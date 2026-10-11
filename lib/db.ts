@@ -63,6 +63,7 @@ import type { RecipeDepthResult } from './recipeDepth';
 import type { TimelineDose, TimelineMeal } from './doseMealTiming';
 import type { WeekdayTargetOverride } from './weekdayTargets';
 import { customTagFromRow, setCustomCheckinTags, type CheckinTagDefinition, type CustomCheckinTagRow } from './checkinTags';
+import { ownContributorFromRow, setOwnContributors, type FlareContributor, type OwnContributorRow } from './flareContext';
 import { gapFoodNameKey } from './nutrientGapFoods';
 import { eatenOutCaption, eatenOutOf, parseEatenOutNote, recentPlaces, type EatenOutHow } from './eatenOut';
 import { readOrClosed } from './vaultReads';
@@ -8379,6 +8380,29 @@ async function runDatabaseInitialization() {
       );
       CREATE INDEX IF NOT EXISTS idx_checkin_body_regions_checkin ON checkin_body_regions(checkin_id);
 
+      -- What was going on before a flare (2026-10-11): stress, sleep,
+      -- exertion, noise, food and the rest, as codes from lib/flareContext.ts
+      -- or 'own:' plus a custom_flare_contributors id. One row per thing
+      -- marked; the id is checkin_id and code joined by a colon. Removed with
+      -- its check-in in deleteCheckin. Not on the between-people allowlist.
+      CREATE TABLE IF NOT EXISTS checkin_contributors (
+        id TEXT PRIMARY KEY,
+        checkin_id TEXT NOT NULL,
+        contributor_code TEXT NOT NULL
+      );
+      CREATE INDEX IF NOT EXISTS idx_checkin_contributors_checkin ON checkin_contributors(checkin_id);
+
+      -- The person's own entries for that list. Removing one a flare used
+      -- sets retired_at so the flare keeps its name; one nothing used is
+      -- deleted (lib/flareContextDb.ts).
+      CREATE TABLE IF NOT EXISTS custom_flare_contributors (
+        id TEXT PRIMARY KEY,
+        label TEXT NOT NULL,
+        retired_at TEXT,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      );
+
       -- Trackers the person names (D2, 2026-09-26): something this app never
       -- thought to ask about, named by the person, with a kind that never
       -- changes once made (scale, count, duration or measurement; see
@@ -10674,6 +10698,7 @@ async function runDatabaseInitialization() {
     // The person's symptom names, loaded once so every label lookup finds
     // them (D3). lib/customCheckinTagsDb.ts reloads after each change.
     setCustomCheckinTags(await readCustomCheckinTags(db));
+    setOwnContributors(await readOwnContributors(db));
   } catch (error) {
     databasePromise = null;
     initializeDatabasePromise = null;
@@ -22995,8 +23020,13 @@ export type WellbeingCheckin = {
   // D11: where on the body, keys from lib/bodyMap.ts, in the order marked.
   // Empty means not marked, never nothing there.
   bodyRegions: string[];
+  // What the person marked as going on (lib/flareContext.ts). Empty means
+  // not answered, never nothing going on.
+  contributors: string[];
   createdAt: string;
 };
+
+type CheckinRowBase = Omit<WellbeingCheckin, 'tags' | 'tagSeverity' | 'noneToday' | 'bodyRegions' | 'contributors'>;
 
 // Records one moment-in-time report of how the person feels -- tag codes
 // come from lib/checkinTags.ts. Positive check-ins are just as valid as
@@ -23023,6 +23053,8 @@ export async function recordCheckin(input: {
   bodyRegions?: string[];
   /** Set by a flare saved from a notification, whose later answers find it by this id. */
   id?: string;
+  /** What was going on, codes from lib/flareContext.ts. */
+  contributors?: string[];
 }) {
   const db = await getDatabase();
   const id = input.id ?? `checkin_${Date.now()}`;
@@ -23071,12 +23103,77 @@ export async function recordCheckin(input: {
     );
   }
 
+  await writeCheckinContributors(db, id, input.contributors ?? []);
+
   return id;
+}
+
+async function writeCheckinContributors(db: SQLite.SQLiteDatabase, checkinId: string, codes: string[]) {
+  for (const code of new Set(codes)) {
+    await db.runAsync(
+      'INSERT OR IGNORE INTO checkin_contributors (id, checkin_id, contributor_code) VALUES (?, ?, ?)',
+      `${checkinId}:${code}`,
+      checkinId,
+      code,
+    );
+  }
+}
+
+/**
+ * Changes what a saved flare or reaction says it was like and what was
+ * going on, so a flare saved from the lock screen with one tap can be
+ * finished in Signals. Severity ratings on symptoms kept are kept; a
+ * symptom rated None today is left alone.
+ */
+export async function updateCheckinDetail(
+  checkinId: string,
+  change: { tags?: string[]; contributors?: string[]; bodyRegions?: string[] },
+) {
+  const db = await getDatabase();
+  if (change.tags) {
+    const keep = new Set(change.tags);
+    const existing = await db.getAllAsync<{ tag_code: string; severity: number | null }>(
+      'SELECT tag_code, severity FROM checkin_tags WHERE checkin_id = ?',
+      checkinId,
+    );
+    for (const row of existing) {
+      if (row.severity === 0) continue;
+      if (!keep.has(row.tag_code)) {
+        await db.runAsync('DELETE FROM checkin_tags WHERE checkin_id = ? AND tag_code = ?', checkinId, row.tag_code);
+      }
+    }
+    const had = new Set(existing.map((row) => row.tag_code));
+    for (const [index, code] of change.tags.entries()) {
+      if (had.has(code)) continue;
+      await db.runAsync(
+        'INSERT INTO checkin_tags (id, checkin_id, tag_code, severity) VALUES (?, ?, ?, NULL)',
+        `checkin_tag_${Date.now()}_${index}`,
+        checkinId,
+        code,
+      );
+    }
+  }
+  if (change.contributors) {
+    await db.runAsync('DELETE FROM checkin_contributors WHERE checkin_id = ?', checkinId);
+    await writeCheckinContributors(db, checkinId, change.contributors);
+  }
+  if (change.bodyRegions) {
+    await db.runAsync('DELETE FROM checkin_body_regions WHERE checkin_id = ?', checkinId);
+    for (const region of new Set(change.bodyRegions)) {
+      await db.runAsync(
+        'INSERT OR IGNORE INTO checkin_body_regions (id, checkin_id, region) VALUES (?, ?, ?)',
+        `${checkinId}:${region}`,
+        checkinId,
+        region,
+      );
+    }
+  }
+  await db.runAsync('UPDATE wellbeing_checkins SET updated_at = ? WHERE id = ?', new Date().toISOString(), checkinId);
 }
 
 async function attachCheckinTags(
   db: SQLite.SQLiteDatabase,
-  checkins: Omit<WellbeingCheckin, 'tags' | 'tagSeverity' | 'noneToday' | 'bodyRegions'>[],
+  checkins: CheckinRowBase[],
 ): Promise<WellbeingCheckin[]> {
   if (checkins.length === 0) return [];
 
@@ -23113,9 +23210,19 @@ async function attachCheckinTags(
     regionsByCheckin.set(row.checkin_id, [...(regionsByCheckin.get(row.checkin_id) ?? []), row.region]);
   }
 
+  const contributorRows = await readOrClosed(() => db.getAllAsync<{ checkin_id: string; contributor_code: string }>(
+    `SELECT checkin_id, contributor_code FROM checkin_contributors WHERE checkin_id IN (${placeholders}) ORDER BY rowid`,
+    ...checkins.map((checkin) => checkin.id),
+  ), []);
+  const contributorsByCheckin = new Map<string, string[]>();
+  for (const row of contributorRows) {
+    contributorsByCheckin.set(row.checkin_id, [...(contributorsByCheckin.get(row.checkin_id) ?? []), row.contributor_code]);
+  }
+
   return checkins.map((checkin) => ({
     ...checkin,
     bodyRegions: regionsByCheckin.get(checkin.id) ?? [],
+    contributors: contributorsByCheckin.get(checkin.id) ?? [],
     tags: tagsByCheckin.get(checkin.id) ?? [],
     tagSeverity: severityByCheckin.get(checkin.id) ?? {},
     noneToday: noneByCheckin.get(checkin.id) ?? [],
@@ -23148,7 +23255,7 @@ export async function listCheckins(
   const whereClause = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
   const limit = filters.limit ?? 50;
 
-  const rows = await readOrClosed(() => db.getAllAsync<Omit<WellbeingCheckin, 'tags' | 'tagSeverity' | 'noneToday' | 'bodyRegions'>>(
+  const rows = await readOrClosed(() => db.getAllAsync<CheckinRowBase>(
     `
       SELECT id, logged_at AS loggedAt, checkin_type AS checkinType, valence, severity, notes, food_name AS foodName,
              related_meal_id AS relatedMealId, related_exercise_id AS relatedExerciseId, food_trial_id AS foodTrialId,
@@ -23169,7 +23276,7 @@ export async function listCheckins(
  *  dates, oldest first, with their tags and body areas (D11, Trends). */
 export async function listCheckinsBetween(types: CheckinType[], startDay: string, endDay: string) {
   const db = await getDatabase();
-  const rows = await readOrClosed(() => db.getAllAsync<Omit<WellbeingCheckin, 'tags' | 'tagSeverity' | 'noneToday' | 'bodyRegions'>>(
+  const rows = await readOrClosed(() => db.getAllAsync<CheckinRowBase>(
     `
       SELECT id, logged_at AS loggedAt, checkin_type AS checkinType, valence, severity, notes, food_name AS foodName,
              related_meal_id AS relatedMealId, related_exercise_id AS relatedExerciseId, food_trial_id AS foodTrialId,
@@ -23191,7 +23298,7 @@ export async function listCheckinsBetween(types: CheckinType[], startDay: string
 export async function listCheckinsByIds(ids: string[]) {
   if (ids.length === 0) return [];
   const db = await getDatabase();
-  const rows = await readOrClosed(() => db.getAllAsync<Omit<WellbeingCheckin, 'tags' | 'tagSeverity' | 'noneToday' | 'bodyRegions'>>(
+  const rows = await readOrClosed(() => db.getAllAsync<CheckinRowBase>(
     `
       SELECT id, logged_at AS loggedAt, checkin_type AS checkinType, valence, severity, notes, food_name AS foodName,
              related_meal_id AS relatedMealId, related_exercise_id AS relatedExerciseId, food_trial_id AS foodTrialId,
@@ -23213,10 +23320,20 @@ export async function readCustomCheckinTags(db: SQLite.SQLiteDatabase): Promise<
   return rows.map(customTagFromRow);
 }
 
+/** Every contributor the person named, retired ones included so old
+ *  flares keep their names. Also used by lib/flareContextDb.ts. */
+export async function readOwnContributors(db: SQLite.SQLiteDatabase): Promise<FlareContributor[]> {
+  const rows = await db.getAllAsync<OwnContributorRow>(
+    'SELECT id, label, retired_at FROM custom_flare_contributors',
+  );
+  return rows.map(ownContributorFromRow);
+}
+
 export async function deleteCheckin(id: string) {
   const db = await getDatabase();
   await db.runAsync('DELETE FROM wellbeing_checkins WHERE id = ?', id);
   await db.runAsync('DELETE FROM checkin_body_regions WHERE checkin_id = ?', id);
+  await db.runAsync('DELETE FROM checkin_contributors WHERE checkin_id = ?', id);
   // Its photos go with it (1.0.53.7), so none is left pointing at nothing.
   await (await import('./mediaDb')).removePhotosOf('symptom', id);
 }
@@ -23403,7 +23520,7 @@ export async function getTherapyResponseInputs(days: number): Promise<{
 // todayDateString()).
 export async function getCheckinForDate(date: string, checkinType: CheckinType): Promise<WellbeingCheckin | null> {
   const db = await getDatabase();
-  const row = await readOrClosed(() => db.getAllAsync<Omit<WellbeingCheckin, 'tags' | 'tagSeverity' | 'noneToday' | 'bodyRegions'>>(
+  const row = await readOrClosed(() => db.getAllAsync<CheckinRowBase>(
     `
       SELECT id, logged_at AS loggedAt, checkin_type AS checkinType, valence, severity, notes, food_name AS foodName,
              related_meal_id AS relatedMealId, related_exercise_id AS relatedExerciseId, food_trial_id AS foodTrialId,

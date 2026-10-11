@@ -1,4 +1,23 @@
-import { getConditionScoresForFoodsBulk, getDatabase, getMealItemsInWindow, getStepCountTrend, listCheckins, listEatenOutMealTimes } from './db';
+import {
+  getConditionScoresForFoodsBulk,
+  getDatabase,
+  getMealItemsInWindow,
+  getStepCountTrend,
+  listCheckins,
+  listEatenOutMealTimes,
+  listExerciseLogs,
+  type WellbeingCheckin,
+} from './db';
+import {
+  CONTRIBUTOR_NOTE,
+  contributorLabel,
+  contributorLines,
+  OUTSIDE_EMPTY_LINE,
+  outsideLines,
+  outsideNote,
+  symptomsOutsideMarks,
+} from './flareContext';
+import { readPersonMarks } from './flareContextDb';
 import { eatenOutPatternLine, flaresAfterEatenOut } from './eatenOut';
 import {
   compareWindows,
@@ -42,6 +61,8 @@ import {
   tagMoments,
   trackerMoments,
   usualRangeMoments,
+  workoutLabel,
+  workoutMoments,
   DAY_TOTAL_MIN_HOURS,
   type FactorFamilyResult,
   type FactorGroup,
@@ -186,12 +207,44 @@ export type PatternFinderResult = {
   factorFamilies: FactorFamilyResult[];
   /** Lines about the factors as a whole, such as what is not recorded yet. */
   factorNotes: string[];
+  /** Flares only (2026-10-11): what the person marked as going on behind
+   *  each flare, and the symptoms that keep coming back outside what the
+   *  app lists for what they marked in Profile. Null for any other outcome. */
+  flareMarks: FlareMarksResult | null;
   /** F4: foods on the worst days beside the best, flares only, with each
    *  food key's name. Null for the kinds of day (D1). */
   bestWorst: { result: BestWorstResult; names: Record<string, string> } | null;
   /** F2: the usual range a body reading outcome is drawn from, and what it leaves out. Empty otherwise. */
   bodyNotes: string[];
 };
+
+export type FlareMarksResult = {
+  flares: number;
+  contributorLines: string[];
+  /** Flares with nothing marked as going on. */
+  unanswered: number;
+  contributorNote: string;
+  outsideLines: string[];
+  outsideNote: string;
+};
+
+// What the person marked on their flares, read from the flares themselves
+// rather than from windows before them. Reactions are left out, since a
+// reaction starts from a food and carries no what-was-going-on answer.
+async function flareMarks(flares: WellbeingCheckin[]): Promise<FlareMarksResult> {
+  const marks = await readPersonMarks();
+  const marked = flares.map((flare) => ({ tags: flare.tags, contributors: flare.contributors }));
+  const contributors = contributorLines(marked, contributorLabel);
+  const outside = symptomsOutsideMarks(marked, marks);
+  return {
+    flares: flares.length,
+    contributorLines: contributors.lines,
+    unanswered: contributors.unanswered,
+    contributorNote: CONTRIBUTOR_NOTE,
+    outsideLines: outside.length > 0 ? outsideLines(outside, flares.length, (code) => getCheckinTagDefinition(code)?.label ?? code) : [OUTSIDE_EMPTY_LINE],
+    outsideNote: outsideNote(marks),
+  };
+}
 
 // F1, 2026-09-26. Reads everything besides food that the app records and
 // turns it into moments for lib/patternFactors.ts, which does the counting
@@ -211,13 +264,14 @@ async function findFactorFamilies(input: {
   const { days, rangeStart, today, now, windowHours } = input;
   const reachBack = dateStringDaysAgo(days + 1);
   const dayTotals = windowHours >= DAY_TOTAL_MIN_HOURS;
-  const [checkins, doses, stepRows, water, trackers, trackerEntries] = await Promise.all([
+  const [checkins, doses, stepRows, water, trackers, trackerEntries, exercise] = await Promise.all([
     listCheckins({ limit: 2000 }),
     listScheduledDoses(rangeForDays(days + 2, today)),
     getStepCountTrend(days + 2),
     dayTotals ? getNutrientTrendSeriesForRange('water', reachBack, today) : Promise.resolve(null),
     listCustomTrackers(),
     listTrackerEntriesSince(reachBack),
+    listExerciseLogs(2000),
   ]);
 
   const moments: FactorMoment[] = [];
@@ -282,6 +336,19 @@ async function findFactorFamilies(input: {
     groups.push({ group: 'water', family: 'water', noun: 'a day of water', dayTotal: true, usualShort: made.usualShort });
     labels.set('water:below', 'Days with less water than your usual range');
     labels.set('water:above', 'Days with more water than your usual range');
+  }
+
+  const workouts = workoutMoments(
+    exercise
+      .map((log) => ({ ...log, at: localStampOf(log.loggedAt) }))
+      .filter((log) => log.at.slice(0, 10) >= reachBack),
+  );
+  if (workouts.length > 0) {
+    moments.push(...workouts);
+    groups.push({ group: 'workouts', family: 'workouts', noun: 'a workout', dayTotal: false, usualShort: null });
+    const typed = new Map<string, string>();
+    for (const log of exercise) typed.set(`workout:type:${log.exerciseType.trim().toLowerCase()}`, log.exerciseType.trim());
+    for (const moment of workouts) for (const key of moment.keys) labels.set(key, workoutLabel(key, typed));
   }
 
   const trackerDays: TrackerDay[] = [];
@@ -748,6 +815,13 @@ export async function findFoodPatterns(
     movementRefusal: weeklyApplies && isMovementRefusal(movement) ? movement : null,
     factorFamilies,
     factorNotes: [NOT_RECORDED_LINE],
+    flareMarks:
+      outcome === 'flares' && !bodyRead
+        ? await flareMarks(
+            // The flares branch above keeps whole check-ins; reactions are left out here.
+            (symptomCheckins as WellbeingCheckin[]).filter((checkin) => checkin.checkinType === 'flare'),
+          )
+        : null,
     bestWorst,
     bodyNotes,
   };

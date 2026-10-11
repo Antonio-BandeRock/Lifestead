@@ -85,6 +85,9 @@ export type ReminderActionId =
   | 'flareTagA'
   | 'flareTagB'
   | 'flareTagOther'
+  | 'flareWhyA'
+  | 'flareWhyB'
+  | 'flareWhyNotSure'
   | 'sleptPoorly'
   | 'sleptOkay'
   | 'sleptWell'
@@ -192,6 +195,14 @@ export function reminderActionTitle(action: ReminderActionId, snoozeMinutes: num
       return 'The second one';
     case 'flareTagOther':
       return 'Something else';
+    // Named for the person's contributors when the question is shown, the
+    // same way the symptom buttons are.
+    case 'flareWhyA':
+      return 'The first one';
+    case 'flareWhyB':
+      return 'The second one';
+    case 'flareWhyNotSure':
+      return 'Not sure';
     case 'sleptPoorly':
       return 'Poorly';
     case 'sleptOkay':
@@ -297,13 +308,16 @@ export const FLARE_SEVERITY_VALUES: Partial<Record<ReminderActionId, number>> = 
   flareVerySevere: 4,
 };
 
-export type FlareQuestion = 'howBad' | 'worse' | 'what';
+export type FlareQuestion = 'howBad' | 'worse' | 'what' | 'why';
 
-/** The question a press brings up next, or null when the chain is done. */
+/** The question a press brings up next, or null when the chain is done.
+ *  What was going on follows the symptom question (2026-10-11), since a
+ *  flare is never assumed to come from food. */
 export function flareFollowUp(action: string): FlareQuestion | null {
   if (action === 'flareYes') return 'howBad';
   if (action === 'flareWorse') return 'worse';
   if (action === 'flareMild' || action === 'flareModerate' || action === 'flareSevere' || action === 'flareVerySevere') return 'what';
+  if (action === 'flareTagA' || action === 'flareTagB' || action === 'flareTagOther') return 'why';
   return null;
 }
 
@@ -312,7 +326,11 @@ export const FLARE_QUESTION_TEXT: Record<FlareQuestion, { title: string; body: s
   worse: { title: 'Severe or very severe?', body: 'Saved as severe for now. Pick the one that fits.' },
   what: {
     title: 'What is it most like?',
-    body: 'The symptoms you have logged with flares most often. Something else keeps the flare as it is, and the symptom can be added in Signals later.',
+    body: 'The symptoms you have logged with flares most often. Something else keeps the flare as it is, and you can add what it was like with Edit on the flare in Signals.',
+  },
+  why: {
+    title: 'What was going on?',
+    body: 'What you mark most often, or what fits what you told the app. Not sure keeps the flare as it is, and you can add more with Edit on the flare in Signals.',
   },
 };
 
@@ -327,6 +345,11 @@ export const FLARE_WHAT_CATEGORY_IDS: Record<1 | 2, string> = {
 export function flareWhatActions(count: 1 | 2): ReminderActionId[] {
   return count === 2 ? ['flareTagA', 'flareTagB', 'flareTagOther'] : ['flareTagA', 'flareTagOther'];
 }
+
+// What was going on: always two of the person's contributors and Not sure,
+// registered when it is shown since the first two carry their names.
+export const FLARE_WHY_CATEGORY_ID = 'inside-story-reminder-flare-why';
+export const FLARE_WHY_ACTIONS: ReminderActionId[] = ['flareWhyA', 'flareWhyB', 'flareWhyNotSure'];
 
 /** The kind every follow-up question carries; its scheduleItemId is the flare's id. */
 export const FLARE_FOLLOW_UP_KIND = 'flare';
@@ -362,6 +385,7 @@ export type ReminderActionPlan =
   | { write: 'flareStart' }
   | { write: 'flareSeverity'; value: number }
   | { write: 'flareTag'; slot: 0 | 1 }
+  | { write: 'flareWhy'; slot: 0 | 1 | 'notSure' }
   | { write: 'flareNote' }
   | { write: 'nothing' }
   | { write: 'sleepQuality'; value: number }
@@ -388,6 +412,9 @@ export function planReminderAction(kind: string, action: string): ReminderAction
     if (action === 'flareTagA') return { write: 'flareTag', slot: 0 };
     if (action === 'flareTagB') return { write: 'flareTag', slot: 1 };
     if (action === 'flareTagOther') return { write: 'nothing' };
+    if (action === 'flareWhyA') return { write: 'flareWhy', slot: 0 };
+    if (action === 'flareWhyB') return { write: 'flareWhy', slot: 1 };
+    if (action === 'flareWhyNotSure') return { write: 'flareWhy', slot: 'notSure' };
   }
   // The typed-reply buttons check-ins carried until 1.0.67.1, still on a
   // notification posted before the update.

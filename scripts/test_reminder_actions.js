@@ -167,7 +167,12 @@ check('Yes on a dose does nothing', planReminderAction('dose', 'flareYes') === n
 check('Yes brings how bad', flareFollowUp('flareYes') === 'howBad');
 check('Severe or worse brings the next two', flareFollowUp('flareWorse') === 'worse');
 for (const a of ['flareMild', 'flareModerate', 'flareSevere', 'flareVerySevere']) check(a + ' brings the symptoms', flareFollowUp(a) === 'what');
-check('a symptom ends the questions', flareFollowUp('flareTagA') === null && flareFollowUp('flareTagOther') === null);
+check('a symptom brings what was going on', ['flareTagA', 'flareTagB', 'flareTagOther'].every((a) => flareFollowUp(a) === 'why'));
+check('what was going on ends the questions', ['flareWhyA', 'flareWhyB', 'flareWhyNotSure'].every((a) => flareFollowUp(a) === null));
+check('the first contributor fills slot 0', planReminderAction('flare', 'flareWhyA').slot === 0);
+check('the second contributor fills slot 1', planReminderAction('flare', 'flareWhyB').slot === 1);
+check('Not sure is written as Not sure', planReminderAction('flare', 'flareWhyNotSure').slot === 'notSure');
+check('contributor buttons only on a flare question', planReminderAction('checkin', 'flareWhyA') === null);
 check('No brings nothing', flareFollowUp('flareNo') === null);
 const steps = { flareMild: 1, flareModerate: 2, flareWorse: 3, flareSevere: 3, flareVerySevere: 4 };
 for (const [a, v] of Object.entries(steps)) {
@@ -193,7 +198,7 @@ check('one symptom gives two buttons', flareWhatActions(1).join() === 'flareTagA
 check('two symptoms give three buttons', flareWhatActions(2).join() === 'flareTagA,flareTagB,flareTagOther');
 check('the symptom sets have ids of their own', FLARE_WHAT_CATEGORY_IDS[1] !== FLARE_WHAT_CATEGORY_IDS[2]);
 check('a flare id carries the press time', newFlareId(new Date(1000)) === 'checkin_flare_1000');
-check('the two questions after Yes have words', ['howBad', 'worse', 'what'].every((q) => FLARE_QUESTION_TEXT[q].title && FLARE_QUESTION_TEXT[q].body));
+check('the questions after Yes have words', ['howBad', 'worse', 'what', 'why'].every((q) => FLARE_QUESTION_TEXT[q].title && FLARE_QUESTION_TEXT[q].body));
 // A notification posted before the update still answers.
 check('an old Add a note still writes a note', planReminderAction('checkin', 'howAreYou').write === 'checkinNote');
 check('an old Log a flare still writes a flare', planReminderAction('afterMeal', 'logFlare').write === 'flare');
@@ -212,7 +217,7 @@ check('an upkeep that cannot be marked says nothing', answerLine('upkeep', false
 
 // The words a reminder carries, checked for praise, dashes and filler.
 const said = [];
-for (const q of ['howBad', 'worse', 'what']) said.push(FLARE_QUESTION_TEXT[q].title, FLARE_QUESTION_TEXT[q].body);
+for (const q of ['howBad', 'worse', 'what', 'why']) said.push(FLARE_QUESTION_TEXT[q].title, FLARE_QUESTION_TEXT[q].body);
 said.push(FLARE_ASK_TITLE);
 for (const kind of ['dose', 'hydration', 'meal', 'garden', 'reminder', 'upkeep', 'compost', 'checkin', 'cropPrep', 'cropSow']) said.push(answerLine(kind));
 const sentenceForbidden = /well done|good job|keep it up|great|you should|real|genuine|own|[—–]| -- /i;

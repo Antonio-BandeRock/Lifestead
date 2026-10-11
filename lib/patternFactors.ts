@@ -31,7 +31,7 @@
 import { compareWindows, MIN_PATTERN_OCCURRENCES, verdictRank, type PatternComparison } from './patternBasis';
 import { placeInUsual, usualRange, MIN_USUAL_READINGS } from './yourUsual';
 
-export type FactorFamily = 'tags' | 'sleep' | 'doses' | 'steps' | 'water' | 'trackers';
+export type FactorFamily = 'tags' | 'sleep' | 'doses' | 'steps' | 'workouts' | 'water' | 'trackers';
 
 // One record of something happening, at a local 'YYYY-MM-DDTHH:mm'. `group`
 // is what its presence counts toward: a window with any moment of a group in
@@ -75,11 +75,12 @@ export const FACTOR_FAMILY_TITLES: Record<FactorFamily, string> = {
   sleep: 'Sleep',
   doses: 'Doses skipped',
   steps: 'Steps',
+  workouts: 'Workouts',
   water: 'Water',
   trackers: 'Your trackers',
 };
 
-const FAMILY_ORDER: FactorFamily[] = ['tags', 'sleep', 'doses', 'steps', 'water', 'trackers'];
+const FAMILY_ORDER: FactorFamily[] = ['tags', 'sleep', 'doses', 'steps', 'workouts', 'water', 'trackers'];
 
 export const DAY_TOTAL_MIN_HOURS = 24;
 
@@ -162,6 +163,38 @@ export function doseMoments(doses: MarkedDose[]): FactorMoment[] {
   }
   return moments;
 }
+
+export type LoggedWorkout = { at: string; exerciseType: string; durationMinutes: number | null; intensity: string | null };
+
+/** An hour or more counts as a long workout. */
+export const LONG_WORKOUT_MINUTES = 60;
+
+// Workouts (2026-10-11), since a flare can follow exertion as easily as a
+// meal. Each workout logged is a record, keyed by its kind as the person
+// typed it, and also as vigorous or long when it was. A day with nothing
+// logged is unknown rather than a rest day, so it is not a record of
+// anything, and the family can only say which kinds of workout show up
+// before flares, never whether working out does.
+export function workoutMoments(workouts: LoggedWorkout[]): FactorMoment[] {
+  return workouts
+    .filter((workout) => workout.exerciseType.trim().length > 0)
+    .map((workout) => {
+      const keys = [`workout:type:${workout.exerciseType.trim().toLowerCase()}`];
+      if (workout.intensity === 'vigorous') keys.push('workout:vigorous');
+      if ((workout.durationMinutes ?? 0) >= LONG_WORKOUT_MINUTES) keys.push('workout:long');
+      return { at: workout.at.slice(0, 16), group: 'workouts', keys };
+    });
+}
+
+export function workoutLabel(key: string, typed: Map<string, string>): string {
+  if (key === 'workout:vigorous') return 'A vigorous workout';
+  if (key === 'workout:long') return 'A workout of an hour or more';
+  const name = typed.get(key) ?? key.replace(/^workout:type:/, '');
+  return name.charAt(0).toUpperCase() + name.slice(1);
+}
+
+export const WORKOUT_FAMILY_LINE =
+  'Counted only against the ones with a workout logged before them, so this shows which kinds of workout turn up, not whether working out does. A day with no workout logged is left out rather than read as a rest day.';
 
 export type TrackerDay = { trackerId: string; date: string; value: number; lastAt: string };
 
@@ -285,7 +318,7 @@ export const NOT_RECORDED_LINE =
   'Weather is not counted here, since one place’s weather is shared by every day around it. Once it is turned on it is listed beside the same flares under Other things around them.';
 
 export const FACTOR_BAND_EMPTY_LINE =
-  'Nothing besides food has been recorded in this range yet: no check-in tags, sleep, marked doses, steps, water or tracker entries.';
+  'Nothing besides food has been recorded in this range yet: no check-in tags, sleep, marked doses, steps, workouts, water or tracker entries.';
 
 // Families in a fixed order, each with its candidates and lines. A family
 // with no group at all (nothing of that kind ever recorded) is left out.
@@ -302,6 +335,7 @@ export function assembleFactorFamilies(
     if (inFamily.length === 0) continue;
     const candidates = inFamily.flatMap((group) => counted.get(group.group)?.candidates ?? []);
     const lines = inFamily.flatMap((group) => familyLines(group, counted.get(group.group), outcomes, windowHours, words));
+    if (family === 'workouts') lines.push(WORKOUT_FAMILY_LINE);
     families.push({ family, title: FACTOR_FAMILY_TITLES[family], candidates, lines });
   }
   return families;

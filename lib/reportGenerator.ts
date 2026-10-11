@@ -59,7 +59,7 @@ import { findFoodPatterns } from './patternFinder';
 import { readExperimentInput, readSteppedInput } from './foodExperimentDb';
 import { experimentResultLines } from './foodExperiment';
 import { orderedSteps, steppedResultLines, steppedStage } from './steppedReintroduction';
-import { experimentsSection, noticedSection, NOTICED_WINDOW_HOURS, type ExperimentForReport } from './reportNoticed';
+import { experimentsSection, flareMarksSection, noticedSection, NOTICED_WINDOW_HOURS, type ExperimentForReport } from './reportNoticed';
 import { readOrClosed } from './vaultReads';
 import { isCategoryClosed } from './vaultState';
 
@@ -639,7 +639,11 @@ async function noticedSections(days: number, rangeStart: string, rangeEnd: strin
     return null;
   });
   const [patternResult, experimentList] = await Promise.all([patterns, experiments]);
-  return [noticedSection(patternResult), experimentsSection(experimentList, rangeStart, rangeEnd)];
+  return [
+    noticedSection(patternResult),
+    flareMarksSection(patternResult?.flareMarks),
+    experimentsSection(experimentList, rangeStart, rangeEnd),
+  ];
 }
 
 // The sections each narrower report adds after its core ones. A Trends or

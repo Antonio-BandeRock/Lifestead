@@ -24,6 +24,7 @@ export const NOTICED_WINDOW_HOURS = 24;
 const WORDS = { one: 'flare or reaction', many: 'flares and reactions', short: 'flare', shortMany: 'flares' };
 
 export const NOTICED_HEADING = 'What I have noticed';
+export const FLARE_MARKS_HEADING = 'What was going on around my flares';
 export const EXPERIMENTS_HEADING = 'Experiments';
 
 export const NOTICED_NOTE =
@@ -67,6 +68,32 @@ export function noticedSection(result: NoticedInput | null): ReportListSection {
     rows.push(contextCaveat(WORDS));
   }
   return { ...base, note: `${NOTICED_NOTE} ${counted}`, rows, empty: '' };
+}
+
+// What the person marked as going on behind each flare, and the symptoms
+// that keep coming back outside what the app lists for anything marked in
+// Profile (2026-10-11). For a doctor this is the part most likely to show
+// where the picture does not add up, so it is set down as counted, with
+// its denominators, and with no reading of what it means.
+export const FLARE_MARKS_NOTE =
+  'What was marked at the time of each flare, counted only against the flares where something was marked. Something marked is not shown to be a cause, and a flare can follow more than one thing.';
+
+export const OUTSIDE_REPORT_NOTE =
+  'Symptoms on three or more flares that the app does not list for anything marked in its Profile. The app’s list is short and leaves a lot out, so these are set down as recorded and not as a sign of anything.';
+
+export function flareMarksSection(marks: PatternFinderResult['flareMarks'] | null | undefined): ReportListSection {
+  const base = { kind: 'list' as const, heading: FLARE_MARKS_HEADING };
+  if (!marks || marks.flares === 0) {
+    return { ...base, rows: [], empty: 'No flares were logged in this range.' };
+  }
+  const rows: string[] = marks.contributorLines.map((line) => line.replace(/^You marked /, 'Marked '));
+  if (rows.length === 0) {
+    rows.push(`Nothing was marked as going on for any of the ${marks.flares} flares.`);
+  } else if (marks.unanswered > 0) {
+    rows.push(`${marks.unanswered} of ${marks.flares} flares have nothing marked and are left out of these counts.`);
+  }
+  rows.push(...marks.outsideLines.map((line) => `Outside what was marked: ${line}`));
+  return { ...base, note: `${FLARE_MARKS_NOTE} ${OUTSIDE_REPORT_NOTE}`, rows, empty: '' };
 }
 
 export type ExperimentForReport = {

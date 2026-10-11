@@ -271,6 +271,8 @@ check('closed again refuses', S.vaultRefusalNow(read) instanceof V.VaultClosedEr
   check('allergies are never refused at the database', V.vaultRefusal('SELECT * FROM user_food_allergies', true, false, ALL) === null);
   check('finances are refused', V.vaultRefusal('SELECT * FROM finance_entries', true, false, ['finances']) instanceof V.VaultClosedError);
   check('a check-in tag list is a tool, never in the vault', !V.ALL_VAULT_TABLES.includes('custom_checkin_tags'));
+  check('a flare contributor list is a tool, never in the vault', !V.ALL_VAULT_TABLES.includes('custom_flare_contributors'));
+  check('what was going on before a flare is a symptoms record', V.VAULT_TABLES.symptoms.includes('checkin_contributors'));
   check('every category is in the default set', same([...V.VAULT_DEFAULT_CATEGORIES].sort(), [...V.VAULT_CATEGORIES].sort()));
   check('every category is health or money', V.VAULT_CATEGORIES.every((c) => ['health', 'money'].includes(V.VAULT_CATEGORY_GROUP[c])));
   check('every category has a label', V.VAULT_CATEGORIES.every((c) => typeof V.VAULT_CATEGORY_LABELS[c] === 'string'));

@@ -127,13 +127,14 @@ export const VAULT_DEFAULT_CATEGORIES: readonly VaultCategory[] = VAULT_CATEGORI
  * Every table a category's records live in. For a records category these
  * are refused while the vault is closed; for a listed category they are
  * only counted (for the offer to set the vault up) and never refused.
- * custom_checkin_tags is left out on purpose: it is the list of tags to
- * choose from, a tool, not a record.
+ * custom_checkin_tags and custom_flare_contributors are left out on
+ * purpose: each is a list to choose from, a tool, not a record.
  */
 export const VAULT_TABLES: Record<VaultCategory, readonly string[]> = {
   symptoms: [
     'wellbeing_checkins',
     'checkin_body_regions',
+    'checkin_contributors',
     'checkin_tags',
     'symptom_assessments',
     'symptom_assessment_responses',

@@ -19,6 +19,8 @@ import {
   CATEGORY_ACTIONS,
   FLARE_FOLLOW_UP_KIND,
   FLARE_WHAT_CATEGORY_IDS,
+  FLARE_WHY_ACTIONS,
+  FLARE_WHY_CATEGORY_ID,
   flareWhatActions,
   REMINDER_CATEGORY_IDS,
   type ReminderActionId,
@@ -135,6 +137,7 @@ export function androidGroupFor(kind: string): { androidGroup: string; androidGr
 export function actionsForCategory(categoryIdentifier: string | null): ReminderActionId[] {
   if (categoryIdentifier === FLARE_WHAT_CATEGORY_IDS[1]) return flareWhatActions(1);
   if (categoryIdentifier === FLARE_WHAT_CATEGORY_IDS[2]) return flareWhatActions(2);
+  if (categoryIdentifier === FLARE_WHY_CATEGORY_ID) return FLARE_WHY_ACTIONS;
   const key = ALL_REMINDER_CATEGORY_KEYS.find(
     (candidate: ReminderCategoryKey) => REMINDER_CATEGORY_IDS[candidate] === categoryIdentifier,
   );

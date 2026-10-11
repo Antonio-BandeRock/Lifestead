@@ -37,8 +37,26 @@ import {
   getCheckinTagsByCategory,
   getCustomCheckinTags,
   type CheckinTagCategory,
+  type CheckinTagDefinition,
 } from '../../lib/checkinTags';
 import { addCustomCheckinTag, removeCustomCheckinTag, renameCustomCheckinTag } from '../../lib/customCheckinTagsDb';
+import {
+  contributorLabel,
+  contributorsForMarks,
+  offeredContributors,
+  splitForPerson,
+  symptomsForMarks,
+  toggleContributor,
+  type PersonMarks,
+} from '../../lib/flareContext';
+import {
+  addOwnContributor,
+  contributorUseCounts,
+  readPersonMarks,
+  removeOwnContributor,
+  renameOwnContributor,
+  symptomUseCounts,
+} from '../../lib/flareContextDb';
 import { SEVERITY_STEPS, describeSeverity, stepFromTen } from '../../lib/severityScale';
 import { PopoverSelect } from '../../components/PopoverSelect';
 import { sortByLabel } from '../../lib/choiceOrder';
@@ -68,6 +86,7 @@ import {
   recordBodyMeasurement,
   recordCheckin,
   recordExercise,
+  updateCheckinDetail,
   markExperimentBack,
   reopenFoodTrial,
   recordTrialStep,
@@ -233,7 +252,7 @@ const LENSES: LensOption<Lens>[] = [
     help: [
       {
         heading: 'Flares',
-        body: "Log a flare-up: when it started, how severe, and which symptoms were part of it. Over time, Trends can look for patterns between flares and what you were eating, taking, or doing.",
+        body: "A flare is any stretch when things get worse: pain, exhaustion, brain fog, overload, a gut that will not settle, or anything else. Log when it started, how bad it was, what it was like and what was going on (stress, poor sleep, a workout, noise and people, food, getting sick, or something you name). The choices you see first come from what you marked in Profile and what you have logged before, and every other possibility follows. Over time, Trends can show what tends to sit around your flares, and Reports can lay it out for a doctor.",
       },
       LOG_PERSONAL_NOTES_HELP,
     ],
@@ -417,7 +436,7 @@ const LENSES: LensOption<Lens>[] = [
 const LOG_HELP_SECTIONS: HelpSection[] = [
   {
     heading: 'Why "Signals"?',
-    body: "Autoimmune flares rarely come out of nowhere: your body usually sends signals first, fatigue, joint pain, brain fog, and other warning signs worth paying attention to before a full flare hits. This tab (renamed from Bio-Compass, 2026-07-27) is where you capture those signals as they happen, not just the flare itself once it's already arrived.",
+    body: "Bad days rarely come out of nowhere. Whatever is behind them, a condition, a body or brain that works differently, stress, or something nobody has named yet, there are usually signals first: tiredness, pain, brain fog, overload. This tab is where you capture those signals as they happen, not just the flare once it has arrived, so the record is there when the pieces do not add up.",
   },
   {
     heading: 'What this tab is for',
@@ -425,7 +444,7 @@ const LOG_HELP_SECTIONS: HelpSection[] = [
   },
   {
     heading: 'Flares',
-    body: "Log a Hashimoto's flare-up: when it started, how severe, and which symptoms were part of it. Over time, Trends can look for patterns between flares and what you were eating, taking, or doing.",
+    body: "A flare is any stretch when things get worse: pain, exhaustion, brain fog, overload, a gut that will not settle, or anything else. Log when it started, how bad it was, what it was like and what was going on (stress, poor sleep, a workout, noise and people, food, getting sick, or something you name). The choices you see first come from what you marked in Profile and what you have logged before, and every other possibility follows. Over time, Trends can show what tends to sit around your flares, and Reports can lay it out for a doctor.",
   },
   {
     heading: 'Food Reactions',
@@ -752,33 +771,85 @@ function OwnSymptoms({ onAdded }: { onAdded: (code: string) => void }) {
   );
 }
 
+// What the pickers start from (2026-10-11): what the person marked in
+// Profile and what they have marked on flares before. Read on focus, so a
+// condition picked in Profile reorders the list the next time Signals opens.
+type PersonFirst = {
+  marks: PersonMarks;
+  symptomCounts: Map<string, number>;
+  contributorCounts: Map<string, number>;
+};
+
+function usePersonFirst(reloadKey: number): PersonFirst | null {
+  const [personal, setPersonal] = useState<PersonFirst | null>(null);
+  useFocusEffect(
+    useCallback(() => {
+      let live = true;
+      void Promise.all([readPersonMarks(), symptomUseCounts(), contributorUseCounts()])
+        .then(([marks, symptomCounts, contributorCounts]) => {
+          if (live) setPersonal({ marks, symptomCounts, contributorCounts });
+        })
+        .catch(() => {});
+      return () => {
+        live = false;
+      };
+      // reloadKey re-reads the counts after a save.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [reloadKey]),
+  );
+  return personal;
+}
+
+const FOR_YOU_LABEL = 'From what you have told the app';
+const FOR_YOU_NOTE =
+  'Put first because of what you marked in Profile or have logged before. Nothing is left out: every other possibility follows.';
+
 function TagPicker({
   selected,
   onToggle,
   detail,
+  personal,
 }: {
   selected: string[];
   onToggle: (code: string) => void;
   detail?: SeverityDetail;
+  personal?: PersonFirst | null;
 }) {
+  const groups = negativeTagGroups();
+  let firstTags: CheckinTagDefinition[] = [];
+  let laterGroups = groups;
+  if (personal) {
+    const all = groups.flatMap((group) => group.tags);
+    const own = new Set(all.filter((tag) => tag.custom).map((tag) => tag.code));
+    firstTags = splitForPerson(all, symptomsForMarks(personal.marks), personal.symptomCounts, own).forYou;
+    const firstCodes = new Set(firstTags.map((tag) => tag.code));
+    laterGroups = groups
+      .map((group) => ({ ...group, tags: group.tags.filter((tag) => !firstCodes.has(tag.code)) }))
+      .filter((group) => group.tags.length > 0);
+  }
+  const pill = (tag: CheckinTagDefinition) => (
+    <TouchableOpacity
+      key={tag.code}
+      style={[styles.pillSmall, selected.includes(tag.code) && styles.pillActive]}
+      onPress={() => onToggle(tag.code)}
+    >
+      <Text style={[styles.pillTextSmall, selected.includes(tag.code) && styles.pillTextActive]}>{tag.label}</Text>
+    </TouchableOpacity>
+  );
   return (
     <View>
-      {negativeTagGroups().map((group) => (
+      {firstTags.length > 0 ? (
+        <View style={styles.tagGroup}>
+          <Text style={styles.tagGroupLabel}>{FOR_YOU_LABEL}</Text>
+          <Text style={styles.helperText}>{FOR_YOU_NOTE}</Text>
+          <View style={styles.pillRow}>{firstTags.map(pill)}</View>
+          <Text style={[styles.tagGroupLabel, styles.otherPossibilities]}>Other possibilities</Text>
+        </View>
+      ) : null}
+      {laterGroups.map((group) => (
         <View key={group.category} style={styles.tagGroup}>
           <Text style={styles.tagGroupLabel}>{group.label}</Text>
-          <View style={styles.pillRow}>
-            {group.tags.map((tag) => (
-              <TouchableOpacity
-                key={tag.code}
-                style={[styles.pillSmall, selected.includes(tag.code) && styles.pillActive]}
-                onPress={() => onToggle(tag.code)}
-              >
-                <Text style={[styles.pillTextSmall, selected.includes(tag.code) && styles.pillTextActive]}>
-                  {tag.label}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+          <View style={styles.pillRow}>{group.tags.map(pill)}</View>
         </View>
       ))}
       {detail && selected.length > 0 ? (
@@ -817,6 +888,132 @@ function TagPicker({
   );
 }
 
+// What was going on before a flare (2026-10-11). A flare is never assumed
+// to come from food: stress, sleep, exertion, noise and people, illness,
+// hormones, weather and the rest sit beside it, the person's most marked
+// and those linked to what they marked in Profile first, and their own
+// entries can be added, renamed and removed. Not sure clears the rest.
+function ContributorPicker({
+  selected,
+  onChange,
+  personal,
+}: {
+  selected: string[];
+  onChange: (next: string[]) => void;
+  personal?: PersonFirst | null;
+}) {
+  const [, setVersion] = useState(0);
+  const offered = offeredContributors();
+  const choices = offered.filter((item) => item.code !== 'not_sure');
+  const { forYou, other } = personal
+    ? splitForPerson(
+        choices,
+        contributorsForMarks(personal.marks),
+        personal.contributorCounts,
+        new Set(choices.filter((item) => item.custom).map((item) => item.code)),
+      )
+    : { forYou: [], other: choices };
+  const notSure = offered.filter((item) => item.code === 'not_sure');
+  // A removed entry still on this flare stays visible so it can be taken off.
+  const retiredHere = selected.filter((code) => !offered.some((item) => item.code === code));
+  const pill = (code: string, label: string) => (
+    <TouchableOpacity
+      key={code}
+      style={[styles.pillSmall, selected.includes(code) && styles.pillActive]}
+      onPress={() => onChange(toggleContributor(selected, code))}
+    >
+      <Text style={[styles.pillTextSmall, selected.includes(code) && styles.pillTextActive]}>{label}</Text>
+    </TouchableOpacity>
+  );
+  return (
+    <View>
+      {forYou.length > 0 ? (
+        <View style={styles.tagGroup}>
+          <Text style={styles.tagGroupLabel}>{FOR_YOU_LABEL}</Text>
+          <View style={styles.pillRow}>{forYou.map((item) => pill(item.code, item.label))}</View>
+          <Text style={[styles.tagGroupLabel, styles.otherPossibilities]}>Other possibilities</Text>
+        </View>
+      ) : null}
+      <View style={styles.tagGroup}>
+        <View style={styles.pillRow}>
+          {other.map((item) => pill(item.code, item.label))}
+          {retiredHere.map((code) => pill(code, contributorLabel(code)))}
+          {notSure.map((item) => pill(item.code, item.label))}
+        </View>
+      </View>
+      <OwnContributors
+        onAdded={(code) => {
+          onChange(toggleContributor(selected, code));
+          setVersion((v) => v + 1);
+        }}
+      />
+    </View>
+  );
+}
+
+function OwnContributors({ onAdded }: { onAdded: (code: string) => void }) {
+  const [name, setName] = useState('');
+  const [renaming, setRenaming] = useState<string | null>(null);
+  const [, setVersion] = useState(0);
+  const own = sortByLabel(offeredContributors().filter((item) => item.custom));
+
+  async function save() {
+    if (!name.trim()) return explainNotYet('Type what was going on first.');
+    if (renaming) {
+      await renameOwnContributor(renaming, name);
+      setRenaming(null);
+    } else {
+      const code = await addOwnContributor(name);
+      if (code) onAdded(code);
+    }
+    setName('');
+    setVersion((v) => v + 1);
+  }
+
+  return (
+    <View style={styles.tagGroup}>
+      <Text style={styles.tagGroupLabel}>{renaming ? 'Rename this' : 'Add something of your own'}</Text>
+      <AppTextInput style={styles.input} placeholder="e.g. Long drive, a hard conversation" value={name} onChangeText={setName} />
+      <View style={styles.pillRow}>
+        <TouchableOpacity style={styles.pillSmall} onPress={() => void save()}>
+          <Text style={styles.pillTextSmall}>{renaming ? 'Save name' : 'Add'}</Text>
+        </TouchableOpacity>
+        {renaming ? (
+          <TouchableOpacity
+            style={styles.pillSmall}
+            onPress={() => {
+              setRenaming(null);
+              setName('');
+            }}
+          >
+            <Text style={styles.pillTextSmall}>Cancel</Text>
+          </TouchableOpacity>
+        ) : null}
+      </View>
+      {own.map((item) => (
+        <ThumbEndRow key={item.code} style={styles.ownSymptomRow}>
+          <Text style={styles.ownSymptomName}>{item.label}</Text>
+          <TouchableOpacity
+            onPress={() => {
+              void removeOwnContributor(item.code).then(() => setVersion((v) => v + 1));
+            }}
+          >
+            <Text style={styles.actionTextRemove}>Remove</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setRenaming(item.code);
+              setName(item.label);
+            }}
+          >
+            <Text style={styles.ownSymptomAction}>Rename</Text>
+          </TouchableOpacity>
+        </ThumbEndRow>
+      ))}
+    </View>
+  );
+}
+
 // Shared by Flares and Food Reactions -- both are a moment-in-time
 // wellbeing_checkins report with a severity and symptom tags, just with a
 // different checkinType and (for reactions) a food name up front.
@@ -840,7 +1037,13 @@ function CheckinForm({
   detail,
   regions,
   onRegionsChange,
+  personal,
+  contributors,
 }: {
+  /** What the pickers start from; absent where nothing is known yet. */
+  personal?: PersonFirst | null;
+  /** Flares only: what was going on. */
+  contributors?: { value: string[]; onChange: (next: string[]) => void };
   detail?: SeverityDetail;
   /** D11: areas marked on the body map. */
   regions: string[];
@@ -906,8 +1109,14 @@ function CheckinForm({
           />
         </>
       ) : null}
-      <Text style={styles.label}>What symptoms? (optional)</Text>
-      <TagPicker selected={tags} onToggle={onToggleTag} detail={detail} />
+      <Text style={styles.label}>What was it like? (optional)</Text>
+      <TagPicker selected={tags} onToggle={onToggleTag} detail={detail} personal={personal} />
+      {contributors ? (
+        <>
+          <Text style={styles.label}>What was going on? (optional)</Text>
+          <ContributorPicker selected={contributors.value} onChange={contributors.onChange} personal={personal} />
+        </>
+      ) : null}
       <Text style={styles.label}>Where on the body? (optional)</Text>
       <BodyMap selected={regions} onChange={onRegionsChange} color={TAB_COLOR} />
       {/* The mic is inside the field (NotesInput), and dictation adds to the notes. */}
@@ -931,8 +1140,67 @@ function CheckinForm({
   );
 }
 
-function CheckinRow({ entry, onDelete }: { entry: WellbeingCheckin; onDelete: (id: string) => void }) {
+function CheckinRow({
+  entry,
+  onDelete,
+  onChanged,
+  personal,
+  withContributors,
+}: {
+  entry: WellbeingCheckin;
+  onDelete: (id: string) => void;
+  /** Given where a saved row can be finished or corrected in place. */
+  onChanged?: () => void;
+  personal?: PersonFirst | null;
+  withContributors?: boolean;
+}) {
   const severityLabel = describeSeverity(entry.severity, entry.severityTen) ?? undefined;
+  const [editing, setEditing] = useState(false);
+  const [tags, setTags] = useState<string[]>(entry.tags);
+  const [contributors, setContributors] = useState<string[]>(entry.contributors);
+
+  if (editing) {
+    return (
+      <View style={styles.formCard}>
+        <Text style={styles.label}>What was it like?</Text>
+        <TagPicker
+          selected={tags}
+          onToggle={(code) => setTags((current) => (current.includes(code) ? current.filter((c) => c !== code) : [...current, code]))}
+          personal={personal}
+        />
+        {withContributors ? (
+          <>
+            <Text style={styles.label}>What was going on?</Text>
+            <ContributorPicker selected={contributors} onChange={setContributors} personal={personal} />
+          </>
+        ) : null}
+        <ThumbRow primary="last" style={styles.formActions}>
+          <TouchableOpacity
+            style={styles.secondaryButton}
+            onPress={() => {
+              setTags(entry.tags);
+              setContributors(entry.contributors);
+              setEditing(false);
+            }}
+          >
+            <Text style={styles.secondaryButtonText}>Cancel</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.primaryButton}
+            onPress={() => {
+              void updateCheckinDetail(entry.id, { tags, ...(withContributors ? { contributors } : {}) }).then(() => {
+                setEditing(false);
+                onChanged?.();
+              });
+            }}
+          >
+            <Text style={styles.primaryButtonText}>Save</Text>
+          </TouchableOpacity>
+        </ThumbRow>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.row}>
       <View style={styles.rowTextCol}>
@@ -956,6 +1224,9 @@ function CheckinRow({ entry, onDelete }: { entry: WellbeingCheckin; onDelete: (i
         {entry.bodyRegions.length > 0 ? (
           <Text style={styles.rowMeta}>{`Where: ${regionsSentence(entry.bodyRegions)}`}</Text>
         ) : null}
+        {entry.contributors.length > 0 ? (
+          <Text style={styles.rowMeta}>{`Going on: ${entry.contributors.map(contributorLabel).join(', ')}`}</Text>
+        ) : null}
         {entry.noneToday.length > 0 ? (
           <Text style={styles.rowMeta}>{`None today: ${entry.noneToday.map(tagLabel).join(', ')}`}</Text>
         ) : null}
@@ -971,6 +1242,17 @@ function CheckinRow({ entry, onDelete }: { entry: WellbeingCheckin; onDelete: (i
         />
       </View>
       <View style={styles.rowActions}>
+        {onChanged ? (
+          <TouchableOpacity
+            onPress={() => {
+              setTags(entry.tags);
+              setContributors(entry.contributors);
+              setEditing(true);
+            }}
+          >
+            <Text style={styles.actionText}>Edit</Text>
+          </TouchableOpacity>
+        ) : null}
         <TouchableOpacity onPress={() => onDelete(entry.id)}>
           <Text style={styles.actionTextRemove}>Remove</Text>
         </TouchableOpacity>
@@ -990,9 +1272,12 @@ function FlaresLens() {
   const [severity, setSeverity] = useState<number | null>(null);
   const [tags, setTags] = useState<string[]>([]);
   const [regions, setRegions] = useState<string[]>([]);
+  const [contributors, setContributors] = useState<string[]>([]);
   const [notes, setNotes] = useState('');
   const detail = useSeverityDetail();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
+  const [savedCount, setSavedCount] = useState(0);
+  const personal = usePersonFirst(savedCount);
 
   const load = useCallback(() => {
     setLoading(true);
@@ -1011,6 +1296,7 @@ function FlaresLens() {
     setSeverity(null);
     setTags([]);
     setRegions([]);
+    setContributors([]);
     setNotes('');
     detail.reset();
   }
@@ -1029,9 +1315,10 @@ function FlaresLens() {
       showInfoAlert('Almost there', 'Select how severe this flare felt.');
       return;
     }
-    await recordCheckin({ loggedAt, checkinType: 'flare', valence: 'negative', severity, notes, tags, bodyRegions: regions, ...detailForSave(detail, tags) });
+    await recordCheckin({ loggedAt, checkinType: 'flare', valence: 'negative', severity, notes, tags, bodyRegions: regions, contributors, ...detailForSave(detail, tags) });
     setFormOpen(false);
     resetForm();
+    setSavedCount((n) => n + 1);
     load();
   }
 
@@ -1067,6 +1354,8 @@ function FlaresLens() {
           onCancel={() => { setFormOpen(false); resetForm(); }}
           onSave={handleSave}
           saveLabel="Save flare"
+          personal={personal}
+          contributors={{ value: contributors, onChange: setContributors }}
         />
       )}
 
@@ -1083,7 +1372,17 @@ function FlaresLens() {
       ) : (
         <View style={styles.table}>
           {entries.map((entry) => (
-            <CheckinRow key={entry.id} entry={entry} onDelete={handleDelete} />
+            <CheckinRow
+              key={entry.id}
+              entry={entry}
+              onDelete={handleDelete}
+              onChanged={() => {
+                setSavedCount((n) => n + 1);
+                load();
+              }}
+              personal={personal}
+              withContributors
+            />
           ))}
         </View>
       )}
@@ -1107,6 +1406,8 @@ function FoodReactionsLens() {
   const [notes, setNotes] = useState('');
   const detail = useSeverityDetail();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
+  const [savedCount, setSavedCount] = useState(0);
+  const personal = usePersonFirst(savedCount);
 
   const load = useCallback(() => {
     setLoading(true);
@@ -1161,6 +1462,7 @@ function FoodReactionsLens() {
     });
     setFormOpen(false);
     resetForm();
+    setSavedCount((n) => n + 1);
     load();
   }
 
@@ -1197,6 +1499,7 @@ function FoodReactionsLens() {
           onCancel={() => { setFormOpen(false); resetForm(); }}
           onSave={handleSave}
           saveLabel="Save reaction"
+          personal={personal}
         />
       )}
 
@@ -1213,7 +1516,16 @@ function FoodReactionsLens() {
       ) : (
         <View style={styles.table}>
           {entries.map((entry) => (
-            <CheckinRow key={entry.id} entry={entry} onDelete={handleDelete} />
+            <CheckinRow
+              key={entry.id}
+              entry={entry}
+              onDelete={handleDelete}
+              onChanged={() => {
+                setSavedCount((n) => n + 1);
+                load();
+              }}
+              personal={personal}
+            />
           ))}
         </View>
       )}
@@ -4050,6 +4362,7 @@ const styles = StyleSheet.create({
   ownSymptomRow: { flexDirection: 'row', alignItems: 'center', gap: 14, marginTop: 6 },
   ownSymptomName: { ...typography.body, ...textShadow, color: TAB_COLOR, flex: 1 },
   ownSymptomAction: { ...typography.captionEmphasis, ...textShadow, color: TAB_COLOR },
+  otherPossibilities: { marginTop: 12 },
   tagGroupLabel: { ...typography.eyebrow, color: TAB_COLOR, marginBottom: 4,
 
     ...textShadow,

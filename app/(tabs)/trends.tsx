@@ -876,11 +876,19 @@ const TRENDS_LENSES: LensOption<TrendsLens>[] = [
     help: [
       {
         heading: 'Pattern Finder',
-        body: "Looks at what you actually ate before each flare or reaction you've logged, and shows what shows up more than once. This is a count of what's already in your data, not a diagnosis. Something showing up before 2 flares is worth a look; it's not proof of anything on its own.",
+        body: "Looks at everything recorded before each flare or reaction you've logged, food and everything else: sleep, stress and other check-in tags, workouts, steps, doses, water and your trackers, and shows what turns up more than once. It also lists what you marked as going on at each flare, and symptoms that keep coming back outside what the app lists for what you marked in Profile. This is a count of what's already in your data, not a diagnosis. Something showing up before 2 flares is worth a look; it's not proof of anything on its own.",
       },
       {
         heading: 'Condition scoring factors',
         body: 'This section only ever checks factors relevant to the conditions set in Profile, so a candidate here is always something one of your tracked conditions actually cares about, not any factor this app happens to score.',
+      },
+      {
+        heading: 'What you marked as going on',
+        body: 'Each flare can carry what was going on at the time: stress, poor sleep, a workout, noise and people, food, getting sick, or something you name. This band counts them, only against the flares where something was marked. Something marked is not shown to be a cause.',
+      },
+      {
+        heading: 'Symptoms outside what you marked',
+        body: "Symptoms that turn up on three or more flares and are not among those the app lists for any condition, autism, ADHD or dyslexia you marked in Profile. The app's list is short, so a symptom here may simply be one it missed. The band is for when the pieces do not add up, and Reports carries it for a doctor.",
       },
       {
         heading: 'The lookback window',
@@ -896,7 +904,7 @@ const TRENDS_LENSES: LensOption<TrendsLens>[] = [
       },
       {
         heading: 'Before them, besides food',
-        body: "The same count for everything else the app records: check-in tags, sleep, doses marked skipped, steps, water and each tracker you made. A number only counts when it sat outside your usual range, and each one is counted only against the flares that had it recorded before them. Steps and water are whole days, so they count at the 24 and 48 hour windows. Weather, once turned on, is listed beside flares in a separate band, from NASA's daily figures for your area, never counted as a candidate. Cycle day is listed beside flares as context, never counted as a candidate, and Trends > Cycle lines symptoms up by cycle day.",
+        body: "The same count for everything else the app records: check-in tags, sleep, doses marked skipped, steps, workouts, water and each tracker you made. Workouts are counted by kind, and as vigorous or an hour or more when they were. A number only counts when it sat outside your usual range, and each one is counted only against the flares that had it recorded before them. Steps and water are whole days, so they count at the 24 and 48 hour windows. Weather, once turned on, is listed beside flares in a separate band, from NASA's daily figures for your area, never counted as a candidate. Cycle day is listed beside flares as context, never counted as a candidate, and Trends > Cycle lines symptoms up by cycle day.",
       },
     ],
   },
@@ -3915,6 +3923,39 @@ export default function TrendsScreen() {
                       </Text>
                     ))}
                     <Text style={styles.patternRowCaption}>{FACTOR_CAVEAT}</Text>
+                  </TabBand>
+                ) : null}
+
+                {!loading && patternResult?.flareMarks && patternResult.flareMarks.flares > 0 ? (
+                  <TabBand folds={folds} color={TAB_COLOR} id={'trends:patterns:going-on'} title={'What you marked as going on'} icon="chatbubbles-outline">
+                    {patternResult.flareMarks.contributorLines.length === 0 ? (
+                      <Text style={styles.patternRowCaption}>
+                        {'None of these flares has anything marked as going on yet. Edit on a flare in Signals adds it, and so does the question after a flare notification.'}
+                      </Text>
+                    ) : (
+                      patternResult.flareMarks.contributorLines.map((line) => (
+                        <Text key={line} style={styles.patternRowCaption}>
+                          {line}
+                        </Text>
+                      ))
+                    )}
+                    {patternResult.flareMarks.unanswered > 0 && patternResult.flareMarks.contributorLines.length > 0 ? (
+                      <Text style={styles.patternRowCaption}>
+                        {`${patternResult.flareMarks.unanswered} of ${patternResult.flareMarks.flares} flares have nothing marked and are left out of these counts.`}
+                      </Text>
+                    ) : null}
+                    <Text style={styles.patternRowCaption}>{patternResult.flareMarks.contributorNote}</Text>
+                  </TabBand>
+                ) : null}
+
+                {!loading && patternResult?.flareMarks && patternResult.flareMarks.flares > 0 ? (
+                  <TabBand folds={folds} color={TAB_COLOR} id={'trends:patterns:outside'} title={'Symptoms outside what you marked'} icon="help-circle-outline">
+                    {patternResult.flareMarks.outsideLines.map((line) => (
+                      <Text key={line} style={styles.patternRowCaption}>
+                        {line}
+                      </Text>
+                    ))}
+                    <Text style={styles.patternRowCaption}>{patternResult.flareMarks.outsideNote}</Text>
                   </TabBand>
                 ) : null}
 

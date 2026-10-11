@@ -261,6 +261,7 @@ export const PERSONAL_HEALTH_TABLES: readonly string[] = [
   'trial_series_items',
   'checkin_tags',
   'checkin_body_regions',
+  'checkin_contributors',
   'daily_step_counts',
   'exercise_logs',
   'therapy_sessions',

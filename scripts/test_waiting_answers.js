@@ -102,6 +102,7 @@ check('the morning row has the three sleep words', groups[0].items[0].actions.jo
 check('no button takes words any more', w.actionTakesWords === undefined);
 check('one symptom: its button and Something else', w.actionsForCategory(actions.FLARE_WHAT_CATEGORY_IDS[1]).join(',') === 'flareTagA,flareTagOther');
 check('two symptoms: both and Something else', w.actionsForCategory(actions.FLARE_WHAT_CATEGORY_IDS[2]).join(',') === 'flareTagA,flareTagB,flareTagOther');
+check('what was going on: two and Not sure', w.actionsForCategory(actions.FLARE_WHY_CATEGORY_ID).join(',') === 'flareWhyA,flareWhyB,flareWhyNotSure');
 
 // --- Groups ---
 const expected = {
@@ -117,7 +118,7 @@ check('a refill sits in the Doses group in the shade', doseGroup.androidGroup ==
 check('an unknown kind sits under Everything Else', w.androidGroupFor('').androidGroup === 'inside-story-group:other');
 check('a group heading opens the list', doseGroup.androidGroupLink === 'hashimotosapp://waiting-answers');
 const deviceSource = fs.readFileSync(path.join(__dirname, '..', 'lib', 'reminderNotifications.ts'), 'utf8');
-check('queued reminders carry their group', /data: \{ \.\.\.planned\.payload, \.\.\.androidGroupFor\(planned\.payload\.kind\) \}/.test(deviceSource));
+check('queued reminders carry their group', /data: \{ \.\.\.planned\.payload, \.\.\.androidGroupFor\(planned\.payload\.kind\)[, }]/.test(deviceSource));
 check('the energy question carries its group', deviceSource.includes("...androidGroupFor('morning')"));
 check('a snooze carries its group', deviceSource.includes("...androidGroupFor(data.kind ?? '')"));
 check('a reminder queued without its group is queued again', deviceSource.includes('data?.androidGroup === androidGroupFor(want.payload.kind).androidGroup'));

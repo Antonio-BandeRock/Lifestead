@@ -94,6 +94,7 @@ export const CHECKIN_TAGS: CheckinTagDefinition[] = [
   // Energy
   { code: 'fatigue', label: 'Fatigue', category: 'energy', usualValence: 'negative' },
   { code: 'energy_crash', label: 'Energy crash', category: 'energy', usualValence: 'negative' },
+  { code: 'crash_after_exertion', label: 'Crashed a day after doing too much', category: 'energy', usualValence: 'negative' },
   { code: 'wired_jittery', label: 'Wired / jittery', category: 'energy', usualValence: 'negative' },
   { code: 'restless', label: "Restless / couldn't settle", category: 'energy', usualValence: 'negative' },
   { code: 'good_energy', label: 'Good, steady energy', category: 'energy', usualValence: 'positive' },
@@ -125,6 +126,20 @@ export const CHECKIN_TAGS: CheckinTagDefinition[] = [
   { code: 'temperature_sensitivity', label: 'Cold/heat sensitivity', category: 'pain_physical', usualValence: 'negative' },
   { code: 'hot_flushes', label: 'Hot flushes', category: 'pain_physical', usualValence: 'negative' },
   { code: 'swelling', label: 'Swelling', category: 'pain_physical', usualValence: 'negative' },
+  // Added 2026-10-11, when flares stopped being assumed to come from food.
+  // Each is reported across several conditions and neurotypes (widespread
+  // pain and touch that hurts with fibromyalgia, which is common alongside
+  // autism; the crash after exertion with ME/CFS, lupus and MS; numbness,
+  // weakness and dizziness with MS, diabetes and thyroid disease; dry eyes
+  // or mouth with Sjogren's), so a person can record them before anyone has
+  // put a name to what they have.
+  { code: 'widespread_pain', label: 'Pain all over', category: 'pain_physical', usualValence: 'negative' },
+  { code: 'touch_hurts', label: 'Touch or clothing hurt', category: 'pain_physical', usualValence: 'negative' },
+  { code: 'stiffness', label: 'Stiffness', category: 'pain_physical', usualValence: 'negative' },
+  { code: 'numbness_tingling', label: 'Numbness or tingling', category: 'pain_physical', usualValence: 'negative' },
+  { code: 'muscle_weakness', label: 'Muscle weakness', category: 'pain_physical', usualValence: 'negative' },
+  { code: 'dizziness', label: 'Dizziness', category: 'pain_physical', usualValence: 'negative' },
+  { code: 'dry_eyes_mouth', label: 'Dry eyes or mouth', category: 'pain_physical', usualValence: 'negative' },
   { code: 'felt_good_physically', label: 'Felt good physically', category: 'pain_physical', usualValence: 'positive' },
 
   // Cognitive

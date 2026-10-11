@@ -84,6 +84,7 @@ for (const count of [1, 2]) {
   const set = actions.flareWhatActions(count);
   if (set.length > 3) findings.push(`lib/reminderActions.ts the symptom question with ${count} has ${set.length} buttons`);
 }
+if (actions.FLARE_WHY_ACTIONS.length > 3) findings.push('lib/reminderActions.ts the what-was-going-on question has more than three buttons');
 
 if (findings.length) {
   for (const f of findings) console.log('FAIL ' + f);

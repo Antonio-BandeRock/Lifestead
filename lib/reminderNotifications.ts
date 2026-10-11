@@ -21,6 +21,8 @@ import {
   FLARE_FOLLOW_UP_KIND,
   FLARE_QUESTION_TEXT,
   FLARE_WHAT_CATEGORY_IDS,
+  FLARE_WHY_ACTIONS,
+  FLARE_WHY_CATEGORY_ID,
   flareAskAfterMealTitle,
   flareFollowUp,
   flareWhatActions,
@@ -38,6 +40,8 @@ import {
   takesWords,
 } from './reminderActions';
 import { addFlareNote, addFlareTag, mostLoggedFlareTags, setFlareSeverity } from './flareNotificationDb';
+import { contributorLabel, contributorsToAsk, NOT_SURE_CONTRIBUTOR, offeredContributors } from './flareContext';
+import { addFlareContributor, contributorUseCounts, readPersonMarks } from './flareContextDb';
 import LockedCapture from '../modules/locked-capture';
 import {
   checkinTimeOf,
@@ -308,6 +312,8 @@ type ReminderPayload = {
    *  symptom buttons, in button order. */
   flareTags?: string[];
   flareTagLabels?: string[];
+  flareWhy?: string[];
+  flareWhyLabels?: string[];
   /** A Yes pressed while locked: the id given to the flare it saved, so
    *  the answers after it, written at the same unlock, find it. */
   flareId?: string;
@@ -1015,6 +1021,16 @@ async function presentFlareQuestion(
         options: { opensAppToForeground: false },
       })),
     );
+  } else if (question === 'why') {
+    categoryIdentifier = FLARE_WHY_CATEGORY_ID;
+    await Notifications.setNotificationCategoryAsync(
+      categoryIdentifier,
+      FLARE_WHY_ACTIONS.map((action, index) => ({
+        identifier: action,
+        buttonTitle: tags[index] && action !== 'flareWhyNotSure' ? tags[index].label : reminderActionTitle(action, SNOOZE_MINUTES),
+        options: { opensAppToForeground: false },
+      })),
+    );
   } else {
     categoryIdentifier = question === 'howBad' ? REMINDER_CATEGORY_IDS.flareHowBad : REMINDER_CATEGORY_IDS.flareWorse;
   }
@@ -1026,6 +1042,7 @@ async function presentFlareQuestion(
     tab: 'signals',
     lens: 'flares',
     ...(question === 'what' ? { flareTags: tags.map((tag) => tag.code), flareTagLabels: tags.map((tag) => tag.label) } : {}),
+    ...(question === 'why' ? { flareWhy: tags.map((tag) => tag.code), flareWhyLabels: tags.map((tag) => tag.label) } : {}),
   };
   const { title, body } = FLARE_QUESTION_TEXT[question];
   await Notifications.scheduleNotificationAsync({
@@ -1036,19 +1053,39 @@ async function presentFlareQuestion(
 }
 
 // What follows a flare answer given with the app unlocked: the next
-// question, if there is one. The symptom question names symptoms, so it
-// is asked only where reminders may show their details, and only when
-// flares have carried symptoms before.
+// question, if there is one. The symptom and what-was-going-on questions
+// name things from the records, so they are asked only where reminders may
+// show their details. With no symptoms logged before, the symptom question
+// is passed over for what was going on.
 async function askNextFlareQuestion(action: string, flareId: string): Promise<void> {
   const next = flareFollowUp(action);
   if (!next || !flareId) return;
-  if (next !== 'what') {
+  if (next === 'howBad' || next === 'worse') {
     await presentFlareQuestion(next, flareId);
     return;
   }
   if (reminderDetailHidden()) return;
-  const tags = await mostLoggedFlareTags(2);
-  if (tags.length > 0) await presentFlareQuestion('what', flareId, tags);
+  if (next === 'what') {
+    const tags = await mostLoggedFlareTags(2);
+    if (tags.length > 0) {
+      await presentFlareQuestion('what', flareId, tags);
+      return;
+    }
+  }
+  await presentFlareWhy(flareId);
+}
+
+// The two contributors to offer: the person's most marked, then those that
+// fit what they marked in Profile, then stress, exertion and poor sleep.
+async function presentFlareWhy(flareId: string): Promise<void> {
+  const [counts, marks] = await Promise.all([contributorUseCounts(), readPersonMarks()]);
+  const codes = contributorsToAsk(counts, marks, offeredContributors());
+  if (codes.length === 0) return;
+  await presentFlareQuestion(
+    'why',
+    flareId,
+    codes.map((code) => ({ code, label: contributorLabel(code) })),
+  );
 }
 
 // The occasional offer to set the vault up (lib/vault.ts). Shown at once
@@ -1956,9 +1993,9 @@ async function answerPress(response: Notifications.NotificationResponse): Promis
   const flareId = plan.write === 'flareStart' ? newFlareId(now) : data?.scheduleItemId ?? '';
   try {
     await withSessionGuardLifted(() =>
-      recordAnswer(plan, data?.scheduleItemId ?? '', words, kind, now, { id: flareId, tags: data?.flareTags }),
+      recordAnswer(plan, data?.scheduleItemId ?? '', words, kind, now, { id: flareId, tags: data?.flareTags, why: data?.flareWhy }),
     );
-    if (plan.write === 'flareStart' || plan.write === 'flareSeverity') await askNextFlareQuestion(response.actionIdentifier, flareId);
+    if (plan.write === 'flareStart' || (kind as string) === FLARE_FOLLOW_UP_KIND) await askNextFlareQuestion(response.actionIdentifier, flareId);
   } finally {
     await syncReminderNotifications();
   }
@@ -1997,11 +2034,17 @@ function toShowing(notification: Notifications.Notification): ShowingReminder {
 // an Answer has to read off the notification rather than from a fixed list.
 function symptomButtonTitles(data: Partial<ReminderPayload> | undefined): Record<string, string> | undefined {
   const labels = data?.flareTagLabels;
-  if (!Array.isArray(labels) || labels.length === 0) return undefined;
+  const why = data?.flareWhyLabels;
   const titles: Record<string, string> = {};
-  if (labels[0]) titles.flareTagA = labels[0];
-  if (labels[1]) titles.flareTagB = labels[1];
-  return titles;
+  if (Array.isArray(labels)) {
+    if (labels[0]) titles.flareTagA = labels[0];
+    if (labels[1]) titles.flareTagB = labels[1];
+  }
+  if (Array.isArray(why)) {
+    if (why[0]) titles.flareWhyA = why[0];
+    if (why[1]) titles.flareWhyB = why[1];
+  }
+  return Object.keys(titles).length > 0 ? titles : undefined;
 }
 
 /**
@@ -2205,6 +2248,7 @@ async function applyWaitingAnswers(): Promise<void> {
         recordAnswer(plan, data.scheduleItemId ?? '', words, kind, new Date(answer.pressedAt), {
           id: plan.write === 'flareStart' ? data.flareId : data.scheduleItemId,
           tags: data.flareTags,
+          why: data.flareWhy,
         }),
       );
     } catch (error) {
@@ -2289,7 +2333,7 @@ async function recordAnswer(
   words: string,
   kind: string,
   now: Date = new Date(),
-  flare: { id?: string; tags?: string[] } = {},
+  flare: { id?: string; tags?: string[]; why?: string[] } = {},
 ): Promise<void> {
   const today = localDateString(now);
   if (plan.write === 'nothing') return;
@@ -2310,6 +2354,11 @@ async function recordAnswer(
   if (plan.write === 'flareTag') {
     const code = flare.tags?.[plan.slot];
     if (flare.id && code) await addFlareTag(flare.id, code);
+    return;
+  }
+  if (plan.write === 'flareWhy') {
+    const code = plan.slot === 'notSure' ? NOT_SURE_CONTRIBUTOR : flare.why?.[plan.slot];
+    if (flare.id && code) await addFlareContributor(flare.id, code);
     return;
   }
   if (plan.write === 'flareNote') {

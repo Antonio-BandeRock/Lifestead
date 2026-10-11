@@ -83,6 +83,7 @@ const NAMED = [
   'lib/sinceLastVisit.ts',
   'lib/reportGlance.ts',
   'lib/reportNoticed.ts',
+  'lib/flareContext.ts',
   'lib/reportHeart.ts',
   'lib/reportDiary.ts',
   'lib/weekdayTargets.ts',
