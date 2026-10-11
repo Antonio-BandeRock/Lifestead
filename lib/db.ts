@@ -18418,6 +18418,27 @@ export async function listUpcomingAppointments(fromDate: string, toDate: string)
   );
 }
 
+// Every provider and place named on an appointment, past or upcoming, so an
+// appointment said aloud (lib/spokenAppointment.ts) can use the name already
+// written down when exactly one fits what was heard.
+export async function listAppointmentNames(): Promise<{ providers: string[]; places: string[] }> {
+  const db = await getDatabase();
+  const rows = await db.getAllAsync<{ providerName: string | null; location: string | null }>(
+    `
+      SELECT DISTINCT provider_name AS providerName, location
+      FROM schedule_items
+      WHERE item_type = 'appointment'
+    `,
+  );
+  const providers = new Set<string>();
+  const places = new Set<string>();
+  for (const row of rows) {
+    if (row.providerName?.trim()) providers.add(row.providerName.trim());
+    if (row.location?.trim()) places.add(row.location.trim());
+  }
+  return { providers: [...providers], places: [...places] };
+}
+
 export async function updateAppointment(
   id: string,
   input: {

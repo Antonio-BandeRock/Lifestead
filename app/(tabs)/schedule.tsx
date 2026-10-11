@@ -332,6 +332,8 @@ import { useWalkMark } from '../../components/WalkMark';
 import { ExerciseScheduleSection } from '../../components/ExerciseScheduleSection';
 import { ThumbRow } from '../../components/ThumbRow';
 import { ThumbEndRow } from '../../components/ThumbEndRow';
+import { SpokenAppointmentBox } from '../../components/SpokenAppointmentBox';
+import type { SpokenAppointment } from '../../lib/spokenAppointment';
 import { VaultClosedBand } from '../../components/VaultClosedBand';
 import { useVaultReloadKey } from '../../lib/vaultReads';
 import { useCategoryClosed } from '../../lib/vaultSession';
@@ -555,7 +557,7 @@ const LENSES: LensOption<Lens>[] = [
     help: [
       {
         heading: 'Appointments',
-        body: 'Doctor, lab/bloodwork, nutritionist, trainer, or other visits: title, type, date/time, location, and provider. Mark one completed or cancelled once it\'s past, or remove it. Appointments don\'t repeat yet; add each one as it\'s scheduled.',
+        body: 'Doctor, lab/bloodwork, nutritionist, trainer, or other visits: title, type, date/time, location, and provider. Mark one completed or cancelled once it\'s past, or remove it. Appointments don\'t repeat yet; add each one as it\'s scheduled. Say an Appointment, at the top of the form, fills the boxes from one sentence, such as "dentist with Dr. Lopez next Tuesday at 3:30 for 45 minutes"; anything not said is left for you, and nothing is kept until Save.',
       },
       {
         heading: 'Phone reminders',
@@ -6266,6 +6268,21 @@ function AppointmentsLens() {
     setForm(blankAppointmentForm());
   }
 
+  // Say an Appointment (voice step 5): each part that was said replaces its
+  // box, and a part nobody said leaves its box as it was.
+  function applySpokenAppointment(reading: SpokenAppointment) {
+    setForm((current) => ({
+      ...current,
+      title: reading.title || current.title,
+      appointmentType: reading.appointmentType ?? current.appointmentType,
+      date: reading.date ?? current.date,
+      time: reading.time ? splitTime24(reading.time) : current.time,
+      providerName: reading.providerName ?? current.providerName,
+      location: reading.location ?? current.location,
+      minutes: reading.minutes ? String(reading.minutes) : current.minutes,
+    }));
+  }
+
   async function handleSaveForm() {
     if (!form.title.trim()) {
       showInfoAlert('Almost there', 'Enter what this appointment is for.');
@@ -6500,6 +6517,7 @@ function AppointmentsLens() {
 
           {showForm ? (
             <View style={styles.formCard}>
+              <SpokenAppointmentBox tabColor={TAB_COLOR} onFill={applySpokenAppointment} />
               <Text style={styles.label}>What is this for?</Text>
               <AppTextInput
                 onVoiceResult={(text) => setForm((current) => ({ ...current, title: text }))}
