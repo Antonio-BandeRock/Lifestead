@@ -10,6 +10,8 @@ import { withSessionGuardLifted } from './databaseActivity';
 import { getMovedWaterTarget } from './hydrationIndexDb';
 import { skipHydrationReminder, waterTargetReached } from './hydrationTarget';
 import {
+  ADD_WORDS_ACTION,
+  ADD_WORDS_LINE,
   AFTER_MEAL_MINUTES,
   ALL_REMINDER_CATEGORY_KEYS,
   answerLine,
@@ -33,8 +35,10 @@ import {
   reminderActionTitle,
   type FlareQuestion,
   type ReminderActionPlan,
+  takesWords,
 } from './reminderActions';
-import { addFlareTag, mostLoggedFlareTags, setFlareSeverity } from './flareNotificationDb';
+import { addFlareNote, addFlareTag, mostLoggedFlareTags, setFlareSeverity } from './flareNotificationDb';
+import LockedCapture from '../modules/locked-capture';
 import {
   checkinTimeOf,
   morningTimeOf,
@@ -717,7 +721,7 @@ async function queueOneNow(planned: PlannedNotification | null): Promise<boolean
       content: {
         title: worded.title,
         body: worded.body,
-        data: { ...worded.payload, ...androidGroupFor(worded.payload.kind) },
+        data: { ...worded.payload, ...androidGroupFor(worded.payload.kind), ...wordsFlagFor(worded.payload.kind) },
         sound: true,
         categoryIdentifier: categoryIdFor(worded),
       },
@@ -841,6 +845,70 @@ function buildCheckPlanned(check: DoneCheck, fireAt: Date, now: Date): PlannedNo
   };
 }
 
+// --- Words over the lock screen (next rebuild, 2026-10-11) -----------------
+//
+// Direct request, 2026-10-11, for anything needing more than a tap: "I still
+// want it. Put it into the next rebuild." A tap on the flare questions opens
+// a small screen over the lock screen with a box to type in and a
+// microphone (components/LockedWordsScreen.tsx). The phone is told which
+// notifications open it by lockedWords in the data, read by the patched
+// expo-notifications builder, which sends the tap to CaptureLauncherActivity
+// in mode "words" (patches/, plugins/withCaptureTile.js). A phone without
+// that build reads none of it, so the line saying so is added only where
+// the screen exists.
+// Read through a type of its own rather than the module's, so this file
+// leaves modules/locked-capture, which the build's fingerprint reads, alone.
+function wordsScreenOnThisPhone(): boolean {
+  const native = LockedCapture as { supportsReminderWords?: () => boolean } | null;
+  return Platform.OS === 'android' && typeof native?.supportsReminderWords === 'function' && native.supportsReminderWords();
+}
+
+function wordsFlagFor(kind: string): { lockedWords?: '1' } {
+  return takesWords(kind) && wordsScreenOnThisPhone() ? { lockedWords: '1' } : {};
+}
+
+function wordsLine(): string {
+  return wordsScreenOnThisPhone() ? ` ${ADD_WORDS_LINE}` : '';
+}
+
+/**
+ * Words written or said on the screen over the lock screen, handed in the
+ * way a button press is: sealed for the next unlock while App Lock holds no
+ * key, otherwise written at once. Answers what happened, for the screen to
+ * say.
+ */
+export async function handInReminderWords(input: {
+  identifier: string;
+  data: Record<string, unknown> | null;
+  words: string;
+}): Promise<'sealed' | 'written' | 'nothing'> {
+  const words = input.words.trim();
+  const data = (input.data ?? {}) as Partial<ReminderPayload>;
+  const kind = typeof data.kind === 'string' ? data.kind : '';
+  const plan = planReminderAction(kind, ADD_WORDS_ACTION);
+  if (!words || !plan) return 'nothing';
+  const now = new Date();
+  if (isLockedNow()) {
+    const kept = await keepAnswerForUnlock({
+      identifier: input.identifier,
+      // Each piece of words is its own answer, so a second note is not
+      // turned away as the first one handed in again.
+      date: now.getTime(),
+      actionIdentifier: ADD_WORDS_ACTION,
+      userText: words,
+      data: input.data,
+      pressedAt: now.toISOString(),
+      handled: null,
+    });
+    if (!kept) throw new Error('The words could not be sealed on this phone.');
+    return 'sealed';
+  }
+  await withSessionGuardLifted(() =>
+    recordAnswer(plan, data.scheduleItemId ?? '', words, kind, now, { id: data.scheduleItemId }),
+  );
+  return 'written';
+}
+
 // --- The two check-in reminders (C1, 2026-09-26) ---------------------------
 //
 // The only reminders that come from no record: the person asked for a
@@ -855,7 +923,7 @@ function buildDailyCheckinPlanned(fireAt: Date, now: Date): PlannedNotification 
   return {
     identifier: `${IDENTIFIER_PREFIX}checkin:${localDateString(fireAt)}`,
     title: FLARE_ASK_TITLE,
-    body: `The daily check-in you asked for. ${answerLine('checkin')} Check-ins as of ${describeFreshness(now, fireAt)}.`,
+    body: `The daily check-in you asked for. ${answerLine('checkin')}${wordsLine()} Check-ins as of ${describeFreshness(now, fireAt)}.`,
     fireAt,
     payload: {
       kind: 'checkin',
@@ -948,7 +1016,7 @@ async function presentFlareQuestion(
   const { title, body } = FLARE_QUESTION_TEXT[question];
   await Notifications.scheduleNotificationAsync({
     identifier: `${IDENTIFIER_PREFIX}flare-${question}:${flareId}`,
-    content: { title, body, data: { ...payload, ...androidGroupFor('checkin') }, sound: false, categoryIdentifier },
+    content: { title, body: body + wordsLine(), data: { ...payload, ...androidGroupFor('checkin'), ...wordsFlagFor(FLARE_FOLLOW_UP_KIND) }, sound: false, categoryIdentifier },
     trigger: { channelId: channelFor('checkin') },
   });
 }
@@ -1070,7 +1138,7 @@ function buildAfterMealPlanned(meal: { id: string; name: string }, fireAt: Date,
   return {
     identifier: `${IDENTIFIER_PREFIX}afterMeal:${meal.id}`,
     title: flareAskAfterMealTitle(meal.name),
-    body: `About ${AFTER_MEAL_MINUTES / 60} hours since you ate. ${answerLine('afterMeal')} Meals as of ${describeFreshness(now, fireAt)}.`,
+    body: `About ${AFTER_MEAL_MINUTES / 60} hours since you ate. ${answerLine('afterMeal')}${wordsLine()} Meals as of ${describeFreshness(now, fireAt)}.`,
     fireAt,
     payload: {
       kind: 'afterMeal',
@@ -1612,7 +1680,7 @@ async function runSync(): Promise<ReminderSyncResult> {
         content: {
           title: planned.title,
           body: planned.body,
-          data: { ...planned.payload, ...androidGroupFor(planned.payload.kind) },
+          data: { ...planned.payload, ...androidGroupFor(planned.payload.kind), ...wordsFlagFor(planned.payload.kind) },
           sound: true,
           categoryIdentifier: categoryIdFor(planned),
         },
@@ -2228,6 +2296,10 @@ async function recordAnswer(
   if (plan.write === 'flareTag') {
     const code = flare.tags?.[plan.slot];
     if (flare.id && code) await addFlareTag(flare.id, code);
+    return;
+  }
+  if (plan.write === 'flareNote') {
+    if (flare.id) await addFlareNote(flare.id, words);
     return;
   }
   if (plan.write === 'checkinNote') {

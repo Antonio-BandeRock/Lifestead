@@ -46,6 +46,10 @@ const {
   MORNING_ENERGY_TITLE,
   MORNING_ENERGY_BODY,
   ALL_REMINDER_CATEGORY_KEYS,
+  ADD_WORDS_ACTION,
+  ADD_WORDS_LINE,
+  FLARE_FOLLOW_UP_KIND,
+  takesWords,
   FLARE_ASK_TITLE,
   FLARE_QUESTION_TEXT,
   FLARE_SEVERITY_VALUES,
@@ -173,6 +177,18 @@ check('a severity on a check-in itself does nothing', planReminderAction('checki
 check('the first symptom fills slot 0', planReminderAction('flare', 'flareTagA').slot === 0);
 check('the second symptom fills slot 1', planReminderAction('flare', 'flareTagB').slot === 1);
 check('Something else writes nothing', planReminderAction('flare', 'flareTagOther').write === 'nothing');
+
+// Words over the lock screen (next rebuild after 1.0.67.1): a tap on a flare
+// question opens a box, and what is written goes where the question points.
+check('the check-in takes words', takesWords('checkin') && takesWords('afterMeal'));
+check('an open flare takes words', takesWords(FLARE_FOLLOW_UP_KIND));
+check('a dose takes no words', !takesWords('dose') && !takesWords('morning'));
+check('words on the check-in are a check-in note', planReminderAction('checkin', ADD_WORDS_ACTION).write === 'checkinNote');
+check('words after a meal are a check-in note', planReminderAction('afterMeal', ADD_WORDS_ACTION).write === 'checkinNote');
+check('words on a flare go into the flare', planReminderAction(FLARE_FOLLOW_UP_KIND, ADD_WORDS_ACTION).write === 'flareNote');
+check('words on a dose do nothing', planReminderAction('dose', ADD_WORDS_ACTION) === null);
+check('no button carries the words', !Object.values(CATEGORY_ACTIONS).some((set) => set.includes(ADD_WORDS_ACTION)));
+check('the offer says no unlock', /without unlocking/.test(ADD_WORDS_LINE));
 check('one symptom gives two buttons', flareWhatActions(1).join() === 'flareTagA,flareTagOther');
 check('two symptoms give three buttons', flareWhatActions(2).join() === 'flareTagA,flareTagB,flareTagOther');
 check('the symptom sets have ids of their own', FLARE_WHAT_CATEGORY_IDS[1] !== FLARE_WHAT_CATEGORY_IDS[2]);

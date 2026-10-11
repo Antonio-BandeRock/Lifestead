@@ -336,6 +336,20 @@ export function newFlareId(pressedAt: Date): string {
   return `checkin_flare_${pressedAt.getTime()}`;
 }
 
+// Words written or said on the screen a tap on the flare questions opens
+// over the lock screen (next rebuild, 2026-10-11). Not a button on any
+// notification: the screen hands it in the way a press is handed in, so it
+// is sealed for the next unlock or written at once by the same path.
+export const ADD_WORDS_ACTION = 'addWords';
+
+/** Added to the body of a question the words screen can open on. */
+export const ADD_WORDS_LINE = 'Tap here to write or say more without unlocking.';
+
+/** Whether a tap on this kind of reminder can open the words screen. */
+export function takesWords(kind: string): boolean {
+  return kind === 'checkin' || kind === 'afterMeal' || kind === FLARE_FOLLOW_UP_KIND;
+}
+
 export type ReminderActionPlan =
   | { write: 'scheduleStatus'; status: 'logged' | 'completed' }
   | { write: 'checkMarked' }
@@ -348,6 +362,7 @@ export type ReminderActionPlan =
   | { write: 'flareStart' }
   | { write: 'flareSeverity'; value: number }
   | { write: 'flareTag'; slot: 0 | 1 }
+  | { write: 'flareNote' }
   | { write: 'nothing' }
   | { write: 'sleepQuality'; value: number }
   | { write: 'morningEnergy'; value: number };
@@ -363,6 +378,10 @@ export function planReminderAction(kind: string, action: string): ReminderAction
   if (action === 'flareYes' && asks) return { write: 'flareStart' };
   // No is the answer, and the question goes away with nothing written.
   if (action === 'flareNo' && asks) return { write: 'nothing' };
+  // Words on the flare question are a check-in note, and words on a flare
+  // already saved go with that flare.
+  if (action === ADD_WORDS_ACTION && asks) return { write: 'checkinNote' };
+  if (action === ADD_WORDS_ACTION && kind === FLARE_FOLLOW_UP_KIND) return { write: 'flareNote' };
   if (kind === FLARE_FOLLOW_UP_KIND) {
     const step = FLARE_SEVERITY_VALUES[action as ReminderActionId];
     if (step !== undefined) return { write: 'flareSeverity', value: step };
