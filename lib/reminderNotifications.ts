@@ -189,6 +189,9 @@ const IDENTIFIER_PREFIX = 'inside-story-reminder:';
 // would take a snooze away on the next foreground. A tap on one still lands
 // where the original would have.
 const SNOOZE_PREFIX = 'inside-story-snooze:';
+// The test flare question (sendTestFlareQuestion). Outside the reminder
+// prefix so a reconcile leaves it queued, and answered like a reminder.
+const TEST_FLARE_PREFIX = 'inside-story-test-flare:';
 // The one notification saying how many reminders are waiting, whose tap
 // opens Waiting for an Answer (1.0.60.2). Outside both prefixes above, so
 // the reconcile never counts it as a reminder or cancels it, and kept on a
@@ -943,7 +946,7 @@ function buildDailyCheckinPlanned(fireAt: Date, now: Date): PlannedNotification 
 export async function sendTestFlareQuestion(delaySeconds = 20): Promise<boolean> {
   const now = new Date();
   const planned = buildDailyCheckinPlanned(new Date(now.getTime() + delaySeconds * 1000), now);
-  return queueOneNow({ ...planned, identifier: `inside-story-test-flare:${now.getTime()}` });
+  return queueOneNow({ ...planned, identifier: `${TEST_FLARE_PREFIX}${now.getTime()}` });
 }
 
 // The morning check-in (D7). Three of the sleep words as buttons, and the
@@ -1917,7 +1920,7 @@ async function answerPress(response: Notifications.NotificationResponse): Promis
     answerVaultOffer(response.actionIdentifier);
     return;
   }
-  const ours = isOurs(request.identifier) || isSnoozed(request.identifier);
+  const ours = isOurs(request.identifier) || isSnoozed(request.identifier) || request.identifier.startsWith(TEST_FLARE_PREFIX);
   if (!ours) return;
   if (isLockedNow()) {
     await answerWhileLocked(response);
