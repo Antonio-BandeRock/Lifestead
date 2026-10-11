@@ -13,11 +13,19 @@
 
 export type VoiceTarget = { id: string; name: string };
 
+// A lens on a tab that is not in front, from lib/voiceLensDirectory.ts:
+// "open Horticulture" said on Home. `tab` is the tab's name.
+export type VoiceElsewhere = VoiceTarget & { tab: string };
+
 export type VoiceScreen = {
   tabs: VoiceTarget[];
   lenses: VoiceTarget[];
   controls: VoiceTarget[];
   fields: VoiceTarget[];
+  // The name of the tab in front, when it is one, and the lenses on every
+  // other tab. Both optional, so a screen with neither still resolves.
+  currentTab?: string;
+  elsewhere?: VoiceElsewhere[];
 };
 
 export type VoiceCommand =
@@ -26,6 +34,7 @@ export type VoiceCommand =
   | { kind: 'scroll'; move: 'up' | 'down' | 'top' | 'bottom' }
   | { kind: 'tab'; id: string }
   | { kind: 'lens'; id: string }
+  | { kind: 'elsewhere'; ids: string[] }
   | { kind: 'press'; ids: string[] }
   | { kind: 'type'; text: string; fieldIds: string[] }
   | { kind: 'notFound'; heard: string };
@@ -33,6 +42,8 @@ export type VoiceCommand =
 export const VOICE_EXAMPLES = [
   'Go to Garden',
   'Open Horticulture',
+  'Remind me tomorrow at 8 to start working',
+  'Set a timer for 20 minutes',
   'Press Save',
   'Type milk in Search',
   'Scroll down',
@@ -161,7 +172,7 @@ export function resolveVoiceCommand(spoken: string, screen: VoiceScreen): VoiceC
   // what is in front of the person, unless a tab or lens has the whole name
   // and the button only part of it.
   const controlScore = bestScore(said, screen.controls);
-  const placeScore = Math.max(bestScore(said, screen.tabs), bestScore(said, screen.lenses));
+  const placeScore = Math.max(bestScore(said, screen.tabs), bestScore(said, screen.lenses), bestScore(said, screen.elsewhere ?? []));
   if (controlScore > 0 && controlScore >= placeScore) {
     return { kind: 'press', ids: bestMatches(said, screen.controls).map((c) => c.id) };
   }
@@ -171,22 +182,47 @@ export function resolveVoiceCommand(spoken: string, screen: VoiceScreen): VoiceC
 }
 
 // A lens on this tab before a tab, since "open Meds" on Schedules means the
-// lens there; a tab only when no lens has as good a claim.
+// lens there; a tab only when no lens on it has as good a claim; and a lens
+// on another tab last, so "open Horticulture" on Home goes to Garden. Two
+// lenses elsewhere with the same name ("Days Until" is on Garden and on
+// Life) come back together, for the person to pick. "Days Until on Life"
+// names the tab and settles it.
 function goTo(where: string, screen: VoiceScreen): VoiceCommand | null {
+  const elsewhere = screen.elsewhere ?? [];
+  const named = /^(.+?)\s+(?:on|in|under|from)\s+(?:the\s+)?(.+)$/i.exec(where);
+  if (named) {
+    const tabWords = voiceKey(named[2]);
+    const tab = screen.tabs.find((t) => voiceKey(t.name) === tabWords);
+    if (tab) {
+      if (screen.currentTab && voiceKey(screen.currentTab) === tabWords) {
+        const lenses = bestMatches(named[1], screen.lenses);
+        if (lenses.length === 1) return { kind: 'lens', id: lenses[0].id };
+      }
+      const there = bestMatches(
+        named[1],
+        elsewhere.filter((e) => voiceKey(e.tab) === tabWords),
+      );
+      if (there.length) return { kind: 'elsewhere', ids: there.map((e) => e.id) };
+    }
+  }
   const lensScore = bestScore(where, screen.lenses);
   const tabScore = bestScore(where, screen.tabs);
-  if (lensScore === 0 && tabScore === 0) return null;
-  if (lensScore >= tabScore) {
+  const elseScore = bestScore(where, elsewhere);
+  if (lensScore === 0 && tabScore === 0 && elseScore === 0) return null;
+  if (lensScore > 0 && lensScore >= tabScore && lensScore >= elseScore) {
     const lenses = bestMatches(where, screen.lenses);
     if (lenses.length === 1) return { kind: 'lens', id: lenses[0].id };
   }
-  const tabs = bestMatches(where, screen.tabs);
-  if (tabs.length === 1 && tabScore > 0) return { kind: 'tab', id: tabs[0].id };
+  if (tabScore > 0 && tabScore >= elseScore) {
+    const tabs = bestMatches(where, screen.tabs);
+    if (tabs.length === 1) return { kind: 'tab', id: tabs[0].id };
+  }
+  if (elseScore > 0) return { kind: 'elsewhere', ids: bestMatches(where, elsewhere).map((e) => e.id) };
   return null;
 }
 
 // What Voice Control shows when a sentence named nothing on screen.
 export function describeNotFound(heard: string): string {
   if (!heard) return 'Nothing was heard. Tap the microphone and say a command.';
-  return `Nothing on this screen is called “${heard}”. Say the words on the button, the name of a tab or lens, or “help”.`;
+  return `Nothing on this screen or in the app is called “${heard}”. Say the words on the button, the name of a tab or lens, a reminder or timer, or “help”.`;
 }

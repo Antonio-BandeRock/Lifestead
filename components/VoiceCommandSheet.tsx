@@ -13,6 +13,17 @@
 // shows both to pick from, top to bottom as they sit on screen, and one that
 // names nothing comes back with what was heard and the shapes to say.
 //
+// Since 1.0.66.26 it also reaches past the screen in front. Direct
+// instruction, 2026-10-10: "Voice Control should be total ability to anything
+// in the app." A lens on another tab is found in lib/voiceLensDirectory.ts
+// and opened through that tab's route parameter, so "open Horticulture" said
+// on Home lands on Garden > Horticulture. A reminder, timer or day counter
+// said outright ("remind me tomorrow at 8 to start working") is read by
+// lib/spokenCommand.ts and made at once, the same way Quick Capture makes it,
+// with Undo keeping the words as a note in Capture. A reminder with no clear
+// time is offered the times Quick Capture offers, unless the words name
+// something on the screen.
+//
 // On a computer that cannot listen, the same commands are typed instead.
 //
 // Saying "Lifestead" opens this sheet too, when that is turned on in Profile
@@ -22,7 +33,7 @@
 // Not a Modal, for the same reason as StoreLocationSheet. Mounted in
 // app/_layout.tsx before AppKeyboard.
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter, type Href } from 'expo-router';
+import { usePathname, useRouter, type Href } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { BackHandler, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -34,9 +45,15 @@ import { textShadow, typography } from '../constants/typography';
 import { useVoiceDictation, type VoiceDictationErrorKind } from '../hooks/useVoiceDictation';
 import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
 import { DESKTOP_MIC_NOT_ALLOWED, DESKTOP_NO_MICROPHONE } from '../lib/desktop/speechModel';
+import { scheduleReminder } from '../lib/db';
+import { commandFromSpoken, undoSpokenCommand, writeSpokenCommand, type UnlockDone } from '../lib/lockedCaptures';
 import { explainNotYet } from '../lib/notYet';
 import { subscribeQuickAccess } from '../lib/quickAccess';
-import { describeNotFound, resolveVoiceCommand, VOICE_EXAMPLES, type VoiceTarget } from '../lib/voiceControl';
+import { describeQuickReminderSet, quickReminderOptions } from '../lib/quickReminder';
+import { syncReminderNotifications } from '../lib/reminderNotifications';
+import { readSpokenCommand } from '../lib/spokenCommand';
+import { describeNotFound, resolveVoiceCommand, VOICE_EXAMPLES, type VoiceElsewhere, type VoiceTarget } from '../lib/voiceControl';
+import { VOICE_LENS_DIRECTORY, type VoiceLensPlace } from '../lib/voiceLensDirectory';
 import {
   voiceControls,
   voiceFields,
@@ -57,7 +74,36 @@ const MIC_ERRORS: Record<Exclude<VoiceDictationErrorKind, 'no-speech'>, string> 
 };
 
 type Box = { x: number; y: number; width: number; height: number };
-type Choice = { key: string; name: string; where: string; run: () => void };
+// `stay` keeps the sheet open after the pick, for a reminder time, whose
+// answer is said here.
+type Choice = { key: string; name: string; where: string; run: () => void; stay?: boolean };
+type Made = { heading: string; done: UnlockDone; undone: boolean };
+
+const TAB_TITLE = new Map<string, string>(TAB_ROUTES.map((tab) => [String(tab.path), tab.title]));
+
+// Every lens on a tab other than the one in front. Home's lenses are mostly
+// ways to another tab's lens, so one whose name a lens elsewhere also has is
+// left to that tab, and Home's repeats are said once.
+function lensesElsewhere(currentPath: string): { targets: VoiceElsewhere[]; places: Map<string, VoiceLensPlace> } {
+  const places = new Map<string, VoiceLensPlace>();
+  const targets: VoiceElsewhere[] = [];
+  const namedOffHome = new Set(VOICE_LENS_DIRECTORY.filter((place) => place.tab !== '/').map((place) => place.label.toLowerCase()));
+  const homeSeen = new Set<string>();
+  for (const place of VOICE_LENS_DIRECTORY) {
+    if (place.tab === currentPath) continue;
+    const tabTitle = TAB_TITLE.get(place.tab);
+    if (!tabTitle) continue;
+    if (place.tab === '/') {
+      const label = place.label.toLowerCase();
+      if (namedOffHome.has(label) || homeSeen.has(label)) continue;
+      homeSeen.add(label);
+    }
+    const id = `${place.tab}|${place.key}`;
+    places.set(id, place);
+    targets.push({ id, name: place.label, tab: tabTitle });
+  }
+  return { targets, places };
+}
 
 function measure(node: VoiceNode): Promise<Box | null | 'unknown'> {
   return new Promise((resolve) => {
@@ -84,6 +130,9 @@ function nextFrame(): Promise<void> {
 
 export function VoiceCommandSheet() {
   const router = useRouter();
+  const pathname = usePathname();
+  const pathRef = useRef(pathname);
+  pathRef.current = pathname;
   const insets = useSafeAreaInsets();
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
   const footerHeight = useFooterBandHeight();
@@ -103,6 +152,7 @@ export function VoiceCommandSheet() {
   const [micProblem, setMicProblem] = useState<string | null>(null);
   const [typed, setTyped] = useState('');
   const [typingFocused, setTypingFocused] = useState(false);
+  const [made, setMade] = useState<Made | null>(null);
   const openRef = useRef(false);
   openRef.current = open;
   const windowRef = useRef({ windowWidth, windowHeight });
@@ -132,6 +182,7 @@ export function VoiceCommandSheet() {
     setMicProblem(null);
     setTyped('');
     setTypingFocused(false);
+    setMade(null);
   }
 
   function listen() {
@@ -153,8 +204,69 @@ export function VoiceCommandSheet() {
     setWorking(false);
   }
 
+  // A reminder, timer or day counter said outright is made before anything
+  // on the screen is looked at, the way Quick Capture makes one.
+  async function makeSpoken(spoken: string, saidAt: Date): Promise<boolean> {
+    const read = readSpokenCommand(spoken, saidAt);
+    if (read.kind !== 'reminder' && read.kind !== 'timer' && read.kind !== 'days') return false;
+    const { command, kept } = commandFromSpoken(read, saidAt);
+    if (!command) return false;
+    try {
+      const done = await writeSpokenCommand(command, spoken, saidAt);
+      void syncReminderNotifications();
+      setMade({ heading: kept.heading, done, undone: false });
+      answer(null);
+    } catch (error) {
+      answer(error instanceof Error && error.message ? error.message : 'It could not be made.');
+    }
+    return true;
+  }
+
+  async function undoMade() {
+    if (!made || made.undone) return;
+    try {
+      await undoSpokenCommand(made.done);
+      setMade({ ...made, undone: true });
+    } catch (error) {
+      answer(error instanceof Error && error.message ? error.message : 'It could not be undone.');
+    }
+  }
+
+  function reminderTimes(spoken: string, saidAt: Date): boolean {
+    const read = readSpokenCommand(spoken, saidAt);
+    if (read.kind !== 'reminderAsk') return false;
+    const seen = new Set<string>();
+    const list: Choice[] = [];
+    for (const offer of [...read.offers, ...quickReminderOptions(saidAt)]) {
+      if (seen.has(offer.scheduledFor)) continue;
+      seen.add(offer.scheduledFor);
+      list.push({
+        key: offer.scheduledFor,
+        name: offer.label,
+        where: `Remind me: ${read.title}`,
+        stay: true,
+        run: () => {
+          void (async () => {
+            try {
+              await scheduleReminder({ title: read.title, scheduledFor: offer.scheduledFor, repeat: read.repeat });
+              void syncReminderNotifications();
+              answer(`Reminder set: ${read.title}. ${describeQuickReminderSet(offer.scheduledFor, new Date())}`);
+            } catch (error) {
+              answer(error instanceof Error && error.message ? error.message : 'The reminder could not be set.');
+            }
+          })();
+        },
+      });
+    }
+    answer(`${read.unclear} Pick when to be reminded.`, false, list);
+    return true;
+  }
+
   async function carryOut(spoken: string) {
     stop();
+    setMade(null);
+    const saidAt = new Date();
+    if (await makeSpoken(spoken, saidAt)) return;
     // Out of the way first, so this sheet's own buttons are not on screen
     // when the screen is read.
     setWorking(true);
@@ -213,6 +325,9 @@ export function VoiceCommandSheet() {
         }
       });
     const tabs: VoiceTarget[] = [...TAB_ROUTES.map((tab, index) => ({ id: `t${index}`, name: tab.title })), { id: 'profile', name: 'Profile' }];
+    const currentPath = pathRef.current;
+    const currentTab = TAB_TITLE.get(currentPath);
+    const { targets: elsewhere, places } = lensesElsewhere(currentPath);
 
     const seenFirst = (list: Placed[]) => [...list.filter((item) => item.seen), ...list.filter((item) => !item.seen)];
     let command = resolveVoiceCommand(spoken, {
@@ -220,10 +335,25 @@ export function VoiceCommandSheet() {
       lenses,
       controls: placedControls.filter((item) => item.seen),
       fields: placedFields.filter((item) => item.seen),
+      currentTab,
+      elsewhere,
     });
     if (command.kind === 'notFound' || (command.kind === 'type' && command.fieldIds.length === 0)) {
-      command = resolveVoiceCommand(spoken, { tabs, lenses, controls: seenFirst(placedControls), fields: seenFirst(placedFields) });
+      command = resolveVoiceCommand(spoken, {
+        tabs,
+        lenses,
+        controls: seenFirst(placedControls),
+        fields: seenFirst(placedFields),
+        currentTab,
+        elsewhere,
+      });
     }
+    if (command.kind === 'notFound' && reminderTimes(spoken, saidAt)) return;
+    const openElsewhere = (id: string) => {
+      const place = places.get(id);
+      if (!place) return;
+      router.navigate({ pathname: place.tab, params: { [place.param]: place.key } } as Href);
+    };
 
     const whereOnScreen = (y: number) => (y < h / 3 ? 'Near the top' : y < (2 * h) / 3 ? 'In the middle' : 'Near the bottom');
 
@@ -276,6 +406,19 @@ export function VoiceCommandSheet() {
       case 'lens': {
         close();
         lensRuns.get(command.id)?.();
+        return;
+      }
+      case 'elsewhere': {
+        if (command.ids.length === 1) {
+          close();
+          openElsewhere(command.ids[0]);
+          return;
+        }
+        const list = command.ids.map((id) => {
+          const target = elsewhere.find((item) => item.id === id);
+          return { key: id, name: target?.name ?? id, where: `On ${target?.tab ?? 'another tab'}`, run: () => openElsewhere(id) };
+        });
+        answer(`${list.length} lenses are called that. Pick the one you mean.`, false, list);
         return;
       }
       case 'press': {
@@ -369,7 +512,7 @@ export function VoiceCommandSheet() {
   }
 
   function pick(choice: Choice) {
-    close();
+    if (!choice.stay) close();
     choice.run();
   }
 
@@ -388,7 +531,7 @@ export function VoiceCommandSheet() {
           <Text style={styles.title}>Voice Control</Text>
         </View>
         <ScrollView style={styles.scroll} contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
-          {choices.length === 0 ? (
+          {choices.length === 0 && !made ? (
             <View style={styles.exampleBox}>
               <Text style={styles.caption}>{showHelp ? 'Anything on the screen can be said by its name:' : 'Say it like this:'}</Text>
               {(showHelp ? VOICE_EXAMPLES : VOICE_EXAMPLES.slice(0, 3)).map((example) => (
@@ -398,7 +541,7 @@ export function VoiceCommandSheet() {
               ))}
               {showHelp ? (
                 <Text style={styles.caption}>
-                  A button answers to the words on it, a box to the words written in it, and a tab or lens to its name.
+                  A button answers to the words on it, a box to the words written in it, and a tab or lens to its name, on this tab or any other. A reminder, timer or day counter can be said whole.
                 </Text>
               ) : null}
             </View>
@@ -435,6 +578,21 @@ export function VoiceCommandSheet() {
             <View style={styles.heardBox}>
               <Text style={styles.heardLabel}>Heard</Text>
               <Text style={styles.body}>{heard}</Text>
+            </View>
+          ) : null}
+          {made ? (
+            <View style={styles.heardBox}>
+              <View style={styles.titleRow}>
+                <Ionicons name={made.undone ? 'arrow-undo' : 'checkmark-circle'} size={18} color={colors.primary} />
+                <Text style={styles.choiceName}>{made.undone ? 'Undone, kept as a note' : made.heading}</Text>
+              </View>
+              <Text style={styles.body}>{made.undone ? made.done.text : made.done.line}</Text>
+              {made.undone ? <Text style={styles.caption}>The words are waiting in Capture.</Text> : null}
+              {made.undone ? null : (
+                <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={() => void undoMade()}>
+                  <Text style={styles.secondaryText}>Undo</Text>
+                </TouchableOpacity>
+              )}
             </View>
           ) : null}
           {message ? <Text style={styles.problem}>{message}</Text> : null}

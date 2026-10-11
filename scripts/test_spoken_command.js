@@ -66,6 +66,12 @@ check('set a reminder', brief('set a reminder to stretch at 4'),
   ['reminder', 'Stretch', '2026-09-22T16:00', 'none', null]);
 check('in two weeks at 9 am', brief('remind me to book the blood test in two weeks at 9 am'),
   ['reminder', 'Book the blood test', '2026-10-06T09:00', 'none', null]);
+check("o'clock left out of the title", brief("Remind me tomorrow morning at 8 o'clock to start working"),
+  ['reminder', 'Start working', '2026-09-23T08:00', 'none', null]);
+check('oclock with no at', brief('remind me tomorrow 8 oclock to stretch'),
+  ['reminder', 'Stretch', '2026-09-23T08:00', 'none', null]);
+check("by 5 o'clock", brief("remind me by 5 o'clock to leave"),
+  ['reminder', 'Leave', '2026-09-22T17:00', 'none', null]);
 
 // --- Repeats -----------------------------------------------------------------
 check('every Monday at 8', brief('remind me to put the bins out every Monday at 8 pm'),

@@ -40,5 +40,30 @@ check('nothing called that', t.resolveVoiceCommand('press launch rocket', screen
 check('empty', t.resolveVoiceCommand('  ', screen), { kind: 'notFound', heard: '' });
 check('key', t.voiceKey('The “Save” button!'), 'save');
 check('ampersand', t.voiceKey('Backup & Restore'), 'backup and restore');
+
+// Lenses on other tabs (1.0.66.26), from the directory Voice Control reads.
+const dirSource = fs.readFileSync(require.resolve('../lib/voiceLensDirectory.ts'), 'utf8');
+const dir = {};
+new Function('exports', ts.transpileModule(dirSource, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2019 } }).outputText)(dir);
+const titles = { '/': 'Home', '/food': 'Food', '/schedule': 'Schedules', '/log': 'Signals', '/insights': 'Insights', '/trends': 'Trends', '/reports': 'Reports', '/garden': 'Garden', '/life': 'Life' };
+const elsewhere = dir.VOICE_LENS_DIRECTORY.filter((l) => l.tab !== '/').map((l) => ({ id: `${l.tab}|${l.key}`, name: l.label, tab: titles[l.tab] }));
+const home = { tabs: screen.tabs, lenses: [], controls: named(['Save']), fields: [], currentTab: 'Home', elsewhere };
+check('every tab is in the directory', Object.keys(titles).every((tab) => dir.VOICE_LENS_DIRECTORY.some((l) => l.tab === tab)), true);
+check('lens on another tab', t.resolveVoiceCommand('Open Horticulture', home), { kind: 'elsewhere', ids: ['/garden|horticulture'] });
+check('lens on another tab, said bare', t.resolveVoiceCommand('Horticulture', home), { kind: 'elsewhere', ids: ['/garden|horticulture'] });
+check('a tab beats a lens elsewhere', t.resolveVoiceCommand('Go to Garden', home), { kind: 'tab', id: 'Garden#7' });
+const twice = t.resolveVoiceCommand('open days until', home);
+check('same name on two tabs comes back as a choice', twice.kind === 'elsewhere' && twice.ids.length === 2, true);
+check('naming the tab settles it', t.resolveVoiceCommand('open days until on life', home), { kind: 'elsewhere', ids: ['/life|daysUntil'] });
+check('this tab first', t.resolveVoiceCommand('Open Days Until', { ...screen, currentTab: 'Garden', elsewhere }), { kind: 'lens', id: 'Days Until#3' });
+check('a button here beats a lens elsewhere', t.resolveVoiceCommand('Save', home), { kind: 'press', ids: ['Save#0'] });
+const { execFileSync } = require('child_process');
+try {
+  execFileSync(process.execPath, [require.resolve('./build_voice_lens_directory.js'), '--check'], { stdio: 'pipe' });
+} catch (error) {
+  failed++;
+  console.log('FAIL', String(error.stdout || error.message).trim());
+}
+
 if (failed) { console.log(failed + ' failed'); process.exit(1); }
 console.log('All voice control checks passed');

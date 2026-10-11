@@ -132,6 +132,8 @@ export function describeDuration(minutes: number): string {
 // A clock time somebody said outright. Each of these is also taken out of
 // the words that become the reminder's title.
 const CLOCK_PATTERNS = [
+  // "at 8 o'clock" as a whole, so "o'clock" is not left in the title.
+  /\b(?:at\s+|by\s+)?\d{1,2}\s*o['’]?\s?clock\b/,
   /\b(?:at\s+|by\s+)?\d{1,2}(?::\d{2})?\s*(?:a\.?m\.?|p\.?m\.?)(?![a-z])/,
   /\b(?:at\s+|by\s+)?\d{1,2}:\d{2}\b/,
   /\b(?:at|by)\s+\d{1,2}\b(?!\s*(?:days?|weeks?|months?|years?|%))/,
@@ -267,7 +269,11 @@ function readReminder(lower: string, original: string, now: Date): SpokenCommand
   const start = /^(?:remind me|set (?:a |me a )?reminder|make (?:a )?reminder|reminder)\b[\s,:]*/.exec(lower);
   if (!start) return null;
   const body = original.slice(start[0].length).trim();
-  const bodyLower = body.toLowerCase();
+  // "8 o'clock" and "by 8 o'clock" read as "at 8", which is how the
+  // date reader knows a time of day.
+  const bodyLower = body
+    .toLowerCase()
+    .replace(/(\b(?:at|by)\s+)?(\d{1,2})\s*o['’]?\s?clock\b/g, (_whole, _before: string | undefined, hour: string) => `at ${hour} o’clock`);
 
   const every = readEvery(bodyLower);
   const withoutEvery = every ? bodyLower.replace(every.matched, ' ') : bodyLower;
