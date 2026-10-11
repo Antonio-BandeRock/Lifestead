@@ -29,5 +29,9 @@ class LockedCaptureModule : Module() {
     Function("showEmergencyNotice") { title: String, body: String -> EmergencyNotice.show(context, title, body) }
 
     Function("hideEmergencyNotice") { EmergencyNotice.hide(context) }
+
+    // Said true by a build whose flare questions open the words screen over
+    // the lock screen, so the notification text offers it only then.
+    Function("supportsReminderWords") { true }
   }
 }
