@@ -935,6 +935,17 @@ function buildDailyCheckinPlanned(fireAt: Date, now: Date): PlannedNotification 
   };
 }
 
+// A test copy of the flare question, queued a few seconds ahead so there is
+// time to lock the phone first. Developer Tools only, reached through the
+// link hashimotosapp://dev-flare-question (app/dev-flare-question.tsx), which
+// a PC can open over USB. Its id is outside the reminder prefix, so a
+// reconcile run while the phone is locked leaves it queued.
+export async function sendTestFlareQuestion(delaySeconds = 20): Promise<boolean> {
+  const now = new Date();
+  const planned = buildDailyCheckinPlanned(new Date(now.getTime() + delaySeconds * 1000), now);
+  return queueOneNow({ ...planned, identifier: `inside-story-test-flare:${now.getTime()}` });
+}
+
 // The morning check-in (D7). Three of the sleep words as buttons, and the
 // energy question after a press (lib/reminderActions.ts). Until 1.0.58.1 it
 // had no buttons and a tap opened Home, where nothing asked anything (direct
