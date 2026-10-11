@@ -10,8 +10,9 @@
 // above the footer where the voice note's tab used to be. A tap opens a short
 // list right above it: each choice sits in a dark pressed-in well, and the
 // wells sit on the lighter menu panel, so the list stands out from
-// whatever screen is behind it. The voice note is the choice nearest the
-// thumb, since it is the one that has to be quick.
+// whatever screen is behind it. The choices read alphabetically from the top
+// (1.0.66.20, direct instruction: "Put all of the quick access menu items in
+// alphabetical order"); until then the voice note sat nearest the thumb.
 //
 // Most choices open sheets mounted elsewhere at the root (the voice note and
 // Low Stimulation, which kept their sheets when they lost their own tabs, Ask
@@ -30,6 +31,7 @@ import { colors } from '../constants/colors';
 import { useFooterBandHeight } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { useVisualPreferences } from '../hooks/useVisualPreferences';
+import { sortByLabel } from '../lib/choiceOrder';
 import { useNavigationHand } from '../lib/navigationHand';
 import { getHubSpots, otherHubSpots, registerHubSpot, subscribeHubSpots } from '../lib/hubHandoff';
 import { openQuickAccessSheet } from '../lib/quickAccess';
@@ -88,8 +90,8 @@ export function QuickAccessButton() {
     run();
   }
 
-  // Top to bottom as drawn; the last one is nearest the thumb.
-  const choices: Choice[] = [
+  // Alphabetical, top to bottom as drawn.
+  const choices: Choice[] = sortByLabel([
     { key: 'command', label: 'Voice Control', icon: 'megaphone-outline', run: () => openQuickAccessSheet('voiceCommand') },
     { key: 'ask', label: 'Ask Your Records', icon: 'help-circle-outline', run: () => openQuickAccessSheet('askRecords') },
     { key: 'where', label: 'Where Is It', icon: 'location-outline', run: () => router.push({ pathname: '/where-is-it', params: { listen: '1' } }) },
@@ -101,7 +103,7 @@ export function QuickAccessButton() {
       run: () => openQuickAccessSheet('lowStimulation'),
     },
     { key: 'voice', label: 'Voice Note', icon: 'mic-outline', run: () => openQuickAccessSheet('voiceNote') },
-  ];
+  ]);
 
   const menuSide = hand === 'right' ? { right: 8 } : { left: 8 };
 
@@ -114,7 +116,7 @@ export function QuickAccessButton() {
         hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}
         accessibilityRole="button"
         accessibilityLabel="Quick access"
-        accessibilityHint="Opens Voice Note, Low Stimulation, Store Its Location, Where Is It, Ask Your Records and Voice Control"
+        accessibilityHint="Opens Ask Your Records, Low Stimulation, Store Its Location, Voice Control, Voice Note and Where Is It"
         accessibilityState={{ expanded: open }}
       >
         <Ionicons name="grid-outline" size={18} color={colors.textPrimary} />
