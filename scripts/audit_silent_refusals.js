@@ -25,6 +25,8 @@ const ROOTS = ['app', 'components'];
 
 // "file:trimmed line text" -> why it is not a refusal a person meets.
 const ALLOWED = {
+  'components/WakeWordListener.tsx:if (!best.trim()) return;':
+    'An empty piece of speech while listening for the wake word; nobody pressed anything.',
   'components/FoodLookup.tsx:if (!isFinal || !transcript.trim()) return;':
     'A voice result arriving in pieces; an empty or unfinished one is waited past, nobody pressed anything.',
   'components/PopoverSelect.tsx:if (hasScrolledToSelectionRef.current || searchText.trim()) return;':

@@ -32,6 +32,7 @@ import { HandSwitchButton } from '../components/HandSwitchButton';
 import { AskRecordsSheet } from '../components/AskRecordsSheet';
 import { StoreLocationSheet } from '../components/StoreLocationSheet';
 import { VoiceCommandSheet } from '../components/VoiceCommandSheet';
+import { WakeWordListener } from '../components/WakeWordListener';
 import { LowStimulationSheet } from '../components/LowStimulationSheet';
 import { QuickAccessButton } from '../components/QuickAccessButton';
 import { QuickCaptureSheet } from '../components/QuickCaptureSheet';
@@ -939,6 +940,7 @@ function UnlockedApp() {
               <StoreLocationSheet />
               {/* Voice Control (1.0.66.11): everything on the screen in front, by voice. */}
               <VoiceCommandSheet />
+              <WakeWordListener />
               {/* App Lock (1.0.60.6): the passcode asked for again before
                   records leave the phone, lib/freshAuth.ts. */}
               <FreshAuthHost />

@@ -24,6 +24,7 @@ import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { isDesktopApp } from '../lib/desktop/bridge';
 import { announcePhoneOnly } from '../lib/desktop/phoneOnly';
+import { claimMic, releaseMic } from '../lib/micClaim';
 import { explainNotYet } from '../lib/notYet';
 import { ensureChildFolder, uploadFile } from '../lib/oneDriveGraph';
 import { getBackupsFolder } from '../lib/oneDriveFolders';
@@ -79,6 +80,16 @@ export function VoiceoverRecorder() {
 
   useEffect(() => stopPlaying, [stopPlaying]);
 
+  // The microphone is claimed while a line records, so listening for
+  // "Lifestead" (components/WakeWordListener.tsx) lets go of it first.
+  const claimedRef = useRef(false);
+  const letGo = useCallback(() => {
+    if (!claimedRef.current) return;
+    claimedRef.current = false;
+    releaseMic();
+  }, []);
+  useEffect(() => letGo, [letGo]);
+
   const record = async (id: string) => {
     if (announcePhoneOnly(showInfoAlert, 'voice')) return;
     if (recordingId) {
@@ -95,12 +106,17 @@ export function VoiceoverRecorder() {
       return;
     }
     try {
+      if (!claimedRef.current) {
+        claimedRef.current = true;
+        await claimMic();
+      }
       await setAudioModeAsync({ allowsRecording: true, playsInSilentMode: true });
       await recorder.prepareToRecordAsync();
       recorder.record();
       setRecordingId(id);
       setMessage(null);
     } catch (error) {
+      letGo();
       showInfoAlert('Recording could not start', error instanceof Error ? error.message : String(error));
     }
   };
@@ -123,6 +139,7 @@ export function VoiceoverRecorder() {
     } finally {
       setRecordingId(null);
       await setAudioModeAsync({ allowsRecording: false, playsInSilentMode: true }).catch(() => {});
+      letGo();
     }
   };
 

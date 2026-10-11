@@ -38,7 +38,9 @@ const MODEL = {
 
 // Numbers written as people write them: without it "three thirty" comes back
 // as "330", which no reader in the app takes for a time.
-const STYLE_PROMPT = 'Lunch at 12:15. Call Dr. Lopez at 3:30 pm. 2 cups of rice, 1.5 kg of carrots.';
+// "Lifestead" is in it so the word that starts a command (voice step 7)
+// comes back spelled the way lib/wakeWord.ts looks for it.
+const STYLE_PROMPT = 'Lifestead, go to Garden. Lunch at 12:15. Call Dr. Lopez at 3:30 pm. 2 cups of rice, 1.5 kg of carrots.';
 
 const SAMPLE_RATE = 16000;
 const LONGEST_SECONDS = 180;

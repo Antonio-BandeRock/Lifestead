@@ -79,7 +79,8 @@ type Session = {
   floor: number | null;
   heardSinceRead: boolean;
   reading: Promise<void> | null;
-  interim: ReturnType<typeof setInterval>;
+  /** Null when the caller asked for the final words only. */
+  interim: ReturnType<typeof setInterval> | null;
   finishing: boolean;
 };
 
@@ -100,7 +101,7 @@ function plainProblem(error: unknown): string {
 }
 
 function release(current: Session): void {
-  clearInterval(current.interim);
+  if (current.interim) clearInterval(current.interim);
   current.processor.onaudioprocess = null;
   try {
     current.source.disconnect();
@@ -178,7 +179,9 @@ function microphoneProblem(error: unknown): ErrorEvent {
   return { error: 'audio-capture', message: 'The microphone could not be opened. It may be in use by another program.' };
 }
 
-async function begin(options: { lang?: string; continuous?: boolean }): Promise<void> {
+type StartOptions = { lang?: string; continuous?: boolean; interimResults?: boolean };
+
+async function begin(options: StartOptions): Promise<void> {
   let stream: MediaStream;
   try {
     stream = await navigator.mediaDevices.getUserMedia({
@@ -207,9 +210,13 @@ async function begin(options: { lang?: string; continuous?: boolean }): Promise<
     floor: null,
     heardSinceRead: false,
     reading: null,
-    interim: setInterval(() => readSoFar(current), INTERIM_EVERY_MS),
+    interim: null,
     finishing: false,
   };
+  // Listening for "Lifestead" asks for final words only, so a busy room
+  // costs one reading per stretch of talk rather than one every second and a
+  // half (components/WakeWordListener.tsx).
+  if (options.interimResults !== false) current.interim = setInterval(() => readSoFar(current), INTERIM_EVERY_MS);
   processor.onaudioprocess = (event) => {
     if (current.finishing) return;
     const piece = downsample(event.inputBuffer.getChannelData(0), context.sampleRate);
@@ -239,7 +246,7 @@ async function begin(options: { lang?: string; continuous?: boolean }): Promise<
 }
 
 export const ExpoSpeechRecognitionModule = {
-  start(options: { lang?: string; continuous?: boolean } = {}): void {
+  start(options: StartOptions = {}): void {
     if (session || starting) return;
     starting = true;
     void begin(options);

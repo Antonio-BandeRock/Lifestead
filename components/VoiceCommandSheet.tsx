@@ -13,8 +13,11 @@
 // shows both to pick from, top to bottom as they sit on screen, and one that
 // names nothing comes back with what was heard and the shapes to say.
 //
-// On a computer there is no speech recognizer the app can use yet, so the
-// same commands are typed instead.
+// On a computer that cannot listen, the same commands are typed instead.
+//
+// Saying "Lifestead" opens this sheet too, when that is turned on in Profile
+// (components/WakeWordListener.tsx); words said after it in the same breath
+// are carried out without the sheet listening again.
 //
 // Not a Modal, for the same reason as StoreLocationSheet. Mounted in
 // app/_layout.tsx before AppKeyboard.
@@ -323,11 +326,18 @@ export function VoiceCommandSheet() {
 
   useEffect(
     () =>
-      subscribeQuickAccess((sheet) => {
+      subscribeQuickAccess((sheet, spoken) => {
         if (sheet !== 'voiceCommand') return;
         reset();
         setWorking(false);
         setOpen(true);
+        // "Lifestead, go to Garden" arrives with the command already said.
+        const said = spoken?.trim() ?? '';
+        if (said) {
+          setHeard(said);
+          void carryOut(said);
+          return;
+        }
         if (!noMic) void start();
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps

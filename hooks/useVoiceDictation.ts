@@ -24,6 +24,7 @@ import { offerVoicePack } from '../lib/voicePackDevice';
 import { findInstalledLocale } from '../lib/voicePack';
 import { isDesktopApp } from '../lib/desktop/bridge';
 import { ensureDesktopSpeechModel } from '../lib/desktop/speechModel';
+import { claimMic, releaseMic } from '../lib/micClaim';
 
 export type VoiceDictationStatus = 'idle' | 'listening';
 
@@ -72,6 +73,14 @@ export function useVoiceDictation({ onResult, onError, lang = 'en-US', pauseMs }
   const onErrorRef = useRef(onError);
   onErrorRef.current = onError;
   const isActiveRef = useRef(false);
+  // Holds the microphone against listening for "Lifestead" (lib/micClaim.ts)
+  // from the press until this session has ended.
+  const claimedRef = useRef(false);
+  const letGo = useCallback(() => {
+    if (!claimedRef.current) return;
+    claimedRef.current = false;
+    releaseMic();
+  }, []);
   // For pauseMs: what has been settled so far, the latest whole text, and the
   // timer that stops listening after the pause.
   const committedRef = useRef('');
@@ -124,6 +133,7 @@ export function useVoiceDictation({ onResult, onError, lang = 'en-US', pauseMs }
   useSpeechRecognitionEvent('end', () => {
     if (!isActiveRef.current) return;
     isActiveRef.current = false;
+    letGo();
     clearPauseTimer();
     setStatus('idle');
     if (pauseMs && latestRef.current) onResultRef.current(latestRef.current, true);
@@ -132,6 +142,7 @@ export function useVoiceDictation({ onResult, onError, lang = 'en-US', pauseMs }
   useSpeechRecognitionEvent('error', (event) => {
     if (!isActiveRef.current) return;
     isActiveRef.current = false;
+    letGo();
     clearPauseTimer();
     setStatus('idle');
     // Stopping after the pause can land as an error on some phones; what was
@@ -150,20 +161,18 @@ export function useVoiceDictation({ onResult, onError, lang = 'en-US', pauseMs }
     onErrorRef.current?.(kind, event.message || event.error);
   });
 
-  const start = useCallback(async () => {
-    if (isActiveRef.current) return;
-    // On a computer the words come from whisper.cpp, whose model is
-    // downloaded once after asking (lib/desktop/speechModel.ts).
-    if (isDesktopApp() && !(await ensureDesktopSpeechModel())) return;
-    if (isActiveRef.current || !mountedRef.current) return;
+  // Everything from asking for the microphone to starting the session; false
+  // when it stopped short, so the claim is given back.
+  const begin = useCallback(async (): Promise<boolean> => {
+    if (isActiveRef.current || !mountedRef.current) return false;
     const permission = await ExpoSpeechRecognitionModule.requestPermissionsAsync();
     if (!permission.granted) {
       onErrorRef.current?.('permission', 'Microphone or speech recognition access was not granted.');
-      return;
+      return false;
     }
     if (!ExpoSpeechRecognitionModule.isRecognitionAvailable()) {
       onErrorRef.current?.('unavailable', 'Speech recognition is not available on this device.');
-      return;
+      return false;
     }
     // Prefer recognition that never leaves the phone. This matters more here
     // than it would in most apps: this one's whole stance is that no server
@@ -212,10 +221,10 @@ export function useVoiceDictation({ onResult, onError, lang = 'en-US', pauseMs }
     if (!useOnDevice && checked && Platform.OS === 'android') {
       const osVersion = typeof Platform.Version === 'number' ? Platform.Version : Number(Platform.Version) || 0;
       const way = await offerVoicePack(lang, { platform: Platform.OS, osVersion, supportsOnDevice, installed: false });
-      if (way === 'cancel') return;
+      if (way === 'cancel') return false;
       if (way === 'on-device') useOnDevice = true;
     }
-    if (isActiveRef.current || !mountedRef.current) return;
+    if (isActiveRef.current || !mountedRef.current) return false;
 
     isActiveRef.current = true;
     committedRef.current = '';
@@ -248,7 +257,19 @@ export function useVoiceDictation({ onResult, onError, lang = 'en-US', pauseMs }
       ...(pauseMs ? null : { continuous: false }),
       maxAlternatives: 1,
     });
+    return true;
   }, [lang, pauseMs, armPauseTimer]);
+
+  const start = useCallback(async () => {
+    if (isActiveRef.current) return;
+    // On a computer the words come from whisper.cpp, whose model is
+    // downloaded once after asking (lib/desktop/speechModel.ts).
+    if (isDesktopApp() && !(await ensureDesktopSpeechModel())) return;
+    if (isActiveRef.current || claimedRef.current || !mountedRef.current) return;
+    claimedRef.current = true;
+    await claimMic();
+    if (!(await begin())) letGo();
+  }, [begin, letGo]);
 
   const stop = useCallback(() => {
     clearPauseTimer();
@@ -263,6 +284,9 @@ export function useVoiceDictation({ onResult, onError, lang = 'en-US', pauseMs }
   // A real, genuinely more likely scenario now that autoStart exists --
   // added alongside it rather than left as a latent gap.
   useEffect(() => stop, [stop]);
+  // The end event never reaches a hook that has gone, so the claim is given
+  // back here.
+  useEffect(() => letGo, [letGo]);
 
   return { status, start, stop, recognitionMode };
 }

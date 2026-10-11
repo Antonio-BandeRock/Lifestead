@@ -42,7 +42,7 @@ import { isSignedIn as isOneDriveSignedIn } from '../lib/oneDriveAuth';
 import { getBackupsFolder, getSharedFolder } from '../lib/oneDriveFolders';
 import type { DriveItemRef } from '../lib/oneDriveGraph';
 import { downloadText, listFiles, uploadText } from '../lib/oneDriveGraph';
-import { isDesktopApp } from '../lib/desktop/bridge';
+import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
 import { explainNotYet } from '../lib/notYet';
 import { AppLockSettings } from '../components/AppLockSettings';
 import { describeSyncStatus, EMPTY_SYNC_STATE, type SnapshotRecord, type SnapshotSyncState } from '../lib/snapshotSync';
@@ -268,6 +268,7 @@ import { PRIVACY_URL, TERMS_URL } from '../lib/agreement';
 import { GHOSTEAD_URL } from '../lib/ghostead';
 import { wording } from '../lib/playfulCopy';
 import { VoicePackPanel } from '../components/VoicePackPanel';
+import { WakeWordPanel } from '../components/WakeWordPanel';
 import { setNavigationHand, useNavigationHand } from '../lib/navigationHand';
 import { setTier, useTier } from '../lib/entitlement';
 import { ThumbEndRow } from '../components/ThumbEndRow';
@@ -448,6 +449,7 @@ const ALL_CARD_SECTION_KEYS = [
   'connections',
   'developer',
   'voice-pack',
+  'wake-word',
   'agreement',
 ] as const;
 type CardSectionKey = (typeof ALL_CARD_SECTION_KEYS)[number];
@@ -687,6 +689,7 @@ const PROFILE_CARD_GROUP: Record<CardSectionKey, string> = {
   connections: 'Device & Account',
   developer: 'Device & Account',
   'voice-pack': 'Device & Account',
+  'wake-word': 'Device & Account',
   agreement: 'Device & Account',
 };
 
@@ -717,6 +720,7 @@ const PROFILE_CARD_ICONS: Record<CardSectionKey, ComponentProps<typeof Ionicons>
   agreement: 'document-text-outline',
   'about-ghostead': 'business-outline',
   'voice-pack': 'volume-high-outline',
+  'wake-word': 'ear-outline',
   connections: 'people-outline',
   applock: 'lock-closed-outline',
   backup: 'cloud-upload-outline',
@@ -6022,6 +6026,24 @@ export default function ProfileScreen() {
           {!collapsedSections.has('voice-pack') ? (
             <View style={styles.cardBody}>
               <VoicePackPanel
+                textStyle={styles.helpText}
+                buttonStyle={styles.checkinButton}
+                buttonTextStyle={styles.checkinButtonText}
+              />
+            </View>
+          ) : null}
+        </View>
+      ) : null}
+
+      {/* Say Lifestead to Start: listening for the word while the app is
+          open, set on each device. See lib/wakeWord.ts. A computer shows it
+          only when it can listen at all. */}
+      {!isDesktopApp() || desktopHearsSpeech() ? (
+        <View style={styles.card}>
+          {renderCardHeader('wake-word', 'Say Lifestead to Start')}
+          {!collapsedSections.has('wake-word') ? (
+            <View style={styles.cardBody}>
+              <WakeWordPanel
                 textStyle={styles.helpText}
                 buttonStyle={styles.checkinButton}
                 buttonTextStyle={styles.checkinButtonText}

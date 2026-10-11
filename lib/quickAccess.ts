@@ -6,13 +6,17 @@
 // the button are siblings at the root and nothing between them needs to know.
 export type QuickAccessSheet = 'voiceNote' | 'lowStimulation' | 'askRecords' | 'storeLocation' | 'voiceCommand';
 
-const listeners = new Set<(sheet: QuickAccessSheet) => void>();
+// `spoken` carries what was said after "Lifestead" in the same breath
+// (components/WakeWordListener.tsx), which Voice Control carries out at once.
+type QuickAccessListener = (sheet: QuickAccessSheet, spoken?: string) => void;
 
-export function openQuickAccessSheet(sheet: QuickAccessSheet): void {
-  for (const listener of listeners) listener(sheet);
+const listeners = new Set<QuickAccessListener>();
+
+export function openQuickAccessSheet(sheet: QuickAccessSheet, spoken?: string): void {
+  for (const listener of listeners) listener(sheet, spoken);
 }
 
-export function subscribeQuickAccess(listener: (sheet: QuickAccessSheet) => void): () => void {
+export function subscribeQuickAccess(listener: QuickAccessListener): () => void {
   listeners.add(listener);
   return () => {
     listeners.delete(listener);
