@@ -247,7 +247,35 @@ export type DesktopBridge = {
   print?: DesktopPrintBridge;
   /** Missing on an installer built before 1.0.55.38. */
   stationListener?: DesktopStationListenerBridge;
+  /** Missing on an installer built before 1.0.66.24. */
+  speech?: DesktopSpeechBridge;
 };
+
+export type DesktopSpeechStatus = {
+  /** False on a Mac and on any install without the engine. */
+  shipped: boolean;
+  model: 'ready' | 'missing' | 'downloading';
+  received: number;
+  total: number;
+};
+
+/** Speech into words on this computer with whisper.cpp (desktop/speech.js). */
+export type DesktopSpeechBridge = {
+  /** Read once when the window opens, so screens can ask without waiting. */
+  shipped: boolean;
+  status(): Promise<DesktopSpeechStatus>;
+  /** Downloads the model once; a second call joins the first. */
+  downloadModel(): Promise<{ ok: true } | { ok: false; problem: string }>;
+  cancelDownload(): Promise<void>;
+  /** 16 kHz mono 16-bit samples in, the words out (empty when none). Rejects with a sentence. */
+  transcribe(pcm: Uint8Array, lang: string): Promise<string>;
+  onProgress(listener: (progress: { received: number; total: number }) => void): () => void;
+};
+
+/** True in a desktop app that can turn speech into words (Windows, 1.0.66.24 on). */
+export function desktopHearsSpeech(): boolean {
+  return typeof window !== 'undefined' && window.insideStoryDesktop?.speech?.shipped === true;
+}
 
 export type StationListenerStatus = {
   listening: boolean;

@@ -35,7 +35,8 @@ import { colors } from '../constants/colors';
 import { useFooterBandHeight, useHubMenuCardSpan, useMenuCardBottom } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { useVoiceDictation, type VoiceDictationErrorKind } from '../hooks/useVoiceDictation';
-import { isDesktopApp } from '../lib/desktop/bridge';
+import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
+import { DESKTOP_MIC_NOT_ALLOWED, DESKTOP_NO_MICROPHONE } from '../lib/desktop/speechModel';
 import { phoneOnlyNotice } from '../lib/desktop/phoneOnly';
 import { explainNotYet } from '../lib/notYet';
 import { announcePlaceSaved, subscribeQuickAccess } from '../lib/quickAccess';
@@ -62,6 +63,9 @@ export function StoreLocationSheet() {
   const menuBottom = useMenuCardBottom();
   const { left, width } = useHubMenuCardSpan();
   const desktop = isDesktopApp();
+  // A computer that cannot listen (a Mac, or an installer from before
+  // 1.0.66.24) types instead; Windows listens with whisper.cpp.
+  const noMic = desktop && !desktopHearsSpeech();
   const [open, setOpen] = useState(false);
   const [heard, setHeard] = useState('');
   const [notUnderstood, setNotUnderstood] = useState(false);
@@ -112,13 +116,15 @@ export function StoreLocationSheet() {
     },
     onError: (kind) => {
       if (kind === 'no-speech') return;
-      setMicProblem(MIC_ERRORS[kind]);
+      setMicProblem(
+        desktop && kind === 'permission' ? DESKTOP_MIC_NOT_ALLOWED : desktop && kind === 'unavailable' ? DESKTOP_NO_MICROPHONE : MIC_ERRORS[kind],
+      );
     },
   });
   const listening = status === 'listening';
 
   function listen() {
-    if (desktop) return;
+    if (noMic) return;
     setHeard('');
     setNotUnderstood(false);
     setMicProblem(null);
@@ -135,12 +141,12 @@ export function StoreLocationSheet() {
     setPlace('');
     setSaved(null);
     setFailed(null);
-    setTyping(desktop);
+    setTyping(noMic);
     setTypingFocused(false);
     listPlaceRecords()
       .then((records) => setKnownPlaces(suggestPlaces(records, 8)))
       .catch(() => setKnownPlaces([]));
-    if (withMic && !desktop) void start();
+    if (withMic && !noMic) void start();
   }
 
   function close() {
@@ -194,7 +200,7 @@ export function StoreLocationSheet() {
     await undoRememberWhere(saved);
     announcePlaceSaved();
     setSaved(null);
-    if (desktop) {
+    if (noMic) {
       setTyping(true);
     } else {
       listen();
@@ -257,7 +263,7 @@ export function StoreLocationSheet() {
                 <Text style={styles.example}>“The bowling balls are in the hall closet.”</Text>
                 <Text style={styles.example}>“John’s fishing poles are in the garage.”</Text>
               </View>
-              {!desktop ? (
+              {!noMic ? (
                 <View style={styles.micArea}>
                   <TouchableOpacity
                     style={[styles.mic, listening ? styles.micListening : null]}

@@ -55,7 +55,7 @@ import { confirmKitchenItemLocation, setKitchenItemLocation } from '../lib/kitch
 import { RecordPhotos } from '../components/RecordPhotos';
 import { usePlayfulWording } from '../hooks/usePlayfulWording';
 import { useVoiceDictation } from '../hooks/useVoiceDictation';
-import { isDesktopApp } from '../lib/desktop/bridge';
+import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
 import { describeSpokenAnswer, parseWhereQuestion } from '../lib/whereSpeech';
 import { SENTENCE_PAUSE_MS } from '../components/StoreLocationSheet';
 
@@ -81,8 +81,9 @@ export default function WhereIsItScreen() {
   // already in the box.
   // listen comes from the quick-access menu: the microphone starts at once.
   const { q, listen } = useLocalSearchParams<{ q?: string; listen?: string }>();
-  const desktop = isDesktopApp();
-  const listenOnArrival = listen === '1' && !desktop;
+  // Windows listens with whisper.cpp (1.0.66.24); a Mac cannot listen yet.
+  const noMic = isDesktopApp() && !desktopHearsSpeech();
+  const listenOnArrival = listen === '1' && !noMic;
   const [query, setQuery] = useState(typeof q === 'string' ? q : '');
   const [records, setRecords] = useState<PlaceRecord[]>([]);
   const [loading, setLoading] = useState(true);
@@ -290,7 +291,7 @@ export default function WhereIsItScreen() {
           </TouchableOpacity>
         </View>
 
-        {!desktop ? (
+        {!noMic ? (
           <View style={styles.askCard}>
             <Text style={styles.lead}>Ask it like this:</Text>
             <Text style={styles.askExample}>“Where are the fishing poles?”</Text>

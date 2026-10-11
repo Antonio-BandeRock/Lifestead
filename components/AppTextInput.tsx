@@ -3,7 +3,7 @@ import { StyleSheet, TextInput, View, type TextInput as TextInputType, type Text
 import { useActiveInputControls, type AppKeyboardType } from './ActiveInputContext';
 import { useKeyboardLift } from './KeyboardLift';
 import { VoiceInputButton } from './VoiceInputButton';
-import { isDesktopApp } from '../lib/desktop/bridge';
+import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
 import { appendDictatedText, parseVoiceCommands } from '../lib/voiceCommandParsing';
 import { useNavigationHand } from '../lib/navigationHand';
 import { NavigationContext } from '@react-navigation/native';
@@ -101,14 +101,15 @@ export const AppTextInput = forwardRef<TextInputType, AppTextInputProps>(functio
     !props.secureTextEntry &&
     props.editable !== false &&
     !props.disableKeyboardLift;
-  // A computer has no dictation (see lib/desktop/phoneOnly.ts), so a mic in
-  // every box there would only ever say so; it is left off rather than
-  // padding every field for a button that cannot listen.
+  // A computer that cannot listen (a Mac, or an installer from before
+  // 1.0.66.24; see lib/desktop/phoneOnly.ts) leaves the mic off rather than
+  // padding every field for a button that would only say so. Windows
+  // listens with whisper.cpp, so its boxes keep the mic.
   // A number field that reads speech itself (a spoken price, through
   // onVoiceResult) keeps its mic; any other number field goes without.
   const hearsSpeech =
     isTextField || (!!onVoiceResult && !props.secureTextEntry && props.editable !== false && !props.disableKeyboardLift);
-  const showMic = (voice ?? true) && hearsSpeech && !isDesktopApp();
+  const showMic = (voice ?? true) && hearsSpeech && (!isDesktopApp() || desktopHearsSpeech());
   if (!showMic) return <AppTextInputField ref={ref} {...props} />;
 
   const { style, value, onChangeText, multiline, maxLength } = props;

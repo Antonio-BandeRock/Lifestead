@@ -22,6 +22,8 @@ import { Platform } from 'react-native';
 import { ExpoSpeechRecognitionModule, useSpeechRecognitionEvent } from 'expo-speech-recognition';
 import { offerVoicePack } from '../lib/voicePackDevice';
 import { findInstalledLocale } from '../lib/voicePack';
+import { isDesktopApp } from '../lib/desktop/bridge';
+import { ensureDesktopSpeechModel } from '../lib/desktop/speechModel';
 
 export type VoiceDictationStatus = 'idle' | 'listening';
 
@@ -144,11 +146,16 @@ export function useVoiceDictation({ onResult, onError, lang = 'en-US', pauseMs }
     let kind: VoiceDictationErrorKind = 'other';
     if (event.error === 'not-allowed' || event.error === 'service-not-allowed') kind = 'permission';
     else if (event.error === 'no-speech' || event.error === 'speech-timeout') kind = 'no-speech';
+    else if (event.error === 'audio-capture') kind = 'unavailable';
     onErrorRef.current?.(kind, event.message || event.error);
   });
 
   const start = useCallback(async () => {
     if (isActiveRef.current) return;
+    // On a computer the words come from whisper.cpp, whose model is
+    // downloaded once after asking (lib/desktop/speechModel.ts).
+    if (isDesktopApp() && !(await ensureDesktopSpeechModel())) return;
+    if (isActiveRef.current || !mountedRef.current) return;
     const permission = await ExpoSpeechRecognitionModule.requestPermissionsAsync();
     if (!permission.granted) {
       onErrorRef.current?.('permission', 'Microphone or speech recognition access was not granted.');

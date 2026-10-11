@@ -29,7 +29,8 @@ import { useFooterBandHeight, useHubMenuCardSpan, useMenuCardBottom } from '../c
 import { TAB_ROUTES } from '../constants/tabs';
 import { textShadow, typography } from '../constants/typography';
 import { useVoiceDictation, type VoiceDictationErrorKind } from '../hooks/useVoiceDictation';
-import { isDesktopApp } from '../lib/desktop/bridge';
+import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
+import { DESKTOP_MIC_NOT_ALLOWED, DESKTOP_NO_MICROPHONE } from '../lib/desktop/speechModel';
 import { explainNotYet } from '../lib/notYet';
 import { subscribeQuickAccess } from '../lib/quickAccess';
 import { describeNotFound, resolveVoiceCommand, VOICE_EXAMPLES, type VoiceTarget } from '../lib/voiceControl';
@@ -86,6 +87,10 @@ export function VoiceCommandSheet() {
   const menuBottom = useMenuCardBottom();
   const { left, width } = useHubMenuCardSpan();
   const desktop = isDesktopApp();
+  // A computer that cannot listen (a Mac, or an installer from before
+  // 1.0.66.24) types only; Windows listens with whisper.cpp and keeps the
+  // box to type in as well.
+  const noMic = desktop && !desktopHearsSpeech();
   const [open, setOpen] = useState(false);
   const [working, setWorking] = useState(false);
   const [heard, setHeard] = useState('');
@@ -109,7 +114,9 @@ export function VoiceCommandSheet() {
     },
     onError: (kind) => {
       if (kind === 'no-speech') return;
-      setMicProblem(MIC_ERRORS[kind]);
+      setMicProblem(
+        desktop && kind === 'permission' ? DESKTOP_MIC_NOT_ALLOWED : desktop && kind === 'unavailable' ? DESKTOP_NO_MICROPHONE : MIC_ERRORS[kind],
+      );
     },
   });
   const listening = status === 'listening';
@@ -125,7 +132,7 @@ export function VoiceCommandSheet() {
   }
 
   function listen() {
-    if (desktop) return;
+    if (noMic) return;
     reset();
     void start();
   }
@@ -321,7 +328,7 @@ export function VoiceCommandSheet() {
         reset();
         setWorking(false);
         setOpen(true);
-        if (!desktop) void start();
+        if (!noMic) void start();
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
@@ -386,7 +393,7 @@ export function VoiceCommandSheet() {
               ) : null}
             </View>
           ) : null}
-          {!desktop ? (
+          {!noMic ? (
             <View style={styles.micArea}>
               <TouchableOpacity
                 style={[styles.mic, listening ? styles.micListening : null]}
@@ -399,7 +406,8 @@ export function VoiceCommandSheet() {
               </TouchableOpacity>
               <Text style={styles.caption}>{micCaption}</Text>
             </View>
-          ) : (
+          ) : null}
+          {desktop ? (
             <AppTextInput
               style={styles.input}
               placeholder="Type a command (Go to Garden)"
@@ -410,8 +418,9 @@ export function VoiceCommandSheet() {
               returnKeyType="go"
               onSubmitEditing={doTyped}
               disableKeyboardLift
+              voice={false}
             />
-          )}
+          ) : null}
           {heard ? (
             <View style={styles.heardBox}>
               <Text style={styles.heardLabel}>Heard</Text>

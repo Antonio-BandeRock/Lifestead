@@ -86,7 +86,8 @@ if (process.env.LIFESTEAD_DESKTOP === '1') {
     'expo-secure-store': 'lib/desktop/secureStoreShim.ts',
     'expo-notifications': 'lib/desktop/notificationsShim.ts',
     'expo-file-system': 'lib/desktop/fileSystemShim.ts',
-    'expo-speech-recognition': 'lib/desktop/unavailableModule.ts',
+    // Voice step 6 (1.0.66.24): whisper.cpp on the computer, desktop/speech.js.
+    'expo-speech-recognition': 'lib/desktop/speechRecognitionShim.ts',
     'react-native-health-connect': 'lib/desktop/unavailableModule.ts',
     'react-native-zeroconf': 'lib/desktop/unavailableModule.ts',
     '@dr.pogodin/react-native-static-server': 'lib/desktop/unavailableModule.ts',

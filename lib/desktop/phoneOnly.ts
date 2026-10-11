@@ -6,7 +6,8 @@
 // scan products, they have to use their mobile app for that."
 //
 // The desktop build (desktop/, the same code in an Electron window) has no
-// camera the app can use, no on-device speech recognizer, no Health
+// camera the app can use, no speech recognizer on a Mac (Windows has one
+// since 1.0.66.24), no Health
 // Connect, no mDNS and no LAN server, and it cannot yet keep or show a
 // picked photo. metro.config.js swaps each of those packages for
 // lib/desktop/unavailableModule.ts, which loads and does nothing, so a
@@ -52,6 +53,10 @@ const MESSAGES: Record<PhoneOnlyFeature, string> = {
     "Scanning a product uses the phone's camera, and this computer has no way to do it. Open Lifestead on your phone and scan the product there.",
   photo:
     'Photos are taken and kept on the phone for now. This computer cannot take one or bring one in yet. Add the photo from Lifestead on your phone.',
+  // Since 1.0.66.24 Windows listens with whisper.cpp (desktop/speech.js),
+  // so this is said only on a Mac, which has no engine yet, and by an
+  // installer from before then; every caller checks desktopHearsSpeech()
+  // first.
   voice:
     'Speaking to the app works on the phone, which listens on the device itself. This computer has no way to do that, so type it here, or say it on your phone.',
   readPrice:

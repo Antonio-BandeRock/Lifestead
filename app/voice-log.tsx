@@ -74,7 +74,7 @@ import {
   type QuickLogMealType,
 } from '../lib/quickLog';
 import { useVoiceDictation, type VoiceRecognitionMode } from '../hooks/useVoiceDictation';
-import { isDesktopApp } from '../lib/desktop/bridge';
+import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
 import { offerGardenUse } from '../lib/gardenPlateOffer';
 import { explainNotYet } from '../lib/notYet';
 
@@ -303,10 +303,11 @@ export default function VoiceLogScreen() {
   // second time here is the wasted tap VoiceInputButton's own autoStart was
   // added to remove.
   //
-  // On the desktop build there is nothing to listen with, so this screen
-  // does not start and shows the phone-only band instead (below).
+  // A computer with nothing to listen with (a Mac, or an installer from
+  // before 1.0.66.24) does not start and shows the phone-only band instead
+  // (below); Windows listens with whisper.cpp.
   useEffect(() => {
-    if (isDesktopApp()) return undefined;
+    if (isDesktopApp() && !desktopHearsSpeech()) return undefined;
     void start();
     return () => stop();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -757,7 +758,7 @@ export default function VoiceLogScreen() {
     );
   }
 
-  if (isDesktopApp()) {
+  if (isDesktopApp() && !desktopHearsSpeech()) {
     return (
       <View style={styles.screen}>
         <Stack.Screen options={{ title: 'Say What You Ate' }} />

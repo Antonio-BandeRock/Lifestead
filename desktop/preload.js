@@ -18,6 +18,16 @@ function unwrap(reply) {
 const responseListeners = new Set();
 const zoomListeners = new Set();
 const stationListeners = new Set();
+const speechProgressListeners = new Set();
+ipcRenderer.on('speech:progress', (_event, progress) => {
+  for (const listener of speechProgressListeners) {
+    try {
+      listener(progress);
+    } catch (error) {
+      console.error('speech progress listener failed', error);
+    }
+  }
+});
 ipcRenderer.on('station:report', (_event, report) => {
   for (const listener of stationListeners) {
     try {
@@ -130,6 +140,19 @@ contextBridge.exposeInMainWorld('insideStoryDesktop', {
       stationListeners.add(listener);
       return () => {
         stationListeners.delete(listener);
+      };
+    },
+  },
+  speech: {
+    shipped: ipcRenderer.sendSync('speech:shipped') === true,
+    status: () => ipcRenderer.invoke('speech:status'),
+    downloadModel: () => ipcRenderer.invoke('speech:downloadModel'),
+    cancelDownload: () => ipcRenderer.invoke('speech:cancelDownload'),
+    transcribe: (pcm, lang) => ipcRenderer.invoke('speech:transcribe', pcm, lang),
+    onProgress: (listener) => {
+      speechProgressListeners.add(listener);
+      return () => {
+        speechProgressListeners.delete(listener);
       };
     },
   },

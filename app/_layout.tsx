@@ -25,6 +25,7 @@ import { RecallWatcher } from '../components/RecallWatcher';
 import { StoryReturnHost } from '../components/StoryReturnHost';
 import { StoryWalkHost } from '../components/StoryWalkHost';
 import { NotYetHost } from '../components/NotYetHost';
+import { DesktopSpeechHost } from '../components/DesktopSpeechHost';
 import { UnlockSummaryHost } from '../components/UnlockSummaryHost';
 import { TellClaudeHost } from '../components/TellClaudeHost';
 import { HandSwitchButton } from '../components/HandSwitchButton';
@@ -957,6 +958,9 @@ function UnlockedApp() {
               {/* Always say why (1.0.60.16): the reason a button cannot do
                   its job yet, lib/notYet.ts. */}
               <NotYetHost />
+              {/* Voice step 6 (1.0.66.24): asks before the computer's speech
+                  model downloads, lib/desktop/speechModel.ts. */}
+              <DesktopSpeechHost />
               <UnlockSummaryHost />
               {/* Before AppKeyboard, deliberately -- see OverlayContext.tsx's own
                   comment: the keyboard must always paint on top of an open

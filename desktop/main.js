@@ -11,8 +11,8 @@
 // (notifications.js), files live under the data folder (files.js), the
 // shared folder is the OneDrive folder on the disk with no sign-in of its
 // own (cloudFolder.js), how large the app draws is page zoom kept in
-// settings.json (zoom.js), and
-// the reference database is copied out of the install folder on first
+// settings.json (zoom.js), speech becomes words on this computer
+// (speech.js), and the reference database is copied out of the install folder on first
 // run. preload.js exposes those to the page as
 // window.insideStoryDesktop, and lib/desktop/bridge.ts in the app is the
 // TypeScript description of that object.
@@ -34,6 +34,7 @@ const zoom = require('./zoom');
 const stationListener = require('./stationListener');
 const print = require('./print');
 const hello = require('./hello');
+const speech = require('./speech');
 
 const APP_ID = 'com.insidestoryapp.app';
 const SCHEME = 'app';
@@ -226,6 +227,21 @@ function registerIpc() {
   ipcMain.handle('cloud:moveFile', (_event, from, fileName, into) => cloudFolder.moveFile(from, fileName, into));
   ipcMain.handle('cloud:copyFileIn', (_event, folder, fileName, source) => cloudFolder.copyFileIn(folder, fileName, source));
   ipcMain.handle('cloud:readBytes', (_event, folder, fileName) => cloudFolder.readBytes(folder, fileName));
+
+  // Speech into words on this computer (speech.js, voice step 6). The model
+  // download reports its progress to the window as it goes.
+  ipcMain.on('speech:shipped', (event) => {
+    event.returnValue = speech.shipped(app);
+  });
+  speech.clearLeftovers(userData);
+  ipcMain.handle('speech:status', () => speech.status(app, userData));
+  ipcMain.handle('speech:downloadModel', () =>
+    speech.downloadModel(net, userData, (progress) => {
+      if (mainWindow && !mainWindow.isDestroyed()) mainWindow.webContents.send('speech:progress', progress);
+    }),
+  );
+  ipcMain.handle('speech:cancelDownload', () => speech.cancelDownload());
+  ipcMain.handle('speech:transcribe', (_event, pcm, lang) => speech.transcribe(app, userData, pcm, lang));
 
   ipcMain.handle('notifications:schedule', (_event, request) => notifications.schedule(request));
   ipcMain.handle('notifications:cancel', (_event, identifier) => notifications.cancel(identifier));

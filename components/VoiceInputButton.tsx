@@ -21,7 +21,9 @@ import { useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, type StyleProp, type ViewStyle } from 'react-native';
 import { colors } from '../constants/colors';
 import { useVoiceDictation, type VoiceDictationErrorKind } from '../hooks/useVoiceDictation';
+import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
 import { announcePhoneOnly } from '../lib/desktop/phoneOnly';
+import { DESKTOP_MIC_NOT_ALLOWED, DESKTOP_NO_MICROPHONE } from '../lib/desktop/speechModel';
 import { useInfoAlert } from './InfoAlert';
 
 export type VoiceInputButtonProps = {
@@ -61,6 +63,13 @@ const ERROR_COPY: Record<Exclude<VoiceDictationErrorKind, 'no-speech'>, { title:
   },
 };
 
+// The same two problems on a Windows computer, where the fix is in a
+// different place (voice step 6, 1.0.66.24).
+const DESKTOP_ERROR_COPY: Partial<typeof ERROR_COPY> = {
+  permission: { title: 'Microphone access needed', message: DESKTOP_MIC_NOT_ALLOWED },
+  unavailable: { title: 'No microphone found', message: DESKTOP_NO_MICROPHONE },
+};
+
 export function VoiceInputButton({
   onResult,
   size = 20,
@@ -80,19 +89,20 @@ export function VoiceInputButton({
       // voice search already handles this, rather than interrupting with
       // a message for something this routine.
       if (kind === 'no-speech') return;
-      const copy = ERROR_COPY[kind];
+      const copy = (isDesktopApp() ? DESKTOP_ERROR_COPY[kind] : undefined) ?? ERROR_COPY[kind];
       showInfoAlert(copy.title, copy.message);
     },
   });
 
   const listening = status === 'listening';
 
-  // The computer has no speech recognizer the app can use (see
-  // lib/desktop/phoneOnly.ts), so on the desktop build a tap says so and
-  // names the phone, rather than reporting that speech recognition is not
-  // available "right now", which reads as a fault that might clear.
+  // A computer without the speech engine (a Mac, or an installer from
+  // before 1.0.66.24; see lib/desktop/phoneOnly.ts) says so and names the
+  // phone, rather than reporting that speech recognition is not available
+  // "right now", which reads as a fault that might clear. Windows listens
+  // with whisper.cpp on the computer itself.
   function startOrAnnounce() {
-    if (announcePhoneOnly(showInfoAlert, 'voice')) return;
+    if (!desktopHearsSpeech() && announcePhoneOnly(showInfoAlert, 'voice')) return;
     start();
   }
 

@@ -40,6 +40,7 @@ import type { RepeatConfig } from '../lib/repeatRule';
 import { readSpokenCommand, type SpokenWhen } from '../lib/spokenCommand';
 import { suggestDestinations, suggestionLine, type CaptureSuggestion } from '../lib/captureSuggest';
 import { loadSuggestModel } from '../lib/captureSuggestDb';
+import { desktopHearsSpeech } from '../lib/desktop/bridge';
 import { announcePhoneOnly } from '../lib/desktop/phoneOnly';
 import { useNavigationHand } from '../lib/navigationHand';
 import { explainNotYet } from '../lib/notYet';
@@ -162,7 +163,7 @@ export function QuickCaptureSheet() {
   }
 
   function openSheet() {
-    if (announcePhoneOnly(showInfoAlert, 'voice')) return;
+    if (!desktopHearsSpeech() && announcePhoneOnly(showInfoAlert, 'voice')) return;
     setOpen(true);
     begin();
   }
