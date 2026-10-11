@@ -138,7 +138,7 @@ export const REMINDER_KIND_LABELS: Record<ReminderKindKey, string> = {
   appointment: 'Appointments',
   meal: 'Meals',
   hydration: 'Water & drinks',
-  checkin: 'How are you today',
+  checkin: 'Daily flare question',
   morning: 'Morning check-in',
   week: 'Your week',
   weekPlan: "This week's meals",

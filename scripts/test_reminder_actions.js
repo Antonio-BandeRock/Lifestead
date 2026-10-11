@@ -45,9 +45,15 @@ const {
   MORNING_BUTTON_VALUES,
   MORNING_ENERGY_TITLE,
   MORNING_ENERGY_BODY,
-  ACTION_OPENS_APP,
-  ACTION_TEXT_INPUT,
   ALL_REMINDER_CATEGORY_KEYS,
+  FLARE_ASK_TITLE,
+  FLARE_QUESTION_TEXT,
+  FLARE_SEVERITY_VALUES,
+  FLARE_WHAT_CATEGORY_IDS,
+  flareAskAfterMealTitle,
+  flareFollowUp,
+  flareWhatActions,
+  newFlareId,
   CATEGORY_ACTIONS,
   answerLine,
   REMINDER_CATEGORY_IDS,
@@ -68,7 +74,9 @@ function check(label, ok) {
 // Every set fits Android's three buttons and ends with Snooze, except the
 // two morning questions, whose three buttons are all answers (2026-10-01:
 // a question on a notification must be answerable on it).
-const ALL_ANSWERS = ['morning', 'energy', 'vaultOffer'];
+// Sets whose every button is an answer, so Snooze gives way: the flare
+// questions (1.0.67.1) are answered with Yes or No and then by tapping.
+const ALL_ANSWERS = ['morning', 'energy', 'vaultOffer', 'checkin', 'flareHowBad', 'flareWorse'];
 for (const key of ALL_REMINDER_CATEGORY_KEYS) {
   const actions = CATEGORY_ACTIONS[key];
   check(`${key} has at most three buttons`, actions.length <= 3);
@@ -125,9 +133,9 @@ const expected = {
   cropSow: 'cropSow',
 };
 for (const [kind, key] of Object.entries(expected)) check(`${kind} -> ${key}`, categoryKeyFor(kind) === key);
-// The vault offer: three answers, and only Set It Up opens the app.
+// The vault offer: three answers, none of which opens the app (1.0.67.1).
 check('the vault offer has its three answers', CATEGORY_ACTIONS.vaultOffer.join() === 'vaultSetUp,vaultNotNow,vaultStop');
-check('only Set It Up opens the app', Object.keys(ACTION_OPENS_APP).join() === 'vaultSetUp');
+check('Set It Up waits for the next time the app is open', planReminderAction('vaultOffer', 'vaultSetUp') === null);
 check('the vault offer writes no record', planReminderAction('vaultOffer', 'vaultNotNow') === null);
 check('upkeep that expires gets Snooze only', categoryKeyFor('upkeep', false) === 'plain');
 
@@ -144,10 +152,37 @@ check('a plain tap does nothing', planReminderAction('dose', 'expo.modules.notif
 check('dose writes logged', planReminderAction('dose', 'taken').status === 'logged');
 check('a Did I Do It check writes its mark (C2)', planReminderAction('check', 'done').write === 'checkMarked');
 check('garden writes completed', planReminderAction('garden', 'done').status === 'completed');
-check('Add a note writes a check-in note', planReminderAction('checkin', 'howAreYou').write === 'checkinNote');
-check('Log a flare writes a flare', planReminderAction('afterMeal', 'logFlare').write === 'flare');
-check('both check-in buttons take words', !!ACTION_TEXT_INPUT.howAreYou && !!ACTION_TEXT_INPUT.logFlare);
-check('Taken does not take words', !ACTION_TEXT_INPUT.taken);
+// The flare question (1.0.67.1): Yes and No, then questions answered by tapping.
+check('the check-in asks Yes or No', CATEGORY_ACTIONS.checkin.join() === 'flareYes,flareNo');
+check('the check-in asks about a flare', FLARE_ASK_TITLE === 'Do you need to log a flare?');
+check('the after-meal question names the meal', flareAskAfterMealTitle('Lunch') === 'Do you need to log a flare after Lunch?');
+check('Yes starts a flare', planReminderAction('checkin', 'flareYes').write === 'flareStart');
+check('Yes after a meal starts a flare', planReminderAction('afterMeal', 'flareYes').write === 'flareStart');
+check('No writes nothing', planReminderAction('checkin', 'flareNo').write === 'nothing');
+check('Yes on a dose does nothing', planReminderAction('dose', 'flareYes') === null);
+check('Yes brings how bad', flareFollowUp('flareYes') === 'howBad');
+check('Severe or worse brings the next two', flareFollowUp('flareWorse') === 'worse');
+for (const a of ['flareMild', 'flareModerate', 'flareSevere', 'flareVerySevere']) check(a + ' brings the symptoms', flareFollowUp(a) === 'what');
+check('a symptom ends the questions', flareFollowUp('flareTagA') === null && flareFollowUp('flareTagOther') === null);
+check('No brings nothing', flareFollowUp('flareNo') === null);
+const steps = { flareMild: 1, flareModerate: 2, flareWorse: 3, flareSevere: 3, flareVerySevere: 4 };
+for (const [a, v] of Object.entries(steps)) {
+  check(a + ' saves severity ' + v, FLARE_SEVERITY_VALUES[a] === v && planReminderAction('flare', a).write === 'flareSeverity' && planReminderAction('flare', a).value === v);
+}
+check('a severity on a check-in itself does nothing', planReminderAction('checkin', 'flareMild') === null);
+check('the first symptom fills slot 0', planReminderAction('flare', 'flareTagA').slot === 0);
+check('the second symptom fills slot 1', planReminderAction('flare', 'flareTagB').slot === 1);
+check('Something else writes nothing', planReminderAction('flare', 'flareTagOther').write === 'nothing');
+check('one symptom gives two buttons', flareWhatActions(1).join() === 'flareTagA,flareTagOther');
+check('two symptoms give three buttons', flareWhatActions(2).join() === 'flareTagA,flareTagB,flareTagOther');
+check('the symptom sets have ids of their own', FLARE_WHAT_CATEGORY_IDS[1] !== FLARE_WHAT_CATEGORY_IDS[2]);
+check('a flare id carries the press time', newFlareId(new Date(1000)) === 'checkin_flare_1000');
+check('the two questions after Yes have words', ['howBad', 'worse', 'what'].every((q) => FLARE_QUESTION_TEXT[q].title && FLARE_QUESTION_TEXT[q].body));
+// A notification posted before the update still answers.
+check('an old Add a note still writes a note', planReminderAction('checkin', 'howAreYou').write === 'checkinNote');
+check('an old Log a flare still writes a flare', planReminderAction('afterMeal', 'logFlare').write === 'flare');
+// Android holds three buttons at most, and the check-in set must fit.
+for (const key of ALL_REMINDER_CATEGORY_KEYS) check(key + ' has three buttons or fewer', CATEGORY_ACTIONS[key].length <= 3);
 
 // Each reminder says what its buttons record; a plain one has none to say.
 check('Prepped records the prep step', planReminderAction('cropPrep', 'prepped').step === 'prepped');
@@ -161,7 +196,8 @@ check('an upkeep that cannot be marked says nothing', answerLine('upkeep', false
 
 // The words a reminder carries, checked for praise, dashes and filler.
 const said = [];
-for (const [id, input] of Object.entries(ACTION_TEXT_INPUT)) said.push(input.placeholder, input.submitButtonTitle, id);
+for (const q of ['howBad', 'worse', 'what']) said.push(FLARE_QUESTION_TEXT[q].title, FLARE_QUESTION_TEXT[q].body);
+said.push(FLARE_ASK_TITLE);
 for (const kind of ['dose', 'hydration', 'meal', 'garden', 'reminder', 'upkeep', 'compost', 'checkin', 'cropPrep', 'cropSow']) said.push(answerLine(kind));
 const sentenceForbidden = /well done|good job|keep it up|great|you should|real|genuine|own|[—–]| -- /i;
 for (const line of said) check(`"${line}" has no praise, dashes or filler`, typeof line === 'string' && !sentenceForbidden.test(line));

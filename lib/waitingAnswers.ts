@@ -15,9 +15,11 @@
 // draws the list.
 
 import {
-  ACTION_TEXT_INPUT,
   ALL_REMINDER_CATEGORY_KEYS,
   CATEGORY_ACTIONS,
+  FLARE_FOLLOW_UP_KIND,
+  FLARE_WHAT_CATEGORY_IDS,
+  flareWhatActions,
   REMINDER_CATEGORY_IDS,
   type ReminderActionId,
   type ReminderCategoryKey,
@@ -32,6 +34,9 @@ export type ShowingReminder = {
   body: string;
   categoryIdentifier: string | null;
   kind: string;
+  /** Buttons named on the notification itself rather than from the fixed
+   *  list: the symptom question's, which carry the person's symptoms. */
+  actionTitles?: Record<string, string>;
 };
 
 export type WaitingGroupKey =
@@ -87,6 +92,7 @@ export function waitingGroupFor(kind: string): WaitingGroupKey {
       return 'water';
     case 'checkin':
     case 'afterMeal':
+    case FLARE_FOLLOW_UP_KIND:
       return 'checkin';
     case 'reminder':
     case 'check':
@@ -127,14 +133,12 @@ export function androidGroupFor(kind: string): { androidGroup: string; androidGr
 
 /** The buttons a notification carries, read from the set it was given. */
 export function actionsForCategory(categoryIdentifier: string | null): ReminderActionId[] {
+  if (categoryIdentifier === FLARE_WHAT_CATEGORY_IDS[1]) return flareWhatActions(1);
+  if (categoryIdentifier === FLARE_WHAT_CATEGORY_IDS[2]) return flareWhatActions(2);
   const key = ALL_REMINDER_CATEGORY_KEYS.find(
     (candidate: ReminderCategoryKey) => REMINDER_CATEGORY_IDS[candidate] === categoryIdentifier,
   );
   return CATEGORY_ACTIONS[key ?? 'plain'];
-}
-
-export function actionTakesWords(action: ReminderActionId): boolean {
-  return ACTION_TEXT_INPUT[action] !== undefined;
 }
 
 /**

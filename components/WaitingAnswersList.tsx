@@ -9,15 +9,16 @@
 //
 // A press here is the same press as on the notification: the same record is
 // written, the notification leaves the phone, and so does every other copy
-// of it. The two buttons that take words open a box here instead. Tapping a
-// reminder's words opens the place it lives.
+// of it. No button asks for typing (1.0.67.1), so the list and the lock
+// screen answer the same way. Tapping a reminder's words opens the place it
+// lives.
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useReminderPreferences } from '../hooks/useReminderPreferences';
-import { ACTION_TEXT_INPUT, reminderActionTitle, type ReminderActionId } from '../lib/reminderActions';
+import { reminderActionTitle, type ReminderActionId } from '../lib/reminderActions';
 import { kindsShowing } from '../lib/reminderKindGroups';
 import { answerFromList, openWaitingReminder, syncReminderNotifications } from '../lib/reminderNotifications';
 import {
@@ -27,9 +28,7 @@ import {
   type ReminderKindKey,
 } from '../lib/reminderPreferences';
 import { SNOOZE_MINUTES } from '../lib/quietHours';
-import { explainNotYet } from '../lib/notYet';
-import { actionTakesWords, waitingFor, type WaitingGroup, type WaitingItem } from '../lib/waitingAnswers';
-import { AppTextInput } from './AppTextInput';
+import { waitingFor, type WaitingGroup, type WaitingItem } from '../lib/waitingAnswers';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP } from './HomeSectionBand';
 import { useTabBandStyles } from './TabBand';
 
@@ -47,17 +46,14 @@ export function WaitingAnswersList({ groups, now, reload, tabColor, nested = fal
   const router = useRouter();
   const prefs = useReminderPreferences();
   const band = useTabBandStyles(tabColor);
-  // Which reminder has its words box open, and for which button.
-  const [writing, setWriting] = useState<{ id: string; action: ReminderActionId } | null>(null);
-  const [words, setWords] = useState('');
   // Reminders being answered right now, so a second tap does nothing.
   const [busy, setBusy] = useState<Set<string>>(new Set());
 
-  async function answer(item: WaitingItem, action: ReminderActionId, text: string | null) {
+  async function answer(item: WaitingItem, action: ReminderActionId) {
     if (busy.has(item.identifier)) return;
     setBusy((current) => new Set(current).add(item.identifier));
     try {
-      await answerFromList(item.copies, action, text);
+      await answerFromList(item.copies, action, null);
     } catch (error) {
       console.error('[waiting-answers] the answer could not be saved', error);
     } finally {
@@ -66,22 +62,10 @@ export function WaitingAnswersList({ groups, now, reload, tabColor, nested = fal
         next.delete(item.identifier);
         return next;
       });
-      if (writing?.id === item.identifier) {
-        setWriting(null);
-        setWords('');
-      }
-      // A sleep answer brings the energy question, which shows up here too.
+      // A sleep answer brings the energy question, and a flare answer the
+      // next flare question, which show up here too.
       await reload();
     }
-  }
-
-  function press(item: WaitingItem, action: ReminderActionId) {
-    if (actionTakesWords(action)) {
-      setWriting(writing?.id === item.identifier && writing.action === action ? null : { id: item.identifier, action });
-      setWords('');
-      return;
-    }
-    void answer(item, action, null);
   }
 
   async function open(item: WaitingItem) {
@@ -113,8 +97,6 @@ export function WaitingAnswersList({ groups, now, reload, tabColor, nested = fal
             </Text>
             {group.items.map((item) => {
               const isBusy = busy.has(item.identifier);
-              const box = writing?.id === item.identifier ? writing : null;
-              const input = box ? ACTION_TEXT_INPUT[box.action] : undefined;
               return (
                 <View key={item.identifier} style={[band.row, styles.item, isBusy ? styles.itemBusy : null]}>
                   <TouchableOpacity onPress={() => void open(item)} activeOpacity={0.8} accessibilityRole="button">
@@ -124,56 +106,23 @@ export function WaitingAnswersList({ groups, now, reload, tabColor, nested = fal
                   </TouchableOpacity>
                   <View style={styles.buttons}>
                     {item.actions.map((action) => {
-                      const quiet = action === 'snooze' || actionTakesWords(action);
-                      const chosen = box?.action === action;
+                      const quiet = action === 'snooze' || action === 'flareNo' || action === 'flareTagOther';
                       return (
                         <TouchableOpacity
                           key={action}
-                          style={[
-                            styles.button,
-                            quiet ? [styles.buttonQuiet, { borderColor: tabColor }] : styles.buttonFilled,
-                            chosen ? styles.buttonChosen : null,
-                          ]}
-                          onPress={() => press(item, action)}
+                          style={[styles.button, quiet ? [styles.buttonQuiet, { borderColor: tabColor }] : styles.buttonFilled]}
+                          onPress={() => void answer(item, action)}
                           disabled={isBusy}
                           activeOpacity={0.8}
                           accessibilityRole="button"
                         >
                           <Text style={quiet ? styles.buttonQuietText : styles.buttonFilledText}>
-                            {reminderActionTitle(action, SNOOZE_MINUTES)}
+                            {item.actionTitles?.[action] ?? reminderActionTitle(action, SNOOZE_MINUTES)}
                           </Text>
                         </TouchableOpacity>
                       );
                     })}
                   </View>
-                  {box && input ? (
-                    <View style={styles.wordsRow}>
-                      <AppTextInput
-                        style={styles.wordsField}
-                        placeholder={input.placeholder}
-                        placeholderTextColor={colors.textMuted}
-                        value={words}
-                        onChangeText={setWords}
-                        multiline
-                        autoFocus
-                      />
-                      <TouchableOpacity
-                        style={[styles.button, styles.buttonFilled, box.action === 'howAreYou' && !words.trim() ? styles.buttonOff : null]}
-                        onPress={() => {
-                          if (box.action === 'howAreYou' && !words.trim()) {
-                            explainNotYet('Type a few words about how you are first.');
-                            return;
-                          }
-                          void answer(item, box.action, words.trim());
-                        }}
-                        disabled={isBusy}
-                        activeOpacity={0.8}
-                        accessibilityRole="button"
-                      >
-                        <Text style={styles.buttonFilledText}>{input.submitButtonTitle}</Text>
-                      </TouchableOpacity>
-                    </View>
-                  ) : null}
                 </View>
               );
             })}
@@ -234,27 +183,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  // The answer itself is filled, since it is the thing to tap; Snooze and
-  // the two that open a box are outlined.
+  // The answer itself is filled, since it is the thing to tap; Snooze, No
+  // and Something else are outlined.
   buttonFilled: { backgroundColor: colors.primary },
   buttonFilledText: { ...typography.body, color: colors.background },
   buttonQuiet: { borderWidth: 1, backgroundColor: colors.surface },
   buttonQuietText: { ...typography.body, color: colors.textPrimary, ...textShadow },
-  buttonChosen: { borderWidth: 2 },
-  buttonOff: { opacity: 0.5 },
-  wordsRow: { flexDirection: 'row', alignItems: 'flex-end', gap: 8 },
-  wordsField: {
-    flex: 1,
-    ...typography.body,
-    color: colors.textPrimary,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 10,
-    padding: 8,
-    minHeight: 44,
-    textAlignVertical: 'top',
-    backgroundColor: colors.surface,
-  },
   switches: { gap: 8 },
   switchCaption: { ...typography.caption, color: colors.textSecondary, lineHeight: 17, ...textShadow },
   pill: { paddingVertical: 7, paddingHorizontal: 12, borderRadius: 999, borderWidth: 1, backgroundColor: colors.surface },

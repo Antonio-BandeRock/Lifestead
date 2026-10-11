@@ -35,13 +35,26 @@
 //   - A crop in My Crops (2026-10-01): Prepped on the get-ready reminder and
 //     Sown on the sowing one record that step for that window, which is
 //     what quiets it, the same as the buttons on the crop's row.
-//   - The two check-in kinds take a typed reply on the notification itself:
-//     Add a note saves the words as a general note in Signals, Log a flare
-//     saves a flare with the words as its note. How somebody feels is
-//     theirs to put into words, so the reply box is where the words come
-//     from and no button supplies any. A note with no words saves nothing;
-//     a flare with no words is still a flare, since pressing it was the
-//     answer.
+//   - The two check-in kinds ask one plain question, "Do you need to log a
+//     flare?", with Yes and No (1.0.67.1). Direct instruction, 2026-10-11:
+//     "why not just be straight forward with a simple question like 'Do you
+//     need to log a flare?' and it offers Yes and No. If they say no, it
+//     goes away, and if they say yes it starts sending questions about the
+//     flare that they can tap the answer without unlocking the phone." No
+//     writes nothing. Yes saves the flare at once and brings up how bad it
+//     is (Mild, Moderate, Severe or worse, then Severe or Very severe), then
+//     what it is most like, from the two symptoms the person has logged
+//     with flares most often. Each answer changes the one flare Yes saved,
+//     whose id rides in the follow-up's payload. Until 1.0.67.1 these two
+//     buttons took a typed reply, which Android will not take on a locked
+//     phone, so the question could not be answered where it was seen.
+//
+// Every notification answered or cleared on the lock screen (standing rule,
+// 2026-10-11: "notifications are required to all be answered or dismissed
+// without having to unlock the phone and open the app"). So no button takes
+// typed words, since Android asks for the unlock before it opens a reply
+// box, and no button opens the app. scripts/audit_lock_answerable.js checks
+// both, and that no set holds more than the three buttons Android shows.
 //   - The morning check-in asks how somebody slept with three of the sleep
 //     scale's own words (direct instruction, 2026-10-01: a question on a
 //     notification must be answerable on it, or its tap must open the place
@@ -62,8 +75,16 @@ export type ReminderActionId =
   | 'done'
   | 'doneToday'
   | 'turned'
-  | 'howAreYou'
-  | 'logFlare'
+  | 'flareYes'
+  | 'flareNo'
+  | 'flareMild'
+  | 'flareModerate'
+  | 'flareWorse'
+  | 'flareSevere'
+  | 'flareVerySevere'
+  | 'flareTagA'
+  | 'flareTagB'
+  | 'flareTagOther'
   | 'sleptPoorly'
   | 'sleptOkay'
   | 'sleptWell'
@@ -85,6 +106,8 @@ export type ReminderCategoryKey =
   | 'upkeep'
   | 'compost'
   | 'checkin'
+  | 'flareHowBad'
+  | 'flareWorse'
   | 'morning'
   | 'energy'
   | 'cropPrep'
@@ -102,7 +125,12 @@ export const REMINDER_CATEGORY_IDS: Record<ReminderCategoryKey, string> = {
   task: 'inside-story-reminder-task',
   upkeep: 'inside-story-reminder-upkeep',
   compost: 'inside-story-reminder-compost',
-  checkin: 'inside-story-reminder-checkin',
+  // A new identifier for the Yes and No pair, so a check-in queued before
+  // 1.0.67.1 keeps the typed-reply buttons it was posted with rather than
+  // showing Yes and No over a question that asks something else.
+  checkin: 'inside-story-reminder-flare-ask',
+  flareHowBad: 'inside-story-reminder-flare-how-bad',
+  flareWorse: 'inside-story-reminder-flare-worse',
   morning: 'inside-story-reminder-morning',
   energy: 'inside-story-reminder-energy',
   cropPrep: 'inside-story-reminder-crop-prep',
@@ -141,10 +169,29 @@ export function reminderActionTitle(action: ReminderActionId, snoozeMinutes: num
       return 'Done today';
     case 'turned':
       return 'Turned it';
-    case 'howAreYou':
-      return 'Add a note';
-    case 'logFlare':
-      return 'Log a flare';
+    case 'flareYes':
+      return 'Yes';
+    case 'flareNo':
+      return 'No';
+    case 'flareMild':
+      return 'Mild';
+    case 'flareModerate':
+      return 'Moderate';
+    case 'flareWorse':
+      return 'Severe or worse';
+    case 'flareSevere':
+      return 'Severe';
+    case 'flareVerySevere':
+      return 'Very severe';
+    // The symptom buttons carry the symptom's name, set when the question
+    // is shown (flareWhatCategory); these are what stands in where no name
+    // is to hand.
+    case 'flareTagA':
+      return 'The first one';
+    case 'flareTagB':
+      return 'The second one';
+    case 'flareTagOther':
+      return 'Something else';
     case 'sleptPoorly':
       return 'Poorly';
     case 'sleptOkay':
@@ -179,7 +226,11 @@ export const CATEGORY_ACTIONS: Record<ReminderCategoryKey, ReminderActionId[]> =
   task: ['done', 'snooze'],
   upkeep: ['doneToday', 'snooze'],
   compost: ['turned', 'snooze'],
-  checkin: ['howAreYou', 'logFlare', 'snooze'],
+  // No Snooze: the question is answered with Yes or No, and No is how it
+  // goes away.
+  checkin: ['flareYes', 'flareNo'],
+  flareHowBad: ['flareMild', 'flareModerate', 'flareWorse'],
+  flareWorse: ['flareSevere', 'flareVerySevere'],
   morning: ['sleptPoorly', 'sleptOkay', 'sleptWell'],
   energy: ['energyLow', 'energySome', 'energyPlenty'],
   cropPrep: ['prepped', 'snooze'],
@@ -189,12 +240,6 @@ export const CATEGORY_ACTIONS: Record<ReminderCategoryKey, ReminderActionId[]> =
   // a month.
   vaultOffer: ['vaultSetUp', 'vaultNotNow', 'vaultStop'],
 };
-
-/**
- * The one button that opens the app, because setting a code is done on a
- * screen. Every other button does its work where it is pressed (1.0.53.10).
- */
-export const ACTION_OPENS_APP: Partial<Record<ReminderActionId, true>> = { vaultSetUp: true };
 
 /**
  * Which set of buttons a reminder of this kind carries. `markable` is false
@@ -232,14 +277,64 @@ export function categoryKeyFor(kind: string, markable = true): ReminderCategoryK
   }
 }
 
-/**
- * The two buttons that take a typed reply instead of a plain press. Android
- * and iPhone both open a small text box on the notification itself.
- */
-export const ACTION_TEXT_INPUT: Partial<Record<ReminderActionId, { submitButtonTitle: string; placeholder: string }>> = {
-  howAreYou: { submitButtonTitle: 'Save', placeholder: 'How are you? In your words' },
-  logFlare: { submitButtonTitle: 'Save', placeholder: 'What is flaring? A few words is fine' },
+// --- The flare questions (1.0.67.1) ------------------------------------------
+
+/** What the check-in asks, with Yes and No. */
+export const FLARE_ASK_TITLE = 'Do you need to log a flare?';
+
+export function flareAskAfterMealTitle(mealName: string): string {
+  return `Do you need to log a flare after ${mealName}?`;
+}
+
+/** The step each severity button saves, on SEVERITY_STEPS in lib/severityScale.ts. */
+export const FLARE_SEVERITY_VALUES: Partial<Record<ReminderActionId, number>> = {
+  flareMild: 1,
+  flareModerate: 2,
+  // Saved as Severe at once, so a flare left at the next question is not
+  // left lighter than the person said; Very severe changes it to 4.
+  flareWorse: 3,
+  flareSevere: 3,
+  flareVerySevere: 4,
 };
+
+export type FlareQuestion = 'howBad' | 'worse' | 'what';
+
+/** The question a press brings up next, or null when the chain is done. */
+export function flareFollowUp(action: string): FlareQuestion | null {
+  if (action === 'flareYes') return 'howBad';
+  if (action === 'flareWorse') return 'worse';
+  if (action === 'flareMild' || action === 'flareModerate' || action === 'flareSevere' || action === 'flareVerySevere') return 'what';
+  return null;
+}
+
+export const FLARE_QUESTION_TEXT: Record<FlareQuestion, { title: string; body: string }> = {
+  howBad: { title: 'How bad is the flare?', body: 'The flare is saved. Pick how bad it is and it is saved with it.' },
+  worse: { title: 'Severe or very severe?', body: 'Saved as severe for now. Pick the one that fits.' },
+  what: {
+    title: 'What is it most like?',
+    body: 'The symptoms you have logged with flares most often. Something else keeps the flare as it is, and the symptom can be added in Signals later.',
+  },
+};
+
+// The symptom question's buttons are named for the person's symptoms, so
+// its set is registered when it is shown, under one of these two
+// identifiers by how many symptoms it names.
+export const FLARE_WHAT_CATEGORY_IDS: Record<1 | 2, string> = {
+  1: 'inside-story-reminder-flare-what-1',
+  2: 'inside-story-reminder-flare-what-2',
+};
+
+export function flareWhatActions(count: 1 | 2): ReminderActionId[] {
+  return count === 2 ? ['flareTagA', 'flareTagB', 'flareTagOther'] : ['flareTagA', 'flareTagOther'];
+}
+
+/** The kind every follow-up question carries; its scheduleItemId is the flare's id. */
+export const FLARE_FOLLOW_UP_KIND = 'flare';
+
+/** The id Yes gives the flare it saves, made at the press so every later answer finds it. */
+export function newFlareId(pressedAt: Date): string {
+  return `checkin_flare_${pressedAt.getTime()}`;
+}
 
 export type ReminderActionPlan =
   | { write: 'scheduleStatus'; status: 'logged' | 'completed' }
@@ -250,6 +345,10 @@ export type ReminderActionPlan =
   | { write: 'cropStep'; step: 'prepped' | 'sown' }
   | { write: 'checkinNote' }
   | { write: 'flare' }
+  | { write: 'flareStart' }
+  | { write: 'flareSeverity'; value: number }
+  | { write: 'flareTag'; slot: 0 | 1 }
+  | { write: 'nothing' }
   | { write: 'sleepQuality'; value: number }
   | { write: 'morningEnergy'; value: number };
 
@@ -260,8 +359,21 @@ export type ReminderActionPlan =
  * possibly since before an update.
  */
 export function planReminderAction(kind: string, action: string): ReminderActionPlan | null {
-  if (action === 'howAreYou' && (kind === 'checkin' || kind === 'afterMeal')) return { write: 'checkinNote' };
-  if (action === 'logFlare' && (kind === 'checkin' || kind === 'afterMeal')) return { write: 'flare' };
+  const asks = kind === 'checkin' || kind === 'afterMeal';
+  if (action === 'flareYes' && asks) return { write: 'flareStart' };
+  // No is the answer, and the question goes away with nothing written.
+  if (action === 'flareNo' && asks) return { write: 'nothing' };
+  if (kind === FLARE_FOLLOW_UP_KIND) {
+    const step = FLARE_SEVERITY_VALUES[action as ReminderActionId];
+    if (step !== undefined) return { write: 'flareSeverity', value: step };
+    if (action === 'flareTagA') return { write: 'flareTag', slot: 0 };
+    if (action === 'flareTagB') return { write: 'flareTag', slot: 1 };
+    if (action === 'flareTagOther') return { write: 'nothing' };
+  }
+  // The typed-reply buttons check-ins carried until 1.0.67.1, still on a
+  // notification posted before the update.
+  if (action === 'howAreYou' && asks) return { write: 'checkinNote' };
+  if (action === 'logFlare' && asks) return { write: 'flare' };
   // The energy question is a morning reminder too, raised by the sleep
   // press with the energy buttons rather than planned on its own.
   const morningValue = MORNING_BUTTON_VALUES[action as ReminderActionId];
@@ -310,7 +422,7 @@ export function answerLine(kind: string, markable = true): string | null {
     case 'cropSow':
       return 'Sown records it in My Crops.';
     case 'checkin':
-      return 'Add a note or log a flare right here, in your words.';
+      return 'Yes saves a flare and asks how bad it is, No clears this, both right here.';
     case 'morning':
       return 'Pick one here and the energy question follows, or tap for every answer and a note.';
     default:
@@ -379,7 +491,7 @@ export function localDay(date: Date): string {
 }
 
 /**
- * Every "How are you today?" moment inside the window, soonest first. Today's
+ * Every daily flare question inside the window, soonest first. Today's
  * is left out once anything has been checked in today, since the question
  * has been answered.
  */

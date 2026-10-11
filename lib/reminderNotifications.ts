@@ -10,24 +10,31 @@ import { withSessionGuardLifted } from './databaseActivity';
 import { getMovedWaterTarget } from './hydrationIndexDb';
 import { skipHydrationReminder, waterTargetReached } from './hydrationTarget';
 import {
-  ACTION_OPENS_APP,
-  ACTION_TEXT_INPUT,
   AFTER_MEAL_MINUTES,
   ALL_REMINDER_CATEGORY_KEYS,
   answerLine,
   CATEGORY_ACTIONS,
   categoryKeyFor,
+  FLARE_ASK_TITLE,
+  FLARE_FOLLOW_UP_KIND,
+  FLARE_QUESTION_TEXT,
+  FLARE_WHAT_CATEGORY_IDS,
+  flareAskAfterMealTitle,
+  flareFollowUp,
+  flareWhatActions,
   localDay,
   MORNING_ENERGY_BODY,
   MORNING_ENERGY_TITLE,
+  newFlareId,
   planAfterMealNudge,
   planDailyCheckins,
   planReminderAction,
   REMINDER_CATEGORY_IDS,
   reminderActionTitle,
-  type ReminderActionId,
+  type FlareQuestion,
   type ReminderActionPlan,
 } from './reminderActions';
+import { addFlareTag, mostLoggedFlareTags, setFlareSeverity } from './flareNotificationDb';
 import {
   checkinTimeOf,
   morningTimeOf,
@@ -90,7 +97,7 @@ import { listRunningCountdowns } from './countdownDb';
 import { describeDuration } from './spokenCommand';
 import { VAULT_OFFER_NOTIFICATION_ID, vaultOfferText } from './vault';
 import { answerVaultOffer, vaultOfferDue } from './vaultOffer';
-import { markVaultOffered } from './vaultSession';
+import { markVaultOffered, takeVaultSetUpWaiting } from './vaultSession';
 
 // Local reminders: the scheduled doses in Schedules > Meds, the visits in
 // Schedules > Appointments, the meals and drinks on the schedule, the work
@@ -290,6 +297,13 @@ type ReminderPayload = {
   androidGroup?: string;
   androidGroupTitle?: string;
   androidGroupLink?: string;
+  /** The symptom question only: the tag code and name behind each of its
+   *  symptom buttons, in button order. */
+  flareTags?: string[];
+  flareTagLabels?: string[];
+  /** A Yes pressed while locked: the id given to the flare it saved, so
+   *  the answers after it, written at the same unlock, find it. */
+  flareId?: string;
 };
 
 type PlannedNotification = {
@@ -830,13 +844,17 @@ function buildCheckPlanned(check: DoneCheck, fireAt: Date, now: Date): PlannedNo
 // --- The two check-in reminders (C1, 2026-09-26) ---------------------------
 //
 // The only reminders that come from no record: the person asked for a
-// question, once a day or after eating. Both buttons take a typed reply
-// on the notification (1.0.53.10), since how somebody feels is theirs to
-// put into words. The wording asks and never suggests an answer.
+// question, once a day or after eating. Until 1.0.67.1 both buttons took a
+// typed reply, which Android will not take with the phone locked, so the
+// question had to be opened to be answered. Direct instruction, 2026-10-11:
+// "why not just be straight forward with a simple question like 'Do you
+// need to log a flare?' and it offers Yes and No." No clears it; Yes saves
+// the flare and the questions about it follow, each answered with a tap on
+// the lock screen.
 function buildDailyCheckinPlanned(fireAt: Date, now: Date): PlannedNotification {
   return {
     identifier: `${IDENTIFIER_PREFIX}checkin:${localDateString(fireAt)}`,
-    title: 'How are you today?',
+    title: FLARE_ASK_TITLE,
     body: `The daily check-in you asked for. ${answerLine('checkin')} Check-ins as of ${describeFreshness(now, fireAt)}.`,
     fireAt,
     payload: {
@@ -891,6 +909,64 @@ async function presentMorningEnergy(day: string): Promise<void> {
     },
     trigger: { channelId: channelFor('morning') },
   });
+}
+
+// A question about the flare Yes just saved, shown at once the way the
+// energy question is. Its id is the flare's, so every answer finds the same
+// record. The symptom question's buttons carry the person's symptom names,
+// so its set of buttons is registered here, just before it is shown.
+async function presentFlareQuestion(
+  question: FlareQuestion,
+  flareId: string,
+  tags: { code: string; label: string }[] = [],
+): Promise<void> {
+  let categoryIdentifier: string;
+  if (question === 'what') {
+    const count: 1 | 2 = tags.length >= 2 ? 2 : 1;
+    const actions = flareWhatActions(count);
+    categoryIdentifier = FLARE_WHAT_CATEGORY_IDS[count];
+    await Notifications.setNotificationCategoryAsync(
+      categoryIdentifier,
+      actions.map((action, index) => ({
+        identifier: action,
+        buttonTitle: tags[index] && action !== 'flareTagOther' ? tags[index].label : reminderActionTitle(action, SNOOZE_MINUTES),
+        options: { opensAppToForeground: false },
+      })),
+    );
+  } else {
+    categoryIdentifier = question === 'howBad' ? REMINDER_CATEGORY_IDS.flareHowBad : REMINDER_CATEGORY_IDS.flareWorse;
+  }
+  // Its kind is none of the reminder kinds, since nothing schedules it.
+  const payload: Omit<ReminderPayload, 'kind'> & { kind: typeof FLARE_FOLLOW_UP_KIND } = {
+    kind: FLARE_FOLLOW_UP_KIND,
+    scheduleItemId: flareId,
+    fireAt: new Date().toISOString(),
+    tab: 'signals',
+    lens: 'flares',
+    ...(question === 'what' ? { flareTags: tags.map((tag) => tag.code), flareTagLabels: tags.map((tag) => tag.label) } : {}),
+  };
+  const { title, body } = FLARE_QUESTION_TEXT[question];
+  await Notifications.scheduleNotificationAsync({
+    identifier: `${IDENTIFIER_PREFIX}flare-${question}:${flareId}`,
+    content: { title, body, data: { ...payload, ...androidGroupFor('checkin') }, sound: false, categoryIdentifier },
+    trigger: { channelId: channelFor('checkin') },
+  });
+}
+
+// What follows a flare answer given with the app unlocked: the next
+// question, if there is one. The symptom question names symptoms, so it
+// is asked only where reminders may show their details, and only when
+// flares have carried symptoms before.
+async function askNextFlareQuestion(action: string, flareId: string): Promise<void> {
+  const next = flareFollowUp(action);
+  if (!next || !flareId) return;
+  if (next !== 'what') {
+    await presentFlareQuestion(next, flareId);
+    return;
+  }
+  if (reminderDetailHidden()) return;
+  const tags = await mostLoggedFlareTags(2);
+  if (tags.length > 0) await presentFlareQuestion('what', flareId, tags);
 }
 
 // The occasional offer to set the vault up (lib/vault.ts). Shown at once
@@ -993,7 +1069,7 @@ function buildSeriesPlanned(
 function buildAfterMealPlanned(meal: { id: string; name: string }, fireAt: Date, now: Date): PlannedNotification {
   return {
     identifier: `${IDENTIFIER_PREFIX}afterMeal:${meal.id}`,
-    title: `How are you after ${meal.name}?`,
+    title: flareAskAfterMealTitle(meal.name),
     body: `About ${AFTER_MEAL_MINUTES / 60} hours since you ate. ${answerLine('afterMeal')} Meals as of ${describeFreshness(now, fireAt)}.`,
     fireAt,
     payload: {
@@ -1129,22 +1205,19 @@ function isSnoozed(identifier: string | null | undefined): boolean {
 
 // Every set of buttons, registered on each reconcile, which costs nothing
 // and means a set changed in an update reaches the phone without a step.
-// No button opens the app (1.0.53.10) except Set It Up on the vault offer,
-// whose answer is a screen; see lib/reminderActions.ts.
+// No button opens the app and none asks for typing, since Android lets
+// neither happen on a locked phone (1.0.67.1, the standing rule in
+// lib/reminderActions.ts, checked by scripts/audit_lock_answerable.js).
 async function ensureCategories(): Promise<void> {
   await Promise.all(
     ALL_REMINDER_CATEGORY_KEYS.map((key) =>
       Notifications.setNotificationCategoryAsync(
         REMINDER_CATEGORY_IDS[key],
-        CATEGORY_ACTIONS[key].map((action) => {
-          const textInput = ACTION_TEXT_INPUT[action];
-          return {
-            identifier: action,
-            buttonTitle: reminderActionTitle(action, SNOOZE_MINUTES),
-            options: { opensAppToForeground: ACTION_OPENS_APP[action] === true },
-            ...(textInput ? { textInput } : {}),
-          };
-        }),
+        CATEGORY_ACTIONS[key].map((action) => ({
+          identifier: action,
+          buttonTitle: reminderActionTitle(action, SNOOZE_MINUTES),
+          options: { opensAppToForeground: false },
+        })),
       ),
     ),
   );
@@ -1796,8 +1869,14 @@ async function answerPress(response: Notifications.NotificationResponse): Promis
     return;
   }
   const words = (response.userText ?? '').trim();
+  const now = new Date();
+  // Yes gives the flare its id here, so the question after it can carry it.
+  const flareId = plan.write === 'flareStart' ? newFlareId(now) : data?.scheduleItemId ?? '';
   try {
-    await withSessionGuardLifted(() => recordAnswer(plan, data?.scheduleItemId ?? '', words, kind));
+    await withSessionGuardLifted(() =>
+      recordAnswer(plan, data?.scheduleItemId ?? '', words, kind, now, { id: flareId, tags: data?.flareTags }),
+    );
+    if (plan.write === 'flareStart' || plan.write === 'flareSeverity') await askNextFlareQuestion(response.actionIdentifier, flareId);
   } finally {
     await syncReminderNotifications();
   }
@@ -1828,7 +1907,19 @@ function toShowing(notification: Notifications.Notification): ShowingReminder {
     body: request.content.body ?? '',
     categoryIdentifier: request.content.categoryIdentifier ?? null,
     kind: typeof data?.kind === 'string' ? data.kind : '',
+    actionTitles: symptomButtonTitles(data),
   };
+}
+
+// The symptom question's buttons are named for symptoms, which Waiting for
+// an Answer has to read off the notification rather than from a fixed list.
+function symptomButtonTitles(data: Partial<ReminderPayload> | undefined): Record<string, string> | undefined {
+  const labels = data?.flareTagLabels;
+  if (!Array.isArray(labels) || labels.length === 0) return undefined;
+  const titles: Record<string, string> = {};
+  if (labels[0]) titles.flareTagA = labels[0];
+  if (labels[1]) titles.flareTagB = labels[1];
+  return titles;
 }
 
 /**
@@ -1989,12 +2080,23 @@ async function answerWhileLocked(response: Notifications.NotificationResponse): 
   if (snooze) await snoozeReminder(response);
   else await clearAnsweredWhileLocked(request.identifier);
   if (plan?.write === 'sleepQuality') await presentMorningEnergy(localDateString(pressedAt));
+  // The flare questions carry on while locked, saved at the next unlock in
+  // the order they were answered. The symptom question waits for an
+  // unlocked phone, since its buttons are read from the records.
+  let keptData = (request.content.data ?? null) as Record<string, unknown> | null;
+  if (plan?.write === 'flareStart') {
+    const flareId = newFlareId(pressedAt);
+    keptData = { ...(keptData ?? {}), flareId };
+    await presentFlareQuestion('howBad', flareId);
+  } else if (plan?.write === 'flareSeverity' && flareFollowUp(response.actionIdentifier) === 'worse' && data?.scheduleItemId) {
+    await presentFlareQuestion('worse', data.scheduleItemId);
+  }
   const kept = await keepAnswerForUnlock({
     identifier: request.identifier,
     date: response.notification.date,
     actionIdentifier: response.actionIdentifier,
     userText: response.userText ?? null,
-    data: (request.content.data ?? null) as Record<string, unknown> | null,
+    data: keptData,
     pressedAt: pressedAt.toISOString(),
     handled: snooze ? 'snoozed' : null,
   });
@@ -2018,7 +2120,10 @@ async function applyWaitingAnswers(): Promise<void> {
       if (!plan) continue;
       const words = (answer.userText ?? '').trim();
       await withSessionGuardLifted(() =>
-        recordAnswer(plan, data.scheduleItemId ?? '', words, kind, new Date(answer.pressedAt)),
+        recordAnswer(plan, data.scheduleItemId ?? '', words, kind, new Date(answer.pressedAt), {
+          id: plan.write === 'flareStart' ? data.flareId : data.scheduleItemId,
+          tags: data.flareTags,
+        }),
       );
     } catch (error) {
       console.error('[reminderNotifications] a press kept while locked could not be written', error);
@@ -2042,10 +2147,10 @@ export async function answerFromBackground(response: Notifications.NotificationR
 // once it is unlocked (listenForReminderTaps).
 let tapWhileLocked: Notifications.NotificationResponse | null = null;
 
-// A tap, or the one button that opens a screen (Set It Up on the vault
-// offer), which the app answers by opening where the tap would.
+// A tap on the notification itself, which the app answers by opening where
+// the thing lives. Every button is answered where it is pressed.
 function opensLikeATap(actionIdentifier: string): boolean {
-  return actionIdentifier === Notifications.DEFAULT_ACTION_IDENTIFIER || ACTION_OPENS_APP[actionIdentifier as ReminderActionId] === true;
+  return actionIdentifier === Notifications.DEFAULT_ACTION_IDENTIFIER;
 }
 
 // Mounted by the lock gate, which is there whether the app is locked or not
@@ -2102,8 +2207,29 @@ async function recordAnswer(
   words: string,
   kind: string,
   now: Date = new Date(),
+  flare: { id?: string; tags?: string[] } = {},
 ): Promise<void> {
   const today = localDateString(now);
+  if (plan.write === 'nothing') return;
+  if (plan.write === 'flareStart') {
+    await recordCheckin({
+      id: flare.id || newFlareId(now),
+      loggedAt: localDateTimeString(now),
+      checkinType: 'flare',
+      valence: 'negative',
+      relatedMealId: kind === 'afterMeal' && id ? id : undefined,
+    });
+    return;
+  }
+  if (plan.write === 'flareSeverity') {
+    if (flare.id) await setFlareSeverity(flare.id, plan.value);
+    return;
+  }
+  if (plan.write === 'flareTag') {
+    const code = flare.tags?.[plan.slot];
+    if (flare.id && code) await addFlareTag(flare.id, code);
+    return;
+  }
   if (plan.write === 'checkinNote') {
     if (!words) return;
     await recordCheckin({ loggedAt: localDateTimeString(now), checkinType: 'general', valence: 'neutral', notes: words });
@@ -2193,6 +2319,9 @@ export function listenForReminderTaps(navigate: (target: ReminderTapTarget) => v
   // Button presses are answered by listenForReminderPresses, which is
   // always mounted; this one opens what a tap points at.
   tapListenerMounted = true;
+  // Set It Up on the vault offer, pressed on the notification, opens the
+  // setup here, the next time the app is open and unlocked.
+  if (takeVaultSetUpWaiting()) navigate({ pathname: '/profile', params: { section: 'applock' } });
   const waitingTap = tapWhileLocked;
   tapWhileLocked = null;
   if (waitingTap) handleResponse(waitingTap, navigate);

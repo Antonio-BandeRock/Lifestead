@@ -23021,9 +23021,11 @@ export async function recordCheckin(input: {
   severityTen?: number | null;
   /** D11: areas marked on the body map. */
   bodyRegions?: string[];
+  /** Set by a flare saved from a notification, whose later answers find it by this id. */
+  id?: string;
 }) {
   const db = await getDatabase();
-  const id = `checkin_${Date.now()}`;
+  const id = input.id ?? `checkin_${Date.now()}`;
   const now = new Date().toISOString();
 
   await db.runAsync(

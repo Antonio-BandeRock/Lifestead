@@ -213,6 +213,20 @@ export function stopVaultOffers(): void {
   saveVaultSettings({ ...getVaultSettings(), stopOffering: true });
 }
 
+/** Set It Up on the offer: asked again in a month like Not Now, and setup
+ *  opens the next time the app is opened (takeVaultSetUpWaiting). */
+export function markVaultSetUpWaiting(now: number = Date.now()): void {
+  saveVaultSettings({ ...getVaultSettings(), offeredAt: now, setUpWaiting: true });
+}
+
+/** True once when Set It Up is waiting, and clears it. */
+export function takeVaultSetUpWaiting(): boolean {
+  const settings = getVaultSettings();
+  if (!settings.setUpWaiting) return false;
+  saveVaultSettings({ ...settings, setUpWaiting: false });
+  return true;
+}
+
 /** Kept for phase 1 callers: on puts the nine phase 1 categories in, off takes everything out. */
 export function setVaultOn(on: boolean): void {
   if (!on) {

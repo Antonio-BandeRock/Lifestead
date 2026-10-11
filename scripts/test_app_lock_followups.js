@@ -116,7 +116,7 @@ for (const rel of ['components/AppLockGate.tsx', 'components/ConfirmItsYou.tsx']
 check('setup no longer checks a passcode its own way', !read('app/app-lock-setup.tsx').includes('unlockWithPasscode('));
 
 // 3. Reminder words
-const kinds = ['dose', 'checkin', 'meal', 'hydration', 'appointment', 'refill', 'peerDose', 'recall', 'garden', 'upkeep', 'todo', 'countdown', 'somethingNew'];
+const kinds = ['dose', 'meal', 'hydration', 'appointment', 'refill', 'peerDose', 'recall', 'garden', 'upkeep', 'todo', 'countdown', 'somethingNew'];
 const secret = 'Levothyroxine 50 mcg with water';
 for (const kind of kinds) {
   const words = W.reminderWords(kind, secret, secret, true);
@@ -128,6 +128,10 @@ for (const kind of kinds) {
 }
 const morning = W.reminderWords('morning', 'How did you sleep?', 'Tap a button', true);
 check('the morning question keeps its words', morning.title === 'How did you sleep?');
+const ask = W.reminderWords('checkin', 'Do you need to log a flare?', 'Tap Yes or No', true);
+check('the flare question keeps its words so it can be answered', ask.title === 'Do you need to log a flare?');
+const afterMeal = W.reminderWords('afterMeal', 'Do you need to log a flare after Levothyroxine?', 'Tap Yes or No', true);
+check('the after-meal question loses the meal name', afterMeal.title === 'Do you need to log a flare?' && !afterMeal.body.includes('Levothyroxine'));
 check('a dose reads as a dose', W.privateReminderTitle('dose') === 'Time for your scheduled dose');
 
 const reminders = read('lib/reminderNotifications.ts');

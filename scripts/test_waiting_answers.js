@@ -99,13 +99,13 @@ for (const key of actions.ALL_REMINDER_CATEGORY_KEYS) {
 check('an unknown set falls back to Snooze', w.actionsForCategory('something-old').join(',') === 'snooze');
 check('no set gives Snooze alone', w.actionsForCategory(null).join(',') === 'snooze');
 check('the morning row has the three sleep words', groups[0].items[0].actions.join(',') === 'sleptPoorly,sleptOkay,sleptWell');
-check('Add a note takes words', w.actionTakesWords('howAreYou'));
-check('Log a flare takes words', w.actionTakesWords('logFlare'));
-check('Taken takes no words', !w.actionTakesWords('taken'));
+check('no button takes words any more', w.actionTakesWords === undefined);
+check('one symptom: its button and Something else', w.actionsForCategory(actions.FLARE_WHAT_CATEGORY_IDS[1]).join(',') === 'flareTagA,flareTagOther');
+check('two symptoms: both and Something else', w.actionsForCategory(actions.FLARE_WHAT_CATEGORY_IDS[2]).join(',') === 'flareTagA,flareTagB,flareTagOther');
 
 // --- Groups ---
 const expected = {
-  dose: 'dose', refill: 'dose', meal: 'meal', hydration: 'water', checkin: 'checkin', afterMeal: 'checkin',
+  dose: 'dose', refill: 'dose', meal: 'meal', hydration: 'water', checkin: 'checkin', afterMeal: 'checkin', flare: 'checkin',
   reminder: 'todo', check: 'todo', todo: 'todo', routine: 'todo', garden: 'garden', compost: 'garden',
   cropPrep: 'garden', cropSow: 'garden', upkeep: 'upkeep', morning: 'morning', appointment: 'other', bill: 'other', '': 'other',
 };
@@ -161,9 +161,10 @@ check('the reconcile brings the summary up to date', /await refreshWaitingSummar
 const screen = fs.readFileSync(path.join(__dirname, '..', 'app', 'waiting-answers.tsx'), 'utf8');
 const list = fs.readFileSync(path.join(__dirname, '..', 'components', 'WaitingAnswersList.tsx'), 'utf8');
 const hook = fs.readFileSync(path.join(__dirname, '..', 'hooks', 'useWaitingReminders.ts'), 'utf8');
-check('the list answers through answerFromList', list.includes('answerFromList(item.copies, action, text)'));
+check('the list answers through answerFromList', list.includes('answerFromList(item.copies, action, null)'));
 check('the list uses the notification button words', list.includes('reminderActionTitle(action, SNOOZE_MINUTES)'));
-check('a note with no words cannot be saved', list.includes("box.action === 'howAreYou' && !words.trim()"));
+check('the list names symptom buttons as the notification does', list.includes('item.actionTitles?.[action]'));
+check('the list has no box for typing', !list.includes('AppTextInput'));
 check('the list is read again on focus', hook.includes('useFocusEffect'));
 check('the list is read again when a reminder arrives', hook.includes('addNotificationReceivedListener'));
 check('the screen draws the shared list', screen.includes('<WaitingAnswersList'));

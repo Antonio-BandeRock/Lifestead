@@ -7,6 +7,7 @@
 //
 // Pure, so scripts/test_app_lock_followups.js can check it without a phone.
 
+import { FLARE_ASK_TITLE } from './reminderActions';
 import { waitingGroupFor } from './waitingAnswers';
 
 export const PRIVATE_REMINDER_BODY = 'Details are hidden while App Lock is on.';
@@ -49,8 +50,11 @@ export function reminderWords(
   body: string,
   hide: boolean,
 ): { title: string; body: string } {
-  // The morning question names nothing personal, and hiding it would leave
-  // its sleep and energy buttons answering a question nobody can see.
-  if (!hide || kind === 'morning') return { title, body };
+  // The morning question and the flare question name nothing personal, and
+  // hiding either would leave its buttons answering a question nobody can
+  // see (1.0.67.1). The after-meal one keeps its question and loses the
+  // meal's name.
+  if (!hide || kind === 'morning' || kind === 'checkin') return { title, body };
+  if (kind === 'afterMeal') return { title: FLARE_ASK_TITLE, body };
   return { title: privateReminderTitle(kind), body: PRIVATE_REMINDER_BODY };
 }

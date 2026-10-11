@@ -358,6 +358,9 @@ export type VaultSettings = {
   stopOffering: boolean;
   /** The setup question has been asked, whatever was answered. */
   setupAsked: boolean;
+  /** Set It Up was pressed on the offer, and setup opens the next time the
+   *  app is opened (1.0.67.1: no button on a notification opens the app). */
+  setUpWaiting: boolean;
 };
 
 export const EMPTY_VAULT_SETTINGS: VaultSettings = {
@@ -368,6 +371,7 @@ export const EMPTY_VAULT_SETTINGS: VaultSettings = {
   offeredAt: 0,
   stopOffering: false,
   setupAsked: false,
+  setUpWaiting: false,
 };
 
 function cleanCode(value: unknown): VaultCode | null {
@@ -411,6 +415,7 @@ export function parseVaultSettings(text: string | null): VaultSettings | null {
     offeredAt: typeof r.offeredAt === 'number' ? r.offeredAt : 0,
     stopOffering: r.stopOffering === true,
     setupAsked: r.setupAsked === true,
+    setUpWaiting: r.setUpWaiting === true,
   };
 }
 
@@ -518,7 +523,7 @@ export function vaultOfferHourOk(at: Date): boolean {
 export function vaultOfferText(recordCount: number): { title: string; body: string } {
   return {
     title: 'Your vault has no code yet',
-    body: `You have ${recordCount} health and money records anyone holding this phone can open. Set up the vault to keep them closed until your code or fingerprint opens them.`,
+    body: `You have ${recordCount} health and money records anyone holding this phone can open. Set up the vault to keep them closed until your code or fingerprint opens them. Set It Up opens the setup the next time you open Lifestead.`,
   };
 }
 

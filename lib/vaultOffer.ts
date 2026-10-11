@@ -3,12 +3,13 @@
 // notification once every so often to offer to secure the vault later after
 // they build up some data for it." lib/reminderNotifications.ts shows it
 // during a reconcile; this file decides whether it is due and answers its
-// two buttons that do not open a screen.
+// three buttons. None opens the app (1.0.67.1): Set It Up leaves the setup
+// waiting for the next time Lifestead is opened.
 
 import { getDatabase } from './db';
 import { shouldOfferVault, VAULT_COUNTED_TABLES, vaultOfferHourOk } from './vault';
 import { getVaultSettings, isAppLockOnForVault, withVaultBypass } from './vaultState';
-import { markVaultOffered, stopVaultOffers } from './vaultSession';
+import { markVaultOffered, markVaultSetUpWaiting, stopVaultOffers } from './vaultSession';
 
 /**
  * How many records the offer would name, or null when it is not due. The
@@ -35,8 +36,10 @@ export async function vaultOfferDue(now: Date): Promise<number | null> {
   return shouldOfferVault(settings, appLockOn, count, now.getTime()) ? count : null;
 }
 
-/** Not Now asks again in a month; Stop Asking never asks again. */
+/** Not Now asks again in a month; Stop Asking never asks again; Set It Up
+ *  opens the setup next time. */
 export function answerVaultOffer(actionIdentifier: string): void {
-  if (actionIdentifier === 'vaultNotNow') markVaultOffered();
+  if (actionIdentifier === 'vaultSetUp') markVaultSetUpWaiting();
+  else if (actionIdentifier === 'vaultNotNow') markVaultOffered();
   else if (actionIdentifier === 'vaultStop') stopVaultOffers();
 }
