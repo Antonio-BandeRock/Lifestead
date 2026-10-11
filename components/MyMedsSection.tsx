@@ -61,6 +61,8 @@ import { useWalkMark } from '../components/WalkMark';
 import { ThumbRow } from './ThumbRow';
 import { VaultClosedBand } from './VaultClosedBand';
 import { useCategoryClosed } from '../lib/vaultSession';
+import { explainNotYet } from '../lib/notYet';
+import { matchSupplementForm, readSpokenSupplementLabel } from '../lib/spokenSupplement';
 
 // My Meds, the registry of everything a person takes: prescriptions, OTC
 // drugs and supplements, each with its dose, form, timing rules, interactions
@@ -72,6 +74,13 @@ import { useCategoryClosed } from '../lib/vaultSession';
 // on Schedules > Meds, reached from each row's Schedule it. The Supplements
 // and Prescriptions lenses on Schedules, which carried their own copies of
 // these forms, are gone; editing came here with them.
+//
+// A supplement's ingredients can be said or typed as the label reads (voice
+// step 4, 1.0.66.22, lib/spokenSupplement.ts): "vitamin D 25 mcg, zinc 11
+// mg, B12 500 mcg as methylcobalamin" fills one row each, with the form
+// picked only when the words name exactly one form in the list. What could
+// not be read is listed under the box, never guessed, and nothing is saved
+// until Add supplement.
 
 // Every band here folds, the same rule Schedules and Food follow, with the
 // open state remembered per band through useBandFolds. The band itself is
@@ -211,6 +220,8 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
 
   const [addMode, setAddMode] = useState<MyMedsCategory | null>(null);
   const [supplementForm, setSupplementForm] = useState<MyMedsSupplementFormState>(blankMyMedsSupplementForm());
+  const [labelText, setLabelText] = useState('');
+  const [labelNote, setLabelNote] = useState<string | null>(null);
   const [medForm, setMedForm] = useState<MedFormState>(blankMedForm('prescription'));
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
@@ -312,6 +323,8 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
   // --- Add flow: category picker ---
   function openAddSupplement() {
     setSupplementForm(blankMyMedsSupplementForm());
+    setLabelText('');
+    setLabelNote(null);
     setAddMode('supplement');
   }
   function openAddMed(category: 'prescription' | 'otc') {
@@ -321,6 +334,8 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
   function closeAddForm() {
     setAddMode(null);
     setSupplementForm(blankMyMedsSupplementForm());
+    setLabelText('');
+    setLabelNote(null);
     setMedForm(blankMedForm('prescription'));
   }
 
@@ -387,6 +402,51 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
       ...current,
       ingredients: current.ingredients.map((row) => (row.key === key ? { ...row, ...update } : row)),
     }));
+  }
+
+  // The label said or typed, read into rows added below any already filled.
+  // A blank starter row is replaced rather than left above them.
+  async function fillFromLabel(text: string) {
+    if (!text.trim()) {
+      explainNotYet('Say or type what the label lists first, for example "vitamin D 25 mcg, zinc 11 mg".');
+      return;
+    }
+    const reading = readSpokenSupplementLabel(text);
+    const tracked = new Set(nutrients.map((nutrient) => nutrient.code));
+    const notes = reading.notUnderstood.map((item) => `"${item.spokenText}": ${item.reason}`);
+    const filled: MedIngredientRow[] = [];
+    for (const row of reading.rows) {
+      if (!tracked.has(row.nutrientCode)) {
+        notes.push(`"${row.spokenText}": No nutrient this app tracks was recognised in it.`);
+        continue;
+      }
+      let form = '';
+      if (row.formWords) {
+        let forms: SupplementForm[] = [];
+        try {
+          forms = await getSupplementForms(row.nutrientCode);
+        } catch {
+          forms = [];
+        }
+        form = matchSupplementForm(row.formWords, forms.map((item) => item.formName)) ?? '';
+        if (!form && forms.length > 0) {
+          notes.push(`"${row.spokenText}": "${row.formWords}" is not one of the forms listed, so the form is left for you to pick.`);
+        }
+      }
+      filled.push({ ...blankMedIngredientRow(), nutrientCode: row.nutrientCode, supplementForm: form, amount: String(row.amount), unit: row.unit });
+      void ensureNutrientDataLoaded(row.nutrientCode);
+    }
+    if (filled.length > 0) {
+      setSupplementForm((current) => ({
+        ...current,
+        ingredients: [...current.ingredients.filter((row) => row.nutrientCode || row.amount), ...filled],
+      }));
+    }
+    const lead =
+      filled.length === 0
+        ? 'Nothing in that could be read as a nutrient with an amount.'
+        : `${filled.length === 1 ? '1 ingredient' : `${filled.length} ingredients`} filled in below. Check each one before adding the supplement.`;
+    setLabelNote(notes.length ? `${lead}\n\nNot read, so nothing was guessed:\n${notes.join('\n')}` : lead);
   }
 
   // A8: adding a med says at once what the interaction rules now have to
@@ -820,6 +880,22 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
               </View>
 
               <Text style={styles.label}>Ingredients (per single dose)</Text>
+              <AppTextInput
+                onVoiceResult={(text, isFinal) => {
+                  setLabelText(text);
+                  if (isFinal) void fillFromLabel(text);
+                }}
+                micColor={tabColor}
+                style={styles.input}
+                multiline
+                placeholder="Say or type the label: vitamin D 25 mcg, zinc 11 mg, B12 500 mcg as methylcobalamin"
+                value={labelText}
+                onChangeText={setLabelText}
+              />
+              <TouchableOpacity onPress={() => void fillFromLabel(labelText)} style={styles.secondaryButton}>
+                <Text style={styles.secondaryButtonText}>Fill Ingredients From This</Text>
+              </TouchableOpacity>
+              {labelNote ? <Text style={styles.helperText}>{labelNote}</Text> : null}
               {supplementForm.ingredients.map((row) => {
                 const forms = formsByNutrient[row.nutrientCode] ?? [];
                 const formOptions: DropdownOption[] = forms.map((form) => ({ label: form.formName, value: form.formName }));

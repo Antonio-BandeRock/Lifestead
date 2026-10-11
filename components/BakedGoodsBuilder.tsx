@@ -50,6 +50,9 @@ import { CollapsibleOverlayCard } from './CollapsibleOverlayCard';
 import { DimensionFlags } from './DimensionFlags';
 import { FoodSourceNote } from './FoodSourceNote';
 import { FoodLookup, type ResolvedFoodSelection } from './FoodLookup';
+import { SpokenIngredientsPanel, SpokenQueueNote } from './SpokenIngredientsPanel';
+import { useSpokenIngredientQueue } from '../hooks/useSpokenIngredientQueue';
+import type { SpokenIngredient } from '../lib/spokenIngredients';
 import { useConfirmSheet } from './ConfirmSheet';
 import { describePrepMismatch } from '../lib/cookingMethodResolution';
 import { useInfoAlert } from './InfoAlert';
@@ -536,7 +539,10 @@ export function BakedGoodsBuilder({
   // dismissing the sheet without picking anything (its own built-in
   // backdrop dismiss, or the explicit Cancel row) can't accidentally leave
   // a stale non-null mode behind.
-  const [ingredientSourceMode, setIngredientSourceMode] = useState<'voice' | 'products' | 'category' | 'nutrient' | null>(null);
+  const [ingredientSourceMode, setIngredientSourceMode] = useState<'voice' | 'spoken' | 'products' | 'category' | 'nutrient' | null>(null);
+  // Say Several Ingredients (voice step 4, 1.0.66.22): the foods said at once,
+  // each taken through the pending card below in turn.
+  const spokenQueue = useSpokenIngredientQueue();
   const [sourceChooserVisible, setSourceChooserVisible] = useState(false);
   // Whether the collapsible baked good/ingredients card (point 2) is
   // currently expanded into its own full overlay -- see
@@ -1007,6 +1013,22 @@ export function BakedGoodsBuilder({
   // connected Category/Food picker reappears the instant pendingResolved
   // goes null (see the early return below), so this doubles as "go back to
   // step one" without a separate navigation call.
+  // A spoken food lands on the pending card with its amount filled in, but
+  // only in a unit this builder offers; otherwise the amount is left for the
+  // person, so "2 kg" never becomes 2 of something else.
+  function applySpokenIngredient(item: SpokenIngredient | null): boolean {
+    if (!item) return false;
+    const unitOffered = unitOptions.includes(item.unit);
+    handleFoodResolved(item.resolved);
+    setQuantity(unitOffered ? formatAmountForPicker(item.quantity, AMOUNT_PICKER_VALUES) : null);
+    setUnit(unitOffered ? item.unit : null);
+    return true;
+  }
+
+  function startSpokenIngredients(list: SpokenIngredient[]) {
+    applySpokenIngredient(spokenQueue.start(list));
+  }
+
   function resetIngredientFields() {
     setPendingResolved(null);
     setPendingScores([]);
@@ -1015,6 +1037,7 @@ export function BakedGoodsBuilder({
     setIngredientCutPrep(null);
     setIngredientCookingMethod(null);
     setIngredientPrepSteps([]);
+    if (applySpokenIngredient(spokenQueue.advance())) return;
     setIngredientSourceMode(null);
   }
 
@@ -1232,6 +1255,7 @@ export function BakedGoodsBuilder({
     };
     const allIngredients = [...ingredients, newIngredient];
     setIngredients(allIngredients);
+    if (then === 'finish') spokenQueue.stop();
     resetIngredientFields();
 
     if (editBakedGoodsId) {
@@ -1243,7 +1267,7 @@ export function BakedGoodsBuilder({
       // own explicit Save Changes button, once the person has had a chance
       // to actually see the updated list. `then` doesn't matter here (see
       // the single "Save Ingredient" button this feeds in edit mode).
-      setAddingIngredient(false);
+      if (!spokenQueue.current()) setAddingIngredient(false);
       return;
     }
 
@@ -1682,6 +1706,27 @@ export function BakedGoodsBuilder({
     // ever left it, the direct fix for the reported "extends below the
     // footer, can never reach the bottom" bug (see
     // SOURCE_CANCEL_ROW_HEIGHT's own comment).
+    if (ingredientSourceMode === 'spoken' && !spokenQueue.current()) {
+      return (
+        <View style={styles.pickerScreen}>
+          <TouchableOpacity
+            style={styles.sourceCancelLink}
+            onPress={() => {
+              dismissKeyboard();
+              setIngredientSourceMode(null);
+            }}
+          >
+            <Ionicons name="chevron-back" size={13} color={tabColor} />
+            <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Cancel</Text>
+          </TouchableOpacity>
+          <SpokenIngredientsPanel
+            tabColor={tabColor}
+            allowedCategories={BAKED_GOODS_BUILDER_CATEGORIES}
+            onReady={startSpokenIngredients}
+          />
+        </View>
+      );
+    }
     if (ingredientSourceMode) {
       return (
         <View style={styles.pickerScreen}>
@@ -1689,6 +1734,7 @@ export function BakedGoodsBuilder({
             style={styles.sourceCancelLink}
             onPress={() => {
               dismissKeyboard();
+              spokenQueue.stop();
               setIngredientSourceMode(null);
             }}
           >
@@ -1704,7 +1750,7 @@ export function BakedGoodsBuilder({
             initialCategory={lastCategory}
             initialSubcategory={lastSubcategory}
             allowedCategories={BAKED_GOODS_BUILDER_CATEGORIES}
-            restrictToSource={ingredientSourceMode}
+            restrictToSource={ingredientSourceMode === 'spoken' ? 'voice' : ingredientSourceMode}
           />
         </View>
       );
@@ -1741,6 +1787,7 @@ export function BakedGoodsBuilder({
           message="Where would you like to get this ingredient from?"
           actions={[
             { label: '🎤 Say a Food Name', onPress: () => setIngredientSourceMode('voice') },
+            { label: '🎤 Say Several Ingredients', onPress: () => setIngredientSourceMode('spoken') },
             { label: 'My Food Products', onPress: () => setIngredientSourceMode('products') },
             { label: 'Whole Foods', onPress: () => setIngredientSourceMode('category') },
             { label: 'Richest in a Nutrient', onPress: () => setIngredientSourceMode('nutrient') },
@@ -1919,6 +1966,9 @@ export function BakedGoodsBuilder({
                 <Ionicons name="chevron-back" size={13} color={tabColor} />
                 <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Change Food</Text>
               </TouchableOpacity>
+              {spokenQueue.current() ? (
+                <SpokenQueueNote remaining={spokenQueue.remainingCount()} tabColor={tabColor} onStop={spokenQueue.stop} />
+              ) : null}
 
               {/* Header, 2026-07-31 -- "Preparation Steps for X", title-cased.
                   Title-casing is applied HERE, at render, rather than
