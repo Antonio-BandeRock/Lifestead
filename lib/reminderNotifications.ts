@@ -86,6 +86,8 @@ import { listCropPlans, recordCropStep } from './cropPlanDb';
 import { parseCropStepSourceId } from './cropPlan';
 import { readCachedFrostDates } from './homeSky';
 import { frostAnchor } from './sowingWindows';
+import { listRunningCountdowns } from './countdownDb';
+import { describeDuration } from './spokenCommand';
 import { VAULT_OFFER_NOTIFICATION_ID, vaultOfferText } from './vault';
 import { answerVaultOffer, vaultOfferDue } from './vaultOffer';
 import { markVaultOffered } from './vaultSession';
@@ -652,6 +654,104 @@ function buildDatedPlanned(
     },
     markable: source.markable,
   };
+}
+
+// --- Counters in hours and minutes (1.0.66.21) ------------------------------
+//
+// A timed counter speaks once, at the moment it ends. Same kind as a day
+// counter, so it rides the same switch, channel and quiet-hours rule; the
+// identifier ends in :timer so it can never be taken for a day's.
+function buildTimerPlanned(
+  timer: { id: string; name: string; about: string | null; startedAt: string; endsAt: string },
+  now: Date,
+): PlannedNotification | null {
+  const fireAt = new Date(timer.endsAt);
+  if (Number.isNaN(fireAt.getTime())) return null;
+  const minutes = Math.round((fireAt.getTime() - new Date(timer.startedAt).getTime()) / 60_000);
+  const ended = formatTime12(`${pad(fireAt.getHours())}:${pad(fireAt.getMinutes())}`);
+  const lead = `Your ${describeDuration(Math.max(1, minutes))} counter ended at ${ended}.`;
+  return {
+    identifier: `${IDENTIFIER_PREFIX}countdown:${timer.id}:timer`,
+    title: timer.name,
+    body: [lead, timer.about, answerLine('countdown'), `Records as of ${describeFreshness(now, fireAt)}.`].filter(Boolean).join(' '),
+    fireAt,
+    payload: {
+      kind: 'countdown',
+      subject: timer.name,
+      scheduleItemId: timer.id,
+      fireAt: fireAt.toISOString(),
+      tab: 'life',
+      lens: 'daysUntil',
+    },
+  };
+}
+
+// Queues one planned reminder now, worded the way a reconcile would word it,
+// so the next reconcile finds it already right and leaves it. Used where the
+// database cannot be read yet: a reminder or a counter said over the lock
+// screen (lib/lockedCaptures.ts) has to go off on time even if the phone is
+// not unlocked before then. Answers false when it could not be queued.
+async function queueOneNow(planned: PlannedNotification | null): Promise<boolean> {
+  if (!supported || !planned || planned.fireAt.getTime() <= Date.now()) return false;
+  try {
+    if (!(await hasReminderPermission())) return false;
+    await ensureAndroidChannels();
+    await ensureCategories();
+    const worded = { ...planned, ...reminderWords(planned.payload.kind, planned.title, planned.body, reminderDetailHidden()) };
+    await Notifications.scheduleNotificationAsync({
+      identifier: worded.identifier,
+      content: {
+        title: worded.title,
+        body: worded.body,
+        data: { ...worded.payload, ...androidGroupFor(worded.payload.kind) },
+        sound: true,
+        categoryIdentifier: categoryIdFor(worded),
+      },
+      trigger: {
+        type: Notifications.SchedulableTriggerInputTypes.DATE,
+        date: worded.fireAt,
+        channelId: channelFor(worded.payload.kind),
+      },
+    });
+    return true;
+  } catch (error) {
+    console.warn('[reminderNotifications] could not queue a reminder now', error);
+    return false;
+  }
+}
+
+/** Queues a reminder that is not in the database yet, under the id its
+ *  schedule row will be written with. scheduledFor is local, YYYY-MM-DDTHH:mm. */
+export function queueReminderNow(reminder: { id: string; title: string; scheduledFor: string }): Promise<boolean> {
+  const candidate: TravelCandidate = {
+    id: reminder.id,
+    scheduledFor: reminder.scheduledFor,
+    itemType: 'reminder',
+    title: reminder.title,
+    mealType: null,
+    location: null,
+    providerName: null,
+    doseAmount: null,
+    keepRemindingMinutes: null,
+    doseUnit: null,
+    taperStepNumber: null,
+    taperStepCount: null,
+  } as TravelCandidate;
+  return queueOneNow(buildPlanned(candidate, new Date()));
+}
+
+/** Queues the end of a counter in hours and minutes that is not in the
+ *  database yet. */
+export function queueTimerEndNow(timer: { id: string; name: string; startedAt: string; endsAt: string }): Promise<boolean> {
+  return queueOneNow(buildTimerPlanned({ ...timer, about: null }, new Date()));
+}
+
+/** Takes back what queueReminderNow or queueTimerEndNow queued, for an Undo
+ *  made before the next reconcile. */
+export async function cancelQueuedNow(kind: 'reminder' | 'timer', id: string): Promise<void> {
+  if (!supported) return;
+  const identifier = kind === 'reminder' ? `${IDENTIFIER_PREFIX}reminder:${id}` : `${IDENTIFIER_PREFIX}countdown:${id}:timer`;
+  await Notifications.cancelScheduledNotificationAsync(identifier).catch(() => undefined);
 }
 
 // --- Routines: the one kind with no row on any schedule ---------------------
@@ -1350,6 +1450,17 @@ async function runSync(): Promise<ReminderSyncResult> {
     }
   }
 
+  // Counters in hours and minutes, one notice each at the moment it ends.
+  if (isReminderKindEnabled(preferences, 'countdown')) {
+    const running = await listRunningCountdowns().catch(() => []);
+    for (const timer of running) {
+      if (!timer.endsAt || !timer.startedAt) continue;
+      const planned = buildTimerPlanned({ ...timer, endsAt: timer.endsAt, startedAt: timer.startedAt }, now);
+      if (!planned || planned.fireAt.getTime() <= now.getTime() || planned.fireAt.getTime() > horizon.getTime()) continue;
+      first.set(planned.identifier, planned);
+    }
+  }
+
   // Quiet hours, applied after everything is planned and before anything is
   // cut, so a held reminder competes for a slot at the time it will arrive.
   // A first reminder is held to the end of the window and says so; a
@@ -1357,6 +1468,9 @@ async function runSync(): Promise<ReminderSyncResult> {
   // arrives in the morning anyway. Doses and appointments are never held.
   const quiet = preferences.quietHours;
   for (const [identifier, planned] of first) {
+    // A counter in hours and minutes was set for that moment on purpose,
+    // like an oven timer, so it is never held.
+    if (identifier.endsWith(':timer')) continue;
     const decision = quietDecision(planned.payload.kind, planned.fireAt, false, quiet);
     if (decision.action !== 'hold') continue;
     const dueAt = formatTime12(`${pad(planned.fireAt.getHours())}:${pad(planned.fireAt.getMinutes())}`);

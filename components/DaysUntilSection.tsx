@@ -46,6 +46,13 @@
 // land rather than by which tab they came from, which is Life's Days
 // Until lens: a row says where its counter belongs, and the form starts a
 // free-form one unless a garden area is picked for it.
+//
+// Counters in hours and minutes since 1.0.66.21 (voice step 3), for a
+// free-form counter only: a timer said by voice ("count down 2 hours") lands
+// here as one, and the form offers Hours and minutes beside Days. A timed
+// counter reads its time left to the minute, redrawn every 30 seconds while
+// one is running, and Start again starts it over from now for the same
+// length. The phone says when it ends (lib/reminderNotifications.ts).
 
 import { useFocusEffect } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
@@ -60,9 +67,13 @@ import {
   countdownFormProblem,
   countdownProgress,
   describeCountdown,
+  describeTimedCountdown,
   freeAsAny,
   gardenAsAny,
   sortCountdowns,
+  timedCountdownFigure,
+  timedCountdownFormProblem,
+  timedCountdownProgress,
   type AnyCountdown,
 } from '../lib/countdown';
 import {
@@ -75,11 +86,13 @@ import {
 } from '../lib/gardenCountdownDb';
 import {
   addCountdown,
+  addTimedCountdown,
   deleteCountdown,
   listCountdowns,
   listEveryCountdown,
   listEveryRunningCountdown,
   listRunningCountdowns,
+  restartTimedCountdown,
   setCountdownDone,
 } from '../lib/countdownDb';
 import { syncReminderNotifications } from '../lib/reminderNotifications';
@@ -96,6 +109,16 @@ const WHOLE_AREA = '__whole_area__';
 const NO_AREA = '__anything__';
 // How many running counters a Home card shows before pointing at the lens.
 const COMPACT_LIMIT = 5;
+// How often a running counter in hours and minutes is redrawn.
+const TIMED_REDRAW_MS = 30_000;
+const UNIT_OPTIONS = [
+  { label: 'Days', value: 'days' },
+  { label: 'Hours and minutes', value: 'timed' },
+];
+
+function isTimed(item: AnyCountdown): item is AnyCountdown & { endsAt: string; startedAt: string } {
+  return item.kind === 'free' && !!item.endsAt && !!item.startedAt;
+}
 
 function todayDateString(): string {
   return new Date().toISOString().slice(0, 10);
@@ -151,6 +174,10 @@ export function DaysUntilSection({
   const [about, setAbout] = useState('');
   const [days, setDays] = useState('');
   const [startedOn, setStartedOn] = useState(todayDateString());
+  const [unit, setUnit] = useState<'days' | 'timed'>('days');
+  const [hours, setHours] = useState('');
+  const [minutes, setMinutes] = useState('');
+  const [now, setNow] = useState(() => new Date());
   const [plotId, setPlotId] = useState<string>(plot?.id ?? (scope === 'everything' ? NO_AREA : ''));
   const [plantingId, setPlantingId] = useState<string>(WHOLE_AREA);
   // Whole garden and everything: the plantings of whichever area is
@@ -230,6 +257,15 @@ export function DaysUntilSection({
     };
   }, [needsAreas, plotId]);
 
+  // Redrawn while a timed counter is running, so its minutes stay true.
+  const timedRunning = items.some((item) => isTimed(item) && !item.doneAt);
+  useEffect(() => {
+    if (!timedRunning) return;
+    setNow(new Date());
+    const timer = setInterval(() => setNow(new Date()), TIMED_REDRAW_MS);
+    return () => clearInterval(timer);
+  }, [timedRunning]);
+
   const offeredPlantings = needsAreas ? pickedPlantings : (plantings ?? []);
   // Free-form is what this counter is when nothing ties it to an area.
   const startingFree = scope === 'free' || (scope === 'everything' && plotId === NO_AREA);
@@ -238,6 +274,9 @@ export function DaysUntilSection({
     setName('');
     setAbout('');
     setDays('');
+    setHours('');
+    setMinutes('');
+    setUnit('days');
     setStartedOn(todayDateString());
     setPlantingId(WHOLE_AREA);
     setError(null);
@@ -245,6 +284,20 @@ export function DaysUntilSection({
   }
 
   async function handleSave() {
+    if (startingFree && unit === 'timed') {
+      const timedProblem = timedCountdownFormProblem({ name, hours, minutes });
+      if (timedProblem) {
+        setError(timedProblem);
+        return;
+      }
+      const total = (hours.trim() ? Number(hours) : 0) * 60 + (minutes.trim() ? Number(minutes) : 0);
+      await addTimedCountdown({ name, about, startedAt: new Date().toISOString(), minutes: total });
+      clearForm();
+      await load();
+      void syncReminderNotifications();
+      if (onChanged) await onChanged();
+      return;
+    }
     const problem = countdownFormProblem({ name, days, startedOn });
     if (problem) {
       setError(problem);
@@ -272,7 +325,8 @@ export function DaysUntilSection({
   }
 
   async function handleDone(item: AnyCountdown) {
-    if (item.kind === 'free') await setCountdownDone(item.id, !item.doneAt);
+    if (isTimed(item) && item.doneAt) await restartTimedCountdown(item.id);
+    else if (item.kind === 'free') await setCountdownDone(item.id, !item.doneAt);
     else await setGardenCountdownDone(item.id, !item.doneAt);
     await load();
     void syncReminderNotifications();
@@ -332,8 +386,9 @@ export function DaysUntilSection({
         </Text>
       ) : null}
       {ordered.map((item) => {
-        const figure = countdownFigure(item, today);
-        const progress = countdownProgress(item, today);
+        const timed = isTimed(item);
+        const figure = timed ? timedCountdownFigure(item, now) : countdownFigure(item, today);
+        const progress = timed ? timedCountdownProgress(item, now) : countdownProgress(item, today);
         return (
           <View key={`${item.kind}_${item.id}`} style={styles.itemRow}>
             <Text style={[styles.figure, { color: tabColor }, item.doneAt ? styles.doneText : null]}>{figure}</Text>
@@ -342,7 +397,9 @@ export function DaysUntilSection({
                 {item.name}
                 {item.where ? ` · ${item.where}` : ''}
               </Text>
-              <Text style={styles.captionText}>{describeCountdown(item, today)}</Text>
+              <Text style={styles.captionText}>
+                {timed ? describeTimedCountdown(item, now) : describeCountdown(item, today)}
+              </Text>
               {compact || readOnly ? null : (
                 <RecordPhotos ownerKind="countdown" ownerId={`${item.kind}_${item.id}`} tabColor={tabColor} title={item.name} />
               )}
@@ -385,12 +442,34 @@ export function DaysUntilSection({
               placeholder={startingFree ? 'Passport back, course starts, cast off' : 'Germination, transplant, first harvest'}
             />
           </View>
-          <View style={styles.fieldRow}>
-            <Text style={styles.fieldLabel}>How many days</Text>
-            <AppTextInput style={[styles.textInput, styles.shortInput]} value={days} onChangeText={setDays} placeholder="14" keyboardType="numeric" />
-            <Text style={styles.fieldLabel}>Started on</Text>
-            <AppTextInput style={[styles.textInput, styles.dateInput]} value={startedOn} onChangeText={setStartedOn} placeholder="YYYY-MM-DD" />
-          </View>
+          {startingFree ? (
+            <View style={styles.fieldRow}>
+              <Text style={styles.fieldLabel}>Count in</Text>
+              <PopoverSelect
+                options={UNIT_OPTIONS}
+                selected={unit}
+                onSelect={(value) => setUnit(value === 'timed' ? 'timed' : 'days')}
+                tabColor={tabColor}
+                width={220}
+              />
+            </View>
+          ) : null}
+          {startingFree && unit === 'timed' ? (
+            <View style={styles.fieldRow}>
+              <Text style={styles.fieldLabel}>Hours</Text>
+              <AppTextInput style={[styles.textInput, styles.shortInput]} value={hours} onChangeText={setHours} placeholder="2" keyboardType="numeric" />
+              <Text style={styles.fieldLabel}>Minutes</Text>
+              <AppTextInput style={[styles.textInput, styles.shortInput]} value={minutes} onChangeText={setMinutes} placeholder="30" keyboardType="numeric" />
+              <Text style={styles.captionText}>Counted from now.</Text>
+            </View>
+          ) : (
+            <View style={styles.fieldRow}>
+              <Text style={styles.fieldLabel}>How many days</Text>
+              <AppTextInput style={[styles.textInput, styles.shortInput]} value={days} onChangeText={setDays} placeholder="14" keyboardType="numeric" />
+              <Text style={styles.fieldLabel}>Started on</Text>
+              <AppTextInput style={[styles.textInput, styles.dateInput]} value={startedOn} onChangeText={setStartedOn} placeholder="YYYY-MM-DD" />
+            </View>
+          )}
           {startingFree ? (
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>About it</Text>

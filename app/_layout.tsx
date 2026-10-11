@@ -25,6 +25,7 @@ import { RecallWatcher } from '../components/RecallWatcher';
 import { StoryReturnHost } from '../components/StoryReturnHost';
 import { StoryWalkHost } from '../components/StoryWalkHost';
 import { NotYetHost } from '../components/NotYetHost';
+import { UnlockSummaryHost } from '../components/UnlockSummaryHost';
 import { TellClaudeHost } from '../components/TellClaudeHost';
 import { HandSwitchButton } from '../components/HandSwitchButton';
 import { AskRecordsSheet } from '../components/AskRecordsSheet';
@@ -956,6 +957,7 @@ function UnlockedApp() {
               {/* Always say why (1.0.60.16): the reason a button cannot do
                   its job yet, lib/notYet.ts. */}
               <NotYetHost />
+              <UnlockSummaryHost />
               {/* Before AppKeyboard, deliberately -- see OverlayContext.tsx's own
                   comment: the keyboard must always paint on top of an open
                   dropdown's backdrop/menu, never the other way around. */}

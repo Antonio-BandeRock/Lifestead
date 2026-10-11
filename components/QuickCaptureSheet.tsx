@@ -15,6 +15,14 @@
 // out of a head in the few seconds before it is gone, and a Save button is one
 // more thing to remember. Nothing is lost by it: a note saved by mistake is
 // deleted in the inbox like any other.
+//
+// Commands (voice step 3, 1.0.66.21). "Remind me to call the pharmacy
+// tomorrow at 10", "set a timer for 20 minutes" and "count down 30 days" are
+// made straight away by lib/spokenCommand.ts's reading, the same as over the
+// lock screen, with an Undo that keeps the words as a note instead. A
+// reminder with no clear time is kept as a note and offers the times it
+// could mean, and a note that names a day offers a reminder for it: nothing
+// is set from a guess.
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
@@ -23,7 +31,13 @@ import { colors } from '../constants/colors';
 import { useFooterBandHeight } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { useVoiceDictation, type VoiceDictationErrorKind } from '../hooks/useVoiceDictation';
-import { createCaptureNote, setCaptureNoteDestination } from '../lib/captureNotesDb';
+import { createCaptureNote, deleteCaptureNote, setCaptureNoteDestination } from '../lib/captureNotesDb';
+import { scheduleReminder } from '../lib/db';
+import { commandFromSpoken, undoSpokenCommand, writeSpokenCommand, type UnlockDone } from '../lib/lockedCaptures';
+import { describeQuickReminderSet, quickReminderOptions } from '../lib/quickReminder';
+import { syncReminderNotifications } from '../lib/reminderNotifications';
+import type { RepeatConfig } from '../lib/repeatRule';
+import { readSpokenCommand, type SpokenWhen } from '../lib/spokenCommand';
 import { suggestDestinations, suggestionLine, type CaptureSuggestion } from '../lib/captureSuggest';
 import { loadSuggestModel } from '../lib/captureSuggestDb';
 import { announcePhoneOnly } from '../lib/desktop/phoneOnly';
@@ -38,7 +52,22 @@ const GAP_ABOVE_FOOTER = 8;
 type Stage =
   | { kind: 'listening' }
   | { kind: 'saving' }
-  | { kind: 'saved'; id: string; text: string; suggestions: CaptureSuggestion[]; placed: string | null }
+  | {
+      kind: 'saved';
+      id: string;
+      text: string;
+      suggestions: CaptureSuggestion[];
+      placed: string | null;
+      /** Times a reminder for this note could be set for, when the words named one. */
+      offers: SpokenWhen[];
+      /** What a reminder from the offers would be called, and how it repeats. */
+      reminderTitle: string;
+      repeat: RepeatConfig | null;
+      /** Why a reminder that was asked for was not set. */
+      unclear: string | null;
+    }
+  | { kind: 'reminded'; line: string }
+  | { kind: 'made'; heading: string; done: UnlockDone; undone: boolean }
   | { kind: 'nothing' }
   | { kind: 'failed'; message: string };
 
@@ -64,6 +93,15 @@ export function QuickCaptureSheet() {
     savedOnce.current = true;
     setStage({ kind: 'saving' });
     try {
+      const saidAt = new Date();
+      const read = readSpokenCommand(text, saidAt);
+      const { command, kept } = commandFromSpoken(read, saidAt);
+      if (command) {
+        const done = await writeSpokenCommand(command, text, saidAt);
+        void syncReminderNotifications();
+        setStage({ kind: 'made', heading: kept.heading, done, undone: false });
+        return;
+      }
       const id = await createCaptureNote(text, 'spoken');
       if (!id) {
         setStage({ kind: 'nothing' });
@@ -75,7 +113,23 @@ export function QuickCaptureSheet() {
       } catch {
         // A guess is a courtesy; the note is saved either way.
       }
-      setStage({ kind: 'saved', id, text, suggestions, placed: null });
+      const offers =
+        read.kind === 'reminderAsk'
+          ? [...read.offers, ...quickReminderOptions(saidAt)]
+          : read.kind === 'note'
+            ? read.offers
+            : [];
+      setStage({
+        kind: 'saved',
+        id,
+        text,
+        suggestions,
+        placed: null,
+        offers,
+        reminderTitle: read.kind === 'reminderAsk' ? read.title : text,
+        repeat: read.kind === 'reminderAsk' ? read.repeat : null,
+        unclear: read.kind === 'reminderAsk' ? read.unclear : null,
+      });
     } catch (error) {
       savedOnce.current = false;
       setStage({ kind: 'failed', message: error instanceof Error && error.message ? error.message : 'The note could not be saved.' });
@@ -140,6 +194,34 @@ export function QuickCaptureSheet() {
     }
   }
 
+  // A reminder from one of the offered times. The note it came from goes,
+  // since the words now live on the reminder and there is nothing to sort.
+  async function remindAt(offer: SpokenWhen) {
+    if (stage.kind !== 'saved') return;
+    try {
+      await scheduleReminder({
+        title: stage.reminderTitle,
+        scheduledFor: offer.scheduledFor,
+        ...(stage.repeat ? { repeat: stage.repeat } : {}),
+      });
+      await deleteCaptureNote(stage.id);
+      void syncReminderNotifications();
+      setStage({ kind: 'reminded', line: `${stage.reminderTitle}. ${describeQuickReminderSet(offer.scheduledFor, new Date())}` });
+    } catch (error) {
+      setStage({ kind: 'failed', message: error instanceof Error && error.message ? error.message : 'The reminder could not be set.' });
+    }
+  }
+
+  async function undoMade() {
+    if (stage.kind !== 'made' || stage.undone) return;
+    try {
+      await undoSpokenCommand(stage.done);
+      setStage({ ...stage, undone: true });
+    } catch (error) {
+      setStage({ kind: 'failed', message: error instanceof Error && error.message ? error.message : 'It could not be undone.' });
+    }
+  }
+
   function openInbox() {
     close();
     router.push('/capture');
@@ -199,8 +281,26 @@ export function QuickCaptureSheet() {
                       </TouchableOpacity>
                     ))
                   : null}
-                {!stage.placed && stage.suggestions.length === 0 ? (
+                {!stage.placed && stage.suggestions.length === 0 && stage.offers.length === 0 ? (
                   <Text style={styles.hint}>It is waiting in Capture to be sorted whenever suits.</Text>
+                ) : null}
+                {!stage.placed && stage.unclear ? <Text style={styles.hint}>{stage.unclear}</Text> : null}
+                {!stage.placed && stage.offers.length > 0 ? (
+                  <>
+                    <Text style={styles.hint}>{stage.unclear ? 'Pick the time it should be:' : 'Or have the phone say it:'}</Text>
+                    <View style={styles.offerRow}>
+                      {stage.offers.map((offer) => (
+                        <TouchableOpacity
+                          key={offer.scheduledFor + offer.label}
+                          style={styles.suggestion}
+                          onPress={() => void remindAt(offer)}
+                        >
+                          <Ionicons name="alarm-outline" size={16} color={colors.textPrimary} />
+                          <Text style={styles.suggestionText}>{offer.label}</Text>
+                        </TouchableOpacity>
+                      ))}
+                    </View>
+                  </>
                 ) : null}
                 <ThumbRow primary="first" style={styles.actions}>
                   <TouchableOpacity style={styles.primaryButton} onPress={close}>
@@ -209,6 +309,40 @@ export function QuickCaptureSheet() {
                   <TouchableOpacity style={styles.secondaryButton} onPress={openInbox}>
                     <Text style={styles.secondaryText}>Open Capture</Text>
                   </TouchableOpacity>
+                </ThumbRow>
+              </>
+            ) : null}
+            {stage.kind === 'reminded' ? (
+              <>
+                <View style={styles.titleRow}>
+                  <Ionicons name="alarm" size={18} color={colors.primary} />
+                  <Text style={styles.title}>Reminder set</Text>
+                </View>
+                <Text style={styles.heard}>{stage.line}</Text>
+                <ThumbRow primary="first" style={styles.actions}>
+                  <TouchableOpacity style={styles.primaryButton} onPress={close}>
+                    <Text style={styles.primaryText}>Done</Text>
+                  </TouchableOpacity>
+                </ThumbRow>
+              </>
+            ) : null}
+            {stage.kind === 'made' ? (
+              <>
+                <View style={styles.titleRow}>
+                  <Ionicons name={stage.undone ? 'arrow-undo' : 'checkmark-circle'} size={18} color={colors.primary} />
+                  <Text style={styles.title}>{stage.undone ? 'Undone, kept as a note' : stage.heading}</Text>
+                </View>
+                <Text style={styles.heard}>{stage.undone ? stage.done.text : stage.done.line}</Text>
+                {stage.undone ? <Text style={styles.hint}>The words are waiting in Capture.</Text> : null}
+                <ThumbRow primary="first" style={styles.actions}>
+                  <TouchableOpacity style={styles.primaryButton} onPress={close}>
+                    <Text style={styles.primaryText}>Done</Text>
+                  </TouchableOpacity>
+                  {stage.undone ? null : (
+                    <TouchableOpacity style={styles.secondaryButton} onPress={() => void undoMade()}>
+                      <Text style={styles.secondaryText}>Undo</Text>
+                    </TouchableOpacity>
+                  )}
                 </ThumbRow>
               </>
             ) : null}
@@ -265,6 +399,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   suggestionText: { ...typography.caption, color: colors.textPrimary, flexShrink: 1, ...textShadow },
+  offerRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   actions: { flexDirection: 'row', gap: 12, marginTop: 4 },
   primaryButton: { paddingVertical: 10, paddingHorizontal: 18, borderRadius: 10, backgroundColor: colors.primary },
   primaryText: { ...typography.bodyEmphasis, color: colors.textOnPrimary, fontWeight: '400' },

@@ -18,12 +18,25 @@
 // Nothing readable sits outside the encryption: the folder holds only sealed
 // files, named by when they were taken, and the photo's plain copies the
 // camera and the shrinking made are deleted before the screen says Saved.
+//
+// Commands said over the lock screen (voice step 3, 1.0.66.21). "Remind me
+// to call the pharmacy tomorrow at 10" and "count down 2 hours" are read
+// there by lib/spokenCommand.ts. A reminder or a timer is queued with the
+// phone at once, counted from when it was said, since waiting for an unlock
+// could make it late; the words and time go into the sealed file like any
+// note, so the notification is the only thing outside it, worded as the
+// lock's reminder setting says. At unlock the command is written as the
+// reminder or counter itself, and a card lists what was done, each with
+// Undo (components/UnlockSummaryHost.tsx). Anything not definite (no clock
+// time, "this evening") is kept as a plain note: nothing is guessed.
 
 import { Directory, File, Paths } from 'expo-file-system';
 import { Platform } from 'react-native';
 import { openSealedForUnlock, sealForUnlock } from './appLock';
 import { heldDataKey, readLockStateSync } from './appLockSession';
 import { base64ToBytesFast, bytesToBase64Fast } from './localSeal';
+import type { RepeatConfig } from './repeatRule';
+import { describeDuration, describeTimerEnd, readSpokenCommand, timerEndsAt, type SpokenCommand } from './spokenCommand';
 
 const FOLDER_NAME = 'locked-captures';
 const SEALED_SUFFIX = '.sealed';
@@ -47,6 +60,14 @@ export function isLockedCaptureShowing(): boolean {
 }
 
 
+/** What a spoken capture asked for, read when it was said. The ids are made
+ *  then, so the reminder queued over the lock screen and the row written at
+ *  unlock are the same reminder. */
+export type LockedCommand =
+  | { kind: 'reminder'; id: string; title: string; scheduledFor: string; repeat: RepeatConfig; label: string }
+  | { kind: 'timer'; id: string; title: string; minutes: number; endsAt: string }
+  | { kind: 'days'; id: string; title: string; days: number };
+
 export type LockedCapture = {
   kind: 'spoken' | 'photo';
   text: string;
@@ -55,6 +76,8 @@ export type LockedCapture = {
   photo: string | null;
   width: number;
   height: number;
+  /** Set on a spoken capture that asked for a reminder or a counter. */
+  command?: LockedCommand | null;
 };
 
 function folder(): Directory {
@@ -86,9 +109,180 @@ export async function keepCaptureForUnlock(capture: LockedCapture): Promise<bool
   return true;
 }
 
+/** What the capture screen says once spoken words are kept. */
+export type SpokenKept = {
+  /** The heading: "Reminder set", "Timer started", "Counter kept", "Note kept". */
+  heading: string;
+  /** One line saying what was set and when, or null for a plain note. */
+  line: string | null;
+  /** Why a reminder was asked for and not set, or null. */
+  notSet: string | null;
+};
+
+function newId(prefix: string, suffix = ''): string {
+  return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 8)}${suffix}`;
+}
+
+function plural(count: number, one: string): string {
+  return `${count} ${count === 1 ? one : `${one}s`}`;
+}
+
+/**
+ * Seals spoken words for the next unlock, reading them for a command first.
+ * A definite reminder or a timer is queued with the phone now. Answers what
+ * was done, or null when there is no key to seal to (and then nothing was
+ * queued either).
+ */
+export async function keepSpokenForUnlock(text: string, takenAt: Date): Promise<SpokenKept | null> {
+  if (!canSealCaptures()) return null;
+  const read = readSpokenCommand(text, takenAt);
+  const { command, kept } = commandFromSpoken(read, takenAt);
+  if (read.kind === 'reminderAsk') {
+    kept.notSet = `${read.unclear} It is kept as a note, and a time can be picked for it in Capture.`;
+  }
+  const notifications = command && command.kind !== 'days' ? await import('./reminderNotifications') : null;
+  if (notifications && command?.kind === 'reminder') {
+    await notifications.queueReminderNow({ id: command.id, title: command.title, scheduledFor: command.scheduledFor });
+  } else if (notifications && command?.kind === 'timer') {
+    await notifications.queueTimerEndNow({
+      id: command.id,
+      name: command.title,
+      startedAt: takenAt.toISOString(),
+      endsAt: command.endsAt,
+    });
+  }
+  const sealed = await keepCaptureForUnlock({
+    kind: 'spoken',
+    text,
+    takenAt: takenAt.toISOString(),
+    photo: null,
+    width: 0,
+    height: 0,
+    command,
+  });
+  if (!sealed) {
+    if (notifications && command && command.kind !== 'days') await notifications.cancelQueuedNow(command.kind, command.id);
+    return null;
+  }
+  return kept;
+}
+
+/** What spoken words ask to be made, with the line that says so. A plain
+ *  note, or a reminder with no clear time, makes nothing. Shared by the
+ *  capture over the lock screen and the quick voice note in the app. */
+export function commandFromSpoken(read: SpokenCommand, saidAt: Date): { command: LockedCommand | null; kept: SpokenKept } {
+  let command: LockedCommand | null = null;
+  let kept: SpokenKept = { heading: 'Note kept', line: null, notSet: null };
+  if (read.kind === 'reminder') {
+    command = {
+      kind: 'reminder',
+      id: newId('schedule_item', '_0'),
+      title: read.title,
+      scheduledFor: read.when.scheduledFor,
+      repeat: read.repeat,
+      label: read.when.label,
+    };
+    kept = { heading: 'Reminder set', line: `${read.title}, ${read.when.label}`, notSet: null };
+  } else if (read.kind === 'timer') {
+    const endsAt = timerEndsAt(saidAt, read.minutes);
+    const title = read.title ?? `${describeDuration(read.minutes)} timer`;
+    command = { kind: 'timer', id: newId('freecount'), title, minutes: read.minutes, endsAt };
+    kept = {
+      heading: 'Timer started',
+      line: `${title}: ${describeDuration(read.minutes)}, ending ${describeTimerEnd(endsAt, saidAt)}`,
+      notSet: null,
+    };
+  } else if (read.kind === 'days') {
+    const title = read.title ?? plural(read.days, 'day');
+    command = { kind: 'days', id: newId('freecount'), title, days: read.days };
+    kept = { heading: 'Counter kept', line: `${title}: ${plural(read.days, 'day')} from today`, notSet: null };
+  }
+  return { command, kept };
+}
+
+// --- What was done at unlock ------------------------------------------------
+
+/** One thing a command said over the lock screen made, for the card at unlock. */
+export type UnlockDone = {
+  kind: 'reminder' | 'timer' | 'days';
+  id: string;
+  /** "Reminder: Call the pharmacy, Tomorrow at 10:00 AM". */
+  line: string;
+  /** The words as said, kept as a note if this is undone. */
+  text: string;
+  takenAt: string;
+};
+
+let unlockDone: UnlockDone[] = [];
+const unlockListeners = new Set<(items: UnlockDone[]) => void>();
+
+function announceUnlockDone(): void {
+  for (const listener of unlockListeners) listener(unlockDone);
+}
+
+/** Listens for what was done at unlock. Called at once with what is waiting. */
+export function subscribeUnlockDone(listener: (items: UnlockDone[]) => void): () => void {
+  unlockListeners.add(listener);
+  listener(unlockDone);
+  return () => {
+    unlockListeners.delete(listener);
+  };
+}
+
+/** Clears the card. */
+export function dismissUnlockDone(): void {
+  unlockDone = [];
+  announceUnlockDone();
+}
+
+/** Takes back one thing a spoken command made, keeping the words as a note
+ *  in Capture with the time they were said, so a wrong reading loses
+ *  nothing. */
+export async function undoUnlockDone(item: UnlockDone): Promise<void> {
+  await undoSpokenCommand(item);
+  unlockDone = unlockDone.filter((done) => done.id !== item.id);
+  announceUnlockDone();
+}
+
+/** Takes back what writeSpokenCommand made and keeps the words as a spoken
+ *  note in Capture, with the time they were said. */
+export async function undoSpokenCommand(item: UnlockDone): Promise<void> {
+  const [{ removeReminder }, { deleteCountdown }, { createCaptureNote }, { syncReminderNotifications }] = await Promise.all([
+    import('./db'),
+    import('./countdownDb'),
+    import('./captureNotesDb'),
+    import('./reminderNotifications'),
+  ]);
+  if (item.kind === 'reminder') await removeReminder(item.id);
+  else await deleteCountdown(item.id);
+  await createCaptureNote(item.text, 'spoken', new Date(item.takenAt));
+  void syncReminderNotifications();
+}
+
 /** Reads a photo the capture screen made into base64, ready to seal. */
 export function photoFileToBase64(uri: string): string {
   return bytesToBase64Fast(new File(uri).bytesSync());
+}
+
+function parseCommand(raw: unknown): LockedCommand | null {
+  if (!raw || typeof raw !== 'object') return null;
+  const c = raw as Record<string, unknown>;
+  if (typeof c.id !== 'string' || typeof c.title !== 'string') return null;
+  if (c.kind === 'reminder' && typeof c.scheduledFor === 'string' && c.repeat && typeof c.repeat === 'object') {
+    return {
+      kind: 'reminder',
+      id: c.id,
+      title: c.title,
+      scheduledFor: c.scheduledFor,
+      repeat: c.repeat as RepeatConfig,
+      label: typeof c.label === 'string' ? c.label : c.scheduledFor,
+    };
+  }
+  if (c.kind === 'timer' && typeof c.minutes === 'number' && typeof c.endsAt === 'string') {
+    return { kind: 'timer', id: c.id, title: c.title, minutes: c.minutes, endsAt: c.endsAt };
+  }
+  if (c.kind === 'days' && typeof c.days === 'number') return { kind: 'days', id: c.id, title: c.title, days: c.days };
+  return null;
 }
 
 function parseCapture(text: string): LockedCapture | null {
@@ -104,6 +298,7 @@ function parseCapture(text: string): LockedCapture | null {
       photo: typeof raw.photo === 'string' ? raw.photo : null,
       width: typeof raw.width === 'number' ? raw.width : 0,
       height: typeof raw.height === 'number' ? raw.height : 0,
+      command: raw.kind === 'spoken' ? parseCommand(raw.command) : null,
     };
   } catch {
     return null;
@@ -186,10 +381,15 @@ async function writeNow(): Promise<number> {
     import('./dayTimeline'),
   ]);
   let written = 0;
+  const made: UnlockDone[] = [];
   for (const { capture, file } of waiting) {
     try {
       const takenAt = new Date(capture.takenAt);
       await withSessionGuardLifted(async () => {
+        if (capture.command) {
+          made.push(await writeSpokenCommand(capture.command, capture.text, takenAt));
+          return;
+        }
         const id = await createCaptureNote(capture.text, capture.kind, takenAt);
         if (id && capture.kind === 'photo' && capture.photo) {
           const bytes = base64ToBytesFast(capture.photo);
@@ -217,7 +417,37 @@ async function writeNow(): Promise<number> {
       console.error('[lockedCaptures] a kept capture could not be written', error);
     }
   }
+  if (made.length > 0) {
+    unlockDone = [...unlockDone, ...made];
+    announceUnlockDone();
+    const { syncReminderNotifications } = await import('./reminderNotifications');
+    void syncReminderNotifications();
+  }
   return written;
+}
+
+/** Writes what a spoken command asked for, under the id it was given when it
+ *  was said, and answers the line that says what was done. */
+export async function writeSpokenCommand(command: LockedCommand, text: string, takenAt: Date): Promise<UnlockDone> {
+  const base = { id: command.id, text, takenAt: takenAt.toISOString() };
+  if (command.kind === 'reminder') {
+    const { scheduleReminder } = await import('./db');
+    await scheduleReminder({ id: command.id, title: command.title, scheduledFor: command.scheduledFor, repeat: command.repeat });
+    return { ...base, kind: 'reminder', line: `Reminder: ${command.title}, ${command.label}` };
+  }
+  const { addCountdown, addTimedCountdown } = await import('./countdownDb');
+  if (command.kind === 'timer') {
+    await addTimedCountdown({ id: command.id, name: command.title, startedAt: takenAt.toISOString(), minutes: command.minutes });
+    const ended = Date.parse(command.endsAt) <= Date.now();
+    return {
+      ...base,
+      kind: 'timer',
+      line: `Timer: ${command.title}, ${describeDuration(command.minutes)}, ${ended ? 'ended' : 'ending'} ${describeTimerEnd(command.endsAt, new Date())}`,
+    };
+  }
+  const startedOn = `${takenAt.getFullYear()}-${String(takenAt.getMonth() + 1).padStart(2, '0')}-${String(takenAt.getDate()).padStart(2, '0')}`;
+  await addCountdown({ id: command.id, name: command.title, about: null, startedOn, days: command.days });
+  return { ...base, kind: 'days', line: `Days Until: ${command.title}, ${plural(command.days, 'day')}` };
 }
 
 /**

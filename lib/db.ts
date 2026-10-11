@@ -10659,6 +10659,18 @@ async function runDatabaseInitialization() {
         await db.execAsync('ALTER TABLE report_history ADD COLUMN left_out TEXT;');
       }
     }
+    // A counter in hours and minutes (voice step 3, 1.0.66.21): the moments it
+    // starts and ends, as ISO strings. NULL on a whole-day counter, which every earlier
+    // row is.
+    {
+      const columns = await db.getAllAsync<{ name: string }>('PRAGMA table_info(countdowns)');
+      if (!columns.some((existing) => existing.name === 'ends_at')) {
+        await db.execAsync('ALTER TABLE countdowns ADD COLUMN ends_at TEXT;');
+      }
+      if (!columns.some((existing) => existing.name === 'started_at')) {
+        await db.execAsync('ALTER TABLE countdowns ADD COLUMN started_at TEXT;');
+      }
+    }
     // The person's symptom names, loaded once so every label lookup finds
     // them (D3). lib/customCheckinTagsDb.ts reloads after each change.
     setCustomCheckinTags(await readCustomCheckinTags(db));
@@ -17419,6 +17431,9 @@ async function insertScheduleSeries(input: {
   // null and correctly means "not applicable" rather than "inside".
   outsideEatingWindow?: boolean;
   repeat: RepeatConfig;
+  /** The first row's id, when a caller had to name it before writing (a
+   *  reminder said over the lock screen, 1.0.66.21). */
+  firstId?: string;
 }): Promise<string> {
   const db = await getDatabase();
   const now = new Date().toISOString();
@@ -17440,7 +17455,7 @@ async function insertScheduleSeries(input: {
 
   let firstId = '';
   for (const [index, { date: occurrenceDate, index: position }] of occurrences.entries()) {
-    const id = `schedule_item_${Date.now()}_${unique}_${index}`;
+    const id = index === 0 && input.firstId ? input.firstId : `schedule_item_${Date.now()}_${unique}_${index}`;
     if (index === 0) {
       firstId = id;
     }
@@ -18938,6 +18953,9 @@ export async function scheduleReminder(input: {
   repeat?: RepeatConfig;
   /** C2: null follows the Profile switch, 0 once only, N every N minutes. */
   keepRemindingMinutes?: number | null;
+  /** The first row's id, given when it was named before the database was
+   *  open (a reminder said over the lock screen). */
+  id?: string;
 }): Promise<string> {
   const id = await insertScheduleSeries({
     itemType: 'reminder',
@@ -18946,6 +18964,7 @@ export async function scheduleReminder(input: {
     scheduledFor: input.scheduledFor,
     notes: input.notes,
     repeat: input.repeat ?? { type: 'none' },
+    firstId: input.id,
   });
   if (input.keepRemindingMinutes !== undefined && input.keepRemindingMinutes !== null) {
     const db = await getDatabase();
@@ -18956,6 +18975,26 @@ export async function scheduleReminder(input: {
     );
   }
   return id;
+}
+
+/** A new id for a reminder's first row, for a caller that has to name it
+ *  before it is written. */
+export function newScheduleItemId(): string {
+  return `schedule_item_${Date.now()}_${Math.random().toString(36).slice(2, 8)}_0`;
+}
+
+/** Takes back a reminder that was just set (the Undo after a spoken one,
+ *  1.0.66.21): the row itself, and when it repeats, the rest of its series
+ *  still to come. Only a reminder: any other kind of row is left alone. */
+export async function removeReminder(id: string): Promise<void> {
+  const db = await getDatabase();
+  const row = await db.getFirstAsync<{ repeatGroupId: string | null }>(
+    `SELECT repeat_group_id AS repeatGroupId FROM schedule_items WHERE id = ? AND item_type = 'reminder'`,
+    id,
+  );
+  if (!row) return;
+  if (row.repeatGroupId) await deleteScheduleSeries(row.repeatGroupId);
+  await db.runAsync(`DELETE FROM schedule_items WHERE id = ? AND item_type = 'reminder'`, id);
 }
 
 const MEASUREMENT_SYSTEM_KEY = 'measurement_system';

@@ -223,6 +223,9 @@ export async function listDatedReminderSources(today: string): Promise<DatedRemi
   // carries the line by itself. Ids cannot collide with the garden ones,
   // which is what the two prefixes in the two add functions are for.
   for (const countdown of freeCountdowns) {
+    // A counter in hours and minutes speaks at the moment it ends, not on a
+    // day, so lib/reminderNotifications.ts queues it (buildTimerPlanned).
+    if (countdown.endsAt) continue;
     sources.push({
       kind: 'countdown',
       sourceId: countdown.id,

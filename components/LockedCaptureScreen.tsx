@@ -29,7 +29,7 @@ import { textShadow, typography } from '../constants/typography';
 import { useVoiceDictation, type VoiceDictationErrorKind } from '../hooks/useVoiceDictation';
 import { readLockStateSync } from '../lib/appLockSession';
 import { PHOTO_CAPTURE_TEXT, cleanCaptureText, isCaptureTextUsable } from '../lib/captureNotes';
-import { canSealCaptures, keepCaptureForUnlock, photoFileToBase64, setLockedCaptureShowing } from '../lib/lockedCaptures';
+import { canSealCaptures, keepCaptureForUnlock, keepSpokenForUnlock, photoFileToBase64, setLockedCaptureShowing, type SpokenKept } from '../lib/lockedCaptures';
 import { shrinkPhotoFile } from '../lib/mealPhotos';
 import LockedCapture from '../modules/locked-capture';
 
@@ -39,7 +39,7 @@ type Stage =
   | { kind: 'listening' }
   | { kind: 'camera' }
   | { kind: 'saving' }
-  | { kind: 'saved'; what: Mode; text: string }
+  | { kind: 'saved'; what: Mode; text: string; spoken?: SpokenKept }
   | { kind: 'nothing' }
   | { kind: 'failed'; message: string };
 
@@ -92,8 +92,8 @@ export function LockedCaptureScreen({ mode: startMode }: { mode?: string }) {
     setStage({ kind: 'saving' });
     const clean = cleanCaptureText(text);
     try {
-      const kept = await keepCaptureForUnlock({ kind: 'spoken', text: clean, takenAt: new Date().toISOString(), photo: null, width: 0, height: 0 });
-      setStage(kept ? { kind: 'saved', what: 'voice', text: clean } : { kind: 'failed', message: 'Lifestead is not locked with a code on this phone, so there is nothing to seal the note to.' });
+      const kept = await keepSpokenForUnlock(clean, new Date());
+      setStage(kept ? { kind: 'saved', what: 'voice', text: clean, spoken: kept } : { kind: 'failed', message: 'Lifestead is not locked with a code on this phone, so there is nothing to seal the note to.' });
     } catch (error) {
       savedOnce.current = false;
       setStage({ kind: 'failed', message: error instanceof Error && error.message ? error.message : 'The note could not be kept.' });
@@ -293,11 +293,15 @@ export function LockedCaptureScreen({ mode: startMode }: { mode?: string }) {
             <>
               <View style={styles.titleRow}>
                 <Ionicons name="lock-closed" size={20} color={colors.primary} />
-                <Text style={styles.title}>{stage.what === 'voice' ? 'Note kept' : 'Photo kept'}</Text>
+                <Text style={styles.title}>{stage.what === 'voice' ? (stage.spoken?.heading ?? 'Note kept') : 'Photo kept'}</Text>
               </View>
               {stage.what === 'voice' ? <Text style={styles.heard}>{stage.text}</Text> : null}
+              {stage.spoken?.line ? <Text style={styles.heard}>{stage.spoken.line}</Text> : null}
+              {stage.spoken?.notSet ? <Text style={styles.hint}>{stage.spoken.notSet}</Text> : null}
               <Text style={styles.hint}>
-                It is sealed on this phone and goes into Capture the next time Lifestead is unlocked, with the time it was taken.
+                {stage.spoken?.line
+                  ? 'It is set now and sealed on this phone. The next time Lifestead is unlocked it is written in, and a card lists it with an Undo.'
+                  : 'It is sealed on this phone and goes into Capture the next time Lifestead is unlocked, with the time it was taken.'}
               </Text>
               <View style={styles.actions}>
                 <TouchableOpacity style={styles.secondaryButton} onPress={() => begin(stage.what === 'voice' ? 'photo' : 'voice')}>

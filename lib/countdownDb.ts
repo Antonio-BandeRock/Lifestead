@@ -17,9 +17,10 @@
 import { getDatabase } from './db';
 import { listCurrentGardenCountdowns, listRunningGardenCountdowns } from './gardenCountdownDb';
 import type { AnyCountdown, Countdown } from './countdown';
-import { mergeCountdowns } from './countdown';
+import { calendarDaysBetween, mergeCountdowns } from './countdown';
 
-const COLUMNS = 'id, name, about, started_on AS startedOn, days, done_at AS doneAt';
+const COLUMNS =
+  'id, name, about, started_on AS startedOn, days, done_at AS doneAt, ends_at AS endsAt, started_at AS startedAt';
 
 /** Every free-form counter, running and done. The order is settled in
  *  lib/countdown.ts (sortCountdowns), since it depends on today's date. */
@@ -34,9 +35,9 @@ export async function listRunningCountdowns(): Promise<Countdown[]> {
   return db.getAllAsync<Countdown>(`SELECT ${COLUMNS} FROM countdowns WHERE done_at IS NULL ORDER BY started_on ASC`);
 }
 
-export async function addCountdown(input: Pick<Countdown, 'name' | 'about' | 'startedOn' | 'days'>): Promise<string> {
+export async function addCountdown(input: Pick<Countdown, 'name' | 'about' | 'startedOn' | 'days'> & { id?: string }): Promise<string> {
   const db = await getDatabase();
-  const id = `freecount_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+  const id = input.id ?? newCountdownId();
   const now = new Date().toISOString();
   const about = input.about && input.about.trim() ? input.about.trim() : null;
   await db.runAsync(
@@ -53,12 +54,82 @@ export async function addCountdown(input: Pick<Countdown, 'name' | 'about' | 'st
   return id;
 }
 
+/** Starts a counter in hours and minutes (1.0.66.21), counted from
+ *  startedAt, which is when it was said when it was said with the phone
+ *  locked. The id may be given, so a reminder set before the database was
+ *  open can name the row it belongs to. */
+export async function addTimedCountdown(input: {
+  id?: string;
+  name: string;
+  about?: string | null;
+  startedAt: string;
+  minutes: number;
+}): Promise<string> {
+  const db = await getDatabase();
+  const id = input.id ?? newCountdownId();
+  const now = new Date().toISOString();
+  const start = new Date(input.startedAt);
+  const end = new Date(start.getTime() + input.minutes * 60_000);
+  const startedOn = localDay(start);
+  const days = calendarDaysBetween(startedOn, localDay(end));
+  const about = input.about && input.about.trim() ? input.about.trim() : null;
+  await db.runAsync(
+    `INSERT INTO countdowns (id, name, about, started_on, days, started_at, ends_at, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    id,
+    input.name.trim(),
+    about,
+    startedOn,
+    days,
+    start.toISOString(),
+    end.toISOString(),
+    now,
+    now,
+  );
+  return id;
+}
+
+/** A new counter id, for a caller that has to name the row before it is
+ *  written. */
+export function newCountdownId(): string {
+  return `freecount_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+}
+
+function localDay(at: Date): string {
+  return `${at.getFullYear()}-${String(at.getMonth() + 1).padStart(2, '0')}-${String(at.getDate()).padStart(2, '0')}`;
+}
+
 /** Marks a counter done today, or, with done false, sets it running
  *  again. */
 export async function setCountdownDone(id: string, done: boolean): Promise<void> {
   const db = await getDatabase();
   const now = new Date().toISOString();
   await db.runAsync('UPDATE countdowns SET done_at = ?, updated_at = ? WHERE id = ?', done ? now : null, now, id);
+}
+
+/** Starts a counter in hours and minutes over from now, for the same length
+ *  it had, since setting one running again with its old end would read as
+ *  already over. */
+export async function restartTimedCountdown(id: string): Promise<void> {
+  const db = await getDatabase();
+  const row = await db.getFirstAsync<{ startedAt: string | null; endsAt: string | null }>(
+    'SELECT started_at AS startedAt, ends_at AS endsAt FROM countdowns WHERE id = ?',
+    id,
+  );
+  if (!row?.startedAt || !row.endsAt) return;
+  const length = new Date(row.endsAt).getTime() - new Date(row.startedAt).getTime();
+  const start = new Date();
+  const end = new Date(start.getTime() + Math.max(60_000, length));
+  const startedOn = localDay(start);
+  await db.runAsync(
+    'UPDATE countdowns SET started_at = ?, ends_at = ?, started_on = ?, days = ?, done_at = NULL, updated_at = ? WHERE id = ?',
+    start.toISOString(),
+    end.toISOString(),
+    startedOn,
+    calendarDaysBetween(startedOn, localDay(end)),
+    start.toISOString(),
+    id,
+  );
 }
 
 /** Removes a counter. Nothing refers to one, so the row goes. */

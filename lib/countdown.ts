@@ -68,6 +68,11 @@ export type Countdown = {
   startedOn: string;
   days: number;
   doneAt: string | null;
+  /** The moment a counter in hours and minutes ends, as an ISO string
+   *  (1.0.66.21). Null on a whole-day counter. */
+  endsAt?: string | null;
+  /** The moment it started, set beside endsAt. */
+  startedAt?: string | null;
 };
 
 /** Either kind, in the shape a list holding both reads in. The where line
@@ -81,6 +86,9 @@ export type AnyCountdown = {
   startedOn: string;
   days: number;
   doneAt: string | null;
+  /** Set on a free-form counter in hours and minutes. */
+  endsAt?: string | null;
+  startedAt?: string | null;
 };
 
 export type CountdownState = 'ahead' | 'today' | 'over' | 'done';
@@ -216,6 +224,8 @@ export function freeAsAny(row: Countdown): AnyCountdown {
     startedOn: row.startedOn,
     days: row.days,
     doneAt: row.doneAt,
+    endsAt: row.endsAt ?? null,
+    startedAt: row.startedAt ?? null,
   };
 }
 
@@ -224,4 +234,74 @@ export function freeAsAny(row: Countdown): AnyCountdown {
  *  caller keys on both together. */
 export function mergeCountdowns(free: readonly Countdown[], garden: readonly GardenCountdownRow[], today: string): AnyCountdown[] {
   return sortCountdowns([...free.map(freeAsAny), ...garden.map((row) => gardenAsAny(row))], today);
+}
+
+// --- Counters in hours and minutes (1.0.66.21) -----------------------------
+//
+// 'Count down 2 hours 30 minutes' counts to a moment rather than a day. The
+// row still carries startedOn and days (whole days to the day it ends), so
+// sorting and every reader that knows only days keep working; these read the
+// moment itself.
+
+/** Minutes left until a timed counter ends, negative once past it. */
+export function minutesLeft(endsAt: string, now: Date): number {
+  return Math.ceil((new Date(endsAt).getTime() - now.getTime()) / 60_000);
+}
+
+function hoursAndMinutes(total: number): string {
+  const days = Math.floor(total / 1440);
+  const hours = Math.floor((total % 1440) / 60);
+  const minutes = total % 60;
+  const parts: string[] = [];
+  if (days) parts.push(`${days} d`);
+  if (hours) parts.push(`${hours} h`);
+  if (minutes || parts.length === 0) parts.push(`${minutes} min`);
+  return parts.join(' ');
+}
+
+/** The figure a timed counter leads with: '2 h 14 min', 'Time is up',
+ *  '15 min over', 'Done'. */
+export function timedCountdownFigure(countdown: { endsAt: string; doneAt: string | null }, now: Date): string {
+  if (countdown.doneAt) return 'Done';
+  const left = minutesLeft(countdown.endsAt, now);
+  if (left > 0) return hoursAndMinutes(left);
+  if (left === 0) return 'Time is up';
+  return `${hoursAndMinutes(-left)} over`;
+}
+
+function clock(at: Date, now: Date): string {
+  const time = at.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+  const sameDay = at.getFullYear() === now.getFullYear() && at.getMonth() === now.getMonth() && at.getDate() === now.getDate();
+  if (sameDay) return time;
+  return `${at.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })} at ${time}`;
+}
+
+/** The sentence under a timed counter: how long it was, from when, and
+ *  when it ends or ended. */
+export function describeTimedCountdown(countdown: { endsAt: string; doneAt: string | null; startedAt: string }, now: Date): string {
+  const start = new Date(countdown.startedAt);
+  const end = new Date(countdown.endsAt);
+  const span = `${hoursAndMinutes(Math.round((end.getTime() - start.getTime()) / 60_000))} from ${clock(start, now)}`;
+  if (countdown.doneAt) return `${span}, marked done.`;
+  if (end.getTime() > now.getTime()) return `${span}, ending ${clock(end, now)}.`;
+  return `${span}, ended ${clock(end, now)}.`;
+}
+
+/** How far along a timed counter is, 0 to 1. */
+export function timedCountdownProgress(countdown: { endsAt: string; startedAt: string }, now: Date): number {
+  const start = new Date(countdown.startedAt).getTime();
+  const end = new Date(countdown.endsAt).getTime();
+  if (end <= start) return 1;
+  return Math.min(1, Math.max(0, (now.getTime() - start) / (end - start)));
+}
+
+/** What the hours-and-minutes form needs before a counter can start. Null
+ *  when it can. */
+export function timedCountdownFormProblem(input: { name: string; hours: string; minutes: string }): string | null {
+  if (!input.name.trim()) return 'Give the counter a name.';
+  const hours = input.hours.trim() ? Number(input.hours) : 0;
+  const minutes = input.minutes.trim() ? Number(input.minutes) : 0;
+  if (!Number.isInteger(hours) || hours < 0 || !Number.isInteger(minutes) || minutes < 0) return 'Hours and minutes are whole numbers.';
+  if (hours * 60 + minutes <= 0) return 'How long? At least 1 minute.';
+  return null;
 }
