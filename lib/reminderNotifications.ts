@@ -106,6 +106,8 @@ import { describeDuration } from './spokenCommand';
 import { VAULT_OFFER_NOTIFICATION_ID, vaultOfferText } from './vault';
 import { answerVaultOffer, vaultOfferDue } from './vaultOffer';
 import { markVaultOffered, takeVaultSetUpWaiting } from './vaultSession';
+import { APP_UPDATE_NOTIFICATION_ID, updateReadyText } from './appUpdate';
+import { APP_VERSION } from '../constants/version';
 
 // Local reminders: the scheduled doses in Schedules > Meds, the visits in
 // Schedules > Appointments, the meals and drinks on the schedule, the work
@@ -1103,6 +1105,19 @@ async function offerVaultIfDue(now: Date): Promise<void> {
   });
 }
 
+// An update has downloaded (lib/appUpdateWatcher.ts). No buttons, so it is
+// dismissed by a swipe on the locked phone; a tap opens Profile on App
+// Updates, which asks before restarting. Carries nothing about the person.
+export async function presentAppUpdateReady(version: string | null): Promise<void> {
+  if (Platform.OS === 'web') return;
+  const { title, body } = updateReadyText(version, APP_VERSION);
+  await Notifications.scheduleNotificationAsync({
+    identifier: APP_UPDATE_NOTIFICATION_ID,
+    content: { title, body, data: { tab: 'appUpdate' }, sound: false },
+    trigger: { channelId: ANDROID_DATED_CHANNEL_ID },
+  });
+}
+
 // This week's meals (H10). The meals planned for the seven days starting
 // the day it fires, read when the reminders are reconciled; the body says
 // when. Opens Schedules on the Meals lens, where the week strip is.
@@ -1788,6 +1803,7 @@ export type ReminderTapTarget =
   | { pathname: '/waiting-answers' }
   | { pathname: '/daily-checkin' }
   | { pathname: '/profile'; params: { section: 'applock' } }
+  | { pathname: '/profile'; params: { section: 'updates'; install: '1' } }
   | { pathname: '/'; params: { openHomeSection: 'yourWeek' } }
   | { pathname: '/food'; params: { openFoodLens: 'myFoodProducts' } }
   | { pathname: '/photo-camera'; params: { ownerKind: string; ownerId: string; guide: '1'; title: string } };
@@ -1812,6 +1828,7 @@ export function resolveReminderTap(response: Notifications.NotificationResponse 
   // The vault offer, tapped or Set It Up pressed, opens Profile on App Lock,
   // where the vault is set up.
   if (request?.identifier === VAULT_OFFER_NOTIFICATION_ID) return { pathname: '/profile', params: { section: 'applock' } };
+  if (request?.identifier === APP_UPDATE_NOTIFICATION_ID) return { pathname: '/profile', params: { section: 'updates', install: '1' } };
   // A16: an alert about somebody else's dose opens Meds, where the band of
   // doses you watch sits. Queued by lib/peerDosesDb.ts, not by this module.
   if (request?.identifier?.startsWith(PEER_DOSE_PREFIX)) return { pathname: '/schedule', params: { openScheduleLens: 'meds' } };

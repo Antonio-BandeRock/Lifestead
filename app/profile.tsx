@@ -821,7 +821,8 @@ export default function ProfileScreen() {
   // Opened straight onto Reminders (1.0.60.3) by Choose Which Reminders
   // Come in the Waiting for an Answer list, so the switches are in view
   // rather than folded away somewhere down the page.
-  const { section: openSection } = useLocalSearchParams<{ section?: string }>();
+  const { section: openSection, install: installParam } = useLocalSearchParams<{ section?: string; install?: string }>();
+  const appUpdatesCardY = useRef<number | null>(null);
   const scrollRef = useRef<ScrollView>(null);
   const remindersCardY = useRef<number | null>(null);
   // Also opened straight onto App Lock (1.0.63.14) by the Your Story
@@ -833,7 +834,9 @@ export default function ProfileScreen() {
         ? { group: 'Your Health', section: 'reminders' as const, y: remindersCardY }
         : openSection === 'applock'
           ? { group: 'Device & Account', section: 'applock' as const, y: appLockCardY }
-          : null;
+          : openSection === 'updates'
+            ? { group: 'Device & Account', section: 'app-updates' as const, y: appUpdatesCardY }
+            : null;
     if (!target) return;
     setCollapsedGroups(new Set(Object.keys(PROFILE_GROUP_ICONS).filter((g) => g !== target.group)));
     setCollapsedSections(new Set(ALL_CARD_SECTION_KEYS.filter((k) => k !== target.section)));
@@ -842,6 +845,15 @@ export default function ProfileScreen() {
     }, 350);
     return () => clearTimeout(timer);
   }, [openSection]);
+  // A tap on the update-ready notification (lib/appUpdateWatcher.ts) lands
+  // here with install=1 and goes straight to the usual question before the
+  // restart, so the person is never restarted without being asked.
+  useEffect(() => {
+    if (installParam !== '1') return;
+    const timer = setTimeout(() => void handleCheckForUpdates(), 600);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [installParam]);
   function toggleSection(key: CardSectionKey) {
     if (!collapsedSections.has(key)) {
       setCollapsedSections((current) => new Set(current).add(key));
@@ -5382,14 +5394,14 @@ export default function ProfileScreen() {
           ever checks for a JS update automatically when it first launches,
           never while already open, so this is the manual alternative to
           force-closing and relaunching just to find out. */}
-      <View style={styles.card}>
+      <View style={styles.card} onLayout={(event) => (appUpdatesCardY.current = event.nativeEvent.layout.y)}>
         {renderCardHeader('app-updates', 'App Updates')}
         {!collapsedSections.has('app-updates') ? (
           <View style={styles.cardBody}>
             <Text style={styles.helpText}>
-              Lifestead only checks for a new version automatically when it first opens, not while it&apos;s
-              already running. If you know an update was just sent out, check here instead of closing and
-              reopening the app.
+              Lifestead checks for a new version when it opens and whenever you come back to it, downloads it
+              quietly and sends a notification when it is ready. Tap that notification to restart into it, or
+              check here if you know an update was just sent out.
             </Text>
             <Text style={[styles.helpText, styles.derivedText]}>
               You&apos;re on version {APP_VERSION}. Checking is safe: if there&apos;s nothing new, nothing happens.

@@ -53,6 +53,7 @@ import { biometricTitle, deviceWord } from "../lib/appLockWords";
 import { isLockedCaptureShowing } from "../lib/lockedCaptures";
 import { isDesktopApp } from "../lib/desktop/bridge";
 import { wording } from "../lib/playfulCopy";
+import { watchForAppUpdates } from "../lib/appUpdateWatcher";
 import { listenForReminderPresses } from "../lib/reminderNotifications";
 import { restartApp } from "../lib/restartApp";
 import { getPlayfulWordingSync } from "../lib/visualPreferences";
@@ -154,6 +155,8 @@ export function AppLockGate({ children }: { children: ReactNode }) {
   // Reminder buttons are answered from here, since the app below does not
   // mount while it is locked (lib/reminderNotifications.ts).
   useEffect(() => listenForReminderPresses(), []);
+  // Updates are checked and announced while locked too (lib/appUpdateWatcher.ts).
+  useEffect(() => watchForAppUpdates(), []);
 
   // The move into the encrypted file, run at the start with nothing else open.
   const migrate = useCallback(async () => {
