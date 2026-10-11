@@ -19,13 +19,16 @@ if (Platform.OS === 'android') {
     require('./lib/lockedCaptures').setLockedCaptureShowing(true);
     const { LockedCaptureScreen } = require('./components/LockedCaptureScreen');
     const { LockedEmergencyView } = require('./components/LockedEmergencyView');
+    const { LockedWordsScreen } = require('./components/LockedWordsScreen');
     const React = require('react');
     // The emergency notification opens the same activity in mode
-    // "emergency", which shows the emergency lines instead (1.0.63.12).
+    // "emergency", which shows the emergency lines instead (1.0.63.12). A tap
+    // on a flare question opens it in mode "words", for typing or saying
+    // more than a button can (next rebuild after 1.0.67.1).
     return function LockedScreen(props) {
-      return props.mode === 'emergency'
-        ? React.createElement(LockedEmergencyView)
-        : React.createElement(LockedCaptureScreen, props);
+      if (props.mode === 'emergency') return React.createElement(LockedEmergencyView);
+      if (props.mode === 'words') return React.createElement(LockedWordsScreen, props);
+      return React.createElement(LockedCaptureScreen, props);
     };
   });
 }

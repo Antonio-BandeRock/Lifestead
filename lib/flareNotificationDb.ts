@@ -35,6 +35,27 @@ export async function addFlareTag(flareId: string, tagCode: string): Promise<voi
   );
 }
 
+// Words added to a flare from the screen over the lock screen. Each piece
+// goes on a line of its own after any notes already there.
+export async function addFlareNote(flareId: string, words: string): Promise<void> {
+  const text = words.trim();
+  if (!text) return;
+  const db = await getDatabase();
+  const flare = await db.getFirstAsync<{ notes: string | null }>(
+    "SELECT notes FROM wellbeing_checkins WHERE id = ? AND checkin_type = 'flare'",
+    flareId,
+  );
+  if (!flare) return;
+  const before = (flare.notes ?? '').trim();
+  if (before.split('\n').includes(text)) return;
+  await db.runAsync(
+    'UPDATE wellbeing_checkins SET notes = ?, updated_at = ? WHERE id = ?',
+    before ? `${before}\n${text}` : text,
+    new Date().toISOString(),
+    flareId,
+  );
+}
+
 /** The symptoms logged with flares most often, at most `limit`, skipping
  *  any the person has removed. Empty when no flare has carried a symptom. */
 export async function mostLoggedFlareTags(limit: number): Promise<{ code: string; label: string }[]> {
