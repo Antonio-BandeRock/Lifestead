@@ -26,6 +26,18 @@ class LockedCaptureModule : Module() {
 
     Function("isShowingShadeButtons") { ShadeButtons.isShowing(context) }
 
+    // One button at a time (2026-10-12), so each has a switch of its own.
+    // kind is "voice", "photo" or "command".
+    Function("showShadeButton") { kind: String -> ShadeButtons.show(context, kind) }
+
+    Function("hideShadeButton") { kind: String -> ShadeButtons.hide(context, kind) }
+
+    Function("isShowingShadeButton") { kind: String -> ShadeButtons.isShowing(context, kind) }
+
+    // Posts again what is wanted, so each button carries the target that
+    // suits App Lock as it is now.
+    Function("repostShadeButtons") { ShadeButtons.repost(context) }
+
     Function("showEmergencyNotice") { title: String, body: String -> EmergencyNotice.show(context, title, body) }
 
     Function("hideEmergencyNotice") { EmergencyNotice.hide(context) }

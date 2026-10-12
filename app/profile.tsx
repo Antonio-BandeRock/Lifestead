@@ -6034,11 +6034,12 @@ export default function ProfileScreen() {
         </View>
       ) : null}
 
-      {/* Voice Control, 2026-10-11: moved out of App Lock by direct request,
-          with the switch for the shade buttons. See components/VoiceControlSetting.tsx. */}
+      {/* Notification Shade Buttons: Voice Control, moved out of App Lock by direct request (2026-10-11),
+          then Voice Note and Photo beside it, each with a switch of its own (2026-10-12).
+          See components/VoiceControlSetting.tsx. */}
       {!isDesktopApp() ? (
         <View style={styles.card}>
-          {renderCardHeader('voice-control', 'Voice Control')}
+          {renderCardHeader('voice-control', 'Notification Shade Buttons')}
           {!collapsedSections.has('voice-control') ? (
             <View style={styles.cardBody}>
               <VoiceControlSetting />

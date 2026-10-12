@@ -162,7 +162,10 @@ export function AppLockGate({ children }: { children: ReactNode }) {
   // a new build's buttons (Voice Control, 1.0.66.13) appear without waiting
   // for Android's package-replaced broadcast, which a Samsung phone skipped.
   useEffect(() => {
-    if (LockedCapture?.isShowingShadeButtons()) LockedCapture.showShadeButtons();
+    // Since 2026-10-12 each button is posted again on its own, which also
+    // gives it the target that suits App Lock as it is now.
+    if (LockedCapture?.repostShadeButtons) LockedCapture.repostShadeButtons();
+    else if (LockedCapture?.isShowingShadeButtons()) LockedCapture.showShadeButtons();
   }, []);
 
   // The move into the encrypted file, run at the start with nothing else open.

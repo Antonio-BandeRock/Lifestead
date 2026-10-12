@@ -21,7 +21,12 @@
 //    the phone's unlock whenever the phone is locked, then opens the app
 //    listening for a command (app/voice-control.tsx). Direct request,
 //    2026-10-10: "it forces the unlock of the phone and then allows the
-//    voice control."
+//    voice control." Since 2026-10-12 the tiles and shade buttons send that
+//    case, and Voice Note and Photo with App Lock off, to the app itself
+//    rather than through here, so the unlock is Android's own: the
+//    launcher's requestDismissKeyguard left a locked phone on the lock
+//    screen with no keypad. The launcher's path stays for a button posted
+//    by an older build.
 //  - LockedCaptureActivity is a second React screen in the same app,
 //    allowed over the lock screen, showing only the component registered as
 //    "LockedCapture" (components/LockedCaptureScreen.tsx). It never shows
@@ -51,6 +56,7 @@ function tileSource(pkg, tile) {
 
 import android.app.PendingIntent
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
@@ -64,12 +70,34 @@ class ${tile.className} : TileService() {
     }
   }
 
+  // Voice Control always, and Voice Note and Photo with App Lock off, open
+  // the app itself through unlockAndRun, which is Android's own unlock for a
+  // tile (2026-10-12): the launcher asking for the unlock by itself left a
+  // locked phone on the lock screen with no keypad.
   override fun onClick() {
     super.onClick()
-    val intent = Intent(this, CaptureLauncherActivity::class.java).apply {
-      putExtra("mode", "${tile.mode}")
-      addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    val mode = "${tile.mode}"
+    val appLockOn = java.io.File(filesDir, "app-lock.json").exists()
+    if (isLocked && (mode == "command" || !appLockOn)) {
+      val path = when (mode) {
+        "command" -> "voice-control"
+        "photo" -> "capture?photo=1"
+        else -> "capture?speak=1"
+      }
+      val app = Intent(Intent.ACTION_VIEW, Uri.parse("hashimotosapp://" + path)).apply {
+        setPackage(packageName)
+        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+      }
+      unlockAndRun { open(app) }
+      return
     }
+    open(Intent(this, CaptureLauncherActivity::class.java).apply {
+      putExtra("mode", mode)
+      addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    })
+  }
+
+  private fun open(intent: Intent) {
     if (Build.VERSION.SDK_INT >= 34) {
       val pending = PendingIntent.getActivity(
         this, ${{ voice: 1, photo: 2, command: 4 }[tile.mode]}, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
