@@ -216,6 +216,7 @@ import {
   isHomeGroupVisible,
   isHomeSectionExpanded,
   isHomeSectionVisible,
+  isShownOnHome,
   modalAnimationType,
   setLowStimulation,
   setVisualPreferences,
@@ -1531,9 +1532,9 @@ export default function HomeScreen() {
         group.kind === 'tab'
           ? !isHomeGroupVisible(visualPrefs, homeGroupIdOf(group)) ||
             group.keys.every(
-              (key) => !isHomeSectionVisible(visualPrefs, key) || !homeSectionHasContent(key),
+              (key) => !isShownOnHome(visualPrefs, key) || !homeSectionHasContent(key),
             )
-          : !isHomeSectionVisible(visualPrefs, group.key) || !homeSectionHasContent(group.key),
+          : !isShownOnHome(visualPrefs, group.key) || !homeSectionHasContent(group.key),
       ),
     // homeSectionHasContent is rebuilt every render and reads exactly the
     // two values listed here, so those are the dependencies that matter.
@@ -4675,6 +4676,9 @@ export default function HomeScreen() {
   }
 
   function renderHomeSection(key: HomeSectionKey) {
+    // Simple View, P1: the four cards in SIMPLE_VIEW_SECTIONS and nothing
+    // else, without touching any card's own switch.
+    if (!isShownOnHome(visualPrefs, key)) return null;
     switch (key) {
       case 'sharedFolderSetup':
         return renderSharedFolderSetup();
@@ -4951,6 +4955,23 @@ export default function HomeScreen() {
               includes the greeting card, which used to sit outside this
               system and always stay: turning Today off is now a thing a
               person can do, so a page with nothing left on it is too. */}
+          {/* Simple View, P1: one line saying the rest is there, and the
+              way back to it, so a quiet Home never reads as an empty app. */}
+          {!loading && !arranging && visualPrefs.simpleView ? (
+            <View style={styles.allSectionsHiddenCard}>
+              <Text style={styles.allSectionsHiddenText}>
+                Simple View is on, so Home shows only these. Every tab is still in the menu.
+              </Text>
+              <TouchableOpacity
+                onPress={() => void setVisualPreferences({ simpleView: false })}
+                accessibilityRole="button"
+                hitSlop={8}
+              >
+                <Text style={[styles.allSectionsHiddenText, { color: colors.primary }]}>Show everything on Home</Text>
+              </TouchableOpacity>
+            </View>
+          ) : null}
+
           {!loading && !arranging && nothingIsShowing ? (
             <View style={styles.allSectionsHiddenCard}>
               <Text style={styles.allSectionsHiddenText}>

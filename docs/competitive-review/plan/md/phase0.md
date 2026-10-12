@@ -23,6 +23,11 @@
 - **Answers:** (your question) · **Theme:** Brainstorm review 2026-10-06
 - **How:** Confirmed 2026-10-06 by direct instruction ("Confirm P28 as written"), and the CLAUDE.md tier table changed with it: the emergency card, med and supplement timing warnings from the interaction rules, allergy cautions and the clinical-claims protections are on every tier including Free. The current tier table puts the rules engine on paid only. Free useful on its own; paying adds depth, people and time saved. The vault (agreed the same day) keeps these outside it as well. Notion: https://app.notion.com/p/3f153652f27281928fe4f7fbfb9ac019
 
+### P34. Separate versions of the app, side by side on one page
+- **Ships by:** Over the air (JS) · **Size:** M · **Tabs:** all
+- **Answers:** (your question) · **Theme:** Asked of you: these meet a standing rule or need a company server
+- **How:** Asked 2026-10-12, after the Leaguestead version page: one private clickable page that opens on a version picker (Free, Individual, Partner, a Household seat, a Guardian child, a Caregiver, and the first run with and without a condition), each version kept in its own screens with a bar at the top to come back, each starting from a ready scenario, and each revision numbered. Tony goes through them and lists what has to change, be removed, reworded, updated or added, so what belongs in each version is there and what does not belong is not. Reads its tab and lens lists from lib/paidFeatures.ts and constants/tabs.ts so it cannot drift from the app. Ties to P3 and P27. Notion: https://app.notion.com/p/3f753652f27281c6a5fdc791ae35294f
+
 ### U1. The billing floor
 - **Ships by:** Owner decision first · **Size:** S · **Tabs:** All
 - **Answers:** Noom, Inflow, Goblin.tools, Headway, PictureThis, Paired · **Theme:** What competitors' users complain about (2026-10-09)
@@ -36,7 +41,7 @@
 ### U3. Say what is Free before setup, and open on the person's own things
 - **Ships by:** Owner decision first · **Size:** S · **Tabs:** All
 - **Answers:** PictureThis, RHS Grow, Goblin.tools, Veglog · **Theme:** What competitors' users complain about (2026-10-09)
-- **How:** No offer screen on opening the app or a tab; what is Free and what is paid is said in the store listing and before the first question of setup, never after it. Sources: complaints/garden.md, home.md. Decided 2026-10-09: yes.
+- **How:** No offer screen on opening the app or a tab; what is Free and what is paid is said in the store listing and before the first question of setup, never after it. Sources: complaints/garden.md, home.md. Decided 2026-10-09: yes. Built 1.0.68.5: the Free line sits at the top of the first interview question while it is unanswered and nowhere else (FREE_BEFORE_SETUP in lib/yourStoryInterview.ts); the store listing half waits for the listing.
 
 ### U4. Privacy is never what a person pays for
 - **Ships by:** Owner decision first · **Size:** S · **Tabs:** All

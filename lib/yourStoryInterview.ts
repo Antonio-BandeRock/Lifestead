@@ -46,6 +46,7 @@ export type InterviewKind =
   | 'neuro'
   | 'beats'
   | 'startTab'
+  | 'homeView'
   | 'meds'
   | 'stage'
   | 'eatingStyle'
@@ -68,7 +69,7 @@ export const INTERVIEW_QUESTIONS: InterviewQuestionDef[] = [
   {
     kind: 'conditions',
     question: 'Do you live with any of these conditions?',
-    why: 'Each one changes what the app says about a food, which reading comes first, and what the meal plans leave out. Choose as many as apply, or none.',
+    why: 'Each one changes what the app says about a food, which reading comes first, and what the meal plans leave out. Choose as many as apply, or none. If you came to keep track of your day rather than a condition, say so below and the questions after this one follow that.',
     beats: [],
   },
   {
@@ -87,6 +88,15 @@ export const INTERVIEW_QUESTIONS: InterviewQuestionDef[] = [
     kind: 'startTab',
     question: 'Where would you like to start?',
     why: 'Every tab can be used without the others. Choose the one closest to why you opened the app, and it comes first below.',
+    beats: [],
+  },
+  // P1, 1.0.68.5: Simple View, offered rather than switched on. Asked of
+  // everybody, since a full Home is a lot on a first day whatever brought
+  // somebody here.
+  {
+    kind: 'homeView',
+    question: 'How much should Home show?',
+    why: "Simple View keeps Home to today's greeting, the one next thing, Capture and anything waiting for an answer. Everything else stays one tap away in the menu, and Profile switches it back.",
     beats: [],
   },
   {
@@ -142,6 +152,13 @@ export const QUESTION_BY_KIND: Record<InterviewKind, InterviewQuestionDef> = Obj
 
 // The labels on the answers that leave no record anywhere else.
 export const NONE_OF_THESE_LABEL = 'None of these';
+// P1, 1.0.68.5: the way in that needs no condition. Kept as the answer
+// 'myDay' on the conditions question, so it leaves no record anywhere else
+// and a condition chosen later simply outranks it.
+export const HERE_FOR_MY_DAY_LABEL = "I'm here for my day, not a condition";
+export const HERE_FOR_MY_DAY = 'myDay';
+export const SIMPLE_VIEW_LABEL = 'Simple View';
+export const FULL_HOME_LABEL = 'Everything';
 export const DONE_LABEL = 'Done';
 export const NOT_SURE_LABEL = 'Not sure yet';
 export const NO_ALLERGIES_LABEL = 'No food allergies';
@@ -168,6 +185,35 @@ export const INTERVIEW_LEAD =
 export const INTERVIEW_ANSWERED_HEADING = 'What you told Lifestead';
 export const INTERVIEW_FINISHED_LINE = 'Every question has an answer. Tap Change on any of them if something is different now.';
 export const NEXT_QUESTION_LABEL = 'Next question:';
+
+// U3 of the competitive build plan, decided 2026-10-09: what is Free is said
+// before the first question of setup, never after it, and nowhere else is an
+// offer shown. Kept in step with lib/paidFeatures.ts by hand, since that
+// table names lenses and this names what a person recognises.
+export const FREE_BEFORE_SETUP_HEADING = 'Before the questions';
+export const FREE_BEFORE_SETUP =
+  'None of these questions costs anything, and neither does running your day here. Free keeps your reminders, Capture, routines, to-dos, Days Until, the grocery list, My Meds with every safety warning, and what you log about meals, symptoms, movement and the garden. Paying adds the reading on each condition, meal plans and the ready-made recipes, reports, Pattern Finder, most of Trends and Finances.';
+
+// P1: what Lifestead does by itself and what it needs from the person, one
+// short list each, shown on the Your Guide page once the questions have
+// answers. Every line is something the app does today.
+export const BY_ITSELF_HEADING = 'What Lifestead does by itself';
+export const NEEDS_FROM_YOU_HEADING = 'What it needs from you';
+export const BY_ITSELF: string[] = [
+  'Reminds you at the times you set, and takes the answer from the locked phone with a tap.',
+  'Holds whatever you put in Capture until you decide where it belongs.',
+  'Counts the days to anything you add to Days Until.',
+  'Builds the grocery list from the meals you plan.',
+  'Warns when a medicine or supplement and a food should be kept apart.',
+  'Keeps a copy of everything in your cloud folder, once backup is set up.',
+];
+export const NEEDS_FROM_YOU: string[] = [
+  'What you want to be reminded of, and when.',
+  'A tap when a reminder is done, so the app knows it was.',
+  'The thought, before it slips away: one tap on Capture.',
+  'What you eat, only if you want food to be part of it.',
+  'A cloud folder, once, so nothing is lost with the phone.',
+];
 
 // The allergens most food labels are required to name, the same list
 // Profile offers.
@@ -1135,6 +1181,7 @@ function viewQuestion(def: InterviewQuestionDef, facts: InterviewFacts): Intervi
     case 'conditions': {
       const names = facts.conditions.map((code) => facts.conditionNames[code] ?? code);
       if (names.length > 0) return { ...base, answered: true, summary: listSentence(names) };
+      if (answer?.answer === HERE_FOR_MY_DAY) return { ...base, answered: true, summary: 'Here for your day, not a condition.' };
       return { ...base, answered: !!answer, summary: answer ? `${NONE_OF_THESE_LABEL}.` : null };
     }
     case 'neuro': {
@@ -1151,6 +1198,9 @@ function viewQuestion(def: InterviewQuestionDef, facts: InterviewFacts): Intervi
       const title = tabTitle(answer.answer);
       return { ...base, answered: true, summary: title ?? 'Every tab, in order.' };
     }
+    case 'homeView':
+      if (!answer) return { ...base, answered: false, summary: null };
+      return { ...base, answered: true, summary: answer.answer === 'simple' ? `${SIMPLE_VIEW_LABEL}.` : 'Everything.' };
     case 'meds': {
       const settled = itemSettled(facts, 'meds');
       if (settled === 'done') return { ...base, answered: true, summary: 'On record in My Meds.' };
@@ -1245,6 +1295,19 @@ export function buildInterview(facts: InterviewFacts): InterviewView {
   return { questions, next, finished: next === null, startPath, tour: buildTour(facts, startPath), facts };
 }
 
+// Whether the Free line shows: only while the first question still waits,
+// so it is read before setup and never comes back to sell anything.
+export function showsFreeLine(view: InterviewView): boolean {
+  const first = view.questions.find((question) => question.def.kind === 'conditions');
+  return !!first && !first.answered;
+}
+
+// Whether the person said they came for their day rather than a condition,
+// and has not chosen a condition since.
+export function isHereForDay(facts: InterviewFacts): boolean {
+  return facts.conditions.length === 0 && facts.answers.conditions?.answer === HERE_FOR_MY_DAY;
+}
+
 // The one line the folded Home card shows while questions are open.
 export function interviewLine(view: InterviewView): string | null {
   return view.next ? `${NEXT_QUESTION_LABEL} ${view.next.question}` : null;
@@ -1275,8 +1338,9 @@ function switchedOnLine(question: InterviewQuestionView, facts: InterviewFacts):
   switch (question.def.kind) {
     case 'conditions': {
       const names = facts.conditions.map((code) => facts.conditionNames[code] ?? code);
-      return names.length > 0
-        ? `Food lookups, meal plans and the reading on Life now take ${listSentence(names)} into account.`
+      if (names.length > 0) return `Food lookups, meal plans and the reading on Life now take ${listSentence(names)} into account.`;
+      return isHereForDay(facts)
+        ? 'No condition is chosen, so nothing is scored against one, and the guides lead with running your day. A condition can be added in Profile at any time.'
         : 'No condition is chosen, so no food is scored against one. One can be added in Profile at any time.';
     }
     case 'neuro': {
@@ -1293,6 +1357,10 @@ function switchedOnLine(question: InterviewQuestionView, facts: InterviewFacts):
       const title = tabTitle(facts.answers.startTab?.answer);
       return title ? `${title} comes first in the tour below.` : 'The tour below runs through every tab in order.';
     }
+    case 'homeView':
+      return facts.answers.homeView?.answer === 'simple'
+        ? "Home shows today's greeting, the one next thing, Capture and anything waiting for an answer. Profile, under Simple View, brings the rest back."
+        : 'Home shows every card. Profile, under Simple View, keeps it to four.';
     case 'meds': {
       const settled = itemSettled(facts, 'meds');
       if (settled === 'done') return 'Timing advice, the dose schedule and the nutrients a supplement adds now read from My Meds.';

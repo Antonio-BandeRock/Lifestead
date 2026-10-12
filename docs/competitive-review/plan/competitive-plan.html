@@ -64,8 +64,8 @@ nav.toc a{color:var(--accent)}
 <h1>Everything the competitors do, and how Lifestead gets there</h1>
 <p class="lead">Every gap the nine tab reviews named, merged where two tabs asked for the same thing, then ordered so each phase stands on the one before. Nothing from the review is left out: items that break a standing rule or need a server are listed in Phase 7 with the reason, waiting on your yes.</p>
 <div class="stats">
-<span class="stat"><b>363</b>items</span>
-<span class="stat"><b>299</b>ship over the air</span>
+<span class="stat"><b>364</b>items</span>
+<span class="stat"><b>300</b>ship over the air</span>
 <span class="stat"><b>12</b>in the Android rebuild</span>
 <span class="stat"><b>2</b>in the iPhone build</span>
 <span class="stat"><b>10</b>on the Worker</span>
@@ -190,7 +190,7 @@ nav.toc a{color:var(--accent)}
 </div>
 
 <section class="phase" id="p0">
-<h2>Phase 0. Decisions only you can make <span class="count">9</span></h2>
+<h2>Phase 0. Decisions only you can make <span class="count">10</span></h2>
 <p class="lead">Nothing here is code yet. Each one either touches the live database, costs money, or bends a standing rule, so it waits for your answer. None of them blocks Phase 1.</p>
 <div class="tw"><table><thead><tr><th>#</th><th>What and how</th><th>Tabs</th><th>Ships by</th><th>Size</th></tr></thead>
 <tbody><tr data-tabs="none" data-text="a small beta outside the house five to ten people (two with one of the 19 conditions, two with adhd, a gardener, a caregiver) for two to four weeks on the play internal testing track, then a conversation with each. plus a private, opt-in usage summary the person sends themselves, nothing leaving the phone otherwise. the first named risk says to test logging before building around it. notion: https://app.notion.com/p/3f153652f2728129b607eae81a0a7b7d (your question)">
@@ -228,6 +228,13 @@ nav.toc a{color:var(--accent)}
 <td><span class="ship ask">Your decision</span></td>
 <td class="size">S</td>
 </tr>
+<tr data-tabs="all" data-text="separate versions of the app, side by side on one page asked 2026-10-12, after the leaguestead version page: one private clickable page that opens on a version picker (free, individual, partner, a household seat, a guardian child, a caregiver, and the first run with and without a condition), each version kept in its own screens with a bar at the top to come back, each starting from a ready scenario, and each revision numbered. tony goes through them and lists what has to change, be removed, reworded, updated or added, so what belongs in each version is there and what does not belong is not. reads its tab and lens lists from lib/paidfeatures.ts and constants/tabs.ts so it cannot drift from the app. ties to p3 and p27. notion: https://app.notion.com/p/3f753652f27281c6a5fdc791ae35294f (your question)">
+<td class="id">P34</td>
+<td><div class="t">Separate versions of the app, side by side on one page</div><div class="how">Asked 2026-10-12, after the Leaguestead version page: one private clickable page that opens on a version picker (Free, Individual, Partner, a Household seat, a Guardian child, a Caregiver, and the first run with and without a condition), each version kept in its own screens with a bar at the top to come back, each starting from a ready scenario, and each revision numbered. Tony goes through them and lists what has to change, be removed, reworded, updated or added, so what belongs in each version is there and what does not belong is not. Reads its tab and lens lists from lib/paidFeatures.ts and constants/tabs.ts so it cannot drift from the app. Ties to P3 and P27. Notion: https://app.notion.com/p/3f753652f27281c6a5fdc791ae35294f</div><div class="meta">Asked of you: these meet a standing rule or need a company server · answers (your question)</div></td>
+<td class="tabs">all</td>
+<td><span class="ship ota">Over the air</span></td>
+<td class="size">M</td>
+</tr>
 <tr data-tabs="All" data-text="the billing floor no free trial that turns into a charge unnoticed: renewal accepted by a box ticked on purpose, a reminder two days before any first or renewing charge, a receipt for every charge, and cancelling in one step inside the app. decided with p27 before any price ships. sources: complaints/home.md, across.md, garden.md, companions.md. decided 2026-10-09: yes. noom, inflow, goblin.tools, headway, picturethis, paired">
 <td class="id">U1</td>
 <td><div class="t">The billing floor</div><div class="how">No free trial that turns into a charge unnoticed: renewal accepted by a box ticked on purpose, a reminder two days before any first or renewing charge, a receipt for every charge, and cancelling in one step inside the app. Decided with P27 before any price ships. Sources: complaints/home.md, across.md, garden.md, companions.md. Decided 2026-10-09: yes.</div><div class="meta">What competitors' users complain about (2026-10-09) · answers Noom, Inflow, Goblin.tools, Headway, PictureThis, Paired</div></td>
@@ -242,9 +249,9 @@ nav.toc a{color:var(--accent)}
 <td><span class="ship ask">Your decision</span></td>
 <td class="size">S</td>
 </tr>
-<tr data-tabs="All" data-text="say what is free before setup, and open on the person's own things no offer screen on opening the app or a tab; what is free and what is paid is said in the store listing and before the first question of setup, never after it. sources: complaints/garden.md, home.md. decided 2026-10-09: yes. picturethis, rhs grow, goblin.tools, veglog">
+<tr data-tabs="All" data-text="say what is free before setup, and open on the person's own things no offer screen on opening the app or a tab; what is free and what is paid is said in the store listing and before the first question of setup, never after it. sources: complaints/garden.md, home.md. decided 2026-10-09: yes. built 1.0.68.5: the free line sits at the top of the first interview question while it is unanswered and nowhere else (free_before_setup in lib/yourstoryinterview.ts); the store listing half waits for the listing. picturethis, rhs grow, goblin.tools, veglog">
 <td class="id">U3</td>
-<td><div class="t">Say what is Free before setup, and open on the person's own things</div><div class="how">No offer screen on opening the app or a tab; what is Free and what is paid is said in the store listing and before the first question of setup, never after it. Sources: complaints/garden.md, home.md. Decided 2026-10-09: yes.</div><div class="meta">What competitors' users complain about (2026-10-09) · answers PictureThis, RHS Grow, Goblin.tools, Veglog</div></td>
+<td><div class="t">Say what is Free before setup, and open on the person's own things</div><div class="how">No offer screen on opening the app or a tab; what is Free and what is paid is said in the store listing and before the first question of setup, never after it. Sources: complaints/garden.md, home.md. Decided 2026-10-09: yes. Built 1.0.68.5: the Free line sits at the top of the first interview question while it is unanswered and nowhere else (FREE_BEFORE_SETUP in lib/yourStoryInterview.ts); the store listing half waits for the listing.</div><div class="meta">What competitors' users complain about (2026-10-09) · answers PictureThis, RHS Grow, Goblin.tools, Veglog</div></td>
 <td class="tabs">All</td>
 <td><span class="ship ask">Your decision</span></td>
 <td class="size">S</td>
@@ -1755,9 +1762,9 @@ nav.toc a{color:var(--accent)}
 <td><span class="ship ota">Over the air</span></td>
 <td class="size">M</td>
 </tr>
-<tr data-tabs="Home|Profile" data-text="the first week, for someone with no condition and no patience design day one, day two and day seven for someone who came to run their day and tracks no condition, before more areas are added: c18 (one clear next thing), simple view, a first screen the second audience recognises, the interview offering "i'm here for my day, not a condition", and a short list of what the app does by itself versus what it needs. ahead of new areas, by recommendation. notion: https://app.notion.com/p/3f153652f2728187b6c8c529c4fee8b0 (your question)">
+<tr data-tabs="Home|Profile" data-text="the first week, for someone with no condition and no patience design day one, day two and day seven for someone who came to run their day and tracks no condition, before more areas are added: c18 (one clear next thing), simple view, a first screen the second audience recognises, the interview offering "i'm here for my day, not a condition", and a short list of what the app does by itself versus what it needs. ahead of new areas, by recommendation. built 1.0.68.5: the your guide interview offers "i'm here for my day, not a condition" on the conditions question and asks how much home should show; simple view (profile, how the app looks) keeps home to today, the one next thing, capture, waiting answers and your guide, with a band to show everything; the one next thing card has a line on days one, two and seven (lib/firstweek.ts, first_day in app_meta, scripts/test_first_week.js); the your guide page lists what lifestead does by itself and what it needs. notion: https://app.notion.com/p/3f153652f2728187b6c8c529c4fee8b0 (your question)">
 <td class="id">P1</td>
-<td><div class="t">The first week, for someone with no condition and no patience</div><div class="how">Design day one, day two and day seven for someone who came to run their day and tracks no condition, before more areas are added: C18 (one clear next thing), Simple View, a first screen the second audience recognises, the interview offering "I'm here for my day, not a condition", and a short list of what the app does by itself versus what it needs. Ahead of new areas, by recommendation. Notion: https://app.notion.com/p/3f153652f2728187b6c8c529c4fee8b0</div><div class="meta">Brainstorm review 2026-10-06 · answers (your question)</div></td>
+<td><div class="t">The first week, for someone with no condition and no patience</div><div class="how">Design day one, day two and day seven for someone who came to run their day and tracks no condition, before more areas are added: C18 (one clear next thing), Simple View, a first screen the second audience recognises, the interview offering "I'm here for my day, not a condition", and a short list of what the app does by itself versus what it needs. Ahead of new areas, by recommendation. Built 1.0.68.5: the Your Guide interview offers "I'm here for my day, not a condition" on the conditions question and asks how much Home should show; Simple View (Profile, How the App Looks) keeps Home to Today, the one next thing, Capture, waiting answers and Your Guide, with a band to show everything; the One Next Thing card has a line on days one, two and seven (lib/firstWeek.ts, first_day in app_meta, scripts/test_first_week.js); the Your Guide page lists what Lifestead does by itself and what it needs. Notion: https://app.notion.com/p/3f153652f2728187b6c8c529c4fee8b0</div><div class="meta">Brainstorm review 2026-10-06 · answers (your question)</div></td>
 <td class="tabs">Home<br>Profile</td>
 <td><span class="ship ota">Over the air</span></td>
 <td class="size">L</td>

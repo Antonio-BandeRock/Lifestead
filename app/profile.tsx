@@ -440,6 +440,7 @@ const ALL_CARD_SECTION_KEYS = [
   // How the App Looks
   'appearance',
   'home-screen',
+  'simple-view',
   'low-stimulation',
   'playful-wording',
   'routine-timer',
@@ -683,6 +684,7 @@ const PROFILE_CARD_GROUP: Record<CardSectionKey, string> = {
   'garden-details': 'Growing Your Own',
   appearance: 'How the App Looks',
   'home-screen': 'How the App Looks',
+  'simple-view': 'How the App Looks',
   'low-stimulation': 'How the App Looks',
   'playful-wording': 'How the App Looks',
   'routine-timer': 'How the App Looks',
@@ -718,6 +720,7 @@ const PROFILE_CARD_ICONS: Record<CardSectionKey, ComponentProps<typeof Ionicons>
   'meal-plan': 'calendar-outline',
   'nutrient-targets': 'nutrition-outline',
   'garden-details': 'map-outline',
+  'simple-view': 'remove-circle-outline',
   'low-stimulation': 'moon-outline',
   'playful-wording': 'happy-outline',
   'routine-timer': 'timer-outline',
@@ -5220,6 +5223,37 @@ export default function ProfileScreen() {
           the instant this goes off. Fold state is the one exception and is
           written once, at switch-on: an override there would hold every
           section shut with no way to read anything. */}
+      {/* Simple View, P1 (1.0.68.5): Home keeps to four cards. Each card's
+          own switch under Home Screen is left as it was, so turning this
+          off brings back exactly what was there. */}
+      <View style={styles.card}>
+        {renderCardHeader('simple-view', 'Simple View')}
+        {!collapsedSections.has('simple-view') ? (
+          <View style={styles.cardBody}>
+            <Text style={styles.helpText}>
+              Home shows today&apos;s greeting, the one next thing, Capture and anything waiting for an answer, and nothing
+              else. Every tab is still in the menu, and the cards you had switched on come back when this goes off.
+            </Text>
+            <View style={styles.pillRow}>
+              {[false, true].map((value) => {
+                const active = visualPrefs.simpleView === value;
+                return (
+                  <TouchableOpacity
+                    key={value ? 'on' : 'off'}
+                    style={[styles.pill, active && styles.pillActive]}
+                    onPress={() => {
+                      void setVisualPreferences({ simpleView: value });
+                    }}
+                  >
+                    <Text style={[styles.pillText, active && styles.pillTextActive]}>{value ? 'On' : 'Off'}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </View>
+        ) : null}
+      </View>
+
       <View style={styles.card}>
         {renderCardHeader('low-stimulation', 'Low Stimulation')}
         {!collapsedSections.has('low-stimulation') ? (

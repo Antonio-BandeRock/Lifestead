@@ -746,6 +746,11 @@ export type VisualPreferences = {
   // neurodivergent profile offers to turn it off (plainWording in
   // lib/neuroProfile.ts).
   playfulWording: boolean;
+  // Simple View, P1 (1.0.68.5): Home keeps to SIMPLE_VIEW_SECTIONS below,
+  // whatever else is switched on, and every other card comes back as it
+  // was the moment it goes off. Offered in the Your Guide questions and
+  // switched in Profile; read through isShownOnHome, never directly.
+  simpleView: boolean;
 };
 
 // Which background a given scope actually draws, once low stimulation has
@@ -811,6 +816,26 @@ export function isHomeSectionVisible(prefs: VisualPreferences, key: HomeSectionK
 // individually toggleable"; Profile and the arranging list both leave the
 // switch off these rather than offering one that does nothing.
 export const HOME_SECTIONS_ALWAYS_SHOWN: ReadonlySet<HomeSectionKey> = new Set<HomeSectionKey>(['yourStory']);
+
+// Simple View, P1 (1.0.68.5). Four cards, chosen for someone who came to
+// run their day: the greeting, the one next thing, Capture, and reminders
+// waiting for an answer. Your Guide stays too, since it is never hidden
+// (HOME_SECTIONS_ALWAYS_SHOWN).
+export const SIMPLE_VIEW_SECTIONS: ReadonlySet<HomeSectionKey> = new Set<HomeSectionKey>([
+  'today',
+  'nextThing',
+  'captureInbox',
+  'waitingAnswers',
+  'yourStory',
+]);
+
+// Whether Home draws a card at all: Simple View first, then the card's own
+// switch. Profile's switches still read isHomeSectionVisible, so turning
+// Simple View off finds every choice where it was left.
+export function isShownOnHome(prefs: VisualPreferences, key: HomeSectionKey): boolean {
+  if (prefs.simpleView && !SIMPLE_VIEW_SECTIONS.has(key)) return false;
+  return isHomeSectionVisible(prefs, key);
+}
 
 // The same contract for a whole group. See homeGroupVisibility above for
 // why a group carries its own switch rather than writing through to the
@@ -928,6 +953,7 @@ const DEFAULT_VISUAL_PREFERENCES: VisualPreferences = {
   developerNotesPreview: true,
   trendsCycleShading: false,
   playfulWording: true,
+  simpleView: false,
 };
 
 const VISUAL_PREFERENCES_KEY = 'visual_preferences';

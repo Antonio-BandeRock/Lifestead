@@ -36,15 +36,24 @@ import { bringYourStoryItemBack, setYourStoryItemAside } from '../lib/yourStoryD
 import {
   ADD_MEDS_LABEL,
   ALL_TABS_LABEL,
+  BY_ITSELF,
+  BY_ITSELF_HEADING,
   CHANGE_LABEL,
   COMMON_ALLERGENS,
   DONE_LABEL,
   EATING_STYLES,
+  FREE_BEFORE_SETUP,
+  FREE_BEFORE_SETUP_HEADING,
+  FULL_HOME_LABEL,
+  HERE_FOR_MY_DAY,
+  HERE_FOR_MY_DAY_LABEL,
   INTERVIEW_ANSWERED_HEADING,
   INTERVIEW_FINISHED_LINE,
   INTERVIEW_HEADING,
   INTERVIEW_LEAD,
   LEAVE_OUT_LABEL,
+  NEEDS_FROM_YOU,
+  NEEDS_FROM_YOU_HEADING,
   NEURO_PROFILE_NOTE,
   NONE_OF_THESE_LABEL,
   NOT_NOW_LABEL,
@@ -58,7 +67,9 @@ import {
   SECURITY_APP_LOCK_LABEL,
   SECURITY_BOTH_LABEL,
   SECURITY_VAULT_LABEL,
+  SIMPLE_VIEW_LABEL,
   START_ALL,
+  showsFreeLine,
   TAKE_NOTHING_LABEL,
   TOUR_TABS,
   type InterviewQuestionView,
@@ -210,6 +221,10 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
               {facts.conditions.length > 0
                 ? link(DONE_LABEL, () => finishMulti(question, facts.conditions.length))
                 : link(NONE_OF_THESE_LABEL, () => finishMulti(question, 0))}
+              {/* P1, 1.0.68.5: the way in that needs no condition. */}
+              {facts.conditions.length > 0
+                ? null
+                : link(HERE_FOR_MY_DAY_LABEL, () => void act(() => setYourStoryAnswer(key, HERE_FOR_MY_DAY), null))}
             </View>
           </>
         );
@@ -261,6 +276,20 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
               pill(tab.title, chosen === tab.path, () => void act(() => setYourStoryAnswer('startTab', tab.path), null), tab.path),
             )}
             {pill(ALL_TABS_LABEL, chosen === START_ALL, () => void act(() => setYourStoryAnswer('startTab', START_ALL), null))}
+          </View>
+        );
+      }
+      case 'homeView': {
+        const chosen = facts.answers.homeView?.answer ?? null;
+        const choose = (value: 'simple' | 'full') =>
+          void act(async () => {
+            await setVisualPreferences({ simpleView: value === 'simple' });
+            await setYourStoryAnswer('homeView', value);
+          }, null);
+        return (
+          <View style={styles.pills}>
+            {pill(SIMPLE_VIEW_LABEL, chosen === 'simple', () => choose('simple'))}
+            {pill(FULL_HOME_LABEL, chosen === 'full', () => choose('full'))}
           </View>
         );
       }
@@ -462,9 +491,21 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
     }
   }
 
+  // U3: what is Free, said once, before the first question and never after.
+  function renderFreeLine() {
+    if (!interview || !showsFreeLine(interview)) return null;
+    return (
+      <View style={styles.freeLine}>
+        <Text style={styles.subheading}>{FREE_BEFORE_SETUP_HEADING}</Text>
+        <Text style={styles.caption}>{FREE_BEFORE_SETUP}</Text>
+      </View>
+    );
+  }
+
   function renderOpen(question: InterviewQuestionView, bandStyle: ViewStyle = styles.bandOpen) {
     return (
       <View style={[styles.band, bandStyle]}>
+        {question.def.kind === 'conditions' ? renderFreeLine() : null}
         <Text style={styles.question}>{question.question}</Text>
         <Text style={styles.why}>{question.def.why}</Text>
         {renderChoices(question)}
@@ -507,6 +548,18 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
         </View>
       ) : null}
       {open ? renderOpen(open) : null}
+      {interview.finished && !holding ? (
+        <View style={styles.band}>
+          <Text style={styles.subheading}>{BY_ITSELF_HEADING}</Text>
+          {BY_ITSELF.map((line) => (
+            <Text key={line} style={styles.caption}>{`• ${line}`}</Text>
+          ))}
+          <Text style={styles.subheading}>{NEEDS_FROM_YOU_HEADING}</Text>
+          {NEEDS_FROM_YOU.map((line) => (
+            <Text key={line} style={styles.caption}>{`• ${line}`}</Text>
+          ))}
+        </View>
+      ) : null}
     </View>
   );
 }
@@ -533,6 +586,13 @@ const styles = StyleSheet.create({
   why: { ...typography.body, color: colors.textSecondary, ...textShadow },
   caption: { ...typography.caption, color: colors.textSecondary, ...textShadow, flexShrink: 1 },
   error: { ...typography.caption, color: colors.statusYellowStandalone, ...textShadow },
+  freeLine: {
+    gap: 4,
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+    backgroundColor: colors.surface,
+  },
   pills: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, backgroundColor: colors.surface },
   pill: {
     flexDirection: 'row',
