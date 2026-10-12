@@ -14,6 +14,8 @@ import { isDesktopApp } from '../lib/desktop/bridge';
 import { KeyboardLiftProvider, KeyboardLiftReleaser, KeyboardLiftView } from '../components/KeyboardLift';
 import { DatabaseSetupScreen } from '../components/DatabaseSetupScreen';
 import { FirstLaunchAgreement } from '../components/FirstLaunchAgreement';
+import { FirstSetup } from '../components/FirstSetup';
+import { GuidedTourHost } from '../components/GuidedTourHost';
 import { GardenPlateOfferHost } from '../components/GardenPlateOfferHost';
 import { StartupFailureScreen } from '../components/StartupFailureScreen';
 import { OverlayProvider, OverlayRoot } from '../components/OverlayContext';
@@ -959,6 +961,9 @@ function UnlockedApp() {
               {/* Walk me through it (1.0.51.10): the strip that stays on
                   top of every screen while one guide step is being done. */}
               <StoryWalkHost />
+              {/* The guided tour after setup (1.0.68.11): one thing to do
+                  now, lib/guidedTour.ts. */}
+              <GuidedTourHost />
               <GardenPlateOfferHost />
               {/* Always say why (1.0.60.16): the reason a button cannot do
                   its job yet, lib/notYet.ts. */}
@@ -967,6 +972,10 @@ function UnlockedApp() {
                   model downloads, lib/desktop/speechModel.ts. */}
               <DesktopSpeechHost />
               <UnlockSummaryHost />
+              {/* Setup before the app (1.0.68.11): over everything above, so
+                  it covers the tour strip, and ahead of OverlayRoot and
+                  AppKeyboard, so a picker and the keyboard draw over it. */}
+              <FirstSetup />
               {/* Before AppKeyboard, deliberately -- see OverlayContext.tsx's own
                   comment: the keyboard must always paint on top of an open
                   dropdown's backdrop/menu, never the other way around. */}

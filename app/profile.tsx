@@ -839,12 +839,16 @@ export default function ProfileScreen() {
   // Also opened straight onto App Lock (1.0.63.14) by the Your Story
   // question about keeping records closed, where the vault is chosen.
   const appLockCardY = useRef<number | null>(null);
+  // And onto Backup & Restore (1.0.68.11) by the setup before the app.
+  const backupCardY = useRef<number | null>(null);
   useEffect(() => {
     const target =
       openSection === 'reminders'
         ? { group: 'Your Health', section: 'reminders' as const, y: remindersCardY }
         : openSection === 'applock'
           ? { group: 'Device & Account', section: 'applock' as const, y: appLockCardY }
+          : openSection === 'backup'
+            ? { group: 'Device & Account', section: 'backup' as const, y: backupCardY }
           : openSection === 'updates'
             ? { group: 'Device & Account', section: 'app-updates' as const, y: appUpdatesCardY }
             : null;
@@ -5476,7 +5480,7 @@ export default function ProfileScreen() {
           boundary named directly in the card's own text too: this backs up
           the data, not the actual photo files a saved dish/recipe photo
           may reference. */}
-      <View style={styles.card}>
+      <View style={styles.card} onLayout={(event) => (backupCardY.current = event.nativeEvent.layout.y)}>
         {renderCardHeader('backup', 'Backup & Restore')}
         {!collapsedSections.has('backup') ? (
           <View style={styles.cardBody}>

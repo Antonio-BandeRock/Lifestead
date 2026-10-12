@@ -185,6 +185,33 @@ export const INTERVIEW_LEAD =
 export const INTERVIEW_ANSWERED_HEADING = 'What you told Lifestead';
 export const INTERVIEW_FINISHED_LINE = 'Every question has an answer. Tap Change on any of them if something is different now.';
 export const NEXT_QUESTION_LABEL = 'Next question:';
+// Shown above the next question once one is answered (1.0.68.11, direct
+// report: the answer "just goes away ... it happens so fast you don't
+// actually realize it"), so what was answered stays in view with Change.
+export const JUST_ANSWERED_LABEL = 'You answered';
+
+// SETUP BEFORE THE APP (1.0.68.11). Direct request: "we need to have a truly
+// guided setup that happens before the rest of the app is loaded for them."
+// The same questions, one to a screen, over the whole app until each has an
+// answer (components/FirstSetup.tsx). A question that needs another screen
+// (My Meds, Backup & Restore, App Lock) opens it and comes back, and each
+// of those can be answered Later instead, which puts it first in the tour
+// that follows (lib/guidedTour.ts). Finish Later lets the person in at any
+// point, and setup comes back at the next start on the first open question.
+export const LATER = 'later';
+export const LATER_LABEL = 'Later';
+export const LATER_SUMMARY = 'Later. It comes first in the tour.';
+export const SETUP_HEADING = 'Setting up Lifestead';
+export const SETUP_LEAD =
+  'A few questions before the app opens, one at a time, so it works for you from the start. Every answer can be changed later in Your Guide.';
+export const SETUP_BACK_LABEL = 'Back';
+export const SETUP_FINISH_LATER_LABEL = 'Finish Later';
+export const SETUP_FINISH_LATER_LINE = 'Setup comes back the next time Lifestead opens, at the first question without an answer.';
+export const SETUP_RETURN_LABEL = 'Back to Setup';
+export const SETUP_DONE_HEADING = 'Setup is done';
+export const SETUP_DONE_LINE =
+  'A strip at the top of the screen now names one thing to do at a time, in the order that makes the app useful soonest, with Go there to take you to it. Hide it whenever you like; Your Guide on Home brings it back.';
+export const SETUP_OPEN_APP_LABEL = 'Open Lifestead';
 
 // U3 of the competitive build plan, decided 2026-10-09: what is Free is said
 // before the first question of setup, never after it, and nowhere else is an
@@ -1205,6 +1232,7 @@ function viewQuestion(def: InterviewQuestionDef, facts: InterviewFacts): Intervi
       const settled = itemSettled(facts, 'meds');
       if (settled === 'done') return { ...base, answered: true, summary: 'On record in My Meds.' };
       if (settled === 'setAside') return { ...base, answered: true, summary: 'You take nothing for now.' };
+      if (answer?.answer === LATER) return { ...base, answered: true, summary: LATER_SUMMARY };
       return { ...base, answered: false, summary: null };
     }
     case 'eatingStyle':
@@ -1221,12 +1249,12 @@ function viewQuestion(def: InterviewQuestionDef, facts: InterviewFacts): Intervi
     }
     case 'backup': {
       if (itemSettled(facts, 'backup') === 'done') return { ...base, answered: true, summary: 'Backed up.' };
-      return { ...base, answered: !!answer, summary: answer ? 'Not yet.' : null };
+      return { ...base, answered: !!answer, summary: answer ? (answer.answer === LATER ? LATER_SUMMARY : 'Not yet.') : null };
     }
     case 'security': {
       const summary = securitySummary(facts);
       if (summary) return { ...base, answered: true, summary };
-      return { ...base, answered: !!answer, summary: answer ? 'Not yet.' : null };
+      return { ...base, answered: !!answer, summary: answer ? (answer.answer === LATER ? LATER_SUMMARY : 'Not yet.') : null };
     }
     case 'stage':
       // Stage questions are built one per condition in buildInterview.

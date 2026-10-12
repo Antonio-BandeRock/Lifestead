@@ -7,6 +7,7 @@
 // stages, eating styles and allergies in their own tables through lib/db.ts,
 // the parts of life in user_beats, and medicines in treatments. Nothing
 // here stores "done".
+import { sortByLabel } from './choiceOrder';
 import { buildYourStory, dayKey } from './yourStory';
 import type { YourStoryView } from './yourStory';
 import { buildGuides } from './yourStoryGuides';
@@ -90,7 +91,13 @@ export async function loadYourStoryEverything(withGuides = true): Promise<YourSt
   ]);
   const conditionNames: Record<string, string> = {};
   for (const condition of allConditions) conditionNames[condition.code] = condition.name;
-  const conditionChoices = allConditions.filter((condition) => condition.status !== 'planned').map((condition) => condition.code);
+  // Alphabetical by name (1.0.68.11, direct instruction: "they should be in
+  // alphabetical order"), the way every chooser list of names reads.
+  const conditionChoices = sortByLabel(
+    allConditions
+      .filter((condition) => condition.status !== 'planned')
+      .map((condition) => ({ code: condition.code, label: condition.name })),
+  ).map((condition) => condition.code);
   const stagedConditions: InterviewFacts['stagedConditions'] = [];
   for (const code of conditions) {
     const model = getConditionStagingModel(code);

@@ -633,6 +633,35 @@ const back = load('lib/storyReturn.ts');
   same(startAll.startPath, null, 'all of them leaves no single start');
   check(startAll.questions.find((q) => q.key === 'startTab').answered, 'and still answers the question');
 
+  // The guided tour after setup (lib/guidedTour.ts, 1.0.68.11).
+  const tour = load('lib/guidedTour.ts', { './yourStoryInterview': interview });
+  const later = { on: '2026-10-12', answer: interview.LATER };
+  const putOff = interview.buildInterview(
+    interviewFacts(fresh, { answers: { meds: later, backup: later, startTab: { on: '2026-10-12', answer: '/life' } } }),
+  );
+  check(putOff.questions.find((q) => q.key === 'meds').answered, 'Later answers the meds question');
+  same(putOff.questions.find((q) => q.key === 'meds').summary, interview.LATER_SUMMARY, 'and says it comes first in the tour');
+  const stops = tour.guidedTourStops(putOff);
+  same(stops.slice(0, 2).map((stop) => stop.key), ['later:meds', 'later:backup'], 'what was left until Later is walked first');
+  check(stops.length > 2 && stops[2].key.startsWith('tour:/life:'), 'then the chosen tab');
+  check(!stops.slice(2).some((stop) => stop.doThis === stops[0].doThis), 'My Meds is walked once');
+  same(new Set(stops.map((stop) => stop.key)).size, stops.length, 'every stop is walked once');
+  check(stops.every((stop) => stop.doThis && stop.why && stop.destination), 'every stop says what, why and where');
+  same(tour.currentTourStop(putOff), null, 'no strip while setup has questions left');
+  same(tour.tourShowing(putOff), 'off', 'the strip is off until setup starts it');
+  const passed = interview.buildInterview(
+    interviewFacts(fresh, {
+      answers: { meds: later, backup: later, [`${tour.TOUR_PASSED_PREFIX}later:meds`]: { on: '2026-10-12', answer: 'passed' } },
+    }),
+  );
+  same(tour.guidedTourStops(passed)[0].key, 'later:backup', 'a passed stop stays passed');
+  const finishedOn = { ...putOff, finished: true, facts: { ...putOff.facts, answers: { ...putOff.facts.answers, guidedTour: { on: '2026-10-12', answer: 'on' } } } };
+  same(tour.currentTourStop(finishedOn).key, 'later:meds', 'once setup is done the strip names the first stop');
+  same(tour.offersTourBack(finishedOn), false, 'and Your Guide does not offer it back while it shows');
+  const finishedHidden = { ...finishedOn, facts: { ...finishedOn.facts, answers: { ...finishedOn.facts.answers, guidedTour: { on: '2026-10-12', answer: 'hidden' } } } };
+  same(tour.currentTourStop(finishedHidden), null, 'a hidden strip draws nothing');
+  same(tour.offersTourBack(finishedHidden), true, 'and Your Guide offers it back');
+
   // A chosen start tab is where the by-tab guide says to start.
   same(tabs.buildTabGuide(everything, '/garden').startHere.def.path, '/garden', 'the tab guide starts where the person said');
   same(tabs.buildTabGuide(everything, null).startHere.def.path, '/life', 'and falls back to its own order otherwise');

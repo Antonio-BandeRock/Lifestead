@@ -26,7 +26,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import { useRouter, type Href } from 'expo-router';
-import { useCallback, useRef, useState, type ComponentProps } from 'react';
+import { useCallback, useEffect, useRef, useState, type ComponentProps } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, type StyleProp, type ViewStyle } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
@@ -46,6 +46,8 @@ import {
 import { bringYourStoryItemBack, setYourStoryItemAside } from '../lib/yourStoryDb';
 import { loadYourStoryEverything } from '../lib/yourStoryInterviewDb';
 import type { InterviewView } from '../lib/yourStoryInterview';
+import { TOUR_BRING_BACK_LABEL, offersTourBack, subscribeTourChanged } from '../lib/guidedTour';
+import { showGuidedTour } from '../lib/guidedTourDb';
 import { currentGuideKey, guideCardLine, openGuideLabel, type GuideView } from '../lib/yourStoryGuides';
 import {
   BEFORE_ANYTHING_CAPTION,
@@ -151,6 +153,10 @@ type Props = {
 export function YourStorySection({ mode, view, guides, interview, onChanged, onHomeDestination }: Props) {
   const router = useRouter();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
+  // Hide on the tour strip offers the strip back here at once.
+  const changedRef = useRef(onChanged);
+  changedRef.current = onChanged;
+  useEffect(() => subscribeTourChanged(() => changedRef.current()), []);
   // Which item has its part-of-life chooser open in place.
   const [beatsOpen, setBeatsOpen] = useState(false);
   // On the full page, sections opened by hand beyond the current one.
@@ -372,9 +378,26 @@ export function YourStorySection({ mode, view, guides, interview, onChanged, onH
     );
   }
 
+  // The guided tour's strip, hidden or never started, brought back
+  // (1.0.68.11). Only offered while something is left for it to name.
+  function renderTourBack() {
+    if (!interview || !offersTourBack(interview)) return null;
+    return (
+      <TouchableOpacity
+        style={styles.action}
+        onPress={() => void showGuidedTour()}
+        accessibilityRole="button"
+      >
+        <Ionicons name="footsteps-outline" size={14} color={colors.primary} style={textShadow} />
+        <Text style={styles.actionText}>{TOUR_BRING_BACK_LABEL}</Text>
+      </TouchableOpacity>
+    );
+  }
+
   if (mode === 'card') {
     return (
       <View style={styles.cardBody}>
+        {renderTourBack()}
         {interview && !interview.finished ? (
           <YourStoryInterview mode="card" interview={interview} onChanged={onChanged} go={goElsewhere} />
         ) : (
@@ -405,6 +428,7 @@ export function YourStorySection({ mode, view, guides, interview, onChanged, onH
 
   return (
     <View style={styles.page}>
+      {interview && offersTourBack(interview) ? <View style={styles.sectionCard}>{renderTourBack()}</View> : null}
       {view.current !== 'frontPage' ? renderFollowing([styles.sectionCard, styles.followingRow]) : null}
       {view.sections.map((section) => {
         const isCurrent = section.def.key === view.current;

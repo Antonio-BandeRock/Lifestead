@@ -7,13 +7,24 @@
 //         question being asked, open.
 //   card  the question being asked, open, for the Home card. Nothing once
 //         every question has an answer.
+//   setup the question being asked, one to a screen, for the setup before
+//         the app (components/FirstSetup.tsx), with Back to the one before.
+//
+// 1.0.68.11, direct request: the choices "a little smaller and not in pill
+// form and laid out more cleanly. I like the way the menu for the quick
+// access choices look. Do them that way." So every list of choices is a
+// panel of pressed-in wells, the quick access menu's look
+// (components/QuickAccessButton.tsx), a filled circle marking what is
+// chosen. Once a question is answered, the card and setup say what was
+// answered, with Change, above the next question, since the answer used to
+// vanish too fast to notice.
 //
 // A question where several things can be chosen (conditions, parts of life,
 // eating styles, allergies) stays open while choices are made, until Done,
 // since the first tap would otherwise answer it and move on.
 import { Ionicons } from '@expo/vector-icons';
-import { useCallback, useEffect, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, type ViewStyle } from 'react-native';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
+import { Pressable, StyleSheet, Text, TouchableOpacity, View, type ViewStyle } from 'react-native';
 import { AppTextInput } from './AppTextInput';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
@@ -51,6 +62,9 @@ import {
   INTERVIEW_FINISHED_LINE,
   INTERVIEW_HEADING,
   INTERVIEW_LEAD,
+  JUST_ANSWERED_LABEL,
+  LATER,
+  LATER_LABEL,
   LEAVE_OUT_LABEL,
   NEEDS_FROM_YOU,
   NEEDS_FROM_YOU_HEADING,
@@ -64,6 +78,7 @@ import {
   PLAN_THIS_WAY_LABEL,
   READ_MORE_LABEL,
   SET_UP_BACKUP_LABEL,
+  SETUP_BACK_LABEL,
   SECURITY_APP_LOCK_LABEL,
   SECURITY_BOTH_LABEL,
   SECURITY_VAULT_LABEL,
@@ -86,10 +101,12 @@ import { VAULT_DEFAULT_CATEGORIES } from '../lib/vault';
 import { answerVaultSetupNotNow, setVaultCategories } from '../lib/vaultSession';
 
 type Props = {
-  mode: 'card' | 'page';
+  mode: 'card' | 'page' | 'setup';
   interview: InterviewView | null;
   onChanged: () => void;
   go: (destination: Exclude<StoryDestination, { kind: 'beats' }>) => void;
+  // Told which question is showing, so setup can scroll back to the top.
+  onQuestionShown?: (key: string | null) => void;
 };
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -108,6 +125,12 @@ function validBirthDate(year: number, month: number, day: number): boolean {
 }
 
 const profileRoute: Exclude<StoryDestination, { kind: 'beats' }> = { kind: 'route', pathname: '/profile' };
+// Profile opened at Backup & Restore.
+const backupRoute: Exclude<StoryDestination, { kind: 'beats' }> = {
+  kind: 'route',
+  pathname: '/profile',
+  params: { section: 'backup' },
+};
 // Profile opened at App Lock, where the vault's choices and code are.
 const appLockProfileRoute: Exclude<StoryDestination, { kind: 'beats' }> = {
   kind: 'route',
@@ -121,7 +144,7 @@ const myMedsRoute: Exclude<StoryDestination, { kind: 'beats' }> = {
   params: { openLifeLens: 'myMeds' },
 };
 
-export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
+export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionShown }: Props) {
   // The question held open while choices are being made, or reopened with
   // Change. Null means the next unanswered one.
   const [holding, setHolding] = useState<string | null>(null);
@@ -135,6 +158,14 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
 
   const openKey = holding ?? interview?.next?.key ?? null;
   const open = interview?.questions.find((question) => question.key === openKey) ?? null;
+  // The question answered last, said above the next one with Change.
+  const [justAnswered, setJustAnswered] = useState<string | null>(null);
+  const openKeyRef = useRef(openKey);
+  openKeyRef.current = openKey;
+
+  useEffect(() => {
+    onQuestionShown?.(openKey);
+  }, [openKey, onQuestionShown]);
 
   useEffect(() => {
     if (open?.def.kind !== 'aboutYou') return;
@@ -161,6 +192,7 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
       } catch (error) {
         console.warn('Your Story interview answer failed', error);
       }
+      if (keepOpen === null && openKeyRef.current) setJustAnswered(openKeyRef.current);
       setHolding(keepOpen);
       onChanged();
     },
@@ -168,22 +200,36 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
   );
 
   if (!interview) return null;
-  if (mode === 'card' && !open) return null;
+  if ((mode === 'card' || mode === 'setup') && !open) return null;
   const facts = interview.facts;
 
-  function pill(label: string, on: boolean, onPress: () => void, key?: string) {
+  // One choice in a pressed-in well, the quick access menu's look, with a
+  // caption under the name when the choice needs one.
+  function well(label: string, on: boolean, onPress: () => void, key?: string, caption?: string, style?: ViewStyle) {
     return (
-      <TouchableOpacity
+      <Pressable
         key={key ?? label}
-        style={[styles.pill, on && styles.pillOn]}
         onPress={onPress}
         accessibilityRole="button"
         accessibilityState={{ selected: on }}
+        style={({ pressed }) => [styles.well, caption ? styles.wellWide : null, style, pressed ? styles.wellPressed : null]}
       >
-        {on ? <Ionicons name="checkmark" size={14} color={colors.textOnPrimary} /> : null}
-        <Text style={on ? styles.pillTextOn : styles.pillText}>{label}</Text>
-      </TouchableOpacity>
+        <Ionicons
+          name={on ? 'checkmark-circle' : 'ellipse-outline'}
+          size={20}
+          color={on ? colors.primary : colors.textSecondary}
+          style={textShadow}
+        />
+        <View style={styles.wellText}>
+          <Text style={styles.wellLabel}>{label}</Text>
+          {caption ? <Text style={styles.caption}>{caption}</Text> : null}
+        </View>
+      </Pressable>
     );
+  }
+
+  function panel(children: ReactNode) {
+    return <View style={styles.panel}>{children}</View>;
   }
 
   function link(label: string, onPress: () => void, muted = false) {
@@ -207,16 +253,16 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
       case 'conditions':
         return (
           <>
-            <View style={styles.pills}>
-              {facts.conditionChoices.map((code) =>
-                pill(
+            {panel(
+              facts.conditionChoices.map((code) =>
+                well(
                   facts.conditionNames[code] ?? code,
                   facts.conditions.includes(code),
                   () => void act(() => setUserConditionSelected(code, !facts.conditions.includes(code)), key),
                   code,
                 ),
-              )}
-            </View>
+              ),
+            )}
             <View style={styles.links}>
               {facts.conditions.length > 0
                 ? link(DONE_LABEL, () => finishMulti(question, facts.conditions.length))
@@ -231,19 +277,18 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
       case 'neuro':
         return (
           <>
-            <View style={styles.choiceList}>
-              {ALL_NEURO_PROFILE_KEYS.map((profileKey: NeuroProfileKey) => {
+            {panel(
+              ALL_NEURO_PROFILE_KEYS.map((profileKey: NeuroProfileKey) => {
                 const on = facts.neuro.includes(profileKey);
-                return (
-                  <View key={profileKey} style={styles.choiceRow}>
-                    {pill(NEURO_PROFILE_LABELS[profileKey], on, () =>
-                      void act(() => (on ? removeNeuroProfile(profileKey) : addNeuroProfile(profileKey)), key),
-                    )}
-                    <Text style={styles.caption}>{NEURO_PROFILE_CAPTIONS[profileKey]}</Text>
-                  </View>
+                return well(
+                  NEURO_PROFILE_LABELS[profileKey],
+                  on,
+                  () => void act(() => (on ? removeNeuroProfile(profileKey) : addNeuroProfile(profileKey)), key),
+                  profileKey,
+                  NEURO_PROFILE_CAPTIONS[profileKey],
                 );
-              })}
-            </View>
+              }),
+            )}
             <Text style={styles.caption}>{NEURO_PROFILE_NOTE}</Text>
             {/* 2026-10-03, direct request: "If the user tells the app from the
                 start they have a neurodivergent mind, we can offer to be more
@@ -252,10 +297,10 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
             {facts.neuro.length > 0 ? (
               <>
                 <Text style={styles.caption}>{wording('plainWordingOffer', playful)}</Text>
-                <View style={styles.pills}>
-                  {pill('Plain wording', !playful, () => void setVisualPreferences({ playfulWording: false }), 'plain-wording')}
-                  {pill('Keep the jokes', playful, () => void setVisualPreferences({ playfulWording: true }), 'keep-jokes')}
-                </View>
+                {panel([
+                  well('Keep the jokes', playful, () => void setVisualPreferences({ playfulWording: true }), 'keep-jokes'),
+                  well('Plain wording', !playful, () => void setVisualPreferences({ playfulWording: false }), 'plain-wording'),
+                ])}
               </>
             ) : null}
             <View style={styles.links}>
@@ -271,12 +316,14 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
       case 'startTab': {
         const chosen = facts.answers.startTab?.answer ?? null;
         return (
-          <View style={styles.pills}>
-            {TOUR_TABS.map((tab) =>
-              pill(tab.title, chosen === tab.path, () => void act(() => setYourStoryAnswer('startTab', tab.path), null), tab.path),
-            )}
-            {pill(ALL_TABS_LABEL, chosen === START_ALL, () => void act(() => setYourStoryAnswer('startTab', START_ALL), null))}
-          </View>
+          panel([
+            ...[...TOUR_TABS]
+              .sort((a, b) => a.title.localeCompare(b.title))
+              .map((tab) =>
+                well(tab.title, chosen === tab.path, () => void act(() => setYourStoryAnswer('startTab', tab.path), null), tab.path),
+              ),
+            well(ALL_TABS_LABEL, chosen === START_ALL, () => void act(() => setYourStoryAnswer('startTab', START_ALL), null)),
+          ])
         );
       }
       case 'homeView': {
@@ -287,10 +334,10 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
             await setYourStoryAnswer('homeView', value);
           }, null);
         return (
-          <View style={styles.pills}>
-            {pill(SIMPLE_VIEW_LABEL, chosen === 'simple', () => choose('simple'))}
-            {pill(FULL_HOME_LABEL, chosen === 'full', () => choose('full'))}
-          </View>
+          panel([
+            well(SIMPLE_VIEW_LABEL, chosen === 'simple', () => choose('simple')),
+            well(FULL_HOME_LABEL, chosen === 'full', () => choose('full')),
+          ])
         );
       }
       case 'meds': {
@@ -304,6 +351,7 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
             {setAside
               ? null
               : link(TAKE_NOTHING_LABEL, () => void act(() => setYourStoryItemAside('meds'), null), true)}
+            {mode === 'setup' ? link(LATER_LABEL, () => void act(() => setYourStoryAnswer('meds', LATER), null), true) : null}
           </View>
         );
       }
@@ -315,19 +363,21 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
         return (
           <>
             <Text style={styles.caption}>{`${model.frameworkName}. ${model.frameworkNote}`}</Text>
-            <View style={styles.choiceList}>
-              {model.stages.map((stage) => (
-                <View key={stage.code} style={styles.choiceRow}>
-                  {pill(stage.label, current === stage.code, () =>
+            {panel(
+              model.stages.map((stage) =>
+                well(
+                  stage.label,
+                  current === stage.code,
+                  () =>
                     void act(async () => {
                       await setConditionStage(code, stage.code);
                       await clearYourStoryAnswer(key);
                     }, null),
-                  )}
-                  <Text style={styles.caption}>{stage.shortDescription}</Text>
-                </View>
-              ))}
-            </View>
+                  stage.code,
+                  stage.shortDescription,
+                ),
+              ),
+            )}
             <View style={styles.links}>
               {link(
                 NOT_SURE_LABEL,
@@ -353,8 +403,13 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
                     <Text style={styles.styleName}>{style.tag}</Text>
                     <Text style={styles.caption}>{style.line}</Text>
                     <View style={styles.links}>
-                      {pill(on ? 'Chosen' : PLAN_THIS_WAY_LABEL, on, () =>
-                        void act(() => setDietPreferenceSelected(style.tag, !on), key),
+                      {well(
+                        on ? 'Chosen' : PLAN_THIS_WAY_LABEL,
+                        on,
+                        () => void act(() => setDietPreferenceSelected(style.tag, !on), key),
+                        undefined,
+                        undefined,
+                        styles.wellInline,
                       )}
                       {link(READ_MORE_LABEL, () => {
                         const target = routeForDigestEntry(style.readId);
@@ -376,13 +431,14 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
         const others = facts.allergies.filter((name) => !COMMON_ALLERGENS.includes(name));
         return (
           <>
-            <View style={styles.pills}>
-              {COMMON_ALLERGENS.map((name) => {
-                const on = facts.allergies.includes(name);
-                return pill(name, on, () => void act(() => (on ? removeFoodAllergy(name) : addFoodAllergy(name)), key));
-              })}
-              {others.map((name) => pill(name, true, () => void act(() => removeFoodAllergy(name), key)))}
-            </View>
+            {panel(
+              [...COMMON_ALLERGENS, ...others]
+                .sort((a, b) => a.localeCompare(b))
+                .map((name) => {
+                  const on = facts.allergies.includes(name);
+                  return well(name, on, () => void act(() => (on ? removeFoodAllergy(name) : addFoodAllergy(name)), key), name);
+                }),
+            )}
             <View style={styles.addRow}>
               <AppTextInput
                 style={styles.input}
@@ -424,10 +480,10 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
         };
         return (
           <>
-            <View style={styles.pills}>
-              {pill('Female', sex === 'female', () => setSex('female'))}
-              {pill('Male', sex === 'male', () => setSex('male'))}
-            </View>
+            {panel([
+              well('Female', sex === 'female', () => setSex('female')),
+              well('Male', sex === 'male', () => setSex('male')),
+            ])}
             <View style={styles.dateRow}>
               <PopoverSelect options={YEARS} selected={year} onSelect={setYear} tabColor={colors.primary} placeholder="Year" searchable />
               <PopoverSelect options={MONTHS} selected={month} onSelect={setMonth} tabColor={colors.primary} placeholder="Month" />
@@ -446,9 +502,11 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
           <View style={styles.links}>
             {link(SET_UP_BACKUP_LABEL, () => {
               setHolding(null);
-              go(profileRoute);
+              go(backupRoute);
             })}
-            {link(NOT_NOW_LABEL, () => void act(() => setYourStoryAnswer('backup', 'notNow'), null), true)}
+            {mode === 'setup'
+              ? link(LATER_LABEL, () => void act(() => setYourStoryAnswer('backup', LATER), null), true)
+              : link(NOT_NOW_LABEL, () => void act(() => setYourStoryAnswer('backup', 'notNow'), null), true)}
           </View>
         );
       case 'security': {
@@ -477,11 +535,11 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
               go(appLockProfileRoute);
             })}
             {link(
-              NOT_NOW_LABEL,
+              mode === 'setup' ? LATER_LABEL : NOT_NOW_LABEL,
               () =>
                 void act(async () => {
                   answerVaultSetupNotNow();
-                  await setYourStoryAnswer('security', 'notNow');
+                  await setYourStoryAnswer('security', mode === 'setup' ? LATER : 'notNow');
                 }, null),
               true,
             )}
@@ -521,8 +579,54 @@ export function YourStoryInterview({ mode, interview, onChanged, go }: Props) {
   // and below the question "shouldn't be there anymore", and any line that
   // separates it uses the same dark line the other areas use. So no accent
   // on the left and the dark divider top and bottom.
+  // What was answered last, with Change, above the next question.
+  function renderJustAnswered(bandStyle: ViewStyle) {
+    const last = justAnswered ? interview?.questions.find((question) => question.key === justAnswered) : null;
+    if (!last || !last.answered || last.key === openKey) return null;
+    return (
+      <View style={[styles.band, bandStyle, styles.answeredRow]}>
+        <Ionicons name="checkmark-circle" size={16} color={colors.primary} style={textShadow} />
+        <View style={styles.answeredText}>
+          <Text style={styles.caption}>{`${JUST_ANSWERED_LABEL}: ${last.question}`}</Text>
+          <Text style={styles.answeredQuestion}>{last.summary ?? DONE_LABEL}</Text>
+        </View>
+        {link(CHANGE_LABEL, () => setHolding(last.key))}
+      </View>
+    );
+  }
+
+  // The question before the one showing, for Back in setup.
+  function previousKey(): string | null {
+    if (!interview) return null;
+    const at = interview.questions.findIndex((question) => question.key === openKey);
+    return at > 0 ? interview.questions[at - 1].key : null;
+  }
+
   if (mode === 'card') {
-    return open ? <View style={styles.cardWrap}>{renderOpen(open, styles.bandInCard)}</View> : null;
+    return open ? (
+      <View style={styles.cardWrap}>
+        {renderJustAnswered(styles.bandInCard)}
+        {renderOpen(open, styles.bandInCard)}
+      </View>
+    ) : null;
+  }
+
+  if (mode === 'setup') {
+    const back = previousKey();
+    return open ? (
+      <View style={styles.page}>
+        {renderJustAnswered(styles.bandPlain)}
+        {renderOpen(open)}
+        {back ? (
+          <View style={[styles.band, styles.links]}>
+            <TouchableOpacity style={styles.link} onPress={() => setHolding(back)} accessibilityRole="button">
+              <Ionicons name="arrow-back" size={13} color={colors.primary} style={textShadow} />
+              <Text style={styles.linkText}>{SETUP_BACK_LABEL}</Text>
+            </TouchableOpacity>
+          </View>
+        ) : null}
+      </View>
+    ) : null;
   }
 
   const answered = interview.questions.filter((question) => question.answered && question.key !== openKey);
@@ -593,27 +697,45 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
     backgroundColor: colors.surface,
   },
-  pills: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, backgroundColor: colors.surface },
-  pill: {
+  bandPlain: {},
+  // The quick access menu's panel and wells (components/QuickAccessButton.tsx),
+  // one column on a phone and as many as fit on a wider window.
+  panel: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 4,
+    padding: 8,
+    borderRadius: 14,
+    borderWidth: 2,
+    borderColor: colors.border,
+    backgroundColor: colors.menuSurface,
+  },
+  well: {
+    flexGrow: 1,
+    flexBasis: 220,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 4,
-    paddingHorizontal: 12,
+    gap: 12,
     paddingVertical: 6,
-    borderRadius: 16,
+    paddingHorizontal: 14,
+    borderRadius: 10,
+    backgroundColor: 'rgba(0,0,0,0.38)',
     borderWidth: 1,
-    borderColor: colors.primary,
-    backgroundColor: colors.surface,
+    borderTopColor: 'rgba(0,0,0,0.6)',
+    borderLeftColor: 'rgba(0,0,0,0.45)',
+    borderRightColor: 'rgba(255,255,255,0.08)',
+    borderBottomColor: 'rgba(255,255,255,0.18)',
   },
-  pillOn: { backgroundColor: colors.primary },
-  pillText: { ...typography.caption, color: colors.textPrimary, ...textShadow },
-  pillTextOn: { ...typography.caption, color: colors.textOnPrimary, textShadowColor: 'transparent', textShadowRadius: 0 },
+  wellWide: { flexBasis: '100%', alignItems: 'flex-start' },
+  wellInline: { flexGrow: 0, flexBasis: 'auto' },
+  wellPressed: { backgroundColor: 'rgba(0,0,0,0.55)' },
+  wellText: { flex: 1, gap: 2 },
+  wellLabel: { ...typography.body, color: colors.textPrimary, ...textShadow },
   links: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 16, backgroundColor: colors.surface },
   link: { flexDirection: 'row', alignItems: 'center', gap: 4, paddingVertical: 2 },
   linkText: { ...typography.caption, color: colors.primary, ...textShadow },
   linkMuted: { ...typography.caption, color: colors.textMuted, ...textShadow },
   choiceList: { gap: 10, backgroundColor: colors.surface },
-  choiceRow: { gap: 4, backgroundColor: colors.surface },
   styleRow: { gap: 4, backgroundColor: colors.surface },
   styleName: { ...typography.label, color: colors.textPrimary, ...textShadow },
   addRow: { backgroundColor: colors.surface },
