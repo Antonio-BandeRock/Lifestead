@@ -31,6 +31,7 @@ import { isDesktopApp } from './desktop/bridge';
 import * as disk from './desktop/cloudFolder';
 import { forgetAccessToken, getAccessToken } from './oneDriveAuth';
 import { ONEDRIVE_BUSY_LEAD } from './passingTrouble';
+import { FileInWords, fileInWords, fileNamesInWords } from './fileInWords';
 
 const GRAPH = 'https://graph.microsoft.com/v1.0';
 
@@ -99,7 +100,8 @@ type GraphChild = {
  * "generalException") says nothing to a person, so it goes in brackets after
  * a sentence that does.
  */
-export function graphErrorSentence(status: number, message: string | null): string {
+export function graphErrorSentence(status: number, rawMessage: string | null): string {
+  const message = rawMessage === null ? null : fileNamesInWords(rawMessage);
   const bare = !message || !/\s/.test(message.trim());
   if (status === 401) {
     return (
@@ -473,7 +475,7 @@ export async function uploadFile(
   if (isDesktopApp()) return disk.uploadFile(folder, fileName, localUri);
   const { File } = await import('expo-file-system');
   const file = new File(localUri);
-  if (!file.exists) return { ok: false, reason: fileName + ' is not on this device.' };
+  if (!file.exists) return { ok: false, reason: FileInWords(fileName) + ' is not on this device.' };
   const size = file.size ?? 0;
   const address =
     GRAPH + '/drives/' + folder.driveId + '/items/' + folder.itemId + ':/' + encodeURIComponent(fileName) + ':';
@@ -509,7 +511,7 @@ export async function uploadFile(
   );
   if (!session.ok) return session;
   const uploadUrl = (session.value as { uploadUrl?: string }).uploadUrl;
-  if (!uploadUrl) return { ok: false, reason: 'OneDrive did not say where to send ' + fileName + '.' };
+  if (!uploadUrl) return { ok: false, reason: 'OneDrive did not say where to send ' + fileInWords(fileName) + '.' };
 
   const handle = file.open();
   try {
@@ -550,7 +552,7 @@ export async function downloadToFile(
   );
   if (!meta.ok) return meta;
   const url = (meta.value as { '@microsoft.graph.downloadUrl'?: string })['@microsoft.graph.downloadUrl'];
-  if (!url) return { ok: false, reason: 'OneDrive did not offer ' + fileName + ' for download.' };
+  if (!url) return { ok: false, reason: 'OneDrive did not offer ' + fileInWords(fileName) + ' for download.' };
   try {
     const { File } = await import('expo-file-system');
     const dest = new File(destUri);
@@ -558,7 +560,7 @@ export async function downloadToFile(
     await File.downloadFileAsync(url, dest, { idempotent: true });
     return { ok: true, value: null };
   } catch {
-    return { ok: false, reason: fileName + ' could not be fetched from OneDrive.' };
+    return { ok: false, reason: FileInWords(fileName) + ' could not be fetched from OneDrive.' };
   }
 }
 

@@ -99,7 +99,7 @@ export async function geocodePostalCode(countryCode: string, postalCode: string)
   });
   try {
     const response = await fetch(`https://nominatim.openstreetmap.org/search?${params.toString()}`, {
-      headers: { 'User-Agent': 'InsideStoryApp/1.0 (growing-zone lookup; contact via app)' },
+      headers: { 'User-Agent': 'Lifestead/1.0 (growing-zone lookup; contact via app)' },
     });
     if (!response.ok) return null;
     const results = await response.json();

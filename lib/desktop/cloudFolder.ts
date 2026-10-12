@@ -32,6 +32,7 @@
 
 import { getDesktopBridge } from './bridge';
 import type { DriveFileRef, DriveItemRef, GraphResult } from '../oneDriveGraph';
+import { FileInWords } from '../fileInWords';
 
 /** The driveId of every folder addressed on this computer's disk. */
 export const DISK_DRIVE_ID = 'disk';
@@ -248,18 +249,18 @@ export async function moveFile(from: DriveItemRef, file: DriveFileRef, into: Dri
   return attempt(async () => {
     await bridge().moveFile(from.itemId, file.name, into.itemId);
     return null;
-  }, file.name + ' could not be moved.');
+  }, FileInWords(file.name) + ' could not be moved.');
 }
 
 export async function uploadText(folder: DriveItemRef, fileName: string, text: string): Promise<GraphResult<null>> {
   return attempt(async () => {
     await bridge().writeText(folder.itemId, fileName, text);
     return null;
-  }, fileName + ' could not be written into ' + folder.name + '.');
+  }, FileInWords(fileName) + ' could not be written into ' + folder.name + '.');
 }
 
 export async function downloadText(folder: DriveItemRef, fileName: string): Promise<GraphResult<string>> {
-  return attempt(() => bridge().readText(folder.itemId, fileName), fileName + ' could not be read.');
+  return attempt(() => bridge().readText(folder.itemId, fileName), FileInWords(fileName) + ' could not be read.');
 }
 
 const OLD_INSTALLER = 'This needs the newest desktop installer. Install it, then try again.';
@@ -271,21 +272,21 @@ export async function uploadFile(folder: DriveItemRef, fileName: string, localUr
   return attempt(async () => {
     await copyIn(folder.itemId, fileName, localUri);
     return null;
-  }, fileName + ' could not be copied into ' + folder.name + '.');
+  }, FileInWords(fileName) + ' could not be copied into ' + folder.name + '.');
 }
 
 /** A file's bytes, read straight from the folder on this disk. */
 export async function readFileBytes(folder: DriveItemRef, fileName: string): Promise<GraphResult<Uint8Array>> {
   const read = bridge().readBytes;
   if (!read) return { ok: false, reason: OLD_INSTALLER };
-  return attempt(async () => new Uint8Array(await read(folder.itemId, fileName)), fileName + ' could not be read.');
+  return attempt(async () => new Uint8Array(await read(folder.itemId, fileName)), FileInWords(fileName) + ' could not be read.');
 }
 
 export async function deleteFile(folder: DriveItemRef, fileName: string): Promise<GraphResult<null>> {
   return attempt(async () => {
     await bridge().deleteFile(folder.itemId, fileName);
     return null;
-  }, fileName + ' could not be removed.');
+  }, FileInWords(fileName) + ' could not be removed.');
 }
 
 export async function checkFolder(folder: DriveItemRef): Promise<GraphResult<{ name: string; path?: string }>> {
