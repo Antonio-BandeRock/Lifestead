@@ -10,7 +10,8 @@
 // readable again from Profile through app/agreement.tsx. Nothing here
 // imports React or the database, so scripts/test_agreement.js checks it.
 
-export const AGREEMENT_VERSION = 1;
+// 2 since 1.0.68.10: the point about locking the app was added.
+export const AGREEMENT_VERSION = 2;
 export const AGREEMENT_META_KEY = 'agreement_accepted';
 
 export const AGREEMENT_TITLE = 'Before you start';
@@ -44,6 +45,10 @@ export const AGREEMENT_POINTS: readonly AgreementPoint[] = [
   {
     heading: 'Your records stay yours',
     body: 'What you record stays on your device and in a cloud folder you choose. No company server holds your health records.',
+  },
+  {
+    heading: 'Locking it is up to you',
+    body: 'App Lock is there and is off until you turn it on. With it on, your records are locked on the device itself, not only hidden behind the screen, and the vault can keep the categories you choose closed until you open them. Turn them on in Profile, under App Lock. Until you do, anyone who can open this device can read what you have recorded.',
   },
 ];
 

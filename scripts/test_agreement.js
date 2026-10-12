@@ -59,7 +59,8 @@ check('no dashes', !/[–—]| -- | - /.test(all));
 check('no filler words', !/\b(real|genuine|genuinely)\b/i.test(all));
 check('legal links on since X3', A.LEGAL_PAGES_LIVE === true);
 check('legal links end in a slash', A.TERMS_URL.endsWith('/terms/') && A.PRIVACY_URL.endsWith('/privacy/'));
-check('six points', A.AGREEMENT_POINTS.length === 6);
+check('seven points', A.AGREEMENT_POINTS.length === 7);
+check('the last point says locking is up to the person', A.AGREEMENT_POINTS[6].heading === 'Locking it is up to you');
 
 console.log(`${pass}/${pass + fail} passed`);
 process.exit(fail ? 1 : 0);
