@@ -5,10 +5,14 @@ import { Pressable, StyleSheet, View, type TextStyle } from 'react-native';
 import { useActiveField, useActiveInputControls } from './ActiveInputContext';
 import { AppTextInput } from './AppTextInput';
 import { VoiceInputButton } from './VoiceInputButton';
+import { withSideRoom } from './fieldSideRoom';
 import { colors } from '../constants/colors';
 import { useDebouncedValue } from '../hooks/useDebouncedValue';
 import { useNavigationHand } from '../lib/navigationHand';
 import { registerThumbSearch } from '../lib/thumbSearch';
+
+// Room inside the box for the mic and the information mark.
+const ICON_ROOM = 40;
 
 // The app's one search box for a list of entries: a text field with the mic
 // inside it on the hand's own side and an optional information icon pinned to
@@ -129,10 +133,10 @@ export function EntrySearchInput({
           mic sits left today. With no icon, only the mic's side needs it. */}
       <AppTextInput
         voice={false}
-        style={[
-          ...(Array.isArray(style) ? style : [style]),
-          onPressInfo ? styles.searchInputPadBoth : (micOnLeft ? styles.searchInputPadLeft : styles.searchInputPadRight),
-        ]}
+        style={withSideRoom(
+          style,
+          onPressInfo ? { left: ICON_ROOM, right: ICON_ROOM } : micOnLeft ? { left: ICON_ROOM } : { right: ICON_ROOM },
+        )}
         placeholder={placeholder}
         value={localValue}
         onChangeText={handleChangeText}
@@ -200,9 +204,6 @@ const styles = StyleSheet.create({
   // width. All the wrap does is give the absolutely positioned mic and
   // information icons something to anchor to.
   searchInputWrap: { position: 'relative' },
-  searchInputPadBoth: { paddingLeft: 40, paddingRight: 40 },
-  searchInputPadLeft: { paddingLeft: 40 },
-  searchInputPadRight: { paddingRight: 40 },
   // top/bottom rather than centering across the wrap's full height: a
   // caller's field style carries trailing margin below the visible box (the
   // Digest's searchInput has marginBottom: 4), and centering across that gap

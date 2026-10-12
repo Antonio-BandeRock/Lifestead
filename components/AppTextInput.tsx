@@ -3,6 +3,7 @@ import { StyleSheet, TextInput, View, type TextInput as TextInputType, type Text
 import { useActiveInputControls, type AppKeyboardType } from './ActiveInputContext';
 import { useKeyboardLift } from './KeyboardLift';
 import { VoiceInputButton } from './VoiceInputButton';
+import { withSideRoom } from './fieldSideRoom';
 import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
 import { appendDictatedText, parseVoiceCommands } from '../lib/voiceCommandParsing';
 import { useNavigationHand } from '../lib/navigationHand';
@@ -122,6 +123,9 @@ export const AppTextInput = forwardRef<TextInputType, AppTextInputProps>(functio
       delete field[key];
     }
   }
+  // The mic's room is written into the field's style object itself, both
+  // sides spelled out, so it holds on the desktop too (components/fieldSideRoom.ts).
+  const roomed = withSideRoom(field as TextStyle, micOnLeft ? { left: MIC_ROOM } : { right: MIC_ROOM });
 
   function handleResult(transcript: string, isFinal: boolean) {
     if (onVoiceResult) {
@@ -151,7 +155,7 @@ export const AppTextInput = forwardRef<TextInputType, AppTextInputProps>(functio
       <AppTextInputField
         ref={ref}
         {...props}
-        style={[field as TextStyle, micOnLeft ? micStyles.padLeft : micStyles.padRight]}
+        style={roomed}
       />
       <VoiceInputButton
         onResult={handleResult}
@@ -165,8 +169,6 @@ export const AppTextInput = forwardRef<TextInputType, AppTextInputProps>(functio
 
 const micStyles = StyleSheet.create({
   wrap: { position: 'relative' },
-  padLeft: { paddingLeft: MIC_ROOM },
-  padRight: { paddingRight: MIC_ROOM },
   mic: { position: 'absolute' },
   micTop: { top: 8 },
   micMiddle: { top: 0, bottom: 0, justifyContent: 'center' },
