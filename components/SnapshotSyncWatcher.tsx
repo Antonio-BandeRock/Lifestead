@@ -103,7 +103,7 @@ import { withPlayfulTail } from '../lib/playfulCopy';
 import { AppActionSheet } from './AppActionSheet';
 import { useInfoAlert } from './InfoAlert';
 import { decideTrouble } from '../lib/passingTrouble';
-import { setTroubleSince, troubleSince } from '../lib/passingTroubleClock';
+import { setTroubleClock, troubleClock } from '../lib/passingTroubleClock';
 
 type Question = {
   title: string;
@@ -159,8 +159,8 @@ export function SnapshotSyncWatcher() {
     (reason: string) => {
       // Trouble that passes by itself (OneDrive busy, no connection for a
       // moment) waits until it has lasted an hour: lib/passingTrouble.ts.
-      const decision = decideTrouble(troubleSince('sharedFolder'), reason, Date.now());
-      setTroubleSince('sharedFolder', decision.since);
+      const decision = decideTrouble(troubleClock('sharedFolder'), reason, Date.now());
+      setTroubleClock('sharedFolder', decision.clock);
       if (!decision.speak) return;
       if (toldRef.current.has(decision.sentence)) return;
       toldRef.current.add(decision.sentence);
@@ -287,7 +287,7 @@ export function SnapshotSyncWatcher() {
         tellOnce(outcome.reason);
         return;
       }
-      if (outcome.status === 'saved' || outcome.status === 'merge') setTroubleSince('sharedFolder', null);
+      if (outcome.status === 'saved' || outcome.status === 'merge') setTroubleClock('sharedFolder', null);
       if (outcome.status === 'merge' && allowMerge) {
         if (source === 'timer' && declinedRef.current === outcome.record.latest.savedAt) return;
         await mergeRef.current(outcome.record, false);
@@ -352,7 +352,7 @@ export function SnapshotSyncWatcher() {
       if (source !== 'takeover') {
         const read = await readSessionNote();
         if (!read.ok) tellOnce(read.reason);
-        else setTroubleSince('sharedFolder', null);
+        else setTroubleClock('sharedFolder', null);
         noteRef.current = read.ok ? read.value : noteRef.current;
         const plan: SessionPlan = read.ok ? planSession(read.value, mine, Date.now()) : { mode: 'free' };
         if (plan.mode === 'waiting') {
@@ -394,7 +394,7 @@ export function SnapshotSyncWatcher() {
         tellOnce(outcome.reason);
         return;
       }
-      setTroubleSince('sharedFolder', null);
+      setTroubleClock('sharedFolder', null);
       if (!quiet) await doSave('foreground');
     },
     [askAboutArrival, claim, doMerge, doSave, enterWaiting, leaveWaiting, me, tellOnce],

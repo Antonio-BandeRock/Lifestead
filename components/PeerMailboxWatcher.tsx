@@ -47,7 +47,7 @@ import { receiveViaRelay, sendViaRelay } from '../lib/relayMailbox';
 import { isRelayWake } from '../lib/relayWake';
 import { useInfoAlert } from './InfoAlert';
 import { decideTrouble } from '../lib/passingTrouble';
-import { setTroubleSince, troubleSince } from '../lib/passingTroubleClock';
+import { setTroubleClock, troubleClock } from '../lib/passingTroubleClock';
 
 /** How often the folder is checked while the app is open. */
 const EXCHANGE_INTERVAL_MS = 30 * 1000;
@@ -74,12 +74,12 @@ export function PeerMailboxWatcher() {
   const heard = useCallback(
     (status: MailboxStatus) => {
       if (status.state !== 'unreachable') {
-        if (status.state === 'ready') setTroubleSince('mailbox', null);
+        if (status.state === 'ready') setTroubleClock('mailbox', null);
         return;
       }
       // Passing trouble waits an hour before it is said (lib/passingTrouble.ts).
-      const decision = decideTrouble(troubleSince('mailbox'), status.reason, Date.now());
-      setTroubleSince('mailbox', decision.since);
+      const decision = decideTrouble(troubleClock('mailbox'), status.reason, Date.now());
+      setTroubleClock('mailbox', decision.clock);
       if (!decision.speak) return;
       const key = status.folderName + ': ' + decision.sentence;
       if (toldRef.current.has(key)) return;

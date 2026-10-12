@@ -5,51 +5,76 @@
 // deal and only serve to make them wonder what's wrong when nothing is wrong."
 // And for anything else like it: "please make the same change for them."
 //
-// A 503 is Microsoft's server saying it is busy for a moment. Sync tries again
-// by itself and nothing recorded is at risk, so saying so at once only worries
-// somebody. What is worth saying is the same trouble still there an hour later,
-// since by then something may need doing. So a passing kind of trouble starts a
-// clock, and the notice waits until the clock passes PASSING_TROUBLE_HOLD_MS
-// with no success in between. Any success stops the clock.
+// Turned around on 2026-10-12 (1.0.68.2), after the notice came again:
+// "Why is this being shown at all? I thought we had this fixed." Two holes
+// let it through. Only a short list of sentences counted as passing, so any
+// other wording (a copy OneDrive was still uploading from the other device
+// reading as "could not be read", a download that broke off) spoke at once.
+// And the clock counted only time, so one failure as the phone woke, then
+// another an hour later on the next wake, read as an hour of trouble with
+// two failed tries in it.
 //
-// Anything not recognised as passing is said at once, the way it always was:
-// a folder that was moved, a permission never given, a sign-in that is gone.
-// Those need the person, and holding them back an hour would be the bug.
+// So now the short list is the other way round: NEEDS_THE_PERSON names the
+// few things nobody but the person can put right (signed out, the folder
+// gone or refused, the wrong sync password, sync turned off), and those are
+// said at once, the way they always were. Everything else is passing, and is
+// said only once it has lasted PASSING_TROUBLE_HOLD_MS AND failed at least
+// PASSING_TROUBLE_MIN_FAILURES separate times with no success in between. Any success
+// stops the clock.
 //
 // No I/O here, so scripts/test_passing_trouble.js can check it. Where the
 // clock is kept is lib/passingTroubleClock.ts.
 
 export const PASSING_TROUBLE_HOLD_MS = 60 * 60 * 1000;
+export const PASSING_TROUBLE_MIN_FAILURES = 4;
+// Failures closer together than this are one try: a single wake reads the
+// session note, checks for an arrival and saves, and all three fail together.
+export const SEPARATE_TRY_GAP_MS = 2 * 60 * 1000;
 
 // The sentence lib/oneDriveGraph.ts gives a status Microsoft uses for "busy,
-// try later" (408, 429 and the 5xx family). Kept here so the two cannot drift.
+// try later" (408, 429 and the 5xx family).
 export const ONEDRIVE_BUSY_LEAD = 'OneDrive is busy or briefly unavailable';
 
-const PASSING_PATTERNS: readonly RegExp[] = [
-  new RegExp('^' + ONEDRIVE_BUSY_LEAD),
-  // No connection, or Microsoft not answering: OneDrive and the sign-in both.
-  /could not be reached\. Check the connection/,
-  // A refused sign-in that lib/oneDriveGraph.ts says often clears by itself.
-  /sometimes on Microsoft’s side/,
+const NEEDS_THE_PERSON: readonly RegExp[] = [
+  /Not signed in to OneDrive/i,
+  /sign-in expired/i,
+  /no longer a folder/i,
+  /not found|could not be found/i,
+  /access ?denied|\(403/i,
+  /not the password sync was turned on with/i,
+  /no OneDrive application id/i,
+  /Sync is off/i,
 ];
 
-export function isPassingTrouble(reason: string): boolean {
-  return PASSING_PATTERNS.some((pattern) => pattern.test(reason));
+export function needsThePerson(reason: string): boolean {
+  return NEEDS_THE_PERSON.some((pattern) => pattern.test(reason));
 }
 
+export function isPassingTrouble(reason: string): boolean {
+  return !needsThePerson(reason);
+}
+
+/** When the current run of passing trouble began, how many separate tries have failed in it, and when the last one did. */
+export type TroubleClock = { since: number; count: number; last: number };
+
 export type TroubleDecision =
-  | { speak: false; since: number }
-  | { speak: true; since: number | null; sentence: string };
+  | { speak: false; clock: TroubleClock }
+  | { speak: true; clock: TroubleClock | null; sentence: string };
 
 /**
- * What to do with one failure. `since` is when the current run of passing
- * trouble began, or null when there is none. The answer carries the `since`
- * to keep: a passing failure keeps or starts the clock, any other failure
- * leaves it as it was.
+ * What to do with one failure. A passing failure keeps or starts the clock
+ * and adds one to its count; any other failure leaves it as it was.
  */
-export function decideTrouble(since: number | null, reason: string, now: number): TroubleDecision {
-  if (!isPassingTrouble(reason)) return { speak: true, since, sentence: reason };
-  const began = since ?? now;
-  if (now - began < PASSING_TROUBLE_HOLD_MS) return { speak: false, since: began };
-  return { speak: true, since: began, sentence: 'This has been going on for more than an hour. ' + reason };
+export function decideTrouble(clock: TroubleClock | null, reason: string, now: number): TroubleDecision {
+  if (needsThePerson(reason)) return { speak: true, clock, sentence: reason };
+  const separate = !clock || now - clock.last >= SEPARATE_TRY_GAP_MS;
+  const next: TroubleClock = {
+    since: clock?.since ?? now,
+    count: (clock?.count ?? 0) + (separate ? 1 : 0),
+    last: now,
+  };
+  if (now - next.since < PASSING_TROUBLE_HOLD_MS || next.count < PASSING_TROUBLE_MIN_FAILURES) {
+    return { speak: false, clock: next };
+  }
+  return { speak: true, clock: next, sentence: 'This has been going on for more than an hour. ' + reason };
 }
