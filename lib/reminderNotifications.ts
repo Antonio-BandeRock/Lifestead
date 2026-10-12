@@ -43,6 +43,8 @@ import { addFlareNote, addFlareTag, mostLoggedFlareTags, setFlareSeverity } from
 import { contributorLabel, contributorsToAsk, NOT_SURE_CONTRIBUTOR, offeredContributors } from './flareContext';
 import { addFlareContributor, contributorUseCounts, readPersonMarks } from './flareContextDb';
 import LockedCapture from '../modules/locked-capture';
+import { getAlertChoices, alertChoiceFor } from './alertChoices';
+import { type AlertChoice, isDefaultAlert, KIND_CHANNEL_PREFIX, kindChannelId, toneFor, vibrationFor } from './alertTones';
 import {
   checkinTimeOf,
   morningTimeOf,
@@ -55,6 +57,7 @@ import {
   getReminderPreferences,
   isNudgeUntilDoneEnabled,
   isReminderKindEnabled,
+  REMINDER_KIND_LABELS,
   type ReminderKindKey,
 } from './reminderPreferences';
 import {
@@ -733,7 +736,7 @@ async function queueOneNow(planned: PlannedNotification | null): Promise<boolean
         title: worded.title,
         body: worded.body,
         data: { ...worded.payload, ...androidGroupFor(worded.payload.kind), ...wordsFlagFor(worded.payload.kind) },
-        sound: true,
+        sound: soundFor(worded.payload.kind),
         categoryIdentifier: categoryIdFor(worded),
       },
       trigger: {
@@ -1282,6 +1285,49 @@ async function ensureAndroidChannels(): Promise<void> {
     lightColor: '#244147',
   });
   await Notifications.deleteNotificationChannelAsync(ANDROID_ANSWER_CHANNEL_ID).catch(() => undefined);
+  await ensureKindChannels();
+}
+
+// One channel for each kind the person gave a sound or vibration of its own
+// in Profile. Android fixes a channel's sound and buzz when it is made, so
+// the choice is part of the id and a new choice makes a new channel; the
+// importance stays that of the kind's group, so a dose is still as loud as
+// before and a bill still as quiet.
+async function ensureKindChannels(): Promise<void> {
+  const choices = getAlertChoices();
+  const wanted = new Set<string>();
+  for (const [kind, choice] of Object.entries(choices) as [ReminderKind, AlertChoice][]) {
+    if (isDefaultAlert(choice)) continue;
+    const id = kindChannelId(kind, choice);
+    wanted.add(id);
+    const group = groupChannelFor(kind);
+    const tone = toneFor(choice.sound);
+    const buzz = vibrationFor(choice.vibration);
+    const groupPattern = group === ANDROID_CHANNEL_ID ? [0, 250, 250, 250] : [0, 180];
+    await Notifications.setNotificationChannelAsync(id, {
+      name: REMINDER_KIND_LABELS[kind] ?? kind,
+      description: 'The sound and vibration picked for this kind of reminder in Profile.',
+      importance: group === ANDROID_CHANNEL_ID ? Notifications.AndroidImportance.HIGH : Notifications.AndroidImportance.DEFAULT,
+      sound: tone.key === 'silent' ? null : tone.file || 'default',
+      enableVibrate: buzz.key !== 'none',
+      vibrationPattern: buzz.key === 'none' ? null : buzz.key === 'default' ? groupPattern : buzz.pattern,
+      lightColor: '#244147',
+    });
+  }
+  // A channel from an earlier choice goes once nothing still waiting is
+  // queued on it; a reminder already set keeps its sound until it fires.
+  try {
+    const channels = await Notifications.getNotificationChannelsAsync();
+    const stale = channels.filter((channel) => channel.id.startsWith(KIND_CHANNEL_PREFIX) && !wanted.has(channel.id));
+    if (stale.length === 0) return;
+    const pending = await Notifications.getAllScheduledNotificationsAsync();
+    const inUse = new Set(pending.map((request) => (request.trigger as { channelId?: string } | null)?.channelId).filter(Boolean));
+    for (const channel of stale) {
+      if (!inUse.has(channel.id)) await Notifications.deleteNotificationChannelAsync(channel.id).catch(() => undefined);
+    }
+  } catch {
+    // Left for the next pass.
+  }
 }
 
 // Today's moment for a routine that speaks today, whether or not it has
@@ -1293,7 +1339,23 @@ function todaysRoutineMoment(routine: Routine, now: Date): Date | null {
   return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minute, 0, 0);
 }
 
+// The channel a kind posts to: its own when the person picked a sound or
+// vibration for it in Profile (lib/alertChoices.ts), otherwise its group's.
 function channelFor(kind: ReminderKind): string {
+  const choice = alertChoiceFor(kind);
+  return choice && !isDefaultAlert(choice) ? kindChannelId(kind, choice) : groupChannelFor(kind);
+}
+
+// iOS has no channels, so the sound rides on each notification.
+function soundFor(kind: string): boolean | string {
+  const choice = alertChoiceFor(kind as ReminderKind);
+  if (!choice) return true;
+  const tone = toneFor(choice.sound);
+  if (tone.key === 'silent') return false;
+  return tone.file || true;
+}
+
+function groupChannelFor(kind: ReminderKind): string {
   if (
     kind === 'bill' ||
     kind === 'upkeep' ||
@@ -1747,7 +1809,7 @@ async function runSync(): Promise<ReminderSyncResult> {
           title: planned.title,
           body: planned.body,
           data: { ...planned.payload, ...androidGroupFor(planned.payload.kind), ...wordsFlagFor(planned.payload.kind) },
-          sound: true,
+          sound: soundFor(planned.payload.kind),
           categoryIdentifier: categoryIdFor(planned),
         },
         trigger: {
@@ -1912,7 +1974,7 @@ async function snoozeReminder(response: Notifications.NotificationResponse): Pro
       title: request.content.title ?? 'Reminder',
       body: request.content.body ?? '',
       data: { ...data, ...androidGroupFor(data.kind ?? ''), fireAt: fireAt.toISOString() },
-      sound: true,
+      sound: data.kind ? soundFor(data.kind) : true,
       categoryIdentifier: request.content.categoryIdentifier ?? REMINDER_CATEGORY,
     },
     trigger: {

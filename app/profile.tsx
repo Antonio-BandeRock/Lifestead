@@ -17,6 +17,7 @@ import { GenericBackground } from '../components/GenericBackground';
 import { HelpButton, type HelpSection } from '../components/HelpButton';
 import { ActiveRingCircle } from '../components/ActiveRingCircle';
 import { PopoverSelect } from '../components/PopoverSelect';
+import { ReminderAlertSettings } from '../components/ReminderAlertSettings';
 import { NUTRIENT_TARGET_FIELDS, WEEKDAY_NAMES, WEEKDAY_ORDER, weekdayValuesFor, type NutrientTargetField, type WeekdayTargetOverride } from '../lib/weekdayTargets';
 import { usePasswordPrompt } from '../components/PasswordPrompt';
 import { useBusyOverlay } from '../components/BusyOverlay';
@@ -427,6 +428,7 @@ const ALL_CARD_SECTION_KEYS = [
   'conditions',
   'general-health',
   'reminders',
+  'reminder-sounds',
   // How You Eat
   'diet-preferences',
   'food-restrictions',
@@ -672,6 +674,7 @@ const PROFILE_CARD_GROUP: Record<CardSectionKey, string> = {
   conditions: 'Your Health',
   'general-health': 'Your Health',
   reminders: 'Your Health',
+  'reminder-sounds': 'Your Health',
   'diet-preferences': 'How You Eat',
   'food-restrictions': 'How You Eat',
   'meal-plan': 'How You Eat',
@@ -708,6 +711,7 @@ const PROFILE_CARD_ICONS: Record<CardSectionKey, ComponentProps<typeof Ionicons>
   conditions: 'medkit-outline',
   'general-health': 'heart-outline',
   reminders: 'notifications-outline',
+  'reminder-sounds': 'musical-notes-outline',
   'diet-preferences': 'leaf-outline',
   'food-restrictions': 'ban-outline',
   'meal-schedule': 'time-outline',
@@ -4210,6 +4214,16 @@ export default function ProfileScreen() {
           </View>
         ) : null}
       </View>
+      {isDesktopApp() ? null : (
+        <View style={styles.card}>
+          {renderCardHeader('reminder-sounds', 'Reminder Sounds & Vibration')}
+          {!collapsedSections.has('reminder-sounds') ? (
+            <View style={styles.cardBody}>
+              <ReminderAlertSettings />
+            </View>
+          ) : null}
+        </View>
+      )}
 
       </View>) : null}
       </View>
