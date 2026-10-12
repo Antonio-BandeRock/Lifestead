@@ -136,10 +136,10 @@ export function DatabaseSetupScreen({
           your food database for the first time" was also just literally
           inaccurate past the very first launch (this screen appears every
           time, per this file's own header comment, just resolving near-
-          instantly on every launch after the first), where "Loading Your
+          instantly on every launch after the first), where "Loading
           Lifestead" reads correctly regardless of which launch this
           is. */}
-      <Text style={styles.message}>Loading Your Lifestead</Text>
+      <Text style={styles.message}>Loading Lifestead</Text>
     </Animated.View>
   );
 }

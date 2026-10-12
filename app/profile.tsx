@@ -44,6 +44,7 @@ import type { DriveItemRef } from '../lib/oneDriveGraph';
 import { downloadText, listFiles, uploadText } from '../lib/oneDriveGraph';
 import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
 import { explainNotYet } from '../lib/notYet';
+import { VoiceControlSetting } from '../components/VoiceControlSetting';
 import { AppLockSettings } from '../components/AppLockSettings';
 import { describeSyncStatus, EMPTY_SYNC_STATE, type SnapshotRecord, type SnapshotSyncState } from '../lib/snapshotSync';
 import {
@@ -448,6 +449,7 @@ const ALL_CARD_SECTION_KEYS = [
   'backup',
   'connections',
   'developer',
+  'voice-control',
   'voice-pack',
   'wake-word',
   'agreement',
@@ -688,6 +690,7 @@ const PROFILE_CARD_GROUP: Record<CardSectionKey, string> = {
   backup: 'Device & Account',
   connections: 'Device & Account',
   developer: 'Device & Account',
+  'voice-control': 'Device & Account',
   'voice-pack': 'Device & Account',
   'wake-word': 'Device & Account',
   agreement: 'Device & Account',
@@ -719,6 +722,7 @@ const PROFILE_CARD_ICONS: Record<CardSectionKey, ComponentProps<typeof Ionicons>
   'app-status': 'pulse-outline',
   agreement: 'document-text-outline',
   'about-ghostead': 'business-outline',
+  'voice-control': 'mic-outline',
   'voice-pack': 'volume-high-outline',
   'wake-word': 'ear-outline',
   connections: 'people-outline',
@@ -6025,6 +6029,19 @@ export default function ProfileScreen() {
                 </Text>
               </TouchableOpacity>
               <VoiceoverRecorder />
+            </View>
+          ) : null}
+        </View>
+      ) : null}
+
+      {/* Voice Control, 2026-10-11: moved out of App Lock by direct request,
+          with the switch for the shade buttons. See components/VoiceControlSetting.tsx. */}
+      {!isDesktopApp() ? (
+        <View style={styles.card}>
+          {renderCardHeader('voice-control', 'Voice Control')}
+          {!collapsedSections.has('voice-control') ? (
+            <View style={styles.cardBody}>
+              <VoiceControlSetting />
             </View>
           ) : null}
         </View>
