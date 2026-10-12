@@ -114,7 +114,9 @@ function standard() {
 // read in handleKey below instead, so that + on the main keyboard (Shift
 // and =), + on the number pad and = all work and none fires twice. A Mac's
 // native menu handles its own accelerators, and there they are registered.
-function buildMenu() {
+// extraItems go at the foot of the View menu (main.js adds Versions Side
+// by Side there, P34).
+function buildMenu(extraItems) {
   const registerAccelerator = process.platform === 'darwin';
   const template = [
     ...(process.platform === 'darwin' ? [{ role: 'appMenu' }] : []),
@@ -131,6 +133,7 @@ function buildMenu() {
         { role: 'toggleDevTools' },
         { type: 'separator' },
         { role: 'togglefullscreen' },
+        ...(extraItems.length > 0 ? [{ type: 'separator' }, ...extraItems] : []),
       ],
     },
     { role: 'windowMenu' },
@@ -159,13 +162,13 @@ function handleKey(event, input) {
  * Called once from main.js: remembers where settings live and which window
  * to zoom, answers the page's IPC, and builds the menu.
  */
-function install(userData, windowGetter) {
+function install(userData, windowGetter, extraItems = []) {
   userDataPath = userData;
   getWindow = windowGetter;
   current = readZoom(userData);
   ipcMain.handle('zoom:get', () => current);
   ipcMain.handle('zoom:set', (_event, factor) => set(factor));
-  buildMenu();
+  buildMenu(extraItems);
 }
 
 /** Wires a new window: the stored factor on every load, and the keys. */

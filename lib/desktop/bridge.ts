@@ -249,7 +249,32 @@ export type DesktopBridge = {
   stationListener?: DesktopStationListenerBridge;
   /** Missing on an installer built before 1.0.66.24. */
   speech?: DesktopSpeechBridge;
+  /** P34: set when this window is one version of the app opened from the
+   *  versions picker (desktop/versions.js), null in the person's own app.
+   *  Missing on an installer built before 1.0.68.9. */
+  versionPreview?: DesktopVersionPreview | null;
+  /** Missing on an installer built before 1.0.68.9. */
+  versions?: { showPicker(): Promise<void> };
 };
+
+/** One version of the app, opened side by side from the versions picker. */
+export type DesktopVersionPreview = {
+  key: string;
+  /** What the bar at the top names it: Free, Individual, First run, ... */
+  label: string;
+  /** The entitlement it runs at, set by the version and not by Profile. */
+  tier: 'free' | 'paid';
+  /** The app version this build carries, 1.0.68.9 and so on. */
+  revision: string | null;
+  /** The revision its records were started on. */
+  startedRevision: string | null;
+};
+
+/** The version this window is, or null in the person's own app and on a phone. */
+export function versionPreview(): DesktopVersionPreview | null {
+  if (typeof window === 'undefined') return null;
+  return window.insideStoryDesktop?.versionPreview ?? null;
+}
 
 export type DesktopSpeechStatus = {
   /** False on a Mac and on any install without the engine. */

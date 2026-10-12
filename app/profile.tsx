@@ -272,7 +272,7 @@ import { wording } from '../lib/playfulCopy';
 import { VoicePackPanel } from '../components/VoicePackPanel';
 import { WakeWordPanel } from '../components/WakeWordPanel';
 import { setNavigationHand, useNavigationHand } from '../lib/navigationHand';
-import { setTier, useTier } from '../lib/entitlement';
+import { setTier, tierSetByVersion, useTier } from '../lib/entitlement';
 import { ThumbEndRow } from '../components/ThumbEndRow';
 import { VaultClosedBand } from '../components/VaultClosedBand';
 import { useOnVaultChange } from '../lib/vaultReads';
@@ -5833,7 +5833,13 @@ export default function ProfileScreen() {
                     <TouchableOpacity
                       key={value}
                       style={[styles.pill, on && styles.pillActive]}
-                      onPress={() => setTier(value)}
+                      onPress={() =>
+                        tierSetByVersion()
+                          ? explainNotYet(
+                              'This window is one version of the app opened from Versions Side by Side, and the version sets whether it is Free or Paid. Open the other version from the picker to see the other side.',
+                            )
+                          : setTier(value)
+                      }
                     >
                       <Text style={[styles.pillText, on && styles.pillTextActive]}>{value === 'free' ? 'Free' : 'Paid'}</Text>
                     </TouchableOpacity>

@@ -35,6 +35,7 @@ const stationListener = require('./stationListener');
 const print = require('./print');
 const hello = require('./hello');
 const speech = require('./speech');
+const versions = require('./versions');
 
 const APP_ID = 'com.insidestoryapp.app';
 const SCHEME = 'app';
@@ -61,7 +62,27 @@ function dataFolder() {
     return before;
   }
 }
-app.setPath('userData', dataFolder());
+// Versions side by side (P34, versions.js): a start with
+// --lifestead-version=<key> is that version of the app with records of its
+// own, and --lifestead-versions is the picker that opens them. Each keeps
+// its folder apart from the person's records, and the single-instance lock,
+// taken per folder, brings an open one forward rather than opening it twice.
+const START = versions.startKind(process.argv);
+if (START.kind === 'version') {
+  app.setPath('userData', versions.folderFor(app.getPath('appData'), START.version.key));
+} else if (START.kind === 'picker') {
+  app.setPath('userData', versions.pickerFolder(app.getPath('appData')));
+} else {
+  app.setPath('userData', dataFolder());
+}
+const SINGLE = START.kind === 'own' || app.requestSingleInstanceLock();
+if (!SINGLE) app.quit();
+app.on('second-instance', () => {
+  const win = BrowserWindow.getAllWindows()[0];
+  if (!win) return;
+  if (win.isMinimized()) win.restore();
+  win.focus();
+});
 
 // A phone-shaped window: the app lays itself out for one column, the
 // popup menus measure the window to place themselves, and this size keeps
@@ -169,6 +190,13 @@ function registerIpc() {
   ipcMain.handle('hello:wrapKey', (_event, keyBase64) => hello.wrapKey(keyBase64));
   ipcMain.handle('hello:unwrapKey', (_event, stored) => hello.unwrapKey(stored));
   ipcMain.handle('hello:remove', () => hello.remove());
+
+  // P34: which version this window is, or null for the person's own app.
+  ipcMain.on('versions:current', (event) => {
+    event.returnValue =
+      START.kind === 'version' ? versions.currentFor(app.getPath('appData'), START.version, versions.revision(WEB_ROOT)) : null;
+  });
+  ipcMain.handle('versions:showPicker', () => versions.openPicker(app));
 
   ipcMain.on('app:version', (event) => {
     event.returnValue = app.getVersion();
@@ -297,12 +325,15 @@ function createWindow() {
   // LIFESTEAD_WINDOW="900x700" opens at that size instead, for checking
   // what a resized window does to the popup menus without dragging one.
   const sizeOverride = /^(\d+)x(\d+)$/.exec(process.env.LIFESTEAD_WINDOW || '');
+  const place = START.kind === 'version' ? versions.boundsFrom(process.argv) : null;
+  const title = START.kind === 'version' ? `Lifestead (${START.version.label})` : 'Lifestead';
   mainWindow = new BrowserWindow({
-    width: sizeOverride ? Number(sizeOverride[1]) : Math.min(DEFAULT_WIDTH, workArea.width),
-    height: sizeOverride ? Number(sizeOverride[2]) : Math.min(DEFAULT_HEIGHT, workArea.height - 24),
+    ...(place ? { x: place.x, y: place.y } : {}),
+    width: place ? place.width : sizeOverride ? Number(sizeOverride[1]) : Math.min(DEFAULT_WIDTH, workArea.width),
+    height: place ? place.height : sizeOverride ? Number(sizeOverride[2]) : Math.min(DEFAULT_HEIGHT, workArea.height - 24),
     minWidth: MIN_WIDTH,
     minHeight: MIN_HEIGHT,
-    title: 'Lifestead',
+    title,
     autoHideMenuBar: true,
     backgroundColor: '#1F2A2C',
     webPreferences: {
@@ -314,6 +345,9 @@ function createWindow() {
     },
   });
   zoom.attach(mainWindow);
+  // A version's window keeps its name rather than taking the page's, so
+  // two side by side can be told apart on the taskbar.
+  if (START.kind === 'version') mainWindow.on('page-title-updated', (event) => event.preventDefault());
 
   // App Lock: the page reloading is how the app locks and restarts, so the
   // key to sealed records goes with the page that held it. Only a new page
@@ -439,10 +473,51 @@ protocol.registerSchemesAsPrivileged([
 
 app.setAppUserModelId(APP_ID);
 
+// The picker (P34): a small page of its own, versions.html, listing every
+// version and opening the ones ticked side by side.
+function createPickerWindow() {
+  const appData = app.getPath('appData');
+  ipcMain.handle('versions:list', () => ({ versions: versions.listFor(appData), revision: versions.revision(WEB_ROOT) }));
+  ipcMain.handle('versions:open', (_event, keys) =>
+    versions.openVersions(app, screen.getPrimaryDisplay().workArea, Array.isArray(keys) ? keys : [], {
+      preferredWidth: DEFAULT_WIDTH,
+      minWidth: MIN_WIDTH,
+    }),
+  );
+  ipcMain.handle('versions:startFresh', (_event, key) => versions.startFresh(appData, key));
+  mainWindow = new BrowserWindow({
+    width: 560,
+    height: 760,
+    title: 'Lifestead Versions',
+    autoHideMenuBar: true,
+    backgroundColor: '#1F2A2C',
+    webPreferences: {
+      preload: path.join(__dirname, 'versionsPreload.js'),
+      contextIsolation: true,
+      sandbox: true,
+      nodeIntegration: false,
+    },
+  });
+  mainWindow.loadFile(path.join(__dirname, 'versions.html'));
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
+}
+
 app.whenReady().then(() => {
+  if (!SINGLE) return;
+  if (START.kind === 'picker') {
+    createPickerWindow();
+    return;
+  }
+  if (START.kind === 'version') {
+    versions.noteStarted(app.getPath('appData'), START.version.key, versions.revision(WEB_ROOT));
+  }
   protocol.handle(SCHEME, serveWebFile);
   registerIpc();
-  zoom.install(app.getPath('userData'), () => mainWindow);
+  zoom.install(app.getPath('userData'), () => mainWindow, [
+    { label: 'Versions Side by Side', click: () => versions.openPicker(app) },
+  ]);
   createWindow();
 
   app.on('activate', () => {

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'" />
+    <title>Lifestead Versions</title>
+    <style>
+      :root {
+        --bg: #1f2a2c;
+        --band: #2a3739;
+        --line: #3c4b4e;
+        --text: #e8efe9;
+        --muted: #a9b8b3;
+        --accent: #7fc8a9;
+        --warn: #e0b46a;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font: 15px/1.45 "Segoe UI", system-ui, sans-serif;
+      }
+      header {
+        padding: 16px;
+        border-left: 4px solid var(--accent);
+        background: var(--band);
+      }
+      h1 { margin: 0; font-size: 19px; font-weight: 500; }
+      header p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+      main { padding: 10px 0 90px; display: grid; gap: 10px; }
+      .version {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 4px 12px;
+        align-items: start;
+        padding: 12px 16px;
+        background: var(--band);
+        border-left: 4px solid var(--accent);
+      }
+      .version.missing { border-left-color: var(--line); }
+      .version input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--accent); }
+      .name { font-size: 16px; }
+      .about { grid-column: 2 / 4; color: var(--muted); font-size: 13px; }
+      .state { grid-column: 2 / 4; color: var(--muted); font-size: 12px; }
+      .missing .about { color: var(--warn); }
+      button {
+        font: inherit;
+        color: var(--text);
+        background: #34464a;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 6px 12px;
+        cursor: pointer;
+      }
+      button:hover { border-color: var(--accent); }
+      footer {
+        position: fixed;
+        left: 0; right: 0; bottom: 0;
+        display: flex; gap: 10px; align-items: center;
+        padding: 12px 16px;
+        background: var(--band);
+        border-top: 1px solid var(--line);
+      }
+      footer .primary { background: #2f5a4a; border-color: var(--accent); }
+      #message { color: var(--muted); font-size: 13px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Lifestead Versions</h1>
+      <p id="revision">Each version is the whole app with its own records, kept apart from yours and from each other.</p>
+    </header>
+    <main id="list"></main>
+    <footer>
+      <button class="primary" id="open">Open Side by Side</button>
+      <span id="message"></span>
+    </footer>
+    <script>
+      const list = document.getElementById('list');
+      const message = document.getElementById('message');
+
+      function say(text) {
+        message.textContent = text;
+      }
+
+      function startedLine(version) {
+        if (!version.started) return 'Not opened yet. It starts at its first run.';
+        const when = new Date(version.started.at).toLocaleString();
+        return 'Started ' + when + (version.started.revision ? ' on revision ' + version.started.revision : '') + '.';
+      }
+
+      async function render() {
+        const { versions, revision } = await window.lifesteadVersions.list();
+        if (revision) {
+          document.getElementById('revision').textContent =
+            'Revision ' + revision + '. Each version is the whole app with its own records, kept apart from yours and from each other.';
+        }
+        list.textContent = '';
+        for (const version of versions) {
+          const row = document.createElement('section');
+          row.className = 'version' + (version.missing ? ' missing' : '');
+
+          const box = document.createElement('input');
+          box.type = 'checkbox';
+          box.value = version.key;
+          box.id = 'v-' + version.key;
+          box.addEventListener('change', () => say(''));
+          if (version.missing) {
+            // Pressable, so it can say why it cannot open (Always say why).
+            box.addEventListener('click', (event) => {
+              event.preventDefault();
+              say(version.label + ' cannot open yet: ' + version.missing);
+            });
+          }
+          row.appendChild(box);
+
+          const name = document.createElement('label');
+          name.className = 'name';
+          name.htmlFor = box.id;
+          name.textContent = version.label + (version.missing ? '' : version.tier === 'free' ? ' (on Free)' : ' (paid)');
+          row.appendChild(name);
+
+          if (!version.missing) {
+            const fresh = document.createElement('button');
+            fresh.textContent = 'Start Fresh';
+            fresh.addEventListener('click', async () => {
+              const result = await window.lifesteadVersions.startFresh(version.key);
+              say(result.ok ? version.label + ' will start at its first run next time it opens.' : result.reason);
+              render();
+            });
+            row.appendChild(fresh);
+          } else {
+            row.appendChild(document.createElement('span'));
+          }
+
+          const about = document.createElement('div');
+          about.className = 'about';
+          about.textContent = version.missing ? 'Not built yet. ' + version.missing : version.about;
+          row.appendChild(about);
+
+          if (!version.missing) {
+            const state = document.createElement('div');
+            state.className = 'state';
+            state.textContent = startedLine(version);
+            row.appendChild(state);
+          }
+          list.appendChild(row);
+        }
+      }
+
+      document.getElementById('open').addEventListener('click', async () => {
+        const keys = Array.from(document.querySelectorAll('input:checked')).map((box) => box.value);
+        if (keys.length === 0) {
+          say('Tick at least one version to open.');
+          return;
+        }
+        const opened = await window.lifesteadVersions.open(keys);
+        say(opened === 1 ? 'Opening 1 version.' : 'Opening ' + opened + ' versions side by side.');
+      });
+
+      render();
+    </script>
+  </body>
+</html>

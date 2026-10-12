@@ -12,6 +12,7 @@
 // What is paid is decided in one place, lib/paidFeatures.ts.
 import { File, Paths } from 'expo-file-system';
 import { useSyncExternalStore } from 'react';
+import { versionPreview } from './desktop/bridge';
 import type { Tier } from './paidFeatures';
 
 const TIER_FILE_NAME = 'developer_tier.txt';
@@ -34,11 +35,18 @@ let current: Tier | null = null;
 const listeners = new Set<() => void>();
 
 export function getTier(): Tier {
-  if (current === null) current = readTier();
+  if (current === null) current = versionPreview()?.tier ?? readTier();
   return current;
 }
 
+/** True when the tier comes from a version opened from the versions picker
+ *  (P34), which the Profile switch then leaves alone. */
+export function tierSetByVersion(): boolean {
+  return versionPreview() !== null;
+}
+
 export function setTier(tier: Tier): void {
+  if (tierSetByVersion()) return;
   if (getTier() === tier) return;
   current = tier;
   try {

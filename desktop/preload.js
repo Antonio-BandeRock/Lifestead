@@ -60,6 +60,11 @@ contextBridge.exposeInMainWorld('insideStoryDesktop', {
   platform: 'desktop',
   appVersion: ipcRenderer.sendSync('app:version'),
   paths: ipcRenderer.sendSync('app:paths'),
+  // P34: which version this window is, or null in the person's own app.
+  versionPreview: ipcRenderer.sendSync('versions:current'),
+  versions: {
+    showPicker: () => ipcRenderer.invoke('versions:showPicker'),
+  },
   sqlite: {
     open: (name) => ipcRenderer.invoke('sqlite:open', name),
     run: (name, sql, params) => ipcRenderer.invoke('sqlite:run', name, sql, params),

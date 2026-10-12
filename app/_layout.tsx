@@ -40,6 +40,7 @@ import { ThumbSearchButton } from '../components/ThumbSearchButton';
 import { FreshAuthHost } from '../components/FreshAuthHost';
 import { WordingEditProvider } from '../components/EditableText';
 import { VersionLabel } from '../components/VersionLabel';
+import { VersionPreviewBar } from '../components/VersionPreviewBar';
 import { colors } from '../constants/colors';
 import { useHomeDataReady } from '../hooks/useHomeDataReady';
 import { getReferenceDatabase, initializeDatabase, settlePastScheduledMeals } from '../lib/db';
@@ -516,6 +517,8 @@ function UnlockedApp() {
                 height. */}
             <KeyboardLiftProvider>
               <KeyboardLiftView style={{ flex: 1 }}>
+              {/* P34: names the version this window is, on the desktop only. */}
+              <VersionPreviewBar />
               <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.background } }}>
                 <Stack.Screen name="(tabs)" />
                 {/* 2026-08-21 -- the native header (with its own back arrow) is

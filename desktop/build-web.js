@@ -33,4 +33,11 @@ if (!fs.existsSync(indexFile)) {
   console.error(`export finished without ${indexFile}`);
   process.exit(1);
 }
+// The revision this build carries, read by versions.js for the versions
+// picker and the bar at the top of each version (P34). The desktop's own
+// package version moves rarely, so the app's version is written beside it.
+const versionSource = fs.readFileSync(path.join(projectRoot, 'constants', 'version.ts'), 'utf8');
+const versionMatch = /APP_VERSION\s*=\s*['"]([^'"]+)['"]/.exec(versionSource);
+if (versionMatch) fs.writeFileSync(path.join(outputDir, 'lifestead-version.txt'), versionMatch[1]);
+
 console.log(`web export ready in ${outputDir}`);
