@@ -61,13 +61,10 @@ const VERSIONS = [
     start: 'fresh',
     about: 'A new person on Free who answers "I\'m here for my day, not a condition" in the interview.',
   },
-  {
-    key: 'partner',
-    label: 'Partner',
-    tier: 'paid',
-    start: 'fresh',
-    missing: 'Partner sharing between two people is not built yet, so a Partner copy would show exactly what Individual shows.',
-  },
+  // No Partner entry, by direct instruction (2026-10-12): Partner is two
+  // people's paid copies on two phones, joined up so the two stay on track
+  // with each other, and each side is Individual. What it adds is the link
+  // between them, which no single copy here can show.
   {
     key: 'household',
     label: 'A Household seat',
