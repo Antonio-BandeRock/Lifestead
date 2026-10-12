@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useRef, useState } from 'react';
-import { Animated, StyleSheet, Text, useWindowDimensions } from 'react-native';
+import { Animated, StyleSheet, Text } from 'react-native';
 import { colors } from '../constants/colors';
 import { FLOATING_BUTTON_BOTTOM_OFFSET, FLOATING_BUTTON_SIZE } from '../constants/floatingButton';
 import { getTabHubIconRenderSize } from '../constants/tabHubIcons';
@@ -66,16 +66,21 @@ const LABEL_WIDTH = 80;
 const MUG_GAP = 6;
 const MUG_SIZE = 26;
 const MUG_SHOWN_MS = 2500;
+// The lowest it may sit. On a phone the safe-area inset keeps the worked-out
+// bottom well above zero, but the desktop window has no inset and the sum came
+// to -4, so the number was cut off along the bottom edge (reported 2026-10-12).
+const LOWEST_BOTTOM = 2;
 
 export function VersionLabel() {
   const insets = useSafeAreaInsets();
-  const { width: windowWidth } = useWindowDimensions();
   const { tabHubIcon } = useVisualPreferences();
   const { width: tabHubIconWidth } = getTabHubIconRenderSize(tabHubIcon);
-  const left = windowWidth / 2 - LABEL_WIDTH / 2;
-  const mugLeft = windowWidth / 2 + tabHubIconWidth / 2 + MUG_GAP;
+  const mugFromCenter = tabHubIconWidth / 2 + MUG_GAP;
   const mugBottom = insets.bottom + FLOATING_BUTTON_BOTTOM_OFFSET + (FLOATING_BUTTON_SIZE - MUG_SIZE) / 2;
-  const bottom = insets.bottom + FLOATING_BUTTON_BOTTOM_OFFSET - GAP_BELOW_BUTTON - LABEL_LINE_HEIGHT - DROP_BELOW_BUTTON;
+  const bottom = Math.max(
+    LOWEST_BOTTOM,
+    insets.bottom + FLOATING_BUTTON_BOTTOM_OFFSET - GAP_BELOW_BUTTON - LABEL_LINE_HEIGHT - DROP_BELOW_BUTTON,
+  );
   const playful = usePlayfulWording();
   const reducedMotion = useReducedMotion();
   const [mugShown, setMugShown] = useState(false);
@@ -108,14 +113,14 @@ export function VersionLabel() {
           pointerEvents="none"
           style={[
             styles.mug,
-            { bottom: mugBottom, left: mugLeft, opacity: pop, transform: [{ scale: pop }] },
+            { bottom: mugBottom, left: '50%', marginLeft: mugFromCenter, opacity: pop, transform: [{ scale: pop }] },
           ]}
         >
           <Ionicons name="cafe-outline" size={MUG_SIZE} color={colors.textSecondary} style={styles.mugIcon} />
         </Animated.View>
       ) : null}
       <Text
-        style={[styles.text, { bottom, left, width: LABEL_WIDTH }]}
+        style={[styles.text, { bottom }]}
         pointerEvents={playful ? 'auto' : 'none'}
         onLongPress={playful ? showMug : undefined}
         allowFontScaling={false}
@@ -133,9 +138,18 @@ const styles = StyleSheet.create({
   // own allowlist so the audit stays meaningful rather than being quietly
   // ignored. Legibility rests on textShadow instead, which is what the hub
   // labels beside it already rely on.
+  // Centered the way TabHub's button is, on its container rather than on a
+  // window width read separately: on the desktop the two were not the same
+  // and the number sat off to one side of the button (2026-10-12). No letter
+  // spacing, which on the desktop adds a space after the last character and
+  // pushes centered text to the left.
   text: {
     position: 'absolute',
+    left: '50%',
+    width: LABEL_WIDTH,
+    marginLeft: -LABEL_WIDTH / 2,
     textAlign: 'center',
+    letterSpacing: 0,
     fontSize: 9,
     lineHeight: LABEL_LINE_HEIGHT,
     color: colors.textMuted,
