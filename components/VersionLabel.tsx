@@ -66,9 +66,10 @@ const LABEL_WIDTH = 80;
 const MUG_GAP = 6;
 const MUG_SIZE = 26;
 const MUG_SHOWN_MS = 2500;
-// The lowest it may sit. On a phone the safe-area inset keeps the worked-out
-// bottom well above zero, but the desktop window has no inset and the sum came
-// to -4, so the number was cut off along the bottom edge (reported 2026-10-12).
+// The lowest it may sit, so it is never cut off by the window's edge. The
+// desktop's room under the well comes from FLOATING_BUTTON_BOTTOM_OFFSET
+// (constants/floatingButton.ts), which lifts the button and this number
+// together; this floor only guards a phone reporting no inset at all.
 const LOWEST_BOTTOM = 2;
 
 export function VersionLabel() {

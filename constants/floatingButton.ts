@@ -70,7 +70,16 @@ const BASE_BOTTOM_MARGIN = 16;
 // with the same "icons and both hub popup textboxes move down with it"
 // expectation as the -5 above. Same mechanism, same reasoning, smaller
 // amount.
-export const FLOATING_BUTTON_BOTTOM_OFFSET = Math.max(0, BASE_BOTTOM_MARGIN - 20) - 4 + 20 + 15 - 5 - 3;
+//
+// On the desktop the row sits 8 higher. A phone's bottom inset lifts the
+// button and the version number under it together, so the number clears the
+// TabHub well; a desktop window has no inset, which left the number either
+// below the window's edge or, once held inside it, drawn over the well
+// (2026-10-12). The 8 is that missing inset, so every hub, menu and footer
+// reading this constant moves up together and keeps the phone's spacing.
+const DESKTOP_BOTTOM_ROOM = 8;
+export const FLOATING_BUTTON_BOTTOM_OFFSET =
+  Math.max(0, BASE_BOTTOM_MARGIN - 20) - 4 + 20 + 15 - 5 - 3 + (isDesktopApp() ? DESKTOP_BOTTOM_ROOM : 0);
 
 // The footer band's own height (image bottom edge / bottomMask / footer
 // line, see ScreenBackground.tsx) -- the flat margin above the button's
