@@ -62,8 +62,8 @@ export const HOME_GROUP_IDENTITY: Record<string, HomeGroupIdentity> = {
     textColor: colors.tabReports,
   },
   '/digest': {
-    title: 'Digest',
-    icon: 'newspaper',
+    title: 'Library',
+    icon: 'library',
     color: colors.tabPurpleDigest,
   },
 };

@@ -525,7 +525,7 @@ export const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
   gardenTasks: 'Garden Tasks',
   daysUntil: 'Days Until in the Garden',
   logHarvest: 'Log a Harvest',
-  digestCards: 'Digest Cards',
+  digestCards: 'Library Cards',
   routines: 'Routines',
   doneChecks: 'Did I Do It',
   countdowns: 'Days Until',

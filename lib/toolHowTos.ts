@@ -2429,7 +2429,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       key: 'readCards',
       title: 'Read something short from Home',
       steps: [
-        { say: 'Open the band with the name of Digest, if it is closed.', mark: 'homeGroup.digest', stay: true },
+        { say: 'Open the band with the name of Library, if it is closed.', mark: 'homeGroup.digest', stay: true },
         { say: 'Swipe along the cards and tap one to turn it over.', mark: 'home.readCards', stay: true },
         { say: 'Tap Read more on the back to open the whole entry where it lives.' },
       ],

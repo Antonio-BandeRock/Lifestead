@@ -1056,8 +1056,8 @@ const HOME_LENS_DESTINATIONS: Partial<
   // (see constants/homeGroups.ts). Each card below still wears the colour
   // and icon of the tab its entry lives on.
   digestCards: {
-    label: 'Digest',
-    icon: 'newspaper',
+    label: 'Library',
+    icon: 'library',
     color: colors.tabPurpleDigest,
     scrollTo: true,
   },
@@ -3566,7 +3566,7 @@ export default function HomeScreen() {
             <FlipCard
               key={card.groupKey}
               icon={<Ionicons name={tab?.icon ?? 'newspaper'} size={18} color={cardColor} style={textShadow} />}
-              header={DIGEST_CATEGORY_LABEL_BY_KEY[card.groupKey] ?? 'Digest'}
+              header={DIGEST_CATEGORY_LABEL_BY_KEY[card.groupKey] ?? 'Library'}
               hook={card.hook}
               backTitle={card.backTitle}
               backBody={card.backBody}
