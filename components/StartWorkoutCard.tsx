@@ -21,10 +21,12 @@ import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { startWorkoutCard, type StartWorkoutCardModel } from '../lib/startWorkout';
 import { lastSessionTimes, listWorkouts } from '../lib/workoutsDb';
 import { ThumbEndRow } from './ThumbEndRow';
+import { useWalkMark } from './WalkMark';
 
 type Props = { tabColor: string };
 
 export function StartWorkoutCard({ tabColor }: Props) {
+  const walkMark = useWalkMark();
   const styles = useMemo(() => makeStyles(tabColor), [tabColor]);
   const router = useRouter();
   const [model, setModel] = useState<StartWorkoutCardModel | null>(null);
@@ -120,12 +122,12 @@ export function StartWorkoutCard({ tabColor }: Props) {
               <Text style={styles.rowMeta}>{item.status}</Text>
             </View>
             {item.action === 'start' && entry.plan.workoutId ? (
-              <TouchableOpacity style={styles.primaryButton} onPress={() => start(entry.plan.workoutId as string, entry)}>
+              <TouchableOpacity ref={walkMark.ref('home.workoutStart')} style={styles.primaryButton} onPress={() => start(entry.plan.workoutId as string, entry)}>
                 <Text style={styles.primaryButtonText}>Start</Text>
               </TouchableOpacity>
             ) : null}
             {item.action === 'mark' ? (
-              <TouchableOpacity style={styles.secondaryButton} disabled={busy} onPress={() => didIt(entry)}>
+              <TouchableOpacity ref={walkMark.ref('home.workoutDidIt')} style={styles.secondaryButton} disabled={busy} onPress={() => didIt(entry)}>
                 <Text style={styles.secondaryButtonText}>Did it</Text>
               </TouchableOpacity>
             ) : null}
@@ -141,13 +143,17 @@ export function StartWorkoutCard({ tabColor }: Props) {
       {model.others.length > 0 ? (
         <Text style={styles.groupLabel}>{model.today.length > 0 ? 'Or another workout' : 'Your workouts'}</Text>
       ) : null}
-      {model.others.map((workout) => (
+      {model.others.map((workout, workoutIndex) => (
         <ThumbEndRow key={workout.id} style={styles.row}>
           <View style={styles.rowText}>
             <Text style={styles.rowTitle}>{workout.name}</Text>
             <Text style={styles.rowMeta}>{workout.line}</Text>
           </View>
-          <TouchableOpacity style={styles.primaryButton} onPress={() => start(workout.id)}>
+          <TouchableOpacity
+            ref={model.today.length === 0 && workoutIndex === 0 ? walkMark.ref('home.workoutStart') : undefined}
+            style={styles.primaryButton}
+            onPress={() => start(workout.id)}
+          >
             <Text style={styles.primaryButtonText}>Start</Text>
           </TouchableOpacity>
         </ThumbEndRow>

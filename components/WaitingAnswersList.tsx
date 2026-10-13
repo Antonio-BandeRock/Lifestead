@@ -18,6 +18,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useReminderPreferences } from '../hooks/useReminderPreferences';
+import { useWalkMark } from './WalkMark';
 import { reminderActionTitle, type ReminderActionId } from '../lib/reminderActions';
 import { kindsShowing } from '../lib/reminderKindGroups';
 import { answerFromList, openWaitingReminder, syncReminderNotifications } from '../lib/reminderNotifications';
@@ -44,6 +45,7 @@ type Props = {
 
 export function WaitingAnswersList({ groups, now, reload, tabColor, nested = false }: Props) {
   const router = useRouter();
+  const walkMark = useWalkMark();
   const prefs = useReminderPreferences();
   const band = useTabBandStyles(tabColor);
   // Reminders being answered right now, so a second tap does nothing.
@@ -85,7 +87,7 @@ export function WaitingAnswersList({ groups, now, reload, tabColor, nested = fal
 
   return (
     <View style={styles.column}>
-      {groups.map((group) => {
+      {groups.map((group, groupIndex) => {
         const kinds = kindsShowing(
           group.items.map((item) => item.kind),
           REMINDER_KIND_LABELS,
@@ -95,16 +97,22 @@ export function WaitingAnswersList({ groups, now, reload, tabColor, nested = fal
             <Text style={styles.groupTitle}>
               {group.label} ({group.items.length})
             </Text>
-            {group.items.map((item) => {
+            {group.items.map((item, itemIndex) => {
               const isBusy = busy.has(item.identifier);
+              const first = groupIndex === 0 && itemIndex === 0;
               return (
                 <View key={item.identifier} style={[band.row, styles.item, isBusy ? styles.itemBusy : null]}>
-                  <TouchableOpacity onPress={() => void open(item)} activeOpacity={0.8} accessibilityRole="button">
+                  <TouchableOpacity
+                    ref={first ? walkMark.ref('home.waitingOpen') : undefined}
+                    onPress={() => void open(item)}
+                    activeOpacity={0.8}
+                    accessibilityRole="button"
+                  >
                     <Text style={styles.itemTitle}>{item.title}</Text>
                     {item.body ? <Text style={styles.itemBody}>{item.body}</Text> : null}
                     <Text style={styles.itemWhen}>{waitingFor(item.shownAt, now)}</Text>
                   </TouchableOpacity>
-                  <View style={styles.buttons}>
+                  <View ref={first ? walkMark.ref('home.waitingAnswer') : undefined} collapsable={false} style={styles.buttons}>
                     {item.actions.map((action) => {
                       const quiet = action === 'snooze' || action === 'flareNo' || action === 'flareTagOther';
                       return (
@@ -127,7 +135,7 @@ export function WaitingAnswersList({ groups, now, reload, tabColor, nested = fal
               );
             })}
             {kinds.length > 0 ? (
-              <View style={[band.row, styles.switches]}>
+              <View ref={groupIndex === 0 ? walkMark.ref('home.waitingKinds') : undefined} collapsable={false} style={[band.row, styles.switches]}>
                 <Text style={styles.switchCaption}>
                   Keep sending these? Turning one off stops new ones; any showing now stay until answered.
                 </Text>
@@ -156,6 +164,7 @@ export function WaitingAnswersList({ groups, now, reload, tabColor, nested = fal
         );
       })}
       <TouchableOpacity
+        ref={walkMark.ref('home.waitingChoose')}
         style={[styles.choose, { borderColor: tabColor }, nested ? null : styles.chooseBetweenBands]}
         onPress={() => router.push({ pathname: '/profile', params: { section: 'reminders' } })}
         activeOpacity={0.8}

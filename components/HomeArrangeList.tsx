@@ -101,6 +101,7 @@ import {
   type VisualPreferences,
 } from '../lib/visualPreferences';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
+import { useWalkMark } from './WalkMark';
 
 // One row, group or card, the same height for both. Fixed rather than
 // whatever a row happened to measure, so the drag can do arithmetic on it.
@@ -163,6 +164,7 @@ export function HomeArrangeList({
   onDragChange,
   onDone,
 }: Props) {
+  const walkMark = useWalkMark();
   // Every group, paired with where it sits in the saved order, and with
   // only the cards that have something to show. A group whose cards are
   // all absent today is not a row either, the same way Home draws no band
@@ -364,6 +366,8 @@ export function HomeArrangeList({
     // A group of one, or a card that is the only one under its name, has
     // nowhere to be dragged to, so it gets no grip rather than a dead one.
     const canDrag = count > 1;
+    // The tutorial rings the first group's eye and grip, never a card's.
+    const firstGroup = kind === 'group' && index === 0;
     return (
       <Animated.View
         key={rowKey}
@@ -398,6 +402,7 @@ export function HomeArrangeList({
 
         {options.onToggleVisible ? (
           <TouchableOpacity
+            ref={firstGroup ? walkMark.ref('home.arrangeEye') : undefined}
             onPress={options.onToggleVisible}
             style={styles.rowButton}
             accessibilityRole="button"
@@ -413,6 +418,8 @@ export function HomeArrangeList({
 
         {canDrag ? (
           <View
+            ref={firstGroup ? walkMark.ref('home.arrangeGrip') : undefined}
+            collapsable={false}
             style={styles.rowButton}
             accessibilityRole="adjustable"
             accessibilityLabel={`Drag ${title} to another place`}
@@ -439,7 +446,7 @@ export function HomeArrangeList({
         <View style={styles.bannerHeader}>
           <Ionicons name="reorder-four-outline" size={18} color={colors.accent} style={textShadow} />
           <Text style={styles.bannerTitle}>Arranging your Home screen</Text>
-          <TouchableOpacity onPress={onDone} style={styles.doneButton} accessibilityRole="button">
+          <TouchableOpacity ref={walkMark.ref('home.arrangeDone')} onPress={onDone} style={styles.doneButton} accessibilityRole="button">
             <Text style={styles.doneText}>Done</Text>
           </TouchableOpacity>
         </View>

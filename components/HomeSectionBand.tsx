@@ -180,6 +180,8 @@ type CommonProps = {
   // twelve rows would be twelve pieces of furniture in the way of the
   // thing somebody actually came for.
   onLongPress?: () => void;
+  // A tutorial mark for the band's name row, from the caller's useWalkMark.
+  markRef?: (node: unknown) => void;
 };
 
 type FoldProps = CommonProps & {
@@ -237,6 +239,7 @@ export function HomeSectionBand(props: FoldProps | ActionProps | StaticProps) {
     return (
       <View style={bandStyle}>
         <TouchableOpacity
+          ref={props.markRef}
           style={styles.header}
           onPress={props.onPress}
           onLongPress={props.onLongPress}
@@ -285,6 +288,7 @@ export function HomeSectionBand(props: FoldProps | ActionProps | StaticProps) {
   return (
     <View style={bandStyle}>
       <TouchableOpacity
+        ref={props.markRef}
         style={styles.header}
         onPress={onToggle}
         onLongPress={props.onLongPress}

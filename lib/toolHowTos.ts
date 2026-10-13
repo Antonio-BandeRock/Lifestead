@@ -30,6 +30,7 @@
 // reach a button that is not drawn.
 
 import type { WalkMark } from './storyWalk';
+import type { HomeSectionKey } from './visualPreferences';
 
 // Marks first named here; a tool line may also use a mark the guides use.
 export type ToolMark =
@@ -200,7 +201,52 @@ export type ToolMark =
   | 'reading.search'
   | 'reading.searchHelp'
   | 'reading.subgroup'
-  | 'reading.entry';
+  | 'reading.entry'
+  // Home: a band's name row by its card key, a tab group's by its path.
+  | `homeBand.${HomeSectionKey}`
+  | `homeGroup.${string}`
+  | 'home.arrangeEye'
+  | 'home.arrangeGrip'
+  | 'home.arrangeDone'
+  | 'home.captureType'
+  | 'home.captureSay'
+  | 'home.captureSort'
+  | 'home.nextGo'
+  | 'home.nextNotNow'
+  | 'home.waitingOpen'
+  | 'home.waitingAnswer'
+  | 'home.waitingKinds'
+  | 'home.waitingChoose'
+  | 'home.oneAtATime'
+  | 'home.morningSleep'
+  | 'home.morningEnergy'
+  | 'home.morningSave'
+  | 'home.morningChange'
+  | 'home.mealSay'
+  | 'home.mealPhoto'
+  | 'home.mealFind'
+  | 'home.usualHad'
+  | 'home.usualElse'
+  | 'home.usualList'
+  | 'home.usualNotToday'
+  | 'home.groceryOpen'
+  | 'home.groceryType'
+  | 'home.groceryAdd'
+  | 'home.groceryQuickOpen'
+  | 'home.pickFrom'
+  | 'home.pickNew'
+  | 'home.pickMark'
+  | 'home.routine'
+  | 'home.routineWayIn'
+  | 'home.check'
+  | 'home.checkWayIn'
+  | 'home.workoutStart'
+  | 'home.workoutDidIt'
+  | 'home.ring'
+  | 'home.chooseNutrients'
+  | 'home.reportWindow'
+  | 'home.lowStim'
+  | 'home.readCards';
 
 export type ToolStep = {
   say: string;
@@ -1541,6 +1587,358 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'The app takes you to the tab and lens where that entry lives and opens it there.',
     },
   ],
+  '/#home': [
+    {
+      key: 'openBand',
+      title: 'Open and close the bands on Home',
+      steps: [
+        { say: 'Tap the name of a band to open it. A band named for a tab, like Signals or Food, holds that tab\'s cards inside it.', mark: 'homeGroup.log', stay: true },
+        { say: 'Tap the name again to fold it shut.' },
+      ],
+      forYou: 'Home remembers which bands you left open, so it looks the same the next time you come back.',
+    },
+    {
+      key: 'arrange',
+      title: 'Put the bands on Home in the order you want',
+      steps: [
+        { say: 'Hold your finger on the name of any band, like Your Guide, until the list for arranging opens.', mark: 'homeBand.yourStory', stay: true },
+        { say: 'Hold the three lines at the right end of a name and drag it up or down.', mark: 'home.arrangeGrip', stay: true },
+        { say: 'To move the cards inside a group, tap the group\'s name in the list first, then drag them the same way.' },
+        { say: 'Tap Done at the top when it reads the way you want.', mark: 'home.arrangeDone' },
+      ],
+      forYou: 'Home shows its bands in that order every time, so what you reach for most can sit at the top.',
+    },
+    {
+      key: 'turnOff',
+      title: 'Turn a band on Home off, or back on',
+      steps: [
+        { say: 'Hold your finger on the name of any band until the list for arranging opens.', mark: 'homeBand.yourStory', stay: true },
+        { say: 'Tap the eye beside a name. A closed eye means that band is off.', mark: 'home.arrangeEye', stay: true },
+        { say: 'Tap Done at the top.', mark: 'home.arrangeDone' },
+      ],
+      forYou: 'A band you turn off leaves Home until you turn it back on here, and nothing it holds is removed.',
+    },
+    {
+      key: 'captureSay',
+      title: 'Say something into Capture',
+      steps: [
+        { say: 'Open the band with the name of Capture.', mark: 'homeBand.captureInbox', stay: true },
+        { say: 'Tap Say it and speak. Tap Type it if you would rather write.', mark: 'home.captureSay' },
+      ],
+      forYou: 'Whatever was on your mind is kept, so you can stop holding on to it and sort it out later.',
+    },
+    {
+      key: 'captureSort',
+      title: 'Sort out what is waiting in Capture',
+      steps: [
+        { say: 'Open the band with the name of Capture.', mark: 'homeBand.captureInbox', stay: true },
+        { say: 'When something is waiting, tap Sort it out.', mark: 'home.captureSort' },
+      ],
+      forYou: 'Each note is offered as the record it reads like: a grocery item, a to-do, a reminder, a place you put something. You say yes or change it.',
+    },
+    {
+      key: 'nextThing',
+      title: 'Do the one next thing',
+      steps: [
+        { say: 'Open the band with the name of One Next Thing.', mark: 'homeBand.nextThing', stay: true },
+        { say: 'Read the sentence, then tap the button under it to go straight there.', mark: 'home.nextGo' },
+      ],
+      forYou: 'Only one thing is offered at a time, so there is no list to work through.',
+    },
+    {
+      key: 'nextThingLater',
+      title: 'Put the one next thing aside for now',
+      steps: [
+        { say: 'Open the band with the name of One Next Thing.', mark: 'homeBand.nextThing', stay: true },
+        { say: 'Tap Not now.', mark: 'home.nextNotNow' },
+      ],
+      forYou: 'It steps aside while you are here, and nothing is counted against you for it.',
+    },
+    {
+      key: 'waitingAnswer',
+      title: 'Answer a reminder you missed',
+      steps: [
+        { say: 'Open the band with the name of Reminders Waiting for an Answer. It shows only when one is waiting.', mark: 'homeBand.waitingAnswers', stay: true },
+        { say: 'Tap one of the buttons under a reminder to answer it here.', mark: 'home.waitingAnswer', stay: true },
+        { say: 'Or tap the words of the reminder to open the place it is about.', mark: 'home.waitingOpen' },
+      ],
+      forYou: 'An answer here counts the same as one given on the notification, and the notification goes away.',
+    },
+    {
+      key: 'waitingKinds',
+      title: 'Stop a kind of reminder coming',
+      steps: [
+        { say: 'Open the band with the name of Reminders Waiting for an Answer.', mark: 'homeBand.waitingAnswers', stay: true },
+        { say: 'Under Keep sending these, tap the kind you want to stop so it reads Off.', mark: 'home.waitingKinds', stay: true },
+        { say: 'For every kind at once, tap Choose Which Reminders Come.', mark: 'home.waitingChoose' },
+      ],
+      forYou: 'New ones of that kind stop. Any showing now stay until you answer them.',
+    },
+    {
+      key: 'oneAtATime',
+      title: 'Check in one question at a time',
+      steps: [
+        { say: 'Open the band with the name of Signals, if it is closed.', mark: 'homeGroup.log', stay: true },
+        { say: 'Open the band with the name of Check In, One Question at a Time.', mark: 'homeBand.oneAtATime', stay: true },
+        { say: 'Tap Start.', mark: 'home.oneAtATime' },
+      ],
+      forYou: 'Each question has a page to itself, so there is only ever one thing to answer, and any of them can be skipped.',
+    },
+    {
+      key: 'morningCheckin',
+      title: 'Say how you slept',
+      steps: [
+        { say: 'Open the band with the name of Signals, if it is closed.', mark: 'homeGroup.log', stay: true },
+        { say: 'Open the band with the name of Morning Check-In.', mark: 'homeBand.morningCheckin', stay: true },
+        { say: 'Tap the word for how you slept.', mark: 'home.morningSleep', stay: true },
+        { say: 'Tap the number for how much energy you have.', mark: 'home.morningEnergy', stay: true },
+        { say: 'Add a note if you like, then tap Save.', mark: 'home.morningSave' },
+      ],
+      forYou: 'Your mornings sit beside your sleep readings, so Trends can lay them out over weeks.',
+    },
+    {
+      key: 'morningChange',
+      title: 'Change this morning\'s answer',
+      steps: [
+        { say: 'Open the band with the name of Morning Check-In, on the Signals band.', mark: 'homeBand.morningCheckin', stay: true },
+        { say: 'Tap Change this morning\'s answer, pick again and tap Save the Change.', mark: 'home.morningChange' },
+      ],
+      forYou: 'The morning keeps one answer, the one you last saved.',
+    },
+    {
+      key: 'mealPhoto',
+      title: 'Photograph a meal now and log it later',
+      steps: [
+        { say: 'Open the band with the name of Food, if it is closed.', mark: 'homeGroup.food', stay: true },
+        { say: 'Open the band with the name of Log a Meal.', mark: 'homeBand.logAgain', stay: true },
+        { say: 'Tap No time now? Photograph it, then take a photo or choose one you have.', mark: 'home.mealPhoto' },
+      ],
+      forYou: 'The photo waits on Home until you have a minute to say what the meal was. Nothing is guessed from the picture and nothing is sent anywhere.',
+    },
+    {
+      key: 'mealFind',
+      title: 'Find a meal you have had before and log it',
+      steps: [
+        { say: 'Open the band with the name of Food, if it is closed.', mark: 'homeGroup.food', stay: true },
+        { say: 'Open the band with the name of Log a Meal.', mark: 'homeBand.logAgain', stay: true },
+        { say: 'Tap Log or schedule a meal.', mark: 'home.mealFind' },
+      ],
+      forYou: 'Food opens on a list of every meal, with a search box, so you can find one by any word in its name.',
+    },
+    {
+      key: 'usualMeal',
+      title: 'Log your usual meal with one tap',
+      steps: [
+        { say: 'Open the band with the name of Food, if it is closed.', mark: 'homeGroup.food', stay: true },
+        { say: 'Open the band named for your usual meal. It changes with the time of day.', mark: 'homeBand.usualMeal', stay: true },
+        { say: 'Tap I had it.', mark: 'home.usualHad' },
+      ],
+      forYou: 'The meal is logged at the usual time, with everything in it, without opening Food.',
+    },
+    {
+      key: 'usualElse',
+      title: 'Say you had something other than your usual',
+      steps: [
+        { say: 'Open the band named for your usual meal, on the Food band.', mark: 'homeBand.usualMeal', stay: true },
+        { say: 'Tap Had something else.', mark: 'home.usualElse' },
+      ],
+      forYou: 'You log what you did eat, and the usual is left alone for next time.',
+    },
+    {
+      key: 'usualSkip',
+      title: 'Put the usual meal away for today',
+      steps: [
+        { say: 'Open the band named for your usual meal, on the Food band.', mark: 'homeBand.usualMeal', stay: true },
+        { say: 'Tap Not today.', mark: 'home.usualNotToday' },
+      ],
+      forYou: 'It comes back tomorrow at the same time.',
+    },
+    {
+      key: 'usualList',
+      title: 'Choose your usual meals',
+      steps: [
+        { say: 'Open the band named for your usual meal, on the Food band.', mark: 'homeBand.usualMeal', stay: true },
+        { say: 'Tap Add usual meals, or Change the list once you have some.', mark: 'home.usualList' },
+      ],
+      forYou: 'Each usual meal has its time of day, and Home offers it when that time comes.',
+    },
+    {
+      key: 'scanProduct',
+      title: 'Scan a product from Home',
+      steps: [
+        { say: 'Open the band with the name of Food, if it is closed.', mark: 'homeGroup.food', stay: true },
+        { say: 'Tap Scan a Product.', mark: 'homeBand.scanProduct' },
+      ],
+      forYou: 'Food opens with the camera ready for the barcode.',
+    },
+    {
+      key: 'logFlare',
+      title: 'Log a flare from Home',
+      steps: [
+        { say: 'Open the band with the name of Signals, if it is closed.', mark: 'homeGroup.log', stay: true },
+        { say: 'Tap Log a Flare.', mark: 'homeBand.logFlare' },
+      ],
+      forYou: 'Signals opens, where a flare is logged with how bad it is and what it felt like.',
+    },
+    {
+      key: 'bloodPressure',
+      title: 'Log a blood pressure reading',
+      steps: [
+        { say: 'Open the band with the name of Signals, if it is closed.', mark: 'homeGroup.log', stay: true },
+        { say: 'Tap Log Blood Pressure.', mark: 'homeBand.logBloodPressure', stay: true },
+        { say: 'Type the top and bottom numbers, and the pulse if you have it, then tap Save.' },
+      ],
+      forYou: 'The reading is saved for right now, beside the rest of your readings.',
+    },
+    {
+      key: 'feeling',
+      title: 'See the worst flare of the last two days',
+      steps: [
+        { say: 'Open the band with the name of Signals, if it is closed.', mark: 'homeGroup.log', stay: true },
+        { say: 'Open the band with the name of How You\'re Feeling.', mark: 'homeBand.howYoureFeeling', stay: true },
+        { say: 'Tap the circle to log a flare or see the whole history on Signals.' },
+      ],
+      forYou: 'The circle shows the worst flare or food reaction you logged in the last two days, so one that is still going on is seen on the first screen.',
+    },
+    {
+      key: 'groceryOpen',
+      title: 'Open your grocery list from Home',
+      steps: [
+        { say: 'Open the band with the name of Life, if it is closed.', mark: 'homeGroup.life', stay: true },
+        { say: 'Open the band with the name of Grocery List.', mark: 'homeBand.groceryList', stay: true },
+        { say: 'Tap Open my grocery list, or Build a grocery list if there is none yet.', mark: 'home.groceryOpen' },
+      ],
+      forYou: 'Life opens on the list, ready to tick things off in the shop.',
+    },
+    {
+      key: 'groceryAdd',
+      title: 'Add to the grocery list without leaving Home',
+      steps: [
+        { say: 'Open the band with the name of Life, if it is closed.', mark: 'homeGroup.life', stay: true },
+        { say: 'Open the band with the name of Add to the Grocery List.', mark: 'homeBand.groceryQuickAdd', stay: true },
+        { say: 'Type or say what you need. Several things can go in at once, like eggs, milk and bread.', mark: 'home.groceryType', stay: true },
+        { say: 'Tap Add.', mark: 'home.groceryAdd' },
+      ],
+      forYou: 'Each one goes on your open grocery list as a line of its own. Open the list shows them there.',
+    },
+    {
+      key: 'todayPicks',
+      title: 'Pick a few things you want to do today',
+      steps: [
+        { say: 'Open the band with the name of Life, if it is closed.', mark: 'homeGroup.life', stay: true },
+        { say: 'Open the band with the name of Today I Want To.', mark: 'homeBand.todayPicks', stay: true },
+        { say: 'Tap Pick from Did I Do It and choose one.', mark: 'home.pickFrom', stay: true },
+        { say: 'Or type something new in the box and tap Add.', mark: 'home.pickNew' },
+      ],
+      forYou: 'Today holds only the few you picked, and each one can be ticked off from Home.',
+    },
+    {
+      key: 'todayPickDone',
+      title: 'Tick off something you picked for today',
+      steps: [
+        { say: 'Open the band with the name of Today I Want To, on the Life band.', mark: 'homeBand.todayPicks', stay: true },
+        { say: 'Tap the circle beside it. Tap again to take the mark back.', mark: 'home.pickMark' },
+      ],
+      forYou: 'The mark is kept with its time, the same as a mark made on Did I Do It.',
+    },
+    {
+      key: 'routine',
+      title: 'Run a routine from Home',
+      steps: [
+        { say: 'Open the band with the name of Life, if it is closed.', mark: 'homeGroup.life', stay: true },
+        { say: 'Open the band with the name of Routines.', mark: 'homeBand.routines', stay: true },
+        { say: 'Tap a routine to go through its steps.', mark: 'home.routine' },
+      ],
+      forYou: 'The steps come one after another, so nothing has to be remembered in order.',
+    },
+    {
+      key: 'doneCheck',
+      title: 'Check whether you did something',
+      steps: [
+        { say: 'Open the band with the name of Life, if it is closed.', mark: 'homeGroup.life', stay: true },
+        { say: 'Open the band with the name of Did I Do It.', mark: 'homeBand.doneChecks', stay: true },
+        { say: 'Read the line under each one for when it was last marked. Tap one to open it on Life.', mark: 'home.check' },
+      ],
+      forYou: 'The answer to "did I already?" is on Home, so you do not have to guess.',
+    },
+    {
+      key: 'startWorkout',
+      title: 'Start a workout from Home',
+      steps: [
+        { say: 'Open the band with the name of Life, if it is closed.', mark: 'homeGroup.life', stay: true },
+        { say: 'Open the band with the name of Start a Workout.', mark: 'homeBand.startWorkout', stay: true },
+        { say: 'Tap Start beside the workout.', mark: 'home.workoutStart' },
+      ],
+      forYou: 'The workout opens step by step, and the session is logged when you finish.',
+    },
+    {
+      key: 'workoutDidIt',
+      title: 'Mark planned exercise as done',
+      steps: [
+        { say: 'Open the band with the name of Start a Workout, on the Life band.', mark: 'homeBand.startWorkout', stay: true },
+        { say: 'Under Planned for today, tap Did it.', mark: 'home.workoutDidIt' },
+      ],
+      forYou: 'The plan on Schedules shows it as done. Undo takes it back if you tapped by mistake.',
+    },
+    {
+      key: 'fuelGauges',
+      title: 'Read today\'s nutrients at a glance',
+      steps: [
+        { say: 'Open the band with the name of Insights, if it is closed.', mark: 'homeGroup.insights', stay: true },
+        { say: 'Open the band with the name of Today\'s Fuel Gauges.', mark: 'homeBand.fuelGauges', stay: true },
+        { say: 'Tap a ring to see that nutrient on Insights.', mark: 'home.ring' },
+      ],
+      forYou: 'Each ring fills from what you have logged today, and says which part came from food and which from a supplement.',
+    },
+    {
+      key: 'chooseNutrients',
+      title: 'Choose which nutrients the gauges show',
+      steps: [
+        { say: 'Open the band with the name of Today\'s Fuel Gauges, on the Insights band.', mark: 'homeBand.fuelGauges', stay: true },
+        { say: 'Tap Choose nutrients and pick the ones you want.', mark: 'home.chooseNutrients' },
+      ],
+      forYou: 'The gauges show the nutrients that matter to you, in place of the starting set.',
+    },
+    {
+      key: 'makeReport',
+      title: 'Make a report from Home',
+      steps: [
+        { say: 'Open the band with the name of Reports, if it is closed.', mark: 'homeGroup.reports', stay: true },
+        { say: 'Open the band with the name of Make a Report.', mark: 'homeBand.makeReport', stay: true },
+        { say: 'Tap how far back it should go.', mark: 'home.reportWindow' },
+      ],
+      forYou: 'Reports opens with that stretch of days, ready to read, print or hand to a doctor.',
+    },
+    {
+      key: 'lowStimulation',
+      title: 'Turn on Low Stimulation',
+      steps: [
+        { say: 'Open the band with the name of Profile, if it is closed.', mark: 'homeGroup.profile', stay: true },
+        { say: 'Open the band with the name of Low Stimulation.', mark: 'homeBand.lowStimulation', stay: true },
+        { say: 'Tap On. Tap Off to put things back.', mark: 'home.lowStim' },
+      ],
+      forYou: 'Flat backgrounds, nothing moving on its own, and whatever is open folded shut. Every picture and colour you picked comes back when you switch it off.',
+    },
+    {
+      key: 'readCards',
+      title: 'Read something short from Home',
+      steps: [
+        { say: 'Open the band with the name of Digest, if it is closed.', mark: 'homeGroup.digest', stay: true },
+        { say: 'Swipe along the cards and tap one to turn it over.', mark: 'home.readCards', stay: true },
+        { say: 'Tap Read more on the back to open the whole entry where it lives.' },
+      ],
+      forYou: 'Each card is the start of an entry from the reading on Life or Garden, in the colour of the tab it lives on.',
+    },
+    {
+      key: 'logHarvest',
+      title: 'Log a harvest from Home',
+      steps: [
+        { say: 'Open the band with the name of Garden, if it is closed.', mark: 'homeGroup.garden', stay: true },
+        { say: 'Tap Log a Harvest.', mark: 'homeBand.logHarvest' },
+      ],
+      forYou: 'Garden opens on the harvest log, where what the garden gave is kept by area and crop.',
+    },
+  ],
   '/life#todos': [
     {
       key: 'done',
@@ -1599,4 +1997,4 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
 };
 
 /** Tabs whose every lens has its tools listed above. */
-export const TOOL_TABS_DONE: readonly string[] = ['/life'];
+export const TOOL_TABS_DONE: readonly string[] = ['/life', '/'];

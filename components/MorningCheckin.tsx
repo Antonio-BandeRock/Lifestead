@@ -21,12 +21,14 @@ import {
 import { getMorningCheckin, getMorningInputs, saveMorningCheckin, type MorningRecord } from '../lib/morningCheckinDb';
 import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { NotesInput } from './NotesInput';
+import { useWalkMark } from './WalkMark';
 
 const ENERGY = scaleOf('energy');
 
 type Props = { tabColor: string };
 
 export function MorningCheckin({ tabColor }: Props) {
+  const walkMark = useWalkMark();
   const [lines, setLines] = useState<MorningLine[] | null>(null);
   const [record, setRecord] = useState<MorningRecord | null>(null);
   const [editing, setEditing] = useState(false);
@@ -63,9 +65,15 @@ export function MorningCheckin({ tabColor }: Props) {
     }
   }
 
-  function renderPills(words: string[], value: number | null, onPick: (next: number | null) => void, numbered: boolean) {
+  function renderPills(
+    words: string[],
+    value: number | null,
+    onPick: (next: number | null) => void,
+    numbered: boolean,
+    markRef?: (node: unknown) => void,
+  ) {
     return (
-      <View style={styles.pillRow}>
+      <View ref={markRef} collapsable={false} style={styles.pillRow}>
         {words.map((word, index) => {
           const n = index + 1;
           const active = value === n;
@@ -110,16 +118,16 @@ export function MorningCheckin({ tabColor }: Props) {
             })}
           </Text>
           {record.notes ? <Text style={styles.caption}>{record.notes}</Text> : null}
-          <TouchableOpacity onPress={() => setEditing(true)} hitSlop={8}>
+          <TouchableOpacity ref={walkMark.ref('home.morningChange')} onPress={() => setEditing(true)} hitSlop={8}>
             <Text style={[styles.link, { color: tabColor }]}>Change this morning&apos;s answer</Text>
           </TouchableOpacity>
         </View>
       ) : (
         <View style={styles.form}>
           <Text style={styles.label}>How did you sleep?</Text>
-          {renderPills(SLEEP_QUALITY_WORDS, sleepQuality, setSleepQuality, false)}
+          {renderPills(SLEEP_QUALITY_WORDS, sleepQuality, setSleepQuality, false, walkMark.ref('home.morningSleep'))}
           <Text style={styles.label}>{ENERGY.question}</Text>
-          {renderPills(ENERGY.words, energy, setEnergy, true)}
+          {renderPills(ENERGY.words, energy, setEnergy, true, walkMark.ref('home.morningEnergy'))}
           <NotesInput
             style={styles.input}
             placeholder="Anything about the night (optional)"
@@ -129,6 +137,7 @@ export function MorningCheckin({ tabColor }: Props) {
             multiline
           />
           <TouchableOpacity
+            ref={walkMark.ref('home.morningSave')}
             style={[styles.button, { backgroundColor: colors.buttonColor }, (!answered || saving) && styles.buttonDisabled]}
             onPress={save}
             disabled={!answered || saving}

@@ -18,6 +18,7 @@ import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { firstWeekDay, firstWeekLine, type FirstWeekLine } from '../lib/firstWeek';
 import { getFirstDay } from '../lib/firstWeekDb';
+import { useWalkMark } from './WalkMark';
 import { welcomeBackFor, type WelcomeBack } from '../lib/welcomeBack';
 import { latestRecordMs } from '../lib/welcomeBackDb';
 import type { StoryDestination, YourStoryView } from '../lib/yourStory';
@@ -30,6 +31,7 @@ type Props = {
 };
 
 export function NextThing({ view, tabColor, onGo }: Props) {
+  const walkMark = useWalkMark();
   const router = useRouter();
   const [welcome, setWelcome] = useState<WelcomeBack | null>(null);
   const [firstWeek, setFirstWeek] = useState<FirstWeekLine | null>(null);
@@ -80,12 +82,12 @@ export function NextThing({ view, tabColor, onGo }: Props) {
     <View style={styles.body}>
       <Text style={styles.sentence}>{sentence}</Text>
       <View style={styles.buttonRow}>
-        <TouchableOpacity style={[styles.button, { borderColor: tabColor }]} activeOpacity={0.8} onPress={go}>
+        <TouchableOpacity ref={walkMark.ref('home.nextGo')} style={[styles.button, { borderColor: tabColor }]} activeOpacity={0.8} onPress={go}>
           <Ionicons name="arrow-forward-circle-outline" size={18} color={tabColor} />
           <Text style={[styles.buttonText, { color: tabColor }]}>{action}</Text>
         </TouchableOpacity>
         {passing ? (
-          <TouchableOpacity onPress={() => setNotNow(true)} hitSlop={8}>
+          <TouchableOpacity ref={walkMark.ref('home.nextNotNow')} onPress={() => setNotNow(true)} hitSlop={8}>
             <Text style={styles.quiet}>Not now</Text>
           </TouchableOpacity>
         ) : null}

@@ -13,6 +13,7 @@ import { groceryItemsFromNote } from '../lib/captureNotes';
 import { addNamesToActiveGroceryList } from '../lib/groceryDb';
 import { explainNotYet } from '../lib/notYet';
 import { AppTextInput } from './AppTextInput';
+import { useWalkMark } from './WalkMark';
 
 type Props = {
   tabColor: string;
@@ -20,6 +21,7 @@ type Props = {
 };
 
 export function GroceryQuickAdd({ tabColor, onOpenList }: Props) {
+  const walkMark = useWalkMark();
   const [text, setText] = useState('');
   const [saving, setSaving] = useState(false);
   const [added, setAdded] = useState<string | null>(null);
@@ -36,7 +38,7 @@ export function GroceryQuickAdd({ tabColor, onOpenList }: Props) {
 
   return (
     <View style={styles.body}>
-      <View style={styles.inputRow}>
+      <View ref={walkMark.ref('home.groceryType')} collapsable={false} style={styles.inputRow}>
         <AppTextInput
           onVoiceResult={(transcript) => setText(transcript)}
           micColor={tabColor}
@@ -54,6 +56,7 @@ export function GroceryQuickAdd({ tabColor, onOpenList }: Props) {
       {items.length > 1 ? <Text style={styles.caption}>{`Adds ${items.length}: ${items.join(', ')}`}</Text> : null}
       <View style={styles.buttonRow}>
         <TouchableOpacity
+          ref={walkMark.ref('home.groceryAdd')}
           style={[styles.button, { borderColor: tabColor }, items.length === 0 ? styles.off : null]}
           activeOpacity={0.8}
           onPress={() => {
@@ -68,7 +71,12 @@ export function GroceryQuickAdd({ tabColor, onOpenList }: Props) {
           <Ionicons name="add-circle-outline" size={18} color={tabColor} />
           <Text style={[styles.buttonText, { color: tabColor }]}>Add</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, { borderColor: tabColor }]} activeOpacity={0.8} onPress={onOpenList}>
+        <TouchableOpacity
+          ref={walkMark.ref('home.groceryQuickOpen')}
+          style={[styles.button, { borderColor: tabColor }]}
+          activeOpacity={0.8}
+          onPress={onOpenList}
+        >
           <Ionicons name="cart-outline" size={18} color={tabColor} />
           <Text style={[styles.buttonText, { color: tabColor }]}>Open the list</Text>
         </TouchableOpacity>

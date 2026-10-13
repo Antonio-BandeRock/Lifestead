@@ -2716,6 +2716,7 @@ export default function HomeScreen() {
         expanded={isHomeSectionExpanded(visualPrefs, key)}
         onToggle={() => toggleHomeSection(key)}
         onLongPress={() => beginArranging(key)}
+        markRef={walkMark.ref(`homeBand.${key}`)}
         contentStyle={options?.contentStyle}
         foldedCaption={options?.foldedCaption}
       >
@@ -3122,6 +3123,7 @@ export default function HomeScreen() {
         textColor={identity?.textColor}
         onPress={onPress}
         onLongPress={() => beginArranging(key)}
+        markRef={walkMark.ref(`homeBand.${key}`)}
         value={options?.value}
         valueColor={options?.valueColor}
       />
@@ -3201,7 +3203,7 @@ export default function HomeScreen() {
       );
     }
     return (
-      <TouchableOpacity onPress={() => setGaugeChooserOpen(true)} hitSlop={8} style={styles.fuelGaugesChooseLink}>
+      <TouchableOpacity ref={walkMark.ref('home.chooseNutrients')} onPress={() => setGaugeChooserOpen(true)} hitSlop={8} style={styles.fuelGaugesChooseLink}>
         <Text style={[styles.fuelGaugesChooseText, { color: tabColorFor('/insights') }]}>Choose nutrients</Text>
       </TouchableOpacity>
     );
@@ -3238,7 +3240,7 @@ export default function HomeScreen() {
         </Text>
         {coreNutrientRings.length === 0 ? <Text style={[styles.fuelGaugesChooseText, { color: tabColorFor('/insights') }]}>{FUEL_GAUGE_EMPTY_LINE}</Text> : null}
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.ringRow}>
-          {coreNutrientRings.map((entry) => {
+          {coreNutrientRings.map((entry, ringIndex) => {
             const ringColors = nutrientRingColors(entry);
             // Null unless a supplement actually contributed to this one,
             // which is most of them on most days, and those rings are
@@ -3246,6 +3248,7 @@ export default function HomeScreen() {
             const split = nutrientSourceSplit(entry);
             return (
               <TouchableOpacity accessibilityLabel={`${entry.displayName}, open Nutrients`}
+                ref={ringIndex === 0 ? walkMark.ref('home.ring') : undefined}
                 key={entry.nutrientCode}
                 onPress={() => router.navigate({ pathname: '/insights', params: { openInsightsLens: 'nutrients' } })}
                 activeOpacity={0.75}
@@ -3535,7 +3538,7 @@ export default function HomeScreen() {
       // starts flush with the group's own text and the row already runs out
       // to the screen edge. The row adds a right inset so the last card is
       // not jammed against it.
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.flipRow}>
+      <ScrollView ref={walkMark.ref('home.readCards')} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.flipRow}>
         {dailyReadingCard
           ? (() => {
               const card = dailyReadingCard;
@@ -3849,6 +3852,7 @@ export default function HomeScreen() {
               <TouchableOpacity
                 style={button}
                 activeOpacity={0.8}
+                ref={walkMark.ref('home.usualHad')}
                 onPress={() =>
                   card.packed
                     ? void handleLogUsualMeal(null, card.packed)
@@ -3861,7 +3865,7 @@ export default function HomeScreen() {
                 <Ionicons name="checkmark-circle-outline" size={18} color={foodColor} style={textShadow} />
                 <Text style={buttonText}>I had it</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={button} activeOpacity={0.8} onPress={() => void handleSomethingElse(card)} disabled={usualMealBusy}>
+              <TouchableOpacity ref={walkMark.ref('home.usualElse')} style={button} activeOpacity={0.8} onPress={() => void handleSomethingElse(card)} disabled={usualMealBusy}>
                 <Ionicons name="swap-horizontal-outline" size={18} color={foodColor} style={textShadow} />
                 <Text style={buttonText}>Had something else</Text>
               </TouchableOpacity>
@@ -3872,12 +3876,12 @@ export default function HomeScreen() {
         {card && !single ? (
           <>
             <Text style={styles.logAgainCaption}>{usualMealsCardCaption(card)}</Text>
-            {groups.map((g) => (
+            {groups.map((g, groupIndex) => (
               <View key={g.label} style={styles.usualMealGroup}>
                 <Text style={styles.logAgainCaption}>{g.label}</Text>
                 <View style={styles.usualMealActions}>
-                  {g.meals.map((meal) => (
-                    <TouchableOpacity key={meal.id} style={button} activeOpacity={0.8} onPress={() => void handleLogUsualMeal(meal)} disabled={usualMealBusy}>
+                  {g.meals.map((meal, mealIndex) => (
+                    <TouchableOpacity key={meal.id} ref={groupIndex === 0 && mealIndex === 0 ? walkMark.ref('home.usualHad') : undefined} style={button} activeOpacity={0.8} onPress={() => void handleLogUsualMeal(meal)} disabled={usualMealBusy}>
                       <Ionicons name={meal.kind === 'out' ? 'storefront-outline' : 'home-outline'} size={18} color={foodColor} style={textShadow} />
                       <Text style={buttonText}>{meal.name}</Text>
                     </TouchableOpacity>
@@ -3890,13 +3894,14 @@ export default function HomeScreen() {
               <TouchableOpacity
                 style={button}
                 activeOpacity={0.8}
+                ref={walkMark.ref('home.usualList')}
                 onPress={() => router.push({ pathname: '/usual-meals', params: { meal: card.slot } })}
                 disabled={usualMealBusy}
               >
                 <Ionicons name="list-outline" size={18} color={foodColor} style={textShadow} />
                 <Text style={buttonText}>{card.home.length + card.out.length === 0 ? 'Add usual meals' : 'Change the list'}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={button} activeOpacity={0.8} onPress={() => void handleDismissUsualMeal(card)} disabled={usualMealBusy}>
+              <TouchableOpacity ref={walkMark.ref('home.usualNotToday')} style={button} activeOpacity={0.8} onPress={() => void handleDismissUsualMeal(card)} disabled={usualMealBusy}>
                 <Ionicons name="close-outline" size={18} color={foodColor} style={textShadow} />
                 <Text style={buttonText}>Not today</Text>
               </TouchableOpacity>
@@ -3932,6 +3937,7 @@ export default function HomeScreen() {
         </Text>
         <TouchableOpacity
           style={[styles.logAgainSpeakButton, { borderColor: foodColor }]}
+          ref={walkMark.ref('home.mealSay')}
           activeOpacity={0.8}
           onPress={() => router.push('/voice-log')}
         >
@@ -3939,6 +3945,7 @@ export default function HomeScreen() {
           <Text style={[styles.logAgainSpeakText, { color: foodColor }]}>Ate out or off-plan? Say it</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          ref={walkMark.ref('home.mealPhoto')}
           style={[styles.logAgainSpeakButton, { borderColor: foodColor }, capturingPhoto ? styles.logAgainTileDisabled : null]}
           activeOpacity={0.8}
           onPress={() => {
@@ -3961,6 +3968,7 @@ export default function HomeScreen() {
             then, and a meal outside those eight was unreachable. */}
         <TouchableOpacity
           style={[styles.logAgainSpeakButton, { borderColor: foodColor }]}
+          ref={walkMark.ref('home.mealFind')}
           activeOpacity={0.8}
           onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'findMeal' } })}
         >
@@ -4025,6 +4033,7 @@ export default function HomeScreen() {
         <TouchableOpacity
           style={[styles.logAgainSpeakButton, { borderColor: scheduleColor }]}
           activeOpacity={0.8}
+          ref={walkMark.ref('home.groceryOpen')}
           onPress={() =>
             router.push(summary ? `/grocery-list?listId=${encodeURIComponent(summary.list.id)}` : '/grocery-list')
           }
@@ -4055,7 +4064,7 @@ export default function HomeScreen() {
           Flat backgrounds, nothing moving on its own, and whatever is open folded shut, in one switch.
           Nothing is deleted: every picture and colour you picked comes back the moment you switch it off.
         </Text>
-        <View style={styles.pillRow}>
+        <View ref={walkMark.ref('home.lowStim')} collapsable={false} style={styles.pillRow}>
           {[false, true].map((value) => {
             const active = visualPrefs.lowStimulation === value;
             return (
@@ -4091,7 +4100,7 @@ export default function HomeScreen() {
           Everything logged over a stretch of days, pulled into one summary to read, print, or hand to a
           doctor. Pick how far back it goes.
         </Text>
-        <View style={styles.pillRow}>
+        <View ref={walkMark.ref('home.reportWindow')} collapsable={false} style={styles.pillRow}>
           {REPORT_WINDOW_OPTIONS.map((option) => (
             <TouchableOpacity
               key={option.days}
@@ -4169,9 +4178,10 @@ export default function HomeScreen() {
   // door. This is the door, and it is there whether the band is empty or
   // full, because the moment somebody wants a second routine is the
   // moment the band is no longer empty.
-  function renderBandWayIn(lens: string, title: string, detail: string) {
+  function renderBandWayIn(lens: string, title: string, detail: string, markRef?: (node: unknown) => void) {
     return (
       <TouchableOpacity
+        ref={markRef}
         style={styles.bandWayInRow}
         activeOpacity={0.8}
         onPress={() => router.push({ pathname: '/life', params: { openLifeLens: lens } })}
@@ -4202,9 +4212,10 @@ export default function HomeScreen() {
       'routines',
       'Routines',
       <View style={styles.bandBody}>
-        {routines.map((routine) => (
+        {routines.map((routine, routineIndex) => (
           <TouchableOpacity
             key={routine.id}
+            ref={routineIndex === 0 ? walkMark.ref('home.routine') : undefined}
             style={styles.reminderRow}
             activeOpacity={0.8}
             onPress={() => router.push({ pathname: '/routine', params: { id: routine.id } })}
@@ -4226,6 +4237,7 @@ export default function HomeScreen() {
           routines.length === 0
             ? 'An order you would rather not hold in your head. Write the steps once in Life and it shows up here, one step at a time.'
             : 'Opens Life, where the steps get written.',
+          walkMark.ref('home.routineWayIn'),
         )}
       </View>,
     );
@@ -4321,6 +4333,7 @@ export default function HomeScreen() {
         </Text>
         <TouchableOpacity
           style={[styles.logAgainSpeakButton, { borderColor: signalsColor }]}
+          ref={walkMark.ref('home.oneAtATime')}
           onPress={() => router.push('/daily-checkin')}
           activeOpacity={0.8}
         >
@@ -4374,11 +4387,12 @@ export default function HomeScreen() {
       'Did I Do It',
       <View style={styles.bandBody}>
         {summaryLine ? <Text style={styles.bandCaption}>{summaryLine}</Text> : null}
-        {checks.map((check) => {
+        {checks.map((check, checkIndex) => {
           const standing = checkStanding(check, now);
           return (
             <TouchableOpacity
               key={check.id}
+              ref={checkIndex === 0 ? walkMark.ref('home.check') : undefined}
               style={styles.reminderRow}
               activeOpacity={0.8}
               onPress={() => router.push({ pathname: '/life', params: { openLifeLens: 'didIDoIt' } })}
@@ -4406,6 +4420,7 @@ export default function HomeScreen() {
           checks.length === 0
             ? 'One question, asked later. Did I take it, did I lock it, did I pay it. Name what you keep wondering about and it waits here.'
             : 'Opens Life, where these get named and ticked off.',
+          walkMark.ref('home.checkWayIn'),
         )}
       </View>,
     );
@@ -4532,6 +4547,7 @@ export default function HomeScreen() {
         </Text>
         <TouchableOpacity
           style={[styles.logAgainSpeakButton, { borderColor: colors.primary }]}
+          ref={walkMark.ref('home.captureType')}
           onPress={() => router.push('/capture')}
           activeOpacity={0.8}
         >
@@ -4540,6 +4556,7 @@ export default function HomeScreen() {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.logAgainSpeakButton, { borderColor: colors.primary }]}
+          ref={walkMark.ref('home.captureSay')}
           onPress={() => router.push({ pathname: '/capture', params: { speak: '1' } })}
           activeOpacity={0.8}
         >
@@ -4549,6 +4566,7 @@ export default function HomeScreen() {
         {queue ? (
           <TouchableOpacity
             style={[styles.logAgainSpeakButton, { borderColor: colors.accent }]}
+            ref={walkMark.ref('home.captureSort')}
             onPress={() => router.push('/reconcile')}
             activeOpacity={0.8}
           >
@@ -4637,6 +4655,7 @@ export default function HomeScreen() {
           expanded={tabGroupFolds.isOpen(foldKey)}
           onToggle={() => tabGroupFolds.toggle(foldKey)}
           onLongPress={() => beginArranging()}
+          markRef={walkMark.ref(`homeGroup.${group.path.slice(1)}`)}
           contentStyle={styles.homeTabGroupBody}
         >
           {shown.map((member, index) => (

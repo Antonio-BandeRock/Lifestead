@@ -35,12 +35,14 @@ import {
 import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
 import { ThumbEndRow } from './ThumbEndRow';
+import { useWalkMark } from './WalkMark';
 
 type Props = {
   tabColor: string;
 };
 
 export function TodayPicks({ tabColor }: Props) {
+  const walkMark = useWalkMark();
   const [day, setDay] = useState(() => localDayKey(new Date()));
   const [picks, setPicks] = useState<TodayPick[]>([]);
   const [checks, setChecks] = useState<DoneCheck[]>([]);
@@ -86,11 +88,12 @@ export function TodayPicks({ tabColor }: Props) {
     <View style={styles.body}>
       {picks.length === 0 ? <Text style={styles.caption}>{TODAY_PICKS_EMPTY}</Text> : null}
 
-      {picks.map((pick) => {
+      {picks.map((pick, pickIndex) => {
         const line = describeTodayPick(pick);
         return (
           <View key={pick.checkId} style={styles.row}>
             <TouchableOpacity
+              ref={pickIndex === 0 ? walkMark.ref('home.pickMark') : undefined}
               style={styles.rowMain}
               disabled={busy}
               onPress={() =>
@@ -123,6 +126,7 @@ export function TodayPicks({ tabColor }: Props) {
       {room ? (
         <>
           {choices.length > 0 ? (
+            <View ref={walkMark.ref('home.pickFrom')} collapsable={false}>
             <PopoverSelect
               options={choices}
               selected={null}
@@ -131,7 +135,9 @@ export function TodayPicks({ tabColor }: Props) {
               placeholder="Pick from Did I Do It"
               searchable={choices.length > 8}
             />
+            </View>
           ) : null}
+          <View ref={walkMark.ref('home.pickNew')} collapsable={false}>
           <ThumbEndRow style={styles.inputRow}>
             <AppTextInput
               onVoiceResult={(transcript) => setNewName(transcript)}
@@ -161,6 +167,7 @@ export function TodayPicks({ tabColor }: Props) {
               <Text style={[styles.buttonText, { color: tabColor }]}>Add</Text>
             </TouchableOpacity>
           </ThumbEndRow>
+          </View>
           {picks.length === 0 && again.length > 0 ? (
             <TouchableOpacity
               style={[styles.button, styles.wide, { borderColor: tabColor }]}
