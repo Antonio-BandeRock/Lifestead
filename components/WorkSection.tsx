@@ -222,6 +222,7 @@ export function WorkSection({ tabColor }: Props) {
         {SECTIONS.map((entry) => (
           <TouchableOpacity
             key={entry.key}
+            ref={walkMark.ref(`work.${entry.key}`)}
             style={[styles.pill, section === entry.key && styles.pillActive]}
             onPress={() => setSection(entry.key)}
           >
@@ -407,7 +408,8 @@ export function WorkSection({ tabColor }: Props) {
             </View>
           ) : null}
 
-          {benefits.map((benefit) => {
+          {benefits.map((benefit, index) => {
+            // The first benefit carries the tutorial rings (lib/toolHowTos.ts).
             const standing = benefitStanding(benefit, todayLocal());
             const gap = matchGap(benefit);
             return (
@@ -457,13 +459,14 @@ export function WorkSection({ tabColor }: Props) {
 
                 <View style={styles.rowActions}>
                   {benefit.kind !== 'perk' ? (
-                    <TouchableOpacity onPress={() => setUseForm({ id: benefit.id, kind: benefit.kind, amount: '' })}>
+                    <TouchableOpacity ref={index === 0 ? walkMark.ref('work.use') : undefined} onPress={() => setUseForm({ id: benefit.id, kind: benefit.kind, amount: '' })}>
                       <Text style={styles.actionText}>
                         {benefit.kind === 'match' ? 'Change what I pay in' : 'Record some used'}
                       </Text>
                     </TouchableOpacity>
                   ) : null}
                   <TouchableOpacity
+                    ref={index === 0 ? walkMark.ref('work.edit') : undefined}
                     onPress={() =>
                       setBenefitForm({
                         id: benefit.id,
@@ -481,6 +484,7 @@ export function WorkSection({ tabColor }: Props) {
                   </TouchableOpacity>
                   {benefit.kind !== 'perk' && benefit.kind !== 'match' && benefit.used > 0 ? (
                     <TouchableOpacity
+                      ref={index === 0 ? walkMark.ref('work.reset') : undefined}
                       onPress={() =>
                         setConfirm({
                           title: `Start ${benefit.name} again?`,
@@ -504,6 +508,7 @@ export function WorkSection({ tabColor }: Props) {
                     </TouchableOpacity>
                   ) : null}
                   <TouchableOpacity
+                    ref={index === 0 ? walkMark.ref('work.remove') : undefined}
                     onPress={() =>
                       setConfirm({
                         title: `Remove ${benefit.name}?`,
@@ -579,6 +584,7 @@ export function WorkSection({ tabColor }: Props) {
             <Text style={styles.footnote}>{NO_SCORE_NOTE}</Text>
             {!checkinForm ? (
               <TouchableOpacity
+                ref={walkMark.ref('work.answerWeek')}
                 style={styles.primaryButton}
                 onPress={() =>
                   setCheckinForm(

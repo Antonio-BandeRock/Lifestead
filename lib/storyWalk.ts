@@ -36,6 +36,7 @@ import {
   type GuideEntry,
   type GuideKey,
 } from './yourStoryGuides';
+import type { ToolMark } from './toolHowTos';
 
 // Which way the arrow on the strip points: toward the round button, the
 // corner lens button, or the bookmarks button beside it.
@@ -49,7 +50,12 @@ export type WalkStep = {
   mark?: WalkMark;
   // A getting-there line: met once this screen (and lens) is open.
   // lensKey, where known, is matched against the key the tab reports.
-  until?: { pathname: string; lens?: string; lensKey?: string };
+  // alsoAt: further screens where the line counts as met, for a lens that
+  // opens a screen of its own (LENS_SCREENS), so the tab line still holds
+  // once that screen is on top.
+  until?: { pathname: string; lens?: string; lensKey?: string; alsoAt?: string[] };
+  // A tool how-to line that goes on past its button (lib/toolHowTos.ts).
+  stay?: boolean;
 };
 
 export type WalkPlace = {
@@ -103,7 +109,9 @@ export type WalkMark =
   | 'work.addBenefit'
   | 'work.saveWeek'
   | 'family.add'
-  | 'family.planMeals';
+  | 'family.planMeals'
+  // The tools on each lens, named in lib/toolHowTos.ts.
+  | ToolMark;
 
 // Which button each tap line names, by guide step key and line. A step that
 // appears in two guides has the same taps in both, and null is a line with
@@ -223,11 +231,20 @@ function walkLines(entry: GuideEntry): WalkStep[] {
  * with the tutorials (lib/tutorials.ts), which name every lens. Each line
  * carries its button's mark, so the ring and Show me find it.
  */
+// Lenses that open a screen of their own rather than showing on the tab:
+// choosing Grocery List on Life pushes /grocery-list.
+const LENS_SCREENS: Record<string, Record<string, string>> = {
+  '/life': { groceryList: '/grocery-list' },
+};
+
 export function gettingThere(pathname: string, lens?: string, lensName?: string): WalkStep[] {
   if (pathname === '/') return [{ say: GO_HOME, point: 'hub', mark: 'hub', until: { pathname: '/' } }];
   const tab = TAB_NAMES[pathname];
   if (!tab) return [];
-  const steps: WalkStep[] = [{ say: `${HUB} and choose ${tab}.`, point: 'hub', mark: 'hub', until: { pathname } }];
+  const screen = lens ? LENS_SCREENS[pathname]?.[lens] : undefined;
+  const steps: WalkStep[] = [
+    { say: `${HUB} and choose ${tab}.`, point: 'hub', mark: 'hub', until: screen ? { pathname, alsoAt: [screen] } : { pathname } },
+  ];
   if (lens && lensName) {
     const bookmarks = MY_ITEMS_LENSES[pathname]?.includes(lens);
     steps.push({
@@ -236,7 +253,7 @@ export function gettingThere(pathname: string, lens?: string, lensName?: string)
         : `Tap the button in the bottom-left corner and choose ${lensName}.`,
       point: bookmarks ? 'bookmarks' : 'corner',
       mark: bookmarks ? 'bookmarks' : 'corner',
-      until: { pathname, lens: lensName, lensKey: lens },
+      until: screen ? { pathname: screen } : { pathname, lens: lensName, lensKey: lens },
     });
   }
   return steps;
@@ -249,6 +266,7 @@ export function gettingThere(pathname: string, lens?: string, lensName?: string)
  */
 export function stepMet(step: WalkStep, place: WalkPlace): boolean {
   if (!step.until) return false;
+  if (step.until.alsoAt?.includes(place.pathname)) return true;
   if (place.pathname !== step.until.pathname) return false;
   if (!step.until.lens) return true;
   if (place.tab !== TAB_NAMES[step.until.pathname]) return true;
@@ -316,7 +334,7 @@ export function walkBack<T extends { cursor: number }>(walk: T, at: number): T {
  * names opens, and the round button only opens the menu.
  */
 export function tapMovesOn(step: WalkStep | null | undefined, tapped: string): boolean {
-  return !!step && !step.until && step.mark === tapped && !MORE_AFTER_TAP.has(step.mark);
+  return !!step && !step.until && !step.stay && step.mark === tapped && !MORE_AFTER_TAP.has(step.mark);
 }
 
 // The button outlined right now, set by components/StoryWalkHost.tsx (a

@@ -8,6 +8,7 @@ import { DigestEntryRow, makeDigestRowStyles } from './DigestEntryRow';
 import { EntrySearchInput, searchFieldStyle } from './EntrySearchInput';
 import { HelpSheet, type HelpSection } from './HelpButton';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, useBandGap } from './HomeSectionBand';
+import { useWalkMark } from './WalkMark';
 import { colors } from '../constants/colors';
 import { menuLabelShadow, textShadow, typography } from '../constants/typography';
 import { getVisibleFoodBaseNames } from '../lib/db';
@@ -308,6 +309,7 @@ export function DigestCategoryLens({
   onJumpElsewhere?: (id: string) => void;
 }) {
   const router = useRouter();
+  const walkMark = useWalkMark();
   const bandGap = useBandGap();
   const styles = useMemo(() => makeStyles(tabColor, tabTextColor, bandGap), [tabColor, tabTextColor, bandGap]);
   const meta = DIGEST_CATEGORY_META.find((candidate) => candidate.key === categoryKey);
@@ -367,7 +369,7 @@ export function DigestCategoryLens({
 
   return (
     <View style={styles.wrapper}>
-      <View style={styles.controlsBox}>
+      <View ref={walkMark.ref('reading.search')} collapsable={false} style={styles.controlsBox}>
         <EntrySearchInput
           key={searchResetKey}
           placeholder={`Search within ${meta?.label ?? 'this lens'}...`}
@@ -379,6 +381,7 @@ export function DigestCategoryLens({
             if (active) scrollToY?.(0);
           }}
           onPressInfo={() => setHelpVisible(true)}
+          infoRef={walkMark.ref('reading.searchHelp')}
         />
       </View>
       <SearchMatchHelpSheet visible={helpVisible} onClose={() => setHelpVisible(false)} styles={styles} />
@@ -418,6 +421,7 @@ export function DigestSearchLens({
   initialQuery?: string;
 }) {
   const router = useRouter();
+  const walkMark = useWalkMark();
   const bandGap = useBandGap();
   const styles = useMemo(() => makeStyles(tabColor, tabTextColor, bandGap), [tabColor, tabTextColor, bandGap]);
   const [query, setQuery] = useState(initialQuery);
@@ -451,7 +455,7 @@ export function DigestSearchLens({
           </Text>
         </View>
       )}
-      <View style={styles.controlsBox}>
+      <View ref={walkMark.ref('reading.search')} collapsable={false} style={styles.controlsBox}>
         <EntrySearchInput
           placeholder="Search everything..."
           style={styles.searchField}
@@ -463,6 +467,7 @@ export function DigestSearchLens({
           }}
           onActiveChange={setSearchActive}
           onPressInfo={() => setHelpVisible(true)}
+          infoRef={walkMark.ref('reading.searchHelp')}
         />
         {trimmed.length > 0 ? (
           <Text style={styles.resultCount}>
@@ -480,6 +485,7 @@ export function DigestSearchLens({
               {index > 0 ? <View style={styles.rowDivider} /> : null}
               <DigestEntryRow
                 entry={result.entry}
+                markRef={index === 0 ? walkMark.ref('reading.entry') : undefined}
                 groupLabel={categoryLabelForEntry(result.entry)}
                 expanded={expandedId === result.entry.id}
                 onToggle={() => setExpandedId(expandedId === result.entry.id ? null : result.entry.id)}

@@ -38,6 +38,7 @@ import { addTodo, answerTodo, deleteTodo, listTodos, reopenTodo, updateTodo } fr
 import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { describeRepeat } from '../lib/repeatRule';
 import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
+import { useWalkMark } from './WalkMark';
 import { AppTextInput } from './AppTextInput';
 import { ThumbRow } from './ThumbRow';
 
@@ -98,6 +99,10 @@ export function TodoSection({ tabColor, scope }: Props) {
   const reading = useMemo(() => (words.trim() ? readTodoWords(words, new Date()) : null), [words]);
   const groups = groupTodos(todos, today);
   const openCount = todos.filter((todo) => !todo.doneAt).length;
+  // The first open to-do carries the tutorial rings for the row buttons
+  // (lib/toolHowTos.ts).
+  const walkMark = useWalkMark();
+  const firstOpenId = groups.find((group) => group.key !== 'closed')?.todos[0]?.id;
 
   async function afterChange(message: string | null) {
     setSaidBack(message);
@@ -234,6 +239,7 @@ export function TodoSection({ tabColor, scope }: Props) {
       <View key={todo.id} style={styles.todoBlock}>
         <View style={styles.itemRow}>
           <TouchableOpacity
+            ref={todo.id === firstOpenId ? walkMark.ref('todo.done') : undefined}
             onPress={() => (closed ? handleReopen(todo) : handleAnswer(todo, 'done'))}
             accessibilityRole="checkbox"
             accessibilityState={{ checked: closed }}
@@ -254,15 +260,15 @@ export function TodoSection({ tabColor, scope }: Props) {
           <View style={styles.linkRow}>
             {closed ? null : (
               <>
-                <TouchableOpacity onPress={() => startEdit(todo)}>
+                <TouchableOpacity ref={todo.id === firstOpenId ? walkMark.ref('todo.change') : undefined} onPress={() => startEdit(todo)}>
                   <Text style={styles.linkText}>Change</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleAnswer(todo, 'let_go')}>
+                <TouchableOpacity ref={todo.id === firstOpenId ? walkMark.ref('todo.letGo') : undefined} onPress={() => handleAnswer(todo, 'let_go')}>
                   <Text style={styles.linkText}>{letGoLabel(todo)}</Text>
                 </TouchableOpacity>
               </>
             )}
-            <TouchableOpacity onPress={() => askRemove(todo)}>
+            <TouchableOpacity ref={todo.id === firstOpenId ? walkMark.ref('todo.remove') : undefined} onPress={() => askRemove(todo)}>
               <Text style={[styles.linkText, { color: colors.danger }]}>Remove</Text>
             </TouchableOpacity>
           </View>
@@ -299,7 +305,7 @@ export function TodoSection({ tabColor, scope }: Props) {
             </TouchableOpacity>
           ) : null}
           {scope === 'everything' ? renderAreaPills(area, setArea) : null}
-          <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleAdd}>
+          <TouchableOpacity ref={walkMark.ref('todo.add')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleAdd}>
             <Text style={styles.primaryButtonText}>Add to the List</Text>
           </TouchableOpacity>
         </View>
@@ -320,7 +326,7 @@ export function TodoSection({ tabColor, scope }: Props) {
         if (group.key === 'closed') {
           return (
             <View key={group.key} style={styles.group}>
-              <TouchableOpacity onPress={() => setShowClosed(!showClosed)} style={styles.groupToggle}>
+              <TouchableOpacity ref={walkMark.ref('todo.showDone')} onPress={() => setShowClosed(!showClosed)} style={styles.groupToggle}>
                 <Ionicons name={showClosed ? 'chevron-down' : 'chevron-forward'} size={16} color={tabColor} />
                 <Text style={styles.groupHeading}>{`${group.label} (${group.todos.length})`}</Text>
               </TouchableOpacity>

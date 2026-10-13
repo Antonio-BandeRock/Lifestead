@@ -656,6 +656,12 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
     );
   }
 
+  // The first row on screen carries the tutorial rings for the row buttons
+  // (lib/toolHowTos.ts), the way the first garden area does.
+  const firstShownId = (['prescription', 'otc', 'supplement'] as const)
+    .map((kind) => treatments.find((treatment) => treatment.treatmentType === kind))
+    .find(Boolean)?.id;
+
   function renderTreatmentGroup(title: string, groupTreatments: TreatmentRecord[]) {
     if (groupTreatments.length === 0) return null;
     return (
@@ -700,21 +706,21 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
               </TouchableOpacity>
 
               <View style={styles.supplementRowActions}>
-                <TouchableOpacity onPress={() => handleToggleActive(treatment)}>
+                <TouchableOpacity ref={treatment.id === firstShownId ? walkMark.ref('myMeds.tracking') : undefined} style={walkMark('myMeds.tracking')} onPress={() => handleToggleActive(treatment)}>
                   <Text style={treatment.active ? styles.actionTextPrimary : styles.actionText}>
                     {treatment.active ? 'Tracking' : 'Not tracking'}
                   </Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setExpandedId(isExpanded ? null : treatment.id)}>
+                <TouchableOpacity ref={treatment.id === firstShownId ? walkMark.ref('myMeds.details') : undefined} style={walkMark('myMeds.details')} onPress={() => setExpandedId(isExpanded ? null : treatment.id)}>
                   <Text style={styles.actionText}>{isExpanded ? 'Hide details' : 'Details'}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => openEdit(treatment)}>
+                <TouchableOpacity ref={treatment.id === firstShownId ? walkMark.ref('myMeds.edit') : undefined} style={walkMark('myMeds.edit')} onPress={() => openEdit(treatment)}>
                   <Text style={styles.actionText}>Edit</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => scheduleIt(treatment)}>
+                <TouchableOpacity ref={treatment.id === firstShownId ? walkMark.ref('myMeds.schedule') : undefined} style={walkMark('myMeds.schedule')} onPress={() => scheduleIt(treatment)}>
                   <Text style={styles.actionTextPrimary}>Schedule it</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleRemove(treatment)}>
+                <TouchableOpacity ref={treatment.id === firstShownId ? walkMark.ref('myMeds.remove') : undefined} style={walkMark('myMeds.remove')} onPress={() => handleRemove(treatment)}>
                   <Text style={styles.actionTextRemove}>Remove</Text>
                 </TouchableOpacity>
               </View>
@@ -840,13 +846,13 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
               <TouchableOpacity ref={walkMark.ref('myMeds.add')} style={[styles.addButton, walkMark('myMeds.add')]} onPress={() => openAddMed('prescription')}>
                 <Text style={styles.addButtonText}>+ Prescription</Text>
               </TouchableOpacity>
-              <TouchableOpacity ref={walkMark.ref('myMeds.add')} style={[styles.addButton, walkMark('myMeds.add')]} onPress={() => openAddMed('otc')}>
+              <TouchableOpacity ref={walkMark.ref('myMeds.otc')} style={[styles.addButton, walkMark('myMeds.otc')]} onPress={() => openAddMed('otc')}>
                 <Text style={styles.addButtonText}>+ OTC drug</Text>
               </TouchableOpacity>
-              <TouchableOpacity ref={walkMark.ref('myMeds.add')} style={[styles.addButton, walkMark('myMeds.add')]} onPress={openAddSupplement}>
+              <TouchableOpacity ref={walkMark.ref('myMeds.supplement')} style={[styles.addButton, walkMark('myMeds.supplement')]} onPress={openAddSupplement}>
                 <Text style={styles.addButtonText}>+ Supplement</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.addButton} onPress={() => router.push('/medicine-label')}>
+              <TouchableOpacity ref={walkMark.ref('myMeds.label')} style={[styles.addButton, walkMark('myMeds.label')]} onPress={() => router.push('/medicine-label')}>
                 <Text style={styles.addButtonText}>Look up a label</Text>
               </TouchableOpacity>
             </View>
@@ -958,7 +964,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
                   </View>
                 );
               })}
-              <TouchableOpacity onPress={addIngredientRow} style={styles.secondaryButton}>
+              <TouchableOpacity ref={walkMark.ref('myMeds.ingredient')} onPress={addIngredientRow} style={[styles.secondaryButton, walkMark('myMeds.ingredient')]}>
                 <Text style={styles.secondaryButtonText}>+ Add ingredient</Text>
               </TouchableOpacity>
 
@@ -975,7 +981,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
                 <TouchableOpacity style={styles.secondaryButton} onPress={closeAddForm}>
                   <Text style={styles.secondaryButtonText}>Cancel</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.primaryButton} onPress={handleSaveSupplement}>
+                <TouchableOpacity ref={walkMark.ref('myMeds.saveSupplement')} style={[styles.primaryButton, walkMark('myMeds.saveSupplement')]} onPress={handleSaveSupplement}>
                   <Text style={styles.primaryButtonText}>Add supplement</Text>
                 </TouchableOpacity>
               </ThumbRow>
@@ -1164,7 +1170,8 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
                 this app is sent.
               </Text>
               <TouchableOpacity
-                style={styles.secondaryButton}
+                ref={walkMark.ref('myMeds.drugChecker')}
+                style={[styles.secondaryButton, walkMark('myMeds.drugChecker')]}
                 onPress={() => Linking.openURL('https://www.drugs.com/drug_interactions.html').catch(() => undefined)}
               >
                 <Text style={styles.secondaryButtonText}>Open the Drugs.com interaction checker</Text>

@@ -90,6 +90,7 @@ import {
   type KitchenCoverage,
 } from '../lib/groceryList';
 import { ThumbEndRow } from '../components/ThumbEndRow';
+import { useWalkMark } from '../components/WalkMark';
 
 const DEFAULT_DAYS = 3;
 
@@ -137,6 +138,7 @@ export default function GroceryListScreen() {
   const scrollPadding = useFloatingButtonScrollPadding();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [confirm, confirmElement] = useConfirmSheet();
+  const walkMark = useWalkMark();
   const { listId } = useLocalSearchParams<{ listId?: string }>();
 
   const [mode, setMode] = useState<Mode>('setup');
@@ -357,14 +359,16 @@ export default function GroceryListScreen() {
     return (
       <View style={styles.card}>
         <Text style={styles.sectionLabel}>Which store? (optional)</Text>
-        <PopoverSelect
-          selected={addingStore ? ADD_STORE : storeName.trim() || NO_STORE}
-          options={storeOptions}
-          onSelect={(value) => void chooseStore(value)}
-          placeholder="No store"
-          width={240}
-          tabColor={colors.tabLife}
-        />
+        <View ref={walkMark.ref('grocery.store')} collapsable={false} style={styles.storePickerWrap}>
+          <PopoverSelect
+            selected={addingStore ? ADD_STORE : storeName.trim() || NO_STORE}
+            options={storeOptions}
+            onSelect={(value) => void chooseStore(value)}
+            placeholder="No store"
+            width={240}
+            tabColor={colors.tabLife}
+          />
+        </View>
         {addingStore ? (
           <ThumbEndRow style={styles.addAmountRow}>
             <AppTextInput
@@ -380,7 +384,7 @@ export default function GroceryListScreen() {
           </ThumbEndRow>
         ) : null}
         <Text style={styles.muted}>{caption}</Text>
-        <TouchableOpacity style={styles.linkRow} activeOpacity={0.85} onPress={() => void openStoreLayout()}>
+        <TouchableOpacity ref={walkMark.ref('grocery.aisles')} style={styles.linkRow} activeOpacity={0.85} onPress={() => void openStoreLayout()}>
           <Ionicons name="storefront-outline" size={18} color={colors.textSecondary} />
           <Text style={styles.linkText}>{storeLayout ? 'Change this store\'s aisles' : 'Lay out a store by its aisles'}</Text>
         </TouchableOpacity>
@@ -876,6 +880,7 @@ export default function GroceryListScreen() {
               {GROCERY_DAY_OPTIONS.map((option) => (
                 <TouchableOpacity
                   key={option}
+                  ref={option === GROCERY_DAY_OPTIONS[0] ? walkMark.ref('grocery.days') : undefined}
                   style={[styles.pill, daysAhead === option && styles.pillActive]}
                   activeOpacity={0.85}
                   onPress={() => setDaysAhead(option)}
@@ -937,6 +942,7 @@ export default function GroceryListScreen() {
               </TouchableOpacity>
               <Text style={styles.stepperValue}>{peopleCount}</Text>
               <TouchableOpacity
+                ref={walkMark.ref('grocery.people')}
                 style={styles.stepperButton}
                 activeOpacity={0.85}
                 onPress={() => setPeopleCount((value) => Math.min(MAX_PEOPLE, value + 1))}
@@ -954,7 +960,7 @@ export default function GroceryListScreen() {
               : 'Saved with the list, so prices can later be compared between stores.',
           )}
 
-          <TouchableOpacity style={[styles.inset, styles.primaryButton, busy && styles.disabled]} activeOpacity={0.85} onPress={handleBuild} disabled={busy}>
+          <TouchableOpacity ref={walkMark.ref('grocery.build')} style={[styles.inset, styles.primaryButton, busy && styles.disabled]} activeOpacity={0.85} onPress={handleBuild} disabled={busy}>
             <Ionicons name="cart-outline" size={18} color={colors.textOnButton} />
             <Text style={styles.primaryButtonText}>{busy ? 'Building…' : 'Build My Grocery List'}</Text>
           </TouchableOpacity>
@@ -962,9 +968,10 @@ export default function GroceryListScreen() {
           {history.length > 0 ? (
             <View style={styles.card}>
               <Text style={styles.sectionLabel}>Earlier lists</Text>
-              {history.map((past) => (
+              {history.map((past, index) => (
                 <TouchableOpacity
                   key={past.id}
+                  ref={index === 0 ? walkMark.ref('grocery.earlier') : undefined}
                   style={styles.historyRow}
                   activeOpacity={0.85}
                   onPress={() => router.replace(`/grocery-list?listId=${encodeURIComponent(past.id)}`)}
@@ -1035,6 +1042,7 @@ export default function GroceryListScreen() {
         <View style={styles.buttonRow}>
           {list && kitchenLines(items, kitchen).length > 0 ? (
             <TouchableOpacity
+              ref={walkMark.ref('grocery.takeKitchen')}
               style={[styles.secondaryButton, busy && styles.disabled]}
               activeOpacity={0.85}
               onPress={() => void offerKitchenForList(list.id, items, kitchen)}
@@ -1045,6 +1053,7 @@ export default function GroceryListScreen() {
             </TouchableOpacity>
           ) : null}
           <TouchableOpacity
+            ref={walkMark.ref('grocery.refresh')}
             style={[styles.secondaryButton, busy && styles.disabled]}
             activeOpacity={0.85}
             onPress={handleRefresh}
@@ -1053,11 +1062,12 @@ export default function GroceryListScreen() {
             <Ionicons name="sync-outline" size={18} color={colors.textSecondary} />
             <Text style={styles.secondaryButtonText}>Refresh</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={handleScanNewItem}>
+          <TouchableOpacity ref={walkMark.ref('grocery.scan')} style={styles.secondaryButton} activeOpacity={0.85} onPress={handleScanNewItem}>
             <Ionicons name="barcode-outline" size={18} color={colors.textSecondary} />
             <Text style={styles.secondaryButtonText}>Scan a Product</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            ref={walkMark.ref('grocery.scanHousehold')}
             style={styles.secondaryButton}
             activeOpacity={0.85}
             onPress={() => list && router.push(`/scan-to-list?listId=${encodeURIComponent(list.id)}`)}
@@ -1065,11 +1075,12 @@ export default function GroceryListScreen() {
             <Ionicons name="barcode-outline" size={18} color={colors.textSecondary} />
             <Text style={styles.secondaryButtonText}>Scan a Household Thing</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={handleSendAsText}>
+          <TouchableOpacity ref={walkMark.ref('grocery.send')} style={styles.secondaryButton} activeOpacity={0.85} onPress={handleSendAsText}>
             <Ionicons name="chatbox-ellipses-outline" size={18} color={colors.textSecondary} />
             <Text style={styles.secondaryButtonText}>Send as Text</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            ref={walkMark.ref('grocery.delete')}
             style={[styles.secondaryButton, busy && styles.disabled]}
             activeOpacity={0.85}
             onPress={() => setConfirmDeleteOpen(true)}
@@ -1078,7 +1089,7 @@ export default function GroceryListScreen() {
             <Ionicons name="trash-outline" size={18} color={colors.danger} />
             <Text style={[styles.secondaryButtonText, { color: colors.danger }]}>Delete List</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.secondaryButton, busy && styles.disabled]} activeOpacity={0.85} onPress={handleFinish} disabled={busy}>
+          <TouchableOpacity ref={walkMark.ref('grocery.finish')} style={[styles.secondaryButton, busy && styles.disabled]} activeOpacity={0.85} onPress={handleFinish} disabled={busy}>
             <Ionicons name={list?.status === 'active' ? 'checkmark-done-outline' : 'refresh-outline'} size={18} color={colors.textSecondary} />
             <Text style={styles.secondaryButtonText}>{list?.status === 'active' ? 'Finish Shopping' : 'Reopen List'}</Text>
           </TouchableOpacity>
@@ -1097,6 +1108,9 @@ export default function GroceryListScreen() {
             <Text style={styles.sectionLabel}>{section.title}</Text>
             {section.caption ? <Text style={styles.muted}>{section.caption}</Text> : null}
             {section.items.map((item) => {
+              // Only the first line on the list carries the tutorial marks,
+              // since the last node registered for a name is the one ringed.
+              const first = section === sections[0] && item === section.items[0];
               const lineTotal = groceryLineTotal(item);
               const expanded = expandedId === item.id;
               // Undefined for most lines: nothing is said unless the app
@@ -1106,6 +1120,7 @@ export default function GroceryListScreen() {
                 <View key={item.id} style={styles.itemWrap}>
                   <View style={styles.itemRow}>
                     <TouchableOpacity
+                      ref={first ? walkMark.ref('grocery.check') : undefined}
                       style={[styles.checkbox, item.checked && styles.checkboxChecked]}
                       activeOpacity={0.85}
                       onPress={() => handleToggleChecked(item)}
@@ -1204,6 +1219,7 @@ export default function GroceryListScreen() {
                       {item.note ? <Text style={styles.rowMeta}>{item.note}</Text> : null}
                     </TouchableOpacity>
                     <TouchableOpacity
+                      ref={first ? walkMark.ref('grocery.open') : undefined}
                       style={styles.expandHit}
                       activeOpacity={0.85}
                       onPress={() => handleExpand(item)}
@@ -1231,6 +1247,7 @@ export default function GroceryListScreen() {
                           placeholderTextColor={colors.textMuted}
                         />
                         <TouchableOpacity
+                          ref={walkMark.ref('grocery.priceCamera')}
                           style={[styles.priceCameraButton, readingPrice && styles.disabled]
                           }
                           activeOpacity={0.85}
@@ -1305,6 +1322,7 @@ export default function GroceryListScreen() {
                           recorded as an offer. Without it a price history reads a
                           single half-price week as the thing getting cheaper. */}
                       <TouchableOpacity
+                        ref={walkMark.ref('grocery.sale')}
                         style={styles.saleRow}
                         activeOpacity={0.85}
                         onPress={() => setEditor((current) => ({ ...current, onSale: !current.onSale }))}
@@ -1326,18 +1344,18 @@ export default function GroceryListScreen() {
                         placeholderTextColor={colors.textMuted}
                       />
 
-                      <TouchableOpacity style={[styles.primaryButton, busy && styles.disabled]} activeOpacity={0.85} onPress={() => handleSavePrice(item)} disabled={busy}>
+                      <TouchableOpacity ref={walkMark.ref('grocery.priceSave')} style={[styles.primaryButton, busy && styles.disabled]} activeOpacity={0.85} onPress={() => handleSavePrice(item)} disabled={busy}>
                         <Text style={styles.primaryButtonText}>Save</Text>
                       </TouchableOpacity>
-                      <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={() => handleScanForItem(item)}>
+                      <TouchableOpacity ref={walkMark.ref('grocery.scanItem')} style={styles.secondaryButton} activeOpacity={0.85} onPress={() => handleScanForItem(item)}>
                         <Ionicons name="barcode-outline" size={18} color={colors.textSecondary} />
                         <Text style={styles.secondaryButtonText}>Scan This Product</Text>
                       </TouchableOpacity>
-                      <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={() => handleComparePrices(item)}>
+                      <TouchableOpacity ref={walkMark.ref('grocery.compare')} style={styles.secondaryButton} activeOpacity={0.85} onPress={() => handleComparePrices(item)}>
                         <Ionicons name="swap-horizontal-outline" size={18} color={colors.textSecondary} />
                         <Text style={styles.secondaryButtonText}>Compare Brands</Text>
                       </TouchableOpacity>
-                      <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={() => handleRemoveItem(item)}>
+                      <TouchableOpacity ref={walkMark.ref('grocery.removeItem')} style={styles.secondaryButton} activeOpacity={0.85} onPress={() => handleRemoveItem(item)}>
                         <Ionicons name="trash-outline" size={18} color={colors.danger} />
                         <Text style={[styles.secondaryButtonText, { color: colors.danger }]}>Remove From List</Text>
                       </TouchableOpacity>
@@ -1375,13 +1393,13 @@ export default function GroceryListScreen() {
               placeholderTextColor={colors.textMuted}
             />
           </View>
-          <TouchableOpacity style={[styles.primaryButton, (busy || !newName.trim()) && styles.disabled]} activeOpacity={0.85} onPress={handleAddItem} disabled={busy}>
+          <TouchableOpacity ref={walkMark.ref('grocery.addItem')} style={[styles.primaryButton, (busy || !newName.trim()) && styles.disabled]} activeOpacity={0.85} onPress={handleAddItem} disabled={busy}>
             <Ionicons name="add" size={18} color={colors.textOnButton} />
             <Text style={styles.primaryButtonText}>Add to List</Text>
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={[styles.inset, styles.secondaryButton]} activeOpacity={0.85} onPress={() => { setList(null); setItems([]); setMode('setup'); }}>
+        <TouchableOpacity ref={walkMark.ref('grocery.newList')} style={[styles.inset, styles.secondaryButton]} activeOpacity={0.85} onPress={() => { setList(null); setItems([]); setMode('setup'); }}>
           <Ionicons name="document-text-outline" size={18} color={colors.textSecondary} />
           <Text style={styles.secondaryButtonText}>Start a New List</Text>
         </TouchableOpacity>
@@ -1578,5 +1596,6 @@ const styles = StyleSheet.create({
   secondaryButtonText: { ...typography.bodyEmphasis, color: colors.textSecondary, ...textShadow },
   storeAddButton: { flex: 0, minWidth: 80 },
   linkRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 6, alignSelf: 'flex-start' },
+  storePickerWrap: { alignSelf: 'flex-start' },
   linkText: { ...typography.body, color: colors.textSecondary, textDecorationLine: 'underline', ...textShadow },
 });

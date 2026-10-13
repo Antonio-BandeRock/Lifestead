@@ -574,6 +574,7 @@ export function RoutinesSection({ tabColor }: Props) {
           <Text style={styles.label}>While walking it</Text>
           <View style={styles.dayRow}>
             <TouchableOpacity
+              ref={walkMark.ref('routines.speak')}
               style={[styles.dayPill, form.speakSteps ? styles.dayPillOn : null]}
               onPress={() => setForm({ ...form, speakSteps: !form.speakSteps })}
             >
@@ -615,6 +616,8 @@ export function RoutinesSection({ tabColor }: Props) {
 
       {routines.map((routine, position) => {
         const open = openId === routine.id;
+        // The first routine carries the tutorial rings (lib/toolHowTos.ts).
+        const first = position === 0;
         return (
           <View key={routine.id} style={routine.active ? null : styles.dimmed}>
           <TabBand folds={folds} color={tabColor} id={`life:routines:${routine.id}`} title={routine.name} icon="repeat-outline" count={routine.steps.length}>
@@ -630,7 +633,7 @@ export function RoutinesSection({ tabColor }: Props) {
 
             {routine.steps.length > 0 ? (
               <TouchableOpacity
-                ref={walkMark.ref('routines.walk')}
+                ref={routine.id === routines.find((each) => each.steps.length > 0)?.id ? walkMark.ref('routines.walk') : undefined}
                 style={[styles.primaryButton, walkMark('routines.walk')]}
                 onPress={() => router.push({ pathname: '/routine', params: { id: routine.id } })}
               >
@@ -639,12 +642,13 @@ export function RoutinesSection({ tabColor }: Props) {
             ) : null}
 
             <View style={styles.rowActions}>
-              <TouchableOpacity onPress={() => setOpenId(open ? null : routine.id)}>
+              <TouchableOpacity ref={first ? walkMark.ref('routines.steps') : undefined} onPress={() => setOpenId(open ? null : routine.id)}>
                 <Text style={styles.actionText}>
                   {open ? 'Hide steps' : routine.steps.length === 0 ? 'Add the steps' : 'Steps'}
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
+                ref={first ? walkMark.ref('routines.change') : undefined}
                 onPress={() => {
                   setOccasionForm(null);
                   setForm({
@@ -666,11 +670,11 @@ export function RoutinesSection({ tabColor }: Props) {
                 </TouchableOpacity>
               ) : null}
               {position < routines.length - 1 ? (
-                <TouchableOpacity onPress={async () => { await moveRoutine(routine.id, 1); load(); }}>
+                <TouchableOpacity ref={first ? walkMark.ref('routines.moveDown') : undefined} onPress={async () => { await moveRoutine(routine.id, 1); load(); }}>
                   <Text style={styles.actionText}>Move down</Text>
                 </TouchableOpacity>
               ) : null}
-              <TouchableOpacity onPress={() => confirmRemoveRoutine(routine)}>
+              <TouchableOpacity ref={first ? walkMark.ref('routines.remove') : undefined} onPress={() => confirmRemoveRoutine(routine)}>
                 <Text style={styles.actionTextRemove}>Remove</Text>
               </TouchableOpacity>
             </View>
@@ -701,7 +705,7 @@ export function RoutinesSection({ tabColor }: Props) {
                             </TouchableOpacity>
                           ) : null}
                           {index < routine.steps.length - 1 ? (
-                            <TouchableOpacity onPress={() => shiftStep(routine, index, 1)}>
+                            <TouchableOpacity ref={index === 0 ? walkMark.ref('routines.stepDown') : undefined} onPress={() => shiftStep(routine, index, 1)}>
                               <Text style={styles.actionText}>Down</Text>
                             </TouchableOpacity>
                           ) : null}
@@ -709,6 +713,7 @@ export function RoutinesSection({ tabColor }: Props) {
                             <Text style={styles.actionTextRemove}>Remove</Text>
                           </TouchableOpacity>
                           <TouchableOpacity
+                            ref={index === 0 ? walkMark.ref('routines.stepEdit') : undefined}
                             onPress={() => {
                               setCheckForm(null);
                               setStepForm({

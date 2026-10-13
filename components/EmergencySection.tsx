@@ -332,7 +332,8 @@ export function EmergencySection({ tabColor }: Props) {
           six-month-old medication list current.
         </Text>
         <TouchableOpacity
-          style={styles.primaryButton}
+          ref={walkMark.ref('emergency.checked')}
+          style={[styles.primaryButton, walkMark('emergency.checked')]}
           onPress={() =>
             setConfirm({
               title: 'All of this still right?',
@@ -383,7 +384,7 @@ export function EmergencySection({ tabColor }: Props) {
             is worth more than everything else on this screen put together.
           </Text>
         ) : (
-          contacts.map((contact) => (
+          contacts.map((contact, index) => (
             <View key={contact.id} style={styles.row}>
               <View style={styles.rowMain}>
                 <Text style={styles.rowTitle}>
@@ -398,7 +399,7 @@ export function EmergencySection({ tabColor }: Props) {
                 <ThumbEndRow style={styles.rowActions}>
                   {Platform.OS !== 'web' && dialable(contact.phone) ? (
                     <>
-                      <TouchableOpacity onPress={() => callContact(contact.phone)} accessibilityLabel={`Call ${contact.name}`}>
+                      <TouchableOpacity ref={index === 0 ? walkMark.ref('emergency.call') : undefined} onPress={() => callContact(contact.phone)} accessibilityLabel={`Call ${contact.name}`}>
                         <Text style={styles.actionText}>Call</Text>
                       </TouchableOpacity>
                       <TouchableOpacity onPress={() => void textContact(contact.phone)} accessibilityLabel={`Text ${contact.name}`}>
@@ -450,7 +451,7 @@ export function EmergencySection({ tabColor }: Props) {
         {contactForm ? (
           <View style={styles.inlineForm}>
             {CAN_PICK_CONTACTS ? (
-              <TouchableOpacity onPress={() => void fillContactFromPhone()} accessibilityLabel="Pick this person from contacts">
+              <TouchableOpacity ref={walkMark.ref('emergency.pickContact')} onPress={() => void fillContactFromPhone()} accessibilityLabel="Pick this person from contacts">
                 <Text style={styles.actionText}>Pick from contacts</Text>
               </TouchableOpacity>
             ) : null}
@@ -502,7 +503,7 @@ export function EmergencySection({ tabColor }: Props) {
               <TouchableOpacity style={styles.secondaryButton} onPress={() => setContactForm(null)}>
                 <Text style={styles.secondaryButtonText}>Cancel</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.primaryButton} onPress={saveContact}>
+              <TouchableOpacity ref={walkMark.ref('emergency.savePerson')} style={[styles.primaryButton, walkMark('emergency.savePerson')]} onPress={saveContact}>
                 <Text style={styles.primaryButtonText}>Save</Text>
               </TouchableOpacity>
             </ThumbRow>
@@ -567,10 +568,11 @@ export function EmergencySection({ tabColor }: Props) {
           printed as blank, so nothing on it can be read as saying you have no allergies.
         </Text>
         <View style={styles.rowActions}>
-          <TouchableOpacity onPress={() => setShowCard((prev) => !prev)}>
+          <TouchableOpacity ref={walkMark.ref('emergency.showCard')} onPress={() => setShowCard((prev) => !prev)}>
             <Text style={styles.actionText}>{showCard ? 'Hide it' : 'Show it'}</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            ref={walkMark.ref('emergency.sendCard')}
             onPress={async () => {
               try {
                 await Share.share({ message: card });
@@ -606,13 +608,14 @@ export function EmergencySection({ tabColor }: Props) {
         {medicalId.length === 0 ? (
           <Text style={styles.helperText}>Nothing to copy yet. Fill in the bands above first.</Text>
         ) : (
-          medicalId.map((entry) => (
+          medicalId.map((entry, index) => (
             <View key={entry.field} style={styles.row}>
               <View style={styles.rowMain}>
                 <Text style={styles.rowTitle}>{entry.field}</Text>
                 <Text style={styles.rowMeta} selectable>{entry.value}</Text>
               </View>
               <TouchableOpacity
+                ref={index === 0 ? walkMark.ref('emergency.copy') : undefined}
                 onPress={() => void copyMedicalIdLine(entry.field, entry.value)}
                 accessibilityLabel={`Copy the ${entry.field} line`}
                 style={styles.lineAction}
@@ -643,7 +646,7 @@ export function EmergencySection({ tabColor }: Props) {
           fold. Drug allergies and who to call go on the front. A long list makes the card longer
           rather than leaving anything off, and the date it was confirmed is printed on it.
         </Text>
-        <TouchableOpacity style={styles.primaryButton} onPress={printWalletCard} disabled={printing}>
+        <TouchableOpacity ref={walkMark.ref('emergency.wallet')} style={[styles.primaryButton, walkMark('emergency.wallet')]} onPress={printWalletCard} disabled={printing}>
           <Text style={styles.primaryButtonText}>{printing ? 'Making the card…' : 'Make the wallet card'}</Text>
         </TouchableOpacity>
       </TabBand>
@@ -688,7 +691,7 @@ export function EmergencySection({ tabColor }: Props) {
             </View>
           ) : (
             <View style={styles.rowActions}>
-              <TouchableOpacity onPress={() => setLockPicking([...lockParts])}>
+              <TouchableOpacity ref={walkMark.ref('emergency.lockScreen')} onPress={() => setLockPicking([...lockParts])}>
                 <Text style={styles.actionText}>{lockParts.length > 0 ? 'Change what shows' : 'Choose what shows'}</Text>
               </TouchableOpacity>
               {lockParts.length > 0 ? (

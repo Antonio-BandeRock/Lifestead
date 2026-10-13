@@ -586,7 +586,7 @@ export function ConditionsSection({
         </Text>
       </View>
 
-      <View style={styles.controlsBox}>
+      <View ref={walkMark.ref('conditions.search')} collapsable={false} style={styles.controlsBox}>
         <EntrySearchInput
           placeholder="Search these conditions..."
           style={styles.searchField}
@@ -657,7 +657,7 @@ export function ConditionsSection({
               advisories.
             </Text>
             {familyClosed ? <VaultClosedBand inline color={tabColor} categories={['familyHealth']} /> : null}
-            {(familyClosed ? [] : family).map((member) => {
+            {(familyClosed ? [] : family).map((member, memberIndex) => {
               const conditionNames = member.conditionCodes
                 .map((code) => allConditions.find((condition) => condition.code === code)?.name ?? code)
                 .sort((a, b) => a.localeCompare(b));
@@ -697,6 +697,7 @@ export function ConditionsSection({
                   </View>
                   <View style={styles.memberActions}>
                     <TouchableOpacity
+                      ref={memberIndex === 0 ? walkMark.ref('family.change') : undefined}
                       onPress={() =>
                         setFamilyForm({
                           id: member.id,
@@ -723,7 +724,7 @@ export function ConditionsSection({
                     >
                       <Text style={styles.actionText}>Change</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => confirmRemoveMember(member)}>
+                    <TouchableOpacity ref={memberIndex === 0 ? walkMark.ref('family.remove') : undefined} onPress={() => confirmRemoveMember(member)}>
                       <Text style={styles.actionTextRemove}>Remove</Text>
                     </TouchableOpacity>
                   </View>
@@ -920,7 +921,7 @@ export function ConditionsSection({
                 touches your scores or advisories.
               </Text>
               <ThumbRow primary="first" style={styles.formActions}>
-                <TouchableOpacity style={styles.primaryButton} onPress={saveFamilyMember}>
+                <TouchableOpacity ref={walkMark.ref('family.save')} style={styles.primaryButton} onPress={saveFamilyMember}>
                   <Text style={styles.primaryButtonText}>Save</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.secondaryButton} onPress={() => setFamilyForm(null)}>
@@ -941,7 +942,7 @@ export function ConditionsSection({
               Conditions you want to read about without adding them to what the app tracks for you. Nothing
               here changes your food scores, meal plans, advisories or safe foods.
             </Text>
-            <View style={styles.pickerRow}>
+            <View ref={walkMark.ref('conditions.curious')} collapsable={false} style={styles.pickerRow}>
               <Text style={styles.pickerLabel}>Add one</Text>
               <PopoverSelect
                 options={curiousChoices}
@@ -1007,6 +1008,7 @@ function ConditionBandBody({
   tabColor: string;
   styles: Styles;
 }) {
+  const walkMark = useWalkMark();
   const conditionCode = DIGEST_KEY_TO_CONDITION_CODE[meta.key];
   const stageCode = conditionCode ? declaredStages[conditionCode] : undefined;
   const grouped = useMemo(
@@ -1038,16 +1040,16 @@ function ConditionBandBody({
         <Text style={styles.conditionIntroText}>{meta.description}</Text>
         {caption ? <Text style={styles.conditionCaption}>{caption}</Text> : null}
         {extra ? (
-          <TouchableOpacity onPress={extra.onPress}>
+          <TouchableOpacity ref={walkMark.ref('conditions.extra')} onPress={extra.onPress}>
             <Text style={styles.actionText}>{extra.label}</Text>
           </TouchableOpacity>
         ) : null}
       </View>
-      {topics.map((topic) => {
+      {topics.map((topic, topicIndex) => {
         const expanded = openTopic === topic.topic;
         return (
           <View key={topic.topic} style={styles.topicFold}>
-            <TouchableOpacity style={styles.topicTapArea} onPress={() => onToggleTopic(topic.topic)} activeOpacity={0.85}>
+            <TouchableOpacity ref={topicIndex === 0 ? walkMark.ref('conditions.topic') : undefined} style={styles.topicTapArea} onPress={() => onToggleTopic(topic.topic)} activeOpacity={0.85}>
               <Text style={styles.topicTitle}>
                 {topic.topic} ({topic.count})
               </Text>

@@ -103,6 +103,7 @@ import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
 import { RecordPhotos } from './RecordPhotos';
 import { ThumbRow } from './ThumbRow';
+import { useWalkMark } from './WalkMark';
 
 const PRIMARY_BUTTON_BACKGROUND = colors.buttonColor;
 const WHOLE_AREA = '__whole_area__';
@@ -178,6 +179,7 @@ export function DaysUntilSection({
   const [hours, setHours] = useState('');
   const [minutes, setMinutes] = useState('');
   const [now, setNow] = useState(() => new Date());
+  const walkMark = useWalkMark();
   const [plotId, setPlotId] = useState<string>(plot?.id ?? (scope === 'everything' ? NO_AREA : ''));
   const [plantingId, setPlantingId] = useState<string>(WHOLE_AREA);
   // Whole garden and everything: the plantings of whichever area is
@@ -385,7 +387,7 @@ export function DaysUntilSection({
                 : withLead('Name something and count the days to it: germination, transplanting out, the first harvest, the cover coming off. The phone reminds you on the day, and a counter keeps counting past its day until you mark it done.')}
         </Text>
       ) : null}
-      {ordered.map((item) => {
+      {ordered.map((item, index) => {
         const timed = isTimed(item);
         const figure = timed ? timedCountdownFigure(item, now) : countdownFigure(item, today);
         const progress = timed ? timedCountdownProgress(item, now) : countdownProgress(item, today);
@@ -411,11 +413,11 @@ export function DaysUntilSection({
             </View>
             {!readOnly ? (
               <>
-                <TouchableOpacity onPress={() => handleDone(item)}>
+                <TouchableOpacity ref={index === 0 ? walkMark.ref('daysUntil.done') : undefined} onPress={() => handleDone(item)}>
                   <Text style={styles.linkText}>{item.doneAt ? 'Start again' : 'Done'}</Text>
                 </TouchableOpacity>
                 {compact ? null : (
-                  <TouchableOpacity onPress={() => handleRemove(item)}>
+                  <TouchableOpacity ref={index === 0 ? walkMark.ref('daysUntil.remove') : undefined} onPress={() => handleRemove(item)}>
                     <Text style={[styles.linkText, { color: colors.danger }]}>Remove</Text>
                   </TouchableOpacity>
                 )}
@@ -483,7 +485,7 @@ export function DaysUntilSection({
           ) : null}
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
           <ThumbRow primary="first" style={styles.actionRow}>
-            <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSave}>
+            <TouchableOpacity ref={walkMark.ref('daysUntil.save')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSave}>
               <Text style={styles.primaryButtonText}>Start Counting</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => { setAdding(false); setError(null); }}>
@@ -492,7 +494,7 @@ export function DaysUntilSection({
           </ThumbRow>
         </View>
       ) : (
-        <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={() => setAdding(true)}>
+        <TouchableOpacity ref={walkMark.ref('daysUntil.add')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={() => setAdding(true)}>
           <Text style={styles.primaryButtonText}>+ Add a Days Until Counter</Text>
         </TouchableOpacity>
       )}

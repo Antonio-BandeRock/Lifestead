@@ -5,6 +5,7 @@ import { useInfoAlert } from './InfoAlert';
 import { PhoneOnlyNotice } from './PhoneOnlyNotice';
 import { TabBand, useTabBandStyles } from './TabBand';
 import { RecordPhotos } from './RecordPhotos';
+import { useWalkMark } from './WalkMark';
 import { useBandFolds } from '../hooks/useBandFolds';
 import { BUTTON_SHADOW, colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
@@ -111,6 +112,7 @@ export function MovementSection({ tabColor }: Props) {
   const styles = useMemo(() => makeStyles(tabColor), [tabColor]);
   const band = useTabBandStyles(tabColor);
   const folds = useBandFolds();
+  const walkMark = useWalkMark();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
 
   const [availability, setAvailability] = useState<HealthAvailability | null>(null);
@@ -410,14 +412,14 @@ export function MovementSection({ tabColor }: Props) {
               Syncs each time this area opens. Nothing is read in the background.
             </Text>
             <View style={styles.buttonRow}>
-              <TouchableOpacity style={styles.primaryButton} onPress={handleSync} disabled={busy !== null}>
+              <TouchableOpacity ref={walkMark.ref('movement.sync')} style={styles.primaryButton} onPress={handleSync} disabled={busy !== null}>
                 <Text style={styles.primaryButtonText}>{busy === 'sync' ? 'Syncing' : 'Sync now'}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.secondaryButton} onPress={() => openHealthSettings()}>
+              <TouchableOpacity ref={walkMark.ref('movement.settings')} style={styles.secondaryButton} onPress={() => openHealthSettings()}>
                 <Text style={styles.secondaryButtonText}>Health Connect settings</Text>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={handleStop} style={styles.linkRow}>
+            <TouchableOpacity ref={walkMark.ref('movement.stop')} onPress={handleStop} style={styles.linkRow}>
               <Text style={styles.actionText}>Stop syncing</Text>
             </TouchableOpacity>
           </>
@@ -429,7 +431,7 @@ export function MovementSection({ tabColor }: Props) {
             {readableCount > 0 && !syncState.enabled ? (
               <Text style={styles.helperText}>Permissions are already granted for {readableCount} signals; connecting turns syncing back on.</Text>
             ) : null}
-            <TouchableOpacity style={styles.primaryButton} onPress={handleConnect} disabled={busy !== null}>
+            <TouchableOpacity ref={walkMark.ref('movement.connect')} style={styles.primaryButton} onPress={handleConnect} disabled={busy !== null}>
               <Text style={styles.primaryButtonText}>{busy === 'connect' ? 'Connecting' : 'Connect'}</Text>
             </TouchableOpacity>
           </>
@@ -440,8 +442,13 @@ export function MovementSection({ tabColor }: Props) {
         <Text style={styles.helperText}>
           Read as recorded, nothing added. An empty row means the store had nothing for it, not that the figure was zero.
         </Text>
-        {summaries.map((summary) => (
-          <TouchableOpacity key={summary.signal.key} style={styles.row} onPress={() => explainSignal(summary)}>
+        {summaries.map((summary, index) => (
+          <TouchableOpacity
+            key={summary.signal.key}
+            ref={index === 0 ? walkMark.ref('movement.signal') : undefined}
+            style={styles.row}
+            onPress={() => explainSignal(summary)}
+          >
             <View style={styles.rowMain}>
               <Text style={styles.rowTitle}>{summary.signal.label}</Text>
               {summary.headline ? (
@@ -490,12 +497,12 @@ export function MovementSection({ tabColor }: Props) {
           {access.canWriteHydration || access.canWriteNutrition ? (
             <View style={styles.buttonRow}>
               {access.canWriteHydration ? (
-                <TouchableOpacity style={styles.primaryButton} onPress={handleSendWater} disabled={busy !== null}>
+                <TouchableOpacity ref={walkMark.ref('movement.sendWater')} style={styles.primaryButton} onPress={handleSendWater} disabled={busy !== null}>
                   <Text style={styles.primaryButtonText}>{busy === 'water' ? 'Sending' : "Send today's water"}</Text>
                 </TouchableOpacity>
               ) : null}
               {access.canWriteNutrition ? (
-                <TouchableOpacity style={styles.primaryButton} onPress={handleSendNutrition} disabled={busy !== null}>
+                <TouchableOpacity ref={walkMark.ref('movement.sendNutrition')} style={styles.primaryButton} onPress={handleSendNutrition} disabled={busy !== null}>
                   <Text style={styles.primaryButtonText}>{busy === 'nutrition' ? 'Sending' : "Send today's nutrition"}</Text>
                 </TouchableOpacity>
               ) : null}

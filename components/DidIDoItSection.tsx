@@ -356,7 +356,7 @@ export function DidIDoItSection({ tabColor }: Props) {
           ) : null}
 
           <ThumbRow primary="first" style={styles.formActions}>
-            <TouchableOpacity style={styles.primaryButton} onPress={saveCheck}>
+            <TouchableOpacity ref={walkMark.ref('didIDoIt.save')} style={styles.primaryButton} onPress={saveCheck}>
               <Text style={styles.primaryButtonText}>Save</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.secondaryButton} onPress={() => setForm(null)}>
@@ -381,6 +381,7 @@ export function DidIDoItSection({ tabColor }: Props) {
             const standing = standings.get(check.id);
             const done = standing?.doneThisPeriod === true;
             const position = checks.indexOf(check);
+            const first = check === groups[0].checks[0];
             return (
               <View
                 key={check.id}
@@ -395,6 +396,7 @@ export function DidIDoItSection({ tabColor }: Props) {
 
                 {check.active ? (
                   <TouchableOpacity
+                    ref={first ? walkMark.ref('didIDoIt.yes') : undefined}
                     style={styles.primaryButton}
                     onPress={async () => { await markDoneCheck(check.id, 'tap'); load(); void syncReminderNotifications(); }}
                   >
@@ -406,11 +408,12 @@ export function DidIDoItSection({ tabColor }: Props) {
 
                 <View style={styles.rowActions}>
                   {check.lastMarkedAt ? (
-                    <TouchableOpacity onPress={async () => { await undoLastCheckMark(check.id); load(); void syncReminderNotifications(); }}>
+                    <TouchableOpacity ref={first ? walkMark.ref('didIDoIt.mistake') : undefined} onPress={async () => { await undoLastCheckMark(check.id); load(); void syncReminderNotifications(); }}>
                       <Text style={styles.actionText}>That was a mistake</Text>
                     </TouchableOpacity>
                   ) : null}
                   <TouchableOpacity
+                    ref={first ? walkMark.ref('didIDoIt.change') : undefined}
                     onPress={() => setForm(formFor(check))}
                   >
                     <Text style={styles.actionText}>Change</Text>
@@ -421,11 +424,11 @@ export function DidIDoItSection({ tabColor }: Props) {
                     </TouchableOpacity>
                   ) : null}
                   {position < checks.length - 1 ? (
-                    <TouchableOpacity onPress={async () => { await moveDoneCheck(check.id, 1); load(); }}>
+                    <TouchableOpacity ref={first ? walkMark.ref('didIDoIt.moveDown') : undefined} onPress={async () => { await moveDoneCheck(check.id, 1); load(); }}>
                       <Text style={styles.actionText}>Move down</Text>
                     </TouchableOpacity>
                   ) : null}
-                  <TouchableOpacity onPress={() => confirmRemove(check)}>
+                  <TouchableOpacity ref={first ? walkMark.ref('didIDoIt.remove') : undefined} onPress={() => confirmRemove(check)}>
                     <Text style={styles.actionTextRemove}>Remove</Text>
                   </TouchableOpacity>
                 </View>

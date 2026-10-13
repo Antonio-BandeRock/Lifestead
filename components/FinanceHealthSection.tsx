@@ -37,6 +37,7 @@ import { LEGACY_CADENCE_MONTHLY } from '../lib/financeCore';
 import { parsePriceInput } from '../lib/groceryList';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
+import { useWalkMark } from './WalkMark';
 
 // The health-money half of Finances, 2026-09-05. Pulled into its own
 // component rather than added to app/(tabs)/life.tsx because it is a
@@ -99,6 +100,7 @@ const ACCOUNT_KIND_OPTIONS = [
 ];
 
 export function FinanceHealthSection({ tabColor }: Props) {
+  const walkMark = useWalkMark();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [plan, setPlan] = useState<InsurancePlan | null>(null);
   const [bills, setBills] = useState<MedicalBill[]>([]);
@@ -260,7 +262,7 @@ export function FinanceHealthSection({ tabColor }: Props) {
               deductible: plan.deductible != null ? String(plan.deductible) : '',
               oopMax: plan.outOfPocketMax != null ? String(plan.outOfPocketMax) : '',
               metDeductible: String(plan.deductibleMetAtStart), metOop: String(plan.outOfPocketMetAtStart),
-            }); setOpenForm('plan'); }}>
+            }); setOpenForm('plan'); }} ref={walkMark.ref('finance.planEdit')}>
               <Text style={styles.actionText}>Edit plan</Text>
             </TouchableOpacity>
           </>
@@ -270,7 +272,7 @@ export function FinanceHealthSection({ tabColor }: Props) {
               Add your deductible and out-of-pocket maximum and this shows where you stand as bills come in. It is the
               figure that decides whether something can wait until next year or is better done now.
             </Text>
-            <TouchableOpacity style={styles.primaryButton} onPress={() => setOpenForm('plan')}>
+            <TouchableOpacity ref={walkMark.ref('finance.planAdd')} style={styles.primaryButton} onPress={() => setOpenForm('plan')}>
               <Text style={styles.primaryButtonText}>Add my plan</Text>
             </TouchableOpacity>
           </>
@@ -337,7 +339,7 @@ export function FinanceHealthSection({ tabColor }: Props) {
             );
           })
         )}
-        <TouchableOpacity style={styles.primaryButton} onPress={() => setOpenForm('account')}>
+        <TouchableOpacity ref={walkMark.ref('finance.fsaAdd')} style={styles.primaryButton} onPress={() => setOpenForm('account')}>
           <Text style={styles.primaryButtonText}>+ Add an account</Text>
         </TouchableOpacity>
       </TabBand>
@@ -411,7 +413,7 @@ export function FinanceHealthSection({ tabColor }: Props) {
             treating it as if it were is the most common way people end up paying more than they should.
           </Text>
         ) : (
-          bills.map((bill) => {
+          bills.map((bill, index) => {
             const result = checkBill(bill);
             return (
               <View key={bill.id} style={styles.listRow}>
@@ -426,16 +428,16 @@ export function FinanceHealthSection({ tabColor }: Props) {
                   <Text style={result.balances ? styles.listMeta : styles.warnText}>{result.message}</Text>
                   <View style={styles.listActions}>
                     {bill.status !== 'paid' ? (
-                      <TouchableOpacity onPress={async () => { await setMedicalBillStatus(bill.id, 'paid', bill.youOwe); load(); }}>
+                      <TouchableOpacity ref={index === 0 ? walkMark.ref('finance.medPaid') : undefined} onPress={async () => { await setMedicalBillStatus(bill.id, 'paid', bill.youOwe); load(); }}>
                         <Text style={styles.actionText}>Mark paid</Text>
                       </TouchableOpacity>
                     ) : null}
                     {bill.status !== 'disputed' ? (
-                      <TouchableOpacity onPress={async () => { await setMedicalBillStatus(bill.id, 'disputed', null); load(); }}>
+                      <TouchableOpacity ref={index === 0 ? walkMark.ref('finance.medDispute') : undefined} onPress={async () => { await setMedicalBillStatus(bill.id, 'disputed', null); load(); }}>
                         <Text style={styles.actionText}>Dispute</Text>
                       </TouchableOpacity>
                     ) : null}
-                    <TouchableOpacity onPress={async () => { await deleteMedicalBill(bill.id); load(); }}>
+                    <TouchableOpacity ref={index === 0 ? walkMark.ref('finance.medRemove') : undefined} onPress={async () => { await deleteMedicalBill(bill.id); load(); }}>
                       <Text style={styles.actionTextRemove}>Remove</Text>
                     </TouchableOpacity>
                   </View>
@@ -445,7 +447,7 @@ export function FinanceHealthSection({ tabColor }: Props) {
             );
           })
         )}
-        <TouchableOpacity style={styles.primaryButton} onPress={() => setOpenForm('bill')}>
+        <TouchableOpacity ref={walkMark.ref('finance.medAdd')} style={styles.primaryButton} onPress={() => setOpenForm('bill')}>
           <Text style={styles.primaryButtonText}>+ Add a bill</Text>
         </TouchableOpacity>
       </TabBand>

@@ -4,6 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { DigestEntryRow, makeDigestRowStyles } from './DigestEntryRow';
 import { EntryScrollAnchor, type EntryScrollTarget } from './EntryScrollAnchor';
 import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, HomeSectionBand, useBandGap } from './HomeSectionBand';
+import { useWalkMark } from './WalkMark';
 import { colors } from '../constants/colors';
 import { menuLabelShadow, textShadow, typography } from '../constants/typography';
 import {
@@ -171,6 +172,7 @@ export function DigestCategorySection({
   scrollToY?: (y: number) => void;
   onJumpToRelated: (id: string) => void;
 }) {
+  const walkMark = useWalkMark();
   const bandGap = useBandGap();
   const styles = useMemo(() => makeStyles(tabColor, tabTextColor, bandGap), [tabColor, tabTextColor, bandGap]);
   const meta = DIGEST_CATEGORY_META.find((candidate) => candidate.key === categoryKey);
@@ -247,6 +249,7 @@ export function DigestCategorySection({
         <EntryScrollAnchor id={entry.id} target={scrollTarget}>
           <DigestEntryRow
             entry={entry}
+            markRef={index === 0 ? walkMark.ref('reading.entry') : undefined}
             expanded={openEntry === entry.id}
             onToggle={() => setOpenEntry(openEntry === entry.id ? null : entry.id)}
             onJumpToRelated={onJumpToRelated}
@@ -285,6 +288,7 @@ export function DigestCategorySection({
                   {index > 0 ? <View style={styles.rowDivider} /> : null}
                   <DigestEntryRow
                     entry={result.entry}
+                    markRef={index === 0 ? walkMark.ref('reading.entry') : undefined}
                     groupLabel={groupLabelFor(categoryKey, result.entry.id, topics)}
                     expanded={openEntry === result.entry.id}
                     onToggle={() => setOpenEntry(openEntry === result.entry.id ? null : result.entry.id)}
@@ -330,12 +334,17 @@ export function DigestCategorySection({
                 {topic.description ? <Text style={styles.topicDescription}>{topic.description}</Text> : null}
                 {single
                   ? renderRows(topic.subgroups[0].entries)
-                  : topic.subgroups.map((subgroup) => {
+                  : topic.subgroups.map((subgroup, subgroupIndex) => {
                       const key = subgroup.label ?? '';
                       const open = openSubgroup === key;
                       return (
                         <View key={key} style={styles.topicFold}>
-                          <TouchableOpacity style={styles.topicTapArea} onPress={() => toggleSubgroup(key, open)} activeOpacity={0.85}>
+                          <TouchableOpacity
+                            ref={subgroupIndex === 0 ? walkMark.ref('reading.subgroup') : undefined}
+                            style={styles.topicTapArea}
+                            onPress={() => toggleSubgroup(key, open)}
+                            activeOpacity={0.85}
+                          >
                             <Text style={styles.topicTitle}>
                               {subgroup.label ?? 'Entries'} ({subgroup.entries.length})
                             </Text>

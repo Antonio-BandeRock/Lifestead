@@ -72,6 +72,7 @@ import {
 import { getLastPaidPrices, recordDisposition } from '../lib/harvestTradeDb';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
+import { useWalkMark } from './WalkMark';
 
 type DispositionForm = {
   itemId: string;
@@ -103,6 +104,8 @@ const SOURCE_LABEL: Record<KitchenInventoryItem['source'], string> = {
 export function KitchenSection({ tabColor }: { tabColor: string }) {
   const band = useTabBandStyles(tabColor);
   const folds = useBandFolds();
+  // The rings the tutorials draw (lib/toolHowTos.ts).
+  const walkMark = useWalkMark();
   const [items, setItems] = useState<KitchenInventoryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
@@ -377,6 +380,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
           {(['food', 'non_food'] as const).map((option) => (
             <TouchableOpacity
               key={option}
+              ref={walkMark.ref(`kitchen.${option}`)}
               style={[styles.kindPill, kind === option && { backgroundColor: tabColor, borderColor: tabColor }]}
               activeOpacity={0.85}
               onPress={() => {
@@ -405,6 +409,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
           here for that reason.
         </Text>
         <TouchableOpacity
+          ref={walkMark.ref('kitchen.add')}
           style={[styles.primaryButton, { backgroundColor: tabColor }]}
           activeOpacity={0.85}
           onPress={() => setAddOpen((open) => !open)}
@@ -416,6 +421,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
             straight onto the grocery list from here. */}
         {kind === 'non_food' ? (
           <TouchableOpacity
+            ref={walkMark.ref('kitchen.scan')}
             style={[styles.secondaryButton, styles.scanButton]}
             activeOpacity={0.85}
             onPress={() => router.push('/scan-to-list')}
@@ -447,6 +453,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
                     keyboardType="numeric"
                   />
                   <TouchableOpacity
+                    ref={walkMark.ref('kitchen.saveNew')}
                     style={[styles.smallButton, { backgroundColor: tabColor }]}
                     activeOpacity={0.85}
                     disabled={busy}
@@ -597,12 +604,15 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
         ) : null}
         <TabBand folds={folds} color={tabColor} id={`life:kitchen:${kind}`} title={kind === 'food' ? 'What is in your kitchen' : 'What the house has'} icon="restaurant-outline" count={items.length}>
         <View style={band.rows}>
-          {items.map((item) => {
+          {items.map((item, index) => {
             const expanded = expandedId === item.id;
             const partly = item.quantityRemaining < item.quantity;
+            // Only the open row shows its buttons, so they carry the
+            // tutorial rings (lib/toolHowTos.ts) wherever they are drawn.
             return (
               <View key={item.id} style={[band.row, styles.itemCard]}>
                 <TouchableOpacity
+                  ref={index === 0 ? walkMark.ref('kitchen.row') : undefined}
                   activeOpacity={0.85}
                   onPress={() => {
                     setExpandedId(expanded ? null : item.id);
@@ -684,6 +694,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
                           : null}
                         <View style={styles.actionRow}>
                           <TouchableOpacity
+                            ref={walkMark.ref('kitchen.place')}
                             style={styles.secondaryButton}
                             activeOpacity={0.85}
                             disabled={busy}
@@ -734,6 +745,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
                     ) : (
                       <View style={styles.actionRow}>
                         <TouchableOpacity
+                          ref={walkMark.ref('kitchen.useBy')}
                           style={styles.secondaryButton}
                           activeOpacity={0.85}
                           disabled={busy}
@@ -768,6 +780,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
                         keyboardType="numeric"
                       />
                       <TouchableOpacity
+                        ref={walkMark.ref('kitchen.use')}
                         style={[styles.smallButton, { backgroundColor: tabColor }]}
                         activeOpacity={0.85}
                         disabled={busy}
@@ -779,6 +792,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
 
                     <View style={styles.actionRow}>
                       <TouchableOpacity
+                        ref={walkMark.ref('kitchen.toList')}
                         style={[styles.smallButton, { backgroundColor: tabColor }]}
                         activeOpacity={0.85}
                         disabled={busy}
@@ -788,6 +802,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
                         <Text style={styles.smallButtonText}>Add to List</Text>
                       </TouchableOpacity>
                       <TouchableOpacity
+                        ref={walkMark.ref('kitchen.gone')}
                         style={styles.secondaryButton}
                         activeOpacity={0.85}
                         disabled={busy}
@@ -1003,6 +1018,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
                           </View>
                         ) : (
                           <TouchableOpacity
+                            ref={walkMark.ref('kitchen.giveAway')}
                             style={styles.secondaryButton}
                             activeOpacity={0.85}
                             disabled={busy}

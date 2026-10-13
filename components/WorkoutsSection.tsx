@@ -10,6 +10,7 @@ import { NotesInput } from './NotesInput';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
 import { RecordPhotos } from './RecordPhotos';
+import { useWalkMark } from './WalkMark';
 import { TabBand, useTabBandStyles } from './TabBand';
 import { useBandFolds } from '../hooks/useBandFolds';
 import { BUTTON_SHADOW, colors } from '../constants/colors';
@@ -143,6 +144,7 @@ export function WorkoutsSection({ tabColor, onDragChange }: Props) {
   const styles = useMemo(() => makeStyles(tabColor), [tabColor]);
   const band = useTabBandStyles(tabColor);
   const folds = useBandFolds();
+  const walkMark = useWalkMark();
 
   const load = useCallback(() => {
     setLoading(true);
@@ -353,20 +355,20 @@ export function WorkoutsSection({ tabColor, onDragChange }: Props) {
           <RecordPhotos ownerKind={EXERCISE_PHOTO_OWNER} ownerId={view.id} tabColor={tabColor} title={view.name} />
         ) : null}
         <View style={styles.rowActions}>
-          <TouchableOpacity onPress={() => chooseWorkoutFor(view)}>
+          <TouchableOpacity ref={walkMark.ref('workouts.addTo')} onPress={() => chooseWorkoutFor(view)}>
             <Text style={styles.actionText}>Add to a workout</Text>
           </TouchableOpacity>
           {view.source === 'custom' ? (
             <>
-              <TouchableOpacity onPress={() => setExerciseForm({ id: view.id, draft: draftFromExercise(view, false) })}>
+              <TouchableOpacity ref={walkMark.ref('workouts.changeExercise')} onPress={() => setExerciseForm({ id: view.id, draft: draftFromExercise(view, false) })}>
                 <Text style={styles.actionText}>Change</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => confirmRemoveExercise(view)}>
+              <TouchableOpacity ref={walkMark.ref('workouts.removeExercise')} onPress={() => confirmRemoveExercise(view)}>
                 <Text style={styles.actionTextRemove}>Remove</Text>
               </TouchableOpacity>
             </>
           ) : (
-            <TouchableOpacity onPress={() => setExerciseForm({ id: null, draft: draftFromExercise(view, true) })}>
+            <TouchableOpacity ref={walkMark.ref('workouts.myVersion')} onPress={() => setExerciseForm({ id: null, draft: draftFromExercise(view, true) })}>
               <Text style={styles.actionText}>Make my own version</Text>
             </TouchableOpacity>
           )}
@@ -375,9 +377,9 @@ export function WorkoutsSection({ tabColor, onDragChange }: Props) {
     );
   }
 
-  function renderPill(label: string, on: boolean, onPress: () => void) {
+  function renderPill(label: string, on: boolean, onPress: () => void, markRef?: ReturnType<typeof walkMark.ref>) {
     return (
-      <TouchableOpacity key={label} style={[styles.pill, on ? styles.pillOn : null]} onPress={onPress}>
+      <TouchableOpacity key={label} ref={markRef} style={[styles.pill, on ? styles.pillOn : null]} onPress={onPress}>
         <Text style={[styles.pillText, on ? styles.pillTextOn : null]}>{label}</Text>
       </TouchableOpacity>
     );
@@ -458,7 +460,7 @@ maxLength={80}
         <NotesInput style={[styles.input, styles.multiline]} value={draft.notes} onChangeText={(notes) => set({ notes })} multiline placeholder="What my physio said" placeholderTextColor={colors.textMuted} />
 
         <ThumbRow primary="first" style={styles.formActions}>
-          <TouchableOpacity style={styles.primaryButton} onPress={saveExerciseForm}>
+          <TouchableOpacity ref={walkMark.ref('workouts.exerciseSave')} style={styles.primaryButton} onPress={saveExerciseForm}>
             <Text style={styles.primaryButtonText}>Save</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.secondaryButton} onPress={() => setExerciseForm(null)}>
@@ -509,7 +511,7 @@ maxLength={80}
         <Text style={styles.label}>A note for this workout (optional)</Text>
         <NotesInput style={styles.input} value={draft.note} onChangeText={(note) => set({ note })} placeholder="Slow on the way down" placeholderTextColor={colors.textMuted} maxLength={200} />
         <ThumbRow primary="first" style={styles.formActions}>
-          <TouchableOpacity style={styles.primaryButton} onPress={saveStepForm}>
+          <TouchableOpacity ref={walkMark.ref('workouts.stepSave')} style={styles.primaryButton} onPress={saveStepForm}>
             <Text style={styles.primaryButtonText}>Save</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.secondaryButton} onPress={() => setStepForm(null)}>
@@ -532,10 +534,10 @@ maxLength={80}
         <Text style={styles.bodyText}>{WORKOUTS_INTRO}</Text>
         {!workoutForm && !exerciseForm ? (
           <View style={styles.formActions}>
-            <TouchableOpacity style={styles.primaryButton} onPress={() => setWorkoutForm({ id: null, name: '', note: '' })}>
+            <TouchableOpacity ref={walkMark.ref('workouts.build')} style={styles.primaryButton} onPress={() => setWorkoutForm({ id: null, name: '', note: '' })}>
               <Text style={styles.primaryButtonText}>+ Build a workout</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.secondaryButton} onPress={() => setExerciseForm({ id: null, draft: blankExerciseDraft() })}>
+            <TouchableOpacity ref={walkMark.ref('workouts.exercise')} style={styles.secondaryButton} onPress={() => setExerciseForm({ id: null, draft: blankExerciseDraft() })}>
               <Text style={styles.secondaryButtonText}>+ An exercise of your own</Text>
             </TouchableOpacity>
           </View>
@@ -564,7 +566,7 @@ maxLength={80}
           <NotesInput style={styles.input} value={workoutForm.note} onChangeText={(note) => setWorkoutForm({ ...workoutForm, note })} placeholder="Warm up with a walk first" placeholderTextColor={colors.textMuted} maxLength={200} />
           <Text style={styles.helperText}>Save it, then open it to add exercises from the list below or from your own.</Text>
           <ThumbRow primary="first" style={styles.formActions}>
-            <TouchableOpacity style={styles.primaryButton} onPress={saveWorkoutForm}>
+            <TouchableOpacity ref={walkMark.ref('workouts.save')} style={styles.primaryButton} onPress={saveWorkoutForm}>
               <Text style={styles.primaryButtonText}>Save</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.secondaryButton} onPress={() => setWorkoutForm(null)}>
@@ -582,12 +584,13 @@ maxLength={80}
         </View>
       ) : null}
 
-      {workouts.map((workout) => (
+      {workouts.map((workout, workoutIndex) => (
         <TabBand key={workout.id} folds={folds} color={tabColor} id={`life:workouts:${workout.id}`} title={workout.name} icon="barbell-outline" count={workout.steps.length}>
           <Text style={styles.rowMeta}>{describeWorkout(workout)}</Text>
           {workout.note ? <Text style={styles.rowMeta}>{workout.note}</Text> : null}
           {workout.steps.length > 0 ? (
             <TouchableOpacity
+              ref={workoutIndex === 0 ? walkMark.ref('workouts.start') : undefined}
               style={styles.primaryButton}
               onPress={() => router.push({ pathname: '/workout', params: { id: workout.id } })}
               accessibilityRole="button"
@@ -614,6 +617,7 @@ maxLength={80}
               const view = resolveExercise(step.source, step.exerciseId, custom);
               const name = view ? view.name : missingExerciseName(step);
               const editing = stepForm?.step.id === step.id;
+              const first = workoutIndex === 0 && index === 0;
               return (
                 <View style={styles.rowMain}>
                   <Text style={styles.rowTitle}>
@@ -623,15 +627,15 @@ maxLength={80}
                   {step.note ? <Text style={styles.rowMeta}>{step.note}</Text> : null}
                   {editing && stepForm ? renderStepForm(stepForm) : (
                     <View style={styles.rowActions}>
-                      <TouchableOpacity onPress={() => setStepForm({ step, draft: stepDraftFrom(step, view) })}>
+                      <TouchableOpacity ref={first ? walkMark.ref('workouts.sets') : undefined} onPress={() => setStepForm({ step, draft: stepDraftFrom(step, view) })}>
                         <Text style={styles.actionText}>Sets and reps</Text>
                       </TouchableOpacity>
                       {view ? (
-                        <TouchableOpacity onPress={() => view && showInfoAlert(view.name, [view.steps.map((line, i) => `${i + 1}. ${line}`).join('\n'), view.safety.length ? `\nDoing it safely\n${view.safety.map((line) => `• ${line}`).join('\n')}` : ''].join('\n'))}>
+                        <TouchableOpacity ref={first ? walkMark.ref('workouts.howTo') : undefined} onPress={() => view && showInfoAlert(view.name, [view.steps.map((line, i) => `${i + 1}. ${line}`).join('\n'), view.safety.length ? `\nDoing it safely\n${view.safety.map((line) => `• ${line}`).join('\n')}` : ''].join('\n'))}>
                           <Text style={styles.actionText}>How to do it</Text>
                         </TouchableOpacity>
                       ) : null}
-                      <TouchableOpacity onPress={async () => { await removeWorkoutStep(step); load(); }}>
+                      <TouchableOpacity ref={first ? walkMark.ref('workouts.takeOut') : undefined} onPress={async () => { await removeWorkoutStep(step); load(); }}>
                         <Text style={styles.actionTextRemove}>Take out</Text>
                       </TouchableOpacity>
                     </View>
@@ -642,6 +646,7 @@ maxLength={80}
           />
 
           <Text style={styles.label}>Add an exercise</Text>
+          <View ref={workoutIndex === 0 ? walkMark.ref('workouts.add') : undefined} collapsable={false}>
           <PopoverSelect
             options={addOptions}
             selected={null}
@@ -654,12 +659,13 @@ maxLength={80}
             }}
             tabColor={tabColor}
           />
+          </View>
 
           <View style={styles.rowActions}>
-            <TouchableOpacity onPress={() => setWorkoutForm({ id: workout.id, name: workout.name, note: workout.note ?? '' })}>
+            <TouchableOpacity ref={workoutIndex === 0 ? walkMark.ref('workouts.rename') : undefined} onPress={() => setWorkoutForm({ id: workout.id, name: workout.name, note: workout.note ?? '' })}>
               <Text style={styles.actionText}>Rename</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => confirmRemoveWorkout(workout)}>
+            <TouchableOpacity ref={workoutIndex === 0 ? walkMark.ref('workouts.remove') : undefined} onPress={() => confirmRemoveWorkout(workout)}>
               <Text style={styles.actionTextRemove}>Remove</Text>
             </TouchableOpacity>
           </View>
@@ -669,7 +675,9 @@ maxLength={80}
       <TabBand folds={folds} color={tabColor} id="life:workouts:library" title="Exercises" icon="body-outline" count={views.length}>
         <Text style={styles.bodyText}>{LIBRARY_INTRO}</Text>
         <Text style={styles.label}>Search</Text>
+        <View ref={walkMark.ref('workouts.search')} collapsable={false}>
         <AppTextInput style={styles.input} value={filter.query} onChangeText={(query) => setFilter({ ...filter, query })} placeholder="Squat, shoulders, band" placeholderTextColor={colors.textMuted} />
+        </View>
         <View style={styles.numberRow}>
           <View style={styles.numberField}>
             <Text style={styles.label}>Kind</Text>
@@ -681,20 +689,20 @@ maxLength={80}
           </View>
         </View>
         <ThumbEndRow style={styles.pillRow}>
-          {renderPill(GENTLE_FILTER_LABEL, filter.gentleOnly, () => setFilter({ ...filter, gentleOnly: !filter.gentleOnly }))}
+          {renderPill(GENTLE_FILTER_LABEL, filter.gentleOnly, () => setFilter({ ...filter, gentleOnly: !filter.gentleOnly }), walkMark.ref('workouts.gentle'))}
           <TouchableOpacity onPress={() => showInfoAlert(GENTLE_FILTER_LABEL, GENTLE_FILTER_HELP)} activeOpacity={0.7} style={styles.pillHelp}>
             <Text style={styles.actionText}>What this means</Text>
           </TouchableOpacity>
         </ThumbEndRow>
         <Text style={styles.rowMeta}>{libraryCountLine(shown.length, views.length)}</Text>
 
-        {shown.map((view) => {
+        {shown.map((view, viewIndex) => {
           const key = exerciseKey(view);
           const open = openExercise === key;
           return (
             <View key={key} style={styles.row}>
               <View style={styles.rowMain}>
-                <TouchableOpacity onPress={() => setOpenExercise(open ? null : key)} activeOpacity={0.7} accessibilityRole="button" accessibilityState={{ expanded: open }}>
+                <TouchableOpacity ref={viewIndex === 0 ? walkMark.ref('workouts.openExercise') : undefined} onPress={() => setOpenExercise(open ? null : key)} activeOpacity={0.7} accessibilityRole="button" accessibilityState={{ expanded: open }}>
                   <Text style={styles.rowTitle}>{view.name}</Text>
                   <Text style={styles.rowMeta}>{exerciseMetaLine(view)}</Text>
                 </TouchableOpacity>

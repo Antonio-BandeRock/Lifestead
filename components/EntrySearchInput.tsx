@@ -50,6 +50,7 @@ export function EntrySearchInput({
   onDebouncedChange,
   onActiveChange,
   onPressInfo,
+  infoRef,
   initialValue = '',
 }: {
   placeholder: string;
@@ -66,6 +67,9 @@ export function EntrySearchInput({
   // tap target. Omit it where there is nothing to explain and no icon
   // renders at all.
   onPressInfo?: () => void;
+  // A tutorial mark for the information icon, from the caller's
+  // useWalkMark, so a how-to can ring it.
+  infoRef?: (node: unknown) => void;
   // What the box holds when it first draws, for a caller opened with a
   // search already asked (Ask Your Records, 2026-09-30). Read once,
   // like everything else here: a caller that wants it changed remounts.
@@ -151,6 +155,7 @@ export function EntrySearchInput({
       />
       {onPressInfo ? (
         <Pressable
+          ref={infoRef}
           onPress={onPressInfo}
           hitSlop={10}
           style={styles.searchInputInfoButton}

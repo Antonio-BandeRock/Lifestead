@@ -12,23 +12,33 @@
 // to its how-tos. A how-to gone through before carries a tick and nothing
 // more: no count, no figure, nothing that grades anybody.
 //
+// Every how-to can also be read rather than run (1.0.68.16): Read it lists
+// its lines, numbered, each with a picture of that moment on the phone
+// beside it once one has been taken (lib/tutorialShots.ts). The written
+// lines are the same on every plan, since reading how a thing works is not
+// the thing itself.
+//
 // Starting a run goes to Home first, where the round button is, so the
 // tutorial's first line ("Tap the round button and choose ...") is true.
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import { Stack, useRouter, type Href } from 'expo-router';
 import { useCallback, useState, type ComponentProps } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { CalmBands, HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandNoHairlines, homeBandStyle } from '../components/HomeSectionBand';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { loadTutorialState, resumeTutorials, startTutorials, type TutorialState } from '../lib/tutorialDb';
 import { currentHowToKey } from '../lib/tutorialRun';
+import { TUTORIAL_SHOTS } from '../lib/tutorialShots';
 import {
   CARRY_ON_LABEL,
   DONE_BEFORE_LABEL,
+  HIDE_READ_LABEL,
   HIDE_STEPS_LABEL,
+  NO_SHOT_YET_LINE,
+  READ_STEPS_LABEL,
   SHOW_STEPS_LABEL,
   START_ALL_LABEL,
   START_ALL_LINE,
@@ -38,6 +48,8 @@ import {
   TUTORIALS_HEADING,
   TUTORIALS_LEAD,
   howToByKey,
+  writtenSteps,
+  type HowTo,
   type TutorialScope,
 } from '../lib/tutorials';
 
@@ -47,6 +59,7 @@ export default function TutorialsScreen() {
   const [state, setState] = useState<TutorialState | null>(null);
   const [openTabs, setOpenTabs] = useState<Set<string>>(new Set());
   const [openLenses, setOpenLenses] = useState<Set<string>>(new Set());
+  const [openReads, setOpenReads] = useState<Set<string>>(new Set());
 
   useFocusEffect(
     useCallback(() => {
@@ -140,7 +153,7 @@ export default function TutorialsScreen() {
                             </View>
                             <SmallButton icon="play" label={START_LENS_LABEL} onPress={() => void start({ kind: 'lens', key: lens.key })} />
                           </View>
-                          {lens.howTos.length > 1 ? (
+                          {lens.howTos.length > 0 ? (
                             <TouchableOpacity
                               onPress={() => toggle(openLenses, lens.key, setOpenLenses)}
                               accessibilityRole="button"
@@ -151,8 +164,8 @@ export default function TutorialsScreen() {
                           ) : null}
                           {lensOpen
                             ? lens.howTos.map((howTo) => (
+                                <View key={howTo.key} style={styles.howToBlock}>
                                 <TouchableOpacity
-                                  key={howTo.key}
                                   style={styles.howToRow}
                                   onPress={() => void start({ kind: 'howTo', key: howTo.key })}
                                   accessibilityRole="button"
@@ -166,6 +179,15 @@ export default function TutorialsScreen() {
                                   />
                                   <Text style={styles.howToTitle}>{howTo.title}</Text>
                                 </TouchableOpacity>
+                                <TouchableOpacity
+                                  onPress={() => toggle(openReads, howTo.key, setOpenReads)}
+                                  accessibilityRole="button"
+                                  accessibilityState={{ expanded: openReads.has(howTo.key) }}
+                                >
+                                  <Text style={[styles.link, styles.readLink]}>{openReads.has(howTo.key) ? HIDE_READ_LABEL : READ_STEPS_LABEL}</Text>
+                                </TouchableOpacity>
+                                {openReads.has(howTo.key) ? <WrittenSteps howTo={howTo} /> : null}
+                                </View>
                               ))
                             : null}
                         </View>
@@ -183,6 +205,34 @@ export default function TutorialsScreen() {
 }
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
+
+function WrittenSteps({ howTo }: { howTo: HowTo }) {
+  return (
+    <View style={styles.written}>
+      {writtenSteps(howTo).map((step, index) => {
+        const shot = TUTORIAL_SHOTS[step.shot];
+        return (
+          <View key={`${step.shot}-${index}`} style={styles.writtenStep}>
+            <Text style={styles.writtenNumber}>{index + 1}.</Text>
+            <View style={styles.writtenBody}>
+              <Text style={styles.writtenLine}>{step.say}</Text>
+              {shot ? (
+                <Image
+                  source={shot.source}
+                  style={[styles.shot, { aspectRatio: shot.width / shot.height }]}
+                  resizeMode="contain"
+                  accessibilityLabel={step.say}
+                />
+              ) : (
+                <Text style={styles.caption}>{NO_SHOT_YET_LINE}</Text>
+              )}
+            </View>
+          </View>
+        );
+      })}
+    </View>
+  );
+}
 
 function Action({ icon, label, line, onPress, filled }: { icon: IconName; label: string; line: string; onPress: () => void; filled?: boolean }) {
   return (
@@ -248,6 +298,14 @@ const styles = StyleSheet.create({
   lensText: { flex: 1, gap: 2 },
   lensName: { ...typography.body, color: colors.textPrimary, ...textShadow },
   link: { ...typography.caption, color: colors.primary, paddingVertical: 4, ...textShadow },
+  howToBlock: { gap: 0 },
+  readLink: { paddingLeft: 32 },
+  written: { gap: 12, paddingLeft: 32, paddingBottom: 6 },
+  writtenStep: { flexDirection: 'row', alignItems: 'flex-start', gap: 6 },
+  writtenNumber: { ...typography.body, color: colors.textSecondary, ...textShadow },
+  writtenBody: { flex: 1, gap: 6 },
+  writtenLine: { ...typography.body, color: colors.textPrimary, ...textShadow },
+  shot: { width: '70%', borderRadius: 8, borderWidth: 1, borderColor: colors.border },
   howToRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 8, paddingVertical: 6, paddingLeft: 6 },
   howToTitle: { ...typography.body, color: colors.textPrimary, flex: 1, ...textShadow },
 });

@@ -37,6 +37,7 @@ import {
 } from '../lib/financeGoalsDb';
 import { parsePriceInput } from '../lib/groceryList';
 import { ThumbRow } from './ThumbRow';
+import { useWalkMark } from './WalkMark';
 import { ThumbEndRow } from './ThumbEndRow';
 
 // Goals, 2026-09-05, pass 3 of the Finances rebuild.
@@ -83,6 +84,7 @@ export function FinanceGoalsSection({ tabColor }: Props) {
   const styles = useMemo(() => makeStyles(tabColor), [tabColor]);
   const band = useTabBandStyles(tabColor);
   const folds = useBandFolds();
+  const walkMark = useWalkMark();
 
   const load = useCallback(() => {
     setLoading(true);
@@ -185,6 +187,7 @@ export function FinanceGoalsSection({ tabColor }: Props) {
         )}
         {!goalForm ? (
           <TouchableOpacity
+            ref={walkMark.ref('finance.goalAdd')}
             style={styles.primaryButton}
             onPress={() => setGoalForm({ name: '', reason: '', targetDate: '' })}
           >
@@ -245,7 +248,7 @@ export function FinanceGoalsSection({ tabColor }: Props) {
         </View>
       ) : null}
 
-      {goals.map(({ progress }) => {
+      {goals.map(({ progress }, goalIndex) => {
         const { goal } = progress;
         const statusWord = STATUS_LABEL[goal.status] ?? '';
         return (
@@ -265,7 +268,7 @@ export function FinanceGoalsSection({ tabColor }: Props) {
               <Text style={styles.footnote}>No date set, so there is no per-month figure for this one.</Text>
             ) : null}
 
-            {progress.costs.map((entry) => {
+            {progress.costs.map((entry, costIndex) => {
               const paceResult = pace(entry, goal.targetDate, todayLocal());
               const paceText = describePace(entry, paceResult);
               const overdue = !isPaceRefusal(paceResult) && paceResult.overdue;
@@ -300,6 +303,7 @@ export function FinanceGoalsSection({ tabColor }: Props) {
                   <View style={styles.costActions}>
                     {!entry.met || entry.cost.kind !== 'money' ? (
                       <TouchableOpacity
+                        ref={goalIndex === 0 && costIndex === 0 ? walkMark.ref('finance.contribute') : undefined}
                         onPress={() =>
                           setContribForm({
                             costId: entry.cost.id,
@@ -447,6 +451,7 @@ export function FinanceGoalsSection({ tabColor }: Props) {
             <View style={styles.goalActions}>
               {!costForm ? (
                 <TouchableOpacity
+                  ref={goalIndex === 0 ? walkMark.ref('finance.costAdd') : undefined}
                   onPress={() =>
                     setCostForm({ goalId: goal.id, kind: 'money', label: '', target: '', unit: '' })
                   }
@@ -456,10 +461,10 @@ export function FinanceGoalsSection({ tabColor }: Props) {
               ) : null}
               {goal.status === 'active' ? (
                 <>
-                  <TouchableOpacity onPress={async () => { await setGoalStatus(goal.id, 'reached'); load(); }}>
+                  <TouchableOpacity ref={goalIndex === 0 ? walkMark.ref('finance.goalReached') : undefined} onPress={async () => { await setGoalStatus(goal.id, 'reached'); load(); }}>
                     <Text style={styles.actionText}>Mark reached</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={async () => { await setGoalStatus(goal.id, 'given_up'); load(); }}>
+                  <TouchableOpacity ref={goalIndex === 0 ? walkMark.ref('finance.goalSetAside') : undefined} onPress={async () => { await setGoalStatus(goal.id, 'given_up'); load(); }}>
                     <Text style={styles.actionText}>Set aside</Text>
                   </TouchableOpacity>
                 </>
@@ -469,6 +474,7 @@ export function FinanceGoalsSection({ tabColor }: Props) {
                 </TouchableOpacity>
               )}
               <TouchableOpacity
+                ref={goalIndex === 0 ? walkMark.ref('finance.goalDelete') : undefined}
                 onPress={() =>
                   setConfirm({
                     title: `Delete ${goal.name}?`,

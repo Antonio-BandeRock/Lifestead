@@ -42,6 +42,7 @@ import {
 } from '../lib/financeAccountsDb';
 import { parsePriceInput } from '../lib/groceryList';
 import { ThumbRow } from './ThumbRow';
+import { useWalkMark } from './WalkMark';
 
 // Accounts, net worth and debt payoff, 2026-09-05, pass 2 of the Finances
 // rebuild. These are the parts every mainstream finance app has and the
@@ -76,6 +77,7 @@ function todayLocalIso(): string {
 }
 
 export function FinanceMoneySection({ tabColor }: Props) {
+  const walkMark = useWalkMark();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [accounts, setAccounts] = useState<AccountRecord[]>([]);
   const [history, setHistory] = useState<NetWorthPoint[]>([]);
@@ -240,7 +242,7 @@ export function FinanceMoneySection({ tabColor }: Props) {
           </>
         )}
         {!form ? (
-          <TouchableOpacity style={styles.primaryButton} onPress={() => setForm({ id: null, name: '', kind: 'checking', balance: '', apr: '', minimumPayment: '', contribution: '' })}>
+          <TouchableOpacity ref={walkMark.ref('finance.accountAdd')} style={styles.primaryButton} onPress={() => setForm({ id: null, name: '', kind: 'checking', balance: '', apr: '', minimumPayment: '', contribution: '' })}>
             <Text style={styles.primaryButtonText}>+ Add an account</Text>
           </TouchableOpacity>
         ) : null}
@@ -324,7 +326,7 @@ export function FinanceMoneySection({ tabColor }: Props) {
 
       {accounts.length > 0 ? (
         <TabBand folds={folds} color={tabColor} id="life:finances:accounts" title="Accounts" icon="wallet-outline">
-          {accounts.map((account) => {
+          {accounts.map((account, index) => {
             const liability = isLiability(account.kind);
             const cost = carryCost({ balance: account.balance, apr: account.apr, side: liability ? 'liability' : 'asset' });
             const change = rateKindFor(account.kind) === 'market' ? measuredChange(balanceHistory[account.id] ?? []) : null;
@@ -376,7 +378,7 @@ export function FinanceMoneySection({ tabColor }: Props) {
                   </Text>
                 ) : null}
                 <View style={styles.listActions}>
-                  <TouchableOpacity onPress={() => setForm({
+                  <TouchableOpacity ref={index === 0 ? walkMark.ref('finance.accountUpdate') : undefined} onPress={() => setForm({
                     id: account.id, name: account.name, kind: account.kind, balance: String(account.balance),
                     apr: account.apr != null ? String(account.apr) : '',
                     minimumPayment: account.minimumPayment != null ? String(account.minimumPayment) : '',
@@ -384,7 +386,7 @@ export function FinanceMoneySection({ tabColor }: Props) {
                   })}>
                     <Text style={styles.actionText}>Update balance</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={async () => { await deleteAccount(account.id); load(); }}>
+                  <TouchableOpacity ref={index === 0 ? walkMark.ref('finance.accountRemove') : undefined} onPress={async () => { await deleteAccount(account.id); load(); }}>
                     <Text style={styles.actionTextRemove}>Remove</Text>
                   </TouchableOpacity>
                 </View>

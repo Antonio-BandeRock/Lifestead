@@ -29,6 +29,7 @@ export function DigestEntryRow({
   tabColor,
   styles,
   below,
+  markRef,
 }: {
   entry: AnyDigestEntry;
   // Where it belongs, shown only in search results, where the rows no
@@ -44,11 +45,13 @@ export function DigestEntryRow({
   // Anything the caller wants under the teaser while the row is closed or
   // open, such as which search terms matched.
   below?: ReactNode;
+  // A tutorial mark for the row, from the caller's useWalkMark.
+  markRef?: (node: unknown) => void;
 }) {
   const dotColor = entryHeaderDotColor(entry, activeConditionCode);
   return (
     <View style={styles.itemRow}>
-      <TouchableOpacity style={styles.itemTapArea} onPress={onToggle} activeOpacity={0.85}>
+      <TouchableOpacity ref={markRef} style={styles.itemTapArea} onPress={onToggle} activeOpacity={0.85}>
         <View style={styles.itemTextWrap}>
           {groupLabel ? <Text style={styles.itemGroupLabel}>{groupLabel}</Text> : null}
           <View style={styles.itemTitleRow}>

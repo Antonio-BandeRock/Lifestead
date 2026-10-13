@@ -17,7 +17,8 @@
 //   1. a how-to that takes the person there and says what the lens does
 //      for them, from the tour's lens line (TOUR_LENS_LINES);
 //   2. a how-to for every guide step that is done on that lens, with the
-//      same lines and the same ringed buttons as Walk me through it.
+//      same lines and the same ringed buttons as Walk me through it;
+//   3. a how-to for every other tool on the lens (lib/toolHowTos.ts).
 //
 // Home has no lenses, so its tutorial walks through its groups of cards
 // and then the guide steps done from Home.
@@ -25,13 +26,13 @@
 // The lens list, the names and the lines all come from TOUR_TABS, which
 // scripts/test_your_story.js checks against the tab screens, so a lens added
 // to a screen and to the tour gets its tutorial here with nothing else to
-// change. Step 3 of the request (a how-to for every tool on every lens)
-// adds to `howTos` below. No counts, no progress figure, no praise: the
+// change. No counts, no progress figure, no praise: the
 // strip says what to do now.
 //
 // No runtime import but the guide and tour modules, so
 // scripts/test_tutorials.js checks it in plain node.
 import { paidLens, type Tier } from './paidFeatures';
+import { TOOL_HOW_TOS, type ToolHowTo } from './toolHowTos';
 import { gettingThere, walkSteps, type WalkStep } from './storyWalk';
 import { FROM_HOME, GUIDES, GO_HOME, type GuideEntry } from './yourStoryGuides';
 import { TOUR_TABS, lensLine, lensName, type TourPath, type TourTabDef } from './yourStoryInterview';
@@ -136,6 +137,18 @@ function entryHowTo(place: string, entry: GuideEntry): HowTo {
   };
 }
 
+function toolHowTo(place: string, reach: WalkStep[], tool: ToolHowTo): HowTo {
+  return {
+    key: `${place}:tool:${tool.key}`,
+    title: tool.title,
+    steps: [
+      ...reach,
+      ...tool.steps.map((step): WalkStep => ({ say: step.say, point: null, ...(step.mark ? { mark: step.mark } : {}), ...(step.stay ? { stay: true } : {}) })),
+      { say: tool.forYou, point: null },
+    ],
+  };
+}
+
 function lensKeys(tab: TourTabDef): string[] {
   const keys: string[] = [];
   for (const group of tab.groups) for (const key of group.lenses) if (!keys.includes(key)) keys.push(key);
@@ -157,6 +170,7 @@ function homeTutorial(tab: TourTabDef, entries: GuideEntry[]): LensTutorial {
     howTos: [
       { key: `${HOME_KEY}:about`, title: `Find your way round ${tab.title}`, steps: tour },
       ...entries.map((entry) => entryHowTo(HOME_KEY, entry)),
+      ...(TOOL_HOW_TOS[HOME_KEY] ?? []).map((tool) => toolHowTo(HOME_KEY, gettingThere('/'), tool)),
     ],
   };
 }
@@ -172,7 +186,11 @@ function lensTutorial(path: TourPath, lens: string, entries: GuideEntry[]): Lens
     lens,
     name,
     line,
-    howTos: [{ key: `${key}:about`, title: `Get to ${name}`, steps: about }, ...entries.map((entry) => entryHowTo(key, entry))],
+    howTos: [
+      { key: `${key}:about`, title: `Get to ${name}`, steps: about },
+      ...entries.map((entry) => entryHowTo(key, entry)),
+      ...(TOOL_HOW_TOS[key] ?? []).map((tool) => toolHowTo(key, gettingThere(path, lens, name), tool)),
+    ],
   };
 }
 
@@ -209,6 +227,29 @@ export function stepsForTier(howTo: HowTo, tabTitle: string, lens: string | null
   if (!paid) return howTo.steps;
   return [{ say: paidTutorialLine(paid.plan, paid.gives), point: null }];
 }
+
+// WRITTEN STEPS. The Tutorials page lists a how-to's lines to read, each
+// beside a picture of that moment (lib/tutorialShots.ts). A getting-there
+// line looks the same in every how-to that reaches the lens, so its picture
+// is named by where it goes rather than by the how-to, and one picture
+// serves them all.
+
+export type WrittenStep = { say: string; shot: string };
+
+export function shotName(howToKey: string, index: number, step: WalkStep): string {
+  const raw = step.until
+    ? `reach${step.until.pathname}${step.until.lensKey ? `-${step.until.lensKey}` : ''}`
+    : `${howToKey}-${index}`;
+  return raw.replace(/[^A-Za-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+}
+
+export function writtenSteps(howTo: HowTo): WrittenStep[] {
+  return howTo.steps.map((step, index) => ({ say: step.say, shot: shotName(howTo.key, index, step) }));
+}
+
+export const READ_STEPS_LABEL = 'Read it';
+export const HIDE_READ_LABEL = 'Hide it';
+export const NO_SHOT_YET_LINE = 'Picture still to come.';
 
 export function paidTutorialLine(plan: string, gives: string): string {
   return `This is part of ${plan}, so its buttons show here once the plan is on. With ${plan} you get ${gives}.`;

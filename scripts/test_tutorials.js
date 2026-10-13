@@ -35,7 +35,8 @@ const guides = load('lib/yourStoryGuides.ts', { './yourStory': story });
 const walk = load('lib/storyWalk.ts', { './yourStoryGuides': guides });
 const interview = load('lib/yourStoryInterview.ts', { './yourStory': story });
 const paidFeatures = load('lib/paidFeatures.ts');
-const tutorials = load('lib/tutorials.ts', { './paidFeatures': paidFeatures, './storyWalk': walk, './yourStoryGuides': guides, './yourStoryInterview': interview });
+const toolHowTos = load('lib/toolHowTos.ts');
+const tutorials = load('lib/tutorials.ts', { './toolHowTos': toolHowTos, './paidFeatures': paidFeatures, './storyWalk': walk, './yourStoryGuides': guides, './yourStoryInterview': interview });
 const runs = load('lib/tutorialRun.ts');
 const spots = load('lib/walkSpots.ts');
 
@@ -248,6 +249,67 @@ for (const [key, text] of lines) {
         if (howTo.key.endsWith(':about')) check(free === howTo.steps, `${howTo.key} still gets there on Free`);
         else check(free.length === 1 && !free[0].mark && free[0].say.includes(lenses[lensKeyName].plan), `${howTo.key} is one line on Free`);
       }
+    }
+  }
+}
+
+// Tool how-tos (lib/toolHowTos.ts, 1.0.68.16): every lens key is a lens
+// the tutorials know, keys are unique on a lens, every mark is drawn on a
+// screen, and a tab listed as done has tools on every lens.
+{
+  const lensByKey = new Map(tabs.flatMap((tab) => tab.lenses.map((lens) => [lens.key, { tab, lens }])));
+  const sourceFiles = (dir) =>
+    fs.readdirSync(dir, { withFileTypes: true }).flatMap((item) =>
+      item.isDirectory() ? sourceFiles(path.join(dir, item.name)) : [path.join(dir, item.name)],
+    );
+  const markSource = ['app', 'components']
+    .flatMap((dir) => sourceFiles(path.join(__dirname, '..', dir)))
+    .filter((file) => /\.tsx?$/.test(file))
+    .map((file) => fs.readFileSync(file, 'utf8'))
+    .join('\n');
+  for (const [key, tools] of Object.entries(toolHowTos.TOOL_HOW_TOS)) {
+    const found = lensByKey.get(key);
+    check(!!found, `tool how-tos for ${key} sit on a lens`);
+    if (!found) continue;
+    const keys = tools.map((tool) => tool.key);
+    check(new Set(keys).size === keys.length, `${key} tool keys are unique`);
+    for (const tool of tools) {
+      const howTo = found.lens.howTos.find((each) => each.key === `${key}:tool:${tool.key}`);
+      check(!!howTo, `${key}:tool:${tool.key} is in the tutorials`);
+      check(tool.steps.length > 0 && tool.forYou.trim().length > 0, `${tool.key} has steps and says what it does`);
+      if (howTo) check(howTo.steps[0].mark === 'hub' || found.tab.path === '/', `${tool.key} starts from the round button`);
+      for (const step of tool.steps) {
+        if (!step.mark) continue;
+        // A row of pills marks each one as `work.${entry.key}`, so the prefix
+        // with a template stands for every pill in the row.
+        const prefix = step.mark.slice(0, step.mark.indexOf('.') + 1);
+        check(
+          markSource.includes(`walkMark('${step.mark}')`) ||
+            markSource.includes(`walkMark.ref('${step.mark}')`) ||
+            (prefix && markSource.includes('walkMark.ref(`' + prefix + '${')),
+          `${step.mark} is drawn on a screen`,
+        );
+      }
+    }
+  }
+  for (const tabPath of toolHowTos.TOOL_TABS_DONE) {
+    const tab = tabs.find((each) => each.path === tabPath);
+    check(!!tab, `${tabPath} in TOOL_TABS_DONE is a tutorial tab`);
+    for (const lens of tab ? tab.lenses : []) check((toolHowTos.TOOL_HOW_TOS[lens.key] ?? []).length > 0, `${lens.key} has its tools`);
+  }
+  // Written steps: one per line, and a picture name every how-to reaching
+  // the same lens shares for its getting-there lines.
+  for (const howTo of allHowTos) {
+    const written = tutorials.writtenSteps(howTo);
+    check(written.length === howTo.steps.length, `${howTo.key} reads as many lines as it runs`);
+    check(written.every((step) => /^[A-Za-z0-9_]+$/.test(step.shot)), `${howTo.key} picture names are plain`);
+  }
+  for (const tab of tabs) {
+    for (const lens of tab.lenses) {
+      const reach = lens.howTos
+        .filter((howTo) => howTo.key.includes(':tool:'))
+        .map((howTo) => tutorials.writtenSteps(howTo).filter((_, index) => howTo.steps[index].until).map((step) => step.shot).join('|'));
+      check(reach.every((each) => each === reach[0]), `${lens.key} tools share their getting-there pictures`);
     }
   }
 }

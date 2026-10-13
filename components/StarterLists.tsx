@@ -19,6 +19,7 @@ import {
 } from '../lib/starterLists';
 import { upsertUpkeepItem } from '../lib/upkeepDb';
 import { AppTextInput } from './AppTextInput';
+import { useWalkMark } from './WalkMark';
 
 type Props = {
   kind: 'routine' | 'upkeep';
@@ -29,6 +30,8 @@ type Props = {
 };
 
 export function StarterLists({ kind, tabColor, heldNames, onAdded }: Props) {
+  // The rings the tutorials draw (lib/toolHowTos.ts).
+  const walkMark = useWalkMark();
   const [open, setOpen] = useState(false);
   const [picked, setPicked] = useState<StarterRoutine | null>(null);
   const [name, setName] = useState('');
@@ -93,7 +96,7 @@ export function StarterLists({ kind, tabColor, heldNames, onAdded }: Props) {
 
   if (!open) {
     return (
-      <TouchableOpacity style={styles.openRow} onPress={() => setOpen(true)}>
+      <TouchableOpacity ref={walkMark.ref('starter.open')} style={styles.openRow} onPress={() => setOpen(true)}>
         <Ionicons name="copy-outline" size={16} color={tabColor} />
         <Text style={[styles.openText, { color: tabColor }]}>
           {kind === 'routine' ? 'Or start from a ready-made routine' : 'Or copy from a kitchen or bathroom list'}
@@ -148,6 +151,7 @@ export function StarterLists({ kind, tabColor, heldNames, onAdded }: Props) {
                 );
               })}
               <TouchableOpacity
+                ref={walkMark.ref('starter.makeRoutine')}
                 style={[styles.button, { borderColor: tabColor }]}
                 onPress={() => void copyRoutine()}
                 disabled={saving || dropped.size === picked.steps.length}
@@ -192,6 +196,7 @@ export function StarterLists({ kind, tabColor, heldNames, onAdded }: Props) {
             </View>
           ))}
           <TouchableOpacity
+            ref={walkMark.ref('starter.addTicked')}
             style={[styles.button, { borderColor: tabColor }, ticked.size === 0 ? styles.off : null]}
             onPress={() => void copyUpkeep()}
             disabled={saving || ticked.size === 0}

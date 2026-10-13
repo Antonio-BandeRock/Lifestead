@@ -441,6 +441,13 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
 
   if (loading) return <View style={band.boxMuted}><Text style={styles.bodyText}>Loading…</Text></View>;
 
+  // The first item showing each button carries the tutorial rings
+  // (lib/toolHowTos.ts).
+  const listed = grouped.flatMap((group) => group.entries);
+  const firstId = listed[0]?.id;
+  const firstDoneId = listed.find((item) => item.cadence === 'recurring')?.id;
+  const firstRenewId = listed.find((item) => item.cadence !== 'recurring' && item.renewable)?.id;
+
   return (
     <View style={band.column}>
       {infoAlertElement}
@@ -466,7 +473,7 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
         {/* The timeline of these dates is Schedules > Upkeep, 2026-09-13:
             items are defined here and read there, the same split as My
             Meds and Schedules > Meds. */}
-        <TouchableOpacity onPress={() => router.push({ pathname: '/schedule', params: { openScheduleLens: 'upkeep' } })}>
+        <TouchableOpacity ref={walkMark.ref('upkeep.schedules')} onPress={() => router.push({ pathname: '/schedule', params: { openScheduleLens: 'upkeep' } })}>
           <Text style={styles.actionText}>See these by date on Schedules &gt; Upkeep</Text>
         </TouchableOpacity>
       </View>
@@ -856,11 +863,11 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
 
                   <ThumbEndRow style={styles.rowActions}>
                     {item.cadence === 'recurring' ? (
-                      <TouchableOpacity onPress={() => confirmDone(item)}>
+                      <TouchableOpacity ref={item.id === firstDoneId ? walkMark.ref('upkeep.done') : undefined} onPress={() => confirmDone(item)}>
                         <Text style={styles.actionText}>Done today</Text>
                       </TouchableOpacity>
                     ) : item.renewable ? (
-                      <TouchableOpacity onPress={() => setRenewForm({ id: item.id, name: item.name, date: '' })}>
+                      <TouchableOpacity ref={item.id === firstRenewId ? walkMark.ref('upkeep.renew') : undefined} onPress={() => setRenewForm({ id: item.id, name: item.name, date: '' })}>
                         <Text style={styles.actionText}>Renewed</Text>
                       </TouchableOpacity>
                     ) : null}
@@ -875,6 +882,7 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
                       </TouchableOpacity>
                     ) : null}
                     <TouchableOpacity
+                      ref={item.id === firstId ? walkMark.ref('upkeep.remove') : undefined}
                       onPress={() =>
                         setConfirm({
                           title: `Remove ${item.name}?`,
@@ -896,7 +904,7 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
                     >
                       <Text style={styles.actionTextRemove}>Remove</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setForm(formFor(item))}>
+                    <TouchableOpacity ref={item.id === firstId ? walkMark.ref('upkeep.edit') : undefined} onPress={() => setForm(formFor(item))}>
                       <Text style={styles.actionText}>Edit</Text>
                     </TouchableOpacity>
                   </ThumbEndRow>

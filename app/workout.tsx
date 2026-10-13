@@ -25,6 +25,7 @@ import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, Vibration, Vi
 import { AppTextInput } from '../components/AppTextInput';
 import { NotesInput } from '../components/NotesInput';
 import { useInfoAlert } from '../components/InfoAlert';
+import { useWalkMark } from '../components/WalkMark';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from '../components/HomeSectionBand';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
@@ -118,6 +119,7 @@ export default function WorkoutPlayerScreen() {
   const router = useRouter();
   const scrollPadding = useFloatingButtonScrollPadding();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
+  const walkMark = useWalkMark();
 
   const [workout, setWorkout] = useState<Workout | null>(null);
   const [custom, setCustom] = useState<CustomExercise[]>([]);
@@ -470,7 +472,7 @@ export default function WorkoutPlayerScreen() {
                 <Text style={styles.captionText}>{sessionNote.source.label}</Text>
               </View>
             ))}
-            <TouchableOpacity style={styles.primaryButton} onPress={begin} accessibilityRole="button">
+            <TouchableOpacity ref={walkMark.ref('workout.begin')} style={styles.primaryButton} onPress={begin} accessibilityRole="button">
               <Ionicons name="play" size={18} color={colors.background} />
               <Text style={styles.primaryButtonText}>Start</Text>
             </TouchableOpacity>
@@ -578,7 +580,7 @@ export default function WorkoutPlayerScreen() {
               </View>
             </View>
 
-            <TouchableOpacity style={styles.primaryButton} onPress={finishSet} accessibilityRole="button">
+            <TouchableOpacity ref={walkMark.ref('workout.done')} style={styles.primaryButton} onPress={finishSet} accessibilityRole="button">
               <Ionicons name={index + 1 < sets.length ? 'checkmark' : 'flag-outline'} size={18} color={colors.background} />
               <Text style={styles.primaryButtonText}>
                 {index + 1 >= sets.length ? 'Done, finish' : current.restAfter ? `Done, rest ${formatSeconds(current.restAfter)}` : 'Done, next'}
@@ -616,7 +618,7 @@ export default function WorkoutPlayerScreen() {
               <Text style={styles.bigClock}>{clockText(restLeft)}</Text>
               {upNextLine(sets, index - 1) ? <Text style={styles.bodyText}>{upNextLine(sets, index - 1)}</Text> : null}
             </View>
-            <TouchableOpacity style={styles.primaryButton} onPress={skipRest} accessibilityRole="button">
+            <TouchableOpacity ref={walkMark.ref('workout.ready')} style={styles.primaryButton} onPress={skipRest} accessibilityRole="button">
               <Ionicons name="play-skip-forward" size={18} color={colors.background} />
               <Text style={styles.primaryButtonText}>Ready now</Text>
             </TouchableOpacity>
@@ -723,6 +725,7 @@ export default function WorkoutPlayerScreen() {
                   </View>
                 ) : null}
                 <TouchableOpacity
+                  ref={walkMark.ref('workout.save')}
                   style={[styles.primaryButton, totals.done === 0 || saving ? styles.minorButtonOff : null]}
                   disabled={totals.done === 0 || saving}
                   onPress={save}

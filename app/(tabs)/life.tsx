@@ -1244,7 +1244,7 @@ export default function LifeScreen() {
             <TouchableOpacity ref={walkMark.ref('finance.addBill')} style={[styles.primaryButton, walkMark('finance.addBill')]} onPress={() => openAddRecurring('expense')}>
               <Text style={styles.primaryButtonText}>+ Add a bill</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.secondaryButton} onPress={() => openAddRecurring('income')}>
+            <TouchableOpacity ref={walkMark.ref('finance.addIncome')} style={styles.secondaryButton} onPress={() => openAddRecurring('income')}>
               <Text style={styles.secondaryButtonText}>+ Add income</Text>
             </TouchableOpacity>
           </View>
@@ -1280,7 +1280,7 @@ export default function LifeScreen() {
 
         {expenses.length > 0 ? (
           <TabBand folds={folds} color={TAB_COLOR} id="life:finances:going-out" title="Going out" icon="cash-outline">
-            {expenses.map((row) => renderRecurringRow(row))}
+            {expenses.map((row, index) => renderRecurringRow(row, index === 0))}
           </TabBand>
         ) : null}
 
@@ -1296,7 +1296,7 @@ export default function LifeScreen() {
     );
   }
 
-  function renderRecurringRow(row: FinanceRecurringRecord) {
+  function renderRecurringRow(row: FinanceRecurringRecord, first = false) {
     const monthly = row.active ? itemMonthly({ ...row }) : 0;
     return (
       <View key={row.id} style={[styles.listRow, !row.active && styles.listRowPaused]}>
@@ -1335,10 +1335,11 @@ export default function LifeScreen() {
         <View style={styles.listRight}>
           <Text style={styles.listAmount}>{formatFinanceMoney(row.amount)}</Text>
           <View style={styles.listActions}>
-            <TouchableOpacity onPress={() => openEditRecurring(row)}>
+            <TouchableOpacity ref={first ? walkMark.ref('finance.billEdit') : undefined} onPress={() => openEditRecurring(row)}>
               <Text style={styles.actionText}>Edit</Text>
             </TouchableOpacity>
             <TouchableOpacity
+              ref={first ? walkMark.ref('finance.billPause') : undefined}
               onPress={async () => {
                 await setRecurringActive(row.id, !row.active);
                 load();
@@ -1346,7 +1347,7 @@ export default function LifeScreen() {
             >
               <Text style={styles.actionText}>{row.active ? 'Pause' : 'Resume'}</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => confirmDeleteRecurring(row)}>
+            <TouchableOpacity ref={first ? walkMark.ref('finance.billRemove') : undefined} onPress={() => confirmDeleteRecurring(row)}>
               <Text style={styles.actionTextRemove}>Remove</Text>
             </TouchableOpacity>
           </View>
@@ -1606,7 +1607,7 @@ export default function LifeScreen() {
           <TouchableOpacity style={styles.secondaryButton} onPress={() => setRecurringForm(null)}>
             <Text style={styles.secondaryButtonText}>Cancel</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.primaryButton} onPress={saveRecurring}>
+          <TouchableOpacity ref={walkMark.ref('finance.billSave')} style={styles.primaryButton} onPress={saveRecurring}>
             <Text style={styles.primaryButtonText}>{form.editingId ? 'Save changes' : 'Add it'}</Text>
           </TouchableOpacity>
         </ThumbRow>
@@ -1749,7 +1750,7 @@ export default function LifeScreen() {
               <TouchableOpacity style={styles.secondaryButton} onPress={() => setEntryForm(null)}>
                 <Text style={styles.secondaryButtonText}>Cancel</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.primaryButton} onPress={saveEntry}>
+              <TouchableOpacity ref={walkMark.ref('finance.recordSave')} style={styles.primaryButton} onPress={saveEntry}>
                 <Text style={styles.primaryButtonText}>Record it</Text>
               </TouchableOpacity>
             </ThumbRow>
@@ -1764,7 +1765,7 @@ export default function LifeScreen() {
               shop.
             </Text>
           ) : (
-            budgetRows.map((row) => (
+            budgetRows.map((row, index) => (
               <View key={row.category} style={styles.barRow}>
                 <View style={styles.barLabelRow}>
                   <Text style={styles.barLabel}>{financeCategoryLabel(row.category)}</Text>
@@ -1789,6 +1790,7 @@ export default function LifeScreen() {
                     {row.committed > 0 ? ` · ${formatAccountMoney(row.committed)} already committed by bills` : ''}
                   </Text>
                   <TouchableOpacity
+                    ref={index === 0 ? walkMark.ref('finance.limitRemove') : undefined}
                     onPress={async () => {
                       await removeBudget(row.category);
                       load();
@@ -1833,6 +1835,7 @@ export default function LifeScreen() {
                   <Text style={styles.secondaryButtonText}>Cancel</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
+                  ref={walkMark.ref('finance.limitSave')}
                   style={styles.primaryButton}
                   onPress={async () => {
                     const limit = parsePriceInput(budgetForm.limit);
@@ -1850,7 +1853,7 @@ export default function LifeScreen() {
               </ThumbRow>
             </>
           ) : (
-            <TouchableOpacity style={styles.secondaryButton} onPress={() => setBudgetForm({ category: 'groceries', limit: '' })}>
+            <TouchableOpacity ref={walkMark.ref('finance.setLimit')} style={styles.secondaryButton} onPress={() => setBudgetForm({ category: 'groceries', limit: '' })}>
               <Text style={styles.secondaryButtonText}>+ Set a limit</Text>
             </TouchableOpacity>
           )}
@@ -1872,7 +1875,7 @@ export default function LifeScreen() {
 
         {entries.length > 0 ? (
           <TabBand folds={folds} color={TAB_COLOR} id="life:finances:recorded-in-x" title={`Recorded in ${monthLabel(month)}`} icon="cash-outline">
-            {entries.map((row) => (
+            {entries.map((row, index) => (
               <View key={row.id} style={styles.listRow}>
                 <View style={styles.listMain}>
                   <Text style={styles.listTitle}>{row.description || financeCategoryLabel(row.category)}</Text>
@@ -1892,6 +1895,7 @@ export default function LifeScreen() {
                     {formatFinanceMoney(row.amount)}
                   </Text>
                   <TouchableOpacity
+                    ref={index === 0 ? walkMark.ref('finance.entryRemove') : undefined}
                     onPress={() => {
                       void removeEntry(row);
                     }}
