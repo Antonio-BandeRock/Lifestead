@@ -634,8 +634,60 @@ const back = load('lib/storyReturn.ts');
   check(startAll.questions.find((q) => q.key === 'startTab').answered, 'and still answers the question');
 
   // The guided tour after setup (lib/guidedTour.ts, 1.0.68.11).
-  const tour = load('lib/guidedTour.ts', { './yourStoryInterview': interview });
+  const setup = load('lib/setupFlow.ts', { './yourStory': story, './yourStoryInterview': interview });
+  const tour = load('lib/guidedTour.ts', { './yourStoryInterview': interview, './setupFlow': setup });
   const later = { on: '2026-10-12', answer: interview.LATER };
+
+  // Setup as a walk through named parts (lib/setupFlow.ts, 1.0.68.13).
+  const freshFlow = setup.buildSetupFlow(first);
+  check(freshFlow.length > 0 && freshFlow.every((step) => step.kind === 'question'), 'no item is asked about before the parts of life are chosen');
+  same(setup.firstOpenStep(freshFlow).key, 'conditions', 'setup opens on the first question');
+  const partOrder = setup.SETUP_PARTS.map((part) => part.key);
+  check(
+    freshFlow.every((step, index) => index === 0 || partOrder.indexOf(step.part) >= partOrder.indexOf(freshFlow[index - 1].part)),
+    'steps run part by part',
+  );
+  for (const entry of setup.SETUP_ITEMS) {
+    check(!!story.ITEM_BY_KEY[entry.item], `setup item ${entry.item} is a Your Guide item`);
+    check(partOrder.includes(entry.part), `setup item ${entry.item} sits in a part`);
+  }
+  const gardenStory = story.buildYourStory(facts({ beats: ['garden'], doneOn: { beats: '2026-10-12' } }));
+  const gardenFlow = setup.buildSetupFlow(interview.buildInterview(interviewFacts(gardenStory)));
+  const gardenItems = gardenFlow.filter((step) => step.kind === 'item').map((step) => step.item.key);
+  check(gardenItems.includes('gardenArea') && gardenItems.includes('planting'), 'choosing Garden brings its items into setup');
+  check(!gardenItems.includes('bills') && !gardenItems.includes('familyMember'), 'parts not chosen bring nothing');
+  check(gardenFlow.every((step, index) => index === 0 || partOrder.indexOf(step.part) >= partOrder.indexOf(gardenFlow[index - 1].part)), 'and items keep the part order');
+  const areaKey = setup.setupItemAnswerKey('gardenArea');
+  const areaLater = setup.buildSetupFlow(interview.buildInterview(interviewFacts(gardenStory, { answers: { [areaKey]: later } })));
+  const areaStep = areaLater.find((step) => step.key === areaKey);
+  check(areaStep.settled && !areaStep.onRecord, 'Later settles an item without a record');
+  const areaSkip = setup.buildSetupFlow(interview.buildInterview(interviewFacts(gardenStory, { answers: { [areaKey]: { on: '2026-10-12', answer: setup.SETUP_SKIP } } })));
+  same(areaSkip.find((step) => step.key === areaKey).summary, setup.SETUP_SKIPPED_SUMMARY, 'Skip says it is still in Your Guide');
+  const areaDoneStory = story.buildYourStory(facts({ beats: ['garden'], doneOn: { beats: '2026-10-12', gardenArea: '2026-10-12' } }));
+  const areaDone = setup.buildSetupFlow(interview.buildInterview(interviewFacts(areaDoneStory))).find((step) => step.key === areaKey);
+  check(areaDone.settled && areaDone.onRecord, 'a saved record settles its item');
+  const areaAt = gardenFlow.findIndex((step) => step.key === areaKey);
+  same(setup.stepAfter(gardenFlow, areaKey).key, gardenFlow[areaAt + 1].key, 'stepAfter is the next step');
+  same(setup.stepBefore(gardenFlow, areaKey).key, gardenFlow[areaAt - 1].key, 'stepBefore is the one before');
+  same(setup.stepBefore(gardenFlow, gardenFlow[0].key), null, 'nothing before the first step');
+  same(setup.stepAfter(gardenFlow, gardenFlow[gardenFlow.length - 1].key), null, 'nothing after the last step');
+  const areaLaterView = interview.buildInterview(interviewFacts(gardenStory, { answers: { meds: later, backup: later, [areaKey]: later } }));
+  same(setup.laterItems(areaLaterView).map((def) => def.key), ['gardenArea'], 'an item left until Later is remembered');
+  same(
+    tour.guidedTourStops(areaLaterView).slice(0, 3).map((stop) => stop.key),
+    ['later:meds', 'later:backup', 'later:gardenArea'],
+    'and walked in the tour after the questions left until Later',
+  );
+  same(setup.laterItems(interview.buildInterview(interviewFacts(areaDoneStory, { answers: { [areaKey]: later } }))), [], 'a Later item with a record is not walked');
+  for (const text of [
+    ...setup.SETUP_PARTS.flatMap((part) => [part.name, part.line]),
+    setup.SETUP_SKIPPED_SUMMARY,
+    setup.SETUP_AWAY_SAVED,
+    setup.SETUP_RERUN_LINE,
+    setup.SETUP_KEEP_LABEL,
+  ]) {
+    check(!/[–—]| -- |(real|genuinely?)|d+%/i.test(text), `setup text reads plainly: ${text}`);
+  }
   const putOff = interview.buildInterview(
     interviewFacts(fresh, { answers: { meds: later, backup: later, startTab: { on: '2026-10-12', answer: '/life' } } }),
   );

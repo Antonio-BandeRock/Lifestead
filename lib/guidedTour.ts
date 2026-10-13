@@ -10,7 +10,8 @@
 //
 // What it walks, in order:
 //   1. Anything setup was told to leave until Later (My Meds, Backup &
-//      Restore, App Lock), since the person was promised these come first.
+//      Restore, App Lock, then the getting-set-up items of lib/setupFlow.ts),
+//      since the person was promised these come first.
 //   2. The "fastest way in" steps of every tab (TOUR_TABS in
 //      lib/yourStoryInterview.ts), the tab chosen to start from first, each
 //      tab's steps already in the order that makes it useful soonest.
@@ -23,6 +24,7 @@
 // Pure, with no runtime import but the interview's labels, so
 // scripts/test_your_story.js checks it without a phone.
 import type { StoryDestination } from './yourStory';
+import { laterItems } from './setupFlow';
 import { LATER, type InterviewView } from './yourStoryInterview';
 
 // Kept in your_story_answers beside the interview's answers.
@@ -87,6 +89,16 @@ export function guidedTourStops(view: InterviewView): TourStop[] {
       doThis: 'Set up App Lock, so your records are encrypted and open with your code.',
       why: 'You left this until later in setup. It is off until you turn it on.',
       destination: appLock,
+      hasRecord: true,
+    });
+  }
+  for (const def of laterItems(view)) {
+    seenItems.add(def.key);
+    stops.push({
+      key: `later:${def.key}`,
+      doThis: def.todo,
+      why: `You left this until later in setup. ${def.why}`,
+      destination: def.destination,
       hasRecord: true,
     });
   }

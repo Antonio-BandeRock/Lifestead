@@ -203,10 +203,10 @@ export const LATER_LABEL = 'Later';
 export const LATER_SUMMARY = 'Later. It comes first in the tour.';
 export const SETUP_HEADING = 'Setting up Lifestead';
 export const SETUP_LEAD =
-  'A few questions before the app opens, one at a time, so it works for you from the start. Every answer can be changed later in Your Guide.';
+  'A few questions before the app opens, one page at a time, then the few things each part of life you chose needs set up once. Every answer can be changed later in Your Guide, or with Run Setup Again in Profile.';
 export const SETUP_BACK_LABEL = 'Back';
 export const SETUP_FINISH_LATER_LABEL = 'Finish Later';
-export const SETUP_FINISH_LATER_LINE = 'Setup comes back the next time Lifestead opens, at the first question without an answer.';
+export const SETUP_FINISH_LATER_LINE = 'Setup comes back the next time Lifestead opens, at the first thing still waiting.';
 export const SETUP_RETURN_LABEL = 'Back to Setup';
 export const SETUP_DONE_HEADING = 'Setup is done';
 export const SETUP_DONE_LINE =

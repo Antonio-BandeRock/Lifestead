@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { runSetupAgain, SETUP_RERUN_LABEL, SETUP_RERUN_LINE } from '../lib/setupFlow';
 import * as Updates from 'expo-updates';
 import { restartApp } from '../lib/restartApp';
 import { Fragment, useCallback, useEffect, useRef, useState, type ComponentProps, type ReactNode } from 'react';
@@ -3312,6 +3313,13 @@ export default function ProfileScreen() {
         </Text>
         <TouchableOpacity style={styles.checkinButton} onPress={() => router.push('/your-story')}>
           <Text style={styles.checkinButtonText}>Open Your Guide</Text>
+        </TouchableOpacity>
+        {/* 1.0.68.13, direct request: "If later on they want to add a
+            condition after choosing not to in the setup, Profile should
+            have a rerun setup guidance again button." */}
+        <Text style={styles.intro}>{SETUP_RERUN_LINE}</Text>
+        <TouchableOpacity style={styles.checkinButton} onPress={runSetupAgain}>
+          <Text style={styles.checkinButtonText}>{SETUP_RERUN_LABEL}</Text>
         </TouchableOpacity>
       </View>
       {savedFlash ? (

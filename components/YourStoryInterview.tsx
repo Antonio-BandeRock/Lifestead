@@ -7,8 +7,9 @@
 //         question being asked, open.
 //   card  the question being asked, open, for the Home card. Nothing once
 //         every question has an answer.
-//   setup the question being asked, one to a screen, for the setup before
-//         the app (components/FirstSetup.tsx), with Back to the one before.
+//   setup the one question setup is showing (showKey), for the setup before
+//         the app (components/FirstSetup.tsx), which owns Back, the answered
+//         line and moving on, and is told each answer through onAnswered.
 //
 // 1.0.68.11, direct request: the choices "a little smaller and not in pill
 // form and laid out more cleanly. I like the way the menu for the quick
@@ -78,7 +79,6 @@ import {
   PLAN_THIS_WAY_LABEL,
   READ_MORE_LABEL,
   SET_UP_BACKUP_LABEL,
-  SETUP_BACK_LABEL,
   SECURITY_APP_LOCK_LABEL,
   SECURITY_BOTH_LABEL,
   SECURITY_VAULT_LABEL,
@@ -107,6 +107,10 @@ type Props = {
   go: (destination: Exclude<StoryDestination, { kind: 'beats' }>) => void;
   // Told which question is showing, so setup can scroll back to the top.
   onQuestionShown?: (key: string | null) => void;
+  // Setup only: the question to show, and told once it has been answered
+  // so setup can move to the next page (1.0.68.13).
+  showKey?: string;
+  onAnswered?: (key: string) => void;
 };
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -144,7 +148,7 @@ const myMedsRoute: Exclude<StoryDestination, { kind: 'beats' }> = {
   params: { openLifeLens: 'myMeds' },
 };
 
-export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionShown }: Props) {
+export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionShown, showKey, onAnswered }: Props) {
   // The question held open while choices are being made, or reopened with
   // Change. Null means the next unanswered one.
   const [holding, setHolding] = useState<string | null>(null);
@@ -156,7 +160,7 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
   const [day, setDay] = useState<string | null>(null);
   const [dateError, setDateError] = useState<string | null>(null);
 
-  const openKey = holding ?? interview?.next?.key ?? null;
+  const openKey = mode === 'setup' ? (showKey ?? null) : (holding ?? interview?.next?.key ?? null);
   const open = interview?.questions.find((question) => question.key === openKey) ?? null;
   // The question answered last, said above the next one with Change.
   const [justAnswered, setJustAnswered] = useState<string | null>(null);
@@ -192,11 +196,14 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
       } catch (error) {
         console.warn('Your Story interview answer failed', error);
       }
-      if (keepOpen === null && openKeyRef.current) setJustAnswered(openKeyRef.current);
+      if (keepOpen === null && openKeyRef.current) {
+        setJustAnswered(openKeyRef.current);
+        onAnswered?.(openKeyRef.current);
+      }
       setHolding(keepOpen);
       onChanged();
     },
-    [onChanged],
+    [onChanged, onAnswered],
   );
 
   if (!interview) return null;
@@ -312,7 +319,17 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
           </>
         );
       case 'beats':
-        return <BeatPicker showQuestion={false} onChanged={() => onChanged()} onDone={() => setHolding(null)} />;
+        return (
+          <BeatPicker
+            showQuestion={false}
+            onChanged={() => onChanged()}
+            onDone={() => {
+              setHolding(null);
+              onAnswered?.(key);
+              onChanged();
+            }}
+          />
+        );
       case 'startTab': {
         const chosen = facts.answers.startTab?.answer ?? null;
         return (
@@ -567,7 +584,7 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
         <Text style={styles.question}>{question.question}</Text>
         <Text style={styles.why}>{question.def.why}</Text>
         {renderChoices(question)}
-        {holding === question.key && question.answered ? (
+        {mode !== 'setup' && holding === question.key && question.answered ? (
           <View style={styles.links}>{link('Close', () => setHolding(null), true)}</View>
         ) : null}
       </View>
@@ -595,13 +612,6 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
     );
   }
 
-  // The question before the one showing, for Back in setup.
-  function previousKey(): string | null {
-    if (!interview) return null;
-    const at = interview.questions.findIndex((question) => question.key === openKey);
-    return at > 0 ? interview.questions[at - 1].key : null;
-  }
-
   if (mode === 'card') {
     return open ? (
       <View style={styles.cardWrap}>
@@ -611,23 +621,7 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
     ) : null;
   }
 
-  if (mode === 'setup') {
-    const back = previousKey();
-    return open ? (
-      <View style={styles.page}>
-        {renderJustAnswered(styles.bandPlain)}
-        {renderOpen(open)}
-        {back ? (
-          <View style={[styles.band, styles.links]}>
-            <TouchableOpacity style={styles.link} onPress={() => setHolding(back)} accessibilityRole="button">
-              <Ionicons name="arrow-back" size={13} color={colors.primary} style={textShadow} />
-              <Text style={styles.linkText}>{SETUP_BACK_LABEL}</Text>
-            </TouchableOpacity>
-          </View>
-        ) : null}
-      </View>
-    ) : null;
-  }
+  if (mode === 'setup') return open ? renderOpen(open) : null;
 
   const answered = interview.questions.filter((question) => question.answered && question.key !== openKey);
   return (
@@ -697,7 +691,6 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
     backgroundColor: colors.surface,
   },
-  bandPlain: {},
   // The quick access menu's panel and wells (components/QuickAccessButton.tsx),
   // one column on a phone and as many as fit on a wider window.
   panel: {
