@@ -48,6 +48,15 @@ const VERSIONS = [
     about: 'Everything Free has, with every paid lens open.',
   },
   {
+    // Fills itself on first open (lib/testDataGenerator.ts), and again after
+    // Start Fresh, with the same five months behind and one month ahead.
+    key: 'test-data',
+    label: 'Test data',
+    tier: 'paid',
+    start: 'fresh',
+    about: 'A made-up person with Hashimoto\'s, prostate problems, autism and ADHD: five months of records behind today and a month planned ahead, for testing and screenshots.',
+  },
+  {
     key: 'first-run-condition',
     label: 'First run, with a condition',
     tier: 'free',

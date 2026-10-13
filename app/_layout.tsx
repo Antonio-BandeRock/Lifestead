@@ -16,6 +16,7 @@ import { KeyboardLiftProvider, KeyboardLiftReleaser, KeyboardLiftView } from '..
 import { DatabaseSetupScreen } from '../components/DatabaseSetupScreen';
 import { FirstLaunchAgreement } from '../components/FirstLaunchAgreement';
 import { FirstSetup } from '../components/FirstSetup';
+import { TestDataFiller } from '../components/TestDataFiller';
 import { GuidedTourHost } from '../components/GuidedTourHost';
 import { GardenPlateOfferHost } from '../components/GardenPlateOfferHost';
 import { StartupFailureScreen } from '../components/StartupFailureScreen';
@@ -1023,6 +1024,9 @@ function UnlockedApp() {
                   it covers the tour strip, and ahead of OverlayRoot and
                   AppKeyboard, so a picker and the keyboard draw over it. */}
               <FirstSetup />
+              {/* The desktop's Test data version fills itself here on first open,
+                  over setup and everything else (lib/testDataGenerator.ts). */}
+              <TestDataFiller />
               {/* Before AppKeyboard, deliberately -- see OverlayContext.tsx's own
                   comment: the keyboard must always paint on top of an open
                   dropdown's backdrop/menu, never the other way around. */}
