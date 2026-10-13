@@ -12,6 +12,7 @@ import { REPORT_CSV_CAPTION, REPORT_CSV_NO_TABLES, reportCsvTables } from '../li
 import { exportReportCsv } from '../lib/reportCsvExport';
 import type { ReportDocument } from '../lib/reportGenerator';
 import { useInfoAlert } from './InfoAlert';
+import { useWalkMark } from './WalkMark';
 
 const WHOLE = '__whole__';
 
@@ -22,6 +23,7 @@ type Props = {
 };
 
 export function ReportCsvButtons({ report, onSaved }: Props) {
+  const walkMark = useWalkMark();
   const [busy, setBusy] = useState<string | null>(null);
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const tables = reportCsvTables(report);
@@ -55,6 +57,7 @@ export function ReportCsvButtons({ report, onSaved }: Props) {
       <View style={styles.buttonRow}>
         {buttons.map((entry) => (
           <TouchableOpacity
+            ref={walkMark.ref('reports.csv')}
             key={entry.key}
             style={[styles.button, busy === entry.key && styles.buttonBusy]}
             onPress={() => handleSave(entry.key)}

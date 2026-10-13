@@ -11,6 +11,7 @@ import { textShadow, typography } from '../constants/typography';
 import { GARDEN_CSV_CAPTION, GARDEN_CSV_KINDS, nothingToSave, type GardenCsvKind } from '../lib/gardenCsv';
 import { exportGardenCsv } from '../lib/gardenCsvDb';
 import { useInfoAlert } from './InfoAlert';
+import { useWalkMark } from './WalkMark';
 
 type Props = {
   /** Replaces the standard caption, for a host with no range above it. */
@@ -18,6 +19,7 @@ type Props = {
 };
 
 export function GardenCsvButtons({ caption = GARDEN_CSV_CAPTION }: Props) {
+  const walkMark = useWalkMark();
   const [busy, setBusy] = useState<GardenCsvKind | null>(null);
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
 
@@ -45,6 +47,7 @@ export function GardenCsvButtons({ caption = GARDEN_CSV_CAPTION }: Props) {
       <View style={styles.buttonRow}>
         {GARDEN_CSV_KINDS.map((entry) => (
           <TouchableOpacity
+            ref={walkMark.ref('reports.gardenCsv')}
             key={entry.kind}
             style={[styles.button, busy === entry.kind && styles.buttonBusy]}
             onPress={() => handleSave(entry.kind)}

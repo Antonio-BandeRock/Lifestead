@@ -24,6 +24,7 @@ import { REPORT_KINDS } from '../lib/reportKinds';
 import { AppTextInput } from './AppTextInput';
 import { useConfirmSheet } from './ConfirmSheet';
 import { useTabBandStyles } from './TabBand';
+import { useWalkMark } from './WalkMark';
 
 const SHOWN_AT_FIRST = 10;
 
@@ -37,6 +38,7 @@ type Props = {
 };
 
 export function ReportHistoryBand({ tabColor, refreshKey, askForId, onMakeAgain }: Props) {
+  const walkMark = useWalkMark();
   const band = useTabBandStyles(tabColor);
   const [entries, setEntries] = useState<ReportHistoryEntry[] | null>(null);
   const [showAll, setShowAll] = useState(false);
@@ -119,7 +121,7 @@ export function ReportHistoryBand({ tabColor, refreshKey, askForId, onMakeAgain 
                 </View>
               ) : null}
               <View style={styles.buttonRow}>
-                <TouchableOpacity style={styles.button} onPress={() => void saveName(entry.id, draft)} accessibilityRole="button">
+                <TouchableOpacity ref={walkMark.ref('reports.whoSave')} style={styles.button} onPress={() => void saveName(entry.id, draft)} accessibilityRole="button">
                   <Text style={styles.buttonText}>Save</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonQuiet} onPress={() => setEditingId(null)} accessibilityRole="button">
@@ -129,13 +131,13 @@ export function ReportHistoryBand({ tabColor, refreshKey, askForId, onMakeAgain 
             </View>
           ) : (
             <View style={styles.buttonRow}>
-              <TouchableOpacity style={styles.button} onPress={() => onMakeAgain(entry)} accessibilityRole="button">
+              <TouchableOpacity ref={walkMark.ref('reports.again')} style={styles.button} onPress={() => onMakeAgain(entry)} accessibilityRole="button">
                 <Text style={styles.buttonText}>Make it again</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonQuiet} onPress={() => startEditing(entry)} accessibilityRole="button">
+              <TouchableOpacity ref={walkMark.ref('reports.who')} style={styles.buttonQuiet} onPress={() => startEditing(entry)} accessibilityRole="button">
                 <Text style={styles.buttonQuietText}>{entry.forWhom ? 'Change who' : 'Who it was for'}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonQuiet} onPress={() => void handleRemove(entry)} accessibilityRole="button">
+              <TouchableOpacity ref={walkMark.ref('reports.remove')} style={styles.buttonQuiet} onPress={() => void handleRemove(entry)} accessibilityRole="button">
                 <Text style={styles.buttonQuietText}>Remove</Text>
               </TouchableOpacity>
             </View>

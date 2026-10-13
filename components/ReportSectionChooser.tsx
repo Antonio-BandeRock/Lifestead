@@ -9,6 +9,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { cleanLeftOut, reportSectionChoices, sectionCountLabel, type ReportKind, type ReportSectionId } from '../lib/reportKinds';
+import { useWalkMark } from './WalkMark';
 
 type Props = {
   kind: ReportKind;
@@ -18,6 +19,7 @@ type Props = {
 };
 
 export function ReportSectionChooser({ kind, leftOut, tabColor, onChange }: Props) {
+  const walkMark = useWalkMark();
   const [open, setOpen] = useState(false);
   const choices = reportSectionChoices(kind);
   const clean = cleanLeftOut(kind, leftOut);
@@ -36,7 +38,7 @@ export function ReportSectionChooser({ kind, leftOut, tabColor, onChange }: Prop
 
   return (
     <View>
-      <TouchableOpacity style={styles.header} onPress={() => setOpen((value) => !value)} accessibilityRole="button" accessibilityState={{ expanded: open }}>
+      <TouchableOpacity ref={walkMark.ref('reports.sections')} style={styles.header} onPress={() => setOpen((value) => !value)} accessibilityRole="button" accessibilityState={{ expanded: open }}>
         <Text style={styles.title}>Sections in this report</Text>
         <Text style={styles.count}>{sectionCountLabel(kind, clean)}</Text>
         <Ionicons name={open ? 'chevron-up' : 'chevron-down'} size={18} color={colors.textSecondary} />
@@ -51,6 +53,7 @@ export function ReportSectionChooser({ kind, leftOut, tabColor, onChange }: Prop
             const locked = isIn && ticked <= 1;
             return (
               <TouchableOpacity
+                ref={walkMark.ref('reports.section')}
                 key={choice.id}
                 style={styles.row}
                 onPress={() => toggle(choice.id)}

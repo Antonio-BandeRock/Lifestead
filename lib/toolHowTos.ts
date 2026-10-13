@@ -512,7 +512,20 @@ export type ToolMark =
   | 'trends.measure'
   | 'trends.nutrient'
   | 'trends.range'
-  | 'trends.test';
+  | 'trends.test'
+  | 'reports.again'
+  | 'reports.csv'
+  | 'reports.custom'
+  | 'reports.gardenCsv'
+  | 'reports.pdf'
+  | 'reports.print'
+  | 'reports.range'
+  | 'reports.remove'
+  | 'reports.section'
+  | 'reports.sections'
+  | 'reports.text'
+  | 'reports.who'
+  | 'reports.whoSave';
 
 export type ToolStep = {
   say: string;
@@ -737,6 +750,69 @@ function moreTrendsHowTos(lens: string, bands: string, readNote: string, emptyNo
     forYou: readNote,
   };
   return emptyNote ? [read, whatItNeeds(emptyNote)] : [read];
+}
+
+// Every report shares one set of tools: pick a range, choose its sections,
+// send it, save its tables, and make it again from the history. Each lens
+// differs only in what the report holds and who it is for.
+function reportHowTos(o: { name: string; holds: string; rangeNote?: string; more?: ToolHowTo[] }): ToolHowTo[] {
+  return [
+    {
+      key: 'make',
+      title: `Make ${o.name}`,
+      steps: [
+        { say: 'Tap how far back the report should reach.', mark: 'reports.range' },
+        { say: 'Read the report below. It is laid out as it will be sent.' },
+      ],
+      forYou: `${o.holds}${o.rangeNote ? ' ' + o.rangeNote : ''}`,
+    },
+    {
+      key: 'custom',
+      title: 'Start the report on a day you choose',
+      steps: [
+        { say: 'Tap Custom at the end of the range pills.', mark: 'reports.custom' },
+        { say: 'Pick the year, month and day it starts from. It runs through today.' },
+      ],
+      forYou: 'Useful for a report covering everything since a diagnosis, a new medicine or a change you made.',
+    },
+    {
+      key: 'sections',
+      title: 'Leave a section out of the report',
+      steps: [
+        { say: 'Tap Sections in this report.', mark: 'reports.sections' },
+        { say: 'Untick a section to leave it out. Tick it again to put it back.', mark: 'reports.section' },
+      ],
+      forYou: 'A section left out is not read at all, and the report says sections were left out without naming them. This report remembers the choice.',
+    },
+    {
+      key: 'send',
+      title: 'Send or print the report',
+      steps: [
+        { say: 'Tap Share as PDF to send it laid out as pages.', mark: 'reports.pdf' },
+        { say: 'Or tap Print to print it.', mark: 'reports.print' },
+        { say: 'Or tap Share as text to paste it into a message.', mark: 'reports.text' },
+      ],
+      forYou: 'The report is made on this device. Nothing is sent anywhere until you pick where it goes.',
+    },
+    {
+      key: 'csv',
+      title: 'Save the report as a spreadsheet',
+      steps: [{ say: 'Under Save as a Spreadsheet, tap Whole report or one of its tables.', mark: 'reports.csv' }],
+      forYou: 'Each file opens in any spreadsheet app, so the figures can be sorted and added up.',
+    },
+    {
+      key: 'history',
+      title: 'Make a report again, or note who it was for',
+      steps: [
+        { say: 'In the list of reports made, tap Make it again to rebuild one with the same sections and range.', mark: 'reports.again' },
+        { say: 'Tap Who it was for to add a name.', mark: 'reports.who' },
+        { say: 'Type the name or tap one used before, then tap Save.', mark: 'reports.whoSave' },
+        { say: 'Tap Remove to take a line out of the list.', mark: 'reports.remove' },
+      ],
+      forYou: 'Every report you send or save is kept in this list. Removing a line does not touch the report wherever it was sent.',
+    },
+    ...(o.more ?? []),
+  ];
 }
 
 export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
@@ -4632,7 +4708,52 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'The record opens where it lives, so a change made there shows here too.',
     },
   ],
+  '/reports#overview': reportHowTos({
+    name: 'the Overview',
+    holds: 'Everything logged over the range in one summary: nutrients, flagged foods, symptoms, what Pattern Finder noticed, meds and supplements, movement and sleep, body readings, your rules and recent labs.',
+  }),
+  '/reports#r-doctor': reportHowTos({
+    name: 'the report for your doctor',
+    holds: 'Built for an appointment: what changed since the last visit, symptoms, doses as scheduled and as marked, meds with the interaction notes that touch them, body readings and recent labs. Food detail is left to the Nutritionist report.',
+    rangeNote: 'Once an appointment has happened, Since last visit appears among the range pills.',
+  }),
+  '/reports#r-nutrition': reportHowTos({
+    name: 'the report for a nutritionist',
+    holds: 'Nutrients against targets, flagged foods, a day-by-day diary of meals beside flares and reactions, hydration, planned meals against what was eaten, and the supplements you take.',
+  }),
+  '/reports#r-trainer': reportHowTos({
+    name: 'the report for a trainer',
+    holds: 'Steps and sleep, weight and blood pressure, heart readings, hydration, nights up and how work weeks went. Conditions, medicines and symptoms are left out on purpose.',
+  }),
+  '/reports#r-month': reportHowTos({
+    name: 'a look back',
+    holds: 'The range as a whole: meals planned and eaten, doses, appointments, work weeks, reactions, nights, ferments, and what eating and the conditions cost. A stretch with nothing recorded says so.',
+  }),
+  '/reports#r-care': reportHowTos({
+    name: 'the report for a caregiver',
+    holds: 'What someone helping day to day needs: what is on today, doses, appointments, your conditions and every active medicine and supplement. Medicine questions go to the prescriber.',
+  }),
+  '/reports#r-medical-costs': reportHowTos({
+    name: 'the medical costs report',
+    holds: 'Every medical bill in the range with what was billed, paid and owed, where your insurance plan stands, and what the conditions, supplements and prescriptions cost.',
+  }),
+  '/reports#r-garden': reportHowTos({
+    name: 'the garden record',
+    holds: 'Harvests by crop and by area, how long each grow took, compost, what was sold, traded or given, and what is on hand now.',
+    more: [
+      {
+        key: 'gardenCsv',
+        title: 'Save the whole garden record as spreadsheets',
+        steps: [{ say: 'Under Save as a Spreadsheet, tap plantings, harvests or what was done.', mark: 'reports.gardenCsv' }],
+        forYou: 'These files hold every garden record, whatever range is picked above.',
+      },
+    ],
+  }),
+  '/reports#r-variety': reportHowTos({
+    name: 'the eating variety report',
+    holds: 'Different foods and plants week by week, the meals and foods that came back most, food groups not logged at all, and where meals came from. A meal that comes back often is counted, not judged.',
+  }),
 };
 
 /** Tabs whose every lens has its tools listed above. */
-export const TOOL_TABS_DONE: readonly string[] = ['/life', '/', '/schedule', '/log', '/food', '/garden', '/insights', '/trends'];
+export const TOOL_TABS_DONE: readonly string[] = ['/life', '/', '/schedule', '/log', '/food', '/garden', '/insights', '/trends', '/reports'];

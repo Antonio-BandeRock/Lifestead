@@ -14,6 +14,7 @@ import { YourStoryMissingLine } from '../../components/YourStoryMissingLine';
 import { LensHub, type LensOption } from '../../components/LensHub';
 import { MyItemsHub, type MyItemsCategory } from '../../components/MyItemsHub';
 import { PopoverSelect } from '../../components/PopoverSelect';
+import { useWalkMark } from '../../components/WalkMark';
 import { PageIdentityLabel } from '../../components/PageIdentityLabel';
 import { SwipeableTabScreen } from '../../components/SwipeableTabScreen';
 import { CalmBands, HOME_BAND_ACCENT_WIDTH } from '../../components/HomeSectionBand';
@@ -143,6 +144,7 @@ function describeStart(start: string): string {
 }
 
 export default function ReportsScreen() {
+  const walkMark = useWalkMark();
   useRegisterScreenHelp('Reports', REPORTS_HELP_SECTIONS, '/reports');
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const [lens, setLens] = useState<ReportsLens>('overview');
@@ -410,6 +412,7 @@ export default function ReportsScreen() {
             <View style={[band.inset, styles.pillRow]}>
               {DAY_RANGE_OPTIONS.map((option) => (
                 <TouchableOpacity
+                  ref={walkMark.ref('reports.range')}
                   key={option.value}
                   style={[styles.pill, range === option.value && styles.pillActive]}
                   onPress={() => setRange(option.value)}
@@ -431,7 +434,7 @@ export default function ReportsScreen() {
                   <Text style={[styles.pillText, range === 'visit' && styles.pillTextActive]}>Since last visit</Text>
                 </TouchableOpacity>
               ) : null}
-              <TouchableOpacity style={[styles.pill, range === 'custom' && styles.pillActive]} onPress={() => setRange('custom')}>
+              <TouchableOpacity ref={walkMark.ref('reports.custom')} style={[styles.pill, range === 'custom' && styles.pillActive]} onPress={() => setRange('custom')}>
                 <Text style={[styles.pillText, range === 'custom' && styles.pillTextActive]}>Custom</Text>
               </TouchableOpacity>
             </View>
@@ -506,13 +509,13 @@ export default function ReportsScreen() {
 
             {reportText && !loading ? (
               <View style={[band.inset, styles.shareRow]}>
-                <TouchableOpacity style={[styles.shareButton, exporting && styles.shareButtonBusy]} onPress={handleSharePdf} disabled={exporting}>
+                <TouchableOpacity ref={walkMark.ref('reports.pdf')} style={[styles.shareButton, exporting && styles.shareButtonBusy]} onPress={handleSharePdf} disabled={exporting}>
                   <Text style={styles.shareButtonText}>{exporting ? 'Laying out the PDF…' : 'Share as PDF'}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.shareButtonSecondary, printing && styles.shareButtonBusy]} onPress={handlePrint} disabled={printing}>
+                <TouchableOpacity ref={walkMark.ref('reports.print')} style={[styles.shareButtonSecondary, printing && styles.shareButtonBusy]} onPress={handlePrint} disabled={printing}>
                   <Text style={styles.shareButtonSecondaryText}>{printing ? 'Opening the print dialog…' : 'Print'}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.shareButtonSecondary} onPress={handleShareText}>
+                <TouchableOpacity ref={walkMark.ref('reports.text')} style={styles.shareButtonSecondary} onPress={handleShareText}>
                   <Text style={styles.shareButtonSecondaryText}>Share as text</Text>
                 </TouchableOpacity>
               </View>
