@@ -181,6 +181,7 @@ import {
 import { ThumbRow } from '../../components/ThumbRow';
 import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { VaultLensFrame } from '../../components/VaultLensFrame';
+import { useWalkMark } from '../../components/WalkMark';
 import type { VaultCategory } from '../../lib/vault';
 
 // Every text box on this page belongs to this one page's own tab, so
@@ -1065,6 +1066,7 @@ function CheckinForm({
   onSave: () => void;
   saveLabel: string;
 }) {
+  const walkMark = useWalkMark();
   return (
     <View style={styles.formCard}>
       {foodNameField ? (
@@ -1132,7 +1134,7 @@ function CheckinForm({
         <TouchableOpacity style={styles.secondaryButton} onPress={onCancel}>
           <Text style={styles.secondaryButtonText}>Cancel</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.primaryButton} onPress={onSave}>
+        <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={onSave}>
           <Text style={styles.primaryButtonText}>{saveLabel}</Text>
         </TouchableOpacity>
       </ThumbRow>
@@ -1146,6 +1148,7 @@ function CheckinRow({
   onChanged,
   personal,
   withContributors,
+  first,
 }: {
   entry: WellbeingCheckin;
   onDelete: (id: string) => void;
@@ -1153,7 +1156,10 @@ function CheckinRow({
   onChanged?: () => void;
   personal?: PersonFirst | null;
   withContributors?: boolean;
+  /** The top row, which a how-to step rings. */
+  first?: boolean;
 }) {
+  const walkMark = useWalkMark();
   const severityLabel = describeSeverity(entry.severity, entry.severityTen) ?? undefined;
   const [editing, setEditing] = useState(false);
   const [tags, setTags] = useState<string[]>(entry.tags);
@@ -1234,16 +1240,18 @@ function CheckinRow({
         {/* A rash, a swelling or a reaction looks different by tomorrow, and a
             photo from the day is what a doctor asks for. The doctor report
             carries these at report size. */}
-        <RecordPhotos
-          ownerKind="symptom"
-          ownerId={entry.id}
-          tabColor={TAB_COLOR}
-          title={entry.foodName ?? severityLabel ?? 'Logged'}
-        />
+        <View ref={first ? walkMark.ref('signals.photosFirst') : undefined} collapsable={false}>
+          <RecordPhotos
+            ownerKind="symptom"
+            ownerId={entry.id}
+            tabColor={TAB_COLOR}
+            title={entry.foodName ?? severityLabel ?? 'Logged'}
+          />
+        </View>
       </View>
       <View style={styles.rowActions}>
         {onChanged ? (
-          <TouchableOpacity
+          <TouchableOpacity ref={first ? walkMark.ref('signals.editFirst') : undefined}
             onPress={() => {
               setTags(entry.tags);
               setContributors(entry.contributors);
@@ -1253,7 +1261,7 @@ function CheckinRow({
             <Text style={styles.actionText}>Edit</Text>
           </TouchableOpacity>
         ) : null}
-        <TouchableOpacity onPress={() => onDelete(entry.id)}>
+        <TouchableOpacity ref={first ? walkMark.ref('signals.removeFirst') : undefined} onPress={() => onDelete(entry.id)}>
           <Text style={styles.actionTextRemove}>Remove</Text>
         </TouchableOpacity>
       </View>
@@ -1262,6 +1270,7 @@ function CheckinRow({
 }
 
 function FlaresLens() {
+  const walkMark = useWalkMark();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const [entries, setEntries] = useState<WellbeingCheckin[]>([]);
   const [loading, setLoading] = useState(true);
@@ -1331,7 +1340,7 @@ function FlaresLens() {
     <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
       {!formOpen ? (
-        <TouchableOpacity style={styles.addButton} onPress={() => setFormOpen(true)}>
+        <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
           <Text style={styles.addButtonText}>+ Log a flare</Text>
         </TouchableOpacity>
       ) : (
@@ -1375,6 +1384,7 @@ function FlaresLens() {
             <CheckinRow
               key={entry.id}
               entry={entry}
+              first={entry.id === entries[0]?.id}
               onDelete={handleDelete}
               onChanged={() => {
                 setSavedCount((n) => n + 1);
@@ -1392,6 +1402,7 @@ function FlaresLens() {
 }
 
 function FoodReactionsLens() {
+  const walkMark = useWalkMark();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const [entries, setEntries] = useState<WellbeingCheckin[]>([]);
   const [loading, setLoading] = useState(true);
@@ -1475,7 +1486,7 @@ function FoodReactionsLens() {
     <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
       {!formOpen ? (
-        <TouchableOpacity style={styles.addButton} onPress={() => setFormOpen(true)}>
+        <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
           <Text style={styles.addButtonText}>+ Log a food reaction</Text>
         </TouchableOpacity>
       ) : (
@@ -1519,6 +1530,7 @@ function FoodReactionsLens() {
             <CheckinRow
               key={entry.id}
               entry={entry}
+              first={entry.id === entries[0]?.id}
               onDelete={handleDelete}
               onChanged={() => {
                 setSavedCount((n) => n + 1);
@@ -1555,6 +1567,7 @@ function NewFoodsLens({
   prefill?: ResolvedFoodSelection | null;
   prefillDesign?: TrialDesign | null;
 }) {
+  const walkMark = useWalkMark();
   const router = useRouter();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const [trials, setTrials] = useState<FoodTrialRecord[]>([]);
@@ -2034,6 +2047,8 @@ function NewFoodsLens({
     );
   }
 
+  const firstTrialingId = trials.find((trial) => trial.status === 'trialing')?.id;
+
   return (
     <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
@@ -2139,17 +2154,17 @@ function NewFoodsLens({
             >
               <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.primaryButton} onPress={handleSaveSeries}>
+            <TouchableOpacity ref={walkMark.ref('newFoods.startSeries')} style={styles.primaryButton} onPress={handleSaveSeries}>
               <Text style={styles.primaryButtonText}>Start series</Text>
             </TouchableOpacity>
           </ThumbRow>
         </View>
       ) : !formOpen ? (
         <>
-          <TouchableOpacity style={styles.addButton} onPress={() => setFormOpen(true)}>
+          <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
             <Text style={styles.addButtonText}>+ Start a new food trial</Text>
           </TouchableOpacity>
-          <TouchableOpacity
+          <TouchableOpacity ref={walkMark.ref('newFoods.addExperiment')}
             style={styles.addButton}
             onPress={() => {
               setSubject(SUBJECT_OPTIONS[0].key);
@@ -2158,7 +2173,7 @@ function NewFoodsLens({
           >
             <Text style={styles.addButtonText}>+ Start an experiment about something else</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.addButton} onPress={() => setSeriesFormOpen(true)}>
+          <TouchableOpacity ref={walkMark.ref('newFoods.addSeries')} style={styles.addButton} onPress={() => setSeriesFormOpen(true)}>
             <Text style={styles.addButtonText}>+ Plan a series of foods</Text>
           </TouchableOpacity>
         </>
@@ -2252,7 +2267,7 @@ function NewFoodsLens({
             <TouchableOpacity style={styles.secondaryButton} onPress={() => { setFormOpen(false); resetForm(); }}>
               <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
+            <TouchableOpacity ref={walkMark.ref('newFoods.startExperiment')} style={styles.primaryButton} onPress={handleSave}>
               <Text style={styles.primaryButtonText}>Start experiment</Text>
             </TouchableOpacity>
           </ThumbRow>
@@ -2477,7 +2492,7 @@ function NewFoodsLens({
             <TouchableOpacity style={styles.secondaryButton} onPress={() => { setFormOpen(false); resetForm(); }}>
               <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
+            <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSave}>
               <Text style={styles.primaryButtonText}>
                 {design === 'stepped'
                   ? 'Set it up'
@@ -2636,7 +2651,7 @@ function NewFoodsLens({
                     </TouchableOpacity>
                   ) : trial.status === 'trialing' ? (
                     <>
-                      <TouchableOpacity onPress={() => handleResolve(trial, 'cleared')}>
+                      <TouchableOpacity ref={trial.id === firstTrialingId ? walkMark.ref('newFoods.resolve') : undefined} onPress={() => handleResolve(trial, 'cleared')}>
                         <Text style={styles.actionTextPrimary}>No problems</Text>
                       </TouchableOpacity>
                       <TouchableOpacity onPress={() => handleResolve(trial, 'flagged')}>
@@ -2648,7 +2663,7 @@ function NewFoodsLens({
                       <Text style={styles.actionTextPrimary}>Reopen for testing</Text>
                     </TouchableOpacity>
                   )}
-                  <TouchableOpacity onPress={() => handleDelete(trial.id)}>
+                  <TouchableOpacity ref={trial.id === trials[0]?.id ? walkMark.ref('signals.removeFirst') : undefined} onPress={() => handleDelete(trial.id)}>
                     <Text style={styles.actionText}>Remove</Text>
                   </TouchableOpacity>
                 </View>
@@ -2681,7 +2696,7 @@ function NewFoodsLens({
                   ) : (
                     <View style={[styles.rowActions, { marginTop: 10 }]}>
                       <Text style={styles.rowMeta}>Today:</Text>
-                      <TouchableOpacity onPress={() => handleTodayNothingToReport(trial)}>
+                      <TouchableOpacity ref={trial.id === firstTrialingId ? walkMark.ref('newFoods.today') : undefined} onPress={() => handleTodayNothingToReport(trial)}>
                         <Text style={styles.actionTextPrimary}>Nothing to report</Text>
                       </TouchableOpacity>
                       <TouchableOpacity onPress={() => handleTodaySomethingFeltOff(trial)}>
@@ -2722,6 +2737,7 @@ function NewFoodsLens({
 }
 
 function ExerciseSection() {
+  const walkMark = useWalkMark();
   const [logs, setLogs] = useState<ExerciseLog[]>([]);
   const [formOpen, setFormOpen] = useState(false);
   const [exerciseType, setExerciseType] = useState('');
@@ -2776,7 +2792,7 @@ function ExerciseSection() {
     <View style={styles.sectionColumn}>
       {infoAlertElement}
       {!formOpen ? (
-        <TouchableOpacity style={styles.addButton} onPress={() => setFormOpen(true)}>
+        <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
           <Text style={styles.addButtonText}>+ Log exercise</Text>
         </TouchableOpacity>
       ) : (
@@ -2819,7 +2835,7 @@ function ExerciseSection() {
             <TouchableOpacity style={styles.secondaryButton} onPress={() => { setFormOpen(false); resetForm(); }}>
               <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
+            <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSave}>
               <Text style={styles.primaryButtonText}>Save</Text>
             </TouchableOpacity>
           </ThumbRow>
@@ -2843,7 +2859,7 @@ function ExerciseSection() {
                 </Text>
               </View>
               <View style={styles.rowActions}>
-                <TouchableOpacity onPress={() => handleDelete(log.id)}>
+                <TouchableOpacity ref={log.id === logs[0]?.id ? walkMark.ref('signals.removeFirst') : undefined} onPress={() => handleDelete(log.id)}>
                   <Text style={styles.actionTextRemove}>Remove</Text>
                 </TouchableOpacity>
               </View>
@@ -2892,6 +2908,7 @@ function pairBloodPressureReadings(
 }
 
 function BloodPressureSection() {
+  const walkMark = useWalkMark();
   const [readings, setReadings] = useState<BpReading[]>([]);
   const [formOpen, setFormOpen] = useState(false);
   const [systolic, setSystolic] = useState('');
@@ -2958,7 +2975,7 @@ function BloodPressureSection() {
     <View style={styles.sectionColumn}>
       {infoAlertElement}
       {!formOpen ? (
-        <TouchableOpacity style={styles.addButton} onPress={() => setFormOpen(true)}>
+        <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
           <Text style={styles.addButtonText}>+ Log a blood pressure reading</Text>
         </TouchableOpacity>
       ) : (
@@ -3002,7 +3019,7 @@ function BloodPressureSection() {
             <TouchableOpacity style={styles.secondaryButton} onPress={() => { setFormOpen(false); resetForm(); }}>
               <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
+            <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSave}>
               <Text style={styles.primaryButtonText}>Save</Text>
             </TouchableOpacity>
           </ThumbRow>
@@ -3024,7 +3041,7 @@ function BloodPressureSection() {
                 <Text style={styles.rowMeta}>{formatEntryDateTime(reading.loggedAt)}</Text>
               </View>
               <View style={styles.rowActions}>
-                <TouchableOpacity onPress={() => handleDelete(reading)}>
+                <TouchableOpacity ref={reading === readings[0] ? walkMark.ref('signals.removeFirst') : undefined} onPress={() => handleDelete(reading)}>
                   <Text style={styles.actionTextRemove}>Remove</Text>
                 </TouchableOpacity>
               </View>
@@ -3037,6 +3054,7 @@ function BloodPressureSection() {
 }
 
 function GeneralNoteSection() {
+  const walkMark = useWalkMark();
   const [notesList, setNotesList] = useState<WellbeingCheckin[]>([]);
   const [formOpen, setFormOpen] = useState(false);
   const [notes, setNotes] = useState('');
@@ -3084,7 +3102,7 @@ function GeneralNoteSection() {
     <View style={styles.sectionColumn}>
       {infoAlertElement}
       {!formOpen ? (
-        <TouchableOpacity style={styles.addButton} onPress={() => setFormOpen(true)}>
+        <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
           <Text style={styles.addButtonText}>+ Add a note</Text>
         </TouchableOpacity>
       ) : (
@@ -3125,7 +3143,7 @@ function GeneralNoteSection() {
             <TouchableOpacity style={styles.secondaryButton} onPress={() => { setFormOpen(false); resetForm(); }}>
               <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
+            <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSave}>
               <Text style={styles.primaryButtonText}>Save</Text>
             </TouchableOpacity>
           </ThumbRow>
@@ -3146,7 +3164,7 @@ function GeneralNoteSection() {
                 <Text style={styles.rowMeta}>{formatEntryDateTime(entry.loggedAt)}</Text>
               </View>
               <View style={styles.rowActions}>
-                <TouchableOpacity onPress={() => handleDelete(entry.id)}>
+                <TouchableOpacity ref={entry === notesList[0] ? walkMark.ref('signals.removeFirst') : undefined} onPress={() => handleDelete(entry.id)}>
                   <Text style={styles.actionTextRemove}>Remove</Text>
                 </TouchableOpacity>
               </View>
@@ -3213,6 +3231,7 @@ function GeneralNoteLens() {
 // by the evening it began, so the default is last night, and logging the
 // same night again replaces it (lib/nocturiaDb.ts).
 function NocturiaLens() {
+  const walkMark = useWalkMark();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const [nights, setNights] = useState<NocturiaNight[]>([]);
   const [formOpen, setFormOpen] = useState(false);
@@ -3265,7 +3284,7 @@ function NocturiaLens() {
       {infoAlertElement}
       <View style={styles.sectionColumn}>
         {!formOpen ? (
-          <TouchableOpacity style={styles.addButton} onPress={() => setFormOpen(true)}>
+          <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
             <Text style={styles.addButtonText}>+ Log a night</Text>
           </TouchableOpacity>
         ) : (
@@ -3291,7 +3310,7 @@ function NocturiaLens() {
               <TouchableOpacity style={styles.secondaryButton} onPress={() => { setFormOpen(false); resetForm(); }}>
                 <Text style={styles.secondaryButtonText}>Cancel</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
+              <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSave}>
                 <Text style={styles.primaryButtonText}>Save</Text>
               </TouchableOpacity>
             </ThumbRow>
@@ -3321,7 +3340,7 @@ function NocturiaLens() {
                     </Text>
                   </View>
                   <View style={styles.rowActions}>
-                    <TouchableOpacity onPress={() => handleDelete(night.id)}>
+                    <TouchableOpacity ref={night === nights[0] ? walkMark.ref('signals.removeFirst') : undefined} onPress={() => handleDelete(night.id)}>
                       <Text style={styles.actionTextRemove}>Remove</Text>
                     </TouchableOpacity>
                   </View>
@@ -3339,6 +3358,7 @@ function NocturiaLens() {
 // a mistaken one is removed and logged again. Every sentence about a type,
 // and the blood note, lives in lib/bowel.ts.
 function BowelLens() {
+  const walkMark = useWalkMark();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const [entries, setEntries] = useState<BowelEntry[]>([]);
   const [formOpen, setFormOpen] = useState(false);
@@ -3414,7 +3434,7 @@ function BowelLens() {
       {infoAlertElement}
       <View style={styles.sectionColumn}>
         {!formOpen ? (
-          <TouchableOpacity style={styles.addButton} onPress={() => setFormOpen(true)}>
+          <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
             <Text style={styles.addButtonText}>+ Log a bowel movement</Text>
           </TouchableOpacity>
         ) : (
@@ -3455,7 +3475,7 @@ function BowelLens() {
               <TouchableOpacity style={styles.secondaryButton} onPress={() => { setFormOpen(false); resetForm(); }}>
                 <Text style={styles.secondaryButtonText}>Cancel</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
+              <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSave}>
                 <Text style={styles.primaryButtonText}>Save</Text>
               </TouchableOpacity>
             </ThumbRow>
@@ -3482,7 +3502,7 @@ function BowelLens() {
                     {entry.blood === 1 ? <Text style={styles.rowMeta}>{BLOOD_NOTE}</Text> : null}
                   </View>
                   <View style={styles.rowActions}>
-                    <TouchableOpacity onPress={() => handleRemove(entry.id)}>
+                    <TouchableOpacity ref={entry === entries[0] ? walkMark.ref('signals.removeFirst') : undefined} onPress={() => handleRemove(entry.id)}>
                       <Text style={styles.actionTextRemove}>Remove</Text>
                     </TouchableOpacity>
                   </View>
@@ -3533,6 +3553,7 @@ function MicrobiomeLens() {
 }
 
 function CycleLens() {
+  const walkMark = useWalkMark();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const [days, setDays] = useState<CycleDayRow[]>([]);
   const [average, setAverage] = useState<string | null>(null);
@@ -3590,7 +3611,7 @@ function CycleLens() {
         </View>
 
         {!formOpen ? (
-          <TouchableOpacity style={styles.addButton} onPress={() => setFormOpen(true)}>
+          <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
             <Text style={styles.addButtonText}>+ Log a period day</Text>
           </TouchableOpacity>
         ) : (
@@ -3619,7 +3640,7 @@ function CycleLens() {
               <TouchableOpacity style={styles.secondaryButton} onPress={() => { setFormOpen(false); resetForm(); }}>
                 <Text style={styles.secondaryButtonText}>Cancel</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
+              <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSave}>
                 <Text style={styles.primaryButtonText}>Save</Text>
               </TouchableOpacity>
             </ThumbRow>
@@ -3644,7 +3665,7 @@ function CycleLens() {
                     </Text>
                   </View>
                   <View style={styles.rowActions}>
-                    <TouchableOpacity onPress={() => handleDelete(row.id)}>
+                    <TouchableOpacity ref={row === days[0] ? walkMark.ref('signals.removeFirst') : undefined} onPress={() => handleDelete(row.id)}>
                       <Text style={styles.actionTextRemove}>Remove</Text>
                     </TouchableOpacity>
                   </View>
@@ -3665,6 +3686,7 @@ function CycleLens() {
 // it to Past trackers rather than deleting what was logged
 // (lib/customTrackers.ts, lib/customTrackersDb.ts).
 function MyTrackersLens() {
+  const walkMark = useWalkMark();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const [trackers, setTrackers] = useState<CustomTracker[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -3796,7 +3818,7 @@ function MyTrackersLens() {
       {infoAlertElement}
       <View style={styles.sectionColumn}>
         {trackerForm === 'closed' ? (
-          <TouchableOpacity style={styles.addButton} onPress={openNewTracker}>
+          <TouchableOpacity ref={walkMark.ref('trackers.addTracker')} style={styles.addButton} onPress={openNewTracker}>
             <Text style={styles.addButtonText}>+ Add a tracker of your own</Text>
           </TouchableOpacity>
         ) : (
@@ -3867,7 +3889,7 @@ function MyTrackersLens() {
               <TouchableOpacity style={styles.secondaryButton} onPress={() => setTrackerForm('closed')}>
                 <Text style={styles.secondaryButtonText}>Cancel</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.primaryButton} onPress={handleSaveTracker}>
+              <TouchableOpacity ref={walkMark.ref('trackers.saveTracker')} style={styles.primaryButton} onPress={handleSaveTracker}>
                 <Text style={styles.primaryButtonText}>Save</Text>
               </TouchableOpacity>
             </ThumbRow>
@@ -3879,7 +3901,7 @@ function MyTrackersLens() {
             <Text style={styles.emptyText}>{TRACKERS_EMPTY_LINE}</Text>
           </View>
         ) : (
-          <View style={styles.panelStandalone}>
+          <View ref={walkMark.ref('trackers.pick')} collapsable={false} style={styles.panelStandalone}>
             <View style={styles.pillRow}>
               {active.map((tracker) => (
                 <TouchableOpacity
@@ -3902,7 +3924,7 @@ function MyTrackersLens() {
         {selected ? (
           <>
             {!entryOpen ? (
-              <TouchableOpacity style={styles.addButton} onPress={() => setEntryOpen(true)}>
+              <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setEntryOpen(true)}>
                 <Text style={styles.addButtonText}>{`+ Log ${selected.name}`}</Text>
               </TouchableOpacity>
             ) : (
@@ -3969,7 +3991,7 @@ function MyTrackersLens() {
                   <TouchableOpacity style={styles.secondaryButton} onPress={() => { setEntryOpen(false); resetEntryForm(); }}>
                     <Text style={styles.secondaryButtonText}>Cancel</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.primaryButton} onPress={handleSaveEntry}>
+                  <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSaveEntry}>
                     <Text style={styles.primaryButtonText}>Save</Text>
                   </TouchableOpacity>
                 </ThumbRow>
@@ -3991,7 +4013,7 @@ function MyTrackersLens() {
                       </Text>
                     </View>
                     <View style={styles.rowActions}>
-                      <TouchableOpacity onPress={() => handleDeleteEntry(entry.id)}>
+                      <TouchableOpacity ref={entry === entries[0] ? walkMark.ref('signals.removeFirst') : undefined} onPress={() => handleDeleteEntry(entry.id)}>
                         <Text style={styles.actionTextRemove}>Remove</Text>
                       </TouchableOpacity>
                     </View>
@@ -4002,7 +4024,7 @@ function MyTrackersLens() {
 
             {trackerForm === 'closed' ? (
               <View style={styles.panelStandalone}>
-                <TouchableOpacity onPress={() => openRename(selected)}>
+                <TouchableOpacity ref={walkMark.ref('trackers.rename')} onPress={() => openRename(selected)}>
                   <Text style={styles.actionText}>{`Rename or remove ${selected.name}`}</Text>
                 </TouchableOpacity>
               </View>

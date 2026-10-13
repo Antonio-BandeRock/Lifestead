@@ -316,7 +316,31 @@ export type ToolMark =
   | 'upkeepLens.add'
   | 'upkeepLens.doneToday'
   | 'upkeepLens.edit'
-  | 'upkeepLens.firstBand';
+  | 'upkeepLens.firstBand'
+  | 'signals.add'
+  | 'signals.save'
+  | 'signals.editFirst'
+  | 'signals.photosFirst'
+  | 'signals.removeFirst'
+  | 'newFoods.addExperiment'
+  | 'newFoods.addSeries'
+  | 'newFoods.startSeries'
+  | 'newFoods.startExperiment'
+  | 'newFoods.resolve'
+  | 'newFoods.today'
+  | 'trackers.addTracker'
+  | 'trackers.saveTracker'
+  | 'trackers.pick'
+  | 'trackers.rename'
+  | 'calm.pacer'
+  | 'calm.start'
+  | 'calm.readAloud'
+  | 'calm.play'
+  | 'microbiome.form'
+  | 'microbiome.photo'
+  | 'microbiome.readLines'
+  | 'microbiome.firstTest'
+  | 'microbiome.across';
 
 export type ToolStep = {
   say: string;
@@ -2571,7 +2595,372 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'The record shows what you did and what you let go, with nothing scored.',
     },
   ],
+  '/log#flares': [
+    {
+      key: 'log',
+      title: 'Log a flare',
+      steps: [
+        { say: 'Tap + Log a flare.', mark: 'signals.add', stay: true },
+        { say: 'Say when it started and how bad it was. The 0 to 10 scale is there if you would rather use a number.' },
+        { say: 'If you want, pick what it was like, what was going on, and where on the body.' },
+        { say: 'Tap Save flare.', mark: 'signals.save' },
+      ],
+      forYou: 'Each flare is kept with its time, so Trends can lay flares beside sleep, meals and everything else you record.',
+    },
+    {
+      key: 'edit',
+      title: 'Finish or correct a flare',
+      steps: [
+        { say: 'Tap Edit on the flare.', mark: 'signals.editFirst', stay: true },
+        { say: 'Change what it was like or what was going on, then tap Save.' },
+      ],
+      forYou: 'A flare logged in a hurry can be filled in later, once you feel up to it.',
+    },
+    {
+      key: 'photos',
+      title: 'Add a photo to a flare',
+      steps: [
+        { say: 'Tap Photos under the flare.', mark: 'signals.photosFirst', stay: true },
+        { say: 'Tap Take a Photo or Choose from Library. Line Up With the Last Photo shows the last one faintly, so the next is taken from the same angle.' },
+      ],
+      forYou: 'A rash or a swelling looks different by tomorrow, and a photo from the day is what a doctor asks for.',
+    },
+    {
+      key: 'remove',
+      title: 'Remove a flare',
+      steps: [{ say: 'Tap Remove on the flare.', mark: 'signals.removeFirst' }],
+      forYou: 'A flare logged by mistake comes out of every chart that read it.',
+    },
+  ],
+  '/log#foodReactions': [
+    {
+      key: 'log',
+      title: 'Log a food reaction',
+      steps: [
+        { say: 'Tap + Log a food reaction.', mark: 'signals.add', stay: true },
+        { say: 'Type what you ate or drank, then say when it started and how bad it was.' },
+        { say: 'If you want, pick what it was like and where on the body.' },
+        { say: 'Tap Save reaction.', mark: 'signals.save' },
+      ],
+      forYou: 'A reaction that starts from a food is kept apart from flares, so the food it followed stays named.',
+    },
+    {
+      key: 'edit',
+      title: 'Finish or correct a reaction',
+      steps: [
+        { say: 'Tap Edit on the reaction.', mark: 'signals.editFirst', stay: true },
+        { say: 'Change what it was like, then tap Save.' },
+      ],
+      forYou: 'Details you remember later can still be added to the same reaction.',
+    },
+    {
+      key: 'photos',
+      title: 'Add a photo to a reaction',
+      steps: [
+        { say: 'Tap Photos under the reaction.', mark: 'signals.photosFirst', stay: true },
+        { say: 'Tap Take a Photo or Choose from Library.' },
+      ],
+      forYou: 'Hives or swelling can be shown to a doctor as it looked on the day.',
+    },
+    {
+      key: 'remove',
+      title: 'Remove a reaction',
+      steps: [{ say: 'Tap Remove on the reaction.', mark: 'signals.removeFirst' }],
+      forYou: 'A reaction logged by mistake is taken out of Trends and the reports.',
+    },
+  ],
+  '/log#newFoods': [
+    {
+      key: 'trial',
+      title: 'Start a food trial',
+      steps: [
+        { say: 'Tap + Start a new food trial.', mark: 'signals.add', stay: true },
+        { say: 'Type the food, or tap Pick a specific food to choose it from the food list.' },
+        { say: 'Pick how to test it and for how many days to watch.' },
+        { say: 'Tap Start trial, or Set it up for a trial in steps.', mark: 'signals.save' },
+      ],
+      forYou: 'A food you have been avoiding is brought back one at a time, with a set number of days to watch for anything.',
+    },
+    {
+      key: 'today',
+      title: 'Check in on a trial each day',
+      steps: [
+        { say: 'Beside Today, tap Nothing to report, or Something felt off to log what happened.', mark: 'newFoods.today' },
+      ],
+      forYou: 'One tap a day is enough, and the days in between are not left blank.',
+    },
+    {
+      key: 'resolve',
+      title: 'Clear or flag a food',
+      steps: [
+        { say: 'Once the watch is over, or sooner if something happens, tap No problems or Flag it.', mark: 'newFoods.resolve' },
+      ],
+      forYou: 'Cleared and flagged foods stay on the list, so you can see what you have tried and how it went.',
+    },
+    {
+      key: 'experiment',
+      title: 'Try an experiment that is not about food',
+      steps: [
+        { say: 'Tap + Start an experiment about something else.', mark: 'newFoods.addExperiment', stay: true },
+        { say: 'Pick what you are testing and say what you will change.' },
+        { say: 'Pick how many days to keep the change, what to watch, and how long to watch once you are back to usual.' },
+        { say: 'Tap Start experiment.', mark: 'newFoods.startExperiment' },
+        { say: 'When the days are up, tap Back to Usual on the experiment.' },
+      ],
+      forYou: 'A bedtime, a supplement or a walk is compared before, during and after, and the result always says it was one run.',
+    },
+    {
+      key: 'series',
+      title: 'Plan a series of foods',
+      steps: [
+        { say: 'Tap + Plan a series of foods.', mark: 'newFoods.addSeries', stay: true },
+        { say: 'Add each food in the order you will bring them back. Move up changes the order.' },
+        { say: 'Pick how many days to watch each one, then tap Start series.', mark: 'newFoods.startSeries' },
+      ],
+      forYou: 'Each food starts once the one before it is settled, so you never have to remember what comes next.',
+    },
+    {
+      key: 'remove',
+      title: 'Remove a trial',
+      steps: [{ say: 'Tap Remove on the trial.', mark: 'signals.removeFirst' }],
+      forYou: 'A trial started by mistake comes off the list.',
+    },
+  ],
+  '/log#exercise': [
+    {
+      key: 'log',
+      title: 'Log exercise',
+      steps: [
+        { say: 'Tap + Log exercise.', mark: 'signals.add', stay: true },
+        { say: 'Say what you did. How long and how hard are there if you want them.' },
+        { say: 'Tap Save.', mark: 'signals.save' },
+      ],
+      forYou: 'A quick note of what you did, read on Trends beside sleep, mood and flares.',
+    },
+    {
+      key: 'remove',
+      title: 'Remove an exercise entry',
+      steps: [{ say: 'Tap Remove on the entry.', mark: 'signals.removeFirst' }],
+      forYou: 'An entry logged twice comes out without a trace.',
+    },
+  ],
+  '/log#bloodPressure': [
+    {
+      key: 'log',
+      title: 'Log a blood pressure reading',
+      steps: [
+        { say: 'Tap + Log a blood pressure reading.', mark: 'signals.add', stay: true },
+        { say: 'Type the top and bottom numbers, and your heart rate if the cuff showed it.' },
+        { say: 'Tap Save.', mark: 'signals.save' },
+      ],
+      forYou: 'Readings kept with their time can go to your doctor in a report, in place of a scrap of paper.',
+    },
+    {
+      key: 'remove',
+      title: 'Remove a reading',
+      steps: [{ say: 'Tap Remove on the reading.', mark: 'signals.removeFirst' }],
+      forYou: 'A reading typed wrong comes out of Trends and the reports.',
+    },
+  ],
+  '/log#therapies': [
+    {
+      key: 'log',
+      title: 'Log a session',
+      steps: [
+        { say: 'Tap + Log a session.', mark: 'signals.add', stay: true },
+        { say: 'Pick the kind of session and the day. Who did it, what they worked on, the length and the cost are there if you want them.' },
+        { say: 'Tap Log session.', mark: 'signals.save' },
+      ],
+      forYou: 'Trends > Therapy Response reads your check-ins after each session, to show how long the effect lasted.',
+    },
+    {
+      key: 'edit',
+      title: 'Change a session',
+      steps: [
+        { say: 'Tap Edit on the session.', mark: 'signals.editFirst', stay: true },
+        { say: 'Change what needs it, then tap Save changes.' },
+      ],
+      forYou: 'A cost or a name added later is kept with the same visit.',
+    },
+    {
+      key: 'remove',
+      title: 'Remove a session',
+      steps: [{ say: 'Tap Remove on the session.', mark: 'signals.removeFirst' }],
+      forYou: 'A session that did not happen comes off the record.',
+    },
+  ],
+  '/log#generalNote': [
+    {
+      key: 'add',
+      title: 'Add a note',
+      steps: [
+        { say: 'Tap + Add a note.', mark: 'signals.add', stay: true },
+        { say: 'Write the note. Mood, energy and stress are there if you want to mark them.' },
+        { say: 'Tap Save.', mark: 'signals.save' },
+      ],
+      forYou: 'Anything worth remembering has a place, with the day it happened.',
+    },
+    {
+      key: 'remove',
+      title: 'Remove a note',
+      steps: [{ say: 'Tap Remove on the note.', mark: 'signals.removeFirst' }],
+      forYou: 'A note you no longer want is taken out.',
+    },
+  ],
+  '/log#nocturia': [
+    {
+      key: 'log',
+      title: 'Log a night',
+      steps: [
+        { say: 'Tap + Log a night.', mark: 'signals.add', stay: true },
+        { say: 'Say how many times you got up, and the first time you woke if you remember it.' },
+        { say: 'Tap Save.', mark: 'signals.save' },
+      ],
+      forYou: 'Trends > Nights reads each night beside what you drank the evening before.',
+    },
+    {
+      key: 'remove',
+      title: 'Remove a night',
+      steps: [{ say: 'Tap Remove on the night.', mark: 'signals.removeFirst' }],
+      forYou: 'Logging the same night again replaces it, and Remove takes it out.',
+    },
+  ],
+  '/log#bowel': [
+    {
+      key: 'log',
+      title: 'Log a bowel movement',
+      steps: [
+        { say: 'Tap + Log a bowel movement.', mark: 'signals.add', stay: true },
+        { say: 'Pick the type that comes closest. Urgency, blood, pain and a note are there if you want them.' },
+        { say: 'Tap Save.', mark: 'signals.save' },
+      ],
+      forYou: 'The types are kept day by day, which is what a clinician will ask about.',
+    },
+    {
+      key: 'remove',
+      title: 'Remove an entry',
+      steps: [{ say: 'Tap Remove on the entry.', mark: 'signals.removeFirst' }],
+      forYou: 'An entry logged by mistake comes out of Trends and the reports.',
+    },
+  ],
+  '/log#microbiome': [
+    {
+      key: 'photo',
+      title: 'Add a test from a photo or screenshot',
+      steps: [
+        { say: 'Open Add a Test.', mark: 'microbiome.form', stay: true },
+        { say: 'Tap Photograph the Report, or From a Screenshot for one already on your phone.', mark: 'microbiome.photo', stay: true },
+        { say: 'Check each row read and confirm the ones you want kept.' },
+        { say: 'Fill in the day, the company and the kind of test, then tap the save button.', mark: 'signals.save' },
+      ],
+      forYou: 'The results are kept the way the report printed them, without typing every line.',
+    },
+    {
+      key: 'paste',
+      title: 'Paste or type the results',
+      steps: [
+        { say: 'Open Add a Test.', mark: 'microbiome.form', stay: true },
+        { say: 'Paste the results, one to a line, then tap Read These Lines.', mark: 'microbiome.readLines', stay: true },
+        { say: 'Confirm each row, or tap Add a Row to type one in.' },
+        { say: 'Tap the save button.', mark: 'signals.save' },
+      ],
+      forYou: 'A report sent as an email or a web page can go straight in.',
+    },
+    {
+      key: 'change',
+      title: 'Add to or remove a test',
+      steps: [
+        { say: 'Open the test.', mark: 'microbiome.firstTest', stay: true },
+        { say: 'Tap Edit or Add Rows to change it, or Remove This Test.' },
+      ],
+      forYou: 'A result missed the first time can be added to the same test.',
+    },
+    {
+      key: 'across',
+      title: 'See one result across tests',
+      steps: [{ say: 'Open The Same Result Across Tests.', mark: 'microbiome.across' }],
+      forYou: 'Each result is laid beside the same one from your other tests, as the reports printed them.',
+    },
+  ],
+  '/log#cycle': [
+    {
+      key: 'log',
+      title: 'Log a period day',
+      steps: [
+        { say: 'Tap + Log a period day.', mark: 'signals.add', stay: true },
+        { say: 'Pick how heavy it was if you want, and the day.' },
+        { say: 'Tap Save.', mark: 'signals.save' },
+      ],
+      forYou: 'Once two cycles are logged, the average of past cycles is shown, and Pattern Finder shows the cycle day beside each flare.',
+    },
+    {
+      key: 'remove',
+      title: 'Remove a day',
+      steps: [{ say: 'Tap Remove on the day.', mark: 'signals.removeFirst' }],
+      forYou: 'A day logged by mistake comes out of the average.',
+    },
+  ],
+  '/log#calm': [
+    {
+      key: 'breathe',
+      title: 'Breathe with the pacer',
+      steps: [
+        { say: 'Open Breathing Pacer.', mark: 'calm.pacer', stay: true },
+        { say: 'Pick a pattern, how long, and what happens at each change.' },
+        { say: 'Tap Start, and breathe in as the circle grows and out as it shrinks.', mark: 'calm.start' },
+      ],
+      forYou: 'Nothing here is recorded or counted. It is there for the moment you need it.',
+    },
+    {
+      key: 'read',
+      title: 'Hear a relaxation script',
+      steps: [
+        { say: 'Open Relaxation Read Aloud.', mark: 'calm.readAloud', stay: true },
+        { say: 'Pick a script, a voice and a pace.' },
+        { say: 'Tap Play.', mark: 'calm.play' },
+      ],
+      forYou: 'The voice already on your phone reads it, including scripts you write.',
+    },
+  ],
+  '/log#trackers': [
+    {
+      key: 'add',
+      title: 'Make a tracker',
+      steps: [
+        { say: 'Tap + Add a tracker of your own.', mark: 'trackers.addTracker', stay: true },
+        { say: 'Name what you want to track and pick what kind of number it is.' },
+        { say: 'Tap Save.', mark: 'trackers.saveTracker' },
+      ],
+      forYou: 'Anything the app does not ask about can be tracked, and Trends > My Trackers draws it.',
+    },
+    {
+      key: 'log',
+      title: 'Log a tracker',
+      steps: [
+        { say: 'Tap the tracker.', mark: 'trackers.pick', stay: true },
+        { say: 'Tap + Log and the tracker name.', mark: 'signals.add', stay: true },
+        { say: 'Fill in the number and when, then tap Save.', mark: 'signals.save' },
+      ],
+      forYou: 'A day with nothing logged shows as a gap, never as a zero.',
+    },
+    {
+      key: 'rename',
+      title: 'Rename or remove a tracker',
+      steps: [
+        { say: 'Tap the tracker.', mark: 'trackers.pick', stay: true },
+        { say: 'Tap Rename or remove.', mark: 'trackers.rename', stay: true },
+        { say: 'Change the name and tap Save, or tap Remove this tracker.' },
+      ],
+      forYou: 'A tracker with entries moves to Past trackers, where what you logged stays readable.',
+    },
+    {
+      key: 'removeEntry',
+      title: 'Remove an entry',
+      steps: [{ say: 'Tap Remove on the entry.', mark: 'signals.removeFirst' }],
+      forYou: 'An entry typed wrong comes out of the chart.',
+    },
+  ],
 };
 
 /** Tabs whose every lens has its tools listed above. */
-export const TOOL_TABS_DONE: readonly string[] = ['/life', '/', '/schedule'];
+export const TOOL_TABS_DONE: readonly string[] = ['/life', '/', '/schedule', '/log'];

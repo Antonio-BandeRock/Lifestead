@@ -45,6 +45,7 @@ export function TabBand({
   title,
   icon,
   count,
+  markRef,
   children,
 }: {
   folds: Folds;
@@ -53,6 +54,8 @@ export function TabBand({
   title: string;
   icon: ComponentProps<typeof Ionicons>['name'];
   count?: number;
+  /** walkMark.ref for a how-to step that rings this band. */
+  markRef?: (node: unknown) => void;
   children: ReactNode;
 }) {
   // Tell Claude, 2026-09-22. Every lens band in the app passes through
@@ -68,6 +71,7 @@ export function TabBand({
   return (
     <HomeSectionBand
       kind="fold"
+      markRef={markRef}
       title={count == null ? title : `${title} (${count})`}
       icon={icon}
       color={color}

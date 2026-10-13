@@ -21,6 +21,7 @@ import { getTherapyTypesByCategory, therapyTypeLabel } from '../lib/therapyTypes
 import { buildTime24, describeTimeInputProblem, formatTime12, splitTime24, type TimeOfDayInput } from '../lib/timeOfDay';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
+import { useWalkMark } from './WalkMark';
 
 function todayDateString(): string {
   const now = new Date();
@@ -118,6 +119,7 @@ type Props = { tabColor: string };
 export function TherapySessionsSection({ tabColor }: Props) {
   const styles = useMemo(() => makeStyles(tabColor), [tabColor]);
   const folds = useBandFolds();
+  const walkMark = useWalkMark();
   const [sessions, setSessions] = useState<TherapySessionRecord[]>([]);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -270,7 +272,7 @@ export function TherapySessionsSection({ tabColor }: Props) {
       ) : (
         <>
           {!showForm ? (
-            <TouchableOpacity style={styles.addButton} onPress={openAddForm}>
+            <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={openAddForm}>
               <Text style={styles.addButtonText}>+ Log a session</Text>
             </TouchableOpacity>
           ) : null}
@@ -397,7 +399,7 @@ export function TherapySessionsSection({ tabColor }: Props) {
                 <TouchableOpacity style={styles.secondaryButton} onPress={closeForm}>
                   <Text style={styles.secondaryButtonText}>Cancel</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.primaryButton} onPress={handleSaveForm}>
+                <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSaveForm}>
                   <Text style={styles.primaryButtonText}>{form.editingId ? 'Save changes' : 'Log session'}</Text>
                 </TouchableOpacity>
               </ThumbRow>
@@ -437,10 +439,16 @@ export function TherapySessionsSection({ tabColor }: Props) {
                   </View>
 
                   <View style={styles.rowActions}>
-                    <TouchableOpacity onPress={() => openEditForm(session)}>
+                    <TouchableOpacity
+                      ref={session.id === sessions[0]?.id ? walkMark.ref('signals.editFirst') : undefined}
+                      onPress={() => openEditForm(session)}
+                    >
                       <Text style={styles.actionText}>Edit</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleRemove(session)}>
+                    <TouchableOpacity
+                      ref={session.id === sessions[0]?.id ? walkMark.ref('signals.removeFirst') : undefined}
+                      onPress={() => handleRemove(session)}
+                    >
                       <Text style={styles.actionTextRemove}>Remove</Text>
                     </TouchableOpacity>
                   </View>

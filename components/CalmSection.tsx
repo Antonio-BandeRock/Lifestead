@@ -64,6 +64,7 @@ import { RecordingsBand } from './RecordingsBand';
 import { TabBand } from './TabBand';
 import { useKeepScreenOn } from '../lib/keepScreenOn';
 import { ThumbRow } from './ThumbRow';
+import { useWalkMark } from './WalkMark';
 
 const EMPTY_PATTERN: PatternFields = { name: '', inSec: '', holdInSec: '', outSec: '', holdOutSec: '' };
 const ADD_OWN = '__add_own__';
@@ -149,6 +150,7 @@ function BreathingPacer({
   voice: VoiceChoice;
   confirm: Confirm;
 }) {
+  const walkMark = useWalkMark();
   const patterns = useMemo(() => [...BUILT_IN_PATTERNS, ...own.patterns], [own.patterns]);
   const [patternId, setPatternId] = useState(BUILT_IN_PATTERNS[0].id);
   const [lengthIndex, setLengthIndex] = useState(2);
@@ -262,7 +264,7 @@ function BreathingPacer({
   const scale = size.interpolate({ inputRange: [0, 1], outputRange: [0.45, 1] });
 
   return (
-    <TabBand folds={folds} color={tabColor} id="signals:calm-pacer" title="Breathing Pacer" icon="ellipse-outline">
+    <TabBand markRef={walkMark.ref('calm.pacer')} folds={folds} color={tabColor} id="signals:calm-pacer" title="Breathing Pacer" icon="ellipse-outline">
       <View style={styles.panel}>
         <Text style={styles.label}>Pattern</Text>
         <PopoverSelect options={patternOptions} selected={pattern.id} onSelect={pickPattern} tabColor={tabColor} />
@@ -349,7 +351,7 @@ function BreathingPacer({
         </Text>
         <Text style={[styles.caption, styles.center]}>{running ? sessionClock(elapsed, minutes) : SESSION_LENGTHS[lengthIndex].label}</Text>
         <View style={styles.actionsCenter}>
-          <TouchableOpacity style={styles.primaryButton} onPress={running ? stop : start}>
+          <TouchableOpacity ref={walkMark.ref('calm.start')} style={styles.primaryButton} onPress={running ? stop : start}>
             <Text style={styles.primaryButtonText}>{running ? 'Stop' : 'Start'}</Text>
           </TouchableOpacity>
         </View>
@@ -478,9 +480,10 @@ function SpokenRelaxation({
     ...sortByLabel((voices ?? []).map((v) => ({ label: `${v.name} (${v.language})`, value: v.identifier }))),
   ];
   const noVoice = voices != null && voices.length === 0;
+  const walkMark = useWalkMark();
 
   return (
-    <TabBand folds={folds} color={tabColor} id="signals:calm-scripts" title="Relaxation Read Aloud" icon="chatbubble-ellipses-outline">
+    <TabBand markRef={walkMark.ref('calm.readAloud')} folds={folds} color={tabColor} id="signals:calm-scripts" title="Relaxation Read Aloud" icon="chatbubble-ellipses-outline">
       <View style={styles.panel}>
         <Text style={styles.body}>{SCRIPTS_INTRO}</Text>
         <Text style={styles.label}>Script</Text>
@@ -559,7 +562,10 @@ function SpokenRelaxation({
           </View>
         ) : null}
         <View style={styles.actionsCenter}>
-          <TouchableOpacity style={[styles.primaryButton, noVoice && styles.disabled]} onPress={playing ? stop : play} disabled={noVoice}>
+          <TouchableOpacity
+            ref={walkMark.ref('calm.play')}
+            style={[styles.primaryButton, noVoice && styles.disabled]}
+            onPress={playing ? stop : play} disabled={noVoice}>
             <Text style={styles.primaryButtonText}>{playing ? 'Stop' : 'Play'}</Text>
           </TouchableOpacity>
         </View>

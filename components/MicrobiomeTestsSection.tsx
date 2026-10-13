@@ -58,6 +58,7 @@ import {
 } from '../lib/microbiomeDb';
 import { explainNotYet } from '../lib/notYet';
 import { recognizeLinesFromImage } from '../lib/ocr';
+import { useWalkMark } from './WalkMark';
 
 const YEAR_OPTIONS = Array.from({ length: 10 }, (_, i) => String(new Date().getFullYear() - i));
 const MONTH_OPTIONS = Array.from({ length: 12 }, (_, i) => String(i + 1));
@@ -125,6 +126,7 @@ function OpenChoice({
 export function MicrobiomeTestsSection({ tabColor }: { tabColor: string }) {
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [confirmSheet, confirmSheetElement] = useConfirmSheet();
+  const walkMark = useWalkMark();
   const [tests, setTests] = useState<MicrobiomeTest[]>([]);
   const [results, setResults] = useState<MicrobiomeResult[]>([]);
   const [used, setUsed] = useState<{ providers: string[]; kinds: string[]; groups: string[] }>({
@@ -340,6 +342,7 @@ export function MicrobiomeTestsSection({ tabColor }: { tabColor: string }) {
 
       <HomeSectionBand
         kind="fold"
+        markRef={walkMark.ref('microbiome.form')}
         title={editing ? `Add to ${describeTestHeading(editing)}` : 'Add a Test'}
         icon="add-circle-outline"
         color={tabColor}
@@ -349,6 +352,7 @@ export function MicrobiomeTestsSection({ tabColor }: { tabColor: string }) {
       >
         <View style={styles.buttonRow}>
           <TouchableOpacity
+            ref={walkMark.ref('microbiome.photo')}
             style={[styles.button, reading ? styles.disabled : null]}
             activeOpacity={0.8}
             disabled={reading}
@@ -378,7 +382,7 @@ export function MicrobiomeTestsSection({ tabColor }: { tabColor: string }) {
         />
         <Text style={styles.caption}>{MICROBIOME_TEXT_HINT}</Text>
         {text.trim() ? (
-          <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.8} onPress={() => readLines(text)}>
+          <TouchableOpacity ref={walkMark.ref('microbiome.readLines')} style={styles.secondaryButton} activeOpacity={0.8} onPress={() => readLines(text)}>
             <Ionicons name="list-outline" size={18} color={colors.textPrimary} />
             <Text style={styles.secondaryButtonText}>Read These Lines</Text>
           </TouchableOpacity>
@@ -534,6 +538,7 @@ export function MicrobiomeTestsSection({ tabColor }: { tabColor: string }) {
           placeholderTextColor={colors.textMuted}
         />
         <TouchableOpacity
+          ref={walkMark.ref('signals.save')}
           style={[styles.button, saving || (!editingId && saves.length === 0 && drafts.length > 0) ? styles.disabled : null]}
           activeOpacity={0.8}
           disabled={saving}
@@ -569,6 +574,7 @@ export function MicrobiomeTestsSection({ tabColor }: { tabColor: string }) {
           <HomeSectionBand
             key={test.id}
             kind="fold"
+            markRef={test.id === tests[0]?.id ? walkMark.ref('microbiome.firstTest') : undefined}
             title={describeTestHeading(test)}
             icon="flask-outline"
             color={tabColor}
@@ -614,6 +620,7 @@ export function MicrobiomeTestsSection({ tabColor }: { tabColor: string }) {
       {across.length > 0 ? (
         <HomeSectionBand
           kind="fold"
+          markRef={walkMark.ref('microbiome.across')}
           title="The Same Result Across Tests"
           icon="git-compare-outline"
           color={tabColor}
