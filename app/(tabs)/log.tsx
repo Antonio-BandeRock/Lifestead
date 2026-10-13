@@ -4155,7 +4155,7 @@ export default function LogScreen() {
         </CalmBands>
       </SwipeableTabScreen>
 
-      <PageIdentityLabel title="Signals" activeLensLabel={revealed ? activeLensLabel : undefined} />
+      <PageIdentityLabel title="Signals" activeLensLabel={revealed ? activeLensLabel : undefined} activeLensKey={lens} />
       <MyItemsHub
         label="My Signals"
         tabColor={TAB_COLOR}

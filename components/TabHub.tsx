@@ -667,7 +667,6 @@ export function TabHub() {
         style={[styles.button, { bottom: buttonBottom }, walkMark('hub')]}
         ref={(node) => {
           buttonRef.current = node;
-          walkMark.ref('hub')(node);
         }}
         onPress={openMenu}
         onLongPress={openIconPicker}
@@ -694,6 +693,10 @@ export function TabHub() {
             shadowOffset are iOS-only, and elevation, its one real
             mechanism, shadows a view's rectangular bounds, not a
             transparent PNG's actual silhouette). */}
+        {/* The tutorial ring is measured off this wrapper rather than the
+            button, since the well is drawn wider than the button's box and
+            the ring has to sit round what the eye sees. */}
+        <View ref={walkMark.ref('hub')} collapsable={false}>
         <ActiveRingCircle
           size={buttonIconWidth}
           glowColor={colors.buttonColor}
@@ -770,6 +773,7 @@ export function TabHub() {
             />
           )}
         </ActiveRingCircle>
+        </View>
       </TouchableOpacity>
 
       {/* statusBarTranslucent/navigationBarTranslucent: Android's Modal opens

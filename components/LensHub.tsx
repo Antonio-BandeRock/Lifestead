@@ -770,7 +770,6 @@ export function LensHub<T extends string>({
   return (
     <>
       <TouchableOpacity
-        ref={walkMark.ref('corner')}
         style={[styles.button, { bottom: buttonBottom, left: buttonLeft }, walkMark('corner')]}
         onPress={openMenu}
         activeOpacity={0.85}
@@ -805,8 +804,13 @@ export function LensHub<T extends string>({
             {renderIcon ? renderIcon(32) : <Ionicons name={tabIcon} size={32} color={tabColor} style={CORNER_ICON_SHADOW} />}
           </ActiveRingCircle>
         ) : (
+          // The tutorial ring is measured off the icon itself: the slot
+          // round it reaches down into the name, and a ring that size cut
+          // through the name on the phone.
           <View style={styles.cornerIconSlot}>
-            {renderIcon ? renderIcon(32) : <Ionicons name={tabIcon} size={32} color={tabColor} style={CORNER_ICON_SHADOW} />}
+            <View ref={walkMark.ref('corner')} collapsable={false}>
+              {renderIcon ? renderIcon(32) : <Ionicons name={tabIcon} size={32} color={tabColor} style={CORNER_ICON_SHADOW} />}
+            </View>
           </View>
         )}
         {/* The page's own name below the icon, 2026-07-27 -- explicitly

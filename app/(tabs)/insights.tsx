@@ -1515,7 +1515,7 @@ export default function InsightsScreen() {
             <ScopeHub breakdown={dimensionsBreakdown} scope={scope} onChangeScope={changeScope} />
           )}
 
-      <PageIdentityLabel title="Insights" activeLensLabel={revealed ? activeLensLabel : undefined} />
+      <PageIdentityLabel title="Insights" activeLensLabel={revealed ? activeLensLabel : undefined} activeLensKey={lens} />
       <MyItemsHub
         label="My Insights"
         tabColor={TAB_COLOR}

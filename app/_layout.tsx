@@ -926,6 +926,18 @@ function UnlockedApp() {
                     headerTintColor: colors.textPrimary,
                   }}
                 />
+                {/* Tutorials (1.0.68.14), reached from Profile. Without a
+                    header of its own its first line sat under the status
+                    bar. */}
+                <Stack.Screen
+                  name="tutorials"
+                  options={{
+                    headerShown: true,
+                    title: 'Tutorials',
+                    headerStyle: { backgroundColor: colors.background },
+                    headerTintColor: colors.textPrimary,
+                  }}
+                />
               </Stack>
               </KeyboardLiftView>
               {/* Puts the content back down when the keyboard closes.

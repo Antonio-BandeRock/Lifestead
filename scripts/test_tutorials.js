@@ -34,7 +34,8 @@ const story = load('lib/yourStory.ts');
 const guides = load('lib/yourStoryGuides.ts', { './yourStory': story });
 const walk = load('lib/storyWalk.ts', { './yourStoryGuides': guides });
 const interview = load('lib/yourStoryInterview.ts', { './yourStory': story });
-const tutorials = load('lib/tutorials.ts', { './storyWalk': walk, './yourStoryGuides': guides, './yourStoryInterview': interview });
+const paidFeatures = load('lib/paidFeatures.ts');
+const tutorials = load('lib/tutorials.ts', { './paidFeatures': paidFeatures, './storyWalk': walk, './yourStoryGuides': guides, './yourStoryInterview': interview });
 const runs = load('lib/tutorialRun.ts');
 const spots = load('lib/walkSpots.ts');
 
@@ -147,6 +148,14 @@ same(walk.tapMovesOn({ say: 'x', point: null, mark: 'hub' }, 'hub'), true, 'a ta
 same(walk.tapMovesOn({ say: 'x', point: null, mark: 'hub' }, 'other'), false, 'a tap on another button does not');
 same(walk.tapMovesOn({ say: 'x', point: null, mark: 'hub', until: { pathname: '/' } }, 'hub'), false, 'a line waiting for a screen waits for the screen');
 same(walk.tapMovesOn(null, 'hub'), false, 'no line, nothing moves');
+same(
+  walk.tapMovesOn({ say: 'Tap + Schedule a meal, then choose what you ate and the time.', point: null, mark: 'schedule.addMeal' }, 'schedule.addMeal'),
+  false,
+  'a line that goes on past its button waits for Next',
+);
+for (const name of walk.MORE_AFTER_TAP) {
+  check(allHowTos.some((howTo) => howTo.steps.some((step) => step.mark === name)), `${name} waits for Next on a line that uses it`);
+}
 
 // The ring and the tap.
 const rect = { x: 100, y: 200, width: 80, height: 40 };
@@ -161,6 +170,18 @@ check(spots.spotHit(rect, 140, 220), 'a tap inside lands');
 check(spots.spotHit(rect, 96, 196), 'a tap just outside the edge still lands');
 check(!spots.spotHit(rect, 300, 220), 'a tap well away does not');
 check(!spots.spotHit(null, 140, 220), 'nothing ringed, nothing lands');
+same(spots.fromOrigin(rect, { x: 0, y: -33 }), { ...rect, y: 233 }, 'a window starting below the status bar is moved down to the layer');
+same(spots.fromOrigin(rect, null), rect, 'no layer measured, the rect stands');
+same(spots.fromOrigin(null, { x: 0, y: 10 }), null, 'nothing measured stays nothing');
+
+// The strip steps out of the ring's way.
+const button = { x: 400, y: 60, width: 200, height: 50 };
+same(spots.stripTop(null, 200, 40, 2000), 40, 'nothing ringed, the strip rests at the top');
+same(spots.stripTop({ ...button, y: 1500 }, 200, 40, 2000), 40, 'a ring well below leaves the strip at the top');
+same(spots.stripTop(button, 200, 40, 2000), 124, 'a ring under the strip moves it to just below the ring');
+same(spots.stripTop(button, 0, 40, 2000), 40, 'a strip not measured yet stays put');
+same(spots.stripTop({ ...button, y: 1900 }, 200, 1800, 2000), 1686, 'no room below, it goes just above');
+check(spots.sameRect(button, { ...button, x: 400.4 }) && !spots.sameRect(button, null), 'a rect within a point is the same rect');
 
 let heard = [];
 const stopListening = spots.subscribeSpotTapped((name) => heard.push(name));
@@ -189,6 +210,46 @@ const ruled = [
 ];
 for (const [key, text] of lines) {
   for (const [pattern, what] of ruled) check(!pattern.test(text), `${key} carries ${what}: ${text}`);
+}
+
+// A corner box label wrapped with a line break still counts as that lens.
+{
+  const step = { say: 'x', point: 'corner', until: { pathname: '/garden', lens: 'Plots & Plantings' } };
+  check(walk.stepMet(step, { pathname: '/garden', tab: 'Garden', lens: 'Plots &\nPlantings' }), 'a wrapped corner label counts as its lens');
+  check(!walk.stepMet(step, { pathname: '/garden', tab: 'Garden', lens: 'Harvest Log' }), 'another lens does not count');
+}
+
+// A getting-there line carries its lens key and matches on it, whatever the
+// corner box's wording ('Meal Builder' for the Meal lens).
+{
+  const [, toLens] = walk.gettingThere('/food', 'mealBuilder', 'Meal');
+  check(toLens.until.lensKey === 'mealBuilder', 'a lens line carries its key');
+  check(walk.stepMet(toLens, { pathname: '/food', tab: 'Food', lens: 'Meal\nBuilder', lensKey: 'mealBuilder' }), 'a lens line is met by its key');
+  check(!walk.stepMet(toLens, { pathname: '/food', tab: 'Food', lens: 'Meal', lensKey: 'sideBuilder' }), 'another key is not met');
+}
+
+// On Free a paid lens shows its wall, so its how-tos say so in one line
+// rather than ringing tools that are not drawn (1.0.68.15). Every paid lens
+// is a lens the tutorials walk, under the same tab title.
+{
+  const tabs = tutorials.buildTutorials(null);
+  for (const [tabTitle, lenses] of Object.entries(paidFeatures.PAID_LENSES)) {
+    const tab = tabs.find((each) => each.title === tabTitle);
+    check(!!tab, `paid tab ${tabTitle} is a tutorial tab`);
+    if (!tab) continue;
+    for (const lensKeyName of Object.keys(lenses)) {
+      const lens = tab.lenses.find((each) => each.lens === lensKeyName);
+      check(!!lens, `paid lens ${tabTitle} ${lensKeyName} has a tutorial`);
+      if (!lens) continue;
+      for (const howTo of lens.howTos) {
+        const free = tutorials.stepsForTier(howTo, tab.title, lens.lens, 'free');
+        const paid = tutorials.stepsForTier(howTo, tab.title, lens.lens, 'paid');
+        check(paid === howTo.steps, `${howTo.key} is unchanged on paid`);
+        if (howTo.key.endsWith(':about')) check(free === howTo.steps, `${howTo.key} still gets there on Free`);
+        else check(free.length === 1 && !free[0].mark && free[0].say.includes(lenses[lensKeyName].plan), `${howTo.key} is one line on Free`);
+      }
+    }
+  }
 }
 
 console.log(`${checks - failures}/${checks} tutorial checks pass`);

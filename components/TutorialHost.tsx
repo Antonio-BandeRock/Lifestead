@@ -13,7 +13,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { usePathname } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import {
@@ -29,6 +28,7 @@ import {
   walkNext,
   walkPosition,
 } from '../lib/storyWalk';
+import { useTier } from '../lib/entitlement';
 import { currentTellClaudeScreen, subscribeTellClaudeScreen, type TellClaudeScreen } from '../lib/tellClaude';
 import { markHowToGoneThrough, saveTutorialResume } from '../lib/tutorialDb';
 import {
@@ -47,10 +47,11 @@ import {
   TUTORIAL_SKIP_LABEL,
   TUTORIAL_STOP_LABEL,
   buildTutorials,
+  stepsForTier,
   howToByKey,
 } from '../lib/tutorials';
 import { SHOW_ME_LABEL, requestShowMe, subscribeSpotTapped } from '../lib/walkSpots';
-import { WalkButton } from './StoryWalkHost';
+import { WalkButton, useStripPlace } from './StoryWalkHost';
 
 export function useTutorialRun(): TutorialRun | null {
   const [run, setRun] = useState<TutorialRun | null>(getTutorialRun);
@@ -74,7 +75,7 @@ export function TutorialHost() {
   const run = useTutorialRun();
   const pathname = usePathname();
   const screen = useReportedScreen();
-  const insets = useSafeAreaInsets();
+  const stripPlace = useStripPlace();
   const [small, setSmall] = useState(false);
   // The keys and lines are the same whichever tab comes first, so one
   // lookup serves every run.
@@ -91,8 +92,9 @@ export function TutorialHost() {
 
   const key = run ? currentHowToKey(run) : null;
   const found = key ? byKey.get(key) ?? null : null;
-  const steps = useMemo(() => found?.howTo.steps ?? [], [found]);
-  const place = { pathname, tab: screen.tab, lens: screen.lens };
+  const tier = useTier();
+  const steps = useMemo(() => (found ? stepsForTier(found.howTo, found.tab.title, found.lens.lens, tier) : []), [found, tier]);
+  const place = { pathname, tab: screen.tab, lens: screen.lens, lensKey: screen.lensKey };
   const at = run && found ? walkPosition(steps, run.cursor, run.skipped, place) : 0;
   const step = found && at < steps.length ? steps[at] : null;
   const finished = !!run && runFinished(run);
@@ -159,7 +161,7 @@ export function TutorialHost() {
   const say = finished ? TUTORIAL_FINISHED_LINE : step?.say ?? '';
 
   return (
-    <View pointerEvents="box-none" style={[styles.anchor, { top: insets.top + 6 }]}>
+    <View pointerEvents="box-none" style={[styles.anchor, { top: stripPlace.top }]} onLayout={stripPlace.onLayout}>
       <View style={styles.strip} accessibilityLiveRegion="polite">
         {small || !found ? null : (
           <Text style={styles.caption} numberOfLines={2}>

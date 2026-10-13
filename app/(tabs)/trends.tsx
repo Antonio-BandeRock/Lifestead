@@ -4020,7 +4020,7 @@ export default function TrendsScreen() {
         </CalmBands>
       </SwipeableTabScreen>
 
-      <PageIdentityLabel title="Trends" activeLensLabel={revealed ? activeLensLabel : undefined} />
+      <PageIdentityLabel title="Trends" activeLensLabel={revealed ? activeLensLabel : undefined} activeLensKey={lens} />
       <MyItemsHub
         label="My Trends"
         tabColor={TAB_COLOR}

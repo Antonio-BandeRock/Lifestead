@@ -31,18 +31,20 @@ export type TellClaudeTarget = {
   bandTitle?: string | null;
 };
 
-export type TellClaudeScreen = { tab: string | null; lens: string | null };
+// lensKey is the open lens's key, which a guide or tutorial line matches on,
+// since a corner label can be worded or wrapped differently from its name.
+export type TellClaudeScreen = { tab: string | null; lens: string | null; lensKey: string | null };
 
 // WHERE YOU ARE.
 
-let screen: TellClaudeScreen = { tab: null, lens: null };
+let screen: TellClaudeScreen = { tab: null, lens: null, lensKey: null };
 
 /** Called from the corner box as each screen renders. */
 const screenListeners = new Set<(value: TellClaudeScreen) => void>();
 
-export function reportTellClaudeScreen(tab: string | null, lens: string | null): void {
-  if (screen.tab === tab && screen.lens === lens) return;
-  screen = { tab, lens };
+export function reportTellClaudeScreen(tab: string | null, lens: string | null, lensKey: string | null = null): void {
+  if (screen.tab === tab && screen.lens === lens && screen.lensKey === lensKey) return;
+  screen = { tab, lens, lensKey };
   for (const listener of screenListeners) listener(screen);
 }
 

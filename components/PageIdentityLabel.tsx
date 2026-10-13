@@ -1,5 +1,5 @@
 import { useFocusEffect } from 'expo-router';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../constants/colors';
@@ -15,7 +15,9 @@ import { useVisualPreferences } from '../hooks/useVisualPreferences';
 import { useNavigationHand } from '../lib/navigationHand';
 import { isDesktopApp } from '../lib/desktop/bridge';
 import { pageIdentityBoxSpan } from '../lib/menuFit';
+import { getStoryWalk, subscribeStoryWalk } from '../lib/storyWalk';
 import { reportTellClaudeScreen } from '../lib/tellClaude';
+import { getTutorialRun, subscribeTutorialRun } from '../lib/tutorialRun';
 
 import { TabRouteIcon } from './TabRouteIcon';
 
@@ -159,7 +161,16 @@ const PROMPT_ICON_SIZE = 13;
 // "ribbon" glyph like every other tab. This is the "far easier" the
 // instruction predicted.
 
-export function PageIdentityLabel({ title, activeLensLabel }: { title: string; activeLensLabel?: string }) {
+export function PageIdentityLabel({
+  title,
+  activeLensLabel,
+  activeLensKey,
+}: {
+  title: string;
+  activeLensLabel?: string;
+  // The open lens's key, reported beside its label (see lib/tellClaude.ts).
+  activeLensKey?: string;
+}) {
   const insets = useSafeAreaInsets();
   const tabRoute = TAB_ROUTES.find((route) => route.title === title);
   const tabColor = tabRoute?.color ?? colors.primary;
@@ -191,17 +202,18 @@ export function PageIdentityLabel({ title, activeLensLabel }: { title: string; a
   // covers a screen added later without anybody remembering to, and the
   // box itself is unchanged: nothing is drawn, measured or made tappable
   // for this. See lib/tellClaude.ts.
+  const reportedKey = activeLensLabel == null ? null : activeLensKey ?? null;
   useEffect(() => {
-    reportTellClaudeScreen(title, activeLensLabel ?? null);
-  }, [title, activeLensLabel]);
+    reportTellClaudeScreen(title, activeLensLabel ?? null, reportedKey);
+  }, [title, activeLensLabel, reportedKey]);
   // Tabs stay mounted, so coming back to one re-renders nothing and the
   // effect above never runs again. Reporting on focus as well keeps the
   // report on the tab actually showing, which Walk me through it relies on
   // (lib/storyWalk.ts). Still draws nothing.
   useFocusEffect(
     useCallback(() => {
-      reportTellClaudeScreen(title, activeLensLabel ?? null);
-    }, [title, activeLensLabel]),
+      reportTellClaudeScreen(title, activeLensLabel ?? null, reportedKey);
+    }, [title, activeLensLabel, reportedKey]),
   );
 
   // Nothing to show at all until a real lens is picked, 2026-08-08 -- see
@@ -231,6 +243,11 @@ export function PageIdentityLabel({ title, activeLensLabel }: { title: string; a
   // a drop cap, not in a narrower column to its right. The sentence is
   // in the same colors.textSecondary the header box body uses, and the
   // tab name alone is in the tab colour.
+  //
+  // While a tutorial or Walk me through it is running, the strip at the top
+  // already says which button to tap and the ring is round it, so the box
+  // stays empty rather than saying it a second time (1.0.68.15).
+  const guided = useGuidedWalk();
   const resting = activeLensLabel == null && tabRoute != null;
 
   // The currently-showing icon's own bottom edge sits buttonIconOverhangY
@@ -269,7 +286,7 @@ export function PageIdentityLabel({ title, activeLensLabel }: { title: string; a
       ]}
       pointerEvents="none"
     >
-      {resting && tabRoute ? (
+      {resting && guided ? null : resting && tabRoute ? (
         <>
           <Text style={styles.prompt} allowFontScaling={false}>
             <TabRouteIcon route={tabRoute} size={PROMPT_ICON_SIZE} />
@@ -285,6 +302,21 @@ export function PageIdentityLabel({ title, activeLensLabel }: { title: string; a
       )}
     </View>
   );
+}
+
+/** Whether a tutorial or a guide walk is running right now. */
+function useGuidedWalk(): boolean {
+  const [walking, setWalking] = useState(() => getStoryWalk() != null);
+  const [tutorial, setTutorial] = useState(() => getTutorialRun() != null);
+  useEffect(() => {
+    setWalking(getStoryWalk() != null);
+    return subscribeStoryWalk((walk) => setWalking(walk != null));
+  }, []);
+  useEffect(() => {
+    setTutorial(getTutorialRun() != null);
+    return subscribeTutorialRun((run) => setTutorial(run != null));
+  }, []);
+  return walking || tutorial;
 }
 
 const styles = StyleSheet.create({

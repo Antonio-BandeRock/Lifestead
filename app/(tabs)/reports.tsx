@@ -536,7 +536,7 @@ export default function ReportsScreen() {
       </SwipeableTabScreen>
       {infoAlertElement}
 
-      <PageIdentityLabel title="Reports" activeLensLabel={revealed ? activeLensLabel : undefined} />
+      <PageIdentityLabel title="Reports" activeLensLabel={revealed ? activeLensLabel : undefined} activeLensKey={lens} />
       <MyItemsHub
         label="My Reports"
         tabColor={TAB_COLOR}

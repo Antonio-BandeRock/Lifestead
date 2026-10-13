@@ -59,8 +59,12 @@ export function useWalkMark(): WalkMarkFn {
     }
     return made;
   }, []);
+  // A button that hands over its node gets the measured ring from
+  // WalkSpotlight, so the outline is left off it; two rings round one
+  // button, a little apart, read as a mistake. The outline stays for a
+  // button that only takes the style.
   const style = useCallback(
-    (name: WalkMark) => (active !== name ? undefined : ROUND_MARKS.includes(name) ? ROUND : MARKED),
+    (name: WalkMark) => (active !== name || refs.current.has(name) ? undefined : ROUND_MARKS.includes(name) ? ROUND : MARKED),
     [active],
   );
   return useMemo(() => Object.assign((name: WalkMark) => style(name), { ref }), [style, ref]);

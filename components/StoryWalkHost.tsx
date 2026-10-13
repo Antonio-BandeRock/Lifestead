@@ -9,7 +9,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { usePathname, useRouter, type Href } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState, type ComponentProps } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, useWindowDimensions, type LayoutChangeEvent } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
@@ -41,7 +41,7 @@ import {
   type WalkPoint,
 } from '../lib/storyWalk';
 import { currentTellClaudeScreen, subscribeTellClaudeScreen, type TellClaudeScreen } from '../lib/tellClaude';
-import { SHOW_ME_LABEL, requestShowMe, subscribeSpotTapped } from '../lib/walkSpots';
+import { SHOW_ME_LABEL, getActiveSpot, requestShowMe, stripTop, subscribeActiveSpot, subscribeSpotTapped, type SpotRect } from '../lib/walkSpots';
 import { loadYourStoryWithGuides } from '../lib/yourStoryDb';
 
 // How often the record is looked for while a walk waits on it.
@@ -65,6 +65,24 @@ function useReportedScreen(): TellClaudeScreen {
   return screen;
 }
 
+// Where a strip sits: at the top, or out of the ring's way when the ringed
+// button is under it (lib/walkSpots.ts stripTop). Shared by both strips.
+export function useStripPlace(): { top: number; onLayout: (event: LayoutChangeEvent) => void } {
+  const insets = useSafeAreaInsets();
+  const { height } = useWindowDimensions();
+  const [ring, setRing] = useState<SpotRect | null>(getActiveSpot);
+  const [stripHeight, setStripHeight] = useState(0);
+  useEffect(() => {
+    setRing(getActiveSpot());
+    return subscribeActiveSpot(setRing);
+  }, []);
+  const onLayout = useCallback((event: LayoutChangeEvent) => {
+    const next = Math.round(event.nativeEvent.layout.height);
+    setStripHeight((was) => (Math.abs(was - next) < 1 ? was : next));
+  }, []);
+  return { top: stripTop(ring, stripHeight, insets.top + 6, height - insets.bottom), onLayout };
+}
+
 function pointIcon(point: WalkPoint): { name: ComponentProps<typeof Ionicons>['name']; turn: string } | null {
   if (point === 'hub') return { name: 'arrow-down', turn: '0deg' };
   if (point === 'corner') return { name: 'arrow-down', turn: '45deg' };
@@ -77,7 +95,7 @@ export function StoryWalkHost() {
   const pathname = usePathname();
   const screen = useReportedScreen();
   const router = useRouter();
-  const insets = useSafeAreaInsets();
+  const stripPlace = useStripPlace();
   const [saved, setSaved] = useState(false);
   // Folded to its one line, so whatever sits at the top of the screen can
   // be reached; the line itself still changes as the person moves.
@@ -117,7 +135,7 @@ export function StoryWalkHost() {
   }, [walkKey, saved, pathname, checkRecord]);
 
   const hidden = !walk || !entry || pathname === '/your-story';
-  const place = { pathname, tab: screen.tab, lens: screen.lens };
+  const place = { pathname, tab: screen.tab, lens: screen.lens, lensKey: screen.lensKey };
   const at = walk ? walkPosition(steps, walk.cursor, walk.skipped, place) : 0;
   const step = at < steps.length ? steps[at] : null;
   // The button the line names is outlined on the screen (stage 2), and
@@ -169,7 +187,7 @@ export function StoryWalkHost() {
   const finished = saved || (!step && !waits);
 
   return (
-    <View pointerEvents="box-none" style={[styles.anchor, { top: insets.top + 6 }]}>
+    <View pointerEvents="box-none" style={[styles.anchor, { top: stripPlace.top }]} onLayout={stripPlace.onLayout}>
       <View style={styles.strip} accessibilityLiveRegion="polite">
         {small ? null : (
           <Text style={styles.caption} numberOfLines={2}>

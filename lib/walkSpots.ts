@@ -95,9 +95,28 @@ export function pickSpot(rects: (SpotRect | null)[], windowHeight: number): numb
   return best;
 }
 
-export async function measureSpot(name: string, windowHeight: number): Promise<SpotMeasure> {
+/**
+ * A rect measured in the window, moved to be measured from a layer whose
+ * top left is at `origin` in the same window. On Android with the app drawn
+ * under the status bar, measureInWindow counts from below the status bar
+ * while the ring's layer and every touch count from the top of the screen,
+ * which put the ring a status bar's height above the button it was round.
+ * Measuring the layer the same way and taking the one from the other cancels
+ * that out wherever the window starts.
+ */
+export function fromOrigin(rect: SpotRect | null, origin: { x: number; y: number } | null): SpotRect | null {
+  if (!rect || !origin) return rect;
+  return { ...rect, x: rect.x - origin.x, y: rect.y - origin.y };
+}
+
+/** Where a node is in the window, or null when it is not drawn. */
+export function measureNode(node: SpotNode | null): Promise<SpotRect | null> {
+  return node ? measureOne(node) : Promise.resolve(null);
+}
+
+export async function measureSpot(name: string, windowHeight: number, origin: { x: number; y: number } | null = null): Promise<SpotMeasure> {
   const nodes = [...(spots.get(name) ?? [])];
-  const rects = await Promise.all(nodes.map(measureOne));
+  const rects = (await Promise.all(nodes.map(measureOne))).map((rect) => fromOrigin(rect, origin));
   const at = pickSpot(rects, windowHeight);
   if (at < 0) return { where: 'missing', rect: null, node: null };
   return { where: spotWhere(rects[at], windowHeight), rect: rects[at], node: nodes[at] };
@@ -114,9 +133,46 @@ export function spotHit(rect: SpotRect | null, x: number, y: number, slack = 8):
 let activeName: string | null = null;
 let activeRect: SpotRect | null = null;
 
+const spotListeners = new Set<(rect: SpotRect | null) => void>();
+
+export function sameRect(a: SpotRect | null, b: SpotRect | null): boolean {
+  if (!a || !b) return a === b;
+  return Math.abs(a.x - b.x) < 1 && Math.abs(a.y - b.y) < 1 && Math.abs(a.width - b.width) < 1 && Math.abs(a.height - b.height) < 1;
+}
+
 export function setActiveSpot(name: string | null, rect: SpotRect | null): void {
+  const moved = !sameRect(activeRect, rect);
   activeName = name;
   activeRect = rect;
+  if (moved) for (const listener of spotListeners) listener(rect);
+}
+
+export function getActiveSpot(): SpotRect | null {
+  return activeRect;
+}
+
+/** Heard by the strips, so a strip can step out of the ring's way. */
+export function subscribeActiveSpot(listener: (rect: SpotRect | null) => void): () => void {
+  spotListeners.add(listener);
+  return () => {
+    spotListeners.delete(listener);
+  };
+}
+
+/**
+ * Where the strip goes. It rests at the top, and when the ringed button is
+ * under it (an Add button at the top of a lens) it moves to just below the
+ * ring, or just above when there is no room below, so the button it talks
+ * about is never hidden by the line about it.
+ */
+export function stripTop(ring: SpotRect | null, stripHeight: number, restingTop: number, windowHeight: number, gap = 14): number {
+  if (!ring || stripHeight <= 0) return restingTop;
+  const ringTop = ring.y - gap;
+  const ringBottom = ring.y + ring.height + gap;
+  if (ringBottom <= restingTop || ringTop >= restingTop + stripHeight) return restingTop;
+  if (ringBottom + stripHeight <= windowHeight) return ringBottom;
+  if (ringTop - stripHeight >= 0) return ringTop - stripHeight;
+  return restingTop;
 }
 
 const tapListeners = new Set<(name: string) => void>();

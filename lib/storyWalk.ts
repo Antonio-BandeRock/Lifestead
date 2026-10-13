@@ -48,7 +48,8 @@ export type WalkStep = {
   // (stage 2). Only Start here and Every day steps carry marks.
   mark?: WalkMark;
   // A getting-there line: met once this screen (and lens) is open.
-  until?: { pathname: string; lens?: string };
+  // lensKey, where known, is matched against the key the tab reports.
+  until?: { pathname: string; lens?: string; lensKey?: string };
 };
 
 export type WalkPlace = {
@@ -56,6 +57,7 @@ export type WalkPlace = {
   // The tab the corner box last reported, and its open lens.
   tab: string | null;
   lens: string | null;
+  lensKey?: string | null;
 };
 
 // STAGE 2, 1.0.51.11 ("Yes, build stage 2"): the button a line names is
@@ -89,6 +91,7 @@ export type WalkMark =
   | 'didIDoIt.add'
   | 'upkeep.add'
   | 'garden.addArea'
+  | 'garden.area'
   | 'garden.addPlanting'
   | 'finance.recurring'
   | 'finance.addBill'
@@ -124,7 +127,7 @@ export const TAP_MARKS: Record<string, (WalkMark | null)[]> = {
   'item:didIDoIt': ['didIDoIt.add'],
   'item:upkeep': ['upkeep.add'],
   'item:gardenArea': ['garden.addArea'],
-  'item:planting': [null, 'garden.addPlanting'],
+  'item:planting': ['garden.area', 'garden.addPlanting'],
   'item:bills': ['finance.recurring', 'finance.addBill'],
   'item:spending': ['finance.spending', 'finance.record'],
   'item:routine': ['routines.add', 'routines.addStep'],
@@ -134,6 +137,22 @@ export const TAP_MARKS: Record<string, (WalkMark | null)[]> = {
   'item:familyMember': ['family.add'],
   familyInMealPlan: ['family.planMeals'],
 };
+
+// Lines that go on past their button ("Tap + Schedule a meal, then choose
+// what you ate and the time"). Tapping the button is only the start of them,
+// so the line stays up while the form is filled in and Next moves it on;
+// moving on at the tap took the rest of the line away just as it was needed.
+export const MORE_AFTER_TAP: ReadonlySet<WalkMark> = new Set<WalkMark>([
+  'capture.box',
+  'schedule.addMeal',
+  'schedule.addDrink',
+  'meds.addTime',
+  'finance.addBill',
+  'finance.record',
+  'routines.add',
+  'routines.addStep',
+  'garden.addPlanting',
+]);
 
 /** Whether a guide step gets its buttons outlined. */
 export function walkMarks(entry: GuideEntry): boolean {
@@ -217,7 +236,7 @@ export function gettingThere(pathname: string, lens?: string, lensName?: string)
         : `Tap the button in the bottom-left corner and choose ${lensName}.`,
       point: bookmarks ? 'bookmarks' : 'corner',
       mark: bookmarks ? 'bookmarks' : 'corner',
-      until: { pathname, lens: lensName },
+      until: { pathname, lens: lensName, lensKey: lens },
     });
   }
   return steps;
@@ -233,7 +252,15 @@ export function stepMet(step: WalkStep, place: WalkPlace): boolean {
   if (place.pathname !== step.until.pathname) return false;
   if (!step.until.lens) return true;
   if (place.tab !== TAB_NAMES[step.until.pathname]) return true;
-  return place.lens === step.until.lens;
+  if (step.until.lensKey && place.lensKey) return place.lensKey === step.until.lensKey;
+  return sameLensName(place.lens, step.until.lens);
+}
+
+// A corner box label can carry a line break to wrap it ('Plots &\nPlantings'),
+// so names are compared with their spacing evened out.
+function sameLensName(a: string | null, b: string): boolean {
+  const even = (name: string) => name.replace(/\s+/g, ' ').trim();
+  return a != null && even(a) === even(b);
 }
 
 /**
@@ -289,7 +316,7 @@ export function walkBack<T extends { cursor: number }>(walk: T, at: number): T {
  * names opens, and the round button only opens the menu.
  */
 export function tapMovesOn(step: WalkStep | null | undefined, tapped: string): boolean {
-  return !!step && !step.until && step.mark === tapped;
+  return !!step && !step.until && step.mark === tapped && !MORE_AFTER_TAP.has(step.mark);
 }
 
 // The button outlined right now, set by components/StoryWalkHost.tsx (a

@@ -609,7 +609,7 @@ export default function GardenScreen() {
         </CalmBands>
       </SwipeableTabScreen>
 
-      <PageIdentityLabel title="Garden" activeLensLabel={revealed ? activeLensLabel : undefined} />
+      <PageIdentityLabel title="Garden" activeLensLabel={revealed ? activeLensLabel : undefined} activeLensKey={lens} />
       <MyItemsHub
         label="My Garden"
         tabColor={TAB_COLOR}
@@ -1595,12 +1595,14 @@ function PlotsAndPlantingsLens({
           <Text style={styles.emptyText}>{wording('gardenEmpty', playful)}</Text>
         </View>
       ) : (
-        nestedOrder(plots).map((plot) => {
+        nestedOrder(plots).map((plot, index) => {
           const expanded = expandedPlotId === plot.id;
           const plantings = plantingsByPlot[plot.id] ?? [];
+          // The first area's band is the one a walk line ("Open the area.")
+          // rings, so the line points at something and the strip moves off it.
           return (
+            <View key={plot.id} ref={index === 0 ? walkMark.ref('garden.area') : undefined} collapsable={false}>
             <HomeSectionBand
-              key={plot.id}
               kind="fold"
               title={areaPath(plot.id, [...plots, ...pastPlots])}
               icon="leaf-outline"
@@ -1819,6 +1821,7 @@ function PlotsAndPlantingsLens({
                 ) : null}
               </View>
             </HomeSectionBand>
+            </View>
           );
         })
       )}

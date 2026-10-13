@@ -20,12 +20,15 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useEffect, useRef, useState } from 'react';
 import { Animated, Easing, Platform, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import { useFooterBandHeight } from '../constants/floatingButton';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { getWalkMark, subscribeWalkMark, type WalkMark } from '../lib/storyWalk';
 import {
+  measureNode,
   measureSpot,
   reportTap,
+  sameRect,
   setActiveSpot,
   SHOW_ME_ABOVE,
   SHOW_ME_BELOW,
@@ -38,6 +41,11 @@ import {
 const MEASURE_MS = 400;
 const HAND_SIZE = 44;
 const RING_PAD = 6;
+// How far the ring breathes out on each side. A fixed distance rather than a
+// share of its size, so the ring round a button the width of the screen grows
+// as little as the ring round an icon and never runs off the edge.
+const RING_GROW = 5;
+const FOOTER_MARKS: readonly WalkMark[] = ['hub', 'corner', 'bookmarks'];
 
 export function WalkSpotlight() {
   const { width, height } = useWindowDimensions();
@@ -49,10 +57,23 @@ export function WalkSpotlight() {
   const hand = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
   const handOpacity = useRef(new Animated.Value(0)).current;
   const ripple = useRef(new Animated.Value(0)).current;
-  const heightRef = useRef(height);
-  heightRef.current = height;
+  const footerHeight = useFooterBandHeight();
   const markRef = useRef(mark);
   markRef.current = mark;
+  // How far down a button can be and still be seen. A button the list has
+  // scrolled under the footer band is still inside the window, so it would
+  // be ringed over the bottom bar; it counts as further down instead. The
+  // footer's own buttons are the exception.
+  const heightRef = useRef(height);
+  heightRef.current = mark && FOOTER_MARKS.includes(mark) ? height : height - footerHeight;
+  // The layer's own place in the window: every rect is measured from it, so
+  // the ring sits where the button is drawn and a tap (counted from the top
+  // of the screen) is checked against the same place.
+  const layerRef = useRef<View | null>(null);
+  const layerOrigin = async () => {
+    const at = await measureNode(layerRef.current as unknown as Parameters<typeof measureNode>[0]);
+    return at ? { x: at.x, y: at.y } : null;
+  };
 
   useEffect(() => {
     setMark(getWalkMark());
@@ -69,7 +90,9 @@ export function WalkSpotlight() {
     }
     let live = true;
     const look = async () => {
-      const found = await measureSpot(mark, heightRef.current);
+      const origin = await layerOrigin();
+      if (!origin) return;
+      const found = await measureSpot(mark, heightRef.current, origin);
       if (!live) return;
       const shown = found.where === 'here' ? found.rect : null;
       setRect((was) => (sameRect(was, shown) ? was : shown));
@@ -112,11 +135,12 @@ export function WalkSpotlight() {
         const name = markRef.current;
         if (!name) return;
         void (async () => {
-          let found = await measureSpot(name, heightRef.current);
+          const origin = await layerOrigin();
+          let found = await measureSpot(name, heightRef.current, origin);
           if (found.where !== 'here' && found.where !== 'missing' && found.node?.scrollIntoView) {
             found.node.scrollIntoView({ block: 'center', behavior: 'smooth' });
             await new Promise((resolve) => setTimeout(resolve, 600));
-            found = await measureSpot(name, heightRef.current);
+            found = await measureSpot(name, heightRef.current, await layerOrigin());
           }
           if (found.where !== 'here' || !found.rect) {
             setNotice(found.where === 'below' ? SHOW_ME_BELOW : found.where === 'above' ? SHOW_ME_ABOVE : SHOW_ME_MISSING);
@@ -156,23 +180,26 @@ export function WalkSpotlight() {
 
   if (!mark) return null;
 
-  const ringScale = pulse.interpolate({ inputRange: [0, 1], outputRange: [1, 1.08] });
   const ringOpacity = pulse.interpolate({ inputRange: [0, 1], outputRange: [0.95, 0.45] });
+  const ring = rect ? ringBox(rect, width) : null;
 
   return (
-    <View pointerEvents="none" style={styles.layer}>
-      {rect ? (
+    <View ref={layerRef} collapsable={false} pointerEvents="none" style={styles.layer}>
+      {ring ? (
         <Animated.View
           style={[
             styles.ring,
             {
-              left: rect.x - RING_PAD,
-              top: rect.y - RING_PAD,
-              width: rect.width + RING_PAD * 2,
-              height: rect.height + RING_PAD * 2,
-              borderRadius: Math.min(rect.height, rect.width) / 2 + RING_PAD,
+              left: ring.x,
+              top: ring.y,
+              width: ring.width,
+              height: ring.height,
+              borderRadius: Math.min(ring.height, ring.width) / 2,
               opacity: ringOpacity,
-              transform: [{ scale: ringScale }],
+              transform: [
+                { scaleX: pulse.interpolate({ inputRange: [0, 1], outputRange: [1, 1 + (RING_GROW * 2) / ring.width] }) },
+                { scaleY: pulse.interpolate({ inputRange: [0, 1], outputRange: [1, 1 + (RING_GROW * 2) / ring.height] }) },
+              ],
             },
           ]}
         />
@@ -202,9 +229,13 @@ export function WalkSpotlight() {
   );
 }
 
-function sameRect(a: SpotRect | null, b: SpotRect | null): boolean {
-  if (!a || !b) return a === b;
-  return Math.abs(a.x - b.x) < 1 && Math.abs(a.y - b.y) < 1 && Math.abs(a.width - b.width) < 1 && Math.abs(a.height - b.height) < 1;
+/** The ring's box: the button with room round it, kept inside the window
+ * with room for the ring to breathe. */
+function ringBox(rect: SpotRect, windowWidth: number): SpotRect {
+  const edge = RING_GROW + 2;
+  const left = Math.max(edge, rect.x - RING_PAD);
+  const right = Math.min(windowWidth - edge, rect.x + rect.width + RING_PAD);
+  return { x: left, y: rect.y - RING_PAD, width: Math.max(right - left, 1), height: rect.height + RING_PAD * 2 };
 }
 
 const styles = StyleSheet.create({

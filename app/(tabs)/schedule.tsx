@@ -7013,7 +7013,7 @@ export default function ScheduleScreen() {
         </CalmBands>
       </SwipeableTabScreen>
 
-      <PageIdentityLabel title="Schedules" activeLensLabel={revealed ? activeLensLabel : undefined} />
+      <PageIdentityLabel title="Schedules" activeLensLabel={revealed ? activeLensLabel : undefined} activeLensKey={lens} />
       <MyItemsHub
         label="My Schedules"
         tabColor={TAB_COLOR}

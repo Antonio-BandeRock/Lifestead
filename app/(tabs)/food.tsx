@@ -1632,7 +1632,7 @@ export default function FoodScreen() {
 
       {/* At rest the tab's own top level shows nothing in the box, per the
           rule that it is absent only on one of the ten tabs themselves. */}
-      <PageIdentityLabel title="Food" activeLensLabel={revealed ? activeLensLabel : undefined} />
+      <PageIdentityLabel title="Food" activeLensLabel={revealed ? activeLensLabel : undefined} activeLensKey={lens} />
       <MyItemsHub
         label="My Foods"
         tabColor={TAB_COLOR}

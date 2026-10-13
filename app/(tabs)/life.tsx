@@ -2106,7 +2106,7 @@ export default function LifeScreen() {
         </CalmBands>
       </SwipeableTabScreen>
 
-      <PageIdentityLabel title="Life" activeLensLabel={revealed ? activeLensLabel : undefined} />
+      <PageIdentityLabel title="Life" activeLensLabel={revealed ? activeLensLabel : undefined} activeLensKey={lens} />
       <MyItemsHub
         label="My Life"
         tabColor={TAB_COLOR}

@@ -31,6 +31,7 @@
 //
 // No runtime import but the guide and tour modules, so
 // scripts/test_tutorials.js checks it in plain node.
+import { paidLens, type Tier } from './paidFeatures';
 import { gettingThere, walkSteps, type WalkStep } from './storyWalk';
 import { FROM_HOME, GUIDES, GO_HOME, type GuideEntry } from './yourStoryGuides';
 import { TOUR_TABS, lensLine, lensName, type TourPath, type TourTabDef } from './yourStoryInterview';
@@ -194,6 +195,23 @@ export function howToByKey(tabs: TabTutorial[]): Map<string, { howTo: HowTo; tab
   const map = new Map<string, { howTo: HowTo; tab: TabTutorial; lens: LensTutorial }>();
   for (const tab of tabs) for (const lens of tab.lenses) for (const howTo of lens.howTos) map.set(howTo.key, { howTo, tab, lens });
   return map;
+}
+
+/**
+ * The lines a how-to shows for this tier. On Free a paid lens shows its wall
+ * in place of its tools, so a how-to that rings those tools would point at
+ * nothing; it says once what the wall is instead. Getting to the lens is
+ * unchanged, since the wall itself is worth seeing.
+ */
+export function stepsForTier(howTo: HowTo, tabTitle: string, lens: string | null, tier: Tier): WalkStep[] {
+  if (tier !== 'free' || howTo.key.endsWith(':about')) return howTo.steps;
+  const paid = paidLens(tabTitle, lens ?? undefined);
+  if (!paid) return howTo.steps;
+  return [{ say: paidTutorialLine(paid.plan, paid.gives), point: null }];
+}
+
+export function paidTutorialLine(plan: string, gives: string): string {
+  return `This is part of ${plan}, so its buttons show here once the plan is on. With ${plan} you get ${gives}.`;
 }
 
 // WHAT A RUN GOES THROUGH.

@@ -568,6 +568,8 @@ const back = load('lib/storyReturn.ts');
   for (const mark of reached) {
     const drawn =
       markSource.includes(`walkMark('${mark}')`) ||
+      // A ref alone draws the measured ring (1.0.68.14).
+      markSource.includes(`walkMark.ref('${mark}')`) ||
       (mark.startsWith('profile.') && markSource.includes('walkMark(`profile.${key}`')) ||
       (mark.startsWith('finance.') && markSource.includes('walkMark(`finance.${entry.key}`'));
     check(drawn, `${mark} is drawn on a screen`);
