@@ -400,7 +400,62 @@ export type ToolMark =
   | 'import.line'
   | 'import.builder'
   | 'import.open'
-  | 'import.past';
+  | 'import.past'
+  | 'garden.findZone'
+  | 'garden.zone'
+  | 'garden.sown'
+  | 'garden.savePlanting'
+  | 'garden.pastAreas'
+  | 'garden.bringBack'
+  | 'garden.spreadsheet'
+  | 'garden.saveArea'
+  | 'garden.keepOnHand'
+  | 'garden.saveHarvest'
+  | 'garden.addHarvest'
+  | 'garden.onHand'
+  | 'garden.yield'
+  | 'garden.addTask'
+  | 'sowing.how'
+  | 'sowing.now'
+  | 'sowing.every'
+  | 'sowing.sky'
+  | 'sowing.tradition'
+  | 'seeds.add'
+  | 'seeds.save'
+  | 'seeds.packet'
+  | 'seeds.test'
+  | 'seeds.saveTest'
+  | 'seeds.change'
+  | 'seeds.putAway'
+  | 'seeds.bringBack'
+  | 'compost.start'
+  | 'compost.startIt'
+  | 'compost.read'
+  | 'compost.action'
+  | 'compost.save'
+  | 'compost.turnEvery'
+  | 'compost.status'
+  | 'compost.deletePile'
+  | 'conditions.record'
+  | 'conditions.next'
+  | 'conditions.measure'
+  | 'conditions.measureLight'
+  | 'conditions.save'
+  | 'conditions.import'
+  | 'conditions.sensors'
+  | 'conditions.trends'
+  | 'costs.add'
+  | 'costs.save'
+  | 'costs.combine'
+  | 'costs.saveGroup'
+  | 'costs.byArea'
+  | 'costs.bill'
+  | 'costs.saveBill'
+  | 'costs.baseline'
+  | 'costs.recordElectric'
+  | 'costs.electricity'
+  | 'crops.wrong'
+  | 'crops.grow';
 
 export type ToolStep = {
   say: string;
@@ -3375,7 +3430,464 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'A recipe you brought in and did not finish is still there to pick up.',
     },
   ],
+  '/garden#myZone': [
+    {
+      key: 'find',
+      title: 'Find your growing zone from where you live',
+      steps: [
+        { say: 'Under Find My Zone, pick your country.' },
+        { say: 'Type your ZIP or postal code.' },
+        { say: 'Tap Find My Zone.', mark: 'garden.findZone' },
+      ],
+      forYou: 'Your zone is set and the place is saved, so the frost dates, the sowing calendar and the rain on watering tasks all read from it.',
+    },
+    {
+      key: 'set',
+      title: 'Set your zone by hand',
+      steps: [
+        { say: 'Under Your Growing Zone, tap the Zone picker and pick your zone.', mark: 'garden.zone' },
+      ],
+      forYou: 'Useful when you already know your zone, or when the lookup cannot find your place.',
+    },
+    {
+      key: 'frost',
+      title: 'Read your frost dates',
+      steps: [
+        { say: 'Find your zone from your postal code first.', mark: 'garden.findZone', stay: true },
+        { say: 'Read the Frost Dates card under it. If it could not read them, tap Try Again.' },
+      ],
+      forYou: 'The usual last frost of spring and first frost of autumn for your place, worked out from its weather history.',
+    },
+  ],
+  '/garden#sowingCalendar': [
+    {
+      key: 'now',
+      title: 'See what to sow now',
+      steps: [
+        { say: 'Save a place in My Zone, so the calendar knows your frost dates.' },
+        { say: 'Open What to Sow Now.', mark: 'sowing.now' },
+        { say: 'Tap a crop to read its timing.' },
+      ],
+      forYou: 'Only what opens in the next four weeks, grouped by start indoors, sow outside and plant out.',
+    },
+    {
+      key: 'crop',
+      title: 'Look up the timing for one crop',
+      steps: [
+        { say: 'Open Every Crop.', mark: 'sowing.every' },
+        { say: 'Tap the crop.' },
+      ],
+      forYou: 'When to start it, when to plant it out and about how long until the first harvest.',
+    },
+    {
+      key: 'how',
+      title: 'Read how the sowing windows are worked out',
+      steps: [
+        { say: 'Tap How the windows are worked out.', mark: 'sowing.how' },
+      ],
+      forYou: 'You can see what each date rests on before you trust it with your seeds.',
+    },
+    {
+      key: 'moon',
+      title: 'See the moon and the turning of the year',
+      steps: [
+        { say: 'Open Moon and Sky.', mark: 'sowing.sky' },
+      ],
+      forYou: 'The moon today, its next phases, the equinoxes and solstices for your half of the world, and the solar term.',
+    },
+    {
+      key: 'tradition',
+      title: 'Read about planting by tradition',
+      steps: [
+        { say: 'Open Planting by Tradition.', mark: 'sowing.tradition' },
+        { say: 'Tap a tradition to read it.' },
+      ],
+      forYou: 'Each tradition says how strong the evidence behind it is, so you can choose what to follow.',
+    },
+  ],
+  '/garden#seeds': [
+    {
+      key: 'add',
+      title: 'Add a seed packet',
+      steps: [
+        { say: 'Tap Add a Packet.', mark: 'seeds.add' },
+        { say: 'Pick the crop the packet is for.' },
+        { say: 'Fill in what the packet says: the variety, where it came from, the year it was packed for and how much is in it.' },
+        { say: 'Tap Save Packet.', mark: 'seeds.save' },
+      ],
+      forYou: 'The packet is kept with how long seed of that crop usually stays good, so you know what to use first.',
+    },
+    {
+      key: 'test',
+      title: 'Test whether old seed still sprouts',
+      steps: [
+        { say: 'Open the packet.', mark: 'seeds.packet' },
+        { say: 'Tap Record a Germination Test.', mark: 'seeds.test' },
+        { say: 'Write how many seeds you set and how many sprouted.' },
+        { say: 'Tap Save Test.', mark: 'seeds.saveTest' },
+      ],
+      forYou: 'You know how thickly to sow from an older packet before a bed is planted with it.',
+    },
+    {
+      key: 'change',
+      title: 'Change what a packet says',
+      steps: [
+        { say: 'Open the packet.', mark: 'seeds.packet' },
+        { say: 'Tap Change, make the change and tap Save Packet.', mark: 'seeds.change' },
+      ],
+      forYou: 'The packet reads right without starting it over.',
+    },
+    {
+      key: 'putAway',
+      title: 'Put away a finished packet',
+      steps: [
+        { say: 'Open the packet.', mark: 'seeds.packet' },
+        { say: 'Tap Put Away.', mark: 'seeds.putAway' },
+      ],
+      forYou: 'It leaves the list on hand and waits under Put Away with its record. Tap Bring Back there to return it.',
+    },
+    {
+      key: 'use',
+      title: 'Take what you sowed off a packet',
+      steps: [
+        { say: 'On Plots & Plantings, add a planting of the same crop.' },
+        { say: 'Under From the Seed Packet, pick the packet and how much you sowed.' },
+      ],
+      forYou: 'The packet shows what is left, without counting seeds twice.',
+    },
+  ],
+  '/garden#plotsAndPlantings': [
+    {
+      key: 'area',
+      title: 'Add a garden area',
+      steps: [
+        { say: 'Tap + Add a Garden Area.', mark: 'garden.addArea' },
+        { say: 'Give it a name, such as Backyard raised bed.' },
+        { say: 'Pick what type of space it is. Answer the questions about sun or lights and size that you know.' },
+        { say: 'Tap Save Garden Area.', mark: 'garden.saveArea' },
+      ],
+      forYou: 'Only the name is needed to start. The rest can be filled in whenever you like.',
+    },
+    {
+      key: 'planting',
+      title: 'Add what you are growing',
+      steps: [
+        { say: 'Open the area.', mark: 'garden.area' },
+        { say: 'Tap + Add a Planting.', mark: 'garden.addPlanting' },
+        { say: 'Pick the food you are growing.' },
+        { say: 'Say how it went in, and pick the seed packet if it came from one.' },
+        { say: 'Tap Save Planting.', mark: 'garden.savePlanting' },
+      ],
+      forYou: 'The planting is followed from going in to harvest, with what grew there before it noted so you can rotate.',
+    },
+    {
+      key: 'sown',
+      title: 'Mark a planned planting as sown',
+      steps: [
+        { say: 'Open the area.', mark: 'garden.area' },
+        { say: 'Tap Sown Today beside the planting.', mark: 'garden.sown' },
+      ],
+      forYou: 'It is marked growing from today, and its expected harvest dates move to match.',
+    },
+    {
+      key: 'status',
+      title: 'Change how a planting is doing',
+      steps: [
+        { say: 'Open the area.', mark: 'garden.area' },
+        { say: 'Beside the planting, pick Growing, Harvested, Failed or Pulled out.' },
+      ],
+      forYou: 'Once every grow in an area has finished, the area can move to Past Areas.',
+    },
+    {
+      key: 'past',
+      title: 'Move an area you no longer grow in to Past Areas',
+      steps: [
+        { say: 'Open the area.', mark: 'garden.area' },
+        { say: 'Tap Move to Past Areas.', mark: 'garden.pastAreas' },
+      ],
+      forYou: 'Everything recorded there stays readable under Past Areas. Tap Bring it back there to return it.',
+    },
+    {
+      key: 'spreadsheet',
+      title: 'Save your garden as a spreadsheet',
+      steps: [
+        { say: 'Open Save as a Spreadsheet.', mark: 'garden.spreadsheet' },
+        { say: 'Tap the file you want: plantings, harvests or what was done.' },
+      ],
+      forYou: 'A CSV file holding everything recorded, for Excel, Google Sheets, Numbers or any program that reads CSV.',
+    },
+  ],
+  '/garden#upcomingTasks': [
+    {
+      key: 'add',
+      title: 'Add a garden task',
+      steps: [
+        { say: 'Type the task, such as Water the tomatoes.' },
+        { say: 'Tap Add.', mark: 'garden.addTask' },
+      ],
+      forYou: 'It is put on the schedule for tomorrow morning.',
+    },
+    {
+      key: 'rain',
+      title: 'See rain on a watering day',
+      steps: [
+        { say: 'Save a place in My Zone.' },
+        { say: 'Add a watering task here.', mark: 'garden.addTask', stay: true },
+        { say: 'Read the line under it for the chance of rain that day.' },
+      ],
+      forYou: 'You can decide whether to water. The forecast is a chance, and nothing moves or skips a task by itself.',
+    },
+  ],
+  '/garden#daysUntil': [
+    {
+      key: 'add',
+      title: 'Count down to something in the garden',
+      steps: [
+        { say: 'Tap Add a Days Until Counter.', mark: 'daysUntil.add', stay: true },
+        { say: 'Under Area, pick the garden area. Under For, pick one planting or leave it at the whole area.' },
+        { say: 'Write what it is counting to, such as first harvest, and how many days it takes.' },
+        { say: 'Tap Start Counting.', mark: 'daysUntil.save' },
+      ],
+      forYou: 'It says Today on the day, the phone reminds you that morning, and it keeps counting past it until you mark it done.',
+    },
+    {
+      key: 'done',
+      title: 'Mark a counter done',
+      steps: [
+        { say: 'Tap Done beside it.', mark: 'daysUntil.done' },
+      ],
+      forYou: 'It stays in the list as the record of how long the thing took.',
+    },
+    {
+      key: 'remove',
+      title: 'Remove a counter',
+      steps: [
+        { say: 'Tap Remove beside it. It goes straight away, with no question first.', mark: 'daysUntil.remove' },
+      ],
+      forYou: 'The reminder for its day goes with it.',
+    },
+  ],
+  '/garden#compost': [
+    {
+      key: 'start',
+      title: 'Start a compost pile',
+      steps: [
+        { say: 'Tap + Start a Pile.', mark: 'compost.start' },
+        { say: 'Give it a name, pick its kind and say where it is.' },
+        { say: 'Tap Start It.', mark: 'compost.startIt' },
+      ],
+      forYou: 'A pile, bin, tumbler, worm bin or trench, each kept on a record of its own.',
+    },
+    {
+      key: 'record',
+      title: 'Record what you did to a pile',
+      steps: [
+        { say: 'Open the pile and tap what you did: Add Material, Turned It, Watered It, Temperature, Moisture, Took Some Out, Put It on a Plot or Note.', mark: 'compost.action' },
+        { say: 'Fill in the date and what it asks for.' },
+        { say: 'Tap Save.', mark: 'compost.save' },
+      ],
+      forYou: 'The pile shows its greens and browns, when it was last turned and watered, and what it needs from what you have recorded.',
+    },
+    {
+      key: 'turn',
+      title: 'Get a reminder to turn the pile',
+      steps: [
+        { say: 'Open the pile. Under Turn it every, pick how many days.', mark: 'compost.turnEvery' },
+      ],
+      forYou: 'The phone reminds you at 9:00 on the day it is due, and again every few days until you record a turn.',
+    },
+    {
+      key: 'status',
+      title: 'Mark a pile as curing or finished',
+      steps: [
+        { say: 'Open the pile. Under Status, pick where it is now.', mark: 'compost.status' },
+      ],
+      forYou: 'A finished pile stops asking to be turned and keeps its record.',
+    },
+    {
+      key: 'read',
+      title: 'Read about composting',
+      steps: [
+        { say: 'Tap Read about composting.', mark: 'compost.read' },
+      ],
+      forYou: 'How to build a pile and keep it working, from the reading on Horticulture.',
+    },
+    {
+      key: 'delete',
+      title: 'Delete a pile',
+      steps: [
+        { say: 'Open the pile and tap Delete this pile and its record.', mark: 'compost.deletePile' },
+      ],
+      forYou: 'Use it for a pile started by mistake. Everything recorded for it goes too.',
+    },
+  ],
+  '/garden#growingConditions': [
+    {
+      key: 'record',
+      title: 'Record a reading',
+      steps: [
+        { say: 'Tap + Record a Reading.', mark: 'conditions.record' },
+        { say: 'Pick the area, and the planting if the reading is for one plant, then tap Next.', mark: 'conditions.next' },
+        { say: 'Pick what you measured, then type the figure and pick its unit.' },
+        { say: 'Tap Save It.', mark: 'conditions.save' },
+      ],
+      forYou: 'A figure read off a meter in your hand counts the same as one from a sensor.',
+    },
+    {
+      key: 'light',
+      title: 'Measure the light with this phone',
+      steps: [
+        { say: 'Tap Measure the Light Here.', mark: 'conditions.measureLight' },
+        { say: 'Pick the area, then hold the phone where the leaves are and tap Measure With This Phone.', mark: 'conditions.measure' },
+        { say: 'Tap Save It.', mark: 'conditions.save' },
+      ],
+      forYou: 'A rough reading of how much light the plants get, with the limits of a phone sensor said under it.',
+    },
+    {
+      key: 'import',
+      title: 'Import readings from a file',
+      steps: [
+        { say: 'Tap Import Readings from a File.', mark: 'conditions.import' },
+        { say: 'Tap Pick a File and choose the file your meter or controller saved.' },
+        { say: 'Say which column holds what, and which area the readings belong to.' },
+        { say: 'Tap Import These Readings.' },
+      ],
+      forYou: 'A season of readings goes in at once, without typing them.',
+    },
+    {
+      key: 'sensors',
+      title: 'Read a sensor gateway on your network',
+      steps: [
+        { say: 'Open Sensors on Your Network.', mark: 'conditions.sensors' },
+        { say: 'Tap + Add a Gateway, give it a name and its address, and pick the area.' },
+        { say: 'Tap Save and Read It.' },
+      ],
+      forYou: 'Readings come in from the sensors without being typed, kept beside the ones you take by hand.',
+    },
+    {
+      key: 'trends',
+      title: 'See a measurement over months',
+      steps: [
+        { say: 'Tap Open Growing Conditions on Trends.', mark: 'conditions.trends' },
+      ],
+      forYou: 'One measurement month by month, and which areas have readings and which have none.',
+    },
+  ],
+  '/garden#harvestLog': [
+    {
+      key: 'log',
+      title: 'Log a harvest',
+      steps: [
+        { say: 'Tap + Add a Harvest.', mark: 'garden.addHarvest' },
+        { say: 'Pick the planting it came from.' },
+        { say: 'Pick the amount and the unit.' },
+        { say: 'Tap Save Harvest.', mark: 'garden.saveHarvest' },
+        { say: 'If it asks to keep it on hand, tap Yes, Keep It On Hand or Not This One.', mark: 'garden.keepOnHand' },
+      ],
+      forYou: 'What the garden gave is recorded against its planting, and food kept on hand can go into meals from My Whole Foods.',
+    },
+    {
+      key: 'onHand',
+      title: 'Change whether a harvest is on hand',
+      steps: [
+        { say: 'Open Recent Harvests. Beside the harvest, tap Keep on hand or Not on hand.', mark: 'garden.onHand' },
+      ],
+      forYou: 'Food you have eaten or given away stops being offered for meals.',
+    },
+    {
+      key: 'yield',
+      title: 'See what the garden has given over time',
+      steps: [
+        { say: 'Tap Open Garden Yield on Trends.', mark: 'garden.yield' },
+      ],
+      forYou: 'Harvests by crop and by month, in the units you weighed or counted them in.',
+    },
+  ],
+  '/garden#growingCosts': [
+    {
+      key: 'add',
+      title: 'Record money spent on growing',
+      steps: [
+        { say: 'Tap + Add a Cost.', mark: 'costs.add' },
+        { say: 'Say what it was, pick its kind and type the cost.' },
+        { say: 'Pick the area it was for, if it was for one.' },
+        { say: 'Tap Save Cost.', mark: 'costs.save' },
+      ],
+      forYou: 'It goes into your budget under Garden & growing supplies and is set against what that area gives back.',
+    },
+    {
+      key: 'byArea',
+      title: 'See what each area cost',
+      steps: [
+        { say: 'Open By Area.', mark: 'costs.byArea' },
+      ],
+      forYou: 'Each area or group as one figure, beside the harvests kept from it.',
+    },
+    {
+      key: 'combine',
+      title: 'Combine areas into one group',
+      steps: [
+        { say: 'Open Cost Groups and tap + Combine Areas.', mark: 'costs.combine' },
+        { say: 'Name the group and tick the areas in it.' },
+        { say: 'Tap Save Group.', mark: 'costs.saveGroup' },
+      ],
+      forYou: 'Areas grown the same way stand as one figure, and an area is in one group at most so nothing counts twice.',
+    },
+    {
+      key: 'bill',
+      title: 'Add an electricity bill',
+      steps: [
+        { say: 'Open Electricity.', mark: 'costs.electricity' },
+        { say: 'Tap + Add a Bill.', mark: 'costs.bill' },
+        { say: 'Type the dates it covers and the amount. Tick This bill is from before the grow if it is.' },
+        { say: 'Tap Save Bill.', mark: 'costs.saveBill' },
+      ],
+      forYou: 'Every bill after the one from before the grow is compared with it per day, so bills of different lengths compare fairly.',
+    },
+    {
+      key: 'baseline',
+      title: 'Mark a bill as the one from before the grow',
+      steps: [
+        { say: 'Open Electricity.', mark: 'costs.electricity' },
+        { say: 'Tap Before the grow beside the bill.', mark: 'costs.baseline' },
+      ],
+      forYou: 'That bill is what every later bill is compared with.',
+    },
+    {
+      key: 'electric',
+      title: 'Record the extra electricity as a growing cost',
+      steps: [
+        { say: 'Open Electricity.', mark: 'costs.electricity' },
+        { say: 'Tap Record it as a growing cost.', mark: 'costs.recordElectric' },
+        { say: 'Check the amount and date, pick the area and tap Record.' },
+      ],
+      forYou: 'One month of what the bills run above the one from before the grow, counted against the area that uses it.',
+    },
+  ],
+  '/garden#horticulture': [
+    {
+      key: 'wrong',
+      title: 'Find out what is wrong with a plant',
+      steps: [
+        { say: 'Open What Is Wrong With a Plant.', mark: 'crops.wrong' },
+        { say: 'Pick the crop, then pick what you see on it.' },
+        { say: 'Tap a cause to read it and how to put it right from the soil.' },
+      ],
+      forYou: 'The likely causes for what you see, each with a way to fix it that starts with the soil.',
+    },
+    {
+      key: 'grow',
+      title: 'Read how to grow a crop',
+      steps: [
+        { say: 'Open How to Grow Each Crop.', mark: 'crops.grow' },
+        { say: 'Type the crop in Find a crop, or open its group.' },
+        { say: 'Tap the crop to read it.' },
+      ],
+      forYou: 'Sun, soil, pH, sowing, spacing, water and three problems the crop is known for, with sources to read further.',
+    },
+    ...readingHowTos('Horticulture', 'Each entry says how strong the evidence behind it is, and lists its sources.'),
+  ],
 };
 
 /** Tabs whose every lens has its tools listed above. */
-export const TOOL_TABS_DONE: readonly string[] = ['/life', '/', '/schedule', '/log', '/food'];
+export const TOOL_TABS_DONE: readonly string[] = ['/life', '/', '/schedule', '/log', '/food', '/garden'];

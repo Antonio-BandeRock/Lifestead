@@ -36,6 +36,7 @@ import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
 import { TabBand } from './TabBand';
 import { ThumbRow } from './ThumbRow';
+import { useWalkMark } from './WalkMark';
 
 type Folds = ReturnType<typeof useBandFolds>;
 
@@ -69,6 +70,7 @@ type Props = {
 };
 
 export function ElectricityBand({ folds, plotOptions, noPlotValue, groupPrefix, onCostRecorded }: Props) {
+  const walkMark = useWalkMark();
   const [bills, setBills] = useState<ElectricityBill[]>([]);
   const [setupLine, setSetupLine] = useState<string | null>(null);
   const [adding, setAdding] = useState(false);
@@ -164,7 +166,7 @@ export function ElectricityBand({ folds, plotOptions, noPlotValue, groupPrefix, 
   }
 
   return (
-    <TabBand folds={folds} color={TAB_COLOR} id="garden:costs:electricity" title="Electricity" icon="flash-outline" count={bills.length}>
+    <TabBand folds={folds} color={TAB_COLOR} markRef={walkMark.ref('costs.electricity')} id="garden:costs:electricity" title="Electricity" icon="flash-outline" count={bills.length}>
       <View style={styles.card}>
         <Text style={styles.captionText}>
           Record the bill you have now, from before the grow starts, and mark it as the baseline. Every bill after it is compared with that one per day, so a short bill and a long one compare fairly, and the difference is what the grow is costing in electricity. A bill is the whole household&apos;s, so it lives here rather than under one area.
@@ -183,7 +185,7 @@ export function ElectricityBand({ folds, plotOptions, noPlotValue, groupPrefix, 
                 {bill.periodStart} to {bill.periodEnd}, {billDays(bill)} days, {formatTradeMoney(bill.amount / billDays(bill))} a day
               </Text>
             </View>
-            <TouchableOpacity onPress={() => handleBaseline(bill)}>
+            <TouchableOpacity ref={walkMark.ref('costs.baseline')} onPress={() => handleBaseline(bill)}>
               <Text style={styles.linkText}>{bill.beforeGrow ? 'Not the baseline' : 'Before the grow'}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => handleDelete(bill.id)}>
@@ -214,7 +216,7 @@ export function ElectricityBand({ folds, plotOptions, noPlotValue, groupPrefix, 
             </TouchableOpacity>
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
             <ThumbRow primary="first" style={styles.actionRow}>
-              <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSave}>
+              <TouchableOpacity ref={walkMark.ref('costs.saveBill')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSave}>
                 <Text style={styles.primaryButtonText}>Save Bill</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => { setAdding(false); setError(null); }}>
@@ -224,11 +226,11 @@ export function ElectricityBand({ folds, plotOptions, noPlotValue, groupPrefix, 
           </View>
         ) : (
           <View style={styles.actionRow}>
-            <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={() => setAdding(true)}>
+            <TouchableOpacity ref={walkMark.ref('costs.bill')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={() => setAdding(true)}>
               <Text style={styles.primaryButtonText}>+ Add a Bill</Text>
             </TouchableOpacity>
             {comparison.extraPerMonth !== null && comparison.extraPerMonth > 0 && !recording ? (
-              <TouchableOpacity onPress={startRecording}>
+              <TouchableOpacity ref={walkMark.ref('costs.recordElectric')} onPress={startRecording}>
                 <Text style={styles.linkText}>Record it as a growing cost</Text>
               </TouchableOpacity>
             ) : null}

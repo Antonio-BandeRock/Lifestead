@@ -640,6 +640,7 @@ export default function GardenScreen() {
 // ---------------------------------------------------------------------------
 
 function MyZoneLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
+  const walkMark = useWalkMark();
   const [zone, setZone] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [country, setCountry] = useState<string | null>(null);
@@ -732,6 +733,7 @@ function MyZoneLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
           onChangeText={setPostalCode}
         />
         <TouchableOpacity
+          ref={walkMark.ref('garden.findZone')}
           style={[
             styles.primaryButton,
             { backgroundColor: PRIMARY_BUTTON_BACKGROUND },
@@ -761,7 +763,7 @@ function MyZoneLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
           A USDA Plant Hardiness Zone: based on your area&apos;s average annual minimum winter temperature, the standard
           reference for what can survive and thrive where you actually live.
         </Text>
-        <View style={styles.fieldRow}>
+        <View ref={walkMark.ref('garden.zone')} collapsable={false} style={styles.fieldRow}>
           <Text style={styles.fieldLabel}>Zone</Text>
           <PopoverSelect
             options={USDA_ZONES}
@@ -1684,7 +1686,7 @@ function PlotsAndPlantingsLens({
                           {planting.varietyNote ? ` (${planting.varietyNote})` : ''}
                         </Text>
                         {planting.status === 'planned' ? (
-                          <TouchableOpacity onPress={() => handleSownToday(plot.id, planting)}>
+                          <TouchableOpacity ref={walkMark.ref('garden.sown')} onPress={() => handleSownToday(plot.id, planting)}>
                             <Text style={styles.linkText}>Sown Today</Text>
                           </TouchableOpacity>
                         ) : (
@@ -1786,6 +1788,7 @@ function PlotsAndPlantingsLens({
                     {renderSowAgain()}
                     <ThumbRow primary="first" style={styles.actionRow}>
                       <TouchableOpacity
+                        ref={walkMark.ref('garden.savePlanting')}
                         style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]}
                         onPress={() => handleAddPlanting(plot.id)}
                       >
@@ -1807,7 +1810,7 @@ function PlotsAndPlantingsLens({
                 )}
 
                 <View style={styles.actionRow}>
-                  <TouchableOpacity onPress={() => handleMoveToPast(plot.id)}>
+                  <TouchableOpacity ref={walkMark.ref('garden.pastAreas')} onPress={() => handleMoveToPast(plot.id)}>
                     <Text style={styles.linkText}>Move to Past Areas</Text>
                   </TouchableOpacity>
                   {plotFacts[plot.id] && !plotFacts[plot.id].hasRecords ? (
@@ -1860,7 +1863,7 @@ function PlotsAndPlantingsLens({
                     </Text>
                   ))}
                   <DaysUntilSection plot={plot} plantings={plantings} readOnly />
-                  <TouchableOpacity onPress={() => handleBringBack(plot.id)}>
+                  <TouchableOpacity ref={walkMark.ref('garden.bringBack')} onPress={() => handleBringBack(plot.id)}>
                     <Text style={styles.linkText}>Bring it back</Text>
                   </TouchableOpacity>
                 </View>
@@ -1874,6 +1877,7 @@ function PlotsAndPlantingsLens({
           as under the Garden report on Reports. */}
       {plots.length > 0 || pastPlots.length > 0 ? (
         <HomeSectionBand
+          markRef={walkMark.ref('garden.spreadsheet')}
           kind="fold"
           title="Save as a Spreadsheet"
           icon="grid-outline"
@@ -2100,6 +2104,7 @@ function PlotsAndPlantingsLens({
 
           <ThumbRow primary="first" style={styles.actionRow}>
             <TouchableOpacity
+              ref={walkMark.ref('garden.saveArea')}
               style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]}
               onPress={handleAddGardenArea}
             >
@@ -2130,6 +2135,7 @@ function PlotsAndPlantingsLens({
 // ---------------------------------------------------------------------------
 
 function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
+  const walkMark = useWalkMark();
   const folds = useBandFolds();
   const { confirmRemoval, photoRemovalSheet } = usePhotoRemovalConfirm();
   const [harvests, setHarvests] = useState<GardenHarvest[]>([]);
@@ -2257,6 +2263,7 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
             </Text>
             <View style={styles.actionRow}>
               <TouchableOpacity
+                ref={walkMark.ref('garden.keepOnHand')}
                 style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]}
                 onPress={() => answerOnHand(true)}
               >
@@ -2279,7 +2286,7 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
               <PopoverSelect options={HARVEST_UNIT_OPTIONS} selected={unit} onSelect={setUnit} tabColor={TAB_COLOR} />
             </View>
             <ThumbRow primary="first" style={styles.actionRow}>
-              <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleRecordHarvest}>
+              <TouchableOpacity ref={walkMark.ref('garden.saveHarvest')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleRecordHarvest}>
                 <Text style={styles.primaryButtonText}>Save Harvest</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setSelectedPlanting(null)}>
@@ -2317,6 +2324,7 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
           </>
         ) : (
           <TouchableOpacity
+            ref={walkMark.ref('garden.addHarvest')}
             style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]}
             onPress={() => setPickingPlanting(true)}
           >
@@ -2343,7 +2351,7 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
                   )}
                 </View>
                 <View style={styles.harvestRowActions}>
-                  <TouchableOpacity onPress={() => handleOnHandChange(harvest.id, Number(harvest.onHand) !== 1)}>
+                  <TouchableOpacity ref={walkMark.ref('garden.onHand')} onPress={() => handleOnHandChange(harvest.id, Number(harvest.onHand) !== 1)}>
                     <Text style={styles.linkText}>{Number(harvest.onHand) === 1 ? 'Not on hand' : 'Keep on hand'}</Text>
                   </TouchableOpacity>
                   <TouchableOpacity onPress={() => handleDelete(harvest.id)}>
@@ -2371,7 +2379,7 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
           Weight month by month, how long each crop took against how long you expected, what your compost produced, and
           what has gone out to other people.
         </Text>
-        <TouchableOpacity onPress={() => router.push({ pathname: '/trends', params: { openTrendsLens: 'harvest' } })}>
+        <TouchableOpacity ref={walkMark.ref('garden.yield')} onPress={() => router.push({ pathname: '/trends', params: { openTrendsLens: 'harvest' } })}>
           <Text style={styles.linkText}>Open Garden Yield on Trends</Text>
         </TouchableOpacity>
       </View>
@@ -2406,6 +2414,7 @@ function DaysUntilLens({ scrollBottomPadding }: { scrollBottomPadding: number })
 }
 
 function UpcomingTasksLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
+  const walkMark = useWalkMark();
   const [upcomingTasks, setUpcomingTasks] = useState<Awaited<ReturnType<typeof listUpcomingGardenTasks>>>([]);
   const [taskTitle, setTaskTitle] = useState('');
   // The week's rain, read only when a watering task falls in it (I2).
@@ -2478,7 +2487,7 @@ function UpcomingTasksLens({ scrollBottomPadding }: { scrollBottomPadding: numbe
             value={taskTitle}
             onChangeText={setTaskTitle}
           />
-          <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleAddTask}>
+          <TouchableOpacity ref={walkMark.ref('garden.addTask')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleAddTask}>
             <Text style={styles.primaryButtonText}>Add</Text>
           </TouchableOpacity>
         </ThumbEndRow>

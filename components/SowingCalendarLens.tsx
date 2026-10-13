@@ -54,6 +54,7 @@ import { HOME_BAND_ACCENT_WIDTH } from './HomeSectionBand';
 import { MyCropsBand } from './MyCropsBand';
 import { useInfoAlert } from './InfoAlert';
 import { makeTabBandStyles, TabBand } from './TabBand';
+import { useWalkMark } from './WalkMark';
 
 // Sowing Calendar, a lens of Garden (I5, 1.0.55.20).
 //
@@ -188,6 +189,7 @@ export function SowingCalendarLens({
   onOpenMyZone: () => void;
   onOpenPlantings: () => void;
 }) {
+  const walkMark = useWalkMark();
   const folds = useBandFolds();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [frost, setFrost] = useState<FrostDatesResult | null>(null);
@@ -298,7 +300,7 @@ export function SowingCalendarLens({
           <>
             {placeLabel ? <Text style={styles.captionText}>For {placeLabel}.</Text> : null}
             <Text style={styles.bodyText}>{line}</Text>
-            <TouchableOpacity onPress={openAbout}>
+            <TouchableOpacity ref={walkMark.ref('sowing.how')} onPress={openAbout}>
               <Text style={[styles.linkText, { color: TAB_COLOR }]}>How the windows are worked out</Text>
             </TouchableOpacity>
           </>
@@ -308,7 +310,7 @@ export function SowingCalendarLens({
       <MyCropsBand folds={folds} color={TAB_COLOR} anchor={anchor} today={today} onOpenPlantings={onOpenPlantings} />
 
       {anchor ? (
-        <TabBand folds={folds} color={TAB_COLOR} id="garden:sowing:now" title="What to Sow Now" icon="calendar-outline" count={nearCount}>
+        <TabBand folds={folds} color={TAB_COLOR} markRef={walkMark.ref('sowing.now')} id="garden:sowing:now" title="What to Sow Now" icon="calendar-outline" count={nearCount}>
           <View style={band.rows}>
             {nearCount === 0 ? (
               <View style={band.row}>
@@ -336,7 +338,7 @@ export function SowingCalendarLens({
         </TabBand>
       ) : null}
 
-      <TabBand folds={folds} color={TAB_COLOR} id="garden:sowing:crops" title="Every Crop" icon="leaf-outline" count={crops.length}>
+      <TabBand folds={folds} color={TAB_COLOR} markRef={walkMark.ref('sowing.every')} id="garden:sowing:crops" title="Every Crop" icon="leaf-outline" count={crops.length}>
         <View style={band.rows}>
           {crops.map((w) => {
             const next = anchor ? upcomingWindows(w, anchor, today)[0] : undefined;
@@ -356,7 +358,7 @@ export function SowingCalendarLens({
         </View>
       </TabBand>
 
-      <TabBand folds={folds} color={TAB_COLOR} id="garden:sowing:sky" title="Moon and Sky" icon="moon-outline">
+      <TabBand folds={folds} color={TAB_COLOR} markRef={walkMark.ref('sowing.sky')} id="garden:sowing:sky" title="Moon and Sky" icon="moon-outline">
         <View style={band.rows}>
           <View style={[band.row, styles.group]}>
             <Text style={styles.fieldLabel}>The moon today</Text>
@@ -402,7 +404,7 @@ export function SowingCalendarLens({
         </View>
       </TabBand>
 
-      <TabBand folds={folds} color={TAB_COLOR} id="garden:sowing:traditions" title="Planting by Tradition" icon="book-outline" count={SOWING_TRADITIONS.length}>
+      <TabBand folds={folds} color={TAB_COLOR} markRef={walkMark.ref('sowing.tradition')} id="garden:sowing:traditions" title="Planting by Tradition" icon="book-outline" count={SOWING_TRADITIONS.length}>
         <View style={band.rows}>
           <View style={band.row}>
             <Text style={styles.captionText}>{TRADITIONS_INTRO}</Text>

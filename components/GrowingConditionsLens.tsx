@@ -97,6 +97,7 @@ import { PopoverSelect } from './PopoverSelect';
 import { makeTabBandStyles, TabBand } from './TabBand';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
+import { useWalkMark } from './WalkMark';
 
 // Growing Conditions, a lens of Garden (2026-09-23).
 //
@@ -175,6 +176,7 @@ function emptyDraft(): ReadingDraft {
 }
 
 export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
+  const walkMark = useWalkMark();
   const folds = useBandFolds();
   const [areas, setAreas] = useState<GardenPlot[]>([]);
   // The short New area form, opened from the where step (1.0.55.33).
@@ -655,7 +657,7 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
             ) : null}
             {addingArea ? null : (
               <ThumbRow primary="first" style={styles.actionRow}>
-                <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleWhereNext}>
+                <TouchableOpacity ref={walkMark.ref('conditions.next')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleWhereNext}>
                 <Text style={styles.primaryButtonText}>
                   {lightNext && METER_ON_THIS_DEVICE ? 'Measure the Light' : 'Next'}
                 </Text>
@@ -939,6 +941,7 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
                         ) : null}
                         <View style={styles.actionRow}>
                           <TouchableOpacity
+                            ref={walkMark.ref('conditions.measure')}
                             style={[styles.primaryButton, { backgroundColor: meter.status === 'reading' ? colors.border : PRIMARY_BUTTON_BACKGROUND }]}
                             disabled={meter.status === 'reading'}
                             onPress={() => void measureLight()}
@@ -1008,7 +1011,7 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
             />
             {problem ? <Text style={styles.errorText}>{problem}</Text> : null}
             <View style={styles.actionRow}>
-              <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSave}>
+              <TouchableOpacity ref={walkMark.ref('conditions.save')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSave}>
                 <Text style={styles.primaryButtonText}>Save It</Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -1045,16 +1048,17 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
               worth keeping whether or not you ever wire anything up.
             </Text>
             <View style={styles.actionRow}>
-              <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={() => startReading(false)}>
+              <TouchableOpacity ref={walkMark.ref('conditions.record')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={() => startReading(false)}>
                 <Text style={styles.primaryButtonText}>+ Record a Reading</Text>
               </TouchableOpacity>
               {METER_ON_THIS_DEVICE ? (
-                <TouchableOpacity onPress={() => startReading(true)}>
+                <TouchableOpacity ref={walkMark.ref('conditions.measureLight')} onPress={() => startReading(true)}>
                   <Text style={styles.linkText}>Measure the Light Here</Text>
                 </TouchableOpacity>
               ) : null}
             </View>
             <TouchableOpacity
+              ref={walkMark.ref('conditions.import')}
               onPress={() => {
                 setImportLine(null);
                 setImporting(true);
@@ -1178,7 +1182,7 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
         </TabBand>
       ) : null}
 
-      <TabBand folds={folds} color={TAB_COLOR} id="garden:conditions:gateways" title="Sensors on Your Network" icon="wifi-outline">
+      <TabBand folds={folds} color={TAB_COLOR} markRef={walkMark.ref('conditions.sensors')} id="garden:conditions:gateways" title="Sensors on Your Network" icon="wifi-outline">
         <EcowittGatewaySection areas={areas} plantings={plantings} onAreaAdded={load} onRead={() => void load()} />
       </TabBand>
 
@@ -1190,7 +1194,7 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
           One measurement month by month, what you are measuring and how recently, and which areas have readings against
           them and which have none.
         </Text>
-        <TouchableOpacity onPress={() => router.push({ pathname: '/trends', params: { openTrendsLens: 'conditions' } })}>
+        <TouchableOpacity ref={walkMark.ref('conditions.trends')} onPress={() => router.push({ pathname: '/trends', params: { openTrendsLens: 'conditions' } })}>
           <Text style={styles.linkText}>Open Growing Conditions on Trends</Text>
         </TouchableOpacity>
       </View>

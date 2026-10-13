@@ -52,6 +52,7 @@ import { PhotoStrip } from './PhotoStrip';
 import { PopoverSelect } from './PopoverSelect';
 import { makeTabBandStyles } from './TabBand';
 import { ThumbRow } from './ThumbRow';
+import { useWalkMark } from './WalkMark';
 
 const TAB_COLOR = colors.tabGarden;
 // 1.0.61.7, extended to every Garden lens in 1.0.61.8: the calm look
@@ -96,6 +97,7 @@ function today(): string {
 }
 
 export function SeedsLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
+  const walkMark = useWalkMark();
   const [packets, setPackets] = useState<SeedPacket[]>([]);
   const [uses, setUses] = useState<SeedUse[]>([]);
   const [tests, setTests] = useState<SeedTest[]>([]);
@@ -176,7 +178,7 @@ export function SeedsLens({ scrollBottomPadding }: { scrollBottomPadding: number
             }}
           />
         ) : (
-          <TouchableOpacity style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]} onPress={() => setPicking(true)}>
+          <TouchableOpacity ref={walkMark.ref('seeds.add')} style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]} onPress={() => setPicking(true)}>
             <Text style={styles.primaryButtonText}>Add a Packet</Text>
           </TouchableOpacity>
         )}
@@ -234,6 +236,7 @@ function PacketForm({
   onCancel: () => void;
   onSaved: (id: string) => void;
 }) {
+  const walkMark = useWalkMark();
   const [error, setError] = useState<string | null>(null);
   const packed = readPackedOn(draft.packedOn);
   const amount = readAmount(draft.amount);
@@ -297,7 +300,7 @@ function PacketForm({
       <PhotoStrip ownerKind={SEED_STOCK_OWNER_KIND} ownerId={draft.id} tabColor={TAB_COLOR} addLabel="Photo of the Packet" title={`${draft.foodName} seed packet`} />
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
       <ThumbRow primary="first" style={styles.row}>
-        <TouchableOpacity style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]} onPress={save}>
+        <TouchableOpacity ref={walkMark.ref('seeds.save')} style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]} onPress={save}>
           <Text style={styles.primaryButtonText}>Save Packet</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={onCancel}>
@@ -325,8 +328,10 @@ function PacketBand({
   onEdit: () => void;
   onChanged: () => void;
 }) {
+  const walkMark = useWalkMark();
   return (
     <HomeSectionBand
+      markRef={walkMark.ref('seeds.packet')}
       kind="fold"
       title={packetTitle(packet)}
       icon="albums-outline"
@@ -383,6 +388,7 @@ function UseList({ uses, unit }: { uses: SeedUse[]; unit: SeedUnit | null }) {
 }
 
 function TestSection({ seedId, tests, onChanged }: { seedId: string; tests: SeedTest[]; onChanged: () => void }) {
+  const walkMark = useWalkMark();
   const [adding, setAdding] = useState(false);
   const [sown, setSown] = useState('10');
   const [sprouted, setSprouted] = useState('');
@@ -434,7 +440,7 @@ function TestSection({ seedId, tests, onChanged }: { seedId: string; tests: Seed
           </View>
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
           <ThumbRow primary="first" style={styles.row}>
-            <TouchableOpacity style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]} onPress={save}>
+            <TouchableOpacity ref={walkMark.ref('seeds.saveTest')} style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]} onPress={save}>
               <Text style={styles.primaryButtonText}>Save Test</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setAdding(false)}>
@@ -443,7 +449,7 @@ function TestSection({ seedId, tests, onChanged }: { seedId: string; tests: Seed
           </ThumbRow>
         </>
       ) : (
-        <TouchableOpacity onPress={() => setAdding(true)}>
+        <TouchableOpacity ref={walkMark.ref('seeds.test')} onPress={() => setAdding(true)}>
           <Text style={styles.linkText}>Record a Germination Test</Text>
         </TouchableOpacity>
       )}
@@ -464,13 +470,15 @@ function PacketActions({
   onEdit: () => void;
   onChanged: () => void;
 }) {
+  const walkMark = useWalkMark();
   const hasRecord = uses.length > 0 || tests.length > 0;
   return (
     <View style={styles.row}>
-      <TouchableOpacity onPress={onEdit}>
+      <TouchableOpacity ref={walkMark.ref('seeds.change')} onPress={onEdit}>
         <Text style={styles.linkText}>Change</Text>
       </TouchableOpacity>
       <TouchableOpacity
+        ref={walkMark.ref('seeds.putAway')}
         onPress={async () => {
           await setSeedPacketPutAway(packet.id, true);
           onChanged();
@@ -493,6 +501,7 @@ function PacketActions({
 }
 
 function PutAwayRow({ packet, uses, onChanged }: { packet: SeedPacket; uses: SeedUse[]; onChanged: () => void }) {
+  const walkMark = useWalkMark();
   return (
     <View style={styles.rowTop}>
       <View style={styles.flex}>
@@ -500,6 +509,7 @@ function PutAwayRow({ packet, uses, onChanged }: { packet: SeedPacket; uses: See
         <Text style={styles.captionText}>{describeRemaining(packet, uses)}</Text>
       </View>
       <TouchableOpacity
+        ref={walkMark.ref('seeds.bringBack')}
         onPress={async () => {
           await setSeedPacketPutAway(packet.id, false);
           onChanged();

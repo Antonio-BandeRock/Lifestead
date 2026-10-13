@@ -49,6 +49,7 @@ import { RecordPhotos } from './RecordPhotos';
 import { usePhotoRemovalConfirm } from './usePhotoRemovalConfirm';
 import { makeTabBandStyles, TabBand } from './TabBand';
 import { ThumbRow } from './ThumbRow';
+import { useWalkMark } from './WalkMark';
 
 // Compost, a lens of Garden.
 //
@@ -151,6 +152,7 @@ export function CompostLens({
   scrollBottomPadding: number;
   onReadAboutComposting: (entryId: string) => void;
 }) {
+  const walkMark = useWalkMark();
   const folds = useBandFolds();
   const [piles, setPiles] = useState<CompostPile[]>([]);
   const [events, setEvents] = useState<CompostEvent[]>([]);
@@ -244,7 +246,7 @@ export function CompostLens({
             </View>
             {startError ? <Text style={styles.errorText}>{startError}</Text> : null}
             <ThumbRow primary="first" style={styles.actionRow}>
-              <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleStart}>
+              <TouchableOpacity ref={walkMark.ref('compost.startIt')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleStart}>
                 <Text style={styles.primaryButtonText}>Start It</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setStarting(false)}>
@@ -260,10 +262,10 @@ export function CompostLens({
               bought for it is set against what the garden gives back.
             </Text>
             <View style={styles.actionRow}>
-              <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={() => setStarting(true)}>
+              <TouchableOpacity ref={walkMark.ref('compost.start')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={() => setStarting(true)}>
                 <Text style={styles.primaryButtonText}>+ Start a Pile</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => onReadAboutComposting('garden-composting-at-home')}>
+              <TouchableOpacity ref={walkMark.ref('compost.read')} onPress={() => onReadAboutComposting('garden-composting-at-home')}>
                 <Text style={styles.linkText}>Read about composting</Text>
               </TouchableOpacity>
             </View>
@@ -313,6 +315,7 @@ function PileBand({
   onChanged: () => Promise<void>;
   onReadAboutComposting: (entryId: string) => void;
 }) {
+  const walkMark = useWalkMark();
   const [action, setAction] = useState<CompostEventKind | null>(null);
   const [date, setDate] = useState(today);
   const [materialPick, setMaterialPick] = useState<string | null>(null);
@@ -519,6 +522,7 @@ function PileBand({
             {ACTIONS.map((entry) => (
               <TouchableOpacity
                 key={entry.kind}
+                ref={entry.kind === 'added' ? walkMark.ref('compost.action') : undefined}
                 style={[styles.pill, { borderColor: TAB_COLOR }, action === entry.kind ? { backgroundColor: PRIMARY_BUTTON_BACKGROUND } : styles.pillIdle]}
                 onPress={() => setAction(action === entry.kind ? null : entry.kind)}
               >
@@ -656,7 +660,7 @@ function PileBand({
 
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
             <ThumbRow primary="first" style={styles.actionRow}>
-              <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSaveEvent}>
+              <TouchableOpacity ref={walkMark.ref('compost.save')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSaveEvent}>
                 <Text style={styles.primaryButtonText}>Save</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={reset}>
@@ -667,7 +671,7 @@ function PileBand({
         ) : null}
 
         {pile.status === 'active' ? (
-          <View style={styles.fieldRow}>
+          <View ref={walkMark.ref('compost.turnEvery')} collapsable={false} style={styles.fieldRow}>
             <Text style={styles.fieldLabel}>Turn it every</Text>
             <PopoverSelect
               options={TURN_INTERVAL_OPTIONS}
@@ -683,7 +687,7 @@ function PileBand({
           </Text>
         ) : null}
 
-        <View style={styles.fieldRow}>
+        <View ref={walkMark.ref('compost.status')} collapsable={false} style={styles.fieldRow}>
           <Text style={styles.fieldLabel}>Status</Text>
           <PopoverSelect options={STATUS_OPTIONS} selected={pile.status} onSelect={handleStatus} tabColor={TAB_COLOR} />
           <TouchableOpacity onPress={() => onReadAboutComposting(pile.status === 'active' ? 'garden-hot-composting' : 'garden-composting-at-home')}>
@@ -730,7 +734,7 @@ function PileBand({
         )}
 
         {photoRemovalSheet}
-        <TouchableOpacity onPress={handleDeletePile}>
+        <TouchableOpacity ref={walkMark.ref('compost.deletePile')} onPress={handleDeletePile}>
           <Text style={[styles.linkText, { color: colors.danger }]}>Delete this pile and its record</Text>
         </TouchableOpacity>
       </View>

@@ -48,6 +48,7 @@ import {
   type PlantNutrientKey,
   WHERE_TO_ASK,
 } from '../lib/plantNutrients';
+import { useWalkMark } from './WalkMark';
 
 // How to grow each crop, and how to read a plant's leaves, on the
 // Horticulture lens above the long-form reading. 2026-09-26, direct
@@ -113,6 +114,7 @@ export function CropGuideSection({
   // The host ScrollView, measured from this section's top.
   scrollToY?: (y: number) => void;
 }) {
+  const walkMark = useWalkMark();
   const bandGap = useBandGap();
   const styles = useMemo(() => makeStyles(tabColor, bandGap), [tabColor, bandGap]);
   const [openBand, setOpenBand] = useState<Band>(null);
@@ -387,6 +389,7 @@ export function CropGuideSection({
   return (
     <View ref={sectionRef} style={styles.wrapper}>
       <HomeSectionBand
+        markRef={walkMark.ref('crops.wrong')}
         kind="fold"
         title="What Is Wrong With a Plant"
         icon="search-outline"
@@ -432,6 +435,7 @@ export function CropGuideSection({
       </HomeSectionBand>
 
       <HomeSectionBand
+        markRef={walkMark.ref('crops.grow')}
         kind="fold"
         title={`How to Grow Each Crop (${CROP_GUIDES.length})`}
         icon="nutrition-outline"

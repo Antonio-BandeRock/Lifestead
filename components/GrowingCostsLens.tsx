@@ -49,6 +49,7 @@ import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { VaultClosedBand } from './VaultClosedBand';
 import { useOnVaultChange } from '../lib/vaultReads';
+import { useWalkMark } from './WalkMark';
 
 // Growing Costs, a lens of Garden.
 //
@@ -130,6 +131,7 @@ function isDateString(value: string): boolean {
 }
 
 export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
+  const walkMark = useWalkMark();
   const folds = useBandFolds();
   const [costs, setCosts] = useState<GrowingCostRecord[]>([]);
   const [picture, setPicture] = useState<GardenMoneyPicture | null>(null);
@@ -424,7 +426,7 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
         ) : null}
       </View>
 
-      <TabBand folds={folds} color={TAB_COLOR} id="garden:costs:areas" title="By Area" icon="grid-outline" count={areaRows.length}>
+      <TabBand folds={folds} color={TAB_COLOR} markRef={walkMark.ref('costs.byArea')} id="garden:costs:areas" title="By Area" icon="grid-outline" count={areaRows.length}>
         <View style={styles.card}>
           {areaRows.length === 0 ? (
             <Text style={styles.captionText}>
@@ -607,7 +609,7 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
             )}
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
             <ThumbRow primary="first" style={styles.actionRow}>
-              <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSave}>
+              <TouchableOpacity ref={walkMark.ref('costs.save')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSave}>
                 <Text style={styles.primaryButtonText}>Save Cost</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setAdding(false)}>
@@ -622,6 +624,7 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
               &amp; growing supplies and is set against what the garden gives back.
             </Text>
             <TouchableOpacity
+              ref={walkMark.ref('costs.add')}
               style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]}
               onPress={() => setAdding(true)}
             >
@@ -683,7 +686,7 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
               })}
               {groupError ? <Text style={styles.errorText}>{groupError}</Text> : null}
               <ThumbRow primary="first" style={styles.actionRow}>
-                <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSaveGroup}>
+                <TouchableOpacity ref={walkMark.ref('costs.saveGroup')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSaveGroup}>
                   <Text style={styles.primaryButtonText}>Save Group</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setGroupEditing(false)}>
@@ -695,6 +698,7 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
             <Text style={styles.captionText}>Add at least two areas under Plots &amp; Plantings before combining them.</Text>
           ) : (
             <TouchableOpacity
+              ref={walkMark.ref('costs.combine')}
               style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]}
               onPress={() => startGroup(null)}
             >
