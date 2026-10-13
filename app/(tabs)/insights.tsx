@@ -6,6 +6,7 @@ import { LabelCheckView } from '../../components/LabelCheckView';
 import { routeForDigestEntry } from '../../lib/digestNavigation';
 import { ActivityIndicator, Modal, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { CalmBands, HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, HomeSectionBand } from '../../components/HomeSectionBand';
+import { useWalkMark } from '../../components/WalkMark';
 import { formatTime12 } from '../../lib/timeOfDay';
 import {
   classifyPrepStateGroup,
@@ -1647,6 +1648,7 @@ function LensExplainer({
   expanded: boolean;
   onToggle: () => void;
 }) {
+  const walkMark = useWalkMark();
   const option = LENSES.find((entry) => entry.key === lens);
   const first = option?.help?.[0];
   if (!option || !first) return null;
@@ -1660,6 +1662,7 @@ function LensExplainer({
   return (
     <View style={[styles.bandColumn, styles.lensExplainerBand]}>
       <HomeSectionBand
+        markRef={walkMark.ref('insights.about')}
         title={option.label}
         icon={option.icon}
         color={TAB_COLOR}
@@ -1850,6 +1853,7 @@ export function NutrientsTable({
   /** Distinct plants in the last seven days (G14), day scope only. */
   plants?: PlantsResult | null;
 }) {
+  const walkMark = useWalkMark();
   const [mealsOpen, setMealsOpen] = useState(true);
   const [plantsOpen, setPlantsOpen] = useState(false);
   const [tableOpen, setTableOpen] = useState(true);
@@ -1946,6 +1950,7 @@ export function NutrientsTable({
           return (
             <View key={`${entry.nutrientCode}_${index}`}>
               <TouchableOpacity
+                ref={walkMark.ref('nutrients.row')}
                 style={styles.tableRow}
                 activeOpacity={canExpandContributors ? 0.6 : 1}
                 disabled={!canExpandContributors}
@@ -2001,6 +2006,7 @@ export function NutrientsTable({
                   ) : null}
                   {shortfall ? <NutrientGapFoods entry={entry} shortfall={shortfall} /> : null}
                   <TouchableOpacity
+                    ref={walkMark.ref('nutrients.compare')}
                     accessibilityRole="link"
                     onPress={() =>
                       router.push({
@@ -2228,6 +2234,7 @@ function PortionsView({
   loading: boolean;
   tabColor: string;
 }) {
+  const walkMark = useWalkMark();
   const [mealsPerDay, setMealsPerDay] = useState(3);
 
   if (loading) {
@@ -2311,6 +2318,7 @@ function PortionsView({
           const active = count === mealsPerDay;
           return (
             <TouchableOpacity
+              ref={walkMark.ref('portions.meals')}
               key={count}
               style={[styles.portionsPill, active ? { backgroundColor: tabColor, borderColor: tabColor } : null]}
               onPress={() => setMealsPerDay(count)}
@@ -2464,6 +2472,7 @@ function ScopeHub<M extends NavigableMeal>({
   scope: Scope;
   onChangeScope: (scope: Scope) => void;
 }) {
+  const walkMark = useWalkMark();
   const [open, setOpen] = useState(false);
   const { bottom: rowBottom, left: buttonLeft } = useBottomLeftHubPosition();
   // Stacked one full button-height plus the standard hub gap above the
@@ -2534,6 +2543,7 @@ function ScopeHub<M extends NavigableMeal>({
   return (
     <>
       <TouchableOpacity
+        ref={walkMark.ref('insights.drill')}
         style={[styles.scopeButton, { bottom: buttonBottom, left: buttonLeft }]}
         onPress={() => setOpen(true)}
         activeOpacity={0.85}
@@ -2638,6 +2648,7 @@ export function SixDsView({
   expandedTierKey: string | null;
   onToggleTier: (key: string) => void;
 }) {
+  const walkMark = useWalkMark();
   const perCondition = resolveScopePerCondition(breakdown, scope);
 
   if (trackedConditions.length === 0) {
@@ -2673,6 +2684,7 @@ export function SixDsView({
                 return (
                   <View key={dim.dimension}>
                     <TouchableOpacity
+                      ref={walkMark.ref('sixDs.dimension')}
                       style={[styles.tableRow, severityRowStyle(dim.severity)]}
                       onPress={() => onToggleDimension(dimensionKey)}
                       activeOpacity={0.7}
@@ -2700,7 +2712,7 @@ export function SixDsView({
 
                           return (
                             <View key={sc.subCriterion}>
-                              <TouchableOpacity style={styles.subTableRow} onPress={() => onToggleTier(key)} activeOpacity={0.6}>
+                              <TouchableOpacity ref={walkMark.ref('sixDs.tier')} style={styles.subTableRow} onPress={() => onToggleTier(key)} activeOpacity={0.6}>
                                 <Text style={styles.subTableLabel} numberOfLines={1}>
                                   {sc.subCriterion}
                                 </Text>
@@ -3001,6 +3013,7 @@ function NutrientRankingView({
   driRows: DietaryReferenceIntake[];
   foodServing: { grams: number; label: string } | null;
 }) {
+  const walkMark = useWalkMark();
   // Memoized, 2026-08-12 -- see the real render-storm root-caused and fixed
   // the same day in PopoverSelect.tsx's own header comment. A fresh array
   // here on every render was exactly the thing breaking PopoverSelect's own
@@ -3174,6 +3187,7 @@ function NutrientRankingView({
       <View style={styles.rankLayout}>
         <View style={styles.pillWrap}>
           <TouchableOpacity
+            ref={walkMark.ref('ranking.mode')}
             style={[styles.stagePill, { borderColor: tabColor }]}
             onPress={() => onModeChange('byNutrient')}
           >
@@ -3225,6 +3239,7 @@ function NutrientRankingView({
       >
         <View style={styles.pillWrap}>
           <TouchableOpacity
+            ref={walkMark.ref('ranking.mode')}
             style={[styles.stagePill, mode === 'byNutrient' ? { backgroundColor: tabColor, borderColor: tabColor } : { borderColor: tabColor }]}
             onPress={() => onModeChange('byNutrient')}
           >
@@ -3257,6 +3272,7 @@ function NutrientRankingView({
                 selected={selected}
                 onSelect={onSelect}
                 tabColor={tabColor}
+                markRef={walkMark.ref('ranking.nutrient')}
                 placeholder="Pick a nutrient..."
                 onOpenChange={handleNutrientPopoverOpenChange}
               />
@@ -3269,6 +3285,7 @@ function NutrientRankingView({
               selected={prepGroup ?? 'all'}
               onSelect={handlePrepGroupSelect}
               tabColor={tabColor}
+              markRef={walkMark.ref('ranking.prep')}
               placeholder="All prep states"
               minWidth={140}
               onOpenChange={handlePrepStatePopoverOpenChange}
@@ -3340,7 +3357,7 @@ function NutrientRankingView({
                     rather than repeated on every row. */}
                 {foodServing ? <Text style={styles.rankFoodCategory}>Suggested serving: {foodServing.label}</Text> : null}
               </View>
-              <TouchableOpacity style={styles.pill} onPress={onClearFood}>
+              <TouchableOpacity ref={walkMark.ref('ranking.change')} style={styles.pill} onPress={onClearFood}>
                 <Text style={styles.pillText}>Change food</Text>
               </TouchableOpacity>
             </ThumbEndRow>
@@ -3383,6 +3400,7 @@ function NutrientRankingView({
 // fetch, so (unlike NutrientRankingView above) this owns its own picker
 // state rather than needing anything lifted to the parent screen.
 function CookingImpactView({ tabColor }: { tabColor: string }) {
+  const walkMark = useWalkMark();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   // See NutrientRankingView's own identical comment -- COOKING_IMPACT_COMPOUNDS
   // is a module-level constant that never changes, so this only ever needs
@@ -3412,6 +3430,7 @@ function CookingImpactView({ tabColor }: { tabColor: string }) {
         onSelect={setSelectedId}
         tabColor={tabColor}
         searchable
+        markRef={walkMark.ref('cooking.pick')}
         placeholder="Pick a nutrient or compound..."
         minWidth={220}
       />
@@ -3478,6 +3497,7 @@ function SafeFoodsView({
   // profile itself finishes its first, fast load.
   personalizationProfile: PersonalizationProfile | null;
 }) {
+  const walkMark = useWalkMark();
   const conditionNames = personalizationProfile?.trackedConditions.map((condition) => condition.name) ?? [];
   const scopeDescription =
     conditionNames.length > 0 ? `zero flagged concerns for ${conditionNames.join(', ')}` : 'zero flagged concerns of any kind';
@@ -3510,6 +3530,7 @@ function SafeFoodsView({
         onSelect={onSelect}
         tabColor={tabColor}
         searchable
+        markRef={walkMark.ref('safe.pick')}
         placeholder="Pick a category..."
         minWidth={220}
       />
@@ -3565,6 +3586,7 @@ function HealingStageView({
   loading: boolean;
   tabColor: string;
 }) {
+  const walkMark = useWalkMark();
   const [expandedRound, setExpandedRound] = useState<string | null>(null);
   const groups = tab === 'stage1' ? stage1Groups : stage2Rounds;
 
@@ -3589,6 +3611,7 @@ function HealingStageView({
     <>
       <View style={styles.pillWrap}>
         <TouchableOpacity
+          ref={walkMark.ref('stage.pick')}
           style={[styles.stagePill, tab === 'stage1' ? { backgroundColor: tabColor, borderColor: tabColor } : { borderColor: tabColor }]}
           onPress={() => onTabChange('stage1')}
         >
@@ -3597,6 +3620,7 @@ function HealingStageView({
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          ref={walkMark.ref('stage.pick')}
           style={[styles.stagePill, tab === 'stage2' ? { backgroundColor: tabColor, borderColor: tabColor } : { borderColor: tabColor }]}
           onPress={() => onTabChange('stage2')}
         >
@@ -3692,6 +3716,7 @@ function LabsView({
   onSaved: () => void;
   tabColor: string;
 }) {
+  const walkMark = useWalkMark();
   const [formOpen, setFormOpen] = useState(false);
   const [formTestCode, setFormTestCode] = useState<string | null>(null);
   const [formValue, setFormValue] = useState('');
@@ -3813,6 +3838,7 @@ function LabsView({
             onSelect={setFormTestCode}
             tabColor={tabColor}
             searchable
+            markRef={walkMark.ref('labs.test')}
             placeholder="Pick a test..."
             minWidth={220}
           />
@@ -3854,6 +3880,7 @@ function LabsView({
               <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity
+              ref={walkMark.ref('labs.save')}
               style={[styles.primaryButton, { backgroundColor: colors.buttonColor, flex: 1, opacity: saving ? 0.6 : 1 }]}
               onPress={handleSave}
               disabled={saving}
@@ -3864,6 +3891,7 @@ function LabsView({
         </View>
       ) : (
         <TouchableOpacity
+          ref={walkMark.ref('labs.add')}
           style={[styles.secondaryButton, styles.rankSpaced, { borderWidth: 1, borderColor: tabColor }]}
           onPress={() => setFormOpen(true)}
         >
@@ -3902,6 +3930,7 @@ function MyMedsView({
   loading: boolean;
   tabColor: string;
 }) {
+  const walkMark = useWalkMark();
   // Personal-rule half of this lens, 2026-08-18. All hooks declared
   // unconditionally, before the loading early-return below -- this view
   // used to have none, so that early return sat first with nothing to
@@ -4137,10 +4166,10 @@ function MyMedsView({
                       {linkSummary ? ` · ${linkSummary}` : ''}
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.rankActionButton} onPress={() => handleToggleRule(rule)}>
+                  <TouchableOpacity ref={walkMark.ref('meds.pause')} style={styles.rankActionButton} onPress={() => handleToggleRule(rule)}>
                     <Text style={[styles.rankActionText, { color: tabColor }]}>{rule.active ? 'Pause' : 'Resume'}</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.rankActionButton} onPress={() => handleDeleteRule(rule)}>
+                  <TouchableOpacity ref={walkMark.ref('meds.delete')} style={styles.rankActionButton} onPress={() => handleDeleteRule(rule)}>
                     <Text style={[styles.rankActionText, { color: colors.danger }]}>Delete</Text>
                   </TouchableOpacity>
                 </View>
@@ -4152,6 +4181,7 @@ function MyMedsView({
         {formOpen ? (
           <View style={[styles.formCard, styles.rankSpaced, { borderColor: tabColor }]}>
             <Text style={[styles.sectionLabel, { color: tabColor }]}>What did you notice, or what were you told?</Text>
+            <View ref={walkMark.ref('meds.ruleText')} collapsable={false}>
             <NotesInput
               micColor={tabColor}
               style={[styles.labInput, { minHeight: 72, textAlignVertical: 'top' }]}
@@ -4161,11 +4191,13 @@ function MyMedsView({
               placeholderTextColor={colors.textMuted}
               multiline
             />
+            </View>
 
             <Text style={[styles.sectionLabel, styles.rankSpaced, { color: tabColor }]}>Where did this come from?</Text>
             <View style={styles.pillWrap}>
               {(['self', 'doctor'] as const).map((option) => (
                 <TouchableOpacity
+                  ref={walkMark.ref('meds.source')}
                   key={option}
                   style={[styles.stagePill, { borderColor: tabColor, backgroundColor: formSource === option ? tabColor : 'transparent' }]}
                   onPress={() => setFormSource(option)}
@@ -4181,6 +4213,7 @@ function MyMedsView({
             <View style={styles.pillWrap}>
               {(['none', 'food', 'treatment'] as const).map((option) => (
                 <TouchableOpacity
+                  ref={walkMark.ref('meds.tie')}
                   key={option}
                   style={[styles.stagePill, { borderColor: tabColor, backgroundColor: formLinkType === option ? tabColor : 'transparent' }]}
                   onPress={() => setFormLinkType(option)}
@@ -4235,6 +4268,7 @@ function MyMedsView({
                 <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity
+                ref={walkMark.ref('meds.saveRule')}
                 style={[styles.primaryButton, { backgroundColor: colors.buttonColor, flex: 1, opacity: saving ? 0.6 : 1 }]}
                 onPress={handleSaveRule}
                 disabled={saving}
@@ -4245,6 +4279,7 @@ function MyMedsView({
           </View>
         ) : (
           <TouchableOpacity
+            ref={walkMark.ref('meds.addRule')}
             style={[styles.secondaryButton, styles.rankSpaced, { borderWidth: 1, borderColor: tabColor }]}
             onPress={() => setFormOpen(true)}
           >

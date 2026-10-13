@@ -17,6 +17,7 @@ import { textShadow, typography } from '../constants/typography';
 import { ITEM_BY_KEY, type ItemView, type YourStoryItemKey } from '../lib/yourStory';
 import { loadYourStory } from '../lib/yourStoryDb';
 import { HOME_BAND_CONTENT_PADDING, homeBandNoHairlines, homeBandStyle, useCalmBands } from './HomeSectionBand';
+import { useWalkMark } from './WalkMark';
 
 type Props = {
   itemKey: YourStoryItemKey;
@@ -28,6 +29,7 @@ type Props = {
 };
 
 export function YourStoryMissingLine({ itemKey, standaloneColor }: Props) {
+  const walkMark = useWalkMark();
   const router = useRouter();
   const calm = useCalmBands();
   // undefined while loading; null when the item is not part of this
@@ -62,7 +64,7 @@ export function YourStoryMissingLine({ itemKey, standaloneColor }: Props) {
     <View style={standaloneColor ? [styles.standalone, { borderColor: standaloneColor }, calm && homeBandNoHairlines] : styles.wrap}>
       <Text style={styles.sentence}>{sentence}</Text>
       {note ? <Text style={styles.note}>{note}</Text> : null}
-      <TouchableOpacity style={styles.link} onPress={() => router.push('/your-story' as Href)} accessibilityRole="button">
+      <TouchableOpacity ref={walkMark.ref('bands.missing')} style={styles.link} onPress={() => router.push('/your-story' as Href)} accessibilityRole="button">
         <Text style={styles.linkText}>Where this fits in Your Guide</Text>
         <Ionicons name="arrow-forward" size={13} color={colors.primary} style={textShadow} />
       </TouchableOpacity>

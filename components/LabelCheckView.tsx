@@ -14,6 +14,7 @@ import type { PersonalizationProfile } from '../lib/foodPersonalization';
 import { labelFitFor, YOU_ID } from '../lib/householdFit';
 import { checkIngredients } from '../lib/ingredientFlags';
 import { flagAdditivesInIngredients, flagConditionConcernsForConditions } from '../lib/scannedProductFlags';
+import { useWalkMark } from './WalkMark';
 
 type Props = {
   tabColor: string;
@@ -22,6 +23,7 @@ type Props = {
 };
 
 export function LabelCheckView({ tabColor, profile, onOpenReading }: Props) {
+  const walkMark = useWalkMark();
   const band = useTabBandStyles(tabColor);
   const [labelText, setLabelText] = useState('');
 
@@ -55,7 +57,7 @@ export function LabelCheckView({ tabColor, profile, onOpenReading }: Props) {
 
   return (
     <View style={band.column}>
-      <View style={[band.box, styles.inputBox]}>
+      <View ref={walkMark.ref('label.box')} collapsable={false} style={[band.box, styles.inputBox]}>
         <Text style={styles.label}>Ingredients off the label</Text>
         <View style={styles.inputRow}>
           <AppTextInput

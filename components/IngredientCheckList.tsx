@@ -21,6 +21,7 @@ import {
   type IngredientReason,
   type IngredientReasonTone,
 } from '../lib/ingredientFlags';
+import { useWalkMark } from './WalkMark';
 
 const TONE_COLOR: Record<IngredientReasonTone, string> = {
   yours: colors.statusYellowOnSurface,
@@ -34,6 +35,7 @@ type Props = {
 };
 
 export function IngredientCheckList({ rows, onOpenReading }: Props) {
+  const walkMark = useWalkMark();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
 
   function openReason(reason: IngredientReason) {
@@ -52,7 +54,7 @@ export function IngredientCheckList({ rows, onOpenReading }: Props) {
           ) : (
             row.reasons.map((reason, reasonIndex) => (
               <View key={`${reason.kind}:${reasonIndex}`} style={styles.reasonLine}>
-                <TouchableOpacity style={styles.reasonTap} activeOpacity={0.75} onPress={() => openReason(reason)}>
+                <TouchableOpacity ref={walkMark.ref('label.reason')} style={styles.reasonTap} activeOpacity={0.75} onPress={() => openReason(reason)}>
                   <Text style={[styles.reason, { color: TONE_COLOR[reason.tone] }]}>{describeReason(reason)}</Text>
                 </TouchableOpacity>
                 {reason.readingId ? (
@@ -67,6 +69,7 @@ export function IngredientCheckList({ rows, onOpenReading }: Props) {
       ))}
       <Text style={styles.caption}>{INGREDIENT_CHECK_CAPTION}</Text>
       <TouchableOpacity
+        ref={walkMark.ref('label.sources')}
         activeOpacity={0.75}
         onPress={() => showInfoAlert('Where these lists come from', INGREDIENT_CHECK_SOURCES.join('\n\n'))}
       >

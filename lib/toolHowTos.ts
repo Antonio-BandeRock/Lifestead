@@ -455,7 +455,39 @@ export type ToolMark =
   | 'costs.recordElectric'
   | 'costs.electricity'
   | 'crops.wrong'
-  | 'crops.grow';
+  | 'crops.grow'
+  | 'bands.band'
+  | 'bands.missing'
+  | 'cooking.pick'
+  | 'insights.about'
+  | 'insights.drill'
+  | 'label.box'
+  | 'label.reason'
+  | 'label.sources'
+  | 'labs.add'
+  | 'labs.save'
+  | 'labs.test'
+  | 'lookup.portion'
+  | 'lookup.voice'
+  | 'lookup.why'
+  | 'meds.addRule'
+  | 'meds.delete'
+  | 'meds.pause'
+  | 'meds.ruleText'
+  | 'meds.saveRule'
+  | 'meds.source'
+  | 'meds.tie'
+  | 'nutrients.compare'
+  | 'nutrients.row'
+  | 'portions.meals'
+  | 'ranking.change'
+  | 'ranking.mode'
+  | 'ranking.nutrient'
+  | 'ranking.prep'
+  | 'safe.pick'
+  | 'sixDs.dimension'
+  | 'sixDs.tier'
+  | 'stage.pick';
 
 export type ToolStep = {
   say: string;
@@ -589,6 +621,32 @@ function builderHowTos(o: {
         { say: 'Find the recipe, open it, and tap Build This Recipe.' },
       ],
       forYou: 'The builder opens with the recipe filled in, ready for you to change what you need before saving it.',
+    },
+  ];
+}
+
+// The lenses that read records kept on other tabs and lay them out in
+// bands share one shape: open a band, and follow the Your Guide link when
+// nothing has been recorded yet. Insights and Trends both use it.
+function bandsHowTos(lens: string, bands: string, readNote: string, emptyNote: string): ToolHowTo[] {
+  return [
+    {
+      key: 'read',
+      title: `Read ${lens}`,
+      steps: [
+        { say: `Open a band: ${bands}.`, mark: 'bands.band' },
+        { say: 'Tap it again to fold it away.' },
+      ],
+      forYou: readNote,
+    },
+    {
+      key: 'empty',
+      title: 'Find out what this lens needs before it can show anything',
+      steps: [
+        { say: 'If a line at the top says what is missing, read it.' },
+        { say: 'Tap Where this fits in Your Guide.', mark: 'bands.missing' },
+      ],
+      forYou: emptyNote,
     },
   ];
 }
@@ -3887,7 +3945,313 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     },
     ...readingHowTos('Horticulture', 'Each entry says how strong the evidence behind it is, and lists its sources.'),
   ],
+  '/insights#i-today': bandsHowTos(
+    'your day',
+    'meals and doses, routines and checks, upkeep due, appointments this week, Days Until landing soon, or what is still open from yesterday',
+    'Today in one place, read from Schedules, Life and Garden. Nothing here writes, so change a record where it lives.',
+    'The line names the one record this lens needs first, and the link opens the step in Your Guide that adds it.',
+  ),
+  '/insights#i-signals': bandsHowTos(
+    'Signals today',
+    'the day by the clock, check-ins today, blood pressure today, or glucose around meals today',
+    'What you logged in Signals today, laid out by the clock so a reading sits beside the meal or dose near it.',
+    'The line names what to log in Signals first, and the link opens the step in Your Guide that shows how.',
+  ),
+  '/insights#nutrients': [
+    {
+      key: 'read',
+      title: 'Read what today supplied, nutrient by nutrient',
+      steps: [
+        { say: 'Read the table. Each row gives the amount so far, your target and where it stands.' },
+        { say: 'Tap a nutrient to see which foods supplied it.', mark: 'nutrients.row' },
+      ],
+      forYou: 'Food and supplements are shown apart, so you can see which of them reached a target.',
+    },
+    {
+      key: 'drill',
+      title: 'Narrow the table to one meal, one side or one item',
+      steps: [
+        { say: 'Tap the funnel button near the bottom corner.', mark: 'insights.drill' },
+        { say: 'Tap a meal, then a side or an item inside it. Tap Whole Day in the trail to go back.' },
+      ],
+      forYou: 'The table then counts only what you picked. The same funnel works on Condition Scores and Cooking & Prep.',
+    },
+    {
+      key: 'compare',
+      title: 'Compare a nutrient with something else over time',
+      steps: [
+        { say: 'Tap a nutrient to open it.', mark: 'nutrients.row', stay: true },
+        { say: 'Tap Compare with something else on Trends.', mark: 'nutrients.compare' },
+      ],
+      forYou: 'Trends opens Compare Two with this nutrient already picked, ready for a lab, a symptom or another nutrient beside it.',
+    },
+    {
+      key: 'about',
+      title: 'Read what this lens is for',
+      steps: [
+        { say: 'Tap the band at the top with the lens name to open its explanation.', mark: 'insights.about' },
+      ],
+      forYou: 'Every Insights lens has this band, so the same tap explains any of them.',
+    },
+  ],
+  '/insights#sixDs': [
+    {
+      key: 'read',
+      title: 'See how today scored for a condition',
+      steps: [
+        { say: 'Find the condition you want. Each one you track in Profile has a card of its own.' },
+        { say: 'Tap a dimension to open it.', mark: 'sixDs.dimension' },
+        { say: 'Tap a line inside it to see which foods landed there.', mark: 'sixDs.tier' },
+      ],
+      forYou: 'Each food you logged is scored against what matters for that condition, and the foods behind every score are listed.',
+    },
+    {
+      key: 'drill',
+      title: 'Score one meal on its own',
+      steps: [
+        { say: 'Tap the funnel button near the bottom corner.', mark: 'insights.drill' },
+        { say: 'Tap the meal you want.' },
+      ],
+      forYou: 'Useful for seeing which meal of the day pulled a score down.',
+    },
+  ],
+  '/insights#prep': [
+    {
+      key: 'read',
+      title: 'See which foods today need care in how they are prepared',
+      steps: [
+        { say: 'Read Needs attention today. Each line names the food and how to prepare it.' },
+        { say: 'Tap the funnel button to look at one meal only.', mark: 'insights.drill' },
+      ],
+      forYou: 'Soaking, sprouting, cooking and pairing tips, worked out from what you actually logged today.',
+    },
+  ],
+  '/insights#hydration': [
+    {
+      key: 'read',
+      title: 'See how much water today has supplied',
+      steps: [
+        { say: 'Tap the band at the top to read how water is counted.', mark: 'insights.about' },
+        { say: 'Read the total and where it came from, food and drink both.' },
+      ],
+      forYou: 'Water in soups, fruit and cooking counts as well as what you drank. Log drinks in Schedules > Hydration.',
+    },
+  ],
+  '/insights#advisories': [
+    {
+      key: 'read',
+      title: 'Read the advisories today raised',
+      steps: [
+        { say: 'Tap the band at the top to read what can raise one.', mark: 'insights.about' },
+        { say: 'Read each card. Under Today it names the food and the meal that raised it.' },
+      ],
+      forYou: 'Alcohol, coffee and plain fruit juice each carry a note about what they do. When nothing raised one, the lens says so.',
+    },
+  ],
+  '/insights#foodLookup': [
+    {
+      key: 'pick',
+      title: 'Look up a food by picking it',
+      steps: [
+        { say: 'Under Select a Food Category, tap a category.' },
+        { say: 'Tap a type, then the food, then how it is prepared.' },
+        { say: 'Tap Change beside any choice to go back and pick again.' },
+      ],
+      forYou: 'Its nutrients per 100g, for a portion you choose, and against your daily targets.',
+    },
+    {
+      key: 'say',
+      title: 'Look up a food by saying its name',
+      steps: [
+        { say: 'Under Say a Food Name, tap the microphone and say the food.', mark: 'lookup.voice' },
+        { say: 'Tap the match you meant. Tap Search again to try another name.' },
+      ],
+      forYou: 'Quicker than going category by category when you know what you are after.',
+    },
+    {
+      key: 'portion',
+      title: 'See the nutrients for the amount you would eat',
+      steps: [
+        { say: 'Pick a food first.' },
+        { say: 'In the Portion column, type the amount. Tap the unit below it to go back to the suggested serving.', mark: 'lookup.portion' },
+      ],
+      forYou: 'Every row and the share of your daily target change to that amount.',
+    },
+    {
+      key: 'why',
+      title: 'Find out why a food suits you or not',
+      steps: [
+        { say: 'Pick a food first.' },
+        { say: 'In the card for you, tap Why.', mark: 'lookup.why' },
+        { say: 'If more than one person is listed, pick the person from For.' },
+      ],
+      forYou: 'The reasons come from the conditions, allergies and diet in Profile, and from each household member who has them set.',
+    },
+  ],
+  '/insights#labelCheck': [
+    {
+      key: 'check',
+      title: 'Check an ingredient list from a label',
+      steps: [
+        { say: 'In Ingredients off the label, paste or type the list, or tap the microphone and read it out.', mark: 'label.box' },
+        { say: 'Read the ingredients that come up below. Tap a reason to read more about it.', mark: 'label.reason' },
+      ],
+      forYou: 'Each ingredient is checked against the allergies, diet and conditions in Profile, plus lists that apply to anybody.',
+    },
+    {
+      key: 'sources',
+      title: 'See where the lists come from',
+      steps: [
+        { say: 'Check a label first.', mark: 'label.box', stay: true },
+        { say: 'Tap Where these lists come from.', mark: 'label.sources' },
+      ],
+      forYou: 'Every list behind a flag is named, so you can judge it for yourself.',
+    },
+  ],
+  '/insights#nutrientRanking': [
+    {
+      key: 'byNutrient',
+      title: 'Find the foods richest in one nutrient',
+      steps: [
+        { say: 'Tap By Nutrient.', mark: 'ranking.mode' },
+        { say: 'Tap the Nutrient picker and pick one.', mark: 'ranking.nutrient' },
+        { say: 'Tap the prep picker to narrow it to raw, cooked or another state.', mark: 'ranking.prep' },
+      ],
+      forYou: 'Foods ranked by how much of it they hold per 100g, with animal and plant protein listed apart.',
+    },
+    {
+      key: 'byFood',
+      title: 'See what one food is richest in',
+      steps: [
+        { say: 'Tap By Food.', mark: 'ranking.mode' },
+        { say: 'Pick the food the way Food Lookup does.' },
+        { say: 'Tap Change food to pick another.', mark: 'ranking.change' },
+      ],
+      forYou: 'Its nutrients ranked from the most to the least, for its suggested serving.',
+    },
+  ],
+  '/insights#cookingImpact': [
+    {
+      key: 'pick',
+      title: 'See how cooking changes a nutrient',
+      steps: [
+        { say: 'Tap the Nutrient / Compound picker and pick one.', mark: 'cooking.pick' },
+        { say: 'Read how much each cooking method leaves behind, and the label under it.' },
+      ],
+      forYou: 'Directly measured, Reasoned estimate or Baseline says how sure each figure is.',
+    },
+  ],
+  '/insights#safeFoods': [
+    {
+      key: 'pick',
+      title: 'Find foods with nothing flagged for you',
+      steps: [
+        { say: 'Tap the Category picker and pick one.', mark: 'safe.pick' },
+        { say: 'Read the foods that qualify.' },
+      ],
+      forYou: 'Only foods with no concern across every condition you track, your diet and your allergies, all set in Profile.',
+    },
+  ],
+  '/insights#healingStage': [
+    {
+      key: 'stage',
+      title: 'See which foods suit each healing stage',
+      steps: [
+        { say: 'Tap Stage 1: Getting Started or Stage 2: Rebuilding.', mark: 'stage.pick' },
+        { say: 'In Stage 2, tap a round to open it.' },
+      ],
+      forYou: 'Foods that suit the stage come first. Nothing is hidden, and a food that needs care says why.',
+    },
+  ],
+  '/insights#labs': [
+    {
+      key: 'log',
+      title: 'Log a lab result',
+      steps: [
+        { say: 'Tap + Log a Result.', mark: 'labs.add' },
+        { say: 'Tap the Test picker and pick the test.', mark: 'labs.test' },
+        { say: 'Type the value, set the date it was drawn, and add the lab if you like.' },
+        { say: 'Tap Save Result.', mark: 'labs.save' },
+      ],
+      forYou: 'It joins your recent results and the lab charts on Trends > Labs.',
+    },
+    {
+      key: 'read',
+      title: 'Read your recent results',
+      steps: [
+        { say: 'Read Recent results. Each line gives the value, the date and how long ago it was.' },
+      ],
+      forYou: 'For results over time, open Labs on Trends.',
+    },
+  ],
+  '/insights#myMeds': [
+    {
+      key: 'check',
+      title: 'Read what to watch between your meds and today’s food',
+      steps: [
+        { say: 'Read Things to check. Tap Why? under one to read how it works.' },
+        { say: 'Read Worth knowing for reference that does not apply to today.' },
+      ],
+      forYou: 'Timing between your medicines, supplements and what you logged today. The prescription itself stays your prescriber’s.',
+    },
+    {
+      key: 'add',
+      title: 'Add a rule of your own',
+      steps: [
+        { say: 'Tap + Add a Rule of Your Own.', mark: 'meds.addRule' },
+        { say: 'Write what you noticed, or what you were told.', mark: 'meds.ruleText' },
+        { say: 'Pick where it came from.', mark: 'meds.source' },
+        { say: 'Tie it to a food or a medication if you like.', mark: 'meds.tie' },
+        { say: 'Tap Save Rule.', mark: 'meds.saveRule' },
+      ],
+      forYou: 'Tied to a food, it shows whenever something you logged today contains that word. Your rules are labelled as yours.',
+    },
+    {
+      key: 'manage',
+      title: 'Pause or delete a rule',
+      steps: [
+        { say: 'Under Manage Your Rules, tap Pause to stop a rule showing, or Resume to bring it back.', mark: 'meds.pause' },
+        { say: 'Tap Delete to remove it for good.', mark: 'meds.delete' },
+      ],
+      forYou: 'Pause keeps the rule for later. Delete asks first.',
+    },
+  ],
+  '/insights#portions': [
+    {
+      key: 'meals',
+      title: 'Split your daily targets across your meals',
+      steps: [
+        { say: 'Under Meals per day, tap how many meals you eat.', mark: 'portions.meals' },
+        { say: 'Read the Daily macro targets table, per day and per meal.' },
+      ],
+      forYou: 'Worked out from your resting and maintenance energy, which come from Profile.',
+    },
+  ],
+  '/insights#i-appointment': bandsHowTos(
+    'what to bring to your next appointment',
+    'the appointment, new lab results, flares, medicine and supplement changes, questions noted, or other appointments coming up',
+    'Everything since your last visit, gathered for the next one. Questions come from what you noted beside the appointment.',
+    'The line names what to add first, usually an appointment in Schedules, and the link opens the step in Your Guide.',
+  ),
+  '/insights#i-money': bandsHowTos(
+    'money this month',
+    'this month so far, against your budgets, medical bills and insurance, or food, supplements and prescriptions',
+    'Only money recorded against a day is counted, read from Life > Finances.',
+    'The line names what to record in Finances first, and the link opens the step in Your Guide.',
+  ),
+  '/insights#i-kitchen': bandsHowTos(
+    'what the kitchen holds',
+    'on hand, running low or getting old, or what the kitchen covers',
+    'Read from Life > Kitchen, so a meal can be planned from what is already there.',
+    'The line names what to record in Kitchen first, and the link opens the step in Your Guide.',
+  ),
+  '/insights#i-garden': bandsHowTos(
+    'what the garden is giving',
+    'ready or coming ready, harvests on hand, or what the garden supplied this week',
+    'Read from Garden, so what is ready can go into this week’s meals.',
+    'The line names what to record in Garden first, and the link opens the step in Your Guide.',
+  ),
 };
 
 /** Tabs whose every lens has its tools listed above. */
-export const TOOL_TABS_DONE: readonly string[] = ['/life', '/', '/schedule', '/log', '/food', '/garden'];
+export const TOOL_TABS_DONE: readonly string[] = ['/life', '/', '/schedule', '/log', '/food', '/garden', '/insights'];

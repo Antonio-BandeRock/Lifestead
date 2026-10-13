@@ -9,6 +9,7 @@ import type { ReadingRow, ReadingView } from '../lib/readingBands';
 import { YourStoryMissingLine } from './YourStoryMissingLine';
 import type { YourStoryItemKey } from '../lib/yourStory';
 import { useTabBandStyles, TabBand } from './TabBand';
+import { useWalkMark } from './WalkMark';
 
 type Props = {
   view: ReadingView | null;
@@ -49,6 +50,7 @@ function Rows({ rows, color }: { rows: ReadingRow[]; color: string }) {
 }
 
 export function ReadingBandsView({ view, loading, loadingLine, folds, color, idPrefix, missingItem }: Props) {
+  const walkMark = useWalkMark();
   const band = useTabBandStyles(color);
   if (loading) {
     return (
@@ -69,6 +71,7 @@ export function ReadingBandsView({ view, loading, loadingLine, folds, color, idP
     <>
       {view.bands.map((entry) => (
         <TabBand
+          markRef={walkMark.ref('bands.band')}
           key={entry.id}
           folds={folds}
           color={color}

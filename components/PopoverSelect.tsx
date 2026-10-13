@@ -200,6 +200,7 @@ export const PopoverSelect = memo(function PopoverSelect({
   openAbove = false,
   openBelow = false,
   onOpenChange,
+  markRef,
 }: {
   options: PopoverSelectOption[];
   selected: string | null;
@@ -274,6 +275,8 @@ export const PopoverSelect = memo(function PopoverSelect({
   // overlapping scroll region from claiming touches while a popover
   // sits on top of it.
   onOpenChange?: (isOpen: boolean) => void;
+  // A tutorial ring on the field (components/WalkMark.ts).
+  markRef?: (node: unknown) => void;
 }) {
   const fieldRef = useRef<View>(null);
   const listRef = useRef<ScrollView | null>(null);
@@ -622,7 +625,10 @@ export const PopoverSelect = memo(function PopoverSelect({
 
   return (
     <TouchableOpacity
-      ref={fieldRef}
+      ref={(node) => {
+        fieldRef.current = node;
+        markRef?.(node);
+      }}
       style={[styles.field, { minWidth, borderColor: isOpen ? colors.buttonColor : 'transparent' }]}
       onPress={openMenu}
       activeOpacity={0.7}

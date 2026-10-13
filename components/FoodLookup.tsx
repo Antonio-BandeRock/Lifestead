@@ -67,6 +67,7 @@ import { InlineSelectList } from './InlineSelectList';
 import { useScreenHeaderHeight } from './ScreenHeader';
 import { VoiceInputButton } from './VoiceInputButton';
 import { useNavigationHand } from '../lib/navigationHand';
+import { useWalkMark } from './WalkMark';
 
 const NUTRIENT_GROUP_LABELS: Record<string, string> = {
   macro: 'Macronutrients',
@@ -692,6 +693,7 @@ export function FoodLookup({
   personalize?: PersonalizationProfile;
 }) {
   const navigationHand = useNavigationHand();
+  const walkMark = useWalkMark();
   const [categories, setCategories] = useState<string[]>([]);
   // Which real "food group" tile (see FOOD_CATEGORY_GROUPS above) is
   // currently opened, revealing its own real categories as the next
@@ -1609,7 +1611,7 @@ export function FoodLookup({
           to offer (the Food step's own search box, further down, already
           covers "find something within this one category"). */}
       {(!restrictToSource || restrictToSource === 'voice') && category === '' ? (
-        <View style={[styles.voiceFoodSection, { borderColor: tabColor }]}>
+        <View ref={walkMark.ref('lookup.voice')} collapsable={false} style={[styles.voiceFoodSection, { borderColor: tabColor }]}>
           {/* Nav-hand-aware, 2026-08-17, direct request: "The microphones
               should always be navigation hand aware and should be on the
               left side closest to the left hand with the left hand
@@ -1722,7 +1724,7 @@ export function FoodLookup({
               </View>
             ) : null}
             {richFoods === null ? (
-              <View style={[styles.voiceFoodSection, { borderColor: tabColor }]}>
+              <View ref={walkMark.ref('lookup.voice')} collapsable={false} style={[styles.voiceFoodSection, { borderColor: tabColor }]}>
                 <Text style={styles.voiceFoodStatus}>Finding the richest foods…</Text>
               </View>
             ) : richFoods.length > 0 ? (
@@ -1795,7 +1797,7 @@ export function FoodLookup({
           so exactly one of "this message" or "the normal step sequence"
           ever shows at a time, never both. */}
       {resolvingFromVoice ? (
-        <View style={[styles.voiceFoodSection, { borderColor: tabColor }]}>
+        <View ref={walkMark.ref('lookup.voice')} collapsable={false} style={[styles.voiceFoodSection, { borderColor: tabColor }]}>
           <Text style={styles.voiceFoodStatus}>Finding {baseName}…</Text>
         </View>
       ) : null}
@@ -2065,6 +2067,7 @@ export function FoodLookup({
                 const forLabel = activePerson.isYou ? 'For You' : `For ${activePerson.name}`;
                 return (
                   <TouchableOpacity
+                    ref={walkMark.ref('lookup.why')}
                     style={styles.personalSummaryRow}
                     onPress={() => setPersonalDetailOpen((open) => !open)}
                     accessibilityRole="button"
@@ -2154,7 +2157,7 @@ export function FoodLookup({
             <TouchableOpacity style={styles.tableCellAmount} onPress={showPer100gInfo}>
               <Text style={[styles.tableHeaderCell, { color: tabColor }]}>Per 100g</Text>
             </TouchableOpacity>
-            <View style={styles.tableCellPortion}>
+            <View ref={walkMark.ref('lookup.portion')} collapsable={false} style={styles.tableCellPortion}>
               <Text style={[styles.tableHeaderCell, { color: tabColor }]}>Portion</Text>
               <View style={styles.portionInputRow}>
                 <AppTextInput
