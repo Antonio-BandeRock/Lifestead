@@ -7,6 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { AppState, Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import type { GestureResponderEvent } from 'react-native';
 import { ActiveInputProvider } from '../components/ActiveInputContext';
 import { AppLockGate } from '../components/AppLockGate';
 import { AppKeyboard } from '../components/AppKeyboard';
@@ -26,6 +27,9 @@ import { PendingScanWatcher } from '../components/PendingScanWatcher';
 import { RecallWatcher } from '../components/RecallWatcher';
 import { StoryReturnHost } from '../components/StoryReturnHost';
 import { StoryWalkHost } from '../components/StoryWalkHost';
+import { TutorialHost } from '../components/TutorialHost';
+import { WalkSpotlight } from '../components/WalkSpotlight';
+import { reportTap } from '../lib/walkSpots';
 import { NotYetHost } from '../components/NotYetHost';
 import { DesktopSpeechHost } from '../components/DesktopSpeechHost';
 import { UnlockSummaryHost } from '../components/UnlockSummaryHost';
@@ -64,6 +68,23 @@ import { refreshWidgets } from '../lib/widgets/taskHandler';
 // with no font-loading code anywhere; this is that infrastructure's actual
 // first use.
 SplashScreen.preventAutoHideAsync();
+
+// Where a touch began, so a drag or a scroll is not taken for a tap on a
+// ringed button (1.0.68.14, lib/walkSpots.ts).
+let touchStartedAt: { x: number; y: number } | null = null;
+
+function noteTouchStart(event: GestureResponderEvent): void {
+  const { pageX, pageY } = event.nativeEvent;
+  touchStartedAt = { x: pageX, y: pageY };
+}
+
+function noteTouchEnd(event: GestureResponderEvent): void {
+  const from = touchStartedAt;
+  touchStartedAt = null;
+  if (!from) return;
+  const { pageX, pageY } = event.nativeEvent;
+  if (Math.abs(pageX - from.x) < 10 && Math.abs(pageY - from.y) < 10) reportTap(pageX, pageY);
+}
 
 // App Lock (2026-10-02) wraps everything: while the app is locked, or while
 // the database is being moved into its encrypted file, nothing below mounts,
@@ -454,7 +475,15 @@ function UnlockedApp() {
         // (used for the tab-swipe gesture in
         // components/SwipeableTabScreen.tsx) -- without a root view of
         // this type, gestures are silently dropped on Android.
-        <GestureHandlerRootView style={{ flex: 1 }}>
+        <GestureHandlerRootView
+          style={{ flex: 1 }}
+          // A tap is reported to lib/walkSpots.ts (1.0.68.14), so a tap on
+          // the button a walk line has ringed moves the line on. Watching
+          // only, never claiming the touch, so nothing below changes. A
+          // computer reports its clicks from components/WalkSpotlight.tsx.
+          onTouchStart={Platform.OS === 'web' ? undefined : noteTouchStart}
+          onTouchEnd={Platform.OS === 'web' ? undefined : noteTouchEnd}
+        >
       {/* Stale note from the old light "Sage & Cream" theme, kept accurate
           2026-07-25: the app is dark navy now (see constants/colors.ts),
           so "dark" icons/text here is arguably wrong too, but that's a
@@ -961,6 +990,12 @@ function UnlockedApp() {
               {/* Walk me through it (1.0.51.10): the strip that stays on
                   top of every screen while one guide step is being done. */}
               <StoryWalkHost />
+              {/* Tutorials (1.0.68.14): a lens at a time, every tab in turn,
+                  lib/tutorialRun.ts. */}
+              <TutorialHost />
+              {/* The ring round the button a walk line names, and Show me.
+                  Above both strips, never catching a touch. */}
+              <WalkSpotlight />
               {/* The guided tour after setup (1.0.68.11): one thing to do
                   now, lib/guidedTour.ts. */}
               <GuidedTourHost />

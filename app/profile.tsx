@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { runSetupAgain, SETUP_RERUN_LABEL, SETUP_RERUN_LINE } from '../lib/setupFlow';
+import { TUTORIALS_OPEN_LABEL, TUTORIALS_PROFILE_LINE } from '../lib/tutorials';
 import * as Updates from 'expo-updates';
 import { restartApp } from '../lib/restartApp';
 import { Fragment, useCallback, useEffect, useRef, useState, type ComponentProps, type ReactNode } from 'react';
@@ -1027,7 +1028,7 @@ export default function ProfileScreen() {
   function renderCardHeader(key: CardSectionKey, title: string) {
     const collapsed = collapsedSections.has(key);
     return (
-      <TouchableOpacity ref={headerRef(`card:${key}`)} style={[styles.cardHeaderRow, styles.cardHeaderRowTop, walkMark(`profile.${key}` as WalkMark)]} onPress={() => toggleSection(key)} activeOpacity={0.7}>
+      <TouchableOpacity ref={(node) => { headerRef(`card:${key}`)(node); walkMark.ref(`profile.${key}` as WalkMark)(node); }} style={[styles.cardHeaderRow, styles.cardHeaderRowTop, walkMark(`profile.${key}` as WalkMark)]} onPress={() => toggleSection(key)} activeOpacity={0.7}>
         <Ionicons name={PROFILE_CARD_ICONS[key]} size={16} color={colors.tabProfile} style={textShadow} />
         <Text style={styles.cardTitle} numberOfLines={1}>{title}</Text>
         <Ionicons name={collapsed ? 'chevron-down' : 'chevron-up'} size={18} color={colors.tabProfile} style={textShadow} />
@@ -3321,6 +3322,13 @@ export default function ProfileScreen() {
         <TouchableOpacity style={styles.checkinButton} onPress={runSetupAgain}>
           <Text style={styles.checkinButtonText}>{SETUP_RERUN_LABEL}</Text>
         </TouchableOpacity>
+        {/* 1.0.68.14: "they can go through any of the tutorials for any tab
+            individually or in succession any time by selecting it in
+            Profile." */}
+        <Text style={styles.intro}>{TUTORIALS_PROFILE_LINE}</Text>
+        <TouchableOpacity style={styles.checkinButton} onPress={() => router.push('/tutorials' as Href)}>
+          <Text style={styles.checkinButtonText}>{TUTORIALS_OPEN_LABEL}</Text>
+        </TouchableOpacity>
       </View>
       {savedFlash ? (
         <View style={styles.savedFlashBox}>
@@ -5547,6 +5555,7 @@ export default function ProfileScreen() {
             {backupFolder ? (
               <>
                 <TouchableOpacity
+                  ref={walkMark.ref('profile.backupOneDrive')}
                   style={[styles.checkinButton, walkMark('profile.backupOneDrive')]}
                   disabled={backupBusy}
                   onPress={handleBackUpToOneDrive}

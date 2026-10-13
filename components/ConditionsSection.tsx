@@ -731,7 +731,7 @@ export function ConditionsSection({
               );
             })}
             {familyForm ? null : (
-              <TouchableOpacity style={[styles.primaryButton, walkMark('family.add')]} onPress={() => setFamilyForm(blankFamilyForm())}>
+              <TouchableOpacity ref={walkMark.ref('family.add')} style={[styles.primaryButton, walkMark('family.add')]} onPress={() => setFamilyForm(blankFamilyForm())}>
                 <Text style={styles.primaryButtonText}>+ Add a family member</Text>
               </TouchableOpacity>
             )}
@@ -779,6 +779,7 @@ export function ConditionsSection({
                 })}
               </View>
               <TouchableOpacity
+                ref={walkMark.ref('family.planMeals')}
                 style={[styles.checkRow, walkMark('family.planMeals')]}
                 onPress={() => setFamilyForm({ ...familyForm, includeInMealPlan: !familyForm.includeInMealPlan })}
               >

@@ -665,7 +665,10 @@ export function TabHub() {
       {onboarding.showPointer && !open ? <TabHubPointer buttonBottom={buttonBottom} /> : null}
       <TouchableOpacity
         style={[styles.button, { bottom: buttonBottom }, walkMark('hub')]}
-        ref={buttonRef}
+        ref={(node) => {
+          buttonRef.current = node;
+          walkMark.ref('hub')(node);
+        }}
         onPress={openMenu}
         onLongPress={openIconPicker}
         activeOpacity={0.85}

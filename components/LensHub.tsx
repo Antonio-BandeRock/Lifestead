@@ -770,6 +770,7 @@ export function LensHub<T extends string>({
   return (
     <>
       <TouchableOpacity
+        ref={walkMark.ref('corner')}
         style={[styles.button, { bottom: buttonBottom, left: buttonLeft }, walkMark('corner')]}
         onPress={openMenu}
         activeOpacity={0.85}

@@ -1241,7 +1241,7 @@ export default function LifeScreen() {
       <View style={band.column}>
         {!recurringForm ? (
           <View style={[band.inset, styles.actionRow]}>
-            <TouchableOpacity style={[styles.primaryButton, walkMark('finance.addBill')]} onPress={() => openAddRecurring('expense')}>
+            <TouchableOpacity ref={walkMark.ref('finance.addBill')} style={[styles.primaryButton, walkMark('finance.addBill')]} onPress={() => openAddRecurring('expense')}>
               <Text style={styles.primaryButtonText}>+ Add a bill</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.secondaryButton} onPress={() => openAddRecurring('income')}>
@@ -1619,7 +1619,7 @@ export default function LifeScreen() {
       <View style={band.column}>
         {!entryForm ? (
           <View style={band.inset}>
-            <TouchableOpacity style={[styles.primaryButton, walkMark('finance.record')]} onPress={() => setEntryForm(blankEntryForm())}>
+            <TouchableOpacity ref={walkMark.ref('finance.record')} style={[styles.primaryButton, walkMark('finance.record')]} onPress={() => setEntryForm(blankEntryForm())}>
               <Text style={styles.primaryButtonText}>+ Record something</Text>
             </TouchableOpacity>
           </View>
@@ -2073,6 +2073,7 @@ export default function LifeScreen() {
               {SECTIONS.map((entry) => (
                 <TouchableOpacity
                   key={entry.key}
+                  ref={walkMark.ref(`finance.${entry.key}` as WalkMark)}
                   style={[styles.pill, section === entry.key && styles.pillActive, walkMark(`finance.${entry.key}` as WalkMark)]}
                   onPress={() => setSection(entry.key)}
                 >

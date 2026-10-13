@@ -23,7 +23,14 @@
 //
 // Pure, so scripts/test_your_story.js checks it in plain node.
 import { ITEM_BY_KEY, itemApplies, type ItemDef, type YourStoryItemKey } from './yourStory';
-import { LATER, LATER_SUMMARY, type InterviewKind, type InterviewQuestionView, type InterviewView } from './yourStoryInterview';
+import {
+  CHANGE_LABEL,
+  LATER,
+  LATER_LABEL,
+  LATER_SUMMARY,
+  SETUP_BACK_LABEL,
+  SETUP_FINISH_LATER_LABEL,
+  type InterviewKind, type InterviewQuestionView, type InterviewView } from './yourStoryInterview';
 
 export type SetupPartKey = 'aboutYou' | 'looks' | 'health' | 'food' | 'safe' | 'days' | 'garden' | 'money' | 'home' | 'work' | 'family';
 
@@ -101,7 +108,28 @@ export const SETUP_AWAY_CAPTION = 'Setting up';
 export const SETUP_AWAY_SAVED = 'Saved. Add more here if you like, or go on.';
 export const SETUP_RERUN_LABEL = 'Run Setup Again';
 export const SETUP_RERUN_LINE =
-  'Every answer is shown as it stands, one page at a time, so you can add a condition, change how Home looks or set up something you skipped. Keep this and go on leaves an answer as it is.';
+  'Every answer is shown as it stands, one page at a time, so you can add a condition, change how Home looks or set up something you skipped.';
+
+// What each control on a setup page does, shown on the first page before
+// any of them appears (direct request, 2026-10-12: "we need to explain that
+// prior to them seeing it. They need to know what to do when they see it").
+export const SETUP_HOW_HEADING = 'How setup works';
+export const SETUP_HOW_LINES: { label: string; line: string }[] = [
+  { label: 'Answering', line: 'Pick an answer and setup moves on to the next page by itself.' },
+  {
+    label: SETUP_KEEP_LABEL,
+    line: 'Shown on a page you have answered before. Press it when the answer there is still right: it stays as it is and setup goes to the next page.',
+  },
+  { label: SETUP_BACK_LABEL, line: 'Goes to the page before, to look at it or change it.' },
+  { label: CHANGE_LABEL, line: 'Beside the answer you just gave, at the top of the next page. It opens that page again.' },
+  { label: SETUP_GO_LABEL, line: 'Opens the screen where that thing is set up, with a strip over it saying what to do there and how to come back.' },
+  { label: LATER_LABEL, line: 'Puts it off. It comes first in the tour once setup is done.' },
+  { label: SETUP_SKIP_LABEL, line: 'Leaves it out. It stays in Your Guide whenever you want it.' },
+  { label: SETUP_FINISH_LATER_LABEL, line: 'Lets you into the app now. Setup comes back the next time Lifestead opens.' },
+];
+
+// Under Keep this and go on, every time it shows.
+export const SETUP_KEEP_LINE = 'This page has an answer already. If it still stands, Keep this and go on leaves it as it is and goes to the next page.';
 
 export type SetupStep = {
   key: string;

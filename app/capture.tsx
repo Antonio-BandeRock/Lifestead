@@ -430,6 +430,7 @@ export default function CaptureScreen() {
         <View style={styles.captureCard}>
           <View style={styles.captureRow}>
             <NotesInput
+              ref={walkMark.ref('capture.box')}
               style={[styles.captureField, walkMark('capture.box')]}
               value={draft}
               onChangeText={(text) => {

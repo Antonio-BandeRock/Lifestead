@@ -292,7 +292,7 @@ export function WorkSection({ tabColor }: Props) {
         <>
           {!benefitForm ? (
             <View style={band.inset}>
-              <TouchableOpacity style={[styles.primaryButton, walkMark('work.addBenefit')]} onPress={() => setBenefitForm(blankBenefitForm())}>
+              <TouchableOpacity ref={walkMark.ref('work.addBenefit')} style={[styles.primaryButton, walkMark('work.addBenefit')]} onPress={() => setBenefitForm(blankBenefitForm())}>
                 <Text style={styles.primaryButtonText}>+ Add something you get</Text>
               </TouchableOpacity>
             </View>
@@ -637,7 +637,7 @@ export function WorkSection({ tabColor }: Props) {
                 <TouchableOpacity style={styles.secondaryButton} onPress={() => setCheckinForm(null)}>
                   <Text style={styles.secondaryButtonText}>Cancel</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.primaryButton, walkMark('work.saveWeek')]} onPress={saveCheckin}>
+                <TouchableOpacity ref={walkMark.ref('work.saveWeek')} style={[styles.primaryButton, walkMark('work.saveWeek')]} onPress={saveCheckin}>
                   <Text style={styles.primaryButtonText}>Save this week</Text>
                 </TouchableOpacity>
               </ThumbRow>

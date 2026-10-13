@@ -508,7 +508,7 @@ export function EmergencySection({ tabColor }: Props) {
             </ThumbRow>
           </View>
         ) : (
-          <TouchableOpacity style={[styles.primaryButton, walkMark('emergency.addPerson')]} onPress={() => setContactForm(blankContact())}>
+          <TouchableOpacity ref={walkMark.ref('emergency.addPerson')} style={[styles.primaryButton, walkMark('emergency.addPerson')]} onPress={() => setContactForm(blankContact())}>
             <Text style={styles.primaryButtonText}>Add someone</Text>
           </TouchableOpacity>
         )}
@@ -549,7 +549,7 @@ export function EmergencySection({ tabColor }: Props) {
             <TouchableOpacity style={styles.secondaryButton} onPress={() => setEditing(null)}>
               <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.primaryButton, walkMark('emergency.save')]} onPress={saveProfile}>
+            <TouchableOpacity ref={walkMark.ref('emergency.save')} style={[styles.primaryButton, walkMark('emergency.save')]} onPress={saveProfile}>
               <Text style={styles.primaryButtonText}>Save</Text>
             </TouchableOpacity>
           </ThumbRow>

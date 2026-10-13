@@ -21,8 +21,12 @@
 //     app starts, at the first thing still waiting.
 //   - Run Setup Again in Profile walks every page from the start, each
 //     showing its answer as it stands.
-//   - Once nothing is waiting, Setup is done, and Open Lifestead starts the
-//     tour strip (lib/guidedTour.ts).
+//   - An item's Set it up also starts that item's guide walk
+//     (lib/storyWalk.ts), so the screen it opens shows each step with the
+//     button to press ringed. 1.0.68.14.
+//   - Once nothing is waiting, Setup is done. Start the tutorials walks
+//     every tab and lens (lib/tutorials.ts, 1.0.68.14); Open Lifestead starts
+//     the tour strip (lib/guidedTour.ts).
 //
 // Every word and answer of a question is the interview's
 // (components/YourStoryInterview.tsx in 'setup' mode), so nothing here asks
@@ -40,6 +44,10 @@ import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { showGuidedTour } from '../lib/guidedTourDb';
+import { setStoryWalk, startStoryWalk } from '../lib/storyWalk';
+import { startTutorials } from '../lib/tutorialDb';
+import { SETUP_TUTORIALS_LABEL, SETUP_TUTORIALS_LINE } from '../lib/tutorials';
+import { GUIDES } from '../lib/yourStoryGuides';
 import {
   buildSetupFlow,
   firstOpenStep,
@@ -47,7 +55,10 @@ import {
   SETUP_AWAY_CAPTION,
   SETUP_AWAY_SAVED,
   SETUP_GO_LABEL,
+  SETUP_HOW_HEADING,
+  SETUP_HOW_LINES,
   SETUP_KEEP_LABEL,
+  SETUP_KEEP_LINE,
   SETUP_NEXT_LABEL,
   SETUP_RERUN_LINE,
   SETUP_SKIP,
@@ -57,7 +68,7 @@ import {
   subscribeRunSetupAgain,
   type SetupStep,
 } from '../lib/setupFlow';
-import type { StoryDestination } from '../lib/yourStory';
+import type { StoryDestination, YourStoryItemKey } from '../lib/yourStory';
 import { setYourStoryItemAside } from '../lib/yourStoryDb';
 import {
   CHANGE_LABEL,
@@ -94,6 +105,15 @@ const LATER_FROM_AWAY = new Set(['meds', 'backup', 'security']);
 
 // While a screen is open for an item, how often its record is looked for.
 const AWAY_LOOK_MS = 4000;
+
+// The guide step that sets up an item, so its screen can show the steps.
+function guideWalkForItem(item: YourStoryItemKey): { guide: (typeof GUIDES)[number]['key']; entryKey: string } | null {
+  for (const guide of GUIDES) {
+    const entry = guide.entries.find((candidate) => candidate.item === item);
+    if (entry) return { guide: guide.key, entryKey: entry.key };
+  }
+  return null;
+}
 
 export function FirstSetup() {
   const router = useRouter();
@@ -193,15 +213,18 @@ export function FirstSetup() {
   }, [phase, load]);
 
   const go = useCallback(
-    (destination: Destination) => {
+    (destination: Destination, item?: YourStoryItemKey, onRecord?: boolean) => {
       setPhase('away');
       goToStoryDestination(router, destination);
+      const walk = item ? guideWalkForItem(item) : null;
+      if (walk) startStoryWalk(walk.guide, walk.entryKey, !!onRecord);
     },
     [router],
   );
 
   const moveOn = useCallback(
     (key: string) => {
+      setStoryWalk(null);
       advanceFrom.current = key;
       setPhase('asking');
       void load();
@@ -250,6 +273,7 @@ export function FirstSetup() {
                 style={styles.awayButton}
                 accessibilityRole="button"
                 onPress={() => {
+                  setStoryWalk(null);
                   returning.current = true;
                   setPhase('asking');
                   void load();
@@ -286,7 +310,7 @@ export function FirstSetup() {
         {item.summary ? <Text style={styles.caption}>{item.summary}</Text> : null}
         <View style={styles.links}>
           {destination ? (
-            <TouchableOpacity style={styles.goButton} accessibilityRole="button" onPress={() => go(destination)}>
+            <TouchableOpacity style={styles.goButton} accessibilityRole="button" onPress={() => go(destination, def.key, item.onRecord)}>
               <Text style={styles.goText}>{SETUP_GO_LABEL}</Text>
               <Ionicons name="arrow-forward" size={16} color={colors.textOnButton} />
             </TouchableOpacity>
@@ -329,6 +353,23 @@ export function FirstSetup() {
         {phase === 'done' || !step || !part ? (
           <View style={[styles.band, styles.bandAccent]}>
             <Text style={styles.heading}>{SETUP_DONE_HEADING}</Text>
+            {/* 1.0.68.14: "When the user has completed the profile settings
+                the app needs, then they are offered the tutorials". */}
+            <Text style={styles.lead}>{SETUP_TUTORIALS_LINE}</Text>
+            <TouchableOpacity
+              style={styles.goButton}
+              accessibilityRole="button"
+              onPress={() => {
+                reviewRef.current = false;
+                setPhase('closed');
+                void startTutorials({ kind: 'all' }).then((started) => {
+                  if (started) router.navigate('/');
+                });
+              }}
+            >
+              <Text style={styles.goText}>{SETUP_TUTORIALS_LABEL}</Text>
+              <Ionicons name="school-outline" size={16} color={colors.textOnButton} />
+            </TouchableOpacity>
             <Text style={styles.lead}>{SETUP_DONE_LINE}</Text>
             <TouchableOpacity
               style={styles.goButton}
@@ -351,6 +392,17 @@ export function FirstSetup() {
               <Text style={styles.lead}>{part.line}</Text>
               {isFirst ? <Text style={styles.caption}>{reviewRef.current ? SETUP_RERUN_LINE : SETUP_LEAD}</Text> : null}
             </View>
+            {isFirst ? (
+              <View style={styles.band}>
+                <Text style={styles.question}>{SETUP_HOW_HEADING}</Text>
+                {SETUP_HOW_LINES.map((entry) => (
+                  <View key={entry.label} style={styles.howRow}>
+                    <Text style={styles.howLabel}>{entry.label}</Text>
+                    <Text style={styles.caption}>{entry.line}</Text>
+                  </View>
+                ))}
+              </View>
+            ) : null}
             {last && last.settled ? (
               <View style={[styles.band, styles.answeredRow]}>
                 <Ionicons name="checkmark-circle" size={16} color={colors.primary} style={textShadow} />
@@ -377,18 +429,21 @@ export function FirstSetup() {
             ) : (
               renderItem(step)
             )}
-            {before || step.settled ? (
+            {step.settled ? (
+              <View style={styles.band}>
+                <Text style={styles.caption}>{SETUP_KEEP_LINE}</Text>
+                <TouchableOpacity style={styles.goButton} accessibilityRole="button" onPress={() => moveOn(step.key)}>
+                  <Text style={styles.goText}>{SETUP_KEEP_LABEL}</Text>
+                  <Ionicons name="arrow-forward" size={16} color={colors.textOnButton} />
+                </TouchableOpacity>
+              </View>
+            ) : null}
+            {before ? (
               <View style={[styles.band, styles.links]}>
                 {before ? (
                   <TouchableOpacity style={styles.link} accessibilityRole="button" onPress={() => setCurrent(before.key)}>
                     <Ionicons name="arrow-back" size={13} color={colors.primary} style={textShadow} />
                     <Text style={styles.linkText}>{SETUP_BACK_LABEL}</Text>
-                  </TouchableOpacity>
-                ) : null}
-                {step.settled ? (
-                  <TouchableOpacity style={styles.link} accessibilityRole="button" onPress={() => moveOn(step.key)}>
-                    <Text style={styles.linkText}>{SETUP_KEEP_LABEL}</Text>
-                    <Ionicons name="arrow-forward" size={13} color={colors.primary} style={textShadow} />
                   </TouchableOpacity>
                 ) : null}
               </View>
@@ -439,6 +494,8 @@ const styles = StyleSheet.create({
   linkMuted: { ...typography.caption, color: colors.textMuted, ...textShadow },
   answeredRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 8 },
   answeredText: { flex: 1, gap: 1 },
+  howRow: { gap: 1 },
+  howLabel: { ...typography.body, color: colors.primary, ...textShadow },
   answeredLine: { ...typography.body, color: colors.textPrimary, ...textShadow },
   laterRow: { flexDirection: 'row', alignItems: 'center', gap: 4, alignSelf: 'flex-start', paddingVertical: 2 },
   laterLabel: { ...typography.body, color: colors.primary, ...textShadow },

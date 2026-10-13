@@ -837,13 +837,13 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
         <>
           {addMode === null ? (
             <View style={styles.myMedsAddRow}>
-              <TouchableOpacity style={[styles.addButton, walkMark('myMeds.add')]} onPress={() => openAddMed('prescription')}>
+              <TouchableOpacity ref={walkMark.ref('myMeds.add')} style={[styles.addButton, walkMark('myMeds.add')]} onPress={() => openAddMed('prescription')}>
                 <Text style={styles.addButtonText}>+ Prescription</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.addButton, walkMark('myMeds.add')]} onPress={() => openAddMed('otc')}>
+              <TouchableOpacity ref={walkMark.ref('myMeds.add')} style={[styles.addButton, walkMark('myMeds.add')]} onPress={() => openAddMed('otc')}>
                 <Text style={styles.addButtonText}>+ OTC drug</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.addButton, walkMark('myMeds.add')]} onPress={openAddSupplement}>
+              <TouchableOpacity ref={walkMark.ref('myMeds.add')} style={[styles.addButton, walkMark('myMeds.add')]} onPress={openAddSupplement}>
                 <Text style={styles.addButtonText}>+ Supplement</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.addButton} onPress={() => router.push('/medicine-label')}>

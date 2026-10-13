@@ -247,6 +247,7 @@ export function DidIDoItSection({ tabColor }: Props) {
         {summaryLine ? <Text style={styles.rowMeta}>{summaryLine}</Text> : null}
         {!form ? (
           <TouchableOpacity
+            ref={walkMark.ref('didIDoIt.add')}
             style={[styles.primaryButton, walkMark('didIDoIt.add')]}
             onPress={() => setForm(emptyForm())}
           >

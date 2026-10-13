@@ -685,6 +685,9 @@ const back = load('lib/storyReturn.ts');
     setup.SETUP_AWAY_SAVED,
     setup.SETUP_RERUN_LINE,
     setup.SETUP_KEEP_LABEL,
+    setup.SETUP_KEEP_LINE,
+    setup.SETUP_HOW_HEADING,
+    ...setup.SETUP_HOW_LINES.flatMap((entry) => [entry.label, entry.line]),
   ]) {
     check(!/[–—]| -- |(real|genuinely?)|d+%/i.test(text), `setup text reads plainly: ${text}`);
   }

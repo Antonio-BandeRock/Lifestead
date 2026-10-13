@@ -456,7 +456,7 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
         <Text style={styles.cardTitle}>Upkeep</Text>
         <Text style={styles.bodyText}>{describeUpkeepSummary(summary)}</Text>
         {!form ? (
-          <TouchableOpacity style={[styles.primaryButton, walkMark('upkeep.add')]} onPress={() => setForm(blankForm())}>
+          <TouchableOpacity ref={walkMark.ref('upkeep.add')} style={[styles.primaryButton, walkMark('upkeep.add')]} onPress={() => setForm(blankForm())}>
             <Text style={styles.primaryButtonText}>+ Add something</Text>
           </TouchableOpacity>
         ) : null}

@@ -1796,6 +1796,7 @@ function PlotsAndPlantingsLens({
                   </View>
                 ) : (
                   <TouchableOpacity
+                    ref={walkMark.ref('garden.addPlanting')}
                     style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }, walkMark('garden.addPlanting')]}
                     onPress={() => setAddingPlantingToPlot(plot.id)}
                   >
@@ -2109,6 +2110,7 @@ function PlotsAndPlantingsLens({
       ) : (
         <View style={band.inset}>
           <TouchableOpacity
+            ref={walkMark.ref('garden.addArea')}
             style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }, walkMark('garden.addArea')]}
             onPress={handleShowAddPlot}
           >

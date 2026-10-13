@@ -1774,7 +1774,7 @@ function MealsLens() {
             </View>
 
             {!showForm ? (
-              <TouchableOpacity style={[styles.addButton, walkMark('schedule.addMeal')]} onPress={openAddForm}>
+              <TouchableOpacity ref={walkMark.ref('schedule.addMeal')} style={[styles.addButton, walkMark('schedule.addMeal')]} onPress={openAddForm}>
                 <Text style={styles.addButtonText}>+ Schedule a meal</Text>
               </TouchableOpacity>
             ) : (
@@ -1992,7 +1992,7 @@ function MealsLens() {
                     <View style={styles.rowActions}>
                       {item.status === 'planned' ? (
                         <>
-                          <TouchableOpacity style={walkMark('schedule.logNow')} onPress={() => handleLogNow(item)}>
+                          <TouchableOpacity ref={walkMark.ref('schedule.logNow')} style={walkMark('schedule.logNow')} onPress={() => handleLogNow(item)}>
                             <Text style={styles.actionTextPrimary}>Log now</Text>
                           </TouchableOpacity>
                           {!item.leftoverOf && !item.leftoverOfMeal && (item.sourceFavoriteId || item.sourceMealId) ? (
@@ -5182,7 +5182,7 @@ function HydrationLens() {
           </View>
 
           {!showForm ? (
-            <TouchableOpacity style={[styles.addButton, walkMark('schedule.addDrink')]} onPress={openAddForm}>
+            <TouchableOpacity ref={walkMark.ref('schedule.addDrink')} style={[styles.addButton, walkMark('schedule.addDrink')]} onPress={openAddForm}>
               <Text style={styles.addButtonText}>+ Schedule a drink</Text>
             </TouchableOpacity>
           ) : (
@@ -5831,7 +5831,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
                   {doseFormTreatmentId === treatment.id ? (
                     renderDoseForm(treatment)
                   ) : (
-                    <TouchableOpacity style={walkMark('meds.addTime')} onPress={() => openDoseForm(treatment.id)}>
+                    <TouchableOpacity ref={walkMark.ref('meds.addTime')} style={walkMark('meds.addTime')} onPress={() => openDoseForm(treatment.id)}>
                       <Text style={styles.actionTextPrimary}>+ Add a reminder time</Text>
                     </TouchableOpacity>
                   )}

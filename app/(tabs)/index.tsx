@@ -2883,6 +2883,7 @@ export default function HomeScreen() {
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
+            ref={walkMark.ref('home.checkin')}
             style={[styles.feelingStartButton, { borderColor: tabColorFor('/log') }, walkMark('home.checkin')]}
             onPress={openFeelingPicker}
             activeOpacity={0.85}

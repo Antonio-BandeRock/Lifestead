@@ -8,7 +8,7 @@
 // walk carries on the moment they leave it again.
 import { Ionicons } from '@expo/vector-icons';
 import { usePathname, useRouter, type Href } from 'expo-router';
-import { useCallback, useEffect, useMemo, useState, type ComponentProps } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type ComponentProps } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../constants/colors';
@@ -28,6 +28,7 @@ import {
   WALK_WAITING_LINE,
   canStepBack,
   getStoryWalk,
+  tapMovesOn,
   setStoryWalk,
   setWalkMark,
   subscribeStoryWalk,
@@ -40,6 +41,7 @@ import {
   type WalkPoint,
 } from '../lib/storyWalk';
 import { currentTellClaudeScreen, subscribeTellClaudeScreen, type TellClaudeScreen } from '../lib/tellClaude';
+import { SHOW_ME_LABEL, requestShowMe, subscribeSpotTapped } from '../lib/walkSpots';
 import { loadYourStoryWithGuides } from '../lib/yourStoryDb';
 
 // How often the record is looked for while a walk waits on it.
@@ -126,6 +128,21 @@ export function StoryWalkHost() {
   }, [mark]);
   useEffect(() => () => setWalkMark(null), []);
 
+  // A tap on the ringed button moves the line on by itself (1.0.68.14), so
+  // Next is only needed for a line with no one button to press.
+  const latest = { walk, steps, at, step: hidden || saved ? null : step };
+  const latestRef = useRef(latest);
+  latestRef.current = latest;
+  useEffect(
+    () =>
+      subscribeSpotTapped((name) => {
+        const now = latestRef.current;
+        if (!now.walk || !tapMovesOn(now.step, name)) return;
+        setStoryWalk(walkNext(now.walk, now.steps, now.at));
+      }),
+    [],
+  );
+
   if (hidden) return null;
   const waits = !walk.startedDone && !!(entry.item || entry.record);
 
@@ -200,6 +217,7 @@ export function StoryWalkHost() {
                 onPress={() => setStoryWalk(walkNext(walk, steps, at))}
               />
             ) : null}
+            {mark ? <WalkButton icon="hand-left-outline" label={SHOW_ME_LABEL} onPress={requestShowMe} /> : null}
             <WalkButton icon="compass-outline" label={WALK_STORY_LABEL} onPress={toStory} />
             <WalkButton icon="close" label={finished ? WALK_CLOSE_LABEL : WALK_STOP_LABEL} onPress={stop} />
           </View>
@@ -209,7 +227,7 @@ export function StoryWalkHost() {
   );
 }
 
-function WalkButton({
+export function WalkButton({
   icon,
   label,
   onPress,

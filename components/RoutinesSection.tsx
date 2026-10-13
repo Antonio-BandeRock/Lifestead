@@ -374,6 +374,7 @@ export function RoutinesSection({ tabColor }: Props) {
         </Text>
         {!form ? (
           <TouchableOpacity
+            ref={walkMark.ref('routines.add')}
             style={[styles.primaryButton, walkMark('routines.add')]}
             onPress={() => {
               setOccasionForm(null);
@@ -629,6 +630,7 @@ export function RoutinesSection({ tabColor }: Props) {
 
             {routine.steps.length > 0 ? (
               <TouchableOpacity
+                ref={walkMark.ref('routines.walk')}
                 style={[styles.primaryButton, walkMark('routines.walk')]}
                 onPress={() => router.push({ pathname: '/routine', params: { id: routine.id } })}
               >
@@ -835,6 +837,7 @@ export function RoutinesSection({ tabColor }: Props) {
                   </View>
                 ) : (
                   <TouchableOpacity
+                    ref={walkMark.ref('routines.addStep')}
                     style={[styles.primaryButton, walkMark('routines.addStep')]}
                     onPress={() => {
                       setCheckForm(null);

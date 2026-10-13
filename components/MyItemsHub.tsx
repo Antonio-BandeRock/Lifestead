@@ -216,6 +216,7 @@ export function MyItemsHub({
     <>
       {hideTriggerButton ? null : (
         <TouchableOpacity
+          ref={walkMark.ref('bookmarks')}
           style={[styles.button, { bottom: buttonBottom, left: buttonLeft }, walkMark('bookmarks')]}
           onPress={() => setOpen(true)}
           activeOpacity={0.85}

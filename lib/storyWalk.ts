@@ -157,7 +157,9 @@ export const WALK_GROW_LABEL = 'Show all of this';
  * each line's button mark when the step is one that carries them. */
 export function walkSteps(entry: GuideEntry): WalkStep[] {
   const steps = walkLines(entry);
-  if (!walkMarks(entry)) return steps;
+  // The getting-there lines carry their marks for the tutorials, so a step
+  // that is not outlined has them taken off here.
+  if (!walkMarks(entry)) return steps.map(({ mark: _mark, ...rest }) => rest);
   const tapMarks = TAP_MARKS[entry.key] ?? [];
   const firstTap = steps.length - (entry.taps ?? []).length;
   return steps.map((step, index) => {
@@ -192,11 +194,21 @@ function walkLines(entry: GuideEntry): WalkStep[] {
       ...taps,
     ];
   }
-  const tab = TAB_NAMES[pathname];
-  if (!tab) return taps;
   const lens = params ? Object.values(params)[0] : undefined;
-  const lensName = lens ? LENS_NAMES[pathname]?.[lens] : undefined;
-  const steps: WalkStep[] = [{ say: `${HUB} and choose ${tab}.`, point: 'hub', until: { pathname } }];
+  return [...gettingThere(pathname, lens, lens ? LENS_NAMES[pathname]?.[lens] : undefined), ...taps];
+}
+
+/**
+ * The lines that reach a tab, and a lens on it, from anywhere: the round
+ * button, then the corner lens button (or the bookmarks button). Shared
+ * with the tutorials (lib/tutorials.ts), which name every lens. Each line
+ * carries its button's mark, so the ring and Show me find it.
+ */
+export function gettingThere(pathname: string, lens?: string, lensName?: string): WalkStep[] {
+  if (pathname === '/') return [{ say: GO_HOME, point: 'hub', mark: 'hub', until: { pathname: '/' } }];
+  const tab = TAB_NAMES[pathname];
+  if (!tab) return [];
+  const steps: WalkStep[] = [{ say: `${HUB} and choose ${tab}.`, point: 'hub', mark: 'hub', until: { pathname } }];
   if (lens && lensName) {
     const bookmarks = MY_ITEMS_LENSES[pathname]?.includes(lens);
     steps.push({
@@ -204,10 +216,11 @@ function walkLines(entry: GuideEntry): WalkStep[] {
         ? `Tap the small bookmarks button just to the left of the round one, and choose ${lensName}.`
         : `Tap the button in the bottom-left corner and choose ${lensName}.`,
       point: bookmarks ? 'bookmarks' : 'corner',
+      mark: bookmarks ? 'bookmarks' : 'corner',
       until: { pathname, lens: lensName },
     });
   }
-  return [...steps, ...taps];
+  return steps;
 }
 
 /**
@@ -261,24 +274,39 @@ export function walkEntry(walk: StoryWalk): GuideEntry | null {
 }
 
 /** Pressing Next at a position. */
-export function walkNext(walk: StoryWalk, steps: WalkStep[], at: number): StoryWalk {
+export function walkNext<T extends { cursor: number; skipped: number[] }>(walk: T, steps: WalkStep[], at: number): T {
   const skipped = steps[at]?.until && !walk.skipped.includes(at) ? [...walk.skipped, at] : walk.skipped;
   return { ...walk, cursor: at + 1, skipped };
 }
 
-export function walkBack(walk: StoryWalk, at: number): StoryWalk {
+export function walkBack<T extends { cursor: number }>(walk: T, at: number): T {
   return { ...walk, cursor: Math.max(0, at - 1) };
 }
 
-// The button outlined right now, set by components/StoryWalkHost.tsx from
-// the line it is showing and read by every walkMark function.
+/**
+ * Whether a tap on an outlined button moves the line on (1.0.68.14). Only a
+ * tap line does: a getting-there line already moves on when the screen it
+ * names opens, and the round button only opens the menu.
+ */
+export function tapMovesOn(step: WalkStep | null | undefined, tapped: string): boolean {
+  return !!step && !step.until && step.mark === tapped;
+}
+
+// The button outlined right now, set by components/StoryWalkHost.tsx (a
+// guide walk) or components/TutorialHost.tsx (a tutorial) from the line it
+// is showing, and read by every walkMark function. Each keeps its own slot,
+// so one clearing its mark never wipes the other's; only one runs at a time.
+export type WalkMarkSource = 'story' | 'tutorial';
+const marks: Record<WalkMarkSource, WalkMark | null> = { story: null, tutorial: null };
 let activeMark: WalkMark | null = null;
 const markListeners = new Set<(value: WalkMark | null) => void>();
 
-export function setWalkMark(value: WalkMark | null): void {
-  if (value === activeMark) return;
-  activeMark = value;
-  for (const listener of markListeners) listener(value);
+export function setWalkMark(value: WalkMark | null, source: WalkMarkSource = 'story'): void {
+  marks[source] = value;
+  const next = marks.tutorial ?? marks.story;
+  if (next === activeMark) return;
+  activeMark = next;
+  for (const listener of markListeners) listener(next);
 }
 
 export function getWalkMark(): WalkMark | null {
