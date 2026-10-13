@@ -32,6 +32,7 @@ import { summarizeSourceSplit } from '../../lib/supplementWindow';
 import { colors } from '../../constants/colors';
 import { CalmBands, HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING } from '../../components/HomeSectionBand';
 import { makeTabBandStyles, TabBand } from '../../components/TabBand';
+import { useWalkMark } from '../../components/WalkMark';
 import { useBandFolds } from '../../hooks/useBandFolds';
 import { useFloatingButtonScrollPadding } from '../../constants/floatingButton';
 import { textShadow, typography } from '../../constants/typography';
@@ -1184,6 +1185,7 @@ const MONTH_RANGE_OPTIONS = [
 ] as const;
 
 export default function TrendsScreen() {
+  const walkMark = useWalkMark();
   useRegisterScreenHelp('Trends', TRENDS_HELP_SECTIONS, '/trends');
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const folds = useBandFolds();
@@ -1762,6 +1764,7 @@ export default function TrendsScreen() {
             <Text style={[styles.trialButtonText, { color: colors.textMuted }]}>Cancel</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            ref={walkMark.ref('patterns.save')}
             style={[styles.trialButton, { borderColor: TAB_COLOR }]}
             disabled={savingRule}
             onPress={handleSaveRule}
@@ -1879,6 +1882,7 @@ export default function TrendsScreen() {
                     const active = dateRangeSelection.kind !== 'custom' && rangeSelectionKey(dateRangeSelection) === pill.key;
                     return (
                       <TouchableOpacity
+                        ref={walkMark.ref('trends.range')}
                         key={pill.key}
                         style={[styles.pill, active && styles.pillActive]}
                         onPress={() => {
@@ -1891,6 +1895,7 @@ export default function TrendsScreen() {
                     );
                   })}
                   <TouchableOpacity
+                    ref={walkMark.ref('trends.custom')}
                     style={[styles.pill, dateRangeSelection.kind === 'custom' && styles.pillActive]}
                     onPress={() => setShowCustomPicker((current) => !current)}
                   >
@@ -1988,6 +1993,7 @@ export default function TrendsScreen() {
                   const chosen = months === option.value;
                   return (
                     <TouchableOpacity
+                      ref={walkMark.ref('trends.range')}
                       key={option.value}
                       style={[styles.pill, chosen && styles.pillActive]}
                       onPress={() =>
@@ -2007,6 +2013,7 @@ export default function TrendsScreen() {
               <View style={[band.inset, styles.pillRow]}>
                 {DAY_RANGE_OPTIONS.map((option) => (
                   <TouchableOpacity
+                    ref={walkMark.ref('trends.range')}
                     key={option.value}
                     style={[styles.pill, days === option.value && styles.pillActive]}
                     onPress={() => setDays(option.value)}
@@ -2018,7 +2025,7 @@ export default function TrendsScreen() {
             )}
 
             {offersCycleShading ? (
-              <View style={[band.box, styles.shadeRow]}>
+              <View ref={walkMark.ref('trends.cycle')} collapsable={false} style={[band.box, styles.shadeRow]}>
                 <View style={styles.patternRowText}>
                   <Text style={styles.patternRowTitle}>{CYCLE_SHADING_SWITCH_LABEL}</Text>
                   <Text style={styles.patternRowCaption}>{CYCLE_SHADING_SWITCH_HELP}</Text>
@@ -2036,7 +2043,7 @@ export default function TrendsScreen() {
             {listedClosedHere ? null : lens === 'nutrients' ? (
               <>
                 {fiberChart && !resolvedRange.isSingleDay ? (
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:nutrients:fiber"
@@ -2070,6 +2077,7 @@ export default function TrendsScreen() {
                 >
                   {CORE_NUTRIENT_CODES.map((code) => (
                     <TouchableOpacity
+                      ref={walkMark.ref('trends.nutrient')}
                       key={code}
                       style={[styles.pill, selectedNutrient === code && styles.pillActive]}
                       onPress={() => setSelectedNutrient(code)}
@@ -2186,7 +2194,7 @@ export default function TrendsScreen() {
                 </View>
               ) : (
                 <>
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:variety:distinct"
@@ -2206,7 +2214,7 @@ export default function TrendsScreen() {
                     ) : null}
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:variety:plants"
@@ -2232,7 +2240,7 @@ export default function TrendsScreen() {
                     <Text style={styles.patternRowCaption}>{varietySummary.plants.method}</Text>
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:variety:rotation"
@@ -2253,7 +2261,7 @@ export default function TrendsScreen() {
                     ) : null}
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:variety:gut"
@@ -2269,7 +2277,7 @@ export default function TrendsScreen() {
                     ) : null}
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:variety:methods"
@@ -2301,7 +2309,7 @@ export default function TrendsScreen() {
                     ) : null}
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:variety:packaged"
@@ -2335,7 +2343,7 @@ export default function TrendsScreen() {
                     ) : null}
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:variety:safelist"
@@ -2358,7 +2366,7 @@ export default function TrendsScreen() {
                     ) : null}
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:variety:garden"
@@ -2411,7 +2419,7 @@ export default function TrendsScreen() {
                 </View>
               ) : (
                 <>
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:keepingUp:checks"
@@ -2432,7 +2440,7 @@ export default function TrendsScreen() {
                     <Text style={styles.patternRowCaption}>{keepingUpSummary.checks.caveat}</Text>
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:keepingUp:routines"
@@ -2464,7 +2472,7 @@ export default function TrendsScreen() {
                     ) : null}
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:keepingUp:captures"
@@ -2485,7 +2493,7 @@ export default function TrendsScreen() {
                     ) : null}
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:keepingUp:upkeep"
@@ -2503,7 +2511,7 @@ export default function TrendsScreen() {
                     <Text style={styles.patternRowCaption}>{keepingUpSummary.upkeep.historyNote}</Text>
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:keepingUp:work"
@@ -2542,7 +2550,7 @@ export default function TrendsScreen() {
                 </View>
               ) : (
                 <>
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:harvest:weight"
@@ -2584,7 +2592,7 @@ export default function TrendsScreen() {
                     ) : null}
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:harvest:timing"
@@ -2613,7 +2621,7 @@ export default function TrendsScreen() {
                     <Text style={styles.patternRowCaption}>{harvestSummary.timing.caveat}</Text>
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:harvest:compost"
@@ -2640,7 +2648,7 @@ export default function TrendsScreen() {
                       <Text style={styles.patternRowCaption}>{harvestSummary.compost.unmeasuredLine}</Text>
                     ) : null}
                   </TabBand>
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:harvest:care"
@@ -2661,7 +2669,7 @@ export default function TrendsScreen() {
                     )}
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:harvest:sharing"
@@ -2711,6 +2719,7 @@ export default function TrendsScreen() {
                         const chosen = conditionsSummary.band?.measurement === entry.code;
                         return (
                           <TouchableOpacity
+                            ref={walkMark.ref('trends.measure')}
                             key={entry.code}
                             style={[styles.pill, chosen && styles.pillActive]}
                             onPress={() => setPickedMeasurement(entry.code)}
@@ -2722,7 +2731,7 @@ export default function TrendsScreen() {
                     </View>
                   ) : null}
                   {conditionsSummary.band ? (
-                    <TabBand
+                    <TabBand markRef={walkMark.ref('trends.band')}
                       folds={folds}
                       color={TAB_COLOR}
                       id="trends:conditions:measurement"
@@ -2739,7 +2748,7 @@ export default function TrendsScreen() {
                     </TabBand>
                   ) : null}
                   {conditionsSummary.device ? (
-                    <TabBand
+                    <TabBand markRef={walkMark.ref('trends.band')}
                       folds={folds}
                       color={TAB_COLOR}
                       id="trends:conditions:device"
@@ -2786,7 +2795,7 @@ export default function TrendsScreen() {
                       ))}
                     </TabBand>
                   ) : null}
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:conditions:measuring"
@@ -2800,7 +2809,7 @@ export default function TrendsScreen() {
                       </View>
                     ))}
                   </TabBand>
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:conditions:areas"
@@ -2831,7 +2840,7 @@ export default function TrendsScreen() {
                 </View>
               ) : (
                 <>
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:cost:condition"
@@ -2869,7 +2878,7 @@ export default function TrendsScreen() {
                     <Text style={styles.patternRowCaption}>{costSummary.condition.sourcesNote}</Text>
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:cost:food"
@@ -2896,7 +2905,7 @@ export default function TrendsScreen() {
                     <Text style={styles.patternRowCaption}>{costSummary.food.note}</Text>
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:cost:growing"
@@ -2924,7 +2933,7 @@ export default function TrendsScreen() {
                     <Text style={styles.patternRowCaption}>{costSummary.growing.caveat}</Text>
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:cost:supplements"
@@ -2954,7 +2963,7 @@ export default function TrendsScreen() {
                     <Text style={styles.patternRowCaption}>{costSummary.supplements.boundary}</Text>
                   </TabBand>
 
-                  <TabBand
+                  <TabBand markRef={walkMark.ref('trends.band')}
                     folds={folds}
                     color={TAB_COLOR}
                     id="trends:cost:plate"
@@ -3011,7 +3020,7 @@ export default function TrendsScreen() {
                   {trackerSeries.map(({ tracker, points }) => {
                     const bounds = trackerChartBounds(tracker.kind, points);
                     return (
-                      <TabBand
+                      <TabBand markRef={walkMark.ref('trends.band')}
                         key={tracker.id}
                         folds={folds}
                         color={TAB_COLOR}
@@ -3074,7 +3083,7 @@ export default function TrendsScreen() {
                 {DAILY_SCALES.map((scale) => {
                   const points = scaleSeries?.[scale.key] ?? [];
                   return (
-                    <TabBand
+                    <TabBand markRef={walkMark.ref('trends.band')}
                       key={scale.key}
                       folds={folds}
                       color={TAB_COLOR}
@@ -3096,7 +3105,7 @@ export default function TrendsScreen() {
                     </TabBand>
                   );
                 })}
-                <TabBand folds={folds} color={TAB_COLOR} id="trends:symptoms:bowel" title="Bowel Movements" icon="ellipse-outline">
+                <TabBand markRef={walkMark.ref('trends.band')} folds={folds} color={TAB_COLOR} id="trends:symptoms:bowel" title="Bowel Movements" icon="ellipse-outline">
                   <View style={styles.chartCard}>
                     <Text style={styles.caption}>
                       {bowelRangeSentence(bowelEntries, resolvedRange.startDate, resolvedRange.endDate)}
@@ -3118,7 +3127,7 @@ export default function TrendsScreen() {
                     )}
                   </View>
                 </TabBand>
-                <TabBand folds={folds} color={TAB_COLOR} id="trends:symptoms:body" title="Where on the Body" icon="body-outline">
+                <TabBand markRef={walkMark.ref('trends.band')} folds={folds} color={TAB_COLOR} id="trends:symptoms:body" title="Where on the Body" icon="body-outline">
                   <View style={styles.chartCard}>
                     <Text style={styles.caption}>{markedSentence(bodyEntries)}</Text>
                     {regionDays(bodyEntries).map((region) => (
@@ -3239,7 +3248,7 @@ export default function TrendsScreen() {
                   const sleepOutside = recentOutsideSentence(recentOutside(sleep.map((point) => point.value)), 'nights');
                   return (
                     <>
-                      <TabBand folds={folds} color={TAB_COLOR} id={'trends:movement:steps-per-day'} title={'Steps per day'} icon="walk-outline">
+                      <TabBand markRef={walkMark.ref('trends.band')} folds={folds} color={TAB_COLOR} id={'trends:movement:steps-per-day'} title={'Steps per day'} icon="walk-outline">
                         <View style={styles.chartCard}>
                         <TrendLineChart
                           points={steps}
@@ -3267,7 +3276,7 @@ export default function TrendsScreen() {
                         {renderPeriodAverages(steps, (value) => Math.round(value).toLocaleString(), { one: 'day', many: 'days' })}
                         </View>
                       </TabBand>
-                      <TabBand folds={folds} color={TAB_COLOR} id={'trends:movement:hours-slept'} title={'Hours slept'} icon="moon-outline">
+                      <TabBand markRef={walkMark.ref('trends.band')} folds={folds} color={TAB_COLOR} id={'trends:movement:hours-slept'} title={'Hours slept'} icon="moon-outline">
                         <View style={styles.chartCard}>
                         <TrendLineChart
                           points={sleep}
@@ -3307,6 +3316,7 @@ export default function TrendsScreen() {
                   onSelect={setSelectedGroceryFood}
                   tabColor={TAB_COLOR}
                   searchable
+                  markRef={walkMark.ref('trends.food')}
                   placeholder="Pick a food..."
                   minWidth={220}
                 />
@@ -3409,7 +3419,7 @@ export default function TrendsScreen() {
                   therapyResponse.summaries.map((summary) => {
                     const label = therapyTypeLabel(summary.therapyType);
                     return (
-                      <TabBand
+                      <TabBand markRef={walkMark.ref('trends.band')}
                         key={summary.therapyType}
                         folds={folds}
                         color={TAB_COLOR}
@@ -3458,6 +3468,7 @@ export default function TrendsScreen() {
                   onSelect={setSelectedTestCode}
                   tabColor={TAB_COLOR}
                   searchable
+                  markRef={walkMark.ref('trends.test')}
                   placeholder="Pick a test..."
                   minWidth={220}
                 />
@@ -3526,6 +3537,7 @@ export default function TrendsScreen() {
                 <View style={[band.inset, styles.pillRow]}>
                   {PATTERN_OUTCOMES.map((option) => (
                     <TouchableOpacity
+                      ref={walkMark.ref('patterns.outcome')}
                       key={option.key}
                       style={[styles.pill, patternOutcome === option.key && styles.pillActive]}
                       onPress={() => setPatternOutcome(option.key)}
@@ -3584,6 +3596,7 @@ export default function TrendsScreen() {
                 <View style={[band.inset, styles.pillRow]}>
                   {PATTERN_WINDOW_HOURS.map((hours) => (
                     <TouchableOpacity
+                      ref={walkMark.ref('patterns.window')}
                       key={hours}
                       style={[styles.pill, patternWindow === hours && styles.pillActive]}
                       onPress={() => setPatternWindow(hours)}
@@ -3620,7 +3633,7 @@ export default function TrendsScreen() {
                       <Text style={styles.patternRowCaption}>{thresholdSentence()}</Text>
                     </View>
                     {patternResult.foodCandidates.length > 0 ? (
-                      <TabBand folds={folds} color={TAB_COLOR} id={'trends:patterns:specific-foods'} title={'Specific foods'} icon="nutrition-outline">
+                      <TabBand markRef={walkMark.ref('trends.band')} folds={folds} color={TAB_COLOR} id={'trends:patterns:specific-foods'} title={'Specific foods'} icon="nutrition-outline">
                         {patternResult.foodCandidates.map((candidate) => {
                           const key = `${candidate.foodId}|${candidate.source}`;
                           return (
@@ -3636,6 +3649,7 @@ export default function TrendsScreen() {
                                 </View>
                                 <View style={styles.patternRowActions}>
                                   <TouchableOpacity
+                                    ref={walkMark.ref('patterns.test')}
                                     style={[styles.trialButton, { borderColor: TAB_COLOR }]}
                                     disabled={startingTrialKey === key}
                                     onPress={() => handleStartTrial(candidate)}
@@ -3645,6 +3659,7 @@ export default function TrendsScreen() {
                                     </Text>
                                   </TouchableOpacity>
                                   <TouchableOpacity
+                                    ref={walkMark.ref('patterns.rule')}
                                     style={[styles.trialButton, { borderColor: TAB_COLOR }]}
                                     onPress={() => handleDraftFoodRule(candidate, key)}
                                   >
@@ -3662,7 +3677,7 @@ export default function TrendsScreen() {
                     ) : null}
 
                     {patternResult.dimensionCandidates.length > 0 ? (
-                      <TabBand folds={folds} color={TAB_COLOR} id={'trends:patterns:scoring-factors'} title={'Condition scoring factors'} icon="analytics-outline">
+                      <TabBand markRef={walkMark.ref('trends.band')} folds={folds} color={TAB_COLOR} id={'trends:patterns:scoring-factors'} title={'Condition scoring factors'} icon="analytics-outline">
                         {patternResult.dimensionCandidates.map((candidate) => {
                           const key = `${candidate.conditionCode}::${candidate.subCriterion}::${candidate.tier}`;
                           return (
@@ -3711,13 +3726,13 @@ export default function TrendsScreen() {
                       // now, so tracking nothing means there's genuinely
                       // nothing this section could ever check, regardless
                       // of what's actually been logged.
-                      <TabBand folds={folds} color={TAB_COLOR} id={'trends:patterns:scoring-factors'} title={'Condition scoring factors'} icon="analytics-outline">
+                      <TabBand markRef={walkMark.ref('trends.band')} folds={folds} color={TAB_COLOR} id={'trends:patterns:scoring-factors'} title={'Condition scoring factors'} icon="analytics-outline">
                         <Text style={styles.loadingText}>Set your tracked conditions in Profile to check for this.</Text>
                       </TabBand>
                     ) : null}
 
                     {patternResult.categoryCandidates.length > 0 ? (
-                      <TabBand folds={folds} color={TAB_COLOR} id={'trends:patterns:food-categories'} title={'Food categories'} icon="grid-outline">
+                      <TabBand markRef={walkMark.ref('trends.band')} folds={folds} color={TAB_COLOR} id={'trends:patterns:food-categories'} title={'Food categories'} icon="grid-outline">
                         {patternResult.categoryCandidates.map((candidate) => {
                           const key = `category::${candidate.category}`;
                           return (
@@ -3759,7 +3774,7 @@ export default function TrendsScreen() {
                 )}
 
                 {!loading && patternResult && patternResult.context.length > 0 ? (
-                  <TabBand folds={folds} color={TAB_COLOR} id={'trends:patterns:around-flares'} title={`Other things around the same ${outcomeWords.shortMany}`} icon="git-compare-outline">
+                  <TabBand markRef={walkMark.ref('trends.band')} folds={folds} color={TAB_COLOR} id={'trends:patterns:around-flares'} title={`Other things around the same ${outcomeWords.shortMany}`} icon="git-compare-outline">
                     {patternResult.context.map((line) => (
                       <Text key={line} style={styles.patternRowCaption}>
                         {line}
@@ -3770,12 +3785,13 @@ export default function TrendsScreen() {
                 ) : null}
 
                 {!loading && patternResult && patternResult.outcome === 'flares' ? (
-                  <TabBand folds={folds} color={TAB_COLOR} id={'trends:patterns:weather'} title={`Weather around the same ${outcomeWords.shortMany}`} icon="partly-sunny-outline">
+                  <TabBand markRef={walkMark.ref('trends.band')} folds={folds} color={TAB_COLOR} id={'trends:patterns:weather'} title={`Weather around the same ${outcomeWords.shortMany}`} icon="partly-sunny-outline">
                     {patternResult.weather.state === 'off' ? (
                       <>
                         <Text style={styles.patternRowCaption}>{WEATHER_OFFER}</Text>
                         <View style={styles.patternRowActions}>
                           <TouchableOpacity
+                            ref={walkMark.ref('patterns.weather')}
                             style={[styles.trialButton, { borderColor: TAB_COLOR }]}
                             disabled={weatherBusy}
                             onPress={() => {
@@ -3858,7 +3874,7 @@ export default function TrendsScreen() {
                 ) : null}
 
                 {!loading && patternResult?.bestWorst ? (
-                  <TabBand folds={folds} color={TAB_COLOR} id={'trends:patterns:best-worst'} title={'Worst days beside best days'} icon="swap-vertical-outline">
+                  <TabBand markRef={walkMark.ref('trends.band')} folds={folds} color={TAB_COLOR} id={'trends:patterns:best-worst'} title={'Worst days beside best days'} icon="swap-vertical-outline">
                     <Text style={styles.patternRowCaption}>{bestWorstSummary(patternResult.bestWorst.result)}</Text>
                     {bestWorstRefusal(patternResult.bestWorst.result) ? (
                       <Text style={styles.patternRowCaption}>{bestWorstRefusal(patternResult.bestWorst.result)}</Text>
@@ -3892,7 +3908,7 @@ export default function TrendsScreen() {
                 ) : null}
 
                 {!loading && patternResult && patternResult.totalSymptomInstances > 0 ? (
-                  <TabBand folds={folds} color={TAB_COLOR} id={'trends:patterns:factors'} title={'Before them, besides food'} icon="layers-outline">
+                  <TabBand markRef={walkMark.ref('trends.band')} folds={folds} color={TAB_COLOR} id={'trends:patterns:factors'} title={'Before them, besides food'} icon="layers-outline">
                     {patternResult.factorFamilies.length === 0 ? (
                       <Text style={styles.patternRowCaption}>{FACTOR_BAND_EMPTY_LINE}</Text>
                     ) : null}
@@ -3927,7 +3943,7 @@ export default function TrendsScreen() {
                 ) : null}
 
                 {!loading && patternResult?.flareMarks && patternResult.flareMarks.flares > 0 ? (
-                  <TabBand folds={folds} color={TAB_COLOR} id={'trends:patterns:going-on'} title={'What you marked as going on'} icon="chatbubbles-outline">
+                  <TabBand markRef={walkMark.ref('trends.band')} folds={folds} color={TAB_COLOR} id={'trends:patterns:going-on'} title={'What you marked as going on'} icon="chatbubbles-outline">
                     {patternResult.flareMarks.contributorLines.length === 0 ? (
                       <Text style={styles.patternRowCaption}>
                         {'None of these flares has anything marked as going on yet. Edit on a flare in Signals adds it, and so does the question after a flare notification.'}
@@ -3949,7 +3965,7 @@ export default function TrendsScreen() {
                 ) : null}
 
                 {!loading && patternResult?.flareMarks && patternResult.flareMarks.flares > 0 ? (
-                  <TabBand folds={folds} color={TAB_COLOR} id={'trends:patterns:outside'} title={'Symptoms outside what you marked'} icon="help-circle-outline">
+                  <TabBand markRef={walkMark.ref('trends.band')} folds={folds} color={TAB_COLOR} id={'trends:patterns:outside'} title={'Symptoms outside what you marked'} icon="help-circle-outline">
                     {patternResult.flareMarks.outsideLines.map((line) => (
                       <Text key={line} style={styles.patternRowCaption}>
                         {line}
@@ -3960,7 +3976,7 @@ export default function TrendsScreen() {
                 ) : null}
 
                 {!loading && patternResult ? (
-                  <TabBand folds={folds} color={TAB_COLOR} id={'trends:patterns:work-weeks'} title={'Work, week by week'} icon="briefcase-outline">
+                  <TabBand markRef={walkMark.ref('trends.band')} folds={folds} color={TAB_COLOR} id={'trends:patterns:work-weeks'} title={'Work, week by week'} icon="briefcase-outline">
                     {patternResult.workStrainRefusal ? (
                       <Text style={styles.patternRowCaption}>
                         {describeStrainRefusal(patternResult.workStrainRefusal)}
@@ -3987,7 +4003,7 @@ export default function TrendsScreen() {
                 ) : null}
 
                 {!loading && patternResult ? (
-                  <TabBand folds={folds} color={TAB_COLOR} id={'trends:patterns:movement-weeks'} title={'Movement, week by week'} icon="walk-outline">
+                  <TabBand markRef={walkMark.ref('trends.band')} folds={folds} color={TAB_COLOR} id={'trends:patterns:movement-weeks'} title={'Movement, week by week'} icon="walk-outline">
                     {patternResult.movementRefusal ? (
                       <Text style={styles.patternRowCaption}>
                         {describeMovementRefusal(patternResult.movementRefusal)}

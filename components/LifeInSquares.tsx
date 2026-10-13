@@ -54,6 +54,7 @@ import {
   type TimeSquare,
 } from '../lib/lifeSquares';
 import { loadPresence, loadRecords, rememberedSquarePlace, rememberSquarePlace } from '../lib/lifeSquaresDb';
+import { useWalkMark } from './WalkMark';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
@@ -104,6 +105,7 @@ type Props = {
 };
 
 export function LifeInSquares({ startAt = 'remembered' }: Props) {
+  const walkMark = useWalkMark();
   const [place, setPlace] = useState<SquarePlace>(() => (startAt === 'remembered' && rememberedSquarePlace()) || todayPlace('day'));
   const [loaded, setLoaded] = useState<Loaded | null>(null);
   const [width, setWidth] = useState(0);
@@ -185,6 +187,7 @@ export function LifeInSquares({ startAt = 'remembered' }: Props) {
           const current = index === crumbs.length - 1;
           return (
             <TouchableOpacity
+              ref={walkMark.ref('squares.crumb')}
               key={crumb.level}
               style={[styles.crumb, current && styles.crumbCurrent]}
               onPress={() => (current ? undefined : go(placeAtLevel(place, crumb.level, today, nowHour)))}
@@ -199,7 +202,7 @@ export function LifeInSquares({ startAt = 'remembered' }: Props) {
       </View>
 
       <View style={styles.heading}>
-        <TouchableOpacity style={styles.step} onPress={() => go(shiftPlace(place, -1))} accessibilityRole="button" accessibilityLabel={`Previous ${place.level}`}>
+        <TouchableOpacity ref={walkMark.ref('squares.step')} style={styles.step} onPress={() => go(shiftPlace(place, -1))} accessibilityRole="button" accessibilityLabel={`Previous ${place.level}`}>
           <Ionicons name="chevron-back" size={20} color={colors.textPrimary} />
         </TouchableOpacity>
         <Text style={styles.headingText}>{placeLabel(place)}</Text>
@@ -214,7 +217,7 @@ export function LifeInSquares({ startAt = 'remembered' }: Props) {
         </TouchableOpacity>
       </View>
       {!atToday ? (
-        <TouchableOpacity style={styles.todayButton} onPress={() => go(todayPlace(place.level))} accessibilityRole="button">
+        <TouchableOpacity ref={walkMark.ref('squares.now')} style={styles.todayButton} onPress={() => go(todayPlace(place.level))} accessibilityRole="button">
           <Text style={styles.todayText}>Back to now</Text>
         </TouchableOpacity>
       ) : null}
@@ -409,6 +412,7 @@ function TabStripes({ tabs, height, vertical = false }: { tabs: SquareTab[]; hei
 }
 
 function Square({ square, size, label, onPress }: { square: TimeSquare; size: number; label: string; onPress: () => void }) {
+  const walkMark = useWalkMark();
   const source = square.first ? squareSource(square.first.source) : undefined;
   if (!square.first || !source) {
     return <View style={[styles.square, { width: size, height: size, backgroundColor: EMPTY_SQUARE }]} />;
@@ -416,6 +420,7 @@ function Square({ square, size, label, onPress }: { square: TimeSquare; size: nu
   const names = square.records.map((r) => r.title).join(', ');
   return (
     <TouchableOpacity
+      ref={walkMark.ref('squares.square')}
       style={[styles.square, { width: size, height: size, backgroundColor: TAB_COLOR[source.tab] }]}
       onPress={onPress}
       accessibilityRole="button"
@@ -428,10 +433,12 @@ function Square({ square, size, label, onPress }: { square: TimeSquare; size: nu
 }
 
 function RecordRow({ record }: { record: SquareRecord }) {
+  const walkMark = useWalkMark();
   const source = squareSource(record.source);
   if (!source) return null;
   return (
     <TouchableOpacity
+      ref={walkMark.ref('squares.record')}
       style={styles.recordRow}
       onPress={() => {
         const route = squareRoute(source);

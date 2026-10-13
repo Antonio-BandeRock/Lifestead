@@ -487,7 +487,32 @@ export type ToolMark =
   | 'safe.pick'
   | 'sixDs.dimension'
   | 'sixDs.tier'
-  | 'stage.pick';
+  | 'stage.pick'
+  | 'compare.a'
+  | 'compare.b'
+  | 'compare.meals'
+  | 'compare.partner'
+  | 'compare.range'
+  | 'compare.tags'
+  | 'patterns.outcome'
+  | 'patterns.rule'
+  | 'patterns.save'
+  | 'patterns.test'
+  | 'patterns.weather'
+  | 'patterns.window'
+  | 'squares.crumb'
+  | 'squares.now'
+  | 'squares.record'
+  | 'squares.square'
+  | 'squares.step'
+  | 'trends.band'
+  | 'trends.custom'
+  | 'trends.cycle'
+  | 'trends.food'
+  | 'trends.measure'
+  | 'trends.nutrient'
+  | 'trends.range'
+  | 'trends.test';
 
 export type ToolStep = {
   say: string;
@@ -649,6 +674,69 @@ function bandsHowTos(lens: string, bands: string, readNote: string, emptyNote: s
       forYou: emptyNote,
     },
   ];
+}
+
+// Most Trends lenses share one way of being read: pick how far back, open a
+// band. The lenses that can draw period days behind their charts add one
+// more how-to for that switch.
+function trendsHowTos(o: {
+  // What the read how-to is called: 'Read your weight over time'.
+  title: string;
+  // The bands, as a reader would name them, or null when the lens draws
+  // its charts without bands.
+  bands: string | null;
+  forYou: string;
+  // Garden Yield, Growing Conditions and What It Costs count by month.
+  months?: boolean;
+  shade?: boolean;
+  more?: ToolHowTo[];
+}): ToolHowTo[] {
+  const range: ToolStep = o.months
+    ? { say: 'Tap how far back to look: the last 12 months, the last 2 years, or everything.', mark: 'trends.range' }
+    : { say: 'Tap how far back to look along the top.', mark: 'trends.range' };
+  const read: ToolStep = o.bands
+    ? { say: `Open a band: ${o.bands}.`, mark: 'trends.band' }
+    : { say: 'Read the chart. Tap a band to fold it away or open it again.', mark: 'trends.band' };
+  const list: ToolHowTo[] = [{ key: 'read', title: o.title, steps: [range, read], forYou: o.forYou }];
+  if (o.shade) {
+    list.push({
+      key: 'shade',
+      title: 'Shade the days of your period on the charts',
+      steps: [{ say: 'Turn on Shade period days.', mark: 'trends.cycle' }],
+      forYou: 'The period days you logged in Signals > Cycle are drawn as pale columns behind every chart on Trends. The switch shows once a period day is logged.',
+    });
+  }
+  return [...list, ...(o.more ?? [])];
+}
+
+// A Trends lens that reads records kept on another tab says what it needs
+// first, with a way into Your Guide.
+function whatItNeeds(note: string): ToolHowTo {
+  return {
+    key: 'empty',
+    title: 'Find out what this lens needs before it can show anything',
+    steps: [
+      { say: 'If a line at the top says what is missing, read it.' },
+      { say: 'Tap Where this fits in Your Guide.', mark: 'bands.missing' },
+    ],
+    forYou: note,
+  };
+}
+
+// The Trends lenses drawn from records kept on other tabs: pick how far
+// back, open a band, and, where the lens needs a record first, follow the
+// Your Guide link.
+function moreTrendsHowTos(lens: string, bands: string, readNote: string, emptyNote?: string): ToolHowTo[] {
+  const read: ToolHowTo = {
+    key: 'read',
+    title: `Read ${lens} over time`,
+    steps: [
+      { say: 'Tap how far back to look along the top.', mark: 'trends.range' },
+      { say: `Open a band: ${bands}.`, mark: 'bands.band' },
+    ],
+    forYou: readNote,
+  };
+  return emptyNote ? [read, whatItNeeds(emptyNote)] : [read];
 }
 
 export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
@@ -4251,7 +4339,300 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     'Read from Garden, so what is ready can go into this week’s meals.',
     'The line names what to record in Garden first, and the link opens the step in Your Guide.',
   ),
+  '/trends#nutrients': trendsHowTos({
+    title: 'Read a nutrient over time',
+    bands: null,
+    forYou: 'Food and supplements are drawn apart, so the chart shows which of them carried a nutrient on each day.',
+    shade: true,
+    more: [
+      {
+        key: 'nutrient',
+        title: 'Change which nutrient the chart follows',
+        steps: [{ say: 'Tap a nutrient in the row of pills.', mark: 'trends.nutrient' }],
+        forYou: 'The chart redraws for that nutrient over the same days.',
+      },
+      {
+        key: 'custom',
+        title: 'Pick your own day or your own dates',
+        steps: [
+          { say: 'Tap Custom at the end of the range pills.', mark: 'trends.custom' },
+          { say: 'Choose One day or Date range, then pick the year, month and day.' },
+        ],
+        forYou: 'Useful for looking at the weeks around an appointment or a change you made.',
+      },
+    ],
+  }),
+  '/trends#sixDs': trendsHowTos({
+    title: 'Read your condition scores over time',
+    bands: null,
+    forYou: 'Each condition you picked in Profile gets a chart of the scores of what you ate, day by day.',
+    shade: true,
+  }),
+  '/trends#variety': trendsHowTos({
+    title: 'Read what you eat over time',
+    bands: 'how many different foods, how many different plants, what keeps coming back, foods that feed your gut, how it gets cooked, bought ready against made at home, how your safe list has grown, or how much came out of your garden',
+    forYou: 'Read from the meals you logged. A week with nothing logged shows as not logged, never as a week of eating nothing.',
+    shade: true,
+  }),
+  '/trends#symptoms': trendsHowTos({
+    title: 'Read your symptoms over time',
+    bands: 'a scale you track, bowel movements, or where on the body',
+    forYou: 'Read from what you logged in Signals. A day with nothing logged is left blank rather than counted as a good day.',
+    shade: true,
+  }),
+  '/trends#eatingWindow': trendsHowTos({
+    title: 'Read when you eat over time',
+    bands: null,
+    forYou: 'Each day shows the time of your first and last meal, from the times you logged.',
+    shade: true,
+  }),
+  '/trends#weight': trendsHowTos({
+    title: 'Read your weight over time',
+    bands: null,
+    forYou: 'The shaded band is your usual range, the middle of the readings you have entered. It says what your readings have been, never what they should be.',
+    shade: true,
+  }),
+  '/trends#movement': trendsHowTos({
+    title: 'Read your steps and sleep over time',
+    bands: 'steps per day, or hours slept',
+    forYou: 'Read from what you entered or what a connected device sent. Each chart carries your usual range.',
+    shade: true,
+  }),
+  '/trends#workouts': moreTrendsHowTos(
+    'your workouts',
+    'by week, what you did, how hard it felt, planned days, or each exercise first and latest',
+    'Read from the workouts you logged in Life > Movement, beside the days you planned.',
+    'The line names the record to add first, and the link opens the step in Your Guide that shows how.',
+  ),
+  '/trends#pacing': moreTrendsHowTos(
+    'your pacing',
+    'your typical day, day by day, bigger days and the days after, overload and crash tags, or therapy sessions',
+    'Shows how busier days sit beside the days that follow them, from what you logged. It counts and lays out, and leaves the reading to you.',
+    'The line names the record to add first, and the link opens the step in Your Guide that shows how.',
+  ),
+  '/trends#cycle': moreTrendsHowTos(
+    'your cycle',
+    'what is counted, flares by cycle day, tags by week of the cycle, or a scale by week of the cycle',
+    'Lines up what you logged against the day of your cycle, from the period days you logged in Signals > Cycle.',
+  ),
+  '/trends#labs': trendsHowTos({
+    title: 'Read a lab result over time',
+    bands: null,
+    forYou: 'Each result you entered on Insights > Labs is a point on the chart, with a dashed line at the middle of its usual reference range where one exists.',
+    shade: true,
+    more: [
+      {
+        key: 'test',
+        title: 'Pick which test to follow',
+        steps: [{ say: 'Tap Pick a test and choose one.', mark: 'trends.test' }],
+        forYou: 'Only tests you have entered a result for are listed.',
+      },
+    ],
+  }),
+  '/trends#groceries': trendsHowTos({
+    title: 'Read what a food has cost you over time',
+    bands: null,
+    forYou: 'Read from the prices you recorded when you bought it.',
+    shade: true,
+    more: [
+      {
+        key: 'food',
+        title: 'Pick which food to follow',
+        steps: [{ say: 'Tap Pick a food and choose one.', mark: 'trends.food' }],
+        forYou: 'The chart redraws for that food over the same days.',
+      },
+    ],
+  }),
+  '/trends#keepingUp': trendsHowTos({
+    title: 'Read how you keep up with things over time',
+    bands: 'what you tick off, routines you walk, what you capture and what happens to it, upkeep on time against late, or how work has felt',
+    forYou: 'A record of what you did, read from Life. Nothing here scores you, and a blank week says nothing was marked.',
+  }),
+  '/trends#harvest': trendsHowTos({
+    title: 'Read what your garden gave over time',
+    bands: 'what the garden gave, how long each crop took, compost made and compost used, what was done before the first picking, or given away, traded and received',
+    forYou: 'Read from the harvests and work you recorded in Garden. Weights add up, and a crop you count stays a count.',
+    months: true,
+  }),
+  '/trends#conditions': trendsHowTos({
+    title: 'Read your growing conditions over time',
+    bands: 'a measurement, hour by hour from a device, what you are measuring, or by area',
+    forYou: 'Read from the readings in Garden > Growing Conditions, typed by you or sent by a sensor.',
+    months: true,
+    more: [
+      {
+        key: 'measure',
+        title: 'Change which measurement the chart follows',
+        steps: [{ say: 'Tap a measurement in the row of pills.', mark: 'trends.measure' }],
+        forYou: 'Rain and water given are added up. Everything else is averaged, with its low and high.',
+      },
+    ],
+  }),
+  '/trends#cost': trendsHowTos({
+    title: 'Read what it costs over time',
+    bands: 'what your condition costs, what eating this way costs, what the garden costs to grow, supplements and what food is reaching, or what the garden put on your plate',
+    forYou: 'Only money you recorded against a day is counted. A figure is never guessed at.',
+    months: true,
+  }),
+  '/trends#therapyResponse': trendsHowTos({
+    title: 'Read how your days go around a therapy',
+    bands: 'one band for each therapy you track',
+    forYou: 'Days with a session are set beside days without one, as a count. It cannot say the therapy caused anything, so read it with whoever runs your treatment.',
+  }),
+  '/trends#hydration': moreTrendsHowTos(
+    'what you drink',
+    'drinks by week, by kind, time of day, or water from everything',
+    'Read from the drinks you logged in Schedules > Hydration, with the water inside your food counted too.',
+    'The line names the record to add first, and the link opens the step in Your Guide that shows how.',
+  ),
+  '/trends#bloodPressure': moreTrendsHowTos(
+    'your blood pressure',
+    'latest reading, by week, or time of day',
+    'Read from the readings you entered in Signals or a connected device sent.',
+  ),
+  '/trends#bodySignals': moreTrendsHowTos(
+    'what your body measures',
+    'resting heart rate, heart rate through the day, heart rate variability, blood oxygen, glucose, skin temperature, breathing rate, body temperature, where these come from, or glucose around meals',
+    'Read from what a connected device or watch sent, and from readings you entered.',
+  ),
+  '/trends#doses': moreTrendsHowTos(
+    'your doses',
+    'by week, time of day, or by med or supplement',
+    'Read from the doses marked taken or skipped in Schedules > Meds.',
+    'The line names the record to add first, and the link opens the step in Your Guide that shows how.',
+  ),
+  '/trends#care': moreTrendsHowTos(
+    'your care visits',
+    'visits by kind, by provider, or coming up',
+    'Read from the appointments in Schedules > Appointments.',
+  ),
+  '/trends#work': moreTrendsHowTos(
+    'how work has gone',
+    'a week, or work beside sleep and flares',
+    'Read from your weekly check-ins in Life > Work.',
+    'The line names the record to add first, and the link opens the step in Your Guide that shows how.',
+  ),
+  '/trends#reactions': moreTrendsHowTos(
+    'your reactions',
+    'new foods and experiments, reactions by week, or each reaction',
+    'Read from the reactions you logged and the food experiments you ran in Signals.',
+    'The line names the record to add first, and the link opens the step in Your Guide that shows how.',
+  ),
+  '/trends#nights': moreTrendsHowTos(
+    'your nights',
+    'times up by week, beside the evening before, or first time up',
+    'Read from the times you logged getting up in the night.',
+  ),
+  '/trends#trackers': trendsHowTos({
+    title: 'Read your trackers over time',
+    bands: 'one band for each tracker you made',
+    forYou: 'Read from the trackers you set up in Signals.',
+    shade: true,
+  }),
+  '/trends#ferments': moreTrendsHowTos(
+    'your ferments',
+    'batches started, going now, or made and drunk',
+    'Read from the batches in Food > Fermentation.',
+  ),
+  '/trends#planned': moreTrendsHowTos(
+    'how your meal plan went',
+    'as planned by week, how the plan went, or by meal',
+    'Sets the meals you planned beside the meals you logged.',
+    'The line names the record to add first, and the link opens the step in Your Guide that shows how.',
+  ),
+  '/trends#patterns': [
+    {
+      key: 'read',
+      title: 'See what tends to come before a flare',
+      steps: [
+        { say: 'Tap what to look before: flares and reactions, low mood days, low energy days, or another choice.', mark: 'patterns.outcome' },
+        { say: 'Tap how many hours before to look.', mark: 'patterns.window' },
+        { say: 'Open a band: specific foods, condition scoring factors, food categories, other things around the same days, weather, or worst days beside best days.', mark: 'trends.band' },
+      ],
+      forYou: 'Every count names what it is counted against, and each food is set beside how often it turns up on any ordinary day. Tends to come before is the most it can say from one person.',
+    },
+    {
+      key: 'test',
+      title: 'Test a food by leaving it out and bringing it back',
+      steps: [
+        { say: 'Open Specific foods.', mark: 'trends.band', stay: true },
+        { say: 'Tap Test this beside a food.', mark: 'patterns.test' },
+      ],
+      forYou: 'Signals sets up the experiment: days without the food, then the food back. The result compares before, without and back, and says what one run can and cannot show.',
+    },
+    {
+      key: 'rule',
+      title: 'Turn a pattern into a reminder',
+      steps: [
+        { say: 'Tap Make this a rule beside a food.', mark: 'patterns.rule' },
+        { say: 'Write what it should remind you of.' },
+        { say: 'Tap Save this rule.', mark: 'patterns.save' },
+      ],
+      forYou: 'The rule shows on Insights > My Meds with your other rules, marked as yours, and speaks up when the food is logged.',
+    },
+    {
+      key: 'weather',
+      title: 'Add the weather around your flares',
+      steps: [
+        { say: 'Open Weather around the same days.', mark: 'trends.band', stay: true },
+        { say: 'Tap Add the weather.', mark: 'patterns.weather' },
+      ],
+      forYou: 'Tap Use this phone\'s rough location when it asks. Only a rough location is used, and Stop adding the weather turns it off again.',
+    },
+  ],
+  '/trends#compare': [
+    {
+      key: 'pick',
+      title: 'Put two things on one chart',
+      steps: [
+        { say: 'Pick the first thing, read off the left scale.', mark: 'compare.a' },
+        { say: 'Pick the second thing, read off the right scale.', mark: 'compare.b' },
+        { say: 'Tap how many days back to look.', mark: 'compare.range' },
+      ],
+      forYou: 'Anything you record can sit beside anything else: a nutrient and a lab, sleep and mood. The chart says whether anything is known to connect the two.',
+    },
+    {
+      key: 'partner',
+      title: 'Pick something known to go with the first',
+      steps: [{ say: 'Tap one of the pills under Known to be read with this.', mark: 'compare.partner' }],
+      forYou: 'Each one carries what to expect on the chart and where that comes from.',
+    },
+    {
+      key: 'tags',
+      title: 'Mark the days you tagged',
+      steps: [{ say: 'Under Mark the days you tagged, tap a tag.', mark: 'compare.tags' }],
+      forYou: 'Those days are shaded behind both lines.',
+    },
+    {
+      key: 'meals',
+      title: 'See two nutrients meet inside one meal',
+      steps: [{ say: 'When the chart says they meet inside a meal, tap Open Today\'s Meals.', mark: 'compare.meals' }],
+      forYou: 'Two nutrients that help or compete with each other are read meal by meal rather than off a chart.',
+    },
+  ],
+  '/trends#squares': [
+    {
+      key: 'zoom',
+      title: 'Move through your life in squares',
+      steps: [
+        { say: 'Tap a square to go into that stretch of time.', mark: 'squares.square' },
+        { say: 'Tap Previous or Next to step along.', mark: 'squares.step' },
+        { say: 'Tap a level in the trail at the top to go back out.', mark: 'squares.crumb' },
+        { say: 'Tap Back to now to come home.', mark: 'squares.now' },
+      ],
+      forYou: 'Each square is coloured by the tabs your records came from, so a busy stretch or a quiet one shows at a glance.',
+    },
+    {
+      key: 'open',
+      title: 'Open a record from a day',
+      steps: [
+        { say: 'Go into a day.', mark: 'squares.square', stay: true },
+        { say: 'Tap a record to open it on its tab.', mark: 'squares.record' },
+      ],
+      forYou: 'The record opens where it lives, so a change made there shows here too.',
+    },
+  ],
 };
 
 /** Tabs whose every lens has its tools listed above. */
-export const TOOL_TABS_DONE: readonly string[] = ['/life', '/', '/schedule', '/log', '/food', '/garden', '/insights'];
+export const TOOL_TABS_DONE: readonly string[] = ['/life', '/', '/schedule', '/log', '/food', '/garden', '/insights', '/trends'];

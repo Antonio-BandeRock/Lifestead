@@ -44,6 +44,7 @@ import {
 import { CompareTwoChart } from './CompareTwoChart';
 import { PopoverSelect } from './PopoverSelect';
 import { useTabBandStyles, TabBand } from './TabBand';
+import { useWalkMark } from './WalkMark';
 
 type Props = {
   folds: ReturnType<typeof useBandFolds>;
@@ -60,6 +61,7 @@ function todayString(): string {
 }
 
 export function CompareTwoLens({ folds, color, weightUnit, initialA }: Props) {
+  const walkMark = useWalkMark();
   const band = useTabBandStyles(color);
   const [choices, setChoices] = useState<SeriesChoice[] | null>(null);
   const [keyA, setKeyA] = useState<string | null>(initialA ?? null);
@@ -195,6 +197,7 @@ export function CompareTwoLens({ folds, color, weightUnit, initialA }: Props) {
           const active = range === days;
           return (
             <TouchableOpacity
+              ref={walkMark.ref('compare.range')}
               key={range}
               style={[styles.pill, active && { backgroundColor: color, borderColor: color }]}
               onPress={() => setDays(range)}
@@ -219,6 +222,7 @@ export function CompareTwoLens({ folds, color, weightUnit, initialA }: Props) {
           onSelect={(value) => setKeyA(value)}
           tabColor={color}
           searchable
+          markRef={walkMark.ref('compare.a')}
           placeholder="Pick something to compare"
         />
         {partners.ready.length > 0 ? (
@@ -229,6 +233,7 @@ export function CompareTwoLens({ folds, color, weightUnit, initialA }: Props) {
                 const active = partner.key === choiceB?.key;
                 return (
                   <TouchableOpacity
+                    ref={walkMark.ref('compare.partner')}
                     key={partner.key}
                     style={[styles.pill, active && { backgroundColor: color, borderColor: color }]}
                     onPress={() => setKeyB(partner.key)}
@@ -254,6 +259,7 @@ export function CompareTwoLens({ folds, color, weightUnit, initialA }: Props) {
           onSelect={(value) => setKeyB(value)}
           tabColor={color}
           searchable
+          markRef={walkMark.ref('compare.b')}
           placeholder="Pick something to compare"
         />
         {rangePills()}
@@ -282,6 +288,7 @@ export function CompareTwoLens({ folds, color, weightUnit, initialA }: Props) {
                     const active = pickedTags.includes(row.code);
                     return (
                       <TouchableOpacity
+                        ref={walkMark.ref('compare.tags')}
                         key={row.code}
                         style={[styles.pill, active && { backgroundColor: color, borderColor: color }]}
                         onPress={() => setPickedTags((now) => togglePicked(markRows(tagRows, now).map((r) => r.code), row.code))}
@@ -314,6 +321,7 @@ export function CompareTwoLens({ folds, color, weightUnit, initialA }: Props) {
                 <Text style={[styles.caption, styles.spaced]}>{MEAL_PAIR_LINE}</Text>
                 <View style={styles.pillRow}>
                   <TouchableOpacity
+                    ref={walkMark.ref('compare.meals')}
                     style={styles.pill}
                     onPress={() => router.push({ pathname: '/schedule', params: { openScheduleLens: 'todaysMeals' } })}
                     accessibilityRole="button"
