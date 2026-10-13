@@ -340,7 +340,67 @@ export type ToolMark =
   | 'microbiome.photo'
   | 'microbiome.readLines'
   | 'microbiome.firstTest'
-  | 'microbiome.across';
+  | 'microbiome.across'
+  | 'builder.kind'
+  | 'builder.name'
+  | 'builder.continue'
+  | 'builder.addIngredients'
+  | 'builder.saveAddNew'
+  | 'builder.saveFinish'
+  | 'builder.nudge'
+  | 'builder.favorite'
+  | 'builder.preview'
+  | 'builder.complete'
+  | 'builder.systemRecipes'
+  | 'ferment.drink'
+  | 'ferment.startToday'
+  | 'ferment.later'
+  | 'ferment.reminder'
+  | 'ferment.own'
+  | 'meal.startFrom'
+  | 'meal.continue'
+  | 'meal.addFrom'
+  | 'meal.addToMeal'
+  | 'meal.logNow'
+  | 'meal.schedule'
+  | 'meal.scheduleIt'
+  | 'findMeal.scope'
+  | 'findMeal.group'
+  | 'findMeal.meal'
+  | 'findMeal.tick'
+  | 'findMeal.use'
+  | 'findMeal.build'
+  | 'findMeal.eatenOut'
+  | 'findMeal.logOut'
+  | 'findMeal.logNow'
+  | 'findMeal.earlier'
+  | 'findMeal.schedule'
+  | 'findMeal.scheduleIt'
+  | 'findMeal.replace'
+  | 'findMeal.menu'
+  | 'findMeal.menuPhoto'
+  | 'scan.frame'
+  | 'scan.ingredientsPhoto'
+  | 'scan.continue'
+  | 'scan.readAloud'
+  | 'scan.logEaten'
+  | 'scan.logIt'
+  | 'scan.buy'
+  | 'scan.pricePhoto'
+  | 'scan.savePrice'
+  | 'scan.grocery'
+  | 'recipes.search'
+  | 'recipes.diet'
+  | 'recipes.group'
+  | 'recipes.recipe'
+  | 'recipes.build'
+  | 'import.read'
+  | 'import.paste'
+  | 'import.readLines'
+  | 'import.line'
+  | 'import.builder'
+  | 'import.open'
+  | 'import.past';
 
 export type ToolStep = {
   say: string;
@@ -399,6 +459,81 @@ function readingHowTos(lens: string, readNote: string): ToolHowTo[] {
         { say: 'Under Related at the end of it, tap a name.' },
       ],
       forYou: 'An entry on this lens opens in place. One that lives elsewhere opens on the tab and lens where it lives.',
+    },
+  ];
+}
+
+// The eleven dish builders share one screen, so they share one set of
+// how-tos, worded with the dish each one makes.
+function builderHowTos(o: {
+  // The dish, as its Save and Complete buttons say it: Side, Baked Good.
+  noun: string;
+  // Lines that come before the name, picking the kind of drink or ferment.
+  firstSteps?: ToolStep[];
+  // Fermentation asks nothing about cooking oil or seasoning.
+  noNudge?: boolean;
+  // Salads and smoothies warn about several raw goitrogenic vegetables.
+  goitrogens?: boolean;
+}): ToolHowTo[] {
+  const lower = o.noun.toLowerCase();
+  const first = o.firstSteps ?? [];
+  const nudge: ToolStep[] = o.noNudge
+    ? []
+    : [{ say: 'If it asks about cooking oil, fat or seasoning, tap + Add Ingredient to add it, or None used, continue.', mark: 'builder.nudge', stay: true }];
+  const goitrogens: ToolStep[] = o.goitrogens
+    ? [{ say: 'If it warns about several raw goitrogenic vegetables together, tap Go back and adjust to change them, or Continue anyway.' }]
+    : [];
+  return [
+    {
+      key: 'build',
+      title: `Build a ${lower} from its ingredients`,
+      steps: [
+        ...first,
+        { say: `Type a name for the ${lower}.`, mark: 'builder.name', stay: true },
+        { say: 'Pick the number of servings and the serving size, then tap Continue.', mark: 'builder.continue' },
+        {
+          say: 'Tap Add Ingredients, then pick a food: say its name, look in Whole Foods or My Food Products, or pick by the nutrient it is richest in.',
+          mark: 'builder.addIngredients',
+        },
+        { say: 'Set the quantity and units, and how it is cut and cooked. Tap Save & Add New to add the next one.', mark: 'builder.saveAddNew', stay: true },
+        { say: `After the last ingredient, tap Save & Finish ${o.noun}.`, mark: 'builder.saveFinish' },
+        ...nudge,
+        ...goitrogens,
+        { say: `Tap Complete & Save This ${o.noun}.`, mark: 'builder.complete' },
+      ],
+      forYou: `The ${lower} goes in My Recipes, ready to add to a meal, log or schedule without building it again.`,
+    },
+    {
+      key: 'report',
+      title: 'Read the full report before you save',
+      steps: [
+        ...first,
+        { say: 'Name it, pick the servings and add the ingredients.', mark: 'builder.name', stay: true },
+        { say: 'Tap Preview Full Report.', mark: 'builder.preview' },
+        { say: 'Read it, then close it and carry on building.' },
+      ],
+      forYou: 'You see what the dish brings and anything in it that touches what you set in Profile, while it can still be changed.',
+    },
+    {
+      key: 'favorite',
+      title: 'Keep it as a favorite',
+      steps: [
+        ...first,
+        { say: 'Build it the usual way.', mark: 'builder.name', stay: true },
+        { say: 'Before you save, tick Also save as a Favorite, for fast reuse later.', mark: 'builder.favorite' },
+        { say: `Tap Complete & Save This ${o.noun}.`, mark: 'builder.complete' },
+      ],
+      forYou: 'A dish you make often is kept with your favorites, so it can be added to a meal in a tap.',
+    },
+    {
+      key: 'fromRecipe',
+      title: 'Start from a recipe built into the app',
+      steps: [
+        ...first,
+        { say: 'Under Find a Recipe, tap System Recipes (built into the app).', mark: 'builder.systemRecipes' },
+        { say: 'Find the recipe, open it, and tap Build This Recipe.' },
+      ],
+      forYou: 'The builder opens with the recipe filled in, ready for you to change what you need before saving it.',
     },
   ];
 }
@@ -2960,7 +3095,287 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'An entry typed wrong comes out of the chart.',
     },
   ],
+  '/food#findMeal': [
+    {
+      key: 'logSaved',
+      title: 'Log a meal you have saved',
+      steps: [
+        { say: 'Choose Your meals or System recipes.', mark: 'findMeal.scope', stay: true },
+        { say: 'Open a group.', mark: 'findMeal.group' },
+        { say: 'Tap a meal.', mark: 'findMeal.meal' },
+        { say: 'Tap Use this meal.', mark: 'findMeal.use' },
+        { say: 'Tap Log it now.', mark: 'findMeal.logNow' },
+      ],
+      forYou: "It goes on today's record, and the timing rules check it against your medicines and supplements.",
+    },
+    {
+      key: 'earlier',
+      title: 'Log a meal you ate earlier today',
+      steps: [
+        { say: 'Open a group and tap the meal.', mark: 'findMeal.meal' },
+        { say: 'Tap Use this meal.', mark: 'findMeal.use' },
+        { say: 'Tap Log it earlier today.', mark: 'findMeal.earlier' },
+        { say: 'Set the time you ate it, then tap Log it.' },
+      ],
+      forYou: 'A meal logged late lands at the time you ate it, so the day reads in the order it happened.',
+    },
+    {
+      key: 'schedule',
+      title: 'Schedule a meal for later',
+      steps: [
+        { say: 'Open a group and tap the meal.', mark: 'findMeal.meal' },
+        { say: 'Tap Use this meal.', mark: 'findMeal.use' },
+        { say: 'Tap Schedule it.', mark: 'findMeal.schedule' },
+        { say: 'Pick Today or Tomorrow and a time, then tap Schedule it.', mark: 'findMeal.scheduleIt' },
+      ],
+      forYou: "It shows in Schedules on Today's Meals at that time, beside your doses.",
+    },
+    {
+      key: 'swap',
+      title: 'Eat something other than what was planned',
+      steps: [
+        { say: 'Open a group and tap the meal you are eating instead.', mark: 'findMeal.meal' },
+        { say: 'Tap Use this meal.', mark: 'findMeal.use' },
+        { say: 'Tap Use it instead of a planned meal. It shows only when a meal is planned today.', mark: 'findMeal.replace' },
+        { say: 'Tap the planned meal it takes the place of.' },
+      ],
+      forYou: 'The day shows what you ate in place of what was planned, without the planned meal left waiting.',
+    },
+    {
+      key: 'combine',
+      title: 'Put several dishes together as one meal',
+      steps: [
+        { say: 'Open a group.', mark: 'findMeal.group' },
+        { say: 'Tick each dish you want in the meal.', mark: 'findMeal.tick', stay: true },
+        { say: 'Tap Build a meal with these dishes.', mark: 'findMeal.build' },
+        { say: 'In the Meal builder, log it now or schedule it.' },
+      ],
+      forYou: 'A main, a side and a drink become one meal, logged once.',
+    },
+    {
+      key: 'eatenOut',
+      title: 'Log a meal you did not cook',
+      steps: [
+        { say: 'Tick A restaurant, a takeaway, or a meal somebody else cooked.', mark: 'findMeal.eatenOut' },
+        { say: 'Fill in where and who cooked it if you like, and under What was in it, search for each food you could see.' },
+        { say: 'Tap Log it with the foods you added, or Log just that I ate out.', mark: 'findMeal.logOut' },
+        { say: 'Pick Now or Earlier today.' },
+      ],
+      forYou: 'A meal out is still on the record, even when you cannot say everything that was in it.',
+    },
+    {
+      key: 'menu',
+      title: 'Check a menu before you order',
+      steps: [
+        { say: 'Open Read a Menu.', mark: 'findMeal.menu' },
+        { say: 'Tap Photograph It and take a picture of the menu, or type or paste it in the box below.', mark: 'findMeal.menuPhoto', stay: true },
+        { say: 'For a menu with more pages, tap Another Page.' },
+      ],
+      forYou: 'Each dish is checked for words that touch your allergies, conditions, eating style and food restrictions, so you know what to ask about before ordering.',
+    },
+  ],
+  '/food#scanProduct': [
+    {
+      key: 'scan',
+      title: 'Scan a product',
+      steps: [
+        { say: 'Point your camera at the barcode inside the frame.', mark: 'scan.frame', stay: true },
+        { say: 'If the product is not found, tap Take a Photo of the Ingredients and photograph its ingredient list.', mark: 'scan.ingredientsPhoto', stay: true },
+        { say: 'Check the words it read, then tap Continue.', mark: 'scan.continue' },
+        { say: 'Read what it says about the product.' },
+      ],
+      forYou: 'You see what is in a packaged food, and anything in it that touches what you set in Profile, while still in the shop.',
+    },
+    {
+      key: 'readAloud',
+      title: 'Have it read to you',
+      steps: [
+        { say: 'Scan the product.', mark: 'scan.frame', stay: true },
+        { say: 'Tap Read This to Me.', mark: 'scan.readAloud' },
+        { say: 'Listen.' },
+      ],
+      forYou: 'Small print on a label is read out loud.',
+    },
+    {
+      key: 'log',
+      title: 'Log a product you ate',
+      steps: [
+        { say: 'Scan the product.', mark: 'scan.frame', stay: true },
+        { say: 'Tap Log This as Eaten.', mark: 'scan.logEaten' },
+        { say: 'Set how many grams and which meal it was part of, then tap Log It.', mark: 'scan.logIt' },
+      ],
+      forYou: 'A packaged food counts in the day beside the meals you cooked.',
+    },
+    {
+      key: 'buy',
+      title: 'Keep a product you buy, with its price',
+      steps: [
+        { say: 'Scan the product.', mark: 'scan.frame', stay: true },
+        { say: 'Tap Buy This.', mark: 'scan.buy' },
+        { say: 'Tap Take a Photo of the Price, or type the price in.', mark: 'scan.pricePhoto', stay: true },
+        { say: 'Tap Save Price.', mark: 'scan.savePrice' },
+        { say: 'To buy it again, tap Put It on My Grocery List.', mark: 'scan.grocery' },
+      ],
+      forYou: 'It is kept in My Food Products, ready to add to a recipe, with what you paid for it that day.',
+    },
+  ],
+  '/food#mealBuilder': [
+    {
+      key: 'build',
+      title: 'Build a meal and log it',
+      steps: [
+        { say: 'Pick a meal type, name it if you like, and tap Continue.', mark: 'meal.continue' },
+        { say: 'Under Add from..., tap the kind of dish to add.', mark: 'meal.addFrom', stay: true },
+        { say: 'Find the dish and tap Add to Meal. Do the same for each dish.', mark: 'meal.addToMeal', stay: true },
+        { say: 'Tap Log This Now.', mark: 'meal.logNow' },
+      ],
+      forYou: "The meal goes on today's record, and the timing rules check it against your medicines and supplements.",
+    },
+    {
+      key: 'schedule',
+      title: 'Build a meal for later',
+      steps: [
+        { say: 'Build the meal the same way.', mark: 'meal.addFrom', stay: true },
+        { say: 'Tap Save & Schedule for Later.', mark: 'meal.schedule' },
+        { say: 'Pick the date and the time, then tap Schedule It.', mark: 'meal.scheduleIt' },
+      ],
+      forYou: "It shows in Schedules on Today's Meals at that time, beside your doses.",
+    },
+    {
+      key: 'startFrom',
+      title: 'Start from a meal you already have',
+      steps: [
+        { say: 'Open Start from a meal you have.', mark: 'meal.startFrom' },
+        { say: 'Pick a favorite, a scheduled meal or one you logged before.' },
+        { say: 'Change what you need, then log it or schedule it.' },
+      ],
+      forYou: 'A meal you eat often is loaded with its dishes, so you only change what is different today.',
+    },
+    {
+      key: 'favorite',
+      title: 'Keep a meal as a favorite',
+      steps: [
+        { say: 'Build the meal.', mark: 'meal.addFrom', stay: true },
+        { say: 'Tick Also save as a Favorite, for fast reuse later.', mark: 'builder.favorite' },
+        { say: 'Tap Log This Now or Save & Schedule for Later.' },
+      ],
+      forYou: 'Next time it is waiting under Start from a meal you have.',
+    },
+    {
+      key: 'report',
+      title: 'Read the full report before you log',
+      steps: [
+        { say: 'Build the meal.', mark: 'meal.addFrom', stay: true },
+        { say: 'Tap Preview Full Report.', mark: 'builder.preview' },
+        { say: 'Read it, then close it and log or schedule the meal.' },
+      ],
+      forYou: 'You see what the whole meal brings and anything in it that touches what you set in Profile, before it is on the record.',
+    },
+  ],
+  '/food#sideBuilder': builderHowTos({ noun: 'Side' }),
+  '/food#saladBuilder': builderHowTos({ noun: 'Salad', goitrogens: true }),
+  '/food#smoothieBuilder': builderHowTos({ noun: 'Smoothie', goitrogens: true }),
+  '/food#soupBuilder': builderHowTos({ noun: 'Soup' }),
+  '/food#snackBuilder': builderHowTos({ noun: 'Snack' }),
+  '/food#beverageBuilder': builderHowTos({
+    noun: 'Beverage',
+    firstSteps: [{ say: 'Pick the closest kind of drink. Smoothies and Fermentation open builders of their own.', mark: 'builder.kind' }],
+  }),
+  '/food#bakedGoodsBuilder': builderHowTos({ noun: 'Baked Good' }),
+  '/food#saucesBuilder': builderHowTos({ noun: 'Sauce' }),
+  '/food#handheldsBuilder': builderHowTos({ noun: 'Handheld' }),
+  '/food#dessertBuilder': builderHowTos({ noun: 'Dessert' }),
+  '/food#fermentationBuilder': [
+    {
+      key: 'premade',
+      title: 'Start a premade ferment today',
+      steps: [
+        { say: 'Tap Yes, a Drink, or No, Something You Eat.', mark: 'ferment.drink', stay: true },
+        { say: 'Pick what kind of ferment it is.', mark: 'builder.kind' },
+        { say: 'Tap Start Today on the recipe you want.', mark: 'ferment.startToday' },
+      ],
+      forYou: 'The recipe is saved and the Fermentation Tracker starts counting the batch from today.',
+    },
+    {
+      key: 'later',
+      title: 'Get a reminder to start one later',
+      steps: [
+        { say: 'Tap Yes, a Drink, or No, Something You Eat.', mark: 'ferment.drink', stay: true },
+        { say: 'Pick what kind of ferment it is.', mark: 'builder.kind' },
+        { say: 'Tap Schedule for Later on the recipe.', mark: 'ferment.later' },
+        { say: 'Type the date as year, month and day, like 2026-11-02, then tap Set Reminder.', mark: 'ferment.reminder' },
+      ],
+      forYou: 'A reminder comes that morning to start it.',
+    },
+    ...builderHowTos({
+      noun: 'Fermentation',
+      noNudge: true,
+      firstSteps: [
+        { say: 'Tap Yes, a Drink, or No, Something You Eat.', mark: 'ferment.drink', stay: true },
+        { say: 'Pick what kind of ferment it is.', mark: 'builder.kind' },
+        { say: 'To make your own rather than a premade one, tap Or Build Your Own Fermentation.', mark: 'ferment.own' },
+      ],
+    }),
+  ],
+  '/food#systemRecipes': [
+    {
+      key: 'find',
+      title: 'Find a recipe',
+      steps: [
+        { say: 'Type a word or two in Search the recipes.', mark: 'recipes.search', stay: true },
+        { say: 'To see only recipes for one eating style, pick it under Filter by diet.', mark: 'recipes.diet', stay: true },
+        { say: 'Open a group.', mark: 'recipes.group' },
+        { say: 'Tap a recipe to read it.', mark: 'recipes.recipe' },
+        { say: 'Read the recipe and any caution on it.' },
+      ],
+      forYou: 'Recipes are there to read, with any caution for a condition you track shown on the recipe.',
+    },
+    {
+      key: 'build',
+      title: 'Make a recipe your own',
+      steps: [
+        { say: 'Open a recipe.', mark: 'recipes.recipe', stay: true },
+        { say: 'Choose how many it is for, then tap Build This Recipe.', mark: 'recipes.build' },
+        { say: 'Change what you need in the builder, then save it.' },
+      ],
+      forYou: 'It goes in My Recipes as yours, ready to log, schedule or change again.',
+    },
+  ],
+  '/food#importRecipe': [
+    {
+      key: 'link',
+      title: 'Bring in a recipe from a web page',
+      steps: [
+        { say: 'Under From a Web Link, paste the address of the recipe and tap Read the Recipe.', mark: 'import.read' },
+        { say: 'Check each line. Tap Pick a food or Change the food where the match is wrong, or Leave it out.', mark: 'import.line', stay: true },
+        { say: 'Under Build it as, pick the kind of dish.', mark: 'import.builder', stay: true },
+        { say: 'Tap Open in the builder it names.', mark: 'import.open' },
+        { say: 'Save it in the builder.' },
+      ],
+      forYou: 'A recipe from anywhere becomes one of yours in My Recipes, with every ingredient matched to a food the app knows.',
+    },
+    {
+      key: 'paste',
+      title: 'Paste in a list of ingredients',
+      steps: [
+        { say: 'Tap Paste ingredients instead.', mark: 'import.paste' },
+        { say: 'Paste or type the ingredients, one to a line, then tap Read These Lines.', mark: 'import.readLines' },
+        { say: 'Check each line, pick the kind of dish under Build it as, and tap Open in the builder it names.', mark: 'import.open' },
+        { say: 'Save it in the builder.' },
+      ],
+      forYou: 'A recipe from a book, a card or a message gets in without typing each food on its own.',
+    },
+    {
+      key: 'past',
+      title: 'Go back to a recipe you brought in',
+      steps: [
+        { say: 'Open Imported Before.', mark: 'import.past', stay: true },
+        { say: 'Tap a recipe to open it again, or tap Remove and then Remove it.' },
+      ],
+      forYou: 'A recipe you brought in and did not finish is still there to pick up.',
+    },
+  ],
 };
 
 /** Tabs whose every lens has its tools listed above. */
-export const TOOL_TABS_DONE: readonly string[] = ['/life', '/', '/schedule', '/log'];
+export const TOOL_TABS_DONE: readonly string[] = ['/life', '/', '/schedule', '/log', '/food'];

@@ -60,6 +60,7 @@ import { PopoverSelect } from './PopoverSelect';
 import { StepsEditor } from './StepsEditor';
 import { ConditionNoteRow } from './ConditionNoteRow';
 import { useNavigationHand } from '../lib/navigationHand';
+import { useWalkMark } from './WalkMark';
 
 // Common home-cooking units -- a plain pill row, not InlineSelectList's own
 // scrollable-box treatment, since this is a short, fixed set (unlike
@@ -495,6 +496,7 @@ export function HandheldsBuilder({
   fromFavoriteId?: string;
   openRecipeId?: string;
 }) {
+  const walkMark = useWalkMark();
   const navigationHand = useNavigationHand();
   const router = useRouter();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
@@ -1262,7 +1264,7 @@ export function HandheldsBuilder({
   // 2026-08-08 -- see SideBuilder.tsx's own identical function.
   function renderFavoriteToggle() {
     return (
-      <TouchableOpacity style={styles.favoriteToggleRow} onPress={() => setAlsoSaveAsFavorite((current) => !current)} activeOpacity={0.7}>
+      <TouchableOpacity ref={walkMark.ref('builder.favorite')} style={styles.favoriteToggleRow} onPress={() => setAlsoSaveAsFavorite((current) => !current)} activeOpacity={0.7}>
         <Ionicons name={alsoSaveAsFavorite ? 'checkbox' : 'square-outline'} size={20} color={tabColor} />
         <Text style={styles.favoriteToggleText}>Also save as a Favorite, for fast reuse later</Text>
       </TouchableOpacity>
@@ -1848,6 +1850,7 @@ export function HandheldsBuilder({
           {renderSummaryCardContent()}
         </CollapsibleOverlayCard>
         <TouchableOpacity
+          ref={walkMark.ref('builder.addIngredients')}
           style={[
             styles.addIngredientsButton,
             { borderColor: tabColor },
@@ -1909,6 +1912,7 @@ export function HandheldsBuilder({
                 <Ionicons name="chevron-forward" size={16} color={tabColor} />
               </TouchableOpacity>
               <TouchableOpacity
+                ref={walkMark.ref('builder.systemRecipes')}
                 style={styles.findRecipeLink}
                 onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'systemRecipes' } })}
               >
@@ -1950,7 +1954,7 @@ export function HandheldsBuilder({
               pushing the box itself over) -- so the label above no longer
               needs its own hand-computed left offset the prior fix required;
               it can stay flush left, always correctly over the field. */}
-          <View style={[styles.dishNameFieldWrap, { backgroundColor: inputBackground(tabColor) }]}>
+          <View ref={walkMark.ref('builder.name')} collapsable={false} style={[styles.dishNameFieldWrap, { backgroundColor: inputBackground(tabColor) }]}>
             <AppTextInput
               onVoiceResult={(transcript) => handleHandheldNameChange(transcript)}
               style={[styles.formInput, styles.dishNameInputEmbedded]}
@@ -1996,6 +2000,7 @@ export function HandheldsBuilder({
               pickers just above can't accidentally end on top of this
               button instead. */}
           <TouchableOpacity
+            ref={walkMark.ref('builder.continue')}
             style={[
               styles.primaryButton,
               styles.continueButtonSpacing,
@@ -2220,6 +2225,7 @@ export function HandheldsBuilder({
                 ) : (
                   <>
                     <TouchableOpacity
+                      ref={walkMark.ref('builder.saveAddNew')}
                       style={[styles.splitButton, ingredientReady ? { backgroundColor: colors.buttonColor } : styles.primaryButtonMuted]}
                       onPress={() => saveIngredient('add-new')}
                     >
@@ -2228,6 +2234,7 @@ export function HandheldsBuilder({
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
+                      ref={walkMark.ref('builder.saveFinish')}
                       style={[styles.splitButton, ingredientReady ? { backgroundColor: colors.buttonColor } : styles.primaryButtonMuted]}
                       onPress={() => saveIngredient('finish')}
                     >
@@ -2253,6 +2260,7 @@ export function HandheldsBuilder({
               </Text>
               <View style={styles.buttonRow}>
                 <TouchableOpacity
+                  ref={walkMark.ref('builder.nudge')}
                   style={styles.secondaryButton}
                   onPress={() => {
                     dismissKeyboard();
@@ -2391,6 +2399,7 @@ export function HandheldsBuilder({
               {renderFavoriteToggle()}
               {!editHandheldId ? (
                 <TouchableOpacity
+                  ref={walkMark.ref('builder.preview')}
                   style={[styles.secondaryButton, styles.reportPreviewButton, { borderColor: tabColor }]}
                   onPress={() => void handlePreviewReport()}
                   disabled={computingReport}
@@ -2403,6 +2412,7 @@ export function HandheldsBuilder({
                 </TouchableOpacity>
               ) : null}
               <TouchableOpacity
+                ref={walkMark.ref('builder.complete')}
                 style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]}
                 onPress={() => void finishHandheld(ingredients)}
                 disabled={computingReport}

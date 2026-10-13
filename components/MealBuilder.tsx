@@ -54,6 +54,7 @@ import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
 import { RecipeDepthReport } from './RecipeDepthReport';
 import { ThumbRow } from './ThumbRow';
+import { useWalkMark } from './WalkMark';
 
 // Deliberately last of the ten Food-tab builders, per this app's own build
 // order (see CLAUDE.md's Next steps) -- this is the only one that assembles
@@ -306,6 +307,7 @@ export function MealBuilder({
   buildFrom?: BuildMealHandoff | null;
   onBuildFromConsumed?: () => void;
 }) {
+  const walkMark = useWalkMark();
   const router = useRouter();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   // Scrolling an opened meal in the Start-from picker to the top of the
@@ -1049,7 +1051,7 @@ export function MealBuilder({
   // 2026-08-08 -- see SideBuilder.tsx's own identical function.
   function renderFavoriteToggle() {
     return (
-      <TouchableOpacity style={styles.favoriteToggleRow} onPress={() => setAlsoSaveAsFavorite((current) => !current)} activeOpacity={0.7}>
+      <TouchableOpacity ref={walkMark.ref('builder.favorite')} style={styles.favoriteToggleRow} onPress={() => setAlsoSaveAsFavorite((current) => !current)} activeOpacity={0.7}>
         <Ionicons name={alsoSaveAsFavorite ? 'checkbox' : 'square-outline'} size={20} color={tabColor} />
         <Text style={styles.favoriteToggleText}>Also save as a Favorite, for fast reuse later</Text>
       </TouchableOpacity>
@@ -1645,6 +1647,7 @@ export function MealBuilder({
               kind="action"
               title="Start from a meal you have"
               caption="A meal favorite, one on your schedule, or one you have logged before, loaded here to adjust."
+              markRef={walkMark.ref('meal.startFrom')}
               icon="restaurant-outline"
               color={tabColor}
               onPress={() => void openStartingPoints()}
@@ -1696,6 +1699,7 @@ export function MealBuilder({
               })}
             </View>
             <TouchableOpacity
+              ref={walkMark.ref('meal.continue')}
               style={[styles.primaryButton, { backgroundColor: identityReady ? colors.buttonColor : colors.border }]}
               onPress={handleContinuePress}
             >
@@ -1728,6 +1732,7 @@ export function MealBuilder({
                 <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity
+                ref={walkMark.ref('meal.addToMeal')}
                 style={[styles.primaryButton, { backgroundColor: colors.buttonColor, flex: 1, marginTop: 0, opacity: confirmingPending ? 0.6 : 1 }]}
                 onPress={() => void confirmPendingSelection()}
                 disabled={confirmingPending}
@@ -1803,6 +1808,7 @@ export function MealBuilder({
                 <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity
+                ref={walkMark.ref('meal.scheduleIt')}
                 style={[styles.primaryButton, { backgroundColor: colors.buttonColor, flex: 1, marginTop: 0, opacity: scheduling ? 0.6 : 1 }]}
                 onPress={confirmScheduleForLater}
                 disabled={scheduling}
@@ -2238,7 +2244,14 @@ export function MealBuilder({
             boxes, instead of a heading chip, a caption chip and a loose
             grid on the photo. */}
         <View style={styles.bandOut}>
-          <HomeSectionBand kind="static" title="Add from..." icon="add-circle-outline" color={tabColor} contentStyle={styles.bandRows}>
+          <HomeSectionBand
+            kind="static"
+            title="Add from..."
+            icon="add-circle-outline"
+            color={tabColor}
+            contentStyle={styles.bandRows}
+            markRef={walkMark.ref('meal.addFrom')}
+          >
             <Text style={styles.gridCaption}>
               Each builder below lists your saved dishes and the system recipes for it. Tap the (i) above to see exactly what this does.
             </Text>
@@ -2291,6 +2304,7 @@ export function MealBuilder({
                 state block near the top of this component for the full
                 reasoning. */}
             <TouchableOpacity
+              ref={walkMark.ref('builder.preview')}
               style={[styles.secondaryButton, styles.reportPreviewButton, { borderColor: tabColor }]}
               onPress={() => void handlePreviewReport()}
               disabled={computingReport}
@@ -2302,6 +2316,7 @@ export function MealBuilder({
               )}
             </TouchableOpacity>
             <TouchableOpacity
+              ref={walkMark.ref('meal.logNow')}
               style={[styles.primaryButton, styles.logButton, { backgroundColor: colors.buttonColor, opacity: saving ? 0.6 : 1 }]}
               onPress={confirmAndLogMealNow}
               disabled={saving || computingReport}
@@ -2317,7 +2332,7 @@ export function MealBuilder({
                 (outlined, not filled) -- Log This Now stays the visually
                 primary action, matching how every other builder's own
                 single real "finish" action is the filled button. */}
-            <TouchableOpacity style={[styles.secondaryButton, styles.scheduleButton]} onPress={openScheduleForLater}>
+            <TouchableOpacity ref={walkMark.ref('meal.schedule')} style={[styles.secondaryButton, styles.scheduleButton]} onPress={openScheduleForLater}>
               <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Save &amp; Schedule for Later</Text>
             </TouchableOpacity>
             {/* "Add to My Hydration Routine," 2026-08-26 -- see the state

@@ -60,6 +60,7 @@ import { PopoverSelect } from './PopoverSelect';
 import { StepsEditor } from './StepsEditor';
 import { ConditionNoteRow } from './ConditionNoteRow';
 import { useNavigationHand } from '../lib/navigationHand';
+import { useWalkMark } from './WalkMark';
 
 // Common home-cooking units -- a plain pill row, not InlineSelectList's own
 // scrollable-box treatment, since this is a short, fixed set (unlike
@@ -469,6 +470,7 @@ export function SmoothieBuilder({
   fromFavoriteId?: string;
   openRecipeId?: string;
 }) {
+  const walkMark = useWalkMark();
   const navigationHand = useNavigationHand();
   const router = useRouter();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
@@ -1282,7 +1284,7 @@ export function SmoothieBuilder({
   // 2026-08-08 -- see SideBuilder.tsx's own identical function.
   function renderFavoriteToggle() {
     return (
-      <TouchableOpacity style={styles.favoriteToggleRow} onPress={() => setAlsoSaveAsFavorite((current) => !current)} activeOpacity={0.7}>
+      <TouchableOpacity ref={walkMark.ref('builder.favorite')} style={styles.favoriteToggleRow} onPress={() => setAlsoSaveAsFavorite((current) => !current)} activeOpacity={0.7}>
         <Ionicons name={alsoSaveAsFavorite ? 'checkbox' : 'square-outline'} size={20} color={tabColor} />
         <Text style={styles.favoriteToggleText}>Also save as a Favorite, for fast reuse later</Text>
       </TouchableOpacity>
@@ -1848,6 +1850,7 @@ export function SmoothieBuilder({
           {renderSummaryCardContent()}
         </CollapsibleOverlayCard>
         <TouchableOpacity
+          ref={walkMark.ref('builder.addIngredients')}
           style={[
             styles.addIngredientsButton,
             { borderColor: tabColor },
@@ -1909,6 +1912,7 @@ export function SmoothieBuilder({
                 <Ionicons name="chevron-forward" size={16} color={tabColor} />
               </TouchableOpacity>
               <TouchableOpacity
+                ref={walkMark.ref('builder.systemRecipes')}
                 style={styles.findRecipeLink}
                 onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'systemRecipes' } })}
               >
@@ -1955,7 +1959,7 @@ export function SmoothieBuilder({
               pushing the box itself over) -- so the label above no longer
               needs its own hand-computed left offset the prior fix required;
               it can stay flush left, always correctly over the field. */}
-          <View style={[styles.dishNameFieldWrap, { backgroundColor: inputBackground(tabColor) }]}>
+          <View ref={walkMark.ref('builder.name')} collapsable={false} style={[styles.dishNameFieldWrap, { backgroundColor: inputBackground(tabColor) }]}>
             <AppTextInput
               onVoiceResult={(transcript) => handleSmoothieNameChange(transcript)}
               style={[styles.formInput, styles.dishNameInputEmbedded]}
@@ -2001,6 +2005,7 @@ export function SmoothieBuilder({
               pickers just above can't accidentally end on top of this
               button instead. */}
           <TouchableOpacity
+            ref={walkMark.ref('builder.continue')}
             style={[
               styles.primaryButton,
               styles.continueButtonSpacing,
@@ -2233,6 +2238,7 @@ export function SmoothieBuilder({
                 ) : (
                   <>
                     <TouchableOpacity
+                      ref={walkMark.ref('builder.saveAddNew')}
                       style={[styles.splitButton, ingredientReady ? { backgroundColor: colors.buttonColor } : styles.primaryButtonMuted]}
                       onPress={() => saveIngredient('add-new')}
                     >
@@ -2241,6 +2247,7 @@ export function SmoothieBuilder({
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
+                      ref={walkMark.ref('builder.saveFinish')}
                       style={[styles.splitButton, ingredientReady ? { backgroundColor: colors.buttonColor } : styles.primaryButtonMuted]}
                       onPress={() => saveIngredient('finish')}
                     >
@@ -2266,6 +2273,7 @@ export function SmoothieBuilder({
               </Text>
               <View style={styles.buttonRow}>
                 <TouchableOpacity
+                  ref={walkMark.ref('builder.nudge')}
                   style={styles.secondaryButton}
                   onPress={() => {
                     dismissKeyboard();
@@ -2403,6 +2411,7 @@ export function SmoothieBuilder({
               {renderFavoriteToggle()}
               {!editSmoothieId ? (
                 <TouchableOpacity
+                  ref={walkMark.ref('builder.preview')}
                   style={[styles.secondaryButton, styles.reportPreviewButton, { borderColor: tabColor }]}
                   onPress={() => void handlePreviewReport()}
                   disabled={computingReport}
@@ -2415,6 +2424,7 @@ export function SmoothieBuilder({
                 </TouchableOpacity>
               ) : null}
               <TouchableOpacity
+                ref={walkMark.ref('builder.complete')}
                 style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]}
                 onPress={() => confirmAndFinishSmoothie(ingredients)}
                 disabled={computingReport}

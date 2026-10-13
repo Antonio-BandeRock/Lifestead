@@ -38,6 +38,7 @@ import { RecipeMarkupView } from './RecipeMarkupView';
 import { isDesktopApp } from '../lib/desktop/bridge';
 import type { Marked } from '../lib/recipeMarkup';
 import { ThumbRow } from './ThumbRow';
+import { useWalkMark } from './WalkMark';
 
 // Opening a page inside the app to read or mark its recipe (G3) needs the
 // phone's web view, which the desktop build does not have.
@@ -116,6 +117,7 @@ export function RecipeImportView({
   /** A link shared into the app (C11), put in the box and nothing fetched until Import is pressed. */
   initialUrl?: string;
 }) {
+  const walkMark = useWalkMark();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const [url, setUrl] = useState(initialUrl ?? '');
   const [busy, setBusy] = useState<string | null>(null);
@@ -365,7 +367,12 @@ export function RecipeImportView({
         )}
         <View style={styles.fieldRow}>
           {line.leftOut ? null : (
-            <TouchableOpacity onPress={() => void startPick(index)} activeOpacity={0.7} style={styles.rowAction}>
+            <TouchableOpacity
+              ref={index === 0 ? walkMark.ref('import.line') : undefined}
+              onPress={() => void startPick(index)}
+              activeOpacity={0.7}
+              style={styles.rowAction}
+            >
               <Text style={styles.rowActionText}>{line.match ? 'Change the food' : 'Pick a food'}</Text>
             </TouchableOpacity>
           )}
@@ -447,6 +454,7 @@ export function RecipeImportView({
           />
           <View style={styles.fieldRow}>
             <TouchableOpacity
+              ref={walkMark.ref('import.read')}
               onPress={() => void readLink()}
               activeOpacity={0.7}
               style={[styles.primaryAction, (busy !== null || url.trim() === '') && styles.disabled]}
@@ -455,7 +463,7 @@ export function RecipeImportView({
               <Text style={styles.primaryActionText}>Read the Recipe</Text>
             </TouchableOpacity>
             {pasting ? null : (
-              <TouchableOpacity onPress={() => setPasting(true)} activeOpacity={0.7}>
+              <TouchableOpacity ref={walkMark.ref('import.paste')} onPress={() => setPasting(true)} activeOpacity={0.7}>
                 <Text style={styles.linkText}>Paste ingredients instead</Text>
               </TouchableOpacity>
             )}
@@ -487,7 +495,7 @@ export function RecipeImportView({
                 textAlignVertical="top"
               />
               <ThumbRow primary="first" style={styles.fieldRow}>
-                <TouchableOpacity onPress={() => void readPasted()} activeOpacity={0.7} style={styles.primaryAction}>
+                <TouchableOpacity ref={walkMark.ref('import.readLines')} onPress={() => void readPasted()} activeOpacity={0.7} style={styles.primaryAction}>
                   <Text style={styles.primaryActionText}>Read These Lines</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -557,7 +565,7 @@ export function RecipeImportView({
 
             <View style={styles.formCard}>
               <Text style={styles.rowTitle}>{readiness.sentence}</Text>
-              <View style={styles.fieldRow}>
+              <View ref={walkMark.ref('import.builder')} collapsable={false} style={styles.fieldRow}>
                 <Text style={styles.fieldLabel}>Build it as</Text>
                 <PopoverSelect
                   options={BUILDER_OPTIONS}
@@ -568,6 +576,7 @@ export function RecipeImportView({
                 />
               </View>
               <TouchableOpacity
+                ref={walkMark.ref('import.open')}
                 onPress={() => void openInBuilder()}
                 activeOpacity={0.7}
                 style={[styles.primaryAction, (!readiness.ready || !record.builderType) && styles.disabled]}
@@ -594,7 +603,14 @@ export function RecipeImportView({
           </HomeSectionBand>
         ) : null}
 
-        <HomeSectionBand kind="static" title="Imported Before" icon="time-outline" color={colors.tabFood} contentStyle={styles.bandBody}>
+        <HomeSectionBand
+          kind="static"
+          title="Imported Before"
+          icon="time-outline"
+          color={colors.tabFood}
+          contentStyle={styles.bandBody}
+          markRef={walkMark.ref('import.past')}
+        >
           {past.length === 0 ? (
             <Text style={styles.emptyText}>Nothing imported yet.</Text>
           ) : (

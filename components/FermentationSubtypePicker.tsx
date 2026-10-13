@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
+import { useWalkMark } from './WalkMark';
 import { textShadow, typography } from '../constants/typography';
 
 // 2026-08-21, direct request: "Fermentation should ask what type of
@@ -106,6 +107,7 @@ export function FermentationSubtypePicker({
   onPick: (key: FermentationSubtypeKey) => void;
 }) {
   const scrollBottomPadding = useFloatingButtonScrollPadding();
+  const walkMark = useWalkMark();
   const [drinkChoice, setDrinkChoice] = useState<DrinkChoice | null>(null);
 
   if (drinkChoice === null) {
@@ -116,7 +118,7 @@ export function FermentationSubtypePicker({
           Fermentation Builder covers both. A fermented drink and a fermented food (sauerkraut, yogurt) need different
           ingredients, so this narrows things before anything else.
         </Text>
-        <TouchableOpacity style={[styles.card, { borderColor: tabColor }]} onPress={() => setDrinkChoice('drink')}>
+        <TouchableOpacity ref={walkMark.ref('ferment.drink')} style={[styles.card, { borderColor: tabColor }]} onPress={() => setDrinkChoice('drink')}>
           <Text style={[styles.cardLabel, { color: tabColor }]}>Yes, a Drink</Text>
           <Text style={styles.cardDescription}>Something you pour into a glass and drink.</Text>
         </TouchableOpacity>
@@ -139,8 +141,8 @@ export function FermentationSubtypePicker({
         Pick the closest match. This scopes ingredient search to the right kind of ferment, and only asks about starter
         cultures where that&rsquo;s actually an ingredient choice.
       </Text>
-      {options.map((option) => (
-        <TouchableOpacity key={option.key} style={[styles.card, { borderColor: tabColor }]} onPress={() => onPick(option.key)}>
+      {options.map((option, index) => (
+        <TouchableOpacity ref={index === 0 ? walkMark.ref('builder.kind') : undefined} key={option.key} style={[styles.card, { borderColor: tabColor }]} onPress={() => onPick(option.key)}>
           <Text style={[styles.cardLabel, { color: tabColor }]}>{option.label}</Text>
           <Text style={styles.cardDescription}>{option.description}</Text>
         </TouchableOpacity>

@@ -83,6 +83,7 @@ import {
   type ScheduleItemRecord,
 } from '../lib/db';
 import { buildTime24, describeTimeInputProblem, formatTime12, type TimeOfDayInput } from '../lib/timeOfDay';
+import { useWalkMark } from './WalkMark';
 
 // How many rows are loaded at once. High enough that a personal history is
 // covered whole, and the search runs in SQL rather than over this list, so a
@@ -238,6 +239,7 @@ export function FindMealView({
   // Called once something has been logged or scheduled, or nothing will be.
   onDone: () => void;
 }) {
+  const walkMark = useWalkMark();
   const scrollPadding = useFloatingButtonScrollPadding();
   const listRef = useRef<FlatList<ListSection>>(null);
   const currentScrollY = useRef(0);
@@ -891,7 +893,7 @@ export function FindMealView({
   function renderEatenOutBand() {
     return (
       <HomeSectionBand kind="static" title="I ate this out" icon="storefront-outline" color={colors.tabFood} contentStyle={styles.sectionBody}>
-        <TouchableOpacity style={styles.dishRow} activeOpacity={0.8} onPress={() => turnEatenOut(!eatenOut)}>
+        <TouchableOpacity ref={walkMark.ref('findMeal.eatenOut')} style={styles.dishRow} activeOpacity={0.8} onPress={() => turnEatenOut(!eatenOut)}>
           <Ionicons name={eatenOut ? 'checkbox' : 'square-outline'} size={20} color={colors.accent} />
           <Text style={styles.dishRowName}>A restaurant, a takeaway, or a meal somebody else cooked</Text>
         </TouchableOpacity>
@@ -1011,6 +1013,7 @@ export function FindMealView({
             </View>
             {outEarlier ? renderTimeFields() : null}
             <TouchableOpacity
+              ref={walkMark.ref('findMeal.logOut')}
               style={[styles.useButton, busy ? styles.disabled : null]}
               activeOpacity={0.85}
               onPress={handleLogEatenOutDirect}
@@ -1064,7 +1067,7 @@ export function FindMealView({
                 </Text>
               </View>
             ) : null}
-            <View style={styles.scopeRow}>
+            <View ref={walkMark.ref('findMeal.scope')} collapsable={false} style={styles.scopeRow}>
               {(
                 [
                   { value: 'yours' as const, label: 'Your meals' },
@@ -1120,7 +1123,7 @@ export function FindMealView({
                   </TouchableOpacity>
                 </View>
               ))}
-              <TouchableOpacity style={styles.useButton} activeOpacity={0.85} onPress={buildMealWithTicked}>
+              <TouchableOpacity ref={walkMark.ref('findMeal.build')} style={styles.useButton} activeOpacity={0.85} onPress={buildMealWithTicked}>
                 <Ionicons name="construct-outline" size={16} color={colors.background} />
                 <Text style={styles.useButtonText}>{`Build a meal with these ${tickedList.length} dish${tickedList.length === 1 ? '' : 'es'}`}</Text>
               </TouchableOpacity>
@@ -1144,9 +1147,10 @@ export function FindMealView({
             </View>
           )
         }
-        renderItem={({ item: section }) => (
+        renderItem={({ item: section, index: sectionIndex }) => (
           <HomeSectionBand
             kind="fold"
+            markRef={sectionIndex === 0 ? walkMark.ref('findMeal.group') : undefined}
             title={`${section.label} (${section.rows.length})`}
             icon={section.icon}
             color={colors.tabFood}
@@ -1154,7 +1158,7 @@ export function FindMealView({
             onToggle={() => toggleSection(section.key)}
             contentStyle={styles.sectionBody}
           >
-            {section.rows.map((item) => {
+            {section.rows.map((item, rowIndex) => {
               const expanded = expandedKey === item.key;
               const detail = detailByKey[item.key];
               const teaser = item.meal.kind === 'curated' ? CURATED_TEASER_BY_ID.get(item.meal.id) : undefined;
@@ -1167,6 +1171,7 @@ export function FindMealView({
                   }}
                 >
                   <TouchableOpacity
+                    ref={sectionIndex === 0 && rowIndex === 0 ? walkMark.ref('findMeal.meal') : undefined}
                     style={styles.row}
                     activeOpacity={0.8}
                     onPress={() => toggleExpanded(item.key, item.meal)}
@@ -1238,6 +1243,7 @@ export function FindMealView({
                                 return (
                                   <TouchableOpacity
                                     key={key}
+                                    ref={index === 0 ? walkMark.ref('findMeal.tick') : undefined}
                                     style={styles.dishRow}
                                     onPress={() =>
                                       toggleDishTicked(key, {
@@ -1257,6 +1263,7 @@ export function FindMealView({
                             </>
                           ) : item.meal.kind === 'curated' ? (
                             <TouchableOpacity
+                              ref={walkMark.ref('findMeal.tick')}
                               style={styles.dishRow}
                               onPress={() =>
                                 toggleDishTicked(`${item.key}::self`, {
@@ -1294,6 +1301,7 @@ export function FindMealView({
                         </>
                       )}
                       <TouchableOpacity
+                        ref={walkMark.ref('findMeal.use')}
                         style={styles.useButton}
                         activeOpacity={0.85}
                         onPress={() => openActionsFor(item.meal)}
@@ -1344,6 +1352,7 @@ export function FindMealView({
         <Text style={styles.muted}>{describeMeal(selected)}</Text>
 
         <TouchableOpacity
+          ref={walkMark.ref('findMeal.logNow')}
           style={[styles.primaryButton, busy ? styles.disabled : null]}
           activeOpacity={0.85}
           onPress={handleLogNow}
@@ -1353,7 +1362,7 @@ export function FindMealView({
           <Text style={styles.primaryButtonText}>{busy ? 'Saving…' : 'Log it now'}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={() => setMode('earlier')}>
+        <TouchableOpacity ref={walkMark.ref('findMeal.earlier')} style={styles.secondaryButton} activeOpacity={0.85} onPress={() => setMode('earlier')}>
           <Ionicons name="time-outline" size={18} color={colors.textSecondary} />
           <Text style={styles.secondaryButtonText}>Log it earlier today</Text>
         </TouchableOpacity>
@@ -1363,14 +1372,14 @@ export function FindMealView({
             {`Logged as ${lowerFirst(eatenOutMealName(outPlace.trim() || null, outHow))}, with this meal standing in for what was served.`}
           </Text>
         ) : (
-          <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={() => setMode('schedule')}>
+          <TouchableOpacity ref={walkMark.ref('findMeal.schedule')} style={styles.secondaryButton} activeOpacity={0.85} onPress={() => setMode('schedule')}>
             <Ionicons name="calendar-outline" size={18} color={colors.textSecondary} />
             <Text style={styles.secondaryButtonText}>Schedule it</Text>
           </TouchableOpacity>
         )}
 
         {plannedToday.length > 0 ? (
-          <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={() => setMode('replace')}>
+          <TouchableOpacity ref={walkMark.ref('findMeal.replace')} style={styles.secondaryButton} activeOpacity={0.85} onPress={() => setMode('replace')}>
             <Ionicons name="swap-horizontal-outline" size={18} color={colors.textSecondary} />
             <Text style={styles.secondaryButtonText}>Use it instead of a planned meal</Text>
           </TouchableOpacity>
@@ -1441,6 +1450,7 @@ export function FindMealView({
         />
         {renderTimeFields()}
         <TouchableOpacity
+          ref={walkMark.ref('findMeal.scheduleIt')}
           style={[styles.primaryButton, busy ? styles.disabled : null]}
           activeOpacity={0.85}
           onPress={handleSchedule}

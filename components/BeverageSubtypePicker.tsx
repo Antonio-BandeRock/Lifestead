@@ -1,6 +1,7 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
+import { useWalkMark } from './WalkMark';
 import { textShadow, typography } from '../constants/typography';
 
 // 2026-08-13, direct request: "if I tap the Beverages lens, it should
@@ -77,6 +78,7 @@ export function BeverageSubtypePicker({
   onPick: (choice: BeverageTypeChoice) => void;
 }) {
   const scrollBottomPadding = useFloatingButtonScrollPadding();
+  const walkMark = useWalkMark();
   return (
     <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
       <Text style={[styles.heading, { color: tabColor }]}>What Kind of Beverage?</Text>
@@ -84,8 +86,9 @@ export function BeverageSubtypePicker({
         Pick the closest match. This scopes ingredient search to the right kind of drink, or opens the right builder
         directly.
       </Text>
-      {BEVERAGE_TYPE_OPTIONS.map((option) => (
+      {BEVERAGE_TYPE_OPTIONS.map((option, index) => (
         <TouchableOpacity
+          ref={index === 0 ? walkMark.ref('builder.kind') : undefined}
           key={option.label}
           style={[styles.card, { borderColor: tabColor }]}
           onPress={() => onPick(option.choice)}

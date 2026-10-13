@@ -74,6 +74,7 @@ import { PopoverSelect } from './PopoverSelect';
 import { StepsEditor } from './StepsEditor';
 import { ConditionNoteRow } from './ConditionNoteRow';
 import { useNavigationHand } from '../lib/navigationHand';
+import { useWalkMark } from './WalkMark';
 
 // Common home-cooking units -- a plain pill row, not InlineSelectList's own
 // scrollable-box treatment, since this is a short, fixed set (unlike
@@ -650,6 +651,7 @@ export function FermentationBuilder({
   openRecipeId?: string;
   subtype?: FermentationSubtypeKey;
 }) {
+  const walkMark = useWalkMark();
   const navigationHand = useNavigationHand();
   // See FERMENTATION_SUBTYPE_CONFIG's own comment above for the full
   // reasoning -- both fall back to the unfiltered/always-shown behavior
@@ -1637,7 +1639,7 @@ export function FermentationBuilder({
   // 2026-08-08 -- see SideBuilder.tsx's own identical function.
   function renderFavoriteToggle() {
     return (
-      <TouchableOpacity style={styles.favoriteToggleRow} onPress={() => setAlsoSaveAsFavorite((current) => !current)} activeOpacity={0.7}>
+      <TouchableOpacity ref={walkMark.ref('builder.favorite')} style={styles.favoriteToggleRow} onPress={() => setAlsoSaveAsFavorite((current) => !current)} activeOpacity={0.7}>
         <Ionicons name={alsoSaveAsFavorite ? 'checkbox' : 'square-outline'} size={20} color={tabColor} />
         <Text style={styles.favoriteToggleText}>Also save as a Favorite, for fast reuse later</Text>
       </TouchableOpacity>
@@ -2227,6 +2229,7 @@ export function FermentationBuilder({
           {renderSummaryCardContent()}
         </CollapsibleOverlayCard>
         <TouchableOpacity
+          ref={walkMark.ref('builder.addIngredients')}
           style={[
             styles.addIngredientsButton,
             { borderColor: tabColor },
@@ -2288,6 +2291,7 @@ export function FermentationBuilder({
                 <Ionicons name="chevron-forward" size={16} color={tabColor} />
               </TouchableOpacity>
               <TouchableOpacity
+                ref={walkMark.ref('builder.systemRecipes')}
                 style={styles.findRecipeLink}
                 onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'systemRecipes' } })}
               >
@@ -2317,12 +2321,13 @@ export function FermentationBuilder({
                   <Text style={styles.recipeMenuLoadingText}>Loading recipes…</Text>
                 </View>
               ) : null}
-              {curatedRecipesForSubtype.map((recipe) => (
+              {curatedRecipesForSubtype.map((recipe, recipeIndex) => (
                 <View key={recipe.id} style={styles.recipeMenuCard}>
                   <Text style={[styles.recipeMenuCardTitle, { color: tabColor }]}>{recipe.name}</Text>
                   <Text style={styles.recipeMenuCardTeaser}>{recipe.flavorProfile}</Text>
                   <View style={styles.recipeMenuActionRow}>
                     <TouchableOpacity
+                      ref={recipeIndex === 0 ? walkMark.ref('ferment.startToday') : undefined}
                       style={[styles.recipeMenuActionButton, { backgroundColor: colors.buttonColor }, startingRecipeId === recipe.id ? styles.disabled : null]}
                       onPress={() => handleStartCuratedRecipeToday(recipe.id, recipe.name)}
                       disabled={startingRecipeId === recipe.id}
@@ -2330,6 +2335,7 @@ export function FermentationBuilder({
                       <Text style={styles.recipeMenuActionButtonText}>{startingRecipeId === recipe.id ? 'Starting…' : 'Start Today'}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
+                      ref={recipeIndex === 0 ? walkMark.ref('ferment.later') : undefined}
                       style={[styles.recipeMenuActionButtonOutline, { borderColor: tabColor }]}
                       onPress={() => {
                         setSchedulingRecipeId((current) => (current === recipe.id ? null : recipe.id));
@@ -2357,6 +2363,7 @@ export function FermentationBuilder({
                         placeholderTextColor={colors.textMuted}
                       />
                       <TouchableOpacity
+                        ref={recipeIndex === 0 ? walkMark.ref('ferment.reminder') : undefined}
                         style={[styles.recipeMenuActionButton, styles.recipeMenuScheduleConfirm, { backgroundColor: colors.buttonColor }, schedulingInProgress ? styles.disabled : null]}
                         onPress={() => handleScheduleCuratedRecipe(recipe.name)}
                         disabled={schedulingInProgress}
@@ -2367,7 +2374,7 @@ export function FermentationBuilder({
                   ) : null}
                 </View>
               ))}
-              <TouchableOpacity style={styles.recipeMenuDismiss} onPress={() => setShowRecipeMenu(false)}>
+              <TouchableOpacity ref={walkMark.ref('ferment.own')} style={styles.recipeMenuDismiss} onPress={() => setShowRecipeMenu(false)}>
                 <Text style={[styles.recipeMenuDismissText, { color: tabColor }]}>Or Build Your Own Fermentation</Text>
               </TouchableOpacity>
             </View>
@@ -2410,7 +2417,7 @@ export function FermentationBuilder({
               pushing the box itself over) -- so the label above no longer
               needs its own hand-computed left offset the prior fix required;
               it can stay flush left, always correctly over the field. */}
-          <View style={[styles.dishNameFieldWrap, { backgroundColor: inputBackground(tabColor) }]}>
+          <View ref={walkMark.ref('builder.name')} collapsable={false} style={[styles.dishNameFieldWrap, { backgroundColor: inputBackground(tabColor) }]}>
             <AppTextInput
               onVoiceResult={(transcript) => handleFermentationNameChange(transcript)}
               style={[styles.formInput, styles.dishNameInputEmbedded]}
@@ -2559,6 +2566,7 @@ export function FermentationBuilder({
               pickers just above can't accidentally end on top of this
               button instead. */}
           <TouchableOpacity
+            ref={walkMark.ref('builder.continue')}
             style={[
               styles.primaryButton,
               styles.continueButtonSpacing,
@@ -2809,6 +2817,7 @@ export function FermentationBuilder({
                 ) : (
                   <>
                     <TouchableOpacity
+                      ref={walkMark.ref('builder.saveAddNew')}
                       style={[styles.splitButton, ingredientReady ? { backgroundColor: colors.buttonColor } : styles.primaryButtonMuted]}
                       onPress={() => saveIngredient('add-new')}
                     >
@@ -2817,6 +2826,7 @@ export function FermentationBuilder({
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
+                      ref={walkMark.ref('builder.saveFinish')}
                       style={[styles.splitButton, ingredientReady ? { backgroundColor: colors.buttonColor } : styles.primaryButtonMuted]}
                       onPress={() => saveIngredient('finish')}
                     >
@@ -2960,6 +2970,7 @@ export function FermentationBuilder({
               {renderFavoriteToggle()}
               {!editFermentationId ? (
                 <TouchableOpacity
+                  ref={walkMark.ref('builder.preview')}
                   style={[styles.secondaryButton, styles.reportPreviewButton, { borderColor: tabColor }]}
                   onPress={() => void handlePreviewReport()}
                   disabled={computingReport}
@@ -2972,6 +2983,7 @@ export function FermentationBuilder({
                 </TouchableOpacity>
               ) : null}
               <TouchableOpacity
+                ref={walkMark.ref('builder.complete')}
                 style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]}
                 onPress={() => void finishFermentation(ingredients)}
                 disabled={computingReport}

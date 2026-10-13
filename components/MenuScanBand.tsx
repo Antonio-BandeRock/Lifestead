@@ -31,8 +31,10 @@ import {
 } from '../lib/menuScan';
 import { recognizeTextFromImage } from '../lib/ocr';
 import { flagConditionConcernsForConditions } from '../lib/scannedProductFlags';
+import { useWalkMark } from './WalkMark';
 
 export function MenuScanBand() {
+  const walkMark = useWalkMark();
   const router = useRouter();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const people = useHouseholdPeople();
@@ -91,6 +93,7 @@ export function MenuScanBand() {
     <HomeSectionBand
       kind="fold"
       title={MENU_BAND_TITLE}
+      markRef={walkMark.ref('findMeal.menu')}
       icon="reader-outline"
       color={colors.tabFood}
       expanded={open}
@@ -100,6 +103,7 @@ export function MenuScanBand() {
       <Text style={styles.line}>{MENU_INTRO}</Text>
       <View style={styles.buttonRow}>
         <TouchableOpacity
+          ref={walkMark.ref('findMeal.menuPhoto')}
           style={[styles.button, reading ? styles.disabled : null]}
           activeOpacity={0.8}
           disabled={reading}

@@ -20,6 +20,7 @@ import {
 } from '../lib/digest/types';
 import type { BuilderFavoriteItemType } from '../lib/db';
 import { isSideDish } from '../lib/recipeDishRole';
+import { useWalkMark } from './WalkMark';
 
 // The curated recipes, on the Food tab, grouped under the builder that
 // makes them. Direct instruction, 2026-09-18: "I would like the System
@@ -320,6 +321,7 @@ export function SystemRecipesView({
   // here). 2026-09-19.
   initialEntryId?: string;
 }) {
+  const walkMark = useWalkMark();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const [openGroup, setOpenGroup] = useState<string | null>(null);
   const [openEntryId, setOpenEntryId] = useState<string | null>(null);
@@ -402,13 +404,15 @@ export function SystemRecipesView({
             </Text>
           </View>
           <View style={styles.controlsBox}>
-            <EntrySearchInput
-              placeholder="Search the recipes..."
-              style={styles.searchField}
-              tabColor={TAB_COLOR}
-              onDebouncedChange={handleDebouncedChange}
-            />
-            <View style={styles.filterRow}>
+            <View ref={walkMark.ref('recipes.search')} collapsable={false}>
+              <EntrySearchInput
+                placeholder="Search the recipes..."
+                style={styles.searchField}
+                tabColor={TAB_COLOR}
+                onDebouncedChange={handleDebouncedChange}
+              />
+            </View>
+            <View ref={walkMark.ref('recipes.diet')} collapsable={false} style={styles.filterRow}>
               <Text style={styles.filterLabel}>Filter by diet</Text>
               <PopoverSelect
                 options={RECIPE_DIET_FILTER_OPTIONS}
@@ -437,6 +441,7 @@ export function SystemRecipesView({
                     <SystemRecipeRow
                       entry={result.entry}
                       groupLabel={result.groupLabel}
+                      first={index === 0}
                       expanded={openEntryId === result.entry.id}
                       onToggle={() => setOpenEntryId(openEntryId === result.entry.id ? null : result.entry.id)}
                       onOpenBuilder={onOpenBuilder}
@@ -446,10 +451,11 @@ export function SystemRecipesView({
               ))}
             </View>
           ) : (
-            filteredGroups.map((group) => (
+            filteredGroups.map((group, groupIndex) => (
               <HomeSectionBand
                 key={group.key}
                 kind="fold"
+                markRef={groupIndex === 0 ? walkMark.ref('recipes.group') : undefined}
                 title={`${group.label} (${group.entries.length})`}
                 icon={group.icon}
                 color={TAB_COLOR}
@@ -474,6 +480,7 @@ export function SystemRecipesView({
                         <EntryScrollAnchor id={entry.id} target={scrollTarget}>
                           <SystemRecipeRow
                             entry={entry}
+                            first={groupIndex === 0 && sectionIndex === 0 && index === 0}
                             expanded={openEntryId === entry.id}
                             onToggle={() => setOpenEntryId(openEntryId === entry.id ? null : entry.id)}
                             onOpenBuilder={onOpenBuilder}
@@ -499,6 +506,7 @@ function SystemRecipeRow({
   expanded,
   onToggle,
   onOpenBuilder,
+  first,
 }: {
   entry: DigestEntry;
   // Which builder makes it, shown only in search results, where the rows
@@ -507,10 +515,18 @@ function SystemRecipeRow({
   expanded: boolean;
   onToggle: () => void;
   onOpenBuilder: (params: Record<string, string>) => void;
+  /** The top row, which a how-to step rings. */
+  first?: boolean;
 }) {
+  const walkMark = useWalkMark();
   return (
     <View style={styles.itemRow}>
-      <TouchableOpacity style={styles.itemTapArea} onPress={onToggle} activeOpacity={0.85}>
+      <TouchableOpacity
+        ref={first ? walkMark.ref('recipes.recipe') : undefined}
+        style={styles.itemTapArea}
+        onPress={onToggle}
+        activeOpacity={0.85}
+      >
         <View style={styles.itemTextWrap}>
           {groupLabel ? <Text style={styles.itemGroupLabel}>{groupLabel}</Text> : null}
           <Text style={styles.itemTitle}>{entry.title}</Text>
@@ -522,22 +538,24 @@ function SystemRecipeRow({
         <View style={styles.itemDetail}>
           <Text style={styles.detailText}>{entry.summary}</Text>
           {entry.linkedCuratedRecipeId && entry.linkedBuilderType ? (
-            <RecipeBuildRow
-              label="Build This Recipe"
-              tabColor={TAB_COLOR}
-              makeForRecipeId={entry.linkedCuratedRecipeId}
-              onPress={() =>
-                onOpenBuilder({
-                  [RECIPE_BUILDER_PARAM[entry.linkedBuilderType!]]: entry.linkedCuratedRecipeId!,
-                })
-              }
-            >
-              <CuratedRecipeShareButton
-                recipeId={entry.linkedCuratedRecipeId}
-                builderType={entry.linkedBuilderType}
+            <View ref={walkMark.ref('recipes.build')} collapsable={false}>
+              <RecipeBuildRow
+                label="Build This Recipe"
                 tabColor={TAB_COLOR}
-              />
-            </RecipeBuildRow>
+                makeForRecipeId={entry.linkedCuratedRecipeId}
+                onPress={() =>
+                  onOpenBuilder({
+                    [RECIPE_BUILDER_PARAM[entry.linkedBuilderType!]]: entry.linkedCuratedRecipeId!,
+                  })
+                }
+              >
+                <CuratedRecipeShareButton
+                  recipeId={entry.linkedCuratedRecipeId}
+                  builderType={entry.linkedBuilderType}
+                  tabColor={TAB_COLOR}
+                />
+              </RecipeBuildRow>
+            </View>
           ) : null}
           {entry.recipeCard ? (
             <RecipeDetailCard card={entry.recipeCard} recipeTitle={entry.title} tabColor={TAB_COLOR} tabTextColor={TAB_COLOR} />

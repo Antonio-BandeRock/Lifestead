@@ -107,6 +107,7 @@ import {
   showsFodmapCard,
 } from '../lib/fodmapLabel';
 import { buildToneMatrix, computeContainRect, saveAdjustedIngredientsPhoto } from '../lib/toneAdjustment';
+import { useWalkMark } from './WalkMark';
 
 type ScanStatus =
   | 'scanning'
@@ -267,6 +268,7 @@ export function ScanProductView({
   // The product is on the list; go back to that list.
   onReturnToGroceryList: (listId: string) => void;
 }) {
+  const walkMark = useWalkMark();
   const scrollPadding = useFloatingButtonScrollPadding();
   // Real, device-measured bottom/top inset -- see the photo-capture render
   // branch below for why the shutter button needs this directly rather
@@ -1170,7 +1172,7 @@ export function ScanProductView({
           onBarcodeScanned={handleBarcodeScanned}
         />
         <View style={styles.scanOverlay} pointerEvents="none">
-          <View style={styles.scanFrame} />
+          <View ref={walkMark.ref('scan.frame')} collapsable={false} style={styles.scanFrame} />
           <Text style={styles.scanHint}>Point your camera at a product&apos;s barcode</Text>
         </View>
       </View>
@@ -1521,6 +1523,7 @@ export function ScanProductView({
             : 'Take a photo of the ingredients list to check it for anything worth avoiding.'}
         </Text>
         <TouchableOpacity
+          ref={walkMark.ref('scan.ingredientsPhoto')}
           style={[styles.primaryButton, capturingIngredients ? styles.disabled : null]}
           activeOpacity={0.85}
           onPress={() => handleOpenCamera('ingredients')}
@@ -1599,6 +1602,7 @@ export function ScanProductView({
           />
         </View>
         <TouchableOpacity
+          ref={walkMark.ref('scan.continue')}
           style={[styles.primaryButton, computingReport ? styles.disabled : null]}
           activeOpacity={0.85}
           onPress={handleContinueFromIngredients}
@@ -1771,7 +1775,7 @@ export function ScanProductView({
 
         <MadeAtHomeBand categoryTags={lookedUp?.categoryTags ?? NO_CATEGORY_TAGS} productName={name} tabColor={colors.buttonColor} />
 
-        <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={handleReadAloud}>
+        <TouchableOpacity ref={walkMark.ref('scan.readAloud')} style={styles.secondaryButton} activeOpacity={0.85} onPress={handleReadAloud}>
           <Ionicons name="volume-high-outline" size={18} color={colors.textSecondary} />
           <Text style={styles.secondaryButtonText}>Read This to Me</Text>
         </TouchableOpacity>
@@ -1829,6 +1833,7 @@ export function ScanProductView({
             </View>
             {logError ? <Text style={styles.logErrorText}>{logError}</Text> : null}
             <TouchableOpacity
+              ref={walkMark.ref('scan.logIt')}
               style={[styles.primaryButton, loggingMeal || !logAmountIsValid ? styles.disabled : null]}
               activeOpacity={0.85}
               onPress={handleLogThis}
@@ -1842,7 +1847,7 @@ export function ScanProductView({
             </TouchableOpacity>
           </View>
         ) : (
-          <TouchableOpacity style={styles.primaryButton} activeOpacity={0.85} onPress={handleOpenLogPanel}>
+          <TouchableOpacity ref={walkMark.ref('scan.logEaten')} style={styles.primaryButton} activeOpacity={0.85} onPress={handleOpenLogPanel}>
             <Ionicons name="restaurant-outline" size={18} color={colors.background} />
             <Text style={styles.primaryButtonText}>Log This as Eaten</Text>
           </TouchableOpacity>
@@ -1850,6 +1855,7 @@ export function ScanProductView({
         {logError && !logPanelOpen ? <Text style={styles.logErrorText}>{logError}</Text> : null}
 
         <TouchableOpacity
+          ref={walkMark.ref('scan.buy')}
           style={[styles.primaryButton, saving ? styles.disabled : null]}
           activeOpacity={0.85}
           onPress={handleBuyThis}
@@ -1878,6 +1884,7 @@ export function ScanProductView({
             : 'Take a photo of the price to track it here next time, so you can watch how it changes over time.'}
         </Text>
         <TouchableOpacity
+          ref={walkMark.ref('scan.pricePhoto')}
           style={[styles.primaryButton, capturingPrice ? styles.disabled : null]}
           activeOpacity={0.85}
           onPress={() => handleOpenCamera('price')}
@@ -1905,6 +1912,7 @@ export function ScanProductView({
           />
         </View>
         <TouchableOpacity
+          ref={walkMark.ref('scan.savePrice')}
           style={[styles.primaryButton, savingPrice ? styles.disabled : null]}
           activeOpacity={0.85}
           onPress={handleSavePrice}
@@ -1930,7 +1938,7 @@ export function ScanProductView({
         {onListNote ? (
           <Text style={styles.text}>{onListNote}</Text>
         ) : (
-          <TouchableOpacity style={styles.primaryButton} activeOpacity={0.85} onPress={handlePutOnList}>
+          <TouchableOpacity ref={walkMark.ref('scan.grocery')} style={styles.primaryButton} activeOpacity={0.85} onPress={handlePutOnList}>
             <Ionicons name="cart-outline" size={18} color={colors.background} />
             <Text style={styles.primaryButtonText}>Put It on My Grocery List</Text>
           </TouchableOpacity>
