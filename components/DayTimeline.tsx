@@ -61,6 +61,7 @@ import { requestCalendarPermission } from '../lib/deviceCalendar';
 import { describeMovePlan } from '../lib/moveToTomorrow';
 import { applyMovePlan, loadMovePlan } from '../lib/moveToTomorrowDb';
 import { useConfirmSheet } from './ConfirmSheet';
+import { useWalkMark } from './WalkMark';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
@@ -109,6 +110,7 @@ function lineOf(style: { fontSize: number; lineHeight?: number }): number {
 
 export function DayTimeline({ tabColor, compact = false }: { tabColor: string; compact?: boolean }) {
   const router = useRouter();
+  const walkMark = useWalkMark();
   const { fontScale } = useWindowDimensions();
   const [view, setView] = useState<DayTimelineView | null>(null);
   const [now, setNow] = useState(() => Date.now());
@@ -239,7 +241,7 @@ export function DayTimeline({ tabColor, compact = false }: { tabColor: string; c
         </View>
       ) : null}
 
-      <View style={styles.stripFrame} onLayout={onViewport}>
+      <View ref={walkMark.ref('timeline.strip')} collapsable={false} style={styles.stripFrame} onLayout={onViewport}>
         <ScrollView
           ref={scrollRef}
           horizontal
@@ -325,7 +327,7 @@ export function DayTimeline({ tabColor, compact = false }: { tabColor: string; c
         </TouchableOpacity>
       ) : (
         <View style={styles.group}>
-          <TouchableOpacity style={styles.row} onPress={() => void moveRest()}>
+          <TouchableOpacity ref={walkMark.ref('timeline.moveRest')} style={styles.row} onPress={() => void moveRest()}>
             <Ionicons name="arrow-redo-outline" size={16} color={tabColor} />
             <View style={styles.rowText}>
               <Text style={styles.rowTitle}>Move what is left today to tomorrow</Text>
@@ -333,7 +335,7 @@ export function DayTimeline({ tabColor, compact = false }: { tabColor: string; c
             </View>
           </TouchableOpacity>
           {timelineCalendarSupported() ? (
-            <View style={styles.row}>
+            <View ref={walkMark.ref('timeline.calendar')} collapsable={false} style={styles.row}>
               <Ionicons name="calendar-number-outline" size={16} color={tabColor} />
               <View style={styles.rowText}>
                 <Text style={styles.rowTitle}>Show my phone&apos;s calendar here</Text>

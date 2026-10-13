@@ -246,7 +246,77 @@ export type ToolMark =
   | 'home.chooseNutrients'
   | 'home.reportWindow'
   | 'home.lowStim'
-  | 'home.readCards';
+  | 'home.readCards'
+  | 'appointments.add'
+  | 'appointments.addCalendar'
+  | 'appointments.cancel'
+  | 'appointments.completed'
+  | 'appointments.edit'
+  | 'appointments.import'
+  | 'appointments.listBand'
+  | 'appointments.remove'
+  | 'appointments.save'
+  | 'appointments.say'
+  | 'exercise.add'
+  | 'exercise.save'
+  | 'hydration.indexBand'
+  | 'hydration.quick'
+  | 'hydration.todayBand'
+  | 'hydration.undo'
+  | 'mealPlan.addToSchedule'
+  | 'mealPlan.days'
+  | 'mealPlan.diet'
+  | 'mealPlan.firstDay'
+  | 'mealPlan.generate'
+  | 'mealPlan.regenerateDay'
+  | 'mealPlan.styles'
+  | 'meds.checkBand'
+  | 'meds.myMeds'
+  | 'meds.skipDose'
+  | 'meds.taken'
+  | 'meds.todayBand'
+  | 'meds.watchAlerts'
+  | 'pastMeals.adjust'
+  | 'pastMeals.leftovers'
+  | 'pastMeals.listBand'
+  | 'pastMeals.loggedAdjust'
+  | 'pastMeals.loggedBand'
+  | 'schedule.addCalendar'
+  | 'schedule.addHousehold'
+  | 'schedule.addNote'
+  | 'schedule.buyingFor'
+  | 'schedule.calendarView'
+  | 'schedule.dayBand'
+  | 'schedule.days'
+  | 'schedule.eatAgain'
+  | 'schedule.edit'
+  | 'schedule.householdBand'
+  | 'schedule.leftovers'
+  | 'schedule.move'
+  | 'schedule.notesBand'
+  | 'schedule.offPlan'
+  | 'schedule.putOnMine'
+  | 'schedule.remove'
+  | 'schedule.repeat'
+  | 'schedule.rotate'
+  | 'schedule.saveHousehold'
+  | 'schedule.saveMeal'
+  | 'schedule.saveNote'
+  | 'schedule.saveWeek'
+  | 'schedule.skip'
+  | 'schedule.unplanned'
+  | 'schedule.useWeek'
+  | 'schedule.weekNext'
+  | 'schedule.weeksBand'
+  | 'timeline.calendar'
+  | 'timeline.moveRest'
+  | 'timeline.strip'
+  | 'todaysMeals.doseBand'
+  | 'todaysMeals.mealBand'
+  | 'upkeepLens.add'
+  | 'upkeepLens.doneToday'
+  | 'upkeepLens.edit'
+  | 'upkeepLens.firstBand';
 
 export type ToolStep = {
   say: string;
@@ -1994,7 +2064,514 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'The list holds only what you still mean to do.',
     },
   ],
+  '/schedule#meals': [
+    {
+      key: 'view',
+      title: 'See a week or a month',
+      steps: [
+        { say: 'Tap Week or Month at the top.', mark: 'schedule.calendarView' },
+        { say: 'Tap the arrow beside the dates to go forward, or the one on the other side to go back.', mark: 'schedule.weekNext' },
+        { say: 'Tap a day to see what is planned on it.', mark: 'schedule.days' },
+      ],
+      forYou: 'The meals planned on that day open below, in the order of the day.',
+    },
+    {
+      key: 'unplanned',
+      title: 'Put something unplanned on a day',
+      steps: [
+        { say: 'Tap + Schedule a meal.', mark: 'schedule.addMeal', stay: true },
+        { say: 'Tap Something unplanned.', mark: 'schedule.unplanned', stay: true },
+        { say: 'Type what it is, then pick the day, the meal and the time.' },
+        { say: 'Tap Add to schedule.', mark: 'schedule.saveMeal' },
+      ],
+      forYou: 'A meal with no recipe behind it still has its place on the day, so the rest of the day is planned around it.',
+    },
+    {
+      key: 'buyingFor',
+      title: 'Say how many people a meal is bought for',
+      steps: [
+        { say: 'Tap + Schedule a meal, or Edit under a meal already there.', mark: 'schedule.addMeal', stay: true },
+        { say: 'Tap the box under Buying for and pick how many.', mark: 'schedule.buyingFor', stay: true },
+        { say: 'Tap Add to schedule, or Save changes.', mark: 'schedule.saveMeal' },
+      ],
+      forYou: 'The grocery list buys enough of that meal for that many people. Left as it is, it follows the number set on the Grocery List.',
+    },
+    {
+      key: 'repeat',
+      title: 'Have a meal come back on its own',
+      steps: [
+        { say: 'Tap + Schedule a meal, or Edit under a meal already there.', mark: 'schedule.addMeal', stay: true },
+        { say: 'Pick how often it repeats.', mark: 'schedule.repeat', stay: true },
+        { say: 'Tap Add to schedule, or Save changes.', mark: 'schedule.saveMeal' },
+      ],
+      forYou: 'The meal lands on every day it repeats, without being added each time.',
+    },
+    {
+      key: 'skip',
+      title: 'Skip a planned meal',
+      steps: [
+        { say: 'Open the day the meal is on.', mark: 'schedule.dayBand' },
+        { say: 'Tap Skip under the meal.', mark: 'schedule.skip' },
+        { say: 'To bring it back, tap Un-skip under it.' },
+      ],
+      forYou: 'The meal stays on the day marked skipped, so the plan still shows what was meant and what happened.',
+    },
+    {
+      key: 'move',
+      title: 'Move a meal to another day',
+      steps: [
+        { say: 'Tap Move under the meal.', mark: 'schedule.move' },
+        { say: 'Pick which day and which meal.' },
+        { say: 'Tap Move it.' },
+      ],
+      forYou: 'The meal goes to the new day and time, and anything tied to it, like leftovers, goes with it.',
+    },
+    {
+      key: 'edit',
+      title: 'Change a planned meal',
+      steps: [
+        { say: 'Tap Edit under the meal.', mark: 'schedule.edit', stay: true },
+        { say: 'Change what you need, then tap Save changes.', mark: 'schedule.saveMeal' },
+      ],
+      forYou: 'The day, the grocery list and the reminders follow the change.',
+    },
+    {
+      key: 'eatAgain',
+      title: 'Eat a meal again on a later day',
+      steps: [
+        { say: 'Tap Eat again under the meal.', mark: 'schedule.eatAgain' },
+        { say: 'Pick which day and which meal, then tap Add this meal.' },
+        { say: 'Tap Done when every later meal is in.' },
+      ],
+      forYou: 'One cooking feeds the later meals too, and each one shows where it came from.',
+    },
+    {
+      key: 'rotate',
+      title: 'Swap the rotating ingredients in a meal',
+      steps: [
+        { say: 'Tap Rotate under a meal that has ingredients set to rotate.', mark: 'schedule.rotate' },
+        { say: 'Pick a different one for each ingredient, or tap Randomize this one or Randomize all.' },
+        { say: 'Tap Save.' },
+      ],
+      forYou: 'The same favorite comes round with different ingredients, so it does not wear thin and the variety stays in your week.',
+    },
+    {
+      key: 'leftovers',
+      title: 'Save leftovers from a meal you ate',
+      steps: [
+        { say: 'Tap Save leftovers under a meal already eaten.', mark: 'schedule.leftovers' },
+        { say: 'Pick which day and which meal you will eat them, then tap Add this meal.' },
+        { say: 'Tap Done.' },
+      ],
+      forYou: 'The leftovers go on that later day, and the app says how long cooked food keeps in the fridge.',
+    },
+    {
+      key: 'calendar',
+      title: 'Put a meal on your phone calendar',
+      steps: [{ say: 'Tap Add to calendar under the meal.', mark: 'schedule.addCalendar' }],
+      forYou: 'The meal shows in your phone calendar beside everything else in your day. Unlink calendar takes it off again.',
+    },
+    {
+      key: 'remove',
+      title: 'Remove a meal from the schedule',
+      steps: [
+        { say: 'Tap Remove under the meal.', mark: 'schedule.remove' },
+        { say: 'Say yes when it asks.' },
+      ],
+      forYou: 'The meal comes off the day and off the grocery list.',
+    },
+    {
+      key: 'offPlan',
+      title: 'Say what you ate when it was not the plan',
+      steps: [
+        { say: 'Tap Ate out or off-plan? Say it.', mark: 'schedule.offPlan' },
+        { say: 'Say what you ate, then check what it heard.' },
+      ],
+      forYou: 'What you ate is logged in place of what was planned, so your records match the day you had.',
+    },
+    {
+      key: 'note',
+      title: 'Add a note to a day',
+      steps: [
+        { say: 'Open the band called Notes.', mark: 'schedule.notesBand' },
+        { say: 'Tap + Add a note to this day.', mark: 'schedule.addNote', stay: true },
+        { say: 'Type the note, and a time if it has one.' },
+        { say: 'Tap Add the note.', mark: 'schedule.saveNote' },
+      ],
+      forYou: 'The note sits on that day of the calendar, for anything that is not a meal.',
+    },
+    {
+      key: 'saveWeek',
+      title: 'Save a week to use again',
+      steps: [
+        { say: 'Open the band called Saved weeks.', mark: 'schedule.weeksBand' },
+        { say: 'Tap Save this week.', mark: 'schedule.saveWeek', stay: true },
+        { say: 'Keep the name it offers or type another, then tap Save.' },
+      ],
+      forYou: 'A week that worked can be put back on any later week in one go.',
+    },
+    {
+      key: 'useWeek',
+      title: 'Use a saved week',
+      steps: [
+        { say: 'Go to the week you want to fill.', mark: 'schedule.weekNext' },
+        { say: 'Open the band called Saved weeks.', mark: 'schedule.weeksBand' },
+        { say: 'Tap Use on this week beside the one you want.', mark: 'schedule.useWeek' },
+      ],
+      forYou: 'Its meals go onto the same weekdays of the week you are on.',
+    },
+    {
+      key: 'household',
+      title: 'Add a household meal',
+      steps: [
+        { say: 'Open the band called Household meal calendar.', mark: 'schedule.householdBand' },
+        { say: 'Tap Add a household meal.', mark: 'schedule.addHousehold', stay: true },
+        { say: 'Say what it is and which day.' },
+        { say: 'Tap Add to the calendar.', mark: 'schedule.saveHousehold' },
+      ],
+      forYou: 'The household can see what is planned for everyone, apart from your schedule.',
+    },
+    {
+      key: 'putOnMine',
+      title: 'Put a household meal on your schedule',
+      steps: [
+        { say: 'Open the band called Household meal calendar.', mark: 'schedule.householdBand' },
+        { say: 'Tap Put on my schedule beside it.', mark: 'schedule.putOnMine' },
+      ],
+      forYou: 'The meal joins your schedule, so it counts toward your day and your grocery list.',
+    },
+  ],
+  '/schedule#todaysMeals': [
+    {
+      key: 'meal',
+      title: 'Open a meal to cook it',
+      steps: [{ say: 'Tap a meal in the day to open it.', mark: 'todaysMeals.mealBand' }],
+      forYou: 'Its dishes, ingredients and steps are inside, in the order of the day.',
+    },
+    {
+      key: 'dose',
+      title: 'See how a dose sits with your meals',
+      steps: [
+        { say: 'Tap a dose in the day to open it.', mark: 'todaysMeals.doseBand' },
+        { say: 'Read When this one is best taken, and tap a line to see why.' },
+      ],
+      forYou: 'It checks the dose against the meals around it, so a clash with a food is seen before it happens.',
+    },
+    {
+      key: 'marks',
+      title: 'Read the marks beside a food',
+      steps: [
+        { say: 'Open a meal.', mark: 'todaysMeals.mealBand' },
+        { say: 'Tap the mark beside a food to see what it means for you.' },
+      ],
+      forYou: 'Each food says whether it suits the conditions you track, and what to look out for.',
+    },
+  ],
+  '/schedule#pastMeals': [
+    {
+      key: 'adjust',
+      title: 'Change a meal you already logged',
+      steps: [
+        { say: 'Open the band called Past meals.', mark: 'pastMeals.listBand' },
+        { say: 'Tap a meal that says Adjust.', mark: 'pastMeals.adjust' },
+        { say: 'Change what you ate or how much, then save it.' },
+      ],
+      forYou: 'Your records hold what you ate, not only what was planned.',
+    },
+    {
+      key: 'leftovers',
+      title: 'Save leftovers from a past meal',
+      steps: [
+        { say: 'Tap Save leftovers under the meal.', mark: 'pastMeals.leftovers' },
+        { say: 'Pick which day and which meal you will eat them, then tap Add this meal.' },
+        { say: 'Tap Done.' },
+      ],
+      forYou: 'The leftovers go on that later day, and the app says how long cooked food keeps in the fridge.',
+    },
+    {
+      key: 'logged',
+      title: 'Change a meal logged from Food',
+      steps: [
+        { say: 'Open the band called Logged from Food this week.', mark: 'pastMeals.loggedBand' },
+        { say: 'Tap Adjust under the meal.', mark: 'pastMeals.loggedAdjust' },
+      ],
+      forYou: 'A meal logged by voice or a scan opens in Food, where you can put it right.',
+    },
+  ],
+  '/schedule#dailyMealPlan': [
+    {
+      key: 'generate',
+      title: 'Make a meal plan',
+      steps: [
+        { say: 'Pick what you eat.', mark: 'mealPlan.diet' },
+        { say: 'Tap any eating style you follow. Hold one down to read what it means.', mark: 'mealPlan.styles' },
+        { say: 'Pick how many days.', mark: 'mealPlan.days' },
+        { say: 'Tap Generate My Day or Generate My Plan.', mark: 'mealPlan.generate' },
+      ],
+      forYou: 'Each day is built from recipes that fit how you eat and the conditions you track, with your nutrient targets in mind.',
+    },
+    {
+      key: 'day',
+      title: 'Look through a day of the plan',
+      steps: [
+        { say: 'Tap a day to open it.', mark: 'mealPlan.firstDay' },
+        { say: 'Read its meals and what the day gives you.' },
+      ],
+      forYou: 'The dot on each day shows how it rated, so a day worth changing stands out.',
+    },
+    {
+      key: 'swap',
+      title: 'Swap a dish in the plan',
+      steps: [
+        { say: 'Open a day.', mark: 'mealPlan.firstDay' },
+        { say: 'Tap Change beside a dish.' },
+        { say: 'Scroll the choices, then tap Use this one, or Keep what is there.' },
+      ],
+      forYou: 'Only dishes that fit the same meal and how you eat are offered.',
+    },
+    {
+      key: 'side',
+      title: 'Add a side to a meal',
+      steps: [
+        { say: 'Open a day.', mark: 'mealPlan.firstDay' },
+        { say: 'Tap Add a side under a meal.' },
+        { say: 'Scroll the choices, then tap Add it.' },
+      ],
+      forYou: 'The side counts toward the day, so its nutrients show with the rest.',
+    },
+    {
+      key: 'regenerate',
+      title: 'Make one day again',
+      steps: [
+        { say: 'Open the day.', mark: 'mealPlan.firstDay' },
+        { say: 'Tap Regenerate This Day.', mark: 'mealPlan.regenerateDay' },
+      ],
+      forYou: 'Only that day changes; the other days stay as they are.',
+    },
+    {
+      key: 'schedule',
+      title: 'Put the plan on your schedule',
+      steps: [
+        { say: 'Type the date to start on.' },
+        { say: 'Tap Add This Day to Schedule or Add This Plan to Schedule.', mark: 'mealPlan.addToSchedule' },
+      ],
+      forYou: 'Every meal lands on its day in Meals, and the grocery list picks them up.',
+    },
+  ],
+  '/schedule#hydration': [
+    {
+      key: 'quick',
+      title: 'Log a drink in one tap',
+      steps: [
+        { say: 'Tap the drink you just had.', mark: 'hydration.quick' },
+        { say: 'If it was a mistake, tap Take it back.', mark: 'hydration.undo' },
+      ],
+      forYou: 'The drink counts toward today straight away.',
+    },
+    {
+      key: 'planned',
+      title: 'Mark a planned drink',
+      steps: [
+        { say: "Open the band called Today's drinks.", mark: 'hydration.todayBand' },
+        { say: 'Tap Log now when you have it, or Skip if you will not.' },
+        { say: 'Tap Edit to change it, or Remove to take it off.' },
+      ],
+      forYou: 'What you drank is kept apart from what was planned.',
+    },
+    {
+      key: 'index',
+      title: 'See how your drinks hold water',
+      steps: [{ say: "Open the band called How today's drinks hold water.", mark: 'hydration.indexBand' }],
+      forYou: 'Some drinks keep water in the body longer than others, and this says how each of today’s compares with plain water.',
+    },
+  ],
+  '/schedule#meds': [
+    {
+      key: 'myMeds',
+      title: 'Add or change a med',
+      steps: [
+        { say: 'Tap Add or change a med in My Meds.', mark: 'meds.myMeds' },
+        { say: 'Add it there, then tap Schedule it to bring it here.' },
+      ],
+      forYou: 'A med is defined once on Life, and its doses are timed here.',
+    },
+    {
+      key: 'taken',
+      title: 'Mark a dose taken',
+      steps: [
+        { say: 'Open the band called Today.', mark: 'meds.todayBand' },
+        { say: 'Tap Taken beside the dose.', mark: 'meds.taken' },
+      ],
+      forYou: 'The dose is recorded with the time you marked it.',
+    },
+    {
+      key: 'skip',
+      title: 'Skip a dose',
+      steps: [
+        { say: 'Open the band called Today.', mark: 'meds.todayBand' },
+        { say: 'Tap Skip beside the dose.', mark: 'meds.skipDose' },
+        { say: 'To bring it back, tap Un-skip.' },
+      ],
+      forYou: 'A skipped dose stays on the day marked skipped, so the record shows it.',
+    },
+    {
+      key: 'watch',
+      title: 'Get alerts for doses you watch',
+      steps: [{ say: 'Under Doses you watch, tap Turn alerts on.', mark: 'meds.watchAlerts' }],
+      forYou: 'This phone raises an alert when a dose of someone you look after is not marked.',
+    },
+    {
+      key: 'check',
+      title: 'See what to check about timing',
+      steps: [
+        { say: 'Open the band called Things to check.', mark: 'meds.checkBand' },
+        { say: 'Tap a line to see why it matters.' },
+      ],
+      forYou: 'It lists foods, supplements and meds that compete or clash, and how far apart to take them.',
+    },
+  ],
+  '/schedule#appointments': [
+    {
+      key: 'add',
+      title: 'Schedule an appointment',
+      steps: [
+        { say: 'Tap + Schedule an appointment.', mark: 'appointments.add', stay: true },
+        { say: 'Fill in what it is for, who with, when and where.' },
+        { say: 'Tap Schedule appointment.', mark: 'appointments.save' },
+      ],
+      forYou: 'You get a reminder before it, and it shows on your day.',
+    },
+    {
+      key: 'say',
+      title: 'Say an appointment out loud',
+      steps: [
+        { say: 'Tap + Schedule an appointment.', mark: 'appointments.add', stay: true },
+        { say: 'Under Say an Appointment, say it the way you would to someone.', mark: 'appointments.say', stay: true },
+        { say: 'Tap Fill the Boxes From This, check them, then tap Schedule appointment.', mark: 'appointments.save' },
+      ],
+      forYou: 'The boxes fill in from what you said, so you only put right what it missed.',
+    },
+    {
+      key: 'import',
+      title: 'Bring one in from your phone calendar',
+      steps: [
+        { say: 'Tap Import from Phone Calendar.', mark: 'appointments.import' },
+        { say: 'Tap the one to bring in.' },
+      ],
+      forYou: 'It is copied in with its date, time and place, ready for notes and reminders.',
+    },
+    {
+      key: 'done',
+      title: 'Mark an appointment done or cancelled',
+      steps: [
+        { say: 'Open the band called Appointments.', mark: 'appointments.listBand' },
+        { say: 'Tap Completed once it has happened.', mark: 'appointments.completed' },
+        { say: 'Or tap Cancel if it is not going ahead. Un-cancel brings it back.', mark: 'appointments.cancel' },
+      ],
+      forYou: 'The record keeps what happened, which a report can show later.',
+    },
+    {
+      key: 'edit',
+      title: 'Change an appointment',
+      steps: [
+        { say: 'Tap Edit under it.', mark: 'appointments.edit', stay: true },
+        { say: 'Change what you need, then tap Save changes.', mark: 'appointments.save' },
+      ],
+      forYou: 'The reminder moves with the new time.',
+    },
+    {
+      key: 'calendar',
+      title: 'Put an appointment on your phone calendar',
+      steps: [{ say: 'Tap Add to calendar under it.', mark: 'appointments.addCalendar' }],
+      forYou: 'It shows in your phone calendar too. Unlink calendar takes it off again.',
+    },
+    {
+      key: 'remove',
+      title: 'Remove an appointment',
+      steps: [
+        { say: 'Tap Remove under it.', mark: 'appointments.remove' },
+        { say: 'If it is on your phone calendar too, pick Remove here only or Remove from both.' },
+      ],
+      forYou: 'It comes off the list and its reminder stops.',
+    },
+  ],
+  '/schedule#upkeep': [
+    {
+      key: 'add',
+      title: 'Add or change something to keep up',
+      steps: [
+        { say: 'Tap Add or change something in Upkeep.', mark: 'upkeepLens.add' },
+        { say: 'Add it on Life, and its dates show up here.' },
+      ],
+      forYou: 'A service, a filter, a registration or a renewal is defined once and its due dates follow.',
+    },
+    {
+      key: 'done',
+      title: 'Say you did one today',
+      steps: [
+        { say: 'Open the band it is in.', mark: 'upkeepLens.firstBand' },
+        { say: 'Tap Done today under it.', mark: 'upkeepLens.doneToday' },
+      ],
+      forYou: 'The next one comes due counted from today, and the app says when.',
+    },
+    {
+      key: 'edit',
+      title: 'Change or renew one',
+      steps: [
+        { say: 'Open the band it is in.', mark: 'upkeepLens.firstBand' },
+        { say: 'Tap Edit in Upkeep, Renew in Upkeep or Set it up in Upkeep under it.', mark: 'upkeepLens.edit' },
+      ],
+      forYou: 'It opens on Life, where it is kept.',
+    },
+  ],
+  '/schedule#timeline': [
+    {
+      key: 'read',
+      title: 'Read your day on one line',
+      steps: [
+        { say: 'Scroll the strip left and right. The line marked Now is where you are in the day.', mark: 'timeline.strip' },
+        { say: 'Tap anything on it to open where it lives.' },
+      ],
+      forYou: 'Meals, doses, appointments, routines, bills, upkeep and counters sit together in the order they come.',
+    },
+    {
+      key: 'moveRest',
+      title: 'Move what is left today to tomorrow',
+      steps: [
+        { say: 'Tap Move what is left today to tomorrow.', mark: 'timeline.moveRest' },
+        { say: 'Read what moves and what stays, then tap Move them.' },
+      ],
+      forYou: 'A day that got away from you does not have to be planned again by hand.',
+    },
+    {
+      key: 'calendar',
+      title: 'Show your phone calendar on the timeline',
+      steps: [{ say: "Turn on Show my phone's calendar here.", mark: 'timeline.calendar' }],
+      forYou: 'Your phone calendar is read each time and shown beside the rest, never copied into the app.',
+    },
+  ],
+  '/schedule#exercise': [
+    {
+      key: 'plan',
+      title: 'Plan exercise',
+      steps: [
+        { say: 'Tap + Plan exercise.', mark: 'exercise.add', stay: true },
+        { say: 'Pick what, then the day, the time and how often.' },
+        { say: 'Tap Save plan.', mark: 'exercise.save' },
+      ],
+      forYou: 'It lands on the days you picked, and a workout from Life can be started from here.',
+    },
+    {
+      key: 'mark',
+      title: 'Mark exercise done or skipped',
+      steps: [
+        { say: 'Under Coming up, tap Start to begin a planned workout, or Did it once it is done.' },
+        { say: 'Tap Skipped if it did not happen. Clear mark takes either back.' },
+      ],
+      forYou: 'The record shows what you did and what you let go, with nothing scored.',
+    },
+  ],
 };
 
 /** Tabs whose every lens has its tools listed above. */
-export const TOOL_TABS_DONE: readonly string[] = ['/life', '/'];
+export const TOOL_TABS_DONE: readonly string[] = ['/life', '/', '/schedule'];

@@ -1011,9 +1011,11 @@ function describeRelativeDate(dateStr: string): string {
 // 2026-09-13: an action band, the same row every Home quick action is.
 function OffPlanShortcut() {
   const router = useRouter();
+  const walkMark = useWalkMark();
   return (
     <View style={styles.bandOut}>
       <HomeSectionBand
+        markRef={walkMark.ref('schedule.offPlan')}
         kind="action"
         title="Ate out or off-plan? Say it"
         icon="mic-outline"
@@ -1039,6 +1041,7 @@ function ScheduleBand({
   title,
   icon,
   count,
+  markRef,
   children,
 }: {
   folds: ScheduleFolds;
@@ -1046,11 +1049,14 @@ function ScheduleBand({
   title: string;
   icon: ComponentProps<typeof Ionicons>['name'];
   count?: number;
+  // The band's name row, for a tutorial line that says to open it.
+  markRef?: (node: unknown) => void;
   children: ReactNode;
 }) {
   return (
     <View style={styles.bandOut}>
       <HomeSectionBand
+        markRef={markRef}
         kind="fold"
         title={count == null ? title : `${title} (${count})`}
         icon={icon}
@@ -1633,6 +1639,17 @@ function MealsLens() {
     ? [...matchingFavorites(favorites, form.mealType), ...matchingTemplates(templates, form.mealType)]
     : [];
 
+  // The tutorial rings a button on the first row that has it.
+  const firstPlannedId = selectedItems.find((item) => item.status === 'planned')?.id;
+  const firstEatAgainId = selectedItems.find(
+    (item) => item.status === 'planned' && !item.leftoverOf && !item.leftoverOfMeal && (item.sourceFavoriteId || item.sourceMealId),
+  )?.id;
+  const firstRotateId = selectedItems.find(
+    (item) => item.status === 'planned' && favoriteRotatingIngredients(item.sourceFavoriteId).length > 0,
+  )?.id;
+  const firstLeftoversId = selectedItems.find((item) => item.status !== 'planned' && item.status !== 'skipped' && canSaveLeftoversFrom(item))?.id;
+  const firstRowId = selectedItems[0]?.id;
+
   return (
     <>
     {infoAlertElement}
@@ -1653,7 +1670,7 @@ function MealsLens() {
         ) : (
           <>
             <View style={styles.weekStripCard}>
-              <View style={styles.calendarViewRow}>
+              <View ref={walkMark.ref('schedule.calendarView')} collapsable={false} style={styles.calendarViewRow}>
                 {(['week', 'month'] as const).map((view) => (
                   <TouchableOpacity
                     key={view}
@@ -1680,6 +1697,7 @@ function MealsLens() {
                   {calendarView === 'month' ? monthLabel(viewMonth) : formatWeekRangeLabel(weekStart)}
                 </Text>
                 <TouchableOpacity
+                  ref={walkMark.ref('schedule.weekNext')}
                   style={styles.weekNavButton}
                   hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
                   onPress={() => (calendarView === 'month' ? setViewMonth(shiftMonth(viewMonth, 1)) : shiftWeek(1))}
@@ -1731,7 +1749,7 @@ function MealsLens() {
                   <Text style={styles.weekStripKey}>{MONTH_GRID_KEY}</Text>
                 </View>
               ) : (
-              <View style={styles.weekDayRow}>
+              <View ref={walkMark.ref('schedule.days')} collapsable={false} style={styles.weekDayRow}>
                 {weekDates.map((date) => {
                   const isSelected = date === selectedDate;
                   const isToday = date === todayDateString();
@@ -1807,6 +1825,7 @@ function MealsLens() {
                         </Text>
                       </TouchableOpacity>
                       <TouchableOpacity
+                        ref={walkMark.ref('schedule.unplanned')}
                         style={[styles.modeTab, form.mode === 'unplanned' && styles.modeTabActive]}
                         onPress={() => setForm((current) => ({ ...current, mode: 'unplanned', sourceFavoriteId: null, sourceMealId: null }))}
                       >
@@ -1919,6 +1938,7 @@ function MealsLens() {
                 <Text style={styles.helperText}>
                   How many people the grocery list buys this meal for. Left as the grocery list, it follows the number of people set there.
                 </Text>
+                <View ref={walkMark.ref('schedule.buyingFor')} collapsable={false}>
                 <PopoverSelect
                   selected={MEAL_SERVING_CHOICES.find((choice) => choice.value === form.servings)?.label ?? MEAL_SERVING_CHOICES[0].label}
                   options={MEAL_SERVING_CHOICES.map((choice) => choice.label)}
@@ -1929,20 +1949,23 @@ function MealsLens() {
                   tabColor={TAB_COLOR}
                   width={240}
                 />
+                </View>
 
                 {!form.editingId ? (
-                  <RepeatPicker
-                    repeat={form.repeat}
-                    startDate={form.date}
-                    onChange={(repeat) => setForm((current) => ({ ...current, repeat }))}
-                  />
+                  <View ref={walkMark.ref('schedule.repeat')} collapsable={false}>
+                    <RepeatPicker
+                      repeat={form.repeat}
+                      startDate={form.date}
+                      onChange={(repeat) => setForm((current) => ({ ...current, repeat }))}
+                    />
+                  </View>
                 ) : null}
 
                 <ThumbRow primary="last" style={styles.formActions}>
                   <TouchableOpacity style={styles.secondaryButton} onPress={closeForm}>
                     <Text style={styles.secondaryButtonText}>Cancel</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.primaryButton} onPress={handleSaveForm}>
+                  <TouchableOpacity ref={walkMark.ref('schedule.saveMeal')} style={styles.primaryButton} onPress={handleSaveForm}>
                     <Text style={styles.primaryButtonText}>{form.editingId ? 'Save changes' : 'Add to schedule'}</Text>
                   </TouchableOpacity>
                 </ThumbRow>
@@ -1952,6 +1975,7 @@ function MealsLens() {
             <ScheduleBand
               folds={folds}
               id="schedule:meals:day"
+              markRef={walkMark.ref('schedule.dayBand')}
               title={capitalize(describeRelativeDate(selectedDate))}
               icon="restaurant-outline"
               count={selectedItems.length}
@@ -1996,22 +2020,37 @@ function MealsLens() {
                             <Text style={styles.actionTextPrimary}>Log now</Text>
                           </TouchableOpacity>
                           {!item.leftoverOf && !item.leftoverOfMeal && (item.sourceFavoriteId || item.sourceMealId) ? (
-                            <TouchableOpacity onPress={() => setLeftoverCook(cookFromScheduleItem(item))}>
+                            <TouchableOpacity
+                              ref={item.id === firstEatAgainId ? walkMark.ref('schedule.eatAgain') : undefined}
+                              onPress={() => setLeftoverCook(cookFromScheduleItem(item))}
+                            >
                               <Text style={styles.actionText}>{EAT_AGAIN_LABEL}</Text>
                             </TouchableOpacity>
                           ) : null}
                           {favoriteRotatingIngredients(item.sourceFavoriteId).length > 0 ? (
-                            <TouchableOpacity onPress={() => openRotateSheet(item)}>
+                            <TouchableOpacity
+                              ref={item.id === firstRotateId ? walkMark.ref('schedule.rotate') : undefined}
+                              onPress={() => openRotateSheet(item)}
+                            >
                               <Text style={styles.actionText}>Rotate</Text>
                             </TouchableOpacity>
                           ) : null}
-                          <TouchableOpacity onPress={() => handleToggleSkipped(item)}>
+                          <TouchableOpacity
+                            ref={item.id === firstPlannedId ? walkMark.ref('schedule.skip') : undefined}
+                            onPress={() => handleToggleSkipped(item)}
+                          >
                             <Text style={styles.actionText}>Skip</Text>
                           </TouchableOpacity>
-                          <TouchableOpacity onPress={() => setMovingItem(item)}>
+                          <TouchableOpacity
+                            ref={item.id === firstPlannedId ? walkMark.ref('schedule.move') : undefined}
+                            onPress={() => setMovingItem(item)}
+                          >
                             <Text style={styles.actionText}>{MOVE_LABEL}</Text>
                           </TouchableOpacity>
-                          <TouchableOpacity onPress={() => openEditForm(item)}>
+                          <TouchableOpacity
+                            ref={item.id === firstPlannedId ? walkMark.ref('schedule.edit') : undefined}
+                            onPress={() => openEditForm(item)}
+                          >
                             <Text style={styles.actionText}>Edit</Text>
                           </TouchableOpacity>
                         </>
@@ -2020,7 +2059,10 @@ function MealsLens() {
                           <Text style={styles.actionText}>Un-skip</Text>
                         </TouchableOpacity>
                       ) : canSaveLeftoversFrom(item) ? (
-                        <TouchableOpacity onPress={() => setLeftoverCook(cookFromScheduleItem(item))}>
+                        <TouchableOpacity
+                          ref={item.id === firstLeftoversId ? walkMark.ref('schedule.leftovers') : undefined}
+                          onPress={() => setLeftoverCook(cookFromScheduleItem(item))}
+                        >
                           <Text style={styles.actionText}>{SAVE_LEFTOVERS_LABEL}</Text>
                         </TouchableOpacity>
                       ) : null}
@@ -2029,11 +2071,14 @@ function MealsLens() {
                           <Text style={styles.actionText}>Unlink calendar</Text>
                         </TouchableOpacity>
                       ) : (
-                        <TouchableOpacity onPress={() => handleAddToDeviceCalendar(item)}>
+                        <TouchableOpacity
+                          ref={item.id === firstRowId ? walkMark.ref('schedule.addCalendar') : undefined}
+                          onPress={() => handleAddToDeviceCalendar(item)}
+                        >
                           <Text style={styles.actionText}>Add to calendar</Text>
                         </TouchableOpacity>
                       )}
-                      <TouchableOpacity onPress={() => handleRemove(item)}>
+                      <TouchableOpacity ref={item.id === firstRowId ? walkMark.ref('schedule.remove') : undefined} onPress={() => handleRemove(item)}>
                         <Text style={styles.actionTextRemove}>Remove</Text>
                       </TouchableOpacity>
                     </View>
@@ -2567,8 +2612,9 @@ function CalendarNotesBand({
     }
   }
 
+  const walkMark = useWalkMark();
   return (
-    <ScheduleBand folds={folds} id="schedule:meals:notes" title={NOTES_TITLE} icon="create-outline" count={notes.length}>
+    <ScheduleBand folds={folds} markRef={walkMark.ref('schedule.notesBand')} id="schedule:meals:notes" title={NOTES_TITLE} icon="create-outline" count={notes.length}>
       <Text style={[styles.helperText, styles.panelStandalone]}>{NOTES_INTRO}</Text>
       {notes.length === 0 ? (
         <Text style={[styles.emptyText, styles.panelStandalone]}>{noNotesLine(dayPhrase)}</Text>
@@ -2625,13 +2671,14 @@ function CalendarNotesBand({
             >
               <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.primaryButton} onPress={() => void handleSave()}>
+            <TouchableOpacity ref={walkMark.ref('schedule.saveNote')} style={styles.primaryButton} onPress={() => void handleSave()}>
               <Text style={styles.primaryButtonText}>{draft.id ? 'Save changes' : 'Add the note'}</Text>
             </TouchableOpacity>
           </ThumbRow>
         </View>
       ) : (
         <TouchableOpacity
+          ref={walkMark.ref('schedule.addNote')}
           style={styles.addButton}
           onPress={() => {
             setDraft({ id: null, text: '', time: '' });
@@ -2732,8 +2779,9 @@ function SavedWeeksBand({
     }
   }
 
+  const walkMark = useWalkMark();
   return (
-    <ScheduleBand folds={folds} id="schedule:meals:savedWeeks" title="Saved weeks" icon="albums-outline" count={weeks.length}>
+    <ScheduleBand folds={folds} markRef={walkMark.ref('schedule.weeksBand')} id="schedule:meals:savedWeeks" title="Saved weeks" icon="albums-outline" count={weeks.length}>
       <Text style={[styles.helperText, styles.panelStandalone]}>
         Keep a week that worked and put it on any other week in one step. Use on this week adds to the week shown above.
       </Text>
@@ -2752,6 +2800,7 @@ function SavedWeeksBand({
         </View>
       ) : (
         <TouchableOpacity
+          ref={walkMark.ref('schedule.saveWeek')}
           style={styles.addButton}
           onPress={() => {
             setName(defaultWeekName(weekStart));
@@ -2767,7 +2816,7 @@ function SavedWeeksBand({
       ) : null}
       {weeks.length > 0 ? (
         <View style={styles.table}>
-          {weeks.map((week) => (
+          {weeks.map((week, weekIndex) => (
             <View key={week.id} style={styles.row}>
               <View style={styles.rowMain}>
                 <View style={styles.rowTextCol}>
@@ -2793,7 +2842,7 @@ function SavedWeeksBand({
                   </>
                 ) : (
                   <>
-                    <TouchableOpacity onPress={() => void handleUse(week)}>
+                    <TouchableOpacity ref={weekIndex === 0 ? walkMark.ref('schedule.useWeek') : undefined} onPress={() => void handleUse(week)}>
                       <Text style={styles.actionTextPrimary}>{USE_SAVED_WEEK_LABEL}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -2928,8 +2977,11 @@ function HouseholdMealCalendarBand({
     }
   }
 
+  const walkMark = useWalkMark();
+  // The tutorial rings Put on my schedule on the first entry that has it.
+  const firstToPutId = entries.find((entry) => scheduleState(entry) !== 'copied')?.id;
   return (
-    <ScheduleBand folds={folds} id="schedule:meals:householdCalendar" title={HOUSEHOLD_CALENDAR_TITLE} icon="people-outline" count={entries.length}>
+    <ScheduleBand folds={folds} markRef={walkMark.ref('schedule.householdBand')} id="schedule:meals:householdCalendar" title={HOUSEHOLD_CALENDAR_TITLE} icon="people-outline" count={entries.length}>
       <Text style={[styles.helperText, styles.panelStandalone]}>
         {householdCalendarIntro(partners)} {weekCountLine(entries.length)}
       </Text>
@@ -3010,13 +3062,13 @@ function HouseholdMealCalendarBand({
             >
               <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.primaryButton} onPress={() => void handleSaveDraft()}>
+            <TouchableOpacity ref={walkMark.ref('schedule.saveHousehold')} style={styles.primaryButton} onPress={() => void handleSaveDraft()}>
               <Text style={styles.primaryButtonText}>{editingId ? 'Save changes' : 'Add to the calendar'}</Text>
             </TouchableOpacity>
           </ThumbRow>
         </View>
       ) : (
-        <TouchableOpacity style={styles.addButton} onPress={startAdding}>
+        <TouchableOpacity ref={walkMark.ref('schedule.addHousehold')} style={styles.addButton} onPress={startAdding}>
           <Text style={styles.addButtonText}>{ADD_TO_CALENDAR_LABEL}</Text>
         </TouchableOpacity>
       )}
@@ -3040,7 +3092,7 @@ function HouseholdMealCalendarBand({
                 </View>
                 <ThumbEndRow style={styles.rowActions}>
                   {state !== 'copied' ? (
-                    <TouchableOpacity onPress={() => void handlePut(entry)}>
+                    <TouchableOpacity ref={entry.id === firstToPutId ? walkMark.ref('schedule.putOnMine') : undefined} onPress={() => void handlePut(entry)}>
                       <Text style={styles.actionTextPrimary}>{PUT_ON_MY_SCHEDULE_LABEL}</Text>
                     </TouchableOpacity>
                   ) : null}
@@ -3068,6 +3120,7 @@ function HouseholdMealCalendarBand({
 
 function PastMealsLens() {
   const router = useRouter();
+  const walkMark = useWalkMark();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const folds = useBandFolds();
   const [items, setItems] = useState<ScheduleItemRecord[]>([]);
@@ -3113,13 +3166,17 @@ function PastMealsLens() {
     load();
   };
 
+  const firstAdjustId = items.find((item) => item.status === 'logged' && !!item.linkedMealId)?.id;
+  const firstLeftoversId = items.find((item) => canSaveLeftoversFrom(item))?.id;
+  const firstLoggedId = loggedMeals[0]?.id;
+
   return (
     <>
     <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {loading ? (
         <View style={styles.bandBox}><Text style={styles.emptyText}>Loading…</Text></View>
       ) : (
-        <ScheduleBand folds={folds} id="schedule:pastMeals:list" title="Past meals" icon="time-outline" count={items.length}>
+        <ScheduleBand folds={folds} id="schedule:pastMeals:list" title="Past meals" icon="time-outline" count={items.length} markRef={walkMark.ref('pastMeals.listBand')}>
         {items.length === 0 ? (
         <Text style={[styles.emptyText, styles.panelStandalone]}>No past meals yet.</Text>
         ) : (
@@ -3132,7 +3189,13 @@ function PastMealsLens() {
             // silently dropped, but with nothing real to tap into yet.
             const canEdit = item.status === 'logged' && !!item.linkedMealId;
             return (
-              <TouchableOpacity key={item.id} style={styles.row} disabled={!canEdit} onPress={() => openEditor(item)}>
+              <TouchableOpacity
+                key={item.id}
+                ref={item.id === firstAdjustId ? walkMark.ref('pastMeals.adjust') : undefined}
+                style={styles.row}
+                disabled={!canEdit}
+                onPress={() => openEditor(item)}
+              >
                 <View style={styles.rowMain}>
                   <Text style={styles.rowTime}>{formatTime12(item.scheduledFor.split('T')[1] ?? '')}</Text>
                   <View style={styles.rowTextCol}>
@@ -3157,7 +3220,10 @@ function PastMealsLens() {
                 <View style={styles.rowActions}>
                   {canEdit ? <Text style={styles.actionTextPrimary}>Adjust</Text> : null}
                   {canSaveLeftoversFrom(item) ? (
-                    <TouchableOpacity onPress={() => setLeftoverCook(cookFromScheduleItem(item))}>
+                    <TouchableOpacity
+                      ref={item.id === firstLeftoversId ? walkMark.ref('pastMeals.leftovers') : undefined}
+                      onPress={() => setLeftoverCook(cookFromScheduleItem(item))}
+                    >
                       <Text style={styles.actionText}>{SAVE_LEFTOVERS_LABEL}</Text>
                     </TouchableOpacity>
                   ) : null}
@@ -3170,7 +3236,14 @@ function PastMealsLens() {
         </ScheduleBand>
       )}
       {!loading && loggedMeals.length > 0 ? (
-        <ScheduleBand folds={folds} id="schedule:pastMeals:logged" title="Logged from Food this week" icon="restaurant-outline" count={loggedMeals.length}>
+        <ScheduleBand
+          folds={folds}
+          id="schedule:pastMeals:logged"
+          title="Logged from Food this week"
+          icon="restaurant-outline"
+          count={loggedMeals.length}
+          markRef={walkMark.ref('pastMeals.loggedBand')}
+        >
           <Text style={[styles.helperText, styles.panelStandalone]}>
             Meals logged straight from Food, by voice or by a scan. Made more of one than was eaten? Save the rest for a later meal.
           </Text>
@@ -3189,7 +3262,10 @@ function PastMealsLens() {
                   </View>
                 </View>
                 <View style={styles.rowActions}>
-                  <TouchableOpacity onPress={() => router.push({ pathname: '/food', params: { editMealId: meal.id } })}>
+                  <TouchableOpacity
+                    ref={meal.id === firstLoggedId ? walkMark.ref('pastMeals.loggedAdjust') : undefined}
+                    onPress={() => router.push({ pathname: '/food', params: { editMealId: meal.id } })}
+                  >
                     <Text style={styles.actionTextPrimary}>Adjust</Text>
                   </TouchableOpacity>
                   {canSaveLeftovers(meal.eatenAt, todayDateString()) ? (
@@ -3861,6 +3937,7 @@ function describePartnerPlanFreshness(sentAt: string | null): string {
 const MEAL_TITLES: Record<OpenMeal, string> = { breakfast: 'Breakfast', lunch: 'Lunch', dinner: 'Dinner' };
 
 function DailyMealPlanLens() {
+  const walkMark = useWalkMark();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const folds = useBandFolds();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
@@ -4190,19 +4267,21 @@ function DailyMealPlanLens() {
       <View style={styles.formCard}>
         <Text style={styles.label}>What you eat</Text>
         <Text style={styles.helperText}>{BASE_DIET_CHOICES.find((choice) => choice.tag === planDiet.base)?.caption}</Text>
-        <PopoverSelect
-          selected={baseChoiceLabel(planDiet.base)}
-          options={BASE_DIET_CHOICES.map((choice) => choice.label)}
-          onSelect={(value) => changeDiet({ ...planDiet, base: BASE_DIET_CHOICES.find((choice) => choice.label === value)?.tag ?? null })}
-          placeholder="What you eat"
-          tabColor={TAB_COLOR}
-          width={220}
-        />
+        <View ref={walkMark.ref('mealPlan.diet')} collapsable={false}>
+          <PopoverSelect
+            selected={baseChoiceLabel(planDiet.base)}
+            options={BASE_DIET_CHOICES.map((choice) => choice.label)}
+            onSelect={(value) => changeDiet({ ...planDiet, base: BASE_DIET_CHOICES.find((choice) => choice.label === value)?.tag ?? null })}
+            placeholder="What you eat"
+            tabColor={TAB_COLOR}
+            width={220}
+          />
+        </View>
         <Text style={[styles.label, { marginTop: 12 }]}>Eating style</Text>
         <Text style={styles.helperText}>
           Every meal is built from recipes that fit the style. Pick one, more than one if you follow both, or none.
         </Text>
-        <View style={styles.pillRow}>
+        <View ref={walkMark.ref('mealPlan.styles')} collapsable={false} style={styles.pillRow}>
           {EATING_STYLE_CHOICES.map((choice) => {
             const active = planDiet.styles.includes(choice.tag);
             return (
@@ -4247,14 +4326,16 @@ function DailyMealPlanLens() {
         <Text style={styles.helperText}>
           More than 1 day gets day-to-day variety and weekly frequency targets (fish, red meat) woven in, not independent random picks each day.
         </Text>
-        <PopoverSelect
-          selected={DAYS_TO_GENERATE_OPTIONS.find((option) => option.value === daysToGenerate)?.label ?? '1 Day'}
-          options={DAYS_TO_GENERATE_OPTIONS.map((option) => option.label)}
-          onSelect={(value) => setDaysToGenerate(DAYS_TO_GENERATE_OPTIONS.find((option) => option.label === value)?.value ?? 1)}
-          placeholder="Days"
-          tabColor={TAB_COLOR}
-          width={220}
-        />
+        <View ref={walkMark.ref('mealPlan.days')} collapsable={false}>
+          <PopoverSelect
+            selected={DAYS_TO_GENERATE_OPTIONS.find((option) => option.value === daysToGenerate)?.label ?? '1 Day'}
+            options={DAYS_TO_GENERATE_OPTIONS.map((option) => option.label)}
+            onSelect={(value) => setDaysToGenerate(DAYS_TO_GENERATE_OPTIONS.find((option) => option.label === value)?.value ?? 1)}
+            placeholder="Days"
+            tabColor={TAB_COLOR}
+            width={220}
+          />
+        </View>
         <Text style={[styles.label, { marginTop: 12 }]}>Carb level</Text>
         <Text style={styles.helperText}>Applies to each day&apos;s own total, not any one meal alone.</Text>
         <PopoverSelect
@@ -4366,6 +4447,7 @@ function DailyMealPlanLens() {
         {describeOpenMeals(openRules) ? <Text style={styles.helperText}>{describeOpenMeals(openRules)}</Text> : null}
         {standingMealsLine(usualMeals) ? <Text style={styles.helperText}>{standingMealsLine(usualMeals)}</Text> : null}
         <TouchableOpacity
+          ref={walkMark.ref('mealPlan.generate')}
           style={[styles.primaryButton, { marginTop: 12 }, generating && styles.primaryButtonDisabled]}
           activeOpacity={0.85}
           disabled={generating}
@@ -4440,6 +4522,7 @@ function DailyMealPlanLens() {
             <View key={index} style={styles.bandOut}>
               <HomeSectionBand
                 kind="fold"
+                markRef={index === 0 ? walkMark.ref('mealPlan.firstDay') : undefined}
                 title={day.date ? `Day ${index + 1}, ${WEEKDAY_NAMES[targetWeekdayOf(day.date)]}` : `Day ${index + 1}`}
                 icon="calendar-outline"
                 renderIcon={() => <View style={[styles.dailyPlanHealthDot, { backgroundColor: healthRatingDotColor(day.healthRating) }]} />}
@@ -4449,6 +4532,7 @@ function DailyMealPlanLens() {
               >
                 <DailyPlanFullReport day={day} swapper={swapperFor(index)} dishCosts={dishCosts} />
                 <TouchableOpacity
+                  ref={index === 0 ? walkMark.ref('mealPlan.regenerateDay') : undefined}
                   style={[styles.primaryButton, { marginTop: 8 }, isRegenerating && styles.primaryButtonDisabled]}
                   activeOpacity={0.85}
                   disabled={isRegenerating}
@@ -4472,6 +4556,7 @@ function DailyMealPlanLens() {
           ) : null}
           <AppTextInput style={styles.input} placeholder="YYYY-MM-DD" value={scheduleDate} onChangeText={setScheduleDate} />
           <TouchableOpacity
+            ref={walkMark.ref('mealPlan.addToSchedule')}
             style={[styles.primaryButton, { marginTop: 12 }, scheduling && styles.primaryButtonDisabled]}
             activeOpacity={0.85}
             disabled={scheduling}
@@ -4530,6 +4615,7 @@ function roundForDisplay(value: number): string {
 // who wants to move a dose is sent there rather than given a second set of
 // controls that could drift from the first.
 function TodaysMealsLens() {
+  const walkMark = useWalkMark();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [meals, setMeals] = useState<TodaysMeal[]>([]);
@@ -4583,6 +4669,8 @@ function TodaysMealsLens() {
 
   const summary = useMemo(() => timelineSummary(timeline), [timeline]);
   const doseCount = useMemo(() => timeline.filter((entry) => entry.kind === 'dose').length, [timeline]);
+  const firstMealEntryId = timeline.flatMap((entry) => (entry.kind === 'dose' ? [] : [entry.meal.id]))[0];
+  const firstDoseId = timeline.flatMap((entry) => (entry.kind === 'dose' ? [entry.dose.id] : []))[0];
 
   function renderMealBand(meal: TodaysMeal) {
     const expanded = expandedId === meal.scheduleItemId;
@@ -4590,6 +4678,7 @@ function TodaysMealsLens() {
       <View key={meal.scheduleItemId} style={styles.bandOut}>
         <HomeSectionBand
           kind="fold"
+          markRef={meal.scheduleItemId === firstMealEntryId ? walkMark.ref('todaysMeals.mealBand') : undefined}
           title={`${formatTime12(meal.scheduledFor.slice(11, 16))} · ${meal.title}`}
           icon="restaurant-outline"
           color={TAB_COLOR}
@@ -4681,6 +4770,7 @@ function TodaysMealsLens() {
       <View key={bandId} style={styles.bandOut}>
         <HomeSectionBand
           kind="fold"
+          markRef={dose.id === firstDoseId ? walkMark.ref('todaysMeals.doseBand') : undefined}
           title={`${formatTime12(dose.time)} · ${dose.treatmentName}${titleSuffix}`}
           icon={needsAttention ? 'alert-circle-outline' : 'medkit-outline'}
           color={TAB_COLOR}
@@ -5154,7 +5244,7 @@ function HydrationLens() {
 
           <View style={styles.bandBox}>
             <Text style={styles.hydrationSummaryLabel}>One tap for a drink</Text>
-            <View style={[styles.pillRow, styles.quickDrinkRow]}>
+            <View ref={walkMark.ref('hydration.quick')} collapsable={false} style={[styles.pillRow, styles.quickDrinkRow]}>
               {QUICK_DRINKS.map((drink) => (
                 <TouchableOpacity
                   key={drink.key}
@@ -5171,7 +5261,11 @@ function HydrationLens() {
             {lastQuick ? (
               <ThumbEndRow style={styles.quickDrinkLoggedRow}>
                 <Text style={styles.quickDrinkLogged}>{lastQuick.line}</Text>
-                <TouchableOpacity onPress={() => void handleUndoQuickDrink()} accessibilityLabel="Take back the drink just logged">
+                <TouchableOpacity
+                  ref={walkMark.ref('hydration.undo')}
+                  onPress={() => void handleUndoQuickDrink()}
+                  accessibilityLabel="Take back the drink just logged"
+                >
                   <Text style={styles.quickDrinkUndo}>Take it back</Text>
                 </TouchableOpacity>
               </ThumbEndRow>
@@ -5315,7 +5409,14 @@ function HydrationLens() {
             </View>
           )}
 
-          <ScheduleBand folds={folds} id="schedule:hydration:today" title="Today's drinks" icon="water-outline" count={rows.length}>
+          <ScheduleBand
+            folds={folds}
+            markRef={walkMark.ref('hydration.todayBand')}
+            id="schedule:hydration:today"
+            title="Today's drinks"
+            icon="water-outline"
+            count={rows.length}
+          >
           {rows.length === 0 ? (
             <Text style={[styles.emptyText, styles.panelStandalone]}>
               Nothing logged or scheduled yet today. This includes any &ldquo;Beverage&rdquo; meals logged directly from Meals too.
@@ -5337,7 +5438,14 @@ function HydrationLens() {
           </ScheduleBand>
 
           {drinkIndex.found.length > 0 || drinkIndex.untested.length > 0 ? (
-            <ScheduleBand folds={folds} id="schedule:hydration:index" title="How today's drinks hold water" icon="flask-outline" count={drinkIndex.found.length}>
+            <ScheduleBand
+              folds={folds}
+              markRef={walkMark.ref('hydration.indexBand')}
+              id="schedule:hydration:index"
+              title="How today's drinks hold water"
+              icon="flask-outline"
+              count={drinkIndex.found.length}
+            >
               <View style={[styles.bandBox, styles.bandRows]}>
                 {drinkIndex.found.map((entry) => (
                   <View key={entry.key}>
@@ -5691,6 +5799,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
         .sort((a, b) => a.scheduledFor.localeCompare(b.scheduledFor)),
     [dosesByTreatment, today],
   );
+  const firstPlannedDoseId = todaysDoses.find((dose) => dose.status === 'planned')?.id;
 
   function describeDose(treatment: TreatmentRecord): string {
     const taperToday = stepOn(tapersByTreatment.get(treatment.id) ?? [], today);
@@ -5706,15 +5815,17 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
     );
   }
 
-  function renderDoseActions(dose: ScheduleItemRecord) {
+  // markFirst rings Taken and Skip on the first planned dose in Today,
+  // for the how-to that names them.
+  function renderDoseActions(dose: ScheduleItemRecord, markFirst = false) {
     return (
       <View style={styles.doseRowActions}>
         {dose.status === 'planned' ? (
           <>
-            <TouchableOpacity onPress={() => handleMarkDoseTaken(dose)}>
+            <TouchableOpacity ref={markFirst ? walkMark.ref('meds.taken') : undefined} onPress={() => handleMarkDoseTaken(dose)}>
               <Text style={styles.actionTextPrimary}>Taken</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleToggleDoseSkipped(dose)}>
+            <TouchableOpacity ref={markFirst ? walkMark.ref('meds.skipDose') : undefined} onPress={() => handleToggleDoseSkipped(dose)}>
               <Text style={styles.actionText}>Skip</Text>
             </TouchableOpacity>
           </>
@@ -5857,6 +5968,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
       <View style={styles.bandOut}>
         <HomeSectionBand
           kind="action"
+          markRef={walkMark.ref('meds.myMeds')}
           title="Add or change a med in My Meds"
           caption="A med is defined on the Life tab. Tap Schedule it there to bring it here."
           icon="flask-outline"
@@ -5887,7 +5999,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
             <VaultClosedBand color={TAB_COLOR} categories={['medications']} />
           ) : (
           <>
-          <ScheduleBand folds={folds} id="schedule:meds:today" title="Today" icon="time-outline" count={todaysDoses.length}>
+          <ScheduleBand folds={folds} markRef={walkMark.ref('meds.todayBand')} id="schedule:meds:today" title="Today" icon="time-outline" count={todaysDoses.length}>
             {todaysDoses.length === 0 ? (
               <Text style={[styles.helperText, styles.panelStandalone]}>
                 No doses on the schedule today. Add a reminder time under a med below.
@@ -5908,7 +6020,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
                         </Text>
                       </View>
                     </View>
-                    {renderDoseActions(dose)}
+                    {renderDoseActions(dose, dose.id === firstPlannedDoseId)}
                   </View>
                 ))}
               </View>
@@ -5938,6 +6050,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
                       : 'Alerts are off. Doses still show here.'}
                   </Text>
                   <TouchableOpacity
+                    ref={walkMark.ref('meds.watchAlerts')}
                     style={styles.secondaryButton}
                     onPress={() => {
                       const next = !watchAlertsOn;
@@ -5959,7 +6072,7 @@ function MedsLens({ scheduleTreatmentId }: { scheduleTreatmentId?: string }) {
           )}
 
           {interactionWarnings.length > 0 ? (
-            <ScheduleBand folds={folds} id="schedule:meds:things-to-check" title="Things to check" icon="alert-circle-outline" count={interactionWarnings.length}>
+            <ScheduleBand folds={folds} markRef={walkMark.ref('meds.checkBand')} id="schedule:meds:things-to-check" title="Things to check" icon="alert-circle-outline" count={interactionWarnings.length}>
               <View style={[styles.table, styles.calmGap]}>
                 {interactionWarnings.map((warning, index) => (
                   <View key={`${warning.ruleId}_${index}`} style={styles.interactionCard}>
@@ -6188,12 +6301,15 @@ const DEVICE_IMPORT_WINDOW_DAYS = 90;
 // scheduleAppointment's own note) -- most appointments get booked one at a
 // time by a provider's office anyway.
 function AppointmentsLens() {
+  const walkMark = useWalkMark();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   // The list is left out while appointments are in a closed vault. Adding
   // one stays, and appointment reminders keep coming.
   const appointmentsClosed = useCategoryClosed('appointments');
   const folds = useBandFolds();
   const [appointments, setAppointments] = useState<ScheduleItemRecord[]>([]);
+  const firstPlannedAppointmentId = appointments.find((item) => item.status === 'planned')?.id;
+  const firstAppointmentId = appointments[0]?.id;
   const [interactionWarnings, setInteractionWarnings] = useState<InteractionWarning[]>([]);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -6478,10 +6594,15 @@ function AppointmentsLens() {
         <>
           {!showForm && !showImportPicker ? (
             <View style={styles.appointmentTopActions}>
-              <TouchableOpacity style={styles.addButton} onPress={openAddForm}>
+              <TouchableOpacity ref={walkMark.ref('appointments.add')} style={styles.addButton} onPress={openAddForm}>
                 <Text style={styles.addButtonText}>+ Schedule an appointment</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.secondaryButtonFull} onPress={handleOpenImportPicker} disabled={importLoading}>
+              <TouchableOpacity
+                ref={walkMark.ref('appointments.import')}
+                style={styles.secondaryButtonFull}
+                onPress={handleOpenImportPicker}
+                disabled={importLoading}
+              >
                 <Text style={styles.secondaryButtonText}>{importLoading ? 'Loading…' : 'Import from Phone Calendar'}</Text>
               </TouchableOpacity>
             </View>
@@ -6517,7 +6638,9 @@ function AppointmentsLens() {
 
           {showForm ? (
             <View style={styles.formCard}>
-              <SpokenAppointmentBox tabColor={TAB_COLOR} onFill={applySpokenAppointment} />
+              <View ref={walkMark.ref('appointments.say')} collapsable={false}>
+                <SpokenAppointmentBox tabColor={TAB_COLOR} onFill={applySpokenAppointment} />
+              </View>
               <Text style={styles.label}>What is this for?</Text>
               <AppTextInput
                 onVoiceResult={(text) => setForm((current) => ({ ...current, title: text }))}
@@ -6640,7 +6763,7 @@ function AppointmentsLens() {
                 <TouchableOpacity style={styles.secondaryButton} onPress={closeForm}>
                   <Text style={styles.secondaryButtonText}>Cancel</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.primaryButton} onPress={handleSaveForm}>
+                <TouchableOpacity ref={walkMark.ref('appointments.save')} style={styles.primaryButton} onPress={handleSaveForm}>
                   <Text style={styles.primaryButtonText}>{form.editingId ? 'Save changes' : 'Schedule appointment'}</Text>
                 </TouchableOpacity>
               </ThumbRow>
@@ -6672,7 +6795,7 @@ function AppointmentsLens() {
           {appointmentsClosed ? (
             <VaultClosedBand color={TAB_COLOR} categories={['appointments']} />
           ) : (
-          <ScheduleBand folds={folds} id="schedule:appointments:list" title="Appointments" icon="calendar-outline" count={appointments.length}>
+          <ScheduleBand folds={folds} markRef={walkMark.ref('appointments.listBand')} id="schedule:appointments:list" title="Appointments" icon="calendar-outline" count={appointments.length}>
           {appointments.length === 0 ? (
             <Text style={[styles.emptyText, styles.panelStandalone]}>Nothing scheduled. Add an appointment or import one from your phone calendar.</Text>
           ) : (
@@ -6701,13 +6824,22 @@ function AppointmentsLens() {
                   <View style={styles.rowActions}>
                     {item.status === 'planned' ? (
                       <>
-                        <TouchableOpacity onPress={() => handleMarkCompleted(item)}>
+                        <TouchableOpacity
+                          ref={item.id === firstPlannedAppointmentId ? walkMark.ref('appointments.completed') : undefined}
+                          onPress={() => handleMarkCompleted(item)}
+                        >
                           <Text style={styles.actionTextPrimary}>Completed</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => handleToggleCancelled(item)}>
+                        <TouchableOpacity
+                          ref={item.id === firstPlannedAppointmentId ? walkMark.ref('appointments.cancel') : undefined}
+                          onPress={() => handleToggleCancelled(item)}
+                        >
                           <Text style={styles.actionText}>Cancel</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => openEditForm(item)}>
+                        <TouchableOpacity
+                          ref={item.id === firstPlannedAppointmentId ? walkMark.ref('appointments.edit') : undefined}
+                          onPress={() => openEditForm(item)}
+                        >
                           <Text style={styles.actionText}>Edit</Text>
                         </TouchableOpacity>
                       </>
@@ -6721,11 +6853,17 @@ function AppointmentsLens() {
                         <Text style={styles.actionText}>Unlink calendar</Text>
                       </TouchableOpacity>
                     ) : (
-                      <TouchableOpacity onPress={() => handleAddToDeviceCalendar(item)}>
+                      <TouchableOpacity
+                        ref={item.id === firstAppointmentId ? walkMark.ref('appointments.addCalendar') : undefined}
+                        onPress={() => handleAddToDeviceCalendar(item)}
+                      >
                         <Text style={styles.actionText}>Add to calendar</Text>
                       </TouchableOpacity>
                     )}
-                    <TouchableOpacity onPress={() => handleRemove(item)}>
+                    <TouchableOpacity
+                      ref={item.id === firstAppointmentId ? walkMark.ref('appointments.remove') : undefined}
+                      onPress={() => handleRemove(item)}
+                    >
                       <Text style={styles.actionTextRemove}>Remove</Text>
                     </TouchableOpacity>
                   </View>
@@ -6770,6 +6908,7 @@ function TimelineLens() {
 
 function UpkeepLens() {
   const router = useRouter();
+  const walkMark = useWalkMark();
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const folds = useBandFolds();
   const [items, setItems] = useState<UpkeepItem[]>([]);
@@ -6803,6 +6942,12 @@ function UpkeepLens() {
     ];
   }, [items, today]);
 
+  const firstBucketKey = buckets.find((bucket) => bucket.rows.length > 0)?.key;
+  const firstDoneId = buckets
+    .flatMap((bucket) => bucket.rows)
+    .find((standing) => standing.item.cadence === 'recurring' && standing.missing !== 'noInterval')?.item.id;
+  const firstEditId = buckets.find((bucket) => bucket.rows.length > 0)?.rows[0]?.item.id;
+
   function openUpkeep() {
     router.push({ pathname: '/life', params: { openLifeLens: 'upkeep' } });
   }
@@ -6826,6 +6971,7 @@ function UpkeepLens() {
       <View style={styles.bandOut}>
         <HomeSectionBand
           kind="action"
+          markRef={walkMark.ref('upkeepLens.add')}
           title="Add or change something in Upkeep"
           caption="Services, filters, registrations, renewals: each is defined on the Life tab and its dates show up here."
           icon="construct-outline"
@@ -6846,7 +6992,11 @@ function UpkeepLens() {
       ) : (
         buckets.map((bucket) =>
           bucket.rows.length === 0 ? null : (
-            <ScheduleBand key={bucket.key} folds={folds} id={`schedule:upkeep:${bucket.key}`} title={bucket.title} icon={bucket.icon} count={bucket.rows.length}>
+            <ScheduleBand
+              key={bucket.key}
+              folds={folds}
+              markRef={bucket.key === firstBucketKey ? walkMark.ref('upkeepLens.firstBand') : undefined}
+              id={`schedule:upkeep:${bucket.key}`} title={bucket.title} icon={bucket.icon} count={bucket.rows.length}>
               <View style={styles.table}>
                 {bucket.rows.map((standing) => (
                   <View key={standing.item.id} style={styles.row}>
@@ -6860,11 +7010,14 @@ function UpkeepLens() {
                     </View>
                     <View style={styles.supplementRowActions}>
                       {standing.item.cadence === 'recurring' && standing.missing !== 'noInterval' ? (
-                        <TouchableOpacity onPress={() => handleDoneToday(standing)}>
+                        <TouchableOpacity
+                          ref={standing.item.id === firstDoneId ? walkMark.ref('upkeepLens.doneToday') : undefined}
+                          onPress={() => handleDoneToday(standing)}
+                        >
                           <Text style={styles.actionTextPrimary}>Done today</Text>
                         </TouchableOpacity>
                       ) : null}
-                      <TouchableOpacity onPress={openUpkeep}>
+                      <TouchableOpacity ref={standing.item.id === firstEditId ? walkMark.ref('upkeepLens.edit') : undefined} onPress={openUpkeep}>
                         <Text style={styles.actionText}>
                           {standing.missing ? 'Set it up in Upkeep' : standing.item.cadence === 'expires' && standing.item.renewable ? 'Renew in Upkeep' : 'Edit in Upkeep'}
                         </Text>

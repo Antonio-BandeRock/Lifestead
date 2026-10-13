@@ -44,6 +44,7 @@ import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { buildTime24, describeTimeInputProblem, splitTime24, type TimeOfDayInput } from '../lib/timeOfDay';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
+import { useWalkMark } from './WalkMark';
 
 // Schedules > Exercise, H11 part 3. A plan is a workout from Life >
 // Workouts or a plain activity by name, on a first day, at a time or any
@@ -104,6 +105,7 @@ export function ExerciseScheduleSection({ tabColor, RepeatRulePicker }: Props) {
   const styles = useMemo(() => makeStyles(tabColor), [tabColor]);
   const router = useRouter();
   const folds = useBandFolds();
+  const walkMark = useWalkMark();
   const [plans, setPlans] = useState<ExercisePlan[]>([]);
   const [marks, setMarks] = useState<PlanMark[]>([]);
   const [workouts, setWorkouts] = useState<Workout[]>([]);
@@ -325,7 +327,7 @@ export function ExerciseScheduleSection({ tabColor, RepeatRulePicker }: Props) {
       />
 
       {!form ? (
-        <TouchableOpacity style={styles.addButton} onPress={openAdd}>
+        <TouchableOpacity ref={walkMark.ref('exercise.add')} style={styles.addButton} onPress={openAdd}>
           <Text style={styles.addButtonText}>+ Plan exercise</Text>
         </TouchableOpacity>
       ) : (
@@ -450,7 +452,7 @@ export function ExerciseScheduleSection({ tabColor, RepeatRulePicker }: Props) {
             <TouchableOpacity style={styles.secondaryButton} onPress={() => setForm(null)}>
               <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
+            <TouchableOpacity ref={walkMark.ref('exercise.save')} style={styles.primaryButton} onPress={handleSave}>
               <Text style={styles.primaryButtonText}>{form.editingId ? 'Save changes' : 'Save plan'}</Text>
             </TouchableOpacity>
           </ThumbRow>
