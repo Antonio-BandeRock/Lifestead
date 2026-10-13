@@ -80,6 +80,7 @@ import type { SQLiteBindValue } from 'expo-sqlite';
 import { encryptBackupPayload } from './backupEncryption';
 import { getDatabase } from './db';
 import { unguardedGetAll } from './databaseActivity';
+import { APP_META_TABLE, DEVICE_LOCAL_META_KEYS, DEVICE_LOCAL_TABLES } from './snapshotSync';
 
 export const BACKUP_SCHEMA_VERSION = 1;
 
@@ -334,6 +335,13 @@ export function parseBackupEnvelope(content: string): BackupEnvelope | null {
 // resolution already designed separately). Every real caller must get an
 // explicit, serious confirmation from the person before this ever runs --
 // this function itself does not ask.
+//
+// What a device keeps to itself survives the restore (1.0.69.5): the
+// tables in DEVICE_LOCAL_TABLES are left as they are, and so are the
+// app_meta rows in DEVICE_LOCAL_META_KEYS, whatever the backup carries.
+// A backup made on another device, or in the desktop's Test data copy,
+// once replaced this device's shared folder with that copy's, which was
+// none, and sync stopped without a word.
 export async function restoreFromBackupEnvelope(envelope: BackupEnvelope): Promise<RestoreResult> {
   const db = await getDatabase();
   const liveTableNames = new Set(await getRealUserTableNames());
@@ -385,13 +393,21 @@ export async function restoreFromBackupEnvelope(envelope: BackupEnvelope): Promi
           tablesSkipped.push(tableName);
           continue;
         }
+        if (DEVICE_LOCAL_TABLES.includes(tableName)) continue;
+        const isMeta = tableName === APP_META_TABLE;
 
         const columnInfo = await db.getAllAsync<{ name: string }>(`PRAGMA table_info("${tableName}")`);
         const liveColumns = new Set(columnInfo.map((column) => column.name));
 
-        await db.runAsync(`DELETE FROM "${tableName}"`);
+        if (isMeta) {
+          const places = DEVICE_LOCAL_META_KEYS.map(() => '?').join(', ');
+          await db.runAsync(`DELETE FROM "${tableName}" WHERE key NOT IN (${places})`, [...DEVICE_LOCAL_META_KEYS]);
+        } else {
+          await db.runAsync(`DELETE FROM "${tableName}"`);
+        }
 
         for (const row of rows) {
+          if (isMeta && DEVICE_LOCAL_META_KEYS.includes(String(row.key))) continue;
           // Only the real, current intersection of columns -- a column the
           // backup has that the live schema no longer does gets dropped; a
           // column the live schema has that this old row never carried
