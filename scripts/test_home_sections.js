@@ -33,6 +33,8 @@ const {
   HOME_SECTION_TAB_PATH,
   reorderHomeGroups,
   reorderWithinHomeGroup,
+  followNewMenuOrder,
+  HOME_GROUP_MENU_ORDER,
 } = load('lib/homeSections.ts');
 
 let failures = 0;
@@ -211,7 +213,8 @@ const defaultOrder = orderMatch[1]
 const defaultGroupPaths = groupHomeSectionsForDisplay(defaultOrder)
   .filter((g) => g.kind === 'tab')
   .map((g) => g.path);
-const menuOrderWithDigest = [tabPaths[0], '/profile', ...tabPaths.slice(1), '/digest'];
+// Profile follows the tabs since 1.0.70.1, as it does in TabHub.
+const menuOrderWithDigest = [...tabPaths, '/profile', '/digest'];
 check('default order runs in TabHub menu order, the Digest last', defaultGroupPaths, menuOrderWithDigest);
 
 // Every declared section is in the default order, and nothing is in it
@@ -280,6 +283,24 @@ check(
   defaultOrder,
 );
 check('an unknown group does nothing', reorderWithinHomeGroup(defaultOrder, 'nope', 0, 1), defaultOrder);
+
+// 1.0.70.1: Home's groups follow TabHub, Home, Life, Food, Garden,
+// Schedules, Signals, Insights, Trends, Reports, Profile, with the Library
+// cards last. HOME_GROUP_MENU_ORDER is held to TAB_ROUTES' order here.
+check('the one-time reorder aims at the menu order', HOME_GROUP_MENU_ORDER, menuOrderWithDigest);
+
+// A saved order in the old group sequence takes the new one, cards inside
+// each group and the cards on their own staying where they were.
+const oldSaved = ['sharedFolderSetup', 'captureInbox', 'today', 'lowStimulation', 'scanProduct', 'logAgain', 'yourDay', 'logFlare', 'weekTrend', 'makeReport', 'gardenTasks', 'routines', 'groceryList', 'digestCards'];
+check(
+  'an old-order save takes the new menu order',
+  followNewMenuOrder(oldSaved),
+  ['sharedFolderSetup', 'captureInbox', 'today', 'routines', 'groceryList', 'scanProduct', 'logAgain', 'gardenTasks', 'yourDay', 'logFlare', 'weekTrend', 'makeReport', 'lowStimulation', 'digestCards'],
+);
+check('reading it twice changes nothing more', followNewMenuOrder(followNewMenuOrder(oldSaved)), followNewMenuOrder(oldSaved));
+const arranged = ['today', 'makeReport', 'scanProduct', 'routines'];
+check('a save with a group moved on purpose is left alone', followNewMenuOrder(arranged), arranged);
+check('an empty save stays empty', followNewMenuOrder([]), []);
 
 if (failures > 0) {
   console.error(`\n${failures} of ${checks} checks failed`);

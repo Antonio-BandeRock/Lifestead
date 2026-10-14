@@ -13,9 +13,9 @@
 // an item is done, so the two can never disagree.
 //
 // The order of TAB_GUIDES is the recommended order and means something:
-// the tabs where records go in come first (Life, Schedules, Signals, Food,
-// Garden), then the tabs that give back what those records hold (Insights,
-// Trends, Reports), each one naming the tab its missing record goes into.
+// the tabs where records go in come first (Life, Food, Garden, Schedules,
+// Signals, in the menu's order since 1.0.70.1), then the tabs that give
+// back what those records hold (Insights, Trends, Reports), each one naming the tab its missing record goes into.
 // Any tab can still be started from; "Start here" only marks the first one
 // with something to do.
 //
@@ -73,26 +73,6 @@ export const TAB_GUIDES: TabGuideDef[] = [
     open: route('/life'),
   },
   {
-    path: '/schedule',
-    title: 'Schedules',
-    group: 'goesIn',
-    beats: ['health', 'food'],
-    gives: 'Your day in order: meals, drinks, doses and appointments on the clock, with reminders so the times stay out of your head.',
-    needs: ['meal', 'water'],
-    readyLine: 'Keep logging meals as you eat them. Every one is something Insights and Trends can read.',
-    open: route('/schedule', { openScheduleLens: 'meals' }),
-  },
-  {
-    path: '/log',
-    title: 'Signals',
-    group: 'goesIn',
-    beats: ['health', 'movement'],
-    gives: 'Say how you feel in a tap or two, and note flares, reactions and movement. This is what your meals get compared with.',
-    needs: ['checkin', 'exercise'],
-    readyLine: 'Note how you feel each day, and log a flare or reaction when one comes.',
-    open: route('/log'),
-  },
-  {
     path: '/food',
     title: 'Food',
     group: 'goesIn',
@@ -111,6 +91,26 @@ export const TAB_GUIDES: TabGuideDef[] = [
     needs: ['gardenArea', 'planting', 'harvest'],
     readyLine: 'Log each harvest as it comes, and Trends shows what the garden grew.',
     open: route('/garden'),
+  },
+  {
+    path: '/schedule',
+    title: 'Schedules',
+    group: 'goesIn',
+    beats: ['health', 'food'],
+    gives: 'Your day in order: meals, drinks, doses and appointments on the clock, with reminders so the times stay out of your head.',
+    needs: ['meal', 'water'],
+    readyLine: 'Keep logging meals as you eat them. Every one is something Insights and Trends can read.',
+    open: route('/schedule', { openScheduleLens: 'meals' }),
+  },
+  {
+    path: '/log',
+    title: 'Signals',
+    group: 'goesIn',
+    beats: ['health', 'movement'],
+    gives: 'Say how you feel in a tap or two, and note flares, reactions and movement. This is what your meals get compared with.',
+    needs: ['checkin', 'exercise'],
+    readyLine: 'Note how you feel each day, and log a flare or reaction when one comes.',
+    open: route('/log'),
   },
   {
     path: '/insights',

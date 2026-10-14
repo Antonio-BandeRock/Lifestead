@@ -26,11 +26,20 @@ export type TabRoute = {
 // each for the sound reason that appending changes no existing tab's swipe
 // adjacency. Ten tabs later that had produced a sequence nobody chose.
 //
-// It reads in three groups, after Home:
+// 1.0.70.1, direct request: "Even though Food is the basis for this app to
+// exist, Life is where food falls under, and Garden, I think, should be
+// next." The order since then, after Home:
 //
-//   Food, Schedules, Signals     what you do daily
+//   Life, Food, Garden           the life, its food, where food grows
+//   Schedules, Signals           what you do daily
 //   Insights, Trends, Reports    what it tells you
-//   Garden, Life                 the wider world
+//
+// Interests goes between Garden and Schedules when it is built. The swipe
+// wraps, so Reports leads back to Home and Home back to Reports. Until
+// 1.0.70.1 it read Food, Schedules, Signals, then the three outputs, then
+// Garden and Life as the wider world, which put Life, the tab the rest sit
+// inside, last. It also put Garden's emerald beside Life's mint, the two
+// closest colours in the grid; they are apart now.
 //
 // The last group was Garden, Digest, Life until 2026-09-19, when the Digest
 // tab was taken apart by direct instruction ("This will in essence remove
@@ -51,27 +60,15 @@ export type TabRoute = {
 //
 // This list drives three things at once, so changing it moves all three
 // together and that is the point: TabHub's grid, SwipeableTabScreen's own
-// left/right order, and the position dots under the header. TabHub lays out
-// its own rows separately, since Profile and Info sit in the top row and
-// neither is a tab (see TAB_HUB_MENU_ORDER there).
+// left/right order, and the position dots under the header. TabHub adds
+// Profile and Info after Reports, since neither is a tab.
 export const TAB_ROUTES: TabRoute[] = [
   { path: '/', title: 'Home', icon: 'home', color: colors.tabHome },
-  { path: '/food', title: 'Food', icon: 'restaurant', color: colors.tabFood },
-  { path: '/schedule', title: 'Schedules', icon: 'calendar', color: colors.tabSchedules },
-  { path: '/log', title: 'Signals', icon: 'compass', color: colors.tabBioCompass },
-  { path: '/insights', title: 'Insights', icon: 'medical', color: colors.tabInsights },
-  { path: '/trends', title: 'Trends', icon: 'trending-up', color: colors.tabTrends },
-  { path: '/reports', title: 'Reports', icon: 'document-text', color: colors.tabReports },
-  // Added 2026-08-13 for home-gardening tracking (a real Growing Zone
-  // lookup, plots/plantings/harvests, and harvest-as-ingredient sourcing
-  // into the Food builders), and since 2026-09-19 the Horticulture reading
-  // as well. Placed by meaning since 2026-09-05, see the block comment
-  // above.
-  { path: '/garden', title: 'Garden', icon: 'leaf', color: colors.tabGarden },
   // Added 2026-09-04. Direct request: "A new tab needs to be added and
   // available through TabHub menu. The name of the new tab is Life... This
   // will deal with the user's life, all aspects." Appended last, the same
   // precedent Garden set, so no earlier tab's own swipe-adjacency changed.
+  // Second since 1.0.70.1, see the block comment above.
   //
   // `infinite` was chosen deliberately over a concrete object. Seven of the
   // nine tabs above are things (a house, a plate, a stethoscope, a
@@ -92,4 +89,16 @@ export const TAB_ROUTES: TabRoute[] = [
   // it back to eleven; TabHub lays its rows out from the count, so nothing
   // there had to change.
   { path: '/life', title: 'Life', icon: 'infinite', color: colors.tabLife },
+  { path: '/food', title: 'Food', icon: 'restaurant', color: colors.tabFood },
+  // Added 2026-08-13 for home-gardening tracking (a real Growing Zone
+  // lookup, plots/plantings/harvests, and harvest-as-ingredient sourcing
+  // into the Food builders), and since 2026-09-19 the Horticulture reading
+  // as well. Placed by meaning since 2026-09-05, see the block comment
+  // above.
+  { path: '/garden', title: 'Garden', icon: 'leaf', color: colors.tabGarden },
+  { path: '/schedule', title: 'Schedules', icon: 'calendar', color: colors.tabSchedules },
+  { path: '/log', title: 'Signals', icon: 'compass', color: colors.tabBioCompass },
+  { path: '/insights', title: 'Insights', icon: 'medical', color: colors.tabInsights },
+  { path: '/trends', title: 'Trends', icon: 'trending-up', color: colors.tabTrends },
+  { path: '/reports', title: 'Reports', icon: 'document-text', color: colors.tabReports },
 ];

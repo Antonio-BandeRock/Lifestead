@@ -1261,7 +1261,7 @@ const HOME_HELP_SECTIONS: HelpSection[] = [
   },
   {
     heading: 'Getting around',
-    body: 'Tap a tab at the bottom to jump to it, or swipe left/right anywhere on a screen to move to the next or previous tab: Home, Meals, Insights, Schedules, Trends, Signals, Reports, in that order.',
+    body: 'Tap the button at the bottom to open the menu and jump to any tab, or swipe left or right anywhere on a screen to move to the next or previous tab: Home, Life, Food, Garden, Schedules, Signals, Insights, Trends and Reports, in that order. Past Reports the swipe comes back to Home.',
   },
 ];
 

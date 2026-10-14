@@ -85,13 +85,13 @@ const presence = new Map([
 ]);
 const year = M.buildYearPage(2026, presence, '2026-10-02');
 same('twelve months', year.length, 12);
-same('tabs in tab order, no counts', year[2].tabs, ['schedule', 'log', 'garden']);
+same('tabs in tab order, no counts', year[2].tabs, ['garden', 'schedule', 'log']);
 ok('November is future', year[10].future && !year[9].future);
 const month = M.buildMonthPage(2026, 10, presence, '2026-10-02');
 ok('weeks of seven', month.every((w) => w.length === 7));
 same('October 2026 starts on a Thursday', month[0].slice(0, 4), [null, null, null, null]);
 const second = month[0][5];
-same('the 2nd', [second.day, second.today, second.tabs], ['2026-10-02', true, ['schedule', 'life']]);
+same('the 2nd', [second.day, second.today, second.tabs], ['2026-10-02', true, ['life', 'schedule']]);
 ok('the 3rd is future', month[0][6].future);
 same('a month has every day once', month.flat().filter(Boolean).length, 31);
 

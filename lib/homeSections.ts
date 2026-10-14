@@ -265,3 +265,33 @@ export function reorderWithinHomeGroup(
   next[index] = { kind: 'tab', path: group.path, keys: moved };
   return next.flatMap(homeGroupMembers);
 }
+
+// The groups' order before and after 1.0.70.1, when TabHub went to Home,
+// Life, Food, Garden, Schedules, Signals, Insights, Trends, Reports,
+// Profile ("Even though Food is the basis for this app to exist, Life is
+// where food falls under, and Garden, I think, should be next"). Home's
+// groups follow the menu, and scripts/test_home_sections.js holds
+// HOME_GROUP_MENU_ORDER to TAB_ROUTES. Spelled out here rather than read
+// from constants/tabs.ts because this file imports nothing at runtime.
+export const HOME_GROUP_MENU_ORDER_BEFORE_1070 = ['/', '/profile', '/food', '/schedule', '/log', '/insights', '/trends', '/reports', '/garden', '/life', '/digest'];
+export const HOME_GROUP_MENU_ORDER = ['/', '/life', '/food', '/garden', '/schedule', '/log', '/insights', '/trends', '/reports', '/profile', '/digest'];
+
+// A saved order whose groups still run in the old menu order was never
+// rearranged by group, so its groups take the new order once, each keeping
+// the cards inside it as they were and each card on its own (Capture, Your
+// Guide) keeping its place. A saved order with any group moved out of the
+// old sequence was arranged on purpose and comes back unchanged.
+export function followNewMenuOrder(saved: HomeSectionKey[]): HomeSectionKey[] {
+  const groups = groupHomeSectionsForDisplay(saved);
+  const tabGroups = groups.filter((group): group is Extract<HomeSectionDisplayGroup, { kind: 'tab' }> => group.kind === 'tab');
+  const rank = (order: string[], path: string) => {
+    const index = order.indexOf(path);
+    return index < 0 ? order.length : index;
+  };
+  for (let i = 1; i < tabGroups.length; i += 1) {
+    if (rank(HOME_GROUP_MENU_ORDER_BEFORE_1070, tabGroups[i - 1].path) > rank(HOME_GROUP_MENU_ORDER_BEFORE_1070, tabGroups[i].path)) return saved;
+  }
+  const sorted = [...tabGroups].sort((a, b) => rank(HOME_GROUP_MENU_ORDER, a.path) - rank(HOME_GROUP_MENU_ORDER, b.path));
+  let next = 0;
+  return groups.flatMap((group) => (group.kind === 'tab' ? sorted[next++].keys : [group.key]));
+}

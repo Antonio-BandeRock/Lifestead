@@ -34,7 +34,7 @@ import { File, Paths } from 'expo-file-system';
 import type { GroundTheme } from '../constants/colors';
 import type { DigestCategoryKey } from './digest';
 import { getDatabase } from './db';
-import { groupHomeSectionKeysByTab } from './homeSections';
+import { followNewMenuOrder, groupHomeSectionKeysByTab } from './homeSections';
 import { setPlayfulWordingEnabled } from './playfulCopy';
 import {
   DEFAULT_LETTER_SPACING,
@@ -408,14 +408,22 @@ export const ALL_HOME_SECTION_KEYS: HomeSectionKey[] = [
   // the TabHub menu." Home leads TabHub’s own grid, so it leads the
   // groups here.
   'today',
-  // Profile. TabHub puts it second, immediately after Home, and so does
-  // this (2026-09-16). It is not a TAB_ROUTE, so Home reads its name,
-  // icon and colour from HOME_GROUP_IDENTITY in app/(tabs)/index.tsx.
-  'lowStimulation',
+  // Life. Second since 1.0.70.1, the way it is second in TabHub.
+  'groceryList',
+  'groceryQuickAdd',
+  'routines',
+  'doneChecks',
+  'todayPicks',
+  'countdowns',
+  'startWorkout',
   // Food.
   'usualMeal',
   'logAgain',
   'scanProduct',
+  // Garden.
+  'gardenTasks',
+  'daysUntil',
+  'logHarvest',
   // Schedules. mealsLoggedToday is stated here beside its tab-mates
   // rather than further down: the grouping pulled it up anyway, and a
   // default order that needs regrouping to read correctly is a trap.
@@ -447,18 +455,10 @@ export const ALL_HOME_SECTION_KEYS: HomeSectionKey[] = [
   'gardenYield',
   // Reports.
   'makeReport',
-  // Garden.
-  'gardenTasks',
-  'daysUntil',
-  'logHarvest',
-  // Life.
-  'groceryList',
-  'groceryQuickAdd',
-  'routines',
-  'doneChecks',
-  'todayPicks',
-  'countdowns',
-  'startWorkout',
+  // Profile. Last of the tab groups since 1.0.70.1, after Reports, where
+  // TabHub puts it now. It is not a TAB_ROUTE, so Home reads its name,
+  // icon and colour from HOME_GROUP_IDENTITY in app/(tabs)/index.tsx.
+  'lowStimulation',
   // The Digest, last. 2026-09-16 put the groups "into the order they exist
   // in the TabHub menu", which ran the Digest ahead of Life while it was a
   // tab. The tab went on 2026-09-19 and the cards kept a group of their
@@ -652,6 +652,12 @@ export type VisualPreferences = {
   // than reading this field directly, the same discipline
   // isHomeSectionVisible() already establishes for its own sibling field.
   homeSectionOrder: HomeSectionKey[];
+  // 1.0.70.1: true once a saved homeSectionOrder has been read past
+  // followNewMenuOrder (lib/homeSections.ts), which gives an order whose
+  // groups were never moved the new menu order. Written with the next
+  // change of any setting, so an order dragged back to the old sequence
+  // after that stays where it was put.
+  homeOrderFollowsMenu1070: boolean;
   // 2026-09-12, direct request: every Home section collapses "to one row
   // height with just the name of what it is... and then when they click
   // on it it expands." Which ones are open right now. Absence means
@@ -942,6 +948,7 @@ const DEFAULT_VISUAL_PREFERENCES: VisualPreferences = {
   homeGroupVisibility: {},
   growthVineEnabled: true,
   homeSectionOrder: [],
+  homeOrderFollowsMenu1070: true,
   homeSectionExpanded: {},
   bandExpanded: {},
   lowStimulation: false,
@@ -1265,6 +1272,11 @@ export async function getVisualPreferences(): Promise<VisualPreferences> {
           tabHubIconRecent: readTabHubIconRecent(parsed.tabHubIconRecent),
           lineSpacing: normalizeLineSpacing(parsed.lineSpacing),
           letterSpacing: normalizeLetterSpacing(parsed.letterSpacing),
+          homeSectionOrder:
+            parsed.homeOrderFollowsMenu1070 === true
+              ? (parsed.homeSectionOrder ?? [])
+              : followNewMenuOrder(parsed.homeSectionOrder ?? []),
+          homeOrderFollowsMenu1070: true,
         };
       } catch {
         // A corrupted/unparseable blob falls back to defaults rather than

@@ -658,6 +658,8 @@ export const TOUR_LENS_LINES: Record<string, Record<string, string>> = {
   },
 };
 
+// In TabHub's order since 1.0.70.1, so the tour and every tutorial walk
+// the tabs the way the menu and the swipe do.
 export const TOUR_TABS: TourTabDef[] = [
   {
     path: '/',
@@ -747,104 +749,6 @@ export const TOUR_TABS: TourTabDef[] = [
       },
     ],
     open: route('/life'),
-  },
-  {
-    path: '/schedule',
-    title: 'Schedules',
-    question: 'What is Schedules for?',
-    answer:
-      'Schedules is your day on a clock. Meals, doses, drinks, appointments, house jobs and exercise each get a time, and a reminder comes when it is time, so the times do not have to live in your head. It also knows what goes with what: a dose that is kept apart from a meal says which meal and by how long. A thing is set up where it belongs, on Life or Food, and gets its time here.',
-    relyOn: [
-      'To remind you at the time you chose, for each dose, meal, drink and appointment.',
-      'To lay today out in order, meals and doses together, so the whole day is in one glance.',
-      'To plan meals up to six weeks ahead, and turn the plan into a grocery list.',
-      'To keep the record of what you ate, for Insights, Trends and Reports to read.',
-    ],
-    groups: [
-      { title: 'Eating', lenses: ['meals', 'todaysMeals', 'pastMeals', 'dailyMealPlan'] },
-      { title: 'Taking care', lenses: ['meds', 'hydration', 'appointments'] },
-      { title: 'Around the house and body', lenses: ['upkeep', 'exercise'] },
-      { title: 'The whole day', lenses: ['timeline'] },
-    ],
-    steps: [
-      {
-        doThis: 'Give each medicine a time.',
-        why: 'This is what turns the list in My Meds into reminders, and lets Today set each dose beside your meals.',
-        record: 'doseTimes',
-        destination: scheduleLens('meds'),
-        beats: ['health'],
-      },
-      {
-        doThis: 'Log what you ate today.',
-        why: 'One logged meal is enough for Insights to show the nutrients and condition scores for the day.',
-        item: 'meal',
-      },
-      {
-        doThis: 'Log a glass of water.',
-        why: 'Hydration then counts the day, and reminders can follow if you want them.',
-        item: 'water',
-      },
-      {
-        doThis: 'Add your next appointment.',
-        why: 'It comes to Home on the day, and there is time to make a report for it.',
-        record: 'appointment',
-        destination: scheduleLens('appointments'),
-        beats: ['health'],
-      },
-      {
-        doThis: 'Try a meal plan for the week ahead.',
-        why: 'It fills the week and the grocery list in one go, so what to eat is already decided.',
-        record: 'mealPlan',
-        destination: scheduleLens('dailyMealPlan'),
-        beats: ['food'],
-      },
-    ],
-    open: route('/schedule'),
-  },
-  {
-    path: '/log',
-    title: 'Signals',
-    question: 'What is Signals for?',
-    answer:
-      'Signals is where your body gets its say. A flare, how a meal sat with you, a new food tried, blood pressure, a night broken by trips to the bathroom, a massage or a physio session: each goes down when it happens, in a few taps. By themselves these are notes. Set beside your meals, medicines and days in Insights, Trends and Reports, they are how you start to see what tends to go with what for your body.',
-    relyOn: [
-      'To take a note in the moment, before the detail is forgotten.',
-      'To hold the dates and how bad it was, so you are not trying to remember at the next appointment.',
-      'To give Pattern Finder what it needs to look for foods that tend to come before a flare.',
-    ],
-    groups: [
-      { title: 'How you feel', lenses: ['flares', 'foodReactions', 'newFoods'] },
-      { title: 'Your body', lenses: ['exercise', 'bloodPressure', 'nocturia', 'bowel', 'microbiome', 'cycle'] },
-      { title: 'What you tried', lenses: ['therapies', 'calm', 'generalNote'] },
-      { title: 'What you name', lenses: ['trackers'] },
-    ],
-    steps: [
-      {
-        doThis: 'Say how you feel today.',
-        why: 'It takes one tap, so it is the easiest record to keep daily, and every day of it gives the rest something to compare against.',
-        item: 'checkin',
-      },
-      {
-        doThis: 'Log a flare when one comes, with how bad it was.',
-        why: 'The date and how bad it was are what Pattern Finder and your reports need most.',
-        record: 'flare',
-        destination: signalsLens('flares'),
-        beats: ['health'],
-      },
-      {
-        doThis: 'Note how a meal sat with you.',
-        why: 'Starting from the food, it builds up the list of what suits you.',
-        record: 'foodReaction',
-        destination: signalsLens('foodReactions'),
-        beats: ['health', 'food'],
-      },
-      {
-        doThis: 'Log some movement.',
-        why: 'Trends can then show movement beside how you feel.',
-        item: 'exercise',
-      },
-    ],
-    open: route('/log'),
   },
   {
     path: '/food',
@@ -948,6 +852,104 @@ export const TOUR_TABS: TourTabDef[] = [
       },
     ],
     open: route('/garden'),
+  },
+  {
+    path: '/schedule',
+    title: 'Schedules',
+    question: 'What is Schedules for?',
+    answer:
+      'Schedules is your day on a clock. Meals, doses, drinks, appointments, house jobs and exercise each get a time, and a reminder comes when it is time, so the times do not have to live in your head. It also knows what goes with what: a dose that is kept apart from a meal says which meal and by how long. A thing is set up where it belongs, on Life or Food, and gets its time here.',
+    relyOn: [
+      'To remind you at the time you chose, for each dose, meal, drink and appointment.',
+      'To lay today out in order, meals and doses together, so the whole day is in one glance.',
+      'To plan meals up to six weeks ahead, and turn the plan into a grocery list.',
+      'To keep the record of what you ate, for Insights, Trends and Reports to read.',
+    ],
+    groups: [
+      { title: 'Eating', lenses: ['meals', 'todaysMeals', 'pastMeals', 'dailyMealPlan'] },
+      { title: 'Taking care', lenses: ['meds', 'hydration', 'appointments'] },
+      { title: 'Around the house and body', lenses: ['upkeep', 'exercise'] },
+      { title: 'The whole day', lenses: ['timeline'] },
+    ],
+    steps: [
+      {
+        doThis: 'Give each medicine a time.',
+        why: 'This is what turns the list in My Meds into reminders, and lets Today set each dose beside your meals.',
+        record: 'doseTimes',
+        destination: scheduleLens('meds'),
+        beats: ['health'],
+      },
+      {
+        doThis: 'Log what you ate today.',
+        why: 'One logged meal is enough for Insights to show the nutrients and condition scores for the day.',
+        item: 'meal',
+      },
+      {
+        doThis: 'Log a glass of water.',
+        why: 'Hydration then counts the day, and reminders can follow if you want them.',
+        item: 'water',
+      },
+      {
+        doThis: 'Add your next appointment.',
+        why: 'It comes to Home on the day, and there is time to make a report for it.',
+        record: 'appointment',
+        destination: scheduleLens('appointments'),
+        beats: ['health'],
+      },
+      {
+        doThis: 'Try a meal plan for the week ahead.',
+        why: 'It fills the week and the grocery list in one go, so what to eat is already decided.',
+        record: 'mealPlan',
+        destination: scheduleLens('dailyMealPlan'),
+        beats: ['food'],
+      },
+    ],
+    open: route('/schedule'),
+  },
+  {
+    path: '/log',
+    title: 'Signals',
+    question: 'What is Signals for?',
+    answer:
+      'Signals is where your body gets its say. A flare, how a meal sat with you, a new food tried, blood pressure, a night broken by trips to the bathroom, a massage or a physio session: each goes down when it happens, in a few taps. By themselves these are notes. Set beside your meals, medicines and days in Insights, Trends and Reports, they are how you start to see what tends to go with what for your body.',
+    relyOn: [
+      'To take a note in the moment, before the detail is forgotten.',
+      'To hold the dates and how bad it was, so you are not trying to remember at the next appointment.',
+      'To give Pattern Finder what it needs to look for foods that tend to come before a flare.',
+    ],
+    groups: [
+      { title: 'How you feel', lenses: ['flares', 'foodReactions', 'newFoods'] },
+      { title: 'Your body', lenses: ['exercise', 'bloodPressure', 'nocturia', 'bowel', 'microbiome', 'cycle'] },
+      { title: 'What you tried', lenses: ['therapies', 'calm', 'generalNote'] },
+      { title: 'What you name', lenses: ['trackers'] },
+    ],
+    steps: [
+      {
+        doThis: 'Say how you feel today.',
+        why: 'It takes one tap, so it is the easiest record to keep daily, and every day of it gives the rest something to compare against.',
+        item: 'checkin',
+      },
+      {
+        doThis: 'Log a flare when one comes, with how bad it was.',
+        why: 'The date and how bad it was are what Pattern Finder and your reports need most.',
+        record: 'flare',
+        destination: signalsLens('flares'),
+        beats: ['health'],
+      },
+      {
+        doThis: 'Note how a meal sat with you.',
+        why: 'Starting from the food, it builds up the list of what suits you.',
+        record: 'foodReaction',
+        destination: signalsLens('foodReactions'),
+        beats: ['health', 'food'],
+      },
+      {
+        doThis: 'Log some movement.',
+        why: 'Trends can then show movement beside how you feel.',
+        item: 'exercise',
+      },
+    ],
+    open: route('/log'),
   },
   {
     path: '/insights',

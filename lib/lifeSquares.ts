@@ -32,7 +32,7 @@ export const SQUARE_MIN = 44;
 export type SquareTab = 'food' | 'schedule' | 'log' | 'insights' | 'life' | 'garden';
 
 /** The order parts of life are listed in, which is the tab order. */
-export const SQUARE_TAB_ORDER: SquareTab[] = ['food', 'schedule', 'log', 'insights', 'life', 'garden'];
+export const SQUARE_TAB_ORDER: SquareTab[] = ['life', 'food', 'garden', 'schedule', 'log', 'insights'];
 
 export const SQUARE_TAB_PATH: Record<SquareTab, string> = {
   food: '/food',

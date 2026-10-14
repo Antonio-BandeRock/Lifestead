@@ -524,8 +524,8 @@ export function TabHub() {
   const cardHeight = cardFit.height;
 
   // 2026-09-05. The three tile kinds render through these rather than inline,
-  // because the grid's order is no longer TAB_ROUTES' order: Home leads, then
-  // Profile and Info (neither is a tab), then the remaining nine.
+  // because Profile and Info, neither of them a tab, follow the tabs in the
+  // grid (since 1.0.70.1; they sat after Home before that).
   const renderTabTile = (route: TabRoute) => {                
               // activeTabPath (see CurrentPageHelp.tsx), not the router's
               // own usePathname() -- kept as a direct, router-independent
@@ -859,15 +859,14 @@ export function TabHub() {
                   contentContainerStyle={styles.card}
                   showsVerticalScrollIndicator={false}
                 >
-                  {/* Home leads, then the two tiles that are not tabs at all,
-                      then the remaining nine in TAB_ROUTES' own order. That puts
-                      what the app IS (a landing screen, the person, help) across
-                      the top row, and leaves three clean rows of three domains
-                      beneath it. */}
-                  {renderTabTile(TAB_ROUTES[0])}
+                  {/* Every tab in TAB_ROUTES' order, then the two tiles that
+                      are not tabs at all. 1.0.70.1, direct request: "Home >
+                      Life > Food > Garden > Interests > Schedules > Signals >
+                      Insights > Trends > Reports > Profile > Info". Until then
+                      Profile and Info followed Home on the top row. */}
+                  {TAB_ROUTES.map(renderTabTile)}
                   {renderProfileTile()}
                   {renderInfoTile()}
-                  {TAB_ROUTES.slice(1).map(renderTabTile)}
                 </ScrollView>
               </View>
             </TabHubCardRing>

@@ -16,7 +16,7 @@
 // Pure, with only a type import, so the test can load it without a phone.
 import type { ReminderKindKey } from './reminderPreferences';
 
-export const TAB_ORDER = ['Home', 'Food', 'Schedules', 'Signals', 'Insights', 'Trends', 'Reports', 'Garden', 'Life'] as const;
+export const TAB_ORDER = ['Home', 'Life', 'Food', 'Garden', 'Schedules', 'Signals', 'Insights', 'Trends', 'Reports'] as const;
 export type ReminderTab = (typeof TAB_ORDER)[number];
 
 export type ReminderPlace = { tab: ReminderTab; lens: string };

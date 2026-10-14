@@ -30,7 +30,7 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 
-const TABS = ['Home', 'Food', 'Schedules', 'Signals', 'Insights', 'Trends', 'Reports', 'Garden', 'Life'];
+const TABS = ['Home', 'Life', 'Food', 'Garden', 'Schedules', 'Signals', 'Insights', 'Trends', 'Reports'];
 
 const args = process.argv.slice(2);
 const withMenus = args.includes('--menus');
