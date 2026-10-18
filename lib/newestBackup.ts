@@ -1,4 +1,4 @@
-// Which backup "Restore Most Recent Backup" opens (1.0.70.2).
+// Which backup "Restore Most Recent Backup" opens (1.0.71.1).
 //
 // Direct request: "Have it check the shared backups folder too." Until then
 // the button read only the copies this device had exported itself, so a

@@ -2894,7 +2894,7 @@ export default function ProfileScreen() {
   }
 
   // Opens the newest backup there is, on this device or in the shared
-  // Backups folder, whichever was taken later (1.0.70.2, direct request:
+  // Backups folder, whichever was taken later (1.0.71.1, direct request:
   // "Have it check the shared backups folder too"). Until then this read only
   // the copies this device had exported, so a backup made on the computer was
   // answered with "No local backups yet". Which one wins is decided in
