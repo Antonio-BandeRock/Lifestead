@@ -43,6 +43,7 @@ import {
 import { APP_VERSION } from '../constants/version';
 import { isSignedIn as isOneDriveSignedIn } from '../lib/oneDriveAuth';
 import { getBackupsFolder, getSharedFolder } from '../lib/oneDriveFolders';
+import { pickNewestBackup, type BackupCandidate } from '../lib/newestBackup';
 import type { DriveItemRef } from '../lib/oneDriveGraph';
 import { downloadText, listFiles, uploadText } from '../lib/oneDriveGraph';
 import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
@@ -2701,60 +2702,6 @@ export default function ProfileScreen() {
     }
   }
 
-  // Restores the newest backup sitting in the OneDrive folder.
-  //
-  // Newest by name, not by a timestamp OneDrive reports: the name carries the
-  // moment the backup was taken, which is the thing that matters, while a file
-  // date changes if it is ever copied or moved between folders.
-  async function handleRestoreFromOneDrive(use: BackupUse = 'restore') {
-    if (backupBusy) return;
-    if (!backupFolder) {
-      showBackupAlert('No shared folder yet', 'Set up your shared folder first, then backups have somewhere to go.');
-      return;
-    }
-    setBackupBusy(true);
-    try {
-      showBusy('Looking in OneDrive...');
-      let listed;
-      try {
-        listed = await listFiles(backupFolder);
-      } finally {
-        hideBusy();
-      }
-      if (!listed.ok) {
-        showBackupAlert('Could not read the folder', listed.reason);
-        return;
-      }
-      const backups = listed.value
-        // Backups made before the 1.0.66 rename start inside-story-backup-,
-        // so both prefixes are read and sorted by the date after them.
-        .filter((file) => /^(lifestead|inside-story)-backup-.*\.json$/.test(file.name))
-        .sort((a, b) => b.name.replace(/^.*-backup-/, '').localeCompare(a.name.replace(/^.*-backup-/, '')));
-      if (backups.length === 0) {
-        showBackupAlert(
-          'No backups there',
-          'There are no Lifestead backups in ' + (backupFolder.path ?? backupFolder.name) + '.',
-        );
-        return;
-      }
-      const newest = backups[0];
-      showBusy('Downloading ' + newest.name + '...');
-      let text;
-      try {
-        text = await downloadText(backupFolder, newest.name);
-      } finally {
-        hideBusy();
-      }
-      if (!text.ok) {
-        showBackupAlert('Could not read that backup', text.reason);
-        return;
-      }
-      await openBackupContent(text.value, use, 'OneDrive');
-    } finally {
-      setBackupBusy(false);
-    }
-  }
-
   async function handleExportBackup() {
     if (backupBusy) return;
     if (!(await confirmItsYou('Before the backup is made'))) return;
@@ -2791,7 +2738,7 @@ export default function ProfileScreen() {
           shared
             ? "If you just saved a copy somewhere (a cloud drive, an email to yourself), that's the one to keep: it survives even if this device doesn't. "
             : ''
-        }A copy also stays right here, in Lifestead's app storage:\n\n${fileUri}\n\nThat copy is what "Restore Most Recent" below reads from, but it's lost along with this device if this device is ever lost or replaced.`,
+        }A copy also stays right here, in Lifestead's app storage:\n\n${fileUri}\n\n"Restore Most Recent Backup" below looks at that copy and at the shared folder, but this copy is lost along with this device if this device is ever lost or replaced.`,
       );
     } catch (error) {
       showBackupAlert('Something went wrong', error instanceof Error ? error.message : 'Failed to export a backup.');
@@ -2946,29 +2893,78 @@ export default function ProfileScreen() {
     }
   }
 
+  // Opens the newest backup there is, on this device or in the shared
+  // Backups folder, whichever was taken later (1.0.70.2, direct request:
+  // "Have it check the shared backups folder too"). Until then this read only
+  // the copies this device had exported, so a backup made on the computer was
+  // answered with "No local backups yet". Which one wins is decided in
+  // lib/newestBackup.ts, by the moment in the name rather than a file date.
+  // The separate Restore Newest from OneDrive button went in the same pass,
+  // since this one now does its work.
   async function handleRestoreMostRecent(use: BackupUse = 'restore') {
     if (backupBusy) return;
     // Deliberately stays true through the whole call below (the password
-    // prompt, the no-longer-frozen-but-still-slow decrypt, the
-    // destructive-confirm dialog, and the actual restore). An
-    // on-device-confirmed bug found the previous version of this function
-    // reset it back to false right before the expensive part even began,
-    // meaning the button never actually showed "Working..." (or stayed
-    // disabled against a double-tap) during the one part of this whole
-    // flow that most needed it.
+    // prompt, the slow decrypt, the destructive-confirm dialog, and the
+    // restore itself), so the button reads "Working..." and cannot be
+    // tapped twice during the part of this flow that most needs it.
     setBackupBusy(true);
     try {
-      const files = await listLocalBackupFiles();
-      if (files.length === 0) {
-        showBackupAlert('No local backups yet', 'Export a backup first, or use "Restore from a File" to pick one from elsewhere.');
+      const onDevice = await listLocalBackupFiles();
+      const candidates: BackupCandidate[] = onDevice.map((file) => ({
+        place: 'device',
+        name: file.name,
+        modifiedMs: file.modificationTimeMs,
+      }));
+      let sharedProblem: string | null = null;
+      if (backupFolder) {
+        showBusy('Looking in the shared folder...');
+        let listed;
+        try {
+          listed = await listFiles(backupFolder);
+        } finally {
+          hideBusy();
+        }
+        if (listed.ok) {
+          for (const file of listed.value) candidates.push({ place: 'shared', name: file.name });
+        } else {
+          sharedProblem = listed.reason;
+        }
+      }
+      const newest = pickNewestBackup(candidates);
+      if (!newest) {
+        showBackupAlert(
+          'No backups found',
+          backupFolder
+            ? sharedProblem
+              ? 'There are none on this device, and the shared folder could not be read: ' + sharedProblem
+              : 'There are none on this device or in ' + (backupFolder.path ?? backupFolder.name) + '. Use "Restore from a File" to pick one from somewhere else.'
+            : 'There are none on this device, and the shared folder could not be looked in because it is not set up here yet. Set it up above, or use "Restore from a File" to pick one.',
+        );
         return;
       }
-      const content = await readBackupFileContent(files[0].uri);
+      let content: string | null = null;
+      if (newest.place === 'device') {
+        const file = onDevice.find((entry) => entry.name === newest.name);
+        content = file ? await readBackupFileContent(file.uri) : null;
+      } else if (backupFolder) {
+        showBusy('Downloading ' + newest.name + '...');
+        let text;
+        try {
+          text = await downloadText(backupFolder, newest.name);
+        } finally {
+          hideBusy();
+        }
+        if (!text.ok) {
+          showBackupAlert('Could not read that backup', text.reason);
+          return;
+        }
+        content = text.value;
+      }
       if (!content) {
         showBackupAlert('Something went wrong', 'Could not read that backup file.');
         return;
       }
-      await openBackupContent(content, use, 'this device');
+      await openBackupContent(content, use, newest.place === 'device' ? 'this device' : 'the shared folder');
     } finally {
       setBackupBusy(false);
     }
@@ -5729,15 +5725,6 @@ export default function ProfileScreen() {
                 lastBackupCheck ? new Date(lastBackupCheck.exportedAt).toLocaleString() : '',
               )}
             </Text>
-            {backupFolder ? (
-              <TouchableOpacity
-                style={styles.checkinButton}
-                disabled={backupBusy}
-                onPress={() => void handleRestoreFromOneDrive('check')}
-              >
-                <Text style={styles.checkinButtonText}>{backupBusy ? 'Working…' : 'Check Newest on OneDrive'}</Text>
-              </TouchableOpacity>
-            ) : null}
             <TouchableOpacity
               style={styles.checkinButton}
               disabled={backupBusy}
@@ -5757,19 +5744,9 @@ export default function ProfileScreen() {
               be undone.
             </Text>
             {/* Restore follows the same rule as backup above: the route that
-                already knows where to look leads, and the two that ask
-                somebody to go and find a file follow it. */}
-            {backupFolder ? (
-              <TouchableOpacity
-                style={styles.dangerButton}
-                disabled={backupBusy}
-                onPress={() => void handleRestoreFromOneDrive()}
-              >
-                <Text style={styles.dangerButtonText}>
-                  {backupBusy ? 'Working…' : 'Restore Newest from OneDrive'}
-                </Text>
-              </TouchableOpacity>
-            ) : null}
+                already knows where to look leads, this device and the shared
+                folder both (lib/newestBackup.ts), and the one that asks
+                somebody to go and find a file follows it. */}
             <TouchableOpacity style={styles.dangerButton} disabled={backupBusy} onPress={() => void handleRestoreMostRecent()}>
               <Text style={styles.dangerButtonText}>{backupBusy ? 'Working…' : 'Restore Most Recent Backup'}</Text>
             </TouchableOpacity>
