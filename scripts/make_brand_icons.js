@@ -135,9 +135,9 @@ const windowSvg = ({ scale, background }) => markSvg({ at: `translate(512 512) s
 
 // One flat colour, for Android's themed icon and the notification icon,
 // where only the shape's alpha is used. The figure alone.
-function figureOnlySvg({ scale }) {
+function figureOnlySvg({ scale, dy = 0 }) {
   return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">'
-    + `<g transform="translate(512 512) scale(${scale})"><g transform="${FT}"><path d="${FIGURE}" fill="#fff"/></g></g></svg>`;
+    + `<g transform="translate(512 ${512 + dy}) scale(${scale})"><g transform="${FT}"><path d="${FIGURE}" fill="#fff"/></g></g></svg>`;
 }
 
 // The figure alone in its white and pearl finish, on nothing. The TabHub
@@ -177,6 +177,13 @@ async function png(svg, size, file, height = size) {
   // so the window sits inside that safe zone on the ground colour.
   await png(windowSvg({ scale: 0.31 }), 1024, 'assets/brand/android-icon-foreground.png');
   await png(figureOnlySvg({ scale: 0.30 }), 432, 'assets/brand/android-icon-monochrome.png');
+  // The notification icon, a file of its own since 1.0.72.1. It used to be
+  // the themed icon above, whose figure is kept to 42% of the square so the
+  // launcher's crop never reaches it; Android draws a notification icon
+  // uncropped, so the figure there came out a quarter of the size of the
+  // icons beside it. Here it fills about the 22 of 24 dp Android allows,
+  // raised so it is centred, since the figure's own drawing sits low.
+  await png(figureOnlySvg({ scale: 0.62, dy: -50 }), 432, 'assets/brand/notification-icon.png');
   // The splash: the window alone, laid on the ground colour by the plugin.
   await png(windowSvg({ scale: 0.46 }), 1024, 'assets/brand/splash-icon.png');
   // The TabHub button: the window alone, filling a 312 px square (four
