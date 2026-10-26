@@ -56,20 +56,33 @@ export function placeInUsual(latest: number, range: UsualRange): UsualPlace {
 
 // The caption. `values` is every reading in order, the latest last;
 // `format` renders one number with its unit.
-export function usualSentence(values: number[], format: (value: number) => string): string {
+export function usualSentence(
+  values: number[],
+  format: (value: number) => string,
+  subject: 'latest' | 'latest rise' = 'latest',
+): string {
   if (values.length === 0) return '';
   const latest = values[values.length - 1];
   const earlier = values.slice(0, -1);
   const range = usualRange(earlier);
   if (!range) {
     const have = earlier.length;
-    return `Your usual range shows once there are ${MIN_USUAL_READINGS} earlier readings to draw it from. There ${have === 1 ? 'is 1' : `are ${have}`} so far.`;
+    return have === 1
+      ? `Your usual range shows once there are ${MIN_USUAL_READINGS} earlier readings to draw it from. There is 1 so far.`
+      : `Your usual range shows once there are ${MIN_USUAL_READINGS} earlier readings to draw it from. There are ${have} so far.`;
   }
-  const span = `${format(range.low)} to ${format(range.high)}`;
+  const value = format(latest);
+  const low = format(range.low);
+  const high = format(range.high);
+  const count = range.count;
+  // Whole sentences, so the Spanish table holds each one whole.
   const place = placeInUsual(latest, range);
-  const where =
-    place === 'within'
-      ? `The latest, ${format(latest)}, is inside your usual range of ${span}`
-      : `The latest, ${format(latest)}, is ${place} your usual range of ${span}`;
-  return `${where}, drawn from the middle of your ${range.count} earlier readings. Usual means what your readings have been, not what they should be.`;
+  if (subject === 'latest rise') {
+    if (place === 'within') return `The latest rise, ${value}, is inside your usual range of ${low} to ${high}, drawn from the middle of your ${count} earlier readings. Usual means what your readings have been, not what they should be.`;
+    if (place === 'below') return `The latest rise, ${value}, is below your usual range of ${low} to ${high}, drawn from the middle of your ${count} earlier readings. Usual means what your readings have been, not what they should be.`;
+    return `The latest rise, ${value}, is above your usual range of ${low} to ${high}, drawn from the middle of your ${count} earlier readings. Usual means what your readings have been, not what they should be.`;
+  }
+  if (place === 'within') return `The latest, ${value}, is inside your usual range of ${low} to ${high}, drawn from the middle of your ${count} earlier readings. Usual means what your readings have been, not what they should be.`;
+  if (place === 'below') return `The latest, ${value}, is below your usual range of ${low} to ${high}, drawn from the middle of your ${count} earlier readings. Usual means what your readings have been, not what they should be.`;
+  return `The latest, ${value}, is above your usual range of ${low} to ${high}, drawn from the middle of your ${count} earlier readings. Usual means what your readings have been, not what they should be.`;
 }

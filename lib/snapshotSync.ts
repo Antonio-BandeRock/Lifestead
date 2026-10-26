@@ -164,12 +164,11 @@ export function clashNotice(clashes: readonly { table: string; row: Record<strin
   if (named.length === 0) return null;
   const said = named.slice(0, 4);
   const left = named.length - said.length;
-  if (left > 0) said.push(left + ' other health record' + (left === 1 ? '' : 's'));
-  return (
-    'Your two devices had each changed ' + listPhrases(said) + ' before either saw the other’s change. ' +
-    'The later change is the one kept. Please check ' + (named.length === 1 ? 'it' : 'each one') +
-    ' says what you meant, since the earlier change was replaced. Profile, Sync Activity keeps a record of this merge.'
-  );
+  if (left > 0) said.push(left === 1 ? '1 other health record' : `${left} other health records`);
+  // Whole sentences, so the Spanish table holds each one whole.
+  return named.length === 1
+    ? `Your two devices had each changed ${listPhrases(said)} before either saw the other’s change. The later change is the one kept. Please check it says what you meant, since the earlier change was replaced. Profile, Sync Activity keeps a record of this merge.`
+    : `Your two devices had each changed ${listPhrases(said)} before either saw the other’s change. The later change is the one kept. Please check each one says what you meant, since the earlier change was replaced. Profile, Sync Activity keeps a record of this merge.`;
 }
 
 export const EMPTY_SYNC_STATE: SnapshotSyncState = {

@@ -1215,7 +1215,7 @@ function mealGlucoseBand(input: BodySignalsInputs): ReadingBand | null {
   const lines = [countSentence(countMealGlucose(these))];
   if (read.length > 0) {
     const upTo = all.flatMap((r) => (r.status === 'read' && r.meal.at <= read[read.length - 1].meal.at ? [riseOf(r)] : []));
-    lines.push(usualSentence(upTo, formatRise).replace('The latest,', 'The latest rise,'));
+    lines.push(usualSentence(upTo, formatRise, 'latest rise'));
     const backTimes = read.flatMap((r) => (r.back === 'back' && r.backMinutes !== null ? [r.backMinutes] : []));
     const middle = median(backTimes);
     if (middle !== null) {
