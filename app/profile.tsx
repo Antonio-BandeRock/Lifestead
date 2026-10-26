@@ -275,6 +275,7 @@ import { wording } from '../lib/playfulCopy';
 import { VoicePackPanel } from '../components/VoicePackPanel';
 import { WakeWordPanel } from '../components/WakeWordPanel';
 import { setNavigationHand, useNavigationHand } from '../lib/navigationHand';
+import { setLanguageChoice, useLanguageChoice, type LanguageChoice } from '../lib/language';
 import { setTier, tierSetByVersion, useTier } from '../lib/entitlement';
 import { ThumbEndRow } from '../components/ThumbEndRow';
 import { VaultClosedBand } from '../components/VaultClosedBand';
@@ -520,6 +521,7 @@ const ALL_APPEARANCE_SUBSECTION_KEYS = [
   'homeGroups',
   'homeOrder',
   'individualTabBackgrounds',
+  'language',
   'navigationHand',
   'progressPictures',
   'sharedBackground',
@@ -527,6 +529,14 @@ const ALL_APPEARANCE_SUBSECTION_KEYS = [
   'textSpacing',
 ] as const;
 type AppearanceSubsectionKey = (typeof ALL_APPEARANCE_SUBSECTION_KEYS)[number];
+
+// Each language named in itself. "Same as the phone" is the one label the
+// tables translate, since it is the only one written in a language.
+const LANGUAGE_OPTIONS: readonly { choice: LanguageChoice; label: string }[] = [
+  { choice: 'en', label: 'English' },
+  { choice: 'es', label: 'Español' },
+  { choice: 'phone', label: 'Same as the phone' },
+];
 
 type DayPart = 'breakfast' | 'lunch' | 'dinner' | 'snack';
 const DAY_PARTS: DayPart[] = ['breakfast', 'lunch', 'dinner', 'snack'];
@@ -1229,6 +1239,7 @@ export default function ProfileScreen() {
   const visualPrefs = useVisualPreferences();
   const tier = useTier();
   const navigationHand = useNavigationHand();
+  const languageChoice = useLanguageChoice();
   const playful = visualPrefs.playfulWording;
   // The hidden touch on the version line in App Updates: a long press shows
   // the mug from the Ghostead trailer. Nothing at all with plain wording.
@@ -4898,6 +4909,33 @@ export default function ProfileScreen() {
                     )}
                   </View>
                 ))}
+              </View>
+            ) : null}
+
+            {/* 2026-10-26, Spanish first (lib/language.ts, lib/i18n.ts). The
+                heading is in both languages and the language names in their
+                own, so somebody who cannot read the language on screen can
+                still find the way back. Kept on this device only. */}
+            {renderAppearanceSubsectionHeader('language', 'Language / Idioma', false)}
+            {!collapsedAppearanceSubsections.has('language') ? (
+              <View style={styles.subsectionBody}>
+                <Text style={styles.helpText}>
+                  The language the app shows its words in. Spanish is being added screen by screen, so anything not
+                  translated yet still shows in English. The reading on Life and Garden comes after the screens. Kept
+                  on this device only.
+                </Text>
+                <PickerField label="Language / Idioma">
+                  <PopoverSelect
+                    options={LANGUAGE_OPTIONS.map((option) => option.label)}
+                    selected={LANGUAGE_OPTIONS.find((option) => option.choice === languageChoice)?.label ?? 'English'}
+                    minWidth={180}
+                    tabColor={colors.menuIconMuted}
+                    groundSurface
+                    onSelect={(label) =>
+                      setLanguageChoice(LANGUAGE_OPTIONS.find((option) => option.label === label)?.choice ?? 'en')
+                    }
+                  />
+                </PickerField>
               </View>
             ) : null}
 

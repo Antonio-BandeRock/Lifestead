@@ -30,6 +30,8 @@ import { createContext, useContext, useEffect, useRef, useState, type ReactNode,
 import type { TextProps } from 'react-native';
 import { Text as NativeText } from './reactNativeText';
 import { flattenTextChildren } from '../lib/devNotes';
+import { translateChildren } from '../lib/i18n';
+import { useLanguage } from '../lib/language';
 import {
   getWordingEditState,
   reportWordingTap,
@@ -66,14 +68,22 @@ export function EditableText(props: EditableTextProps) {
   const wording = useContext(WordingContext);
   const plain = useContext(PlainContext);
   const own = useRef<NativeText | null>(null);
+  // The app's language (2026-10-26). Every Text's words go through the
+  // language's table here, so the whole app is translated without the files
+  // that draw text changing; see lib/i18n.ts. An edit note still records
+  // the English, since that is what the source holds.
+  const language = useLanguage();
+  const shown = translateChildren(props.children, language);
 
-  if (!wording.active || plain) return <NativeText {...props} />;
+  if (!wording.active || plain) {
+    return shown === props.children ? <NativeText {...props} /> : <NativeText {...props}>{shown}</NativeText>;
+  }
 
   const { children, ref, style, onPress, onLongPress, ...rest } = props;
   const originalText = flattenTextChildren(children);
   const edited = wording.showEdits ? wording.edits.get(originalText) : undefined;
-  const shownText = edited ?? originalText;
-  const content = <PlainContext.Provider value>{edited ?? children}</PlainContext.Provider>;
+  const shownText = edited ?? flattenTextChildren(shown);
+  const content = <PlainContext.Provider value>{edited ?? shown}</PlainContext.Provider>;
 
   if (!wording.editing || !originalText.trim()) {
     return (

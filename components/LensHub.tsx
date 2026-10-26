@@ -43,6 +43,7 @@ import { modalAnimationType } from '../lib/visualPreferences';
 import { NavigationContext } from '@react-navigation/native';
 import { focusOf, registerVoiceLenses } from '../lib/voiceControlRegistry';
 import { useWalkMark } from './WalkMark';
+import { useLanguage } from '../lib/language';
 
 export type LensOption<T extends string> = {
   key: T;
@@ -655,6 +656,11 @@ export function LensHub<T extends string>({
   // -- shouldn't happen for a real tab, but cheaper than a crash if a
   // future page's title drifts out of sync.
   const tabRoute = TAB_ROUTES.find((route) => route.title === pageTitle);
+  // Spanish runs about a quarter longer than the English (2026-10-26), so in
+  // any language but English a label may take a second line rather than
+  // being cut off. The card already scrolls when its grid outgrows it.
+  const language = useLanguage();
+  const labelLines = language === 'en' ? itemLabelLines : Math.max(itemLabelLines, 2);
   const tier = useTier();
   const tabIcon = icon ?? tabRoute?.icon ?? 'list';
   const tabColor = color ?? tabRoute?.color ?? colors.primary;
@@ -1039,7 +1045,7 @@ export function LensHub<T extends string>({
                         </View>
                         <Text
                           style={[styles.itemLabel, { color: labelColor }]}
-                          numberOfLines={itemLabelLines}
+                          numberOfLines={labelLines}
                           ellipsizeMode="tail"
                           maxFontSizeMultiplier={MENU_MAX_FONT_SCALE}
                         >
