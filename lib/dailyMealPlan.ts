@@ -615,7 +615,7 @@ export const FREQUENCY_RULES: FrequencyRule[] = [
     kind: 'atMost',
     timesPerWeek: 3,
     citation:
-      'Limit red and processed meat, World Cancer Research Fund: no more than roughly 3 servings (350-500g cooked weight) a week. A 2024 paper (PMID 38492553) questions how strong the evidence for this specific threshold actually is, named honestly rather than presented as settled.',
+      'Limit red and processed meat, World Cancer Research Fund: no more than roughly 3 servings (350-500g cooked weight) a week. A 2024 paper (PMID 38492553) questions how strong the evidence for this specific threshold actually is, so it is named here rather than presented as settled.',
     matches: (curatedRecipeId) => curatedRecipeContainsAnyIngredient(curatedRecipeId, 'Meat', RED_MEAT_BASE_NAMES),
   },
 ];

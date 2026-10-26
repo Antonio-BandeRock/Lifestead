@@ -1464,7 +1464,7 @@ export function ScanProductView({
           <Text style={styles.title}>Couldn&apos;t find that product</Text>
           <Text style={styles.text}>
             This barcode isn&apos;t in Open Food Facts or USDA FoodData Central yet. You can still log this food manually
-            from any builder&apos;s own ingredient search.
+            from any builder&apos;s ingredient search.
           </Text>
           <TouchableOpacity style={styles.primaryButton} activeOpacity={0.85} onPress={resetForNewScan}>
             <Text style={styles.primaryButtonText}>Scan Another</Text>
@@ -1934,7 +1934,7 @@ export function ScanProductView({
       <View style={styles.centerBody}>
         <Ionicons name="checkmark-circle-outline" size={40} color={colors.accent} />
         <Text style={styles.title}>Saved</Text>
-        <Text style={styles.text}>{name} is in your My Processed Foods, ready to add from any builder&apos;s own ingredient search.</Text>
+        <Text style={styles.text}>{name} is in your My Processed Foods, ready to add from any builder&apos;s ingredient search.</Text>
         {onListNote ? (
           <Text style={styles.text}>{onListNote}</Text>
         ) : (
