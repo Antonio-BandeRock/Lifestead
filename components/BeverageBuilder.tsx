@@ -2348,7 +2348,7 @@ export function BeverageBuilder({
                   note says exactly that instead of implying otherwise. */}
               {pendingCalculatorOverride && (
                 <Text style={styles.calculatorTrackingNote}>
-                  Quantity and Units below were set by the alcohol calculator&apos;s own total. You can still
+                  Quantity and Units below were set by the alcohol calculator&apos;s total. You can still
                   change them by hand, but the calories and carbs actually tracked keep coming from the
                   calculator below, not from what&apos;s picked here: adjust Volume, ABV, or Pours down there
                   if you want a different total tracked.

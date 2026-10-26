@@ -1182,7 +1182,7 @@ export default function ProfileScreen() {
   // follow or is interested in trying should be in the Profile." Backed by
   // its own diet_preferences table (lib/db.ts), storing real RecipeDietTag
   // values -- the same vocabulary already computed per-recipe (2026-08-24
-  // diet-tagging work) and already used by Recipes' own "Filter by diet"
+  // diet-tagging work) and already used by Recipes' "Filter by diet"
   // picker, so a person's own stated preference lines up directly against
   // real, existing data rather than a second, disconnected list.
   const [dietPreferences, setDietPreferences] = useState<RecipeDietTag[]>([]);
@@ -3731,7 +3731,7 @@ export default function ProfileScreen() {
               Learn about a condition without adding it to what this app tracks and helps with for you personally,
               whether you are wondering about yourself or someone else. Anything selected here gets a separate
               Other Conditions list in Life &gt; Conditions, apart from yours, shows up among the Home tab&apos;s
-              Digest cards, and a recipe carrying a note about it lists that note separately from the ones
+              Something to Read cards, and a recipe carrying a note about it lists that note separately from the ones
               about you. Nothing selected here ever changes your food scores, meal plans, advisories or safe
               foods.
             </Text>
@@ -4278,7 +4278,7 @@ export default function ProfileScreen() {
           <View style={styles.cardBody}>
             <Text style={styles.helpText}>
               Select any diet you&apos;re following, or are just curious about trying. This drives the default
-              in Recipes&apos; own &quot;Filter by diet&quot; picker and what the Meal Plan on Schedules
+              in Recipes&apos; &quot;Filter by diet&quot; picker and what the Meal Plan on Schedules
               generates, both still freely changeable in the moment. Selecting more than one is fully supported.
             </Text>
             <View style={styles.conditionGrid}>
@@ -5019,7 +5019,7 @@ export default function ProfileScreen() {
                   The flowery scene behind Home, and behind every tab left on Photo under Individual tab backgrounds until you pick a function. &ldquo;Generic&rdquo; swaps
                   it for a calm gradient instead (pick it under Generic color combination); &ldquo;Off&rdquo; removes it
                   entirely, leaving the same flat background color as the header and footer. &ldquo;Custom
-                  image&rdquo; lets you upload your own photo; it&apos;s automatically resized and compressed to
+                  image&rdquo; lets you upload a photo; it&apos;s automatically resized and compressed to
                   comply with a reasonable size (up to {CUSTOM_BACKGROUND_MAX_DIMENSION}px, under{' '}
                   {Math.round(CUSTOM_BACKGROUND_MAX_FILE_SIZE_BYTES / (1024 * 1024))}MB on disk); a too-small
                   photo (under {CUSTOM_BACKGROUND_MIN_DIMENSION}px on its shorter side) is rejected rather than

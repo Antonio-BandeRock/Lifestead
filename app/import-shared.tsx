@@ -131,7 +131,7 @@ export default function ImportSharedScreen() {
           <Text style={styles.title}>Saved to Shared Recipes</Text>
           <Text style={styles.text}>
             {previewName(envelope)} is now under Recipes Shared With Me, in My Recipes on the Food screen, shared by
-            {envelope.fromName}. Try it, then save it to your own recipes or as a favorite, or just delete it if
+            {envelope.fromName}. Try it, then save it to your recipes or as a favorite, or just delete it if
             it&apos;s not for you.
           </Text>
           <TouchableOpacity

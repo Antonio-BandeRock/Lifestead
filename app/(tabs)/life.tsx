@@ -1185,7 +1185,7 @@ export default function LifeScreen() {
           )}
           <Text style={styles.footnote}>
             Worked out from {summary.activeCount} active {summary.activeCount === 1 ? 'entry' : 'entries'}, with weekly
-            and every-two-weeks amounts converted using the real number of payments in a year rather than four a month.
+            and every-two-weeks amounts converted using the number of payments in a year (52 or 26) rather than four a month.
           </Text>
         </TabBand>
 

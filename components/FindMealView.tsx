@@ -1473,7 +1473,7 @@ export function FindMealView({
         <Text style={styles.title}>{selected?.name}</Text>
         <Text style={styles.sectionLabel}>Which planned meal did this replace?</Text>
         <Text style={styles.muted}>
-          It gets logged at the planned meal&apos;s own time, and that meal stops sitting on your schedule waiting.
+          It gets logged at the planned meal&apos;s time, and that meal stops sitting on your schedule waiting.
         </Text>
         {plannedToday.map((planned) => (
           <TouchableOpacity

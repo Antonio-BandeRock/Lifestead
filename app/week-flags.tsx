@@ -164,7 +164,7 @@ export default function WeekFlagsScreen() {
           </Text>
           {conditions.length > 0 && otherTotal > 0 ? (
             <Text style={styles.summaryOther}>
-              {`${otherTotal} more ${otherTotal === 1 ? 'thing was' : 'things were'} flagged that ${otherTotal === 1 ? 'is' : 'are'} not tied to a condition you track. ${otherTotal === 1 ? 'It is' : 'They are'} listed under each day, not counted on Home.`}
+              {`${otherTotal} more ${otherTotal === 1 ? 'thing was' : 'things were'} flagged outside the conditions you track. ${otherTotal === 1 ? 'It is' : 'They are'} listed under each day, not counted on Home.`}
             </Text>
           ) : null}
         </View>

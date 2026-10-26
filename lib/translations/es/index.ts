@@ -6,6 +6,14 @@ import { PART as PART_004 } from './part-004';
 import { PART as PART_005 } from './part-005';
 import { PART as PART_006 } from './part-006';
 import { PART as PART_007 } from './part-007';
+import { PART as PART_008 } from './part-008';
+import { PART as PART_009 } from './part-009';
+import { PART as PART_010 } from './part-010';
+import { PART as PART_011 } from './part-011';
+import { PART as PART_012 } from './part-012';
+import { PART as PART_013 } from './part-013';
+import { PART as PART_014 } from './part-014';
+import { PART as PART_015 } from './part-015';
 
-export const ES_PARTS: Readonly<Record<string, string>> = Object.assign({}, PART_001, PART_002, PART_003, PART_004, PART_005, PART_006, PART_007);
+export const ES_PARTS: Readonly<Record<string, string>> = Object.assign({}, PART_001, PART_002, PART_003, PART_004, PART_005, PART_006, PART_007, PART_008, PART_009, PART_010, PART_011, PART_012, PART_013, PART_014, PART_015);
 export const ES_FOODS: Readonly<Record<string, string>> = Object.assign({}, {});

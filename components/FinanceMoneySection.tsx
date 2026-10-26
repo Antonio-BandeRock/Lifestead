@@ -234,7 +234,7 @@ export function FinanceMoneySection({ tabColor }: Props) {
               <Text style={styles.footnote}>
                 {trend.change >= 0 ? 'Up' : 'Down'} {formatAccountMoney(Math.abs(trend.change))} since {trend.from},
                 across {trend.points} times you updated a balance. A point is recorded when you change a balance, not
-                daily, so this line only moves when something real did.
+                daily, so this line only moves when a balance did.
               </Text>
             ) : (
               <Text style={styles.footnote}>Update a balance again later and this starts showing which way things are moving.</Text>

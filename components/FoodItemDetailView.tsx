@@ -511,7 +511,7 @@ export function FoodItemDetailView({
                       return (
                         <TouchableOpacity onPress={() => handleReopenIngredientTrial(trial.id, ingredient.id)}>
                           <Text style={styles.ingredientTrialLink}>
-                            Tested: {trial.status === 'cleared' ? 'tolerated' : 'avoiding'} -- reopen?
+                            Tested: {trial.status === 'cleared' ? 'tolerated' : 'avoiding'}. Reopen?
                           </Text>
                         </TouchableOpacity>
                       );

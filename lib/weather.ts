@@ -176,4 +176,4 @@ export const WEATHER_NO_PLACE =
 
 // On the phone, which can also give its rough location.
 export const WEATHER_NO_PLACE_PHONE =
-  'Weather needs a place. Set a postal code in Garden > My Zone, or use this phone’s rough location. Either way the point is rounded to about 55 km before it is kept or sent.';
+  'Weather needs a place. Set a postal code in Garden > My Zone, or use this phone’s rough location. Either way the location is rounded to about 55 km before it is kept or sent.';

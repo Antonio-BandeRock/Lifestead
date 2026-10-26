@@ -398,7 +398,7 @@ export function FinanceHealthSection({ tabColor }: Props) {
         {rollup.untagged > 0 ? (
           <Text style={styles.footnote}>
             {formatHealthMoney(rollup.untagged)} of health spending is not tagged to a condition. It is shown here on its
-            own rather than divided between them, because splitting it would turn one honest figure into several invented
+            own rather than divided between them, because splitting it would turn one recorded figure into several invented
             ones.
           </Text>
         ) : null}

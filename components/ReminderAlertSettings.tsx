@@ -101,7 +101,7 @@ export function ReminderAlertSettings() {
         plays it. The sounds are short tones made for Lifestead, none of them a song or a ringtone.
       </Text>
       <Text style={styles.caption}>
-        The phone&apos;s own sounds and every vibration work now. The Lifestead tones play here now and on a reminder once
+        The phone&apos;s sounds and every vibration work now. The Lifestead tones play here now and on a reminder once
         the next full install of Lifestead is on this phone. Chosen here, kept on this phone only.
       </Text>
       {GROUPS.map((group) => (
