@@ -628,8 +628,10 @@ export function importReadiness(lines: ImportLineStatus[]): ImportReadiness {
 
 /** Said when a page has no Recipe block. */
 export function noRecipeFoundSentence(site: string): string {
-  const where = site ? `${site} does not` : 'This page does not';
-  return `${where} describe a recipe in the standard form recipe sites use. Paste the ingredient list below instead, one per line.`;
+  // Two whole sentences, so the Spanish table holds each one whole.
+  return site
+    ? `${site} does not describe a recipe in the standard form recipe sites use. Paste the ingredient list below instead, one per line.`
+    : 'This page does not describe a recipe in the standard form recipe sites use. Paste the ingredient list below instead, one per line.';
 }
 
 /** The attribution line kept with the recipe and shown in the builder's notes. */

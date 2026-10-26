@@ -28,6 +28,8 @@ import { PART as PART_026 } from './part-026';
 import { PART as PART_027 } from './part-027';
 import { PART as PART_028 } from './part-028';
 import { PART as PART_029 } from './part-029';
+import { PART as PART_030 } from './part-030';
+import { PART as PART_031 } from './part-031';
 
-export const ES_PARTS: Readonly<Record<string, string>> = Object.assign({}, PART_001, PART_002, PART_003, PART_004, PART_005, PART_006, PART_007, PART_008, PART_009, PART_010, PART_011, PART_012, PART_013, PART_014, PART_015, PART_016, PART_017, PART_018, PART_019, PART_020, PART_021, PART_022, PART_023, PART_024, PART_025, PART_026, PART_027, PART_028, PART_029);
+export const ES_PARTS: Readonly<Record<string, string>> = Object.assign({}, PART_001, PART_002, PART_003, PART_004, PART_005, PART_006, PART_007, PART_008, PART_009, PART_010, PART_011, PART_012, PART_013, PART_014, PART_015, PART_016, PART_017, PART_018, PART_019, PART_020, PART_021, PART_022, PART_023, PART_024, PART_025, PART_026, PART_027, PART_028, PART_029, PART_030, PART_031);
 export const ES_FOODS: Readonly<Record<string, string>> = Object.assign({}, {});
