@@ -101,9 +101,10 @@ export function pendingScansHeading(scans: PendingScan[]): string {
 
 export const QUEUED_TITLE = 'Saved to look up later';
 
+// One sentence with a {barcode} slot, so the Spanish table can hold it whole.
+export const QUEUED_MESSAGE =
+  'The lookup could not be reached, so barcode {barcode} is kept here and looked up by itself once there is a signal again. It will be waiting at the top of Scan a Product.';
+
 export function queuedMessage(barcode: string): string {
-  return (
-    `The lookup could not be reached, so barcode ${barcode} is kept here and looked up by itself once ` +
-    'there is a signal again. It will be waiting at the top of Scan a Product.'
-  );
+  return QUEUED_MESSAGE.replace('{barcode}', barcode);
 }

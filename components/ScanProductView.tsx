@@ -43,9 +43,10 @@ import {
   pendingScanCaption,
   pendingScansHeading,
   pendingScanTitle,
-  queuedMessage,
+  QUEUED_MESSAGE,
   type PendingScan,
 } from '../lib/pendingScans';
+import { t } from '../lib/i18n';
 import { clearPendingScan, getPendingScans, queuePendingScan, subscribePendingScans } from '../lib/pendingScansDb';
 import { routeForDigestEntry } from '../lib/digestNavigation';
 import { getPersonalizationProfile, type TrackedConditionRef } from '../lib/foodPersonalization';
@@ -1483,7 +1484,7 @@ export function ScanProductView({
         <View style={styles.centerBody}>
           <Ionicons name="cloud-offline-outline" size={40} color={colors.textMuted} />
           <Text style={styles.title}>{QUEUED_TITLE}</Text>
-          <Text style={styles.text}>{queuedMessage(barcode ?? '')}</Text>
+          <Text style={styles.text}>{t(QUEUED_MESSAGE, { barcode: barcode ?? '' })}</Text>
           <TouchableOpacity style={styles.primaryButton} activeOpacity={0.85} onPress={resetForNewScan}>
             <Text style={styles.primaryButtonText}>Scan Another</Text>
           </TouchableOpacity>

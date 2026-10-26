@@ -101,6 +101,21 @@ function nextNumber(prefix) {
   return pad(n);
 }
 
+// Fields nothing on screen reads, so their strings never go in the table.
+// The meal rules' citation is kept for whoever reads the code; Compare Two
+// shows compare.source instead.
+const NOT_SHOWN = [{ file: 'lib/nutrientPairRules.ts', property: 'citation' }];
+const sourceLines = new Map();
+
+function notShown(file, line) {
+  const rule = NOT_SHOWN.find((r) => r.file === file);
+  if (!rule) return false;
+  if (!sourceLines.has(file)) sourceLines.set(file, fs.readFileSync(path.join(ROOT, file), 'utf8').split(/\r?\n/));
+  const lines = sourceLines.get(file);
+  const here = new RegExp(`^\\s*${rule.property}:`);
+  return here.test(lines[line - 1] ?? '') || here.test(lines[line - 2] ?? '');
+}
+
 function pending(foods) {
   const done = existing();
   const parts = foodParts();
@@ -115,6 +130,7 @@ function pending(foods) {
     if (!key || seen.has(key) || done.has(key) || parts.has(key)) continue;
     seen.add(key);
     const file = info.where.replace(/:\d+$/, '');
+    if (notShown(file.replace(/\\/g, '/'), Number(info.where.split(':').pop()))) continue;
     const group = PRIORITY.findIndex((test) => test(file));
     out.push({ key, group, where: info.where, file, line: Number(info.where.split(':').pop()) });
   }
