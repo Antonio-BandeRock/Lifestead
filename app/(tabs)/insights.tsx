@@ -2255,7 +2255,7 @@ function PortionsView({
     return (
       <View style={styles.noticeCard}>
         <Text style={styles.noticeText}>
-          Set your {missing.join(', ')} in Profile to see your own Energy & Portions numbers. Nothing here is
+          Set your {missing.join(', ')} in Profile to see your Energy & Portions numbers. Nothing here is
           guessed on your behalf.
         </Text>
       </View>
@@ -2354,7 +2354,7 @@ function PortionsView({
       </Text>
 
       <Text style={styles.portionsSectionHeading}>Produce guide</Text>
-      <Text style={styles.footerNote}>USDA MyPlate&apos;s own published cup-equivalent amounts, scaled to your calorie need.</Text>
+      <Text style={styles.footerNote}>USDA MyPlate&apos;s published cup-equivalent amounts, scaled to your calorie need.</Text>
       <View style={styles.statRow}>
         <View style={styles.statBox}>
           <Text style={styles.statValue}>{produce.vegetableCups.toFixed(1)}</Text>
@@ -2371,7 +2371,7 @@ function PortionsView({
           <Text style={styles.portionsSectionHeading}>Water</Text>
           <Text style={[styles.statValue, { textAlign: 'left' }, styles.panelStandalone]}>{(waterRow.amount / 1000).toFixed(1)}L / day</Text>
           <Text style={styles.footerNote}>
-            {waterRow.sourceAgency}. Counts water-rich food too, not just drinks -- see the Hydration lens for
+            {waterRow.sourceAgency}. Counts water-rich food too, not just drinks; see the Hydration lens for
             today&apos;s actual progress toward it.
           </Text>
         </>
@@ -3373,7 +3373,7 @@ function NutrientRankingView({
               // clearer message rather than reading as a possible bug.
               <Text style={[styles.emptyText, styles.rankSpaced, styles.panelStandalone]}>
                 {rankingFood.baseName} is {PREP_STATE_GROUP_LABELS[classifyPrepStateGroup(rankingFood.prepMethod)].toLowerCase()},
-                not {PREP_STATE_GROUP_LABELS[prepGroup].toLowerCase()} -- switch the Prep state filter below to see how it ranks.
+                not {PREP_STATE_GROUP_LABELS[prepGroup].toLowerCase()}; switch the Prep state filter below to see how it ranks.
               </Text>
             ) : foodRankings.length === 0 ? (
               <Text style={[styles.emptyText, styles.rankSpaced, styles.panelStandalone]}>
@@ -3516,7 +3516,7 @@ function SafeFoodsView({
     return (
       <Text style={[styles.emptyText, styles.rankSpaced, styles.panelStandalone]}>
         Checking every food against {conditionNames.length > 0 ? conditionNames.join(', ') : 'every scored factor'}, once for this
-        session -- this can take a while the first time.
+        session; this can take a while the first time.
       </Text>
     );
   }

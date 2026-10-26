@@ -20,7 +20,16 @@
 // Every entry here was translated by Claude and has not yet been checked by
 // a native speaker. Health wording above all needs that check before the
 // app is offered in Spanish to anybody but Tony and Lisa.
-export const ES: Readonly<Record<string, string>> = {
+//
+// Most of the table lives in lib/translations/es/part-NNN.ts, written a
+// batch at a time by scripts/i18n_batch.js; the entries below were written
+// by hand and win over a part file. Food names are a table of their own,
+// ES_FOODS, keyed by the parts of a name between its commas.
+import { ES_FOODS, ES_PARTS } from './es/index';
+
+export { ES_FOODS };
+
+const BY_HAND: Readonly<Record<string, string>> = {
   // ---- The tabs (constants/tabs.ts) and TabHub's two extra tiles.
   Home: 'Inicio',
   Life: 'Vida',
@@ -229,3 +238,5 @@ export const ES: Readonly<Record<string, string>> = {
   'The language the app shows its words in. Spanish is being added screen by screen, so anything not translated yet still shows in English. The reading on Life and Garden comes after the screens. Kept on this device only.':
     'El idioma en que la app muestra sus palabras. El español se está agregando pantalla por pantalla, así que lo que todavía no está traducido se ve en inglés. Las lecturas de Vida y Huerto vienen después de las pantallas. Se guarda solo en este dispositivo.',
 };
+
+export const ES: Readonly<Record<string, string>> = { ...ES_PARTS, ...BY_HAND };

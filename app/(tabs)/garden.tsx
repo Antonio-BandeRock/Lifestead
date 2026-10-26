@@ -711,7 +711,7 @@ function MyZoneLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
         <Text style={[styles.cardTitle, { color: TAB_COLOR }]}>Find My Zone</Text>
         <Text style={styles.cardBody}>
           Enter your country and ZIP or postal code. This works anywhere on Earth, not just the US: a US ZIP gets the
-          official USDA zone directly; everywhere else gets an estimate computed from that location&apos;s own historical
+          official USDA zone directly; everywhere else gets an estimate computed from that location&apos;s historical
           temperature data, using the same USDA temperature bands.
         </Text>
         <View style={styles.fieldRow}>
@@ -775,7 +775,7 @@ function MyZoneLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
         </View>
         <Text style={styles.captionText}>
           Already know your zone, or want to check it directly? Set it here; this always overrides whatever the lookup above
-          found. The USDA&apos;s own published map (usda.gov/plant-hardiness-zone) or a local agricultural extension office are
+          found. The USDA&apos;s published map (usda.gov/plant-hardiness-zone) or a local agricultural extension office are
           both direct ways to double-check either result.
         </Text>
       </View>

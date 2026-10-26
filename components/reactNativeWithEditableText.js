@@ -15,6 +15,7 @@
 const ReactNative = require('react-native/index');
 const { EditableText } = require('./EditableText');
 const { withVoiceName, withVoiceScroll } = require('./voiceNamedControl');
+const { withTranslatedPlaceholder } = require('./translatedTextInput');
 
 const swapped = {
   Text: () => EditableText,
@@ -24,6 +25,8 @@ const swapped = {
   ScrollView: () => withVoiceScroll(ReactNative.ScrollView, 'ScrollView'),
   FlatList: () => withVoiceScroll(ReactNative.FlatList, 'FlatList'),
   SectionList: () => withVoiceScroll(ReactNative.SectionList, 'SectionList'),
+  // Since 2026-10-26 a TextInput's placeholder is in the app's language.
+  TextInput: () => withTranslatedPlaceholder(ReactNative.TextInput),
 };
 
 const withEditableText = {};

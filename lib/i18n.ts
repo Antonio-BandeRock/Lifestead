@@ -17,28 +17,120 @@
 //     (metro.config.js), and it hands its words through translateChildren
 //     below. That covers words written in JSX and words that reach a Text
 //     from a constant, such as a tab's title or a lens label.
-//  2. t() by hand, for words that never pass through a Text: Alert titles
-//     and messages, placeholders, notifications, the PDF report, and any
-//     sentence built with a value inside it (t('{count} meals', { count })).
+//  2. Every TextInput's placeholder and every Alert, the same way
+//     (components/TranslatedTextInput.tsx, lib/translateAlerts.ts).
+//  3. t() by hand, for words that reach the screen some other way:
+//     notifications, the PDF report, voice.
 //
-// A sentence assembled from pieces in JSX (`Logged {count} meals`) reaches a
-// Text as several children and is not matched until it is written as one
-// t() call, since word order differs between languages.
+// SENTENCES WITH A VALUE IN THEM. A table entry may hold {name}s: "Logged
+// {count} meals" matches "Logged 3 meals" whether it was built with t(), a
+// template literal, or JSX pieces, and each value is itself looked up, so
+// "{name} is due" turns "Levothyroxine is due" round with the medicine's
+// name left as the person typed it. Patterns are indexed by their first and
+// last literal word, so a lookup tries a handful of them, never the table.
+//
+// WHEN NOTHING MATCHES WHOLE, the words are cut where a language never
+// reorders them, at a line break, at " · ", and between sentences, and
+// each piece is looked up on its own. A label's trailing colon or ellipsis
+// is put back after the words are found.
+//
+// A TEXT WITH ANOTHER TEXT INSIDE IT ("Tap <Bold>Save</Bold> to keep it")
+// is looked up as "Tap <0>Save</0> to keep it", the way i18next's Trans
+// writes it, so a translation can move the bold word to where Spanish puts
+// it. An element with no words of its own (an icon) is <0/>.
+import { cloneElement, isValidElement, type ReactElement, type ReactNode } from 'react';
 import { getLanguage, type AppLanguage } from './language';
-import { ES } from './translations/es';
+import { ES, ES_FOODS } from './translations/es';
 
-const TABLES: Record<Exclude<AppLanguage, 'en'>, Readonly<Record<string, string>>> = {
+type Table = Readonly<Record<string, string>>;
+
+const TABLES: Record<Exclude<AppLanguage, 'en'>, Table> = {
   es: ES,
 };
 
-function table(language: AppLanguage): Readonly<Record<string, string>> | null {
-  return language === 'en' ? null : TABLES[language];
+// FOOD NAMES from the reference database ("Apple, raw, with skin") are
+// translated by the parts between their commas, the way Mexico's food
+// tables write a name too ("Manzana, cruda, con cáscara"), so one table of
+// parts reaches every screen a food's name is shown on. A name is turned
+// round only when every part of it is found.
+const FOODS: Record<Exclude<AppLanguage, 'en'>, Table> = {
+  es: ES_FOODS,
+};
+
+type Pattern = {
+  regex: RegExp;
+  names: string[];
+  target: string;
+  /** Letters that are not a {name}, so the most specific pattern wins. */
+  literal: number;
+};
+
+type Compiled = {
+  words: Table;
+  foods: Table;
+  byFirst: Map<string, Pattern[]>;
+  byLast: Map<string, Pattern[]>;
+  memo: Map<string, string>;
+};
+
+const compiled = new Map<AppLanguage, Compiled>();
+const MEMO_LIMIT = 8000;
+
+function escapeRegex(text: string): string {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-/** The words in `language`, or the English itself when the table has none. */
-export function translateIn(language: AppLanguage, english: string): string {
-  const words = table(language);
-  if (!words) return english;
+function firstWord(text: string): string {
+  const match = /^\s*([^\s{]+)/.exec(text);
+  return match ? match[1].toLowerCase() : '';
+}
+
+function lastWord(text: string): string {
+  const match = /([^\s}]+)\s*$/.exec(text);
+  return match ? match[1].toLowerCase() : '';
+}
+
+function compile(language: AppLanguage): Compiled | null {
+  if (language === 'en') return null;
+  const existing = compiled.get(language);
+  if (existing) return existing;
+  const words = TABLES[language];
+  const byFirst = new Map<string, Pattern[]>();
+  const byLast = new Map<string, Pattern[]>();
+  for (const [english, target] of Object.entries(words)) {
+    if (!english.includes('{')) continue;
+    const parts = english.split(/\{(\w+)\}/);
+    const names: string[] = [];
+    let source = '^';
+    let literal = 0;
+    parts.forEach((part, index) => {
+      if (index % 2 === 1) {
+        names.push(part);
+        source += '(.+?)';
+      } else {
+        source += escapeRegex(part);
+        literal += part.replace(/\s/g, '').length;
+      }
+    });
+    if (literal === 0) continue;
+    const pattern: Pattern = { regex: new RegExp(`${source}$`, 's'), names, target, literal };
+    const head = parts[0].trim() ? firstWord(parts[0]) : '';
+    const tail = parts[parts.length - 1].trim() ? lastWord(parts[parts.length - 1]) : '';
+    // A pattern whose first word is a word sits under it; one that starts
+    // with a value sits under its last word.
+    const [index, key] = head ? [byFirst, head] : [byLast, tail];
+    if (!key) continue;
+    const list = index.get(key);
+    if (list) list.push(pattern);
+    else index.set(key, [pattern]);
+  }
+  for (const list of [...byFirst.values(), ...byLast.values()]) list.sort((a, b) => b.literal - a.literal);
+  const made: Compiled = { words, foods: FOODS[language], byFirst, byLast, memo: new Map() };
+  compiled.set(language, made);
+  return made;
+}
+
+function exact(words: Table, english: string): string | undefined {
   const found = words[english];
   if (found !== undefined) return found;
   // Keep the spaces round a piece of a sentence, which a table never holds.
@@ -47,13 +139,114 @@ export function translateIn(language: AppLanguage, english: string): string {
     const inner = words[trimmed];
     if (inner !== undefined) return english.replace(trimmed, inner);
   }
-  return english;
+  return undefined;
+}
+
+const SEPARATED = /\n|\s[·•|]\s/;
+
+function byPattern(table: Compiled, english: string, depth: number): string | undefined {
+  const trimmed = english.trim();
+  if (!trimmed) return undefined;
+  const candidates = [
+    ...(table.byFirst.get(firstWord(trimmed)) ?? []),
+    ...(table.byLast.get(lastWord(trimmed)) ?? []),
+  ].sort((a, b) => b.literal - a.literal);
+  for (const pattern of candidates) {
+    const match = pattern.regex.exec(trimmed);
+    // A value never runs across a line or a middle dot: those are pieces.
+    if (!match || match.slice(1).some((value) => SEPARATED.test(value))) continue;
+    const values: Record<string, string> = {};
+    pattern.names.forEach((name, index) => {
+      const value = match[index + 1];
+      values[name] = depth < 3 ? lookup(table, value, depth + 1) ?? value : value;
+    });
+    const filled = pattern.target.replace(/\{(\w+)\}/g, (whole, name: string) => values[name] ?? whole);
+    return english.replace(trimmed, filled);
+  }
+  return undefined;
+}
+
+const TRAILING = /^(.*?)(\s*[:…?!.]+|\.\.\.)$/s;
+
+function byPieces(table: Compiled, english: string, depth: number): string | undefined {
+  // A line break, a middle dot or a bullet is never moved by a translation.
+  for (const separator of [/(\n+)/, /(\s+[·•|]\s+)/]) {
+    const pieces = english.split(separator);
+    if (pieces.length < 3) continue;
+    let changed = false;
+    const out = pieces.map((piece, index) => {
+      if (index % 2 === 1 || !piece.trim()) return piece;
+      const found = lookup(table, piece, depth + 1);
+      if (found === undefined) return piece;
+      changed = true;
+      return found;
+    });
+    return changed ? out.join('') : undefined;
+  }
+  // A label's colon, an ellipsis or a question mark.
+  const trailing = TRAILING.exec(english);
+  if (trailing && trailing[1].trim()) {
+    const found = exact(table.words, trailing[1]) ?? byPattern(table, trailing[1], depth);
+    if (found !== undefined) return found + trailing[2];
+  }
+  // Between sentences.
+  const sentences = english.split(/(?<=[.!?])(\s+)(?=[A-Z0-9"“(¿¡])/);
+  if (sentences.length >= 3) {
+    let changed = false;
+    const out = sentences.map((piece, index) => {
+      if (index % 2 === 1 || !piece.trim()) return piece;
+      const found = lookup(table, piece, depth + 1);
+      if (found === undefined) return piece;
+      changed = true;
+      return found;
+    });
+    return changed ? out.join('') : undefined;
+  }
+  return undefined;
+}
+
+function foodName(table: Compiled, english: string): string | undefined {
+  const whole = exact(table.foods, english);
+  if (whole !== undefined) return whole;
+  const trimmed = english.trim();
+  if (!trimmed.includes(', ')) return undefined;
+  const out: string[] = [];
+  for (const part of trimmed.split(', ')) {
+    if (!/[A-Za-z]/.test(part)) {
+      out.push(part);
+      continue;
+    }
+    const found = table.foods[part] ?? table.words[part];
+    if (found === undefined) return undefined;
+    out.push(found);
+  }
+  return english.replace(trimmed, out.join(', '));
+}
+
+function lookup(table: Compiled, english: string, depth: number): string | undefined {
+  if (!english || !/[A-Za-z]/.test(english)) return undefined;
+  const found = exact(table.words, english) ?? foodName(table, english);
+  if (found !== undefined) return found;
+  if (depth > 4) return undefined;
+  return byPattern(table, english, depth) ?? byPieces(table, english, depth);
+}
+
+/** The words in `language`, or the English itself when the table has none. */
+export function translateIn(language: AppLanguage, english: string): string {
+  const table = compile(language);
+  if (!table || typeof english !== 'string') return english;
+  const remembered = table.memo.get(english);
+  if (remembered !== undefined) return remembered;
+  const found = lookup(table, english, 0) ?? english;
+  if (table.memo.size >= MEMO_LIMIT) table.memo.clear();
+  table.memo.set(english, found);
+  return found;
 }
 
 /** Whether `language` has these words, for the coverage script and tests. */
 export function hasTranslation(language: AppLanguage, english: string): boolean {
-  const words = table(language);
-  return !words || words[english] !== undefined || words[english.trim()] !== undefined;
+  const table = compile(language);
+  return !table || lookup(table, english, 0) !== undefined;
 }
 
 /**
@@ -69,11 +262,72 @@ export function t(english: string, values?: Readonly<Record<string, string | num
   );
 }
 
+/** A value of the app's own (a unit, a label from a list) in the app's language. */
+export function tl(english: string | null | undefined): string {
+  return english ? translateIn(getLanguage(), english) : (english ?? '');
+}
+
+type WithChildren = ReactElement<{ children?: ReactNode }>;
+
+function wordsOf(element: WithChildren): string | null {
+  const inner = element.props?.children;
+  if (typeof inner === 'string') return inner;
+  if (typeof inner === 'number') return String(inner);
+  if (Array.isArray(inner) && inner.length > 0 && inner.every((c) => typeof c === 'string' || typeof c === 'number')) {
+    return inner.join('');
+  }
+  return null;
+}
+
+/** "Tap <0>Save</0> to keep it." rebuilt into children, or null. */
+function composite(children: unknown[], language: AppLanguage): unknown[] | null {
+  let key = '';
+  const elements: WithChildren[] = [];
+  for (const child of children) {
+    if (child === null || child === undefined || typeof child === 'boolean') continue;
+    if (typeof child === 'string' || typeof child === 'number') {
+      key += String(child);
+    } else if (isValidElement(child)) {
+      const index = elements.length;
+      elements.push(child as WithChildren);
+      const words = wordsOf(child as WithChildren);
+      key += words === null ? `<${index}/>` : `<${index}>${words}</${index}>`;
+    } else {
+      return null;
+    }
+  }
+  if (!/[A-Za-z]/.test(key.replace(/<\/?\d+\/?>/g, ''))) return null;
+  const found = translateIn(language, key);
+  if (found === key) return null;
+  const out: unknown[] = [];
+  const tag = /<(\d+)\/>|<(\d+)>([\s\S]*?)<\/\2>/g;
+  let last = 0;
+  let match: RegExpExecArray | null;
+  let n = 0;
+  while ((match = tag.exec(found)) !== null) {
+    if (match.index > last) out.push(found.slice(last, match.index));
+    const index = Number(match[1] ?? match[2]);
+    const element = elements[index];
+    if (element) {
+      out.push(
+        match[1] !== undefined
+          ? cloneElement(element, { key: `t${n}` })
+          : cloneElement(element, { key: `t${n}` }, match[3]),
+      );
+    }
+    n += 1;
+    last = tag.lastIndex;
+  }
+  if (last < found.length) out.push(found.slice(last));
+  return out;
+}
+
 /**
  * A Text's children in `language`. A plain string, or children that are all
  * strings and numbers (JSX splits `Save{' '}Now` that way), is looked up
- * whole; otherwise each string piece is looked up on its own and anything
- * else, a nested Text or an icon, is left as it is.
+ * whole; children with a Text inside are looked up as one sentence with the
+ * inner Text marked <0>...</0>; failing both, each string piece is looked up
+ * on its own and anything else is left as it is.
  */
 export function translateChildren<T>(children: T, language: AppLanguage): T {
   if (language === 'en') return children;
@@ -83,6 +337,9 @@ export function translateChildren<T>(children: T, language: AppLanguage): T {
     const whole = children.join('');
     const found = translateIn(language, whole);
     if (found !== whole) return found as T;
+  } else {
+    const rebuilt = composite(children, language);
+    if (rebuilt) return rebuilt as T;
   }
   let changed = false;
   const out = children.map((child: unknown) => {

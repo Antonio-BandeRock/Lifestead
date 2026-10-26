@@ -4337,7 +4337,7 @@ function DailyMealPlanLens() {
           />
         </View>
         <Text style={[styles.label, { marginTop: 12 }]}>Carb level</Text>
-        <Text style={styles.helperText}>Applies to each day&apos;s own total, not any one meal alone.</Text>
+        <Text style={styles.helperText}>Applies to each day&apos;s total, not any one meal alone.</Text>
         <PopoverSelect
           selected={CARB_LEVEL_OPTIONS.find((option) => option.value === carbLevel)?.label ?? 'Any'}
           options={CARB_LEVEL_OPTIONS.map((option) => option.label)}

@@ -35,6 +35,7 @@ import { NotYetHost } from '../components/NotYetHost';
 import { DesktopSpeechHost } from '../components/DesktopSpeechHost';
 import { UnlockSummaryHost } from '../components/UnlockSummaryHost';
 import { TellClaudeHost } from '../components/TellClaudeHost';
+import '../lib/translateAlerts';
 import { HandSwitchButton } from '../components/HandSwitchButton';
 import { AskRecordsSheet } from '../components/AskRecordsSheet';
 import { StoreLocationSheet } from '../components/StoreLocationSheet';

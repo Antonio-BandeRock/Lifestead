@@ -46,6 +46,8 @@ const EDITABLE_TEXT_FILES = new Set([
 // each deep import gets its own module. See components/voiceNamedControl.js.
 const WEB_SWAPS = { Text: 'editableTextForWeb.js' };
 for (const name of ['TouchableOpacity', 'TouchableHighlight', 'Pressable', 'ScrollView', 'FlatList', 'SectionList']) WEB_SWAPS[name] = `voiceWeb${name}.js`;
+// A TextInput's placeholder in the app's language (2026-10-26).
+WEB_SWAPS.TextInput = 'voiceWebTextInput.js';
 const WEB_SWAP_MODULES = new Map();
 for (const [name, file] of Object.entries(WEB_SWAPS)) {
   WEB_SWAP_MODULES.set(`react-native-web/dist/exports/${name}`, file);
