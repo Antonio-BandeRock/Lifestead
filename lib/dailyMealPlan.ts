@@ -606,7 +606,7 @@ export const FREQUENCY_RULES: FrequencyRule[] = [
     kind: 'atLeast',
     timesPerWeek: 2,
     citation:
-      'Seafood Long-Chain n-3 Polyunsaturated Fatty Acids and Cardiovascular Disease: A Science Advisory From the American Heart Association, Rimm et al., Circulation 2018, PMID 29773586 -- two servings of non-fried fish a week, preferably oily fish.',
+      'Seafood Long-Chain n-3 Polyunsaturated Fatty Acids and Cardiovascular Disease: A Science Advisory From the American Heart Association, Rimm et al., Circulation 2018, PMID 29773586: two servings of non-fried fish a week, preferably oily fish.',
     matches: (curatedRecipeId) => curatedRecipeContainsAnyIngredient(curatedRecipeId, 'Meat', FISH_SEAFOOD_BASE_NAMES),
   },
   {
@@ -615,7 +615,7 @@ export const FREQUENCY_RULES: FrequencyRule[] = [
     kind: 'atMost',
     timesPerWeek: 3,
     citation:
-      'Limit red and processed meat, World Cancer Research Fund -- no more than roughly 3 servings (350-500g cooked weight) a week. A 2024 paper (PMID 38492553) questions how strong the evidence for this specific threshold actually is, named honestly rather than presented as settled.',
+      'Limit red and processed meat, World Cancer Research Fund: no more than roughly 3 servings (350-500g cooked weight) a week. A 2024 paper (PMID 38492553) questions how strong the evidence for this specific threshold actually is, named honestly rather than presented as settled.',
     matches: (curatedRecipeId) => curatedRecipeContainsAnyIngredient(curatedRecipeId, 'Meat', RED_MEAT_BASE_NAMES),
   },
 ];
