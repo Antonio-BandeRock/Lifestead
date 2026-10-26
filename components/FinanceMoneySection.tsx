@@ -42,6 +42,7 @@ import {
 } from '../lib/financeAccountsDb';
 import { parsePriceInput } from '../lib/groceryList';
 import { ThumbRow } from './ThumbRow';
+import { t } from '../lib/i18n';
 import { useWalkMark } from './WalkMark';
 
 // Accounts, net worth and debt payoff, 2026-09-05, pass 2 of the Finances
@@ -232,9 +233,13 @@ export function FinanceMoneySection({ tabColor }: Props) {
             ) : null}
             {trend ? (
               <Text style={styles.footnote}>
-                {trend.change >= 0 ? 'Up' : 'Down'} {formatAccountMoney(Math.abs(trend.change))} since {trend.from},
-                across {trend.points} times you updated a balance. A point is recorded when you change a balance, not
-                daily, so this line only moves when a balance did.
+                {/* Whole sentences, so the Spanish table holds each one whole. */}
+                {t(
+                  trend.change >= 0
+                    ? 'Up {accountMoney} since {from}, across {points} times you updated a balance. A point is recorded when you change a balance, not daily, so this line only moves when a balance did.'
+                    : 'Down {accountMoney} since {from}, across {points} times you updated a balance. A point is recorded when you change a balance, not daily, so this line only moves when a balance did.',
+                  { accountMoney: formatAccountMoney(Math.abs(trend.change)), from: trend.from, points: trend.points },
+                )}
               </Text>
             ) : (
               <Text style={styles.footnote}>Update a balance again later and this starts showing which way things are moving.</Text>

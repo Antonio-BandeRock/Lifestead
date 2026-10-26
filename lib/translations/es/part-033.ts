@@ -310,7 +310,7 @@ export const PART: Readonly<Record<string, string>> = {
  "Glucose around meals": "Glucosa alrededor de las comidas",
  "Vigorous": "Vigoroso",
  "nothing marked done": "nada marcado como hecho",
- "No exercise in this range. Movement is logged from the quick log or Schedules > Exercise, a workout is built on Life > Workouts and done in its player, and a plan is made on Schedules > Exercise.": "No hay ejercicio en este tramo. El movimiento se registra desde el registro rápido o en Agenda > Ejercicio, una rutina de ejercicio se arma en Vida > Rutinas de ejercicio y se hace en su reproductor, y un plan se hace en Agenda > Ejercicio.",
+ "No exercise in this range. Movement is logged from the quick log or Schedules > Exercise, a workout is built on Life > Workouts and done in its player, and a plan is made on Schedules > Exercise.": "No hay ejercicio en este tramo. El movimiento se registra desde el registro rápido o en Agenda > Ejercicio, un entrenamiento se arma en Vida > Entrenamientos y se hace en su reproductor, y un plan se hace en Agenda > Ejercicio.",
  "{value} on {value2}, {minutesIn} minutes in all. The bar is the week's minutes.": "{value} en {value2}, {minutesIn} minutos en total. La barra son los minutos de la semana.",
  "{value} had no minutes given, so they count as times but add no minutes.": "{value} no tenían minutos, así que cuentan como veces pero no suman minutos.",
  "What you did": "Lo que hiciste",
