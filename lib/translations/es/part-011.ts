@@ -353,7 +353,7 @@ export const PART: Readonly<Record<string, string>> = {
  "Steps or checks": "Pasos o revisiones",
  "The phone will say it {plainDate}. The note is marked done.": "El teléfono lo va a decir {plainDate}. La nota queda marcada como hecha.",
  "A counter of {value}, landing {plainDate}. The note is marked done.": "Un contador de {value}, que llega {plainDate}. La nota queda marcada como hecha.",
- "Open Days Until": "Abrir Días para",
+ "Open Days Until": "Abrir Cuenta regresiva",
  "{value} on the grocery list. The note is marked done.": "{value} en la lista del súper. La nota queda marcada como hecha.",
  "Open the grocery list": "Abrir la lista del súper",
  "Give the routine a name first, for example \"Morning\".": "Primero ponle nombre a la rutina, por ejemplo \"Mañana\".",

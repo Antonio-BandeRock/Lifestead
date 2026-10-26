@@ -224,7 +224,7 @@ export const PART: Readonly<Record<string, string>> = {
  "Tap Remove it to say yes. Everything recorded against it goes too.": "Toca Quitarlo para decir que sí. Todo lo registrado en ella se va también.",
  "Your list holds only what you still want to ask about.": "Tu lista tiene solo lo que todavía quieres preguntarte.",
  "Count down hours and minutes": "Contar hacia atrás horas y minutos",
- "Tap Add a Days Until Counter.": "Toca + Agregar un contador de Días para.",
+ "Tap Add a Days Until Counter.": "Toca + Agregar una cuenta regresiva.",
  "Under Days until what?, write what it is counting to.": "En ¿Días para qué?, escribe a qué está contando.",
  "Under Count in, pick Hours and minutes, then write how many of each.": "En Contar en, elige Horas y minutos, y luego escribe cuántos de cada uno.",
  "Tap Start Counting.": "Toca Empezar a contar.",

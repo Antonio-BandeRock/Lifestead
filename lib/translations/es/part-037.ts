@@ -67,7 +67,7 @@ export const PART: Readonly<Record<string, string>> = {
  "Schedule a meal for later": "Programar una comida para después",
  "Tap Schedule it.": "Toca Programarla.",
  "Pick Today or Tomorrow and a time, then tap Schedule it.": "Elige Hoy o Mañana y una hora, y luego toca Programarla.",
- "It shows in Schedules on Today's Meals at that time, beside your doses.": "Aparece en Agenda, en Las comidas de hoy, a esa hora, junto a tus dosis.",
+ "It shows in Schedules on Today's Meals at that time, beside your doses.": "Aparece en Agenda, en Comidas de hoy, a esa hora, junto a tus dosis.",
  "Eat something other than what was planned": "Comer algo distinto de lo planeado",
  "Open a group and tap the meal you are eating instead.": "Abre un grupo y toca la comida que vas a comer en su lugar.",
  "Tap Use it instead of a planned meal. It shows only when a meal is planned today.": "Toca Usarla en lugar de una comida planeada. Solo aparece cuando hay una comida planeada hoy.",
