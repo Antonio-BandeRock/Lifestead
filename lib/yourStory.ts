@@ -672,24 +672,42 @@ export type ArchiveFacts = {
   syncSavedOn: string | null;
   syncLoadedOn: string | null;
   lastBackupOn: string | null;
+  // Whether this device has a shared folder chosen, and the newest backup
+  // last seen in it (1.0.74.9): a backup made on the computer into the
+  // shared folder is a copy kept, whichever device is asking.
+  sharedFolderSet?: boolean;
+  sharedBackupOn?: string | null;
 };
+
+function newestBackupOn(archive: ArchiveFacts): string | null {
+  const shared = archive.sharedFolderSet ? (archive.sharedBackupOn ?? null) : null;
+  const both = [archive.lastBackupOn, shared].filter((day): day is string => !!day).sort();
+  return both.length > 0 ? both[both.length - 1] : null;
+}
+
+function newestIsShared(archive: ArchiveFacts): boolean {
+  return !!archive.sharedFolderSet && !!archive.sharedBackupOn && newestBackupOn(archive) === archive.sharedBackupOn;
+}
 
 export function backupDoneOn(archive: ArchiveFacts, today: string): string | null {
   if (archive.syncOn) return archive.syncSavedOn ?? today;
-  if (archive.lastBackupOn && daysBetween(archive.lastBackupOn, today) <= BACKUP_FRESH_DAYS) return archive.lastBackupOn;
+  const newest = newestBackupOn(archive);
+  if (newest && daysBetween(newest, today) <= BACKUP_FRESH_DAYS) return newest;
   return null;
 }
 
 export function backupDoneSentence(archive: ArchiveFacts): string {
-  return archive.syncOn
-    ? 'Saving automatically to your shared folder.'
-    : 'A backup was saved on this device.';
+  if (archive.syncOn) return 'Saving automatically to your shared folder.';
+  return newestIsShared(archive) ? 'A recent backup is in your shared folder.' : 'A backup was saved on this device.';
 }
 
 export function backupReopenLine(archive: ArchiveFacts, seenOn: string | null, today: string): string {
-  if (archive.lastBackupOn) {
-    const age = daysBetween(archive.lastBackupOn, today);
-    return `The last backup on this device was saved on ${storyDate(archive.lastBackupOn)}, ${age} days ago, and automatic saving is off.`;
+  const newest = newestBackupOn(archive);
+  if (newest) {
+    const age = daysBetween(newest, today);
+    return newestIsShared(archive)
+      ? `The last backup in your shared folder was saved on ${storyDate(newest)}, ${age} days ago, and automatic saving is off.`
+      : `The last backup on this device was saved on ${storyDate(newest)}, ${age} days ago, and automatic saving is off.`;
   }
   if (seenOn) return `Your records were backed up on ${storyDate(seenOn)}. Automatic saving is off on this device now, and no recent backup is here.`;
   return '';

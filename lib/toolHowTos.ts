@@ -246,6 +246,7 @@ export type ToolMark =
   | 'home.chooseNutrients'
   | 'home.reportWindow'
   | 'home.lowStim'
+  | 'header.checkUpdates'
   | 'home.readCards'
   | 'appointments.add'
   | 'appointments.addCalendar'
@@ -2443,6 +2444,15 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Log a Harvest.', mark: 'homeBand.logHarvest' },
       ],
       forYou: 'Garden opens on the harvest log, where what the garden gave is kept by area and crop.',
+    },
+    {
+      key: 'checkUpdates',
+      title: 'Check for a new version of the app',
+      steps: [
+        { say: 'Tap the arrow into a cloud at the right end of the bar along the top, beside the word Lifestead.', mark: 'header.checkUpdates', stay: true },
+        { say: 'Profile opens at App Updates and looks for a newer version. If there is one, you are asked before the app restarts.' },
+      ],
+      forYou: 'A change sent out today reaches you now, without closing the app and opening it again to find out.',
     },
   ],
   '/life#todos': [

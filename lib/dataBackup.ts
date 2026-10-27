@@ -208,6 +208,35 @@ export async function recordBackupSaved(): Promise<void> {
   }
 }
 
+// When the newest backup in the shared folder was taken, as last seen when
+// Profile listed that folder (1.0.74.9). Your Story's Archive reads it, so a
+// backup the computer put in the shared folder counts on the phone too,
+// without setup reaching OneDrive every few seconds to look. Device-local,
+// since it says what this device last saw.
+export const BACKUP_SHARED_NEWEST_META_KEY = 'backup_shared_newest';
+
+export async function recordSharedBackupSeen(takenAtIso: string | null): Promise<void> {
+  try {
+    const db = await getDatabase();
+    const now = new Date().toISOString();
+    if (!takenAtIso) {
+      await db.runAsync('DELETE FROM app_meta WHERE key = ?', BACKUP_SHARED_NEWEST_META_KEY);
+      return;
+    }
+    await db.runAsync(
+      `
+        INSERT INTO app_meta (key, value, updated_at) VALUES (?, ?, ?)
+        ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = excluded.updated_at
+      `,
+      BACKUP_SHARED_NEWEST_META_KEY,
+      takenAtIso,
+      now,
+    );
+  } catch (error) {
+    console.error('[dataBackup] Failed to note the newest shared backup', error);
+  }
+}
+
 export async function exportBackupToFile(password: string): Promise<string | null> {
   try {
     const envelope = await buildBackupEnvelope();

@@ -2,8 +2,20 @@ import { useRouter } from 'expo-router';
 import { Image, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { Text as SvgText } from 'react-native-svg';
+import { Ionicons } from '@expo/vector-icons';
 import { colors } from '../constants/colors';
 import { EDGE_SHADOW_HEIGHT, EdgeShadow } from './EdgeShadow';
+import { useWalkMark } from './WalkMark';
+
+// Check for Updates at the row's right end (1.0.74.9, direct request:
+// "create a check updates button on the right side of the app header").
+// It opens Profile at App Updates with install=1, which runs the same check
+// as the button there, asks before any restart, and says Up to Date when
+// there is nothing new. `at` makes a second press start a second check
+// while Profile is still open.
+const UPDATE_BUTTON_SIZE = 44;
+const UPDATE_ICON_SIZE = 26;
+const UPDATE_RIGHT_INSET = 12;
 
 // The gap kept at the row's right end, so the word's canvas never runs to
 // the true screen edge.
@@ -91,9 +103,16 @@ export function ScreenHeader() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { width: windowWidth } = useWindowDimensions();
+  const walkMark = useWalkMark();
   const textAreaWidth = Math.max(
     120,
-    windowWidth - HEADER_LEFT_INSET - HEADER_LOGO_SIZE - HEADER_LOGO_TEXT_GAP - ROW_HORIZONTAL_PADDING,
+    windowWidth -
+      HEADER_LEFT_INSET -
+      HEADER_LOGO_SIZE -
+      HEADER_LOGO_TEXT_GAP -
+      ROW_HORIZONTAL_PADDING -
+      UPDATE_BUTTON_SIZE -
+      UPDATE_RIGHT_INSET,
   );
   // The baseline, so the word's visible middle is on the logo's centre line.
   const textBaselineY = HEADER_TEXT_HEIGHT / 2 + WORD_INK_MIDDLE_EM * HEADER_TEXT_FONT_SIZE;
@@ -106,34 +125,48 @@ export function ScreenHeader() {
       <View style={{ paddingTop: insets.top }}>
         {/* The header is still the door into the day timeline
             (app/timeline.tsx), as it has been since 2026-09-26. */}
-        <Pressable accessibilityLabel="Lifestead, open your timeline" style={styles.row} onPress={() => router.push('/timeline')}>
-          <Image source={LOGO} style={styles.logo} resizeMode="contain" />
-          <Svg width={textAreaWidth} height={HEADER_TEXT_HEIGHT}>
-            {SHADOW_LAYERS.slice().reverse().map((layer) => (
+        <View style={styles.bar}>
+          <Pressable accessibilityLabel="Lifestead, open your timeline" style={styles.row} onPress={() => router.push('/timeline')}>
+            <Image source={LOGO} style={styles.logo} resizeMode="contain" />
+            <Svg width={textAreaWidth} height={HEADER_TEXT_HEIGHT}>
+              {SHADOW_LAYERS.slice().reverse().map((layer) => (
+                <SvgText
+                  key={layer.offset}
+                  x={textX + layer.offset}
+                  y={textBaselineY + layer.offset}
+                  fontFamily="Nunito_600SemiBold"
+                  fontSize={HEADER_TEXT_FONT_SIZE}
+                  fill={`rgba(6, 9, 20, ${layer.opacity})`}
+                  textAnchor="start"
+                >
+                  {APP_NAME}
+                </SvgText>
+              ))}
               <SvgText
-                key={layer.offset}
-                x={textX + layer.offset}
-                y={textBaselineY + layer.offset}
+                x={textX}
+                y={textBaselineY}
                 fontFamily="Nunito_600SemiBold"
                 fontSize={HEADER_TEXT_FONT_SIZE}
-                fill={`rgba(6, 9, 20, ${layer.opacity})`}
+                fill={LOGO_FIGURE_WHITE}
                 textAnchor="start"
               >
                 {APP_NAME}
               </SvgText>
-            ))}
-            <SvgText
-              x={textX}
-              y={textBaselineY}
-              fontFamily="Nunito_600SemiBold"
-              fontSize={HEADER_TEXT_FONT_SIZE}
-              fill={LOGO_FIGURE_WHITE}
-              textAnchor="start"
-            >
-              {APP_NAME}
-            </SvgText>
-          </Svg>
-        </Pressable>
+            </Svg>
+          </Pressable>
+          <Pressable
+            ref={walkMark.ref('header.checkUpdates')}
+            accessibilityRole="button"
+            accessibilityLabel="Check for updates"
+            hitSlop={8}
+            style={styles.updateButton}
+            onPress={() =>
+              router.push({ pathname: '/profile', params: { section: 'updates', install: '1', at: String(Date.now()) } })
+            }
+          >
+            <Ionicons name="cloud-download-outline" size={UPDATE_ICON_SIZE} color={LOGO_FIGURE_WHITE} />
+          </Pressable>
+        </View>
         {/* The bottom edge reads as a rounded counter edge curling toward the
             screen, 2026-08-21; see EdgeShadow.tsx. */}
         <EdgeShadow direction="down" />
@@ -179,6 +212,18 @@ const styles = StyleSheet.create({
     paddingLeft: HEADER_LEFT_INSET,
     paddingRight: ROW_HORIZONTAL_PADDING,
     paddingVertical: 0,
+  },
+  bar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  updateButton: {
+    width: UPDATE_BUTTON_SIZE,
+    height: UPDATE_BUTTON_SIZE,
+    marginLeft: 'auto',
+    marginRight: UPDATE_RIGHT_INSET,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   logo: {
     width: HEADER_LOGO_SIZE,

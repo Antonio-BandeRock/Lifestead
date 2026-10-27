@@ -120,6 +120,7 @@ export async function loadYourStoryEverything(withGuides = true): Promise<YourSt
     answers,
     records,
     security: readSecurity(),
+    backupFolderSet: !!facts.archive.sharedFolderSet,
   });
   return { view, guides: withGuides ? buildGuides(facts, records) : [], interview };
 }

@@ -175,5 +175,18 @@ export const PART: Readonly<Record<string, string>> = {
  "The two outdoor beds": "Las dos camas de afuera",
  "Garden food on the plate": "Comida del huerto en el plato",
  "About the person": "Sobre la persona",
- "Medicines": "Medicamentos"
+ "Medicines": "Medicamentos",
+ "This is the newest backup on this device. The shared folder was not looked in, because OneDrive is not signed in here or no shared folder is set up on this device.": "Este es el respaldo más reciente en este dispositivo. No se buscó en la carpeta compartida, porque aquí no se inició sesión en OneDrive o en este dispositivo no hay una carpeta compartida configurada.",
+ "This is the newest backup on this device. The shared folder could not be read: {sharedProblem}": "Este es el respaldo más reciente en este dispositivo. No se pudo leer la carpeta compartida: {sharedProblem}",
+ "A recent backup is in your shared folder.": "Hay un respaldo reciente en tu carpeta compartida.",
+ "The last backup in your shared folder was saved on {storyDate}, {age} days ago, and automatic saving is off.": "El último respaldo en tu carpeta compartida se guardó el {storyDate}, hace {age} días, y el guardado automático está apagado.",
+ "Your shared folder.": "Tu carpeta compartida.",
+ "Your shared folder is chosen. Profile, under Backup & Restore, saves a backup there or turns on automatic saving.": "Tu carpeta compartida ya está elegida. En Perfil, en Respaldo y restauración, puedes guardar ahí un respaldo o activar el guardado automático.",
+ "Updated by the Installer": "Se actualiza con el instalador",
+ "On a computer, Lifestead is brought up to date by running the newest Lifestead installer. This copy is version {APP_VERSION}.": "En una computadora, Lifestead se pone al día ejecutando el instalador más reciente de Lifestead. Esta copia es la versión {APP_VERSION}.",
+ "Check for updates": "Buscar actualizaciones",
+ "Check for a new version of the app": "Buscar una versión nueva de la app",
+ "Tap the arrow into a cloud at the right end of the bar along the top, beside the word Lifestead.": "Toca la flecha que entra en una nube, en el extremo derecho de la barra de arriba, junto a la palabra Lifestead.",
+ "Profile opens at App Updates and looks for a newer version. If there is one, you are asked before the app restarts.": "Perfil se abre en Actualizaciones de la app y busca una versión más nueva. Si la hay, se te pregunta antes de que la app se reinicie.",
+ "A change sent out today reaches you now, without closing the app and opening it again to find out.": "Un cambio enviado hoy te llega ahora, sin tener que cerrar la app y volver a abrirla para enterarte."
 };

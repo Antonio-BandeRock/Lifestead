@@ -1128,6 +1128,10 @@ export type InterviewFacts = {
   records: GuideRecords;
   // App Lock and the vault, read from their files rather than the database.
   security?: { appLockOn: boolean; vaultCategories: number; vaultGuarded: boolean };
+  // A shared folder is chosen on this device (1.0.74.9). The question asks
+  // where a copy should be kept, so choosing the place answers it, even
+  // before the first backup lands there.
+  backupFolderSet?: boolean;
 };
 
 export type InterviewQuestionView = {
@@ -1254,6 +1258,7 @@ function viewQuestion(def: InterviewQuestionDef, facts: InterviewFacts): Intervi
     }
     case 'backup': {
       if (itemSettled(facts, 'backup') === 'done') return { ...base, answered: true, summary: 'Backed up.' };
+      if (facts.backupFolderSet) return { ...base, answered: true, summary: 'Your shared folder.' };
       return { ...base, answered: !!answer, summary: answer ? (answer.answer === LATER ? LATER_SUMMARY : 'Not yet.') : null };
     }
     case 'security': {
@@ -1422,8 +1427,9 @@ function switchedOnLine(question: InterviewQuestionView, facts: InterviewFacts):
       return null;
     }
     case 'backup':
-      return itemSettled(facts, 'backup') === 'done'
-        ? 'A copy of your records is kept in the folder you chose.'
+      if (itemSettled(facts, 'backup') === 'done') return 'A copy of your records is kept in the folder you chose.';
+      return facts.backupFolderSet
+        ? 'Your shared folder is chosen. Profile, under Backup & Restore, saves a backup there or turns on automatic saving.'
         : 'Nothing is backed up yet. Profile, under Backup & Restore, sets it up whenever you are ready.';
     case 'security': {
       const security = facts.security;

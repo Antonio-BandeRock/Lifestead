@@ -248,6 +248,7 @@ export const DEVICE_LOCAL_META_KEYS: readonly string[] = [
   'visual_fold_state',
   'backup_last_check',
   'backup_last_saved',
+  'backup_shared_newest',
   'peer_photos_wifi_only',
   // A16: whether this phone raises an alert when somebody's dose is not
   // marked. A setting about this phone's notifications.

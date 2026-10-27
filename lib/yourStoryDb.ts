@@ -13,8 +13,8 @@ import { dayKey, localDayOf, normalizeBeatKeys, buildYourStory } from './yourSto
 import type { ArchiveFacts, BeatKey, YourStoryFacts, YourStoryItemKey, YourStoryView } from './yourStory';
 import { buildGuides, isGuideStyle } from './yourStoryGuides';
 import type { GuideRecordKey, GuideRecords, GuideStyle, GuideView } from './yourStoryGuides';
-import { getDatabase } from './db';
-import { BACKUP_LAST_SAVED_META_KEY, listLocalBackupFiles } from './dataBackup';
+import { getDatabase, getOneDriveFolder } from './db';
+import { BACKUP_LAST_SAVED_META_KEY, BACKUP_SHARED_NEWEST_META_KEY, listLocalBackupFiles } from './dataBackup';
 import { readSyncState } from './snapshotSyncDevice';
 
 type Db = Awaited<ReturnType<typeof getDatabase>>;
@@ -284,11 +284,15 @@ async function lastBackupDay(db: Db): Promise<string | null> {
 
 async function readArchive(db: Db): Promise<ArchiveFacts> {
   const sync = await readSyncState();
+  const folder = await getOneDriveFolder().catch(() => null);
+  const shared = await db.getFirstAsync<{ value: string }>('SELECT value FROM app_meta WHERE key = ?', BACKUP_SHARED_NEWEST_META_KEY);
   return {
     syncOn: sync.enabled,
     syncSavedOn: localDayOf(sync.lastSavedAt),
     syncLoadedOn: localDayOf(sync.lastLoadedAt),
     lastBackupOn: await lastBackupDay(db),
+    sharedFolderSet: !!folder,
+    sharedBackupOn: localDayOf(shared?.value ?? null),
   };
 }
 

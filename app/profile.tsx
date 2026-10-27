@@ -43,7 +43,7 @@ import {
 import { APP_VERSION } from '../constants/version';
 import { isSignedIn as isOneDriveSignedIn } from '../lib/oneDriveAuth';
 import { getBackupsFolder, getSharedFolder } from '../lib/oneDriveFolders';
-import { pickNewestBackup, type BackupCandidate } from '../lib/newestBackup';
+import { backupTakenAt, pickNewestBackup, type BackupCandidate } from '../lib/newestBackup';
 import type { DriveItemRef } from '../lib/oneDriveGraph';
 import { downloadText, listFiles, uploadText } from '../lib/oneDriveGraph';
 import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
@@ -97,6 +97,7 @@ import { decryptBackupPayload, isEncryptedBackupWire } from '../lib/backupEncryp
 import {
   buildBackupFileContent,
   recordBackupSaved,
+  recordSharedBackupSeen,
   exportBackupToFile,
   listLocalBackupFiles,
   parseBackupEnvelope,
@@ -754,6 +755,14 @@ const PROFILE_CARD_ICONS: Record<CardSectionKey, ComponentProps<typeof Ionicons>
   developer: 'construct-outline',
 };
 
+// Remembers when the newest backup in the shared folder was taken, read
+// from the names a listing returned, for Your Story's Archive.
+async function noteSharedBackups(names: readonly string[]): Promise<void> {
+  const newest = pickNewestBackup(names.map((name) => ({ place: 'shared' as const, name })));
+  const taken = newest ? backupTakenAt(newest.name) : null;
+  await recordSharedBackupSeen(taken === null ? null : new Date(taken).toISOString());
+}
+
 export default function ProfileScreen() {
   // The outline on a button a Your Story walk line names (components/WalkMark.ts).
   const walkMark = useWalkMark();
@@ -847,7 +856,11 @@ export default function ProfileScreen() {
   // Opened straight onto Reminders (1.0.60.3) by Choose Which Reminders
   // Come in the Waiting for an Answer list, so the switches are in view
   // rather than folded away somewhere down the page.
-  const { section: openSection, install: installParam } = useLocalSearchParams<{ section?: string; install?: string }>();
+  const {
+    section: openSection,
+    install: installParam,
+    at: installAt,
+  } = useLocalSearchParams<{ section?: string; install?: string; at?: string }>();
   const scrollRef = useRef<ScrollView>(null);
   // Also opened straight onto App Lock (1.0.63.14) by the Your Story
   // question about keeping records closed, where the vault is chosen, and
@@ -884,7 +897,7 @@ export default function ProfileScreen() {
     const timer = setTimeout(() => void handleCheckForUpdates(), 600);
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [installParam]);
+  }, [installParam, installAt]);
   function toggleSection(key: CardSectionKey) {
     if (!collapsedSections.has(key)) {
       setCollapsedSections((current) => new Set(current).add(key));
@@ -1557,6 +1570,18 @@ export default function ProfileScreen() {
     setUpdateCheckBusy(true);
     showBusy('Checking for updates…');
     try {
+      // On a computer a new version comes as a new installer, so there is
+      // nothing for this check to download (1.0.74.9, once the header gave
+      // the desktop the same button).
+      if (isDesktopApp()) {
+        hideBusy();
+        setUpdateCheckBusy(false);
+        showBackupAlert(
+          'Updated by the Installer',
+          `On a computer, Lifestead is brought up to date by running the newest Lifestead installer. This copy is version ${APP_VERSION}.`,
+        );
+        return;
+      }
       // Updates.isEnabled is false in Expo Go and in a development-client
       // build with no update channel configured -- both real, common cases
       // during this app's own testing, not just a theoretical guard.
@@ -1662,20 +1687,31 @@ export default function ProfileScreen() {
   // Derived from the shared folder rather than chosen separately: the app owns
   // the shape under that folder, so Backups is found or made there rather than
   // being one more thing to set up.
-  const refreshBackupFolder = useCallback(async () => {
+  const refreshBackupFolder = useCallback(async (): Promise<DriveItemRef | null> => {
     const connected = await isOneDriveSignedIn();
     setOneDriveConnected(connected);
     if (!connected) {
       setBackupFolder(null);
-      return;
+      return null;
     }
     const shared = await getSharedFolder();
     if (shared.state !== 'ready') {
       setBackupFolder(null);
-      return;
+      return null;
     }
     const backups = await getBackupsFolder();
-    setBackupFolder(backups.ok ? backups.value : null);
+    const folder = backups.ok ? backups.value : null;
+    setBackupFolder(folder);
+    // What the shared folder holds, so setup and Your Story count a backup
+    // the other device put there (1.0.74.9). One listing per visit.
+    if (folder) {
+      void listFiles(folder)
+        .then((listed) => {
+          if (listed.ok) void noteSharedBackups(listed.value.map((file) => file.name));
+        })
+        .catch(() => {});
+    }
+    return folder;
   }, []);
 
   useEffect(() => {
@@ -2825,9 +2861,9 @@ export default function ProfileScreen() {
   // only check that it opens. A check goes through the same password and
   // decrypt as a restore, so a check that passes means a restore would
   // start, and it writes nothing but the date of the check.
-  async function openBackupContent(content: string, use: BackupUse, source: string) {
+  async function openBackupContent(content: string, use: BackupUse, source: string, aside: string | null = null) {
     if (use === 'restore') {
-      await runRestore(content);
+      await runRestore(content, aside);
       return;
     }
     const envelope = await resolveBackupEnvelope(content);
@@ -2843,10 +2879,11 @@ export default function ProfileScreen() {
     const record: BackupCheckRecord = { ...summary, checkedAt: new Date().toISOString(), source };
     await saveBackupCheck(record);
     setLastBackupCheck(record);
-    showBackupAlert('Backup checked', backupCheckSentence(summary, new Date(envelope.exportedAt).toLocaleString(appLocale())));
+    const checked = backupCheckSentence(summary, new Date(envelope.exportedAt).toLocaleString(appLocale()));
+    showBackupAlert('Backup checked', aside ? `${checked}\n\n${aside}` : checked);
   }
 
-  async function runRestore(content: string) {
+  async function runRestore(content: string, aside: string | null = null) {
     if (!(await confirmItsYou('Before a backup is restored'))) return;
     const envelope = await resolveBackupEnvelope(content);
     if (envelope === 'cancelled') return;
@@ -2859,7 +2896,7 @@ export default function ProfileScreen() {
     }
     const shouldRestore = await confirmBackup({
       title: 'Restore this backup?',
-      message: `This will replace everything currently on this device with what's in the backup from ${new Date(envelope.exportedAt).toLocaleString(appLocale())}. This can't be undone.`,
+      message: `This will replace everything currently on this device with what's in the backup from ${new Date(envelope.exportedAt).toLocaleString(appLocale())}. This can't be undone.${aside ? `\n\n${aside}` : ''}`,
       confirmLabel: 'Restore',
       destructive: true,
     });
@@ -2930,28 +2967,35 @@ export default function ProfileScreen() {
         modifiedMs: file.modificationTimeMs,
       }));
       let sharedProblem: string | null = null;
-      if (backupFolder) {
-        showBusy('Looking in the shared folder...');
-        let listed;
-        try {
-          listed = await listFiles(backupFolder);
-        } finally {
-          hideBusy();
+      // Looked up again here rather than trusted from when Profile opened:
+      // a press made before that lookup finished, or after OneDrive came
+      // back, read only this device and opened an older backup than the
+      // shared folder held (1.0.74.9, a check landing on October 2 when
+      // the folder had one from that morning).
+      showBusy('Looking in the shared folder...');
+      let folder: DriveItemRef | null = null;
+      try {
+        folder = await refreshBackupFolder();
+        if (folder) {
+          const listed = await listFiles(folder);
+          if (listed.ok) {
+            for (const file of listed.value) candidates.push({ place: 'shared', name: file.name });
+            await noteSharedBackups(listed.value.map((file) => file.name));
+          } else {
+            sharedProblem = listed.reason;
+          }
         }
-        if (listed.ok) {
-          for (const file of listed.value) candidates.push({ place: 'shared', name: file.name });
-        } else {
-          sharedProblem = listed.reason;
-        }
+      } finally {
+        hideBusy();
       }
       const newest = pickNewestBackup(candidates);
       if (!newest) {
         showBackupAlert(
           'No backups found',
-          backupFolder
+          folder
             ? sharedProblem
               ? 'There are none on this device, and the shared folder could not be read: ' + sharedProblem
-              : 'There are none on this device or in ' + (backupFolder.path ?? backupFolder.name) + '. Use "Restore from a File" to pick one from somewhere else.'
+              : 'There are none on this device or in ' + (folder.path ?? folder.name) + '. Use "Restore from a File" to pick one from somewhere else.'
             : 'There are none on this device, and the shared folder could not be looked in because it is not set up here yet. Set it up above, or use "Restore from a File" to pick one.',
         );
         return;
@@ -2960,11 +3004,11 @@ export default function ProfileScreen() {
       if (newest.place === 'device') {
         const file = onDevice.find((entry) => entry.name === newest.name);
         content = file ? await readBackupFileContent(file.uri) : null;
-      } else if (backupFolder) {
+      } else if (folder) {
         showBusy('Downloading ' + newest.name + '...');
         let text;
         try {
-          text = await downloadText(backupFolder, newest.name);
+          text = await downloadText(folder, newest.name);
         } finally {
           hideBusy();
         }
@@ -2978,7 +3022,17 @@ export default function ProfileScreen() {
         showBackupAlert('Something went wrong', 'Could not read that backup file.');
         return;
       }
-      await openBackupContent(content, use, newest.place === 'device' ? 'this device' : 'the shared folder');
+      // When only this device could be looked in, the result says so, so an
+      // older backup is never taken for the newest there is.
+      const aside =
+        newest.place !== 'device'
+          ? null
+          : !folder
+            ? 'This is the newest backup on this device. The shared folder was not looked in, because OneDrive is not signed in here or no shared folder is set up on this device.'
+            : sharedProblem
+              ? `This is the newest backup on this device. The shared folder could not be read: ${sharedProblem}`
+              : null;
+      await openBackupContent(content, use, newest.place === 'device' ? 'this device' : 'the shared folder', aside);
     } finally {
       setBackupBusy(false);
     }
