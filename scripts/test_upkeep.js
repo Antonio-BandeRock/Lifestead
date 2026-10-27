@@ -29,8 +29,10 @@ function loadModule(relPath) {
   });
   const module = { exports: {} };
   // eslint-disable-next-line no-new-func
-  new Function('exports', 'module', 'require', outputText)(module.exports, module, () => {
-    throw new Error('unexpected import');
+  new Function('exports', 'module', 'require', outputText)(module.exports, module, (name) => {
+    // lib/choiceOrder.ts is pure, so upkeep.ts may sort with it.
+    if (name === './choiceOrder') return loadModule('lib/choiceOrder.ts');
+    throw new Error('unexpected import ' + name);
   });
   return module.exports;
 }

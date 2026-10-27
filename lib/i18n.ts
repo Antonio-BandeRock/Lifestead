@@ -85,6 +85,8 @@ type Pattern = {
   literal: number;
   /** The longest piece of fixed text, which a loose pattern needs to see first. */
   needle: string;
+  /** Per value, whether it is an ending glued to a word ("Flare{value}"). */
+  glued: boolean[];
 };
 
 type Compiled = {
@@ -128,6 +130,7 @@ function compile(language: AppLanguage): Compiled | null {
     if (!english.includes('{')) continue;
     const parts = english.split(/\{(\w+)\}/);
     const names: string[] = [];
+    const glues: boolean[] = [];
     let source = '^';
     let literal = 0;
     parts.forEach((part, index) => {
@@ -137,6 +140,7 @@ function compile(language: AppLanguage): Compiled | null {
         // is a suffix that may be nothing: "1 day" and "3 days" are one entry.
         // So is a value straight after another value ("{date}{value}").
         const glued = /\S$/.test(parts[index - 1]) || (index > 1 && parts[index - 1] === '');
+        glues.push(/[A-Za-z]$/.test(parts[index - 1]));
         source += glued ? '(.*?)' : '(.+?)';
       } else {
         source += escapeRegex(part);
@@ -146,7 +150,7 @@ function compile(language: AppLanguage): Compiled | null {
     if (literal === 0) continue;
     const fixed = parts.filter((_, at) => at % 2 === 0);
     const needle = fixed.reduce((longest, part) => (part.trim().length > longest.length ? part.trim() : longest), '');
-    const pattern: Pattern = { regex: new RegExp(`${source}$`, 's'), names, target, literal, needle };
+    const pattern: Pattern = { regex: new RegExp(`${source}$`, 's'), names, target, literal, needle, glued: glues };
     // A first word is only a key when a space ends it: in "Result{value}" or
     // "\"{name}\"" the words shown run straight into the value.
     const first = parts[0];
@@ -208,6 +212,36 @@ function oneStop(words: string): string {
   return words.replace(/(\b[ap]\. m\.)\./g, (_, clock: string) => clock);
 }
 
+// A pattern is a sentence with gaps for values, and a value that stayed in
+// English is right when it is a number or somebody's name for a thing, and
+// wrong when it is the rest of an English sentence the pattern happened to
+// fit: "Pick up prescription" is not "Cosechar up prescription", and
+// "Retirement match" is not "Retirement resultado". Such a fit is refused,
+// so the words stay whole in English, where the list of what is left
+// (lib/untranslatedLog.ts) finds them, rather than half in each language.
+const COUNT_NAMES = new Set(['count', 'n', 'days', 'hours', 'minutes', 'weeks', 'months', 'total', 'm', 'h', 'low', 'high', 'hour', 'clock', 'percent', 'amount', 'number', 'shown', 'done']);
+const SPANISH_WORDS = /[áéíóúñü¿¡]|\b(el|la|los|las|del|que|con|para|por|una|un|y|de)\b/i;
+const SENTENCE_WORDS = /\b(the|an|and|or|of|to|up|over|for|with|in|on|at|from|after|before|about|your|my|is|are|was|it|this|that|be|by|into|out|off|still|not)\b/i;
+
+/** A count holds a number, perhaps with its unit, or nothing that reads as words. */
+function countLike(value: string): boolean {
+  return /\d/.test(value) || !/[A-Za-z]{2}/.test(value);
+}
+
+function leftoverEnglish(value: string, glued: boolean): boolean {
+  const words = value.trim();
+  if (!/[A-Za-z]{2}/.test(words)) return false;
+  // "Flare{value}" holds an ending ("s"), never "s and check-ins".
+  if (glued) return words.length > 3 || /\s/.test(value);
+  // A name holds whatever somebody called a thing, which starts with a
+  // capital or a digit far more often than the middle of a sentence does,
+  // and is seldom a run of words joined by "to", "the" and "with".
+  // Words somebody typed in Spanish are never taken for English left over.
+  if (SPANISH_WORDS.test(words)) return false;
+  const several = words.split(/\s+/).length;
+  return (/^[a-z]/.test(words) && several >= 2) || (several >= 3 && SENTENCE_WORDS.test(words));
+}
+
 function byPattern(table: Compiled, english: string, depth: number): string | undefined {
   const trimmed = english.trim();
   if (!trimmed) return undefined;
@@ -222,10 +256,14 @@ function byPattern(table: Compiled, english: string, depth: number): string | un
     // A value never runs across a line or a middle dot: those are pieces.
     if (!match || match.slice(1).some((value) => SEPARATED.test(value) || acrossSentences(value))) continue;
     const values: Record<string, string> = {};
+    let leftover = false;
     pattern.names.forEach((name, index) => {
       const value = match[index + 1];
-      values[name] = depth < 3 ? lookup(table, value, depth + 1) ?? value : value;
+      const found = depth < 3 ? lookup(table, value, depth + 1) : undefined;
+      if (COUNT_NAMES.has(name) ? !countLike(value) : found === undefined && leftoverEnglish(value, pattern.glued[index])) leftover = true;
+      values[name] = found ?? value;
     });
+    if (leftover) continue;
     const filled = pattern.target.replace(/\{(\w+)\}/g, (whole, name: string) => values[name] ?? whole);
     return english.replace(trimmed, () => oneStop(filled));
   }
@@ -233,6 +271,7 @@ function byPattern(table: Compiled, english: string, depth: number): string | un
 }
 
 const TRAILING = /^(.*?)(\s*[:…?!.]+|\.\.\.)$/s;
+const COUNTED = /^(.*?)(\s*\(\d[\d,.]*\))$/s;
 
 function byPieces(table: Compiled, english: string, depth: number): string | undefined {
   // A line break, a middle dot or a bullet is never moved by a translation.
@@ -249,12 +288,29 @@ function byPieces(table: Compiled, english: string, depth: number): string | und
     });
     return changed ? out.join('') : undefined;
   }
+  // A shelf's count, "Soil and Compost (12)", says the same in any language.
+  const counted = COUNTED.exec(english);
+  if (counted && counted[1].trim()) {
+    const found = lookup(table, counted[1], depth + 1);
+    if (found !== undefined) return found + counted[2];
+  }
   // A label's colon, an ellipsis or a question mark.
   const trailing = TRAILING.exec(english);
   if (trailing && trailing[1].trim()) {
     const found = exact(table.words, trailing[1]) ?? byPattern(table, trailing[1], depth);
     // "7:45 AM." is "7:45 a. m.", with one full stop rather than two.
     if (found !== undefined) return trailing[2] === '.' && found.endsWith('.') ? found : found + trailing[2];
+  }
+  // A list, "3 meals, 2 doses and 1 routine", only when every item has words
+  // of its own, so a list is never left half in one language.
+  if (/ and /.test(english) && !/[.!?:;\n]/.test(english)) {
+    const items = english.split(/, | and /);
+    const join = exact(table.words, 'and');
+    const found = items.map((item) => lookup(table, item, depth + 1));
+    if (join !== undefined && items.length >= 2 && found.every((item) => item !== undefined)) {
+      const done = found as string[];
+      return done.length === 2 ? `${done[0]} ${join} ${done[1]}` : `${done.slice(0, -1).join(', ')} ${join} ${done[done.length - 1]}`;
+    }
   }
   // Between sentences.
   const sentences = english.split(/(?<=[.!?])(\s+)(?=[A-Z0-9"“(¿¡])/);
@@ -354,13 +410,26 @@ function lookup(table: Compiled, english: string, depth: number): string | undef
   return byPattern(table, english, depth) ?? byPieces(table, english, depth);
 }
 
+// Words that reached the screen with nothing in the table, handed to
+// lib/untranslatedLog.ts while Developer Tools has Tell Claude on, so a
+// walk through the app in Spanish lists exactly what is still English.
+// A listener rather than an import, so this file stays free of the file
+// and screen code and the test scripts can still load it on their own.
+let missListener: ((english: string) => void) | null = null;
+
+export function setMissListener(listener: ((english: string) => void) | null): void {
+  missListener = listener;
+}
+
 /** The words in `language`, or the English itself when the table has none. */
 export function translateIn(language: AppLanguage, english: string): string {
   const table = compile(language);
   if (!table || typeof english !== 'string') return english;
   const remembered = table.memo.get(english);
   if (remembered !== undefined) return remembered;
-  const found = lookup(table, english, 0) ?? english;
+  const looked = lookup(table, english, 0);
+  if (looked === undefined && missListener) missListener(english);
+  const found = looked ?? english;
   if (table.memo.size >= MEMO_LIMIT) table.memo.clear();
   table.memo.set(english, found);
   return found;

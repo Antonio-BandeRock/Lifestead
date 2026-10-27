@@ -44,6 +44,8 @@ import { NavigationContext } from '@react-navigation/native';
 import { focusOf, registerVoiceLenses } from '../lib/voiceControlRegistry';
 import { useWalkMark } from './WalkMark';
 import { useLanguage } from '../lib/language';
+import { translateIn } from '../lib/i18n';
+import { splitLabelEvenly } from '../lib/labelSplit';
 
 export type LensOption<T extends string> = {
   key: T;
@@ -660,6 +662,9 @@ export function LensHub<T extends string>({
   // any language but English a label may take a second line rather than
   // being cut off. The card already scrolls when its grid outgrows it.
   const language = useLanguage();
+  // A longer label is also broken on purpose at its most even space
+  // (lib/labelSplit.ts), since one that fills its column on one line runs
+  // into the label beside it.
   const labelLines = language === 'en' ? itemLabelLines : Math.max(itemLabelLines, 2);
   const tier = useTier();
   const tabIcon = icon ?? tabRoute?.icon ?? 'list';
@@ -1049,7 +1054,9 @@ export function LensHub<T extends string>({
                           ellipsizeMode="tail"
                           maxFontSizeMultiplier={MENU_MAX_FONT_SCALE}
                         >
-                          {option.gridLabel ?? option.label}
+                          {language === 'en'
+                            ? option.gridLabel ?? option.label
+                            : splitLabelEvenly(translateIn(language, option.gridLabel ?? option.label))}
                         </Text>
                       </TouchableOpacity>
                     </Fragment>

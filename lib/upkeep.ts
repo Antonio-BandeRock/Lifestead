@@ -477,7 +477,8 @@ export function describePlaceGroup(group: PlaceGroup): string {
   if (group.lastDoneOn) parts.push(`last done here ${group.lastDoneOn}`);
   const paused = group.entries.length - group.activeCount;
   if (paused > 0) parts.push(`${paused} paused`);
-  return parts.join(', ') + '.';
+  // A middle dot between the parts, so each part is translated on its own.
+  return parts.join(' · ');
 }
 
 /**

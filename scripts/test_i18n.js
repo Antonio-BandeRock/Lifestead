@@ -22,6 +22,9 @@ const TABLE = {
   'From {start} to {end}': 'Del {start} al {end}',
   '{count} could not be opened. {why}': 'No se pudieron abrir {count}. {why}',
   '"{name}" will be removed for good.': '"{name}" se quitará para siempre.',
+  'Pick {name}': 'Cosechar {name}',
+  '{title} with {provider}': '{title} con {provider}',
+  'Flare{value}': 'Brote{value}',
   '{spent} of {limit}': '{spent} de {limit}',
   'Started {date}': 'Empezó el {date}',
   '{hour}:{value} AM': '{hour}:{value} a. m.',
@@ -146,6 +149,17 @@ language = 'en';
 check('in English the search adds nothing', searching && searching.translate(READING_EN), undefined);
 language = 'es';
 
+// A pattern whose gap would hold the rest of an English sentence is refused,
+// so the words stay whole in English rather than half in each language.
+check('a pattern does not take the rest of an English sentence', translateIn('es', 'Pick up prescription'), 'Pick up prescription');
+check('a pattern still takes a name', translateIn('es', 'Pick Tomatoes'), 'Cosechar Tomatoes');
+check('a count holds a number', translateIn('es', 'Nothing came up over three meals'), 'Nothing came up over three meals');
+check('a glued ending is short', translateIn('es', 'Flares and check-ins'), 'Flares and check-ins');
+check('a glued ending still works', translateIn('es', 'Flares'), 'Brotes');
+check('a name after a quote mark is not an ending', translateIn('es', '"Garden Bed" will be removed for good.'), '"Garden Bed" se quitará para siempre.');
+check('a name with a provider', translateIn('es', 'Checkup with Dr. Lee'), 'Checkup con Dr. Lee');
+check('a name typed in Spanish is kept', translateIn('es', 'Pagar la renta a tiempo with Dr. Lee'), 'Pagar la renta a tiempo con Dr. Lee');
+check('a lowercase phrase is not a name', translateIn('es', 'Feed with compost tea'), 'Feed with compost tea');
 if (failures > 0) {
   console.log(`\n${failures} check(s) failed.`);
   process.exit(1);

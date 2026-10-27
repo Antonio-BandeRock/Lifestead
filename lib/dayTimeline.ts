@@ -803,8 +803,8 @@ export function describeHowFull(view: DayTimelineView, now: number): string {
   if (parts.length === 0) return 'Nothing is on today yet.';
   const ahead = todays.filter((item) => item.status === 'planned' && (item.allDay || item.start > now)).length;
   const aheadWords =
-    ahead === 0 ? 'none of it still ahead' : ahead === 1 ? '1 of them still ahead' : `${ahead} of them still ahead`;
-  return `Today holds ${listWords(parts)}, ${aheadWords}.`;
+    ahead === 0 ? 'None of it is still ahead' : ahead === 1 ? '1 of them is still ahead' : `${ahead} of them are still ahead`;
+  return `Today holds ${listWords(parts)}. ${aheadWords}.`;
 }
 
 /**

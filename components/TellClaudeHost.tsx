@@ -27,7 +27,7 @@
 // where it does.
 import { Ionicons } from '@expo/vector-icons';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
+import { AppState, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { KEYBOARD_HEIGHT } from '../constants/appKeyboard';
 import { colors } from '../constants/colors';
@@ -35,7 +35,9 @@ import { useFooterBandHeight } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { useVisualPreferences } from '../hooks/useVisualPreferences';
 import { isDesktopApp } from '../lib/desktop/bridge';
+import { useLanguage } from '../lib/language';
 import { useNavigationHand } from '../lib/navigationHand';
+import { keepUntranslated, writeUntranslated } from '../lib/untranslatedLog';
 import {
   DEV_NOTE_CAPTIONS,
   DEV_NOTE_KINDS,
@@ -103,6 +105,28 @@ export function TellClaudeHost() {
       reloadWordingEdits().catch((error) => console.error('[tellClaude] could not read the wording edits', error));
     }
   }, [developerNotes, developerNotesPreview]);
+
+  // While the app is in another language, what the table had nothing for is
+  // kept and written beside the notes every minute and whenever the app is
+  // put away (lib/untranslatedLog.ts).
+  const language = useLanguage();
+  useEffect(() => {
+    const keeping = developerNotes && language !== 'en';
+    keepUntranslated(keeping);
+    if (!keeping) return undefined;
+    const send = () => {
+      writeUntranslated().catch((error) => console.error('[tellClaude] could not write the untranslated words', error));
+    };
+    const timer = setInterval(send, 60_000);
+    const away = AppState.addEventListener('change', (next) => {
+      if (next !== 'active') send();
+    });
+    return () => {
+      clearInterval(timer);
+      away.remove();
+      keepUntranslated(false);
+    };
+  }, [developerNotes, language]);
 
   useEffect(() => subscribeWordingEdits((state) => setEditing(state.editing)), []);
 
