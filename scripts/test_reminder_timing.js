@@ -45,7 +45,7 @@ check('reads both settings', JSON.stringify(withModule.reminderTimingStatus()) =
 check('an older build reads unknown, never off', JSON.stringify(without.reminderTimingStatus()) === '{"exact":null,"battery":null}');
 check('nothing to say when unknown', withModule.reminderTimingLine({ exact: null, battery: null }) === null);
 check('off says the app may be held back', /picked up or the app is opened/.test(withModule.reminderTimingLine({ exact: false, battery: null })));
-check('on says set for its minute', /set for its minute/.test(withModule.reminderTimingLine({ exact: true, battery: true })));
+check('on says it arrives at its minute', /arrives at its minute/.test(withModule.reminderTimingLine({ exact: true, battery: true })));
 check('battery off names the cost', /a little battery/.test(withModule.reminderTimingLine({ exact: true, battery: false })));
 
 const now = new Date('2026-10-01T09:00:00Z');

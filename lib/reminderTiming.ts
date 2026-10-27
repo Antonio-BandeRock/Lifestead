@@ -94,17 +94,45 @@ export function becameExact(before: boolean | null, after: boolean | null): bool
   return before === false && after === true;
 }
 
-/** The line Profile > Reminders shows; null where there is nothing to say. Pure. */
+// Why Profile > Reminders talks about the phone's settings at all. Direct
+// report, 2026-10-27: "I have no idea what it is telling me. It needs to be
+// explained why the user would need to change their notifications settings
+// for the app." The status lines alone named two Android switches without
+// saying what they have to do with Lifestead's reminders.
+export const REMINDER_TIMING_WHY =
+  'Lifestead sets each reminder for its time, but Android decides when to hand it to you. Two settings on the phone ' +
+  'can hold reminders back, often until you pick the phone up or open the app, which is why a reminder sometimes ' +
+  'shows up late. That is the only reason to change them, and nothing else in Lifestead needs them.';
+
+export const REMINDER_TIMING_ALL_SET = 'Both are set the way reminders need, so there is nothing to change here.';
+
+/**
+ * The lines Profile > Reminders shows under REMINDER_TIMING_WHY, one per
+ * setting, so each is translated on its own; empty where nothing is known.
+ * Pure.
+ */
+export function reminderTimingLines(status: ReminderTimingStatus): string[] {
+  if (status.exact === null) return [];
+  const lines = [
+    status.exact
+      ? 'Alarms & reminders: allowed. Each reminder arrives at its minute.'
+      : 'Alarms & reminders: not allowed. Android may hold reminders back until the phone is picked up or the app is opened.',
+  ];
+  if (status.battery !== null) {
+    lines.push(
+      status.battery
+        ? 'Battery: unrestricted. Android does not put Lifestead to sleep between reminders.'
+        : 'Battery: optimised. On some phones this also holds reminders back. Unrestricted lets them through, at the cost of a little battery.',
+    );
+  }
+  if (status.exact && status.battery !== false) lines.push(REMINDER_TIMING_ALL_SET);
+  return lines;
+}
+
+/** The same lines as one string, for the test; null where nothing is known. */
 export function reminderTimingLine(status: ReminderTimingStatus): string | null {
-  if (status.exact === null) return null;
-  const exact = status.exact
-    ? 'Alarms & reminders is allowed, so each reminder is set for its minute.'
-    : 'Alarms & reminders is not allowed for Lifestead, so Android may hold reminders back until the phone is picked up or the app is opened.';
-  if (status.battery === null) return exact;
-  const battery = status.battery
-    ? 'Battery use is unrestricted, so Android does not put the app to sleep between reminders.'
-    : 'Battery use is optimised, which can also hold reminders back on some phones. Unrestricted lets them through, at the cost of a little battery.';
-  return `${exact} ${battery}`;
+  const lines = reminderTimingLines(status);
+  return lines.length > 0 ? lines.join(' ') : null;
 }
 
 export const REMINDER_TIMING_TITLE = 'Let reminders arrive on time';

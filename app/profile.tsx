@@ -80,7 +80,8 @@ import {
   canOpenReminderTimingSettings,
   openBatterySettings,
   openExactAlarmSettings,
-  reminderTimingLine,
+  REMINDER_TIMING_WHY,
+  reminderTimingLines,
   reminderTimingStatus,
   type ReminderTimingStatus,
 } from '../lib/reminderTiming';
@@ -4145,15 +4146,28 @@ export default function ProfileScreen() {
         {renderCardHeader('reminders', 'Reminders')}
         {!collapsedSections.has('reminders') ? (
           <View style={styles.cardBody}>
+            {/* 1.0.74.11, direct report: "I have no idea what it is telling
+                me." The card is the reminders Lifestead sends, so it says
+                that first, and the two Android settings sit under a heading
+                of their own that says why they matter to those reminders. */}
             <Text style={styles.helpText}>
-              Which of your scheduled things send a notification to this phone. Turning one off leaves the
-              schedule itself untouched, it only stops the reminder. None of these can fire until you have
-              allowed notifications for Lifestead, which Schedules &gt; Meds asks for the first time you set a
-              dose time.
+              These are the reminders Lifestead sends to this phone: a dose to take, a planned meal, a drink, a
+              garden task, a bill, an appointment and the rest. Turn each kind on or off below and choose its
+              times. Turning one off stops only the notification; what is scheduled stays as it is.
             </Text>
-            {canOpenReminderTimingSettings() && reminderTimingLine(reminderTiming) ? (
+            <Text style={styles.helpText}>
+              None of them can arrive until notifications are allowed for Lifestead. The app asks the first time
+              you set a dose time in Schedules &gt; Meds.
+            </Text>
+            {canOpenReminderTimingSettings() && reminderTimingLines(reminderTiming).length > 0 ? (
               <>
-                <Text style={styles.helpText}>{reminderTimingLine(reminderTiming)}</Text>
+                <Text style={styles.subLabelDivided}>Getting reminders on time</Text>
+                <Text style={styles.helpText}>{REMINDER_TIMING_WHY}</Text>
+                {reminderTimingLines(reminderTiming).map((line) => (
+                  <Text key={line} style={styles.helpText}>
+                    {line}
+                  </Text>
+                ))}
                 {reminderTiming.exact === false ? (
                   <TouchableOpacity style={styles.checkinButton} onPress={openExactAlarmSettings}>
                     <Text style={styles.checkinButtonText}>Allow on-time reminders</Text>
@@ -4171,6 +4185,7 @@ export default function ProfileScreen() {
                 ) : null}
               </>
             ) : null}
+            <Text style={styles.subLabelDivided}>Which reminders come</Text>
             <Text style={styles.helpText}>
               Laid out by the tab each reminder belongs to, then by lens. The same switches are in the
               Waiting for an Answer list on Home, beside the reminders they send.
