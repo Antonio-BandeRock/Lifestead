@@ -179,13 +179,15 @@ function readingPieces() {
       const id = readingKey(value);
       if (!seen.has(id)) {
         seen.add(id);
-        out.push({ id, key: value });
+        // What shows on every card (titles, teasers, food names) goes first,
+        // so a reader sees Spanish on the shelves before the long reading.
+        out.push({ id, key: value, first: /^(title|teaser|foodName)$/.test(at) });
       }
     } else if (Array.isArray(value)) value.forEach((item) => walk(item, at));
     else if (value && typeof value === 'object') for (const [k, v] of Object.entries(value)) walk(v, at ? `${at}.${k}` : k);
   };
   for (const entry of ALL_DIGEST_ENTRIES) walk(entry, '');
-  return out;
+  return [...out.filter((item) => item.first), ...out.filter((item) => !item.first)];
 }
 
 function readingPending() {
