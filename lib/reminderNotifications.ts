@@ -221,8 +221,8 @@ const ANDROID_ANSWER_CHANNEL_ID = 'inside-story-answers';
 // lib/reminderActions.ts for what that means while the app is closed.
 //
 // Since C1 (2026-09-26) each kind has a set of buttons of its own, beside
-// Snooze, defined in lib/reminderActions.ts. The Snooze-only set keeps
-// the identifier the single category always had.
+// Snooze, defined in lib/reminderActions.ts. The plain set (Got it and
+// Snooze) keeps the identifier the single category always had.
 const REMINDER_CATEGORY = REMINDER_CATEGORY_IDS.plain;
 const SNOOZE_ACTION = 'snooze';
 export const LOOKAHEAD_DAYS = 7;

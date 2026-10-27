@@ -2166,7 +2166,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Answer a reminder you missed',
       steps: [
         { say: 'Open the band with the name of Reminders Waiting for an Answer. It shows only when one is waiting.', mark: 'homeBand.waitingAnswers', stay: true },
-        { say: 'Tap one of the buttons under a reminder to answer it here.', mark: 'home.waitingAnswer', stay: true },
+        { say: 'Tap one of the buttons under a reminder to answer it here. Got it clears one that has nothing to record.', mark: 'home.waitingAnswer', stay: true },
         { say: 'Or tap the words of the reminder to open the place it is about.', mark: 'home.waitingOpen' },
       ],
       forYou: 'An answer here counts the same as one given on the notification, and the notification goes away.',
@@ -2176,7 +2176,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Stop a kind of reminder coming',
       steps: [
         { say: 'Open the band with the name of Reminders Waiting for an Answer.', mark: 'homeBand.waitingAnswers', stay: true },
-        { say: 'Under Keep sending these, tap the kind you want to stop so it reads Off.', mark: 'home.waitingKinds', stay: true },
+        { say: 'Below the reminders, tap the kind you want to stop so it reads Off.', mark: 'home.waitingKinds', stay: true },
         { say: 'For every kind at once, tap Choose Which Reminders Come.', mark: 'home.waitingChoose' },
       ],
       forYou: 'New ones of that kind stop. Any showing now stay until you answer them.',

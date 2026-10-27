@@ -62,13 +62,18 @@
 //     question with three of the energy scale's own words. Android shows
 //     three buttons at most, so neither carries Snooze; the tap opens the
 //     check-in on the sleep question, where all five words and a note are.
-//   - Appointments, bills, work benefits, Days Until counters and routines
-//     keep Snooze only. Nothing in the app records a bill as paid or a
-//     benefit as used, a counter is marked done where it lives, and a
-//     routine is a walk of several steps that its tap already opens.
+//   - Appointments, bills, work benefits, Days Until counters, routines and
+//     Your Week carry Got it and Snooze. Nothing in the app records a bill
+//     as paid or a benefit as used, a counter is marked done where it
+//     lives, and a routine is a walk of several steps that its tap already
+//     opens, so Got it writes nothing: it clears the reminder. Until
+//     1.0.74.12 they had Snooze only, which left a reminder that had been
+//     read with no way to go except coming back in 15 minutes (direct
+//     report, 2026-10-27, on Your Week).
 
 export type ReminderActionId =
   | 'snooze'
+  | 'gotIt'
   | 'taken'
   | 'drank'
   | 'ate'
@@ -118,8 +123,8 @@ export type ReminderCategoryKey =
   | 'vaultOffer';
 
 // 'plain' keeps the identifier the single category always had, so a
-// Snooze-only reminder already queued is still correct and is left alone
-// by the reconcile rather than replaced.
+// reminder already queued is still correct and is left alone by the
+// reconcile rather than replaced; it picks up Got it from the category.
 export const REMINDER_CATEGORY_IDS: Record<ReminderCategoryKey, string> = {
   plain: 'inside-story-reminder',
   dose: 'inside-story-reminder-dose',
@@ -160,6 +165,8 @@ export function reminderActionTitle(action: ReminderActionId, snoozeMinutes: num
   switch (action) {
     case 'snooze':
       return `Snooze ${snoozeMinutes} min`;
+    case 'gotIt':
+      return 'Got it';
     case 'taken':
       return 'Taken';
     case 'drank':
@@ -230,7 +237,7 @@ export function reminderActionTitle(action: ReminderActionId, snoozeMinutes: num
 
 // Android shows three buttons at most, so no category may list more.
 export const CATEGORY_ACTIONS: Record<ReminderCategoryKey, ReminderActionId[]> = {
-  plain: ['snooze'],
+  plain: ['gotIt', 'snooze'],
   dose: ['taken', 'snooze'],
   hydration: ['drank', 'snooze'],
   meal: ['ate', 'snooze'],
@@ -398,6 +405,8 @@ export type ReminderActionPlan =
  * possibly since before an update.
  */
 export function planReminderAction(kind: string, action: string): ReminderActionPlan | null {
+  // Got it, on a reminder with nothing to record: it goes, nothing is written.
+  if (action === 'gotIt') return { write: 'nothing' };
   const asks = kind === 'checkin' || kind === 'afterMeal';
   if (action === 'flareYes' && asks) return { write: 'flareStart' };
   // No is the answer, and the question goes away with nothing written.

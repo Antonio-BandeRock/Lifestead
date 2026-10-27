@@ -137,7 +137,7 @@ export function WaitingAnswersList({ groups, now, reload, tabColor, nested = fal
             {kinds.length > 0 ? (
               <View ref={groupIndex === 0 ? walkMark.ref('home.waitingKinds') : undefined} collapsable={false} style={[band.row, styles.switches]}>
                 <Text style={styles.switchCaption}>
-                  Keep sending these? Turning one off stops new ones; any showing now stay until answered.
+                  Tap to stop or start this kind of reminder.
                 </Text>
                 <View style={styles.buttons}>
                   {kinds.map((key) => {

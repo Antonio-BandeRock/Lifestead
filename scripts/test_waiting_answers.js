@@ -96,8 +96,8 @@ for (const key of actions.ALL_REMINDER_CATEGORY_KEYS) {
   const got = w.actionsForCategory(ids[key]).join(',');
   check('buttons for ' + key, got === actions.CATEGORY_ACTIONS[key].join(','));
 }
-check('an unknown set falls back to Snooze', w.actionsForCategory('something-old').join(',') === 'snooze');
-check('no set gives Snooze alone', w.actionsForCategory(null).join(',') === 'snooze');
+check('an unknown set falls back to the plain set', w.actionsForCategory('something-old').join(',') === actions.CATEGORY_ACTIONS.plain.join(','));
+check('no set gives the plain set', w.actionsForCategory(null).join(',') === actions.CATEGORY_ACTIONS.plain.join(','));
 check('the morning row has the three sleep words', groups[0].items[0].actions.join(',') === 'sleptPoorly,sleptOkay,sleptWell');
 check('no button takes words any more', w.actionTakesWords === undefined);
 check('one symptom: its button and Something else', w.actionsForCategory(actions.FLARE_WHAT_CATEGORY_IDS[1]).join(',') === 'flareTagA,flareTagOther');
@@ -153,7 +153,7 @@ check('the summary is outside both reminder prefixes', /WAITING_SUMMARY_ID = 'in
 check('a tap on the summary opens the list', device.includes("request?.identifier === WAITING_SUMMARY_ID) return { pathname: '/waiting-answers' }"));
 check('the summary is never a banner', device.includes('shouldShowBanner: !summary'));
 check('the summary has a quiet channel', /ANDROID_WAITING_CHANNEL_ID[\s\S]{0,200}AndroidImportance\.LOW/.test(device));
-check('the summary is not shown again when nothing changed', device.includes('showing.request.content.title === title && showing.request.content.body === body'));
+check('the summary is not shown again when nothing changed', device.includes('shown && shown.title === title && shown.body === body) return;'));
 check('a press from the list goes through the same answer', /export async function answerFromList[\s\S]*?await answerPress\(response\)/.test(device));
 check('every press brings the summary up to date', (device.match(/await refreshWaitingSummary\(\);/g) || []).length >= 4);
 check('a reminder arriving while open brings the summary up to date', device.includes('addNotificationReceivedListener'));

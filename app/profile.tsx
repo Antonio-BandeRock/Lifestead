@@ -148,7 +148,7 @@ import {
   setWeekSchedule,
 } from '../lib/reminderPreferences';
 import { groupReminderKinds } from '../lib/reminderKindGroups';
-import { DEFAULT_QUIET_HOURS, quietTimeOptions, SNOOZE_MINUTES, type QuietHours } from '../lib/quietHours';
+import { DEFAULT_QUIET_HOURS, quietTimeOptions, type QuietHours } from '../lib/quietHours';
 import {
   ALL_NEURO_PROFILE_KEYS,
   describeTurnedOff,
@@ -4149,11 +4149,16 @@ export default function ProfileScreen() {
             {/* 1.0.74.11, direct report: "I have no idea what it is telling
                 me." The card is the reminders Lifestead sends, so it says
                 that first, and the two Android settings sit under a heading
-                of their own that says why they matter to those reminders. */}
+                of their own that says why they matter to those reminders.
+                1.0.74.12, direct report: "That entire section has a ton of
+                words that don't really direct the user on what to do." Each
+                part is now a heading, one line saying what to do, and the
+                long explanations behind What it is and More, which open
+                showBackupAlert (a plain useInfoAlert, named for its first
+                caller). */}
             <Text style={styles.helpText}>
-              These are the reminders Lifestead sends to this phone: a dose to take, a planned meal, a drink, a
-              garden task, a bill, an appointment and the rest. Turn each kind on or off below and choose its
-              times. Turning one off stops only the notification; what is scheduled stays as it is.
+              Turn on the reminders you want and choose their times. Turning one off stops only the
+              notification, never what is scheduled.
             </Text>
             <Text style={styles.helpText}>
               None of them can arrive until notifications are allowed for Lifestead. The app asks the first time
@@ -4187,8 +4192,7 @@ export default function ProfileScreen() {
             ) : null}
             <Text style={styles.subLabelDivided}>Which reminders come</Text>
             <Text style={styles.helpText}>
-              Laid out by the tab each reminder belongs to, then by lens. The same switches are in the
-              Waiting for an Answer list on Home, beside the reminders they send.
+              Tap a kind to turn it on or off. What it is says when it comes.
             </Text>
             {groupReminderKinds(ALL_REMINDER_KIND_KEYS, REMINDER_KIND_LABELS).map((tabGroup) => (
               <View key={tabGroup.tab}>
@@ -4199,13 +4203,20 @@ export default function ProfileScreen() {
                     {lensGroup.keys.map((key) => {
                       const on = isReminderKindEnabled(reminderPrefs, key);
                       return (
-                        <View key={key}>
+                        <View key={key} style={styles.reminderKind}>
                           <View style={styles.pillRow}>
                             <TouchableOpacity style={[styles.pill, on && styles.pillActive]} onPress={() => toggleReminderKind(key)}>
-                              <Text style={[styles.pillText, on && styles.pillTextActive]}>{REMINDER_KIND_LABELS[key]}</Text>
+                              <Text style={[styles.pillText, on && styles.pillTextActive]}>
+                                {REMINDER_KIND_LABELS[key]}: {on ? 'On' : 'Off'}
+                              </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                              style={styles.pill}
+                              onPress={() => showBackupAlert(REMINDER_KIND_LABELS[key], REMINDER_KIND_CAPTIONS[key])}
+                            >
+                              <Text style={styles.pillText}>What it is</Text>
                             </TouchableOpacity>
                           </View>
-                          <Text style={styles.helpText}>{REMINDER_KIND_CAPTIONS[key]}</Text>
                           {on ? renderReminderTimes(key) : null}
                         </View>
                       );
@@ -4229,21 +4240,42 @@ export default function ProfileScreen() {
                   Keep reminding until it is done
                 </Text>
               </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.pill}
+                onPress={() =>
+                  showBackupAlert(
+                    'Keep reminding until it is done',
+                    'A reminder comes back instead of firing once and being gone. A dose, a meal, a drink or a ' +
+                      'garden task asks again after 15 minutes, 45 minutes and an hour and a half, and something in ' +
+                      'Upkeep asks each morning while it is overdue, up to two weeks. Marking the thing done is what ' +
+                      'stops it. Appointments never repeat, and bills and work benefits cannot, because nothing here ' +
+                      "records that one month's bill got paid or that an allowance was finished with.",
+                  )
+                }
+              >
+                <Text style={styles.pillText}>More</Text>
+              </TouchableOpacity>
             </View>
-            <Text style={styles.helpText}>
-              Keep reminding until it is done: a reminder comes back instead of firing once and being gone.
-              A dose, a meal, a drink or a garden task asks again after 15 minutes, 45 minutes and an hour
-              and a half, and something in Upkeep asks each morning while it is overdue, up to two weeks.
-              Marking the thing done is what stops it. Appointments never repeat, and bills and work
-              benefits cannot, because nothing here records that one month&apos;s bill got paid or that an
-              allowance was finished with.
-            </Text>
+            <Text style={styles.helpText}>A reminder asks again until you mark it done.</Text>
             <View style={styles.pillRow}>
               <TouchableOpacity
                 style={[styles.pill, reminderPrefs.quietHours && styles.pillActive]}
                 onPress={() => saveQuietHours(reminderPrefs.quietHours ? null : DEFAULT_QUIET_HOURS)}
               >
                 <Text style={[styles.pillText, reminderPrefs.quietHours && styles.pillTextActive]}>Quiet hours</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.pill}
+                onPress={() =>
+                  showBackupAlert(
+                    'Quiet hours',
+                    'A reminder that would arrive in this window waits until it ends, and says what time it was ' +
+                      'for. A repeat that falls inside the window is skipped. A dose and an appointment always ' +
+                      'arrive on time, because moving either one could matter more than the sleep.',
+                  )
+                }
+              >
+                <Text style={styles.pillText}>More</Text>
               </TouchableOpacity>
             </View>
             {reminderPrefs.quietHours ? (
@@ -4274,13 +4306,7 @@ export default function ProfileScreen() {
                 </PickerField>
               </View>
             ) : null}
-            <Text style={styles.helpText}>
-              Quiet hours: a reminder that would arrive in this window waits until it ends, and says what
-              time it was for. A repeat that falls inside the window is skipped. A dose and an appointment
-              always arrive on time, because moving either one could matter more than the sleep. Every
-              reminder also has a Snooze {SNOOZE_MINUTES} min button, which briefly opens the app so it
-              works even when the app was closed.
-            </Text>
+            <Text style={styles.helpText}>Reminders wait until the quiet hours end.</Text>
             {/* Home screen widgets (L2, rebuild R1). Kept on this phone only
                 (widget_hide_health in DEVICE_LOCAL_META_KEYS). */}
             {Platform.OS === 'android' ? (
@@ -4291,25 +4317,41 @@ export default function ProfileScreen() {
                       Hide health details on widgets
                     </Text>
                   </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.pill}
+                    onPress={() =>
+                      showBackupAlert(
+                        'Hide health details on widgets',
+                        'Anybody who picks this phone up sees its home screen, so with this on the Next thing and ' +
+                          'Next dose widgets say only A dose or An appointment, and the fuel gauges widget shows no ' +
+                          'amounts. Meals, the grocery list, routines and Capture stay as they are.',
+                      )
+                    }
+                  >
+                    <Text style={styles.pillText}>More</Text>
+                  </TouchableOpacity>
                 </View>
-                <Text style={styles.helpText}>
-                  Hide health details on widgets: anybody who picks this phone up sees its home screen, so with
-                  this on the Next thing and Next dose widgets say only A dose or An appointment, and the fuel
-                  gauges widget shows no amounts. Meals, the grocery list, routines and Capture stay as they are.
-                </Text>
+                <Text style={styles.helpText}>With this on, widgets say only what kind of thing is next.</Text>
               </>
             ) : null}
-            <Text style={styles.helpText}>
-              Buttons on the reminder: a dose has Taken, a drink Drank it, a planned meal Ate it, a garden
-              task or something you noted down Done, upkeep Done today and a compost pile Turned it. Each
-              records the same thing as answering it where it is kept, without opening the app. Upkeep
-              that expires, bills, work benefits, appointments, counters and routines keep Snooze only,
-              because a button cannot ask for a new expiry date and nothing here records a bill as paid.
-            </Text>
-            <Text style={styles.helpText}>
-              When two or more reminders are waiting, one quiet line on your phone says how many. Tap it to
-              answer them all in one list. The same list is at the top of Home whenever anything is waiting.
-            </Text>
+            <TouchableOpacity
+              style={styles.checkinButton}
+              onPress={() =>
+                showBackupAlert(
+                  'Buttons on a reminder',
+                  'A dose has Taken, a drink Drank it, a planned meal Ate it, a garden task or something you noted ' +
+                    'down Done, upkeep Done today and a compost pile Turned it. Each records the same thing as ' +
+                    'answering it where it is kept, without opening the app. Your Week, appointments, bills, work ' +
+                    'benefits, counters, routines and upkeep that expires have Got it, which clears the reminder ' +
+                    'and records nothing, because nothing here records a bill as paid and a button cannot ask for a ' +
+                    'new expiry date. Most reminders also have Snooze. When two or more are waiting, one quiet line ' +
+                    'on your phone says how many; tap it to answer them all in one list, which is also at the top ' +
+                    'of Home.',
+                )
+              }
+            >
+              <Text style={styles.checkinButtonText}>What the Buttons on a Reminder Do</Text>
+            </TouchableOpacity>
             <TouchableOpacity style={styles.checkinButton} onPress={() => router.push('/app-status')}>
               <Text style={styles.checkinButtonText}>A Reminder Did Not Come</Text>
             </TouchableOpacity>
@@ -6641,6 +6683,11 @@ const styles = StyleSheet.create({
 
     ...textShadow,
 
+  },
+  // One reminder kind on Profile > Reminders: its switch, What it is, and
+  // its times when on.
+  reminderKind: {
+    marginBottom: 10,
   },
   pillRow: {
     flexDirection: 'row',

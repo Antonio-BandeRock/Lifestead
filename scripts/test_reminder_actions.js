@@ -141,7 +141,9 @@ for (const [kind, key] of Object.entries(expected)) check(`${kind} -> ${key}`, c
 check('the vault offer has its three answers', CATEGORY_ACTIONS.vaultOffer.join() === 'vaultSetUp,vaultNotNow,vaultStop');
 check('Set It Up waits for the next time the app is open', planReminderAction('vaultOffer', 'vaultSetUp') === null);
 check('the vault offer writes no record', planReminderAction('vaultOffer', 'vaultNotNow') === null);
-check('upkeep that expires gets Snooze only', categoryKeyFor('upkeep', false) === 'plain');
+check('upkeep that expires gets the plain set', categoryKeyFor('upkeep', false) === 'plain');
+check('the plain set is Got it and Snooze', CATEGORY_ACTIONS.plain.join() === 'gotIt,snooze');
+check('Got it writes nothing on any kind', ['week', 'appointment', 'bill', 'countdown', 'routine'].every((kind) => planReminderAction(kind, 'gotIt').write === 'nothing'));
 
 // Every button a kind carries has a plan, and every plan pairs with its own kind.
 for (const [kind, key] of Object.entries(expected)) {
