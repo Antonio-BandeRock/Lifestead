@@ -1,6 +1,7 @@
 import type { Ionicons } from '@expo/vector-icons';
 import type { ComponentProps } from 'react';
 import { APP_HELPS_ENTRIES } from './appHelps';
+import { readingTranslator } from './searchLanguage';
 import { BIG_PICTURE_ENTRIES } from './bigPicture';
 import { BODY_FAT_BIOLOGY_ENTRIES } from './bodyFatBiology';
 import { BODY_SYSTEMS_ENTRIES } from './bodySystems';
@@ -476,19 +477,43 @@ export function findDigestEntriesByIds(ids: string[]): AnyDigestEntry[] {
 // each entry's own searchable text exactly once (lazily, on first use),
 // so every search after the first reuses it instead of repeating the same
 // string work over an entry pool that's only grown.
-const digestSearchTextCache = new WeakMap<AnyDigestEntry, { haystack: string; title: string }>();
+//
+// 2026-10-26, Spanish first: when the app is in another language, the
+// translation of each searched field is added beside its English (see
+// lib/digest/searchLanguage.ts), and both the text and the query are
+// compared without accents, so "proteina" finds "proteína". The cache
+// remembers which language it was built in and rebuilds an entry once the
+// language changes.
+const digestSearchTextCache = new WeakMap<AnyDigestEntry, { haystack: string; title: string; language: string }>();
+
+function withoutAccents(text: string): string {
+  return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
 
 function digestSearchText(entry: AnyDigestEntry): { haystack: string; title: string } {
+  const translator = readingTranslator();
+  const language = translator?.language() ?? 'en';
   const cached = digestSearchTextCache.get(entry);
-  if (cached) return cached;
+  if (cached && cached.language === language) return cached;
 
+  const both = (fields: string[]): string[] => {
+    if (!translator || language === 'en') return fields;
+    const translated = fields.map((field) => (field ? translator.translate(field) : undefined)).filter((t): t is string => Boolean(t));
+    return [...fields, ...translated];
+  };
   const citationText = entry.citations.map((citation) => citation.source).join(' ');
-  const title = (isProblemFoodEntry(entry) ? entry.foodName : entry.title).toLowerCase();
-  const haystack = isProblemFoodEntry(entry)
-    ? [entry.foodName, entry.teaser, entry.problem, entry.mechanism, entry.swaps.join(' '), citationText].join(' ').toLowerCase()
-    : [entry.title, entry.teaser, entry.summary, citationText].join(' ').toLowerCase();
+  const titleText = isProblemFoodEntry(entry) ? entry.foodName : entry.title;
+  const title = withoutAccents(both([titleText]).join(' ').toLowerCase());
+  const haystack = withoutAccents(
+    (isProblemFoodEntry(entry)
+      ? [...both([entry.foodName, entry.teaser, entry.problem, entry.mechanism, ...entry.swaps]), citationText]
+      : [...both([entry.title, entry.teaser, entry.summary]), citationText]
+    )
+      .join(' ')
+      .toLowerCase(),
+  );
 
-  const computed = { haystack, title };
+  const computed = { haystack, title, language };
   digestSearchTextCache.set(entry, computed);
   return computed;
 }
@@ -593,6 +618,30 @@ const SEARCH_STOPWORDS = new Set([
   'please',
   'tell',
   'know',
+  // The same kind of filler in Spanish (2026-10-26), for a question typed
+  // while the app is in Spanish.
+  'el',
+  'la',
+  'los',
+  'las',
+  'un',
+  'una',
+  'de',
+  'del',
+  'y',
+  'que',
+  'en',
+  'mi',
+  'yo',
+  'tu',
+  'por',
+  'para',
+  'como',
+  'porque',
+  'pero',
+  'se',
+  'lo',
+  'al',
 ]);
 
 // Splits a raw query into real search terms -- lowercased, punctuation
@@ -601,8 +650,7 @@ const SEARCH_STOPWORDS = new Set([
 // code, not filtered here at all) can survive right alongside a whole
 // question's worth of filler getting stripped out around it.
 function extractSearchTerms(query: string): string[] {
-  return query
-    .toLowerCase()
+  return withoutAccents(query.toLowerCase())
     .replace(/[?!.,;:'"()]/g, ' ')
     .split(/\s+/)
     .map((term) => term.trim())

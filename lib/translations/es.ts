@@ -25,9 +25,9 @@
 // batch at a time by scripts/i18n_batch.js; the entries below were written
 // by hand and win over a part file. Food names are a table of their own,
 // ES_FOODS, keyed by the parts of a name between its commas.
-import { ES_FOODS, ES_PARTS } from './es/index';
+import { ES_FOODS, ES_PARTS, ES_READING } from './es/index';
 
-export { ES_FOODS };
+export { ES_FOODS, ES_READING };
 
 const BY_HAND: Readonly<Record<string, string>> = {
   // ---- The tabs (constants/tabs.ts) and TabHub's two extra tiles.

@@ -40,7 +40,9 @@
 // it. An element with no words of its own (an icon) is <0/>.
 import { cloneElement, isValidElement, type ReactElement, type ReactNode } from 'react';
 import { getLanguage, type AppLanguage } from './language';
-import { ES, ES_FOODS } from './translations/es';
+import { ES, ES_FOODS, ES_READING } from './translations/es';
+import { readingKey } from './readingKey';
+import { setReadingTranslator } from './digest/searchLanguage';
 import { ES_DATES, type DateWords } from './translations/esDates';
 
 type Table = Readonly<Record<string, string>>;
@@ -56,6 +58,15 @@ const TABLES: Record<Exclude<AppLanguage, 'en'>, Table> = {
 // round only when every part of it is found.
 const FOODS: Record<Exclude<AppLanguage, 'en'>, Table> = {
   es: ES_FOODS,
+};
+
+// THE READING (the conditions, Health Literacy, Earth Matters, Horticulture
+// and the recipes) is filed by a fingerprint of each piece's English
+// rather than by the English, since it runs to nearly three million
+// characters (lib/readingKey.ts). A piece is looked up there once the
+// table of the app's words has missed it.
+const READING: Record<Exclude<AppLanguage, 'en'>, Table> = {
+  es: ES_READING,
 };
 
 // DATES written in English by the app ("Oct 26", "Mon 26 Oct", "October
@@ -79,6 +90,7 @@ type Pattern = {
 type Compiled = {
   words: Table;
   foods: Table;
+  reading: Table;
   byFirst: Map<string, Pattern[]>;
   byLast: Map<string, Pattern[]>;
   /** Patterns with no whole word at either end: "{n} could not be opened. {why}". */
@@ -161,7 +173,7 @@ function compile(language: AppLanguage): Compiled | null {
     else index.set(key, [pattern]);
   }
   for (const list of [...byFirst.values(), ...byLast.values(), loose]) list.sort((a, b) => b.literal - a.literal);
-  const made: Compiled = { words, foods: FOODS[language], byFirst, byLast, loose, dates: DATES[language], memo: new Map() };
+  const made: Compiled = { words, foods: FOODS[language], reading: READING[language], byFirst, byLast, loose, dates: DATES[language], memo: new Map() };
   compiled.set(language, made);
   return made;
 }
@@ -336,7 +348,7 @@ function dateIn(table: Compiled, english: string, depth: number): string | undef
 
 function lookup(table: Compiled, english: string, depth: number): string | undefined {
   if (!english || !/[A-Za-z]/.test(english)) return undefined;
-  const found = exact(table.words, english) ?? foodName(table, english) ?? dateIn(table, english, depth);
+  const found = exact(table.words, english) ?? table.reading[readingKey(english)] ?? foodName(table, english) ?? dateIn(table, english, depth);
   if (found !== undefined) return found;
   if (depth > 4) return undefined;
   return byPattern(table, english, depth) ?? byPieces(table, english, depth);
@@ -353,6 +365,20 @@ export function translateIn(language: AppLanguage, english: string): string {
   table.memo.set(english, found);
   return found;
 }
+
+// Search Reading also searches the words on screen, so a search typed in
+// Spanish finds the Spanish (lib/digest/searchLanguage.ts). Only whole
+// pieces are handed over, the words table and then the reading table,
+// since the search reads every entry once and the memo above is kept for
+// what is drawn.
+setReadingTranslator({
+  language: () => getLanguage(),
+  translate: (english) => {
+    const table = compile(getLanguage());
+    if (!table) return undefined;
+    return exact(table.words, english) ?? table.reading[readingKey(english)];
+  },
+});
 
 /** Whether `language` has these words, for the coverage script and tests. */
 export function hasTranslation(language: AppLanguage, english: string): boolean {

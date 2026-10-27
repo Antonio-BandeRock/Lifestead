@@ -32,6 +32,15 @@ const SKIP = [
   path.join('lib', 'desktop', 'sqliteShim.ts'),
 ];
 
+// The reading's entries are translated by scripts/i18n_batch.js --reading,
+// but the names and descriptions around them (categories, topics, the
+// groups inside a topic) are ordinary words looked up like any other.
+const READING_FRAME = [
+  path.join('lib', 'digest', 'index.ts'),
+  path.join('lib', 'digest', 'categoryGrouping.ts'),
+  path.join('lib', 'digest', 'conditionGrouping.ts'),
+];
+
 const ENTITIES = { apos: "'", quot: '"', amp: '&', lt: '<', gt: '>', nbsp: ' ', rsquo: '’', lsquo: '‘', hellip: '…' };
 function decode(text) {
   return text.replace(/&(#x?[0-9a-f]+|\w+);/gi, (whole, name) => {
@@ -69,8 +78,16 @@ function walk(dir, files) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     const rel = path.relative(ROOT, full);
-    if (SKIP.some((skip) => rel === skip || rel.startsWith(skip + path.sep))) continue;
-    if (entry.isDirectory()) walk(full, files);
+    const skipped = SKIP.some((skip) => rel === skip || rel.startsWith(skip + path.sep));
+    if (entry.isDirectory()) {
+      if (skipped && READING_FRAME.some((file) => file.startsWith(rel + path.sep))) {
+        for (const file of READING_FRAME) if (file.startsWith(rel + path.sep)) files.push(path.join(ROOT, file));
+        continue;
+      }
+      if (!skipped) walk(full, files);
+      continue;
+    }
+    if (skipped) continue;
     else if (/\.tsx?$/.test(entry.name) && !entry.name.endsWith('.d.ts')) files.push(full);
   }
 }

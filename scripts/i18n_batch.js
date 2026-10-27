@@ -13,6 +13,12 @@
 //     place of punctuation, and writes lib/translations/es/part-NN.ts (or
 //     foods-NN.ts), then rebuilds lib/translations/es/index.ts.
 //
+//   --reading does the same for the reading (lib/digest: the conditions,
+//     Health Literacy, Earth Matters, Horticulture and the recipes), one
+//     "key|English" per line where key is lib/readingKey.ts's fingerprint,
+//     taken entry by entry so a batch reads as whole entries, and writes
+//     reading-NN.ts. Paper titles in the citations stay as published.
+//
 //   node scripts/i18n_batch.js status
 //     How much is left, by priority group.
 //
@@ -56,7 +62,7 @@ function existing() {
   const done = new Map();
   if (fs.existsSync(OUT_DIR)) {
     for (const name of fs.readdirSync(OUT_DIR)) {
-      if (/^(part|foods)-\d+\.ts$/.test(name)) {
+      if (/^(part|foods|reading)-\d+\.ts$/.test(name)) {
         for (const [k, v] of Object.entries(readPart(path.join(OUT_DIR, name)))) done.set(k, v);
       }
     }
@@ -138,15 +144,70 @@ function pending(foods) {
   return out;
 }
 
-function make(chars, foods) {
-  const list = pending(foods);
-  const prefix = foods ? 'foods' : 'part';
+// THE READING. Every entry in lib/digest, loaded by transpiling it, with
+// the strings a person reads taken field by field. Ids, links, keys the
+// code tests and the paper titles in citations are left out.
+const READING_SKIP = /^(id|category|overallTier|linkedCuratedRecipeId|linkedBuilderType|relatedIds|citations\.(url|source)|recipeCard\.safeForConditions|recipeCard\.dietTags|recipeCard\.conditionCautions\.\w+\.severity|recipeCard\.ingredients\.(foodId|category)|recipeCard\.checkIngredients\..*|relatedFoodNames)$/;
+let transpiled = null;
+
+function loadTs(abs) {
+  const ts = require('typescript');
+  transpiled = transpiled ?? new Map();
+  if (transpiled.has(abs)) return transpiled.get(abs).exports;
+  const file = [`${abs}.ts`, `${abs}.tsx`, path.join(abs, 'index.ts'), abs].find((f) => fs.existsSync(f) && fs.statSync(f).isFile());
+  if (!file) return {};
+  const out = ts.transpileModule(fs.readFileSync(file, 'utf8'), {
+    compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 },
+  }).outputText;
+  const mod = { exports: {} };
+  transpiled.set(abs, mod);
+  const stub = new Proxy({}, { get: () => () => ({}) });
+  new Function('exports', 'module', 'require', out)(mod.exports, mod, (name) =>
+    name.startsWith('.') ? loadTs(path.resolve(path.dirname(file), name)) : stub,
+  );
+  return mod.exports;
+}
+
+function readingPieces() {
+  const { ALL_DIGEST_ENTRIES } = loadTs(path.join(ROOT, 'lib', 'digest', 'index'));
+  const { readingKey } = loadTs(path.join(ROOT, 'lib', 'readingKey'));
+  const seen = new Set();
+  const out = [];
+  const walk = (value, at) => {
+    if (typeof value === 'string') {
+      if (READING_SKIP.test(at) || !/[A-Za-z]{2}/.test(value)) return;
+      const id = readingKey(value);
+      if (!seen.has(id)) {
+        seen.add(id);
+        out.push({ id, key: value });
+      }
+    } else if (Array.isArray(value)) value.forEach((item) => walk(item, at));
+    else if (value && typeof value === 'object') for (const [k, v] of Object.entries(value)) walk(v, at ? `${at}.${k}` : k);
+  };
+  for (const entry of ALL_DIGEST_ENTRIES) walk(entry, '');
+  return out;
+}
+
+function readingPending() {
+  const done = new Set();
+  if (fs.existsSync(OUT_DIR)) {
+    for (const name of fs.readdirSync(OUT_DIR)) {
+      if (/^reading-\d+\.ts$/.test(name)) for (const k of Object.keys(readPart(path.join(OUT_DIR, name)))) done.add(k);
+    }
+  }
+  const words = existing();
+  return readingPieces().filter((item) => !done.has(item.id) && !words.has(item.key));
+}
+
+function make(chars, foods, reading) {
+  const list = reading ? readingPending() : pending(foods);
+  const prefix = reading ? 'reading' : foods ? 'foods' : 'part';
   const number = nextNumber(prefix);
   const lines = [];
   let size = 0;
   for (const item of list) {
     if (size > 0 && size + item.key.length > chars) break;
-    lines.push(`${lines.length + 1}|${escape(item.key)}`);
+    lines.push(`${reading ? item.id : lines.length + 1}|${escape(item.key)}`);
     size += item.key.length;
   }
   const file = path.join(SCRATCH, `${prefix}-${number}.txt`);
@@ -158,7 +219,8 @@ const names = (text) => [...text.matchAll(/\{(\w+)\}/g)].map((m) => m[1]).sort()
 const tags = (text) => [...text.matchAll(/<\/?(\d+)\/?>/g)].map((m) => m[0]).sort().join(',');
 
 function merge(number) {
-  const prefix = process.argv.includes('--foods') ? 'foods' : 'part';
+  const reading = process.argv.includes('--reading');
+  const prefix = reading ? 'reading' : process.argv.includes('--foods') ? 'foods' : 'part';
   const source = fs.readFileSync(path.join(SCRATCH, `${prefix}-${number}.txt`), 'utf8').split('\n').filter(Boolean);
   const english = new Map(source.map((line) => {
     const at = line.indexOf('|');
@@ -178,7 +240,7 @@ function merge(number) {
     else if (names(en) !== names(spanish)) problems.push(`${id}: {names} differ: ${en} => ${spanish}`);
     else if (tags(en) !== tags(spanish)) problems.push(`${id}: tags differ: ${en} => ${spanish}`);
     else if (/[–—]| -- /.test(spanish) && !/[–—]| -- /.test(en)) problems.push(`${id}: a dash: ${spanish}`);
-    else out[en] = spanish;
+    else out[reading ? id : en] = spanish;
   }
   const missing = [...english.keys()].filter((id) => !answers.some((l) => l.startsWith(`${id}|`)));
   if (missing.length) problems.push(`missing ids: ${missing.join(' ')}`);
@@ -195,9 +257,10 @@ function merge(number) {
 }
 
 function writeIndex() {
-  const files = fs.readdirSync(OUT_DIR).filter((n) => /^(part|foods)-\d+\.ts$/.test(n)).sort();
+  const files = fs.readdirSync(OUT_DIR).filter((n) => /^(part|foods|reading)-\d+\.ts$/.test(n)).sort();
   const parts = files.filter((n) => n.startsWith('part'));
   const foods = files.filter((n) => n.startsWith('foods'));
+  const readings = files.filter((n) => n.startsWith('reading'));
   const ident = (n) => n.replace(/\.ts$/, '').replace('-', '_').toUpperCase();
   const lines = [
     '// Generated by scripts/i18n_batch.js; lists every part file.',
@@ -205,6 +268,7 @@ function writeIndex() {
     '',
     `export const ES_PARTS: Readonly<Record<string, string>> = Object.assign({}, ${parts.map(ident).join(', ') || '{}'});`,
     `export const ES_FOODS: Readonly<Record<string, string>> = Object.assign({}, ${foods.map(ident).join(', ') || '{}'});`,
+    `export const ES_READING: Readonly<Record<string, string>> = Object.assign({}, ${readings.map(ident).join(', ') || '{}'});`,
     '',
   ];
   fs.writeFileSync(path.join(OUT_DIR, 'index.ts'), lines.join('\n'));
@@ -217,12 +281,15 @@ function status() {
     for (const item of list) by.set(item.group, (by.get(item.group) ?? 0) + item.key.length);
     console.log(foods ? 'food parts:' : 'words:', list.length, 'keys', [...by].map(([g, c]) => `group ${g + 1}: ${c}`).join(', '));
   }
+  const left = readingPending();
+  const chars = left.reduce((n, item) => n + item.key.length, 0);
+  console.log('reading:', left.length, 'pieces,', chars, 'characters left of', readingPieces().length, 'pieces');
 }
 
 const [command, arg] = process.argv.slice(2);
 if (command === 'make') {
   const at = process.argv.indexOf('--chars');
-  make(at >= 0 ? Number(process.argv[at + 1]) : 25000, process.argv.includes('--foods'));
+  make(at >= 0 ? Number(process.argv[at + 1]) : 25000, process.argv.includes('--foods'), process.argv.includes('--reading'));
 } else if (command === 'merge') merge(String(arg).padStart(3, '0'));
 else if (command === 'index') writeIndex();
 else if (command === 'status') status();

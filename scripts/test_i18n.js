@@ -41,10 +41,16 @@ function load(relPath, stubs) {
   return module.exports;
 }
 
+const { readingKey } = load('lib/readingKey.ts', {});
+const searchLanguage = load('lib/digest/searchLanguage.ts', {});
+const READING_EN = 'Selenium lowers thyroid antibodies in several trials.';
+
 const { t, translateIn, translateChildren, hasTranslation } = load('lib/i18n.ts', {
   './language': { getLanguage: () => language },
+  './readingKey': { readingKey },
+  './digest/searchLanguage': searchLanguage,
   './translations/esDates': load('lib/translations/esDates.ts', {}),
-  './translations/es': { ES: TABLE, ES_FOODS: { Apple: 'Manzana', raw: 'cruda', 'with skin': 'con cáscara' } },
+  './translations/es': { ES: TABLE, ES_FOODS: { Apple: 'Manzana', raw: 'cruda', 'with skin': 'con cáscara' }, ES_READING: { [readingKey(READING_EN)]: 'El selenio baja los anticuerpos tiroideos en varios ensayos.' } },
   react: require('react'),
 });
 
@@ -55,6 +61,9 @@ function check(label, actual, expected) {
   console.log(`${ok ? 'ok  ' : 'FAIL'} ${label}${ok ? '' : ` (got ${JSON.stringify(actual)}, expected ${JSON.stringify(expected)})`}`);
 }
 
+check('the reading is found by its fingerprint', translateIn('es', READING_EN), 'El selenio baja los anticuerpos tiroideos en varios ensayos.');
+check('a fingerprint is the same every time', readingKey(READING_EN), readingKey(String(READING_EN)));
+check('changed English no longer matches its old reading', readingKey(READING_EN) === readingKey(`${READING_EN} `), false);
 check('a word in the table', translateIn('es', 'Save'), 'Guardar');
 check('a word not in the table stays English', translateIn('es', 'Plant a seed'), 'Plant a seed');
 check('English is never looked up', translateIn('en', 'Save'), 'Save');
@@ -104,7 +113,15 @@ const parts = load('lib/translations/es/index.ts', new Proxy({}, {
   has: () => true,
   get: (_, name) => load(`lib/translations/es/${name.replace('./', '')}.ts`, {}),
 }));
-const { ES } = load('lib/translations/es.ts', { './es/index': parts });
+const { ES, ES_READING } = load('lib/translations/es.ts', { './es/index': parts });
+let badReading = 0;
+for (const spanish of Object.values(ES_READING)) {
+  if (!spanish.trim() || /[–—]| -- /.test(spanish)) {
+    badReading += 1;
+    console.log(`FAIL reading entry ${JSON.stringify(spanish.slice(0, 80))}`);
+  }
+}
+check(`the Spanish reading's ${Object.keys(ES_READING).length} entries are well formed`, badReading, 0);
 const names = (text) => [...text.matchAll(/\{(\w+)\}/g)].map((match) => match[1]).sort().join(',');
 let bad = 0;
 for (const [english, spanish] of Object.entries(ES)) {
@@ -118,6 +135,16 @@ for (const [english, spanish] of Object.entries(ES)) {
   }
 }
 check(`the Spanish table's ${Object.keys(ES).length} entries are well formed`, bad, 0);
+
+// Search Reading reads the words on screen as well as the English beneath.
+language = 'es';
+const searching = searchLanguage.readingTranslator();
+check('the search is handed the language', searching && searching.language(), 'es');
+check('the search finds a translated piece of the reading', searching && searching.translate(READING_EN), 'El selenio baja los anticuerpos tiroideos en varios ensayos.');
+check('the search is told when nothing is written yet', searching && searching.translate('Plant a seed'), undefined);
+language = 'en';
+check('in English the search adds nothing', searching && searching.translate(READING_EN), undefined);
+language = 'es';
 
 if (failures > 0) {
   console.log(`\n${failures} check(s) failed.`);
