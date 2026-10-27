@@ -848,33 +848,34 @@ export default function ProfileScreen() {
   // Come in the Waiting for an Answer list, so the switches are in view
   // rather than folded away somewhere down the page.
   const { section: openSection, install: installParam } = useLocalSearchParams<{ section?: string; install?: string }>();
-  const appUpdatesCardY = useRef<number | null>(null);
   const scrollRef = useRef<ScrollView>(null);
-  const remindersCardY = useRef<number | null>(null);
   // Also opened straight onto App Lock (1.0.63.14) by the Your Story
-  // question about keeping records closed, where the vault is chosen.
-  const appLockCardY = useRef<number | null>(null);
-  // And onto Backup & Restore (1.0.68.11) by the setup before the app.
-  const backupCardY = useRef<number | null>(null);
-  useEffect(() => {
-    const target =
-      openSection === 'reminders'
-        ? { group: 'Your Health', section: 'reminders' as const, y: remindersCardY }
-        : openSection === 'applock'
-          ? { group: 'Device & Account', section: 'applock' as const, y: appLockCardY }
-          : openSection === 'backup'
-            ? { group: 'Device & Account', section: 'backup' as const, y: backupCardY }
-          : openSection === 'updates'
-            ? { group: 'Device & Account', section: 'app-updates' as const, y: appUpdatesCardY }
-            : null;
-    if (!target) return;
-    setCollapsedGroups(new Set(Object.keys(PROFILE_GROUP_ICONS).filter((g) => g !== target.group)));
-    setCollapsedSections(new Set(ALL_CARD_SECTION_KEYS.filter((k) => k !== target.section)));
-    const timer = setTimeout(() => {
-      if (target.y.current != null) scrollRef.current?.scrollTo({ y: target.y.current, animated: true });
-    }, 350);
-    return () => clearTimeout(timer);
-  }, [openSection]);
+  // question about keeping records closed, where the vault is chosen, and
+  // onto Backup & Restore (1.0.68.11) by the setup before the app.
+  // Reported 2026-10-27: setup's backup question landed at the top of
+  // Profile. Each card's onLayout y was measured inside its group, not on
+  // the page, so the scroll went to a spot near the top. The card's header
+  // is now measured in the window, the way a tapped header is, and this
+  // runs each time Profile comes into view with a section named.
+  useFocusEffect(
+    useCallback(() => {
+      const target =
+        openSection === 'reminders'
+          ? { group: 'Your Health', section: 'reminders' as const }
+          : openSection === 'applock'
+            ? { group: 'Device & Account', section: 'applock' as const }
+            : openSection === 'backup'
+              ? { group: 'Device & Account', section: 'backup' as const }
+              : openSection === 'updates'
+                ? { group: 'Device & Account', section: 'app-updates' as const }
+                : null;
+      if (!target) return;
+      setCollapsedGroups(new Set(Object.keys(PROFILE_GROUP_ICONS).filter((g) => g !== target.group)));
+      setCollapsedSections(new Set(ALL_CARD_SECTION_KEYS.filter((k) => k !== target.section)));
+      const timer = setTimeout(() => bringHeaderToTop(`card:${target.section}`), 400);
+      return () => clearTimeout(timer);
+    }, [openSection]),
+  );
   // A tap on the update-ready notification (lib/appUpdateWatcher.ts) lands
   // here with install=1 and goes straight to the usual question before the
   // restart, so the person is never restarted without being asked.
@@ -4086,7 +4087,7 @@ export default function ProfileScreen() {
           so garden tasks, bills, upkeep and work benefits arrived with
           the list. What did need adding is the nudge switch below, which
           is not a kind and governs all of them at once. */}
-      <View style={styles.card} onLayout={(event) => (remindersCardY.current = event.nativeEvent.layout.y)}>
+      <View style={styles.card}>
         {renderCardHeader('reminders', 'Reminders')}
         {!collapsedSections.has('reminders') ? (
           <View style={styles.cardBody}>
@@ -5480,7 +5481,7 @@ export default function ProfileScreen() {
 
       {/* App Lock, 2026-10-02: setting it up and its settings, in
           components/AppLockSettings.tsx. */}
-      <View style={styles.card} onLayout={(event) => (appLockCardY.current = event.nativeEvent.layout.y)}>
+      <View style={styles.card}>
         {renderCardHeader('applock', 'App Lock')}
         {!collapsedSections.has('applock') ? (
           <View style={styles.cardBody}>
@@ -5511,7 +5512,7 @@ export default function ProfileScreen() {
           ever checks for a JS update automatically when it first launches,
           never while already open, so this is the manual alternative to
           force-closing and relaunching just to find out. */}
-      <View style={styles.card} onLayout={(event) => (appUpdatesCardY.current = event.nativeEvent.layout.y)}>
+      <View style={styles.card}>
         {renderCardHeader('app-updates', 'App Updates')}
         {!collapsedSections.has('app-updates') ? (
           <View style={styles.cardBody}>
@@ -5541,7 +5542,7 @@ export default function ProfileScreen() {
           boundary named directly in the card's own text too: this backs up
           the data, not the actual photo files a saved dish/recipe photo
           may reference. */}
-      <View style={styles.card} onLayout={(event) => (backupCardY.current = event.nativeEvent.layout.y)}>
+      <View style={styles.card}>
         {renderCardHeader('backup', 'Backup & Restore')}
         {!collapsedSections.has('backup') ? (
           <View style={styles.cardBody}>
