@@ -39,6 +39,7 @@ import {
 import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { formatTime12 } from '../lib/timeOfDay';
 import { PopoverSelect } from './PopoverSelect';
+import { t, tl } from '../lib/i18n';
 
 /** Every half hour from 5 in the morning to 10 at night. */
 const TIME_OPTIONS = (() => {
@@ -224,7 +225,7 @@ export function PhotoSeriesBand({
             </View>
           )}
           <Text style={[styles.caption, muted]}>
-            {frame ? `${takenOnLabel(frame.takenOn, today)}, frame ${index + 1} of ${frames.length}` : ''}
+            {frame ? t('{taken}, frame {index} of {count}', { taken: tl(takenOnLabel(frame.takenOn, today)), index: index + 1, count: frames.length }) : ''}
           </Text>
           {frames.length > 1 ? (
             <View style={styles.controls}>

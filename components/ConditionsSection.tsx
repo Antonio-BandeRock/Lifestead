@@ -56,6 +56,7 @@ import { useWalkMark } from './WalkMark';
 import { ThumbRow } from './ThumbRow';
 import { VaultClosedBand } from './VaultClosedBand';
 import { useCategoryClosed } from '../lib/vaultSession';
+import { t, tl } from '../lib/i18n';
 
 // The 19 conditions, on the Life tab. Direct instruction, 2026-09-19:
 // "move Conditions from Digest to Life, all condition icons be changed to
@@ -686,9 +687,9 @@ export function ConditionsSection({
                       {member.relationship ? <Text style={styles.memberRelationship}>{`  ${member.relationship}`}</Text> : null}
                     </Text>
                     <Text style={styles.memberMeta}>
-                      {conditionNames.length === 0 ? 'Tracks no conditions.' : conditionNames.join(', ')}
-                      {shared > 0 ? ` ${shared === 1 ? 'One is' : `${shared} are`} also yours, shown above.` : ''}
-                      {member.includeInMealPlan ? '' : ' Not planned around.'}
+                      {conditionNames.length === 0 ? 'Tracks no conditions.' : conditionNames.map((name) => tl(name)).join(', ')}
+                      {shared > 0 ? ` ${t(shared === 1 ? 'One is also yours, shown above.' : '{count} are also yours, shown above.', { count: shared })}` : ''}
+                      {member.includeInMealPlan ? '' : ` ${t('Not planned around.')}`}
                     </Text>
                     {foodParts.length > 0 ? <Text style={styles.memberMeta}>{foodParts.join(' ')}</Text> : null}
                     {member.includeInMealPlan && tableParts.length > 0 ? (

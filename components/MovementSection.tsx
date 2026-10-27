@@ -41,6 +41,7 @@ import {
 import { isDesktopApp } from '../lib/desktop/bridge';
 import { EXERCISE_TYPE_NAMES, syncHealthConnect } from '../lib/healthSync';
 import { detectMeasurementSystemFromLocale, kgToLb } from '../lib/measurement';
+import { t, tl } from '../lib/i18n';
 
 // Movement: what the phone's health store has, read as is. Life's eighth
 // area, 2026-09-14, the JS half of the Health Connect rebuild.
@@ -478,7 +479,9 @@ export function MovementSection({ tabColor }: Props) {
                   <View style={styles.rowMain}>
                     <Text style={styles.rowTitle}>{title || typeName}</Text>
                     <Text style={styles.rowMeta}>
-                      {formatDay(workout.startedAt)} at {formatTime(workout.startedAt)}, {workout.value ?? 0} min{title && title !== typeName ? `, ${typeName.toLowerCase()}` : ''}
+                      {title && title !== typeName
+                        ? t('{day} at {time}, {minutes} min, {kind}', { day: formatDay(workout.startedAt), time: formatTime(workout.startedAt), minutes: workout.value ?? 0, kind: tl(typeName).toLowerCase() })
+                        : t('{day} at {time}, {minutes} min', { day: formatDay(workout.startedAt), time: formatTime(workout.startedAt), minutes: workout.value ?? 0 })}
                     </Text>
                     <RecordPhotos ownerKind="workout" ownerId={String(workout.id)} tabColor={tabColor} title={title || typeName} />
                   </View>

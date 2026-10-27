@@ -117,6 +117,7 @@ import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { VaultClosedBand } from '../../components/VaultClosedBand';
 import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
+import { t } from '../../lib/i18n';
 
 // Which vault categories each lens shows (lib/vault.ts, phase 2). My Meds
 // and Conditions say so inside their own lists, beside the tools that stay.
@@ -1770,7 +1771,7 @@ export default function LifeScreen() {
                 <View style={styles.barLabelRow}>
                   <Text style={styles.barLabel}>{financeCategoryLabel(row.category)}</Text>
                   <Text style={[styles.barValue, row.overspent && styles.statWarn]}>
-                    {formatAccountMoney(row.spent)} of {formatAccountMoney(row.limit)}
+                    {t('{spent} of {limit}', { spent: formatAccountMoney(row.spent), limit: formatAccountMoney(row.limit) })}
                   </Text>
                 </View>
                 <View style={styles.barTrack}>
@@ -1958,8 +1959,9 @@ export default function LifeScreen() {
                 <View style={styles.listMain}>
                   <Text style={styles.listTitle}>{fund.name}</Text>
                   <Text style={styles.listMeta}>
-                    {formatAccountMoney(fund.amount)}
-                    {fund.nextDue ? ` due ${shortDate(fund.nextDue)}` : ''}
+                    {fund.nextDue
+                      ? t('{amount} due {date}', { amount: formatAccountMoney(fund.amount), date: shortDate(fund.nextDue) })
+                      : formatAccountMoney(fund.amount)}
                     {fund.monthsUntilDue != null
                       ? fund.monthsUntilDue === 0
                         ? ' · this month'
@@ -1973,7 +1975,7 @@ export default function LifeScreen() {
                     </Text>
                   ) : null}
                 </View>
-                <Text style={styles.listAmount}>{formatAccountMoney(fund.monthlySetAside)}/mo</Text>
+                <Text style={styles.listAmount}>{t('{money}/mo', { money: formatAccountMoney(fund.monthlySetAside) })}</Text>
               </View>
             ))}
             <Text style={styles.footnote}>

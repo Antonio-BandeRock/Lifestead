@@ -183,6 +183,7 @@ import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { VaultLensFrame } from '../../components/VaultLensFrame';
 import { useWalkMark } from '../../components/WalkMark';
 import type { VaultCategory } from '../../lib/vault';
+import { t, tl } from '../../lib/i18n';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -2673,7 +2674,9 @@ function NewFoodsLens({
                     <Text style={styles.rowMeta}>
                       {stepped
                         ? 'Step by step:'
-                        : `Experiment${trial.measure ? `, watching ${trial.measure.toLowerCase()}` : ''}:`}
+                        : trial.measure
+                          ? t('Experiment, watching {measure}:', { measure: tl(trial.measure).toLowerCase() })
+                          : 'Experiment:'}
                     </Text>
                     {experimentResults[trial.id].map((line) => (
                       <Text key={line} style={styles.rowMeta}>

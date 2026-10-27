@@ -46,6 +46,7 @@ import { PopoverSelect } from './PopoverSelect';
 import { QuickAreaForm } from './QuickAreaForm';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
+import { t } from '../lib/i18n';
 
 // Garden > Growing Conditions > Sensors on Your Network (I20, 2026-09-28):
 // an Ecowitt gateway read over the home network while the app is open.
@@ -500,7 +501,7 @@ export function EcowittGatewaySection(props: {
               </Text>
             ) : polling.lastLine ? (
               <Text style={styles.bodyText}>
-                {polling.lastLine} {polling.lastReadAt ? `Last read ${when(polling.lastReadAt)}.` : ''}
+                {polling.lastLine} {polling.lastReadAt ? t('Last read {when}.', { when: when(polling.lastReadAt) }) : ''}
               </Text>
             ) : null}
             {entry.readsHere && !sends ? (

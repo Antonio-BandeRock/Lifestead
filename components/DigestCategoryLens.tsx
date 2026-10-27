@@ -24,6 +24,7 @@ import {
   type SearchMatchInfo,
 } from '../lib/digest';
 import { routeForDigestEntry } from '../lib/digestNavigation';
+import { t } from '../lib/i18n';
 
 // One reading category as a lens on whichever tab it lives on, 2026-09-19.
 //
@@ -473,7 +474,7 @@ export function DigestSearchLens({
           <Text style={styles.resultCount}>
             {results.length === 0
               ? `No matches for “${trimmed}”.`
-              : `${results.length} match${results.length === 1 ? '' : 'es'}`}
+              : t(results.length === 1 ? '{count} match' : '{count} matches', { count: results.length })}
           </Text>
         ) : null}
       </View>

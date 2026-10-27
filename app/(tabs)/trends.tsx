@@ -175,6 +175,7 @@ import { VaultClosedBand } from '../../components/VaultClosedBand';
 import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
 import { useListedClosed } from '../../lib/vaultSession';
+import { t } from '../../lib/i18n';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -3174,8 +3175,12 @@ export default function TrendsScreen() {
                   {eatingWindowTrend && eatingWindowTrend.totalMeals > 0 ? (
                     <Text style={styles.caption}>
                       {eatingWindowTrend.totalExceptions === 0
-                        ? `All ${eatingWindowTrend.totalMeals} scheduled ${eatingWindowTrend.totalMeals === 1 ? 'meal' : 'meals'} in this range fell inside your window.`
-                        : `${eatingWindowTrend.totalExceptions} of ${eatingWindowTrend.totalMeals} scheduled meals kept outside your window, across ${eatingWindowTrend.daysWithExceptions} ${eatingWindowTrend.daysWithExceptions === 1 ? 'day' : 'days'}.`}
+                        ? t(eatingWindowTrend.totalMeals === 1 ? 'The one scheduled meal in this range fell inside your window.' : 'All {count} scheduled meals in this range fell inside your window.', { count: eatingWindowTrend.totalMeals })
+                        : t(eatingWindowTrend.daysWithExceptions === 1 ? '{kept} of {count} scheduled meals kept outside your window, across {days} day.' : '{kept} of {count} scheduled meals kept outside your window, across {days} days.', {
+                            kept: eatingWindowTrend.totalExceptions,
+                            count: eatingWindowTrend.totalMeals,
+                            days: eatingWindowTrend.daysWithExceptions,
+                          })}
                     </Text>
                   ) : null}
                   <Text style={styles.caption}>
@@ -3441,7 +3446,7 @@ export default function TrendsScreen() {
                                     {day.checkinCount === 0
                                       ? 'No check-ins logged on these days.'
                                       : day.negativeShare === null
-                                        ? `Only ${day.checkinCount} check-${day.checkinCount === 1 ? 'in' : 'ins'} here, too few to work out a share from.`
+                                        ? t(day.checkinCount === 1 ? 'Only {count} check-in here, too few to work out a share from.' : 'Only {count} check-ins here, too few to work out a share from.', { count: day.checkinCount })
                                         : `${day.negativeCount} of ${day.checkinCount} check-ins reported something off (${Math.round(
                                             day.negativeShare * 100,
                                           )}%).`}

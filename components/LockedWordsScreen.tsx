@@ -21,6 +21,7 @@ import { setLockedCaptureShowing } from '../lib/lockedCaptures';
 import { FLARE_FOLLOW_UP_KIND } from '../lib/reminderActions';
 import { handInReminderWords } from '../lib/reminderNotifications';
 import LockedCapture from '../modules/locked-capture';
+import {  } from '../lib/i18n';
 
 type Props = { identifier?: string; title?: string; data?: string };
 
@@ -173,7 +174,9 @@ export function LockedWordsScreen({ identifier, title, data: rawData }: Props) {
               <Text style={styles.heard}>{text.trim()}</Text>
               <Text style={styles.hint}>
                 {stage.how === 'sealed'
-                  ? `It is sealed on this phone and written ${onFlare ? 'into the flare' : 'as a check-in note'} the next time Lifestead is unlocked, with the time you saved it.`
+                  ? onFlare
+                    ? 'It is sealed on this phone and written into the flare the next time Lifestead is unlocked, with the time you saved it.'
+                    : 'It is sealed on this phone and written as a check-in note the next time Lifestead is unlocked, with the time you saved it.'
                   : onFlare
                     ? 'It is added to the flare\'s notes in Signals.'
                     : 'It is saved as a check-in note in Signals.'}

@@ -18,6 +18,7 @@ import { AppTextInput } from './AppTextInput';
 import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, HomeSectionBand } from './HomeSectionBand';
 import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
+import { t, tl } from '../lib/i18n';
 
 // My Whole Foods: what the person has on hand from their own garden, and
 // from other people's.
@@ -165,7 +166,11 @@ export function MyWholeFoodsView({ onClose, onChanged }: { onClose: () => void; 
           </Text>
           <Text style={styles.rowMeta} numberOfLines={2}>
             {showRemaining
-              ? `${formatQuantity(harvest.quantityRemaining, harvest.unit)} of ${formatQuantity(harvest.quantity, harvest.unit)} left, harvested ${harvest.harvestedAt.slice(0, 10)}`
+              ? t('{left} of {total} left, harvested {date}', {
+                  left: formatQuantity(harvest.quantityRemaining, harvest.unit),
+                  total: formatQuantity(harvest.quantity, harvest.unit),
+                  date: harvest.harvestedAt.slice(0, 10),
+                })
               : `${formatQuantity(harvest.quantity, harvest.unit)}, harvested ${harvest.harvestedAt.slice(0, 10)}, all used`}
           </Text>
         </View>
@@ -184,8 +189,13 @@ export function MyWholeFoodsView({ onClose, onChanged }: { onClose: () => void; 
       <>
         {valuation.valued.map((entry, index) => (
           <Text key={`${what}-${entry.foodName}-${index}`} style={styles.rowMeta}>
-            {formatQuantity(entry.quantity, entry.unit)} of {entry.foodName} at the {formatTradeMoney(entry.pricePaid)}{' '}
-            {perUnit(entry.unit)} you paid on {entry.pricedOn}
+            {t('{amount} of {food} at the {price} {perUnit} you paid on {date}', {
+              amount: formatQuantity(entry.quantity, entry.unit),
+              food: tl(entry.foodName),
+              price: formatTradeMoney(entry.pricePaid),
+              perUnit: tl(perUnit(entry.unit)),
+              date: entry.pricedOn,
+            })}
           </Text>
         ))}
         {valuation.unvalued.length > 0 ? (

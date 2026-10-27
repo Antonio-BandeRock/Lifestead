@@ -4,6 +4,9 @@
 //   node scripts/i18n_coverage.js --missing app/profile.tsx
 //                                            the English still missing in
 //                                            one file or folder, one per line
+//   node scripts/i18n_coverage.js --where [path]
+//                                            the same, each with the file, line
+//                                            and source it comes from
 //   node scripts/i18n_coverage.js --json out.json [path]
 //                                            the missing English as a JSON
 //                                            array, ready to be translated
@@ -30,15 +33,36 @@ const ROOT = path.join(__dirname, '..');
 const FOLDERS = ['app', 'components', 'constants', 'hooks', 'lib'];
 const SKIP = [path.join('lib', 'digest'), path.join('lib', 'translations'), path.join('lib', 'desktop')];
 
-function loadTable() {
-  const file = path.join(ROOT, 'lib', 'translations', 'es.ts');
+// Loads es.ts together with the part files it imports from lib/translations/es,
+// which is where nearly the whole table lives.
+function loadModule(file, stubs = {}) {
   const source = fs.readFileSync(file, 'utf8');
   const { outputText } = ts.transpileModule(source, {
     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 },
   });
   const module = { exports: {} };
-  new Function('exports', 'module', 'require', outputText)(module.exports, module, () => ({}));
-  return module.exports.ES;
+  const requireRelative = (name) => {
+    if (stubs[name]) return stubs[name];
+    if (!name.startsWith('.')) return {};
+    const base = path.join(path.dirname(file), name);
+    const found = [base + '.ts', path.join(base, 'index.ts')].find((candidate) => fs.existsSync(candidate));
+    return found ? loadModule(found, stubs) : {};
+  };
+  new Function('exports', 'module', 'require', outputText)(module.exports, module, requireRelative);
+  return module.exports;
+}
+
+function loadTable() {
+  return loadModule(path.join(ROOT, 'lib', 'translations', 'es.ts')).ES;
+}
+
+// lib/i18n.ts itself, so a sentence is counted the way the app looks it up.
+function loadLookup() {
+  const stubs = {
+    react: { cloneElement: (element) => element, isValidElement: () => false },
+    './language': { getLanguage: () => 'es' },
+  };
+  return loadModule(path.join(ROOT, 'lib', 'i18n.ts'), stubs).hasTranslation;
 }
 
 const ENTITIES = { apos: "'", quot: '"', amp: '&', lt: '<', gt: '>', nbsp: ' ', rsquo: '’', lsquo: '‘', hellip: '…' };
@@ -84,14 +108,67 @@ function walk(dir, files) {
   }
 }
 
+// A Text whose children mix words and values reaches lib/i18n.ts as one
+// sentence, so it is counted as one: each value becomes {} and a value that
+// is one of two quoted words ('day' or 'days', '' or 's') gives a sentence
+// for each, since the table needs an entry for each.
+const MAX_VARIANTS = 8;
+function literalOf(expression) {
+  if (!expression) return null;
+  if (ts.isParenthesizedExpression(expression)) return literalOf(expression.expression);
+  if (ts.isStringLiteral(expression) || ts.isNoSubstitutionTemplateLiteral(expression)) return [expression.text];
+  // ` · ${label}` keeps its words, so the middle dot it adds is seen.
+  if (ts.isTemplateExpression(expression)) {
+    return [expression.head.text + expression.templateSpans.map((span) => '{}' + span.literal.text).join('')];
+  }
+  if (ts.isConditionalExpression(expression)) {
+    const a = literalOf(expression.whenTrue);
+    const b = literalOf(expression.whenFalse);
+    if (a && b) return [...a, ...b];
+  }
+  return null;
+}
+
+function sentencesOf(element) {
+  const children = element.children;
+  if (children.some((child) => ts.isJsxElement(child) || ts.isJsxSelfClosingElement(child) || ts.isJsxFragment(child))) return null;
+  const hasValue = children.some((child) => ts.isJsxExpression(child) && child.expression && !literalOf(child.expression));
+  const hasChoice = children.some((child) => ts.isJsxExpression(child) && literalOf(child.expression)?.length > 1);
+  if (!hasValue && !hasChoice) return null;
+  let variants = [''];
+  for (const child of children) {
+    let options;
+    if (ts.isJsxText(child)) options = [jsxString(child.text)];
+    else if (ts.isJsxExpression(child)) options = child.expression ? literalOf(child.expression) ?? ['{}'] : [''];
+    else options = [''];
+    const next = [];
+    for (const start of variants) for (const option of options) next.push(start + option);
+    variants = next.slice(0, MAX_VARIANTS);
+  }
+  const out = [...new Set(variants.map((variant) => variant.trim()))].filter((variant) => /[A-Za-z]/.test(variant.replace(/\{\}/g, '')));
+  return out.length ? out : null;
+}
+
 function wordsIn(file) {
   const source = fs.readFileSync(file, 'utf8');
   const sf = ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true, file.endsWith('x') ? ts.ScriptKind.TSX : ts.ScriptKind.TS);
   const found = [];
   const visit = (node) => {
+    if (ts.isJsxElement(node)) {
+      const sentences = sentencesOf(node);
+      if (sentences) {
+        const at = `${path.relative(ROOT, file)}:${sf.getLineAndCharacterOfPosition(node.getStart()).line + 1}`;
+        const code = node.getText().replace(/\s+/g, ' ').slice(0, 400);
+        for (const sentence of sentences) found.push({ sentence, at, code });
+        node.children.forEach((child) => {
+          if (!ts.isJsxText(child)) visit(child);
+        });
+        return;
+      }
+    }
     if (ts.isJsxText(node)) {
       const text = jsxString(node.text);
-      if (/[A-Za-z]/.test(text)) found.push(text.trim());
+      if (/[A-Za-z]/.test(text)) found.push({ sentence: text.trim(), at: `${path.relative(ROOT, file)}:${sf.getLineAndCharacterOfPosition(node.getStart()).line + 1}`, code: text.trim() });
     } else if (
       ts.isPropertyAssignment(node) &&
       (ts.isIdentifier(node.name) && (node.name.text === 'label' || node.name.text === 'title')) &&
@@ -121,7 +198,8 @@ function placeholders(text) {
 const args = process.argv.slice(2);
 const missingAt = args.indexOf('--missing');
 const jsonAt = args.indexOf('--json');
-const scope = missingAt >= 0 ? args[missingAt + 1] : jsonAt >= 0 ? args[jsonAt + 2] : undefined;
+const whereAt = args.indexOf('--where');
+const scope = whereAt >= 0 ? args[whereAt + 1] : missingAt >= 0 ? args[missingAt + 1] : jsonAt >= 0 ? args[jsonAt + 2] : undefined;
 
 const table = loadTable();
 let problems = 0;
@@ -138,22 +216,35 @@ for (const [english, spanish] of Object.entries(table)) {
 const files = [];
 for (const folder of FOLDERS) walk(path.join(ROOT, folder), files);
 
-const has = (text) => table[text] !== undefined;
+// A sentence is covered when lib/i18n.ts finds it, with a number standing in
+// for each value. A value that is itself words is looked up on its own at
+// run time, so a number is the case the table has to cover.
+const hasTranslation = loadLookup();
+const hasSentence = (sentence) => hasTranslation('es', sentence.replace(/{}/g, '7'));
+const has = (item) => hasSentence(typeof item === 'string' ? item : item.sentence);
 const totals = {};
 const missing = new Set();
+const where = new Map();
 for (const file of files) {
   const rel = path.relative(ROOT, file);
   const top = rel.split(path.sep)[0];
   const inScope = !scope || rel === path.normalize(scope) || rel.startsWith(path.normalize(scope) + path.sep);
   totals[top] = totals[top] || { strings: new Set(), done: new Set() };
-  for (const text of wordsIn(file)) {
+  for (const item of wordsIn(file)) {
+    const text = typeof item === 'string' ? item : item.sentence;
     totals[top].strings.add(text);
-    if (has(text)) totals[top].done.add(text);
-    else if (inScope) missing.add(text);
+    if (has(item)) totals[top].done.add(text);
+    else if (inScope) {
+      missing.add(text);
+      if (typeof item !== 'string' && !where.has(text)) where.set(text, `${item.at}  ${item.code}`);
+    }
   }
 }
 
-if (missingAt >= 0) {
+if (whereAt >= 0) {
+  for (const text of missing) console.log(`${text}
+    ${where.get(text) ?? ''}`);
+} else if (missingAt >= 0) {
   for (const text of missing) console.log(text);
 } else if (jsonAt >= 0) {
   fs.writeFileSync(args[jsonAt + 1], JSON.stringify([...missing], null, 2) + '\n');

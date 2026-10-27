@@ -1387,7 +1387,7 @@ export function ScanProductView({
       <ScrollView style={styles.screen} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
         <View style={styles.panel}>
         <Text style={styles.title}>
-          {ingredientsAttempts.length} photo{ingredientsAttempts.length === 1 ? '' : 's'} of up to {MAX_INGREDIENT_ANGLES}
+          {t(ingredientsAttempts.length === 1 ? '{count} photo of up to {max}' : '{count} photos of up to {max}', { count: ingredientsAttempts.length, max: MAX_INGREDIENT_ANGLES })}
         </Text>
         <Text style={styles.text}>
           {ingredientsAttempts.length > 1
@@ -1670,7 +1670,7 @@ export function ScanProductView({
         <Text style={styles.sectionLabel}>
           {additiveFlags.length + conditionFlags.length === 0
             ? 'Nothing flagged'
-            : `${additiveFlags.length + conditionFlags.length} thing${additiveFlags.length + conditionFlags.length === 1 ? '' : 's'} to be aware of`}
+            : t(additiveFlags.length + conditionFlags.length === 1 ? '{count} thing to be aware of' : '{count} things to be aware of', { count: additiveFlags.length + conditionFlags.length })}
         </Text>
         {additiveFlags.map((flag, index) => (
           <TouchableOpacity

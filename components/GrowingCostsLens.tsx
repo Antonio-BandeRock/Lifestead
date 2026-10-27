@@ -50,6 +50,7 @@ import { ThumbEndRow } from './ThumbEndRow';
 import { VaultClosedBand } from './VaultClosedBand';
 import { useOnVaultChange } from '../lib/vaultReads';
 import { useWalkMark } from './WalkMark';
+import { t, tl } from '../lib/i18n';
 
 // Growing Costs, a lens of Garden.
 //
@@ -409,8 +410,9 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
                 <Text style={styles.fieldLabel}>By where it grows</Text>
                 {byLocation.map((location) => (
                   <Text key={location.locationType} style={styles.bodyText}>
-                    {location.label}
-                    {location.areaCount === 1 ? '' : ` (${location.areaCount} areas)`}: {describeNetShort(location.summary)}
+                    {location.areaCount === 1
+                      ? t('{label}: {net}', { label: tl(location.label), net: tl(describeNetShort(location.summary)) })
+                      : t('{label} ({count} areas): {net}', { label: tl(location.label), count: location.areaCount, net: tl(describeNetShort(location.summary)) })}
                   </Text>
                 ))}
               </View>
@@ -451,7 +453,7 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
                   <Text style={styles.captionText}>
                     {counts}
                     {area.summary.unpricedCount > 0
-                      ? `. ${area.summary.unpricedCount === 1 ? 'One' : area.summary.unpricedCount} ${area.summary.unpricedCount === 1 ? 'is' : 'are'} counted without a recorded price.`
+                      ? `. ${t(area.summary.unpricedCount === 1 ? 'One is counted without a recorded price.' : '{count} are counted without a recorded price.', { count: area.summary.unpricedCount })}`
                       : ''}
                   </Text>
                 </View>

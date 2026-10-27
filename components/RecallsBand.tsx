@@ -30,6 +30,7 @@ import {
 } from '../lib/recallsDb';
 import { TabBand } from './TabBand';
 import { HOME_BAND_GAP } from './HomeSectionBand';
+import { t } from '../lib/i18n';
 
 // Recalls (A14): the FDA recalls of the past year that name a medicine being
 // tracked or a food that was scanned. One band, on Life > My Meds, holding
@@ -135,7 +136,7 @@ export function RecallsBand({ folds, tabColor, reloadKey }: { folds: Folds; tabC
                   {med.byName.length > 0 ? (
                     <View style={styles.card}>
                       <Text style={styles.title}>
-                        {med.byName.length === 1 ? `A recall may be about your ${med.name}` : `${med.byName.length} recalls may be about your ${med.name}`}
+                        {med.byName.length === 1 ? `A recall may be about your ${med.name}` : t('{count} recalls may be about your {name}', { count: med.byName.length, name: med.name })}
                       </Text>
                       <Text style={styles.body}>
                         {med.byName.length === 1 ? 'It names' : 'They name'} {med.byName[0].matchedOn}, from {firms.slice(0, 4).join(', ')}

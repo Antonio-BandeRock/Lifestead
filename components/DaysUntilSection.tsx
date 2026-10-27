@@ -104,6 +104,7 @@ import { PopoverSelect } from './PopoverSelect';
 import { RecordPhotos } from './RecordPhotos';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
+import { t, tl } from '../lib/i18n';
 
 const PRIMARY_BUTTON_BACKGROUND = colors.buttonColor;
 const WHOLE_AREA = '__whole_area__';
@@ -502,7 +503,7 @@ export function DaysUntilSection({
         <TouchableOpacity onPress={openSeeAll}>
           <Text style={styles.linkText}>
             {heldBack > 0
-              ? `${heldBack} more running, and every counter, on ${seeAllWhere}`
+              ? t('{count} more running, and every counter, on {where}', { count: heldBack, where: tl(seeAllWhere) })
               : `Every counter, finished ones too, on ${seeAllWhere}`}
           </Text>
         </TouchableOpacity>

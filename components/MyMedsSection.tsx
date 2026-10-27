@@ -63,6 +63,7 @@ import { VaultClosedBand } from './VaultClosedBand';
 import { useCategoryClosed } from '../lib/vaultSession';
 import { explainNotYet } from '../lib/notYet';
 import { matchSupplementForm, readSpokenSupplementLabel } from '../lib/spokenSupplement';
+import { t, tl } from '../lib/i18n';
 
 // My Meds, the registry of everything a person takes: prescriptions, OTC
 // drugs and supplements, each with its dose, form, timing rules, interactions
@@ -731,8 +732,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
                     ? ingredients.map((ingredient) => (
                         <View key={ingredient.id}>
                           <Text style={styles.myMedsResearchLabel}>
-                            {nutrientDisplayName(ingredient.nutrientCode)}: {ingredient.amountPerUnit}
-                            {ingredient.unit}/dose
+                            {t('{nutrient}: {amount}{unit}/dose', { nutrient: tl(nutrientDisplayName(ingredient.nutrientCode)), amount: ingredient.amountPerUnit, unit: ingredient.unit })}
                           </Text>
                           {renderNutrientResearchCard(ingredient.nutrientCode, ingredient.supplementForm ?? '')}
                         </View>

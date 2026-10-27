@@ -21,6 +21,7 @@ import {
 import type { BuilderFavoriteItemType } from '../lib/db';
 import { isSideDish } from '../lib/recipeDishRole';
 import { useWalkMark } from './WalkMark';
+import { t, tl } from '../lib/i18n';
 
 // The curated recipes, on the Food tab, grouped under the builder that
 // makes them. Direct instruction, 2026-09-18: "I would like the System
@@ -424,8 +425,8 @@ export function SystemRecipesView({
             {dietFilter || searchResults ? (
               <Text style={styles.resultCount}>
                 {searchResults
-                  ? `${searchResults.length} ${searchResults.length === 1 ? 'recipe' : 'recipes'} found`
-                  : `${filteredTotal} ${filteredTotal === 1 ? 'recipe' : 'recipes'} for ${dietFilter}`}
+                  ? t(searchResults.length === 1 ? '{count} recipe found' : '{count} recipes found', { count: searchResults.length })
+                  : t(filteredTotal === 1 ? '{count} recipe for {diet}' : '{count} recipes for {diet}', { count: filteredTotal, diet: tl(dietFilter) })}
               </Text>
             ) : null}
           </View>

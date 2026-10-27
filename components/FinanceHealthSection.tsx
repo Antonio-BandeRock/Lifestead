@@ -38,6 +38,7 @@ import { parsePriceInput } from '../lib/groceryList';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { useWalkMark } from './WalkMark';
+import { t } from '../lib/i18n';
 
 // The health-money half of Finances, 2026-09-05. Pulled into its own
 // component rather than added to app/(tabs)/life.tsx because it is a
@@ -231,8 +232,7 @@ export function FinanceHealthSection({ tabColor }: Props) {
         <View style={styles.barLabelRow}>
           <Text style={styles.barLabel}>{label}</Text>
           <Text style={styles.barValue}>
-            {formatHealthMoney(met)}
-            {limit != null ? ` of ${formatHealthMoney(limit)}` : ''}
+            {limit != null ? t('{met} of {limit}', { met: formatHealthMoney(met), limit: formatHealthMoney(limit) }) : formatHealthMoney(met)}
           </Text>
         </View>
         <View style={styles.barTrack}>

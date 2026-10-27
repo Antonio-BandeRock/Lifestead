@@ -53,6 +53,7 @@ import { PopoverSelect } from './PopoverSelect';
 import { makeTabBandStyles } from './TabBand';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
+import { t } from '../lib/i18n';
 
 const TAB_COLOR = colors.tabGarden;
 // 1.0.61.7, extended to every Garden lens in 1.0.61.8: the calm look
@@ -380,7 +381,7 @@ function UseList({ uses, unit }: { uses: SeedUse[]; unit: SeedUnit | null }) {
         <Text key={use.id} style={styles.captionText}>
           {`${dateLabel(use.usedOn)} ${use.usedOn.slice(0, 4)}`}
           {use.amount !== null ? `, ${formatAmount(use.amount, unit)}` : ''}
-          {use.plantingLabel === null ? ', planting since removed' : use.plantingLabel ? `, in ${use.plantingLabel}` : ''}
+          {use.plantingLabel === null ? ', planting since removed' : use.plantingLabel ? t(', in {planting}', { planting: use.plantingLabel }) : ''}
         </Text>
       ))}
     </>

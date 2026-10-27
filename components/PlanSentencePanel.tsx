@@ -22,6 +22,7 @@ import {
 } from '../lib/planSentence';
 import { explainNotYet } from '../lib/notYet';
 import { syncReminderNotifications } from '../lib/reminderNotifications';
+import { t, tl } from '../lib/i18n';
 
 type Props = {
   text: string;
@@ -97,7 +98,7 @@ export function PlanSentencePanel({ text, now, vocabulary, keepReminding, disabl
       ) : null}
       {reading.pieces.map((piece) => (
         <Text key={`${piece.words}-${piece.reads}`} style={styles.piece}>
-          “{piece.words}” read as {piece.reads}.
+          {t('“{words}” read as {reads}.', { words: piece.words, reads: tl(piece.reads) })}
         </Text>
       ))}
       {reading.timeAssumed ? <Text style={styles.piece}>No time was said, so it is set for 9:00 AM.</Text> : null}

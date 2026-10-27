@@ -240,6 +240,7 @@ import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { VaultClosedBand } from '../../components/VaultClosedBand';
 import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
+import { t } from '../../lib/i18n';
 
 // What Home shows that the vault can hold: check-ins and flares, the
 // morning readings, the week, pacing and the assessment banner.
@@ -3349,7 +3350,7 @@ export default function HomeScreen() {
         activeOpacity={0.75}
       >
         <Text style={[styles.trendNumber, { color: tabColorFor('/trends') }]}>
-          {variety.distinctThisWeek == null ? 'Nothing logged this week yet' : `${variety.distinctThisWeek} different ${variety.distinctThisWeek === 1 ? 'food' : 'foods'}`}
+          {variety.distinctThisWeek == null ? 'Nothing logged this week yet' : t(variety.distinctThisWeek === 1 ? '{count} different food' : '{count} different foods', { count: variety.distinctThisWeek })}
         </Text>
         <Text style={[styles.trendDelta, { color: tabColorFor('/trends') }]}>{variety.line}</Text>
         {variety.nearThing ? (
@@ -4025,9 +4026,11 @@ export default function HomeScreen() {
       <View style={styles.bandBody}>
         <Text style={styles.logAgainCaption}>
           {summary
-            ? `${summary.checkedCount} of ${summary.itemCount} in the cart${remaining > 0 ? `, ${remaining} to go` : ''}.${
-                summary.list.storeName ? ` At ${summary.list.storeName}.` : ''
-              }`
+            ? `${t(remaining > 0 ? '{checked} of {total} in the cart, {remaining} to go.' : '{checked} of {total} in the cart.', {
+                checked: summary.checkedCount,
+                total: summary.itemCount,
+                remaining,
+              })}${summary.list.storeName ? ` ${t('At {store}.', { store: summary.list.storeName })}` : ''}`
             : 'Turn the next few days of scheduled meals into a list you can shop from, priced and checked off as you go.'}
         </Text>
         <TouchableOpacity

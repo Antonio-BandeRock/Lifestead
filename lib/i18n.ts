@@ -106,7 +106,11 @@ function compile(language: AppLanguage): Compiled | null {
     parts.forEach((part, index) => {
       if (index % 2 === 1) {
         names.push(part);
-        source += '(.+?)';
+        // A value glued to the word before it ("day{value}", "Result{value}")
+        // is a suffix that may be nothing: "1 day" and "3 days" are one entry.
+        // So is a value straight after another value ("{date}{value}").
+        const glued = /\S$/.test(parts[index - 1]) || (index > 1 && parts[index - 1] === '');
+        source += glued ? '(.*?)' : '(.+?)';
       } else {
         source += escapeRegex(part);
         literal += part.replace(/\s/g, '').length;
@@ -118,7 +122,10 @@ function compile(language: AppLanguage): Compiled | null {
     const tail = parts[parts.length - 1].trim() ? lastWord(parts[parts.length - 1]) : '';
     // A pattern whose first word is a word sits under it; one that starts
     // with a value sits under its last word.
-    const [index, key] = head ? [byFirst, head] : [byLast, tail];
+    // One that ends "{value}." sits under its last mark, and needs words.
+    const marksOnly = !head && !/[a-z0-9]/i.test(tail);
+    if (marksOnly && !/[A-Za-z]/.test(parts.filter((_, at) => at % 2 === 0).join(''))) continue;
+    const [index, key] = head ? [byFirst, head] : [byLast, marksOnly ? tail.slice(-1) : tail];
     if (!key) continue;
     const list = index.get(key);
     if (list) list.push(pattern);
@@ -150,6 +157,7 @@ function byPattern(table: Compiled, english: string, depth: number): string | un
   const candidates = [
     ...(table.byFirst.get(firstWord(trimmed)) ?? []),
     ...(table.byLast.get(lastWord(trimmed)) ?? []),
+    ...(/[^\w\s]/.test(trimmed.slice(-1)) && trimmed.slice(-1) !== lastWord(trimmed) ? table.byLast.get(trimmed.slice(-1)) ?? [] : []),
   ].sort((a, b) => b.literal - a.literal);
   for (const pattern of candidates) {
     const match = pattern.regex.exec(trimmed);

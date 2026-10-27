@@ -337,6 +337,7 @@ import type { SpokenAppointment } from '../../lib/spokenAppointment';
 import { VaultClosedBand } from '../../components/VaultClosedBand';
 import { useVaultReloadKey } from '../../lib/vaultReads';
 import { useCategoryClosed } from '../../lib/vaultSession';
+import { t } from '../../lib/i18n';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -3821,9 +3822,7 @@ function DailyPlanFullReport({
               </Text>
               <View style={styles.dailyPlanNutrientValue}>
                 <Text style={[styles.helperText, { textAlign: 'right' }, ceilingExceeded && { color: colors.danger }]}>
-                  {Math.round(row.amount * 10) / 10}
-                  {row.unit} of {displayTarget}
-                  {row.unit}
+                  {t('{amount}{unit} of {target}{unit2}', { amount: Math.round(row.amount * 10) / 10, unit: row.unit, target: displayTarget ?? '', unit2: row.unit })}
                   {displayPercent !== null ? ` (${displayPercent}%)` : ''}
                 </Text>
                 {nearOrOverLimit ? (

@@ -68,6 +68,7 @@ import { useScreenHeaderHeight } from './ScreenHeader';
 import { VoiceInputButton } from './VoiceInputButton';
 import { useNavigationHand } from '../lib/navigationHand';
 import { useWalkMark } from './WalkMark';
+import { t } from '../lib/i18n';
 
 const NUTRIENT_GROUP_LABELS: Record<string, string> = {
   macro: 'Macronutrients',
@@ -2108,7 +2109,7 @@ export function FoodLookup({
                   >
                     <Text style={[styles.personalWarningText, { color: stop ? colors.danger : colors.statusYellowStandalone }]}>
                       {describeRestrictionHit(hit)}. {hit.why}
-                      {hit.readingId ? ' Tap to read more.' : ''}
+                      {hit.readingId ? ` ${t('Tap to read more.')}` : ''}
                     </Text>
                   </TouchableOpacity>
                 );

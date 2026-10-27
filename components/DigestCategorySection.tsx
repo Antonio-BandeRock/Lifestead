@@ -24,6 +24,7 @@ import {
   groupEntriesForLens,
   TYING_TOGETHER_GROUP_KEY,
 } from '../lib/digest/categoryGrouping';
+import { t, tl } from '../lib/i18n';
 
 // One reading category (Health Literacy, Earth Matters or Horticulture)
 // on fold bands, 2026-09-19, the shape Conditions took on the Life tab
@@ -278,7 +279,7 @@ export function DigestCategorySection({
             <Text style={styles.countText}>
               {searchResults.length === 0
                 ? `No matches for “${query.trim()}” in ${label}.`
-                : `${searchResults.length} match${searchResults.length === 1 ? '' : 'es'} in ${label}`}
+                : t(searchResults.length === 1 ? '{count} match in {label}' : '{count} matches in {label}', { count: searchResults.length, label: tl(label) })}
             </Text>
           </View>
           {searchResults.length > 0 ? (

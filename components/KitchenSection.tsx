@@ -73,6 +73,7 @@ import { getLastPaidPrices, recordDisposition } from '../lib/harvestTradeDb';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { useWalkMark } from './WalkMark';
+import { t } from '../lib/i18n';
 
 type DispositionForm = {
   itemId: string;
@@ -621,8 +622,9 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
                 >
                   <Text style={styles.itemName}>{item.foodName}</Text>
                   <Text style={styles.itemMeta}>
-                    {formatGroceryAmount(item.quantityRemaining, item.unit)}
-                    {partly ? ` left of ${formatGroceryAmount(item.quantity, item.unit)}` : ''}
+                    {partly
+                      ? t('{left} left of {total}', { left: formatGroceryAmount(item.quantityRemaining, item.unit), total: formatGroceryAmount(item.quantity, item.unit) })
+                      : formatGroceryAmount(item.quantityRemaining, item.unit)}
                   </Text>
                   <Text style={styles.itemMeta}>
                     {SOURCE_LABEL[item.source]} · {describeKitchenAge(item.addedAt)}

@@ -139,6 +139,7 @@ import { anyWateringSoon, rainNoteForTask } from '../../lib/rainForecast';
 import { ThumbRow } from '../../components/ThumbRow';
 import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { useOnVaultChange } from '../../lib/vaultReads';
+import { t, tl } from '../../lib/i18n';
 
 // This page's own identity color -- see constants/colors.ts's own comment
 // on tabGarden for how it was chosen.
@@ -2277,8 +2278,9 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
         ) : selectedPlanting ? (
           <>
             <Text style={styles.bodyText}>
-              {selectedPlanting.foodName}
-              {plotNameById[selectedPlanting.plotId] ? `, from ${plotNameById[selectedPlanting.plotId]}` : ''}
+              {plotNameById[selectedPlanting.plotId]
+                ? t('{food}, from {area}', { food: tl(selectedPlanting.foodName), area: plotNameById[selectedPlanting.plotId] })
+                : selectedPlanting.foodName}
             </Text>
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Amount</Text>

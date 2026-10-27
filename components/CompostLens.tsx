@@ -50,6 +50,7 @@ import { usePhotoRemovalConfirm } from './usePhotoRemovalConfirm';
 import { makeTabBandStyles, TabBand } from './TabBand';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
+import { t, tl } from '../lib/i18n';
 
 // Compost, a lens of Garden.
 //
@@ -484,8 +485,7 @@ function PileBand({
     >
       <View style={styles.card}>
         <Text style={styles.captionText}>
-          {pileKindLabel(pile.kind)}
-          {pile.location ? `, ${pile.location}` : ''} · started {pile.startedOn}, {summary.daysSinceStarted} days ago · {statusLabel}
+          {pile.location ? t('{kind}, {location}', { kind: tl(pileKindLabel(pile.kind)), location: pile.location }) : pileKindLabel(pile.kind)} · started {pile.startedOn}, {summary.daysSinceStarted} days ago · {statusLabel}
           {pileFeedsName ? ` · feeds ${pileFeedsName}` : ''}
         </Text>
 

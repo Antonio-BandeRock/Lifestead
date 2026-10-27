@@ -281,6 +281,7 @@ import { ThumbEndRow } from '../components/ThumbEndRow';
 import { VaultClosedBand } from '../components/VaultClosedBand';
 import { useOnVaultChange } from '../lib/vaultReads';
 import { useCategoryClosed } from '../lib/vaultSession';
+import { t, tl } from '../lib/i18n';
 
 // Whether a backup that has been reached is restored or only checked.
 type BackupUse = 'restore' | 'check';
@@ -4640,8 +4641,17 @@ export default function ProfileScreen() {
                 <View style={[styles.dateRow, { marginTop: 12 }]}>
                   <View style={{ flex: 1 }}>
                     <Text style={styles.helpText}>
-                      {field.label} ({field.isCeiling ? 'ceiling' : 'floor'}), your default: {defaultLabel}
-                      {overrideValue != null ? `, your target: ${overrideValue}${field.unit}` : ''}
+                      {overrideValue != null
+                        ? t(field.isCeiling ? '{label} (ceiling), your default: {fallback}, your target: {target}{unit}' : '{label} (floor), your default: {fallback}, your target: {target}{unit}', {
+                            label: tl(field.label),
+                            fallback: tl(defaultLabel),
+                            target: overrideValue,
+                            unit: field.unit,
+                          })
+                        : t(field.isCeiling ? '{label} (ceiling), your default: {fallback}' : '{label} (floor), your default: {fallback}', {
+                            label: tl(field.label),
+                            fallback: tl(defaultLabel),
+                          })}
                     </Text>
                     <AppTextInput
                       style={[styles.input, styles.nameInput]}
