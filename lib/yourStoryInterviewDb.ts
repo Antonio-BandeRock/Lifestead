@@ -11,7 +11,7 @@ import { sortByLabel } from './choiceOrder';
 import { buildYourStory, dayKey } from './yourStory';
 import type { YourStoryView } from './yourStory';
 import { buildGuides } from './yourStoryGuides';
-import type { GuideView } from './yourStoryGuides';
+import type { GuideRecords, GuideView } from './yourStoryGuides';
 import { buildInterview } from './yourStoryInterview';
 import { readLockStateSync } from './appLockSession';
 import { chosenVaultCategories, currentVaultKey } from './vaultState';
@@ -68,7 +68,7 @@ async function safely<T>(read: () => Promise<T>, fallback: T): Promise<T> {
   }
 }
 
-export type YourStoryEverything = { view: YourStoryView; guides: GuideView[]; interview: InterviewView };
+export type YourStoryEverything = { view: YourStoryView; guides: GuideView[]; interview: InterviewView; records: GuideRecords };
 
 // Your Story, its guides and its interview in one read, so the Home card and
 // the full page never disagree about what is on record.
@@ -80,7 +80,7 @@ export async function loadYourStoryEverything(withGuides = true): Promise<YourSt
   }
   const db = await getDatabase();
   const [records, conditions, allConditions, stages, diets, allergies, neuro, answers] = await Promise.all([
-    safely(() => lookForGuideRecords(db), {}),
+    safely(() => lookForGuideRecords(db), {} as GuideRecords),
     safely(getUserConditions, [] as string[]),
     safely(listAllConditions, []),
     safely(getConditionStages, {} as Record<string, string>),
@@ -122,7 +122,7 @@ export async function loadYourStoryEverything(withGuides = true): Promise<YourSt
     security: readSecurity(),
     backupFolderSet: !!facts.archive.sharedFolderSet,
   });
-  return { view, guides: withGuides ? buildGuides(facts, records) : [], interview };
+  return { view, guides: withGuides ? buildGuides(facts, records) : [], interview, records };
 }
 
 // App Lock and the vault, for the question that asks how records are kept

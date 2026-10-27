@@ -48,21 +48,13 @@ import { loadYourStoryEverything } from '../lib/yourStoryInterviewDb';
 import type { InterviewView } from '../lib/yourStoryInterview';
 import { TOUR_BRING_BACK_LABEL, offersTourBack, subscribeTourChanged } from '../lib/guidedTour';
 import { showGuidedTour } from '../lib/guidedTourDb';
-import { currentGuideKey, guideCardLine, openGuideLabel, type GuideView } from '../lib/yourStoryGuides';
+import { currentGuideKey, guideCardLine, openGuideLabel, type GuideRecords, type GuideView } from '../lib/yourStoryGuides';
+import { SetupCardShelves } from './SetupCardShelves';
 import {
   BEFORE_ANYTHING_CAPTION,
   BEFORE_ANYTHING_HEADING,
-  FILLING_LABEL,
-  FIRST_LABEL,
-  READY_LABEL,
-  START_HERE_LABEL,
-  TAB_GROUP_CAPTIONS,
-  TAB_GROUP_HEADINGS,
   buildTabGuide,
-  type TabGroup,
-  type TabGuideView,
 } from '../lib/yourStoryTabs';
-import { TAB_ROUTES } from '../constants/tabs';
 import { markStoryReturn } from '../lib/storyReturn';
 import { BeatPicker } from './BeatPicker';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
@@ -71,10 +63,11 @@ import { YourStoryInterview } from './YourStoryInterview';
 
 // Loads Your Story whenever the screen holding it comes into focus, which is
 // how an item done on another tab is already ticked on the way back.
-export function useYourStory(): [YourStoryView | null, () => Promise<void>, GuideView[], InterviewView | null] {
+export function useYourStory(): [YourStoryView | null, () => Promise<void>, GuideView[], InterviewView | null, GuideRecords] {
   const [view, setView] = useState<YourStoryView | null>(null);
   const [guides, setGuides] = useState<GuideView[]>([]);
   const [interview, setInterview] = useState<InterviewView | null>(null);
+  const [records, setRecords] = useState<GuideRecords>({});
   const live = useRef(true);
   const reload = useCallback(async () => {
     try {
@@ -83,6 +76,7 @@ export function useYourStory(): [YourStoryView | null, () => Promise<void>, Guid
         setView(next.view);
         setGuides(next.guides);
         setInterview(next.interview);
+        setRecords(next.records);
       }
     } catch (error) {
       console.warn('loadYourStory failed', error);
@@ -97,7 +91,7 @@ export function useYourStory(): [YourStoryView | null, () => Promise<void>, Guid
       };
     }, [reload]),
   );
-  return [view, reload, guides, interview];
+  return [view, reload, guides, interview, records];
 }
 
 // Where a Your Story destination leads, shared by the paper and the guides.
@@ -144,13 +138,16 @@ type Props = {
   // card asks it; once none is, the card lists the tabs, the one chosen to
   // start from marked Start here.
   interview?: InterviewView | null;
+  // Which records exist and since when (lib/yourStoryGuides.ts), which is
+  // how a setup card knows it is done.
+  records?: GuideRecords;
   onChanged: () => void;
   // Home passes this, since a card on Home and Home's quick-log form open in
   // place there. Anywhere else those go back to Home, which opens them.
   onHomeDestination?: (destination: Extract<StoryDestination, { kind: 'home' | 'quickLog' }>) => void;
 };
 
-export function YourStorySection({ mode, view, guides, interview, onChanged, onHomeDestination }: Props) {
+export function YourStorySection({ mode, view, guides, interview, records, onChanged, onHomeDestination }: Props) {
   const router = useRouter();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   // Hide on the tour strip offers the strip back here at once.
@@ -284,58 +281,6 @@ export function YourStorySection({ mode, view, guides, interview, onChanged, onH
   // saying what it gives back and the one thing it needs first.
   const tabGuide = buildTabGuide(view, interview?.startPath ?? null);
 
-  function renderTab(tab: TabGuideView) {
-    const route = TAB_ROUTES.find((entry) => entry.path === tab.def.path);
-    const label =
-      tab.status === 'first' ? FIRST_LABEL : tab.status === 'filling' ? FILLING_LABEL : tab.status === 'ready' ? READY_LABEL : null;
-    const quiet = tab.status === 'notChosen' || tab.status === 'waitingOnChoice';
-    return (
-      <View key={tab.def.path} style={styles.tabRow}>
-        <View style={styles.tabHead}>
-          <Ionicons name={route?.icon ?? 'ellipse-outline'} size={18} color={route?.color ?? colors.primary} style={textShadow} />
-          <Text style={styles.tabTitle}>{tab.def.title}</Text>
-          {tab.startHere ? <Text style={styles.startHere}>{START_HERE_LABEL}</Text> : null}
-        </View>
-        <View style={styles.tabBody}>
-          <Text style={styles.tabGives}>{tab.def.gives}</Text>
-          <Text style={quiet ? styles.muted : styles.tabStatus}>
-            {label ? <Text style={tab.status === 'ready' ? styles.readyLabel : styles.firstLabel}>{`${label} `}</Text> : null}
-            {tab.line}
-          </Text>
-          {tab.note ? <Text style={styles.note}>{tab.note}</Text> : null}
-          <View style={styles.tabActions}>
-            <TouchableOpacity style={styles.action} onPress={() => go(tab.go)} accessibilityRole="button">
-              <Text style={styles.actionText}>{tab.goLabel}</Text>
-              <Ionicons name="arrow-forward" size={13} color={colors.primary} style={textShadow} />
-            </TouchableOpacity>
-            {tab.status === 'first' && tab.item ? (
-              <TouchableOpacity
-                style={styles.action}
-                onPress={() => tab.item && showInfoAlert(WHY_LABEL, tab.item.def.why)}
-                accessibilityRole="button"
-              >
-                <Text style={styles.actionText}>{WHY_LABEL}</Text>
-              </TouchableOpacity>
-            ) : null}
-          </View>
-        </View>
-      </View>
-    );
-  }
-
-  function renderTabGroup(group: TabGroup) {
-    const rows = tabGuide.tabs.filter((tab) => tab.def.group === group);
-    return (
-      <View key={group} style={styles.tabGroup}>
-        <View style={styles.sectionHead}>
-          <Text style={styles.sectionName}>{TAB_GROUP_HEADINGS[group]}</Text>
-          <Text style={styles.sectionCaption}>{TAB_GROUP_CAPTIONS[group]}</Text>
-        </View>
-        <View style={styles.items}>{rows.map(renderTab)}</View>
-      </View>
-    );
-  }
-
   const beatsItem = view.allItems.beats;
   function renderBefore() {
     // While the chooser is open, the question stays on screen even once it
@@ -358,8 +303,15 @@ export function YourStorySection({ mode, view, guides, interview, onChanged, onH
     return (
       <>
         {renderBefore()}
-        {renderTabGroup('goesIn')}
-        {renderTabGroup('givesBack')}
+        {view ? (
+          <SetupCardShelves
+            view={view}
+            records={records ?? {}}
+            startPath={interview?.startPath ?? null}
+            go={goElsewhere}
+            explain={showInfoAlert}
+          />
+        ) : null}
       </>
     );
   }

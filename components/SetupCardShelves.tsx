@@ -1,0 +1,283 @@
+// Getting Set Up as cards (1.0.74.13, lib/setupCards.ts). One block per tab
+// where records go in, a sideways row of cards for each part of it, each
+// card about three quarters of the window wide so the next one shows at the
+// edge. A card opens with its lens's icon on a strip in its tab's colour,
+// says what the thing is, what you do and where it comes back, and ends on
+// one button that opens the place to set it up. A done card turns green and
+// says since when.
+import { Ionicons } from '@expo/vector-icons';
+import type { ComponentProps } from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
+import { colors, hexToRgba } from '../constants/colors';
+import { TAB_ROUTES } from '../constants/tabs';
+import { textShadow, typography } from '../constants/typography';
+import { t } from '../lib/i18n';
+import {
+  GETS_BACK_LABEL,
+  OPEN_IT_LABEL,
+  SETUP_CARDS_CAPTION,
+  SETUP_CARDS_HEADING,
+  SET_ASIDE_LABEL,
+  SET_IT_UP_LABEL,
+  START_HERE_CARD_LABEL,
+  WHAT_IT_IS_LABEL,
+  WHAT_YOU_DO_LABEL,
+  WORKS_WITH_LABEL,
+  buildSetupShelves,
+  cardTitle,
+  giveBackExplanation,
+  type SetupCardView,
+  type SetupShelfView,
+  type SetupTabView,
+} from '../lib/setupCards';
+import { datelineFor, type StoryDestination, type YourStoryView } from '../lib/yourStory';
+import type { GuideRecords } from '../lib/yourStoryGuides';
+import { useWalkMark } from './WalkMark';
+
+type IconName = ComponentProps<typeof Ionicons>['name'];
+
+type Props = {
+  view: YourStoryView;
+  records: GuideRecords;
+  startPath: string | null;
+  go: (destination: Exclude<StoryDestination, { kind: 'beats' }>) => void;
+  explain: (title: string, body: string) => void;
+};
+
+const DONE_COLOR = colors.statusGreenOnSurface;
+// Dark text on a filled button carries no shadow.
+const NO_SHADOW = { textShadowColor: 'transparent', textShadowRadius: 0 } as const;
+
+function tabOf(path: string) {
+  return TAB_ROUTES.find((route) => route.path === path);
+}
+
+export function SetupCardShelves({ view, records, startPath, go, explain }: Props) {
+  const { width } = useWindowDimensions();
+  const walkMark = useWalkMark();
+  // Three quarters of the window, never so wide on a computer that a row
+  // shows only one card.
+  const cardWidth = Math.round(Math.min(Math.max(width * 0.75, 240), 340));
+  const tabs = buildSetupShelves(view, records, startPath);
+  if (tabs.length === 0) return null;
+  let firstOpenMarked = false;
+
+  function renderCard(card: SetupCardView, tabColor: string) {
+    const done = !!card.doneOn;
+    const tint = done ? DONE_COLOR : tabColor;
+    const markThis = !done && !firstOpenMarked;
+    if (markThis) firstOpenMarked = true;
+    const partners = (card.def.worksWith ?? []).map(cardTitle).filter((title): title is string => !!title);
+    return (
+      <View
+        key={card.def.key}
+        ref={markThis ? walkMark.ref('home.setupCards') : undefined}
+        style={[styles.card, { width: cardWidth, borderColor: hexToRgba(tint, done ? 0.7 : 0.55) }, markThis && walkMark('home.setupCards')]}
+      >
+        <View style={[styles.hero, { backgroundColor: hexToRgba(tint, 0.2) }]}>
+          <View style={[styles.heroCircle, { backgroundColor: hexToRgba(tint, 0.3), borderColor: tint }]}>
+            <Ionicons name={(done ? 'checkmark' : card.def.icon) as IconName} size={34} color={tint} style={textShadow} />
+          </View>
+          <View style={styles.takesTag}>
+            <Ionicons name={done ? 'checkmark-circle-outline' : 'time-outline'} size={12} color={tint} style={textShadow} />
+            <Text style={styles.takesText}>{done && card.doneOn ? datelineFor(card.doneOn) : card.def.takes}</Text>
+          </View>
+        </View>
+        <View style={styles.cardBody}>
+          <Text style={styles.cardTitle}>{card.def.title}</Text>
+          <Text style={[styles.hook, { color: tint }]}>{card.def.hook}</Text>
+          {card.setAside ? <Text style={styles.muted}>{SET_ASIDE_LABEL}</Text> : null}
+          <View style={styles.part}>
+            <View style={styles.partHead}>
+              <Ionicons name="information-circle-outline" size={13} color={colors.textMuted} style={textShadow} />
+              <Text style={styles.partLabel}>{WHAT_IT_IS_LABEL}</Text>
+            </View>
+            <Text style={styles.partText}>{card.def.whatItIs}</Text>
+          </View>
+          <View style={styles.part}>
+            <View style={styles.partHead}>
+              <Ionicons name="hand-left-outline" size={13} color={colors.textMuted} style={textShadow} />
+              <Text style={styles.partLabel}>{WHAT_YOU_DO_LABEL}</Text>
+            </View>
+            <Text style={styles.partText}>{card.def.whatYouDo}</Text>
+          </View>
+          <View style={styles.part}>
+            <View style={styles.partHead}>
+              <Ionicons name="return-down-back-outline" size={13} color={colors.textMuted} style={textShadow} />
+              <Text style={styles.partLabel}>{GETS_BACK_LABEL}</Text>
+            </View>
+            <View style={styles.chips}>
+              {card.areas.map((area) => {
+                const areaTab = tabOf(area.tabPath);
+                const color = areaTab?.color ?? colors.primary;
+                return (
+                  <TouchableOpacity
+                    key={area.key}
+                    style={[styles.chip, { backgroundColor: hexToRgba(color, 0.16), borderColor: hexToRgba(color, 0.6) }]}
+                    onPress={() => explain(t(area.label), giveBackExplanation(area, view, (english) => t(english)))}
+                    accessibilityRole="button"
+                    accessibilityLabel={area.label}
+                  >
+                    <Ionicons name={(areaTab?.icon ?? 'ellipse') as IconName} size={11} color={color} style={textShadow} />
+                    <Text style={styles.chipText}>{area.label}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </View>
+          {partners.length > 0 ? (
+            <Text style={styles.muted}>{t('{label}: {names}', { label: t(WORKS_WITH_LABEL), names: partners.map((name) => t(name)).join(', ') })}</Text>
+          ) : null}
+          <View style={styles.spacer} />
+          <TouchableOpacity
+            ref={markThis ? walkMark.ref('home.setupCardGo') : undefined}
+            style={[
+              done ? styles.openButton : styles.goButton,
+              done ? { borderColor: tint } : { backgroundColor: tint },
+              markThis && walkMark('home.setupCardGo'),
+            ]}
+            onPress={() => go(card.def.destination)}
+            accessibilityRole="button"
+            accessibilityLabel={`${done ? OPEN_IT_LABEL : SET_IT_UP_LABEL}: ${card.def.title}`}
+          >
+            <Text style={done ? styles.openButtonText : styles.goButtonText}>{done ? OPEN_IT_LABEL : SET_IT_UP_LABEL}</Text>
+            {done ? (
+              <Ionicons name="arrow-forward" size={15} color={tint} style={textShadow} />
+            ) : (
+              <Ionicons name="arrow-forward" size={15} color={colors.textOnButton} style={NO_SHADOW} />
+            )}
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+
+  function renderShelf(shelf: SetupShelfView, tabColor: string) {
+    const total = shelf.cards.length;
+    const settled = total - shelf.openCount;
+    return (
+      <View key={shelf.def.key} style={styles.shelf}>
+        <View style={styles.shelfHead}>
+          <Text style={styles.shelfTitle}>{shelf.def.title}</Text>
+          <Text style={styles.shelfCount}>{t('{done} of {total} set up', { done: settled, total })}</Text>
+        </View>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
+          {shelf.cards.map((card) => renderCard(card, tabColor))}
+        </ScrollView>
+      </View>
+    );
+  }
+
+  function renderTab(tab: SetupTabView) {
+    const route = tabOf(tab.def.path);
+    const color = route?.color ?? colors.primary;
+    return (
+      <View key={tab.def.path} style={[styles.tab, { borderLeftColor: color }]}>
+        <View style={styles.tabHead}>
+          <Ionicons name={(route?.icon ?? 'ellipse') as IconName} size={20} color={color} style={textShadow} />
+          <Text style={styles.tabTitle}>{tab.def.title}</Text>
+          {tab.startHere ? <Text style={styles.startHere}>{START_HERE_CARD_LABEL}</Text> : null}
+        </View>
+        <Text style={styles.tabLine}>{tab.def.line}</Text>
+        {tab.shelves.map((shelf) => renderShelf(shelf, color))}
+      </View>
+    );
+  }
+
+  return (
+    <View style={styles.wrap}>
+      <View style={styles.head}>
+        <Text style={styles.heading}>{SETUP_CARDS_HEADING}</Text>
+        <Text style={styles.caption}>{SETUP_CARDS_CAPTION}</Text>
+      </View>
+      {tabs.map(renderTab)}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  wrap: { gap: 16, backgroundColor: colors.surface },
+  head: { gap: 2, backgroundColor: colors.surface },
+  heading: { ...typography.sectionTitle, color: colors.textPrimary, ...textShadow },
+  caption: { ...typography.caption, color: colors.textSecondary, ...textShadow },
+  tab: { gap: 8, borderLeftWidth: 3, paddingLeft: 10, backgroundColor: colors.surface },
+  tabHead: { flexDirection: 'row', alignItems: 'center', gap: 8, flexWrap: 'wrap' },
+  tabTitle: { ...typography.sectionTitle, color: colors.textPrimary, ...textShadow },
+  startHere: { ...typography.caption, color: colors.accent, ...textShadow },
+  tabLine: { ...typography.caption, color: colors.textSecondary, ...textShadow },
+  shelf: { gap: 6, backgroundColor: colors.surface },
+  shelfHead: { flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between', gap: 8, flexWrap: 'wrap' },
+  shelfTitle: { ...typography.label, color: colors.textPrimary, ...textShadow },
+  shelfCount: { ...typography.caption, color: colors.textMuted, ...textShadow },
+  row: { gap: 12, paddingRight: 12, alignItems: 'stretch' },
+  card: {
+    borderWidth: 1,
+    borderRadius: 14,
+    overflow: 'hidden',
+    backgroundColor: colors.surfaceMuted,
+  },
+  hero: { height: 92, alignItems: 'center', justifyContent: 'center' },
+  heroCircle: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  takesTag: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 10,
+    backgroundColor: colors.surface,
+  },
+  takesText: { ...typography.caption, color: colors.textPrimary, ...textShadow },
+  cardBody: { flex: 1, padding: 12, gap: 8, backgroundColor: colors.surfaceMuted },
+  cardTitle: { ...typography.sectionTitle, color: colors.textPrimary, ...textShadow },
+  hook: { ...typography.body, ...textShadow },
+  muted: { ...typography.caption, color: colors.textMuted, ...textShadow },
+  part: { gap: 2, backgroundColor: colors.surfaceMuted },
+  partHead: { flexDirection: 'row', alignItems: 'center', gap: 4 },
+  partLabel: { ...typography.eyebrow, color: colors.textMuted, ...textShadow },
+  partText: { ...typography.caption, color: colors.textSecondary, ...textShadow },
+  chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, paddingTop: 2 },
+  chip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    borderWidth: 1,
+    borderRadius: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+  },
+  chipText: { ...typography.caption, color: colors.textPrimary, ...textShadow },
+  spacer: { flex: 1 },
+  goButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    borderRadius: 10,
+    paddingVertical: 10,
+    marginTop: 4,
+  },
+  goButtonText: { ...typography.label, color: colors.textOnButton, ...NO_SHADOW },
+  openButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    borderRadius: 10,
+    borderWidth: 1,
+    paddingVertical: 10,
+    marginTop: 4,
+    backgroundColor: colors.surface,
+  },
+  openButtonText: { ...typography.label, color: colors.textPrimary, ...textShadow },
+});

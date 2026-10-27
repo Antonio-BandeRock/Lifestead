@@ -248,6 +248,8 @@ export type ToolMark =
   | 'home.lowStim'
   | 'header.checkUpdates'
   | 'home.readCards'
+  | 'home.setupCards'
+  | 'home.setupCardGo'
   | 'appointments.add'
   | 'appointments.addCalendar'
   | 'appointments.cancel'
@@ -2124,6 +2126,17 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Done at the top.', mark: 'home.arrangeDone' },
       ],
       forYou: 'A band you turn off leaves Home until you turn it back on here, and nothing it holds is removed.',
+    },
+    {
+      key: 'setupCard',
+      title: 'Set something up from Your Guide',
+      steps: [
+        { say: 'Open the band with the name of Your Guide.', mark: 'homeBand.yourStory', stay: true },
+        { say: 'Each tab has rows of cards. Swipe along a row to see what else it holds.', mark: 'home.setupCards', stay: true },
+        { say: 'Tap a coloured chip under Where it comes back to read what that place will show you.' },
+        { say: 'Tap Set It Up. It opens the exact place to do it.', mark: 'home.setupCardGo' },
+      ],
+      forYou: 'Once the record exists the card turns green, says since when and moves to the end of its row, so what is left to set up is always first.',
     },
     {
       key: 'captureSay',
