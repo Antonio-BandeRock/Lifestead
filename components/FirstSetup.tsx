@@ -14,7 +14,7 @@
 //
 //   - Answering moves to the next page by itself. Back goes to the one
 //     before, and a page already answered has Keep this and go on.
-//   - An item opens its screen with setup set aside, and a strip over that
+//   - An item opens its screen with setup set aside, and a strip above that
 //     screen names what to do there, with Back to Setup and Later. Once the
 //     record exists the strip says Saved and offers Next in setup.
 //   - Finish Later lets the person in. Setup comes back the next time the
@@ -89,6 +89,7 @@ import {
 import { loadYourStoryEverything, setYourStoryAnswer } from '../lib/yourStoryInterviewDb';
 import { answerVaultSetupNotNow } from '../lib/vaultSession';
 import { goToStoryDestination } from './GuidedTourHost';
+import { GuideStripAnchor } from './GuideRoom';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
 import { YourStoryInterview } from './YourStoryInterview';
 
@@ -257,7 +258,7 @@ export function FirstSetup() {
     // An item is saved once its record exists; a question once answered.
     const saved = !!step && (step.kind === 'item' ? step.onRecord : step.settled);
     return (
-      <View pointerEvents="box-none" style={[styles.awayAnchor, { bottom: insets.bottom + 90 }]}>
+      <GuideStripAnchor slot="setup" style={styles.awayAnchor}>
         <View style={styles.awayStrip}>
           <Text style={styles.caption}>{SETUP_AWAY_CAPTION}</Text>
           {step ? <Text style={styles.awayTitle}>{step.title}</Text> : null}
@@ -290,7 +291,7 @@ export function FirstSetup() {
             ) : null}
           </View>
         </View>
-      </View>
+      </GuideStripAnchor>
     );
   }
 
@@ -510,7 +511,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.buttonColor,
   },
   goText: { ...typography.bodyEmphasis, color: colors.textOnButton },
-  awayAnchor: { position: 'absolute', left: 0, right: 0, alignItems: 'center', zIndex: 999, paddingHorizontal: 16 },
+  // At the top in its slot (components/GuideRoom.tsx), with the screen moved
+  // down below it (1.0.74.10). It used to float 90 above the bottom edge,
+  // which put it over the App Lock keys and buttons: "boxes telling them how
+  // to setup something for setup can never be in the way of what the user
+  // needs to see, type in, or tap."
+  awayAnchor: { left: 0, right: 0, alignItems: 'center', paddingHorizontal: 16 },
   awayStrip: {
     alignSelf: 'stretch',
     maxWidth: 480,

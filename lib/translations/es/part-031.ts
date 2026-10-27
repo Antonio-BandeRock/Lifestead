@@ -281,7 +281,7 @@ export const PART: Readonly<Record<string, string>> = {
  "Shown on a page you have answered before. Press it when the answer there is still right: it stays as it is and setup goes to the next page.": "Aparece en una página que ya contestaste. Tócalo cuando la respuesta de ahí siga siendo la correcta: se queda como está y la configuración pasa a la siguiente página.",
  "Goes to the page before, to look at it or change it.": "Va a la página anterior, para verla o cambiarla.",
  "Beside the answer you just gave, at the top of the next page. It opens that page again.": "Junto a la respuesta que acabas de dar, arriba de la siguiente página. Vuelve a abrir esa página.",
- "Opens the screen where that thing is set up, with a strip over it saying what to do there and how to come back.": "Abre la pantalla donde se configura eso, con una franja encima que dice qué hacer ahí y cómo regresar.",
+ "Opens the screen where that thing is set up, with a strip at the top saying what to do there and how to come back. The screen moves down below the strip, so the strip never covers anything.": "Abre la pantalla donde se configura eso, con una franja arriba que dice qué hacer ahí y cómo regresar. La pantalla baja debajo de la franja, así que la franja nunca tapa nada.",
  "Puts it off. It comes first in the tour once setup is done.": "Lo deja para después. Va primero en el recorrido cuando termine la configuración.",
  "Leaves it out. It stays in Your Guide whenever you want it.": "Lo deja fuera. Se queda en Tu guía cuando lo quieras.",
  "Lets you into the app now. Setup comes back the next time Lifestead opens.": "Te deja entrar a la app ahora. La configuración regresa la próxima vez que se abra Lifestead.",

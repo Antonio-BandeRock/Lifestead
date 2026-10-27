@@ -13,7 +13,8 @@
 
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useRef, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useVoiceDictation, type VoiceDictationErrorKind } from '../hooks/useVoiceDictation';
@@ -21,6 +22,8 @@ import { setLockedCaptureShowing } from '../lib/lockedCaptures';
 import { FLARE_FOLLOW_UP_KIND } from '../lib/reminderActions';
 import { handInReminderWords } from '../lib/reminderNotifications';
 import LockedCapture from '../modules/locked-capture';
+import { AppTextInput } from './AppTextInput';
+import { StandaloneKeyboard } from './StandaloneKeyboard';
 import {  } from '../lib/i18n';
 
 type Props = { identifier?: string; title?: string; data?: string };
@@ -122,7 +125,11 @@ export function LockedWordsScreen({ identifier, title, data: rawData }: Props) {
     close();
   }
 
+  // Its own React root, so it carries its own safe-area provider and its own
+  // app keyboard (1.0.74.10): the phone's keyboard never opens here.
   return (
+    <SafeAreaProvider>
+    <StandaloneKeyboard>
     <View style={styles.screen}>
       <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
         <View style={styles.card}>
@@ -134,7 +141,8 @@ export function LockedWordsScreen({ identifier, title, data: rawData }: Props) {
                   ? 'Write or say anything about this flare. It is added to the flare\'s notes.'
                   : 'Write or say how you are. It is kept as a check-in note. The Yes and No buttons stay on the lock screen.'}
               </Text>
-              <TextInput
+              <AppTextInput
+                voice={false}
                 style={styles.box}
                 value={text}
                 onChangeText={setText}
@@ -204,6 +212,8 @@ export function LockedWordsScreen({ identifier, title, data: rawData }: Props) {
         </View>
       </ScrollView>
     </View>
+    </StandaloneKeyboard>
+    </SafeAreaProvider>
   );
 }
 

@@ -5,6 +5,7 @@ import { deviceWord } from "../lib/appLockWords";
 import { readLockStateSync } from "../lib/appLockSession";
 import { listenForFreshAuth, type FreshAuthRequest } from "../lib/freshAuth";
 import { ConfirmItsYou } from "./ConfirmItsYou";
+import { StandaloneKeyboard } from "./StandaloneKeyboard";
 
 // Draws the question lib/freshAuth.ts asks before records leave the phone.
 // Mounted once in app/_layout.tsx. The key it opens is not kept: the app
@@ -22,6 +23,9 @@ export function FreshAuthHost() {
       visible
       onRequestClose={() => request.resolve(false)}
     >
+      {/* A Modal is its own window, so a passphrase here is typed on a
+          keyboard drawn inside it (1.0.74.10), never the phone's. */}
+      <StandaloneKeyboard>
       <View style={styles.backdrop}>
         <ScrollView
           contentContainerStyle={styles.body}
@@ -42,6 +46,7 @@ export function FreshAuthHost() {
           </View>
         </ScrollView>
       </View>
+      </StandaloneKeyboard>
     </Modal>
   );
 }

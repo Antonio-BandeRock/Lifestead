@@ -14,7 +14,6 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -58,7 +57,9 @@ import LockedCapture from "../modules/locked-capture";
 import { listenForReminderPresses } from "../lib/reminderNotifications";
 import { restartApp } from "../lib/restartApp";
 import { getPlayfulWordingSync } from "../lib/visualPreferences";
+import { AppTextInput } from "./AppTextInput";
 import { PasscodeEntry } from "./PasscodeEntry";
+import { StandaloneKeyboard } from "./StandaloneKeyboard";
 
 // App Lock's gate (step 4 of docs/app-lock-phase0-audit.md). Wraps the whole
 // app in app/_layout.tsx, so nothing that reads the database mounts until
@@ -407,19 +408,24 @@ function GateScreen({
   title: string;
   children: ReactNode;
 }) {
+  // The lock draws in place of the app, outside the root keyboard, so it
+  // brings its own (1.0.74.10): a passphrase or recovery key is typed on
+  // the app keyboard, never the phone's.
   return (
-    <View style={styles.screen}>
-      <ScrollView
-        contentContainerStyle={styles.body}
-        keyboardShouldPersistTaps="handled"
-      >
-        <View style={styles.card}>
-          <Ionicons name={icon} size={40} color={colors.textMuted} />
-          <Text style={styles.title}>{title}</Text>
-          {children}
-        </View>
-      </ScrollView>
-    </View>
+    <StandaloneKeyboard>
+      <View style={styles.screen}>
+        <ScrollView
+          contentContainerStyle={styles.body}
+          keyboardShouldPersistTaps="handled"
+        >
+          <View style={styles.card}>
+            <Ionicons name={icon} size={40} color={colors.textMuted} />
+            <Text style={styles.title}>{title}</Text>
+            {children}
+          </View>
+        </ScrollView>
+      </View>
+    </StandaloneKeyboard>
   );
 }
 
@@ -573,7 +579,8 @@ function RecoveryEntry({
         set the lock up. Spaces and dashes do not matter. After it opens, you
         will choose a new passcode.
       </Text>
-      <TextInput
+      <AppTextInput
+        voice={false}
         style={styles.input}
         value={typed}
         onChangeText={setTyped}

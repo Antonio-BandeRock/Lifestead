@@ -2,13 +2,13 @@ import { Ionicons } from "@expo/vector-icons";
 import {
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 import { colors } from "../constants/colors";
 import { textShadow, typography } from "../constants/typography";
 import { MAX_PASSCODE_DIGITS, type PasscodeKind } from "../lib/appLock";
+import { AppTextInput } from "./AppTextInput";
 
 // Where a passcode is typed, on the lock screen and in App Lock setup.
 //
@@ -54,7 +54,11 @@ export function PasscodeEntry({
   if (kind === "phrase") {
     return (
       <View style={styles.phraseWrap}>
-        <TextInput
+        {/* The app keyboard, never the phone's (1.0.74.10, direct
+            instruction). Each screen that shows this sits inside a
+            StandaloneKeyboard, since none of them is under the root one. */}
+        <AppTextInput
+          voice={false}
           style={styles.phraseInput}
           value={value}
           onChangeText={onChange}

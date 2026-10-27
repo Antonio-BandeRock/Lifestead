@@ -86,14 +86,18 @@ type Mode = 'letters' | 'numbers' | 'accents';
 // GatedTabContent.tsx: a 0-1 progress SharedValue driven by withTiming over
 // the same shared TAB_REVEAL_DURATION_MS, translateY-ed by (1 - progress) *
 // its own height.
-export function AppKeyboard() {
+// `followsRoute` and `bottom` are for StandaloneKeyboard (1.0.74.10), which
+// draws a second copy inside a screen that is its own window (the lock
+// screen, a Modal) or its own React root (the locked-phone words screen),
+// where the root copy would sit underneath, out of reach, and where there is
+// no router and no footer.
+export function AppKeyboard({ followsRoute = true, bottom }: { followsRoute?: boolean; bottom?: number } = {}) {
   const navigationHand = useNavigationHand();
   const { activeField, searchRequest } = useActiveInputValue();
   const { forceClear, focusNextField } = useActiveInputControls();
   const footerBandHeight = useFooterBandHeight();
   const { reportKeyboardTop } = useKeyboardLift();
   const clipRef = useRef<View>(null);
-  const pathname = usePathname();
   const [mode, setMode] = useState<Mode>('letters');
   const [shiftActive, setShiftActive] = useState(false);
   const progress = useSharedValue(0);
@@ -119,19 +123,6 @@ export function AppKeyboard() {
     setMode('letters');
     setShiftActive(false);
   }, [activeField?.id]);
-
-  // Any real navigation -- a tab switch or a stack push/pop to
-  // profile.tsx/purple-digest.tsx -- should close the keyboard cleanly
-  // rather than leaving it floating over a screen it no longer belongs to.
-  useEffect(() => {
-    if (activeField) {
-      activeField.blur();
-      forceClear();
-    }
-    // Only pathname changing should trigger this -- activeField is read via
-    // the ref-like closure captured at effect-run time, not a dependency.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
 
   // Android-specific, reported directly 2026-08-02 after a few real
   // occurrences: the OS's own soft keyboard could appear over this
@@ -416,7 +407,7 @@ export function AppKeyboard() {
     // it would cross this box's own bottom edge, which sits exactly at
     // the footer's own top edge.
     <View
-      style={[styles.clipWrap, { bottom: footerBandHeight, height: KEYBOARD_HEIGHT }]}
+      style={[styles.clipWrap, { bottom: bottom ?? footerBandHeight, height: KEYBOARD_HEIGHT }]}
       pointerEvents={visible ? 'auto' : 'none'}
       // WHERE THE TOP OF THE KEYBOARD ACTUALLY IS, 2026-09-09.
       //
@@ -440,6 +431,7 @@ export function AppKeyboard() {
     >
       {/* Key labels are not wording anybody edits, and a tap on a key must
           type rather than open the Edit wording editor. */}
+      {followsRoute ? <CloseOnRouteChange /> : null}
       <PlainTextZone>
         <Animated.View style={[styles.container, risenStyle]}>
           {searchRow}
@@ -449,6 +441,26 @@ export function AppKeyboard() {
       </PlainTextZone>
     </View>
   );
+}
+
+// Any real navigation -- a tab switch or a stack push/pop to
+// profile.tsx/purple-digest.tsx -- should close the keyboard cleanly
+// rather than leaving it floating over a screen it no longer belongs to.
+// A leaf of its own so a keyboard with no router above it can leave it out.
+function CloseOnRouteChange() {
+  const { activeField } = useActiveInputValue();
+  const { forceClear } = useActiveInputControls();
+  const pathname = usePathname();
+  useEffect(() => {
+    if (activeField) {
+      activeField.blur();
+      forceClear();
+    }
+    // Only pathname changing should trigger this -- activeField is read via
+    // the ref-like closure captured at effect-run time, not a dependency.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+  return null;
 }
 
 function Key({

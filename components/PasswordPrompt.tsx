@@ -1,8 +1,10 @@
 import { useCallback, useRef, useState, type ReactNode } from 'react';
-import { Modal, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Modal, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { modalAnimationType } from '../lib/visualPreferences';
+import { AppTextInput } from './AppTextInput';
+import { StandaloneKeyboard } from './StandaloneKeyboard';
 import { ThumbRow } from './ThumbRow';
 
 export type PasswordPromptMode = 'set' | 'enter';
@@ -20,13 +22,13 @@ const MIN_PASSWORD_LENGTH = 8;
 // reason this exists) -- modeled directly on components/InfoAlert.tsx's
 // own real hook+Modal pattern.
 //
-// Deliberately uses React Native's OWN native TextInput with
-// secureTextEntry, not this app's custom AppTextInput/AppKeyboard system
-// -- confirmed directly (grepped both files) that system has no masked-
-// entry support at all, and a password field genuinely benefits from the
-// OS's own trusted, standard secure-entry behavior rather than this app's
-// own custom on-screen keyboard, a real, deliberate exception to how
-// every other text field in this app is built.
+// The app keyboard, like every other field (1.0.74.10, direct instruction:
+// "everywhere that requires a keyboard uses the app keyboard every time and
+// never the phone keyboard"). This used to be the one deliberate exception,
+// on the phone's keyboard. AppTextInput passes secureTextEntry straight to
+// the field, so the dots are drawn as before, and the app keyboard shows no
+// preview of what is typed. The Modal is its own window, so the keyboard
+// comes from a StandaloneKeyboard inside it, and voice is off on both boxes.
 //
 // Two real modes: 'set' (export) asks for the password twice, to catch a
 // typo before it locks someone out of their own backup forever -- there
@@ -82,12 +84,14 @@ export function usePasswordPrompt(): [
 
   const element = (
     <Modal visible={request !== null} transparent animationType={modalAnimationType('fade')} onRequestClose={() => close(null)}>
+      <StandaloneKeyboard>
       <View style={styles.backdrop}>
         <Pressable accessibilityLabel="Cancel" style={StyleSheet.absoluteFill} onPress={() => close(null)} />
         <View style={styles.card}>
           <Text style={styles.title}>{request?.title}</Text>
           <Text style={styles.message}>{request?.message}</Text>
-          <TextInput
+          <AppTextInput
+            voice={false}
             style={styles.input}
             value={password}
             onChangeText={(text) => {
@@ -102,7 +106,8 @@ export function usePasswordPrompt(): [
             autoFocus
           />
           {request?.mode === 'set' ? (
-            <TextInput
+            <AppTextInput
+              voice={false}
               style={styles.input}
               value={confirmPassword}
               onChangeText={(text) => {
@@ -133,6 +138,7 @@ export function usePasswordPrompt(): [
           </ThumbRow>
         </View>
       </View>
+      </StandaloneKeyboard>
     </Modal>
   );
 

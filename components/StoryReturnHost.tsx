@@ -12,7 +12,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { usePathname, useRouter, type Href } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../constants/colors';
 import { typography } from '../constants/typography';
 import {
@@ -26,6 +25,7 @@ import {
   type StoryReturn,
 } from '../lib/storyReturn';
 import { useStoryWalk } from './StoryWalkHost';
+import { GuideStripAnchor } from './GuideRoom';
 
 function useStoryReturn(): [StoryReturn | null, (next: StoryReturn | null) => void] {
   const [value, setValue] = useState<StoryReturn | null>(getStoryReturn);
@@ -40,7 +40,6 @@ export function StoryReturnHost() {
   const [value, setValue] = useStoryReturn();
   const pathname = usePathname();
   const router = useRouter();
-  const insets = useSafeAreaInsets();
   // A walk under way carries its own way back on its strip.
   const walking = useStoryWalk() !== null;
   const { show, next } = storyReturnOnPath(value, pathname);
@@ -57,7 +56,7 @@ export function StoryReturnHost() {
   };
 
   return (
-    <View pointerEvents="box-none" style={[styles.anchor, { top: insets.top + 8 }]}>
+    <GuideStripAnchor slot="return" style={styles.anchor}>
       <View style={styles.pill}>
         <TouchableOpacity
           style={styles.back}
@@ -78,7 +77,7 @@ export function StoryReturnHost() {
           <Ionicons name="close" size={16} color={colors.textOnButton} />
         </TouchableOpacity>
       </View>
-    </View>
+    </GuideStripAnchor>
   );
 }
 

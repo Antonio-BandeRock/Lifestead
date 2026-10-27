@@ -122,7 +122,7 @@ export const SETUP_HOW_LINES: { label: string; line: string }[] = [
   },
   { label: SETUP_BACK_LABEL, line: 'Goes to the page before, to look at it or change it.' },
   { label: CHANGE_LABEL, line: 'Beside the answer you just gave, at the top of the next page. It opens that page again.' },
-  { label: SETUP_GO_LABEL, line: 'Opens the screen where that thing is set up, with a strip over it saying what to do there and how to come back.' },
+  { label: SETUP_GO_LABEL, line: 'Opens the screen where that thing is set up, with a strip at the top saying what to do there and how to come back. The screen moves down below the strip, so the strip never covers anything.' },
   { label: LATER_LABEL, line: 'Puts it off. It comes first in the tour once setup is done.' },
   { label: SETUP_SKIP_LABEL, line: 'Leaves it out. It stays in Your Guide whenever you want it.' },
   { label: SETUP_FINISH_LATER_LABEL, line: 'Lets you into the app now. Setup comes back the next time Lifestead opens.' },

@@ -12,6 +12,7 @@ import { ActiveInputProvider } from '../components/ActiveInputContext';
 import { AppLockGate } from '../components/AppLockGate';
 import { AppKeyboard } from '../components/AppKeyboard';
 import { isDesktopApp } from '../lib/desktop/bridge';
+import { GuideRoomView } from '../components/GuideRoom';
 import { KeyboardLiftProvider, KeyboardLiftReleaser, KeyboardLiftView } from '../components/KeyboardLift';
 import { DatabaseSetupScreen } from '../components/DatabaseSetupScreen';
 import { FirstLaunchAgreement } from '../components/FirstLaunchAgreement';
@@ -550,6 +551,10 @@ function UnlockedApp() {
                 height. */}
             <KeyboardLiftProvider>
               <KeyboardLiftView style={{ flex: 1 }}>
+              {/* Every guide strip sits in its slot at the top and the screens
+                  move down below them, so none of them covers anything to
+                  read, type in or press (1.0.74.10, components/GuideRoom.tsx). */}
+              <GuideRoomView>
               {/* P34: names the version this window is, on the desktop only. */}
               <VersionPreviewBar />
               <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.background } }}>
@@ -941,6 +946,7 @@ function UnlockedApp() {
                   }}
                 />
               </Stack>
+              </GuideRoomView>
               </KeyboardLiftView>
               {/* Puts the content back down when the keyboard closes.
                   A leaf that renders null, so subscribing it to the active

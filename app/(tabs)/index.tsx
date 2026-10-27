@@ -236,6 +236,7 @@ import { countWaiting } from '../../lib/waitingAnswers';
 import { useBandFolds } from '../../hooks/useBandFolds';
 import { useWalkMark } from '../../components/WalkMark';
 import { ThumbRow } from '../../components/ThumbRow';
+import { StandaloneKeyboard } from '../../components/StandaloneKeyboard';
 import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { VaultClosedBand } from '../../components/VaultClosedBand';
 import type { VaultCategory } from '../../lib/vault';
@@ -5101,6 +5102,9 @@ export default function HomeScreen() {
         </Modal>
 
         <Modal visible={quickLogModal != null} transparent animationType={modalAnimationType('fade')} onRequestClose={closeQuickLogModal}>
+          {/* Its own window, so its own app keyboard (1.0.74.10): the root
+              one was drawn underneath, out of reach. */}
+          <StandaloneKeyboard>
           <View style={styles.modalBackdrop}>
             <Pressable accessibilityLabel="Close" style={styles.modalBackdropTouchable} onPress={closeQuickLogModal} />
             <View style={styles.modalCard}>
@@ -5195,6 +5199,7 @@ export default function HomeScreen() {
               ) : null}
             </View>
           </View>
+          </StandaloneKeyboard>
         </Modal>
     </View>
   );

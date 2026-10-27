@@ -8,7 +8,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { usePathname, useRouter, type Href } from 'expo-router';
 import { useCallback, useEffect, useRef, useState, type ComponentProps } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import {
@@ -25,6 +24,7 @@ import { hideGuidedTour, passTourStop } from '../lib/guidedTourDb';
 import { WALK_GROW_LABEL, WALK_SAVED_LINE, WALK_SHRINK_LABEL } from '../lib/storyWalk';
 import type { StoryDestination } from '../lib/yourStory';
 import { loadYourStoryEverything } from '../lib/yourStoryInterviewDb';
+import { GuideStripAnchor } from './GuideRoom';
 import { useStoryWalk } from './StoryWalkHost';
 
 // How often the record is looked for while a stop waits on it.
@@ -45,7 +45,6 @@ export function GuidedTourHost() {
   const walk = useStoryWalk();
   const pathname = usePathname();
   const router = useRouter();
-  const insets = useSafeAreaInsets();
   const [stop, setStop] = useState<TourStop | null>(null);
   const [small, setSmall] = useState(false);
   const [whyOpen, setWhyOpen] = useState(false);
@@ -90,7 +89,7 @@ export function GuidedTourHost() {
   };
 
   return (
-    <View pointerEvents="box-none" style={[styles.anchor, { top: insets.top + 6 }]}>
+    <GuideStripAnchor slot="tour" style={styles.anchor}>
       <View style={styles.strip} accessibilityLiveRegion="polite">
         {justSaved && !small ? (
           <View style={styles.sayRow}>
@@ -131,7 +130,7 @@ export function GuidedTourHost() {
           </View>
         )}
       </View>
-    </View>
+    </GuideStripAnchor>
   );
 }
 

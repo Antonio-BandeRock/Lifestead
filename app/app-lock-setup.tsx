@@ -15,10 +15,10 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
+import { AppTextInput } from "../components/AppTextInput";
 import { ChoosePasscode } from "../components/AppLockGate";
 import { ConfirmItsYou } from "../components/ConfirmItsYou";
 import { HOME_BAND_GAP } from "../components/HomeSectionBand";
@@ -429,7 +429,10 @@ export default function AppLockSetupScreen() {
         {[0, 1].map((i) => (
           <View key={i} style={styles.confirmRow}>
             <Text style={styles.confirmLabel}>Group {confirmGroups[i]}</Text>
-            <TextInput
+            {/* The app keyboard (1.0.74.10). It types lowercase too, which
+                groupMatches reads the same as capitals. */}
+            <AppTextInput
+              voice={false}
               style={styles.confirmInput}
               value={typedGroups[i]}
               onChangeText={(text) =>

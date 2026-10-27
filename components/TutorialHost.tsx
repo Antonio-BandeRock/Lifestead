@@ -51,7 +51,8 @@ import {
   howToByKey,
 } from '../lib/tutorials';
 import { SHOW_ME_LABEL, requestShowMe, subscribeSpotTapped } from '../lib/walkSpots';
-import { WalkButton, useStripPlace } from './StoryWalkHost';
+import { GuideStripAnchor } from './GuideRoom';
+import { WalkButton } from './StoryWalkHost';
 
 export function useTutorialRun(): TutorialRun | null {
   const [run, setRun] = useState<TutorialRun | null>(getTutorialRun);
@@ -75,7 +76,6 @@ export function TutorialHost() {
   const run = useTutorialRun();
   const pathname = usePathname();
   const screen = useReportedScreen();
-  const stripPlace = useStripPlace();
   const [small, setSmall] = useState(false);
   // The keys and lines are the same whichever tab comes first, so one
   // lookup serves every run.
@@ -161,7 +161,7 @@ export function TutorialHost() {
   const say = finished ? TUTORIAL_FINISHED_LINE : step?.say ?? '';
 
   return (
-    <View pointerEvents="box-none" style={[styles.anchor, { top: stripPlace.top }]} onLayout={stripPlace.onLayout}>
+    <GuideStripAnchor slot="tutorial" style={styles.anchor}>
       <View style={styles.strip} accessibilityLiveRegion="polite">
         {small || !found ? null : (
           <Text style={styles.caption} numberOfLines={2}>
@@ -200,7 +200,7 @@ export function TutorialHost() {
           </View>
         )}
       </View>
-    </View>
+    </GuideStripAnchor>
   );
 }
 
