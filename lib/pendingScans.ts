@@ -62,13 +62,13 @@ export function orderPendingScans(scans: PendingScan[]): PendingScan[] {
 function scannedWhen(scan: PendingScan, now: Date): string {
   const at = new Date(scan.scannedAt);
   if (Number.isNaN(at.getTime())) return '';
-  const time = at.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  const time = at.toLocaleTimeString(globalThis.lifesteadDateLocale, { hour: 'numeric', minute: '2-digit' });
   const sameDay = at.toDateString() === now.toDateString();
   if (sameDay) return `scanned at ${time}`;
   const yesterday = new Date(now);
   yesterday.setDate(now.getDate() - 1);
   if (at.toDateString() === yesterday.toDateString()) return `scanned yesterday at ${time}`;
-  return `scanned ${at.toLocaleDateString([], { month: 'short', day: 'numeric' })}`;
+  return `scanned ${at.toLocaleDateString(globalThis.lifesteadDateLocale, { month: 'short', day: 'numeric' })}`;
 }
 
 export function pendingScanTitle(scan: PendingScan): string {

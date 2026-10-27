@@ -104,6 +104,6 @@ export const AGREEMENT_CHANGED_LINE = 'The wording below has changed since you l
 export function agreedLine(record: AgreementRecord | null): string {
   if (!record) return 'Not agreed to on this device yet.';
   const when = new Date(record.agreedAt);
-  const day = when.toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' });
+  const day = when.toLocaleDateString(globalThis.lifesteadDateLocale, { day: 'numeric', month: 'long', year: 'numeric' });
   return record.appVersion ? `Agreed on ${day}, in version ${record.appVersion}.` : `Agreed on ${day}.`;
 }

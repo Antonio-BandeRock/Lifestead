@@ -241,6 +241,7 @@ import { VaultClosedBand } from '../../components/VaultClosedBand';
 import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
 import { t } from '../../lib/i18n';
+import { appLocale } from '@/lib/language';
 
 // What Home shows that the vault can hold: check-ins and flares, the
 // morning readings, the week, pacing and the assessment banner.
@@ -758,7 +759,7 @@ const REPORT_WINDOW_OPTIONS = [
 function gardenTaskDayLabel(scheduledFor: string, today: string): string {
   const day = scheduledFor.slice(0, 10);
   if (day === today) return 'Today';
-  return new Date(`${day}T12:00:00`).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  return new Date(`${day}T12:00:00`).toLocaleDateString(appLocale(), { month: 'short', day: 'numeric' });
 }
 
 // One dated thing that has something to say today, 2026-09-23. The lead is
@@ -2344,7 +2345,7 @@ export default function HomeScreen() {
     // this zero," not a dead end.
     router.navigate({ pathname: '/insights', params: { openInsightsLens: 'nutrients' } });
   }
-  const todayLabel = new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
+  const todayLabel = new Date().toLocaleDateString(appLocale(), { weekday: 'long', month: 'long', day: 'numeric' });
   // 2026-08-29, direct request: this banner "should only be there at all
   // if they have set a preference telling the app that they have a
   // condition" -- so no tracked condition means no reminder at all,

@@ -74,7 +74,7 @@ export function isInMonth(date: string, month: string): boolean {
 
 /** "September 2026". */
 export function monthLabel(month: string): string {
-  return toDate(`${month}-01`).toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+  return toDate(`${month}-01`).toLocaleDateString(globalThis.lifesteadDateLocale, { month: 'long', year: 'numeric' });
 }
 
 /** The seven column headings, Sunday first, one or two letters each. */
@@ -84,7 +84,7 @@ export function weekdayInitials(): string[] {
   for (let i = 0; i < 7; i++) {
     const day = new Date(sunday);
     day.setDate(sunday.getDate() + i);
-    out.push(day.toLocaleDateString(undefined, { weekday: 'short' }).slice(0, 2));
+    out.push(day.toLocaleDateString(globalThis.lifesteadDateLocale, { weekday: 'short' }).slice(0, 2));
   }
   return out;
 }
@@ -116,7 +116,7 @@ export const MONTH_GRID_KEY = 'A dot under a day is a meal planned; a ring is a 
 
 /** What a screen reader says for one day of the grid. */
 export function monthDayAccessibilityLabel(date: string, marks: DayMarks | undefined): string {
-  const day = toDate(date).toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
+  const day = toDate(date).toLocaleDateString(globalThis.lifesteadDateLocale, { weekday: 'long', month: 'long', day: 'numeric' });
   const parts: string[] = [];
   const meals = marks?.meals ?? 0;
   const notes = marks?.notes ?? 0;

@@ -465,7 +465,7 @@ export function describeDevice(device: SyncDevice): string {
 export function describeMoment(iso: string): string {
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return iso;
-  return date.toLocaleString();
+  return date.toLocaleString(globalThis.lifesteadDateLocale);
 }
 
 export type ArrivalPlan =

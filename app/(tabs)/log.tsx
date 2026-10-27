@@ -184,6 +184,7 @@ import { VaultLensFrame } from '../../components/VaultLensFrame';
 import { useWalkMark } from '../../components/WalkMark';
 import type { VaultCategory } from '../../lib/vault';
 import { t, tl } from '../../lib/i18n';
+import { appLocale } from '@/lib/language';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -502,7 +503,7 @@ function nowTimeString24(): string {
 }
 
 function dateLabelFromParts(year: number, month: number, day: number): string {
-  return new Date(year, month - 1, day).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  return new Date(year, month - 1, day).toLocaleDateString(appLocale(), { month: 'short', day: 'numeric' });
 }
 
 function formatEntryDate(value: string): string {

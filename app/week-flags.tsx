@@ -35,6 +35,7 @@ import { getFlaggedItemsByDateRange, type DayFlags, type FlaggedSubCriterion } f
 import { getTrackedConditionsWithNames, type TrackedConditionRef } from '../lib/foodPersonalization';
 import { getSubCriterionSources, getTierDefinition, tierSeverity } from '../lib/sixDimensionsReference';
 import { dateStringOffsetFrom } from '../lib/trendAnalysis';
+import { appLocale } from '@/lib/language';
 
 // The same seven days Home sums: the last six days plus today.
 const WEEK_DAYS = 7;
@@ -49,7 +50,7 @@ function formatDay(dateStr: string, today: string): string {
   if (dateStr === today) return 'Today';
   if (dateStr === dateStringOffsetFrom(today, -1)) return 'Yesterday';
   const [y, m, d] = dateStr.split('-').map(Number);
-  return new Date(y, m - 1, d).toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' });
+  return new Date(y, m - 1, d).toLocaleDateString(appLocale(), { weekday: 'long', month: 'short', day: 'numeric' });
 }
 
 export default function WeekFlagsScreen() {

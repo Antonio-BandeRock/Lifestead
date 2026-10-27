@@ -47,6 +47,7 @@ import { explainNotYet } from "../lib/notYet";
 import { restartApp } from "../lib/restartApp";
 import { wording } from "../lib/playfulCopy";
 import { usePlayfulWording } from "../hooks/usePlayfulWording";
+import { appLocale } from '@/lib/language';
 
 type Mode = "setup" | "passcode" | "recovery" | "biometric" | "off";
 
@@ -77,7 +78,7 @@ function recoveryText(key: RecoveryKey): string {
     "",
     `This opens Lifestead on your ${deviceWord()} if you forget your passcode.`,
     `Keep it somewhere safe and away from the ${deviceWord()}. Anybody holding it and the ${deviceWord()} can open your records.`,
-    `Made ${new Date().toLocaleDateString()}.`,
+    `Made ${new Date().toLocaleDateString(appLocale())}.`,
   ].join("\n");
 }
 
@@ -88,7 +89,7 @@ function recoveryHtml(key: RecoveryKey): string {
 <p style="font-family: monospace; font-size: 24px; letter-spacing: 2px; word-spacing: 12px;">${groups}</p>
 <p>This opens Lifestead on your ${deviceWord()} if you forget your passcode.</p>
 <p>Keep it somewhere safe and away from the ${deviceWord()}. Anybody holding it and the ${deviceWord()} can open your records.</p>
-<p>Made ${new Date().toLocaleDateString()}.</p>
+<p>Made ${new Date().toLocaleDateString(appLocale())}.</p>
 </body></html>`;
 }
 

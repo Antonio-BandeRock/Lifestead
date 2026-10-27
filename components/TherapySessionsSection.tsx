@@ -22,6 +22,7 @@ import { buildTime24, describeTimeInputProblem, formatTime12, splitTime24, type 
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { useWalkMark } from './WalkMark';
+import { appLocale } from '@/lib/language';
 
 function todayDateString(): string {
   const now = new Date();
@@ -36,7 +37,7 @@ function isValidDateString(value: string): boolean {
 function formatShortDate(dateStr: string): string {
   const [year, month, day] = dateStr.split('-').map(Number);
   const date = new Date(year, month - 1, day);
-  return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  return date.toLocaleDateString(appLocale(), { month: 'short', day: 'numeric' });
 }
 
 // Every band here folds, the same rule every tab follows, remembered per

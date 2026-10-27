@@ -816,12 +816,12 @@ function shiftDay(day: string, by: number): string {
 
 function shortDay(day: string): string {
   const [y, m, d] = day.split('-').map(Number);
-  return new Date(y, m - 1, d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  return new Date(y, m - 1, d).toLocaleDateString(globalThis.lifesteadDateLocale, { month: 'short', day: 'numeric' });
 }
 
 function longDay(day: string): string {
   const [y, m, d] = day.split('-').map(Number);
-  return new Date(y, m - 1, d).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
+  return new Date(y, m - 1, d).toLocaleDateString(globalThis.lifesteadDateLocale, { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
 function spreadDisplay(average: number, lowest: number, highest: number, unit: string): string {

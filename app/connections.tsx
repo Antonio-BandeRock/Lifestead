@@ -72,6 +72,7 @@ import {
   type LanSyncStatus,
 } from '../lib/lanSync';
 import { canEncryptTo } from '../lib/partnerCrypto';
+import { appLocale } from '@/lib/language';
 import {
   checkLinkedFile,
   importPartnerFile,
@@ -701,7 +702,7 @@ export default function ConnectionsScreen() {
                 <>
                   <View style={styles.rowInfo}>
                     <Text style={styles.rowName}>{connection.name}</Text>
-                    <Text style={styles.rowMeta}>Connected {new Date(connection.pairedAt).toLocaleDateString()}</Text>
+                    <Text style={styles.rowMeta}>Connected {new Date(connection.pairedAt).toLocaleDateString(appLocale())}</Text>
                     {connection.role === 'partner' ? (
                       <>
                         <Text style={styles.rowBadge}>Partner</Text>

@@ -27,6 +27,7 @@ import { lastCheckLine } from '../lib/backupCheck';
 import { REFERENCE_DB_VERSION } from '../lib/referenceDbVersion';
 import { referenceDataDate } from '../lib/reportVersion';
 import { describeMoment } from '../lib/snapshotSync';
+import { appLocale } from '@/lib/language';
 
 // How many queued reminders are listed. The rest are counted.
 const QUEUED_SHOWN = 12;
@@ -73,8 +74,8 @@ export default function AppStatusScreen() {
           label: 'Last backup check',
           value: lastCheckLine(
             facts.lastBackupCheck,
-            facts.lastBackupCheck ? new Date(facts.lastBackupCheck.checkedAt).toLocaleString() : '',
-            facts.lastBackupCheck ? new Date(facts.lastBackupCheck.exportedAt).toLocaleString() : '',
+            facts.lastBackupCheck ? new Date(facts.lastBackupCheck.checkedAt).toLocaleString(appLocale()) : '',
+            facts.lastBackupCheck ? new Date(facts.lastBackupCheck.exportedAt).toLocaleString(appLocale()) : '',
           ),
           tone: facts.lastBackupCheck ? 'ok' : 'attention',
         },
@@ -135,7 +136,7 @@ export default function AppStatusScreen() {
                       <View style={styles.rowMain}>
                         <Text style={styles.rowTitle}>{queued.title}</Text>
                         <Text style={styles.caption}>
-                          {queued.fireAt.toLocaleString()}
+                          {queued.fireAt.toLocaleString(appLocale())}
                           {queued.snoozed ? ', snoozed' : ''}
                         </Text>
                       </View>

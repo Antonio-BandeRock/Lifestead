@@ -143,7 +143,7 @@ function renderSection(section: ReportSection): string {
 }
 
 export function renderReportHtml(doc: ReportDocument): string {
-  const generated = new Date(doc.generatedAt).toLocaleString();
+  const generated = new Date(doc.generatedAt).toLocaleString(globalThis.lifesteadDateLocale);
   const body: string[] = [];
   body.push('<header>');
   body.push(`<h1>${escapeHtml(doc.title)}</h1>`);

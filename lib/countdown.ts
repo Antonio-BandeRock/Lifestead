@@ -149,8 +149,8 @@ export function countdownFigure(countdown: Pick<GardenCountdown, 'startedOn' | '
  *  lands. */
 export function describeCountdown(countdown: Pick<GardenCountdown, 'startedOn' | 'days' | 'doneAt'>, today: string): string {
   const due = countdownDueDate(countdown);
-  const dueLabel = new Date(`${due}T12:00:00`).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-  const startLabel = new Date(`${countdown.startedOn}T12:00:00`).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  const dueLabel = new Date(`${due}T12:00:00`).toLocaleDateString(globalThis.lifesteadDateLocale, { month: 'short', day: 'numeric' });
+  const startLabel = new Date(`${countdown.startedOn}T12:00:00`).toLocaleDateString(globalThis.lifesteadDateLocale, { month: 'short', day: 'numeric' });
   const span = `${countdown.days} ${countdown.days === 1 ? 'day' : 'days'} from ${startLabel}`;
   const state = countdownState(countdown, today);
   if (state === 'done') {
@@ -270,10 +270,10 @@ export function timedCountdownFigure(countdown: { endsAt: string; doneAt: string
 }
 
 function clock(at: Date, now: Date): string {
-  const time = at.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+  const time = at.toLocaleTimeString(globalThis.lifesteadDateLocale, { hour: 'numeric', minute: '2-digit' });
   const sameDay = at.getFullYear() === now.getFullYear() && at.getMonth() === now.getMonth() && at.getDate() === now.getDate();
   if (sameDay) return time;
-  return `${at.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })} at ${time}`;
+  return `${at.toLocaleDateString(globalThis.lifesteadDateLocale, { weekday: 'short', month: 'short', day: 'numeric' })} at ${time}`;
 }
 
 /** The sentence under a timed counter: how long it was, from when, and

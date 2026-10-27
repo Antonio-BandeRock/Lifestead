@@ -338,6 +338,7 @@ import { VaultClosedBand } from '../../components/VaultClosedBand';
 import { useVaultReloadKey } from '../../lib/vaultReads';
 import { useCategoryClosed } from '../../lib/vaultSession';
 import { t } from '../../lib/i18n';
+import { appLocale } from '@/lib/language';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -970,7 +971,7 @@ function daysBetweenLocal(fromDate: string, toDate: string): number {
 
 function formatWeekdayShort(dateStr: string): string {
   const [year, month, day] = dateStr.split('-').map(Number);
-  return new Date(year, month - 1, day).toLocaleDateString(undefined, { weekday: 'short' });
+  return new Date(year, month - 1, day).toLocaleDateString(appLocale(), { weekday: 'short' });
 }
 
 function formatDayNumber(dateStr: string): string {
@@ -2270,7 +2271,7 @@ function statusSuffix(status: string): string {
 
 function formatPastMealDate(value: string): string {
   const [year, month, day] = value.slice(0, 10).split('-').map(Number);
-  return new Date(year, month - 1, day).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  return new Date(year, month - 1, day).toLocaleDateString(appLocale(), { month: 'short', day: 'numeric' });
 }
 
 // "Past Meals" -- 2026-08-14, direct request: a real place to review and,
@@ -6145,7 +6146,7 @@ function isValidDateString(value: string): boolean {
 function formatShortDate(dateStr: string): string {
   const [year, month, day] = dateStr.split('-').map(Number);
   const date = new Date(year, month - 1, day);
-  return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  return date.toLocaleDateString(appLocale(), { month: 'short', day: 'numeric' });
 }
 
 function addDaysToDateStringLocal(dateStr: string, days: number): string {

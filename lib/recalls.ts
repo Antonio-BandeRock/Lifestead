@@ -317,7 +317,7 @@ export function sortMatches(matches: RecallMatch[]): RecallMatch[] {
 function readableDay(day: string): string {
   const [y, m, d] = day.split('-').map(Number);
   if (!y || !m || !d) return day;
-  return new Date(y, m - 1, d).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+  return new Date(y, m - 1, d).toLocaleDateString(globalThis.lifesteadDateLocale, { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
 export function recallTitle(match: RecallMatch): string {

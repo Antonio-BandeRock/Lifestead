@@ -761,7 +761,7 @@ export function renderReportText(doc: ReportDocument): string {
   const lines: string[] = [];
   lines.push(doc.title.toUpperCase());
   lines.push(`Range: ${doc.rangeLabel} (last ${doc.days} days)`);
-  lines.push(`Generated: ${new Date(doc.generatedAt).toLocaleString()}`);
+  lines.push(`Generated: ${new Date(doc.generatedAt).toLocaleString(globalThis.lifesteadDateLocale)}`);
   lines.push('');
   for (const paragraph of doc.preface) lines.push(paragraph);
   lines.push('');

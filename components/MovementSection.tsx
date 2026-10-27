@@ -42,6 +42,7 @@ import { isDesktopApp } from '../lib/desktop/bridge';
 import { EXERCISE_TYPE_NAMES, syncHealthConnect } from '../lib/healthSync';
 import { detectMeasurementSystemFromLocale, kgToLb } from '../lib/measurement';
 import { t, tl } from '../lib/i18n';
+import { appLocale } from '@/lib/language';
 
 // Movement: what the phone's health store has, read as is. Life's eighth
 // area, 2026-09-14, the JS half of the Health Connect rebuild.
@@ -84,13 +85,13 @@ function formatCount(value: number): string {
 function formatDay(iso: string): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return iso.slice(0, 10);
-  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  return d.toLocaleDateString(appLocale(), { month: 'short', day: 'numeric' });
 }
 
 function formatTime(iso: string): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return '';
-  return d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+  return d.toLocaleTimeString(appLocale(), { hour: 'numeric', minute: '2-digit' });
 }
 
 function formatHours(hours: number): string {

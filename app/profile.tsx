@@ -282,6 +282,7 @@ import { VaultClosedBand } from '../components/VaultClosedBand';
 import { useOnVaultChange } from '../lib/vaultReads';
 import { useCategoryClosed } from '../lib/vaultSession';
 import { t, tl } from '../lib/i18n';
+import { appLocale } from '@/lib/language';
 
 // Whether a backup that has been reached is restored or only checked.
 type BackupUse = 'restore' | 'check';
@@ -2841,7 +2842,7 @@ export default function ProfileScreen() {
     const record: BackupCheckRecord = { ...summary, checkedAt: new Date().toISOString(), source };
     await saveBackupCheck(record);
     setLastBackupCheck(record);
-    showBackupAlert('Backup checked', backupCheckSentence(summary, new Date(envelope.exportedAt).toLocaleString()));
+    showBackupAlert('Backup checked', backupCheckSentence(summary, new Date(envelope.exportedAt).toLocaleString(appLocale())));
   }
 
   async function runRestore(content: string) {
@@ -2857,7 +2858,7 @@ export default function ProfileScreen() {
     }
     const shouldRestore = await confirmBackup({
       title: 'Restore this backup?',
-      message: `This will replace everything currently on this device with what's in the backup from ${new Date(envelope.exportedAt).toLocaleString()}. This can't be undone.`,
+      message: `This will replace everything currently on this device with what's in the backup from ${new Date(envelope.exportedAt).toLocaleString(appLocale())}. This can't be undone.`,
       confirmLabel: 'Restore',
       destructive: true,
     });
@@ -5716,7 +5717,7 @@ export default function ProfileScreen() {
               title="Which copy do you want?"
               message={
                 syncChoice
-                  ? 'A copy saved from your ' + otherDeviceKind + ' on ' + new Date(syncChoice.latest.savedAt).toLocaleString() +
+                  ? 'A copy saved from your ' + otherDeviceKind + ' on ' + new Date(syncChoice.latest.savedAt).toLocaleString(appLocale()) +
                     ' is in your shared folder. Load it here, replacing what is on this ' + (isDesktopApp() ? 'computer' : 'phone') +
                     ', or keep what is here and save it over that copy.' +
                     ' From then on the two are kept in step on their own and nothing has to be chosen again.'
@@ -5753,7 +5754,7 @@ export default function ProfileScreen() {
                 {localBackups.map((file) => (
                   <View key={file.uri} style={styles.localBackupRow}>
                     <Text style={styles.concernLabel}>
-                      {file.modificationTimeMs ? new Date(file.modificationTimeMs).toLocaleString() : file.name}
+                      {file.modificationTimeMs ? new Date(file.modificationTimeMs).toLocaleString(appLocale()) : file.name}
                     </Text>
                     <Text style={styles.derivedText}>{file.uri}</Text>
                   </View>
@@ -5769,8 +5770,8 @@ export default function ProfileScreen() {
             <Text style={[styles.helpText, styles.derivedText]}>
               {lastCheckLine(
                 lastBackupCheck,
-                lastBackupCheck ? new Date(lastBackupCheck.checkedAt).toLocaleString() : '',
-                lastBackupCheck ? new Date(lastBackupCheck.exportedAt).toLocaleString() : '',
+                lastBackupCheck ? new Date(lastBackupCheck.checkedAt).toLocaleString(appLocale()) : '',
+                lastBackupCheck ? new Date(lastBackupCheck.exportedAt).toLocaleString(appLocale()) : '',
               )}
             </Text>
             <TouchableOpacity

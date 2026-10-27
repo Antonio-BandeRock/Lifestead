@@ -50,7 +50,7 @@ function dayName(date: string, today: string): string {
   if (date === today) return 'today';
   if (date === addDays(today, 1)) return 'tomorrow';
   const [y, m, d] = date.split('-').map(Number);
-  return new Date(y, m - 1, d).toLocaleDateString('en-US', { weekday: 'long' });
+  return new Date(y, m - 1, d).toLocaleDateString(globalThis.lifesteadDateLocale, { weekday: 'long' });
 }
 
 export function describeRainAmount(amount: number, unit: RainUnit): string {

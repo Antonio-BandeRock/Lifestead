@@ -47,6 +47,7 @@ import { QuickAreaForm } from './QuickAreaForm';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { t } from '../lib/i18n';
+import { appLocale } from '@/lib/language';
 
 // Garden > Growing Conditions > Sensors on Your Network (I20, 2026-09-28):
 // an Ecowitt gateway read over the home network while the app is open.
@@ -97,7 +98,7 @@ function when(stamp: string | null): string {
   if (!stamp) return '';
   const date = new Date(stamp);
   if (!Number.isFinite(date.getTime())) return '';
-  return date.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+  return date.toLocaleString(appLocale(), { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
 }
 
 export function EcowittGatewaySection(props: {

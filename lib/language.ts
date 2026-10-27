@@ -67,14 +67,41 @@ export function getLanguage(): AppLanguage {
   if (resolved === null) {
     const picked = getLanguageChoice();
     resolved = picked === 'phone' ? phoneLanguage() : picked;
+    globalThis.lifesteadDateLocale = localeFor(resolved);
   }
   return resolved;
+}
+
+declare global {
+  /**
+   * The locale dates are written in, kept on the global so the pure modules
+   * that write sentences (lib/countdown.ts, lib/monthGrid.ts and the rest)
+   * can read it without importing this file, which their node tests could
+   * not load. Undefined means the phone's own way of writing a date.
+   */
+  var lifesteadDateLocale: string | undefined;
+}
+
+/**
+ * The locale dates are written in. Spanish is always Mexican Spanish. English
+ * keeps the phone's own way of writing a date (as it did before 2026-10-26),
+ * except on a phone set to Spanish, where it is US English so an English
+ * screen does not carry Spanish month names.
+ */
+export function appLocale(): string | undefined {
+  return localeFor(getLanguage());
+}
+
+function localeFor(language: AppLanguage): string | undefined {
+  if (language === 'es') return 'es-MX';
+  return phoneLanguage() === 'es' ? 'en-US' : undefined;
 }
 
 export function setLanguageChoice(next: LanguageChoice): void {
   if (getLanguageChoice() === next) return;
   choice = next;
   resolved = null;
+  getLanguage();
   try {
     choiceFile().write(next);
   } catch {

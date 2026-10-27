@@ -140,6 +140,7 @@ import { ThumbRow } from '../../components/ThumbRow';
 import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { useOnVaultChange } from '../../lib/vaultReads';
 import { t, tl } from '../../lib/i18n';
+import { appLocale } from '@/lib/language';
 
 // This page's own identity color -- see constants/colors.ts's own comment
 // on tabGarden for how it was chosen.
@@ -2470,7 +2471,7 @@ function UpcomingTasksLens({ scrollBottomPadding }: { scrollBottomPadding: numbe
         {rain?.status === 'ready' ? (
           <Text style={styles.captionText}>
             Rain on a watering task is the Open-Meteo forecast for the place saved in My Zone, read at{' '}
-            {new Date(rain.forecast.fetchedAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}. It
+            {new Date(rain.forecast.fetchedAt).toLocaleTimeString(appLocale(), { hour: 'numeric', minute: '2-digit' })}. It
             is a chance, never a promise, and nothing here moves or skips a task.
           </Text>
         ) : rain?.status === 'error' ? (
