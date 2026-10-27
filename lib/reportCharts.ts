@@ -126,8 +126,10 @@ function escapeXml(text: string): string {
   return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-/** The chart as an inline <svg>, or an empty string when nothing is recorded. */
-export function renderChartSvg(chart: ReportChart): string {
+/** The chart as an inline <svg>, or an empty string when nothing is recorded.
+ *  `say` puts its words (the unit, the day labels) in the app's language;
+ *  it is passed in so this file keeps no imports. */
+export function renderChartSvg(chart: ReportChart, say: (english: string) => string = (english) => english): string {
   const points = chartPointsInRange(chart);
   if (points.length === 0) return '';
   const days = chartDayCount(chart);
@@ -150,7 +152,7 @@ export function renderChartSvg(chart: ReportChart): string {
       `<text x="${LEFT - 6}" y="${ty}" dy="3" text-anchor="end" font-size="10" fill="${MUTED}">${escapeXml(formatValue(tick, chart.decimals))}</text>`,
     );
   }
-  parts.push(`<text x="${LEFT - 6}" y="10" text-anchor="end" font-size="9" fill="${MUTED}">${escapeXml(chart.unit)}</text>`);
+  parts.push(`<text x="${LEFT - 6}" y="10" text-anchor="end" font-size="9" fill="${MUTED}">${escapeXml(say(chart.unit))}</text>`);
 
   if (chart.style === 'bars') {
     const barW = Math.max(1, slot * 0.7);
@@ -177,7 +179,7 @@ export function renderChartSvg(chart: ReportChart): string {
     const anchor = index === 0 ? 'start' : index === labelDays.length - 1 ? 'end' : 'middle';
     const x = index === 0 ? LEFT : index === labelDays.length - 1 ? WIDTH - RIGHT : LEFT + (offset + 0.5) * slot;
     parts.push(
-      `<text x="${x.toFixed(1)}" y="${HEIGHT - 6}" text-anchor="${anchor}" font-size="10" fill="${MUTED}">${escapeXml(dayLabel(start + offset))}</text>`,
+      `<text x="${x.toFixed(1)}" y="${HEIGHT - 6}" text-anchor="${anchor}" font-size="10" fill="${MUTED}">${escapeXml(say(dayLabel(start + offset)))}</text>`,
     );
   });
   parts.push('</svg>');

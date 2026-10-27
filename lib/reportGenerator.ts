@@ -255,7 +255,7 @@ export async function buildReport(
       charts: [
         {
           title: 'Flagged items a day',
-          chart: { style: 'bars', startDate: rangeStart, endDate: rangeEnd, points: sixDsSeries, unit: 'items', decimals: 0, slotNoun: 'day' },
+          chart: { style: 'bars', startDate: rangeStart, endDate: rangeEnd, points: sixDsSeries, unit: 'flagged items', decimals: 0, slotNoun: 'day' },
         },
       ],
       note: 'Logged foods whose scored properties matter for the conditions above. A flag is a property worth knowing about, not a verdict on the food.',

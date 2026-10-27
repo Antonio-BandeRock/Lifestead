@@ -16,6 +16,8 @@
 
 import { chartCaption, renderChartSvg } from './reportCharts';
 import type { ReportDocument, ReportSection } from './reportGenerator';
+import { getLanguage } from './language';
+import { t, tl } from './i18n';
 
 const INK = '#1f2a2e';
 const MUTED = '#5c6a70';
@@ -23,6 +25,13 @@ const RULE = '#244147';
 const LINE = '#d5dcdf';
 const ZEBRA = '#f3f6f7';
 const CALLOUT = '#fbf6ea';
+
+// The document is built in English, the way every screen is, and each
+// piece is put in the app's language here, at the moment the page is laid
+// out, then escaped.
+function words(text: string): string {
+  return escapeHtml(tl(text));
+}
 
 export function escapeHtml(text: string): string {
   return text
@@ -103,38 +112,38 @@ function renderSection(section: ReportSection): string {
   const callout = isSelfReportedSection(section);
   const parts: string[] = [];
   parts.push(`<section${callout ? ' class="callout"' : ''}>`);
-  if (callout) parts.push('<div class="tag">Self-reported, not verified</div>');
-  parts.push(`<h2>${escapeHtml(section.heading)}</h2>`);
-  if (section.note) parts.push(`<p class="note">${escapeHtml(section.note)}</p>`);
+  if (callout) parts.push(`<div class="tag">${words('Self-reported, not verified')}</div>`);
+  parts.push(`<h2>${words(section.heading)}</h2>`);
+  if (section.note) parts.push(`<p class="note">${words(section.note)}</p>`);
   if (section.rows.length === 0) {
-    parts.push(`<p class="empty">${escapeHtml(section.empty)}</p>`);
+    parts.push(`<p class="empty">${words(section.empty)}</p>`);
   } else if (section.kind === 'photos') {
     parts.push('<div class="photos">');
     for (const photo of section.rows) {
-      parts.push(`<figure><img src="${escapeHtml(photo.dataUri)}" alt=""><figcaption>${escapeHtml(photo.caption)}</figcaption></figure>`);
+      parts.push(`<figure><img src="${escapeHtml(photo.dataUri)}" alt=""><figcaption>${words(photo.caption)}</figcaption></figure>`);
     }
     parts.push('</div>');
   } else if (section.kind === 'list') {
     parts.push('<ul>');
-    for (const row of section.rows) parts.push(`<li>${escapeHtml(row)}</li>`);
+    for (const row of section.rows) parts.push(`<li>${words(row)}</li>`);
     parts.push('</ul>');
   } else {
     parts.push('<table><thead><tr>');
-    for (const column of section.columns) parts.push(`<th>${escapeHtml(column)}</th>`);
+    for (const column of section.columns) parts.push(`<th>${words(column)}</th>`);
     parts.push('</tr></thead><tbody>');
     for (const cells of section.rows) {
       parts.push('<tr>');
-      for (const cell of cells) parts.push(`<td>${escapeHtml(cell)}</td>`);
+      for (const cell of cells) parts.push(`<td>${words(cell)}</td>`);
       parts.push('</tr>');
     }
     parts.push('</tbody></table>');
   }
   if (section.kind !== 'photos') {
     for (const { title, chart } of section.charts ?? []) {
-      const svg = renderChartSvg(chart);
+      const svg = renderChartSvg(chart, tl);
       if (!svg) continue;
       parts.push(
-        `<div class="chart"><p class="chart-title">${escapeHtml(title)}</p>${svg}<p class="chart-caption">${escapeHtml(chartCaption(chart))}</p></div>`,
+        `<div class="chart"><p class="chart-title">${words(title)}</p>${svg}<p class="chart-caption">${words(chartCaption(chart))}</p></div>`,
       );
     }
   }
@@ -146,14 +155,14 @@ export function renderReportHtml(doc: ReportDocument): string {
   const generated = new Date(doc.generatedAt).toLocaleString(globalThis.lifesteadDateLocale);
   const body: string[] = [];
   body.push('<header>');
-  body.push(`<h1>${escapeHtml(doc.title)}</h1>`);
-  body.push(`<p class="meta">${escapeHtml(doc.rangeLabel)} (last ${doc.days} days). Generated ${escapeHtml(generated)}.</p>`);
+  body.push(`<h1>${words(doc.title)}</h1>`);
+  body.push(`<p class="meta">${words(doc.rangeLabel)} ${escapeHtml(t('(last {days} days). Generated {when}.', { days: doc.days, when: generated }))}</p>`);
   body.push('</header>');
   body.push('<div class="preface">');
-  for (const paragraph of doc.preface) body.push(`<p>${escapeHtml(paragraph)}</p>`);
+  for (const paragraph of doc.preface) body.push(`<p>${words(paragraph)}</p>`);
   body.push('</div>');
   for (const section of doc.sections) body.push(renderSection(section));
-  body.push(`<footer>${escapeHtml(doc.footer)}<br>${escapeHtml(doc.versionLine)}</footer>`);
+  body.push(`<footer>${words(doc.footer)}<br>${words(doc.versionLine)}</footer>`);
 
-  return `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escapeHtml(doc.title)}</title><style>${CSS}</style></head><body>${body.join('')}</body></html>`;
+  return `<!DOCTYPE html><html lang="${getLanguage() === 'es' ? 'es-MX' : 'en'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${words(doc.title)}</title><style>${CSS}</style></head><body>${body.join('')}</body></html>`;
 }

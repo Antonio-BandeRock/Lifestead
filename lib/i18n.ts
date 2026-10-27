@@ -183,6 +183,14 @@ const SEPARATED = /\n|\s[·•|]\s/;
 // up a sentence at a time (byPieces) rather than as one loose pattern.
 const ACROSS_SENTENCES = /[.!?;]\s+[A-Z0-9"“(¿¡]/;
 
+// The full stop in a title before a name ("Dr. Ruiz") ends no sentence.
+const TITLE_STOP = /\b(Dr|Dra|Mr|Mrs|Ms|St|Jr|Sr)\.(?=\s)/g;
+const ENDS_IN_TITLE = /\b(Dr|Dra|Mr|Mrs|Ms|St|Jr|Sr)\.$/;
+
+function acrossSentences(value: string): boolean {
+  return ACROSS_SENTENCES.test(value.replace(TITLE_STOP, (_, title: string) => title));
+}
+
 // "a las 7:45 a. m." ends a sentence with the full stop it already has.
 function oneStop(words: string): string {
   return words.replace(/(\b[ap]\. m\.)\./g, (_, clock: string) => clock);
@@ -200,7 +208,7 @@ function byPattern(table: Compiled, english: string, depth: number): string | un
   for (const pattern of candidates) {
     const match = pattern.regex.exec(trimmed);
     // A value never runs across a line or a middle dot: those are pieces.
-    if (!match || match.slice(1).some((value) => SEPARATED.test(value) || ACROSS_SENTENCES.test(value))) continue;
+    if (!match || match.slice(1).some((value) => SEPARATED.test(value) || acrossSentences(value))) continue;
     const values: Record<string, string> = {};
     pattern.names.forEach((name, index) => {
       const value = match[index + 1];
@@ -238,6 +246,12 @@ function byPieces(table: Compiled, english: string, depth: number): string | und
   }
   // Between sentences.
   const sentences = english.split(/(?<=[.!?])(\s+)(?=[A-Z0-9"“(¿¡])/);
+  // Put back together what a title's full stop split apart.
+  for (let at = sentences.length - 2; at >= 1; at -= 2) {
+    if (ENDS_IN_TITLE.test(sentences[at - 1])) {
+      sentences.splice(at - 1, 3, sentences[at - 1] + sentences[at] + sentences[at + 1]);
+    }
+  }
   if (sentences.length >= 3) {
     let changed = false;
     const out = sentences.map((piece, index) => {
