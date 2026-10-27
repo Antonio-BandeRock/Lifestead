@@ -36,6 +36,7 @@ import {
 import { holdOn } from './peerRelationships';
 import { instantInZone, parseTravelMode } from './travelTime';
 import { getHomeZone } from './travelTimeDb';
+import { inAppLanguage } from './notificationWords';
 
 const ALERTS_KEY = 'dose_watch_alerts';
 // The same channel as this phone's own dose reminders ('Reminders' in
@@ -258,13 +259,13 @@ export async function reconcileDoseAlerts(): Promise<void> {
       try {
         await Notifications.cancelScheduledNotificationAsync(identifier).catch(() => undefined);
         if (fireAtMs <= now + 5_000) {
-          await Notifications.scheduleNotificationAsync({
+          await Notifications.scheduleNotificationAsync(inAppLanguage({
             identifier,
             content,
             trigger: Platform.OS === 'android' ? { channelId: ANDROID_CHANNEL_ID } : null,
-          });
+          }));
         } else {
-          await Notifications.scheduleNotificationAsync({
+          await Notifications.scheduleNotificationAsync(inAppLanguage({
             identifier,
             content,
             trigger: {
@@ -272,7 +273,7 @@ export async function reconcileDoseAlerts(): Promise<void> {
               date: new Date(fireAtMs),
               ...(Platform.OS === 'android' ? { channelId: ANDROID_CHANNEL_ID } : {}),
             },
-          });
+          }));
         }
         await db.runAsync(
           `INSERT INTO peer_dose_alerts (connection_id, dose_id, fire_at) VALUES (?, ?, ?)

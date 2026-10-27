@@ -36,6 +36,7 @@ import {
 } from '../lib/stepTimers';
 import { modalAnimationType } from '../lib/visualPreferences';
 import { useKeepScreenOn } from '../lib/keepScreenOn';
+import { inAppLanguage } from '@/lib/notificationWords';
 
 type CookTimer = {
   id: string;
@@ -68,7 +69,7 @@ async function scheduleTimerNotification(id: string, seconds: number, body: stri
   try {
     if (!(await hasReminderPermission())) return null;
     const identifier = `${NOTIFICATION_PREFIX}${id}`;
-    await Notifications.scheduleNotificationAsync({
+    await Notifications.scheduleNotificationAsync(inAppLanguage({
       identifier,
       content: { title: 'Timer done', body, sound: true },
       trigger: {
@@ -76,7 +77,7 @@ async function scheduleTimerNotification(id: string, seconds: number, body: stri
         date: new Date(Date.now() + seconds * 1000),
         channelId: 'reminders',
       },
-    });
+    }));
     return identifier;
   } catch (error) {
     console.error('[CookMode] scheduling a timer notification failed', error);

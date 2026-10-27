@@ -61,7 +61,9 @@ check('stamps found in the module', stampLeads.length >= 7);
 
 // 3.
 check('the reconcile compares through withoutFreshness',
-  source.includes('withoutFreshness(request.content.body) === withoutFreshness(want.body)'));
+  // The queued words are compared in English (queuedEnglish), so a reminder
+  // shown in Spanish still matches the English the module builds.
+  source.includes('withoutFreshness(queued.body) === withoutFreshness(want.body)'));
 check('no whole-body comparison left', !source.includes('request.content.body === want.body'));
 
 // 4.

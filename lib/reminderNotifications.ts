@@ -111,6 +111,8 @@ import { answerVaultOffer, vaultOfferDue } from './vaultOffer';
 import { markVaultOffered, takeVaultSetUpWaiting } from './vaultSession';
 import { APP_UPDATE_NOTIFICATION_ID, updateReadyText } from './appUpdate';
 import { APP_VERSION } from '../constants/version';
+import { inAppLanguage, queuedEnglish } from './notificationWords';
+import { t } from './i18n';
 
 // Local reminders: the scheduled doses in Schedules > Meds, the visits in
 // Schedules > Appointments, the meals and drinks on the schedule, the work
@@ -527,12 +529,14 @@ function buildPlanned(candidate: TravelCandidate, now: Date): PlannedNotificatio
     // calendar and the lens already show.
     if (fireAt.getTime() <= now.getTime()) return null;
     const time = formatTime12(`${pad(scheduledFor.getHours())}:${pad(scheduledFor.getMinutes())}`);
-    const where = [candidate.location, candidate.providerName ? `with ${candidate.providerName}` : null]
+    // The name and the time go through t() here, since a name is the
+    // person's words and nothing later could find where it ends.
+    const where = [candidate.location, candidate.providerName ? t('with {name}', { name: candidate.providerName }) : null]
       .filter(Boolean)
       .join(', ');
     return {
       identifier: `${IDENTIFIER_PREFIX}appointment:${candidate.id}`,
-      title: `${candidate.title} at ${time}`,
+      title: t('{title} at {time}', { title: candidate.title, time: t(time) }),
       body: `${where ? `${where}. ` : ''}Starts in about an hour. ${freshness(fireAt)}`,
       fireAt,
       payload: {
@@ -730,7 +734,7 @@ async function queueOneNow(planned: PlannedNotification | null): Promise<boolean
     await ensureAndroidChannels();
     await ensureCategories();
     const worded = { ...planned, ...reminderWords(planned.payload.kind, planned.title, planned.body, reminderDetailHidden()) };
-    await Notifications.scheduleNotificationAsync({
+    await Notifications.scheduleNotificationAsync(inAppLanguage({
       identifier: worded.identifier,
       content: {
         title: worded.title,
@@ -744,7 +748,7 @@ async function queueOneNow(planned: PlannedNotification | null): Promise<boolean
         date: worded.fireAt,
         channelId: channelFor(worded.payload.kind),
       },
-    });
+    }));
     return true;
   } catch (error) {
     console.warn('[reminderNotifications] could not queue a reminder now', error);
@@ -991,7 +995,7 @@ async function presentMorningEnergy(day: string): Promise<void> {
     tab: 'checkinFlow',
     lens: 'morningEnergy',
   };
-  await Notifications.scheduleNotificationAsync({
+  await Notifications.scheduleNotificationAsync(inAppLanguage({
     identifier: `${IDENTIFIER_PREFIX}morningEnergy:${day}`,
     content: {
       title: MORNING_ENERGY_TITLE,
@@ -1001,7 +1005,7 @@ async function presentMorningEnergy(day: string): Promise<void> {
       categoryIdentifier: REMINDER_CATEGORY_IDS.energy,
     },
     trigger: { channelId: channelFor('morning') },
-  });
+  }));
 }
 
 // A question about the flare Yes just saved, shown at once the way the
@@ -1022,7 +1026,7 @@ async function presentFlareQuestion(
       categoryIdentifier,
       actions.map((action, index) => ({
         identifier: action,
-        buttonTitle: tags[index] && action !== 'flareTagOther' ? tags[index].label : reminderActionTitle(action, SNOOZE_MINUTES),
+        buttonTitle: tags[index] && action !== 'flareTagOther' ? t(tags[index].label) : t(reminderActionTitle(action, SNOOZE_MINUTES)),
         options: { opensAppToForeground: false },
       })),
     );
@@ -1032,7 +1036,7 @@ async function presentFlareQuestion(
       categoryIdentifier,
       FLARE_WHY_ACTIONS.map((action, index) => ({
         identifier: action,
-        buttonTitle: tags[index] && action !== 'flareWhyNotSure' ? tags[index].label : reminderActionTitle(action, SNOOZE_MINUTES),
+        buttonTitle: tags[index] && action !== 'flareWhyNotSure' ? t(tags[index].label) : t(reminderActionTitle(action, SNOOZE_MINUTES)),
         options: { opensAppToForeground: false },
       })),
     );
@@ -1050,11 +1054,11 @@ async function presentFlareQuestion(
     ...(question === 'why' ? { flareWhy: tags.map((tag) => tag.code), flareWhyLabels: tags.map((tag) => tag.label) } : {}),
   };
   const { title, body } = FLARE_QUESTION_TEXT[question];
-  await Notifications.scheduleNotificationAsync({
+  await Notifications.scheduleNotificationAsync(inAppLanguage({
     identifier: `${IDENTIFIER_PREFIX}flare-${question}:${flareId}`,
     content: { title, body: body + wordsLine(), data: { ...payload, ...androidGroupFor('checkin'), ...wordsFlagFor(FLARE_FOLLOW_UP_KIND) }, sound: false, categoryIdentifier },
     trigger: { channelId: channelFor('checkin') },
-  });
+  }));
 }
 
 // What follows a flare answer given with the app unlocked: the next
@@ -1101,11 +1105,11 @@ async function offerVaultIfDue(now: Date): Promise<void> {
   if (count === null) return;
   markVaultOffered(now.getTime());
   const { title, body } = vaultOfferText(count);
-  await Notifications.scheduleNotificationAsync({
+  await Notifications.scheduleNotificationAsync(inAppLanguage({
     identifier: VAULT_OFFER_NOTIFICATION_ID,
     content: { title, body, data: { tab: 'vaultOffer' }, sound: false, categoryIdentifier: REMINDER_CATEGORY_IDS.vaultOffer },
     trigger: { channelId: ANDROID_DATED_CHANNEL_ID },
-  });
+  }));
 }
 
 // An update has downloaded (lib/appUpdateWatcher.ts). No buttons, so it is
@@ -1114,11 +1118,11 @@ async function offerVaultIfDue(now: Date): Promise<void> {
 export async function presentAppUpdateReady(version: string | null): Promise<void> {
   if (Platform.OS === 'web') return;
   const { title, body } = updateReadyText(version, APP_VERSION);
-  await Notifications.scheduleNotificationAsync({
+  await Notifications.scheduleNotificationAsync(inAppLanguage({
     identifier: APP_UPDATE_NOTIFICATION_ID,
     content: { title, body, data: { tab: 'appUpdate' }, sound: false },
     trigger: { channelId: ANDROID_DATED_CHANNEL_ID },
-  });
+  }));
 }
 
 // This week's meals (H10). The meals planned for the seven days starting
@@ -1254,33 +1258,34 @@ function buildNudges(
 async function ensureAndroidChannels(): Promise<void> {
   if (Platform.OS !== 'android') return;
   await Notifications.setNotificationChannelAsync(ANDROID_CHANNEL_ID, {
-    name: 'Reminders',
-    description: 'Scheduled doses and upcoming appointments.',
+    name: t('Reminders'),
+    description: t('Scheduled doses and upcoming appointments.'),
     importance: Notifications.AndroidImportance.HIGH,
     sound: 'default',
     vibrationPattern: [0, 250, 250, 250],
     lightColor: '#244147',
   });
   await Notifications.setNotificationChannelAsync(ANDROID_ROUTINE_CHANNEL_ID, {
-    name: 'Routines, meals & drinks',
-    description:
+    name: t('Routines, meals & drinks'),
+    description: t(
       'Routines at the time you set them, scheduled meals, anything on your hydration schedule, and planned garden work.',
+    ),
     importance: Notifications.AndroidImportance.DEFAULT,
     sound: 'default',
     vibrationPattern: [0, 180],
     lightColor: '#244147',
   });
   await Notifications.setNotificationChannelAsync(ANDROID_DATED_CHANNEL_ID, {
-    name: 'Dates coming up',
-    description: 'Bills, upkeep and renewals, work benefits about to reset, Days Until counters landing, and kitchen use-by dates.',
+    name: t('Dates coming up'),
+    description: t('Bills, upkeep and renewals, work benefits about to reset, Days Until counters landing, and kitchen use-by dates.'),
     importance: Notifications.AndroidImportance.DEFAULT,
     sound: 'default',
     vibrationPattern: [0, 180],
     lightColor: '#244147',
   });
   await Notifications.setNotificationChannelAsync(ANDROID_WAITING_CHANNEL_ID, {
-    name: 'Waiting for an answer',
-    description: 'One quiet line when two or more reminders are still waiting, which opens them all in one list.',
+    name: t('Waiting for an answer'),
+    description: t('One quiet line when two or more reminders are still waiting, which opens them all in one list.'),
     importance: Notifications.AndroidImportance.LOW,
     lightColor: '#244147',
   });
@@ -1305,8 +1310,8 @@ async function ensureKindChannels(): Promise<void> {
     const buzz = vibrationFor(choice.vibration);
     const groupPattern = group === ANDROID_CHANNEL_ID ? [0, 250, 250, 250] : [0, 180];
     await Notifications.setNotificationChannelAsync(id, {
-      name: REMINDER_KIND_LABELS[kind] ?? kind,
-      description: 'The sound and vibration picked for this kind of reminder in Profile.',
+      name: t(REMINDER_KIND_LABELS[kind] ?? kind),
+      description: t('The sound and vibration picked for this kind of reminder in Profile.'),
       importance: group === ANDROID_CHANNEL_ID ? Notifications.AndroidImportance.HIGH : Notifications.AndroidImportance.DEFAULT,
       sound: tone.key === 'silent' ? null : tone.file || 'default',
       enableVibrate: buzz.key !== 'none',
@@ -1411,7 +1416,7 @@ async function ensureCategories(): Promise<void> {
         REMINDER_CATEGORY_IDS[key],
         CATEGORY_ACTIONS[key].map((action) => ({
           identifier: action,
-          buttonTitle: reminderActionTitle(action, SNOOZE_MINUTES),
+          buttonTitle: t(reminderActionTitle(action, SNOOZE_MINUTES)),
           options: { opensAppToForeground: false },
         })),
       ),
@@ -1774,6 +1779,7 @@ async function runSync(): Promise<ReminderSyncResult> {
     if (!isOurs(request.identifier)) continue;
     const want = keptById.get(request.identifier);
     const data = request.content.data as Partial<ReminderPayload> | undefined;
+    const queued = queuedEnglish(request.content);
     // Same moment and same wording, leaving the "as of" stamp aside
     // (withoutFreshness), means the pending one is already right;
     // anything else (moved time, edited title, dropped row) is replaced.
@@ -1782,8 +1788,9 @@ async function runSync(): Promise<ReminderSyncResult> {
     if (
       want &&
       data?.fireAt === want.payload.fireAt &&
-      request.content.title === want.title &&
-      withoutFreshness(request.content.body) === withoutFreshness(want.body) &&
+      queued !== null &&
+      queued.title === want.title &&
+      withoutFreshness(queued.body) === withoutFreshness(want.body) &&
       request.content.categoryIdentifier === categoryIdFor(want) &&
       // Requeues, once, every reminder queued before it carried its group.
       data?.androidGroup === androidGroupFor(want.payload.kind).androidGroup
@@ -1803,7 +1810,7 @@ async function runSync(): Promise<ReminderSyncResult> {
     // (direct report, 2026-10-01). Its follow-ups, still ahead, are kept.
     if (planned.fireAt.getTime() <= Date.now()) continue;
     try {
-      await Notifications.scheduleNotificationAsync({
+      await Notifications.scheduleNotificationAsync(inAppLanguage({
         identifier: planned.identifier,
         content: {
           title: planned.title,
@@ -1817,7 +1824,7 @@ async function runSync(): Promise<ReminderSyncResult> {
           date: planned.fireAt,
           channelId: channelFor(planned.payload.kind),
         },
-      });
+      }));
       scheduled += 1;
     } catch (error) {
       console.error(`[reminderNotifications] could not schedule ${planned.identifier}`, error);
@@ -1968,7 +1975,7 @@ async function snoozeReminder(response: Notifications.NotificationResponse): Pro
   const fireAt = new Date(Date.now() + SNOOZE_MINUTES * 60_000);
   const data = (request.content.data ?? {}) as Partial<ReminderPayload>;
   const base = isSnoozed(request.identifier) ? request.identifier.split('@')[0] : SNOOZE_PREFIX + request.identifier;
-  await Notifications.scheduleNotificationAsync({
+  await Notifications.scheduleNotificationAsync(inAppLanguage({
     identifier: `${base}@${fireAt.getTime()}`,
     content: {
       title: request.content.title ?? 'Reminder',
@@ -1982,7 +1989,7 @@ async function snoozeReminder(response: Notifications.NotificationResponse): Pro
       date: fireAt,
       channelId: data.kind ? channelFor(data.kind) : ANDROID_CHANNEL_ID,
     },
-  });
+  }));
   await Notifications.dismissNotificationAsync(request.identifier).catch(() => undefined);
 }
 
@@ -2204,13 +2211,14 @@ async function updateWaitingSummary(): Promise<void> {
   }
   const title = summaryTitle(count);
   const body = summaryBody(groups);
-  if (showing && showing.request.content.title === title && showing.request.content.body === body) return;
+  const shown = showing ? queuedEnglish(showing.request.content) : null;
+  if (shown && shown.title === title && shown.body === body) return;
   await ensureAndroidChannels();
-  await Notifications.scheduleNotificationAsync({
+  await Notifications.scheduleNotificationAsync(inAppLanguage({
     identifier: WAITING_SUMMARY_ID,
     content: { title, body, data: { tab: 'waiting' }, sound: false },
     trigger: Platform.OS === 'android' ? { channelId: ANDROID_WAITING_CHANNEL_ID } : null,
-  });
+  }));
 }
 
 // A group heading in Android's shade with nothing left under it, which can

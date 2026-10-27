@@ -8,6 +8,7 @@ import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 import { getDatabase } from './db';
 import { timerSignal } from './stepTimer';
+import { inAppLanguage } from './notificationWords';
 
 export const STEP_TIMER_RING_KEY = 'routine_timer_ring';
 export const STEP_TIMER_SIGNAL_KEY = 'routine_timer_signal';
@@ -57,7 +58,7 @@ export async function scheduleStepTimerSignal(atMs: number, routineName: string,
     if (!permission.granted) return;
     await Notifications.cancelScheduledNotificationAsync(SIGNAL_ID).catch(() => undefined);
     const { title, body } = timerSignal(routineName, stepText);
-    await Notifications.scheduleNotificationAsync({
+    await Notifications.scheduleNotificationAsync(inAppLanguage({
       identifier: SIGNAL_ID,
       content: { title, body },
       trigger: {
@@ -65,7 +66,7 @@ export async function scheduleStepTimerSignal(atMs: number, routineName: string,
         date: new Date(atMs),
         ...(Platform.OS === 'android' ? { channelId: ANDROID_CHANNEL_ID } : {}),
       },
-    });
+    }));
   } catch (error) {
     console.warn('[stepTimer] Could not set the signal', error);
   }

@@ -71,6 +71,7 @@ import {
   type SetResult,
 } from '../lib/workoutSession';
 import { ThumbEndRow } from '../components/ThumbEndRow';
+import { inAppLanguage } from '@/lib/notificationWords';
 
 type Phase = 'ready' | 'set' | 'rest' | 'stopping' | 'review' | 'saved';
 
@@ -84,7 +85,7 @@ async function scheduleRestNotice(seconds: number, body: string): Promise<string
   try {
     if (!(await hasReminderPermission())) return null;
     const identifier = `${NOTIFICATION_PREFIX}${Date.now()}`;
-    await Notifications.scheduleNotificationAsync({
+    await Notifications.scheduleNotificationAsync(inAppLanguage({
       identifier,
       content: { title: 'Rest is over', body, sound: true },
       trigger: {
@@ -92,7 +93,7 @@ async function scheduleRestNotice(seconds: number, body: string): Promise<string
         date: new Date(Date.now() + seconds * 1000),
         channelId: 'reminders',
       },
-    });
+    }));
     return identifier;
   } catch (error) {
     console.error('[Workout] scheduling the rest notice failed', error);

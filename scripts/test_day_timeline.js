@@ -315,6 +315,11 @@ check('nothing filled in says nothing', describeFilledIn({ sleepMinutes: null, s
 {
   const { routineWalkNotice } = load('lib/routineWalkNotice.ts', {
     'expo-notifications': {},
+    './notificationWords': { inAppLanguage: (request) => request },
+    './i18n': {
+      t: (english, values) =>
+        values ? english.replace(/\{(\w+)\}/g, (whole, name) => (name in values ? String(values[name]) : whole)) : english,
+    },
     'react-native': { Platform: { OS: 'android' } },
     './desktop/bridge': { isDesktopApp: () => false },
   });

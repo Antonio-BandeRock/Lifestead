@@ -16,6 +16,8 @@
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 import { isDesktopApp } from './desktop/bridge';
+import { inAppLanguage } from './notificationWords';
+import { t } from './i18n';
 
 const NOTIFICATION_ID = 'inside-story-routine-walk';
 const CHANNEL_ID = 'routine-walk';
@@ -43,12 +45,16 @@ export function routineWalkNotice(input: {
   stepMinutes: number | null;
   stepStartedAt: Date;
 }): RoutineWalkNotice {
+  // Each piece goes through t() here, because the clock and the length sit
+  // side by side in the sentence and no lookup could tell them apart later.
   const length = input.stepMinutes
-    ? `, about ${input.stepMinutes === 1 ? '1 minute' : `${input.stepMinutes} minutes`}`
+    ? input.stepMinutes === 1
+      ? t(', about 1 minute')
+      : t(', about {n} minutes', { n: input.stepMinutes })
     : '';
   return {
-    title: `${input.routineName}: step ${input.position + 1} of ${input.total}`,
-    body: `${input.stepText}. Up since ${clock(input.stepStartedAt)}${length}.`,
+    title: t('{title}: step {n} of {m}', { title: input.routineName, n: input.position + 1, m: input.total }),
+    body: t('{stepText}. Up since {clock}{length}.', { stepText: input.stepText, clock: t(clock(input.stepStartedAt)), length }),
   };
 }
 
@@ -58,19 +64,19 @@ export async function showRoutineWalkNotice(notice: RoutineWalkNotice): Promise<
     const permission = await Notifications.getPermissionsAsync();
     if (!permission.granted) return;
     await Notifications.setNotificationChannelAsync(CHANNEL_ID, {
-      name: 'Routine in progress',
-      description: 'The step you are on while walking a routine, taken down when you finish or leave it.',
+      name: t('Routine in progress'),
+      description: t('The step you are on while walking a routine, taken down when you finish or leave it.'),
       importance: Notifications.AndroidImportance.LOW,
       lockscreenVisibility: Notifications.AndroidNotificationVisibility.PUBLIC,
       sound: null,
       vibrationPattern: null,
       showBadge: false,
     });
-    await Notifications.scheduleNotificationAsync({
+    await Notifications.scheduleNotificationAsync(inAppLanguage({
       identifier: NOTIFICATION_ID,
       content: { title: notice.title, body: notice.body, sticky: true, autoDismiss: false, sound: false },
       trigger: { channelId: CHANNEL_ID },
-    });
+    }));
   } catch (error) {
     console.warn('[routineWalkNotice] Could not put the notice up', error);
   }

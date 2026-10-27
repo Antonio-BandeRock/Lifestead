@@ -28,6 +28,8 @@ import { isDesktopApp } from './desktop/bridge';
 import { gatherFromApp, getEmergencyProfile, listEmergencyContacts } from './emergencyDb';
 import { lockScreenNotice, parseLockScreenParts, type LockScreenPart } from './emergencyOutside';
 import LockedCapture from '../modules/locked-capture';
+import { inAppLanguage } from './notificationWords';
+import { t } from './i18n';
 
 const META_KEY = 'emergency_lock_screen';
 const NOTIFICATION_ID = 'inside-story-emergency';
@@ -131,19 +133,19 @@ export async function refreshLockScreenNotice(): Promise<boolean> {
       return LockedCapture?.showEmergencyNotice?.(notice.title, notice.body) ?? false;
     }
     await Notifications.setNotificationChannelAsync(CHANNEL_ID, {
-      name: 'Emergency lines on the lock screen',
-      description: 'The emergency lines you picked in Life > Emergency, readable while the phone is locked.',
+      name: t('Emergency lines on the lock screen'),
+      description: t('The emergency lines you picked in Life > Emergency, readable while the phone is locked.'),
       importance: Notifications.AndroidImportance.LOW,
       lockscreenVisibility: Notifications.AndroidNotificationVisibility.PUBLIC,
       sound: null,
       vibrationPattern: null,
       showBadge: false,
     });
-    await Notifications.scheduleNotificationAsync({
+    await Notifications.scheduleNotificationAsync(inAppLanguage({
       identifier: NOTIFICATION_ID,
       content: { title: notice.title, body: notice.body, sticky: true, autoDismiss: false, sound: false },
       trigger: { channelId: CHANNEL_ID },
-    });
+    }));
     return true;
   } catch (error) {
     console.warn('[emergencyLockScreen] Could not put the notice up', error);

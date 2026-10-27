@@ -237,6 +237,37 @@ const BY_HAND: Readonly<Record<string, string>> = {
   'Same as the phone': 'Igual que el teléfono',
   'The language the app shows its words in. Spanish is being added screen by screen, so anything not translated yet still shows in English. The reading on Life and Garden comes after the screens. Kept on this device only.':
     'El idioma en que la app muestra sus palabras. El español se está agregando pantalla por pantalla, así que lo que todavía no está traducido se ve en inglés. Las lecturas de Vida y Huerto vienen después de las pantallas. Se guarda solo en este dispositivo.',
+
+  // ---- Notifications, one sentence at a time, since a notification's body
+  // is put together from these and the lookup splits it between sentences.
+  'every day': 'todos los días',
+  weekdays: 'entre semana',
+  weekends: 'los fines de semana',
+  'The daily check-in you asked for.': 'La revisión diaria que pediste.',
+  'About {value} hours since you ate.': 'Más o menos {value} horas desde que comiste.',
+  'Tap to walk it one step at a time, {reminderDays}.': 'Toca para recorrerla un paso a la vez, {reminderDays}.',
+  '{title} at {time}': '{title} a las {time}',
+  '1 minute': '1 minuto',
+  '{n} minutes': '{n} minutos',
+  ', about {n} minutes': ', unos {n} minutos',
+  ', about 1 minute': ', más o menos 1 minuto',
+  'with {name}': 'con {name}',
+  '{hour}:{value} am': '{hour}:{value} a. m.',
+  '{hour}:{value} pm': '{hour}:{value} p. m.',
+  'Starts in about an hour.': 'Empieza en una hora más o menos.',
+  '{clock} home time ({zone})': '{clock} hora de casa ({zone})',
+  '{dose}, due {due} on your Meds schedule.': '{dose}, para las {due} en tu agenda de medicamentos.',
+  'Due {due} on your Meds schedule.': 'Para las {due} en tu agenda de medicamentos.',
+  '{dose}, due {due} here, {home}, on your Meds schedule.': '{dose}, para las {due} aquí, {home}, en tu agenda de medicamentos.',
+  'Due {due} here, {home}, on your Meds schedule.': 'Para las {due} aquí, {home}, en tu agenda de medicamentos.',
+  '{title}: step {n} of {m}': '{title}: paso {n} de {m}',
+  'Schedule as of {freshness}.': 'Agenda revisada: {freshness}.',
+  'Records as of {freshness}.': 'Registros revisados: {freshness}.',
+  'Routines as of {freshness}.': 'Rutinas revisadas: {freshness}.',
+  'Did I Do It as of {freshness}.': 'Marcas revisadas: {freshness}.',
+  'Check-ins as of {freshness}.': 'Datos revisados: {freshness}.',
+  'Meals as of {freshness}.': 'Comidas revisadas: {freshness}.',
+  'The words could not be sealed on this phone.': 'Las palabras no se pudieron sellar en este teléfono.',
 };
 
 export const ES: Readonly<Record<string, string>> = { ...ES_PARTS, ...BY_HAND };

@@ -41,6 +41,7 @@
 import { cloneElement, isValidElement, type ReactElement, type ReactNode } from 'react';
 import { getLanguage, type AppLanguage } from './language';
 import { ES, ES_FOODS } from './translations/es';
+import { ES_DATES, type DateWords } from './translations/esDates';
 
 type Table = Readonly<Record<string, string>>;
 
@@ -57,12 +58,22 @@ const FOODS: Record<Exclude<AppLanguage, 'en'>, Table> = {
   es: ES_FOODS,
 };
 
+// DATES written in English by the app ("Oct 26", "Mon 26 Oct", "October
+// 2026", "Oct 26, 7:45 AM") are recognised and written again the way the
+// language writes them, so the fifty or so places that build a date from an
+// English list of months never needed changing (lib/translations/esDates.ts).
+const DATES: Record<Exclude<AppLanguage, 'en'>, DateWords> = {
+  es: ES_DATES,
+};
+
 type Pattern = {
   regex: RegExp;
   names: string[];
   target: string;
   /** Letters that are not a {name}, so the most specific pattern wins. */
   literal: number;
+  /** The longest piece of fixed text, which a loose pattern needs to see first. */
+  needle: string;
 };
 
 type Compiled = {
@@ -70,6 +81,9 @@ type Compiled = {
   foods: Table;
   byFirst: Map<string, Pattern[]>;
   byLast: Map<string, Pattern[]>;
+  /** Patterns with no whole word at either end: "{n} could not be opened. {why}". */
+  loose: Pattern[];
+  dates: DateWords;
   memo: Map<string, string>;
 };
 
@@ -97,6 +111,7 @@ function compile(language: AppLanguage): Compiled | null {
   const words = TABLES[language];
   const byFirst = new Map<string, Pattern[]>();
   const byLast = new Map<string, Pattern[]>();
+  const loose: Pattern[] = [];
   for (const [english, target] of Object.entries(words)) {
     if (!english.includes('{')) continue;
     const parts = english.split(/\{(\w+)\}/);
@@ -117,22 +132,36 @@ function compile(language: AppLanguage): Compiled | null {
       }
     });
     if (literal === 0) continue;
-    const pattern: Pattern = { regex: new RegExp(`${source}$`, 's'), names, target, literal };
-    const head = parts[0].trim() ? firstWord(parts[0]) : '';
-    const tail = parts[parts.length - 1].trim() ? lastWord(parts[parts.length - 1]) : '';
+    const fixed = parts.filter((_, at) => at % 2 === 0);
+    const needle = fixed.reduce((longest, part) => (part.trim().length > longest.length ? part.trim() : longest), '');
+    const pattern: Pattern = { regex: new RegExp(`${source}$`, 's'), names, target, literal, needle };
+    // A first word is only a key when a space ends it: in "Result{value}" or
+    // "\"{name}\"" the words shown run straight into the value.
+    const first = parts[0];
+    const last = parts[parts.length - 1];
+    const head = /^\s*[^\s{]+\s/.test(first) ? firstWord(first) : '';
+    const tail = last.trim() ? lastWord(last) : '';
     // A pattern whose first word is a word sits under it; one that starts
     // with a value sits under its last word.
     // One that ends "{value}." sits under its last mark, and needs words.
-    const marksOnly = !head && !/[a-z0-9]/i.test(tail);
-    if (marksOnly && !/[A-Za-z]/.test(parts.filter((_, at) => at % 2 === 0).join(''))) continue;
-    const [index, key] = head ? [byFirst, head] : [byLast, marksOnly ? tail.slice(-1) : tail];
-    if (!key) continue;
+    const marksOnly = !head && !!tail && !/[a-z0-9]/i.test(tail);
+    if (!/[A-Za-z]/.test(fixed.join(''))) continue;
+    const tailKey = marksOnly ? tail.slice(-1) : /\s\S+\s*$/.test(last) ? tail : '';
+    // Anything else ("{n} could not be opened. {why}", "Result{value}")
+    // is tried only when its longest piece of fixed text is in the words,
+    // and only when that piece says something: "{spent} of {limit}" would
+    // otherwise turn the "of" in any sentence into "de".
+    if (!head && !tailKey) {
+      if ((needle.match(/[A-Za-z]/g) ?? []).length >= 4) loose.push(pattern);
+      continue;
+    }
+    const [index, key] = head ? [byFirst, head] : [byLast, tailKey];
     const list = index.get(key);
     if (list) list.push(pattern);
     else index.set(key, [pattern]);
   }
-  for (const list of [...byFirst.values(), ...byLast.values()]) list.sort((a, b) => b.literal - a.literal);
-  const made: Compiled = { words, foods: FOODS[language], byFirst, byLast, memo: new Map() };
+  for (const list of [...byFirst.values(), ...byLast.values(), loose]) list.sort((a, b) => b.literal - a.literal);
+  const made: Compiled = { words, foods: FOODS[language], byFirst, byLast, loose, dates: DATES[language], memo: new Map() };
   compiled.set(language, made);
   return made;
 }
@@ -144,12 +173,20 @@ function exact(words: Table, english: string): string | undefined {
   const trimmed = english.trim();
   if (trimmed !== english && trimmed) {
     const inner = words[trimmed];
-    if (inner !== undefined) return english.replace(trimmed, inner);
+    if (inner !== undefined) return english.replace(trimmed, () => inner);
   }
   return undefined;
 }
 
 const SEPARATED = /\n|\s[·•|]\s/;
+// Nor across the end of a sentence: a string of several sentences is looked
+// up a sentence at a time (byPieces) rather than as one loose pattern.
+const ACROSS_SENTENCES = /[.!?;]\s+[A-Z0-9"“(¿¡]/;
+
+// "a las 7:45 a. m." ends a sentence with the full stop it already has.
+function oneStop(words: string): string {
+  return words.replace(/(\b[ap]\. m\.)\./g, (_, clock: string) => clock);
+}
 
 function byPattern(table: Compiled, english: string, depth: number): string | undefined {
   const trimmed = english.trim();
@@ -158,18 +195,19 @@ function byPattern(table: Compiled, english: string, depth: number): string | un
     ...(table.byFirst.get(firstWord(trimmed)) ?? []),
     ...(table.byLast.get(lastWord(trimmed)) ?? []),
     ...(/[^\w\s]/.test(trimmed.slice(-1)) && trimmed.slice(-1) !== lastWord(trimmed) ? table.byLast.get(trimmed.slice(-1)) ?? [] : []),
+    ...table.loose.filter((pattern) => trimmed.includes(pattern.needle)),
   ].sort((a, b) => b.literal - a.literal);
   for (const pattern of candidates) {
     const match = pattern.regex.exec(trimmed);
     // A value never runs across a line or a middle dot: those are pieces.
-    if (!match || match.slice(1).some((value) => SEPARATED.test(value))) continue;
+    if (!match || match.slice(1).some((value) => SEPARATED.test(value) || ACROSS_SENTENCES.test(value))) continue;
     const values: Record<string, string> = {};
     pattern.names.forEach((name, index) => {
       const value = match[index + 1];
       values[name] = depth < 3 ? lookup(table, value, depth + 1) ?? value : value;
     });
     const filled = pattern.target.replace(/\{(\w+)\}/g, (whole, name: string) => values[name] ?? whole);
-    return english.replace(trimmed, filled);
+    return english.replace(trimmed, () => oneStop(filled));
   }
   return undefined;
 }
@@ -195,7 +233,8 @@ function byPieces(table: Compiled, english: string, depth: number): string | und
   const trailing = TRAILING.exec(english);
   if (trailing && trailing[1].trim()) {
     const found = exact(table.words, trailing[1]) ?? byPattern(table, trailing[1], depth);
-    if (found !== undefined) return found + trailing[2];
+    // "7:45 AM." is "7:45 a. m.", with one full stop rather than two.
+    if (found !== undefined) return trailing[2] === '.' && found.endsWith('.') ? found : found + trailing[2];
   }
   // Between sentences.
   const sentences = english.split(/(?<=[.!?])(\s+)(?=[A-Z0-9"“(¿¡])/);
@@ -228,12 +267,62 @@ function foodName(table: Compiled, english: string): string | undefined {
     if (found === undefined) return undefined;
     out.push(found);
   }
-  return english.replace(trimmed, out.join(', '));
+  return english.replace(trimmed, () => out.join(', '));
+}
+
+const MONTH_KEYS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+const WEEKDAY_KEYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+const MONTH_WORD = '(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|June?|July?|Aug(?:ust)?|Sept?(?:ember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)';
+const WEEKDAY_WORD = '(Sun(?:day)?|Mon(?:day)?|Tue(?:s|sday)?|Wed(?:nesday)?|Thu(?:r|rs|rsday)?|Fri(?:day)?|Sat(?:urday)?)';
+// [weekday] month day | day month, [year], [", 7:45 AM" or " at 7:45 AM"].
+const DATE_SHAPE = new RegExp(
+  `^(?:${WEEKDAY_WORD},?\\s+)?(?:${MONTH_WORD}\\.?\\s+(\\d{1,2})(?:st|nd|rd|th)?|(\\d{1,2})\\s+${MONTH_WORD}\\.?)(?:,?\\s+(\\d{4}))?(?:(,\\s+|\\s+at\\s+)(\\d{1,2}(?::\\d{2})?(?:\\s*[AaPp]\\.?\\s?[Mm]\\.?)?))?$`,
+);
+const MONTH_YEAR_SHAPE = new RegExp(`^${MONTH_WORD}\\s+(\\d{4})$`);
+const WEEKDAY_DAY_SHAPE = new RegExp(`^${WEEKDAY_WORD}\\s+(\\d{1,2})$`);
+const LONG_MONTH = /^(January|February|March|April|June|July|August|September|October|November|December)$/;
+
+function dateIn(table: Compiled, english: string, depth: number): string | undefined {
+  const trimmed = english.trim();
+  if (!/\d/.test(trimmed) || trimmed.length > 40) return undefined;
+  const words = table.dates;
+  const weekday = (name: string) => {
+    const at = WEEKDAY_KEYS.indexOf(name.slice(0, 3).toLowerCase());
+    return name.length > 4 ? words.weekdaysLong[at] : words.weekdaysShort[at];
+  };
+  let out: string | undefined;
+  const date = DATE_SHAPE.exec(trimmed);
+  if (date) {
+    const [, day7, monthFirst, dayAfter, dayFirst, monthAfter, year, joint, time] = date;
+    const month = monthFirst ?? monthAfter;
+    const long = LONG_MONTH.test(month);
+    const at = MONTH_KEYS.indexOf(month.slice(0, 3).toLowerCase());
+    out = `${dayAfter ?? dayFirst} ${long ? `de ${words.monthsLong[at]}` : words.monthsShort[at]}`;
+    if (year) out += long ? ` de ${year}` : ` ${year}`;
+    if (day7) out = `${weekday(day7)} ${out}`;
+    if (time) {
+      const clock = lookup(table, time, depth + 1) ?? time;
+      out += joint.trim() === 'at' ? ` ${/^1(?::|\s|$)/.test(time) ? 'a la' : 'a las'} ${clock}` : `, ${clock}`;
+    }
+  } else {
+    const monthYear = MONTH_YEAR_SHAPE.exec(trimmed);
+    const weekdayDay = WEEKDAY_DAY_SHAPE.exec(trimmed);
+    if (monthYear) {
+      const at = MONTH_KEYS.indexOf(monthYear[1].slice(0, 3).toLowerCase());
+      out = LONG_MONTH.test(monthYear[1]) ? `${words.monthsLong[at]} de ${monthYear[2]}` : `${words.monthsShort[at]} ${monthYear[2]}`;
+    } else if (weekdayDay) {
+      out = `${weekday(weekdayDay[1])} ${weekdayDay[2]}`;
+    }
+  }
+  if (out === undefined) return undefined;
+  // A date standing on its own starts with a capital, as a label does.
+  if (depth === 0) out = out.charAt(0).toUpperCase() + out.slice(1);
+  return english.replace(trimmed, () => out);
 }
 
 function lookup(table: Compiled, english: string, depth: number): string | undefined {
   if (!english || !/[A-Za-z]/.test(english)) return undefined;
-  const found = exact(table.words, english) ?? foodName(table, english);
+  const found = exact(table.words, english) ?? foodName(table, english) ?? dateIn(table, english, depth);
   if (found !== undefined) return found;
   if (depth > 4) return undefined;
   return byPattern(table, english, depth) ?? byPieces(table, english, depth);
@@ -265,8 +354,10 @@ export function hasTranslation(language: AppLanguage, english: string): boolean 
 export function t(english: string, values?: Readonly<Record<string, string | number>>): string {
   const words = translateIn(getLanguage(), english);
   if (!values) return words;
-  return words.replace(/\{(\w+)\}/g, (whole, name: string) =>
-    Object.prototype.hasOwnProperty.call(values, name) ? String(values[name]) : whole,
+  return oneStop(
+    words.replace(/\{(\w+)\}/g, (whole, name: string) =>
+      Object.prototype.hasOwnProperty.call(values, name) ? String(values[name]) : whole,
+    ),
   );
 }
 

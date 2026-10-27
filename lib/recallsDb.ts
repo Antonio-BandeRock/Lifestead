@@ -34,6 +34,7 @@ import {
   type RecallKind,
   type RecallMatch,
 } from './recalls';
+import { inAppLanguage } from './notificationWords';
 
 const RECALLS_ON_KEY = 'recall_check';
 const LAST_READ_KEY = 'recalls_last_read';
@@ -382,7 +383,7 @@ async function notifyMatches(matches: RecallMatch[]): Promise<void> {
     const settings = await Notifications.getPermissionsAsync();
     if (!settings.granted) return;
     const onlyFoods = matches.every((m) => m.ownerKind === 'scanned_product');
-    await Notifications.scheduleNotificationAsync({
+    await Notifications.scheduleNotificationAsync(inAppLanguage({
       identifier: `${RECALL_NOTIFICATION_PREFIX}-${Date.now()}`,
       content: {
         ...reminderWords('recall', notificationTitle(matches), notificationBody(matches), reminderDetailHidden()),
@@ -390,7 +391,7 @@ async function notifyMatches(matches: RecallMatch[]): Promise<void> {
         sound: true,
       },
       trigger: Platform.OS === 'android' ? { channelId: ANDROID_CHANNEL_ID } : null,
-    });
+    }));
   } catch {
     // The band still lists every match; a notification that could not be
     // raised is not retried.

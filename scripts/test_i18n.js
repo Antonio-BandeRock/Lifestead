@@ -20,6 +20,11 @@ const TABLE = {
   'Tap <0>Save</0> to keep it.': 'Toca <0>Guardar</0> para conservarlo.',
   'Add a note': 'Agrega una nota',
   'From {start} to {end}': 'Del {start} al {end}',
+  '{count} could not be opened. {why}': 'No se pudieron abrir {count}. {why}',
+  '"{name}" will be removed for good.': '"{name}" se quitará para siempre.',
+  '{spent} of {limit}': '{spent} de {limit}',
+  'Started {date}': 'Empezó el {date}',
+  '{hour}:{value} AM': '{hour}:{value} a. m.',
 };
 let language = 'es';
 
@@ -38,6 +43,7 @@ function load(relPath, stubs) {
 
 const { t, translateIn, translateChildren, hasTranslation } = load('lib/i18n.ts', {
   './language': { getLanguage: () => language },
+  './translations/esDates': load('lib/translations/esDates.ts', {}),
   './translations/es': { ES: TABLE, ES_FOODS: { Apple: 'Manzana', raw: 'cruda', 'with skin': 'con cáscara' } },
   react: require('react'),
 });
@@ -67,7 +73,7 @@ check('a pattern with a number', translateIn('es', 'Logged 3 meals'), '3 comidas
 check('a pattern built in JSX pieces', translateChildren(['Logged ', 3, ' meals'], 'es'), '3 comidas registradas');
 check('a value inside a pattern is looked up too', translateIn('es', 'Your dose is due'), 'Toca Tu dosis');
 check('a value nobody translated stays as typed', translateIn('es', 'Levothyroxine is due'), 'Toca Levothyroxine');
-check('two values', translateIn('es', 'From May 3 to May 9'), 'Del May 3 al May 9');
+check('two values', translateIn('es', 'From May 3 to May 9'), 'Del 3 may al 9 may');
 check('a trailing colon is put back', translateIn('es', 'Add a note:'), 'Agrega una nota:');
 check('lines are looked up one by one', translateIn('es', 'Save\nHome'), 'Guardar\nInicio');
 check('pieces round a middle dot', translateIn('es', 'Home · Logged 2 meals'), 'Inicio · 2 comidas registradas');
@@ -79,6 +85,17 @@ check('a nested Text is moved with its sentence', [rebuilt[0], rebuilt[1].props.
 check('a food name by its parts', translateIn('es', 'Apple, raw, with skin'), 'Manzana, cruda, con cáscara');
 check('a food name with a part nobody translated stays English', translateIn('es', 'Apple, dried'), 'Apple, dried');
 check('hasTranslation knows a missing entry', hasTranslation('es', 'Plant a seed'), false);
+check('a value at both ends', translateIn('es', '3 could not be opened. Save'), 'No se pudieron abrir 3. Guardar');
+check('a value glued to its first mark', translateIn('es', '"Basil" will be removed for good.'), '"Basil" se quitará para siempre.');
+check('a short loose pattern never turns a word inside a sentence', translateIn('es', 'Meds as of noon'), 'Meds as of noon');
+check('a short date', translateIn('es', 'Oct 26'), '26 oct');
+check('a long date with its year', translateIn('es', 'October 26, 2026'), '26 de octubre de 2026');
+check('a weekday and a date', translateIn('es', 'Mon 26 Oct'), 'Lun 26 oct');
+check('a month and year', translateIn('es', 'October 2026'), 'Octubre de 2026');
+check('a date inside a sentence', translateIn('es', 'Started Oct 3'), 'Empezó el 3 oct');
+check('a date with a time', translateIn('es', 'Oct 26, 7:45 AM'), '26 oct, 7:45 a. m.');
+check('one full stop after a time', translateIn('es', '7:45 AM.'), '7:45 a. m.');
+check('a price keeps its dollar sign', translateIn('es', 'Started $$5'), 'Empezó el $$5');
 language = 'en';
 check('t in English fills values', t('{count} meals', { count: 1 }), '1 meals');
 
