@@ -204,5 +204,5 @@ export const PART: Readonly<Record<string, string>> = {
   "{step} (part {part} of {total})": "{step} (parte {part} de {total})",
   "{money} when it comes round.": "{money} cuando toque.",
   "{kind}: On": "{kind}: Activado",
-  "{kind}: Off": "{kind}: Desactivado",
+  "{kind}: Off": "{kind}: Desactivado"
 };
