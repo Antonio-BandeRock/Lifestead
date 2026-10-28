@@ -318,19 +318,19 @@ const ROUTINES_HELP_SECTIONS: HelpSection[] = [
 const DID_I_DO_IT_HELP_SECTIONS: HelpSection[] = [
   {
     heading: 'What this is for',
-    body: 'One question, asked later. Did I take my pill, did I lock the back door, did I pay the electric bill. The whole value is being able to look, so the answer costs a glance rather than a walk back upstairs or a second payment of the same bill.',
+    body: 'A great way to make sure you know whether you did or did not do something. Did I take my pill, did I lock the back door, did I put the bins out. Check it off when you do it, and the answer later costs a glance rather than a walk back upstairs.',
   },
   {
-    heading: 'This is the record your routines write',
-    body: 'Most of these get ticked off while you walk a routine, at the step that does them, the moment you tap. So they are listed here under the routine they belong to, and a heading will walk that routine for you. The ones nothing walks past are gathered at the end, and those are the ones the button on the card is for.',
+    heading: 'Each thing keeps its times and days',
+    body: 'Give a thing one or more times in the day, on the days of the week you pick, or every few days, weeks or months from a day you choose. Each time is checked off on its own, and once it is, the thing comes back at its next time.',
   },
   {
-    heading: 'It is not a reminder and not a task list',
-    body: 'Nothing here goes off, and nothing here is asking to be done. Each line holds exactly one fact: whether a thing has happened, and when. Something you record today keeps its clock time, because the hour is the part that answers the question.',
+    heading: 'Reminders sit together in the notification area',
+    body: 'A thing with a reminder raises one at each of its times, all kept together under To Do List in the notification area. Done on the reminder checks that time off without unlocking the phone or opening the app.',
   },
   {
-    heading: 'How often it comes round',
-    body: 'Every day, every week, every month, or no set pattern. A week runs Monday to Sunday and a month is the calendar month. Something with no set pattern is never shown as late, because there is nothing for it to be late for: it shows when it last happened and leaves the judgement to you.',
+    heading: 'How this works with routines',
+    body: 'A routine only puts things in order. A thing a routine walks past is listed here under that routine and reminded with it, never on its own, so nothing speaks twice. Tapping its box during the walk checks it off here. The things no routine walks past are gathered at the end.',
   },
   {
     heading: 'Mistakes are expected',
@@ -484,20 +484,20 @@ const TODO_HELP_SECTIONS: HelpSection[] = [
     body: 'Things to do, big or small, with a day if they have one. Type one the way you would say it: "renew the car insurance on 12 November", "water the ferns every 3 days", or just "buy stamps". What was read (the day, the repeat) shows before it is added, and you can keep it without the day.',
   },
   {
-    heading: 'A to-do past its day is still open',
-    body: 'Nothing here is ever late or missed. A to-do whose day has gone by moves to From earlier, still open, and waits there until you do it or let it go. Nothing is counted against you for how long it waited.',
+    heading: 'A task past its day is still open',
+    body: 'Nothing here is ever late or missed. A task whose day has gone by moves to From earlier, still open, and waits there until you do it or let it go. Nothing is counted against you for how long it waited.',
   },
   {
     heading: 'Repeating ones',
-    body: 'A to-do that repeats moves on to its next day when you tick it, and the day it was done is kept. Let this one go moves it on without calling it done. Days that went by while it waited are not owed: it moves to the next day from today.',
+    body: 'A task that repeats moves on to its next day when you tick it, and the day it was done is kept. Let this one go moves it on without calling it done. Days that went by while it waited are not owed: it moves to the next day from today.',
   },
   {
     heading: 'Work and personal',
-    body: 'Every to-do is Personal or Work. This lens shows both, with the work ones marked, and the To-Do pill on Work shows only the work ones.',
+    body: 'Every task is Personal or Work. This lens shows both, with the work ones marked, and the Tasks pill on Work shows only the work ones.',
   },
   {
     heading: 'The phone tells you on the day',
-    body: 'A to-do with a day raises one reminder that morning, and Done on the reminder ticks it. One left open is not chased. The switch is in Profile > Reminders.',
+    body: 'A task with a day raises one reminder that morning, and Done on the reminder ticks it. One left open is not chased. The switch is in Profile > Reminders.',
   },
 ];
 
@@ -553,7 +553,7 @@ const LIFE_LENSES: LensOption<LifeLens>[] = [
   // has already happened. They sit next to each other because a routine
   // step can write a check, which is the join the whole design rests on.
   { key: 'routines', label: 'Routines', icon: 'footsteps-outline', help: ROUTINES_HELP_SECTIONS },
-  { key: 'didIDoIt', label: 'Did I Do It', icon: 'checkmark-done-outline', help: DID_I_DO_IT_HELP_SECTIONS },
+  { key: 'didIDoIt', label: 'To Do List', icon: 'checkmark-done-outline', help: DID_I_DO_IT_HELP_SECTIONS },
   // 2026-09-22, when a Days Until counter stopped having to be about the
   // garden. Every counter of either kind reads here, in the order they
   // land; a counter started here belongs to nothing unless a garden area
@@ -561,7 +561,7 @@ const LIFE_LENSES: LensOption<LifeLens>[] = [
   { key: 'daysUntil', label: 'Days Until', icon: 'hourglass-outline', help: DAYS_UNTIL_HELP_SECTIONS },
   // 2026-09-30 (C10). Things to do with an optional day and repeat, work and
   // personal together. See components/TodoSection.tsx.
-  { key: 'todos', label: 'To-Do', icon: 'checkbox-outline', help: TODO_HELP_SECTIONS },
+  { key: 'todos', label: 'Tasks', icon: 'checkbox-outline', help: TODO_HELP_SECTIONS },
 ];
 
 const DIRECTION_OPTIONS = [
@@ -2068,7 +2068,7 @@ export default function LifeScreen() {
             ) : null}
             {lens === 'todos' ? (
               <View style={band.box}>
-                <Text style={styles.cardTitle}>To-Do</Text>
+                <Text style={styles.cardTitle}>Tasks</Text>
                 <TodoSection scope="everything" tabColor={TAB_COLOR} />
               </View>
             ) : null}

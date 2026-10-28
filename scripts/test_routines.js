@@ -1,5 +1,6 @@
-// Checks the routine and Did I Do It rules (lib/routines.ts): whether a
-// recorded thing still counts for the period it is in, what each line says,
+// Checks the routine and To Do List rules (lib/routines.ts): when each
+// thing on the To Do List comes round, which time a tap checks off, what each
+// line says,
 // which routine the clock puts first, and that reordering steps loses
 // nothing. Pure, so it runs here rather than needing a phone.
 //
@@ -33,10 +34,15 @@ function load(relPath) {
 }
 
 const {
-  ALL_CHECK_CADENCES,
   ALL_ROUTINE_OCCASIONS,
   checkIdsInRoutine,
   checkStanding,
+  cleanCheckSchedule,
+  describeCheckSchedule,
+  describeDue,
+  isScheduledOn,
+  nextCheckReminderTimes,
+  occurrenceToMark,
   cleanReminderTime,
   cleanRoutineText,
   describeReminderDays,
@@ -60,7 +66,6 @@ const {
   occasionChoices,
   orderRoutinesForNow,
   parseReminderDays,
-  periodStart,
   reminderFiresOnDay,
   routineDoneToday,
   routineForCheck,
@@ -89,11 +94,20 @@ function makeCheck(overrides) {
   return {
     id: 'c1',
     name: 'Take the morning pill',
-    cadence: 'daily',
     active: true,
     position: 0,
     lastMarkedAt: null,
     lastMarkedVia: null,
+    times: ['08:00'],
+    repeat: 'days',
+    days: [],
+    everyN: 1,
+    everyUnit: 'day',
+    startsOn: '2026-09-01',
+    reminderOn: true,
+    keepReminding: null,
+    lastDueAt: null,
+    createdAt: new Date(2026, 8, 1, 0, 0, 0).toISOString(),
     ...overrides,
   };
 }
@@ -127,47 +141,70 @@ check('Monday is its own week start', startOfLocalWeek(new Date(2026, 8, 14, 23,
 check('Wednesday belongs to Monday', startOfLocalWeek(wednesday).getDate(), 14);
 check('Sunday trails the week it ends', startOfLocalWeek(new Date(2026, 8, 20, 0, 1)).getDate(), 14);
 
-check('a day period starts at midnight', periodStart('daily', wednesday).getHours(), 0);
-check('a month period starts on the first', periodStart('monthly', wednesday).getDate(), 1);
-// The one that matters most: a thing with no pattern has no deadline, so
-// the app never invents one for it.
-check('no pattern means no period', periodStart('anytime', wednesday), null);
+// ------------------------------------------------------------ when a thing comes round
 
-// ------------------------------------------------------------ does the last mark still count
+const day = (d) => new Date(2026, 8, d, 12, 0, 0);
+check('every day means every day', isScheduledOn(makeCheck({}), day(19)), true);
+check('weekdays leave Saturday out', isScheduledOn(makeCheck({ days: [1, 2, 3, 4, 5] }), day(19)), false);
+check('and keep Wednesday', isScheduledOn(makeCheck({ days: [1, 2, 3, 4, 5] }), day(16)), true);
+const fortnightly = makeCheck({ repeat: 'every', everyN: 2, everyUnit: 'week', startsOn: '2026-09-02' });
+check('every 2 weeks skips the week between', isScheduledOn(fortnightly, day(9)), false);
+check('and lands on the second Wednesday', isScheduledOn(fortnightly, day(16)), true);
+check('nothing comes round before it starts', isScheduledOn(fortnightly, new Date(2026, 7, 19, 12)), false);
+const every3 = makeCheck({ repeat: 'every', everyN: 3, everyUnit: 'day', startsOn: '2026-09-10' });
+check('every 3 days from the 10th lands on the 16th', isScheduledOn(every3, day(16)), true);
+check('and not on the 17th', isScheduledOn(every3, day(17)), false);
+// The 31st falls on the last day of a shorter month rather than skipping it.
+const monthEnd = makeCheck({ repeat: 'every', everyN: 1, everyUnit: 'month', startsOn: '2026-01-31' });
+check('the 31st lands on April 30', isScheduledOn(monthEnd, new Date(2026, 3, 30, 12)), true);
+check('and not on April 29', isScheduledOn(monthEnd, new Date(2026, 3, 29, 12)), false);
+
+const cleaned = cleanCheckSchedule(
+  { times: ['20:00', 'nonsense', '08:00', '08:00'], repeat: 'other', days: [9, 1], everyN: 0, everyUnit: 'year', startsOn: 'soon', reminderOn: true, keepReminding: null },
+  wednesday,
+);
+check('times are cleaned, deduplicated and put in clock order', cleaned.times, ['08:00', '20:00']);
+check('an unknown repeat reads as days', cleaned.repeat, 'days');
+check('an unknown unit reads as days', cleaned.everyUnit, 'day');
+check('a number below one reads as one', cleaned.everyN, 1);
+check('a start that is not a day reads as today', cleaned.startsOn, '2026-09-16');
+check(
+  'a schedule never ends up with no time',
+  cleanCheckSchedule({ ...cleaned, times: [] }, wednesday).times,
+  ['09:00'],
+);
+
+// ------------------------------------------------------------ which time a tap checks off
+
+const twiceDaily = makeCheck({ times: ['08:00', '20:00'] });
+check('the morning time is open at 9:30, so a tap checks it off', occurrenceToMark(twiceDaily, wednesday), '2026-09-16T08:00');
+check(
+  'once the morning is done, a tap counts for the evening',
+  occurrenceToMark(makeCheck({ times: ['08:00', '20:00'], lastDueAt: '2026-09-16T08:00' }), wednesday),
+  '2026-09-16T20:00',
+);
+check(
+  'and once the evening is done early, the next tap is tomorrow morning',
+  occurrenceToMark(makeCheck({ times: ['08:00', '20:00'], lastDueAt: '2026-09-16T20:00' }), wednesday),
+  '2026-09-17T08:00',
+);
+
+// ------------------------------------------------------------ where a thing stands
 
 const markedThisMorning = new Date(2026, 8, 16, 7, 12, 0).toISOString();
-const markedLastWeek = new Date(2026, 8, 8, 7, 12, 0).toISOString();
+const markedLastWeek = new Date(2026, 8, 8, 8, 2, 0).toISOString();
 
-check(
-  'a mark from this morning counts today',
-  checkStanding(makeCheck({ lastMarkedAt: markedThisMorning }), wednesday).doneThisPeriod,
-  true,
-);
-check(
-  'a mark from last week does not count today',
-  checkStanding(makeCheck({ lastMarkedAt: markedLastWeek }), wednesday).doneThisPeriod,
-  false,
-);
-check(
-  'a mark from last week does not count this week either',
-  checkStanding(makeCheck({ cadence: 'weekly', lastMarkedAt: markedLastWeek }), wednesday).doneThisPeriod,
-  false,
-);
-check(
-  'a mark from this Monday counts this week',
-  checkStanding(
-    makeCheck({ cadence: 'weekly', lastMarkedAt: new Date(2026, 8, 14, 20, 0).toISOString() }),
-    wednesday,
-  ).doneThisPeriod,
-  true,
-);
-// Not false: a smoke alarm battery is not late, because nothing said when
-// it was due.
-check(
-  'a thing with no pattern is never late',
-  checkStanding(makeCheck({ cadence: 'anytime', lastMarkedAt: markedLastWeek }), wednesday).doneThisPeriod,
-  null,
-);
+const doneToday = checkStanding(makeCheck({ lastMarkedAt: markedThisMorning, lastDueAt: '2026-09-16T08:00' }), wednesday);
+check('this morning checked off is done', doneToday.done, true);
+check('and nothing is waiting', doneToday.waitingSince, null);
+check('the next one is tomorrow morning', doneToday.nextDue.getTime(), new Date(2026, 8, 17, 8, 0).getTime());
+const waiting = checkStanding(makeCheck({ lastMarkedAt: markedLastWeek, lastDueAt: '2026-09-08T08:00' }), wednesday);
+check('checked off last week is waiting today', waiting.done, false);
+check('since this morning', waiting.waitingSince.getTime(), new Date(2026, 8, 16, 8, 0).getTime());
+// Added at nine with an eight o'clock time: this morning's eight never
+// applied to it, so it is not waiting since then.
+const addedToday = checkStanding(makeCheck({ createdAt: new Date(2026, 8, 16, 9, 0).toISOString() }), wednesday);
+check('a thing added after its time today has nothing due yet', addedToday.done, null);
 check(
   'nonsense in the column reads as nothing recorded',
   checkStanding(makeCheck({ lastMarkedAt: 'not a date' }), wednesday).lastMarkedAt,
@@ -198,58 +235,68 @@ check(
   '3 weeks ago',
 );
 
+check('a time later today', describeDue(new Date(2026, 8, 16, 20, 0), wednesday), 'today at 8pm');
+check('a time tomorrow', describeDue(new Date(2026, 8, 17, 8, 0), wednesday), 'tomorrow at 8am');
+check('a time this week is named by its day', describeDue(new Date(2026, 8, 18, 9, 0), wednesday), 'Friday at 9am');
+check('a time further off is named by its date', describeDue(new Date(2026, 10, 14, 9, 0), wednesday), 'Nov 14 at 9am');
+
+check('done says when, and when it comes back', doneToday.line, 'Done today at 7:12am. Next: tomorrow at 8am.');
+check('waiting says since when, and when it last was', waiting.line, 'Not checked off for today at 8am. Last done over a week ago.');
+check('never done says only what it is waiting for', checkStanding(makeCheck({}), wednesday).line, 'Not checked off for today at 8am.');
+check('added after its time says when the first one is', addedToday.line, 'First one is tomorrow at 8am.');
+
+// ------------------------------------------------------------ the schedule in words
+
+check('two times every day', describeCheckSchedule(twiceDaily), '8am and 8pm, every day.');
+check('weekdays', describeCheckSchedule(makeCheck({ days: [1, 2, 3, 4, 5] })), '8am, weekdays.');
+check('every 3 days', describeCheckSchedule(every3), '8am, every 3 days.');
+check('every 2 weeks names its day', describeCheckSchedule(fortnightly), '8am, every 2 weeks on Wednesday.');
 check(
-  'a daily thing done today says when',
-  checkStanding(makeCheck({ lastMarkedAt: markedThisMorning }), wednesday).line,
-  'Done, 7:12am.',
+  'every month names its date',
+  describeCheckSchedule(makeCheck({ repeat: 'every', everyN: 1, everyUnit: 'month', startsOn: '2026-09-15' })),
+  '8am, every month on day 15.',
 );
+const spanish = { and: 'y', 'every day': 'cada día' };
 check(
-  'a daily thing not done today says so and says when it last was',
-  checkStanding(makeCheck({ lastMarkedAt: markedLastWeek }), wednesday).line,
-  'Not today. Last done over a week ago.',
-);
-check(
-  'a daily thing never done says only that',
-  checkStanding(makeCheck({}), wednesday).line,
-  'Not recorded today.',
-);
-check(
-  'a weekly thing done says which period it covers',
-  checkStanding(
-    makeCheck({ cadence: 'weekly', lastMarkedAt: new Date(2026, 8, 14, 20, 0).toISOString() }),
-    wednesday,
-  ).line,
-  'Done this week, Monday at 8:00pm.',
-);
-check(
-  'a thing with no pattern says when, and nothing else',
-  checkStanding(makeCheck({ cadence: 'anytime', lastMarkedAt: markedLastWeek }), wednesday).line,
-  'Last done over a week ago.',
-);
-check(
-  'a thing with no pattern and no history says nothing more',
-  checkStanding(makeCheck({ cadence: 'anytime' }), wednesday).line,
-  'Nothing recorded yet.',
+  'a language can be handed in',
+  describeCheckSchedule(twiceDaily, (english) => spanish[english] ?? english),
+  '8am y 8pm, cada día.',
 );
 
-// ------------------------------------------------------------ the card's own line
+// ------------------------------------------------------------ reminders for a thing on its own
+
+check('a thing with its reminder off never speaks', nextCheckReminderTimes(makeCheck({ reminderOn: false }), wednesday, 2), []);
+check('a thing a routine walks past never speaks on its own', nextCheckReminderTimes(twiceDaily, wednesday, 2, true), []);
+check('a switched off thing never speaks', nextCheckReminderTimes(makeCheck({ active: false }), wednesday, 2), []);
+check(
+  'twice a day, still open this morning: this morning, tonight, and both tomorrow',
+  nextCheckReminderTimes(twiceDaily, wednesday, 1).length,
+  4,
+);
+check(
+  'once the morning is checked off it is left out',
+  nextCheckReminderTimes(makeCheck({ times: ['08:00', '20:00'], lastDueAt: '2026-09-16T08:00' }), wednesday, 1).length,
+  3,
+);
+
+// ------------------------------------------------------------ the card's line
 
 const waitingAndDone = [
-  makeCheck({ id: 'a', lastMarkedAt: markedThisMorning }),
+  makeCheck({ id: 'a', lastMarkedAt: markedThisMorning, lastDueAt: '2026-09-16T08:00' }),
   makeCheck({ id: 'b' }),
-  makeCheck({ id: 'c', cadence: 'anytime' }),
+  makeCheck({ id: 'c', createdAt: new Date(2026, 8, 16, 9, 0).toISOString() }),
   makeCheck({ id: 'd', active: false }),
 ];
-check('a switched off check counts for nothing', summarizeChecks(waitingAndDone, wednesday), {
+check('a switched off thing counts for nothing', summarizeChecks(waitingAndDone, wednesday), {
   total: 3,
   waiting: 1,
   done: 1,
-  noPeriod: 1,
+  notYet: 1,
 });
 check('one waiting is said in the singular', describeChecksSummary(summarizeChecks(waitingAndDone, wednesday)), '1 thing not recorded yet.');
 check(
   'nothing waiting says nothing at all',
-  describeChecksSummary(summarizeChecks([makeCheck({ lastMarkedAt: markedThisMorning })], wednesday)),
+  describeChecksSummary(summarizeChecks([waitingAndDone[0]], wednesday)),
   null,
 );
 check('an empty list says nothing at all', describeChecksSummary(summarizeChecks([], wednesday)), null);
@@ -570,10 +617,9 @@ check('nothing to say, nothing to schedule', nextReminderTimes(makeRoutine({}), 
 }
 // ------------------------------------------------------------ nothing goes unnamed
 
-check('every cadence is listed', ALL_CHECK_CADENCES.length, 4);
 check('every occasion is listed', ALL_ROUTINE_OCCASIONS.length, 4);
-for (const cadence of ALL_CHECK_CADENCES) {
-  check(`${cadence} has a standing line`, checkStanding(makeCheck({ cadence }), wednesday).line.length > 0, true);
+for (const repeat of ['days', 'every']) {
+  check(`${repeat} has a standing line`, checkStanding(makeCheck({ repeat }), wednesday).line.length > 0, true);
 }
 
 if (failures > 0) {

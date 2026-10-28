@@ -305,7 +305,7 @@ export const DATED_KIND_PREFIX: Record<DatedReminderKind, string | null> = {
   compost: 'Compost',
   refill: 'Refill',
   useBy: 'Kitchen',
-  todo: 'To-do',
+  todo: 'Task',
   cropPrep: 'Get ready',
   cropSow: 'Sowing time',
 };

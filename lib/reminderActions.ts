@@ -62,11 +62,15 @@
 //     question with three of the energy scale's own words. Android shows
 //     three buttons at most, so neither carries Snooze; the tap opens the
 //     check-in on the sleep question, where all five words and a note are.
-//   - Appointments, bills, work benefits, Days Until counters, routines and
-//     Your Week carry Got it and Snooze. Nothing in the app records a bill
-//     as paid or a benefit as used, a counter is marked done where it
-//     lives, and a routine is a walk of several steps that its tap already
-//     opens, so Got it writes nothing: it clears the reminder. Until
+//   - A routine with steps carries Done and Snooze (2026-10-28). Its
+//     notification shows one step at a time: Done checks that step off and
+//     the next step takes its place, right there, so the whole walk can be
+//     done from the shade, locked or not. A routine with no steps yet has
+//     Got it and Snooze, like the rest below.
+//   - Appointments, bills, work benefits, Days Until counters and Your
+//     Week carry Got it and Snooze. Nothing in the app records a bill as
+//     paid or a benefit as used, and a counter is marked done where it
+//     lives, so Got it writes nothing: it clears the reminder. Until
 //     1.0.74.12 they had Snooze only, which left a reminder that had been
 //     read with no way to go except coming back in 15 minutes (direct
 //     report, 2026-10-27, on Your Week).
@@ -277,6 +281,8 @@ export function categoryKeyFor(kind: string, markable = true): ReminderCategoryK
     case 'check':
     case 'todo':
       return 'task';
+    case 'routine':
+      return markable ? 'task' : 'plain';
     case 'upkeep':
       return markable ? 'upkeep' : 'plain';
     case 'compost':
@@ -383,6 +389,7 @@ export function takesWords(kind: string): boolean {
 export type ReminderActionPlan =
   | { write: 'scheduleStatus'; status: 'logged' | 'completed' }
   | { write: 'checkMarked' }
+  | { write: 'routineStep' }
   | { write: 'upkeepDone' }
   | { write: 'compostTurned' }
   | { write: 'todoDone' }
@@ -440,6 +447,7 @@ export function planReminderAction(kind: string, action: string): ReminderAction
   if (action === 'ate' && kind === 'meal') return { write: 'scheduleStatus', status: 'logged' };
   if (action === 'done' && (kind === 'garden' || kind === 'reminder')) return { write: 'scheduleStatus', status: 'completed' };
   if (action === 'done' && kind === 'check') return { write: 'checkMarked' };
+  if (action === 'done' && kind === 'routine') return { write: 'routineStep' };
   if (action === 'doneToday' && kind === 'upkeep') return { write: 'upkeepDone' };
   if (action === 'turned' && kind === 'compost') return { write: 'compostTurned' };
   if (action === 'done' && kind === 'todo') return { write: 'todoDone' };
@@ -465,8 +473,9 @@ export function answerLine(kind: string, markable = true): string | null {
       return "Ate it marks it eaten on Today's Meals.";
     case 'task':
       if (kind === 'garden') return 'Done marks it done in Upcoming Tasks.';
-      if (kind === 'check') return 'Done marks it on Did I Do It.';
-      if (kind === 'todo') return 'Done marks it done on your list.';
+      if (kind === 'check') return 'Done checks it off your To Do List.';
+      if (kind === 'routine') return 'Done checks this step off and shows the next one here.';
+      if (kind === 'todo') return 'Done marks it done on Tasks.';
       return 'Done marks it done.';
     case 'upkeep':
       return 'Done today records it in Upkeep.';

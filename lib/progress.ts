@@ -441,7 +441,7 @@ export function buildProgressBands(inputs: ProgressInputs): ProgressBand[] {
     ],
     weeks: [
       weeksKept('A routine walked through', life.routineDays, 'No routine walked through yet.'),
-      weeksKept('Something marked in Did I Do It', life.markDays, 'Nothing marked in Did I Do It yet.'),
+      weeksKept('Something checked off the To Do List', life.markDays, 'Nothing checked off the To Do List yet.'),
       weeksKept('Upkeep done', life.upkeepDays, 'No upkeep done yet.'),
       weeksKept('A work check-in', life.workDays, 'No work check-ins yet.'),
     ],

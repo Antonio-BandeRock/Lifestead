@@ -40,7 +40,6 @@ export const PART: Readonly<Record<string, string>> = {
  "Last marked {daysAgoPhrase}, which is more than a {period} back.": "Última marca {daysAgoPhrase}, que es hace más de un {period}.",
  "Marked {daysMarked} {value} in this range. Last marked {daysAgoPhrase}.": "Marcado {daysMarked} {value} en este tramo. Última marca {daysAgoPhrase}.",
  "A day with no mark means no mark was made. It does not mean the thing went undone, since plenty gets done without anybody tapping anything.": "Un día sin marca quiere decir que no se hizo ninguna marca. No quiere decir que la cosa quedó sin hacer, porque mucho se hace sin que nadie toque nada.",
- "Nothing set up under Did I Do It yet. Add one on the Life tab and this fills in on its own.": "Todavía no hay nada configurado en ¿Ya lo hice?. Agrega algo en la pestaña Vida y esto se llena solo.",
  "{length} {value} to check, and nothing marked in this range.": "{length} {value} que revisar, y nada marcado en este tramo.",
  "{days} {value} with something marked in this range.": "{days} {value} con algo marcado en este tramo.",
  "nothing was marked in them.": "no se marcó nada en ellos.",

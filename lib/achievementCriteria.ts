@@ -347,7 +347,7 @@ const OTHER_CRITERIA: CriterionDefinition[] = [
   },
   { key: 'emergency_contact_added', label: 'Added an emergency contact', tab: '/life', firstQuery: firstOf('emergency_contacts', 'created_at') },
   { key: 'routine_run', label: 'Walked through a routine', tab: '/life', firstQuery: firstOf('routine_runs', 'started_at') },
-  { key: 'done_mark_made', label: 'Marked something done in Did I Do It', tab: '/life', firstQuery: firstOf('done_check_marks', 'marked_at') },
+  { key: 'done_mark_made', label: 'Checked something off the To Do List', tab: '/life', firstQuery: firstOf('done_check_marks', 'marked_at') },
   { key: 'upkeep_done', label: 'Did an upkeep job', tab: '/life', firstQuery: firstOf('upkeep_doings', 'done_on') },
   { key: 'countdown_reached', label: 'Reached a Days Until counter', tab: '/life', firstQuery: firstOf('countdowns', 'done_at', 'done_at IS NOT NULL') },
   {

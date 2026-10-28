@@ -367,8 +367,6 @@ export const PART: Readonly<Record<string, string>> = {
  "No movement logged yet.": "Todavía no hay movimiento registrado.",
  "A routine walked through": "Una rutina recorrida",
  "No routine walked through yet.": "Todavía no hay una rutina recorrida.",
- "Something marked in Did I Do It": "Algo marcado en ¿Ya lo hice?",
- "Nothing marked in Did I Do It yet.": "Todavía no hay nada marcado en ¿Ya lo hice?",
  "No upkeep done yet.": "Todavía no hay mantenimiento hecho.",
  "A work check-in": "Una revisión del trabajo",
  "No work check-ins yet.": "Todavía no hay revisiones del trabajo.",

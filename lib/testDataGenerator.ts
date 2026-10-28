@@ -91,6 +91,7 @@ import { recordBenefitUse, saveWorkCheckin, upsertBenefit } from './workDb';
 import { createUpkeepPlace, markUpkeepDone, upsertUpkeepItem } from './upkeepDb';
 import { addRoutineStep, createDoneCheck, createRoutine, markDoneCheck, markRoutineRunProgress, startRoutineRun } from './routinesDb';
 import { addTodo, markTodoDone } from './todosDb';
+import { defaultCheckSchedule } from './routines';
 import { addCountdown } from './countdownDb';
 import { saveEmergencyProfile, upsertEmergencyContact } from './emergencyDb';
 import { createCaptureNote, setCaptureNoteDestination } from './captureNotesDb';
@@ -876,9 +877,20 @@ async function fillLife(progress: (step: string) => void): Promise<void> {
 
   progress('Routines and checks');
   const db = await getDatabase();
-  const pills = await createDoneCheck('Morning pill', 'daily');
-  const backDoor = await createDoneCheck('Back door locked', 'daily');
-  const bins = await createDoneCheck('Bins out', 'weekly');
+  // Every schedule counts from before the first mark, and the bins from a
+  // Tuesday, since that is the day they go out.
+  let binsStart = -PAST - 2;
+  while (dayFrom(binsStart).getDay() !== 2) binsStart -= 1;
+  const daily = (time: string) => ({ ...defaultCheckSchedule(new Date(), time), startsOn: day(-PAST - 2) });
+  const pills = await createDoneCheck('Morning pill', daily('06:30'));
+  const backDoor = await createDoneCheck('Back door locked', daily('22:00'));
+  const bins = await createDoneCheck('Bins out', {
+    ...defaultCheckSchedule(new Date(), '19:00'),
+    repeat: 'every',
+    everyN: 1,
+    everyUnit: 'week',
+    startsOn: day(binsStart),
+  });
   if (!pills || !backDoor || !bins) throw new Error('Test data: a check could not be made.');
   const routines: [string, string, string[], string | null][] = [
     ['Morning', 'morning', ['Levothyroxine with water', 'Shower', 'Check the day\'s calendar', 'Breakfast after an hour'], pills],

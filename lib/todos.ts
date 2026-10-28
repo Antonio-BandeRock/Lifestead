@@ -229,7 +229,7 @@ export function readTodoWords(text: string, now: Date): TodoReading {
   const dueOn = reading.start.date < today ? today : reading.start.date;
   const repeat = reading.repeat.type === 'none' ? null : reading.repeat;
   const notes = reading.pieces.map((piece) => `“${piece.words}” read as ${piece.reads}.`);
-  if (!reading.timeAssumed) notes.push('A to-do keeps the day and not the time. For a set time, save it from Capture as a reminder.');
+  if (!reading.timeAssumed) notes.push('A task keeps the day and not the time. For a set time, put it on your To Do List.');
   // Unsettled lines about where a thing is kept (My Meds, the garden) are
   // about reminders and appointments, not to-dos; the rest still apply.
   for (const line of reading.unsettled) if (!/My Meds|appointment/i.test(line)) notes.push(line);

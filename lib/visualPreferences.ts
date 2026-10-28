@@ -527,7 +527,7 @@ export const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
   logHarvest: 'Log a Harvest',
   digestCards: 'Library Cards',
   routines: 'Routines',
-  doneChecks: 'Did I Do It',
+  doneChecks: 'To Do List',
   countdowns: 'Days Until',
   startWorkout: 'Start a Workout',
   groceryQuickAdd: 'Add to the Grocery List',

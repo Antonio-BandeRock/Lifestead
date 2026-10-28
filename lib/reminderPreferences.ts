@@ -147,7 +147,7 @@ export const REMINDER_KIND_LABELS: Record<ReminderKindKey, string> = {
   garden: 'Garden tasks',
   routine: 'Routines',
   exercise: 'Planned exercise',
-  check: 'Did I Do It checks',
+  check: 'To Do List',
   bill: 'Bills',
   upkeep: 'Upkeep & renewals',
   benefit: 'Work benefits',
@@ -155,7 +155,7 @@ export const REMINDER_KIND_LABELS: Record<ReminderKindKey, string> = {
   compost: 'Turning the compost',
   refill: 'Running low on a med',
   useBy: 'Use it before its date',
-  todo: 'A to-do on its day',
+  todo: 'A task on its day',
   cropPrep: 'Get an area ready for a crop',
   cropSow: 'Time to sow a crop',
   photoSeries: 'Photo series',
@@ -186,7 +186,7 @@ export const REMINDER_KIND_CAPTIONS: Record<ReminderKindKey, string> = {
   exercise:
     'A day of a plan on Schedules > Exercise that has a time. A workout opens in the player; an activity opens Schedules to mark it. Quiet on a day already marked.',
   check:
-    'A check from Life > Did I Do It that you gave a time to, on the days you picked. Done marks it. Quiet once it is marked for the day, week or month.',
+    'Something on Life > To Do List with Remind me on, once at each of its times. Done checks that time off, even with the phone locked, and it comes back at the next time. A thing a routine walks past is reminded with the routine instead.',
   bill:
     'A bill from Life > Finances, three days ahead and again on the day. Anything set to pay itself is left out.',
   upkeep:
@@ -201,7 +201,7 @@ export const REMINDER_KIND_CAPTIONS: Record<ReminderKindKey, string> = {
     'A med or supplement on Life > My Meds whose counted supply is running low, a week ahead unless you picked another lead, then every few days until you save a fresh count.',
   useBy:
     'Something in Life > Kitchen with a use-by date you gave it, the day before and on the day. Marking it used or gone clears the reminder.',
-  todo: 'A to-do on Life > To-Do or Work that you gave a day to, once on that day. Done on the reminder marks it done; one left open stays on the list and is not chased.',
+  todo: 'A task on Life > Tasks or Work that you gave a day to, once on that day. Done on the reminder marks it done; one left open stays on the list and is not chased.',
   cropPrep:
     'A week before a sowing window opens for a crop in Garden > Sowing Calendar > My Crops, word to get its area ready. Prepped on the reminder records it. Only crops you chose, and only once a place is saved in My Zone.',
   cropSow:

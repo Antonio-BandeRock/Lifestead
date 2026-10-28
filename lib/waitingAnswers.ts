@@ -73,7 +73,7 @@ export const WAITING_GROUP_LABELS: Record<WaitingGroupKey, string> = {
   meal: 'Meals',
   water: 'Water',
   checkin: 'How You Are',
-  todo: 'Things to Do',
+  todo: 'To Do List',
   garden: 'Garden',
   upkeep: 'Upkeep',
   other: 'Everything Else',

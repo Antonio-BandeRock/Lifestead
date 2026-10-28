@@ -43,6 +43,7 @@ import {
   type PlainDate,
 } from '../lib/plainDate';
 import { syncReminderNotifications } from '../lib/reminderNotifications';
+import { defaultCheckSchedule } from '../lib/routines';
 import { addRoutineStep, createDoneCheck, createRoutine } from '../lib/routinesDb';
 
 type Mode = 'menu' | 'day' | 'grocery' | 'steps';
@@ -188,10 +189,10 @@ export function CaptureTurnInto({ note, onChanged, onFinished }: Props) {
     if (busy) return;
     if (kept.length === 0) return explainNotYet(NOTHING_KEPT);
     setBusy(true);
-    for (const item of kept) await createDoneCheck(item, 'daily');
+    for (const item of kept) await createDoneCheck(item, defaultCheckSchedule(new Date()));
     await finish({
-      message: `${kept.length === 1 ? '1 check' : `${kept.length} checks`} on Did I Do It, each asked about daily. Change any of them there. The note is marked done.`,
-      open: { label: 'Open Did I Do It', href: lifeLens('didIDoIt') },
+      message: `${kept.length === 1 ? '1 thing' : `${kept.length} things`} on your To Do List, each every day at 9am. Change the times there. The note is marked done.`,
+      open: { label: 'Open To Do List', href: lifeLens('didIDoIt') },
     });
   }
 
@@ -338,7 +339,7 @@ export function CaptureTurnInto({ note, onChanged, onFinished }: Props) {
             disabled={busy}
           >
             <Ionicons name="checkmark-done-outline" size={16} color={colors.accent} />
-            <Text style={styles.outlineButtonText}>Did I Do It checks, one each</Text>
+            <Text style={styles.outlineButtonText}>To Do List, one thing each</Text>
           </TouchableOpacity>
         </View>
       )}

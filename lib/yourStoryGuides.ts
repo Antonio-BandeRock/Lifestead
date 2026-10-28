@@ -836,12 +836,12 @@ export const GUIDES: GuideDef[] = [
     entries: [
       fromItem(
         'didIDoIt',
-        'Add something you tend to wonder whether you did, like locking the door, in Life under Did I Do It.',
+        'Add something you need to do and tend to wonder whether you did, like locking the door, in Life under To Do List.',
         'One tap when you do it, and later the answer is there, with the time.',
         {
           when: 'start',
           takes: 'Under a minute',
-          taps: ['Tap + Add something to check.', 'Name it, like Front door locked, and save.'],
+          taps: ['Tap + Add something to do.', 'Name it, like Front door locked, give it its times and days, and save.'],
         },
       ),
       fromItem(
@@ -859,7 +859,7 @@ export const GUIDES: GuideDef[] = [
         key: 'doneMark',
         record: 'doneMark',
         when: 'daily',
-        doThis: 'Tap it each time you do it, in Life under Did I Do It.',
+        doThis: 'Check it off each time you do it, in Life under To Do List.',
         forYou: 'The time is kept, so the question has an answer.',
         takes: 'One tap',
         taps: ['Tap the thing you just did.'],
@@ -1221,12 +1221,12 @@ export const GUIDES: GuideDef[] = [
       ),
       fromItem(
         'didIDoIt',
-        'Add something you tend to wonder whether you did, in Life under Did I Do It.',
+        'Add something you need to do and tend to wonder whether you did, in Life under To Do List.',
         'One tap when you do it, and the answer is there later.',
         {
           when: 'daily',
           takes: 'Under a minute to add, one tap each time',
-          taps: ['Tap + Add something to check, name it, and save.', 'Tap it each time you do it.'],
+          taps: ['Tap + Add something to do, name it, give it its times and days, and save.', 'Check it off each time you do it.'],
         },
       ),
       fromItem(
@@ -1241,7 +1241,7 @@ export const GUIDES: GuideDef[] = [
       ),
       fromItem(
         'todo',
-        'Put the things you mean to do on one list, in Life under To-Do.',
+        'Put the things you mean to do on one list, in Life under Tasks.',
         'One list, each thing with its day if it has one and a reminder that morning. One left open stays until you do it or let it go.',
         {
           when: 'whenItHappens',
@@ -1298,12 +1298,12 @@ export const GUIDES: GuideDef[] = [
       ),
       fromItem(
         'todo',
-        'Keep the work to-dos in one place, in Life under Work, on the To-Do pill.',
-        'Each with its day if it has one, beside your personal ones on Life under To-Do.',
+        'Keep the work tasks in one place, in Life under Work, on the Tasks pill.',
+        'Each with its day if it has one, beside your personal ones on Life under Tasks.',
         {
           when: 'whenItHappens',
           takes: 'A few seconds each',
-          taps: ['Tap To-Do on Work.', 'Type it the way you would say it, like "send the report on Friday", and tap Add to the List.'],
+          taps: ['Tap Tasks on Work.', 'Type it the way you would say it, like "send the report on Friday", and tap Add to the List.'],
         },
       ),
     ],
@@ -1418,9 +1418,9 @@ export const LENS_NAMES: Record<string, Record<string, string>> = {
     movement: 'Movement',
     workouts: 'Workouts',
     routines: 'Routines',
-    didIDoIt: 'Did I Do It',
+    didIDoIt: 'To Do List',
     daysUntil: 'Days Until',
-    todos: 'To-Do',
+    todos: 'Tasks',
   },
   '/schedule': {
     meals: 'Meals',

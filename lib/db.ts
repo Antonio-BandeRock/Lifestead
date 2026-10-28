@@ -5872,10 +5872,13 @@ async function runDatabaseInitialization() {
       CREATE TABLE IF NOT EXISTS done_checks (
         id TEXT PRIMARY KEY,
         name TEXT NOT NULL,
-        -- One of lib/routines.ts CHECK_CADENCES: 'daily', 'weekly',
-        -- 'monthly', or 'anytime' for a thing with no pattern, where the
-        -- honest answer is when it last happened rather than yes or no.
-        cadence TEXT NOT NULL DEFAULT 'daily',
+        -- How the days are picked since the To Do List (2026-10-28): 'days'
+        -- (days of the week, reminder_days, none meaning every day) or
+        -- 'every' (every_n every_unit from starts_on). Before that it held
+        -- 'daily', 'weekly', 'monthly' or 'anytime', which the migration
+        -- below turns into a schedule and lib/routinesDb.ts toCheck still
+        -- reads if one arrives by sync.
+        cadence TEXT NOT NULL DEFAULT 'days',
         active INTEGER NOT NULL DEFAULT 1,
         position INTEGER NOT NULL DEFAULT 0,
         -- Carried on the row as well as in done_check_marks, because every
@@ -9428,6 +9431,40 @@ async function runDatabaseInitialization() {
       if (!checkColumns.some((column) => column.name === 'keep_reminding_minutes')) {
         await db.execAsync('ALTER TABLE done_checks ADD COLUMN keep_reminding_minutes INTEGER;');
       }
+      // The To Do List (2026-10-28): every thing has a schedule of its own,
+      // one or more times a day ('HH:mm' comma list) on days of the week or
+      // every N days, weeks or months, and each time is checked off on its
+      // own (last_due_at, the latest one checked off). A row from before,
+      // with a cadence, is given the schedule it meant: its reminder time or
+      // 9am, every day for daily and "no set pattern", every week or month
+      // counted from the day it was added.
+      if (!checkColumns.some((column) => column.name === 'times')) {
+        await db.execAsync(`
+          ALTER TABLE done_checks ADD COLUMN times TEXT;
+          ALTER TABLE done_checks ADD COLUMN every_n INTEGER NOT NULL DEFAULT 1;
+          ALTER TABLE done_checks ADD COLUMN every_unit TEXT NOT NULL DEFAULT 'day';
+          ALTER TABLE done_checks ADD COLUMN starts_on TEXT;
+          ALTER TABLE done_checks ADD COLUMN last_due_at TEXT;
+        `);
+      }
+      // Only when a row still needs it, so a start with nothing to convert
+      // writes nothing and gives sync nothing to send.
+      const unconverted = await db.getFirstAsync<{ n: number }>(
+        "SELECT COUNT(*) AS n FROM done_checks WHERE times IS NULL OR times = '' OR starts_on IS NULL OR cadence NOT IN ('days', 'every')",
+      );
+      if ((unconverted?.n ?? 0) > 0) await db.execAsync(`
+        UPDATE done_checks SET times =COALESCE(reminder_time, '09:00') WHERE times IS NULL OR times = '';
+        UPDATE done_checks SET starts_on = date(created_at) WHERE starts_on IS NULL;
+        UPDATE done_checks SET cadence = 'every', every_n = 1, every_unit = 'week', reminder_on = 1 WHERE cadence = 'weekly';
+        UPDATE done_checks SET cadence = 'every', every_n = 1, every_unit = 'month', reminder_on = 1 WHERE cadence = 'monthly';
+        UPDATE done_checks SET cadence = 'days', reminder_on = 1 WHERE cadence NOT IN ('days', 'every');
+      `);
+    }
+    // Which time of a To Do List thing a mark checked off (2026-10-28), as
+    // lib/routines.ts dueKey writes it. Null on marks from before.
+    const checkMarkColumns = await db.getAllAsync<{ name: string }>('PRAGMA table_info(done_check_marks)');
+    if (checkMarkColumns.length > 0 && !checkMarkColumns.some((column) => column.name === 'due_at')) {
+      await db.execAsync('ALTER TABLE done_check_marks ADD COLUMN due_at TEXT;');
     }
     // How long a step takes, when somebody knows (B4). Nullable: a step
     // nobody has timed has no length, not a length of nothing.

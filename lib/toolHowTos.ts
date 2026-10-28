@@ -1037,13 +1037,13 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     },
     {
       key: 'todo',
-      title: 'Keep a to-do for work',
+      title: 'Keep a task for work',
       steps: [
-        { say: 'Tap To-Do.', mark: 'work.todos' },
-        { say: 'Type the to-do as you would say it, with a day if it has one, like "send the report on Friday".' },
+        { say: 'Tap Tasks.', mark: 'work.todos' },
+        { say: 'Type the task as you would say it, with a day if it has one, like "send the report on Friday".' },
         { say: 'Tap Add to the List.', mark: 'todo.add' },
       ],
-      forYou: 'It shows here and in Life under To-Do beside everything else you mean to do, and reminds you on its day.',
+      forYou: 'It shows here and in Life under Tasks beside everything else you mean to do, and reminds you on its day.',
     },
     {
       key: 'changeWeek',
@@ -1296,53 +1296,66 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
   ],
   '/life#didIDoIt': [
     {
+      key: 'add',
+      title: 'Put something on your To Do List',
+      steps: [
+        { say: 'Tap + Add something to do.', mark: 'didIDoIt.add', stay: true },
+        { say: 'Under What you need to do, type its name the way you would say it, like Morning pill.' },
+        { say: 'Under At these times, pick the hour and minutes. Tap + Another time in the day for each time it needs doing.' },
+        { say: 'Under Which days, leave every day lit or tap the days to leave out, or pick Every few days, weeks or months and say how often and from which day.' },
+        { say: 'Under A reminder in the notification area, pick Remind me or No reminder.' },
+        { say: 'Tap Save.', mark: 'didIDoIt.save' },
+      ],
+      forYou: 'It shows on your list at each of its times, and once a time is checked off it comes back at the next one.',
+    },
+    {
       key: 'yes',
       title: 'Mark that you just did it',
       steps: [
-        { say: 'If your checks sit in bands, open the band it is listed under.' },
+        { say: 'If your list sits in bands, open the band it is listed under.' },
         { say: 'Tap Yes, just did it.', mark: 'didIDoIt.yes' },
       ],
-      forYou: 'The line under its name now says when, so the next time you wonder, the answer is there.',
+      forYou: 'That time is checked off and the line under its name says when, so the next time you wonder, the answer is there. It comes back at its next time.',
     },
     {
       key: 'mistake',
       title: 'Take back a mark made by mistake',
       steps: [
-        { say: 'If your checks sit in bands, open the band it is listed under.' },
+        { say: 'If your list sits in bands, open the band it is listed under.' },
         { say: 'Tap That was a mistake.', mark: 'didIDoIt.mistake' },
       ],
       forYou: 'Only the last mark goes. Everything before it stays as it was.',
     },
     {
       key: 'remind',
-      title: 'Have the phone ask you',
+      title: 'Change its times or have the phone remind you',
       steps: [
-        { say: 'If your checks sit in bands, open the band it is listed under.' },
+        { say: 'If your list sits in bands, open the band it is listed under.' },
         { say: 'Tap Change.', mark: 'didIDoIt.change', stay: true },
-        { say: 'Under How often it comes round, pick daily, weekly or monthly.' },
-        { say: 'Under A reminder to do it, pick an hour and minutes, then tap the days you want it under On these days.' },
+        { say: 'Change the times under At these times and the days under Which days.' },
+        { say: 'Under A reminder in the notification area, pick Remind me.' },
         { say: 'Tap Save.', mark: 'didIDoIt.save' },
       ],
-      forYou: 'Tapping Done on the reminder marks it here, and once it is marked it stays quiet until the next day, week or month.',
+      forYou: 'One reminder comes at each time, kept together under To Do List in the notification area. Done on it checks that time off, even with the phone locked.',
     },
     {
       key: 'order',
-      title: 'Put your checks in a different order',
+      title: 'Put your list in a different order',
       steps: [
-        { say: 'If your checks sit in bands, open the band it is listed under.' },
+        { say: 'If your list sits in bands, open the band it is listed under.' },
         { say: 'Tap Move down to put it later in the list, or Move up to put it sooner.', mark: 'didIDoIt.moveDown', stay: true },
       ],
       forYou: 'The ones you wonder about most can sit at the top.',
     },
     {
       key: 'remove',
-      title: 'Remove a check',
+      title: 'Remove something from your To Do List',
       steps: [
-        { say: 'If your checks sit in bands, open the band it is listed under.' },
+        { say: 'If your list sits in bands, open the band it is listed under.' },
         { say: 'Tap Remove.', mark: 'didIDoIt.remove' },
         { say: 'Tap Remove it to say yes. Everything recorded against it goes too.' },
       ],
-      forYou: 'Your list holds only what you still want to ask about.',
+      forYou: 'Your list holds only what you still need to do.',
     },
   ],
   '/life#daysUntil': [
@@ -2157,7 +2170,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Open the band with the name of Capture.', mark: 'homeBand.captureInbox', stay: true },
         { say: 'When something is waiting, tap Sort it out.', mark: 'home.captureSort' },
       ],
-      forYou: 'Each note is offered as the record it reads like: a grocery item, a to-do, a reminder, a place you put something. You say yes or change it.',
+      forYou: 'Each note is offered as the record it reads like: a grocery item, a task, a reminder, a place you put something. You say yes or change it.',
     },
     {
       key: 'nextThing',
@@ -2350,7 +2363,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       steps: [
         { say: 'Open the band with the name of Life, if it is closed.', mark: 'homeGroup.life', stay: true },
         { say: 'Open the band with the name of Today I Want To.', mark: 'homeBand.todayPicks', stay: true },
-        { say: 'Tap Pick from Did I Do It and choose one.', mark: 'home.pickFrom', stay: true },
+        { say: 'Tap Pick from your To Do List and choose one.', mark: 'home.pickFrom', stay: true },
         { say: 'Or type something new in the box and tap Add.', mark: 'home.pickNew' },
       ],
       forYou: 'Today holds only the few you picked, and each one can be ticked off from Home.',
@@ -2362,7 +2375,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Open the band with the name of Today I Want To, on the Life band.', mark: 'homeBand.todayPicks', stay: true },
         { say: 'Tap the circle beside it. Tap again to take the mark back.', mark: 'home.pickMark' },
       ],
-      forYou: 'The mark is kept with its time, the same as a mark made on Did I Do It.',
+      forYou: 'The mark is kept with its time, the same as checking it off on your To Do List.',
     },
     {
       key: 'routine',
@@ -2379,8 +2392,8 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Check whether you did something',
       steps: [
         { say: 'Open the band with the name of Life, if it is closed.', mark: 'homeGroup.life', stay: true },
-        { say: 'Open the band with the name of Did I Do It.', mark: 'homeBand.doneChecks', stay: true },
-        { say: 'Read the line under each one for when it was last marked. Tap one to open it on Life.', mark: 'home.check' },
+        { say: 'Open the band with the name of To Do List.', mark: 'homeBand.doneChecks', stay: true },
+        { say: 'Read the line under each one for whether it is checked off. Tap one to open it on Life.', mark: 'home.check' },
       ],
       forYou: 'The answer to "did I already?" is on Home, so you do not have to guess.',
     },
@@ -2474,7 +2487,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
   '/life#todos': [
     {
       key: 'done',
-      title: 'Mark a to-do done',
+      title: 'Mark a task done',
       steps: [
         { say: 'Tap the box beside it.', mark: 'todo.done' },
       ],
@@ -2482,7 +2495,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     },
     {
       key: 'change',
-      title: 'Change a to-do or its day',
+      title: 'Change a task or its day',
       steps: [
         { say: 'Tap Change under it.', mark: 'todo.change', stay: true },
         { say: 'Change the words or the day, then tap Save.' },
@@ -2491,7 +2504,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     },
     {
       key: 'letGo',
-      title: 'Let a to-do go without doing it',
+      title: 'Let a task go without doing it',
       steps: [
         { say: 'Tap Let it go under it. On one that repeats, it says Let this one go.', mark: 'todo.letGo' },
       ],
@@ -2499,9 +2512,9 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     },
     {
       key: 'noDay',
-      title: 'Keep a to-do with no day',
+      title: 'Keep a task with no day',
       steps: [
-        { say: 'Type the to-do in the box at the top.' },
+        { say: 'Type the task in the box at the top.' },
         { say: 'If it read a day you did not mean, tap Keep it without a day.' },
         { say: 'Tap Add to the List.', mark: 'todo.add' },
       ],
@@ -2514,11 +2527,11 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Done, below the list.', mark: 'todo.showDone' },
         { say: 'Tap the box beside one to open it again.' },
       ],
-      forYou: 'Nothing done is lost, and a to-do marked done by mistake goes back on the list.',
+      forYou: 'Nothing done is lost, and a task marked done by mistake goes back on the list.',
     },
     {
       key: 'remove',
-      title: 'Remove a to-do',
+      title: 'Remove a task',
       steps: [
         { say: 'Tap Remove under it.', mark: 'todo.remove' },
         { say: 'Tap Remove again to say yes. The record of each time it was done goes too, so mark it done or let it go if you want to keep that.' },

@@ -38,8 +38,6 @@ export const PART: Readonly<Record<string, string>> = {
  "days in your meal plan": "días de tu plan de comidas",
  "grocery list item": "artículo de la lista del súper",
  "grocery list items": "artículos de la lista del súper",
- "Did I Do It entry": "registro de ¿Ya lo hice?",
- "Did I Do It entries": "registros de ¿Ya lo hice?",
  "medications and supplements": "medicamentos y suplementos",
  "recall set aside": "retiro del mercado apartado",
  "recalls set aside": "retiros del mercado apartados",

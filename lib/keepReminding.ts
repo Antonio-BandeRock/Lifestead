@@ -5,7 +5,7 @@
 // once, whether it came back: three follow-ups at 15, 45 and 90 minutes.
 // Somebody who needs the morning pill repeated every ten minutes and never
 // wants the bins repeated at all had to pick one answer for both. Each
-// routine, each Did I Do It check and each reminder somebody sets now
+// routine, each To Do List thing and each reminder somebody sets now
 // carries a choice of its own:
 //
 //   null  follow the Profile switch (the old behaviour, and the default)
@@ -23,7 +23,6 @@
 // scripts/test_keep_reminding.js can check it without a phone.
 
 import { NUDGE_FOLLOW_UP_MINUTES } from './reminderSchedule';
-import type { DoneCheck } from './routines';
 
 export type KeepReminding = number | null;
 
@@ -94,70 +93,8 @@ export function describeKeepReminding(choice: KeepReminding, switchOn: boolean):
   return `It comes back every ${describeInterval(choice)} until you mark it, ${count} more times at most.`;
 }
 
-// --- Did I Do It checks that speak -------------------------------------------
-
-export type CheckReminder = {
-  /** 'HH:mm', or null for a check nothing speaks about. */
-  time: string | null;
-  /** 0 is Sunday. Empty means every day. */
-  days: number[];
-  on: boolean;
-};
-
-function startOfDay(date: Date): Date {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-}
-
-function startOfWeek(date: Date): Date {
-  const day = startOfDay(date);
-  const offset = (day.getDay() + 6) % 7;
-  day.setDate(day.getDate() - offset);
-  return day;
-}
-
-/** The start of the period a moment falls in, the same periods
- *  checkStanding in lib/routines.ts reads a check against. */
-function periodOf(cadence: DoneCheck['cadence'], date: Date): number | null {
-  if (cadence === 'daily') return startOfDay(date).getTime();
-  if (cadence === 'weekly') return startOfWeek(date).getTime();
-  if (cadence === 'monthly') return new Date(date.getFullYear(), date.getMonth(), 1).getTime();
-  return null;
-}
-
-function cleanTime(time: string | null): [number, number] | null {
-  if (!time) return null;
-  const match = /^(\d{1,2}):(\d{2})$/.exec(time.trim());
-  if (!match) return null;
-  const hour = Number(match[1]);
-  const minute = Number(match[2]);
-  if (hour > 23 || minute > 59) return null;
-  return [hour, minute];
-}
-
-/**
- * Every moment a check should speak between the start of today and the
- * horizon, in order, including today's when it has already gone by, since
- * that is the one its follow-ups hang from. A day inside a period the check
- * is already marked in is skipped: a weekly check marked on Tuesday says
- * nothing on Thursday. A check with no period ('anytime') never speaks,
- * because there is nothing for it to be due in.
- */
-export function checkReminderTimes(check: DoneCheck, reminder: CheckReminder, now: Date, withinDays: number): Date[] {
-  if (!reminder.on || check.cadence === 'anytime' || !check.active) return [];
-  const clock = cleanTime(reminder.time);
-  if (!clock) return [];
-  const marked = check.lastMarkedAt ? new Date(check.lastMarkedAt) : null;
-  const markedPeriod = marked && !Number.isNaN(marked.getTime()) ? periodOf(check.cadence, marked) : null;
-  const times: Date[] = [];
-  for (let offset = 0; offset <= withinDays; offset += 1) {
-    const day = startOfDay(now);
-    day.setDate(day.getDate() + offset);
-    if (reminder.days.length > 0 && !reminder.days.includes(day.getDay())) continue;
-    if (markedPeriod !== null && periodOf(check.cadence, day) === markedPeriod) continue;
-    times.push(new Date(day.getFullYear(), day.getMonth(), day.getDate(), clock[0], clock[1], 0, 0));
-  }
-  return times;
-}
+// The times a To Do List thing speaks at are worked out in lib/routines.ts
+// (nextCheckReminderTimes), beside the schedule they come from.
 
 /**
  * Today's moment for a routine or a check that has already gone by and is

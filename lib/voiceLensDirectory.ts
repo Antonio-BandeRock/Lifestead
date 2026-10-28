@@ -44,7 +44,7 @@ export const VOICE_LENS_DIRECTORY: VoiceLensPlace[] = [
   { tab: '/', param: 'openHomeSection', key: 'groceryList', label: 'Grocery List' },
   { tab: '/', param: 'openHomeSection', key: 'groceryQuickAdd', label: 'Add to the Grocery List' },
   { tab: '/', param: 'openHomeSection', key: 'routines', label: 'Routines' },
-  { tab: '/', param: 'openHomeSection', key: 'doneChecks', label: 'Did I Do It' },
+  { tab: '/', param: 'openHomeSection', key: 'doneChecks', label: 'To Do List' },
   { tab: '/', param: 'openHomeSection', key: 'todayPicks', label: 'Today I Want To' },
   { tab: '/', param: 'openHomeSection', key: 'countdowns', label: 'Days Until' },
   { tab: '/', param: 'openHomeSection', key: 'startWorkout', label: 'Start a Workout' },
@@ -172,7 +172,7 @@ export const VOICE_LENS_DIRECTORY: VoiceLensPlace[] = [
   { tab: '/life', param: 'openLifeLens', key: 'movement', label: 'Movement' },
   { tab: '/life', param: 'openLifeLens', key: 'workouts', label: 'Workouts' },
   { tab: '/life', param: 'openLifeLens', key: 'routines', label: 'Routines' },
-  { tab: '/life', param: 'openLifeLens', key: 'didIDoIt', label: 'Did I Do It' },
+  { tab: '/life', param: 'openLifeLens', key: 'didIDoIt', label: 'To Do List' },
   { tab: '/life', param: 'openLifeLens', key: 'daysUntil', label: 'Days Until' },
-  { tab: '/life', param: 'openLifeLens', key: 'todos', label: 'To-Do' },
+  { tab: '/life', param: 'openLifeLens', key: 'todos', label: 'Tasks' },
 ];

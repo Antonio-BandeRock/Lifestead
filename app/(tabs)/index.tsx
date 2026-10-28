@@ -998,7 +998,7 @@ const HOME_LENS_DESTINATIONS: Partial<
     href: { pathname: '/life', params: { openLifeLens: 'routines' } } as Href,
   },
   doneChecks: {
-    label: 'Did I Do It',
+    label: 'To Do List',
     icon: 'checkmark-done',
     color: colors.tabLife,
     href: { pathname: '/life', params: { openLifeLens: 'didIDoIt' } } as Href,
@@ -4389,7 +4389,7 @@ export default function HomeScreen() {
     const summaryLine = describeChecksSummary(summarizeChecks(checks, now));
     return renderBand(
       'doneChecks',
-      'Did I Do It',
+      'To Do List',
       <View style={styles.bandBody}>
         {summaryLine ? <Text style={styles.bandCaption}>{summaryLine}</Text> : null}
         {checks.map((check, checkIndex) => {
@@ -4411,9 +4411,9 @@ export default function HomeScreen() {
                 </Text>
               </View>
               <Ionicons
-                name={standing.doneThisPeriod === true ? 'checkmark-circle' : 'ellipse-outline'}
+                name={standing.done === true ? 'checkmark-circle' : 'ellipse-outline'}
                 size={18}
-                color={standing.doneThisPeriod === true ? colors.accent : colors.textSecondary}
+                color={standing.done === true ? colors.accent : colors.textSecondary}
                 style={textShadow}
               />
             </TouchableOpacity>
@@ -4421,10 +4421,10 @@ export default function HomeScreen() {
         })}
         {renderBandWayIn(
           'didIDoIt',
-          checks.length === 0 ? 'Add your first check' : 'Add or change a check',
+          checks.length === 0 ? 'Add the first thing to do' : 'Add or change something to do',
           checks.length === 0
-            ? 'One question, asked later. Did I take it, did I lock it, did I pay it. Name what you keep wondering about and it waits here.'
-            : 'Opens Life, where these get named and ticked off.',
+            ? 'The things you need to do regularly, each with its times and days. Check one off when you do it and you will know later whether you did.'
+            : 'Opens Life, where these get their times and are checked off.',
           walkMark.ref('home.checkWayIn'),
         )}
       </View>,

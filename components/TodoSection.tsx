@@ -160,7 +160,7 @@ export function TodoSection({ tabColor, scope }: Props) {
     if (!editing) return;
     const title = editing.title.trim();
     if (!title) {
-      setEditError('Say what the to-do is.');
+      setEditError('Say what the task is.');
       return;
     }
     const when = readTodoWhen(editing.when, new Date());
@@ -315,8 +315,8 @@ export function TodoSection({ tabColor, scope }: Props) {
       {todos.length === 0 ? (
         <Text style={styles.captionText}>
           {scope === 'work'
-            ? 'Nothing on the work list. Type a to-do as you would say it, with a day or a repeat if it has one.'
-            : 'Nothing on the list. Type a to-do as you would say it: "renew the car insurance on 12 November", "water the ferns every 3 days", or just "buy stamps". A to-do with a day reminds you on that day, and one left open stays here until it is done or let go.'}
+            ? 'Nothing on the work list. Type a task as you would say it, with a day or a repeat if it has one.'
+            : 'Nothing on the list. Type a task as you would say it: "renew the car insurance on 12 November", "water the ferns every 3 days", or just "buy stamps". A task with a day reminds you on that day, and one left open stays here until it is done or let go.'}
         </Text>
       ) : openCount === 0 ? (
         <Text style={styles.captionText}>Everything on the list is done.</Text>

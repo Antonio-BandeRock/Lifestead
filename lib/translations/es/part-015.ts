@@ -520,7 +520,6 @@ export const PART: Readonly<Record<string, string>> = {
  "Top drawer, the white bottle": "Cajón de arriba, el frasco blanco",
  "Give the steps minutes and the routine shows about how long it takes, and the day timeline draws it as a block of time rather than a moment.": "Ponle minutos a los pasos y la rutina muestra más o menos cuánto tarda, y la línea del tiempo del día la dibuja como un bloque de tiempo y no como un momento.",
  "Something to check off here": "Algo que palomear aquí",
- "Attach a check and this step carries a box to tap while you are standing there doing it. Tapping it is what answers the question in Did I Do It later, so nothing has to be remembered twice.": "Liga una revisión y este paso trae una casilla para tocar mientras estás ahí haciéndolo. Tocarla es lo que responde la pregunta en ¿Ya lo hice? más tarde, así que nada se tiene que recordar dos veces.",
  "A new check": "Una revisión nueva",
  "Took my pill": "Me tomé la pastilla",
  "How often it needs doing": "Cada cuánto hay que hacerlo",

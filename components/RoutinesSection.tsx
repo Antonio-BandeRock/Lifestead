@@ -14,7 +14,8 @@ import { useBandFolds } from '../hooks/useBandFolds';
 import { BUTTON_SHADOW, colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import {
-  CHECK_CADENCES,
+  cleanReminderTime,
+  defaultCheckSchedule,
   describeOccasionHours,
   describeReminderDays,
   describeRoutineReminder,
@@ -33,7 +34,6 @@ import {
   MAX_ROUTINE_NAME,
   MAX_STEP_DETAIL,
   MAX_STEP_TEXT,
-  type CheckCadence,
   type CustomOccasion,
   type DoneCheck,
   type Routine,
@@ -59,6 +59,7 @@ import {
   updateRoutineOccasion,
   updateRoutineStep,
 } from '../lib/routinesDb';
+import { explainNotYet } from '../lib/notYet';
 import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { useWalkMark } from './WalkMark';
 import { ThumbRow } from './ThumbRow';
@@ -119,7 +120,7 @@ type StepForm = {
   /** Typed digits, kept as text until saved. */
   minutes: string;
 };
-type CheckForm = { name: string; cadence: CheckCadence };
+type CheckForm = { name: string };
 
 const HOUR_OPTIONS = [
   { label: 'Any time', value: ANY_HOUR },
@@ -228,11 +229,6 @@ export function RoutinesSection({ tabColor }: Props) {
     [checks],
   );
 
-  const cadenceOptions = useMemo(
-    () => CHECK_CADENCES.map((entry) => ({ label: entry.label, value: entry.key })),
-    [],
-  );
-
   async function saveRoutine() {
     if (!form) return;
     if (!form.name.trim()) {
@@ -313,15 +309,22 @@ export function RoutinesSection({ tabColor }: Props) {
     load();
   }
 
-  /** A check made from inside the step that does it, and attached to that
-   *  step straight away. */
+  /** A thing for the To Do List made from inside the step that does it, and
+   *  attached to that step straight away. It takes the routine's time and
+   *  days, since the routine is what reminds it (2026-10-28), and can be
+   *  given a schedule of its own on the To Do List. */
   async function saveCheck() {
     if (!checkForm || !stepForm) return;
     if (!checkForm.name.trim()) {
-      showInfoAlert('Almost there', 'Name it as the question you will be asking: "Took my pill".');
+      explainNotYet('Give it a name first, the way you would say it out loud, like "Morning pill".');
       return;
     }
-    const id = await createDoneCheck(checkForm.name, checkForm.cadence);
+    const routine = routines.find((each) => each.id === stepForm.routineId);
+    const schedule = {
+      ...defaultCheckSchedule(new Date(), cleanReminderTime(routine?.reminderTime ?? null) ?? '09:00', false),
+      days: routine?.reminderDays ?? [],
+    };
+    const id = await createDoneCheck(checkForm.name, schedule);
     setChecks(await getDoneChecks(true));
     if (id) setStepForm({ ...stepForm, checkId: id });
     setCheckForm(null);
@@ -778,7 +781,7 @@ export function RoutinesSection({ tabColor }: Props) {
                       selected={stepForm.checkId ?? NO_CHECK}
                       onSelect={(value) => {
                         if (value === ADD_CHECK) {
-                          setCheckForm({ name: stepForm.text.trim(), cadence: 'daily' });
+                          setCheckForm({ name: stepForm.text.trim() });
                           return;
                         }
                         setCheckForm(null);
@@ -787,32 +790,25 @@ export function RoutinesSection({ tabColor }: Props) {
                       tabColor={tabColor}
                     />
                     <Text style={styles.helperText}>
-                      Attach a check and this step carries a box to tap while you are standing there doing it.
-                      Tapping it is what answers the question in Did I Do It later, so nothing has to be
-                      remembered twice.
+                      Attach something from your To Do List and this step carries a box to tap while you are
+                      standing there doing it. Tapping it checks it off there, so nothing has to be remembered
+                      twice, and the routine&apos;s reminder covers it.
                     </Text>
 
                     {checkForm ? (
                       <View style={styles.inlineForm}>
-                        <Text style={styles.label}>A new check</Text>
+                        <Text style={styles.label}>Something new for your To Do List</Text>
                         <AppTextInput
                           onVoiceResult={(name) => setCheckForm({ ...checkForm, name })}
                           style={styles.input}
                           value={checkForm.name}
                           onChangeText={(name) => setCheckForm({ ...checkForm, name })}
-                          placeholder="Took my pill"
+                          placeholder="Morning pill"
                           placeholderTextColor={colors.textMuted}
                           maxLength={MAX_CHECK_NAME}
                         />
-                        <Text style={styles.label}>How often it needs doing</Text>
-                        <PopoverSelect
-                          options={cadenceOptions}
-                          selected={checkForm.cadence}
-                          onSelect={(value) => setCheckForm({ ...checkForm, cadence: value as CheckCadence })}
-                          tabColor={tabColor}
-                        />
                         <Text style={styles.helperText}>
-                          {CHECK_CADENCES.find((entry) => entry.key === checkForm.cadence)?.example}
+                          It goes on your To Do List at this routine&apos;s time and days. Change its times there.
                         </Text>
                         <ThumbRow primary="first" style={styles.formActions}>
                           <TouchableOpacity style={styles.primaryButton} onPress={saveCheck}>

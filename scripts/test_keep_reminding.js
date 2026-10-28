@@ -1,7 +1,6 @@
 // Checks lib/keepReminding.ts (C2 of the competitive build plan, Phase 2,
 // 2026-09-26): the per-thing "keep reminding me until I mark it" choice,
-// when a Did I Do It check speaks, and how long something already gone by
-// keeps its follow-ups. Pure, so it runs here rather than on a phone. Exits
+// and how long something already gone by keeps its follow-ups. Pure, so it runs here rather than on a phone. Exits
 // non-zero on any failure.
 
 // eslint-config-expo lints this repo as app code, which has no __dirname.
@@ -58,24 +57,10 @@ check('value round trip, 15', k.readKeepReminding(k.keepRemindingValue(15)), 15)
 check('every option reads back', k.KEEP_REMINDING_OPTIONS.map((o) => k.keepRemindingValue(k.readKeepReminding(o.value))), k.KEEP_REMINDING_OPTIONS.map((o) => o.value));
 check('lookback covers the longest follow-up', k.KEEP_REMINDING_LOOKBACK_MINUTES >= 120, true);
 
-// --- A check that speaks -----------------------------------------------------
-function makeCheck(over) {
-  return { id: 'c1', name: 'Took my morning pill', cadence: 'daily', active: true, position: 0, lastMarkedAt: null, lastMarkedVia: null, reminderTime: '08:00', reminderDays: [], reminderOn: true, keepReminding: null, ...over };
-}
-const on = { time: '08:00', days: [], on: true };
-// Friday 2026-09-25, 9:00 local.
+// When a thing on the To Do List speaks is checked in scripts/test_routines.js
+// (nextCheckReminderTimes), since 2026-10-28 each thing carries its own
+// times and days and lib/routines.ts works them out.
 const friday = new Date(2026, 8, 25, 9, 0, 0);
-const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')} ${d.getDate()} ${d.getHours()}:${String(d.getMinutes()).padStart(2, '0')}`;
-
-check('daily, unmarked: today (gone by) and the next two', k.checkReminderTimes(makeCheck(), on, friday, 2).map(iso), ['2026-09 25 8:00', '2026-09 26 8:00', '2026-09 27 8:00']);
-check('daily, marked this morning: today is skipped', k.checkReminderTimes(makeCheck({ lastMarkedAt: new Date(2026, 8, 25, 7, 30).toISOString() }), on, friday, 1).map(iso), ['2026-09 26 8:00']);
-check('weekly, marked Tuesday: quiet through Sunday', k.checkReminderTimes(makeCheck({ cadence: 'weekly', lastMarkedAt: new Date(2026, 8, 22, 12).toISOString() }), on, friday, 3).map(iso), ['2026-09 28 8:00']);
-check('monthly, marked this month: quiet until October', k.checkReminderTimes(makeCheck({ cadence: 'monthly', lastMarkedAt: new Date(2026, 8, 2).toISOString() }), on, friday, 6).map(iso), ['2026-10 1 8:00']);
-check('anytime never speaks', k.checkReminderTimes(makeCheck({ cadence: 'anytime' }), on, friday, 6), []);
-check('retired never speaks', k.checkReminderTimes(makeCheck({ active: false }), on, friday, 6), []);
-check('off never speaks', k.checkReminderTimes(makeCheck(), { ...on, on: false }, friday, 6), []);
-check('a bad time never speaks', k.checkReminderTimes(makeCheck(), { ...on, time: '25:00' }, friday, 6), []);
-check('weekdays only skips the weekend', k.checkReminderTimes(makeCheck(), { ...on, days: [1, 2, 3, 4, 5] }, friday, 3).map(iso), ['2026-09 25 8:00', '2026-09 28 8:00']);
 
 // --- Gone by, still outstanding ----------------------------------------------
 check('an hour ago is outstanding', k.outstandingSince(new Date(2026, 8, 25, 8, 0), friday) !== null, true);

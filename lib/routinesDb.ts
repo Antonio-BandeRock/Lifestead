@@ -7,8 +7,16 @@
 import { getDatabase } from './db';
 import { cleanKeepReminding } from './keepReminding';
 import {
-  ALL_CHECK_CADENCES,
+  cleanCheckSchedule,
+  cleanEveryN,
+  cleanEveryUnit,
   cleanReminderTime,
+  defaultCheckSchedule,
+  localDayKey,
+  occurrenceToMark,
+  parseCheckTimes,
+  parseDueKey,
+  serializeCheckTimes,
   cleanRoutineText,
   hasRoutineReminder,
   isRoutineTextUsable,
@@ -19,7 +27,8 @@ import {
   MAX_ROUTINE_NAME,
   MAX_STEP_DETAIL,
   MAX_STEP_TEXT,
-  type CheckCadence,
+  type CheckRepeat,
+  type CheckSchedule,
   type CheckMarkVia,
   type CustomOccasion,
   type DoneCheck,
@@ -50,32 +59,59 @@ type CheckRow = {
   reminderDays: string | null;
   reminderOn: number | null;
   keepReminding: number | null;
+  times: string | null;
+  everyN: number | null;
+  everyUnit: string | null;
+  startsOn: string | null;
+  lastDueAt: string | null;
+  createdAt: string | null;
 };
 
+/** SQLite's datetime('now') is 'YYYY-MM-DD HH:MM:SS' in UTC with no zone,
+ *  which a phone would read as local time or not at all. */
+function readCreatedAt(value: string | null): string | null {
+  if (!value) return null;
+  if (/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(value)) return `${value.replace(' ', 'T')}Z`;
+  return Number.isNaN(Date.parse(value)) ? null : value;
+}
+
 function toCheck(row: CheckRow): DoneCheck {
-  const cadence = ALL_CHECK_CADENCES.includes(row.cadence as CheckCadence)
-    ? (row.cadence as CheckCadence)
-    : 'daily';
+  // A row from before the To Do List can still arrive by sync from a phone
+  // not yet updated, so its cadence is read the way the migration reads it.
+  const legacyUnit = row.cadence === 'weekly' ? 'week' : row.cadence === 'monthly' ? 'month' : null;
+  const repeat: CheckRepeat = legacyUnit || row.cadence === 'every' ? 'every' : 'days';
+  const everyUnit = legacyUnit ?? cleanEveryUnit(row.everyUnit);
+  const createdAt = readCreatedAt(row.createdAt);
+  const times = parseCheckTimes(row.times);
+  const fallbackTime = cleanReminderTime(row.reminderTime) ?? '09:00';
   return {
     id: row.id,
     name: row.name,
-    cadence,
     active: row.active !== 0,
     position: row.position,
     lastMarkedAt: row.lastMarkedAt,
     lastMarkedVia: row.lastMarkedVia === 'routine' ? 'routine' : row.lastMarkedVia === 'tap' ? 'tap' : null,
-    reminderTime: cleanReminderTime(row.reminderTime),
-    reminderDays: parseReminderDays(row.reminderDays),
-    // On with no time is off, the same as a routine.
-    reminderOn: (row.reminderOn ?? 0) !== 0 && cleanReminderTime(row.reminderTime) !== null,
+    times: times.length > 0 ? times : [fallbackTime],
+    repeat,
+    days: parseReminderDays(row.reminderDays),
+    everyN: legacyUnit ? 1 : cleanEveryN(row.everyN, everyUnit),
+    everyUnit,
+    startsOn:
+      row.startsOn && /^\d{4}-\d{2}-\d{2}$/.test(row.startsOn)
+        ? row.startsOn
+        : localDayKey(createdAt ? new Date(createdAt) : new Date()),
+    reminderOn: (row.reminderOn ?? 0) !== 0,
     keepReminding: cleanKeepReminding(row.keepReminding),
+    lastDueAt: parseDueKey(row.lastDueAt) ? row.lastDueAt : null,
+    createdAt,
   };
 }
 
 const CHECK_COLUMNS = `id, name, cadence, active, position,
      last_marked_at AS lastMarkedAt, last_marked_via AS lastMarkedVia,
      reminder_time AS reminderTime, reminder_days AS reminderDays, reminder_on AS reminderOn,
-     keep_reminding_minutes AS keepReminding`;
+     keep_reminding_minutes AS keepReminding, times, every_n AS everyN, every_unit AS everyUnit,
+     starts_on AS startsOn, last_due_at AS lastDueAt, created_at AS createdAt`;
 
 export async function getDoneChecks(includeInactive = false): Promise<DoneCheck[]> {
   const db = await getDatabase();
@@ -93,66 +129,75 @@ export async function getDoneCheck(id: string): Promise<DoneCheck | null> {
   return row ? toCheck(row) : null;
 }
 
-export async function createDoneCheck(name: string, cadence: CheckCadence): Promise<string | null> {
+/** The schedule's columns in the order createDoneCheck and updateDoneCheck
+ *  write them. reminder_time keeps the first time, so a phone not yet
+ *  updated still has something sensible to show. */
+function scheduleValues(schedule: CheckSchedule): (string | number | null)[] {
+  const cleaned = cleanCheckSchedule(schedule, new Date());
+  return [
+    cleaned.repeat,
+    serializeCheckTimes(cleaned.times),
+    cleaned.times[0] ?? null,
+    serializeReminderDays(cleaned.days),
+    cleaned.everyN,
+    cleaned.everyUnit,
+    cleaned.startsOn,
+    cleaned.reminderOn ? 1 : 0,
+    cleanKeepReminding(cleaned.keepReminding),
+  ];
+}
+
+export async function createDoneCheck(name: string, schedule?: CheckSchedule): Promise<string | null> {
   if (!isRoutineTextUsable(name)) return null;
   const db = await getDatabase();
   const id = newId('check');
+  const now = new Date();
   const next = await db.getFirstAsync<{ next: number }>(
     `SELECT COALESCE(MAX(position), -1) + 1 AS next FROM done_checks`,
   );
   await db.runAsync(
-    `INSERT INTO done_checks (id, name, cadence, active, position, created_at)
-     VALUES (?, ?, ?, 1, ?, ?)`,
+    `INSERT INTO done_checks (id, name, cadence, times, reminder_time, reminder_days, every_n, every_unit,
+       starts_on, reminder_on, keep_reminding_minutes, active, position, created_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?)`,
     id,
     trimTo(name, MAX_CHECK_NAME),
-    ALL_CHECK_CADENCES.includes(cadence) ? cadence : 'daily',
+    ...scheduleValues(schedule ?? defaultCheckSchedule(now)),
     next?.next ?? 0,
-    new Date().toISOString(),
+    now.toISOString(),
   );
   return id;
 }
 
-export async function updateDoneCheck(id: string, name: string, cadence: CheckCadence): Promise<boolean> {
+/** The name and the whole schedule, written together, since the form edits
+ *  them together. */
+export async function updateDoneCheck(id: string, name: string, schedule: CheckSchedule): Promise<boolean> {
   if (!isRoutineTextUsable(name)) return false;
   const db = await getDatabase();
   await db.runAsync(
-    `UPDATE done_checks SET name = ?, cadence = ? WHERE id = ?`,
+    `UPDATE done_checks SET name = ?, cadence = ?, times = ?, reminder_time = ?, reminder_days = ?, every_n = ?,
+       every_unit = ?, starts_on = ?, reminder_on = ?, keep_reminding_minutes = ? WHERE id = ?`,
     trimTo(name, MAX_CHECK_NAME),
-    ALL_CHECK_CADENCES.includes(cadence) ? cadence : 'daily',
+    ...scheduleValues(schedule),
     id,
   );
   return true;
 }
 
-/** When a check speaks (C2). Written whole, so clearing the time clears
- *  the row as well as the form. */
-export async function setDoneCheckReminder(
-  id: string,
-  time: string | null,
-  days: number[],
-  keepReminding: number | null,
-): Promise<void> {
-  const db = await getDatabase();
-  const cleaned = cleanReminderTime(time);
-  await db.runAsync(
-    `UPDATE done_checks SET reminder_time = ?, reminder_days = ?, reminder_on = ?, keep_reminding_minutes = ? WHERE id = ?`,
-    cleaned,
-    serializeReminderDays(days),
-    cleaned ? 1 : 0,
-    cleanKeepReminding(keepReminding),
-    id,
-  );
-}
-
-/** Every active check with a time to speak at, for the reminder reconcile. */
+/** Every active thing that speaks at its times on its own, for the
+ *  reminder reconcile. A thing a live routine walks past is left out: the
+ *  routine's reminder covers it, so it never speaks twice. */
 export async function listCheckReminders(): Promise<DoneCheck[]> {
   const db = await getDatabase();
   const rows = await db.getAllAsync<CheckRow>(
     `SELECT ${CHECK_COLUMNS} FROM done_checks
-      WHERE active = 1 AND reminder_on = 1 AND reminder_time IS NOT NULL
+      WHERE active = 1 AND reminder_on = 1
+        AND id NOT IN (
+          SELECT s.check_id FROM routine_steps s JOIN routines r ON r.id = s.routine_id
+           WHERE r.active = 1 AND s.check_id IS NOT NULL
+        )
       ORDER BY position ASC, name ASC`,
   );
-  return rows.map(toCheck).filter((check) => check.reminderOn);
+  return rows.map(toCheck);
 }
 
 /** Retired rather than deleted, so a step still pointing at it keeps its
@@ -173,41 +218,59 @@ export async function deleteDoneCheck(id: string): Promise<void> {
 
 /**
  * Record that a thing has been done, now. Writes the history row and the
- * copy on the check in one go, since every screen reads the copy and nothing
- * yet reads the history.
+ * copy on the check in one go, since every screen reads the copy.
+ *
+ * Which of its times it checks off: the one due now while it is open,
+ * otherwise the next one, so doing the evening pill a little early counts
+ * for the evening (occurrenceToMark). A notification's Done names its time
+ * in dueAt instead, and a press for a time already checked off writes
+ * nothing, so a second press on an old copy is not a second dose.
  *
  * markedAt is passed in rather than taken here so that a routine finishing
  * seven steps stamps all seven marks with the one moment the walk ended,
  * instead of seven times a few milliseconds apart.
+ *
+ * Answers whether a mark was written.
  */
 export async function markDoneCheck(
   checkId: string,
   via: CheckMarkVia = 'tap',
   routineId: string | null = null,
   markedAt: string = new Date().toISOString(),
-): Promise<void> {
+  dueAt: string | null = null,
+): Promise<boolean> {
   const db = await getDatabase();
+  const check = await getDoneCheck(checkId);
+  if (!check) return false;
+  const named = parseDueKey(dueAt) ? dueAt : null;
+  if (named && check.lastDueAt && named <= check.lastDueAt) return false;
+  const marked = new Date(markedAt);
+  const due = named ?? occurrenceToMark(check, Number.isNaN(marked.getTime()) ? new Date() : marked);
   await db.runAsync(
-    `INSERT INTO done_check_marks (id, check_id, marked_at, via, routine_id) VALUES (?, ?, ?, ?, ?)`,
+    `INSERT INTO done_check_marks (id, check_id, marked_at, via, routine_id, due_at) VALUES (?, ?, ?, ?, ?, ?)`,
     newId('mark'),
     checkId,
     markedAt,
     via,
     routineId,
+    due,
   );
+  const lastDue = due && (!check.lastDueAt || due > check.lastDueAt) ? due : check.lastDueAt;
   await db.runAsync(
-    `UPDATE done_checks SET last_marked_at = ?, last_marked_via = ? WHERE id = ?`,
+    `UPDATE done_checks SET last_marked_at = ?, last_marked_via = ?, last_due_at = ? WHERE id = ?`,
     markedAt,
     via,
+    lastDue,
     checkId,
   );
+  return true;
 }
 
 /**
  * Take back the most recent mark on a check, and put the one before it back
- * on the row. Here because a tap on the wrong line is the single likeliest
- * mistake on this screen, and a record you cannot correct is one people stop
- * trusting.
+ * on the row, with the latest time still checked off. Here because a tap on
+ * the wrong line is the single likeliest mistake on this screen, and a
+ * record you cannot correct is one people stop trusting.
  */
 export async function undoLastCheckMark(checkId: string): Promise<void> {
   const db = await getDatabase();
@@ -222,10 +285,15 @@ export async function undoLastCheckMark(checkId: string): Promise<void> {
       WHERE check_id = ? ORDER BY marked_at DESC, rowid DESC LIMIT 1`,
     checkId,
   );
+  const latestDue = await db.getFirstAsync<{ dueAt: string | null }>(
+    `SELECT MAX(due_at) AS dueAt FROM done_check_marks WHERE check_id = ?`,
+    checkId,
+  );
   await db.runAsync(
-    `UPDATE done_checks SET last_marked_at = ?, last_marked_via = ? WHERE id = ?`,
+    `UPDATE done_checks SET last_marked_at = ?, last_marked_via = ?, last_due_at = ? WHERE id = ?`,
     previous?.markedAt ?? null,
     previous?.via ?? null,
+    latestDue?.dueAt ?? null,
     checkId,
   );
 }

@@ -219,7 +219,7 @@ export const SETUP_OPEN_APP_LABEL = 'Open Lifestead';
 // table names lenses and this names what a person recognises.
 export const FREE_BEFORE_SETUP_HEADING = 'Before the questions';
 export const FREE_BEFORE_SETUP =
-  'None of these questions costs anything, and neither does running your day here. Free keeps your reminders, Capture, routines, to-dos, Days Until, the grocery list, My Meds with every safety warning, and what you log about meals, symptoms, movement and the garden. Paying adds the reading on each condition, meal plans and the ready-made recipes, reports, Pattern Finder, most of Trends and Finances.';
+  'None of these questions costs anything, and neither does running your day here. Free keeps your reminders, Capture, routines, the To Do List, tasks, Days Until, the grocery list, My Meds with every safety warning, and what you log about meals, symptoms, movement and the garden. Paying adds the reading on each condition, meal plans and the ready-made recipes, reports, Pattern Finder, most of Trends and Finances.';
 
 // P1: what Lifestead does by itself and what it needs from the person, one
 // short list each, shown on the Your Guide page once the questions have
@@ -371,9 +371,9 @@ export const TOUR_LENS_NAMES: Record<string, Record<string, string>> = {
     emergency: 'Emergency',
     conditions: 'Conditions',
     routines: 'Routines',
-    didIDoIt: 'Did I Do It',
+    didIDoIt: 'To Do List',
     daysUntil: 'Days Until',
-    todos: 'To-Do',
+    todos: 'Tasks',
     upkeep: 'Upkeep',
     kitchen: 'Kitchen',
     groceryList: 'Grocery List',
@@ -744,7 +744,7 @@ export const TOUR_TABS: TourTabDef[] = [
       },
       {
         doThis: 'Write down one routine you go through most days.',
-        why: 'Walked through a part at a time, it takes the remembering out of it, and Did I Do It answers whether you did.',
+        why: 'Walked through a part at a time, it takes the remembering out of it, and your To Do List answers whether you did.',
         item: 'routine',
       },
     ],

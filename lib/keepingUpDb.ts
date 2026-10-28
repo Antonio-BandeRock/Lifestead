@@ -98,6 +98,28 @@ async function readUpkeepStanding(today: string): Promise<KeepingUpUpkeepStandin
   return { overdue, dueSoon, settled, worstName, worstDaysLate };
 }
 
+/**
+ * What a To Do List schedule (2026-10-28) is, in the words Keeping Up reads:
+ * every day is 'daily', every week or every month is 'weekly' or
+ * 'monthly', and anything else (weekdays only, every 3 days) is read by
+ * when it last happened, which claims the least. A row from before keeps
+ * its old cadence.
+ */
+function cadenceOfSchedule(row: { cadence: string; reminderDays: string | null; everyN: number | null; everyUnit: string | null }): string {
+  if (row.cadence === 'days') {
+    const days = (row.reminderDays ?? '').split(',').filter((day) => day.trim() !== '');
+    return days.length === 0 || days.length === 7 ? 'daily' : 'anytime';
+  }
+  if (row.cadence === 'every') {
+    if ((row.everyN ?? 1) !== 1) return 'anytime';
+    if (row.everyUnit === 'day') return 'daily';
+    if (row.everyUnit === 'week') return 'weekly';
+    if (row.everyUnit === 'month') return 'monthly';
+    return 'anytime';
+  }
+  return row.cadence;
+}
+
 export async function getKeepingUpInputs(startDate: string, endDate: string): Promise<KeepingUpInputs> {
   const db = await getDatabase();
   // A day wider than the range at both ends, then narrowed by local day.
@@ -105,8 +127,12 @@ export async function getKeepingUpInputs(startDate: string, endDate: string): Pr
   const until = `${addDays(endDate, 1)}T23:59:59.999Z`;
 
   const [checkRows, markRows, runRows, captureRows, doingRows, workRows, standing] = await Promise.all([
-    db.getAllAsync<{ id: string; name: string; cadence: string }>(
-      `SELECT id, name, cadence FROM done_checks WHERE active = 1 ORDER BY position, name`,
+    db.getAllAsync<{
+      id: string; name: string; cadence: string; reminderDays: string | null;
+      everyN: number | null; everyUnit: string | null;
+    }>(
+      `SELECT id, name, cadence, reminder_days AS reminderDays, every_n AS everyN, every_unit AS everyUnit
+         FROM done_checks WHERE active = 1 ORDER BY position, name`,
     ),
     db.getAllAsync<{ checkId: string; markedAt: string }>(
       `SELECT check_id AS checkId, marked_at AS markedAt
@@ -160,7 +186,7 @@ export async function getKeepingUpInputs(startDate: string, endDate: string): Pr
   const checks: KeepingUpCheck[] = checkRows.map((row) => ({
     id: row.id,
     name: row.name,
-    cadence: readCadence(row.cadence),
+    cadence: readCadence(cadenceOfSchedule(row)),
   }));
 
   const marks: KeepingUpMark[] = [];

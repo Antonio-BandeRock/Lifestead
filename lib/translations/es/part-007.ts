@@ -143,7 +143,6 @@ export const PART: Readonly<Record<string, string>> = {
  "Mark a food safe under Food > Safe Foods and this starts filling in.": "Marca un alimento como seguro en Comida > Alimentos seguros y esto empieza a llenarse.",
  "How much of it came out of your garden": "Cuánto salió de tu huerto",
  "Reading how it has been going…": "Leyendo cómo ha ido…",
- "Nothing to read yet. Tick something off on Life > Did I Do It, walk a routine, or capture a note, and this fills in on its own.": "Todavía no hay nada que leer. Palomea algo en Vida > ¿Ya lo hice?, recorre una rutina o captura una nota, y esto se llena solo.",
  "What you tick off": "Lo que palomeas",
  "Routines you walk": "Las rutinas que recorres",
  "What you capture, and what happens to it": "Lo que capturas, y qué pasa con ello",

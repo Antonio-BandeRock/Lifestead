@@ -139,8 +139,8 @@ const AREAS: readonly Area[] = [
     quiet: ['routine_steps', 'routine_occasions', 'routine_runs'],
   },
   {
-    one: 'Did I Do It entry',
-    many: 'Did I Do It entries',
+    one: 'To Do List entry',
+    many: 'To Do List entries',
     count: ['done_checks'],
     quiet: ['done_check_marks'],
   },
@@ -247,7 +247,7 @@ const AREAS: readonly Area[] = [
   { one: 'report sent', many: 'reports sent', count: ['report_history'], quiet: [] },
   // C10, 2026-09-30. The doings are each time one was ticked, which the
   // to-do itself already says by moving on.
-  { one: 'to-do', many: 'to-dos', count: ['todos'], quiet: ['todo_doings'] },
+  { one: 'task', many: 'tasks', count: ['todos'], quiet: ['todo_doings'] },
   {
     one: 'piece of grow setup',
     many: 'pieces of grow setup',

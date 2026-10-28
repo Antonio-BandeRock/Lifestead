@@ -77,7 +77,7 @@ const SECTIONS: { key: Section; label: string }[] = [
   { key: 'overview', label: 'Overview' },
   // C10 (2026-09-30): the work to-dos. Life > To-Do shows these beside the
   // personal ones.
-  { key: 'todos', label: 'To-Do' },
+  { key: 'todos', label: 'Tasks' },
   { key: 'have', label: 'What I Get' },
   { key: 'ask', label: 'Worth Asking' },
   { key: 'feel', label: 'How It Feels' },
@@ -570,7 +570,7 @@ export function WorkSection({ tabColor }: Props) {
 
       {section === 'todos' ? (
         <View style={band.box}>
-          <Text style={styles.cardTitle}>Work To-Do</Text>
+          <Text style={styles.cardTitle}>Work Tasks</Text>
           <TodoSection scope="work" tabColor={tabColor} />
         </View>
       ) : null}

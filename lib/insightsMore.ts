@@ -152,15 +152,15 @@ export function buildTodayView(input: TodayInputs): ReadingView {
   const waitingChecks = input.checks
     .filter((check) => check.active)
     .map((check) => checkStanding(check, now))
-    .filter((standing) => standing.doneThisPeriod === false);
+    .filter((standing) => standing.done === false);
   if (dueRoutines.length > 0 || waitingChecks.length > 0) {
     bands.push({
       id: 'routines',
-      title: 'Routines and checks',
+      title: 'Routines and the To Do List',
       icon: 'list-outline',
       count: dueRoutines.length + waitingChecks.length,
       lines: [
-        `${plural(dueRoutines.length, 'routine')} not run yet today, ${plural(waitingChecks.length, 'check')} not marked for this period.`,
+        `${plural(dueRoutines.length, 'routine')} not run yet today, ${plural(waitingChecks.length, 'thing')} on the To Do List not checked off yet.`,
       ],
       items: [
         ...dueRoutines.map((routine) => ({

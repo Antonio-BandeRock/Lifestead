@@ -72,14 +72,29 @@ import {
   type DatedReminderSource,
 } from './reminderSources';
 import {
-  checkReminderTimes,
   followUpMinutes,
   KEEP_REMINDING_LOOKBACK_MINUTES,
   outstandingSince,
   type KeepReminding,
 } from './keepReminding';
-import { describeReminderDays, nextReminderTimes, routineDoneToday, type DoneCheck, type Routine } from './routines';
-import { listCheckReminders, listRoutineReminders, markDoneCheck } from './routinesDb';
+import {
+  describeReminderDays,
+  dueKey,
+  nextCheckReminderTimes,
+  nextReminderTimes,
+  routineDoneToday,
+  type DoneCheck,
+  type Routine,
+} from './routines';
+import {
+  completeRoutine,
+  finishRoutineRun,
+  getRoutine,
+  listCheckReminders,
+  listRoutineReminders,
+  markDoneCheck,
+  startRoutineRun,
+} from './routinesDb';
 import { listExercisePlans, listPlanMarks } from './exercisePlanDb';
 import { listWorkouts } from './workoutsDb';
 import { planTitle, reminderBody, reminderMoments, reminderTitle, type ExercisePlan } from './exercisePlan';
@@ -269,9 +284,9 @@ export type ReminderKind = ReminderKindKey;
 // itself without anybody tapping anything: finishing the walk stamps
 // last_completed_at, and nextReminderTimes drops the rest of today the
 // moment that happens, so the next reconcile cancels the follow-ups.
-// 'check' (C2) for the same reason as 'routine': marking it moves the
-// check's last mark into this period, and checkReminderTimes then has no
-// moment left today to hang a follow-up from.
+// 'check' (C2) for the same reason as 'routine': checking a time off
+// moves the thing's last_due_at past it, and nextCheckReminderTimes then
+// leaves that time out, follow-ups and all.
 const NUDGEABLE_TIMED_KINDS: ReminderKind[] = ['dose', 'meal', 'hydration', 'garden', 'reminder', 'routine', 'check'];
 
 type ScheduleLens = 'meds' | 'appointments' | 'meals' | 'todaysMeals' | 'hydration' | 'exercise';
@@ -282,7 +297,7 @@ type SignalsReminderLens = 'generalNote' | 'flares';
 // opens the Days Until lens too, which has held every counter since
 // 1.0.42.14.
 type GardenReminderLens = 'upcomingTasks' | 'plotsAndPlantings' | 'daysUntil' | 'compost' | 'sowingCalendar';
-// A Did I Do It check (C2) lands on its lens on Life, beside the dated ones.
+// A To Do List thing (C2) lands on its lens on Life, beside the dated ones.
 type LifeReminderLens = DatedReminderLens | 'didIDoIt';
 
 type ReminderPayload = {
@@ -324,7 +339,17 @@ type ReminderPayload = {
   /** A Yes pressed while locked: the id given to the flare it saved, so
    *  the answers after it, written at the same unlock, find it. */
   flareId?: string;
+  /** A To Do List thing: which of its times this is (lib/routines.ts
+   *  dueKey), so Done checks off this time and no other. */
+  dueAt?: string;
+  /** A routine: its steps in order and the one on screen, so Done can show
+   *  the next step at once without the database, which a locked phone
+   *  cannot open (2026-10-28). */
+  routineSteps?: RoutineStepWords[];
+  stepIndex?: number;
 };
+
+type RoutineStepWords = { text: string; checkId: string | null };
 
 type PlannedNotification = {
   identifier: string;
@@ -801,23 +826,93 @@ export async function cancelQueuedNow(kind: 'reminder' | 'timer', id: string): P
 // one: a routine that speaks every morning produces seven of these and they
 // have to coexist rather than replace each other.
 function buildRoutinePlanned(routine: Routine, fireAt: Date, now: Date): PlannedNotification {
+  const steps: RoutineStepWords[] = routine.steps.map((step) => ({ text: step.text, checkId: step.checkId }));
   return {
     identifier: `${IDENTIFIER_PREFIX}routine:${routine.id}:${localDateString(fireAt)}`,
     title: routine.name,
     // The name they gave it is the whole title, unprefixed, for the same
     // reason a captured thought keeps its own words: they wrote it to
-    // recognise it. What the body adds is the one thing a notification can
-    // usefully say, which is that tapping it starts the walk.
-    body: `Tap to walk it one step at a time, ${describeReminderDays(routine.reminderDays)}. Routines as of ${describeFreshness(now, fireAt)}.`,
+    // recognise it. The body is the first step, and Done walks the rest
+    // here one step at a time (2026-10-28). A routine with no steps yet
+    // can only be opened, so it says that.
+    body:
+      steps.length > 0
+        ? `${routineStepLine(steps, 0)} ${answerLine('routine')} Routines as of ${describeFreshness(now, fireAt)}.`
+        : `Tap to walk it one step at a time, ${describeReminderDays(routine.reminderDays)}. Routines as of ${describeFreshness(now, fireAt)}.`,
     fireAt,
+    markable: steps.length > 0,
     payload: {
       kind: 'routine',
       scheduleItemId: routine.id,
       fireAt: fireAt.toISOString(),
       tab: 'routine',
       lens: 'walk',
+      title: routine.name,
+      subject: routine.name,
+      ...(steps.length > 0 ? { routineSteps: steps, stepIndex: 0 } : {}),
     },
   };
+}
+
+function routineStepLine(steps: RoutineStepWords[], index: number): string {
+  return `Step ${index + 1} of ${steps.length}: ${steps[index].text}.`;
+}
+
+// The step after the one Done was pressed on, shown at once in its place.
+// One identifier a routine and a day, so each step replaces the one before
+// rather than piling up, and the reconcile leaves a routine alone while one
+// of these is on screen (routineWalksShowing). Shown rather than queued, so
+// a reconcile has nothing pending of it to cancel.
+function routineStepIdentifier(routineId: string, day: string): string {
+  return `${IDENTIFIER_PREFIX}routineStep:${routineId}:${day}`;
+}
+
+async function presentRoutineStep(data: Partial<ReminderPayload>, index: number, day: string): Promise<void> {
+  const steps = data.routineSteps ?? [];
+  const routineId = data.scheduleItemId ?? '';
+  if (!routineId || index < 0 || index >= steps.length) return;
+  const title = data.title ?? data.subject ?? 'Routine';
+  const payload: ReminderPayload = {
+    kind: 'routine',
+    scheduleItemId: routineId,
+    fireAt: new Date().toISOString(),
+    tab: 'routine',
+    lens: 'walk',
+    title,
+    subject: title,
+    routineSteps: steps,
+    stepIndex: index,
+  };
+  const worded = reminderWords('routine', title, `${routineStepLine(steps, index)} ${answerLine('routine')}`, reminderDetailHidden());
+  await Notifications.scheduleNotificationAsync(inAppLanguage({
+    identifier: routineStepIdentifier(routineId, day),
+    content: {
+      title: worded.title,
+      body: worded.body,
+      data: { ...payload, ...androidGroupFor('routine') },
+      sound: false,
+      categoryIdentifier: REMINDER_CATEGORY_IDS.task,
+    },
+    trigger: { channelId: channelFor('routine') },
+  }));
+}
+
+// The routines with a walk going on in the shade today, so the reconcile
+// does not queue step 1 again over step 3.
+async function routineWalksShowing(day: string): Promise<Set<string>> {
+  const showing = new Set<string>();
+  try {
+    const presented = await Notifications.getPresentedNotificationsAsync();
+    const prefix = `${IDENTIFIER_PREFIX}routineStep:`;
+    for (const notification of presented) {
+      const id = notification.request.identifier;
+      if (!id.startsWith(prefix) || !id.endsWith(`:${day}`)) continue;
+      showing.add(id.slice(prefix.length, id.length - day.length - 1));
+    }
+  } catch (error) {
+    console.warn('[reminderNotifications] could not read which routine walks are showing', error);
+  }
+  return showing;
 }
 
 // A planned exercise day with a time (H11 part 3). One per day in the
@@ -843,14 +938,16 @@ function buildExercisePlanned(plan: ExercisePlan, title: string, date: string, f
   };
 }
 
-// A Did I Do It check with a time (C2). Same shape as a routine: the name
-// they gave it is the title, one per speaking day, and the day is in the
-// identifier so the week's copies coexist.
+// A To Do List thing (C2). The name they gave it is the title, one
+// notification for each of its times, and the time is in the identifier so
+// the 8am and the 8pm one coexist. dueAt says which time it is, so Done
+// checks off that one and no other (2026-10-28).
 function buildCheckPlanned(check: DoneCheck, fireAt: Date, now: Date): PlannedNotification {
+  const due = dueKey(fireAt);
   return {
-    identifier: `${IDENTIFIER_PREFIX}check:${check.id}:${localDateString(fireAt)}`,
+    identifier: `${IDENTIFIER_PREFIX}check:${check.id}:${due}`,
     title: check.name,
-    body: `${answerLine('check')} Did I Do It as of ${describeFreshness(now, fireAt)}.`,
+    body: `${answerLine('check')} To Do List as of ${describeFreshness(now, fireAt)}.`,
     fireAt,
     payload: {
       kind: 'check',
@@ -859,6 +956,7 @@ function buildCheckPlanned(check: DoneCheck, fireAt: Date, now: Date): PlannedNo
       tab: 'life',
       lens: 'didIDoIt',
       subject: check.name,
+      dueAt: due,
     },
   };
 }
@@ -1547,7 +1645,19 @@ async function runSync(): Promise<ReminderSyncResult> {
   // less urgent, so they queue behind everything else's follow-ups and get
   // dropped first when the phone runs out of room.
   if (isReminderKindEnabled(preferences, 'routine')) {
+    const walking = await routineWalksShowing(today);
     for (const routine of routines) {
+      // A walk going on in the shade: today's reminder and its follow-ups
+      // would bring step 1 back over it, so only the days ahead are queued.
+      if (walking.has(routine.id)) {
+        nextReminderTimes(routine, now, LOOKAHEAD_DAYS)
+          .filter((fireAt) => localDateString(fireAt) !== today)
+          .forEach((fireAt) => {
+            const planned = buildRoutinePlanned(routine, fireAt, now);
+            followUps.set(planned.identifier, planned);
+          });
+        continue;
+      }
       const times = nextReminderTimes(routine, now, LOOKAHEAD_DAYS);
       times.forEach((fireAt, index) => {
         const planned = buildRoutinePlanned(routine, fireAt, now);
@@ -1584,14 +1694,15 @@ async function runSync(): Promise<ReminderSyncResult> {
     }
   }
 
-  // A Did I Do It check with a time (C2). Today's moment may already have
-  // gone by, in which case it only carries follow-ups; the next one still
-  // ahead is a first-time reminder and the rest of the week queues behind.
+  // The To Do List (C2, a schedule of its own since 2026-10-28). The time
+  // due now may already have gone by, in which case it only carries
+  // follow-ups; the next one still ahead is a first-time reminder and the
+  // rest of the week queues behind. A thing a routine walks past is not in
+  // the list at all, since the routine's reminder covers it.
   if (isReminderKindEnabled(preferences, 'check')) {
     for (const check of checks) {
-      const reminder = { time: check.reminderTime, days: check.reminderDays, on: check.reminderOn };
       let firstAhead = true;
-      for (const fireAt of checkReminderTimes(check, reminder, now, LOOKAHEAD_DAYS)) {
+      for (const fireAt of nextCheckReminderTimes(check, now, LOOKAHEAD_DAYS)) {
         const planned = buildCheckPlanned(check, fireAt, now);
         if (fireAt.getTime() <= now.getTime()) {
           if (outstandingSince(fireAt, now)) {
@@ -2079,9 +2190,17 @@ async function answerPress(response: Notifications.NotificationResponse): Promis
   const flareId = plan.write === 'flareStart' ? newFlareId(now) : data?.scheduleItemId ?? '';
   try {
     await withSessionGuardLifted(() =>
-      recordAnswer(plan, data?.scheduleItemId ?? '', words, kind, now, { id: flareId, tags: data?.flareTags, why: data?.flareWhy }),
+      recordAnswer(plan, data?.scheduleItemId ?? '', words, kind, now, {
+        id: flareId,
+        tags: data?.flareTags,
+        why: data?.flareWhy,
+        dueAt: data?.dueAt,
+        steps: data?.routineSteps,
+        stepIndex: data?.stepIndex,
+      }),
     );
     if (plan.write === 'flareStart' || (kind as string) === FLARE_FOLLOW_UP_KIND) await askNextFlareQuestion(response.actionIdentifier, flareId);
+    if (plan.write === 'routineStep' && data) await presentRoutineStep(data, (data.stepIndex ?? 0) + 1, localDateString(now));
   } finally {
     await syncReminderNotifications();
   }
@@ -2292,6 +2411,9 @@ async function answerWhileLocked(response: Notifications.NotificationResponse): 
   if (snooze) await snoozeReminder(response);
   else await clearAnsweredWhileLocked(request.identifier);
   if (plan?.write === 'sleepQuality') await presentMorningEnergy(localDateString(pressedAt));
+  // A routine walks on while locked: the next step comes up from what the
+  // notification carries, and the step pressed is checked off at unlock.
+  if (plan?.write === 'routineStep' && data) await presentRoutineStep(data, (data.stepIndex ?? 0) + 1, localDateString(pressedAt));
   // The flare questions carry on while locked, saved at the next unlock in
   // the order they were answered. The symptom question waits for an
   // unlocked phone, since its buttons are read from the records.
@@ -2336,6 +2458,9 @@ async function applyWaitingAnswers(): Promise<void> {
           id: plan.write === 'flareStart' ? data.flareId : data.scheduleItemId,
           tags: data.flareTags,
           why: data.flareWhy,
+          dueAt: data.dueAt,
+          steps: data.routineSteps,
+          stepIndex: data.stepIndex,
         }),
       );
     } catch (error) {
@@ -2420,7 +2545,14 @@ async function recordAnswer(
   words: string,
   kind: string,
   now: Date = new Date(),
-  flare: { id?: string; tags?: string[]; why?: string[] } = {},
+  flare: {
+    id?: string;
+    tags?: string[];
+    why?: string[];
+    dueAt?: string;
+    steps?: RoutineStepWords[];
+    stepIndex?: number;
+  } = {},
 ): Promise<void> {
   const today = localDateString(now);
   if (plan.write === 'nothing') return;
@@ -2487,11 +2619,27 @@ async function recordAnswer(
     return;
   }
   if (plan.write === 'checkMarked') {
-    // Pressed twice, or pressed after a routine already ticked it: the
-    // second press writes nothing, since the period is already answered.
-    const check = (await listCheckReminders()).find((candidate) => candidate.id === id);
-    if (check && checkReminderTimes(check, { time: check.reminderTime, days: [], on: true }, now, 0).length === 0) return;
-    await markDoneCheck(id, 'tap', null, now.toISOString());
+    // The time named on the notification is checked off. Pressed twice, or
+    // pressed after that time was already checked off in the app, the
+    // second press writes nothing (markDoneCheck). A notification from
+    // before 2026-10-28 names no time, and checks off the one due now.
+    await markDoneCheck(id, 'tap', null, now.toISOString(), flare.dueAt ?? null);
+    return;
+  }
+  if (plan.write === 'routineStep') {
+    const steps = flare.steps ?? [];
+    const index = flare.stepIndex ?? 0;
+    const step = steps[index];
+    if (!step) return;
+    if (step.checkId) await markDoneCheck(step.checkId, 'routine', id, now.toISOString());
+    if (index === steps.length - 1) {
+      // The last step: the routine is done, and the walk goes into the
+      // record Keeping Up reads, the same as a walk in the app.
+      await completeRoutine(id);
+      const routine = await getRoutine(id);
+      const runId = await startRoutineRun(id, routine?.name ?? '', steps.length, null);
+      await finishRoutineRun(runId, steps.length, 0);
+    }
     return;
   }
   if (plan.write === 'upkeepDone') {
