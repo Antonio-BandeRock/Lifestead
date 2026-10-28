@@ -4,7 +4,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   GUIDE_GAP,
   guideRoomHeight,
-  guideRoomVersion,
   guideSlotOffset,
   reportGuideHeight,
   subscribeGuideRoom,
@@ -14,8 +13,14 @@ import {
 // The React half of lib/guideRoom.ts (1.0.74.10): where a guide strip goes,
 // and the view that moves the screen down so no strip ever covers it.
 
-function useGuideRoomVersion(): number {
-  return useSyncExternalStore(subscribeGuideRoom, guideRoomVersion, guideRoomVersion);
+// Each number is read as the store's snapshot, never worked out in render
+// (1.0.75.6). This app builds with React Compiler, which keeps the result of
+// a call like guideRoomHeight() made in render until something it can see
+// changes, and a module's Map is nothing it can see: the room was worked out
+// once, as 0, and the screen was never moved down. A snapshot is a number
+// React compares itself, so every change of height redraws.
+function useGuideRoomNumber(read: () => number): number {
+  return useSyncExternalStore(subscribeGuideRoom, read, read);
 }
 
 /**
@@ -34,12 +39,12 @@ export function GuideStripAnchor({
   children: ReactNode;
 }) {
   const insets = useSafeAreaInsets();
-  useGuideRoomVersion();
+  const offset = useGuideRoomNumber(() => guideSlotOffset(slot));
   useEffect(() => () => reportGuideHeight(slot, 0), [slot]);
   return (
     <View
       pointerEvents="box-none"
-      style={[{ position: 'absolute', zIndex: 999 }, style, { top: insets.top + GUIDE_GAP + guideSlotOffset(slot) }]}
+      style={[{ position: 'absolute', zIndex: 999 }, style, { top: insets.top + GUIDE_GAP + offset }]}
       onLayout={(event) => reportGuideHeight(slot, event.nativeEvent.layout.height)}
     >
       {children}
@@ -52,7 +57,10 @@ export function GuideStripAnchor({
  * root Stack puts it in every screen's contentStyle (app/_layout.tsx).
  */
 export function useGuideRoomHeight(): number {
-  useGuideRoomVersion();
+  return useGuideRoomNumber(readRoom);
+}
+
+function readRoom(): number {
   return guideRoomHeight();
 }
 
