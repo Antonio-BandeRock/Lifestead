@@ -6,6 +6,8 @@ import { EntryScrollAnchor, type EntryScrollTarget } from './EntryScrollAnchor';
 import { EntrySearchInput, searchFieldStyle } from './EntrySearchInput';
 import { HOME_BAND_GAP, HomeSectionBand, useBandGap } from './HomeSectionBand';
 import { PopoverSelect } from './PopoverSelect';
+import { ReadingCardRow, type ReadingCardItem } from './ReadingCardRow';
+import type { ToolMark } from '../lib/toolHowTos';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import {
@@ -222,6 +224,81 @@ export function CropGuideSection({
     </View>
   );
 
+  const cropDetail = (guide: CropGuide) => (
+    <View style={styles.detailSurface}>
+      <Text style={styles.latin}>
+        {guide.latin} · {guide.family}
+      </Text>
+      {fact('Sun', guide.sun)}
+      {fact('Soil', `${guide.soil} Grows best at ${formatPh(guide.ph)}.`)}
+      {fact('Sowing and planting', guide.sow)}
+      {fact('Spacing', guide.spacing)}
+      {fact('Ready', guide.ready)}
+      {fact('Water', guide.water)}
+      {fact('Growing it well', guide.grow)}
+      <View style={styles.fact}>
+        <Text style={styles.detailLabel}>Three problems to know</Text>
+        {(CROP_PROBLEMS[guide.key] ?? []).map(renderProblem)}
+      </View>
+      {renderSources(cropSources(guide))}
+    </View>
+  );
+
+  const nutrientDetail = (nutrient: PlantNutrient) => (
+    <View style={styles.detailSurface}>
+      {fact('What it does', nutrient.role)}
+      {fact('What it looks like', nutrient.looks)}
+      {fact('Why it happens', nutrient.causes)}
+      {fact('Working with the soil', nutrient.withTheSoil)}
+      {fact('Why not the bag or bottle', nutrient.whyNotChemical)}
+      {fact('Before you treat', nutrient.caution)}
+      {renderSources(nutrient.sources)}
+    </View>
+  );
+
+  // A group of crops or of leaf signs as a sideways row of cards
+  // (1.0.75.2), the way every reading lens lays out a topic. Read opens
+  // the guide under the row. Search matches stay a list.
+  const cardRow = (heading: string, items: ReadingCardItem[], body: (id: string) => React.ReactNode, mark?: ToolMark) => (
+    <ReadingCardRow
+      key={heading}
+      heading={heading}
+      items={items}
+      openId={openItem}
+      onToggle={toggleItem}
+      renderBody={body}
+      tabColor={tabColor}
+      icon="leaf-outline"
+      scrollTarget={scrollTarget}
+      markCard={mark}
+    />
+  );
+
+  const cropCards = (heading: string, guides: CropGuide[], mark?: ToolMark) =>
+    cardRow(
+      heading,
+      guides.map((guide) => ({
+        id: CROP_ANCHOR(guide.key),
+        title: guide.name,
+        line: `${formatPh(guide.ph)} · ${FEEDING_LABELS[guide.feeding]} · ${SEASON_LABELS[guide.season]}`,
+      })),
+      (id) => {
+        const guide = guides.find((candidate) => CROP_ANCHOR(candidate.key) === id);
+        return guide ? cropDetail(guide) : null;
+      },
+      mark,
+    );
+
+  const nutrientCards = (heading: string, nutrients: PlantNutrient[]) =>
+    cardRow(
+      heading,
+      nutrients.map((nutrient) => ({ id: NUTRIENT_ANCHOR(nutrient.key), title: nutrient.name, line: nutrient.looks })),
+      (id) => {
+        const nutrient = nutrients.find((candidate) => NUTRIENT_ANCHOR(candidate.key) === id);
+        return nutrient ? nutrientDetail(nutrient) : null;
+      },
+    );
+
   const renderCropRow = (guide: CropGuide, index: number, showGroup: boolean) => {
     const id = CROP_ANCHOR(guide.key);
     const expanded = openItem === id;
@@ -240,59 +317,7 @@ export function CropGuideSection({
               </View>
               <Ionicons name={expanded ? 'chevron-up' : 'chevron-down'} size={18} color={colors.textSecondary} />
             </TouchableOpacity>
-            {expanded ? (
-              <View style={[styles.itemDetail, styles.detailBody]}>
-                <Text style={styles.latin}>
-                  {guide.latin} · {guide.family}
-                </Text>
-                {fact('Sun', guide.sun)}
-                {fact('Soil', `${guide.soil} Grows best at ${formatPh(guide.ph)}.`)}
-                {fact('Sowing and planting', guide.sow)}
-                {fact('Spacing', guide.spacing)}
-                {fact('Ready', guide.ready)}
-                {fact('Water', guide.water)}
-                {fact('Growing it well', guide.grow)}
-                <View style={styles.fact}>
-                  <Text style={styles.detailLabel}>Three problems to know</Text>
-                  {(CROP_PROBLEMS[guide.key] ?? []).map(renderProblem)}
-                </View>
-                {renderSources(cropSources(guide))}
-              </View>
-            ) : null}
-          </View>
-        </EntryScrollAnchor>
-      </Fragment>
-    );
-  };
-
-  const renderNutrientRow = (nutrient: PlantNutrient, index: number) => {
-    const id = NUTRIENT_ANCHOR(nutrient.key);
-    const expanded = openItem === id;
-    return (
-      <Fragment key={nutrient.key}>
-        {index > 0 ? <View style={styles.rowDivider} /> : null}
-        <EntryScrollAnchor id={id} target={scrollTarget}>
-          <View style={styles.itemRow}>
-            <TouchableOpacity style={styles.itemTapArea} onPress={() => toggleItem(id)} activeOpacity={0.85}>
-              <View style={styles.itemTextWrap}>
-                <Text style={styles.itemTitle}>{nutrient.name}</Text>
-                <Text style={styles.itemSubtitle} numberOfLines={1}>
-                  {nutrient.looks}
-                </Text>
-              </View>
-              <Ionicons name={expanded ? 'chevron-up' : 'chevron-down'} size={18} color={colors.textSecondary} />
-            </TouchableOpacity>
-            {expanded ? (
-              <View style={[styles.itemDetail, styles.detailBody]}>
-                {fact('What it does', nutrient.role)}
-                {fact('What it looks like', nutrient.looks)}
-                {fact('Why it happens', nutrient.causes)}
-                {fact('Working with the soil', nutrient.withTheSoil)}
-                {fact('Why not the bag or bottle', nutrient.whyNotChemical)}
-                {fact('Before you treat', nutrient.caution)}
-                {renderSources(nutrient.sources)}
-              </View>
-            ) : null}
+            {expanded ? <View style={styles.itemDetail}>{cropDetail(guide)}</View> : null}
           </View>
         </EntryScrollAnchor>
       </Fragment>
@@ -455,9 +480,9 @@ export function CropGuideSection({
             <View>{matches.map((guide, index) => renderCropRow(guide, index, true))}</View>
           )
         ) : (
-          GROUP_ORDER.map((group) => {
+          GROUP_ORDER.map((group, groupIndex) => {
             const guides = CROP_GUIDES.filter((guide) => guide.group === group).sort((a, b) => a.name.localeCompare(b.name));
-            return fold(group, `${CROP_GROUP_LABELS[group]} (${guides.length})`, () => guides.map((guide, index) => renderCropRow(guide, index, false)));
+            return cropCards(`${CROP_GROUP_LABELS[group]} (${guides.length})`, guides, groupIndex === 0 ? 'crops.card' : undefined);
           })
         )}
       </HomeSectionBand>
@@ -474,8 +499,8 @@ export function CropGuideSection({
         <Text style={styles.topicDescription}>
           Look first at where it shows. A nutrient the plant can move is drawn out of the old leaves to feed the new, so the old leaves show it first; one it cannot move shows on the newest growth. Then check the look-alikes, and test the soil before adding anything.
         </Text>
-        {fold('older', `Shows on Older Leaves First (${olderFirst.length})`, () => olderFirst.map(renderNutrientRow))}
-        {fold('newer', `Shows on the Newest Leaves First (${newerFirst.length})`, () => newerFirst.map(renderNutrientRow))}
+        {nutrientCards(`Shows on Older Leaves First (${olderFirst.length})`, olderFirst)}
+        {nutrientCards(`Shows on the Newest Leaves First (${newerFirst.length})`, newerFirst)}
         {fold('lookalikes', `Looks Like a Shortage, Is Not (${NUTRIENT_LOOK_ALIKES.length})`, () =>
           NUTRIENT_LOOK_ALIKES.map((item) => (
             <View key={item.heading} style={styles.fact}>
@@ -556,6 +581,7 @@ function makeStyles(tabColor: string, bandGap: number = HOME_BAND_GAP) {
     topicDescription: { ...typography.caption, color: colors.textSecondary, ...textShadow },
     searchField: { ...typography.body, ...searchFieldStyle, borderColor: tabColor, ...textShadow },
     detailBody: { gap: HOME_BAND_GAP },
+    detailSurface: { gap: HOME_BAND_GAP, backgroundColor: colors.surface },
     fact: { gap: 2 },
     latin: { ...typography.caption, color: colors.textSecondary, fontStyle: 'italic', ...textShadow },
     detailLabel: { ...typography.eyebrow, color: tabColor, ...textShadow },

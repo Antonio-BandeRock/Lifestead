@@ -200,7 +200,6 @@ export type ToolMark =
   | 'workout.save'
   | 'reading.search'
   | 'reading.searchHelp'
-  | 'reading.subgroup'
   | 'reading.entry'
   // Home: a band's name row by its card key, a tab group's by its path.
   | `homeBand.${HomeSectionKey}`
@@ -461,6 +460,7 @@ export type ToolMark =
   | 'costs.electricity'
   | 'crops.wrong'
   | 'crops.grow'
+  | 'crops.card'
   | 'bands.band'
   | 'bands.missing'
   | 'cooking.pick'
@@ -559,8 +559,8 @@ function readingHowTos(lens: string, readNote: string): ToolHowTo[] {
       title: `Read an entry in ${lens}`,
       steps: [
         { say: 'Open the band with the name of the topic you want.' },
-        { say: 'If the topic has smaller groups inside it, tap one to open it.', mark: 'reading.subgroup', stay: true },
-        { say: 'Tap an entry to read it. Tap it again to close it.', mark: 'reading.entry' },
+        { say: 'Swipe along a row of cards to see every entry in it. A topic with smaller groups has a row for each.' },
+        { say: 'Tap Read on a card. The entry opens under the row, and Close puts it away.', mark: 'reading.entry' },
       ],
       forYou: readNote,
     },
@@ -1778,7 +1778,8 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       steps: [
         { say: 'Open the band with the name of the condition.' },
         { say: 'Tap a topic to open it.', mark: 'conditions.topic', stay: true },
-        { say: 'Tap an entry to read it. A link at the end of an entry takes you to the entry it names.' },
+        { say: 'Swipe along a row of cards, then tap Read on one. It opens under the row, and Close puts it away.', mark: 'reading.entry' },
+        { say: 'A link at the end of an entry takes you to the entry it names.' },
       ],
       forYou: 'Each entry carries its evidence and its sources, so you can see how much weight it holds.',
     },
@@ -4127,8 +4128,8 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Read how to grow a crop',
       steps: [
         { say: 'Open How to Grow Each Crop.', mark: 'crops.grow' },
-        { say: 'Type the crop in Find a crop, or open its group.' },
-        { say: 'Tap the crop to read it.' },
+        { say: 'Type the crop in Find a crop, or swipe along the row of cards for its group.', mark: 'crops.card', stay: true },
+        { say: 'Tap Read on the crop. The guide opens under the row, and Close puts it away.' },
       ],
       forYou: 'Sun, soil, pH, sowing, spacing, water and three problems the crop is known for, with sources to read further.',
     },

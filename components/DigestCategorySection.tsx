@@ -1,14 +1,17 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { DigestEntryBody, entryHeaderDotColor } from './DigestEntryDetail';
 import { DigestEntryRow, makeDigestRowStyles } from './DigestEntryRow';
-import { EntryScrollAnchor, type EntryScrollTarget } from './EntryScrollAnchor';
+import { ReadingCardRow } from './ReadingCardRow';
+import type { EntryScrollTarget } from './EntryScrollAnchor';
 import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, HomeSectionBand, useBandGap } from './HomeSectionBand';
 import { useWalkMark } from './WalkMark';
 import { colors } from '../constants/colors';
 import { menuLabelShadow, textShadow, typography } from '../constants/typography';
 import {
   DIGEST_CATEGORY_META,
+  isProblemFoodEntry,
   searchEntriesScored,
   type AnyDigestEntry,
   type DigestCategoryKey,
@@ -180,14 +183,12 @@ export function DigestCategorySection({
   const topics = useMemo(() => topicsForCategory(categoryKey, entries), [categoryKey, entries]);
 
   const [openTopic, setOpenTopic] = useState<string | null>(null);
-  const [openSubgroup, setOpenSubgroup] = useState<string | null>(null);
   const [openEntry, setOpenEntry] = useState<string | null>(null);
 
   // Switching category closes everything; the old category's labels mean
   // nothing in the new one.
   useEffect(() => {
     setOpenTopic(null);
-    setOpenSubgroup(null);
     setOpenEntry(null);
   }, [categoryKey]);
 
@@ -207,7 +208,6 @@ export function DigestCategorySection({
       const where = locateEntry(topics, id);
       if (!where) return;
       setOpenTopic(where.topic);
-      setOpenSubgroup(where.subgroup);
       setOpenEntry(id);
       pendingEntry.current = id;
     },
@@ -238,28 +238,32 @@ export function DigestCategorySection({
 
   const label = meta?.label ?? '';
 
-  const toggleSubgroup = (key: string, open: boolean) => {
-    setOpenSubgroup(open ? null : key);
-    setOpenEntry(null);
-  };
-
-  const renderRows = (rows: AnyDigestEntry[]) =>
-    rows.map((entry, index) => (
-      <Fragment key={entry.id}>
-        {index > 0 ? <View style={styles.rowDivider} /> : null}
-        <EntryScrollAnchor id={entry.id} target={scrollTarget}>
-          <DigestEntryRow
-            entry={entry}
-            markRef={index === 0 ? walkMark.ref('reading.entry') : undefined}
-            expanded={openEntry === entry.id}
-            onToggle={() => setOpenEntry(openEntry === entry.id ? null : entry.id)}
-            onJumpToRelated={onJumpToRelated}
-            tabColor={tabColor}
-            styles={styles}
-          />
-        </EntryScrollAnchor>
-      </Fragment>
-    ));
+  // A topic's entries as a sideways row of cards (1.0.75.2), one row per
+  // subgroup with its name over it; Read opens the entry under its row.
+  const icon = meta?.icon ?? 'reader-outline';
+  const renderCardRow = (rows: AnyDigestEntry[], heading: string | undefined, first: boolean) => (
+    <ReadingCardRow
+      heading={heading}
+      items={rows.map((entry) => ({
+        id: entry.id,
+        title: isProblemFoodEntry(entry) ? entry.foodName : entry.title,
+        line: entry.teaser,
+        dotColor: entryHeaderDotColor(entry),
+      }))}
+      openId={openEntry}
+      onToggle={(id) => setOpenEntry(openEntry === id ? null : id)}
+      renderBody={(id) => {
+        const entry = rows.find((candidate) => candidate.id === id);
+        return entry ? (
+          <DigestEntryBody entry={entry} onJumpToRelated={onJumpToRelated} tabColor={tabColor} tabTextColor={tabColor} />
+        ) : null;
+      }}
+      tabColor={tabColor}
+      icon={icon}
+      scrollTarget={scrollTarget}
+      markCard={first ? 'reading.entry' : undefined}
+    />
+  );
 
   return (
     <View ref={sectionRef} style={styles.wrapper}>
@@ -327,34 +331,22 @@ export function DigestCategorySection({
                 expanded={expanded}
                 onToggle={() => {
                   setOpenTopic(expanded ? null : topic.label);
-                  setOpenSubgroup(null);
                   setOpenEntry(null);
                 }}
                 contentStyle={styles.bandBody}
               >
                 {topic.description ? <Text style={styles.topicDescription}>{topic.description}</Text> : null}
                 {single
-                  ? renderRows(topic.subgroups[0].entries)
-                  : topic.subgroups.map((subgroup, subgroupIndex) => {
-                      const key = subgroup.label ?? '';
-                      const open = openSubgroup === key;
-                      return (
-                        <View key={key} style={styles.topicFold}>
-                          <TouchableOpacity
-                            ref={subgroupIndex === 0 ? walkMark.ref('reading.subgroup') : undefined}
-                            style={styles.topicTapArea}
-                            onPress={() => toggleSubgroup(key, open)}
-                            activeOpacity={0.85}
-                          >
-                            <Text style={styles.topicTitle}>
-                              {subgroup.label ?? 'Entries'} ({subgroup.entries.length})
-                            </Text>
-                            <Ionicons name={open ? 'chevron-up' : 'chevron-down'} size={18} color={colors.textSecondary} />
-                          </TouchableOpacity>
-                          {open ? <View style={styles.topicBody}>{renderRows(subgroup.entries)}</View> : null}
-                        </View>
-                      );
-                    })}
+                  ? renderCardRow(topic.subgroups[0].entries, undefined, true)
+                  : topic.subgroups.map((subgroup, subgroupIndex) => (
+                      <Fragment key={subgroup.label ?? ''}>
+                        {renderCardRow(
+                          subgroup.entries,
+                          `${subgroup.label ?? t('Entries')} (${subgroup.entries.length})`,
+                          subgroupIndex === 0,
+                        )}
+                      </Fragment>
+                    ))}
               </HomeSectionBand>
             </Fragment>
           );

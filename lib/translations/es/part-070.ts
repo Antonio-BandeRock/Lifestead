@@ -434,5 +434,11 @@ export const PART: Readonly<Record<string, string>> = {
  "{title} will not show here or on the other lenses it feeds. It stays in Your Guide on Home if you want it later.": "{title} ya no va a aparecer aquí ni en las otras vistas que llena. Sigue en Tu guía, en Inicio, por si la quieres después.",
  "Set up what fills this lens": "Configura lo que llena esta vista",
  "Under What fills this in, swipe along the cards. Each one is a record that this lens reads.": "En Qué llena esta vista, desliza a lo largo de las tarjetas. Cada una es un registro que esta vista lee.",
- "Once the record exists the card leaves this row. Not for me takes a card off every lens and leaves it in Your Guide on Home.": "En cuanto existe el registro, la tarjeta sale de esta fila. No es para mí quita una tarjeta de todas las vistas y la deja en Tu guía, en Inicio."
+ "Once the record exists the card leaves this row. Not for me takes a card off every lens and leaves it in Your Guide on Home.": "En cuanto existe el registro, la tarjeta sale de esta fila. No es para mí quita una tarjeta de todas las vistas y la deja en Tu guía, en Inicio.",
+ "Close": "Cerrar",
+ "Swipe along a row of cards to see every entry in it. A topic with smaller groups has a row for each.": "Desliza a lo largo de una fila de tarjetas para ver cada entrada. Un tema con grupos más pequeños tiene una fila para cada uno.",
+ "Tap Read on a card. The entry opens under the row, and Close puts it away.": "Toca Leer en una tarjeta. La entrada se abre debajo de la fila, y Cerrar la guarda.",
+ "Swipe along a row of cards, then tap Read on one. It opens under the row, and Close puts it away.": "Desliza a lo largo de una fila de tarjetas y toca Leer en una. Se abre debajo de la fila, y Cerrar la guarda.",
+ "Type the crop in Find a crop, or swipe along the row of cards for its group.": "Escribe el cultivo en Buscar un cultivo, o desliza a lo largo de la fila de tarjetas de su grupo.",
+ "Tap Read on the crop. The guide opens under the row, and Close puts it away.": "Toca Leer en el cultivo. La guía se abre debajo de la fila, y Cerrar la guarda."
 };

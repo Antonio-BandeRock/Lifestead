@@ -6,7 +6,9 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { AppTextInput } from './AppTextInput';
 import { DIGEST_CONDITION_ICONS } from './DigestConditionIcons';
+import { DigestEntryBody, entryHeaderDotColor } from './DigestEntryDetail';
 import { DigestEntryRow, makeDigestRowStyles } from './DigestEntryRow';
+import { ReadingCardRow } from './ReadingCardRow';
 import { EntryScrollAnchor, type EntryScrollTarget } from './EntryScrollAnchor';
 import { EntrySearchInput, searchFieldStyle } from './EntrySearchInput';
 import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, HomeSectionBand, useBandGap } from './HomeSectionBand';
@@ -1035,6 +1037,39 @@ function ConditionBandBody({
     });
   }, [grouped]);
 
+  // A topic's entries as a sideways row of cards (1.0.75.2), one row per
+  // section with its name over it; Read opens the entry under its row.
+  const renderCardRow = (rows: AnyDigestEntry[], heading: string | undefined, first: boolean) => (
+    <ReadingCardRow
+      heading={heading}
+      items={rows.map((entry) => ({
+        id: entry.id,
+        title: isProblemFoodEntry(entry) ? entry.foodName : entry.title,
+        line: entry.teaser,
+        dotColor: entryHeaderDotColor(entry, conditionCode),
+      }))}
+      openId={openEntry}
+      onToggle={onToggleEntry}
+      renderBody={(id) => {
+        const entry = rows.find((candidate) => candidate.id === id);
+        return entry ? (
+          <DigestEntryBody
+            entry={entry}
+            onJumpToRelated={onJumpToRelated}
+            activeConditionCode={conditionCode}
+            activeStageCode={stageCode}
+            tabColor={tabColor}
+            tabTextColor={tabColor}
+          />
+        ) : null;
+      }}
+      tabColor={tabColor}
+      icon="reader-outline"
+      scrollTarget={scrollTarget}
+      markCard={first ? 'reading.entry' : undefined}
+    />
+  );
+
   return (
     <>
       <View style={styles.conditionIntro}>
@@ -1057,31 +1092,14 @@ function ConditionBandBody({
               <Ionicons name={expanded ? 'chevron-up' : 'chevron-down'} size={18} color={colors.textSecondary} />
             </TouchableOpacity>
             {expanded ? (
-              <View style={styles.topicBody}>
+              <View style={[styles.topicBody, styles.topicBodyCards]}>
                 {topic.sections.map((section, sectionIndex) => (
                   <Fragment key={section.label ?? 'all'}>
-                    {section.label ? (
-                      <Text style={[styles.subgroupHeading, sectionIndex > 0 ? styles.subgroupHeadingLater : null]}>
-                        {section.label} ({section.entries.length})
-                      </Text>
-                    ) : null}
-                    {section.entries.map((entry, index) => (
-                      <Fragment key={entry.id}>
-                        {index > 0 ? <View style={styles.rowDivider} /> : null}
-                        <EntryScrollAnchor id={entry.id} target={scrollTarget}>
-                          <DigestEntryRow
-                            entry={entry}
-                            activeConditionCode={conditionCode}
-                            activeStageCode={stageCode}
-                            expanded={openEntry === entry.id}
-                            onToggle={() => onToggleEntry(entry.id)}
-                            onJumpToRelated={onJumpToRelated}
-                            tabColor={tabColor}
-                            styles={styles}
-                          />
-                        </EntryScrollAnchor>
-                      </Fragment>
-                    ))}
+                    {renderCardRow(
+                      section.entries,
+                      section.label ? `${section.label} (${section.entries.length})` : undefined,
+                      topicIndex === 0 && sectionIndex === 0,
+                    )}
                   </Fragment>
                 ))}
               </View>
@@ -1091,19 +1109,7 @@ function ConditionBandBody({
       })}
       {grouped.tyingTogether ? (
         <View style={styles.topicFold}>
-          <Text style={[styles.subgroupHeading, styles.tyingTogetherHeading]}>Putting It Together</Text>
-          <EntryScrollAnchor id={grouped.tyingTogether.id} target={scrollTarget}>
-            <DigestEntryRow
-              entry={grouped.tyingTogether}
-              activeConditionCode={conditionCode}
-              activeStageCode={stageCode}
-              expanded={openEntry === grouped.tyingTogether.id}
-              onToggle={() => onToggleEntry(grouped.tyingTogether!.id)}
-              onJumpToRelated={onJumpToRelated}
-              tabColor={tabColor}
-              styles={styles}
-            />
-          </EntryScrollAnchor>
+          <View style={[styles.topicBodyCards, { paddingTop: 12 }]}>{renderCardRow([grouped.tyingTogether], 'Putting It Together', false)}</View>
         </View>
       ) : null}
     </>
@@ -1121,6 +1127,7 @@ function makeStyles(tabColor: string, bandGap: number = HOME_BAND_GAP) {
     // the text inside a band.
     wrapper: { gap: bandGap },
     bandBody: { gap: bandGap },
+    topicBodyCards: { gap: bandGap, paddingBottom: 12 },
     introBox: {
       backgroundColor: colors.surfaceMuted,
       paddingVertical: 12,
