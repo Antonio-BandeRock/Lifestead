@@ -1,5 +1,5 @@
 import { useEffect, useSyncExternalStore, type ReactNode } from 'react';
-import { View, type StyleProp, type ViewStyle } from 'react-native';
+import { Platform, View, type StyleProp, type ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   GUIDE_GAP,
@@ -47,8 +47,32 @@ export function GuideStripAnchor({
   );
 }
 
-/** Wraps the screens in app/_layout.tsx and pushes them below the strips. */
-export function GuideRoomView({ children }: { children: ReactNode }) {
+/**
+ * The room the strips take now, redrawn whenever it changes. On a phone the
+ * root Stack puts it in every screen's contentStyle (app/_layout.tsx).
+ */
+export function useGuideRoomHeight(): number {
   useGuideRoomVersion();
-  return <View style={{ flex: 1, paddingTop: guideRoomHeight() }}>{children}</View>;
+  return guideRoomHeight();
+}
+
+// On a phone the padding goes INSIDE each screen (1.0.75.5). Padding the
+// view around the native Stack moved nothing on Android: the screens kept
+// the frame they were first given, so Setup's strip sat over Life > Did I Do
+// It and its + Add something to check button, the one the walk asked to tap.
+// Inside the screen it is ordinary layout and follows every change. The
+// desktop has no native screens, so the view around the Stack still does it
+// there, which also keeps the version bar below the strips.
+const PAD_AROUND_STACK = Platform.OS === 'web';
+
+/** Wraps the screens in app/_layout.tsx and, on the desktop, pushes them below the strips. */
+export function GuideRoomView({ children }: { children: ReactNode }) {
+  const room = useGuideRoomHeight();
+  return <View style={{ flex: 1, paddingTop: PAD_AROUND_STACK ? room : 0 }}>{children}</View>;
+}
+
+/** The padding a phone's screens take inside, 0 on the desktop. */
+export function useGuideRoomScreenPadding(): number {
+  const room = useGuideRoomHeight();
+  return PAD_AROUND_STACK ? 0 : room;
 }

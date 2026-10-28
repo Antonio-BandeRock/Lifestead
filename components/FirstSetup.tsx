@@ -90,6 +90,7 @@ import { loadYourStoryEverything, setYourStoryAnswer } from '../lib/yourStoryInt
 import { answerVaultSetupNotNow } from '../lib/vaultSession';
 import { goToStoryDestination } from './GuidedTourHost';
 import { GuideStripAnchor } from './GuideRoom';
+import { useStoryWalk } from './StoryWalkHost';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
 import { YourStoryInterview } from './YourStoryInterview';
 
@@ -125,6 +126,7 @@ export function FirstSetup() {
   const [phase, setPhase] = useState<Phase>(putOffThisRun ? 'closed' : 'reading');
   const [current, setCurrentState] = useState<string | null>(null);
   const [justDone, setJustDone] = useState<string | null>(null);
+  const walk = useStoryWalk();
   const scroller = useRef<ScrollView>(null);
   const fade = useRef(new Animated.Value(1)).current;
 
@@ -250,6 +252,12 @@ export function FirstSetup() {
     advanceFrom.current = key;
   }, []);
 
+  // A guide walk on the same step already says what to do, at the top of
+  // the screen (1.0.75.5): the strip here then drops its own copy of the
+  // step and keeps only its buttons on one row, so the two strips do not
+  // say the same thing twice and take a third of the screen between them.
+  const walking = !!walk;
+
   if (phase === 'reading' || phase === 'closed' || !interview) return null;
 
   const step = current ? (flow.find((entry) => entry.key === current) ?? null) : null;
@@ -259,11 +267,12 @@ export function FirstSetup() {
     const saved = !!step && (step.kind === 'item' ? step.onRecord : step.settled);
     return (
       <GuideStripAnchor slot="setup" style={styles.awayAnchor}>
-        <View style={styles.awayStrip}>
-          <Text style={styles.caption}>{SETUP_AWAY_CAPTION}</Text>
-          {step ? <Text style={styles.awayTitle}>{step.title}</Text> : null}
+        <View style={[styles.awayStrip, walking && styles.awayStripSmall]}>
+          {walking ? null : <Text style={styles.caption}>{SETUP_AWAY_CAPTION}</Text>}
+          {step && !walking ? <Text style={styles.awayTitle}>{step.title}</Text> : null}
           {saved ? <Text style={styles.caption}>{SETUP_AWAY_SAVED}</Text> : null}
           <View style={styles.awayButtons}>
+            {walking ? <Text style={styles.caption}>{SETUP_AWAY_CAPTION}</Text> : null}
             {saved && step ? (
               <TouchableOpacity style={styles.awayButton} accessibilityRole="button" onPress={() => moveOn(step.key)}>
                 <Text style={styles.awayButtonText}>{SETUP_NEXT_LABEL}</Text>
@@ -532,6 +541,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     shadowOffset: { width: 0, height: 3 },
   },
+  awayStripSmall: { paddingVertical: 6, gap: 2 },
   awayTitle: { ...typography.body, color: colors.textPrimary, ...textShadow },
   awayButtons: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 16 },
   awayButton: {
