@@ -53,7 +53,7 @@ import { isLockedCaptureShowing } from "../lib/lockedCaptures";
 import { isDesktopApp } from "../lib/desktop/bridge";
 import { wording } from "../lib/playfulCopy";
 import { watchForAppUpdates } from "../lib/appUpdateWatcher";
-import LockedCapture from "../modules/locked-capture";
+import { postWantedShadeButtons } from "../lib/shadeButtonChoice";
 import { listenForReminderPresses } from "../lib/reminderNotifications";
 import { restartApp } from "../lib/restartApp";
 import { getPlayfulWordingSync } from "../lib/visualPreferences";
@@ -159,15 +159,12 @@ export function AppLockGate({ children }: { children: ReactNode }) {
   useEffect(() => listenForReminderPresses(), []);
   // Updates are checked and announced while locked too (lib/appUpdateWatcher.ts).
   useEffect(() => watchForAppUpdates(), []);
-  // The shade buttons are posted again on every start while they are on, so
-  // a new build's buttons (Voice Control, 1.0.66.13) appear without waiting
-  // for Android's package-replaced broadcast, which a Samsung phone skipped.
-  useEffect(() => {
-    // Since 2026-10-12 each button is posted again on its own, which also
-    // gives it the target that suits App Lock as it is now.
-    if (LockedCapture?.repostShadeButtons) LockedCapture.repostShadeButtons();
-    else if (LockedCapture?.isShowingShadeButtons()) LockedCapture.showShadeButtons();
-  }, []);
+  // The shade buttons are posted on every start unless the person hid them
+  // in Profile (lib/shadeButtonChoice.ts, on by default since 1.0.75.3), so
+  // a new build's buttons appear without waiting for Android's
+  // package-replaced broadcast, which a Samsung phone skipped, and a button
+  // swiped away comes back.
+  useEffect(() => postWantedShadeButtons(), []);
 
   // The move into the encrypted file, run at the start with nothing else open.
   const migrate = useCallback(async () => {

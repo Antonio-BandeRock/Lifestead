@@ -5,6 +5,7 @@ import { textShadow, typography } from '../constants/typography';
 import { readLockStateSync } from '../lib/appLockDevice';
 import { isDesktopApp } from '../lib/desktop/bridge';
 import { explainNotYet } from '../lib/notYet';
+import { SHADE_BUTTON_KINDS, setShadeButtonHidden } from '../lib/shadeButtonChoice';
 import LockedCapture, { type ShadeButtonKind } from '../modules/locked-capture';
 
 // Profile > Device & Account > Notification Shade Buttons. Voice Control
@@ -19,6 +20,9 @@ import LockedCapture, { type ShadeButtonKind } from '../modules/locked-capture';
 // A build from before 2026-10-12 can only post all three together
 // (ShadeButtons.kt in modules/locked-capture), so on one of those the card
 // shows one switch and says so.
+//
+// On by default since 1.0.75.3 (lib/shadeButtonChoice.ts): Hidden here is
+// the only thing that keeps a button out of the shade.
 
 const NOTIFICATIONS_OFF =
   'Notifications are turned off for Lifestead, so the button has nowhere to show. They can be turned on in the phone settings, under Apps.';
@@ -59,6 +63,8 @@ export function VoiceControlSetting() {
       explainNotYet('This needs the next full install of Lifestead on this phone.');
       return;
     }
+    if (separate) setShadeButtonHidden(kind, !on);
+    else for (const each of SHADE_BUTTON_KINDS) setShadeButtonHidden(each, !on);
     if (separate) {
       if (on) {
         if (!LockedCapture.showShadeButton?.(kind)) {
@@ -83,7 +89,8 @@ export function VoiceControlSetting() {
     <View>
       <Text style={styles.text}>
         Three buttons Lifestead can keep in the notification shade, so they are one pull down away from anywhere on the
-        phone. Each is shown or hidden on its own.
+        phone. All three are there from the start, and each can be hidden on its own. One swiped away comes back the
+        next time Lifestead opens; Hidden here keeps it away.
       </Text>
 
       <Text style={styles.subLabel}>Voice Control</Text>
