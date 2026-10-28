@@ -12,7 +12,7 @@ import { ActiveInputProvider } from '../components/ActiveInputContext';
 import { AppLockGate } from '../components/AppLockGate';
 import { AppKeyboard } from '../components/AppKeyboard';
 import { isDesktopApp } from '../lib/desktop/bridge';
-import { GuideRoomView, useGuideRoomScreenPadding } from '../components/GuideRoom';
+import { GuideRoomView, useGuideRoomHeight } from '../components/GuideRoom';
 import { KeyboardLiftProvider, KeyboardLiftReleaser, KeyboardLiftView } from '../components/KeyboardLift';
 import { DatabaseSetupScreen } from '../components/DatabaseSetupScreen';
 import { FirstLaunchAgreement } from '../components/FirstLaunchAgreement';
@@ -690,7 +690,7 @@ function UnlockedApp() {
 // (1.0.75.5, components/GuideRoom.tsx). A component of its own so a strip
 // changing height redraws the Stack and not everything around it.
 function RootStack() {
-  const guideRoomPadding = useGuideRoomScreenPadding();
+  const guideRoomPadding = useGuideRoomHeight();
   return (
     <Stack
       screenOptions={{
@@ -698,7 +698,9 @@ function RootStack() {
         contentStyle: { backgroundColor: colors.background, paddingTop: guideRoomPadding },
       }}
     >
-      <Stack.Screen name="(tabs)" />
+      {/* The tabs take the room under the Lifestead header instead, so the
+          header stays at the top (1.0.75.7, app/(tabs)/_layout.tsx). */}
+      <Stack.Screen name="(tabs)" options={{ contentStyle: { backgroundColor: colors.background } }} />
       {/* 2026-08-21 -- the native header (with its own back arrow) is
           removed by direct request: Profile is reached only via
           TabHub's own corner tile and closes via its own blue circle

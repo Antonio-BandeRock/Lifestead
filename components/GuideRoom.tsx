@@ -1,11 +1,13 @@
 import { useEffect, useSyncExternalStore, type ReactNode } from 'react';
-import { Platform, View, type StyleProp, type ViewStyle } from 'react-native';
+import { View, type StyleProp, type ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   GUIDE_GAP,
   guideRoomHeight,
+  guideRoomTop,
   guideSlotOffset,
   reportGuideHeight,
+  setGuideRoomTop,
   subscribeGuideRoom,
   type GuideSlot,
 } from '../lib/guideRoom';
@@ -40,11 +42,12 @@ export function GuideStripAnchor({
 }) {
   const insets = useSafeAreaInsets();
   const offset = useGuideRoomNumber(() => guideSlotOffset(slot));
+  const below = useGuideRoomNumber(guideRoomTop);
   useEffect(() => () => reportGuideHeight(slot, 0), [slot]);
   return (
     <View
       pointerEvents="box-none"
-      style={[{ position: 'absolute', zIndex: 999 }, style, { top: insets.top + GUIDE_GAP + offset }]}
+      style={[{ position: 'absolute', zIndex: 999 }, style, { top: Math.max(insets.top, below) + GUIDE_GAP + offset }]}
       onLayout={(event) => reportGuideHeight(slot, event.nativeEvent.layout.height)}
     >
       {children}
@@ -53,8 +56,9 @@ export function GuideStripAnchor({
 }
 
 /**
- * The room the strips take now, redrawn whenever it changes. On a phone the
- * root Stack puts it in every screen's contentStyle (app/_layout.tsx).
+ * The room the strips take now, redrawn whenever it changes. The root Stack
+ * puts it in every screen's contentStyle except the tabs (app/_layout.tsx),
+ * and the tabs put it under the Lifestead header (app/(tabs)/_layout.tsx).
  */
 export function useGuideRoomHeight(): number {
   return useGuideRoomNumber(readRoom);
@@ -64,23 +68,25 @@ function readRoom(): number {
   return guideRoomHeight();
 }
 
-// On a phone the padding goes INSIDE each screen (1.0.75.5). Padding the
-// view around the native Stack moved nothing on Android: the screens kept
-// the frame they were first given, so Setup's strip sat over Life > Did I Do
-// It and its + Add something to check button, the one the walk asked to tap.
-// Inside the screen it is ordinary layout and follows every change. The
-// desktop has no native screens, so the view around the Stack still does it
-// there, which also keeps the version bar below the strips.
-const PAD_AROUND_STACK = Platform.OS === 'web';
+// The padding goes INSIDE each screen (1.0.75.5), never around the whole
+// app: around the app it pushed the Lifestead header down below the strips
+// (1.0.75.6), where the header belongs at the top with the strips under it
+// (1.0.75.7). Tabs take it under the header, every other screen at its top.
 
-/** Wraps the screens in app/_layout.tsx and, on the desktop, pushes them below the strips. */
+/** Wraps the screens in app/_layout.tsx. */
 export function GuideRoomView({ children }: { children: ReactNode }) {
-  const room = useGuideRoomHeight();
-  return <View style={{ flex: 1, paddingTop: PAD_AROUND_STACK ? room : 0 }}>{children}</View>;
+  return <View style={{ flex: 1 }}>{children}</View>;
 }
 
-/** The padding a phone's screens take inside, 0 on the desktop. */
-export function useGuideRoomScreenPadding(): number {
-  const room = useGuideRoomHeight();
-  return PAD_AROUND_STACK ? 0 : room;
+/**
+ * Tells the strips where the Lifestead header ends while a tab is showing,
+ * so they start under it, and gives the top back when the tab is covered or
+ * closes.
+ */
+export function useGuideStripsBelow(bottom: number, active: boolean): void {
+  useEffect(() => {
+    if (!active) return;
+    setGuideRoomTop(bottom);
+    return () => setGuideRoomTop(0);
+  }, [bottom, active]);
 }

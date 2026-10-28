@@ -28,14 +28,34 @@ export const GUIDE_GAP = 6;
 const heights = new Map<GuideSlot, number>();
 const listeners = new Set<() => void>();
 let version = 0;
+// Where the first strip may start, from the top of the window (1.0.75.7).
+// 0 means just under the status bar. On a tab the Lifestead header stays at
+// the top where it always is, so the tabs layout sets this to the header's
+// bottom and the strips start under it.
+let top = 0;
+
+function changed(): void {
+  version += 1;
+  for (const listener of listeners) listener();
+}
+
+export function setGuideRoomTop(next: number): void {
+  const value = next > 0 ? Math.ceil(next) : 0;
+  if (value === top) return;
+  top = value;
+  changed();
+}
+
+export function guideRoomTop(): number {
+  return top;
+}
 
 export function reportGuideHeight(slot: GuideSlot, height: number): void {
   const next = height > 0 ? Math.ceil(height) : 0;
   if ((heights.get(slot) ?? 0) === next) return;
   if (next === 0) heights.delete(slot);
   else heights.set(slot, next);
-  version += 1;
-  for (const listener of listeners) listener();
+  changed();
 }
 
 export function subscribeGuideRoom(listener: () => void): () => void {

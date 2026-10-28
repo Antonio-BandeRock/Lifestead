@@ -1,11 +1,13 @@
 import { Tabs } from 'expo-router';
+import { useIsFocused } from '@react-navigation/native';
 import { Platform, StyleSheet, View } from 'react-native';
 import { enableScreens } from 'react-native-screens';
 import { CurrentPageHelpProvider } from '../../components/CurrentPageHelp';
 import { QuickActionRouter } from '../../components/QuickActionRouter';
 import { ShareIntentHandler } from '../../components/ShareIntentHandler';
 import { ScreenBackground } from '../../components/ScreenBackground';
-import { ScreenHeader } from '../../components/ScreenHeader';
+import { ScreenHeader, useScreenHeaderHeight } from '../../components/ScreenHeader';
+import { useGuideRoomHeight, useGuideStripsBelow } from '../../components/GuideRoom';
 import { TabHub } from '../../components/TabHub';
 
 // headerShown: false everywhere here -- <ScreenHeader/> below (rendered
@@ -68,6 +70,14 @@ if (Platform.OS === 'web') {
 }
 
 export default function TabLayout() {
+  // The guide strips start under the Lifestead header while a tab shows,
+  // and the tab's screen moves down by the room they take, so the header
+  // stays at the top (1.0.75.7). A screen pushed over the tabs, like
+  // Profile, has no header, so the strips go back to the top there.
+  const focused = useIsFocused();
+  const headerHeight = useScreenHeaderHeight();
+  const guideRoom = useGuideRoomHeight();
+  useGuideStripsBelow(headerHeight, focused);
   // 2026-08-21: a real, direct report traced the shared background here
   // (specifically its own footer divider line) visibly showing through
   // Profile, a Stack-pushed screen this whole group sits behind once
@@ -100,7 +110,7 @@ export default function TabLayout() {
               // current @react-navigation/bottom-tabs prop for this (see
               // this file's own git history for why `sceneContainerStyle`,
               // an older/nonexistent prop name, silently did nothing).
-              sceneStyle: { backgroundColor: 'transparent' },
+              sceneStyle: { backgroundColor: 'transparent', paddingTop: focused ? guideRoom : 0 },
             }}
           >
             {/* 2026-07-26: Home is now the literal "index" file (formerly
