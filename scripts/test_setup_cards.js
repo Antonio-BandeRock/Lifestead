@@ -136,6 +136,59 @@ check(
   'a card with two records is done from the earlier one',
 );
 
+// What fills this in (1.0.75.1): every place a card gives back to is on a
+// lens, each lens row shows a card once and in the order written, a done,
+// hidden or set aside card steps aside, and the how-tos list every lens
+// that draws the row.
+{
+  const howTos = load('lib/toolHowTos.ts');
+  const lensKeys = cards.lensKeysWithFeeders();
+  check(
+    JSON.stringify([...howTos.LENSES_WITH_FEEDERS].sort()) === JSON.stringify([...lensKeys].sort()),
+    'lib/toolHowTos.ts LENSES_WITH_FEEDERS matches lensKeysWithFeeders()',
+  );
+  for (const key of lensKeys) {
+    check((howTos.TOOL_HOW_TOS[key] ?? []).some((tool) => tool.key === 'feedsThis'), `${key} has the What fills this in how-to`);
+  }
+  const covered = new Set();
+  for (const key of lensKeys) {
+    const [tabPath, lensKey] = key.split('#');
+    for (const area of cards.areasForLens(tabPath, lensKey)) covered.add(area.key);
+    const row = cards.buildLensFeeders(tabPath, lensKey, fresh, {}, []);
+    check(row.cards.length > 0, `${key} has a card to set up when nothing is recorded`);
+    const rowKeys = row.cards.map((card) => card.def.key);
+    check(new Set(rowKeys).size === rowKeys.length, `${key} shows each card once`);
+    const order = allCards.map((card) => card.key).filter((cardKey) => rowKeys.includes(cardKey));
+    check(JSON.stringify(order) === JSON.stringify(rowKeys), `${key} keeps the order written`);
+    const own = new Set(row.areas.map((area) => area.key));
+    check(
+      row.cards.every((card) => card.areas.every((area) => !own.has(area.key))),
+      `${key} cards list only the other places they come back on`,
+    );
+    check(row.cards.every((card) => tabPaths.has(card.tabPath)), `${key} cards know their tab`);
+    const first = row.cards[0].def;
+    const hidden = cards.buildLensFeeders(tabPath, lensKey, fresh, {}, [first.key]);
+    check(!hidden.cards.some((card) => card.def.key === first.key), `${key} leaves out a card marked Not for me`);
+  }
+  for (const area of cards.GIVE_BACK_AREAS) check(covered.has(area.key), `${area.key} sits on a lens that draws the row`);
+
+  const compostLens = cards.GIVE_BACK_AREAS.find((area) =>
+    allCards.some((card) => card.key === 'compost' && card.getsBack.includes(area.key)),
+  );
+  if (compostLens) {
+    const lensKey = Object.values(compostLens.destination.params ?? {})[0];
+    const open = cards.buildLensFeeders(compostLens.tabPath, lensKey, fresh, {}, []);
+    const done = cards.buildLensFeeders(compostLens.tabPath, lensKey, fresh, { compost: '2026-10-20' }, []);
+    check(open.cards.some((card) => card.def.key === 'compost'), 'an open card is on its lens row');
+    check(!done.cards.some((card) => card.def.key === 'compost'), 'a done card steps aside on its lens row');
+  }
+
+  const once = cards.withHiddenFeeder(cards.withHiddenFeeder([], 'labs'), 'labs');
+  check(once.length === 1, 'marking a card Not for me twice keeps it once');
+  check(cards.parseHiddenFeeders('not json').length === 0 && cards.parseHiddenFeeders(null).length === 0, 'a bad stored list reads as empty');
+  check(JSON.stringify(cards.parseHiddenFeeders('["a",3,"b"]')) === '["a","b"]', 'only names are kept from the stored list');
+}
+
 // Words.
 const BANNED = [
   [/—|–| -- | - /, 'a dash used as punctuation'],
@@ -154,7 +207,7 @@ for (const tab of cards.SETUP_TABS) {
   }
 }
 for (const area of cards.GIVE_BACK_AREAS) strings.push(area.label, area.line);
-for (const [name, value] of Object.entries(cards)) if (/_LABEL$|^SETUP_CARDS_/.test(name)) strings.push(value);
+for (const [name, value] of Object.entries(cards)) if (/_LABEL$|^SETUP_CARDS_|^FEEDS_THIS_|^NOT_FOR_ME_/.test(name)) strings.push(value);
 for (const text of strings) {
   check(typeof text === 'string' && text.length > 0, 'every string is filled in');
   for (const [pattern, why] of BANNED) check(!pattern.test(text), `${why}: ${text}`);

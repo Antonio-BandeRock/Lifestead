@@ -171,6 +171,7 @@ import type { ReadingView } from '../../lib/readingBands';
 import type { YourStoryItemKey } from '../../lib/yourStory';
 import { listRecordedBodySignals, loadTrendsMoreView, type TrendsMoreLens } from '../../lib/trendsMoreDb';
 import { ThumbRow } from '../../components/ThumbRow';
+import { LensFeedersRow } from '../../components/LensFeedersRow';
 import { VaultClosedBand } from '../../components/VaultClosedBand';
 import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
@@ -1871,6 +1872,7 @@ export default function TrendsScreen() {
               <Text style={band.headingText}>{activeLensLabel}</Text>
             </View>
             <VaultClosedBand color={TAB_COLOR} categories={lensVault} />
+            <LensFeedersRow tabPath="/trends" lensKey={lens} tabColor={TAB_COLOR} />
 
             {lens === 'squares' ? null : showsRangePicker ? (
               <>

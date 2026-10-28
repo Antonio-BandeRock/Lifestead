@@ -286,6 +286,8 @@ for (const [key, text] of lines) {
         check(
           markSource.includes(`walkMark('${step.mark}')`) ||
             markSource.includes(`walkMark.ref('${step.mark}')`) ||
+            // A card handed its mark as a prop (SetupCard's markCard and markGo).
+            markSource.includes(`? '${step.mark}' : undefined`) ||
             (prefix && markSource.includes('walkMark.ref(`' + prefix + '${')),
           `${step.mark} is drawn on a screen`,
         );

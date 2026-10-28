@@ -424,5 +424,15 @@ export const PART: Readonly<Record<string, string>> = {
  "Tap a coloured chip under Where it comes back to read what that place will show you.": "Toca una etiqueta de color bajo Dónde te regresa para leer lo que ese lugar te va a mostrar.",
  "Tap Set It Up. It opens the exact place to do it.": "Toca Configurarlo. Abre el lugar exacto para hacerlo.",
  "Once the record exists the card turns green, says since when and moves to the end of its row, so what is left to set up is always first.": "En cuanto existe el registro, la tarjeta se pone verde, dice desde cuándo y se pasa al final de su fila, así que lo que falta por configurar siempre va primero.",
- "The things you look after, written down once so they stop taking up room in your head.": "Lo que cuidas, anotado una sola vez para que deje de ocupar espacio en tu cabeza."
+ "The things you look after, written down once so they stop taking up room in your head.": "Lo que cuidas, anotado una sola vez para que deje de ocupar espacio en tu cabeza.",
+ "What fills this in": "Qué llena esta vista",
+ "{label} reads what these put in. Set one up and it starts filling in.": "{label} lee lo que estas guardan. Configura una y empieza a llenarse.",
+ "This reads what these put in. Set one up and it starts filling in.": "Esta vista lee lo que estas guardan. Configura una y empieza a llenarse.",
+ "Also comes back on": "También te regresa en",
+ "Not for me": "No es para mí",
+ "Taken off this row": "Quitada de esta fila",
+ "{title} will not show here or on the other lenses it feeds. It stays in Your Guide on Home if you want it later.": "{title} ya no va a aparecer aquí ni en las otras vistas que llena. Sigue en Tu guía, en Inicio, por si la quieres después.",
+ "Set up what fills this lens": "Configura lo que llena esta vista",
+ "Under What fills this in, swipe along the cards. Each one is a record that this lens reads.": "En Qué llena esta vista, desliza a lo largo de las tarjetas. Cada una es un registro que esta vista lee.",
+ "Once the record exists the card leaves this row. Not for me takes a card off every lens and leaves it in Your Guide on Home.": "En cuanto existe el registro, la tarjeta sale de esta fila. No es para mí quita una tarjeta de todas las vistas y la deja en Tu guía, en Inicio."
 };

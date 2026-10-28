@@ -169,6 +169,7 @@ import { nutrientKey } from '../../lib/compareSeries';
 import { eatenOutDayLine } from '../../lib/eatenOut';
 import { ThumbRow } from '../../components/ThumbRow';
 import { ThumbEndRow } from '../../components/ThumbEndRow';
+import { LensFeedersRow } from '../../components/LensFeedersRow';
 import { VaultClosedBand } from '../../components/VaultClosedBand';
 import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
@@ -1364,6 +1365,7 @@ export default function InsightsScreen() {
                 onToggle={() => setLensExplainerExpanded((current) => !current)}
               />
               <VaultClosedBand color={TAB_COLOR} categories={lensVault} />
+              <LensFeedersRow tabPath="/insights" lensKey={lens} tabColor={TAB_COLOR} />
               {lens === 'labelCheck' ? (
               <View style={styles.bandColumn}>
                 <LabelCheckView

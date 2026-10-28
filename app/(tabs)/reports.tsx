@@ -34,6 +34,7 @@ import { markYourStorySeen } from '../../lib/yourStoryDb';
 import { describeRange, monthsBefore, sinceVisitStart, type LastVisitForRange } from '../../lib/reportRange';
 import { lastVisit } from '../../lib/sinceLastVisit';
 import { listAllAppointments } from '../../lib/trendsMoreDb';
+import { LensFeedersRow } from '../../components/LensFeedersRow';
 import { VaultClosedBand } from '../../components/VaultClosedBand';
 import { VAULT_CATEGORIES } from '../../lib/vault';
 import { useOnVaultChange } from '../../lib/vaultReads';
@@ -408,6 +409,7 @@ export default function ReportsScreen() {
               <Text style={band.headingText}>{activeLensLabel}</Text>
             </View>
             <VaultClosedBand color={TAB_COLOR} categories={VAULT_CATEGORIES} />
+            <LensFeedersRow tabPath="/reports" lensKey={lens} tabColor={TAB_COLOR} />
 
             <View style={[band.inset, styles.pillRow]}>
               {DAY_RANGE_OPTIONS.map((option) => (

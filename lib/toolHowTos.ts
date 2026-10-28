@@ -250,6 +250,8 @@ export type ToolMark =
   | 'home.readCards'
   | 'home.setupCards'
   | 'home.setupCardGo'
+  | 'lens.feedsThis'
+  | 'lens.feedsThisGo'
   | 'appointments.add'
   | 'appointments.addCalendar'
   | 'appointments.cancel'
@@ -4777,6 +4779,57 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     holds: 'Different foods and plants week by week, the meals and foods that came back most, food groups not logged at all, and where meals came from. A meal that comes back often is counted, not judged.',
   }),
 };
+
+// Lenses that draw What fills this in (components/LensFeedersRow.tsx). The
+// list is written out because this file imports nothing at runtime;
+// scripts/test_setup_cards.js checks it against lensKeysWithFeeders().
+export const LENSES_WITH_FEEDERS: readonly string[] = [
+  '/trends#patterns',
+  '/trends#symptoms',
+  '/trends#nutrients',
+  '/trends#variety',
+  '/trends#eatingWindow',
+  '/trends#movement',
+  '/trends#weight',
+  '/trends#labs',
+  '/trends#bloodPressure',
+  '/trends#hydration',
+  '/trends#doses',
+  '/trends#care',
+  '/trends#reactions',
+  '/trends#planned',
+  '/trends#ferments',
+  '/trends#groceries',
+  '/trends#keepingUp',
+  '/trends#cost',
+  '/trends#work',
+  '/trends#harvest',
+  '/trends#conditions',
+  '/insights#nutrients',
+  '/insights#foodLookup',
+  '/insights#safeFoods',
+  '/insights#healingStage',
+  '/insights#myMeds',
+  '/reports#r-doctor',
+  '/reports#r-nutrition',
+  '/reports#r-trainer',
+  '/reports#r-care',
+  '/reports#r-medical-costs',
+  '/reports#r-garden',
+  '/reports#r-variety',
+];
+
+for (const key of LENSES_WITH_FEEDERS) {
+  (TOOL_HOW_TOS[key] ??= []).push({
+    key: 'feedsThis',
+    title: 'Set up what fills this lens',
+    steps: [
+      { say: 'Under What fills this in, swipe along the cards. Each one is a record that this lens reads.', mark: 'lens.feedsThis', stay: true },
+      { say: 'Tap Set It Up. It opens the exact place to do it.', mark: 'lens.feedsThisGo' },
+    ],
+    forYou: 'Once the record exists the card leaves this row. Not for me takes a card off every lens and leaves it in Your Guide on Home.',
+  });
+}
 
 /** Tabs whose every lens has its tools listed above. */
 export const TOOL_TABS_DONE: readonly string[] = ['/life', '/', '/schedule', '/log', '/food', '/garden', '/insights', '/trends', '/reports'];

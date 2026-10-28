@@ -14,6 +14,7 @@ import { textShadow, typography } from '../constants/typography';
 import { t } from '../lib/i18n';
 import {
   GETS_BACK_LABEL,
+  NOT_FOR_ME_LABEL,
   OPEN_IT_LABEL,
   SETUP_CARDS_CAPTION,
   SETUP_CARDS_HEADING,
@@ -32,6 +33,7 @@ import {
 } from '../lib/setupCards';
 import { datelineFor, type StoryDestination, type YourStoryView } from '../lib/yourStory';
 import type { GuideRecords } from '../lib/yourStoryGuides';
+import type { ToolMark } from '../lib/toolHowTos';
 import { useWalkMark } from './WalkMark';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
@@ -52,105 +54,132 @@ function tabOf(path: string) {
   return TAB_ROUTES.find((route) => route.path === path);
 }
 
+type CardProps = {
+  card: SetupCardView;
+  tabColor: string;
+  width: number;
+  view: YourStoryView;
+  go: Props['go'];
+  explain: Props['explain'];
+  // The walk marks a how-to rings, on the one card it points at.
+  markCard?: ToolMark;
+  markGo?: ToolMark;
+  // Over the area chips, a label other than Where it comes back.
+  areasLabel?: string;
+  // Shown as a quiet button under Set It Up when given.
+  onNotForMe?: () => void;
+};
+
+// One card, shared by Your Guide on Home and the What fills this in row on
+// a lens.
+export function SetupCard({ card, tabColor, width, view, go, explain, markCard, markGo, areasLabel, onNotForMe }: CardProps) {
+  const walkMark = useWalkMark();
+  const done = !!card.doneOn;
+  const tint = done ? DONE_COLOR : tabColor;
+  const partners = (card.def.worksWith ?? []).map(cardTitle).filter((title): title is string => !!title);
+  return (
+    <View
+      ref={markCard ? walkMark.ref(markCard) : undefined}
+      style={[styles.card, { width, borderColor: hexToRgba(tint, done ? 0.7 : 0.55) }, markCard && walkMark(markCard)]}
+    >
+      <View style={[styles.hero, { backgroundColor: hexToRgba(tint, 0.2) }]}>
+        <View style={[styles.heroCircle, { backgroundColor: hexToRgba(tint, 0.3), borderColor: tint }]}>
+          <Ionicons name={(done ? 'checkmark' : card.def.icon) as IconName} size={34} color={tint} style={textShadow} />
+        </View>
+        <View style={styles.takesTag}>
+          <Ionicons name={done ? 'checkmark-circle-outline' : 'time-outline'} size={12} color={tint} style={textShadow} />
+          <Text style={styles.takesText}>{done && card.doneOn ? datelineFor(card.doneOn) : card.def.takes}</Text>
+        </View>
+      </View>
+      <View style={styles.cardBody}>
+        <Text style={styles.cardTitle}>{card.def.title}</Text>
+        <Text style={[styles.hook, { color: tint }]}>{card.def.hook}</Text>
+        {card.setAside ? <Text style={styles.muted}>{SET_ASIDE_LABEL}</Text> : null}
+        <View style={styles.part}>
+          <View style={styles.partHead}>
+            <Ionicons name="information-circle-outline" size={13} color={colors.textMuted} style={textShadow} />
+            <Text style={styles.partLabel}>{WHAT_IT_IS_LABEL}</Text>
+          </View>
+          <Text style={styles.partText}>{card.def.whatItIs}</Text>
+        </View>
+        <View style={styles.part}>
+          <View style={styles.partHead}>
+            <Ionicons name="hand-left-outline" size={13} color={colors.textMuted} style={textShadow} />
+            <Text style={styles.partLabel}>{WHAT_YOU_DO_LABEL}</Text>
+          </View>
+          <Text style={styles.partText}>{card.def.whatYouDo}</Text>
+        </View>
+        {card.areas.length > 0 ? (
+        <View style={styles.part}>
+          <View style={styles.partHead}>
+            <Ionicons name="return-down-back-outline" size={13} color={colors.textMuted} style={textShadow} />
+            <Text style={styles.partLabel}>{areasLabel ?? GETS_BACK_LABEL}</Text>
+          </View>
+          <View style={styles.chips}>
+            {card.areas.map((area) => {
+              const areaTab = tabOf(area.tabPath);
+              const color = areaTab?.color ?? colors.primary;
+              return (
+                <TouchableOpacity
+                  key={area.key}
+                  style={[styles.chip, { backgroundColor: hexToRgba(color, 0.16), borderColor: hexToRgba(color, 0.6) }]}
+                  onPress={() => explain(t(area.label), giveBackExplanation(area, view, (english) => t(english)))}
+                  accessibilityRole="button"
+                  accessibilityLabel={area.label}
+                >
+                  <Ionicons name={(areaTab?.icon ?? 'ellipse') as IconName} size={11} color={color} style={textShadow} />
+                  <Text style={styles.chipText}>{area.label}</Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </View>
+        ) : null}
+        {partners.length > 0 ? (
+          <Text style={styles.muted}>{t('{label}: {names}', { label: t(WORKS_WITH_LABEL), names: partners.map((name) => t(name)).join(', ') })}</Text>
+        ) : null}
+        <View style={styles.spacer} />
+        <TouchableOpacity
+          ref={markGo ? walkMark.ref(markGo) : undefined}
+          style={[
+            done ? styles.openButton : styles.goButton,
+            done ? { borderColor: tint } : { backgroundColor: tint },
+            markGo && walkMark(markGo),
+          ]}
+          onPress={() => go(card.def.destination)}
+          accessibilityRole="button"
+          accessibilityLabel={`${done ? OPEN_IT_LABEL : SET_IT_UP_LABEL}: ${card.def.title}`}
+        >
+          <Text style={done ? styles.openButtonText : styles.goButtonText}>{done ? OPEN_IT_LABEL : SET_IT_UP_LABEL}</Text>
+          {done ? (
+            <Ionicons name="arrow-forward" size={15} color={tint} style={textShadow} />
+          ) : (
+            <Ionicons name="arrow-forward" size={15} color={colors.textOnButton} style={NO_SHADOW} />
+          )}
+        </TouchableOpacity>
+        {onNotForMe ? (
+          <TouchableOpacity style={styles.notForMe} onPress={onNotForMe} accessibilityRole="button" accessibilityLabel={`${NOT_FOR_ME_LABEL}: ${card.def.title}`}>
+            <Text style={styles.notForMeText}>{NOT_FOR_ME_LABEL}</Text>
+          </TouchableOpacity>
+        ) : null}
+      </View>
+    </View>
+  );
+}
+
+
+// Three quarters of the window, never so wide on a computer that a row
+// shows only one card.
+export function setupCardWidth(windowWidth: number): number {
+  return Math.round(Math.min(Math.max(windowWidth * 0.75, 240), 340));
+}
+
 export function SetupCardShelves({ view, records, startPath, go, explain }: Props) {
   const { width } = useWindowDimensions();
-  const walkMark = useWalkMark();
-  // Three quarters of the window, never so wide on a computer that a row
-  // shows only one card.
-  const cardWidth = Math.round(Math.min(Math.max(width * 0.75, 240), 340));
+  const cardWidth = setupCardWidth(width);
   const tabs = buildSetupShelves(view, records, startPath);
   if (tabs.length === 0) return null;
   let firstOpenMarked = false;
-
-  function renderCard(card: SetupCardView, tabColor: string) {
-    const done = !!card.doneOn;
-    const tint = done ? DONE_COLOR : tabColor;
-    const markThis = !done && !firstOpenMarked;
-    if (markThis) firstOpenMarked = true;
-    const partners = (card.def.worksWith ?? []).map(cardTitle).filter((title): title is string => !!title);
-    return (
-      <View
-        key={card.def.key}
-        ref={markThis ? walkMark.ref('home.setupCards') : undefined}
-        style={[styles.card, { width: cardWidth, borderColor: hexToRgba(tint, done ? 0.7 : 0.55) }, markThis && walkMark('home.setupCards')]}
-      >
-        <View style={[styles.hero, { backgroundColor: hexToRgba(tint, 0.2) }]}>
-          <View style={[styles.heroCircle, { backgroundColor: hexToRgba(tint, 0.3), borderColor: tint }]}>
-            <Ionicons name={(done ? 'checkmark' : card.def.icon) as IconName} size={34} color={tint} style={textShadow} />
-          </View>
-          <View style={styles.takesTag}>
-            <Ionicons name={done ? 'checkmark-circle-outline' : 'time-outline'} size={12} color={tint} style={textShadow} />
-            <Text style={styles.takesText}>{done && card.doneOn ? datelineFor(card.doneOn) : card.def.takes}</Text>
-          </View>
-        </View>
-        <View style={styles.cardBody}>
-          <Text style={styles.cardTitle}>{card.def.title}</Text>
-          <Text style={[styles.hook, { color: tint }]}>{card.def.hook}</Text>
-          {card.setAside ? <Text style={styles.muted}>{SET_ASIDE_LABEL}</Text> : null}
-          <View style={styles.part}>
-            <View style={styles.partHead}>
-              <Ionicons name="information-circle-outline" size={13} color={colors.textMuted} style={textShadow} />
-              <Text style={styles.partLabel}>{WHAT_IT_IS_LABEL}</Text>
-            </View>
-            <Text style={styles.partText}>{card.def.whatItIs}</Text>
-          </View>
-          <View style={styles.part}>
-            <View style={styles.partHead}>
-              <Ionicons name="hand-left-outline" size={13} color={colors.textMuted} style={textShadow} />
-              <Text style={styles.partLabel}>{WHAT_YOU_DO_LABEL}</Text>
-            </View>
-            <Text style={styles.partText}>{card.def.whatYouDo}</Text>
-          </View>
-          <View style={styles.part}>
-            <View style={styles.partHead}>
-              <Ionicons name="return-down-back-outline" size={13} color={colors.textMuted} style={textShadow} />
-              <Text style={styles.partLabel}>{GETS_BACK_LABEL}</Text>
-            </View>
-            <View style={styles.chips}>
-              {card.areas.map((area) => {
-                const areaTab = tabOf(area.tabPath);
-                const color = areaTab?.color ?? colors.primary;
-                return (
-                  <TouchableOpacity
-                    key={area.key}
-                    style={[styles.chip, { backgroundColor: hexToRgba(color, 0.16), borderColor: hexToRgba(color, 0.6) }]}
-                    onPress={() => explain(t(area.label), giveBackExplanation(area, view, (english) => t(english)))}
-                    accessibilityRole="button"
-                    accessibilityLabel={area.label}
-                  >
-                    <Ionicons name={(areaTab?.icon ?? 'ellipse') as IconName} size={11} color={color} style={textShadow} />
-                    <Text style={styles.chipText}>{area.label}</Text>
-                  </TouchableOpacity>
-                );
-              })}
-            </View>
-          </View>
-          {partners.length > 0 ? (
-            <Text style={styles.muted}>{t('{label}: {names}', { label: t(WORKS_WITH_LABEL), names: partners.map((name) => t(name)).join(', ') })}</Text>
-          ) : null}
-          <View style={styles.spacer} />
-          <TouchableOpacity
-            ref={markThis ? walkMark.ref('home.setupCardGo') : undefined}
-            style={[
-              done ? styles.openButton : styles.goButton,
-              done ? { borderColor: tint } : { backgroundColor: tint },
-              markThis && walkMark('home.setupCardGo'),
-            ]}
-            onPress={() => go(card.def.destination)}
-            accessibilityRole="button"
-            accessibilityLabel={`${done ? OPEN_IT_LABEL : SET_IT_UP_LABEL}: ${card.def.title}`}
-          >
-            <Text style={done ? styles.openButtonText : styles.goButtonText}>{done ? OPEN_IT_LABEL : SET_IT_UP_LABEL}</Text>
-            {done ? (
-              <Ionicons name="arrow-forward" size={15} color={tint} style={textShadow} />
-            ) : (
-              <Ionicons name="arrow-forward" size={15} color={colors.textOnButton} style={NO_SHADOW} />
-            )}
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
 
   function renderShelf(shelf: SetupShelfView, tabColor: string) {
     const total = shelf.cards.length;
@@ -162,7 +191,23 @@ export function SetupCardShelves({ view, records, startPath, go, explain }: Prop
           <Text style={styles.shelfCount}>{t('{done} of {total} set up', { done: settled, total })}</Text>
         </View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
-          {shelf.cards.map((card) => renderCard(card, tabColor))}
+          {shelf.cards.map((card) => {
+            const markThis = !card.doneOn && !firstOpenMarked;
+            if (markThis) firstOpenMarked = true;
+            return (
+              <SetupCard
+                key={card.def.key}
+                card={card}
+                tabColor={tabColor}
+                width={cardWidth}
+                view={view}
+                go={go}
+                explain={explain}
+                markCard={markThis ? 'home.setupCards' : undefined}
+                markGo={markThis ? 'home.setupCardGo' : undefined}
+              />
+            );
+          })}
         </ScrollView>
       </View>
     );
@@ -279,5 +324,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
     backgroundColor: colors.surface,
   },
+  notForMe: { alignSelf: 'center', paddingVertical: 6, paddingHorizontal: 12, backgroundColor: colors.surfaceMuted },
+  notForMeText: { ...typography.caption, color: colors.textMuted, ...textShadow },
   openButtonText: { ...typography.label, color: colors.textPrimary, ...textShadow },
 });

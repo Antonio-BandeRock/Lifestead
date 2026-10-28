@@ -1159,6 +1159,113 @@ export const OPEN_IT_LABEL = 'Open It';
 export const SET_ASIDE_LABEL = 'Set aside for now';
 export const START_HERE_CARD_LABEL = 'You chose to start here';
 
+// WHAT FILLS THIS IN (1.0.75.1). The same cards turned round: a lens on
+// Insights, Trends or Reports shows the cards that feed it, at the top of
+// the lens, for as long as any of them is still open. Direct instruction:
+// "incorporate this way of working with things in the lenses too", item 1
+// of the plan being an empty output lens saying what fills it. A done card
+// steps aside here rather than moving to the end, since the lens itself now
+// shows what it put in; a card set aside on Your Story or marked Not for me
+// here is left out. Your Guide on Home keeps every card whatever is chosen
+// here.
+export type LensTabPath = GiveBackArea['tabPath'];
+
+export type LensFeederView = SetupCardView & {
+  // The tab the card is set up on, for its colour.
+  tabPath: SetupTabDef['path'];
+};
+
+export type LensFeeders = {
+  areas: GiveBackArea[];
+  cards: LensFeederView[];
+};
+
+const LENS_PARAM: Record<LensTabPath, string> = {
+  '/insights': 'openInsightsLens',
+  '/trends': 'openTrendsLens',
+  '/reports': 'openReportsLens',
+};
+
+// The give-back places a lens is, found from where each one opens.
+export function areasForLens(tabPath: LensTabPath, lensKey: string): GiveBackArea[] {
+  return GIVE_BACK_AREAS.filter(
+    (area) => area.tabPath === tabPath && area.destination.params?.[LENS_PARAM[tabPath]] === lensKey,
+  );
+}
+
+// Every lens key a card row can show on, for the how-tos and the test.
+export function lensKeysWithFeeders(): string[] {
+  return GIVE_BACK_AREAS.map((area) => `${area.tabPath}#${area.destination.params?.[LENS_PARAM[area.tabPath]] ?? ''}`);
+}
+
+export function buildLensFeeders(
+  tabPath: LensTabPath,
+  lensKey: string,
+  view: YourStoryView,
+  records: GuideRecords,
+  hidden: readonly string[],
+): LensFeeders {
+  const areas = areasForLens(tabPath, lensKey);
+  const wanted = new Set(areas.map((area) => area.key));
+  const cards: LensFeederView[] = [];
+  if (wanted.size === 0) return { areas, cards };
+  // In the order the tabs and rows are written, so the most useful card of
+  // each tab comes first, and a card feeding two of the lens's places shows
+  // once.
+  for (const tab of SETUP_TABS) {
+    for (const shelf of tab.shelves) {
+      for (const def of shelf.cards) {
+        if (!def.getsBack.some((key) => wanted.has(key))) continue;
+        if (hidden.includes(def.key)) continue;
+        const item = def.item ? view.allItems[def.item] : undefined;
+        if (item?.state === 'setAside') continue;
+        const doneOn = cardDoneOn(def, view, records);
+        if (doneOn) continue;
+        cards.push({
+          def,
+          doneOn: null,
+          setAside: false,
+          // The other places it gives back to; this one is the lens itself.
+          areas: def.getsBack
+            .filter((key) => !wanted.has(key))
+            .map((key) => AREA_BY_KEY.get(key))
+            .filter((area): area is GiveBackArea => !!area),
+          tabPath: tab.path,
+        });
+      }
+    }
+  }
+  return { areas, cards };
+}
+
+// Not for me, kept in one app_meta row as a list of card keys. It travels
+// between the person's devices, since what somebody does not keep is the
+// same on each.
+export const FEEDS_HIDDEN_META_KEY = 'setup_cards_not_for_me';
+
+export function parseHiddenFeeders(value: string | null): string[] {
+  if (!value) return [];
+  try {
+    const parsed: unknown = JSON.parse(value);
+    return Array.isArray(parsed) ? parsed.filter((key): key is string => typeof key === 'string') : [];
+  } catch {
+    return [];
+  }
+}
+
+export function withHiddenFeeder(hidden: readonly string[], key: string): string[] {
+  return hidden.includes(key) ? [...hidden] : [...hidden, key];
+}
+
+export const FEEDS_THIS_HEADING = 'What fills this in';
+export const FEEDS_THIS_CAPTION = '{label} reads what these put in. Set one up and it starts filling in.';
+export const FEEDS_THIS_CAPTION_MANY = 'This reads what these put in. Set one up and it starts filling in.';
+export const ALSO_COMES_BACK_LABEL = 'Also comes back on';
+export const NOT_FOR_ME_LABEL = 'Not for me';
+export const NOT_FOR_ME_TITLE = 'Taken off this row';
+export const NOT_FOR_ME_BODY =
+  '{title} will not show here or on the other lenses it feeds. It stays in Your Guide on Home if you want it later.';
+
 export function cardTitle(key: string): string | null {
   for (const tab of SETUP_TABS)
     for (const shelf of tab.shelves) for (const card of shelf.cards) if (card.key === key) return card.title;
