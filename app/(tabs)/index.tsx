@@ -2840,7 +2840,10 @@ export default function HomeScreen() {
                     return (
                       <TouchableOpacity
                         key={tag.code}
-                        style={[styles.feelingTagChip, active && styles.feelingTagChipActive]}
+                        style={[
+                          styles.feelingTagChip,
+                          active && { backgroundColor: tabColorFor('/log'), borderColor: tabColorFor('/log') },
+                        ]}
                         onPress={() => toggleFeelingTag(tag.code)}
                       >
                         <Text style={[styles.feelingTagText, active && styles.feelingTagTextActive]}>{tag.label}</Text>
@@ -3812,7 +3815,7 @@ export default function HomeScreen() {
                         .map((plant) => (
                           <TouchableOpacity
                             key={plant.key}
-                            style={styles.varietyChip}
+                            style={[styles.varietyChip, { borderColor: foodColor }]}
                             activeOpacity={0.8}
                             onPress={() => void handleAddPlantToLogged(plant)}
                             disabled={usualMealBusy}
@@ -3841,7 +3844,7 @@ export default function HomeScreen() {
                 return (
                   <TouchableOpacity
                     key={plant.key}
-                    style={[styles.varietyChip, picked && styles.varietyChipActive]}
+                    style={[styles.varietyChip, { borderColor: foodColor }, picked && { backgroundColor: foodColor }]}
                     activeOpacity={0.8}
                     onPress={() => toggleVarietyExtra(plant)}
                     disabled={usualMealBusy}
@@ -4066,6 +4069,7 @@ export default function HomeScreen() {
   // time it is looked at. No local copy, nothing to drift.
   function renderLowStimulation() {
     if (!isHomeSectionVisible(visualPrefs, 'lowStimulation')) return null;
+    const homeColor = homeGroupIdentity('/profile')?.color ?? colors.primary;
     return renderBand(
       'lowStimulation',
       'Low Stimulation',
@@ -4080,14 +4084,14 @@ export default function HomeScreen() {
             return (
               <TouchableOpacity
                 key={value ? 'on' : 'off'}
-                style={[styles.pill, active && styles.pillActive]}
+                style={[styles.tabPill, active && { backgroundColor: homeColor, borderColor: homeColor }]}
                 onPress={() => {
                   void setLowStimulation(value);
                 }}
                 accessibilityRole="button"
                 accessibilityState={{ selected: active }}
               >
-                <Text style={[styles.pillText, active && styles.pillTextActive]}>{value ? 'On' : 'Off'}</Text>
+                <Text style={[styles.tabPillText, active && styles.tabPillTextActive]}>{value ? 'On' : 'Off'}</Text>
               </TouchableOpacity>
             );
           })}
@@ -4101,6 +4105,7 @@ export default function HomeScreen() {
   // Home lands on a finished report rather than on the picker.
   function renderMakeReport() {
     if (!isHomeSectionVisible(visualPrefs, 'makeReport')) return null;
+    const reportsColor = tabColorFor('/reports');
     return renderBand(
       'makeReport',
       'Make a Report',
@@ -4113,13 +4118,13 @@ export default function HomeScreen() {
           {REPORT_WINDOW_OPTIONS.map((option) => (
             <TouchableOpacity
               key={option.days}
-              style={styles.pill}
+              style={[styles.tabPill, { borderColor: reportsColor }]}
               activeOpacity={0.8}
               onPress={() =>
                 router.push({ pathname: '/reports', params: { openReportDays: String(option.days) } })
               }
             >
-              <Text style={styles.pillText}>{option.label}</Text>
+              <Text style={styles.tabPillText}>{option.label}</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -5464,8 +5469,14 @@ const styles = StyleSheet.create({
   usualMealActions: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   usualMealButton: { flexGrow: 1 },
   usualMealGroup: { gap: 6 },
-  varietyChip: { ...PILL, flexDirection: 'row', alignItems: 'center', gap: 4 },
-  varietyChipTextPicked: { ...PILL_ON_TEXT },
+  // The plant chips, the feeling tags and the two tabPill rows keep the colour
+  // of the tab they lead to, the way every Home card does, so they are not on
+  // the shared PILL look (scripts/audit_pill_style.js EXEMPT).
+  varietyChip: { flexDirection: 'row', alignItems: 'center', gap: 4, borderWidth: 1, borderRadius: 999, paddingHorizontal: 12, paddingVertical: 6 },
+  varietyChipTextPicked: { ...typography.caption, color: colors.textOnPrimary, textShadowColor: 'transparent', textShadowRadius: 0 },
+  tabPill: { borderWidth: 1, borderColor: colors.border, borderRadius: 999, paddingHorizontal: 12, paddingVertical: 8 },
+  tabPillText: { ...typography.caption, ...textShadow, color: colors.textPrimary },
+  tabPillTextActive: { color: colors.textOnPrimary, textShadowColor: 'transparent', textShadowRadius: 0 },
   // Negative margin so the tile row can scroll all the way to the card edges
   // instead of stopping short at its padding, with that same padding handed
   // to the content instead. Same negative-margin technique the page itself
@@ -5540,7 +5551,14 @@ const styles = StyleSheet.create({
   },
   // gap 10 (was 8), 2026-08-08 -- see content's own comment.
   feelingTagRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
-  feelingTagChip: { ...PILL },
+  feelingTagChip: {
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 999,
+    paddingHorizontal: 12,
+    paddingVertical: 7,
+    backgroundColor: colors.surfaceMuted,
+  },
   feelingTagText: { ...typography.caption, ...textShadow, color: colors.textPrimary },
   feelingTagTextActive: { color: colors.textOnPrimary,
 
@@ -5656,6 +5674,4 @@ const styles = StyleSheet.create({
   // Dark text: cancel any shadow inherited from a base style it is
   // composed with. See constants/typography.ts.
   pillTextActive: { ...PILL_ON_TEXT },
-  varietyChipActive: { ...PILL_ON },
-  feelingTagChipActive: { ...PILL_ON },
 });

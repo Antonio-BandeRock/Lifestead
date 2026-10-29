@@ -91,8 +91,9 @@ export const BUTTON_SECONDARY_TEXT = {
 //   - PILL_ON, chosen, laid over PILL: the button colour and shadow of
 //     PRIMARY, with PILL_ON_TEXT's dark text on it.
 //   - PILL_SMALL is the same a size down, for a row of many short choices.
-// A pill's colour no longer follows its tab; a pill whose colour carries a
-// meaning of its own (a verdict) keeps it and is listed in
+// A pill's colour no longer follows the tab it sits on; a pill whose colour
+// carries a meaning (a verdict, the tab a note goes to or a card leads to)
+// keeps it and is listed in
 // scripts/audit_pill_style.js with the reason. The same rules as buttons:
 // spread one, add only where it sits, never retype the fill, border, radius
 // or padding, and never colour one inline.
@@ -125,15 +126,17 @@ export const PILL_ON = {
   ...BUTTON_SHADOW,
 } as const;
 
+// Pill words are the size of button words: at caption size they were hard
+// to read (direct report, 2026-10-28).
 export const PILL_TEXT = {
-  ...typography.caption,
+  ...typography.bodyEmphasis,
   color: colors.textPrimary,
   ...textShadow,
 } as const;
 
 // Dark text on the button colour, so no shadow.
 export const PILL_ON_TEXT = {
-  ...typography.caption,
+  ...typography.bodyEmphasis,
   color: colors.textOnButton,
   textShadowColor: 'transparent',
   textShadowRadius: 0,

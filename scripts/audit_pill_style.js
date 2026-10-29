@@ -60,6 +60,17 @@ const EXEMPT = {
   },
   'components/RecipeDetailCard.tsx': { dietTagPill: 'a diet tag, not pressed', dietTagPillText: 'its words' },
   'components/DayTimeline.tsx': { nowPill: 'the now marker on the timeline, not pressed', nowPillText: 'its words' },
+  'app/capture.tsx': { destPill: 'coloured by the tab the note goes to', destPillText: 'its words, in that colour' },
+  'app/reconcile.tsx': { destPill: 'coloured by the tab the note goes to', destPillText: 'its words, in that colour' },
+  'components/SetupCardShelves.tsx': { areaChip: 'tinted with the tab the card gives back to, not pressed', areaChipText: 'its words' },
+  'app/(tabs)/index.tsx': {
+    varietyChip: 'in the colour of Food, where the plants are counted',
+    varietyChipTextPicked: 'its words on that colour',
+    feelingTagChip: 'chosen in the colour of Signals, where the feeling is logged',
+    tabPill: 'Low Stimulation and Make Report in the colour of the tab each leads to',
+    tabPillText: 'its words',
+    tabPillTextActive: 'its words on that colour',
+  },
 };
 
 const hits = [];

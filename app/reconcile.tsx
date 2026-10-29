@@ -88,7 +88,7 @@ import {
 } from '../lib/reconciliation';
 import { PhotoStrip } from '../components/PhotoStrip';
 import { ThumbEndRow } from '../components/ThumbEndRow';
-import { PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { PILL, PILL_TEXT } from '../constants/buttons';
 
 // Same resolution app/capture.tsx makes: a destination wears the colour and
 // the icon of the tab it hands off to, so the pills read as the place before
@@ -373,12 +373,12 @@ export default function ReconcileScreen() {
               return (
                 <TouchableOpacity
                   key={option.key}
-                  style={[styles.pill, active && styles.pillActive]}
+                  style={[styles.destPill, { borderColor: color }, active ? { backgroundColor: color } : null]}
                   onPress={() => void sortNote(note, active ? null : option.key)}
                   onLongPress={() => showInfoAlert(option.label, option.hint)}
                 >
                   <Ionicons name={DESTINATION_ICONS[option.key]} size={14} color={active ? colors.background : color} />
-                  <Text style={[styles.pillText, active && styles.pillTextActive]}>{option.label}</Text>
+                  <Text style={[styles.destPillText, { color: active ? colors.background : color }]}>{option.label}</Text>
                 </TouchableOpacity>
               );
             })}
@@ -548,8 +548,6 @@ const styles = StyleSheet.create({
   movePillText: { ...PILL_TEXT },
   timePill: { ...PILL },
   timePillText: { ...PILL_TEXT },
-  pill: { ...PILL, flexDirection: 'row', alignItems: 'center', gap: 5 },
-  pillText: { ...PILL_TEXT },
   editRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 8 },
   editField: {
     flex: 1,
@@ -563,6 +561,16 @@ const styles = StyleSheet.create({
     ...textShadow,
   },
   footnote: { ...typography.caption, color: colors.textMuted, ...textShadow },
-  pillActive: { ...PILL_ON },
-  pillTextActive: { ...PILL_ON_TEXT },
+  // Each place a note can go keeps the colour of the tab it goes to, so this
+  // pill is not on the shared PILL look (scripts/audit_pill_style.js EXEMPT).
+  destPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    paddingVertical: 7,
+    paddingHorizontal: 12,
+    borderRadius: 999,
+    borderWidth: 1,
+  },
+  destPillText: { ...typography.caption },
 });

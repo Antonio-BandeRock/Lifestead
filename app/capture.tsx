@@ -74,7 +74,7 @@ import { loadSuggestModel } from '../lib/captureSuggestDb';
 import { PlanSentencePanel } from '../components/PlanSentencePanel';
 import { describePlainDate, plainDateToLocalDateTime, readPlainDates } from '../lib/plainDate';
 import { ThumbEndRow } from '../components/ThumbEndRow';
-import { PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { PILL, PILL_TEXT } from '../constants/buttons';
 
 // A destination wears the colour and icon of the tab it hands off to, rather
 // than a palette invented here, so "In the garden" reads as Garden before the
@@ -378,7 +378,7 @@ export default function CaptureScreen() {
               return (
                 <TouchableOpacity
                   key={option.key}
-                  style={[styles.pill, active && styles.pillActive]}
+                  style={[styles.destPill, { borderColor: color }, active ? { backgroundColor: color } : null]}
                   onPress={() => void sortNote(note, active ? null : option.key)}
                   onLongPress={() => showInfoAlert(option.label, option.hint)}
                 >
@@ -387,7 +387,7 @@ export default function CaptureScreen() {
                     size={14}
                     color={active ? colors.background : color}
                   />
-                  <Text style={[styles.pillText, active && styles.pillTextActive]}>{option.label}</Text>
+                  <Text style={[styles.destPillText, { color: active ? colors.background : color }]}>{option.label}</Text>
                 </TouchableOpacity>
               );
             })}
@@ -726,9 +726,17 @@ const styles = StyleSheet.create({
     ...textShadow,
   },
   pillWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 2 },
-  pill: { ...PILL, flexDirection: 'row', alignItems: 'center', gap: 5 },
-  pillText: { ...PILL_TEXT },
   footnote: { ...typography.caption, color: colors.textMuted, ...textShadow },
-  pillActive: { ...PILL_ON },
-  pillTextActive: { ...PILL_ON_TEXT },
+  // Each place a note can go keeps the colour of the tab it goes to, so this
+  // pill is not on the shared PILL look (scripts/audit_pill_style.js EXEMPT).
+  destPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    paddingVertical: 7,
+    paddingHorizontal: 12,
+    borderRadius: 999,
+    borderWidth: 1,
+  },
+  destPillText: { ...typography.caption },
 });
