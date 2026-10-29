@@ -13,7 +13,7 @@
 // always somewhere to begin and a how-to has a card to point at.
 import { Ionicons } from '@expo/vector-icons';
 import { useRef, useState, type ComponentProps } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
 import { colors, hexToRgba } from '../constants/colors';
 import { TAB_ROUTES } from '../constants/tabs';
 import { textShadow, typography } from '../constants/typography';
@@ -43,6 +43,7 @@ import type { ToolMark } from '../lib/toolHowTos';
 import { useWalkMark } from './WalkMark';
 import { useBringToTop } from './BringToTop';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
+import { HorizontalScroll } from './HorizontalScroll';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
@@ -227,7 +228,7 @@ export function SetupCardShelves({ view, records, startPath, go, explain, layout
           <Text style={styles.shelfTitle}>{shelf.def.title}</Text>
           <Text style={styles.shelfCount}>{t('{done} of {total} set up', { done: settled, total })}</Text>
         </View>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
+        <HorizontalScroll showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
           {shelf.cards.map((card) => {
             const markThis = !card.doneOn && !firstOpenMarked;
             if (markThis) firstOpenMarked = true;
@@ -246,7 +247,7 @@ export function SetupCardShelves({ view, records, startPath, go, explain, layout
               />
             );
           })}
-        </ScrollView>
+        </HorizontalScroll>
       </View>
     );
   }

@@ -9,13 +9,14 @@
 import { Image } from 'expo-image';
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { Modal, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Modal, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { PEER_PHOTO_TAP_LINE, peerPhotoAskedLine } from '../lib/peerPhotos';
 import { listPeerDishPhotos, requestPeerPhoto, type PeerDishPhoto } from '../lib/peerPhotosDb';
 import { modalAnimationType } from '../lib/visualPreferences';
 import { useInfoAlert } from './InfoAlert';
+import { HorizontalScroll } from './HorizontalScroll';
 
 type Dish = { id: string; name: string };
 
@@ -71,7 +72,7 @@ export function PeerDishPhotos({
   return (
     <View style={styles.container}>
       <Text style={[styles.heading, { color: tabColor }]}>Photos from {personName}</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.strip}>
+      <HorizontalScroll showsHorizontalScrollIndicator={false} contentContainerStyle={styles.strip}>
         {shown.map(({ dish, photo }) => (
           <TouchableOpacity
             key={dish.id}
@@ -86,7 +87,7 @@ export function PeerDishPhotos({
             </Text>
           </TouchableOpacity>
         ))}
-      </ScrollView>
+      </HorizontalScroll>
       <Text style={styles.tapLine}>{PEER_PHOTO_TAP_LINE}</Text>
 
       <Modal

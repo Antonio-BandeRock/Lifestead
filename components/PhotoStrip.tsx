@@ -22,7 +22,6 @@ import {
   ActivityIndicator,
   Modal,
   Pressable,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -45,6 +44,7 @@ import { openPhotoCamera } from '../lib/photoCamera';
 import { modalAnimationType } from '../lib/visualPreferences';
 import { AppActionSheet } from './AppActionSheet';
 import { useInfoAlert } from './InfoAlert';
+import { HorizontalScroll } from './HorizontalScroll';
 
 type Shown = { item: MediaItem; uri: string | null };
 type Opened = { item: MediaItem; uri: string | null };
@@ -141,7 +141,7 @@ export function PhotoStrip({
     <View style={styles.container}>
       {loaded && shown.length === 0 ? <Text style={styles.emptyText}>{PHOTO_STRIP_EMPTY_LINE}</Text> : null}
       {shown.length > 0 ? (
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.strip}>
+        <HorizontalScroll showsHorizontalScrollIndicator={false} contentContainerStyle={styles.strip}>
           {shown.map((entry) => (
             <TouchableOpacity
               key={entry.item.id}
@@ -159,7 +159,7 @@ export function PhotoStrip({
               )}
             </TouchableOpacity>
           ))}
-        </ScrollView>
+        </HorizontalScroll>
       ) : null}
       {busy ? (
         <ActivityIndicator color={tabColor} style={styles.spinner} />

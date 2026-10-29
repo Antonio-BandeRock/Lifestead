@@ -17,7 +17,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import { useRouter, type Href } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
 import { colors, hexToRgba } from '../constants/colors';
 import { TAB_ROUTES } from '../constants/tabs';
 import { textShadow, typography } from '../constants/typography';
@@ -39,6 +39,7 @@ import { storyDate } from '../lib/yourStory';
 import type { TourPath } from '../lib/yourStoryInterview';
 import { setupCardWidth } from './SetupCardShelves';
 import { useWalkMark } from './WalkMark';
+import { HorizontalScroll } from './HorizontalScroll';
 
 const DONE_COLOR = colors.statusGreenOnSurface;
 // Dark text on a filled button carries no shadow.
@@ -75,7 +76,7 @@ export function TabTutorialCards({ path }: { path: TourPath }) {
   return (
     <View style={styles.wrap}>
       <Text style={styles.caption}>{TUTORIAL_CARD_LINE}</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
+      <HorizontalScroll showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
         {cards.map((card, index) => {
           const done = card.doneOn != null;
           const tint = done ? DONE_COLOR : tabColor;
@@ -151,7 +152,7 @@ export function TabTutorialCards({ path }: { path: TourPath }) {
             </View>
           );
         })}
-      </ScrollView>
+      </HorizontalScroll>
     </View>
   );
 }

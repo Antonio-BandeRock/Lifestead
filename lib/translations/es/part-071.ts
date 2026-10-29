@@ -193,5 +193,7 @@ export const PART: Readonly<Record<string, string>> = {
  "Open the band with the name of Tutorials, at the end of it.": "Abre la banda con el nombre de Tutoriales, al final.",
  "Each card is one lens. Swipe along the row to see the rest. A card you have gone through turns green and moves to the end.": "Cada tarjeta es una vista. Desliza la fila para ver las demás. Una tarjeta que ya recorriste se pone verde y pasa al final.",
  "Tap Start. The tutorial takes you to that lens and goes through it with you on the screen.": "Toca Empezar. El tutorial te lleva a esa vista y la recorre contigo en la pantalla.",
- "A tutorial for what a tab does is right there in its band, so you can learn one lens when you need it.": "El tutorial de lo que hace una pestaña está ahí mismo en su banda, para que aprendas una vista cuando la necesites."
+ "A tutorial for what a tab does is right there in its band, so you can learn one lens when you need it.": "El tutorial de lo que hace una pestaña está ahí mismo en su banda, para que aprendas una vista cuando la necesites.",
+ "Back along the row": "Atrás en la fila",
+ "On along the row": "Adelante en la fila"
 };

@@ -339,6 +339,7 @@ import { useVaultReloadKey } from '../../lib/vaultReads';
 import { useCategoryClosed } from '../../lib/vaultSession';
 import { t } from '../../lib/i18n';
 import { appLocale } from '@/lib/language';
+import { HorizontalScroll } from '../../components/HorizontalScroll';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -3495,9 +3496,8 @@ function PlateSwapScroller({
       {!state && !failed ? <Text style={styles.helperText}>Loading the choices...</Text> : null}
       {state && state.choices.length === 0 ? <Text style={styles.helperText}>Nothing else fits this plate.</Text> : null}
       {state && state.choices.length > 0 ? (
-        <ScrollView
+        <HorizontalScroll
           ref={scrollRef}
-          horizontal
           showsHorizontalScrollIndicator
           snapToInterval={SWAP_CARD_STEP}
           decelerationRate="fast"
@@ -3525,7 +3525,7 @@ function PlateSwapScroller({
               ))}
             </TouchableOpacity>
           ))}
-        </ScrollView>
+        </HorizontalScroll>
       ) : null}
       {state?.notes.map((note) => (
         <Text key={note} style={styles.helperText}>

@@ -12,6 +12,7 @@ import Svg, { Rect, Text as SvgText } from 'react-native-svg';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { describeCell, type CalendarHeat, type HeatLevel, type YearStripSpec } from '../lib/calendarHeat';
+import { HorizontalScroll } from './HorizontalScroll';
 
 const DAY_LABEL_WIDTH = 26;
 const MONTH_ROW_HEIGHT = 14;
@@ -108,15 +109,14 @@ export function CalendarHeatStrip({ heat, spec, color }: { heat: CalendarHeat; s
       <Text style={styles.heading}>{heat.heading}</Text>
       <Text style={styles.caption}>{heat.summary}</Text>
       {width > 0 && drawWidth > width ? (
-        <ScrollView
-          horizontal
+        <HorizontalScroll
           showsHorizontalScrollIndicator={false}
           ref={scrollRef}
           onContentSizeChange={() => scrollRef.current?.scrollToEnd({ animated: false })}
           style={styles.grid}
         >
           {grid}
-        </ScrollView>
+        </HorizontalScroll>
       ) : (
         <View style={styles.grid}>{grid}</View>
       )}

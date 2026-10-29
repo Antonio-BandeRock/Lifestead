@@ -248,6 +248,7 @@ import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
 import { t } from '../../lib/i18n';
 import { appLocale } from '@/lib/language';
 import { BringToTopProvider, useBringToTopHost } from '../../components/BringToTop';
+import { HorizontalScroll } from '../../components/HorizontalScroll';
 
 // What Home shows that the vault can hold: check-ins and flares, the
 // morning readings, the week, pacing and the assessment banner.
@@ -3251,7 +3252,7 @@ export default function HomeScreen() {
           more, so a low number early is normal.
         </Text>
         {coreNutrientRings.length === 0 ? <Text style={[styles.fuelGaugesChooseText, { color: tabColorFor('/insights') }]}>{FUEL_GAUGE_EMPTY_LINE}</Text> : null}
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.ringRow}>
+        <HorizontalScroll showsHorizontalScrollIndicator={false} contentContainerStyle={styles.ringRow}>
           {coreNutrientRings.map((entry, ringIndex) => {
             const ringColors = nutrientRingColors(entry);
             // Null unless a supplement actually contributed to this one,
@@ -3276,7 +3277,7 @@ export default function HomeScreen() {
               </TouchableOpacity>
             );
           })}
-        </ScrollView>
+        </HorizontalScroll>
         {/* Only when one of the rings on screen actually carries a
             supplement stretch. A key for a colour nothing is drawn in
             would be a line to read past every day. */}
@@ -3550,7 +3551,7 @@ export default function HomeScreen() {
       // starts flush with the group's own text and the row already runs out
       // to the screen edge. The row adds a right inset so the last card is
       // not jammed against it.
-      <ScrollView ref={walkMark.ref('home.readCards')} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.flipRow}>
+      <HorizontalScroll ref={walkMark.ref('home.readCards')}  showsHorizontalScrollIndicator={false} contentContainerStyle={styles.flipRow}>
         {dailyReadingCard
           ? (() => {
               const card = dailyReadingCard;
@@ -3587,7 +3588,7 @@ export default function HomeScreen() {
             />
           );
         })}
-      </ScrollView>
+      </HorizontalScroll>
     );
   }
 
@@ -3992,8 +3993,7 @@ export default function HomeScreen() {
             <Text style={styles.logAgainCaption}>
               {`${draftPhotos.length} ${draftPhotos.length === 1 ? 'photo is' : 'photos are'} waiting to be turned into a meal. Tap one when you have a minute.`}
             </Text>
-            <ScrollView
-              horizontal
+            <HorizontalScroll
               showsHorizontalScrollIndicator={false}
               style={styles.logAgainScroll}
               contentContainerStyle={styles.logAgainRow}
@@ -4011,7 +4011,7 @@ export default function HomeScreen() {
                   </Text>
                 </TouchableOpacity>
               ))}
-            </ScrollView>
+            </HorizontalScroll>
           </Fragment>
         ) : null}
       </View>,

@@ -14,6 +14,7 @@ import { textShadow, typography } from '../constants/typography';
 import { EntryScrollAnchor, type EntryScrollTarget } from './EntryScrollAnchor';
 import { useWalkMark } from './WalkMark';
 import type { ToolMark } from '../lib/toolHowTos';
+import { HorizontalScroll } from './HorizontalScroll';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
@@ -83,7 +84,7 @@ export function ReadingCardRow({
             <Text style={[styles.heading, { color: tabColor }]}>{heading}</Text>
           </View>
         ) : null}
-        <ScrollView ref={scroller} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
+        <HorizontalScroll ref={scroller}  showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
           {items.map((item, index) => {
             const open = item.id === openId;
             const mark = index === 0 ? markCard : undefined;
@@ -129,7 +130,7 @@ export function ReadingCardRow({
               </TouchableOpacity>
             );
           })}
-        </ScrollView>
+        </HorizontalScroll>
         {openIndex >= 0 ? (
           <View style={[styles.opened, { borderLeftColor: tabColor }]}>
             <Text style={styles.openedTitle}>{items[openIndex].title}</Text>

@@ -62,6 +62,7 @@ import { describeMovePlan } from '../lib/moveToTomorrow';
 import { applyMovePlan, loadMovePlan } from '../lib/moveToTomorrowDb';
 import { useConfirmSheet } from './ConfirmSheet';
 import { useWalkMark } from './WalkMark';
+import { HorizontalScroll } from './HorizontalScroll';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
@@ -242,9 +243,8 @@ export function DayTimeline({ tabColor, compact = false }: { tabColor: string; c
       ) : null}
 
       <View ref={walkMark.ref('timeline.strip')} collapsable={false} style={styles.stripFrame} onLayout={onViewport}>
-        <ScrollView
+        <HorizontalScroll
           ref={scrollRef}
-          horizontal
           showsHorizontalScrollIndicator={false}
           decelerationRate="normal"
           scrollEventThrottle={16}
@@ -312,7 +312,7 @@ export function DayTimeline({ tabColor, compact = false }: { tabColor: string; c
               </Text>
             </View>
           </View>
-        </ScrollView>
+        </HorizontalScroll>
       </View>
 
       {nothing ? (

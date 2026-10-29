@@ -6,7 +6,7 @@
 // not drawn at all.
 import { useFocusEffect, useRouter, type Href } from 'expo-router';
 import { useCallback, useRef, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import { colors } from '../constants/colors';
 import { TAB_ROUTES } from '../constants/tabs';
 import { textShadow, typography } from '../constants/typography';
@@ -26,6 +26,7 @@ import type { StoryDestination } from '../lib/yourStory';
 import { useInfoAlert } from './InfoAlert';
 import { SetupCard, setupCardWidth } from './SetupCardShelves';
 import { makeTabBandStyles } from './TabBand';
+import { HorizontalScroll } from './HorizontalScroll';
 
 type Props = {
   tabPath: LensTabPath;
@@ -94,7 +95,7 @@ export function LensFeedersRow({ tabPath, lensKey, tabColor }: Props) {
         <Text style={styles.heading}>{FEEDS_THIS_HEADING}</Text>
         <Text style={styles.caption}>{caption}</Text>
       </View>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
+      <HorizontalScroll showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
         {feeders.cards.map((card, index) => (
           <SetupCard
             key={card.def.key}
@@ -110,7 +111,7 @@ export function LensFeedersRow({ tabPath, lensKey, tabColor }: Props) {
             onNotForMe={() => void notForMe(card.def.key, card.def.title)}
           />
         ))}
-      </ScrollView>
+      </HorizontalScroll>
     </View>
   );
 }

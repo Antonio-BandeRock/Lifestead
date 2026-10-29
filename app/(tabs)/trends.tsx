@@ -177,6 +177,7 @@ import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
 import { useListedClosed } from '../../lib/vaultSession';
 import { t } from '../../lib/i18n';
+import { HorizontalScroll } from '../../components/HorizontalScroll';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -1876,8 +1877,7 @@ export default function TrendsScreen() {
 
             {lens === 'squares' ? null : showsRangePicker ? (
               <>
-                <ScrollView
-                  horizontal
+                <HorizontalScroll
                   showsHorizontalScrollIndicator={false}
                   contentContainerStyle={styles.nutrientPillRow}
                 >
@@ -1904,7 +1904,7 @@ export default function TrendsScreen() {
                   >
                     <Text style={[styles.pillText, dateRangeSelection.kind === 'custom' && styles.pillTextActive]}>Custom</Text>
                   </TouchableOpacity>
-                </ScrollView>
+                </HorizontalScroll>
 
                 {showCustomPicker ? (
                   <View style={band.box}>
@@ -2073,8 +2073,7 @@ export default function TrendsScreen() {
                     </Text>
                   </TabBand>
                 ) : null}
-                <ScrollView
-                  horizontal
+                <HorizontalScroll
                   showsHorizontalScrollIndicator={false}
                   contentContainerStyle={styles.nutrientPillRow}
                 >
@@ -2090,7 +2089,7 @@ export default function TrendsScreen() {
                       </Text>
                     </TouchableOpacity>
                   ))}
-                </ScrollView>
+                </HorizontalScroll>
 
                 {loading ? (
                   <View style={band.boxMuted}>

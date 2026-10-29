@@ -27,7 +27,7 @@
 // where it does.
 import { Ionicons } from '@expo/vector-icons';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { AppState, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
+import { AppState, Pressable, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { KEYBOARD_HEIGHT } from '../constants/appKeyboard';
 import { colors } from '../constants/colors';
@@ -69,6 +69,7 @@ import { PlainTextZone } from './EditableText';
 import { wording } from '../lib/playfulCopy';
 import { useKeyboardLift } from './KeyboardLift';
 import { ThumbRow } from './ThumbRow';
+import { HorizontalScroll } from './HorizontalScroll';
 
 type Open = {
   tab: string | null;
@@ -245,7 +246,7 @@ export function TellClaudeHost() {
               </>
             ) : (
               <>
-                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.pillRow}>
+                <HorizontalScroll showsHorizontalScrollIndicator={false} contentContainerStyle={styles.pillRow}>
                   {DEV_NOTE_KINDS.map((option) => (
                     <TouchableOpacity
                       key={option}
@@ -258,7 +259,7 @@ export function TellClaudeHost() {
                       </Text>
                     </TouchableOpacity>
                   ))}
-                </ScrollView>
+                </HorizontalScroll>
                 <Text style={styles.caption}>{DEV_NOTE_CAPTIONS[kind]}</Text>
                 <NotesInput
                   style={styles.input}

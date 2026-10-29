@@ -14,7 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { typography } from '../constants/typography';
 import { useBandFolds } from '../hooks/useBandFolds';
@@ -41,6 +41,7 @@ import {
 } from '../lib/symptomPhotos';
 import { PopoverSelect } from './PopoverSelect';
 import { TabBand } from './TabBand';
+import { HorizontalScroll } from './HorizontalScroll';
 
 const WORDS: Words = {
   tag: (code) => getCheckinTagDefinition(code)?.label ?? code,
@@ -228,7 +229,7 @@ export function SymptomPhotosOverTime({ tabColor }: { tabColor: string }) {
             {days.map((day) => (
               <View key={day.day} style={styles.day}>
                 <Text style={styles.dayLabel}>{day.label}</Text>
-                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.thumbRow}>
+                <HorizontalScroll showsHorizontalScrollIndicator={false} contentContainerStyle={styles.thumbRow}>
                   {day.photos.map(({ photo }) => (
                     <Thumb
                       key={photo.id}
@@ -239,7 +240,7 @@ export function SymptomPhotosOverTime({ tabColor }: { tabColor: string }) {
                       onPress={() => setOpenId(photo.id)}
                     />
                   ))}
-                </ScrollView>
+                </HorizontalScroll>
               </View>
             ))}
             <Text style={[styles.caption, styles.muted]}>{SYMPTOM_PHOTOS_PRIVATE}</Text>
