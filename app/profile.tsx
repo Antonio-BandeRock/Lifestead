@@ -261,11 +261,13 @@ import {
   setLowStimulation,
   setVisualPreferences,
   SHARED_BACKGROUND_SCOPE_KEY,
+  SIMPLE_VIEW_SECTIONS,
   type BackgroundStyle,
   type GenericPalette,
   type TabHubIconChoice,
 } from '../lib/visualPreferences';
 import { groupHomeSectionsForDisplay, homeGroupIdOf } from '../lib/homeSections';
+import { sortByLabel } from '../lib/choiceOrder';
 import { PICTURE_TABS } from '../lib/progressScene';
 import { homeGroupIdentity } from '../constants/homeGroups';
 import { useWalkMark } from '../components/WalkMark';
@@ -5409,8 +5411,8 @@ export default function ProfileScreen() {
         {!collapsedSections.has('simple-view') ? (
           <View style={styles.cardBody}>
             <Text style={styles.helpText}>
-              Home shows today&apos;s greeting, the one next thing, Routines, the To Do List, Sort It Out and anything
-              waiting for an answer, and nothing else. Every tab is still in the menu, and the cards you had switched on come back when this goes off.
+              Home shows today&apos;s greeting, the one next thing, Routines, the To Do List, Sort It Out, anything
+              waiting for an answer and the cards you keep below, and nothing else. Every tab is still in the menu, and the cards you had switched on come back when this goes off.
             </Text>
             <View style={styles.pillRow}>
               {[false, true].map((value) => {
@@ -5424,6 +5426,38 @@ export default function ProfileScreen() {
                     }}
                   >
                     <Text style={[styles.pillText, active && styles.pillTextActive]}>{value ? 'On' : 'Off'}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+            {/* 2026-10-28: "In Simple View, how do we have the Home screen
+                allow the viewing of something like a grocery list?" Any
+                other card can be kept in Simple View too; the Grocery List
+                starts kept (simpleViewExtras in lib/visualPreferences.ts). */}
+            <Text style={styles.helpText}>
+              Also keep these cards in Simple View. A card kept here still follows its switch under Home Screen.
+            </Text>
+            <View style={styles.pillRow}>
+              {sortByLabel(
+                ALL_HOME_SECTION_KEYS.filter((key) => !SIMPLE_VIEW_SECTIONS.has(key) && !HOME_SECTIONS_ALWAYS_SHOWN.has(key)).map(
+                  (key) => ({ key, label: HOME_SECTION_LABELS[key] }),
+                ),
+              ).map(({ key, label }) => {
+                const extras = visualPrefs.simpleViewExtras ?? [];
+                const kept = extras.includes(key);
+                return (
+                  <TouchableOpacity
+                    key={key}
+                    style={[styles.pill, kept && styles.pillActive]}
+                    onPress={() => {
+                      void setVisualPreferences({
+                        simpleViewExtras: kept ? extras.filter((other) => other !== key) : [...extras, key],
+                      });
+                    }}
+                    accessibilityRole="button"
+                    accessibilityState={{ selected: kept }}
+                  >
+                    <Text style={[styles.pillText, kept && styles.pillTextActive]}>{label}</Text>
                   </TouchableOpacity>
                 );
               })}

@@ -36,6 +36,7 @@ import type { DigestCategoryKey } from './digest';
 import { getDatabase } from './db';
 import { followNewMenuOrder, groupHomeSectionKeysByTab } from './homeSections';
 import { setPlayfulWordingEnabled } from './playfulCopy';
+import { DEFAULT_TO_DO_LOOK_AHEAD, readToDoLookAhead, type ToDoLookAhead } from './routines';
 import {
   DEFAULT_LETTER_SPACING,
   DEFAULT_LINE_SPACING,
@@ -792,6 +793,14 @@ export type VisualPreferences = {
   // was the moment it goes off. Offered in the Your Guide questions and
   // switched in Profile; read through isShownOnHome, never directly.
   simpleView: boolean;
+  // 2026-10-28, asked as "In Simple View, how do we have the Home screen
+  // allow the viewing of something like a grocery list?" Cards the person
+  // keeps in Simple View beside SIMPLE_VIEW_SECTIONS, chosen in Profile >
+  // Simple View. The Grocery List starts in it, since that was the card
+  // asked for.
+  simpleViewExtras: HomeSectionKey[];
+  // How far ahead Home's To Do List looks (toDoListView in lib/routines.ts).
+  toDoLookAhead: ToDoLookAhead;
 };
 
 // Which background a given scope actually draws, once low stimulation has
@@ -878,7 +887,7 @@ export const SIMPLE_VIEW_SECTIONS: ReadonlySet<HomeSectionKey> = new Set<HomeSec
 // switch. Profile's switches still read isHomeSectionVisible, so turning
 // Simple View off finds every choice where it was left.
 export function isShownOnHome(prefs: VisualPreferences, key: HomeSectionKey): boolean {
-  if (prefs.simpleView && !SIMPLE_VIEW_SECTIONS.has(key)) return false;
+  if (prefs.simpleView && !SIMPLE_VIEW_SECTIONS.has(key) && !(prefs.simpleViewExtras ?? []).includes(key)) return false;
   return isHomeSectionVisible(prefs, key);
 }
 
@@ -1000,6 +1009,8 @@ const DEFAULT_VISUAL_PREFERENCES: VisualPreferences = {
   trendsCycleShading: false,
   playfulWording: true,
   simpleView: false,
+  simpleViewExtras: ['groceryList'],
+  toDoLookAhead: DEFAULT_TO_DO_LOOK_AHEAD,
 };
 
 const VISUAL_PREFERENCES_KEY = 'visual_preferences';
@@ -1316,6 +1327,10 @@ export async function getVisualPreferences(): Promise<VisualPreferences> {
               ? (parsed.homeSectionOrder ?? [])
               : followNewMenuOrder(parsed.homeSectionOrder ?? []),
           homeOrderFollowsMenu1070: true,
+          simpleViewExtras: Array.isArray(parsed.simpleViewExtras)
+            ? parsed.simpleViewExtras.filter((key) => ALL_HOME_SECTION_KEYS.includes(key))
+            : DEFAULT_VISUAL_PREFERENCES.simpleViewExtras,
+          toDoLookAhead: readToDoLookAhead(parsed.toDoLookAhead),
         };
       } catch {
         // A corrupted/unparseable blob falls back to defaults rather than

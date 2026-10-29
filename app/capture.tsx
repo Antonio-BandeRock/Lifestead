@@ -59,6 +59,7 @@ import {
   updateCaptureNoteText,
 } from '../lib/captureNotesDb';
 import { useWalkMark } from '../components/WalkMark';
+import { PhotoStrip } from '../components/PhotoStrip';
 import { RecordPhotos } from '../components/RecordPhotos';
 import { PHOTO_CAPTURE_TEXT } from '../lib/captureNotes';
 import { openPhotoCamera } from '../lib/photoCamera';
@@ -290,7 +291,13 @@ export default function CaptureScreen() {
           ) : null}
           <Text style={styles.noteMeta}>{describeCaptureAge(note.createdAt, now)}</Text>
         </View>
-        <RecordPhotos ownerKind="capture_note" ownerId={note.id} tabColor={colors.accent} title={note.text} />
+        {/* A photo note shows its photo straight away, since the photo is
+            the note; any other note keeps its photos behind the opener. */}
+        {note.source === 'photo' ? (
+          <PhotoStrip ownerKind="capture_note" ownerId={note.id} tabColor={colors.accent} title={note.text} />
+        ) : (
+          <RecordPhotos ownerKind="capture_note" ownerId={note.id} tabColor={colors.accent} title={note.text} />
+        )}
         {/* C8: where it probably goes, only when the evidence is clear, with
             the reason, and filed only when tapped. */}
         {note.status === 'waiting' && !note.destination && suggestModel

@@ -7,20 +7,17 @@
 // card says Your Story is up to date and offers Capture.
 //
 // P1 (1.0.68.5): on days one, two and seven of somebody's use, a first-week
-// line (lib/firstWeek.ts) comes after the welcome-back line and before the
-// Your Story item, and Not now sets it aside for the visit.
+// line (lib/firstWeek.ts) came after the welcome-back line.
+//
+// 2026-10-28: both of those moved into the greeting at the top of Home
+// (components/GreetingWelcome.tsx), so they reach Simple View too, and this
+// card keeps to the next thing to set up in Your Guide.
 import { Ionicons } from '@expo/vector-icons';
-import { useFocusEffect } from '@react-navigation/native';
 import { useRouter, type Href } from 'expo-router';
-import { useCallback, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
-import { firstWeekDay, firstWeekLine, type FirstWeekLine } from '../lib/firstWeek';
-import { getFirstDay } from '../lib/firstWeekDb';
 import { useWalkMark } from './WalkMark';
-import { welcomeBackFor, type WelcomeBack } from '../lib/welcomeBack';
-import { latestRecordMs } from '../lib/welcomeBackDb';
 import type { StoryDestination, YourStoryView } from '../lib/yourStory';
 
 type Props = {
@@ -33,41 +30,11 @@ type Props = {
 export function NextThing({ view, tabColor, onGo }: Props) {
   const walkMark = useWalkMark();
   const router = useRouter();
-  const [welcome, setWelcome] = useState<WelcomeBack | null>(null);
-  const [firstWeek, setFirstWeek] = useState<FirstWeekLine | null>(null);
-  const [notNow, setNotNow] = useState(false);
-
-  useFocusEffect(
-    useCallback(() => {
-      let live = true;
-      void latestRecordMs().then((latest) => {
-        if (live) setWelcome(welcomeBackFor(latest, Date.now()));
-      });
-      void getFirstDay()
-        .then((firstDay) => {
-          if (live) setFirstWeek(firstWeekLine(firstWeekDay(firstDay, Date.now())));
-        })
-        .catch(() => {});
-      return () => {
-        live = false;
-      };
-    }, []),
-  );
 
   let sentence: string;
   let action: string;
   let go: () => void;
-  const passing = !notNow ? (welcome ?? firstWeek) : null;
-  if (welcome && !notNow) {
-    sentence = welcome.sentence;
-    action = welcome.action;
-    go = () => router.push('/capture' as Href);
-  } else if (firstWeek && !notNow) {
-    const line = firstWeek;
-    sentence = line.sentence;
-    action = line.action;
-    go = () => router.push({ pathname: line.pathname, params: line.params } as Href);
-  } else if (view?.nextItem && view.nextItem.def.kind !== 'waiting') {
+  if (view?.nextItem && view.nextItem.def.kind !== 'waiting') {
     const item = view.nextItem;
     sentence = item.sentence;
     action = 'Take me there';
@@ -86,11 +53,6 @@ export function NextThing({ view, tabColor, onGo }: Props) {
           <Ionicons name="arrow-forward-circle-outline" size={18} color={tabColor} />
           <Text style={[styles.buttonText, { color: tabColor }]}>{action}</Text>
         </TouchableOpacity>
-        {passing ? (
-          <TouchableOpacity ref={walkMark.ref('home.nextNotNow')} onPress={() => setNotNow(true)} hitSlop={8}>
-            <Text style={styles.quiet}>Not now</Text>
-          </TouchableOpacity>
-        ) : null}
       </View>
     </View>
   );
@@ -111,5 +73,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
   },
   buttonText: { ...typography.bodyEmphasis, textShadowColor: 'transparent', textShadowRadius: 0 },
-  quiet: { ...typography.caption, ...textShadow, color: colors.textSecondary },
 });

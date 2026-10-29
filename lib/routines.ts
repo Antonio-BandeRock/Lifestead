@@ -919,6 +919,83 @@ export function nextReminderTimes(routine: Routine, now: Date, withinDays: numbe
   return times;
 }
 
+// ------------------------------------------- the To Do List on Home
+//
+// 2026-10-28, direct request: "make sure they are always displayed in the
+// order of when they need to be done, and only are displayed when their time
+// is approaching, maybe have the choice of 1 or 2 or more hours before so
+// they can sort of look ahead at what is coming up so they can get
+// themselves use to the schedule of their day."
+//
+// So Home's list is the day in clock order. A thing still waiting from
+// earlier is first, oldest first, and stays until it is checked off, since a
+// missed pill does not stop mattering because its hour went by. After it
+// comes whatever is due within the look-ahead, soonest first. Anything due
+// later than that is left off and counted, with the next of them named, so
+// nobody wonders whether the rest went missing. Life > To Do List still
+// shows everything, since that is where things are set up and changed.
+
+export type ToDoLookAhead = '1h' | '2h' | '4h' | 'today';
+
+export const TO_DO_LOOK_AHEADS: { key: ToDoLookAhead; label: string }[] = [
+  { key: '1h', label: '1 hour' },
+  { key: '2h', label: '2 hours' },
+  { key: '4h', label: '4 hours' },
+  { key: 'today', label: 'Rest of today' },
+];
+
+export const DEFAULT_TO_DO_LOOK_AHEAD: ToDoLookAhead = '2h';
+
+export function readToDoLookAhead(value: unknown): ToDoLookAhead {
+  return TO_DO_LOOK_AHEADS.some((entry) => entry.key === value) ? (value as ToDoLookAhead) : DEFAULT_TO_DO_LOOK_AHEAD;
+}
+
+/** The last moment the list looks ahead to. Rest of today reaches midnight,
+ *  and an hour window running past midnight reaches into tomorrow, because
+ *  a 12:30am pill is as close at 11pm as a 1pm one is at noon. */
+export function lookAheadUntil(lookAhead: ToDoLookAhead, now: Date): Date {
+  if (lookAhead === 'today') return new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0);
+  const hours = lookAhead === '1h' ? 1 : lookAhead === '4h' ? 4 : 2;
+  return new Date(now.getTime() + hours * 3600000);
+}
+
+export type ToDoListView = {
+  /** Waiting first, oldest first, then coming up, soonest first. */
+  shown: CheckStanding[];
+  /** How many active things are due after the look-ahead. */
+  laterCount: number;
+  /** The soonest of those, to name. */
+  nextLater: CheckStanding | null;
+};
+
+export function toDoListView(checks: DoneCheck[], now: Date, lookAhead: ToDoLookAhead): ToDoListView {
+  const until = lookAheadUntil(lookAhead, now).getTime();
+  const waiting: CheckStanding[] = [];
+  const coming: CheckStanding[] = [];
+  const later: CheckStanding[] = [];
+  for (const check of checks) {
+    if (!check.active) continue;
+    const standing = checkStanding(check, now);
+    if (standing.done === false) waiting.push(standing);
+    else if (standing.nextDue && standing.nextDue.getTime() <= until) coming.push(standing);
+    else if (standing.nextDue) later.push(standing);
+  }
+  const at = (date: Date | null) => (date ? date.getTime() : Number.POSITIVE_INFINITY);
+  const byName = (a: CheckStanding, b: CheckStanding) => a.check.name.localeCompare(b.check.name);
+  waiting.sort((a, b) => at(a.waitingSince) - at(b.waitingSince) || byName(a, b));
+  coming.sort((a, b) => at(a.nextDue) - at(b.nextDue) || byName(a, b));
+  later.sort((a, b) => at(a.nextDue) - at(b.nextDue) || byName(a, b));
+  return { shown: [...waiting, ...coming], laterCount: later.length, nextLater: later[0] ?? null };
+}
+
+/** The line under the list naming what was left off for later. */
+export function describeLaterOnList(view: ToDoListView, now: Date): string | null {
+  if (view.laterCount === 0 || !view.nextLater?.nextDue) return null;
+  const next = `${view.nextLater.check.name}, ${describeDue(view.nextLater.nextDue, now)}`;
+  if (view.laterCount === 1) return `Coming later: ${next}.`;
+  return `${view.laterCount} more coming later. The next is ${next}.`;
+}
+
 export type ChecksSummary = { total: number; waiting: number; done: number; notYet: number };
 
 export function summarizeChecks(checks: DoneCheck[], now: Date): ChecksSummary {

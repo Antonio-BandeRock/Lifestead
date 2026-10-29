@@ -211,7 +211,8 @@ export type ToolMark =
   | 'home.captureSay'
   | 'home.captureSort'
   | 'home.nextGo'
-  | 'home.nextNotNow'
+  | 'home.welcomeGo'
+  | 'home.welcomeNotNow'
   | 'home.waitingOpen'
   | 'home.waitingAnswer'
   | 'home.waitingKinds'
@@ -239,6 +240,7 @@ export type ToolMark =
   | 'home.routineWayIn'
   | 'home.check'
   | 'home.checkWayIn'
+  | 'home.checkLookAhead'
   | 'home.workoutStart'
   | 'home.workoutDidIt'
   | 'home.ring'
@@ -2170,7 +2172,8 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Switch Home to Simple View and back',
       steps: [
         { say: 'Tap the quick-access tab at the bottom edge of the screen on your thumb side.' },
-        { say: 'Tap Simple View. Home keeps to your greeting, Routines, the To Do List, Sort It Out and anything waiting for an answer.' },
+        { say: 'Tap Simple View. Home keeps to your greeting, Routines, the To Do List, Sort It Out, anything waiting for an answer and the Grocery List.' },
+        { say: 'To keep another card, such as your appointments, open Profile, then Simple View, and tap the card under Also keep these cards in Simple View.' },
         { say: 'To bring everything back, open the same menu and tap Normal View.' },
       ],
       forYou: 'Nothing you set up is lost while Simple View is on. Every tab is still in the menu.',
@@ -2204,10 +2207,11 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     },
     {
       key: 'nextThingLater',
-      title: 'Put the one next thing aside for now',
+      title: 'Answer or set aside the welcome line',
       steps: [
-        { say: 'Open the band with the name of One Next Thing.', mark: 'homeBand.nextThing', stay: true },
-        { say: 'Tap Not now.', mark: 'home.nextNotNow' },
+        { say: 'Open the band with the name of Today, at the top of Home.', mark: 'homeBand.today', stay: true },
+        { say: 'After a few days away, and on your first days with the app, a line under the date says what is worth doing first. Tap the button under it to go there.', mark: 'home.welcomeGo', stay: true },
+        { say: 'Or tap Not now.', mark: 'home.welcomeNotNow' },
       ],
       forYou: 'It steps aside while you are here, and nothing is counted against you for it.',
     },
@@ -2426,6 +2430,15 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Read the line under each one for whether it is checked off. Tap one to open it on Life.', mark: 'home.check' },
       ],
       forYou: 'The answer to "did I already?" is on Home, so you do not have to guess.',
+    },
+    {
+      key: 'doneCheckAhead',
+      title: 'Choose how far ahead the To Do List looks',
+      steps: [
+        { say: 'Open the band with the name of To Do List, near the top of Home.', mark: 'homeBand.doneChecks', stay: true },
+        { say: 'Tap 1 hour, 2 hours, 4 hours or Rest of today. Anything still waiting from earlier stays at the top, then what is due in that time, soonest first.', mark: 'home.checkLookAhead' },
+      ],
+      forYou: 'You see what is coming up next without the whole day at once, and the line at the end names what comes after.',
     },
     {
       key: 'startWorkout',

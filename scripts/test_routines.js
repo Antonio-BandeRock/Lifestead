@@ -76,6 +76,10 @@ const {
   toggleReminderDay,
   suggestedOccasion,
   summarizeChecks,
+  toDoListView,
+  describeLaterOnList,
+  lookAheadUntil,
+  readToDoLookAhead,
 } = load('lib/routines.ts');
 
 let failures = 0;
@@ -615,6 +619,36 @@ check('nothing to say, nothing to schedule', nextReminderTimes(makeRoutine({}), 
   check('starting this Friday', times[0].getTime(), new Date(2026, 8, 18, 9, 0, 0, 0).getTime());
   check('and again the Friday after', times[1].getTime(), new Date(2026, 8, 25, 9, 0, 0, 0).getTime());
 }
+// ------------------------------------------------------------ the To Do List on Home
+{
+  // Wednesday 9:30am. The 8am pill is waiting, the 10am and 11am things are
+  // coming, the 3pm one is later, and one switched off never shows. Each was
+  // checked off yesterday, or yesterday's time would still be waiting.
+  const pill = makeCheck({ id: 'pill', name: 'Morning pill', times: ['08:00'] });
+  const water = makeCheck({ id: 'water', name: 'Water the plants', times: ['11:00'], lastDueAt: '2026-09-15T11:00' });
+  const dog = makeCheck({ id: 'dog', name: 'Walk the dog', times: ['10:00'], lastDueAt: '2026-09-15T10:00' });
+  const mail = makeCheck({ id: 'mail', name: 'Check the mail', times: ['15:00'], lastDueAt: '2026-09-15T15:00' });
+  const off = makeCheck({ id: 'off', name: 'Old thing', times: ['10:00'], active: false });
+  const view2 = toDoListView([mail, water, off, dog, pill], wednesday, '2h');
+  check('two hours: the waiting one first, then soonest first', view2.shown.map((s) => s.check.id).join(','), 'pill,dog,water');
+  check('two hours: one left for later', view2.laterCount, 1);
+  check('and it is named', describeLaterOnList(view2, wednesday), 'Coming later: Check the mail, today at 3pm.');
+  const view1 = toDoListView([mail, water, off, dog, pill], wednesday, '1h');
+  check('one hour leaves the 11am thing for later', view1.shown.map((s) => s.check.id).join(','), 'pill,dog');
+  check('two coming later, the next named', describeLaterOnList(view1, wednesday), '2 more coming later. The next is Water the plants, today at 11am.');
+  const viewDay = toDoListView([mail, water, off, dog, pill], wednesday, 'today');
+  check('rest of today shows all four', viewDay.shown.length, 4);
+  check('and nothing later', describeLaterOnList(viewDay, wednesday), null);
+  const donePill = makeCheck({ id: 'pill', name: 'Morning pill', times: ['08:00'], lastDueAt: '2026-09-16T08:00' });
+  const doneView = toDoListView([donePill], wednesday, '2h');
+  check('a thing checked off with its next time tomorrow leaves the list', doneView.shown.length, 0);
+  check('rest of today ends at midnight', lookAheadUntil('today', wednesday).getTime(), new Date(2026, 8, 17, 0, 0, 0, 0).getTime());
+  const late = new Date(2026, 8, 16, 23, 0, 0);
+  const night = makeCheck({ id: 'night', name: 'Night pill', times: ['00:30'], lastDueAt: '2026-09-16T00:30' });
+  check('two hours at 11pm reaches a 12:30am time', toDoListView([night], late, '2h').shown.length, 1);
+  check('an unknown look-ahead reads as two hours', readToDoLookAhead('9h'), '2h');
+}
+
 // ------------------------------------------------------------ nothing goes unnamed
 
 check('every occasion is listed', ALL_ROUTINE_OCCASIONS.length, 4);

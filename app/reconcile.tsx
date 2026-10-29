@@ -86,6 +86,7 @@ import {
   type ReconcileKind,
   type ReconcileOutcome,
 } from '../lib/reconciliation';
+import { PhotoStrip } from '../components/PhotoStrip';
 import { ThumbEndRow } from '../components/ThumbEndRow';
 
 // Same resolution app/capture.tsx makes: a destination wears the colour and
@@ -338,11 +339,18 @@ export default function ReconcileScreen() {
         )}
         <View style={styles.itemMetaRow}>
           {note.source === 'spoken' ? <Ionicons name="mic-outline" size={13} color={colors.textMuted} /> : null}
+          {note.source === 'photo' ? <Ionicons name="camera-outline" size={13} color={colors.textMuted} /> : null}
           <Text style={styles.itemMeta}>{describeCaptureAge(note.createdAt, now)}</Text>
           {destination ? (
             <Text style={[styles.itemMeta, { color: destinationColor(destination) }]}>· {destination.label}</Text>
           ) : null}
         </View>
+        {/* A photo note is its photo: its words are only "A photo" until it
+            is named, so without the picture there was nothing to decide
+            where it goes or whether it is dealt with (2026-10-28). */}
+        {note.source === 'photo' ? (
+          <PhotoStrip ownerKind="capture_note" ownerId={note.id} tabColor={colors.accent} title={note.text} />
+        ) : null}
         <View style={styles.pillWrap}>
           <TouchableOpacity style={styles.movePill} onPress={() => toggleRow(note.id, 'where')}>
             <Ionicons name="file-tray-outline" size={14} color={colors.accent} />

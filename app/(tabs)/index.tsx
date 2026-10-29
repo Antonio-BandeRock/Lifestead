@@ -170,16 +170,19 @@ import { getTomorrowSlots, logPackedMeal, skipPackedMeal, undoPackedMeal } from 
 import { addedToMealSentence, homeChipCaption, type PlantNotLately } from '../../lib/mealVariety';
 import { appendPlantToMeal, getHomeVariety, type HomeVariety } from '../../lib/mealVarietyDb';
 import { PackPicker } from '../../components/PackPicker';
+import { GreetingWelcome } from '../../components/GreetingWelcome';
 import { offerGardenUse } from '../../lib/gardenPlateOffer';
 import type { GardenYieldHomeSummary } from '../../lib/harvestYield';
 import { getGardenYieldHomeSummary } from '../../lib/harvestYieldDb';
 import { describeReconcileQueue, lookbackDateString } from '../../lib/reconciliation';
 import {
-  checkStanding,
   describeChecksSummary,
+  describeLaterOnList,
   describeRoutineStanding,
   orderRoutinesForNow,
   summarizeChecks,
+  TO_DO_LOOK_AHEADS,
+  toDoListView,
   type CustomOccasion,
   type DoneCheck,
   type Routine,
@@ -2575,6 +2578,9 @@ export default function HomeScreen() {
         </Text>
         <Text style={styles.affirmationText}>{pickAffirmation()}</Text>
         <Text style={styles.dateText}>{todayLabel}</Text>
+        {/* The welcome-back and first-week lines, here since 2026-10-28 so
+            Simple View has them too. Most days this draws nothing. */}
+        <GreetingWelcome tabColor={colors.primary} />
 
         {isHomeSectionVisible(visualPrefs, 'weather') ? (
           <View style={styles.skyGrid}>
@@ -4392,13 +4398,42 @@ export default function HomeScreen() {
     const now = new Date();
     const checks = data?.doneChecks ?? [];
     const summaryLine = describeChecksSummary(summarizeChecks(checks, now));
+    // In clock order, and only what is waiting or due within the look-ahead
+    // (toDoListView in lib/routines.ts, 2026-10-28). The rest is counted
+    // under the list with the next of it named.
+    const lookAhead = visualPrefs.toDoLookAhead;
+    const view = toDoListView(checks, now, lookAhead);
+    const laterLine = describeLaterOnList(view, now);
     return renderBand(
       'doneChecks',
       'To Do List',
       <View style={styles.bandBody}>
         {summaryLine ? <Text style={styles.bandCaption}>{summaryLine}</Text> : null}
-        {checks.map((check, checkIndex) => {
-          const standing = checkStanding(check, now);
+        {checks.length > 0 ? (
+          <View style={styles.pillRow} ref={walkMark.ref('home.checkLookAhead')}>
+            {TO_DO_LOOK_AHEADS.map((entry) => {
+              const active = lookAhead === entry.key;
+              return (
+                <TouchableOpacity
+                  key={entry.key}
+                  style={[styles.pill, active && styles.pillActive]}
+                  onPress={() => void setVisualPreferences({ toDoLookAhead: entry.key })}
+                  accessibilityRole="button"
+                  accessibilityState={{ selected: active }}
+                >
+                  <Text style={[styles.pillText, active && styles.pillTextActive]}>{entry.label}</Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        ) : null}
+        {checks.length > 0 && view.shown.length === 0 ? (
+          <Text style={styles.bandCaption}>
+            {lookAhead === 'today' ? 'Nothing more is due today.' : 'Nothing is due in that time.'}
+          </Text>
+        ) : null}
+        {view.shown.map((standing, checkIndex) => {
+          const check = standing.check;
           return (
             <TouchableOpacity
               key={check.id}
@@ -4424,6 +4459,7 @@ export default function HomeScreen() {
             </TouchableOpacity>
           );
         })}
+        {laterLine ? <Text style={styles.bandCaption}>{laterLine}</Text> : null}
         {renderBandWayIn(
           'didIDoIt',
           checks.length === 0 ? 'Add the first thing to do' : 'Add or change something to do',
