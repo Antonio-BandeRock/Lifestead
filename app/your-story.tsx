@@ -100,7 +100,7 @@ export default function YourStoryScreen() {
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.background },
   content: { gap: HOME_BAND_ACCENT_WIDTH },
-  leadBox: { ...homeBandStyle, ...homeBandNoHairlines, borderColor: colors.primary, padding: HOME_BAND_CONTENT_PADDING, gap: 6 },
+  leadBox: { ...homeBandStyle, ...homeBandNoHairlines, borderColor: colors.homeNoTab, padding: HOME_BAND_CONTENT_PADDING, gap: 6 },
   heading: { ...typography.sectionTitle, color: colors.textPrimary, ...textShadow },
   lead: { ...typography.body, color: colors.textSecondary, ...textShadow },
 });

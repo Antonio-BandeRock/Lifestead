@@ -79,9 +79,9 @@ import { PILL, PILL_TEXT } from '../constants/buttons';
 // A destination wears the colour and icon of the tab it hands off to, rather
 // than a palette invented here, so "In the garden" reads as Garden before the
 // word is read at all. A thought kept as a thought belongs to no tab and gets
-// the app's own primary.
+// pearl, colors.homeNoTab, like the Home bands that belong to no tab.
 function destinationColor(destination: CaptureDestination): string {
-  if (!destination.tabPath) return colors.primary;
+  if (!destination.tabPath) return colors.homeNoTab;
   return TAB_ROUTES.find((route) => route.path === destination.tabPath)?.color ?? colors.primary;
 }
 

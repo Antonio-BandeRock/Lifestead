@@ -94,7 +94,7 @@ import { PILL, PILL_TEXT } from '../constants/buttons';
 // the icon of the tab it hands off to, so the pills read as the place before
 // the word is read at all.
 function destinationColor(destination: CaptureDestination): string {
-  if (!destination.tabPath) return colors.primary;
+  if (!destination.tabPath) return colors.homeNoTab;
   return TAB_ROUTES.find((route) => route.path === destination.tabPath)?.color ?? colors.primary;
 }
 

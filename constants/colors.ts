@@ -564,6 +564,15 @@ export const colors = {
   // ~3.3:1 (Schedules, blue is still the hardest hue to keep light enough)
   // up to ~5.3:1 (Food, nÃ©e Meals).
   tabHome: '#E2D19C',
+  // 2026-10-29. The Home bands that belong to no tab (Your Guide, One Next
+  // Thing, Sort It Out, Waiting for an Answer, the shared folder nudge)
+  // used to wear primary, which means tap this and nothing else. Pearl, a
+  // warm off-white kept apart from Reports' grey, is their identity now,
+  // and primary stays on what is pressed inside them.
+  homeNoTab: '#E6E2DA',
+  // Reserved for Interests, the tenth tab, when it is built: rose, the one
+  // clear hue left between Insights' orchid and Signals' peach.
+  tabInterests: '#E29CBA',
   tabFood: '#B9E29C',
   // 2026-09-05. Was mint (#9CE2BF), which was wrong twice over. Mint reads as
   // fresh and growing, which is Food's and Garden's meaning rather than

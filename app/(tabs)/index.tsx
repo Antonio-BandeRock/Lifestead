@@ -1024,12 +1024,12 @@ const HOME_LENS_DESTINATIONS: Partial<
     color: colors.tabLife,
     href: { pathname: '/life', params: { openLifeLens: 'workouts' } } as Href,
   },
-  // Belongs to no tab, so it keeps colors.primary the way the shared-
+  // Belongs to no tab, so it wears colors.homeNoTab the way the shared-
   // folder nudge does.
   captureInbox: {
     label: 'Sort It Out',
     icon: 'checkmark-done-outline',
-    color: colors.primary,
+    color: colors.homeNoTab,
     href: '/reconcile' as Href,
   },
   // Your Story, 2026-09-24. The menu goes to the full page rather than
@@ -1039,19 +1039,19 @@ const HOME_LENS_DESTINATIONS: Partial<
   waitingAnswers: {
     label: 'Waiting for an Answer',
     icon: 'notifications-outline',
-    color: colors.primary,
+    color: colors.homeNoTab,
     href: '/waiting-answers' as Href,
   },
   nextThing: {
     label: 'One Next Thing',
     icon: 'arrow-forward-circle-outline',
-    color: colors.primary,
+    color: colors.homeNoTab,
     href: '/your-story' as Href,
   },
   yourStory: {
     label: 'Your Guide',
     icon: 'compass-outline',
-    color: colors.primary,
+    color: colors.homeNoTab,
     href: '/your-story' as Href,
   },
   // 2026-09-19: the Digest tab is gone, its categories spread over Life,
@@ -2762,7 +2762,7 @@ export default function HomeScreen() {
           <Text style={[styles.logAgainSpeakText, { color: colors.primary }]}>Choose the folder</Text>
         </TouchableOpacity>
       </View>,
-      { icon: 'cloud-outline', color: colors.primary },
+      { icon: 'cloud-outline', color: colors.homeNoTab },
     );
   }
 
@@ -4523,7 +4523,7 @@ export default function HomeScreen() {
       </View>,
       {
         icon: 'notifications-outline',
-        color: colors.primary,
+        color: colors.homeNoTab,
         foldedCaption: groups.map((group) => group.label + ': ' + group.items.length).join(', '),
       },
     );
@@ -4544,7 +4544,7 @@ export default function HomeScreen() {
           }
         />
       </View>,
-      { icon: 'arrow-forward-circle-outline', color: colors.primary },
+      { icon: 'arrow-forward-circle-outline', color: colors.homeNoTab },
     );
   }
 
@@ -4565,7 +4565,7 @@ export default function HomeScreen() {
       </View>,
       {
         icon: 'compass-outline',
-        color: colors.primary,
+        color: colors.homeNoTab,
         foldedCaption: yourStory
           ? (yourStoryInterview ? interviewLine(yourStoryInterview) : null) ??
             tabGuideLine(buildTabGuide(yourStory, yourStoryInterview?.startPath ?? null), nextLine(yourStory))
@@ -4617,7 +4617,7 @@ export default function HomeScreen() {
           <Text style={styles.primaryButtonText}>Sort It Out</Text>
         </TouchableOpacity>
       </View>,
-      { icon: 'checkmark-done-outline', color: colors.primary },
+      { icon: 'checkmark-done-outline', color: colors.homeNoTab },
     );
   }
 
