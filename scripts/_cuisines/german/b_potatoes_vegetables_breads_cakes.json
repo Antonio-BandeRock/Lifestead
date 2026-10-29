@@ -1213,6 +1213,1386 @@
         { "source": "Quick German Recipes, Brussel Sprouts Recipes", "url": "https://www.quick-german-recipes.com/brussel-sprouts-recipes.html" }
       ],
       "curationNote": "Quick German Recipes gives sprouts with bacon and the boiled, buttered German way with nutmeg. This version blanches then pan-fries, which is how the dish is cooked in German homes; the oven method on the first page is not used."
+    },
+    {
+      "id": "curated_de_laugenbrezel",
+      "name": "Laugenbrezel",
+      "builderType": "bakedGoods",
+      "dishGroup": "Breads & Pretzels",
+      "region": "Swabia and Bavaria",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "A deep mahogany, glossy crust with coarse salt, a crisp split belly and thin, crunchy arms around a soft, chewy middle.",
+      "healthBenefit": "Mostly wheat carbohydrate with a little protein; the pretzel salt makes it a salty bread, so it sits best beside fresh food.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_laugenteig", "servings": 8, "note": "the whole batch, with its lye bath and salt" }
+      ],
+      "ingredients": [],
+      "instructions": [
+        "Make the Laugenteig and divide it into 8 pieces. Roll each into a rope 50 to 60 cm long, thick in the middle and thin at the ends.",
+        "Lift the ends, cross them twice and press them onto the thick belly. Lay the pretzels on a floured cloth and chill them uncovered for 1 hour so a skin forms.",
+        "Dip each pretzel in the lye bath for 10 to 15 seconds, wearing gloves, and set it on a tray lined with baking paper. Sprinkle with coarse salt and cut the belly once, about 5 mm deep.",
+        "Bake at 425°F (220°C) for 15 to 20 minutes until deep brown. Cool on a rack and eat the same day, plain or split and buttered as a Butterbrezel."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Carbohydrate", "note": "From the wheat flour." },
+        { "nutrient": "Sodium", "note": "From the dough salt and the coarse pretzel salt." }
+      ],
+      "citations": [
+        { "source": "Quick German Recipes, German Pretzel Recipe", "url": "https://www.quick-german-recipes.com/german-pretzel-recipe.html" },
+        { "source": "My Dinner, German Pretzels", "url": "https://mydinner.co.uk/german-pretzels/" },
+        { "source": "Wikipedia (de), Brezel", "url": "https://de.wikipedia.org/wiki/Brezel" }
+      ],
+      "curationNote": "The dough, lye bath and salt sit in the Laugenteig base; this recipe is the shaping and baking. Both recipe sources dip in lye (or baking soda) and cut the belly; Wikipedia gives the Swabian shape with thin arms and a fat belly."
+    },
+    {
+      "id": "curated_de_laugenbrotchen",
+      "name": "Laugenbrötchen",
+      "builderType": "bakedGoods",
+      "dishGroup": "Breads & Pretzels",
+      "region": "Southern Germany",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "roll",
+      "flavorProfile": "A round roll with the dark, salty pretzel crust and a soft, close crumb, split for butter, cheese or Leberkäse.",
+      "healthBenefit": "Mostly wheat carbohydrate with a little protein, and salty from the crust; good split and filled with vegetables and cheese.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_laugenteig", "servings": 8, "note": "the whole batch, shaped as rolls" }
+      ],
+      "ingredients": [],
+      "instructions": [
+        "Make the Laugenteig and divide it into 8 pieces of about 105 g. Shape each into a tight ball by rolling it under a cupped hand on the bench.",
+        "Set the rolls on a floured cloth seam side down and chill them uncovered for 1 hour so a skin forms.",
+        "Dip each roll in the lye bath for 10 to 15 seconds, wearing gloves, and set it on a tray lined with baking paper. Cut a cross or a single slash on top and sprinkle with coarse salt.",
+        "Bake at 425°F (220°C) for 16 to 20 minutes until deep brown. Cool on a rack."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Carbohydrate", "note": "From the wheat flour." },
+        { "nutrient": "Sodium", "note": "From the dough salt and the coarse salt on top." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Pretzel Buns", "url": "https://mydinner.co.uk/pretzel-bun/" },
+        { "source": "Quick German Recipes, German Pretzel Recipe", "url": "https://www.quick-german-recipes.com/german-pretzel-recipe.html" }
+      ],
+      "curationNote": "Same dough and lye bath as the pretzel, shaped as round rolls with a cross cut, as My Dinner's pretzel buns. The dough and bath are counted through the Laugenteig base."
+    },
+    {
+      "id": "curated_de_roggenmischbrot",
+      "name": "Roggenmischbrot",
+      "builderType": "bakedGoods",
+      "dishGroup": "Breads & Pretzels",
+      "region": "Germany",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "A dark-crusted loaf, mostly rye, with a moist, close crumb, a mild sourness and a breath of caraway and coriander.",
+      "healthBenefit": "Rye flour brings more fibre than white wheat, and the sourdough makes its minerals easier to take up.",
+      "overallTier": "moderate",
+      "components": [
+        { "recipeId": "curated_de_base_roggensauerteig", "servings": 5, "note": "about 250 g ripe starter" }
+      ],
+      "ingredients": [
+        { "category": "PantryStaples", "baseName": "Rye flour, Type 1150", "quantity": 300, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 1050", "quantity": 200, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Bev", "baseName": "Water, tap", "quantity": 300, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "lukewarm" },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 12, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Baker's yeast fresh, pressed", "quantity": 5, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, caraway seed", "quantity": 1, "unit": "tsp", "cutPrep": "lightly crushed", "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, coriander seed", "quantity": 0.5, "unit": "tsp", "cutPrep": "ground", "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Dissolve the yeast in the water. Add the starter, both flours, salt and spices and mix for 6 to 8 minutes to a sticky, smooth dough; rye dough will not become elastic.",
+        "Cover and rest 45 minutes to 1 hour.",
+        "With wet hands shape a round or oval loaf and set it seam side down in a floured proofing basket. Let it rise 45 minutes to 1 hour, until cracks begin to show on the surface.",
+        "Heat the oven to 480°F (250°C) with a tray at the bottom. Turn the loaf onto a lined sheet, pour water into the tray for steam and bake 10 minutes.",
+        "Lower to 400°F (200°C) and bake 45 to 50 minutes more, until the loaf sounds hollow when tapped underneath. Cool at least 3 hours before cutting."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Fibre", "note": "From the rye flour." },
+        { "nutrient": "Magnesium", "note": "From the rye and Type 1050 wheat flour." }
+      ],
+      "citations": [
+        { "source": "My Dinner, German Rye Bread", "url": "https://mydinner.co.uk/german-rye-bread/" },
+        { "source": "Wikipedia (de), Mischbrot", "url": "https://de.wikipedia.org/wiki/Mischbrot" }
+      ],
+      "curationNote": "My Dinner gives a rye-heavy loaf with caraway and coriander and a little wheat; Wikipedia gives the rule that a Roggenmischbrot holds more rye than wheat and is leavened with sourdough. Here rye is about 68% of the flour, counting the starter. The vinegar My Dinner uses for sourness is replaced by the rye sourdough base."
+    },
+    {
+      "id": "curated_de_vollkornbrot",
+      "name": "Vollkornbrot",
+      "builderType": "bakedGoods",
+      "dishGroup": "Breads & Pretzels",
+      "region": "Northern and western Germany",
+      "servings": 20,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "A dense, moist, dark tin loaf of whole rye with linseed and sunflower seeds, gently sour and a little sweet.",
+      "healthBenefit": "Whole rye and seeds bring a lot of fibre, magnesium and plant omega-3 fat, and the slow rise keeps the bread filling.",
+      "overallTier": "moderate",
+      "components": [
+        { "recipeId": "curated_de_base_roggensauerteig", "servings": 4, "note": "about 200 g ripe starter" }
+      ],
+      "ingredients": [
+        { "category": "PantryStaples", "baseName": "Rye wholemeal flour", "quantity": 400, "unit": "g", "cutPrep": "coarse, or half wholemeal flour and half cracked rye", "cookingMethod": "Baked", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Wheat wholemeal flour", "quantity": 100, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "NutSeed", "baseName": "Linseed/flax seed", "quantity": 50, "unit": "g", "cutPrep": "soaked", "cookingMethod": null, "prepNote": null },
+        { "category": "NutSeed", "baseName": "Sunflower seed", "quantity": 60, "unit": "g", "cutPrep": "soaked", "cookingMethod": null, "prepNote": null },
+        { "category": "Bev", "baseName": "Water, tap", "quantity": 450, "unit": "ml", "cutPrep": "150 ml for soaking the seeds, the rest for the dough", "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 13, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Blackstrap Molasses (Pure)", "quantity": 15, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "or sugar beet syrup (Rübenkraut)" },
+        { "category": "PantryStaples", "baseName": "Baker's yeast fresh, pressed", "quantity": 5, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Pour 150 ml boiling water over the linseed and sunflower seeds and leave them to soak for 2 to 4 hours or overnight.",
+        "Dissolve the yeast and molasses in the remaining lukewarm water. Add the starter, both flours, the soaked seeds and the salt and mix for 5 to 8 minutes to a thick, sticky paste.",
+        "Spread it into a greased loaf tin of about 30 cm, smooth the top with a wet spoon and let it rise 1 to 2 hours, until it has risen by about a third and shows small holes.",
+        "Bake at 450°F (230°C) for 15 minutes, then at 375°F (190°C) for 60 to 70 minutes more, until it sounds hollow out of the tin.",
+        "Wrap the cooled loaf in a cloth and leave it 24 hours before slicing thin."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Fibre", "note": "From the whole rye, wholemeal wheat and seeds." },
+        { "nutrient": "Magnesium", "note": "From the whole rye and sunflower seeds." },
+        { "nutrient": "Omega-3 (ALA)", "note": "From the linseed." }
+      ],
+      "citations": [
+        { "source": "Wikipedia (de), Vollkornbrot", "url": "https://de.wikipedia.org/wiki/Vollkornbrot" },
+        { "source": "Quick German Recipes, Rye Bread Recipe", "url": "https://www.quick-german-recipes.com/rye-bread-recipe.html" }
+      ],
+      "curationNote": "Written mostly from descriptions. Wikipedia gives the rule (at least 90% wholegrain, sourdough or yeast, salt, often seeds and syrup); Quick German Recipes gives the dense tin loaf with whole rye, linseed and molasses. Quantities are standard proportions for a 30 cm tin."
+    },
+    {
+      "id": "curated_de_bauernbrot",
+      "name": "Bauernbrot",
+      "builderType": "bakedGoods",
+      "dishGroup": "Breads & Pretzels",
+      "region": "Germany",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "A round, floury farmhouse loaf with a thick, cracked crust and a soft, mildly sour crumb of rye and wheat.",
+      "healthBenefit": "The rye half brings more fibre and minerals than a white loaf, and the sourdough makes them easier to take up.",
+      "overallTier": "moderate",
+      "components": [
+        { "recipeId": "curated_de_base_roggensauerteig", "servings": 4, "note": "about 200 g ripe starter" }
+      ],
+      "ingredients": [
+        { "category": "PantryStaples", "baseName": "Rye flour, Type 1150", "quantity": 250, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 1050", "quantity": 250, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Bev", "baseName": "Water, tap", "quantity": 320, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "lukewarm" },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 12, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Baker's yeast fresh, pressed", "quantity": 8, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Dissolve the yeast in the water, add the starter, both flours and the salt and knead 8 to 10 minutes to a soft, slightly sticky dough.",
+        "Cover and let it rise 1 hour.",
+        "Shape a round loaf on a floured bench and set it seam side up in a well-floured basket. Let it rise 45 minutes to 1 hour.",
+        "Heat the oven to 480°F (250°C) with a tray at the bottom. Turn the loaf out onto a lined sheet so the floured top faces up, pour water into the tray for steam and bake 10 minutes.",
+        "Lower to 410°F (210°C) and bake 40 to 50 minutes more, until dark and hollow sounding. Cool on a rack for at least 2 hours."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Fibre", "note": "From the rye flour." },
+        { "nutrient": "B vitamins", "note": "From the darker flours and the yeast." }
+      ],
+      "citations": [
+        { "source": "Wikipedia (de), Bauernbrot", "url": "https://de.wikipedia.org/wiki/Bauernbrot" },
+        { "source": "Quick German Recipes, Artisan Bread Recipe", "url": "https://www.quick-german-recipes.com/artisan-bread-recipe.html" }
+      ],
+      "curationNote": "Written mostly from descriptions. Wikipedia defines Bauernbrot as a round, free-baked rye and wheat loaf with sourdough, salt, yeast and water and a floured, cracked crust; Quick German Recipes gives the hydration and steam baking. Equal rye and wheat, with the starter adding more rye."
+    },
+    {
+      "id": "curated_de_dinkelbrot",
+      "name": "Dinkelbrot",
+      "builderType": "bakedGoods",
+      "dishGroup": "Breads & Pretzels",
+      "region": "Swabia and southern Germany",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "A light, nutty spelt loaf with a crisp crust, a soft crumb and toasted sunflower seeds.",
+      "healthBenefit": "Part wholemeal spelt brings fibre, magnesium and B vitamins; spelt is a wheat and contains gluten.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "PantryStaples", "baseName": "Spelt flour, Type 630", "quantity": 300, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Spelt wholemeal flour", "quantity": 200, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Bev", "baseName": "Water, tap", "quantity": 360, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "cool" },
+        { "category": "PantryStaples", "baseName": "Baker's yeast fresh, pressed", "quantity": 8, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 10, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "NutSeed", "baseName": "Sunflower seed", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": "Roasted", "prepNote": "toasted" }
+      ],
+      "instructions": [
+        "Dissolve the yeast in the cool water. Add both flours and the salt and knead gently for only 5 to 6 minutes, since spelt tears when overworked. Work in the sunflower seeds at the end.",
+        "Cover and let it rise slowly in the fridge for 8 to 12 hours, or at room temperature for 1.5 to 2 hours.",
+        "Shape an oval loaf, set it in a floured basket or a greased tin and let it rise 45 minutes to 1 hour.",
+        "Heat the oven to 465°F (240°C) with a tray at the bottom. Bake with steam for 10 minutes, then at 410°F (210°C) for 30 to 40 minutes until golden brown and hollow sounding. Cool on a rack."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Fibre", "note": "From the wholemeal spelt and sunflower seeds." },
+        { "nutrient": "Magnesium", "note": "From the wholemeal spelt and seeds." }
+      ],
+      "citations": [
+        { "source": "Wikipedia (de), Dinkelbrot", "url": "https://de.wikipedia.org/wiki/Dinkelbrot" },
+        { "source": "Quick German Recipes, Artisan Bread Recipe", "url": "https://www.quick-german-recipes.com/artisan-bread-recipe.html" }
+      ],
+      "curationNote": "Written mostly from descriptions. Wikipedia gives the rule that a German Dinkelbrot is at least 90% spelt; all the flour here is spelt. The slow, cool rise and steam baking follow Quick German Recipes' artisan loaf, with less kneading since spelt gluten is weaker."
+    },
+    {
+      "id": "curated_de_hefezopf",
+      "name": "Hefezopf",
+      "builderType": "bakedGoods",
+      "dishGroup": "Breads & Pretzels",
+      "region": "Germany",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "A soft, golden, slightly sweet braided loaf scented with lemon, studded with raisins and topped with almonds.",
+      "healthBenefit": "A sweet bread made with butter, egg and milk; a treat for Sunday breakfast rather than an everyday loaf.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_hefeteig", "servings": 12, "note": "the whole batch" }
+      ],
+      "ingredients": [
+        { "category": "Fruit", "baseName": "Raisin", "quantity": 100, "unit": "g", "cutPrep": "soaked in warm water 15 minutes and dried", "cookingMethod": null, "prepNote": "optional" },
+        { "category": "Dairy", "baseName": "Chicken Egg Yolk (Raw)", "quantity": 1, "unit": "each", "cutPrep": "beaten with 1 tbsp milk", "cookingMethod": null, "prepNote": "for brushing" },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 15, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "NutSeed", "baseName": "Almonds", "quantity": 30, "unit": "g", "cutPrep": "flaked", "cookingMethod": "Baked", "prepNote": null },
+        { "notInDatabase": true, "name": "pearl sugar (Hagelzucker)", "contains": "none", "quantity": 15, "unit": "g", "cutPrep": null, "prepNote": "optional" }
+      ],
+      "instructions": [
+        "Make the Hefeteig and, after its first rise, knead in the raisins.",
+        "Divide the dough into 3 equal pieces and roll each into a rope about 40 cm long. Press the tops together and braid them loosely, tucking the ends under.",
+        "Set the braid on a lined baking sheet, cover and let it rise 30 to 40 minutes.",
+        "Brush with the yolk and milk and scatter with almonds and pearl sugar.",
+        "Bake at 350°F (180°C) for 30 to 35 minutes until deep golden, covering loosely with foil if it browns too fast. Cool on a rack."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Carbohydrate", "note": "From the flour, sugar and raisins." },
+        { "nutrient": "Vitamin E", "note": "From the almonds." }
+      ],
+      "citations": [
+        { "source": "Quick German Recipes, Braided Bread Recipe", "url": "https://www.quick-german-recipes.com/braided-bread-recipe.html" },
+        { "source": "Wikipedia (de), Hefezopf", "url": "https://de.wikipedia.org/wiki/Hefezopf" }
+      ],
+      "curationNote": "Quick German Recipes gives a lemon-scented dough with raisins, a yolk wash and flaked almonds; Wikipedia defines the Hefezopf as a sweet braided yeast dough with egg and butter, sweet unlike the Swiss Zopf. The dough is the Hefeteig base; pearl sugar is not in the food database."
+    },
+    {
+      "id": "curated_de_schwarzwalder_kirschtorte",
+      "name": "Schwarzwälder Kirschtorte (Black Forest Cake)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Baden-Württemberg (Black Forest)",
+      "servings": 10,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "Light chocolate sponge soaked with cherry brandy, layered with tart cherries and cool whipped cream, finished with chocolate shavings.",
+      "healthBenefit": "A celebration cake rich in cream and sugar; the sour cherries bring some vitamin C and the cocoa some minerals, but it is a treat.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 4, "unit": "each", "cutPrep": "separated", "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Bev", "baseName": "Water, tap", "quantity": 50, "unit": "ml", "cutPrep": "hot", "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 150, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the sponge" },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 125, "unit": "g", "cutPrep": "sifted", "cookingMethod": "Baked", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Cornstarch", "quantity": 30, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the sponge" },
+        { "category": "Brewing", "baseName": "Pure Cocoa / Cacao Powder (Unsweetened)", "quantity": 30, "unit": "g", "cutPrep": "sifted", "cookingMethod": "Baked", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Baking powder", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fruit", "baseName": "Sour Cherry", "quantity": 350, "unit": "g", "cutPrep": "pitted, drained from a jar", "cookingMethod": "Simmered", "prepNote": null },
+        { "category": "Bev", "baseName": "Sour cherry juice", "quantity": 500, "unit": "ml", "cutPrep": "from the jar", "cookingMethod": "Simmered", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Cornstarch", "quantity": 32, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "to thicken the cherries" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the cherries" },
+        { "category": "Herbs", "baseName": "Vanilla extract", "quantity": 2, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "split between the cherries and the cream" },
+        { "category": "Dairy", "baseName": "Heavy Whipping Cream", "quantity": 500, "unit": "ml", "cutPrep": "cold", "cookingMethod": null, "prepNote": null },
+        { "notInDatabase": true, "name": "powdered sugar", "contains": "none", "quantity": 40, "unit": "g", "cutPrep": null, "prepNote": "for the cream" },
+        { "notInDatabase": true, "name": "Kirschwasser (cherry brandy)", "contains": "alcohol", "quantity": 50, "unit": "ml", "cutPrep": null, "prepNote": "to soak the sponge" },
+        { "category": "Sweets", "baseName": "Dark chocolate", "quantity": 30, "unit": "g", "cutPrep": "shaved", "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Heat the oven to 350°F (175°C) and line the base of a 26 cm springform tin.",
+        "Beat the egg whites with the hot water until stiff, then beat in the sugar until glossy and stir in the yolks.",
+        "Sift the flour, cornstarch, cocoa and baking powder over the eggs and fold in gently.",
+        "Bake for 25 to 30 minutes, until a skewer comes out clean, and leave to cool fully, ideally overnight.",
+        "Bring most of the cherry juice to a boil, whisk the cornstarch and sugar into the rest, stir it in and cook for 1 to 2 minutes until thick. Fold in the cherries and half the vanilla and leave to cool.",
+        "Cut the sponge into three layers and drizzle each with Kirschwasser.",
+        "Whip the cream with the powdered sugar and the rest of the vanilla until stiff.",
+        "Spread the cherries over the bottom layer, cover with cream, add the second layer and more cream, then the top layer.",
+        "Cover the whole cake with cream, pipe rosettes on top, scatter with chocolate shavings and chill for 2 to 3 hours before slicing."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin A", "note": "From the whipping cream and egg yolks." },
+        { "nutrient": "Iron", "note": "A little from the cocoa and dark chocolate." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Black Forest Cake", "url": "https://mydinner.co.uk/black-forest-cake/" },
+        { "source": "Quick German Recipes, Black Forest Cake Recipe", "url": "https://www.quick-german-recipes.com/black-forest-cake-recipe.html" }
+      ],
+      "curationNote": "Both sources build a cocoa sponge without butter, cut it into three layers, soak with Kirschwasser and fill with thickened sour cherries and cream. Quantities follow My Dinner. Kirschwasser and powdered sugar are not in the food database."
+    },
+    {
+      "id": "curated_de_apfelstrudel",
+      "name": "Apfelstrudel",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Bavaria and Austria",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "Paper-thin, crisp pastry wrapped around soft cinnamon apples, raisins and buttery toasted crumbs, served warm.",
+      "healthBenefit": "Mostly apple by weight, so it brings fibre and some vitamin C, with butter and sugar making it a dessert.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 250, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": "for the pulled dough" },
+        { "category": "Bev", "baseName": "Water, tap", "quantity": 125, "unit": "ml", "cutPrep": "lukewarm", "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Rapsolja", "quantity": 2, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": "in the dough" },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 1, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fruit", "baseName": "Apple", "quantity": 1200, "unit": "g", "cutPrep": "peeled, cored, thinly sliced", "cookingMethod": "Baked", "prepNote": "tart apples such as Boskop" },
+        { "category": "Bev", "baseName": "Lemon Juice", "quantity": 2, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 80, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, cinnamon, ground", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fruit", "baseName": "Raisin", "quantity": 60, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Alcohol", "baseName": "Rum 80 % vol", "quantity": 2, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": "to soak the raisins, optional" },
+        { "category": "NutSeed", "baseName": "Almonds", "quantity": 30, "unit": "g", "cutPrep": "flaked", "cookingMethod": "Baked", "prepNote": null },
+        { "notInDatabase": true, "name": "dry breadcrumbs", "contains": "gluten", "quantity": 60, "unit": "g", "cutPrep": null, "prepNote": "toasted in butter" },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 100, "unit": "g", "cutPrep": "melted", "cookingMethod": "Baked", "prepNote": "for the crumbs and brushing" },
+        { "notInDatabase": true, "name": "powdered sugar", "contains": "none", "quantity": 2, "unit": "tbsp", "cutPrep": null, "prepNote": "for dusting" }
+      ],
+      "instructions": [
+        "Knead the flour, water, oil and salt for 8 to 10 minutes into a smooth, soft dough, brush with oil and rest it covered for 30 to 60 minutes.",
+        "Soak the raisins in the rum. Toss the apples with the lemon juice, sugar, cinnamon, raisins and almonds.",
+        "Toast the breadcrumbs in 40 g of the butter until golden, then set aside.",
+        "Heat the oven to 375°F (190°C).",
+        "Roll the dough out on a large floured cloth, then stretch it over the backs of your hands until it is thin enough to read through, and trim the thick edges.",
+        "Brush the dough with melted butter, scatter the crumbs over two thirds of it and spread the apples over the crumbs.",
+        "Lift the cloth to roll the strudel up, tuck in the ends and roll it seam side down onto a lined tray.",
+        "Brush with butter and bake for 35 to 45 minutes, brushing again halfway, until golden and crisp.",
+        "Rest for 10 minutes, dust with powdered sugar and serve warm, with vanilla sauce or whipped cream."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Fibre", "note": "From the apples and raisins." },
+        { "nutrient": "Vitamin E", "note": "A little from the almonds." }
+      ],
+      "citations": [
+        { "source": "Quick German Recipes, German Apple Strudel", "url": "https://www.quick-german-recipes.com/german-apple-strudel-recipe.html" },
+        { "source": "My Dinner, Quick and Easy Apple Strudel", "url": "https://mydinner.co.uk/apple-strudel-puff-pastry/" },
+        { "source": "Wikipedia (de), Apfelstrudel", "url": "https://de.wikipedia.org/wiki/Apfelstrudel" }
+      ],
+      "curationNote": "Both recipe sources use puff pastry as a shortcut; the filling (apples, lemon, sugar, cinnamon, raisins, almonds, buttered crumbs) follows them. The traditional pulled strudel dough of flour, water, oil and salt is written from the Wikipedia description and standard proportions. Breadcrumbs and powdered sugar are not in the food database."
+    },
+    {
+      "id": "curated_de_bienenstich",
+      "name": "Bienenstich (Bee Sting Cake)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Germany",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "Soft sweet yeast cake under a crackly honey and almond crust, split and filled with cool vanilla cream.",
+      "healthBenefit": "A rich coffee-table cake; the almonds bring vitamin E and the milk some calcium alongside plenty of sugar and butter.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_hefeteig", "servings": 6, "note": "half the batch, about 250 g flour" }
+      ],
+      "ingredients": [
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": "for the topping" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": "for the topping" },
+        { "category": "Sweets", "baseName": "Standard Honey (Blossom Honey)", "quantity": 2, "unit": "tbsp", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Dairy", "baseName": "Heavy Whipping Cream", "quantity": 2, "unit": "tbsp", "cutPrep": null, "cookingMethod": "Baked", "prepNote": "for the topping" },
+        { "category": "NutSeed", "baseName": "Almonds", "quantity": 100, "unit": "g", "cutPrep": "flaked", "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 480, "unit": "ml", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": "for the filling" },
+        { "category": "Dairy", "baseName": "Chicken Egg Yolk (Raw)", "quantity": 2, "unit": "each", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Cornstarch", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 100, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the filling" },
+        { "category": "Herbs", "baseName": "Vanilla extract", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Gelatine", "quantity": 7, "unit": "g", "cutPrep": "4 sheets, soaked in cold water", "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Heavy Whipping Cream", "quantity": 180, "unit": "ml", "cutPrep": "whipped stiff", "cookingMethod": null, "prepNote": "for the filling" }
+      ],
+      "instructions": [
+        "Press half the risen Hefeteig into a lined 26 cm springform tin and leave it to rise for 20 to 30 minutes.",
+        "Melt the butter, sugar, honey and 2 tbsp cream together, stir in the almonds and cook for 2 to 3 minutes until slightly thickened, then cool for a few minutes.",
+        "Heat the oven to 350°F (180°C). Spread the almond mixture over the dough and bake for 25 to 30 minutes until golden; cool completely.",
+        "Whisk a little of the milk with the yolks, cornstarch and sugar. Bring the rest of the milk to a boil, whisk in the yolk mixture and cook for 1 to 2 minutes until thick.",
+        "Take the pudding off the heat, stir in the vanilla and the squeezed gelatine until dissolved, and cool until just setting.",
+        "Fold the whipped cream into the cooled pudding.",
+        "Cut the cake in half horizontally, cut the almond top into 12 wedges, spread the cream on the base and lay the wedges back on top.",
+        "Chill for at least 2 hours before serving."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin E", "note": "From the flaked almonds." },
+        { "nutrient": "Calcium", "note": "From the milk and cream in the filling." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Bee Sting Cake", "url": "https://mydinner.co.uk/bee-sting-cake/" },
+        { "source": "Quick German Recipes, Bienenstich Recipe", "url": "https://www.quick-german-recipes.com/bienenstich-recipe.html" },
+        { "source": "Wikipedia (de), Bienenstich", "url": "https://de.wikipedia.org/wiki/Bienenstich" }
+      ],
+      "curationNote": "My Dinner gives a quick version on a baking powder base; Quick German Recipes and Wikipedia describe the traditional yeast base, so the base here is half the Hefeteig and the honey almond topping and gelatine-set vanilla cream follow My Dinner."
+    },
+    {
+      "id": "curated_de_kasekuchen",
+      "name": "Käsekuchen (German Quark Cheesecake)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Germany",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "A tall, light, gently tangy quark filling scented with lemon and vanilla on a crisp shortcrust base.",
+      "healthBenefit": "Quark makes this cheesecake higher in protein and lighter than cream cheese versions, though it is still a sweet dessert.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_murbeteig", "servings": 12, "note": "the whole batch, lining the tin" },
+        { "recipeId": "curated_de_base_quark", "servings": 18, "note": "about 900 g" }
+      ],
+      "ingredients": [
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 200, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Heavy Whipping Cream", "quantity": 180, "unit": "ml", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 5, "unit": "each", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Cornstarch", "quantity": 32, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Vanilla extract", "quantity": 2, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fruit", "baseName": "Lemon", "quantity": 1, "unit": "each", "cutPrep": "zest only", "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Heat the oven to 350°F (180°C). Roll out the Mürbeteig and line a greased 26 to 28 cm springform tin, bringing it 4 cm up the sides; chill while you make the filling.",
+        "Beat the quark, sugar, cream, eggs, cornstarch, vanilla and lemon zest together until smooth.",
+        "Pour the filling into the tin and smooth the top.",
+        "Bake for 60 to 70 minutes, until set at the edges and just wobbly in the middle; cover with foil if it browns too fast.",
+        "Turn off the oven and leave the cake inside with the door slightly open for 20 to 30 minutes so it does not crack, then cool completely and chill before slicing."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Protein", "note": "From the quark and eggs." },
+        { "nutrient": "Calcium", "note": "From the quark and cream." }
+      ],
+      "citations": [
+        { "source": "My Dinner, German Cheesecake", "url": "https://mydinner.co.uk/german-cheesecake/" },
+        { "source": "Quick German Recipes, German Cheesecake Recipe", "url": "https://www.quick-german-recipes.com/german-cheesecake-recipe.html" }
+      ],
+      "curationNote": "Both sources use a shortcrust base and a quark filling bound with eggs and cornstarch, flavoured with lemon and vanilla. My Dinner's 900 g quark and five eggs are used; the base is the Mürbeteig recipe and the quark is the homemade quark base at 50 g per serving."
+    },
+    {
+      "id": "curated_de_streuselkuchen",
+      "name": "Streuselkuchen (Crumb Cake)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Silesia and all of Germany",
+      "servings": 24,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Soft sweet yeast cake under a thick layer of buttery vanilla crumbs, moistened with a little cream.",
+      "healthBenefit": "A plain coffee cake of flour, butter and sugar; small squares make it an occasional treat.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_hefeteig", "servings": 12, "note": "the whole batch, for one baking tray" }
+      ],
+      "ingredients": [
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 150, "unit": "g", "cutPrep": "cold, cubed", "cookingMethod": "Baked", "prepNote": "for the streusel" },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 250, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": "for the streusel" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 100, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": "for the streusel" },
+        { "category": "Herbs", "baseName": "Vanilla extract", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Heavy Whipping Cream", "quantity": 180, "unit": "ml", "cutPrep": null, "cookingMethod": "Baked", "prepNote": "poured over after baking" },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 55, "unit": "g", "cutPrep": "melted", "cookingMethod": null, "prepNote": "for brushing" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 25, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "to sprinkle" },
+        { "notInDatabase": true, "name": "powdered sugar", "contains": "none", "quantity": 60, "unit": "g", "cutPrep": null, "prepNote": "for dusting" }
+      ],
+      "instructions": [
+        "Roll the risen Hefeteig out onto a lined baking tray (about 30 × 40 cm), cover and leave to rise for 20 to 30 minutes.",
+        "Rub the cold butter, flour, sugar and vanilla together with your fingertips into large and small crumbs; chill them.",
+        "Heat the oven to 350°F (180°C). Press shallow dimples into the dough with your fingers and brush it with the melted butter.",
+        "Scatter the streusel thickly over the dough and sprinkle with the sugar.",
+        "Bake for 20 to 25 minutes, until the crumbs are golden.",
+        "Drizzle the cream over the hot cake so it soaks in, cool, dust with powdered sugar and cut into 24 squares."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Carbohydrate", "note": "From the flour in the dough and crumbs." },
+        { "nutrient": "Vitamin A", "note": "From the butter and cream." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Streuselkuchen", "url": "https://mydinner.co.uk/streuselkuchen/" },
+        { "source": "Quick German Recipes, Crumb Cake Recipes", "url": "https://www.quick-german-recipes.com/crumb-cake-recipes.html" },
+        { "source": "Wikipedia (de), Streuselkuchen", "url": "https://de.wikipedia.org/wiki/Streuselkuchen" }
+      ],
+      "curationNote": "Both recipe sources bake a sheet of sweet yeast dough under butter streusel; My Dinner's 500 g flour dough matches the Hefeteig base, and its streusel and cream finish are kept. Powdered sugar is not in the food database."
+    },
+    {
+      "id": "curated_de_zwetschgendatschi",
+      "name": "Zwetschgendatschi (Bavarian Plum Sheet Cake)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Augsburg, Bavaria",
+      "servings": 20,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Thin yeast dough packed edge to edge with tart, jammy plums under cinnamon crumbs, best with a spoon of whipped cream.",
+      "healthBenefit": "Mostly fruit on a thin base, so the plums bring fibre and potassium, with butter and sugar keeping it a treat.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_hefeteig", "servings": 12, "note": "the whole batch, rolled thin" }
+      ],
+      "ingredients": [
+        { "category": "Fruit", "baseName": "Blue plum", "quantity": 1500, "unit": "g", "cutPrep": "halved, stoned and cut in from the top", "cookingMethod": "Baked", "prepNote": "Zwetschgen (prune plums)" },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 150, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": "for the streusel" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 70, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": "for the streusel" },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 75, "unit": "g", "cutPrep": "cold, cubed", "cookingMethod": "Baked", "prepNote": "for the streusel" },
+        { "category": "Herbs", "baseName": "Spices, cinnamon, ground", "quantity": 2, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 2, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": "to sprinkle over the plums" }
+      ],
+      "instructions": [
+        "Roll the risen Hefeteig thinly onto a greased baking tray (about 30 × 40 cm) and leave to rise for 15 to 20 minutes.",
+        "Stand the plum halves upright and close together in rows over the whole dough, cut side up.",
+        "Rub the flour, sugar, butter and cinnamon into crumbs and scatter them over the plums; sprinkle with the remaining sugar.",
+        "Bake at 400°F (200°C) for 25 to 35 minutes, until the dough is golden underneath and the plums are soft.",
+        "Cool on the tray, cut into 20 pieces and serve with whipped cream."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Fibre", "note": "From the plums with their skins." },
+        { "nutrient": "Potassium", "note": "From the plums." }
+      ],
+      "citations": [
+        { "source": "My Dinner, German Plum Cake", "url": "https://mydinner.co.uk/german-plum-cake/" },
+        { "source": "Wikipedia (de), Zwetschgenkuchen", "url": "https://de.wikipedia.org/wiki/Zwetschgenkuchen" }
+      ],
+      "curationNote": "My Dinner gives the yeast-dough plum cake with cinnamon streusel; Wikipedia describes the Augsburg Datschi as a thin yeast base covered tightly with prune plums. The base is the Hefeteig recipe and the plums are increased for a full tray as Wikipedia describes."
+    },
+    {
+      "id": "curated_de_frankfurter_kranz",
+      "name": "Frankfurter Kranz (Frankfurt Crown Cake)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Frankfurt am Main, Hesse",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "A ring of light sponge layered with vanilla buttercream and raspberry jam, coated in crunchy caramelised almond brittle.",
+      "healthBenefit": "One of the richest German cakes, high in butter and sugar; the almonds add vitamin E, and a thin slice goes a long way.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 5, "unit": "each", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 200, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": "for the sponge" },
+        { "category": "PantryStaples", "baseName": "Cornstarch", "quantity": 100, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": "for the sponge" },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 160, "unit": "g", "cutPrep": "sifted", "cookingMethod": "Baked", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Baking powder", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 480, "unit": "ml", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": "for the pudding" },
+        { "category": "PantryStaples", "baseName": "Cornstarch", "quantity": 60, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the pudding" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the pudding" },
+        { "category": "Dairy", "baseName": "Chicken Egg Yolk (Raw)", "quantity": 1, "unit": "each", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": null },
+        { "category": "Herbs", "baseName": "Vanilla extract", "quantity": 2, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 225, "unit": "g", "cutPrep": "soft", "cookingMethod": null, "prepNote": "for the buttercream" },
+        { "notInDatabase": true, "name": "powdered sugar", "contains": "none", "quantity": 60, "unit": "g", "cutPrep": null, "prepNote": "for the buttercream" },
+        { "notInDatabase": true, "name": "raspberry jam", "contains": "none", "quantity": 190, "unit": "g", "cutPrep": null, "prepNote": "red currant jam is also traditional" },
+        { "category": "NutSeed", "baseName": "Almonds", "quantity": 200, "unit": "g", "cutPrep": "finely chopped", "cookingMethod": "Roasted", "prepNote": "for the Krokant" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 200, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the Krokant" },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 10, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the Krokant" }
+      ],
+      "instructions": [
+        "Heat the oven to 350°F (175°C) and butter and flour a 26 cm ring (Kranz) tin.",
+        "Beat the eggs and sugar for 8 to 10 minutes until thick and pale, then fold in the sifted flour, cornstarch and baking powder.",
+        "Bake for 30 to 40 minutes, turn out and leave to cool completely.",
+        "Whisk a little milk with the cornstarch, sugar, yolk and vanilla; boil the rest of the milk, whisk the mixture in and cook for 1 to 2 minutes until thick. Cover the surface and cool to room temperature.",
+        "Beat the butter with the powdered sugar for 5 minutes until fluffy, then beat in the cooled pudding a spoonful at a time.",
+        "For the Krokant, melt the sugar with the butter to a golden caramel, stir in the almonds, spread on baking paper to cool, then crush finely.",
+        "Cut the ring into three layers; spread the bottom two with jam and buttercream and stack them.",
+        "Coat the whole ring with buttercream, press the Krokant all over and pipe a few rosettes on top. Chill for 2 hours before slicing."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin E", "note": "From the almonds in the brittle." },
+        { "nutrient": "Vitamin A", "note": "From the butter and egg yolks." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Frankfurter Kranz", "url": "https://mydinner.co.uk/frankfurter-kranz/" },
+        { "source": "Wikipedia (de), Frankfurter Kranz", "url": "https://de.wikipedia.org/wiki/Frankfurter_Kranz" }
+      ],
+      "curationNote": "Quantities follow My Dinner: a starch-rich sponge, German pudding buttercream, raspberry jam and almond Krokant. Wikipedia confirms the ring shape, buttercream, red jam and Krokant coating of the Frankfurt original. Only one full recipe source was opened. Jam and powdered sugar are not in the food database."
+    },
+    {
+      "id": "curated_de_donauwelle",
+      "name": "Donauwelle (Danube Wave Cake)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Germany",
+      "servings": 24,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Marbled vanilla and chocolate sheet cake with sour cherries sunk into it, a thick layer of vanilla buttercream and a wavy chocolate top.",
+      "healthBenefit": "A rich sheet cake heavy in butter and sugar; the cherries and dark chocolate bring a little fibre and iron.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 225, "unit": "g", "cutPrep": "soft", "cookingMethod": "Baked", "prepNote": "for the cake" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 250, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": "for the cake" },
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 6, "unit": "each", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 375, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Baking powder", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Brewing", "baseName": "Pure Cocoa / Cacao Powder (Unsweetened)", "quantity": 20, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Fruit", "baseName": "Sour Cherry", "quantity": 700, "unit": "g", "cutPrep": "pitted, drained from jars", "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 480, "unit": "ml", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": "for the pudding" },
+        { "category": "Dairy", "baseName": "Chicken Egg Yolk (Raw)", "quantity": 2, "unit": "each", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Cornstarch", "quantity": 32, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the pudding" },
+        { "category": "Herbs", "baseName": "Vanilla extract", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 225, "unit": "g", "cutPrep": "soft", "cookingMethod": null, "prepNote": "for the buttercream" },
+        { "category": "Sweets", "baseName": "Dark chocolate", "quantity": 200, "unit": "g", "cutPrep": "melted", "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Rapsolja", "quantity": 1, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": "melted with the chocolate" }
+      ],
+      "instructions": [
+        "Make the pudding first: whisk a little milk with the yolks, cornstarch, sugar and vanilla, boil the rest of the milk, whisk the mixture in and cook for 1 to 2 minutes. Cover the surface and cool to room temperature.",
+        "Heat the oven to 350°F (180°C) and line a deep baking tray (about 30 × 40 cm).",
+        "Beat the butter and sugar until fluffy, beat in the eggs one at a time, then fold in the flour and baking powder.",
+        "Spread half the batter on the tray. Stir the cocoa and a splash of milk into the rest and spread it over the light layer.",
+        "Scatter the cherries over the top and press them in lightly; bake for 25 to 30 minutes and cool completely.",
+        "Beat the soft butter until pale, then beat in the room-temperature pudding a spoonful at a time and spread it over the cake. Chill for 30 minutes.",
+        "Melt the chocolate with the oil, spread it over the buttercream and draw waves through it with a fork or a cake comb before it sets.",
+        "Chill until firm and cut into 24 pieces with a hot knife."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Iron", "note": "A little from the dark chocolate and cocoa." },
+        { "nutrient": "Vitamin A", "note": "From the butter and eggs." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Donauwelle", "url": "https://mydinner.co.uk/donauwelle/" },
+        { "source": "Wikipedia (de), Donauwelle", "url": "https://de.wikipedia.org/wiki/Donauwelle" }
+      ],
+      "curationNote": "Quantities follow My Dinner; Wikipedia confirms the light and cocoa batters, sour cherries, buttercream and chocolate waves. A full tray of six eggs is cut into 24 pieces rather than the 12 the source names. Only one full recipe source was opened."
+    },
+    {
+      "id": "curated_de_rote_grutze",
+      "name": "Rote Grütze (Red Berry Pudding)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Northern Germany",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Tart, glossy red berries and cherries just set in their juice, served cold under warm vanilla sauce.",
+      "healthBenefit": "Mostly berries, so it brings vitamin C, fibre and the red plant pigments berries carry, with less fat than most desserts.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Fruit", "baseName": "Raspberry", "quantity": 200, "unit": "g", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": null },
+        { "category": "Fruit", "baseName": "Red currant", "quantity": 150, "unit": "g", "cutPrep": "stripped from the stems", "cookingMethod": "Simmered", "prepNote": null },
+        { "category": "Fruit", "baseName": "Strawberry", "quantity": 150, "unit": "g", "cutPrep": "halved", "cookingMethod": "Simmered", "prepNote": null },
+        { "category": "Fruit", "baseName": "Sour Cherry", "quantity": 350, "unit": "g", "cutPrep": "pitted, drained from a jar", "cookingMethod": "Simmered", "prepNote": null },
+        { "category": "Bev", "baseName": "Water, tap", "quantity": 300, "unit": "ml", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": "or the cherry juice from the jar" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 45, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the berries" },
+        { "category": "PantryStaples", "baseName": "Cornstarch", "quantity": 30, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the berries" },
+        { "category": "Herbs", "baseName": "Vanilla extract", "quantity": 2, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "split between berries and sauce" },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 480, "unit": "ml", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": "for the vanilla sauce" },
+        { "category": "Dairy", "baseName": "Chicken Egg Yolk (Raw)", "quantity": 4, "unit": "each", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": "for the vanilla sauce" },
+        { "category": "PantryStaples", "baseName": "Cornstarch", "quantity": 2, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "for the vanilla sauce" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the vanilla sauce" }
+      ],
+      "instructions": [
+        "Bring 250 ml of the water to a boil with the sugar and the currants and simmer for 2 to 3 minutes.",
+        "Whisk the cornstarch into the remaining 50 ml water, stir it into the pan and boil for 1 minute until clear and thick.",
+        "Take the pan off the heat and fold in the raspberries, strawberries, cherries and half the vanilla so they keep their shape.",
+        "Pour into a bowl or glasses and chill for at least 2 hours.",
+        "For the vanilla sauce, whisk the yolks with the cornstarch. Heat the milk with the sugar to a simmer, whisk it slowly into the yolks and return to low heat.",
+        "Stir for 3 to 5 minutes until the sauce coats a spoon, without letting it boil, then stir in the rest of the vanilla.",
+        "Serve the cold Grütze with the warm or cold vanilla sauce poured over."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin C", "note": "From the strawberries, currants and raspberries." },
+        { "nutrient": "Fibre", "note": "From the whole berries and cherries." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Rote Grütze", "url": "https://mydinner.co.uk/rote-gruetze/" },
+        { "source": "Quick German Recipes, Fruit Pudding Recipe", "url": "https://www.quick-german-recipes.com/fruit-pudding-recipe.html" },
+        { "source": "Quick German Recipes, Vanilla Sauce Recipe", "url": "https://www.quick-german-recipes.com/vanilla-sauce-recipe.html" }
+      ],
+      "curationNote": "Both sources set mixed red berries with cornstarch in a little water and sugar; My Dinner adds jarred sour cherries, kept here, which lifts the yield to 6. The vanilla sauce follows Quick German Recipes."
+    },
+    {
+      "id": "curated_de_kaiserschmarrn",
+      "name": "Kaiserschmarrn (Torn Emperor's Pancake)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Bavaria and Austria",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "A thick, fluffy pancake torn into pieces and caramelised in butter, studded with raisins and served with apple sauce.",
+      "healthBenefit": "Eggs and milk give it protein, and the apple sauce adds fruit; the butter and sugar make it a hearty sweet meal rather than a light one.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_apfelmus", "servings": 4, "note": "to serve" }
+      ],
+      "ingredients": [
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 6, "unit": "each", "cutPrep": "separated", "cookingMethod": "Fried", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 220, "unit": "g", "cutPrep": null, "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 240, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "part in the batter, part to caramelise" },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 1, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fruit", "baseName": "Raisin", "quantity": 40, "unit": "g", "cutPrep": "soaked in warm water or rum", "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 30, "unit": "g", "cutPrep": null, "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Fats", "baseName": "Rapsolja", "quantity": 2, "unit": "tbsp", "cutPrep": null, "cookingMethod": "Fried", "prepNote": null },
+        { "notInDatabase": true, "name": "powdered sugar", "contains": "none", "quantity": 2, "unit": "tbsp", "cutPrep": null, "prepNote": "for dusting" }
+      ],
+      "instructions": [
+        "Heat the oven to 400°F (200°C).",
+        "Whisk the yolks with the milk, flour, half the sugar and the salt into a smooth thick batter.",
+        "Beat the whites until stiff and fold them gently into the batter.",
+        "Heat the oil and half the butter in a large ovenproof pan, pour in the batter and scatter the drained raisins over it.",
+        "Cook over medium heat for 3 to 4 minutes until set underneath, then bake for 8 to 10 minutes until puffed and golden.",
+        "Tear the pancake into bite-sized pieces with two forks, add the rest of the butter and sugar and toss over the heat for 2 to 3 minutes until caramelised.",
+        "Dust with powdered sugar and serve hot with the Apfelmus."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Protein", "note": "From the six eggs and milk." },
+        { "nutrient": "Vitamin B12", "note": "From the eggs and milk." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Kaiserschmarrn", "url": "https://mydinner.co.uk/kaiserschmarrn/" },
+        { "source": "Quick German Recipes, Kaiserschmarrn", "url": "https://www.quick-german-recipes.com/kaiserschmarrn.html" },
+        { "source": "Wikipedia (de), Kaiserschmarrn", "url": "https://de.wikipedia.org/wiki/Kaiserschmarrn" }
+      ],
+      "curationNote": "Both recipe sources separate the eggs, fold in beaten whites, add raisins, and tear and caramelise the pancake; My Dinner's quantities and oven finish are used. Apple sauce is the Apfelmus base, one of the two traditional accompaniments with plum compote. Powdered sugar is not in the food database."
+    },
+    {
+      "id": "curated_de_germknodel",
+      "name": "Germknödel (Plum-Filled Yeast Dumplings)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Bavaria and Austria",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "dumpling",
+      "flavorProfile": "A big, pillowy steamed yeast dumpling with dark spiced plum butter inside, drenched in melted butter, poppy seed sugar and vanilla sauce.",
+      "healthBenefit": "Poppy seeds bring calcium and the plum butter some fibre, but with butter and vanilla sauce this is a filling, rich sweet dish.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_pflaumenmus", "servings": 4, "note": "1 tbsp in each dumpling" }
+      ],
+      "ingredients": [
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 120, "unit": "ml", "cutPrep": "lukewarm", "cookingMethod": null, "prepNote": "for the dough" },
+        { "category": "PantryStaples", "baseName": "Baker's yeast", "quantity": 7, "unit": "g", "cutPrep": "dried", "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 40, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the dough" },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 250, "unit": "g", "cutPrep": null, "cookingMethod": "Steamed", "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 50, "unit": "g", "cutPrep": "soft", "cookingMethod": null, "prepNote": "for the dough" },
+        { "category": "Dairy", "baseName": "Chicken Egg Yolk (Raw)", "quantity": 2, "unit": "each", "cutPrep": null, "cookingMethod": "Steamed", "prepNote": "for the dough" },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 1, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Vanilla extract", "quantity": 2, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "split between dough and sauce" },
+        { "category": "Fruit", "baseName": "Lemon", "quantity": 0.5, "unit": "each", "cutPrep": "zest only", "cookingMethod": null, "prepNote": null },
+        { "category": "Alcohol", "baseName": "Rum 80 % vol", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "stirred into the plum butter, optional" },
+        { "category": "NutSeed", "baseName": "Poppy seed ground", "quantity": 36, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "4 tbsp" },
+        { "notInDatabase": true, "name": "powdered sugar", "contains": "none", "quantity": 2, "unit": "tbsp", "cutPrep": null, "prepNote": "mixed with the poppy seed" },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 50, "unit": "g", "cutPrep": "melted", "cookingMethod": null, "prepNote": "to pour over" },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 480, "unit": "ml", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": "for the vanilla sauce" },
+        { "category": "Dairy", "baseName": "Chicken Egg Yolk (Raw)", "quantity": 4, "unit": "each", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": "for the vanilla sauce" },
+        { "category": "PantryStaples", "baseName": "Cornstarch", "quantity": 2, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "for the vanilla sauce" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the vanilla sauce" }
+      ],
+      "instructions": [
+        "Stir the yeast and a pinch of the sugar into the lukewarm milk and leave for 10 minutes until foamy.",
+        "Knead it with the flour, remaining sugar, soft butter, yolks, salt, half the vanilla and the lemon zest for 5 to 8 minutes into a smooth dough; cover and leave to rise for 45 to 60 minutes until doubled.",
+        "Stir the rum into the Pflaumenmus. Divide the dough into 4, flatten each, put 1 tbsp of plum butter in the middle, pinch the dough closed and roll into a ball.",
+        "Leave the dumplings to rise, seam side down, for 15 to 20 minutes.",
+        "Steam them over simmering water, or in a covered pan over a cloth stretched above boiling water, for 15 to 20 minutes without lifting the lid.",
+        "Meanwhile make the vanilla sauce: whisk the yolks with the cornstarch, whisk in the milk heated with the sugar, and stir over low heat for 3 to 5 minutes until it coats a spoon; add the rest of the vanilla.",
+        "Serve each dumpling in a deep plate with melted butter poured over, a thick layer of poppy seed and powdered sugar, and the vanilla sauce around it."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Calcium", "note": "From the poppy seeds and milk." },
+        { "nutrient": "Vitamin A", "note": "From the butter and egg yolks." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Germknödel", "url": "https://mydinner.co.uk/germknodel/" },
+        { "source": "Quick German Recipes, Vanilla Sauce Recipe", "url": "https://www.quick-german-recipes.com/vanilla-sauce-recipe.html" }
+      ],
+      "curationNote": "The dough, the plum butter filling and the poppy seed and butter finish follow My Dinner; the vanilla sauce follows Quick German Recipes. The filling is the Pflaumenmus base. Powdered sugar is not in the food database."
+    },
+    {
+      "id": "curated_de_dampfnudeln",
+      "name": "Dampfnudeln (Steamed Yeast Buns)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Palatinate and Bavaria",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "dumpling",
+      "flavorProfile": "Soft, fluffy yeast buns steamed in sweet milk and butter until a caramelised, crackling crust forms underneath, with vanilla sauce.",
+      "healthBenefit": "Milk and eggs bring protein and calcium; it is a sweet, filling dish traditionally eaten as a meal in itself.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Bev", "baseName": "Water, tap", "quantity": 30, "unit": "ml", "cutPrep": "lukewarm", "cookingMethod": null, "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Baker's yeast", "quantity": 3, "unit": "g", "cutPrep": "dried", "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 30, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the dough" },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 57, "unit": "g", "cutPrep": "soft", "cookingMethod": null, "prepNote": "for the dough" },
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 2, "unit": "each", "cutPrep": null, "cookingMethod": "Steamed", "prepNote": null },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 60, "unit": "ml", "cutPrep": "lukewarm", "cookingMethod": null, "prepNote": "for the dough" },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 2, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 300, "unit": "g", "cutPrep": null, "cookingMethod": "Steamed", "prepNote": "or as needed" },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 360, "unit": "ml", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": "for steaming" },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 42, "unit": "g", "cutPrep": null, "cookingMethod": "Fried", "prepNote": "for steaming" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 13, "unit": "g", "cutPrep": null, "cookingMethod": "Fried", "prepNote": "for steaming" },
+        { "category": "Herbs", "baseName": "Vanilla extract", "quantity": 2, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "split between pan and sauce" },
+        { "category": "Fruit", "baseName": "Lemon", "quantity": 0.5, "unit": "each", "cutPrep": "zest only", "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 480, "unit": "ml", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": "for the vanilla sauce" },
+        { "category": "Dairy", "baseName": "Chicken Egg Yolk (Raw)", "quantity": 4, "unit": "each", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": "for the vanilla sauce" },
+        { "category": "PantryStaples", "baseName": "Cornstarch", "quantity": 2, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "for the vanilla sauce" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the vanilla sauce" }
+      ],
+      "instructions": [
+        "Stir the yeast and a pinch of the sugar into the lukewarm water and leave for 10 minutes until bubbly.",
+        "Cream the butter with the rest of the dough sugar, mix in the eggs, milk, salt and yeast, then enough flour for a soft dough; knead until smooth.",
+        "Cover and leave to rise for about 1 hour until doubled, then shape into 8 balls and leave to rise for 30 minutes more.",
+        "In a wide pan with a tight lid, heat the steaming milk, butter, sugar, a pinch of salt, half the vanilla and the lemon zest.",
+        "Set the buns in the pan, cover and cook over low heat for 25 to 30 minutes without lifting the lid, until the milk has gone and you hear a crackle as the bottoms caramelise.",
+        "While they cook, make the vanilla sauce: whisk the yolks with the cornstarch, whisk in the milk heated with the sugar, stir over low heat for 3 to 5 minutes until it coats a spoon, and add the rest of the vanilla.",
+        "Lift the buns out crust side up and serve warm with the vanilla sauce."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Calcium", "note": "From the milk in the pan and the sauce." },
+        { "nutrient": "Protein", "note": "From the eggs and milk." }
+      ],
+      "citations": [
+        { "source": "Quick German Recipes, German Steamed Yeast Dumplings (Dampfnudeln)", "url": "https://www.quick-german-recipes.com/dampfnudeln.html" },
+        { "source": "Wikipedia (de), Dampfnudel", "url": "https://de.wikipedia.org/wiki/Dampfnudel" },
+        { "source": "Quick German Recipes, Vanilla Sauce Recipe", "url": "https://www.quick-german-recipes.com/vanilla-sauce-recipe.html" }
+      ],
+      "curationNote": "Quantities follow Quick German Recipes, which steams the buns in sweet milk and butter; Wikipedia describes the Palatinate and Bavarian method of cooking them covered until a caramel crust forms underneath, served with vanilla sauce."
+    },
+    {
+      "id": "curated_de_rhabarberkuchen",
+      "name": "Rhabarberkuchen mit Streuseln (Rhubarb Crumb Cake)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Germany",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "Sharp, soft rhubarb set in a light vanilla glaze between a buttery shortcrust base and crisp crumbs.",
+      "healthBenefit": "Rhubarb brings fibre, vitamin K and calcium, with the shortcrust making it a butter-rich spring treat.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_murbeteig", "servings": 12, "note": "two thirds for the base, one third crumbled on top" }
+      ],
+      "ingredients": [
+        { "category": "Fruit", "baseName": "Rhubarb", "quantity": 900, "unit": "g", "cutPrep": "trimmed, cut in 2 cm pieces", "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 100, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the rhubarb" },
+        { "category": "Herbs", "baseName": "Vanilla extract", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Cornstarch", "quantity": 24, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "NutSeed", "baseName": "Nut, almond meal", "quantity": 30, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": "worked into the crumbs" }
+      ],
+      "instructions": [
+        "Toss the rhubarb with the sugar, vanilla and cornstarch and leave for 15 to 20 minutes while the oven heats to 350°F (180°C).",
+        "Press two thirds of the Mürbeteig into a greased 23 to 26 cm springform tin, bringing it 2 cm up the sides.",
+        "Spread the rhubarb and its juice over the base.",
+        "Rub the ground almonds into the remaining dough to make coarse crumbs and scatter them over the fruit.",
+        "Bake for 50 to 60 minutes, until the crumbs are golden and the juice bubbles at the edges.",
+        "Cool in the tin for at least 1 hour so the filling sets before slicing."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin K", "note": "From the rhubarb." },
+        { "nutrient": "Fibre", "note": "From the rhubarb." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Rhubarb Streusel Cake", "url": "https://mydinner.co.uk/rhubarb-streusel-cake/" },
+        { "source": "Quick German Recipes, Rhubarb Crumb Cake", "url": "https://www.quick-german-recipes.com/rhubarb-cake.html" },
+        { "source": "Wikipedia (de), Rhabarberkuchen", "url": "https://de.wikipedia.org/wiki/Rhabarberkuchen" }
+      ],
+      "curationNote": "Both recipe sources use one butter dough as base and crumbs with the rhubarb between; My Dinner's 900 g rhubarb thickened with cornstarch is kept and the dough is the Mürbeteig base. Quick German Recipes works ground almonds into its crumbs, which is where the almonds come from."
+    },
+    {
+      "id": "curated_de_nurnberger_lebkuchen",
+      "name": "Nürnberger Elisenlebkuchen (Nuremberg Gingerbread)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Nuremberg, Franconia",
+      "servings": 20,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Soft, moist, nutty gingerbread rounds on thin wafers, warm with spice and candied citrus, glazed in chocolate or sugar.",
+      "healthBenefit": "Made mostly of almonds and hazelnuts rather than flour, so they bring vitamin E and magnesium, with sugar and candied peel keeping them a Christmas sweet.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 6, "unit": "each", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Sweets", "baseName": "Brown Sugar (Commercial)", "quantity": 200, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "NutSeed", "baseName": "Nut, almond meal", "quantity": 130, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "NutSeed", "baseName": "Hazelnut ground", "quantity": 130, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "notInDatabase": true, "name": "candied lemon peel (Zitronat)", "contains": "none", "quantity": 100, "unit": "g", "cutPrep": "finely chopped", "prepNote": null },
+        { "notInDatabase": true, "name": "candied orange peel (Orangeat)", "contains": "none", "quantity": 100, "unit": "g", "cutPrep": "finely chopped", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Baking powder", "quantity": 2, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "notInDatabase": true, "name": "Lebkuchen spice (cinnamon, cloves, allspice, cardamom, coriander, nutmeg, ginger)", "contains": "none", "quantity": 2, "unit": "tsp", "cutPrep": null, "prepNote": null },
+        { "notInDatabase": true, "name": "Oblaten wafers, 70 mm", "contains": "gluten", "quantity": 20, "unit": "each", "cutPrep": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Dark chocolate", "quantity": 100, "unit": "g", "cutPrep": "melted", "cookingMethod": null, "prepNote": "to glaze half" },
+        { "notInDatabase": true, "name": "powdered sugar", "contains": "none", "quantity": 60, "unit": "g", "cutPrep": "stirred with a little water", "prepNote": "to glaze the rest" }
+      ],
+      "instructions": [
+        "Heat the oven to 350°F (180°C) and lay the Oblaten on lined baking trays.",
+        "Beat the eggs and brown sugar for 5 to 8 minutes until thick and pale.",
+        "Fold in the ground almonds and hazelnuts, the chopped candied peel, the baking powder and the spice into a soft, sticky mass.",
+        "Spread a heaped mound on each wafer with a wet knife, leaving a thin rim, and smooth into a dome.",
+        "Bake for 15 to 20 minutes, until set and only lightly coloured; they should stay soft inside.",
+        "Glaze half with melted chocolate and half with the powdered sugar icing while still warm, then cool and store in a tin for a few days to soften further."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin E", "note": "From the almonds and hazelnuts." },
+        { "nutrient": "Magnesium", "note": "From the nuts and dark chocolate." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Elisenlebkuchen", "url": "https://mydinner.co.uk/elisenlebkuchen/" },
+        { "source": "Quick German Recipes, German Lebkuchen Recipe", "url": "https://www.quick-german-recipes.com/lebkuchen-recipe.html" },
+        { "source": "Wikipedia (de), Lebkuchen", "url": "https://de.wikipedia.org/wiki/Lebkuchen" }
+      ],
+      "curationNote": "The Nuremberg style followed here is the nut-based Elisenlebkuchen on Oblaten from My Dinner. Quick German Recipes gives a flour-based bar with honey and molasses, used only to compare the spice and candied peel. Candied peel, Lebkuchen spice, Oblaten and powdered sugar are not in the food database."
+    },
+    {
+      "id": "curated_de_christstollen",
+      "name": "Christstollen (Christmas Stollen)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Dresden, Saxony",
+      "servings": 20,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "A dense, buttery yeast loaf full of rum-soaked raisins, almonds and candied peel around a seam of marzipan, under a thick coat of sugar.",
+      "healthBenefit": "Rich in butter and dried fruit, a Christmas bread eaten in thin slices; the almonds and raisins add some fibre and minerals.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Fruit", "baseName": "Raisin", "quantity": 150, "unit": "g", "cutPrep": "soaked overnight", "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Alcohol", "baseName": "Rum 80 % vol", "quantity": 3, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": "to soak the raisins, optional" },
+        { "category": "Bev", "baseName": "Water, tap", "quantity": 120, "unit": "ml", "cutPrep": "warm", "cookingMethod": null, "prepNote": "to soak the raisins" },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 120, "unit": "ml", "cutPrep": "lukewarm", "cookingMethod": null, "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Baker's yeast", "quantity": 7, "unit": "g", "cutPrep": "dried", "cookingMethod": null, "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 440, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 225, "unit": "g", "cutPrep": "soft", "cookingMethod": "Baked", "prepNote": "in the dough" },
+        { "category": "NutSeed", "baseName": "Almonds", "quantity": 90, "unit": "g", "cutPrep": "flaked, toasted", "cookingMethod": "Roasted", "prepNote": null },
+        { "notInDatabase": true, "name": "Lebkuchen spice", "contains": "none", "quantity": 1, "unit": "tsp", "cutPrep": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Vanilla extract", "quantity": 2, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 6, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 65, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "in the dough" },
+        { "notInDatabase": true, "name": "candied orange peel (Orangeat)", "contains": "none", "quantity": 25, "unit": "g", "cutPrep": "chopped", "prepNote": null },
+        { "notInDatabase": true, "name": "candied lemon peel (Zitronat)", "contains": "none", "quantity": 50, "unit": "g", "cutPrep": "chopped", "prepNote": null },
+        { "notInDatabase": true, "name": "marzipan", "contains": "none", "quantity": 55, "unit": "g", "cutPrep": "rolled into a log", "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 30, "unit": "g", "cutPrep": "melted", "cookingMethod": null, "prepNote": "to brush the hot loaf" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 2, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": "first coat" },
+        { "notInDatabase": true, "name": "powdered sugar", "contains": "none", "quantity": 120, "unit": "g", "cutPrep": null, "prepNote": "thick final coat" }
+      ],
+      "instructions": [
+        "Soak the raisins in the warm water and rum for at least 1 hour, ideally overnight, then drain.",
+        "Stir the yeast into the lukewarm milk with 100 g of the flour and leave this starter for 45 minutes.",
+        "Toast the flaked almonds on a tray at 400°F (200°C) for 8 to 10 minutes until golden, then cool. Lower the oven to 350°F (175°C).",
+        "Knead the starter with the remaining flour, sugar, salt, spice, vanilla and soft butter into a firm dough, then knead in the raisins, almonds and candied peel just until spread through.",
+        "Cover and leave to rise for 1 to 2 hours; the dough rises only a little.",
+        "Flatten the dough into an oval, lay the marzipan log along the middle, fold one long side over so it does not quite meet the other and press the edge to make the stollen shape.",
+        "Bake on a lined tray for 50 to 60 minutes, covering with foil if it browns too fast.",
+        "Brush the hot stollen all over with melted butter, roll it in the sugar, cool, then cover thickly with powdered sugar.",
+        "Wrap well and leave for 1 to 3 weeks before slicing, so the flavours settle."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin A", "note": "From the butter." },
+        { "nutrient": "Fibre", "note": "From the raisins and almonds." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Authentic Stollen", "url": "https://mydinner.co.uk/stollen-recipe/" },
+        { "source": "Wikipedia (de), Stollen (Gebäck)", "url": "https://de.wikipedia.org/wiki/Stollen_(Geb%C3%A4ck)" }
+      ],
+      "curationNote": "Quantities follow My Dinner's yeast stollen with a starter, rum raisins, almonds, candied peel and a marzipan seam. Wikipedia describes the Stollen as a heavy, butter-rich yeast dough with dried fruit, and the Christmas loaf as the same recipe. Quick German Recipes was opened but gives a quark stollen with baking powder, a different style, so it is not followed. Candied peel, marzipan, Lebkuchen spice and powdered sugar are not in the food database."
+    },
+    {
+      "id": "curated_de_berliner_pfannkuchen",
+      "name": "Berliner Pfannkuchen (Jam Doughnuts)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Berlin and all of Germany",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Light, golden fried yeast doughnuts with a pale ring around the middle, filled with tart jam and rolled in sugar.",
+      "healthBenefit": "Fried and sweet, made for carnival and New Year's Eve; a treat rather than a source of much nutrition.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 180, "unit": "ml", "cutPrep": "lukewarm", "cookingMethod": null, "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Baker's yeast", "quantity": 7, "unit": "g", "cutPrep": "dried", "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 500, "unit": "g", "cutPrep": null, "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 60, "unit": "g", "cutPrep": "soft", "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Vanilla extract", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 3, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Chicken Egg Yolk (Raw)", "quantity": 3, "unit": "each", "cutPrep": null, "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Fats", "baseName": "Solrosolja", "quantity": 100, "unit": "ml", "cutPrep": null, "cookingMethod": "Fried", "prepNote": "about what is taken up from 750 ml for frying" },
+        { "notInDatabase": true, "name": "jam (plum, raspberry or red currant)", "contains": "none", "quantity": 250, "unit": "g", "cutPrep": null, "prepNote": null },
+        { "notInDatabase": true, "name": "powdered sugar", "contains": "none", "quantity": 50, "unit": "g", "cutPrep": null, "prepNote": "or granulated sugar to roll" }
+      ],
+      "instructions": [
+        "Stir the yeast and sugar into the lukewarm milk and leave for 10 minutes until it bubbles.",
+        "Add the flour, butter, vanilla and salt, pour in the yeast milk and knead, adding the yolks one at a time, for 5 to 8 minutes into a smooth, elastic dough.",
+        "Cover and leave to rise for about 1 hour until doubled.",
+        "Divide into 12 pieces of about 60 g, roll each into a tight ball, set on a floured cloth, cover and leave to rise for 30 to 40 minutes.",
+        "Heat the oil to 340°F (170°C). Fry 3 or 4 at a time, covered for the first 2 minutes, then turn and fry uncovered for 2 to 3 minutes more, until golden with a pale ring around the middle.",
+        "Drain on paper, then pipe the jam into each through a small hole in the side.",
+        "Roll in or dust with sugar and eat the same day."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Carbohydrate", "note": "From the flour, sugar and jam." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Authentic German Berliner", "url": "https://mydinner.co.uk/berliner-donut/" },
+        { "source": "Quick German Recipes, Berliner Pfannkuchen or Krapfen", "url": "https://www.quick-german-recipes.com/jelly-donut-recipe.html" },
+        { "source": "Wikipedia (de), Berliner Pfannkuchen", "url": "https://de.wikipedia.org/wiki/Berliner_Pfannkuchen" }
+      ],
+      "curationNote": "Both sources make an enriched yeast dough with egg yolks, fry it and pipe in jam; My Dinner's quantities and its covered-then-uncovered frying for the white ring are followed. The oil is entered as roughly what the doughnuts absorb. Jam and powdered sugar are not in the food database."
+    },
+    {
+      "id": "curated_de_marmorkuchen",
+      "name": "Marmorkuchen (Marble Cake)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Germany",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "A moist, buttery vanilla Gugelhupf swirled with cocoa and coated in a thin snap of dark chocolate.",
+      "healthBenefit": "A classic butter cake for coffee time; eggs bring some protein and cocoa a little iron, alongside plenty of sugar and butter.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 225, "unit": "g", "cutPrep": "soft", "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 200, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Herbs", "baseName": "Vanilla extract", "quantity": 2, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 5, "unit": "each", "cutPrep": "room temperature", "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Dairy", "baseName": "Heavy Whipping Cream", "quantity": 180, "unit": "ml", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 315, "unit": "g", "cutPrep": "sifted", "cookingMethod": "Baked", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Baking powder", "quantity": 3, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 1, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Brewing", "baseName": "Pure Cocoa / Cacao Powder (Unsweetened)", "quantity": 20, "unit": "g", "cutPrep": "sifted", "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 2, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": "for the cocoa batter" },
+        { "category": "Sweets", "baseName": "Dark chocolate", "quantity": 100, "unit": "g", "cutPrep": "melted", "cookingMethod": null, "prepNote": "for the glaze" },
+        { "category": "Fats", "baseName": "Rapsolja", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "melted with the chocolate" }
+      ],
+      "instructions": [
+        "Heat the oven to 350°F (180°C). Butter a 22 cm Gugelhupf or Bundt tin and dust it with flour.",
+        "Beat the butter, sugar and vanilla for 3 to 4 minutes until light, then beat in the eggs one at a time and mix in the cream.",
+        "Sift in the flour, baking powder and salt and fold just until combined.",
+        "Spoon two thirds of the batter into the tin. Stir the cocoa and milk into the rest and spread it on top.",
+        "Draw a fork through both batters in a spiral to marble them.",
+        "Bake for 50 to 60 minutes, until a skewer comes out clean. Cool for 10 minutes in the tin, then turn out.",
+        "Melt the chocolate with the oil and pour it over the cooled cake."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin A", "note": "From the butter, cream and eggs." },
+        { "nutrient": "Iron", "note": "A little from the cocoa and dark chocolate." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Marmorkuchen", "url": "https://mydinner.co.uk/marble-cake/" },
+        { "source": "Quick German Recipes, German Marble Pound Cake", "url": "https://www.quick-german-recipes.com/marble-pound-cake-recipe.html" },
+        { "source": "Wikipedia (de), Marmorkuchen", "url": "https://de.wikipedia.org/wiki/Marmorkuchen" }
+      ],
+      "curationNote": "Both sources make a butter cake, darken part of the batter and swirl it in a ring tin; My Dinner's cream-enriched batter with cocoa and a dark chocolate glaze is followed. The glaze is melted dark chocolate with a little oil, the homemade option the source describes."
+    },
+    {
+      "id": "curated_de_apfelpfannkuchen",
+      "name": "Apfelpfannkuchen (Apple Pancakes)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "pancake",
+      "flavorProfile": "Thick, airy pancakes fried in butter around thin slices of caramelised apple, crisp at the edges.",
+      "healthBenefit": "Eggs and milk give protein and apples some fibre; eaten as a sweet lunch or dessert.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 225, "unit": "g", "cutPrep": null, "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 3, "unit": "each", "cutPrep": "separated", "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 180, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Bev", "baseName": "Natural mineral water", "quantity": 60, "unit": "ml", "cutPrep": "sparkling", "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 1, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 2, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "a pinch" },
+        { "category": "Fruit", "baseName": "Apple", "quantity": 4, "unit": "each", "cutPrep": "cored, cut in 5 mm wedges", "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Bev", "baseName": "Lemon Juice", "quantity": 1, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Brown Sugar (Commercial)", "quantity": 4, "unit": "tsp", "cutPrep": null, "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 56, "unit": "g", "cutPrep": null, "cookingMethod": "Fried", "prepNote": null }
+      ],
+      "instructions": [
+        "Whisk the egg whites with a pinch of the salt until stiff.",
+        "Whisk the flour and milk until smooth, then add the yolks, sparkling water, sugar and the rest of the salt into a thick batter.",
+        "Fold in the egg whites and rest the batter in the fridge for about 30 minutes.",
+        "Toss the apple wedges with the lemon juice and brown sugar.",
+        "Melt 1 tbsp butter in a frying pan over medium heat, lay a quarter of the apples in it and cook for 2 minutes until they start to caramelise.",
+        "Pour a quarter of the batter over the apples, cover and cook for 3 to 4 minutes until set, then turn and cook for 2 to 3 minutes more.",
+        "Repeat with the rest and serve warm, dusted with cinnamon sugar if you like."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Protein", "note": "From the eggs and milk." },
+        { "nutrient": "Fibre", "note": "From the apples." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Apfelpfannkuchen", "url": "https://mydinner.co.uk/german-caramelised-apple-pancake/" },
+        { "source": "Quick German Recipes, German Apple Pancake", "url": "https://www.quick-german-recipes.com/german-apple-pancake-recipe.html" },
+        { "source": "Wikipedia (de), Pfannkuchen", "url": "https://de.wikipedia.org/wiki/Pfannkuchen" }
+      ],
+      "curationNote": "My Dinner's pan-fried pancake with folded egg whites and sparkling water over caramelised apples is followed. Quick German Recipes bakes a single oven pancake with apples, a variation it notes is debated, and was used only to compare the batter."
+    },
+    {
+      "id": "curated_de_bratapfel",
+      "name": "Bratapfel (Baked Apple with Vanilla Sauce)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Soft, sweet-sour whole apples filled with caramelised nuts, raisins, cinnamon and marzipan, in a pool of warm vanilla sauce.",
+      "healthBenefit": "A whole apple each brings fibre and some vitamin C, and the nuts add vitamin E; the vanilla sauce and marzipan make it a winter dessert.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Fruit", "baseName": "Apple", "quantity": 4, "unit": "each", "cutPrep": "large tart apples, cored", "cookingMethod": "Baked", "prepNote": "Boskop or Elstar" },
+        { "category": "Fruit", "baseName": "Raisin", "quantity": 40, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Alcohol", "baseName": "Rum 80 % vol", "quantity": 2, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": "to soak the raisins, optional" },
+        { "category": "NutSeed", "baseName": "Hazelnut", "quantity": 50, "unit": "g", "cutPrep": "chopped", "cookingMethod": "Roasted", "prepNote": "or almonds or walnuts" },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 28, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Sweets", "baseName": "Brown Sugar (Commercial)", "quantity": 1, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Bev", "baseName": "Lemon Juice", "quantity": 1, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, cinnamon, ground", "quantity": 0.5, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "notInDatabase": true, "name": "marzipan", "contains": "none", "quantity": 50, "unit": "g", "cutPrep": null, "prepNote": "or 3 tbsp tart jam" },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 480, "unit": "ml", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": "for the vanilla sauce" },
+        { "category": "PantryStaples", "baseName": "Cornstarch", "quantity": 20, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 35, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the vanilla sauce" },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 1, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "notInDatabase": true, "name": "vanilla pod", "contains": "none", "quantity": 1, "unit": "each", "cutPrep": "split, seeds scraped", "prepNote": null },
+        { "category": "Dairy", "baseName": "Chicken Egg Yolk (Raw)", "quantity": 2, "unit": "each", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": null }
+      ],
+      "instructions": [
+        "Soak the raisins in the rum, ideally the night before. Heat the oven to 350°F (180°C).",
+        "Toast the nuts in a dry pan, stirring, for 3 to 5 minutes until they smell roasted, then add the butter and brown sugar and stir until caramelised.",
+        "Off the heat, stir in the raisins, cinnamon and lemon juice, then knead in the marzipan to a paste.",
+        "Fill the cored apples with the nut mixture and stand them in a buttered baking dish.",
+        "Bake for 25 to 35 minutes, until the apples are soft but still hold their shape.",
+        "For the vanilla sauce, whisk a little milk with the cornstarch, sugar, salt and yolks. Heat the rest of the milk with the vanilla pod and seeds, whisk in the mixture and stir over low heat for 3 to 5 minutes until thick, then remove the pod.",
+        "Serve the hot apples in the warm vanilla sauce."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Fibre", "note": "From the whole apples and raisins." },
+        { "nutrient": "Vitamin E", "note": "From the hazelnuts." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Bratapfel", "url": "https://mydinner.co.uk/bratapfel/" },
+        { "source": "Quick German Recipes, Easy Recipe for Baked Apples (Bratäpfel)", "url": "https://www.quick-german-recipes.com/easy-recipe-for-baked-apples.html" },
+        { "source": "Wikipedia (de), Bratapfel", "url": "https://de.wikipedia.org/wiki/Bratapfel" }
+      ],
+      "curationNote": "My Dinner's filling of caramelised nuts, raisins, cinnamon and marzipan with a vanilla sauce is followed; Quick German Recipes bakes the apples with nuts and spices too but sweetens with maple syrup, so it was used only to compare. The vanilla pod and marzipan are not in the food database."
+    },
+    {
+      "id": "curated_de_spekulatius",
+      "name": "Spekulatius (Spiced Shortcrust Biscuits)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Rhineland and Westphalia",
+      "servings": 30,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Thin, crisp, caramel-brown biscuits pressed with pictures, fragrant with cinnamon, cloves and cardamom.",
+      "healthBenefit": "A small Christmas biscuit of butter, flour and sugar; the ground almonds add a little vitamin E.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 115, "unit": "g", "cutPrep": "cold, cubed", "cookingMethod": "Baked", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 250, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 65, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Sweets", "baseName": "Brown Sugar (Commercial)", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "NutSeed", "baseName": "Nut, almond meal", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 1, "unit": "each", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Herbs", "baseName": "Vanilla extract", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, cinnamon, ground", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, cloves, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "a pinch" },
+        { "category": "Herbs", "baseName": "Spices, cardamom, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "a pinch" },
+        { "category": "Herbs", "baseName": "Spices, ginger, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "a pinch" },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 1, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Mix the spices together. Combine the flour, both sugars, spices, salt and ground almonds and make a well in the middle.",
+        "Add the egg, vanilla and cold butter and work everything together quickly with cold hands until a smooth dough forms, adding a teaspoon of water only if it stays crumbly.",
+        "Wrap and chill overnight.",
+        "Heat the oven to 350°F (180°C). Roll the dough 3 mm thin, or press it into floured Spekulatius moulds and knock it out, and cut or stamp about 30 biscuits.",
+        "Bake on lined trays for 10 to 12 minutes, until golden brown at the edges.",
+        "Cool on a rack and store in a tin."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Carbohydrate", "note": "From the flour and sugars." },
+        { "nutrient": "Vitamin E", "note": "A little from the ground almonds." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Easy Spekulatius", "url": "https://mydinner.co.uk/spekulatius/" },
+        { "source": "Wikipedia (de), Spekulatius", "url": "https://de.wikipedia.org/wiki/Spekulatius" }
+      ],
+      "curationNote": "Quantities follow My Dinner's spiced shortcrust with ground almonds. Wikipedia describes Spekulatius as a thin spiced shortcrust biscuit pressed in picture moulds, traditional in the Rhineland, Westphalia and the Low Countries."
+    },
+    {
+      "id": "curated_de_zimtsterne",
+      "name": "Zimtsterne (Cinnamon Stars)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Swabia and southern Germany",
+      "servings": 25,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Chewy almond and cinnamon stars with a crisp, snow-white meringue top, no flour at all.",
+      "healthBenefit": "Made of almonds and egg white without flour, so they suit a wheat-free table and bring vitamin E, though they are mostly sugar.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Dairy", "baseName": "Chicken Egg White (Raw)", "quantity": 3, "unit": "each", "cutPrep": "room temperature", "cookingMethod": "Baked", "prepNote": null },
+        { "notInDatabase": true, "name": "powdered sugar", "contains": "none", "quantity": 300, "unit": "g", "cutPrep": "sifted", "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 1, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "NutSeed", "baseName": "Almonds", "quantity": 300, "unit": "g", "cutPrep": "ground with their skins", "cookingMethod": "Baked", "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, cinnamon, ground", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "use up to 1 tbsp for a stronger taste" },
+        { "category": "Herbs", "baseName": "Vanilla extract", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fruit", "baseName": "Orange", "quantity": 0.25, "unit": "each", "cutPrep": "zest only", "cookingMethod": null, "prepNote": "about 1 tsp" }
+      ],
+      "instructions": [
+        "Whisk the egg whites with the salt and powdered sugar until stiff and glossy.",
+        "Take out about a third of the meringue and keep it covered for the tops.",
+        "Knead the almonds, cinnamon, vanilla and orange zest into the rest to a smooth dough; wrap and chill for at least 2 hours or overnight.",
+        "Heat the oven to 300°F (150°C). Roll the dough 1 cm thick between sheets of baking paper dusted with powdered sugar and cut out stars.",
+        "Brush each star with the reserved meringue.",
+        "Bake for 8 to 12 minutes, until the meringue is set but still white and the stars are soft underneath; they firm up as they cool."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin E", "note": "From the ground almonds." },
+        { "nutrient": "Magnesium", "note": "From the almonds." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Zimtsterne", "url": "https://mydinner.co.uk/zimtsterne/" },
+        { "source": "Wikipedia (de), Zimtstern", "url": "https://de.wikipedia.org/wiki/Zimtstern" }
+      ],
+      "curationNote": "Quantities follow My Dinner: egg white meringue, ground unpeeled almonds, cinnamon and orange zest, a third of the meringue kept for glazing. Wikipedia describes the flourless almond and cinnamon star with its white glaze, at home in Swabia. Powdered sugar is not in the food database."
+    },
+    {
+      "id": "curated_de_quarkkeulchen",
+      "name": "Quarkkeulchen (Saxon Quark and Potato Pancakes)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Saxony",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Small golden pan-fried cakes of potato and quark, soft inside with raisins and lemon, tossed in cinnamon sugar and served with apple sauce.",
+      "healthBenefit": "Potato and quark give a filling mix of starch and protein; frying and the cinnamon sugar make it a sweet meal.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_quark", "servings": 5, "note": "about 250 g" },
+        { "recipeId": "curated_de_base_apfelmus", "servings": 4, "note": "to serve" }
+      ],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Potato", "quantity": 450, "unit": "g", "cutPrep": "floury, peeled, boiled and riced, cooled", "cookingMethod": "Boiled", "prepNote": "ideally cooked the day before" },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 65, "unit": "g", "cutPrep": null, "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 1, "unit": "each", "cutPrep": null, "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 40, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "in the dough" },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 1, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fruit", "baseName": "Lemon", "quantity": 0.5, "unit": "each", "cutPrep": "zest only", "cookingMethod": null, "prepNote": "optional" },
+        { "category": "Fruit", "baseName": "Raisin", "quantity": 40, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "optional" },
+        { "category": "Fats", "baseName": "Rapsolja", "quantity": 3, "unit": "tbsp", "cutPrep": null, "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the cinnamon sugar" },
+        { "category": "Herbs", "baseName": "Spices, cinnamon, ground", "quantity": 2, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": "for the cinnamon sugar" }
+      ],
+      "instructions": [
+        "Boil the peeled potatoes in salted water for 15 to 20 minutes until soft, rice or mash them and leave to cool completely.",
+        "Mix the potato, quark, flour, egg, sugar, salt, lemon zest and raisins into a soft dough.",
+        "With floured hands, shape it into small flat cakes about 1.5 cm thick.",
+        "Heat the oil in a frying pan and fry the cakes over medium heat for 3 to 4 minutes on each side until golden brown.",
+        "Mix the sugar and cinnamon and toss the warm Quarkkeulchen in it, then serve with the Apfelmus."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Protein", "note": "From the quark and egg." },
+        { "nutrient": "Potassium", "note": "From the potatoes." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Quarkkeulchen", "url": "https://mydinner.co.uk/quarkkeulchen/" },
+        { "source": "Wikipedia (de), Quarkkäulchen", "url": "https://de.wikipedia.org/wiki/Quarkk%C3%A4ulchen" }
+      ],
+      "curationNote": "Quantities follow My Dinner's Saxon potato and quark cakes with raisins and lemon, served with apple sauce and cinnamon sugar. Wikipedia describes them as flat pan-fried cakes of quark dough shaped like small patties. The quark is the homemade quark base at 50 g per serving and the apple sauce is the Apfelmus base."
+    },
+    {
+      "id": "curated_de_grie_brei",
+      "name": "Grießbrei (Semolina Pudding)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Warm, smooth, creamy milk pudding of fine semolina scented with vanilla and lemon, under cinnamon sugar or fruit.",
+      "healthBenefit": "Mostly milk, so it brings calcium, protein and vitamin B12, and it is gentle and easy to eat.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 960, "unit": "ml", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 1, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "notInDatabase": true, "name": "vanilla sugar", "contains": "none", "quantity": 8, "unit": "g", "cutPrep": null, "prepNote": null },
+        { "category": "Fruit", "baseName": "Lemon", "quantity": 0.25, "unit": "each", "cutPrep": "zest only", "cookingMethod": null, "prepNote": "about 1 tsp" },
+        { "category": "Grain", "baseName": "Soft wheat semolina", "quantity": 85, "unit": "g", "cutPrep": "fine", "cookingMethod": "Simmered", "prepNote": "Weichweizengrieß" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 2, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": "for the cinnamon sugar" },
+        { "category": "Herbs", "baseName": "Spices, cinnamon, ground", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "for the cinnamon sugar" }
+      ],
+      "instructions": [
+        "Bring the milk, sugar, vanilla sugar, lemon zest and salt to a boil, stirring all the time so it does not catch.",
+        "Take the pan off the heat and sprinkle in the semolina while stirring.",
+        "Return to low heat and cook for about 10 minutes, stirring often, until thick and smooth.",
+        "Leave to cool for a few minutes.",
+        "Serve warm or cold with cinnamon sugar, or with fruit compote, Apfelmus or Rote Grütze."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Calcium", "note": "From the milk." },
+        { "nutrient": "Vitamin B12", "note": "From the milk." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Simple Semolina Pudding (Grießbrei)", "url": "https://mydinner.co.uk/semolina-pudding/" },
+        { "source": "Wikipedia (de), Grießbrei", "url": "https://de.wikipedia.org/wiki/Grie%C3%9Fbrei" }
+      ],
+      "curationNote": "Quantities follow My Dinner. Wikipedia describes Grießbrei as soft wheat semolina cooked in milk and served with sugar, cinnamon, fruit, compote or apple sauce, which is how it is served here. Vanilla sugar is not in the food database."
+    },
+    {
+      "id": "curated_de_arme_ritter",
+      "name": "Arme Ritter (German French Toast)",
+      "builderType": "dessert",
+      "dishGroup": "Cakes & Desserts",
+      "region": "Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Slices of stale roll soaked in sweet lemon-scented egg milk and fried golden in butter, crisp outside and custardy inside.",
+      "healthBenefit": "A thrifty dish that uses up stale bread, with eggs and milk adding protein; the butter and sugar make it a sweet treat.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_kaiserbrotchen", "servings": 2.5, "note": "about 240 g stale rolls, sliced 1.5 cm thick" }
+      ],
+      "ingredients": [
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 2, "unit": "each", "cutPrep": null, "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 1, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 26, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "in the egg milk" },
+        { "category": "Fruit", "baseName": "Lemon", "quantity": 0.5, "unit": "each", "cutPrep": "zest only", "cookingMethod": null, "prepNote": "optional" },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 240, "unit": "ml", "cutPrep": null, "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 2, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": "for the cinnamon sugar" },
+        { "category": "Herbs", "baseName": "Spices, cinnamon, ground", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "for the cinnamon sugar" }
+      ],
+      "instructions": [
+        "Whisk the eggs, salt, sugar, lemon zest and milk together in a shallow dish.",
+        "Dip the slices of roll into the egg milk on both sides and leave them on baking paper for 2 to 3 minutes to soak in.",
+        "Heat the butter in a frying pan over medium heat.",
+        "Fry the slices in batches for 2 to 3 minutes on each side until golden brown, keeping the first batch warm in a 200°F (95°C) oven.",
+        "Toss in cinnamon sugar and serve warm, with Apfelmus, fruit compote or vanilla sauce."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Protein", "note": "From the eggs and milk." },
+        { "nutrient": "Carbohydrate", "note": "From the bread rolls." }
+      ],
+      "citations": [
+        { "source": "Quick German Recipes, Traditional German French Toast (Arme Ritter)", "url": "https://www.quick-german-recipes.com/german-french-toast.html" },
+        { "source": "Wikipedia (de), Arme Ritter", "url": "https://de.wikipedia.org/wiki/Arme_Ritter" }
+      ],
+      "curationNote": "Quantities follow Quick German Recipes. Wikipedia describes Arme Ritter as stale rolls or white bread soaked in egg milk and fried in fat, a way of using up old bread, so the bread is the Kaiserbrötchen recipe here, left a day to go stale."
     }
   ]
 }

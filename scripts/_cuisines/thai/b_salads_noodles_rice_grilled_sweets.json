@@ -1,0 +1,1555 @@
+{
+  "recipes": [
+    {
+      "id": "curated_th_som_tam_thai",
+      "name": "Som Tam Thai (Green Papaya Salad)",
+      "builderType": "salad",
+      "dishGroup": "Salads",
+      "region": "Central",
+      "servings": 2,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Crunchy shredded green papaya pounded with lime, palm sugar and fish sauce, sour and sweet first with a chili bite and toasted peanuts in every mouthful.",
+      "healthBenefit": "Raw green papaya, beans and tomatoes bring vitamin C and fibre with very little fat, while the sauce carries a fair amount of salt and some sugar.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "2 cloves, peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red or green",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "bird's eye chilies",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Yandlong beans, immature pods",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "cut in 5 cm pieces",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cherry Tomato",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "halved",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Papaya",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "green, unripe, peeled and shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "palm sugar",
+          "contains": "none",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": "shaved",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried shrimp",
+          "contains": "fish",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Peanut",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "roasted, coarsely crushed",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Pound the garlic and chilies in a clay mortar to a rough paste, about 20 to 30 seconds.",
+        "Add the long beans and bruise them lightly with the pestle, then add the tomatoes and press just until they split.",
+        "Add the palm sugar, fish sauce and lime juice and stir with a spoon until the sugar dissolves, 30 seconds to 1 minute.",
+        "Add the shredded papaya, dried shrimp and peanuts, then pound gently while turning everything with the spoon for 30 to 60 seconds so the papaya softens a little and takes the dressing.",
+        "Taste for sour, sweet and salty, adjust with lime, sugar or fish sauce, and serve at once with sticky rice and raw cabbage."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the raw papaya, tomatoes and lime juice."
+        },
+        {
+          "nutrient": "Fibre",
+          "note": "From the papaya and long beans."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "Mostly from the fish sauce and dried shrimp."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Rachel Cooks Thai, Som Tum Thai (Green Papaya Salad)",
+          "url": "https://rachelcooksthai.com/green-papaya-salad/"
+        },
+        {
+          "source": "Wikipedia, Green papaya salad",
+          "url": "https://en.wikipedia.org/wiki/Green_papaya_salad"
+        }
+      ],
+      "curationNote": "Rachel Cooks Thai (single serve: 1 garlic, 1 chili, 1/4 cup beans, 5 tomatoes, 1 cup papaya, 2 tbsp each lime and palm sugar, 1 tbsp fish sauce, 1 tsp dried shrimp, 2 tbsp peanuts) doubled, compared with Wikipedia on the Central Thai version being sweeter and carrying peanuts and dried shrimp."
+    },
+    {
+      "id": "curated_th_som_tam_lao",
+      "name": "Som Tam Lao (Isan Papaya Salad with Pla Ra)",
+      "builderType": "salad",
+      "dishGroup": "Salads",
+      "region": "Isan",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "A fiercer, funkier papaya salad, deeply savoury from fermented fish and salted crab, hot with chilies and sour with lime, with almost no sweetness.",
+      "healthBenefit": "Raw papaya, tomatoes and beans bring vitamin C and fibre, while the fermented fish, salted crab and fish sauce make it a salty dish best eaten with plenty of fresh vegetables.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 9,
+          "unit": "g",
+          "cutPrep": "3 cloves, peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red or green",
+          "quantity": 5,
+          "unit": "each",
+          "cutPrep": "bird's eye chilies",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Yandlong beans, immature pods",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "cut in 5 cm pieces",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "Roma, cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Papaya",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "green, unripe, peeled and shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "palm sugar",
+          "contains": "none",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "shaved",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "pla ra (fermented fish sauce)",
+          "contains": "fish",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": "the strained juice",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "salted field crab (pu dong)",
+          "contains": "fish",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "cleaned and cracked",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Eggplant",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "small Thai eggplant, quartered",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Pound the garlic and chilies in a clay mortar until broken down, about 20 to 30 seconds.",
+        "Add the long beans, eggplant and salted crab and bruise them, then add the tomatoes and press until they release their juice.",
+        "Add the palm sugar, fish sauce, pla ra juice and lime juice and stir until the sugar dissolves, about 1 minute.",
+        "Add the papaya and pound gently while turning with a spoon for 30 to 60 seconds, until it is well coated and slightly softened.",
+        "Taste, adding more pla ra for funk or lime for sourness, and serve at once with sticky rice, raw cabbage and long beans."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the raw papaya, tomatoes and lime."
+        },
+        {
+          "nutrient": "Fibre",
+          "note": "From the papaya, beans and eggplant."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "High, from the pla ra, salted crab and fish sauce."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Import Food, Som Tum (Somtum Lao sai pla ra)",
+          "url": "https://importfood.com/recipes/recipe/1298-som-tum"
+        },
+        {
+          "source": "Wikipedia, Green papaya salad",
+          "url": "https://en.wikipedia.org/wiki/Green_papaya_salad"
+        }
+      ],
+      "curationNote": "Import Food 1298 (4 servings: 2 cups papaya, 3 Roma tomatoes, string beans, 5 chiles, 3 garlic, 2 tbsp each palm sugar, fish sauce, lime and pla ra juice) followed, with the salted crab and eggplant Wikipedia names for the Lao and Isan version. Dried shrimp and peanuts left out since this style does not carry them."
+    },
+    {
+      "id": "curated_th_larb_moo",
+      "name": "Larb Moo (Isan Minced Pork Salad)",
+      "builderType": "salad",
+      "dishGroup": "Salads",
+      "region": "Isan",
+      "servings": 3,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Warm, juicy minced pork dressed with lime and fish sauce, nutty from toasted rice powder, hot from chili flakes and bright with handfuls of mint and shallot.",
+      "healthBenefit": "Pork gives a good amount of protein, B vitamins and zinc, and the herbs add freshness with little fat beyond what the meat carries.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_th_base_khao_khua",
+          "servings": 1.5,
+          "note": "freshly ground"
+        },
+        {
+          "recipeId": "curated_th_base_prik_pon",
+          "servings": 0.25,
+          "note": "to taste"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Ground Pork (Raw)",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 45,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 45,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, spearmint, fresh",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "leaves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "sawtooth coriander (culantro)",
+          "contains": "none",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the pork and water in a small pot over medium heat and cook, stirring to break it up, until just cooked through with some juice left, 3 to 5 minutes.",
+        "Take the pot off the heat and season with the fish sauce, lime juice and chili flakes.",
+        "Stir in the shallots and toasted rice powder, then fold in the mint, cilantro, scallion and sawtooth coriander.",
+        "Taste for a balance of sour, salty and hot, then serve warm with sticky rice, cabbage wedges and long beans."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the minced pork."
+        },
+        {
+          "nutrient": "Vitamin B1 (thiamine)",
+          "note": "Pork is one of the richest common sources."
+        },
+        {
+          "nutrient": "Zinc",
+          "note": "From the pork."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Rachel Cooks Thai, Larb Gai (Ground Chicken Salad)",
+          "url": "https://rachelcooksthai.com/ground-chicken-salad/"
+        },
+        {
+          "source": "Wikipedia, Larb",
+          "url": "https://en.wikipedia.org/wiki/Larb"
+        }
+      ],
+      "curationNote": "Rachel Cooks Thai larb (1 cup meat, 2 tbsp water, 2 tbsp shallot, 1/4 cup each mint and cilantro, 1 tbsp each fish sauce, lime and toasted rice, 1/2 tsp chili flakes for 2) scaled to 300 g pork, the meat Wikipedia names as the common Isan choice. Khao khua assumed 16 servings of 1 tbsp, prik pon the same."
+    },
+    {
+      "id": "curated_th_nam_tok_neua",
+      "name": "Nam Tok Neua (Grilled Beef Waterfall Salad)",
+      "builderType": "salad",
+      "dishGroup": "Salads",
+      "region": "Isan",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Smoky slices of grilled beef, still pink and juicy, tossed warm with lime, fish sauce, toasted rice powder, chili and a heap of fresh herbs.",
+      "healthBenefit": "Beef brings protein, iron, zinc and vitamin B12, and the dressing adds flavour without added fat.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_th_base_khao_khua",
+          "servings": 2,
+          "note": "freshly ground"
+        },
+        {
+          "recipeId": "curated_th_base_prik_pon",
+          "servings": 0.5,
+          "note": "to taste"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Flank (Raw)",
+          "quantity": 225,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "sawtooth coriander (culantro)",
+          "contains": "none",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, spearmint, fresh",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "leaves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Grill the beef over hot charcoal or a grill pan at about 450°F (230°C) until charred outside and medium rare inside, 3 to 5 minutes a side.",
+        "Rest the beef for 5 to 10 minutes, then slice it thinly across the grain, keeping the juices.",
+        "Toss the warm beef and its juices with the fish sauce, lime juice and chili flakes.",
+        "Add the shallots and toasted rice powder, then the sawtooth coriander, cilantro, mint and scallion, and toss gently.",
+        "Serve at once with sticky rice and raw vegetables."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the grilled beef."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "Heme iron from the beef, absorbed well."
+        },
+        {
+          "nutrient": "Vitamin B12",
+          "note": "From the beef."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Rachel Cooks Thai, Neua Nam Tok (Beef Waterfall Salad)",
+          "url": "https://rachelcooksthai.com/beef-waterfall/"
+        },
+        {
+          "source": "Wikipedia, Larb",
+          "url": "https://en.wikipedia.org/wiki/Larb"
+        },
+        {
+          "source": "Wikipedia, Thai salads",
+          "url": "https://en.wikipedia.org/wiki/Thai_salads"
+        }
+      ],
+      "curationNote": "Rachel Cooks Thai recipe followed at its proportions (8 oz flank, 1 tbsp each fish sauce and lime, 1/4 cup shallot and each herb, 2 tbsp rice powder, 1/2 tsp chili flakes). Wikipedia Larb confirms nam tok as the grilled sliced meat version."
+    },
+    {
+      "id": "curated_th_yum_woon_sen",
+      "name": "Yum Woon Sen (Glass Noodle Salad)",
+      "builderType": "salad",
+      "dishGroup": "Salads",
+      "region": "Central",
+      "servings": 2,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Slippery glass noodles and minced pork in a sharp lime and fish sauce dressing, with crunchy onion, celery, peanuts and the sweet tang of pickled garlic.",
+      "healthBenefit": "Pork and peanuts add protein to a light noodle dish, while the noodles themselves are mostly starch with little else.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "PastaNoodles",
+          "baseName": "Glass noodles made from mung bean starch",
+          "quantity": 70,
+          "unit": "g",
+          "cutPrep": "soaked 10 minutes",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Ground Pork (Raw)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic pickled, drained",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "sliced, plus 4 tbsp of its liquid",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red or green",
+          "quantity": 5,
+          "unit": "each",
+          "cutPrep": "bird's eye chilies",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Leaf celery, stems and leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "Chinese celery, cut in 3 cm lengths",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cherry Tomato",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "halved",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Peanut",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "roasted, coarsely crushed",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring a pot of water to a boil, cook the minced pork until no longer pink, 1 to 2 minutes, and lift it out.",
+        "In the same water cook the soaked glass noodles until clear and soft, 1 to 2 minutes, then drain and cut them a few times with scissors.",
+        "Whisk the fish sauce, lime juice, sugar, pickled garlic liquid and chopped chilies until the sugar dissolves.",
+        "Toss the warm noodles and pork with the dressing, then add the onion, tomatoes, pickled garlic, celery, scallion and cilantro.",
+        "Scatter with peanuts and serve at once, while the noodles are still warm."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the pork and peanuts."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the lime, tomatoes and chilies."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Hungry in Thailand, Yum Woon Sen with Pork",
+          "url": "https://hungryinthailand.com/yum-woon-sen-pork/"
+        },
+        {
+          "source": "Wikipedia, Thai salads",
+          "url": "https://en.wikipedia.org/wiki/Thai_salads"
+        }
+      ],
+      "curationNote": "Hungry in Thailand recipe for 2 followed (2.5 oz glass noodles, 1 cup pork, 2 tbsp fish sauce, 1 tbsp each lime and sugar, 1/4 cup pickled garlic water, 5 chilies, 1 onion, 8 tomatoes, 1/3 cup peanuts). Wikipedia lists yam wunsen with minced pork."
+    },
+    {
+      "id": "curated_th_yum_neua",
+      "name": "Yum Neua (Grilled Beef Salad)",
+      "builderType": "salad",
+      "dishGroup": "Salads",
+      "region": "Central",
+      "servings": 2,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Charred sliced beef with cool cucumber, carrot and onion in a sweet, sour and salty lime dressing with a gentle chili heat.",
+      "healthBenefit": "Beef gives protein, iron and vitamin B12, and the raw vegetables add vitamin A, vitamin C and crunch.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Top Sirloin (Raw)",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Sesamolja",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": "to rub the beef",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "palm sugar",
+          "contains": "none",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": "shaved",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 1.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "julienned",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cherry Tomato",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "halved",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cucumber",
+          "quantity": 90,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red or green",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "bird's eye chilies",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rub the beef with the sesame oil and grill over high heat, about 450°F (230°C), until medium rare, 2 to 4 minutes a side.",
+        "Rest the beef for 5 to 10 minutes, then slice it thinly across the grain.",
+        "Stir the palm sugar, lime juice, fish sauce and chopped chilies together until the sugar dissolves.",
+        "Toss the beef with the carrot, onion, tomatoes, cucumber, scallion and cilantro, pour over the dressing and toss again.",
+        "Serve at once with jasmine rice."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the beef."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the carrot."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the beef."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Hungry in Thailand, Yum Nua (Thai Beef Salad)",
+          "url": "https://hungryinthailand.com/yum-nua/"
+        },
+        {
+          "source": "Wikipedia, Thai salads",
+          "url": "https://en.wikipedia.org/wiki/Thai_salads"
+        }
+      ],
+      "curationNote": "Hungry in Thailand recipe for 2 followed at its amounts (9 oz beef, 1 tbsp sesame oil, 1 tbsp palm sugar, 2 tbsp lime, 1.5 tbsp fish sauce, vegetables as listed). Wikipedia names yam nuea yang as the grilled beef yam."
+    },
+    {
+      "id": "curated_th_yum_pla_duk_fu",
+      "name": "Yum Pla Duk Fu (Crispy Catfish with Green Mango)",
+      "builderType": "salad",
+      "dishGroup": "Salads",
+      "region": "Central",
+      "servings": 2,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "A golden, airy tangle of fried catfish flakes that shatters on the tongue, eaten with a sharp green mango salad full of chili, shallot and cashews.",
+      "healthBenefit": "Catfish adds protein and the green mango brings vitamin C, while deep frying makes this a rich dish to share.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "NutSeed",
+          "baseName": "Cashew nut",
+          "quantity": 35,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "catfish",
+          "contains": "fish",
+          "quantity": 225,
+          "unit": "g",
+          "cutPrep": "skin on fillet or whole, grilled or baked then flaked",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 80,
+          "unit": "ml",
+          "cutPrep": "for frying",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Mango",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "green, unripe, julienned",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": "juice of 1 lime",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red or green",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "bird's eye chilies",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Grill or bake the catfish at 400°F (200°C) until cooked and slightly dry, 20 to 30 minutes, then pick off the flesh and pound or chop it into fine fluffy flakes.",
+        "Heat the oil in a wok to about 350°F (175°C), fry the cashews until golden, 1 to 2 minutes, and lift them out.",
+        "Scatter the fish flakes into the hot oil so they puff into a raft, fry until deep golden and crisp, 3 to 5 minutes, then flip briefly and drain on paper.",
+        "Stir the fish sauce, lime juice, sugar and sliced chilies together, then toss with the green mango, shallots and cashews.",
+        "Pile the mango salad beside the crispy catfish and serve straight away so the fish stays crisp."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the catfish and cashews."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the green mango and lime."
+        },
+        {
+          "nutrient": "Fat",
+          "note": "Mostly from the frying oil and cashews."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Thai Table, Crispy Catfish Green Mango Salad",
+          "url": "https://thaitable.com/recipes/crispy-catfish-green-mango-salad"
+        },
+        {
+          "source": "Wikipedia, Thai salads",
+          "url": "https://en.wikipedia.org/wiki/Thai_salads"
+        }
+      ],
+      "curationNote": "Thai Table recipe for 2 followed (1/4 cup cashews, 1/2 lb catfish, 2 tbsp fish sauce, 1/3 cup green mango, 1 lime, 2 shallots, 1 tsp sugar, 3 to 5 chilies, 1/3 cup oil). Wikipedia describes the fried flaked catfish with green mango. Catfish is not in the food database, so it is listed by name."
+    },
+    {
+      "id": "curated_th_yum_mamuang",
+      "name": "Yum Mamuang (Green Mango Salad)",
+      "builderType": "salad",
+      "dishGroup": "Salads",
+      "region": "Central",
+      "servings": 2,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Crisp, mouth-puckering green mango in a salty sweet lime dressing with chili, shallot, peanuts and the savoury chew of dried shrimp.",
+      "healthBenefit": "Green mango brings vitamin C and fibre, with peanuts adding some protein and healthy fat.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_th_base_prik_pon",
+          "servings": 0.66,
+          "note": "to taste"
+        }
+      ],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "palm sugar",
+          "contains": "none",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": "shaved",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Mango",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "green, unripe, julienned",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Peanut",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "roasted, coarsely crushed",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried shrimp",
+          "contains": "fish",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Stir the palm sugar, fish sauce, lime juice and chili flakes together until the sugar dissolves.",
+        "Put the mango and shallots in a bowl, pour over the dressing and toss well.",
+        "Add the peanuts and dried shrimp, toss once more and serve at once."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the green mango and lime."
+        },
+        {
+          "nutrient": "Fibre",
+          "note": "From the mango."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Hungry in Thailand, Thai Mango Salad (Yum Mamuang)",
+          "url": "https://hungryinthailand.com/thai-mango-salad/"
+        },
+        {
+          "source": "Wikipedia, Thai salads",
+          "url": "https://en.wikipedia.org/wiki/Thai_salads"
+        }
+      ],
+      "curationNote": "Hungry in Thailand recipe for 2 followed at its amounts (1 tbsp each palm sugar, fish sauce and lime, 2 tsp chili flakes, 7 oz green mango, 1/3 cup shallot, 2 tbsp each peanuts and dried shrimp). Wikipedia Thai salads used for context on yam style."
+    },
+    {
+      "id": "curated_th_yum_talay",
+      "name": "Yum Talay (Spicy Seafood Salad)",
+      "builderType": "salad",
+      "dishGroup": "Salads",
+      "region": "Central",
+      "servings": 2,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Tender shrimp, squid and mussels barely cooked and tossed warm in a hot, sour lime dressing with onion, tomato and the crunch of Chinese celery.",
+      "healthBenefit": "Seafood gives lean protein, iodine, selenium and vitamin B12, with almost no added fat.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Shrimp Crustaceans",
+          "quantity": 170,
+          "unit": "g",
+          "cutPrep": "peeled and deveined",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Squid Mollusks",
+          "quantity": 170,
+          "unit": "g",
+          "cutPrep": "cleaned, cut in rings",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Mussel Mollusks",
+          "quantity": 110,
+          "unit": "g",
+          "cutPrep": "shelled",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 90,
+          "unit": "g",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Leaf celery, stems and leaves",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "Chinese celery, cut in 3 cm lengths",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red or green",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "bird's eye chilies",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 9,
+          "unit": "g",
+          "cutPrep": "3 cloves, minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 45,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mix the fish sauce, lime juice, sugar, garlic and chopped chilies until the sugar dissolves.",
+        "Bring a pot of water to a boil and cook the shrimp, squid and mussels in batches just until opaque, 30 seconds to 90 seconds, then drain.",
+        "Toss the warm seafood with the dressing, then add the tomato, onion and celery and toss again.",
+        "Taste, adjust with lime or fish sauce, and serve straight away."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the shrimp, squid and mussels."
+        },
+        {
+          "nutrient": "Selenium",
+          "note": "From the seafood."
+        },
+        {
+          "nutrient": "Vitamin B12",
+          "note": "Mussels and squid are rich in it."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Hungry in Thailand, Yum Talay (Thai Seafood Salad)",
+          "url": "https://hungryinthailand.com/yum-talay/"
+        },
+        {
+          "source": "Wikipedia, Thai salads",
+          "url": "https://en.wikipedia.org/wiki/Thai_salads"
+        }
+      ],
+      "curationNote": "Hungry in Thailand recipe for 2 followed (1 lb mixed seafood, 1/2 cup each tomato, onion and celery, 4 chilies, 3 garlic, 2 tbsp fish sauce, 3 tbsp lime, 1 tbsp sugar), leaving out the optional pork. Wikipedia names yam tale with celery."
+    },
+    {
+      "id": "curated_th_plaa_goong",
+      "name": "Plaa Goong (Grilled Shrimp Salad with Lemongrass)",
+      "builderType": "salad",
+      "dishGroup": "Salads",
+      "region": "Central",
+      "servings": 3,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Lightly charred shrimp tossed in a roasted chili jam and lime dressing, perfumed with lemongrass, makrut leaf and mint, sweet, smoky and hot all at once.",
+      "healthBenefit": "Shrimp gives lean protein and selenium, and the herbs and lettuce add freshness, with some sugar from the chili jam.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_th_base_nam_prik_pao",
+          "servings": 2,
+          "note": "Thai roasted chili paste"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Shrimp Crustaceans",
+          "quantity": 340,
+          "unit": "g",
+          "cutPrep": "peeled and deveined, tails on",
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, green leaf",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "torn, to serve",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, spearmint, fresh",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "leaves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "lemongrass",
+          "contains": "none",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red or green",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "bird's eye chilies",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "makrut lime leaves",
+          "contains": "none",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "very thinly sliced",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "palm sugar",
+          "contains": "none",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": "shaved",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Grill the shrimp over high heat until just pink, 2 to 3 minutes in all, turning once.",
+        "Stir the nam prik pao, palm sugar, fish sauce and lime juice together until smooth.",
+        "Toss the warm shrimp with the dressing, then add the shallot, lemongrass, makrut leaves, chilies, mint and cilantro.",
+        "Spoon onto a bed of lettuce and serve at once."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the shrimp."
+        },
+        {
+          "nutrient": "Selenium",
+          "note": "From the shrimp."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Rachel Cooks Thai, Pla Goong (Spicy Grilled Shrimp Salad)",
+          "url": "https://rachelcooksthai.com/spicy-grilled-shrimp-salad/"
+        },
+        {
+          "source": "Wikipedia, Thai salads",
+          "url": "https://en.wikipedia.org/wiki/Thai_salads"
+        }
+      ],
+      "curationNote": "Rachel Cooks Thai recipe followed (3/4 lb shrimp, 3 cups lettuce, 1/4 cup each mint, cilantro and shallot, 1/8 cup lemongrass, 4 makrut leaves; dressing 2 tbsp nam prik pao, 1 tbsp palm sugar, 2 tbsp each fish sauce and lime). Wikipedia confirms phla kung with lemongrass, mint and nam phrik phao. Nam prik pao assumed 16 servings of 1 tbsp."
+    },
+    {
+      "id": "curated_th_yum_som_o",
+      "name": "Yum Som O (Pomelo Salad)",
+      "builderType": "salad",
+      "dishGroup": "Salads",
+      "region": "Central",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Juicy pomelo segments and sweet shrimp in a creamy coconut and chili jam dressing, finished with toasted coconut, peanuts and crisp fried shallot and garlic.",
+      "healthBenefit": "Pomelo brings vitamin C and the shrimp adds protein, with the coconut and fried toppings making it a little richer than most yum.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_th_base_nam_prik_pao",
+          "servings": 1,
+          "note": "Thai roasted chili paste"
+        },
+        {
+          "recipeId": "curated_th_base_hom_jiew",
+          "servings": 1,
+          "note": "fried shallots"
+        },
+        {
+          "recipeId": "curated_th_base_kati",
+          "servings": 0.125,
+          "note": "about 2 tbsp"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fruit",
+          "baseName": "Pomelo, rå",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "peeled, segments broken into pieces",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Shrimp Crustaceans",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "peeled and deveined",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Nuts, coconut meat, desiccated, unsweetened",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "toasted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Peanut",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "roasted, coarsely crushed",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "thinly sliced and fried crisp",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "palm sugar",
+          "contains": "none",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": "shaved",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Simmer the shrimp in a little water until pink, 1 to 2 minutes, then drain and halve them.",
+        "Toast the coconut in a dry pan over medium-low heat, stirring, until golden, 2 to 4 minutes.",
+        "Stir the coconut milk, nam prik pao, fish sauce, palm sugar and lime juice together until smooth.",
+        "Gently toss the pomelo and shrimp with the dressing, taking care not to crush the pomelo.",
+        "Top with the toasted coconut, peanuts, fried shallots, fried garlic and cilantro, and serve."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the pomelo and lime."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the shrimp and peanuts."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Rachel Cooks Thai, Yum Som-O (Pomelo Salad)",
+          "url": "https://rachelcooksthai.com/pomelo-salad/"
+        },
+        {
+          "source": "Wikipedia, Thai salads",
+          "url": "https://en.wikipedia.org/wiki/Thai_salads"
+        }
+      ],
+      "curationNote": "Rachel Cooks Thai recipe followed (3 cups pomelo, 6 shrimp, 2 tbsp coconut flakes, 2 tbsp peanuts, 1 tbsp each fried shallot and garlic; dressing 2 tbsp coconut milk, 1 tbsp nam prik pao, 1 tbsp fish sauce, 1 tbsp palm sugar, 2 tbsp lime). Wikipedia confirms yam som o with palm sugar and coconut milk. Kati assumed 8 servings of 1 cup, hom jiew and nam prik pao 16 of 1 tbsp."
+    }
+  ]
+}

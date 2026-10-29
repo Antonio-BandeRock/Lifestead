@@ -1586,5 +1586,1103 @@
 {"source":"Made With Lau, Ginger and Scallion Crab","url":"https://www.madewithlau.com/recipes/ginger-scallion-crab"}
 ],
 "curationNote":"Quantities and method follow Made With Lau, the one recipe opened for this dish; its tamari is listed here as dark soy sauce, as its method calls it. The doneness temperature is the standard one for crab."
+},
+{
+"id":"curated_cn_mapo_dou_fu","name":"Mapo Dou Fu (Mapo Tofu)","builderType":"side","dishRole":"main","dishGroup":"Tofu & Eggs","region":"Sichuan (Chengdu)","servings":6,"servingSizeAmount":1,"servingSizeUnit":"serving",
+"flavorProfile":"Soft tofu simmered in a glossy red sauce of fermented chili bean paste, minced pork, garlic and ginger, numbing with ground Sichuan pepper and fragrant with toasted chili oil.",
+"healthBenefit":"Tofu gives plant protein, calcium and iron, and a small amount of pork carries the flavour through a large amount of tofu; the oil and bean paste make it rich and salty, so it is eaten with plenty of rice.",
+"overallTier":"moderate",
+"components":[
+{"recipeId":"curated_sauce_chicken_stock","servings":0.67,"note":"2/3 cup, or water"},
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":6,"note":"1 cup cooked per serving"}
+],
+"ingredients":[
+{"category":"Fats","baseName":"Rapsolja","quantity":120,"unit":"ml","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":"half to make the chili oil, half to cook"},
+{"category":"Veg","baseName":"Red Chilli (Chili)","quantity":5,"unit":"g","cutPrep":"1 to 2 fresh bird chilies, thinly sliced","cookingMethod":"Fried","prepNote":null},
+{"category":"Veg","baseName":"Pepper, hot chili, red, sun-dried","quantity":4,"unit":"g","cutPrep":"6 to 8, roughly chopped","cookingMethod":"Fried","prepNote":null},
+{"notInDatabase":true,"name":"ground Sichuan peppercorn","contains":"none","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":"1/2 to 1 1/2 tbsp, with 1/4 tsp kept back to finish"},
+{"category":"Herbs","baseName":"Ginger root","quantity":18,"unit":"g","cutPrep":"finely minced","cookingMethod":"Fried","prepNote":"about 3 tbsp"},
+{"category":"Veg","baseName":"Garlic","quantity":25,"unit":"g","cutPrep":"finely minced","cookingMethod":"Fried","prepNote":"about 3 tbsp"},
+{"category":"Meat","baseName":"Ground Pork (Raw)","quantity":225,"unit":"g","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":"minced beef is the other traditional choice"},
+{"notInDatabase":true,"name":"doubanjiang (Pixian chili bean paste)","contains":"gluten","quantity":1.5,"unit":"tbsp","cutPrep":null,"prepNote":"1 to 2 tbsp"},
+{"category":"Legume","baseName":"Tofu, silken, soft","quantity":450,"unit":"g","cutPrep":"in 2.5 cm cubes","cookingMethod":"Simmered","prepNote":null},
+{"category":"Bev","baseName":"Water, tap","quantity":60,"unit":"ml","cutPrep":null,"cookingMethod":null,"prepNote":"for the slurry"},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":1.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Fats","baseName":"Sesamolja","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"optional"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"optional"},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":15,"unit":"g","cutPrep":"1, finely chopped","cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Warm 1/4 cup of the oil over low heat with the fresh and dried chilies and cook gently for about 5 minutes, stirring now and then, until fragrant but not burnt. Set aside.",
+"Heat the rest of the oil over medium heat, fry the ginger for 1 minute, then the garlic for 1 minute more. Turn the heat to high, add the pork, break it up and cook until no pink remains.",
+"Stir in the ground Sichuan pepper for 15 to 30 seconds without letting it burn, then the bean paste. Pour in the stock and simmer for about 1 minute over medium heat.",
+"Stir in the cornstarch mixed with the water and let it bubble until thick, then add the chili oil and chilies.",
+"Fold in the tofu gently and simmer 3 to 5 minutes, then stir in the sesame oil, sugar and scallion just until it wilts. Finish with the reserved Sichuan pepper and serve hot with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From tofu and pork together."},
+{"nutrient":"Calcium","note":"Tofu set with calcium sulfate is a good source."},
+{"nutrient":"Iron","note":"From the tofu and meat."}
+],
+"citations":[
+{"source":"The Woks of Life, Mapo Tofu","url":"https://thewoksoflife.com/ma-po-tofu-real-deal/"},
+{"source":"China Sichuan Food, Mapo Tofu","url":"https://www.chinasichuanfood.com/mapo-tofu/"}
+],
+"curationNote":"Quantities follow The Woks of Life; China Sichuan Food blanches the tofu in salted water for 1 minute first, adds fermented black beans and simmers the tofu 6 to 8 minutes. Wikipedia's account of the Chengdu origin was read for the region."
+},
+{
+"id":"curated_cn_xi_hong_shi_chao_dan","name":"Xi Hong Shi Chao Dan (Tomato and Egg Stir-Fry)","builderType":"side","dishRole":"main","dishGroup":"Tofu & Eggs","region":"Nationwide home cooking","servings":2,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Soft, fluffy scrambled egg folded into tomatoes cooked down into a sweet and sour sauce, the most familiar home dish in China.",
+"healthBenefit":"Eggs give protein, choline and B12, and cooked tomatoes give lycopene, which the body takes up better from tomatoes cooked with a little oil.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":2,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Veg","baseName":"Tomato","quantity":500,"unit":"g","cutPrep":"4 small to medium, in small wedges","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":15,"unit":"g","cutPrep":"1, finely chopped","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Dairy","baseName":"Chicken Egg (Raw)","quantity":4,"unit":"each","cutPrep":"beaten","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.75,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"1/4 tsp in the eggs, 1/2 tsp with the tomatoes"},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Fats","baseName":"Sesamolja","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":1,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Fats","baseName":"Rapsolja","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":"2 tbsp for the eggs, 1 for the tomatoes"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Bev","baseName":"Water, tap","quantity":60,"unit":"ml","cutPrep":null,"cookingMethod":"Simmered","prepNote":"up to 120 ml if it cooks off fast"}
+],
+"instructions":[
+"Beat the eggs for about 1 minute with 1/4 tsp salt, the white pepper, sesame oil and Shaoxing wine.",
+"Heat the wok over medium heat until it just smokes, add 2 tbsp oil and pour in the eggs straight away. Scramble until just set and lift them out.",
+"Add the last 1 tbsp oil, raise the heat to high and stir-fry the tomatoes and scallion for 1 minute.",
+"Add the sugar, 1/2 tsp salt and the water, return the eggs, mix, cover and cook for 1 to 2 minutes until the tomatoes are completely soft.",
+"Uncover and stir over high heat until the sauce is as thick as you like. Serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the eggs."},
+{"nutrient":"Lycopene","note":"Cooked tomatoes are a rich source."},
+{"nutrient":"Choline","note":"Egg yolks are a good source."}
+],
+"citations":[
+{"source":"The Woks of Life, Chinese Tomato Egg Stir-fry","url":"https://thewoksoflife.com/stir-fried-tomato-and-egg/"},
+{"source":"Wikipedia, Stir-fried tomato and scrambled eggs","url":"https://en.wikipedia.org/wiki/Stir-fried_tomato_and_scrambled_eggs"}
+],
+"curationNote":"Quantities follow The Woks of Life; Wikipedia describes the same cook the eggs, cook the tomatoes, combine method and the dish's history in Shanghai home cooking."
+},
+{
+"id":"curated_cn_cha_ye_dan","name":"Cha Ye Dan (Tea Eggs)","builderType":"snack","dishGroup":"Tofu & Eggs","region":"Zhejiang, now nationwide","servings":12,"servingSizeAmount":1,"servingSizeUnit":"each",
+"flavorProfile":"Hard-boiled eggs with cracked shells soaked overnight in black tea, soy sauce and warm spices, so the whites come out marbled brown and gently spiced.",
+"healthBenefit":"Each egg gives about 6 g of protein with choline, B12 and selenium; most of the salty soaking liquid is left behind.",
+"overallTier":"strong",
+"components":[],
+"ingredients":[
+{"category":"Dairy","baseName":"Chicken Egg (Raw)","quantity":12,"unit":"each","cutPrep":"whole in the shell","cookingMethod":"Boiled","prepNote":null},
+{"notInDatabase":true,"name":"loose black tea leaves","contains":"none","quantity":2,"unit":"tbsp","cutPrep":null,"prepNote":"in the soaking liquid, not eaten"},
+{"notInDatabase":true,"name":"star anise","contains":"none","quantity":5,"unit":"each","cutPrep":null,"prepNote":"in the soaking liquid, not eaten"},
+{"category":"Herbs","baseName":"Spices, cloves, ground","quantity":0.25,"unit":"tsp","cutPrep":"6 whole cloves","cookingMethod":null,"prepNote":"in the soaking liquid, not eaten"},
+{"category":"Herbs","baseName":"Pepper, black, ground","quantity":0.25,"unit":"tsp","cutPrep":"12 whole peppercorns","cookingMethod":null,"prepNote":"in the soaking liquid, not eaten"},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"in the soaking liquid; only a little reaches the eggs"},
+{"notInDatabase":true,"name":"dark soy sauce","contains":"gluten","quantity":2,"unit":"tbsp","cutPrep":null,"prepNote":"in the soaking liquid; only a little reaches the eggs"},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce, in the soaking liquid; only a little reaches the eggs"}
+],
+"instructions":[
+"Put the eggs in a pot with all the other ingredients and 1 to 1.2 litres of water, enough to cover the eggs. Bring slowly to a boil over medium heat, 15 to 20 minutes.",
+"Turn off the heat and leave the eggs in the liquid for about 30 minutes as it cools.",
+"Lift the eggs out one at a time and tap the shells all over with the back of a spoon, firmly enough to break the membrane but without peeling.",
+"Return them to the liquid, cover and refrigerate overnight, 12 to 48 hours, then peel and eat cold or warmed, whole or halved into noodle soup."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"About 6 g an egg."},
+{"nutrient":"Choline","note":"Egg yolks are a good source."},
+{"nutrient":"Vitamin B12","note":"From the eggs."}
+],
+"citations":[
+{"source":"The Woks of Life, Tea Eggs","url":"https://thewoksoflife.com/tea-eggs/"},
+{"source":"China Sichuan Food, Tea Eggs (Marbled Eggs)","url":"https://www.chinasichuanfood.com/chinese-tea-eggs/"},
+{"source":"Wikipedia, Tea egg","url":"https://en.wikipedia.org/wiki/Tea_egg"}
+],
+"curationNote":"Quantities follow The Woks of Life; China Sichuan Food adds rock sugar, Sichuan pepper, cassia, bay and fennel, and Wikipedia gives the Zhejiang origin. The soaking liquid is listed for reference but is not eaten, so the egg's nutrition is overstated a little in salt and soy."
+},
+{
+"id":"curated_cn_pi_dan_dou_fu","name":"Pi Dan Dou Fu (Century Egg Tofu)","builderType":"side","dishRole":"side","dishGroup":"Tofu & Eggs","region":"Northern China","servings":4,"servingSizeAmount":1,"servingSizeUnit":"serving",
+"flavorProfile":"A cold dish of chilled silken tofu topped with sliced century egg, shredded young ginger and scallion, dressed with light soy sauce and sesame oil.",
+"healthBenefit":"No cooking, little oil, and a good dose of plant protein and calcium from the tofu; the century egg and soy add a fair amount of salt.",
+"overallTier":"moderate",
+"components":[],
+"ingredients":[
+{"category":"Legume","baseName":"Tofu, silken, soft","quantity":400,"unit":"g","cutPrep":"chilled, drained, sliced or left whole","cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"century egg (pidan)","contains":"egg","quantity":2,"unit":"each","cutPrep":"peeled and cut in wedges","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":10,"unit":"g","cutPrep":"finely shredded","cookingMethod":null,"prepNote":"young ginger if you can find it"},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":15,"unit":"g","cutPrep":"1, finely chopped","cookingMethod":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce"},
+{"category":"Fats","baseName":"Sesamolja","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Keep the tofu chilled until just before serving, then slide it onto a plate and pour off the water that gathers.",
+"Peel the century eggs, rinse them and cut into wedges with a knife wiped between cuts, and arrange them over and around the tofu.",
+"Scatter the shredded ginger and scallion on top.",
+"Drizzle over the soy sauce and sesame oil and serve cold, within about 30 minutes."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From tofu and egg."},
+{"nutrient":"Calcium","note":"Tofu is a good source."},
+{"nutrient":"Sodium","note":"Century eggs and soy sauce are salty."}
+],
+"citations":[
+{"source":"Wikipedia, Century egg","url":"https://en.wikipedia.org/wiki/Century_egg"}
+],
+"curationNote":"Written from Wikipedia's description of the northern Chinese serving (century egg over chilled silken tofu with young ginger, spring onion, light soy sauce and sesame oil) using standard proportions; no recipe with quantities opened. Taiwan adds bonito flakes."
+},
+{
+"id":"curated_cn_jia_chang_dou_fu","name":"Jia Chang Dou Fu (Home-Style Tofu)","builderType":"side","dishRole":"main","dishGroup":"Tofu & Eggs","region":"Sichuan","servings":2,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Thick slabs of tofu pan-fried golden on both sides, then tossed with carrot and green chili in a savoury sauce of chili bean paste, garlic, ginger and soy.",
+"healthBenefit":"Tofu gives plant protein, calcium and iron and the carrot adds beta-carotene, with pan-frying rather than deep-frying keeping the oil moderate.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":2,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Legume","baseName":"Tofu","quantity":400,"unit":"g","cutPrep":"firm, drained, cut in strips about 10 by 3 cm","cookingMethod":"Pan Fried","prepNote":null},
+{"category":"Fats","baseName":"Rapsolja","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Pan Fried","prepNote":"split between frying the tofu and the sauce"},
+{"category":"Veg","baseName":"Carrot","quantity":110,"unit":"g","cutPrep":"sliced","cookingMethod":"Stir Fried","prepNote":"about 1 cup"},
+{"category":"Veg","baseName":"Green Chilli (Chili)","quantity":30,"unit":"g","cutPrep":"1, chopped","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":9,"unit":"g","cutPrep":"3 cloves, chopped","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":6,"unit":"g","cutPrep":"2 slices","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":10,"unit":"g","cutPrep":"white part, in rounds","cookingMethod":"Stir Fried","prepNote":null},
+{"notInDatabase":true,"name":"doubanjiang (chili bean paste)","contains":"gluten","quantity":2,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":1.5,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"1 tbsp light and 1/2 tbsp regular"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":0.5,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Drain the tofu, pat it dry and cut it into thick strips.",
+"Heat a pan over medium-high heat until it smokes lightly, add half the oil and fry the tofu for 3 to 5 minutes a side until golden. Set aside.",
+"Add the rest of the oil to the pan over low heat and fry the bean paste for about 1 minute until the oil turns red, then add the garlic, ginger and scallion white until fragrant.",
+"Add the carrot and chili and stir-fry for about 2 minutes, then the sugar, soy sauces and Shaoxing wine and let it bubble for about 30 seconds.",
+"Return the tofu, turn it gently to coat and serve at once with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"Firm tofu is a good plant source."},
+{"nutrient":"Calcium","note":"From the tofu."},
+{"nutrient":"Vitamin A","note":"Carrot provides beta-carotene."}
+],
+"citations":[
+{"source":"China Sichuan Food, Home Style Tofu","url":"https://www.chinasichuanfood.com/home-style-tofu/"},
+{"source":"The Woks of Life, Home-Style Tofu Stir-Fry","url":"https://thewoksoflife.com/home-style-tofu/"}
+],
+"curationNote":"Quantities follow China Sichuan Food's chili bean paste version, which gives no frying time; the 3 to 5 minutes a side comes from The Woks of Life, whose version adds 115 g ground pork and oyster sauce and leaves out the bean paste."
+},
+{
+"id":"curated_cn_zheng_shui_dan","name":"Zheng Shui Dan (Steamed Egg Custard)","builderType":"side","dishRole":"side","dishGroup":"Tofu & Eggs","region":"Cantonese, made nationwide","servings":2,"servingSizeAmount":1,"servingSizeUnit":"bowl",
+"flavorProfile":"Eggs beaten with twice their volume of water and stock and steamed gently until silky and barely set, finished with soy sauce.",
+"healthBenefit":"A soft, easily digested dish with egg protein, choline and B12 and almost no added fat, often made for children and anyone recovering from illness.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_sauce_chicken_stock","servings":0.67,"note":"the same volume as the eggs, about 160 ml"}
+],
+"ingredients":[
+{"category":"Dairy","baseName":"Chicken Egg (Raw)","quantity":3,"unit":"each","cutPrep":"beaten","cookingMethod":"Steamed","prepNote":"about 160 ml"},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Bev","baseName":"Water, tap","quantity":160,"unit":"ml","cutPrep":null,"cookingMethod":"Steamed","prepNote":"the same volume as the eggs"},
+{"category":"Fats","baseName":"Sesamolja","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Veg","baseName":"Okra","quantity":70,"unit":"g","cutPrep":"4 to 5, sliced into thin rounds","cookingMethod":"Steamed","prepNote":"optional; scallion is the more usual topping"},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Crack the eggs into a measuring jug and note the volume. Pour them into a bowl with the salt and beat for at least 1 minute.",
+"Whisk in the same volume of water and the same volume of stock, then the sesame oil and white pepper. Strain through a fine sieve into a shallow heatproof dish and skim off any bubbles.",
+"Float the okra slices on top in a single layer.",
+"Bring the water in a steamer to a full boil, 212°F (100°C), set the dish in, cover and steam on high for 3 minutes. Turn off the heat and leave the lid on for 14 minutes, until just set with a slight wobble.",
+"Drizzle with the soy sauce and serve warm."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the eggs."},
+{"nutrient":"Choline","note":"Egg yolks are a good source."},
+{"nutrient":"Vitamin B12","note":"From the eggs."}
+],
+"citations":[
+{"source":"The Woks of Life, Steamed Eggs","url":"https://thewoksoflife.com/steamed-eggs/"},
+{"source":"Wikipedia, Chinese steamed eggs","url":"https://en.wikipedia.org/wiki/Chinese_steamed_eggs"}
+],
+"curationNote":"Quantities and the steam then rest method follow The Woks of Life; Wikipedia gives the usual liquid to egg ratio of about 1.5 to 1 and Fuchsia Dunlop's advice to cook the eggs gently and not for too long."
+},
+{
+"id":"curated_cn_fu_yung_dan","name":"Fu Yung Dan (Egg Foo Young)","builderType":"side","dishRole":"main","dishGroup":"Tofu & Eggs","region":"Cantonese (Guangdong)","servings":4,"servingSizeAmount":1,"servingSizeUnit":"serving",
+"flavorProfile":"Puffy egg patties full of shrimp, onion and bean sprouts, fried until golden at the edges and covered with a savoury brown gravy of stock, oyster sauce and soy.",
+"healthBenefit":"Eggs and shrimp give plenty of protein, choline and selenium and the sprouts add some vitamin C; frying and the gravy make it rich, so it is a dish for now and then.",
+"overallTier":"moderate",
+"components":[
+{"recipeId":"curated_sauce_chicken_stock","servings":3.25,"note":"for the gravy, about 780 ml"},
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per serving"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Shrimp Crustaceans","quantity":280,"unit":"g","cutPrep":"peeled and roughly chopped","cookingMethod":"Fried","prepNote":"or char siu, chicken, pork or tofu"},
+{"category":"Veg","baseName":"Onion","quantity":165,"unit":"g","cutPrep":"1 medium, diced","cookingMethod":"Fried","prepNote":null},
+{"category":"Sprouts","baseName":"Mung Bean Sprouts (Raw)","quantity":200,"unit":"g","cutPrep":"about 2 cups","cookingMethod":"Fried","prepNote":null},
+{"category":"Dairy","baseName":"Chicken Egg (Raw)","quantity":6,"unit":"each","cutPrep":"lightly beaten","cookingMethod":"Fried","prepNote":null},
+{"category":"Fats","baseName":"Sesamolja","quantity":0.75,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"1/4 tsp in the batter, 1/2 tsp in the gravy"},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":10,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"1 tsp in the batter, 3 tbsp for the gravy"},
+{"category":"Fats","baseName":"Rapsolja","quantity":5,"unit":"tbsp","cutPrep":null,"cookingMethod":"Fried","prepNote":"2 tbsp for the gravy, about 3 tbsp absorbed in frying"},
+{"category":"PantryStaples","baseName":"Wheat flour, white, all-purpose, enriched, unbleached","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Spices, turmeric, ground","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Paprika","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":3,"unit":"g","cutPrep":"1 small clove, minced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Shallot","quantity":5,"unit":"g","cutPrep":"minced","cookingMethod":"Stir Fried","prepNote":"about 1 tsp"},
+{"category":"Herbs","baseName":"Seasoning sauce, oyster sauce","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce"},
+{"notInDatabase":true,"name":"dark soy sauce","contains":"gluten","quantity":0.5,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":15,"unit":"g","cutPrep":"1, chopped","cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"For the gravy, heat 2 tbsp oil in a saucepan over medium heat and whisk in the flour, turmeric and paprika for 15 to 20 seconds, then the garlic and shallot for 30 seconds. Whisk in 3 cups of the stock, bring to a simmer and add the oyster sauce, soy sauces, 1/2 tsp sesame oil and white pepper. Stir in most of the 3 tbsp cornstarch mixed with the last 1/4 cup of stock and cook 30 seconds, until it coats a spoon.",
+"Heat 5 to 8 cm of oil in a wok or deep pot to 350°F (175°C); it settles to about 325°F (160°C) once the patties go in.",
+"Only when the oil is nearly hot, fold the shrimp, onion and sprouts with the eggs, 1/4 tsp sesame oil and 1 tsp cornstarch until just combined, without salt.",
+"Pour in about 3/4 cup of batter at a time from a ladle held close to the oil, 2 or 3 patties at once. Fry 40 seconds, spooning hot oil over the tops, then flip and fry 1 minute more, until golden and set.",
+"Drain on a rack, pressing lightly to remove the oil. Serve over rice with the hot gravy and scallion."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From eggs and shrimp."},
+{"nutrient":"Selenium","note":"Shrimp and eggs both contribute."},
+{"nutrient":"Choline","note":"From the eggs."}
+],
+"citations":[
+{"source":"The Woks of Life, Egg Foo Young","url":"https://thewoksoflife.com/egg-foo-young/"},
+{"source":"Wikipedia, Egg foo young","url":"https://en.wikipedia.org/wiki/Egg_foo_young"}
+],
+"curationNote":"Quantities follow The Woks of Life, which also gives a pan-fried version using 1 tbsp oil a patty; Wikipedia gives the Guangdong origin and the common fillings. Only the absorbed frying oil is counted."
+},
+{
+"id":"curated_cn_yong_tau_foo","name":"Yong Tau Foo (Hakka Stuffed Tofu)","builderType":"side","dishRole":"main","dishGroup":"Tofu & Eggs","region":"Hakka","servings":4,"servingSizeAmount":5,"servingSizeUnit":"piece",
+"flavorProfile":"Squares of firm tofu with a hollow filled with a springy pork and prawn stuffing, steamed and then sizzled with hot oil, scallion and coriander and seasoned with soy sauce.",
+"healthBenefit":"Tofu, pork and prawn together give plenty of protein with calcium, iron and selenium, and steaming keeps the fat low.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per serving"}
+],
+"ingredients":[
+{"category":"Legume","baseName":"Tofu","quantity":500,"unit":"g","cutPrep":"firm, cut in 4 by 4 by 2 cm squares, a hollow scooped from each","cookingMethod":"Steamed","prepNote":null},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"2 tbsp to dust, 1 tbsp in the stuffing; dust each piece with about 1/4 tsp"},
+{"category":"Herbs","baseName":"Ginger root","quantity":3,"unit":"g","cutPrep":"a 1/2 cm knob, finely chopped","cookingMethod":"Steamed","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":22,"unit":"g","cutPrep":"1 1/2, half finely chopped for the stuffing, the rest sliced","cookingMethod":null,"prepNote":null},
+{"category":"Veg","baseName":"Coriander (cilantro) leaves","quantity":15,"unit":"g","cutPrep":"a handful, finely chopped, plus sprigs to finish","cookingMethod":null,"prepNote":null},
+{"category":"Meat","baseName":"Ground Pork (Raw)","quantity":100,"unit":"g","cutPrep":null,"cookingMethod":"Steamed","prepNote":null},
+{"category":"Meat","baseName":"Shrimp Crustaceans","quantity":100,"unit":"g","cutPrep":"raw, minced to a paste with a cleaver","cookingMethod":"Steamed","prepNote":"fish paste is the usual Southeast Asian choice"},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":4,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"1 tbsp in the stuffing, 3 to season"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":0.5,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.0625,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"a pinch"},
+{"category":"Fats","baseName":"Rapsolja","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Fried","prepNote":"heated to smoking"}
+],
+"instructions":[
+"Mix the ginger, chopped scallion, chopped coriander, pork, prawn paste, 1 tbsp soy sauce, Shaoxing wine, sugar, white pepper and 1 tbsp cornstarch. Scoop it up and throw it back into the bowl 5 or 6 times to make it springy.",
+"Cut the tofu into squares, scoop a small hollow in the middle of each and dust lightly with cornstarch. Press a heaped teaspoon of stuffing into each hollow; roll any left over into small balls.",
+"Set the pieces on a heatproof plate and steam over high heat, 212°F (100°C), for 10 minutes, until the stuffing is firm and cooked through, 160°F (71°C) in the centre.",
+"Scatter the sliced scallion and coriander sprigs over the tofu. Heat the oil in a wok until it smokes and pour it over so it sizzles.",
+"Season with the rest of the soy sauce and serve hot with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From tofu, pork and prawn."},
+{"nutrient":"Calcium","note":"From the tofu."},
+{"nutrient":"Selenium","note":"Prawns are a good source."}
+],
+"citations":[
+{"source":"Great British Chefs (Jeremy Pang), Hakka Stuffed Tofu","url":"https://www.greatbritishchefs.com/recipes/hakka-stuffed-tofu-recipe"},
+{"source":"What To Cook Today, Hakka Yong Tau Foo","url":"https://whattocooktoday.com/yong-tau-foo.html"},
+{"source":"Wikipedia, Yong tau foo","url":"https://en.wikipedia.org/wiki/Yong_tau_foo"}
+],
+"curationNote":"Quantities follow Jeremy Pang's steamed version for Great British Chefs; What To Cook Today uses half pork and half fish paste, stuffs eggplant, bitter melon, okra and chilies too, and serves it in an anchovy broth or with a sweet bean sauce. Wikipedia gives the Hakka origin. The doneness temperature is the standard one for minced pork."
+},
+{
+"id":"curated_cn_di_san_xian","name":"Di San Xian (Potato, Eggplant and Pepper)","builderType":"side","dishRole":"side","dishGroup":"Vegetables","region":"Northeastern China (Dongbei)","servings":2,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"The three treasures of the earth: potato browned in the wok, soft eggplant and sweet pepper, glazed together with garlic, soy sauce and a light cornstarch sauce.",
+"healthBenefit":"Three vegetables in one dish give fibre, potassium and vitamin C from the pepper; eggplant soaks up oil readily, so this is a richer vegetable dish than most.",
+"overallTier":"moderate",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":2,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Veg","baseName":"Garlic","quantity":9,"unit":"g","cutPrep":"3 cloves, smashed","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":30,"unit":"g","cutPrep":"2, chopped","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":1.5,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"stirred into the water"},
+{"category":"Bev","baseName":"Water, tap","quantity":45,"unit":"ml","cutPrep":null,"cookingMethod":null,"prepNote":"for the slurry"},
+{"category":"Veg","baseName":"Eggplant","quantity":400,"unit":"g","cutPrep":"2 long Chinese eggplants, cut on an angle into large pieces","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Potato","quantity":225,"unit":"g","cutPrep":"1 large, peeled, cut on an angle into large pieces","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Red Bell Pepper","quantity":120,"unit":"g","cutPrep":"in large pieces","cookingMethod":"Stir Fried","prepNote":"The Woks of Life uses half a red and half an orange pepper; a green pepper is the Dongbei original"},
+{"category":"Fats","baseName":"Rapsolja","quantity":4,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Fats","baseName":"Sesamolja","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"to taste"}
+],
+"instructions":[
+"Wash and dry the vegetables well, cut them into large pieces and cook the potato and eggplant soon after cutting so they do not darken. Stir the cornstarch into the water.",
+"Heat the oil in a wok over medium heat and brown the potato for about 8 minutes, stirring now and then, until cooked through. Add the peppers for about 1 minute, then lift everything out.",
+"Spread the eggplant in the oil left in the wok, cover for about 1 minute, then uncover and stir. Repeat 2 or 3 times until it is soft and cooked through, then lift it out.",
+"Add a little oil only if the wok is dry, fry the garlic for a few seconds and return all the vegetables. Add the Shaoxing wine, soy sauce, sugar, white pepper and sesame oil and mix well.",
+"Raise the heat, stir the slurry and add it with the scallions. Toss a few times until glossy, add salt to taste and serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Vitamin C","note":"From the sweet pepper and potato."},
+{"nutrient":"Potassium","note":"Potato and eggplant both contribute."},
+{"nutrient":"Fiber","note":"From all three vegetables."}
+],
+"citations":[
+{"source":"The Woks of Life, Di San Xian","url":"https://thewoksoflife.com/di-san-xian/"},
+{"source":"China Sichuan Food, Di San Xian","url":"https://www.chinasichuanfood.com/di-san-xian/"},
+{"source":"Wikipedia, Disanxian","url":"https://en.wikipedia.org/wiki/Di_san_xian"}
+],
+"curationNote":"Quantities follow The Woks of Life's lighter stir-fried version; China Sichuan Food gives the more usual restaurant method of coating the eggplant in cornstarch and deep-frying everything in a 3 cm layer of oil. Wikipedia gives the Northeastern origin."
+},
+{
+"id":"curated_cn_gan_bian_si_ji_dou","name":"Gan Bian Si Ji Dou (Dry-Fried Green Beans)","builderType":"side","dishRole":"side","dishGroup":"Vegetables","region":"Sichuan","servings":4,"servingSizeAmount":1,"servingSizeUnit":"serving",
+"flavorProfile":"Green beans fried until wrinkled and blistered, then tossed with a little minced pork, garlic, ginger, dried chilies and Sichuan pepper until the seasoning clings and nothing pools on the plate.",
+"healthBenefit":"Green beans give fibre, vitamin K and folate, with only a little pork for flavour; most of the frying oil is poured off before the beans are seasoned.",
+"overallTier":"moderate",
+"components":[],
+"ingredients":[
+{"category":"Veg","baseName":"Green beans","quantity":450,"unit":"g","cutPrep":"trimmed, halved to about 7.5 cm, dried well","cookingMethod":"Fried","prepNote":null},
+{"category":"Fats","baseName":"Rapsolja","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Fried","prepNote":"fry the beans in 1/4 cup; about 2 tbsp stays in the dish"},
+{"notInDatabase":true,"name":"Sichuan peppercorns","contains":"none","quantity":2,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":3,"unit":"g","cutPrep":"minced","cookingMethod":"Stir Fried","prepNote":"about 1 tsp"},
+{"category":"Veg","baseName":"Garlic","quantity":9,"unit":"g","cutPrep":"3 cloves, minced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Pepper, hot chili, red, sun-dried","quantity":2,"unit":"g","cutPrep":"3, seeded and chopped","cookingMethod":"Stir Fried","prepNote":"optional"},
+{"category":"Meat","baseName":"Ground Pork (Raw)","quantity":113,"unit":"g","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":"or ground chicken; leave out for a vegetarian dish"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce"},
+{"notInDatabase":true,"name":"dark soy sauce","contains":"gluten","quantity":0.25,"unit":"tsp","cutPrep":null,"prepNote":"optional, for colour"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"to taste"}
+],
+"instructions":[
+"Trim and halve the beans, wash them and pat them completely dry so the oil does not spit.",
+"Heat 1/4 cup oil in a wok over medium-high heat and fry the beans in two batches, 5 to 8 minutes each, until wrinkled and lightly scorched. Lift them out with a strainer.",
+"Turn off the heat and pour off all but 1 tbsp of oil. Over low heat, fry the Sichuan peppercorns, ginger, garlic and dried chilies for about 1 minute until fragrant.",
+"Turn the heat to high, add the pork and stir-fry, breaking it up, until lightly browned.",
+"Return the beans with the Shaoxing wine, soy sauces and sugar and stir-fry over high heat until the liquid has cooked off and the seasoning coats the beans. Salt to taste and serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Vitamin K","note":"Green beans are a good source."},
+{"nutrient":"Fiber","note":"From the beans."},
+{"nutrient":"Folate","note":"From the beans."}
+],
+"citations":[
+{"source":"The Woks of Life, Sichuan Dry Fried String Beans","url":"https://thewoksoflife.com/dry-fried-string-beans-sichuan/"}
+],
+"curationNote":"Quantities and method follow The Woks of Life, the one recipe opened for this dish; it gives no frying time, so the 5 to 8 minutes a batch is the usual time for beans to blister. The amount of oil left in the dish is an estimate."
+},
+{
+"id":"curated_cn_suan_rong_bai_cai","name":"Suan Rong Bai Cai (Garlic Bok Choy)","builderType":"side","dishRole":"side","dishGroup":"Vegetables","region":"Cantonese, made nationwide","servings":4,"servingSizeAmount":1,"servingSizeUnit":"serving",
+"flavorProfile":"Baby bok choy flashed in a smoking wok with plenty of garlic, seasoned only with salt, white pepper and a pinch of sugar so the greens stay sweet and bright.",
+"healthBenefit":"Bok choy is a calcium-rich leafy green with vitamins A, C and K, and a quick stir-fry keeps most of them.",
+"overallTier":"strong",
+"components":[],
+"ingredients":[
+{"category":"Veg","baseName":"Bok choy","quantity":450,"unit":"g","cutPrep":"baby bok choy, halved or quartered, washed and drained well","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Fats","baseName":"Rapsolja","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":15,"unit":"g","cutPrep":"5 cloves, minced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"to taste"},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"to taste"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Trim the bok choy and split it into halves or quarters of similar size. Rinse 2 or 3 times in a basin of cold water, letting it soak a few minutes each time, and drain well.",
+"Heat the wok over high heat until it smokes, add the oil and swirl to coat.",
+"Add the garlic and immediately the bok choy, tossing so the garlic does not burn.",
+"Once the leaves begin to wilt, about 30 seconds, add the salt, white pepper and sugar.",
+"Keep tossing 2 to 4 minutes more, until the stems are as tender as you like. Serve at once."
+],
+"nutritionHighlights":[
+{"nutrient":"Calcium","note":"Bok choy is one of the better plant sources."},
+{"nutrient":"Vitamin A","note":"From the dark leaves."},
+{"nutrient":"Vitamin C","note":"Kept by quick cooking."}
+],
+"citations":[
+{"source":"The Woks of Life, Garlic Baby Bok Choy Stir Fry","url":"https://thewoksoflife.com/garlic-baby-bok-choy/"},
+{"source":"China Sichuan Food, Bok Choy Stir Fry","url":"https://www.chinasichuanfood.com/bok-choy-stir-fry-with-garlic/"}
+],
+"curationNote":"Quantities follow The Woks of Life; China Sichuan Food gives two versions with the same 5 cloves of garlic to 250 g bok choy, one with dried chilies and light soy sauce, the other finished with 2 tbsp oyster sauce."
+},
+{
+"id":"curated_cn_hao_you_gai_lan","name":"Hao You Gai Lan (Chinese Broccoli with Oyster Sauce)","builderType":"side","dishRole":"side","dishGroup":"Vegetables","region":"Cantonese (Guangdong, Hong Kong)","servings":4,"servingSizeAmount":1,"servingSizeUnit":"serving",
+"flavorProfile":"Whole stalks of gai lan blanched in salted, oiled boiling water until crisp-tender and bright green, then drizzled with oyster sauce, a dim sum and teahouse classic.",
+"healthBenefit":"Gai lan is a brassica rich in vitamins A, C and K, calcium and folate; blanching uses almost no fat, and the oyster sauce brings most of the salt.",
+"overallTier":"strong",
+"components":[],
+"ingredients":[
+{"category":"Veg","baseName":"Chinese Broccoli","quantity":450,"unit":"g","cutPrep":"ends trimmed, washed well","cookingMethod":"Blanched","prepNote":null},
+{"category":"Herbs","baseName":"Seasoning sauce, oyster sauce","quantity":2.5,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"2 to 3 tbsp, to taste"}
+],
+"instructions":[
+"Soak the gai lan in a basin of clean water for at least 5 minutes, rubbing it to loosen grit, then lift it out. Repeat once or twice with fresh water.",
+"Bring 2 litres of water to a rolling boil, 212°F (100°C), in a wok or large pot and add 1 tsp salt and 1 to 2 tbsp oil.",
+"Add the whole stalks, in two batches if needed, push them under and cook 1 to 2 minutes until crisp-tender; baby gai lan needs about 1 minute.",
+"Lift the stalks out, shake off the water and lay them on a plate, pouring off any water that gathers.",
+"Drizzle the oyster sauce over the top and serve."
+],
+"nutritionHighlights":[
+{"nutrient":"Vitamin K","note":"Gai lan is a rich source."},
+{"nutrient":"Vitamin C","note":"Kept by brief blanching."},
+{"nutrient":"Calcium","note":"From the leaves and stems."}
+],
+"citations":[
+{"source":"The Woks of Life, Chinese Broccoli with Oyster Sauce","url":"https://thewoksoflife.com/chinese-broccoli-with-oyster-sauce/"},
+{"source":"Wikipedia, Gai lan","url":"https://en.wikipedia.org/wiki/Gai_lan"}
+],
+"curationNote":"Quantities follow The Woks of Life; Wikipedia gives boiled or steamed gai lan with oyster sauce as a common preparation tied to dim sum restaurants. The salt and oil go into the blanching water, which is poured away, so they are left out of the ingredients."
+},
+{
+"id":"curated_cn_yu_xiang_qie_zi","name":"Yu Xiang Qie Zi (Fish-Fragrant Eggplant)","builderType":"side","dishRole":"side","dishGroup":"Vegetables","region":"Sichuan","servings":2,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Soft fried eggplant in the sweet, sour, salty and gently hot yu xiang sauce of pickled chili, chili bean paste, garlic, ginger, scallion and black vinegar, with a little crisp minced pork; there is no fish in it.",
+"healthBenefit":"Eggplant gives fibre and potassium, and its purple skin carries anthocyanins; it absorbs oil readily and the sauce is sweet, so this is a dish to share.",
+"overallTier":"moderate",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":2,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Veg","baseName":"Eggplant","quantity":400,"unit":"g","cutPrep":"2 long eggplants, roll-cut into strips","cookingMethod":"Fried","prepNote":"soaked 10 to 15 minutes in water with 1 tsp salt, which is poured away"},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"about 2 tbsp clings as a coating, 1 tbsp in the sauce"},
+{"category":"Fats","baseName":"Rapsolja","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":"Fried","prepNote":null},
+{"category":"Meat","baseName":"Ground Pork (Raw)","quantity":55,"unit":"g","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":"about 1/4 cup"},
+{"notInDatabase":true,"name":"Sichuan pickled chilies (pao jiao)","contains":"none","quantity":1,"unit":"tbsp","cutPrep":"chopped","prepNote":null},
+{"notInDatabase":true,"name":"doubanjiang (chili bean paste)","contains":"gluten","quantity":0.5,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":6,"unit":"g","cutPrep":"2 cloves, chopped","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":6,"unit":"g","cutPrep":"chopped","cookingMethod":"Stir Fried","prepNote":"about 1 tbsp"},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":30,"unit":"g","cutPrep":"2, white and green chopped apart","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce"},
+{"notInDatabase":true,"name":"Chinese black vinegar (Zhenjiang)","contains":"gluten","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Bev","baseName":"Water, tap","quantity":75,"unit":"ml","cutPrep":null,"cookingMethod":null,"prepNote":"5 tbsp, in the sauce"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"in the sauce"}
+],
+"instructions":[
+"Roll-cut the eggplant into strips, soak 10 to 15 minutes in salted water, drain well and toss in a thin coat of cornstarch.",
+"Mix the soy sauce, black vinegar, water, 1 tbsp cornstarch, sugar and salt in a bowl.",
+"Heat 2 tbsp oil in a wok and fry the eggplant in batches, 4 to 6 minutes each, until browned and soft. Set aside.",
+"Heat the last 1 tbsp oil and fry the pork until crisp and browned. Add the bean paste and pickled chilies for about 1 minute until the oil turns red, then the garlic, ginger and scallion whites until fragrant.",
+"Stir in the sauce and cook until it thickens, then add the eggplant and toss quickly to coat. Scatter with the scallion greens and serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Fiber","note":"From the eggplant."},
+{"nutrient":"Potassium","note":"Eggplant contributes."},
+{"nutrient":"Anthocyanins","note":"In the purple eggplant skin."}
+],
+"citations":[
+{"source":"China Sichuan Food, Yu Xiang Qie Zi","url":"https://www.chinasichuanfood.com/yu-xiang-qie-zi-sichuan-eggplant/"},
+{"source":"The Woks of Life, Fish Fragrant Eggplant","url":"https://thewoksoflife.com/fish-fragrant-eggplant-yuxiang-qiezi/"}
+],
+"curationNote":"Quantities follow China Sichuan Food, which gives no frying time, so the 4 to 6 minutes a batch is the usual time; The Woks of Life sears the eggplant without a coating, uses dried chilies, chicken stock and oyster sauce, and leaves out the pickled chili."
+},
+{
+"id":"curated_cn_pai_huang_gua","name":"Pai Huang Gua (Smashed Cucumber Salad)","builderType":"salad","dishGroup":"Vegetables","region":"Sichuan and Northern China","servings":2,"servingSizeAmount":1,"servingSizeUnit":"bowl",
+"flavorProfile":"Cucumber smashed with a cleaver so it cracks into rough pieces that soak up a cold dressing of raw garlic, black vinegar, soy sauce, sesame oil and chili oil.",
+"healthBenefit":"A raw, cooling vegetable dish that is mostly water with some vitamin K and potassium, plus the raw garlic; the dressing is where the salt and oil are.",
+"overallTier":"strong",
+"components":[],
+"ingredients":[
+{"category":"Veg","baseName":"Cucumber","quantity":500,"unit":"g","cutPrep":"2, tough skin and ends removed","cookingMethod":null,"prepNote":null},
+{"category":"Veg","baseName":"Coriander (cilantro) leaves","quantity":15,"unit":"g","cutPrep":"a small bunch, in 2.5 cm lengths","cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"a pinch, mostly drained off with the cucumber water"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Veg","baseName":"Red Bell Pepper","quantity":40,"unit":"g","cutPrep":"1/4, finely shredded","cookingMethod":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce"},
+{"category":"Fats","baseName":"Sesamolja","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Hot seasoning, Chinese chili oil","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"or 1 tbsp hot oil poured over for a milder salad"},
+{"notInDatabase":true,"name":"Chinese black vinegar (Zhenjiang)","contains":"gluten","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":9,"unit":"g","cutPrep":"3 cloves, grated","cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Peel the tough skin from the cucumbers, trim the ends and halve them lengthwise.",
+"Smash each half with the flat of a cleaver until it cracks, scoop out the seedy middle if you like, and cut into 3 to 4 cm pieces.",
+"Toss with the pinch of salt and leave 10 minutes, then pour off the water that collects.",
+"Add the coriander, shredded pepper, sugar, soy sauce, sesame oil, chili oil, vinegar and garlic and mix well.",
+"Serve straight away, as the cucumber keeps giving off water and thins the dressing if it waits."
+],
+"nutritionHighlights":[
+{"nutrient":"Vitamin K","note":"From the cucumber and coriander."},
+{"nutrient":"Vitamin C","note":"From the raw red pepper."},
+{"nutrient":"Potassium","note":"Cucumber contributes."}
+],
+"citations":[
+{"source":"China Sichuan Food, Smashed Cucumber Salad","url":"https://www.chinasichuanfood.com/smashed-cucumber-salad/"},
+{"source":"Omnivore's Cookbook, Easy Chinese Cucumber Salad","url":"https://omnivorescookbook.com/easy-chinese-cucumber-salad/"}
+],
+"curationNote":"Quantities follow China Sichuan Food, whose two cucumbers are taken as about 500 g; Omnivore's Cookbook dresses one 300 g cucumber with the same black vinegar, soy sauce and garlic and adds the dressing only just before serving."
+},
+{
+"id":"curated_cn_suan_la_tu_dou_si","name":"Suan La Tu Dou Si (Hot and Sour Shredded Potato)","builderType":"side","dishRole":"side","dishGroup":"Vegetables","region":"Sichuan, made nationwide","servings":2,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Fine shreds of potato rinsed of their starch and stir-fried over fierce heat so they stay crisp, with dried chilies, Sichuan pepper, garlic and a splash of black vinegar at the end.",
+"healthBenefit":"Potato gives potassium, vitamin C and B6, and this method uses only a tablespoon of oil for the whole dish.",
+"overallTier":"strong",
+"components":[],
+"ingredients":[
+{"category":"Veg","baseName":"Potato","quantity":300,"unit":"g","cutPrep":"1 large, peeled, cut into fine shreds","cookingMethod":"Stir Fried","prepNote":"soaked 10 minutes and rinsed until the water runs clear"},
+{"category":"Veg","baseName":"Pepper, hot chili, red, sun-dried","quantity":3,"unit":"g","cutPrep":"2 to 4, seeded and chopped","cookingMethod":"Stir Fried","prepNote":null},
+{"notInDatabase":true,"name":"Sichuan peppercorns","contains":"none","quantity":1,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":0.5,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce"},
+{"category":"Veg","baseName":"Garlic","quantity":6,"unit":"g","cutPrep":"2 cloves, minced","cookingMethod":"Stir Fried","prepNote":null},
+{"notInDatabase":true,"name":"Chinese black vinegar (Zhenjiang)","contains":"gluten","quantity":2,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Fats","baseName":"Rapsolja","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":10,"unit":"g","cutPrep":"chopped","cookingMethod":null,"prepNote":null},
+{"category":"Veg","baseName":"Coriander (cilantro) leaves","quantity":5,"unit":"g","cutPrep":"chopped","cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Cut the potato into fine, even shreds. Soak them 10 minutes, rinsing in two or more changes of water until it runs clear, and drain very well.",
+"Heat the oil in a wok over medium heat, add the Sichuan peppercorns and, once they sizzle, the chilies. When fragrant add the garlic for about 10 seconds.",
+"Turn the heat as high as it goes, add the potato and stir-fry 2 to 3 minutes, until soft outside but still slightly crisp inside.",
+"Season with the salt and soy sauce, then pour the vinegar around the edge of the wok and toss; it goes in last so its sourness stays.",
+"Scatter with scallion and coriander and serve at once."
+],
+"nutritionHighlights":[
+{"nutrient":"Potassium","note":"Potato is a good source."},
+{"nutrient":"Vitamin C","note":"Kept by quick cooking."},
+{"nutrient":"Vitamin B6","note":"From the potato."}
+],
+"citations":[
+{"source":"China Sichuan Food, Spicy and Sour Shredded Potato","url":"https://www.chinasichuanfood.com/spicy-and-sour-potato/"},
+{"source":"The Mala Market, Sichuan Hot and Sour Shredded Potato","url":"https://blog.themalamarket.com/sichuan-hot-and-sour-shredded-potato-suanla-tudou-si/"}
+],
+"curationNote":"Quantities follow China Sichuan Food, with the 2 to 3 minute stir-fry and 10 minute rinse from The Mala Market, which uses 400 g of potato, roasted rapeseed oil and optional MSG."
+},
+{
+"id":"curated_cn_fu_ru_kong_xin_cai","name":"Fu Ru Kong Xin Cai (Water Spinach with Fermented Bean Curd)","builderType":"side","dishRole":"side","dishGroup":"Vegetables","region":"Cantonese (Guangdong)","servings":2,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Hollow-stemmed water spinach stir-fried in a smoking wok with ginger, garlic and chili and mashed white fermented bean curd, which melts into a creamy, savoury coating.",
+"healthBenefit":"Water spinach gives vitamins A and C, iron and folate; the fermented bean curd is salty, so the dish needs little other salt.",
+"overallTier":"strong",
+"components":[],
+"ingredients":[
+{"category":"Veg","baseName":"Spinach, water, fresh","quantity":300,"unit":"g","cutPrep":"1 bunch, tough stems removed, washed and drained","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Fats","baseName":"Rapsolja","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":6,"unit":"g","cutPrep":"3 to 4 thin slices, julienned","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Pepper, hot chili, red, sun-dried","quantity":2,"unit":"g","cutPrep":"4 to 5 whole","cookingMethod":"Stir Fried","prepNote":"optional"},
+{"category":"Veg","baseName":"Garlic","quantity":6,"unit":"g","cutPrep":"1 to 4 cloves, sliced","cookingMethod":"Stir Fried","prepNote":null},
+{"notInDatabase":true,"name":"white fermented bean curd (fu ru)","contains":"alcohol","quantity":0.5,"unit":"tbsp","cutPrep":"2 squares, mashed","prepNote":"usually cured in rice wine"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"less if the bean curd is very salty"},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":2,"unit":"tbsp","cutPrep":null,"prepNote":null}
+],
+"instructions":[
+"Strip off the larger, tough stems and keep the tender ones. Wash the greens well, rinsing and soaking a couple of times, and drain in a colander.",
+"Heat the oil in a wok over high heat and stir the ginger for about 10 seconds.",
+"Add the chilies, garlic, fermented bean curd, sugar, salt and white pepper.",
+"Add the greens and stir-fry over high heat with a folding motion for about 1 minute, until evenly seared, then pile them in the middle so the sides heat again.",
+"Pour the Shaoxing wine around the edge of the wok and toss 15 to 30 seconds more. Serve at once."
+],
+"nutritionHighlights":[
+{"nutrient":"Vitamin A","note":"Water spinach is a rich source."},
+{"nutrient":"Iron","note":"From the leafy greens."},
+{"nutrient":"Vitamin C","note":"Kept by quick cooking."}
+],
+"citations":[
+{"source":"The Woks of Life, Stir Fried Water Spinach with Fermented Tofu","url":"https://thewoksoflife.com/water-spinach-garlic-ginger-fermented-tofu/"},
+{"source":"Made With Lau, Ong Choy with Fermented Bean Curd","url":"https://www.madewithlau.com/recipes/ong-choy-water-spinach-fermented-bean-curd"}
+],
+"curationNote":"Quantities follow The Woks of Life; Made With Lau blanches 450 g of ong choy for about 2 1/2 minutes first, presses out the water and uses 3 cubes of bean curd mashed with sugar, cooking wine and white pepper."
+},
+{
+"id":"curated_cn_luo_han_zhai","name":"Luo Han Zhai (Buddha's Delight)","builderType":"side","dishRole":"main","dishGroup":"Vegetables","region":"Cantonese Buddhist cooking, eaten at Lunar New Year","servings":6,"servingSizeAmount":1,"servingSizeUnit":"bowl",
+"flavorProfile":"A vegetarian braise of napa cabbage, leek, shiitake, wood ear, lily flowers, tofu puffs, dried bean curd and glass noodles in a savoury sauce of red fermented bean curd, soy and Shaoxing wine.",
+"healthBenefit":"Many vegetables and fungi in one pot give fibre, B vitamins from the shiitake, and plant protein from the tofu and bean curd, with little oil.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":6,"note":"1 cup cooked per bowl"}
+],
+"ingredients":[
+{"category":"Fats","baseName":"Rapsolja","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":9,"unit":"g","cutPrep":"3 slices","cookingMethod":"Stir Fried","prepNote":null},
+{"notInDatabase":true,"name":"red fermented bean curd (nam yu)","contains":"alcohol","quantity":3,"unit":"tbsp","cutPrep":"broken up","prepNote":"cured with red yeast rice and rice wine"},
+{"category":"Veg","baseName":"Garlic","quantity":9,"unit":"g","cutPrep":"3 cloves, sliced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Leek","quantity":150,"unit":"g","cutPrep":"1 medium, in 5 cm pieces, white and green apart","cookingMethod":"Braised","prepNote":null},
+{"category":"Mushroom","baseName":"Shiitake mushroom dried","quantity":15,"unit":"g","cutPrep":"5, soaked in warm water and sliced","cookingMethod":"Braised","prepNote":null},
+{"category":"Mushroom","baseName":"Mushrooms, tree ears, Cloud ear, dried","quantity":7,"unit":"g","cutPrep":"1/4 cup, soaked in warm water","cookingMethod":"Braised","prepNote":"about 1 cup once soaked"},
+{"notInDatabase":true,"name":"dried lily flowers (golden needles)","contains":"none","quantity":8,"unit":"g","cutPrep":"1/4 cup, soaked, hard tips cut off","prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":2,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Veg","baseName":"Cabbage, napa","quantity":210,"unit":"g","cutPrep":"3 cups, in 5 cm pieces","cookingMethod":"Braised","prepNote":null},
+{"category":"Legume","baseName":"Tofu, fried (prepared with calcium sulphate)","quantity":40,"unit":"g","cutPrep":"1 cup fried tofu puffs","cookingMethod":"Braised","prepNote":null},
+{"notInDatabase":true,"name":"dried bean curd sticks (fu zhu)","contains":"none","quantity":40,"unit":"g","cutPrep":"2 sticks, soaked and cut in 5 cm pieces","prepNote":null},
+{"category":"Fats","baseName":"Sesamolja","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Bev","baseName":"Water, tap","quantity":240,"unit":"ml","cutPrep":null,"cookingMethod":"Braised","prepNote":"or vegetable stock"},
+{"notInDatabase":true,"name":"mung bean glass noodles","contains":"none","quantity":40,"unit":"g","cutPrep":"1 small bundle, soaked and cut shorter","prepNote":null}
+],
+"instructions":[
+"Soak the shiitake, wood ears, lily flowers, bean curd sticks and noodles in separate bowls of warm water until soft, 20 to 60 minutes, then slice or cut as listed.",
+"Heat the oil in a wok over medium-high heat and let the ginger caramelise for about 30 seconds. Break up the fermented bean curd in the oil, then add the garlic, leek whites, shiitake, wood ears and lily flowers and stir-fry 1 minute. Add the Shaoxing wine and stir-fry 1 minute more.",
+"Add the cabbage, tofu puffs and bean curd sticks, raise the heat to high and stir-fry 2 minutes.",
+"Add the leek greens, sesame oil, soy sauce, sugar and water, stir, cover and cook over medium heat for 6 minutes, stirring now and then.",
+"Uncover, return to high heat, add the noodles and stir until they have soaked up most of the liquid, 2 to 3 minutes. Serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Fiber","note":"From the vegetables and fungi."},
+{"nutrient":"Protein","note":"Tofu puffs and bean curd sticks."},
+{"nutrient":"B vitamins","note":"Shiitake contributes."}
+],
+"citations":[
+{"source":"The Woks of Life, Buddha's Delight","url":"https://thewoksoflife.com/buddhas-delight/"},
+{"source":"Made With Lau, Buddha's Delight","url":"https://www.madewithlau.com/recipes/buddhas-delight"}
+],
+"curationNote":"Quantities follow The Woks of Life; Made With Lau's New Year version adds bamboo fungus, king oyster and seafood mushrooms, celery, carrot, baby corn and snap peas and fries the bean curd sheet first. Weights for the dried goods are estimated from the cup measures, and the soaking times are the usual ones since the source gives none."
+},
+{
+"id":"curated_cn_hu_pi_jian_jiao","name":"Hu Pi Jian Jiao (Tiger Skin Peppers)","builderType":"side","dishRole":"side","dishGroup":"Vegetables","region":"Sichuan and Hunan","servings":4,"servingSizeAmount":1,"servingSizeUnit":"serving",
+"flavorProfile":"Long green peppers pressed against a hot wok until blistered and striped like a tiger's skin, then glazed with black vinegar, a little sugar and salt.",
+"healthBenefit":"Green chilies are rich in vitamin C and give some vitamin B6, and this takes few ingredients beyond the peppers.",
+"overallTier":"strong",
+"components":[],
+"ingredients":[
+{"category":"Veg","baseName":"Green Chilli (Chili)","quantity":360,"unit":"g","cutPrep":"12 long hot green peppers, seeded and halved","cookingMethod":"Pan Fried","prepNote":"cubanelle or green bell pepper for a milder dish"},
+{"category":"Bev","baseName":"Water, tap","quantity":45,"unit":"ml","cutPrep":null,"cookingMethod":null,"prepNote":"warm, 3 tbsp"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"Chinese black vinegar (Zhenjiang)","contains":"gluten","quantity":3,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"to taste"},
+{"category":"Fats","baseName":"Peanøttolje","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":"Pan Fried","prepNote":null}
+],
+"instructions":[
+"Seed and halve the peppers, then wash your hands well before touching your face.",
+"Mix the warm water, sugar, black vinegar and a pinch of salt.",
+"Heat the wok over medium heat and spread the oil around it, hot but not smoking. Add the peppers so they all touch the wok.",
+"After about 1 minute start turning them, pressing gently, and keep going about 5 minutes more until every side is blistered and the peppers are soft. Lower the heat if they burn.",
+"Raise the heat to medium-high, pour in the vinegar mixture and stir-fry about 30 seconds until slightly reduced. Sprinkle with salt and serve."
+],
+"nutritionHighlights":[
+{"nutrient":"Vitamin C","note":"Green chilies are a rich source."},
+{"nutrient":"Vitamin B6","note":"From the peppers."}
+],
+"citations":[
+{"source":"The Woks of Life, Tiger Skin Peppers","url":"https://thewoksoflife.com/tiger-skin-peppers/"},
+{"source":"China Sichuan Food, Tiger Skin Pepper","url":"https://www.chinasichuanfood.com/chinese-sauteed-green-peppers-tiger-skin-pepper/"}
+],
+"curationNote":"Quantities follow The Woks of Life; the pepper weight is an estimate for 12 long peppers. China Sichuan Food uses 10 shishito peppers with garlic, 2 tbsp light soy sauce and 1 tbsp black vinegar."
+},
+{
+"id":"curated_cn_cu_liu_bai_cai","name":"Cu Liu Bai Cai (Vinegar Napa Cabbage)","builderType":"side","dishRole":"side","dishGroup":"Vegetables","region":"Northern China","servings":4,"servingSizeAmount":1,"servingSizeUnit":"serving",
+"flavorProfile":"The white stalks of napa cabbage cut on the slant and stir-fried over high heat with dried chilies, ginger and garlic, then glazed in a sweet and sour sauce of black vinegar and soy.",
+"healthBenefit":"Napa cabbage gives vitamins C and K and folate for very few calories, and the dish uses little oil.",
+"overallTier":"strong",
+"components":[],
+"ingredients":[
+{"category":"Veg","baseName":"Cabbage, napa","quantity":600,"unit":"g","cutPrep":"white stalks only, sliced on a 45° angle into 2.5 cm pieces","cookingMethod":"Stir Fried","prepNote":"from a 1 to 1.2 kg head; keep the leaves for another dish"},
+{"category":"Fats","baseName":"Peanøttolje","quantity":1.5,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Pepper, hot chili, red, sun-dried","quantity":3,"unit":"g","cutPrep":"4 whole","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":10,"unit":"g","cutPrep":"a 2.5 cm piece, minced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":3,"unit":"g","cutPrep":"1 clove, minced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":30,"unit":"g","cutPrep":"2, sliced","cookingMethod":"Stir Fried","prepNote":null},
+{"notInDatabase":true,"name":"Chinese black vinegar (Zhenjiang)","contains":"gluten","quantity":2,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Separate the leaves, cut away the leafy green parts and slice the white stalks on the slant into 2.5 cm pieces.",
+"Stir the vinegar, soy sauce, sugar and cornstarch together.",
+"Heat the oil in a wok over medium-high heat and cook the chilies until they begin to darken, then add the ginger, garlic and scallions for about 1 minute.",
+"Add the cabbage, turn the heat to high, leave it 30 seconds, then stir-fry about 2 minutes until it begins to soften but is still crunchy; any longer and it floods the wok with water.",
+"Stir the sauce, pour it in and toss until the cabbage is glazed and the sauce thickens, 30 to 60 seconds. Serve hot."
+],
+"nutritionHighlights":[
+{"nutrient":"Vitamin C","note":"Napa cabbage contributes."},
+{"nutrient":"Vitamin K","note":"From the cabbage."},
+{"nutrient":"Folate","note":"From the cabbage."}
+],
+"citations":[
+{"source":"Omnivore's Cookbook, Napa Cabbage Stir Fry with Vinegar Sauce","url":"https://omnivorescookbook.com/napa-cabbage-stir-fry-vinegar-sauce/"},
+{"source":"The Woks of Life, Sichuan Napa Cabbage Stir-fry","url":"https://thewoksoflife.com/hot-sour-cabbage-stir-fry/"}
+],
+"curationNote":"Quantities follow Omnivore's Cookbook; the weight of the white stalks alone is an estimate. The Woks of Life's Sichuan hot and sour version uses 450 g of stalks with black vinegar, light soy, oyster sauce and a separate slurry."
+},
+{
+"id":"curated_cn_he_lan_dou_chao","name":"He Lan Dou Chao (Stir-Fried Snow Peas)","builderType":"side","dishRole":"side","dishGroup":"Vegetables","region":"Cantonese, made nationwide","servings":2,"servingSizeAmount":1,"servingSizeUnit":"serving",
+"flavorProfile":"Snow peas blanched for a minute to fix their colour, then tossed briefly with garlic, salt and sesame oil so they stay sweet, crisp and bright green.",
+"healthBenefit":"Snow peas give vitamin C, vitamin K and fibre, and the dish takes only a little oil.",
+"overallTier":"strong",
+"components":[],
+"ingredients":[
+{"category":"Veg","baseName":"Fresh Snow Pea","quantity":130,"unit":"g","cutPrep":"2 cups, trimmed","cookingMethod":"Stir Fried","prepNote":"blanched first"},
+{"category":"Fats","baseName":"Rapsolja","quantity":0.5,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":9,"unit":"g","cutPrep":"3 cloves, minced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Fats","baseName":"Sesamolja","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"NutSeed","baseName":"Sesame seed","quantity":1,"unit":"tsp","cutPrep":"toasted","cookingMethod":null,"prepNote":"optional"}
+],
+"instructions":[
+"Bring a pot of water to a boil, 212°F (100°C), with a few drops of oil and a small pinch of salt. Blanch the snow peas for about 1 minute and drain.",
+"Heat the oil in a wok over medium heat and fry the garlic until fragrant, 15 to 30 seconds, without letting it brown.",
+"Add the snow peas, the salt and the sesame oil and toss 30 to 60 seconds, just to combine.",
+"Take them off the heat straight away, scatter with sesame seeds and serve."
+],
+"nutritionHighlights":[
+{"nutrient":"Vitamin C","note":"Snow peas are a good source."},
+{"nutrient":"Vitamin K","note":"From the pods."},
+{"nutrient":"Fiber","note":"From the pods."}
+],
+"citations":[
+{"source":"China Sichuan Food, Garlic Snow Peas Stir Fry","url":"https://www.chinasichuanfood.com/garlic-snow-peas-stir-fry/"},
+{"source":"Omnivore's Cookbook, Stir-Fried Snow Peas and Water Chestnuts","url":"https://omnivorescookbook.com/stir-fried-snow-peas-and-water-chestnuts/"}
+],
+"curationNote":"Quantities follow China Sichuan Food; 2 cups of snow peas is taken as about 130 g. Omnivore's Cookbook skips the blanching and stir-fries the peas raw for about 3 minutes with sliced garlic, carrot and water chestnuts."
+},
+{
+"id":"curated_cn_dan_tat","name":"Dan Tat (Egg Tarts)","builderType":"bakedGoods","dishGroup":"Sweets & Drinks","region":"Hong Kong (Cantonese)","servings":16,"servingSizeAmount":1,"servingSizeUnit":"pastry",
+"flavorProfile":"A flaky, buttery shortcrust shell around a smooth, barely set custard of eggs, sugar syrup and evaporated milk, glossy and pale yellow, best eaten warm.",
+"healthBenefit":"A pastry for an occasional treat: the eggs bring some protein, choline and vitamin B12, but most of each tart is butter, flour and sugar.",
+"overallTier":"weak",
+"components":[],
+"ingredients":[
+{"category":"PantryStaples","baseName":"Wheat flour, white, all-purpose, enriched, unbleached","quantity":250,"unit":"g","cutPrep":null,"cookingMethod":"Baked","prepNote":"plus a little for rolling"},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Fats","baseName":"Pure Butter (Unsalted)","quantity":170,"unit":"g","cutPrep":"12 tbsp, slightly softened, cubed","cookingMethod":"Baked","prepNote":null},
+{"category":"Bev","baseName":"Water, tap","quantity":30,"unit":"ml","cutPrep":null,"cookingMethod":null,"prepNote":"cold, 2 tbsp plus up to 3 tsp more, for the pastry"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":100,"unit":"g","cutPrep":null,"cookingMethod":null,"prepNote":"1/2 cup"},
+{"category":"Bev","baseName":"Water, tap","quantity":240,"unit":"ml","cutPrep":null,"cookingMethod":null,"prepNote":"hot, for the sugar syrup"},
+{"notInDatabase":true,"name":"evaporated milk","contains":"dairy","quantity":120,"unit":"ml","cutPrep":null,"prepNote":"room temperature"},
+{"category":"Dairy","baseName":"Chicken Egg (Raw)","quantity":3,"unit":"each","cutPrep":"large, room temperature","cookingMethod":"Baked","prepNote":null},
+{"category":"Herbs","baseName":"Vanilla extract","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Mix the flour and salt, add the cubed butter and rub it in quickly with your fingers until the mixture looks like coarse crumbs with some pea-sized pieces of butter.",
+"Add 2 tbsp cold water and press the dough together, adding a little more water only if it will not hold. Wrap and chill 20 minutes.",
+"Roll the dough into a rectangle about 15 by 38 cm, fold it in thirds like a letter, turn it a quarter turn, roll and fold again. Wrap and chill 1 hour.",
+"Meanwhile dissolve the sugar in the hot water and let it cool. Whisk the evaporated milk, eggs and vanilla, whisk in the cooled syrup and strain through a fine sieve into a jug.",
+"Heat the oven to 375°F (190°C) with a rack in the lower third. Roll the dough about 5 mm thick, cut 10 cm circles and press them into tart tins or a muffin pan, leaving a lip above the rim. Re-roll the scraps to make 16 shells.",
+"Fill each shell about three quarters full, put the pan in the oven, lower the heat to 350°F (180°C) and bake 26 to 29 minutes, until the custard is just set and a toothpick stands up in it.",
+"Cool at least 10 minutes and serve warm."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the eggs and evaporated milk in the custard."},
+{"nutrient":"Choline","note":"Egg yolks are a rich source."},
+{"nutrient":"Saturated fat","note":"Mostly from the butter pastry."}
+],
+"citations":[
+{"source":"The Woks of Life, Hong Kong Egg Tarts","url":"https://thewoksoflife.com/hong-kong-egg-tarts/"},
+{"source":"Omnivore's Cookbook, Hong Kong Egg Tart","url":"https://omnivorescookbook.com/hong-kong-egg-tart/"}
+],
+"curationNote":"Quantities follow The Woks of Life's shortcrust version. Omnivore's Cookbook makes the flaky puff version Hong Kong bakeries also sell, a water dough wrapped around a shortening and butter dough, with a custard of 4 eggs, 200 ml hot water, 1/4 cup sugar and 1/2 cup evaporated milk baked at 325°F (162°C) for 25 to 35 minutes."
+},
+{
+"id":"curated_cn_jian_dui","name":"Jian Dui (Sesame Balls)","builderType":"dessert","dishGroup":"Sweets & Drinks","region":"Cantonese dim sum, made across China","servings":8,"servingSizeAmount":1,"servingSizeUnit":"piece",
+"flavorProfile":"Chewy, slightly sweet glutinous rice dough wrapped around red bean or lotus seed paste, coated in sesame seeds and slowly deep-fried until crisp, golden and hollow-sounding.",
+"healthBenefit":"A fried sweet for dim sum or New Year; the sesame coating brings some calcium and minerals, but the balls are mostly starch, sugar and absorbed oil.",
+"overallTier":"weak",
+"components":[],
+"ingredients":[
+{"category":"PantryStaples","baseName":"Grains, rice, white, glutinous, flour","quantity":180,"unit":"g","cutPrep":null,"cookingMethod":"Fried","prepNote":"1 1/2 cups, used in two parts"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":67,"unit":"g","cutPrep":null,"cookingMethod":null,"prepNote":"1/3 cup"},
+{"category":"Bev","baseName":"Water, tap","quantity":60,"unit":"ml","cutPrep":null,"cookingMethod":null,"prepNote":"boiling"},
+{"category":"Bev","baseName":"Water, tap","quantity":70,"unit":"ml","cutPrep":null,"cookingMethod":null,"prepNote":"room temperature"},
+{"notInDatabase":true,"name":"sweetened red bean paste or lotus seed paste","contains":"none","quantity":192,"unit":"g","cutPrep":"8 balls of 24 g","prepNote":"chilled so it is easier to shape"},
+{"category":"NutSeed","baseName":"Sesame seed","quantity":36,"unit":"g","cutPrep":"1/4 cup, raw or toasted, rinsed and kept damp","cookingMethod":"Fried","prepNote":null},
+{"category":"Fats","baseName":"Peanøttolje","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":"Fried","prepNote":"fry in about 1 litre; about 3 tbsp is absorbed"}
+],
+"instructions":[
+"Mix 60 g of the glutinous rice flour with the sugar, stir in the boiling water until smooth and rest 5 minutes. Add the room-temperature water and the remaining 120 g flour, knead into a soft dough, cover and rest 30 minutes.",
+"Rinse the sesame seeds in a fine strainer until wet through, drain and spread them on a plate so they stay damp.",
+"Divide the dough into 8 pieces of about 47 g. Flatten each into a disc about 7.5 cm across, a little thicker in the middle, wrap it around a ball of paste, pinch it closed and roll smooth.",
+"Roll each ball in the sesame seeds, then roll it again between your palms to press the seeds in.",
+"Heat the oil in a pot to 320°F (160°C). Fry 4 balls at a time, keeping them moving, and hold the oil at about 300°F (150°C), never above it and never below 290°F (143°C). After about 10 minutes they float; press them under the oil for 2 to 3 minutes so they expand.",
+"Raise the oil gradually to 350°F (177°C) and fry about 5 minutes more, 17 to 18 minutes in all, until light golden. Drain on a rack, fry the second batch and cool at least 10 minutes before eating, as the filling is very hot."
+],
+"nutritionHighlights":[
+{"nutrient":"Calcium","note":"From the sesame coating."},
+{"nutrient":"Carbohydrate","note":"Glutinous rice, bean paste and sugar make up most of each ball."}
+],
+"citations":[
+{"source":"The Woks of Life, Sesame Balls","url":"https://thewoksoflife.com/sesame-balls/"},
+{"source":"China Sichuan Food, Sesame Balls (Jian Dui)","url":"https://www.chinasichuanfood.com/sesame-balls-jian-dui/"}
+],
+"curationNote":"Quantities and oil temperatures follow The Woks of Life. China Sichuan Food makes about 20 smaller balls, kneading a small boiled piece of dough into the rest and frying at 120°C. The amount of oil absorbed is an estimate, since neither recipe gives one."
+},
+{
+"id":"curated_cn_tang_yuan","name":"Tang Yuan (Sweet Rice Balls)","builderType":"dessert","dishGroup":"Sweets & Drinks","region":"Eaten across China at the Lantern Festival and the winter solstice","servings":6,"servingSizeAmount":4,"servingSizeUnit":"each",
+"flavorProfile":"Soft, chewy glutinous rice balls filled with a black sesame paste that melts into a sweet, nutty liquid, served in a little of the hot water they were cooked in.",
+"healthBenefit":"Black sesame gives calcium, iron and some healthy fat; the butter and sugar in the filling make this a festival sweet rather than an everyday one.",
+"overallTier":"weak",
+"components":[],
+"ingredients":[
+{"category":"NutSeed","baseName":"Sesame seed","quantity":60,"unit":"g","cutPrep":"black sesame, toasted","cookingMethod":null,"prepNote":null},
+{"category":"Sweets","baseName":"Brown Sugar (Commercial)","quantity":50,"unit":"g","cutPrep":null,"cookingMethod":null,"prepNote":"1/4 cup, or white sugar"},
+{"category":"Fats","baseName":"Pure Butter (Unsalted)","quantity":85,"unit":"g","cutPrep":"6 tbsp, softened","cookingMethod":null,"prepNote":null},
+{"category":"PantryStaples","baseName":"Grains, rice, white, glutinous, flour","quantity":200,"unit":"g","cutPrep":null,"cookingMethod":"Boiled","prepNote":"plus a little for dusting"},
+{"category":"Bev","baseName":"Water, tap","quantity":200,"unit":"ml","cutPrep":null,"cookingMethod":null,"prepNote":"warm, 100°F (40°C)"}
+],
+"instructions":[
+"Grind the sesame seeds and sugar in a food processor until fine, add the butter and pulse until evenly blended.",
+"Spread the filling thinly on a plate and chill at least 30 minutes in the fridge or 15 minutes in the freezer until firm. Roll it into 24 balls of about 7 g and chill again.",
+"Mix the glutinous rice flour with the warm water and knead on a lightly floured surface until smooth and soft. Keep it covered.",
+"Take about 16 g of dough, roll it into a ball and press a well in the middle. Put in a ball of filling, stretch the dough over it, pinch it closed and roll it round. Repeat with the rest.",
+"Bring a pot of water to a boil, add the balls and stir gently so they do not stick. When the water boils again, lower to medium; once the balls float, boil 2 minutes more.",
+"Serve hot in bowls with some of the cooking water."
+],
+"nutritionHighlights":[
+{"nutrient":"Calcium","note":"Black sesame is a good source."},
+{"nutrient":"Iron","note":"From the sesame."},
+{"nutrient":"Saturated fat","note":"From the butter in the filling."}
+],
+"citations":[
+{"source":"Omnivore's Cookbook, Black Sesame Sweet Rice Balls","url":"https://omnivorescookbook.com/black-seseam-sweet-rice-balls/"},
+{"source":"The Woks of Life, Tang Yuan with Black Sesame Filling","url":"https://thewoksoflife.com/tang-yuan-recipe/"}
+],
+"curationNote":"Quantities follow Omnivore's Cookbook, since its filling is nearly all used by its 24 balls. The Woks of Life makes 12 balls from 1 cup flour and 1/2 cup water, cooks a small piece of dough first and kneads it back in, and adds 1/2 cup cold water three times as the pot returns to a boil."
+},
+{
+"id":"curated_cn_mango_pudding","name":"Mango Pudding","builderType":"dessert","dishGroup":"Sweets & Drinks","region":"Hong Kong (Cantonese dim sum)","servings":9,"servingSizeAmount":1,"servingSizeUnit":"piece",
+"flavorProfile":"A soft, wobbly set pudding of puréed ripe mango, lightly sweetened and given a creamy edge with a spoonful of condensed milk, cut into squares and topped with fresh mango.",
+"healthBenefit":"Most of the flavour comes from fresh mango, which gives vitamin C, vitamin A and folate, with modest added sugar.",
+"overallTier":"moderate",
+"components":[],
+"ingredients":[
+{"category":"Fruit","baseName":"Mango","quantity":340,"unit":"g","cutPrep":"very ripe, peeled, pitted and cubed","cookingMethod":null,"prepNote":"about 2 mangos, plus extra cubes to serve if you like"},
+{"category":"PantryStaples","baseName":"Gelatine","quantity":18,"unit":"g","cutPrep":"powdered, 2 tbsp","cookingMethod":null,"prepNote":null},
+{"category":"Bev","baseName":"Water, tap","quantity":480,"unit":"ml","cutPrep":null,"cookingMethod":null,"prepNote":"120 ml to bloom the gelatin, 360 ml for the syrup"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"sweetened condensed milk","contains":"dairy","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":"or evaporated milk or half and half"}
+],
+"instructions":[
+"Blend the mango until completely smooth, pressing it through a sieve if it is fibrous. You need at least 1 cup of purée.",
+"Stir the gelatin into 120 ml water and leave it until it swells to a thick paste.",
+"Warm the remaining 360 ml water with the sugar over medium-low heat until the sugar dissolves, without letting it simmer. Stir in the bloomed gelatin until dissolved, take it off the heat and cool 5 minutes.",
+"Whisk the syrup, mango purée and condensed milk together slowly, so as not to beat in air; you should have about 3 cups.",
+"Pour into a lightly oiled 23 cm pie dish or 20 to 23 cm square pan, tap out any bubbles and chill uncovered at least 4 hours, until set.",
+"Cut into 9 squares and serve topped with cubed mango."
+],
+"nutritionHighlights":[
+{"nutrient":"Vitamin C","note":"From the fresh mango."},
+{"nutrient":"Vitamin A","note":"Ripe mango is rich in beta-carotene."},
+{"nutrient":"Folate","note":"From the mango."}
+],
+"citations":[
+{"source":"The Woks of Life, Mango Pudding","url":"https://thewoksoflife.com/mango-pudding/"},
+{"source":"China Sichuan Food, Chinese Mango Pudding","url":"https://www.chinasichuanfood.com/chinese-mango-pudding/"}
+],
+"curationNote":"Quantities follow The Woks of Life. China Sichuan Food makes a creamier, sweeter version for 4 with 2 cups mango, 15 g gelatin sheets, 1/2 cup sugar, 1 cup water, 100 ml whipping cream and 150 ml milk, chilled in cups for 2 to 4 hours."
+},
+{
+"id":"curated_cn_hong_dou_tang","name":"Hong Dou Tang (Red Bean Soup)","builderType":"dessert","dishGroup":"Sweets & Drinks","region":"Southern China (Cantonese tong sui), eaten across China","servings":6,"servingSizeAmount":1,"servingSizeUnit":"bowl",
+"flavorProfile":"Adzuki beans simmered with dried tangerine peel until they break down into a thick, gently sweet soup, eaten hot in winter or chilled in summer.",
+"healthBenefit":"Adzuki beans give fibre, plant protein, folate, iron and potassium; the soup is lower in fat than most desserts, with sugar to taste.",
+"overallTier":"moderate",
+"components":[],
+"ingredients":[
+{"category":"Legume","baseName":"Adzuki beans, mature seeds, whole","quantity":200,"unit":"g","cutPrep":"1 cup dried, rinsed and soaked overnight","cookingMethod":"Simmered","prepNote":"soaking water is drained away"},
+{"category":"Bev","baseName":"Water, tap","quantity":1900,"unit":"ml","cutPrep":null,"cookingMethod":"Simmered","prepNote":"8 cups; some cooks off"},
+{"notInDatabase":true,"name":"dried tangerine peel (chenpi)","contains":"none","quantity":5,"unit":"g","cutPrep":"1 piece","prepNote":"optional"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":50,"unit":"g","cutPrep":null,"cookingMethod":null,"prepNote":"rock sugar is traditional; to taste"},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"a pinch"}
+],
+"instructions":[
+"Rinse the beans and soak them overnight in about 750 ml water, then drain.",
+"Put the beans in a pot with the 1.9 litres of water and the tangerine peel, bring to a boil, then lower to medium-low and simmer partly covered for 1 hour.",
+"Add the sugar and salt and simmer 40 minutes more, stirring now and then, until the beans are very soft and some have broken apart.",
+"Taste, adjust the sweetness and serve hot or chilled."
+],
+"nutritionHighlights":[
+{"nutrient":"Fiber","note":"Adzuki beans are high in fibre."},
+{"nutrient":"Folate","note":"From the beans."},
+{"nutrient":"Potassium","note":"From the beans."}
+],
+"citations":[
+{"source":"Omnivore's Cookbook, Red Bean Soup","url":"https://omnivorescookbook.com/red-bean-soup/"},
+{"source":"China Sichuan Food, Red Bean Soup","url":"https://www.chinasichuanfood.com/red-bean-soup-recipe/"}
+],
+"curationNote":"Quantities follow Omnivore's Cookbook, which also offers raw peanuts or dried lotus seeds and a 30 minute pressure-cooker method. China Sichuan Food uses 1 1/2 cups beans to 6 cups water with rock sugar and tangerine peel, and serves it with sago in coconut milk or small glutinous rice balls."
+},
+{
+"id":"curated_cn_yue_bing","name":"Yue Bing (Mooncakes)","builderType":"bakedGoods","dishGroup":"Sweets & Drinks","region":"Cantonese, eaten across China at the Mid-Autumn Festival","servings":18,"servingSizeAmount":1,"servingSizeUnit":"piece",
+"flavorProfile":"Cantonese baked mooncakes: a thin, glossy golden crust pressed with a pattern around a dense, sweet lotus seed paste, most of them with a salted duck egg yolk at the centre.",
+"healthBenefit":"A rich festival pastry, dense with sugar and oil; lotus seeds and the yolk add some protein and minerals, and one cake is usually shared.",
+"overallTier":"weak",
+"components":[],
+"ingredients":[
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":145,"unit":"g","cutPrep":null,"cookingMethod":null,"prepNote":"the share of a 225 g sugar syrup used in the dough"},
+{"category":"Bev","baseName":"Water, tap","quantity":120,"unit":"ml","cutPrep":null,"cookingMethod":null,"prepNote":"for the syrup, mostly cooked off"},
+{"category":"Fruit","baseName":"Lemon","quantity":15,"unit":"g","cutPrep":"juice of 1/2 lemon","cookingMethod":null,"prepNote":null},
+{"category":"NutSeed","baseName":"Lotus seeds, mature, dried, shelled and skinned","quantity":340,"unit":"g","cutPrep":"split, green centres removed, soaked overnight","cookingMethod":"Simmered","prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":200,"unit":"g","cutPrep":null,"cookingMethod":null,"prepNote":"1 2/3 cups powdered sugar, for the filling"},
+{"category":"Fats","baseName":"Peanøttolje","quantity":20,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"1 1/4 cups, for the filling; corn oil also works"},
+{"notInDatabase":true,"name":"maltose","contains":"none","quantity":5,"unit":"tbsp","cutPrep":null,"prepNote":"1/3 cup, for the filling"},
+{"notInDatabase":true,"name":"salted duck egg yolks","contains":"egg","quantity":12,"unit":"each","cutPrep":null,"prepNote":"about 22 g each; 6 cakes are made without one"},
+{"category":"Fats","baseName":"Peanøttolje","quantity":5,"unit":"tbsp","cutPrep":null,"cookingMethod":"Baked","prepNote":"1/3 cup, for the dough"},
+{"notInDatabase":true,"name":"lye water (kansui)","contains":"none","quantity":1,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"PantryStaples","baseName":"Wheat flour, white, all-purpose, enriched, unbleached","quantity":250,"unit":"g","cutPrep":null,"cookingMethod":"Baked","prepNote":"plus more for the mould"},
+{"category":"Dairy","baseName":"Chicken Egg Yolk (Raw)","quantity":1,"unit":"each","cutPrep":"beaten with 3 tbsp water","cookingMethod":"Baked","prepNote":"egg wash"}
+],
+"instructions":[
+"For the syrup, dissolve the sugar in the water over medium heat, add the lemon juice once it boils, then simmer uncovered on low 60 to 70 minutes without stirring, until light amber and as thick as honey. Cool completely; the dough uses about 8 3/4 tbsp.",
+"For the filling, simmer the soaked lotus seeds in fresh water 30 minutes after it boils, until soft but whole. Drain, keeping the liquid, and purée in two batches with enough liquid to make a smooth paste.",
+"Cook the purée in a nonstick or cast-iron pan over medium to medium-low heat, stirring constantly, for about 30 minutes, adding the oil, powdered sugar and maltose in batches and letting each batch mix in for 2 to 3 minutes. Cool and chill.",
+"For the dough, mix 8 3/4 tbsp syrup with the oil and lye water, fold in the flour until just soft and chill at least 1 hour. Bake the salted yolks at 350°F (175°C) for 8 to 10 minutes and cool.",
+"Wrap 58 g of filling around each yolk, or use 70 g of filling alone. Divide the dough into eighteen 25 g balls, flatten each to about 10 cm, wrap it around a filling ball without trapping air and press it into a floured 100 g mould.",
+"Mist the cakes with water and bake at 325°F (160°C) for 5 minutes. Lower the oven to 300°F (150°C), brush with the egg wash and bake 15 minutes more.",
+"Cool completely and keep airtight 1 to 2 days, until the crust softens and turns shiny, before eating."
+],
+"nutritionHighlights":[
+{"nutrient":"Total fat","note":"From the oil worked into the filling and dough."},
+{"nutrient":"Added sugar","note":"In the syrup crust and the lotus paste."},
+{"nutrient":"Magnesium","note":"Lotus seeds contribute some."}
+],
+"citations":[
+{"source":"The Woks of Life, Lotus Mooncakes with Salted Egg Yolks","url":"https://thewoksoflife.com/lotus-mooncakes-egg-yolks/"},
+{"source":"Omnivore's Cookbook, Traditional Mooncake","url":"https://omnivorescookbook.com/traditional-mooncake/"}
+],
+"curationNote":"Quantities follow The Woks of Life. The syrup makes more than the dough needs, so the sugar listed for it is an estimate of the share used. Omnivore's Cookbook makes eighteen 50 g cakes with golden syrup and kansui in the dough and a black sesame and white bean filling around half a salted yolk, baked at 400°F (200°C) then 350°F (176°C)."
+},
+{
+"id":"curated_cn_xing_ren_dou_fu","name":"Xing Ren Dou Fu (Almond Tofu)","builderType":"dessert","dishGroup":"Sweets & Drinks","region":"Northern China and Cantonese dim sum","servings":4,"servingSizeAmount":1,"servingSizeUnit":"bowl",
+"flavorProfile":"Not tofu at all: a cool, silky jelly of almond milk scented with almond extract, cut into small cubes and served with sweet strawberries in their syrup.",
+"healthBenefit":"A light dessert with fruit; strawberries give vitamin C and fibre, and almond milk is low in fat and often fortified with calcium.",
+"overallTier":"moderate",
+"components":[],
+"ingredients":[
+{"category":"NutSeed","baseName":"Almond drink unsweetened","quantity":480,"unit":"ml","cutPrep":null,"cookingMethod":null,"prepNote":"2 cups"},
+{"category":"PantryStaples","baseName":"Gelatine","quantity":14,"unit":"g","cutPrep":"sheets or powder","cookingMethod":null,"prepNote":"or 3 g agar strips for a vegetarian version"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":5,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"4 tbsp for the jelly, 1 tbsp for the berries"},
+{"notInDatabase":true,"name":"almond extract","contains":"none","quantity":1,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Fruit","baseName":"Strawberry","quantity":300,"unit":"g","cutPrep":"2 cups, quartered","cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Bring 1 cup of the almond milk to a boil, turn off the heat, add the gelatin and stir until dissolved.",
+"Stir in 4 tbsp sugar and the almond extract until dissolved, then the remaining cup of almond milk.",
+"Strain into a 20 cm square pan and chill about 1 hour, until set.",
+"Toss the strawberries with the last 1 tbsp sugar, cover and chill a couple of hours so they soften and give off a syrup.",
+"Run a knife round the pan, cut the jelly into 1 cm cubes and lift them into bowls. Spoon the strawberries and their syrup over the top."
+],
+"nutritionHighlights":[
+{"nutrient":"Vitamin C","note":"From the strawberries."},
+{"nutrient":"Calcium","note":"If the almond milk is fortified."}
+],
+"citations":[
+{"source":"Omnivore's Cookbook, Almond Tofu","url":"https://omnivorescookbook.com/almond-tofu/"},
+{"source":"China Sichuan Food, Chinese Almond Tofu (Almond Jelly)","url":"https://www.chinasichuanfood.com/chinese-almond-tofualmond-jelly/"}
+],
+"curationNote":"Quantities follow Omnivore's Cookbook. The older way, which China Sichuan Food gives, blends soaked sweet apricot kernels with water for the milk, adds cow's milk and sets it with 6 to 7 g agar, served with fruit or osmanthus syrup."
+},
+{
+"id":"curated_cn_dou_hua","name":"Dou Hua (Sweet Tofu Pudding)","builderType":"dessert","dishGroup":"Sweets & Drinks","region":"Southern China and Taiwan, eaten across China","servings":2,"servingSizeAmount":1,"servingSizeUnit":"bowl",
+"flavorProfile":"Soy milk set with gypsum into a trembling, custard-soft curd, served warm or cold under a brown sugar and ginger syrup.",
+"healthBenefit":"Soy milk set with gypsum gives plant protein and calcium from the calcium sulphate, with sugar only in the syrup.",
+"overallTier":"strong",
+"components":[],
+"ingredients":[
+{"category":"Legume","baseName":"Soybeans, soy milk, regular","quantity":400,"unit":"ml","cutPrep":null,"cookingMethod":"Steamed","prepNote":"homemade or plain store-bought, soybeans and water only"},
+{"notInDatabase":true,"name":"food-grade gypsum (calcium sulphate)","contains":"none","quantity":0.5,"unit":"tsp","cutPrep":null,"prepNote":"2 g; 3.5 g with store-bought soy milk"},
+{"category":"Sweets","baseName":"Brown Sugar (Commercial)","quantity":4,"unit":"tbsp","cutPrep":null,"cookingMethod":"Simmered","prepNote":"half the syrup; the full syrup uses 1/2 cup"},
+{"category":"Bev","baseName":"Water, tap","quantity":60,"unit":"ml","cutPrep":null,"cookingMethod":"Simmered","prepNote":"for the syrup"},
+{"category":"Herbs","baseName":"Ginger root","quantity":5,"unit":"g","cutPrep":"sliced","cookingMethod":"Simmered","prepNote":null}
+],
+"instructions":[
+"In a heatproof bowl that holds at least 2 cups and fits your steamer, mix the gypsum with a little soy milk until dissolved, then pour in the rest slowly while stirring. Cover with plastic wrap.",
+"Bring the steamer water to a full boil, 212°F (100°C), set the bowl in, cover and steam on high for 10 minutes without moving it.",
+"Take the steamer off the heat, uncover and poke a few holes in the wrap so condensation escapes as it cools. Remove the wrap once most of the steam has gone.",
+"For the syrup, bring the brown sugar, water and ginger to a boil over medium heat, then simmer on medium-low 5 minutes.",
+"Spoon the pudding into bowls and pour the syrup over, warm or cold."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the soy milk."},
+{"nutrient":"Calcium","note":"The gypsum used to set it is calcium sulphate."}
+],
+"citations":[
+{"source":"Omnivore's Cookbook, The Ultimate Guide to Making Douhua","url":"https://omnivorescookbook.com/douhua-tofu-pudding/"},
+{"source":"China Sichuan Food, Douhua (Tofu Pudding)","url":"https://www.chinasichuanfood.com/douhua/"}
+],
+"curationNote":"Quantities follow Omnivore's gypsum version; its syrup recipe makes extra, so half is listed. China Sichuan Food makes 6 servings from 1 cup soybeans and 1.5 litres water, boils the strained milk at least 15 minutes, cools it to 80 to 90°C and sets it with 3 g GDL in 15 to 20 minutes."
+},
+{
+"id":"curated_cn_dou_jiang","name":"Dou Jiang (Soy Milk)","builderType":"beverage","dishGroup":"Sweets & Drinks","region":"Northern and Eastern China, a breakfast drink nationwide","servings":8,"servingSizeAmount":1,"servingSizeUnit":"cup",
+"flavorProfile":"Fresh soy milk from soaked, boiled and blended soybeans, simmered and strained, with a nutty, beany taste; drunk hot or cold, plain, lightly salted or sweetened.",
+"healthBenefit":"Homemade soy milk gives plant protein, potassium and folate with no added sugar unless you add it.",
+"overallTier":"strong",
+"components":[],
+"ingredients":[
+{"category":"Legume","baseName":"Dry Soybeans","quantity":285,"unit":"g","cutPrep":"soaked overnight and rinsed","cookingMethod":"Simmered","prepNote":"the pulp (okara) is strained out, so part of the fibre and protein is not in the drink"},
+{"category":"Bev","baseName":"Water, tap","quantity":2840,"unit":"ml","cutPrep":null,"cookingMethod":"Simmered","prepNote":"12 cups; some cooks off"},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"sugar to taste is optional and not counted"}
+],
+"instructions":[
+"Rinse the soybeans, cover them well with cold water and soak overnight. Rinse them a couple of times the next day.",
+"Put the beans in a large pot with the 12 cups of water, bring to a boil over high heat and cook 10 minutes more on medium.",
+"Blend the beans and water in batches until completely smooth.",
+"Return to a clean pot and simmer 40 minutes, watching closely as it boils over easily. Stir in the salt and any sugar near the end.",
+"Strain through fine cheesecloth or a fine sieve. Drink hot, or cool and refrigerate and finish within a few days."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"Soybeans give complete plant protein."},
+{"nutrient":"Potassium","note":"From the soybeans."},
+{"nutrient":"Folate","note":"From the soybeans."}
+],
+"citations":[
+{"source":"The Woks of Life, How to Make Soy Milk at Home","url":"https://thewoksoflife.com/how-to-make-soy-milk/"},
+{"source":"China Sichuan Food, How to Make Soy Milk at Home","url":"https://www.chinasichuanfood.com/how-to-make-soy-milk-at-home/"}
+],
+"curationNote":"Quantities follow The Woks of Life. China Sichuan Food blends 1 cup soaked beans with 3 cups water, strains it raw and then boils it about 20 minutes on the lowest heat; both say soy milk must be boiled before drinking."
+},
+{
+"id":"curated_cn_hong_kong_milk_tea","name":"Hong Kong Milk Tea","builderType":"beverage","dishGroup":"Sweets & Drinks","region":"Hong Kong","servings":4,"servingSizeAmount":1,"servingSizeUnit":"cup",
+"flavorProfile":"Strong, very dark black tea simmered and strained until smooth, then made creamy with evaporated milk and a little sweetened condensed milk; the cha chaan teng drink.",
+"healthBenefit":"Black tea brings caffeine and polyphenols, and evaporated milk adds calcium and protein; the condensed milk is the added sugar.",
+"overallTier":"weak",
+"components":[],
+"ingredients":[
+{"category":"Bev","baseName":"Black tea (infusion)","quantity":1060,"unit":"ml","cutPrep":null,"cookingMethod":"Simmered","prepNote":"brewed from 10 tbsp black tea leaves or fannings in 1.4 litres water, simmered 15 minutes and strained; leaves discarded"},
+{"notInDatabase":true,"name":"evaporated milk","contains":"dairy","quantity":315,"unit":"ml","cutPrep":null,"prepNote":"1/3 cup per cup of tea"},
+{"notInDatabase":true,"name":"sweetened condensed milk","contains":"dairy","quantity":4,"unit":"tsp","cutPrep":null,"prepNote":"about 1 tsp per cup, to taste"}
+],
+"instructions":[
+"Put 1.4 litres of very hot water in a pot with the tea in bags or strainers, bring to a boil, then simmer 15 minutes, until the tea is very dark.",
+"Strain through a fine sieve lined with cheesecloth to remove every bit of tea; you should have about 4 1/2 cups.",
+"Just before serving, pour a little over 1 cup of tea per glass and stir in 1/3 cup evaporated milk and about 1 tsp condensed milk each. Serve straight away, hot or over ice."
+],
+"nutritionHighlights":[
+{"nutrient":"Caffeine","note":"A strong brew, more than an ordinary cup of tea."},
+{"nutrient":"Calcium","note":"From the evaporated milk."}
+],
+"citations":[
+{"source":"The Woks of Life, Hong Kong Milk Tea","url":"https://thewoksoflife.com/hong-kong-milk-tea/"},
+{"source":"Wikipedia, Hong Kong-style milk tea","url":"https://en.wikipedia.org/wiki/Hong_Kong-style_milk_tea"}
+],
+"curationNote":"Quantities follow The Woks of Life, which suggests mixing Ceylon, Lipton and Earl Grey. Wikipedia describes the cafe method: a blend of black teas steeped about 12 minutes at 96 to 98°C in a cotton bag, the silk stocking, and poured through it several times, with evaporated milk, or condensed milk for the sweeter cha jau."
+},
+{
+"id":"curated_cn_ba_bao_fan","name":"Ba Bao Fan (Eight Treasure Rice)","builderType":"dessert","dishGroup":"Sweets & Drinks","region":"Eastern China (Jiangnan and Shanghai), eaten across China at Lunar New Year","servings":6,"servingSizeAmount":1,"servingSizeUnit":"serving",
+"flavorProfile":"A dome of sweet, glossy sticky rice with a hidden layer of red bean paste, its top set with a pattern of jujubes, raisins, goji berries, pumpkin seeds and walnut, turned out and glazed with chrysanthemum syrup.",
+"healthBenefit":"A New Year sweet that is mostly glutinous rice and sugar; the dried fruit, seeds and walnut add some fibre, iron and minerals.",
+"overallTier":"weak",
+"components":[
+{"recipeId":"curated_cn_base_steamed_glutinous_rice","servings":3,"note":"about 3 cups, from 1 1/2 cups raw rice; still slightly firm"}
+],
+"ingredients":[
+{"category":"Fats","baseName":"Coconut Oil (Virgin)","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"or shortening; lard is traditional"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"for the rice"},
+{"notInDatabase":true,"name":"sweetened red bean paste","contains":"none","quantity":4,"unit":"tbsp","cutPrep":null,"prepNote":"homemade or bought"},
+{"category":"Fruit","baseName":"Chinese Jujube","quantity":3,"unit":"each","cutPrep":"dried, halved and pitted","cookingMethod":"Steamed","prepNote":null},
+{"category":"Fruit","baseName":"Raisins, golden, seedless","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":"Steamed","prepNote":null},
+{"category":"NutSeed","baseName":"Pumpkin seed","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":"Steamed","prepNote":null},
+{"category":"Fruit","baseName":"Goji berry","quantity":0.5,"unit":"tbsp","cutPrep":"dried","cookingMethod":"Steamed","prepNote":null},
+{"category":"NutSeed","baseName":"Walnut","quantity":4,"unit":"g","cutPrep":"1 half","cookingMethod":"Steamed","prepNote":null},
+{"category":"Bev","baseName":"Water, tap","quantity":240,"unit":"ml","cutPrep":null,"cookingMethod":"Simmered","prepNote":"for the syrup"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Simmered","prepNote":"for the syrup"},
+{"notInDatabase":true,"name":"dried chrysanthemum buds","contains":"none","quantity":1,"unit":"tbsp","cutPrep":"heaped","prepNote":"strained out of the syrup; osmanthus syrup can replace the whole syrup"},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"mixed with 1 tsp water"}
+],
+"instructions":[
+"Steam the soaked glutinous rice as in the base recipe, stopping while it is still fairly firm, about 30 minutes for rice soaked overnight.",
+"While it steams, set out the jujubes, raisins, pumpkin seeds, goji berries and walnut in a pattern in the bottom of a wide heatproof bowl.",
+"Stir the coconut oil and 1 tbsp sugar into the hot rice until the sugar dissolves. Press two thirds of the rice over the fruit, make a well in the middle, spread in the red bean paste thinly and cover with the rest of the rice, pressing it flat.",
+"Steam the filled bowl 30 minutes more.",
+"For the syrup, bring the water, 2 tbsp sugar and chrysanthemum to a boil and simmer on medium-low 10 minutes. Stir in the cornstarch slurry until slightly thickened and strain out the buds.",
+"Spoon a little syrup over the rice and rest 10 minutes, then turn it out onto a plate, pour over the rest of the syrup and serve warm."
+],
+"nutritionHighlights":[
+{"nutrient":"Carbohydrate","note":"Glutinous rice and sugar make up most of the dish."},
+{"nutrient":"Iron","note":"From the jujubes, raisins and seeds."}
+],
+"citations":[
+{"source":"Omnivore's Cookbook, Eight Treasure Rice","url":"https://omnivorescookbook.com/eight-treasure-rice/"},
+{"source":"Wikipedia, Eight treasure rice","url":"https://en.wikipedia.org/wiki/Eight_treasure_rice"}
+],
+"curationNote":"Quantities follow Omnivore's Cookbook, which suggests 3 to 5 toppings rather than a full eight. Wikipedia gives the wider list (lotus seeds, longans, candied winter melon, plums, melon seeds, Job's tears) and lard as the usual fat, and says it is eaten on festive days, above all at Lunar New Year; it names no single home region, so Eastern China follows its listing under Jiangsu and Shanghai cooking."
 }
 ]}
