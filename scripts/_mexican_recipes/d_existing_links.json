@@ -1,0 +1,924 @@
+{
+  "recipes": [
+    {
+      "id": "curated_sauce_classic_hummus",
+      "name": "Classic Hummus",
+      "builderType": "sauce",
+      "dishGroup": "Sauces & Dips",
+      "region": "Eastern Mediterranean",
+      "servings": 12,
+      "servingSizeAmount": 0.25,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Smooth, nutty and bright with lemon, with a soft garlic edge and a little warmth from cumin.",
+      "healthBenefit": "Chickpeas bring plant protein and fiber, and tahini adds calcium, iron and mostly unsaturated fat, so a few spoonfuls make a filling spread or dip.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Legume",
+          "baseName": "Chickpeas (garbanzo beans, bengal gram)",
+          "quantity": 480,
+          "unit": "g",
+          "cutPrep": "cooked or canned, drained and rinsed",
+          "cookingMethod": "Boiled",
+          "prepNote": "two 15 oz cans, drained, or about 1 1/4 cups dried, cooked"
+        },
+        {
+          "category": "SaucesCondiments",
+          "baseName": "Tahini",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "stirred well",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lemon",
+          "quantity": 90,
+          "unit": "g",
+          "cutPrep": "juiced",
+          "cookingMethod": null,
+          "prepNote": "about 6 tbsp juice, from 2 lemons"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": "2 cloves"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Olive Oil (Extra Virgin)",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": "ice cold",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "optional"
+        }
+      ],
+      "instructions": [
+        "Stir the lemon juice and cold water together in a small cup. Whisk the tahini with the olive oil in a second cup.",
+        "Put the chickpeas, garlic, salt and cumin in a food processor and grind for about 15 to 20 seconds until coarse.",
+        "Scrape down the bowl. With the machine running, pour in the lemon and water, then process for about 1 minute.",
+        "Scrape down again. With the machine running, pour in the tahini and oil and process for 1 to 2 minutes, until very smooth.",
+        "Taste for salt and lemon. Rest it for about 30 minutes so the flavors settle, then serve or chill.",
+        "Keep it covered in the refrigerator for up to 5 days. Stir before using, and loosen with a spoonful of water if it has thickened."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fiber",
+          "note": "From the chickpeas."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the chickpeas and the tahini together."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "Mostly from the tahini."
+        }
+      ],
+      "citations": [
+        {
+          "source": "America's Test Kitchen, Classic Hummus",
+          "url": "https://www.americastestkitchen.com/recipes/6873-classic-hummus"
+        }
+      ],
+      "curationNote": "Doubled from the ATK method (one 15 oz can, 1/4 cup tahini, 2 tbsp lemon, 2 tbsp oil, 1/4 cup water, about 2 cups made). Lemon raised a little to match the ratio the shipped hummus dishes already use. 12 servings of 1/4 cup gives 40 g chickpeas and 10 g tahini per serving, which is the unit the hummus wraps and snack are linked by."
+    },
+    {
+      "id": "curated_sauce_vegetable_stock",
+      "name": "Homemade Vegetable Stock",
+      "builderType": "sauce",
+      "dishGroup": "Sauces & Dips",
+      "region": "International",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Light, clean and savory, sweet from onion and carrot, with herb notes from parsley, thyme and bay.",
+      "healthBenefit": "A stock made from vegetables and water with no salt added lets each soup be seasoned to taste, and carries far less sodium than a bouillon powder or cube.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Olive Oil (Extra Virgin)",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "quartered, skin left on",
+          "cookingMethod": "Simmered",
+          "prepNote": "2 medium"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "cut in large chunks",
+          "cookingMethod": "Simmered",
+          "prepNote": "3 medium"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Celery",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "cut in large chunks",
+          "cookingMethod": "Simmered",
+          "prepNote": "3 stalks"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Leek",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "green tops, washed well",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fennel Bulb",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "cut in large chunks",
+          "cookingMethod": "Simmered",
+          "prepNote": "optional"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "halved crosswise",
+          "cookingMethod": "Simmered",
+          "prepNote": "half a head"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Parsley Spices",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "stems and leaves",
+          "cookingMethod": null,
+          "prepNote": "a small bunch"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Thyme",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "cookingMethod": null,
+          "prepNote": "4 or 5 sprigs"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.6,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "3 leaves"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "or a few whole peppercorns"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 3000,
+          "unit": "ml",
+          "cutPrep": "cold",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Warm the olive oil in a large stockpot over medium heat. Add the onion, carrot, celery, leek, fennel and garlic and cook, stirring now and then, for 10 to 15 minutes, until they start to color.",
+        "Add the parsley, thyme, bay leaves, pepper and cold water. Bring it up to a gentle simmer, around 190 to 200°F (88 to 93°C), without letting it boil hard.",
+        "Simmer partly covered for 1 to 2 hours, until the stock tastes of the vegetables.",
+        "Strain through a fine sieve, pressing lightly on the vegetables, and discard the solids. You should have about 2 litres (8 cups). If you have more, simmer it down.",
+        "Cool it quickly, then refrigerate for 4 to 5 days or freeze in 1 cup portions for 2 to 3 months.",
+        "Season the dish the stock goes into, not the stock, since it has no salt."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sodium",
+          "note": "Very little, since no salt or bouillon goes in."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "Some passes into the water from the vegetables as it simmers."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Center for Science in the Public Interest, Vegetable Stock",
+          "url": "https://www.cspi.org/recipe/vegetable-stock"
+        },
+        {
+          "source": "Sur La Table, Vegetable Stock",
+          "url": "https://www.surlatable.com/recipe/vegetable-stock/REC-175"
+        }
+      ],
+      "curationNote": "Combines the Sur La Table method (sweat the vegetables in oil, simmer about 2 hours covered) with the CSPI one (scraps, bay, thyme, peppercorns, short simmer and reduce). Tomato paste left out, since the database has no row for it. Unsalted on purpose. House convention: the strained vegetables are counted in full, the same as the oat milk counts all its oats, so the nutrient totals overstate what reaches the bowl. Replaces the bouillon powder row (PantryStaples Vegetable stock, about 22,000 mg sodium per 100 g) plus the water row in the soups."
+    },
+    {
+      "id": "curated_sauce_chicken_stock",
+      "name": "Homemade Chicken Stock",
+      "builderType": "sauce",
+      "dishGroup": "Sauces & Dips",
+      "region": "International",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Rich, savory and rounded, with body from the bones and a soft note of onion, garlic and bay.",
+      "healthBenefit": "A stock simmered from chicken bones with no salt added gives soups depth and some gelatin, with far less sodium than a stock cube.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "chicken backs, necks and wings, or a roast chicken carcass",
+          "quantity": 1360,
+          "unit": "g",
+          "cutPrep": "hacked into 2 inch pieces",
+          "prepNote": "about 3 lb"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": "Simmered",
+          "prepNote": "1 large"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 9,
+          "unit": "g",
+          "cutPrep": "lightly crushed",
+          "cookingMethod": "Simmered",
+          "prepNote": "3 cloves"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.6,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "3 leaves"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2880,
+          "unit": "ml",
+          "cutPrep": "cold",
+          "cookingMethod": "Simmered",
+          "prepNote": "12 cups"
+        }
+      ],
+      "instructions": [
+        "Put the chicken pieces and cold water in a large stockpot and bring them to a boil over medium high heat, 15 to 20 minutes.",
+        "Skim off the foam that rises. Add the onion, garlic and bay leaves, then turn the heat down so it barely simmers, around 190 to 200°F (88 to 93°C).",
+        "Simmer partly covered for 2 to 4 hours, skimming now and then. Longer gives more body.",
+        "Strain through a fine sieve and discard the bones and vegetables. You should have about 3 quarts (12 cups).",
+        "Cool it quickly, refrigerate overnight, and lift off the fat that sets on top.",
+        "Keep it in the refrigerator for 1 to 2 days or freeze in 1 cup portions for 3 to 4 months. Salt the dish it goes into, not the stock."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sodium",
+          "note": "Very little, since no salt or stock cube goes in."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "A small amount, mostly gelatin drawn from the bones; not counted here because bones are not in the food database."
+        }
+      ],
+      "citations": [
+        {
+          "source": "America's Test Kitchen, All-Purpose Chicken Stock",
+          "url": "https://www.americastestkitchen.com/recipes/15132-all-purpose-chicken-stock"
+        },
+        {
+          "source": "Center for Science in the Public Interest, Easy Homemade Chicken Stock",
+          "url": "https://www.cspi.org/recipe/easy-homemade-chicken-stock"
+        }
+      ],
+      "curationNote": "ATK proportions (3 lb bones, 12 cups water, 1 onion, 3 garlic, 3 bay, about 3 quarts made, keeps 2 days chilled or 4 months frozen), with the longer 3 to 4 hour simmer CSPI uses for a carcass offered as a range. The bones are notInDatabase: the database has no bones or backs row, and counting Meat Chicken would claim the meat itself is eaten. So the counted nutrients are only the onion and garlic, which the strained solids convention counts in full. Replaces the stock cube plus water rows in the chicken vegetable soup."
+    }
+  ],
+  "links": [
+    {
+      "recipeId": "curated_handheld_hummus_roasted_vegetable_wrap",
+      "componentRecipeId": "curated_baked_wheat_tortillas",
+      "servings": 2,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, tortilla mix, enriched"
+        }
+      ],
+      "reason": "The wrap lists 60 g of tortilla flour, which is the flour of the tortilla it is rolled in. The homemade wheat tortilla uses 31.25 g flour per tortilla, so 60 g is 1.92 of its servings. Rounded to 2 tortillas (62.5 g flour), rolled out together as one large wrap.",
+      "note": "rolled out as one large wrap"
+    },
+    {
+      "recipeId": "curated_handheld_bison_roasted_vegetable_wrap",
+      "componentRecipeId": "curated_baked_wheat_tortillas",
+      "servings": 2,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, tortilla mix, enriched"
+        }
+      ],
+      "reason": "The wrap lists 60 g of tortilla flour, which is the flour of the tortilla it is rolled in. The homemade wheat tortilla uses 31.25 g flour per tortilla, so 60 g is 1.92 of its servings. Rounded to 2 tortillas (62.5 g flour), rolled out together as one large wrap.",
+      "note": "rolled out as one large wrap"
+    },
+    {
+      "recipeId": "curated_vegan_handheld_seitan_roasted_vegetable_wrap",
+      "componentRecipeId": "curated_baked_wheat_tortillas",
+      "servings": 2,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, tortilla mix, enriched"
+        }
+      ],
+      "reason": "The wrap lists 60 g of tortilla flour, which is the flour of the tortilla it is rolled in. The homemade wheat tortilla uses 31.25 g flour per tortilla, so 60 g is 1.92 of its servings. Rounded to 2 tortillas (62.5 g flour), rolled out together as one large wrap.",
+      "note": "rolled out as one large wrap"
+    },
+    {
+      "recipeId": "curated_handheld_turkey_avocado_wrap",
+      "componentRecipeId": "curated_baked_wheat_tortillas",
+      "servings": 1,
+      "replaces": [
+        {
+          "category": "Baked",
+          "baseName": "Tortilla, wraps/burrito, hvetemel"
+        }
+      ],
+      "reason": "The wrap uses one store wheat tortilla. One homemade wheat tortilla takes its place, one for one; the homemade one is about 8 inches, so it may be smaller than the store wrap."
+    },
+    {
+      "recipeId": "curated_vegan_handheld_chickpea_avocado_wrap",
+      "componentRecipeId": "curated_baked_wheat_tortillas",
+      "servings": 1,
+      "replaces": [
+        {
+          "category": "Baked",
+          "baseName": "Tortilla, wraps/burrito, hvetemel"
+        }
+      ],
+      "reason": "The wrap uses one store wheat tortilla. One homemade wheat tortilla takes its place, one for one; the homemade one is about 8 inches, so it may be smaller than the store wrap."
+    },
+    {
+      "recipeId": "curated_handheld_hummus_roasted_vegetable_wrap",
+      "componentRecipeId": "curated_sauce_classic_hummus",
+      "servings": 1.5,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Chickpeas (garbanzo beans, bengal gram)"
+        },
+        {
+          "category": "SaucesCondiments",
+          "baseName": "Tahini"
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lemon"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt"
+        }
+      ],
+      "reason": "The chickpeas, tahini, lemon, garlic and salt are the hummus, blended together in the instructions. Matched on chickpeas: 60 g over 40 g per serving of the hummus."
+    },
+    {
+      "recipeId": "curated_handheld_turkey_hummus_collard_wrap",
+      "componentRecipeId": "curated_sauce_classic_hummus",
+      "servings": 1,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Chickpeas (garbanzo beans, bengal gram)"
+        },
+        {
+          "category": "SaucesCondiments",
+          "baseName": "Tahini"
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lemon"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt"
+        }
+      ],
+      "reason": "The chickpeas, tahini, lemon, garlic and salt are an inline hummus. 40 g chickpeas and 10 g tahini are one serving of the hummus."
+    },
+    {
+      "recipeId": "curated_vegan_handheld_tempeh_hummus_collard_wrap",
+      "componentRecipeId": "curated_sauce_classic_hummus",
+      "servings": 1,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Chickpeas (garbanzo beans, bengal gram)"
+        },
+        {
+          "category": "SaucesCondiments",
+          "baseName": "Tahini"
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lemon"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic"
+        }
+      ],
+      "reason": "The chickpeas, tahini, lemon and garlic are an inline hummus, one serving of it by chickpeas and tahini. The salt row stays, since it also seasons the tempeh."
+    },
+    {
+      "recipeId": "curated_snack_hummus_cucumber",
+      "componentRecipeId": "curated_sauce_classic_hummus",
+      "servings": 4,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Chickpeas (garbanzo beans, bengal gram)"
+        },
+        {
+          "category": "SaucesCondiments",
+          "baseName": "Tahini"
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lemon"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Olive Oil (Extra Virgin)"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt"
+        }
+      ],
+      "reason": "Everything except the cucumber is a hummus made inline. 160 g chickpeas is 4 servings of the hummus; the cucumber stays."
+    },
+    {
+      "recipeId": "curated_snack_carrot_tahini_dip",
+      "componentRecipeId": "curated_sauce_tahini_lemon",
+      "servings": 3,
+      "replaces": [
+        {
+          "category": "SaucesCondiments",
+          "baseName": "Tahini"
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lemon"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt"
+        }
+      ],
+      "reason": "The tahini, lemon, garlic and salt are the tahini lemon sauce without its water. 30 g tahini is the whole batch of that sauce, all 3 of its servings, so the dip gains a little lemon and water."
+    },
+    {
+      "recipeId": "curated_soup_butternut_squash",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 0.78,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 3.75 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 187.5 ml of water. 187.5 ml of homemade unsalted stock is 0.78 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_soup_red_lentil",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 1.04,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 3.75 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 250 ml of water. 250 ml of homemade unsalted stock is 1.04 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_soup_tomato_basil",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 0.52,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 2.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 125 ml of water. 125 ml of homemade unsalted stock is 0.52 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_soup_green_lentil_vegetable_stew",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 0.83,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 7.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 200 ml of water. 200 ml of homemade unsalted stock is 0.83 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_soup_turkey_black_bean_chili",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 0.63,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 150 ml of water. 150 ml of homemade unsalted stock is 0.63 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_soup_mussels_tomato_garlic_broth",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 1.25,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 300 ml of water. 300 ml of homemade unsalted stock is 1.25 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_soup_white_bean_kale_soup",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 0.92,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 7.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 220 ml of water. 220 ml of homemade unsalted stock is 0.92 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_soup_lentil_kale_soup",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 0.92,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 7.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 220 ml of water. 220 ml of homemade unsalted stock is 0.92 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_soup_crab_corn_chowder",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 0.5,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 120 ml of water. 120 ml of homemade unsalted stock is 0.5 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_soup_white_bean_swiss_chard_soup",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 0.92,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 7.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 220 ml of water. 220 ml of homemade unsalted stock is 0.92 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_soup_mussels_tomato_fennel_broth",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 1.25,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 300 ml of water. 300 ml of homemade unsalted stock is 1.25 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_soup_turkey_white_bean_soup",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 0.83,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 7.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 200 ml of water. 200 ml of homemade unsalted stock is 0.83 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_soup_salmon_fennel_leek_soup",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 1.04,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 250 ml of water. 250 ml of homemade unsalted stock is 1.04 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_vegan_soup_white_bean_vegetable_soup",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 1.04,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 250 ml of water. 250 ml of homemade unsalted stock is 1.04 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_vegan_soup_hearts_of_palm_corn_chowder",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 0.5,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 120 ml of water. 120 ml of homemade unsalted stock is 0.5 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_vegan_soup_white_bean_tomato_fennel_broth",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 1.04,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 250 ml of water. 250 ml of homemade unsalted stock is 1.04 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_vegan_soup_white_bean_tomato_garlic_broth",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 1.04,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 250 ml of water. 250 ml of homemade unsalted stock is 1.04 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_vegan_soup_lentil_black_bean_chili",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 0.63,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 150 ml of water. 150 ml of homemade unsalted stock is 0.63 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_vegan_soup_mushroom_white_bean_soup",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 0.83,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 7.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 200 ml of water. 200 ml of homemade unsalted stock is 0.83 cups, which cuts the sodium sharply."
+    },
+    {
+      "recipeId": "curated_sauce_onion_gravy",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 1.25,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        }
+      ],
+      "reason": "The gravy lists 300 ml of vegetable stock as its liquid. That much homemade stock is 1.25 cups, in place of the bouillon powder row with its very high sodium."
+    },
+    {
+      "recipeId": "curated_side_braised_beef_kohlrabi_carrot",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 1,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        }
+      ],
+      "reason": "The instructions braise in stock and water to about 1 cup of liquid, with 7.5 g of the bouillon powder row and no water row. One cup of homemade stock takes the place of both."
+    },
+    {
+      "recipeId": "curated_vegan_side_braised_seitan_kohlrabi_carrot",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 1,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        }
+      ],
+      "reason": "The instructions braise in stock and water to about 1 cup of liquid, with 7.5 g of the bouillon powder row and no water row. One cup of homemade stock takes the place of both."
+    },
+    {
+      "recipeId": "curated_soup_chicken_vegetable",
+      "componentRecipeId": "curated_sauce_chicken_stock",
+      "servings": 1.04,
+      "replaces": [
+        {
+          "category": "Herbs",
+          "baseName": "Chicken bouillon/stock/soup (stock cubes, powder)"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap"
+        }
+      ],
+      "reason": "The 2.5 g stock cube in 250 ml of water is the broth. 250 ml of homemade unsalted chicken stock is 1.04 cups."
+    }
+  ]
+}

@@ -323,6 +323,14 @@ export type RecipeIngredientLine = {
   // UI would have to reassemble, since natural recipe phrasing varies too
   // much dish to dish to force through one rigid template.
   text: string;
+  // 2026-10-29: a line that is another recipe made first (tortillas, a
+  // salsa, a mole). The digest id of that recipe, opened through
+  // routeForDigestEntry when the line is tapped.
+  makeFirst?: string;
+  // 2026-10-29: an ingredient the food database does not hold (guajillo
+  // chiles, corn husks), shown with a note that nutrients and condition
+  // checks leave it out.
+  notInDatabase?: boolean;
 };
 
 export type RecipeNutritionHighlight = {
@@ -426,6 +434,13 @@ export function recipeMatchesAllDietPreferences(entry: AnyDigestEntry, dietPrefe
 export type RecipeCard = {
   // e.g. "Makes about 4 cups, serves 2 generous bowls."
   yield: string;
+  // 2026-10-29, the Mexican recipes: the cuisine a recipe comes from, and
+  // the shelf it sits on in System Recipes ("Tacos", "Bases: Salsas").
+  // Unset for every recipe written before them.
+  cuisine?: string;
+  shelf?: string;
+  // Where the dish comes from, when it belongs to one region ("Yucatán").
+  region?: string;
   // 2026-08-24, direct request: every recipe grouped/identified by real
   // diet compatibility (omnivore/vegetarian/vegan) and by whether it fits
   // several named popular diet philosophies. Computed once, directly from

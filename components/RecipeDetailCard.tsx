@@ -18,6 +18,7 @@
 // than the other.
 import { useEffect, useMemo, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { CookModeButton } from './CookMode';
 import { HouseholdFitBand, useHouseholdPeople } from './HouseholdFitBand';
@@ -27,6 +28,7 @@ import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { getCuratedRecipe, getUserProfile, type BuilderFavoriteItemType } from '../lib/db';
 import { findDigestEntryById } from '../lib/digest';
+import { routeForDigestEntry } from '../lib/digestNavigation';
 import {
   isProblemFoodEntry,
   RECIPE_DIET_TAGS,
@@ -236,6 +238,7 @@ export function RecipeDetailCard({
   activeConditionCode?: string;
 }) {
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
+  const router = useRouter();
   const styles = useMemo(() => makeRecipeStyles(tabColor, tabTextColor), [tabColor, tabTextColor]);
 
   // Opens the Digest entry for the tapped diet in the same overlay this
@@ -336,11 +339,34 @@ export function RecipeDetailCard({
       <Text style={styles.detailText}>{card.yield}</Text>
 
       <Text style={styles.detailLabel}>Ingredients</Text>
-      {card.ingredients.map((ingredient, index) => (
-        <Text key={index} style={styles.swapText}>
-          {'•'} {ingredient.text}
+      {card.ingredients.map((ingredient, index) =>
+        ingredient.makeFirst ? (
+          <TouchableOpacity
+            key={index}
+            style={styles.makeFirstRow}
+            onPress={() => router.push(routeForDigestEntry(ingredient.makeFirst as string))}
+            accessibilityRole="link"
+            accessibilityLabel={`Make first: ${ingredient.text}. Opens that recipe.`}
+          >
+            <Ionicons name="return-down-forward" size={16} color={tabColor} />
+            <Text style={styles.makeFirstText}>{ingredient.text}</Text>
+            <Ionicons name="chevron-forward" size={16} color={tabColor} />
+          </TouchableOpacity>
+        ) : (
+          <Text key={index} style={styles.swapText}>
+            {'•'} {ingredient.text}
+            {ingredient.notInDatabase ? <Text style={styles.notInDatabaseMark}> (not in the food database)</Text> : null}
+          </Text>
+        ),
+      )}
+      {card.ingredients.some((ingredient) => ingredient.makeFirst) ? (
+        <Text style={styles.ingredientCaption}>Tap a recipe made first to open it.</Text>
+      ) : null}
+      {card.ingredients.some((ingredient) => ingredient.notInDatabase) ? (
+        <Text style={styles.ingredientCaption}>
+          Not in the food database, so not counted in nutrients or condition checks.
         </Text>
-      ))}
+      ) : null}
 
       {card.instructions ? (
         <>
@@ -588,6 +614,10 @@ function makeRecipeStyles(tabColor: string, tabTextColor: string) {
     // indistinguishable from the text around it.
     detailTextEmphasis: { color: tabTextColor },
     swapText: { ...typography.body, color: colors.textPrimary, lineHeight: 19, marginTop: 2, ...textShadow },
+    makeFirstRow: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 4, paddingVertical: 4 },
+    makeFirstText: { ...typography.body, flex: 1, color: tabTextColor, lineHeight: 19, ...textShadow },
+    notInDatabaseMark: { ...typography.caption, color: colors.textMuted },
+    ingredientCaption: { ...typography.caption, color: colors.textMuted, marginTop: 6, ...textShadow },
     buildRecipeButton: {
       ...BUTTON_PRIMARY,
       flexDirection: 'row',

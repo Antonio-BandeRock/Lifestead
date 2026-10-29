@@ -1,0 +1,1616 @@
+{
+  "recipes": [
+    {
+      "id": "curated_mx_base_nixtamal_masa",
+      "name": "Masa de Nixtamal",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Masa & Tortillas",
+      "region": "Central Mexico",
+      "servings": 18,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Soft, cool dough that smells of toasted corn and limestone, with a faint sweetness and a clean mineral finish.",
+      "healthBenefit": "Cooking corn with cal frees much of its bound niacin and adds calcium from the lime, which is why masa has fed Mexico for thousands of years, though phytate in the corn still limits how much of that calcium is absorbed.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Grain",
+          "baseName": "White Corn Grain",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "dried field corn, picked over",
+          "cookingMethod": "Simmered",
+          "prepNote": "white dent corn is the usual choice for tortillas"
+        },
+        {
+          "notInDatabase": true,
+          "name": "cal (food grade slaked lime, calcium hydroxide)",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": "dissolved in a little water",
+          "prepNote": "sold in Mexican markets as cal para nixtamal"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 3000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Simmered",
+          "prepNote": "for cooking and soaking, drained away afterwards"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 300,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "added while grinding and kneading, a little at a time"
+        }
+      ],
+      "instructions": [
+        "Rinse the dried corn and pick out any broken or dark kernels.",
+        "Dissolve the cal in about 250 ml of the water in a large nonreactive pot, then add the rest of the cooking water and the corn and stir; skim off any kernels that float.",
+        "Bring to a boil over high heat, then lower to a gentle simmer and cook for 25 to 40 minutes, until a kernel rubbed between your fingers slips its skin and the inside is just tender but still firm at the center.",
+        "Take the pot off the heat, cover and leave the corn in its yellow water for 8 to 18 hours, overnight being the usual.",
+        "Drain the nixtamal and rinse it lightly, rubbing between your hands to loosen some of the skins; do not wash it clean, as a little of the lime gives masa its flavor and helps it hold together.",
+        "Grind the nixtamal in a molino or a hand corn mill, passing it two or three times, adding water a spoonful at a time until the masa is fine and smooth.",
+        "Knead the masa for about 5 minutes on the counter, adding water until it feels like soft clay that does not crack at the edges when a ball is pressed flat. It makes about 1.8 kg of masa.",
+        "Keep the masa covered with a damp cloth and use it the same day, or wrap it and refrigerate for 1 to 2 days.",
+        "Without a mill, mix 500 g masa harina with about 650 to 750 ml warm water and a pinch of salt, knead for 2 to 3 minutes and rest it covered for 15 to 30 minutes; it stands in for fresh masa in any recipe here."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "Taken up from the cal the corn is cooked and soaked in."
+        },
+        {
+          "nutrient": "Niacin",
+          "note": "Corn niacin is mostly bound until nixtamalization releases it."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From the whole corn kernel, ground with its germ."
+        }
+      ],
+      "citations": [
+        {
+          "source": "México Desconocido, Nixtamal: qué es, cómo se hace (chef Héctor Gil)",
+          "url": "https://www.mexicodesconocido.com.mx/nixtamal-que-es-como-se-hace-y-mas.html"
+        },
+        {
+          "source": "Zarela Martínez, Making nixtamal and masa",
+          "url": "https://zarela.com/?p=14069"
+        },
+        {
+          "source": "Rancho Gordo, Making masa from scratch",
+          "url": "https://www.ranchogordo.com/blogs/blog/making-masa-fro"
+        },
+        {
+          "source": "Hambidge et al., Calcium absorption from tortilla meals, Am J Clin Nutr 2005",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1592687"
+        }
+      ],
+      "curationNote": "Proportions follow Héctor Gil in México Desconocido (1.1 kg corn, 30 g cal, 2 L water, rest 8 to 18 h, grind three times for tortillas) scaled to 1 kg corn, checked against Zarela Martínez and Rancho Gordo for timing. Yield about 1.8 kg masa; one serving is about 100 g of masa, so 18 servings. Cooking water is listed for completeness but drained. Masa harina route added in the last step as the brief asks."
+    },
+    {
+      "id": "curated_mx_base_corn_tortillas",
+      "name": "Tortillas de Maíz",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Masa & Tortillas",
+      "region": "Central Mexico",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tortilla",
+      "flavorProfile": "Soft, warm and lightly freckled from the comal, with a toasty corn smell and a gentle chew.",
+      "healthBenefit": "Whole nixtamalized corn gives fiber, calcium and available niacin with no added fat, which makes the tortilla one of the plainer and more nourishing breads there is.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_nixtamal_masa",
+          "servings": 6,
+          "note": "about 600 g fresh masa"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "only as needed to soften the masa"
+        }
+      ],
+      "instructions": [
+        "Knead the masa for a minute, adding water a teaspoon at a time if a pressed ball cracks at the edges; it should feel soft and moist but not sticky.",
+        "Divide it into 16 balls of about 35 to 40 g and keep them under a damp cloth.",
+        "Heat a comal or heavy skillet over medium to medium high heat for about 5 minutes, until evenly hot, around 400 to 450°F (205 to 230°C) on the surface.",
+        "Line a tortilla press with two pieces of plastic cut from a bag, set a ball in the middle and press to a round about 13 cm (5 in) across and 2 to 3 mm thick.",
+        "Peel off the top plastic, turn the tortilla onto your hand, peel off the second and lay it on the comal; cook 40 to 45 seconds without moving it, until the edges dry and it releases.",
+        "Turn it and cook 60 to 90 seconds, until the underside has brown freckles.",
+        "Turn once more for 10 to 15 seconds; press gently with your fingers or a cloth so it puffs, then wrap it in a cloth or tortillero, where the steam keeps the stack soft."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the cal used to make the masa."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From whole ground corn."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Pati Jinich, Homemade Corn Tortillas",
+          "url": "https://patijinich.com/wprm_print/homemade-corn-tortillas"
+        },
+        {
+          "source": "National Park Service, Tumacácori, Tortillas de maíz",
+          "url": "https://www.nps.gov/articles/000/tortillas-de-maiz.htm"
+        }
+      ],
+      "curationNote": "Pati Jinich's timings (40 to 45 s, 70 to 90 s, 10 to 15 s and the puff) and 35 to 40 g balls, with fresh masa from the nixtamal base rather than masa harina. NPS Tumacácori confirms the three turns and roughly 2 minutes total. One serving is one tortilla; 16 tortillas use about 600 g masa, six masa servings. No salt, as tortilla masa traditionally has none."
+    },
+    {
+      "id": "curated_mx_base_masa_para_tamales",
+      "name": "Masa para Tamales",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Masa & Tortillas",
+      "region": "Central Mexico",
+      "servings": 24,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tamal",
+      "flavorProfile": "Light, fluffy and savory once steamed, rich with lard and seasoned with chicken broth around a soft corn crumb.",
+      "healthBenefit": "This is a rich dough: the lard that makes it light also makes each tamal a filling, fat dense food, so tamales sit best beside beans, greens and salsa rather than as an everyday bread.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_nixtamal_masa",
+          "servings": 10,
+          "note": "about 1 kg fresh masa, coarser grind for tamales"
+        },
+        {
+          "recipeId": "curated_mx_base_manteca",
+          "servings": 18,
+          "note": "about 250 g, at cool room temperature"
+        },
+        {
+          "recipeId": "curated_mx_base_caldo_de_pollo",
+          "servings": 1.5,
+          "note": "about 375 ml, warm"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Baking powder",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "taste and adjust, the masa should taste a little salty before steaming"
+        }
+      ],
+      "instructions": [
+        "Beat the lard in a stand mixer or with a hand mixer on medium high for 3 to 5 minutes, until it is white and fluffy like whipped cream.",
+        "Beat in the baking powder and salt for another 1 to 2 minutes.",
+        "With the mixer on medium, add the masa a handful at a time, alternating with splashes of warm broth, until all the masa is in.",
+        "Keep beating for 8 to 10 minutes, adding broth until the masa is as soft as thick cake batter that still holds a shape on a spoon.",
+        "Drop half a teaspoon of masa into a glass of cold water: if it floats it is ready, and if it sinks beat for 2 to 3 minutes more and test again.",
+        "Taste and adjust the salt, then spread about 60 to 70 g on each soaked corn husk or banana leaf and steam the tamales for 60 to 90 minutes, until the masa pulls cleanly away from the wrapper.",
+        "With masa harina instead of fresh masa, use 1 kg harina for tamales and 1 to 1.25 L warm broth in the same way."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fat",
+          "note": "Mostly from the lard beaten into the masa."
+        },
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the corn masa."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "Carried in from the nixtamalized corn."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Receta masa para tamales básica",
+          "url": "https://www.excelsior.com.mx/recetas/receta-masa-para-tamales-basica"
+        },
+        {
+          "source": "Mamá Maggie's Kitchen, Basic Masa for Tamales",
+          "url": "https://www.inmamamaggieskitchen.com/?p=36658"
+        }
+      ],
+      "curationNote": "Excélsior's proportions (1 kg harina, 250 g lard, 1 tbsp baking powder, 1 tbsp salt, 1 to 1.25 L broth, 25 tamales, float test) moved onto fresh masa, which needs far less broth. Mamá Maggie's confirms the whipped lard first, alternating additions and the float test. One serving is the masa for one tamal, about 60 to 70 g."
+    },
+    {
+      "id": "curated_mx_base_flour_tortillas",
+      "name": "Tortillas de Harina",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Masa & Tortillas",
+      "region": "Sonora",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tortilla",
+      "flavorProfile": "Thin, soft and pliable with toasted spots, tasting of wheat and a little lard, and tearing in tender layers.",
+      "healthBenefit": "Made with refined flour and lard, these are a richer, plainer bread than corn tortillas, best eaten as the wrapper for beans, meat and vegetables.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_manteca",
+          "servings": 6.5,
+          "note": "about 90 g, soft"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "plus a little for rolling"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 280,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "hot to the touch, about 120 to 130°F (50 to 55°C)"
+        }
+      ],
+      "instructions": [
+        "Mix the flour and salt in a wide bowl, then rub in the lard with your fingertips until the flour feels like damp sand, 2 to 3 minutes.",
+        "Pour in the hot water a little at a time, mixing with your hand until a soft dough forms, then knead on the counter for 3 to 5 minutes until smooth and elastic.",
+        "Divide into 16 balls of about 55 g, cover with a cloth and rest for 15 to 20 minutes so the gluten relaxes.",
+        "Heat a comal or griddle over medium high heat for 5 minutes, to about 450 to 500°F (230 to 260°C) on the surface.",
+        "Roll each ball with a palote (thin rolling pin) into a round 23 to 25 cm (9 to 10 in) across and as thin as you can manage, turning it a quarter turn between strokes.",
+        "Cook 20 to 30 seconds, until bubbles rise, turn and cook 20 to 30 seconds more, pressing any big bubbles down with a cloth so they brown in spots.",
+        "Stack them in a cloth as they come off the comal to keep them soft."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the wheat flour."
+        },
+        {
+          "nutrient": "Fat",
+          "note": "From the lard worked into the dough."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Food My Muse, Sonoran Tortillas de Harina",
+          "url": "https://foodmymuse.com/sonoran-tortillas-de-harina/"
+        },
+        {
+          "source": "National Park Service, Tumacácori, Tortillas de harina",
+          "url": "https://www.nps.gov/articles/000/tortillas-de-harina.htm"
+        }
+      ],
+      "curationNote": "Food My Muse (raised in Sonora) gives 4 cups flour, 1/3 cup lard, hot water, rest 15 to 20 min and a hot comal; NPS Tumacácori gives the older ranch ratio (2 lb flour to 1/2 lb lard) and the thin Sonoran style. Lard set between the two at about 18% of flour. One serving is one tortilla. The giant sobaquera style is mentioned by NPS but this keeps a home size."
+    },
+    {
+      "id": "curated_mx_base_totopos",
+      "name": "Totopos",
+      "builderType": "snack",
+      "dishGroup": "Bases: Masa & Tortillas",
+      "region": "Central Mexico",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Crisp, salty corn chips that shatter cleanly and taste of toasted masa, made for scooping salsa and beans.",
+      "healthBenefit": "Fried totopos absorb oil and are a snack to enjoy in modest handfuls; baking them instead keeps the corn fiber and calcium with much less fat.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "a day old or left out to dry"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Majsolja",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": "about what the chips absorb from 500 to 750 ml heated for frying"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Spread the tortillas on the counter for 30 minutes to 2 hours so they dry a little, which makes them crisp rather than chewy.",
+        "Stack them and cut each into 6 wedges.",
+        "Heat 2 to 3 cm (about 1 in) of oil in a heavy pan to 350 to 365°F (175 to 185°C).",
+        "Fry the wedges in batches for 1 to 2 minutes, turning, until golden and the bubbling slows; do not let them go dark or they turn bitter.",
+        "Lift them onto paper towels and salt them while hot.",
+        "To bake instead, brush the wedges lightly with oil and bake at 350°F (175°C) for 15 to 25 minutes, turning once, until crisp."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fat",
+          "note": "From the frying oil the chips take up."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From the corn tortillas."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Pati Jinich, How to make tostadas and chips at home",
+          "url": "https://patijinich.com/?p=4336"
+        },
+        {
+          "source": "Directo al Paladar, Cómo hacer totopos caseros",
+          "url": "https://www.directoalpaladar.com/recetas-de-aperitivos/como-hacer-totopos-o-nachos-caseros-receta-mexicana"
+        }
+      ],
+      "curationNote": "Pati Jinich's drying step and frying guidance, with her 350°F baking alternative; Directo al Paladar confirms frying until golden and draining. Fat listed is the amount absorbed, not the frying bath. One serving is 12 chips (two tortillas)."
+    },
+    {
+      "id": "curated_mx_base_tostada_shells",
+      "name": "Tostadas (Shells)",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Masa & Tortillas",
+      "region": "Central Mexico",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "A flat, golden, crackling corn disc with a toasted flavor, sturdy enough to hold beans, meat and salsa.",
+      "healthBenefit": "A fried tostada carries some oil, while a baked or comal toasted one keeps the plain nutrition of the corn tortilla with almost none.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "left out to dry"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Majsolja",
+          "quantity": 50,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": "about what 12 tortillas absorb from a pan with 1 cm of oil"
+        }
+      ],
+      "instructions": [
+        "Lay the tortillas out on the counter or a tray for 30 minutes to a couple of hours so they dry slightly.",
+        "Heat about 1 cm (1/2 in) of oil in a skillet over medium heat for 4 to 6 minutes, to about 350°F (175°C), hot but not smoking.",
+        "Fry one tortilla at a time for 45 seconds to 1 minute per side, until golden and rigid, pressing it flat with a spatula.",
+        "Drain upright in a tall strainer or flat on paper towels; they crisp further as they cool.",
+        "To bake instead, set them on a baking sheet at 350°F (175°C) for 25 to 30 minutes, turning once, or toast them on a dry comal over medium heat, turning often, until crisp."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fiber",
+          "note": "From the corn tortilla."
+        },
+        {
+          "nutrient": "Fat",
+          "note": "From the oil, when fried."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Pati Jinich, How to make tostadas and chips at home",
+          "url": "https://patijinich.com/?p=4336"
+        },
+        {
+          "source": "Directo al Paladar, Cómo hacer totopos caseros",
+          "url": "https://www.directoalpaladar.com/recetas-de-aperitivos/como-hacer-totopos-o-nachos-caseros-receta-mexicana"
+        }
+      ],
+      "curationNote": "Pati Jinich's method in full (dry, 1/2 in oil, 45 s to 1 min a side, or 350°F for 25 to 30 min, or comal). Directo al Paladar was compared for the fried crisp and draining. Only one dedicated tostada source opened fully; other search results were US blogs, so not used. One serving is one tostada."
+    },
+    {
+      "id": "curated_mx_base_bolillo",
+      "name": "Bolillo",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Masa & Tortillas",
+      "region": "Mexico City",
+      "servings": 10,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "roll",
+      "flavorProfile": "A thin, crackling golden crust around a soft, airy white crumb, mildly salty and made for tortas and molletes.",
+      "healthBenefit": "A plain white bread roll: mostly refined wheat carbohydrate, best paired with beans, eggs or vegetables to round out a meal.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_manteca",
+          "servings": 3,
+          "note": "about 40 g, soft"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Grains, wheat flour, white, bread flour",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Baked",
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baker's yeast",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "active dry",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 340,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "lukewarm, about 100°F (38°C)"
+        }
+      ],
+      "instructions": [
+        "Heap the flour on the counter or in a bowl and make a well; put the yeast and 120 ml of the lukewarm water in the center and leave it 5 to 10 minutes, until foamy.",
+        "Draw in the flour with the remaining water, then add the sugar and salt and mix to a rough dough.",
+        "Work in the lard and knead for 10 minutes, until the dough is smooth, elastic and comes cleanly off the counter.",
+        "Cover and let it rise in a warm place until doubled, 45 to 90 minutes.",
+        "Punch it down and divide into 10 pieces of about 85 g; flatten each, fold the edges to the center, then roll it into a spindle with tapered ends, pressing the ends into points.",
+        "Set them on a lined baking sheet, cover and let rise until nearly doubled, 40 to 60 minutes.",
+        "Heat the oven to 450 to 480°F (230 to 250°C) with an empty tray on the lowest rack.",
+        "Cut a slash about 1 cm deep along the length of each roll, slide them in and pour a cup of hot water into the empty tray for steam.",
+        "Bake for 15 to 20 minutes, until golden and hollow sounding when tapped underneath, then cool on a rack before cutting."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the wheat flour."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the gluten in bread flour."
+        }
+      ],
+      "citations": [
+        {
+          "source": "México Desconocido, Cómo hacer bolillos",
+          "url": "https://www.mexicodesconocido.com.mx/como-hacer-bolillos-aqui-te-decimos-el-secreto.html"
+        },
+        {
+          "source": "Grupo Animal, Bolillo, pan mexicano",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/bolillo-pan-mexicano-historia"
+        }
+      ],
+      "curationNote": "México Desconocido's recipe (500 g flour, yeast in a well with water, 10 min knead, rise to double, 10 rolls, 250°C with a water tray for crust) and Grupo Animal's (rise 45 to 90 min, 220°C about 20 min, slash along the length). Lard used as the fat, which bakers prefer and México Desconocido allows (it lists manteca vegetal or oil). Salt reduced from the source's 2 tablespoons, which reads as an error, to 2% of flour."
+    },
+    {
+      "id": "curated_mx_base_telera",
+      "name": "Telera",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Masa & Tortillas",
+      "region": "Mexico City",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "roll",
+      "flavorProfile": "A soft, flat, lightly sweet roll with a thin golden crust and two pressed lines, made to be split for tortas.",
+      "healthBenefit": "A plain enriched white roll that carries the beans, meat and vegetables of a torta, and is mostly refined carbohydrate by itself.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_manteca",
+          "servings": 1.8,
+          "note": "about 25 g, melted"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 420,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Baked",
+          "prepNote": "plus a little for dusting"
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baker's yeast",
+          "quantity": 7,
+          "unit": "g",
+          "cutPrep": "active dry or instant",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 300,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "lukewarm, 110 to 115°F (43 to 46°C)"
+        }
+      ],
+      "instructions": [
+        "Stir the yeast and sugar into the lukewarm water and leave it a few minutes, until bubbly.",
+        "Add the flour, melted lard and salt and mix on low with a dough hook for 1 to 2 minutes, then knead on medium for about 8 minutes (or 10 minutes by hand) until smooth and elastic.",
+        "Oil the bowl, cover and let rise in a warm place until doubled, about 1 hour; for more flavor, refrigerate overnight and bring back to room temperature for about 2 hours.",
+        "Press the dough down, divide into 6 pieces, roll into balls, dust with flour and rest covered for 15 minutes.",
+        "Flatten each ball into an oval about 13 by 8 cm (5 by 3 in) on a lined baking sheet.",
+        "Press a floured wooden spoon handle deep into each oval twice along its length, almost through the dough, to make the three sections.",
+        "Dust lightly with flour, cover and let rise about 30 minutes, until almost doubled, while the oven heats to 400°F (200°C).",
+        "Bake for 18 to 20 minutes, until golden, and cool slightly before splitting."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the wheat flour and a little sugar."
+        },
+        {
+          "nutrient": "Folate",
+          "note": "From the enriched flour."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Rick Bayless, Teleras",
+          "url": "https://www.rickbayless.com/recipe/teleras/"
+        },
+        {
+          "source": "Camila Made, Teleras",
+          "url": "https://camilamade.com/teleras/"
+        }
+      ],
+      "curationNote": "Rick Bayless's recipe followed closely (420 g flour, 25 g lard or oil, 2 tbsp sugar, 6 rolls, two deep presses, 400°F 18 to 20 min); Camila Made's version agrees in every measure and was used to confirm. Lard chosen over the oil alternative."
+    },
+    {
+      "id": "curated_mx_base_salsa_roja",
+      "name": "Salsa Roja Asada",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Salsas",
+      "region": "Jalisco and Central Mexico",
+      "servings": 20,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Smoky, chunky and bright, with charred tomato sweetness, a sharp serrano bite and roasted garlic underneath.",
+      "healthBenefit": "A fresh vegetable salsa with almost no fat, bringing vitamin C and the red carotenoids of tomato to whatever it tops.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "whole, about 6 Roma tomatoes",
+          "cookingMethod": "Roasted",
+          "prepNote": "charred on the comal"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 24,
+          "unit": "g",
+          "cutPrep": "whole, about 4, stems removed after roasting",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "white onion, in thick slices",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "2 cloves, unpeeled",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": "optional"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "coarse salt if you have it",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat a dry comal or heavy skillet over medium heat and lay on the tomatoes, serranos, onion and garlic.",
+        "Roast, turning with tongs, until blistered and blackened in patches and soft: 4 to 6 minutes for the garlic and chiles, 8 to 12 minutes for the tomatoes and onion.",
+        "Peel the garlic, pull the stems off the chiles and chop the onion.",
+        "In a molcajete, grind the garlic with the salt to a paste, then add the chiles and grind until broken down.",
+        "Add the onion, then the tomatoes with their charred skins, and grind to a coarse, juicy salsa.",
+        "Stir in the cilantro and taste for salt; it should taste a little salty by itself. It keeps 3 days in the refrigerator."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomatoes and serranos."
+        },
+        {
+          "nutrient": "Lycopene",
+          "note": "From the roasted tomatoes."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Mexican Food Journal, Salsa Molcajeteada",
+          "url": "https://mexicanfoodjournal.com/wprm_print/4047"
+        },
+        {
+          "source": "Martín Gerardo Ramírez Correa (Jalisco and Guanajuato), Salsa asada de jitomate y serrano, Cookpad",
+          "url": "https://cookpad.com/mx/recetas/5584341"
+        }
+      ],
+      "curationNote": "Mexican Food Journal's molcajete order (garlic to a paste, onion, then tomatoes, salt so it tastes salty by itself, keeps 3 days) with the Ramírez Correa family's all tomato and serrano proportions from Los Altos de Jalisco (4 large tomatoes, 6 serranos, onion, 2 garlic, roasted on a low comal about 10 minutes). Tomatillos from the Journal version left out so this stays the red roasted table salsa. One serving is 2 tablespoons; the batch is about 2 1/2 cups."
+    },
+    {
+      "id": "curated_mx_base_salsa_verde",
+      "name": "Salsa Verde Cocida",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Salsas",
+      "region": "Mexico City",
+      "servings": 20,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Tangy and smooth with a fresh cilantro lift and steady serrano heat, deepened and rounded by a short fry in hot oil.",
+      "healthBenefit": "Tomatillos, chile and cilantro make a light sauce with vitamin C and a little fiber, and only a spoonful of oil for the whole batch.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Tomatillo",
+          "quantity": 900,
+          "unit": "g",
+          "cutPrep": "husked and rinsed",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "2 or 3, stems removed",
+          "cookingMethod": "Boiled",
+          "prepNote": "add more to taste"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "2 cloves, peeled",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "white onion, roughly chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 16,
+          "unit": "g",
+          "cutPrep": "about 1 cup leaves and upper stems",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "cooking liquid kept for blending"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Majsolja",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": "corn or safflower oil"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the tomatillos, serranos and garlic in a pot, cover with water and bring to a boil over high heat.",
+        "Lower to medium and simmer for 8 to 12 minutes, just until the tomatillos turn from bright to olive green and soften without bursting; lift them out and keep 120 ml of the water.",
+        "Blend the tomatillos, chiles and garlic with the reserved water until smooth, then add the onion, cilantro and salt and blend again; taste for heat and salt.",
+        "Heat the oil in a pot over medium heat until hot but not smoking, pour in the salsa (it will spatter) and bring it to a boil.",
+        "Simmer for 6 to 7 minutes, until it darkens a shade and thickens slightly.",
+        "Cool and keep it covered in the refrigerator for up to 1 week; the heat mellows as it sits."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomatillos and serranos."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From the tomatillos."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Pati Jinich, Cooked Salsa Verde",
+          "url": "https://patijinich.com/wprm_print/cooked-salsa-verde"
+        },
+        {
+          "source": "Federico Negrete (Ciudad de México), Salsa Verde, Cookpad",
+          "url": "https://cookpad.com/mx/recetas/1319947"
+        },
+        {
+          "source": "Grupo Animal, Cómo hacer salsa verde",
+          "url": "https://grupoanimal.mx/gastronomia/salsa-verde-tacos-enchiladas-chilaquiles"
+        }
+      ],
+      "curationNote": "Pati Jinich's proportions and the fry in oil for 6 to 7 minutes; Federico Negrete's Mexico City home version and Grupo Animal both confirm boiling until the color changes and blending with raw cilantro and onion; Grupo Animal adds the warning not to let the tomatillos burst. One serving is 2 tablespoons; the batch is about 2 1/2 cups."
+    },
+    {
+      "id": "curated_mx_base_salsa_verde_cruda",
+      "name": "Salsa Verde Cruda",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Salsas",
+      "region": "Mexico City",
+      "servings": 16,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Sharp, grassy and cool, the raw tomatillo tartness softened into a pale, creamy green by avocado.",
+      "healthBenefit": "Raw tomatillo keeps its vitamin C, and the avocado adds monounsaturated fat and potassium to a taco without any cooking oil.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Tomatillo",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "husked, rinsed and halved",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Avocado",
+          "quantity": 140,
+          "unit": "g",
+          "cutPrep": "flesh of 1 ripe Hass avocado",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "white onion, coarsely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "leaves and upper stems",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "1 or 2, stems removed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "half a small clove",
+          "cookingMethod": null,
+          "prepNote": "optional"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the tomatillos, onion, garlic, half the serrano and the salt in a blender and blend until smooth, adding a spoonful or two of water only if the blades stall.",
+        "Add the avocado and cilantro and blend again until pale green and creamy.",
+        "Taste and blend in more serrano for more heat and more salt if needed.",
+        "Serve within a few hours; to keep it, press plastic wrap onto the surface and refrigerate for up to 1 day, stirring before serving."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the raw tomatillos and chile."
+        },
+        {
+          "nutrient": "Monounsaturated fat",
+          "note": "From the avocado."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "From the avocado and tomatillos."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Pati Jinich, Raw Salsa Verde with Avocado",
+          "url": "https://patijinich.com/wprm_print/raw-salsa-verde-with-avocado"
+        },
+        {
+          "source": "Grupo Animal, Cómo hacer salsa verde (cruda y cremosa con aguacate)",
+          "url": "https://grupoanimal.mx/gastronomia/salsa-verde-tacos-enchiladas-chilaquiles"
+        }
+      ],
+      "curationNote": "Pati Jinich's quantities (1 lb tomatillos, 1 avocado, 2 tbsp onion, 1/4 cup cilantro, half the chile first), with Grupo Animal's raw and avocado versions for the garlic and the order of blending the avocado in last. One serving is 2 tablespoons; the batch is about 2 cups."
+    },
+    {
+      "id": "curated_mx_base_pico_de_gallo",
+      "name": "Pico de Gallo",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Salsas",
+      "region": "Central Mexico",
+      "servings": 10,
+      "servingSizeAmount": 0.25,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Crunchy, juicy and fresh, with ripe tomato, sharp white onion, green serrano heat and a squeeze of lime.",
+      "healthBenefit": "Raw tomato, onion, chile, cilantro and lime make a fat free relish that brings vitamin C and a little fiber to any plate.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "4 Roma (saladet) tomatoes, in small even dice",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "half a white onion, in small dice",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "2 or 3, finely chopped",
+          "cookingMethod": null,
+          "prepNote": "seeds and veins removed for milder heat"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "half a bunch, finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "juiced, 2 to 3 tablespoons",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Halve the tomatoes and scoop out most of the seeds if you want a drier, crisper salsa, then cut them into small, even cubes.",
+        "Dice the onion to the same size and finely chop the serranos and cilantro.",
+        "If making it ahead, soak the chopped onion in ice water for 10 minutes and drain it well to soften its bite.",
+        "Mix everything in a glass or ceramic bowl, add the lime juice and salt and stir gently.",
+        "Let it sit at room temperature for 10 to 15 minutes before serving so the flavors come together."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomato, serrano and lime."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From the raw vegetables."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Pico de gallo tradicional",
+          "url": "https://www.excelsior.com.mx/recetas/prepara-pico-gallo-tradicional-para-acompanar-clasicos-mexicanos"
+        },
+        {
+          "source": "Directo al Paladar, Cómo hacer pico de gallo",
+          "url": "https://www.directoalpaladar.com/recetas-de-salsas-y-guarniciones/receta-de-pico-de-gallo"
+        }
+      ],
+      "curationNote": "Excélsior's quantities (4 saladet, half an onion, 2 to 3 serranos, half a bunch cilantro, 2 to 3 tbsp lime) and its rest and onion soak tips; Directo al Paladar agrees on the classic five ingredients and serrano first. One serving is 1/4 cup; the batch is about 2 1/2 cups."
+    },
+    {
+      "id": "curated_mx_base_salsa_taquera",
+      "name": "Salsa Taquera de Chile de Árbol",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Salsas",
+      "region": "Mexico City",
+      "servings": 16,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Thin, brick red and fiercely hot, with toasted chile de árbol, a tart tomatillo edge and charred garlic.",
+      "healthBenefit": "A very hot, very light salsa made mostly of vegetables and dried chile, meant to be used by the spoonful.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "dried chiles de árbol",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "about 15, stems removed",
+          "prepNote": "toasted a few seconds"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomatillo",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "husked and rinsed, about 5",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "1 Roma tomato",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "2 cloves, unpeeled",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "white onion, a thick slice",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "to thin"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "coarse salt",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat a dry comal over medium heat and roast the tomatillos, tomato, onion and garlic, turning, until blackened in spots and soft, 8 to 12 minutes.",
+        "Pass the chiles de árbol over the comal for only 10 to 20 seconds a side, until fragrant and a shade darker; burnt chiles make the salsa bitter.",
+        "Peel the garlic and blend the chiles with the salt and half the water first, until the chile is finely broken up.",
+        "Add the onion, garlic, tomato and tomatillos and the rest of the water and blend briefly, leaving some texture; the salsa should be thin and pourable.",
+        "Taste for salt, and if the tomatillos are sharp, add a pinch of sugar. It keeps 5 days in the refrigerator."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomatillos and tomato."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the dried red chiles."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Grupo Animal, Salsa taquera: recetas tradicionales para roja y verde",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/salsa-roja-vs-salsa-verde-taquera"
+        },
+        {
+          "source": "Mexican Food Journal, Salsa Taquera (Salsa de Chile de Árbol)",
+          "url": "https://mexicanfoodjournal.com/wprm_print/salsa-taquera"
+        }
+      ],
+      "curationNote": "Grupo Animal's roasted salsa roja de árbol (10 to 15 árbol chiles barely toasted, chiles blended with salt first, pulse for texture) with tomatillo added as the base description asks and as many taquerías do. Mexican Food Journal's oil emulsified version was compared and its oil left out to keep the thin taquería style. Árbol chiles weigh about 0.4 g each. One serving is 2 tablespoons; the batch is about 2 cups."
+    },
+    {
+      "id": "curated_mx_base_salsa_macha",
+      "name": "Salsa Macha",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Salsas",
+      "region": "Veracruz",
+      "servings": 32,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "A deep red chile oil, crunchy with peanuts and seeds, smoky from morita and sharp from árbol, with fried garlic sweetness.",
+      "healthBenefit": "This is an oil condiment and rich by the spoonful, though the peanuts and seeds bring protein, vitamin E and minerals with the fat.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Majsolja",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": "any neutral seed oil; some Veracruz cooks use part olive oil"
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried chiles de árbol",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "about 10, stems removed",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried chiles morita",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "about 5, stems removed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "4 cloves, sliced",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Peanut",
+          "quantity": 70,
+          "unit": "g",
+          "cutPrep": "raw, unsalted, about 1/2 cup",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Pumpkin seed",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "hulled, about 1/2 cup",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Sesame seed",
+          "quantity": 36,
+          "unit": "g",
+          "cutPrep": "about 1/4 cup",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Warm the oil in a skillet over very low heat, to about 250 to 275°F (120 to 135°C); it should only shimmer, never smoke.",
+        "Fry the garlic for 2 to 3 minutes, until pale gold, and lift it out.",
+        "Fry the chiles for 20 to 40 seconds, just until they puff and darken a shade, and lift them out before they burn.",
+        "Fry the peanuts for 2 to 3 minutes, then the pumpkin seeds and sesame for 1 to 2 minutes more, until the seeds pop and smell toasted.",
+        "Take the pan off the heat and let everything cool for 10 to 15 minutes.",
+        "Pulse the chiles, garlic, nuts and seeds with the salt and some of the oil in a blender to a coarse crumb, then stir in the rest of the oil.",
+        "Keep it in a sterilized jar with the solids covered by oil, in a cool place or the refrigerator, for up to 1 month."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin E",
+          "note": "From the seed oil, peanuts and seeds."
+        },
+        {
+          "nutrient": "Magnesium",
+          "note": "From the pumpkin and sesame seeds."
+        },
+        {
+          "nutrient": "Fat",
+          "note": "Mostly from the oil, which is most of the jar."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Receta de salsa macha tradicional",
+          "url": "https://www.excelsior.com.mx/recetas/receta-de-salsa-macha-tradicional-el-sabor-clasico-para-tus-comidas/1730926"
+        },
+        {
+          "source": "Food and Pleasure, Salsa macha (versión clásica veracruzana)",
+          "url": "https://foodandpleasure.com/?p=249039"
+        }
+      ],
+      "curationNote": "Excélsior's recipe followed for quantities and frying order (garlic, chiles, peanuts, then seeds, very low heat, about 1/2 liter). Food and Pleasure confirms the Veracruz classic of morita, árbol, peanuts, sesame and garlic. Storage set at 1 month as a careful middle between the sources' ranges. One serving is 1 tablespoon."
+    },
+    {
+      "id": "curated_mx_base_salsa_ranchera",
+      "name": "Salsa Ranchera",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Salsas",
+      "region": "Central and Northern Mexico",
+      "servings": 4,
+      "servingSizeAmount": 0.5,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "A warm, brothy tomato sauce with fresh serrano heat, a little garlic and onion, and a hint of thyme, made to be spooned over eggs.",
+      "healthBenefit": "Mostly cooked tomato with a spoonful of oil, it brings lycopene and vitamin C and keeps the eggs it covers a light breakfast.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "about 6 Roma tomatoes",
+          "cookingMethod": "Roasted",
+          "prepNote": "roasted on the comal"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "2 or 3, stems removed after roasting",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "white onion, roughly chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "1 clove, unpeeled",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "roughly chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Majsolja",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "more to loosen"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Roast the tomatoes, serranos and garlic on a dry comal over medium heat, turning, until soft and blistered, 8 to 12 minutes; do not burn the garlic.",
+        "Peel the garlic and stem the chiles, then blend them with the tomatoes, onion, thyme and water until fairly smooth, about 1 minute.",
+        "Heat the oil in a saucepan over medium high heat until it shimmers and pour in the sauce carefully, as it spatters.",
+        "Season with salt and simmer for 8 to 10 minutes, stirring now and then, until it turns deep red and thickens slightly but stays brothy; loosen with a little water if needed.",
+        "Stir in the cilantro and cook 1 minute more, then keep it warm while the eggs are fried. It keeps 4 days in the refrigerator."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Lycopene",
+          "note": "From the cooked tomatoes, more available after cooking with oil."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomatoes and serranos."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Mexican Food Journal, Huevos Rancheros (Salsa Ranchera)",
+          "url": "https://mexicanfoodjournal.com/huevos-rancheros/"
+        },
+        {
+          "source": "La Opinión, Cómo hacer fácil y bien una salsa ranchera mexicana",
+          "url": "https://laopinion.com/?p=2411037"
+        }
+      ],
+      "curationNote": "Mexican Food Journal's blend and fry with thyme, simmered about 10 minutes, doubled; La Opinión's roasting of tomatoes, chiles and garlic first and cilantro in the last minute. One serving is 1/2 cup, enough for one plate of huevos rancheros."
+    },
+    {
+      "id": "curated_mx_base_chiltomate",
+      "name": "Chiltomate",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Salsas",
+      "region": "Yucatán",
+      "servings": 8,
+      "servingSizeAmount": 0.25,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Chunky and smoky, with sweet charred tomato, fragrant habanero heat and a fresh hit of cilantro.",
+      "healthBenefit": "Charred tomato and a little habanero make a fat free sauce with vitamin C and the red carotenoids of tomato.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "whole ripe tomatoes",
+          "cookingMethod": "Roasted",
+          "prepNote": "charred on the comal"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "a quarter of a white onion",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "habanero chile",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "seeded after charring",
+          "prepNote": "add half, then more to taste"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 16,
+          "unit": "g",
+          "cutPrep": "about 1 cup coarsely chopped leaves and upper stems",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat a dry comal over medium heat and char the tomatoes, onion and habanero, turning once, until blackened in patches and soft, 10 to 12 minutes; or broil them on a sheet for the same time.",
+        "Let them cool a little, then chop the onion and seed and chop the habanero, keeping your face away from its fumes.",
+        "Mash the tomatoes completely in a molcajete, then work in the onion, cilantro and salt.",
+        "Add half the habanero, mash it in and taste, adding more for more heat.",
+        "Serve warm or at room temperature; in a blender, pulse just until combined and still chunky."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomatoes and habanero."
+        },
+        {
+          "nutrient": "Lycopene",
+          "note": "From the charred tomatoes."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Pati Jinich, Basic Yucatecan Tomato Sauce (Salsa de Chiltomate)",
+          "url": "https://patijinich.com/wprm_print/basic-yucatecan-tomato-sauce"
+        },
+        {
+          "source": "México Desconocido, Salsa de chiltomate",
+          "url": "https://www.mexicodesconocido.com.mx/salsa-de-chiltomate.html"
+        }
+      ],
+      "curationNote": "Pati Jinich's quantities and molcajete method (1 lb tomatoes, a quarter onion, 1 habanero, 1 cup cilantro, 10 to 12 min on the comal); México Desconocido confirms roasting all three and grinding together, with up to 4 or 5 habaneros for the hotter Yucatecan table. One serving is 1/4 cup; the batch is about 2 cups."
+    },
+    {
+      "id": "curated_mx_base_guacamole",
+      "name": "Guacamole",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Salsas",
+      "region": "Central Mexico",
+      "servings": 8,
+      "servingSizeAmount": 0.25,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Creamy and chunky, with buttery avocado lifted by a pounded paste of onion, serrano and cilantro, lime and coarse salt.",
+      "healthBenefit": "Avocado brings monounsaturated fat, fiber and potassium, so guacamole is a rich but nourishing topping in place of cheese or cream.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fruit",
+          "baseName": "Avocado",
+          "quantity": 420,
+          "unit": "g",
+          "cutPrep": "flesh of 3 ripe Hass avocados",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "white onion, finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": "2, finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "juiced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "coarse salt",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "In a molcajete, grind half the onion, the serrano, half the cilantro and the salt to a rough paste, 1 to 2 minutes.",
+        "Scoop in the avocado and mash it into the paste with the pestle or a fork, leaving some chunks.",
+        "Fold in the rest of the onion and cilantro and half the lime juice, then taste and add more lime and salt as needed.",
+        "Serve right away in the molcajete; to hold it up to 2 hours, press plastic wrap onto its surface."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Monounsaturated fat",
+          "note": "From the avocado."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From the avocado."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "From the avocado."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Maricruz Avalos, Authentic Guacamole Recipe in a Molcajete",
+          "url": "https://www.maricruzavalos.com/?p=23714"
+        },
+        {
+          "source": "Riu Palace Cabo San Lucas (chef Edilson Rodríguez Soto), Prepara el auténtico guacamole",
+          "url": "https://www.riu.com/blog/prepara-autentico-guacamole-la-ayuda-chef-mexicano/"
+        }
+      ],
+      "curationNote": "Maricruz Avalos's molcajete method (aromatics ground to a paste with salt first, avocado mashed in, lime to taste) and Chef Rodríguez Soto's chunky texture and early lime. Tomato, garlic and cumin from Avalos left out to keep the plain central Mexican version the base describes. One serving is 1/4 cup; the batch is about 2 cups."
+    }
+  ]
+}

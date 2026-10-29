@@ -20,6 +20,12 @@
 // printout is the thing that stops that list from drifting quietly the way the
 // builder-type counts did.
 //
+// Since 2026-10-29 the Mexican recipes (recipeCard.cuisine 'Mexican') form a
+// band of their own, shelved by recipeCard.shelf in the order MEXICAN_SHELVES
+// gives, since their Spanish titles read badly against English title rules.
+// For that band this checks every shelf is one MEXICAN_SHELVES names, and
+// prints the count on each.
+//
 // Run: node scripts/audit_system_recipe_subgroups.js
 //      node scripts/audit_system_recipe_subgroups.js --list   (print buckets)
 
@@ -66,6 +72,14 @@ function readSubgroupTables() {
   return new Function(body)();
 }
 
+function readMexicanShelves() {
+  const source = fs.readFileSync(COMPONENT, 'utf8');
+  const start = source.indexOf('const MEXICAN_SHELVES = [');
+  if (start === -1) throw new Error('MEXICAN_SHELVES not found in SystemRecipesView.tsx');
+  const body = source.slice(start, source.indexOf('];', start));
+  return [...body.matchAll(/'([^']+)'/g)].map((match) => match[1]);
+}
+
 // --- the side dishes, read out of lib/recipeDishRole.ts ------------------
 //
 // Comment lines inside the set are dropped before the quoted ids are read.
@@ -110,7 +124,14 @@ function readRecipes() {
     match = line.match(/^ {4}linkedCuratedRecipeId: '([^']+)',/);
     if (match) { curated = match[1]; continue; }
     match = line.match(/^ {4}linkedBuilderType: '([^']+)',/);
-    if (match && id && title) entries.push({ id, title, curated, builder: match[1] });
+    if (match && id && title) { entries.push({ id, title, curated, builder: match[1], cuisine: null, shelf: null }); continue; }
+    // cuisine and shelf sit inside recipeCard, after linkedBuilderType, so
+    // they belong to the entry just pushed.
+    const last = entries[entries.length - 1];
+    match = line.match(/^ {6}cuisine: '([^']+)',/);
+    if (match && last && last.id === id) { last.cuisine = match[1]; continue; }
+    match = line.match(/^ {6}shelf: '(.*)',$/);
+    if (match && last && last.id === id) last.shelf = match[1].replace(/\\'/g, "'");
   }
   return entries;
 }
@@ -118,12 +139,15 @@ function readRecipes() {
 const SUBGROUP_MIN = 12;
 const tables = readSubgroupTables();
 const sideDishIds = readSideDishIds();
+const mexicanShelves = readMexicanShelves();
 const recipes = readRecipes();
 if (recipes.length === 0) { console.error('read no recipes out of lib/digest/recipes.ts'); process.exit(1); }
 
 // The same call groupKeyFor makes in the component.
 const bandFor = (recipe) =>
-  recipe.builder === 'side' && !sideDishIds.has(recipe.curated) ? 'main' : recipe.builder;
+  recipe.cuisine === 'Mexican'
+    ? 'mexican'
+    : recipe.builder === 'side' && !sideDishIds.has(recipe.curated) ? 'main' : recipe.builder;
 
 const byBand = new Map();
 for (const recipe of recipes) {
@@ -139,7 +163,7 @@ const fail = (message) => { console.log(`  PROBLEM: ${message}`); problems += 1;
 console.log(`${recipes.length} recipes across ${byBand.size} bands\n`);
 
 // The Side Builder split, printed every run so the list cannot drift.
-const sideBuilder = recipes.filter((recipe) => recipe.builder === 'side');
+const sideBuilder = recipes.filter((recipe) => recipe.builder === 'side' && recipe.cuisine !== 'Mexican');
 const asMains = sideBuilder.filter((recipe) => bandFor(recipe) === 'main');
 const asSides = sideBuilder.filter((recipe) => sideDishIds.has(recipe.curated));
 console.log(`side builder: ${sideBuilder.length} recipes -> ${asMains.length} mains, ${asSides.length} sides`);
@@ -156,6 +180,21 @@ for (const curated of missingIds) fail(`SIDE_DISH_RECIPE_IDS names ${curated}, w
 console.log('');
 
 for (const [band, list] of [...byBand.entries()].sort()) {
+  if (band === 'mexican') {
+    const counts = new Map(mexicanShelves.map((label) => [label, []]));
+    for (const recipe of list) {
+      if (!counts.has(recipe.shelf)) { fail(`mexican: "${recipe.title}" has shelf "${recipe.shelf}", which MEXICAN_SHELVES does not name`); continue; }
+      counts.get(recipe.shelf).push(recipe.title);
+    }
+    console.log(`mexican: ${list.length} recipes, shelved by recipeCard.shelf`);
+    for (const [label, bucket] of counts) {
+      if (bucket.length === 0) continue;
+      console.log(`  ${label} (${bucket.length})`);
+      if (showBuckets) for (const title of bucket.slice().sort()) console.log(`      ${title}`);
+    }
+    console.log('');
+    continue;
+  }
   const rules = tables[band];
   if (!rules) {
     if (list.length > SUBGROUP_MIN) fail(`${band} holds ${list.length} recipes and has no subgroup table`);

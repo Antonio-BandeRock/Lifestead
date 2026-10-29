@@ -1,0 +1,1023 @@
+{
+  "recipes": [
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_carne_asada",
+      "name": "Carne Asada",
+      "region": "Sonora and Nuevo León",
+      "servings": 6,
+      "flavorProfile": "Beefy, smoky and salty from the charcoal, with a squeeze of lime cutting through the char on thin, quickly grilled steak.",
+      "healthBenefit": "Lean grilled beef seasoned with little more than salt brings a generous amount of protein, iron and zinc for its size.",
+      "overallTier": "strong",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Top Sirloin (Raw)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "cut in thin steaks about 1 cm thick",
+          "cookingMethod": "Grilled",
+          "prepNote": "aguayón or diezmillo in Sonora"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "halved",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "cebollitas or thick slices",
+          "cookingMethod": "Grilled",
+          "prepNote": "grilled alongside"
+        }
+      ],
+      "instructions": [
+        "Light a charcoal fire, mesquite if you can find it, and let it burn down to glowing coals with a light coat of ash, about 30 to 40 minutes.",
+        "Season the steaks on both sides with the coarse salt just before they go on the grill. In Sonora salt is the whole seasoning; in Monterrey many cooks first rub the meat with garlic, lime and a splash of beer for 2 hours.",
+        "Grill the steaks over high heat (about 500 to 550 °F, 260 to 290 °C at the grate) for 2 to 4 minutes a side, turning once, until charred outside and still juicy inside. Grill the onions at the edge of the fire until soft and blistered, 8 to 10 minutes.",
+        "Rest the meat for 5 minutes, then chop it on a board into small pieces for tacos or slice it to serve on a plate.",
+        "Squeeze lime over the meat at the table and serve with tortillas, salsa and the grilled onions."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the sirloin, the whole point of the dish."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "Beef supplies the heme form, which the body absorbs readily."
+        },
+        {
+          "nutrient": "Zinc",
+          "note": "Red meat is one of the richest everyday sources."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Cocina Fácil, Cómo sazonar la carne asada",
+          "url": "https://www.cocinafacil.com.mx/recetas/como-sazonar-la-carne-asada-5-recetas-deliciosas"
+        },
+        {
+          "source": "Wikipedia, Carne asada",
+          "url": "https://en.wikipedia.org/wiki/Carne_asada"
+        }
+      ],
+      "curationNote": "Sonoran salt-only asada over mesquite, with the Monterrey beer and lime rub mentioned as the other northern way. Cocina Fácil gives the marinades and cuts; Wikipedia gives the cuts and northern ranching origin. One serving is about 110 g cooked meat, enough for 3 tacos."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_barbacoa",
+      "name": "Barbacoa de Borrego",
+      "region": "Hidalgo",
+      "servings": 10,
+      "flavorProfile": "Soft, rich lamb that falls from the bone with a faint sweetness and smoke from the maguey leaves, served with a deep, savoury consomé from the drippings.",
+      "healthBenefit": "Lamb gives plenty of protein, iron, zinc and vitamin B12, and the consomé brings vegetables and chickpeas, though the drippings make it a rich bowl.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Lamb Shoulder (Raw)",
+          "quantity": 2500,
+          "unit": "g",
+          "cutPrep": "bone-in, in large pieces",
+          "cookingMethod": "Steamed",
+          "prepNote": "shoulder, leg and ribs together"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "maguey leaves (pencas)",
+          "quantity": 6,
+          "unit": "each",
+          "cutPrep": "roasted over a flame until pliable",
+          "prepNote": "for lining and covering"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "in large chunks",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "peeled, in large chunks",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Legume",
+          "baseName": "Chickpeas (garbanzo beans, bengal gram)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "dried, soaked overnight",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Grain",
+          "baseName": "Grains, rice, white, long-grain, regular",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "quartered",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "one whole head, halved",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed between the palms",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 3000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rub the lamb all over with the salt. Roast the maguey leaves over a gas flame or on a hot comal until they soften and darken in spots, 1 to 2 minutes a side.",
+        "Put the carrot, potato, soaked chickpeas, rice, onion, garlic, bay, oregano and water in the bottom of a large steamer pot. Set the steamer rack over it.",
+        "Line the rack with the maguey leaves, letting them hang over the sides, lay the lamb on top and fold the leaves over to enclose it. Cover tightly, sealing the lid with a damp towel or a strip of masa.",
+        "Steam over medium heat for 4 to 5 hours, until the meat pulls from the bone, adding hot water to the pot if the level drops. The juices from the lamb drip into the pot and become the consomé.",
+        "Pull the meat into large pieces. Taste the consomé for salt and serve it in cups with the vegetables and chickpeas, with the meat, salsa verde and warm tortillas alongside."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the lamb."
+        },
+        {
+          "nutrient": "Vitamin B12",
+          "note": "Lamb is one of the richest meat sources."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From the chickpeas and vegetables in the consomé."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Animal Gourmet, El chilpatli de Guerrero y la barbacoa de borrego de Hidalgo",
+          "url": "https://grupoanimal.mx/gastronomia/cocinerastradicionales-el-chilpatli-de-guerrero-y-la-barbacoa-de-borrego-de-hidalgo"
+        },
+        {
+          "source": "Pati Jinich, Barbacoa",
+          "url": "https://patijinich.com/es/barbacoa/"
+        }
+      ],
+      "curationNote": "Hidalgo style from the Animal Gourmet cocineras tradicionales piece: lamb with salt only, wrapped in roasted pencas, steamed over a consomé of carrot, potato, rice, onion and a whole garlic head. Chickpeas and bay from Pati Jinich, who uses an adobo; the adobo was left out to keep the Hidalgo version. A pit oven is the traditional method; the steamer is the home version both sources accept. One serving is about 120 g meat plus a cup of consomé."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_birria",
+      "name": "Birria de Chivo con Consomé",
+      "region": "Jalisco",
+      "servings": 10,
+      "flavorProfile": "Tender goat in a brick-red, warmly spiced chile broth, earthy from guajillo and ancho with clove, cumin and a sharp edge of vinegar.",
+      "healthBenefit": "Goat is a lean red meat with protein and iron, and the dried chiles add vitamin A and fiber to the consomé; it is a hearty, festive dish.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "bone-in goat (chivo)",
+          "quantity": 2000,
+          "unit": "g",
+          "cutPrep": "in pieces about 8 cm",
+          "prepNote": "lamb or beef shank where goat cannot be had"
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried guajillo chiles",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "stemmed and seeded",
+          "prepNote": "toasted and soaked"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, ancho",
+          "quantity": 36,
+          "unit": "g",
+          "cutPrep": "dried, stemmed and seeded",
+          "cookingMethod": null,
+          "prepNote": "toasted and soaked"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, pasilla",
+          "quantity": 14,
+          "unit": "g",
+          "cutPrep": "dried, stemmed and seeded",
+          "cookingMethod": null,
+          "prepNote": "toasted and soaked"
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried cascabel chiles",
+          "quantity": 24,
+          "unit": "g",
+          "cutPrep": "stemmed and seeded",
+          "prepNote": "toasted and soaked"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "in chunks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "whole peppercorns",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed between the palms",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, cider",
+          "quantity": 180,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried avocado leaves",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "toasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "roasted",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Toast the guajillo, ancho, pasilla and cascabel chiles on a dry comal over medium heat for 15 to 30 seconds a side, then soak them in hot water for 15 minutes.",
+        "Blend the drained chiles with the garlic, onion, cumin, peppercorns, cloves, cinnamon, oregano, thyme, vinegar and salt into a thick, smooth adobo. Rub it all over the goat, cover and refrigerate for at least 12 hours, ideally a day.",
+        "Put the meat and its adobo in a heavy pot or roasting pan, tuck in the bay and toasted avocado leaves, and pour in the water. Cover tightly with foil and a lid.",
+        "Cook in the oven at 325 °F (165 °C) or over low heat on the stove for 3 to 4 hours, until the meat pulls from the bone.",
+        "Lift out the meat. Blend the roasted tomato with a little of the cooking liquid, stir it back into the pot and simmer 15 minutes to make the consomé. Skim some of the fat and keep it for quesabirria if you like.",
+        "Serve the meat in bowls with plenty of hot consomé, with chopped onion, cilantro, lime and warm tortillas at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the goat, which is not counted in the totals because the database has no goat."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the dried chiles in the adobo."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Animal Gourmet, Receta de birria",
+          "url": "https://www.animalgourmet.com/2020/01/16/receta-de-birria"
+        },
+        {
+          "source": "Pati Jinich, Birria",
+          "url": "https://patijinich.com/es/birria/"
+        },
+        {
+          "source": "Mexican Food Journal, Birria with consomé",
+          "url": "https://mexicanfoodjournal.com/birria-with-consome/"
+        }
+      ],
+      "curationNote": "Jalisco birria de chivo. Chile mix (ancho, pasilla, guajillo, cascabel), spices, vinegar, a day of marinating and the tomato in the consomé follow Animal Gourmet; avocado leaves and the vinegar rinse idea from Pati Jinich. Goat is marked notInDatabase rather than swapped for lamb. One serving is about 120 g meat with a bowl of consomé."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_buche",
+      "name": "Buche",
+      "region": "Michoacán and Mexico City",
+      "servings": 6,
+      "flavorProfile": "Pork stomach simmered until tender, then fried in lard so it turns chewy and soft with crisp, golden edges.",
+      "healthBenefit": "Pork stomach is mostly protein and collagen and is fairly lean; finishing it in lard makes it a rich taco filling.",
+      "overallTier": "weak",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "pork stomach (buche)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "cleaned, fat trimmed",
+          "prepNote": "often sold already cleaned"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, cider",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "halved",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "whole cloves",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Orange",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "juiced, peel kept",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rinse the stomach well, rub it inside and out with the vinegar and a little of the salt, and rinse again. Trim off any loose fat.",
+        "Put it in a pot with the water, onion, garlic, bay and the rest of the salt. Bring to a boil, skim, then simmer covered for 2½ to 3 hours, until a knife slides in easily.",
+        "Drain and cut into strips or bite-size pieces.",
+        "Melt the lard in a heavy pot or cazo over medium heat, add the buche, the orange juice and the squeezed orange half, and fry gently for 20 to 30 minutes, stirring now and then, until the edges are golden and a little crisp.",
+        "Lift it out with a slotted spoon, chop it on a board and serve in tacos with salsa verde, onion and cilantro."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the stomach, much of it as collagen; the stomach itself is not counted because the database lacks it."
+        },
+        {
+          "nutrient": "Fat",
+          "note": "Mostly from the lard it is fried in."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chilango, Glosario taquero: nana, bofe, nenepil y buche",
+          "url": "https://www.chilango.com/comida/tacos-nana-bofe-nenepil-glosario-taquero/"
+        },
+        {
+          "source": "México Desconocido, Carnitas michoacanas",
+          "url": "https://www.mexicodesconocido.com.mx/carnitas-michoacanas-receta-y-origen.html"
+        }
+      ],
+      "curationNote": "Buche is cooked in the carnitas cazo in Michoacán and in Mexico City taquerías. Chilango confirms pork stomach is the most popular buche; México Desconocido lists offal and skin as carnitas cuts and gives the simmer then fry method followed here. The long preliminary simmer reflects that stomach needs far more time than shoulder. One serving is about 110 g, enough for 3 tacos."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_cabeza",
+      "name": "Cabeza de Res al Vapor",
+      "region": "Mexico City and central Mexico",
+      "servings": 12,
+      "flavorProfile": "Silky, gelatinous beef from the cheek, snout and palate, steamed for hours with garlic, bay and allspice until it melts, then finely chopped.",
+      "healthBenefit": "The head meat is rich in protein and collagen; the fatty, gelatinous texture makes it a rich filling to enjoy in modest portions.",
+      "overallTier": "weak",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "beef head meat (cheek, snout, palate)",
+          "quantity": 2500,
+          "unit": "g",
+          "cutPrep": "on the bone or in large pieces, well washed",
+          "prepNote": "tongue, brains and eyes are cooked with it and sold separately"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "quartered",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "two whole heads, halved",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 6,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Fill the bottom of a large steamer pot with hot water and add the onion, garlic, bay, allspice, cloves and salt.",
+        "Set the rack in place, lay the washed head meat on it, and cover with foil and a clean towel before putting on the lid so no steam escapes.",
+        "Steam over medium heat for 5 to 7 hours for a whole head, or 3 to 4 hours for separate pieces, adding hot water when the level drops, until the meat comes away from the bone at a touch.",
+        "Pull the meat from the bones, discarding gristle you do not want. Chop it finely on a board and keep it warm over the steaming pot.",
+        "Serve in small tacos with onion, cilantro, lime and salsa verde."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the head meat, which is not counted in the totals because the database has no beef head."
+        },
+        {
+          "nutrient": "Collagen",
+          "note": "From the cheek, snout and palate, which turn gelatinous with long steaming."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Cookpad, Tacos de cabeza de res",
+          "url": "https://cookpad.com/mx/recetas/100412"
+        },
+        {
+          "source": "Chilango, Los mejores tacos de cabeza en la CDMX",
+          "url": "https://www.chilango.com/comida/los-mejores-tacos-de-cabeza-en-la-cdmx/"
+        }
+      ],
+      "curationNote": "Steamed beef head as in Mexico City taquerías. Aromatics (garlic heads, bay, allspice, clove, onion, salt) and the 5 to 7 hour steam follow the Cookpad home recipe; Chilango confirms steaming or boiling with onion, garlic and herbs and which cuts go into the surtido. One serving is about 100 g of chopped meat, enough for 3 small tacos."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_cachete",
+      "name": "Cachete de Res",
+      "region": "Mexico City and central Mexico",
+      "servings": 8,
+      "flavorProfile": "Beef cheek steamed until it is soft, juicy and almost spreadable, with a deep beefy taste and a gentle garlic and bay perfume.",
+      "healthBenefit": "Cheek is a hard-working muscle full of protein and collagen; it carries more fat than lean cuts, so it is a rich choice.",
+      "overallTier": "weak",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "beef cheek (cachete)",
+          "quantity": 1500,
+          "unit": "g",
+          "cutPrep": "trimmed of silver skin",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "quartered",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "one whole head, halved",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Fill the bottom of a steamer pot with hot water and add the onion, garlic, bay, allspice and salt.",
+        "Lay the cheeks on the rack, cover with foil and a towel, put on the lid and steam over medium heat for 3 to 4 hours, until the meat yields completely to a fork. Add hot water as it boils away.",
+        "Chop the cheek finely on a board, moistening it with a spoonful of the steaming liquid, and keep it warm over the pot.",
+        "Serve in tacos with onion, cilantro, lime and salsa verde or salsa roja."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the cheek, which is not counted because the database has no beef cheek."
+        },
+        {
+          "nutrient": "Collagen",
+          "note": "Cheek is full of connective tissue that softens into gelatin with steaming."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chilango, Los mejores tacos de cabeza en la CDMX",
+          "url": "https://www.chilango.com/comida/los-mejores-tacos-de-cabeza-en-la-cdmx/"
+        },
+        {
+          "source": "Cookpad, Tacos de cabeza de res",
+          "url": "https://cookpad.com/mx/recetas/100412"
+        }
+      ],
+      "curationNote": "Cachete is the most asked-for cut in a cabeza stand, so it is written on its own with the same steaming aromatics as the whole head (Cookpad) and the shorter time for a separate cut. One serving is about 110 g, enough for 3 tacos."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_carnitas",
+      "name": "Carnitas",
+      "region": "Michoacán",
+      "servings": 10,
+      "flavorProfile": "Pork slow-cooked in lard with orange until tender inside and caramelized and crisp outside, rich, salty and faintly sweet.",
+      "healthBenefit": "Carnitas bring a lot of protein along with B vitamins from the pork, and cooking in lard makes them rich, best eaten with plenty of salsa, onion and cilantro.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 1500,
+          "unit": "g",
+          "cutPrep": "maciza, in 8 cm chunks",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Spare Ribs (Raw)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "cut between the bones",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Orange",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "juiced, halves kept",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "whole cloves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Marjoram Spices",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 250,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Melt the lard in a large heavy pot, ideally a copper cazo, over medium heat.",
+        "Add the pork shoulder, ribs, garlic, bay, marjoram, thyme, salt and water. Bring to a simmer, cover and cook gently for 1 to 1½ hours, turning the pieces now and then, until the meat is tender.",
+        "Uncover, add the orange juice, the squeezed orange halves and the milk, and raise the heat so the liquid boils away.",
+        "Once the liquid is gone the meat begins to fry in the lard. Keep cooking, stirring carefully, for 15 to 20 minutes, until the outside is deep golden. Do not let it go longer or it dries out.",
+        "Lift the meat out with a slotted spoon and let it drain. Chop it on a board with some of the crisp bits and serve with tortillas, salsa verde, onion and cilantro."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the pork shoulder and ribs."
+        },
+        {
+          "nutrient": "Thiamin",
+          "note": "Pork is one of the richest food sources of vitamin B1."
+        },
+        {
+          "nutrient": "Fat",
+          "note": "From the lard and the pork, which is what makes carnitas rich."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Larousse Cocina, Carnitas",
+          "url": "https://laroussecocina.mx/receta/carnitas/"
+        },
+        {
+          "source": "Cocina Fácil, Tacos de carnitas estilo Michoacán",
+          "url": "https://www.cocinafacil.com.mx/recetas/tacos-de-carnitas-estilo-michoacan"
+        },
+        {
+          "source": "Gastrolab, Carnitas estilo Michoacán desde cero",
+          "url": "https://www.gastrolabweb.com/recetas/2021/6/9/dona-angela-te-ensena-preparar-unas-autenticas-carnitas-desde-cero-estilo-michoacan-11172.html"
+        }
+      ],
+      "curationNote": "Michoacán carnitas in lard. Orange juice and herbs from Larousse; milk, the 250 g of lard and the covered-then-fried timing from Cocina Fácil; mixed cuts and the cazo from the Gastrolab Michoacán cook, who uses far more lard at market scale. Condensed milk (Pati Jinich) was left out. One serving is about 110 g, enough for 3 tacos."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_cecina",
+      "name": "Cecina de Yecapixtla",
+      "region": "Morelos",
+      "servings": 8,
+      "flavorProfile": "Paper-thin salted beef dried in the sun and seared on a hot comal, smoky, salty and chewy with a light gloss of lard.",
+      "healthBenefit": "Cecina is lean beef with plenty of protein and iron, but it is heavily salted, so it is one to enjoy in small amounts.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Round (Raw)",
+          "quantity": 1200,
+          "unit": "g",
+          "cutPrep": "cut into very thin, wide sheets about 1 to 2 mm",
+          "cookingMethod": "Grilled",
+          "prepNote": "pulpa negra or cañada from the leg"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Ask the butcher to slice the beef into long, wide sheets as thin as possible, or freeze it for 1 hour and slice it yourself.",
+        "Lay the sheets flat without folds, salt them evenly on both sides, and dry them in the sun on a clean board or rack, turning often, for 45 minutes to 1 hour, until they have lost about 40 percent of their moisture. Indoors, dry them on a rack in a 170 °F (75 °C) oven for 1 to 2 hours.",
+        "Let them cool for 10 minutes, rub them lightly with the lard, fold and store in the refrigerator until needed.",
+        "To serve, sear the cecina on a very hot comal or grill for 30 seconds to 1 minute a side, until it browns at the edges.",
+        "Serve with grilled nopales and cebollitas, queso fresco, crema, beans, salsa and warm tortillas."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the beef round, concentrated as it dries."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the beef."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "High, from the salt cure."
+        }
+      ],
+      "citations": [
+        {
+          "source": "El Universal, Cómo se hace la cecina",
+          "url": "https://www.eluniversal.com.mx/menu/como-se-hace-la-cecina/"
+        },
+        {
+          "source": "Mexico News Daily, State by Plate: Morelos and cecina de Yecapixtla",
+          "url": "https://mexiconewsdaily.com/lifestyle/food/state-by-plate-morelos-and-cecina-de-yecapixtla/"
+        },
+        {
+          "source": "UnoTV, Cecina de Yecapixtla",
+          "url": "https://www.unotv.com/estilo-de-vida/gastronomia/cecina-de-yecapixtla-por-que-su-preparacion-la-hace-tan-famosa/"
+        }
+      ],
+      "curationNote": "Yecapixtla cecina: leg beef sliced thin, salted, sun-dried to about 40 percent moisture loss, cooled, then rubbed with lard (all three sources agree). The oven step is a home stand-in for the sun. Accompaniments from Mexico News Daily and UnoTV. One serving is about 100 g."
+    }
+  ]
+}

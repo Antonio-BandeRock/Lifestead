@@ -1,0 +1,2000 @@
+{
+  "recipes": [
+    {
+      "id": "curated_mx_elote",
+      "name": "Elote",
+      "builderType": "handheld",
+      "dishGroup": "Tortas & Antojitos",
+      "region": "Central Mexico, street carts",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Sweet, chewy corn on the cob under a creamy, salty coat of crema, mayonnaise and cotija, sharpened with chile and lime.",
+      "healthBenefit": "Whole corn brings fibre and some B vitamins, while the mayonnaise, crema and cheese make each ear a rich street treat.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_crema",
+          "servings": 2,
+          "note": "about 60 ml, brushed on first"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "White Corn",
+          "quantity": 6,
+          "unit": "each",
+          "cutPrep": "ears, outer husks pulled back",
+          "cookingMethod": "Boiled",
+          "prepNote": "Mexican elote is large, starchy white corn; boil in the husk or grill"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Dressing, mayonnaise, whole egg type",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Queso Cotija",
+          "quantity": 70,
+          "unit": "g",
+          "cutPrep": "crumbled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "ground chile piquín",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": "powdered",
+          "prepNote": "or chile de árbol powder"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 3000,
+          "unit": "ml",
+          "cutPrep": "for boiling",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Pull the outer husks back but leave the inner ones on, and trim the ends.",
+        "Bring a large pot of salted water to a boil, add the corn, cover and cook over medium heat for 8 to 12 minutes, until the kernels are tender. To grill instead, cook over medium coals for 10 to 15 minutes, turning every few minutes until charred in spots.",
+        "Pull off the husks and silk, then push a wooden stick into the base of each ear if you like.",
+        "Brush each hot ear with crema, then a thin layer of mayonnaise.",
+        "Roll or sprinkle with crumbled cotija, dust with chile piquín, and squeeze lime over just before eating."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "From the whole corn kernels."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the cotija and crema."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Mexico in My Kitchen, Mexican Corn on the Cob (Elote)",
+          "url": "https://www.mexicoinmykitchen.com/mexican-corn-on-cob/"
+        },
+        {
+          "source": "Camila Made, Elote",
+          "url": "https://camilamade.com/elote/"
+        }
+      ],
+      "curationNote": "Both sources dress the boiled or grilled ear with crema, mayonnaise, cotija, ground chile and lime; Mexico in My Kitchen boils it in the husk as in Mexico, so that is the main method."
+    },
+    {
+      "id": "curated_mx_esquites",
+      "name": "Esquites",
+      "builderType": "handheld",
+      "dishGroup": "Tortas & Antojitos",
+      "region": "Mexico City and Central Mexico",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Tender corn kernels in a little epazote broth, piled into a cup with mayonnaise, lime, cheese and a sting of chile.",
+      "healthBenefit": "Corn kernels give fibre and potassium, and the epazote broth keeps it lighter than elote, though the toppings still add fat.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_queso_fresco",
+          "servings": 2,
+          "note": "about 60 g, crumbled"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 28,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Peppers, hot chile",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "dried chile de árbol",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "White Corn",
+          "quantity": 1100,
+          "unit": "g",
+          "cutPrep": "kernels cut from about 8 ears",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 480,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Epazote",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Dressing, mayonnaise, whole egg type",
+          "quantity": 90,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Queso Cotija",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "crumbled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "ground chile piquín",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "powdered",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat the butter and oil in a wide pot over medium heat. Fry the árbol chiles for 20 to 30 seconds until they darken a shade, then lift them out and crumble them.",
+        "Add the onion and cook 3 to 4 minutes until soft, then add the corn kernels and stir for 4 to 5 minutes.",
+        "Pour in the water, add the epazote, salt and the crumbled chile, bring to a simmer and cook covered for 15 to 25 minutes, until the kernels are tender and the broth is flavourful.",
+        "Spoon the corn with some of its broth into cups. Top each with mayonnaise, a squeeze of lime, queso fresco and cotija, and a pinch of chile piquín."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "From the corn kernels."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "From the corn and its cooking broth."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Pati Jinich, Esquites con Pepitas y Chile de Árbol",
+          "url": "https://patijinich.com/esquites-con-pepitas-y-chile-de-arbol/"
+        },
+        {
+          "source": "Rick Bayless, Esquites",
+          "url": "https://www.rickbayless.com/recipe/esquites/"
+        }
+      ],
+      "curationNote": "Pati Jinich fries árbol chile in butter and oil then simmers the kernels with epazote in water; Bayless simmers 20 to 30 minutes with epazote. The pepitas in Pati version are left off as the plain street version."
+    },
+    {
+      "id": "curated_mx_gorditas_de_chicharron",
+      "name": "Gorditas de Chicharrón Prensado",
+      "builderType": "handheld",
+      "dishGroup": "Tortas & Antojitos",
+      "region": "Mexico City and Central Mexico",
+      "servings": 4,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Thick, puffed masa cakes, crisp outside and soft inside, filled with rich, chile-stewed pressed pork crackling and topped with salsa, onion and cheese.",
+      "healthBenefit": "The masa gives calcium from the nixtamal and some fibre, while the pressed pork and the fat they fry in make these a hearty, rich antojito.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_salsa_verde",
+          "servings": 4,
+          "note": "about 240 ml, for serving"
+        },
+        {
+          "recipeId": "curated_mx_base_queso_fresco",
+          "servings": 2,
+          "note": "about 60 g"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Grains, corn flour, masa, yellow, U.S. enriched",
+          "quantity": 240,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Grains, wheat flour, white, all purpose, unbleached",
+          "quantity": 16,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baking powder",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 360,
+          "unit": "ml",
+          "cutPrep": "warm",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "chicharrón prensado (pressed pork cracklings in chile)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "chopped fine",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mix the masa harina, wheat flour, salt and baking powder, then work in the warm water a little at a time until the dough is soft and does not crack, about 3 to 5 minutes. Cover and rest 10 minutes.",
+        "Divide into 8 balls. Flatten each one, put a spoonful of chopped chicharrón in the centre, close the dough over it and press it into a disc about 1 cm thick.",
+        "Cook each gordita on a hot comal over medium heat for 1 to 2 minutes a side to set the surface.",
+        "Heat the lard in a skillet to about 350°F (175°C) and fry the gorditas 2 to 3 minutes a side, until golden and puffed. Drain on paper.",
+        "Slit one side if you like and serve topped with salsa verde, onion, cilantro and crumbled queso fresco."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the nixtamalized masa and the cheese."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the pressed pork and cheese."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Receta de gorditas de chicharrón",
+          "url": "https://www.excelsior.com.mx/recetas/receta-de-gorditas-de-chicharron-el-clasico-antojito-mexicano/1738866"
+        },
+        {
+          "source": "Grupo Animal, Gorditas de chicharrón prensado",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/gorditas-chicharron-prensado"
+        }
+      ],
+      "curationNote": "Excélsior gives quantities (masa harina with a little wheat flour and baking powder, 150 g chicharrón, fried in lard 1 cm thick); Grupo Animal confirms filling, frying and toppings."
+    },
+    {
+      "id": "curated_mx_molletes",
+      "name": "Molletes con Pico de Gallo",
+      "builderType": "handheld",
+      "dishGroup": "Tortas & Antojitos",
+      "region": "Mexico City",
+      "servings": 4,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Toasty halved bolillos spread with warm refried beans under bubbling melted cheese, cooled with fresh pico de gallo.",
+      "healthBenefit": "Beans bring fibre, protein and folate to a simple breakfast, with cheese adding calcium.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_bolillo",
+          "servings": 4,
+          "note": "4 rolls, split lengthwise"
+        },
+        {
+          "recipeId": "curated_mx_base_frijoles_refritos",
+          "servings": 4,
+          "note": "about 400 g"
+        },
+        {
+          "recipeId": "curated_mx_base_pico_de_gallo",
+          "servings": 4,
+          "note": "about 240 ml"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "softened",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Manchego, ost",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "sliced or grated",
+          "cookingMethod": "Baked",
+          "prepNote": "Mexican manchego is a mild melting cheese; Chihuahua works too"
+        }
+      ],
+      "instructions": [
+        "Heat the oven to 350°F (175°C).",
+        "Split the bolillos lengthwise and pull out a little of the soft crumb. Spread the cut sides thinly with butter.",
+        "Spread each half with warm refried beans and cover with the cheese.",
+        "Bake on a tray for 10 to 14 minutes, until the bread is crisp at the edges and the cheese has melted.",
+        "Serve hot with pico de gallo spooned on top."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "From the refried beans."
+        },
+        {
+          "nutrient": "Folate",
+          "note": "From the beans."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the cheese."
+        }
+      ],
+      "citations": [
+        {
+          "source": "México Desconocido, Molletes",
+          "url": "https://www.mexicodesconocido.com.mx/molletes.html"
+        },
+        {
+          "source": "Adán Medrano, Molletes",
+          "url": "https://adanmedrano.com/molletes-bean-cheese-sandwich-frijol-queso/"
+        }
+      ],
+      "curationNote": "Both sources: bolillo halves, refritos, cheese, baked, with pico de gallo. Manchego per México Desconocido; 350°F and about 12 minutes per Medrano."
+    },
+    {
+      "id": "curated_mx_molotes",
+      "name": "Molotes de Papa con Chorizo",
+      "builderType": "handheld",
+      "dishGroup": "Tortas & Antojitos",
+      "region": "Puebla and Tlaxcala",
+      "servings": 5,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Long, crisp fried masa pockets with a soft centre of potato and spicy chorizo, served with crema, cheese and salsa.",
+      "healthBenefit": "Potato and masa give energy and some potassium, while chorizo and deep frying make molotes a rich evening treat.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_chorizo",
+          "servings": 2,
+          "note": "about 200 g, casing removed"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_verde",
+          "servings": 4,
+          "note": "for serving"
+        },
+        {
+          "recipeId": "curated_mx_base_crema",
+          "servings": 2,
+          "note": "about 60 ml"
+        },
+        {
+          "recipeId": "curated_mx_base_queso_fresco",
+          "servings": 2,
+          "note": "about 60 g, crumbled"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "peeled, diced and boiled",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Grains, corn flour, masa, yellow, U.S. enriched",
+          "quantity": 240,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Grains, wheat flour, white, all purpose, unbleached",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baking powder",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 13,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 360,
+          "unit": "ml",
+          "cutPrep": "warm",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, iceberg",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Cook the onion in a little of the oil over medium heat for 3 minutes, add the chorizo and break it up, and cook 5 to 7 minutes until done. Stir in the boiled potato and season with salt.",
+        "Mix the masa harina, wheat flour, baking powder, lard and a pinch of salt, then knead in the warm water until smooth and moist, 3 to 5 minutes.",
+        "Roll small balls of dough between two sheets of plastic into ovals about 12 by 6 cm. Spoon filling down the centre, fold over into a half moon and press the edges well so nothing leaks.",
+        "Heat the oil to about 350°F (175°C) and fry the molotes 4 to 6 minutes a side until golden. Drain on paper.",
+        "Serve on shredded lettuce with crema, queso fresco and salsa."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Potassium",
+          "note": "From the potato."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the chorizo and cheese."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Kiwilimón, Molotes Poblanos",
+          "url": "https://us.kiwilimon.com/amp/recipe/main-courses/mexican/poblano-molotes"
+        },
+        {
+          "source": "Larousse Cocina, Molote (Diccionario enciclopédico de la gastronomía mexicana)",
+          "url": "https://laroussecocina.mx/palabra/molote/"
+        }
+      ],
+      "curationNote": "Kiwilimón gives the Puebla dough with wheat flour and baking powder and the potato with chorizo filling; Larousse confirms the Puebla shape (12 by 6 cm half moon) and papa con longaniza or chorizo as a classic filling."
+    },
+    {
+      "id": "curated_mx_quesadilla_flor_de_calabaza",
+      "name": "Quesadillas de Flor de Calabaza",
+      "builderType": "handheld",
+      "dishGroup": "Tortas & Antojitos",
+      "region": "Mexico City and Central Mexico",
+      "servings": 5,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Soft fresh masa folded around stretchy Oaxaca cheese and tender squash blossoms with epazote, toasted on the comal until spotted.",
+      "healthBenefit": "Squash blossoms are light and bring vitamin A precursors, and the nixtamal masa gives calcium, with the cheese adding protein.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_nixtamal_masa",
+          "servings": 5,
+          "note": "about 500 g fresh masa"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Pumpkin flowers",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "stems and pistils removed, roughly chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Epazote",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "leaves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "queso Oaxaca",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "pulled into strings",
+          "prepNote": "or another mild stretching cheese"
+        }
+      ],
+      "instructions": [
+        "Cook the onion and serrano in the oil over medium heat for 2 to 3 minutes, add the squash blossoms and epazote, season with salt and cook 3 to 5 minutes until wilted and the liquid is gone.",
+        "Divide the masa into 10 balls and press each between plastic in a tortilla press into a round about 12 cm across.",
+        "Lay a raw tortilla on a hot comal over medium heat. Put cheese and blossoms on one half and fold it over, pressing the edges.",
+        "Cook about 3 minutes a side, turning once or twice, until the masa is cooked through with brown spots and the cheese has melted.",
+        "Serve hot with salsa."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the nixtamal masa and the cheese."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the squash blossoms."
+        }
+      ],
+      "citations": [
+        {
+          "source": "México Desconocido, Quesadillas de flor de calabaza",
+          "url": "https://www.mexicodesconocido.com.mx/receta-de-quesadillas-de-flor-de-calabaza.html"
+        },
+        {
+          "source": "Maricruz Avalos, Quesadillas de Flor de Calabaza",
+          "url": "https://www.maricruzavalos.com/wprm_print/quesadillas-de-flor-de-calabaza"
+        }
+      ],
+      "curationNote": "The Mexico City quesadilla made from raw fresh masa on the comal, as in México Desconocido (1 kg masa for 10 people, 12 cm tortillas, 3 minutes a side); Maricruz Avalos gives the onion, chile and epazote sauté. Halved for 5."
+    },
+    {
+      "id": "curated_mx_sincronizada",
+      "name": "Sincronizadas",
+      "builderType": "handheld",
+      "dishGroup": "Tortas & Antojitos",
+      "region": "Mexico City and Northern Mexico",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Two flour tortillas pressed around ham and melted cheese, toasted crisp and cut in wedges, with guacamole and salsa.",
+      "healthBenefit": "Ham and cheese make this a protein-rich quick meal, though it is salty, and the guacamole adds fibre and good fats.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_flour_tortillas",
+          "servings": 12,
+          "note": "12 medium tortillas"
+        },
+        {
+          "recipeId": "curated_mx_base_guacamole",
+          "servings": 3,
+          "note": "for serving"
+        },
+        {
+          "recipeId": "curated_mx_base_pico_de_gallo",
+          "servings": 3,
+          "note": "for serving"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Dairy",
+          "baseName": "Queso Chihuahua",
+          "quantity": 240,
+          "unit": "g",
+          "cutPrep": "grated",
+          "cookingMethod": "Grilled",
+          "prepNote": "or Oaxaca cheese"
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Ham (Cured)",
+          "quantity": 180,
+          "unit": "g",
+          "cutPrep": "about 12 thin slices",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 10,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat a comal or skillet over medium heat and wipe it with a little oil.",
+        "Lay one tortilla down, cover with half its share of cheese, two slices of ham and the rest of the cheese, then top with a second tortilla.",
+        "Cook 2 to 3 minutes, pressing with a spatula, until the underside is golden in spots and the cheese starts to melt.",
+        "Flip and cook another 2 to 3 minutes until the second side is golden and the cheese has melted. Repeat with the rest.",
+        "Cut into wedges and serve warm with guacamole and pico de gallo."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the ham and cheese."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the cheese."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Pati Jinich, Ham and Cheese Quesadillas (Sincronizadas)",
+          "url": "https://patijinich.com/wprm_print/ham-and-cheese-quesadillas"
+        },
+        {
+          "source": "Mexico in My Kitchen, Quesadillas or Sincronizadas",
+          "url": "https://www.mexicoinmykitchen.com/easy-quesadillas-recipe/"
+        }
+      ],
+      "curationNote": "Both use flour tortillas with ham and Chihuahua or Oaxaca cheese, cooked on the comal and served with guacamole and salsa. Pati: 12 tortillas, 8 oz cheese, 6 to 12 ham slices."
+    },
+    {
+      "id": "curated_mx_sopes",
+      "name": "Sopes",
+      "builderType": "handheld",
+      "dishGroup": "Tortas & Antojitos",
+      "region": "Central and Western Mexico",
+      "servings": 5,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Thick little masa boats with pinched rims, crisp on the bottom, layered with beans, shredded chicken, lettuce, crema and crumbly cheese.",
+      "healthBenefit": "Beans and chicken give protein and fibre on a calcium-bearing nixtamal base, with fresh lettuce on top.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_frijoles_refritos",
+          "servings": 3,
+          "note": "about 250 g, warm"
+        },
+        {
+          "recipeId": "curated_mx_base_pollo_deshebrado",
+          "servings": 3,
+          "note": "about 300 g, warm"
+        },
+        {
+          "recipeId": "curated_mx_base_queso_fresco",
+          "servings": 2,
+          "note": "about 60 g"
+        },
+        {
+          "recipeId": "curated_mx_base_crema",
+          "servings": 2,
+          "note": "about 120 ml"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_roja",
+          "servings": 3,
+          "note": "for serving"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Grains, corn flour, masa, yellow, U.S. enriched",
+          "quantity": 180,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 300,
+          "unit": "ml",
+          "cutPrep": "warm",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, iceberg",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mix the masa harina, salt and warm water into a soft dough that does not stick, 2 to 3 minutes. Divide into 10 balls and keep them covered.",
+        "Press each ball into a thick round about 1 cm thick and 8 cm across. Cook on a hot comal over medium heat for 1 to 2 minutes a side, until the surface sets.",
+        "While they are still hot, pinch up a rim all around each one with your fingertips, protecting your hands with a towel.",
+        "Melt the lard in a skillet over medium heat and fry the sopes, rim side up, 1 to 2 minutes, spooning a little fat inside, until crisp underneath.",
+        "Spread with beans and top with chicken, lettuce, onion, crema, crumbled queso fresco and salsa."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken and beans."
+        },
+        {
+          "nutrient": "Fibre",
+          "note": "From the beans and masa."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the nixtamal masa and cheese."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Mexico in My Kitchen, Sopes",
+          "url": "https://www.mexicoinmykitchen.com/wprm_print/sopes"
+        },
+        {
+          "source": "La Cocina de Leslie, How to Make Mexican Sopes",
+          "url": "https://lacocinadeleslie.com/2016/04/how-to-make-mexican-sopes.html"
+        }
+      ],
+      "curationNote": "Mexico in My Kitchen: 10 sopes from 1.5 cups masa harina, fried in lard or oil, beans, shredded meat, lettuce, queso fresco, crema; rims pinched while hot. La Cocina de Leslie confirms the method."
+    },
+    {
+      "id": "curated_mx_tlacoyos",
+      "name": "Tlacoyos",
+      "builderType": "handheld",
+      "dishGroup": "Tortas & Antojitos",
+      "region": "Mexico City and the State of Mexico",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Thick, pointed masa ovals with a seam of creamy bean inside, toasted on the comal and topped with tangy nopales, salsa, onion and cheese.",
+      "healthBenefit": "Masa and beans together give fibre and plant protein, and a nopal topping adds more fibre for very little fat.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_nixtamal_masa",
+          "servings": 6,
+          "note": "about 600 g fresh masa"
+        },
+        {
+          "recipeId": "curated_mx_base_frijoles_refritos",
+          "servings": 2,
+          "note": "about 180 g, thick and well fried"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_verde",
+          "servings": 4,
+          "note": "about 240 ml"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Nopales",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "cleaned, diced and boiled until tender",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Queso Cotija",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "crumbled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Knead the masa with the salt, adding a spoon of water if it cracks, until soft and smooth. Divide into 6 balls and keep them covered.",
+        "Press each ball between plastic into a thick round about 12 cm across. Spoon about 1½ tablespoons of beans down the middle, fold the round over to seal, and pinch each end into a point.",
+        "Pat the filled tlacoyo flat again to about 2 cm thick, keeping the oval shape.",
+        "Cook on a comal over medium heat greased with a little lard, 2 to 4 minutes a side, turning a few times, until speckled and cooked through.",
+        "Top with the boiled nopales, salsa, crumbled cheese, onion and cilantro."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "From the beans, masa and nopales."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the nixtamal masa and the cheese."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Larousse Cocina, Tlacoyos (Alicia Gironella)",
+          "url": "https://laroussecocina.mx/receta/tlacoyos/"
+        },
+        {
+          "source": "Mexico in My Kitchen, How to Make Tlacoyos",
+          "url": "https://www.mexicoinmykitchen.com/how-to-make-tlacoyos/"
+        }
+      ],
+      "curationNote": "Larousse (Alicia Gironella): fresh masa, beans or requesón, 2 cm thick ovals cooked on a greased comal, topped with nopales or quelites, cheese, onion and salsa. Mexico in My Kitchen gives the quantities for 6 and the pointed shape."
+    },
+    {
+      "id": "curated_mx_tlayuda",
+      "name": "Tlayuda",
+      "builderType": "handheld",
+      "dishGroup": "Tortas & Antojitos",
+      "region": "Oaxaca",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "A huge, crackling-crisp Oaxacan tortilla smeared with pork asiento and black beans, folded over strings of quesillo, cabbage and grilled tasajo.",
+      "healthBenefit": "Black beans and beef make it filling and protein-rich, and cabbage adds crunch and vitamin C, though the asiento and cheese make it rich.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_nixtamal_masa",
+          "servings": 8,
+          "note": "about 800 g fresh masa for 4 large tlayudas"
+        },
+        {
+          "recipeId": "curated_mx_base_frijoles_refritos",
+          "servings": 4,
+          "note": "black beans, about 350 g, ideally cooked with hoja santa"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_taquera",
+          "servings": 4,
+          "note": "chile de árbol salsa, for serving"
+        }
+      ],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "asiento (the browned pork fat from the bottom of the chicharrón pot)",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "or unto; lard can stand in"
+        },
+        {
+          "notInDatabase": true,
+          "name": "hoja santa",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "leaves, blended into the beans",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "tasajo (thin salted, part-dried beef)",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "grilled and cut in pieces",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "quesillo (Oaxaca string cheese)",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "pulled into strings",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cabbage",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "finely shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Avocado",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Press the masa into 4 very thin rounds about 30 cm across, using two sheets of plastic. Cook each on a large comal over medium heat for 2 to 3 minutes a side, then leave it on the edge of the comal to dry and toast until stiff, 10 to 15 minutes. This is the tlayuda.",
+        "Grill the tasajo over hot coals or in a hot skillet for 2 to 3 minutes a side and cut it into pieces.",
+        "Warm a tlayuda on the comal for a few seconds to soften it a little. Spread it thinly with asiento, then with a layer of the black beans blended with hoja santa.",
+        "Scatter cabbage and quesillo over one half, fold the other half over, and toast it over medium heat or on a grill over coals, 5 to 10 minutes a side, until crisp and the cheese melts.",
+        "Serve with the tasajo on top or alongside, avocado, and the chile de árbol salsa."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the tasajo, beans and quesillo."
+        },
+        {
+          "nutrient": "Fibre",
+          "note": "From the black beans and masa."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the cabbage."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Larousse Cocina, Tlayuda istmeña",
+          "url": "https://laroussecocina.mx/receta/tlayuda-istmena/"
+        },
+        {
+          "source": "Animal Gourmet, Cómo hacer tlayudas oaxaqueñas",
+          "url": "https://admin.animalgourmet.com/2025/09/16/tlayudas-oaxaca-receta/"
+        }
+      ],
+      "curationNote": "Animal Gourmet gives the Central Valleys version: asiento, black beans blended with hoja santa, tasajo, cabbage and quesillo. Larousse gives the fold-and-toast method with unto, 10 minutes a side. The tortilla itself is made here from the masa base, since no tlayuda shell base exists."
+    },
+    {
+      "id": "curated_mx_tostadas_de_tinga",
+      "name": "Tostadas de Tinga de Pollo",
+      "builderType": "handheld",
+      "dishGroup": "Tortas & Antojitos",
+      "region": "Puebla",
+      "servings": 6,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Crunchy tostadas spread with beans and piled with smoky chipotle chicken and onion, cooled with lettuce, avocado, crema and crumbled cheese.",
+      "healthBenefit": "Chicken and beans make this a protein-rich plate with fibre, and the fresh toppings add vitamins, with crema and cheese in moderation.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_tostada_shells",
+          "servings": 12,
+          "note": "12 tostadas"
+        },
+        {
+          "recipeId": "curated_mx_base_pollo_deshebrado",
+          "servings": 4,
+          "note": "about 450 g, shredded"
+        },
+        {
+          "recipeId": "curated_mx_base_frijoles_refritos",
+          "servings": 4,
+          "note": "about 350 g, warm"
+        },
+        {
+          "recipeId": "curated_mx_base_crema",
+          "servings": 2,
+          "note": "about 120 ml"
+        },
+        {
+          "recipeId": "curated_mx_base_queso_fresco",
+          "servings": 2,
+          "note": "about 60 g, crumbled"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_verde",
+          "servings": 3,
+          "note": "for serving"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "cored",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "chipotle chiles in adobo",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "chopped, with a spoon of their sauce",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, iceberg",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Avocado",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Simmer the tomatoes and garlic in salted water for 8 to 10 minutes until soft. Peel the tomatoes and blend them with the garlic and the chipotles until smooth.",
+        "Heat the oil in a wide pan over medium heat and cook the sliced onion for 5 to 7 minutes until soft and translucent.",
+        "Pour in the tomato and chipotle sauce, add the bay leaves and salt, and simmer 5 minutes. Stir in the shredded chicken and cook 5 to 10 minutes more, until most of the sauce clings to the meat.",
+        "Spread each tostada with refried beans and top with tinga, lettuce, avocado, crema and queso fresco. Serve the salsa on the side."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken and beans."
+        },
+        {
+          "nutrient": "Fibre",
+          "note": "From the beans, avocado and lettuce."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "From the tomato and avocado."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Pati Jinich, Chicken Tinga Tostadas",
+          "url": "https://patijinich.com/chicken-tinga-tostadas/"
+        },
+        {
+          "source": "Larousse Cocina, Tostadas de tinga de pollo y de pata (Aquiles Chávez)",
+          "url": "https://laroussecocina.mx/receta/tostadas-de-tinga-de-pollo-y-de-pata/"
+        }
+      ],
+      "curationNote": "Tinga is the classic Puebla tostada topping. Larousse gives the tinga (boiled tomato and garlic, sliced onion, bay, chipotle); Pati gives the assembly for 12 tostadas with beans, lettuce, avocado, queso fresco and crema."
+    },
+    {
+      "id": "curated_mx_corundas",
+      "name": "Corundas",
+      "builderType": "handheld",
+      "dishGroup": "Tamales",
+      "region": "Michoacán",
+      "servings": 5,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "tamal",
+      "flavorProfile": "Small, five-sided Purépecha tamales with a light, slightly salty masa, served under a mild tomato and poblano sauce with sour cream.",
+      "healthBenefit": "Plain corn masa gives energy and calcium from the nixtamal, while the lard makes these rich, so the vegetable sauce is a good partner.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_nixtamal_masa",
+          "servings": 10,
+          "note": "about 1 kg fresh masa, coarsely ground if you can get it"
+        },
+        {
+          "recipeId": "curated_mx_base_caldo_de_pollo",
+          "servings": 1,
+          "note": "about 120 ml stock"
+        },
+        {
+          "recipeId": "curated_mx_base_crema",
+          "servings": 3,
+          "note": "about 180 ml"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 180,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 350,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baking powder",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "fresh green corn plant leaves (hojas de milpa)",
+          "quantity": 15,
+          "unit": "each",
+          "cutPrep": "washed",
+          "prepNote": "for wrapping, not eaten"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "poblano chiles",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "roasted, peeled, seeded and cut in strips",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 360,
+          "unit": "g",
+          "cutPrep": "roasted, peeled and seeded",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "For the sauce, cook the onion in the teaspoon of lard over medium heat for 3 minutes, add the garlic and poblano strips and cook 3 minutes more.",
+        "Blend the roasted tomatoes, add them to the pan and boil 5 minutes until reduced by half. Add the chicken stock, cook 5 minutes more, salt to taste and set aside.",
+        "For the masa, mix the masa with the water. Beat the 350 g of lard for 5 minutes until white and fluffy, then beat in the masa a little at a time with the baking powder and salt, 5 minutes more. It should taste lightly salty.",
+        "Fold a milpa leaf from its thick end into a cone, put in about 2 tablespoons of masa, and keep folding the leaf up and around to make a five-sided tamal. Repeat with the rest.",
+        "Steam over high heat for about 1 hour, until the masa comes away cleanly from the leaf, then rest 20 minutes. Unwrap and serve with the sauce and crema."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the nixtamalized corn."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomato and poblano sauce."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Larousse Cocina, Corundas (Margarita Carrillo)",
+          "url": "https://laroussecocina.mx/receta/corundas/"
+        },
+        {
+          "source": "Animal Gourmet, Qué son y cómo se preparan las corundas michoacanas",
+          "url": "https://admin.animalgourmet.com/2014/12/30/que-son-y-como-se-preparan-las-corundas-michoacanas/"
+        }
+      ],
+      "curationNote": "Followed Margarita Carrillo Arronte (Larousse): 15 corundas from 1 kg masa and 350 g lard, wrapped in milpa leaves, tomato and poblano rajas sauce with crema. Animal Gourmet (Alicia Gironella) confirms the leaf folding and the 1 hour steam; its rice flour and cheese variant was not used."
+    },
+    {
+      "id": "curated_mx_uchepos",
+      "name": "Uchepos",
+      "builderType": "handheld",
+      "dishGroup": "Tamales",
+      "region": "Michoacán",
+      "servings": 6,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "tamal",
+      "flavorProfile": "Soft, sweet fresh corn tamales with a custardy crumb, eaten warm with cream, crumbled cheese and a little red salsa.",
+      "healthBenefit": "Made from fresh corn kernels, uchepos bring fibre and some vitamin C, while the cream and sugar make them a rich treat.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_crema",
+          "servings": 2,
+          "note": "thick cream for serving"
+        },
+        {
+          "recipeId": "curated_mx_base_queso_fresco",
+          "servings": 2,
+          "note": "about 60 g, crumbled"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_roja",
+          "servings": 3,
+          "note": "for serving, as in Michoacán"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "White Corn",
+          "quantity": 1500,
+          "unit": "g",
+          "cutPrep": "kernels from about 10 to 12 tender ears",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Heavy Whipping Cream",
+          "quantity": 360,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "stands in for nata, the skin skimmed from boiled milk"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baking powder",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "fresh green corn husks",
+          "quantity": 24,
+          "unit": "each",
+          "cutPrep": "from the ears, rinsed",
+          "prepNote": "for wrapping, not eaten"
+        }
+      ],
+      "instructions": [
+        "Carefully peel the husks from the ears and keep the inner ones in a bowl of water. Cut the kernels from the cobs.",
+        "Blend the kernels with a little of the cream until as smooth as you can get them, without adding water.",
+        "Beat the rest of the cream with the sugar, baking powder and salt, then stir it into the corn purée.",
+        "Lay a fresh husk (or two thin ones) with its point toward you, spread about 3 tablespoons of the mixture in the middle, fold the sides in and the point up, and stand the uchepos open end up in a steamer lined with husks.",
+        "Cover with more husks and steam over high heat for about 1 hour, until they come away easily from the husk. Serve warm with cream, cheese and red salsa."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "From the fresh corn kernels."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the fresh corn."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Larousse Cocina, Uchepos (Ricardo Muñoz Zurita)",
+          "url": "https://laroussecocina.mx/receta/uchepos/"
+        },
+        {
+          "source": "Pati Jinich, Uchepos, tamales de elote",
+          "url": "https://patijinich.com/es/uchepos-tamales-de-elote/"
+        }
+      ],
+      "curationNote": "Ricardo Muñoz Zurita (Larousse): 12 tender ears, 3 cups nata, 1 cup sugar, baking powder, steamed 1 hour. Pati uses condensed milk and a little flour instead; the nata version was kept as the Michoacán one, with sugar trimmed to the lower end. Heavy cream stands in for nata. Michoacán serving with red salsa and cheese from the Larousse dictionary entry."
+    },
+    {
+      "id": "curated_mx_tamales_rojos_de_cerdo",
+      "name": "Tamales Rojos de Cerdo",
+      "builderType": "handheld",
+      "dishGroup": "Tamales",
+      "region": "Central Mexico",
+      "servings": 8,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "tamal",
+      "flavorProfile": "Fluffy, lard-beaten masa wrapped around tender shredded pork in a deep red guajillo and ancho sauce, steamed in corn husks.",
+      "healthBenefit": "Pork shoulder brings protein, zinc and B vitamins and the chiles add vitamin A precursors, while the lard-beaten masa makes these a rich festive food.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_masa_para_tamales",
+          "servings": 16,
+          "note": "enough beaten masa for 16 tamales, about 1.3 kg"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_guajillo",
+          "servings": 4,
+          "note": "about 240 ml"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 350,
+          "unit": "g",
+          "cutPrep": "cut in cubes",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "a quarter onion in one piece",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 960,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, ancho",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "dried, stemmed and seeded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 0.33,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried corn husks",
+          "quantity": 20,
+          "unit": "each",
+          "cutPrep": "soaked in hot water 20 to 30 minutes until pliable",
+          "prepNote": "for wrapping, not eaten"
+        }
+      ],
+      "instructions": [
+        "Put the pork, garlic, onion, bay leaf and salt in a pot, cover with the water, bring to a boil and simmer partly covered for about 1 hour, skimming, until tender enough to shred. Shred the meat and keep the broth for the masa.",
+        "Soak the ancho chiles in hot water for 15 to 20 minutes, then blend them into the guajillo salsa with the cumin.",
+        "Heat the oil in a skillet over medium high heat, pour in the chile sauce with 240 ml of the pork broth and cook 8 minutes. Add the pork, season with salt and pepper and simmer 5 minutes more until thick and flavourful.",
+        "Spread about ⅓ cup of the beaten masa on the wide end of a drained husk, put a spoonful of pork down the middle, fold the sides over and fold the narrow end up.",
+        "Stand the tamales open end up in a steamer lined with husks, cover with more husks and a lid, and steam over medium heat for 1 hour to 1 hour 15 minutes, until the masa comes away cleanly from the husk. Rest 15 minutes before serving."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the pork shoulder."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the ancho and guajillo chiles."
+        },
+        {
+          "nutrient": "Zinc",
+          "note": "From the pork."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Mexico in My Kitchen, Tamales Rojos de Puerco",
+          "url": "https://www.mexicoinmykitchen.com/pork-tamales/"
+        },
+        {
+          "source": "Rick Bayless, Red Chile Pork Tamales Steamed in Corn Husks",
+          "url": "https://www.rickbayless.com/recipe/red-chile-pork-tamales-steamed-in-corn-husks/"
+        }
+      ],
+      "curationNote": "Mexico in My Kitchen gives the 16-tamal batch (3/4 lb pork, ancho and guajillo, 1 hour 15 minutes); Bayless describes the central Mexico style as light and fluffy with guajillo pork. The guajillo sauce base carries the guajillos; the ancho is added here."
+    },
+    {
+      "id": "curated_mx_tamales_de_elote",
+      "name": "Tamales de Elote",
+      "builderType": "handheld",
+      "dishGroup": "Tamales",
+      "region": "Central Mexico",
+      "servings": 8,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "tamal",
+      "flavorProfile": "Sweet, tender fresh corn tamales with butter and a hint of canela, soft and moist like a steamed corn cake.",
+      "healthBenefit": "Fresh corn kernels give fibre and potassium, while the butter and sugar make these a sweet treat for the afternoon.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "White Corn",
+          "quantity": 1500,
+          "unit": "g",
+          "cutPrep": "kernels from about 8 tender ears",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "softened",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "sweetened condensed milk",
+          "quantity": 200,
+          "unit": "ml",
+          "cutPrep": null,
+          "prepNote": "optional, for a sweeter tamal; leave out and add 50 g more sugar if you prefer"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baking powder",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "fresh green corn husks",
+          "quantity": 20,
+          "unit": "each",
+          "cutPrep": "from the ears, rinsed",
+          "prepNote": "for wrapping, not eaten"
+        }
+      ],
+      "instructions": [
+        "Peel the husks from the ears carefully and keep them in water. Cut off the kernels.",
+        "Grind the kernels in a blender or food processor with the butter, sugar, condensed milk, canela, baking powder and salt until you have a thick, slightly coarse batter.",
+        "Spread a heaped tablespoon or two of the batter on each husk, fold it into a small packet and tie it with a strip of husk.",
+        "Line a steamer with husks, stand the tamales in it, cover with more husks and steam over medium heat for 40 to 60 minutes, until they come away easily from the husk.",
+        "Rest a few minutes and serve warm, plain or with a spoon of crema."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "From the fresh corn."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "From the corn kernels."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Cocina Fácil, Tamal de elote dulce",
+          "url": "https://www.cocinafacil.com.mx/recetas/tamal-de-elote-dulce"
+        },
+        {
+          "source": "Mexico in My Kitchen, Sweet Corn Tamales (Tamales de Elote)",
+          "url": "https://www.mexicoinmykitchen.com/easy-sweet-corn-tamales-recipe/"
+        }
+      ],
+      "curationNote": "Cocina Fácil: kernels ground with butter, condensed milk, canela, baking powder and salt, steamed 30 to 40 minutes in fresh husks. Mexico in My Kitchen confirms butter, sugar, baking powder and salt in fresh husks. Its masa harina was left out to keep the all-corn street version; the separate Michoacán uchepo uses nata."
+    },
+    {
+      "id": "curated_mx_tamales_dulces",
+      "name": "Tamales de Dulce",
+      "builderType": "handheld",
+      "dishGroup": "Tamales",
+      "region": "Mexico City and Central Mexico",
+      "servings": 9,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "tamal",
+      "flavorProfile": "Fluffy pink sweet tamales studded with raisins, lightly sweet and tender, the classic partner for atole or champurrado.",
+      "healthBenefit": "These are a festive sweet: corn masa gives some calcium, but the sugar and lard make them a treat rather than an everyday food.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_nixtamal_masa",
+          "servings": 10,
+          "note": "about 1 kg fresh masa"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baking powder",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 320,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Raisins, dark, seedless",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "red food colouring (or a little cochineal, as was done before)",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "prepNote": "optional, for the pink colour"
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried corn husks",
+          "quantity": 18,
+          "unit": "each",
+          "cutPrep": "soaked in hot water 20 to 30 minutes until pliable",
+          "prepNote": "for wrapping, not eaten"
+        }
+      ],
+      "instructions": [
+        "Beat the lard with the baking powder at high speed for 3 to 5 minutes until white and fluffy like meringue.",
+        "In a large bowl, beat the masa and water together by hand until no lumps are left. Add the sugar, raisins and colouring and mix again.",
+        "Fold in the beaten lard until the mixture is even.",
+        "Spread about ⅓ cup of masa on each drained husk, fold the sides over each other and fold the point up without squeezing.",
+        "Stand the tamales open end up in a steamer over water, bring to a full steam over high heat and cook for 1 hour. Turn off the heat and rest at least 20 minutes before serving."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the nixtamalized corn masa."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "A little, from the raisins."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Larousse Cocina, Tamales de dulce (Ricardo Muñoz Zurita)",
+          "url": "https://laroussecocina.mx/receta/tamales-de-dulce/"
+        },
+        {
+          "source": "Mexico in My Kitchen, Sweet Tamales (Tamales Dulces)",
+          "url": "https://www.mexicoinmykitchen.com/mexican-sweet-tamales/"
+        }
+      ],
+      "curationNote": "Followed Ricardo Muñoz Zurita (Larousse) for 18 tamales: 1 kg masa, about 1¼ cups lard, 1¼ cups sugar, ¼ cup raisins, red colouring once made with cochineal, 1 hour steam. Mexico in My Kitchen confirms the method with butter."
+    }
+  ]
+}

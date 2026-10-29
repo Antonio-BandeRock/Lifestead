@@ -80,6 +80,21 @@ for (const row of rows) {
   byRecipe.get(row.recipeId).push({ category: row.category, baseName: row.baseName });
 }
 
+// 2026-10-29: ingredients the food database does not hold (the Mexican
+// recipes' guajillo chiles, corn husks, goat meat) live in
+// curated_recipe_unlisted_ingredients with the diet tags they carry in
+// `contains` (meat, fish, dairy, egg, gluten, insect, alcohol), so a recipe
+// whose goat is not in the database is still never tagged Vegan.
+const unlistedTable = runSql("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'curated_recipe_unlisted_ingredients';");
+const unlistedByRecipe = new Map();
+if (unlistedTable.length > 0) {
+  for (const row of runSql('SELECT recipe_id AS recipeId, contains FROM curated_recipe_unlisted_ingredients;')) {
+    if (!unlistedByRecipe.has(row.recipeId)) unlistedByRecipe.set(row.recipeId, new Set());
+    for (const tag of String(row.contains || '').split(',').filter(Boolean)) unlistedByRecipe.get(row.recipeId).add(tag);
+    if (!byRecipe.has(row.recipeId)) byRecipe.set(row.recipeId, []);
+  }
+}
+
 const RED_MEATS = new Set([
   'Beef Top Sirloin (Raw)',
   'Bison Top Sirloin (Raw)',
@@ -146,13 +161,24 @@ function hasRedMeat(ingredients) {
   return ingredients.some((i) => i.category === 'Meat' && RED_MEATS.has(i.baseName));
 }
 
-function classifyRecipe(ingredients) {
+// 2026-10-29: wheat, barley and rye named in a base_name the fixed list
+// above does not hold (the Mexican recipes' flour tortillas and bolillos).
+// Buckwheat is not wheat.
+const GLUTEN_GRAIN_NAME = /\b(wheat|barley|rye|spelt|semolina|durum|seitan)\b/i;
+
+function hasGluten(ingredients) {
+  return ingredients.some(
+    (i) => GLUTEN_INGREDIENTS.has(i.baseName) || (GLUTEN_GRAIN_NAME.test(i.baseName) && !/buckwheat/i.test(i.baseName)),
+  );
+}
+
+function classifyRecipe(ingredients, unlisted = new Set()) {
   const tags = [];
 
   // ---- Base tier: exactly one of Vegan / Vegetarian / Omnivore ----
-  const hasMeat = hasCategory(ingredients, 'Meat');
-  const hasDairy = hasCategory(ingredients, 'Dairy');
-  const hasEgg = hasNameMatch(ingredients, /\begg\b/i);
+  const hasMeat = hasCategory(ingredients, 'Meat') || unlisted.has('meat') || unlisted.has('fish') || unlisted.has('insect');
+  const hasDairy = hasCategory(ingredients, 'Dairy') || unlisted.has('dairy');
+  const hasEgg = hasNameMatch(ingredients, /\begg\b/i) || unlisted.has('egg');
   let baseTag;
   if (hasMeat) {
     baseTag = 'Omnivore';
@@ -176,7 +202,8 @@ function classifyRecipe(ingredients) {
   }
 
   // ---- Gluten-Free ----
-  if (!hasAnyFromSet(ingredients, GLUTEN_INGREDIENTS)) {
+  const containsGluten = hasGluten(ingredients) || unlisted.has('gluten');
+  if (!containsGluten) {
     tags.push('Gluten-Free');
   }
 
@@ -196,7 +223,7 @@ function classifyRecipe(ingredients) {
   // item across every category it actually appears in (Grain, Baked, the
   // Legume soy-sauce row, and these two PantryStaples flour rows), so
   // reusing it here catches the flour case the plain category checks miss.
-  const hasGrainProduct = hasGrain || hasBaked || hasAnyFromSet(ingredients, GLUTEN_INGREDIENTS);
+  const hasGrainProduct = hasGrain || hasBaked || containsGluten;
   const isPaleo = !hasGrainProduct && !hasLegume && !hasDairy && !hasRefinedSugar && !hasCommercialCondiment;
   if (isPaleo) {
     tags.push('Paleo');
@@ -223,7 +250,7 @@ function classifyRecipe(ingredients) {
 
 const output = {};
 for (const [recipeId, ingredients] of byRecipe.entries()) {
-  output[recipeId] = classifyRecipe(ingredients);
+  output[recipeId] = classifyRecipe(ingredients, unlistedByRecipe.get(recipeId));
 }
 
 const outPath = path.join(__dirname, '_recipe_diet_tags_output.json');

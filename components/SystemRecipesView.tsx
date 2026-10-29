@@ -78,7 +78,12 @@ const TAB_COLOR = colors.tabFood;
 // cannot exist in the corpus today, and adding one would mean widening
 // that type first, then authoring meals as combinations of the components
 // below. Raised with the owner 2026-09-18.
-type RecipeGroupKey = BuilderFavoriteItemType | 'main';
+//
+// 2026-10-29: Mexican is a band of its own, the one band that is a cuisine
+// rather than a builder, because its dishes are built from each other
+// (tortillas, salsas, moles) and read best kept together, shelved by
+// MEXICAN_SHELVES below. Each still opens the builder it was written for.
+type RecipeGroupKey = BuilderFavoriteItemType | 'main' | 'mexican';
 
 const RECIPE_GROUPS: { key: RecipeGroupKey; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
   { key: 'main', label: 'Mains', icon: 'restaurant-outline' },
@@ -93,12 +98,35 @@ const RECIPE_GROUPS: { key: RecipeGroupKey; label: string; icon: keyof typeof Io
   { key: 'sauce', label: 'Sauces', icon: 'water-outline' },
   { key: 'handheld', label: 'Handhelds', icon: 'layers-outline' },
   { key: 'dessert', label: 'Desserts', icon: 'ice-cream-outline' },
+  { key: 'mexican', label: 'Mexican', icon: 'sunny-outline' },
+];
+
+// The Mexican band's shelves, in the order a cook meets them: what has to
+// be made first, then the dishes. A recipe's shelf is recipeCard.shelf,
+// written by scripts/generate_mexican_recipes_ts.js, and
+// scripts/audit_system_recipe_subgroups.js fails on one not listed here.
+const MEXICAN_SHELVES = [
+  'Bases: Masa & Tortillas',
+  'Bases: Salsas',
+  'Bases: Moles & Chile Sauces',
+  'Bases: Beans, Rice & Pantry',
+  'Tacos',
+  'Tortas & Antojitos',
+  'Tamales',
+  'Meats & Seafood',
+  'Enchiladas & Tortilla Dishes',
+  'Eggs & Breakfast',
+  'Soups & Pozoles',
+  'Vegetables & Sides',
+  'Drinks',
+  'Sweets & Breads',
 ];
 
 // Which band a recipe belongs in. Its builder, except that the Side
 // Builder feeds two.
 function groupKeyFor(entry: DigestEntry): RecipeGroupKey | null {
   if (!entry.linkedBuilderType) return null;
+  if (entry.recipeCard?.cuisine === 'Mexican') return 'mexican';
   if (entry.linkedBuilderType === 'side' && !isSideDish(entry.linkedCuratedRecipeId)) return 'main';
   return entry.linkedBuilderType;
 }
@@ -242,6 +270,16 @@ const SUBGROUP_MIN = 12;
 // table, or one filtered down to a handful, comes back as a single
 // unlabeled section.
 function sectionsFor(key: RecipeGroupKey, entries: DigestEntry[]): RecipeSection[] {
+  if (key === 'mexican') {
+    if (entries.length <= SUBGROUP_MIN) return [{ label: null, entries }];
+    const sections: RecipeSection[] = MEXICAN_SHELVES.map((label) => ({
+      label,
+      entries: entries.filter((entry) => entry.recipeCard?.shelf === label),
+    }));
+    const unshelved = entries.filter((entry) => !MEXICAN_SHELVES.includes(entry.recipeCard?.shelf ?? ''));
+    if (unshelved.length > 0) sections.push({ label: 'Other', entries: unshelved });
+    return sections.filter((section) => section.entries.length > 0);
+  }
   const rules = RECIPE_SUBGROUPS[key];
   if (!rules || entries.length <= SUBGROUP_MIN) return [{ label: null, entries }];
   const buckets = new Map<string, DigestEntry[]>();
