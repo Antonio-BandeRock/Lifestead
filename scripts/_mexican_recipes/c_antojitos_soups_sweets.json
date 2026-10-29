@@ -1995,6 +1995,4086 @@
         }
       ],
       "curationNote": "Followed Ricardo Muñoz Zurita (Larousse) for 18 tamales: 1 kg masa, about 1¼ cups lard, 1¼ cups sugar, ¼ cup raisins, red colouring once made with cochineal, 1 hour steam. Mexico in My Kitchen confirms the method with butter."
+    },
+    {
+      "id": "curated_mx_tamales_oaxaquenos",
+      "name": "Tamales Oaxaqueños de Mole Negro",
+      "builderType": "handheld",
+      "dishGroup": "Tamales",
+      "region": "Oaxaca",
+      "servings": 10,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tamal",
+      "flavorProfile": "Soft, moist masa steamed flat in banana leaf around chicken and pork in dark, bittersweet mole negro, with the leaf giving a grassy perfume.",
+      "healthBenefit": "Chicken and pork give protein, and the chiles, seeds and chocolate in the mole bring minerals, while the lard masa makes these a festive, rich food.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_masa_para_tamales",
+          "servings": 10,
+          "note": "about 1.2 kg beaten masa, loosened with extra broth to a very soft, spreadable texture"
+        },
+        {
+          "recipeId": "curated_mx_base_mole_negro",
+          "servings": 8,
+          "note": "about 500 g mole negro"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Chicken Thigh (with skin)",
+          "quantity": 700,
+          "unit": "g",
+          "cutPrep": "in pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "in pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 110,
+          "unit": "g",
+          "cutPrep": "halved",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "banana leaves",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "large leaves, softened and cut in 20 cm squares",
+          "prepNote": "for wrapping, not eaten"
+        }
+      ],
+      "instructions": [
+        "Cover the pork with water, add the garlic and onion and simmer for 30 minutes. Add the chicken, salt and more boiling water and simmer 30 to 40 minutes more until both are tender. Lift out the meat, take the chicken off the bone and cut everything in medium pieces. Keep the broth.",
+        "Soften the banana leaves by passing them over a flame for a few seconds a side, or boiling them about 20 minutes until they lose their bright green. Cut into 20 cm squares and wipe them clean.",
+        "Dissolve the mole in a little of the fat skimmed from the broth and heat it until thick and glossy, 5 to 10 minutes.",
+        "Beat a little more warm broth into the tamal masa until very soft and spreadable.",
+        "Spread a thin layer of masa over the middle of a banana leaf square, add a spoon of mole and two spoons of meat, fold the leaf in three from the sides and then the ends to make a flat square, and tie with a strip of leaf.",
+        "Lay the tamales flat in layers in a steamer, cover and steam for about 1 hour 30 minutes, adding boiling water as needed. They are done when the masa comes away from the leaf."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken and pork."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the dried chiles, seeds and chocolate in the mole."
+        },
+        {
+          "nutrient": "Magnesium",
+          "note": "From the seeds and cacao in the mole negro."
+        }
+      ],
+      "citations": [
+        {
+          "source": "¡Hola! Cocina, Tamales oaxaqueños (Fundación Casa de México en España)",
+          "url": "https://www.hola.com/cocina/recetas/20240605255088/tamales-oaxaquenos/"
+        },
+        {
+          "source": "Los Sabores de México, Oaxacan Tamales",
+          "url": "https://lossaboresdemexico.com/oaxacan-tamales-an-unmissable-recipe/"
+        }
+      ],
+      "curationNote": "Fundación Casa de México: pork and whole chicken, 500 g mole negro, 250 g lard beaten with masa and broth, banana leaf squares folded in three, steamed 1 hour 30 minutes. Los Sabores de México confirms grilling the leaves, tying with leaf strips and the same steaming time."
+    },
+    {
+      "id": "curated_mx_huitlacoche_guisado",
+      "name": "Huitlacoche Guisado",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Vegetables & Sides",
+      "region": "Central Mexico",
+      "servings": 8,
+      "servingSizeAmount": 60,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Earthy, smoky-sweet corn mushroom sautéed with onion, garlic and epazote, ready to tuck into tortillas or quesadillas.",
+      "healthBenefit": "Huitlacoche is low in fat and brings protein, fibre and some minerals, and the epazote and onion add flavour without much salt.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 8,
+          "note": "8 warm tortillas for serving"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_verde_cruda",
+          "servings": 2,
+          "note": "raw serrano salsa for serving"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "huitlacoche (fresh or frozen)",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "rinsed and cut in bite-size pieces",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Epazote",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": "each",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat the oil in a medium frying pan over medium heat. Cook the onion for about 2 minutes until it turns translucent, add the garlic and cook 1 minute more.",
+        "Add the huitlacoche and epazote. It will release some liquid as it cooks; stir lightly and keep sautéing for about 5 minutes, until just tender. Do not overcook it or it turns dry.",
+        "Season with salt and serve about 2 tablespoons in each warm tortilla, with a raw serrano salsa, or use it to fill quesadillas with melting cheese."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "From the huitlacoche and tortillas."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "Huitlacoche carries more protein than the corn it grows on."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Mexico in My Kitchen, Huitlacoche Tacos",
+          "url": "https://www.mexicoinmykitchen.com/wprm_print/huitlacoche-tacos"
+        },
+        {
+          "source": "UTSA La Cocina Histórica, Huitlacoche con Rajas, Crema y Queso 1971 (from La Cocina de Doña Ventura)",
+          "url": "https://lacocina.utsa.edu/?p=288"
+        }
+      ],
+      "curationNote": "Mely Martínez: 1 lb huitlacoche, onion, garlic, epazote, about 5 minutes, served in tortillas with raw serrano salsa. The 1971 Doña Ventura recipe confirms frying chopped huitlacoche with onion in hot oil and serving it with hot tortillas. The rajas and cream variant was not used."
+    },
+    {
+      "id": "curated_mx_nopales_a_la_mexicana",
+      "name": "Nopales a la Mexicana",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Vegetables & Sides",
+      "region": "Central Mexico",
+      "servings": 4,
+      "servingSizeAmount": 150,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Tender strips of nopal cooked with tomato, onion and serrano, bright and a little tangy, eaten with tortillas or beside eggs and beans.",
+      "healthBenefit": "Nopales are very low in calories and rich in fibre, and the tomato adds vitamin C, so this is a light, filling vegetable dish.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Nopales",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "spines removed, cut in strips",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 180,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Simmer the nopal strips in salted water for about 10 minutes, until they turn olive green and tender. Drain and rinse to remove the slime.",
+        "Heat the oil in a frying pan over medium heat and cook the onion and serrano for 3 to 4 minutes until soft.",
+        "Add the tomato and cook 3 to 5 minutes until it gives up its juice.",
+        "Stir in the nopales, lower the heat and cook a few minutes more. Season with salt and serve with hot tortillas or beside eggs and beans."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "Nopales are rich in soluble fibre."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomato and nopal."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "Nopales carry some calcium."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Recetas con nopales para Cuaresma (Nopales a la mexicana)",
+          "url": "https://www.excelsior.com.mx/recetas/recetas-con-nopales-para-cuaresma-economicas-y-llenas-sabor"
+        },
+        {
+          "source": "El Universal, 5 deliciosas maneras de preparar nopales",
+          "url": "https://eluniversal.com.mx/menu/5-deliciosas-maneras-de-preparar-nopales/"
+        }
+      ],
+      "curationNote": "Excélsior gives the dish for 4: 6 cooked nopales in strips, 1 cup tomato, ½ cup onion, 1 serrano, oil and salt. El Universal confirms cooking nopales no more than 10 minutes and pairing them with tomato, onion and cilantro. Salt cut from 1 tablespoon to 1 teaspoon in the dish, with the rest in the boiling water."
+    },
+    {
+      "id": "curated_mx_rajas_con_crema",
+      "name": "Rajas con Crema y Elote",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Vegetables & Sides",
+      "region": "Puebla and Central Mexico",
+      "servings": 4,
+      "servingSizeAmount": 150,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Smoky strips of roasted poblano and sweet corn in a silky cream sauce, mild and comforting, perfect in tacos.",
+      "healthBenefit": "Poblano chiles are rich in vitamin C and corn adds fibre, while the cream makes it rich, so it pairs well with tortillas and beans.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_crema",
+          "servings": 4,
+          "note": "about 250 ml crema"
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 8,
+          "note": "for serving"
+        }
+      ],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "poblano chiles",
+          "quantity": 5,
+          "unit": "each",
+          "cutPrep": "about 500 g, charred, peeled, seeded and cut in 1 cm strips",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Sweet Corn",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "kernels from tender ears",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Char the poblanos directly over a gas flame or under the grill until the skin is black and blistered all over, 6 to 10 minutes. Seal them in a bag for 10 minutes to sweat.",
+        "Rub off the skin under cold water, remove the seeds and white veins, and cut into strips about 1 cm wide.",
+        "Heat the oil in a wide frying pan and cook the onion over medium heat for 5 to 7 minutes until soft and lightly golden.",
+        "Add the corn and the poblano strips and cook 5 minutes over medium heat.",
+        "Turn the heat to low, stir in the crema, season with salt and pepper and warm through for 2 to 3 minutes without boiling. Serve with hot tortillas."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "Poblano chiles are a rich source."
+        },
+        {
+          "nutrient": "Fibre",
+          "note": "From the corn and chiles."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Receta de rajas con crema: el secreto para que no piquen",
+          "url": "https://www.excelsior.com.mx/recetas/receta-rajas-con-crema-secreto-para-que-no-piquen"
+        },
+        {
+          "source": "Grupo Animal, Rajas con crema y elote",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/rajas-con-crema-y-elote-guisado"
+        }
+      ],
+      "curationNote": "Excélsior gives the quantities: 500 g poblano, 250 ml crema, 150 g corn, 100 g onion, 30 ml oil, optional panela. Grupo Animal adds blended cream cheese and manchego; left out here to keep the plain home version."
+    },
+    {
+      "id": "curated_mx_calabacitas_con_queso",
+      "name": "Calabacitas con Queso",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Vegetables & Sides",
+      "region": "Northern and Central Mexico",
+      "servings": 4,
+      "servingSizeAmount": 150,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Tender Mexican squash with tomato, onion and a little serrano, finished with soft cubes of melting fresh cheese.",
+      "healthBenefit": "Squash and tomato are low in calories and bring vitamin C and potassium, and the cheese adds protein and calcium.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Squash, zucchini",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "Mexican grey squash or zucchini, cut in cubes",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "finely diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "finely minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "queso panela",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "cubed",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat the oil in a pot over medium heat, add the squash and cook for 2 minutes, stirring now and then.",
+        "Add the serrano, onion, garlic, tomato, salt and pepper, stir and cook for about 5 minutes, until the squash is tender.",
+        "Stir in the cheese, turn off the heat, cover and leave 2 minutes so it softens. Serve as a side, or as a light meal with tortillas."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the squash and tomato."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the cheese."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "From the squash and tomato."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Mama Maggie’s Kitchen, Calabacitas con Queso (Maggie Unzueta)",
+          "url": "https://inmamamaggieskitchen.com/wprm_print/calabacitas-con-queso"
+        },
+        {
+          "source": "Maricruz Avalos, Calabacitas con Queso",
+          "url": "https://www.maricruzavalos.com/wprm_print/calabacitas-con-queso-recipe"
+        }
+      ],
+      "curationNote": "Followed Maggie Unzueta: calabacitas, serrano, onion, garlic, tomato and cubed panela, 7 minutes. Maricruz Avalos makes a fuller version with corn, poblano, cumin and Oaxaca cheese; those were not added. Her note on epazote or oregano is a fair option."
+    },
+    {
+      "id": "curated_mx_base_tortitas_de_camaron",
+      "name": "Tortitas de Camarón",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Beans, Rice & Pantry",
+      "region": "Central Mexico",
+      "servings": 6,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Light, puffy fritters of beaten egg and ground dried shrimp, salty and savoury, made to simmer in mole with romeritos.",
+      "healthBenefit": "Eggs and dried shrimp make these protein-rich, and dried shrimp is salty, so no salt is added.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "dried shrimp",
+          "quantity": 125,
+          "unit": "g",
+          "cutPrep": "heads, tails and shells removed, ground to a fine powder",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Peel the dried shrimp and grind them to a fine powder in a blender or spice grinder.",
+        "Beat the egg whites until they hold stiff peaks, then beat in the yolks one at a time and fold in the shrimp powder to make a soft paste.",
+        "Heat the oil in a frying pan over medium heat to about 175°C (350°F). Drop in teaspoons of the paste and fry for 1 to 2 minutes a side, until puffed and golden, without letting them burn.",
+        "Drain on paper towels. Keep them apart from the mole until the moment of serving."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs and shrimp."
+        },
+        {
+          "nutrient": "Iodine",
+          "note": "Dried shrimp is a sea food source."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Los Sabores de México, Romeritos con mole y tortitas de camarón",
+          "url": "https://lossaboresdemexico.com/sea-blite-with-mole-and-shrimp-cakes-recipe/"
+        },
+        {
+          "source": "ADN40, Receta fácil para preparar romeritos (chef Denisse Palacios)",
+          "url": "https://www.adn40.mx/es-tendencia/2024-12-17/ingredientes-receta-facil-preparar-romeritos/"
+        }
+      ],
+      "curationNote": "Written as a base for the romeritos. Both sources beat the whites to stiff peaks, add the yolks and ground shrimp, and fry spoonfuls in hot oil. Halved from Los Sabores de México (1/4 kg shrimp, 6 eggs)."
+    },
+    {
+      "id": "curated_mx_romeritos",
+      "name": "Romeritos en Mole con Tortitas de Camarón",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Vegetables & Sides",
+      "region": "Mexico City and Central Mexico",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Tender, slightly salty romerito greens in rich red mole with little potatoes, nopales and puffy dried shrimp fritters, the classic Christmas Eve dish.",
+      "healthBenefit": "Romeritos are a leafy green with vitamins and minerals, nopales add fibre and the shrimp fritters protein, while the mole is rich.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_mole_poblano",
+          "servings": 8,
+          "note": "about 500 g mole, loosened with stock"
+        },
+        {
+          "recipeId": "curated_mx_base_caldo_de_pollo",
+          "servings": 4,
+          "note": "about 1 litre chicken stock"
+        },
+        {
+          "recipeId": "curated_mx_base_tortitas_de_camaron",
+          "servings": 6,
+          "note": "about 18 fritters"
+        }
+      ],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "romeritos (seepweed greens)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "thick stems and roots removed, washed",
+          "prepNote": "Boiled"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato, red, flesh and skin",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "small new potatoes, boiled",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Nopales",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "a piece, for the nopal water",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 3000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Wash the romeritos well to remove all soil. Boil them in salted water for 5 to 10 minutes, until tender enough to break with a fingernail, then cool under cold water and drain.",
+        "Boil the small potatoes in salted water for 20 to 25 minutes until tender. Separately, boil the diced nopales with a piece of onion and salt for about 10 minutes, drain and rinse.",
+        "In a deep pot, dissolve the mole in the chicken stock and simmer for about 30 minutes, stirring, until it is smooth and coats a spoon lightly.",
+        "At the moment of serving, add the romeritos, potatoes, nopales and shrimp fritters to the mole and heat for 5 minutes. Store the parts separately and heat only what you will serve."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "From the romeritos, nopales and potatoes."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the shrimp fritters."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the leafy greens and mole."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Los Sabores de México, Romeritos con mole y tortitas de camarón",
+          "url": "https://lossaboresdemexico.com/sea-blite-with-mole-and-shrimp-cakes-recipe/"
+        },
+        {
+          "source": "ADN40, Receta fácil para preparar romeritos (chef Denisse Palacios)",
+          "url": "https://www.adn40.mx/es-tendencia/2024-12-17/ingredientes-receta-facil-preparar-romeritos/"
+        }
+      ],
+      "curationNote": "Los Sabores de México: 1.5 kg romeritos, potatoes, optional nopales, mole paste with chicken broth simmered 30 minutes, everything added only at serving. ADN40 (Denisse Palacios) adds the boiling times and the fingernail test. Halved to about 1 kg greens."
+    },
+    {
+      "id": "curated_mx_camotes_enmielados",
+      "name": "Camotes Enmielados",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Vegetables & Sides",
+      "region": "Puebla and Central Mexico",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Whole sweet potatoes slowly simmered in dark piloncillo syrup with canela, clove and anise until soft and glossy.",
+      "healthBenefit": "Sweet potato is rich in beta carotene and fibre, but the syrup is sugary, so this is a sweet side for special days.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_piloncillo_syrup",
+          "servings": 6,
+          "note": "about 225 g piloncillo dissolved in 480 ml water, with the cinnamon stick"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Sweet potato",
+          "quantity": 1200,
+          "unit": "g",
+          "cutPrep": "4 large sweet potatoes, scrubbed, whole or in large pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, anise seed",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "or 1 star anise pod"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.125,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "or 1 whole clove"
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Orange",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": "optional"
+        }
+      ],
+      "instructions": [
+        "Put the sweet potatoes in a heavy pot with the piloncillo syrup, anise, clove and orange slices. Bring to a boil over high heat.",
+        "Lower the heat, cover and simmer for about 50 minutes, until the sweet potatoes are soft.",
+        "Uncover and simmer gently 15 to 20 minutes more so the syrup reduces to a thick honey.",
+        "Rest 10 minutes, remove the spices and orange, and serve each sweet potato with syrup spooned over, warm or cold."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin A",
+          "note": "Sweet potato is rich in beta carotene."
+        },
+        {
+          "nutrient": "Fibre",
+          "note": "From the sweet potato."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "From the sweet potato."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Isabel Eats, Camote Enmielado",
+          "url": "https://www.isabeleats.com/camotes-enmielados/"
+        },
+        {
+          "source": "Grupo Animal, Cómo preparar dulce de camote casero",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/como-preparar-dulce-de-camote-casero"
+        }
+      ],
+      "curationNote": "Isabel Eats: 4 large sweet potatoes, 8 oz piloncillo, cinnamon, star anise, clove, 2 cups water, 50 minutes covered then 15 to 20 uncovered. Grupo Animal adds orange slices and calls it a market-stall classic."
+    },
+    {
+      "id": "curated_mx_huevos_a_la_mexicana",
+      "name": "Huevos a la Mexicana",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Eggs & Breakfast",
+      "region": "All of Mexico",
+      "servings": 2,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Soft, large curds of egg scrambled with onion, tomato and serrano, the green, white and red of the flag, fresh and a little hot.",
+      "healthBenefit": "Eggs give complete protein, choline and vitamin B12, and the tomato and chile add vitamin C for very little fat.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_frijoles_refritos",
+          "servings": 2,
+          "note": "about 1 cup refried beans, black or pinto, on the side"
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 4,
+          "note": "4 warm tortillas"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "chopped in 1 cm pieces",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "finely diced",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "diced in 1 cm pieces",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "lightly beaten",
+          "cookingMethod": "Scrambled",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Chop the onion, serrano and tomato into pieces about 1 cm across.",
+        "Heat the oil in a non-stick frying pan over medium-high heat. Cook the onion for about 1 minute, add the serrano and tomato and cook about 2 minutes more, so the vegetables soften but keep their shape.",
+        "Pour in the eggs, season with salt and leave them about 2 minutes, then fold the vegetables gently through. Cook 1 to 2 minutes more without overmixing, so the curds stay large, until the eggs are just set.",
+        "Serve at once with refried beans and warm tortillas."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs."
+        },
+        {
+          "nutrient": "Choline",
+          "note": "Eggs are one of the richest food sources."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomato and serrano."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Mexico in My Kitchen, Mexican Style Scrambled Eggs (Huevos a la Mexicana)",
+          "url": "https://www.mexicoinmykitchen.com/?p=146"
+        },
+        {
+          "source": "La Opinión, 5 formas de cocinar huevos muy a la mexicana",
+          "url": "https://laopinion.com/?p=2568613"
+        }
+      ],
+      "curationNote": "Followed Mely Martínez: 4 eggs, 1/3 cup onion, 1 serrano, 2 plum tomatoes, 1 tablespoon oil, beans and tortillas on the side. La Opinión gives the same order: onion, chile and tomato fried first, the eggs left a minute, then stirred and cooked 2 to 3 minutes more."
+    },
+    {
+      "id": "curated_mx_huevos_motulenos",
+      "name": "Huevos Motuleños",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Eggs & Breakfast",
+      "region": "Yucatán (Motul)",
+      "servings": 2,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Fried tortillas spread with black beans, topped with fried eggs and habanero tomato sauce, then showered with ham, peas, fresh cheese and sweet fried plantain.",
+      "healthBenefit": "Eggs, beans and ham give plenty of protein and the black beans add fibre and iron, though the frying and ham make this a hearty breakfast for an active morning.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 4,
+          "note": "4 tortillas"
+        },
+        {
+          "recipeId": "curated_mx_base_frijoles_refritos",
+          "servings": 2,
+          "note": "about 1 cup black bean refritos, strained smooth"
+        },
+        {
+          "recipeId": "curated_mx_base_chiltomate",
+          "servings": 4,
+          "note": "about 1 cup chiltomate with habanero"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Ham (Cured)",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Green Peas",
+          "quantity": 70,
+          "unit": "g",
+          "cutPrep": "shelled",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "queso fresco",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "crumbled",
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Plantain",
+          "quantity": 180,
+          "unit": "g",
+          "cutPrep": "ripe, sliced on the diagonal",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": "for boiling the peas",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Boil the peas in water for 4 to 6 minutes until tender and drain. Have the chiltomate hot and the beans warm and smooth.",
+        "Heat the lard in a frying pan over medium heat. Fry the plantain slices 2 to 3 minutes a side until golden and drain them.",
+        "In the same fat, pass the tortillas through for a few seconds a side so they soften without browning. Drain them.",
+        "Fry the eggs in the remaining fat, 2 to 3 minutes, keeping the yolks soft.",
+        "On each plate lay a tortilla, spread it with beans, add a second tortilla and a fried egg, or two eggs side by side. Cover with the hot chiltomate.",
+        "Finish with the ham, peas and cheese, and lay the fried plantain beside the eggs. Serve at once."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs, beans and ham."
+        },
+        {
+          "nutrient": "Fibre",
+          "note": "From the black beans and peas."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "From the plantain and beans."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Huevos motuleños: el clásico yucateco para desayunar en casa",
+          "url": "https://www.excelsior.com.mx/recetas/huevos-motulenos-clasico-yucateco-para-desayunar-casa"
+        },
+        {
+          "source": "El Universal, Cómo se hacen los huevos motuleños (Maricruz Avalos)",
+          "url": "https://www.eluniversal.com.mx/menu/receta-como-se-hacen-los-huevos-motulenos/"
+        }
+      ],
+      "curationNote": "Excélsior gives 4 eggs, 4 tortillas, 1 cup black beans, a tomato and habanero sauce, ½ cup ham, ½ cup peas, ½ cup queso fresco and fried plantain. El Universal confirms strained black beans, chiltomate and tortillas fried without browning. Both sauce and beans come from the listed bases."
+    },
+    {
+      "id": "curated_mx_huevos_rancheros",
+      "name": "Huevos Rancheros",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Eggs & Breakfast",
+      "region": "Central and Northern Mexico",
+      "servings": 2,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Lightly crisp fried corn tortillas under fried eggs with runny yolks, covered in warm tomato and chile ranchera sauce.",
+      "healthBenefit": "Eggs give complete protein and the tomato sauce adds vitamin C and lycopene, while the fried tortillas add energy, so beans on the side round it out.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 4,
+          "note": "4 corn tortillas"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_ranchera",
+          "servings": 2,
+          "note": "about 1 cup salsa ranchera, hot"
+        },
+        {
+          "recipeId": "curated_mx_base_frijoles_refritos",
+          "servings": 2,
+          "note": "about 1 cup refried beans on the side"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 45,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Warm the salsa ranchera in a small pan and keep it hot.",
+        "Heat the oil in a non-stick frying pan over medium heat. Fry the tortillas one at a time for about 30 seconds a side, until lightly crisp but still bendable. Drain on paper towels.",
+        "In the same pan, fry the eggs 2 to 3 minutes, keeping the yolks whole and soft, and season with a pinch of salt.",
+        "Lay two tortillas side by side on each plate, spoon a little salsa over them, set the eggs on top and finish with more salsa. Serve with refried beans."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs and beans."
+        },
+        {
+          "nutrient": "Lycopene",
+          "note": "From the cooked tomato sauce."
+        },
+        {
+          "nutrient": "Fibre",
+          "note": "From the beans and corn tortillas."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Maricruz Avalos, Huevos Rancheros Mexicanos",
+          "url": "https://www.maricruzavalos.com/?p=47534"
+        },
+        {
+          "source": "La Opinión, 5 formas de cocinar huevos muy a la mexicana",
+          "url": "https://laopinion.com/?p=2568613"
+        }
+      ],
+      "curationNote": "Followed Maricruz Avalos for 2: 4 eggs, 4 corn tortillas fried until lightly crisp, eggs fried in the same pan, salsa under and over, refried beans on the side. La Opinión confirms tortilla passed through oil, eggs on top and bathed in ranchera sauce. The sauce is the listed salsa ranchera base."
+    },
+    {
+      "id": "curated_mx_papadzules",
+      "name": "Papadzules",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Eggs & Breakfast",
+      "region": "Yucatán",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "tortilla",
+      "flavorProfile": "Tortillas dipped in a pale green sauce of ground pumpkin seed and epazote, rolled around chopped hard-boiled egg and topped with tomato habanero sauce and drops of green pepita oil.",
+      "healthBenefit": "Pumpkin seeds bring magnesium, zinc, iron and good fats, and the eggs add protein, so this Maya dish is nourishing with no meat at all.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "12 fresh tortillas, warm"
+        },
+        {
+          "recipeId": "curated_mx_base_chiltomate",
+          "servings": 4,
+          "note": "about 1 cup chiltomate, hot"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "NutSeed",
+          "baseName": "Pumpkin seed",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "hulled, lightly toasted and finely ground",
+          "cookingMethod": "Toasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Epazote",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "a bunch of leaves and tender stems",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": "for the epazote broth",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 6,
+          "unit": "each",
+          "cutPrep": "hard-boiled, peeled and chopped",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Boil the eggs for 10 minutes, cool them in cold water, peel and chop them.",
+        "Bring the water to a boil with the epazote and salt and simmer 5 to 8 minutes. Strain and keep the broth warm.",
+        "Toast the pumpkin seeds lightly in a dry pan over low heat, stirring, until they start to pop, without browning them. Grind them very finely.",
+        "Knead the ground seed with a few spoons of the warm epazote broth until a little green oil comes out; collect it in a cup and keep it for the top.",
+        "Blend or whisk the seed paste with enough warm epazote broth to make a light cream. Keep it warm in a bowl set over hot water, never over direct heat, or it splits.",
+        "Dip each warm tortilla in the pumpkin seed sauce, fill with chopped egg and roll it up. Lay three on each plate, cover with more seed sauce, spoon the chiltomate on top and finish with drops of the green oil."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Magnesium",
+          "note": "Pumpkin seeds are one of the richest sources."
+        },
+        {
+          "nutrient": "Zinc",
+          "note": "From the pumpkin seeds."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs and seeds."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Receta de papadzules, sabor maya para el desayuno",
+          "url": "https://www.excelsior.com.mx/recetas/receta-papadzules-sabor-maya-para-desayuno"
+        },
+        {
+          "source": "Por Esto, La receta original para preparar papadzules yucatecos",
+          "url": "https://www.poresto.com/turismo/gastronomia/2025/5/12/-la-receta-original-para-preparar-papadzules-yucatecos-y-que-no-luzcan-como-los-de-masterchef-celebrity-.html"
+        },
+        {
+          "source": "UTSA La Cocina Histórica, Papadzules 2000 (CONACULTA)",
+          "url": "https://lacocina.utsa.edu/?p=395"
+        }
+      ],
+      "curationNote": "Excélsior: 250 g pepita, a bunch of epazote boiled 5 to 8 minutes in 1 litre water, 12 tortillas, 6 eggs boiled 10 minutes. Por Esto warns that the sauce splits over direct heat and is kept warm in a water bath. The CONACULTA recipe gives the kneading for the green oil."
+    },
+    {
+      "id": "curated_mx_caldo_de_pollo",
+      "name": "Caldo de Pollo",
+      "builderType": "soup",
+      "dishGroup": "Soups & Pozoles",
+      "region": "All of Mexico",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Clear, golden chicken broth full of chicken pieces, carrot, potato, chayote and squash with a little rice, brightened with lime, onion and serrano at the table.",
+      "healthBenefit": "A light, warming soup with protein from the chicken and vitamins and potassium from the vegetables, and the stock gives fluids and some minerals when someone is unwell.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_caldo_de_pollo",
+          "servings": 8,
+          "note": "about 2 litres chicken stock"
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warm tortillas at the table"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Chicken Drumstick (with skin)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "4 drumsticks",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Chicken Thigh (with skin)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "4 thighs",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "halved",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "peeled, in rounds",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "peeled, in 2 cm cubes",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Chayote Fruit",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "peeled, in 2 cm cubes",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Squash, zucchini",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "Mexican squash, in large pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Grain",
+          "baseName": "White Rice",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "a few sprigs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "finely chopped, for the table",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "finely chopped, for the table",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring the stock to a boil in a large pot with the tomato halves. Add the chicken, lower to a simmer and skim off the foam that rises in the first 10 minutes.",
+        "Add the carrot and rice and simmer 10 minutes, then add the potato and chayote and simmer about 15 minutes more, until the chicken is cooked through and the potato is nearly tender.",
+        "Add the squash and the cilantro sprigs, simmer 3 to 5 minutes until the squash is just tender, then turn off the heat and leave it covered for 4 minutes. Taste and add salt.",
+        "Serve each bowl with a piece of chicken and some of every vegetable, with chopped onion, serrano, lime and hot tortillas at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the carrot."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "From the potato, chayote and squash."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Cookpad México, Caldo de Pollo con verduras (Cynthia Serena)",
+          "url": "https://cookpad.com/mx/recetas/6499269"
+        },
+        {
+          "source": "Grupo Animal, 10 recetas de caldos y sopas mexicanas para apapachar el frío",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/recetas-caldos-sopas-mexicanas-frio"
+        }
+      ],
+      "curationNote": "The soup is built on the listed chicken stock base, with drumsticks and thighs cooked in it. Cynthia Serena: legs and thighs, tomato, potatoes, carrots, squash added last, ½ cup rice, lime and chopped onion at the table. Grupo Animal adds chayote and cuts the vegetables in even cubes, carrot first. The bouillon cube was left out."
+    },
+    {
+      "id": "curated_mx_caldo_de_res",
+      "name": "Caldo de Res",
+      "builderType": "soup",
+      "dishGroup": "Soups & Pozoles",
+      "region": "All of Mexico",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Deep, beefy broth from slow-simmered shank on the bone, with big pieces of corn on the cob, carrot, chayote, potato and squash, finished with lime and serrano.",
+      "healthBenefit": "Beef shank gives protein, iron and zinc, and the long simmer draws collagen into the broth, while the vegetables add fibre and potassium.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warm tortillas at the table"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Shank Crosscuts (Raw)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "chambarete on the bone",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 3500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "1 clove",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 110,
+          "unit": "g",
+          "cutPrep": "half an onion, whole",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "a bunch, washed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Celery",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "1 stalk, for flavour",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Corn, sweet, yellow",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "ears cut in 3 pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "peeled, in thick pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Chayote Fruit",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "2 chayotes, peeled, in wedges",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "1 large, peeled, in chunks",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Squash, zucchini",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "Mexican squash, in large pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cabbage",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "a wedge, optional",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "whole",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "finely chopped, for the table",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the water in a large pot with the garlic, the half onion, the cilantro and the celery. Add the washed beef and the salt, cover and simmer over low heat, skimming the foam, for 2 to 3 hours, until the meat is very tender and comes away from the bone and tendon.",
+        "Lift out the meat and strain the broth, throwing away the spent onion, cilantro, celery and garlic. Return the broth and meat to the pot. For a leaner broth, chill it overnight and lift off the solid fat.",
+        "Bring the broth back to a simmer. Add the corn, carrot and whole serranos and cook 10 minutes, then the potato and chayote for 10 to 12 minutes, and last the squash and cabbage for 5 minutes, so every vegetable is just tender.",
+        "Take out the serranos if you want less heat. Serve the beef and vegetables in deep bowls with plenty of broth, and lime, chopped onion and hot tortillas at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the beef shank."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "Beef is a well-absorbed source."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "From the potato, chayote and corn."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Telediario, Ideal para el frío: receta tradicional de caldo de res",
+          "url": "https://www.telediario.mx/tendencias/ideal-frio-receta-tradicional-caldo-res"
+        },
+        {
+          "source": "Grupo Animal, Receta de caldo de res reconfortante",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/receta-de-caldo-de-res-reconfortante"
+        }
+      ],
+      "curationNote": "Both sources: 1 kg chambarete, 2 ears of corn, 2 carrots, 2 chayotes, 1 large potato, a bunch of cilantro, onion, 2 serranos, 1 garlic clove, simmered slowly until the meat falls from the bone, strained, then the vegetables cooked separately to just tender. Telediario adds celery; Grupo Animal suggests squash and cabbage. The powdered bouillon both use was left out and the salt kept moderate."
+    },
+    {
+      "id": "curated_mx_menudo",
+      "name": "Menudo Rojo (Pancita)",
+      "builderType": "soup",
+      "dishGroup": "Soups & Pozoles",
+      "region": "Northern Mexico and Mexico City",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Rich, gelatinous red chile broth full of tender beef tripe and cow foot, earthy with guajillo and ancho, finished at the table with onion, oregano, chile and lime.",
+      "healthBenefit": "Tripe and cow foot are lean protein and rich in collagen, and the dried chiles add vitamin A, though the broth is rich and best eaten in a moderate bowl.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 16,
+          "note": "hot tortillas at the table"
+        }
+      ],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "beef tripe (honeycomb, book and smooth, mixed)",
+          "quantity": 1500,
+          "unit": "g",
+          "cutPrep": "cleaned and cut in bite-size pieces",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "cow foot",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "cleaned and cut in four by the butcher",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 5,
+          "unit": "each",
+          "cutPrep": "juiced, for cleaning the tripe",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Distilled Vinegar",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": "for soaking the tripe",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "a whole head, halved",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "1 large, whole",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 5000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "guajillo chiles",
+          "quantity": 6,
+          "unit": "each",
+          "cutPrep": "stems, veins and seeds removed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, ancho",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "dried, stems and seeds removed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, pasilla",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "dried, stems and seeds removed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "roasted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 16,
+          "unit": "g",
+          "cutPrep": "4 cloves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "a quarter, for the sauce",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "dried",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Epazote",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "a sprig, optional",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "finely chopped, for the table",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": "dried",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Peppers, hot chile",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "toasted and crumbled, for the table",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rub the tripe and cow foot well with coarse salt and lime juice under cold running water. Rinse, then soak them in fresh water with the vinegar for 20 minutes and rinse again.",
+        "Put the meat in a large pot with the water, the halved garlic head, the whole onion and the bay leaves. Simmer over medium heat for about 2 hours 30 minutes, skimming off the foam, until the tripe is tender. A pressure cooker takes about 50 minutes from when it reaches pressure.",
+        "Meanwhile, toast the dried chiles lightly on a dry comal for a few seconds a side and soak them in hot water for 15 minutes. Blend them with the roasted tomato, garlic cloves, quarter onion, cumin, pepper, oregano, clove and a cup of the cooking broth until very smooth, then strain.",
+        "Heat the lard in a pan and fry the chile purée 5 minutes, stirring, until it darkens. Pour it into the pot, take the cow foot off the bone and return the meat, add the epazote and simmer about 40 minutes more so the flavours meet. Taste for salt.",
+        "Serve very hot, with chopped onion, oregano, crumbled chile de árbol, lime halves and hot tortillas at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the tripe and cow foot."
+        },
+        {
+          "nutrient": "Collagen",
+          "note": "From the cow foot and tripe, which gives the broth body."
+        },
+        {
+          "nutrient": "Vitamin B12",
+          "note": "Tripe is a good source."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Cómo hacer pancita tradicional: la receta de los domingos",
+          "url": "https://www.excelsior.com.mx/recetas/como-hacer-pancita-tradicional-receta-domingos-cuando-antoje"
+        },
+        {
+          "source": "Grupo Animal, Cómo preparar menudo de res rojo",
+          "url": "https://grupoanimal.mx/gastronomia/como-preparar-menudo-de-res-rojo"
+        }
+      ],
+      "curationNote": "Quantities and method from Excélsior: 1.5 kg mixed tripe, 1 cow foot, salt and lime scrub, ½ cup vinegar soak, 2 hours 30 minutes, then a strained adobo of guajillo, ancho, pasilla, tomato, garlic, onion, cumin, pepper, oregano and clove fried in lard. Grupo Animal confirms skimming the broth and simmering about 40 minutes after the chile goes in. Pozole corn, added in parts of the north, was left out."
+    },
+    {
+      "id": "curated_mx_pozole_rojo",
+      "name": "Pozole Rojo",
+      "builderType": "soup",
+      "dishGroup": "Soups & Pozoles",
+      "region": "Jalisco and Central Mexico",
+      "servings": 10,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Big, bloomed kernels of hominy and tender pork in a brick red broth of guajillo and ancho, piled at the table with crisp lettuce, radish, onion, oregano and lime.",
+      "healthBenefit": "Nixtamalized hominy gives fibre and niacin, the pork protein and zinc, and the fresh garnishes add crunch and vitamin C to a filling party dish.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_tostada_shells",
+          "servings": 10,
+          "note": "10 tostadas at the table"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "in large pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Back Ribs (Raw)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "cut in pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 5000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 220,
+          "unit": "g",
+          "cutPrep": "1 large, halved",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "a whole head, unpeeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Grain",
+          "baseName": "Hominy",
+          "quantity": 2000,
+          "unit": "g",
+          "cutPrep": "precooked pozolero corn, rinsed",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "guajillo chiles",
+          "quantity": 5,
+          "unit": "each",
+          "cutPrep": "stems, veins and seeds removed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, ancho",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "dried, stems and seeds removed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "2 cloves, for the sauce",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "a piece, for the sauce",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "dried",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, iceberg",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "finely shredded, for the table",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Radish",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "thinly sliced, for the table",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "finely chopped, for the table",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 3,
+          "unit": "tsp",
+          "cutPrep": "dried",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 6,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Peppers, hot chile",
+          "quantity": 6,
+          "unit": "each",
+          "cutPrep": "toasted and ground, for the table",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the pork in a large pot with the water, half the onion, the whole garlic head, the bay leaves, cumin and salt. Simmer about 1 hour 30 minutes, skimming the foam, until the meat is tender. Lift out the meat, cut or shred it and strain the broth.",
+        "Meanwhile, toast the chiles lightly on a dry comal for a few seconds without burning them and soak them in hot water for 10 to 15 minutes, until soft.",
+        "Blend the chiles with the 2 garlic cloves, the piece of onion, the oregano and a cup of the broth until very smooth, and strain to remove the skins. Fry the purée in the oil for about 5 minutes, stirring.",
+        "Add the hominy and the chile purée to the hot broth and simmer 30 to 40 minutes over low heat, until the kernels bloom open. Return the meat and heat through, then taste for salt.",
+        "Serve in deep bowls, with lettuce, radish, onion, oregano, lime, ground chile de árbol and tostadas at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "From the hominy."
+        },
+        {
+          "nutrient": "Niacin",
+          "note": "Nixtamalization frees the niacin in the corn."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the pork."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Azteca Jalisco, Pozole rojo de Jalisco: así se prepara el tradicional platillo de las fiestas patrias",
+          "url": "https://www.aztecajalisco.com/arte-y-cultura/pozole-rojo-de-jalisco-asi-se-prepara-el-tradicional-platillo-de-las-fiestas-patrias/"
+        },
+        {
+          "source": "El Universal, Receta de salsa para pozole rojo",
+          "url": "https://www.eluniversal.com.mx/menu/receta-de-salsa-para-pozole-rojo/"
+        }
+      ],
+      "curationNote": "Azteca Jalisco: 2 kg precooked pozolero corn, 1.5 kg pork, guajillo and ancho, a head of garlic, onion, 3 bay leaves, oregano and cumin, the strained chile sauce added with the corn and simmered 30 to 40 minutes. The chile sauce follows El Universal: 5 guajillo, 3 ancho softened, blended with garlic, onion and oregano and fried 5 minutes. Five guajillo and four ancho sit between the two sources."
+    },
+    {
+      "id": "curated_mx_pozole_verde",
+      "name": "Pozole Verde",
+      "builderType": "soup",
+      "dishGroup": "Soups & Pozoles",
+      "region": "Guerrero",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Tender pork and bloomed hominy in a green broth thickened with toasted pumpkin seeds, tart with tomatillo and fragrant with epazote, cilantro and radish leaves.",
+      "healthBenefit": "Pumpkin seeds bring magnesium, zinc and healthy fats, the hominy fibre and niacin, and the green sauce a load of leafy herbs and vitamin C.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_tostada_shells",
+          "servings": 8,
+          "note": "8 tostadas at the table"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "in large pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Loin Back Ribs (Raw)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "cut in pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 4000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "1 onion, halved",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "a whole head, halved crosswise",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Grain",
+          "baseName": "Hominy",
+          "quantity": 1500,
+          "unit": "g",
+          "cutPrep": "precooked white pozolero corn, rinsed",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Pumpkin seed",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "hulled, toasted until they pop",
+          "cookingMethod": "Toasted",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "poblano chiles",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "stems and seeds removed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "stems removed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomatillo",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "husked and rinsed",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": "3 cloves, for the sauce",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "a piece, for the sauce",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "leaves and tender stems",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Epazote",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "leaves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "radish leaves",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "a small bunch, washed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "dried",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 45,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, iceberg",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "finely shredded, for the table",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Radish",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "thinly sliced, for the table",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "finely chopped, for the table",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": "dried",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 6,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "chile piquín, ground",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "prepNote": "for the table"
+        }
+      ],
+      "instructions": [
+        "Put the pork in a large pot with the water, the halved onion, the garlic head, bay leaves, thyme and salt. Simmer 1 hour 30 minutes to 2 hours, skimming the foam, until tender. Lift out the meat, shred or cut it, and strain the broth.",
+        "Add the hominy to the broth and keep it at a gentle simmer while the sauce is made.",
+        "Toast the pumpkin seeds in a dry pan over medium heat, stirring, for 4 to 6 minutes, until they puff and start to pop; do not let them brown. Simmer the tomatillos, poblanos and serranos in water for 8 to 10 minutes, until the tomatillos turn olive green.",
+        "Blend the seeds, tomatillos, chiles, garlic, the piece of onion, cilantro, epazote, radish leaves, cumin and oregano with about 2 cups of the broth until smooth.",
+        "Heat the oil in a pan and fry the green sauce for 5 to 7 minutes, stirring, until it darkens a shade and thickens. Stir it into the pot with the meat, season with salt and simmer 5 to 10 minutes more without boiling hard, which can split the seed sauce.",
+        "Serve in deep bowls with lettuce, radish, onion, oregano, lime, chile piquín and tostadas at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Magnesium",
+          "note": "From the pumpkin seeds."
+        },
+        {
+          "nutrient": "Fibre",
+          "note": "From the hominy and greens."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the pork and seeds."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Mexico In My Kitchen, Mexican Green Pozole Soup (Guerrero Style)",
+          "url": "https://www.mexicoinmykitchen.com/wprm_print/mexican-green-pozole-soup-guerrero-style"
+        },
+        {
+          "source": "Uno TV, Pozole verde: la receta más sencilla",
+          "url": "https://www.unotv.com/estilo-de-vida/gastronomia/pozole-verde-la-receta-mas-sencilla-para-dar-el-grito-este-15-de-septiembre/"
+        }
+      ],
+      "curationNote": "Mexico In My Kitchen (serves 10): 6 lb pork leg and ribs, 2 cups pumpkin seeds, 2 poblanos, 2 to 3 serranos, 1 lb tomatillo, cilantro, epazote, radish leaves, cumin and oregano, fried about 7 minutes and simmered 5. Uno TV (serves 6 to 8): 1 kg pork, 200 g tomatillos, a quarter cup of seeds, poblano or jalapeño. Amounts sit between the two for 8 bowls. Written with its sauce inline rather than the pipián base, since both sources build the pozole sauce from the broth itself."
+    },
+    {
+      "id": "curated_mx_pozole_blanco",
+      "name": "Pozole Blanco",
+      "builderType": "soup",
+      "dishGroup": "Soups & Pozoles",
+      "region": "Guerrero and Jalisco",
+      "servings": 10,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "A clear, clean pork and corn broth with soft, flowered hominy, left plain so each bowl is seasoned at the table with chile, oregano, lime, radish and lettuce.",
+      "healthBenefit": "Hominy gives fibre and niacin, the pork protein and zinc, and the long simmer of meat on the bone makes a broth rich in gelatin.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_tostada_shells",
+          "servings": 10,
+          "note": "10 tostadas at the table"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "maciza, in large pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "pork head or spine (espinazo)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "cut in pieces by the butcher",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 5000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 220,
+          "unit": "g",
+          "cutPrep": "1 and a half onions, halved",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "5 cloves, peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "or 4 whole berries",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Grain",
+          "baseName": "Hominy",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "precooked white pozolero corn, rinsed",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, cos or romaine",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "finely shredded, for the table",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Radish",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "thinly sliced, for the table",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "finely chopped, for the table",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 3,
+          "unit": "tsp",
+          "cutPrep": "dried",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 8,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "chile piquín, ground",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "prepNote": "for the table"
+        }
+      ],
+      "instructions": [
+        "Put the meat in a large pot with the water, one onion, 3 garlic cloves, the bay leaves, allspice and salt. Bring to a boil, skim the foam, and simmer 1 hour 30 minutes to 2 hours, until the meat comes away from the bone.",
+        "In a second pot, cover the hominy with water, add the remaining half onion and 2 garlic cloves and simmer 40 minutes to 1 hour, until the kernels open like flowers. Drain.",
+        "Lift the meat from the broth, take out the bones and cut or shred it. Strain the broth over the hominy, add the meat back and simmer 10 to 15 minutes together. Taste for salt.",
+        "Serve plain and white in deep bowls, with lettuce, radish, onion, oregano, lime, chile piquín and tostadas for each person to add."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "From the hominy."
+        },
+        {
+          "nutrient": "Niacin",
+          "note": "Nixtamalized corn makes its niacin available."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the pork."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Milenio, Pozole blanco: receta fácil e ingredientes",
+          "url": "https://www.milenio.com/comunidad/pozole-blanco-receta-facil-ingredientes"
+        },
+        {
+          "source": "Uno TV, Cuánto cuesta preparar pozole blanco para 10 personas (receta de Profeco)",
+          "url": "https://www.unotv.com/noticias-utiles/dia-de-la-independencia-2022-cuanto-cuesta-preparar-pozole-blanco-para-10-personas-como-se-prepaa/"
+        }
+      ],
+      "curationNote": "Milenio: 1 kg precooked corn and 1.5 kg pork (head, spine and maciza), one and a half onions, 4 to 5 garlic cloves, the corn cooked apart until it flowers, the meat 1.5 to 2 hours. Uno TV citing Profeco (serves 10): 1 kg corn, 2 kg pork head and spine, 2 bay leaves, 4 allspice berries, romaine, radish, lime, oregano and piquín. The meat amount follows Milenio."
+    },
+    {
+      "id": "curated_mx_sopa_de_lima",
+      "name": "Sopa de Lima",
+      "builderType": "soup",
+      "dishGroup": "Soups & Pozoles",
+      "region": "Yucatán",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Light chicken broth scented with the bitter, floral peel of Yucatecan lima, with shredded chicken, sweet pepper and tomato, finished with crisp fried tortilla strips.",
+      "healthBenefit": "A light, warming soup with lean chicken protein and vitamin C from the tomato, pepper and citrus; most of the fat sits in the tortilla strips.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_caldo_de_pollo",
+          "servings": 6,
+          "note": "1.5 litres of chicken broth"
+        },
+        {
+          "recipeId": "curated_mx_base_pollo_deshebrado",
+          "servings": 4,
+          "note": "about 2 cups of shredded chicken breast"
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 6,
+          "note": "6 tortillas cut in strips and fried"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Sautéed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "1 onion, finely chopped",
+          "cookingMethod": "Sautéed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 16,
+          "unit": "g",
+          "cutPrep": "4 cloves, finely chopped",
+          "cookingMethod": "Sautéed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 480,
+          "unit": "g",
+          "cutPrep": "4 tomatoes, chopped",
+          "cookingMethod": "Sautéed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Green Bell Pepper",
+          "quantity": 180,
+          "unit": "g",
+          "cutPrep": "in place of 1 and a half chile dulce, chopped",
+          "cookingMethod": "Sautéed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "dried",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": "or 2 whole cloves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "lima agria (Yucatecan sweet lime)",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "2 juiced, 1 thinly sliced",
+          "prepNote": "substitute 3 parts lime juice to 1 part orange juice"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 40,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped, for serving",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Cut the tortillas in thin strips and fry them in hot oil in batches for 1 to 2 minutes, until golden and crisp. Drain on paper and salt lightly.",
+        "Melt the lard in a pot over medium heat and cook the onion, garlic and pepper for 4 to 5 minutes, until soft. Add the tomato and cook 5 to 7 minutes more, until it breaks down.",
+        "Pour in the broth, add the oregano, pepper and clove and simmer 10 minutes. Add the shredded chicken and the lima juice and taste for salt.",
+        "Add the lima slices only in the last 2 to 3 minutes, since the peel turns the broth bitter if it simmers longer. Serve at once with the tortilla strips and cilantro on top."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomato, pepper and lima."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Auténtica sopa de lima yucateca lista en menos de 30 minutos",
+          "url": "https://www.excelsior.com.mx/recetas/autentica-sopa-lima-yucateca-lista-menos-30-minutos"
+        },
+        {
+          "source": "Grupo Animal, Cómo hacer sopa de lima tradicional",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/como-hacer-sopa-de-lima-tradicional"
+        }
+      ],
+      "curationNote": "Excélsior: 1 shredded chicken breast, 1 onion, 4 tomatoes, 4 garlic cloves, 1 and a half chile dulce, 1.5 L stock, 3 limas, oregano and pepper, 2 cups fried tortilla strips; bell pepper and the 3 to 1 lime and orange mix are its stated substitutes. Grupo Animal fries in lard and adds cumin, clove and oregano, and adds the lima slices a few minutes before serving. Lard follows Grupo Animal; the chicken broth and shredded chicken come from the bases."
+    },
+    {
+      "id": "curated_mx_agua_de_horchata",
+      "name": "Agua de Horchata",
+      "builderType": "beverage",
+      "dishGroup": "Drinks",
+      "region": "Central Mexico",
+      "servings": 7,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "glass",
+      "flavorProfile": "Cold, milky and sweet rice drink with cinnamon and vanilla, smooth and creamy in the paletería style.",
+      "healthBenefit": "A treat drink: most of its energy comes from the rice and the sweetened condensed milk, with some calcium from the evaporated milk.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Grain",
+          "baseName": "White Rice",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "1 cup, rinsed",
+          "cookingMethod": "Soaked",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": "boiled, then cooled with the rice",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "1 Mexican canela stick, broken",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "sweetened condensed milk",
+          "quantity": 375,
+          "unit": "g",
+          "cutPrep": "1 can",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "evaporated milk",
+          "quantity": 360,
+          "unit": "g",
+          "cutPrep": "1 can",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring the water to a boil for a couple of minutes, take it off the heat and add the rice and canela. Leave to cool, then refrigerate overnight, 8 to 12 hours.",
+        "Blend the rice with the canela and the soaking water until fine, 1 to 2 minutes, and strain through a fine sieve or cloth.",
+        "Return the rice water to the blender with the condensed milk, evaporated milk and vanilla and blend a few seconds until creamy.",
+        "Chill, stir well before pouring since the starch settles, and serve over plenty of ice. For a lighter horchata, skip both milks, sweeten with sugar and dilute half and half with water."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the rice and condensed milk."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the evaporated and condensed milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Receta de agua de horchata al estilo de La Michoacana",
+          "url": "https://www.excelsior.com.mx/recetas/receta-agua-horchata-estilo-michoacana"
+        },
+        {
+          "source": "Uno TV, Receta de agua de horchata estilo paletería",
+          "url": "https://www.unotv.com/estilo-de-vida/gastronomia/receta-de-agua-de-horchata-estilo-paleteria-para-semana-santa/"
+        },
+        {
+          "source": "Cookpad México, Horchata de arroz",
+          "url": "https://cookpad.com/mx/recetas/7598049"
+        }
+      ],
+      "curationNote": "Excélsior and Uno TV agree: 1 cup rice and a canela stick soaked overnight in 1 L water brought to a boil, blended, strained, then blended with a can each of condensed and evaporated milk and vanilla. The lighter version in the last step follows Cookpad (rice soaked with sugar and canela, diluted half with water at the glass). Seven glasses of about 250 ml."
+    },
+    {
+      "id": "curated_mx_agua_de_jamaica",
+      "name": "Agua de Jamaica",
+      "builderType": "beverage",
+      "dishGroup": "Drinks",
+      "region": "Throughout Mexico",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "glass",
+      "flavorProfile": "Deep ruby, tart and cranberry-like hibiscus water, sweetened just enough and served very cold.",
+      "healthBenefit": "Hibiscus brings anthocyanins and a sharp tartness; nearly all the energy is from the added sugar, so the amount can be brought down to taste.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Brewing",
+          "baseName": "Hibiscus / Fruit Tea (Unsweetened)",
+          "quantity": 2000,
+          "unit": "ml",
+          "cutPrep": "brewed from 70 g dried flor de jamaica (2 cups)",
+          "cookingMethod": "Simmered",
+          "prepNote": "500 ml for the infusion, 1.5 L cold water to dilute"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "optional, half a canela stick",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rinse the dried flowers quickly in a sieve under cold water without leaving them to soak.",
+        "Bring 500 ml of water to a boil, add the flowers (and canela, if using) and simmer gently 8 to 10 minutes, no longer than 15, which pulls out bitter tannins. Cover off the heat and leave 20 minutes.",
+        "Stir in the sugar while the infusion is still warm until no grains remain, then strain the concentrate into a large jug.",
+        "Add the 1.5 litres of cold water, taste for sweetness and chill. Serve over ice."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Anthocyanins",
+          "note": "From the hibiscus calyces."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Receta de agua de jamaica, la tradicional de las fonditas mexicanas",
+          "url": "https://www.excelsior.com.mx/recetas/receta-agua-jamaica-tradicional-fonditas-mexicanas"
+        },
+        {
+          "source": "Cookpad México, Agua de Jamaica",
+          "url": "https://cookpad.com/mx/recetas/319440"
+        }
+      ],
+      "curationNote": "Excélsior: 2 cups dried flowers, 2 L water split as 500 ml to infuse and 1.5 L to dilute, three quarters of a cup of sugar or grated piloncillo, simmered 8 to 10 minutes and rested 20, never over 15 minutes boiling. Cookpad: 200 g flowers boiled for 2 L, with lime and mint as an option. The flowers are entered as the brewed hibiscus infusion, since the database holds the brewed tea rather than the dried calyx."
+    },
+    {
+      "id": "curated_mx_agua_de_tamarindo",
+      "name": "Agua de Tamarindo",
+      "builderType": "beverage",
+      "dishGroup": "Drinks",
+      "region": "Throughout Mexico",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "glass",
+      "flavorProfile": "Brown, sweet and sour tamarind water with a faint caramel note, thick with fine pulp and very refreshing over ice.",
+      "healthBenefit": "Tamarind pulp brings fibre, potassium and magnesium; the sugar can be cut back, since ripe pulp is already sweet.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fruit",
+          "baseName": "Tamarind",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "pulp from 500 g pods, shells and fibres removed",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 3500,
+          "unit": "ml",
+          "cutPrep": "1.5 L to cook, 2 L to dilute",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 220,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "sliced, optional",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Press the pods to crack the shells, peel away the shell and the fibrous strings, and rinse the sticky pulp briefly under cold water.",
+        "Simmer the pulp in 1.5 litres of water for 15 to 20 minutes, until it swells and turns very soft. Off the heat, stir in the sugar until dissolved and let cool until warm.",
+        "With clean hands, rub the pulp off the seeds in the pot and discard the seeds. Blend the pulp and its liquid for 30 to 45 seconds and strain into a jug.",
+        "Add the remaining 2 litres of cold water, stir and chill. Stir again before serving, since the pulp settles, and pour over ice with a slice of lime."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Potassium",
+          "note": "From the tamarind pulp."
+        },
+        {
+          "nutrient": "Fibre",
+          "note": "Some fine pulp stays in the drink."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Prepara una deliciosa agua de tamarindo",
+          "url": "https://www.excelsior.com.mx/recetas/prepara-deliciosa-agua-tamarindo-acompanamiento-perfecto-mesa"
+        },
+        {
+          "source": "Grupo Animal, Cómo hacer agua de tamarindo, fresca y deliciosa",
+          "url": "https://grupoanimal.mx/gastronomia/agua-de-tamarindo-fresca-y-deliciosa"
+        }
+      ],
+      "curationNote": "Excélsior: 500 g pods in their shells, 3.5 L water with 1.5 L used to cook the pulp 15 to 20 minutes, 1 to 1 and a quarter cups sugar or piloncillo, seeds rubbed off by hand, blended and strained. Grupo Animal: 500 g tamarind, 2 L water, 1 cup sugar, boiled 20 minutes and mashed. Shelled pulp weighed at about 400 g from 500 g pods. Twelve glasses of about 300 ml."
+    },
+    {
+      "id": "curated_mx_agua_de_sandia",
+      "name": "Agua de Sandía",
+      "builderType": "beverage",
+      "dishGroup": "Drinks",
+      "region": "Throughout Mexico",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "glass",
+      "flavorProfile": "Pink, light and sweet watermelon water sharpened with lime, the simplest and most summery of the aguas frescas.",
+      "healthBenefit": "Mostly water with watermelon, it hydrates and gives vitamin C and lycopene; the sugar is optional when the fruit is ripe.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fruit",
+          "baseName": "Watermelon",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "flesh only, seeds removed, in cubes",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "juiced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2000,
+          "unit": "ml",
+          "cutPrep": "cold",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Cut the watermelon flesh in cubes and blend with the lime juice, the sugar and about 500 ml of the water for 1 minute, until smooth.",
+        "Strain if a finer drink is wanted, or leave the pulp in.",
+        "Pour into a jug with the rest of the cold water, taste for sweetness and chill 1 to 2 hours. Serve over ice."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the watermelon and lime."
+        },
+        {
+          "nutrient": "Lycopene",
+          "note": "From the red watermelon flesh."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Fundación Casa de México en España, Agua de sandía y limón",
+          "url": "https://www.casademexico.es/noticia/receta/agua-de-sandia-y-limon/"
+        },
+        {
+          "source": "Directo al Paladar, Agua de sandía",
+          "url": "https://www.directoalpaladar.com/recetas-vegetarianas/agua-sandia-receta-refrescante-para-tomar-todos-dias"
+        }
+      ],
+      "curationNote": "Casa de México (8 servings): 1 kg seeded watermelon, 3 limes, 100 g sugar optional, 2 L water, blended with part of the water and strained if wanted. Directo al Paladar: 400 g watermelon, 300 ml water, 30 ml lime juice, 30 g sugar, blended 1 minute. Amounts follow Casa de México."
+    },
+    {
+      "id": "curated_mx_atole_de_masa",
+      "name": "Atole de Masa",
+      "builderType": "beverage",
+      "dishGroup": "Drinks",
+      "region": "Central Mexico",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Hot, thick and silky corn drink sweetened with piloncillo and scented with canela and a touch of star anise, the breakfast partner of tamales.",
+      "healthBenefit": "Nixtamalized corn gives slow carbohydrate, some fibre and calcium from the cal; the piloncillo adds sugar, so the amount can be eased back.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_nixtamal_masa",
+          "servings": 5,
+          "note": "500 g fresh masa"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2000,
+          "unit": "ml",
+          "cutPrep": "1.5 L to heat, 500 ml to dissolve the masa",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "chopped, or 1 cone",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "1 canela stick",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "star anise",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "half a star is enough for a subtle note",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put 1.5 litres of water in a pot with the piloncillo, canela and star anise and heat over medium until the piloncillo dissolves and the water starts to bubble.",
+        "Meanwhile blend or work the masa with the remaining 500 ml of water until smooth, with no lumps.",
+        "Pour the dissolved masa into the pot little by little, stirring all the time. Cook 15 to 20 minutes over low heat, stirring constantly so it does not catch, until it thickens and loses its raw corn taste.",
+        "If it gets too thick, add a little more water. Strain out the canela and anise and serve hot."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the corn masa."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "Nixtamalization with cal adds calcium."
+        }
+      ],
+      "citations": [
+        {
+          "source": "El Universal, Cómo hacer atole de maíz y qué aporta",
+          "url": "https://www.eluniversal.com.mx/menu/como-hacer-atole-de-maiz-y-que-aporta/"
+        },
+        {
+          "source": "Cookpad México, Atole de masa con piloncillo",
+          "url": "https://cookpad.com/mx/recetas/12914005"
+        }
+      ],
+      "curationNote": "El Universal: 1 L water, half a cup of piloncillo, half a canela stick, half a star anise, 500 g masa, cooked 15 minutes stirring, thinned with water if needed and strained. Cookpad (12 servings): 500 g masa, 4 L water, canela and piloncillo to taste. The water sits between the two at 2 L."
+    },
+    {
+      "id": "curated_mx_atolillo",
+      "name": "Atolillo (Atole de Arroz)",
+      "builderType": "beverage",
+      "dishGroup": "Drinks",
+      "region": "Central and southern Mexico",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "A warm, creamy rice and milk drink, sweet and scented with canela and a little vanilla, thick enough to coat the spoon.",
+      "healthBenefit": "Milk gives calcium and protein, and the rice an easy, gentle starch that suits a cold morning or an upset stomach.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Grain",
+          "baseName": "White Rice",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "soaked in water 1 to 2 hours, drained",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "1 Mexican canela stick",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Cornstarch",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "optional, dissolved in a little cold milk, for a thicker atole",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Soak the rice in water for 1 to 2 hours, drain it and blend it with the 500 ml of fresh water until it is very fine.",
+        "Pour the rice water into a pot with the canela and cook over medium heat, stirring all the time, for 8 to 10 minutes, until it thickens and the rice is cooked.",
+        "Add the milk and sugar and keep cooking over low heat, stirring so it does not catch, for 15 to 20 minutes. Stir in the cornstarch now if a thicker atole is wanted and cook 3 to 5 minutes more.",
+        "Take it off the heat, stir in the vanilla, lift out the canela and serve hot in cups."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the milk."
+        },
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the rice."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Larousse Cocina, Atole de arroz (Margarita Carrillo)",
+          "url": "https://laroussecocina.mx/receta/atole-de-arroz/"
+        },
+        {
+          "source": "Recetas de México, Atole de arroz",
+          "url": "https://recetasdemexico.org/atole-de-arroz/"
+        }
+      ],
+      "curationNote": "Larousse Cocina (4 to 6): half a cup of soaked rice cooked in half a litre of water, then 1 L milk, three quarters of a cup of sugar and canela, 15 to 20 minutes. Recetas de México (4): 200 g rice blended with half the milk, 1 L milk, 120 g sugar, canela, half a teaspoon of vanilla. The cornstarch is optional and follows the thicker Guatemalan atolillo style."
+    },
+    {
+      "id": "curated_mx_batido_de_platano",
+      "name": "Licuado de Plátano con Avena",
+      "builderType": "beverage",
+      "dishGroup": "Drinks",
+      "region": "Throughout Mexico",
+      "servings": 2,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "glass",
+      "flavorProfile": "A cold, thick breakfast licuado of ripe banana, milk and oats, sweetened with honey and dusted with cinnamon.",
+      "healthBenefit": "Banana brings potassium, oats soluble fibre (beta-glucan), and milk protein and calcium, which makes this a filling breakfast in a glass.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fruit",
+          "baseName": "Banana",
+          "quantity": 240,
+          "unit": "g",
+          "cutPrep": "2 ripe bananas, peeled and sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Grain",
+          "baseName": "Oats",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "rolled oats",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Standard Honey (Blossom Honey)",
+          "quantity": 1.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": "as a handful of ice",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the banana, milk, oats, honey, vanilla and ice in the blender.",
+        "Blend on high for 1 to 2 minutes, until the oats are fully broken down and the licuado is smooth and frothy.",
+        "Pour into glasses, dust with cinnamon and drink right away, before the oats thicken it further."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Potassium",
+          "note": "From the banana."
+        },
+        {
+          "nutrient": "Fibre",
+          "note": "From the oats."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Cocina Fácil, Licuado de plátano con avena",
+          "url": "https://www.cocinafacil.com.mx/recetas/licuado-de-platano-con-avena"
+        },
+        {
+          "source": "Cookpad México, Licuado de plátano con avena",
+          "url": "https://cookpad.com/mx/recetas/16204108"
+        }
+      ],
+      "curationNote": "Cocina Fácil (1): 1 ripe banana, half a cup of oats, 1 tbsp honey, 1 cup milk, ice. Cookpad (4): 2 bananas, 1 L milk, 6 tbsp oats, 3 tbsp honey, 1 tbsp vanilla, cinnamon. Scaled to 2 glasses between the two. This is the batido de plátano asked for, under the name it goes by in Mexican kitchens."
+    },
+    {
+      "id": "curated_mx_cafe_de_olla",
+      "name": "Café de Olla",
+      "builderType": "beverage",
+      "dishGroup": "Drinks",
+      "region": "Central Mexico",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Coffee brewed in a clay pot with piloncillo, canela, clove and orange peel: dark, sweet and spiced, with a light citrus finish.",
+      "healthBenefit": "Coffee carries polyphenols such as chlorogenic acid, and the cinnamon and clove add aromatic compounds; the piloncillo is still sugar, so a cup is a treat.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
+          "quantity": 85,
+          "unit": "g",
+          "cutPrep": "about 3 oz, chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": "half a Mexican canela stick",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cloves, dried, ground",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "whole cloves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Orange",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "zest only, in wide strips",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "ground coffee, dark roast, medium-coarse grind",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "about 4 tbsp",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the water, piloncillo, canela, cloves and orange peel in a clay pot (olla de barro) or saucepan and bring to a boil, stirring until the piloncillo dissolves, about 5 to 7 minutes.",
+        "Take the pot off the heat, stir in the coffee, cover and let it steep 5 to 10 minutes.",
+        "Strain through a fine sieve or cloth into cups and serve hot."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Polyphenols",
+          "note": "From the coffee."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Casa de México, Café de olla",
+          "url": "https://www.casademexico.es/noticia/receta/cafe-de-olla/"
+        },
+        {
+          "source": "México en mi Cocina, Cómo hacer café de olla",
+          "url": "https://www.mexicoenmicocina.com/como-hacer-cafe-de-olla/"
+        }
+      ],
+      "curationNote": "México en mi Cocina (4 cups): 4 cups water, 3 oz piloncillo, half a canela stick, 4 tbsp coffee, added off the heat and rested 5 minutes. Casa de México (10): 3 L water, 500 g coffee, 250 g piloncillo, 2 oranges of zest, 3 cloves, canela, star anise optional, steeped 10 minutes on very low heat. Ground coffee is listed outside the database because its entries are brewed coffee only."
+    },
+    {
+      "id": "curated_mx_champurrado",
+      "name": "Champurrado",
+      "builderType": "beverage",
+      "dishGroup": "Drinks",
+      "region": "Central Mexico",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "A thick, hot chocolate atole of corn masa, Mexican table chocolate and piloncillo, frothed with a molinillo and scented with canela.",
+      "healthBenefit": "Nixtamalized masa gives calcium and niacin, cacao brings polyphenols and magnesium, and the milk adds protein; it is sweet and rich, a cold-weather drink.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_nixtamal_masa",
+          "servings": 1,
+          "note": "about 100 g fresh masa"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1250,
+          "unit": "ml",
+          "cutPrep": "1 litre plus 1 cup to dissolve the masa",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Mexican table chocolate (chocolate de mesa)",
+          "quantity": 180,
+          "unit": "g",
+          "cutPrep": "2 tablets, broken up",
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "1 small cone, chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "1 large Mexican canela stick",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.125,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring 1 litre of the water to a boil with the canela and piloncillo and simmer until the piloncillo dissolves, 5 to 8 minutes.",
+        "Add the milk and the chocolate and stir over medium heat until the chocolate melts, 3 to 5 minutes.",
+        "Dissolve the masa in the remaining cup of water, working out every lump with your fingers, and strain it.",
+        "Pour the masa into the pot in a thin stream, beating all the while with a molinillo or whisk so it does not lump. Add the salt and keep cooking over low heat, stirring, for 10 to 15 minutes, until it thickens and loses any raw corn taste.",
+        "Lift out the canela, froth once more with the molinillo and serve hot."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the nixtamalized masa and the milk."
+        },
+        {
+          "nutrient": "Magnesium",
+          "note": "From the cacao."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Receta tradicional de champurrado",
+          "url": "https://www.excelsior.com.mx/recetas/receta-tradicional-champurrado"
+        },
+        {
+          "source": "El Imparcial, Esta es la receta del mejor champurrado",
+          "url": "https://www.elimparcial.com/estilos/2024/12/20/esta-es-la-receta-del-mejor-champurrado-y-su-secreto-para-acompanar-tu-cena-esta-navidad/"
+        }
+      ],
+      "curationNote": "Excélsior: 1 L water plus a cup, 2 to 3 chocolate tablets, a small cone of piloncillo, canela, half a cup of masa poured in a thread under the molinillo. El Imparcial (6): 1 L milk, 1 L water, half a cup of masa, 2 tablets, half a cup of piloncillo, canela and a pinch of salt. Written mostly with water, the older way, with a little milk."
+    },
+    {
+      "id": "curated_mx_chocolate_caliente",
+      "name": "Chocolate Caliente Mexicano",
+      "builderType": "beverage",
+      "dishGroup": "Drinks",
+      "region": "Oaxaca and central Mexico",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Milk beaten with stone-ground Mexican chocolate, canela and vanilla until a thick foam rises, slightly gritty with sugar and almond in the old style.",
+      "healthBenefit": "Cacao brings magnesium, iron and flavanols, the milk calcium and protein, and the almonds vitamin E; it is sweet, so a cup is a treat.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Mexican table chocolate (chocolate de mesa)",
+          "quantity": 180,
+          "unit": "g",
+          "cutPrep": "2 tablets, broken up",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "1 Mexican canela stick",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Almonds",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "finely ground, optional",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat the milk with the canela over medium heat until it is steaming and small bubbles form at the edge, 6 to 8 minutes.",
+        "Add the chocolate, the ground almonds if used and the sugar, and stir until the chocolate melts.",
+        "Beat with a molinillo, rolling it between your palms, or with a whisk, for 8 to 10 minutes on low heat, until a thick foam covers the top. Do not let it boil over.",
+        "Stir in the vanilla, lift out the canela and serve with its foam."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Magnesium",
+          "note": "From the cacao."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "El Universal, Cómo hacer chocolate caliente",
+          "url": "https://www.eluniversal.com.mx/menu/receta-como-hacer-chocolate-caliente/"
+        },
+        {
+          "source": "Pati Jinich, Chocolate caliente mexicano",
+          "url": "https://patijinich.com/es/chocolate-caliente-mexicano/"
+        }
+      ],
+      "curationNote": "El Universal (6): 2 L milk, canela, a vanilla pod, 2 metate chocolate tablets, half a cup of sugar, beaten 8 to 10 minutes. Pati Jinich (2): 2 cups milk or water, 120 g chocolate, a 5 cm canela stick, 1 tsp vanilla, 4 tbsp ground almonds, 4 tbsp sugar. Water in place of milk is the older Oaxacan way."
+    },
+    {
+      "id": "curated_mx_licuado_de_mamey",
+      "name": "Licuado de Mamey",
+      "builderType": "beverage",
+      "dishGroup": "Drinks",
+      "region": "Southern Mexico and the Yucatán",
+      "servings": 2,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "glass",
+      "flavorProfile": "A cold, thick licuado of ripe mamey, with its sweet pumpkin and almond taste, blended with milk and finished with cinnamon.",
+      "healthBenefit": "Mamey sapote is high in fibre, vitamin C, vitamin B6 and carotenoids, and the milk brings calcium and protein.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "mamey sapote",
+          "quantity": 350,
+          "unit": "g",
+          "cutPrep": "1 ripe mamey, flesh only, seed removed",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": "as about 2 cups of ice",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": "ground, to finish",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Cut the mamey in half, take out the large seed and scoop out the orange flesh.",
+        "Blend the mamey with the milk, sugar, vanilla and ice for 1 to 2 minutes, until smooth.",
+        "Pour into glasses, sprinkle with ground cinnamon and serve cold."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "From the mamey."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the mamey."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "México en mi Cocina, Licuado de mamey",
+          "url": "https://www.mexicoenmicocina.com/licuado-de-mamey/"
+        },
+        {
+          "source": "Cocina Vital, Licuado de mamey con vainilla",
+          "url": "https://www.cocinavital.mx/recetas/bebidas/licuado-mamey-vainilla/2017/08/"
+        }
+      ],
+      "curationNote": "México en mi Cocina (2): 1 mamey, 2 cups cold milk, 2 cups ice, 2 tbsp sugar, cinnamon on top. Cocina Vital (2): 1 ripe mamey, 1 tsp vanilla, 500 ml milk, 2 tbsp sugar, cinnamon. Mamey sapote is not in the database; the mammy apple there is a different fruit."
+    },
+    {
+      "id": "curated_mx_ponche_navideno",
+      "name": "Ponche Navideño",
+      "builderType": "beverage",
+      "dishGroup": "Drinks",
+      "region": "Throughout Mexico",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "A hot Christmas fruit punch of tejocote, guava, apple, sugarcane, tamarind and prunes, simmered with canela, jamaica and piloncillo until fragrant.",
+      "healthBenefit": "Guava is very high in vitamin C, and the fruit adds fibre and potassium; it is sweetened, and the fruit pieces are eaten from the cup with a spoon.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 4000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "tejocotes",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "scored, simmered 5 minutes and peeled",
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Guava",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "quartered",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Apple",
+          "quantity": 360,
+          "unit": "g",
+          "cutPrep": "2 apples, cored and diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "sugarcane",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "peeled, cut in sticks",
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Tamarind",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "pods peeled, seeds left in",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pruneau, sec",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "dried prunes (ciruela pasa)",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Raisins, dark, seedless",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Brewing",
+          "baseName": "Hibiscus / Fruit Tea (Unsweetened)",
+          "quantity": 250,
+          "unit": "ml",
+          "cutPrep": "a handful of dried jamaica flowers, steeped in the pot",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "2 Mexican canela sticks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring the water to a boil with the canela, piloncillo, tamarind and jamaica, and simmer 10 to 15 minutes, until the piloncillo dissolves and the water turns red. Strain out the jamaica and tamarind pods if a clear punch is wanted.",
+        "Add the tejocotes, sugarcane and apple and simmer 15 minutes.",
+        "Add the guava, prunes and raisins and simmer 15 to 20 minutes more, until all the fruit is soft and the punch smells of it.",
+        "Serve hot in cups with fruit pieces and a stick of sugarcane in each."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the guava."
+        },
+        {
+          "nutrient": "Fibre",
+          "note": "From the fruit eaten with the punch."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Mama Latina Tips, Ponche mexicano navideño",
+          "url": "https://www.mamalatinatips.com/es/2012/12/ponche-mexicano-navideno.html"
+        },
+        {
+          "source": "UTSA La Cocina, Ponche de Navidad",
+          "url": "https://lacocina.utsa.edu/ponche-de-navidad-christmas-punch/"
+        }
+      ],
+      "curationNote": "Mama Latina Tips (40 cups): 12 L water, 5 apples, 12 guavas, 20 tejocotes, 2 sugarcanes, a quarter kilo of prunes, 2 handfuls of jamaica, 5 canela sticks, 1.2 kg sugar, simmered 30 to 45 minutes. UTSA (6): 1 lb tamarind, 1 lb guava, 2 sugarcane pieces, 8 oz tejocote, canela, prunes and raisins, simmered 25 then 20 minutes. Scaled to 12 cups with piloncillo for the sweetener. The jamaica is listed as its brewed tea, since it is steeped in the pot."
+    },
+    {
+      "id": "curated_mx_pozol",
+      "name": "Pozol de Cacao",
+      "builderType": "fermentation",
+      "dishGroup": "Drinks",
+      "region": "Tabasco and Chiapas",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "glass",
+      "flavorProfile": "A cool, thin drink of nixtamalized corn masa and toasted cacao dissolved in water, earthy and lightly bitter; left to sour for a few days, it turns tart.",
+      "healthBenefit": "Nixtamalized corn gives calcium and niacin, cacao magnesium and polyphenols. Soured pozol is a traditional lactic ferment studied for its lactic acid bacteria, though benefits in people are not established.",
+      "overallTier": "weak",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_nixtamal_masa",
+          "servings": 2.5,
+          "note": "about 250 g masa, coarse"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Sweets",
+          "baseName": "Cocoa mass",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "cacao beans toasted, peeled and ground with the masa",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": "boiled and cooled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "grated, optional",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "ground, optional",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.125,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Toast the cacao beans in a dry comal over medium heat, turning them, for 8 to 12 minutes, until fragrant and the shells crack. Peel them while warm.",
+        "Grind the cacao with the masa (in a molino, a metate or a food processor) into one even, dark dough and shape it into balls.",
+        "For pozol agrio, wrap the balls in banana leaves or a cloth and keep them at warm room temperature for 4 to 5 days, until they smell pleasantly sour. For fresh pozol skip this step.",
+        "To serve, break a ball into a jícara or glass and dissolve it in the water with your hand until it is a thin, watery atole. Sweeten with piloncillo, add the cinnamon and salt if wanted, and serve with ice."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the nixtamalized masa."
+        },
+        {
+          "nutrient": "Magnesium",
+          "note": "From the cacao."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Amigos de MAP, Pozol tabasqueño",
+          "url": "https://www.amigosmap.org.mx/pozo-tabasqueno/"
+        },
+        {
+          "source": "Cocina Vital, Cómo preparar pozol de cacao",
+          "url": "https://www.cocinavital.mx/recetas/bebidas/como-preparar-pozol-de-cacao-la-bebida-tradicional-de-tabasco-en-menos-de-20-minutos/2026/10/"
+        },
+        {
+          "source": "Infobae, Pozol, la bebida ancestral tabasqueña",
+          "url": "https://www.infobae.com/mexico/2024/04/27/pozol-la-bebida-ancestral-tabasquena-que-calma-el-calor/"
+        }
+      ],
+      "curationNote": "Amigos de MAP (16 cups): 1 kg nixtamalized corn and 200 g toasted, peeled cacao ground together and thinned with 4 L boiled water. Cocina Vital (4): 250 g masa, 80 g cacao, 1 L water, 80 g piloncillo, half a teaspoon of cinnamon, salt. Infobae, quoting Tabasco agriculture officials: pozol agrio ferments 4 to 5 days, sometimes two weeks. Cacao beans are listed as cocoa mass, the database entry nearest to ground whole beans. Tier is weak because the health effects of the ferment rest on microbiology studies, not trials."
     }
   ]
 }

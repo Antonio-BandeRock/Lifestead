@@ -1018,6 +1018,5526 @@
         }
       ],
       "curationNote": "Yecapixtla cecina: leg beef sliced thin, salted, sun-dried to about 40 percent moisture loss, cooled, then rubbed with lard (all three sources agree). The oven step is a home stand-in for the sun. Accompaniments from Mexico News Daily and UnoTV. One serving is about 100 g."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_chicharron",
+      "name": "Chicharrón de Cerdo",
+      "region": "Central Mexico",
+      "servings": 8,
+      "flavorProfile": "Shatteringly crisp and puffed pork skin with a salty, porky richness, sometimes with a strip of meat still clinging to it.",
+      "healthBenefit": "Chicharrón is almost all protein and fat, much of the protein as collagen, and it is a rich treat best eaten in small amounts.",
+      "overallTier": "weak",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "pork belly with skin (or pork skin with some fat)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "cut in 5 cm pieces",
+          "prepNote": "skin scored"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Garlic powder",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 250,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Pat the pieces dry and rub them all over with the salt, pepper, garlic powder and cumin.",
+        "Put them in a heavy pot or cazo with the bay leaves and the water over medium heat. Cook, stirring now and then, until the water has evaporated and the fat has started to render, 40 to 50 minutes.",
+        "Keep cooking in the rendered fat, stirring often with a wooden spoon, until the skin puffs and turns deep golden and crisp, 20 to 40 minutes more (the fat will be around 350 to 375 °F, 175 to 190 °C).",
+        "Lift the chicharrón out onto paper to drain and cool. Strain and keep the lard for cooking.",
+        "Serve as it is with lime and salsa, or break it into pieces for tacos, gorditas or chicharrón en salsa verde."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "Mostly collagen from the skin."
+        },
+        {
+          "nutrient": "Fat",
+          "note": "From the belly fat that renders out and crisps the skin."
+        }
+      ],
+      "citations": [
+        {
+          "source": "ADN40, Chicharrón: receta y cómo preparar",
+          "url": "https://www.adn40.mx/es-tendencia/chicharron-receta-y-como-preparar/"
+        },
+        {
+          "source": "Edible Austin, Chicharrones in the cazo",
+          "url": "https://edibleaustin.com/?p=8921"
+        }
+      ],
+      "curationNote": "Home version from ADN40 (belly pieces seasoned, cooked in water until it evaporates, then crisped in their fat), checked against the cazo method in Edible Austin (skin squares with salt water, stirred in a cazo until puffed). Pork belly and pork skin are not in the database. One serving is about 60 g."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_chilorio",
+      "name": "Chilorio",
+      "region": "Sinaloa",
+      "servings": 10,
+      "flavorProfile": "Tender shredded pork fried in lard and coated in a deep red, tangy chile sauce with cumin, garlic and oregano.",
+      "healthBenefit": "Pork gives protein, thiamine and zinc and the dried chiles add color and flavor, though the lard makes it a rich dish.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 2000,
+          "unit": "g",
+          "cutPrep": "with its fat, in 3 cm pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": "cabeza de lomo or loin with fat"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1200,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried guajillo chiles",
+          "quantity": 90,
+          "unit": "g",
+          "cutPrep": "stemmed and seeded",
+          "prepNote": "toasted and soaked"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, ancho",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "dried, stemmed and seeded",
+          "cookingMethod": null,
+          "prepNote": "toasted and soaked"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed between the palms",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, coriander seed",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, cider",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the pork, water and salt in a wide heavy pot. Simmer uncovered over medium heat, stirring now and then, until the water has evaporated and the meat is tender, 1 to 1½ hours.",
+        "Meanwhile toast the guajillo and ancho chiles on a comal for a few seconds a side, then soak them in hot water for 10 to 15 minutes until soft.",
+        "Blend the drained chiles with the garlic, oregano, cumin, coriander, pepper, bay and vinegar, adding a little soaking water to make a smooth purée.",
+        "When the pot is dry, add the lard and let the pork brown in it for 8 to 10 minutes. Shred it in the pot with two forks.",
+        "Pour in the chile purée and cook, stirring, until it darkens and coats the meat and is nearly dry, 15 to 20 minutes. Taste for salt and serve in flour tortillas, or keep in the fridge for a week."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the pork shoulder."
+        },
+        {
+          "nutrient": "Thiamine",
+          "note": "Pork is one of the richest sources of vitamin B1."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "Carotenoids from the dried chiles."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Pati Jinich, Chilorio",
+          "url": "https://patijinich.com/es/chilorio/"
+        },
+        {
+          "source": "Larousse Cocina, Chilorio",
+          "url": "https://laroussecocina.mx/receta/chilorio/"
+        }
+      ],
+      "curationNote": "Pati Jinich (Mocorito style: guajillo, garlic, oregano, coriander, cumin and vinegar, the pork simmered dry then fried) combined with Larousse (ancho, lard, cooked until nearly dry). Both chiles kept since Sinaloan cooks use either. One serving is about 110 g."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Eggs & Breakfast",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [
+        {
+          "recipeId": "curated_mx_chilorio",
+          "servings": 2,
+          "note": "about 1 cup, with a little of its fat"
+        }
+      ],
+      "id": "curated_mx_chilorio_con_huevo",
+      "name": "Chilorio con Huevo",
+      "region": "Sinaloa",
+      "servings": 4,
+      "flavorProfile": "Soft scrambled eggs streaked red with tangy chile pork, with sweet tomato and mild green chile.",
+      "healthBenefit": "Eggs and pork make this a protein-rich breakfast with choline from the yolks and some vitamin C from the tomato and chile.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "fresh Anaheim chiles",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "seeded and chopped",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 8,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat the chilorio in a large skillet over medium heat until its fat melts, 2 to 3 minutes.",
+        "Add the onion and Anaheim chiles and cook until they soften, 2 to 4 minutes, then add the tomato and cook until it breaks down, 4 to 5 minutes.",
+        "Beat the eggs with the salt, pour them in and stir gently until they set into soft, loose curds, 2 to 3 minutes.",
+        "Serve right away with flour tortillas and refried beans."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs and the pork."
+        },
+        {
+          "nutrient": "Choline",
+          "note": "From the egg yolks."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Pati Jinich, Chilorio Migas (Sopitas con huevo y chilorio)",
+          "url": "https://patijinich.com/sopitas-con-huevo-y-chilorio/"
+        },
+        {
+          "source": "Wikipedia, Chilorio",
+          "url": "https://en.wikipedia.org/wiki/Chilorio"
+        }
+      ],
+      "curationNote": "Pati Jinich amounts (1 cup chilorio, 8 eggs, onion, Anaheim and tomato) without the toasted tortilla pieces that make it migas; Wikipedia confirms chilorio scrambled with eggs as an everyday Sinaloan way to eat it. Shelved with eggs and breakfast."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_recado_rojo",
+          "servings": 8,
+          "note": "dissolved in the orange juice"
+        }
+      ],
+      "id": "curated_mx_cochinita_pibil",
+      "name": "Cochinita Pibil",
+      "region": "Yucatán",
+      "servings": 10,
+      "flavorProfile": "Soft, juicy pulled pork stained red with achiote, tangy with sour orange and perfumed by the banana leaves it cooks in.",
+      "healthBenefit": "Slow-cooked pork gives protein, thiamine and zinc, and the citrus marinade brings flavor without much added fat beyond the lard.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 1500,
+          "unit": "g",
+          "cutPrep": "in large pieces",
+          "cookingMethod": "Baked",
+          "prepNote": "pierna and lomo, or falda"
+        },
+        {
+          "notInDatabase": true,
+          "name": "sour orange juice (naranja agria)",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": "freshly squeezed",
+          "prepNote": "or 2 parts sweet orange to 1 part lime"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "mashed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed between the palms",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Baked",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "banana leaves",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "passed over a flame to soften",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Dissolve the recado in the sour orange juice and mash in the garlic, cumin, pepper, oregano and salt.",
+        "Put the pork in a glass dish, pour the marinade over and turn to coat. Cover and refrigerate for at least 3 hours, overnight for the best flavor.",
+        "Heat the oven to 325 to 350 °F (165 to 180 °C). Line a baking dish with banana leaves, lay in the pork with its marinade, add the bay leaves and the melted lard, and fold more leaves over the top. Cover with foil.",
+        "Bake for 2 to 3 hours, until the meat falls apart when pressed. The traditional way is a pib, an earth pit lined with hot stones.",
+        "Shred the pork in its juices and serve with pickled red onion, habanero salsa and warm tortillas, or in a bolillo as a torta."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the pork."
+        },
+        {
+          "nutrient": "Thiamine",
+          "note": "Pork is one of the richest sources of vitamin B1."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "Some survives from the citrus marinade."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Larousse Cocina, Cochinita pibil",
+          "url": "https://laroussecocina.mx/receta/cochinita-pibil/"
+        },
+        {
+          "source": "Por Esto, Cómo preparar cochinita siguiendo la receta tradicional",
+          "url": "https://www.poresto.com/yucatan/2020/8/10/como-preparar-cochinita-siguiendo-la-receta-tradicional.html"
+        }
+      ],
+      "curationNote": "Por Esto (the Mérida paper) for the marinade, bay leaves, lard and 165 °C oven; Larousse for the amounts of recado and lard and the 2 to 3 hours. The recado rojo is the shared base. One serving is about 120 g."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_costilla_asada",
+      "name": "Costilla de Res Asada",
+      "region": "Sonora and Nuevo León",
+      "servings": 6,
+      "flavorProfile": "Fatty, beefy short rib with a salty, smoky crust from mesquite coals and juicy meat close to the bone.",
+      "healthBenefit": "Beef rib gives protein, iron, zinc and vitamin B12, though it is a fatty cut and a rich plate.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Ribs (Raw)",
+          "quantity": 1500,
+          "unit": "g",
+          "cutPrep": "flanken-cut short rib about 1.5 cm thick, or costilla cargada",
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "halved",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Light a mesquite charcoal fire and let it burn down to hot coals with a light coat of ash, 30 to 40 minutes.",
+        "Salt the ribs on both sides just before grilling. Northern grill cooks use salt alone and no marinade.",
+        "Grill over high heat (about 450 to 500 °F, 230 to 260 °C) for 4 to 6 minutes a side, until the fat crisps and the meat is cooked through but juicy. Move pieces to the cooler side if the fat flares.",
+        "Rest 5 minutes, then cut the meat off the bone to chop for tacos or serve the ribs whole with lime, salsa, grilled onions and tortillas."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the beef."
+        },
+        {
+          "nutrient": "Zinc",
+          "note": "Beef rib is a rich source."
+        },
+        {
+          "nutrient": "Vitamin B12",
+          "note": "From the beef."
+        }
+      ],
+      "citations": [
+        {
+          "source": "El Imparcial, Por qué Sonora es la cuna de la mejor carne asada",
+          "url": "https://www.elimparcial.com/mexico/2026/04/23/por-que-sonora-es-considerada-la-cuna-de-la-mejor-carne-asada-de-mexico-y-no-otros-estados-del-norte-del-pais/"
+        },
+        {
+          "source": "El Imparcial, La carne asada de Sonora, la mejor de México",
+          "url": "https://www.elimparcial.com/son/sonora/2025/06/19/colocan-a-la-carne-asada-de-sonora-como-la-mejor-de-mexico-por-estos-motivos-segun-articulo-de-radio-formula/"
+        }
+      ],
+      "curationNote": "Written as part of the northern carne asada: El Imparcial names costilla cargada in Sonora and short rib in Nuevo León, salt only, mesquite charcoal and no marinade. No single recipe page for costilla was found; the method follows the asada sources. One serving is about 250 g raw with bone."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_cueritos",
+      "name": "Cueritos en Vinagre",
+      "region": "Jalisco and Central Mexico",
+      "servings": 8,
+      "flavorProfile": "Soft, slightly chewy strips of pork skin, sharp with vinegar and lime and mellowed by onion and herbs.",
+      "healthBenefit": "Pickled pork skin is high in collagen protein and carries a fair amount of fat, so it is eaten as a snack or topping rather than a main.",
+      "overallTier": "weak",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "pork skin (cuero de cerdo)",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "scraped clean",
+          "prepNote": "boiled until soft, then cut in strips"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Distilled Vinegar",
+          "quantity": 300,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "or the vinegar from chiles en escabeche"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 150,
+          "unit": "ml",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Marjoram Spices",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed between the palms",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Simmer the pork skin in the salted water with the garlic until it is soft enough to cut easily, 1½ to 2 hours.",
+        "Drain, let it cool, and cut it in strips about 1 cm wide.",
+        "Put the strips in a glass jar with the onion, vinegar, lime juice, bay, thyme, marjoram, oregano and pepper, adding salt to taste. Cover and refrigerate at least 1 day, up to a week.",
+        "Serve cold on tostadas with lettuce, tomato, avocado and salsa, or as a botana with chicharrón and lime."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "Mostly collagen from the skin."
+        },
+        {
+          "nutrient": "Fat",
+          "note": "The skin keeps some fat even after boiling."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Tostadas de cueritos estilo Jalisco",
+          "url": "https://www.excelsior.com.mx/recetas/deliciosas-tostadas-cueritos-estilo-jalisco-para-noche-mexicana"
+        },
+        {
+          "source": "El Universal, Qué tan saludables son los cueritos de cerdo",
+          "url": "https://www.eluniversal.com.mx/menu/que-tan-saludables-son-los-cueritos-de-cerdo-botana-mexicana/"
+        }
+      ],
+      "curationNote": "Excélsior for the Jalisco marinade (onion, chile vinegar, lime, salt) and the tostada serving; El Universal for the herbs (hierbas de olor) and for the protein, fat and collagen content. Pork skin is not in the database. One serving is about 75 g."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_chorizo",
+          "servings": 4.17,
+          "note": "crumbled"
+        }
+      ],
+      "id": "curated_mx_discada",
+      "name": "Discada Norteña",
+      "region": "Chihuahua, Coahuila and Nuevo León",
+      "servings": 12,
+      "flavorProfile": "A hearty, smoky mix of beef, pork, bacon, ham, chorizo and sausage cooked down with onion, tomato, chile and beer on a plow disc.",
+      "healthBenefit": "Discada is very high in protein, iron and zinc from the mixed meats, and with bacon, sausage and chorizo it is a rich, salty party dish.",
+      "overallTier": "weak",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Bacon",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Beef Round (Raw)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "in small cubes",
+          "cookingMethod": "Fried",
+          "prepNote": "pulpa de res"
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Meat (Raw)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "in small cubes",
+          "cookingMethod": "Fried",
+          "prepNote": "pierna de cerdo"
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Ham (Cured)",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Wienerpølse",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": "Fried",
+          "prepNote": "salchicha viena"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Green Bell Pepper",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, jalapeno",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Pale beer",
+          "quantity": 700,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed between the palms",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat a discada (plow disc) or a very large wok over a wood or charcoal fire. Fry the bacon until it renders its fat, 5 to 7 minutes.",
+        "Add the beef and pork and cook, stirring, until browned and their liquid has cooked off, 15 to 20 minutes.",
+        "Add the chorizo, ham and sausage and cook 5 to 8 minutes more.",
+        "Add the onion, bell pepper, jalapeño and garlic and cook until soft, 5 minutes, then the tomato and the spices.",
+        "Pour in the beer and simmer, stirring now and then, until the liquid has reduced and the meats are tender, 20 to 30 minutes. Taste for salt and serve straight from the disc with flour or corn tortillas and salsa."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the six meats."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the beef."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "High, from the bacon, ham, sausage and chorizo."
+        }
+      ],
+      "citations": [
+        {
+          "source": "México Desconocido, Discada norteña",
+          "url": "https://www.mexicodesconocido.com.mx/discada-receta.html"
+        },
+        {
+          "source": "La Opinión, Cómo hacer una auténtica discada norteña",
+          "url": "https://laopinion.com/2020/05/27/como-hacer-una-autentica-discada-nortena/"
+        }
+      ],
+      "curationNote": "México Desconocido for the mix of meats, beer and spices (scaled down by about half); La Opinión (Monterrey) for the green pepper and jalapeño and the order of the meats. Vienna sausage is the database row Wienerpølse. One serving is about 150 g."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_labio",
+      "name": "Labio de Res al Vapor",
+      "region": "Mexico City and Central Mexico",
+      "servings": 6,
+      "flavorProfile": "Soft, gelatinous and mild beef lip with a little chew, steamed until it melts and seasoned with onion and herbs.",
+      "healthBenefit": "Beef lip is mostly collagen protein with some fat, eaten in small amounts in tacos.",
+      "overallTier": "weak",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "beef lip (labio de res)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "well cleaned",
+          "prepNote": "from the cabeza"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "halved",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "whole cloves",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Clean the lip well under cold water and rub it with the salt.",
+        "Put the water, onion, garlic, bay and allspice in the bottom of a steamer, set the rack over it and lay the lip on top. Cover tightly.",
+        "Steam over medium heat until very soft, 3 to 4 hours, adding hot water when the level drops.",
+        "Chop finely on a board and serve hot in small corn tortillas with onion, cilantro, salsa and lime, the way taquerías de cabeza serve it."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "Mostly collagen."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Cookpad México, Tacos de cabeza de res al vapor",
+          "url": "https://cookpad.com/mx/recetas/100412"
+        },
+        {
+          "source": "Chilango, Los mejores tacos de cabeza",
+          "url": "https://www.chilango.com/comida/los-mejores-tacos-de-cabeza-en-la-cdmx/"
+        }
+      ],
+      "curationNote": "Labio is one of the cuts of tacos de cabeza; no separate recipe exists, so it follows the steamed cabeza method in Cookpad México, with Chilango listing labio among the cabeza cuts. Not in the database. One serving is about 100 g."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_lengua",
+      "name": "Lengua de Res",
+      "region": "Central Mexico",
+      "servings": 8,
+      "flavorProfile": "Tender, silky and mildly beefy, with a fine grain that soaks up the herbs it simmered in.",
+      "healthBenefit": "Beef tongue gives protein, zinc, iron and plenty of vitamin B12, and it is a fatty cut.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "beef tongue (lengua de res)",
+          "quantity": 1500,
+          "unit": "g",
+          "cutPrep": "washed and scrubbed",
+          "prepNote": "simmered, then skinned"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 3000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "halved",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "whole cloves",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Marjoram Spices",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed between the palms",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rinse the tongue in cold water and scrub it clean.",
+        "Put it in a large pot with the water, onion, garlic, allspice, bay, thyme, marjoram, oregano and salt. Bring to a boil, then simmer covered over medium-low heat until a fork slides in easily, 2½ to 3 hours (about 1 hour in a pressure cooker).",
+        "Lift out the tongue and, while it is still warm, cut a shallow slit in the skin and peel it off, scraping away any white membrane. Skim the fat from the broth.",
+        "Chop or slice the tongue and return it to a little broth to keep warm. Serve in corn tortillas with onion, cilantro, salsa and lime."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin B12",
+          "note": "Tongue is rich in it."
+        },
+        {
+          "nutrient": "Zinc",
+          "note": "From the beef tongue."
+        }
+      ],
+      "citations": [
+        {
+          "source": "El Universal, Tacos de lengua de res de Doña Ángela",
+          "url": "https://www.eluniversal.com.mx/menu/receta-tacos-de-lengua-de-res-de-dona-angela/"
+        },
+        {
+          "source": "Animal Gourmet, Lengua de res: tiempo de cocción y limpieza",
+          "url": "https://grupoanimal.mx/gastronomia/tips/lengua-res-tiempo-coccion-limpieza"
+        }
+      ],
+      "curationNote": "Doña Ángela (El Universal) for the herbs and allspice; Animal Gourmet for cleaning, the 2 hour pot or 1 hour pressure cooker timing, and peeling. Tongue is not in the database. One serving is about 110 g."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_longaniza_con_papas",
+      "name": "Longaniza con Papas en Salsa Verde",
+      "region": "Central Mexico",
+      "servings": 6,
+      "flavorProfile": "Crisp-edged pieces of red pork longaniza in a bright, tangy tomatillo and serrano sauce with soft potato and nopales.",
+      "healthBenefit": "Potato and nopales add fiber, potassium and vitamin C to the pork, though longaniza is salty and fatty, so this is a hearty dish.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "fresh pork longaniza",
+          "quantity": 750,
+          "unit": "g",
+          "cutPrep": "cut in medium pieces, or out of its casing",
+          "prepNote": "from a trusted butcher"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "peeled, in 2 cm cubes",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Nopales",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "cleaned and diced",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomatillo",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "husked",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "stemmed",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "in chunks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring the water to a boil with half the salt and cook the potato and nopales until tender, 15 to 20 minutes. Drain.",
+        "Simmer the tomatillos and serranos in water to cover until olive green and soft, 8 to 10 minutes. Blend with the onion, garlic and remaining salt.",
+        "Fry the longaniza in the lard over medium heat until browned and its fat has rendered, 8 to 10 minutes.",
+        "Pour in the salsa and let it boil for 3 to 5 minutes, then add the potato and nopales and simmer 10 minutes more. Taste for salt and serve with beans and corn tortillas."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the longaniza."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "From the potatoes."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomatillos, serranos and nopales."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Animal Gourmet, 4 guisados caseros con longaniza",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/longaniza-preparaciones-cocina-mexicana"
+        },
+        {
+          "source": "Chilango, Diferencias entre chorizo y longaniza",
+          "url": "https://www.chilango.com/comida/diferencias-chorizo-y-longaniza-historia/"
+        }
+      ],
+      "curationNote": "Longaniza is bought from the butcher in Mexico far more than made at home, and no source gave measured home amounts, so the dish is the classic guisado. Animal Gourmet for the recipe; Chilango for what longaniza is (pork resting in adobo, cut and stuffed whole in a long casing). Not in the database. One serving is about 200 g of the guisado."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_machaca",
+      "name": "Machaca (Carne Seca)",
+      "region": "Sonora, Chihuahua and Nuevo León",
+      "servings": 10,
+      "flavorProfile": "Salty, deeply beefy dried meat pounded into fine, fluffy threads that crisp in a pan.",
+      "healthBenefit": "Drying concentrates the protein, iron and zinc of lean beef, and the salt cure makes it high in sodium, so a little goes a long way.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Round (Raw)",
+          "quantity": 1500,
+          "unit": "g",
+          "cutPrep": "lean, sliced in thin sheets about 5 mm thick",
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "optional, pounded in",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rub the sheets of beef lightly on both sides with the coarse salt and the pepper.",
+        "Hang them in a dry, sunny, airy place covered with a fine mesh, and dry for 3 to 5 days until stiff and dark. Indoors, dry on racks in an oven at its lowest setting, 150 to 170 °F (65 to 75 °C), for 6 to 10 hours.",
+        "Toast the dried meat over charcoal or on a hot comal for 1 to 2 minutes a side.",
+        "Soak it in hot water for about 30 minutes, drain well, and pound it on a metate or a board with a stone or mallet until it breaks into fine threads, with the garlic if you like. Spread it to dry again and keep in a cool, dry place."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "Concentrated by drying the beef."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "Heme iron from the beef."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "High, from the salt cure."
+        }
+      ],
+      "citations": [
+        {
+          "source": "El Universal, Cómo se hace la machaca",
+          "url": "https://www.eluniversal.com.mx/menu/como-se-hace-la-machaca/"
+        },
+        {
+          "source": "Animal Gourmet, Machacado con huevo: historia y recetas",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/machacado-con-huevo-nuevo-leon-historia"
+        }
+      ],
+      "curationNote": "El Universal for the whole process (thin lean beef, coarse salt, 3 to 5 days in the sun under mesh, grilled, soaked, pounded on a metate, garlic in some regions); Animal Gourmet confirms the sun drying and pounding. The oven route is added for a home without a dry climate. 1500 g raw gives about 500 g machaca; one serving is about 50 g."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Eggs & Breakfast",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [
+        {
+          "recipeId": "curated_mx_machaca",
+          "servings": 2,
+          "note": "about 100 g"
+        }
+      ],
+      "id": "curated_mx_machaca_con_huevo",
+      "name": "Machaca con Huevo",
+      "region": "Nuevo León and Sonora",
+      "servings": 2,
+      "flavorProfile": "Salty, chewy threads of dried beef folded through soft eggs with sweet tomato, onion and green chile.",
+      "healthBenefit": "Eggs and dried beef make a very high protein breakfast with choline and iron, salty enough that it needs no added salt.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Melt the lard in a skillet over medium heat and fry the machaca, stirring, until lightly browned, 1 to 2 minutes.",
+        "Add the onion and chile and cook until the onion turns translucent, about 2 minutes, then the tomato for 3 minutes more over medium-low heat.",
+        "Beat the eggs with the pepper (the machaca brings the salt), pour them over and fold gently from the edges until set but still glossy, 2 to 3 minutes.",
+        "Serve right away with flour tortillas, refried beans and whole serranos on the side."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs and dried beef."
+        },
+        {
+          "nutrient": "Choline",
+          "note": "From the egg yolks."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Machaca con huevo estilo norteño",
+          "url": "https://www.excelsior.com.mx/recetas/receta-machaca-con-huevo-estilo-norteno-sabor-desierto-plato"
+        },
+        {
+          "source": "Animal Gourmet, Machacado con huevo: historia y recetas",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/machacado-con-huevo-nuevo-leon-historia"
+        }
+      ],
+      "curationNote": "Excélsior amounts (100 g machaca, 4 eggs, lard, onion, tomato, two green chiles); Animal Gourmet for the Nuevo León serving with flour tortillas, beans and serranos. In Monterrey it is called machacado con huevo. Shelved with eggs and breakfast."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_machitos",
+      "name": "Machitos de Cabrito",
+      "region": "Nuevo León",
+      "servings": 6,
+      "flavorProfile": "Rich, minerally goat liver, heart and lung wrapped in the kid’s intestine and grilled until the outside crisps.",
+      "healthBenefit": "Liver and heart make machitos very rich in iron, vitamin A and vitamin B12, and as organ meat it is eaten in small portions.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "kid goat liver, heart and lung (asadura de cabrito)",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "trimmed and chopped",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "kid goat intestine (tripa de leche)",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "turned and washed very well",
+          "prepNote": "for wrapping and tying"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mix the chopped liver, heart and lung with the onion, garlic, salt and pepper.",
+        "Shape the mixture into small bundles about the size of a sausage and wrap each one tightly with the intestine, tying it with the end of the tripe.",
+        "Simmer the bundles in the water with the bay leaves until cooked through, 30 to 40 minutes. Drain.",
+        "Grill over charcoal (or fry in the lard) until browned and crisp outside, 8 to 12 minutes, turning often. Slice and serve in tacos with salsa and lime, or beside cabrito."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the liver, in large amounts."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the liver, heart and lung."
+        },
+        {
+          "nutrient": "Vitamin B12",
+          "note": "Organ meats are among the richest sources."
+        }
+      ],
+      "citations": [
+        {
+          "source": "El Diario NY, Todo lo que tienes que saber del cabrito de Monterrey",
+          "url": "https://eldiariony.com/2020/03/22/todo-lo-que-tienes-que-saber-del-cabrito-de-monterrey/"
+        },
+        {
+          "source": "Chilango, Machitos en la taquería La Especial",
+          "url": "https://www.chilango.com/comida-y-tragos/taqueria-la-especial/"
+        }
+      ],
+      "curationNote": "El Diario NY for what machitos are in Monterrey (liver, lung and heart wrapped in the kid’s milk intestine); Chilango for the washed tripe being cooked first and then fried for tacos. No source gave measured amounts, so they are worked out for a home batch. Goat is not in the database, and lamb was not used in its place. One serving is about 100 g."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_mixiote",
+      "name": "Mixiote de Carnero",
+      "region": "Hidalgo and Tlaxcala",
+      "servings": 6,
+      "flavorProfile": "Tender lamb steamed in a parcel with a brick-red guajillo and ancho adobo, warm with cumin and clove and scented with avocado leaf.",
+      "healthBenefit": "Lamb gives protein, iron, zinc and vitamin B12, and steaming in its sauce keeps the added fat low.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Lamb Shoulder (Raw)",
+          "quantity": 1500,
+          "unit": "g",
+          "cutPrep": "bone-in, in pieces",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried guajillo chiles",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "stemmed and seeded",
+          "prepNote": "toasted and soaked"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, ancho",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "dried, stemmed and seeded",
+          "cookingMethod": null,
+          "prepNote": "toasted and soaked"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "or 3 whole cloves"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed between the palms",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "in chunks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, cider",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "pulque",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "prepNote": "optional, as in Hidalgo"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "mixiote sheets (maguey membrane) or parchment",
+          "quantity": 6,
+          "unit": "each",
+          "cutPrep": "soaked to soften",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "avocado leaves",
+          "quantity": 12,
+          "unit": "each",
+          "cutPrep": "toasted",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Sprinkle the lamb with half the salt and set it aside.",
+        "Toast the chiles lightly on a comal, then soak them in the hot water for 15 to 20 minutes.",
+        "Blend the drained chiles with the cumin, garlic, cloves, pepper, cinnamon, oregano, thyme, onion, vinegar, pulque, remaining salt and a little soaking water into a thick, smooth paste. Strain it.",
+        "Fry the paste in the oil in a saucepan, stirring, until it thickens and darkens, 8 to 10 minutes. Let it cool, rub it over the lamb and refrigerate at least 4 hours, overnight if you can.",
+        "Lay 2 avocado leaves and a portion of meat with plenty of sauce on each sheet, gather the corners into a parcel and tie with string.",
+        "Steam for 90 minutes to 2 hours from the moment the steam rises, until the meat is very soft. Each person opens a parcel at the table and makes tacos with tortillas and salsa verde."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the lamb."
+        },
+        {
+          "nutrient": "Vitamin B12",
+          "note": "From the lamb."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "Carotenoids from the dried chiles."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Animal Gourmet, Cómo hacer mixiotes tradicionales",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/mixiotes-carnero-preparacion-tradicional"
+        },
+        {
+          "source": "Infobae, Mixiotes tlaxcaltecas",
+          "url": "https://www.infobae.com/mexico/2025/08/28/como-preparar-unos-mixiotes-tlaxcaltecas-una-receta-con-tradicion-culinaria/"
+        }
+      ],
+      "curationNote": "Infobae (Tlaxcala) for the measured adobo and the 90 minute steam; Animal Gourmet (Hidalgo) for the pulque, cider vinegar and avocado leaf. Mutton (carnero) is the traditional meat; the database lamb shoulder is the closest row. One serving is one parcel, about 250 g raw with bone."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_ojo",
+      "name": "Ojo de Res al Vapor",
+      "region": "Mexico City and Central Mexico",
+      "servings": 4,
+      "flavorProfile": "A small, rich taquería cut, soft and gelatinous with a little cartilage, steamed with the rest of the cabeza.",
+      "healthBenefit": "Ojo is mostly fat and collagen with some protein, eaten in very small amounts as part of tacos de cabeza.",
+      "overallTier": "weak",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "beef eye with surrounding meat (ojo de res)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "cleaned",
+          "prepNote": "from the cabeza"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "halved",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "whole cloves",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rinse the ojo well and rub it with the salt.",
+        "Put the water, onion, garlic and bay in the bottom of a steamer, set the rack over it, lay the ojo on top and cover tightly.",
+        "Steam over medium heat until very soft, 3 to 4 hours, topping up with hot water.",
+        "Chop finely on the board and serve in small hot tortillas with salsa verde, onion, cilantro and lime. Taquerías often mix it with other cabeza cuts."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fat",
+          "note": "Most of the energy in this cut."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "Mostly collagen."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Cookpad México, Tacos de cabeza de res al vapor",
+          "url": "https://cookpad.com/mx/recetas/100412"
+        },
+        {
+          "source": "El Financiero, Tacos de cabeza en la CDMX",
+          "url": "https://www.elfinanciero.com.mx/food-and-drink/2021/11/28/5-de-cabeza-para-empezar-aqui-los-encuentras-en-la-cdmx/"
+        }
+      ],
+      "curationNote": "Ojo is one of the cabeza cuts, steamed with the head; it follows the Cookpad México cabeza method, and El Financiero names ojo among the cuts at Mexico City cabeza stands, served with salsa verde, onion, cilantro and lime. Not in the database. One serving is about 75 g."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_sesos",
+      "name": "Sesos a la Mexicana",
+      "region": "Central Mexico",
+      "servings": 6,
+      "flavorProfile": "Soft, creamy and mild brains cooked down with onion, green chile and epazote until they turn velvety.",
+      "healthBenefit": "Brains are rich in vitamin B12 and omega-3 fats and also very high in cholesterol, so they are eaten as a small filling.",
+      "overallTier": "weak",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "beef brains (sesos de res)",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "membranes removed, soaked in cold water",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "half in a piece, half finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Epazote",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Soak the brains in cold water for 30 minutes and peel off the thin membrane and any blood.",
+        "Simmer them in the water with the piece of onion, garlic, bay and half the salt for 10 to 15 minutes, until firm. Drain and chop.",
+        "Melt the lard in a pan and soften the chopped onion with the epazote, 3 to 4 minutes, then add the serranos.",
+        "Add the brains and the remaining salt and cook over low heat, stirring all the time, until creamy and fully cooked, 8 to 10 minutes. Stir in the cilantro and use for tacos or fried quesadillas."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin B12",
+          "note": "Brains are a rich source."
+        },
+        {
+          "nutrient": "Omega-3 fats",
+          "note": "Brains carry DHA."
+        },
+        {
+          "nutrient": "Cholesterol",
+          "note": "Very high; a small portion goes a long way."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Animal Gourmet, La quesadilla de sesos: cómo prepararla",
+          "url": "https://grupoanimal.mx/gastronomia/quesadilla-de-sesos-como-preparar"
+        },
+        {
+          "source": "Cookpad México, Sesos de res con epazote",
+          "url": "https://cookpad.com/mx/recetas/2300484"
+        }
+      ],
+      "curationNote": "Cookpad for simmering the beef brains first with herbs, garlic and onion, then cooking them with onion, serrano, epazote and cilantro; Animal Gourmet for the lard and the constant stirring until creamy. The ginger in Cookpad was left out as uncommon. Beef brains are not in the database (only lamb is, and it was not used in their place). One serving is about 90 g."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_suadero",
+      "name": "Suadero",
+      "region": "Mexico City",
+      "servings": 4,
+      "flavorProfile": "Soft, silky beef confited in lard until golden at the edges, with a buttery richness and a little crisp.",
+      "healthBenefit": "Suadero gives plenty of protein, iron and zinc, and cooking in lard makes it a rich taco meat.",
+      "overallTier": "weak",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Brisket Navel End (Raw)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "with its fat, scored and in large pieces",
+          "cookingMethod": "Fried",
+          "prepNote": "suadero is the thin cut between the belly and leg"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "halved",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "whole cloves",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Score the meat in a shallow crosshatch and rub the salt into the cuts. Refrigerate overnight if you have time.",
+        "Simmer the meat with the water, onion, garlic and bay until very tender, about 1½ hours (20 to 30 minutes in a pressure cooker). Drain.",
+        "Heat the lard in a wide pan or comal over medium heat and cook the meat in it, turning now and then, until golden at the edges, 15 to 20 minutes. Taquerías instead confit it in a pot of lard for 1½ to 2 hours.",
+        "Chop finely, dip the tortillas briefly in the fat and warm them on the comal, and serve with onion, cilantro, salsa and lime."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the beef."
+        },
+        {
+          "nutrient": "Zinc",
+          "note": "From the beef."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Animal Gourmet, Tacos de suadero en casa",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/receta-tacos-de-suadero-en-casa"
+        },
+        {
+          "source": "Excélsior, Tacos de suadero estilo taquería",
+          "url": "https://www.excelsior.com.mx/recetas/receta-tacos-suadero-estilo-taquerias"
+        }
+      ],
+      "curationNote": "Animal Gourmet gives both the taquería confit (1.5 to 2 hours in lard) and the lower-fat boil then fry; the home recipe follows its lower-fat way with Excélsior’s scored, salted meat and onion and garlic. Suadero is the thin flank-to-plate cut, matched to the database navel end. One serving is about 110 g cooked."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_tasajo",
+      "name": "Tasajo",
+      "region": "Oaxaca",
+      "servings": 6,
+      "flavorProfile": "Thin, salty sheets of beef charred fast over hot coals, chewy and smoky, with grilled cebollitas and chiles alongside.",
+      "healthBenefit": "Lean beef gives protein, iron and zinc, and the salt cure makes it high in sodium.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Round (Raw)",
+          "quantity": 800,
+          "unit": "g",
+          "cutPrep": "cut in long thin sheets about 5 mm thick",
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "coarse sea salt",
+          "cookingMethod": null,
+          "prepNote": "mostly rinsed off before grilling"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "cebollitas (green onions with bulbs)",
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Nopales",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "whole paddles, cleaned",
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "chiles de agua",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": null,
+          "prepNote": "grilled"
+        }
+      ],
+      "instructions": [
+        "Rub both sides of the beef with the coarse salt, lay flat on a tray, cover with a clean cloth and leave in a cool place for 24 hours. In Oaxaca the sheets are then hung to dry partly in the air.",
+        "Rinse off the salt and pat the meat dry.",
+        "Light a hardwood charcoal fire until very hot. Grill the tasajo 30 to 60 seconds a side until it chars, with the cebollitas, nopales and chiles de agua alongside.",
+        "Serve at once with avocado, salsa de molcajete and tortillas, or on a tlayuda."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the beef."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "Heme iron from the beef."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "High, from the salt cure."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Table Journey, Tasajo (Oaxaca)",
+          "url": "https://tablejourney.com/mexico/oaxaca/dish/tasajo/"
+        },
+        {
+          "source": "Chilango, Dónde comprar tlayudas, tasajo y mezcal",
+          "url": "https://www.chilango.com/comida-y-tragos/oaxaca-en-la-ciudad-de-mexico-donde-comprar-tlayudas-tasajo-y-mezcal/"
+        },
+        {
+          "source": "México Desconocido, Platillos típicos de Oaxaca",
+          "url": "https://www.mexicodesconocido.com.mx/platillos-tipicos-de-oaxaca-guia.html"
+        }
+      ],
+      "curationNote": "Table Journey for the cut, the 60 g salt to 800 g beef, the 24 hour rest and the fast grill with cebollitas, nopales and chiles de agua; Chilango and México Desconocido for tasajo stacked waiting for the grill and served on tlayudas. Most of the salt is rinsed off, so the nutrient total overstates sodium. One serving is about 90 g cooked."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_tripas",
+      "name": "Tripas (Suaves o Doradas)",
+      "region": "Mexico City and Central Mexico",
+      "servings": 6,
+      "flavorProfile": "Beef small intestine boiled tender and then fried in lard, soft and rich or fried longer until crunchy like chicharrón.",
+      "healthBenefit": "Tripas give protein and some zinc and vitamin B12, and frying them in lard makes them a rich taco meat best eaten now and then.",
+      "overallTier": "weak",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "beef small intestine (tripa de leche)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "well washed and turned",
+          "prepNote": "cleaned by the butcher"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "halved",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "whole cloves",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rinse the tripe again under cold running water, inside and out, until the water runs clear.",
+        "Cover it with the water in a pot, add the onion, garlic, salt and pepper and simmer until tender, 1 to 1½ hours (20 to 25 minutes if it was precooked). Drain, let it cool a little and cut in 2 to 3 cm pieces.",
+        "Heat the lard in a wide pan or a taquero comal over medium heat and fry the tripe, stirring now and then. For suave, take it out once it turns pale pink and hot through, 8 to 10 minutes.",
+        "For dorada, keep frying over medium-high heat until brown and crisp, 20 to 30 minutes in all. Drain and serve at once in hot tortillas with onion, cilantro, lime and salsa roja, since it loses its crunch as it cools."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the tripe."
+        },
+        {
+          "nutrient": "Fat",
+          "note": "Much of it from the lard the tripe fries in."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chilango, Taco de tripa: ¿suave o doradita?",
+          "url": "https://www.chilango.com/comida/mejores-tacos-de-tripa-en-la-cdmx/"
+        },
+        {
+          "source": "TV Azteca, Qué carne se usa para los tacos de tripa",
+          "url": "https://www.tvazteca.com/aztecauno/especiales-azteca/por-fin-lo-sabras-que-carne-se-usa-realmente-para-hacer-los-tacos-de-tripas"
+        }
+      ],
+      "curationNote": "Chilango for washing, boiling with onion, garlic and salt, frying in pork lard, and the suave or dorada choice with its colours; TV Azteca for beef small intestine, the 2 to 3 cm pieces and the toppings. TV Azteca fries in vegetable oil, and lard was kept as the taquería fat Chilango names. Beef intestine is not in the database. One serving is about 110 g cooked."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "fillet",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_chiles_en_escabeche",
+          "servings": 1.33,
+          "note": "pickled jalapeños, seeded and cut in strips"
+        }
+      ],
+      "id": "curated_mx_pescado_a_la_veracruzana",
+      "name": "Pescado a la Veracruzana",
+      "region": "Veracruz",
+      "servings": 4,
+      "flavorProfile": "Mild white fish baked in a chunky tomato sauce that is bright with olives, capers and pickled jalapeño, and fragrant with bay, thyme and a touch of cinnamon.",
+      "healthBenefit": "Snapper gives lean protein, selenium and vitamin B12, and the tomato and olive oil sauce adds vitamin C and lycopene, with salt from the olives and capers.",
+      "overallTier": "strong",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Snapper Fish",
+          "quantity": 700,
+          "unit": "g",
+          "cutPrep": "4 fillets of about 175 g, skin on",
+          "cookingMethod": "Baked",
+          "prepNote": "red snapper (huachinango) is the classic; any firm white fish works"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Olive Oil (Extra Virgin)",
+          "quantity": 6,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": "3 cloves whole, 2 minced",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 900,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Capers (In Vinegar / Raw)",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "drained",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Pickled Olives",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "green, about 12, whole or sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Parsley",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "leaves, chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Marjoram Spices",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed between the palms",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "White Wine",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": "dry",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat 4 tbsp olive oil in a heavy saucepan over medium-high heat. Brown the 3 whole garlic cloves on all sides, then lift them out and discard.",
+        "Add the minced garlic and onion and cook, stirring, until the onion is translucent, about 3 minutes. Stir in the tomatoes, lower the heat to medium-low and cook 15 minutes.",
+        "Add the capers, olives, jalapeños, bay, parsley, thyme, marjoram, oregano, cinnamon, wine and half the salt. Cover and simmer 15 to 20 minutes until thick. Taste for salt.",
+        "Heat the oven to 425 °F (220 °C). Salt the fillets lightly, rub them with the remaining oil and lay them in a baking dish.",
+        "Cover with the hot sauce and bake until the fish is opaque and flakes easily, 12 to 18 minutes, about 10 minutes per 2.5 cm of thickness. Serve with arroz blanco."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the snapper."
+        },
+        {
+          "nutrient": "Selenium",
+          "note": "From the fish."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomatoes and parsley."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Zarela Martínez, Pescado a la Veracruzana",
+          "url": "https://old.zarela.com/?p=10257"
+        },
+        {
+          "source": "Mexican Food Journal, Veracruz Style White Fish",
+          "url": "https://mexicanfoodjournal.com/veracruz-style-white-fish"
+        }
+      ],
+      "curationNote": "Zarela Martínez (from Veracruz cooking) for the sauce: garlic browned and discarded, tomato, capers, olives, pickled jalapeño strips, bay, parsley, thyme, marjoram, oregano, canela and white wine, and roasting at 425 °F. Mexican Food Journal confirms the fillet version simmered in the sauce, served with white rice. Zarela bakes a whole 3 lb fish; fillets were used here for home cooking. One serving is one fillet with sauce."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_bacalao_a_la_vizcaina",
+      "name": "Bacalao a la Vizcaína",
+      "region": "Mexico City and Central Mexico (Christmas Eve)",
+      "servings": 8,
+      "flavorProfile": "Flakes of salt cod in a rich, olive oil tomato sauce with roasted peppers, ancho, olives, little potatoes and tangy güero chiles.",
+      "healthBenefit": "Cod gives lean protein and vitamin B12 and the sauce brings vitamin C from tomato and red pepper, though the olive oil and salted fish make it a rich, salty holiday dish.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "dried salt cod (bacalao)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "soaked and shredded",
+          "prepNote": "soaked at least 24 hours, water changed 2 or 3 times"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 18,
+          "unit": "g",
+          "cutPrep": "finely minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "roasted and peeled",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "roasted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Bell Pepper",
+          "quantity": 350,
+          "unit": "g",
+          "cutPrep": "2 large, roasted, peeled and seeded",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, ancho",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "dried, stemmed and seeded",
+          "cookingMethod": null,
+          "prepNote": "toasted and soaked"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Olive Oil (Extra Virgin)",
+          "quantity": 17,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed between the palms",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "small new potatoes, boiled and peeled",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Pickled Olives",
+          "quantity": 140,
+          "unit": "g",
+          "cutPrep": "green, pitted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "pickled chiles güeros",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "whole",
+          "prepNote": "from a can or jar"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Parsley",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "leaves, chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "At least a day ahead, cover the salt cod with cold water and refrigerate it for 24 hours or longer, changing the water 2 or 3 times, until a flake tastes only mildly salty. Drain, pick out bones and skin, and shred.",
+        "Blend the garlic, tomato, onion, one of the roasted peppers and the ancho until very smooth.",
+        "Heat 16 tbsp olive oil in a wide casserole over medium heat, pour in the sauce (it will splatter) and fry it with the pepper, cumin, oregano and bay for 10 minutes, stirring.",
+        "Add the cod, potatoes, olives and güeros and cook over low heat, stirring now and then, for 30 to 40 minutes until the sauce thickens. Taste before adding any salt.",
+        "Cut the remaining pepper in 5 mm strips and fry them in the last tbsp of oil for 3 to 4 minutes. Lay them and the parsley over the bacalao and serve with bolillos. It tastes better the next day."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomato and red peppers."
+        },
+        {
+          "nutrient": "Monounsaturated fat",
+          "note": "From the olive oil."
+        }
+      ],
+      "citations": [
+        {
+          "source": "El Diario NY, Bacalao a la vizcaína al estilo mexicano",
+          "url": "https://eldiariony.com/2019/12/16/para-esta-navidad-prepara-un-bacalao-a-la-vizcaina-al-estilo-mexicano/"
+        },
+        {
+          "source": "ADN40, Receta de bacalao a la vizcaína",
+          "url": "https://www.adn40.mx/es-tendencia/2024-12-03/receta-bacalao-a-la-vizcaina-ingredientes/"
+        }
+      ],
+      "curationNote": "El Diario NY for the Mexican style: roasted tomato, onion, red pepper and ancho blended and fried in a cup of olive oil, cooked with the cod, new potatoes and olives for 30 minutes, pepper strips on top. ADN40 for the 24 hour soak with water changes, the parsley and the canned chiles güeros. Salt cod is not in the database (only fresh cod, which is a different form), so the cod is not counted. One serving is about 200 g."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_charales_en_salsa",
+      "name": "Charales con Nopales y Papas en Salsa de Cascabel",
+      "region": "Michoacán and the central lakes",
+      "servings": 6,
+      "flavorProfile": "Crisp little dried lake fish simmered in a nutty, gently hot red cascabel and tomato sauce with tender nopales and potato.",
+      "healthBenefit": "Eaten whole with their bones, charales give protein and calcium, and the nopales, potato and tomato add fiber, potassium and vitamin C.",
+      "overallTier": "strong",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "dried charales",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "heads off the larger ones",
+          "prepNote": "soaked 15 to 30 minutes with a splash of lime or vinegar to soften the bitterness"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Nopales",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "cleaned and diced",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "peeled, in cubes",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 110,
+          "unit": "g",
+          "cutPrep": "quartered",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried cascabel chiles",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": "stemmed",
+          "prepNote": "6 chiles"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 480,
+          "unit": "g",
+          "cutPrep": "whole",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Cover the nopales with water, add half the salt, one garlic clove and half the onion, and bring to a boil. Lower to medium and cook until they turn olive green and soft, 10 to 15 minutes. Drain, rinse in cold water and set aside.",
+        "Boil the potatoes over medium-low heat until just tender, 10 to 12 minutes. Drain.",
+        "Simmer the tomatoes, cascabel chiles, the other garlic clove and the remaining onion until soft and the tomato skins split, 8 to 10 minutes. Blend with the remaining salt and a little cooking water into a thick salsa.",
+        "Drain the charales well. Heat the oil in a clay cazuela and fry them, stirring all the time, until golden, 3 to 5 minutes.",
+        "Pour in the salsa and let it boil a few minutes, then add the nopales and potatoes and cook over medium-low heat for 5 to 10 minutes, until thick. Serve with arroz blanco or tostadas."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the tiny fish eaten whole with their bones."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From the nopales."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomato and nopales."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Charales con nopales y papas en salsa cascabel",
+          "url": "https://www.excelsior.com.mx/recetas/receta-charales-con-nopales-y-papas-salsa-cascabel"
+        },
+        {
+          "source": "México Desconocido, Los charales, un alimento extraordinario de los lagos mexicanos",
+          "url": "https://www.mexicodesconocido.com.mx/los-charales-un-alimento-extraordinario-de-los-lagos-mexicanos.html"
+        }
+      ],
+      "curationNote": "Excélsior for the Lenten guisado and its amounts (it lists potatoes twice; one batch of about 450 g was kept). México Desconocido for charales as Chirostoma from the highland lakes (Pátzcuaro, Chapala, Yuriria), Michoacán giving most of them, and the simplest way of eating them: dried, fried, with lime and hot sauce. Dried charales are not the database smelt, so they are not counted. One serving is about 250 g."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_chapulines",
+      "name": "Chapulines",
+      "region": "Oaxaca",
+      "servings": 8,
+      "flavorProfile": "Crunchy toasted grasshoppers, sour with lime, garlicky and salty with a little chile heat.",
+      "healthBenefit": "Chapulines are high in protein, and since some imported from Oaxaca have been found carrying lead, they are best bought from a trusted seller and kept out of lead-glazed pottery.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "fresh chapulines (grasshoppers)",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "cleaned and rinsed",
+          "prepNote": "the small seasonal kind from Oaxaca markets"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "finely minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried chiles de árbol",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "stemmed",
+          "prepNote": "toasted"
+        }
+      ],
+      "instructions": [
+        "Rinse the chapulines well in several changes of water.",
+        "Boil them for about 15 minutes, drain and spread them out to dry.",
+        "Toss them with the lime juice, garlic, salt and the chiles de árbol, ground, and leave 15 to 30 minutes.",
+        "Toast them on a comal or in a wide clay pan over medium heat, stirring all the time, until dry and crisp, 10 to 15 minutes. Eat as a botana with lime, or in tacos with guacamole, or on a tlayuda."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "Grasshoppers are mostly protein once dried."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the insects."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Animal Gourmet, Tacos de chapulín: el sabor oaxaqueño",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/tacos-de-chapulin-el-sabor-oaxaqueno"
+        },
+        {
+          "source": "TV Azteca, Tacos de chapulines de Oaxaca",
+          "url": "https://www.tvazteca.com/aztecauno/especiales-azteca/en-esta-zona-mexico-venden-el-taco-mas-raro-no-tiene-carne-todos-hacen"
+        },
+        {
+          "source": "Wikipedia, Chapulines (preparation and lead reports from Zimatlán)",
+          "url": "https://en.wikipedia.org/wiki/Chapulines"
+        }
+      ],
+      "curationNote": "Animal Gourmet for the Oaxacan method (rinse, boil 15 minutes, marinate with lime, garlic, salt and chile, toast in a clay pan); TV Azteca for serving in tacos with guacamole and lime, on tlayudas or as a botana. Wikipedia for comal toasting and the 2007 reports of lead in chapulines from Zimatlán, which is the caution in healthBenefit. Amounts are worked out; no source measured them. One serving is about 30 g."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_escamoles",
+      "name": "Escamoles a la Mantequilla",
+      "region": "Hidalgo and the Valle del Mezquital",
+      "servings": 4,
+      "flavorProfile": "Tender ant larvae sautéed in butter until opaque white, mild, nutty and buttery, with the sharp herb note of epazote.",
+      "healthBenefit": "Escamoles are rich in protein, and the butter makes this a rich dish served in small tacos.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "escamoles (ant larvae)",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "rinsed of ant remains and soil",
+          "prepNote": "harvested March to May"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Epazote",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "a few leaves, whole",
+          "cookingMethod": null,
+          "prepNote": "used sparingly, it is strong"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.75,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rinse the escamoles gently in cold water to remove any ant remains or soil, and drain.",
+        "Melt the butter with the oil in a skillet over medium heat and cook the onion until soft, 3 to 4 minutes.",
+        "Mix the escamoles with the serrano, add them to the pan and cook, stirring gently, until they turn opaque white, 3 to 5 minutes.",
+        "Season with the salt and epazote and leave on the heat for a minute or two more. Take out the epazote leaves and serve hot in fresh corn tortillas with salsa."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the escamoles."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "From the butter."
+        }
+      ],
+      "citations": [
+        {
+          "source": "México Desconocido, Escamoles: receta, propiedades y qué son",
+          "url": "https://www.mexicodesconocido.com.mx/escamoles-el-caviar-mexicano-de-hidalgo.html"
+        },
+        {
+          "source": "Chilango, Escápate a recolectar escamoles en Hidalgo",
+          "url": "https://www.chilango.com/viajes/escapate/recolectar-escamoles-en-hidalgo/"
+        }
+      ],
+      "curationNote": "México Desconocido for the amounts (400 g escamoles, 100 g butter, oil, onion, serrano, epazote) and the March to May season; Chilango for the Valle del Mezquital harvest and butter, onion, epazote and salt, eaten in a taco. Escamoles are not in the database. One serving is about 130 g."
+    },
+    {
+      "id": "curated_mx_salsa_de_jumiles",
+      "name": "Salsa de Jumiles",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Salsas",
+      "region": "Taxco, Guerrero",
+      "servings": 8,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "A rustic molcajete salsa of charred tomato, serrano and garlic, with the sharp, cinnamon and mint-like bite of ground jumiles.",
+      "healthBenefit": "Jumiles add a little protein to a salsa that is mostly tomato and chile, with vitamin C from both.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "jumiles (Taxco stink bugs)",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": "about 25, live or toasted",
+          "prepNote": "in season from October to January"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "seeded",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "a quarter",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 360,
+          "unit": "g",
+          "cutPrep": "3 ripe, whole",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.125,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Char the serranos, onion, garlic and tomatoes on a hot comal, turning, until blackened in spots and soft, 8 to 12 minutes.",
+        "Grind the garlic with the pepper and salt in a molcajete, then the chiles and onion, then the tomatoes, into a coarse salsa.",
+        "Add the jumiles and keep grinding until they disappear into the salsa. Taste for salt and serve with corn tortillas or over any guisado."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomato and serranos."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "A little, from the jumiles."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Animal Gourmet, Qué son los jumiles y receta de salsa",
+          "url": "https://grupoanimal.mx/gastronomia/jumiles-insectos-guerrero-receta"
+        },
+        {
+          "source": "México Desconocido, Jumiles, insectos comestibles de Taxco",
+          "url": "https://www.mexicodesconocido.com.mx/jumiles.html"
+        }
+      ],
+      "curationNote": "Jumiles are eaten in Taxco mostly as this salsa, so the dish is written as one. Animal Gourmet (citing Larousse Cocina) for the charred serranos, onion, garlic and tomato ground in a molcajete with the jumiles added last; México Desconocido for about 25 live jumiles per salsa, the Huixteco harvest in early November, and toasted jumiles used too. Jumiles are not in the database."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_recado_rojo",
+          "servings": 3.33,
+          "note": "achiote paste"
+        },
+        {
+          "recipeId": "curated_mx_base_caldo_de_pollo",
+          "servings": 0.25,
+          "note": null
+        }
+      ],
+      "id": "curated_mx_carne_al_pastor",
+      "name": "Carne al Pastor",
+      "region": "Mexico City",
+      "servings": 10,
+      "flavorProfile": "Thin sheets of pork in a brick-red guajillo, ancho and achiote adobo, tangy with orange and vinegar, charred and caramelized at the edges.",
+      "healthBenefit": "Pork gives protein, thiamine and zinc, and the dried chiles bring carotenoids, though the charred edges and the fat make this a rich taco meat.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 1500,
+          "unit": "g",
+          "cutPrep": "not too lean, in thin sheets about 5 mm thick",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried guajillo chiles",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "stemmed and seeded",
+          "prepNote": "toasted and soaked"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, ancho",
+          "quantity": 45,
+          "unit": "g",
+          "cutPrep": "dried, stemmed and seeded",
+          "cookingMethod": null,
+          "prepNote": "toasted and soaked"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Orange",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "juiced, about 180 ml",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Distilled Vinegar (White)",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "or 3 whole cloves"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Marjoram Spices",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed between the palms",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Toast the guajillos and anchos on a comal until fragrant and lightly darkened, 20 to 30 seconds a side. Soak them in warm water until soft, 10 to 15 minutes, and drain.",
+        "Blend the chiles with the achiote paste, garlic, orange juice, vinegar, broth, water, cloves, cumin, thyme, marjoram, oregano, allspice and salt into a smooth, pourable adobo.",
+        "Dip each sheet of pork in the adobo and stack them in a dish, rubbing the sauce into every fold. Pour the rest over, cover and refrigerate at least 12 hours.",
+        "At home, without a trompo: heat a heavy skillet or comal over high heat with a little lard and sear the sheets in batches until charred at the edges and cooked through, 3 to 4 minutes a side. Or stack them tightly on a skewer and roast at 400 °F (200 °C) for 60 to 75 minutes, then slice thin from the outside and crisp the slices on the comal.",
+        "Chop and serve hot for tacos al pastor."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the pork shoulder."
+        },
+        {
+          "nutrient": "Thiamine",
+          "note": "Pork is a rich source."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "Carotenoids from the dried chiles and achiote."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Animal Gourmet, Receta original de adobo para tacos al pastor",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/receta-original-de-adobo-para-tacos-al-pastor"
+        },
+        {
+          "source": "Excélsior, Cómo hacer tacos al pastor sin trompo",
+          "url": "https://www.excelsior.com.mx/recetas/como-hacer-tacos-pastor-sin-trompo-receta-casera-sarten"
+        }
+      ],
+      "curationNote": "Animal Gourmet for the taquería adobo (guajillo, ancho, achiote, orange juice, white vinegar, broth, clove, cumin, thyme, marjoram, oregano, allspice) and the 12 hour marinade of thin pulpa sheets; Excélsior for the 1.2 to 1.5 kg of pork and searing in a hot pan in batches at home. The oven skewer is a home stand-in for the trompo. One serving is about 100 g cooked, enough for 3 tacos."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_arrachera",
+      "name": "Arrachera",
+      "region": "Nuevo León",
+      "servings": 6,
+      "flavorProfile": "Skirt steak soaked in lime, beer and a dark seasoning sauce, seared hard until the edges crust and the inside stays juicy.",
+      "healthBenefit": "Skirt steak gives protein, iron, zinc and vitamin B12, and searing it in a little oil keeps the added fat low.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Plate Skirt Steak (Raw)",
+          "quantity": 900,
+          "unit": "g",
+          "cutPrep": "trimmed of membrane",
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "jugo sazonador (Maggi seasoning sauce)",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "salsa inglesa (Worcestershire sauce)",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, mustard seed, yellow",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Pale beer",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mix the lime juice, seasoning sauce, Worcestershire, mustard seeds, garlic and oil. Lay the skirt steak in it, pour the beer over and refrigerate 1 to 2 hours.",
+        "Lift the meat out and pat it dry. Heat a grill, a heavy pan or a comal over high heat until very hot.",
+        "Sear the steak about 5 minutes a side, depending on thickness, salting it as it cooks. Cut into strips or let the liquid it releases cook off until the strips brown well, about 15 minutes in all.",
+        "Rest 5 minutes, then slice across the grain and chop for tacos."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the skirt steak."
+        },
+        {
+          "nutrient": "Vitamin B12",
+          "note": "Beef is a rich source."
+        },
+        {
+          "nutrient": "Zinc",
+          "note": "Also from the beef."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Mexican Food Journal, Arrachera (skirt steak) tacos",
+          "url": "https://mexicanfoodjournal.com/arrachera-skirt-steak-tacos/"
+        },
+        {
+          "source": "Gastrolab, Tacos de arrachera",
+          "url": "https://www.gastrolabweb.com/recetas/2021/3/31/feliz-dia-del-taco-receta-para-preparar-disfrutar-unos-tacos-de-arrachera-8426.html"
+        }
+      ],
+      "curationNote": "Gastrolab for the marinade (lime, seasoning sauce, Worcestershire, mustard seed, garlic, oil, light beer, 1 to 2 hours chilled) and 5 minutes a side; Mexican Food Journal for searing strips of 2 lb arrachera over high heat with salt until the liquid cooks off, about 15 minutes. The seasoning sauce and Worcestershire are not in the database. One serving is about 100 g cooked, enough for 3 tacos."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "components": [],
+      "id": "curated_mx_pollo_asado",
+      "name": "Pollo Asado Estilo Sinaloa",
+      "region": "Sinaloa",
+      "servings": 6,
+      "flavorProfile": "Butterflied chicken soaked in citrus, garlic, vinegar and a little pineapple, grilled over charcoal until the skin chars and the meat stays moist.",
+      "healthBenefit": "Chicken gives protein, niacin and vitamin B6, and the citrus marinade adds flavor with almost no added fat.",
+      "overallTier": "moderate",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Chicken Thigh (with skin)",
+          "quantity": 800,
+          "unit": "g",
+          "cutPrep": "bone in",
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Chicken, broiler, breast, skinless, boneless, meat",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "or a whole chicken, spatchcocked",
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 90,
+          "unit": "ml",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Orange",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "juiced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, cider",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Paprika",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed between the palms",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Pineapple",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "one slice",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 180,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Grind the garlic with the pepper in a molcajete or blender. Add the lime and orange juice, vinegar, paprika, oregano, pineapple, salt and water and blend until smooth.",
+        "Coat the chicken all over with the marinade and refrigerate at least 2 hours, or overnight.",
+        "Grill over medium charcoal, skin side down first, turning and basting with the marinade, until golden and charred in places and the juices run clear, 40 to 50 minutes. In an oven, broil at about 3 inches from the element, 20 minutes a side, then uncover to char.",
+        "Rest 5 minutes, pull the meat from the bones and chop it for tacos."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken."
+        },
+        {
+          "nutrient": "Niacin",
+          "note": "Chicken is a rich source."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "A little from the citrus and pineapple."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Luz Noticias, Receta para preparar el mejor pollo asado estilo Sinaloa",
+          "url": "https://www.luznoticias.mx/2024-04-09/sinaloa/receta-para-preparar-el-mejor-pollo-asado-estilo-sinaloa/201303"
+        },
+        {
+          "source": "My Slice of Mexico, Sinaloa style chicken",
+          "url": "https://mysliceofmexico.ca/2019/05/17/sinaloa-style-chicken-not-too-crazy/"
+        }
+      ],
+      "curationNote": "Luz Noticias for the Sinaloa marinade (lemon, cider vinegar, garlic ground with peppercorns, paprika, a slice of pineapple, water, at least 2 hours, charcoal); My Slice of Mexico for the orange, lime and oregano, the spatchcocked bird and the broiler method. Thighs and breast stand in for a whole chicken so the database rows match. One serving is about 100 g of meat off the bone."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_al_pastor",
+      "name": "Tacos al Pastor",
+      "region": "Mexico City",
+      "flavorProfile": "Charred, chile-red pork on small corn tortillas with sweet grilled pineapple, sharp onion, cilantro and green salsa.",
+      "healthBenefit": "The pork brings protein and thiamine and the pineapple adds vitamin C, though this is a rich taco to keep for a treat.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_carne_al_pastor",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed on the comal"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_verde",
+          "servings": 4,
+          "note": null
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fruit",
+          "baseName": "Pineapple",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "peeled, in thin slices",
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Grill or sear the pineapple slices on a hot comal until caramelized at the edges, 2 to 3 minutes a side, then chop them small.",
+        "Crisp the chopped pastor on the comal for 1 to 2 minutes and warm the tortillas.",
+        "Fill each tortilla with pastor and top with a little pineapple, onion, cilantro and green salsa.",
+        "Set out the onion, cilantro and lime wedges so each taco can be finished at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the pork."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the pineapple and lime."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Animal Gourmet, Receta original de adobo para tacos al pastor",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/receta-original-de-adobo-para-tacos-al-pastor"
+        },
+        {
+          "source": "Excélsior, Cómo hacer tacos al pastor sin trompo",
+          "url": "https://www.excelsior.com.mx/recetas/como-hacer-tacos-pastor-sin-trompo-receta-casera-sarten"
+        }
+      ],
+      "curationNote": "The pastor meat is its own recipe, Carne al Pastor. Excélsior names caramelized pineapple, onion and cilantro as the toppings at home. Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_de_arrachera",
+      "name": "Tacos de Arrachera",
+      "region": "Nuevo León",
+      "flavorProfile": "Juicy chopped skirt steak with a roasted tomatillo salsa, charred spring onions and grilled jalapeños on the side.",
+      "healthBenefit": "Skirt steak gives protein, iron and zinc, and the salsa and grilled vegetables add vitamin C.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_arrachera",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed on the comal"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_verde",
+          "servings": 4,
+          "note": null
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Spring onion",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "whole, trimmed",
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, jalapeno",
+          "quantity": 90,
+          "unit": "g",
+          "cutPrep": "whole",
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Char the spring onions and jalapeños on a dry, hot pan or grill, turning until browned on all sides, 6 to 10 minutes.",
+        "Chop the arrachera and warm the tortillas.",
+        "Fill each tortilla with 2 or 3 strips of meat and plenty of salsa, with the spring onions, jalapeños and lime on the side."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the skirt steak."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "Heme iron from the beef."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Mexican Food Journal, Arrachera (skirt steak) tacos",
+          "url": "https://mexicanfoodjournal.com/arrachera-skirt-steak-tacos/"
+        },
+        {
+          "source": "Gastrolab, Tacos de arrachera",
+          "url": "https://www.gastrolabweb.com/recetas/2021/3/31/feliz-dia-del-taco-receta-para-preparar-disfrutar-unos-tacos-de-arrachera-8426.html"
+        }
+      ],
+      "curationNote": "Both sources serve arrachera with a tomatillo salsa and charred cebollitas; Gastrolab adds grilled jalapeños. Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_de_asada",
+      "name": "Tacos de Asada",
+      "region": "Sonora",
+      "flavorProfile": "Smoky chopped grilled beef with a red table salsa, guacamole, onion, cilantro and lime.",
+      "healthBenefit": "Beef gives protein, iron and vitamin B12, and the guacamole adds fiber and mostly unsaturated fat.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_carne_asada",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed on the comal"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_roja",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_guacamole",
+          "servings": 2,
+          "note": null
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Chop the hot carne asada small on the board and warm the tortillas on the grill or comal.",
+        "Fill each tortilla with meat, then add guacamole and salsa.",
+        "Set out the onion, cilantro and lime wedges so each taco can be finished at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the beef."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From the avocado."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Cocina Fácil, Cómo sazonar la carne asada",
+          "url": "https://www.cocinafacil.com.mx/recetas/como-sazonar-la-carne-asada-5-recetas-deliciosas"
+        },
+        {
+          "source": "Wikipedia, Carne asada",
+          "url": "https://en.wikipedia.org/wiki/Carne_asada"
+        }
+      ],
+      "curationNote": "Corn tortillas suit the central style; in Sonora flour tortillas are as common. Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_de_barbacoa",
+      "name": "Tacos de Barbacoa",
+      "region": "Hidalgo",
+      "flavorProfile": "Tender pit-steamed lamb on corn tortillas with a red salsa, chopped onion, cilantro and lime.",
+      "healthBenefit": "Lamb gives protein, zinc and vitamin B12; it is a fatty meat, so the onion, salsa and lime keep the plate lively.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_barbacoa",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed on the comal"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_roja",
+          "servings": 4,
+          "note": null
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Warm the barbacoa, covered, so it stays moist, and heat the tortillas.",
+        "Fill each tortilla with shredded meat and spoon salsa over it.",
+        "Set out the onion, cilantro and lime wedges so each taco can be finished at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the lamb."
+        },
+        {
+          "nutrient": "Zinc",
+          "note": "Lamb is a good source."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Animal Gourmet, El chilpatli de Guerrero y la barbacoa de borrego de Hidalgo",
+          "url": "https://grupoanimal.mx/gastronomia/cocinerastradicionales-el-chilpatli-de-guerrero-y-la-barbacoa-de-borrego-de-hidalgo"
+        },
+        {
+          "source": "Pati Jinich, Barbacoa",
+          "url": "https://patijinich.com/es/barbacoa/"
+        }
+      ],
+      "curationNote": "Served on weekend mornings in Hidalgo and Mexico State, often with the consomé from the pit on the side. Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_de_birria",
+      "name": "Tacos de Birria",
+      "region": "Jalisco",
+      "flavorProfile": "Shredded chile-braised goat on tortillas dipped in the red fat of the consomé, with onion, cilantro, lime and a cup of consomé to sip.",
+      "healthBenefit": "Goat is a lean red meat with protein and iron, and the dried chiles bring carotenoids.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_birria",
+          "servings": 4,
+          "note": "meat with its consomé"
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed on the comal"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_taquera",
+          "servings": 4,
+          "note": null
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Skim a little of the red fat from the top of the consomé. Dip each tortilla in it and warm it on a hot comal.",
+        "Fill with shredded birria, fold and crisp each taco on the comal for 1 to 2 minutes a side.",
+        "Serve with onion, cilantro, lime, salsa and a small cup of hot consomé for dipping."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the goat."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "Heme iron from the meat."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Animal Gourmet, Receta de birria",
+          "url": "https://www.animalgourmet.com/2020/01/16/receta-de-birria"
+        },
+        {
+          "source": "Mexican Food Journal, Birria with consomé",
+          "url": "https://mexicanfoodjournal.com/birria-with-consome/"
+        }
+      ],
+      "curationNote": "For quesabirria, the Tijuana style, lay melting cheese on the dipped tortilla before the meat and fold it on the comal until the cheese melts. Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_de_cabeza",
+      "name": "Tacos de Cabeza",
+      "region": "Mexico City",
+      "flavorProfile": "Soft steamed beef head meat on small steamed tortillas, with green salsa, onion and cilantro.",
+      "healthBenefit": "Head meat gives protein and collagen, and the cuts vary from lean to rich.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_cabeza",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed on the comal"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_verde",
+          "servings": 4,
+          "note": null
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Steam the tortillas over the meat or in a covered basket until soft, 2 to 3 minutes.",
+        "Chop the cabeza and fill each tortilla, then add salsa.",
+        "Set out the onion, cilantro and lime wedges so each taco can be finished at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the beef head meat."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Cookpad, Tacos de cabeza de res",
+          "url": "https://cookpad.com/mx/recetas/100412"
+        },
+        {
+          "source": "Chilango, Los mejores tacos de cabeza en la CDMX",
+          "url": "https://www.chilango.com/comida/los-mejores-tacos-de-cabeza-en-la-cdmx/"
+        }
+      ],
+      "curationNote": "At a taquería de cabeza the person asks for maciza, cachete, lengua, ojo or sesos; this taco uses the mixed cabeza. Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_de_camaron",
+      "name": "Tacos de Camarón Estilo Ensenada",
+      "region": "Baja California",
+      "flavorProfile": "Crisp beer-battered shrimp on corn tortillas with shredded red and white cabbage, avocado and a smoky chipotle cream.",
+      "healthBenefit": "Shrimp gives protein, selenium and vitamin B12 and the cabbage adds vitamin C, though the frying makes this an occasional taco.",
+      "overallTier": "weak",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed on the comal"
+        },
+        {
+          "recipeId": "curated_mx_base_crema",
+          "servings": 2,
+          "note": "blended with lime and chipotle"
+        },
+        {
+          "recipeId": "curated_mx_base_pico_de_gallo",
+          "servings": 2,
+          "note": "salsa bandera"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Shrimp Crustaceans",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "medium, peeled and cleaned",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, Type 405",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "sifted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Pale beer",
+          "quantity": 350,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baking powder, dry powder",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Garlic powder",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed between the palms",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Cabbage",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "finely shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cabbage",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "finely shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Avocado",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "chipotle chiles in adobo",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Sift the flour and mix it with the salt, pepper, garlic powder, oregano and baking powder. Whisk in the beer, then the egg, until no lumps remain. Cover and set aside.",
+        "Heat oil about 1½ inches (4 cm) deep to 350 to 375 °F (175 to 190 °C). Dip the shrimp one at a time in the batter, let the extra drip off and fry a few at a time until deep golden, 2 to 3 minutes. Drain on paper towels.",
+        "Blend the crema with the lime juice and chipotle.",
+        "Fill each warm tortilla with 2 or 3 shrimp, the mixed cabbage, avocado, salsa bandera and the chipotle cream. Eat right away while the batter is crisp."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Selenium",
+          "note": "Shrimp is a rich source."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the cabbage and salsa."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Tacos de camarón estilo Ensenada",
+          "url": "https://www.excelsior.com.mx/recetas/receta-tacos-camaron-estilo-ensenada"
+        },
+        {
+          "source": "Chilango, Tacos estilo Ensenada en la CDMX",
+          "url": "https://www.chilango.com/comida-y-tragos/tacos/tacos-estilo-ensenada-en-cdmx/"
+        }
+      ],
+      "curationNote": "Excélsior for the batter (2 cups flour, 1 egg, 350 ml beer, baking powder, garlic powder, oregano), the 500 g of shrimp for 12 tortillas, the two cabbages, avocado and chipotle cream; Chilango for the salsa bandera, as the pico de gallo is called in Ensenada. The oil row counts what the batter absorbs, not the frying oil. Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_de_carnitas",
+      "name": "Tacos de Carnitas",
+      "region": "Michoacán",
+      "flavorProfile": "Lard-simmered pork, soft in the middle and crisp at the edges, with green salsa, onion, cilantro and lime.",
+      "healthBenefit": "Pork gives protein, thiamine and zinc; the lard cooking makes this a rich taco, and the salsa and lime freshen it.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_carnitas",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed on the comal"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_verde",
+          "servings": 4,
+          "note": null
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Chop the carnitas, mixing the cuts, and crisp them on a hot comal for 1 to 2 minutes.",
+        "Fill each warm tortilla with meat and add salsa.",
+        "Set out the onion, cilantro and lime wedges so each taco can be finished at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the pork."
+        },
+        {
+          "nutrient": "Thiamine",
+          "note": "Pork is a rich source."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Cocina Fácil, Tacos de carnitas estilo Michoacán",
+          "url": "https://www.cocinafacil.com.mx/recetas/tacos-de-carnitas-estilo-michoacan"
+        },
+        {
+          "source": "Larousse Cocina, Carnitas",
+          "url": "https://laroussecocina.mx/receta/carnitas/"
+        }
+      ],
+      "curationNote": "In Michoacán a person asks for maciza, cuerito, buche or surtida; this taco uses the mixed carnitas. Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_de_chicharron",
+      "name": "Tacos de Chicharrón en Salsa Verde",
+      "region": "Central Mexico",
+      "flavorProfile": "Pork crackling softened in a bright tomatillo, serrano and cilantro salsa, spooned into tortillas with a little queso fresco.",
+      "healthBenefit": "The tomatillo salsa brings vitamin C, while the crackling is salty and rich, so this is a guisado for now and then.",
+      "overallTier": "weak",
+      "components": [
+        {
+          "recipeId": "curated_mx_chicharron",
+          "servings": 3,
+          "note": "about 200 g, broken in pieces"
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed on the comal"
+        },
+        {
+          "recipeId": "curated_mx_base_queso_fresco",
+          "servings": 2,
+          "note": "crumbled"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Tomatillo",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "husked",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": "stemmed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "leaves and tender stems",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Blend the tomatillos, serranos, onion, cilantro and water until smooth.",
+        "Heat the oil in a pan and fry the garlic until golden, 1 to 2 minutes. Pour in the salsa and cook until it darkens in color, 5 to 8 minutes.",
+        "Add the chicharrón, stir to coat and simmer until it softens, 5 to 10 minutes. Taste before salting, since the chicharrón is already salty.",
+        "Spoon into warm tortillas and top with queso fresco."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomatillos and serranos."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Animal Gourmet, Guisados para taquiza",
+          "url": "https://grupoanimal.mx/gastronomia/guisados-taquiza-sencillos-deliciosos"
+        },
+        {
+          "source": "Cookpad México, Tacos de chicharrón en salsa verde",
+          "url": "https://cookpad.com/mx/recetas/100285"
+        }
+      ],
+      "curationNote": "Animal Gourmet for the 200 g of chicharrón, the blended raw salsa and frying the garlic first; Cookpad for serving it with queso fresco and saving the salt. Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_de_cochinita",
+      "name": "Tacos de Cochinita Pibil",
+      "region": "Yucatán",
+      "flavorProfile": "Achiote and sour orange pork, slow cooked in banana leaves, topped with pink pickled red onion and habanero.",
+      "healthBenefit": "Pork gives protein and thiamine, and the pickled onion adds a sharp, fresh contrast with very little fat.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_cochinita_pibil",
+          "servings": 4,
+          "note": "with some of its juices"
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed on the comal"
+        },
+        {
+          "recipeId": "curated_mx_base_cebolla_encurtida",
+          "servings": 4,
+          "note": "red onion pickled with habanero"
+        }
+      ],
+      "ingredients": [],
+      "instructions": [
+        "Warm the cochinita in its juices and heat the tortillas.",
+        "Fill each tortilla with shredded pork, moisten with a spoonful of the juices and top with pickled red onion."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the pork."
+        },
+        {
+          "nutrient": "Thiamine",
+          "note": "Pork is a rich source."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Larousse Cocina, Cochinita pibil",
+          "url": "https://laroussecocina.mx/receta/cochinita-pibil/"
+        },
+        {
+          "source": "Por Esto, Cómo preparar cochinita siguiendo la receta tradicional",
+          "url": "https://www.poresto.com/yucatan/2020/8/10/como-preparar-cochinita-siguiendo-la-receta-tradicional.html"
+        }
+      ],
+      "curationNote": "In Yucatán cochinita is eaten in tacos and tortas in the morning with the habanero onion and no cilantro. Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_de_lengua",
+      "name": "Tacos de Lengua",
+      "region": "Mexico City",
+      "flavorProfile": "Tender, mild beef tongue, chopped and browned lightly, with green salsa, onion and cilantro.",
+      "healthBenefit": "Tongue gives protein, zinc and vitamin B12, and it is a rich cut.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_lengua",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed on the comal"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_verde",
+          "servings": 4,
+          "note": null
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Dice the cooked tongue and brown it lightly on the comal, 2 to 3 minutes.",
+        "Fill each warm tortilla and add salsa.",
+        "Set out the onion, cilantro and lime wedges so each taco can be finished at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin B12",
+          "note": "Beef tongue is a rich source."
+        },
+        {
+          "nutrient": "Zinc",
+          "note": "Also from the tongue."
+        }
+      ],
+      "citations": [
+        {
+          "source": "El Universal, Tacos de lengua de res de Doña Ángela",
+          "url": "https://www.eluniversal.com.mx/menu/receta-tacos-de-lengua-de-res-de-dona-angela/"
+        },
+        {
+          "source": "Animal Gourmet, Lengua de res: tiempo de cocción y limpieza",
+          "url": "https://grupoanimal.mx/gastronomia/tips/lengua-res-tiempo-coccion-limpieza"
+        }
+      ],
+      "curationNote": "Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_de_pescado",
+      "name": "Tacos de Pescado Estilo Ensenada",
+      "region": "Baja California",
+      "flavorProfile": "Strips of white fish in a light, crisp beer batter on corn tortillas with cabbage, salsa bandera and a creamy mayonnaise sauce.",
+      "healthBenefit": "White fish gives lean protein, selenium and vitamin B12, and the cabbage and salsa add vitamin C; frying makes it an occasional taco.",
+      "overallTier": "weak",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed on the comal"
+        },
+        {
+          "recipeId": "curated_mx_base_crema",
+          "servings": 2.5,
+          "note": "for the Baja cream"
+        },
+        {
+          "recipeId": "curated_mx_base_pico_de_gallo",
+          "servings": 4,
+          "note": "salsa bandera"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Snapper Fish",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "skinless fillets, in strips about 3 inches long",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "mashed to a paste with salt",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed between the palms",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Mustard, prepared, yellow",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Pale beer",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, Type 405",
+          "quantity": 125,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baking powder, dry powder",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Dressing, mayonnaise, whole egg type",
+          "quantity": 5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "enough to make the cream spoonable"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cabbage",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "finely shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mash the garlic with salt into a paste. Whisk it with the oregano, pepper, mustard and salt, then the beer. Add the flour and baking powder and whisk just until combined.",
+        "Stir the mayonnaise and crema together with enough milk to make a spoonable sauce.",
+        "Heat oil about 1½ inches (4 cm) deep to 375 °F (190 °C). Dip the fish strips in the batter and fry in an uncrowded layer, turning, until deep golden and crisp, about 4 minutes a batch. Drain on paper towels.",
+        "Serve with the warm tortillas, cabbage, salsa bandera, the cream and lime so each taco is built at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Selenium",
+          "note": "From the fish."
+        },
+        {
+          "nutrient": "Vitamin B12",
+          "note": "Also from the fish."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Rick Bayless, Classic Ensenada fish tacos",
+          "url": "https://www.rickbayless.com/recipe/classic-ensenada-fish-tacos/"
+        },
+        {
+          "source": "Selecciones, Taco de pescado estilo Ensenada",
+          "url": "https://selecciones.com.mx/aprende-a-preparar-el-taco-de-pescado-estilo-ensenada"
+        }
+      ],
+      "curationNote": "Rick Bayless for the batter (garlic, oregano, pepper, yellow mustard, beer, flour, baking powder; his chicken bouillon is left out), 1 lb of fish for 12 tacos, 375 °F and the Baja cream of mayonnaise, crema and milk; Selecciones for robalo, huachinango or cazón and the salsa bandera. The oil row counts what the batter absorbs. Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_de_pollo",
+      "name": "Tacos de Pollo Asado",
+      "region": "Sinaloa",
+      "flavorProfile": "Chopped citrus-marinated grilled chicken with a blended red salsa, onion, cilantro and lime.",
+      "healthBenefit": "Chicken is a lean protein with niacin and vitamin B6, and the salsa and lime add vitamin C.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_mx_pollo_asado",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed on the comal"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_roja",
+          "servings": 4,
+          "note": null
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Chop the grilled chicken, with some of the charred skin if wanted, and warm the tortillas on the grill.",
+        "Fill each tortilla with chicken and spoon salsa over.",
+        "Set out the onion, cilantro and lime wedges so each taco can be finished at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken."
+        },
+        {
+          "nutrient": "Niacin",
+          "note": "Chicken is a rich source."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Luz Noticias, Receta para preparar el mejor pollo asado estilo Sinaloa",
+          "url": "https://www.luznoticias.mx/2024-04-09/sinaloa/receta-para-preparar-el-mejor-pollo-asado-estilo-sinaloa/201303"
+        },
+        {
+          "source": "My Slice of Mexico, Sinaloa style chicken",
+          "url": "https://mysliceofmexico.ca/2019/05/17/sinaloa-style-chicken-not-too-crazy/"
+        }
+      ],
+      "curationNote": "Both sources serve the grilled chicken with warm corn tortillas and a blended tomato salsa. Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_de_sesos",
+      "name": "Tacos de Sesos",
+      "region": "Mexico City",
+      "flavorProfile": "Creamy beef brains cooked with epazote and chile, on soft tortillas with green salsa, onion and cilantro.",
+      "healthBenefit": "Brains are rich in vitamin B12 and omega-3 fats but very high in cholesterol, so they are eaten now and then.",
+      "overallTier": "weak",
+      "components": [
+        {
+          "recipeId": "curated_mx_sesos",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed on the comal"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_verde",
+          "servings": 4,
+          "note": null
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Warm the sesos gently in a covered pan so they stay soft, and steam or warm the tortillas.",
+        "Fill each tortilla and add salsa.",
+        "Set out the onion, cilantro and lime wedges so each taco can be finished at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin B12",
+          "note": "Brains are an unusually rich source."
+        },
+        {
+          "nutrient": "Cholesterol",
+          "note": "Very high, which is why this is an occasional taco."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Animal Gourmet, La quesadilla de sesos: cómo prepararla",
+          "url": "https://grupoanimal.mx/gastronomia/quesadilla-de-sesos-como-preparar"
+        },
+        {
+          "source": "Chilango, Los mejores tacos de cabeza en la CDMX",
+          "url": "https://www.chilango.com/comida/los-mejores-tacos-de-cabeza-en-la-cdmx/"
+        }
+      ],
+      "curationNote": "Sesos are one of the fillings at a taquería de cabeza and are also folded into quesadillas. Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_de_suadero",
+      "name": "Tacos de Suadero",
+      "region": "Mexico City",
+      "flavorProfile": "Beef confited slowly in fat until tender, then crisped on the comal, on small tortillas with green salsa, onion and cilantro.",
+      "healthBenefit": "Beef gives protein, iron and vitamin B12; the confit cooking makes it rich, so the salsa and lime balance it.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_suadero",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed on the comal"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_verde",
+          "servings": 4,
+          "note": null
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Chop the suadero and crisp it on the comal, 1 to 2 minutes. Pass the tortillas through the fat for a moment to warm and soften them.",
+        "Fill each tortilla and add salsa.",
+        "Set out the onion, cilantro and lime wedges so each taco can be finished at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the beef."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "Heme iron from the beef."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Animal Gourmet, Tacos de suadero en casa",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/receta-tacos-de-suadero-en-casa"
+        },
+        {
+          "source": "Excélsior, Tacos de suadero estilo taquería",
+          "url": "https://www.excelsior.com.mx/recetas/receta-tacos-suadero-estilo-taquerias"
+        }
+      ],
+      "curationNote": "Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_de_tripa",
+      "name": "Tacos de Tripa",
+      "region": "Mexico City",
+      "flavorProfile": "Beef small intestine simmered then fried, soft or crisp to order, with red salsa, onion and cilantro.",
+      "healthBenefit": "Tripa gives protein and vitamin B12 but is fatty, especially when fried crisp.",
+      "overallTier": "weak",
+      "components": [
+        {
+          "recipeId": "curated_mx_tripas",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed on the comal"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_roja",
+          "servings": 4,
+          "note": null
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Chop the tripas and fry them on the comal to taste: 2 to 3 minutes for suave, 6 to 8 minutes for doradita.",
+        "Fill each warm tortilla and add salsa.",
+        "Set out the onion, cilantro and lime wedges so each taco can be finished at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin B12",
+          "note": "From the intestine."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chilango, Taco de tripa: ¿suave o doradita?",
+          "url": "https://www.chilango.com/comida/mejores-tacos-de-tripa-en-la-cdmx/"
+        },
+        {
+          "source": "TV Azteca, Qué carne se usa para los tacos de tripa",
+          "url": "https://www.tvazteca.com/aztecauno/especiales-azteca/por-fin-lo-sabras-que-carne-se-usa-realmente-para-hacer-los-tacos-de-tripas"
+        }
+      ],
+      "curationNote": "Chilango describes the choice between suave and doradita. Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_dorados",
+      "name": "Tacos Dorados de Pollo",
+      "region": "Mexico",
+      "flavorProfile": "Crisp fried rolled tacos of shredded chicken under lettuce, tomato, avocado, cream, crumbled cheese and green salsa.",
+      "healthBenefit": "The chicken gives protein and the toppings add vitamins A and C and fiber, though frying makes this an occasional dish.",
+      "overallTier": "weak",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_pollo_deshebrado",
+          "servings": 3,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "a day old, so they roll without tearing"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_verde",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_crema",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_queso_fresco",
+          "servings": 3.33,
+          "note": "crumbled"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, cos or romaine",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "finely shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Avocado",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "If the tortillas are fresh, lay them on a cloth for 30 minutes to dry a little; if they are cold, warm them a few seconds so they bend.",
+        "Put 1 to 2 tablespoons of chicken at one edge of each tortilla, roll it tightly and pin it with a toothpick if needed.",
+        "Heat oil about 1 inch (2.5 cm) deep to 350 to 375 °F (175 to 190 °C). Fry the tacos seam side down first, 2 to 3 minutes a side, until golden and crisp. Drain on paper towels and remove the toothpicks.",
+        "Plate 3 tacos each and top with lettuce, tomato and avocado, then cream, cheese and salsa. Serve at once."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken and cheese."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the lettuce and tomato."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Tacos de pollo dorados y súper crujientes",
+          "url": "https://www.excelsior.com.mx/recetas/tacos-pollo-dorados-y-super-crujientes-tradicionales-cocina-mexicana"
+        },
+        {
+          "source": "Animal Gourmet, Tacos dorados de pollo en salsa verde",
+          "url": "https://grupoanimal.mx/gastronomia/receta-tacos-dorados-de-pollo-en-salsa-verde"
+        }
+      ],
+      "curationNote": "Excélsior for drying the tortillas, frying seam side down at 175 to 190 °C for 2 to 3 minutes a side, and the lettuce, tomato, avocado, crema and cheese; Animal Gourmet for the green salsa. The oil row counts what the tacos absorb. Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tacos",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "taco",
+      "id": "curated_mx_tacos_gobernador",
+      "name": "Tacos Gobernador",
+      "region": "Sinaloa",
+      "flavorProfile": "Shrimp sautéed in butter with poblano, onion and tomato, folded with melting cheese into a tortilla crisped on the griddle.",
+      "healthBenefit": "Shrimp brings protein, selenium and vitamin B12 and the poblano adds vitamin C, though the cheese and butter make it rich.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed on the comal"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Butter, plain, salted",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "poblano chile",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "stemmed, seeded and thinly sliced",
+          "prepNote": "sautéed, not roasted"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 9,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 170,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, serrano",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Shrimp Crustaceans",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "small, peeled and chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "salsa inglesa (Worcestershire sauce)",
+          "quantity": 10,
+          "unit": "ml",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Tomato paste",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Queso Chihuahua",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Melt the butter in a skillet over medium heat. Cook the poblano and onion, stirring, until soft and lightly browned, 5 to 7 minutes. Add the garlic for 1 minute, then the tomato and serrano for 2 to 3 minutes more.",
+        "Add the shrimp and stir 2 to 3 minutes, until they turn from translucent to white. Add the Worcestershire and let it cook off, then take the pan off the heat, stir in the tomato paste and season with salt.",
+        "Heat a griddle over medium-high heat. Brush one side of a tortilla with oil, lay it oiled side down, scatter cheese on it, add shrimp and fold it over.",
+        "Cook, turning, until the cheese melts and the tortilla is crisp, 2 to 3 minutes. Eat straight off the griddle."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Selenium",
+          "note": "From the shrimp."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the cheese."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the poblano and tomato."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Rick Bayless, Governor’s tacos",
+          "url": "https://www.rickbayless.com/recipe/governors-tacos/"
+        },
+        {
+          "source": "Pati Jinich, Tacos gobernador de camarón",
+          "url": "https://www.patijinich.com/?p=20403"
+        },
+        {
+          "source": "Excélsior, Tacos gobernador estilo Sinaloa",
+          "url": "https://www.excelsior.com.mx/recetas/receta-tacos-gobernador-estilo-sinaloa"
+        }
+      ],
+      "curationNote": "Rick Bayless for the quantities (1 lb shrimp, 12 tortillas, sautéed rather than roasted poblano) and the griddle method; Pati Jinich and Excélsior for the story of Los Arcos in Mazatlán and Governor Francisco Labastida Ochoa, dated to the 1980s or early 1990s. Excélsior adds celery and manchego; Pati Jinich adds chipotle. Poblano and Worcestershire are not in the database. Four plates of 3 tacos, so 12 tortillas."
     }
   ]
 }
