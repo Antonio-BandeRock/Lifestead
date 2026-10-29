@@ -243,6 +243,7 @@ import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
 import { t } from '../../lib/i18n';
 import { appLocale } from '@/lib/language';
+import { BringToTopProvider, useBringToTopHost } from '../../components/BringToTop';
 
 // What Home shows that the vault can hold: check-ins and flares, the
 // morning readings, the week, pacing and the assessment banner.
@@ -1562,6 +1563,10 @@ export default function HomeScreen() {
   // while that load is still going never brings the gate back.
   const homeShownRef = useRef(false);
   const scrollRef = useRef<ScrollView>(null);
+  // Getting Set Up's tabs fold like Profile's menus: the one opened goes to
+  // the top of the page (components/BringToTop.tsx).
+  const contentAreaRef = useRef<View>(null);
+  const bringToTopHost = useBringToTopHost(scrollRef, contentAreaRef);
   // Changes as the vault opens or closes, so the cards that load themselves
   // read again.
   const vaultKey = useVaultReloadKey();
@@ -4886,11 +4891,14 @@ export default function HomeScreen() {
         ]}
       />
       <SwipeableTabScreen>
-        <View style={styles.contentArea}>
+        <View ref={contentAreaRef} style={styles.contentArea}>
+        <BringToTopProvider value={bringToTopHost.bringToTop}>
         <ScrollView
           ref={scrollRef}
           style={styles.scroll}
           scrollEnabled={!arrangeDragging}
+          onScroll={bringToTopHost.onScroll}
+          scrollEventThrottle={32}
           contentContainerStyle={[styles.content, { paddingBottom: scrollBottomPadding }]}
         >
 
@@ -5008,6 +5016,7 @@ export default function HomeScreen() {
           ) : null}
 
         </ScrollView>
+        </BringToTopProvider>
 
         {/* Painted after (on top of) the ScrollView above, so the area
             behind TabHub/LensHub/ScopeHub stays guaranteed flat

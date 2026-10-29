@@ -164,5 +164,6 @@ export const PART: Readonly<Record<string, string>> = {
  "{count} months ago": "hace {count} meses",
  "Today": "Hoy",
  "Tomorrow": "Mañana",
- "{weekday}, {month} {day}": "{weekday} {day} de {month}"
+ "{weekday}, {month} {day}": "{weekday} {day} de {month}",
+ "Tap a tab's name to open it. The one open before closes, and the one you opened moves to the top. Swipe along a row of cards to see what else it holds.": "Toca el nombre de una pestaña para abrirla. La que estaba abierta se cierra, y la que abriste sube hasta arriba. Desliza a lo largo de una fila de tarjetas para ver qué más tiene."
 };

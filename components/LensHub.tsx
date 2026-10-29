@@ -43,6 +43,7 @@ import { modalAnimationType } from '../lib/visualPreferences';
 import { NavigationContext } from '@react-navigation/native';
 import { focusOf, registerVoiceLenses } from '../lib/voiceControlRegistry';
 import { useWalkMark } from './WalkMark';
+import { useNavigationHand } from '../lib/navigationHand';
 import { useLanguage } from '../lib/language';
 import { translateIn } from '../lib/i18n';
 import { splitLabelEvenly } from '../lib/labelSplit';
@@ -531,6 +532,10 @@ export function LensHub<T extends string>({
   // above can't recur through this path.
   // The outline on a button a Your Story walk line names (components/WalkMark.ts).
   const walkMark = useWalkMark();
+  // With the right hand working the navigation the icons run from the right
+  // edge, the first lens top right (direct request, 2026-10-28), so the thumb reaches
+  // the first of them soonest. Rows still read top to bottom.
+  const hand = useNavigationHand();
   const [open, setOpen] = useState(false);
 
   // Voice control (1.0.66.11): "Open Horticulture" picks this tab's lens by
@@ -922,7 +927,7 @@ export function LensHub<T extends string>({
             <View style={styles.gridWrapper}>
             <ScrollView
               style={styles.gridScroll}
-              contentContainerStyle={styles.grid}
+              contentContainerStyle={[styles.grid, hand === 'right' && styles.gridMirrored]}
               showsVerticalScrollIndicator={false}
               scrollEventThrottle={100}
               onLayout={(event) => {
@@ -1348,6 +1353,7 @@ const styles = StyleSheet.create({
   gridWrapper: { flex: 1 },
   gridScroll: { flex: 1 },
   grid: { flexDirection: 'row', flexWrap: 'wrap' },
+  gridMirrored: { flexDirection: 'row-reverse' },
   // 2026-08-18, added for Insights specifically -- see LensOption's own
   // `group` field comment. `grid`'s own contentContainerStyle is
   // `flexDirection: 'row', flexWrap: 'wrap'`, so a plain width: '100%'

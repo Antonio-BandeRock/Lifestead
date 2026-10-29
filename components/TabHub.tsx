@@ -45,6 +45,7 @@ import { TabHubIconPicker } from './TabHubIconPicker';
 import { TabHubPointer, useTabHubOnboarding } from './TabHubOnboarding';
 import { TabRouteIcon } from './TabRouteIcon';
 import { useWalkMark } from './WalkMark';
+import { useNavigationHand } from '../lib/navigationHand';
 
 // Thickness of the line around the popup menu card, below -- matches the
 // old card's own borderWidth (1) exactly, not just visually close -- the
@@ -264,6 +265,10 @@ function cardHeightFor(fontScale: number): number {
 export function TabHub() {
   // The outline on a button a Your Story walk line names (components/WalkMark.ts).
   const walkMark = useWalkMark();
+  // With the right hand working the navigation the icons run from the right
+  // edge, Home top right (direct request, 2026-10-28), so the thumb reaches
+  // the first of them soonest. Rows still read top to bottom.
+  const hand = useNavigationHand();
   const [open, setOpen] = useState(false);
   // A tenth attempt at the "card drops in from above" bug, 2026-08-01 --
   // unlike the nine before it (see the Modal's own long comment below),
@@ -856,7 +861,7 @@ export function TabHub() {
               <View style={[styles.cardFrame, { height: cardHeight }]}>
                 <ScrollView
                   style={styles.cardScroll}
-                  contentContainerStyle={styles.card}
+                  contentContainerStyle={[styles.card, hand === 'right' && styles.cardMirrored]}
                   showsVerticalScrollIndicator={false}
                 >
                   {/* Every tab in TAB_ROUTES' order, then the two tiles that
@@ -1039,6 +1044,7 @@ const styles = StyleSheet.create({
     paddingBottom: CARD_PADDING_BOTTOM,
     paddingHorizontal: 2,
   },
+  cardMirrored: { flexDirection: 'row-reverse' },
   item: { width: `${CARD_ITEM_WIDTH_PERCENT}%`, alignItems: 'center', gap: 1, paddingVertical: 4 },
   // The inactive/plain state -- same footprint as ActiveRingCircle's
   // own `size` (ICON_PILL_SIZE), just centering a bare icon with no circle

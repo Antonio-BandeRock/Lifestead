@@ -2148,7 +2148,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Set something up from Your Guide',
       steps: [
         { say: 'Open the band with the name of Your Guide.', mark: 'homeBand.yourStory', stay: true },
-        { say: 'Each tab has rows of cards. Swipe along a row to see what else it holds.', mark: 'home.setupCards', stay: true },
+        { say: "Tap a tab's name to open it. The one open before closes, and the one you opened moves to the top. Swipe along a row of cards to see what else it holds.", mark: 'home.setupCards', stay: true },
         { say: 'Tap a coloured chip under Where it comes back to read what that place will show you.' },
         { say: 'Tap Set It Up. It opens the exact place to do it.', mark: 'home.setupCardGo' },
       ],

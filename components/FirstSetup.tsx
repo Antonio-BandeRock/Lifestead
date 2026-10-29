@@ -402,6 +402,17 @@ export function FirstSetup() {
               <Text style={styles.lead}>{part.line}</Text>
               {isFirst ? <Text style={styles.caption}>{reviewRef.current ? SETUP_RERUN_LINE : SETUP_LEAD}</Text> : null}
             </View>
+            {/* Just under the part's heading (direct request, 2026-10-28), so
+                Back is in the same place on every page rather than under
+                however long the page happens to be. */}
+            {before ? (
+              <View style={[styles.band, styles.links]}>
+                <TouchableOpacity style={styles.link} accessibilityRole="button" onPress={() => setCurrent(before.key)}>
+                  <Ionicons name="arrow-back" size={13} color={colors.primary} style={textShadow} />
+                  <Text style={styles.linkText}>{SETUP_BACK_LABEL}</Text>
+                </TouchableOpacity>
+              </View>
+            ) : null}
             {isFirst ? (
               <View style={styles.band}>
                 <Text style={styles.question}>{SETUP_HOW_HEADING}</Text>
@@ -446,16 +457,6 @@ export function FirstSetup() {
                   <Text style={styles.goText}>{SETUP_KEEP_LABEL}</Text>
                   <Ionicons name="arrow-forward" size={16} color={colors.textOnButton} />
                 </TouchableOpacity>
-              </View>
-            ) : null}
-            {before ? (
-              <View style={[styles.band, styles.links]}>
-                {before ? (
-                  <TouchableOpacity style={styles.link} accessibilityRole="button" onPress={() => setCurrent(before.key)}>
-                    <Ionicons name="arrow-back" size={13} color={colors.primary} style={textShadow} />
-                    <Text style={styles.linkText}>{SETUP_BACK_LABEL}</Text>
-                  </TouchableOpacity>
-                ) : null}
               </View>
             ) : null}
           </Animated.View>

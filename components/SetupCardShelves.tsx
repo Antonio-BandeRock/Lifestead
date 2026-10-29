@@ -5,8 +5,14 @@
 // says what the thing is, what you do and where it comes back, and ends on
 // one button that opens the place to set it up. A done card turns green and
 // says since when.
+//
+// Each tab folds (2026-10-28, direct request), the way Profile's menus do:
+// opening one closes the one open before and brings the one opened to the
+// top of the page, just under the header (components/BringToTop.tsx). The
+// tab holding the first thing still to set up starts open, so there is
+// always somewhere to begin and a how-to has a card to point at.
 import { Ionicons } from '@expo/vector-icons';
-import type { ComponentProps } from 'react';
+import { useRef, useState, type ComponentProps } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
 import { colors, hexToRgba } from '../constants/colors';
 import { TAB_ROUTES } from '../constants/tabs';
@@ -35,6 +41,7 @@ import { datelineFor, type StoryDestination, type YourStoryView } from '../lib/y
 import type { GuideRecords } from '../lib/yourStoryGuides';
 import type { ToolMark } from '../lib/toolHowTos';
 import { useWalkMark } from './WalkMark';
+import { useBringToTop } from './BringToTop';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
@@ -174,12 +181,31 @@ export function setupCardWidth(windowWidth: number): number {
   return Math.round(Math.min(Math.max(windowWidth * 0.75, 240), 340));
 }
 
+function hasOpenCard(tab: SetupTabView): boolean {
+  return tab.shelves.some((shelf) => shelf.openCount > 0);
+}
+
 export function SetupCardShelves({ view, records, startPath, go, explain }: Props) {
   const { width } = useWindowDimensions();
   const cardWidth = setupCardWidth(width);
   const tabs = buildSetupShelves(view, records, startPath);
+  const bringToTop = useBringToTop();
+  const headRefs = useRef(new Map<string, View | null>());
+  const [openPath, setOpenPath] = useState<string | null | undefined>(undefined);
   if (tabs.length === 0) return null;
+  // Until somebody taps a tab, the one with the first thing left to set up.
+  const startOpen = (tabs.find((tab) => tab.startHere && hasOpenCard(tab)) ?? tabs.find(hasOpenCard))?.def.path ?? null;
+  const shownOpen = openPath === undefined ? startOpen : openPath;
   let firstOpenMarked = false;
+
+  function toggle(path: string) {
+    if (shownOpen === path) {
+      setOpenPath(null);
+      return;
+    }
+    setOpenPath(path);
+    bringToTop?.(headRefs.current.get(path) ?? null);
+  }
 
   function renderShelf(shelf: SetupShelfView, tabColor: string) {
     const total = shelf.cards.length;
@@ -216,15 +242,28 @@ export function SetupCardShelves({ view, records, startPath, go, explain }: Prop
   function renderTab(tab: SetupTabView) {
     const route = tabOf(tab.def.path);
     const color = route?.color ?? colors.primary;
+    const open = shownOpen === tab.def.path;
     return (
       <View key={tab.def.path} style={[styles.tab, { borderLeftColor: color }]}>
-        <View style={styles.tabHead}>
-          <Ionicons name={(route?.icon ?? 'ellipse') as IconName} size={20} color={color} style={textShadow} />
-          <Text style={styles.tabTitle}>{tab.def.title}</Text>
-          {tab.startHere ? <Text style={styles.startHere}>{START_HERE_CARD_LABEL}</Text> : null}
-        </View>
-        <Text style={styles.tabLine}>{tab.def.line}</Text>
-        {tab.shelves.map((shelf) => renderShelf(shelf, color))}
+        <TouchableOpacity
+          ref={(node) => {
+            headRefs.current.set(tab.def.path, node);
+          }}
+          style={styles.tabHeadButton}
+          accessibilityRole="button"
+          accessibilityState={{ expanded: open }}
+          onPress={() => toggle(tab.def.path)}
+        >
+          <View style={styles.tabHead}>
+            <Ionicons name={(route?.icon ?? 'ellipse') as IconName} size={20} color={color} style={textShadow} />
+            <Text style={styles.tabTitle}>{tab.def.title}</Text>
+            {tab.startHere ? <Text style={styles.startHere}>{START_HERE_CARD_LABEL}</Text> : null}
+            <View style={styles.spacer} />
+            <Ionicons name={open ? 'chevron-up' : 'chevron-down'} size={18} color={colors.textSecondary} style={textShadow} />
+          </View>
+          <Text style={styles.tabLine}>{tab.def.line}</Text>
+        </TouchableOpacity>
+        {open ? tab.shelves.map((shelf) => renderShelf(shelf, color)) : null}
       </View>
     );
   }
@@ -246,6 +285,7 @@ const styles = StyleSheet.create({
   heading: { ...typography.sectionTitle, color: colors.textPrimary, ...textShadow },
   caption: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   tab: { gap: 8, borderLeftWidth: 3, paddingLeft: 10, backgroundColor: colors.surface },
+  tabHeadButton: { gap: 8, paddingVertical: 4, backgroundColor: colors.surface },
   tabHead: { flexDirection: 'row', alignItems: 'center', gap: 8, flexWrap: 'wrap' },
   tabTitle: { ...typography.sectionTitle, color: colors.textPrimary, ...textShadow },
   startHere: { ...typography.caption, color: colors.accent, ...textShadow },
