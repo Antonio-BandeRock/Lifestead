@@ -1,0 +1,1590 @@
+{"recipes":[
+{
+"id":"curated_cn_gu_lou_yuk","name":"Gu Lou Yuk (Sweet and Sour Pork)","builderType":"side","dishRole":"main","dishGroup":"Pork","region":"Cantonese","servings":4,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Crisp double-fried pork in a glossy bright sauce that is sweet first and sharp after, with juicy pineapple, onion and peppers cooked only until bright.",
+"healthBenefit":"The pork gives protein and the peppers and pineapple add vitamin C, though the double frying and the sugar in the sauce make this a dish for now and then.",
+"overallTier":"moderate",
+"components":[
+{"recipeId":"curated_cn_base_sweet_and_sour_sauce","servings":2,"note":"about 1/2 cup"},
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Pork Shoulder (Raw)","quantity":450,"unit":"g","cutPrep":"cut in 2 cm cubes","cookingMethod":"Deep Fried","prepNote":"a little fat through it keeps the pieces tender"},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce, for the marinade"},
+{"category":"Fats","baseName":"Sesamolja","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"for the marinade"},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Dairy","baseName":"Chicken Egg (Raw)","quantity":1,"unit":"each","cutPrep":"beaten","cookingMethod":null,"prepNote":"for the coating"},
+{"category":"PantryStaples","baseName":"Wheat flour, white, all-purpose, enriched, unbleached","quantity":60,"unit":"g","cutPrep":null,"cookingMethod":null,"prepNote":"for the coating"},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":30,"unit":"g","cutPrep":null,"cookingMethod":null,"prepNote":"for the coating"},
+{"category":"Fats","baseName":"Rapsolja","quantity":60,"unit":"ml","cutPrep":null,"cookingMethod":"Deep Fried","prepNote":"roughly what the pork takes up from about 1 litre of frying oil"},
+{"category":"Veg","baseName":"Green Bell Pepper","quantity":75,"unit":"g","cutPrep":"cut in 2 cm pieces","cookingMethod":"Stir Fried","prepNote":"half a pepper"},
+{"category":"Veg","baseName":"Red Bell Pepper","quantity":75,"unit":"g","cutPrep":"cut in 2 cm pieces","cookingMethod":"Stir Fried","prepNote":"half a pepper"},
+{"category":"Veg","baseName":"Onion","quantity":75,"unit":"g","cutPrep":"cut in 2 cm pieces","cookingMethod":"Stir Fried","prepNote":"half an onion"},
+{"category":"Fruit","baseName":"Pineapple","quantity":225,"unit":"g","cutPrep":"cut in chunks","cookingMethod":"Stir Fried","prepNote":"fresh or canned in juice"},
+{"category":"Veg","baseName":"Garlic","quantity":6,"unit":"g","cutPrep":"2 cloves, sliced","cookingMethod":"Stir Fried","prepNote":null}
+],
+"instructions":[
+"Toss the pork with the soy sauce, sesame oil and salt and leave for 20 to 30 minutes.",
+"Stir the beaten egg into the pork, then toss the pieces in the flour mixed with the cornstarch until each is well coated.",
+"Heat the frying oil to 350°F (175°C) and fry the pork in batches for 3 to 4 minutes until pale gold. Lift out and rest for 5 minutes.",
+"Raise the oil to 375°F (190°C) and fry the pork again for 1 to 2 minutes until deep gold and crisp. Drain well.",
+"In a wok with 1 tbsp of the oil, stir-fry the garlic, onion and peppers over high heat for 1 to 2 minutes, add the pineapple and the warm sweet and sour sauce and bring to a bubble.",
+"Tip in the pork, toss for 15 to 30 seconds until coated and serve at once with rice, before the coating softens."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the pork shoulder."},
+{"nutrient":"Vitamin C","note":"Bell peppers and pineapple both contribute."}
+],
+"citations":[
+{"source":"The Woks of Life, Sweet and Sour Pork","url":"https://thewoksoflife.com/sweet-and-sour-pork/"},
+{"source":"Wikipedia, Sweet and sour pork","url":"https://en.wikipedia.org/wiki/Sweet_and_sour_pork"}
+],
+"curationNote":"Quantities and the two-temperature frying follow The Woks of Life; Wikipedia gives the Guangdong origin and the double frying. The sauce points at the Chinese sweet and sour sauce base."
+},
+{
+"id":"curated_cn_hong_shao_rou","name":"Hong Shao Rou (Red-Braised Pork Belly)","builderType":"side","dishRole":"main","dishGroup":"Pork","region":"Shanghainese","servings":6,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Cubes of pork belly braised until the fat trembles, glazed in a dark, sticky sauce of caramelised rock sugar, soy and Shaoxing wine.",
+"healthBenefit":"A rich dish that gives protein and B vitamins from the pork; it is high in fat, so a small portion with plenty of rice and greens is the usual way.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":6,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Gris sidfläsk bit rå m. svål","quantity":680,"unit":"g","cutPrep":"skin on, cut in 2.5 cm cubes","cookingMethod":"Braised","prepNote":"pork belly with the skin"},
+{"category":"Fats","baseName":"Rapsolja","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":25,"unit":"g","cutPrep":null,"cookingMethod":"Caramelised","prepNote":"rock sugar, crushed"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":80,"unit":"ml","cutPrep":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Braised","prepNote":"light soy sauce"},
+{"notInDatabase":true,"name":"dark soy sauce","contains":"gluten","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":"for the colour"},
+{"category":"Herbs","baseName":"Ginger root","quantity":10,"unit":"g","cutPrep":"sliced","cookingMethod":"Braised","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":20,"unit":"g","cutPrep":"cut in lengths","cookingMethod":"Braised","prepNote":null},
+{"category":"Bev","baseName":"Water, tap","quantity":600,"unit":"ml","cutPrep":null,"cookingMethod":"Braised","prepNote":"enough to just cover"}
+],
+"instructions":[
+"Put the pork in cold water, bring to a boil and blanch for 2 to 3 minutes. Rinse and drain well.",
+"Heat the oil in a wok over low heat, add the rock sugar and stir for 2 to 4 minutes until it melts and turns amber.",
+"Add the pork, raise the heat to medium and stir for 2 to 3 minutes until every cube is glazed and coloured.",
+"Add the ginger, scallion, Shaoxing wine, both soy sauces and enough water to just cover. Bring to a boil, cover and simmer gently for 45 to 60 minutes until the pork is very tender.",
+"Uncover, raise the heat and stir for 5 to 10 minutes until the sauce reduces to a sticky glaze that clings to the pork. Serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the pork belly."},
+{"nutrient":"Thiamine","note":"Pork is one of the richest food sources of vitamin B1."}
+],
+"citations":[
+{"source":"The Woks of Life, Shanghai Style Braised Pork Belly","url":"https://thewoksoflife.com/shanghai-style-braised-pork-belly/"},
+{"source":"Wikipedia, Red braised pork belly","url":"https://en.wikipedia.org/wiki/Red_braised_pork_belly"}
+],
+"curationNote":"Proportions follow The Woks of Life Shanghai version; Wikipedia notes both the Shanghai and Hunan styles. This is the Shanghai style, sweeter and with no chili."
+},
+{
+"id":"curated_cn_hui_guo_rou","name":"Hui Guo Rou (Twice-Cooked Pork)","builderType":"side","dishRole":"main","dishGroup":"Pork","region":"Sichuan","servings":4,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Thin slices of simmered pork belly fried until they curl, then tossed with chili bean paste, fermented black beans and sweet leek for a salty, spicy, deeply savoury plate.",
+"healthBenefit":"The pork gives protein and B vitamins and the leek and green chilies add fibre, though the belly and the bean paste make it rich and salty.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Gris sidfläsk bit rå m. svål","quantity":450,"unit":"g","cutPrep":"one piece, skin on","cookingMethod":"Simmered then Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":10,"unit":"g","cutPrep":"sliced","cookingMethod":"Simmered","prepNote":"for the simmering water"},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":15,"unit":"g","cutPrep":"knotted","cookingMethod":"Simmered","prepNote":"for the simmering water"},
+{"notInDatabase":true,"name":"Sichuan peppercorns","contains":"none","quantity":1,"unit":"tsp","cutPrep":null,"prepNote":"for the simmering water"},
+{"category":"Fats","baseName":"Rapsolja","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":null},
+{"notInDatabase":true,"name":"doubanjiang (Pixian chili bean paste)","contains":"gluten","quantity":1.5,"unit":"tbsp","cutPrep":"chopped fine","prepNote":null},
+{"notInDatabase":true,"name":"fermented black beans (douchi)","contains":"none","quantity":2,"unit":"tsp","cutPrep":"rinsed","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":10,"unit":"g","cutPrep":"sliced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Green Chilli (Chili)","quantity":60,"unit":"g","cutPrep":"cut on the slant","cookingMethod":"Stir Fried","prepNote":"long mild green peppers"},
+{"category":"Veg","baseName":"Leek","quantity":100,"unit":"g","cutPrep":"cut on the slant","cookingMethod":"Stir Fried","prepNote":"or garlic sprouts, the Sichuan choice"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":1,"unit":"g","cutPrep":null,"cookingMethod":null,"prepNote":"a pinch"}
+],
+"instructions":[
+"Cover the pork with water, add the ginger, scallion and Sichuan peppercorns, bring to a boil and simmer for 25 to 30 minutes until a chopstick goes in easily. Cool, then chill for at least 1 hour so it slices cleanly.",
+"Slice the pork as thin as you can, about 3 mm, keeping some skin and fat on every slice.",
+"Heat the oil in a wok over medium heat and fry the slices for 3 to 5 minutes until the fat renders and the slices curl like small bowls.",
+"Push the pork aside, fry the bean paste in the fat for 30 seconds until the oil turns red, add the black beans and garlic and stir for 20 seconds.",
+"Add the green peppers and leek, splash in the Shaoxing wine, soy sauce and sugar and toss over high heat for 1 to 2 minutes until the leek is just tender. Serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the pork belly."},
+{"nutrient":"Thiamine","note":"Pork is a rich source of vitamin B1."}
+],
+"citations":[
+{"source":"China Sichuan Food, Twice Cooked Pork","url":"https://www.chinasichuanfood.com/twice-cooked-pork/"},
+{"source":"The Woks of Life, Twice Cooked Pork","url":"https://thewoksoflife.com/twice-cooked-pork/"}
+],
+"curationNote":"China Sichuan Food gives the simmer, the thin slicing and the seasoning; The Woks of Life confirms the leek or garlic sprout choice and the long green peppers."
+},
+{
+"id":"curated_cn_dongpo_rou","name":"Dongpo Rou (Dongpo Pork)","builderType":"side","dishRole":"main","dishGroup":"Pork","region":"Hangzhou","servings":6,"servingSizeAmount":1,"servingSizeUnit":"piece",
+"flavorProfile":"Neat squares of pork belly cooked for hours in Shaoxing wine, soy and rock sugar until the skin is soft as custard and the sauce is mellow, sweet and winey.",
+"healthBenefit":"A piece gives protein and B vitamins; the belly is very rich, so one square with rice and a green vegetable is the traditional portion.",
+"overallTier":"moderate",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":6,"note":"1 cup cooked per person"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Gris sidfläsk bit rå m. svål","quantity":900,"unit":"g","cutPrep":"skin on, cut in 5 cm squares","cookingMethod":"Braised then Steamed","prepNote":"belly with even layers of fat and lean"},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":60,"unit":"g","cutPrep":"whole","cookingMethod":"Braised","prepNote":"a bed for the pot"},
+{"category":"Herbs","baseName":"Ginger root","quantity":30,"unit":"g","cutPrep":"thick slices","cookingMethod":"Braised","prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":50,"unit":"g","cutPrep":null,"cookingMethod":"Braised","prepNote":"rock sugar"},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":"Braised","prepNote":"light soy sauce"},
+{"notInDatabase":true,"name":"dark soy sauce","contains":"gluten","quantity":2,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":500,"unit":"ml","cutPrep":null,"prepNote":"in place of water, the Hangzhou way"}
+],
+"instructions":[
+"Blanch the pork squares in boiling water for 5 minutes, rinse and, if you like, tie each with kitchen string so it keeps its shape.",
+"Line a heavy clay pot or casserole with the scallions and ginger and set the pork on top, skin side down.",
+"Add the rock sugar, both soy sauces and the Shaoxing wine, bring to a boil, cover tightly and cook over the lowest heat for 1 1/2 to 2 hours.",
+"Turn the pieces skin side up, transfer them with the sauce to a heatproof bowl and steam over boiling water for 30 minutes more, until the skin is glossy and very soft.",
+"Pour off the sauce, boil it for 3 to 5 minutes until syrupy, spoon it over the pork and serve each square with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the pork belly."},
+{"nutrient":"Vitamin B12","note":"Pork contributes."}
+],
+"citations":[
+{"source":"Wikipedia, Dongpo pork","url":"https://en.wikipedia.org/wiki/Dongpo_pork"}
+],
+"curationNote":"Written from the Wikipedia description (squares of fatty belly, pan cooked then red-cooked slowly in soy, rock sugar and huangjiu) using standard Hangzhou proportions of about 500 ml wine to 1 kg of belly; no full recipe page opened, so treat quantities as typical rather than sourced."
+},
+{
+"id":"curated_cn_shi_zi_tou","name":"Shi Zi Tou (Lion's Head Meatballs)","builderType":"side","dishRole":"main","dishGroup":"Pork","region":"Huaiyang","servings":8,"servingSizeAmount":1,"servingSizeUnit":"piece",
+"flavorProfile":"Large, soft pork meatballs with crunchy water chestnut inside, browned and then braised in a gently sweet soy sauce over tender bok choy.",
+"healthBenefit":"The pork and egg give protein, and the bok choy adds vitamin A, vitamin C and calcium to a comforting braise.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_five_spice_powder","servings":0.17,"note":"about 1/4 tsp"},
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked for each person, two meatballs each"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Ground Pork (Raw)","quantity":450,"unit":"g","cutPrep":null,"cookingMethod":"Fried then Braised","prepNote":"fatty, about 70 percent lean"},
+{"category":"Herbs","baseName":"Ginger root","quantity":8,"unit":"g","cutPrep":"grated","cookingMethod":null,"prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":15,"unit":"g","cutPrep":"finely chopped","cookingMethod":null,"prepNote":null},
+{"category":"Dairy","baseName":"Chicken Egg (Raw)","quantity":1,"unit":"each","cutPrep":"beaten","cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"fine breadcrumbs","contains":"gluten","quantity":25,"unit":"g","cutPrep":null,"prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":2,"unit":"tbsp","cutPrep":null,"prepNote":"1 tbsp for the meat, 1 tbsp for the sauce"},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce, half for the meat"},
+{"category":"Herbs","baseName":"Seasoning sauce, oyster sauce","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"half for the meat"},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":1.5,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"1 1/2 tsp for the meat, the rest to thicken"},
+{"category":"Veg","baseName":"Water chestnuts, canned, drained","quantity":100,"unit":"g","cutPrep":"finely chopped","cookingMethod":null,"prepNote":null},
+{"category":"Bev","baseName":"Water, tap","quantity":420,"unit":"ml","cutPrep":null,"cookingMethod":"Braised","prepNote":"60 ml beaten into the meat, the rest for the braise"},
+{"category":"Fats","baseName":"Rapsolja","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":"Fried","prepNote":"roughly what the meatballs take up"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":10,"unit":"g","cutPrep":null,"cookingMethod":null,"prepNote":"rock sugar"},
+{"notInDatabase":true,"name":"dark soy sauce","contains":"gluten","quantity":1,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Veg","baseName":"Bok choy","quantity":300,"unit":"g","cutPrep":"halved","cookingMethod":"Braised","prepNote":null},
+{"category":"Fats","baseName":"Sesamolja","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Mix the pork with the ginger, scallion, egg, breadcrumbs, 1 tbsp Shaoxing, 1 tbsp each of soy and oyster sauce, white pepper, five spice and 1 1/2 tsp cornstarch. Beat in 60 ml water a little at a time, stirring in one direction for 3 to 5 minutes until sticky, then fold in the water chestnuts.",
+"With wet hands, shape 8 large meatballs.",
+"Heat the oil to 350°F (175°C) in a wok and fry the meatballs a few at a time for 4 to 6 minutes, turning, until browned all over.",
+"Put the rock sugar, the rest of the Shaoxing, soy and oyster sauce, the dark soy and 360 ml water in a clay pot, add the meatballs, cover and braise gently for 12 to 15 minutes.",
+"Tuck the bok choy around the meatballs for the last 3 to 4 minutes. Lift out meatballs and greens, thicken the sauce with the rest of the cornstarch mixed in a little water, stir in the sesame oil and pour it over. Serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the pork and egg."},
+{"nutrient":"Vitamin A","note":"From the bok choy."}
+],
+"citations":[
+{"source":"The Woks of Life, Lion's Head Meatballs","url":"https://thewoksoflife.com/lions-head-meatballs/"},
+{"source":"Wikipedia, Lion's head (food)","url":"https://en.wikipedia.org/wiki/Lion%27s_head_(food)"}
+],
+"curationNote":"Quantities follow The Woks of Life red-braised version; Wikipedia places the dish in Huaiyang cooking from Yangzhou and Zhenjiang and describes both the red and the plain napa-braised styles. Five spice points at the base."
+},
+{
+"id":"curated_cn_yu_xiang_rou_si","name":"Yu Xiang Rou Si (Fish-Fragrant Shredded Pork)","builderType":"side","dishRole":"main","dishGroup":"Pork","region":"Sichuan","servings":3,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Silky shreds of pork with wood ear and carrot in a red sauce that is hot, sweet, sour and garlicky all at once, the classic Sichuan fish-fragrant balance with no fish in it.",
+"healthBenefit":"Lean tenderloin gives protein with little fat, and the carrot and wood ear add vitamin A and fibre, though the sauce carries a fair amount of sugar and salt.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":3,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Pork Fillet / Tenderloin (Raw)","quantity":300,"unit":"g","cutPrep":"cut in thin shreds","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":3,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce, 1 tsp for the marinade"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":1,"unit":"tsp","cutPrep":null,"prepNote":"for the marinade"},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":4,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"1 tsp for the marinade, the rest for the sauce"},
+{"category":"Mushroom","baseName":"Mushrooms, tree ears, Cloud ear, dried","quantity":8,"unit":"g","cutPrep":"soaked and shredded","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Carrot","quantity":60,"unit":"g","cutPrep":"cut in thin shreds","cookingMethod":"Stir Fried","prepNote":"bamboo shoot is also used"},
+{"category":"Fats","baseName":"Rapsolja","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":null},
+{"notInDatabase":true,"name":"pickled chilies (pao la jiao)","contains":"none","quantity":1,"unit":"tbsp","cutPrep":"chopped fine","prepNote":null},
+{"notInDatabase":true,"name":"doubanjiang (Pixian chili bean paste)","contains":"gluten","quantity":0.5,"unit":"tbsp","cutPrep":"chopped fine","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":15,"unit":"g","cutPrep":"5 cloves, minced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":8,"unit":"g","cutPrep":"minced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":20,"unit":"g","cutPrep":"chopped","cookingMethod":"Stir Fried","prepNote":null},
+{"notInDatabase":true,"name":"Chinkiang black vinegar","contains":"gluten","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":"for the sauce"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":25,"unit":"g","cutPrep":null,"cookingMethod":null,"prepNote":"about 2 tbsp, for the sauce"},
+{"category":"Bev","baseName":"Water, tap","quantity":75,"unit":"ml","cutPrep":null,"cookingMethod":null,"prepNote":"for the sauce"}
+],
+"instructions":[
+"Mix the pork with 1 tsp soy sauce, the Shaoxing wine and 1 tsp cornstarch and leave for 10 to 15 minutes. Stir the remaining soy sauce, the vinegar, sugar, water and cornstarch together for the sauce.",
+"Heat the oil in a wok over high heat, add the pork and stir quickly for 1 to 2 minutes until it turns pale. Push it to one side.",
+"Lower the heat a little, fry the pickled chilies and bean paste for 30 seconds until the oil turns red, then add the garlic and ginger and stir for 20 seconds.",
+"Add the wood ear and carrot and stir-fry for 1 minute, mix the pork back in, then pour in the stirred sauce.",
+"Toss for 30 seconds to 1 minute until the sauce thickens and turns glossy, add the scallion and serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the lean pork tenderloin."},
+{"nutrient":"Vitamin A","note":"From the carrot."}
+],
+"citations":[
+{"source":"China Sichuan Food, Yu Xiang Rou Si","url":"https://www.chinasichuanfood.com/yu-xiang-rou-si/"},
+{"source":"Wikipedia, Yuxiang","url":"https://en.wikipedia.org/wiki/Yuxiang"}
+],
+"curationNote":"Quantities follow China Sichuan Food; Wikipedia describes the yuxiang base of pickled chili, scallion, ginger and garlic with sugar, vinegar and bean paste. Wood ear and carrot are the standard additions and were sized here from typical home versions."
+},
+{
+"id":"curated_cn_jiao_yan_pai_gu","name":"Jiao Yan Pai Gu (Salt and Pepper Pork Ribs)","builderType":"side","dishRole":"main","dishGroup":"Pork","region":"Cantonese","servings":6,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Bite-size rib pieces fried shatteringly crisp, then tossed with fried garlic, chili, scallion and a sharp white pepper salt.",
+"healthBenefit":"The ribs give protein, zinc and B vitamins; they are deep fried and well salted, so they suit a shared table rather than a daily meal.",
+"overallTier":"moderate",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":6,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Pork Spare Ribs (Raw)","quantity":1000,"unit":"g","cutPrep":"cut in 5 cm pieces","cookingMethod":"Deep Fried","prepNote":"ask the butcher to cut across the bone"},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"1 1/2 tsp for the marinade, 1/2 tsp for the pepper salt"},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"for the coating"},
+{"category":"PantryStaples","baseName":"Rice flour","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"for the coating"},
+{"category":"Fats","baseName":"Rapsolja","quantity":80,"unit":"ml","cutPrep":null,"cookingMethod":"Deep Fried","prepNote":"roughly what the ribs take up from the frying oil"},
+{"category":"Veg","baseName":"Garlic","quantity":20,"unit":"g","cutPrep":"minced","cookingMethod":"Fried","prepNote":null},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"for the pepper salt"},
+{"category":"Veg","baseName":"Red Chilli (Chili)","quantity":20,"unit":"g","cutPrep":"sliced","cookingMethod":"Fried","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":15,"unit":"g","cutPrep":"chopped","cookingMethod":"Fried","prepNote":null}
+],
+"instructions":[
+"Toss the ribs with 1 1/2 tsp salt, the soy sauce and the Shaoxing wine and leave for 30 minutes to 2 hours in the fridge.",
+"Mix the cornstarch and rice flour and toss the ribs in it until coated. Mix the white pepper with 1/2 tsp salt, warming it in a dry pan for 30 seconds if you like.",
+"Heat the oil to 290°F (145°C) and fry the ribs in batches for 5 to 6 minutes until cooked through. Lift out.",
+"Raise the oil to 385°F (195°C) and fry the ribs again for 30 seconds to 1 minute until crisp and golden. Drain.",
+"In a wok with 1 tbsp of the oil, fry the garlic, chili and scallion for 30 seconds, add the ribs, sprinkle with the pepper salt and toss for 15 seconds. Serve at once."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the pork ribs."},
+{"nutrient":"Zinc","note":"Pork contributes."}
+],
+"citations":[
+{"source":"Chinese Cooking Demystified, Chinese Salt and Pepper Anything","url":"https://chinesecookingdemystified.substack.com/p/chinese-salt-and-pepper-anything"}
+],
+"curationNote":"Method, coating and the two frying temperatures follow Chinese Cooking Demystified, which sets the Cantonese white pepper salt apart from the Sichuan pepper salt used elsewhere. Only one source opened."
+},
+{
+"id":"curated_cn_siu_yuk","name":"Siu Yuk (Crispy Roast Pork Belly)","builderType":"side","dishRole":"main","dishGroup":"Pork","region":"Cantonese","servings":8,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Juicy five spice seasoned pork belly under a puffed, crackling skin that breaks like glass, cut into bite-size pieces.",
+"healthBenefit":"A small serving gives protein and B vitamins; the belly is fatty and the crust salty, so it is best as one part of a meal with rice and greens.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_five_spice_powder","servings":0.33,"note":"about 1/2 tsp"},
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":8,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Gris sidfläsk bit rå m. svål","quantity":1360,"unit":"g","cutPrep":"one slab, skin on","cookingMethod":"Roasted","prepNote":"an even slab about 4 cm thick"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":2,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"for the meat side"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Vinegar, rice vinegar","quantity":1.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"brushed on the skin"},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":140,"unit":"g","cutPrep":"coarse","cookingMethod":null,"prepNote":"a crust on the skin, lifted off and thrown away before the final blast of heat"}
+],
+"instructions":[
+"Blanch the belly skin side down in simmering water for 1 to 2 minutes, then prick the skin all over with a sharp skewer, as close together as you can.",
+"Rub the meat side, not the skin, with the Shaoxing wine, then with the salt, sugar, five spice and white pepper mixed together. Set skin up on a rack and dry uncovered in the fridge for 12 to 24 hours.",
+"Heat the oven to 375°F (190°C). Wrap foil around the sides of the meat to make a tray, brush the skin with the vinegar and pack the coarse salt over it in an even layer.",
+"Roast for 1 1/2 hours, then lift off and discard the salt crust.",
+"Turn the oven to broil or 450°F (230°C) and roast for 5 to 15 minutes more, watching closely, until the skin puffs and crackles all over. Rest for 15 minutes, then cut into pieces and serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the pork belly."},
+{"nutrient":"Thiamine","note":"Pork is a rich source of vitamin B1."}
+],
+"citations":[
+{"source":"The Woks of Life, Cantonese Roast Pork Belly","url":"https://thewoksoflife.com/cantonese-roast-pork-belly/"},
+{"source":"Made With Lau, Siu Yuk","url":"https://madewithlau.com/recipes/siu-yuk-crispy-pork-belly"}
+],
+"curationNote":"Seasoning, salt crust and oven times follow The Woks of Life; Made With Lau confirms the blanching, the pricking and the high final heat. Most of the salt crust is discarded, so the listed salt overstates what is eaten. Five spice points at the base."
+},
+{
+"id":"curated_cn_mu_xu_rou","name":"Mu Xu Rou (Moo Shu Pork)","builderType":"side","dishRole":"main","dishGroup":"Pork","region":"Shandong","servings":4,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"A quick, savoury stir-fry of sliced pork, soft yellow egg, crisp cucumber, wood ear and daylily buds, seasoned lightly with soy, wine and scallion.",
+"healthBenefit":"Pork and egg give protein, and the cucumber and wood ear add volume and fibre, so this is one of the lighter pork stir-fries.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Pork Loin (Raw)","quantity":225,"unit":"g","cutPrep":"thin slices","cookingMethod":"Stir Fried","prepNote":"tenderloin works too"},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":4,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce, 1 tsp for the marinade"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":4,"unit":"tsp","cutPrep":null,"prepNote":"1 tsp for the marinade"},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"for the marinade"},
+{"category":"Dairy","baseName":"Chicken Egg (Raw)","quantity":3,"unit":"each","cutPrep":"beaten","cookingMethod":"Scrambled","prepNote":null},
+{"category":"Veg","baseName":"Cucumber","quantity":150,"unit":"g","cutPrep":"halved and sliced on the slant","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Mushroom","baseName":"Mushrooms, tree ears, Cloud ear, dried","quantity":10,"unit":"g","cutPrep":"soaked and torn","cookingMethod":"Stir Fried","prepNote":"about 1 cup once soaked"},
+{"notInDatabase":true,"name":"dried daylily buds (golden needles)","contains":"none","quantity":15,"unit":"g","cutPrep":"soaked, hard tips cut off","prepNote":"the Beijing addition"},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":30,"unit":"g","cutPrep":"cut in lengths","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":5,"unit":"g","cutPrep":"minced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":6,"unit":"g","cutPrep":"minced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Seasoning sauce, oyster sauce","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Fats","baseName":"Pork Lard","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":"the traditional fat; a neutral oil also works"},
+{"category":"Fats","baseName":"Sesamolja","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Mix the pork with 1 tsp soy sauce, 1 tsp Shaoxing wine and the cornstarch and leave for 15 minutes.",
+"Heat 1 tbsp lard in a wok over medium heat, pour in the eggs and scramble into large soft curds, 30 seconds to 1 minute. Tip out.",
+"Add the rest of the lard, raise the heat to high and stir-fry the pork for 1 to 2 minutes until it changes colour. Add the ginger, garlic and white parts of the scallion for 20 seconds.",
+"Add the wood ear and daylily buds and stir for 1 minute, then the cucumber, the rest of the Shaoxing and soy and the oyster sauce, and toss for 30 seconds.",
+"Return the egg, add the green scallion and the sesame oil, toss to combine and serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"Pork and eggs together."},
+{"nutrient":"Selenium","note":"Eggs and pork both contribute."}
+],
+"citations":[
+{"source":"The Woks of Life, Moo Shu Pork","url":"https://thewoksoflife.com/moo-shu-pork/"},
+{"source":"Wikipedia, Moo shu pork","url":"https://en.wikipedia.org/wiki/Moo_shu_pork"}
+],
+"curationNote":"Quantities follow The Woks of Life; Wikipedia gives the Shandong origin, the lard, the daylily buds of the Beijing style, and notes that the traditional dish is eaten without pancakes, which came with the American version. Served here with rice."
+},
+{
+"id":"curated_cn_mei_cai_kou_rou","name":"Mei Cai Kou Rou (Pork Belly with Preserved Mustard Greens)","builderType":"side","dishRole":"main","dishGroup":"Pork","region":"Hakka","servings":6,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Thin slices of soy-glazed pork belly steamed for over an hour on sweet, salty preserved mustard greens, then turned out as a glossy dome.",
+"healthBenefit":"The pork gives protein and the greens add some fibre; the belly is rich and the preserved greens salty, so a little goes a long way with rice.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_sauce_chicken_stock","servings":1,"note":"about 240 ml"},
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":6,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Gris sidfläsk bit rå m. svål","quantity":680,"unit":"g","cutPrep":"one piece, skin on","cookingMethod":"Simmered then Steamed","prepNote":null},
+{"notInDatabase":true,"name":"dried preserved mustard greens (mei cai)","contains":"none","quantity":170,"unit":"g","cutPrep":"soaked, rinsed well and chopped","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":10,"unit":"g","cutPrep":"sliced","cookingMethod":"Simmered","prepNote":null},
+{"notInDatabase":true,"name":"star anise","contains":"none","quantity":2,"unit":"each","cutPrep":null,"prepNote":null},
+{"notInDatabase":true,"name":"dark soy sauce","contains":"gluten","quantity":4,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":2,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":20,"unit":"g","cutPrep":null,"cookingMethod":null,"prepNote":"rock sugar"},
+{"category":"Fats","baseName":"Rapsolja","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Fried","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":10,"unit":"g","cutPrep":"minced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"to thicken the sauce"}
+],
+"instructions":[
+"Soak the mei cai for 20 to 30 minutes, rinse several times to remove grit, squeeze dry and chop.",
+"Simmer the pork with the ginger and star anise for 30 to 35 minutes until a chopstick goes in. Drain, pat dry and rub the skin with 2 tsp dark soy.",
+"Fry the pork skin side down in the oil for 2 to 4 minutes until blistered and dark, covering against spatters. Cool and cut into 5 mm slices.",
+"Stir-fry the garlic and mei cai in the same oil for 2 minutes, adding the rock sugar, the rest of the dark soy, the light soy, Shaoxing wine and stock, and simmer for 5 minutes.",
+"Lay the pork slices skin down in a heatproof bowl, pack the mei cai on top and pour over the liquid. Steam over boiling water for 75 to 90 minutes.",
+"Pour the juices into a pan, invert the bowl onto a plate, thicken the juices with the cornstarch mixed in a little water for 30 seconds, pour over and serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the pork belly."},
+{"nutrient":"Sodium","note":"The preserved greens and soy make this salty; rinse the mei cai well."}
+],
+"citations":[
+{"source":"The Woks of Life, Mei Cai Kou Rou","url":"https://thewoksoflife.com/mei-cai-kou-rou-pork-belly/"},
+{"source":"Wok and Kin, Steamed Pork Belly with Preserved Mustard Greens","url":"https://www.wokandkin.com/steamed-pork-belly-with-preserved-mustard-greens/"}
+],
+"curationNote":"Quantities and the long steam follow The Woks of Life; Wok and Kin confirms the Hakka origin and the turning out as a dome. Stock points at the shared chicken stock."
+},
+{
+"id":"curated_cn_tang_cu_pai_gu","name":"Tang Cu Pai Gu (Sweet and Sour Ribs)","builderType":"side","dishRole":"main","dishGroup":"Pork","region":"Shanghainese","servings":3,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Short lengths of rib simmered and then reduced in caramelised rock sugar and black vinegar until sticky, dark, tangy and sweet, finished with sesame.",
+"healthBenefit":"The ribs give protein, zinc and B vitamins; the glaze is sweet, so this is usually one dish shared among several.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":3,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Pork Spare Ribs (Raw)","quantity":450,"unit":"g","cutPrep":"cut in 3 to 4 cm sections","cookingMethod":"Braised","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":40,"unit":"g","cutPrep":"4 for blanching, a little chopped to garnish","cookingMethod":"Simmered","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":10,"unit":"g","cutPrep":"3 slices","cookingMethod":"Simmered","prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":2,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Fats","baseName":"Rapsolja","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":35,"unit":"g","cutPrep":"crushed","cookingMethod":"Caramelised","prepNote":"rock sugar"},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Braised","prepNote":"light soy sauce"},
+{"notInDatabase":true,"name":"Chinkiang black vinegar","contains":"gluten","quantity":4,"unit":"tbsp","cutPrep":null,"prepNote":"3 tbsp in the braise, 1 tbsp at the end"},
+{"notInDatabase":true,"name":"star anise","contains":"none","quantity":1,"unit":"each","cutPrep":null,"prepNote":"optional"},
+{"category":"Bev","baseName":"Water, tap","quantity":500,"unit":"ml","cutPrep":null,"cookingMethod":"Braised","prepNote":"hot, enough to cover"},
+{"category":"NutSeed","baseName":"Sesame seed","quantity":0.5,"unit":"tbsp","cutPrep":null,"cookingMethod":"Toasted","prepNote":"white sesame"}
+],
+"instructions":[
+"Put the ribs in a wok of cold water with the ginger, the whole scallions and the Shaoxing wine, bring to a boil and cook for 2 to 3 minutes. Rinse under warm water, drain and pat dry.",
+"Heat the oil and crushed rock sugar over low heat, stirring for 3 to 5 minutes until the sugar melts and turns dark red.",
+"Add the ribs and stir-fry for 1 to 2 minutes until well coloured.",
+"Add hot water to cover, the soy sauce, 3 tbsp black vinegar and the star anise. Cover and simmer on the lowest heat for 25 minutes, stirring once or twice.",
+"Uncover, raise the heat to medium and stir for 5 to 8 minutes until the sauce thickens and coats the ribs, watching that it does not catch.",
+"Stir in the last tablespoon of vinegar, scatter with sesame and chopped scallion and serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the pork ribs."},
+{"nutrient":"Zinc","note":"Pork contributes."}
+],
+"citations":[
+{"source":"China Sichuan Food, Sweet and Sour Spare Ribs","url":"https://www.chinasichuanfood.com/sweet-and-sour-spare-ribs/"},
+{"source":"Wikipedia, Sweet and sour","url":"https://en.wikipedia.org/wiki/Sweet_and_sour"}
+],
+"curationNote":"Quantities and the sugar colour method follow China Sichuan Food; Wikipedia names sweet and sour spare ribs as a popular Shanghai dish."
+},
+{
+"id":"curated_cn_steamed_pork_patty_with_salted_egg","name":"Steamed Pork Patty with Salted Egg","builderType":"side","dishRole":"main","dishGroup":"Pork","region":"Cantonese","servings":4,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"A tender, juicy steamed pork patty with crunchy water chestnut, studded with rich, salty duck egg yolks and sitting in its savoury juices.",
+"healthBenefit":"The pork and eggs give protein, selenium and B vitamins; salted eggs are very salty, so no added salt is needed.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_five_spice_powder","servings":0.05,"note":"a pinch"},
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"notInDatabase":true,"name":"salted duck eggs","contains":"egg","quantity":4,"unit":"each","cutPrep":"yolks and whites separated","prepNote":null},
+{"category":"Meat","baseName":"Ground Pork (Raw)","quantity":340,"unit":"g","cutPrep":null,"cookingMethod":"Steamed","prepNote":"about 70 percent lean"},
+{"category":"Herbs","baseName":"Ginger root","quantity":3,"unit":"g","cutPrep":"grated","cookingMethod":null,"prepNote":null},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":1.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"ground Sichuan peppercorn","contains":"none","quantity":0.1,"unit":"tsp","cutPrep":null,"prepNote":"a pinch"},
+{"category":"Herbs","baseName":"Seasoning sauce, oyster sauce","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Bev","baseName":"Water, tap","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":1.5,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Fats","baseName":"Sesamolja","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Veg","baseName":"Water chestnuts, canned, drained","quantity":50,"unit":"g","cutPrep":"chopped","cookingMethod":null,"prepNote":"about 1/3 cup"},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":15,"unit":"g","cutPrep":"finely chopped","cookingMethod":null,"prepNote":"plus more to garnish"},
+{"category":"Veg","baseName":"Coriander (cilantro) leaves","quantity":3,"unit":"g","cutPrep":"chopped","cookingMethod":null,"prepNote":"to garnish"}
+],
+"instructions":[
+"Crack the salted eggs, keeping the yolks and whites in separate bowls.",
+"In a shallow heatproof dish, mix the pork with the ginger, cornstarch, sugar, white pepper, five spice, Sichuan pepper, oyster sauce, water, Shaoxing wine, sesame oil and the egg whites.",
+"Stir in one direction for 2 to 3 minutes until smooth and sticky, then fold in the water chestnuts and scallion. Spread level and rest for 30 minutes.",
+"Halve the yolks and press them, round side up, evenly into the top of the patty.",
+"Steam over boiling water, covered, for 20 minutes, then leave in the turned-off steamer for 5 to 10 minutes. Scatter with scallion and cilantro and serve with rice, spooning the juices over."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"Pork and duck eggs together."},
+{"nutrient":"Sodium","note":"The salted eggs carry plenty of salt, so none is added."}
+],
+"citations":[
+{"source":"The Woks of Life, Steamed Pork Patty with Salted Duck Eggs","url":"https://thewoksoflife.com/steamed-pork-patty-salted-duck-eggs/"}
+],
+"curationNote":"Quantities and method follow The Woks of Life, the one source opened for this dish. Five spice points at the base."
+},
+{
+"id":"curated_cn_gong_bao_ji_ding","name":"Gong Bao Ji Ding (Kung Pao Chicken)","builderType":"side","dishRole":"main","dishGroup":"Poultry","region":"Sichuan","servings":4,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Tender cubes of chicken with crunchy peanuts, scallion and dried chilies in a light glossy sauce that is gently sweet, sour and savoury, with the tingle of Sichuan pepper.",
+"healthBenefit":"Chicken breast gives lean protein and the peanuts add healthy fats, magnesium and fibre, making this one of the more balanced stir-fries.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Chicken, broiler, breast, skinless, boneless, meat","quantity":340,"unit":"g","cutPrep":"cut in 2 cm cubes","cookingMethod":"Stir Fried","prepNote":"boneless thighs also work"},
+{"category":"NutSeed","baseName":"Peanut","quantity":140,"unit":"g","cutPrep":"raw, shelled","cookingMethod":"Toasted","prepNote":"about 1 cup"},
+{"category":"Fats","baseName":"Rapsolja","quantity":4,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":"a little for the peanuts and marinade, the rest for the wok"},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"half for the marinade, half for the sauce"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":1,"unit":"tsp","cutPrep":null,"prepNote":"for the marinade"},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"a pinch"},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce"},
+{"notInDatabase":true,"name":"dark soy sauce","contains":"gluten","quantity":0.5,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Herbs","baseName":"Vinegar, rice vinegar","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"Chinkiang black vinegar is the Sichuan choice"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Bev","baseName":"Water, tap","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"for the sauce"},
+{"category":"Veg","baseName":"Garlic","quantity":9,"unit":"g","cutPrep":"3 cloves, sliced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":5,"unit":"g","cutPrep":"minced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Pepper, hot chili, red, sun-dried","quantity":4,"unit":"g","cutPrep":"seeded and cut in pieces","cookingMethod":"Stir Fried","prepNote":"more for a hotter dish"},
+{"notInDatabase":true,"name":"ground Sichuan peppercorn","contains":"none","quantity":0.5,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":60,"unit":"g","cutPrep":"white parts, cut in 2 cm pieces","cookingMethod":"Stir Fried","prepNote":"about 6 scallions"}
+],
+"instructions":[
+"Warm 1 tsp oil in a wok over medium heat and stir the peanuts for 3 minutes, then off the heat for 1 minute more. Cool them completely so they turn crunchy.",
+"Toss the chicken with 1 tsp oil, 1 tsp cornstarch, the Shaoxing wine, salt and white pepper and leave for 20 minutes. Stir the soy sauces, vinegar, sugar, water and the rest of the cornstarch together for the sauce.",
+"Heat 2 tbsp oil in the wok over high heat and sear the chicken for 2 to 3 minutes until just cooked. Lift it out.",
+"Lower the heat, add 1 tbsp oil and fry the garlic, ginger, chilies, Sichuan pepper and scallion for 1 to 2 minutes until fragrant, without letting the chilies blacken.",
+"Return the chicken, turn the heat to high and stir-fry for 1 minute, add the stirred sauce and cook for about 1 minute until thick and glossy. Toss in the peanuts and serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the chicken breast and peanuts."},
+{"nutrient":"Niacin","note":"Chicken and peanuts are both rich in vitamin B3."},
+{"nutrient":"Magnesium","note":"From the peanuts."}
+],
+"citations":[
+{"source":"The Woks of Life, Kung Pao Chicken","url":"https://thewoksoflife.com/kung-pao-chicken/"},
+{"source":"Wikipedia, Kung Pao chicken","url":"https://en.wikipedia.org/wiki/Kung_Pao_chicken"}
+],
+"curationNote":"Quantities follow The Woks of Life; Wikipedia confirms the Sichuan origin, the dried chilies, Sichuan pepper, unroasted peanuts and scallion."
+},
+{
+"id":"curated_cn_beijing_kao_ya","name":"Beijing Kao Ya (Peking Duck)","builderType":"side","dishRole":"main","dishGroup":"Poultry","region":"Beijing","servings":6,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Lacquered duck with thin, crackling mahogany skin and juicy meat, rolled in soft pancakes with sweet bean sauce, crisp cucumber and sharp leek.",
+"healthBenefit":"Duck gives protein, iron and B vitamins and the cucumber adds freshness; the skin is the fattiest part, so it is a dish for a feast.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_five_spice_powder","servings":1.33,"note":"about 2 tsp"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Duck (Raw)","quantity":2200,"unit":"g","cutPrep":"whole, cleaned","cookingMethod":"Roasted","prepNote":"a Pekin duck"},
+{"category":"Herbs","baseName":"Distilled Vinegar (White)","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"for the soak and the glaze"},
+{"category":"Herbs","baseName":"Seasoning sauce, oyster sauce","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"rubbed inside the cavity"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":2,"unit":"tbsp","cutPrep":null,"prepNote":"rubbed inside the cavity"},
+{"notInDatabase":true,"name":"maltose","contains":"gluten","quantity":3,"unit":"tbsp","cutPrep":null,"prepNote":"for the glaze; honey also works"},
+{"category":"Bev","baseName":"Water, tap","quantity":3,"unit":"tbsp","cutPrep":"boiling","cookingMethod":null,"prepNote":"to loosen the maltose"},
+{"category":"PantryStaples","baseName":"Wheat flour, white, all-purpose, enriched, unbleached","quantity":250,"unit":"g","cutPrep":null,"cookingMethod":"Steamed","prepNote":"for about 20 thin pancakes"},
+{"category":"Bev","baseName":"Water, tap","quantity":175,"unit":"ml","cutPrep":"boiling","cookingMethod":null,"prepNote":"for the pancake dough"},
+{"category":"Fats","baseName":"Sesamolja","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"for the pancakes and the sauce"},
+{"notInDatabase":true,"name":"sweet bean sauce (tianmianjiang)","contains":"gluten","quantity":5,"unit":"tbsp","cutPrep":null,"prepNote":"hoisin is the common stand-in"},
+{"category":"Veg","baseName":"Cucumber","quantity":300,"unit":"g","cutPrep":"cut in thin batons","cookingMethod":null,"prepNote":null},
+{"category":"Veg","baseName":"Leek","quantity":100,"unit":"g","cutPrep":"white part, finely shredded","cookingMethod":null,"prepNote":"or scallion whites"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"for dipping the skin, the Beijing way"}
+],
+"instructions":[
+"Soak the duck in water with 1 tsp vinegar for 1 hour, then blanch it in boiling water for 2 to 3 minutes to tighten the skin. Hang it by the neck to drain.",
+"Mix the oyster sauce, Shaoxing wine and five spice and rub it inside the cavity only. Mix the maltose with the boiling water and the rest of the vinegar and brush it over the skin, then again after 30 minutes.",
+"Hang or set the duck on a rack in a cold, airy place or uncovered in the fridge for 24 hours or more, until the skin feels dry like paper.",
+"Heat the oven to 350°F (180°C). Roast the duck breast up on a rack over a tray of water for 20 minutes, turn it and roast 15 minutes, then lower to 250°F (120°C) for 30 to 40 minutes. Finish at 400 to 425°F (200 to 220°C) for 6 to 10 minutes, watching closely, until the skin is deep brown and crisp.",
+"While it roasts, mix the flour with the boiling water to a soft dough, rest it for 30 minutes, roll small rounds, brush half with sesame oil, press pairs together, roll very thin and cook in a dry pan for 30 to 60 seconds a side. Peel them apart and keep them warm in a steamer.",
+"Rest the duck for 10 minutes, carve the skin and meat into thin slices and serve with the pancakes, sweet bean sauce loosened with a little sesame oil, cucumber, leek and sugar for the skin."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the duck."},
+{"nutrient":"Iron","note":"Duck meat is richer in iron than chicken."},
+{"nutrient":"Selenium","note":"Duck contributes."}
+],
+"citations":[
+{"source":"China Sichuan Food, Homemade Peking Duck","url":"https://www.chinasichuanfood.com/homemade-peking-duck/"},
+{"source":"Wikipedia, Peking duck","url":"https://en.wikipedia.org/wiki/Peking_duck"}
+],
+"curationNote":"Seasoning, maltose glaze and oven stages follow China Sichuan Food, scaled from a 1 kg duck to a 2.2 kg one; Wikipedia gives the blanching, drying, sweet bean sauce, cucumber, scallion and sugar for the skin. Pancake dough is the standard hot water dough, sized from typical proportions. Five spice points at the base."
+},
+{
+"id":"curated_cn_bai_qie_ji","name":"Bai Qie Ji (White Cut Chicken)","builderType":"side","dishRole":"main","dishGroup":"Poultry","region":"Cantonese","servings":6,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"A whole chicken poached gently and plunged into ice, so the meat is silky and juicy under smooth, springy skin, served with a fragrant ginger and scallion oil.",
+"healthBenefit":"Poaching keeps this one of the leanest ways to cook a whole chicken, with plenty of protein, niacin and selenium; the dipping oil adds most of the fat.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_ginger_scallion_sauce","servings":8,"note":"about 1/2 cup"},
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":6,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Chicken, broilers or fryers","quantity":1800,"unit":"g","cutPrep":"whole","cookingMethod":"Poached","prepNote":"a free-range bird has the best texture"},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"for the poaching water"},
+{"category":"Herbs","baseName":"Ginger root","quantity":15,"unit":"g","cutPrep":"sliced","cookingMethod":"Poached","prepNote":"for the poaching water"}
+],
+"instructions":[
+"Bring a large pot of water, enough to cover the chicken, to a rolling boil with the salt and ginger.",
+"Holding the chicken by the neck or wings, dip it into the water and lift it out 3 times so the cavity fills, then submerge it fully.",
+"Cover and bring back to a boil over high heat for about 5 minutes, then lower to the gentlest simmer for 35 to 40 minutes, until a chopstick pushed into the thickest part of the thigh brings up clear juice.",
+"Lift the chicken out, drain the cavity and put it into a bowl of iced water for 5 to 10 minutes, turning it, until the skin is cool and taut.",
+"Drain, chop through the bone into pieces and serve at room temperature with the ginger and scallion sauce and rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the chicken."},
+{"nutrient":"Niacin","note":"Chicken is one of the richest sources of vitamin B3."},
+{"nutrient":"Selenium","note":"Chicken contributes."}
+],
+"citations":[
+{"source":"Made With Lau, White Cut Chicken","url":"https://madewithlau.com/recipes/white-cut-chicken"},
+{"source":"Wikipedia, White cut chicken","url":"https://en.wikipedia.org/wiki/White_cut_chicken"}
+],
+"curationNote":"Poaching times and the ice bath follow Made With Lau; Wikipedia places the dish in Guangdong, Fujian and Hong Kong and names the ginger, garlic and scallion condiment. The sauce points at the ginger scallion sauce base."
+},
+{
+"id":"curated_cn_see_yau_gai","name":"See Yau Gai (Soy Sauce Chicken)","builderType":"side","dishRole":"main","dishGroup":"Poultry","region":"Cantonese","servings":6,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"A whole chicken poached in a sweet, dark soy master sauce with star anise and rose wine until the skin is glossy mahogany and the meat tender and well seasoned.",
+"healthBenefit":"The chicken gives plenty of protein, niacin and selenium; only a little of the salty braising liquid stays on the bird, and the rest is kept for the next one.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_lu_shui","servings":16,"note":"the whole pot, strained and kept as a master stock afterwards"},
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":6,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Chicken, broilers or fryers","quantity":1800,"unit":"g","cutPrep":"whole","cookingMethod":"Poached","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":20,"unit":"g","cutPrep":"7 slices","cookingMethod":"Simmered","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":30,"unit":"g","cutPrep":"cut in lengths and smashed","cookingMethod":"Simmered","prepNote":null},
+{"notInDatabase":true,"name":"rose wine (mei gui lu jiu)","contains":"alcohol","quantity":60,"unit":"ml","cutPrep":null,"prepNote":"the Cantonese rose-scented spirit"},
+{"category":"Fats","baseName":"Rapsolja","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Leave the chicken out of the fridge for 1 hour. In a tall, narrow pot, warm the oil with the ginger for 30 seconds and the scallion for 30 seconds more.",
+"Add the rose wine and the master stock, bring to a simmer and cook gently for 10 minutes so the aromatics bloom.",
+"Raise the heat to a slow boil and lower the chicken in breast up, letting the cavity fill. Cook for 5 minutes, lift it out, drain the cavity and lower it back in.",
+"Bring the liquid back to a lazy simmer, about 210°F (99°C), cover and cook for 25 minutes, basting any part that sits above the liquid.",
+"Turn off the heat and leave the chicken covered in the liquid for 15 to 25 minutes, until the thickest part of the thigh reaches 165°F (74°C).",
+"Lift it out, rest for 10 to 15 minutes, brushing it with the sauce as it cools, then chop and serve over rice with a little sauce. Strain the rest and keep it chilled or frozen for the next time."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the chicken."},
+{"nutrient":"Niacin","note":"Chicken is rich in vitamin B3."}
+],
+"citations":[
+{"source":"The Woks of Life, Soy Sauce Chicken","url":"https://thewoksoflife.com/soy-sauce-chicken/"},
+{"source":"Wikipedia, Soy sauce chicken","url":"https://en.wikipedia.org/wiki/Soy_sauce_chicken"}
+],
+"curationNote":"Method and times follow The Woks of Life; Wikipedia places it in Guangdong as a Hong Kong siu mei dish. The soy, sugar, wine and star anise liquid is the Cantonese master stock, so it points at the lu shui base; most of it is kept and reused, so its full nutrition overstates what one chicken takes up."
+},
+{
+"id":"curated_cn_san_bei_ji","name":"San Bei Ji (Three Cup Chicken)","builderType":"side","dishRole":"main","dishGroup":"Poultry","region":"Taiwanese","servings":6,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Chicken wings seared in sesame oil with plenty of ginger and garlic, braised in rice wine and soy until sticky, then finished with a big handful of Thai basil.",
+"healthBenefit":"The chicken gives protein and the ginger, garlic and basil bring flavour without much else; the wings and sesame oil make it fairly rich.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":6,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Chicken Wings (with skin)","quantity":1000,"unit":"g","cutPrep":"cut at the joints, tips discarded","cookingMethod":"Braised","prepNote":"bone-in thigh pieces are also used"},
+{"category":"Fats","baseName":"Sesamolja","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":"Fried","prepNote":"black sesame oil in Taiwan"},
+{"category":"Fats","baseName":"Rapsolja","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":20,"unit":"g","cutPrep":"6 slices","cookingMethod":"Fried","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":15,"unit":"g","cutPrep":"5 cloves, sliced","cookingMethod":"Fried","prepNote":null},
+{"category":"Veg","baseName":"Pepper, hot chili, red, sun-dried","quantity":1,"unit":"each","cutPrep":"halved","cookingMethod":"Fried","prepNote":null},
+{"category":"Bev","baseName":"Water, tap","quantity":60,"unit":"ml","cutPrep":"warm","cookingMethod":"Braised","prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":60,"unit":"ml","cutPrep":null,"prepNote":"Taiwanese rice wine (mijiu) is the traditional choice"},
+{"notInDatabase":true,"name":"dark soy sauce","contains":"gluten","quantity":3,"unit":"tsp","cutPrep":null,"prepNote":"2 to 5 tsp, to taste for colour"},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":1.5,"unit":"tbsp","cutPrep":null,"cookingMethod":"Braised","prepNote":"light soy sauce"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"rock sugar is also used"},
+{"notInDatabase":true,"name":"Thai basil leaves","contains":"none","quantity":15,"unit":"g","cutPrep":"a small bunch","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":30,"unit":"g","cutPrep":"cut in 5 cm lengths","cookingMethod":"Stir Fried","prepNote":null}
+],
+"instructions":[
+"Warm the sesame oil and the neutral oil in a wok over medium heat with the ginger, garlic and chili for about 2 minutes until the ginger starts to curl.",
+"Turn the heat to high, add the wings in a single layer and sear for 3 to 4 minutes a side until golden.",
+"Add the warm water, rice wine, both soy sauces and the sugar, cover, lower to medium and cook for 15 to 20 minutes.",
+"Uncover, raise the heat and stir often for 3 to 5 minutes as the sauce reduces, darkens and clings to the chicken.",
+"Add the basil and scallion and toss for about 1 minute until wilted. Serve with rice, traditionally straight from a clay pot."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the chicken."},
+{"nutrient":"Niacin","note":"Chicken contributes vitamin B3."}
+],
+"citations":[
+{"source":"The Woks of Life, Three Cup Chicken","url":"https://thewoksoflife.com/three-cup-chicken/"},
+{"source":"Wikipedia, Three-cup chicken","url":"https://en.wikipedia.org/wiki/Three-cup_chicken"}
+],
+"curationNote":"Quantities follow The Woks of Life; Wikipedia traces the dish to Jiangxi and the Hakka of Ningdu and names the three cups of soy, rice wine and sesame oil. It is now best known as a Taiwanese dish, which is why the region reads Taiwanese."
+},
+{
+"id":"curated_cn_yan_ju_ji","name":"Yan Ju Ji (Salt-Baked Chicken)","builderType":"side","dishRole":"main","dishGroup":"Poultry","region":"Hakka","servings":6,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"A whole chicken seasoned with sand ginger and white pepper, wrapped in paper and buried in hot salt, so the meat steams in its juices and pulls apart fragrant and savoury.",
+"healthBenefit":"Cooking in a sealed salt bed adds no fat, so this gives plenty of protein, niacin and selenium; the salt stays outside the paper and only the rub seasons the bird.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":6,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Chicken, broilers or fryers","quantity":1350,"unit":"g","cutPrep":"whole","cookingMethod":"Baked","prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":2,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"notInDatabase":true,"name":"sand ginger powder","contains":"none","quantity":1.5,"unit":"tbsp","cutPrep":null,"prepNote":"the defining Hakka spice"},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":2,"unit":"tsp","cutPrep":"coarse","cookingMethod":null,"prepNote":"for the rub only"},
+{"category":"Herbs","baseName":"Ginger root","quantity":15,"unit":"g","cutPrep":"4 slices","cookingMethod":null,"prepNote":"in the cavity"},
+{"category":"Fats","baseName":"Rapsolja","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"brushed on the skin"},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":10,"unit":"g","cutPrep":"chopped","cookingMethod":null,"prepNote":"to garnish"}
+],
+"instructions":[
+"The day before, brush the chicken inside and out with the Shaoxing wine, then rub it all over with the sand ginger, white pepper and 2 tsp salt mixed together. Stand it on a rack and dry uncovered in the fridge overnight.",
+"Take it out 1 to 2 hours before cooking. Put the ginger in the cavity, brush the skin with oil, tie the legs and wrap the bird in two layers of parchment.",
+"Stir about 1.35 kg of coarse sea salt, roughly the weight of the chicken and not counted in the ingredients, in a dry wok over medium heat for about 15 minutes until it turns light brown and very hot.",
+"Spread a 1 cm layer of the hot salt in a heavy pot, set the wrapped chicken on it breast up, pour the rest of the salt over to bury it, cover and cook over medium heat for 35 minutes.",
+"Turn off the heat and leave covered for 30 to 40 minutes, until the salt is just warm. Lift the chicken out, unwrap it, pull the meat from the bones, pour the juices over and scatter with scallion."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the chicken."},
+{"nutrient":"Selenium","note":"Chicken contributes."}
+],
+"citations":[
+{"source":"The Woks of Life, Salt Baked Chicken, Hakka Style","url":"https://thewoksoflife.com/salt-baked-chicken/"}
+],
+"curationNote":"Quantities and the stovetop salt bake follow The Woks of Life, the one source opened. The salt bed stays outside the paper and is thrown away, so it is left out of the ingredients."
+},
+{
+"id":"curated_cn_kou_shui_ji","name":"Kou Shui Ji (Mouth-Watering Chicken)","builderType":"side","dishRole":"main","dishGroup":"Poultry","region":"Sichuan","servings":4,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Cold, silky poached chicken drenched in a red sauce of chili oil, black vinegar, soy, garlic and sesame, hot, numbing, tangy and nutty at once.",
+"healthBenefit":"Poached chicken gives lean protein and the peanuts and sesame add healthy fats, though the chili oil makes the sauce rich.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_hong_you","servings":5,"note":"about 5 tbsp"},
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Chicken, broiler, leg, meat and skin","quantity":800,"unit":"g","cutPrep":"whole legs","cookingMethod":"Poached","prepNote":"a small whole chicken is also used"},
+{"category":"Herbs","baseName":"Ginger root","quantity":15,"unit":"g","cutPrep":"sliced","cookingMethod":"Poached","prepNote":"for the poaching water"},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":30,"unit":"g","cutPrep":"2 for poaching, a little minced to finish","cookingMethod":"Poached","prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":"for the poaching water"},
+{"notInDatabase":true,"name":"Chinkiang black vinegar","contains":"gluten","quantity":2,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":1.5,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce"},
+{"category":"NutSeed","baseName":"Sesame Seeds Paste","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"Chinese sesame paste"},
+{"category":"Fats","baseName":"Sesamolja","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":8,"unit":"g","cutPrep":"crushed to a paste","cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"ground Sichuan peppercorn","contains":"none","quantity":0.5,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"NutSeed","baseName":"Peanut","quantity":30,"unit":"g","cutPrep":"crushed","cookingMethod":"Toasted","prepNote":null},
+{"category":"NutSeed","baseName":"Sesame seed","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":"Toasted","prepNote":null},
+{"category":"Veg","baseName":"Coriander (cilantro) leaves","quantity":5,"unit":"g","cutPrep":"chopped","cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Put the chicken in a pot with the ginger, two scallions and the Shaoxing wine, cover with water and bring to a boil over medium heat. Simmer for 8 to 10 minutes, then turn off the heat, cover and leave for 20 minutes.",
+"Lift the chicken into a bowl of iced water and leave until completely cool, 10 to 15 minutes. Drain, pat dry and cut into pieces or thick slices on a plate.",
+"Stir the sesame paste with the soy sauce until smooth, then mix in the black vinegar, sugar, garlic, sesame oil, Sichuan pepper and the chili oil with its sediment.",
+"Spoon the sauce over the chicken and scatter with the peanuts, sesame seeds, minced scallion and cilantro. Serve cold or at room temperature."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the chicken."},
+{"nutrient":"Vitamin E","note":"Peanuts, sesame and the oils contribute."}
+],
+"citations":[
+{"source":"China Sichuan Food, Saliva Chicken","url":"https://www.chinasichuanfood.com/saliva-chicken/"},
+{"source":"The Woks of Life, Sichuan Chicken in Chili Oil Sauce (Kou Shui Ji)","url":"https://thewoksoflife.com/sichuan-chicken-chili-oil-sauce-kou-shui-ji/"}
+],
+"curationNote":"Sauce proportions and the poaching follow China Sichuan Food; The Woks of Life adds the sesame paste and the ice bath for legs. The chili oil points at the Sichuan chili oil base."
+},
+{
+"id":"curated_cn_la_zi_ji","name":"La Zi Ji (Chongqing Chili Chicken)","builderType":"side","dishRole":"main","dishGroup":"Poultry","region":"Chongqing","servings":4,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Crisp, salty nuggets of fried chicken tossed through a mountain of dried chilies and Sichuan peppercorns, smoky and numbing, picked out piece by piece.",
+"healthBenefit":"The chicken gives protein; the chilies are mostly left on the plate, and frying makes this a dish for sharing rather than every day.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Chicken, broiler, thigh, meat without skin","quantity":450,"unit":"g","cutPrep":"cut in 2.5 cm cubes","cookingMethod":"Fried","prepNote":"bone-in pieces are used in Chongqing"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":"for the marinade"},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce, for the marinade"},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":30,"unit":"g","cutPrep":null,"cookingMethod":null,"prepNote":"for the coating"},
+{"category":"Herbs","baseName":"Spices, pepper, red or cayenne","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"for the coating"},
+{"notInDatabase":true,"name":"ground Sichuan peppercorn","contains":"none","quantity":1,"unit":"tsp","cutPrep":null,"prepNote":"for the coating"},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.75,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Fats","baseName":"Peanøttolje","quantity":80,"unit":"ml","cutPrep":null,"cookingMethod":"Fried","prepNote":"peanut oil"},
+{"notInDatabase":true,"name":"Sichuan peppercorns","contains":"none","quantity":2,"unit":"tsp","cutPrep":null,"prepNote":"whole"},
+{"category":"Veg","baseName":"Garlic","quantity":15,"unit":"g","cutPrep":"5 cloves, sliced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":10,"unit":"g","cutPrep":"minced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Pepper, hot chili, red, sun-dried","quantity":30,"unit":"g","cutPrep":"whole or snipped in half","cookingMethod":"Stir Fried","prepNote":"1 to 3 cups; mostly for fragrance and left on the plate"},
+{"category":"Herbs","baseName":"Chilli (chili), dried, ground","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"Sichuan chili flakes"},
+{"category":"NutSeed","baseName":"Sesame seed","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":"Toasted","prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":40,"unit":"g","cutPrep":"sliced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Coriander (cilantro) leaves","quantity":15,"unit":"g","cutPrep":"chopped","cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Toss the chicken with the Shaoxing wine and soy sauce and leave for 20 to 30 minutes. Mix the cornstarch, cayenne, ground Sichuan pepper and salt and toss the chicken in it.",
+"Heat a wok over medium-high heat until it smokes, add the oil and fry the chicken in a single layer, turning, for 6 to 8 minutes until crisp and golden on all sides. Lift it out.",
+"Lower the heat to medium-low, leaving about 2 tbsp of oil, and fry the whole Sichuan peppercorns for 1 minute, then the garlic and ginger for 1 minute.",
+"Add the dried chilies and chili flakes and stir for 1 minute until fragrant and deep red, taking care they do not blacken.",
+"Return the chicken, add the sesame seeds, sugar, scallion and cilantro, raise the heat and toss for 30 seconds to 1 minute. Serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the chicken thighs."},
+{"nutrient":"Vitamin A","note":"The dried chilies contribute carotenoids."}
+],
+"citations":[
+{"source":"Omnivore's Cookbook, La Zi Ji (Sichuan Mala Chicken)","url":"https://omnivorescookbook.com/mala-chicken/"},
+{"source":"The Woks of Life, Chongqing Chicken","url":"https://thewoksoflife.com/chongqing-chicken/"},
+{"source":"Wikipedia, Laziji","url":"https://en.wikipedia.org/wiki/Laziji"}
+],
+"curationNote":"Quantities follow Omnivore's Cookbook; The Woks of Life confirms the order of peppercorns, aromatics and chilies; Wikipedia gives the Geleshan, Chongqing origin. Neither page gives an oil temperature, so the frying is described by heat level."
+},
+{
+"id":"curated_cn_zui_ji","name":"Zui Ji (Drunken Chicken)","builderType":"side","dishRole":"main","dishGroup":"Poultry","region":"Zhejiang","servings":4,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Cold rolls of steamed chicken soaked for a day in Shaoxing huadiao wine and broth, tender and gently boozy, sweet and aromatic.",
+"healthBenefit":"Steamed chicken gives lean protein; the wine brine carries alcohol, so it is not a dish for children or anyone avoiding alcohol.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_sauce_chicken_stock","servings":1.5,"note":"about 360 ml, at room temperature"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Chicken, broiler, leg, meat and skin","quantity":600,"unit":"g","cutPrep":"2 leg quarters, boned, skin on","cookingMethod":"Steamed","prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":3,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"1/2 tsp to season the chicken, the rest for the brine"},
+{"notInDatabase":true,"name":"Shaoxing huadiao wine","contains":"alcohol","quantity":360,"unit":"ml","cutPrep":null,"prepNote":"for the brine; the chicken takes up only part of it"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":1.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Fruit","baseName":"Goji berry","quantity":8,"unit":"g","cutPrep":"dried","cookingMethod":null,"prepNote":"about 1 tbsp"}
+],
+"instructions":[
+"Pat the chicken dry, season each piece with 1/4 tsp salt, roll it up lengthwise and wrap tightly in foil, twisting the ends.",
+"Steam the bundles over high heat, covered, for 20 minutes, then turn off the heat and leave them in the steamer for 5 minutes.",
+"Put the bundles in iced water for 10 to 15 minutes until completely cool.",
+"Stir the stock, wine, sugar, the rest of the salt and the goji berries together in a narrow, deep container. Unwrap the chicken, submerge it, cover and chill for 24 hours.",
+"Slice and serve cold or at room temperature with a spoonful of the brine. Keep it in the brine and eat within 3 days."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the chicken."},
+{"nutrient":"Niacin","note":"Chicken contributes vitamin B3."}
+],
+"citations":[
+{"source":"The Woks of Life, Chinese Drunken Chicken","url":"https://thewoksoflife.com/drunken-chicken/"},
+{"source":"Wikipedia, Drunken chicken","url":"https://en.wikipedia.org/wiki/Drunken_chicken"}
+],
+"curationNote":"Quantities follow The Woks of Life; Wikipedia places Shaoxing-style drunken chicken in Zhejiang. Stock points at the shared chicken stock. Only part of the wine is absorbed, so the full amount overstates the alcohol eaten."
+},
+{
+"id":"curated_cn_ban_li_shao_ji","name":"Ban Li Shao Ji (Chicken with Chestnuts)","builderType":"side","dishRole":"main","dishGroup":"Poultry","region":"Shanghainese","servings":4,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Bone-in chicken braised with sweet, floury chestnuts and meaty shiitake in a glossy soy and rock sugar sauce scented with star anise and cinnamon.",
+"healthBenefit":"The chicken gives protein, and the chestnuts add fibre and potassium with far less fat than other nuts, making this a warming autumn braise.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Mushroom","baseName":"Shiitake mushroom dried","quantity":20,"unit":"g","cutPrep":"8 mushrooms, soaked","cookingMethod":"Braised","prepNote":"keep the soaking water"},
+{"category":"Meat","baseName":"Chicken, broiler, leg, meat and skin","quantity":680,"unit":"g","cutPrep":"bone in, chopped in bite-size pieces","cookingMethod":"Braised","prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":"Braised","prepNote":"light soy sauce"},
+{"category":"NutSeed","baseName":"Nuts, Chinese chestnuts","quantity":150,"unit":"g","cutPrep":"peeled","cookingMethod":"Braised","prepNote":"about 12; fresh, frozen or vacuum-packed"},
+{"category":"Fats","baseName":"Peanøttolje","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Fried","prepNote":"peanut oil"},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":45,"unit":"g","cutPrep":"2 in 5 cm pieces, 1 chopped","cookingMethod":"Fried","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":9,"unit":"g","cutPrep":"3 cloves, smashed","cookingMethod":"Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":6,"unit":"g","cutPrep":"2 slices","cookingMethod":"Fried","prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":3,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"notInDatabase":true,"name":"dark soy sauce","contains":"gluten","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":25,"unit":"g","cutPrep":null,"cookingMethod":null,"prepNote":"rock sugar"},
+{"notInDatabase":true,"name":"star anise","contains":"none","quantity":1,"unit":"each","cutPrep":null,"prepNote":null},
+{"category":"Herbs","baseName":"Spices, cinnamon, ground","quantity":3,"unit":"g","cutPrep":"one 7.5 cm stick","cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"Sichuan peppercorns","contains":"none","quantity":1,"unit":"tsp","cutPrep":null,"prepNote":"optional"},
+{"category":"Bev","baseName":"Water, tap","quantity":480,"unit":"ml","cutPrep":null,"cookingMethod":"Braised","prepNote":"360 ml plus 120 ml of the mushroom soaking water"},
+{"category":"Fats","baseName":"Sesamolja","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"optional"}
+],
+"instructions":[
+"Soak the shiitake in warm water for 1 to 2 hours until soft, squeeze them out and keep 120 ml of the soaking water. Toss the chicken with the light soy sauce.",
+"If the chestnuts are fresh, trim them, boil for 3 to 5 minutes and rub off the skins while warm.",
+"Heat the oil in a heavy pot over medium heat and brown the chestnuts for 3 to 4 minutes, then the scallion pieces, garlic, ginger and mushrooms for 2 minutes. Lift everything out.",
+"Brown the chicken in a single layer, 3 to 4 minutes a side.",
+"Add the water and mushroom water, scraping the bottom, then the Shaoxing wine, dark soy, salt, rock sugar, star anise, cinnamon and Sichuan peppercorns. Return the chestnuts, aromatics and mushrooms.",
+"Bring to a boil and keep at a gentle low boil, uncovered, for 25 minutes, stirring a few times near the end, until the chicken is tender and the sauce coats it. Drizzle with sesame oil, scatter with chopped scallion and serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the chicken."},
+{"nutrient":"Fibre","note":"Chestnuts and shiitake contribute."},
+{"nutrient":"Potassium","note":"Chestnuts are a good source."}
+],
+"citations":[
+{"source":"Omnivore's Cookbook, Braised Chestnut Chicken","url":"https://omnivorescookbook.com/braised-chestnut-chicken/"},
+{"source":"The Woks of Life, Braised Chicken with Chestnuts","url":"https://thewoksoflife.com/chinese-chicken-chestnuts/"}
+],
+"curationNote":"Quantities and the uncovered low boil follow Omnivore's Cookbook's Shanghai-style version; The Woks of Life confirms the shiitake and mushroom water."
+},
+{
+"id":"curated_cn_gai_lan_chao_niu_rou","name":"Gai Lan Chao Niu Rou (Beef with Chinese Broccoli)","builderType":"side","dishRole":"main","dishGroup":"Beef & Lamb","region":"Cantonese","servings":4,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Tender slices of seared flank steak with bright, slightly bitter Chinese broccoli in a light, glossy oyster sauce gravy with ginger and garlic.",
+"healthBenefit":"Gai lan is rich in vitamin K, vitamin C and folate, and lean flank steak adds protein, iron and zinc, so this is a well balanced plate.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_sauce_chicken_stock","servings":0.25,"note":"about 60 ml, hot"},
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Beef Flank (Raw)","quantity":225,"unit":"g","cutPrep":"sliced 6 mm thick across the grain","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":7,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"1 tsp for the marinade, 2 tbsp mixed with 2 tbsp water as a slurry, used as needed"},
+{"category":"Fats","baseName":"Rapsolja","quantity":10,"unit":"tsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":"1 tsp for the marinade, 3 tbsp for the wok"},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"half for the marinade, half for the sauce"},
+{"category":"Herbs","baseName":"Ginger root","quantity":10,"unit":"g","cutPrep":"3 slices","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":6,"unit":"g","cutPrep":"2 cloves, sliced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Chinese Broccoli","quantity":450,"unit":"g","cutPrep":"cut in 7.5 cm pieces","cookingMethod":"Stir Fried","prepNote":"broccolini also works"},
+{"category":"Herbs","baseName":"Seasoning sauce, oyster sauce","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Fats","baseName":"Sesamolja","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Bev","baseName":"Water, tap","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"for the slurry"}
+],
+"instructions":[
+"Toss the beef with 1 tsp each of cornstarch, oil and soy sauce and leave for 20 minutes.",
+"Heat a wok over high heat until it smokes, add 1 tbsp oil and sear the beef for 30 to 60 seconds until just browned. Lift it out.",
+"Add 2 tbsp oil and the ginger and let it sizzle for about 15 seconds, then add the garlic and Chinese broccoli and stir-fry for about 1 minute until bright green.",
+"Return the beef with the oyster sauce, the rest of the soy sauce, salt, sugar, sesame oil and hot stock and toss until mixed.",
+"When the liquid boils, stir in the slurry a little at a time until the sauce coats everything, then serve at once over rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Vitamin K","note":"Chinese broccoli is an excellent source."},
+{"nutrient":"Vitamin C","note":"From the Chinese broccoli."},
+{"nutrient":"Iron","note":"Flank steak gives well absorbed iron."}
+],
+"citations":[
+{"source":"The Woks of Life, Beef with Chinese Broccoli","url":"https://thewoksoflife.com/beef-with-chinese-broccoli/"},
+{"source":"Wikipedia, Gai lan","url":"https://en.wikipedia.org/wiki/Gai_lan"}
+],
+"curationNote":"Quantities follow The Woks of Life; Wikipedia confirms gai lan stir-fried with ginger and garlic and served with oyster sauce. Stock points at the shared chicken stock."
+},
+{
+"id":"curated_cn_zi_ran_yang_rou","name":"Zi Ran Yang Rou (Cumin Lamb)","builderType":"side","dishRole":"main","dishGroup":"Beef & Lamb","region":"Xinjiang","servings":4,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Crisp-edged pieces of lamb tossed with toasted cumin, dried chilies, Sichuan pepper and plenty of cilantro, smoky, earthy and hot.",
+"healthBenefit":"Lamb gives protein, iron, zinc and vitamin B12, and the onion and cilantro add a little fibre and vitamin C.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Lamb Leg (Raw)","quantity":450,"unit":"g","cutPrep":"cut in 1.5 cm cubes","cookingMethod":"Stir Fried","prepNote":"shoulder also works"},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":30,"unit":"g","cutPrep":null,"cookingMethod":null,"prepNote":"for coating"},
+{"category":"Herbs","baseName":"Cumin (cummin) seed, dried, ground","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Chilli (chili), dried, ground","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"Sichuan chili flakes"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"ground Sichuan peppercorn","contains":"none","quantity":0.25,"unit":"tsp","cutPrep":null,"prepNote":"optional"},
+{"category":"Fats","baseName":"Peanøttolje","quantity":4,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":"peanut oil"},
+{"category":"Veg","baseName":"Pepper, hot chili, red, sun-dried","quantity":15,"unit":"g","cutPrep":"whole","cookingMethod":"Stir Fried","prepNote":"about 1/2 cup"},
+{"category":"Veg","baseName":"Onion","quantity":110,"unit":"g","cutPrep":"1 small, large dice","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":10,"unit":"g","cutPrep":"minced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":15,"unit":"g","cutPrep":"5 cloves, sliced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Coriander (cilantro) leaves","quantity":20,"unit":"g","cutPrep":"chopped","cookingMethod":null,"prepNote":"about 1 cup"},
+{"category":"NutSeed","baseName":"Sesame seed","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":"Toasted","prepNote":"optional"}
+],
+"instructions":[
+"Mix the lamb with the soy sauce, Shaoxing wine and salt and leave for 20 minutes. Stir the cumin, chili flakes, sugar and Sichuan pepper together in a small bowl.",
+"Drain any liquid from the lamb and toss it with the cornstarch a few spoonfuls at a time until every piece is coated.",
+"Heat 3 tbsp oil in a large skillet or wok over medium-high heat and lay the lamb in a single layer. Cook undisturbed for about 1 minute until golden, flip and cook 30 to 40 seconds more. Lift it out.",
+"Add the last 1 tbsp oil with the dried chilies, ginger and garlic and stir for a few seconds until fragrant, then add the onion and cook for about 1 minute until it starts to soften.",
+"Return the lamb, scatter over the spice mix and stir at once to coat, then take the pan off the heat. Taste for salt, toss in the cilantro and sesame and serve hot."
+],
+"nutritionHighlights":[
+{"nutrient":"Vitamin B12","note":"Lamb is a rich source."},
+{"nutrient":"Zinc","note":"From the lamb."},
+{"nutrient":"Iron","note":"Lamb and cumin both contribute."}
+],
+"citations":[
+{"source":"Omnivore's Cookbook, Xinjiang Cumin Lamb","url":"https://omnivorescookbook.com/cumin-lamb/"},
+{"source":"The Woks of Life, Xinjiang Cumin Lamb","url":"https://thewoksoflife.com/cumin-lamb/"}
+],
+"curationNote":"Quantities follow Omnivore's Cookbook; The Woks of Life uses shoulder, whole toasted cumin seeds and fresh red chilies in the same order of cooking."
+},
+{
+"id":"curated_cn_hei_jiao_niu_liu","name":"Hei Jiao Niu Liu (Black Pepper Beef)","builderType":"side","dishRole":"main","dishGroup":"Beef & Lamb","region":"Cantonese","servings":4,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Tender strips of beef with onion and sweet peppers in a glossy brown sauce carried by plenty of coarsely ground black pepper.",
+"healthBenefit":"Beef gives protein, iron, zinc and B12, and the bell peppers add a good dose of vitamin C, which helps the body take up that iron.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_sauce_chicken_stock","servings":0.5,"note":"about 120 ml"},
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Beef Flank (Raw)","quantity":450,"unit":"g","cutPrep":"sliced 3 mm thick across the grain","cookingMethod":"Stir Fried","prepNote":"tenderloin is the restaurant choice"},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":8,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"2 tsp for the marinade, 2 tbsp for the sauce"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":8,"unit":"tsp","cutPrep":null,"prepNote":"2 tsp for the marinade, 2 tbsp for the sauce"},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"2 tsp for the marinade, 1 tbsp for the sauce"},
+{"notInDatabase":true,"name":"baking soda","contains":"none","quantity":0.5,"unit":"tsp","cutPrep":null,"prepNote":"tenderises the beef"},
+{"notInDatabase":true,"name":"dark soy sauce","contains":"gluten","quantity":1,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Herbs","baseName":"Pepper, black, ground","quantity":2,"unit":"tsp","cutPrep":"coarsely ground","cookingMethod":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Fats","baseName":"Peanøttolje","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":"peanut oil"},
+{"category":"Herbs","baseName":"Ginger root","quantity":8,"unit":"g","cutPrep":"minced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":6,"unit":"g","cutPrep":"2 cloves, minced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Onion","quantity":75,"unit":"g","cutPrep":"1/2, sliced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Pepper, sweet, green","quantity":120,"unit":"g","cutPrep":"sliced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Pepper, sweet, red","quantity":120,"unit":"g","cutPrep":"sliced","cookingMethod":"Stir Fried","prepNote":null}
+],
+"instructions":[
+"Halve the flank steak lengthwise and slice it 3 mm thick across the grain. Mix with 2 tsp each of soy sauce, Shaoxing wine and cornstarch and the baking soda and leave for 15 minutes.",
+"Stir the stock, the rest of the soy sauce and Shaoxing wine, the dark soy, 1 tbsp cornstarch, black pepper, sugar and salt together for the sauce.",
+"Heat 1 tbsp oil in a wok or skillet over medium-high heat until shimmering, spread the beef in one layer and sear without moving for 1 to 2 minutes, then flip and cook about 1 minute more. Lift it out.",
+"Lower to medium, add the last 1 tbsp oil with the ginger and garlic and stir for about 1 minute, then add the onion and peppers and stir-fry for 1 minute so they stay crisp.",
+"Stir the sauce again, pour it in and cook a few seconds until it thickens, return the beef, toss to coat and serve straight away with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Vitamin C","note":"Bell peppers are an excellent source."},
+{"nutrient":"Iron","note":"From the beef."},
+{"nutrient":"Zinc","note":"Beef is one of the richest food sources."}
+],
+"citations":[
+{"source":"Omnivore's Cookbook, Black Pepper Steak","url":"https://omnivorescookbook.com/black-pepper-steak/"},
+{"source":"China Sichuan Food, Black Pepper Beef Stir Fry","url":"https://www.chinasichuanfood.com/chinese-black-pepper-beef/"}
+],
+"curationNote":"Quantities follow Omnivore's Cookbook; China Sichuan Food gives the same method with oyster sauce in the marinade. Stock points at the shared chicken stock."
+},
+{
+"id":"curated_cn_lu_niu_rou","name":"Lu Niu Rou (Braised Beef Shank)","builderType":"side","dishRole":"main","dishGroup":"Beef & Lamb","region":"Northern Chinese","servings":6,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Beef shank braised slowly in soy, Shaoxing wine, star anise and cinnamon, chilled and sliced thin so each slice shows its marbling of tender tendon, savoury and gently spiced.",
+"healthBenefit":"Shank is lean and its connective tissue gives collagen; with protein, iron, zinc and B12 it is a good cold dish, though the braising liquid is salty.",
+"overallTier":"strong",
+"components":[],
+"ingredients":[
+{"category":"Meat","baseName":"Beef Hind Shank / Shin (Raw)","quantity":1000,"unit":"g","cutPrep":"boneless, trimmed, cut in 2 or 3 pieces","cookingMethod":"Braised","prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":120,"unit":"ml","cutPrep":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":4,"unit":"tbsp","cutPrep":null,"cookingMethod":"Braised","prepNote":"light soy sauce"},
+{"notInDatabase":true,"name":"dark soy sauce","contains":"gluten","quantity":3,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"notInDatabase":true,"name":"star anise","contains":"none","quantity":7,"unit":"each","cutPrep":null,"prepNote":null},
+{"category":"Veg","baseName":"Pepper, hot chili, red, sun-dried","quantity":1,"unit":"each","cutPrep":"sliced","cookingMethod":"Braised","prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"rock sugar"},
+{"category":"Herbs","baseName":"Spices, cinnamon, ground","quantity":3,"unit":"g","cutPrep":"one stick","cookingMethod":null,"prepNote":"Chinese cassia stick"},
+{"category":"Bev","baseName":"Water, tap","quantity":1000,"unit":"ml","cutPrep":null,"cookingMethod":"Braised","prepNote":"enough to come two thirds up the meat; most of the liquid is not eaten"},
+{"category":"NutSeed","baseName":"Sesame seed","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":"Toasted","prepNote":"to garnish"},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":10,"unit":"g","cutPrep":"chopped","cookingMethod":null,"prepNote":"to garnish"}
+],
+"instructions":[
+"Trim the excess fat from the shank and cut it into 2 or 3 chunks. Boil it in a pot of water for about 8 minutes, then drain and rinse.",
+"Put the beef in a small, deep pan over medium-low heat with the Shaoxing wine, both soy sauces, star anise, chili, rock sugar and cinnamon and roll it in the sauce for a few minutes.",
+"Add water to come two thirds of the way up the meat, cover and bring to a boil over medium-high heat, then lower to a simmer and cook covered for 2 hours, turning the meat every 30 minutes.",
+"Turn off the heat and leave the beef covered in the liquid for about 2 hours, turning it once, then chill it in the liquid, ideally overnight.",
+"Lift the beef out, slice it thinly across the grain and serve cold with sesame seeds and scallion, or add it to noodle soup."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the shank."},
+{"nutrient":"Zinc","note":"Beef is one of the richest food sources."},
+{"nutrient":"Vitamin B12","note":"From the beef."}
+],
+"citations":[
+{"source":"The Woks of Life, Chinese Braised Beef Shank","url":"https://thewoksoflife.com/chinese-braised-beef-shank/"},
+{"source":"China Sichuan Food, Chinese Braised Beef Shank","url":"https://www.chinasichuanfood.com/chinese-braised-beef-shank/"}
+],
+"curationNote":"Quantities and method follow The Woks of Life; China Sichuan Food gives a version in beef stock with a fuller spice bag and an overnight soak. Only part of the braising liquid clings to the meat, so the soy figures overstate the salt eaten."
+},
+{
+"id":"curated_cn_shui_zhu_niu_rou","name":"Shui Zhu Niu Rou (Water-Boiled Beef)","builderType":"side","dishRole":"main","dishGroup":"Beef & Lamb","region":"Sichuan","servings":4,"servingSizeAmount":1,"servingSizeUnit":"bowl",
+"flavorProfile":"Silky slices of beef poached in a fiery red broth of chili bean paste over sprouts and enoki, then topped with garlic and chili and sizzled with hot oil.",
+"healthBenefit":"The beef gives protein, iron and zinc and the sprouts and mushrooms add fibre and B vitamins; most of the oil stays in the bowl, so lift the meat out rather than drinking the broth.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_sauce_chicken_stock","servings":1.5,"note":"about 360 ml"},
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per bowl"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Beef Flank (Raw)","quantity":285,"unit":"g","cutPrep":"sliced 6 mm thick across the grain","cookingMethod":"Poached","prepNote":null},
+{"notInDatabase":true,"name":"baking soda","contains":"none","quantity":0.25,"unit":"tsp","cutPrep":null,"prepNote":"with 60 ml water, rinsed off before cooking"},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Fats","baseName":"Peanøttolje","quantity":120,"unit":"ml","cutPrep":null,"cookingMethod":"Fried","prepNote":"1 tbsp for the vegetables, 1/4 cup for the broth, 3 tbsp to sizzle"},
+{"category":"Sprouts","baseName":"Soybean Sprouts (Raw)","quantity":170,"unit":"g","cutPrep":"washed","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Enoki Mushrooms","quantity":200,"unit":"g","cutPrep":"trimmed","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":10,"unit":"g","cutPrep":"3 slices","cookingMethod":"Fried","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":30,"unit":"g","cutPrep":"white parts, in 1 cm pieces","cookingMethod":"Fried","prepNote":null},
+{"notInDatabase":true,"name":"Sichuan peppercorns","contains":"none","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":"whole, plus 1/2 tsp ground to finish"},
+{"notInDatabase":true,"name":"doubanjiang (Pixian chili bean paste)","contains":"gluten","quantity":3,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":1.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":10,"unit":"g","cutPrep":"minced","cookingMethod":null,"prepNote":"about 1 tbsp"},
+{"category":"Herbs","baseName":"Chilli (chili), dried, ground","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"chili flakes"},
+{"category":"Veg","baseName":"Coriander (cilantro) leaves","quantity":4,"unit":"g","cutPrep":"chopped","cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Toss the beef with the baking soda and 60 ml water and leave for 1 hour, then rinse under gently running water for 5 minutes, drain and coat with the cornstarch.",
+"Stir-fry the sprouts in 1 tbsp oil over high heat for about 2 minutes, add the enoki and stir until wilted, then spread them in the bottom of a deep serving bowl. Wipe out the wok.",
+"Heat 1/4 cup oil over medium heat and fry the ginger until light brown, then the scallion and whole Sichuan peppercorns for 2 minutes. Add the chili bean paste and fry for 3 to 4 minutes until the oil turns bright red.",
+"Add the stock and sugar and bring to a boil over high heat. Add the beef and stir gently to separate the slices, turning off the heat as soon as they turn opaque.",
+"Pour the beef and broth over the vegetables, top with garlic, chili flakes and cilantro, then heat 3 tbsp oil until shimmering and pour it over in a thin stream so it sizzles. Dust with ground Sichuan pepper and serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the beef and soybean sprouts."},
+{"nutrient":"Iron","note":"From the beef."},
+{"nutrient":"Niacin","note":"Enoki and beef both contribute."}
+],
+"citations":[
+{"source":"The Woks of Life, Sichuan Boiled Beef","url":"https://thewoksoflife.com/sichuan-boiled-beef/"},
+{"source":"Wikipedia, Shuizhu","url":"https://en.wikipedia.org/wiki/Shuizhu"}
+],
+"curationNote":"Quantities follow The Woks of Life; Wikipedia gives the Sichuan origin, the brief poaching over boiled vegetables and the hot oil poured over chili, Sichuan pepper and garlic. All of the oil is listed although much of it stays in the bowl. Stock points at the shared chicken stock."
+},
+{
+"id":"curated_cn_fan_qie_niu_nan","name":"Fan Qie Niu Nan (Tomato Beef Brisket)","builderType":"side","dishRole":"main","dishGroup":"Beef & Lamb","region":"Cantonese","servings":4,"servingSizeAmount":1,"servingSizeUnit":"bowl",
+"flavorProfile":"Chunks of brisket stewed until tender with star anise and bay, then reduced with fresh tomatoes and ketchup into a thick, sweet and tangy red sauce.",
+"healthBenefit":"Brisket gives protein, iron, zinc and B12, and cooked tomatoes add lycopene and vitamin C; the brisket is fatty, so skimming the stew helps.",
+"overallTier":"moderate",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per bowl"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Beef Brisket (Raw)","quantity":800,"unit":"g","cutPrep":"cut in 2.5 cm cubes","cookingMethod":"Stewed","prepNote":null},
+{"category":"Veg","baseName":"Tomato","quantity":500,"unit":"g","cutPrep":"4 medium, peeled and chopped","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Fats","baseName":"Rapsolja","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":20,"unit":"g","cutPrep":"6 slices","cookingMethod":"Stewed","prepNote":"half for blanching, half for the stew"},
+{"category":"Veg","baseName":"Garlic","quantity":12,"unit":"g","cutPrep":"4 cloves, peeled","cookingMethod":"Stewed","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":30,"unit":"g","cutPrep":"2, tied in a knot","cookingMethod":"Stewed","prepNote":null},
+{"notInDatabase":true,"name":"star anise","contains":"none","quantity":2,"unit":"each","cutPrep":null,"prepNote":null},
+{"category":"Herbs","baseName":"Spices, bay leaf","quantity":2,"unit":"each","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":4,"unit":"tbsp","cutPrep":null,"prepNote":"half for blanching, half for the stew"},
+{"category":"Herbs","baseName":"Tomato ketchup","quantity":120,"unit":"ml","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"then to taste"},
+{"category":"Bev","baseName":"Water, tap","quantity":1000,"unit":"ml","cutPrep":null,"cookingMethod":"Stewed","prepNote":"to cover the beef"},
+{"category":"Veg","baseName":"Coriander (cilantro) leaves","quantity":10,"unit":"g","cutPrep":"chopped","cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Put the beef in a pot of cold water with 2 tbsp Shaoxing wine and 3 slices of ginger, bring to a boil and skim the scum until the liquid runs clear.",
+"Move the beef and its liquid to a pressure cooker with the rest of the ginger, the garlic, scallion knot, star anise, bay leaves, the rest of the wine and the salt and cook at high pressure for 40 minutes. In a heavy covered pot on the stove, simmer gently for 1 1/2 to 2 hours instead, until a chopstick slides in easily.",
+"Score, blanch and peel the tomatoes and chop them.",
+"Heat the oil in a wok over medium-high heat and fry the tomatoes until they break down and turn juicy, then add the ketchup and cook until the sauce thickens.",
+"Lift the spices out of the beef, pour the beef and its liquid into the tomato sauce and boil over high heat, stirring, until the sauce is thick, 10 to 15 minutes. Adjust the salt, stir in the cilantro and serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Lycopene","note":"Cooked tomatoes and ketchup are rich in it."},
+{"nutrient":"Zinc","note":"From the brisket."},
+{"nutrient":"Vitamin B12","note":"From the beef."}
+],
+"citations":[
+{"source":"Woks of Love, Chinese Tomato Beef Stew (Xihongshi Dun Niunan)","url":"https://woksoflove.com/wprm_print/chinese-tomato-beef-stew-xihongshi-dun-niunan"}
+],
+"curationNote":"Quantities and the pressure cooker method follow Woks of Love, the one recipe that opened. The stovetop time is a standard brisket braising time, not from that source."
+},
+{
+"id":"curated_cn_yang_rou_chuan","name":"Yang Rou Chuan (Lamb Skewers)","builderType":"snack","dishRole":"main","dishGroup":"Beef & Lamb","region":"Xinjiang","servings":4,"servingSizeAmount":3,"servingSizeUnit":"skewer",
+"flavorProfile":"Small cubes of lamb with nubs of fat threaded close together, charred over coals and showered with cumin, chili and salt, smoky and juicy.",
+"healthBenefit":"Lamb gives protein, iron, zinc and vitamin B12; the fat on the skewers keeps them juicy and much of it drips away on the grill.",
+"overallTier":"strong",
+"components":[],
+"ingredients":[
+{"category":"Meat","baseName":"Lamb Shoulder (Raw)","quantity":450,"unit":"g","cutPrep":"lean in 1.5 cm cubes, fat in smaller pieces","cookingMethod":"Grilled","prepNote":"about 7 parts lean to 3 parts fat"},
+{"category":"Veg","baseName":"Onion","quantity":75,"unit":"g","cutPrep":"1/2, sliced","cookingMethod":null,"prepNote":"flavours the marinade, not eaten"},
+{"category":"Fats","baseName":"Peanøttolje","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"peanut oil"},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce, or tamari for gluten free"},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Cumin (cummin) seed, dried, ground","quantity":4,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"2 tsp in the marinade, the rest for the grill"},
+{"category":"Herbs","baseName":"Spices, cumin seed","quantity":2,"unit":"tbsp","cutPrep":"whole","cookingMethod":"Grilled","prepNote":"optional"},
+{"category":"Herbs","baseName":"Chilli (chili), dried, ground","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"half in the marinade, half for the grill"},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"ground Sichuan peppercorn","contains":"none","quantity":0.25,"unit":"tsp","cutPrep":null,"prepNote":"optional"}
+],
+"instructions":[
+"Mix the oil, soy sauce, cornstarch, 2 tsp ground cumin, half the chili powder, the salt and the Sichuan pepper for the marinade.",
+"Thread the lamb closely onto soaked bamboo or metal skewers, putting a piece of fat after every two or three lean cubes, to make about 12 skewers.",
+"Lay the onion in a bag or dish, put the skewers on top, pour over the marinade, coat well and marinate for 30 minutes at room temperature or up to overnight in the fridge.",
+"Build a charcoal fire with a hot side and a cooler side. Sear the skewers about a finger's width apart over the hot side, turning often, until dark brown all over.",
+"Move them to the cooler side, sprinkle with ground cumin and chili, turn, sprinkle again with cumin and the whole seeds and cook until done through, a few minutes more. Serve hot."
+],
+"nutritionHighlights":[
+{"nutrient":"Vitamin B12","note":"Lamb is a rich source."},
+{"nutrient":"Zinc","note":"From the lamb."},
+{"nutrient":"Iron","note":"Lamb and cumin both contribute."}
+],
+"citations":[
+{"source":"Omnivore's Cookbook, Xinjiang Lamb Skewers","url":"https://omnivorescookbook.com/xinjiang-lamb-skewers/"},
+{"source":"The Woks of Life, Beijing Lamb Skewers (Yangrou Chuan)","url":"https://thewoksoflife.com/spicy-beijing-lamb-skewers-yangrou-chuan/"},
+{"source":"Wikipedia, Chuan (food)","url":"https://en.wikipedia.org/wiki/Chuan_(food)"}
+],
+"curationNote":"Quantities follow Omnivore's Cookbook; The Woks of Life's Beijing version uses only cumin, chili flakes and salt; Wikipedia gives the Xinjiang Uyghur origin. Neither recipe gives grill minutes, so doneness is judged by colour."
+},
+{
+"id":"curated_cn_gan_bian_niu_rou_si","name":"Gan Bian Niu Rou Si (Dry-Fried Beef)","builderType":"side","dishRole":"main","dishGroup":"Beef & Lamb","region":"Sichuan","servings":4,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Strips of beef fried until their juices cook off and the edges turn chewy and crisp, tossed with chili bean paste, celery, carrot and Sichuan pepper.",
+"healthBenefit":"Flank steak gives protein, iron and zinc, and the carrot and celery add vitamin A and fibre; it uses less oil than a deep-fried version.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Fats","baseName":"Rapsolja","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Meat","baseName":"Beef Flank (Raw)","quantity":340,"unit":"g","cutPrep":"cut in 8 mm strips","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":15,"unit":"g","cutPrep":"5 slices, julienned","cookingMethod":"Stir Fried","prepNote":null},
+{"notInDatabase":true,"name":"doubanjiang (Pixian chili bean paste)","contains":"gluten","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":"sweet bean sauce for a mild version"},
+{"category":"Veg","baseName":"Celery","quantity":80,"unit":"g","cutPrep":"2 stalks, julienned","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Carrot","quantity":60,"unit":"g","cutPrep":"1 small, julienned","cookingMethod":"Stir Fried","prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":0.75,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce"},
+{"category":"Fats","baseName":"Sesamolja","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"ground Sichuan peppercorn","contains":"none","quantity":1,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Herbs","baseName":"Chilli (chili), dried, ground","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"optional chili flakes"},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":30,"unit":"g","cutPrep":"2, julienned","cookingMethod":"Stir Fried","prepNote":null}
+],
+"instructions":[
+"Heat a wok over high heat until it smokes, add 1 tbsp oil and spread the beef in a single layer. Sear for 2 to 3 minutes, stirring now and then, until the liquid has cooked off and the beef is well browned. Lift it out.",
+"Lower the heat, add the remaining 2 tbsp oil and the ginger and let it crisp, then add the chili bean paste and fry for about 1 minute until the oil turns red.",
+"Add the celery, carrot and beef, turn the heat to high and stir to coat, then add the Shaoxing wine, sugar, soy sauce, sesame oil, Sichuan pepper, chili flakes and scallion.",
+"Stir-fry for about 1 minute until everything is well mixed and serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Vitamin A","note":"From the carrot."},
+{"nutrient":"Iron","note":"From the beef."},
+{"nutrient":"Zinc","note":"Beef is one of the richest food sources."}
+],
+"citations":[
+{"source":"The Woks of Life, Sichuan Beef, Dry-Fried","url":"https://thewoksoflife.com/sichuan-beef-dry-fried/"},
+{"source":"China Sichuan Food, Sichuan Dry Fried Beef","url":"https://www.chinasichuanfood.com/sichuan-dry-fried-beef/"}
+],
+"curationNote":"Quantities follow The Woks of Life; China Sichuan Food fries finer shreds in more oil at about 320°F (160°C) with dried chilies and a dash of black vinegar."
+},
+{
+"id":"curated_cn_hao_you_niu_rou","name":"Hao You Niu Rou (Beef in Oyster Sauce)","builderType":"side","dishRole":"main","dishGroup":"Beef & Lamb","region":"Cantonese","servings":4,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Velvety slices of beef with onion and oyster mushrooms in a savoury, glossy oyster sauce, piled in a ring of blanched Chinese broccoli.",
+"healthBenefit":"Beef gives protein, iron and zinc, the mushrooms add B vitamins and the gai lan brings vitamins K and C.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_sauce_chicken_stock","servings":0.5,"note":"about 120 ml"},
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Beef Flank (Raw)","quantity":340,"unit":"g","cutPrep":"thinly sliced across the grain","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Bev","baseName":"Water, tap","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"for the marinade"},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"half for the marinade, half for the sauce"},
+{"category":"Fats","baseName":"Rapsolja","quantity":11,"unit":"tsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":"1 tsp marinade, 1 tsp blanching water, 3 tbsp for the wok"},
+{"category":"Herbs","baseName":"Seasoning sauce, oyster sauce","quantity":5.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"1 tsp for the marinade, 1 1/2 tbsp for the sauce"},
+{"notInDatabase":true,"name":"baking soda","contains":"none","quantity":0.25,"unit":"tsp","cutPrep":null,"prepNote":"optional tenderiser"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"dark soy sauce","contains":"gluten","quantity":1,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Veg","baseName":"Chinese Broccoli","quantity":225,"unit":"g","cutPrep":"cut in pieces","cookingMethod":"Blanched","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":3,"unit":"g","cutPrep":"1 slice","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":3,"unit":"g","cutPrep":"1 clove, sliced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Onion","quantity":100,"unit":"g","cutPrep":"1 small, in wedges","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Mushroom","baseName":"Oyster mushroom","quantity":70,"unit":"g","cutPrep":"torn","cookingMethod":"Stir Fried","prepNote":"about 1 cup"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":null}
+],
+"instructions":[
+"Mix the beef with the water, 1/2 tsp cornstarch, 1 tsp oil, 1 tsp oyster sauce and the baking soda and leave for 30 minutes, or up to 4 hours in the fridge. Stir the stock, the rest of the oyster sauce, sugar, the rest of the cornstarch, dark soy and white pepper together for the sauce.",
+"Bring a wok half full of water to a boil with 1 tsp oil, blanch the Chinese broccoli for about 1 minute, drain without rinsing and arrange it around the rim of a serving plate.",
+"Heat the clean wok over high heat until it lightly smokes, add 1 tbsp oil and sear the beef briefly until browned, about 1 minute. Lift it out.",
+"Lower to medium, add 2 tbsp oil and the ginger for 30 seconds, then the garlic for 15 seconds. Raise the heat, add the onion and mushrooms for 15 seconds, then the Shaoxing wine for 30 seconds.",
+"Stir the sauce, pour it in and bring to a simmer, stirring, until it thickens. Return the beef, toss to coat, pour off any water from the broccoli plate and pile the beef in the centre. Serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Iron","note":"From the beef."},
+{"nutrient":"Vitamin K","note":"From the Chinese broccoli."},
+{"nutrient":"Niacin","note":"Oyster mushrooms and beef both contribute."}
+],
+"citations":[
+{"source":"The Woks of Life, Beef with Oyster Sauce","url":"https://thewoksoflife.com/beef-oyster-sauce/"}
+],
+"curationNote":"Quantities and method follow The Woks of Life, the one source opened for this dish. Stock points at the shared chicken stock."
+},
+{
+"id":"curated_cn_qing_zheng_yu","name":"Qing Zheng Yu (Steamed Whole Fish)","builderType":"side","dishRole":"main","dishGroup":"Fish & Seafood","region":"Cantonese","servings":2,"servingSizeAmount":1,"servingSizeUnit":"serving",
+"flavorProfile":"A whole fish steamed just until the flesh flakes, covered with shredded scallion and chili, sizzled with smoking oil and dressed with warm soy sauce.",
+"healthBenefit":"Steaming keeps the fish moist with very little fat added, and sea bass gives lean protein, selenium, vitamin B12 and some omega-3 fats.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":2,"note":"1 cup cooked per serving"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Fish, sea bass","quantity":600,"unit":"g","cutPrep":"whole, cleaned and scaled, scored at the thickest part","cookingMethod":"Steamed","prepNote":"weight includes head and bones"},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":120,"unit":"g","cutPrep":"half in short lengths, half finely shredded","cookingMethod":"Steamed","prepNote":"the steaming scallions are thrown away"},
+{"category":"Herbs","baseName":"Ginger root","quantity":15,"unit":"g","cutPrep":"sliced","cookingMethod":"Steamed","prepNote":"thrown away after steaming"},
+{"category":"Veg","baseName":"Red Chilli (Chili)","quantity":10,"unit":"g","cutPrep":"finely shredded","cookingMethod":null,"prepNote":null},
+{"category":"Veg","baseName":"Coriander (cilantro) leaves","quantity":4,"unit":"g","cutPrep":"2 sprigs","cookingMethod":null,"prepNote":null},
+{"category":"Fats","baseName":"Rapsolja","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Fried","prepNote":"heated until almost smoking"},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"seasoned soy sauce for seafood if you have it, warmed"}
+],
+"instructions":[
+"Clean the fish well, removing the dark membrane inside the belly, and pat it dry. Score the thickest part so it cooks evenly and tuck half the scallion lengths and the ginger into the cavity.",
+"Lay the rest of the scallion lengths or two chopsticks on a heatproof plate and set the fish on top so the steam can circulate. Soak the shredded scallion in cold water.",
+"Bring water to a full boil in a large pot or wok, set the plate in, cover and steam for 5 to 7 minutes for a sea fish of about 600 g (7 to 10 minutes for a freshwater fish), until the flesh is opaque and flakes, about 140°F (60°C) at the thickest part. Leave it covered off the heat for 1 to 2 minutes.",
+"Move the fish to a clean plate, discard the cooked scallion and ginger and the liquid, and pile the drained shredded scallion and chili on top.",
+"Heat the oil until it almost smokes and pour it evenly over the scallion so it sizzles, then pour the warm soy sauce around the fish and serve within 10 minutes."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"Lean and easy to digest."},
+{"nutrient":"Selenium","note":"Sea bass is a good source."},
+{"nutrient":"Vitamin B12","note":"From the fish."}
+],
+"citations":[
+{"source":"China Sichuan Food, Chinese Steamed Fish","url":"https://www.chinasichuanfood.com/chinese-steamed-fish/"},
+{"source":"The Woks of Life, Steamed Fish","url":"https://thewoksoflife.com/steamed-fish/"}
+],
+"curationNote":"Quantities and method follow China Sichuan Food; The Woks of Life gives the steaming times by size of fish and the 140°F (60°C) doneness test, in a version finished with black bean sauce."
+},
+{
+"id":"curated_cn_shui_zhu_yu","name":"Shui Zhu Yu (Sichuan Boiled Fish)","builderType":"side","dishRole":"main","dishGroup":"Fish & Seafood","region":"Sichuan","servings":3,"servingSizeAmount":1,"servingSizeUnit":"bowl",
+"flavorProfile":"Silky slices of white fish poached in a gingery broth over soybean sprouts, then showered with dried chilies and green Sichuan peppercorns and sizzled with hot oil, numbing and fragrant.",
+"healthBenefit":"The fish is lean protein with selenium and B12 and the sprouts add fibre and vitamin C; lift the fish out with a slotted spoon so the hot oil stays behind.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_sauce_chicken_stock","servings":3,"note":"about 720 ml"},
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":3,"note":"1 cup cooked per bowl"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Tilapia rå","quantity":450,"unit":"g","cutPrep":"fillets, sliced 6 mm thick at an angle","cookingMethod":"Poached","prepNote":"catfish, flounder or carp also work"},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.75,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"plus more to taste for the broth"},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"half for the fish, half for the broth"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":2,"unit":"tbsp","cutPrep":null,"prepNote":"half for the fish, half for the broth"},
+{"category":"Dairy","baseName":"Chicken Egg White (Raw)","quantity":33,"unit":"g","cutPrep":"1 egg white","cookingMethod":null,"prepNote":null},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":1.5,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Fats","baseName":"Rapsolja","quantity":135,"unit":"ml","cutPrep":null,"cookingMethod":"Fried","prepNote":"1 tbsp for the fish, 1/2 cup heated to finish"},
+{"category":"Bev","baseName":"Water, tap","quantity":480,"unit":"ml","cutPrep":null,"cookingMethod":"Boiled","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":15,"unit":"g","cutPrep":"5 slices","cookingMethod":"Boiled","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":9,"unit":"g","cutPrep":"3 cloves, thinly sliced","cookingMethod":"Boiled","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":30,"unit":"g","cutPrep":"2, in 5 cm lengths","cookingMethod":"Boiled","prepNote":null},
+{"category":"Sprouts","baseName":"Soybean Sprouts (Raw)","quantity":340,"unit":"g","cutPrep":"washed","cookingMethod":"Boiled","prepNote":null},
+{"category":"Veg","baseName":"Pepper, hot chili, red, sun-dried","quantity":15,"unit":"g","cutPrep":"seeded and chopped","cookingMethod":"Fried","prepNote":"about 1/2 cup"},
+{"notInDatabase":true,"name":"green Sichuan peppercorns","contains":"none","quantity":3,"unit":"tbsp","cutPrep":null,"prepNote":"about 10 g"}
+],
+"instructions":[
+"Mix the fish by hand with the salt, 1/4 tsp white pepper and 1 tbsp Shaoxing wine, then the egg white, then the cornstarch until slippery. Drizzle 1 tbsp oil over the top without mixing and chill for about 20 minutes.",
+"In a wok over high heat, bring the stock, water, ginger, garlic, scallion and the rest of the white pepper and Shaoxing wine to a boil and season with salt.",
+"Add the soybean sprouts, return to a boil and cook for 1 minute, then lift the vegetables and aromatics into a deep heatproof serving bowl.",
+"Warm 1/2 cup oil in a small pot over low to medium heat until a wooden chopstick dipped in it makes small bubbles, about 350°F (175°C), without smoking.",
+"Bring the broth back to a boil, lower the heat and slip in the fish one piece at a time, then bring it back to a boil until the fish is just opaque, 1 to 2 minutes. Pour the fish and broth over the sprouts, scatter over the chilies and Sichuan peppercorns, pour the hot oil over them so they sizzle and serve at once."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the fish and soybean sprouts."},
+{"nutrient":"Selenium","note":"Tilapia is a good source."},
+{"nutrient":"Vitamin C","note":"Soybean sprouts contribute."}
+],
+"citations":[
+{"source":"The Woks of Life, Sichuan Boiled Fish (Shui Zhu Yu)","url":"https://thewoksoflife.com/sichuan-boiled-fish/"},
+{"source":"Wikipedia, Shuizhu","url":"https://en.wikipedia.org/wiki/Shuizhu"}
+],
+"curationNote":"Quantities follow The Woks of Life, which gives only a chopstick test for the oil; the 350°F (175°C) figure is the usual temperature for that test. Wikipedia gives the Sichuan origin and the hot oil finish. All of the finishing oil is listed although much of it stays in the bowl."
+},
+{
+"id":"curated_cn_jiao_yan_xia","name":"Jiao Yan Xia (Salt and Pepper Shrimp)","builderType":"side","dishRole":"main","dishGroup":"Fish & Seafood","region":"Cantonese","servings":4,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Shrimp dusted in starch and shallow-fried until crisp, then tossed with fried garlic, chili and a peppery toasted salt.",
+"healthBenefit":"Shrimp are high in protein and selenium and low in fat before frying; shallow frying in a thin layer of oil keeps the oil they take up modest.",
+"overallTier":"moderate",
+"components":[],
+"ingredients":[
+{"category":"Meat","baseName":"Shrimp Crustaceans","quantity":450,"unit":"g","cutPrep":"peeled and deveined, or shell on and deveined","cookingMethod":"Fried","prepNote":null},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":30,"unit":"g","cutPrep":null,"cookingMethod":null,"prepNote":"the part that stays on the shrimp; dredge in about 1/2 cup"},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.75,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"1/4 tsp in the coating, 1/2 tsp in the pepper salt"},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"or ground Sichuan pepper for a numbing finish"},
+{"category":"Fats","baseName":"Rapsolja","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Fried","prepNote":"about what is absorbed; fry in 1/2 cup"},
+{"category":"Veg","baseName":"Garlic","quantity":9,"unit":"g","cutPrep":"3 cloves, minced","cookingMethod":"Fried","prepNote":null},
+{"category":"Veg","baseName":"Red Chilli (Chili)","quantity":20,"unit":"g","cutPrep":"2, sliced","cookingMethod":"Stir Fried","prepNote":"optional"}
+],
+"instructions":[
+"Pat the shrimp very dry. Mix the cornstarch with 1/4 tsp salt, toss the shrimp in it and shake off the excess. Mix 1/2 tsp salt with the white pepper.",
+"Heat about 6 mm of oil in a pan over medium-high heat to 375°F (190°C); a pinch of cornstarch should bubble fast.",
+"Fry the shrimp in a single layer in batches for 30 seconds to 2 minutes a side, depending on size, until pale golden and curled. Drain on a rack.",
+"Pour off all but about 2 tsp of oil, add the garlic and chili and stir for a few seconds until fragrant.",
+"Return the shrimp, sprinkle with the pepper salt and toss for about 10 seconds. Serve hot as a starter or over rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"Shrimp are a lean source."},
+{"nutrient":"Selenium","note":"Shrimp are rich in it."},
+{"nutrient":"Vitamin B12","note":"From the shrimp."}
+],
+"citations":[
+{"source":"Omnivore's Cookbook, Salt and Pepper Shrimp","url":"https://omnivorescookbook.com/salt-and-pepper-shrimp/"},
+{"source":"The Woks of Life, Salt and Pepper Shrimp","url":"https://thewoksoflife.com/salt-and-pepper-shrimp/"}
+],
+"curationNote":"Quantities follow Omnivore's Cookbook; The Woks of Life fries shell-on shrimp for 30 seconds a side and makes its pepper salt from toasted whole peppercorns. Only the absorbed oil is counted."
+},
+{
+"id":"curated_cn_xi_hu_cu_yu","name":"Xi Hu Cu Yu (West Lake Fish in Vinegar Sauce)","builderType":"side","dishRole":"main","dishGroup":"Fish & Seafood","region":"Zhejiang (Hangzhou)","servings":4,"servingSizeAmount":1,"servingSizeUnit":"serving",
+"flavorProfile":"A whole freshwater fish poached for only a few minutes so it stays tender, then coated in a glossy sweet and sour sauce of dark vinegar, sugar, ginger and rice wine.",
+"healthBenefit":"Poaching adds no fat, and the fish gives lean protein, B12 and selenium; the sauce carries a fair amount of sugar, so it is spooned on rather than drowned.",
+"overallTier":"moderate",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per serving"}
+],
+"ingredients":[
+{"notInDatabase":true,"name":"grass carp","contains":"fish","quantity":750,"unit":"g","cutPrep":"whole, cleaned, split down the back into two joined halves","prepNote":"sea bass is the usual restaurant swap"},
+{"category":"Herbs","baseName":"Ginger root","quantity":15,"unit":"g","cutPrep":"half sliced, half minced","cookingMethod":"Poached","prepNote":"slices for the poaching water"},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":30,"unit":"g","cutPrep":"2, knotted","cookingMethod":"Poached","prepNote":"for the poaching water"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":2,"unit":"tbsp","cutPrep":null,"prepNote":"half for the water, half for the sauce"},
+{"notInDatabase":true,"name":"Zhenjiang black vinegar","contains":"gluten","quantity":3,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"mixed with 2 tbsp water"},
+{"category":"Bev","baseName":"Water, tap","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"for the slurry; the sauce also takes 120 ml of the poaching liquid"}
+],
+"instructions":[
+"Clean the fish and split it along the back into two halves still joined at the belly, and score the thicker half lightly so it cooks at the same rate.",
+"Bring a wide pan of water to a boil with the ginger slices, scallion knot and 1 tbsp Shaoxing wine. Lower in the fish skin side up, return to a bare simmer and poach for 3 to 4 minutes, until the flesh is just opaque at the thickest part, about 140°F (60°C).",
+"Lift the fish onto a warm plate, keeping its shape, and save 120 ml of the poaching liquid.",
+"In a small pan, bring the saved liquid, black vinegar, sugar, soy sauce, the rest of the Shaoxing wine and the minced ginger to a boil, then stir in the slurry and cook for about 30 seconds until glossy and lightly thick.",
+"Pour the hot sauce over the fish and serve at once with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the fish."},
+{"nutrient":"Vitamin B12","note":"From the fish."},
+{"nutrient":"Selenium","note":"Freshwater fish contribute."}
+],
+"citations":[
+{"source":"Wikipedia, West Lake Fish in Vinegar Gravy","url":"https://en.wikipedia.org/wiki/West_Lake_Fish_in_Vinegar_Gravy"}
+],
+"curationNote":"Written from Wikipedia's description (a grass carp of about 750 g poached for three to four minutes, a vinegar and sugar sauce with rice wine, ginger, scallion and starch) using standard proportions; no recipe with quantities opened. The poaching water is not counted."
+},
+{
+"id":"curated_cn_suan_cai_yu","name":"Suan Cai Yu (Fish with Pickled Mustard Greens)","builderType":"side","dishRole":"main","dishGroup":"Fish & Seafood","region":"Sichuan (Chongqing)","servings":4,"servingSizeAmount":1,"servingSizeUnit":"bowl",
+"flavorProfile":"Tender poached fish in a sour, spicy broth of Sichuan pickled mustard greens, pickled chilies, garlic and ginger, finished with sizzling oil.",
+"healthBenefit":"Lean fish gives protein, selenium and B12; the pickles make the broth salty, so rinse them and go easy on drinking the broth.",
+"overallTier":"moderate",
+"components":[
+{"recipeId":"curated_sauce_chicken_stock","servings":4,"note":"about 960 ml"},
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per bowl"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Fish, sea bass","quantity":450,"unit":"g","cutPrep":"fillets, sliced 1 cm thick at an angle","cookingMethod":"Poached","prepNote":"catfish is the most usual choice"},
+{"category":"Dairy","baseName":"Chicken Egg White (Raw)","quantity":33,"unit":"g","cutPrep":"1 egg white","cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.75,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"1/2 tsp for the fish, the rest to taste"},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Fats","baseName":"Peanøttolje","quantity":5,"unit":"tbsp","cutPrep":null,"cookingMethod":"Fried","prepNote":"2 tbsp to cook the aromatics, 2 to 3 tbsp heated to finish"},
+{"category":"Veg","baseName":"Pepper, hot chili, red, sun-dried","quantity":10,"unit":"g","cutPrep":"whole","cookingMethod":"Fried","prepNote":"about 1/3 cup"},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":60,"unit":"g","cutPrep":"4, whites in 1 cm pieces, greens sliced","cookingMethod":"Fried","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":18,"unit":"g","cutPrep":"6 cloves, minced","cookingMethod":"Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":15,"unit":"g","cutPrep":"minced","cookingMethod":"Fried","prepNote":null},
+{"category":"Veg","baseName":"Cabbage, mustard, salted","quantity":300,"unit":"g","cutPrep":"rinsed, drained, in bite-sized pieces","cookingMethod":"Boiled","prepNote":"Sichuan pickled mustard greens (suan cai)"},
+{"category":"Veg","baseName":"Peppers, hot pickled","quantity":60,"unit":"g","cutPrep":"sliced","cookingMethod":"Boiled","prepNote":"Chinese pickled chilies, about 1/2 cup"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":2,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"ground Sichuan peppercorn","contains":"none","quantity":0.25,"unit":"tsp","cutPrep":null,"prepNote":null}
+],
+"instructions":[
+"Mix the fish with the egg white, 1/2 tsp salt, the cornstarch and 1/4 tsp white pepper by hand and leave for 10 to 20 minutes.",
+"Heat 2 tbsp oil in a deep pan or wok over medium heat and stir the scallion whites, garlic, ginger and dried chilies for about 1 minute, until the chilies just darken. Add the mustard greens and pickled chilies and stir for 1 to 2 minutes, then splash in the Shaoxing wine.",
+"Add the stock and sugar, bring to a boil and simmer on medium for 3 to 5 minutes. Season with the rest of the salt and white pepper; the broth should taste slightly salty. Lift the pickles into a large serving bowl.",
+"Bring the broth to a simmer over medium-high heat, add the fish in batches, separating the slices gently, and cook 1 to 2 minutes until just done. Lay the fish over the pickles, bring the broth back to a boil and pour enough over to almost cover.",
+"Scatter the scallion greens and ground Sichuan pepper on top. Heat the remaining oil until it just starts to smoke, about 400°F (205°C), and drizzle it over so it sizzles. Serve hot."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the fish."},
+{"nutrient":"Selenium","note":"Sea bass is a good source."},
+{"nutrient":"Sodium","note":"The pickles make this a salty broth."}
+],
+"citations":[
+{"source":"Omnivore's Cookbook, Suan Cai Yu","url":"https://omnivorescookbook.com/suan-cai-yu/"},
+{"source":"China Sichuan Food, Szechuan Fish (Suan Cai Yu)","url":"https://www.chinasichuanfood.com/szechuan-fish-suan-cai-yu/"}
+],
+"curationNote":"Quantities follow Omnivore's Cookbook, which does not give the oil for the aromatics, so 2 tbsp is a standard amount; China Sichuan Food makes the broth from the fish bones in water instead of chicken stock. The salted mustard cabbage in the food database stands for suan cai."
+},
+{
+"id":"curated_cn_hong_shao_yu","name":"Hong Shao Yu (Red-Braised Fish)","builderType":"side","dishRole":"main","dishGroup":"Fish & Seafood","region":"Shanghainese","servings":6,"servingSizeAmount":1,"servingSizeUnit":"serving",
+"flavorProfile":"Whole fish seared until golden, then braised in Shaoxing wine, black vinegar, soy and sugar until the sauce reduces to a sticky, sweet and savoury glaze.",
+"healthBenefit":"Tilapia gives lean protein, selenium and B12, and searing in a little oil rather than deep-frying keeps the fat moderate.",
+"overallTier":"moderate",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":6,"note":"1 cup cooked per serving"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Tilapia rå","quantity":1130,"unit":"g","cutPrep":"2 whole fish, scaled and cleaned, scored three times a side","cookingMethod":"Braised","prepNote":"weight includes head and bones"},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"to dust the skin"},
+{"category":"Fats","baseName":"Rapsolja","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":"Pan Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":20,"unit":"g","cutPrep":"6 slices","cookingMethod":"Braised","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":45,"unit":"g","cutPrep":"3, in 5 cm lengths","cookingMethod":"Braised","prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":180,"unit":"ml","cutPrep":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"Chinese black vinegar","contains":"gluten","quantity":2.5,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"notInDatabase":true,"name":"dark soy sauce","contains":"gluten","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":2,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce"}
+],
+"instructions":[
+"Pat the fish very dry, score each side three times and dust both sides with a thin, even layer of cornstarch.",
+"Heat the wok until it smokes, add the oil and ginger, lower the heat to medium and lift the ginger out as soon as it browns.",
+"Lay the fish in and leave it alone for 5 minutes, tilting the wok so the oil reaches all of it. When it releases, flip it gently and sear the other side for about 5 minutes.",
+"Return the ginger and add the scallion, Shaoxing wine, sugar, black vinegar and both soy sauces. Over medium-low heat, spoon the liquid over the fish continuously for 4 to 5 minutes a side, until the sauce is nearly syrupy.",
+"The fish is done when the thickest part pulls easily away from the bone, about 145°F (63°C). Serve with the glaze spooned over and rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the tilapia."},
+{"nutrient":"Selenium","note":"Tilapia is a good source."},
+{"nutrient":"Vitamin B12","note":"From the fish."}
+],
+"citations":[
+{"source":"The Woks of Life, Chinese Braised Fish (Hong Shao Yu)","url":"https://thewoksoflife.com/chinese-braised-fish/"}
+],
+"curationNote":"Quantities and method follow The Woks of Life, the one recipe opened for this dish; the doneness temperature is the standard one for fish."
+},
+{
+"id":"curated_cn_dou_chi_chao_xian","name":"Dou Chi Chao Xian (Clams in Black Bean Sauce)","builderType":"side","dishRole":"main","dishGroup":"Fish & Seafood","region":"Cantonese","servings":2,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Clams steamed open in the wok with ginger, garlic, chilies and salty fermented black beans, their juices thickened into a savoury sauce with cilantro.",
+"healthBenefit":"Clams are one of the richest food sources of vitamin B12 and iron, with lean protein and very little fat.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":2,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Clam Mollusks","quantity":680,"unit":"g","cutPrep":"scrubbed and purged of sand","cookingMethod":"Steamed","prepNote":"weight in the shell"},
+{"category":"Fats","baseName":"Rapsolja","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":12,"unit":"g","cutPrep":"4 slices","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":9,"unit":"g","cutPrep":"3 cloves, thinly sliced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":15,"unit":"g","cutPrep":"1, in 5 cm lengths","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Green Chilli (Chili)","quantity":30,"unit":"g","cutPrep":"1 long pepper, sliced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Red Chilli (Chili)","quantity":30,"unit":"g","cutPrep":"1 long pepper, sliced","cookingMethod":"Stir Fried","prepNote":null},
+{"notInDatabase":true,"name":"fermented black beans","contains":"none","quantity":1,"unit":"tbsp","cutPrep":"rinsed and drained","prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Fats","baseName":"Sesamolja","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"optional, to taste"},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"mixed with 2 tbsp water, used as needed"},
+{"category":"Bev","baseName":"Water, tap","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"for the slurry"},
+{"category":"Veg","baseName":"Coriander (cilantro) leaves","quantity":6,"unit":"g","cutPrep":"chopped","cookingMethod":null,"prepNote":"about 3 tbsp"}
+],
+"instructions":[
+"If the clams are sandy, soak them for at least 2 hours, or overnight in the fridge, in 1 litre of cold water with about 35 g of sea salt, then scrub and rinse well.",
+"Heat the oil in a wok over high heat, add the ginger and let it caramelise for about 20 seconds without burning.",
+"Add the garlic, scallion, peppers and black beans and stir-fry for about 10 seconds, then add the clams, pour the Shaoxing wine around the edge of the wok and cover at once.",
+"Cook covered over high heat until most of the clams open, 3 to 6 minutes depending on size, then uncover, stir in the sugar, sesame oil and white pepper and throw away any that stay shut. Taste and add soy sauce if needed.",
+"Stir in half the slurry, adding more until the sauce coats the clams, toss in the cilantro and serve straight away."
+],
+"nutritionHighlights":[
+{"nutrient":"Vitamin B12","note":"Clams are among the richest sources of any food."},
+{"nutrient":"Iron","note":"Clams are high in it."},
+{"nutrient":"Vitamin C","note":"From the fresh peppers."}
+],
+"citations":[
+{"source":"The Woks of Life, Stir-Fried Clams in Black Bean Sauce","url":"https://thewoksoflife.com/stir-fried-clams-black-bean-sauce/"}
+],
+"curationNote":"Quantities and method follow The Woks of Life, the one recipe opened for this dish; the source gives no cooking time for the clams, so 3 to 6 minutes is a standard range. The purging salt is not counted."
+},
+{
+"id":"curated_cn_gong_bao_xia_qiu","name":"Gong Bao Xia Qiu (Kung Pao Shrimp)","builderType":"side","dishRole":"main","dishGroup":"Fish & Seafood","region":"Sichuan","servings":4,"servingSizeAmount":1,"servingSizeUnit":"plate",
+"flavorProfile":"Butterflied shrimp seared quickly and tossed with dried chilies, scallion and crunchy peanuts in a tangy, slightly sweet sauce with a tingle of Sichuan pepper.",
+"healthBenefit":"Shrimp give lean protein and selenium and the peanuts add vitamin E, magnesium and healthy fats.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per plate"}
+],
+"ingredients":[
+{"category":"NutSeed","baseName":"Peanut","quantity":145,"unit":"g","cutPrep":"raw, shelled","cookingMethod":"Roasted","prepNote":"about 1 cup"},
+{"category":"Meat","baseName":"Shrimp Crustaceans","quantity":450,"unit":"g","cutPrep":"peeled, deveined and butterflied","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Fats","baseName":"Rapsolja","quantity":5,"unit":"tsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":"1 tsp for the peanuts, 1 tsp for the shrimp, 3 tbsp for the wok"},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":1,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Herbs","baseName":"Common salt/table salt","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.125,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":1.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"1/2 tsp for the shrimp, 1 tsp for the sauce"},
+{"category":"Bev","baseName":"Water, tap","quantity":3,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Herbs","baseName":"Vinegar, rice vinegar","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":1,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":"light soy sauce"},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"ground Sichuan peppercorn","contains":"none","quantity":0.5,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"notInDatabase":true,"name":"dark soy sauce","contains":"gluten","quantity":0.5,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":9,"unit":"g","cutPrep":"3 cloves, smashed and sliced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Herbs","baseName":"Ginger root","quantity":8,"unit":"g","cutPrep":"minced","cookingMethod":"Stir Fried","prepNote":"about 1 tbsp"},
+{"category":"Veg","baseName":"Pepper, hot chili, red, sun-dried","quantity":2,"unit":"g","cutPrep":"2 to 4, seeded and chopped","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":60,"unit":"g","cutPrep":"6, white parts in 1 cm pieces","cookingMethod":"Stir Fried","prepNote":null}
+],
+"instructions":[
+"Heat 1 tsp oil in a wok over medium heat and stir the peanuts constantly for 4 to 5 minutes, then off the heat for 1 minute more. Leave them to cool so they crisp.",
+"Toss the shrimp with 1 tsp oil, the Shaoxing wine, salt and white pepper and leave for 15 minutes, then mix in 1/2 tsp cornstarch. Stir the water, vinegar, soy sauce, sugar, 1 tsp cornstarch, Sichuan pepper and dark soy together for the sauce.",
+"Heat the wok over high heat until it just smokes, add 2 tbsp oil and sear the shrimp on both sides until pink, about 1 minute in all. Lift them out.",
+"Lower the heat, add the last 1 tbsp oil with the garlic, ginger, chilies and scallion and cook for 1 to 2 minutes until fragrant. Turn the heat to high, return the shrimp and stir for 30 seconds.",
+"Stir the sauce, pour it in and stir-fry for about 1 minute until it thickens. Add the peanuts, toss, turn off the heat and serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Protein","note":"From the shrimp and peanuts."},
+{"nutrient":"Selenium","note":"Shrimp are rich in it."},
+{"nutrient":"Vitamin E","note":"From the peanuts."}
+],
+"citations":[
+{"source":"The Woks of Life, Kung Pao Shrimp","url":"https://thewoksoflife.com/kung-pao-shrimp/"},
+{"source":"Omnivore's Cookbook, Kung Pao Shrimp","url":"https://omnivorescookbook.com/kung-pao-shrimp/"}
+],
+"curationNote":"Quantities follow The Woks of Life; Omnivore's Cookbook makes a sweeter version with Chinkiang vinegar, more sugar and diced red pepper."
+},
+{
+"id":"curated_cn_jiang_cong_xie","name":"Jiang Cong Xie (Ginger Scallion Crab)","builderType":"side","dishRole":"main","dishGroup":"Fish & Seafood","region":"Cantonese","servings":4,"servingSizeAmount":1,"servingSizeUnit":"serving",
+"flavorProfile":"Chopped crab seared in its shell, then tossed with plenty of ginger and scallion and simmered briefly in a light oyster and soy sauce.",
+"healthBenefit":"Crab is high in protein, zinc, selenium and vitamin B12 and is low in fat.",
+"overallTier":"strong",
+"components":[
+{"recipeId":"curated_cn_base_steamed_jasmine_rice","servings":4,"note":"1 cup cooked per serving"}
+],
+"ingredients":[
+{"category":"Meat","baseName":"Crab Crustaceans","quantity":900,"unit":"g","cutPrep":"cleaned and chopped in pieces, claws cracked","cookingMethod":"Stir Fried","prepNote":"weight in the shell"},
+{"category":"Herbs","baseName":"Ginger root","quantity":40,"unit":"g","cutPrep":"thinly sliced and smashed","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Onions, spring or scallions (includes tops and bulb)","quantity":55,"unit":"g","cutPrep":"whites smashed, all cut in 5 cm lengths","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"Veg","baseName":"Garlic","quantity":9,"unit":"g","cutPrep":"3 cloves, roughly minced","cookingMethod":"Stir Fried","prepNote":null},
+{"category":"PantryStaples","baseName":"Cornstarch","quantity":10,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":"3 tbsp to coat the crab, 1 tsp for the slurry"},
+{"category":"Fats","baseName":"Rapsolja","quantity":4,"unit":"tbsp","cutPrep":null,"cookingMethod":"Stir Fried","prepNote":"corn oil or any neutral oil; some is poured off and part reused"},
+{"category":"Bev","baseName":"Water, tap","quantity":255,"unit":"ml","cutPrep":null,"cookingMethod":"Simmered","prepNote":"1 cup plus 1 tbsp for the slurry"},
+{"category":"Herbs","baseName":"Seasoning sauce, oyster sauce","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Legume","baseName":"Soy sauce made from soy and wheat (shoyu)","quantity":2,"unit":"tbsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"dark soy sauce","contains":"gluten","quantity":1,"unit":"tsp","cutPrep":null,"prepNote":null},
+{"category":"Herbs","baseName":"Spices, pepper, white, ground","quantity":0.25,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"category":"Sweets","baseName":"Sugar (Cane / Granulated)","quantity":0.5,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null},
+{"notInDatabase":true,"name":"Shaoxing wine","contains":"alcohol","quantity":1,"unit":"tbsp","cutPrep":null,"prepNote":null},
+{"category":"Fats","baseName":"Sesamolja","quantity":1,"unit":"tsp","cutPrep":null,"cookingMethod":null,"prepNote":null}
+],
+"instructions":[
+"Scrub the crab, remove the top shell and gills, chop off the legs and cut the body into 8 pieces; crack the legs and claws. Mix the oyster sauce, soy sauces, white pepper and sugar.",
+"Coat the body and claw pieces with 3 tbsp cornstarch. Heat the wok on the highest heat, add the oil and fry the pieces for about 1 minute, lower the heat, flip when golden, then raise the heat for about 1 minute more. Lift out the crab and pour the oil into a bowl.",
+"Heat 1 tbsp of the reserved oil over high heat and fry the garlic, ginger and scallion whites for about 20 seconds, then add the legs for 30 to 40 seconds.",
+"Return the crab with the Shaoxing wine, 1 cup water, the sauce and the top shell, cover and cook for 3 minutes, until the crab is cooked through, about 145°F (63°C) in the thickest meat.",
+"Lift out the shell, stir in the slurry gently, add the scallion greens and turn off the heat. Drizzle with the sesame oil and serve with rice."
+],
+"nutritionHighlights":[
+{"nutrient":"Zinc","note":"Crab is a rich source."},
+{"nutrient":"Vitamin B12","note":"From the crab."},
+{"nutrient":"Selenium","note":"Crab is high in it."}
+],
+"citations":[
+{"source":"Made With Lau, Ginger and Scallion Crab","url":"https://www.madewithlau.com/recipes/ginger-scallion-crab"}
+],
+"curationNote":"Quantities and method follow Made With Lau, the one recipe opened for this dish; its tamari is listed here as dark soy sauce, as its method calls it. The doneness temperature is the standard one for crab."
+}
+]}

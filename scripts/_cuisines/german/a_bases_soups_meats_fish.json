@@ -1,0 +1,5165 @@
+{
+  "recipes": [
+    {
+      "id": "curated_de_base_rinderbruhe",
+      "name": "Rinderbrühe (Beef Stock)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Stocks & Sauces",
+      "region": "Germany",
+      "servings": 10,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "A clear, golden, deeply beefy broth with a sweet note from the charred onion and a gentle warmth of clove and pepper.",
+      "healthBenefit": "A light broth that carries some protein and gelatin from the shin and bones and minerals from the root vegetables, salted lightly so the dish it goes into sets the seasoning.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Hind Shank / Shin (Raw)",
+          "quantity": 800,
+          "unit": "g",
+          "cutPrep": "in one piece",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "beef marrow and soup bones",
+          "contains": "meat",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "rinsed, sawn in pieces",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 3500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "halved, unpeeled, the cut sides charred dark in a dry pan",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "peeled, in chunks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Celeriac",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "peeled, in chunks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Leek",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "washed, in pieces",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Parsley root",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "a few stalks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "whole",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": "2 whole cloves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "about a dozen whole peppercorns",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rinse the bones, put them with the shin in a large pot, cover with the cold water and bring slowly to a simmer, 30 to 40 minutes.",
+        "Skim off the grey foam as it rises, then keep at a bare simmer, uncovered, for 1 hour.",
+        "Add the charred onion, carrot, celeriac, leek, parsley root and parsley stalks, the bay leaves, cloves and peppercorns.",
+        "Simmer gently for 2 to 2.5 hours more, never at a rolling boil, so the broth stays clear.",
+        "Lift out the meat (it is good sliced and eaten with horseradish, or cut into a soup) and strain the broth through a cloth-lined sieve.",
+        "Salt lightly, cool quickly, and lift off the fat once it sets. Makes about 2.5 litres; keeps 3 to 4 days chilled or 3 months frozen."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "A little protein and gelatin from the shin and the bones."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "Drawn out of the carrot, celeriac and leek."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikibooks Kochbuch, Fleischbrühe",
+          "url": "https://de.wikibooks.org/wiki/Kochbuch/_Fleischbrühe"
+        },
+        {
+          "source": "Chefkoch, Gute alte Rinderbrühe",
+          "url": "https://www.chefkoch.de/rezepte/369331122509524/Gute-alte-Rinderbruehe.html"
+        },
+        {
+          "source": "Chefkoch, Rinderbrühe selbst kochen",
+          "url": "https://www.chefkoch.de/rezepte/4448401788780696/Rinderbruehe-selbst-kochen.html"
+        }
+      ],
+      "curationNote": "Wikibooks Fleischbrühe and two Chefkoch Rinderbrühe recipes agree: shin or brisket with marrow bones, charred onion, Suppengrün (carrot, celeriac, leek, parsley root), clove, bay, pepper, cold-water start, skimming, uncovered gentle simmer, vegetables added after the first hour."
+    },
+    {
+      "id": "curated_de_base_huhnerbruhe",
+      "name": "Hühnerbrühe (Chicken Stock)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Stocks & Sauces",
+      "region": "Germany",
+      "servings": 10,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "A pale golden, rich chicken broth with soft sweetness from the root vegetables and a fine layer of chicken fat.",
+      "healthBenefit": "A light, warming broth with some protein and gelatin from a whole boiling hen and minerals from the vegetables.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "boiling hen (Suppenhuhn), whole",
+          "contains": "meat",
+          "quantity": 1500,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 3000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "halved, cut sides browned in a dry pan",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "peeled, in chunks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Celeriac",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "peeled, in chunks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Leek",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "in pieces",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "stalks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": "2 whole cloves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "whole peppercorns",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the hen in a large pot, cover with the cold water and bring slowly to a simmer, skimming the foam, about 30 minutes.",
+        "Add the onion, carrot, celeriac, leek, parsley stalks, bay, cloves and peppercorns.",
+        "Simmer very gently, half covered, for 1.5 to 2 hours, until the meat falls from the bones.",
+        "Lift out the hen and pick the meat for Hühnerfrikassee or a soup.",
+        "Strain the broth, salt lightly and chill. Skim the fat when set, or keep a little for flavor. Makes about 2.5 litres; keeps 3 days chilled."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the boiling hen."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "A little, from the carrots."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikibooks Kochbuch, Hühnerbrühe",
+          "url": "https://de.wikibooks.org/wiki/Kochbuch/_Hühnerbrühe"
+        },
+        {
+          "source": "Chefkoch, Hühnerbrühe Grundrezept",
+          "url": "https://www.chefkoch.de/rezepte/405811129903561/Huehnerbruehe-Grundrezept.html"
+        },
+        {
+          "source": "Chefkoch, Meine Hühnerbrühe verleiht mir Flügel",
+          "url": "https://www.chefkoch.de/rezepte/1832331297094967/Meine-Huehnerbruehe-verleiht-mir-Fluegel.html"
+        }
+      ],
+      "curationNote": "A boiling hen is what German home cooks use; written as not in the database since the database has broiler cuts only. Wikibooks and two Chefkoch recipes give the same Suppengrün, clove and bay, and a 2 hour simmer."
+    },
+    {
+      "id": "curated_de_base_gemusebruhe",
+      "name": "Gemüsebrühe (Vegetable Stock)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Stocks & Sauces",
+      "region": "Germany",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "A savory, sweet-rooted broth with the toasty edge of charred onion and a little spice from allspice and clove.",
+      "healthBenefit": "A plant-only broth that carries potassium and a little of the vitamins from the root vegetables, with no meat or dairy.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": "for sweating",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "2 onions, halved, cut sides charred in a dry pan",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "peeled, in chunks",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Celeriac",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "peeled, in chunks",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Leek",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "1 leek, washed, in rings",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "with stalks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": "2 whole cloves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": "3 whole berries",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "whole peppercorns",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Char the cut sides of the onions in a dry heavy pan until nearly black.",
+        "Heat the oil in a large pot and sweat the carrot, celeriac and leek for 5 to 8 minutes without browning.",
+        "Add the onions, parsley, bay, cloves, allspice and peppercorns, pour in the cold water and bring to a simmer.",
+        "Simmer gently, half covered, for 45 to 60 minutes.",
+        "Strain, pressing lightly on the vegetables, and season with the salt. Makes about 2 litres; keeps 4 days chilled."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Potassium",
+          "note": "From the carrots, celeriac and leek."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikibooks Kochbuch, Gemüsebrühe",
+          "url": "https://de.wikibooks.org/wiki/Kochbuch/_Gemüsebrühe"
+        },
+        {
+          "source": "Chefkoch, Gemüsebrühe hausgemacht",
+          "url": "https://www.chefkoch.de/rezepte/3309811491572010/Gemuesebruehe-hausgemacht.html"
+        }
+      ],
+      "curationNote": "Wikibooks Gemüsebrühe (oil or Butterschmalz, charred onions, carrots, celeriac, leek, parsley, bay, clove, allspice, pepper) checked against the Chefkoch hausgemacht recipe. Rapeseed oil keeps it vegan."
+    },
+    {
+      "id": "curated_de_base_fischfond",
+      "name": "Fischfond (Fish Stock)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Stocks & Sauces",
+      "region": "Germany",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "A light, clean, faintly briny stock with white wine brightness and a soft aroma of leek and celery.",
+      "healthBenefit": "A light stock that brings a little protein and minerals from white fish bones into sauces and soups.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "white fish bones and heads (plaice, cod, sole), gills removed",
+          "contains": "fish",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "rinsed well under cold water",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Leek",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "white part, sliced",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Celery",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "White Wine",
+          "quantity": 200,
+          "unit": "ml",
+          "cutPrep": "dry",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "stalks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "whole peppercorns",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Lemon Juice",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Soak the bones in cold water for 30 minutes to draw out blood, then drain.",
+        "Melt the butter in a wide pot and sweat the onion, leek and celery for 3 to 5 minutes without browning.",
+        "Add the bones and stir for 2 minutes, then pour in the wine and let it bubble for 1 minute.",
+        "Add the cold water, parsley stalks, bay and peppercorns and bring slowly to a simmer, skimming.",
+        "Simmer gently for 20 to 25 minutes only; longer makes fish stock bitter.",
+        "Strain through a cloth-lined sieve without pressing, then add the lemon juice and salt. Makes about 1.5 litres; use within 2 days or freeze."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "A little, from the fish bones and heads."
+        },
+        {
+          "nutrient": "Iodine",
+          "note": "Some, from the sea fish."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chefkoch, Selbstgemachter Fischfond",
+          "url": "https://www.chefkoch.de/rezepte/3358901499438515/Selbstgemachter-Fischfond.html"
+        },
+        {
+          "source": "Chefkoch, Fischfond",
+          "url": "https://www.chefkoch.de/rezepte/67671024992170/Fischfond.html"
+        }
+      ],
+      "curationNote": "Two Chefkoch Fischfond recipes agree on soaking the bones, sweating without color, white wine, and a short 20 to 30 minute simmer."
+    },
+    {
+      "id": "curated_de_base_bratenso_e",
+      "name": "Bratensoße (Brown Gravy)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Stocks & Sauces",
+      "region": "Germany",
+      "servings": 10,
+      "servingSizeAmount": 0.25,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "A dark, glossy, deeply roasted gravy with red wine depth and herbal notes, the sauce poured over a Sunday roast.",
+      "healthBenefit": "A rich sauce used in small amounts, carrying flavor and a little gelatin from roasted bones.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_base_rinderbruhe",
+          "servings": 1.7,
+          "note": "about 400 ml"
+        }
+      ],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "pork or veal bones, chopped small",
+          "contains": "meat",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "in small dice",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Celeriac",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "in small dice",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "unpeeled, in chunks",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Tomato paste",
+          "quantity": 0.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Red Wine",
+          "quantity": 200,
+          "unit": "ml",
+          "cutPrep": "dry",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 400,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.3,
+          "unit": "g",
+          "cutPrep": "1 whole clove",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Thyme",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "2 sprigs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Rosemary",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "1 sprig",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Cornstarch",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "mixed with a little cold water",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "cold, in pieces",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat the oven to 480°F (250°C). Toss the bones with the oil and roast for 30 minutes, until deep brown.",
+        "Add the carrot, celeriac and onion and roast 15 to 20 minutes more, turning once.",
+        "Tip everything into a pot, stir in the tomato paste over medium heat for 1 to 2 minutes, then pour in a third of the wine and let it boil away; repeat twice more with the rest.",
+        "Add the stock, water, bay, clove, thyme and rosemary and simmer gently for 1.5 to 2 hours, skimming.",
+        "Strain, reduce to about 600 ml, then thicken lightly with the starch slurry and simmer 1 minute.",
+        "Take off the heat, swirl in the cold butter and season with salt and pepper."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "A little gelatin and protein from the roasted bones."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chefkoch, Dunkle Bratensoße",
+          "url": "https://www.chefkoch.de/rezepte/1999441323794186/Dunkle-Bratensosse.html"
+        }
+      ],
+      "curationNote": "Chefkoch Dunkle Bratensoße (roasted pork bones at 250 °C, Rinderfond, water, red wine added in stages, tomato paste, clove, bay, thyme, rosemary, starch, cold butter), with the bone-browning order from the Wikibooks Kalbs- oder Rinderfond page."
+    },
+    {
+      "id": "curated_de_base_rahmso_e",
+      "name": "Rahmsoße (Cream Sauce)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Stocks & Sauces",
+      "region": "Germany",
+      "servings": 6,
+      "servingSizeAmount": 0.25,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "A smooth, pale rosy cream sauce, mild and savory, the classic Rahmsoße for schnitzel and Spätzle.",
+      "healthBenefit": "A rich sauce for small portions that brings a little calcium and vitamin A from the cream, butter and milk.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_base_rinderbruhe",
+          "servings": 1,
+          "note": "hot, about 250 ml"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Tomato paste",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, Type 405",
+          "quantity": 16,
+          "unit": "g",
+          "cutPrep": "2 tbsp, stirred into the cold water",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 75,
+          "unit": "ml",
+          "cutPrep": "cold",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Heavy Whipping Cream",
+          "quantity": 100,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 50,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Paprika",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "sweet",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Melt the butter in a small pan and soften the onion for 3 to 4 minutes without browning.",
+        "Stir in the tomato paste for 1 minute, then pour in the hot stock.",
+        "Whisk the flour into the cold water until smooth, then whisk it into the simmering stock.",
+        "Add the cream and milk and simmer gently for 5 to 8 minutes, stirring, until it coats a spoon.",
+        "Season with salt, pepper and paprika. Strain if you want it very smooth."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the milk and cream."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the butter and cream."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chefkoch, Selbst gemachte Rahmsoße",
+          "url": "https://www.chefkoch.de/rezepte/1690791277370222/Selbst-gemachte-Rahmsosse.html"
+        },
+        {
+          "source": "Chefkoch, Champignon-Rahmsauce",
+          "url": "https://www.chefkoch.de/rezepte/3772071574607315/Champignon-Rahmsauce.html"
+        }
+      ],
+      "curationNote": "The plain Chefkoch Rahmsoße (butter, Fleischbrühe, tomato paste, flour slurry, cream and milk) is the base, checked against the Champignon-Rahmsauce. The mushroom version is Jägersoße."
+    },
+    {
+      "id": "curated_de_base_jagerso_e",
+      "name": "Jägersoße (Mushroom Sauce)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Stocks & Sauces",
+      "region": "Germany",
+      "servings": 4,
+      "servingSizeAmount": 0.5,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "A creamy, earthy mushroom sauce with sweet shallot, smoky bacon and a lift of white wine, made for Jägerschnitzel.",
+      "healthBenefit": "Mushrooms bring B vitamins and potassium to a rich sauce best eaten in modest portions.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_base_rinderbruhe",
+          "servings": 1,
+          "note": "about 250 ml"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Bacon",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "smoked, in small dice",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "2 to 3 shallots, finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Mushroom, common, fresh",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Tomato paste",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, Type 405",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "1 tbsp",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "White Wine",
+          "quantity": 125,
+          "unit": "ml",
+          "cutPrep": "dry",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Heavy Whipping Cream",
+          "quantity": 150,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Crisp the bacon in a wide pan over medium heat, 3 to 4 minutes, then add the butter and the shallots and soften them for 2 to 3 minutes.",
+        "Raise the heat, add the mushrooms and fry until their liquid has cooked away and they color, 6 to 8 minutes.",
+        "Stir in the tomato paste and dust over the flour, stirring for 1 minute.",
+        "Pour in the wine, let it bubble down by half, then add the stock and simmer 5 minutes.",
+        "Stir in the cream and simmer 3 to 5 minutes more, until creamy. Season and finish with the parsley."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Potassium",
+          "note": "From the mushrooms."
+        },
+        {
+          "nutrient": "B vitamins",
+          "note": "Riboflavin and niacin from the mushrooms."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chefkoch, Jägersauce",
+          "url": "https://www.chefkoch.de/rezepte/979871203509191/Jaegersauce.html"
+        },
+        {
+          "source": "Chefkoch, Jägersoße",
+          "url": "https://www.chefkoch.de/rezepte/1811181293431186/Jaegersosse.html"
+        }
+      ],
+      "curationNote": "Chefkoch Jägersauce (butter, shallots, mushrooms, tomato paste, flour, white wine, cream, beef stock, parsley) with smoked bacon from the second Chefkoch Jägersoße, which uses bacon and onions; both are common in German homes."
+    },
+    {
+      "id": "curated_de_base_frankfurter_grune_so_e",
+      "name": "Frankfurter Grüne Soße",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Stocks & Sauces",
+      "region": "Hesse (Frankfurt)",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "A cool, bright green herb sauce, tangy with yoghurt and sour cream, grassy from seven fresh herbs and rich with chopped egg.",
+      "healthBenefit": "A large handful of fresh herbs brings vitamin K, vitamin C and folate, with protein and calcium from the eggs and cultured dairy.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Borage",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "leaves, very finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Chervil Spices",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "very finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garden Cress",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "very finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "flat leaf, very finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "salad burnet (Pimpinelle)",
+          "contains": "none",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "very finely chopped",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Chives",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "very finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Sorrel",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "very finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Sour Cream (Traditional / Cultured)",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Yoghurt, naturell",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Wine vinegar",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Mustard hot",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 6,
+          "unit": "each",
+          "cutPrep": "hard-boiled 10 minutes, peeled",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "a pinch",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Wash the herbs, spin them dry and pick off the coarse stalks.",
+        "Chop the herbs very finely by hand or in a food processor in short pulses; they should stay green and not turn to mush.",
+        "Stir the sour cream and yoghurt together with the vinegar, mustard and oil until smooth.",
+        "Chop 4 of the eggs finely and stir them in with the herbs. Season with salt, pepper and a pinch of sugar.",
+        "Chill for at least 1 hour so the herbs flavor the sauce. Serve cold, with the last 2 eggs halved on top, beside boiled potatoes."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin K",
+          "note": "From the parsley, chives, cress and borage."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs and yoghurt."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the yoghurt and sour cream."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chefkoch, Frankfurter Grüne Soße",
+          "url": "https://www.chefkoch.de/rezepte/1021661207383908/Frankfurter-Gruene-Sosse.html"
+        },
+        {
+          "source": "Chefkoch, Frankfurter Grüne Sauce mit Kartoffeln",
+          "url": "https://www.chefkoch.de/rezepte/144071062336091/Frankfurter-Gruene-Sauce-mit-Kartoffeln.html"
+        },
+        {
+          "source": "Wikibooks Kochbuch, Grüne Sauce",
+          "url": "https://de.wikibooks.org/wiki/Kochbuch/_Grüne_Sauce"
+        }
+      ],
+      "curationNote": "The seven Frankfurt herbs (borage, chervil, cress, parsley, Pimpinelle, chives, sorrel) in equal parts with less sorrel, as the protected Frankfurter Grüne Soße names them; sour cream and yoghurt, vinegar, hot mustard and hard eggs as Chefkoch and Wikibooks give them. Pimpinelle is not in the database."
+    },
+    {
+      "id": "curated_de_base_meerrettichso_e",
+      "name": "Meerrettichsoße (Horseradish Sauce)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Stocks & Sauces",
+      "region": "Germany",
+      "servings": 8,
+      "servingSizeAmount": 0.25,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "A warm, creamy, gently sharp sauce with the nose-tingling heat of fresh horseradish softened by milk and broth.",
+      "healthBenefit": "Horseradish brings its sharp glucosinolate compounds and a little vitamin C to a light white sauce.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_base_rinderbruhe",
+          "servings": 1,
+          "note": "hot, about 250 ml"
+        },
+        {
+          "recipeId": "curated_de_base_geriebener_meerrettich",
+          "servings": 3,
+          "note": "or 40 g freshly grated root"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, Type 405",
+          "quantity": 16,
+          "unit": "g",
+          "cutPrep": "2 tbsp",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 250,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Heavy Whipping Cream",
+          "quantity": 50,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Lemon Juice",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "a pinch",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 0.2,
+          "unit": "g",
+          "cutPrep": "a grating",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Melt the butter in a saucepan and stir in the flour; cook over low heat for 1 to 2 minutes without letting it color.",
+        "Whisk in the hot stock, then the milk, a little at a time, so no lumps form.",
+        "Simmer gently for 10 minutes, stirring often.",
+        "Take off the heat and stir in the horseradish and cream; do not boil again or the horseradish loses its sharpness.",
+        "Season with lemon juice, sugar, salt and nutmeg. Serve warm with boiled beef or fish."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the milk."
+        },
+        {
+          "nutrient": "Glucosinolates",
+          "note": "The sharp compounds in fresh horseradish."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chefkoch, Meerrettichsoße",
+          "url": "https://www.chefkoch.de/rezepte/799681183616582/Meerrettichsosse.html"
+        },
+        {
+          "source": "Wikibooks Kochbuch, Béchamelsauce",
+          "url": "https://de.wikibooks.org/wiki/Kochbuch/_Béchamelsauce"
+        }
+      ],
+      "curationNote": "Chefkoch Meerrettichsoße (light roux, Fleischbrühe and milk, 40 g grated horseradish, lemon, sugar, salt, 10 minute simmer); the roux method follows Wikibooks Béchamelsauce. Horseradish goes in off the heat."
+    },
+    {
+      "id": "curated_de_base_spatzleteig",
+      "name": "Spätzleteig (Spätzle Batter)",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Doughs & Dumplings",
+      "region": "Swabia (Baden-Württemberg)",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Soft, chewy, eggy little noodles with an irregular, rustic shape that soaks up gravy and melted butter.",
+      "healthBenefit": "A filling egg and wheat noodle that brings protein from the eggs and carbohydrate from the flour.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, Type 405",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Grain",
+          "baseName": "Soft wheat semolina",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "1 tbsp",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "large",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 150,
+          "unit": "ml",
+          "cutPrep": "lukewarm",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "1 tsp, plus more for the cooking water",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 0.2,
+          "unit": "g",
+          "cutPrep": "a grating",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Stir the flour, semolina, salt and nutmeg in a bowl, then add the eggs and most of the water.",
+        "Beat with a wooden spoon for 5 to 10 minutes until the batter is smooth, thick and throws bubbles; add the rest of the water if it is too stiff to drop slowly from the spoon.",
+        "Rest the batter for 10 to 15 minutes while a large pot of salted water comes to a gentle boil.",
+        "Scrape the batter in thin strips off a wet board into the water, or press it through a Spätzle press, working in batches.",
+        "When the Spätzle float, after 1 to 2 minutes, lift them out with a slotted spoon into a bowl of warm water or straight onto a warm dish.",
+        "Serve tossed in a little butter, or use as a dish calls for. Serves 4 as a side."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the four eggs."
+        },
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the wheat flour."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chefkoch, Schwäbischer Spätzleteig",
+          "url": "https://www.chefkoch.de/rezepte/316781113268026/Schwaebischer-Spaetzleteig.html"
+        },
+        {
+          "source": "Chefkoch, Spätzle",
+          "url": "https://www.chefkoch.de/rezepte/1111591217169060/Spaetzle.html"
+        },
+        {
+          "source": "Wikibooks Kochbuch, Spätzle",
+          "url": "https://de.wikibooks.org/wiki/Kochbuch/_Spätzle"
+        }
+      ],
+      "curationNote": "Chefkoch Schwäbischer Spätzleteig (400 g flour, 4 eggs, salt, lukewarm water) and Wikibooks Spätzle (flour, salt, a spoon of semolina, 4 eggs). Water rather than milk is the Swabian way; the beating until bubbles form is in all three."
+    },
+    {
+      "id": "curated_de_base_nudelteig",
+      "name": "Nudelteig (Egg Noodle Dough)",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Doughs & Dumplings",
+      "region": "Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "A silky, golden egg pasta with a firm bite, rolled thin for soup noodles or cut wide for Bandnudeln.",
+      "healthBenefit": "Fresh egg noodles bring protein from the eggs alongside the wheat.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, Type 405",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Grain",
+          "baseName": "Durum wheat semolina",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "fine",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "large",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Olive Oil (Extra Virgin)",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": "only if needed",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mix the flour, semolina and salt on a board and make a well in the middle.",
+        "Break in the eggs, add the oil, and work them into the flour with a fork, then knead by hand for 8 to 10 minutes until smooth and elastic; add a few drops of water only if it will not come together.",
+        "Wrap and rest for 30 minutes at room temperature.",
+        "Roll out very thin with a pin or a pasta machine, dust with semolina and cut into noodles as the dish needs.",
+        "Cook in plenty of salted boiling water for 2 to 4 minutes, until just tender."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs and durum semolina."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikibooks Kochbuch, Eiernudelteig",
+          "url": "https://de.wikibooks.org/wiki/Kochbuch/_Eiernudelteig"
+        },
+        {
+          "source": "Chefkoch, Nudelteig für perfekte Pasta",
+          "url": "https://www.chefkoch.de/rezepte/1611411268351373/Nudelteig-fuer-perfekte-Pasta.html"
+        },
+        {
+          "source": "Chefkoch, Pasta-Teig",
+          "url": "https://www.chefkoch.de/rezepte/1125361218987095/Pasta-Teig.html"
+        }
+      ],
+      "curationNote": "Wikibooks Eiernudelteig (half wheat, half durum, 1 egg per 100 g, a little oil, 30 minute rest) agrees with both Chefkoch doughs."
+    },
+    {
+      "id": "curated_de_base_hefeteig",
+      "name": "Hefeteig (Sweet Yeast Dough)",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Doughs & Dumplings",
+      "region": "Germany",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "A soft, light, faintly sweet and buttery dough with a hint of lemon, the base of Hefezopf, Streuselkuchen and Dampfnudeln.",
+      "healthBenefit": "An everyday sweet bread dough that brings carbohydrate with a little protein from the milk and egg; a treat rather than a staple.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, Type 405",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Baked",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 250,
+          "unit": "ml",
+          "cutPrep": "lukewarm",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baker's yeast fresh, pressed",
+          "quantity": 21,
+          "unit": "g",
+          "cutPrep": "half a cube, crumbled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 75,
+          "unit": "g",
+          "cutPrep": "soft",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "1 tsp",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lemon",
+          "quantity": 0.5,
+          "unit": "each",
+          "cutPrep": "zest only, finely grated",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Crumble the yeast into the lukewarm milk with 1 teaspoon of the sugar and stir until dissolved; leave 10 minutes until foamy.",
+        "Put the flour in a bowl with the rest of the sugar, the salt and lemon zest. Add the yeast milk, the egg and the soft butter.",
+        "Knead for 8 to 10 minutes by hand or 5 minutes in a mixer until smooth, silky and pulling away from the bowl.",
+        "Cover and leave in a warm place for 1 to 1.5 hours, until doubled.",
+        "Knock back, shape as the recipe needs (a braid, a sheet for a tray cake, rolls) and let it rise 20 to 30 minutes more before baking. A braid bakes 25 to 35 minutes at 350°F (180°C)."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the wheat flour and sugar."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "A little, from the milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chefkoch, Süßer Hefeteig",
+          "url": "https://www.chefkoch.de/rezepte/895841195046865/Suesser-Hefeteig.html"
+        },
+        {
+          "source": "Chefkoch, Friedas genialer Hefezopf",
+          "url": "https://www.chefkoch.de/rezepte/378801124204434/Friedas-genialer-Hefezopf.html"
+        },
+        {
+          "source": "Wikibooks Kochbuch, Hefeteig",
+          "url": "https://de.wikibooks.org/wiki/Kochbuch/_Hefeteig"
+        }
+      ],
+      "curationNote": "Halved from the Chefkoch Hefezopf (1 kg flour, 500 ml milk, 100 g sugar, 42 g yeast, 150 g butter, 2 tsp salt, 2 eggs, lemon zest), checked against the Chefkoch Süßer Hefeteig and Wikibooks Hefeteig."
+    },
+    {
+      "id": "curated_de_base_murbeteig",
+      "name": "Mürbeteig (Shortcrust)",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Doughs & Dumplings",
+      "region": "Germany",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "A crisp, sandy, buttery sweet pastry with vanilla and lemon, the 1-2-3 dough of German tarts and Plätzchen.",
+      "healthBenefit": "A rich butter pastry, a treat in small slices, carrying vitamin A from the butter and yolks.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, Type 405",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Baked",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "cold, in small cubes",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "icing sugar",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg Yolk (Raw)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "a pinch",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lemon",
+          "quantity": 0.5,
+          "unit": "each",
+          "cutPrep": "zest only",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the flour, sugar, salt and lemon zest on a board or in a bowl and scatter over the cold butter.",
+        "Rub or cut the butter in quickly until it looks like coarse crumbs, then add the yolks and vanilla.",
+        "Bring it together with cool hands into a smooth dough in as few movements as you can; do not knead or it turns tough.",
+        "Flatten into a disc, wrap and chill for at least 30 minutes.",
+        "Roll out between sheets of baking paper. For a blind-baked base, bake 12 to 15 minutes at 350°F (180°C) until pale golden. Lines one 28 cm tart tin."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the butter and egg yolks."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chefkoch, Mürbeteig gelingt immer",
+          "url": "https://www.chefkoch.de/rezepte/223931092646762/Muerbeteig-gelingt-immer.html"
+        },
+        {
+          "source": "Chefkoch, Mürbteig",
+          "url": "https://www.chefkoch.de/rezepte/509051146386295/Muerbteig.html"
+        }
+      ],
+      "curationNote": "The 1-2-3 rule (1 part sugar, 2 butter, 3 flour) from both Chefkoch doughs, with two yolks, salt, vanilla and lemon zest."
+    },
+    {
+      "id": "curated_de_base_quark_ol_teig",
+      "name": "Quark-Öl-Teig",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Doughs & Dumplings",
+      "region": "Germany",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "A soft, tender, quickly made dough with a light tang from the quark, between a scone and a yeast dough.",
+      "healthBenefit": "Quark adds protein and calcium to a quick dough, which is lower in fat than a butter pastry.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_base_quark",
+          "servings": 3,
+          "note": "150 g, drained"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, Type 405",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Baked",
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baking powder",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "1 packet",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 90,
+          "unit": "ml",
+          "cutPrep": "6 tbsp, neutral",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 90,
+          "unit": "ml",
+          "cutPrep": "6 tbsp",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 75,
+          "unit": "g",
+          "cutPrep": "for a sweet dough; leave out for savory",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "a pinch",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Stir the quark, oil, milk, egg, sugar and salt together until smooth.",
+        "Mix the flour with the baking powder and add half of it, stirring.",
+        "Knead in the rest of the flour by hand to a smooth, soft dough that no longer sticks; add a spoon of flour if needed.",
+        "Roll out straight away, without resting, onto a baking tray for a fruit tray cake, or cut and shape into rolls.",
+        "Bake at 350°F (180°C) for 25 to 35 minutes depending on the topping, until golden underneath."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the quark and egg."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the quark and milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chefkoch, Quark-Öl-Teig Grundmischung",
+          "url": "https://www.chefkoch.de/rezepte/151711066719536/Quark-Oel-Teig-Grundmischung.html"
+        },
+        {
+          "source": "Chefkoch, Pflaumenkuchen mit Quark-Öl-Teig",
+          "url": "https://www.chefkoch.de/rezepte/275061105005169/Pflaumenkuchen-mit-Quark-Oel-Teig.html"
+        }
+      ],
+      "curationNote": "The classic ratio from both Chefkoch recipes (quark, oil and milk in equal spoonfuls, flour with a packet of baking powder, sugar, egg), worked straight away without resting."
+    },
+    {
+      "id": "curated_de_base_roggensauerteig",
+      "name": "Roggensauerteig (Rye Sourdough Starter)",
+      "builderType": "fermentation",
+      "dishGroup": "Bases: Doughs & Dumplings",
+      "region": "Germany",
+      "servings": 10,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "A thick, grey-brown paste that smells sour, fruity and a little like beer, which gives German rye bread its tang.",
+      "healthBenefit": "A live culture of lactic acid bacteria and wild yeast whose long fermentation makes rye bread easier to digest and helps free minerals from the grain.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Rye flour, Type 1150",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 250,
+          "unit": "ml",
+          "cutPrep": "lukewarm, about 95°F (35°C)",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Day 1: stir 50 g rye flour with 50 ml lukewarm water in a clean jar, cover loosely and keep somewhere warm, 77 to 86°F (25 to 30°C).",
+        "Days 2 to 5: once a day, stir in another 50 g rye flour and 50 ml lukewarm water.",
+        "By day 4 or 5 it should be bubbly, risen and pleasantly sour. If it smells of nail varnish, feed it twice a day for a day.",
+        "On baking day take what the recipe needs and keep about 50 g back as Anstellgut in the fridge for the next bake.",
+        "To refresh, mix 1 part Anstellgut with 10 parts rye flour and 10 parts water and leave 12 to 18 hours at room temperature. Makes about 500 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fiber",
+          "note": "From the type 1150 rye flour."
+        },
+        {
+          "nutrient": "Lactic acid bacteria",
+          "note": "Live cultures that sour and raise the dough."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Lecker, Sauerteig selber machen",
+          "url": "https://www.lecker.de/sauerteig-50351.html"
+        },
+        {
+          "source": "Wikipedia, Sauerteig",
+          "url": "https://de.wikipedia.org/wiki/Sauerteig"
+        },
+        {
+          "source": "Chefkoch, Tiroler Alpenfladen mit Roggensauerteig",
+          "url": "https://www.chefkoch.de/rezepte/3513731523725661/Tiroler-Alpenfladen-mit-Roggensauerteig.html"
+        }
+      ],
+      "curationNote": "Lecker 5-day starter (50 g type 1150 rye and 50 ml warm water a day, about 500 g at the end); refresh ratio of 1 to 10 to 10 from the Chefkoch Alpenfladen; Wikipedia Sauerteig for why rye needs the acid. Moderate tier because the digestibility and mineral benefit rests on mixed research."
+    },
+    {
+      "id": "curated_de_base_laugenteig",
+      "name": "Laugenteig (Pretzel Dough)",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Doughs & Dumplings",
+      "region": "Bavaria and Swabia",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "A chewy, dense bread with a deep mahogany, glossy crust and the unmistakable salty, alkaline bite of a Laugenbrezel.",
+      "healthBenefit": "A plain wheat bread that brings carbohydrate and a little protein; the coarse salt on top makes it a salty food to enjoy in moderation.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, Type 550",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Baked",
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baker's yeast fresh, pressed",
+          "quantity": 21,
+          "unit": "g",
+          "cutPrep": "crumbled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 270,
+          "unit": "ml",
+          "cutPrep": "lukewarm",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "soft",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "1 tsp",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "food-grade lye (sodium hydroxide), for a 4% bath",
+          "contains": "none",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "dissolved in 1 litre cold water; or 3 tbsp baking soda boiled in 1 litre water",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": "for the bath",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "coarse pretzel salt",
+          "contains": "none",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "for sprinkling",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Dissolve the yeast and sugar in the lukewarm water. Knead with the flour, salt and butter for 8 to 10 minutes to a firm, smooth dough.",
+        "Rest 15 minutes covered, then divide into 8 pieces and roll each into a rope 50 to 60 cm long, thick in the middle and thin at the ends.",
+        "Twist into pretzels, lay them on a floured cloth and leave uncovered in the fridge for 1 hour, so a skin forms.",
+        "Wearing gloves and goggles, stir the lye into the cold water in a glass or steel bowl. Dip each pretzel for 10 to 15 seconds, lift onto a tray lined with baking paper. With baking soda instead, dip them for 30 seconds in the gently boiling soda water.",
+        "Sprinkle with coarse salt, cut the thick belly once with a sharp knife, and bake at 400°F (200°C) for 15 to 20 minutes until deep brown. Makes 8 pretzels."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the wheat flour."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "From the coarse salt on top."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chefkoch, Laugenbrezeln",
+          "url": "https://www.chefkoch.de/rezepte/3296351489415409/Laugenbrezeln.html"
+        },
+        {
+          "source": "Chefkoch, Schwäbische Laugenbrezel",
+          "url": "https://www.chefkoch.de/rezepte/367291122225684/Schwaebische-Laugenbrezel.html"
+        }
+      ],
+      "curationNote": "Two Chefkoch pretzels (500 g flour, yeast, butter, water or milk, salt; baking soda bath; bake 180 to 200 °C). The traditional bakery bath is a 3 to 4% lye solution, written in with its safety step and with baking soda as the home alternative."
+    },
+    {
+      "id": "curated_de_base_gewurzgurken",
+      "name": "Gewürzgurken (Pickled Cucumbers)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Germany",
+      "servings": 20,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Crunchy, sweet-sour small cucumbers fragrant with dill, mustard seed and bay, the pickle served beside cold cuts and in Rouladen.",
+      "healthBenefit": "A low-calorie pickle that adds flavor and a little vitamin K; it carries salt and sugar, so a couple at a time.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Cucumber",
+          "quantity": 2000,
+          "unit": "g",
+          "cutPrep": "small pickling cucumbers, scrubbed, ends trimmed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Distilled Vinegar (White)",
+          "quantity": 250,
+          "unit": "ml",
+          "cutPrep": "5%",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 750,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 75,
+          "unit": "g",
+          "cutPrep": "6 tbsp",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 18,
+          "unit": "g",
+          "cutPrep": "1 tbsp",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "4 shallots, sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, mustard seed, yellow",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Dill Weed",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "dill flowers or sprigs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "whole peppercorns",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": "3 berries",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Soak the cucumbers in cold salted water overnight, then drain and pat dry.",
+        "Pack them upright in clean jars with the shallots, dill, bay, mustard seed, peppercorns and allspice.",
+        "Bring the vinegar, water, sugar and salt to the boil and pour it over the cucumbers to cover; close the jars.",
+        "Set the jars in a pan or oven and heat them at 176°F (80°C) for 30 minutes so they keep, then leave to cool.",
+        "Wait at least 2 weeks before eating. Unopened jars keep 1 year in a cool, dark place; open ones 4 weeks in the fridge."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin K",
+          "note": "From the cucumber skins."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chefkoch, Gewürzgurken süß-sauer",
+          "url": "https://www.chefkoch.de/rezepte/1760371285745557/Gewuerzgurken-suess-sauer.html"
+        },
+        {
+          "source": "Chefkoch, Eingelegte Gewürzgurken",
+          "url": "https://www.chefkoch.de/rezepte/2701701423053891/Eingelegte-Gewuerzgurken.html"
+        }
+      ],
+      "curationNote": "Chefkoch Gewürzgurken süß-sauer (2 kg cucumbers, 1 cup vinegar, 3 cups water, 6 tbsp sugar, 1 tbsp salt, shallots, bay, 30 minutes at 80 °C), with the overnight salt soak and spice mix from the Eingelegte Gewürzgurken."
+    },
+    {
+      "id": "curated_de_base_su_er_senf",
+      "name": "Süßer Senf (Bavarian Sweet Mustard)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Bavaria",
+      "servings": 20,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "A coarse, dark, caramel-sweet mustard with only a gentle heat, made for Weißwurst and Leberkäse.",
+      "healthBenefit": "A condiment with a little mineral content from the mustard seed; sweet, so eaten by the spoonful.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Herbs",
+          "baseName": "Spices, mustard seed, yellow",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "yellow, coarsely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 80,
+          "unit": "ml",
+          "cutPrep": "hot",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Brown Sugar (Commercial)",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Wine vinegar",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": "white wine vinegar",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Standard Honey (Blossom Honey)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.2,
+          "unit": "g",
+          "cutPrep": "a pinch, ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Grind the mustard seed coarsely in a mortar or spice mill.",
+        "Melt the brown sugar in a small pan over medium heat until it caramelizes to a dark amber, 3 to 4 minutes, then carefully pour in the hot water and stir until dissolved.",
+        "Stir in the vinegar, honey, cloves and salt, then the ground mustard seed.",
+        "Spoon into a clean jar while warm and close.",
+        "Leave 2 to 3 days in the fridge for the bitterness to fade. Keeps 2 to 3 months chilled."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Selenium",
+          "note": "A little, from the mustard seed."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chefkoch, Süßen Senf selber machen",
+          "url": "https://www.chefkoch.de/rezepte/4448721788948063/Suessen-Senf-selber-machen.html"
+        },
+        {
+          "source": "Wikibooks Kochbuch, Senf",
+          "url": "https://de.wikibooks.org/wiki/Kochbuch/_Senf"
+        }
+      ],
+      "curationNote": "Chefkoch Süßer Senf (yellow mustard seed, water, caramelized brown sugar, white wine vinegar, honey, cloves); Wikibooks Senf for the resting time."
+    },
+    {
+      "id": "curated_de_base_quark",
+      "name": "Quark",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Germany",
+      "servings": 8,
+      "servingSizeAmount": 0.25,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "A fresh, mild, gently tangy curd cheese, smooth and spoonable, used in cheesecake, dips and doughs.",
+      "healthBenefit": "A cultured fresh cheese rich in protein and calcium, with live cultures from the buttermilk.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 2000,
+          "unit": "ml",
+          "cutPrep": "whole, 3.5%, not ultra-pasteurized",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Buttermilk",
+          "quantity": 50,
+          "unit": "ml",
+          "cutPrep": "with live cultures",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Stir the buttermilk into the milk in a clean pot or bowl, cover and leave at warm room temperature for about 2 days, until thick and set like yoghurt.",
+        "Set the covered pot in a 104°F (40°C) oven, or in warm water, for 1.5 to 2 hours so the whey separates from the curd.",
+        "Line a sieve with a clean cloth, pour in the curd and let it drain for 2 hours, or longer for a firmer quark.",
+        "Stir until smooth and keep it in a closed jar in the fridge. Makes about 400 g; keeps 5 days."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "Concentrated in the curd as the whey drains off."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Küchengötter, Quark Grundrezept",
+          "url": "https://www.kuechengoetter.de/rezepte/download/Quark-Grundrezept-67684.pdf"
+        },
+        {
+          "source": "Utopia, Quark selber machen",
+          "url": "https://utopia.de/ratgeber/quark-selber-machen-schnellrezept-mit-nur-zwei-zutaten_106067/"
+        }
+      ],
+      "curationNote": "Küchengötter Quark Grundrezept (2 litres whole milk, 50 ml buttermilk, 2 days, then 1.5 hours at 40 °C, drained 2 hours, about 400 g) agrees with Utopia. Quark is not in the database, so it is built from milk and buttermilk; the drained whey makes the nutrient totals read high on lactose."
+    },
+    {
+      "id": "curated_de_base_griebenschmalz",
+      "name": "Griebenschmalz",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Germany",
+      "servings": 30,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "A rich, savory spreading lard full of crisp pork cracklings, sweet fried onion and apple, with marjoram, spread thick on rye bread.",
+      "healthBenefit": "A very rich fat spread, a treat in thin layers, which carries some vitamin D from the pork fat.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Back Fat (Raw)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "rind removed, in small dice",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "finely diced",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Apple",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "a tart apple such as Boskop, peeled and diced",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "1 clove, crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Marjoram Spices",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "dried",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, caraway seed",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the diced back fat in a heavy pan with a splash of water and render it slowly over low to medium heat, stirring now and then, 30 to 40 minutes, until the pieces are golden and crisp.",
+        "Add the onion and fry for 5 to 8 minutes until golden, then the apple and garlic for 3 to 5 minutes more; do not let the onion burn.",
+        "Take off the heat and stir in the marjoram, caraway, salt and pepper.",
+        "Pour into clean jars and stir now and then as it cools, so the cracklings stay spread through the fat.",
+        "Keep chilled; it keeps about 4 weeks. Spread on rye bread with salt and a pickle."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fat",
+          "note": "Mostly monounsaturated and saturated fat from the pork back fat."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Chefkoch, Deftiges Griebenschmalz",
+          "url": "https://www.chefkoch.de/rezepte/2194121352199284/Deftiges-Griebenschmalz.html"
+        },
+        {
+          "source": "Chefkoch, Griebenschmalz mit Äpfeln und Zwiebeln nach Uromas Art",
+          "url": "https://www.chefkoch.de/rezepte/2450051385905879/Griebenschmalz-mit-Aepfeln-und-Zwiebeln-nach-Uromas-Art.html"
+        }
+      ],
+      "curationNote": "Chefkoch Deftiges Griebenschmalz (500 g back fat, 200 g onion, 100 g apple, garlic, marjoram, caraway, salt), checked against the Uroma version with Flomen, bacon, Boskop and marjoram."
+    },
+    {
+      "id": "curated_de_base_butterschmalz",
+      "name": "Butterschmalz (Clarified Butter)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Germany",
+      "servings": 26,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "A pure golden cooking fat with a nutty, toasty butter taste that can be heated high without burning.",
+      "healthBenefit": "A concentrated butterfat for frying; it carries vitamin A and is nearly free of lactose once the milk solids are strained off.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "unsalted",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Melt the butter in a heavy saucepan over low heat.",
+        "Let it simmer very gently for 20 to 30 minutes; the white foam rises and the milk solids sink and turn golden.",
+        "Skim off the foam, and take it off the heat when the bubbling quietens and it smells of hazelnut.",
+        "Strain through a sieve lined with kitchen paper or a cloth into a clean jar, leaving the solids behind.",
+        "Close once cool. Makes about 400 g; keeps for months in the fridge."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin A",
+          "note": "Carried in the butterfat."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikibooks Kochbuch, Butterschmalz",
+          "url": "https://de.wikibooks.org/wiki/Kochbuch/_Butterschmalz"
+        }
+      ],
+      "curationNote": "Wikibooks Butterschmalz (500 g butter, simmered gently about 30 minutes until the foam subsides and the solids turn golden, strained through paper). Only one source opened for this one; the method is the standard clarified butter technique."
+    },
+    {
+      "id": "curated_de_base_apfelmus",
+      "name": "Apfelmus",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Germany",
+      "servings": 6,
+      "servingSizeAmount": 0.5,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "A soft, fresh and tart apple purée with a little sweetness and cinnamon, served with Reibekuchen, Kartoffelpuffer and Milchreis.",
+      "healthBenefit": "Cooked apples bring fiber, including pectin, and a little vitamin C, with only a small amount of added sugar.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fruit",
+          "baseName": "Apple",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "tart apples (Boskop, Elstar), peeled, cored and cut in pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Apples, straight fruit juice",
+          "quantity": 125,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Brown Sugar (Commercial)",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": "2 tbsp",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Lemon Juice",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Toss the apple pieces with the lemon juice in a pot.",
+        "Add the apple juice, sugar and butter, cover and simmer over low to medium heat for 10 to 15 minutes, stirring now and then, until the apples fall apart.",
+        "Mash with a potato masher for a chunky Apfelmus or purée it for a smooth one.",
+        "Stir in the cinnamon and taste; add a little more sugar only if the apples were very sour.",
+        "Serve warm or cold. Keeps 5 days in the fridge, or a year in jars heated 30 minutes at 194°F (90°C)."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fiber",
+          "note": "Pectin from the apples."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "A little, from the apples and lemon."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Emmi kocht einfach, Apfelmus selber machen",
+          "url": "https://emmikochteinfach.de/apfelmus-selber-machen/"
+        },
+        {
+          "source": "Oma kocht, Apfelmus selber machen",
+          "url": "https://www.oma-kocht.de/fruchtiges-apfelmus-selber-machen/"
+        }
+      ],
+      "curationNote": "Emmi kocht einfach (1 kg tart apples, brown sugar, apple juice, butter, lemon, cinnamon) and Oma kocht (apples, sugar, lemon, a splash of water, cinnamon, 10 to 15 minutes) agree."
+    },
+    {
+      "id": "curated_de_base_pflaumenmus",
+      "name": "Pflaumenmus",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Germany",
+      "servings": 60,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "A thick, dark, almost black plum butter, deeply fruity and spiced with cinnamon and clove, for Buchteln, Germknödel and bread.",
+      "healthBenefit": "Long-cooked plums keep their fiber and potassium; it is sweetened, so a spoonful at a time.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fruit",
+          "baseName": "Blue plum",
+          "quantity": 2500,
+          "unit": "g",
+          "cutPrep": "Zwetschgen, stoned and halved",
+          "cookingMethod": "Baked",
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "2 cinnamon sticks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "4 whole cloves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "dark rum",
+          "contains": "alcohol",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": "optional, stirred in at the end",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mix the plums with the sugar, cinnamon sticks and cloves in a deep roasting tin and leave covered overnight so the juice runs.",
+        "Put the tin in the oven at 320°F (160°C), uncovered, and cook for about 3 hours, stirring every 30 to 45 minutes.",
+        "Cook until thick and dark brown and a spoon drawn through leaves a clear track; it can take up to 4.5 hours.",
+        "Remove the cinnamon and cloves, purée if you want it smooth, and stir in the rum if using.",
+        "Fill boiling hot into clean jars, close and turn upside down for 5 minutes. Makes about 5 jars of 300 g; keeps a year unopened."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fiber",
+          "note": "From the plums."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "From the plums."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Lecker, Pflaumenmus aus dem Backofen",
+          "url": "https://www.lecker.de/pflaumenmus-das-klassische-rezept-aus-dem-backofen-82029.html"
+        },
+        {
+          "source": "Küche gemacht, Pflaumenmus im Backofen",
+          "url": "https://kuechegemacht.de/rezepte/pflaumenmus-im-backofen/"
+        }
+      ],
+      "curationNote": "Küche gemacht (2.5 kg plums, 400 g sugar, cinnamon sticks, cloves, overnight then 3 hours at 160 °C) with the rum and longer cooking from Lecker (3.5 kg plums, 150 °C for about 4.5 hours)."
+    },
+    {
+      "id": "curated_de_base_geriebener_meerrettich",
+      "name": "Geriebener Meerrettich (Prepared Horseradish)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Germany",
+      "servings": 20,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "A sharp, clean, sinus-clearing grated horseradish with a little vinegar sourness, served with Tafelspitz, ham and fish.",
+      "healthBenefit": "Fresh horseradish carries its sharp glucosinolate compounds and some vitamin C, eaten in small amounts.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Horseradish",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "root, peeled and very finely grated",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "1 tsp",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": "1 tsp, optional",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Wine vinegar",
+          "quantity": 100,
+          "unit": "ml",
+          "cutPrep": "white wine vinegar",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Peel the horseradish root and grate it finely, by an open window or wearing glasses; the vapours sting.",
+        "Stir in the salt and sugar straight away.",
+        "Pour over the vinegar and water at once, which stops the root turning brown and holds its sharpness.",
+        "Pack into small clean jars so the horseradish is covered with liquid, and close.",
+        "Keep in the fridge, or cool and dark; it keeps up to 3 months. Stir a spoon into cream or sauces as needed."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the fresh root."
+        },
+        {
+          "nutrient": "Glucosinolates",
+          "note": "The sharp compounds that give horseradish its bite."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Gartenjournal, Meerrettich einlegen",
+          "url": "https://www.gartenjournal.net/meerrettich-einlegen"
+        },
+        {
+          "source": "Utopia, Meerrettich haltbar machen",
+          "url": "https://utopia.de/ratgeber/meerrettich-haltbar-machen-so-gehts_394207/"
+        }
+      ],
+      "curationNote": "Gartenjournal (200 g root finely grated, salt, a little sugar, covered with vinegar in sterile jars, keeps 3 months) and Utopia (grate, cover with salt and vinegar) agree."
+    },
+    {
+      "id": "curated_de_base_weinkraut",
+      "name": "Weinkraut (Sauerkraut Braised in Wine)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Palatinate and Baden",
+      "servings": 6,
+      "servingSizeAmount": 0.75,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Soft, mellow sauerkraut, gently sour and fruity with Riesling, apple and juniper, rich from a little goose fat.",
+      "healthBenefit": "Cabbage brings fiber, vitamin C and vitamin K; long braising softens the sourness, though the live cultures of raw sauerkraut do not survive cooking.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_ferment_sauerkraut",
+          "servings": 7,
+          "note": "about 800 g, drained lightly"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Goose Fat (Adipose)",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "3 tbsp",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "2 onions, finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Apple",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "1 tart apple, peeled and diced",
+          "cookingMethod": "Braised",
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "White Wine",
+          "quantity": 125,
+          "unit": "ml",
+          "cutPrep": "dry Riesling",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 600,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "juniper berries",
+          "contains": "none",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "1 tsp, lightly crushed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "1 small, finely grated, to bind",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Melt the goose fat in a heavy pot and soften the onions for 5 minutes, then add the apple for 2 minutes.",
+        "Add the sauerkraut, loosening it with a fork, then the wine, water, juniper and bay.",
+        "Bring to a simmer, cover and braise gently for 30 minutes.",
+        "Grate the potato in and stir; braise 30 minutes more, until the kraut is soft and creamy.",
+        "Season with salt and pepper. Serve with Kasseler, Eisbein, Bratwurst or Schäufele."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the cabbage."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From the cabbage and apple."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Küchengötter, Riesling-Sauerkraut",
+          "url": "https://www.kuechengoetter.de/rezepte/download/Riesling-Sauerkraut-72938.pdf"
+        },
+        {
+          "source": "Küchengötter, Fermentiertes Weinsauerkraut",
+          "url": "https://www.kuechengoetter.de/rezepte/download/Fermentiertes-Weinsauerkraut-94448.pdf"
+        }
+      ],
+      "curationNote": "Küchengötter Riesling-Sauerkraut (onions, Boskop, goose fat, 125 ml Riesling, juniper, 800 g sauerkraut, bay, 600 ml water, a small grated potato after 30 minutes, 1 hour) braises the Classic Sauerkraut base. The second Küchengötter recipe ferments the cabbage with wine from the start and was compared for the spices."
+    },
+    {
+      "id": "curated_de_kartoffelsuppe",
+      "name": "Kartoffelsuppe",
+      "builderType": "soup",
+      "dishGroup": "Soups & Eintöpfe",
+      "region": "Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Thick, soft and comforting, with floury potato carrying smoky bacon, sweet leek and a breath of marjoram and nutmeg.",
+      "healthBenefit": "A filling everyday soup that brings potassium and vitamin C from the potatoes and fibre from the root vegetables, with the bacon adding flavour and some salt and fat.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_base_gemusebruhe",
+          "servings": 4,
+          "note": "hot, about 1 litre"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 800,
+          "unit": "g",
+          "cutPrep": "floury, peeled, in 2 cm cubes",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Leek",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "in rings",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Celeriac",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Bacon",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Marjoram Spices",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": "freshly grated",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Sour Cream (Traditional / Cultured)",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Fry the bacon in the oil in a large pot over medium heat until it gives up its fat, 4 to 5 minutes, and lift out half for the top.",
+        "Add the onion and leek and soften them in the fat, 3 to 4 minutes.",
+        "Add the potatoes, carrot and celeriac, pour on the hot broth, add the bay leaf and bring to a simmer.",
+        "Simmer, covered, until the potatoes fall apart at the edges, 20 to 25 minutes.",
+        "Take out the bay leaf and mash or blend about half the soup, leaving the rest in pieces.",
+        "Season with marjoram, nutmeg, pepper and salt, stir in the sour cream, and serve with the saved bacon and parsley on top."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Potassium",
+          "note": "From the potatoes, carrot and celeriac."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the potatoes and parsley."
+        }
+      ],
+      "citations": [
+        {
+          "source": "GuteKüche, Kartoffelsuppe mit Speck",
+          "url": "https://www.gutekueche.de/rezepte/kartoffelsuppe-mit-speck-rezept-909"
+        },
+        {
+          "source": "GuteKüche, Kartoffelsuppe mit Sellerie",
+          "url": "https://www.gutekueche.de/rezepte/kartoffelsuppe-mit-sellerie-rezept-863"
+        }
+      ],
+      "curationNote": "Two GuteKüche versions compared: floury potatoes, Suppengrün, broth, marjoram, nutmeg and bacon from the first; half blended and a spoon of sour cream from the second."
+    },
+    {
+      "id": "curated_de_erbsensuppe",
+      "name": "Erbsensuppe",
+      "builderType": "soup",
+      "dishGroup": "Soups & Eintöpfe",
+      "region": "Germany",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Thick, earthy and smoky, with yellow split peas cooked to a velvet, chunks of potato and the deep savour of smoked bacon and marjoram.",
+      "healthBenefit": "Split peas bring plenty of plant protein and fibre, which make this a sustaining bowl, with the bacon kept to flavouring the pot.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Legume",
+          "baseName": "Split Pea",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "yellow, soaked overnight and drained",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Bacon",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "in one piece",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Celeriac",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Leek",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "in rings",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "peeled, diced",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Marjoram Spices",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "dried",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, savory, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the soaked peas and the piece of bacon in a large pot with the water, bring to a boil and skim off the foam.",
+        "Simmer, half covered, for 45 minutes, stirring now and then so the peas do not catch.",
+        "Soften the onion in the butter in a pan, 3 to 4 minutes, and add it to the pot with the carrot, celeriac, leek and potatoes.",
+        "Simmer 25 to 30 minutes more, until the peas have fallen apart and the potatoes are soft.",
+        "Lift out the bacon, dice it and return it, then purée about half the soup if you like it smoother.",
+        "Season with marjoram, savory, pepper and salt, and thin with a little hot water if it has grown too thick."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "From the split peas and vegetables."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "Mostly from the split peas, some from the bacon."
+        },
+        {
+          "nutrient": "Folate",
+          "note": "From the split peas."
+        }
+      ],
+      "citations": [
+        {
+          "source": "GuteKüche, Berliner Erbsensuppe",
+          "url": "https://www.gutekueche.de/rezepte/berliner-erbsensuppe-rezept-7797"
+        },
+        {
+          "source": "GuteKüche, Erbsensuppe mit Speck",
+          "url": "https://www.gutekueche.de/rezepte/erbsensuppe-mit-speck-rezept-12499"
+        }
+      ],
+      "curationNote": "Berliner Erbsensuppe gave soaked yellow split peas, bacon, Suppengrün, potatoes, savory and marjoram, half puréed; the second confirmed the long simmer. Cream from the second version left out as a variation."
+    },
+    {
+      "id": "curated_de_linseneintopf",
+      "name": "Linseneintopf",
+      "builderType": "soup",
+      "dishGroup": "Soups & Eintöpfe",
+      "region": "Westphalia",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Hearty and earthy, with soft lentils, smoked pork and sausage, sharpened at the end with a splash of vinegar and a touch of sugar.",
+      "healthBenefit": "Lentils give fibre, folate, iron and plant protein, and the vinegar at the end helps the iron along; the smoked meats make it a rich, salty pot to enjoy in moderate bowls.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_base_rinderbruhe",
+          "servings": 4,
+          "note": "hot, about 1 litre"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Legume",
+          "baseName": "Lentils",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "brown or green, rinsed",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Bacon",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "smoked belly, diced",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Celeriac",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Leek",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "in rings",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "peeled, diced",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Mettenden (smoked pork sausages)",
+          "contains": "meat",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "sliced",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Kasseler (cured smoked pork loin)",
+          "contains": "meat",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "2 slices, diced",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, Type 405",
+          "quantity": 1.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Wine vinegar",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": "red wine vinegar",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Fry the bacon in a large pot until it gives up its fat, 4 to 5 minutes, then add the onion and soften it, 3 minutes.",
+        "Add the lentils, carrot, celeriac, leek, bay leaves and hot broth, bring to a boil and simmer, covered, for 30 minutes.",
+        "Add the potatoes, sausages and Kasseler and simmer 20 to 30 minutes more, until the lentils and potatoes are soft.",
+        "Melt the butter in a small pan, stir in the flour and cook to a pale roux, 2 minutes, then whisk in a ladle of soup and stir it all back into the pot.",
+        "Simmer 5 minutes to thicken, then season with the vinegar, sugar, pepper and salt, tasting for a gentle sweet and sour balance."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "From the lentils and vegetables."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the lentils and the pork."
+        },
+        {
+          "nutrient": "Folate",
+          "note": "From the lentils."
+        }
+      ],
+      "citations": [
+        {
+          "source": "GuteKüche, Westfälischer Linseneintopf",
+          "url": "https://www.gutekueche.de/rezepte/westfaelischer-linseneintopf-rezept-16369"
+        },
+        {
+          "source": "GuteKüche, Linseneintopf",
+          "url": "https://www.gutekueche.de/rezepte/linseneintopf-rezept-1608"
+        }
+      ],
+      "curationNote": "Westphalian version followed for the smoked bacon, Mettenden, Kasseler, bay and the butter roux; the second confirmed potatoes and the vinegar and sugar finish. Mettenden and Kasseler are not in the food database."
+    },
+    {
+      "id": "curated_de_gulaschsuppe",
+      "name": "Gulaschsuppe",
+      "builderType": "soup",
+      "dishGroup": "Soups & Eintöpfe",
+      "region": "Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Deep red, warming and peppery, with tender beef, sweet peppers and potato in a broth rich with paprika, caraway and marjoram.",
+      "healthBenefit": "Beef brings protein, iron and zinc, and the peppers, tomatoes and paprika add vitamin C, which helps the body take up that iron.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_base_rinderbruhe",
+          "servings": 4,
+          "note": "hot, about 1 litre"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Chuck Stew Meat (Raw)",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "in 1.5 cm cubes",
+          "cookingMethod": "Braised",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "cloves, chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Bell Pepper",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "waxy, diced",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "peeled, diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Tomato paste",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Paprika",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": "sweet, plus a pinch of hot",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, caraway seed",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Marjoram Spices",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Brown the beef in the hot oil in batches over high heat, 3 to 4 minutes a batch, and set aside.",
+        "Soften the onions in the same pot, 5 minutes, then add the garlic and tomato paste and cook 1 minute.",
+        "Take the pot off the heat, stir in the paprika so it does not scorch, then return the beef with the broth, tomatoes, caraway and bay.",
+        "Simmer, covered, 40 minutes, then add the peppers, carrots and potatoes and simmer 25 to 30 minutes more, until the beef is tender.",
+        "Season with marjoram, salt and pepper and serve with crusty bread."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the beef."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the beef."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the peppers, tomatoes and paprika."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikibooks Kochbuch, Gulaschsuppe",
+          "url": "https://de.wikibooks.org/wiki/Kochbuch/_Gulaschsuppe"
+        },
+        {
+          "source": "GuteKüche, Gulaschsuppe mit Kartoffeln",
+          "url": "https://www.gutekueche.de/rezepte/gulaschsuppe-mit-kartoffeln-rezept-10169"
+        }
+      ],
+      "curationNote": "Wikibooks and GuteKüche agree on browned beef, onions, paprika off the heat, tomato paste, caraway, marjoram, peppers and potatoes in beef broth."
+    },
+    {
+      "id": "curated_de_leberknodelsuppe",
+      "name": "Leberknödelsuppe",
+      "builderType": "soup",
+      "dishGroup": "Soups & Eintöpfe",
+      "region": "Bavaria",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Clear, savoury beef broth around soft, herby liver dumplings with marjoram and a hint of lemon, finished with fresh chives.",
+      "healthBenefit": "Liver is one of the richest food sources of vitamin A, vitamin B12 and iron, so this soup carries a lot in a small bowl; it is best eaten now and then rather than daily because of how much vitamin A liver holds.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_base_rinderbruhe",
+          "servings": 4,
+          "note": "hot, about 1 litre"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Baked",
+          "baseName": "Rundstykke, fint, med vann, hjemmebakt",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "stale, thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 125,
+          "unit": "ml",
+          "cutPrep": "warmed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Liver (Raw)",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "very finely minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "finely diced",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Marjoram Spices",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "dried",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "breadcrumbs",
+          "contains": "gluten",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "lemon zest",
+          "contains": "none",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "grated",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Chives",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "in fine rings",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Pour the warm milk over the sliced rolls and leave to soak 10 minutes.",
+        "Soften the onion in the butter, 3 to 4 minutes, and let it cool.",
+        "Squeeze the rolls lightly and mix with the liver, onion, eggs, parsley, marjoram, lemon zest, salt and pepper, adding breadcrumbs until the mass holds; rest it 15 minutes.",
+        "With wet hands shape 8 dumplings and slide them into lightly salted water held at a bare simmer, about 200°F (93°C), for 20 minutes.",
+        "Lift the dumplings into bowls, ladle the hot clear broth over them and scatter with chives."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the liver, in large amounts."
+        },
+        {
+          "nutrient": "Vitamin B12",
+          "note": "From the liver."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the liver."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikibooks Kochbuch, Leberknödel",
+          "url": "https://de.wikibooks.org/wiki/Kochbuch/_Leberknödel"
+        },
+        {
+          "source": "GuteKüche, Leberknödelsuppe",
+          "url": "https://www.gutekueche.de/rezepte/leberknoedelsuppe-rezept-313"
+        }
+      ],
+      "curationNote": "Wikibooks Leberknödel and GuteKüche Leberknödelsuppe agree on soaked rolls, minced liver, onion, eggs, marjoram, parsley and lemon zest, dumplings cooked apart so the broth stays clear. Bavaria uses beef liver; pork liver is used because beef liver is not in the food database, as several Bavarian and Silesian recipes allow."
+    },
+    {
+      "id": "curated_de_fladlesuppe",
+      "name": "Flädlesuppe",
+      "builderType": "soup",
+      "dishGroup": "Soups & Eintöpfe",
+      "region": "Swabia",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "A clear, golden beef broth with soft ribbons of thin herb pancake and a bright scatter of chives.",
+      "healthBenefit": "A light, warming soup with protein from the eggs and broth, easy to eat when appetite is low.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_base_rinderbruhe",
+          "servings": 5,
+          "note": "hot, about 1.2 litres"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, Type 405",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 200,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 0.1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "for the pan",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Chives",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "in fine rings",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Whisk the flour, milk, eggs, salt and nutmeg to a smooth, thin batter, stir in the parsley, and rest it 20 to 30 minutes.",
+        "Fry very thin pancakes in a little butter over medium heat, about 1 minute a side, until lightly golden.",
+        "Let the pancakes cool, roll them up tightly and cut into thin strips.",
+        "Divide the strips among warm bowls, pour the boiling broth over them and scatter with chives."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs, milk and broth."
+        },
+        {
+          "nutrient": "Vitamin B12",
+          "note": "From the eggs and milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikibooks Kochbuch, Frittaten",
+          "url": "https://de.wikibooks.org/wiki/Kochbuch/_Frittaten"
+        },
+        {
+          "source": "GuteKüche, Schwäbische Flädlesuppe",
+          "url": "https://www.gutekueche.de/rezepte/schwaebische-flaedlesuppe-rezept-16576"
+        }
+      ],
+      "curationNote": "Wikibooks Frittaten and GuteKüche Flädlesuppe agree on a thin egg and milk batter with herbs, fried thin, rolled and cut, served in clear beef broth. Halved the batter of the GuteKüche version to suit four bowls."
+    },
+    {
+      "id": "curated_de_grie_nockerlsuppe",
+      "name": "Grießnockerlsuppe",
+      "builderType": "soup",
+      "dishGroup": "Soups & Eintöpfe",
+      "region": "Bavaria",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Light, fluffy semolina dumplings scented with nutmeg floating in a clear, savoury beef broth.",
+      "healthBenefit": "A gentle, easy soup with protein from the eggs and broth and some B vitamins from the semolina.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_base_rinderbruhe",
+          "servings": 4,
+          "note": "hot, about 1 litre"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "soft",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Grain",
+          "baseName": "Durum wheat semolina",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 0.1,
+          "unit": "tsp",
+          "cutPrep": "freshly grated",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Chives",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "in fine rings",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Beat the soft butter until creamy, then beat in the eggs one at a time with the salt and nutmeg.",
+        "Stir in the semolina to a soft mass and leave it to swell in the fridge for 15 to 30 minutes.",
+        "With two wet teaspoons shape small oval dumplings and slip them into lightly salted water at a bare simmer.",
+        "Cook, covered, 10 minutes, then turn off the heat and let them stand 10 minutes more so they puff up.",
+        "Lift the dumplings into the hot broth and serve with chives."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs, semolina and broth."
+        },
+        {
+          "nutrient": "B vitamins",
+          "note": "From the semolina and eggs."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikibooks Kochbuch, Grießklößchen",
+          "url": "https://de.wikibooks.org/wiki/Kochbuch/_Grießklößchen"
+        },
+        {
+          "source": "GuteKüche, Grießnockerlsuppe",
+          "url": "https://www.gutekueche.de/rezepte/griessnockerlsuppe-rezept-4802"
+        }
+      ],
+      "curationNote": "Wikibooks Grießklößchen and GuteKüche agree on butter, eggs and semolina rested to swell, nutmeg, dumplings poached gently. The butter and egg mix without milk is the more common Bavarian Nockerl, so the milk-cooked version was left out."
+    },
+    {
+      "id": "curated_de_hochzeitssuppe",
+      "name": "Hochzeitssuppe",
+      "builderType": "soup",
+      "dishGroup": "Soups & Eintöpfe",
+      "region": "Westphalia and Lower Saxony",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "A festive, clear broth with tender meatballs, cubes of silky savoury custard, white asparagus and spring vegetables.",
+      "healthBenefit": "Protein from the broth, meatballs and egg custard, with vitamins and fibre from the asparagus, carrots and cauliflower.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_base_huhnerbruhe",
+          "servings": 6,
+          "note": "hot, about 1.5 litres"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "for the Eierstich",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 125,
+          "unit": "ml",
+          "cutPrep": "for the Eierstich",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 0.1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Ground Pork (Raw)",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "for the meatballs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "for the meatballs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "breadcrumbs",
+          "contains": "gluten",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Asparagus",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "white, peeled, in 3 cm pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cauliflower",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "in small florets",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Spring onion",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "in rings",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "for the mould",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Whisk 4 eggs with the milk, nutmeg and a pinch of salt, pour into a buttered mould and set it in a water bath at 265°F (130°C) for 25 to 30 minutes, until just firm; cool and cut into cubes.",
+        "Mix the pork with 1 egg, the breadcrumbs, half the parsley, salt and pepper and roll into small balls the size of a hazelnut.",
+        "Bring the broth to a simmer and cook the asparagus, carrots and cauliflower in it until just tender, 8 to 10 minutes.",
+        "Add the meatballs and simmer 5 to 6 minutes, until cooked through.",
+        "Add the spring onions and Eierstich cubes, warm through for 1 minute, and serve with the rest of the parsley."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the broth, pork and egg custard."
+        },
+        {
+          "nutrient": "Folate",
+          "note": "From the asparagus and cauliflower."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the carrots."
+        }
+      ],
+      "citations": [
+        {
+          "source": "GuteKüche, Hochzeitssuppe Grundrezept",
+          "url": "https://www.gutekueche.de/rezepte/hochzeitssuppe-grundrezept-rezept-2489"
+        },
+        {
+          "source": "GuteKüche, Münsterländer Hochzeitssuppe",
+          "url": "https://www.gutekueche.de/rezepte/muensterlaender-hochzeitssuppe-rezept-6946"
+        }
+      ],
+      "curationNote": "Grundrezept gave the chicken broth with Eierstich and Klößchen; the Münsterland version gave the custard ratio and temperature, pork meatballs and white asparagus, carrot, cauliflower and spring onion."
+    },
+    {
+      "id": "curated_de_grune_bohneneintopf",
+      "name": "Grüne Bohneneintopf",
+      "builderType": "soup",
+      "dishGroup": "Soups & Eintöpfe",
+      "region": "Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "A hearty summer stew of green beans and potatoes with smoky bacon and the peppery note of savory, the herb Germans call Bohnenkraut.",
+      "healthBenefit": "Green beans and vegetables give fibre, vitamin C and vitamin K, and the potatoes make it filling; the bacon flavours it and adds some salt.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_base_rinderbruhe",
+          "servings": 3,
+          "note": "hot, about 750 ml"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Bean green",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "topped, in 3 cm pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "peeled, diced",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Celeriac",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Bacon",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, savory, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "or a few sprigs fresh",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Marjoram Spices",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Fry the bacon in the butter in a large pot until golden, 4 to 5 minutes, then soften the onion in it, 3 minutes.",
+        "Add the beans, potatoes, carrots, celeriac and savory and pour on the hot broth.",
+        "Bring to a boil and simmer, covered, 25 to 30 minutes, until the beans and potatoes are tender.",
+        "Season with marjoram, salt and pepper and serve with parsley."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "From the green beans and vegetables."
+        },
+        {
+          "nutrient": "Vitamin K",
+          "note": "From the green beans."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the beans and potatoes."
+        }
+      ],
+      "citations": [
+        {
+          "source": "GuteKüche, Grüner Bohneneintopf",
+          "url": "https://www.gutekueche.de/rezepte/gruener-bohneneintopf-rezept-11377"
+        },
+        {
+          "source": "GuteKüche, Bohneneintopf mit Speck",
+          "url": "https://www.gutekueche.de/rezepte/bohneneintopf-mit-speck-rezept-11364"
+        }
+      ],
+      "curationNote": "Both GuteKüche versions use green beans, potatoes, carrots, savory and broth; bacon and butter from the second, celeriac from the first. The cream and crème fraîche finishes were left out as variations."
+    },
+    {
+      "id": "curated_de_pichelsteiner_eintopf",
+      "name": "Pichelsteiner Eintopf",
+      "builderType": "soup",
+      "dishGroup": "Soups & Eintöpfe",
+      "region": "Bavarian Forest",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "A layered one-pot of three meats and vegetables, cooked slowly without stirring until everything is tender and the juices have mingled.",
+      "healthBenefit": "A sustaining stew with protein, iron and zinc from three meats and fibre and vitamins from cabbage, roots and potatoes.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_base_rinderbruhe",
+          "servings": 5,
+          "note": "hot, about 1.2 litres"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Chuck Stew Meat (Raw)",
+          "quantity": 350,
+          "unit": "g",
+          "cutPrep": "in 2 cm cubes",
+          "cookingMethod": "Braised",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 350,
+          "unit": "g",
+          "cutPrep": "in 2 cm cubes",
+          "cookingMethod": "Braised",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Lamb Shoulder (Raw)",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "in 2 cm cubes",
+          "cookingMethod": "Braised",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "peeled, sliced",
+          "cookingMethod": "Braised",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Celeriac",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Savoy Cabbage",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "in strips",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Leek",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "in rings",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Marjoram Spices",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Thyme",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "leaves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat the oven to 350°F (180°C). Grease a heavy pot with the lard and brown the meat in batches over high heat, 3 to 4 minutes a batch.",
+        "Layer the meat, onions, potatoes, carrots, celeriac, cabbage and leek in the pot, seasoning each layer with salt, pepper, marjoram and thyme, and finish with a layer of potatoes.",
+        "Pour the hot broth down the side so it comes about two thirds of the way up.",
+        "Cover tightly and cook in the oven, without stirring, for 80 to 90 minutes, until the meat is tender.",
+        "Serve straight from the pot with parsley scattered over."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the beef, pork and lamb."
+        },
+        {
+          "nutrient": "Zinc",
+          "note": "From the beef and lamb."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the savoy cabbage and potatoes."
+        }
+      ],
+      "citations": [
+        {
+          "source": "GuteKüche, Pichelsteiner Eintopf",
+          "url": "https://www.gutekueche.de/rezepte/pichelsteiner-eintopf-rezept-16856"
+        },
+        {
+          "source": "GuteKüche, Pichelsteiner Eintopf, second version",
+          "url": "https://www.gutekueche.de/rezepte/pichelsteiner-eintopf-rezept-7315"
+        }
+      ],
+      "curationNote": "Both GuteKüche versions: browned mixed meats layered with roots, cabbage, leek and potatoes, broth poured in, never stirred, slow oven. Three meats with lamb from the second."
+    },
+    {
+      "id": "curated_de_gaisburger_marsch",
+      "name": "Gaisburger Marsch",
+      "builderType": "soup",
+      "dishGroup": "Soups & Eintöpfe",
+      "region": "Swabia (Stuttgart)",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "A robust Swabian beef stew of tender boiled beef, Spätzle and potatoes in strong broth, crowned with onions fried golden in butter.",
+      "healthBenefit": "Protein, iron and zinc from the beef, energy from the Spätzle and potatoes, and vitamins from the root vegetables.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_base_rinderbruhe",
+          "servings": 6,
+          "note": "hot, about 1.5 litres"
+        },
+        {
+          "recipeId": "curated_de_base_spatzleteig",
+          "servings": 4,
+          "note": "cooked, about 400 g"
+        },
+        {
+          "recipeId": "curated_de_base_butterschmalz",
+          "servings": 2,
+          "note": "for the onions"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Shoulder Roast / Steak (Raw)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "in one piece",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "peeled, diced",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Celeriac",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Parsley root",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Leek",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "in rings",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "in thin rings",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "lovage",
+          "contains": "none",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "a few leaves",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Chives",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "in rings",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Simmer the beef in the broth with the bay leaf and lovage, covered, until tender, 1.5 to 2 hours.",
+        "Lift out the beef, cut it in bite-sized cubes and return it to the pot.",
+        "Add the potatoes, carrot, celeriac, parsley root and leek and simmer 20 minutes, until soft.",
+        "Meanwhile fry the onion rings slowly in the Butterschmalz over medium heat until deep golden, 12 to 15 minutes.",
+        "Stir the cooked Spätzle into the stew to warm through, season with salt and pepper, and serve with the onions, chives and parsley on top."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the beef and broth."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the beef."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the carrots."
+        }
+      ],
+      "citations": [
+        {
+          "source": "GuteKüche, Gaisburger Marsch",
+          "url": "https://www.gutekueche.de/rezepte/gaisburger-marsch-rezept-5043"
+        },
+        {
+          "source": "Wikipedia, Gaisburger Marsch",
+          "url": "https://de.wikipedia.org/wiki/Gaisburger_Marsch"
+        }
+      ],
+      "curationNote": "GuteKüche gave beef shoulder simmered in broth with Suppengrün, lovage and bay, potatoes, Spätzle and onions melted in Butterschmalz; Wikipedia confirmed the Stuttgart origin and the classic trio of beef, Spätzle and potatoes."
+    },
+    {
+      "id": "curated_de_spargelcremesuppe",
+      "name": "Spargelcremesuppe",
+      "builderType": "soup",
+      "dishGroup": "Soups & Eintöpfe",
+      "region": "Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Silky, delicate and creamy, with the sweet, slightly bitter taste of white asparagus lifted by white wine and lemon.",
+      "healthBenefit": "White asparagus brings folate and fibre, and the stock made from its peels keeps its flavour; the butter and cream make it a rich spring treat.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_base_huhnerbruhe",
+          "servings": 3,
+          "note": "about 600 ml"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Asparagus",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "white, peeled, peels kept, in 3 cm pieces, tips set aside",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 750,
+          "unit": "ml",
+          "cutPrep": "for the peel stock",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, Type 405",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "White Wine",
+          "quantity": 100,
+          "unit": "ml",
+          "cutPrep": "dry",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg Yolk (Raw)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Sour Cream (Traditional / Cultured)",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Lemon Juice",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 0.1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Simmer the asparagus peels and ends in the water with the sugar and a pinch of salt for 20 minutes, then strain and keep the stock.",
+        "Cook the asparagus pieces in the peel stock until tender, 10 to 12 minutes, adding the tips for the last 4 minutes; lift out the tips.",
+        "Melt the butter, stir in the flour and cook to a pale roux, 2 minutes, then whisk in the white wine, the asparagus stock with the pieces, and the chicken broth.",
+        "Simmer 10 minutes, then blend smooth.",
+        "Take the pot off the heat, whisk the yolk with the sour cream and a ladle of soup, and stir it back in without boiling again.",
+        "Season with lemon juice, nutmeg and salt and serve with the asparagus tips."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Folate",
+          "note": "From the asparagus."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the butter and egg yolk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "GuteKüche, Weiße Spargelcremesuppe",
+          "url": "https://www.gutekueche.de/rezepte/weisse-spargelcremesuppe-rezept-10652"
+        },
+        {
+          "source": "GuteKüche, Spargelcremesuppe",
+          "url": "https://www.gutekueche.de/rezepte/spargelcremesuppe-rezept-2472"
+        }
+      ],
+      "curationNote": "The second GuteKüche version followed for the peel stock, roux and yolk and sour cream liaison; white wine, poultry broth, lemon and nutmeg from the first."
+    },
+    {
+      "id": "curated_de_grunkohl_mit_pinkel",
+      "name": "Grünkohl mit Pinkel",
+      "builderType": "soup",
+      "dishGroup": "Soups & Eintöpfe",
+      "region": "Bremen and Oldenburg",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Long-braised kale gone soft, dark and savoury, cooked with smoky pork and the oat-filled Pinkel sausage, with a little mustard and sweetness.",
+      "healthBenefit": "Kale is rich in vitamin K, vitamin C, vitamin A and calcium even after long cooking; the sausages and pork make it a hearty, salty winter dish.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_base_rinderbruhe",
+          "servings": 1,
+          "note": "about 250 ml"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Kale",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "stripped from the stalks, washed, blanched and chopped",
+          "cookingMethod": "Braised",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Pinkel (smoked oat and pork sausage)",
+          "contains": "meat,gluten",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Kasseler (cured smoked pork chops)",
+          "contains": "meat",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "pork belly, smoked",
+          "contains": "meat",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "2 slices",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Mustard medium hot",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 0.1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Blanch the kale in boiling water for 2 minutes, drain, squeeze and chop it coarsely.",
+        "Soften the onions in the lard in a large pot, 4 to 5 minutes, then add the kale and the broth.",
+        "Lay the pork belly and Kasseler on top and braise, covered, over low heat for 1 hour, stirring now and then and adding a little water if it grows dry.",
+        "Add the Pinkel and braise 30 minutes more, until the kale is very soft and dark.",
+        "Season with mustard, sugar, nutmeg, salt and pepper and serve with the meats and boiled or caramelised potatoes."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin K",
+          "note": "From the kale, in large amounts."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the kale."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the kale."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikibooks Kochbuch, Grünkohl",
+          "url": "https://de.wikibooks.org/wiki/Kochbuch/_Grünkohl"
+        },
+        {
+          "source": "GuteKüche, Grünkohl mit Pinkel",
+          "url": "https://www.gutekueche.de/rezepte/gruenkohl-mit-pinkel-rezept-435"
+        },
+        {
+          "source": "GuteKüche, Grünkohl mit Pinkel, Kasseler und Bauch",
+          "url": "https://www.gutekueche.de/rezepte/gruenkohl-mit-pinkel-rezept-1920"
+        }
+      ],
+      "curationNote": "Wikibooks and two GuteKüche versions: blanched kale braised long with onions in lard, Pinkel, Kasseler and smoked belly, mustard and a little sugar. Pinkel, Kasseler and smoked belly are not in the food database."
+    }
+  ]
+}

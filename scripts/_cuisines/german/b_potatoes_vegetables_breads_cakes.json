@@ -1,0 +1,1218 @@
+{
+  "recipes": [
+    {
+      "id": "curated_de_kasespatzle",
+      "name": "Käsespätzle",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Potatoes, Dumplings & Noodles",
+      "region": "Swabia and the Allgäu",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Soft egg noodles in strings of melted mountain cheese, with sweet, deeply browned onions on top.",
+      "healthBenefit": "A rich dish that brings protein and calcium from the eggs and cheese; it is a hearty meal best eaten with a green salad beside it.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_spatzleteig", "servings": 4, "note": "the whole batch of batter, scraped or pressed into boiling water" }
+      ],
+      "ingredients": [
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 45, "unit": "g", "cutPrep": null, "cookingMethod": "Sauteed", "prepNote": "for the onions and the dish" },
+        { "category": "Veg", "baseName": "Onion", "quantity": 300, "unit": "g", "cutPrep": "thinly sliced into rings", "cookingMethod": "Sauteed", "prepNote": null },
+        { "category": "Dairy", "baseName": "Swiss", "quantity": 150, "unit": "g", "cutPrep": "coarsely grated", "cookingMethod": "Baked", "prepNote": "Emmental" },
+        { "notInDatabase": true, "name": "Allgäuer Bergkäse (mountain cheese)", "contains": "dairy", "quantity": 120, "unit": "g", "cutPrep": "coarsely grated", "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 10, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the cooking water" },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.5, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Veg", "baseName": "Chives", "quantity": 10, "unit": "g", "cutPrep": "finely snipped", "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Heat the oven to 400°F (205°C) and butter a deep baking dish.",
+        "Melt most of the butter in a wide pan and fry the onion rings over medium heat, stirring often, until deep golden, 15 to 20 minutes.",
+        "Bring a large pot of water to a boil with the salt and press or scrape the Spätzle batter into it in batches. Lift each batch out with a slotted spoon 1 to 2 minutes after it floats.",
+        "Layer the hot Spätzle in the dish with the two cheeses and a grind of pepper, finishing with cheese.",
+        "Bake until the cheese is melted and bubbling, 15 to 20 minutes, then pile the onions on top and scatter the chives."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Calcium", "note": "From the Emmental and mountain cheese." },
+        { "nutrient": "Protein", "note": "From the eggs in the batter and the cheese." }
+      ],
+      "citations": [
+        { "source": "Quick German Recipes, Oma's Käsespätzle", "url": "https://www.quick-german-recipes.com/cheese-spaetzle.html" },
+        { "source": "Quick German Recipes, Oma's Spätzle", "url": "https://www.quick-german-recipes.com/german-spaetzle-recipe.html" }
+      ],
+      "curationNote": "Quick German Recipes layers Spätzle, onions and Emmental and bakes it; the Allgäu version mixes Emmental with Bergkäse, which is kept here as a not-in-database cheese rather than swapped for another."
+    },
+    {
+      "id": "curated_de_spatzle",
+      "name": "Spätzle",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Potatoes, Dumplings & Noodles",
+      "region": "Swabia",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Tender, slightly chewy egg noodles with a buttery finish, made for soaking up gravy.",
+      "healthBenefit": "Brings protein from the eggs and starch for energy, a plain side for a braise or a roast.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_spatzleteig", "servings": 4, "note": "the whole batch of batter" }
+      ],
+      "ingredients": [
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 10, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the cooking water" },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 30, "unit": "g", "cutPrep": null, "cookingMethod": "Sauteed", "prepNote": null }
+      ],
+      "instructions": [
+        "Bring a large pot of water to a rolling boil with the salt.",
+        "Press the batter through a Spätzle press or scrape it in thin strips off a wet board straight into the water, one batch at a time.",
+        "When the noodles float, give them 1 to 2 minutes more, then lift them into a colander with a slotted spoon.",
+        "Toss the drained Spätzle in the butter in a warm pan for 2 to 3 minutes and serve beside a braise or with gravy."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Protein", "note": "From the eggs in the batter." },
+        { "nutrient": "Carbohydrate", "note": "From the wheat flour." }
+      ],
+      "citations": [
+        { "source": "Quick German Recipes, Oma's Spätzle", "url": "https://www.quick-german-recipes.com/german-spaetzle-recipe.html" },
+        { "source": "Quick German Recipes, Oma's Käsespätzle", "url": "https://www.quick-german-recipes.com/cheese-spaetzle.html" }
+      ],
+      "curationNote": "Both sources boil the batter in salted water until it floats and finish it in butter; the batter itself is the Spätzleteig base."
+    },
+    {
+      "id": "curated_de_maultaschen",
+      "name": "Maultaschen in der Brühe",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Potatoes, Dumplings & Noodles",
+      "region": "Swabia",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Large pasta pockets filled with meat, spinach and herbs, served in a clear, savoury beef broth with chives.",
+      "healthBenefit": "Brings protein and iron from the beef and pork and folate from the spinach, in a warming broth.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_nudelteig", "servings": 4, "note": "the whole batch, rolled thin" },
+        { "recipeId": "curated_de_base_rinderbruhe", "servings": 8, "note": "about 1.9 litres, hot" },
+        { "recipeId": "curated_de_kaiserbrotchen", "servings": 1, "note": "one stale roll, soaked in milk" }
+      ],
+      "ingredients": [
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 90, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "warm, for soaking the roll" },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 14, "unit": "g", "cutPrep": null, "cookingMethod": "Sauteed", "prepNote": null },
+        { "category": "Veg", "baseName": "Onion", "quantity": 100, "unit": "g", "cutPrep": "finely chopped", "cookingMethod": "Sauteed", "prepNote": null },
+        { "category": "Meat", "baseName": "Ground Beef (Raw)", "quantity": 225, "unit": "g", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": null },
+        { "category": "Meat", "baseName": "Ground Pork (Raw)", "quantity": 225, "unit": "g", "cutPrep": null, "cookingMethod": "Simmered", "prepNote": "or pork sausage meat (Brät)" },
+        { "category": "Veg", "baseName": "Spinach", "quantity": 225, "unit": "g", "cutPrep": "blanched, squeezed dry and chopped", "cookingMethod": "Simmered", "prepNote": null },
+        { "category": "Veg", "baseName": "Fresh Parsley", "quantity": 12, "unit": "g", "cutPrep": "chopped", "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 3, "unit": "each", "cutPrep": "two for the filling, one beaten for sealing", "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 3, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.5, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, nutmeg, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Veg", "baseName": "Chives", "quantity": 10, "unit": "g", "cutPrep": "snipped", "cookingMethod": null, "prepNote": "to serve" }
+      ],
+      "instructions": [
+        "Tear the roll into small pieces, cover with the warm milk for 5 to 10 minutes, then squeeze it out and crumble it.",
+        "Soften the onion in the butter over medium heat, about 5 minutes.",
+        "Mix the beef, pork, spinach, parsley, two eggs, salt, pepper, nutmeg, bread and onion into an even filling.",
+        "Roll the noodle dough thin into long strips about 12 cm (5 in) wide. Spread or spoon the filling along one half, brush the edges with beaten egg, fold over and press firmly, then cut into squares about 8 cm (3 in) long.",
+        "Simmer the Maultaschen in barely bubbling salted water until they float and the filling is cooked through, 10 to 15 minutes.",
+        "Lift them into bowls of hot beef broth and scatter with chives."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Protein", "note": "From the beef, pork and eggs." },
+        { "nutrient": "Iron", "note": "From the beef and spinach." },
+        { "nutrient": "Folate", "note": "From the spinach and parsley." }
+      ],
+      "citations": [
+        { "source": "Quick German Recipes, Maultaschen", "url": "https://www.quick-german-recipes.com/maultaschen-recipe.html" },
+        { "source": "Wikipedia (de), Maultasche", "url": "https://de.wikipedia.org/wiki/Maultasche" }
+      ],
+      "curationNote": "Quick German Recipes gives the filling and serves them in beef broth but uses egg roll wrappers; the Swabian pasta dough from the Nudelteig base replaces those, as Wikipedia describes. Sausage meat is noted as an option on the ground pork."
+    },
+    {
+      "id": "curated_de_kartoffelknodel",
+      "name": "Kartoffelknödel (Potato Dumplings)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Potatoes, Dumplings & Noodles",
+      "region": "Bavaria and Thuringia",
+      "servings": 4,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "dumpling",
+      "flavorProfile": "Soft, smooth potato dumplings with a crisp buttered crouton hidden in the middle, made to sit in gravy.",
+      "healthBenefit": "Brings potassium and vitamin C from the potatoes, with starch for energy beside a roast.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_kaiserbrotchen", "servings": 1, "note": "one day-old roll, cut into small cubes" }
+      ],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Potato", "quantity": 1000, "unit": "g", "cutPrep": "floury, boiled in their skins, peeled and riced", "cookingMethod": "Boiled", "prepNote": "riced while warm and chilled for several hours" },
+        { "category": "PantryStaples", "baseName": "Potato Starch", "quantity": 150, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "plus more if the dough is soft" },
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 2, "unit": "each", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 6, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "plus more for the water" },
+        { "category": "Herbs", "baseName": "Spices, nutmeg, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 28, "unit": "g", "cutPrep": null, "cookingMethod": "Fried", "prepNote": "for the croutons" }
+      ],
+      "instructions": [
+        "Boil the potatoes in their skins until tender, 20 to 30 minutes. Peel, press through a ricer while warm and chill until cold, several hours or overnight.",
+        "Fry the bread cubes in the butter over medium heat until golden on all sides, 4 to 6 minutes, and let them cool.",
+        "Work the potato starch, eggs, salt and nutmeg into the riced potatoes to a smooth dough that holds its shape.",
+        "With wet hands, shape 8 dumplings, pressing two or three croutons into the centre of each.",
+        "Lower them into a large pot of salted water kept just below a simmer and let them cook until they float and are firm, 18 to 20 minutes. Do not let the water boil hard or they break."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Potassium", "note": "From the potatoes." },
+        { "nutrient": "Vitamin C", "note": "From the potatoes, cooked in their skins." }
+      ],
+      "citations": [
+        { "source": "Quick German Recipes, Oma's Kartoffelknödel", "url": "https://www.quick-german-recipes.com/german-potato-dumplings.html" },
+        { "source": "My Dinner, Easy Kartoffelknödel", "url": "https://mydinner.co.uk/potato-dumplings/" }
+      ],
+      "curationNote": "Both sources bind riced cooked potatoes with starch and egg; Quick German Recipes adds the buttered crouton centre, kept here. Cooked just below a simmer as both say."
+    },
+    {
+      "id": "curated_de_semmelknodel",
+      "name": "Semmelknödel (Bread Dumplings)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Potatoes, Dumplings & Noodles",
+      "region": "Bavaria",
+      "servings": 6,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "dumpling",
+      "flavorProfile": "Light, savoury dumplings of soaked rolls with onion, bacon and plenty of parsley, soft enough to cut with a fork.",
+      "healthBenefit": "Turns stale rolls into a filling side, with protein from the eggs and milk; the bacon makes it a salty one.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_kaiserbrotchen", "servings": 5, "note": "five stale rolls, about 450 g, cut into 1 cm cubes" }
+      ],
+      "ingredients": [
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 360, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "hot, not boiling" },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 28, "unit": "g", "cutPrep": null, "cookingMethod": "Sauteed", "prepNote": null },
+        { "category": "Meat", "baseName": "Pork Bacon", "quantity": 50, "unit": "g", "cutPrep": "finely diced", "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Veg", "baseName": "Onion", "quantity": 150, "unit": "g", "cutPrep": "finely diced", "cookingMethod": "Sauteed", "prepNote": null },
+        { "category": "Veg", "baseName": "Fresh Parsley", "quantity": 30, "unit": "g", "cutPrep": "finely chopped", "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 2, "unit": "each", "cutPrep": "lightly beaten", "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 6, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "plus more for the water" },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.5, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "notInDatabase": true, "name": "dry breadcrumbs", "contains": "gluten", "quantity": 30, "unit": "g", "cutPrep": null, "prepNote": "only if the mixture is too wet" }
+      ],
+      "instructions": [
+        "Toss the bread cubes with the salt, pour the hot milk over and leave to soak for 15 to 20 minutes.",
+        "Fry the bacon and onion in the butter until the onion is translucent, 5 to 7 minutes, then stir in the parsley.",
+        "Add the onion mixture, eggs and pepper to the bread and knead lightly with wet hands until it holds together, adding breadcrumbs only if it is too wet.",
+        "Shape 12 firm dumplings and lower them into a large pot of salted water at a slow simmer.",
+        "Cook uncovered, without boiling, until firm and cooked through, 15 to 20 minutes, then lift out with a slotted spoon."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Protein", "note": "From the eggs, milk and bacon." },
+        { "nutrient": "Vitamin K", "note": "From the parsley." }
+      ],
+      "citations": [
+        { "source": "Quick German Recipes, Oma's Semmelknödel", "url": "https://www.quick-german-recipes.com/german-bread-dumplings.html" },
+        { "source": "My Dinner, Classic Semmelknödel", "url": "https://mydinner.co.uk/semmelknodel/" }
+      ],
+      "curationNote": "Both sources soak stale rolls in hot milk, add fried onion, bacon, parsley and egg, and poach at a simmer. The rolls are the Kaiserbrötchen recipe in this file."
+    },
+    {
+      "id": "curated_de_kartoffelpuffer",
+      "name": "Kartoffelpuffer (Reibekuchen)",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Potatoes, Dumplings & Noodles",
+      "region": "Rhineland and across Germany",
+      "servings": 4,
+      "servingSizeAmount": 3,
+      "servingSizeUnit": "pancake",
+      "flavorProfile": "Lacy, crisp-edged grated potato pancakes, soft inside, eaten hot with cool, sweet apple sauce.",
+      "healthBenefit": "Brings potassium and vitamin C from the potatoes; fried in plenty of oil, they are a treat rather than an everyday dish.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_apfelmus", "servings": 4, "note": "to serve" }
+      ],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Potato", "quantity": 900, "unit": "g", "cutPrep": "peeled and finely grated, squeezed dry", "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Veg", "baseName": "Onion", "quantity": 120, "unit": "g", "cutPrep": "grated", "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 2, "unit": "each", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 30, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 6, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, nutmeg, ground", "quantity": 0.1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Rapsolja", "quantity": 120, "unit": "ml", "cutPrep": null, "cookingMethod": "Fried", "prepNote": "rapeseed oil, for shallow frying" }
+      ],
+      "instructions": [
+        "Grate the potatoes and onion, wrap them in a towel and squeeze the liquid into a bowl. Let the liquid stand for a few minutes, pour it off and keep the starch at the bottom.",
+        "Mix the potatoes and onion with the starch, eggs, flour, salt and nutmeg.",
+        "Heat a thin layer of oil in a heavy pan over medium-high heat. Drop in heaped spoonfuls and press them flat.",
+        "Fry until deep golden and crisp, 3 to 4 minutes a side, adding oil as needed, and drain on paper.",
+        "Keep warm in a 200°F (95°C) oven while frying the rest and serve with apple sauce."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Potassium", "note": "From the potatoes." },
+        { "nutrient": "Vitamin C", "note": "From the potatoes and onion." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Kartoffelpuffer / Reibekuchen", "url": "https://mydinner.co.uk/kartoffelpuffer/" },
+        { "source": "Quick German Recipes, Oma's Kartoffelpuffer", "url": "https://www.quick-german-recipes.com/german-potato-pancake-recipe.html" }
+      ],
+      "curationNote": "Quantities follow My Dinner, including saving the potato starch; both sources fry in oil or clarified butter and serve with apple sauce."
+    },
+    {
+      "id": "curated_de_bratkartoffeln",
+      "name": "Bratkartoffeln",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Potatoes, Dumplings & Noodles",
+      "region": "Across Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Slices of cooked potato fried until crisp and brown, with soft onion and salty bits of bacon.",
+      "healthBenefit": "Brings potassium and vitamin C from the potatoes; the bacon and frying fat make it a rich side.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_butterschmalz", "servings": 2, "note": "for frying" }
+      ],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Potato", "quantity": 800, "unit": "g", "cutPrep": "waxy, boiled in their skins the day before, peeled and sliced 5 mm (0.25 in) thick", "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Meat", "baseName": "Pork Bacon", "quantity": 100, "unit": "g", "cutPrep": "diced", "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Veg", "baseName": "Onion", "quantity": 150, "unit": "g", "cutPrep": "diced", "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 4, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.5, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Fry the bacon in a large heavy pan until golden, then lift it out and leave the fat behind.",
+        "Add the clarified butter, then the potato slices in one layer, and fry over medium-high heat without stirring for about 5 minutes, until browned underneath.",
+        "Turn them, add the onion and keep frying and turning gently until crisp on both sides and the onion is soft, 8 to 12 minutes.",
+        "Return the bacon, season with salt and pepper and serve straight away."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Potassium", "note": "From the potatoes." },
+        { "nutrient": "Vitamin B6", "note": "From the potatoes." }
+      ],
+      "citations": [
+        { "source": "Quick German Recipes, Oma's Bratkartoffeln", "url": "https://www.quick-german-recipes.com/fried-potato-recipes.html" },
+        { "source": "Wikipedia (de), Bratkartoffeln", "url": "https://de.wikipedia.org/wiki/Bratkartoffeln" }
+      ],
+      "curationNote": "Quick German Recipes uses cooked potatoes, bacon and onion in butter and bacon fat; Wikipedia gives the cooked-the-day-before potato as the classic, and clarified butter is the usual German frying fat."
+    },
+    {
+      "id": "curated_de_schwabischer_kartoffelsalat",
+      "name": "Schwäbischer Kartoffelsalat",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Potatoes, Dumplings & Noodles",
+      "region": "Swabia",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Silky, warm potato slices soaked in a tangy broth and vinegar dressing with mild onion and chives, no mayonnaise.",
+      "healthBenefit": "A light potato salad with potassium and vitamin C, dressed with rapeseed oil rather than mayonnaise.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_rinderbruhe", "servings": 1.25, "note": "about 300 ml, warm" }
+      ],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Potato", "quantity": 900, "unit": "g", "cutPrep": "waxy, boiled in their skins, peeled warm and thinly sliced", "cookingMethod": "Boiled", "prepNote": null },
+        { "category": "Veg", "baseName": "Onion", "quantity": 200, "unit": "g", "cutPrep": "finely diced", "cookingMethod": null, "prepNote": "warmed in the dressing" },
+        { "category": "Herbs", "baseName": "Wine vinegar", "quantity": 3, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Mustard medium hot", "quantity": 1, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 3, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 2, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Rapsolja", "quantity": 4, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": "rapeseed oil" },
+        { "category": "Veg", "baseName": "Chives", "quantity": 30, "unit": "g", "cutPrep": "snipped", "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Boil the potatoes whole in their skins in salted water until just tender, 25 to 30 minutes.",
+        "Meanwhile warm the broth, vinegar, mustard, salt, sugar, pepper and onion in a small pan until the sugar dissolves, without boiling.",
+        "Peel the potatoes while still warm and slice them thinly into a bowl.",
+        "Pour the warm dressing over, fold gently and leave to soak for 30 to 60 minutes, folding now and then until the salad looks creamy.",
+        "Fold in the oil and chives, taste for salt and vinegar and serve at room temperature."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Potassium", "note": "From the potatoes." },
+        { "nutrient": "Vitamin C", "note": "From the potatoes and chives." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Authentic Swabian Potato Salad", "url": "https://mydinner.co.uk/swabian-potato-salad/" },
+        { "source": "Quick German Recipes, Southern German Potato Salad", "url": "https://www.quick-german-recipes.com/recipe-for-german-potato-salad.html" }
+      ],
+      "curationNote": "Follows My Dinner (beef broth, vinegar, mustard, oil, onion warmed in the dressing). Quick German Recipes confirms the warm broth method for the south."
+    },
+    {
+      "id": "curated_de_norddeutscher_kartoffelsalat",
+      "name": "Norddeutscher Kartoffelsalat",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Potatoes, Dumplings & Noodles",
+      "region": "Northern Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Creamy potato salad with mayonnaise and yogurt, crunchy pickles, egg and fresh dill.",
+      "healthBenefit": "Brings potassium from the potatoes and protein from the eggs; the mayonnaise makes it a rich salad.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_gemusebruhe", "servings": 0.75, "note": "warm" },
+        { "recipeId": "curated_de_base_gewurzgurken", "servings": 1, "note": "about 100 g, diced" }
+      ],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Potato", "quantity": 900, "unit": "g", "cutPrep": "waxy, boiled, peeled and cut into bite-size pieces", "cookingMethod": "Boiled", "prepNote": null },
+        { "category": "Veg", "baseName": "Onion", "quantity": 120, "unit": "g", "cutPrep": "diced", "cookingMethod": "Sauteed", "prepNote": "softened gently" },
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 3, "unit": "each", "cutPrep": "hard boiled, peeled and diced", "cookingMethod": "Boiled", "prepNote": null },
+        { "category": "Herbs", "baseName": "Distilled Vinegar (White)", "quantity": 1, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 4, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Mustard medium hot", "quantity": 2, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Dressing, mayonnaise, whole egg type", "quantity": 120, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Yoghurt, naturell", "quantity": 45, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Fresh Dill Weed", "quantity": 20, "unit": "g", "cutPrep": "finely chopped", "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 3, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Boil the potatoes in salted water until soft, about 20 minutes, and hard boil the eggs for 8 to 10 minutes.",
+        "Soften the onion over low heat for about 10 minutes, then stir in the warm broth, mustard, vinegar and sugar.",
+        "Peel and cut the potatoes while warm, pour the broth mixture over them and leave to cool, 20 to 30 minutes.",
+        "Fold in the mayonnaise, yogurt, pickles, eggs and dill, season with salt and chill for at least 1 hour before serving."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Potassium", "note": "From the potatoes." },
+        { "nutrient": "Protein", "note": "From the eggs and yogurt." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Northern German Potato Salad", "url": "https://mydinner.co.uk/northern-german-potato-salad/" },
+        { "source": "Quick German Recipes, Oma's Potato Salad", "url": "https://www.quick-german-recipes.com/easy-potato-salad-recipe.html" }
+      ],
+      "curationNote": "Quantities follow My Dinner; both sources give the northern style with mayonnaise, pickles and egg. Pickles point at the Gewürzgurken base."
+    },
+    {
+      "id": "curated_de_schupfnudeln",
+      "name": "Schupfnudeln",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Potatoes, Dumplings & Noodles",
+      "region": "Swabia and Baden",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Finger-shaped potato noodles, soft inside and browned in butter, often tossed with sauerkraut.",
+      "healthBenefit": "Brings potassium from the potatoes and starch for energy; with sauerkraut beside it the plate gains fibre.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Potato", "quantity": 450, "unit": "g", "cutPrep": "floury, boiled, peeled and riced", "cookingMethod": "Boiled", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 125, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "plus a little for rolling" },
+        { "category": "PantryStaples", "baseName": "Cornstarch", "quantity": 2, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 1, "unit": "each", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 6, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "plus more for the water" },
+        { "category": "Herbs", "baseName": "Spices, nutmeg, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 28, "unit": "g", "cutPrep": null, "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Veg", "baseName": "Fresh Parsley", "quantity": 4, "unit": "g", "cutPrep": "chopped", "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Boil the potatoes in salted water until soft, 15 to 20 minutes, drain and let them steam dry, then peel and rice them.",
+        "Knead the warm potato with the flour, cornstarch, egg, salt and nutmeg to a smooth dough that is not sticky.",
+        "Roll walnut-size pieces between your palms into fingers about 6 cm (2.5 in) long with pointed ends.",
+        "Cook them in barely simmering salted water until they float, 2 to 3 minutes, and drain.",
+        "Brown them in the butter over medium heat, 5 to 7 minutes, and scatter with parsley. Serve alone or tossed with sauerkraut."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Potassium", "note": "From the potatoes." },
+        { "nutrient": "Carbohydrate", "note": "From the potatoes and flour." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Easy Schupfnudeln", "url": "https://mydinner.co.uk/schupfnudeln/" },
+        { "source": "Wikipedia (de), Schupfnudel", "url": "https://de.wikipedia.org/wiki/Schupfnudel" }
+      ],
+      "curationNote": "Quantities follow My Dinner; Wikipedia gives the shape, the boil then brown method and the classic pairing with sauerkraut."
+    },
+    {
+      "id": "curated_de_salzkartoffeln",
+      "name": "Salzkartoffeln",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Potatoes, Dumplings & Noodles",
+      "region": "Across Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Plain peeled potatoes boiled in salted water until tender and floury at the edges, the everyday German side.",
+      "healthBenefit": "A simple side with potassium, vitamin C and vitamin B6 and nothing added but salt.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Potato", "quantity": 800, "unit": "g", "cutPrep": "peeled and quartered", "cookingMethod": "Boiled", "prepNote": "one medium potato a person" },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 6, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "about 1 tsp per litre of water" },
+        { "category": "Veg", "baseName": "Fresh Parsley", "quantity": 5, "unit": "g", "cutPrep": "chopped", "cookingMethod": null, "prepNote": "optional" }
+      ],
+      "instructions": [
+        "Peel the potatoes, dropping them into cold water as you go so they stay white.",
+        "Quarter them, cover with fresh water in a pot and add the salt.",
+        "Bring to a boil, cover and boil gently until a knife slides in easily, about 20 minutes.",
+        "Drain, return the pot to the low heat for a minute to steam them dry and serve with parsley."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Potassium", "note": "From the potatoes." },
+        { "nutrient": "Vitamin C", "note": "From the potatoes." }
+      ],
+      "citations": [
+        { "source": "Quick German Recipes, Oma's Salzkartoffeln", "url": "https://www.quick-german-recipes.com/how-to-boil-potatoes.html" },
+        { "source": "Wikipedia (de), Salzkartoffel", "url": "https://de.wikipedia.org/wiki/Salzkartoffel" }
+      ],
+      "curationNote": "Both sources: peeled, cut, boiled in salted water and steamed dry."
+    },
+    {
+      "id": "curated_de_kartoffelpuree",
+      "name": "Kartoffelpüree",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Potatoes, Dumplings & Noodles",
+      "region": "Across Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Smooth, fluffy mashed potatoes with warm milk, butter and a breath of nutmeg.",
+      "healthBenefit": "Brings potassium and vitamin C from the potatoes and calcium from the milk.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Potato", "quantity": 1000, "unit": "g", "cutPrep": "floury, peeled and quartered", "cookingMethod": "Boiled", "prepNote": null },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 200, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "hot" },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 6, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "plus more for the water" },
+        { "category": "Herbs", "baseName": "Spices, nutmeg, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Boil the peeled potatoes in salted water until very tender, 20 to 25 minutes, then drain and steam dry over low heat for 1 to 2 minutes.",
+        "Press them through a ricer or mash them by hand, never in a blender, which turns them gluey.",
+        "Beat in the hot milk a little at a time with a wooden spoon, then the butter, until smooth and fluffy.",
+        "Season with salt and nutmeg and serve hot."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Potassium", "note": "From the potatoes." },
+        { "nutrient": "Calcium", "note": "From the milk." }
+      ],
+      "citations": [
+        { "source": "Wikipedia (de), Kartoffelpüree", "url": "https://de.wikipedia.org/wiki/Kartoffelp%C3%BCree" },
+        { "source": "Quick German Recipes, Oma's Salzkartoffeln", "url": "https://www.quick-german-recipes.com/how-to-boil-potatoes.html" }
+      ],
+      "curationNote": "Written mostly from the Wikipedia description (boiled floury potatoes mashed with hot milk, butter, salt and nutmeg) with the boiling from Quick German Recipes. Quantities are standard proportions, not from one recipe."
+    },
+    {
+      "id": "curated_de_himmel_und_erde",
+      "name": "Himmel und Erde",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Potatoes, Dumplings & Noodles",
+      "region": "Rhineland and Westphalia",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Mashed potato and apple, sweet and savoury at once, under crisp fried onions; heaven is the apple, earth the potato.",
+      "healthBenefit": "Brings potassium from the potatoes and fibre and vitamin C from the apples and potatoes together.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Potato", "quantity": 450, "unit": "g", "cutPrep": "floury, peeled and cut in 2.5 cm (1 in) cubes", "cookingMethod": "Boiled", "prepNote": null },
+        { "category": "Fruit", "baseName": "Apple", "quantity": 450, "unit": "g", "cutPrep": "tart cooking apples, peeled, cored and thickly sliced", "cookingMethod": "Boiled", "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 56, "unit": "g", "cutPrep": "divided", "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Veg", "baseName": "Onion", "quantity": 200, "unit": "g", "cutPrep": "sliced", "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, nutmeg, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 5, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "plus more for the water" },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Boil the potatoes and apples together in salted water until tender, 10 to 15 minutes, and drain.",
+        "Meanwhile fry the onions in half the butter over medium heat until crisp and brown, 10 to 12 minutes.",
+        "Mash the potatoes and apples with the rest of the butter and season with nutmeg, salt and pepper.",
+        "Spoon the onions over the mash and serve with fried blood sausage or another sausage."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Potassium", "note": "From the potatoes." },
+        { "nutrient": "Fibre", "note": "From the apples and onions." }
+      ],
+      "citations": [
+        { "source": "Quick German Recipes, Oma's Himmel und Erde", "url": "https://www.quick-german-recipes.com/himmel-und-erde.html" },
+        { "source": "Wikipedia, Himmel und Erde", "url": "https://en.wikipedia.org/wiki/Himmel_und_Erde" }
+      ],
+      "curationNote": "Follows Quick German Recipes; Wikipedia gives the name and the usual blood sausage (Flönz) served with it, mentioned in the last step rather than listed."
+    },
+    {
+      "id": "curated_de_pellkartoffeln_mit_quark",
+      "name": "Pellkartoffeln mit Quark",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Potatoes, Dumplings & Noodles",
+      "region": "Across Germany, especially the north and east",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Hot potatoes boiled in their jackets with a cool, tangy herb quark full of chives and a little garlic.",
+      "healthBenefit": "A light meal with protein and calcium from the quark and potassium from the potatoes cooked in their skins.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_quark", "servings": 6, "note": "about 300 g" }
+      ],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Potato", "quantity": 1000, "unit": "g", "cutPrep": "small waxy potatoes, scrubbed", "cookingMethod": "Boiled", "prepNote": "boiled in their skins" },
+        { "category": "Herbs", "baseName": "Spices, caraway seed", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "for the cooking water" },
+        { "category": "Dairy", "baseName": "Sour Cream (Traditional / Cultured)", "quantity": 150, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Veg", "baseName": "Chives", "quantity": 30, "unit": "g", "cutPrep": "finely snipped", "cookingMethod": null, "prepNote": null },
+        { "category": "Veg", "baseName": "Fresh Parsley", "quantity": 10, "unit": "g", "cutPrep": "finely chopped", "cookingMethod": null, "prepNote": null },
+        { "category": "Veg", "baseName": "Garlic", "quantity": 1, "unit": "each", "cutPrep": "one clove, crushed", "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 6, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Linfröolja", "quantity": 2, "unit": "tbsp", "cutPrep": null, "cookingMethod": null, "prepNote": "linseed oil, drizzled over, as in Lusatia" }
+      ],
+      "instructions": [
+        "Cover the potatoes with water, add a little salt and the caraway, and boil until tender, 20 to 25 minutes.",
+        "Meanwhile stir the quark and sour cream together until smooth, then fold in the chives, parsley and garlic and season with salt and pepper.",
+        "Drain the potatoes and serve them hot in their skins, to be peeled at the table, with the herb quark and a drizzle of linseed oil."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Protein", "note": "From the quark." },
+        { "nutrient": "Calcium", "note": "From the quark and sour cream." },
+        { "nutrient": "Omega-3 (ALA)", "note": "From the linseed oil." }
+      ],
+      "citations": [
+        { "source": "My Dinner, German Quark Dip", "url": "https://mydinner.co.uk/healthy-german-chive-quark-dip/" },
+        { "source": "Wikipedia (de), Pellkartoffel", "url": "https://de.wikipedia.org/wiki/Pellkartoffel" }
+      ],
+      "curationNote": "Herb quark follows My Dinner's chive and garlic version; Wikipedia gives jacket potatoes with caraway in the water and Quark mit Leinöl as the classic pairing."
+    },
+    {
+      "id": "curated_de_kaiserbrotchen",
+      "name": "Kaiserbrötchen (Kaiser Rolls)",
+      "builderType": "bakedGoods",
+      "dishGroup": "Breads & Pretzels",
+      "region": "Austria and southern Germany",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "roll",
+      "flavorProfile": "Crackling-crusted white rolls with a soft, airy crumb and the five-part star pattern on top.",
+      "healthBenefit": "A plain bread roll that brings carbohydrate for energy and a little protein from the wheat.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 550", "quantity": 500, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Baker's yeast fresh, pressed", "quantity": 20, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Bev", "baseName": "Water, tap", "quantity": 300, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "lukewarm" },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 10, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 6, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 15, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "soft" }
+      ],
+      "instructions": [
+        "Dissolve the yeast and sugar in the lukewarm water and leave for 10 minutes until it foams.",
+        "Add the flour, salt and butter and knead for 8 to 10 minutes to a smooth, slightly tacky dough. Cover and let it rise until doubled, about 1 hour.",
+        "Divide into 8 pieces, shape tight balls and stamp each with a Kaiser roll stamp, or fold five overlapping flaps by hand. Set them stamp side down on a floured cloth for 15 minutes, then turn them over onto a lined sheet and let them rise 20 to 30 minutes more.",
+        "Heat the oven to 450°F (230°C) with a tray at the bottom. Spray the rolls with water, slide them in, pour a cup of water or ice cubes into the hot tray for steam and bake 18 to 22 minutes until deep golden.",
+        "Cool on a rack so the crust stays crisp."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Carbohydrate", "note": "From the wheat flour." },
+        { "nutrient": "B vitamins", "note": "From the flour and yeast." }
+      ],
+      "citations": [
+        { "source": "Quick German Recipes, Oma's Traditional Brötchen", "url": "https://www.quick-german-recipes.com/bread-rolls-recipe.html" },
+        { "source": "My Dinner, Brötchen", "url": "https://mydinner.co.uk/brotchen/" },
+        { "source": "Wikipedia (de), Kaisersemmel", "url": "https://de.wikipedia.org/wiki/Kaisersemmel" }
+      ],
+      "curationNote": "Dough follows the two Brötchen recipes (Type 550 flour, yeast, water, salt, a little sugar and butter, steam baking); Wikipedia gives the star cut, the Austrian origin and the minimum weight. Fresh yeast is used in place of instant, as a German baker would. Eight rolls of about 95 g so other recipes can count rolls."
+    },
+    {
+      "id": "curated_de_rotkohl",
+      "name": "Rotkohl (Apfelrotkohl)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Vegetables & Salads",
+      "region": "Germany",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Soft, glossy red cabbage, sweet and sour at once, with apple, clove and bay running through it.",
+      "healthBenefit": "Red cabbage brings fibre, vitamin C and the purple anthocyanin pigments, and the long braise keeps it gentle to eat.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Red Cabbage", "quantity": 1000, "unit": "g", "cutPrep": "cored and finely shredded", "cookingMethod": "Braised", "prepNote": null },
+        { "category": "Veg", "baseName": "Onion", "quantity": 150, "unit": "g", "cutPrep": "finely chopped", "cookingMethod": "Sauteed", "prepNote": null },
+        { "category": "Fruit", "baseName": "Apple", "quantity": 400, "unit": "g", "cutPrep": "peeled, cored and diced", "cookingMethod": "Braised", "prepNote": "tart, such as Boskoop" },
+        { "category": "Fats", "baseName": "Pork Lard", "quantity": 40, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "or butter" },
+        { "category": "Herbs", "baseName": "Spices, bay leaf", "quantity": 0.5, "unit": "g", "cutPrep": "2 leaves", "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, cloves, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "or 4 whole cloves" },
+        { "category": "Herbs", "baseName": "Spices, cinnamon, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "or a small piece of stick" },
+        { "category": "Herbs", "baseName": "Vinegar, red wine", "quantity": 60, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Bev", "baseName": "Water, tap", "quantity": 125, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 25, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 6, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 8, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "or 1 tsp cornstarch, to bind" }
+      ],
+      "instructions": [
+        "Toss the shredded cabbage with the vinegar, sugar and salt in a bowl. If there is time, leave it covered overnight in the fridge so it keeps its colour.",
+        "Melt the lard in a wide pot over medium heat and soften the onion for 4 to 5 minutes without browning.",
+        "Add the apple, then the cabbage with its liquid, the water, bay leaves, cloves and cinnamon. Bring to a simmer.",
+        "Cover and braise over low heat for 45 to 60 minutes, stirring now and then and adding a splash of water if it catches, until the cabbage is soft.",
+        "Remove the bay leaves and whole spices. Dust in the flour, stir and simmer 2 to 3 minutes until glossy. Taste for salt, sugar and vinegar."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin C", "note": "From the red cabbage and apple." },
+        { "nutrient": "Fibre", "note": "From the cabbage." }
+      ],
+      "citations": [
+        { "source": "My Dinner, German Red Cabbage with Apple", "url": "https://mydinner.co.uk/german-red-cabbage-and-apple/" },
+        { "source": "Quick German Recipes, Red Cabbage Recipes", "url": "https://www.quick-german-recipes.com/red-cabbage-recipes.html" },
+        { "source": "Wikipedia (de), Rotkohl", "url": "https://de.wikipedia.org/wiki/Rotkohl" }
+      ],
+      "curationNote": "My Dinner gives the apple, bay, clove, cinnamon and vinegar version with butter; Quick German Recipes uses bacon fat and binds with starch. Lard is kept as the older household fat with butter as the alternative. Six servings from 1 kg cabbage."
+    },
+    {
+      "id": "curated_de_spargel_mit_sauce_hollandaise",
+      "name": "Spargel mit Sauce Hollandaise",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Vegetables & Salads",
+      "region": "Germany (Spargelzeit, Baden and Lower Saxony)",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Tender, mild white asparagus under a warm, buttery, lemony sauce, with new potatoes and slices of cured ham.",
+      "healthBenefit": "Asparagus brings folate and fibre and the ham adds protein; the butter sauce makes this a rich spring plate.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_salzkartoffeln", "servings": 4, "note": "boiled potatoes on the side" }
+      ],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Asparagus", "quantity": 1000, "unit": "g", "cutPrep": "white, peeled, woody ends cut off", "cookingMethod": "Simmered", "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 5, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the cooking water" },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 12, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "for the cooking water and the sauce" },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 205, "unit": "g", "cutPrep": "200 g melted and cleared for the sauce, 5 g for the water", "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Chicken Egg Yolk (Raw)", "quantity": 4, "unit": "each", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Alcohol", "baseName": "White Wine", "quantity": 50, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "dry" },
+        { "category": "Bev", "baseName": "Lemon Juice", "quantity": 20, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "from half a lemon" },
+        { "category": "Herbs", "baseName": "Spices, pepper, red or cayenne", "quantity": 1, "unit": "each", "cutPrep": "a pinch", "cookingMethod": null, "prepNote": null },
+        { "category": "Meat", "baseName": "Pork Ham (Cured)", "quantity": 200, "unit": "g", "cutPrep": "thinly sliced", "cookingMethod": null, "prepNote": "Black Forest or cooked ham" }
+      ],
+      "instructions": [
+        "Peel each spear from just below the tip downward and cut off the woody ends.",
+        "Bring a wide pot of water to the boil with the salt, sugar and 5 g butter. Lay in the asparagus and simmer gently for 10 to 15 minutes, depending on thickness, until a knife slides in.",
+        "Meanwhile melt the 200 g butter and skim off the foam. Keep it warm, about 140°F (60°C).",
+        "Whisk the yolks with the wine in a metal bowl over barely simmering water until thick and pale, 3 to 5 minutes. Do not let the bowl get hotter than the hand can bear.",
+        "Off the heat, whisk in the warm butter in a thin stream until the sauce is thick and glossy. Season with lemon juice, salt and a pinch of cayenne.",
+        "Lift out the asparagus, drain and plate it with the potatoes and ham. Spoon the sauce over just before serving."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Folate", "note": "From the asparagus." },
+        { "nutrient": "Protein", "note": "From the ham and egg yolks." },
+        { "nutrient": "Vitamin A", "note": "From the butter and yolks in the sauce." }
+      ],
+      "citations": [
+        { "source": "My Dinner, German Asparagus with Hollandaise Sauce", "url": "https://mydinner.co.uk/german-asparagus-hollandaise-sauce/" },
+        { "source": "Quick German Recipes, How to Cook Asparagus", "url": "https://www.quick-german-recipes.com/how-to-cook-asparagus.html" }
+      ],
+      "curationNote": "Both sources cook white asparagus in salted, sugared water; My Dinner gives the hollandaise (200 g butter, 4 yolks, 50 ml wine, half a lemon) and Quick German Recipes the classic plate with boiled potatoes and ham. The potatoes point at Salzkartoffeln."
+    },
+    {
+      "id": "curated_de_rahmspinat",
+      "name": "Rahmspinat",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Vegetables & Salads",
+      "region": "Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Silky, finely chopped spinach in a light cream sauce with a whisper of garlic and nutmeg.",
+      "healthBenefit": "Spinach brings folate, vitamin K and vitamin A, and the cream and milk carry some calcium.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Spinach", "quantity": 900, "unit": "g", "cutPrep": "washed, thick stems removed", "cookingMethod": "Boiled", "prepNote": null },
+        { "category": "Veg", "baseName": "Onion", "quantity": 60, "unit": "g", "cutPrep": "finely chopped", "cookingMethod": "Sauteed", "prepNote": null },
+        { "category": "Veg", "baseName": "Garlic", "quantity": 0.5, "unit": "each", "cutPrep": "half a clove, minced", "cookingMethod": "Sauteed", "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 30, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 15, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 60, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Heavy Whipping Cream", "quantity": 150, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, nutmeg, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "freshly grated" },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 4, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Blanch the spinach in boiling salted water for 1 to 2 minutes, drain, rinse cold and squeeze out the water, keeping a few spoonfuls of the cooking liquid.",
+        "Chop the spinach very finely by knife or pulse it briefly in a processor.",
+        "Melt the butter in a pan over medium heat and soften the onion and garlic for 3 to 4 minutes. Stir in the flour and cook 1 minute.",
+        "Whisk in the milk and cream and simmer 2 to 3 minutes until it thickens, loosening with the spinach water if needed.",
+        "Stir in the spinach, season with nutmeg, salt and pepper and heat through for 2 to 3 minutes."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin K", "note": "From the spinach." },
+        { "nutrient": "Folate", "note": "From the spinach." }
+      ],
+      "citations": [
+        { "source": "My Dinner, German Creamed Spinach", "url": "https://mydinner.co.uk/german-creamed-spinach/" },
+        { "source": "Quick German Recipes, Creamed Spinach Recipe", "url": "https://www.quick-german-recipes.com/creamed-spinach-recipe.html" }
+      ],
+      "curationNote": "Both sources use a butter and flour base with milk and cream, garlic and nutmeg, and chop the spinach fine. Spinach is set between their amounts (450 g and 1.36 kg) at 900 g for four."
+    },
+    {
+      "id": "curated_de_kohlrabi_in_rahmso_e",
+      "name": "Kohlrabi in Rahmsoße",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Vegetables & Salads",
+      "region": "Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Sweet, tender kohlrabi sticks in a mild cream sauce, flecked green with its chopped leaves and a little nutmeg.",
+      "healthBenefit": "Kohlrabi is high in vitamin C and fibre and low in calories; the cream keeps the portion modest but rich.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_gemusebruhe", "servings": 0.4, "note": "about 100 ml" }
+      ],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Kohlrabi", "quantity": 600, "unit": "g", "cutPrep": "2 bulbs, peeled and cut in sticks", "cookingMethod": "Simmered", "prepNote": null },
+        { "category": "Veg", "baseName": "Kohlrabi", "quantity": 20, "unit": "g", "cutPrep": "tender leaves, finely chopped", "cookingMethod": null, "prepNote": null },
+        { "category": "Veg", "baseName": "Onion", "quantity": 80, "unit": "g", "cutPrep": "finely chopped", "cookingMethod": "Sauteed", "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 15, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Heavy Whipping Cream", "quantity": 100, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Cornstarch", "quantity": 3, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "stirred into a little cold water" },
+        { "category": "Herbs", "baseName": "Spices, nutmeg, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 3, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Melt the butter in a pot over medium heat and soften the onion for 3 minutes.",
+        "Add the kohlrabi sticks, season with salt, pepper and nutmeg, pour in the vegetable stock, cover and stew for 8 to 10 minutes.",
+        "Pour in the cream and simmer uncovered 4 to 5 minutes until the kohlrabi is tender.",
+        "Stir in the starch slurry and simmer 1 minute until the sauce coats a spoon. Fold in the chopped leaves and taste for seasoning."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin C", "note": "From the kohlrabi." },
+        { "nutrient": "Fibre", "note": "From the kohlrabi." }
+      ],
+      "citations": [
+        { "source": "Lecker, Kohlrabigemüse kochen: das beste Rezept", "url": "https://www.lecker.de/kohlrabigemuese-kochen-das-beste-rezept-79832" },
+        { "source": "Quick German Recipes, Kohlrabi Recipe", "url": "https://www.quick-german-recipes.com/kohlrabi-recipe.html" }
+      ],
+      "curationNote": "Lecker gives the quantities (two kohlrabi, 100 ml stock, 100 ml cream, a little starch, the leaves chopped in at the end); Quick German Recipes confirms the cream and nutmeg treatment. Ham, which Quick German Recipes adds, is left out as optional."
+    },
+    {
+      "id": "curated_de_gurkensalat",
+      "name": "Gurkensalat",
+      "builderType": "salad",
+      "dishGroup": "Vegetables & Salads",
+      "region": "Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Cool, thin cucumber slices in a sweet-sour vinegar dressing with plenty of dill.",
+      "healthBenefit": "A light, hydrating salad that brings a little vitamin K and potassium with very few calories.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Cucumber", "quantity": 700, "unit": "g", "cutPrep": "2 cucumbers, very thinly sliced", "cookingMethod": null, "prepNote": null },
+        { "category": "Veg", "baseName": "Onion", "quantity": 50, "unit": "g", "cutPrep": "very finely chopped", "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Distilled Vinegar (White)", "quantity": 45, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Bev", "baseName": "Water, tap", "quantity": 30, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Solrosolja", "quantity": 40, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "sunflower oil" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 8, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 4, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Fresh Dill Weed", "quantity": 8, "unit": "g", "cutPrep": "chopped", "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Toss the cucumber slices with the salt and leave them 30 to 60 minutes, then squeeze out the water they release.",
+        "Whisk the vinegar, water, sugar, pepper and oil, and stir in the onion.",
+        "Fold in the cucumbers and dill and leave 10 to 15 minutes before serving."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin K", "note": "From the cucumber skin and dill." },
+        { "nutrient": "Potassium", "note": "From the cucumber." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Gurkensalat", "url": "https://mydinner.co.uk/gurkensalat/" },
+        { "source": "Quick German Recipes, German Cucumber Salad", "url": "https://www.quick-german-recipes.com/german-cucumber-salad.html" }
+      ],
+      "curationNote": "Both salt and drain the cucumbers and dress them with vinegar, sugar and dill; My Dinner adds oil and onion, Quick German Recipes thins the vinegar with water. The sour cream version is a separate regional habit and is not written here."
+    },
+    {
+      "id": "curated_de_krautsalat",
+      "name": "Krautsalat",
+      "builderType": "salad",
+      "dishGroup": "Vegetables & Salads",
+      "region": "Bavaria and southern Germany",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Crisp, finely shaved white cabbage kneaded soft with vinegar and salt, sharpened with onion and caraway.",
+      "healthBenefit": "Raw white cabbage brings vitamin C, vitamin K and fibre, with only a little oil in the dressing.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Veg", "baseName": "White cabbage", "quantity": 600, "unit": "g", "cutPrep": "cored and very finely shaved", "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Wine vinegar", "quantity": 60, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "white wine vinegar" },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 6, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 8, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Veg", "baseName": "Onion", "quantity": 60, "unit": "g", "cutPrep": "1 small, finely chopped", "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Solrosolja", "quantity": 22, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "sunflower oil" },
+        { "category": "Herbs", "baseName": "Spices, caraway seed", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Shave the cabbage very finely and put it in a large bowl with the salt and sugar.",
+        "Knead it firmly with clean hands for about 5 minutes until it softens and releases liquid.",
+        "Add the vinegar, onion, caraway, pepper and oil and mix well.",
+        "Cover and leave at least 30 minutes, better 2 to 3 hours, then taste and season again."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin C", "note": "From the raw cabbage." },
+        { "nutrient": "Vitamin K", "note": "From the cabbage." }
+      ],
+      "citations": [
+        { "source": "Lecker, Klassischer Krautsalat", "url": "https://www.lecker.de/klassischer-krautsalat-77673" },
+        { "source": "Wikipedia (de), Krautsalat", "url": "https://de.wikipedia.org/wiki/Krautsalat" }
+      ],
+      "curationNote": "Quantities from Lecker (600 g cabbage, 4 EL white wine vinegar, 1.5 EL oil, 1 TL caraway, kneaded 5 minutes); Wikipedia confirms the kneading and the warm Bavarian variant with Speck, which is left out here."
+    },
+    {
+      "id": "curated_de_bohnensalat",
+      "name": "Bohnensalat",
+      "builderType": "salad",
+      "dishGroup": "Vegetables & Salads",
+      "region": "Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Tender green beans in a sharp vinegar and oil dressing with onion and the peppery note of summer savory.",
+      "healthBenefit": "Green beans bring fibre, vitamin K and folate, and rapeseed oil adds some omega-3 fat.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Green beans", "quantity": 500, "unit": "g", "cutPrep": "trimmed, halved", "cookingMethod": "Boiled", "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, savory, ground", "quantity": 0.5, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "or a fresh sprig of Bohnenkraut cooked with the beans" },
+        { "category": "Veg", "baseName": "Onion", "quantity": 80, "unit": "g", "cutPrep": "finely chopped", "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Wine vinegar", "quantity": 30, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Rapsolja", "quantity": 30, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "rapeseed oil" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 3, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 5, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "part for the cooking water" },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Cook the beans in salted water with the savory for 8 to 12 minutes until tender but still green. Drain, keeping 2 tbsp of the water.",
+        "Whisk the vinegar, the bean water, sugar, salt, pepper and oil, and stir in the onion.",
+        "Pour the dressing over the warm beans so they take it up, and leave 30 minutes to 1 hour before serving."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin K", "note": "From the green beans." },
+        { "nutrient": "Fibre", "note": "From the green beans." }
+      ],
+      "citations": [
+        { "source": "Wikipedia (de), Bohnensalat", "url": "https://de.wikipedia.org/wiki/Bohnensalat" },
+        { "source": "Quick German Recipes, Cooking Green Beans", "url": "https://www.quick-german-recipes.com/cooking-green-beans.html" }
+      ],
+      "curationNote": "Written partly from descriptions: Wikipedia describes the green bean salad dressed with vinegar, oil and onion; Quick German Recipes gives the cooking with summer savory. Quantities are standard proportions for four."
+    },
+    {
+      "id": "curated_de_rahmwirsing",
+      "name": "Rahmwirsing",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Vegetables & Salads",
+      "region": "Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Soft ribbons of savoy cabbage in cream, sweet and mild, with nutmeg at the back.",
+      "healthBenefit": "Savoy cabbage brings vitamin C, vitamin K and fibre; the cream makes it a rich side.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_butterschmalz", "servings": 2, "note": "2 tbsp" },
+        { "recipeId": "curated_de_base_gemusebruhe", "servings": 0.5, "note": "about 120 ml" }
+      ],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Savoy Cabbage", "quantity": 1000, "unit": "g", "cutPrep": "cored and cut in fine strips", "cookingMethod": "Braised", "prepNote": null },
+        { "category": "Veg", "baseName": "Onion", "quantity": 100, "unit": "g", "cutPrep": "finely chopped", "cookingMethod": "Sauteed", "prepNote": null },
+        { "category": "Dairy", "baseName": "Heavy Whipping Cream", "quantity": 180, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, nutmeg, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 6, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "part for the blanching water" },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Blanch the cabbage strips in boiling salted water for 3 to 5 minutes, then drain and rinse cold so they stay green.",
+        "Melt the Butterschmalz in a wide pan over medium heat and soften the onion for 4 minutes.",
+        "Add the cabbage and stock, cover and braise 8 to 10 minutes.",
+        "Pour in the cream and simmer uncovered 5 to 8 minutes until it thickens and coats the cabbage. Season with nutmeg, salt and pepper."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin K", "note": "From the savoy cabbage." },
+        { "nutrient": "Vitamin C", "note": "From the cabbage." }
+      ],
+      "citations": [
+        { "source": "Quick German Recipes, German Creamed Cabbage", "url": "https://www.quick-german-recipes.com/german-creamed-cabbage-recipe.html" },
+        { "source": "My Dinner, Creamed Cabbage", "url": "https://mydinner.co.uk/creamed-cabbage/" }
+      ],
+      "curationNote": "Quick German Recipes gives savoy, onion, Butterschmalz, 180 ml cream and nutmeg; My Dinner blanches the savoy first and adds vegetable stock. The bacon and apple Quick German Recipes lists as options are left out."
+    },
+    {
+      "id": "curated_de_leipziger_allerlei",
+      "name": "Leipziger Allerlei",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Vegetables & Salads",
+      "region": "Saxony (Leipzig)",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Young spring vegetables, each cooked to its point, with morels and crayfish tails in a light butter and cream sauce.",
+      "healthBenefit": "A wide mix of vegetables brings fibre, vitamin A from carrots, vitamin C and folate, and the crayfish adds lean protein.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_gemusebruhe", "servings": 1.5, "note": "about 360 ml" }
+      ],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Carrot", "quantity": 250, "unit": "g", "cutPrep": "young, cut in batons", "cookingMethod": "Boiled", "prepNote": null },
+        { "category": "Veg", "baseName": "Pea, green, fresh", "quantity": 200, "unit": "g", "cutPrep": "shelled", "cookingMethod": "Boiled", "prepNote": null },
+        { "category": "Veg", "baseName": "Asparagus", "quantity": 250, "unit": "g", "cutPrep": "white, peeled, in 4 cm pieces", "cookingMethod": "Boiled", "prepNote": null },
+        { "category": "Veg", "baseName": "Kohlrabi", "quantity": 250, "unit": "g", "cutPrep": "peeled, in batons", "cookingMethod": "Boiled", "prepNote": null },
+        { "category": "Veg", "baseName": "Cauliflower", "quantity": 250, "unit": "g", "cutPrep": "small florets", "cookingMethod": "Boiled", "prepNote": null },
+        { "category": "Mushroom", "baseName": "Morel", "quantity": 60, "unit": "g", "cutPrep": "fresh, cleaned and halved", "cookingMethod": "Sauteed", "prepNote": null },
+        { "category": "Meat", "baseName": "Crayfish Crustaceans", "quantity": 150, "unit": "g", "cutPrep": "cooked tails, shelled", "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 40, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 20, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Heavy Whipping Cream", "quantity": 100, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, nutmeg, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 6, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Veg", "baseName": "Fresh Parsley", "quantity": 8, "unit": "g", "cutPrep": "chopped", "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Cook each vegetable separately in the simmering stock until just tender: asparagus 8 to 10 minutes, carrots and kohlrabi 6 to 8, cauliflower 5 to 7, peas 3 to 4. Lift each out and keep it warm, and keep the stock.",
+        "Melt half the butter in a small pan and fry the morels for 3 to 4 minutes.",
+        "Melt the rest of the butter in a pot, stir in the flour and cook 1 minute. Whisk in 300 ml of the stock and simmer 5 minutes, then add the cream and simmer 2 minutes more.",
+        "Season the sauce with nutmeg and salt, warm the crayfish tails in it for 1 to 2 minutes and fold in the vegetables and morels.",
+        "Scatter with parsley and serve at once."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin A", "note": "From the carrots." },
+        { "nutrient": "Fibre", "note": "From the peas, cauliflower and kohlrabi." },
+        { "nutrient": "Protein", "note": "From the crayfish and peas." }
+      ],
+      "citations": [
+        { "source": "Berliner Kurier, Leipziger Allerlei mit Spargel", "url": "https://www.berliner-kurier.de/rezepte/ein-rezept-aus-dem-osten-so-gelingt-leipziger-allerlei-mit-spargel-perfekt-li.10030345" },
+        { "source": "Wikipedia (de), Leipziger Allerlei", "url": "https://de.wikipedia.org/wiki/Leipziger_Allerlei" }
+      ],
+      "curationNote": "Both sources describe the classic: young peas, carrots, asparagus, kohlrabi and cauliflower with morels and crayfish, each vegetable cooked on its own and bound with a light sauce. Neither page gave quantities in a form I could read, so the amounts are standard proportions for six."
+    },
+    {
+      "id": "curated_de_rote_bete_salat",
+      "name": "Rote-Bete-Salat",
+      "builderType": "salad",
+      "dishGroup": "Vegetables & Salads",
+      "region": "Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Earthy, sweet beetroot in a tangy cider vinegar and honey dressing, with toasted walnuts and spring onion.",
+      "healthBenefit": "Beetroot brings folate, fibre and dietary nitrate, and walnuts add plant omega-3 fat.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Beetroot", "quantity": 600, "unit": "g", "cutPrep": "boiled, peeled and diced", "cookingMethod": "Boiled", "prepNote": null },
+        { "category": "Herbs", "baseName": "Vinegar, cider", "quantity": 90, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Standard Honey (Blossom Honey)", "quantity": 7, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Rapsolja", "quantity": 30, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "rapeseed oil" },
+        { "category": "NutSeed", "baseName": "Walnut", "quantity": 100, "unit": "g", "cutPrep": "roughly chopped", "cookingMethod": "Roasted", "prepNote": "toasted in a dry pan" },
+        { "category": "Veg", "baseName": "Spring onion", "quantity": 60, "unit": "g", "cutPrep": "4 spring onions, in thin rings", "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Chervil Spices", "quantity": 5, "unit": "g", "cutPrep": "leaves picked", "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 4, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Boil the beetroot in their skins for 25 to 40 minutes, depending on size, until a knife slides in. Cool, peel and cut in small dice.",
+        "Toast the walnuts in a dry pan for 3 to 4 minutes, shaking, until fragrant.",
+        "Whisk the vinegar, honey, salt, pepper and oil and toss with the beetroot and spring onions.",
+        "Leave 20 to 30 minutes, then scatter with the walnuts and chervil."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Folate", "note": "From the beetroot." },
+        { "nutrient": "Omega-3 (ALA)", "note": "From the walnuts and rapeseed oil." }
+      ],
+      "citations": [
+        { "source": "Lecker, Rote-Bete-Salat", "url": "https://www.lecker.de/rote-bete-salat-32368" },
+        { "source": "My Dinner, Beetroot Salad", "url": "https://mydinner.co.uk/beetroot-salad/" }
+      ],
+      "curationNote": "Quantities from Lecker (600 g beetroot, 6 EL cider vinegar, honey, rapeseed oil, 100 g walnuts, spring onions, chervil); My Dinner confirms boiled beetroot dressed with vinegar and onion. Oil raised slightly to 30 ml to carry the vinegar."
+    },
+    {
+      "id": "curated_de_wurstsalat",
+      "name": "Wurstsalat",
+      "builderType": "salad",
+      "dishGroup": "Vegetables & Salads",
+      "region": "Bavaria, Swabia and Baden",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Thin strips of mild sausage with pickles, red onion and radish in a sharp vinegar dressing, a cool beer-garden plate.",
+      "healthBenefit": "The sausage brings protein but also salt and fat, so this is a hearty snack plate best eaten with bread and a salad.",
+      "overallTier": "strong",
+      "components": [
+        { "recipeId": "curated_de_base_gewurzgurken", "servings": 3, "note": "3 pickles, cut in strips" }
+      ],
+      "ingredients": [
+        { "notInDatabase": true, "name": "Fleischwurst or Lyoner", "contains": "meat", "quantity": 250, "unit": "g", "cutPrep": "skinned, cut in thin strips", "prepNote": null },
+        { "category": "Veg", "baseName": "Onions, red onions, bulb", "quantity": 70, "unit": "g", "cutPrep": "1 small, in thin rings", "cookingMethod": null, "prepNote": null },
+        { "category": "Veg", "baseName": "Radish", "quantity": 60, "unit": "g", "cutPrep": "5 radishes, thinly sliced", "cookingMethod": null, "prepNote": null },
+        { "notInDatabase": true, "name": "pickle brine from the Gewürzgurken", "contains": "none", "quantity": 45, "unit": "ml", "cutPrep": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Vinegar, cider", "quantity": 30, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Rapsolja", "quantity": 45, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "rapeseed oil" },
+        { "category": "Herbs", "baseName": "Mustard medium hot", "quantity": 5, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 2, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 1, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Veg", "baseName": "Chives", "quantity": 10, "unit": "g", "cutPrep": "snipped", "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Cut the sausage and pickles into matchsticks and put them in a bowl with the onion rings and radishes.",
+        "Whisk the pickle brine, vinegar, mustard, sugar, salt, pepper and oil.",
+        "Pour the dressing over, toss and chill for 1 hour.",
+        "Toss again, scatter with chives and serve with farmhouse bread or a pretzel."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Protein", "note": "From the sausage." },
+        { "nutrient": "Sodium", "note": "High, from the sausage and pickles." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Wurstsalat", "url": "https://mydinner.co.uk/wurstsalat/" },
+        { "source": "Quick German Recipes, Wurstsalat", "url": "https://www.quick-german-recipes.com/Wurstsalat.html" },
+        { "source": "Wikipedia (de), Wurstsalat", "url": "https://de.wikipedia.org/wiki/Wurstsalat" }
+      ],
+      "curationNote": "My Dinner gives the quantities (Fleischwurst, three pickles with their water, red onion, radish, cider vinegar, mustard, chill 1 hour); Quick German Recipes and Wikipedia confirm Lyoner and the vinegar marinade. The Swiss version with Emmental strips is left out. Fleischwurst is not in the food database."
+    },
+    {
+      "id": "curated_de_obatzda",
+      "name": "Obatzda",
+      "builderType": "snack",
+      "dishGroup": "Vegetables & Salads",
+      "region": "Bavaria",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "A soft, tangy spread of ripe Camembert mashed with butter, onion, paprika and a splash of wheat beer.",
+      "healthBenefit": "A rich cheese spread that brings protein and calcium; it is high in saturated fat, so a small serving with radishes and bread is the usual way.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Dairy", "baseName": "Camembert", "quantity": 200, "unit": "g", "cutPrep": "ripe, rind on, cut small", "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Cream Cheese", "quantity": 100, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 50, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "soft" },
+        { "category": "Veg", "baseName": "Onion", "quantity": 50, "unit": "g", "cutPrep": "very finely chopped", "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Paprika", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": "sweet" },
+        { "category": "Herbs", "baseName": "Spices, pepper, red or cayenne", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, caraway seed", "quantity": 0.5, "unit": "tsp", "cutPrep": "lightly crushed", "cookingMethod": null, "prepNote": null },
+        { "notInDatabase": true, "name": "wheat beer (Weißbier)", "contains": "alcohol,gluten", "quantity": 40, "unit": "ml", "cutPrep": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 1, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Veg", "baseName": "Chives", "quantity": 5, "unit": "g", "cutPrep": "snipped", "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Mash the Camembert with a fork, then work in the soft butter and cream cheese until mostly smooth with small pieces left.",
+        "Stir in the onion, paprika, cayenne, caraway, salt, pepper and beer.",
+        "Chill for 30 minutes to 1 hour so the flavours settle.",
+        "Mound it on a plate, dust with a little more paprika, scatter with chives and serve with pretzels, rye bread and radishes."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Calcium", "note": "From the Camembert and cream cheese." },
+        { "nutrient": "Protein", "note": "From the cheese." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Obatzda", "url": "https://mydinner.co.uk/obatzda/" },
+        { "source": "Quick German Recipes, Obatzda Recipe", "url": "https://www.quick-german-recipes.com/obatzda-recipe.html" },
+        { "source": "Wikipedia (de), Obatzter", "url": "https://de.wikipedia.org/wiki/Obatzter" }
+      ],
+      "curationNote": "Both recipes mash ripe Camembert with cream cheese, butter, onion, paprika and wheat beer; butter set between them at 50 g. Wheat beer is not in the food database."
+    },
+    {
+      "id": "curated_de_zwiebelkuchen",
+      "name": "Zwiebelkuchen",
+      "builderType": "bakedGoods",
+      "dishGroup": "Vegetables & Salads",
+      "region": "Swabia, Baden and the Palatinate",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "A thin yeast base under a deep layer of soft, sweet onions set in sour cream and egg, with smoky bacon and caraway.",
+      "healthBenefit": "Onions bring fibre and the eggs and bacon protein; with bacon and sour cream it is a rich autumn bake.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "PantryStaples", "baseName": "Wheat flour, Type 405", "quantity": 315, "unit": "g", "cutPrep": null, "cookingMethod": "Baked", "prepNote": "for the dough" },
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 180, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "lukewarm" },
+        { "category": "PantryStaples", "baseName": "Baker's yeast", "quantity": 7, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "dried" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 2, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Fats", "baseName": "Rapsolja", "quantity": 30, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Veg", "baseName": "Onion", "quantity": 900, "unit": "g", "cutPrep": "halved and thinly sliced", "cookingMethod": "Sauteed", "prepNote": null },
+        { "category": "Meat", "baseName": "Pork Bacon", "quantity": 150, "unit": "g", "cutPrep": "smoked, diced", "cookingMethod": "Fried", "prepNote": null },
+        { "category": "Dairy", "baseName": "Sour Cream (Traditional / Cultured)", "quantity": 400, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Chicken Egg (Raw)", "quantity": 3, "unit": "each", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, caraway seed", "quantity": 1, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 9, "unit": "g", "cutPrep": "5 g for the dough, the rest for the filling", "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.5, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, nutmeg, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Stir the yeast and sugar into the lukewarm milk and leave 5 to 10 minutes. Add the flour, 5 g salt and the oil and knead 5 to 8 minutes to a smooth dough. Cover and let it rise 45 minutes to 1 hour.",
+        "Fry the bacon in a large pan until the fat runs, 4 to 5 minutes. Add the onions and cook gently, stirring, for 15 to 20 minutes until soft and pale gold. Let it cool.",
+        "Beat the sour cream with the eggs, caraway, the rest of the salt, pepper and nutmeg, and stir in the onions.",
+        "Heat the oven to 400°F (200°C). Roll the dough thin onto a lined baking sheet, pressing up a small rim, and spread the onion mixture over it.",
+        "Bake 35 to 45 minutes until the top is set and golden in places. Serve warm, traditionally with new wine (Federweißer)."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Protein", "note": "From the eggs, bacon and sour cream." },
+        { "nutrient": "Fibre", "note": "From the onions." }
+      ],
+      "citations": [
+        { "source": "My Dinner, Zwiebelkuchen (German Onion Cake)", "url": "https://mydinner.co.uk/a-german-cake-with-onions/" },
+        { "source": "Wikipedia (de), Zwiebelkuchen", "url": "https://de.wikipedia.org/wiki/Zwiebelkuchen" }
+      ],
+      "curationNote": "Quantities from My Dinner (yeast dough of 315 g flour and 180 ml milk, 900 g onions, smoked bacon, about 400 g sour cream, 3 eggs, caraway). Wikipedia confirms the yeast base, the sour cream and egg set and the regions. Cups converted to grams."
+    },
+    {
+      "id": "curated_de_rosenkohl_mit_speck",
+      "name": "Rosenkohl mit Speck",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Vegetables & Salads",
+      "region": "Germany",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Brussels sprouts blanched until tender, then tossed in a hot pan with crisp bacon, onion and butter.",
+      "healthBenefit": "Brussels sprouts are high in vitamin C, vitamin K and fibre; the bacon adds flavour, protein and salt.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Veg", "baseName": "Brussels sprout", "quantity": 600, "unit": "g", "cutPrep": "trimmed, a cross cut in large stems", "cookingMethod": "Boiled", "prepNote": null },
+        { "category": "Meat", "baseName": "Pork Bacon", "quantity": 100, "unit": "g", "cutPrep": "diced", "cookingMethod": "Fried", "prepNote": "smoked Speck" },
+        { "category": "Veg", "baseName": "Onion", "quantity": 60, "unit": "g", "cutPrep": "finely chopped", "cookingMethod": "Sauteed", "prepNote": null },
+        { "category": "Fats", "baseName": "Pure Butter (Unsalted)", "quantity": 15, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Spices, nutmeg, ground", "quantity": 1, "unit": "each", "cutPrep": "a pinch", "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 5, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "mostly for the cooking water" },
+        { "category": "Herbs", "baseName": "Pepper, black, ground", "quantity": 0.25, "unit": "tsp", "cutPrep": null, "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Cook the sprouts in salted boiling water for 6 to 8 minutes until just tender. Drain well.",
+        "Fry the bacon in a wide pan over medium heat for 4 to 6 minutes until crisp. Add the onion and cook 2 to 3 minutes.",
+        "Add the butter and the sprouts and toss over medium-high heat for 3 to 5 minutes until they take a little colour.",
+        "Season with nutmeg and pepper and serve."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin K", "note": "From the Brussels sprouts." },
+        { "nutrient": "Vitamin C", "note": "From the Brussels sprouts." }
+      ],
+      "citations": [
+        { "source": "Quick German Recipes, Brussels Sprouts with Bacon", "url": "https://www.quick-german-recipes.com/brussels-sprouts-recipe.html" },
+        { "source": "Quick German Recipes, Brussel Sprouts Recipes", "url": "https://www.quick-german-recipes.com/brussel-sprouts-recipes.html" }
+      ],
+      "curationNote": "Quick German Recipes gives sprouts with bacon and the boiled, buttered German way with nutmeg. This version blanches then pan-fries, which is how the dish is cooked in German homes; the oven method on the first page is not used."
+    }
+  ]
+}

@@ -7497,6 +7497,1421 @@
         }
       ],
       "curationNote": "Cuisine d'Aubery for 4: 50 g olive oil, 600 g tomatoes, 280 g mild green peppers, 400 g onions, 3 garlic cloves, 400 g red peppers, Espelette, sugar, salt, bay, simmered 25 to 30 minutes, a quarter blended, 3 eggs stirred in for a few seconds, and a slice of Bayonne ham each. Demotivateur for 6: 600 g onions, 1.2 kg mild peppers, 3 peppers, 3 garlic cloves, 1.5 kg tomatoes, bouquet garni, olive oil, a tablespoon of sugar and Espelette, about 45 minutes, without eggs. Written from Cuisine d'Aubery with one egg a person. The mild green Basque peppers and Espelette are not in the food database and are listed as not counted; the ham is the database's cured ham."
+    },
+    {
+      "dishRole": "main",
+      "servingSizeAmount": 1,
+      "components": [
+        {
+          "recipeId": "curated_fr_base_beurre_clarifie",
+          "servings": 4,
+          "note": "4 tbsp, for frying the fish without burning"
+        }
+      ],
+      "overallTier": "strong",
+      "id": "curated_fr_sole_meuniere",
+      "name": "Sole Meunière",
+      "builderType": "side",
+      "dishGroup": "Fish & Shellfish",
+      "region": "France",
+      "servings": 4,
+      "servingSizeUnit": "fillet",
+      "flavorProfile": "Delicate white fish with a thin golden crust, under hot nutty brown butter sharpened with lemon and fresh parsley.",
+      "healthBenefit": "Sole is a lean white fish with a good amount of protein for few calories, and the dish keeps to fish, butter, lemon and parsley.",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Sole fillet",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "skinned, 8 fillets or 4 small whole sole",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "for dredging",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "cut in pieces",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Lemon Juice",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lemon",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Pat the fish dry, season it with salt and pepper and dredge it in the flour, shaking off the excess.",
+        "Heat the clarified butter in a wide frying pan over medium high heat until it shimmers.",
+        "Lay in the fish and fry fillets 2 to 3 minutes a side, or whole skinned sole 4 to 5 minutes a side, until golden and just opaque at the centre. Lift onto warm plates.",
+        "Wipe out the pan, add the whole butter and cook it over medium heat for 1 to 2 minutes, swirling, until it foams and smells of hazelnuts.",
+        "Take the pan off the heat, add the lemon juice and parsley, which will spit, and pour the hot butter straight over the fish.",
+        "Serve at once with lemon wedges and steamed potatoes."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "Sole is a lean source of protein."
+        },
+        {
+          "nutrient": "Selenium",
+          "note": "White fish such as sole supplies selenium."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (French), Sole meunière",
+          "url": "https://fr.wikipedia.org/wiki/Sole_meuni%C3%A8re"
+        },
+        {
+          "source": "Wikipedia, Sole meunière",
+          "url": "https://en.wikipedia.org/wiki/Sole_meuni%C3%A8re"
+        }
+      ],
+      "curationNote": "Both pages agree on the method: skinned sole floured, fried in butter, finished with a brown butter, lemon and parsley. The English page cites Escoffier and Elizabeth David's use of clarified butter for the frying, which is why the clarified butter base fries the fish and whole butter makes the sauce. Neither page gives amounts; they are written for four from common practice."
+    },
+    {
+      "dishRole": "main",
+      "servingSizeAmount": 1,
+      "components": [],
+      "overallTier": "strong",
+      "id": "curated_fr_moules_marinieres",
+      "name": "Moules Marinières",
+      "builderType": "side",
+      "dishGroup": "Fish & Shellfish",
+      "region": "France (Atlantic and Channel coasts)",
+      "servings": 4,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Sweet, briny mussels steamed open in white wine, shallot and butter, with a broth worth mopping up.",
+      "healthBenefit": "Mussels are one of the richest common sources of vitamin B12 and iron, and they are farmed on ropes with no feed added.",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Mussel Mollusks",
+          "quantity": 2000,
+          "unit": "g",
+          "cutPrep": "in the shell, scrubbed and debearded, any open ones that do not close discarded",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "peeled and finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "peeled and finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "White Wine",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": "dry",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Heavy Whipping Cream",
+          "quantity": 45,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Melt the butter in a large pot over medium heat and soften the shallots and garlic for 2 to 3 minutes without letting them colour.",
+        "Pour in the white wine, add half the parsley and the pepper and bring it to a boil.",
+        "Tip in the mussels, cover tightly and cook over high heat for 4 to 6 minutes, shaking the pot once or twice, until the shells have opened.",
+        "Lift the mussels into warm bowls with a slotted spoon, throwing away any that stayed shut.",
+        "Stir the cream into the broth if you like, let it bubble for 1 minute, taste it before adding any salt since the mussels are salty, and pour it over the mussels.",
+        "Scatter over the rest of the parsley and serve with bread or fries."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin B12",
+          "note": "Mussels are very high in vitamin B12."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "Mussels supply a good amount of iron."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "Lean protein from the shellfish."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (French), Moules marinières",
+          "url": "https://fr.wikipedia.org/wiki/Moules_marini%C3%A8res"
+        },
+        {
+          "source": "Wikibooks (French), Livre de cuisine: Moules marinières",
+          "url": "https://fr.wikibooks.org/wiki/Livre_de_cuisine/Moules_marini%C3%A8res"
+        },
+        {
+          "source": "Wikipedia, Moules-frites",
+          "url": "https://en.wikipedia.org/wiki/Moules-frites"
+        }
+      ],
+      "curationNote": "Wikibooks gives for four: 3 L of mussels, 2 to 3 shallots, 50 cl dry white wine, a knob of butter, parsley, under 10 minutes, and 1 to 3 spoons of crème fraîche as an option. Written to that, with 3 L of mussels taken as about 2 kg. The cream is optional and can be left out. The French Wikipedia page adds garlic and serving with fries."
+    },
+    {
+      "dishRole": "main",
+      "servingSizeAmount": 1,
+      "components": [
+        {
+          "recipeId": "curated_fr_base_persillade",
+          "servings": 3,
+          "note": "3 tbsp of parsley and garlic"
+        }
+      ],
+      "overallTier": "strong",
+      "id": "curated_fr_coquilles_saint_jacques",
+      "name": "Coquilles Saint-Jacques",
+      "builderType": "side",
+      "dishGroup": "Fish & Shellfish",
+      "region": "France (Brittany and Normandy)",
+      "servings": 4,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Sweet, tender scallops seared golden in butter and tossed in garlic and parsley.",
+      "healthBenefit": "Scallops are almost pure lean protein and supply vitamin B12 and selenium.",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Scallop Mollusks",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "shelled, coral removed or kept, patted dry",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Olive Oil (Extra Virgin)",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rinse the scallops, drain them and pat them very dry with a cloth so they brown rather than steam.",
+        "Heat the butter and olive oil in a frying pan over high heat until the butter foams.",
+        "Lay in the scallops in one layer and sear them 1 to 2 minutes a side, until golden outside and still just translucent at the centre. Lift them out and keep them warm.",
+        "Lower the heat, add two thirds of the persillade to the pan juices and stir for a few seconds only, then take the pan off the heat before the garlic darkens.",
+        "Return the scallops to the pan and toss them in the parsley and garlic.",
+        "Season with salt and pepper and serve with the rest of the persillade on top."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "Scallops are a lean source of protein."
+        },
+        {
+          "nutrient": "Vitamin B12",
+          "note": "Scallops supply vitamin B12."
+        },
+        {
+          "nutrient": "Selenium",
+          "note": "Scallops supply selenium."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Jardiner Malin, Saint-Jacques en persillade",
+          "url": "https://www.jardiner-malin.fr/recettes/saint-jacques-en-persillade.html"
+        },
+        {
+          "source": "Wikipedia (French), Coquille Saint-Jacques",
+          "url": "https://fr.wikipedia.org/wiki/Coquille_Saint-Jacques"
+        }
+      ],
+      "curationNote": "Written as Saint-Jacques à la persillade, the pan-seared way. Jardiner Malin: 500 g scallops for 4 to 6, 3 tbsp parsley, 3 garlic cloves, olive oil and a large knob of butter, seared 2 to 3 minutes, garlic and parsley added to the pan juices off the heat. The French Wikipedia page lists pan-frying as one of the usual ways to cook the noix and coral. The gratin version in a shell with cream or Mornay was not written because no opened source gave it."
+    },
+    {
+      "dishRole": "main",
+      "servingSizeAmount": 1,
+      "components": [
+        {
+          "recipeId": "curated_fr_base_court_bouillon",
+          "servings": 3,
+          "note": "the whole batch, for poaching the cod"
+        }
+      ],
+      "overallTier": "strong",
+      "id": "curated_fr_brandade_de_morue",
+      "name": "Brandade de Morue",
+      "builderType": "side",
+      "dishGroup": "Fish & Shellfish",
+      "region": "France (Nîmes, Languedoc)",
+      "servings": 6,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "A creamy, garlicky whip of salt cod, olive oil and warm milk, rich and savoury with a lift of lemon.",
+      "healthBenefit": "Salt cod is a lean, dense protein, and soaking it for a day draws out most of the salt it was cured in.",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Klippfisk, saltet og tørket",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "soaked 24 to 36 hours in cold water changed every few hours",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "peeled, 2 cloves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "warmed",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Olive Oil (Extra Virgin)",
+          "quantity": 400,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lemon",
+          "quantity": 0.5,
+          "unit": "each",
+          "cutPrep": "zest and juice",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Soak the salt cod in a large bowl of cold water in the fridge for 24 to 36 hours, changing the water every 2 to 3 hours during the day, until a flake no longer tastes very salty.",
+        "Bring the court bouillon to a simmer, slide in the drained cod and poach it gently for 8 to 10 minutes. Do not let it boil hard.",
+        "Drain the cod, remove all skin and bones and flake it into a food processor or a heavy pan with the garlic.",
+        "Warm the milk and olive oil separately until warm to the touch.",
+        "Working the cod with the processor or a wooden spoon, add the oil and milk in turn, a little at a time, until the brandade is white, smooth and creamy like a soft mash.",
+        "Beat in the lemon zest and juice and season with pepper; salt is rarely needed.",
+        "Serve warm with potatoes boiled in their skins or on toasted bread."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "Salt cod is a concentrated source of protein."
+        },
+        {
+          "nutrient": "Monounsaturated fat",
+          "note": "Olive oil makes up most of the fat."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "Even well soaked, salt cod carries more sodium than fresh fish."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Routard, Recette de la brandade de morue",
+          "url": "https://www.routard.com/guide-voyage-recette/recette-de-la-brandade-de-morue"
+        },
+        {
+          "source": "Wikipedia (French), Brandade de morue",
+          "url": "https://fr.wikipedia.org/wiki/Brandade_de_morue"
+        }
+      ],
+      "curationNote": "Routard for 6: 500 g salt cod desalted overnight with the water changed every 2 hours, poached 10 minutes in a court bouillon with bouquet garni, dried fennel, garlic and white peppercorns, then worked with 2 garlic cloves, 50 cl warm milk and 40 cl warm olive oil added gradually, half a lemon's zest and juice and pepper. Written to that. Wikipedia gives the Nîmes version as salt cod, oil, milk and garlic with no potato, which is this one; the Paris version mixed with mashed potato and gratinéed is not written here. The court bouillon base stands in for Routard's poaching liquid."
+    },
+    {
+      "dishRole": "main",
+      "servingSizeAmount": 1,
+      "components": [],
+      "overallTier": "strong",
+      "id": "curated_fr_truite_aux_amandes",
+      "name": "Truite aux Amandes",
+      "builderType": "side",
+      "dishGroup": "Fish & Shellfish",
+      "region": "France",
+      "servings": 4,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Mild, sweet trout fried golden in butter under a scatter of toasted almonds and a splash of white wine.",
+      "healthBenefit": "Trout supplies omega-3 fats and protein, and the almonds add vitamin E and magnesium.",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Trout Fish",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "4 whole trout of about 250 g, cleaned",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "for dredging",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Almonds",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "slivered",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "White Wine",
+          "quantity": 100,
+          "unit": "ml",
+          "cutPrep": "dry",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Lemon Juice",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rinse the trout, pat them dry inside and out, season with salt and pepper and dredge them in flour, shaking off the excess.",
+        "Melt half the butter in a large frying pan over medium heat and fry the trout 4 to 6 minutes a side, until golden and the flesh lifts from the bone. Lift onto warm plates.",
+        "Add the rest of the butter and the almonds to the pan and stir for 2 to 3 minutes, until the almonds are golden. Watch them, since they turn quickly.",
+        "Pour in the white wine and the lemon juice and let it bubble for 1 minute, scraping the pan.",
+        "Spoon the almonds and the pan juices over the trout, scatter with parsley and serve with steamed potatoes."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Omega-3 fatty acids",
+          "note": "Trout supplies EPA and DHA."
+        },
+        {
+          "nutrient": "Vitamin E",
+          "note": "Almonds are rich in vitamin E."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "Trout is a good source of protein."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikibooks (French), Livre de cuisine: Truite aux amandes",
+          "url": "https://fr.wikibooks.org/wiki/Livre_de_cuisine/Truite_aux_amandes"
+        },
+        {
+          "source": "Wikipedia, Amandine (culinary term)",
+          "url": "https://en.wikipedia.org/wiki/Amandine_(culinary_term)"
+        }
+      ],
+      "curationNote": "Wikibooks gives one trout of 200 to 300 g a person, 150 g slivered almonds, butter and 30 cl dry white wine, oven-baked at 200°C for 30 minutes, with a pan version where the trout is floured, fried in butter about 10 minutes and the pan deglazed with wine. The pan version is written here, with less wine since it only deglazes. Wikipedia describes amandine dishes as cooked in butter with seasonings and finished with toasted almonds. Wikibooks is the only opened source with amounts."
+    },
+    {
+      "dishRole": "main",
+      "servingSizeAmount": 1,
+      "components": [
+        {
+          "recipeId": "curated_fr_base_fumet_de_poisson",
+          "servings": 1,
+          "note": "1 cup"
+        },
+        {
+          "recipeId": "curated_fr_base_sauce_tomate",
+          "servings": 2,
+          "note": "1 cup"
+        }
+      ],
+      "overallTier": "strong",
+      "id": "curated_fr_lotte_a_larmoricaine",
+      "name": "Lotte à l'Armoricaine",
+      "builderType": "side",
+      "dishGroup": "Fish & Shellfish",
+      "region": "France (Brittany)",
+      "servings": 4,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Firm, sweet monkfish in a deep red sauce of tomato, shallot, white wine and fish stock, warmed with tarragon and a pinch of cayenne.",
+      "healthBenefit": "Monkfish is a lean white fish, and the sauce is built on tomatoes, which supply lycopene.",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Fish, monkfish",
+          "quantity": 900,
+          "unit": "g",
+          "cutPrep": "tail, skinned, membrane removed, cut in thick medallions",
+          "cookingMethod": "Braised",
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "for dusting",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Olive Oil (Extra Virgin)",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "peeled and finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "peeled and finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "peeled and finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "cognac",
+          "contains": "alcohol",
+          "quantity": 45,
+          "unit": "ml",
+          "cutPrep": null,
+          "prepNote": "for flaming; leave out or replace with more wine if you prefer"
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "White Wine",
+          "quantity": 200,
+          "unit": "ml",
+          "cutPrep": "dry",
+          "cookingMethod": "Braised",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Tomato paste",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Tarragon Spices",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": "leaves, chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, red or cayenne",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Season the monkfish with salt and pepper and dust it lightly with flour.",
+        "Heat the olive oil and half the butter in a wide sauté pan over medium high heat and brown the monkfish 2 minutes a side. Lift it out.",
+        "Lower the heat, add the shallots, onion and garlic and soften them 3 to 4 minutes without browning.",
+        "Return the fish, pour in the cognac and set it alight away from anything that can catch, or let it bubble off for 1 minute.",
+        "Add the white wine, the fish fumet, the tomato sauce, tomato paste, half the tarragon and the cayenne. Bring to a simmer, cover and cook gently for 10 to 12 minutes, until the fish is just firm.",
+        "Lift out the fish, boil the sauce 3 to 5 minutes to thicken it, then whisk in the rest of the butter off the heat.",
+        "Return the fish to the sauce, scatter over the rest of the tarragon and the parsley, and serve with rice."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "Monkfish is a lean source of protein."
+        },
+        {
+          "nutrient": "Lycopene",
+          "note": "Cooked tomato supplies lycopene."
+        },
+        {
+          "nutrient": "Selenium",
+          "note": "Monkfish supplies selenium."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (French), Homard à l'américaine",
+          "url": "https://fr.wikipedia.org/wiki/Homard_%C3%A0_l%27am%C3%A9ricaine"
+        },
+        {
+          "source": "Wikipedia (French), Sauce américaine",
+          "url": "https://fr.wikipedia.org/wiki/Sauce_am%C3%A9ricaine"
+        }
+      ],
+      "curationNote": "Neither opened page names monkfish. Homard à l'américaine gives the sauce: cognac, white wine, tomatoes, shallots, onion, garlic, olive oil and butter, tarragon, parsley and cayenne, and says the name armoricaine comes from a 1938 Larousse mistake. Sauce américaine adds fish fumet, bouquet garni, chervil and flour. This dish is that sauce with monkfish in place of lobster. Since there are no lobster shells, the fumet and tomato bases carry the depth. Amounts are written from common practice. Cognac is listed as not in the food database."
+    },
+    {
+      "dishRole": "main",
+      "servingSizeAmount": 1,
+      "components": [
+        {
+          "recipeId": "curated_fr_base_court_bouillon",
+          "servings": 3,
+          "note": "the whole batch, for poaching"
+        }
+      ],
+      "overallTier": "strong",
+      "id": "curated_fr_raie_au_beurre_noir",
+      "name": "Raie au Beurre Noir",
+      "builderType": "side",
+      "dishGroup": "Fish & Shellfish",
+      "region": "France (Brittany)",
+      "servings": 4,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Soft, sweet ribbons of skate under dark nutty butter, sharp with vinegar and capers.",
+      "healthBenefit": "Skate is a lean fish, and poaching it in court bouillon cooks it with no added fat until the sauce goes on.",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Skate, rå",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "4 skate wings, rinsed",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "cut in pieces",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Wine vinegar",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Capers (In Vinegar / Raw)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "drained",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "scrubbed",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rinse the skate wings well in cold water; a skate that smells of ammonia is not fresh.",
+        "Lay the wings in a wide pan, pour over the court bouillon, adding water if needed to cover, and bring it just to a shiver. Poach 8 to 10 minutes, without boiling, until the flesh lifts from the cartilage.",
+        "Drain the wings, peel off the skin on both sides and lay them on warm plates. Season with salt and pepper and scatter with capers and parsley.",
+        "Melt the butter in a small pan over medium heat and cook it 2 to 4 minutes, until it is dark brown and smells toasted, but not burnt.",
+        "Pour the butter over the fish, then pour the vinegar into the hot pan, let it boil for a few seconds and pour it over too.",
+        "Serve at once with steamed potatoes."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "Skate is a lean source of protein."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "Most of the fat comes from the butter in the sauce."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (French), Raie au beurre noir",
+          "url": "https://fr.wikipedia.org/wiki/Raie_au_beurre_noir"
+        },
+        {
+          "source": "Wikipedia (French), Beurre noir",
+          "url": "https://fr.wikipedia.org/wiki/Beurre_noir"
+        }
+      ],
+      "curationNote": "Raie au beurre noir: skate wings poached about 10 minutes in court bouillon, finished with black butter and capers, parsley or lemon, served with steamed potatoes or rice. Beurre noir: butter cooked past hazelnut, the pan deglazed with vinegar or lemon, capers and parsley, poured on skate, Breton in origin. Written to both; neither page gives amounts, so they are from common practice."
+    },
+    {
+      "dishRole": "main",
+      "servingSizeAmount": 1,
+      "components": [
+        {
+          "recipeId": "curated_fr_base_sauce_bechamel",
+          "servings": 4,
+          "note": "1 cup, the base of the Nantua sauce"
+        }
+      ],
+      "overallTier": "strong",
+      "id": "curated_fr_quenelles_de_brochet",
+      "name": "Quenelles de Brochet",
+      "builderType": "side",
+      "dishGroup": "Fish & Shellfish",
+      "region": "France (Lyon)",
+      "servings": 6,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Light, soufflé-like dumplings of pike baked in a creamy crayfish sauce until puffed and golden.",
+      "healthBenefit": "Pike is a lean freshwater fish, and the quenelles are bound with eggs and a flour panade rather than bread.",
+      "ingredients": [
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 250,
+          "unit": "ml",
+          "cutPrep": "for the panade",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "diced, 50 g for the panade and 100 g for the fish",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 125,
+          "unit": "g",
+          "cutPrep": "sifted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": "freshly grated",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pike Fish",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "skinned and boned fillet, chilled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg White (Raw)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "chilled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2000,
+          "unit": "ml",
+          "cutPrep": "lightly salted, for poaching",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Crayfish Crustaceans",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "cooked and shelled tails, for the sauce",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Heavy Whipping Cream",
+          "quantity": 150,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, red or cayenne",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Gruyère",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "grated",
+          "cookingMethod": "Baked",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Make the panade: bring the water, 50 g of the butter, the salt and the nutmeg to a boil, tip in the flour all at once and stir over the heat for 1 to 2 minutes until the paste comes away from the pan. Spread it on a plate and chill it completely.",
+        "In a food processor, blend the chilled pike to a fine paste. Add the cold panade and blend, then the eggs and whites one at a time, then the remaining 100 g of soft butter, until smooth. Season with pepper. Chill the mixture at least 2 hours, or overnight.",
+        "Bring the salted water to a bare simmer. Shape the mixture between two wet tablespoons into ovals and slide them in a few at a time. Poach 8 to 10 minutes, turning once, until they float and feel firm. Lift them onto a cloth.",
+        "For the Nantua sauce, warm the béchamel with the cream, stir in the crayfish tails and a pinch of cayenne and simmer 2 to 3 minutes.",
+        "Heat the oven to 350°F (180°C). Lay the quenelles in a buttered gratin dish with room to swell, pour over the sauce and scatter with the Gruyère.",
+        "Bake 20 to 25 minutes, until the quenelles have puffed and the top is golden. Serve straight away, since they sink as they cool."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "Pike, eggs and crayfish make this a high protein dish."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "Butter and cream carry most of the fat."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "The béchamel, cream and cheese supply calcium."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (French), Quenelle",
+          "url": "https://fr.wikipedia.org/wiki/Quenelle"
+        },
+        {
+          "source": "Wikipedia, Quenelle",
+          "url": "https://en.wikipedia.org/wiki/Quenelle"
+        },
+        {
+          "source": "Dubo, ça la assiette, Quenelle de brochet sauce homard",
+          "url": "https://www.dubocalalassiette.fr/quenelle-de-brochet-sauce-homard/"
+        }
+      ],
+      "curationNote": "French Wikipedia: pike with a panade of flour and milk or water, eggs, butter in place of suet since Moyne in the 1920s, shaped with two spoons, poached and served in a crayfish Nantua sauce, often gratinéed. English Wikipedia agrees on panade, fish, shaping, poaching and Nantua sauce browned under the grill. Dubo, ça la assiette gives a choux-style panade of water, butter and flour, blended with pike, eggs, extra whites and butter, baked in sauce with Gruyère at 180°C for 25 minutes. None of the pages give amounts; they are written from common practice. The sauce here is béchamel with cream and crayfish tails, since a full Nantua made from crayfish shells and butter needs live crayfish."
+    },
+    {
+      "dishRole": "main",
+      "servingSizeAmount": 1,
+      "components": [],
+      "overallTier": "strong",
+      "id": "curated_fr_saumon_en_papillote",
+      "name": "Saumon en Papillote",
+      "builderType": "side",
+      "dishGroup": "Fish & Shellfish",
+      "region": "France",
+      "servings": 4,
+      "servingSizeUnit": "fillet",
+      "flavorProfile": "Moist, tender salmon steamed in a paper parcel with thin vegetables, lemon, herbs and a splash of white wine.",
+      "healthBenefit": "Salmon is one of the best food sources of omega-3 fats and vitamin D, and the parcel steams it in its juices with very little fat added.",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Salmon Fillet (Raw)",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "4 portions of 150 g, skin removed",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Leek",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "white part, cut in thin strips",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "peeled and cut in thin matchsticks",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lemon",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Thyme",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "a few sprigs, in the bouquet garni",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Dill Weed",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "White Wine",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": "dry",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Olive Oil (Extra Virgin)",
+          "quantity": 20,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat the oven to 400°F (200°C). Cut 4 large rectangles of baking parchment.",
+        "Divide the leek and carrot strips between the middle of each sheet, lay a salmon portion on top and season with salt and pepper.",
+        "Top each with lemon slices, thyme and dill, drizzle with olive oil and spoon over a tablespoon of white wine.",
+        "Bring the long sides of the paper together over the fish and fold them down tightly, then twist or fold the ends so the parcel is sealed and steam cannot escape.",
+        "Set the parcels on a baking tray and bake 12 to 15 minutes, until the paper has puffed and the salmon is just opaque.",
+        "Serve the parcels on plates and open them at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Omega-3 fatty acids",
+          "note": "Salmon is rich in EPA and DHA."
+        },
+        {
+          "nutrient": "Vitamin D",
+          "note": "Salmon is one of the few foods with a useful amount of vitamin D."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "A good source of protein."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia, Papillote",
+          "url": "https://en.wikipedia.org/wiki/Papillote"
+        },
+        {
+          "source": "Wikipedia (French), Cuisson en papillote",
+          "url": "https://fr.wikipedia.org/wiki/Cuisson_en_papillote"
+        }
+      ],
+      "curationNote": "Both pages describe the method: fish sealed in parchment or foil and steamed in its juices, with wine or stock and herbs for moisture, opened at the table. Neither gives a recipe, temperatures or amounts. The oven heat, time and the leek, carrot, lemon and herb filling are written from common practice."
+    },
+    {
+      "dishRole": "main",
+      "servingSizeAmount": 1,
+      "components": [],
+      "overallTier": "strong",
+      "id": "curated_fr_thon_basquaise",
+      "name": "Thon Basquaise",
+      "builderType": "side",
+      "dishGroup": "Fish & Shellfish",
+      "region": "France (Basque Country)",
+      "servings": 4,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Seared tuna braised briefly in a soft, sweet sauce of peppers, onion and tomato, warmed with Espelette chili.",
+      "healthBenefit": "Tuna supplies protein and omega-3 fats, and the pipérade adds a large amount of vitamin C from the peppers.",
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Tuna Fish",
+          "quantity": 700,
+          "unit": "g",
+          "cutPrep": "4 thick steaks",
+          "cookingMethod": "Braised",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Olive Oil (Extra Virgin)",
+          "quantity": 45,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "peeled and thinly sliced",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Bell Pepper",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "seeded and cut in strips",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Green Bell Pepper",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "seeded and cut in strips",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 9,
+          "unit": "g",
+          "cutPrep": "peeled and sliced",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "peeled, seeded and chopped",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "piment d'Espelette (ground Basque chili)",
+          "contains": "none",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Thyme",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "a few sprigs, in the bouquet garni",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "whole",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "White Wine",
+          "quantity": 100,
+          "unit": "ml",
+          "cutPrep": "dry",
+          "cookingMethod": "Braised",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat 30 ml of the olive oil in a wide pan over medium heat and cook the onion 5 minutes until soft.",
+        "Add the peppers and garlic and cook 10 to 15 minutes, stirring now and then, until the peppers are soft.",
+        "Add the tomatoes, thyme, bay leaf, Espelette, salt and pepper and simmer 15 to 20 minutes, until the sauce is thick.",
+        "Meanwhile pat the tuna dry, season it and sear it in the rest of the oil in a hot pan for 1 minute a side.",
+        "Pour the white wine into the sauce, lay the tuna in it, cover and cook gently 5 to 8 minutes, until the tuna is cooked as you like it; tuna dries if it cooks too long.",
+        "Scatter with parsley and serve with rice or potatoes."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "Tuna is a rich source of protein."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "Peppers supply a large amount of vitamin C."
+        },
+        {
+          "nutrient": "Omega-3 fatty acids",
+          "note": "Tuna supplies EPA and DHA."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (French), Cuisine basque",
+          "url": "https://fr.wikipedia.org/wiki/Cuisine_basque"
+        },
+        {
+          "source": "Wikipedia, Piperade",
+          "url": "https://en.wikipedia.org/wiki/Piperade"
+        }
+      ],
+      "curationNote": "Cuisine basque names thon kaskarote, tuna cooked with tomatoes, peppers, onions and chiles, and red tuna fried and served with pipérade; it does not use the name thon basquaise. Wikipedia's Piperade page gives the sauce as onions, green peppers and tomatoes with Espelette, garlic often added. Written as tuna seared and then simmered in pipérade. Amounts are from common practice. Large amounts of tuna are not advised for children or during pregnancy because of mercury."
     }
   ]
 }

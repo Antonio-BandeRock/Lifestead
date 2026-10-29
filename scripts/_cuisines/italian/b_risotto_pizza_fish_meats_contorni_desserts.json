@@ -7743,6 +7743,2040 @@
         }
       ],
       "curationNote": "Memorie di Angelina (450 g peas, half an onion, 2 to 3 slices of prosciutto in strips, about 5 minutes for frozen and 15 to 20 for fresh) for the Roman crudo version; Allacciate il grembiule (600 g frozen peas, onion, a glass of vegetable broth, 3 tbsp oil, about 10 minutes, with cooked ham) for the broth and amounts. Prosciutto crudo kept, as in Rome. Broth points at brodo vegetale."
+    },
+    {
+      "builderType": "dessert",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "overallTier": "strong",
+      "components": [],
+      "id": "curated_it_tiramisu",
+      "name": "Tiramisù",
+      "dishGroup": "Desserts",
+      "region": "Veneto and Friuli Venezia Giulia",
+      "servings": 6,
+      "flavorProfile": "Ladyfingers soaked in strong coffee layered with a light, airy cream of mascarpone, egg and sugar and finished with bitter cocoa, soft, creamy and gently bitter.",
+      "healthBenefit": "A rich dessert of mascarpone, eggs and sugar; the eggs bring protein, and it is best kept to a small square.",
+      "ingredients": [
+        {
+          "category": "Dairy",
+          "baseName": "Mascarpone",
+          "quantity": 750,
+          "unit": "g",
+          "cutPrep": "at room temperature",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 5,
+          "unit": "each",
+          "cutPrep": "separated",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.125,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Baked",
+          "baseName": "Savoiardikex",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "savoiardi (ladyfingers)",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Coffee, brewed, espresso, restaurant prepared",
+          "quantity": 250,
+          "unit": "ml",
+          "cutPrep": "freshly made",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Brewing",
+          "baseName": "Pure Cocoa / Cacao Powder (Unsweetened)",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "for dusting",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Make the coffee and let it cool completely.",
+        "Separate the eggs. Whip the whites with a pinch of salt to stiff peaks.",
+        "Whisk the yolks with the sugar until pale, thick and frothy, then fold in the mascarpone a spoonful at a time, lifting from the bottom so the cream stays light.",
+        "Fold in the whipped whites in two or three goes.",
+        "Spread a thin layer of cream in a dish about 20 by 30 cm. Dip the ladyfingers in the coffee one at a time for a second or two on each side, so they soften without falling apart, and lay them close together.",
+        "Cover with cream, then another layer of soaked ladyfingers, and finish with cream.",
+        "Dust generously with cocoa and chill at least 2 hours, better 4 to 6 or overnight, before cutting."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs and mascarpone."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "Mascarpone is a very rich cheese."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Dissapore, Tiramisù",
+          "url": "https://www.dissapore.com/ricette/tiramisu/"
+        },
+        {
+          "source": "Misya, Tiramisù",
+          "url": "https://www.misya.info/ricetta/tiramisu.htm"
+        }
+      ],
+      "curationNote": "Dissapore (750 g mascarpone, 5 eggs separated, whites whipped, 120 g sugar, 250 g savoiardi, 6 cups of moka coffee, cocoa, 2 hours chilling) followed as the classic egg and mascarpone cream. Misya (yolks only, mascarpone lightened with whipped cream, milk in the coffee, chocolate shavings, about 3 hours) compared; its cream and chocolate left out. The eggs are not cooked, so use the freshest eggs you can, or pasteurised eggs for anyone pregnant, very young, elderly or with a weakened immune system."
+    },
+    {
+      "builderType": "dessert",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "overallTier": "strong",
+      "components": [],
+      "id": "curated_it_panna_cotta",
+      "name": "Panna Cotta",
+      "dishGroup": "Desserts",
+      "region": "Piedmont",
+      "servings": 4,
+      "flavorProfile": "Cream and milk scented with vanilla, set with just enough gelatine to wobble, smooth and milky, served with a warm sauce of strawberries cooked with sugar and lemon.",
+      "healthBenefit": "A rich cream dessert; the strawberries bring vitamin C, and it is best kept to a small mould.",
+      "ingredients": [
+        {
+          "category": "Dairy",
+          "baseName": "Heavy Whipping Cream",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 100,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Gelatine",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "sheets, soaked in cold water",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Strawberry",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "hulled and quartered",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Lemon Juice",
+          "quantity": 20,
+          "unit": "ml",
+          "cutPrep": "half a lemon",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": "1 tablespoon, for the strawberries",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Soak the gelatine sheets in cold water for 10 minutes, then squeeze them out.",
+        "Warm the milk, take it off the heat and stir in the gelatine until it dissolves.",
+        "In another pan bring the cream, 100 g of sugar and the vanilla just to the boil. Take it off the heat, add the milk and stir well with a whisk.",
+        "Rinse four moulds or cups with cold water, shake them out without drying and pour in the cream.",
+        "Chill at least 4 hours, better 6, until set.",
+        "For the sauce, cook the strawberries with the tablespoon of sugar and the lemon juice over low heat for about 10 minutes.",
+        "Dip each mould briefly in hot water, turn out onto plates and spoon the strawberries over."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the strawberries and lemon."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "From the cream."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Dissapore, Panna cotta",
+          "url": "https://www.dissapore.com/ricette/panna-cotta/"
+        },
+        {
+          "source": "Misya, Panna cotta",
+          "url": "https://www.misya.info/ricetta/panna-cotta.htm"
+        }
+      ],
+      "curationNote": "Dissapore (500 ml cream, 100 ml milk, 100 g sugar, vanilla, 10 g gelatine, 4 hours, strawberry sauce cooked 10 minutes with lemon and sugar) followed; Misya (500 ml cream, 150 ml milk, 125 g sugar, 8 g fish gelatine, at least 6 hours, caramel) compared. Strawberry sauce kept from Dissapore."
+    },
+    {
+      "builderType": "dessert",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "overallTier": "strong",
+      "components": [],
+      "id": "curated_it_cannoli_siciliani",
+      "name": "Cannoli Siciliani",
+      "dishGroup": "Desserts",
+      "region": "Sicily",
+      "servings": 15,
+      "flavorProfile": "Crisp, blistered fried shells scented with Marsala and filled at the last minute with sweet sheep's milk ricotta, chocolate chips and a touch of cinnamon, crunchy outside and cool and creamy within.",
+      "healthBenefit": "Ricotta brings protein and calcium; with a fried shell and sugar, one cannolo is a treat rather than a snack.",
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "type 00",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "melted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Dessert Wine",
+          "quantity": 50,
+          "unit": "ml",
+          "cutPrep": "Marsala",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.125,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "seed oil for frying (peanut or sunflower)",
+          "contains": "none",
+          "quantity": 150,
+          "unit": "ml",
+          "cutPrep": null,
+          "prepNote": "the share taken up; fry in about 1 litre"
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Ricotta",
+          "quantity": 750,
+          "unit": "g",
+          "cutPrep": "sheep's milk, drained in a sieve for several hours",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "icing sugar (powdered sugar)",
+          "contains": "none",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "sifted into the ricotta"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Chocolate, dark, 45- 59% cacao solids",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "chips or small pieces",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "candied cherries or candied orange peel",
+          "contains": "none",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "to decorate",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "icing sugar (powdered sugar)",
+          "contains": "none",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "for dusting"
+        }
+      ],
+      "instructions": [
+        "Drain the ricotta in a fine sieve in the fridge for several hours, or overnight, so it loses its whey.",
+        "Mix the flour, sugar, melted butter, egg, Marsala and salt into a firm dough, adding a few drops of water only if needed. Knead until smooth, wrap and rest at least 30 minutes.",
+        "Roll the dough very thin, by hand or through a pasta machine down to a thin setting, and cut discs about 10 cm across.",
+        "Wrap each disc around a metal cannoli tube, dab the overlap with a little egg white or water and press to seal.",
+        "Heat the oil to 340 °F (170 °C) and fry two or three at a time, 1 to 2 minutes, turning, until blistered and golden. Drain on paper, and when cool slide out the tubes.",
+        "Press the ricotta through a sieve, then beat in the icing sugar and cinnamon and stir in the chocolate.",
+        "Fill the shells with a piping bag or spoon only shortly before serving, press a piece of candied fruit into each end and dust with icing sugar."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the ricotta."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the ricotta and egg."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Dissapore, Cannoli siciliani",
+          "url": "https://www.dissapore.com/ricette/cannoli-siciliani/"
+        },
+        {
+          "source": "Misya, Cannoli siciliani",
+          "url": "https://www.misya.info/ricetta/cannoli-siciliani.htm"
+        }
+      ],
+      "curationNote": "Dissapore (250 g flour, 1 egg, 50 g sugar, 40 g butter, 50 ml Marsala, 1 kg sheep ricotta drained, cinnamon, chocolate chips, candied fruit, peanut oil at 170 °C, 15 cannoli) followed; Misya (adds 5 g cocoa to the shell, 750 g ricotta, 200 g icing sugar, 150 g chocolate chips) gives the filling amounts. Marsala entered as dessert wine."
+    },
+    {
+      "builderType": "dessert",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "overallTier": "strong",
+      "components": [],
+      "id": "curated_it_zabaione",
+      "name": "Zabaione",
+      "dishGroup": "Desserts",
+      "region": "Piedmont",
+      "servings": 4,
+      "flavorProfile": "Egg yolks, sugar and Marsala whisked over barely simmering water into a warm, thick, golden foam, sweet and winey.",
+      "healthBenefit": "Egg yolks bring protein, vitamin A, vitamin D and choline; it is sweet and carries a little alcohol, so it suits a small cup.",
+      "ingredients": [
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg Yolk (Raw)",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "4 tablespoons",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Dessert Wine",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": "Marsala",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "In a round metal bowl or small pan, whisk the yolks with the sugar until pale and frothy, by hand or with an electric whisk.",
+        "Set the bowl over a pan of water that is barely simmering, without the bowl touching the water.",
+        "Add the Marsala and keep whisking constantly for about 10 minutes, until the cream is thick, fluffy and holds a trail. Do not let the water boil or the eggs will curdle.",
+        "Serve at once, warm, alone or with dry biscuits."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Choline",
+          "note": "From the egg yolks."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the egg yolks."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Misya, Zabaione",
+          "url": "https://www.misya.info/ricetta/zabaione.htm"
+        },
+        {
+          "source": "Dissapore, Zabaione",
+          "url": "https://www.dissapore.com/ricette/zabaione/"
+        }
+      ],
+      "curationNote": "Misya (4 yolks, 4 tbsp sugar, 4 tbsp Marsala, whisked over barely simmering water about 10 minutes) and Dissapore (3 yolks, 75 g sugar, 40 g Marsala, about 10 minutes) agree. Misya amounts kept. The alcohol does not fully cook off at this gentle heat. Marsala entered as dessert wine."
+    },
+    {
+      "builderType": "dessert",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "overallTier": "strong",
+      "components": [],
+      "id": "curated_it_cantucci",
+      "name": "Cantucci",
+      "dishGroup": "Desserts",
+      "region": "Tuscany (Prato)",
+      "servings": 25,
+      "flavorProfile": "Crisp twice-baked almond biscuits, golden and crunchy with whole almonds and a hint of lemon, made for dipping in vin santo.",
+      "healthBenefit": "Almonds bring vitamin E, magnesium and fibre; these are still sweet biscuits, best enjoyed one or two at a time.",
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "type 00",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 170,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Almonds",
+          "quantity": 130,
+          "unit": "g",
+          "cutPrep": "whole, skin on, lightly toasted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baking powder",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Citron, zeste, cru",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "finely grated lemon zest",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.125,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Toast the almonds in a dry pan over medium-low heat for about 5 minutes, stirring, and let them cool.",
+        "Beat the eggs with the sugar, lemon zest, vanilla and salt.",
+        "Add the flour mixed with the baking powder and work it in, then the almonds, until the dough is even and holds together.",
+        "Shape it into two logs about 3 fingers wide and lay them well apart on a lined tray, since they spread.",
+        "Bake at 350 °F (180 °C) for 20 to 25 minutes, until lightly golden.",
+        "While still warm, cut the logs on the diagonal into slices about 1 cm thick.",
+        "Lay the slices cut side up and bake again at 210 to 350 °F (100 to 180 °C) for 10 to 15 minutes, turning halfway, until dry. Cool and keep in a tin."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin E",
+          "note": "From the almonds."
+        },
+        {
+          "nutrient": "Magnesium",
+          "note": "From the almonds."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Misya, Cantucci",
+          "url": "https://www.misya.info/ricetta/cantucci.htm"
+        },
+        {
+          "source": "Dissapore, Cantucci",
+          "url": "https://www.dissapore.com/ricette/cantucci/"
+        }
+      ],
+      "curationNote": "Misya (250 g flour, 200 g sugar, 125 g almonds with skin, 2 eggs, baking powder, vanilla, lemon zest, 180 °C 25 minutes then 100 °C 15 minutes) and Dissapore (250 g flour, 150 g sugar, 130 g toasted almonds, 2 eggs, lemon zest, 180 °C 20 minutes then about 10 more turned halfway). Sugar set between the two; the second bake given as either source does it."
+    },
+    {
+      "builderType": "dessert",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "overallTier": "strong",
+      "components": [],
+      "id": "curated_it_torta_caprese",
+      "name": "Torta Caprese",
+      "dishGroup": "Desserts",
+      "region": "Campania (Capri)",
+      "servings": 10,
+      "flavorProfile": "A dense, flourless chocolate and almond cake with a thin crisp crust and a moist, fudgy middle, dusted with icing sugar.",
+      "healthBenefit": "Almonds bring vitamin E, magnesium and fibre and dark chocolate brings some iron and magnesium; with this much butter and sugar it is a rich cake. Made without wheat flour.",
+      "ingredients": [
+        {
+          "category": "Sweets",
+          "baseName": "Chocolate, dark, 60-69% cacao solids",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "in pieces",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "in pieces, plus a little for the tin",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Nut, almond meal",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "finely ground almonds",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 6,
+          "unit": "each",
+          "cutPrep": "separated",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "icing sugar (powdered sugar)",
+          "contains": "none",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "for dusting"
+        }
+      ],
+      "instructions": [
+        "Heat the oven to 340 °F (170 °C) and line a 26 cm springform tin with baking paper.",
+        "Melt the chocolate in a bowl over simmering water, then stir in the butter until it melts.",
+        "Off the heat, stir in the yolks, the ground almonds and the sugar to a smooth batter.",
+        "Whip the whites to stiff peaks and fold them in with a spatula, lifting from the bottom.",
+        "Pour into the tin and bake 35 to 40 minutes, until the top is set and crisp but the middle is still moist.",
+        "Cool in the tin, turn out and dust with icing sugar."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin E",
+          "note": "From the almonds."
+        },
+        {
+          "nutrient": "Magnesium",
+          "note": "From the almonds and dark chocolate."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "From the butter and chocolate."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Dissapore, Torta caprese",
+          "url": "https://www.dissapore.com/ricette/torta-caprese/"
+        },
+        {
+          "source": "Misya, Torta caprese",
+          "url": "https://www.misya.info/ricetta/torta-caprese.htm"
+        }
+      ],
+      "curationNote": "Dissapore (250 g each of almond flour, butter, dark chocolate and sugar, 6 eggs separated, 26 cm tin, 170 °C 35 minutes, elsewhere on the page 180 °C 35 to 40) followed; Misya (20 cm tin, 140 g chocolate, 100 g butter, 130 g sugar, 150 g almonds, 3 eggs, a teaspoon of baking powder, 180 °C 35 minutes) compared. The baking powder is left out, keeping the cake without leavening as Dissapore makes it."
+    },
+    {
+      "builderType": "dessert",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_it_base_pasta_frolla",
+          "servings": 6,
+          "note": "about 650 g of the pastry, for the base and lattice"
+        }
+      ],
+      "id": "curated_it_crostata_di_marmellata",
+      "name": "Crostata di Marmellata",
+      "dishGroup": "Desserts",
+      "region": "Throughout Italy",
+      "servings": 8,
+      "flavorProfile": "A buttery, lemon-scented shortcrust tart filled with jam under a lattice of pastry, crumbly and fruity.",
+      "healthBenefit": "A simple home tart of pastry and fruit jam; sweet, so best as a slice with coffee or at breakfast now and then.",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "fruit jam (apricot, peach or cherry)",
+          "contains": "none",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "a thick jam holds best"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "for the tin",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "for the tin and rolling",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Make the pastry and chill it at least 30 minutes.",
+        "Heat the oven to 340 to 350 °F (170 to 180 °C). Butter and flour a 24 to 26 cm tart tin.",
+        "Roll two thirds of the pastry 3 to 4 mm thick on a floured surface, lift it into the tin, trim the edge and prick the base with a fork.",
+        "Spread the jam evenly over the base.",
+        "Roll out the rest of the pastry, cut strips with a pastry wheel and lay them diagonally across the jam in two directions to make diamonds. Press the ends to the rim.",
+        "Bake 35 to 40 minutes until the pastry is golden.",
+        "Let it cool completely before slicing so the jam sets."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the pastry and jam."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "From the butter in the pastry."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Misya, Crostata di marmellata",
+          "url": "https://www.misya.info/ricetta/crostata-di-marmellata.htm"
+        },
+        {
+          "source": "Dissapore, Crostata di marmellata",
+          "url": "https://www.dissapore.com/ricette/crostata-di-marmellata/"
+        }
+      ],
+      "curationNote": "Misya (300 g flour frolla, 400 g jam, 26 cm tin, lattice, 180 °C 40 minutes) and Dissapore (250 g flour, 150 g butter frolla, a jar of jam, lattice, 170 °C 35 minutes). The pastry points at pasta frolla; 6 of its 10 servings is close to both pastry amounts."
+    },
+    {
+      "builderType": "dessert",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "overallTier": "strong",
+      "components": [],
+      "id": "curated_it_affogato_al_caffe",
+      "name": "Affogato al Caffè",
+      "dishGroup": "Desserts",
+      "region": "Throughout Italy",
+      "servings": 4,
+      "flavorProfile": "A scoop of cold vanilla gelato drowned in a shot of hot espresso, so it melts into a sweet, bitter, creamy coffee.",
+      "healthBenefit": "A small dessert of gelato and coffee; the espresso brings caffeine, so it is one to have earlier in the day for anyone sensitive to it.",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "vanilla or fior di latte gelato",
+          "contains": "dairy,egg",
+          "quantity": 240,
+          "unit": "g",
+          "cutPrep": "4 scoops",
+          "prepNote": "fior di latte gelato is often made without egg"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Coffee, brewed, espresso, restaurant prepared",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": "freshly made",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put a scoop of gelato in each of four small glasses or cups and keep them in the freezer while you make the coffee.",
+        "Make the espresso, or moka coffee.",
+        "Pour the hot coffee straight over the gelato and serve at once, with a spoon.",
+        "A splash of amaretto or grappa in each cup, or a spoon of whipped cream, are common additions."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the gelato."
+        },
+        {
+          "nutrient": "Caffeine",
+          "note": "From the espresso."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Dissapore, Affogato",
+          "url": "https://www.dissapore.com/ricette/affogato/"
+        },
+        {
+          "source": "Misya, Affogato al caffè",
+          "url": "https://www.misya.info/ricetta/affogato-al-caffe.htm"
+        }
+      ],
+      "curationNote": "Dissapore (4 scoops of vanilla gelato, 4 cups of moka coffee, optional grappa or amaretto or cream) and Misya (200 g fior di latte or vanilla gelato for 2, 2 unsweetened espressos, whipped cream and chocolate shavings). The plain version kept. Gelato is not in the database; entered as dairy and egg."
+    },
+    {
+      "builderType": "dessert",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_it_base_pasta_frolla",
+          "servings": 5,
+          "note": "about 550 g of the pastry, for one 24 cm pastiera"
+        }
+      ],
+      "id": "curated_it_pastiera_napoletana",
+      "name": "Pastiera Napoletana",
+      "dishGroup": "Desserts",
+      "region": "Campania (Naples)",
+      "servings": 8,
+      "flavorProfile": "The Neapolitan Easter tart: a shortcrust shell and lattice around a filling of ricotta, wheat berries cooked in milk, candied peel and orange blossom water, soft, fragrant and lightly spiced.",
+      "healthBenefit": "Ricotta and eggs bring protein and calcium and the wheat brings some fibre; it is a sweet, rich tart for a holiday slice.",
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "cooked wheat berries (grano cotto)",
+          "contains": "gluten",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "sold ready cooked in jars in Italy; or soak and boil soft wheat berries"
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 100,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lemon",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "peel only, white pith removed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Ricotta",
+          "quantity": 350,
+          "unit": "g",
+          "cutPrep": "sheep's milk, drained and sieved",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg Yolk (Raw)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "candied orange peel",
+          "contains": "none",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "diced",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "candied citron peel",
+          "contains": "none",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": "diced",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "orange blossom water",
+          "contains": "none",
+          "quantity": 25,
+          "unit": "ml",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "icing sugar (powdered sugar)",
+          "contains": "none",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "for dusting"
+        }
+      ],
+      "instructions": [
+        "Simmer the cooked wheat with the milk, butter and lemon peel over low heat, stirring now and then, until creamy and the milk is absorbed, about 20 to 30 minutes. Cool completely and remove the peel.",
+        "Press the ricotta through a sieve and beat it with the sugar. Beat in the eggs and yolk one at a time, then the cooled wheat, candied peel, orange blossom water, cinnamon and vanilla.",
+        "Heat the oven to 340 to 350 °F (170 to 180 °C). Roll about two thirds of the pastry 3 to 4 mm thick and line a lightly greased 24 cm tin, about 5 cm deep.",
+        "Pour in the filling up to half a centimetre below the rim, since it rises in the oven.",
+        "Cut seven strips about 2 cm wide from the rest of the pastry and lay them in a diamond lattice, four one way and three the other.",
+        "Bake on the low rack 60 to 90 minutes, until the top is an even amber brown.",
+        "Cool in the switched-off oven with the door ajar, then completely. It is best made a day or two ahead and kept in the fridge; dust with icing sugar to serve."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the ricotta and eggs."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the ricotta and milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Dissapore, Pastiera napoletana",
+          "url": "https://www.dissapore.com/ricette/pastiera-napoletana/"
+        },
+        {
+          "source": "Misya, Pastiera napoletana",
+          "url": "https://www.misya.info/ricetta/pastiera-napoletana.htm"
+        }
+      ],
+      "curationNote": "Dissapore (butter frolla from 500 g flour for two 24 cm pies; filling 700 g ricotta, 500 g sugar, 500 g cooked wheat, 5 eggs and 2 yolks, 200 ml milk, candied orange and citron, orange blossom water, cinnamon; 170 °C 60 to 90 minutes) halved for one pie; Misya (lard frolla, 350 g wheat cooked with milk, butter and lemon about 30 minutes, 300 g ricotta, 300 g sugar, 3 eggs, 180 °C about 1 hour) compared. Butter frolla points at pasta frolla, whose amounts match Dissapore's. Grano cotto is not in the database."
+    },
+    {
+      "builderType": "dessert",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_it_base_crema_pasticcera",
+          "servings": 4,
+          "note": "about 350 g of the cream"
+        }
+      ],
+      "id": "curated_it_zeppole_di_san_giuseppe",
+      "name": "Zeppole di San Giuseppe",
+      "dishGroup": "Desserts",
+      "region": "Campania (Naples)",
+      "servings": 8,
+      "flavorProfile": "Rings of choux pastry fried until puffed and golden, filled with a swirl of vanilla pastry cream and topped with a sour cherry in syrup, crisp, soft and creamy.",
+      "healthBenefit": "Eggs and milk bring protein; fried and filled with cream, these are a feast day pastry.",
+      "ingredients": [
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 250,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "cubed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.125,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg Yolk (Raw)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "seed oil for frying (peanut or sunflower)",
+          "contains": "none",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "prepNote": "the share taken up; fry in about 1 litre"
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Sour Cherry",
+          "quantity": 8,
+          "unit": "each",
+          "cutPrep": "amarene in syrup, plus a little syrup",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "icing sugar (powdered sugar)",
+          "contains": "none",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "for dusting"
+        }
+      ],
+      "instructions": [
+        "Make the pastry cream ahead and chill it covered with film touching the surface.",
+        "Bring the water, butter and salt to the boil. Tip in all the flour at once and stir hard until the dough is smooth and comes away from the pan, 1 to 2 minutes more.",
+        "Spread the dough out to cool, then beat in the eggs and yolk a little at a time until glossy, soft and just holding its shape.",
+        "Pipe rings about 7 cm across, two turns high, through a large star nozzle onto squares of baking paper.",
+        "Heat the oil to 340 to 355 °F (170 to 180 °C). Lower one or two zeppole in on their paper and pull the paper away after a few seconds. Fry about 2 minutes, turn, and fry 2 to 3 minutes more until puffed and golden. Drain on paper.",
+        "When cool, pipe pastry cream into the middle, top with a cherry and a drop of its syrup, and dust with icing sugar."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs and the milk in the cream."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "From the butter."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Misya, Zeppole di San Giuseppe",
+          "url": "https://www.misya.info/ricetta/zeppole-di-san-giuseppe.htm"
+        },
+        {
+          "source": "Recipes from Italy, Zeppole di San Giuseppe",
+          "url": "https://www.recipesfromitaly.com/zeppole-di-san-giuseppe/"
+        }
+      ],
+      "curationNote": "Recipes from Italy (250 ml water, 60 g butter, 150 g flour, 3 eggs plus 1 yolk, rings of 6 to 7 cm, fried at 170 to 180 °C about 2 then 2 to 3 minutes, crema from 250 ml milk, black cherries in syrup) followed; Misya (choux from 250 g flour and 5 eggs, 5 cm rings, pre-baked at 200 °C for 10 minutes before frying at 180 °C, amarene) compared. Misya's pre-bake is an optional step that keeps them from taking up as much oil. The cream points at crema pasticcera."
+    },
+    {
+      "builderType": "dessert",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_it_base_crema_pasticcera",
+          "servings": 4,
+          "note": "about 350 g of the cream, cooled"
+        }
+      ],
+      "id": "curated_it_bomboloni",
+      "name": "Bomboloni",
+      "dishGroup": "Desserts",
+      "region": "Tuscany",
+      "servings": 10,
+      "flavorProfile": "Soft, airy fried yeast doughnuts scented with lemon, rolled in sugar while warm and filled with vanilla pastry cream.",
+      "healthBenefit": "Fried, sugared and cream-filled, these are an occasional treat; the eggs and milk bring some protein.",
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 135,
+          "unit": "g",
+          "cutPrep": "type 00",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Grains, wheat flour, white, bread flour",
+          "quantity": 135,
+          "unit": "g",
+          "cutPrep": "Manitoba or strong flour",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 100,
+          "unit": "ml",
+          "cutPrep": "lukewarm, about 98 °F (37 °C)",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baker's yeast fresh, pressed",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "soft or melted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Citron, zeste, cru",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "finely grated lemon zest",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "seed oil for frying (peanut or sunflower)",
+          "contains": "none",
+          "quantity": 80,
+          "unit": "ml",
+          "cutPrep": null,
+          "prepNote": "the share taken up; fry in about 1 litre"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "for rolling",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Dissolve the yeast in the lukewarm milk.",
+        "Mix the two flours with the sugar, egg, butter and lemon zest, add the milk and yeast and then the salt, and knead 10 to 20 minutes until smooth, soft and elastic.",
+        "Cover and leave in a warm place about 2 hours, until doubled.",
+        "Roll the dough about 2 cm thick and cut discs about 8 cm across. Set them on a lightly floured tray, cover, and let them rise again about 1 hour.",
+        "Heat the oil to about 340 °F (170 °C). Fry two or three at a time, 2 to 3 minutes a side, until deep golden.",
+        "Drain briefly and roll them in sugar while still warm.",
+        "Make a hole in the side and pipe in the cooled pastry cream with a long nozzle. Serve warm."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the flour and sugar."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the egg and milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Misya, Bomboloni",
+          "url": "https://www.misya.info/ricetta/bomboloni.htm"
+        },
+        {
+          "source": "Dissapore, Bomboloni",
+          "url": "https://www.dissapore.com/ricette/bomboloni/"
+        }
+      ],
+      "curationNote": "Misya (135 g 00 and 135 g 0 flour, starter with 12 g yeast, egg, 50 g butter, 30 g sugar, 100 ml milk, lemon zest, 2 hour then 1 hour rises, 8 cm discs 2 cm thick, fried then rolled in sugar and filled, 12 pieces) followed; Dissapore (125 g 00 and 125 g Manitoba, 100 ml milk at 37 °C, 8 g yeast, 50 g butter, 50 g sugar, 1 egg, 2 hour rise, cream sealed inside before frying) supplied the Manitoba flour and milk temperature. Misya's starter folded into a direct dough. Frying temperature added from usual practice since neither gives it. The cream points at crema pasticcera."
+    },
+    {
+      "builderType": "dessert",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "overallTier": "strong",
+      "components": [],
+      "id": "curated_it_amaretti",
+      "name": "Amaretti",
+      "dishGroup": "Desserts",
+      "region": "Lombardy (Saronno) and Liguria (Sassello)",
+      "servings": 40,
+      "flavorProfile": "Small almond biscuits of ground almonds, sugar and egg white with the bitter almond note of apricot kernels, crackled on top, crisp or soft depending on how long they bake.",
+      "healthBenefit": "Almonds bring vitamin E and magnesium, and the biscuits are made without wheat flour; they are mostly sugar, so one or two is plenty.",
+      "ingredients": [
+        {
+          "category": "NutSeed",
+          "baseName": "Nuts, almonds, blanched",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "lightly toasted and cooled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "bitter apricot kernels (armelline)",
+          "contains": "none",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "or 5 drops of bitter almond extract; these kernels are only used in this small amount"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 140,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "icing sugar (powdered sugar)",
+          "contains": "none",
+          "quantity": 125,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg White (Raw)",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "from about 2 eggs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baking powder",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": "or ammonium bicarbonate",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "icing sugar (powdered sugar)",
+          "contains": "none",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "for rolling"
+        }
+      ],
+      "instructions": [
+        "Toast the almonds at 400 °F (200 °C) for 5 minutes and let them cool.",
+        "Grind the almonds and apricot kernels with the sugar and 125 g of icing sugar in short bursts until very fine, without letting them turn oily.",
+        "Mix in the baking powder and the egg white with a spoon, then knead by hand to a soft, firm dough. Rest 10 minutes.",
+        "Roll into balls 2 to 3 cm across, about 12 to 15 g each. For soft amaretti, roll them in icing sugar and leave them covered overnight.",
+        "Set them apart on a lined tray and press each top lightly.",
+        "Bake at 340 to 350 °F (170 to 180 °C): about 15 minutes for crisp amaretti, or 10 to 12 minutes until just cracked for soft ones. Cool on the tray, where they firm up."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin E",
+          "note": "From the almonds."
+        },
+        {
+          "nutrient": "Magnesium",
+          "note": "From the almonds."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Recipes from Italy, Amaretti cookies",
+          "url": "https://www.recipesfromitaly.com/amaretti-cookies/"
+        },
+        {
+          "source": "Dissapore, Amaretti",
+          "url": "https://www.dissapore.com/ricette/amaretti/"
+        }
+      ],
+      "curationNote": "Recipes from Italy (200 g blanched almonds, 140 g sugar, 125 g icing sugar, 50 g egg white, 15 g armelline or bitter almond extract, ammonium bicarbonate, 170 °C 15 minutes, crisp Saronno style) followed; Dissapore (150 g almonds, 50 g sugar, 50 g icing sugar, 1 egg white, baking soda, rolled in icing sugar and rested overnight, 180 °C, soft style) supplied the soft version. Apricot kernels are not in the database. Soft bake time added from usual practice since Dissapore gives none."
+    },
+    {
+      "builderType": "dessert",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_it_base_pasta_frolla",
+          "servings": 6,
+          "note": "about 650 g of the pastry, for the base and lid"
+        },
+        {
+          "recipeId": "curated_it_base_crema_pasticcera",
+          "servings": 8,
+          "note": "the whole batch, cooled"
+        }
+      ],
+      "id": "curated_it_torta_della_nonna",
+      "name": "Torta della Nonna",
+      "dishGroup": "Desserts",
+      "region": "Tuscany (Florence)",
+      "servings": 8,
+      "flavorProfile": "Two layers of tender, lemony shortcrust enclosing a thick vanilla and lemon pastry cream, topped with toasted pine nuts and icing sugar.",
+      "healthBenefit": "Pine nuts bring vitamin E, magnesium and some iron, and the cream brings protein and calcium from milk and eggs; it is a sweet, rich tart.",
+      "ingredients": [
+        {
+          "category": "NutSeed",
+          "baseName": "Pine nut",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "for the tin",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "icing sugar (powdered sugar)",
+          "contains": "none",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "for dusting"
+        }
+      ],
+      "instructions": [
+        "Make the pastry and chill it at least 30 minutes. Make the pastry cream, cover it with film touching the surface and let it cool.",
+        "Heat the oven to 340 to 350 °F (170 to 180 °C) and butter a 22 to 24 cm tin.",
+        "Divide the pastry into two thirds and one third. Roll the larger piece about 4 mm thick, line the tin, trim and prick the base.",
+        "Stir the cream smooth and spread it in the shell.",
+        "Roll the smaller piece to the same thickness, lay it over the cream, trim, seal the edges and prick the top.",
+        "Scatter the pine nuts over and press them in lightly.",
+        "Bake 40 to 45 minutes, until golden and the pine nuts are toasted. Cool completely and dust with icing sugar."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin E",
+          "note": "From the pine nuts."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the milk in the cream."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Misya, Torta della nonna",
+          "url": "https://www.misya.info/ricetta/torta-della-nonna.htm"
+        },
+        {
+          "source": "Recipes from Italy, Torta della nonna",
+          "url": "https://www.recipesfromitaly.com/torta-della-nonna/"
+        }
+      ],
+      "curationNote": "Misya (frolla from 450 g flour, crema from 400 ml milk and 4 yolks, 25 g pine nuts, 22 cm tin, 180 °C about 40 minutes) and Recipes from Italy (frolla from 250 g flour, crema from 500 ml milk and 4 yolks, 80 g pine nuts, 22 cm tin, 170 °C about 45 minutes). The pastry points at pasta frolla and the cream at crema pasticcera, whose 500 ml of milk matches Recipes from Italy. Dissapore's version, a custard baked in shortcrust brisé, was read and set aside as a different tart."
+    },
+    {
+      "builderType": "dessert",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "overallTier": "strong",
+      "components": [],
+      "id": "curated_it_granita_al_limone",
+      "name": "Granita al Limone",
+      "dishGroup": "Desserts",
+      "region": "Sicily",
+      "servings": 4,
+      "flavorProfile": "Lemon juice and sugar syrup frozen and scraped into fine, icy crystals, sharp, sweet and very cold.",
+      "healthBenefit": "Lemon juice brings vitamin C; it is mostly sugar and water, so a refreshing glass rather than a nourishing one.",
+      "ingredients": [
+        {
+          "category": "Bev",
+          "baseName": "Lemon Juice",
+          "quantity": 200,
+          "unit": "ml",
+          "cutPrep": "freshly squeezed, strained, from 4 to 5 lemons",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Citron, zeste, cru",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "finely grated lemon zest",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring the water, sugar and lemon zest to the boil, stirring until the sugar dissolves, then let the syrup cool completely.",
+        "Stir the strained lemon juice into the cold syrup.",
+        "Pour into a wide metal or plastic tray and freeze for 30 minutes.",
+        "Break up the ice crystals with a fork or whisk and return it to the freezer. Repeat every 30 minutes, about 5 to 8 times, over 3 to 4 hours, until it is a mass of fine crystals. An ice cream machine churning about 25 minutes does the same job.",
+        "Scrape with a spoon and serve in glasses, in Sicily often with a soft brioche."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the lemon juice."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Dissapore, Granita siciliana al limone",
+          "url": "https://www.dissapore.com/ricette/granita-siciliana-al-limone/"
+        },
+        {
+          "source": "Misya, Granita al limone",
+          "url": "https://www.misya.info/ricetta/granita-al-limone.htm"
+        }
+      ],
+      "curationNote": "Dissapore (250 ml lemon juice, 500 ml water, 250 g sugar, zest boiled into a syrup and cooled, 30 minutes in the freezer then an ice cream maker or about 5 breakings) and Misya (120 ml juice, 120 g sugar, 500 ml water, zest stirred cold, 4 to 6 hours broken every 30 minutes). Juice and sugar set between the two; the cooked syrup kept from Dissapore."
+    },
+    {
+      "builderType": "dessert",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "overallTier": "strong",
+      "components": [],
+      "id": "curated_it_panforte",
+      "name": "Panforte",
+      "dishGroup": "Desserts",
+      "region": "Tuscany (Siena)",
+      "servings": 16,
+      "flavorProfile": "A dense, chewy Sienese cake of toasted almonds and candied citron and orange bound with honey and sugar, warm with cinnamon, clove and nutmeg, on a thin wafer base.",
+      "healthBenefit": "Almonds bring vitamin E, magnesium and fibre; with honey, sugar and candied peel it is very sweet, so a thin slice is the way it is eaten.",
+      "ingredients": [
+        {
+          "category": "NutSeed",
+          "baseName": "Almonds",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "whole, skin on, toasted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "candied citron peel",
+          "contains": "none",
+          "quantity": 125,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "candied orange peel",
+          "contains": "none",
+          "quantity": 125,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, coriander seed",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "icing sugar (powdered sugar)",
+          "contains": "none",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "for the syrup"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Standard Honey (Blossom Honey)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 50,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "edible wafer paper (ostia)",
+          "contains": "gluten",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "1 sheet",
+          "prepNote": "some wafer paper is made from potato starch"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "for the tin",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "icing sugar (powdered sugar)",
+          "contains": "none",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "for dusting"
+        }
+      ],
+      "instructions": [
+        "Toast the almonds at 350 °F (180 °C) for 10 to 12 minutes until fragrant, then let them cool a little.",
+        "In a large bowl mix the flour, candied peel, spices and almonds until everything is coated.",
+        "In a small pan over low heat, dissolve the icing sugar in the water, add the honey and stir until smooth and just bubbling at the edges.",
+        "Pour the hot syrup over the dry mix and stir quickly and thoroughly. It will be stiff.",
+        "Butter a 20 to 22 cm springform tin, line the base with the wafer and press the mixture in with the back of a wet spoon, 2 to 4 cm deep. Dust with icing sugar.",
+        "Bake at 350 °F (180 °C) for 15 to 30 minutes, until set at the edges; it firms as it cools.",
+        "Release from the tin while still warm, so the caramel does not stick, then cool completely and dust again with icing sugar. Cut in thin slices."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin E",
+          "note": "From the almonds."
+        },
+        {
+          "nutrient": "Magnesium",
+          "note": "From the almonds."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From the almonds."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Recipes from Italy, Panforte",
+          "url": "https://www.recipesfromitaly.com/panforte-recipe/"
+        },
+        {
+          "source": "Misya, Panforte",
+          "url": "https://www.misya.info/ricetta/panforte.htm"
+        }
+      ],
+      "curationNote": "Recipes from Italy (150 g flour, 300 g almonds with skin, 125 g each candied citron and orange, cinnamon, nutmeg, cloves, syrup of 150 g icing sugar, 150 g honey, 50 g water, wafer, 20 cm tin, 180 °C 15 to 20 minutes) followed; Misya (350 g almonds, 300 g candied fruit, 150 g each flour, honey and icing sugar, 10 g spices including coriander, 22 cm tin, 180 °C 25 to 30 minutes) adds coriander. The baking range covers both."
+    },
+    {
+      "builderType": "dessert",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_it_amaretti",
+          "servings": 15,
+          "note": "about 200 g of crisp amaretti, crushed"
+        }
+      ],
+      "id": "curated_it_bonet",
+      "name": "Bonet",
+      "dishGroup": "Desserts",
+      "region": "Piedmont",
+      "servings": 6,
+      "flavorProfile": "A Piedmontese baked custard of eggs, milk, cocoa and crushed amaretti, set in a caramel-lined mould and turned out glossy, bittersweet and almondy.",
+      "healthBenefit": "Eggs and milk bring protein, calcium and vitamin B12, and cocoa brings some iron and magnesium; with caramel and amaretti it is a sweet pudding.",
+      "ingredients": [
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg Yolk (Raw)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "for the custard",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Brewing",
+          "baseName": "Pure Cocoa / Cacao Powder (Unsweetened)",
+          "quantity": 35,
+          "unit": "g",
+          "cutPrep": "sifted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.125,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Rum 37.5/40 % vol",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": "or amaretto",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "for the caramel",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 50,
+          "unit": "ml",
+          "cutPrep": "for the caramel",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "For the caramel, stir the 150 g of sugar with the water in a small pan, then boil without stirring for a few minutes until amber. Pour it into a loaf mould about 25 by 11 cm and tilt to coat the base.",
+        "Mix the eggs, yolk and sugar well without whisking in air. Stir in the cocoa, salt, crushed amaretti and rum, then pour in the milk slowly, stirring.",
+        "Pour the mixture over the caramel and set the mould in a deep tray. Pour very hot water into the tray to halfway up the mould.",
+        "Bake at 300 to 320 °F (150 to 160 °C) for 45 to 60 minutes, until a toothpick comes out dry from the center.",
+        "Cool in the mould, then chill at least 1 hour, better 4.",
+        "Loosen the edges, warm the base of the mould briefly to free the caramel and turn out onto a plate. Decorate with whole amaretti."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs and milk."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Recipes from Italy, Bonet",
+          "url": "https://www.recipesfromitaly.com/bonet-recipe/"
+        },
+        {
+          "source": "Misya, Bonet",
+          "url": "https://www.misya.info/ricetta/bonet.htm"
+        }
+      ],
+      "curationNote": "Recipes from Italy (200 g crisp amaretti, 35 g cocoa, 4 eggs and 1 yolk, 500 ml milk, 150 g sugar, rum or amaretto, caramel of 150 g sugar and 50 ml water, bain-marie at 160 °C about 60 minutes, loaf mould) followed; Misya (2 eggs, 100 g sugar, 25 g cocoa, 50 g amaretti, 250 ml milk, rum, 8 small moulds at 150 °C 30 minutes, 4 hours chilling) compared. The amaretti point at the Amaretti recipe in this collection."
+    },
+    {
+      "builderType": "dessert",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "overallTier": "strong",
+      "components": [],
+      "id": "curated_it_sfogliatelle",
+      "name": "Sfogliatelle",
+      "dishGroup": "Desserts",
+      "region": "Campania (Naples)",
+      "servings": 12,
+      "flavorProfile": "Shell-shaped Neapolitan pastries of many paper-thin, lard-brushed layers baked shatteringly crisp around a warm filling of semolina, ricotta, candied peel and cinnamon.",
+      "healthBenefit": "Ricotta and milk bring protein and calcium; made with lard and sugar, these are a rich pastry for an occasional breakfast or treat.",
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 200,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "softened, plus a little more for brushing",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 250,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Grain",
+          "baseName": "Durum wheat semolina",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lemon",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "peel only",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Ricotta",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "drained and sieved",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg Yolk (Raw)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "candied citron and orange peel",
+          "contains": "none",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "finely diced",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "orange blossom water",
+          "contains": "none",
+          "quantity": 5,
+          "unit": "ml",
+          "cutPrep": "1 teaspoon",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "icing sugar (powdered sugar)",
+          "contains": "none",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "for dusting"
+        }
+      ],
+      "instructions": [
+        "Knead the flour, water and salt into a smooth, firm dough, cover and rest 30 minutes.",
+        "Roll it through a pasta machine, a strip at a time, into a long very thin sheet. Spread it with softened lard and roll it up tightly into a cylinder about 5 cm across, stretching each turn slightly. Coat the outside with lard, wrap and chill at least 30 minutes, ideally overnight.",
+        "For the filling, bring the milk to the boil with the lemon peel, remove the peel and whisk in the semolina. Cook 5 minutes, stirring, until thick, then cool.",
+        "Beat the ricotta with the sugar, yolk, cinnamon and orange blossom water, then stir in the cold semolina and the candied peel.",
+        "Cut the cylinder into slices about 1.5 to 2 cm thick. Working from the center out with greased fingers, press each slice into a cone so the layers fan out, fill it with a spoonful of filling and press the edge closed.",
+        "Bake at 400 °F (200 °C), fan, for 20 to 25 minutes until deep golden and crisp.",
+        "Cool slightly and dust with icing sugar. They are best warm, the day they are baked."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the ricotta and milk."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the ricotta, milk and yolk."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "From the lard."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Dissapore, Sfogliatelle ricce",
+          "url": "https://www.dissapore.com/ricette/sfogliatelle-ricce/"
+        },
+        {
+          "source": "Misya, Sfogliatelle",
+          "url": "https://www.misya.info/ricetta/sfogliatelle.htm"
+        }
+      ],
+      "curationNote": "Dissapore (300 g flour, 200 ml water, 5 g salt, 150 g lard, rolled thin and wound into a cylinder; filling 250 ml milk with lemon, 100 g semolina, 300 g ricotta, 80 g sugar, cinnamon, 50 g candied peel; 2 cm slices shaped into cones, 200 °C fan 25 minutes) followed for the riccia. Misya makes the frolla kind of sfogliatella, which has a different pastry; only its filling (adds a yolk, orange blossom water and vanilla) was compared and its yolk and orange blossom kept. The overnight chill added from usual practice as it makes the slices easier to shape."
     }
   ]
 }
