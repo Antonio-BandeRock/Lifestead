@@ -201,11 +201,9 @@
     "AIP"
   ],
   "curated_dessert_baked_cinnamon_apples": [
-    "Vegan",
+    "Vegetarian",
     "Plant-Based/Flexitarian",
-    "Gluten-Free",
-    "Dairy-Free",
-    "Paleo"
+    "Gluten-Free"
   ],
   "curated_dessert_mixed_berry_chia_pudding": [
     "Vegan",
@@ -555,6 +553,7 @@
   "curated_handheld_hummus_roasted_vegetable_wrap": [
     "Vegan",
     "Plant-Based/Flexitarian",
+    "Mediterranean",
     "Dairy-Free",
     "High-Protein"
   ],
@@ -570,14 +569,1219 @@
   "curated_handheld_turkey_avocado_wrap": [
     "Omnivore",
     "Plant-Based/Flexitarian",
+    "Mediterranean",
     "Dairy-Free",
     "High-Protein"
   ],
   "curated_handheld_turkey_hummus_collard_wrap": [
     "Omnivore",
     "Plant-Based/Flexitarian",
+    "Mediterranean",
     "Gluten-Free",
     "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_agua_de_horchata": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_mx_agua_de_jamaica": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_agua_de_sandia": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_agua_de_tamarindo": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_alegrias": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_arrachera": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_arroz_con_leche": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_mx_atole_de_masa": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_atolillo": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_mx_bacalao_a_la_vizcaina": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_barbacoa": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_base_adobo": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_mx_base_arroz_blanco": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_base_arroz_rojo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_base_arroz_verde": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_base_bolillo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_base_cajeta": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_mx_base_caldo_de_pollo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_base_cebolla_encurtida": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_mx_base_chiles_en_escabeche": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_base_chiltomate": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_mx_base_chorizo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_base_corn_tortillas": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_base_crema": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_mx_base_flour_tortillas": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_base_frijoles_de_la_olla": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_base_frijoles_refritos": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_base_guacamole": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_mx_base_jarabe_de_tamarindo": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_base_manteca": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_base_masa_para_tamales": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_base_mole_amarillo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_base_mole_coloradito": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_base_mole_negro": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_base_mole_poblano": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_base_mole_verde": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_base_nixtamal_masa": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_base_pico_de_gallo": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_mx_base_piloncillo_syrup": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_mx_base_pipian_verde": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_base_pollo_deshebrado": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_base_queso_fresco": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_base_recado_rojo": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_mx_base_salsa_entomatada": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_base_salsa_guajillo": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_mx_base_salsa_macha": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_mx_base_salsa_ranchera": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_mx_base_salsa_roja": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_mx_base_salsa_taquera": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_mx_base_salsa_verde": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_mx_base_salsa_verde_cruda": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_mx_base_telera": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_base_tortitas_de_camaron": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_base_tostada_shells": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_base_totopos": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_batido_de_platano": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_mx_birria": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_borrachitos": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_buche": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_bunuelos": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_cabeza": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_cachete": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_cafe_de_olla": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_mx_calabacitas_con_queso": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_mx_caldo_de_pollo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_caldo_de_res": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_camote_de_puebla": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_camotes_enmielados": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_mx_capirotada": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_carne_al_pastor": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_carne_asada": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_carnitas": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_cecina": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_champurrado": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_mx_chapulines": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_charales_en_salsa": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_chicharron": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_chilaquiles_rojos": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_chile_relleno": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_chilorio": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_chilorio_con_huevo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_chocolate_caliente": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_mx_chongos_zamoranos": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_churros": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_cocadas": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_mx_cochinita_pibil": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_corundas": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_costilla_asada": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_cueritos": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_discada": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_elote": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_enchiladas_rojas": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_enfrijoladas": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_enmoladas": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_entomatadas": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_escamoles": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_esquites": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_flan_napolitano": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_flautas": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_gelatina_de_mosaico": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_mx_glorias": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_mx_gorditas_de_chicharron": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_huevos_a_la_mexicana": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_huevos_motulenos": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_huevos_rancheros": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_huitlacoche_guisado": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_jericalla": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_labio": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_lengua": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_licuado_de_mamey": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_mx_longaniza_con_papas": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_machaca": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_machaca_con_huevo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_machitos": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_mazapan": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_menudo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_mixiote": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_mole_amarillo_con_pollo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_mole_coloradito_con_pollo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_mole_negro_con_pollo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_mole_verde_con_cerdo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_molletes": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_molotes": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_nopales_a_la_mexicana": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_mx_obleas_con_cajeta": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_mx_ojo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_palanqueta": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_mx_pambazo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_papadzules": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_pescado_a_la_veracruzana": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_pipian_verde_con_pollo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_pollo_asado": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_pollo_en_mole_poblano": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_ponche_navideno": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_mx_pozol": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_pozole_blanco": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_pozole_rojo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_pozole_verde": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_quesadilla_flor_de_calabaza": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_mx_rajas_con_crema": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_mx_raspados": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_romeritos": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_salsa_de_jumiles": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_sesos": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_sincronizada": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_sopa_de_lima": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_sopes": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_suadero": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_al_pastor": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_de_arrachera": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_de_asada": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_de_barbacoa": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_de_birria": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_de_cabeza": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_de_camaron": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_de_carnitas": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_de_chicharron": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_de_cochinita": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_de_lengua": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_de_pescado": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_de_pollo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_de_sesos": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_de_suadero": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_de_tripa": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_dorados": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tacos_gobernador": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_tamales_de_elote": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_mx_tamales_dulces": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tamales_oaxaquenos": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tamales_rojos_de_cerdo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tasajo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_mx_tejate": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_tejuino": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_mx_tepache": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_mx_tlacoyos": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tlayuda": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_torta_ahogada": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_torta_cubana": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_torta_de_jamon": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_mx_tostadas_de_tinga": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_mx_tripas": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_mx_uchepos": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
     "High-Protein"
   ],
   "curated_salad_beef_carrot_fennel_salad": [
@@ -797,6 +2001,23 @@
     "Paleo",
     "AIP"
   ],
+  "curated_sauce_chicken_stock": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_sauce_classic_hummus": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
   "curated_sauce_coconut_ginger": [
     "Vegan",
     "Plant-Based/Flexitarian",
@@ -941,6 +2162,15 @@
     "Mediterranean",
     "Gluten-Free",
     "High-Protein"
+  ],
+  "curated_sauce_vegetable_stock": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
   ],
   "curated_sauce_yogurt_ranch": [
     "Vegetarian",
@@ -2482,12 +3712,14 @@
   "curated_soup_green_lentil_vegetable_stew": [
     "Vegan",
     "Plant-Based/Flexitarian",
+    "Mediterranean",
     "Gluten-Free",
     "Dairy-Free"
   ],
   "curated_soup_lentil_kale_soup": [
     "Vegan",
     "Plant-Based/Flexitarian",
+    "Mediterranean",
     "Gluten-Free",
     "Dairy-Free"
   ],
@@ -2512,12 +3744,14 @@
   "curated_soup_red_lentil": [
     "Vegan",
     "Plant-Based/Flexitarian",
+    "Mediterranean",
     "Gluten-Free",
     "Dairy-Free"
   ],
   "curated_soup_salmon_fennel_leek_soup": [
     "Omnivore",
     "Plant-Based/Flexitarian",
+    "Mediterranean",
     "Gluten-Free",
     "Dairy-Free",
     "Paleo",
@@ -2535,6 +3769,7 @@
   "curated_soup_turkey_black_bean_chili": [
     "Omnivore",
     "Plant-Based/Flexitarian",
+    "Mediterranean",
     "Gluten-Free",
     "Dairy-Free",
     "High-Protein"
@@ -2542,6 +3777,7 @@
   "curated_soup_turkey_white_bean_soup": [
     "Omnivore",
     "Plant-Based/Flexitarian",
+    "Mediterranean",
     "Gluten-Free",
     "Dairy-Free",
     "High-Protein"
@@ -2824,6 +4060,7 @@
   "curated_vegan_handheld_chickpea_avocado_wrap": [
     "Vegan",
     "Plant-Based/Flexitarian",
+    "Mediterranean",
     "Dairy-Free",
     "High-Protein"
   ],
@@ -2849,6 +4086,7 @@
   "curated_vegan_handheld_tempeh_hummus_collard_wrap": [
     "Vegan",
     "Plant-Based/Flexitarian",
+    "Mediterranean",
     "Gluten-Free",
     "Dairy-Free",
     "High-Protein"
@@ -3549,6 +4787,7 @@
   "curated_vegan_soup_lentil_black_bean_chili": [
     "Vegan",
     "Plant-Based/Flexitarian",
+    "Mediterranean",
     "Gluten-Free",
     "Dairy-Free",
     "High-Protein"
@@ -3556,6 +4795,7 @@
   "curated_vegan_soup_mushroom_white_bean_soup": [
     "Vegan",
     "Plant-Based/Flexitarian",
+    "Mediterranean",
     "Gluten-Free",
     "Dairy-Free",
     "High-Protein"
@@ -3586,6 +4826,7 @@
   "curated_vegan_soup_white_bean_vegetable_soup": [
     "Vegan",
     "Plant-Based/Flexitarian",
+    "Mediterranean",
     "Gluten-Free",
     "Dairy-Free",
     "High-Protein"

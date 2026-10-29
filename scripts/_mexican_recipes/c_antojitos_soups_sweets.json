@@ -869,7 +869,7 @@
         },
         {
           "recipeId": "curated_mx_base_crema",
-          "servings": 2,
+          "servings": 4,
           "note": "about 120 ml"
         },
         {
@@ -1225,7 +1225,7 @@
         },
         {
           "recipeId": "curated_mx_base_crema",
-          "servings": 2,
+          "servings": 4,
           "note": "about 120 ml"
         },
         {
@@ -1378,7 +1378,7 @@
         },
         {
           "recipeId": "curated_mx_base_crema",
-          "servings": 3,
+          "servings": 6,
           "note": "about 180 ml"
         }
       ],
@@ -2352,8 +2352,8 @@
       "components": [
         {
           "recipeId": "curated_mx_base_crema",
-          "servings": 4,
-          "note": "about 250 ml crema"
+          "servings": 8,
+          "note": "about 240 ml crema"
         },
         {
           "recipeId": "curated_mx_base_corn_tortillas",
@@ -2776,7 +2776,7 @@
         {
           "recipeId": "curated_mx_base_piloncillo_syrup",
           "servings": 6,
-          "note": "about 225 g piloncillo dissolved in 480 ml water, with the cinnamon stick"
+          "note": "about 225 g piloncillo, with the cinnamon stick"
         }
       ],
       "ingredients": [
@@ -2990,6 +2990,11 @@
           "recipeId": "curated_mx_base_chiltomate",
           "servings": 4,
           "note": "about 1 cup chiltomate with habanero"
+        },
+        {
+          "recipeId": "curated_mx_base_queso_fresco",
+          "servings": 1.67,
+          "note": "about 50 g, crumbled"
         }
       ],
       "ingredients": [
@@ -3027,14 +3032,6 @@
           "unit": "g",
           "cutPrep": "shelled",
           "cookingMethod": "Boiled",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "queso fresco",
-          "quantity": 50,
-          "unit": "g",
-          "cutPrep": "crumbled",
           "prepNote": null
         },
         {
@@ -6075,6 +6072,2220 @@
         }
       ],
       "curationNote": "Amigos de MAP (16 cups): 1 kg nixtamalized corn and 200 g toasted, peeled cacao ground together and thinned with 4 L boiled water. Cocina Vital (4): 250 g masa, 80 g cacao, 1 L water, 80 g piloncillo, half a teaspoon of cinnamon, salt. Infobae, quoting Tabasco agriculture officials: pozol agrio ferments 4 to 5 days, sometimes two weeks. Cacao beans are listed as cocoa mass, the database entry nearest to ground whole beans. Tier is weak because the health effects of the ferment rest on microbiology studies, not trials."
+    },
+    {
+      "id": "curated_mx_tejate",
+      "name": "Tejate",
+      "builderType": "beverage",
+      "dishGroup": "Drinks",
+      "region": "Valles Centrales, Oaxaca",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "glass",
+      "flavorProfile": "A cold, foamy Zapotec drink of corn and cacao with toasted mamey seed and rosita de cacao flowers, beaten by hand in iced sweet water until a thick, pale foam floats on top; nutty, bitter and lightly sweet.",
+      "healthBenefit": "Corn cooked with ash gives calcium and niacin, cacao magnesium and polyphenols, and the toasted mamey seed healthy fats. It is sweetened, so the sugar is the part to watch.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Grain",
+          "baseName": "Maize",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "dried white corn kernels",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "wood ash (ceniza), sifted",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "for cooking the corn",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 3000,
+          "unit": "ml",
+          "cutPrep": "for cooking the corn",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Cocoa mass",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "cacao beans, toasted and peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "mamey seed kernels (pixtle)",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "toasted",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "rosita de cacao flowers (Quararibea funebris)",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "toasted",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2000,
+          "unit": "ml",
+          "cutPrep": "iced, for beating",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": "as ice",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Cook the corn in the water with the ash at a simmer for 45 minutes to 1 hour, until the skins slip. Leave it to stand overnight, then rub and rinse it under running water until it is completely white.",
+        "Grind the corn to a fine masa (a molino or metate gives the best texture).",
+        "Toast the cacao beans, the mamey seed kernels and the rosita de cacao flowers on a dry comal over medium-low heat for 5 to 10 minutes, turning them so nothing burns. Peel the cacao.",
+        "Grind the toasted cacao, pixtle and flowers together into a fine paste and knead it into the corn masa.",
+        "Dissolve the sugar in the iced water in a large bowl or apaxtle. Add the masa a little at a time and beat it with your hand and arm, lifting and dropping it, until a thick foam rises to the top, 10 to 15 minutes.",
+        "Serve very cold with ice, ladling foam into every jícara."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the corn cooked with ash."
+        },
+        {
+          "nutrient": "Magnesium",
+          "note": "From the cacao."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Grupo Animal, Receta del refrescante tejate oaxaqueño",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/receta-refrescante-tejate-oaxaqueno"
+        },
+        {
+          "source": "Cookpad México, Tejate",
+          "url": "https://cookpad.com/mx/recetas/1005818"
+        },
+        {
+          "source": "Grupo Animal, El tejate, Lucila y la ceniza",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/el-tejate-lucila-y-la-ceniza"
+        }
+      ],
+      "curationNote": "Grupo Animal and Cookpad give the same home amounts: half a kilo of corn, 50 g each of cacao, mamey seed and cacao flower, sugar, ice and water, the toasted parts ground and beaten by hand into iced sweet water. Grupo Animal (María del Carmen Castillo, San Bartolomé Quialana) describes the corn cooked in water with ash. Ash, pixtle and rosita de cacao are not in the database; the cacao beans are listed as cocoa mass."
+    },
+    {
+      "id": "curated_mx_tejuino",
+      "name": "Tejuino",
+      "builderType": "fermentation",
+      "dishGroup": "Drinks",
+      "region": "Jalisco, Nayarit and Colima",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "glass",
+      "flavorProfile": "A cold, thick, lightly sour corn drink fermented with piloncillo, served over ice with lime, salt and chile piquín, often with a scoop of lime nieve.",
+      "healthBenefit": "Nixtamalized masa gives calcium and niacin. As a short lactic and yeast ferment it carries live microbes when unrefrigerated, though benefits in people are not established; the piloncillo makes it sweet.",
+      "overallTier": "weak",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_nixtamal_masa",
+          "servings": 10,
+          "note": "about 1 kg masa"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 4000,
+          "unit": "ml",
+          "cutPrep": "3 litres boiling, 1 litre cold",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
+          "quantity": 800,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "juiced, plus wedges for serving",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "chile piquín, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "prepNote": "for serving"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1500,
+          "unit": "ml",
+          "cutPrep": "as crushed ice, for serving",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring 3 litres of the water to a boil. Dissolve the piloncillo in the litre of cold water. Blend or work the masa with a cup of cold water until there are no lumps.",
+        "Pour the masa into the boiling water, stirring all the time so it does not lump, then add the dissolved piloncillo.",
+        "Lower the heat and cook, stirring often, for 30 to 45 minutes, until it is as thick as an atole.",
+        "Take it off the heat and let it cool completely. Strain it into a glass jar or clay pot, cover with a cloth and leave it at room temperature for 2 to 3 days, stirring once every 24 hours, until it tastes pleasantly sour.",
+        "Refrigerate it to slow the ferment. Serve very cold over crushed ice with lime juice, a pinch of salt and chile piquín."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the nixtamalized masa."
+        },
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the corn and piloncillo."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Uno TV, Qué es el tejuino: origen, historia y beneficios",
+          "url": "https://www.unotv.com/estilo-de-vida/gastronomia/que-es-el-tejuino-origen-historia-y-beneficios/"
+        },
+        {
+          "source": "Azteca Jalisco, Tejuinos de Jalisco: datos curiosos",
+          "url": "https://www.aztecajalisco.com/tendenciayviral/tejuinos-jalisco-datos-curiosos-que-no-conocias"
+        },
+        {
+          "source": "Grupo Animal, Tejuino, la bebida prehispánica de Jalisco",
+          "url": "https://grupoanimal.mx/gastronomia/tips/tejuino-bebida-maiz-jalisco"
+        }
+      ],
+      "curationNote": "Uno TV: 1 kg nixtamalized masa, 1 kg piloncillo, 3 L water, 2 limes, salt and ice, fermented 2 to 3 days with a stir every 24 hours. Azteca Jalisco: the same masa and piloncillo with 4 L water, cooked 30 to 45 minutes to an atole, cooled, strained and fermented 2 to 3 days, finished with lime, salt and chile piquín. Grupo Animal describes the older way with sprouted corn ground on the metate. Piloncillo reduced a little from the sources, which can be raised to taste. Tier is weak because the health effects of the ferment have not been tested in people."
+    },
+    {
+      "id": "curated_mx_tepache",
+      "name": "Tepache de Piña",
+      "builderType": "fermentation",
+      "dishGroup": "Drinks",
+      "region": "Throughout Mexico, especially Jalisco and central Mexico",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "glass",
+      "flavorProfile": "A lightly fizzy, sweet and sour pineapple drink fermented from the peel and core with piloncillo and canela, with a gentle clove warmth.",
+      "healthBenefit": "It is made from pineapple peel and core that would otherwise be thrown out. A short wild ferment carries live yeasts and lactic bacteria while unrefrigerated, though benefits in people are not established, and it is sweet.",
+      "overallTier": "weak",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fruit",
+          "baseName": "Pineapple",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "peel and core of 1 large very ripe pineapple, well washed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "finely chopped or grated",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2000,
+          "unit": "ml",
+          "cutPrep": "filtered or boiled and cooled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "1 Mexican canela stick",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cloves, dried, ground",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "whole cloves, optional",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "whole allspice berries, optional",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": "as ice, for serving",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat 500 ml of the water with the piloncillo over medium-low heat, stirring, until it dissolves, 5 to 8 minutes. Let it cool completely.",
+        "Put the pineapple peel and core, the canela, cloves and allspice in a 3 litre glass jar or clay pot. Pour in the cooled syrup and enough of the remaining water to cover the fruit.",
+        "Cover with cheesecloth held by a band and leave it at room temperature, out of the sun, for 2 to 4 days in warm weather (24 to 29 °C, 75 to 84 °F) or 5 to 7 days in cooler weather. Taste it from the second day; it is ready when it is frothy and pleasantly sour. Skim any white foam from the top.",
+        "Strain into clean bottles and refrigerate, which slows the ferment before it turns to vinegar. Serve cold over ice within about a week."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the piloncillo and pineapple."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Refrescante tepache de piña casero",
+          "url": "https://www.excelsior.com.mx/mujeres/refrescante-tepache-pina-casero-para-acompanar-comidas-mexicanas"
+        },
+        {
+          "source": "Uno TV, Cómo hacer tepache casero",
+          "url": "https://www.unotv.com/estilo-de-vida/gastronomia/como-hacer-tepache-casero-la-bebida-fermentada-mas-refrescante-de-mexico/"
+        }
+      ],
+      "curationNote": "Excélsior: 1 ripe pineapple (peel and core), 2 L water, 150 to 200 g piloncillo, a canela stick and optional cloves, fermented under cheesecloth 2 to 4 days. Uno TV (6 cups): an 8 oz cone of piloncillo, 6 cups filtered water, 1 large very ripe pineapple, optional canela, cloves, allspice and ginger, 2 to 3 days at 24 to 29 °C or 5 to 7 days in cooler weather. The pineapple weight is the peel and core only. Tier is weak because the health effects of the ferment have not been tested in people."
+    },
+    {
+      "id": "curated_mx_base_jarabe_de_tamarindo",
+      "name": "Jarabe de Tamarindo para Raspados",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Beans, Rice & Pantry",
+      "region": "Throughout Mexico",
+      "servings": 24,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "A thick, sweet and sour brown syrup of tamarind pulp cooked into a sugar syrup, for pouring over shaved ice.",
+      "healthBenefit": "Tamarind brings a little potassium, magnesium and polyphenols, but this is a sugar syrup, used by the spoonful.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": "for the base syrup",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Tamarind",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "about 2 cups pods, peeled and rinsed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 720,
+          "unit": "ml",
+          "cutPrep": "for the tamarind",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Make the base syrup: put the sugar and 240 ml of water in a pot over medium heat for about 15 minutes, until it forms a thick syrup.",
+        "Put the peeled tamarind in another pot with 720 ml of water and cook over medium heat for 30 to 40 minutes, until it boils and the pulp softens away from the seeds.",
+        "Add the base syrup to the tamarind and boil gently for another 30 minutes, stirring, until thick.",
+        "Strain through a sieve, pressing the pulp through and leaving the seeds and fibres behind. Let it cool completely before pouring it on ice, since warm syrup melts the ice too fast. Keep it in the refrigerator for up to 2 weeks."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Potassium",
+          "note": "From the tamarind."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Uno TV, Cómo hacer raspados caseros con frutas naturales",
+          "url": "https://www.unotv.com/estilo-de-vida/gastronomia/como-hacer-raspados-caseros-con-frutas-naturales/"
+        },
+        {
+          "source": "El Imparcial, Descubre el origen de los raspados en México",
+          "url": "https://www.elimparcial.com/estilos/2024/05/19/descubre-el-origen-de-los-raspados-en-mexico/"
+        }
+      ],
+      "curationNote": "Uno TV: a base syrup of 1 cup sugar and 1 cup water cooked 15 minutes, then 2 cups peeled tamarind with 3 cups water cooked 40 minutes, the base syrup added and boiled half an hour more, strained and cooled. El Imparcial: raspado syrups are homemade from fruit and sugar cooked slowly until thick, with tamarind among the classic flavours. Sugar here is the 1 cup of the base syrup. Makes about 3 cups."
+    },
+    {
+      "id": "curated_mx_raspados",
+      "name": "Raspado de Tamarindo",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Breads",
+      "region": "Throughout Mexico",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Snow-fine shaved ice soaked with dark, sweet and sour tamarind syrup, eaten with a spoon and a straw as it melts; some add lime and chile piquín.",
+      "healthBenefit": "Mostly ice and sugar syrup, with a little potassium from the tamarind; a summer treat.",
+      "overallTier": "weak",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_jarabe_de_tamarindo",
+          "servings": 8,
+          "note": "about 1 cup of syrup"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": "as a block of ice, finely shaved",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "cut in wedges, optional",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "chile piquín, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "prepNote": "optional"
+        }
+      ],
+      "instructions": [
+        "Chill the syrup well, at least 1 hour or overnight.",
+        "Shave the ice very fine with a hand ice shaver or a scraper over a block, or pulse ice cubes in a strong blender, and pack it into cups.",
+        "Pour about 4 tablespoons of syrup over each cup so it soaks down through the ice. Add a squeeze of lime and a pinch of chile piquín if wanted, and eat at once with a spoon and a straw."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Potassium",
+          "note": "A little, from the tamarind syrup."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Uno TV, Cómo hacer raspados caseros con frutas naturales",
+          "url": "https://www.unotv.com/estilo-de-vida/gastronomia/como-hacer-raspados-caseros-con-frutas-naturales/"
+        },
+        {
+          "source": "El Imparcial, Descubre el origen de los raspados en México",
+          "url": "https://www.elimparcial.com/estilos/2024/05/19/descubre-el-origen-de-los-raspados-en-mexico/"
+        }
+      ],
+      "curationNote": "Uno TV: ice shaved for each cup and the chosen syrup poured over it, with tamarind, lime, strawberry, grosella and guava among the flavours. El Imparcial: a large block of ice scraped fine and soaked with fruit syrup. Written with tamarind as one classic flavour; any fruit syrup made the same way serves."
+    },
+    {
+      "id": "curated_mx_alegrias",
+      "name": "Alegrías de Amaranto",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Breads",
+      "region": "Tulyehualco, Xochimilco (Mexico City) and central Mexico",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Crisp, light bars of popped amaranth bound with a piloncillo and honey caramel, studded with toasted pecans, pumpkin seeds, peanuts and raisins.",
+      "healthBenefit": "Amaranth is a whole grain with complete protein, fibre, iron, magnesium and calcium, and the nuts and seeds add healthy fats. The caramel that binds it is sugar, so it stays a treat.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Grain",
+          "baseName": "Grains, amaranth",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "popped (amaranto inflado), about 4 cups",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "grated or chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Standard Honey (Blossom Honey)",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 70,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 0.5,
+          "unit": "each",
+          "cutPrep": "juiced, a few drops",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Pecan",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "roughly chopped",
+          "cookingMethod": "Toasted",
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Pumpkin seed",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "hulled",
+          "cookingMethod": "Toasted",
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Peanut",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": "Toasted",
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Raisins, dark, seedless",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Line a 22 cm (9 in) square mould or a tray with baking paper, leaving some hanging over the sides. Have ready a buttered or greased spatula and a second sheet of paper.",
+        "Toast the pecans, pumpkin seeds and peanuts in a dry pan over very low heat, stirring, for 4 to 6 minutes until fragrant. Set aside with the raisins.",
+        "Put the piloncillo, water and salt in a heavy pot over medium heat and stir until it dissolves. Let it bubble for 6 to 10 minutes until it thickens to a light caramel that forms a thread when dropped from a spoon (about 115 to 118 °C, 240 to 245 °F). Take it off the heat and stir in the honey and a few drops of lime.",
+        "Tip in the popped amaranth at once and stir fast so every grain is coated, then fold in the nuts, seeds and raisins.",
+        "Turn it into the mould and press it down hard with the paper and a flat object so it is compact. Leave it 20 to 30 minutes, until firm but still slightly warm, then lift it out and cut it into 12 bars. Let them cool completely and keep them in a closed tin for up to 2 weeks."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "Amaranth carries all the essential amino acids."
+        },
+        {
+          "nutrient": "Magnesium",
+          "note": "From the amaranth, pumpkin seeds and nuts."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the amaranth and pumpkin seeds."
+        }
+      ],
+      "citations": [
+        {
+          "source": "El Imparcial, Cómo hacer las alegrías de amaranto que preparaba Tita en Como Agua Para Chocolate",
+          "url": "https://www.elimparcial.com/espectaculos/2026/02/19/como-hacer-las-alegrias-de-amaranto-que-preparatita-en-la-serie-como-agua-para-chocolate/"
+        },
+        {
+          "source": "Grupo Animal, Alegrías de amaranto, el dulce de Como Agua Para Chocolate",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/receta-alegria-de-amaranto"
+        },
+        {
+          "source": "Infobae, Qué tan saludable es comer alegrías de amaranto",
+          "url": "https://www.infobae.com/mexico/2025/09/19/que-tan-saludable-es-comer-alegrias-de-amaranto/"
+        }
+      ],
+      "curationNote": "El Imparcial: 4 cups amaranth, raisins, pecans, pumpkin seeds and peanuts, 1 piloncillo, half a cup of honey and lime drops, the nuts toasted on very low heat, the syrup cooked thick, mixed and pressed into greased moulds and cut while warm. Grupo Animal describes the same caramel of piloncillo, honey and lime drops. Infobae summarises the amaranth's protein, fibre, calcium and iron. The amaranth is listed as the grain; it is bought already popped."
+    },
+    {
+      "id": "curated_mx_arroz_con_leche",
+      "name": "Arroz con Leche",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Breads",
+      "region": "Throughout Mexico",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Soft, creamy rice pudding simmered in milk with canela and lime peel, sweet and fragrant, eaten warm or cold with ground cinnamon on top.",
+      "healthBenefit": "Milk gives calcium and protein. It is sweetened white rice, so the sugar is the part to keep moderate.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Grain",
+          "baseName": "Grains, rice, white, short-grain",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "short-grain, rinsed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "1 Mexican canela stick",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "peel only, in wide strips without the white pith",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 960,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Raisins, dark, seedless",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "optional",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "for dusting",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Soak the rice in hot water for 10 minutes, then drain and rinse it.",
+        "Put the rice, the 240 ml of water and the canela stick in a heavy pot and cook over medium heat for 8 to 10 minutes, until the water is nearly absorbed.",
+        "Add the milk and lime peel, lower the heat and simmer gently, stirring often so it does not catch, for 20 to 25 minutes, until the rice is very soft.",
+        "Stir in the sugar, vanilla and raisins and cook 10 to 15 minutes more, until creamy. It thickens as it cools, so take it off while still a little loose.",
+        "Remove the canela and lime peel. Serve warm or chilled, dusted with ground cinnamon."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the milk."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Por Esto, Cómo preparar un rico arroz con leche",
+          "url": "https://www.poresto.com/turismo/gastronomia/2025/1/21/como-preparar-un-rico-arroz-con-leche-un-postre-clasico-y-reconfortante.amp.html"
+        },
+        {
+          "source": "Cookpad México, Arroz con leche",
+          "url": "https://cookpad.com/mx/recetas/125722"
+        }
+      ],
+      "curationNote": "Por Esto (4 servings): 1 cup short-grain rice, 4 cups whole milk, 1 cup water, canela, lime peel, 1 cup sugar and vanilla, the rice cooked in the water until nearly absorbed, then the milk and peel, then sugar and vanilla for 10 to 15 minutes. Cookpad México makes it with evaporated and condensed milk in place of milk and sugar, which is the other common home way. Written to Por Esto with sugar reduced a little and raisins as the usual option."
+    },
+    {
+      "id": "curated_mx_borrachitos",
+      "name": "Borrachitos de Fresa",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Breads",
+      "region": "Puebla",
+      "servings": 24,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Small soft, jelly-like rectangles of cooked cornstarch and fruit, laced with rum and rolled in sugar, from the convent sweet tradition of Puebla.",
+      "healthBenefit": "A sugar sweet with a little vitamin C from the strawberries; it contains alcohol and is not for children.",
+      "overallTier": "weak",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fruit",
+          "baseName": "Strawberry",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "hulled and blended to a purée",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 360,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Cornstarch",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Gelatine",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "unflavoured powder",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Rum 80 % vol",
+          "quantity": 45,
+          "unit": "ml",
+          "cutPrep": "or brandy or rompope",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Sprinkle the gelatine over 60 ml of the cold water and leave it 5 minutes to bloom. Dissolve the cornstarch in another 120 ml of the water until smooth.",
+        "Bring the remaining 180 ml of water and the strawberry purée to a boil in a pot, add the 100 g of sugar and stir until it dissolves.",
+        "Pour in the cornstarch mixture, stirring all the time over medium heat, for 4 to 6 minutes until it thickens and turns glossy. Stir in the bloomed gelatine until no lumps remain.",
+        "Take it off the heat, let it cool 5 minutes, then stir in the rum. Pour into a glass dish about 20 by 15 cm (8 by 6 in) dusted with cornstarch and refrigerate at least 3 hours, until set.",
+        "Turn it out, wipe off the excess starch, cut into small rectangles and roll each one in the remaining sugar. Keep them in a closed box in a cool place."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "A little, from the strawberries."
+        }
+      ],
+      "citations": [
+        {
+          "source": "adn40, ¿De qué están hechos los borrachitos, sí tienen alcohol?",
+          "url": "https://www.adn40.mx/salud/borrachitos-ingredientes-alcohol-mva-especial/"
+        },
+        {
+          "source": "Mexico News Daily, Have you tried Mexico's delicious drunken candies?",
+          "url": "https://mexiconewsdaily.com/lifestyle/food/have-you-tried-mexicos-delicious-drunken-candies/"
+        }
+      ],
+      "curationNote": "adn40, citing Larousse Cocina: cornstarch, sugar, fruit flavour such as strawberry, pineapple or lime, gelatine for the soft texture, and a little brandy, rompope, rum or tequila; water boiled with the starch, the fruit added, then the alcohol and sugar, dusted with sugar and cut in rectangles. Mexico News Daily (Gabriela Solis) gives the fruit version with 2 cups water, 50 g cornstarch, half a cup of sugar and 3 tbsp rum, set 3 hours. Written with fresh strawberry purée and plain gelatine in place of flavoured gelatine powder. Tier is weak: a sweet with alcohol."
+    },
+    {
+      "id": "curated_mx_bunuelos",
+      "name": "Buñuelos de Rodilla con Miel de Piloncillo",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Breads",
+      "region": "Central and western Mexico, for Christmas and village fairs",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Thin, wide, bubbly discs of fried dough, crisp and shattering, scented with anise and tomatillo husk water, soaked or drizzled with a piloncillo syrup cooked with guava and canela.",
+      "healthBenefit": "A fried festive sweet; the guava adds a little vitamin C. Best kept for the season.",
+      "overallTier": "weak",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_piloncillo_syrup",
+          "servings": 8,
+          "note": "about 2 cups, simmered with the guavas"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Grains, wheat flour, white, all purpose, unbleached",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 480,
+          "unit": "ml",
+          "cutPrep": "for the husk infusion",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "tomatillo husks",
+          "quantity": 8,
+          "unit": "each",
+          "cutPrep": "rinsed",
+          "prepNote": "the dried papery husks only"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, anise seed",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Deep-fried",
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Guava",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "halved, for the syrup",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Boil the water with the tomatillo husks and anise seed for 5 minutes, then turn it off and let it cool until just warm. Strain it.",
+        "In a bowl, mix the flour, sugar and salt. Add the eggs and lard and work them in with your fingers, then add the warm infusion little by little, kneading until the dough is smooth and soft and no longer sticks to your hands. Cover and rest 10 minutes.",
+        "Divide the dough into balls of about 30 g (16 balls), cover with a cloth and rest 10 minutes more.",
+        "Roll each ball out as thin as possible, then stretch it gently over your knee covered with a clean cloth, or over an upturned clay pot, until almost see-through. Lay them on a clean cloth so they dry a little while you shape the rest.",
+        "Heat the syrup with the halved guavas and simmer 5 to 10 minutes until the guavas are soft.",
+        "Heat the oil in a wide pan to 180 °C (355 °F). Fry the buñuelos one at a time, about 1 to 2 minutes a side, until golden and blistered. Drain on paper.",
+        "Serve stacked, broken into a bowl with the warm guava syrup ladled over them, or drizzled with it."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "A little, from the guava in the syrup."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Tradicionales buñuelos de rodilla y viento",
+          "url": "https://www.excelsior.com.mx/trending/tradicionales-bunuelos-de-rodilla-y-viento-los-favoritos-de-las-fiestas-decembrinas/1691111"
+        },
+        {
+          "source": "Vanguardia, Cómo hacer buñuelos navideños",
+          "url": "https://vanguardia.com.mx/vida/como-hacer-bunuelos-navidenos-receta-facil-y-tradicional-ED10465122"
+        }
+      ],
+      "curationNote": "Excélsior (Elena Gutiérrez): 500 g flour, 8 tomatillo husks and anise seed boiled in 2 cups water, 2 eggs, 200 g lard, a quarter cup sugar, balls of about 30 g rolled very thin and fried 2 minutes a side, served with a syrup of piloncillo, canela and 4 guavas. Vanguardia: the dough stretched over an upturned pot covered with a cloth, left to dry a little, fried in very hot oil, and a piloncillo syrup with canela, guava, anise and orange peel. Lard reduced a little from Excélsior. Oil is the frying amount; much less is absorbed. The tomatillo husks are not in the database."
+    },
+    {
+      "id": "curated_mx_camote_de_puebla",
+      "name": "Camotes Poblanos",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Breads",
+      "region": "Puebla",
+      "servings": 20,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Smooth, dense little rolls of sweet potato paste cooked in syrup with citrus, rolled in sugar and wrapped in paper; soft inside with a crystallised crust.",
+      "healthBenefit": "Sweet potato gives beta carotene and fibre, but this is about half sugar, so a single piece is the serving.",
+      "overallTier": "weak",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Sweet potato",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "whole, scrubbed",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 700,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "finely grated zest only",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "natural food colouring",
+          "quantity": 5,
+          "unit": "each",
+          "cutPrep": null,
+          "prepNote": "drops, optional"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Boil the sweet potatoes in their skins for 30 to 45 minutes until very soft. Peel them while warm and press through a fine sieve to get a smooth purée.",
+        "Boil the 700 g of sugar with the water over low heat, without stirring, for 10 to 15 minutes until a thick syrup that bubbles heavily (about 112 °C, 234 °F).",
+        "Add the sweet potato purée, the lime zest and the colouring if using. Cook over medium-low heat, stirring constantly with a wooden spoon, for 30 to 40 minutes, until the paste is thick enough that you see the bottom of the pot when you drag the spoon through it.",
+        "Let it cool until it can be handled. With lightly wet hands, shape it into rolls about 10 cm (4 in) long and 2 cm thick and roll each one in the remaining sugar.",
+        "Leave them on a rack for 12 to 24 hours, until dry on the outside, then wrap each one in waxed paper."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the beta carotene in the sweet potato."
+        },
+        {
+          "nutrient": "Fibre",
+          "note": "From the sweet potato."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Plano Informativo, De qué están hechos los camotes poblanos",
+          "url": "https://planoinformativo.com/1084092/de-que-estan-hechos-los-camotes-poblanosg-descubre-su-historia"
+        },
+        {
+          "source": "Uno TV, Camote de Puebla: cuál es su historia y quién lo inventó",
+          "url": "https://www.unotv.com/estados/puebla/camote-de-puebla-cual-es-su-historia-y-quien-lo-invento/"
+        }
+      ],
+      "curationNote": "Plano Informativo: 1 kg sweet potato, 1 kg sugar, 1 cup water, lime or orange essence and colouring, the sweet potatoes cooked, peeled and sieved, the sugar boiled to a thick syrup, the paste cooked stirring until thick, shaped, rolled in sugar, dried and wrapped in waxed paper. Uno TV tells the convent legend of Santa Clara where the sweet potato was cooked with sugar and lime zest. Sugar reduced from 1 kg; grated lime zest used in place of essence. Tier is weak because it is mostly sugar."
+    },
+    {
+      "id": "curated_mx_capirotada",
+      "name": "Capirotada",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Breads",
+      "region": "Throughout Mexico, for Lent",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Layers of toasted bolillo soaked in a canela piloncillo syrup with raisins, almonds and peanuts, and salty crumbled Cotija between them, soft and sticky with a sweet and salty balance.",
+      "healthBenefit": "Nuts add healthy fats and the cheese some calcium and protein, but it is bread soaked in piloncillo syrup, a once-a-year sweet.",
+      "overallTier": "weak",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_bolillo",
+          "servings": 6,
+          "note": "day-old, sliced"
+        },
+        {
+          "recipeId": "curated_mx_base_piloncillo_syrup",
+          "servings": 16,
+          "note": "about 4 cups"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fruit",
+          "baseName": "Raisins, dark, seedless",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "melted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Almonds",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Peanut",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "peeled and toasted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Queso Cotija",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "crumbled",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Cut the bolillos into thick slices the night before and leave them uncovered so they dry out, which helps them soak up the syrup.",
+        "Warm the piloncillo syrup, add the raisins, and leave it off the heat for 10 minutes so they plump.",
+        "Brush the bread slices with the melted butter and toast them in a pan or on a comal over medium heat, 1 to 2 minutes a side, just until sealed and lightly golden.",
+        "Lightly grease a clay cazuela or a heavy pot. Lay a layer of bread, ladle syrup with raisins over it so the bread is well soaked, and scatter almonds, peanuts and Cotija on top. Repeat until everything is used, ending with syrup and cheese.",
+        "Cover and cook over the lowest heat for 20 to 25 minutes, or bake covered at 180 °C (350 °F) for 30 to 45 minutes, adding a little more syrup if it looks dry. Rest 15 minutes before serving, warm or cold."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the Cotija."
+        },
+        {
+          "nutrient": "Vitamin E",
+          "note": "From the almonds."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Receta de capirotada tradicional sin horno",
+          "url": "https://www.excelsior.com.mx/recetas/receta-capirotada-tradicional-sin-horno"
+        },
+        {
+          "source": "Milenio, Capirotada: receta, ingredientes, origen y significado",
+          "url": "https://www.milenio.com/estilo/capirotada-receta-ingredientes-origen-y-significado"
+        },
+        {
+          "source": "Uno TV, Capirotada con la receta de Doña Ángela",
+          "url": "https://www.unotv.com/estilo-de-vida/capirotada-con-la-receta-de-dona-angela-una-opcion-dulce-para-la-cuaresma/"
+        }
+      ],
+      "curationNote": "Excélsior: 2 L water, 450 g piloncillo, canela and raisins for the syrup; 6 day-old bolillos, 4 tbsp butter, 150 g sliced almonds and 100 g Cotija, layered and cooked covered on the lowest heat 20 to 25 minutes. Milenio (9 servings): the same syrup, 16 fried bolillo slices, peanuts, raisins and Cotija, baked covered 1 hour at 180 °C. Uno TV (Doña Ángela) adds orange, cloves, banana, prunes and walnuts, which vary by region. The syrup is the piloncillo syrup base; bread toasted with less butter than frying uses."
+    },
+    {
+      "id": "curated_mx_chongos_zamoranos",
+      "name": "Chongos Zamoranos",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Breads",
+      "region": "Zamora, Michoacán",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Soft knots of curdled milk slowly cooked in their whey until it turns into an amber syrup with canela and piloncillo; tender, milky and very sweet.",
+      "healthBenefit": "Milk curds give protein and calcium; the syrup is sugar and piloncillo, so the portion is small.",
+      "overallTier": "weak",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 3000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "rennet (cuajo)",
+          "quantity": 3,
+          "unit": "ml",
+          "cutPrep": null,
+          "prepNote": "liquid, or about a third of a tablet"
+        },
+        {
+          "notInDatabase": true,
+          "name": "calcium chloride",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "optional, helps pasteurised milk set"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 20,
+          "unit": "ml",
+          "cutPrep": "to dissolve the rennet and calcium",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "grated",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "2 Mexican canela sticks, broken",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "If using calcium chloride, dissolve it in 10 ml of the water and stir it into the milk.",
+        "Warm the milk in a wide clay or heavy pot to 32 to 37 °C (90 to 99 °F), lukewarm to the touch. Take it off the heat, stir in the rennet dissolved in the other 10 ml of water, and leave it completely still for 30 to 45 minutes, until it sets to a firm curd.",
+        "Cut the curd in the pot into squares of about 5 to 10 cm (2 to 4 in) with a knife. Tuck the pieces of canela between them and sprinkle the sugar and piloncillo around the edges of the pot so they do not break the curd.",
+        "Set the pot over the lowest possible heat and let it barely simmer, never boil, without stirring, for 2 to 3 hours, until the whey has turned into an amber syrup and the curds have tightened into knots. Add the vanilla near the end.",
+        "Let them cool in the syrup, then store in clean glass jars in the refrigerator. Serve cold in small bowls with plenty of syrup."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the milk curds."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "López-Hernández, Gutiérrez-Rodríguez and Ramírez-Godínez, Elaboración de chongos zamoranos, Boletín Científico del ICEA, UAEH, 2023",
+          "url": "https://repository.uaeh.edu.mx/revistas/index.php/icea/article/view/10953"
+        },
+        {
+          "source": "Larousse Cocina, Chongos zamoranos",
+          "url": "https://laroussecocina.mx/palabra/chongos-zamoranos"
+        },
+        {
+          "source": "Cookpad México, Chongos zamoranos",
+          "url": "https://cookpad.com/mx/recetas/4918680"
+        }
+      ],
+      "curationNote": "UAEH practical (5 L milk): 5 ml rennet, 1 g calcium chloride, 200 g sugar, 100 g piloncillo, 2 g canela and 5 ml vanilla; the milk warmed to 32 to 37 °C, set 30 minutes, cut in squares and cooked on low heat about 3 hours until brown. Larousse Cocina: whole cow's milk is needed, the rennet used sparingly or the chongos squeak, cut and cooked on low heat in a syrup of brown sugar, water and canela. Cookpad México (3 L milk) uses half a kilo of brown sugar and a canela stick, with vinegar if there is no rennet. Sugar here sits between the two. Rennet and calcium chloride are not in the database."
+    },
+    {
+      "id": "curated_mx_churros",
+      "name": "Churros",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Breads",
+      "region": "Throughout Mexico",
+      "servings": 6,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Ridged sticks of fried choux-like dough, crisp outside and soft inside, rolled hot in cinnamon sugar; eaten with hot chocolate or cajeta.",
+      "healthBenefit": "A fried sweet. It is best kept occasional.",
+      "overallTier": "weak",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Grains, wheat flour, white, all purpose, unbleached",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Maisolje",
+          "quantity": 750,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Deep-fried",
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat the water with the butter, 12 g of sugar, salt and vanilla over medium heat until the butter melts and it just comes to a boil.",
+        "Tip in the flour all at once, lower the heat and beat hard with a wooden spoon for 2 to 3 minutes, until the dough comes away from the sides in a smooth ball.",
+        "Take it off the heat, let it cool 3 to 5 minutes, then beat in the egg until fully absorbed and the dough is smooth and glossy.",
+        "Heat the oil in a deep pot to 180 °C (355 °F). Mix the 100 g of sugar with the cinnamon on a plate.",
+        "Spoon the dough into a churrera or a piping bag with a large open star tip. Pipe 12 to 15 cm (5 to 6 in) lengths straight into the oil, cutting them with scissors, and fry 3 to 4 minutes, turning once, until deep golden.",
+        "Drain briefly on paper, roll at once in the cinnamon sugar and serve hot."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the flour and sugar."
+        }
+      ],
+      "citations": [
+        {
+          "source": "N+ Univision, Receta churros mexicanos: el secreto para que queden crujientes",
+          "url": "https://www.univision.com/radio/miami-wamr-fm/receta-churros-mexicanos-secreto-para-que-queden-crujientes"
+        },
+        {
+          "source": "Cookpad México, Churros",
+          "url": "https://cookpad.com/mx/recetas/1133726"
+        }
+      ],
+      "curationNote": "N+ Univision: equal cups of flour and water, butter, a tablespoon of sugar, salt, vanilla and one egg added off the heat, piped through a star tip into hot oil and rolled in sugar and cinnamon, with cajeta or chocolate to serve. Cookpad México: 240 g flour, 240 ml water, salt and butter, the flour added all at once and stirred until it leaves the pot. Flour here is between the two for a dough that pipes cleanly. Oil is the frying amount; much less is absorbed."
+    },
+    {
+      "id": "curated_mx_cocadas",
+      "name": "Cocadas",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Breads",
+      "region": "Coastal Mexico (Guerrero, Colima, Veracruz) and throughout the country",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Chewy coconut sweets cooked down in milk with canela and vanilla, then browned in the oven until the edges are golden and toasty.",
+      "healthBenefit": "Coconut adds fibre and the milk a little calcium; it is mostly sugar and coconut fat, so one piece is the serving.",
+      "overallTier": "weak",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "NutSeed",
+          "baseName": "Nuts, coconut meat, desiccated, unsweetened",
+          "quantity": 180,
+          "unit": "g",
+          "cutPrep": "about 2 cups",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 180,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "1 Mexican canela stick",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring the milk, 180 g of sugar and the canela stick to a boil in a medium pot over medium heat, stirring until the sugar dissolves.",
+        "Lower the heat, add the coconut and butter, and cook, stirring often with a wooden spoon, for 25 to 35 minutes, until the coconut is soft and the milk has been absorbed into a thick paste that pulls away from the pot. Stir in the vanilla and take out the canela.",
+        "Spread the paste on a tray to cool a little, then shape it into 12 small mounds or cut it into rounds with a cookie cutter and set them on a tray lined with baking paper. Sprinkle with the remaining sugar.",
+        "Bake in an oven heated to 200 °C (390 °F) for 5 to 10 minutes, until golden on top and at the edges. Cool on the tray, where they firm up."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "From the coconut."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "A little, from the milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "La Opinión, Dulce manjar, suculenta receta mexicana de cocadas en cuatro sencillos pasos",
+          "url": "https://laopinion.com/?p=2200422"
+        },
+        {
+          "source": "El Universal, Menú: Prepara cocadas con solo 3 ingredientes",
+          "url": "https://www.eluniversal.com.mx/menu/prepara-cocadas-con-solo-3-ingredientes/"
+        }
+      ],
+      "curationNote": "La Opinión: 2 cups grated coconut, 500 ml milk, 200 g sugar or piloncillo, 50 g butter, a canela stick and vanilla, cooked on low heat about 30 minutes until the milk is absorbed, cut with cookie cutters, sprinkled with sugar and baked at 200 °C for 5 to 10 minutes. El Universal quotes the Larousse definition (coconut cooked with sugar or piloncillo, varying by region) and gives a baked version of 250 g desiccated coconut, 120 g sugar and 2 eggs at 220 °C for 15 to 20 minutes. Written to La Opinión with sugar and butter reduced a little; the orange colouring it mentions is left out."
+    },
+    {
+      "id": "curated_mx_flan_napolitano",
+      "name": "Flan Napolitano",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Breads",
+      "region": "Throughout Mexico",
+      "servings": 10,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "A dense, creamy custard of condensed and evaporated milk, eggs and cream cheese, baked in a water bath under a layer of amber caramel.",
+      "healthBenefit": "Eggs and milk give protein and calcium; it is rich and very sweet, so the slice is the portion.",
+      "overallTier": "weak",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "sweetened condensed milk",
+          "quantity": 387,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "1 can"
+        },
+        {
+          "notInDatabase": true,
+          "name": "evaporated milk",
+          "quantity": 360,
+          "unit": "ml",
+          "cutPrep": null,
+          "prepNote": "1 can"
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Cream Cheese",
+          "quantity": 190,
+          "unit": "g",
+          "cutPrep": "at room temperature",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 5,
+          "unit": "each",
+          "cutPrep": "at room temperature",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the 100 g of sugar in the flan mould or a small pan over low heat and let it melt, swirling rather than stirring, until it is liquid and amber, 5 to 8 minutes. Pour it into a 22 cm (9 in) mould at once and tilt so it coats the bottom.",
+        "Blend the condensed milk, evaporated milk, cream cheese, eggs and vanilla for 3 to 4 minutes until completely smooth. Strain it through a sieve so the flan comes out without holes, and pour it over the set caramel.",
+        "Cover the mould with foil and stand it in a larger pan with hot water reaching halfway up its sides. Bake at 180 °C (350 °F) for 50 to 60 minutes, or cook covered in a pot of simmering water on the stove for 45 to 60 minutes, until a toothpick in the centre comes out clean.",
+        "Let it cool at room temperature, then refrigerate at least 4 hours. Run a knife around the edge and turn it out onto a deep plate so the caramel runs down the sides."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs and milks."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the milks and cream cheese."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Flan napolitano, la mejor receta para que este postre quede perfecto",
+          "url": "https://www.excelsior.com.mx/trending/como-hacer-flan-napolitano/1722078"
+        },
+        {
+          "source": "¡HOLA! Cocina, El flan con nombre italiano, pero típico de México",
+          "url": "https://www.hola.com/cocina/recetas/20260618907811/flan-napolitano-reposteria-mexico-receta-origen/"
+        }
+      ],
+      "curationNote": "Excélsior: 8 tbsp sugar for the caramel, 190 g cream cheese, a can each of condensed and evaporated milk, 2 tsp vanilla and 5 eggs, blended 3 to 4 minutes, covered with foil and cooked in a water bath on low heat for 45 to 60 minutes, then chilled 4 hours; it advises room-temperature ingredients and straining. ¡HOLA! Cocina explains that the napolitano form came from the twentieth-century Mexican use of condensed and evaporated milk in the Spanish flan. Condensed and evaporated milk are not in the database."
+    },
+    {
+      "id": "curated_mx_gelatina_de_mosaico",
+      "name": "Gelatina de Mosaico",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Breads",
+      "region": "Throughout Mexico",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "Cubes of bright strawberry and lime jelly set in a creamy milk gelatine, so every slice looks like stained glass; cool, soft and sweet.",
+      "healthBenefit": "A light party dessert with a little vitamin C from the fruit and calcium from the milk, sweetened with condensed milk and sugar.",
+      "overallTier": "weak",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fruit",
+          "baseName": "Strawberry",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "hulled and blended",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 780,
+          "unit": "ml",
+          "cutPrep": "divided",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 130,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Gelatine",
+          "quantity": 42,
+          "unit": "g",
+          "cutPrep": "unflavoured powder, divided",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 480,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "sweetened condensed milk",
+          "quantity": 387,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "1 can"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "For the strawberry cubes, sprinkle 14 g of gelatine over 60 ml of cold water and leave 5 minutes. Heat 240 ml of water with the blended strawberries and 60 g of sugar until it steams, take it off the heat and stir in the bloomed gelatine until dissolved. Pour into a greased dish about 20 cm (8 in) square.",
+        "For the lime cubes, bloom another 14 g of gelatine in 60 ml cold water. Heat 360 ml of water with 70 g sugar until dissolved, take it off the heat, stir in the gelatine and then the lime juice. Pour into a second greased dish. Refrigerate both for 2 to 4 hours, until firm.",
+        "Cut both jellies into cubes of about 2 cm (1 in) and scatter them in a greased ring mould.",
+        "Bloom the last 14 g of gelatine in 60 ml cold water, then melt it in a warm water bath or a few seconds in the microwave. Blend the milk, condensed milk and vanilla, then add the melted gelatine with the blender running.",
+        "Pour the milk mixture over the cubes so it fills all the gaps. Refrigerate at least 4 to 6 hours, until set firm. Dip the mould briefly in warm water and turn it out to serve."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the milk."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the strawberries and lime juice."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Grupo Animal, Cómo hacer gelatina de mosaico",
+          "url": "https://grupoanimal.mx/gastronomia/recetas/como-hacer-gelatina-de-mosaico"
+        },
+        {
+          "source": "Excélsior, Esta gelatina de mosaico será el postre que todos querrán probar",
+          "url": "https://www.excelsior.com.mx/recetas/como-hacer-gelatina-mosaico-perfecta"
+        }
+      ],
+      "curationNote": "Grupo Animal: strawberry and lime gelatine set separately, cut into cubes and arranged in a greased mould, then a packet of unflavoured gelatine melted in a water bath and blended with 2 cups of milk and a can of condensed milk and poured over. Excélsior uses four flavoured gelatines, 21 g of unflavoured gelatine, evaporated and condensed milk and cream cheese, layered and chilled about 4 hours. The flavoured packets are replaced here with fresh strawberry purée and lime juice set with plain gelatine. Condensed milk is not in the database."
+    },
+    {
+      "id": "curated_mx_glorias",
+      "name": "Glorias de Linares",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Breads",
+      "region": "Linares, Nuevo León",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Small balls of burnt-milk caramel, soft and chewy, rolled in chopped pecans and twisted in red cellophane, from the dairy country of northern Mexico.",
+      "healthBenefit": "Pecans give healthy fats and the milk some calcium; the caramel is milk cooked down with a lot of sugar, so it is a sweet.",
+      "overallTier": "weak",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 350,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Bicarbonate de soude",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.125,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Pecan",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the milk, sugar, baking soda, vanilla and salt in a heavy-bottomed pot over medium-low heat. Stir until the sugar dissolves and the milk is hot, without letting it boil.",
+        "Lower the heat and keep cooking, stirring often, for 1 to 1.5 hours, until most of the liquid has evaporated and it starts to thicken.",
+        "Turn the heat to its lowest and keep stirring for 20 to 40 minutes more, until it is a thick caramel-coloured paste that comes away cleanly from the bottom of the pot. High heat only scorches the milk, so take your time.",
+        "Take it off the heat, rest it a few minutes, and stir in about half of the pecans if you like them inside. Spread it in a dish and let it cool to room temperature, when it firms up.",
+        "Roll small portions into balls of about 25 g, roll them in the remaining chopped pecans and set each in a small paper case. For the classic look, wrap in waxed paper and then in red cellophane."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the milk."
+        },
+        {
+          "nutrient": "Healthy fats",
+          "note": "From the pecans."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior (Marisela Valencia), Tradicionales glorias de Linares, el dulce de leche más rico, hecho en casa",
+          "url": "https://www.excelsior.com.mx/recetas/tradicionales-glorias-linares-dulce-leche-mas-rico-hecho-casa"
+        },
+        {
+          "source": "Food and Pleasure, Linares, el pueblito donde la gente compra glorias y dulces de leche",
+          "url": "https://foodandpleasure.com/linares-nuevo-leon/"
+        }
+      ],
+      "curationNote": "Excélsior: 1 L pasteurised goat milk or cow milk, 350 g sugar, a quarter teaspoon of baking soda, vanilla, 150 g chopped pecans and salt, cooked on low heat stirring until a thick caramel paste, rolled in balls, coated in pecan and wrapped in waxed paper and red cellophane; it dates them to Linares in the 1930s. Food and Pleasure describes Linares as the home of glorias and of cow and goat milk sweets. Goat milk is traditional but not in the database, so cow milk is listed, as Excélsior allows."
+    },
+    {
+      "id": "curated_mx_jericalla",
+      "name": "Jericalla",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Breads",
+      "region": "Guadalajara, Jalisco",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "A firm egg and milk custard scented with canela and vanilla, baked in small dishes until the top is scorched dark brown, the mark of the Guadalajara classic.",
+      "healthBenefit": "Milk and egg yolks give protein, calcium and vitamin A; it is sweetened, so one small dish is the serving.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 720,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "1 Mexican canela stick",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "peel only, optional",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg Yolk (Raw)",
+          "quantity": 6,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Cornstarch",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring the milk to a boil with the canela stick and the lime peel, if using. Take it off the heat, stir in the vanilla and leave it to cool until warm, 15 to 20 minutes. Remove the canela and peel.",
+        "In a bowl, mix the yolks with the sugar and cornstarch without beating in much air. Pour in the warm milk little by little, stirring, then strain the mixture.",
+        "Divide it among 6 small ovenproof dishes without filling them to the top, set them in a baking dish and pour in boiling water to about 2 cm (1 in) deep.",
+        "Bake at 180 °C (350 °F) for 30 to 40 minutes, until set but still a little soft in the centre.",
+        "Move them to the top of the oven under the grill (broiler) for 3 to 6 minutes, until the tops are dark brown in patches. Serve warm or chilled."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the milk and egg yolks."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the milk."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the egg yolks."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Directo al Paladar México (Carmen Tía Alia), Jericallas, receta tradicional mexicana",
+          "url": "https://www.directoalpaladar.com/postres/jericallas-receta-tradicional-mexicana-postre-super-delicioso-2mar"
+        },
+        {
+          "source": "Uno TV, Jericaya: receta e historia del postre mexicano que surgió como un accidente",
+          "url": "https://www.unotv.com/estilo-de-vida/gastronomia/jericalla-origen-historia-y-receta/"
+        }
+      ],
+      "curationNote": "Directo al Paladar (4 servings): 480 ml milk, a canela stick, 10 ml vanilla, 4 yolks, 100 g sugar and 30 g cornstarch, the milk boiled with the canela and cooled, mixed with the yolks, strained, baked in a water bath at 180 °C about 30 minutes and browned under the grill. Uno TV: 1 L milk, 1 cup sugar, 6 yolks, vanilla and canela, and the story of the Guadalajara hospice nun whose custard browned in the oven. Written between the two, with less cornstarch so it stays closer to the yolk-only version."
+    },
+    {
+      "id": "curated_mx_mazapan",
+      "name": "Mazapán de Cacahuate",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Breads",
+      "region": "Throughout Mexico",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Crumbly, melt-in-the-mouth rounds of finely ground toasted peanuts pressed with powdered sugar; nutty, sweet and soft.",
+      "healthBenefit": "Peanuts give protein, healthy fats, magnesium and niacin; the rest is sugar, so a piece or two is the serving.",
+      "overallTier": "weak",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "NutSeed",
+          "baseName": "Peanut",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "peeled, unsalted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "blended to a fine powder (azúcar glass)",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.125,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Toast the peanuts in a dry pan over low heat for 5 to 8 minutes, stirring, until fragrant but not dark. Let them cool completely.",
+        "Grind the peanuts in a food processor or blender in small batches, stopping to scrape down the sides, until they are a fine, slightly oily powder with no pieces left.",
+        "Blend the sugar until it is a fine powder, even if it is already fine.",
+        "Knead the ground peanuts with the sugar and salt by hand, pressing hard, until the oils come out and it holds together when squeezed.",
+        "Press it firmly into a round cutter or mould about 5 cm (2 in) across, about 30 g at a time, and push out the discs. Leave them to rest 24 hours before wrapping in cellophane."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the peanuts."
+        },
+        {
+          "nutrient": "Niacin",
+          "note": "From the peanuts."
+        },
+        {
+          "nutrient": "Magnesium",
+          "note": "From the peanuts."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Uno TV, Receta de mazapán casero con solo dos ingredientes",
+          "url": "https://www.unotv.com/estilo-de-vida/gastronomia/receta-de-mazapan-casero-solo-necesitas-estos-dos-ingredientes/"
+        },
+        {
+          "source": "Cookpad México, Mazapán de cacahuate",
+          "url": "https://cookpad.com/mx/recetas/24537401"
+        }
+      ],
+      "curationNote": "Uno TV: powdered sugar and ground seeds (peanuts, almonds, walnuts or pistachios), the seeds toasted on low heat so they release their oil, ground to a powder, mixed with sugar, pressed into moulds and rested 24 hours. Cookpad México: 350 g peanuts and half a kilo of powdered sugar, the sugar blended again, kneaded hard so the peanut releases its fat, wrapped in cellophane. Sugar here is reduced from Cookpad. Powdered sugar is listed as cane sugar blended fine."
+    },
+    {
+      "id": "curated_mx_obleas_con_cajeta",
+      "name": "Obleas con Cajeta",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Breads",
+      "region": "Celaya and Guanajuato",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Two paper-thin round wafers sandwiched with goat milk cajeta, sometimes with chopped pecans, crisp at first and then chewy as the cajeta softens them.",
+      "healthBenefit": "A small sweet; the cajeta gives some calcium from the milk. One sandwich is the serving.",
+      "overallTier": "weak",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_cajeta",
+          "servings": 6,
+          "note": "about 12 tbsp, at room temperature"
+        }
+      ],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "obleas (thin wafer rounds)",
+          "quantity": 24,
+          "unit": "each",
+          "cutPrep": null,
+          "prepNote": "about 10 cm across, from a dulcería"
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Pecan",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "finely chopped, optional",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Warm the cajeta slightly in a pan of hot water, 2 to 3 minutes, so it spreads without tearing the wafers.",
+        "Spread a tablespoon of cajeta on one wafer, leaving a narrow border. Scatter on a few chopped pecans if using.",
+        "Press a second wafer on top. Eat soon, or keep them in a closed tin for a day; the wafers soften as they sit."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "A little, from the milk in the cajeta."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia, Cajeta de Celaya",
+          "url": "https://en.wikipedia.org/wiki/Cajeta_de_Celaya"
+        },
+        {
+          "source": "Chilango, Obleas, nieve y más delicias mexicanas: Festival de la Cajeta en Celaya",
+          "url": "https://www.chilango.com/viajes/en-corto/delicias-mexicanas-festival-de-la-cajeta-2024-celaya-cuando/"
+        }
+      ],
+      "curationNote": "Wikipedia (Cajeta de Celaya) notes it is common to place cajeta between obleas as a traditional Mexican candy, and that cajeta comes from Celaya, Guanajuato. Chilango, on the Celaya cajeta festival, lists obleas among the sweets sold with cajeta in the squares of Guanajuato. This is an assembly of the cajeta base with bought wafers; obleas are not in the database."
+    },
+    {
+      "id": "curated_mx_palanqueta",
+      "name": "Palanqueta de Cacahuate",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Breads",
+      "region": "Throughout Mexico",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "A crunchy brittle of toasted peanuts set in a dark caramel of sugar, piloncillo and honey, snapped into bars.",
+      "healthBenefit": "Peanuts give protein, healthy fats, magnesium and niacin, but the caramel is sugar, so a small piece is the serving.",
+      "overallTier": "weak",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "NutSeed",
+          "baseName": "Peanut",
+          "quantity": 280,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": "Toasted",
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "grated",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Standard Honey (Blossom Honey)",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "in small pieces",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Lightly butter a 23 cm (9 in) square dish or a sheet of baking paper on a tray.",
+        "Put the sugar, piloncillo, honey, salt and water in a small heavy pot and swirl to mix. Wipe down any sugar on the sides with a wet finger.",
+        "Bring it to a boil over medium-high heat and cook without stirring for 15 to 22 minutes, until it is a dark caramel (175 °C, 345 to 350 °F on a candy thermometer).",
+        "Take it off the heat, add the butter and peanuts at once and stir quickly with a wooden spoon until coated.",
+        "Scrape it into the dish and press it flat with the spoon. While still pliable, turn it out and cut into 12 bars. Cool completely and keep in a closed tin for up to a week."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the peanuts."
+        },
+        {
+          "nutrient": "Niacin",
+          "note": "From the peanuts."
+        },
+        {
+          "nutrient": "Magnesium",
+          "note": "From the peanuts."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Saveur (Genevieve Ko), Palanquetas de Cacahuates",
+          "url": "https://www.saveur.com/mexican-peanut-brittle-recipe/"
+        },
+        {
+          "source": "UTSA La Cocina Historic Mexican Cookbook Collection, Palanquetas (Hidalgo) 1971, from La Cocina de Doña Ventura",
+          "url": "https://lacocina.utsa.edu/palanquetas/"
+        },
+        {
+          "source": "Infobae, Qué tan saludable es comer palanquetas",
+          "url": "https://www.infobae.com/mexico/2025/07/25/que-tan-saludable-es-comer-palanquetas/"
+        }
+      ],
+      "curationNote": "Saveur: half a cup of sugar, 2 tbsp piloncillo, 2 tbsp honey, salt, a quarter cup of water, 2 tbsp butter and 2 cups toasted peanuts, the syrup cooked without stirring to 345 to 350 °F, pressed into a 9 in dish and cut while pliable. The 1971 Hidalgo recipe in La Cocina de Doña Ventura (UTSA collection) uses white sugar, boiling water and thick piloncillo syrup cooked to ball stage with pecan halves. Infobae notes the peanuts carry healthy fats, protein, B vitamins and magnesium while the caramel is mostly sugar."
     }
   ]
 }

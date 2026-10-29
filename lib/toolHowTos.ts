@@ -3696,6 +3696,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Open a group.', mark: 'recipes.group' },
         { say: 'Tap a recipe to read it.', mark: 'recipes.recipe' },
         { say: 'Read the recipe and any caution on it.' },
+        { say: 'Where an ingredient is a recipe made first, such as a salsa or the tortillas, tap it to open that recipe.' },
       ],
       forYou: 'Recipes are there to read, with any caution for a condition you track shown on the recipe.',
     },

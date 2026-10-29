@@ -78,6 +78,20 @@ export const SIDE_DISH_RECIPE_IDS = new Set<string>([
   // and neither is somebody's lunch on its own.
   'curated_side_lemon_garlic_chickpeas',
   'curated_side_stewed_lentils_carrot',
+
+  // 2026-10-29, the Mexican System Recipes (scripts/add_mexican_recipes.js).
+  // They sit on the Mexican band on screen rather than under Sides, but the
+  // meal plan's side pool still reads this list, so the rice, the beans and
+  // the vegetable sides served beside a main are named here.
+  'curated_mx_base_arroz_blanco',
+  'curated_mx_base_arroz_rojo',
+  'curated_mx_base_arroz_verde',
+  'curated_mx_base_frijoles_de_la_olla',
+  'curated_mx_base_frijoles_refritos',
+  'curated_mx_calabacitas_con_queso',
+  'curated_mx_camotes_enmielados',
+  'curated_mx_nopales_a_la_mexicana',
+  'curated_mx_rajas_con_crema',
 ]);
 
 // True only for a dish meant to sit beside a main. Everything else the

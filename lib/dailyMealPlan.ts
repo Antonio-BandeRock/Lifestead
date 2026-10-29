@@ -1399,7 +1399,12 @@ async function buildCandidatePools(conditionCodes: string[], dietPreferences: Re
   // so a breakfast dish has to be named out of the midday and evening
   // pools rather than filtered out by type. See BREAKFAST_DISH_RECIPE_IDS.
   const isBreakfastDish = (entry: EligibleRecipeEntry) => BREAKFAST_DISH_RECIPE_IDS.has(entry.linkedCuratedRecipeId);
-  const mainCandidates = pool.filter((entry) => !isBreakfastDish(entry));
+  // 2026-10-29: a Mexican base (a salsa, a masa, shredded chicken, chorizo)
+  // is made first and goes into a dish, so it is never served as the meal.
+  // The rice and beans among them still reach the side pool below, which
+  // reads from pool.
+  const isMadeFirstBase = (entry: EligibleRecipeEntry) => entry.recipeCard?.shelf?.startsWith('Bases:') === true;
+  const mainCandidates = pool.filter((entry) => !isBreakfastDish(entry) && !isMadeFirstBase(entry));
   const lunchMainPoolEntries = mainCandidates.filter((entry) => lunchMainTypes.has(entry.linkedBuilderType));
   const dinnerMainPoolEntries = mainCandidates.filter((entry) => dinnerMainTypes.has(entry.linkedBuilderType));
   // A side pairing has to be an actual side dish, which is a narrower

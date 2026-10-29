@@ -173,8 +173,10 @@ for (const recipe of asSides.slice().sort((a, b) => a.title.localeCompare(b.titl
 if (asMains.length + asSides.length !== sideBuilder.length) {
   fail(`the side builder split is not a partition: ${asMains.length} + ${asSides.length} against ${sideBuilder.length}`);
 }
+// The Mexican sides are named in the list for the meal plan's side pool but
+// shelved on the Mexican band, so they count as carried here.
 const missingIds = [...sideDishIds].filter(
-  (curated) => !sideBuilder.some((recipe) => recipe.curated === curated),
+  (curated) => !recipes.some((recipe) => recipe.builder === 'side' && recipe.curated === curated),
 );
 for (const curated of missingIds) fail(`SIDE_DISH_RECIPE_IDS names ${curated}, which no side-builder recipe carries`);
 console.log('');

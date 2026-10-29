@@ -1394,8 +1394,8 @@
       "components": [
         {
           "recipeId": "curated_mx_base_recado_rojo",
-          "servings": 8,
-          "note": "dissolved in the orange juice"
+          "servings": 7,
+          "note": "about 120 g, dissolved in the orange juice"
         }
       ],
       "id": "curated_mx_cochinita_pibil",
@@ -1763,7 +1763,7 @@
       "components": [
         {
           "recipeId": "curated_mx_base_chorizo",
-          "servings": 4.17,
+          "servings": 2.5,
           "note": "crumbled"
         }
       ],
@@ -3400,8 +3400,8 @@
       "components": [
         {
           "recipeId": "curated_mx_base_chiles_en_escabeche",
-          "servings": 1.33,
-          "note": "pickled jalapeños, seeded and cut in strips"
+          "servings": 1,
+          "note": "about 40 g of pickled jalapeños, seeded and cut in strips"
         }
       ],
       "id": "curated_mx_pescado_a_la_veracruzana",
@@ -4215,8 +4215,8 @@
       "components": [
         {
           "recipeId": "curated_mx_base_recado_rojo",
-          "servings": 3.33,
-          "note": "achiote paste"
+          "servings": 3,
+          "note": "about 50 g achiote paste"
         },
         {
           "recipeId": "curated_mx_base_caldo_de_pollo",
@@ -6538,6 +6538,2449 @@
         }
       ],
       "curationNote": "Rick Bayless for the quantities (1 lb shrimp, 12 tortillas, sautéed rather than roasted poblano) and the griddle method; Pati Jinich and Excélsior for the story of Los Arcos in Mazatlán and Governor Francisco Labastida Ochoa, dated to the 1980s or early 1990s. Excélsior adds celery and manchego; Pati Jinich adds chipotle. Poblano and Worcestershire are not in the database. Four plates of 3 tacos, so 12 tortillas."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tortas & Antojitos",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "torta",
+      "id": "curated_mx_torta_de_jamon",
+      "name": "Torta de Jamón",
+      "region": "Mexico City",
+      "servings": 4,
+      "flavorProfile": "A crisp-edged telera spread with beans, mayonnaise and cream, layered with ham, melting cheese, tomato, avocado and pickled jalapeños.",
+      "healthBenefit": "Beans add fiber and plant protein, avocado adds potassium and monounsaturated fat, and the tomato brings vitamin C to a sandwich that is otherwise rich.",
+      "overallTier": "weak",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_telera",
+          "servings": 4,
+          "note": "split and crisped"
+        },
+        {
+          "recipeId": "curated_mx_base_frijoles_refritos",
+          "servings": 1.32,
+          "note": "warm, blended with a little lard to spread"
+        },
+        {
+          "recipeId": "curated_mx_base_crema",
+          "servings": 2.5,
+          "note": "mixed with the mayonnaise"
+        },
+        {
+          "recipeId": "curated_mx_base_chiles_en_escabeche",
+          "servings": 1,
+          "note": "the jalapeños sliced"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Herbs",
+          "baseName": "Dressing, mayonnaise, whole egg type",
+          "quantity": 5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "jamón cocido (cooked ham)",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Queso Chihuahua",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Avocado",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, cos or romaine",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat the oven to 400°F (200°C). Split the teleras and pull out a little of the soft crumb from the tops.",
+        "Warm the refried beans with the lard until spreadable. Stir the mayonnaise and crema together.",
+        "Lay the rolls cut side up on a sheet and bake 3 to 5 minutes, until the edges are crisp. Or toast them cut side down on a comal brushed with butter.",
+        "Spread the bottoms with beans and the tops with the cream and mayonnaise. Layer ham, cheese, tomato, avocado, lettuce and jalapeños, close and press lightly. Serve at once."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the ham, cheese and beans together."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "Mostly from the beans and avocado."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the Chihuahua cheese."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Rick Bayless, Torta de jamón con todo",
+          "url": "https://rickbayless.com/recipe/torta-de-jamon-con-todo"
+        },
+        {
+          "source": "Directo al Paladar, Torta de jamón, el bocadillo famoso de México",
+          "url": "https://www.directoalpaladar.com/recetas-de-sandwiches-y-bocadillos/torta-jamon-bocadillo-famoso-facil-mexico"
+        }
+      ],
+      "curationNote": "Rick Bayless for 4 teleras, ⅔ cup beans blended with lard, mayonnaise mixed with crema, 10 to 12 oz ham, Chihuahua cheese, tomato, avocado and pickled jalapeños, crisped at 400°F; Directo al Paladar for the telera as the traditional roll, the butter-toasted bread, and avocado and jalapeños as later additions. Cooked ham is not in the database."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tortas & Antojitos",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "torta",
+      "id": "curated_mx_torta_ahogada",
+      "name": "Torta Ahogada",
+      "region": "Jalisco",
+      "servings": 4,
+      "flavorProfile": "A crusty roll stuffed with carnitas and beans, drowned in a thin spiced tomato broth and as much fiery chile de árbol sauce as each person can take.",
+      "healthBenefit": "The tomato sauce brings lycopene and vitamin C, the beans fiber, and the onion and lime topping adds freshness to a pork-rich dish best kept for now and then.",
+      "overallTier": "weak",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_bolillo",
+          "servings": 4,
+          "note": "standing in for the salty, hard-crusted birote of Guadalajara"
+        },
+        {
+          "recipeId": "curated_mx_carnitas",
+          "servings": 4,
+          "note": "chopped, warm"
+        },
+        {
+          "recipeId": "curated_mx_base_frijoles_refritos",
+          "servings": 1.32,
+          "note": "warm"
+        },
+        {
+          "recipeId": "curated_mx_base_caldo_de_pollo",
+          "servings": 3.5,
+          "note": "for the tomato sauce"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 900,
+          "unit": "g",
+          "cutPrep": "cored",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "half for the sauce, half thinly sliced for the topping",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed between the palms",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried chiles de árbol",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": "stemmed",
+          "prepNote": "toasted"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, cider",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 45,
+          "unit": "ml",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Boil the tomatoes with half the onion and 2 garlic cloves 10 to 15 minutes, until soft. Blend with the cumin and cloves and strain.",
+        "Heat the oil in a pot over medium-high heat, add the tomato purée and fry 3 to 5 minutes, then add the broth and oregano, season with salt and simmer 25 to 30 minutes. The sauce should stay thin and brothy.",
+        "For the hot sauce, toast the árbol chiles on a dry comal 20 to 30 seconds, turning, without letting them blacken. Soak in hot water 15 minutes, then blend with the remaining garlic, the vinegar, a little salt and about ½ cup (120 ml) of the soaking water until smooth.",
+        "Toss the sliced onion with the lime juice and a pinch of salt and leave 15 minutes.",
+        "Heat the oven to 350°F (175°C) and crisp the rolls 5 to 8 minutes. Split them, spread with beans and fill with carnitas.",
+        "Set each torta in a deep plate and ladle the hot tomato sauce over until it is soaked. Spoon on árbol sauce to taste, top with the onion and eat with a spoon close at hand."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the carnitas and beans."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomato sauce and lime."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From the beans."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Animal Gourmet, Receta de tortas ahogadas de Guadalajara",
+          "url": "https://grupoanimal.mx/gastronomia/receta-tortas-ahogadas-de-guadalajara"
+        },
+        {
+          "source": "Rick Bayless, Torta ahogada",
+          "url": "https://rickbayless.com/recipe/torta-ahogada"
+        }
+      ],
+      "curationNote": "Animal Gourmet for the birote salado, carnitas, beans, boiled tomato blended with cumin and clove and fried in oil with oregano, and the árbol sauce with garlic and vinegar; Rick Bayless for 4 tortas, about 1 lb carnitas, 3½ cups broth simmered 30 minutes, árbol toasted 30 seconds, beans and the lime and onion topping, and crisping the rolls at 350°F. Birote is not one of the shared bases, so the bolillo stands in. Dried árbol chiles are not in the database."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tortas & Antojitos",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "torta",
+      "id": "curated_mx_torta_cubana",
+      "name": "Torta Cubana",
+      "region": "Mexico City",
+      "servings": 4,
+      "flavorProfile": "The everything torta: breaded beef milanesa, sausage, ham, a fried egg and melted cheese stacked in a pressed telera with beans, avocado and pickled jalapeños.",
+      "healthBenefit": "A very high-protein meal with iron and B12 from the beef and egg, best shared or kept for a day with a lot of physical work.",
+      "overallTier": "weak",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_telera",
+          "servings": 4,
+          "note": "split"
+        },
+        {
+          "recipeId": "curated_mx_base_frijoles_refritos",
+          "servings": 1,
+          "note": "warm"
+        },
+        {
+          "recipeId": "curated_mx_base_chiles_en_escabeche",
+          "servings": 1,
+          "note": null
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Round (Raw)",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "cut in 4 thin steaks and pounded very thin",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 5,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "pan molido (dry bread crumbs)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "salchichas tipo Viena (Vienna sausages)",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "split lengthwise",
+          "prepNote": "browned on the plancha"
+        },
+        {
+          "notInDatabase": true,
+          "name": "jamón cocido (cooked ham)",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Queso Chihuahua",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": "Oaxaca cheese or manchego are also used"
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Avocado",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Dressing, mayonnaise, whole egg type",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Mustard, prepared, yellow",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Season the thin beef steaks with salt and pepper. Beat 1 egg in a shallow dish, dip each steak in it, then press into the bread crumbs on both sides.",
+        "Heat 3 tbsp of the oil in a skillet over medium-high heat and fry the milanesas 3 to 4 minutes a side, until golden. Drain on paper.",
+        "On the same plancha or skillet, brown the split sausages and warm the ham. Fry the remaining 4 eggs in the last of the oil.",
+        "Spread the bottoms of the teleras with beans and the tops with mayonnaise and mustard. Layer milanesa, sausage, ham, cheese, egg, tomato, onion, avocado and jalapeños.",
+        "Close the tortas and press them on the hot plancha about 2 minutes, turning once, until the bread is toasted and the cheese melts."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the beef, egg, ham, sausage and cheese."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the beef round."
+        },
+        {
+          "nutrient": "Vitamin B12",
+          "note": "From the beef and egg."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Cómo hacer torta cubana tradicional",
+          "url": "https://www.excelsior.com.mx/recetas/como-hacer-torta-cubana-tradicional-receta-iconica-torterias"
+        },
+        {
+          "source": "La Razón, Qué lleva la torta cubana y por qué se le dice así",
+          "url": "https://www.razon.com.mx/virales/que-lleva-la-torta-cubana-y-porque-se-le-dice-asi-569241/"
+        }
+      ],
+      "curationNote": "Excélsior for the teleras, beef milanesas, Vienna sausages, ham, Oaxaca or manchego, fried egg, avocado, tomato, onion, beans, mayonnaise, mustard and pickled chiles, milanesa 3 to 4 minutes a side and 2 minutes pressed on the plancha, doubled here to 4 tortas; La Razón for the name coming from Calle de Cuba in the Centro Histórico rather than the island, and for torterías that add pierna, quesillo or egg with chorizo. Cooked ham, Vienna sausages and bread crumbs are not in the database. The oil row counts what the milanesas and eggs absorb."
+    },
+    {
+      "builderType": "handheld",
+      "dishGroup": "Tortas & Antojitos",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "torta",
+      "id": "curated_mx_pambazo",
+      "name": "Pambazo",
+      "region": "Mexico City",
+      "servings": 8,
+      "flavorProfile": "Soft bread bathed in red guajillo sauce and fried in lard, filled with potato mashed into chorizo, then topped with lettuce, cream, aged cheese and green salsa.",
+      "healthBenefit": "Potato gives potassium and vitamin C, guajillo chile adds vitamin A, and the lettuce and raw salsa bring freshness to a street food fried in lard.",
+      "overallTier": "weak",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_bolillo",
+          "servings": 8,
+          "note": "standing in for pan bazo, a soft white roll; a day-old roll takes the sauce best"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_guajillo",
+          "servings": 6,
+          "note": "kept thick"
+        },
+        {
+          "recipeId": "curated_mx_base_chorizo",
+          "servings": 4,
+          "note": "crumbled, about 2 cups"
+        },
+        {
+          "recipeId": "curated_mx_base_crema",
+          "servings": 8,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_verde_cruda",
+          "servings": 4,
+          "note": null
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "peeled and cut in large pieces",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, cos or romaine",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "finely shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Queso Anejo",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "crumbled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Boil the potatoes in salted water 15 to 20 minutes, until tender, and drain.",
+        "Cook the chorizo in a skillet over medium heat 6 to 8 minutes, until it releases its fat. Add the potatoes, mash them into the chorizo and cook 3 minutes more. Season with salt if needed.",
+        "Split the rolls, leaving one side joined, and fill with the potato and chorizo.",
+        "Heat some of the lard in a skillet over medium heat. Brush or dip the outside of each filled roll in the guajillo sauce, top side first, and set it in the pan. Brush the other side and fry 1 to 2 minutes a side, until the sauce sets and darkens, adding lard as needed.",
+        "Open each pambazo and add lettuce, cream, crumbled cheese and green salsa. Serve hot."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Potassium",
+          "note": "From the potatoes."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the guajillo sauce and lettuce."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the chorizo and cheese."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Por Esto, Receta para preparar pambazos",
+          "url": "https://www.poresto.com/entretenimiento/virales/2021/9/14/independencia-de-mexico-receta-para-preparar-pambazos.html"
+        },
+        {
+          "source": "México Desconocido, Pambazo",
+          "url": "https://www.mexicodesconocido.com.mx/pambazo.html"
+        },
+        {
+          "source": "Directo al Paladar, Pambazos de patata y chorizo",
+          "url": "https://www.directoalpaladar.com/recetas-de-carnes-y-aves/como-hacer-pambazos-patata-chorizo-popular-receta-bocadillo-mexicano"
+        }
+      ],
+      "curationNote": "Por Esto for 8 pambazos, a thick guajillo sauce, 2 cups chorizo with 3 potatoes mashed in, ¼ cup lard for frying face down, and lettuce, crema, queso añejo and raw green salsa; México Desconocido for the Mexico City pambazo dipped in guajillo and fried, potato with chorizo or longaniza, and pan bazo as a white bread from Castile; Directo al Paladar for brushing the sauce on the outside of the bread before toasting. Pan bazo is not one of the shared bases, so the bolillo stands in."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Enchiladas & Tortilla Dishes",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "id": "curated_mx_enchiladas_rojas",
+      "name": "Enchiladas Rojas",
+      "region": "Central Mexico",
+      "flavorProfile": "Soft corn tortillas dipped in brick-red guajillo sauce and rolled around shredded chicken, finished with cream, fresh cheese, onion, lettuce and radish.",
+      "healthBenefit": "Chicken gives lean protein, corn tortillas whole-grain fiber, and guajillo chiles carotenoids, with fresh vegetables piled on top.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed until pliable"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_guajillo",
+          "servings": 8,
+          "note": "hot"
+        },
+        {
+          "recipeId": "curated_mx_base_pollo_deshebrado",
+          "servings": 4,
+          "note": "warm"
+        },
+        {
+          "recipeId": "curated_mx_base_crema",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_queso_fresco",
+          "servings": 3,
+          "note": "crumbled"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 70,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, cos or romaine",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "finely shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Radish",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Avocado",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat the guajillo sauce in a wide pan over medium heat with 1 tbsp of the oil and simmer 8 to 10 minutes, until it coats a spoon.",
+        "Brush the tortillas lightly with the remaining oil and warm them on a comal about 30 seconds a side, until pliable. Keep them wrapped in a cloth.",
+        "Dip each tortilla in the hot sauce, fill with about 3 tbsp of chicken, roll and lay seam side down on warm plates, 3 to a plate.",
+        "Spoon more sauce over, then top with crema, queso fresco, onion, lettuce, radish and avocado. Serve with lime at once."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken and cheese."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "Guajillo chiles are rich in carotenoids."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From the corn tortillas and avocado."
+        }
+      ],
+      "citations": [
+        {
+          "source": "MexGrocer, Enchiladas rojas from scratch with guajillo sauce",
+          "url": "https://www.mexgrocer.com/blogs/recipes/enchiladas-rojas-from-scratch-guajillo-sauce"
+        },
+        {
+          "source": "Camila Made, Enchiladas rojas de queso",
+          "url": "https://camilamade.com/es/wprm_print/enchiladas-rojas-de-queso"
+        }
+      ],
+      "curationNote": "MexGrocer for 4 servings of 12 enchiladas, 2 cups shredded chicken or queso fresco, the sauce simmered 8 to 10 minutes in a tablespoon of oil, tortillas brushed with oil and warmed, and crema, queso fresco, onion, lettuce, radish, avocado and lime on top; Camila Made for the cheese filling as the other common version and for dipping each tortilla before rolling. The oil row counts what the tortillas take up."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Enchiladas & Tortilla Dishes",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "id": "curated_mx_enfrijoladas",
+      "name": "Enfrijoladas",
+      "region": "Oaxaca",
+      "flavorProfile": "Tortillas softened in oil and folded through a smooth black bean sauce scented with avocado leaf and a touch of chile de árbol, under melting string cheese and onion.",
+      "healthBenefit": "Black beans bring fiber, folate, plant protein and polyphenols, and with corn tortillas they make a complete protein in a humble, filling plate.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed until pliable"
+        },
+        {
+          "recipeId": "curated_mx_base_frijoles_de_la_olla",
+          "servings": 4.5,
+          "note": "black beans with their broth, about 2 cups beans and 2½ cups broth"
+        },
+        {
+          "recipeId": "curated_mx_base_queso_fresco",
+          "servings": 2,
+          "note": "crumbled"
+        }
+      ],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "dried chiles de árbol",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "stemmed",
+          "prepNote": "toasted"
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried avocado leaves (hojas de aguacate)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "toasted",
+          "prepNote": "blended into the sauce"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Mozzarella",
+          "quantity": 225,
+          "unit": "g",
+          "cutPrep": "torn into strands",
+          "cookingMethod": null,
+          "prepNote": "standing in for Oaxaca cheese"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Parsley",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Toast the chile de árbol and avocado leaves on a dry comal 15 to 30 seconds, until fragrant. Blend with the beans and their broth about 30 seconds, until smooth.",
+        "Heat 1 tsp of the oil in a saucepan over medium heat, add the bean purée and cook 4 to 5 minutes, stirring. It should be about as thick as heavy cream; loosen with water ¼ cup (60 ml) at a time if needed. Season with salt.",
+        "Heat the rest of the oil in a skillet over medium heat and pass each tortilla through it 10 to 20 seconds a side, just until soft. Drain on paper.",
+        "Dip each tortilla in the hot sauce about 15 seconds a side, fold in half and lay 3 on each plate. Spoon about ⅓ cup (80 ml) more sauce over, top with the cheeses, onion and parsley, and serve hot."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fiber",
+          "note": "Black beans are among the richest everyday sources."
+        },
+        {
+          "nutrient": "Folate",
+          "note": "Also from the beans."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the cheeses and the lime-treated corn tortillas."
+        }
+      ],
+      "citations": [
+        {
+          "source": "I Love Mole (Guelaguetza), Enfrijoladas",
+          "url": "https://www.ilovemole.com/blogs/recipes/enfrijoladas"
+        },
+        {
+          "source": "Excélsior, Historia de las enfrijoladas",
+          "url": "https://www.excelsior.com.mx/recetas/historia-de-las-enfrijoladas-origen-y-evolucion-del-platillo-mexicano/1750078"
+        },
+        {
+          "source": "La Opinión, Así se preparan las auténticas enfrijoladas mexicanas",
+          "url": "https://laopinion.com/?p=2557311"
+        }
+      ],
+      "curationNote": "Guelaguetza (via I Love Mole) for 4 plates of 3, the toasted árbol blended with 2 cups beans and 2½ cups broth, tortillas fried 10 to 20 seconds a side, dipped 15 seconds, and Oaxaca cheese or low-moisture mozzarella with queso fresco, onion and parsley; Excélsior for the Oaxacan sauce of black beans with epazote and avocado leaves and the regional versions; La Opinión for warming the tortillas in oil without crisping them. Oaxaca cheese, árbol and avocado leaves are not in the database, so mozzarella stands in. The oil row counts what the tortillas take up."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Enchiladas & Tortilla Dishes",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "id": "curated_mx_enmoladas",
+      "name": "Enmoladas",
+      "region": "Puebla",
+      "flavorProfile": "Folded tortillas filled with chicken and smothered in dark, sweet-spiced mole poblano, topped with cream, crumbled cheese and raw onion.",
+      "healthBenefit": "Mole carries chiles, seeds, nuts and spices full of polyphenols and minerals, and the chicken adds lean protein.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed until pliable"
+        },
+        {
+          "recipeId": "curated_mx_base_mole_poblano",
+          "servings": 10,
+          "note": "hot"
+        },
+        {
+          "recipeId": "curated_mx_base_caldo_de_pollo",
+          "servings": 0.5,
+          "note": "to loosen the mole"
+        },
+        {
+          "recipeId": "curated_mx_base_pollo_deshebrado",
+          "servings": 4,
+          "note": "warm"
+        },
+        {
+          "recipeId": "curated_mx_base_crema",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_queso_fresco",
+          "servings": 2.67,
+          "note": "crumbled"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat the mole with the broth in a saucepan over medium-low heat, stirring, 5 to 8 minutes, until smooth and thick enough to coat a spoon.",
+        "Heat the oil in a skillet over medium heat and pass each tortilla through it a few seconds a side, so it softens without crisping.",
+        "Fill each tortilla with chicken, fold in half and lay 3 on each plate.",
+        "Pour the hot mole over to cover completely, then top with crema, queso fresco and onion. Serve hot, with rice or refried beans if you like."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken."
+        },
+        {
+          "nutrient": "Magnesium",
+          "note": "From the seeds, nuts and chocolate in the mole."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the dried chiles and seeds in the mole."
+        }
+      ],
+      "citations": [
+        {
+          "source": "TV Azteca, Cómo preparar unas ricas enmoladas al estilo poblano",
+          "url": "https://www.tvazteca.com/aztecauno/azteca-uno-especiales/2025-09-26/como-preparar-unas-ricas-enmoladas-la-receta-de-7-pasos-al-estilo-poblano"
+        },
+        {
+          "source": "Directo al Paladar, Enchiladas de pollo con mole poblano",
+          "url": "https://www.directoalpaladar.com/recetas-de-carnes-y-aves/enchiladas-pollo-mole-poblano"
+        }
+      ],
+      "curationNote": "TV Azteca for 12 tortillas, mole thinned with chicken broth, tortillas fried a few seconds a side, filled with chicken or cheese and folded, then crema, queso fresco and onion; Directo al Paladar for 600 g shredded chicken to 12 tortillas, the mole made ahead, and raw onion and fresh cheese on top. The base mole is already a finished sauce, so only ½ cup broth is added. The oil row counts what the tortillas take up."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Enchiladas & Tortilla Dishes",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "id": "curated_mx_entomatadas",
+      "name": "Entomatadas",
+      "region": "Central Mexico",
+      "flavorProfile": "Tortillas bathed in a mild, oregano-scented tomato sauce and folded around fresh cheese and onion, with a little cream on top.",
+      "healthBenefit": "A light, mild plate: cooked tomato gives lycopene and vitamin C, and the corn tortillas and fresh cheese add fiber, calcium and protein.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 12,
+          "note": "warmed until pliable"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_entomatada",
+          "servings": 4,
+          "note": "hot"
+        },
+        {
+          "recipeId": "curated_mx_base_queso_fresco",
+          "servings": 5,
+          "note": "crumbled, part for filling and part for the top"
+        },
+        {
+          "recipeId": "curated_mx_base_crema",
+          "servings": 2,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_caldo_de_pollo",
+          "servings": 0.25,
+          "note": "a splash over each plate"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring the tomato sauce to a simmer in a wide pan with a little of the oil and keep it hot.",
+        "Warm the tortillas on a comal or brush them with the rest of the oil and heat 15 to 20 seconds a side, so they do not tear when dipped.",
+        "Dip each tortilla in the sauce, fill with crumbled cheese and onion, fold in half and lay 3 on each plate.",
+        "Spoon a little broth and more sauce over, then top with the remaining cheese, a little crema and cilantro. Serve at once."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomato sauce."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the queso fresco and the corn tortillas."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the cheese."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Cookpad, Entomatadas",
+          "url": "https://cookpad.com/cu/recetas/10036583"
+        },
+        {
+          "source": "TV Azteca, La receta de la chef Zahie Téllez",
+          "url": "https://www.tvazteca.com/aztecauno/masterchef/la-receta-de-la-chef-zahie-tellez-que-es-rica-en-vitaminas-y-muy-facil-de-hacer"
+        }
+      ],
+      "curationNote": "Cookpad for the tomato sauce with oregano, tortillas bathed and fried, filled with onion and queso oreado, and finished with a little broth, cheese and crema; Zahie Téllez for frying the sauce, keeping the tortillas warm so they do not break, and queso fresco with cream or cilantro on top. Queso fresco from the base stands in for queso oreado."
+    },
+    {
+      "id": "curated_mx_flautas",
+      "name": "Flautas de Pollo",
+      "builderType": "handheld",
+      "dishGroup": "Enchiladas & Tortilla Dishes",
+      "region": "Mexico",
+      "servings": 4,
+      "servingSizeAmount": 4,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Long, tight rolls of tortilla around chicken cooked with tomato, chile and cumin, fried golden and crackling, then heaped with lettuce, cream, cheese and green salsa.",
+      "healthBenefit": "Lean chicken in a tomato and chile filling, served under fresh lettuce and radish; frying adds fat, so they are best with plenty of vegetables on the side.",
+      "overallTier": "weak",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 16,
+          "note": "warmed until pliable"
+        },
+        {
+          "recipeId": "curated_mx_base_pollo_deshebrado",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_crema",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_queso_fresco",
+          "servings": 2.67,
+          "note": "crumbled"
+        },
+        {
+          "recipeId": "curated_mx_base_salsa_verde",
+          "servings": 4,
+          "note": null
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 180,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 70,
+          "unit": "g",
+          "cutPrep": "diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, jalapeno",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "chipotle chiles in adobo",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Iceberg lettuce",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "finely shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Radish",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat 3 tbsp oil in a skillet over medium heat. Cook the onion and chile 1 minute, add the tomato, chipotle, cumin and salt and cook until saucy, 3 to 4 minutes. Stir in the chicken and cilantro and cook about 5 minutes, until little liquid is left.",
+        "Warm the tortillas on a comal until pliable and keep them wrapped. Lay a line of filling along one edge of each, roll tightly and secure with a toothpick or keep seam side down.",
+        "Heat about 1 inch (2.5 cm) of oil in a large pan to 350°F (175°C). Fry the flautas seam side down first, in batches, about 3 minutes a side, until golden and crisp. Drain on paper and pull out the toothpicks.",
+        "Plate 4 per person and top with lettuce, radish, crema, cheese and green salsa. Serve hot."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomato, chile and salsa verde."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From the corn tortillas."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Maricruz Avalos, Flautas de pollo",
+          "url": "https://www.maricruzavalos.com/wprm_print/flautas-de-pollo"
+        },
+        {
+          "source": "Directo al Paladar, Flautas de pollo",
+          "url": "https://www.directoalpaladar.com/recetas-de-carnes-y-aves/flautas-doradas-de-pollo-receta-mexicana-facil"
+        }
+      ],
+      "curationNote": "Maricruz Avalos for 16 flautas, 4 a plate, 2 cups chicken cooked with tomato, onion, jalapeño, cilantro, chipotle and cumin, rolled tight, fried in about 1 inch of oil, and lettuce, radish, crema and queso fresco on top; Directo al Paladar for frying seam side down about 3 minutes a side and green salsa with cream and cheese. Neither gives an oil temperature, so 350°F is the usual frying heat. Chipotle is not in the database. The deep-fried oil row counts what the flautas absorb, not the pan."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Enchiladas & Tortilla Dishes",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "id": "curated_mx_chilaquiles_rojos",
+      "name": "Chilaquiles Rojos",
+      "region": "Central Mexico",
+      "flavorProfile": "Crisp fried tortilla chips tossed in a hot red guajillo and árbol sauce just long enough to soak at the edges, under a fried egg, cream, cheese, onion and avocado.",
+      "healthBenefit": "The tomato and chile sauce brings vitamin C and carotenoids, the egg protein, and the avocado healthy fat, in a breakfast that keeps people going.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_totopos",
+          "servings": 6,
+          "note": "from 12 tortillas, about 300 g"
+        },
+        {
+          "recipeId": "curated_mx_base_caldo_de_pollo",
+          "servings": 2,
+          "note": "for the sauce"
+        },
+        {
+          "recipeId": "curated_mx_base_crema",
+          "servings": 4,
+          "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_queso_fresco",
+          "servings": 2,
+          "note": "crumbled"
+        }
+      ],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "dried guajillo chiles",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "stemmed and seeded",
+          "prepNote": "toasted and soaked"
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried chiles de árbol",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": "stemmed",
+          "prepNote": "toasted"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 350,
+          "unit": "g",
+          "cutPrep": "cored",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "a piece for the sauce, the rest finely chopped",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed between the palms",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Avocado",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Simmer the guajillo and árbol chiles, tomatoes, garlic and a piece of the onion in water to cover over medium heat about 10 minutes, until the chiles soften and the tomatoes change color.",
+        "Drain and blend with 1 cup (240 ml) of the broth, the cumin, oregano, salt and pepper until smooth, adding more broth if it is very thick.",
+        "Heat 1 tbsp oil in a wide pan over medium-low heat, pour in the sauce and cook 5 minutes, until it thickens slightly. Add the remaining broth as needed.",
+        "Fry the eggs sunny side up in the other tablespoon of oil.",
+        "Add the totopos to the hot sauce and fold gently, 1 minute for crunchy or 3 to 4 minutes for soft. Plate at once with an egg on each, then crema, cheese, chopped onion, cilantro and avocado."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs and cheese."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomato and chile sauce."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "Guajillo chiles are rich in carotenoids."
+        }
+      ],
+      "citations": [
+        {
+          "source": "El Universal, Receta: cómo preparar chilaquiles rojos",
+          "url": "https://www.eluniversal.com.mx/menu/receta-como-preparar-chilaquiles-rojos/"
+        },
+        {
+          "source": "Excélsior, Prepara los mejores chilaquiles rojos con la receta tradicional",
+          "url": "https://www.excelsior.com.mx/recetas/receta-chilaquiles-rojos-tradicionales"
+        }
+      ],
+      "curationNote": "El Universal for 12 tortillas or 300 g totopos, 7 guajillo and 3 árbol chiles, 3 tomatoes, 2 cups chicken broth, garlic, onion, cumin, oregano, 4 fried eggs, avocado, crema, queso fresco, onion and cilantro, and adding the chips just before serving for crunch; Excélsior for drying the tortillas overnight, boiling the chiles and tomatoes 10 minutes and thickening the sauce 5 minutes in a little oil. Guajillo and árbol are not in the database."
+    },
+    {
+      "id": "curated_mx_chile_relleno",
+      "name": "Chile Relleno",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Vegetables & Sides",
+      "region": "Puebla",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "A roasted poblano stuffed with melting cheese, wrapped in a puffed egg batter and fried golden, then simmered briefly in a thin tomato caldillo with marjoram and thyme.",
+      "healthBenefit": "Poblano chiles are rich in vitamin C and the tomato caldillo adds more, with cheese and egg for protein and calcium; the frying makes it a dish for now and then.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_caldo_de_pollo",
+          "servings": 2,
+          "note": "for the caldillo"
+        }
+      ],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "poblano chiles",
+          "quantity": 6,
+          "unit": "each",
+          "cutPrep": "large",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Queso Asadero",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "cut in strips",
+          "cookingMethod": null,
+          "prepNote": "standing in for Oaxaca cheese"
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, Type 405",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "cored",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "pan molido (dry bread crumbs)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "about 3 tbsp, to thicken the caldillo"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Marjoram Spices",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Roast the poblanos over a flame or on a comal until the skin is black on all sides. Seal them in a bag for 20 to 30 minutes to sweat, then rub off the skin, rinse briefly and pat dry.",
+        "Cut a slit down one side of each chile and pull out the seeds and veins. Fill with cheese without overstuffing so the chile closes; pin with a toothpick if needed.",
+        "For the caldillo, roast the tomatoes, onion and garlic, blend and strain. Simmer in 1 tbsp oil over low heat 10 minutes, stir in the bread crumbs, add the broth, marjoram and thyme and simmer 15 minutes over medium-low heat. Season with salt.",
+        "Separate the eggs. Beat the whites to firm peaks, then fold in the yolks one at a time without knocking out the air.",
+        "Heat about 1 inch (2.5 cm) of oil to 340 to 355°F (170 to 180°C). Dust each chile in flour, dip it in the batter and fry one or two at a time, spooning oil over the top, until golden underneath. Turn once and brown the other side. Drain on paper.",
+        "Set the chiles in the caldillo and simmer 2 minutes, or ladle the caldillo into plates and set a chile in each. Serve at once with rice and warm tortillas."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the poblano and the tomato caldillo."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the cheese."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the cheese and egg."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Excélsior, Chiles rellenos de queso capeados",
+          "url": "https://www.excelsior.com.mx/recetas/receta-chiles-rellenos-capeados"
+        },
+        {
+          "source": "Directo al Paladar, Chiles rellenos de queso, receta tradicional mexicana",
+          "url": "https://www.directoalpaladar.com/recetas-vegetarianas/chiles-rellenos-de-queso-receta-mexicana"
+        }
+      ],
+      "curationNote": "Excélsior for 6 large poblanos, 300 g Oaxaca or manchego, 3 eggs, ½ cup flour, sweating 20 minutes, whites beaten to peaks with the yolks folded in, frying at 170 to 180°C one or two at a time, and a caldillo of tomato, onion and garlic; Directo al Paladar for 5 eggs, roasting the tomatoes, thickening the caldillo with 3 tbsp bread crumbs, 2 cups chicken broth, marjoram and thyme simmered 15 minutes, and a final 2 minutes of the chiles in the caldillo. Eggs set at 4 between the two. Poblano, Oaxaca cheese and bread crumbs are not in the database, so asadero stands in for the cheese. The frying oil row counts what the batter absorbs."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "id": "curated_mx_pollo_en_mole_poblano",
+      "name": "Pollo en Mole Poblano",
+      "region": "Puebla",
+      "servings": 4,
+      "flavorProfile": "Pieces of poached chicken warmed through in dark, glossy mole poblano, sweet with chocolate and spice and gently hot, under a scatter of toasted sesame.",
+      "healthBenefit": "Chicken gives protein, and the mole carries dried chiles, sesame, almonds, peanuts and spices that bring fiber, minerals and polyphenols to the plate.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_mole_poblano",
+          "servings": 12,
+          "note": "finished sauce"
+        },
+        {
+          "recipeId": "curated_mx_base_caldo_de_pollo",
+          "servings": 0.5,
+          "note": "from poaching the chicken, to loosen the mole"
+        },
+        {
+          "recipeId": "curated_mx_base_arroz_rojo",
+          "servings": 4,
+          "note": "to serve"
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 8,
+          "note": "warm, to serve"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Chicken, broiler, leg, meat",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "bone-in pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Chicken Thigh (with skin)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "bone-in pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "halved",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "whole cloves",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Sesame seed",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Roasted",
+          "prepNote": "toasted on a dry comal"
+        }
+      ],
+      "instructions": [
+        "Put the chicken in a pot with the onion, garlic, salt and water to cover. Bring to a boil, skim, then lower the heat and simmer 30 to 40 minutes, until cooked through to 165°F (74°C). Keep the broth.",
+        "Warm the mole in a wide cazuela over low heat, stirring, and loosen it with about ½ cup (120 ml) of the broth until it coats a spoon thickly.",
+        "Add the chicken pieces and simmer gently 10 to 15 minutes, turning them in the sauce, until hot and glossy.",
+        "Plate one or two pieces per person with plenty of mole, sprinkle with toasted sesame and serve with red rice and warm tortillas."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken."
+        },
+        {
+          "nutrient": "Magnesium",
+          "note": "From the sesame, nuts and chocolate in the mole."
+        },
+        {
+          "nutrient": "Niacin",
+          "note": "Chicken is a rich source."
+        }
+      ],
+      "citations": [
+        {
+          "source": "TV Azteca, Mole con pollo, el paso a paso de Isabel Carvajal en MasterChef",
+          "url": "https://www.tvazteca.com/aztecauno/masterchef/mole-pollo-el-paso-a-paso-para-la-deliciosa-receta-isabel-carvajal-en-masterchef-24-7/"
+        },
+        {
+          "source": "Food and Pleasure, Recetas de mole poblano",
+          "url": "https://foodandpleasure.com/recetas-de-mole-poblano/"
+        },
+        {
+          "source": "MedlinePlus, Pollo con mole",
+          "url": "https://medlineplus.gov/spanish/recetas/pollo-con-mole/"
+        }
+      ],
+      "curationNote": "TV Azteca (MasterChef) for 4 pieces of chicken boiled with salt, one piece per plate with toasted sesame and red or white rice; Food and Pleasure for leg pieces cooked in salted water and then cooked on in the finished mole until glossy; MedlinePlus for poaching about 30 minutes to 165°F and the tradition of sesame over the chicken and sauce. The base mole is already a finished sauce, so only broth is added here."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "id": "curated_mx_mole_negro_con_pollo",
+      "name": "Mole Negro con Pollo",
+      "region": "Oaxaca",
+      "servings": 4,
+      "flavorProfile": "Chicken simmered in Oaxaca's near-black mole, smoky from burnt chiles, bittersweet with chocolate and fragrant with avocado leaf.",
+      "healthBenefit": "A protein-rich plate whose sauce is built from chiles, seeds, nuts, plantain and chocolate, a dense mix of minerals and polyphenols.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_mole_negro",
+          "servings": 12,
+          "note": "finished sauce"
+        },
+        {
+          "recipeId": "curated_mx_base_caldo_de_pollo",
+          "servings": 0.5,
+          "note": "from poaching the chicken"
+        },
+        {
+          "recipeId": "curated_mx_base_arroz_blanco",
+          "servings": 4,
+          "note": "to serve"
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 8,
+          "note": "warm, to serve"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Chicken, broiler, leg, meat",
+          "quantity": 800,
+          "unit": "g",
+          "cutPrep": "bone-in pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Chicken Thigh (with skin)",
+          "quantity": 700,
+          "unit": "g",
+          "cutPrep": "bone-in pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "halved",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "whole cloves",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring the water, onion, garlic, bay leaf and pepper to a boil in a large pot, add the chicken and return to a boil. Lower the heat, cover and simmer 45 minutes to 1 hour, until the juices of the dark meat run clear. Add the salt and keep the broth.",
+        "Heat the mole in a cazuela over low heat, stirring so it does not stick, and thin it with broth if it is very thick.",
+        "Add the chicken and simmer 15 minutes, turning the pieces in the sauce.",
+        "Set a piece of chicken on each plate, pour plenty of hot mole over and serve with white rice and warm tortillas."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the dried chiles and seeds in the mole."
+        },
+        {
+          "nutrient": "Magnesium",
+          "note": "From the nuts, seeds and chocolate."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Ya Oaxaca, Turkey or chicken with mole negro sauce",
+          "url": "https://yaoaxaca.com/blogs/recipes/mole-negro-de-pollo"
+        },
+        {
+          "source": "Cookpad, Mole negro oaxaqueño",
+          "url": "https://cookpad.com/py/recetas/659593"
+        }
+      ],
+      "curationNote": "Ya Oaxaca for 4 servings from about 3½ lb bone-in chicken parts simmered 45 minutes to 1 hour with onion, garlic, bay and peppercorns, salt added at the end, the hot mole poured over a piece on each plate and rice with tortillas alongside; Cookpad for a whole chicken poached with onion, garlic and salt and the pieces simmered 15 minutes in the finished mole. The base mole is already a finished sauce."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "id": "curated_mx_mole_verde_con_cerdo",
+      "name": "Mole Verde con Cerdo",
+      "region": "Oaxaca",
+      "servings": 6,
+      "flavorProfile": "Tender pork in a bright green sauce of pumpkin seed, tomatillo, hoja santa, epazote and fresh herbs, with chayote and green beans cooked just tender.",
+      "healthBenefit": "Pumpkin seeds and leafy herbs give magnesium, zinc and vitamin K, the vegetables add fiber and vitamin C, and pork shoulder brings protein and B vitamins.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_mole_verde",
+          "servings": 10,
+          "note": "finished sauce, kept off the boil"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "cut in large chunks",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "halved",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "whole cloves",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Chayote",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "peeled, cut in wedges",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Green beans",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "cut in 1½ inch (4 cm) lengths",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Squash, zucchini",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "thickly sliced",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the pork in a pot with the onion, garlic, salt and water to cover. Bring to a boil, skim, then cover and simmer over low heat 1½ to 2 hours, until tender.",
+        "Boil the chayote, green beans and zucchini separately in salted water until just tender, 5 to 10 minutes each. Drain.",
+        "Warm the mole verde in a cazuela over low heat, loosening it with a little of the pork broth if needed. Add the pork and vegetables and heat through 5 to 8 minutes without letting it boil hard, so the sauce keeps its green color.",
+        "Serve in bowls or deep plates with warm tortillas or totopos."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Magnesium",
+          "note": "Pumpkin seeds are among the richest sources."
+        },
+        {
+          "nutrient": "Vitamin K",
+          "note": "From the herbs and leafy greens in the sauce."
+        },
+        {
+          "nutrient": "Thiamin",
+          "note": "Pork is a rich source."
+        }
+      ],
+      "citations": [
+        {
+          "source": "México Desconocido, Mole verde con carne",
+          "url": "https://www.mexicodesconocido.com.mx/mole-verde.html"
+        },
+        {
+          "source": "La Opinión, Prepara un exquisito mole verde veracruzano",
+          "url": "https://laopinion.com/?p=2391443"
+        }
+      ],
+      "curationNote": "México Desconocido for pork leg or loin cooked with onion, garlic and salt until soft, then warmed in the finished green mole, keeping part of the herb sauce back so it is not boiled and stays green, served with totopos; La Opinión (from Larousse) for 6 servings from 1¼ kg pork, and chayote, green beans and zucchini boiled separately in salted water before going into the mole. Shoulder is used here as the cut that stays most tender with long simmering."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "id": "curated_mx_mole_amarillo_con_pollo",
+      "name": "Mole Amarillo con Pollo",
+      "region": "Oaxaca",
+      "servings": 4,
+      "flavorProfile": "The lightest of the Oaxacan moles: chicken, chayote and green beans in a thin, masa-thickened sauce of guajillo, tomato and tomatillo perfumed with hoja santa.",
+      "healthBenefit": "Chicken for protein and chayote, green beans and potato for fiber, potassium and vitamin C, in a sauce with little fat compared with the darker moles.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_mole_amarillo",
+          "servings": 8,
+          "note": "finished sauce"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Chicken, broiler, leg, meat",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "bone-in pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Chicken Thigh (with skin)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "bone-in pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "halved",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "whole cloves",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "small, halved",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Chayote",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "peeled, cut in chunks",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Green beans",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "cut in 1 inch (2.5 cm) lengths",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "thinly sliced, macerated in lime juice and salt",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the chicken in a pot with the onion, garlic, salt and water to cover. Bring to a boil, then simmer 25 to 30 minutes, until cooked through to 165°F (74°C). Keep the broth.",
+        "Cover the potatoes with water, bring to a boil, then cook covered over medium heat 10 minutes. Add the chayote and cook 5 minutes, then add the green beans and cook 2 to 3 minutes more, until they are bright green and the potatoes are fork tender. Drain.",
+        "Toss the sliced onion with the lime juice and a pinch of salt and leave it to soften while you finish the dish.",
+        "Heat the mole in a pot over medium-low heat, thinning with a little broth if needed. Add the chicken and simmer 10 minutes to heat through, then add the vegetables for the last 2 to 3 minutes.",
+        "Ladle into deep plates with a piece of chicken and some of each vegetable, and top with the lime onions. Serve with warm tortillas."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the chayote, green beans, potato and tomatoes in the sauce."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "From the potato and chayote."
+        }
+      ],
+      "citations": [
+        {
+          "source": "My Slice of Mexico, Oaxaca style yellow mole",
+          "url": "https://mysliceofmexico.ca/2021/07/13/oaxaca-style-yellow-mole-mole-amarillo-de-oaxaca/"
+        },
+        {
+          "source": "Rick Bayless, Chicken breasts with yellow mole and roasted vegetables",
+          "url": "https://rickbayless.com/recipe/chicken-breasts-with-yellow-mole-and-roasted-vegetables"
+        }
+      ],
+      "curationNote": "My Slice of Mexico for a cut-up chicken cooked in water with its broth kept, potatoes cooked 10 minutes, chayote 5 more and green beans a couple of minutes, and the bowls topped with onions macerated in lime and salt; Rick Bayless for 4 servings with about 4 cups of sauce, chayote and green beans as the vegetables, and the chicken reheated in the finished mole. The chochoyotes some cooks add are left out here."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "id": "curated_mx_mole_coloradito_con_pollo",
+      "name": "Mole Coloradito con Pollo",
+      "region": "Oaxaca",
+      "servings": 6,
+      "flavorProfile": "Chicken and potatoes simmered in brick-red coloradito, sweet with plantain, egg bread and Oaxacan chocolate over ancho chile, finished with toasted sesame.",
+      "healthBenefit": "Chicken gives protein and the potatoes potassium, while the ancho chiles and sesame in the sauce add carotenoids and minerals.",
+      "overallTier": "moderate",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_mole_coloradito",
+          "servings": 18,
+          "note": "finished sauce"
+        },
+        {
+          "recipeId": "curated_mx_base_caldo_de_pollo",
+          "servings": 0.5,
+          "note": "from poaching the chicken"
+        },
+        {
+          "recipeId": "curated_mx_base_frijoles_refritos",
+          "servings": 6,
+          "note": "to serve"
+        },
+        {
+          "recipeId": "curated_mx_base_arroz_blanco",
+          "servings": 6,
+          "note": "to serve"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Chicken, broiler, leg, meat",
+          "quantity": 900,
+          "unit": "g",
+          "cutPrep": "bone-in pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Chicken Thigh (with skin)",
+          "quantity": 700,
+          "unit": "g",
+          "cutPrep": "bone-in pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "crushed with salt and oregano into a paste",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "dried, rubbed between the palms",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "halved",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "whole cloves",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 3000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Potato",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "peeled, cut in chunks",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Sesame seed",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Roasted",
+          "prepNote": "toasted on a dry comal"
+        }
+      ],
+      "instructions": [
+        "Rub the chicken with the garlic paste, salt and oregano and refrigerate 1 to 12 hours.",
+        "Put the chicken in a large pot with the onion, the rest of the garlic and salt and water to cover. Bring to a boil, then simmer uncovered 25 to 30 minutes, until barely tender. Keep the broth.",
+        "Boil the potatoes in salted water 12 to 15 minutes, until tender. Drain.",
+        "Heat the mole in a heavy pot over medium heat with ½ cup (120 ml) of broth and simmer 5 minutes. Add the chicken and potatoes, with more broth if it is very thick, and simmer gently 10 minutes, stirring now and then.",
+        "Serve in a clay cazuela or deep plates, sprinkled with toasted sesame, with refried beans, rice and warm tortillas."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "From the potatoes."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "Ancho chiles are rich in carotenoids."
+        }
+      ],
+      "citations": [
+        {
+          "source": "México Desconocido, Receta de pollo en mole coloradito",
+          "url": "https://www.mexicodesconocido.com.mx/receta-de-pollo-en-mole-coloradito.html"
+        },
+        {
+          "source": "AARP en Español, Mole coloradito de guajolote",
+          "url": "https://www.aarp.org/espanol/cocina/recetas/info-2017/mole-coloradito-de-guajolote.html"
+        }
+      ],
+      "curationNote": "México Desconocido for chicken boiled with onion and garlic until soft, cooked potatoes added to the mole with more broth and simmered 10 minutes, served in a cazuela with refried beans and rice; AARP for chicken legs and thighs rubbed with garlic, salt and oregano 1 to 12 hours, poached 25 to 30 minutes, the paste thinned with broth 5 minutes, the chicken simmered 10 minutes and sesame on top. The base mole is already a finished sauce."
+    },
+    {
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Meats & Seafood",
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "id": "curated_mx_pipian_verde_con_pollo",
+      "name": "Pipián Verde con Pollo",
+      "region": "Central Mexico",
+      "servings": 4,
+      "flavorProfile": "Chicken simmered in a creamy, pale green sauce of toasted pumpkin and sesame seeds, tomatillo, green chile and fresh herbs.",
+      "healthBenefit": "The pumpkin seed sauce is rich in magnesium, zinc and healthy fats, and the chicken brings lean protein.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_pipian_verde",
+          "servings": 6,
+          "note": "finished sauce"
+        },
+        {
+          "recipeId": "curated_mx_base_arroz_blanco",
+          "servings": 4,
+          "note": "to serve"
+        },
+        {
+          "recipeId": "curated_mx_base_corn_tortillas",
+          "servings": 8,
+          "note": "warm, to serve"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Chicken, broiler, leg, meat",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "bone-in pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Chicken Thigh (with skin)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "bone-in pieces",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "halved",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "whole cloves",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Avocado Oil (Extra Virgin)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the chicken in a pot with the onion, garlic, salt and water to cover. Bring to a boil, then simmer 30 to 40 minutes, until cooked through to 165°F (74°C). Keep the broth.",
+        "Heat the oil in a deep pan over medium heat, add the pipián and bring it just to a boil, stirring. If it is thicker than heavy cream, loosen it with broth.",
+        "Add the chicken, lower the heat, cover and simmer 10 to 15 minutes so the chicken takes up the sauce, without letting it boil hard or the seeds will split.",
+        "Serve hot with white rice and warm tortillas."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Magnesium",
+          "note": "Pumpkin seeds are among the richest sources."
+        },
+        {
+          "nutrient": "Zinc",
+          "note": "Also from the pumpkin seeds and the chicken."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken and seeds."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Gastrolab, Cómo hacer pipián verde desde cero",
+          "url": "https://www.gastrolabweb.com/recetas/2022/7/12/como-hacer-pipian-verde-desde-cero-aprende-preparar-este-rico-mole-26038.html"
+        },
+        {
+          "source": "La Cocina de Leslie, Chicken pipián verde",
+          "url": "https://www.lacocinadeleslie.com/2014/03/chicken-pipian-verde-weekdaysupper.html"
+        }
+      ],
+      "curationNote": "Gastrolab for the sauce of toasted pumpkin and sesame seeds with tomatillo, green chiles and herbs made with chicken broth, then the meat added and cooked in it as a guisado; La Cocina de Leslie for cooked chicken added once the sauce boils, loosened to the thickness of heavy cream, simmered covered over low heat, and served with rice and warm tortillas. The base pipián is already a finished sauce."
     }
   ]
 }

@@ -37,7 +37,7 @@ const STYLE = [
   [/\*\*/, 'bold markup'],
 ];
 
-const allFiles = fs.readdirSync(DIR).filter((f) => f.endsWith('.json') && f !== 'base_ids.json');
+const allFiles = fs.readdirSync(DIR).filter((f) => f.endsWith('.json') && f !== 'base_ids.json' && f !== 'unlisted_tags.json');
 const targets = process.argv.slice(2).length > 0 ? process.argv.slice(2).map((f) => path.basename(f)) : allFiles;
 
 // Every recipe id across every file, so a dish may point at a base written in

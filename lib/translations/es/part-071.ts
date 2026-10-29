@@ -275,4 +275,5 @@ export const PART: Readonly<Record<string, string>> = {
   "Vegetables & Sides": "Verduras y guarniciones",
   "Drinks": "Bebidas",
   "Sweets & Breads": "Dulces y panes",
+  "Where an ingredient is a recipe made first, such as a salsa or the tortillas, tap it to open that recipe.": "Donde un ingrediente es una receta que se prepara antes, como una salsa o las tortillas, tócalo para abrir esa receta.",
 };

@@ -248,7 +248,8 @@ const CATEGORIES = [
       /\bmyriad\b/gi,
       /\bplethora\b/gi,
       /\ba testament to\b/gi,
-      /\bserves? as a\b/gi,
+      // Not "Serve as a side", which tells a cook how to serve the dish.
+      /\bserves? as a\b(?! (?:side|snack|starter|main|light meal|topping|dip)\b)/gi,
       /\bstands? as (?:a|the)\b/gi,
       /\bintricate\b/gi,
       /\bmultifaceted\b/gi,

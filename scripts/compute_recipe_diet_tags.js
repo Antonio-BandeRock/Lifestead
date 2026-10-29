@@ -85,12 +85,17 @@ for (const row of rows) {
 // curated_recipe_unlisted_ingredients with the diet tags they carry in
 // `contains` (meat, fish, dairy, egg, gluten, insect, alcohol), so a recipe
 // whose goat is not in the database is still never tagged Vegan.
+const UNLISTED_NIGHTSHADE = /chil[ei]|guajillo|ancho|pasilla|mulato|chipotle|habanero|jalape|poblano|serrano|tomat|paprika/i;
 const unlistedTable = runSql("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'curated_recipe_unlisted_ingredients';");
 const unlistedByRecipe = new Map();
 if (unlistedTable.length > 0) {
-  for (const row of runSql('SELECT recipe_id AS recipeId, contains FROM curated_recipe_unlisted_ingredients;')) {
+  for (const row of runSql('SELECT recipe_id AS recipeId, name, contains FROM curated_recipe_unlisted_ingredients;')) {
     if (!unlistedByRecipe.has(row.recipeId)) unlistedByRecipe.set(row.recipeId, new Set());
     for (const tag of String(row.contains || '').split(',').filter(Boolean)) unlistedByRecipe.get(row.recipeId).add(tag);
+    // Chiles are nightshades, which only AIP asks about, so the name says so
+    // rather than a tag every other diet would ignore. Tomatillo husks flavour
+    // the cooking water and are not eaten.
+    if (UNLISTED_NIGHTSHADE.test(row.name) && !/husk/i.test(row.name)) unlistedByRecipe.get(row.recipeId).add('nightshade');
     if (!byRecipe.has(row.recipeId)) byRecipe.set(row.recipeId, []);
   }
 }
@@ -136,6 +141,19 @@ const PROTEIN_LEGUMES = new Set([
 const HIGH_PROTEIN_DAIRY = new Set(['Yogurt, Greek, plain, lowfat', 'Cottage Cheese', 'Cheddar', 'Feta', 'Parmesan']);
 
 const NIGHTSHADES = new Set(['Tomato', 'Potato', 'Eggplant', 'Red Bell Pepper', 'Yellow Bell Pepper']);
+// 2026-10-29: the five above missed every chile, the tomatillo, green bell
+// pepper, tomato paste and the red potato, which the Mexican recipes made
+// common. Black pepper is a different plant and sweet potato is not a
+// nightshade.
+const NIGHTSHADE_NAME = /(tomato|tomatillo|potato|eggplant|bell pepper|chile|chili|cayenne|pimiento)|^Pepper, (ancho|jalapeno|pasilla|serrano|poblano|chipotle|guajillo)|^Peppers, hot/i;
+const NOT_NIGHTSHADE_NAME = /sweet potato|black/i;
+
+function hasNightshadeName(ingredients) {
+  return ingredients.some((i) => NIGHTSHADE_NAME.test(i.baseName) && !NOT_NIGHTSHADE_NAME.test(i.baseName));
+}
+
+// Butter sits under Fats in this database, not Dairy.
+const DAIRY_FAT_NAME = /^(Pure Butter|Butter, plain)/i;
 const NIGHTSHADE_SPICES = new Set(['Paprika']);
 
 const REFINED_SUGAR = new Set(['Sugar (Cane / Granulated)']);
@@ -177,7 +195,7 @@ function classifyRecipe(ingredients, unlisted = new Set()) {
 
   // ---- Base tier: exactly one of Vegan / Vegetarian / Omnivore ----
   const hasMeat = hasCategory(ingredients, 'Meat') || unlisted.has('meat') || unlisted.has('fish') || unlisted.has('insect');
-  const hasDairy = hasCategory(ingredients, 'Dairy') || unlisted.has('dairy');
+  const hasDairy = hasCategory(ingredients, 'Dairy') || hasNameMatch(ingredients, DAIRY_FAT_NAME) || unlisted.has('dairy');
   const hasEgg = hasNameMatch(ingredients, /\begg\b/i) || unlisted.has('egg');
   let baseTag;
   if (hasMeat) {
@@ -232,7 +250,8 @@ function classifyRecipe(ingredients, unlisted = new Set()) {
   // ---- AIP (Autoimmune Protocol) ----
   if (isPaleo) {
     const hasNutSeed = hasCategory(ingredients, 'NutSeed');
-    const hasNightshade = hasAnyFromSet(ingredients, NIGHTSHADES) || hasAnyFromSet(ingredients, NIGHTSHADE_SPICES);
+    const hasNightshade =
+      hasAnyFromSet(ingredients, NIGHTSHADES) || hasAnyFromSet(ingredients, NIGHTSHADE_SPICES) || hasNightshadeName(ingredients) || unlisted.has('nightshade');
     if (!hasEgg && !hasNutSeed && !hasNightshade) {
       tags.push('AIP');
     }

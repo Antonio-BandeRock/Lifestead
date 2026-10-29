@@ -160,4 +160,13 @@
 // of the words the writing rules keep out, and the triptan and SSRI rule
 // was rewritten to say what the later evidence found. A stale copy would
 // show every rule without its level, so phones need the new rows.
-export const REFERENCE_DB_VERSION = "20260926120000";
+// BUMPED 2026-10-29 (1.0.76.3). 185 System Recipes were added: the
+// Mexican dishes from Tony's list with the bases they are made from, plus
+// homemade vegetable stock, chicken stock and hummus, which 32 older
+// recipes now name as made first in place of a bouillon, a store tortilla
+// or hummus listed by its parts. Two new tables came with them,
+// curated_recipe_components (what is made first) and
+// curated_recipe_unlisted_ingredients (what the food database does not
+// hold), and curated_recipe_ingredients gained from_component. A stale
+// copy has none of these recipes, so phones need the new rows.
+export const REFERENCE_DB_VERSION = "20261029120000";
