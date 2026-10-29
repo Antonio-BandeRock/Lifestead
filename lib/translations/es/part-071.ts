@@ -165,5 +165,11 @@ export const PART: Readonly<Record<string, string>> = {
  "Today": "Hoy",
  "Tomorrow": "Mañana",
  "{weekday}, {month} {day}": "{weekday} {day} de {month}",
- "Tap a tab's name to open it. The one open before closes, and the one you opened moves to the top. Swipe along a row of cards to see what else it holds.": "Toca el nombre de una pestaña para abrirla. La que estaba abierta se cierra, y la que abriste sube hasta arriba. Desliza a lo largo de una fila de tarjetas para ver qué más tiene."
+ "Tap a tab's name to open it. The one open before closes, and the one you opened moves to the top. Swipe along a row of cards to see what else it holds.": "Toca el nombre de una pestaña para abrirla. La que estaba abierta se cierra, y la que abriste sube hasta arriba. Desliza a lo largo de una fila de tarjetas para ver qué más tiene.",
+ "Open the band with the name of Routines, near the top of Home.": "Abre la franja con el nombre Rutinas, cerca de la parte de arriba de Inicio.",
+ "Open the band with the name of To Do List, near the top of Home.": "Abre la franja con el nombre Lista de pendientes, cerca de la parte de arriba de Inicio.",
+ "Saved. Add more here if you like, then go back to Setup.": "Guardado. Agrega más aquí si quieres, y luego regresa a la configuración.",
+ "A few questions first, then the same cards as Getting Set Up on Home. Open a tab and set up what you want, in any order. Every answer can be changed later in Your Guide, or with Run Setup Again in Profile.": "Primero unas preguntas, luego las mismas tarjetas que Preparándote en Inicio. Abre una pestaña y configura lo que quieras, en el orden que quieras. Cada respuesta se puede cambiar después en Tu guía, o con Volver a configurar en Perfil.",
+ "Goes on to Home now. Setup comes back the next time Lifestead opens while something is still waiting, and the same cards stay on Home.": "Pasa a Inicio ahora. La configuración regresa la próxima vez que abras Lifestead mientras algo siga pendiente, y las mismas tarjetas se quedan en Inicio.",
+ "Opens setup again with every answer as it stands, so you can add a condition, change how Home looks or set up something you skipped.": "Abre la configuración de nuevo con cada respuesta como está, para que puedas agregar un padecimiento, cambiar cómo se ve Inicio o configurar algo que saltaste."
 };

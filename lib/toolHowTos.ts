@@ -2381,8 +2381,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       key: 'routine',
       title: 'Run a routine from Home',
       steps: [
-        { say: 'Open the band with the name of Life, if it is closed.', mark: 'homeGroup.life', stay: true },
-        { say: 'Open the band with the name of Routines.', mark: 'homeBand.routines', stay: true },
+        { say: 'Open the band with the name of Routines, near the top of Home.', mark: 'homeBand.routines', stay: true },
         { say: 'Tap a routine to go through its steps.', mark: 'home.routine' },
       ],
       forYou: 'The steps come one after another, so nothing has to be remembered in order.',
@@ -2391,8 +2390,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       key: 'doneCheck',
       title: 'Check whether you did something',
       steps: [
-        { say: 'Open the band with the name of Life, if it is closed.', mark: 'homeGroup.life', stay: true },
-        { say: 'Open the band with the name of To Do List.', mark: 'homeBand.doneChecks', stay: true },
+        { say: 'Open the band with the name of To Do List, near the top of Home.', mark: 'homeBand.doneChecks', stay: true },
         { say: 'Read the line under each one for whether it is checked off. Tap one to open it on Life.', mark: 'home.check' },
       ],
       forYou: 'The answer to "did I already?" is on Home, so you do not have to guess.',

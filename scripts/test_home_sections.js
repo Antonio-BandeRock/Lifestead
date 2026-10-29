@@ -291,11 +291,11 @@ check('the one-time reorder aims at the menu order', HOME_GROUP_MENU_ORDER, menu
 
 // A saved order in the old group sequence takes the new one, cards inside
 // each group and the cards on their own staying where they were.
-const oldSaved = ['sharedFolderSetup', 'captureInbox', 'today', 'lowStimulation', 'scanProduct', 'logAgain', 'yourDay', 'logFlare', 'weekTrend', 'makeReport', 'gardenTasks', 'routines', 'groceryList', 'digestCards'];
+const oldSaved = ['sharedFolderSetup', 'captureInbox', 'today', 'lowStimulation', 'scanProduct', 'logAgain', 'yourDay', 'logFlare', 'weekTrend', 'makeReport', 'gardenTasks', 'groceryQuickAdd', 'groceryList', 'digestCards'];
 check(
   'an old-order save takes the new menu order',
   followNewMenuOrder(oldSaved),
-  ['sharedFolderSetup', 'captureInbox', 'today', 'routines', 'groceryList', 'scanProduct', 'logAgain', 'gardenTasks', 'yourDay', 'logFlare', 'weekTrend', 'makeReport', 'lowStimulation', 'digestCards'],
+  ['sharedFolderSetup', 'captureInbox', 'today', 'groceryQuickAdd', 'groceryList', 'scanProduct', 'logAgain', 'gardenTasks', 'yourDay', 'logFlare', 'weekTrend', 'makeReport', 'lowStimulation', 'digestCards'],
 );
 check('reading it twice changes nothing more', followNewMenuOrder(followNewMenuOrder(oldSaved)), followNewMenuOrder(oldSaved));
 const arranged = ['today', 'makeReport', 'scanProduct', 'routines'];

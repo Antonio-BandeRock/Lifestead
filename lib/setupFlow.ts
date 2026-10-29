@@ -108,7 +108,7 @@ export const SETUP_AWAY_CAPTION = 'Setting up';
 export const SETUP_AWAY_SAVED = 'Saved. Add more here if you like, or go on.';
 export const SETUP_RERUN_LABEL = 'Run Setup Again';
 export const SETUP_RERUN_LINE =
-  'Every answer is shown as it stands, one page at a time, so you can add a condition, change how Home looks or set up something you skipped.';
+  'Opens setup again with every answer as it stands, so you can add a condition, change how Home looks or set up something you skipped.';
 
 // What each control on a setup page does, shown on the first page before
 // any of them appears (direct request, 2026-10-12: "we need to explain that

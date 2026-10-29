@@ -50,6 +50,7 @@ import { TOUR_BRING_BACK_LABEL, offersTourBack, subscribeTourChanged } from '../
 import { showGuidedTour } from '../lib/guidedTourDb';
 import { currentGuideKey, guideCardLine, openGuideLabel, type GuideRecords, type GuideView } from '../lib/yourStoryGuides';
 import { SetupCardShelves } from './SetupCardShelves';
+import type { SetupCardView } from '../lib/setupCards';
 import {
   BEFORE_ANYTHING_CAPTION,
   BEFORE_ANYTHING_HEADING,
@@ -129,7 +130,10 @@ export function useStoryGo(
 type Props = {
   // tabs is the by-tab guide on its own (lib/yourStoryTabs.ts), which the
   // full page puts first; the card carries the same list.
-  mode: 'card' | 'page' | 'tabs';
+  // setup is the startup setup (components/FirstSetup.tsx, 2026-10-28):
+  // the same cards as Home, laid out as bands of their own since nothing on
+  // that screen holds them.
+  mode: 'card' | 'page' | 'tabs' | 'setup';
   view: YourStoryView | null;
   // The guides for the parts of life chosen; the card uses them to say
   // which guide the next thing belongs to.
@@ -145,9 +149,13 @@ type Props = {
   // Home passes this, since a card on Home and Home's quick-log form open in
   // place there. Anywhere else those go back to Home, which opens them.
   onHomeDestination?: (destination: Extract<StoryDestination, { kind: 'home' | 'quickLog' }>) => void;
+  // Setup opens every screen itself, so it can name what is being set up
+  // in its strip and say once it is saved.
+  goOverride?: (destination: StoryDestination) => void;
+  onCardGo?: (card: SetupCardView) => void;
 };
 
-export function YourStorySection({ mode, view, guides, interview, records, onChanged, onHomeDestination }: Props) {
+export function YourStorySection({ mode, view, guides, interview, records, onChanged, onHomeDestination, goOverride, onCardGo }: Props) {
   const router = useRouter();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   // Hide on the tour strip offers the strip back here at once.
@@ -159,7 +167,8 @@ export function YourStorySection({ mode, view, guides, interview, records, onCha
   // On the full page, sections opened by hand beyond the current one.
   const [openSections, setOpenSections] = useState<SectionKey[]>([]);
 
-  const goElsewhere = useStoryGo(mode === 'card' ? 'home' : 'page', onHomeDestination);
+  const storyGo = useStoryGo(mode === 'card' ? 'home' : 'page', onHomeDestination);
+  const goElsewhere = goOverride ?? storyGo;
   const go = useCallback(
     (destination: StoryDestination) => {
       if (destination.kind === 'beats') {
@@ -313,6 +322,30 @@ export function YourStorySection({ mode, view, guides, interview, records, onCha
           />
         ) : null}
       </>
+    );
+  }
+
+  if (mode === 'setup') {
+    const before = renderBefore();
+    return (
+      <View style={styles.page}>
+        {interview && !interview.finished ? (
+          <View style={styles.sectionCard}>
+            <YourStoryInterview mode="card" interview={interview} onChanged={onChanged} go={goElsewhere} />
+          </View>
+        ) : null}
+        {before ? <View style={styles.sectionCard}>{before}</View> : null}
+        <SetupCardShelves
+          view={view}
+          records={records ?? {}}
+          startPath={interview?.startPath ?? null}
+          go={goElsewhere}
+          explain={showInfoAlert}
+          layout="bands"
+          onCardGo={onCardGo}
+        />
+        {infoAlertElement}
+      </View>
     );
   }
 

@@ -42,6 +42,7 @@ import type { GuideRecords } from '../lib/yourStoryGuides';
 import type { ToolMark } from '../lib/toolHowTos';
 import { useWalkMark } from './WalkMark';
 import { useBringToTop } from './BringToTop';
+import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
@@ -51,6 +52,14 @@ type Props = {
   startPath: string | null;
   go: (destination: Exclude<StoryDestination, { kind: 'beats' }>) => void;
   explain: (title: string, body: string) => void;
+  // 'inBand' on Home, where the whole list sits inside the Your Guide band.
+  // 'bands' on the startup setup (2026-10-28, direct request), which is not
+  // inside anything: the heading and each tab are bands of their own, edge
+  // to edge, with nothing indented.
+  layout?: 'inBand' | 'bands';
+  // Told which card Set It Up was pressed on, in place of go, so setup can
+  // name it in its strip and say once it is saved.
+  onCardGo?: (card: SetupCardView) => void;
 };
 
 const DONE_COLOR = colors.statusGreenOnSurface;
@@ -68,6 +77,7 @@ type CardProps = {
   view: YourStoryView;
   go: Props['go'];
   explain: Props['explain'];
+  onCardGo?: Props['onCardGo'];
   // The walk marks a how-to rings, on the one card it points at.
   markCard?: ToolMark;
   markGo?: ToolMark;
@@ -79,7 +89,7 @@ type CardProps = {
 
 // One card, shared by Your Guide on Home and the What fills this in row on
 // a lens.
-export function SetupCard({ card, tabColor, width, view, go, explain, markCard, markGo, areasLabel, onNotForMe }: CardProps) {
+export function SetupCard({ card, tabColor, width, view, go, explain, onCardGo, markCard, markGo, areasLabel, onNotForMe }: CardProps) {
   const walkMark = useWalkMark();
   const done = !!card.doneOn;
   const tint = done ? DONE_COLOR : tabColor;
@@ -153,7 +163,7 @@ export function SetupCard({ card, tabColor, width, view, go, explain, markCard, 
             done ? { borderColor: tint } : { backgroundColor: tint },
             markGo && walkMark(markGo),
           ]}
-          onPress={() => go(card.def.destination)}
+          onPress={() => (onCardGo ? onCardGo(card) : go(card.def.destination))}
           accessibilityRole="button"
           accessibilityLabel={`${done ? OPEN_IT_LABEL : SET_IT_UP_LABEL}: ${card.def.title}`}
         >
@@ -185,7 +195,8 @@ function hasOpenCard(tab: SetupTabView): boolean {
   return tab.shelves.some((shelf) => shelf.openCount > 0);
 }
 
-export function SetupCardShelves({ view, records, startPath, go, explain }: Props) {
+export function SetupCardShelves({ view, records, startPath, go, explain, layout = 'inBand', onCardGo }: Props) {
+  const bands = layout === 'bands';
   const { width } = useWindowDimensions();
   const cardWidth = setupCardWidth(width);
   const tabs = buildSetupShelves(view, records, startPath);
@@ -229,6 +240,7 @@ export function SetupCardShelves({ view, records, startPath, go, explain }: Prop
                 view={view}
                 go={go}
                 explain={explain}
+                onCardGo={onCardGo}
                 markCard={markThis ? 'home.setupCards' : undefined}
                 markGo={markThis ? 'home.setupCardGo' : undefined}
               />
@@ -244,7 +256,7 @@ export function SetupCardShelves({ view, records, startPath, go, explain }: Prop
     const color = route?.color ?? colors.primary;
     const open = shownOpen === tab.def.path;
     return (
-      <View key={tab.def.path} style={[styles.tab, { borderLeftColor: color }]}>
+      <View key={tab.def.path} style={[bands ? styles.tabBand : styles.tab, { borderLeftColor: color }]}>
         <TouchableOpacity
           ref={(node) => {
             headRefs.current.set(tab.def.path, node);
@@ -269,8 +281,8 @@ export function SetupCardShelves({ view, records, startPath, go, explain }: Prop
   }
 
   return (
-    <View style={styles.wrap}>
-      <View style={styles.head}>
+    <View style={bands ? styles.wrapBands : styles.wrap}>
+      <View style={bands ? styles.headBand : styles.head}>
         <Text style={styles.heading}>{SETUP_CARDS_HEADING}</Text>
         <Text style={styles.caption}>{SETUP_CARDS_CAPTION}</Text>
       </View>
@@ -282,6 +294,9 @@ export function SetupCardShelves({ view, records, startPath, go, explain }: Prop
 const styles = StyleSheet.create({
   wrap: { gap: 16, backgroundColor: colors.surface },
   head: { gap: 2, backgroundColor: colors.surface },
+  wrapBands: { gap: HOME_BAND_GAP },
+  headBand: { ...homeBandStyle, borderColor: colors.border, gap: 2, padding: HOME_BAND_CONTENT_PADDING },
+  tabBand: { ...homeBandStyle, borderColor: colors.border, gap: 8, padding: HOME_BAND_CONTENT_PADDING },
   heading: { ...typography.sectionTitle, color: colors.textPrimary, ...textShadow },
   caption: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   tab: { gap: 8, borderLeftWidth: 3, paddingLeft: 10, backgroundColor: colors.surface },

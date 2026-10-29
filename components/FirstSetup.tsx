@@ -1,36 +1,36 @@
-// Setup before the app, 1.0.68.11, walked page by page since 1.0.68.13.
+// Setup before the app, 1.0.68.11; the Home cards since 1.0.75.10.
 //
 // 1.0.68.11, direct request: "we need to have a truly guided setup that
-// happens before the rest of the app is loaded for them". 1.0.68.13, direct
-// request: Done on a question made "that part just disappear in a flash and
-// then the screen doesn't automatically go somewhere they should be working
-// on next ... The user is taken step by step through everything they need
-// to do in the app until it is down to how to use the app."
+// happens before the rest of the app is loaded for them". From 1.0.68.13 to
+// 1.0.75.9 that was a walk, one page at a time. 2026-10-28, direct request:
+// "Replace the walk with the Home cards, on folding band per tab, but with a
+// header area above them and them not being indented since they are not on
+// the home screen. Move the option to continue to the Home screen to the top
+// inside of the Getting Set Up header."
 //
-// So setup is one walk (lib/setupFlow.ts): the interview's questions and the
-// getting-set-up items of every part of life chosen, grouped into named
-// parts. Every page says which part it is in, fades in at the top of the
-// screen, and says what was answered on the page before, with Change.
+// So setup is the same screen as Getting Set Up on Home
+// (components/YourStorySection.tsx in 'setup' mode): the interview's open
+// question while one is left, Before anything else, then a folding band per
+// tab of setup cards (components/SetupCardShelves.tsx), each band full width
+// with nothing indented. Opening a tab closes the one open before and brings
+// it to the top (components/BringToTop.tsx).
 //
-//   - Answering moves to the next page by itself. Back goes to the one
-//     before, and a page already answered has Keep this and go on.
-//   - An item opens its screen with setup set aside, and a strip above that
-//     screen names what to do there, with Back to Setup and Later. Once the
-//     record exists the strip says Saved and offers Next in setup.
-//   - Finish Later lets the person in. Setup comes back the next time the
-//     app starts, at the first thing still waiting.
-//   - Run Setup Again in Profile walks every page from the start, each
-//     showing its answer as it stands.
-//   - An item's Set it up also starts that item's guide walk
-//     (lib/storyWalk.ts), so the screen it opens shows each step with the
-//     button to press ringed. 1.0.68.14.
-//   - Once nothing is waiting, Setup is done. Start the tutorials walks
-//     every tab and lens (lib/tutorials.ts, 1.0.68.14); Open Lifestead starts
-//     the tour strip (lib/guidedTour.ts).
+//   - The header band comes first, with Finish Later at its top, which
+//     lets the person in. Setup comes back the next time the app starts
+//     while something on the walk (lib/setupFlow.ts) is still waiting.
+//   - Set It Up on a card opens its screen with setup set aside, starts the
+//     card's guide walk (lib/storyWalk.ts) so each step's button is ringed,
+//     and shows a strip above that screen naming the card, with Back to
+//     Setup. Once the card's record exists the strip says Saved.
+//   - Once nothing is waiting, the header offers Open Lifestead, which
+//     starts the tour strip (lib/guidedTour.ts), and Start the tutorials
+//     (lib/tutorials.ts), in place of Finish Later.
+//   - Run Setup Again in Profile opens it again with every answer as it
+//     stands.
 //
 // Every word and answer of a question is the interview's
-// (components/YourStoryInterview.tsx in 'setup' mode), so nothing here asks
-// twice or keeps a second record.
+// (components/YourStoryInterview.tsx), so nothing here asks twice or keeps
+// a second record.
 //
 // Mounted inside UnlockedApp so it never shows over the lock, and ahead of
 // OverlayRoot and AppKeyboard so a picker and the drawn keyboard draw over
@@ -38,44 +38,21 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Animated, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { showGuidedTour } from '../lib/guidedTourDb';
+import { cardDoneOn, type SetupCardView } from '../lib/setupCards';
 import { setStoryWalk, startStoryWalk } from '../lib/storyWalk';
 import { startTutorials } from '../lib/tutorialDb';
 import { SETUP_TUTORIALS_LABEL, SETUP_TUTORIALS_LINE } from '../lib/tutorials';
-import { GUIDES } from '../lib/yourStoryGuides';
+import { GUIDES, type GuideRecords } from '../lib/yourStoryGuides';
+import { buildSetupFlow, firstOpenStep, SETUP_AWAY_CAPTION, subscribeRunSetupAgain } from '../lib/setupFlow';
+import { HEADING_TAKING_SHAPE, type StoryDestination, type YourStoryItemKey, type YourStoryView } from '../lib/yourStory';
 import {
-  buildSetupFlow,
-  firstOpenStep,
-  PART_BY_KEY,
-  SETUP_AWAY_CAPTION,
-  SETUP_AWAY_SAVED,
-  SETUP_GO_LABEL,
-  SETUP_HOW_HEADING,
-  SETUP_HOW_LINES,
-  SETUP_KEEP_LABEL,
-  SETUP_KEEP_LINE,
-  SETUP_NEXT_LABEL,
-  SETUP_RERUN_LINE,
-  SETUP_SKIP,
-  SETUP_SKIP_LABEL,
-  stepAfter,
-  stepBefore,
-  subscribeRunSetupAgain,
-  type SetupStep,
-} from '../lib/setupFlow';
-import type { StoryDestination, YourStoryItemKey } from '../lib/yourStory';
-import { setYourStoryItemAside } from '../lib/yourStoryDb';
-import {
-  CHANGE_LABEL,
-  JUST_ANSWERED_LABEL,
-  LATER,
-  LATER_LABEL,
-  SETUP_BACK_LABEL,
+  SETUP_AWAY_SAVED_CARD,
   SETUP_DONE_HEADING,
   SETUP_DONE_LINE,
   SETUP_FINISH_LATER_LABEL,
@@ -86,26 +63,21 @@ import {
   SETUP_RETURN_LABEL,
   type InterviewView,
 } from '../lib/yourStoryInterview';
-import { loadYourStoryEverything, setYourStoryAnswer } from '../lib/yourStoryInterviewDb';
-import { answerVaultSetupNotNow } from '../lib/vaultSession';
+import { loadYourStoryEverything } from '../lib/yourStoryInterviewDb';
+import { BringToTopProvider, useBringToTopHost } from './BringToTop';
 import { goToStoryDestination } from './GuidedTourHost';
 import { GuideStripAnchor } from './GuideRoom';
 import { useStoryWalk } from './StoryWalkHost';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
-import { YourStoryInterview } from './YourStoryInterview';
+import { YourStorySection } from './YourStorySection';
 
 // Finish Later lasts until the app next starts, so it is kept here rather
 // than as an answer.
 let putOffThisRun = false;
 
-type Phase = 'reading' | 'asking' | 'away' | 'done' | 'closed';
+type Phase = 'reading' | 'asking' | 'away' | 'closed';
 
-type Destination = Exclude<StoryDestination, { kind: 'beats' }>;
-
-// Questions that open another screen and can be left until Later from it.
-const LATER_FROM_AWAY = new Set(['meds', 'backup', 'security']);
-
-// While a screen is open for an item, how often its record is looked for.
+// While a screen is open for a card, how often its record is looked for.
 const AWAY_LOOK_MS = 4000;
 
 // The guide step that sets up an item, so its screen can show the steps.
@@ -122,62 +94,38 @@ export function FirstSetup() {
   const insets = useSafeAreaInsets();
   const bottomPadding = useFloatingButtonScrollPadding();
   const [interview, setInterview] = useState<InterviewView | null>(null);
-  const [flow, setFlow] = useState<SetupStep[]>([]);
+  const [view, setView] = useState<YourStoryView | null>(null);
+  const [records, setRecords] = useState<GuideRecords>({});
+  // Nothing on the walk is waiting any more.
+  const [allDone, setAllDone] = useState(false);
   const [phase, setPhase] = useState<Phase>(putOffThisRun ? 'closed' : 'reading');
-  const [current, setCurrentState] = useState<string | null>(null);
-  const [justDone, setJustDone] = useState<string | null>(null);
+  // The card opened from setup, so the strip can name it and say once it
+  // is saved; null for anything else opened from here.
+  const [awayCard, setAwayCard] = useState<SetupCardView | null>(null);
   const walk = useStoryWalk();
   const scroller = useRef<ScrollView>(null);
-  const fade = useRef(new Animated.Value(1)).current;
-
-  const currentRef = useRef<string | null>(null);
-  // Run Setup Again: every page in turn, answered or not.
+  const frame = useRef<View>(null);
+  const { bringToTop, onScroll } = useBringToTopHost(scroller, frame);
+  // Run Setup Again shows setup even with nothing waiting.
   const reviewRef = useRef(false);
-  // The page just answered, so the next load moves on from it.
-  const advanceFrom = useRef<string | null>(null);
-  // Back from another screen: move on if what was asked there is settled.
-  const returning = useRef(false);
-
-  const setCurrent = useCallback((key: string | null) => {
-    currentRef.current = key;
-    setCurrentState(key);
-  }, []);
-
-  const nextAfter = useCallback((steps: SetupStep[], from: string): string | null => {
-    if (reviewRef.current) return stepAfter(steps, from)?.key ?? null;
-    return firstOpenStep(steps)?.key ?? null;
-  }, []);
 
   const load = useCallback(async () => {
     try {
-      const { interview: next } = await loadYourStoryEverything(false);
-      const steps = buildSetupFlow(next);
-      setInterview(next);
-      setFlow(steps);
-      const from = advanceFrom.current;
-      advanceFrom.current = null;
-      const back = returning.current;
-      returning.current = false;
-      let target = currentRef.current;
-      const shown = target ? steps.find((step) => step.key === target) : null;
-      if (from) target = nextAfter(steps, from);
-      else if (!shown) target = reviewRef.current ? (steps[0]?.key ?? null) : (firstOpenStep(steps)?.key ?? null);
-      else if (back && shown.settled) target = nextAfter(steps, shown.key);
+      const everything = await loadYourStoryEverything(false);
+      const waiting = !!firstOpenStep(buildSetupFlow(everything.interview));
+      setInterview(everything.interview);
+      setView(everything.view);
+      setRecords(everything.records);
+      setAllDone(!waiting);
       setPhase((was) => {
-        if (was === 'closed' || was === 'away') return was;
-        if (target) return 'asking';
-        // Setup is done only said when setup was shown this run.
-        return was === 'asking' ? 'done' : 'closed';
+        if (was !== 'reading') return was;
+        return waiting || reviewRef.current ? 'asking' : 'closed';
       });
-      if (target !== currentRef.current) {
-        if (from) setJustDone(from);
-        setCurrent(target);
-      }
     } catch (error) {
       console.warn('Setup: could not read what is set up', error);
       setPhase('closed');
     }
-  }, [nextAfter, setCurrent]);
+  }, []);
 
   useEffect(() => {
     if (putOffThisRun) return;
@@ -189,23 +137,12 @@ export function FirstSetup() {
       subscribeRunSetupAgain(() => {
         putOffThisRun = false;
         reviewRef.current = true;
-        advanceFrom.current = null;
-        returning.current = false;
-        setJustDone(null);
-        setCurrent(null);
+        setAwayCard(null);
         setPhase('reading');
-        void load().then(() => setPhase((was) => (was === 'reading' ? 'asking' : was)));
+        void load();
       }),
-    [load, setCurrent],
+    [load],
   );
-
-  // A new page starts at the top and fades in, so moving on is seen.
-  useEffect(() => {
-    if (!current) return;
-    scroller.current?.scrollTo({ y: 0, animated: false });
-    fade.setValue(0);
-    Animated.timing(fade, { toValue: 1, duration: 260, useNativeDriver: Platform.OS !== 'web' }).start();
-  }, [current, fade]);
 
   // While another screen is open, look for its record now and then, so
   // the strip can say Saved without the person coming back to check.
@@ -215,278 +152,144 @@ export function FirstSetup() {
     return () => clearInterval(timer);
   }, [phase, load]);
 
-  const go = useCallback(
-    (destination: Destination, item?: YourStoryItemKey, onRecord?: boolean) => {
+  const goAway = useCallback(
+    (destination: StoryDestination, card: SetupCardView | null) => {
+      if (destination.kind === 'beats') return;
+      setAwayCard(card);
       setPhase('away');
       goToStoryDestination(router, destination);
-      const walk = item ? guideWalkForItem(item) : null;
-      if (walk) startStoryWalk(walk.guide, walk.entryKey, !!onRecord);
+      const guideWalk = card?.def.item ? guideWalkForItem(card.def.item) : null;
+      if (guideWalk) startStoryWalk(guideWalk.guide, guideWalk.entryKey, !!card?.doneOn);
     },
     [router],
   );
 
-  const moveOn = useCallback(
-    (key: string) => {
-      setStoryWalk(null);
-      advanceFrom.current = key;
-      setPhase('asking');
-      void load();
-    },
-    [load],
-  );
+  const goElsewhere = useCallback((destination: StoryDestination) => goAway(destination, null), [goAway]);
+  const goCard = useCallback((card: SetupCardView) => goAway(card.def.destination, card), [goAway]);
 
-  const answer = useCallback(
-    async (step: SetupStep, value: string) => {
-      try {
-        if (step.key === 'security') answerVaultSetupNotNow();
-        await setYourStoryAnswer(step.key, value);
-      } catch (error) {
-        console.warn('Setup: could not save the answer', error);
-      }
-      moveOn(step.key);
-    },
-    [moveOn],
-  );
+  const comeBack = useCallback(() => {
+    setStoryWalk(null);
+    setAwayCard(null);
+    setPhase('asking');
+    void load();
+  }, [load]);
 
-  const onAnswered = useCallback((key: string) => {
-    advanceFrom.current = key;
+  const close = useCallback(() => {
+    reviewRef.current = false;
+    setPhase('closed');
   }, []);
 
-  // A guide walk on the same step already says what to do, at the top of
-  // the screen (1.0.75.5): the strip here then drops its own copy of the
-  // step and keeps only its buttons on one row, so the two strips do not
-  // say the same thing twice and take a third of the screen between them.
+  // A guide walk on the same card already says what to do, at the top of
+  // the screen (1.0.75.5): the strip here then drops its own copy and keeps
+  // only its button on one row.
   const walking = !!walk;
 
   if (phase === 'reading' || phase === 'closed' || !interview) return null;
 
-  const step = current ? (flow.find((entry) => entry.key === current) ?? null) : null;
-
   if (phase === 'away') {
-    // An item is saved once its record exists; a question once answered.
-    const saved = !!step && (step.kind === 'item' ? step.onRecord : step.settled);
+    const saved = !!awayCard && !!view && !!cardDoneOn(awayCard.def, view, records);
     return (
       <GuideStripAnchor slot="setup" style={styles.awayAnchor}>
         <View style={[styles.awayStrip, walking && styles.awayStripSmall]}>
           {walking ? null : <Text style={styles.caption}>{SETUP_AWAY_CAPTION}</Text>}
-          {step && !walking ? <Text style={styles.awayTitle}>{step.title}</Text> : null}
-          {saved ? <Text style={styles.caption}>{SETUP_AWAY_SAVED}</Text> : null}
+          {awayCard && !walking ? <Text style={styles.awayTitle}>{awayCard.def.title}</Text> : null}
+          {saved ? <Text style={styles.caption}>{SETUP_AWAY_SAVED_CARD}</Text> : null}
           <View style={styles.awayButtons}>
             {walking ? <Text style={styles.caption}>{SETUP_AWAY_CAPTION}</Text> : null}
-            {saved && step ? (
-              <TouchableOpacity style={styles.awayButton} accessibilityRole="button" onPress={() => moveOn(step.key)}>
-                <Text style={styles.awayButtonText}>{SETUP_NEXT_LABEL}</Text>
-                <Ionicons name="arrow-forward" size={16} color={colors.textOnButton} />
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity
-                style={styles.awayButton}
-                accessibilityRole="button"
-                onPress={() => {
-                  setStoryWalk(null);
-                  returning.current = true;
-                  setPhase('asking');
-                  void load();
-                }}
-              >
-                <Ionicons name="arrow-back" size={16} color={colors.textOnButton} />
-                <Text style={styles.awayButtonText}>{SETUP_RETURN_LABEL}</Text>
-              </TouchableOpacity>
-            )}
-            {step && !step.settled && (step.kind === 'item' || LATER_FROM_AWAY.has(step.key)) ? (
-              <TouchableOpacity style={styles.awayLater} accessibilityRole="button" onPress={() => void answer(step, LATER)}>
-                <Text style={styles.awayLaterText}>{LATER_LABEL}</Text>
-              </TouchableOpacity>
-            ) : null}
+            <TouchableOpacity style={styles.awayButton} accessibilityRole="button" onPress={comeBack}>
+              <Ionicons name="arrow-back" size={16} color={colors.textOnButton} />
+              <Text style={styles.awayButtonText}>{SETUP_RETURN_LABEL}</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </GuideStripAnchor>
     );
   }
 
-  const part = step ? PART_BY_KEY[step.part] : null;
-  const isFirst = !!step && flow[0]?.key === step.key;
-  const before = step ? stepBefore(flow, step.key) : null;
-  const last = justDone && justDone !== current ? (flow.find((entry) => entry.key === justDone) ?? null) : null;
-
-  function renderItem(item: SetupStep) {
-    const def = item.item;
-    if (!def) return null;
-    const destination = def.destination.kind === 'beats' ? null : def.destination;
-    return (
-      <View style={[styles.band, styles.bandAccent]}>
-        <Text style={styles.question}>{item.title}</Text>
-        <Text style={styles.lead}>{def.why}</Text>
-        {item.summary ? <Text style={styles.caption}>{item.summary}</Text> : null}
-        <View style={styles.links}>
-          {destination ? (
-            <TouchableOpacity style={styles.goButton} accessibilityRole="button" onPress={() => go(destination, def.key, item.onRecord)}>
-              <Text style={styles.goText}>{SETUP_GO_LABEL}</Text>
-              <Ionicons name="arrow-forward" size={16} color={colors.textOnButton} />
-            </TouchableOpacity>
-          ) : null}
-          {item.settled ? null : (
-            <>
-              <TouchableOpacity style={styles.link} accessibilityRole="button" onPress={() => void answer(item, LATER)}>
-                <Text style={styles.linkMuted}>{LATER_LABEL}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.link} accessibilityRole="button" onPress={() => void answer(item, SETUP_SKIP)}>
-                <Text style={styles.linkMuted}>{SETUP_SKIP_LABEL}</Text>
-              </TouchableOpacity>
-              {def.setAside ? (
-                <TouchableOpacity
-                  style={styles.link}
-                  accessibilityRole="button"
-                  onPress={() =>
-                    void setYourStoryItemAside(def.key)
-                      .catch((error) => console.warn('Setup: could not set the item aside', error))
-                      .then(() => moveOn(item.key))
-                  }
-                >
-                  <Text style={styles.linkMuted}>{def.setAside.label}</Text>
-                </TouchableOpacity>
-              ) : null}
-            </>
-          )}
-        </View>
-      </View>
-    );
-  }
-
   return (
     <View style={[styles.cover, { paddingTop: insets.top }]}>
-      <ScrollView
-        ref={scroller}
-        contentContainerStyle={[styles.content, { paddingBottom: bottomPadding }]}
-        keyboardShouldPersistTaps="handled"
-      >
-        {phase === 'done' || !step || !part ? (
-          <View style={[styles.band, styles.bandAccent]}>
-            <Text style={styles.heading}>{SETUP_DONE_HEADING}</Text>
-            {/* 1.0.68.14: "When the user has completed the profile settings
-                the app needs, then they are offered the tutorials". */}
-            <Text style={styles.lead}>{SETUP_TUTORIALS_LINE}</Text>
-            <TouchableOpacity
-              style={styles.goButton}
-              accessibilityRole="button"
-              onPress={() => {
-                reviewRef.current = false;
-                setPhase('closed');
-                void startTutorials({ kind: 'all' }).then((started) => {
-                  if (started) router.navigate('/');
-                });
-              }}
-            >
-              <Text style={styles.goText}>{SETUP_TUTORIALS_LABEL}</Text>
-              <Ionicons name="school-outline" size={16} color={colors.textOnButton} />
-            </TouchableOpacity>
-            <Text style={styles.lead}>{SETUP_DONE_LINE}</Text>
-            <TouchableOpacity
-              style={styles.goButton}
-              accessibilityRole="button"
-              onPress={() => {
-                reviewRef.current = false;
-                setPhase('closed');
-                void showGuidedTour();
-              }}
-            >
-              <Text style={styles.goText}>{SETUP_OPEN_APP_LABEL}</Text>
-              <Ionicons name="arrow-forward" size={16} color={colors.textOnButton} />
-            </TouchableOpacity>
-          </View>
-        ) : (
-          <Animated.View style={[styles.page, { opacity: fade }]}>
+      <View ref={frame} style={styles.frame} collapsable={false}>
+        <BringToTopProvider value={bringToTop}>
+          <ScrollView
+            ref={scroller}
+            contentContainerStyle={[styles.content, { paddingBottom: bottomPadding }]}
+            keyboardShouldPersistTaps="handled"
+            onScroll={onScroll}
+            scrollEventThrottle={16}
+          >
             <View style={[styles.band, styles.bandAccent]}>
+              {/* The way on to Home, at the top inside the header (direct
+                  request, 2026-10-28), so it is never under a long list. */}
+              {allDone ? (
+                <>
+                  <TouchableOpacity
+                    style={styles.goButton}
+                    accessibilityRole="button"
+                    onPress={() => {
+                      close();
+                      void showGuidedTour();
+                    }}
+                  >
+                    <Text style={styles.goText}>{SETUP_OPEN_APP_LABEL}</Text>
+                    <Ionicons name="arrow-forward" size={16} color={colors.textOnButton} />
+                  </TouchableOpacity>
+                  <Text style={styles.caption}>{SETUP_DONE_LINE}</Text>
+                  <TouchableOpacity
+                    style={styles.laterRow}
+                    accessibilityRole="button"
+                    onPress={() => {
+                      close();
+                      void startTutorials({ kind: 'all' }).then((started) => {
+                        if (started) router.navigate('/');
+                      });
+                    }}
+                  >
+                    <Ionicons name="school-outline" size={14} color={colors.primary} style={textShadow} />
+                    <Text style={styles.laterLabel}>{SETUP_TUTORIALS_LABEL}</Text>
+                  </TouchableOpacity>
+                  <Text style={styles.caption}>{SETUP_TUTORIALS_LINE}</Text>
+                </>
+              ) : (
+                <>
+                  <TouchableOpacity
+                    style={styles.laterRow}
+                    accessibilityRole="button"
+                    onPress={() => {
+                      putOffThisRun = true;
+                      close();
+                    }}
+                  >
+                    <Text style={styles.laterLabel}>{SETUP_FINISH_LATER_LABEL}</Text>
+                    <Ionicons name="arrow-forward" size={13} color={colors.primary} style={textShadow} />
+                  </TouchableOpacity>
+                  <Text style={styles.caption}>{SETUP_FINISH_LATER_LINE}</Text>
+                </>
+              )}
+              <View style={styles.rule} />
               <Text style={styles.caption}>{SETUP_HEADING}</Text>
-              <Text style={styles.heading}>{part.name}</Text>
-              <Text style={styles.lead}>{part.line}</Text>
-              {isFirst ? <Text style={styles.caption}>{reviewRef.current ? SETUP_RERUN_LINE : SETUP_LEAD}</Text> : null}
+              <Text style={styles.heading}>{allDone ? SETUP_DONE_HEADING : HEADING_TAKING_SHAPE}</Text>
+              <Text style={styles.lead}>{SETUP_LEAD}</Text>
             </View>
-            {/* Just under the part's heading (direct request, 2026-10-28), so
-                Back is in the same place on every page rather than under
-                however long the page happens to be. */}
-            {before ? (
-              <View style={[styles.band, styles.links]}>
-                <TouchableOpacity style={styles.link} accessibilityRole="button" onPress={() => setCurrent(before.key)}>
-                  <Ionicons name="arrow-back" size={13} color={colors.primary} style={textShadow} />
-                  <Text style={styles.linkText}>{SETUP_BACK_LABEL}</Text>
-                </TouchableOpacity>
-              </View>
-            ) : null}
-            {isFirst ? (
-              <View style={styles.band}>
-                <Text style={styles.question}>{SETUP_HOW_HEADING}</Text>
-                {SETUP_HOW_LINES.map((entry) => (
-                  <View key={entry.label} style={styles.howRow}>
-                    <Text style={styles.howLabel}>{entry.label}</Text>
-                    <Text style={styles.caption}>{entry.line}</Text>
-                  </View>
-                ))}
-              </View>
-            ) : null}
-            {last && last.settled ? (
-              <View style={[styles.band, styles.answeredRow]}>
-                <Ionicons name="checkmark-circle" size={16} color={colors.primary} style={textShadow} />
-                <View style={styles.answeredText}>
-                  <Text style={styles.caption}>
-                    {last.kind === 'question' ? `${JUST_ANSWERED_LABEL}: ${last.title}` : last.title}
-                  </Text>
-                  {last.summary ? <Text style={styles.answeredLine}>{last.summary}</Text> : null}
-                </View>
-                <TouchableOpacity style={styles.link} accessibilityRole="button" onPress={() => setCurrent(last.key)}>
-                  <Text style={styles.linkText}>{CHANGE_LABEL}</Text>
-                </TouchableOpacity>
-              </View>
-            ) : null}
-            {step.kind === 'question' ? (
-              <YourStoryInterview
-                mode="setup"
-                interview={interview}
-                showKey={step.key}
-                onAnswered={onAnswered}
-                onChanged={() => void load()}
-                go={go}
-              />
-            ) : (
-              renderItem(step)
-            )}
-            {step.settled ? (
-              <View style={styles.band}>
-                <Text style={styles.caption}>{SETUP_KEEP_LINE}</Text>
-                <TouchableOpacity style={styles.goButton} accessibilityRole="button" onPress={() => moveOn(step.key)}>
-                  <Text style={styles.goText}>{SETUP_KEEP_LABEL}</Text>
-                  <Ionicons name="arrow-forward" size={16} color={colors.textOnButton} />
-                </TouchableOpacity>
-              </View>
-            ) : null}
-          </Animated.View>
-        )}
-        {phase === 'done' || !step ? null : (
-          <View style={styles.band}>
-            <TouchableOpacity
-              style={styles.laterRow}
-              accessibilityRole="button"
-              onPress={() => {
-                putOffThisRun = true;
-                reviewRef.current = false;
-                setPhase('closed');
-              }}
-            >
-              <Text style={styles.laterLabel}>{SETUP_FINISH_LATER_LABEL}</Text>
-              <Ionicons name="arrow-forward" size={13} color={colors.primary} style={textShadow} />
-            </TouchableOpacity>
-            <Text style={styles.caption}>{SETUP_FINISH_LATER_LINE}</Text>
-          </View>
-        )}
-      </ScrollView>
+            <YourStorySection
+              mode="setup"
+              view={view}
+              interview={interview}
+              records={records}
+              onChanged={() => void load()}
+              goOverride={goElsewhere}
+              onCardGo={goCard}
+            />
+          </ScrollView>
+        </BringToTopProvider>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   cover: { ...StyleSheet.absoluteFillObject, zIndex: 999, backgroundColor: colors.background },
+  frame: { flex: 1 },
   content: { gap: HOME_BAND_GAP, paddingTop: HOME_BAND_GAP },
-  page: { gap: HOME_BAND_GAP },
   band: {
     ...homeBandStyle,
     borderColor: colors.border,
@@ -495,19 +298,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
   },
   bandAccent: { borderColor: colors.primary },
+  rule: { height: StyleSheet.hairlineWidth, backgroundColor: colors.border, marginVertical: 2 },
   heading: { ...typography.sectionTitle, color: colors.textPrimary, ...textShadow },
-  question: { ...typography.bodyEmphasis, color: colors.textPrimary, ...textShadow },
   lead: { ...typography.body, color: colors.textSecondary, ...textShadow },
   caption: { ...typography.caption, color: colors.textSecondary, ...textShadow, flexShrink: 1 },
-  links: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 16, backgroundColor: colors.surface },
-  link: { flexDirection: 'row', alignItems: 'center', gap: 4, paddingVertical: 2 },
-  linkText: { ...typography.caption, color: colors.primary, ...textShadow },
-  linkMuted: { ...typography.caption, color: colors.textMuted, ...textShadow },
-  answeredRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 8 },
-  answeredText: { flex: 1, gap: 1 },
-  howRow: { gap: 1 },
-  howLabel: { ...typography.body, color: colors.primary, ...textShadow },
-  answeredLine: { ...typography.body, color: colors.textPrimary, ...textShadow },
   laterRow: { flexDirection: 'row', alignItems: 'center', gap: 4, alignSelf: 'flex-start', paddingVertical: 2 },
   laterLabel: { ...typography.body, color: colors.primary, ...textShadow },
   goButton: {
@@ -555,6 +349,4 @@ const styles = StyleSheet.create({
     backgroundColor: colors.buttonColor,
   },
   awayButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton },
-  awayLater: { paddingVertical: 8 },
-  awayLaterText: { ...typography.body, color: colors.textMuted, ...textShadow },
 });

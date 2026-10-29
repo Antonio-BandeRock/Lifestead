@@ -403,6 +403,10 @@ export const ALL_HOME_SECTION_KEYS: HomeSectionKey[] = [
   // Capture leads, behind only the one-off folder nudge: it is the one
   // card whose whole value is being reachable before a thought is gone.
   'captureInbox',
+  // Routines and the To Do List, rows of their own since 2026-10-28 (see
+  // lib/homeSections.ts), so a day's reminders are one tap from the top.
+  'routines',
+  'doneChecks',
   // Home. 2026-09-16, direct correction: "You removed the Home group from
   // the Home screen. It should remain at the top in order of occurance in
   // the TabHub menu." Home leads TabHub’s own grid, so it leads the
@@ -411,8 +415,6 @@ export const ALL_HOME_SECTION_KEYS: HomeSectionKey[] = [
   // Life. Second since 1.0.70.1, the way it is second in TabHub.
   'groceryList',
   'groceryQuickAdd',
-  'routines',
-  'doneChecks',
   'todayPicks',
   'countdowns',
   'startWorkout',

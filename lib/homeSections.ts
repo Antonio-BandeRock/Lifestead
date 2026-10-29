@@ -128,11 +128,16 @@ export const HOME_SECTION_TAB_PATH: Record<HomeSectionKey, string | null> = {
   // still wears the colour of the tab its entry now lives on (see
   // renderDigestCards in app/(tabs)/index.tsx).
   digestCards: '/digest',
-  // Life's, 2026-09-17, alongside the Grocery List for the same reason:
-  // these are the things a day is actually run on, and Life is where both
-  // are built.
-  routines: '/life',
-  doneChecks: '/life',
+  // Top-level rows since 2026-10-28, out of the Life group they sat in
+  // from 2026-09-17. Direct request: "Reminders and Routines need a place
+  // on the Home screen. I know they are listed in the Life, and they will
+  // be available from notifications, but they should also be just as
+  // accessible on the home screen." Inside the Life group they took two
+  // taps; null makes each a row of its own, one tap, like Capture. They
+  // still wear Life's colour, since Life is where both are built
+  // (renderRoutines and renderDoneChecks in app/(tabs)/index.tsx).
+  routines: null,
+  doneChecks: null,
 };
 
 // Regroups an already-ordered list so sections from the same tab sit

@@ -4250,6 +4250,8 @@ export default function HomeScreen() {
           walkMark.ref('home.routineWayIn'),
         )}
       </View>,
+      // A row of its own since 2026-10-28, still in Life's colour.
+      { color: colors.tabLife, icon: 'footsteps' },
     );
   }
 
@@ -4433,6 +4435,8 @@ export default function HomeScreen() {
           walkMark.ref('home.checkWayIn'),
         )}
       </View>,
+      // A row of its own since 2026-10-28, still in Life's colour.
+      { color: colors.tabLife, icon: 'checkmark-done' },
     );
   }
 
