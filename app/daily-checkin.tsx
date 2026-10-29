@@ -44,6 +44,7 @@ import { SEVERITY_STEPS, severityStepLabel, stepFromTen } from '../lib/severityS
 import { VaultClosedBand } from '../components/VaultClosedBand';
 import { useOnVaultChange } from '../lib/vaultReads';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../constants/buttons';
+import { tl } from '../lib/i18n';
 
 const TAB_COLOR = colors.tabBioCompass;
 const ENERGY = scaleOf('energy');
@@ -253,7 +254,7 @@ export default function DailyCheckinScreen() {
               style={[styles.pill, active && styles.pillActive]}
               onPress={() => onPick(active ? null : n)}
             >
-              <Text style={[styles.pillText, active && styles.pillTextActive]}>{numbered ? `${n} ${word}` : word}</Text>
+              <Text style={[styles.pillText, active && styles.pillTextActive]}>{numbered ? `${n} ${tl(word)}` : word}</Text>
             </TouchableOpacity>
           );
         })}

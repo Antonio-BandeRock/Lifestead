@@ -28,6 +28,7 @@ import {
   setReminderKindEnabled,
   type ReminderKindKey,
 } from '../lib/reminderPreferences';
+import { tl } from '../lib/i18n';
 import { SNOOZE_MINUTES } from '../lib/quietHours';
 import { waitingFor, type WaitingGroup, type WaitingItem } from '../lib/waitingAnswers';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP } from './HomeSectionBand';
@@ -96,7 +97,7 @@ export function WaitingAnswersList({ groups, now, reload, tabColor, nested = fal
         return (
           <View key={group.key} style={nested ? styles.column : [band.box, styles.column]}>
             <Text style={styles.groupTitle}>
-              {group.label} ({group.items.length})
+              {tl(group.label)} ({group.items.length})
             </Text>
             {group.items.map((item, itemIndex) => {
               const isBusy = busy.has(item.identifier);

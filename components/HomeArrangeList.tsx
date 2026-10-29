@@ -102,6 +102,7 @@ import {
 } from '../lib/visualPreferences';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
 import { useWalkMark } from './WalkMark';
+import { t } from '../lib/i18n';
 
 // One row, group or card, the same height for both. Fixed rather than
 // whatever a row happened to measure, so the drag can do arithmetic on it.
@@ -484,9 +485,16 @@ export function HomeArrangeList({
               inset: false,
               caption: solo
                 ? (restingCaption?.(members[0]) ?? undefined)
-                : `${members.length} ${members.length === 1 ? 'card' : 'cards'}${
-                    hiddenCount > 0 ? `, ${hiddenCount} turned off` : ''
-                  }`,
+                : t(
+                    hiddenCount > 0
+                      ? members.length === 1
+                        ? '1 card, {hidden} turned off'
+                        : '{count} cards, {hidden} turned off'
+                      : members.length === 1
+                        ? '1 card'
+                        : '{count} cards',
+                    { count: members.length, hidden: hiddenCount },
+                  ),
               onToggleVisible:
                 solo && HOME_SECTIONS_ALWAYS_SHOWN.has(members[0])
                   ? undefined

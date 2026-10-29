@@ -49,6 +49,7 @@ import { QuickCaptureSheet } from '../components/QuickCaptureSheet';
 import { ThumbSearchButton } from '../components/ThumbSearchButton';
 import { FreshAuthHost } from '../components/FreshAuthHost';
 import { WordingEditProvider } from '../components/EditableText';
+import TranslatedHeaderTitle from '../components/TranslatedHeaderTitle';
 import { VersionLabel } from '../components/VersionLabel';
 import { VersionPreviewBar } from '../components/VersionPreviewBar';
 import { colors } from '../constants/colors';
@@ -701,6 +702,7 @@ function RootStack() {
       screenOptions={{
         headerShown: false,
         contentStyle: { backgroundColor: colors.background, paddingTop: guideRoomPadding },
+        headerTitle: (props) => <TranslatedHeaderTitle {...props} />,
       }}
     >
       {/* The tabs take the room under the Lifestead header instead, so the

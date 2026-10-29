@@ -23,6 +23,7 @@ import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { NotesInput } from './NotesInput';
 import { useWalkMark } from './WalkMark';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { tl } from '../lib/i18n';
 
 const ENERGY = scaleOf('energy');
 
@@ -84,7 +85,7 @@ export function MorningCheckin({ tabColor }: Props) {
               style={[styles.pill, active && styles.pillActive]}
               onPress={() => onPick(active ? null : n)}
             >
-              <Text style={[styles.pillText, active && styles.pillTextActive]}>{numbered ? `${n} ${word}` : word}</Text>
+              <Text style={[styles.pillText, active && styles.pillTextActive]}>{numbered ? `${n} ${tl(word)}` : word}</Text>
             </TouchableOpacity>
           );
         })}

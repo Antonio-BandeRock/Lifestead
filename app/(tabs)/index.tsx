@@ -241,7 +241,7 @@ import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { VaultClosedBand } from '../../components/VaultClosedBand';
 import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
-import { t } from '../../lib/i18n';
+import { t, tl } from '../../lib/i18n';
 import { appLocale } from '@/lib/language';
 import { BringToTopProvider, useBringToTopHost } from '../../components/BringToTop';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
@@ -3035,7 +3035,7 @@ export default function HomeScreen() {
               </Text>
               <View style={styles.reminderBody}>
                 <Text style={styles.reminderTitle} numberOfLines={1}>
-                  {prefix ? `${prefix}: ${source.title}` : source.title}
+                  {prefix ? `${tl(prefix)}: ${source.title}` : source.title}
                 </Text>
                 <Text style={styles.reminderDetail} numberOfLines={2}>
                   {detail}
@@ -4524,7 +4524,7 @@ export default function HomeScreen() {
       {
         icon: 'notifications-outline',
         color: colors.homeNoTab,
-        foldedCaption: groups.map((group) => group.label + ': ' + group.items.length).join(', '),
+        foldedCaption: groups.map((group) => tl(group.label) + ': ' + group.items.length).join(', '),
       },
     );
   }

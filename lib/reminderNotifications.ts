@@ -127,7 +127,7 @@ import { markVaultOffered, takeVaultSetUpWaiting } from './vaultSession';
 import { APP_UPDATE_NOTIFICATION_ID, updateReadyText } from './appUpdate';
 import { APP_VERSION } from '../constants/version';
 import { inAppLanguage, queuedEnglish } from './notificationWords';
-import { t } from './i18n';
+import { t, tl } from './i18n';
 
 // Local reminders: the scheduled doses in Schedules > Meds, the visits in
 // Schedules > Appointments, the meals and drinks on the schedule, the work
@@ -700,7 +700,7 @@ function buildDatedPlanned(
     // of these: the same bill speaks three days out and again on the day,
     // and they have to be able to coexist rather than replace each other.
     identifier: `${IDENTIFIER_PREFIX}${source.kind}:${source.sourceId}:${day.on}`,
-    title: prefix ? `${prefix}: ${source.title}` : source.title,
+    title: prefix ? `${tl(prefix)}: ${source.title}` : source.title,
     body: [`${pieces.join('. ')}.`, answerLine(source.kind, source.markable ?? true), `Records as of ${describeFreshness(now, fireAt)}.`]
       .filter(Boolean)
       .join(' '),

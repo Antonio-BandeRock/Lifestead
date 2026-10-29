@@ -407,6 +407,14 @@ function lookup(table: Compiled, english: string, depth: number): string | undef
   const found = exact(table.words, english) ?? table.reading[readingKey(english)] ?? foodName(table, english) ?? dateIn(table, english, depth);
   if (found !== undefined) return found;
   if (depth > 4) return undefined;
+  // A label the table holds whole, with a count after it, before any pattern
+  // gets the chance to split it: "This Morning (1)" read through "This
+  // {here}" came out "Este Mañana (1)".
+  const counted = COUNTED.exec(english);
+  if (counted && counted[1].trim()) {
+    const whole = exact(table.words, counted[1]);
+    if (whole !== undefined) return whole + counted[2];
+  }
   return byPattern(table, english, depth) ?? byPieces(table, english, depth);
 }
 
@@ -505,8 +513,12 @@ function composite(children: unknown[], language: AppLanguage): unknown[] | null
     }
   }
   if (!/[A-Za-z]/.test(key.replace(/<\/?\d+\/?>/g, ''))) return null;
-  const found = translateIn(language, key);
-  if (found === key) return null;
+  // A table entry written around a value that changes, such as a tab's name
+  // in its colour, marks the inner Text <n/>; the inner Text then translates
+  // its own words when it is drawn.
+  const bare = key.replace(/<(\d+)>[\s\S]*?<\/\1>/g, '<$1/>');
+  const found = translateIn(language, bare !== key && !hasTranslation(language, key) && hasTranslation(language, bare) ? bare : key);
+  if (found === key || found === bare) return null;
   const out: unknown[] = [];
   const tag = /<(\d+)\/>|<(\d+)>([\s\S]*?)<\/\2>/g;
   let last = 0;
