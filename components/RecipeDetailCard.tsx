@@ -49,6 +49,7 @@ import { getPhotoForTarget } from '../lib/mealPhotos';
 import { shareFileIfAvailable } from '../lib/nativeSharing';
 import { encodeShareLinkFromCuratedRecipe, writeIsFileForCuratedRecipe } from '../lib/sharing';
 import { ThumbEndRow } from './ThumbEndRow';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 // A recipe's linkedBuilderType maps onto one param per builder in
 // app/(tabs)/food.tsx (openSideRecipeId, openSaladRecipeId, and so on),
@@ -510,7 +511,7 @@ export function RecipeBuildRow({
         }}
         disabled={disabled}
       >
-        <Ionicons name="hammer-outline" size={18} color={colors.background} />
+        <Ionicons name="hammer-outline" size={18} color={colors.textOnButton} />
         <Text style={styles.buildRecipeButtonText}>{label}</Text>
       </TouchableOpacity>
       {children}
@@ -588,21 +589,12 @@ function makeRecipeStyles(tabColor: string, tabTextColor: string) {
     detailTextEmphasis: { color: tabTextColor },
     swapText: { ...typography.body, color: colors.textPrimary, lineHeight: 19, marginTop: 2, ...textShadow },
     buildRecipeButton: {
+      ...BUTTON_PRIMARY,
       flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
       gap: 8,
-      backgroundColor: tabColor,
-      borderRadius: 10,
-      paddingVertical: 12,
       marginTop: 12,
     },
-    buildRecipeButtonText: {
-      ...typography.bodyEmphasis,
-      color: colors.background,
-      textShadowColor: 'transparent',
-      textShadowRadius: 0,
-    },
+    buildRecipeButtonText: { ...BUTTON_PRIMARY_TEXT },
     buildRecipeButtonDisabled: { opacity: 0.5 },
     recipeButtonRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
     recipeButtonFlex: { flex: 1, marginTop: 0 },

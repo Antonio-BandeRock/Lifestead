@@ -16,7 +16,7 @@ import { useConfirmSheet } from '../components/ConfirmSheet';
 import { AppActionSheet } from '../components/AppActionSheet';
 import { DOSE_CONSENT_CHOICES, DOSE_CONSENT_TITLE, consentLine, doseConsentMessage } from '../lib/doseWatch';
 import { getDoseConsents, giveDoseConsent, withdrawDoseConsent, type DoseConsent } from '../lib/peerDosesDb';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { CalmBands, HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, homeBandNoHairlines, homeBandStyle } from '../components/HomeSectionBand';
@@ -82,6 +82,7 @@ import {
   sendToPartnerAsFile,
   unlinkFiles,
 } from '../lib/partnerTransfer';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // One sentence per state, so every button that can hit a not-ready mailbox
 // says the same thing about it rather than each inventing its own wording.
@@ -945,26 +946,11 @@ const styles = StyleSheet.create({
   // with it, which is why it is the quieter of the two.
   fingerprintPath: { ...typography.caption, color: colors.accent, ...textShadow },
   primaryButton: {
+    ...BUTTON_PRIMARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-    borderRadius: 10,
-    paddingVertical: 14,
   },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   // A full-width heading band on the muted surface, the same shape
   // makeTabBandStyles gives every tab's lens headings.
   headingBand: {
@@ -1051,19 +1037,20 @@ const styles = StyleSheet.create({
   },
   rowFixText: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   rowFixButton: {
-    flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6,
-    backgroundColor: colors.buttonColor, borderRadius: 10, paddingVertical: 9, paddingHorizontal: 14,
-    ...BUTTON_SHADOW,
+    ...BUTTON_PRIMARY_COMPACT,
+    flexDirection: 'row',
+    gap: 6,
   },
-  rowFixButtonText: { ...typography.caption, color: colors.textOnButton },
+  rowFixButtonText: { ...BUTTON_PRIMARY_TEXT },
   rowWarn: { ...typography.caption, color: colors.statusYellowStandalone, marginTop: 4, ...textShadow },
   partnerHint: { ...typography.caption, color: colors.textMuted, marginTop: 6, ...textShadow },
   secondaryButton: {
-    flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8,
-    backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border,
-    borderRadius: 10, paddingVertical: 12, paddingHorizontal: 16, marginTop: 8,
+    ...BUTTON_SECONDARY,
+    flexDirection: 'row',
+    gap: 8,
+    marginTop: 8,
   },
-  secondaryButtonText: { ...typography.bodyEmphasis, color: colors.textPrimary, ...textShadow },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   // Below the text, not beside it, with a line above so they read as controls
   // rather than as more of the same paragraph.
   rowActions: {

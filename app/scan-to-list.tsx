@@ -18,7 +18,7 @@ import { AppTextInput } from '../components/AppTextInput';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from '../components/HomeSectionBand';
 import { PhoneOnlyNotice } from '../components/PhoneOnlyNotice';
 import { PopoverSelect } from '../components/PopoverSelect';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { HOUSEHOLD_GROUPS } from '../constants/householdItems';
 import { textShadow, typography } from '../constants/typography';
@@ -36,6 +36,7 @@ import {
 } from '../lib/scanToList';
 import { explainNotYet } from '../lib/notYet';
 import { findHouseholdProduct, putHouseholdOnList } from '../lib/scanToListDb';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 const TAB = colors.tabLife;
 const OWN_GROUP = 'A group of your own…';
@@ -412,30 +413,17 @@ const styles = StyleSheet.create({
   amountInput: { width: 90 },
   unitInput: { flex: 1 },
   primaryButton: {
+    ...BUTTON_PRIMARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    backgroundColor: colors.buttonColor,
-    borderRadius: 12,
-    paddingVertical: 14,
-    paddingHorizontal: 18,
-    ...BUTTON_SHADOW,
   },
-  primaryButtonText: { ...typography.body, color: colors.textOnButton },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   secondaryButton: {
+    ...BUTTON_SECONDARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    backgroundColor: colors.surface,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: colors.border,
-    paddingVertical: 12,
-    paddingHorizontal: 18,
   },
-  secondaryButtonText: { ...typography.body, color: colors.textPrimary, ...textShadow },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   disabled: { opacity: 0.5 },
   inset: { marginHorizontal: HOME_BAND_CONTENT_PADDING },
   camera: { flex: 1 },

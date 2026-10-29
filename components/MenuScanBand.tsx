@@ -13,7 +13,7 @@ import { AppTextInput } from './AppTextInput';
 import { HOME_BAND_GAP, HomeSectionBand } from './HomeSectionBand';
 import { useHouseholdPeople } from './HouseholdFitBand';
 import { useInfoAlert } from './InfoAlert';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { announcePhoneOnly } from '../lib/desktop/phoneOnly';
 import { routeForDigestEntry } from '../lib/digestNavigation';
@@ -32,6 +32,7 @@ import {
 import { recognizeTextFromImage } from '../lib/ocr';
 import { flagConditionConcernsForConditions } from '../lib/scannedProductFlags';
 import { useWalkMark } from './WalkMark';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 export function MenuScanBand() {
   const walkMark = useWalkMark();
@@ -187,29 +188,17 @@ const styles = StyleSheet.create({
   caption: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   buttonRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   button: {
+    ...BUTTON_PRIMARY,
     flexDirection: 'row',
-    alignItems: 'center',
     gap: 8,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
   },
-  buttonText: { ...typography.bodyEmphasis, color: colors.textOnButton, textShadowColor: 'transparent', textShadowRadius: 0 },
+  buttonText: { ...BUTTON_PRIMARY_TEXT },
   secondaryButton: {
+    ...BUTTON_SECONDARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
   },
-  secondaryButtonText: { ...typography.bodyEmphasis, color: colors.textPrimary, ...textShadow },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   disabled: { opacity: 0.6 },
   input: {
     ...typography.body,

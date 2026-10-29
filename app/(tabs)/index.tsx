@@ -52,14 +52,7 @@ import { ProgressRing } from '../../components/ProgressRing';
 
 import { useBackgroundBottomInset } from '../../components/ScreenBackground';
 import { SwipeableTabScreen } from '../../components/SwipeableTabScreen';
-import {
-  BUTTON_SHADOW,
-  colors,
-  GAUGE_EMPTY,
-  GAUGE_OPTIMAL,
-  GAUGE_OVER_LIMIT,
-  mixHex,
-} from '../../constants/colors';
+import { colors, GAUGE_EMPTY, GAUGE_OPTIMAL, GAUGE_OVER_LIMIT, mixHex } from '../../constants/colors';
 import { getSharedFolder } from '../../lib/oneDriveFolders';
 import { announcePhoneOnly } from '../../lib/desktop/phoneOnly';
 import { useFloatingButtonScrollPadding } from '../../constants/floatingButton';
@@ -249,6 +242,7 @@ import { t } from '../../lib/i18n';
 import { appLocale } from '@/lib/language';
 import { BringToTopProvider, useBringToTopHost } from '../../components/BringToTop';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../../constants/buttons';
 
 // What Home shows that the vault can hold: check-ins and flares, the
 // morning readings, the week, pacing and the assessment banner.
@@ -5616,23 +5610,10 @@ const styles = StyleSheet.create({
   },
   modalMeta: { ...typography.body, ...textShadow, color: colors.textSecondary, marginTop: 4 },
   modalActions: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginTop: 16 },
-  primaryButton: { paddingVertical: 10, paddingHorizontal: 14, borderRadius: 8, backgroundColor: colors.buttonColor, ...BUTTON_SHADOW },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton,
-    fontWeight: '400',
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
-  secondaryButton: { paddingVertical: 10, paddingHorizontal: 14, borderRadius: 8, borderWidth: 1, borderColor: colors.border },
-  secondaryButtonText: { ...typography.bodyEmphasis, ...textShadow, color: colors.textSecondary,
-    fontWeight: '400',
-  },
+  primaryButton: { ...BUTTON_PRIMARY },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+  secondaryButton: { ...BUTTON_SECONDARY },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
 
   quickInputRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 12 },
   quickInput: {

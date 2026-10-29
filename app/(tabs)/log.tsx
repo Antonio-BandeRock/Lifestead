@@ -21,7 +21,7 @@ import { useMyItemsCategories } from '../../hooks/useMyItemsCategories';
 import { PageIdentityLabel } from '../../components/PageIdentityLabel';
 import { SwipeableTabScreen } from '../../components/SwipeableTabScreen';
 import { DailyScalesPicker } from '../../components/DailyScalesPicker';
-import { BUTTON_SHADOW, colors } from '../../constants/colors';
+import { colors } from '../../constants/colors';
 import { useFloatingButtonScrollPadding } from '../../constants/floatingButton';
 import { TherapySessionsSection } from '../../components/TherapySessionsSection';
 import { textShadow, typography } from '../../constants/typography';
@@ -185,6 +185,7 @@ import { useWalkMark } from '../../components/WalkMark';
 import type { VaultCategory } from '../../lib/vault';
 import { t, tl } from '../../lib/i18n';
 import { appLocale } from '@/lib/language';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../../constants/buttons';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -4333,24 +4334,10 @@ const styles = StyleSheet.create({
 
   },
   formActions: { flexDirection: 'row', justifyContent: 'flex-end', gap: 12, marginTop: 16 },
-  secondaryButton: { paddingVertical: 10, paddingHorizontal: 14, borderRadius: 8, borderWidth: 1, borderColor: colors.border },
-  secondaryButtonText: { ...typography.bodyEmphasis, color: TAB_COLOR,
-
-    ...textShadow,
-
-  },
-  primaryButton: { paddingVertical: 10, paddingHorizontal: 14, borderRadius: 8, backgroundColor: colors.buttonColor, ...BUTTON_SHADOW },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  secondaryButton: { ...BUTTON_SECONDARY },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
+  primaryButton: { ...BUTTON_PRIMARY },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   // Border color/width match TAB_COLOR/Home's own TAB_BORDER_WIDTH rule, 2026-07-27.
   // The table is a band whose rows carry the content inset themselves.
   table: { ...homeBandStyle, ...homeBandNoHairlines, borderColor: TAB_COLOR, overflow: 'hidden' },

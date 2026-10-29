@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors, inputBackground } from '../constants/colors';
+import { colors, inputBackground } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, homeBandNoHairlines, HomeSectionBand, homeBandStyle } from './HomeSectionBand';
 import { textShadow, typography } from '../constants/typography';
@@ -55,6 +55,7 @@ import { PopoverSelect } from './PopoverSelect';
 import { RecipeDepthReport } from './RecipeDepthReport';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // Deliberately last of the ten Food-tab builders, per this app's own build
 // order (see CLAUDE.md's Next steps) -- this is the only one that assembles
@@ -1506,11 +1507,11 @@ export function MealBuilder({
                               onPress={() => void chooseStartingPoint(row)}
                               disabled={loadingStartingPoint}
                             >
-                              <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Use the whole meal</Text>
+                              <Text style={styles.secondaryButtonText}>Use the whole meal</Text>
                             </TouchableOpacity>
                             {tickedList.length > 0 ? (
                               <TouchableOpacity
-                                style={[styles.primaryButton, { backgroundColor: colors.buttonColor, flex: 1, marginTop: 0 }]}
+                                style={[styles.primaryButton, { flex: 1, marginTop: 0 }]}
                                 onPress={() => void chooseTickedDishes()}
                                 disabled={loadingStartingPoint}
                               >
@@ -1605,13 +1606,13 @@ export function MealBuilder({
                   </View>
                 ))}
                 <TouchableOpacity
-                  style={[styles.primaryButton, { backgroundColor: colors.buttonColor, marginTop: 0 }]}
+                  style={[styles.primaryButton, { marginTop: 0 }]}
                   onPress={() => void chooseTickedDishes()}
                 >
                   <Text style={styles.primaryButtonText}>{`Use these ${tickedList.length} dish${tickedList.length === 1 ? '' : 'es'}`}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.secondaryButton, { borderColor: tabColor }]} onPress={() => setTickedDishes({})}>
-                  <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Clear the ticks</Text>
+                <TouchableOpacity style={styles.secondaryButton} onPress={() => setTickedDishes({})}>
+                  <Text style={styles.secondaryButtonText}>Clear the ticks</Text>
                 </TouchableOpacity>
               </HomeSectionBand>
             </View>
@@ -1700,7 +1701,7 @@ export function MealBuilder({
             </View>
             <TouchableOpacity
               ref={walkMark.ref('meal.continue')}
-              style={[styles.primaryButton, { backgroundColor: identityReady ? colors.buttonColor : colors.border }]}
+              style={[styles.primaryButton, { opacity: identityReady ? 1 : 0.5 }]}
               onPress={handleContinuePress}
             >
               <Text style={[styles.primaryButtonText, identityReady ? null : styles.primaryButtonTextMuted]}>Continue</Text>
@@ -1729,11 +1730,11 @@ export function MealBuilder({
             <PopoverSelect options={SHARE_PICKER_VALUES} selected={pendingAmount} onSelect={setPendingAmount} tabColor={tabColor} minWidth={80} />
             <ThumbRow primary="last" style={styles.buttonRow}>
               <TouchableOpacity style={[styles.secondaryButton, { flex: 1 }]} onPress={cancelPendingSelection}>
-                <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Cancel</Text>
+                <Text style={styles.secondaryButtonText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 ref={walkMark.ref('meal.addToMeal')}
-                style={[styles.primaryButton, { backgroundColor: colors.buttonColor, flex: 1, marginTop: 0, opacity: confirmingPending ? 0.6 : 1 }]}
+                style={[styles.primaryButton, { flex: 1, marginTop: 0, opacity: confirmingPending ? 0.6 : 1 }]}
                 onPress={() => void confirmPendingSelection()}
                 disabled={confirmingPending}
               >
@@ -1805,11 +1806,11 @@ export function MealBuilder({
             </View>
             <ThumbRow primary="last" style={styles.buttonRow}>
               <TouchableOpacity style={[styles.secondaryButton, { flex: 1 }]} onPress={cancelScheduleForLater} disabled={scheduling}>
-                <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Cancel</Text>
+                <Text style={styles.secondaryButtonText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 ref={walkMark.ref('meal.scheduleIt')}
-                style={[styles.primaryButton, { backgroundColor: colors.buttonColor, flex: 1, marginTop: 0, opacity: scheduling ? 0.6 : 1 }]}
+                style={[styles.primaryButton, { flex: 1, marginTop: 0, opacity: scheduling ? 0.6 : 1 }]}
                 onPress={confirmScheduleForLater}
                 disabled={scheduling}
               >
@@ -1886,10 +1887,10 @@ export function MealBuilder({
             </View>
             <ThumbRow primary="last" style={styles.buttonRow}>
               <TouchableOpacity style={[styles.secondaryButton, { flex: 1 }]} onPress={cancelAddToRoutine} disabled={savingToRoutine}>
-                <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Cancel</Text>
+                <Text style={styles.secondaryButtonText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={[styles.primaryButton, { backgroundColor: colors.buttonColor, flex: 1, marginTop: 0, opacity: savingToRoutine ? 0.6 : 1 }]}
+                style={[styles.primaryButton, { flex: 1, marginTop: 0, opacity: savingToRoutine ? 0.6 : 1 }]}
                 onPress={confirmAddToRoutine}
                 disabled={savingToRoutine}
               >
@@ -1995,10 +1996,10 @@ export function MealBuilder({
             </View>
             <ThumbRow primary="last" style={styles.buttonRow}>
               <TouchableOpacity style={[styles.secondaryButton, { flex: 1 }]} onPress={cancelTrialDateCorrection} disabled={correcting}>
-                <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Back</Text>
+                <Text style={styles.secondaryButtonText}>Back</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={[styles.primaryButton, { backgroundColor: colors.buttonColor, flex: 1, marginTop: 0, opacity: correcting ? 0.6 : 1 }]}
+                style={[styles.primaryButton, { flex: 1, marginTop: 0, opacity: correcting ? 0.6 : 1 }]}
                 onPress={confirmTrialDateCorrection}
                 disabled={correcting}
               >
@@ -2286,7 +2287,7 @@ export function MealBuilder({
               {computingReport ? (
                 <ActivityIndicator color={tabColor} />
               ) : (
-                <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Preview Full Report</Text>
+                <Text style={styles.secondaryButtonText}>Preview Full Report</Text>
               )}
             </TouchableOpacity>
             <TouchableOpacity
@@ -2312,7 +2313,7 @@ export function MealBuilder({
               {computingReport ? (
                 <ActivityIndicator color={tabColor} />
               ) : (
-                <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Preview Full Report</Text>
+                <Text style={styles.secondaryButtonText}>Preview Full Report</Text>
               )}
             </TouchableOpacity>
             <TouchableOpacity
@@ -2333,7 +2334,7 @@ export function MealBuilder({
                 primary action, matching how every other builder's own
                 single real "finish" action is the filled button. */}
             <TouchableOpacity ref={walkMark.ref('meal.schedule')} style={[styles.secondaryButton, styles.scheduleButton]} onPress={openScheduleForLater}>
-              <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Save &amp; Schedule for Later</Text>
+              <Text style={styles.secondaryButtonText}>Save &amp; Schedule for Later</Text>
             </TouchableOpacity>
             {/* "Add to My Hydration Routine," 2026-08-26 -- see the state
                 block above for the full reasoning. Beverage-only: this is
@@ -2342,7 +2343,7 @@ export function MealBuilder({
                 feature. */}
             {mealType === 'beverage' ? (
               <TouchableOpacity style={[styles.secondaryButton, styles.scheduleButton]} onPress={openAddToRoutine}>
-                <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Add to My Hydration Routine</Text>
+                <Text style={styles.secondaryButtonText}>Add to My Hydration Routine</Text>
               </TouchableOpacity>
             ) : null}
           </>
@@ -2415,36 +2416,11 @@ const styles = StyleSheet.create({
   // A selected pill fills with the tab colour and its label goes dark; dark
   // text never carries a shadow (scripts/audit_dark_text_shadow.js).
   typePillTextActive: { color: colors.textOnPrimary, textShadowColor: 'transparent', textShadowRadius: 0 },
-  primaryButton: {
-    borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    alignItems: 'center',
-    marginTop: 16,
-    ...BUTTON_SHADOW,
-  },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  primaryButton: { ...BUTTON_PRIMARY, marginTop: 16 },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   primaryButtonTextMuted: { color: colors.textMuted },
-  secondaryButton: {
-    borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    alignItems: 'center',
-    marginTop: 16,
-    // Filled so its label is not sitting on the photo background.
-    backgroundColor: colors.surface,
-  },
-  secondaryButtonText: { ...typography.bodyEmphasis, ...textShadow },
+  secondaryButton: { ...BUTTON_SECONDARY, marginTop: 16 },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   reportPreviewButton: { borderWidth: 2 },
   buttonRow: { flexDirection: 'row', gap: 10, marginTop: 4 },
   // 2026-08-08 -- renderFavoriteToggle's own row, same shape as every

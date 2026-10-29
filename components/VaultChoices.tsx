@@ -35,6 +35,7 @@ import {
 } from '../lib/vaultSession';
 import { ChoosePasscode } from './AppLockGate';
 import { VaultOpener } from './VaultOpener';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 const GROUPS: { key: 'health' | 'money'; title: string }[] = [
   { key: 'health', title: 'Health' },
@@ -231,19 +232,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
   },
   askText: { ...typography.body, color: colors.textPrimary, ...textShadow },
-  button: {
-    backgroundColor: colors.primary,
-    borderRadius: 12,
-    paddingVertical: 12,
-    alignItems: 'center',
-    marginTop: 14,
-  },
-  buttonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnPrimary,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  button: { ...BUTTON_PRIMARY, marginTop: 14 },
+  buttonText: { ...BUTTON_PRIMARY_TEXT },
   quietButton: {
     backgroundColor: colors.surface,
     borderWidth: 1,

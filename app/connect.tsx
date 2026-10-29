@@ -19,7 +19,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import {
@@ -39,6 +39,7 @@ import { computeKeyFingerprint, getDeviceIdentity } from '../lib/deviceIdentity'
 import { SHARE_SCOPES, defaultGrantsForRole, type ShareGrants } from '../lib/partners';
 import { canEncryptTo } from '../lib/partnerCrypto';
 import { confirmItsYou } from '../lib/freshAuth';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 type Status = 'checking' | 'preview' | 'self-invite' | 'already-connected' | 'accepting' | 'accepted' | 'error';
 
@@ -468,33 +469,12 @@ const styles = StyleSheet.create({
   actionButton: { flex: 1 },
   doneButton: { marginTop: 4, width: '100%' },
   primaryButton: {
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    alignItems: 'center',
+    ...BUTTON_PRIMARY,
     marginTop: 8,
     width: '100%',
   },
   primaryButtonDisabled: { opacity: 0.6 },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton, textAlign: 'center',
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
-  secondaryButton: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 10,
-    paddingVertical: 12,
-    alignItems: 'center',
-  },
-  secondaryButtonText: { ...typography.bodyEmphasis, color: colors.textSecondary, ...textShadow },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+  secondaryButton: { ...BUTTON_SECONDARY },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
 });

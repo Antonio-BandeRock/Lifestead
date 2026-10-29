@@ -12,13 +12,14 @@ import { useEffect, useState } from 'react';
 import { Linking, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppTextInput } from './AppTextInput';
 import { RecordPhotos } from './RecordPhotos';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { saveTreatmentContacts, saveTreatmentSupply, type TreatmentDetails } from '../lib/medDetailsDb';
 import { dialable, type SupplyReading } from '../lib/medSupply';
 import { textNumber } from '../lib/phoneReach';
 import { CAN_PICK_CONTACTS, pickContact } from '../lib/contactPick';
 import { ThumbRow } from './ThumbRow';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 type Props = {
   treatmentId: string;
@@ -295,22 +296,10 @@ function makeStyles(tabColor: string) {
     label: { ...typography.label, color: tabColor, marginBottom: 6, marginTop: 10, ...textShadow },
     numberInput: { width: 88 },
     panel: { gap: 14, marginTop: 12 },
-    primaryButton: { paddingVertical: 10, paddingHorizontal: 14, borderRadius: 8, backgroundColor: colors.buttonColor, ...BUTTON_SHADOW },
-    primaryButtonText: {
-      ...typography.bodyEmphasis,
-      color: colors.textOnButton,
-      textShadowColor: 'transparent',
-      textShadowRadius: 0,
-    },
-    secondaryButton: {
-      paddingVertical: 10,
-      paddingHorizontal: 14,
-      borderRadius: 8,
-      borderWidth: 1,
-      borderColor: colors.border,
-      backgroundColor: colors.surface,
-    },
-    secondaryButtonText: { ...typography.bodyEmphasis, color: tabColor, ...textShadow },
+    primaryButton: { ...BUTTON_PRIMARY },
+    primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+    secondaryButton: { ...BUTTON_SECONDARY },
+    secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
     section: { gap: 2 },
     smallButton: {
       paddingVertical: 6,

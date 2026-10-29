@@ -1,7 +1,7 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useBandFolds } from '../hooks/useBandFolds';
 import {
@@ -51,6 +51,7 @@ import { makeTabBandStyles, TabBand } from './TabBand';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
 import { t, tl } from '../lib/i18n';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 // Compost, a lens of Garden.
 //
@@ -247,7 +248,7 @@ export function CompostLens({
             </View>
             {startError ? <Text style={styles.errorText}>{startError}</Text> : null}
             <ThumbRow primary="first" style={styles.actionRow}>
-              <TouchableOpacity ref={walkMark.ref('compost.startIt')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleStart}>
+              <TouchableOpacity ref={walkMark.ref('compost.startIt')} style={styles.primaryButton} onPress={handleStart}>
                 <Text style={styles.primaryButtonText}>Start It</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setStarting(false)}>
@@ -263,7 +264,7 @@ export function CompostLens({
               bought for it is set against what the garden gives back.
             </Text>
             <View style={styles.actionRow}>
-              <TouchableOpacity ref={walkMark.ref('compost.start')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={() => setStarting(true)}>
+              <TouchableOpacity ref={walkMark.ref('compost.start')} style={styles.primaryButton} onPress={() => setStarting(true)}>
                 <Text style={styles.primaryButtonText}>+ Start a Pile</Text>
               </TouchableOpacity>
               <TouchableOpacity ref={walkMark.ref('compost.read')} onPress={() => onReadAboutComposting('garden-composting-at-home')}>
@@ -660,7 +661,7 @@ function PileBand({
 
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
             <ThumbRow primary="first" style={styles.actionRow}>
-              <TouchableOpacity ref={walkMark.ref('compost.save')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSaveEvent}>
+              <TouchableOpacity ref={walkMark.ref('compost.save')} style={styles.primaryButton} onPress={handleSaveEvent}>
                 <Text style={styles.primaryButtonText}>Save</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={reset}>
@@ -779,13 +780,8 @@ const styles = StyleSheet.create({
   row: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12 },
   rowText: { flex: 1, gap: 2 },
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4 },
-  primaryButton: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', ...BUTTON_SHADOW },
-  primaryButtonText: {
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
 });

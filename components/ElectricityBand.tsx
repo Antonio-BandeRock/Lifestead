@@ -17,7 +17,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import type { useBandFolds } from '../hooks/useBandFolds';
 import { recordGrowingCost } from '../lib/gardenMoneyDb';
@@ -37,6 +37,7 @@ import { PopoverSelect } from './PopoverSelect';
 import { TabBand } from './TabBand';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 type Folds = ReturnType<typeof useBandFolds>;
 
@@ -216,7 +217,7 @@ export function ElectricityBand({ folds, plotOptions, noPlotValue, groupPrefix, 
             </TouchableOpacity>
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
             <ThumbRow primary="first" style={styles.actionRow}>
-              <TouchableOpacity ref={walkMark.ref('costs.saveBill')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSave}>
+              <TouchableOpacity ref={walkMark.ref('costs.saveBill')} style={styles.primaryButton} onPress={handleSave}>
                 <Text style={styles.primaryButtonText}>Save Bill</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => { setAdding(false); setError(null); }}>
@@ -226,7 +227,7 @@ export function ElectricityBand({ folds, plotOptions, noPlotValue, groupPrefix, 
           </View>
         ) : (
           <View style={styles.actionRow}>
-            <TouchableOpacity ref={walkMark.ref('costs.bill')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={() => setAdding(true)}>
+            <TouchableOpacity ref={walkMark.ref('costs.bill')} style={styles.primaryButton} onPress={() => setAdding(true)}>
               <Text style={styles.primaryButtonText}>+ Add a Bill</Text>
             </TouchableOpacity>
             {comparison.extraPerMonth !== null && comparison.extraPerMonth > 0 && !recording ? (
@@ -252,7 +253,7 @@ export function ElectricityBand({ folds, plotOptions, noPlotValue, groupPrefix, 
             </View>
             {recordError ? <Text style={styles.errorText}>{recordError}</Text> : null}
             <ThumbRow primary="first" style={styles.actionRow}>
-              <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleRecord}>
+              <TouchableOpacity style={styles.primaryButton} onPress={handleRecord}>
                 <Text style={styles.primaryButtonText}>Record</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setRecording(false)}>
@@ -289,13 +290,8 @@ const styles = StyleSheet.create({
   pillTextActive: { color: colors.textOnButton },
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4, flexWrap: 'wrap' },
   nestedForm: { gap: 8, paddingLeft: 10, borderLeftWidth: 2, borderLeftColor: TAB_COLOR, marginVertical: 4 },
-  primaryButton: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', ...BUTTON_SHADOW },
-  primaryButtonText: {
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
 });

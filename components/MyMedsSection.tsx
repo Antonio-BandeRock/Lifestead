@@ -14,7 +14,7 @@ import { PopoverSelect } from './PopoverSelect';
 import { WhyExplainer } from './WhyExplainer';
 import { RuleSeverityTag } from './RuleSeverityTag';
 import { MedDetailsPanel } from './MedDetailsPanel';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useBandFolds } from '../hooks/useBandFolds';
 import { getTreatmentIdsWithLabels } from '../lib/medicineLabelDb';
@@ -64,6 +64,7 @@ import { useCategoryClosed } from '../lib/vaultSession';
 import { explainNotYet } from '../lib/notYet';
 import { matchSupplementForm, readSpokenSupplementLabel } from '../lib/spokenSupplement';
 import { t, tl } from '../lib/i18n';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // My Meds, the registry of everything a person takes: prescriptions, OTC
 // drugs and supplements, each with its dose, form, timing rules, interactions
@@ -1211,15 +1212,8 @@ function makeStyles(tabColor: string, calm: boolean = false) {
     actionText: { ...typography.captionEmphasis, color: tabColor, ...textShadow },
     actionTextPrimary: { ...typography.captionEmphasis, color: colors.primary, ...textShadow },
     actionTextRemove: { ...typography.captionEmphasis, color: colors.danger, ...textShadow },
-    addButton: {
-      borderWidth: 1,
-      borderColor: colors.primary,
-      borderRadius: 10,
-      paddingVertical: 12,
-      alignItems: 'center',
-      backgroundColor: colors.surface,
-    },
-    addButtonText: { ...typography.bodyEmphasis, color: colors.primary, ...textShadow },
+    addButton: { ...BUTTON_PRIMARY, flexGrow: 1 },
+    addButtonText: { ...BUTTON_PRIMARY_TEXT },
     bandBox: {
       ...homeBandStyle,
       ...edges,
@@ -1283,17 +1277,8 @@ function makeStyles(tabColor: string, calm: boolean = false) {
       padding: 12,
     },
     myMedsResearchLabel: { ...typography.captionEmphasis, color: tabColor, marginTop: 4, ...textShadow },
-    primaryButton: { paddingVertical: 10, paddingHorizontal: 14, borderRadius: 8, backgroundColor: colors.buttonColor, ...BUTTON_SHADOW },
-    primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton,
-
-      // Dark text: cancel any shadow inherited from a base style it is
-
-      // composed with. See constants/typography.ts.
-
-      textShadowColor: 'transparent',
-
-      textShadowRadius: 0,
-    },
+    primaryButton: { ...BUTTON_PRIMARY },
+    primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
     row: {
       borderRadius: 10,
       backgroundColor: colors.surfaceMuted,
@@ -1302,8 +1287,8 @@ function makeStyles(tabColor: string, calm: boolean = false) {
     rowMeta: { ...typography.caption, color: tabColor, marginTop: 2, ...textShadow },
     rowTextCol: { flex: 1 },
     rowTitle: { ...typography.label, color: tabColor, ...textShadow },
-    secondaryButton: { paddingVertical: 10, paddingHorizontal: 14, borderRadius: 8, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.surface },
-    secondaryButtonText: { ...typography.bodyEmphasis, color: tabColor, ...textShadow },
+    secondaryButton: { ...BUTTON_SECONDARY },
+    secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
     supplementRowActions: { flexDirection: 'row', gap: 16, marginTop: 10 },
     table: { gap: bandGap },
     timeInput: { width: 56, textAlign: 'center' },

@@ -7,7 +7,7 @@ import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
 import { TabBand, useTabBandStyles } from './TabBand';
 import { useBandFolds } from '../hooks/useBandFolds';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { getTrackedConditionsWithNames } from '../lib/foodPersonalization';
 import {
@@ -39,6 +39,7 @@ import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { useWalkMark } from './WalkMark';
 import { t } from '../lib/i18n';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // The health-money half of Finances, 2026-09-05. Pulled into its own
 // component rather than added to app/(tabs)/life.tsx because it is a
@@ -564,16 +565,10 @@ function makeStyles(tabColor: string) {
     actionTextRemove: { ...typography.caption, color: colors.danger, ...textShadow },
 
     formActions: { flexDirection: 'row', gap: 10, marginTop: 16 },
-    primaryButton: {
-      backgroundColor: colors.buttonColor, borderRadius: 10, paddingVertical: 12, paddingHorizontal: 18,
-      alignItems: 'center', marginTop: 12, ...BUTTON_SHADOW,
-    },
-    primaryButtonText: { ...typography.body, color: colors.textOnButton, textShadowColor: 'transparent', textShadowRadius: 0 },
-    secondaryButton: {
-      backgroundColor: colors.surface, borderRadius: 10, borderWidth: 1, borderColor: colors.border,
-      paddingVertical: 12, paddingHorizontal: 18, alignItems: 'center', marginTop: 12,
-    },
-    secondaryButtonText: { ...typography.body, color: colors.textPrimary, ...textShadow },
+    primaryButton: { ...BUTTON_PRIMARY, marginTop: 12 },
+    primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+    secondaryButton: { ...BUTTON_SECONDARY, marginTop: 12 },
+    secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
     pillSmall: {
       backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border, borderRadius: 999,
       paddingHorizontal: 12, paddingVertical: 8,

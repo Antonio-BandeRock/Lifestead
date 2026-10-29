@@ -22,7 +22,7 @@ import { AppTextInput } from "../components/AppTextInput";
 import { ChoosePasscode } from "../components/AppLockGate";
 import { ConfirmItsYou } from "../components/ConfirmItsYou";
 import { HOME_BAND_GAP } from "../components/HomeSectionBand";
-import { BUTTON_SHADOW, colors } from "../constants/colors";
+import { colors } from "../constants/colors";
 import { textShadow, typography } from "../constants/typography";
 import {
   groupMatches,
@@ -48,6 +48,7 @@ import { restartApp } from "../lib/restartApp";
 import { wording } from "../lib/playfulCopy";
 import { usePlayfulWording } from "../hooks/usePlayfulWording";
 import { appLocale } from '@/lib/language';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 type Mode = "setup" | "passcode" | "recovery" | "biometric" | "off";
 
@@ -631,36 +632,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 8,
   },
-  primaryButton: {
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    alignItems: "center",
-    width: "100%",
-  },
-  primaryButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnButton,
-    textAlign: "center",
-    textShadowColor: "transparent",
-    textShadowRadius: 0,
-  },
-  secondaryButton: {
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    alignItems: "center",
-    width: "100%",
-  },
-  secondaryButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textSecondary,
-    ...textShadow,
-  },
+  primaryButton: { ...BUTTON_PRIMARY, width: "100%" },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+  secondaryButton: { ...BUTTON_SECONDARY, width: "100%" },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   disabled: { opacity: 0.5 },
 });

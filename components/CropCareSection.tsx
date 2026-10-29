@@ -8,7 +8,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import {
   CARE_INTRO,
@@ -34,6 +34,7 @@ import { dateLabel } from '../lib/moonSky';
 import { dateKey } from '../lib/plainDate';
 import { AppTextInput } from './AppTextInput';
 import { ThumbEndRow } from './ThumbEndRow';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 const TAB_COLOR = colors.tabGarden;
 
@@ -209,7 +210,7 @@ export function CropCareSection({ plantingId, plotId, status, guide, expectedHar
                   {error ? <Text style={styles.errorText}>{error}</Text> : null}
                   {added ? <Text style={styles.captionText}>{added}</Text> : null}
                   <TouchableOpacity
-                    style={[styles.primaryButton, { backgroundColor: colors.buttonColor }, tickedCount === 0 || busy ? styles.disabled : null]}
+                    style={[styles.primaryButton, tickedCount === 0 || busy ? styles.disabled : null]}
                     onPress={handleAdd}
                     disabled={tickedCount === 0 || busy}
                     accessibilityRole="button"
@@ -257,12 +258,7 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
   },
   daysInput: { width: 70 },
-  primaryButton: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', alignSelf: 'flex-start', ...BUTTON_SHADOW },
-  primaryButtonText: {
-    ...typography.body,
-    color: colors.textOnButton,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   disabled: { opacity: 0.5 },
 });

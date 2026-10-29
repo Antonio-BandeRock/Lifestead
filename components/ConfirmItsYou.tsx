@@ -11,6 +11,7 @@ import {
   unlockWithBiometric,
 } from "../lib/appLockDevice";
 import { PasscodeEntry } from "./PasscodeEntry";
+import { BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // Asking for the passcode, or the fingerprint or face, when the app is
 // already open: before App Lock settings change, before the lock is turned
@@ -162,19 +163,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     ...textShadow,
   },
-  secondaryButton: {
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    alignItems: "center",
-    width: "100%",
-  },
-  secondaryButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textSecondary,
-    ...textShadow,
-  },
+  secondaryButton: { ...BUTTON_SECONDARY, width: "100%" },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
 });

@@ -70,6 +70,7 @@ import { wording } from '../lib/playfulCopy';
 import { useKeyboardLift } from './KeyboardLift';
 import { ThumbRow } from './ThumbRow';
 import { HorizontalScroll } from './HorizontalScroll';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 type Open = {
   tab: string | null;
@@ -573,11 +574,6 @@ const styles = StyleSheet.create({
   buttonRow: { flexDirection: 'row', gap: 12, marginTop: 14, justifyContent: 'flex-start' },
   cancelButton: { paddingHorizontal: 16, paddingVertical: 10 },
   cancelButtonText: { ...typography.bodyEmphasis, color: colors.textSecondary, ...textShadow },
-  okButton: { paddingHorizontal: 24, paddingVertical: 10, borderRadius: 8, backgroundColor: colors.primary },
-  okButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnPrimary,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  okButton: { ...BUTTON_PRIMARY },
+  okButtonText: { ...BUTTON_PRIMARY_TEXT },
 });

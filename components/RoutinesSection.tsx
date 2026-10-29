@@ -11,7 +11,7 @@ import { KeepRemindingPicker } from './KeepRemindingPicker';
 import { StarterLists } from './StarterLists';
 import { TabBand, useTabBandStyles } from './TabBand';
 import { useBandFolds } from '../hooks/useBandFolds';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import {
   cleanReminderTime,
@@ -64,6 +64,7 @@ import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { useWalkMark } from './WalkMark';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // Routines: an order you do not want to hold in your head.
 //
@@ -897,15 +898,9 @@ function makeStyles(tabColor: string) {
     actionTextRemove: { ...typography.caption, color: colors.danger, ...textShadow },
 
     formActions: { flexDirection: 'row', gap: 10, marginTop: 16 },
-    primaryButton: {
-      backgroundColor: colors.buttonColor, borderRadius: 10, paddingVertical: 12, paddingHorizontal: 18,
-      alignItems: 'center', marginTop: 12, ...BUTTON_SHADOW,
-    },
-    primaryButtonText: { ...typography.body, color: colors.textOnButton, textShadowColor: 'transparent', textShadowRadius: 0 },
-    secondaryButton: {
-      backgroundColor: colors.surface, borderRadius: 10, borderWidth: 1, borderColor: colors.border,
-      paddingVertical: 12, paddingHorizontal: 18, alignItems: 'center', marginTop: 12,
-    },
-    secondaryButtonText: { ...typography.body, color: colors.textPrimary, ...textShadow },
+    primaryButton: { ...BUTTON_PRIMARY, marginTop: 12 },
+    primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+    secondaryButton: { ...BUTTON_SECONDARY, marginTop: 12 },
+    secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   });
 }

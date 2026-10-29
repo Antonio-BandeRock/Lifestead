@@ -27,6 +27,7 @@ import {
   writeIsFileForMeal,
 } from '../lib/sharing';
 import { buildTime24, formatTime12 } from '../lib/timeOfDay';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 // 2026-08-15, Schedule/Share actions for a person's saved and favorited
 // recipes, direct request: "All items should be available to be added to
@@ -524,21 +525,12 @@ function makeActionStyles(tabColor: string, tabTextColor: string) {
       textShadowRadius: 0,
     },
     confirmButton: {
+      ...BUTTON_PRIMARY,
       flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
       gap: 8,
-      backgroundColor: tabColor,
-      borderRadius: 10,
-      paddingVertical: 12,
       marginTop: 12,
     },
-    confirmButtonText: {
-      ...typography.bodyEmphasis,
-      color: colors.background,
-      textShadowColor: 'transparent',
-      textShadowRadius: 0,
-    },
+    confirmButtonText: { ...BUTTON_PRIMARY_TEXT },
     confirmButtonDisabled: { opacity: 0.5 },
   });
 }

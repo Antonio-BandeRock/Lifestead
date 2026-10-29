@@ -16,7 +16,7 @@ import { AppActionSheet } from '../components/AppActionSheet';
 import { AppTextInput } from '../components/AppTextInput';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from '../components/HomeSectionBand';
 import { PopoverSelect } from '../components/PopoverSelect';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import {
@@ -44,6 +44,7 @@ import {
 } from '../lib/groceryDb';
 import { explainNotYet } from '../lib/notYet';
 import { ThumbEndRow } from '../components/ThumbEndRow';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 const OWN_HEADING = '__own_heading__';
 
@@ -470,19 +471,8 @@ const styles = StyleSheet.create({
     padding: 12,
     ...textShadow,
   },
-  smallButton: {
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderRadius: 10,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-  },
-  smallButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnButton,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  smallButton: { ...BUTTON_PRIMARY },
+  smallButtonText: { ...BUTTON_PRIMARY_TEXT },
   textButton: { flexDirection: 'row', alignItems: 'center', gap: 6, alignSelf: 'flex-start', paddingVertical: 6 },
   textButtonLabel: { ...typography.body, ...textShadow },
   aisleWrap: {

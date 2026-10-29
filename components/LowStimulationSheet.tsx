@@ -22,6 +22,7 @@ import { LOW_STIMULATION_INTRO, LOW_STIMULATION_PARTS } from '../lib/lowStimulat
 import { subscribeQuickAccess } from '../lib/quickAccess';
 import { modalAnimationType, setLowStimulation } from '../lib/visualPreferences';
 import { cardHeightFor } from './LensHub';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 export function LowStimulationSheet() {
   const prefs = useVisualPreferences();
@@ -109,19 +110,8 @@ const styles = StyleSheet.create({
   partTitle: { ...typography.bodyEmphasis, fontWeight: '400', color: colors.textPrimary, ...textShadow },
   body: { ...typography.body, color: colors.textSecondary, ...textShadow },
   buttons: { flexDirection: 'row', gap: 10, marginTop: 10 },
-  button: {
-    flex: 1,
-    backgroundColor: colors.primary,
-    borderRadius: 12,
-    paddingVertical: 12,
-    alignItems: 'center',
-  },
-  buttonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnPrimary,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  button: { ...BUTTON_PRIMARY, flex: 1 },
+  buttonText: { ...BUTTON_PRIMARY_TEXT },
   quietButton: {
     flex: 1,
     backgroundColor: colors.surface,

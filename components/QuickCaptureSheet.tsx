@@ -47,6 +47,7 @@ import { explainNotYet } from '../lib/notYet';
 import { subscribeQuickAccess } from '../lib/quickAccess';
 import { useInfoAlert } from './InfoAlert';
 import { ThumbRow } from './ThumbRow';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 const GAP_ABOVE_FOOTER = 8;
 
@@ -402,15 +403,8 @@ const styles = StyleSheet.create({
   suggestionText: { ...typography.caption, color: colors.textPrimary, flexShrink: 1, ...textShadow },
   offerRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   actions: { flexDirection: 'row', gap: 12, marginTop: 4 },
-  primaryButton: { paddingVertical: 10, paddingHorizontal: 18, borderRadius: 10, backgroundColor: colors.primary },
-  primaryText: { ...typography.bodyEmphasis, color: colors.textOnPrimary, fontWeight: '400' },
-  secondaryButton: {
-    paddingVertical: 10,
-    paddingHorizontal: 18,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-  },
-  secondaryText: { ...typography.bodyEmphasis, color: colors.textPrimary, fontWeight: '400', ...textShadow },
+  primaryButton: { ...BUTTON_PRIMARY },
+  primaryText: { ...BUTTON_PRIMARY_TEXT },
+  secondaryButton: { ...BUTTON_SECONDARY },
+  secondaryText: { ...BUTTON_SECONDARY_TEXT },
 });

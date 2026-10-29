@@ -7,7 +7,7 @@ import { useConfirmSheet } from '../components/ConfirmSheet';
 import { useInfoAlert } from '../components/InfoAlert';
 import { PopoverSelect } from '../components/PopoverSelect';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from '../components/HomeSectionBand';
 import {
@@ -28,6 +28,7 @@ import {
 } from '../lib/db';
 import { parseAmountValue } from '../lib/measurement';
 import { ThumbRow } from '../components/ThumbRow';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // The Fermentation Tracker, 2026-08-20 -- "a tracker for the entire
 // process... with triggers and reminders for keeping the fermentation
@@ -317,8 +318,8 @@ export default function FermentationTrackerScreen() {
               </Text>
 
               {batch.stage === 'primary' || batch.stage === 'carbonating' ? (
-                <TouchableOpacity style={[styles.secondaryButton, { borderColor: colors.tabFood }]} onPress={() => handleAdvance(batch)}>
-                  <Text style={[styles.secondaryButtonText, { color: colors.tabFood }]}>{NEXT_STAGE_BUTTON_LABEL[batch.stage]}</Text>
+                <TouchableOpacity style={styles.secondaryButton} onPress={() => handleAdvance(batch)}>
+                  <Text style={styles.secondaryButtonText}>{NEXT_STAGE_BUTTON_LABEL[batch.stage]}</Text>
                 </TouchableOpacity>
               ) : null}
 
@@ -411,7 +412,7 @@ export default function FermentationTrackerScreen() {
                         keyboardType="decimal-pad"
                       />
                       <TouchableOpacity style={[styles.secondaryButton, styles.harvestFormButton, { borderColor: colors.tabFood }]} onPress={() => handleLogGlass(harvest)}>
-                        <Text style={[styles.secondaryButtonText, { color: colors.tabFood }]}>Log a Glass</Text>
+                        <Text style={styles.secondaryButtonText}>Log a Glass</Text>
                       </TouchableOpacity>
                     </View>
                     <TouchableOpacity style={styles.secondaryButton} onPress={() => handleMarkEmpty(harvest)}>
@@ -460,39 +461,19 @@ const styles = StyleSheet.create({
   // A button standing between bands keeps the bands' content inset.
   inset: { marginHorizontal: HOME_BAND_CONTENT_PADDING },
   primaryButton: {
+    ...BUTTON_PRIMARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-    borderRadius: 10,
-    paddingVertical: 12,
     marginTop: 4,
   },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   secondaryButton: {
+    ...BUTTON_SECONDARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 10,
-    paddingVertical: 12,
     marginTop: 4,
   },
-  secondaryButtonText: { ...typography.bodyEmphasis, color: colors.textSecondary, ...textShadow },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   harvestForm: { gap: 8, marginTop: 4 },
   harvestFormRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   harvestFormButton: { flex: 1, marginTop: 0 },

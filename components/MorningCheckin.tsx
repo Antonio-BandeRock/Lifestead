@@ -8,7 +8,7 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { scaleOf } from '../lib/dailyScales';
 import {
@@ -22,6 +22,7 @@ import { getMorningCheckin, getMorningInputs, saveMorningCheckin, type MorningRe
 import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { NotesInput } from './NotesInput';
 import { useWalkMark } from './WalkMark';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 const ENERGY = scaleOf('energy');
 
@@ -138,7 +139,7 @@ export function MorningCheckin({ tabColor }: Props) {
           />
           <TouchableOpacity
             ref={walkMark.ref('home.morningSave')}
-            style={[styles.button, { backgroundColor: colors.buttonColor }, (!answered || saving) && styles.buttonDisabled]}
+            style={[styles.button, (!answered || saving) && styles.buttonDisabled]}
             onPress={save}
             disabled={!answered || saving}
           >
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
     minHeight: 44,
   },
-  button: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', alignSelf: 'flex-start', ...BUTTON_SHADOW },
+  button: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
   buttonDisabled: { opacity: 0.5 },
-  buttonText: { color: colors.textOnButton, fontWeight: '400', textShadowColor: 'transparent', textShadowRadius: 0 },
+  buttonText: { ...BUTTON_PRIMARY_TEXT },
 });

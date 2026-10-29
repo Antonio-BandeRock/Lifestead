@@ -58,7 +58,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { listGardenPlantings, listGardenPlots, type GardenPlanting, type GardenPlot } from '../lib/db';
 import { sortByLabel } from '../lib/choiceOrder';
@@ -105,8 +105,8 @@ import { RecordPhotos } from './RecordPhotos';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
 import { t, tl } from '../lib/i18n';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
-const PRIMARY_BUTTON_BACKGROUND = colors.buttonColor;
 const WHOLE_AREA = '__whole_area__';
 const NO_AREA = '__anything__';
 // How many running counters a Home card shows before pointing at the lens.
@@ -486,7 +486,7 @@ export function DaysUntilSection({
           ) : null}
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
           <ThumbRow primary="first" style={styles.actionRow}>
-            <TouchableOpacity ref={walkMark.ref('daysUntil.save')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSave}>
+            <TouchableOpacity ref={walkMark.ref('daysUntil.save')} style={styles.primaryButton} onPress={handleSave}>
               <Text style={styles.primaryButtonText}>Start Counting</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => { setAdding(false); setError(null); }}>
@@ -495,7 +495,7 @@ export function DaysUntilSection({
           </ThumbRow>
         </View>
       ) : (
-        <TouchableOpacity ref={walkMark.ref('daysUntil.add')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={() => setAdding(true)}>
+        <TouchableOpacity ref={walkMark.ref('daysUntil.add')} style={styles.primaryButton} onPress={() => setAdding(true)}>
           <Text style={styles.primaryButtonText}>+ Add a Days Until Counter</Text>
         </TouchableOpacity>
       )}
@@ -538,13 +538,8 @@ const styles = StyleSheet.create({
   dateInput: { width: 130 },
   nestedForm: { gap: 8, paddingLeft: 10, borderLeftWidth: 2, marginVertical: 4 },
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4 },
-  primaryButton: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', alignSelf: 'flex-start', ...BUTTON_SHADOW },
-  primaryButtonText: {
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
 });

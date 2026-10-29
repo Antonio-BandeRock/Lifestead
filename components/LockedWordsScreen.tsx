@@ -25,6 +25,7 @@ import LockedCapture from '../modules/locked-capture';
 import { AppTextInput } from './AppTextInput';
 import { StandaloneKeyboard } from './StandaloneKeyboard';
 import {  } from '../lib/i18n';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 type Props = { identifier?: string; title?: string; data?: string };
 
@@ -245,16 +246,9 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
   },
   actions: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-end', gap: 12, marginTop: 4 },
-  primaryButton: { paddingVertical: 10, paddingHorizontal: 18, borderRadius: 10, backgroundColor: colors.primary },
-  primaryText: { ...typography.bodyEmphasis, color: colors.textOnPrimary, fontWeight: '400' },
-  secondaryButton: {
-    paddingVertical: 10,
-    paddingHorizontal: 18,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-  },
+  primaryButton: { ...BUTTON_PRIMARY },
+  primaryText: { ...BUTTON_PRIMARY_TEXT },
+  secondaryButton: { ...BUTTON_SECONDARY },
   listening: { borderColor: colors.primary },
-  secondaryText: { ...typography.bodyEmphasis, color: colors.textPrimary, fontWeight: '400', ...textShadow },
+  secondaryText: { ...BUTTON_SECONDARY_TEXT },
 });

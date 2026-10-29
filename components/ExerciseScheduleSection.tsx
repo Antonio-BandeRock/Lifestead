@@ -9,7 +9,7 @@ import { NotesInput } from './NotesInput';
 import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, HomeSectionBand, homeBandNoHairlines, homeBandStyle } from './HomeSectionBand';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useBandFolds } from '../hooks/useBandFolds';
 import { addDays, type RepeatConfig } from '../lib/repeatRule';
@@ -45,6 +45,7 @@ import { buildTime24, describeTimeInputProblem, splitTime24, type TimeOfDayInput
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { useWalkMark } from './WalkMark';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // Schedules > Exercise, H11 part 3. A plan is a workout from Life >
 // Workouts or a plain activity by name, on a first day, at a time or any
@@ -525,15 +526,8 @@ function makeStyles(tabColor: string) {
   return StyleSheet.create({
     actionText: { ...typography.captionEmphasis, color: tabColor, ...textShadow },
     actionTextRemove: { ...typography.captionEmphasis, color: colors.danger, ...textShadow },
-    addButton: {
-      borderWidth: 1,
-      borderColor: colors.primary,
-      borderRadius: 10,
-      paddingVertical: 12,
-      alignItems: 'center',
-      backgroundColor: colors.surface,
-    },
-    addButtonText: { ...typography.bodyEmphasis, color: colors.primary, ...textShadow },
+    addButton: { ...BUTTON_PRIMARY },
+    addButtonText: { ...BUTTON_PRIMARY_TEXT },
     bandBox: {
       ...homeBandStyle,
       ...homeBandNoHairlines,
@@ -597,21 +591,14 @@ function makeStyles(tabColor: string) {
     },
     pillTextActive: { color: colors.textOnPrimary, ...darkText },
     pillTextSmall: { ...typography.caption, color: tabColor, ...textShadow },
-    primaryButton: { paddingVertical: 8, paddingHorizontal: 14, borderRadius: 8, backgroundColor: colors.buttonColor, ...BUTTON_SHADOW },
-    primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton, ...darkText },
+    primaryButton: { ...BUTTON_PRIMARY_COMPACT },
+    primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
     row: { borderRadius: 10, backgroundColor: colors.surfaceMuted, padding: 12 },
     rowActions: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: 16, marginTop: 10 },
     rowMeta: { ...typography.caption, color: tabColor, marginTop: 2, ...textShadow },
     rowTitle: { ...typography.label, color: tabColor, ...textShadow },
-    secondaryButton: {
-      paddingVertical: 10,
-      paddingHorizontal: 14,
-      borderRadius: 8,
-      borderWidth: 1,
-      borderColor: colors.border,
-      backgroundColor: colors.surface,
-    },
-    secondaryButtonText: { ...typography.bodyEmphasis, color: tabColor, ...textShadow },
+    secondaryButton: { ...BUTTON_SECONDARY },
+    secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
     spaced: { marginTop: 8 },
     timeInput: { width: 56, textAlign: 'center' },
     timeRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },

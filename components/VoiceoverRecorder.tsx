@@ -31,6 +31,7 @@ import { getBackupsFolder } from '../lib/oneDriveFolders';
 import { SPEAKER_LABEL, VOICEOVER_LINES, VOICEOVER_SCRIPTS } from '../lib/voiceoverScript';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 const FOLDER_NAME = 'voiceover';
 const ONEDRIVE_FOLDER_NAME = 'Voiceover';
@@ -321,22 +322,11 @@ const styles = StyleSheet.create({
     gap: 8,
     marginTop: 6,
   },
-  button: {
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    borderRadius: 10,
-    backgroundColor: colors.primary,
-    alignSelf: 'flex-start',
-  },
+  button: { ...BUTTON_PRIMARY, alignSelf: 'flex-start' },
   stopButton: {
     backgroundColor: colors.danger,
   },
-  buttonText: {
-    ...typography.captionEmphasis,
-    color: colors.textOnPrimary,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  buttonText: { ...BUTTON_PRIMARY_TEXT },
   outlineButton: {
     paddingHorizontal: 14,
     paddingVertical: 10,

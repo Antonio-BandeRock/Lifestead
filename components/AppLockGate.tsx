@@ -17,7 +17,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { BUTTON_SHADOW, colors } from "../constants/colors";
+import { colors } from "../constants/colors";
 import { textShadow, typography } from "../constants/typography";
 import {
   passcodeProblem,
@@ -60,6 +60,7 @@ import { getPlayfulWordingSync } from "../lib/visualPreferences";
 import { AppTextInput } from "./AppTextInput";
 import { PasscodeEntry } from "./PasscodeEntry";
 import { StandaloneKeyboard } from "./StandaloneKeyboard";
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // App Lock's gate (step 4 of docs/app-lock-phase0-audit.md). Wraps the whole
 // app in app/_layout.tsx, so nothing that reads the database mounts until
@@ -931,37 +932,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     textAlign: "center",
   },
-  primaryButton: {
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    alignItems: "center",
-    width: "100%",
-  },
-  primaryButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnButton,
-    textAlign: "center",
-    textShadowColor: "transparent",
-    textShadowRadius: 0,
-  },
-  secondaryButton: {
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    alignItems: "center",
-    width: "100%",
-  },
-  secondaryButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textSecondary,
-    ...textShadow,
-  },
+  primaryButton: { ...BUTTON_PRIMARY, width: "100%" },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+  secondaryButton: { ...BUTTON_SECONDARY, width: "100%" },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   linkButton: { paddingVertical: 8 },
   linkText: {
     ...typography.caption,

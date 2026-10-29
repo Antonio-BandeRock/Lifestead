@@ -58,6 +58,7 @@ import { useVoiceDictation } from '../hooks/useVoiceDictation';
 import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
 import { describeSpokenAnswer, parseWhereQuestion } from '../lib/whereSpeech';
 import { SENTENCE_PAUSE_MS } from '../components/StoreLocationSheet';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 // Where the answer came from, so a result carries its source at a glance: a
 // garden bed reads differently from a cupboard, and a sentence somebody spoke
@@ -286,7 +287,7 @@ export default function WhereIsItScreen() {
             onPress={() => openQuickAccessSheet('storeLocation')}
             accessibilityRole="button"
           >
-            <Ionicons name="pin-outline" size={16} color={colors.textOnPrimary} />
+            <Ionicons name="pin-outline" size={16} color={colors.textOnButton} />
             <Text style={styles.storeLocationText}>Store Its Location</Text>
           </TouchableOpacity>
         </View>
@@ -390,21 +391,11 @@ const styles = StyleSheet.create({
   // Where Is It answers only from what was told to it, so the way to tell it
   // sits right under the sentence saying what it reads (1.0.66.9).
   storeLocationButton: {
+    ...BUTTON_PRIMARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 6,
-    paddingVertical: 10,
-    borderRadius: 12,
-    backgroundColor: colors.primary,
   },
-  storeLocationText: {
-    ...typography.bodyEmphasis,
-    fontWeight: '400',
-    color: colors.textOnPrimary,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  storeLocationText: { ...BUTTON_PRIMARY_TEXT },
   lead: { ...typography.body, color: colors.textSecondary, ...textShadow },
   askCard: { ...homeBandStyle, borderColor: colors.primary, padding: HOME_BAND_CONTENT_PADDING, gap: 6 },
   askExample: { ...typography.body, color: colors.textPrimary, ...textShadow },

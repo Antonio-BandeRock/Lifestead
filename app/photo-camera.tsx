@@ -30,6 +30,7 @@ import { phoneOnlyNotice } from '../lib/desktop/phoneOnly';
 import { PHOTO_ORIGINAL_NOT_KEPT } from '../lib/media';
 import { keepPhoto, listMediaFor, mediaDisplayUri, removePhoto } from '../lib/mediaDb';
 import { canSaveOriginalToGallery } from '../lib/photoNative';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 /** How strongly the last photo shows through. Enough to line up an edge
  *  against, faint enough that the live view is still what is seen. */
@@ -188,8 +189,8 @@ const styles = StyleSheet.create({
   messagePanel: { backgroundColor: colors.surface, borderRadius: 14, padding: 16, gap: 10, maxWidth: 480, width: '100%' },
   messageTitle: { ...typography.bodyEmphasis, color: colors.textPrimary, ...textShadow },
   messageBody: { ...typography.body, color: colors.textPrimary, ...textShadow },
-  permissionButton: { alignSelf: 'flex-start', backgroundColor: colors.primary, borderRadius: 10, paddingHorizontal: 14, paddingVertical: 10 },
-  permissionButtonText: { ...typography.bodyEmphasis, color: '#FFFFFF', ...textShadow },
+  permissionButton: { ...BUTTON_PRIMARY, alignSelf: 'flex-start' },
+  permissionButtonText: { ...BUTTON_PRIMARY_TEXT },
   topBar: {
     position: 'absolute',
     left: 0,

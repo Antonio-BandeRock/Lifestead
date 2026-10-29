@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors, inputBackground } from '../constants/colors';
+import { colors, inputBackground } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { appendDictatedText, parseVoiceCommands } from '../lib/voiceCommandParsing';
 import { useActiveField, useActiveInputControls } from './ActiveInputContext';
@@ -12,6 +12,7 @@ import { useInfoAlert } from './InfoAlert';
 import { VoiceInputButton } from './VoiceInputButton';
 import { useNavigationHand } from '../lib/navigationHand';
 import { ThumbRow } from './ThumbRow';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // A real, reusable, controlled add/edit/remove list-of-steps editor --
 // 2026-08-17, extracted from what used to be SideBuilder.tsx's own
@@ -237,8 +238,8 @@ export function StepsEditor({
             )}
           </View>
           <ThumbRow primary="last" style={styles.buttonRow}>
-            <TouchableOpacity style={styles.splitButton} onPress={cancelStepEditor}>
-              <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Cancel</Text>
+            <TouchableOpacity style={styles.splitButtonSecondary} onPress={cancelStepEditor}>
+              <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.splitButton, stepDraft.trim() ? { backgroundColor: colors.buttonColor } : styles.primaryButtonMuted]}
@@ -249,22 +250,22 @@ export function StepsEditor({
           </ThumbRow>
         </View>
       ) : steps.length === 0 ? (
-        <TouchableOpacity style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]} onPress={openAddStep}>
+        <TouchableOpacity style={styles.primaryButton} onPress={openAddStep}>
           <Text style={styles.primaryButtonText}>{addFirstLabel}</Text>
         </TouchableOpacity>
       ) : stepsComplete ? (
         <View style={styles.stepsCompleteRow}>
           <Text style={styles.summaryEmptyText}>Saved.</Text>
           <TouchableOpacity onPress={() => setStepsComplete(false)}>
-            <Text style={[styles.secondaryButtonText, { color: tabColor }]}>{addAnotherLabel}</Text>
+            <Text style={[styles.linkText, { color: tabColor }]}>{addAnotherLabel}</Text>
           </TouchableOpacity>
         </View>
       ) : (
         <View style={styles.buttonRow}>
-          <TouchableOpacity style={styles.splitButton} onPress={openAddStep}>
-            <Text style={[styles.secondaryButtonText, { color: tabColor }]}>{addAnotherLabel}</Text>
+          <TouchableOpacity style={styles.splitButtonSecondary} onPress={openAddStep}>
+            <Text style={styles.secondaryButtonText}>{addAnotherLabel}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.splitButton, { backgroundColor: colors.buttonColor }]} onPress={() => setStepsComplete(true)}>
+          <TouchableOpacity style={styles.splitButton} onPress={() => setStepsComplete(true)}>
             <Text style={styles.primaryButtonText}>{completeLabel}</Text>
           </TouchableOpacity>
         </View>
@@ -307,37 +308,14 @@ const styles = StyleSheet.create({
   // layered on top of formInput, not a replacement for it.
   stepInputEmbedded: { flex: 1, marginTop: 0, borderWidth: 0, backgroundColor: 'transparent' },
   buttonRow: { flexDirection: 'row', gap: 10, marginTop: 16 },
-  splitButton: {
-    flex: 1,
-    borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    ...BUTTON_SHADOW,
-  },
-  primaryButton: {
-    borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    alignItems: 'center',
-    marginTop: 14,
-    ...BUTTON_SHADOW,
-  },
+  splitButton: { ...BUTTON_PRIMARY, flex: 1 },
+  splitButtonSecondary: { ...BUTTON_SECONDARY, flex: 1 },
+  primaryButton: { ...BUTTON_PRIMARY, marginTop: 14 },
   primaryButtonMuted: { backgroundColor: colors.border },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   primaryButtonTextMuted: { color: colors.textMuted },
-  secondaryButtonText: { ...typography.bodyEmphasis, ...textShadow },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
+  linkText: { ...typography.bodyEmphasis, ...textShadow },
   summaryEmptyText: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   stepRow: {
     flexDirection: 'row',

@@ -43,7 +43,7 @@ import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, Text, Touch
 import { AppTextInput } from '../components/AppTextInput';
 import { useInfoAlert } from '../components/InfoAlert';
 import { MenuScanBand } from './MenuScanBand';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, homeBandNoHairlines, HomeSectionBand, homeBandStyle } from './HomeSectionBand';
@@ -84,6 +84,7 @@ import {
 } from '../lib/db';
 import { buildTime24, describeTimeInputProblem, formatTime12, type TimeOfDayInput } from '../lib/timeOfDay';
 import { useWalkMark } from './WalkMark';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // How many rows are loaded at once. High enough that a personal history is
 // covered whole, and the search runs in SQL rather than over this list, so a
@@ -1019,7 +1020,7 @@ export function FindMealView({
               onPress={handleLogEatenOutDirect}
               disabled={busy}
             >
-              <Ionicons name="checkmark-circle-outline" size={16} color={colors.background} />
+              <Ionicons name="checkmark-circle-outline" size={16} color={colors.textOnButton} />
               <Text style={styles.useButtonText}>
                 {busy
                   ? 'Saving…'
@@ -1124,7 +1125,7 @@ export function FindMealView({
                 </View>
               ))}
               <TouchableOpacity ref={walkMark.ref('findMeal.build')} style={styles.useButton} activeOpacity={0.85} onPress={buildMealWithTicked}>
-                <Ionicons name="construct-outline" size={16} color={colors.background} />
+                <Ionicons name="construct-outline" size={16} color={colors.textOnButton} />
                 <Text style={styles.useButtonText}>{`Build a meal with these ${tickedList.length} dish${tickedList.length === 1 ? '' : 'es'}`}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.buildButton} activeOpacity={0.85} onPress={() => setTickedDishes({})}>
@@ -1306,7 +1307,7 @@ export function FindMealView({
                         activeOpacity={0.85}
                         onPress={() => openActionsFor(item.meal)}
                       >
-                        <Ionicons name="checkmark-circle-outline" size={16} color={colors.background} />
+                        <Ionicons name="checkmark-circle-outline" size={16} color={colors.textOnButton} />
                         <Text style={styles.useButtonText}>Use this meal</Text>
                       </TouchableOpacity>
                       {/* Into Meal Builder. While anything is ticked
@@ -1358,7 +1359,7 @@ export function FindMealView({
           onPress={handleLogNow}
           disabled={busy}
         >
-          <Ionicons name="checkmark-circle-outline" size={18} color={colors.background} />
+          <Ionicons name="checkmark-circle-outline" size={18} color={colors.textOnButton} />
           <Text style={styles.primaryButtonText}>{busy ? 'Saving…' : 'Log it now'}</Text>
         </TouchableOpacity>
 
@@ -1581,15 +1582,10 @@ const styles = StyleSheet.create({
   },
   ingredientLine: { ...typography.caption, color: colors.textPrimary, ...textShadow },
   useButton: {
+    ...BUTTON_PRIMARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 6,
     marginTop: 8,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-    borderRadius: 10,
-    paddingVertical: 10,
   },
   dishRow: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 4 },
   dishRowName: { ...typography.body, color: colors.textPrimary, flex: 1, ...textShadow },
@@ -1608,12 +1604,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
   },
   buildButtonText: { ...typography.bodyEmphasis, color: colors.tabFood, ...textShadow },
-  useButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnButton,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  useButtonText: { ...BUTTON_PRIMARY_TEXT },
   scopeRow: { flexDirection: 'row', gap: 8 },
   rowTextWrap: { flex: 1, gap: 2 },
   rowName: { ...typography.body, color: colors.textPrimary, ...textShadow },
@@ -1648,30 +1639,15 @@ const styles = StyleSheet.create({
   pillTextActive: { color: colors.background, textShadowColor: 'transparent', textShadowRadius: 0 },
   disabled: { opacity: 0.6 },
   primaryButton: {
+    ...BUTTON_PRIMARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-    borderRadius: 10,
-    paddingVertical: 14,
   },
-  primaryButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnButton,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   secondaryButton: {
+    ...BUTTON_SECONDARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 10,
-    paddingVertical: 12,
   },
-  secondaryButtonText: { ...typography.bodyEmphasis, color: colors.textPrimary, ...textShadow },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
 });

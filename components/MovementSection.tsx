@@ -7,7 +7,7 @@ import { TabBand, useTabBandStyles } from './TabBand';
 import { RecordPhotos } from './RecordPhotos';
 import { useWalkMark } from './WalkMark';
 import { useBandFolds } from '../hooks/useBandFolds';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import {
   getDailyNutrientBreakdown,
@@ -43,6 +43,7 @@ import { EXERCISE_TYPE_NAMES, syncHealthConnect } from '../lib/healthSync';
 import { detectMeasurementSystemFromLocale, kgToLb } from '../lib/measurement';
 import { t, tl } from '../lib/i18n';
 import { appLocale } from '@/lib/language';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // Movement: what the phone's health store has, read as is. Life's eighth
 // area, 2026-09-14, the JS half of the Health Connect rebuild.
@@ -549,16 +550,10 @@ function makeStyles(tabColor: string) {
     buttonRow: { flexDirection: 'row', gap: 10, flexWrap: 'wrap' },
     linkRow: { marginTop: 12 },
     actionText: { ...typography.caption, color: tabColor, ...textShadow },
-    primaryButton: {
-      backgroundColor: colors.buttonColor, borderRadius: 10, paddingVertical: 12, paddingHorizontal: 18,
-      alignItems: 'center', marginTop: 12, ...BUTTON_SHADOW,
-    },
-    primaryButtonText: { ...typography.body, color: colors.textOnButton, textShadowColor: 'transparent', textShadowRadius: 0 },
-    secondaryButton: {
-      backgroundColor: colors.surface, borderRadius: 10, borderWidth: 1, borderColor: colors.border,
-      paddingVertical: 12, paddingHorizontal: 18, alignItems: 'center', marginTop: 12,
-    },
-    secondaryButtonText: { ...typography.body, color: colors.textPrimary, ...textShadow },
+    primaryButton: { ...BUTTON_PRIMARY, marginTop: 12 },
+    primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+    secondaryButton: { ...BUTTON_SECONDARY, marginTop: 12 },
+    secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   });
 }
 

@@ -72,6 +72,7 @@ import {
 } from '../lib/workoutSession';
 import { ThumbEndRow } from '../components/ThumbEndRow';
 import { inAppLanguage } from '@/lib/notificationWords';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 type Phase = 'ready' | 'set' | 'rest' | 'stopping' | 'review' | 'saved';
 
@@ -474,7 +475,7 @@ export default function WorkoutPlayerScreen() {
               </View>
             ))}
             <TouchableOpacity ref={walkMark.ref('workout.begin')} style={styles.primaryButton} onPress={begin} accessibilityRole="button">
-              <Ionicons name="play" size={18} color={colors.background} />
+              <Ionicons name="play" size={18} color={colors.textOnButton} />
               <Text style={styles.primaryButtonText}>Start</Text>
             </TouchableOpacity>
           </>
@@ -582,7 +583,7 @@ export default function WorkoutPlayerScreen() {
             </View>
 
             <TouchableOpacity ref={walkMark.ref('workout.done')} style={styles.primaryButton} onPress={finishSet} accessibilityRole="button">
-              <Ionicons name={index + 1 < sets.length ? 'checkmark' : 'flag-outline'} size={18} color={colors.background} />
+              <Ionicons name={index + 1 < sets.length ? 'checkmark' : 'flag-outline'} size={18} color={colors.textOnButton} />
               <Text style={styles.primaryButtonText}>
                 {index + 1 >= sets.length ? 'Done, finish' : current.restAfter ? `Done, rest ${formatSeconds(current.restAfter)}` : 'Done, next'}
               </Text>
@@ -620,7 +621,7 @@ export default function WorkoutPlayerScreen() {
               {upNextLine(sets, index - 1) ? <Text style={styles.bodyText}>{upNextLine(sets, index - 1)}</Text> : null}
             </View>
             <TouchableOpacity ref={walkMark.ref('workout.ready')} style={styles.primaryButton} onPress={skipRest} accessibilityRole="button">
-              <Ionicons name="play-skip-forward" size={18} color={colors.background} />
+              <Ionicons name="play-skip-forward" size={18} color={colors.textOnButton} />
               <Text style={styles.primaryButtonText}>Ready now</Text>
             </TouchableOpacity>
             <View style={styles.minorRow}>
@@ -680,7 +681,7 @@ export default function WorkoutPlayerScreen() {
                 <View style={styles.card}>
                   <Text style={styles.label}>A note about today (optional)</Text>
                   <NotesInput
-                    style={[styles.noteInput]}
+                    style={styles.noteInput}
                     value={note}
                     onChangeText={setNote}
                     placeholder="How it went, how you felt"
@@ -731,7 +732,7 @@ export default function WorkoutPlayerScreen() {
                   disabled={totals.done === 0 || saving}
                   onPress={save}
                 >
-                  <Ionicons name="save-outline" size={18} color={colors.background} />
+                  <Ionicons name="save-outline" size={18} color={colors.textOnButton} />
                   <Text style={styles.primaryButtonText}>{totals.done === 0 ? 'No sets done to save' : 'Save'}</Text>
                 </TouchableOpacity>
                 <View style={styles.minorRow}>
@@ -854,16 +855,12 @@ const styles = StyleSheet.create({
     ...typography.body,
   },
   primaryButton: {
+    ...BUTTON_PRIMARY,
     marginHorizontal: HOME_BAND_CONTENT_PADDING,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    paddingVertical: 15,
-    borderRadius: 999,
-    backgroundColor: colors.primary,
   },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.background },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   minorRow: { marginHorizontal: HOME_BAND_CONTENT_PADDING, flexDirection: 'row', gap: 10 },
   minorButton: {
     flex: 1,

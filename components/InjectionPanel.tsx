@@ -5,7 +5,7 @@
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppTextInput } from './AppTextInput';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import {
   BUILT_IN_SITES,
@@ -27,6 +27,7 @@ import {
 } from '../lib/injectionSites';
 import { recordSite, removeSiteUse, saveInjectionSetting, type InjectionSetting } from '../lib/injectionSitesDb';
 import { ThumbEndRow } from './ThumbEndRow';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 type Props = {
   treatmentId: string;
@@ -209,22 +210,10 @@ function makeStyles(tabColor: string) {
       ...textShadow,
     },
     label: { ...typography.label, color: tabColor, marginBottom: 6, marginTop: 10, ...textShadow },
-    primaryButton: { paddingVertical: 10, paddingHorizontal: 14, borderRadius: 8, backgroundColor: colors.buttonColor, ...BUTTON_SHADOW },
-    primaryButtonText: {
-      ...typography.bodyEmphasis,
-      color: colors.textOnButton,
-      textShadowColor: 'transparent',
-      textShadowRadius: 0,
-    },
-    secondaryButton: {
-      paddingVertical: 10,
-      paddingHorizontal: 14,
-      borderRadius: 8,
-      borderWidth: 1,
-      borderColor: colors.border,
-      backgroundColor: colors.surface,
-    },
-    secondaryButtonText: { ...typography.bodyEmphasis, color: tabColor, ...textShadow },
+    primaryButton: { ...BUTTON_PRIMARY },
+    primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+    secondaryButton: { ...BUTTON_SECONDARY },
+    secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
     section: { gap: 2, marginTop: 12 },
     smallAction: { ...typography.caption, color: tabColor, textDecorationLine: 'underline', ...textShadow },
     smallButton: {

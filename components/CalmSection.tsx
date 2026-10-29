@@ -16,7 +16,7 @@ import { useFocusEffect } from 'expo-router';
 import * as Speech from 'expo-speech';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Animated, Easing, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { typography } from '../constants/typography';
 import { useBandFolds } from '../hooks/useBandFolds';
 import {
@@ -65,6 +65,7 @@ import { TabBand } from './TabBand';
 import { useKeepScreenOn } from '../lib/keepScreenOn';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 const EMPTY_PATTERN: PatternFields = { name: '', inSec: '', holdInSec: '', outSec: '', holdOutSec: '' };
 const ADD_OWN = '__add_own__';
@@ -315,7 +316,7 @@ function BreathingPacer({
             {problem ? <Text style={[styles.caption, { color: colors.statusRedOnSurface }]}>{problem}</Text> : null}
             <ThumbRow primary="last" style={styles.actions}>
               <TouchableOpacity style={styles.secondaryButton} onPress={() => { setForm(null); setProblem(null); }}>
-                <Text style={[styles.buttonText, { color: tabColor }]}>Cancel</Text>
+                <Text style={styles.secondaryButtonText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.primaryButton} onPress={savePattern}>
                 <Text style={styles.primaryButtonText}>Save</Text>
@@ -524,7 +525,7 @@ function SpokenRelaxation({
             {problem ? <Text style={[styles.caption, { color: colors.statusRedOnSurface }]}>{problem}</Text> : null}
             <ThumbRow primary="last" style={styles.actions}>
               <TouchableOpacity style={styles.secondaryButton} onPress={() => { setForm(null); setProblem(null); }}>
-                <Text style={[styles.buttonText, { color: tabColor }]}>Cancel</Text>
+                <Text style={styles.secondaryButtonText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.primaryButton} onPress={saveScript}>
                 <Text style={styles.primaryButtonText}>Save</Text>
@@ -601,10 +602,11 @@ const styles = StyleSheet.create({
   secondsCell: { flex: 1, gap: 4 },
   actions: { flexDirection: 'row', justifyContent: 'flex-end', gap: 10 },
   actionsCenter: { flexDirection: 'row', justifyContent: 'center' },
-  secondaryButton: { paddingVertical: 10, paddingHorizontal: 14, borderRadius: 8, borderWidth: 1, borderColor: colors.border },
+  secondaryButton: { ...BUTTON_SECONDARY },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   buttonText: { ...typography.bodyEmphasis, ...noShadow },
-  primaryButton: { paddingVertical: 10, paddingHorizontal: 22, borderRadius: 8, backgroundColor: colors.buttonColor, ...BUTTON_SHADOW },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton, ...noShadow },
+  primaryButton: { ...BUTTON_PRIMARY },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   disabled: { opacity: 0.4 },
   circleArea: { height: 200, alignItems: 'center', justifyContent: 'center', marginTop: 8 },
   circle: { width: 190, height: 190, borderRadius: 95, opacity: 0.55 },

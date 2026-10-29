@@ -48,13 +48,14 @@ import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from '../components/HomeSectionBand';
 import { getConnectionByPublicKey } from '../lib/connections';
 import { decodeShareEnvelope, stageSharedItem, type ShareEnvelope } from '../lib/sharing';
 import { ThumbRow } from '../components/ThumbRow';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 function previewIngredientLines(envelope: ShareEnvelope): string[] {
   if (envelope.payload.kind === 'component') {
@@ -267,35 +268,9 @@ const styles = StyleSheet.create({
   },
   actionRow: { flexDirection: 'row', gap: 12, marginHorizontal: HOME_BAND_CONTENT_PADDING, marginTop: 14 },
   actionButton: { flex: 1 },
-  primaryButton: {
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-    borderRadius: 10,
-    paddingVertical: 12,
-    alignItems: 'center',
-  },
+  primaryButton: { ...BUTTON_PRIMARY },
   primaryButtonDisabled: { opacity: 0.6 },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
-  secondaryButton: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 10,
-    paddingVertical: 12,
-    alignItems: 'center',
-  },
-  secondaryButtonText: { ...typography.bodyEmphasis, color: colors.textSecondary,
-
-    ...textShadow,
-
-  },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+  secondaryButton: { ...BUTTON_SECONDARY },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
 });

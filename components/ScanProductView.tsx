@@ -31,7 +31,7 @@ import { AppTextInput } from './AppTextInput';
 import { DraggableCropOverlay, type CropRect } from './DraggableCropOverlay';
 import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, homeBandNoHairlines, homeBandStyle } from './HomeSectionBand';
 import { SimpleSlider } from './SimpleSlider';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { useRouter } from 'expo-router';
@@ -109,6 +109,7 @@ import {
 } from '../lib/fodmapLabel';
 import { buildToneMatrix, computeContainRect, saveAdjustedIngredientsPhoto } from '../lib/toneAdjustment';
 import { useWalkMark } from './WalkMark';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 type ScanStatus =
   | 'scanning'
@@ -1530,7 +1531,7 @@ export function ScanProductView({
           onPress={() => handleOpenCamera('ingredients')}
           disabled={capturingIngredients}
         >
-          <Ionicons name="camera-outline" size={18} color={colors.background} />
+          <Ionicons name="camera-outline" size={18} color={colors.textOnButton} />
           <Text style={styles.primaryButtonText}>{capturingIngredients ? 'Reading…' : 'Take a Photo of the Ingredients'}</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -1840,7 +1841,7 @@ export function ScanProductView({
               onPress={handleLogThis}
               disabled={loggingMeal}
             >
-              <Ionicons name="checkmark-circle-outline" size={18} color={colors.background} />
+              <Ionicons name="checkmark-circle-outline" size={18} color={colors.textOnButton} />
               <Text style={styles.primaryButtonText}>{loggingMeal ? `Logging…` : `Log It`}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={() => setLogPanelOpen(false)}>
@@ -1849,7 +1850,7 @@ export function ScanProductView({
           </View>
         ) : (
           <TouchableOpacity ref={walkMark.ref('scan.logEaten')} style={styles.primaryButton} activeOpacity={0.85} onPress={handleOpenLogPanel}>
-            <Ionicons name="restaurant-outline" size={18} color={colors.background} />
+            <Ionicons name="restaurant-outline" size={18} color={colors.textOnButton} />
             <Text style={styles.primaryButtonText}>Log This as Eaten</Text>
           </TouchableOpacity>
         )}
@@ -1862,7 +1863,7 @@ export function ScanProductView({
           onPress={handleBuyThis}
           disabled={saving}
         >
-          <Ionicons name="cart-outline" size={18} color={colors.background} />
+          <Ionicons name="cart-outline" size={18} color={colors.textOnButton} />
           <Text style={styles.primaryButtonText}>{saving ? 'Saving…' : 'Buy This'}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.secondaryButton} activeOpacity={0.85} onPress={resetForNewScan}>
@@ -1891,7 +1892,7 @@ export function ScanProductView({
           onPress={() => handleOpenCamera('price')}
           disabled={capturingPrice}
         >
-          <Ionicons name="camera-outline" size={18} color={colors.background} />
+          <Ionicons name="camera-outline" size={18} color={colors.textOnButton} />
           <Text style={styles.primaryButtonText}>{capturingPrice ? 'Reading…' : 'Take a Photo of the Price'}</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -1940,7 +1941,7 @@ export function ScanProductView({
           <Text style={styles.text}>{onListNote}</Text>
         ) : (
           <TouchableOpacity ref={walkMark.ref('scan.grocery')} style={styles.primaryButton} activeOpacity={0.85} onPress={handlePutOnList}>
-            <Ionicons name="cart-outline" size={18} color={colors.background} />
+            <Ionicons name="cart-outline" size={18} color={colors.textOnButton} />
             <Text style={styles.primaryButtonText}>Put It on My Grocery List</Text>
           </TouchableOpacity>
         )}
@@ -2144,37 +2145,17 @@ const styles = StyleSheet.create({
   },
   disabled: { opacity: 0.6 },
   primaryButton: {
+    ...BUTTON_PRIMARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-    borderRadius: 10,
-    paddingVertical: 14,
   },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   secondaryButton: {
+    ...BUTTON_SECONDARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 10,
-    paddingVertical: 12,
   },
-  secondaryButtonText: { ...typography.bodyEmphasis, color: colors.textPrimary, ...textShadow },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   // Quick-log phase 2, 2026-08-30.
   logBanner: {
     flexDirection: 'row',

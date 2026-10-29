@@ -9,7 +9,7 @@ import { PopoverSelect } from './PopoverSelect';
 import { TabBand, useTabBandStyles } from './TabBand';
 import { TodoSection } from './TodoSection';
 import { useBandFolds } from '../hooks/useBandFolds';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { WORK_PROMPT_COUNT, WORK_PROMPT_GROUPS } from '../constants/workBenefitPrompts';
 import {
@@ -51,6 +51,7 @@ import {
 import { parsePriceInput } from '../lib/groceryList';
 import { useWalkMark } from './WalkMark';
 import { ThumbRow } from './ThumbRow';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // Work: what it gives you, and how it is actually going.
 //
@@ -730,15 +731,9 @@ function makeStyles(tabColor: string) {
     barFill: { height: 8, borderRadius: 4, backgroundColor: tabColor },
 
     formActions: { flexDirection: 'row', gap: 10, marginTop: 16 },
-    primaryButton: {
-      backgroundColor: colors.buttonColor, borderRadius: 10, paddingVertical: 12, paddingHorizontal: 18,
-      alignItems: 'center', marginTop: 12, ...BUTTON_SHADOW,
-    },
-    primaryButtonText: { ...typography.body, color: colors.textOnButton, textShadowColor: 'transparent', textShadowRadius: 0 },
-    secondaryButton: {
-      backgroundColor: colors.surface, borderRadius: 10, borderWidth: 1, borderColor: colors.border,
-      paddingVertical: 12, paddingHorizontal: 18, alignItems: 'center', marginTop: 12,
-    },
-    secondaryButtonText: { ...typography.body, color: colors.textPrimary, ...textShadow },
+    primaryButton: { ...BUTTON_PRIMARY, marginTop: 12 },
+    primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+    secondaryButton: { ...BUTTON_SECONDARY, marginTop: 12 },
+    secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   });
 }

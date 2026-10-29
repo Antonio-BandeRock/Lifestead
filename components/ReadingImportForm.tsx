@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { sortByLabel } from '../lib/choiceOrder';
 import { readBackupFileContent } from '../lib/dataBackup';
@@ -34,6 +34,7 @@ import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
 import { QuickAreaForm } from './QuickAreaForm';
 import { ThumbRow } from './ThumbRow';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 // Garden > Growing Conditions > Import Readings from a File (I19,
 // 2026-09-28): a controller's history file read into garden_readings with
@@ -41,7 +42,6 @@ import { ThumbRow } from './ThumbRow';
 // lib/readingImport.ts; this is the form around them.
 
 const TAB_COLOR = colors.tabGarden;
-const PRIMARY_BUTTON_BACKGROUND = colors.buttonColor;
 const NO_PLOT = '__none__';
 const NO_PLANTING = '__none__';
 const LEAVE_OUT = '__leave_out__';
@@ -235,7 +235,7 @@ export function ReadingImportForm(props: {
     <View style={styles.formCard}>
       <Text style={styles.captionText}>{IMPORT_HOW}</Text>
       <ThumbRow primary="first" style={styles.actionRow}>
-        <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handlePick}>
+        <TouchableOpacity style={styles.primaryButton} onPress={handlePick}>
           <Text style={styles.primaryButtonText}>{loaded ? 'Pick a Different File' : 'Pick a File'}</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={props.onCancel}>
@@ -400,7 +400,7 @@ export function ReadingImportForm(props: {
               <Text style={styles.captionText}>{WHERE_KEPT_NOTE}</Text>
               {plan.samples.length > 0 ? (
                 <View style={styles.actionRow}>
-                  <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleImport}>
+                  <TouchableOpacity style={styles.primaryButton} onPress={handleImport}>
                     <Text style={styles.primaryButtonText}>{saving ? 'Importing…' : 'Import These Readings'}</Text>
                   </TouchableOpacity>
                 </View>
@@ -432,13 +432,8 @@ const styles = StyleSheet.create({
   wideInput: { flex: 1, minWidth: 160 },
   unitInput: { width: 90 },
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4 },
-  primaryButton: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', ...BUTTON_SHADOW },
-  primaryButtonText: {
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
 });

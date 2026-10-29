@@ -6,12 +6,13 @@
 
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { GARDEN_CSV_CAPTION, GARDEN_CSV_KINDS, nothingToSave, type GardenCsvKind } from '../lib/gardenCsv';
 import { exportGardenCsv } from '../lib/gardenCsvDb';
 import { useInfoAlert } from './InfoAlert';
 import { useWalkMark } from './WalkMark';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 type Props = {
   /** Replaces the standard caption, for a host with no range above it. */
@@ -68,18 +69,7 @@ const styles = StyleSheet.create({
   wrap: { gap: 10 },
   captionText: { ...typography.caption, color: colors.textMuted, ...textShadow },
   buttonRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
-  button: {
-    borderRadius: 8,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-  },
+  button: { ...BUTTON_PRIMARY_COMPACT },
   buttonBusy: { opacity: 0.6 },
-  buttonText: {
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  buttonText: { ...BUTTON_PRIMARY_TEXT },
 });

@@ -11,7 +11,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { termLabel, type CustomGardenTerm } from '../lib/growSetup';
 import { dateLabel } from '../lib/moonSky';
@@ -27,9 +27,9 @@ import { AppTextInput } from './AppTextInput';
 import { GardenTermField } from './GardenTermField';
 import { NotesInput } from './NotesInput';
 import { ThumbRow } from './ThumbRow';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 const TAB_COLOR = colors.tabGarden;
-const PRIMARY_BUTTON_BACKGROUND = colors.buttonColor;
 const SHOWN_AT_FIRST = 8;
 
 type Props = {
@@ -151,7 +151,7 @@ export function PlantingEventsSection({ plantingId, plotId, terms, onTermsChange
               />
               {error ? <Text style={styles.errorText}>{error}</Text> : null}
               <ThumbRow primary="first" style={styles.actionRow}>
-                <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSave}>
+                <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
                   <Text style={styles.primaryButtonText}>Save</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={reset}>
@@ -210,13 +210,8 @@ const styles = StyleSheet.create({
   },
   dateInput: { width: 130 },
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4 },
-  primaryButton: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', alignSelf: 'flex-start', ...BUTTON_SHADOW },
-  primaryButtonText: {
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
 });

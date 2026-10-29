@@ -4,6 +4,7 @@ import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { modalAnimationType } from '../lib/visualPreferences';
 import { useNavigationHand } from '../lib/navigationHand';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 type InfoAlertRequest = { title: string; message: string };
 
@@ -143,23 +144,6 @@ const styles = StyleSheet.create({
   buttonRow: {
     flexDirection: 'row',
   },
-  okButton: {
-    paddingHorizontal: 24,
-    paddingVertical: 10,
-    borderRadius: 8,
-    backgroundColor: colors.primary,
-  },
-  okButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnPrimary,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  okButton: { ...BUTTON_PRIMARY },
+  okButtonText: { ...BUTTON_PRIMARY_TEXT },
 });

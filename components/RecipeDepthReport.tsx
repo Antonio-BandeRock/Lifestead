@@ -26,7 +26,7 @@
 
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, HomeSectionBand, homeBandStyle } from './HomeSectionBand';
 import { textShadow, typography } from '../constants/typography';
 import type { DimensionSeverity } from '../lib/recipeDepth';
@@ -34,6 +34,7 @@ import type { ConditionStageAdvisory } from '../lib/conditionStageAdvisory';
 import type { DeclaredConditionStage } from '../lib/conditionStages';
 import { DimensionChart } from './DimensionChart';
 import { NutrientBarChart, type NutrientChartDatum } from './NutrientBarChart';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 export type RecipeDepthReportProps = {
   dishName: string;
@@ -248,7 +249,7 @@ export function RecipeDepthReport({
       ) : null}
       <View style={[styles.headingBox, styles.buttonRow, { borderColor: tabColor }]}>
         <TouchableOpacity style={[styles.secondaryButton, styles.buttonHalf, { borderColor: tabColor }]} onPress={onGoBack} disabled={saving}>
-          <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Go Back and Adjust</Text>
+          <Text style={styles.secondaryButtonText}>Go Back and Adjust</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.primaryButton, styles.buttonHalf, { backgroundColor: colors.buttonColor }]}
@@ -300,30 +301,8 @@ const styles = StyleSheet.create({
   stageNoteSpacing: { marginTop: 8 },
   buttonRow: { flexDirection: 'row', gap: 10 },
   buttonHalf: { flex: 1 },
-  primaryButton: {
-    borderRadius: 8,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    alignItems: 'center',
-    ...BUTTON_SHADOW,
-  },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
-  secondaryButton: {
-    borderRadius: 8,
-    borderWidth: 2,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    alignItems: 'center',
-  },
-  secondaryButtonText: { ...typography.bodyEmphasis, ...textShadow },
+  primaryButton: { ...BUTTON_PRIMARY },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+  secondaryButton: { ...BUTTON_SECONDARY },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
 });

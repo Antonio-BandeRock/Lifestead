@@ -11,6 +11,7 @@ import { textShadow, typography } from '../constants/typography';
 import { dismissUnlockDone, subscribeUnlockDone, undoUnlockDone, type UnlockDone } from '../lib/lockedCaptures';
 import { useNavigationHand } from '../lib/navigationHand';
 import { modalAnimationType } from '../lib/visualPreferences';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 export function UnlockSummaryHost() {
   const navigationHand = useNavigationHand();
@@ -114,13 +115,6 @@ const styles = StyleSheet.create({
   },
   undoText: { ...typography.bodyEmphasis, color: colors.primary, ...textShadow },
   buttonRow: { flexDirection: 'row' },
-  okButton: { paddingHorizontal: 24, paddingVertical: 10, borderRadius: 8, backgroundColor: colors.primary },
-  okButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnPrimary,
-    // Dark text: cancel any shadow inherited from a base style it is
-    // composed with. See constants/typography.ts.
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  okButton: { ...BUTTON_PRIMARY },
+  okButtonText: { ...BUTTON_PRIMARY_TEXT },
 });

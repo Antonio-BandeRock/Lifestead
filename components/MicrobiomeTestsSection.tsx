@@ -14,7 +14,7 @@ import { useConfirmSheet } from './ConfirmSheet';
 import { HOME_BAND_ACCENT_WIDTH, HomeSectionBand } from './HomeSectionBand';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { announcePhoneOnly } from '../lib/desktop/phoneOnly';
 import { rowsFromPositionedLines } from '../lib/labImport';
@@ -59,6 +59,7 @@ import {
 import { explainNotYet } from '../lib/notYet';
 import { recognizeLinesFromImage } from '../lib/ocr';
 import { useWalkMark } from './WalkMark';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 const YEAR_OPTIONS = Array.from({ length: 10 }, (_, i) => String(new Date().getFullYear() - i));
 const MONTH_OPTIONS = Array.from({ length: 12 }, (_, i) => String(i + 1));
@@ -671,30 +672,17 @@ const styles = StyleSheet.create({
   link: { ...typography.bodyEmphasis, ...textShadow },
   buttonRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   button: {
+    ...BUTTON_PRIMARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
   },
-  buttonText: { ...typography.bodyEmphasis, color: colors.textOnButton, textShadowColor: 'transparent', textShadowRadius: 0 },
+  buttonText: { ...BUTTON_PRIMARY_TEXT },
   secondaryButton: {
+    ...BUTTON_SECONDARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
   },
-  secondaryButtonText: { ...typography.bodyEmphasis, color: colors.textPrimary, ...textShadow },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   disabled: { opacity: 0.6 },
   input: {
     ...typography.body,

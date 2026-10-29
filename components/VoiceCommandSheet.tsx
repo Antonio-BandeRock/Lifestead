@@ -63,6 +63,7 @@ import {
 } from '../lib/voiceControlRegistry';
 import { AppTextInput } from './AppTextInput';
 import { ThumbRow } from './ThumbRow';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // Shorter than Store Its Location's pause: a command is a few words.
 export const COMMAND_PAUSE_MS = 1600;
@@ -691,22 +692,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surfaceMuted,
   },
   actions: { flexDirection: 'row', gap: 12 },
-  primaryButton: { flex: 1, paddingVertical: 12, borderRadius: 12, alignItems: 'center', backgroundColor: colors.primary },
-  primaryText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnPrimary,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
-  secondaryButton: {
-    flex: 1,
-    paddingVertical: 12,
-    borderRadius: 12,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-  },
-  secondaryText: { ...typography.bodyEmphasis, color: colors.textPrimary, fontWeight: '400', ...textShadow },
+  primaryButton: { ...BUTTON_PRIMARY, flex: 1 },
+  primaryText: { ...BUTTON_PRIMARY_TEXT },
+  secondaryButton: { ...BUTTON_SECONDARY, flex: 1 },
+  secondaryText: { ...BUTTON_SECONDARY_TEXT },
 });

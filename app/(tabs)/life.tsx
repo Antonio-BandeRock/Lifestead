@@ -41,7 +41,7 @@ import { useMyItemsCategories } from '../../hooks/useMyItemsCategories';
 import { PageIdentityLabel } from '../../components/PageIdentityLabel';
 import { PopoverSelect } from '../../components/PopoverSelect';
 import { SwipeableTabScreen } from '../../components/SwipeableTabScreen';
-import { BUTTON_SHADOW, colors } from '../../constants/colors';
+import { colors } from '../../constants/colors';
 import { useFloatingButtonScrollPadding } from '../../constants/floatingButton';
 import { textShadow, typography } from '../../constants/typography';
 import { useAutoOpenLensHubSignal } from '../../hooks/useAutoOpenLensHubSignal';
@@ -118,6 +118,7 @@ import { VaultClosedBand } from '../../components/VaultClosedBand';
 import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
 import { t } from '../../lib/i18n';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../../constants/buttons';
 
 // Which vault categories each lens shows (lib/vault.ts, phase 2). My Meds
 // and Conditions say so inside their own lists, beside the tools that stay.
@@ -2276,25 +2277,8 @@ const styles = StyleSheet.create({
 
   actionRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
   formActions: { flexDirection: 'row', gap: 10, marginTop: 16 },
-  primaryButton: {
-    backgroundColor: colors.buttonColor,
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 18,
-    alignItems: 'center',
-    marginTop: 12,
-    ...BUTTON_SHADOW,
-  },
-  primaryButtonText: { ...typography.body, color: colors.textOnButton, textShadowColor: 'transparent', textShadowRadius: 0 },
-  secondaryButton: {
-    backgroundColor: colors.surface,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: colors.border,
-    paddingVertical: 12,
-    paddingHorizontal: 18,
-    alignItems: 'center',
-    marginTop: 12,
-  },
-  secondaryButtonText: { ...typography.body, color: colors.textPrimary, ...textShadow },
+  primaryButton: { ...BUTTON_PRIMARY, marginTop: 12 },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+  secondaryButton: { ...BUTTON_SECONDARY, marginTop: 12 },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
 });

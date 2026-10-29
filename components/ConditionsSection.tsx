@@ -14,7 +14,7 @@ import { EntrySearchInput, searchFieldStyle } from './EntrySearchInput';
 import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, HomeSectionBand, useBandGap } from './HomeSectionBand';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { CONDITION_CODE_TO_DIGEST_KEY, DIGEST_KEY_TO_CONDITION_CODE } from '../lib/conditionCodeMap';
 import {
@@ -59,6 +59,7 @@ import { ThumbRow } from './ThumbRow';
 import { VaultClosedBand } from './VaultClosedBand';
 import { useCategoryClosed } from '../lib/vaultSession';
 import { t, tl } from '../lib/i18n';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // The 19 conditions, on the Life tab. Direct instruction, 2026-09-19:
 // "move Conditions from Digest to Life, all condition icons be changed to
@@ -1218,27 +1219,13 @@ function makeStyles(tabColor: string, bandGap: number = HOME_BAND_GAP) {
     checkLabel: { ...typography.body, color: colors.textPrimary, ...textShadow },
     formActions: { flexDirection: 'row', gap: 10, marginTop: 4 },
     primaryButton: {
-      backgroundColor: colors.buttonColor,
-      borderRadius: 10,
-      paddingVertical: 12,
-      paddingHorizontal: 18,
-      alignItems: 'center',
+      ...BUTTON_PRIMARY,
       alignSelf: 'flex-start',
       marginTop: 8,
-      ...BUTTON_SHADOW,
     },
-    primaryButtonText: { ...typography.body, color: colors.textOnButton, textShadowColor: 'transparent', textShadowRadius: 0 },
-    secondaryButton: {
-      backgroundColor: colors.surface,
-      borderRadius: 10,
-      borderWidth: 1,
-      borderColor: colors.border,
-      paddingVertical: 12,
-      paddingHorizontal: 18,
-      alignItems: 'center',
-      marginTop: 8,
-    },
-    secondaryButtonText: { ...typography.body, color: colors.textPrimary, ...textShadow },
+    primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+    secondaryButton: { ...BUTTON_SECONDARY, marginTop: 8 },
+    secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
 
     // Inside a band. The band's content is a surface already, so the
     // description sits on it directly.

@@ -6,6 +6,7 @@ import { modalAnimationType } from '../lib/visualPreferences';
 import { AppTextInput } from './AppTextInput';
 import { StandaloneKeyboard } from './StandaloneKeyboard';
 import { ThumbRow } from './ThumbRow';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 export type PasswordPromptMode = 'set' | 'enter';
 
@@ -203,32 +204,8 @@ const styles = StyleSheet.create({
     gap: 12,
     marginTop: 12,
   },
-  cancelButton: {
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-  },
-  cancelButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textSecondary,
-    ...textShadow,
-  },
-  okButton: {
-    paddingHorizontal: 24,
-    paddingVertical: 10,
-    borderRadius: 8,
-    backgroundColor: colors.primary,
-  },
-  okButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnPrimary,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  cancelButton: { ...BUTTON_SECONDARY },
+  cancelButtonText: { ...BUTTON_SECONDARY_TEXT },
+  okButton: { ...BUTTON_PRIMARY },
+  okButtonText: { ...BUTTON_PRIMARY_TEXT },
 });

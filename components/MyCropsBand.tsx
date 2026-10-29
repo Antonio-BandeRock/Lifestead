@@ -15,7 +15,7 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useMemo, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import type { useBandFolds } from '../hooks/useBandFolds';
 import { sortByLabel } from '../lib/choiceOrder';
@@ -37,6 +37,7 @@ import { PopoverSelect } from './PopoverSelect';
 import { useTabBandStyles, TabBand } from './TabBand';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 type Folds = ReturnType<typeof useBandFolds>;
 
@@ -313,19 +314,6 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
   },
   wideInput: { flex: 1, minWidth: 160 },
-  primaryButton: {
-    backgroundColor: colors.buttonColor,
-    borderRadius: 8,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    alignItems: 'center',
-    alignSelf: 'flex-start',
-    ...BUTTON_SHADOW,
-  },
-  primaryButtonText: {
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
 });

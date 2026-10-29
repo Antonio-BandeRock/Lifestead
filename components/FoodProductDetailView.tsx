@@ -6,7 +6,7 @@ import { useConfirmSheet } from './ConfirmSheet';
 import { useInfoAlert } from './InfoAlert';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { TrendLineChart } from './TrendLineChart';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, homeBandNoHairlines, homeBandStyle } from './HomeSectionBand';
 import {
@@ -22,6 +22,7 @@ import {
 import { formatAmount } from '../lib/nutrientAnalysis';
 import { classSentence, howMatchedSentence, recallNumberSentence, recallTitle, statusSentence, whatToDoSentence, type RecallMatch } from '../lib/recalls';
 import { getProductRecallMatches, isRecallCheckOn, setAsideRecalls } from '../lib/recallsDb';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // A Food lens since 2026-09-13 (it was app/food-product-detail.tsx, a
 // Stack screen, from 2026-08-16 until then), for the same reason
@@ -412,38 +413,18 @@ const styles = StyleSheet.create({
   },
   disabled: { opacity: 0.6 },
   primaryButton: {
+    ...BUTTON_PRIMARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-    borderRadius: 10,
-    paddingVertical: 12,
   },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   secondaryButton: {
+    ...BUTTON_SECONDARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 10,
-    paddingVertical: 12,
     marginTop: 4,
   },
-  secondaryButtonText: { ...typography.bodyEmphasis, color: colors.textPrimary, ...textShadow },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   dataTable: {
     borderWidth: 1,
     borderColor: colors.border,

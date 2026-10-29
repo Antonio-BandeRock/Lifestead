@@ -270,7 +270,7 @@ import { RecordPhotos } from '../../components/RecordPhotos';
 import { SwipeableTabScreen } from '../../components/SwipeableTabScreen';
 import { WhyExplainer } from '../../components/WhyExplainer';
 import { RuleSeverityTag } from '../../components/RuleSeverityTag';
-import { BUTTON_SHADOW, colors } from '../../constants/colors';
+import { colors } from '../../constants/colors';
 import { useFloatingButtonScrollPadding } from '../../constants/floatingButton';
 import { textShadow, typography } from '../../constants/typography';
 import { CalmBands, HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, HomeSectionBand, homeBandNoHairlines, homeBandStyle } from '../../components/HomeSectionBand';
@@ -340,6 +340,7 @@ import { useCategoryClosed } from '../../lib/vaultSession';
 import { t } from '../../lib/i18n';
 import { appLocale } from '@/lib/language';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../../constants/buttons';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -7222,14 +7223,7 @@ const styles = StyleSheet.create({
   // on the photo background. A fill is the fix rather than a shadow: an
   // unfilled control on a photo is exactly the case the standing rule
   // exists for.
-  addButton: {
-    borderWidth: 1,
-    borderColor: colors.primary,
-    borderRadius: 10,
-    paddingVertical: 12,
-    alignItems: 'center',
-    backgroundColor: colors.surface,
-  },
+  addButton: { ...BUTTON_PRIMARY },
 
   // Since 2026-09-13 a heading introducing a group is the band's own header
   // row (ScheduleBand), and a standalone line sits in a bandBox; what is
@@ -7256,7 +7250,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 12,
   },
-  addButtonText: { ...typography.bodyEmphasis, color: colors.primary, ...textShadow },
+  addButtonText: { ...BUTTON_PRIMARY_TEXT },
   // Meals lens' own week strip, 2026-08-18 -- same border/color rule as
   // every other card on this page (a TAB_COLOR border, TAB_COLOR text).
   weekStripCard: {
@@ -7494,20 +7488,10 @@ const styles = StyleSheet.create({
   },
   formActions: { flexDirection: 'row', justifyContent: 'flex-end', gap: 12, marginTop: 16 },
   // Filled for the same reason as addButton above.
-  secondaryButton: { paddingVertical: 10, paddingHorizontal: 14, borderRadius: 8, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.surface },
-  secondaryButtonText: { ...typography.bodyEmphasis, color: TAB_COLOR, ...textShadow },
-  primaryButton: { paddingVertical: 10, paddingHorizontal: 14, borderRadius: 8, backgroundColor: colors.buttonColor, ...BUTTON_SHADOW },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  secondaryButton: { ...BUTTON_SECONDARY },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
+  primaryButton: { ...BUTTON_PRIMARY },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   primaryButtonDisabled: { opacity: 0.5 },
   // Meal Plan/Shopping List lenses, 2026-08-24.
   mealPlanDayRow: {

@@ -40,7 +40,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { AppTextInput } from '../components/AppTextInput';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { CalmBands, HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, homeBandNoHairlines, homeBandStyle } from '../components/HomeSectionBand';
@@ -64,6 +64,7 @@ import {
   type DriveItemRef,
 } from '../lib/oneDriveGraph';
 import { ONEDRIVE_NOT_CONFIGURED } from '../lib/oneDriveConfig';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 /** Where the listing came from, so Back knows what to go back to. */
 type Root = 'shared' | 'mine';
@@ -512,20 +513,10 @@ const styles = StyleSheet.create({
     ...typography.body,
   },
   primaryButton: {
+    ...BUTTON_PRIMARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-    borderRadius: 10,
-    paddingVertical: 14,
     marginTop: 4,
   },
-  primaryButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnButton,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
 });

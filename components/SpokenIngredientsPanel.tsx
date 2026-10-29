@@ -7,7 +7,7 @@
 // lib/spokenIngredients.ts; the queue in hooks/useSpokenIngredientQueue.ts.
 import { useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { explainNotYet } from '../lib/notYet';
 import {
@@ -20,6 +20,7 @@ import {
 import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
 import { useTabBandStyles } from './TabBand';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 function amountText(row: { quantity: number; unit: string }): string {
   const amount = Number.isInteger(row.quantity) ? String(row.quantity) : String(Math.round(row.quantity * 100) / 100);
@@ -130,7 +131,7 @@ export function SpokenIngredientsPanel({
           onChangeText={setText}
         />
         <TouchableOpacity style={styles.secondaryButton} onPress={() => void find(text)}>
-          <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Find These</Text>
+          <Text style={styles.secondaryButtonText}>Find These</Text>
         </TouchableOpacity>
       </View>
 
@@ -182,7 +183,7 @@ export function SpokenIngredientsPanel({
               );
             })}
           </View>
-          <TouchableOpacity style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]} onPress={() => void addThese()}>
+          <TouchableOpacity style={styles.primaryButton} onPress={() => void addThese()}>
             <Text style={styles.primaryButtonText}>
               {matched.length > 0 ? `Add These One at a Time (${matched.length})` : 'Add These One at a Time'}
             </Text>
@@ -210,17 +211,8 @@ const styles = StyleSheet.create({
     ...textShadow,
     minHeight: 72,
   },
-  secondaryButton: {
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: colors.border,
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    alignItems: 'center',
-    marginTop: 12,
-    backgroundColor: colors.surface,
-  },
-  secondaryButtonText: { ...typography.bodyEmphasis, ...textShadow },
+  secondaryButton: { ...BUTTON_SECONDARY, marginTop: 12 },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   rowButtons: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 8 },
   smallButton: {
     borderRadius: 8,
@@ -231,20 +223,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
   },
   smallButtonText: { ...typography.body, ...textShadow },
-  primaryButton: {
-    borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    alignItems: 'center',
-    marginTop: 14,
-    ...BUTTON_SHADOW,
-  },
-  primaryButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnButton,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY, marginTop: 14 },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
 });
 
 // The line on a builder's pending card while spoken foods are waiting, with a

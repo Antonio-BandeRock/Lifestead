@@ -22,7 +22,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { formatTradeMoney } from '../lib/harvestTrade';
 import {
@@ -51,6 +51,7 @@ import { GardenTermField } from './GardenTermField';
 import { PopoverSelect } from './PopoverSelect';
 import { RecordPhotos } from './RecordPhotos';
 import { ThumbRow } from './ThumbRow';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 const TAB_COLOR = colors.tabGarden;
 const PRIMARY_BUTTON_BACKGROUND = colors.buttonColor;
@@ -487,7 +488,7 @@ export function GrowSetupSection({ plot, onChanged }: Props) {
           ) : null}
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
           <ThumbRow primary="first" style={styles.actionRow}>
-            <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSave}>
+            <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
               <Text style={styles.primaryButtonText}>Save to the Setup</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => { setAdding(false); setError(null); }}>
@@ -496,7 +497,7 @@ export function GrowSetupSection({ plot, onChanged }: Props) {
           </ThumbRow>
         </View>
       ) : (
-        <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={() => setAdding(true)}>
+        <TouchableOpacity style={styles.primaryButton} onPress={() => setAdding(true)}>
           <Text style={styles.primaryButtonText}>+ Add to the Setup</Text>
         </TouchableOpacity>
       )}
@@ -532,13 +533,8 @@ const styles = StyleSheet.create({
   pillTextActive: { color: colors.textOnButton },
   nestedForm: { gap: 8, paddingLeft: 10, borderLeftWidth: 2, borderLeftColor: TAB_COLOR, marginVertical: 4 },
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4 },
-  primaryButton: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', alignSelf: 'flex-start', ...BUTTON_SHADOW },
-  primaryButtonText: {
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
 });

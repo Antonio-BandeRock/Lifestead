@@ -7,7 +7,7 @@ import { AppTextInput } from './AppTextInput';
 import { NotesInput } from './NotesInput';
 import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, homeBandNoHairlines, HomeSectionBand, homeBandStyle } from './HomeSectionBand';
 import { useInfoAlert } from './InfoAlert';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useBandFolds } from '../hooks/useBandFolds';
 import {
@@ -23,6 +23,7 @@ import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { useWalkMark } from './WalkMark';
 import { appLocale } from '@/lib/language';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 function todayDateString(): string {
   const now = new Date();
@@ -468,15 +469,8 @@ function makeStyles(tabColor: string) {
   return StyleSheet.create({
     actionText: { ...typography.captionEmphasis, color: tabColor, ...textShadow },
     actionTextRemove: { ...typography.captionEmphasis, color: colors.danger, ...textShadow },
-    addButton: {
-      borderWidth: 1,
-      borderColor: colors.primary,
-      borderRadius: 10,
-      paddingVertical: 12,
-      alignItems: 'center',
-      backgroundColor: colors.surface,
-    },
-    addButtonText: { ...typography.bodyEmphasis, color: colors.primary, ...textShadow },
+    addButton: { ...BUTTON_PRIMARY },
+    addButtonText: { ...BUTTON_PRIMARY_TEXT },
     appointmentRowTime: { width: 76, lineHeight: 16 },
     bandBox: {
       ...homeBandStyle,
@@ -546,17 +540,8 @@ function makeStyles(tabColor: string) {
 
     },
     pillTextSmall: { ...typography.caption, color: tabColor, ...textShadow },
-    primaryButton: { paddingVertical: 10, paddingHorizontal: 14, borderRadius: 8, backgroundColor: colors.buttonColor, ...BUTTON_SHADOW },
-    primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton,
-
-      // Dark text: cancel any shadow inherited from a base style it is
-
-      // composed with. See constants/typography.ts.
-
-      textShadowColor: 'transparent',
-
-      textShadowRadius: 0,
-    },
+    primaryButton: { ...BUTTON_PRIMARY },
+    primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
     row: {
       borderRadius: 10,
       backgroundColor: colors.surfaceMuted,
@@ -568,8 +553,8 @@ function makeStyles(tabColor: string) {
     rowTextCol: { flex: 1 },
     rowTime: { ...typography.captionEmphasis, color: tabColor, width: 68, ...textShadow },
     rowTitle: { ...typography.label, color: tabColor, ...textShadow },
-    secondaryButton: { paddingVertical: 10, paddingHorizontal: 14, borderRadius: 8, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.surface },
-    secondaryButtonText: { ...typography.bodyEmphasis, color: tabColor, ...textShadow },
+    secondaryButton: { ...BUTTON_SECONDARY },
+    secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
     table: { gap: HOME_BAND_ACCENT_WIDTH },
     timeInput: { width: 56, textAlign: 'center' },
     timeRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },

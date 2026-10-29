@@ -9,6 +9,7 @@ import { colors } from "../constants/colors";
 import { textShadow, typography } from "../constants/typography";
 import { MAX_PASSCODE_DIGITS, type PasscodeKind } from "../lib/appLock";
 import { AppTextInput } from "./AppTextInput";
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 // Where a passcode is typed, on the lock screen and in App Lock setup.
 //
@@ -207,16 +208,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
   },
-  submitButton: {
-    backgroundColor: colors.buttonColor,
-    borderRadius: 10,
-    paddingVertical: 12,
-    alignItems: "center",
-  },
-  submitText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnButton,
-    textShadowColor: "transparent",
-    textShadowRadius: 0,
-  },
+  submitButton: { ...BUTTON_PRIMARY },
+  submitText: { ...BUTTON_PRIMARY_TEXT },
 });

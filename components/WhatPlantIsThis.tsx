@@ -8,7 +8,7 @@
 
 import { useState } from 'react';
 import { Linking, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import {
   IDENTIFY_CAUTION,
@@ -21,6 +21,7 @@ import {
   type IdentifyServiceId,
 } from '../lib/plantIdentify';
 import { makeTabBandStyles } from './TabBand';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 const TAB_COLOR = colors.tabGarden;
 // 1.0.61.7, extended to every Garden lens in 1.0.61.8: the calm look
@@ -70,7 +71,7 @@ export function WhatPlantIsThis({ openedWith, onOpened }: Props) {
           {IDENTIFY_SERVICES.map((service) => (
             <View key={service.id} style={styles.serviceRow}>
               <TouchableOpacity
-                style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]}
+                style={styles.primaryButton}
                 onPress={() => handleOpen(service)}
                 accessibilityRole="button"
               >
@@ -98,13 +99,8 @@ const styles = StyleSheet.create({
   serviceRow: { gap: 4 },
   bodyText: { ...typography.body, color: colors.textPrimary, ...textShadow },
   captionText: { ...typography.caption, color: colors.textMuted, ...textShadow },
-  primaryButton: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', alignSelf: 'flex-start', ...BUTTON_SHADOW },
-  primaryButtonText: {
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
 });

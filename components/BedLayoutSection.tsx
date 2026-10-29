@@ -14,7 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, Text, TouchableOpacity, View, type GestureResponderEvent } from 'react-native';
 import Svg, { Circle, Line, Rect, Text as SvgText } from 'react-native-svg';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import {
   LAYOUT_INTRO,
@@ -40,6 +40,7 @@ import { findCropGuide } from '../lib/cropGuides';
 import { updateGardenPlot, type GardenPlanting, type GardenPlot } from '../lib/db';
 import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 const TAB_COLOR = colors.tabGarden;
 const MAX_PLAN_HEIGHT = 420;
@@ -190,7 +191,7 @@ export function BedLayoutSection({ plot, plantings, onSizeSaved }: Props) {
           <PopoverSelect options={UNIT_OPTIONS} selected={unitChoice} onSelect={(value) => setUnitChoice(value as LayoutUnit)} tabColor={TAB_COLOR} width={120} />
         </View>
         {error ? <Text style={styles.errorText}>{error}</Text> : null}
-        <TouchableOpacity style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]} onPress={() => handleSaveSize().catch(() => undefined)}>
+        <TouchableOpacity style={styles.primaryButton} onPress={() => handleSaveSize().catch(() => undefined)}>
           <Text style={styles.primaryButtonText}>Save the Size</Text>
         </TouchableOpacity>
       </View>
@@ -443,11 +444,6 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
   },
   sizeInput: { width: 90 },
-  primaryButton: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', alignSelf: 'flex-start', ...BUTTON_SHADOW },
-  primaryButtonText: {
-    ...typography.body,
-    color: colors.textOnButton,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
 });

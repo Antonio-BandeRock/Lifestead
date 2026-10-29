@@ -34,6 +34,7 @@ import type { PlateOffer } from '../lib/plateSource';
 import { getPlateOfferForMeal, keepPlateUses } from '../lib/plateSourceDb';
 import { describePantryAction, describePantryOffer, type PantryOffer } from '../lib/onHand';
 import { getPantryOffersForMeal, keepPantryUses } from '../lib/onHandDb';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 type Open = {
   mealId: string;
@@ -220,16 +221,9 @@ const styles = StyleSheet.create({
   rowLine: { ...typography.caption, color: colors.textSecondary, marginTop: 3, ...textShadow },
   caption: { ...typography.caption, color: colors.textMuted, marginTop: 10, ...textShadow },
   buttonRow: { flexDirection: 'row', gap: 12, marginTop: 14, justifyContent: 'flex-start' },
-  cancelButton: { paddingHorizontal: 16, paddingVertical: 10 },
-  cancelButtonText: { ...typography.bodyEmphasis, color: colors.textSecondary, ...textShadow },
-  okButton: { paddingHorizontal: 24, paddingVertical: 10, borderRadius: 8, backgroundColor: colors.primary },
+  cancelButton: { ...BUTTON_SECONDARY },
+  cancelButtonText: { ...BUTTON_SECONDARY_TEXT },
+  okButton: { ...BUTTON_PRIMARY },
   okButtonOff: { opacity: 0.5 },
-  okButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnPrimary,
-    // Dark text: cancel the shadow the base style carries. See
-    // constants/typography.ts.
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  okButtonText: { ...BUTTON_PRIMARY_TEXT },
 });

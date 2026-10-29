@@ -8,7 +8,7 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
 import { Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { removePhotosOf } from '../lib/mediaDb';
 import { dateLabel } from '../lib/moonSky';
@@ -54,6 +54,7 @@ import { makeTabBandStyles } from './TabBand';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
 import { t } from '../lib/i18n';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 const TAB_COLOR = colors.tabGarden;
 // 1.0.61.7, extended to every Garden lens in 1.0.61.8: the calm look
@@ -179,7 +180,7 @@ export function SeedsLens({ scrollBottomPadding }: { scrollBottomPadding: number
             }}
           />
         ) : (
-          <TouchableOpacity ref={walkMark.ref('seeds.add')} style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]} onPress={() => setPicking(true)}>
+          <TouchableOpacity ref={walkMark.ref('seeds.add')} style={styles.primaryButton} onPress={() => setPicking(true)}>
             <Text style={styles.primaryButtonText}>Add a Packet</Text>
           </TouchableOpacity>
         )}
@@ -301,7 +302,7 @@ function PacketForm({
       <PhotoStrip ownerKind={SEED_STOCK_OWNER_KIND} ownerId={draft.id} tabColor={TAB_COLOR} addLabel="Photo of the Packet" title={`${draft.foodName} seed packet`} />
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
       <ThumbRow primary="first" style={styles.row}>
-        <TouchableOpacity ref={walkMark.ref('seeds.save')} style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]} onPress={save}>
+        <TouchableOpacity ref={walkMark.ref('seeds.save')} style={styles.primaryButton} onPress={save}>
           <Text style={styles.primaryButtonText}>Save Packet</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={onCancel}>
@@ -441,7 +442,7 @@ function TestSection({ seedId, tests, onChanged }: { seedId: string; tests: Seed
           </View>
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
           <ThumbRow primary="first" style={styles.row}>
-            <TouchableOpacity ref={walkMark.ref('seeds.saveTest')} style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]} onPress={save}>
+            <TouchableOpacity ref={walkMark.ref('seeds.saveTest')} style={styles.primaryButton} onPress={save}>
               <Text style={styles.primaryButtonText}>Save Test</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setAdding(false)}>
@@ -545,11 +546,6 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
   },
   shortInput: { width: 90 },
-  primaryButton: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', alignSelf: 'flex-start', ...BUTTON_SHADOW },
-  primaryButtonText: {
-    ...typography.body,
-    color: colors.textOnButton,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
 });

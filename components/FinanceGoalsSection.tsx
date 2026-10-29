@@ -8,7 +8,7 @@ import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
 import { TabBand, useTabBandStyles } from './TabBand';
 import { useBandFolds } from '../hooks/useBandFolds';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import {
   GOAL_COST_KINDS,
@@ -39,6 +39,7 @@ import { parsePriceInput } from '../lib/groceryList';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
 import { ThumbEndRow } from './ThumbEndRow';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // Goals, 2026-09-05, pass 3 of the Finances rebuild.
 //
@@ -572,15 +573,9 @@ function makeStyles(tabColor: string) {
       borderRadius: 999, paddingHorizontal: 12, paddingVertical: 8,
     },
     pillTextSmall: { ...typography.caption, color: colors.textPrimary, ...textShadow },
-    primaryButton: {
-      backgroundColor: colors.buttonColor, borderRadius: 10, paddingVertical: 12, paddingHorizontal: 18,
-      alignItems: 'center', marginTop: 12, ...BUTTON_SHADOW,
-    },
-    primaryButtonText: { ...typography.body, color: colors.textOnButton, textShadowColor: 'transparent', textShadowRadius: 0 },
-    secondaryButton: {
-      backgroundColor: colors.surface, borderRadius: 10, borderWidth: 1, borderColor: colors.border,
-      paddingVertical: 12, paddingHorizontal: 18, alignItems: 'center', marginTop: 12,
-    },
-    secondaryButtonText: { ...typography.body, color: colors.textPrimary, ...textShadow },
+    primaryButton: { ...BUTTON_PRIMARY, marginTop: 12 },
+    primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+    secondaryButton: { ...BUTTON_SECONDARY, marginTop: 12 },
+    secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   });
 }

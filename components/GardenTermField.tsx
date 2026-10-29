@@ -16,7 +16,7 @@
 // three; onTermsChanged asks the parent to reload after a save or removal.
 
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import {
   findTerm,
@@ -33,9 +33,9 @@ import { useState } from 'react';
 import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 const TAB_COLOR = colors.tabGarden;
-const PRIMARY_BUTTON_BACKGROUND = colors.buttonColor;
 const ADD_TERM = '__add_term__';
 
 type Props = {
@@ -146,7 +146,7 @@ export function GardenTermField({ list, label, selected, onSelect, terms, onTerm
           <Text style={styles.captionText}>{termSaveNote(list)}</Text>
           {formError ? <Text style={styles.errorText}>{formError}</Text> : null}
           <ThumbRow primary="first" style={styles.actionRow}>
-            <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSave}>
+            <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
               <Text style={styles.primaryButtonText}>Save</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setForm(null)}>
@@ -172,7 +172,7 @@ export function GardenTermField({ list, label, selected, onSelect, terms, onTerm
           </View>
           <ThumbRow primary="first" style={styles.actionRow}>
             <TouchableOpacity
-              style={[styles.primaryButton, { backgroundColor: removal.moveTo ? PRIMARY_BUTTON_BACKGROUND : colors.border }]}
+              style={[styles.primaryButton, { opacity: removal.moveTo ? 1 : 0.5 }]}
               disabled={!removal.moveTo}
               onPress={() => finishRemoval(removal.id, removal.moveTo, removal.counts)}
             >
@@ -203,13 +203,8 @@ const styles = StyleSheet.create({
   },
   nestedForm: { gap: 8, paddingLeft: 10, borderLeftWidth: 2, borderLeftColor: TAB_COLOR, marginVertical: 4 },
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4 },
-  primaryButton: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', ...BUTTON_SHADOW },
-  primaryButtonText: {
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
 });

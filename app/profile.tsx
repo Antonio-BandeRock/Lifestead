@@ -26,7 +26,7 @@ import { useBusyOverlay } from '../components/BusyOverlay';
 import { useConfirmSheet } from '../components/ConfirmSheet';
 import { useInfoAlert } from '../components/InfoAlert';
 import { confirmItsYou } from '../lib/freshAuth';
-import { BUTTON_SHADOW, colors, GROUND_THEME_LABELS, GROUND_THEMES, type GroundTheme } from '../constants/colors';
+import { colors, GROUND_THEME_LABELS, GROUND_THEMES, type GroundTheme } from '../constants/colors';
 import { FLOATING_BUTTON_BOTTOM_OFFSET, FLOATING_BUTTON_SIZE, useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { TAB_HUB_ICON_SOURCES } from '../constants/tabHubIcons';
 import { TAB_ROUTES } from '../constants/tabs';
@@ -285,6 +285,7 @@ import { useOnVaultChange } from '../lib/vaultReads';
 import { useCategoryClosed } from '../lib/vaultSession';
 import { t, tl } from '../lib/i18n';
 import { appLocale } from '@/lib/language';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 // Whether a backup that has been reached is restored or only checked.
 type BackupUse = 'restore' | 'check';
@@ -6955,42 +6956,14 @@ const styles = StyleSheet.create({
   // full-width style), colors.primary instead of colors.danger since "Add
   // a food allergy" isn't a destructive action.
   replayWelcomeButton: {
+    ...BUTTON_PRIMARY,
     alignSelf: 'flex-start',
     marginTop: 6,
     marginBottom: 4,
-    paddingHorizontal: 18,
-    paddingVertical: 10,
-    borderRadius: 12,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
   },
-  replayWelcomeButtonText: {
-    ...typography.label,
-    color: colors.textOnButton,
-    // Dark text on a light fill: cancel any inherited shadow, the same as
-    // addAllergyButtonText just below.
-    textShadowColor: 'transparent',
-  },
-  addAllergyButton: {
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    borderRadius: 10,
-    backgroundColor: colors.primary,
-    justifyContent: 'center',
-  },
-  addAllergyButtonText: {
-    ...typography.captionEmphasis,
-    color: colors.textOnPrimary,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  replayWelcomeButtonText: { ...BUTTON_PRIMARY_TEXT },
+  addAllergyButton: { ...BUTTON_PRIMARY },
+  addAllergyButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: {
     ...typography.caption,
     color: colors.danger,
@@ -7030,26 +7003,8 @@ const styles = StyleSheet.create({
     ...textShadow,
 
   },
-  checkinButton: {
-    backgroundColor: colors.primary,
-    borderRadius: 12,
-    paddingVertical: 12,
-    alignItems: 'center',
-    marginTop: 14,
-  },
-  checkinButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnPrimary,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  checkinButton: { ...BUTTON_PRIMARY, marginTop: 14 },
+  checkinButtonText: { ...BUTTON_PRIMARY_TEXT },
   // For a checkinButton label that deliberately spans more than one line.
   // checkinButton's own alignItems: 'center' centers the Text box itself,
   // but says nothing about how the lines inside that box align to each

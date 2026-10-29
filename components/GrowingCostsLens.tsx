@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useBandFolds } from '../hooks/useBandFolds';
 import { sortByLabel } from '../lib/choiceOrder';
@@ -51,6 +51,7 @@ import { VaultClosedBand } from './VaultClosedBand';
 import { useOnVaultChange } from '../lib/vaultReads';
 import { useWalkMark } from './WalkMark';
 import { t, tl } from '../lib/i18n';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 // Growing Costs, a lens of Garden.
 //
@@ -114,7 +115,6 @@ const TAB_COLOR = colors.tabGarden;
 // (CalmBands in components/HomeSectionBand.tsx), bands a left-accent width
 // apart with no hairlines.
 const band = makeTabBandStyles(TAB_COLOR, { calm: true });
-const PRIMARY_BUTTON_BACKGROUND = colors.buttonColor;
 
 const ADD_KIND = '__add_kind__';
 const NO_PLOT = '__none__';
@@ -518,7 +518,7 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
                 </Text>
                 {kindError ? <Text style={styles.errorText}>{kindError}</Text> : null}
                 <ThumbRow primary="first" style={styles.actionRow}>
-                  <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSaveKind}>
+                  <TouchableOpacity style={styles.primaryButton} onPress={handleSaveKind}>
                     <Text style={styles.primaryButtonText}>Save Kind</Text>
                   </TouchableOpacity>
                   <TouchableOpacity onPress={() => setKindForm(null)}>
@@ -545,7 +545,7 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
                 </View>
                 <ThumbRow primary="first" style={styles.actionRow}>
                   <TouchableOpacity
-                    style={[styles.primaryButton, { backgroundColor: kindRemoval.moveTo ? PRIMARY_BUTTON_BACKGROUND : colors.border }]}
+                    style={[styles.primaryButton, { opacity: kindRemoval.moveTo ? 1 : 0.5 }]}
                     disabled={!kindRemoval.moveTo}
                     onPress={() => finishKindRemoval(kindRemoval.id, kindRemoval.moveTo)}
                   >
@@ -611,7 +611,7 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
             )}
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
             <ThumbRow primary="first" style={styles.actionRow}>
-              <TouchableOpacity ref={walkMark.ref('costs.save')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSave}>
+              <TouchableOpacity ref={walkMark.ref('costs.save')} style={styles.primaryButton} onPress={handleSave}>
                 <Text style={styles.primaryButtonText}>Save Cost</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setAdding(false)}>
@@ -627,7 +627,7 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
             </Text>
             <TouchableOpacity
               ref={walkMark.ref('costs.add')}
-              style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]}
+              style={styles.primaryButton}
               onPress={() => setAdding(true)}
             >
               <Text style={styles.primaryButtonText}>+ Add a Cost</Text>
@@ -688,7 +688,7 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
               })}
               {groupError ? <Text style={styles.errorText}>{groupError}</Text> : null}
               <ThumbRow primary="first" style={styles.actionRow}>
-                <TouchableOpacity ref={walkMark.ref('costs.saveGroup')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSaveGroup}>
+                <TouchableOpacity ref={walkMark.ref('costs.saveGroup')} style={styles.primaryButton} onPress={handleSaveGroup}>
                   <Text style={styles.primaryButtonText}>Save Group</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setGroupEditing(false)}>
@@ -701,7 +701,7 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
           ) : (
             <TouchableOpacity
               ref={walkMark.ref('costs.combine')}
-              style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]}
+              style={styles.primaryButton}
               onPress={() => startGroup(null)}
             >
               <Text style={styles.primaryButtonText}>+ Combine Areas</Text>
@@ -779,13 +779,8 @@ const styles = StyleSheet.create({
   checkLabel: { ...typography.body, color: colors.textPrimary, ...textShadow, flex: 1 },
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4 },
   nestedForm: { gap: 8, paddingLeft: 10, borderLeftWidth: 2, borderLeftColor: TAB_COLOR, marginVertical: 4 },
-  primaryButton: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', ...BUTTON_SHADOW },
-  primaryButtonText: {
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
 });

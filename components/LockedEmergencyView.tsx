@@ -19,6 +19,7 @@ import { textShadow, typography } from '../constants/typography';
 import { readEmergencyLinesSync } from '../lib/emergencyLockScreen';
 import { setLockedCaptureShowing } from '../lib/lockedCaptures';
 import LockedCapture from '../modules/locked-capture';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 function close() {
   LockedCapture?.finishCapture();
@@ -94,6 +95,6 @@ const styles = StyleSheet.create({
   value: { ...typography.body, fontSize: 22, lineHeight: 30, color: colors.textPrimary, ...textShadow },
   hint: { ...typography.body, fontSize: 17, lineHeight: 24, color: colors.textSecondary, ...textShadow },
   actions: { flexDirection: 'row', justifyContent: 'flex-end', marginTop: 4 },
-  primaryButton: { paddingVertical: 12, paddingHorizontal: 24, borderRadius: 10, backgroundColor: colors.primary },
-  primaryText: { ...typography.bodyEmphasis, fontSize: 17, color: colors.textOnPrimary, fontWeight: '400' },
+  primaryButton: { ...BUTTON_PRIMARY },
+  primaryText: { ...BUTTON_PRIMARY_TEXT },
 });

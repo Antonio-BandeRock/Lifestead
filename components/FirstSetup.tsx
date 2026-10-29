@@ -70,6 +70,7 @@ import { GuideStripAnchor } from './GuideRoom';
 import { useStoryWalk } from './StoryWalkHost';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
 import { YourStorySection } from './YourStorySection';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 // Finish Later lasts until the app next starts, so it is kept here rather
 // than as an answer.
@@ -305,16 +306,12 @@ const styles = StyleSheet.create({
   laterRow: { flexDirection: 'row', alignItems: 'center', gap: 4, alignSelf: 'flex-start', paddingVertical: 2 },
   laterLabel: { ...typography.body, color: colors.primary, ...textShadow },
   goButton: {
+    ...BUTTON_PRIMARY_COMPACT,
     flexDirection: 'row',
-    alignItems: 'center',
     gap: 8,
     alignSelf: 'flex-start',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 10,
-    backgroundColor: colors.buttonColor,
   },
-  goText: { ...typography.bodyEmphasis, color: colors.textOnButton },
+  goText: { ...BUTTON_PRIMARY_TEXT },
   // At the top in its slot (components/GuideRoom.tsx), with the screen moved
   // down below it (1.0.74.10). It used to float 90 above the bottom edge,
   // which put it over the App Lock keys and buttons: "boxes telling them how
@@ -340,13 +337,9 @@ const styles = StyleSheet.create({
   awayTitle: { ...typography.body, color: colors.textPrimary, ...textShadow },
   awayButtons: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 16 },
   awayButton: {
+    ...BUTTON_PRIMARY_COMPACT,
     flexDirection: 'row',
-    alignItems: 'center',
     gap: 6,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 20,
-    backgroundColor: colors.buttonColor,
   },
-  awayButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton },
+  awayButtonText: { ...BUTTON_PRIMARY_TEXT },
 });

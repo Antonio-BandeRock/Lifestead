@@ -84,6 +84,7 @@ import {
   setStepTimerRing,
   type StepTimerSettings,
 } from '../lib/stepTimerDb';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 export default function RoutineWalkScreen() {
   const params = useLocalSearchParams<{ id?: string }>();
@@ -434,7 +435,7 @@ export default function RoutineWalkScreen() {
               <Ionicons
                 name={index + 1 < steps.length ? 'arrow-forward' : 'checkmark'}
                 size={18}
-                color={colors.background}
+                color={colors.textOnButton}
               />
               <Text style={styles.primaryButtonText}>
                 {index + 1 < steps.length ? 'Done, next' : 'Done, finish'}
@@ -593,16 +594,12 @@ const styles = StyleSheet.create({
   tickTextOn: { color: colors.accent },
   tickHint: { ...typography.caption, color: colors.textMuted, ...textShadow },
   primaryButton: {
+    ...BUTTON_PRIMARY,
     marginHorizontal: HOME_BAND_CONTENT_PADDING,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    paddingVertical: 15,
-    borderRadius: 999,
-    backgroundColor: colors.primary,
   },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.background },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   minorRow: { marginHorizontal: HOME_BAND_CONTENT_PADDING, flexDirection: 'row', gap: 10 },
   minorButton: {
     flex: 1,

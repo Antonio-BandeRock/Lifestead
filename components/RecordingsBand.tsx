@@ -9,7 +9,7 @@
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { typography } from '../constants/typography';
 import type { useBandFolds } from '../hooks/useBandFolds';
 import { isDesktopApp } from '../lib/desktop/bridge';
@@ -38,6 +38,7 @@ import { AppTextInput } from './AppTextInput';
 import type { useConfirmSheet } from './ConfirmSheet';
 import { TabBand } from './TabBand';
 import { ThumbRow } from './ThumbRow';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 type Folds = ReturnType<typeof useBandFolds>;
 type Confirm = ReturnType<typeof useConfirmSheet>[0];
@@ -259,7 +260,7 @@ export function RecordingsBand({ tabColor, folds, confirm }: { tabColor: string;
                         setProblem(null);
                       }}
                     >
-                      <Text style={[styles.buttonText, { color: tabColor }]}>Cancel</Text>
+                      <Text style={styles.secondaryButtonText}>Cancel</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.primaryButton} onPress={() => void saveName()}>
                       <Text style={styles.primaryButtonText}>Save</Text>
@@ -305,9 +306,10 @@ const styles = StyleSheet.create({
   },
   actions: { flexDirection: 'row', justifyContent: 'flex-end', gap: 10 },
   actionsCenter: { flexDirection: 'row', justifyContent: 'center', marginTop: 4 },
-  secondaryButton: { paddingVertical: 10, paddingHorizontal: 14, borderRadius: 8, borderWidth: 1, borderColor: colors.border },
+  secondaryButton: { ...BUTTON_SECONDARY },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   buttonText: { ...typography.bodyEmphasis, ...noShadow },
-  primaryButton: { paddingVertical: 10, paddingHorizontal: 22, borderRadius: 8, backgroundColor: colors.buttonColor, ...BUTTON_SHADOW },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton, ...noShadow },
+  primaryButton: { ...BUTTON_PRIMARY },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   disabled: { opacity: 0.4 },
 });

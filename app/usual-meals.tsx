@@ -46,6 +46,7 @@ import {
   removeUsualMeal,
   setStandingWeekdays,
 } from '../lib/usualMealDb';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 const TINT = colors.tabFood;
 
@@ -407,12 +408,12 @@ export default function UsualMealsScreen() {
             />
             <Text style={styles.muted}>{TYPED_FOODS_NOTE}</Text>
             <TouchableOpacity
-              style={[styles.addButton, { borderColor: TINT }, !name.trim() && styles.addButtonOff]}
+              style={[styles.addButton, !name.trim() && styles.addButtonOff]}
               onPress={addTyped}
               disabled={busy}
             >
-              <Ionicons name="add-circle-outline" size={18} color={TINT} />
-              <Text style={[styles.addButtonText, { color: TINT }]}>{`Add this ${slot}`}</Text>
+              <Ionicons name="add-circle-outline" size={18} color={colors.textOnButton} />
+              <Text style={styles.addButtonText}>{`Add this ${slot}`}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -504,16 +505,11 @@ const styles = StyleSheet.create({
   },
   fieldTall: { minHeight: 64, textAlignVertical: 'top' },
   addButton: {
+    ...BUTTON_PRIMARY_COMPACT,
     flexDirection: 'row',
-    alignItems: 'center',
     alignSelf: 'flex-start',
     gap: 6,
-    paddingVertical: 8,
-    paddingHorizontal: 14,
-    borderRadius: 999,
-    borderWidth: 1,
-    backgroundColor: colors.surfaceMuted,
   },
   addButtonOff: { opacity: 0.5 },
-  addButtonText: { ...typography.caption },
+  addButtonText: { ...BUTTON_PRIMARY_TEXT },
 });

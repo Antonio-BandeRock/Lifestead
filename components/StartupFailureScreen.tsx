@@ -2,10 +2,11 @@ import * as Updates from 'expo-updates';
 import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { APP_VERSION } from '../constants/version';
 import { restartApp } from '../lib/restartApp';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // Shown when the database cannot be set up, so the app is not simply dead.
 //
@@ -162,19 +163,18 @@ const styles = StyleSheet.create({
   text: { ...typography.body, color: colors.textSecondary, textAlign: 'center', ...textShadow },
   note: { ...typography.caption, color: colors.textMuted, textAlign: 'center', ...textShadow },
   primaryButton: {
-    backgroundColor: colors.buttonColor, ...BUTTON_SHADOW, borderRadius: 10,
-    paddingVertical: 12, paddingHorizontal: 16, alignItems: 'center', marginTop: 8, width: '100%',
+    ...BUTTON_PRIMARY,
+    marginTop: 8,
+    width: '100%',
   },
   primaryButtonDisabled: { opacity: 0.6 },
-  primaryButtonText: {
-    ...typography.bodyEmphasis, color: colors.textOnButton, textAlign: 'center',
-    textShadowColor: 'transparent', textShadowRadius: 0,
-  },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   secondaryButton: {
-    borderWidth: 1, borderColor: colors.border, borderRadius: 10,
-    paddingVertical: 12, paddingHorizontal: 16, alignItems: 'center', marginTop: 12, width: '100%',
+    ...BUTTON_SECONDARY,
+    marginTop: 12,
+    width: '100%',
   },
-  secondaryButtonText: { ...typography.bodyEmphasis, color: colors.textSecondary, ...textShadow },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   detailBox: {
     marginTop: 20, padding: 12, borderRadius: 10, borderWidth: 1, borderColor: colors.border,
     backgroundColor: colors.surface, width: '100%', gap: 4,

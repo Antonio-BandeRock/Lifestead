@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { BUTTON_SHADOW, colors } from "../constants/colors";
+import { colors } from "../constants/colors";
 import { textShadow, typography } from "../constants/typography";
 import { createGardenPlot, type GardenPlot } from "../lib/db";
 import { insideChoices, ON_ITS_OWN } from "../lib/gardenAreaNesting";
 import { AppTextInput } from "./AppTextInput";
 import { GardenSpaceField } from "./GardenSpaceField";
 import { PopoverSelect } from "./PopoverSelect";
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 // A short form for a new garden area, opened in place from a form that asks
 // which area something is for, so nobody has to leave what they are
@@ -20,7 +21,6 @@ import { PopoverSelect } from "./PopoverSelect";
 // the same garden_plots row Plots & Plantings does and hands its id back.
 
 const TAB_COLOR = colors.tabGarden;
-const PRIMARY_BUTTON_BACKGROUND = colors.buttonColor;
 const ON_ITS_OWN_VALUE = "__own__";
 
 type AreaLocationType = "outdoor" | "indoor" | "greenhouse";
@@ -120,7 +120,6 @@ export function QuickAreaForm(props: {
         <TouchableOpacity
           style={[
             styles.primaryButton,
-            { backgroundColor: PRIMARY_BUTTON_BACKGROUND },
           ]}
           onPress={handleSave}
         >
@@ -168,19 +167,8 @@ const styles = StyleSheet.create({
     borderLeftColor: TAB_COLOR,
     marginVertical: 4,
   },
-  primaryButton: {
-    borderRadius: 8,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    alignItems: "center",
-    ...BUTTON_SHADOW,
-  },
-  primaryButtonText: {
-    color: colors.textOnButton,
-    fontWeight: "400",
-    textShadowColor: "transparent",
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
 });

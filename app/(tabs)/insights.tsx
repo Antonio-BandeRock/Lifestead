@@ -148,7 +148,7 @@ import { ProgressRing } from '../../components/ProgressRing';
 import { SwipeableTabScreen } from '../../components/SwipeableTabScreen';
 import { WhyExplainer } from '../../components/WhyExplainer';
 import { RuleSeverityTag } from '../../components/RuleSeverityTag';
-import { BUTTON_SHADOW, colors } from '../../constants/colors';
+import { colors } from '../../constants/colors';
 import {
   FLOATING_BUTTON_SIZE,
   SECONDARY_HUB_GAP,
@@ -174,6 +174,7 @@ import { VaultClosedBand } from '../../components/VaultClosedBand';
 import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
 import { useCategoryClosed } from '../../lib/vaultSession';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../../constants/buttons';
 
 // 'YYYY-MM-DD' in LOCAL time -- same reasoning as the rest of the app
 // (see lib/db.ts/app/(tabs)/index.tsx): UTC's calendar date is wrong for
@@ -3879,11 +3880,11 @@ function LabsView({
                 resetForm();
               }}
             >
-              <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Cancel</Text>
+              <Text style={styles.secondaryButtonText}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity
               ref={walkMark.ref('labs.save')}
-              style={[styles.primaryButton, { backgroundColor: colors.buttonColor, flex: 1, opacity: saving ? 0.6 : 1 }]}
+              style={[styles.primaryButton, { flex: 1, opacity: saving ? 0.6 : 1 }]}
               onPress={handleSave}
               disabled={saving}
             >
@@ -3897,7 +3898,7 @@ function LabsView({
           style={[styles.secondaryButton, styles.rankSpaced, { borderWidth: 1, borderColor: tabColor }]}
           onPress={() => setFormOpen(true)}
         >
-          <Text style={[styles.secondaryButtonText, { color: tabColor }]}>+ Log a Result</Text>
+          <Text style={styles.secondaryButtonText}>+ Log a Result</Text>
         </TouchableOpacity>
       )}
       <View style={styles.rankSpaced}>
@@ -4267,11 +4268,11 @@ function MyMedsView({
                   resetRuleForm();
                 }}
               >
-                <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Cancel</Text>
+                <Text style={styles.secondaryButtonText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 ref={walkMark.ref('meds.saveRule')}
-                style={[styles.primaryButton, { backgroundColor: colors.buttonColor, flex: 1, opacity: saving ? 0.6 : 1 }]}
+                style={[styles.primaryButton, { flex: 1, opacity: saving ? 0.6 : 1 }]}
                 onPress={handleSaveRule}
                 disabled={saving}
               >
@@ -4285,7 +4286,7 @@ function MyMedsView({
             style={[styles.secondaryButton, styles.rankSpaced, { borderWidth: 1, borderColor: tabColor }]}
             onPress={() => setFormOpen(true)}
           >
-            <Text style={[styles.secondaryButtonText, { color: tabColor }]}>+ Add a Rule of Your Own</Text>
+            <Text style={styles.secondaryButtonText}>+ Add a Rule of Your Own</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -5154,40 +5155,14 @@ const styles = StyleSheet.create({
   // (button row/primary/secondary button) are new here even though the
   // exact same shape already exists in most other tabs' own files.
   buttonRow: { flexDirection: 'row', gap: 10, marginTop: 16 },
-  primaryButton: {
-    borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    alignItems: 'center',
-    ...BUTTON_SHADOW,
-  },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  primaryButton: { ...BUTTON_PRIMARY },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   // Outline-only until 2026-08-29, which left its label sitting on the
   // photo background. A fill is the fix rather than a shadow: an
   // unfilled control on a photo is the exact case the standing rule
   // exists for. Call sites still set their own borderColor.
-  secondaryButton: {
-    borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    alignItems: 'center',
-    backgroundColor: colors.surface,
-  },
-  secondaryButtonText: { ...typography.bodyEmphasis,
-
-    ...textShadow,
-
-  },
+  secondaryButton: { ...BUTTON_SECONDARY },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   labInput: {
     ...typography.body,
     color: colors.textPrimary,

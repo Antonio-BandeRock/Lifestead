@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { sortByLabel } from '../lib/choiceOrder';
 import type { GardenPlanting, GardenPlot } from '../lib/db';
@@ -48,6 +48,7 @@ import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { t } from '../lib/i18n';
 import { appLocale } from '@/lib/language';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 // Garden > Growing Conditions > Sensors on Your Network (I20, 2026-09-28):
 // an Ecowitt gateway read over the home network while the app is open.
@@ -403,7 +404,7 @@ export function EcowittGatewaySection(props: {
         </Text>
         {problem ? <Text style={styles.errorText}>{problem}</Text> : null}
         <ThumbRow primary="first" style={styles.actionRow}>
-          <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={() => void handleSave()}>
+          <TouchableOpacity style={styles.primaryButton} onPress={() => void handleSave()}>
             <Text style={styles.primaryButtonText}>{sends ? 'Save' : 'Save and Read It'}</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -454,7 +455,7 @@ export function EcowittGatewaySection(props: {
                   <Text style={styles.bodyText}>{reader.takeOverConfirm}</Text>
                   <ThumbRow primary="first" style={styles.actionRow}>
                     <TouchableOpacity
-                      style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]}
+                      style={styles.primaryButton}
                       onPress={() => void handleTakeOver(gateway.id)}
                     >
                       <Text style={styles.primaryButtonText}>{reader.takeOverLabel}</Text>
@@ -539,7 +540,7 @@ export function EcowittGatewaySection(props: {
             <ThumbEndRow style={styles.actionRow}>
               {entry.readsHere && !sends ? (
                 <TouchableOpacity
-                  style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]}
+                  style={styles.primaryButton}
                   disabled={busyId === gateway.id}
                   onPress={() => void readNow(gateway.id)}
                 >
@@ -635,14 +636,9 @@ const styles = StyleSheet.create({
   portInput: { width: 90 },
   confirmBox: { gap: 6, paddingLeft: 10, borderLeftWidth: 2, borderLeftColor: TAB_COLOR },
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4, flexWrap: 'wrap' },
-  primaryButton: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', ...BUTTON_SHADOW },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT },
   addButton: { alignSelf: 'flex-start' },
-  primaryButtonText: {
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
 });

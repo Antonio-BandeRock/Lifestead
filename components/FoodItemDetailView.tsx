@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { NutrientsTable, PrepView, SixDsView, type Scope } from '../app/(tabs)/insights';
 import type { ResolvedFoodSelection } from './FoodLookup';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { useConfirmSheet } from './ConfirmSheet';
 import { useInfoAlert } from './InfoAlert';
 import { formatGroceryAmount } from '../lib/groceryList';
@@ -72,6 +72,7 @@ import {
 } from '../lib/db';
 import { getPersonalizationProfile, type PersonalizationProfile } from '../lib/foodPersonalization';
 import { isFlaggedTier } from '../lib/sixDimensionsReference';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 // Step 2 of "save a Side, then actually be able to see it" (step 1:
 // app/food-items.tsx's own list screen) -- reuses Insights' own
@@ -799,34 +800,17 @@ const styles = StyleSheet.create({
   stockTitle: { ...typography.label, ...textShadow, color: colors.textPrimary },
   stockBody: { ...typography.caption, ...textShadow, color: colors.textSecondary },
   stockButton: {
+    ...BUTTON_PRIMARY_COMPACT,
     alignSelf: 'flex-start',
     marginTop: 4,
-    paddingHorizontal: 14,
-    paddingVertical: 9,
-    borderRadius: 10,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
   },
-  stockButtonText: {
-    ...typography.caption,
-    color: colors.textOnButton,
-    textShadowColor: 'transparent',
-  },
+  stockButtonText: { ...BUTTON_PRIMARY_TEXT },
   madeButton: {
+    ...BUTTON_PRIMARY,
     alignSelf: 'flex-start',
-    paddingHorizontal: 18,
-    paddingVertical: 10,
-    borderRadius: 12,
-    backgroundColor: colors.buttonColor,
     marginBottom: 12,
-    ...BUTTON_SHADOW,
   },
-  madeButtonText: {
-    ...typography.label,
-    color: colors.textOnButton,
-    // Dark text on a light fill: no shadow, matching every other button.
-    textShadowColor: 'transparent',
-  },
+  madeButtonText: { ...BUTTON_PRIMARY_TEXT },
   sideMeta: {
     ...typography.caption,
     color: colors.textSecondary,

@@ -7,7 +7,7 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import {
   FOR_WHOM_MAX,
@@ -25,6 +25,7 @@ import { AppTextInput } from './AppTextInput';
 import { useConfirmSheet } from './ConfirmSheet';
 import { useTabBandStyles } from './TabBand';
 import { useWalkMark } from './WalkMark';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 const SHOWN_AT_FIRST = 10;
 
@@ -170,19 +171,8 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
   },
   buttonRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 4 },
-  button: {
-    borderRadius: 8,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-  },
-  buttonText: {
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  button: { ...BUTTON_PRIMARY_COMPACT },
+  buttonText: { ...BUTTON_PRIMARY_TEXT },
   buttonQuiet: {
     borderRadius: 8,
     paddingHorizontal: 14,

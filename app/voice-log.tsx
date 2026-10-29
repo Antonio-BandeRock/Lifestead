@@ -38,7 +38,7 @@ import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TouchableOpacit
 import { AppTextInput } from '../components/AppTextInput';
 import { useInfoAlert } from '../components/InfoAlert';
 import { PhoneOnlyNotice } from '../components/PhoneOnlyNotice';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from '../components/HomeSectionBand';
@@ -77,6 +77,7 @@ import { useVoiceDictation, type VoiceRecognitionMode } from '../hooks/useVoiceD
 import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
 import { offerGardenUse } from '../lib/gardenPlateOffer';
 import { explainNotYet } from '../lib/notYet';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // meals.eaten_at's own stored format: 'YYYY-MM-DDTHH:mm', local time. See
 // listMealsForDate in lib/db.ts for why a UTC toISOString() would break every
@@ -644,7 +645,7 @@ export default function VoiceLogScreen() {
             <Text style={styles.sectionLabel}>That sounds like something you have had before</Text>
             <Text style={styles.text}>{mealProposal.name}</Text>
             <TouchableOpacity style={styles.primaryButton} activeOpacity={0.85} onPress={handleLogProposedMeal}>
-              <Ionicons name="repeat-outline" size={18} color={colors.background} />
+              <Ionicons name="repeat-outline" size={18} color={colors.textOnButton} />
               <Text style={styles.primaryButtonText}>{`Log ${mealProposal.name} again`}</Text>
             </TouchableOpacity>
           </View>
@@ -740,7 +741,7 @@ export default function VoiceLogScreen() {
           onPress={handleLogItems}
           disabled={phase === 'saving'}
         >
-          <Ionicons name="checkmark-circle-outline" size={18} color={colors.background} />
+          <Ionicons name="checkmark-circle-outline" size={18} color={colors.textOnButton} />
           <Text style={styles.primaryButtonText}>
             {phase === 'saving'
               ? 'Logging…'
@@ -862,30 +863,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: HOME_BAND_CONTENT_PADDING,
   },
   primaryButton: {
+    ...BUTTON_PRIMARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-    borderRadius: 10,
-    paddingVertical: 14,
   },
-  primaryButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnButton,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   secondaryButton: {
+    ...BUTTON_SECONDARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 10,
-    paddingVertical: 12,
   },
-  secondaryButtonText: { ...typography.bodyEmphasis, color: colors.textSecondary, ...textShadow },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
 });

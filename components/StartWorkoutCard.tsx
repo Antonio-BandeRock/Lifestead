@@ -13,7 +13,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { clearPlanMark, listExercisePlans, listPlanMarks, markPlanDone } from '../lib/exercisePlanDb';
 import { localDate, type PlanEntry } from '../lib/exercisePlan';
@@ -22,6 +22,7 @@ import { startWorkoutCard, type StartWorkoutCardModel } from '../lib/startWorkou
 import { lastSessionTimes, listWorkouts } from '../lib/workoutsDb';
 import { ThumbEndRow } from './ThumbEndRow';
 import { useWalkMark } from './WalkMark';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 type Props = { tabColor: string };
 
@@ -177,7 +178,6 @@ export function StartWorkoutCard({ tabColor }: Props) {
 }
 
 function makeStyles(tabColor: string) {
-  const darkText = { textShadowColor: 'transparent', textShadowRadius: 0 } as const;
   return StyleSheet.create({
     section: { gap: 8 },
     groupLabel: { ...typography.label, color: tabColor, ...textShadow },
@@ -197,16 +197,9 @@ function makeStyles(tabColor: string) {
     errorText: { ...typography.body, color: colors.danger, ...textShadow },
     links: { gap: 6, marginTop: 2 },
     linkText: { ...typography.body, color: colors.primary, ...textShadow },
-    primaryButton: { paddingVertical: 8, paddingHorizontal: 16, borderRadius: 8, backgroundColor: colors.buttonColor, ...BUTTON_SHADOW },
-    primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton, ...darkText },
-    secondaryButton: {
-      paddingVertical: 8,
-      paddingHorizontal: 14,
-      borderRadius: 8,
-      borderWidth: 1,
-      borderColor: colors.border,
-      backgroundColor: colors.surface,
-    },
-    secondaryButtonText: { ...typography.bodyEmphasis, color: tabColor, ...textShadow },
+    primaryButton: { ...BUTTON_PRIMARY_COMPACT },
+    primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+    secondaryButton: { ...BUTTON_SECONDARY_COMPACT },
+    secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   });
 }

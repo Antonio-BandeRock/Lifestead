@@ -27,7 +27,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { ScrollView, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { PhoneOnlyNotice } from '../components/PhoneOnlyNotice';
 import { QrCode } from '../components/QrCode';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from '../components/HomeSectionBand';
@@ -47,6 +47,7 @@ import {
 import { isDesktopApp } from '../lib/desktop/bridge';
 import { getMyKeyFingerprint } from '../lib/deviceIdentity';
 import { confirmItsYou } from '../lib/freshAuth';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // Big enough that each module lands on several physical pixels at any normal
 // phone density, which is what actually decides whether a code scans on the
@@ -402,30 +403,17 @@ const styles = StyleSheet.create({
   noteBox: { ...homeBandStyle, borderColor: colors.tabProfile, padding: HOME_BAND_CONTENT_PADDING },
   noteText: { ...typography.caption, color: colors.textMuted, textAlign: 'center', ...textShadow },
   primaryButton: {
+    ...BUTTON_PRIMARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    backgroundColor: colors.buttonColor,
-    borderRadius: 12,
-    paddingVertical: 14,
-    paddingHorizontal: 18,
-    ...BUTTON_SHADOW,
   },
-  primaryButtonText: { ...typography.body, color: colors.textOnButton },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   secondaryButton: {
+    ...BUTTON_SECONDARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    backgroundColor: colors.surface,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: colors.border,
-    paddingVertical: 12,
-    paddingHorizontal: 18,
   },
-  secondaryButtonText: { ...typography.body, color: colors.textPrimary, ...textShadow },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   buttonDisabled: { opacity: 0.5 },
   // A button standing between bands keeps the bands' content inset.
   inset: { marginHorizontal: HOME_BAND_CONTENT_PADDING },

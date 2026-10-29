@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { LinearTransition } from 'react-native-reanimated';
 import { KEYBOARD_HEIGHT } from '../constants/appKeyboard';
-import { BUTTON_SHADOW, colors, inputBackground } from '../constants/colors';
+import { colors, inputBackground } from '../constants/colors';
 import { DESSERT_BUILDER_CATEGORIES } from '../constants/foodBuilderCategories';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, homeBandNoHairlines, HomeSectionBand, homeBandStyle } from './HomeSectionBand';
@@ -64,6 +64,7 @@ import { StepsEditor } from './StepsEditor';
 import { ConditionNoteRow } from './ConditionNoteRow';
 import { useNavigationHand } from '../lib/navigationHand';
 import { useWalkMark } from './WalkMark';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // Common home-cooking units -- a plain pill row, not InlineSelectList's own
 // scrollable-box treatment, since this is a short, fixed set (unlike
@@ -1507,7 +1508,7 @@ export function DessertBuilder({
           <Text style={styles.summaryDetailText}>
             {servingSizeAmount || '?'} {servingSizeUnit ?? '?'} / serving
           </Text>
-          <Text style={[styles.secondaryButtonText, { color: tabColor, marginTop: 4 }]}>Tap to change dessert details</Text>
+          <Text style={[styles.secondaryButtonText, { marginTop: 4 }]}>Tap to change dessert details</Text>
         </TouchableOpacity>
 
         <View style={[styles.overlayDivider, { borderColor: tabColor }]} />
@@ -1699,7 +1700,7 @@ export function DessertBuilder({
             <Text style={styles.summaryDetailText}>
               {servingSizeAmount || '?'} {servingSizeUnit ?? '?'} / serving
             </Text>
-            <Text style={[styles.secondaryButtonText, { color: tabColor, marginTop: 8 }]}>Tap to change</Text>
+            <Text style={[styles.secondaryButtonText, { marginTop: 8 }]}>Tap to change</Text>
           </TouchableOpacity>
 
           <View style={styles.bandOut}>
@@ -1733,7 +1734,7 @@ export function DessertBuilder({
                 setAddingIngredient(true);
               }}
             >
-              <Text style={[styles.secondaryButtonText, { color: tabColor }]}>+ Add Ingredient</Text>
+              <Text style={styles.secondaryButtonText}>+ Add Ingredient</Text>
             </TouchableOpacity>
             </HomeSectionBand>
           </View>
@@ -1759,11 +1760,11 @@ export function DessertBuilder({
             {computingReport ? (
               <ActivityIndicator color={tabColor} />
             ) : (
-              <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Preview Full Report</Text>
+              <Text style={styles.secondaryButtonText}>Preview Full Report</Text>
             )}
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]}
+            style={styles.primaryButton}
             onPress={() => void finishDessert(ingredients)}
             disabled={computingReport}
           >
@@ -1812,7 +1813,7 @@ export function DessertBuilder({
             }}
           >
             <Ionicons name="chevron-back" size={13} color={tabColor} />
-            <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Cancel</Text>
+            <Text style={styles.secondaryButtonText}>Cancel</Text>
           </TouchableOpacity>
           <SpokenIngredientsPanel
             tabColor={tabColor}
@@ -1834,7 +1835,7 @@ export function DessertBuilder({
             }}
           >
             <Ionicons name="chevron-back" size={13} color={tabColor} />
-            <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Cancel</Text>
+            <Text style={styles.secondaryButtonText}>Cancel</Text>
           </TouchableOpacity>
           <FoodLookup
             tabColor={tabColor}
@@ -2057,7 +2058,7 @@ export function DessertBuilder({
                 }}
               >
                 <Ionicons name="chevron-back" size={13} color={tabColor} />
-                <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Change Food</Text>
+                <Text style={styles.secondaryButtonText}>Change Food</Text>
               </TouchableOpacity>
               {spokenQueue.current() ? (
                 <SpokenQueueNote remaining={spokenQueue.remainingCount()} tabColor={tabColor} onStop={spokenQueue.stop} />
@@ -2312,10 +2313,10 @@ export function DessertBuilder({
                     setNudgeDismissed(true);
                   }}
                 >
-                  <Text style={[styles.secondaryButtonText, { color: tabColor }]}>None used, continue</Text>
+                  <Text style={styles.secondaryButtonText}>None used, continue</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]}
+                  style={styles.primaryButton}
                   onPress={() => {
                     dismissKeyboard();
                     setFinishStep('building');
@@ -2373,7 +2374,7 @@ export function DessertBuilder({
                   setFinishStep('building');
                 }}
               >
-                <Text style={[styles.secondaryButtonText, { color: tabColor }]}>+ Add Another Ingredient</Text>
+                <Text style={styles.secondaryButtonText}>+ Add Another Ingredient</Text>
               </TouchableOpacity>
 
               {/* Real steps, create mode -- 2026-08-17, right where the same
@@ -2452,13 +2453,13 @@ export function DessertBuilder({
                   {computingReport ? (
                     <ActivityIndicator color={tabColor} />
                   ) : (
-                    <Text style={[styles.secondaryButtonText, { color: tabColor }]}>Preview Full Report</Text>
+                    <Text style={styles.secondaryButtonText}>Preview Full Report</Text>
                   )}
                 </TouchableOpacity>
               ) : null}
               <TouchableOpacity
                 ref={walkMark.ref('builder.complete')}
-                style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]}
+                style={styles.primaryButton}
                 onPress={() => void finishDessert(ingredients)}
                 disabled={computingReport}
               >
@@ -2631,45 +2632,20 @@ const styles = StyleSheet.create({
   continueButtonSpacing: {
     marginTop: 28,
   },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   // Continue's own "still missing something" look, 2026-07-28 -- dim
   // grey rather than this page's own tabColor, reading as not-quite-ready
   // without actually disabling the button (see handleContinuePress's own
   // comment for why it still needs to fire).
-  primaryButton: {
-    borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    alignItems: 'center',
-    marginTop: 14,
-    ...BUTTON_SHADOW,
-  },
+  primaryButton: { ...BUTTON_PRIMARY, marginTop: 14 },
   primaryButtonMuted: {
     backgroundColor: colors.border,
   },
   primaryButtonTextMuted: {
     color: colors.textMuted,
   },
-  secondaryButton: {
-    borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    alignItems: 'center',
-    marginTop: 14,
-    // Filled so its label is not sitting on the photo background.
-    backgroundColor: colors.surface,
-  },
-  secondaryButtonText: { ...typography.bodyEmphasis, ...textShadow },
+  secondaryButton: { ...BUTTON_SECONDARY, marginTop: 14 },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   reportPreviewButton: { borderWidth: 2 },
   // marginTop 16 (2026-07-31): the Save buttons sat flush against the Prep
   // Notes box, reading as one attached control group. This separates them
@@ -2877,15 +2853,7 @@ const styles = StyleSheet.create({
   // it. PopoverSelect (2026-08-01) owns its own field/popover layout
   // entirely, so both had no callers left.
   // The two Save buttons share the row evenly.
-  splitButton: {
-    flex: 1,
-    borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    ...BUTTON_SHADOW,
-  },
+  splitButton: { ...BUTTON_PRIMARY, flex: 1 },
   emptyText: {
     ...typography.body,
     color: colors.textSecondary,

@@ -8,7 +8,7 @@
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import type { GardenPlot } from '../lib/db';
 import {
@@ -24,6 +24,7 @@ import { listMeasurePlan, saveMeasurePlan } from '../lib/measuringPlanDb';
 import { termChoices, termLabel, type CustomGardenTerm } from '../lib/growSetup';
 import { listGardenTerms, listGrowEquipment } from '../lib/growSetupDb';
 import { GardenTermField } from './GardenTermField';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 const TAB_COLOR = colors.tabGarden;
 
@@ -140,7 +141,7 @@ export function MeasuringPlanSection({ plot, startOpen = false, onSaved }: Props
             onTermsChanged={load}
           />
           <View style={styles.actionRow}>
-            <TouchableOpacity style={[styles.primaryButton, { backgroundColor: colors.buttonColor }]} onPress={handleSave}>
+            <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
               <Text style={styles.primaryButtonText}>Save What Is Measured</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setOpen(false)}>
@@ -164,12 +165,7 @@ const styles = StyleSheet.create({
   bodyText: { ...typography.body, color: colors.textPrimary, ...textShadow },
   captionText: { ...typography.caption, color: colors.textMuted, ...textShadow },
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4 },
-  primaryButton: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', alignSelf: 'flex-start', ...BUTTON_SHADOW },
-  primaryButtonText: {
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
 });

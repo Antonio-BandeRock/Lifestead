@@ -15,7 +15,7 @@ import { DailyList } from '../components/DailyList';
 import { DailyScalesPicker } from '../components/DailyScalesPicker';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from '../components/HomeSectionBand';
 import { NotesInput } from '../components/NotesInput';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import {
@@ -43,6 +43,7 @@ import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { SEVERITY_STEPS, severityStepLabel, stepFromTen } from '../lib/severityScale';
 import { VaultClosedBand } from '../components/VaultClosedBand';
 import { useOnVaultChange } from '../lib/vaultReads';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 const TAB_COLOR = colors.tabBioCompass;
 const ENERGY = scaleOf('energy');
@@ -558,9 +559,9 @@ const styles = StyleSheet.create({
   },
   actions: { flexDirection: 'row', gap: 10, paddingHorizontal: HOME_BAND_CONTENT_PADDING },
   button: { flex: 1, alignItems: 'center', paddingVertical: 12, borderRadius: 12 },
-  primaryButton: { backgroundColor: colors.buttonColor, ...BUTTON_SHADOW },
-  primaryButtonText: { ...typography.bodyEmphasis, color: colors.textOnButton, fontWeight: '400', textShadowColor: 'transparent', textShadowRadius: 0 },
-  secondaryButton: { borderWidth: 1, borderColor: colors.border, backgroundColor: colors.surface },
-  secondaryButtonText: { ...typography.bodyEmphasis, ...textShadow, color: colors.textSecondary, fontWeight: '400' },
+  primaryButton: { ...BUTTON_PRIMARY },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+  secondaryButton: { ...BUTTON_SECONDARY },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   buttonDisabled: { opacity: 0.5 },
 });

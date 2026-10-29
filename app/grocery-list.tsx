@@ -91,6 +91,7 @@ import {
 } from '../lib/groceryList';
 import { ThumbEndRow } from '../components/ThumbEndRow';
 import { useWalkMark } from '../components/WalkMark';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 const DEFAULT_DAYS = 3;
 
@@ -1087,7 +1088,7 @@ export default function GroceryListScreen() {
             disabled={busy}
           >
             <Ionicons name="trash-outline" size={18} color={colors.danger} />
-            <Text style={[styles.secondaryButtonText, { color: colors.danger }]}>Delete List</Text>
+            <Text style={styles.secondaryButtonText}>Delete List</Text>
           </TouchableOpacity>
           <TouchableOpacity ref={walkMark.ref('grocery.finish')} style={[styles.secondaryButton, busy && styles.disabled]} activeOpacity={0.85} onPress={handleFinish} disabled={busy}>
             <Ionicons name={list?.status === 'active' ? 'checkmark-done-outline' : 'refresh-outline'} size={18} color={colors.textSecondary} />
@@ -1357,7 +1358,7 @@ export default function GroceryListScreen() {
                       </TouchableOpacity>
                       <TouchableOpacity ref={walkMark.ref('grocery.removeItem')} style={styles.secondaryButton} activeOpacity={0.85} onPress={() => handleRemoveItem(item)}>
                         <Ionicons name="trash-outline" size={18} color={colors.danger} />
-                        <Text style={[styles.secondaryButtonText, { color: colors.danger }]}>Remove From List</Text>
+                        <Text style={styles.secondaryButtonText}>Remove From List</Text>
                       </TouchableOpacity>
                     </View>
                   ) : null}
@@ -1506,23 +1507,13 @@ const styles = StyleSheet.create({
   rowName: { ...typography.body, color: colors.textPrimary, ...textShadow },
   rowNameChecked: { color: colors.textMuted, textDecorationLine: 'line-through' },
   useKitchenButton: {
+    ...BUTTON_PRIMARY_COMPACT,
     alignSelf: 'flex-start',
     flexDirection: 'row',
-    alignItems: 'center',
     gap: 6,
     marginTop: 6,
-    paddingVertical: 7,
-    paddingHorizontal: 12,
-    borderRadius: 10,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
   },
-  useKitchenButtonText: {
-    ...typography.caption,
-    color: colors.textOnButton,
-    // Dark text on a light fill: no shadow, matching every other button.
-    textShadowColor: 'transparent',
-  },
+  useKitchenButtonText: { ...BUTTON_PRIMARY_TEXT },
   rowNonFood: {
     color: colors.textMuted,
   },
@@ -1564,36 +1555,19 @@ const styles = StyleSheet.create({
   // A button standing between bands keeps the bands' content inset.
   inset: { marginHorizontal: HOME_BAND_CONTENT_PADDING },
   primaryButton: {
+    ...BUTTON_PRIMARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-    borderRadius: 10,
-    paddingVertical: 14,
   },
-  primaryButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnButton,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   secondaryButton: {
+    ...BUTTON_SECONDARY,
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 10,
     minWidth: 132,
-    backgroundColor: colors.surface,
   },
-  secondaryButtonText: { ...typography.bodyEmphasis, color: colors.textSecondary, ...textShadow },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   storeAddButton: { flex: 0, minWidth: 80 },
   linkRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 6, alignSelf: 'flex-start' },
   storePickerWrap: { alignSelf: 'flex-start' },

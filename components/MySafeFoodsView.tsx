@@ -30,6 +30,7 @@ import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, HomeSectionBand } fr
 import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
 import { useOnVaultChange } from '../lib/vaultReads';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // My Safe Foods: the person's list, kept by the person.
 //
@@ -678,33 +679,10 @@ const styles = StyleSheet.create({
   },
   verdictPillTextOn: { color: colors.textOnPrimary },
   draftActions: { flexDirection: 'row', gap: 8, justifyContent: 'flex-end' },
-  primaryButton: {
-    backgroundColor: colors.tabFood,
-    borderRadius: 20,
-    paddingHorizontal: 16,
-    paddingVertical: 9,
-  },
-  primaryButtonText: {
-    ...typography.body,
-    color: colors.textOnPrimary,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
-  secondaryButton: {
-    alignSelf: 'flex-start',
-    backgroundColor: colors.surface,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: colors.border,
-    paddingHorizontal: 16,
-    paddingVertical: 9,
-  },
-  secondaryButtonText: {
-    ...typography.body,
-    color: colors.textPrimary,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+  secondaryButton: { ...BUTTON_SECONDARY_COMPACT, alignSelf: 'flex-start' },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   itemRow: {
     flexDirection: 'row',
     alignItems: 'center',

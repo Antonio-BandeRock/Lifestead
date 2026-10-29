@@ -37,6 +37,7 @@ import {
 import { modalAnimationType } from '../lib/visualPreferences';
 import { useKeepScreenOn } from '../lib/keepScreenOn';
 import { inAppLanguage } from '@/lib/notificationWords';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 type CookTimer = {
   id: string;
@@ -381,15 +382,11 @@ const styles = StyleSheet.create({
   stepText: { ...typography.body, fontSize: STEP_SIZE, lineHeight: scaledLineHeight(STEP_SIZE), color: colors.textPrimary, ...textShadow },
   startBlock: { gap: 4 },
   startButton: {
+    ...BUTTON_PRIMARY,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 8,
-    borderRadius: 10,
-    paddingVertical: 14,
-    backgroundColor: colors.buttonColor,
   },
-  startButtonText: { ...typography.sectionTitle, color: colors.textOnButton, ...DARK_TEXT },
+  startButtonText: { ...BUTTON_PRIMARY_TEXT, ...DARK_TEXT },
   caption: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   extraRow: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 8 },
   extraChip: { borderWidth: 1, borderRadius: 14, paddingHorizontal: 12, paddingVertical: 6, backgroundColor: colors.surface },

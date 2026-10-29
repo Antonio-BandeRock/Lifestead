@@ -18,7 +18,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useMemo, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import {
   TODO_AREA_LABELS,
@@ -41,8 +41,8 @@ import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { useWalkMark } from './WalkMark';
 import { AppTextInput } from './AppTextInput';
 import { ThumbRow } from './ThumbRow';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
-const PRIMARY_BUTTON_BACKGROUND = colors.buttonColor;
 
 function todayLocal(): string {
   const now = new Date();
@@ -220,7 +220,7 @@ export function TodoSection({ tabColor, scope }: Props) {
         {scope === 'everything' ? renderAreaPills(editing.area, (value) => setEditing({ ...editing, area: value })) : null}
         {editError ? <Text style={styles.errorText}>{editError}</Text> : null}
         <ThumbRow primary="first" style={styles.actionRow}>
-          <TouchableOpacity style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={saveEdit}>
+          <TouchableOpacity style={styles.primaryButton} onPress={saveEdit}>
             <Text style={styles.primaryButtonText}>Save</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => setEditing(null)}>
@@ -305,7 +305,7 @@ export function TodoSection({ tabColor, scope }: Props) {
             </TouchableOpacity>
           ) : null}
           {scope === 'everything' ? renderAreaPills(area, setArea) : null}
-          <TouchableOpacity ref={walkMark.ref('todo.add')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleAdd}>
+          <TouchableOpacity ref={walkMark.ref('todo.add')} style={styles.primaryButton} onPress={handleAdd}>
             <Text style={styles.primaryButtonText}>Add to the List</Text>
           </TouchableOpacity>
         </View>
@@ -380,13 +380,8 @@ const styles = StyleSheet.create({
   },
   nestedForm: { gap: 8, paddingLeft: 10, borderLeftWidth: 2, marginVertical: 4 },
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4 },
-  primaryButton: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', alignSelf: 'flex-start', ...BUTTON_SHADOW },
-  primaryButtonText: {
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
 });

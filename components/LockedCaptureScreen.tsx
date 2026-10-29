@@ -32,6 +32,7 @@ import { PHOTO_CAPTURE_TEXT, cleanCaptureText, isCaptureTextUsable } from '../li
 import { canSealCaptures, keepCaptureForUnlock, keepSpokenForUnlock, photoFileToBase64, setLockedCaptureShowing, type SpokenKept } from '../lib/lockedCaptures';
 import { shrinkPhotoFile } from '../lib/mealPhotos';
 import LockedCapture from '../modules/locked-capture';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 type Mode = 'voice' | 'photo';
 
@@ -354,17 +355,10 @@ const styles = StyleSheet.create({
   hint: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   warning: { ...typography.caption, color: colors.danger, ...textShadow },
   actions: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-end', gap: 12, marginTop: 4 },
-  primaryButton: { paddingVertical: 10, paddingHorizontal: 18, borderRadius: 10, backgroundColor: colors.primary },
-  primaryText: { ...typography.bodyEmphasis, color: colors.textOnPrimary, fontWeight: '400' },
-  secondaryButton: {
-    paddingVertical: 10,
-    paddingHorizontal: 18,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-  },
-  secondaryText: { ...typography.bodyEmphasis, color: colors.textPrimary, fontWeight: '400', ...textShadow },
+  primaryButton: { ...BUTTON_PRIMARY },
+  primaryText: { ...BUTTON_PRIMARY_TEXT },
+  secondaryButton: { ...BUTTON_SECONDARY },
+  secondaryText: { ...BUTTON_SECONDARY_TEXT },
   cameraScreen: { flex: 1, backgroundColor: '#000', justifyContent: 'center' },
   cameraBar: {
     position: 'absolute',

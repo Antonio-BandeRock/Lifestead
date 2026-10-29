@@ -27,7 +27,7 @@ import { useInfoAlert } from './InfoAlert';
 import { TabBand, useTabBandStyles } from './TabBand';
 import { RecordPhotos } from './RecordPhotos';
 import { useBandFolds } from '../hooks/useBandFolds';
-import { BUTTON_SHADOW, colors, inputBackground } from '../constants/colors';
+import { colors, inputBackground } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { formatGroceryAmount } from '../lib/groceryList';
 import { addGroceryListItem, getActiveGroceryList } from '../lib/groceryDb';
@@ -74,6 +74,7 @@ import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { useWalkMark } from './WalkMark';
 import { t } from '../lib/i18n';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 type DispositionForm = {
   itemId: string;
@@ -411,7 +412,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
         </Text>
         <TouchableOpacity
           ref={walkMark.ref('kitchen.add')}
-          style={[styles.primaryButton, { backgroundColor: tabColor }]}
+          style={styles.primaryButton}
           activeOpacity={0.85}
           onPress={() => setAddOpen((open) => !open)}
         >
@@ -455,7 +456,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
                   />
                   <TouchableOpacity
                     ref={walkMark.ref('kitchen.saveNew')}
-                    style={[styles.smallButton, { backgroundColor: tabColor }]}
+                    style={styles.smallButton}
                     activeOpacity={0.85}
                     disabled={busy}
                     onPress={handleAdd}
@@ -663,7 +664,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
                             placeholder="pantry, chest freezer, garage shelf"
                           />
                           <TouchableOpacity
-                            style={[styles.smallButton, { backgroundColor: tabColor }]}
+                            style={styles.smallButton}
                             activeOpacity={0.85}
                             disabled={busy}
                             onPress={() => void handleSavePlace(item)}
@@ -723,7 +724,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
                             placeholder="2026-10-02, or a number of days"
                           />
                           <TouchableOpacity
-                            style={[styles.smallButton, { backgroundColor: tabColor }]}
+                            style={styles.smallButton}
                             activeOpacity={0.85}
                             disabled={busy}
                             onPress={() => void handleSaveUseBy(item, useByDraft)}
@@ -783,7 +784,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
                       />
                       <TouchableOpacity
                         ref={walkMark.ref('kitchen.use')}
-                        style={[styles.smallButton, { backgroundColor: tabColor }]}
+                        style={styles.smallButton}
                         activeOpacity={0.85}
                         disabled={busy}
                         onPress={() => handleUseSome(item)}
@@ -795,7 +796,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
                     <View style={styles.actionRow}>
                       <TouchableOpacity
                         ref={walkMark.ref('kitchen.toList')}
-                        style={[styles.smallButton, { backgroundColor: tabColor }]}
+                        style={styles.smallButton}
                         activeOpacity={0.85}
                         disabled={busy}
                         onPress={() => handleAddToList(item)}
@@ -1002,7 +1003,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
 
                             <ThumbRow primary="first" style={styles.actionRow}>
                               <TouchableOpacity
-                                style={[styles.smallButton, { backgroundColor: tabColor }]}
+                                style={styles.smallButton}
                                 activeOpacity={0.85}
                                 disabled={busy}
                                 onPress={() => void handleDisposition(item)}
@@ -1134,34 +1135,19 @@ const styles = StyleSheet.create({
   pickedName: { ...typography.label, ...textShadow, color: colors.textPrimary, flex: 1 },
   changeLink: { ...typography.caption, ...textShadow, color: colors.primary },
   primaryButton: {
+    ...BUTTON_PRIMARY,
     alignSelf: 'flex-start',
     flexDirection: 'row',
-    alignItems: 'center',
     gap: 6,
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 12,
-    ...BUTTON_SHADOW,
   },
-  primaryButtonText: { ...typography.label, color: colors.textOnButton, textShadowColor: 'transparent' },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   smallButton: {
+    ...BUTTON_PRIMARY_COMPACT,
     flexDirection: 'row',
-    alignItems: 'center',
     gap: 5,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 10,
-    ...BUTTON_SHADOW,
   },
-  smallButtonText: { ...typography.caption, color: colors.textOnButton, textShadowColor: 'transparent' },
-  secondaryButton: {
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surfaceMuted,
-  },
-  secondaryButtonText: { ...typography.caption, ...textShadow, color: colors.textSecondary },
+  smallButtonText: { ...BUTTON_PRIMARY_TEXT },
+  secondaryButton: { ...BUTTON_SECONDARY_COMPACT },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   scanButton: { alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', gap: 6 },
 });

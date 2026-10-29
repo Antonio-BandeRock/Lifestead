@@ -25,7 +25,7 @@ import { AppTextInput } from '../../components/AppTextInput';
 import { FoodLookup, type ResolvedFoodSelection } from '../../components/FoodLookup';
 import { PopoverSelect } from '../../components/PopoverSelect';
 import { COUNTRIES } from '../../constants/countries';
-import { BUTTON_SHADOW, colors } from '../../constants/colors';
+import { colors } from '../../constants/colors';
 import { typography, textShadow } from '../../constants/typography';
 import { useFloatingButtonScrollPadding } from '../../constants/floatingButton';
 import { formatQuantity, formatTradeMoney, harvestUnitForPricing, perUnit, valueReceivedGoods } from '../../lib/harvestTrade';
@@ -141,6 +141,7 @@ import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { useOnVaultChange } from '../../lib/vaultReads';
 import { t, tl } from '../../lib/i18n';
 import { appLocale } from '@/lib/language';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../../constants/buttons';
 
 // This page's own identity color -- see constants/colors.ts's own comment
 // on tabGarden for how it was chosen.
@@ -738,14 +739,13 @@ function MyZoneLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
           ref={walkMark.ref('garden.findZone')}
           style={[
             styles.primaryButton,
-            { backgroundColor: PRIMARY_BUTTON_BACKGROUND },
             lookupDisabled ? styles.disabledButton : null,
           ]}
           onPress={handleLookup}
           disabled={lookupBusy}
         >
           {lookupBusy ? (
-            <ActivityIndicator size="small" color={colors.background} />
+            <ActivityIndicator size="small" color={colors.textOnButton} />
           ) : (
             <Text style={styles.primaryButtonText}>Find My Zone</Text>
           )}
@@ -1791,7 +1791,7 @@ function PlotsAndPlantingsLens({
                     <ThumbRow primary="first" style={styles.actionRow}>
                       <TouchableOpacity
                         ref={walkMark.ref('garden.savePlanting')}
-                        style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]}
+                        style={styles.primaryButton}
                         onPress={() => handleAddPlanting(plot.id)}
                       >
                         <Text style={styles.primaryButtonText}>Save Planting</Text>
@@ -1804,7 +1804,7 @@ function PlotsAndPlantingsLens({
                 ) : (
                   <TouchableOpacity
                     ref={walkMark.ref('garden.addPlanting')}
-                    style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }, walkMark('garden.addPlanting')]}
+                    style={[styles.primaryButton, walkMark('garden.addPlanting')]}
                     onPress={() => setAddingPlantingToPlot(plot.id)}
                   >
                     <Text style={styles.primaryButtonText}>+ Add a Planting</Text>
@@ -2077,7 +2077,6 @@ function PlotsAndPlantingsLens({
           <TouchableOpacity
             style={[
               styles.secondaryButton,
-              { borderColor: TAB_COLOR },
               !newAreaZoneCountry || !newAreaZonePostal.trim() || zoneLookupBusy ? styles.disabledButton : null,
             ]}
             onPress={handleZoneLookup}
@@ -2086,7 +2085,7 @@ function PlotsAndPlantingsLens({
             {zoneLookupBusy ? (
               <ActivityIndicator size="small" color={TAB_COLOR} />
             ) : (
-              <Text style={[styles.secondaryButtonText, { color: TAB_COLOR }]}>Find My Zone</Text>
+              <Text style={styles.secondaryButtonText}>Find My Zone</Text>
             )}
           </TouchableOpacity>
           {zoneLookupResult ? (
@@ -2107,7 +2106,7 @@ function PlotsAndPlantingsLens({
           <ThumbRow primary="first" style={styles.actionRow}>
             <TouchableOpacity
               ref={walkMark.ref('garden.saveArea')}
-              style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]}
+              style={styles.primaryButton}
               onPress={handleAddGardenArea}
             >
               <Text style={styles.primaryButtonText}>Save Garden Area</Text>
@@ -2121,7 +2120,7 @@ function PlotsAndPlantingsLens({
         <View style={band.inset}>
           <TouchableOpacity
             ref={walkMark.ref('garden.addArea')}
-            style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }, walkMark('garden.addArea')]}
+            style={[styles.primaryButton, walkMark('garden.addArea')]}
             onPress={handleShowAddPlot}
           >
             <Text style={styles.primaryButtonText}>+ Add a Garden Area</Text>
@@ -2266,7 +2265,7 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
             <View style={styles.actionRow}>
               <TouchableOpacity
                 ref={walkMark.ref('garden.keepOnHand')}
-                style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]}
+                style={styles.primaryButton}
                 onPress={() => answerOnHand(true)}
               >
                 <Text style={styles.primaryButtonText}>Yes, Keep It On Hand</Text>
@@ -2289,7 +2288,7 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
               <PopoverSelect options={HARVEST_UNIT_OPTIONS} selected={unit} onSelect={setUnit} tabColor={TAB_COLOR} />
             </View>
             <ThumbRow primary="first" style={styles.actionRow}>
-              <TouchableOpacity ref={walkMark.ref('garden.saveHarvest')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleRecordHarvest}>
+              <TouchableOpacity ref={walkMark.ref('garden.saveHarvest')} style={styles.primaryButton} onPress={handleRecordHarvest}>
                 <Text style={styles.primaryButtonText}>Save Harvest</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setSelectedPlanting(null)}>
@@ -2328,7 +2327,7 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
         ) : (
           <TouchableOpacity
             ref={walkMark.ref('garden.addHarvest')}
-            style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]}
+            style={styles.primaryButton}
             onPress={() => setPickingPlanting(true)}
           >
             <Text style={styles.primaryButtonText}>+ Add a Harvest</Text>
@@ -2490,7 +2489,7 @@ function UpcomingTasksLens({ scrollBottomPadding }: { scrollBottomPadding: numbe
             value={taskTitle}
             onChangeText={setTaskTitle}
           />
-          <TouchableOpacity ref={walkMark.ref('garden.addTask')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleAddTask}>
+          <TouchableOpacity ref={walkMark.ref('garden.addTask')} style={styles.primaryButton} onPress={handleAddTask}>
             <Text style={styles.primaryButtonText}>Add</Text>
           </TouchableOpacity>
         </ThumbEndRow>
@@ -2616,22 +2615,12 @@ const styles = StyleSheet.create({
   plantingPickRow: { paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: colors.border, gap: 2 },
   pendingCard: { gap: 8 },
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4 },
-  primaryButton: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', ...BUTTON_SHADOW },
-  primaryButtonText: { color: colors.textOnButton, fontWeight: '400',
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   disabledButton: { opacity: 0.5 },
   errorText: { color: colors.danger },
-  secondaryButton: { borderWidth: 1, borderRadius: 8, paddingVertical: 10, alignItems: 'center' },
-  secondaryButtonText: { fontWeight: '400' },
+  secondaryButton: { ...BUTTON_SECONDARY },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   howToGrowLink: { alignSelf: 'flex-start', paddingVertical: 4 },
   linkText: { ...typography.body, color: colors.primary,
 

@@ -6,13 +6,14 @@
 import { useState } from 'react';
 import { confirmItsYou } from '../lib/freshAuth';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { REPORT_CSV_CAPTION, REPORT_CSV_NO_TABLES, reportCsvTables } from '../lib/reportCsv';
 import { exportReportCsv } from '../lib/reportCsvExport';
 import type { ReportDocument } from '../lib/reportGenerator';
 import { useInfoAlert } from './InfoAlert';
 import { useWalkMark } from './WalkMark';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 const WHOLE = '__whole__';
 
@@ -78,18 +79,7 @@ const styles = StyleSheet.create({
   wrap: { gap: 10 },
   captionText: { ...typography.caption, color: colors.textMuted, ...textShadow },
   buttonRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
-  button: {
-    borderRadius: 8,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    backgroundColor: colors.buttonColor,
-    ...BUTTON_SHADOW,
-  },
+  button: { ...BUTTON_PRIMARY_COMPACT },
   buttonBusy: { opacity: 0.6 },
-  buttonText: {
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  buttonText: { ...BUTTON_PRIMARY_TEXT },
 });

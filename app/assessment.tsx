@@ -42,6 +42,7 @@ import {
   type QuestionnaireCode,
 } from '../lib/standardQuestionnaires';
 import { VaultClosedBand } from '../components/VaultClosedBand';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 type QuestionnaireResult = {
   code: QuestionnaireCode;
@@ -613,29 +614,11 @@ const styles = StyleSheet.create({
     textShadowRadius: 0,
 
   },
-  submitButton: {
-    marginHorizontal: HOME_BAND_CONTENT_PADDING,
-    backgroundColor: colors.primary,
-    borderRadius: 12,
-    paddingVertical: 14,
-    alignItems: 'center',
-  },
+  submitButton: { ...BUTTON_PRIMARY, marginHorizontal: HOME_BAND_CONTENT_PADDING },
   submitButtonDisabled: {
     backgroundColor: colors.primaryMuted,
   },
-  submitButtonText: {
-    ...typography.bodyEmphasis,
-    color: colors.textOnPrimary,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  submitButtonText: { ...BUTTON_PRIMARY_TEXT },
   resultsTitle: {
     fontSize: 24,
     fontWeight: '400',

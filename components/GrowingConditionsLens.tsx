@@ -3,7 +3,7 @@ import { router } from 'expo-router';
 import { LightSensor } from 'expo-sensors';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_SHADOW, colors } from '../constants/colors';
+import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useBandFolds } from '../hooks/useBandFolds';
 import { sortByLabel } from '../lib/choiceOrder';
@@ -98,6 +98,7 @@ import { makeTabBandStyles, TabBand } from './TabBand';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { useWalkMark } from './WalkMark';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 // Growing Conditions, a lens of Garden (2026-09-23).
 //
@@ -130,7 +131,6 @@ const TAB_COLOR = colors.tabGarden;
 // (CalmBands in components/HomeSectionBand.tsx), bands a left-accent width
 // apart with no hairlines.
 const band = makeTabBandStyles(TAB_COLOR, { calm: true });
-const PRIMARY_BUTTON_BACKGROUND = colors.buttonColor;
 const NO_PLOT = '__none__';
 const NO_PLANTING = '__none__';
 const ADD_UNIT = '__add_unit__';
@@ -657,7 +657,7 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
             ) : null}
             {addingArea ? null : (
               <ThumbRow primary="first" style={styles.actionRow}>
-                <TouchableOpacity ref={walkMark.ref('conditions.next')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleWhereNext}>
+                <TouchableOpacity ref={walkMark.ref('conditions.next')} style={styles.primaryButton} onPress={handleWhereNext}>
                 <Text style={styles.primaryButtonText}>
                   {lightNext && METER_ON_THIS_DEVICE ? 'Measure the Light' : 'Next'}
                 </Text>
@@ -942,7 +942,7 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
                         <View style={styles.actionRow}>
                           <TouchableOpacity
                             ref={walkMark.ref('conditions.measure')}
-                            style={[styles.primaryButton, { backgroundColor: meter.status === 'reading' ? colors.border : PRIMARY_BUTTON_BACKGROUND }]}
+                            style={[styles.primaryButton, { opacity: meter.status === 'reading' ? 0.5 : 1 }]}
                             disabled={meter.status === 'reading'}
                             onPress={() => void measureLight()}
                           >
@@ -973,7 +973,7 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
                     </Text>
                     <ThumbRow primary="first" style={styles.actionRow}>
                       <TouchableOpacity
-                        style={[styles.primaryButton, { backgroundColor: newUnit.trim() ? PRIMARY_BUTTON_BACKGROUND : colors.border }]}
+                        style={[styles.primaryButton, { opacity: newUnit.trim() ? 1 : 0.5 }]}
                         onPress={() => {
                           if (!newUnit.trim()) return explainNotYet('Type the unit first, for example kPa.');
                           setDraft({ ...draft, unit: newUnit.trim() });
@@ -1011,7 +1011,7 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
             />
             {problem ? <Text style={styles.errorText}>{problem}</Text> : null}
             <View style={styles.actionRow}>
-              <TouchableOpacity ref={walkMark.ref('conditions.save')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={handleSave}>
+              <TouchableOpacity ref={walkMark.ref('conditions.save')} style={styles.primaryButton} onPress={handleSave}>
                 <Text style={styles.primaryButtonText}>Save It</Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -1048,7 +1048,7 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
               worth keeping whether or not you ever wire anything up.
             </Text>
             <View style={styles.actionRow}>
-              <TouchableOpacity ref={walkMark.ref('conditions.record')} style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]} onPress={() => startReading(false)}>
+              <TouchableOpacity ref={walkMark.ref('conditions.record')} style={styles.primaryButton} onPress={() => startReading(false)}>
                 <Text style={styles.primaryButtonText}>+ Record a Reading</Text>
               </TouchableOpacity>
               {METER_ON_THIS_DEVICE ? (
@@ -1095,7 +1095,7 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
                     <MeasuringPlanSection plot={plot} onSaved={load} />
                     <View style={styles.actionRow}>
                       <TouchableOpacity
-                        style={[styles.primaryButton, { backgroundColor: PRIMARY_BUTTON_BACKGROUND }]}
+                        style={styles.primaryButton}
                         onPress={() => startReading(false, plot.id)}
                       >
                         <Text style={styles.primaryButtonText}>+ Record a Reading Here</Text>
@@ -1231,13 +1231,8 @@ const styles = StyleSheet.create({
   row: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12 },
   rowText: { flex: 1, gap: 2 },
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4 },
-  primaryButton: { borderRadius: 8, paddingHorizontal: 14, paddingVertical: 8, alignItems: 'center', ...BUTTON_SHADOW },
-  primaryButtonText: {
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  primaryButton: { ...BUTTON_PRIMARY_COMPACT },
+  primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
 });
