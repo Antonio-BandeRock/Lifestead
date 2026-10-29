@@ -562,7 +562,7 @@ export const SETUP_TABS: SetupTabDef[] = [
           },
           {
             key: 'todo',
-            title: 'To do',
+            title: 'Tasks',
             icon: 'checkbox-outline',
             hook: 'Out of your head and onto a list that reminds you.',
             whatItIs: 'Things to do, with a day if they need one.',
