@@ -59,7 +59,7 @@ import { RecordPhotos } from './RecordPhotos';
 import { describePlainDate, readPlainDateField, readPlainDates, type Lean } from '../lib/plainDate';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL_SMALL, PILL_TEXT } from '../constants/buttons';
 
 // Upkeep: things that need doing again, and things that run out.
 //
@@ -961,11 +961,8 @@ function makeStyles(tabColor: string) {
     actionText: { ...typography.caption, color: tabColor, ...textShadow },
     actionTextRemove: { ...typography.caption, color: colors.danger, ...textShadow },
 
-    pillSmall: {
-      backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border,
-      borderRadius: 999, paddingHorizontal: 12, paddingVertical: 8,
-    },
-    pillTextSmall: { ...typography.caption, color: colors.textPrimary, ...textShadow },
+    pillSmall: { ...PILL_SMALL },
+    pillTextSmall: { ...PILL_TEXT },
 
     formActions: { flexDirection: 'row', gap: 10, marginTop: 16 },
     primaryButton: { ...BUTTON_PRIMARY, marginTop: 12 },

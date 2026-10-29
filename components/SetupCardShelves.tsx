@@ -44,6 +44,7 @@ import { useWalkMark } from './WalkMark';
 import { useBringToTop } from './BringToTop';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
 import { HorizontalScroll } from './HorizontalScroll';
+import { PILL, PILL_ON, PILL_TEXT } from '../constants/buttons';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
@@ -140,7 +141,7 @@ export function SetupCard({ card, tabColor, width, view, go, explain, onCardGo, 
               return (
                 <TouchableOpacity
                   key={area.key}
-                  style={[styles.chip, { backgroundColor: hexToRgba(color, 0.16), borderColor: hexToRgba(color, 0.6) }]}
+                  style={[styles.chip, styles.chipActive]}
                   onPress={() => explain(t(area.label), giveBackExplanation(area, view, (english) => t(english)))}
                   accessibilityRole="button"
                   accessibilityLabel={area.label}
@@ -348,16 +349,8 @@ const styles = StyleSheet.create({
   partLabel: { ...typography.eyebrow, color: colors.textMuted, ...textShadow },
   partText: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, paddingTop: 2 },
-  chip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    borderWidth: 1,
-    borderRadius: 12,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-  },
-  chipText: { ...typography.caption, color: colors.textPrimary, ...textShadow },
+  chip: { ...PILL, flexDirection: 'row', alignItems: 'center', gap: 4 },
+  chipText: { ...PILL_TEXT },
   spacer: { flex: 1 },
   goButton: {
     flexDirection: 'row',
@@ -383,4 +376,5 @@ const styles = StyleSheet.create({
   notForMe: { alignSelf: 'center', paddingVertical: 6, paddingHorizontal: 12, backgroundColor: colors.surfaceMuted },
   notForMeText: { ...typography.caption, color: colors.textMuted, ...textShadow },
   openButtonText: { ...typography.label, color: colors.textPrimary, ...textShadow },
+  chipActive: { ...PILL_ON },
 });

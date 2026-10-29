@@ -174,7 +174,7 @@ import { VaultClosedBand } from '../../components/VaultClosedBand';
 import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
 import { useCategoryClosed } from '../../lib/vaultSession';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../../constants/buttons';
 
 // 'YYYY-MM-DD' in LOCAL time -- same reasoning as the rest of the app
 // (see lib/db.ts/app/(tabs)/index.tsx): UTC's calendar date is wrong for
@@ -2323,7 +2323,7 @@ function PortionsView({
             <TouchableOpacity
               ref={walkMark.ref('portions.meals')}
               key={count}
-              style={[styles.portionsPill, active ? { backgroundColor: tabColor, borderColor: tabColor } : null]}
+              style={[styles.portionsPill, active && styles.portionsPillActive]}
               onPress={() => setMealsPerDay(count)}
             >
               <Text style={[styles.portionsPillText, active && styles.portionsPillTextActive]}>{count}</Text>
@@ -3191,13 +3191,13 @@ function NutrientRankingView({
         <View style={styles.pillWrap}>
           <TouchableOpacity
             ref={walkMark.ref('ranking.mode')}
-            style={[styles.stagePill, { borderColor: tabColor }]}
+            style={styles.stagePill}
             onPress={() => onModeChange('byNutrient')}
           >
-            <Text style={[styles.stagePillText, { color: tabColor }]}>By Nutrient</Text>
+            <Text style={styles.stagePillText}>By Nutrient</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.stagePill, { backgroundColor: tabColor, borderColor: tabColor }]}
+            style={[styles.stagePill, styles.stagePillActive]}
             onPress={() => onModeChange('byFood')}
           >
             <Text style={[styles.stagePillText, styles.stagePillTextActive]}>By Food</Text>
@@ -3243,18 +3243,18 @@ function NutrientRankingView({
         <View style={styles.pillWrap}>
           <TouchableOpacity
             ref={walkMark.ref('ranking.mode')}
-            style={[styles.stagePill, mode === 'byNutrient' ? { backgroundColor: tabColor, borderColor: tabColor } : { borderColor: tabColor }]}
+            style={[styles.stagePill, mode === 'byNutrient' && styles.stagePillActive]}
             onPress={() => onModeChange('byNutrient')}
           >
-            <Text style={[styles.stagePillText, mode === 'byNutrient' ? styles.stagePillTextActive : { color: tabColor }]}>
+            <Text style={[styles.stagePillText, mode === 'byNutrient' && styles.stagePillTextActive]}>
               By Nutrient
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.stagePill, mode === 'byFood' ? { backgroundColor: tabColor, borderColor: tabColor } : { borderColor: tabColor }]}
+            style={[styles.stagePill, mode === 'byFood' && styles.stagePillActive]}
             onPress={() => onModeChange('byFood')}
           >
-            <Text style={[styles.stagePillText, mode === 'byFood' ? styles.stagePillTextActive : { color: tabColor }]}>
+            <Text style={[styles.stagePillText, mode === 'byFood' && styles.stagePillTextActive]}>
               By Food
             </Text>
           </TouchableOpacity>
@@ -3615,19 +3615,19 @@ function HealingStageView({
       <View style={styles.pillWrap}>
         <TouchableOpacity
           ref={walkMark.ref('stage.pick')}
-          style={[styles.stagePill, tab === 'stage1' ? { backgroundColor: tabColor, borderColor: tabColor } : { borderColor: tabColor }]}
+          style={[styles.stagePill, tab === 'stage1' && styles.stagePillActive]}
           onPress={() => onTabChange('stage1')}
         >
-          <Text style={[styles.stagePillText, tab === 'stage1' ? styles.stagePillTextActive : { color: tabColor }]}>
+          <Text style={[styles.stagePillText, tab === 'stage1' && styles.stagePillTextActive]}>
             Stage 1: Getting Started
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           ref={walkMark.ref('stage.pick')}
-          style={[styles.stagePill, tab === 'stage2' ? { backgroundColor: tabColor, borderColor: tabColor } : { borderColor: tabColor }]}
+          style={[styles.stagePill, tab === 'stage2' && styles.stagePillActive]}
           onPress={() => onTabChange('stage2')}
         >
-          <Text style={[styles.stagePillText, tab === 'stage2' ? styles.stagePillTextActive : { color: tabColor }]}>
+          <Text style={[styles.stagePillText, tab === 'stage2' && styles.stagePillTextActive]}>
             Stage 2: Rebuilding
           </Text>
         </TouchableOpacity>
@@ -4202,10 +4202,10 @@ function MyMedsView({
                 <TouchableOpacity
                   ref={walkMark.ref('meds.source')}
                   key={option}
-                  style={[styles.stagePill, { borderColor: tabColor, backgroundColor: formSource === option ? tabColor : 'transparent' }]}
+                  style={[styles.stagePill, formSource === option && styles.stagePillActive]}
                   onPress={() => setFormSource(option)}
                 >
-                  <Text style={[styles.stagePillText, formSource === option ? styles.stagePillTextActive : { color: tabColor }]}>
+                  <Text style={[styles.stagePillText, formSource === option && styles.stagePillTextActive]}>
                     {option === 'doctor' ? 'My doctor told me' : 'Something I noticed'}
                   </Text>
                 </TouchableOpacity>
@@ -4218,10 +4218,10 @@ function MyMedsView({
                 <TouchableOpacity
                   ref={walkMark.ref('meds.tie')}
                   key={option}
-                  style={[styles.stagePill, { borderColor: tabColor, backgroundColor: formLinkType === option ? tabColor : 'transparent' }]}
+                  style={[styles.stagePill, formLinkType === option && styles.stagePillActive]}
                   onPress={() => setFormLinkType(option)}
                 >
-                  <Text style={[styles.stagePillText, formLinkType === option ? styles.stagePillTextActive : { color: tabColor }]}>
+                  <Text style={[styles.stagePillText, formLinkType === option && styles.stagePillTextActive]}>
                     {option === 'none' ? 'Nothing specific' : option === 'food' ? 'A food' : 'A medication'}
                   </Text>
                 </TouchableOpacity>
@@ -4893,21 +4893,8 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: 8,
   },
-  pill: {
-    borderWidth: 1,
-    borderColor: colors.primary,
-    borderRadius: 16,
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    maxWidth: 220,
-  },
-  pillText: {
-    ...typography.captionEmphasis,
-    color: colors.primary,
-
-    ...textShadow,
-
-  },
+  pill: { ...PILL, maxWidth: 220 },
+  pillText: { ...PILL_TEXT },
   tipCard: {
     borderTopWidth: 1,
     borderTopColor: colors.border,
@@ -5090,29 +5077,11 @@ const styles = StyleSheet.create({
   // Same reasoning as secondaryButton: the unselected pill was outline
   // only, so its label sat on the photo. The selected state still
   // overrides this with the tab colour at its own call sites.
-  stagePill: {
-    borderWidth: 1,
-    borderRadius: 999,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    backgroundColor: colors.surface,
-  },
-  stagePillText: { ...typography.captionEmphasis,
-
-    ...textShadow,
-
-  },
-  stagePillTextActive: { color: colors.textOnPrimary,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  stagePill: { ...PILL },
+  stagePillText: { ...PILL_TEXT },
+  // Dark text: cancel any shadow inherited from a base style it is
+  // composed with. See constants/typography.ts.
+  stagePillTextActive: { ...PILL_ON_TEXT },
   // Same colors.surface/2px-tabColor-border treatment every other card on
   // this page already uses (see table's own comment above) -- a round is
   // a tappable card (the whole thing opens/closes on tap), not a plain row.
@@ -5240,28 +5209,11 @@ const styles = StyleSheet.create({
 
   },
   portionsPillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  portionsPill: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 999,
-    paddingVertical: 6,
-    paddingHorizontal: 16,
-    backgroundColor: colors.surface,
-  },
-  portionsPillText: { ...typography.bodyEmphasis, color: colors.textPrimary,
-
-    ...textShadow,
-
-  },
-  portionsPillTextActive: { color: colors.textOnPrimary,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  portionsPill: { ...PILL },
+  portionsPillText: { ...PILL_TEXT },
+  // Dark text: cancel any shadow inherited from a base style it is
+  // composed with. See constants/typography.ts.
+  portionsPillTextActive: { ...PILL_ON_TEXT },
+  stagePillActive: { ...PILL_ON },
+  portionsPillActive: { ...PILL_ON },
 });

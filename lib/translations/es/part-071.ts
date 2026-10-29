@@ -239,4 +239,12 @@ export const PART: Readonly<Record<string, string>> = {
   "Choose how far ahead the To Do List looks": "Elegir qué tan adelante mira la Lista de pendientes",
   "Tap 1 hour, 2 hours, 4 hours or Rest of today. Anything still waiting from earlier stays at the top, then what is due in that time, soonest first.": "Toca 1 hora, 2 horas, 4 horas o Lo que queda de hoy. Lo que sigue esperando desde antes se queda arriba, luego lo que toca en ese tiempo, lo más próximo primero.",
   "You see what is coming up next without the whole day at once, and the line at the end names what comes after.": "Ves lo que viene sin todo el día de golpe, y la línea del final dice qué sigue después.",
+  "Plan My Meals": "Planear mis comidas",
+  "Opens Ask Your Records, Low Stimulation, Normal View, Plan My Meals, Store Its Location, Type a Note, Voice Note and Where Is It": "Abre Pregúntale a tus registros, Poca estimulación, Vista normal, Planear mis comidas, Guardar su ubicación, Escribir una nota, Nota de voz y Dónde está",
+  "Opens Ask Your Records, Low Stimulation, Plan My Meals, Simple View, Store Its Location, Type a Note, Voice Note and Where Is It": "Abre Pregúntale a tus registros, Poca estimulación, Planear mis comidas, Vista simple, Guardar su ubicación, Escribir una nota, Nota de voz y Dónde está",
+  "Plan meals from the quick-access menu": "Planear comidas desde el menú de acceso rápido",
+  "Tap Plan My Meals. It opens Meal Plan on Schedules.": "Toca Planear mis comidas. Abre el Plan de comidas en Agenda.",
+  "Choose how many days, then tap Generate My Day or Generate My Plan.": "Elige cuántos días, luego toca Generar mi día o Generar mi plan.",
+  "The plan is picked from the recipes in the app that suit the conditions and diet you set in Profile, from any screen you are on.": "El plan se arma con las recetas de la app que van con los padecimientos y la dieta que pusiste en Perfil, desde cualquier pantalla en la que estés.",
+  "Tap 1 hour, 2 hours, 4 hours or Rest of today. Anything late for being checked off stays at the top, marked in the warning colour, then what is due in that time, soonest first.": "Toca 1 hora, 2 horas, 4 horas o Lo que queda de hoy. Lo que ya se pasó sin marcarse como hecho se queda arriba, marcado en el color de aviso, luego lo que toca en ese tiempo, lo más próximo primero.",
 };

@@ -88,6 +88,7 @@ import {
 } from '../lib/reconciliation';
 import { PhotoStrip } from '../components/PhotoStrip';
 import { ThumbEndRow } from '../components/ThumbEndRow';
+import { PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 // Same resolution app/capture.tsx makes: a destination wears the colour and
 // the icon of the tab it hands off to, so the pills read as the place before
@@ -372,12 +373,12 @@ export default function ReconcileScreen() {
               return (
                 <TouchableOpacity
                   key={option.key}
-                  style={[styles.pill, { borderColor: color }, active ? { backgroundColor: color } : null]}
+                  style={[styles.pill, active && styles.pillActive]}
                   onPress={() => void sortNote(note, active ? null : option.key)}
                   onLongPress={() => showInfoAlert(option.label, option.hint)}
                 >
                   <Ionicons name={DESTINATION_ICONS[option.key]} size={14} color={active ? colors.background : color} />
-                  <Text style={[styles.pillText, { color: active ? colors.background : color }]}>{option.label}</Text>
+                  <Text style={[styles.pillText, active && styles.pillTextActive]}>{option.label}</Text>
                 </TouchableOpacity>
               );
             })}
@@ -541,44 +542,14 @@ const styles = StyleSheet.create({
   // The answers themselves are filled, because they are the thing to tap.
   // Everything that opens another row of choices is outlined, so a chip that
   // settles something never looks like a chip that asks something.
-  answerPill: {
-    paddingVertical: 7,
-    paddingHorizontal: 12,
-    borderRadius: 999,
-    backgroundColor: colors.primary,
-  },
-  answerPillText: { ...typography.caption, color: colors.background },
-  movePill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-    paddingVertical: 7,
-    paddingHorizontal: 12,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.accent,
-    backgroundColor: colors.surfaceMuted,
-  },
-  movePillText: { ...typography.caption, color: colors.accent },
-  timePill: {
-    paddingVertical: 7,
-    paddingHorizontal: 12,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surfaceMuted,
-  },
-  timePillText: { ...typography.caption, color: colors.textPrimary },
-  pill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-    paddingVertical: 7,
-    paddingHorizontal: 12,
-    borderRadius: 999,
-    borderWidth: 1,
-  },
-  pillText: { ...typography.caption },
+  answerPill: { ...PILL },
+  answerPillText: { ...PILL_TEXT },
+  movePill: { ...PILL, flexDirection: 'row', alignItems: 'center', gap: 5 },
+  movePillText: { ...PILL_TEXT },
+  timePill: { ...PILL },
+  timePillText: { ...PILL_TEXT },
+  pill: { ...PILL, flexDirection: 'row', alignItems: 'center', gap: 5 },
+  pillText: { ...PILL_TEXT },
   editRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 8 },
   editField: {
     flex: 1,
@@ -592,4 +563,6 @@ const styles = StyleSheet.create({
     ...textShadow,
   },
   footnote: { ...typography.caption, color: colors.textMuted, ...textShadow },
+  pillActive: { ...PILL_ON },
+  pillTextActive: { ...PILL_ON_TEXT },
 });

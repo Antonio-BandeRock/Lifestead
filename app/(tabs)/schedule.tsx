@@ -340,7 +340,7 @@ import { useCategoryClosed } from '../../lib/vaultSession';
 import { t } from '../../lib/i18n';
 import { appLocale } from '@/lib/language';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -7333,7 +7333,7 @@ const styles = StyleSheet.create({
   hydrationSummaryValue: { ...typography.screenTitle, color: TAB_COLOR, marginTop: 4, ...textShadow },
   hydrationSummaryMeta: { ...typography.caption, color: TAB_COLOR, marginTop: 2, ...textShadow },
   quickDrinkRow: { marginTop: 8, marginBottom: 6 },
-  quickDrinkPill: { borderColor: TAB_COLOR, alignItems: 'center' },
+  quickDrinkPill: { alignItems: 'center' },
   quickDrinkSize: { ...typography.caption, color: TAB_COLOR, opacity: 0.8, ...textShadow },
   quickDrinkLoggedRow: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 10, marginBottom: 4 },
   quickDrinkLogged: { ...typography.bodyEmphasis, color: TAB_COLOR, ...textShadow },
@@ -7361,34 +7361,14 @@ const styles = StyleSheet.create({
   planScopeText: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   helperText: { ...typography.caption, color: TAB_COLOR, marginTop: 4, marginBottom: 8, ...textShadow },
   pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  pill: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 999,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-  },
-  pillSmall: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 999,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-  },
-  pillActive: { backgroundColor: colors.primary, borderColor: colors.primary },
-  pillText: { ...typography.caption, color: TAB_COLOR, textTransform: 'capitalize', ...textShadow },
-  pillTextSmall: { ...typography.caption, color: TAB_COLOR, ...textShadow },
-  pillTextActive: { color: colors.textOnPrimary,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  pill: { ...PILL },
+  pillSmall: { ...PILL_SMALL },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT, textTransform: 'capitalize' },
+  pillTextSmall: { ...PILL_TEXT },
+  // Dark text: cancel any shadow inherited from a base style it is
+  // composed with. See constants/typography.ts.
+  pillTextActive: { ...PILL_ON_TEXT },
   modeRow: { flexDirection: 'row', gap: 6, marginTop: 12 },
   modeTab: {
     flex: 1,

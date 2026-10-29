@@ -22,7 +22,7 @@ import { getMorningCheckin, getMorningInputs, saveMorningCheckin, type MorningRe
 import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { NotesInput } from './NotesInput';
 import { useWalkMark } from './WalkMark';
-import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 const ENERGY = scaleOf('energy');
 
@@ -81,7 +81,7 @@ export function MorningCheckin({ tabColor }: Props) {
           return (
             <TouchableOpacity
               key={word}
-              style={[styles.pill, active && { backgroundColor: tabColor, borderColor: tabColor }]}
+              style={[styles.pill, active && styles.pillActive]}
               onPress={() => onPick(active ? null : n)}
             >
               <Text style={[styles.pillText, active && styles.pillTextActive]}>{numbered ? `${n} ${word}` : word}</Text>
@@ -160,16 +160,9 @@ const styles = StyleSheet.create({
   label: { ...typography.label, ...textShadow, color: colors.textPrimary },
   link: { ...typography.caption, ...textShadow, marginTop: 4 },
   pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  pill: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 999,
-    paddingHorizontal: 11,
-    paddingVertical: 6,
-    backgroundColor: colors.surfaceMuted,
-  },
-  pillText: { ...typography.caption, ...textShadow, color: colors.textPrimary },
-  pillTextActive: { color: colors.textOnPrimary, textShadowColor: 'transparent', textShadowRadius: 0 },
+  pill: { ...PILL },
+  pillText: { ...PILL_TEXT },
+  pillTextActive: { ...PILL_ON_TEXT },
   input: {
     borderWidth: 1,
     borderColor: colors.border,
@@ -182,4 +175,5 @@ const styles = StyleSheet.create({
   button: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
   buttonDisabled: { opacity: 0.5 },
   buttonText: { ...BUTTON_PRIMARY_TEXT },
+  pillActive: { ...PILL_ON },
 });

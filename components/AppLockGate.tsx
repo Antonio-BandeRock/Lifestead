@@ -60,7 +60,7 @@ import { getPlayfulWordingSync } from "../lib/visualPreferences";
 import { AppTextInput } from "./AppTextInput";
 import { PasscodeEntry } from "./PasscodeEntry";
 import { StandaloneKeyboard } from "./StandaloneKeyboard";
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 // App Lock's gate (step 4 of docs/app-lock-phase0-audit.md). Wraps the whole
 // app in app/_layout.tsx, so nothing that reads the database mounts until
@@ -944,22 +944,8 @@ const styles = StyleSheet.create({
     ...textShadow,
   },
   pillRow: { flexDirection: "row", gap: 8, justifyContent: "center" },
-  pill: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 18,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-  },
-  pillActive: {
-    backgroundColor: colors.buttonColor,
-    borderColor: colors.buttonColor,
-  },
-  pillText: { ...typography.body, color: colors.textSecondary, ...textShadow },
-  pillTextActive: {
-    color: colors.textOnButton,
-    textShadowColor: "transparent",
-    textShadowRadius: 0,
-  },
+  pill: { ...PILL },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
+  pillTextActive: { ...PILL_ON_TEXT },
 });

@@ -19,6 +19,7 @@ import {
   type GroupingMode,
 } from '../lib/fuelGaugeGroups';
 import type { NutrientGapEntry } from '../lib/nutrientAnalysis';
+import { PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 type Props = {
   entries: NutrientGapEntry[];
@@ -64,7 +65,7 @@ export function FuelGaugeGroups({ entries, conditionCodes, accent, showInfo }: P
             <TouchableOpacity
               key={choice.mode}
               onPress={() => setMode(choice.mode)}
-              style={[styles.pill, chosen ? { backgroundColor: accent, borderColor: accent } : null]}
+              style={[styles.pill, chosen && styles.pillActive]}
               accessibilityRole="button"
               accessibilityState={{ selected: chosen }}
             >
@@ -97,17 +98,11 @@ const styles = StyleSheet.create({
   linkText: { ...typography.caption, ...textShadow },
   caption: { ...typography.caption, ...textShadow, color: colors.textMuted },
   modes: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  pill: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 999,
-    paddingHorizontal: 14,
-    paddingVertical: 7,
-    backgroundColor: colors.surfaceMuted,
-  },
-  pillText: { ...typography.caption, ...textShadow, color: colors.textPrimary },
-  pillTextOnAccent: { color: colors.textOnPrimary, textShadowColor: 'transparent', textShadowRadius: 0 },
+  pill: { ...PILL },
+  pillText: { ...PILL_TEXT },
+  pillTextOnAccent: { ...PILL_ON_TEXT },
   group: { gap: 2 },
   groupName: { ...typography.body, ...textShadow },
   nutrients: { ...typography.caption, ...textShadow, color: colors.textPrimary },
+  pillActive: { ...PILL_ON },
 });

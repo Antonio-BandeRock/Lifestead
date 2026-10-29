@@ -27,7 +27,7 @@ import {
 } from '../lib/injectionSites';
 import { recordSite, removeSiteUse, saveInjectionSetting, type InjectionSetting } from '../lib/injectionSitesDb';
 import { ThumbEndRow } from './ThumbEndRow';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 type Props = {
   treatmentId: string;
@@ -183,18 +183,11 @@ function makeStyles(tabColor: string) {
     actions: { flexDirection: 'row', justifyContent: 'flex-end', flexWrap: 'wrap', gap: 10, marginTop: 10 },
     bodyEmphasis: { ...typography.bodyEmphasis, color: tabColor, marginTop: 6, ...textShadow },
     bodyText: { ...typography.body, color: tabColor, ...textShadow },
-    chip: {
-      paddingVertical: 8,
-      paddingHorizontal: 12,
-      borderRadius: 16,
-      borderWidth: 1,
-      borderColor: tabColor,
-      backgroundColor: colors.surface,
-    },
-    chipOn: { backgroundColor: tabColor },
+    chip: { ...PILL },
+    chipOn: { ...PILL_ON },
     chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 4 },
-    chipText: { ...typography.caption, color: tabColor, ...textShadow },
-    chipTextOn: { color: colors.textOnButton, textShadowColor: 'transparent', textShadowRadius: 0 },
+    chipText: { ...PILL_TEXT },
+    chipTextOn: { ...PILL_ON_TEXT },
     flexInput: { flex: 1, minWidth: 140 },
     heading: { ...typography.captionEmphasis, color: tabColor, marginBottom: 4, ...textShadow },
     inlineRow: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: 10 },

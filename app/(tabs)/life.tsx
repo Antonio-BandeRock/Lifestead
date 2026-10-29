@@ -118,7 +118,7 @@ import { VaultClosedBand } from '../../components/VaultClosedBand';
 import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
 import { t } from '../../lib/i18n';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
 
 // Which vault categories each lens shows (lib/vault.ts, phase 2). My Meds
 // and Conditions say so inside their own lists, beside the tools that stay.
@@ -2173,26 +2173,12 @@ const styles = StyleSheet.create({
   // no-text-on-the-tab-background rule.
 
   sectionPillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  pill: {
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 999,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-  },
-  pillActive: { backgroundColor: TAB_COLOR, borderColor: TAB_COLOR },
-  pillText: { ...typography.caption, color: colors.textPrimary, ...textShadow },
-  pillTextActive: { color: colors.textOnPrimary, textShadowColor: 'transparent', textShadowRadius: 0 },
-  pillSmall: {
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 999,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-  },
-  pillTextSmall: { ...typography.caption, color: colors.textPrimary, ...textShadow },
+  pill: { ...PILL },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
+  pillTextActive: { ...PILL_ON_TEXT },
+  pillSmall: { ...PILL_SMALL },
+  pillTextSmall: { ...PILL_TEXT },
 
   cardTitle: { ...typography.sectionTitle, color: colors.textPrimary, marginBottom: 10, ...textShadow },
   bodyText: { ...typography.body, color: colors.textSecondary, ...textShadow },

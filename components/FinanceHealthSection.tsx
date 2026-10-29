@@ -39,7 +39,7 @@ import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { useWalkMark } from './WalkMark';
 import { t } from '../lib/i18n';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL_SMALL, PILL_TEXT } from '../constants/buttons';
 
 // The health-money half of Finances, 2026-09-05. Pulled into its own
 // component rather than added to app/(tabs)/life.tsx because it is a
@@ -569,10 +569,7 @@ function makeStyles(tabColor: string) {
     primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
     secondaryButton: { ...BUTTON_SECONDARY, marginTop: 12 },
     secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
-    pillSmall: {
-      backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border, borderRadius: 999,
-      paddingHorizontal: 12, paddingVertical: 8,
-    },
-    pillTextSmall: { ...typography.caption, color: colors.textPrimary, ...textShadow },
+    pillSmall: { ...PILL_SMALL },
+    pillTextSmall: { ...PILL_TEXT },
   });
 }

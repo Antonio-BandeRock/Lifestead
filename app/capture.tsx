@@ -74,6 +74,7 @@ import { loadSuggestModel } from '../lib/captureSuggestDb';
 import { PlanSentencePanel } from '../components/PlanSentencePanel';
 import { describePlainDate, plainDateToLocalDateTime, readPlainDates } from '../lib/plainDate';
 import { ThumbEndRow } from '../components/ThumbEndRow';
+import { PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 // A destination wears the colour and icon of the tab it hands off to, rather
 // than a palette invented here, so "In the garden" reads as Garden before the
@@ -377,7 +378,7 @@ export default function CaptureScreen() {
               return (
                 <TouchableOpacity
                   key={option.key}
-                  style={[styles.pill, { borderColor: color }, active ? { backgroundColor: color } : null]}
+                  style={[styles.pill, active && styles.pillActive]}
                   onPress={() => void sortNote(note, active ? null : option.key)}
                   onLongPress={() => showInfoAlert(option.label, option.hint)}
                 >
@@ -386,7 +387,7 @@ export default function CaptureScreen() {
                     size={14}
                     color={active ? colors.background : color}
                   />
-                  <Text style={[styles.pillText, { color: active ? colors.background : color }]}>{option.label}</Text>
+                  <Text style={[styles.pillText, active && styles.pillTextActive]}>{option.label}</Text>
                 </TouchableOpacity>
               );
             })}
@@ -665,18 +666,8 @@ const styles = StyleSheet.create({
   privacyNote: { ...typography.caption, color: colors.textMuted, ...textShadow },
   remindLabel: { ...typography.label, color: colors.menuLabelMuted, ...textShadow },
   remindRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  remindPill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.accent,
-    backgroundColor: colors.surface,
-  },
-  remindPillText: { ...typography.caption, color: colors.accent, textShadowColor: 'transparent', textShadowRadius: 0 },
+  remindPill: { ...PILL, flexDirection: 'row', alignItems: 'center', gap: 6 },
+  remindPillText: { ...PILL_TEXT },
   remindSet: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   emptyCard: {
     ...homeBandStyle,
@@ -735,15 +726,9 @@ const styles = StyleSheet.create({
     ...textShadow,
   },
   pillWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 2 },
-  pill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-    paddingVertical: 7,
-    paddingHorizontal: 12,
-    borderRadius: 999,
-    borderWidth: 1,
-  },
-  pillText: { ...typography.caption },
+  pill: { ...PILL, flexDirection: 'row', alignItems: 'center', gap: 5 },
+  pillText: { ...PILL_TEXT },
   footnote: { ...typography.caption, color: colors.textMuted, ...textShadow },
+  pillActive: { ...PILL_ON },
+  pillTextActive: { ...PILL_ON_TEXT },
 });

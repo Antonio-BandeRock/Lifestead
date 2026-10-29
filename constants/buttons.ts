@@ -82,3 +82,59 @@ export const BUTTON_SECONDARY_TEXT = {
   color: colors.textPrimary,
   ...textShadow,
 } as const;
+
+// The one pill look (2026-10-28). Direct instruction: "Just like the buttons,
+// we need to have a default pill button type, and it should match the
+// default buttons." A pill is a choice among a few (a day, a kind, a range):
+// round ends, and the two button looks for its two states.
+//   - PILL, not chosen: the surface and the hairline border of SECONDARY.
+//   - PILL_ON, chosen, laid over PILL: the button colour and shadow of
+//     PRIMARY, with PILL_ON_TEXT's dark text on it.
+//   - PILL_SMALL is the same a size down, for a row of many short choices.
+// A pill's colour no longer follows its tab; a pill whose colour carries a
+// meaning of its own (a verdict) keeps it and is listed in
+// scripts/audit_pill_style.js with the reason. The same rules as buttons:
+// spread one, add only where it sits, never retype the fill, border, radius
+// or padding, and never colour one inline.
+export const PILL_RADIUS = 999;
+
+const pillShape = {
+  borderRadius: PILL_RADIUS,
+  paddingVertical: 8,
+  paddingHorizontal: 14,
+  alignItems: 'center',
+  justifyContent: 'center',
+} as const;
+
+export const PILL = {
+  ...pillShape,
+  backgroundColor: colors.surface,
+  borderWidth: 1,
+  borderColor: colors.border,
+} as const;
+
+export const PILL_SMALL = {
+  ...PILL,
+  paddingVertical: 6,
+  paddingHorizontal: 10,
+} as const;
+
+export const PILL_ON = {
+  backgroundColor: colors.buttonColor,
+  borderColor: colors.buttonColor,
+  ...BUTTON_SHADOW,
+} as const;
+
+export const PILL_TEXT = {
+  ...typography.caption,
+  color: colors.textPrimary,
+  ...textShadow,
+} as const;
+
+// Dark text on the button colour, so no shadow.
+export const PILL_ON_TEXT = {
+  ...typography.caption,
+  color: colors.textOnButton,
+  textShadowColor: 'transparent',
+  textShadowRadius: 0,
+} as const;

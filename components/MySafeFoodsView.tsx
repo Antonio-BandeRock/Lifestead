@@ -30,7 +30,7 @@ import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, HomeSectionBand } fr
 import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
 import { useOnVaultChange } from '../lib/vaultReads';
-import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT, PILL, PILL_TEXT } from '../constants/buttons';
 
 // My Safe Foods: the person's list, kept by the person.
 //
@@ -657,26 +657,11 @@ const styles = StyleSheet.create({
     ...textShadow,
   },
   verdictRow: { flexDirection: 'row', gap: 8 },
-  verdictPill: {
-    flex: 1,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-    paddingVertical: 9,
-    paddingHorizontal: 4,
-    alignItems: 'center',
-  },
+  verdictPill: { ...PILL, flex: 1, alignItems: 'center' },
   verdictPillSafeOn: { backgroundColor: colors.tabFood, borderColor: colors.tabFood },
   verdictPillUnsureOn: { backgroundColor: colors.statusYellowBg, borderColor: colors.statusYellowOnSurface },
   verdictPillAvoidOn: { backgroundColor: colors.statusRedBg, borderColor: colors.statusRedOnSurface },
-  verdictPillText: {
-    ...typography.caption,
-    color: colors.textPrimary,
-    textAlign: 'center',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  verdictPillText: { ...PILL_TEXT, textAlign: 'center' },
   verdictPillTextOn: { color: colors.textOnPrimary },
   draftActions: { flexDirection: 'row', gap: 8, justifyContent: 'flex-end' },
   primaryButton: { ...BUTTON_PRIMARY_COMPACT },

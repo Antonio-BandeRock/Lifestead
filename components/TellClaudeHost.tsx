@@ -70,7 +70,7 @@ import { wording } from '../lib/playfulCopy';
 import { useKeyboardLift } from './KeyboardLift';
 import { ThumbRow } from './ThumbRow';
 import { HorizontalScroll } from './HorizontalScroll';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 type Open = {
   tab: string | null;
@@ -540,23 +540,12 @@ const styles = StyleSheet.create({
   where: { ...typography.caption, color: colors.textMuted, marginTop: 2, marginBottom: 12, ...textShadow },
   message: { ...typography.body, color: colors.textSecondary, marginTop: 6, ...textShadow },
   pillRow: { flexDirection: 'row', gap: 8, paddingRight: 8 },
-  pill: {
-    paddingHorizontal: 12,
-    paddingVertical: 7,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surfaceMuted,
-  },
-  pillActive: { backgroundColor: colors.primary, borderColor: colors.primary },
-  pillText: { ...typography.caption, color: colors.textSecondary, ...textShadow },
-  pillTextActive: {
-    color: colors.textOnPrimary,
-    // Dark text: cancel the shadow the base style carries. See
-    // constants/typography.ts.
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  pill: { ...PILL },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
+  // Dark text: cancel the shadow the base style carries. See
+  // constants/typography.ts.
+  pillTextActive: { ...PILL_ON_TEXT },
   caption: { ...typography.caption, color: colors.textMuted, marginTop: 10, marginBottom: 8, ...textShadow },
   input: {
     ...typography.body,

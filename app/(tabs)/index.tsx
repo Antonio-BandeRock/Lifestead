@@ -245,7 +245,7 @@ import { t } from '../../lib/i18n';
 import { appLocale } from '@/lib/language';
 import { BringToTopProvider, useBringToTopHost } from '../../components/BringToTop';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../../constants/buttons';
 
 // What Home shows that the vault can hold: check-ins and flares, the
 // morning readings, the week, pacing and the assessment banner.
@@ -2840,10 +2840,7 @@ export default function HomeScreen() {
                     return (
                       <TouchableOpacity
                         key={tag.code}
-                        style={[
-                          styles.feelingTagChip,
-                          active && { backgroundColor: tabColorFor('/log'), borderColor: tabColorFor('/log') },
-                        ]}
+                        style={[styles.feelingTagChip, active && styles.feelingTagChipActive]}
                         onPress={() => toggleFeelingTag(tag.code)}
                       >
                         <Text style={[styles.feelingTagText, active && styles.feelingTagTextActive]}>{tag.label}</Text>
@@ -3815,7 +3812,7 @@ export default function HomeScreen() {
                         .map((plant) => (
                           <TouchableOpacity
                             key={plant.key}
-                            style={[styles.varietyChip, { borderColor: foodColor }]}
+                            style={styles.varietyChip}
                             activeOpacity={0.8}
                             onPress={() => void handleAddPlantToLogged(plant)}
                             disabled={usualMealBusy}
@@ -3844,7 +3841,7 @@ export default function HomeScreen() {
                 return (
                   <TouchableOpacity
                     key={plant.key}
-                    style={[styles.varietyChip, { borderColor: foodColor }, picked && { backgroundColor: foodColor }]}
+                    style={[styles.varietyChip, picked && styles.varietyChipActive]}
                     activeOpacity={0.8}
                     onPress={() => toggleVarietyExtra(plant)}
                     disabled={usualMealBusy}
@@ -4069,7 +4066,6 @@ export default function HomeScreen() {
   // time it is looked at. No local copy, nothing to drift.
   function renderLowStimulation() {
     if (!isHomeSectionVisible(visualPrefs, 'lowStimulation')) return null;
-    const homeColor = homeGroupIdentity('/profile')?.color ?? colors.primary;
     return renderBand(
       'lowStimulation',
       'Low Stimulation',
@@ -4084,7 +4080,7 @@ export default function HomeScreen() {
             return (
               <TouchableOpacity
                 key={value ? 'on' : 'off'}
-                style={[styles.pill, active && { backgroundColor: homeColor, borderColor: homeColor }]}
+                style={[styles.pill, active && styles.pillActive]}
                 onPress={() => {
                   void setLowStimulation(value);
                 }}
@@ -4105,7 +4101,6 @@ export default function HomeScreen() {
   // Home lands on a finished report rather than on the picker.
   function renderMakeReport() {
     if (!isHomeSectionVisible(visualPrefs, 'makeReport')) return null;
-    const reportsColor = tabColorFor('/reports');
     return renderBand(
       'makeReport',
       'Make a Report',
@@ -4118,7 +4113,7 @@ export default function HomeScreen() {
           {REPORT_WINDOW_OPTIONS.map((option) => (
             <TouchableOpacity
               key={option.days}
-              style={[styles.pill, { borderColor: reportsColor }]}
+              style={styles.pill}
               activeOpacity={0.8}
               onPress={() =>
                 router.push({ pathname: '/reports', params: { openReportDays: String(option.days) } })
@@ -4434,11 +4429,15 @@ export default function HomeScreen() {
         ) : null}
         {view.shown.map((standing, checkIndex) => {
           const check = standing.check;
+          // 2026-10-28: anything late for being checked off is at the top
+          // already (toDoListView) and is drawn in the warning colour, so it
+          // is the first thing the eye lands on.
+          const late = standing.done === false;
           return (
             <TouchableOpacity
               key={check.id}
               ref={checkIndex === 0 ? walkMark.ref('home.check') : undefined}
-              style={styles.reminderRow}
+              style={[styles.reminderRow, late && styles.reminderRowLate]}
               activeOpacity={0.8}
               onPress={() => router.push({ pathname: '/life', params: { openLifeLens: 'didIDoIt' } })}
             >
@@ -4446,14 +4445,14 @@ export default function HomeScreen() {
                 <Text style={styles.reminderTitle} numberOfLines={1}>
                   {check.name}
                 </Text>
-                <Text style={styles.reminderDetail} numberOfLines={2}>
+                <Text style={[styles.reminderDetail, late && styles.reminderDetailLate]} numberOfLines={2}>
                   {standing.line}
                 </Text>
               </View>
               <Ionicons
-                name={standing.done === true ? 'checkmark-circle' : 'ellipse-outline'}
+                name={standing.done === true ? 'checkmark-circle' : late ? 'alert-circle' : 'ellipse-outline'}
                 size={18}
-                color={standing.done === true ? colors.accent : colors.textSecondary}
+                color={standing.done === true ? colors.accent : late ? colors.danger : colors.textSecondary}
                 style={textShadow}
               />
             </TouchableOpacity>
@@ -5353,6 +5352,9 @@ const styles = StyleSheet.create({
   reminderTime: { ...typography.caption, ...textShadow, color: colors.textMuted, width: 62 },
   reminderBody: { flex: 1, gap: 2 },
   reminderTitle: { ...typography.body, ...textShadow, color: colors.textPrimary },
+  // A thing on the To Do List whose time passed without being checked off.
+  reminderRowLate: { borderLeftWidth: 4, borderLeftColor: colors.danger },
+  reminderDetailLate: { color: colors.danger },
   reminderDetail: { ...typography.caption, ...textShadow, color: colors.textMuted },
   // The one sentence about the meals around a dose. Amber rather than the
   // muted grey of the line above it, because it is the only line on the
@@ -5462,8 +5464,8 @@ const styles = StyleSheet.create({
   usualMealActions: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   usualMealButton: { flexGrow: 1 },
   usualMealGroup: { gap: 6 },
-  varietyChip: { flexDirection: 'row', alignItems: 'center', gap: 4, borderWidth: 1, borderRadius: 999, paddingHorizontal: 12, paddingVertical: 6 },
-  varietyChipTextPicked: { ...typography.caption, color: colors.textOnPrimary, textShadowColor: 'transparent', textShadowRadius: 0 },
+  varietyChip: { ...PILL, flexDirection: 'row', alignItems: 'center', gap: 4 },
+  varietyChipTextPicked: { ...PILL_ON_TEXT },
   // Negative margin so the tile row can scroll all the way to the card edges
   // instead of stopping short at its padding, with that same padding handed
   // to the content instead. Same negative-margin technique the page itself
@@ -5538,14 +5540,7 @@ const styles = StyleSheet.create({
   },
   // gap 10 (was 8), 2026-08-08 -- see content's own comment.
   feelingTagRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
-  feelingTagChip: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 999,
-    paddingHorizontal: 12,
-    paddingVertical: 7,
-    backgroundColor: colors.surfaceMuted,
-  },
+  feelingTagChip: { ...PILL },
   feelingTagText: { ...typography.caption, ...textShadow, color: colors.textPrimary },
   feelingTagTextActive: { color: colors.textOnPrimary,
 
@@ -5655,18 +5650,12 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, flexShrink: 1 },
-  pill: { borderWidth: 1, borderColor: colors.border, borderRadius: 999, paddingHorizontal: 12, paddingVertical: 8 },
-  pillActive: { backgroundColor: colors.primary, borderColor: colors.primary },
-  pillText: { ...typography.caption, ...textShadow, color: colors.textPrimary },
-  pillTextActive: { color: colors.textOnPrimary,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  pill: { ...PILL },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
+  // Dark text: cancel any shadow inherited from a base style it is
+  // composed with. See constants/typography.ts.
+  pillTextActive: { ...PILL_ON_TEXT },
+  varietyChipActive: { ...PILL_ON },
+  feelingTagChipActive: { ...PILL_ON },
 });

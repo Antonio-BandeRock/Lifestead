@@ -46,7 +46,7 @@ import {
   removeUsualMeal,
   setStandingWeekdays,
 } from '../lib/usualMealDb';
-import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 const TINT = colors.tabFood;
 
@@ -468,31 +468,14 @@ const styles = StyleSheet.create({
   mealName: { ...typography.body, color: colors.textPrimary, ...textShadow },
   mealDetail: { ...typography.caption, color: colors.textMuted, ...textShadow },
   pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  pill: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surfaceMuted,
-  },
-  pillActive: { backgroundColor: TINT, borderColor: TINT },
+  pill: { ...PILL },
+  pillActive: { ...PILL_ON },
   pillTaken: { opacity: 0.4 },
-  pillText: { ...typography.caption, color: colors.textSecondary },
-  pillTextActive: { color: colors.background },
+  pillText: { ...PILL_TEXT },
+  pillTextActive: { ...PILL_ON_TEXT },
   chipWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  chip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    paddingVertical: 6,
-    paddingHorizontal: 11,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surfaceMuted,
-  },
-  chipText: { ...typography.caption, color: colors.textSecondary },
+  chip: { ...PILL, flexDirection: 'row', alignItems: 'center', gap: 4 },
+  chipText: { ...PILL_TEXT },
   field: {
     ...typography.body,
     color: colors.textPrimary,

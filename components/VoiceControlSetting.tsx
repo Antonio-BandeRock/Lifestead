@@ -7,6 +7,7 @@ import { isDesktopApp } from '../lib/desktop/bridge';
 import { explainNotYet } from '../lib/notYet';
 import { SHADE_BUTTON_KINDS, setShadeButtonHidden } from '../lib/shadeButtonChoice';
 import LockedCapture, { type ShadeButtonKind } from '../modules/locked-capture';
+import { PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 // Profile > Device & Account > Notification Shade Buttons. Voice Control
 // moved here out of App Lock on 2026-10-11 by direct request: "Why is it
@@ -134,15 +135,8 @@ const styles = StyleSheet.create({
   caption: { ...typography.caption, color: colors.textMuted, marginTop: 10, ...textShadow },
   subLabel: { ...typography.label, color: colors.textPrimary, marginTop: 14, marginBottom: 6, ...textShadow },
   pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 8 },
-  pill: {
-    paddingVertical: 7,
-    paddingHorizontal: 14,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-  },
-  pillActive: { backgroundColor: colors.primary, borderColor: colors.primary },
-  pillText: { ...typography.body, color: colors.textSecondary, ...textShadow },
-  pillTextActive: { color: colors.textOnPrimary, textShadowColor: 'transparent', textShadowRadius: 0 },
+  pill: { ...PILL },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
+  pillTextActive: { ...PILL_ON_TEXT },
 });

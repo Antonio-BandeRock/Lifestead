@@ -185,7 +185,7 @@ import { useWalkMark } from '../../components/WalkMark';
 import type { VaultCategory } from '../../lib/vault';
 import { t, tl } from '../../lib/i18n';
 import { appLocale } from '@/lib/language';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -4290,30 +4290,14 @@ const styles = StyleSheet.create({
 
   },
   pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, alignItems: 'center' },
-  pill: { borderWidth: 1, borderColor: colors.border, borderRadius: 999, paddingHorizontal: 12, paddingVertical: 8 },
-  pillSmall: { borderWidth: 1, borderColor: colors.border, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 8 },
-  pillActive: { backgroundColor: colors.primary, borderColor: colors.primary },
-  pillText: { ...typography.caption, color: TAB_COLOR,
-
-    ...textShadow,
-
-  },
-  pillTextSmall: { ...typography.caption, color: TAB_COLOR,
-
-    ...textShadow,
-
-  },
-  pillTextActive: { color: colors.textOnPrimary,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  pill: { ...PILL },
+  pillSmall: { ...PILL_SMALL },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
+  pillTextSmall: { ...PILL_TEXT },
+  // Dark text: cancel any shadow inherited from a base style it is
+  // composed with. See constants/typography.ts.
+  pillTextActive: { ...PILL_ON_TEXT },
   input: {
     borderWidth: 1,
     borderColor: colors.border,

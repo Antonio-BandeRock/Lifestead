@@ -40,7 +40,7 @@ import { findCropGuide } from '../lib/cropGuides';
 import { updateGardenPlot, type GardenPlanting, type GardenPlot } from '../lib/db';
 import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
-import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_TEXT } from '../constants/buttons';
 
 const TAB_COLOR = colors.tabGarden;
 const MAX_PLAN_HEIGHT = 420;
@@ -424,9 +424,9 @@ const styles = StyleSheet.create({
   sizeRow: { flexDirection: 'row', alignItems: 'center', gap: 8, flexWrap: 'wrap' },
   controlRow: { flexDirection: 'row', alignItems: 'center', gap: 12, flexWrap: 'wrap' },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  chip: { borderWidth: 1, borderColor: TAB_COLOR, borderRadius: 16, paddingHorizontal: 12, paddingVertical: 6, backgroundColor: colors.surface },
-  chipPicked: { backgroundColor: TAB_COLOR },
-  chipText: { ...typography.body, color: colors.textPrimary, ...textShadow },
+  chip: { ...PILL },
+  chipPicked: { ...PILL_ON },
+  chipText: { ...PILL_TEXT },
   selectedCard: { gap: 6, paddingLeft: 10, borderLeftWidth: 2, borderLeftColor: TAB_COLOR },
   iconButton: { padding: 6, borderRadius: 8, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.surface },
   smallButton: { paddingVertical: 4 },

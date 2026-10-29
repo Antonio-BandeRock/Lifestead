@@ -24,7 +24,7 @@ import { listMeasurePlan, saveMeasurePlan } from '../lib/measuringPlanDb';
 import { termChoices, termLabel, type CustomGardenTerm } from '../lib/growSetup';
 import { listGardenTerms, listGrowEquipment } from '../lib/growSetupDb';
 import { GardenTermField } from './GardenTermField';
-import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 const TAB_COLOR = colors.tabGarden;
 
@@ -104,7 +104,7 @@ export function MeasuringPlanSection({ plot, startOpen = false, onSaved }: Props
               <TouchableOpacity
                 key={entry.value}
                 onPress={() => setChoices((current) => ({ ...current, [code]: entry.value }))}
-                style={[styles.pill, on ? { backgroundColor: TAB_COLOR, borderColor: TAB_COLOR } : null]}
+                style={[styles.pill, on && styles.pillActive]}
                 accessibilityRole="button"
                 accessibilityState={{ selected: on }}
               >
@@ -159,13 +159,14 @@ const styles = StyleSheet.create({
   nested: { gap: 8, paddingLeft: 10, borderLeftWidth: 2, borderLeftColor: TAB_COLOR },
   planRow: { gap: 4 },
   pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
-  pill: { borderRadius: 16, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.surfaceMuted, paddingHorizontal: 10, paddingVertical: 5 },
-  pillText: { ...typography.caption, color: colors.textPrimary, ...textShadow },
-  pillTextOn: { color: colors.textOnButton, textShadowColor: 'transparent', textShadowRadius: 0 },
+  pill: { ...PILL },
+  pillText: { ...PILL_TEXT },
+  pillTextOn: { ...PILL_ON_TEXT },
   bodyText: { ...typography.body, color: colors.textPrimary, ...textShadow },
   captionText: { ...typography.caption, color: colors.textMuted, ...textShadow },
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4 },
   primaryButton: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
   primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
+  pillActive: { ...PILL_ON },
 });

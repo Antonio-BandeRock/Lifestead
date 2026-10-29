@@ -64,7 +64,7 @@ import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { useWalkMark } from './WalkMark';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 // Routines: an order you do not want to hold in your head.
 //
@@ -887,13 +887,10 @@ function makeStyles(tabColor: string) {
     rowActions: { flexDirection: 'row', gap: 14, marginTop: 10, flexWrap: 'wrap' },
     clockRow: { flexDirection: 'row', gap: 10, alignItems: 'center', flexWrap: 'wrap' },
     dayRow: { flexDirection: 'row', gap: 6, flexWrap: 'wrap' },
-    dayPill: {
-      backgroundColor: colors.surfaceMuted, borderRadius: 10, borderWidth: 1, borderColor: colors.border,
-      paddingVertical: 8, paddingHorizontal: 10,
-    },
-    dayPillOn: { backgroundColor: tabColor, borderColor: tabColor },
-    dayPillText: { ...typography.caption, color: colors.textMuted, ...textShadow },
-    dayPillTextOn: { color: colors.textOnButton, textShadowColor: 'transparent', textShadowRadius: 0 },
+    dayPill: { ...PILL },
+    dayPillOn: { ...PILL_ON },
+    dayPillText: { ...PILL_TEXT },
+    dayPillTextOn: { ...PILL_ON_TEXT },
     actionText: { ...typography.caption, color: tabColor, ...textShadow },
     actionTextRemove: { ...typography.caption, color: colors.danger, ...textShadow },
 

@@ -20,6 +20,7 @@ import {
 import { upsertUpkeepItem } from '../lib/upkeepDb';
 import { AppTextInput } from './AppTextInput';
 import { useWalkMark } from './WalkMark';
+import { PILL, PILL_ON, PILL_TEXT } from '../constants/buttons';
 
 type Props = {
   kind: 'routine' | 'upkeep';
@@ -119,7 +120,7 @@ export function StarterLists({ kind, tabColor, heldNames, onAdded }: Props) {
             {STARTER_ROUTINES.map((starter) => (
               <TouchableOpacity
                 key={starter.key}
-                style={[styles.pill, picked?.key === starter.key ? { borderColor: tabColor } : null]}
+                style={[styles.pill, picked?.key === starter.key && styles.pillActive]}
                 onPress={() => pickRoutine(starter)}
               >
                 <Text style={styles.pillText}>{starter.name}</Text>
@@ -230,15 +231,8 @@ const styles = StyleSheet.create({
   caption: { ...typography.caption, ...textShadow, color: colors.textSecondary },
   label: { ...typography.label, ...textShadow, color: colors.textPrimary },
   pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  pill: {
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 999,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-  },
-  pillText: { ...typography.caption, color: colors.textPrimary },
+  pill: { ...PILL },
+  pillText: { ...PILL_TEXT },
   preview: { gap: 6 },
   input: {
     borderWidth: 1,
@@ -264,4 +258,5 @@ const styles = StyleSheet.create({
   },
   off: { opacity: 0.5 },
   buttonText: { ...typography.bodyEmphasis, textShadowColor: 'transparent', textShadowRadius: 0 },
+  pillActive: { ...PILL_ON },
 });

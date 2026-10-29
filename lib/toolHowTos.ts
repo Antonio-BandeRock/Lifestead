@@ -2168,6 +2168,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'Whatever was on your mind is kept, so you can stop holding on to it and sort it out later.',
     },
     {
+      key: 'quickMealPlan',
+      title: 'Plan meals from the quick-access menu',
+      steps: [
+        { say: 'Tap the quick-access tab at the bottom edge of the screen on your thumb side.' },
+        { say: 'Tap Plan My Meals. It opens Meal Plan on Schedules.' },
+        { say: 'Choose how many days, then tap Generate My Day or Generate My Plan.' },
+      ],
+      forYou: 'The plan is picked from the recipes in the app that suit the conditions and diet you set in Profile, from any screen you are on.',
+    },
+    {
       key: 'simpleView',
       title: 'Switch Home to Simple View and back',
       steps: [
@@ -2436,7 +2446,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Choose how far ahead the To Do List looks',
       steps: [
         { say: 'Open the band with the name of To Do List, near the top of Home.', mark: 'homeBand.doneChecks', stay: true },
-        { say: 'Tap 1 hour, 2 hours, 4 hours or Rest of today. Anything still waiting from earlier stays at the top, then what is due in that time, soonest first.', mark: 'home.checkLookAhead' },
+        { say: 'Tap 1 hour, 2 hours, 4 hours or Rest of today. Anything late for being checked off stays at the top, marked in the warning colour, then what is due in that time, soonest first.', mark: 'home.checkLookAhead' },
       ],
       forYou: 'You see what is coming up next without the whole day at once, and the line at the end names what comes after.',
     },

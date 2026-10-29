@@ -117,6 +117,15 @@ export function QuickAccessButton() {
       icon: prefs.simpleView ? 'expand-outline' : 'contract-outline',
       run: () => void setVisualPreferences({ simpleView: !prefs.simpleView }),
     },
+    // 2026-10-28: "There doesn't appear to be a quick access for setting up a
+    // meal plan based on the included recipes." Opens Schedules > Meal Plan,
+    // where Generate My Day or Generate My Plan picks from them.
+    {
+      key: 'mealPlan',
+      label: 'Plan My Meals',
+      icon: 'restaurant-outline',
+      run: () => router.push({ pathname: '/schedule', params: { openScheduleLens: 'dailyMealPlan' } }),
+    },
     { key: 'type', label: 'Type a Note', icon: 'create-outline', run: () => router.push('/capture') },
     { key: 'voice', label: 'Voice Note', icon: 'mic-outline', run: () => openQuickAccessSheet('voiceNote') },
   ]);
@@ -134,8 +143,8 @@ export function QuickAccessButton() {
         accessibilityLabel="Quick access"
         accessibilityHint={
           prefs.simpleView
-            ? 'Opens Ask Your Records, Low Stimulation, Normal View, Store Its Location, Type a Note, Voice Note and Where Is It'
-            : 'Opens Ask Your Records, Low Stimulation, Simple View, Store Its Location, Type a Note, Voice Note and Where Is It'
+            ? 'Opens Ask Your Records, Low Stimulation, Normal View, Plan My Meals, Store Its Location, Type a Note, Voice Note and Where Is It'
+            : 'Opens Ask Your Records, Low Stimulation, Plan My Meals, Simple View, Store Its Location, Type a Note, Voice Note and Where Is It'
         }
         accessibilityState={{ expanded: open }}
       >

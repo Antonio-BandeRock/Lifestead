@@ -178,6 +178,7 @@ import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
 import { useListedClosed } from '../../lib/vaultSession';
 import { t } from '../../lib/i18n';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
+import { PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -4113,21 +4114,13 @@ const styles = StyleSheet.create({
   // The scroller spans the screen (content has no side inset now); the
   // padding here keeps the first and last pill off the edge.
   nutrientPillRow: { flexDirection: 'row', gap: 8, paddingHorizontal: HOME_BAND_CONTENT_PADDING },
-  pill: { borderWidth: 1, borderColor: colors.border, borderRadius: 999, paddingHorizontal: 14, paddingVertical: 8 },
-  smallPill: { borderWidth: 1, borderColor: colors.border, borderRadius: 999, paddingHorizontal: 12, paddingVertical: 6 },
-  pillActive: { backgroundColor: colors.primary, borderColor: colors.primary },
-  pillText: { ...typography.caption, color: colors.textPrimary, ...textShadow },
-  pillTextActive: { color: colors.textOnPrimary,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  pill: { ...PILL },
+  smallPill: { ...PILL_SMALL },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
+  // Dark text: cancel any shadow inherited from a base style it is
+  // composed with. See constants/typography.ts.
+  pillTextActive: { ...PILL_ON_TEXT },
 
   // The custom date panel sits in band.box, directly under the pill row
   // it belongs to.

@@ -43,7 +43,7 @@ import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { SEVERITY_STEPS, severityStepLabel, stepFromTen } from '../lib/severityScale';
 import { VaultClosedBand } from '../components/VaultClosedBand';
 import { useOnVaultChange } from '../lib/vaultReads';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../constants/buttons';
 
 const TAB_COLOR = colors.tabBioCompass;
 const ENERGY = scaleOf('energy');
@@ -527,27 +527,11 @@ const styles = StyleSheet.create({
   tagGroup: { marginTop: 4 },
   summaryRow: { gap: 2, marginBottom: 8 },
   pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  pill: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 999,
-    paddingHorizontal: 12,
-    paddingVertical: 7,
-    backgroundColor: colors.surfaceMuted,
-  },
-  pillSmall: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 999,
-    minWidth: 34,
-    alignItems: 'center',
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-    backgroundColor: colors.surfaceMuted,
-  },
-  pillActive: { backgroundColor: TAB_COLOR, borderColor: TAB_COLOR },
-  pillText: { ...typography.caption, ...textShadow, color: colors.textPrimary },
-  pillTextActive: { color: colors.textOnPrimary, textShadowColor: 'transparent', textShadowRadius: 0 },
+  pill: { ...PILL },
+  pillSmall: { ...PILL_SMALL, minWidth: 34, alignItems: 'center' },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
+  pillTextActive: { ...PILL_ON_TEXT },
   input: {
     borderWidth: 1,
     borderColor: colors.border,

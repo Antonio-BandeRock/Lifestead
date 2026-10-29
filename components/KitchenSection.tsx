@@ -74,7 +74,7 @@ import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { useWalkMark } from './WalkMark';
 import { t } from '../lib/i18n';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 type DispositionForm = {
   itemId: string;
@@ -383,7 +383,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
             <TouchableOpacity
               key={option}
               ref={walkMark.ref(`kitchen.${option}`)}
-              style={[styles.kindPill, kind === option && { backgroundColor: tabColor, borderColor: tabColor }]}
+              style={[styles.kindPill, kind === option && styles.kindPillActive]}
               activeOpacity={0.85}
               onPress={() => {
                 setKind(option);
@@ -1112,16 +1112,9 @@ const styles = StyleSheet.create({
   placeWarning: { ...typography.caption, ...textShadow, color: colors.statusYellowStandalone },
   addBlock: { gap: 8, marginTop: 4 },
   kindRow: { flexDirection: 'row', gap: 8, marginBottom: 2 },
-  kindPill: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surfaceMuted,
-  },
-  kindPillText: { ...typography.caption, ...textShadow, color: colors.textSecondary },
-  kindPillTextActive: { color: colors.textOnButton, textShadowColor: 'transparent' },
+  kindPill: { ...PILL },
+  kindPillText: { ...PILL_TEXT },
+  kindPillTextActive: { ...PILL_ON_TEXT },
   // Tall enough to scroll a full catalogue without swallowing the page.
   picker: { maxHeight: 260 },
   pickerRow: {
@@ -1150,4 +1143,5 @@ const styles = StyleSheet.create({
   secondaryButton: { ...BUTTON_SECONDARY_COMPACT },
   secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
   scanButton: { alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', gap: 6 },
+  kindPillActive: { ...PILL_ON },
 });

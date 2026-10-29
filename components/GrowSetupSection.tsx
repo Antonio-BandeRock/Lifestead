@@ -51,10 +51,9 @@ import { GardenTermField } from './GardenTermField';
 import { PopoverSelect } from './PopoverSelect';
 import { RecordPhotos } from './RecordPhotos';
 import { ThumbRow } from './ThumbRow';
-import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 const TAB_COLOR = colors.tabGarden;
-const PRIMARY_BUTTON_BACKGROUND = colors.buttonColor;
 
 function todayDateString(): string {
   return new Date().toISOString().slice(0, 10);
@@ -125,10 +124,10 @@ function PillRow({ options, selected, onSelect }: { options: PillOption[]; selec
       {options.map((option) => (
         <TouchableOpacity
           key={option.value}
-          style={[styles.pill, { borderColor: TAB_COLOR }, selected === option.value ? { backgroundColor: PRIMARY_BUTTON_BACKGROUND } : null]}
+          style={[styles.pill, selected === option.value && styles.pillActive]}
           onPress={() => onSelect(option.value)}
         >
-          <Text style={selected === option.value ? styles.pillTextActive : { color: TAB_COLOR }}>{option.label}</Text>
+          <Text style={[styles.pillText, selected === option.value && styles.pillTextActive]}>{option.label}</Text>
         </TouchableOpacity>
       ))}
     </View>
@@ -529,12 +528,14 @@ const styles = StyleSheet.create({
   wideInput: { flex: 1, minWidth: 160 },
   dateInput: { width: 130 },
   pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  pill: { borderWidth: 1, borderRadius: 16, paddingHorizontal: 12, paddingVertical: 6 },
-  pillTextActive: { color: colors.textOnButton },
+  pill: { ...PILL },
+  pillTextActive: { ...PILL_ON_TEXT },
   nestedForm: { gap: 8, paddingLeft: 10, borderLeftWidth: 2, borderLeftColor: TAB_COLOR, marginVertical: 4 },
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4 },
   primaryButton: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
   primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
 });

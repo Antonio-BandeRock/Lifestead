@@ -3,11 +3,11 @@
 // wherever the phone is now. The sentences and the zone arithmetic are in
 // lib/travelTime.ts.
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { TRAVEL_LEAD, TRAVEL_MODES, currentZone, isAway, modeLine, zoneName, type TravelMode } from '../lib/travelTime';
 import { saveTravelMode, setHomeZoneToHere } from '../lib/travelTimeDb';
 import { syncReminderNotifications } from '../lib/reminderNotifications';
+import { PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 type Props = {
   treatmentId: string;
@@ -83,18 +83,11 @@ function makeStyles(tabColor: string) {
   return StyleSheet.create({
     actionText: { ...typography.captionEmphasis, color: tabColor, marginTop: 6, ...textShadow },
     bodyText: { ...typography.body, color: tabColor, ...textShadow },
-    chip: {
-      paddingVertical: 8,
-      paddingHorizontal: 12,
-      borderRadius: 16,
-      borderWidth: 1,
-      borderColor: tabColor,
-      backgroundColor: colors.surface,
-    },
-    chipOn: { backgroundColor: tabColor },
+    chip: { ...PILL },
+    chipOn: { ...PILL_ON },
     chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 6, marginBottom: 4 },
-    chipText: { ...typography.caption, color: tabColor, ...textShadow },
-    chipTextOn: { color: colors.textOnButton, textShadowColor: 'transparent', textShadowRadius: 0 },
+    chipText: { ...PILL_TEXT },
+    chipTextOn: { ...PILL_ON_TEXT },
     heading: { ...typography.captionEmphasis, color: tabColor, marginBottom: 4, ...textShadow },
     section: { gap: 2, marginTop: 12 },
     stepText: { ...typography.caption, color: tabColor, ...textShadow },

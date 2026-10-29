@@ -41,7 +41,7 @@ import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { useWalkMark } from './WalkMark';
 import { AppTextInput } from './AppTextInput';
 import { ThumbRow } from './ThumbRow';
-import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 
 function todayLocal(): string {
@@ -181,7 +181,7 @@ export function TodoSection({ tabColor, scope }: Props) {
           return (
             <TouchableOpacity
               key={value}
-              style={[styles.pill, { borderColor: tabColor }, on ? { backgroundColor: tabColor } : null]}
+              style={[styles.pill, on && styles.pillActive]}
               onPress={() => onSelect(value)}
             >
               <Text style={[styles.pillText, on ? styles.pillTextOn : null]}>{TODO_AREA_LABELS[value]}</Text>
@@ -367,9 +367,9 @@ const styles = StyleSheet.create({
   itemText: { flex: 1, gap: 2 },
   linkRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 16, paddingLeft: 34 },
   pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  pill: { borderWidth: 1, borderRadius: 14, paddingHorizontal: 12, paddingVertical: 4, backgroundColor: colors.surface },
-  pillText: { ...typography.caption, color: colors.textPrimary, textShadowColor: 'transparent', textShadowRadius: 0 },
-  pillTextOn: { color: colors.textOnButton },
+  pill: { ...PILL },
+  pillText: { ...PILL_TEXT },
+  pillTextOn: { ...PILL_ON_TEXT },
   textInput: {
     borderWidth: 1,
     borderColor: colors.border,
@@ -384,4 +384,5 @@ const styles = StyleSheet.create({
   primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
+  pillActive: { ...PILL_ON },
 });

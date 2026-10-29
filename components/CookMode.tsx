@@ -37,7 +37,7 @@ import {
 import { modalAnimationType } from '../lib/visualPreferences';
 import { useKeepScreenOn } from '../lib/keepScreenOn';
 import { inAppLanguage } from '@/lib/notificationWords';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, PILL, PILL_TEXT } from '../constants/buttons';
 
 type CookTimer = {
   id: string;
@@ -389,8 +389,8 @@ const styles = StyleSheet.create({
   startButtonText: { ...BUTTON_PRIMARY_TEXT, ...DARK_TEXT },
   caption: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   extraRow: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 8 },
-  extraChip: { borderWidth: 1, borderRadius: 14, paddingHorizontal: 12, paddingVertical: 6, backgroundColor: colors.surface },
-  extraChipText: { ...typography.bodyEmphasis, color: colors.textPrimary, ...textShadow },
+  extraChip: { ...PILL },
+  extraChipText: { ...PILL_TEXT },
   timerList: { gap: 8, marginTop: 4 },
   timerRow: {
     flexDirection: 'row',

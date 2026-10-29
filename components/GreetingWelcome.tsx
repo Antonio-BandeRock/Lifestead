@@ -21,6 +21,7 @@ import { getFirstDay } from '../lib/firstWeekDb';
 import { welcomeBackFor, type WelcomeBack } from '../lib/welcomeBack';
 import { latestRecordMs } from '../lib/welcomeBackDb';
 import { useWalkMark } from './WalkMark';
+import { PILL, PILL_TEXT } from '../constants/buttons';
 
 export function GreetingWelcome({ tabColor }: { tabColor: string }) {
   const walkMark = useWalkMark();
@@ -71,13 +72,13 @@ export function GreetingWelcome({ tabColor }: { tabColor: string }) {
       <View style={styles.buttonRow}>
         <TouchableOpacity
           ref={walkMark.ref('home.welcomeGo')}
-          style={[styles.goPill, { borderColor: tabColor }]}
+          style={styles.goPill}
           activeOpacity={0.8}
           onPress={go}
           accessibilityRole="button"
         >
           <Ionicons name="arrow-forward-circle-outline" size={18} color={tabColor} />
-          <Text style={[styles.goPillText, { color: tabColor }]}>{action}</Text>
+          <Text style={styles.goPillText}>{action}</Text>
         </TouchableOpacity>
         <TouchableOpacity ref={walkMark.ref('home.welcomeNotNow')} onPress={() => setNotNow(true)} hitSlop={8} accessibilityRole="button">
           <Text style={styles.quiet}>Not now</Text>
@@ -91,16 +92,7 @@ const styles = StyleSheet.create({
   body: { gap: 10, marginTop: 10 },
   sentence: { ...typography.body, ...textShadow, color: colors.textPrimary },
   buttonRow: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: 14 },
-  goPill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    backgroundColor: colors.surface,
-    borderRadius: 999,
-    borderWidth: 1,
-    paddingVertical: 8,
-    paddingHorizontal: 14,
-  },
-  goPillText: { ...typography.bodyEmphasis, textShadowColor: 'transparent', textShadowRadius: 0 },
+  goPill: { ...PILL, flexDirection: 'row', alignItems: 'center', gap: 6 },
+  goPillText: { ...PILL_TEXT },
   quiet: { ...typography.caption, ...textShadow, color: colors.textSecondary },
 });

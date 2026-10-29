@@ -45,6 +45,7 @@ import {
 import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { defaultCheckSchedule } from '../lib/routines';
 import { addRoutineStep, createDoneCheck, createRoutine } from '../lib/routinesDb';
+import { PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 type Mode = 'menu' | 'day' | 'grocery' | 'steps';
 
@@ -361,20 +362,10 @@ const styles = StyleSheet.create({
   helper: { ...typography.caption, color: colors.textMuted, ...textShadow },
   backRow: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   pillWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  pill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-    paddingVertical: 7,
-    paddingHorizontal: 12,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.accent,
-    backgroundColor: colors.surface,
-  },
-  pillOn: { backgroundColor: colors.accent },
-  pillText: { ...typography.caption, color: colors.accent, textShadowColor: 'transparent', textShadowRadius: 0 },
-  pillTextOn: { color: colors.background },
+  pill: { ...PILL, flexDirection: 'row', alignItems: 'center', gap: 5 },
+  pillOn: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
+  pillTextOn: { ...PILL_ON_TEXT },
   input: {
     ...typography.body,
     color: colors.textPrimary,

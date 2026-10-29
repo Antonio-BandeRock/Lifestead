@@ -23,6 +23,7 @@ import {
 import { explainNotYet } from '../lib/notYet';
 import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { t, tl } from '../lib/i18n';
+import { PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 type Props = {
   text: string;
@@ -156,17 +157,10 @@ const styles = StyleSheet.create({
   piece: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   unsettled: { ...typography.caption, color: colors.textMuted, fontStyle: 'italic', ...textShadow },
   kindRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 2 },
-  kindPill: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.accent,
-    backgroundColor: colors.surface,
-  },
-  kindPillOn: { backgroundColor: colors.accent },
-  kindPillText: { ...typography.caption, color: colors.accent, textShadowColor: 'transparent', textShadowRadius: 0 },
-  kindPillTextOn: { color: colors.background },
+  kindPill: { ...PILL },
+  kindPillOn: { ...PILL_ON },
+  kindPillText: { ...PILL_TEXT },
+  kindPillTextOn: { ...PILL_ON_TEXT },
   saveButton: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -55,7 +55,7 @@ import { PopoverSelect } from './PopoverSelect';
 import { RecipeDepthReport } from './RecipeDepthReport';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 // Deliberately last of the ten Food-tab builders, per this app's own build
 // order (see CLAUDE.md's Next steps) -- this is the only one that assembles
@@ -1543,7 +1543,7 @@ export function MealBuilder({
           }}
           scrollEventThrottle={16}
         >
-          <TouchableOpacity style={[styles.backPill, { backgroundColor: tabColor }]} onPress={closeStartingPoints}>
+          <TouchableOpacity style={[styles.backPill, styles.backPillActive]} onPress={closeStartingPoints}>
             <Text style={styles.backPillText}>{identityConfirmed ? '‹ Back to your meal' : '‹ Back'}</Text>
           </TouchableOpacity>
           {/* One band per group of whole meals, the same shape Log or
@@ -1686,10 +1686,7 @@ export function MealBuilder({
                 return (
                   <TouchableOpacity
                     key={type}
-                    style={[
-                      styles.typePill,
-                      { backgroundColor: isSelected ? tabColor : inputBackground(tabColor), borderColor: isSelected ? tabColor : colors.border },
-                    ]}
+                    style={[styles.typePill, styles.typePillActive]}
                     onPress={() => setMealType(type)}
                   >
                     <Text style={[styles.typePillText, isSelected ? styles.typePillTextActive : null]}>
@@ -1791,10 +1788,7 @@ export function MealBuilder({
                     return (
                       <TouchableOpacity
                         key={option}
-                        style={[
-                          styles.typePill,
-                          { backgroundColor: active ? tabColor : inputBackground(tabColor), borderColor: active ? tabColor : colors.border },
-                        ]}
+                        style={[styles.typePill, styles.typePillActive]}
                         onPress={() => setScheduleTimeBuffer((current) => ({ ...current, ampm: option }))}
                       >
                         <Text style={[styles.typePillText, active ? styles.typePillTextActive : null]}>{option}</Text>
@@ -1872,10 +1866,7 @@ export function MealBuilder({
                     return (
                       <TouchableOpacity
                         key={option}
-                        style={[
-                          styles.typePill,
-                          { backgroundColor: active ? tabColor : inputBackground(tabColor), borderColor: active ? tabColor : colors.border },
-                        ]}
+                        style={[styles.typePill, styles.typePillActive]}
                         onPress={() => setRoutineTimeBuffer((current) => ({ ...current, ampm: option }))}
                       >
                         <Text style={[styles.typePillText, active ? styles.typePillTextActive : null]}>{option}</Text>
@@ -1931,10 +1922,7 @@ export function MealBuilder({
                 return (
                   <TouchableOpacity
                     key={option.key}
-                    style={[
-                      styles.typePill,
-                      { backgroundColor: active ? tabColor : inputBackground(tabColor), borderColor: active ? tabColor : colors.border },
-                    ]}
+                    style={[styles.typePill, styles.typePillActive]}
                     onPress={() => setCorrectionDateChoice(option.key)}
                   >
                     <Text style={[styles.typePillText, active ? styles.typePillTextActive : null]}>{option.label}</Text>
@@ -1981,10 +1969,7 @@ export function MealBuilder({
                     return (
                       <TouchableOpacity
                         key={option}
-                        style={[
-                          styles.typePill,
-                          { backgroundColor: active ? tabColor : inputBackground(tabColor), borderColor: active ? tabColor : colors.border },
-                        ]}
+                        style={[styles.typePill, styles.typePillActive]}
                         onPress={() => setCorrectionTimeBuffer((current) => ({ ...current, ampm: option }))}
                       >
                         <Text style={[styles.typePillText, active ? styles.typePillTextActive : null]}>{option}</Text>
@@ -2039,7 +2024,7 @@ export function MealBuilder({
         {confirmSheetElement}
         {reconciliationSheetElement}
         <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]} keyboardShouldPersistTaps="handled">
-          <TouchableOpacity style={[styles.backPill, { backgroundColor: tabColor }]} onPress={closeCategory}>
+          <TouchableOpacity style={[styles.backPill, styles.backPillActive]} onPress={closeCategory}>
             <Text style={styles.backPillText}>‹ Back to Add from...</Text>
           </TouchableOpacity>
           <View style={styles.bandOut}>
@@ -2187,7 +2172,7 @@ export function MealBuilder({
             type changed, or Continue pressed again. Not while adjusting a
             past meal in place, which has no identity step to go back to. */}
         {!editMealId ? (
-          <TouchableOpacity style={[styles.backPill, { backgroundColor: tabColor }]} onPress={() => setIdentityConfirmed(false)}>
+          <TouchableOpacity style={[styles.backPill, styles.backPillActive]} onPress={() => setIdentityConfirmed(false)}>
             <Text style={styles.backPillText}>‹ Back</Text>
           </TouchableOpacity>
         ) : null}
@@ -2406,16 +2391,11 @@ const styles = StyleSheet.create({
   categorySearchRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 8, marginBottom: 4 },
   categorySearchInput: { flex: 1 },
   pillWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 6 },
-  typePill: {
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 12,
-    paddingVertical: 7,
-  },
-  typePillText: { ...typography.body, color: colors.textPrimary, ...textShadow },
+  typePill: { ...PILL },
+  typePillText: { ...PILL_TEXT },
   // A selected pill fills with the tab colour and its label goes dark; dark
   // text never carries a shadow (scripts/audit_dark_text_shadow.js).
-  typePillTextActive: { color: colors.textOnPrimary, textShadowColor: 'transparent', textShadowRadius: 0 },
+  typePillTextActive: { ...PILL_ON_TEXT },
   primaryButton: { ...BUTTON_PRIMARY, marginTop: 16 },
   primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   primaryButtonTextMuted: { color: colors.textMuted },
@@ -2463,8 +2443,8 @@ const styles = StyleSheet.create({
   // standing rule).
   // The Back pill every converted Food screen carries at the top (see
   // FoodItemDetailView's own backLink): the tab colour as fill, dark text.
-  backPill: { alignSelf: 'flex-start', borderRadius: 20, paddingHorizontal: 14, paddingVertical: 8 },
-  backPillText: { ...typography.body, color: colors.textOnPrimary, fontWeight: '400' },
+  backPill: { ...PILL, alignSelf: 'flex-start' },
+  backPillText: { ...PILL_TEXT },
   // tabColor applied inline at both call sites -- matches SideBuilder's own
   // "Ingredients" heading (also typography.eyebrow), which gets the same
   // treatment despite being a section heading rather than a single-field
@@ -2516,4 +2496,6 @@ const styles = StyleSheet.create({
   },
   gridTileLabel: { ...typography.caption, textAlign: 'center', color: colors.textPrimary, ...textShadow },
   logButton: { marginTop: 4 },
+  typePillActive: { ...PILL_ON },
+  backPillActive: { ...PILL_ON },
 });

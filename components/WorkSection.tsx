@@ -51,7 +51,7 @@ import {
 import { parsePriceInput } from '../lib/groceryList';
 import { useWalkMark } from './WalkMark';
 import { ThumbRow } from './ThumbRow';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 // Work: what it gives you, and how it is actually going.
 //
@@ -685,13 +685,10 @@ function makeStyles(tabColor: string) {
     warn: { color: colors.danger },
 
     pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 16 },
-    pill: {
-      backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border,
-      borderRadius: 999, paddingHorizontal: 14, paddingVertical: 8,
-    },
-    pillActive: { backgroundColor: tabColor, borderColor: tabColor },
-    pillText: { ...typography.caption, color: colors.textPrimary, ...textShadow },
-    pillTextActive: { color: colors.textOnPrimary, textShadowColor: 'transparent', textShadowRadius: 0 },
+    pill: { ...PILL },
+    pillActive: { ...PILL_ON },
+    pillText: { ...PILL_TEXT },
+    pillTextActive: { ...PILL_ON_TEXT },
 
     label: { ...typography.label, color: colors.menuLabelMuted, marginTop: 12, marginBottom: 4, ...textShadow },
     labelRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 12 },

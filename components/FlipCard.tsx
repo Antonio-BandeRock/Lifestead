@@ -5,6 +5,7 @@ import { useReducedMotion } from '../hooks/useReducedMotion';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_EDGE_WIDTH } from './HomeSectionBand';
+import { PILL, PILL_TEXT } from '../constants/buttons';
 
 // A small, single-concept "micro-learning" card -- a striking icon and a
 // one-sentence hook up front, a bite-sized tip on the back. Meant to be
@@ -183,9 +184,9 @@ export function FlipCard({
             onPress={onReadMore}
             hitSlop={8}
             accessibilityRole="button"
-            style={[styles.readMorePill, { borderColor }]}
+            style={styles.readMorePill}
           >
-            <Text style={[styles.readMoreText, { color: borderColor }]}>Read more →</Text>
+            <Text style={styles.readMoreText}>Read more →</Text>
           </TouchableOpacity>
         ) : null}
         <TouchableOpacity onPress={toggle} hitSlop={8} accessibilityRole="button" accessibilityLabel="Flip back">
@@ -244,16 +245,8 @@ const styles = StyleSheet.create({
   backTitle: { ...typography.bodyEmphasis, ...textShadow, color: colors.primary, textAlign: 'left', fontWeight: '400', lineHeight: 19 },
   backDivider: { height: 1, backgroundColor: colors.primaryMuted, opacity: 0.4, marginTop: 6, marginBottom: 8 },
   backBody: { ...typography.body, ...textShadow, color: colors.textPrimary, textAlign: 'left', lineHeight: 21 },
-  readMorePill: {
-    alignSelf: 'flex-start',
-    marginTop: 8,
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderRadius: 999,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-  },
-  readMoreText: { ...typography.bodyEmphasis, ...textShadow, fontWeight: '400' },
+  readMorePill: { ...PILL, alignSelf: 'flex-start', marginTop: 8 },
+  readMoreText: { ...PILL_TEXT },
   backHint: {
     ...typography.caption,
     ...textShadow,

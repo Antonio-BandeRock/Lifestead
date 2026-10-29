@@ -27,7 +27,7 @@ import {
   writeIsFileForMeal,
 } from '../lib/sharing';
 import { buildTime24, formatTime12 } from '../lib/timeOfDay';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 // 2026-08-15, Schedule/Share actions for a person's saved and favorited
 // recipes, direct request: "All items should be available to be added to
@@ -508,22 +508,12 @@ function makeActionStyles(tabColor: string, tabTextColor: string) {
     },
     dynamicScheduleRow: { flexDirection: 'row', gap: 8, alignItems: 'center' },
     ampmRow: { flexDirection: 'row', gap: 6 },
-    ampmPill: {
-      paddingVertical: 8,
-      paddingHorizontal: 10,
-      borderRadius: 8,
-      borderWidth: 1,
-      borderColor: colors.border,
-    },
-    ampmPillActive: { backgroundColor: tabColor, borderColor: tabColor },
-    ampmPillText: { ...typography.caption, color: colors.textSecondary, ...textShadow },
-    ampmPillTextActive: {
-      color: colors.background,
-      // Dark text: cancel any shadow inherited from a base style it is
-      // composed with. See constants/typography.ts.
-      textShadowColor: 'transparent',
-      textShadowRadius: 0,
-    },
+    ampmPill: { ...PILL },
+    ampmPillActive: { ...PILL_ON },
+    ampmPillText: { ...PILL_TEXT },
+    // Dark text: cancel any shadow inherited from a base style it is
+    // composed with. See constants/typography.ts.
+    ampmPillTextActive: { ...PILL_ON_TEXT },
     confirmButton: {
       ...BUTTON_PRIMARY,
       flexDirection: 'row',

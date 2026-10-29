@@ -42,7 +42,7 @@ import {
   type QuestionnaireCode,
 } from '../lib/standardQuestionnaires';
 import { VaultClosedBand } from '../components/VaultClosedBand';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 type QuestionnaireResult = {
   code: QuestionnaireCode;
@@ -586,34 +586,12 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: 6,
   },
-  scalePill: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 999,
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-  },
-  scalePillActive: {
-    backgroundColor: colors.primary,
-    borderColor: colors.primary,
-  },
-  scalePillText: {
-    ...typography.caption,
-    color: colors.textPrimary,
-    ...textShadow,
-  },
-  scalePillTextActive: {
-    color: colors.textOnPrimary,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  scalePill: { ...PILL },
+  scalePillActive: { ...PILL_ON },
+  scalePillText: { ...PILL_TEXT },
+  // Dark text: cancel any shadow inherited from a base style it is
+  // composed with. See constants/typography.ts.
+  scalePillTextActive: { ...PILL_ON_TEXT },
   submitButton: { ...BUTTON_PRIMARY, marginHorizontal: HOME_BAND_CONTENT_PADDING },
   submitButtonDisabled: {
     backgroundColor: colors.primaryMuted,

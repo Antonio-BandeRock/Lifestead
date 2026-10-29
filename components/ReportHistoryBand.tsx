@@ -25,7 +25,7 @@ import { AppTextInput } from './AppTextInput';
 import { useConfirmSheet } from './ConfirmSheet';
 import { useTabBandStyles } from './TabBand';
 import { useWalkMark } from './WalkMark';
-import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_TEXT } from '../constants/buttons';
 
 const SHOWN_AT_FIRST = 10;
 
@@ -183,6 +183,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   buttonQuietText: { ...typography.body, color: colors.textPrimary, ...textShadow },
-  namePill: { borderRadius: 999, paddingHorizontal: 12, paddingVertical: 6, backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border },
-  namePillText: { ...typography.caption, color: colors.textPrimary, ...textShadow },
+  namePill: { ...PILL },
+  namePillText: { ...PILL_TEXT },
 });

@@ -25,6 +25,7 @@ import { TYPED_FOODS_NOTE, orderUsualMeals, parseFoods, type UsualMeal, type Usu
 import { listSavedMealsForUsual, listUsualMeals } from '../lib/usualMealDb';
 import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
+import { PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 type Props = {
   entry: TomorrowSlot;
@@ -211,7 +212,7 @@ export function PackPicker({ entry, today, nowTime, tint, onChanged }: Props) {
             <View style={styles.group}>
               <View style={styles.row}>
                 {(['home', 'out'] as const).map((which) => (
-                  <TouchableOpacity key={which} style={[styles.pill, kind === which && { backgroundColor: tint, borderColor: tint }]} onPress={() => setKind(which)}>
+                  <TouchableOpacity key={which} style={[styles.pill, kind === which && styles.pillActive]} onPress={() => setKind(which)}>
                     <Text style={[styles.pillText, kind === which && styles.pillTextActive]}>{which === 'home' ? 'From home' : 'Eating out'}</Text>
                   </TouchableOpacity>
                 ))}
@@ -289,16 +290,9 @@ const styles = StyleSheet.create({
   },
   buttonText: { ...typography.caption, ...textShadow },
   off: { opacity: 0.5 },
-  pill: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-  },
-  pillText: { ...typography.caption, color: colors.textSecondary },
-  pillTextActive: { color: colors.background },
+  pill: { ...PILL },
+  pillText: { ...PILL_TEXT },
+  pillTextActive: { ...PILL_ON_TEXT },
   field: {
     ...typography.body,
     color: colors.textPrimary,
@@ -309,4 +303,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     ...textShadow,
   },
+  pillActive: { ...PILL_ON },
 });

@@ -7,7 +7,6 @@
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Svg, { Ellipse, Rect } from 'react-native-svg';
-import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import {
   BODY_BOX,
@@ -18,6 +17,7 @@ import {
   toggleRegion,
   type BodyView,
 } from '../lib/bodyMap';
+import { PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 const DRAWN_WIDTH = 150;
 
@@ -41,23 +41,23 @@ export function BodyMap({
         {(['front', 'back'] as BodyView[]).map((each) => (
           <TouchableOpacity
             key={each}
-            style={[styles.pill, view === each && { backgroundColor: color, borderColor: color }]}
+            style={[styles.pill, view === each && styles.pillActive]}
             onPress={() => setView(each)}
             accessibilityRole="button"
             accessibilityState={{ selected: view === each }}
           >
-            <Text style={[styles.pillText, { color }, view === each && styles.pillTextActive]}>
+            <Text style={[styles.pillText, view === each && styles.pillTextActive]}>
               {each === 'front' ? 'Front' : 'Back'}
             </Text>
           </TouchableOpacity>
         ))}
         <TouchableOpacity
-          style={[styles.pill, asList && { backgroundColor: color, borderColor: color }]}
+          style={[styles.pill, asList && styles.pillActive]}
           onPress={() => setAsList(!asList)}
           accessibilityRole="button"
           accessibilityState={{ selected: asList }}
         >
-          <Text style={[styles.pillText, { color }, asList && styles.pillTextActive]}>Pick from a list</Text>
+          <Text style={[styles.pillText, asList && styles.pillTextActive]}>Pick from a list</Text>
         </TouchableOpacity>
       </View>
       <Text style={[styles.caption, { color }]}>{SIDES_NOTE}</Text>
@@ -69,12 +69,12 @@ export function BodyMap({
             return (
               <TouchableOpacity
                 key={region.key}
-                style={[styles.pill, on && { backgroundColor: color, borderColor: color }]}
+                style={[styles.pill, on && styles.pillActive]}
                 onPress={() => toggle(region.key)}
                 accessibilityRole="checkbox"
                 accessibilityState={{ checked: on }}
               >
-                <Text style={[styles.pillText, { color }, on && styles.pillTextActive]}>{region.label}</Text>
+                <Text style={[styles.pillText, on && styles.pillTextActive]}>{region.label}</Text>
               </TouchableOpacity>
             );
           })}
@@ -117,9 +117,10 @@ const styles = StyleSheet.create({
   wrap: { gap: 8 },
   row: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, alignItems: 'center' },
   drawing: { alignItems: 'center', paddingVertical: 4 },
-  pill: { borderWidth: 1, borderColor: colors.border, borderRadius: 999, paddingHorizontal: 12, paddingVertical: 8 },
-  pillText: { ...typography.caption, ...textShadow },
-  pillTextActive: { color: colors.textOnPrimary, textShadowColor: 'transparent', textShadowRadius: 0 },
+  pill: { ...PILL },
+  pillText: { ...PILL_TEXT },
+  pillTextActive: { ...PILL_ON_TEXT },
   caption: { ...typography.caption, ...textShadow },
   clear: { ...typography.caption, textDecorationLine: 'underline', ...textShadow },
+  pillActive: { ...PILL_ON },
 });

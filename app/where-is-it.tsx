@@ -58,7 +58,7 @@ import { useVoiceDictation } from '../hooks/useVoiceDictation';
 import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
 import { describeSpokenAnswer, parseWhereQuestion } from '../lib/whereSpeech';
 import { SENTENCE_PAUSE_MS } from '../components/StoreLocationSheet';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, PILL, PILL_TEXT } from '../constants/buttons';
 
 // Where the answer came from, so a result carries its source at a glance: a
 // garden bed reads differently from a cupboard, and a sentence somebody spoke
@@ -433,18 +433,8 @@ const styles = StyleSheet.create({
     ...textShadow,
   },
   chipWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  chip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    paddingVertical: 6,
-    paddingHorizontal: 11,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surfaceMuted,
-  },
-  chipText: { ...typography.caption, color: colors.textSecondary },
+  chip: { ...PILL, flexDirection: 'row', alignItems: 'center', gap: 4 },
+  chipText: { ...PILL_TEXT },
   emptyCard: { ...homeBandStyle, borderColor: colors.primary, padding: HOME_BAND_CONTENT_PADDING },
   emptyText: { ...typography.body, color: colors.textSecondary, ...textShadow },
   hitCard: { ...homeBandStyle, padding: HOME_BAND_CONTENT_PADDING, gap: 6 },

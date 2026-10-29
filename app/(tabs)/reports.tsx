@@ -38,6 +38,7 @@ import { LensFeedersRow } from '../../components/LensFeedersRow';
 import { VaultClosedBand } from '../../components/VaultClosedBand';
 import { VAULT_CATEGORIES } from '../../lib/vault';
 import { useOnVaultChange } from '../../lib/vaultReads';
+import { PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../../constants/buttons';
 
 const TAB_COLOR = colors.tabReports;
 const band = makeTabBandStyles(TAB_COLOR, { calm: true });
@@ -580,20 +581,12 @@ const styles = StyleSheet.create({
   dateFieldLabel: { ...typography.eyebrow, color: colors.textSecondary, marginBottom: 4, ...textShadow },
   presetCaption: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   customCaption: { ...typography.caption, color: colors.textSecondary, marginTop: 10, ...textShadow },
-  pill: { borderWidth: 1, borderColor: colors.border, borderRadius: 999, paddingHorizontal: 14, paddingVertical: 8 },
-  pillActive: { backgroundColor: colors.primary, borderColor: colors.primary },
-  pillText: { ...typography.caption, color: colors.textPrimary, ...textShadow },
-  pillTextActive: { color: colors.textOnPrimary,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  pill: { ...PILL },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
+  // Dark text: cancel any shadow inherited from a base style it is
+  // composed with. See constants/typography.ts.
+  pillTextActive: { ...PILL_ON_TEXT },
 
   // A real, deliberate monospace-adjacent choice -- this text is meant to
   // be read as a plain document (and shared verbatim via Share below), not

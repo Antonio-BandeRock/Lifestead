@@ -81,7 +81,7 @@ import {
 } from '../lib/workoutsDb';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 // Life > Workouts (H11, 1.0.55.1). Direct request, 2026-09-28: "there needs
 // to be a workout builder to add exercises and everything about the
@@ -801,13 +801,10 @@ function makeStyles(tabColor: string) {
     rowMeta: { ...typography.caption, color: colors.textMuted, marginTop: 2, ...textShadow },
     rowActions: { flexDirection: 'row', gap: 14, marginTop: 10, flexWrap: 'wrap' },
     pillRow: { flexDirection: 'row', gap: 6, flexWrap: 'wrap', marginTop: 8, alignItems: 'center' },
-    pill: {
-      backgroundColor: colors.surfaceMuted, borderRadius: 10, borderWidth: 1, borderColor: colors.border,
-      paddingVertical: 8, paddingHorizontal: 10,
-    },
-    pillOn: { backgroundColor: tabColor, borderColor: tabColor },
-    pillText: { ...typography.caption, color: colors.textMuted, ...textShadow },
-    pillTextOn: { color: colors.textOnButton, textShadowColor: 'transparent', textShadowRadius: 0 },
+    pill: { ...PILL },
+    pillOn: { ...PILL_ON },
+    pillText: { ...PILL_TEXT },
+    pillTextOn: { ...PILL_ON_TEXT },
     pillHelp: { paddingVertical: 8, paddingHorizontal: 4 },
     actionText: { ...typography.caption, color: tabColor, ...textShadow },
     actionTextRemove: { ...typography.caption, color: colors.danger, ...textShadow },

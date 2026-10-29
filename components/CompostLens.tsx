@@ -51,7 +51,7 @@ import { makeTabBandStyles, TabBand } from './TabBand';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
 import { t, tl } from '../lib/i18n';
-import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 // Compost, a lens of Garden.
 //
@@ -77,7 +77,6 @@ const TAB_COLOR = colors.tabGarden;
 // (CalmBands in components/HomeSectionBand.tsx), bands a left-accent width
 // apart with no hairlines.
 const band = makeTabBandStyles(TAB_COLOR, { calm: true });
-const PRIMARY_BUTTON_BACKGROUND = colors.buttonColor;
 
 // Lists of names are alphabetical; status and moisture are scales and
 // keep their order.
@@ -524,7 +523,7 @@ function PileBand({
               <TouchableOpacity
                 key={entry.kind}
                 ref={entry.kind === 'added' ? walkMark.ref('compost.action') : undefined}
-                style={[styles.pill, { borderColor: TAB_COLOR }, action === entry.kind ? { backgroundColor: PRIMARY_BUTTON_BACKGROUND } : styles.pillIdle]}
+                style={[styles.pill, action === entry.kind && styles.pillActive]}
                 onPress={() => setAction(action === entry.kind ? null : entry.kind)}
               >
                 <Text style={action === entry.kind ? styles.pillTextActive : styles.pillText}>{entry.label}</Text>
@@ -577,7 +576,7 @@ function PileBand({
                 </View>
                 <View style={styles.fieldRow}>
                   <TouchableOpacity
-                    style={[styles.pill, { borderColor: TAB_COLOR }, bought ? { backgroundColor: PRIMARY_BUTTON_BACKGROUND } : styles.pillIdle]}
+                    style={[styles.pill, bought && styles.pillActive]}
                     onPress={() => setBought(!bought)}
                   >
                     <Text style={bought ? styles.pillTextActive : styles.pillText}>{bought ? 'Bought' : 'Free'}</Text>
@@ -767,16 +766,9 @@ const styles = StyleSheet.create({
   shortInput: { width: 110 },
   dateInput: { width: 140 },
   pillRow: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
-  pill: { borderWidth: 1, borderRadius: 999, paddingHorizontal: 14, paddingVertical: 6 },
-  pillIdle: { backgroundColor: colors.surface },
-  pillText: { ...typography.caption, color: colors.textPrimary, ...textShadow },
-  pillTextActive: {
-    ...typography.caption,
-    color: colors.textOnButton,
-    fontWeight: '400',
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  pill: { ...PILL },
+  pillText: { ...PILL_TEXT },
+  pillTextActive: { ...PILL_ON_TEXT },
   row: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12 },
   rowText: { flex: 1, gap: 2 },
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4 },
@@ -784,4 +776,5 @@ const styles = StyleSheet.create({
   primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
+  pillActive: { ...PILL_ON },
 });

@@ -141,7 +141,7 @@ import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { useOnVaultChange } from '../../lib/vaultReads';
 import { t, tl } from '../../lib/i18n';
 import { appLocale } from '@/lib/language';
-import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../../constants/buttons';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../../constants/buttons';
 
 // This page's own identity color -- see constants/colors.ts's own comment
 // on tabGarden for how it was chosen.
@@ -151,22 +151,6 @@ const TAB_COLOR = colors.tabGarden;
 // (CalmBands in components/HomeSectionBand.tsx), bands a left-accent width
 // apart with no hairlines.
 const band = makeTabBandStyles(TAB_COLOR, { calm: true });
-
-// A real, deliberately soft fill for every "primary action" button and the
-// active-toggle pill in this file, 2026-08-13, direct report: "make the
-// background of the Add a Harvest button be a little easier to read and
-// easier on the eyes. This green is a bit too much for the eyes to deal
-// with." Originally a lightened, fully-opaque tint of TAB_COLOR
-// (popoverBackground); superseded 2026-08-24 by the same app-wide fix
-// every other button got, direct report: "there needs to be some sort of
-// continuity between app buttons... follow the color of the ground color
-// chosen in the Profile." colors.buttonColor (see its own comment in
-// constants/colors.ts) replaces the tab-tinted fill so this file's own
-// buttons look like every other screen's, not a one-off green tint.
-// primaryButtonText below was updated to match (colors.textOnButton, the
-// dark text verified against this exact fill), not left on its old
-// colors.background value.
-const PRIMARY_BUTTON_BACKGROUND = colors.buttonColor;
 
 // COUNTRIES mapped once, at module scope, into the label/value shape
 // PopoverSelect's own searchable list expects -- a real, stable array
@@ -1284,10 +1268,10 @@ function PlotsAndPlantingsLens({
     const toggle = (on: boolean, label: string, onPress: () => void) => (
       <TouchableOpacity
         key={label}
-        style={[styles.pill, { borderColor: TAB_COLOR }, on ? { backgroundColor: PRIMARY_BUTTON_BACKGROUND } : null]}
+        style={[styles.pill, on && styles.pillActive]}
         onPress={onPress}
       >
-        <Text style={on ? styles.pillTextActive : { color: TAB_COLOR }}>{label}</Text>
+        <Text style={[styles.pillText, on && styles.pillTextActive]}>{label}</Text>
       </TouchableOpacity>
     );
     return (
@@ -1337,10 +1321,10 @@ function PlotsAndPlantingsLens({
     const toggle = (on: boolean, label: string, onPress: () => void) => (
       <TouchableOpacity
         key={label}
-        style={[styles.pill, { borderColor: TAB_COLOR }, on ? { backgroundColor: PRIMARY_BUTTON_BACKGROUND } : null]}
+        style={[styles.pill, on && styles.pillActive]}
         onPress={onPress}
       >
-        <Text style={on ? styles.pillTextActive : { color: TAB_COLOR }}>{label}</Text>
+        <Text style={[styles.pillText, on && styles.pillTextActive]}>{label}</Text>
       </TouchableOpacity>
     );
     return (
@@ -1917,14 +1901,10 @@ function PlotsAndPlantingsLens({
             {LOCATION_TYPE_OPTIONS.map((option) => (
               <TouchableOpacity
                 key={option.value}
-                style={[
-                  styles.pill,
-                  { borderColor: TAB_COLOR },
-                  newAreaLocationType === option.value ? { backgroundColor: PRIMARY_BUTTON_BACKGROUND } : null,
-                ]}
+                style={[styles.pill, newAreaLocationType === option.value && styles.pillActive]}
                 onPress={() => setNewAreaLocationType(option.value)}
               >
-                <Text style={newAreaLocationType === option.value ? styles.pillTextActive : { color: TAB_COLOR }}>
+                <Text style={[styles.pillText, newAreaLocationType === option.value && styles.pillTextActive]}>
                   {option.label}
                 </Text>
               </TouchableOpacity>
@@ -1969,14 +1949,10 @@ function PlotsAndPlantingsLens({
                 {SUNLIGHT_OPTIONS.map((option) => (
                   <TouchableOpacity
                     key={option.value}
-                    style={[
-                      styles.pill,
-                      { borderColor: TAB_COLOR },
-                      newAreaSunlight === option.value ? { backgroundColor: PRIMARY_BUTTON_BACKGROUND } : null,
-                    ]}
+                    style={[styles.pill, newAreaSunlight === option.value && styles.pillActive]}
                     onPress={() => setNewAreaSunlight(newAreaSunlight === option.value ? null : option.value)}
                   >
-                    <Text style={newAreaSunlight === option.value ? styles.pillTextActive : { color: TAB_COLOR }}>
+                    <Text style={[styles.pillText, newAreaSunlight === option.value && styles.pillTextActive]}>
                       {option.label}
                     </Text>
                   </TouchableOpacity>
@@ -1992,14 +1968,10 @@ function PlotsAndPlantingsLens({
                 {[{ value: true, label: 'Yes' }, { value: false, label: 'No' }].map((option) => (
                   <TouchableOpacity
                     key={option.label}
-                    style={[
-                      styles.pill,
-                      { borderColor: TAB_COLOR },
-                      newAreaGreenhouseLit === option.value ? { backgroundColor: PRIMARY_BUTTON_BACKGROUND } : null,
-                    ]}
+                    style={[styles.pill, newAreaGreenhouseLit === option.value && styles.pillActive]}
                     onPress={() => setNewAreaGreenhouseLit(option.value)}
                   >
-                    <Text style={newAreaGreenhouseLit === option.value ? styles.pillTextActive : { color: TAB_COLOR }}>
+                    <Text style={[styles.pillText, newAreaGreenhouseLit === option.value && styles.pillTextActive]}>
                       {option.label}
                     </Text>
                   </TouchableOpacity>
@@ -2039,14 +2011,10 @@ function PlotsAndPlantingsLens({
               {SIZE_UNIT_OPTIONS.map((option) => (
                 <TouchableOpacity
                   key={option.value}
-                  style={[
-                    styles.pill,
-                    { borderColor: TAB_COLOR },
-                    newAreaSizeUnit === option.value ? { backgroundColor: PRIMARY_BUTTON_BACKGROUND } : null,
-                  ]}
+                  style={[styles.pill, newAreaSizeUnit === option.value && styles.pillActive]}
                   onPress={() => setNewAreaSizeUnit(option.value)}
                 >
-                  <Text style={newAreaSizeUnit === option.value ? styles.pillTextActive : { color: TAB_COLOR }}>
+                  <Text style={[styles.pillText, newAreaSizeUnit === option.value && styles.pillTextActive]}>
                     {option.label}
                   </Text>
                 </TouchableOpacity>
@@ -2582,21 +2550,13 @@ const styles = StyleSheet.create({
   // using this same style, since wrap has no visible effect when
   // everything already fits on one line.
   pillRow: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
-  pill: { borderWidth: 1, borderRadius: 999, paddingHorizontal: 14, paddingVertical: 6 },
+  pill: { ...PILL },
   // Phase 4's own Length/Width entry boxes -- narrow enough to sit
   // side-by-side with the Feet/Meters toggle in the same fieldRow.
   sizeInput: { width: 90 },
-  pillTextActive: { color: colors.textOnButton, fontWeight: '400',
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  // Dark text: cancel any shadow inherited from a base style it is
+  // composed with. See constants/typography.ts.
+  pillTextActive: { ...PILL_ON_TEXT },
   expandedSection: { gap: 8, marginTop: 4 },
   plantingRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 8 },
   plantingName: { flex: 1 },
@@ -2627,4 +2587,6 @@ const styles = StyleSheet.create({
     ...textShadow,
 
   },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
 });

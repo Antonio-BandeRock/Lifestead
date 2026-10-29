@@ -98,7 +98,7 @@ import { makeTabBandStyles, TabBand } from './TabBand';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { useWalkMark } from './WalkMark';
-import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 // Growing Conditions, a lens of Garden (2026-09-23).
 //
@@ -698,7 +698,7 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
                       <TouchableOpacity
                         key={code}
                         onPress={() => pickMeasurement(code)}
-                        style={[styles.wayPill, on ? { backgroundColor: TAB_COLOR, borderColor: TAB_COLOR } : null]}
+                        style={[styles.wayPill, on && styles.wayPillActive]}
                       >
                         <Text style={[styles.wayPillText, on ? styles.wayPillTextOn : null]}>{measurementLabel(code)}</Text>
                       </TouchableOpacity>
@@ -808,7 +808,7 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
                                   <TouchableOpacity
                                     key={way.value}
                                     onPress={() => setRatioWay(way.value)}
-                                    style={[styles.wayPill, on ? { backgroundColor: TAB_COLOR, borderColor: TAB_COLOR } : null]}
+                                    style={[styles.wayPill, on && styles.wayPillActive]}
                                   >
                                     <Text style={[styles.wayPillText, on ? styles.wayPillTextOn : null]}>{way.label}</Text>
                                   </TouchableOpacity>
@@ -1212,9 +1212,9 @@ const styles = StyleSheet.create({
   formCard: { borderRadius: 10, backgroundColor: colors.surfaceMuted, padding: 12, gap: 8 },
   spectrumCard: { borderRadius: 10, borderWidth: 1, borderColor: TAB_COLOR, backgroundColor: colors.surface, padding: 12, gap: 8 },
   wayRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  wayPill: { borderRadius: 16, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.surfaceMuted, paddingHorizontal: 12, paddingVertical: 6 },
-  wayPillText: { ...typography.caption, color: colors.textPrimary, ...textShadow },
-  wayPillTextOn: { color: colors.textOnButton, textShadowColor: 'transparent', textShadowRadius: 0 },
+  wayPill: { ...PILL },
+  wayPillText: { ...PILL_TEXT },
+  wayPillTextOn: { ...PILL_ON_TEXT },
   eventList: { gap: 8 },
   fieldRow: { flexDirection: 'row', alignItems: 'center', gap: 8, flexWrap: 'wrap' },
   fieldLabel: { ...typography.label, color: colors.textPrimary, ...textShadow },
@@ -1235,4 +1235,5 @@ const styles = StyleSheet.create({
   primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
+  wayPillActive: { ...PILL_ON },
 });

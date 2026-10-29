@@ -37,12 +37,11 @@ import { PopoverSelect } from './PopoverSelect';
 import { TabBand } from './TabBand';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
-import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 type Folds = ReturnType<typeof useBandFolds>;
 
 const TAB_COLOR = colors.tabGarden;
-const PRIMARY_BUTTON_BACKGROUND = colors.buttonColor;
 
 function todayDateString(): string {
   return new Date().toISOString().slice(0, 10);
@@ -210,10 +209,10 @@ export function ElectricityBand({ folds, plotOptions, noPlotValue, groupPrefix, 
             </View>
             <Text style={styles.captionText}>The kWh is on the bill and is optional, but with it the app knows what a kWh costs you and can price what the equipment draws.</Text>
             <TouchableOpacity
-              style={[styles.pill, { borderColor: TAB_COLOR }, beforeGrow ? { backgroundColor: PRIMARY_BUTTON_BACKGROUND } : null]}
+              style={[styles.pill, beforeGrow && styles.pillActive]}
               onPress={() => setBeforeGrow(!beforeGrow)}
             >
-              <Text style={beforeGrow ? styles.pillTextActive : { color: TAB_COLOR }}>This bill is from before the grow</Text>
+              <Text style={[styles.pillText, beforeGrow && styles.pillTextActive]}>This bill is from before the grow</Text>
             </TouchableOpacity>
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
             <ThumbRow primary="first" style={styles.actionRow}>
@@ -286,12 +285,14 @@ const styles = StyleSheet.create({
   dateInput: { width: 140 },
   row: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' },
   rowText: { flex: 1, minWidth: 160, gap: 2 },
-  pill: { borderWidth: 1, borderRadius: 999, paddingHorizontal: 14, paddingVertical: 6, alignSelf: 'flex-start' },
-  pillTextActive: { color: colors.textOnButton },
+  pill: { ...PILL, alignSelf: 'flex-start' },
+  pillTextActive: { ...PILL_ON_TEXT },
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4, flexWrap: 'wrap' },
   nestedForm: { gap: 8, paddingLeft: 10, borderLeftWidth: 2, borderLeftColor: TAB_COLOR, marginVertical: 4 },
   primaryButton: { ...BUTTON_PRIMARY_COMPACT },
   primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: { color: colors.danger },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
 });

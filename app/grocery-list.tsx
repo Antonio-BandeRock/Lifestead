@@ -91,7 +91,7 @@ import {
 } from '../lib/groceryList';
 import { ThumbEndRow } from '../components/ThumbEndRow';
 import { useWalkMark } from '../components/WalkMark';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 const DEFAULT_DAYS = 3;
 
@@ -1442,19 +1442,12 @@ const styles = StyleSheet.create({
   progressText: { ...typography.body, color: colors.textPrimary, ...textShadow },
   labelRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 10 },
   pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  pill: {
-    paddingVertical: 8,
-    paddingHorizontal: 14,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-  },
-  pillActive: { borderColor: colors.accent, backgroundColor: colors.accent },
-  pillText: { ...typography.body, color: colors.textSecondary, ...textShadow },
+  pill: { ...PILL },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
   // Dark text on the light accent fill: cancel the shadow it would otherwise
   // inherit. See constants/typography.ts.
-  pillTextActive: { color: colors.background, textShadowColor: 'transparent', textShadowRadius: 0 },
+  pillTextActive: { ...PILL_ON_TEXT },
   stepperRow: { flexDirection: 'row', alignItems: 'center', gap: 16 },
   stepperButton: {
     width: 44,

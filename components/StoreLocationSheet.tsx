@@ -45,7 +45,7 @@ import { listPlaceRecords, rememberWhere, undoRememberWhere, type RememberedWher
 import { parseStoreSentence } from '../lib/whereSpeech';
 import { AppTextInput } from './AppTextInput';
 import { ThumbRow } from './ThumbRow';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_TEXT } from '../constants/buttons';
 
 // Long enough to take a breath in the middle of a sentence.
 export const SENTENCE_PAUSE_MS = 2800;
@@ -425,15 +425,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surfaceMuted,
   },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
-  chip: {
-    paddingVertical: 6,
-    paddingHorizontal: 10,
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-  },
-  chipText: { ...typography.caption, color: colors.textPrimary, ...textShadow },
+  chip: { ...PILL },
+  chipText: { ...PILL_TEXT },
   actions: { flexDirection: 'row', gap: 12 },
   primaryButton: { ...BUTTON_PRIMARY, flex: 1 },
   primaryText: { ...BUTTON_PRIMARY_TEXT },

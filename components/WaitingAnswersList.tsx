@@ -32,6 +32,7 @@ import { SNOOZE_MINUTES } from '../lib/quietHours';
 import { waitingFor, type WaitingGroup, type WaitingItem } from '../lib/waitingAnswers';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP } from './HomeSectionBand';
 import { useTabBandStyles } from './TabBand';
+import { PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 type Props = {
   groups: WaitingGroup[];
@@ -145,7 +146,7 @@ export function WaitingAnswersList({ groups, now, reload, tabColor, nested = fal
                     return (
                       <TouchableOpacity
                         key={key}
-                        style={[styles.pill, on ? { backgroundColor: tabColor, borderColor: tabColor } : { borderColor: tabColor }]}
+                        style={[styles.pill, on && styles.pillActive]}
                         onPress={() => void toggleKind(key)}
                         activeOpacity={0.8}
                         accessibilityRole="switch"
@@ -200,9 +201,9 @@ const styles = StyleSheet.create({
   buttonQuietText: { ...typography.body, color: colors.textPrimary, ...textShadow },
   switches: { gap: 8 },
   switchCaption: { ...typography.caption, color: colors.textSecondary, lineHeight: 17, ...textShadow },
-  pill: { paddingVertical: 7, paddingHorizontal: 12, borderRadius: 999, borderWidth: 1, backgroundColor: colors.surface },
-  pillText: { ...typography.caption, color: colors.textPrimary, ...textShadow },
-  pillTextOn: { ...typography.caption, color: colors.background },
+  pill: { ...PILL },
+  pillText: { ...PILL_TEXT },
+  pillTextOn: { ...PILL_ON_TEXT },
   choose: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -213,4 +214,5 @@ const styles = StyleSheet.create({
   },
   chooseBetweenBands: { marginHorizontal: HOME_BAND_CONTENT_PADDING },
   chooseText: { ...typography.bodyEmphasis, color: colors.textPrimary, fontWeight: '400', ...textShadow },
+  pillActive: { ...PILL_ON },
 });

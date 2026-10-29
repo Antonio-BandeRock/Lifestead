@@ -39,7 +39,7 @@ import { parsePriceInput } from '../lib/groceryList';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
 import { ThumbEndRow } from './ThumbEndRow';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL_SMALL, PILL_TEXT } from '../constants/buttons';
 
 // Goals, 2026-09-05, pass 3 of the Finances rebuild.
 //
@@ -568,11 +568,8 @@ function makeStyles(tabColor: string) {
     actionTextRemove: { ...typography.caption, color: colors.danger, ...textShadow },
 
     formActions: { flexDirection: 'row', gap: 10, marginTop: 16 },
-    pillSmall: {
-      backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border,
-      borderRadius: 999, paddingHorizontal: 12, paddingVertical: 8,
-    },
-    pillTextSmall: { ...typography.caption, color: colors.textPrimary, ...textShadow },
+    pillSmall: { ...PILL_SMALL },
+    pillTextSmall: { ...PILL_TEXT },
     primaryButton: { ...BUTTON_PRIMARY, marginTop: 12 },
     primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
     secondaryButton: { ...BUTTON_SECONDARY, marginTop: 12 },

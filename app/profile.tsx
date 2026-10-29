@@ -287,7 +287,7 @@ import { useOnVaultChange } from '../lib/vaultReads';
 import { useCategoryClosed } from '../lib/vaultSession';
 import { t, tl } from '../lib/i18n';
 import { appLocale } from '@/lib/language';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../constants/buttons';
 
 // Whether a backup that has been reached is restored or only checked.
 type BackupUse = 'restore' | 'check';
@@ -6729,50 +6729,14 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: 8,
   },
-  pill: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 999,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-  },
-  pillSmall: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 999,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
-  pillActive: {
-    backgroundColor: colors.primary,
-    borderColor: colors.primary,
-  },
-  pillText: {
-    ...typography.caption,
-    color: colors.textPrimary,
-
-    ...textShadow,
-
-  },
-  pillTextSmall: {
-    ...typography.caption,
-    color: colors.textPrimary,
-
-    ...textShadow,
-
-  },
-  pillTextActive: {
-    color: colors.textOnPrimary,
-
-    // Dark text: cancel any shadow inherited from a base style it is
-
-    // composed with. See constants/typography.ts.
-
-    textShadowColor: 'transparent',
-
-    textShadowRadius: 0,
-
-  },
+  pill: { ...PILL },
+  pillSmall: { ...PILL_SMALL },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
+  pillTextSmall: { ...PILL_TEXT },
+  // Dark text: cancel any shadow inherited from a base style it is
+  // composed with. See constants/typography.ts.
+  pillTextActive: { ...PILL_ON_TEXT },
   // The Conditions & Check-In condition picker's even 2-column grid,
   // 2026-08-21, see the JSX's comment above for why this list needed a
   // grid instead of the plain pillRow every other picker on this screen

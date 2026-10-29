@@ -59,7 +59,7 @@ import { ThumbRow } from './ThumbRow';
 import { VaultClosedBand } from './VaultClosedBand';
 import { useCategoryClosed } from '../lib/vaultSession';
 import { t, tl } from '../lib/i18n';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 // The 19 conditions, on the Life tab. Direct instruction, 2026-09-19:
 // "move Conditions from Digest to Life, all condition icons be changed to
@@ -1204,17 +1204,10 @@ function makeStyles(tabColor: string, bandGap: number = HOME_BAND_GAP) {
     },
     helperText: { ...typography.caption, color: colors.textMuted, marginTop: 6, ...textShadow },
     conditionGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-    pill: {
-      backgroundColor: colors.surfaceMuted,
-      borderRadius: 16,
-      borderWidth: 1,
-      borderColor: colors.border,
-      paddingVertical: 6,
-      paddingHorizontal: 12,
-    },
-    pillActive: { backgroundColor: tabColor, borderColor: tabColor },
-    pillText: { ...typography.caption, color: colors.textPrimary, ...textShadow },
-    pillTextActive: { color: colors.textOnPrimary, textShadowColor: 'transparent', textShadowRadius: 0 },
+    pill: { ...PILL },
+    pillActive: { ...PILL_ON },
+    pillText: { ...PILL_TEXT },
+    pillTextActive: { ...PILL_ON_TEXT },
     checkRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 14 },
     checkLabel: { ...typography.body, color: colors.textPrimary, ...textShadow },
     formActions: { flexDirection: 'row', gap: 10, marginTop: 4 },

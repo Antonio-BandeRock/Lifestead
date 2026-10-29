@@ -15,7 +15,7 @@ import { biometricTitle, biometricWords, deviceWord } from '../lib/appLockWords'
 import { isDesktopApp } from '../lib/desktop/bridge';
 import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { VaultChoices } from './VaultChoices';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 // The body of Profile > App Lock. Setting the lock up and the changes that
 // need the passcode open app/app-lock-setup.tsx; the settings that do not
@@ -205,17 +205,10 @@ const styles = StyleSheet.create({
   caption: { ...typography.caption, color: colors.textMuted, marginTop: 6, ...textShadow },
   subLabel: { ...typography.label, color: colors.textPrimary, marginTop: 14, marginBottom: 6, ...textShadow },
   pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  pill: {
-    paddingVertical: 7,
-    paddingHorizontal: 14,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-  },
-  pillActive: { backgroundColor: colors.primary, borderColor: colors.primary },
-  pillText: { ...typography.body, color: colors.textSecondary, ...textShadow },
-  pillTextActive: { color: colors.textOnPrimary, textShadowColor: 'transparent', textShadowRadius: 0 },
+  pill: { ...PILL },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
+  pillTextActive: { ...PILL_ON_TEXT },
   button: { ...BUTTON_PRIMARY, marginTop: 14 },
   buttonText: { ...BUTTON_PRIMARY_TEXT },
   quietButton: {

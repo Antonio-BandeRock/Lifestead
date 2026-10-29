@@ -77,7 +77,7 @@ import { useVoiceDictation, type VoiceRecognitionMode } from '../hooks/useVoiceD
 import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
 import { offerGardenUse } from '../lib/gardenPlateOffer';
 import { explainNotYet } from '../lib/notYet';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 // meals.eaten_at's own stored format: 'YYYY-MM-DDTHH:mm', local time. See
 // listMealsForDate in lib/db.ts for why a UTC toISOString() would break every
@@ -837,19 +837,12 @@ const styles = StyleSheet.create({
   ateOutRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 4 },
   ateOutText: { ...typography.body, color: colors.textSecondary, ...textShadow },
   mealTypeRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  mealTypePill: {
-    paddingVertical: 8,
-    paddingHorizontal: 14,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-  },
-  mealTypePillActive: { borderColor: colors.accent, backgroundColor: colors.accent },
-  mealTypePillText: { ...typography.body, color: colors.textSecondary, ...textShadow },
+  mealTypePill: { ...PILL },
+  mealTypePillActive: { ...PILL_ON },
+  mealTypePillText: { ...PILL_TEXT },
   // Dark text on the light accent fill: cancel the shadow it would otherwise
   // inherit. See constants/typography.ts.
-  mealTypePillTextActive: { color: colors.background, textShadowColor: 'transparent', textShadowRadius: 0 },
+  mealTypePillTextActive: { ...PILL_ON_TEXT },
   disabled: { opacity: 0.6 },
   // A button standing between bands keeps the bands' content inset.
   inset: { marginHorizontal: HOME_BAND_CONTENT_PADDING },

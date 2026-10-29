@@ -45,6 +45,7 @@ import { CompareTwoChart } from './CompareTwoChart';
 import { PopoverSelect } from './PopoverSelect';
 import { useTabBandStyles, TabBand } from './TabBand';
 import { useWalkMark } from './WalkMark';
+import { PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 type Props = {
   folds: ReturnType<typeof useBandFolds>;
@@ -199,7 +200,7 @@ export function CompareTwoLens({ folds, color, weightUnit, initialA }: Props) {
             <TouchableOpacity
               ref={walkMark.ref('compare.range')}
               key={range}
-              style={[styles.pill, active && { backgroundColor: color, borderColor: color }]}
+              style={[styles.pill, active && styles.pillActive]}
               onPress={() => setDays(range)}
               accessibilityRole="button"
               accessibilityState={{ selected: active }}
@@ -235,7 +236,7 @@ export function CompareTwoLens({ folds, color, weightUnit, initialA }: Props) {
                   <TouchableOpacity
                     ref={walkMark.ref('compare.partner')}
                     key={partner.key}
-                    style={[styles.pill, active && { backgroundColor: color, borderColor: color }]}
+                    style={[styles.pill, active && styles.pillActive]}
                     onPress={() => setKeyB(partner.key)}
                     accessibilityRole="button"
                     accessibilityState={{ selected: active }}
@@ -290,7 +291,7 @@ export function CompareTwoLens({ folds, color, weightUnit, initialA }: Props) {
                       <TouchableOpacity
                         ref={walkMark.ref('compare.tags')}
                         key={row.code}
-                        style={[styles.pill, active && { backgroundColor: color, borderColor: color }]}
+                        style={[styles.pill, active && styles.pillActive]}
                         onPress={() => setPickedTags((now) => togglePicked(markRows(tagRows, now).map((r) => r.code), row.code))}
                         accessibilityRole="button"
                         accessibilityState={{ selected: active }}
@@ -354,7 +355,8 @@ const styles = StyleSheet.create({
   chart: { marginTop: 10 },
   pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 12 },
   pillRowTight: { marginTop: 4 },
-  pill: { borderWidth: 1, borderColor: colors.border, borderRadius: 999, paddingHorizontal: 12, paddingVertical: 7, backgroundColor: colors.surfaceMuted },
-  pillText: { ...typography.caption, color: colors.textPrimary, ...textShadow },
-  pillTextActive: { color: colors.textOnPrimary, textShadowColor: 'transparent', textShadowRadius: 0 },
+  pill: { ...PILL },
+  pillText: { ...PILL_TEXT },
+  pillTextActive: { ...PILL_ON_TEXT },
+  pillActive: { ...PILL_ON },
 });

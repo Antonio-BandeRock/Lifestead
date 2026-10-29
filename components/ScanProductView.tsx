@@ -109,7 +109,7 @@ import {
 } from '../lib/fodmapLabel';
 import { buildToneMatrix, computeContainRect, saveAdjustedIngredientsPhoto } from '../lib/toneAdjustment';
 import { useWalkMark } from './WalkMark';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 type ScanStatus =
   | 'scanning'
@@ -2175,19 +2175,12 @@ const styles = StyleSheet.create({
   logErrorText: { ...typography.caption, color: colors.danger, ...textShadow },
   logUnitText: { ...typography.body, color: colors.textSecondary, paddingTop: 12, ...textShadow },
   logMealTypeRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  logMealTypePill: {
-    paddingVertical: 8,
-    paddingHorizontal: 14,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-  },
-  logMealTypePillActive: { borderColor: colors.accent, backgroundColor: colors.accent },
-  logMealTypePillText: { ...typography.body, color: colors.textSecondary, ...textShadow },
+  logMealTypePill: { ...PILL },
+  logMealTypePillActive: { ...PILL_ON },
+  logMealTypePillText: { ...PILL_TEXT },
   // Dark text on the light accent fill: cancel the shadow it would otherwise
   // inherit, matching primaryButtonText just below. See constants/typography.ts.
-  logMealTypePillTextActive: { color: colors.background, textShadowColor: 'transparent', textShadowRadius: 0 },
+  logMealTypePillTextActive: { ...PILL_ON_TEXT },
   libraryLink: { alignItems: 'center', paddingVertical: 4 },
   libraryLinkText: { ...typography.caption, color: colors.textSecondary, textDecorationLine: 'underline', ...textShadow },
 });

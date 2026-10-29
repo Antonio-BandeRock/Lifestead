@@ -26,6 +26,7 @@ import {
   type EvidenceTier,
 } from '../lib/digest';
 import { resolveActiveConditionCaution, resolveActiveConditionSeverity } from '../lib/digest/conditionGrouping';
+import { PILL, PILL_TEXT } from '../constants/buttons';
 
 export function tierColor(tier: EvidenceTier): string {
   if (tier === 'strong') return colors.accent;
@@ -443,19 +444,12 @@ const styles = StyleSheet.create({
   relatedBlock: { marginTop: 10 },
   relatedLabel: { ...typography.eyebrow, ...textShadow, fontWeight: '400', marginBottom: 4 },
   relatedRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  relatedChip: {
-    borderWidth: 1,
-    borderColor: colors.primary,
-    borderRadius: 16,
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    // 2026-08-08, direct request: "Allow the Related chips... span the
-    // entire horizontal space available to it within the bounds
-    // controlling it." '100%' caps a chip at its container's width, so one
-    // chip alone can use the whole row and several still wrap normally.
-    // 2026-09-18: the one-line cap is gone too, so a long title wraps
-    // inside the chip instead of being cut off mid-word.
-    maxWidth: '100%',
-  },
-  relatedChipText: { ...typography.captionEmphasis, color: colors.primary, ...textShadow },
+  // 2026-08-08, direct request: "Allow the Related chips... span the
+  // entire horizontal space available to it within the bounds
+  // controlling it." '100%' caps a chip at its container's width, so one
+  // chip alone can use the whole row and several still wrap normally.
+  // 2026-09-18: the one-line cap is gone too, so a long title wraps
+  // inside the chip instead of being cut off mid-word.
+  relatedChip: { ...PILL, maxWidth: '100%' },
+  relatedChipText: { ...PILL_TEXT },
 });

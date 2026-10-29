@@ -45,7 +45,7 @@ import { buildTime24, describeTimeInputProblem, splitTime24, type TimeOfDayInput
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { useWalkMark } from './WalkMark';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../constants/buttons';
 
 // Schedules > Exercise, H11 part 3. A plan is a workout from Life >
 // Workouts or a plain activity by name, on a first day, at a time or any
@@ -522,7 +522,6 @@ export function ExerciseScheduleSection({ tabColor, RepeatRulePicker }: Props) {
 }
 
 function makeStyles(tabColor: string) {
-  const darkText = { textShadowColor: 'transparent', textShadowRadius: 0 } as const;
   return StyleSheet.create({
     actionText: { ...typography.captionEmphasis, color: tabColor, ...textShadow },
     actionTextRemove: { ...typography.captionEmphasis, color: colors.danger, ...textShadow },
@@ -579,18 +578,11 @@ function makeStyles(tabColor: string) {
       paddingVertical: 12,
       paddingHorizontal: 12,
     },
-    pillActive: { backgroundColor: colors.primary, borderColor: colors.primary },
+    pillActive: { ...PILL_ON },
     pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-    pillSmall: {
-      borderWidth: 1,
-      borderColor: colors.border,
-      borderRadius: 999,
-      paddingHorizontal: 10,
-      paddingVertical: 8,
-      backgroundColor: colors.surface,
-    },
-    pillTextActive: { color: colors.textOnPrimary, ...darkText },
-    pillTextSmall: { ...typography.caption, color: tabColor, ...textShadow },
+    pillSmall: { ...PILL_SMALL },
+    pillTextActive: { ...PILL_ON_TEXT },
+    pillTextSmall: { ...PILL_TEXT },
     primaryButton: { ...BUTTON_PRIMARY_COMPACT },
     primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
     row: { borderRadius: 10, backgroundColor: colors.surfaceMuted, padding: 12 },
