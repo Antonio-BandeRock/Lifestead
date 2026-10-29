@@ -23086,7 +23086,7 @@ export const RECIPES_ENTRIES: DigestEntry[] = [
     },
   },
 
-  // BEGIN MEXICAN RECIPES (scripts/generate_mexican_recipes_ts.js writes everything up to END)
+  // BEGIN MEXICAN RECIPES (scripts/generate_cuisine_recipes_ts.js writes everything up to END)
   {
     id: 'recipe-mx-base-nixtamal-masa',
     category: 'recipes',

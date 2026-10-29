@@ -1,0 +1,125 @@
+{
+  "_comment": "The vietnamese made-first recipes, fixed before any dish was written so both files agree on ids. a_bases_pho_noodles_rice.json writes every one of these; dishes in either file point at them through components. A dish needing a base not listed here writes it itself under curated_vn_base_<slug>.",
+  "bases": [
+    {
+      "id": "curated_vn_base_nuoc_dung_pho_bo",
+      "name": "Nước Dùng Phở Bò (Beef Phở Broth)",
+      "shelf": "Bases: Broths"
+    },
+    {
+      "id": "curated_vn_base_nuoc_dung_pho_ga",
+      "name": "Nước Dùng Phở Gà (Chicken Phở Broth)",
+      "shelf": "Bases: Broths"
+    },
+    {
+      "id": "curated_vn_base_nuoc_dung_bun_bo_hue",
+      "name": "Nước Dùng Bún Bò Huế (Huế Beef Noodle Broth)",
+      "shelf": "Bases: Broths"
+    },
+    {
+      "id": "curated_vn_base_nuoc_dung_xuong_heo",
+      "name": "Nước Dùng Xương Heo (Pork Bone Broth)",
+      "shelf": "Bases: Broths"
+    },
+    {
+      "id": "curated_vn_base_nuoc_dung_chay",
+      "name": "Nước Dùng Chay (Vegetable Broth)",
+      "shelf": "Bases: Broths"
+    },
+    {
+      "id": "curated_vn_base_nuoc_cham",
+      "name": "Nước Chấm (Dipping Fish Sauce)",
+      "shelf": "Bases: Sauces & Dips"
+    },
+    {
+      "id": "curated_vn_base_nuoc_mam_gung",
+      "name": "Nước Mắm Gừng (Ginger Fish Sauce)",
+      "shelf": "Bases: Sauces & Dips"
+    },
+    {
+      "id": "curated_vn_base_tuong_cham_goi_cuon",
+      "name": "Tương Chấm Gỏi Cuốn (Peanut Hoisin Dip)",
+      "shelf": "Bases: Sauces & Dips"
+    },
+    {
+      "id": "curated_vn_base_do_chua",
+      "name": "Đồ Chua (Pickled Carrot and Daikon)",
+      "shelf": "Bases: Sauces & Dips"
+    },
+    {
+      "id": "curated_vn_base_mo_hanh",
+      "name": "Mỡ Hành (Scallion Oil)",
+      "shelf": "Bases: Sauces & Dips"
+    },
+    {
+      "id": "curated_vn_base_sa_te",
+      "name": "Sa Tế (Lemongrass Chili Oil)",
+      "shelf": "Bases: Sauces & Dips"
+    },
+    {
+      "id": "curated_vn_base_muoi_tieu_chanh",
+      "name": "Muối Tiêu Chanh (Salt, Pepper and Lime Dip)",
+      "shelf": "Bases: Sauces & Dips"
+    },
+    {
+      "id": "curated_vn_base_nuoc_mau",
+      "name": "Nước Màu (Caramel Sauce)",
+      "shelf": "Bases: Sauces & Dips"
+    },
+    {
+      "id": "curated_vn_base_nuoc_cham_chay",
+      "name": "Nước Chấm Chay (Vegetarian Dipping Sauce)",
+      "shelf": "Bases: Sauces & Dips"
+    },
+    {
+      "id": "curated_vn_base_sot_mayonnaise_banh_mi",
+      "name": "Sốt Mayonnaise Bánh Mì",
+      "shelf": "Bases: Sauces & Dips"
+    },
+    {
+      "id": "curated_vn_base_com_trang",
+      "name": "Cơm Trắng (Steamed Jasmine Rice)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_vn_base_xoi_trang",
+      "name": "Xôi Trắng (Steamed Sticky Rice)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_vn_base_banh_pho_tuoi",
+      "name": "Bánh Phở Tươi (Fresh Rice Noodles)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_vn_base_cha_lua",
+      "name": "Chả Lụa (Vietnamese Pork Roll)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_vn_base_pa_te_gan",
+      "name": "Pa Tê Gan (Liver Pâté)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_vn_base_hanh_phi",
+      "name": "Hành Phi (Fried Shallots)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_vn_base_thinh",
+      "name": "Thính (Toasted Rice Powder)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_vn_base_dua_cai_chua",
+      "name": "Dưa Cải Chua (Pickled Mustard Greens)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_vn_base_banh_mi",
+      "name": "Bánh Mì (Vietnamese Baguette)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    }
+  ]
+}

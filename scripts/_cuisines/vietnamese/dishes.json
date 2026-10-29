@@ -1,0 +1,653 @@
+{
+  "_comment": "Every recipe to write: id, name as it should appear (a writer may correct spelling or accents but keeps the id), its shelf (dishGroup), and the file that writes it.",
+  "dishes": [
+    {
+      "id": "curated_vn_base_nuoc_dung_pho_bo",
+      "name": "Nước Dùng Phở Bò (Beef Phở Broth)",
+      "shelf": "Bases: Broths",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_nuoc_dung_pho_ga",
+      "name": "Nước Dùng Phở Gà (Chicken Phở Broth)",
+      "shelf": "Bases: Broths",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_nuoc_dung_bun_bo_hue",
+      "name": "Nước Dùng Bún Bò Huế (Huế Beef Noodle Broth)",
+      "shelf": "Bases: Broths",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_nuoc_dung_xuong_heo",
+      "name": "Nước Dùng Xương Heo (Pork Bone Broth)",
+      "shelf": "Bases: Broths",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_nuoc_dung_chay",
+      "name": "Nước Dùng Chay (Vegetable Broth)",
+      "shelf": "Bases: Broths",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_nuoc_cham",
+      "name": "Nước Chấm (Dipping Fish Sauce)",
+      "shelf": "Bases: Sauces & Dips",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_nuoc_mam_gung",
+      "name": "Nước Mắm Gừng (Ginger Fish Sauce)",
+      "shelf": "Bases: Sauces & Dips",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_tuong_cham_goi_cuon",
+      "name": "Tương Chấm Gỏi Cuốn (Peanut Hoisin Dip)",
+      "shelf": "Bases: Sauces & Dips",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_do_chua",
+      "name": "Đồ Chua (Pickled Carrot and Daikon)",
+      "shelf": "Bases: Sauces & Dips",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_mo_hanh",
+      "name": "Mỡ Hành (Scallion Oil)",
+      "shelf": "Bases: Sauces & Dips",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_sa_te",
+      "name": "Sa Tế (Lemongrass Chili Oil)",
+      "shelf": "Bases: Sauces & Dips",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_muoi_tieu_chanh",
+      "name": "Muối Tiêu Chanh (Salt, Pepper and Lime Dip)",
+      "shelf": "Bases: Sauces & Dips",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_nuoc_mau",
+      "name": "Nước Màu (Caramel Sauce)",
+      "shelf": "Bases: Sauces & Dips",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_nuoc_cham_chay",
+      "name": "Nước Chấm Chay (Vegetarian Dipping Sauce)",
+      "shelf": "Bases: Sauces & Dips",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_sot_mayonnaise_banh_mi",
+      "name": "Sốt Mayonnaise Bánh Mì",
+      "shelf": "Bases: Sauces & Dips",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_com_trang",
+      "name": "Cơm Trắng (Steamed Jasmine Rice)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_xoi_trang",
+      "name": "Xôi Trắng (Steamed Sticky Rice)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_banh_pho_tuoi",
+      "name": "Bánh Phở Tươi (Fresh Rice Noodles)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_cha_lua",
+      "name": "Chả Lụa (Vietnamese Pork Roll)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_pa_te_gan",
+      "name": "Pa Tê Gan (Liver Pâté)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_hanh_phi",
+      "name": "Hành Phi (Fried Shallots)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_thinh",
+      "name": "Thính (Toasted Rice Powder)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_dua_cai_chua",
+      "name": "Dưa Cải Chua (Pickled Mustard Greens)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_base_banh_mi",
+      "name": "Bánh Mì (Vietnamese Baguette)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_pho_bo_tai",
+      "name": "Phở Bò Tái (Beef Phở with Rare Steak)",
+      "shelf": "Phở & Noodle Soups",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_pho_ga",
+      "name": "Phở Gà (Chicken Phở)",
+      "shelf": "Phở & Noodle Soups",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_bun_bo_hue",
+      "name": "Bún Bò Huế",
+      "shelf": "Phở & Noodle Soups",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_bun_rieu_cua",
+      "name": "Bún Riêu Cua (Crab and Tomato Noodle Soup)",
+      "shelf": "Phở & Noodle Soups",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_hu_tieu_nam_vang",
+      "name": "Hủ Tiếu Nam Vang",
+      "shelf": "Phở & Noodle Soups",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_mi_quang",
+      "name": "Mì Quảng",
+      "shelf": "Phở & Noodle Soups",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_banh_canh_cua",
+      "name": "Bánh Canh Cua (Crab Tapioca Noodle Soup)",
+      "shelf": "Phở & Noodle Soups",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_bun_moc",
+      "name": "Bún Mọc (Pork Meatball Noodle Soup)",
+      "shelf": "Phở & Noodle Soups",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_bun_thang",
+      "name": "Bún Thang",
+      "shelf": "Phở & Noodle Soups",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_pho_chay",
+      "name": "Phở Chay (Vegetarian Phở)",
+      "shelf": "Phở & Noodle Soups",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_bun_ca",
+      "name": "Bún Cá (Fish Noodle Soup)",
+      "shelf": "Phở & Noodle Soups",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_bun_cha_ha_noi",
+      "name": "Bún Chả Hà Nội",
+      "shelf": "Noodle Bowls",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_bun_thit_nuong",
+      "name": "Bún Thịt Nướng",
+      "shelf": "Noodle Bowls",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_bun_bo_nam_bo",
+      "name": "Bún Bò Nam Bộ",
+      "shelf": "Noodle Bowls",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_bun_cha_gio",
+      "name": "Bún Chả Giò",
+      "shelf": "Noodle Bowls",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_bun_dau_mam_tom",
+      "name": "Bún Đậu Mắm Tôm",
+      "shelf": "Noodle Bowls",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_cao_lau",
+      "name": "Cao Lầu",
+      "shelf": "Noodle Bowls",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_pho_xao",
+      "name": "Phở Xào (Stir-Fried Phở Noodles)",
+      "shelf": "Noodle Bowls",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_mien_xao_cua",
+      "name": "Miến Xào Cua (Glass Noodles with Crab)",
+      "shelf": "Noodle Bowls",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_com_tam_suon_nuong",
+      "name": "Cơm Tấm Sườn Nướng (Broken Rice with Grilled Pork Chop)",
+      "shelf": "Rice Dishes",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_com_ga_hoi_an",
+      "name": "Cơm Gà Hội An",
+      "shelf": "Rice Dishes",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_com_chien",
+      "name": "Cơm Chiên (Vietnamese Fried Rice)",
+      "shelf": "Rice Dishes",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_xoi_gac",
+      "name": "Xôi Gấc",
+      "shelf": "Rice Dishes",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_xoi_man",
+      "name": "Xôi Mặn (Savory Sticky Rice)",
+      "shelf": "Rice Dishes",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_chao_ga",
+      "name": "Cháo Gà (Chicken Rice Porridge)",
+      "shelf": "Rice Dishes",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_com_hen",
+      "name": "Cơm Hến (Huế Clam Rice)",
+      "shelf": "Rice Dishes",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_com_rang_dua_bo",
+      "name": "Cơm Rang Dưa Bò (Fried Rice with Beef and Pickled Greens)",
+      "shelf": "Rice Dishes",
+      "file": "a_bases_pho_noodles_rice.json"
+    },
+    {
+      "id": "curated_vn_banh_mi_thit",
+      "name": "Bánh Mì Thịt",
+      "shelf": "Bánh Mì, Rolls & Pancakes",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_banh_mi_xiu_mai",
+      "name": "Bánh Mì Xíu Mại",
+      "shelf": "Bánh Mì, Rolls & Pancakes",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_banh_mi_op_la",
+      "name": "Bánh Mì Ốp La",
+      "shelf": "Bánh Mì, Rolls & Pancakes",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_goi_cuon",
+      "name": "Gỏi Cuốn (Fresh Spring Rolls)",
+      "shelf": "Bánh Mì, Rolls & Pancakes",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_cha_gio",
+      "name": "Chả Giò (Fried Spring Rolls)",
+      "shelf": "Bánh Mì, Rolls & Pancakes",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_banh_xeo",
+      "name": "Bánh Xèo (Crispy Pancakes)",
+      "shelf": "Bánh Mì, Rolls & Pancakes",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_banh_khot",
+      "name": "Bánh Khọt",
+      "shelf": "Bánh Mì, Rolls & Pancakes",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_banh_cuon",
+      "name": "Bánh Cuốn",
+      "shelf": "Bánh Mì, Rolls & Pancakes",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_pho_cuon",
+      "name": "Phở Cuốn",
+      "shelf": "Bánh Mì, Rolls & Pancakes",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_bo_bia",
+      "name": "Bò Bía",
+      "shelf": "Bánh Mì, Rolls & Pancakes",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_banh_bot_loc",
+      "name": "Bánh Bột Lọc",
+      "shelf": "Bánh Mì, Rolls & Pancakes",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_banh_beo",
+      "name": "Bánh Bèo",
+      "shelf": "Bánh Mì, Rolls & Pancakes",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_nem_nuong_cuon",
+      "name": "Nem Nướng Cuốn",
+      "shelf": "Bánh Mì, Rolls & Pancakes",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_thit_kho_trung",
+      "name": "Thịt Kho Trứng (Caramelized Pork and Eggs)",
+      "shelf": "Meats & Seafood",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_ca_kho_to",
+      "name": "Cá Kho Tộ (Clay Pot Caramelized Fish)",
+      "shelf": "Meats & Seafood",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_ga_kho_gung",
+      "name": "Gà Kho Gừng (Ginger Braised Chicken)",
+      "shelf": "Meats & Seafood",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_bo_luc_lac",
+      "name": "Bò Lúc Lắc (Shaking Beef)",
+      "shelf": "Meats & Seafood",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_bo_kho",
+      "name": "Bò Kho (Beef Stew)",
+      "shelf": "Meats & Seafood",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_ga_xao_sa_ot",
+      "name": "Gà Xào Sả Ớt (Lemongrass Chili Chicken)",
+      "shelf": "Meats & Seafood",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_tom_rim",
+      "name": "Tôm Rim (Caramelized Shrimp)",
+      "shelf": "Meats & Seafood",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_suon_ram_man",
+      "name": "Sườn Ram Mặn (Caramelized Pork Ribs)",
+      "shelf": "Meats & Seafood",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_cha_ca_la_vong",
+      "name": "Chả Cá Lã Vọng (Turmeric Fish with Dill)",
+      "shelf": "Meats & Seafood",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_bo_nuong_la_lot",
+      "name": "Bò Nướng Lá Lốt (Beef in Betel Leaves)",
+      "shelf": "Meats & Seafood",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_chao_tom",
+      "name": "Chạo Tôm (Shrimp on Sugarcane)",
+      "shelf": "Meats & Seafood",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_ga_nuong_sa",
+      "name": "Gà Nướng Sả (Lemongrass Grilled Chicken)",
+      "shelf": "Meats & Seafood",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_muc_xao",
+      "name": "Mực Xào (Stir-Fried Squid)",
+      "shelf": "Meats & Seafood",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_dau_hu_sot_ca_chua",
+      "name": "Đậu Hũ Sốt Cà Chua (Tofu in Tomato Sauce)",
+      "shelf": "Meats & Seafood",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_canh_chua_ca",
+      "name": "Canh Chua Cá (Sour Fish Soup)",
+      "shelf": "Soups",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_canh_bi_dao",
+      "name": "Canh Bí Đao (Winter Melon Soup)",
+      "shelf": "Soups",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_canh_cai_thit_bam",
+      "name": "Canh Cải Thịt Bằm (Mustard Greens and Pork Soup)",
+      "shelf": "Soups",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_canh_rau_ngot",
+      "name": "Canh Rau Ngót (Sweet Leaf Soup)",
+      "shelf": "Soups",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_sup_cua",
+      "name": "Súp Cua (Crab Soup)",
+      "shelf": "Soups",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_canh_kho_qua_nhoi_thit",
+      "name": "Canh Khổ Qua Nhồi Thịt (Stuffed Bitter Melon Soup)",
+      "shelf": "Soups",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_lau_ca",
+      "name": "Lẩu Cá (Fish Hot Pot)",
+      "shelf": "Soups",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_canh_bau_tom",
+      "name": "Canh Bầu Tôm (Bottle Gourd and Shrimp Soup)",
+      "shelf": "Soups",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_goi_ga_bap_cai",
+      "name": "Gỏi Gà Bắp Cải (Chicken and Cabbage Salad)",
+      "shelf": "Salads & Vegetables",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_goi_du_du",
+      "name": "Gỏi Đu Đủ (Green Papaya Salad)",
+      "shelf": "Salads & Vegetables",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_nom_hoa_chuoi",
+      "name": "Nộm Hoa Chuối (Banana Blossom Salad)",
+      "shelf": "Salads & Vegetables",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_goi_ngo_sen",
+      "name": "Gỏi Ngó Sen (Lotus Stem Salad)",
+      "shelf": "Salads & Vegetables",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_rau_muong_xao_toi",
+      "name": "Rau Muống Xào Tỏi (Garlic Water Spinach)",
+      "shelf": "Salads & Vegetables",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_ca_tim_nuong_mo_hanh",
+      "name": "Cà Tím Nướng Mỡ Hành (Grilled Eggplant with Scallion Oil)",
+      "shelf": "Salads & Vegetables",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_rau_cu_luoc_cham_kho_quet",
+      "name": "Rau Củ Luộc Chấm Kho Quẹt",
+      "shelf": "Salads & Vegetables",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_dau_que_xao_toi",
+      "name": "Đậu Que Xào Tỏi (Garlic Green Beans)",
+      "shelf": "Salads & Vegetables",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_bo_tai_chanh",
+      "name": "Bò Tái Chanh (Lime-Cured Beef Salad)",
+      "shelf": "Salads & Vegetables",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_dua_gia",
+      "name": "Dưa Giá (Pickled Bean Sprouts)",
+      "shelf": "Salads & Vegetables",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_che_ba_mau",
+      "name": "Chè Ba Màu (Three-Color Dessert)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_che_chuoi",
+      "name": "Chè Chuối (Banana and Tapioca Pudding)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_che_dau_xanh",
+      "name": "Chè Đậu Xanh (Mung Bean Pudding)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_banh_flan",
+      "name": "Bánh Flan",
+      "shelf": "Sweets & Drinks",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_banh_chuoi_nuong",
+      "name": "Bánh Chuối Nướng (Baked Banana Cake)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_ca_phe_sua_da",
+      "name": "Cà Phê Sữa Đá (Iced Milk Coffee)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_ca_phe_trung",
+      "name": "Cà Phê Trứng (Egg Coffee)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_sinh_to_bo",
+      "name": "Sinh Tố Bơ (Avocado Shake)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_banh_da_lon",
+      "name": "Bánh Da Lợn (Steamed Layer Cake)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_sua_dau_nanh",
+      "name": "Sữa Đậu Nành (Soy Milk)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_che_troi_nuoc",
+      "name": "Chè Trôi Nước (Sweet Rice Balls in Ginger Syrup)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_banh_bo_nuong",
+      "name": "Bánh Bò Nướng (Honeycomb Cake)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_banhmi_meats_soups_salads_sweets.json"
+    }
+  ]
+}

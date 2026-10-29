@@ -1,0 +1,851 @@
+{
+  "_comment": "Every recipe to write: id, name as it should appear (a writer may correct spelling or accents but keeps the id), its shelf (dishGroup), and the file that writes it.",
+  "dishes": [
+    {
+      "id": "curated_cn_base_qing_tang",
+      "name": "Qing Tang (Clear Chicken Stock)",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_pork_bone_stock",
+      "name": "Pork Bone Stock",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_lu_shui",
+      "name": "Lu Shui (Master Stock)",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_hong_you",
+      "name": "Hong You (Sichuan Chili Oil)",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_ginger_scallion_sauce",
+      "name": "Ginger Scallion Sauce",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_dumpling_dipping_sauce",
+      "name": "Dumpling Dipping Sauce",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_sweet_and_sour_sauce",
+      "name": "Sweet and Sour Sauce",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_black_bean_garlic_sauce",
+      "name": "Black Bean Garlic Sauce",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_xo_sauce",
+      "name": "XO Sauce",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_jiaozi_wrappers",
+      "name": "Jiaozi Wrappers (Dumpling Dough)",
+      "shelf": "Bases: Doughs & Wrappers",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_wonton_wrappers",
+      "name": "Wonton Wrappers",
+      "shelf": "Bases: Doughs & Wrappers",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_bao_dough",
+      "name": "Bao Dough (Steamed Bun Dough)",
+      "shelf": "Bases: Doughs & Wrappers",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_har_gow_wrapper_dough",
+      "name": "Har Gow Wrapper Dough",
+      "shelf": "Bases: Doughs & Wrappers",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_hand_pulled_noodle_dough",
+      "name": "Hand-Pulled Noodle Dough",
+      "shelf": "Bases: Doughs & Wrappers",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_spring_roll_wrappers",
+      "name": "Spring Roll Wrappers",
+      "shelf": "Bases: Doughs & Wrappers",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_steamed_jasmine_rice",
+      "name": "Steamed Jasmine Rice",
+      "shelf": "Bases: Rice & Pantry",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_steamed_glutinous_rice",
+      "name": "Steamed Glutinous Rice",
+      "shelf": "Bases: Rice & Pantry",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_plain_congee",
+      "name": "Plain Congee (Jook)",
+      "shelf": "Bases: Rice & Pantry",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_pao_cai",
+      "name": "Pao Cai (Sichuan Pickled Vegetables)",
+      "shelf": "Bases: Rice & Pantry",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_five_spice_powder",
+      "name": "Five-Spice Powder",
+      "shelf": "Bases: Rice & Pantry",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_sichuan_pepper_salt",
+      "name": "Sichuan Pepper Salt",
+      "shelf": "Bases: Rice & Pantry",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_base_char_siu",
+      "name": "Char Siu (Cantonese Barbecued Pork)",
+      "shelf": "Bases: Rice & Pantry",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_har_gow",
+      "name": "Har Gow (Shrimp Dumplings)",
+      "shelf": "Dim Sum & Dumplings",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_siu_mai",
+      "name": "Siu Mai (Pork and Shrimp Dumplings)",
+      "shelf": "Dim Sum & Dumplings",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_char_siu_bao",
+      "name": "Char Siu Bao (Barbecued Pork Buns)",
+      "shelf": "Dim Sum & Dumplings",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_jiaozi",
+      "name": "Jiaozi (Pork and Napa Cabbage Dumplings)",
+      "shelf": "Dim Sum & Dumplings",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_xiao_long_bao",
+      "name": "Xiao Long Bao (Soup Dumplings)",
+      "shelf": "Dim Sum & Dumplings",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_hong_you_chao_shou",
+      "name": "Hong You Chao Shou (Wontons in Chili Oil)",
+      "shelf": "Dim Sum & Dumplings",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_guotie",
+      "name": "Guotie (Potstickers)",
+      "shelf": "Dim Sum & Dumplings",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_shengjian_bao",
+      "name": "Shengjian Bao (Pan-Fried Pork Buns)",
+      "shelf": "Dim Sum & Dumplings",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_cheung_fun",
+      "name": "Cheung Fun (Rice Noodle Rolls)",
+      "shelf": "Dim Sum & Dumplings",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_lo_mai_gai",
+      "name": "Lo Mai Gai (Sticky Rice in Lotus Leaf)",
+      "shelf": "Dim Sum & Dumplings",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_lo_bak_go",
+      "name": "Lo Bak Go (Turnip Cake)",
+      "shelf": "Dim Sum & Dumplings",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_chun_juan",
+      "name": "Chun Juan (Spring Rolls)",
+      "shelf": "Dim Sum & Dumplings",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_cong_you_bing",
+      "name": "Cong You Bing (Scallion Pancakes)",
+      "shelf": "Dim Sum & Dumplings",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_jiu_cai_jiaozi",
+      "name": "Jiu Cai Jiaozi (Pork and Chive Dumplings)",
+      "shelf": "Dim Sum & Dumplings",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_su_baozi",
+      "name": "Su Baozi (Vegetable Buns)",
+      "shelf": "Dim Sum & Dumplings",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_fun_guo",
+      "name": "Fun Guo (Chiuchow Dumplings)",
+      "shelf": "Dim Sum & Dumplings",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_dan_dan_mian",
+      "name": "Dan Dan Mian (Dan Dan Noodles)",
+      "shelf": "Noodles",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_zha_jiang_mian",
+      "name": "Zha Jiang Mian (Fried Sauce Noodles)",
+      "shelf": "Noodles",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_gon_chow_ngau_ho",
+      "name": "Gon Chow Ngau Ho (Beef Chow Fun)",
+      "shelf": "Noodles",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_lo_mein",
+      "name": "Lo Mein",
+      "shelf": "Noodles",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_cantonese_crispy_chow_mein",
+      "name": "Cantonese Crispy Chow Mein",
+      "shelf": "Noodles",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_biang_biang_mian",
+      "name": "Biang Biang Mian",
+      "shelf": "Noodles",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_liang_pi",
+      "name": "Liang Pi (Cold Skin Noodles)",
+      "shelf": "Noodles",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_lanzhou_niu_rou_mian",
+      "name": "Lanzhou Niu Rou Mian (Lanzhou Beef Noodle Soup)",
+      "shelf": "Noodles",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_cong_you_ban_mian",
+      "name": "Cong You Ban Mian (Scallion Oil Noodles)",
+      "shelf": "Noodles",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_ma_jiang_liang_mian",
+      "name": "Ma Jiang Liang Mian (Cold Sesame Noodles)",
+      "shelf": "Noodles",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_guo_qiao_mi_xian",
+      "name": "Guo Qiao Mi Xian (Crossing the Bridge Noodles)",
+      "shelf": "Noodles",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_re_gan_mian",
+      "name": "Re Gan Mian (Hot Dry Noodles)",
+      "shelf": "Noodles",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_ma_yi_shang_shu",
+      "name": "Ma Yi Shang Shu (Ants Climbing a Tree)",
+      "shelf": "Noodles",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_yangzhou_chao_fan",
+      "name": "Yangzhou Chao Fan (Yangzhou Fried Rice)",
+      "shelf": "Rice Dishes",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_dan_chao_fan",
+      "name": "Dan Chao Fan (Egg Fried Rice)",
+      "shelf": "Rice Dishes",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_bao_zai_fan",
+      "name": "Bao Zai Fan (Claypot Rice)",
+      "shelf": "Rice Dishes",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_hainan_chicken_rice",
+      "name": "Hainan Chicken Rice",
+      "shelf": "Rice Dishes",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_pei_dan_shou_rou_zhou",
+      "name": "Pei Dan Shou Rou Zhou (Century Egg and Pork Congee)",
+      "shelf": "Rice Dishes",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_yu_pian_zhou",
+      "name": "Yu Pian Zhou (Fish Congee)",
+      "shelf": "Rice Dishes",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_zongzi",
+      "name": "Zongzi (Sticky Rice Dumplings)",
+      "shelf": "Rice Dishes",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_lap_cheong_fan",
+      "name": "Lap Cheong Fan (Chinese Sausage Rice)",
+      "shelf": "Rice Dishes",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_char_siu_fan",
+      "name": "Char Siu Fan (Barbecued Pork on Rice)",
+      "shelf": "Rice Dishes",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_suan_la_tang",
+      "name": "Suan La Tang (Hot and Sour Soup)",
+      "shelf": "Soups",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_dan_hua_tang",
+      "name": "Dan Hua Tang (Egg Drop Soup)",
+      "shelf": "Soups",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_wonton_soup",
+      "name": "Wonton Soup",
+      "shelf": "Soups",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_dong_gua_tang",
+      "name": "Dong Gua Tang (Winter Melon Soup)",
+      "shelf": "Soups",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_su_mi_geng",
+      "name": "Su Mi Geng (Sweet Corn Soup)",
+      "shelf": "Soups",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_xi_hu_niu_rou_geng",
+      "name": "Xi Hu Niu Rou Geng (West Lake Beef Soup)",
+      "shelf": "Soups",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_lian_ou_pai_gu_tang",
+      "name": "Lian Ou Pai Gu Tang (Lotus Root and Pork Rib Soup)",
+      "shelf": "Soups",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_fan_qie_dan_hua_tang",
+      "name": "Fan Qie Dan Hua Tang (Tomato Egg Drop Soup)",
+      "shelf": "Soups",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_yu_tou_dou_fu_tang",
+      "name": "Yu Tou Dou Fu Tang (Fish Head and Tofu Soup)",
+      "shelf": "Soups",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_ma_la_huo_guo",
+      "name": "Ma La Huo Guo (Sichuan Hot Pot)",
+      "shelf": "Soups",
+      "file": "a_bases_dimsum_noodles_rice_soups.json"
+    },
+    {
+      "id": "curated_cn_gu_lou_yuk",
+      "name": "Gu Lou Yuk (Sweet and Sour Pork)",
+      "shelf": "Pork",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_hong_shao_rou",
+      "name": "Hong Shao Rou (Red-Braised Pork Belly)",
+      "shelf": "Pork",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_hui_guo_rou",
+      "name": "Hui Guo Rou (Twice-Cooked Pork)",
+      "shelf": "Pork",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_dongpo_rou",
+      "name": "Dongpo Rou (Dongpo Pork)",
+      "shelf": "Pork",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_shi_zi_tou",
+      "name": "Shi Zi Tou (Lion's Head Meatballs)",
+      "shelf": "Pork",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_yu_xiang_rou_si",
+      "name": "Yu Xiang Rou Si (Fish-Fragrant Shredded Pork)",
+      "shelf": "Pork",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_jiao_yan_pai_gu",
+      "name": "Jiao Yan Pai Gu (Salt and Pepper Pork Ribs)",
+      "shelf": "Pork",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_siu_yuk",
+      "name": "Siu Yuk (Crispy Roast Pork Belly)",
+      "shelf": "Pork",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_mu_xu_rou",
+      "name": "Mu Xu Rou (Moo Shu Pork)",
+      "shelf": "Pork",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_mei_cai_kou_rou",
+      "name": "Mei Cai Kou Rou (Pork Belly with Preserved Mustard Greens)",
+      "shelf": "Pork",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_tang_cu_pai_gu",
+      "name": "Tang Cu Pai Gu (Sweet and Sour Ribs)",
+      "shelf": "Pork",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_steamed_pork_patty_with_salted_egg",
+      "name": "Steamed Pork Patty with Salted Egg",
+      "shelf": "Pork",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_gong_bao_ji_ding",
+      "name": "Gong Bao Ji Ding (Kung Pao Chicken)",
+      "shelf": "Poultry",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_beijing_kao_ya",
+      "name": "Beijing Kao Ya (Peking Duck)",
+      "shelf": "Poultry",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_bai_qie_ji",
+      "name": "Bai Qie Ji (White Cut Chicken)",
+      "shelf": "Poultry",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_see_yau_gai",
+      "name": "See Yau Gai (Soy Sauce Chicken)",
+      "shelf": "Poultry",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_san_bei_ji",
+      "name": "San Bei Ji (Three Cup Chicken)",
+      "shelf": "Poultry",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_yan_ju_ji",
+      "name": "Yan Ju Ji (Salt-Baked Chicken)",
+      "shelf": "Poultry",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_kou_shui_ji",
+      "name": "Kou Shui Ji (Mouth-Watering Chicken)",
+      "shelf": "Poultry",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_la_zi_ji",
+      "name": "La Zi Ji (Chongqing Chili Chicken)",
+      "shelf": "Poultry",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_zui_ji",
+      "name": "Zui Ji (Drunken Chicken)",
+      "shelf": "Poultry",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_ban_li_shao_ji",
+      "name": "Ban Li Shao Ji (Chicken with Chestnuts)",
+      "shelf": "Poultry",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_gai_lan_chao_niu_rou",
+      "name": "Gai Lan Chao Niu Rou (Beef with Chinese Broccoli)",
+      "shelf": "Beef & Lamb",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_zi_ran_yang_rou",
+      "name": "Zi Ran Yang Rou (Cumin Lamb)",
+      "shelf": "Beef & Lamb",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_hei_jiao_niu_liu",
+      "name": "Hei Jiao Niu Liu (Black Pepper Beef)",
+      "shelf": "Beef & Lamb",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_lu_niu_rou",
+      "name": "Lu Niu Rou (Braised Beef Shank)",
+      "shelf": "Beef & Lamb",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_shui_zhu_niu_rou",
+      "name": "Shui Zhu Niu Rou (Water-Boiled Beef)",
+      "shelf": "Beef & Lamb",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_fan_qie_niu_nan",
+      "name": "Fan Qie Niu Nan (Tomato Beef Brisket)",
+      "shelf": "Beef & Lamb",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_yang_rou_chuan",
+      "name": "Yang Rou Chuan (Lamb Skewers)",
+      "shelf": "Beef & Lamb",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_gan_bian_niu_rou_si",
+      "name": "Gan Bian Niu Rou Si (Dry-Fried Beef)",
+      "shelf": "Beef & Lamb",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_hao_you_niu_rou",
+      "name": "Hao You Niu Rou (Beef in Oyster Sauce)",
+      "shelf": "Beef & Lamb",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_qing_zheng_yu",
+      "name": "Qing Zheng Yu (Steamed Whole Fish)",
+      "shelf": "Fish & Seafood",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_shui_zhu_yu",
+      "name": "Shui Zhu Yu (Sichuan Boiled Fish)",
+      "shelf": "Fish & Seafood",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_jiao_yan_xia",
+      "name": "Jiao Yan Xia (Salt and Pepper Shrimp)",
+      "shelf": "Fish & Seafood",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_xi_hu_cu_yu",
+      "name": "Xi Hu Cu Yu (West Lake Fish in Vinegar Sauce)",
+      "shelf": "Fish & Seafood",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_suan_cai_yu",
+      "name": "Suan Cai Yu (Fish with Pickled Mustard Greens)",
+      "shelf": "Fish & Seafood",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_hong_shao_yu",
+      "name": "Hong Shao Yu (Red-Braised Fish)",
+      "shelf": "Fish & Seafood",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_dou_chi_chao_xian",
+      "name": "Dou Chi Chao Xian (Clams in Black Bean Sauce)",
+      "shelf": "Fish & Seafood",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_gong_bao_xia_qiu",
+      "name": "Gong Bao Xia Qiu (Kung Pao Shrimp)",
+      "shelf": "Fish & Seafood",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_jiang_cong_xie",
+      "name": "Jiang Cong Xie (Ginger Scallion Crab)",
+      "shelf": "Fish & Seafood",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_mapo_dou_fu",
+      "name": "Mapo Dou Fu (Mapo Tofu)",
+      "shelf": "Tofu & Eggs",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_xi_hong_shi_chao_dan",
+      "name": "Xi Hong Shi Chao Dan (Tomato and Egg Stir-Fry)",
+      "shelf": "Tofu & Eggs",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_cha_ye_dan",
+      "name": "Cha Ye Dan (Tea Eggs)",
+      "shelf": "Tofu & Eggs",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_pi_dan_dou_fu",
+      "name": "Pi Dan Dou Fu (Century Egg Tofu)",
+      "shelf": "Tofu & Eggs",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_jia_chang_dou_fu",
+      "name": "Jia Chang Dou Fu (Home-Style Tofu)",
+      "shelf": "Tofu & Eggs",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_zheng_shui_dan",
+      "name": "Zheng Shui Dan (Steamed Egg Custard)",
+      "shelf": "Tofu & Eggs",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_fu_yung_dan",
+      "name": "Fu Yung Dan (Egg Foo Young)",
+      "shelf": "Tofu & Eggs",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_yong_tau_foo",
+      "name": "Yong Tau Foo (Hakka Stuffed Tofu)",
+      "shelf": "Tofu & Eggs",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_di_san_xian",
+      "name": "Di San Xian (Potato, Eggplant and Pepper)",
+      "shelf": "Vegetables",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_gan_bian_si_ji_dou",
+      "name": "Gan Bian Si Ji Dou (Dry-Fried Green Beans)",
+      "shelf": "Vegetables",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_suan_rong_bai_cai",
+      "name": "Suan Rong Bai Cai (Garlic Bok Choy)",
+      "shelf": "Vegetables",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_hao_you_gai_lan",
+      "name": "Hao You Gai Lan (Chinese Broccoli with Oyster Sauce)",
+      "shelf": "Vegetables",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_yu_xiang_qie_zi",
+      "name": "Yu Xiang Qie Zi (Fish-Fragrant Eggplant)",
+      "shelf": "Vegetables",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_pai_huang_gua",
+      "name": "Pai Huang Gua (Smashed Cucumber Salad)",
+      "shelf": "Vegetables",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_suan_la_tu_dou_si",
+      "name": "Suan La Tu Dou Si (Hot and Sour Shredded Potato)",
+      "shelf": "Vegetables",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_fu_ru_kong_xin_cai",
+      "name": "Fu Ru Kong Xin Cai (Water Spinach with Fermented Bean Curd)",
+      "shelf": "Vegetables",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_luo_han_zhai",
+      "name": "Luo Han Zhai (Buddha's Delight)",
+      "shelf": "Vegetables",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_hu_pi_jian_jiao",
+      "name": "Hu Pi Jian Jiao (Tiger Skin Peppers)",
+      "shelf": "Vegetables",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_cu_liu_bai_cai",
+      "name": "Cu Liu Bai Cai (Vinegar Napa Cabbage)",
+      "shelf": "Vegetables",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_he_lan_dou_chao",
+      "name": "He Lan Dou Chao (Stir-Fried Snow Peas)",
+      "shelf": "Vegetables",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_dan_tat",
+      "name": "Dan Tat (Egg Tarts)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_jian_dui",
+      "name": "Jian Dui (Sesame Balls)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_tang_yuan",
+      "name": "Tang Yuan (Sweet Rice Balls)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_mango_pudding",
+      "name": "Mango Pudding",
+      "shelf": "Sweets & Drinks",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_hong_dou_tang",
+      "name": "Hong Dou Tang (Red Bean Soup)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_yue_bing",
+      "name": "Yue Bing (Mooncakes)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_xing_ren_dou_fu",
+      "name": "Xing Ren Dou Fu (Almond Tofu)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_dou_hua",
+      "name": "Dou Hua (Sweet Tofu Pudding)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_dou_jiang",
+      "name": "Dou Jiang (Soy Milk)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_hong_kong_milk_tea",
+      "name": "Hong Kong Milk Tea",
+      "shelf": "Sweets & Drinks",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    },
+    {
+      "id": "curated_cn_ba_bao_fan",
+      "name": "Ba Bao Fan (Eight Treasure Rice)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_pork_poultry_beef_seafood_tofu_veg_sweets.json"
+    }
+  ]
+}

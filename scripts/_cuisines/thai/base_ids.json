@@ -1,0 +1,140 @@
+{
+  "_comment": "The thai made-first recipes, fixed before any dish was written so both files agree on ids. a_bases_curries_soups_stirfries.json writes every one of these; dishes in either file point at them through components. A dish needing a base not listed here writes it itself under curated_th_base_<slug>.",
+  "bases": [
+    {
+      "id": "curated_th_base_prik_gaeng_kiew_wan",
+      "name": "Prik Gaeng Kiew Wan (Green Curry Paste)",
+      "shelf": "Bases: Curry Pastes"
+    },
+    {
+      "id": "curated_th_base_prik_gaeng_phed",
+      "name": "Prik Gaeng Phed (Red Curry Paste)",
+      "shelf": "Bases: Curry Pastes"
+    },
+    {
+      "id": "curated_th_base_prik_gaeng_kari",
+      "name": "Prik Gaeng Kari (Yellow Curry Paste)",
+      "shelf": "Bases: Curry Pastes"
+    },
+    {
+      "id": "curated_th_base_prik_gaeng_massaman",
+      "name": "Prik Gaeng Massaman (Massaman Curry Paste)",
+      "shelf": "Bases: Curry Pastes"
+    },
+    {
+      "id": "curated_th_base_prik_gaeng_panang",
+      "name": "Prik Gaeng Panang (Panang Curry Paste)",
+      "shelf": "Bases: Curry Pastes"
+    },
+    {
+      "id": "curated_th_base_prik_gaeng_khao_soi",
+      "name": "Prik Gaeng Khao Soi (Khao Soi Curry Paste)",
+      "shelf": "Bases: Curry Pastes"
+    },
+    {
+      "id": "curated_th_base_prik_gaeng_som",
+      "name": "Prik Gaeng Som (Sour Curry Paste)",
+      "shelf": "Bases: Curry Pastes"
+    },
+    {
+      "id": "curated_th_base_prik_gaeng_pa",
+      "name": "Prik Gaeng Pa (Jungle Curry Paste)",
+      "shelf": "Bases: Curry Pastes"
+    },
+    {
+      "id": "curated_th_base_prik_gaeng_hang_lay",
+      "name": "Prik Gaeng Hang Lay (Hang Lay Curry Paste)",
+      "shelf": "Bases: Curry Pastes"
+    },
+    {
+      "id": "curated_th_base_nam_prik_pao",
+      "name": "Nam Prik Pao (Roasted Chili Jam)",
+      "shelf": "Bases: Sauces, Dips & Stocks"
+    },
+    {
+      "id": "curated_th_base_nam_pla_prik",
+      "name": "Nam Pla Prik (Fish Sauce with Chilies)",
+      "shelf": "Bases: Sauces, Dips & Stocks"
+    },
+    {
+      "id": "curated_th_base_nam_jim_jaew",
+      "name": "Nam Jim Jaew (Isan Dipping Sauce)",
+      "shelf": "Bases: Sauces, Dips & Stocks"
+    },
+    {
+      "id": "curated_th_base_nam_jim_seafood",
+      "name": "Nam Jim Seafood (Seafood Dipping Sauce)",
+      "shelf": "Bases: Sauces, Dips & Stocks"
+    },
+    {
+      "id": "curated_th_base_nam_jim_kai",
+      "name": "Nam Jim Kai (Sweet Chili Sauce)",
+      "shelf": "Bases: Sauces, Dips & Stocks"
+    },
+    {
+      "id": "curated_th_base_nam_jim_satay",
+      "name": "Nam Jim Satay (Peanut Sauce)",
+      "shelf": "Bases: Sauces, Dips & Stocks"
+    },
+    {
+      "id": "curated_th_base_nam_prik_noom",
+      "name": "Nam Prik Noom (Green Chili Dip)",
+      "shelf": "Bases: Sauces, Dips & Stocks"
+    },
+    {
+      "id": "curated_th_base_nam_prik_ong",
+      "name": "Nam Prik Ong (Northern Tomato and Pork Dip)",
+      "shelf": "Bases: Sauces, Dips & Stocks"
+    },
+    {
+      "id": "curated_th_base_ajad",
+      "name": "Ajad (Cucumber Relish)",
+      "shelf": "Bases: Sauces, Dips & Stocks"
+    },
+    {
+      "id": "curated_th_base_nam_soup_gai",
+      "name": "Nam Soup Gai (Thai Chicken Stock)",
+      "shelf": "Bases: Sauces, Dips & Stocks"
+    },
+    {
+      "id": "curated_th_base_nam_makham",
+      "name": "Nam Makham (Tamarind Water)",
+      "shelf": "Bases: Sauces, Dips & Stocks"
+    },
+    {
+      "id": "curated_th_base_khao_suay",
+      "name": "Khao Suay (Steamed Jasmine Rice)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_th_base_khao_niao",
+      "name": "Khao Niao (Sticky Rice)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_th_base_khao_khua",
+      "name": "Khao Khua (Toasted Rice Powder)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_th_base_prik_pon",
+      "name": "Prik Pon (Roasted Chili Flakes)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_th_base_hom_jiew",
+      "name": "Hom Jiew (Fried Shallots)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_th_base_kati",
+      "name": "Kati (Fresh Coconut Milk)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_th_base_moo_krob",
+      "name": "Moo Krob (Crispy Pork Belly)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    }
+  ]
+}

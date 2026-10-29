@@ -1,0 +1,125 @@
+{
+  "_comment": "The italian made-first recipes, fixed before any dish was written so both files agree on ids. a_bases_antipasti_soups_pasta.json writes every one of these; dishes in either file point at them through components. A dish needing a base not listed here writes it itself under curated_it_base_<slug>.",
+  "bases": [
+    {
+      "id": "curated_it_base_pasta_fresca_alluovo",
+      "name": "Pasta Fresca all'Uovo (Fresh Egg Pasta)",
+      "shelf": "Bases: Pasta & Doughs"
+    },
+    {
+      "id": "curated_it_base_pasta_di_semola",
+      "name": "Pasta di Semola (Durum Wheat Pasta Dough)",
+      "shelf": "Bases: Pasta & Doughs"
+    },
+    {
+      "id": "curated_it_base_gnocchi_di_patate",
+      "name": "Gnocchi di Patate",
+      "shelf": "Bases: Pasta & Doughs"
+    },
+    {
+      "id": "curated_it_base_impasto_per_pizza_napoletana",
+      "name": "Impasto per Pizza Napoletana",
+      "shelf": "Bases: Pasta & Doughs"
+    },
+    {
+      "id": "curated_it_base_impasto_per_focaccia",
+      "name": "Impasto per Focaccia",
+      "shelf": "Bases: Pasta & Doughs"
+    },
+    {
+      "id": "curated_it_base_pasta_frolla",
+      "name": "Pasta Frolla",
+      "shelf": "Bases: Pasta & Doughs"
+    },
+    {
+      "id": "curated_it_base_pan_di_spagna",
+      "name": "Pan di Spagna",
+      "shelf": "Bases: Pasta & Doughs"
+    },
+    {
+      "id": "curated_it_base_crema_pasticcera",
+      "name": "Crema Pasticcera",
+      "shelf": "Bases: Pasta & Doughs"
+    },
+    {
+      "id": "curated_it_base_brodo_di_carne",
+      "name": "Brodo di Carne",
+      "shelf": "Bases: Sauces & Stocks"
+    },
+    {
+      "id": "curated_it_base_brodo_vegetale",
+      "name": "Brodo Vegetale",
+      "shelf": "Bases: Sauces & Stocks"
+    },
+    {
+      "id": "curated_it_base_fumetto_di_pesce",
+      "name": "Fumetto di Pesce",
+      "shelf": "Bases: Sauces & Stocks"
+    },
+    {
+      "id": "curated_it_base_sugo_di_pomodoro",
+      "name": "Sugo di Pomodoro",
+      "shelf": "Bases: Sauces & Stocks"
+    },
+    {
+      "id": "curated_it_base_ragu_alla_bolognese",
+      "name": "Ragù alla Bolognese",
+      "shelf": "Bases: Sauces & Stocks"
+    },
+    {
+      "id": "curated_it_base_ragu_napoletano",
+      "name": "Ragù Napoletano",
+      "shelf": "Bases: Sauces & Stocks"
+    },
+    {
+      "id": "curated_it_base_pesto_alla_genovese",
+      "name": "Pesto alla Genovese",
+      "shelf": "Bases: Sauces & Stocks"
+    },
+    {
+      "id": "curated_it_base_besciamella",
+      "name": "Besciamella",
+      "shelf": "Bases: Sauces & Stocks"
+    },
+    {
+      "id": "curated_it_base_salsa_verde",
+      "name": "Salsa Verde",
+      "shelf": "Bases: Sauces & Stocks"
+    },
+    {
+      "id": "curated_it_base_soffritto",
+      "name": "Soffritto",
+      "shelf": "Bases: Pantry & Building Blocks"
+    },
+    {
+      "id": "curated_it_base_ricotta_fatta_in_casa",
+      "name": "Ricotta Fatta in Casa",
+      "shelf": "Bases: Pantry & Building Blocks"
+    },
+    {
+      "id": "curated_it_base_pangrattato_tostato",
+      "name": "Pangrattato Tostato",
+      "shelf": "Bases: Pantry & Building Blocks"
+    },
+    {
+      "id": "curated_it_base_giardiniera",
+      "name": "Giardiniera",
+      "shelf": "Bases: Pantry & Building Blocks"
+    },
+    {
+      "id": "curated_it_base_olio_santo",
+      "name": "Olio Santo (Chili Oil)",
+      "shelf": "Bases: Pantry & Building Blocks"
+    },
+    {
+      "id": "curated_it_base_gremolata",
+      "name": "Gremolata",
+      "shelf": "Bases: Pantry & Building Blocks"
+    },
+    {
+      "id": "curated_it_base_polenta",
+      "name": "Polenta",
+      "shelf": "Bases: Pantry & Building Blocks"
+    }
+  ]
+}

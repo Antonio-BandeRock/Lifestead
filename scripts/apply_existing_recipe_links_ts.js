@@ -1,6 +1,6 @@
 /* global __dirname */
 // 2026-10-29: "the links to make this first will also need to be applied to
-// the existing recipes." scripts/add_mexican_recipes.js applies the links in
+// the existing recipes." scripts/add_cuisine_recipes.js applies the links in
 // scripts/_mexican_recipes/d_existing_links.json to the database; this does
 // the same to each older recipe's card in lib/digest/recipes.ts, so the card
 // shows the made-first line that taps through.
@@ -14,13 +14,13 @@
 //
 // Rerunnable: a card already carrying the link's makeFirst line is left alone.
 //
-// Run after scripts/generate_mexican_recipes_ts.js (which writes the new
+// Run after scripts/generate_cuisine_recipes_ts.js (which writes the new
 // made-first recipes' own cards): node scripts/apply_existing_recipe_links_ts.js
 const fs = require('fs');
 const path = require('path');
 const { DatabaseSync } = require('node:sqlite');
-const { loadMexicanRecipes, loadExistingLinks } = require('./add_mexican_recipes');
-const { componentText, digestId, q } = require('./generate_mexican_recipes_ts');
+const { loadAllCuisineRecipes, loadExistingLinks } = require('./cuisine_recipes');
+const { componentText, digestId, q } = require('./generate_cuisine_recipes_ts');
 const { DB_PATH } = require('./flatten_recipe_components');
 
 const RECIPES_TS = path.join(__dirname, '..', 'lib', 'digest', 'recipes.ts');
@@ -39,7 +39,7 @@ const WORDS = {
   'Chicken bouillon/stock/soup (stock cubes, powder)': /stock|bouillon|broth/i,
 };
 
-const newRecipes = new Map(loadMexicanRecipes().map((r) => [r.id, r]));
+const newRecipes = new Map(loadAllCuisineRecipes().map((r) => [r.id, r]));
 const db = new DatabaseSync(DB_PATH, { readOnly: true });
 const dbRecipe = db.prepare('SELECT id, name, serving_size_amount AS servingSizeAmount, serving_size_unit AS servingSizeUnit FROM curated_recipes WHERE id = ?');
 

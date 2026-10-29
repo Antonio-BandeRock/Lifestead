@@ -1,0 +1,899 @@
+{
+  "_comment": "Every recipe to write: id, name as it should appear (a writer may correct spelling or accents but keeps the id), its shelf (dishGroup), and the file that writes it.",
+  "dishes": [
+    {
+      "id": "curated_it_base_pasta_fresca_alluovo",
+      "name": "Pasta Fresca all'Uovo (Fresh Egg Pasta)",
+      "shelf": "Bases: Pasta & Doughs",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_pasta_di_semola",
+      "name": "Pasta di Semola (Durum Wheat Pasta Dough)",
+      "shelf": "Bases: Pasta & Doughs",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_gnocchi_di_patate",
+      "name": "Gnocchi di Patate",
+      "shelf": "Bases: Pasta & Doughs",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_impasto_per_pizza_napoletana",
+      "name": "Impasto per Pizza Napoletana",
+      "shelf": "Bases: Pasta & Doughs",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_impasto_per_focaccia",
+      "name": "Impasto per Focaccia",
+      "shelf": "Bases: Pasta & Doughs",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_pasta_frolla",
+      "name": "Pasta Frolla",
+      "shelf": "Bases: Pasta & Doughs",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_pan_di_spagna",
+      "name": "Pan di Spagna",
+      "shelf": "Bases: Pasta & Doughs",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_crema_pasticcera",
+      "name": "Crema Pasticcera",
+      "shelf": "Bases: Pasta & Doughs",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_brodo_di_carne",
+      "name": "Brodo di Carne",
+      "shelf": "Bases: Sauces & Stocks",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_brodo_vegetale",
+      "name": "Brodo Vegetale",
+      "shelf": "Bases: Sauces & Stocks",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_fumetto_di_pesce",
+      "name": "Fumetto di Pesce",
+      "shelf": "Bases: Sauces & Stocks",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_sugo_di_pomodoro",
+      "name": "Sugo di Pomodoro",
+      "shelf": "Bases: Sauces & Stocks",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_ragu_alla_bolognese",
+      "name": "Ragù alla Bolognese",
+      "shelf": "Bases: Sauces & Stocks",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_ragu_napoletano",
+      "name": "Ragù Napoletano",
+      "shelf": "Bases: Sauces & Stocks",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_pesto_alla_genovese",
+      "name": "Pesto alla Genovese",
+      "shelf": "Bases: Sauces & Stocks",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_besciamella",
+      "name": "Besciamella",
+      "shelf": "Bases: Sauces & Stocks",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_salsa_verde",
+      "name": "Salsa Verde",
+      "shelf": "Bases: Sauces & Stocks",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_soffritto",
+      "name": "Soffritto",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_ricotta_fatta_in_casa",
+      "name": "Ricotta Fatta in Casa",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_pangrattato_tostato",
+      "name": "Pangrattato Tostato",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_giardiniera",
+      "name": "Giardiniera",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_olio_santo",
+      "name": "Olio Santo (Chili Oil)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_gremolata",
+      "name": "Gremolata",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_base_polenta",
+      "name": "Polenta",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_bruschetta_al_pomodoro",
+      "name": "Bruschetta al Pomodoro",
+      "shelf": "Antipasti",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_insalata_caprese",
+      "name": "Insalata Caprese",
+      "shelf": "Antipasti",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_vitello_tonnato",
+      "name": "Vitello Tonnato",
+      "shelf": "Antipasti",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_arancini",
+      "name": "Arancini",
+      "shelf": "Antipasti",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_suppli",
+      "name": "Supplì",
+      "shelf": "Antipasti",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_carpaccio_di_manzo",
+      "name": "Carpaccio di Manzo",
+      "shelf": "Antipasti",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_caponata",
+      "name": "Caponata",
+      "shelf": "Antipasti",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_olive_allascolana",
+      "name": "Olive all'Ascolana",
+      "shelf": "Antipasti",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_crostini_di_fegatini",
+      "name": "Crostini di Fegatini",
+      "shelf": "Antipasti",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_frittata_di_zucchine",
+      "name": "Frittata di Zucchine",
+      "shelf": "Antipasti",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_fiori_di_zucca_fritti",
+      "name": "Fiori di Zucca Fritti",
+      "shelf": "Antipasti",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_panzanella",
+      "name": "Panzanella",
+      "shelf": "Antipasti",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_minestrone",
+      "name": "Minestrone",
+      "shelf": "Soups",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_ribollita",
+      "name": "Ribollita",
+      "shelf": "Soups",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_pasta_e_fagioli",
+      "name": "Pasta e Fagioli",
+      "shelf": "Soups",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_pasta_e_ceci",
+      "name": "Pasta e Ceci",
+      "shelf": "Soups",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_stracciatella",
+      "name": "Stracciatella",
+      "shelf": "Soups",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_tortellini_in_brodo",
+      "name": "Tortellini in Brodo",
+      "shelf": "Soups",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_acquacotta",
+      "name": "Acquacotta",
+      "shelf": "Soups",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_pappa_al_pomodoro",
+      "name": "Pappa al Pomodoro",
+      "shelf": "Soups",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_minestra_maritata",
+      "name": "Minestra Maritata",
+      "shelf": "Soups",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_zuppa_di_lenticchie",
+      "name": "Zuppa di Lenticchie",
+      "shelf": "Soups",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_spaghetti_alla_carbonara",
+      "name": "Spaghetti alla Carbonara",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_tonnarelli_cacio_e_pepe",
+      "name": "Tonnarelli Cacio e Pepe",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_bucatini_allamatriciana",
+      "name": "Bucatini all'Amatriciana",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_rigatoni_alla_gricia",
+      "name": "Rigatoni alla Gricia",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_spaghetti_aglio_olio_e_peperoncino",
+      "name": "Spaghetti Aglio, Olio e Peperoncino",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_tagliatelle_al_ragu",
+      "name": "Tagliatelle al Ragù",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_lasagne_alla_bolognese",
+      "name": "Lasagne alla Bolognese",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_trofie_al_pesto",
+      "name": "Trofie al Pesto",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_spaghetti_alla_puttanesca",
+      "name": "Spaghetti alla Puttanesca",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_pasta_alla_norma",
+      "name": "Pasta alla Norma",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_spaghetti_alle_vongole",
+      "name": "Spaghetti alle Vongole",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_orecchiette_con_le_cime_di_rapa",
+      "name": "Orecchiette con le Cime di Rapa",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_pasta_al_forno",
+      "name": "Pasta al Forno",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_ravioli_ricotta_e_spinaci",
+      "name": "Ravioli Ricotta e Spinaci",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_tortellini",
+      "name": "Tortellini",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_cannelloni",
+      "name": "Cannelloni",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_pasta_alla_genovese",
+      "name": "Pasta alla Genovese",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_spaghetti_al_pomodoro",
+      "name": "Spaghetti al Pomodoro",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_pasta_con_le_sarde",
+      "name": "Pasta con le Sarde",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_fettuccine_al_burro",
+      "name": "Fettuccine al Burro",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_agnolotti_del_plin",
+      "name": "Agnolotti del Plin",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_busiate_alla_trapanese",
+      "name": "Busiate alla Trapanese",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_linguine_allo_scoglio",
+      "name": "Linguine allo Scoglio",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_pici_allaglione",
+      "name": "Pici all'Aglione",
+      "shelf": "Pasta",
+      "file": "a_bases_antipasti_soups_pasta.json"
+    },
+    {
+      "id": "curated_it_risotto_alla_milanese",
+      "name": "Risotto alla Milanese",
+      "shelf": "Risotto, Polenta & Gnocchi",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_risotto_ai_funghi_porcini",
+      "name": "Risotto ai Funghi Porcini",
+      "shelf": "Risotto, Polenta & Gnocchi",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_risi_e_bisi",
+      "name": "Risi e Bisi",
+      "shelf": "Risotto, Polenta & Gnocchi",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_gnocchi_alla_sorrentina",
+      "name": "Gnocchi alla Sorrentina",
+      "shelf": "Risotto, Polenta & Gnocchi",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_gnocchi_burro_e_salvia",
+      "name": "Gnocchi Burro e Salvia",
+      "shelf": "Risotto, Polenta & Gnocchi",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_polenta_concia",
+      "name": "Polenta Concia",
+      "shelf": "Risotto, Polenta & Gnocchi",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_canederli",
+      "name": "Canederli",
+      "shelf": "Risotto, Polenta & Gnocchi",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_gnudi",
+      "name": "Gnudi",
+      "shelf": "Risotto, Polenta & Gnocchi",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_risotto_al_radicchio",
+      "name": "Risotto al Radicchio",
+      "shelf": "Risotto, Polenta & Gnocchi",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_pizza_margherita",
+      "name": "Pizza Margherita",
+      "shelf": "Pizza & Breads",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_pizza_marinara",
+      "name": "Pizza Marinara",
+      "shelf": "Pizza & Breads",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_focaccia_genovese",
+      "name": "Focaccia Genovese",
+      "shelf": "Pizza & Breads",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_focaccia_barese",
+      "name": "Focaccia Barese",
+      "shelf": "Pizza & Breads",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_piadina_romagnola",
+      "name": "Piadina Romagnola",
+      "shelf": "Pizza & Breads",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_ciabatta",
+      "name": "Ciabatta",
+      "shelf": "Pizza & Breads",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_pane_toscano",
+      "name": "Pane Toscano",
+      "shelf": "Pizza & Breads",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_grissini",
+      "name": "Grissini",
+      "shelf": "Pizza & Breads",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_calzone",
+      "name": "Calzone",
+      "shelf": "Pizza & Breads",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_sfincione",
+      "name": "Sfincione",
+      "shelf": "Pizza & Breads",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_taralli",
+      "name": "Taralli",
+      "shelf": "Pizza & Breads",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_panzerotti",
+      "name": "Panzerotti",
+      "shelf": "Pizza & Breads",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_cacciucco",
+      "name": "Cacciucco",
+      "shelf": "Fish & Seafood",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_branzino_al_forno",
+      "name": "Branzino al Forno",
+      "shelf": "Fish & Seafood",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_baccala_alla_vicentina",
+      "name": "Baccalà alla Vicentina",
+      "shelf": "Fish & Seafood",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_fritto_misto_di_mare",
+      "name": "Fritto Misto di Mare",
+      "shelf": "Fish & Seafood",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_impepata_di_cozze",
+      "name": "Impepata di Cozze",
+      "shelf": "Fish & Seafood",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_calamari_ripieni",
+      "name": "Calamari Ripieni",
+      "shelf": "Fish & Seafood",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_pesce_spada_alla_siciliana",
+      "name": "Pesce Spada alla Siciliana",
+      "shelf": "Fish & Seafood",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_sarde_a_beccafico",
+      "name": "Sarde a Beccafico",
+      "shelf": "Fish & Seafood",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_polpo_e_patate",
+      "name": "Polpo e Patate",
+      "shelf": "Fish & Seafood",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_pesce_allacqua_pazza",
+      "name": "Pesce all'Acqua Pazza",
+      "shelf": "Fish & Seafood",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_ossobuco_alla_milanese",
+      "name": "Ossobuco alla Milanese",
+      "shelf": "Meats & Poultry",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_saltimbocca_alla_romana",
+      "name": "Saltimbocca alla Romana",
+      "shelf": "Meats & Poultry",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_pollo_alla_cacciatora",
+      "name": "Pollo alla Cacciatora",
+      "shelf": "Meats & Poultry",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_bistecca_alla_fiorentina",
+      "name": "Bistecca alla Fiorentina",
+      "shelf": "Meats & Poultry",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_cotoletta_alla_milanese",
+      "name": "Cotoletta alla Milanese",
+      "shelf": "Meats & Poultry",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_brasato_al_barolo",
+      "name": "Brasato al Barolo",
+      "shelf": "Meats & Poultry",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_porchetta",
+      "name": "Porchetta",
+      "shelf": "Meats & Poultry",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_polpette_al_sugo",
+      "name": "Polpette al Sugo",
+      "shelf": "Meats & Poultry",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_abbacchio_alla_romana",
+      "name": "Abbacchio alla Romana",
+      "shelf": "Meats & Poultry",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_pollo_al_mattone",
+      "name": "Pollo al Mattone",
+      "shelf": "Meats & Poultry",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_coda_alla_vaccinara",
+      "name": "Coda alla Vaccinara",
+      "shelf": "Meats & Poultry",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_salsiccia_e_friarielli",
+      "name": "Salsiccia e Friarielli",
+      "shelf": "Meats & Poultry",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_braciole_alla_napoletana",
+      "name": "Braciole alla Napoletana",
+      "shelf": "Meats & Poultry",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_maiale_al_latte",
+      "name": "Maiale al Latte",
+      "shelf": "Meats & Poultry",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_trippa_alla_romana",
+      "name": "Trippa alla Romana",
+      "shelf": "Meats & Poultry",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_scaloppine_al_limone",
+      "name": "Scaloppine al Limone",
+      "shelf": "Meats & Poultry",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_involtini_di_manzo",
+      "name": "Involtini di Manzo",
+      "shelf": "Meats & Poultry",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_carciofi_alla_romana",
+      "name": "Carciofi alla Romana",
+      "shelf": "Vegetables & Contorni",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_carciofi_alla_giudia",
+      "name": "Carciofi alla Giudia",
+      "shelf": "Vegetables & Contorni",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_parmigiana_di_melanzane",
+      "name": "Parmigiana di Melanzane",
+      "shelf": "Vegetables & Contorni",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_peperonata",
+      "name": "Peperonata",
+      "shelf": "Vegetables & Contorni",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_fagioli_alluccelletto",
+      "name": "Fagioli all'Uccelletto",
+      "shelf": "Vegetables & Contorni",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_cicoria_ripassata",
+      "name": "Cicoria Ripassata",
+      "shelf": "Vegetables & Contorni",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_patate_al_forno",
+      "name": "Patate al Forno",
+      "shelf": "Vegetables & Contorni",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_zucchine_alla_scapece",
+      "name": "Zucchine alla Scapece",
+      "shelf": "Vegetables & Contorni",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_funghi_trifolati",
+      "name": "Funghi Trifolati",
+      "shelf": "Vegetables & Contorni",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_verdure_grigliate",
+      "name": "Verdure Grigliate",
+      "shelf": "Vegetables & Contorni",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_insalata_di_finocchi_e_arance",
+      "name": "Insalata di Finocchi e Arance",
+      "shelf": "Vegetables & Contorni",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_piselli_al_prosciutto",
+      "name": "Piselli al Prosciutto",
+      "shelf": "Vegetables & Contorni",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_bietole_saltate",
+      "name": "Bietole Saltate",
+      "shelf": "Vegetables & Contorni",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_tiramisu",
+      "name": "Tiramisù",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_panna_cotta",
+      "name": "Panna Cotta",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_cannoli_siciliani",
+      "name": "Cannoli Siciliani",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_zabaione",
+      "name": "Zabaione",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_cantucci",
+      "name": "Cantucci",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_torta_caprese",
+      "name": "Torta Caprese",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_crostata_di_marmellata",
+      "name": "Crostata di Marmellata",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_affogato_al_caffe",
+      "name": "Affogato al Caffè",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_semifreddo_alle_mandorle",
+      "name": "Semifreddo alle Mandorle",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_pastiera_napoletana",
+      "name": "Pastiera Napoletana",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_zeppole_di_san_giuseppe",
+      "name": "Zeppole di San Giuseppe",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_bomboloni",
+      "name": "Bomboloni",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_amaretti",
+      "name": "Amaretti",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_torta_della_nonna",
+      "name": "Torta della Nonna",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_granita_al_limone",
+      "name": "Granita al Limone",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_panforte",
+      "name": "Panforte",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_bonet",
+      "name": "Bonet",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_sfogliatelle",
+      "name": "Sfogliatelle",
+      "shelf": "Desserts",
+      "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    }
+  ]
+}

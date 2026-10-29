@@ -1,0 +1,130 @@
+{
+  "_comment": "The german made-first recipes, fixed before any dish was written so both files agree on ids. a_bases_soups_meats_fish.json writes every one of these; dishes in either file point at them through components. A dish needing a base not listed here writes it itself under curated_de_base_<slug>.",
+  "bases": [
+    {
+      "id": "curated_de_base_rinderbruhe",
+      "name": "Rinderbrühe (Beef Stock)",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_de_base_huhnerbruhe",
+      "name": "Hühnerbrühe (Chicken Stock)",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_de_base_gemusebruhe",
+      "name": "Gemüsebrühe (Vegetable Stock)",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_de_base_fischfond",
+      "name": "Fischfond (Fish Stock)",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_de_base_bratenso_e",
+      "name": "Bratensoße (Brown Gravy)",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_de_base_rahmso_e",
+      "name": "Rahmsoße (Cream Sauce)",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_de_base_jagerso_e",
+      "name": "Jägersoße (Mushroom Sauce)",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_de_base_frankfurter_grune_so_e",
+      "name": "Frankfurter Grüne Soße",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_de_base_meerrettichso_e",
+      "name": "Meerrettichsoße (Horseradish Sauce)",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_de_base_spatzleteig",
+      "name": "Spätzleteig (Spätzle Batter)",
+      "shelf": "Bases: Doughs & Dumplings"
+    },
+    {
+      "id": "curated_de_base_nudelteig",
+      "name": "Nudelteig (Egg Noodle Dough)",
+      "shelf": "Bases: Doughs & Dumplings"
+    },
+    {
+      "id": "curated_de_base_hefeteig",
+      "name": "Hefeteig (Sweet Yeast Dough)",
+      "shelf": "Bases: Doughs & Dumplings"
+    },
+    {
+      "id": "curated_de_base_murbeteig",
+      "name": "Mürbeteig (Shortcrust)",
+      "shelf": "Bases: Doughs & Dumplings"
+    },
+    {
+      "id": "curated_de_base_quark_ol_teig",
+      "name": "Quark-Öl-Teig",
+      "shelf": "Bases: Doughs & Dumplings"
+    },
+    {
+      "id": "curated_de_base_roggensauerteig",
+      "name": "Roggensauerteig (Rye Sourdough Starter)",
+      "shelf": "Bases: Doughs & Dumplings"
+    },
+    {
+      "id": "curated_de_base_laugenteig",
+      "name": "Laugenteig (Pretzel Dough)",
+      "shelf": "Bases: Doughs & Dumplings"
+    },
+    {
+      "id": "curated_de_base_gewurzgurken",
+      "name": "Gewürzgurken (Pickled Cucumbers)",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_su_er_senf",
+      "name": "Süßer Senf (Bavarian Sweet Mustard)",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_quark",
+      "name": "Quark",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_griebenschmalz",
+      "name": "Griebenschmalz",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_butterschmalz",
+      "name": "Butterschmalz (Clarified Butter)",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_apfelmus",
+      "name": "Apfelmus",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_pflaumenmus",
+      "name": "Pflaumenmus",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_geriebener_meerrettich",
+      "name": "Geriebener Meerrettich (Prepared Horseradish)",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_weinkraut",
+      "name": "Weinkraut (Sauerkraut Braised in Wine)",
+      "shelf": "Bases: Pantry & Preserves"
+    }
+  ]
+}

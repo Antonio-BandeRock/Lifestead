@@ -1,0 +1,767 @@
+{
+  "_comment": "Every recipe to write: id, name as it should appear (a writer may correct spelling or accents but keeps the id), its shelf (dishGroup), and the file that writes it.",
+  "dishes": [
+    {
+      "id": "curated_de_base_rinderbruhe",
+      "name": "Rinderbrühe (Beef Stock)",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_huhnerbruhe",
+      "name": "Hühnerbrühe (Chicken Stock)",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_gemusebruhe",
+      "name": "Gemüsebrühe (Vegetable Stock)",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_fischfond",
+      "name": "Fischfond (Fish Stock)",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_bratenso_e",
+      "name": "Bratensoße (Brown Gravy)",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_rahmso_e",
+      "name": "Rahmsoße (Cream Sauce)",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_jagerso_e",
+      "name": "Jägersoße (Mushroom Sauce)",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_frankfurter_grune_so_e",
+      "name": "Frankfurter Grüne Soße",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_meerrettichso_e",
+      "name": "Meerrettichsoße (Horseradish Sauce)",
+      "shelf": "Bases: Stocks & Sauces",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_spatzleteig",
+      "name": "Spätzleteig (Spätzle Batter)",
+      "shelf": "Bases: Doughs & Dumplings",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_nudelteig",
+      "name": "Nudelteig (Egg Noodle Dough)",
+      "shelf": "Bases: Doughs & Dumplings",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_hefeteig",
+      "name": "Hefeteig (Sweet Yeast Dough)",
+      "shelf": "Bases: Doughs & Dumplings",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_murbeteig",
+      "name": "Mürbeteig (Shortcrust)",
+      "shelf": "Bases: Doughs & Dumplings",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_quark_ol_teig",
+      "name": "Quark-Öl-Teig",
+      "shelf": "Bases: Doughs & Dumplings",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_roggensauerteig",
+      "name": "Roggensauerteig (Rye Sourdough Starter)",
+      "shelf": "Bases: Doughs & Dumplings",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_laugenteig",
+      "name": "Laugenteig (Pretzel Dough)",
+      "shelf": "Bases: Doughs & Dumplings",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_gewurzgurken",
+      "name": "Gewürzgurken (Pickled Cucumbers)",
+      "shelf": "Bases: Pantry & Preserves",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_su_er_senf",
+      "name": "Süßer Senf (Bavarian Sweet Mustard)",
+      "shelf": "Bases: Pantry & Preserves",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_quark",
+      "name": "Quark",
+      "shelf": "Bases: Pantry & Preserves",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_griebenschmalz",
+      "name": "Griebenschmalz",
+      "shelf": "Bases: Pantry & Preserves",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_butterschmalz",
+      "name": "Butterschmalz (Clarified Butter)",
+      "shelf": "Bases: Pantry & Preserves",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_apfelmus",
+      "name": "Apfelmus",
+      "shelf": "Bases: Pantry & Preserves",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_pflaumenmus",
+      "name": "Pflaumenmus",
+      "shelf": "Bases: Pantry & Preserves",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_geriebener_meerrettich",
+      "name": "Geriebener Meerrettich (Prepared Horseradish)",
+      "shelf": "Bases: Pantry & Preserves",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_base_weinkraut",
+      "name": "Weinkraut (Sauerkraut Braised in Wine)",
+      "shelf": "Bases: Pantry & Preserves",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_kartoffelsuppe",
+      "name": "Kartoffelsuppe",
+      "shelf": "Soups & Eintöpfe",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_erbsensuppe",
+      "name": "Erbsensuppe",
+      "shelf": "Soups & Eintöpfe",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_linseneintopf",
+      "name": "Linseneintopf",
+      "shelf": "Soups & Eintöpfe",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_gulaschsuppe",
+      "name": "Gulaschsuppe",
+      "shelf": "Soups & Eintöpfe",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_leberknodelsuppe",
+      "name": "Leberknödelsuppe",
+      "shelf": "Soups & Eintöpfe",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_fladlesuppe",
+      "name": "Flädlesuppe",
+      "shelf": "Soups & Eintöpfe",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_grie_nockerlsuppe",
+      "name": "Grießnockerlsuppe",
+      "shelf": "Soups & Eintöpfe",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_hochzeitssuppe",
+      "name": "Hochzeitssuppe",
+      "shelf": "Soups & Eintöpfe",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_grune_bohneneintopf",
+      "name": "Grüne Bohneneintopf",
+      "shelf": "Soups & Eintöpfe",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_pichelsteiner_eintopf",
+      "name": "Pichelsteiner Eintopf",
+      "shelf": "Soups & Eintöpfe",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_gaisburger_marsch",
+      "name": "Gaisburger Marsch",
+      "shelf": "Soups & Eintöpfe",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_spargelcremesuppe",
+      "name": "Spargelcremesuppe",
+      "shelf": "Soups & Eintöpfe",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_grunkohl_mit_pinkel",
+      "name": "Grünkohl mit Pinkel",
+      "shelf": "Soups & Eintöpfe",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_sauerbraten",
+      "name": "Sauerbraten",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_rinderrouladen",
+      "name": "Rinderrouladen",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_schweinebraten",
+      "name": "Schweinebraten",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_schweinshaxe",
+      "name": "Schweinshaxe",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_schnitzel_wiener_art",
+      "name": "Schnitzel Wiener Art",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_jagerschnitzel",
+      "name": "Jägerschnitzel",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_konigsberger_klopse",
+      "name": "Königsberger Klopse",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_frikadellen",
+      "name": "Frikadellen",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_kasseler_mit_sauerkraut",
+      "name": "Kasseler mit Sauerkraut",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_eisbein",
+      "name": "Eisbein",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_leberkase",
+      "name": "Leberkäse",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_currywurst",
+      "name": "Currywurst",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_labskaus",
+      "name": "Labskaus",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_huhnerfrikassee",
+      "name": "Hühnerfrikassee",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_rindergulasch",
+      "name": "Rindergulasch",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_kohlrouladen",
+      "name": "Kohlrouladen",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_falscher_hase",
+      "name": "Falscher Hase",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_zwiebelrostbraten",
+      "name": "Zwiebelrostbraten",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_strammer_max",
+      "name": "Strammer Max",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_senfeier",
+      "name": "Senfeier",
+      "shelf": "Meats & Sausages",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_matjes_nach_hausfrauenart",
+      "name": "Matjes nach Hausfrauenart",
+      "shelf": "Fish",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_bismarckhering",
+      "name": "Bismarckhering",
+      "shelf": "Fish",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_rollmops",
+      "name": "Rollmops",
+      "shelf": "Fish",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_forelle_mullerin_art",
+      "name": "Forelle Müllerin Art",
+      "shelf": "Fish",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_backfisch",
+      "name": "Backfisch",
+      "shelf": "Fish",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_scholle_finkenwerder_art",
+      "name": "Scholle Finkenwerder Art",
+      "shelf": "Fish",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_fischfrikadellen",
+      "name": "Fischfrikadellen",
+      "shelf": "Fish",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_hamburger_pannfisch",
+      "name": "Hamburger Pannfisch",
+      "shelf": "Fish",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_heringssalat",
+      "name": "Heringssalat",
+      "shelf": "Fish",
+      "file": "a_bases_soups_meats_fish.json"
+    },
+    {
+      "id": "curated_de_kasespatzle",
+      "name": "Käsespätzle",
+      "shelf": "Potatoes, Dumplings & Noodles",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_spatzle",
+      "name": "Spätzle",
+      "shelf": "Potatoes, Dumplings & Noodles",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_maultaschen",
+      "name": "Maultaschen",
+      "shelf": "Potatoes, Dumplings & Noodles",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_kartoffelknodel",
+      "name": "Kartoffelknödel",
+      "shelf": "Potatoes, Dumplings & Noodles",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_semmelknodel",
+      "name": "Semmelknödel",
+      "shelf": "Potatoes, Dumplings & Noodles",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_kartoffelpuffer",
+      "name": "Kartoffelpuffer",
+      "shelf": "Potatoes, Dumplings & Noodles",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_bratkartoffeln",
+      "name": "Bratkartoffeln",
+      "shelf": "Potatoes, Dumplings & Noodles",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_schwabischer_kartoffelsalat",
+      "name": "Schwäbischer Kartoffelsalat",
+      "shelf": "Potatoes, Dumplings & Noodles",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_norddeutscher_kartoffelsalat",
+      "name": "Norddeutscher Kartoffelsalat",
+      "shelf": "Potatoes, Dumplings & Noodles",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_schupfnudeln",
+      "name": "Schupfnudeln",
+      "shelf": "Potatoes, Dumplings & Noodles",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_salzkartoffeln",
+      "name": "Salzkartoffeln",
+      "shelf": "Potatoes, Dumplings & Noodles",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_kartoffelpuree",
+      "name": "Kartoffelpüree",
+      "shelf": "Potatoes, Dumplings & Noodles",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_himmel_und_erde",
+      "name": "Himmel und Erde",
+      "shelf": "Potatoes, Dumplings & Noodles",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_pellkartoffeln_mit_quark",
+      "name": "Pellkartoffeln mit Quark",
+      "shelf": "Potatoes, Dumplings & Noodles",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_rotkohl",
+      "name": "Rotkohl",
+      "shelf": "Vegetables & Salads",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_spargel_mit_sauce_hollandaise",
+      "name": "Spargel mit Sauce Hollandaise",
+      "shelf": "Vegetables & Salads",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_rahmspinat",
+      "name": "Rahmspinat",
+      "shelf": "Vegetables & Salads",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_kohlrabi_in_rahmso_e",
+      "name": "Kohlrabi in Rahmsoße",
+      "shelf": "Vegetables & Salads",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_gurkensalat",
+      "name": "Gurkensalat",
+      "shelf": "Vegetables & Salads",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_krautsalat",
+      "name": "Krautsalat",
+      "shelf": "Vegetables & Salads",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_bohnensalat",
+      "name": "Bohnensalat",
+      "shelf": "Vegetables & Salads",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_rahmwirsing",
+      "name": "Rahmwirsing",
+      "shelf": "Vegetables & Salads",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_leipziger_allerlei",
+      "name": "Leipziger Allerlei",
+      "shelf": "Vegetables & Salads",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_rote_bete_salat",
+      "name": "Rote-Bete-Salat",
+      "shelf": "Vegetables & Salads",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_wurstsalat",
+      "name": "Wurstsalat",
+      "shelf": "Vegetables & Salads",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_obatzda",
+      "name": "Obatzda",
+      "shelf": "Vegetables & Salads",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_zwiebelkuchen",
+      "name": "Zwiebelkuchen",
+      "shelf": "Vegetables & Salads",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_rosenkohl_mit_speck",
+      "name": "Rosenkohl mit Speck",
+      "shelf": "Vegetables & Salads",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_laugenbrezel",
+      "name": "Laugenbrezel",
+      "shelf": "Breads & Pretzels",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_roggenmischbrot",
+      "name": "Roggenmischbrot",
+      "shelf": "Breads & Pretzels",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_vollkornbrot",
+      "name": "Vollkornbrot",
+      "shelf": "Breads & Pretzels",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_kaiserbrotchen",
+      "name": "Kaiserbrötchen",
+      "shelf": "Breads & Pretzels",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_bauernbrot",
+      "name": "Bauernbrot",
+      "shelf": "Breads & Pretzels",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_dinkelbrot",
+      "name": "Dinkelbrot",
+      "shelf": "Breads & Pretzels",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_laugenbrotchen",
+      "name": "Laugenbrötchen",
+      "shelf": "Breads & Pretzels",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_hefezopf",
+      "name": "Hefezopf",
+      "shelf": "Breads & Pretzels",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_schwarzwalder_kirschtorte",
+      "name": "Schwarzwälder Kirschtorte",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_apfelstrudel",
+      "name": "Apfelstrudel",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_bienenstich",
+      "name": "Bienenstich",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_kasekuchen",
+      "name": "Käsekuchen",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_streuselkuchen",
+      "name": "Streuselkuchen",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_zwetschgendatschi",
+      "name": "Zwetschgendatschi",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_frankfurter_kranz",
+      "name": "Frankfurter Kranz",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_donauwelle",
+      "name": "Donauwelle",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_rote_grutze",
+      "name": "Rote Grütze",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_kaiserschmarrn",
+      "name": "Kaiserschmarrn",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_germknodel",
+      "name": "Germknödel",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_dampfnudeln",
+      "name": "Dampfnudeln",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_rhabarberkuchen",
+      "name": "Rhabarberkuchen",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_nurnberger_lebkuchen",
+      "name": "Nürnberger Lebkuchen",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_christstollen",
+      "name": "Christstollen",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_berliner_pfannkuchen",
+      "name": "Berliner Pfannkuchen",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_marmorkuchen",
+      "name": "Marmorkuchen",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_apfelpfannkuchen",
+      "name": "Apfelpfannkuchen",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_bratapfel",
+      "name": "Bratapfel",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_spekulatius",
+      "name": "Spekulatius",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_zimtsterne",
+      "name": "Zimtsterne",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_quarkkeulchen",
+      "name": "Quarkkeulchen",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_grie_brei",
+      "name": "Grießbrei",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    },
+    {
+      "id": "curated_de_arme_ritter",
+      "name": "Arme Ritter",
+      "shelf": "Cakes & Desserts",
+      "file": "b_potatoes_vegetables_breads_cakes.json"
+    }
+  ]
+}

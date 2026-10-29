@@ -20,17 +20,18 @@
 // printout is the thing that stops that list from drifting quietly the way the
 // builder-type counts did.
 //
-// Since 2026-10-29 the Mexican recipes (recipeCard.cuisine 'Mexican') form a
-// band of their own, shelved by recipeCard.shelf in the order MEXICAN_SHELVES
-// gives, since their Spanish titles read badly against English title rules.
-// For that band this checks every shelf is one MEXICAN_SHELVES names, and
-// prints the count on each.
+// Since 2026-10-29 each cuisine (recipeCard.cuisine 'Mexican', 'French' and
+// the rest) forms a band of its own, shelved by recipeCard.shelf in the order
+// lib/cuisineBands.ts gives, since their titles in the cuisine's language read
+// badly against English title rules. For those bands this checks every shelf
+// is one the band names, and prints the count on each.
 //
 // Run: node scripts/audit_system_recipe_subgroups.js
 //      node scripts/audit_system_recipe_subgroups.js --list   (print buckets)
 
 const fs = require('fs');
 const path = require('path');
+const { readCuisineBands } = require('./cuisine_recipes');
 
 const ROOT = path.join(__dirname, '..');
 const COMPONENT = path.join(ROOT, 'components', 'SystemRecipesView.tsx');
@@ -72,13 +73,6 @@ function readSubgroupTables() {
   return new Function(body)();
 }
 
-function readMexicanShelves() {
-  const source = fs.readFileSync(COMPONENT, 'utf8');
-  const start = source.indexOf('const MEXICAN_SHELVES = [');
-  if (start === -1) throw new Error('MEXICAN_SHELVES not found in SystemRecipesView.tsx');
-  const body = source.slice(start, source.indexOf('];', start));
-  return [...body.matchAll(/'([^']+)'/g)].map((match) => match[1]);
-}
 
 // --- the side dishes, read out of lib/recipeDishRole.ts ------------------
 //
@@ -95,7 +89,7 @@ function readSideDishIds() {
   const body = source
     .slice(start, source.indexOf(']);', start))
     .split('\n')
-    .map((line) => line.replace(/\/\/.*$/, ''))
+    .map((line) => line.replace(/\r$/, '').replace(/\/\/.*$/, ''))
     .join('\n');
   const ids = new Set([...body.matchAll(/'([^']+)'/g)].map((match) => match[1]));
   if (ids.size === 0) throw new Error('SIDE_DISH_RECIPE_IDS is empty');
@@ -139,14 +133,16 @@ function readRecipes() {
 const SUBGROUP_MIN = 12;
 const tables = readSubgroupTables();
 const sideDishIds = readSideDishIds();
-const mexicanShelves = readMexicanShelves();
+const cuisineBands = readCuisineBands();
+const cuisineBandOf = (cuisine) => cuisineBands.find((band) => band.cuisine === cuisine);
+const cuisineBandByKey = new Map(cuisineBands.map((band) => [band.key, band]));
 const recipes = readRecipes();
 if (recipes.length === 0) { console.error('read no recipes out of lib/digest/recipes.ts'); process.exit(1); }
 
 // The same call groupKeyFor makes in the component.
 const bandFor = (recipe) =>
-  recipe.cuisine === 'Mexican'
-    ? 'mexican'
+  cuisineBandOf(recipe.cuisine)
+    ? cuisineBandOf(recipe.cuisine).key
     : recipe.builder === 'side' && !sideDishIds.has(recipe.curated) ? 'main' : recipe.builder;
 
 const byBand = new Map();
@@ -163,7 +159,7 @@ const fail = (message) => { console.log(`  PROBLEM: ${message}`); problems += 1;
 console.log(`${recipes.length} recipes across ${byBand.size} bands\n`);
 
 // The Side Builder split, printed every run so the list cannot drift.
-const sideBuilder = recipes.filter((recipe) => recipe.builder === 'side' && recipe.cuisine !== 'Mexican');
+const sideBuilder = recipes.filter((recipe) => recipe.builder === 'side' && !cuisineBandOf(recipe.cuisine));
 const asMains = sideBuilder.filter((recipe) => bandFor(recipe) === 'main');
 const asSides = sideBuilder.filter((recipe) => sideDishIds.has(recipe.curated));
 console.log(`side builder: ${sideBuilder.length} recipes -> ${asMains.length} mains, ${asSides.length} sides`);
@@ -173,8 +169,8 @@ for (const recipe of asSides.slice().sort((a, b) => a.title.localeCompare(b.titl
 if (asMains.length + asSides.length !== sideBuilder.length) {
   fail(`the side builder split is not a partition: ${asMains.length} + ${asSides.length} against ${sideBuilder.length}`);
 }
-// The Mexican sides are named in the list for the meal plan's side pool but
-// shelved on the Mexican band, so they count as carried here.
+// The cuisine sides are named in the list for the meal plan's side pool but
+// shelved on their cuisine's band, so they count as carried here.
 const missingIds = [...sideDishIds].filter(
   (curated) => !recipes.some((recipe) => recipe.builder === 'side' && recipe.curated === curated),
 );
@@ -182,13 +178,14 @@ for (const curated of missingIds) fail(`SIDE_DISH_RECIPE_IDS names ${curated}, w
 console.log('');
 
 for (const [band, list] of [...byBand.entries()].sort()) {
-  if (band === 'mexican') {
-    const counts = new Map(mexicanShelves.map((label) => [label, []]));
+  const cuisineBand = cuisineBandByKey.get(band);
+  if (cuisineBand) {
+    const counts = new Map(cuisineBand.shelves.map((label) => [label, []]));
     for (const recipe of list) {
-      if (!counts.has(recipe.shelf)) { fail(`mexican: "${recipe.title}" has shelf "${recipe.shelf}", which MEXICAN_SHELVES does not name`); continue; }
+      if (!counts.has(recipe.shelf)) { fail(`${band}: "${recipe.title}" has shelf "${recipe.shelf}", which lib/cuisineBands.ts does not name`); continue; }
       counts.get(recipe.shelf).push(recipe.title);
     }
-    console.log(`mexican: ${list.length} recipes, shelved by recipeCard.shelf`);
+    console.log(`${band}: ${list.length} recipes, shelved by recipeCard.shelf`);
     for (const [label, bucket] of counts) {
       if (bucket.length === 0) continue;
       console.log(`  ${label} (${bucket.length})`);

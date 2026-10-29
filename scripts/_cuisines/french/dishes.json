@@ -1,0 +1,881 @@
+{
+  "_comment": "Every recipe to write: id, name as it should appear (a writer may correct spelling or accents but keeps the id), its shelf (dishGroup), and the file that writes it.",
+  "dishes": [
+    {
+      "id": "curated_fr_base_fond_blanc_de_volaille",
+      "name": "Fond Blanc de Volaille (White Chicken Stock)",
+      "shelf": "Bases: Stocks & Mother Sauces",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_fond_brun_de_veau",
+      "name": "Fond Brun de Veau (Brown Veal Stock)",
+      "shelf": "Bases: Stocks & Mother Sauces",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_fumet_de_poisson",
+      "name": "Fumet de Poisson (Fish Stock)",
+      "shelf": "Bases: Stocks & Mother Sauces",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_court_bouillon",
+      "name": "Court-Bouillon",
+      "shelf": "Bases: Stocks & Mother Sauces",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_sauce_bechamel",
+      "name": "Sauce Béchamel",
+      "shelf": "Bases: Stocks & Mother Sauces",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_sauce_veloute",
+      "name": "Sauce Velouté",
+      "shelf": "Bases: Stocks & Mother Sauces",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_sauce_espagnole",
+      "name": "Sauce Espagnole",
+      "shelf": "Bases: Stocks & Mother Sauces",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_demi_glace",
+      "name": "Demi-Glace",
+      "shelf": "Bases: Stocks & Mother Sauces",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_sauce_tomate",
+      "name": "Sauce Tomate",
+      "shelf": "Bases: Stocks & Mother Sauces",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_sauce_hollandaise",
+      "name": "Sauce Hollandaise",
+      "shelf": "Bases: Stocks & Mother Sauces",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_sauce_bearnaise",
+      "name": "Sauce Béarnaise",
+      "shelf": "Bases: Stocks & Mother Sauces",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_beurre_blanc",
+      "name": "Beurre Blanc",
+      "shelf": "Bases: Stocks & Mother Sauces",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_sauce_mornay",
+      "name": "Sauce Mornay",
+      "shelf": "Bases: Stocks & Mother Sauces",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_pate_brisee",
+      "name": "Pâte Brisée (Shortcrust)",
+      "shelf": "Bases: Doughs & Pastry",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_pate_sucree",
+      "name": "Pâte Sucrée (Sweet Tart Pastry)",
+      "shelf": "Bases: Doughs & Pastry",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_pate_feuilletee",
+      "name": "Pâte Feuilletée (Puff Pastry)",
+      "shelf": "Bases: Doughs & Pastry",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_pate_a_choux",
+      "name": "Pâte à Choux",
+      "shelf": "Bases: Doughs & Pastry",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_pate_a_crepes",
+      "name": "Pâte à Crêpes (Crêpe Batter)",
+      "shelf": "Bases: Doughs & Pastry",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_creme_patissiere",
+      "name": "Crème Pâtissière (Pastry Cream)",
+      "shelf": "Bases: Doughs & Pastry",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_creme_anglaise",
+      "name": "Crème Anglaise",
+      "shelf": "Bases: Doughs & Pastry",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_roux_blond",
+      "name": "Roux Blond",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_duxelles",
+      "name": "Duxelles",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_beurre_clarifie",
+      "name": "Beurre Clarifié (Clarified Butter)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_beurre_maitre_dhotel",
+      "name": "Beurre Maître d'Hôtel",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_persillade",
+      "name": "Persillade",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_mayonnaise",
+      "name": "Mayonnaise",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_aioli",
+      "name": "Aïoli",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_vinaigrette_a_la_moutarde",
+      "name": "Vinaigrette à la Moutarde",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_creme_fraiche_maison",
+      "name": "Crème Fraîche Maison",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_croutons",
+      "name": "Croûtons",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_base_oignons_confits",
+      "name": "Oignons Confits (Slow-Cooked Onions)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_pate_de_campagne",
+      "name": "Pâté de Campagne",
+      "shelf": "Starters & Charcuterie",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_rillettes_de_porc",
+      "name": "Rillettes de Porc",
+      "shelf": "Starters & Charcuterie",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_mousse_de_foies_de_volaille",
+      "name": "Mousse de Foies de Volaille",
+      "shelf": "Starters & Charcuterie",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_tapenade",
+      "name": "Tapenade",
+      "shelf": "Starters & Charcuterie",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_gougeres",
+      "name": "Gougères",
+      "shelf": "Starters & Charcuterie",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_oeufs_mimosa",
+      "name": "Œufs Mimosa",
+      "shelf": "Starters & Charcuterie",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_escargots_a_la_bourguignonne",
+      "name": "Escargots à la Bourguignonne",
+      "shelf": "Starters & Charcuterie",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_jambon_persille",
+      "name": "Jambon Persillé",
+      "shelf": "Starters & Charcuterie",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_soupe_a_loignon_gratinee",
+      "name": "Soupe à l'Oignon Gratinée",
+      "shelf": "Soups",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_vichyssoise",
+      "name": "Vichyssoise",
+      "shelf": "Soups",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_potage_parmentier",
+      "name": "Potage Parmentier",
+      "shelf": "Soups",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_bouillabaisse",
+      "name": "Bouillabaisse",
+      "shelf": "Soups",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_bisque_de_homard",
+      "name": "Bisque de Homard",
+      "shelf": "Soups",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_soupe_au_pistou",
+      "name": "Soupe au Pistou",
+      "shelf": "Soups",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_veloute_de_champignons",
+      "name": "Velouté de Champignons",
+      "shelf": "Soups",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_garbure",
+      "name": "Garbure",
+      "shelf": "Soups",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_potage_saint_germain",
+      "name": "Potage Saint-Germain",
+      "shelf": "Soups",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_creme_du_barry",
+      "name": "Crème Du Barry",
+      "shelf": "Soups",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_quiche_lorraine",
+      "name": "Quiche Lorraine",
+      "shelf": "Eggs, Crêpes & Savory Tarts",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_omelette_aux_fines_herbes",
+      "name": "Omelette aux Fines Herbes",
+      "shelf": "Eggs, Crêpes & Savory Tarts",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_oeufs_en_cocotte",
+      "name": "Œufs en Cocotte",
+      "shelf": "Eggs, Crêpes & Savory Tarts",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_galette_complete",
+      "name": "Galette Complète (Buckwheat Crêpe with Ham, Egg and Cheese)",
+      "shelf": "Eggs, Crêpes & Savory Tarts",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_souffle_au_fromage",
+      "name": "Soufflé au Fromage",
+      "shelf": "Eggs, Crêpes & Savory Tarts",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_croque_monsieur",
+      "name": "Croque-Monsieur",
+      "shelf": "Eggs, Crêpes & Savory Tarts",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_croque_madame",
+      "name": "Croque-Madame",
+      "shelf": "Eggs, Crêpes & Savory Tarts",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_tarte_a_loignon",
+      "name": "Tarte à l'Oignon",
+      "shelf": "Eggs, Crêpes & Savory Tarts",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_tarte_flambee",
+      "name": "Tarte Flambée (Flammekueche)",
+      "shelf": "Eggs, Crêpes & Savory Tarts",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_oeufs_en_meurette",
+      "name": "Œufs en Meurette",
+      "shelf": "Eggs, Crêpes & Savory Tarts",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_piperade",
+      "name": "Pipérade",
+      "shelf": "Eggs, Crêpes & Savory Tarts",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_sole_meuniere",
+      "name": "Sole Meunière",
+      "shelf": "Fish & Shellfish",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_moules_marinieres",
+      "name": "Moules Marinières",
+      "shelf": "Fish & Shellfish",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_coquilles_saint_jacques",
+      "name": "Coquilles Saint-Jacques",
+      "shelf": "Fish & Shellfish",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_brandade_de_morue",
+      "name": "Brandade de Morue",
+      "shelf": "Fish & Shellfish",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_truite_aux_amandes",
+      "name": "Truite aux Amandes",
+      "shelf": "Fish & Shellfish",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_lotte_a_larmoricaine",
+      "name": "Lotte à l'Armoricaine",
+      "shelf": "Fish & Shellfish",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_raie_au_beurre_noir",
+      "name": "Raie au Beurre Noir",
+      "shelf": "Fish & Shellfish",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_quenelles_de_brochet",
+      "name": "Quenelles de Brochet",
+      "shelf": "Fish & Shellfish",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_saumon_en_papillote",
+      "name": "Saumon en Papillote",
+      "shelf": "Fish & Shellfish",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_thon_basquaise",
+      "name": "Thon Basquaise",
+      "shelf": "Fish & Shellfish",
+      "file": "a_bases_starters_soups_eggs_fish.json"
+    },
+    {
+      "id": "curated_fr_coq_au_vin",
+      "name": "Coq au Vin",
+      "shelf": "Poultry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_poulet_basquaise",
+      "name": "Poulet Basquaise",
+      "shelf": "Poultry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_poulet_roti",
+      "name": "Poulet Rôti",
+      "shelf": "Poultry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_poulet_vallee_dauge",
+      "name": "Poulet Vallée d'Auge",
+      "shelf": "Poultry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_confit_de_canard",
+      "name": "Confit de Canard",
+      "shelf": "Poultry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_magret_de_canard",
+      "name": "Magret de Canard",
+      "shelf": "Poultry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_canard_a_lorange",
+      "name": "Canard à l'Orange",
+      "shelf": "Poultry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_poulet_chasseur",
+      "name": "Poulet Chasseur",
+      "shelf": "Poultry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_boeuf_bourguignon",
+      "name": "Bœuf Bourguignon",
+      "shelf": "Meats & Stews",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_blanquette_de_veau",
+      "name": "Blanquette de Veau",
+      "shelf": "Meats & Stews",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_pot_au_feu",
+      "name": "Pot-au-Feu",
+      "shelf": "Meats & Stews",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_daube_provencale",
+      "name": "Daube Provençale",
+      "shelf": "Meats & Stews",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_cassoulet",
+      "name": "Cassoulet",
+      "shelf": "Meats & Stews",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_navarin_dagneau",
+      "name": "Navarin d'Agneau",
+      "shelf": "Meats & Stews",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_steak_au_poivre",
+      "name": "Steak au Poivre",
+      "shelf": "Meats & Stews",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_carbonnade_flamande",
+      "name": "Carbonnade Flamande",
+      "shelf": "Meats & Stews",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_hachis_parmentier",
+      "name": "Hachis Parmentier",
+      "shelf": "Meats & Stews",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_gigot_dagneau",
+      "name": "Gigot d'Agneau",
+      "shelf": "Meats & Stews",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_choucroute_garnie",
+      "name": "Choucroute Garnie",
+      "shelf": "Meats & Stews",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_tartiflette",
+      "name": "Tartiflette",
+      "shelf": "Meats & Stews",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_petit_sale_aux_lentilles",
+      "name": "Petit Salé aux Lentilles",
+      "shelf": "Meats & Stews",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_lapin_a_la_moutarde",
+      "name": "Lapin à la Moutarde",
+      "shelf": "Meats & Stews",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_filet_mignon_de_porc_a_la",
+      "name": "Filet Mignon de Porc à la Normande",
+      "shelf": "Meats & Stews",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_ratatouille",
+      "name": "Ratatouille",
+      "shelf": "Vegetables & Sides",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_gratin_dauphinois",
+      "name": "Gratin Dauphinois",
+      "shelf": "Vegetables & Sides",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_puree_de_pommes_de_terre",
+      "name": "Purée de Pommes de Terre",
+      "shelf": "Vegetables & Sides",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_pommes_anna",
+      "name": "Pommes Anna",
+      "shelf": "Vegetables & Sides",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_pommes_sarladaises",
+      "name": "Pommes Sarladaises",
+      "shelf": "Vegetables & Sides",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_pommes_frites",
+      "name": "Pommes Frites",
+      "shelf": "Vegetables & Sides",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_petits_pois_a_la_francaise",
+      "name": "Petits Pois à la Française",
+      "shelf": "Vegetables & Sides",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_carottes_vichy",
+      "name": "Carottes Vichy",
+      "shelf": "Vegetables & Sides",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_endives_braisees",
+      "name": "Endives Braisées",
+      "shelf": "Vegetables & Sides",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_lentilles_du_puy",
+      "name": "Lentilles du Puy",
+      "shelf": "Vegetables & Sides",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_flageolets",
+      "name": "Flageolets",
+      "shelf": "Vegetables & Sides",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_tian_provencal",
+      "name": "Tian Provençal",
+      "shelf": "Vegetables & Sides",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_champignons_a_la_provencale",
+      "name": "Champignons à la Provençale",
+      "shelf": "Vegetables & Sides",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_aligot",
+      "name": "Aligot",
+      "shelf": "Vegetables & Sides",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_epinards_a_la_creme",
+      "name": "Épinards à la Crème",
+      "shelf": "Vegetables & Sides",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_salade_nicoise",
+      "name": "Salade Niçoise",
+      "shelf": "Salads",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_salade_lyonnaise",
+      "name": "Salade Lyonnaise",
+      "shelf": "Salads",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_celeri_remoulade",
+      "name": "Céleri Rémoulade",
+      "shelf": "Salads",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_carottes_rapees",
+      "name": "Carottes Râpées",
+      "shelf": "Salads",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_salade_de_chevre_chaud",
+      "name": "Salade de Chèvre Chaud",
+      "shelf": "Salads",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_salade_de_lentilles",
+      "name": "Salade de Lentilles",
+      "shelf": "Salads",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_baguette",
+      "name": "Baguette",
+      "shelf": "Breads & Viennoiserie",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_pain_de_campagne",
+      "name": "Pain de Campagne",
+      "shelf": "Breads & Viennoiserie",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_brioche",
+      "name": "Brioche",
+      "shelf": "Breads & Viennoiserie",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_croissants",
+      "name": "Croissants",
+      "shelf": "Breads & Viennoiserie",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_pain_au_chocolat",
+      "name": "Pain au Chocolat",
+      "shelf": "Breads & Viennoiserie",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_fougasse",
+      "name": "Fougasse",
+      "shelf": "Breads & Viennoiserie",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_pain_depices",
+      "name": "Pain d'Épices",
+      "shelf": "Breads & Viennoiserie",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_pissaladiere",
+      "name": "Pissaladière",
+      "shelf": "Breads & Viennoiserie",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_pain_de_mie",
+      "name": "Pain de Mie",
+      "shelf": "Breads & Viennoiserie",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_creme_brulee",
+      "name": "Crème Brûlée",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_mousse_au_chocolat",
+      "name": "Mousse au Chocolat",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_tarte_tatin",
+      "name": "Tarte Tatin",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_tarte_fine_aux_pommes",
+      "name": "Tarte Fine aux Pommes",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_clafoutis_aux_cerises",
+      "name": "Clafoutis aux Cerises",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_crepes_suzette",
+      "name": "Crêpes Suzette",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_crepes_au_sucre",
+      "name": "Crêpes au Sucre",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_profiteroles",
+      "name": "Profiteroles",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_eclairs_au_chocolat",
+      "name": "Éclairs au Chocolat",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_paris_brest",
+      "name": "Paris-Brest",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_madeleines",
+      "name": "Madeleines",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_financiers",
+      "name": "Financiers",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_ile_flottante",
+      "name": "Île Flottante",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_far_breton",
+      "name": "Far Breton",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_tarte_au_citron",
+      "name": "Tarte au Citron",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_macarons",
+      "name": "Macarons",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_creme_caramel",
+      "name": "Crème Caramel",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_mille_feuille",
+      "name": "Mille-Feuille",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_tarte_aux_fraises",
+      "name": "Tarte aux Fraises",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_caneles",
+      "name": "Canelés",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_poires_belle_helene",
+      "name": "Poires Belle Hélène",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_gateau_basque",
+      "name": "Gâteau Basque",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_kouign_amann",
+      "name": "Kouign-Amann",
+      "shelf": "Desserts & Pastry",
+      "file": "b_poultry_meats_sides_breads_desserts.json"
+    }
+  ]
+}

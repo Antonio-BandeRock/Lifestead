@@ -1,0 +1,659 @@
+{
+  "_comment": "Every recipe to write: id, name as it should appear (a writer may correct spelling or accents but keeps the id), its shelf (dishGroup), and the file that writes it.",
+  "dishes": [
+    {
+      "id": "curated_th_base_prik_gaeng_kiew_wan",
+      "name": "Prik Gaeng Kiew Wan (Green Curry Paste)",
+      "shelf": "Bases: Curry Pastes",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_prik_gaeng_phed",
+      "name": "Prik Gaeng Phed (Red Curry Paste)",
+      "shelf": "Bases: Curry Pastes",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_prik_gaeng_kari",
+      "name": "Prik Gaeng Kari (Yellow Curry Paste)",
+      "shelf": "Bases: Curry Pastes",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_prik_gaeng_massaman",
+      "name": "Prik Gaeng Massaman (Massaman Curry Paste)",
+      "shelf": "Bases: Curry Pastes",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_prik_gaeng_panang",
+      "name": "Prik Gaeng Panang (Panang Curry Paste)",
+      "shelf": "Bases: Curry Pastes",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_prik_gaeng_khao_soi",
+      "name": "Prik Gaeng Khao Soi (Khao Soi Curry Paste)",
+      "shelf": "Bases: Curry Pastes",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_prik_gaeng_som",
+      "name": "Prik Gaeng Som (Sour Curry Paste)",
+      "shelf": "Bases: Curry Pastes",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_prik_gaeng_pa",
+      "name": "Prik Gaeng Pa (Jungle Curry Paste)",
+      "shelf": "Bases: Curry Pastes",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_prik_gaeng_hang_lay",
+      "name": "Prik Gaeng Hang Lay (Hang Lay Curry Paste)",
+      "shelf": "Bases: Curry Pastes",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_nam_prik_pao",
+      "name": "Nam Prik Pao (Roasted Chili Jam)",
+      "shelf": "Bases: Sauces, Dips & Stocks",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_nam_pla_prik",
+      "name": "Nam Pla Prik (Fish Sauce with Chilies)",
+      "shelf": "Bases: Sauces, Dips & Stocks",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_nam_jim_jaew",
+      "name": "Nam Jim Jaew (Isan Dipping Sauce)",
+      "shelf": "Bases: Sauces, Dips & Stocks",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_nam_jim_seafood",
+      "name": "Nam Jim Seafood (Seafood Dipping Sauce)",
+      "shelf": "Bases: Sauces, Dips & Stocks",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_nam_jim_kai",
+      "name": "Nam Jim Kai (Sweet Chili Sauce)",
+      "shelf": "Bases: Sauces, Dips & Stocks",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_nam_jim_satay",
+      "name": "Nam Jim Satay (Peanut Sauce)",
+      "shelf": "Bases: Sauces, Dips & Stocks",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_nam_prik_noom",
+      "name": "Nam Prik Noom (Green Chili Dip)",
+      "shelf": "Bases: Sauces, Dips & Stocks",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_nam_prik_ong",
+      "name": "Nam Prik Ong (Northern Tomato and Pork Dip)",
+      "shelf": "Bases: Sauces, Dips & Stocks",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_ajad",
+      "name": "Ajad (Cucumber Relish)",
+      "shelf": "Bases: Sauces, Dips & Stocks",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_nam_soup_gai",
+      "name": "Nam Soup Gai (Thai Chicken Stock)",
+      "shelf": "Bases: Sauces, Dips & Stocks",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_nam_makham",
+      "name": "Nam Makham (Tamarind Water)",
+      "shelf": "Bases: Sauces, Dips & Stocks",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_khao_suay",
+      "name": "Khao Suay (Steamed Jasmine Rice)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_khao_niao",
+      "name": "Khao Niao (Sticky Rice)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_khao_khua",
+      "name": "Khao Khua (Toasted Rice Powder)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_prik_pon",
+      "name": "Prik Pon (Roasted Chili Flakes)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_hom_jiew",
+      "name": "Hom Jiew (Fried Shallots)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_kati",
+      "name": "Kati (Fresh Coconut Milk)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_base_moo_krob",
+      "name": "Moo Krob (Crispy Pork Belly)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_gaeng_kiew_wan_gai",
+      "name": "Gaeng Kiew Wan Gai (Green Curry with Chicken)",
+      "shelf": "Curries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_gaeng_phed_ped_yang",
+      "name": "Gaeng Phed Ped Yang (Red Curry with Roast Duck)",
+      "shelf": "Curries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_gaeng_massaman_neua",
+      "name": "Gaeng Massaman Neua (Massaman Beef Curry)",
+      "shelf": "Curries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_panang_neua",
+      "name": "Panang Neua (Panang Beef Curry)",
+      "shelf": "Curries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_gaeng_kari_gai",
+      "name": "Gaeng Kari Gai (Yellow Chicken Curry)",
+      "shelf": "Curries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_gaeng_som_goong",
+      "name": "Gaeng Som Goong (Sour Curry with Shrimp)",
+      "shelf": "Curries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_gaeng_pa",
+      "name": "Gaeng Pa (Jungle Curry)",
+      "shelf": "Curries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_gaeng_hang_lay_moo",
+      "name": "Gaeng Hang Lay Moo (Northern Pork Curry)",
+      "shelf": "Curries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_choo_chee_pla",
+      "name": "Choo Chee Pla (Choo Chee Fish Curry)",
+      "shelf": "Curries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_gaeng_phed_fak_thong",
+      "name": "Gaeng Phed Fak Thong (Red Curry with Pumpkin)",
+      "shelf": "Curries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_gaeng_tai_pla",
+      "name": "Gaeng Tai Pla (Southern Fish Organ Curry)",
+      "shelf": "Curries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_tom_yum_goong",
+      "name": "Tom Yum Goong (Hot and Sour Shrimp Soup)",
+      "shelf": "Soups",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_tom_kha_gai",
+      "name": "Tom Kha Gai (Coconut Chicken Soup)",
+      "shelf": "Soups",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_tom_saep",
+      "name": "Tom Saep (Isan Hot and Sour Pork Soup)",
+      "shelf": "Soups",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_gaeng_jued_tao_hoo",
+      "name": "Gaeng Jued Tao Hoo (Clear Soup with Tofu)",
+      "shelf": "Soups",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_tom_kha_hed",
+      "name": "Tom Kha Hed (Coconut Mushroom Soup)",
+      "shelf": "Soups",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_poh_taek",
+      "name": "Poh Taek (Seafood Hot and Sour Soup)",
+      "shelf": "Soups",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_khao_tom",
+      "name": "Khao Tom (Rice Soup)",
+      "shelf": "Soups",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_pad_kra_pao",
+      "name": "Pad Kra Pao (Holy Basil Stir-Fry)",
+      "shelf": "Stir-Fries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_pad_pak_ruam",
+      "name": "Pad Pak Ruam (Mixed Vegetable Stir-Fry)",
+      "shelf": "Stir-Fries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_pad_prik_khing",
+      "name": "Pad Prik Khing (Red Curry Paste Stir-Fry with Long Beans)",
+      "shelf": "Stir-Fries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_gai_pad_med_mamuang",
+      "name": "Gai Pad Med Mamuang (Cashew Chicken)",
+      "shelf": "Stir-Fries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_pad_pak_boong",
+      "name": "Pad Pak Boong (Stir-Fried Morning Glory)",
+      "shelf": "Stir-Fries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_pad_cha_talay",
+      "name": "Pad Cha Talay (Spicy Seafood Stir-Fry)",
+      "shelf": "Stir-Fries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_gai_pad_khing",
+      "name": "Gai Pad Khing (Ginger Chicken)",
+      "shelf": "Stir-Fries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_moo_kratiem",
+      "name": "Moo Kratiem (Garlic Pepper Pork)",
+      "shelf": "Stir-Fries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_pad_kana_moo_krob",
+      "name": "Pad Kana Moo Krob (Chinese Broccoli with Crispy Pork)",
+      "shelf": "Stir-Fries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_pad_prik_gaeng_moo",
+      "name": "Pad Prik Gaeng Moo (Pork Stir-Fried with Curry Paste)",
+      "shelf": "Stir-Fries",
+      "file": "a_bases_curries_soups_stirfries.json"
+    },
+    {
+      "id": "curated_th_som_tam_thai",
+      "name": "Som Tam Thai (Green Papaya Salad)",
+      "shelf": "Salads",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_som_tam_lao",
+      "name": "Som Tam Lao (Isan Papaya Salad with Pla Ra)",
+      "shelf": "Salads",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_larb_moo",
+      "name": "Larb Moo (Isan Minced Pork Salad)",
+      "shelf": "Salads",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_nam_tok_neua",
+      "name": "Nam Tok Neua (Grilled Beef Salad)",
+      "shelf": "Salads",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_yum_woon_sen",
+      "name": "Yum Woon Sen (Glass Noodle Salad)",
+      "shelf": "Salads",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_yum_neua",
+      "name": "Yum Neua (Beef Salad)",
+      "shelf": "Salads",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_yum_pla_duk_fu",
+      "name": "Yum Pla Duk Fu (Crispy Catfish Salad)",
+      "shelf": "Salads",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_yum_mamuang",
+      "name": "Yum Mamuang (Green Mango Salad)",
+      "shelf": "Salads",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_yum_talay",
+      "name": "Yum Talay (Seafood Salad)",
+      "shelf": "Salads",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_plaa_goong",
+      "name": "Plaa Goong (Shrimp Salad)",
+      "shelf": "Salads",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_yum_som_o",
+      "name": "Yum Som O (Pomelo Salad)",
+      "shelf": "Salads",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_pad_thai",
+      "name": "Pad Thai",
+      "shelf": "Noodles",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_pad_see_ew",
+      "name": "Pad See Ew",
+      "shelf": "Noodles",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_rad_na",
+      "name": "Rad Na (Noodles in Gravy)",
+      "shelf": "Noodles",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_pad_kee_mao",
+      "name": "Pad Kee Mao (Drunken Noodles)",
+      "shelf": "Noodles",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_khao_soi_gai",
+      "name": "Khao Soi Gai (Northern Curry Noodle Soup)",
+      "shelf": "Noodles",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_kuay_teow_reua",
+      "name": "Kuay Teow Reua (Boat Noodles)",
+      "shelf": "Noodles",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_kuay_teow_tom_yum",
+      "name": "Kuay Teow Tom Yum (Tom Yum Noodle Soup)",
+      "shelf": "Noodles",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_kanom_jeen_nam_ya",
+      "name": "Kanom Jeen Nam Ya (Rice Noodles with Fish Curry)",
+      "shelf": "Noodles",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_guay_teow_kua_gai",
+      "name": "Guay Teow Kua Gai (Stir-Fried Noodles with Chicken)",
+      "shelf": "Noodles",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_kanom_jeen_nam_ngiao",
+      "name": "Kanom Jeen Nam Ngiao (Northern Pork and Tomato Noodles)",
+      "shelf": "Noodles",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_khao_pad",
+      "name": "Khao Pad (Thai Fried Rice)",
+      "shelf": "Rice Dishes",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_khao_man_gai",
+      "name": "Khao Man Gai (Chicken and Rice)",
+      "shelf": "Rice Dishes",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_khao_moo_daeng",
+      "name": "Khao Moo Daeng (Red Pork on Rice)",
+      "shelf": "Rice Dishes",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_khao_kha_moo",
+      "name": "Khao Kha Moo (Stewed Pork Leg on Rice)",
+      "shelf": "Rice Dishes",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_khao_pad_sapparot",
+      "name": "Khao Pad Sapparot (Pineapple Fried Rice)",
+      "shelf": "Rice Dishes",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_khao_mok_gai",
+      "name": "Khao Mok Gai (Thai Chicken Biryani)",
+      "shelf": "Rice Dishes",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_jok",
+      "name": "Jok (Rice Porridge)",
+      "shelf": "Rice Dishes",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_khao_yum",
+      "name": "Khao Yum (Southern Rice Salad)",
+      "shelf": "Rice Dishes",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_gai_yang",
+      "name": "Gai Yang (Isan Grilled Chicken)",
+      "shelf": "Grilled & Fried",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_moo_ping",
+      "name": "Moo Ping (Grilled Pork Skewers)",
+      "shelf": "Grilled & Fried",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_satay_gai",
+      "name": "Satay Gai (Chicken Satay)",
+      "shelf": "Grilled & Fried",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_kor_moo_yang",
+      "name": "Kor Moo Yang (Grilled Pork Neck)",
+      "shelf": "Grilled & Fried",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_tod_mun_pla",
+      "name": "Tod Mun Pla (Fish Cakes)",
+      "shelf": "Grilled & Fried",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_seua_rong_hai",
+      "name": "Seua Rong Hai (Crying Tiger Steak)",
+      "shelf": "Grilled & Fried",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_pla_rad_prik",
+      "name": "Pla Rad Prik (Fried Fish with Chili Sauce)",
+      "shelf": "Grilled & Fried",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_kai_jeow",
+      "name": "Kai Jeow (Thai Omelette)",
+      "shelf": "Grilled & Fried",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_pla_pao",
+      "name": "Pla Pao (Salt-Crusted Grilled Fish)",
+      "shelf": "Grilled & Fried",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_gai_tod_hat_yai",
+      "name": "Gai Tod Hat Yai (Hat Yai Fried Chicken)",
+      "shelf": "Grilled & Fried",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_goong_ob_woon_sen",
+      "name": "Goong Ob Woon Sen (Baked Shrimp with Glass Noodles)",
+      "shelf": "Grilled & Fried",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_moo_tod_kratiem",
+      "name": "Moo Tod Kratiem (Garlic Fried Pork)",
+      "shelf": "Grilled & Fried",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_kai_look_keuy",
+      "name": "Kai Look Keuy (Son-in-Law Eggs)",
+      "shelf": "Grilled & Fried",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_khao_niao_mamuang",
+      "name": "Khao Niao Mamuang (Mango Sticky Rice)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_khanom_krok",
+      "name": "Khanom Krok (Coconut Rice Pancakes)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_tub_tim_grob",
+      "name": "Tub Tim Grob (Red Rubies in Coconut Milk)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_bua_loy",
+      "name": "Bua Loy (Rice Balls in Coconut Milk)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_kluay_buat_chee",
+      "name": "Kluay Buat Chee (Bananas in Coconut Milk)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_sangkaya_fak_thong",
+      "name": "Sangkaya Fak Thong (Pumpkin Custard)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_khanom_chan",
+      "name": "Khanom Chan (Layered Pandan Cake)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_cha_yen",
+      "name": "Cha Yen (Thai Iced Tea)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_oliang",
+      "name": "Oliang (Thai Iced Coffee)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_cha_manao",
+      "name": "Cha Manao (Thai Lime Tea)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_nam_takrai",
+      "name": "Nam Takrai (Lemongrass Drink)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_khanom_tako",
+      "name": "Khanom Tako (Coconut Pandan Cups)",
+      "shelf": "Sweets & Drinks",
+      "file": "b_salads_noodles_rice_grilled_sweets.json"
+    }
+  ]
+}

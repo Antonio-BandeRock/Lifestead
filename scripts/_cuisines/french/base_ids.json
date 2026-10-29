@@ -1,0 +1,160 @@
+{
+  "_comment": "The french made-first recipes, fixed before any dish was written so both files agree on ids. a_bases_starters_soups_eggs_fish.json writes every one of these; dishes in either file point at them through components. A dish needing a base not listed here writes it itself under curated_fr_base_<slug>.",
+  "bases": [
+    {
+      "id": "curated_fr_base_fond_blanc_de_volaille",
+      "name": "Fond Blanc de Volaille (White Chicken Stock)",
+      "shelf": "Bases: Stocks & Mother Sauces"
+    },
+    {
+      "id": "curated_fr_base_fond_brun_de_veau",
+      "name": "Fond Brun de Veau (Brown Veal Stock)",
+      "shelf": "Bases: Stocks & Mother Sauces"
+    },
+    {
+      "id": "curated_fr_base_fumet_de_poisson",
+      "name": "Fumet de Poisson (Fish Stock)",
+      "shelf": "Bases: Stocks & Mother Sauces"
+    },
+    {
+      "id": "curated_fr_base_court_bouillon",
+      "name": "Court-Bouillon",
+      "shelf": "Bases: Stocks & Mother Sauces"
+    },
+    {
+      "id": "curated_fr_base_sauce_bechamel",
+      "name": "Sauce Béchamel",
+      "shelf": "Bases: Stocks & Mother Sauces"
+    },
+    {
+      "id": "curated_fr_base_sauce_veloute",
+      "name": "Sauce Velouté",
+      "shelf": "Bases: Stocks & Mother Sauces"
+    },
+    {
+      "id": "curated_fr_base_sauce_espagnole",
+      "name": "Sauce Espagnole",
+      "shelf": "Bases: Stocks & Mother Sauces"
+    },
+    {
+      "id": "curated_fr_base_demi_glace",
+      "name": "Demi-Glace",
+      "shelf": "Bases: Stocks & Mother Sauces"
+    },
+    {
+      "id": "curated_fr_base_sauce_tomate",
+      "name": "Sauce Tomate",
+      "shelf": "Bases: Stocks & Mother Sauces"
+    },
+    {
+      "id": "curated_fr_base_sauce_hollandaise",
+      "name": "Sauce Hollandaise",
+      "shelf": "Bases: Stocks & Mother Sauces"
+    },
+    {
+      "id": "curated_fr_base_sauce_bearnaise",
+      "name": "Sauce Béarnaise",
+      "shelf": "Bases: Stocks & Mother Sauces"
+    },
+    {
+      "id": "curated_fr_base_beurre_blanc",
+      "name": "Beurre Blanc",
+      "shelf": "Bases: Stocks & Mother Sauces"
+    },
+    {
+      "id": "curated_fr_base_sauce_mornay",
+      "name": "Sauce Mornay",
+      "shelf": "Bases: Stocks & Mother Sauces"
+    },
+    {
+      "id": "curated_fr_base_pate_brisee",
+      "name": "Pâte Brisée (Shortcrust)",
+      "shelf": "Bases: Doughs & Pastry"
+    },
+    {
+      "id": "curated_fr_base_pate_sucree",
+      "name": "Pâte Sucrée (Sweet Tart Pastry)",
+      "shelf": "Bases: Doughs & Pastry"
+    },
+    {
+      "id": "curated_fr_base_pate_feuilletee",
+      "name": "Pâte Feuilletée (Puff Pastry)",
+      "shelf": "Bases: Doughs & Pastry"
+    },
+    {
+      "id": "curated_fr_base_pate_a_choux",
+      "name": "Pâte à Choux",
+      "shelf": "Bases: Doughs & Pastry"
+    },
+    {
+      "id": "curated_fr_base_pate_a_crepes",
+      "name": "Pâte à Crêpes (Crêpe Batter)",
+      "shelf": "Bases: Doughs & Pastry"
+    },
+    {
+      "id": "curated_fr_base_creme_patissiere",
+      "name": "Crème Pâtissière (Pastry Cream)",
+      "shelf": "Bases: Doughs & Pastry"
+    },
+    {
+      "id": "curated_fr_base_creme_anglaise",
+      "name": "Crème Anglaise",
+      "shelf": "Bases: Doughs & Pastry"
+    },
+    {
+      "id": "curated_fr_base_roux_blond",
+      "name": "Roux Blond",
+      "shelf": "Bases: Pantry & Building Blocks"
+    },
+    {
+      "id": "curated_fr_base_duxelles",
+      "name": "Duxelles",
+      "shelf": "Bases: Pantry & Building Blocks"
+    },
+    {
+      "id": "curated_fr_base_beurre_clarifie",
+      "name": "Beurre Clarifié (Clarified Butter)",
+      "shelf": "Bases: Pantry & Building Blocks"
+    },
+    {
+      "id": "curated_fr_base_beurre_maitre_dhotel",
+      "name": "Beurre Maître d'Hôtel",
+      "shelf": "Bases: Pantry & Building Blocks"
+    },
+    {
+      "id": "curated_fr_base_persillade",
+      "name": "Persillade",
+      "shelf": "Bases: Pantry & Building Blocks"
+    },
+    {
+      "id": "curated_fr_base_mayonnaise",
+      "name": "Mayonnaise",
+      "shelf": "Bases: Pantry & Building Blocks"
+    },
+    {
+      "id": "curated_fr_base_aioli",
+      "name": "Aïoli",
+      "shelf": "Bases: Pantry & Building Blocks"
+    },
+    {
+      "id": "curated_fr_base_vinaigrette_a_la_moutarde",
+      "name": "Vinaigrette à la Moutarde",
+      "shelf": "Bases: Pantry & Building Blocks"
+    },
+    {
+      "id": "curated_fr_base_creme_fraiche_maison",
+      "name": "Crème Fraîche Maison",
+      "shelf": "Bases: Pantry & Building Blocks"
+    },
+    {
+      "id": "curated_fr_base_croutons",
+      "name": "Croûtons",
+      "shelf": "Bases: Pantry & Building Blocks"
+    },
+    {
+      "id": "curated_fr_base_oignons_confits",
+      "name": "Oignons Confits (Slow-Cooked Onions)",
+      "shelf": "Bases: Pantry & Building Blocks"
+    }
+  ]
+}

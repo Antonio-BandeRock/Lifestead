@@ -1,0 +1,115 @@
+{
+  "_comment": "The chinese made-first recipes, fixed before any dish was written so both files agree on ids. a_bases_dimsum_noodles_rice_soups.json writes every one of these; dishes in either file point at them through components. A dish needing a base not listed here writes it itself under curated_cn_base_<slug>.",
+  "bases": [
+    {
+      "id": "curated_cn_base_qing_tang",
+      "name": "Qing Tang (Clear Chicken Stock)",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_cn_base_pork_bone_stock",
+      "name": "Pork Bone Stock",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_cn_base_lu_shui",
+      "name": "Lu Shui (Master Stock)",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_cn_base_hong_you",
+      "name": "Hong You (Sichuan Chili Oil)",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_cn_base_ginger_scallion_sauce",
+      "name": "Ginger Scallion Sauce",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_cn_base_dumpling_dipping_sauce",
+      "name": "Dumpling Dipping Sauce",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_cn_base_sweet_and_sour_sauce",
+      "name": "Sweet and Sour Sauce",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_cn_base_black_bean_garlic_sauce",
+      "name": "Black Bean Garlic Sauce",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_cn_base_xo_sauce",
+      "name": "XO Sauce",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_cn_base_jiaozi_wrappers",
+      "name": "Jiaozi Wrappers (Dumpling Dough)",
+      "shelf": "Bases: Doughs & Wrappers"
+    },
+    {
+      "id": "curated_cn_base_wonton_wrappers",
+      "name": "Wonton Wrappers",
+      "shelf": "Bases: Doughs & Wrappers"
+    },
+    {
+      "id": "curated_cn_base_bao_dough",
+      "name": "Bao Dough (Steamed Bun Dough)",
+      "shelf": "Bases: Doughs & Wrappers"
+    },
+    {
+      "id": "curated_cn_base_har_gow_wrapper_dough",
+      "name": "Har Gow Wrapper Dough",
+      "shelf": "Bases: Doughs & Wrappers"
+    },
+    {
+      "id": "curated_cn_base_hand_pulled_noodle_dough",
+      "name": "Hand-Pulled Noodle Dough",
+      "shelf": "Bases: Doughs & Wrappers"
+    },
+    {
+      "id": "curated_cn_base_spring_roll_wrappers",
+      "name": "Spring Roll Wrappers",
+      "shelf": "Bases: Doughs & Wrappers"
+    },
+    {
+      "id": "curated_cn_base_steamed_jasmine_rice",
+      "name": "Steamed Jasmine Rice",
+      "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_steamed_glutinous_rice",
+      "name": "Steamed Glutinous Rice",
+      "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_plain_congee",
+      "name": "Plain Congee (Jook)",
+      "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_pao_cai",
+      "name": "Pao Cai (Sichuan Pickled Vegetables)",
+      "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_five_spice_powder",
+      "name": "Five-Spice Powder",
+      "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_sichuan_pepper_salt",
+      "name": "Sichuan Pepper Salt",
+      "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_char_siu",
+      "name": "Char Siu (Cantonese Barbecued Pork)",
+      "shelf": "Bases: Rice & Pantry"
+    }
+  ]
+}

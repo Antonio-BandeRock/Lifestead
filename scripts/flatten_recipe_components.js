@@ -25,7 +25,7 @@
 // pipeline reads their contains.
 //
 // Run: node scripts/flatten_recipe_components.js
-// Also required from scripts/add_mexican_recipes.js.
+// Also required from scripts/add_cuisine_recipes.js.
 const path = require('path');
 const { DatabaseSync } = require('node:sqlite');
 
