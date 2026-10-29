@@ -21,24 +21,31 @@ export type TutorialState = {
   tabs: TabTutorial[];
   resume: TutorialRun | null;
   doneKeys: Set<string>;
+  // The day each how-to was last gone through, for the date on a card.
+  doneOn: Map<string, string>;
 };
 
 export async function loadTutorialState(): Promise<TutorialState> {
   const db = await getDatabase();
-  const rows = await db.getAllAsync<{ question_key: string; answer: string | null }>(
-    `SELECT question_key, answer FROM your_story_answers WHERE question_key = 'startTab' OR question_key LIKE 'tutorial%'`,
+  const rows = await db.getAllAsync<{ question_key: string; answered_on: string | null; answer: string | null }>(
+    `SELECT question_key, answered_on, answer FROM your_story_answers WHERE question_key = 'startTab' OR question_key LIKE 'tutorial%'`,
   );
   let start: string | null = null;
   let resume: string | null = null;
   const doneKeys = new Set<string>();
+  const doneOn = new Map<string, string>();
   for (const row of rows) {
     if (row.question_key === 'startTab') start = row.answer;
     else if (row.question_key === TUTORIAL_RESUME_KEY) resume = row.answer;
-    else if (row.question_key.startsWith(TUTORIAL_DONE_PREFIX)) doneKeys.add(row.question_key.slice(TUTORIAL_DONE_PREFIX.length));
+    else if (row.question_key.startsWith(TUTORIAL_DONE_PREFIX)) {
+      const key = row.question_key.slice(TUTORIAL_DONE_PREFIX.length);
+      doneKeys.add(key);
+      if (row.answered_on) doneOn.set(key, row.answered_on);
+    }
   }
   const tabs = buildTutorials(isTourPath(start) ? start : null);
   const known = howToByKey(tabs);
-  return { tabs, resume: runFromResume(resume, (key) => known.has(key)), doneKeys };
+  return { tabs, resume: runFromResume(resume, (key) => known.has(key)), doneKeys, doneOn };
 }
 
 /** Start a run, ending any guide walk first so only one strip shows. */

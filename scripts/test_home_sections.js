@@ -31,6 +31,7 @@ const {
   groupHomeSectionsForDisplay,
   homeGroupIdOf,
   HOME_SECTION_TAB_PATH,
+  TUTORIAL_SECTION_PATH,
   reorderHomeGroups,
   reorderWithinHomeGroup,
   followNewMenuOrder,
@@ -167,7 +168,8 @@ check('low stimulation sits in the profile group', groupHomeSectionsForDisplay([
 // apart, and left again the same day by direct correction: "they need to
 // be out on their own together like they were before, and they should be
 // listed in a group called Digest."
-check('the home group holds only the today card', Object.keys(HOME_SECTION_TAB_PATH).filter((k) => HOME_SECTION_TAB_PATH[k] === '/'), ['today']);
+check('the home group holds the today card and Home tutorials', Object.keys(HOME_SECTION_TAB_PATH).filter((k) => HOME_SECTION_TAB_PATH[k] === '/'), ['today', 'tutorialsHome']);
+check('every tab tutorials card sits in the group of its tab', Object.keys(TUTORIAL_SECTION_PATH).filter((k) => HOME_SECTION_TAB_PATH[k] !== TUTORIAL_SECTION_PATH[k]), []);
 check('the digest cards keep a group of their own', groupHomeSectionsForDisplay(['today', 'digestCards', 'groceryList']), [
   { kind: 'tab', path: '/', keys: ['today'] },
   { kind: 'tab', path: '/digest', keys: ['digestCards'] },

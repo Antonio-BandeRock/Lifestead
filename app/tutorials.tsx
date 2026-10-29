@@ -18,12 +18,17 @@
 // lines are the same on every plan, since reading how a thing works is not
 // the thing itself.
 //
+// Read it in Tutorials on a tab's card on Home (2026-10-28) opens this
+// page with that tab and that lens folded open, and scrolled to the tab;
+// the page itself is unchanged, by direct instruction ("the profile area
+// should remain as is").
+//
 // Starting a run goes to Home first, where the round button is, so the
 // tutorial's first line ("Tap the round button and choose ...") is true.
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
-import { Stack, useRouter, type Href } from 'expo-router';
-import { useCallback, useState, type ComponentProps } from 'react';
+import { Stack, useLocalSearchParams, useRouter, type Href } from 'expo-router';
+import { useCallback, useRef, useState, type ComponentProps } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { CalmBands, HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandNoHairlines, homeBandStyle } from '../components/HomeSectionBand';
 import { colors } from '../constants/colors';
@@ -55,10 +60,14 @@ import {
 
 export default function TutorialsScreen() {
   const router = useRouter();
+  const params = useLocalSearchParams<{ openTab?: string; openLens?: string }>();
   const scrollPadding = useFloatingButtonScrollPadding();
+  const scrollRef = useRef<ScrollView>(null);
+  // Scrolled to once, the first time the tab asked for is laid out.
+  const scrolledTo = useRef(false);
   const [state, setState] = useState<TutorialState | null>(null);
-  const [openTabs, setOpenTabs] = useState<Set<string>>(new Set());
-  const [openLenses, setOpenLenses] = useState<Set<string>>(new Set());
+  const [openTabs, setOpenTabs] = useState<Set<string>>(() => new Set(params.openTab ? [params.openTab] : []));
+  const [openLenses, setOpenLenses] = useState<Set<string>>(() => new Set(params.openLens ? [params.openLens] : []));
   const [openReads, setOpenReads] = useState<Set<string>>(new Set());
 
   useFocusEffect(
@@ -99,7 +108,7 @@ export default function TutorialsScreen() {
     <CalmBands>
       <View style={styles.screen}>
         <Stack.Screen options={{ title: TUTORIALS_HEADING }} />
-        <ScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+        <ScrollView ref={scrollRef} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
           <View style={styles.card}>
             <Text style={styles.lead}>{TUTORIALS_LEAD}</Text>
             <Action icon="play" label={START_ALL_LABEL} line={START_ALL_LINE} onPress={() => void start({ kind: 'all' })} filled />
@@ -116,7 +125,19 @@ export default function TutorialsScreen() {
           {state?.tabs.map((tab) => {
             const tabOpen = openTabs.has(tab.path);
             return (
-              <View key={tab.path} style={styles.card}>
+              <View
+                key={tab.path}
+                style={styles.card}
+                onLayout={
+                  tab.path === params.openTab
+                    ? (event) => {
+                        if (scrolledTo.current) return;
+                        scrolledTo.current = true;
+                        scrollRef.current?.scrollTo({ y: event.nativeEvent.layout.y, animated: true });
+                      }
+                    : undefined
+                }
+              >
                 <TouchableOpacity
                   style={styles.foldRow}
                   onPress={() => toggle(openTabs, tab.path, setOpenTabs)}

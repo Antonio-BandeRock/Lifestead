@@ -138,7 +138,36 @@ export const HOME_SECTION_TAB_PATH: Record<HomeSectionKey, string | null> = {
   // (renderRoutines and renderDoneChecks in app/(tabs)/index.tsx).
   routines: null,
   doneChecks: null,
+  // Each tab's tutorials, in that tab's group (2026-10-28).
+  tutorialsHome: '/',
+  tutorialsLife: '/life',
+  tutorialsFood: '/food',
+  tutorialsGarden: '/garden',
+  tutorialsSchedule: '/schedule',
+  tutorialsSignals: '/log',
+  tutorialsInsights: '/insights',
+  tutorialsTrends: '/trends',
+  tutorialsReports: '/reports',
 };
+
+// Which tab's tutorials each tutorials card shows.
+export const TUTORIAL_SECTION_PATH = {
+  tutorialsHome: '/',
+  tutorialsLife: '/life',
+  tutorialsFood: '/food',
+  tutorialsGarden: '/garden',
+  tutorialsSchedule: '/schedule',
+  tutorialsSignals: '/log',
+  tutorialsInsights: '/insights',
+  tutorialsTrends: '/trends',
+  tutorialsReports: '/reports',
+} as const satisfies Partial<Record<HomeSectionKey, string>>;
+
+export type TutorialSectionKey = keyof typeof TUTORIAL_SECTION_PATH;
+
+export function isTutorialSection(key: HomeSectionKey): key is TutorialSectionKey {
+  return key in TUTORIAL_SECTION_PATH;
+}
 
 // Regroups an already-ordered list so sections from the same tab sit
 // together, without discarding the order the person chose in Profile:

@@ -378,7 +378,22 @@ export type HomeSectionKey =
   // 1.0.60.3, direct request 2026-10-03: the reminders still showing on
   // the phone, answerable in one list. At the very top, and drawn only
   // while something is waiting.
-  | 'waitingAnswers';
+  | 'waitingAnswers'
+  // Tutorials inside each tab's band, 2026-10-28. Direct request: "we
+  // could have them inside of each separate Tab band ... rather than one
+  // Tutorials band on Home for all of them in one place." One key per tab,
+  // each the last card of its group, so each can be moved or turned off on
+  // its own (components/TabTutorialCards.tsx, TUTORIAL_SECTION_PATH in
+  // lib/homeSections.ts).
+  | 'tutorialsHome'
+  | 'tutorialsLife'
+  | 'tutorialsFood'
+  | 'tutorialsGarden'
+  | 'tutorialsSchedule'
+  | 'tutorialsSignals'
+  | 'tutorialsInsights'
+  | 'tutorialsTrends'
+  | 'tutorialsReports';
 
 // The default order, 2026-09-12: grouped by the tab each section is a
 // window into (see lib/homeSections.ts), in the same order TabHub's own
@@ -412,20 +427,24 @@ export const ALL_HOME_SECTION_KEYS: HomeSectionKey[] = [
   // the TabHub menu." Home leads TabHub’s own grid, so it leads the
   // groups here.
   'today',
+  'tutorialsHome',
   // Life. Second since 1.0.70.1, the way it is second in TabHub.
   'groceryList',
   'groceryQuickAdd',
   'todayPicks',
   'countdowns',
   'startWorkout',
+  'tutorialsLife',
   // Food.
   'usualMeal',
   'logAgain',
   'scanProduct',
+  'tutorialsFood',
   // Garden.
   'gardenTasks',
   'daysUntil',
   'logHarvest',
+  'tutorialsGarden',
   // Schedules. mealsLoggedToday is stated here beside its tab-mates
   // rather than further down: the grouping pulled it up anyway, and a
   // default order that needs regrouping to read correctly is a trap.
@@ -434,6 +453,7 @@ export const ALL_HOME_SECTION_KEYS: HomeSectionKey[] = [
   'todaysReminders',
   'mealsLoggedToday',
   'sinceLastMeal',
+  'tutorialsSchedule',
   // Signals.
   'symptomCheckinReminder',
   'morningCheckin',
@@ -443,9 +463,11 @@ export const ALL_HOME_SECTION_KEYS: HomeSectionKey[] = [
   'logFlare',
   'logBloodPressure',
   'logExercise',
+  'tutorialsSignals',
   // Insights.
   'worthALook',
   'fuelGauges',
+  'tutorialsInsights',
   // Trends.
   'weekTrend',
   'varietyThisWeek',
@@ -455,8 +477,10 @@ export const ALL_HOME_SECTION_KEYS: HomeSectionKey[] = [
   'yourWeek',
   'lifeSquares',
   'gardenYield',
+  'tutorialsTrends',
   // Reports.
   'makeReport',
+  'tutorialsReports',
   // Profile. Last of the tab groups since 1.0.70.1, after Reports, where
   // TabHub puts it now. It is not a TAB_ROUTE, so Home reads its name,
   // icon and colour from HOME_GROUP_IDENTITY in app/(tabs)/index.tsx.
@@ -536,6 +560,15 @@ export const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
   todayPicks: 'Today I Want To',
   nextThing: 'One Next Thing',
   waitingAnswers: 'Waiting for an Answer',
+  tutorialsHome: 'Home Tutorials',
+  tutorialsLife: 'Life Tutorials',
+  tutorialsFood: 'Food Tutorials',
+  tutorialsGarden: 'Garden Tutorials',
+  tutorialsSchedule: 'Schedules Tutorials',
+  tutorialsSignals: 'Signals Tutorials',
+  tutorialsInsights: 'Insights Tutorials',
+  tutorialsTrends: 'Trends Tutorials',
+  tutorialsReports: 'Reports Tutorials',
 };
 
 export type VisualPreferences = {

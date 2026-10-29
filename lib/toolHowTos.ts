@@ -249,6 +249,8 @@ export type ToolMark =
   | 'home.readCards'
   | 'home.setupCards'
   | 'home.setupCardGo'
+  | 'home.tutorialCard'
+  | 'home.tutorialStart'
   | 'lens.feedsThis'
   | 'lens.feedsThisGo'
   | 'appointments.add'
@@ -2376,6 +2378,17 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap the circle beside it. Tap again to take the mark back.', mark: 'home.pickMark' },
       ],
       forYou: 'The mark is kept with its time, the same as checking it off on your To Do List.',
+    },
+    {
+      key: 'tutorialCards',
+      title: "Start a tab's tutorial from Home",
+      steps: [
+        { say: "Open the band with the name of Life. Every tab's band on Home ends with that tab's Tutorials.", mark: 'homeGroup.life', stay: true },
+        { say: 'Open the band with the name of Tutorials, at the end of it.', mark: 'homeBand.tutorialsLife', stay: true },
+        { say: 'Each card is one lens. Swipe along the row to see the rest. A card you have gone through turns green and moves to the end.', mark: 'home.tutorialCard', stay: true },
+        { say: 'Tap Start. The tutorial takes you to that lens and goes through it with you on the screen.', mark: 'home.tutorialStart' },
+      ],
+      forYou: 'A tutorial for what a tab does is right there in its band, so you can learn one lens when you need it.',
     },
     {
       key: 'routine',

@@ -282,3 +282,47 @@ export function tutorialQueue(tabs: TabTutorial[], scope: TutorialScope): string
       return howToByKey(tabs).has(scope.key) ? [scope.key] : [];
   }
 }
+
+// CARDS IN A TAB'S BAND ON HOME (2026-10-28). Direct request: "we could
+// have them inside of each separate Tab band ... each laid out like the
+// Getting Setup. I like the card you've read idea." One card per lens,
+// in the tab's order, a card whose how-tos have all been gone through
+// turning green with the day and moving to the end of the row, where it
+// still runs again with one tap. A tick beside each how-to gone through
+// and nothing more: no count, no figure.
+
+export const TAB_TUTORIALS_BAND_TITLE = 'Tutorials';
+export const TUTORIAL_CARD_SHOWS_LABEL = 'What it shows you';
+export const TUTORIAL_CARD_START_LABEL = 'Start';
+export const TUTORIAL_CARD_AGAIN_LABEL = 'Go through it again';
+export const TUTORIAL_CARD_READ_LABEL = 'Read it in Tutorials';
+export const TUTORIAL_CARD_LINE = 'Each card goes through one lens with you on the screen itself. Swipe along the row for the rest.';
+// How many how-to names a card lists before saying the rest are on the
+// Tutorials page, so every card in a row stays about the same height.
+export const TUTORIAL_CARD_TITLES_SHOWN = 4;
+
+export type TutorialCardView = {
+  lens: LensTutorial;
+  // The last day a how-to on it was gone through, once all of them have:
+  // '' when they all have and no day was kept, null while any has not.
+  doneOn: string | null;
+  howTos: { key: string; title: string; done: boolean }[];
+};
+
+export function tabTutorialCards(tabs: TabTutorial[], path: TourPath, doneKeys: Set<string>, doneOn: Map<string, string>): TutorialCardView[] {
+  const tab = tabs.find((each) => each.path === path);
+  if (!tab) return [];
+  const cards = tab.lenses.map((lens): TutorialCardView => {
+    const howTos = lens.howTos.map((howTo) => ({ key: howTo.key, title: howTo.title, done: doneKeys.has(howTo.key) }));
+    const allDone = howTos.length > 0 && howTos.every((howTo) => howTo.done);
+    let last = '';
+    if (allDone) {
+      for (const howTo of howTos) {
+        const day = doneOn.get(howTo.key) ?? '';
+        if (day > last) last = day;
+      }
+    }
+    return { lens, doneOn: allDone ? last : null, howTos };
+  });
+  return [...cards.filter((card) => card.doneOn == null), ...cards.filter((card) => card.doneOn != null)];
+}

@@ -226,8 +226,12 @@ import {
   groupHomeSectionsForDisplay,
   HOME_SECTION_TAB_PATH,
   homeGroupIdOf,
+  isTutorialSection,
+  TUTORIAL_SECTION_PATH,
   type HomeSectionDisplayGroup,
 } from '../../lib/homeSections';
+import { TAB_TUTORIALS_BAND_TITLE } from '../../lib/tutorials';
+import { TabTutorialCards } from '../../components/TabTutorialCards';
 import { homeGroupIdentity } from '../../constants/homeGroups';
 import { HomeArrangeList } from '../../components/HomeArrangeList';
 import { useVisualPreferences } from '../../hooks/useVisualPreferences';
@@ -4806,6 +4810,10 @@ export default function HomeScreen() {
       case 'dayTimeline':
         return renderDayTimeline();
       default:
+        // Each tab's tutorials, the last card in its band (2026-10-28).
+        if (isTutorialSection(key)) {
+          return renderBand(key, TAB_TUTORIALS_BAND_TITLE, <TabTutorialCards path={TUTORIAL_SECTION_PATH[key]} />, { icon: 'school' });
+        }
         return null;
     }
   }
