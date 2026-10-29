@@ -516,7 +516,7 @@ export const REORDERABLE_HOME_SECTION_KEYS: HomeSectionKey[] = ALL_HOME_SECTION_
 export const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
   weather: 'Weather & Sunrise/Sunset',
   sharedFolderSetup: 'Shared Folder Setup',
-  captureInbox: 'Capture',
+  captureInbox: 'Sort It Out',
   yourStory: 'Your Guide',
   today: 'Today',
   lowStimulation: 'Low Stimulation',
@@ -858,15 +858,19 @@ export function isHomeSectionVisible(prefs: VisualPreferences, key: HomeSectionK
 // switch off these rather than offering one that does nothing.
 export const HOME_SECTIONS_ALWAYS_SHOWN: ReadonlySet<HomeSectionKey> = new Set<HomeSectionKey>(['yourStory']);
 
-// Simple View, P1 (1.0.68.5). Four cards, chosen for someone who came to
-// run their day: the greeting, the one next thing, Capture, and reminders
-// waiting for an answer. Your Guide stays too, since it is never hidden
-// (HOME_SECTIONS_ALWAYS_SHOWN).
+// Simple View, P1 (1.0.68.5). Chosen for someone who came to run their day:
+// the greeting, the one next thing, Sort It Out, and reminders waiting for an
+// answer. Your Guide stays too, since it is never hidden
+// (HOME_SECTIONS_ALWAYS_SHOWN). Routines and the To Do List joined in
+// 1.0.75.15, direct instruction: "Their To Do List and Routines need to be
+// visible in the Simple View."
 export const SIMPLE_VIEW_SECTIONS: ReadonlySet<HomeSectionKey> = new Set<HomeSectionKey>([
   'today',
   'nextThing',
   'captureInbox',
   'waitingAnswers',
+  'routines',
+  'doneChecks',
   'yourStory',
 ]);
 

@@ -10,7 +10,7 @@ export const VOICE_LENS_DIRECTORY: VoiceLensPlace[] = [
   { tab: '/', param: 'openHomeSection', key: 'today', label: 'Today' },
   { tab: '/', param: 'openHomeSection', key: 'nextThing', label: 'One Next Thing' },
   { tab: '/', param: 'openHomeSection', key: 'yourStory', label: 'Your Guide' },
-  { tab: '/', param: 'openHomeSection', key: 'captureInbox', label: 'Capture' },
+  { tab: '/', param: 'openHomeSection', key: 'captureInbox', label: 'Sort It Out' },
   { tab: '/', param: 'openHomeSection', key: 'usualMeal', label: 'Your Usual Meals' },
   { tab: '/', param: 'openHomeSection', key: 'logAgain', label: 'Log a Meal' },
   { tab: '/', param: 'openHomeSection', key: 'scanProduct', label: 'Scan a Product' },

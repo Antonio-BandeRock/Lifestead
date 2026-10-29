@@ -5401,7 +5401,7 @@ export default function ProfileScreen() {
           the instant this goes off. Fold state is the one exception and is
           written once, at switch-on: an override there would hold every
           section shut with no way to read anything. */}
-      {/* Simple View, P1 (1.0.68.5): Home keeps to four cards. Each card's
+      {/* Simple View, P1 (1.0.68.5): Home keeps to a short set of cards. Each card's
           own switch under Home Screen is left as it was, so turning this
           off brings back exactly what was there. */}
       <View style={styles.card}>
@@ -5409,8 +5409,8 @@ export default function ProfileScreen() {
         {!collapsedSections.has('simple-view') ? (
           <View style={styles.cardBody}>
             <Text style={styles.helpText}>
-              Home shows today&apos;s greeting, the one next thing, Capture and anything waiting for an answer, and nothing
-              else. Every tab is still in the menu, and the cards you had switched on come back when this goes off.
+              Home shows today&apos;s greeting, the one next thing, Routines, the To Do List, Sort It Out and anything
+              waiting for an answer, and nothing else. Every tab is still in the menu, and the cards you had switched on come back when this goes off.
             </Text>
             <View style={styles.pillRow}>
               {[false, true].map((value) => {

@@ -19,6 +19,15 @@
 // Your Records, and Store Its Location), through lib/quickAccess.ts. Where
 // Is It is a screen.
 //
+// 1.0.75.15 (2026-10-28), direct request: "Add Simple View to the Quick Access
+// menu... If Simple View is selected it then turns to Normal View being
+// selectable", "the two ways to capture should be on the quick access menu",
+// and "move voice control out of the quick access and make it its own quick
+// access just above". So Simple View or Normal View switches Home's view in
+// place, Type a Note opens Capture with the keyboard (the Voice Note is the
+// spoken way), and Voice Control is its own edge tab above this one,
+// components/VoiceControlButton.tsx.
+//
 // Store Its Location joined in 1.0.66.9 as Where Is It's companion, by
 // direct request: "Where is it can only draw on what the user has told it
 // about where something is located. We need a button for them to do that."
@@ -31,6 +40,7 @@ import { colors } from '../constants/colors';
 import { useFooterBandHeight } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { useVisualPreferences } from '../hooks/useVisualPreferences';
+import { setVisualPreferences } from '../lib/visualPreferences';
 import { sortByLabel } from '../lib/choiceOrder';
 import { useNavigationHand } from '../lib/navigationHand';
 import { getHubSpots, otherHubSpots, registerHubSpot, subscribeHubSpots } from '../lib/hubHandoff';
@@ -92,7 +102,6 @@ export function QuickAccessButton() {
 
   // Alphabetical, top to bottom as drawn.
   const choices: Choice[] = sortByLabel([
-    { key: 'command', label: 'Voice Control', icon: 'megaphone-outline', run: () => openQuickAccessSheet('voiceCommand') },
     { key: 'ask', label: 'Ask Your Records', icon: 'help-circle-outline', run: () => openQuickAccessSheet('askRecords') },
     { key: 'where', label: 'Where Is It', icon: 'location-outline', run: () => router.push({ pathname: '/where-is-it', params: { listen: '1' } }) },
     { key: 'storeLocation', label: 'Store Its Location', icon: 'pin-outline', run: () => openQuickAccessSheet('storeLocation') },
@@ -102,6 +111,13 @@ export function QuickAccessButton() {
       icon: lowStimulationOn ? 'moon' : 'moon-outline',
       run: () => openQuickAccessSheet('lowStimulation'),
     },
+    {
+      key: 'view',
+      label: prefs.simpleView ? 'Normal View' : 'Simple View',
+      icon: prefs.simpleView ? 'expand-outline' : 'contract-outline',
+      run: () => void setVisualPreferences({ simpleView: !prefs.simpleView }),
+    },
+    { key: 'type', label: 'Type a Note', icon: 'create-outline', run: () => router.push('/capture') },
     { key: 'voice', label: 'Voice Note', icon: 'mic-outline', run: () => openQuickAccessSheet('voiceNote') },
   ]);
 
@@ -116,7 +132,11 @@ export function QuickAccessButton() {
         hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}
         accessibilityRole="button"
         accessibilityLabel="Quick access"
-        accessibilityHint="Opens Ask Your Records, Low Stimulation, Store Its Location, Voice Control, Voice Note and Where Is It"
+        accessibilityHint={
+          prefs.simpleView
+            ? 'Opens Ask Your Records, Low Stimulation, Normal View, Store Its Location, Type a Note, Voice Note and Where Is It'
+            : 'Opens Ask Your Records, Low Stimulation, Simple View, Store Its Location, Type a Note, Voice Note and Where Is It'
+        }
         accessibilityState={{ expanded: open }}
       >
         <Ionicons name="grid-outline" size={18} color={colors.textPrimary} />

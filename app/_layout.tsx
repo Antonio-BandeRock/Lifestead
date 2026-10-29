@@ -44,6 +44,7 @@ import { VoiceCommandSheet } from '../components/VoiceCommandSheet';
 import { WakeWordListener } from '../components/WakeWordListener';
 import { LowStimulationSheet } from '../components/LowStimulationSheet';
 import { QuickAccessButton } from '../components/QuickAccessButton';
+import { VoiceControlButton } from '../components/VoiceControlButton';
 import { QuickCaptureSheet } from '../components/QuickCaptureSheet';
 import { ThumbSearchButton } from '../components/ThumbSearchButton';
 import { FreshAuthHost } from '../components/FreshAuthHost';
@@ -591,9 +592,13 @@ function UnlockedApp() {
                   Voice Note, Low Stimulation, Where Is It and Ask Your Records,
                   components/QuickAccessButton.tsx. The voice note's sheet
                   (1.0.61.14) saves what is said to Capture. */}
+              {/* Voice Control (1.0.75.15): its own edge tab just above quick
+                  access, components/VoiceControlButton.tsx. Ahead of the menu so
+                  an open menu draws over it. */}
+              <VoiceControlButton />
               <QuickAccessButton />
               <QuickCaptureSheet />
-              {/* Search near the thumb (1.0.61.15): above the voice note tab while
+              {/* Search near the thumb (1.0.61.15): above the Voice Control tab while
                   the screen has a lens search box, components/ThumbSearchButton.tsx. */}
               <ThumbSearchButton />
               {/* Low Stimulation's explain-then-ask card, opened from the

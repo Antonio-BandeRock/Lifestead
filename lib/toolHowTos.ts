@@ -2158,19 +2158,38 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     },
     {
       key: 'captureSay',
-      title: 'Say something into Capture',
+      title: 'Put a thought down from the quick-access menu',
       steps: [
-        { say: 'Open the band with the name of Capture.', mark: 'homeBand.captureInbox', stay: true },
-        { say: 'Tap Say it and speak. Tap Type it if you would rather write.', mark: 'home.captureSay' },
+        { say: 'Tap the quick-access tab at the bottom edge of the screen on your thumb side, the one with four small squares.' },
+        { say: 'Tap Voice Note and speak, or tap Type a Note if you would rather write. Either one works from any screen.' },
       ],
       forYou: 'Whatever was on your mind is kept, so you can stop holding on to it and sort it out later.',
     },
     {
-      key: 'captureSort',
-      title: 'Sort out what is waiting in Capture',
+      key: 'simpleView',
+      title: 'Switch Home to Simple View and back',
       steps: [
-        { say: 'Open the band with the name of Capture.', mark: 'homeBand.captureInbox', stay: true },
-        { say: 'When something is waiting, tap Sort it out.', mark: 'home.captureSort' },
+        { say: 'Tap the quick-access tab at the bottom edge of the screen on your thumb side.' },
+        { say: 'Tap Simple View. Home keeps to your greeting, Routines, the To Do List, Sort It Out and anything waiting for an answer.' },
+        { say: 'To bring everything back, open the same menu and tap Normal View.' },
+      ],
+      forYou: 'Nothing you set up is lost while Simple View is on. Every tab is still in the menu.',
+    },
+    {
+      key: 'voiceControl',
+      title: 'Work the screen by voice',
+      steps: [
+        { say: 'Tap the Voice Control tab, the one with the megaphone, just above the quick-access tab on your thumb side.' },
+        { say: 'Say what you want done on the screen in front of you.' },
+      ],
+      forYou: 'Your hands can stay on whatever they are doing.',
+    },
+    {
+      key: 'captureSort',
+      title: 'Sort out what is waiting',
+      steps: [
+        { say: 'Open the band with the name of Sort It Out.', mark: 'homeBand.captureInbox', stay: true },
+        { say: 'Tap Sort It Out.', mark: 'home.captureSort' },
       ],
       forYou: 'Each note is offered as the record it reads like: a grocery item, a task, a reminder, a place you put something. You say yes or change it.',
     },

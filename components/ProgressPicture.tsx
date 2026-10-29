@@ -2,6 +2,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Svg, { Circle, Path, Rect } from 'react-native-svg';
+import { useFooterBandHeight } from '../constants/floatingButton';
 import { TAB_ROUTES } from '../constants/tabs';
 import { useVisualPreferences } from '../hooks/useVisualPreferences';
 import type { ProgressTabPath } from '../lib/progress';
@@ -29,6 +30,7 @@ export function ProgressPicture({ routeKey }: { routeKey: string | undefined }) 
   const eligible = Boolean(route && (PICTURE_TABS as readonly string[]).includes(String(route.path)));
   const shown = eligible && routeKey ? isProgressPictureShown(prefs, routeKey) : false;
   const [scene, setScene] = useState<ProgressScene | null>(null);
+  const footerHeight = useFooterBandHeight();
 
   useFocusEffect(
     useCallback(() => {
@@ -50,7 +52,7 @@ export function ProgressPicture({ routeKey }: { routeKey: string | undefined }) 
   if (!shown || !scene || scene.shapes.length === 0) return null;
 
   return (
-    <View pointerEvents="none" style={styles.frame}>
+    <View pointerEvents="none" style={[styles.frame, { bottom: footerHeight + PICTURE_ABOVE_FOOTER }]}>
       <ProgressSceneSvg scene={scene} />
     </View>
   );
@@ -85,8 +87,14 @@ export function ProgressSceneSvg({ scene }: { scene: ProgressScene }) {
   );
 }
 
+// The clear space between the footer's top edge and the bottom of a scene.
+const PICTURE_ABOVE_FOOTER = 12;
+
 const styles = StyleSheet.create({
-  // Held clear of the corner hubs at the bottom and the header at the top,
-  // so the picture never sits under a button.
-  frame: { ...StyleSheet.absoluteFillObject, top: '14%', bottom: '16%', left: '6%', right: '6%' },
+  // Held clear of the header at the top. The bottom is set inline from the
+  // footer's height: a share of the screen (it was 16%) is shorter than the
+  // footer on a phone with a bottom inset, which drew the bottom of every
+  // scene, Life's shelf and Food's bottles, into the footer behind the hubs
+  // (2026-10-28).
+  frame: { ...StyleSheet.absoluteFillObject, top: '14%', left: '6%', right: '6%' },
 });

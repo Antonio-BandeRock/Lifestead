@@ -98,7 +98,7 @@ export const NEURO_SUPPORT_DETAILS: Record<NeuroSupportKey, string> = {
   lowStimulation:
     'Folds Home down to the plain rows. Every band closes, the backgrounds go quiet, and what is left is a short list instead of a wall. You can open any band again whenever you want one.',
   captureInbox:
-    'Puts one control on Home that takes a thought by voice or by typing, with no category to pick at the time. It leaves your head straight away, and sorting it is a later job.',
+    'Puts Sort It Out on Home, where a thought you put down by voice or by typing from the quick-access menu waits, with no category to pick at the time. It leaves your head straight away, and sorting it is a later job.',
   roomyText:
     'Opens the lines up so the words stop running together. This is separate from text size, which your phone already sets for every app including this one.',
   plainWording:

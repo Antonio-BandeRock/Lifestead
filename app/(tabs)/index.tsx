@@ -1024,10 +1024,10 @@ const HOME_LENS_DESTINATIONS: Partial<
   // Belongs to no tab, so it keeps colors.primary the way the shared-
   // folder nudge does.
   captureInbox: {
-    label: 'Capture',
-    icon: 'file-tray-outline',
+    label: 'Sort It Out',
+    icon: 'checkmark-done-outline',
     color: colors.primary,
-    href: '/capture' as Href,
+    href: '/reconcile' as Href,
   },
   // Your Story, 2026-09-24. The menu goes to the full page rather than
   // scrolling to the card, since the card shows one section and the page
@@ -4548,49 +4548,36 @@ export default function HomeScreen() {
     // than counting the same waiting notes a second time in different words.
     // The button itself watches both, since either one is a reason to open
     // the screen.
-    const queue = describeReconcileQueue({ thoughts: counts.waiting, scheduled: toAnswer });
     const answerLine = describeReconcileQueue({ thoughts: 0, scheduled: toAnswer });
+    // Sort It Out, 1.0.75.15 (2026-10-28). Direct request: "Sort it out also
+    // needs to be its own band on the home screen and available in Simple
+    // View, and I think the two ways to capture should be on the quick access
+    // menu, and Capture shouldn't be on the Home screen as one of the bands."
+    // So Type a Note and Voice Note moved to the quick-access menu, and this
+    // band, under the same key so a saved order holds, is the way to what
+    // they left waiting and to everything scheduled nobody answered for.
     return renderBand(
       'captureInbox',
-      'Capture',
+      'Sort It Out',
       <View style={styles.bandBody}>
         <Text style={styles.bandCaption}>
-          Somewhere to throw a thought before it is gone. Nothing is asked of you: no category, no date, no
-          form. Sorting it out can wait until you have a minute.
+          The thoughts you put down with Type a Note or Voice Note in the quick-access menu wait here to be named and
+          put where they go, beside anything scheduled whose time passed with no answer.
         </Text>
-        <TouchableOpacity
-          style={[styles.logAgainSpeakButton, { borderColor: colors.primary }]}
-          ref={walkMark.ref('home.captureType')}
-          onPress={() => router.push('/capture')}
-          activeOpacity={0.8}
-        >
-          <Ionicons name="create-outline" size={18} color={colors.primary} style={textShadow} />
-          <Text style={[styles.logAgainSpeakText, { color: colors.primary }]}>Type it</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.logAgainSpeakButton, { borderColor: colors.primary }]}
-          ref={walkMark.ref('home.captureSay')}
-          onPress={() => router.push({ pathname: '/capture', params: { speak: '1' } })}
-          activeOpacity={0.8}
-        >
-          <Ionicons name="mic-outline" size={18} color={colors.primary} style={textShadow} />
-          <Text style={[styles.logAgainSpeakText, { color: colors.primary }]}>Say it</Text>
-        </TouchableOpacity>
-        {queue ? (
-          <TouchableOpacity
-            style={[styles.logAgainSpeakButton, { borderColor: colors.accent }]}
-            ref={walkMark.ref('home.captureSort')}
-            onPress={() => router.push('/reconcile')}
-            activeOpacity={0.8}
-          >
-            <Ionicons name="checkmark-done-outline" size={18} color={colors.accent} style={textShadow} />
-            <Text style={[styles.logAgainSpeakText, { color: colors.accent }]}>Sort it out</Text>
-          </TouchableOpacity>
-        ) : null}
         {answerLine ? <Text style={styles.bandCaption}>{answerLine}</Text> : null}
         {summary ? <Text style={styles.bandCaption}>{summary}</Text> : null}
+        {!answerLine && !summary ? <Text style={styles.bandCaption}>Nothing is waiting to be sorted.</Text> : null}
+        <TouchableOpacity
+          style={styles.primaryButton}
+          ref={walkMark.ref('home.captureSort')}
+          onPress={() => router.push('/reconcile')}
+          activeOpacity={0.8}
+          accessibilityRole="button"
+        >
+          <Text style={styles.primaryButtonText}>Sort It Out</Text>
+        </TouchableOpacity>
       </View>,
-      { icon: 'file-tray-outline', color: colors.primary },
+      { icon: 'checkmark-done-outline', color: colors.primary },
     );
   }
 
