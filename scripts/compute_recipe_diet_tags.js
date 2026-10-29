@@ -1,3 +1,4 @@
+/* global __dirname */
 // Computes real, rule-based diet-compatibility tags for every curated
 // recipe, 2026-08-24, direct request: "For all recipes, they need to be
 // grouped so they can be identified at being omnivore, vegetarian, or
@@ -85,6 +86,8 @@ for (const row of rows) {
 // curated_recipe_unlisted_ingredients with the diet tags they carry in
 // `contains` (meat, fish, dairy, egg, gluten, insect, alcohol), so a recipe
 // whose goat is not in the database is still never tagged Vegan.
+const RED_MEAT_NAME_UNLISTED =
+  /\b(beef|pork|lamb|mutton|goat|veal|venison|ham|bacon|sausages?|chorizo|longaniza|salami|lard|tongue|tripe|res|cerdo|chivo|cabrito|tasajo|chicharr\w*|espinazo|buche|cow|asiento)\b/i;
 const UNLISTED_NIGHTSHADE = /chil[ei]|guajillo|ancho|pasilla|mulato|chipotle|habanero|jalape|poblano|serrano|tomat|paprika/i;
 const unlistedTable = runSql("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'curated_recipe_unlisted_ingredients';");
 const unlistedByRecipe = new Map();
@@ -96,6 +99,8 @@ if (unlistedTable.length > 0) {
     // rather than a tag every other diet would ignore. Tomatillo husks flavour
     // the cooking water and are not eaten.
     if (UNLISTED_NIGHTSHADE.test(row.name) && !/husk/i.test(row.name)) unlistedByRecipe.get(row.recipeId).add('nightshade');
+    // Red meat the same way, for Flexitarian and Mediterranean.
+    if (/\bmeat\b/.test(String(row.contains || '')) && RED_MEAT_NAME_UNLISTED.test(row.name)) unlistedByRecipe.get(row.recipeId).add('redmeat');
     if (!byRecipe.has(row.recipeId)) byRecipe.set(row.recipeId, []);
   }
 }
@@ -175,8 +180,57 @@ function hasAnyFromSet(ingredients, names) {
   return ingredients.some((i) => names.has(i.baseName));
 }
 
-function hasRedMeat(ingredients) {
-  return ingredients.some((i) => i.category === 'Meat' && RED_MEATS.has(i.baseName));
+// 2026-10-29, direct instruction: "Goat and any other meat must be
+// categorized as meat so it will disqualify as vegan. Make sure anything that
+// we know what it is can be categorized properly." The database's category
+// alone missed animal foods filed elsewhere: Pork Lard and Beef Tallow under
+// Fats, Gelatine and the stocks under PantryStaples, fish sauce and oyster
+// sauce under Herbs, ghee under Fats. So an ingredient is also read by its
+// name, with the plant foods that share a word (coconut meat, lamb's lettuce,
+// butter beans, sesame butter) named as exceptions. Checked against every
+// visible food in the database on 2026-10-29.
+const FLESH_NAME =
+  /\b(beef|pork|lamb|mutton|goat|veal|venison|bison|buffalo|chicken|turkey|duck|goose|quail|rabbit|bacon|ham|sausages?|chorizo|salami|prosciutto|pancetta|lard|tallow|suet|gelatine?|bouillon|broth|stock|consomm[eé]|dashi|anchov\w*|fish|salmon|tuna|cod|shrimps?|prawns?|crab|lobster|oysters?|clams?|mussels?|squid|octopus|scallops?|sardines?|mackerel|caviar|roe|liver|tripe|oxtail|meat|nam pla)\b/i;
+const NOT_FLESH_NAME =
+  /\beggs?\b|vegetable|vegan|vegetarian|plant|meat (substitute|extender|alternative)|alternativ|imitation|meatless|coconut|lettuce|squash|green caviar|u\. gelatin|seitan|tofu|mushroom/i;
+const DAIRY_NAME = /\b(milk|cream|cheese|butter|yogh?urt|ghee|whey|casein|kefir|curds?|quark|skyr|paneer|ricotta|mozzarella|parmesan)\b/i;
+const NOT_DAIRY_NAME =
+  /coconut|soy|almond|\boat|rice milk|cashew|nut|peanut|cocoa butter|cacao butter|seed butter|sesame|sunflower|tahini|apple butter|cream of tartar|plant|vegan|dairy[- ]free|non-?dairy|hemp|pea milk|bean|lettuce|bread and butter|vegetabilsk|milk cap|tofu|cream cracker/i;
+const EGG_NAME = /\beggs?\b|mayonnaise/i;
+const NOT_EGG_NAME = /egg[- ]free|eggless/i;
+// Honey is made by bees, so a recipe with it is Vegetarian, not Vegan, the
+// definition the Vegan Society uses.
+const HONEY_NAME = /\bhoney\b/i;
+// Red meat for the Flexitarian and Mediterranean tags, by name rather than a
+// fixed list of cuts, which missed goat, ground pork, bacon, ham and brisket.
+const RED_MEAT_NAME =
+  /\b(beef|pork|lamb|mutton|goat|veal|venison|bison|buffalo|ham|bacon|sausages?|chorizo|longaniza|salami|prosciutto|pancetta|lard|tallow|oxtail|tongue|tripe|res|cerdo|chivo|cabrito|tasajo|chicharr\w*|espinazo|buche|cow|steak|brisket|sirloin|ribs?)\b/i;
+
+// What is said in a name that does not count: "granules without milk".
+function withoutNegations(name) {
+  return name.replace(/\b(without|no added|no|u\.)\s+(milk|meat|gelatin)\b/gi, '');
+}
+
+function isFlesh(i) {
+  if (i.category === 'Meat') return true;
+  if (['Mushroom', 'Algae', 'Veg'].includes(i.category)) return false;
+  const name = withoutNegations(i.baseName);
+  return FLESH_NAME.test(name) && !NOT_FLESH_NAME.test(name);
+}
+
+function isDairy(i) {
+  if (i.category === 'Dairy') return !EGG_NAME.test(i.baseName) || DAIRY_NAME.test(i.baseName);
+  if (i.category === 'Mushroom') return false;
+  const name = withoutNegations(i.baseName);
+  return DAIRY_NAME.test(name) && !NOT_DAIRY_NAME.test(name);
+}
+
+function isEgg(i) {
+  return EGG_NAME.test(i.baseName) && !NOT_EGG_NAME.test(i.baseName);
+}
+
+function hasRedMeat(ingredients, unlistedRedMeat = false) {
+  return unlistedRedMeat || ingredients.some((i) => (RED_MEATS.has(i.baseName) || RED_MEAT_NAME.test(i.baseName)) && isFlesh(i));
 }
 
 // 2026-10-29: wheat, barley and rye named in a base_name the fixed list
@@ -194,13 +248,16 @@ function classifyRecipe(ingredients, unlisted = new Set()) {
   const tags = [];
 
   // ---- Base tier: exactly one of Vegan / Vegetarian / Omnivore ----
-  const hasMeat = hasCategory(ingredients, 'Meat') || unlisted.has('meat') || unlisted.has('fish') || unlisted.has('insect');
-  const hasDairy = hasCategory(ingredients, 'Dairy') || hasNameMatch(ingredients, DAIRY_FAT_NAME) || unlisted.has('dairy');
-  const hasEgg = hasNameMatch(ingredients, /\begg\b/i) || unlisted.has('egg');
+  const unlistedAnimal = unlisted.has('meat') || unlisted.has('fish') || unlisted.has('insect');
+  const hasMeat = ingredients.some(isFlesh) || unlistedAnimal;
+  const hasDairy = ingredients.some(isDairy) || hasNameMatch(ingredients, DAIRY_FAT_NAME) || unlisted.has('dairy');
+  const hasEgg = ingredients.some(isEgg) || unlisted.has('egg');
+  const hasHoney = ingredients.some((i) => i.category !== 'Mushroom' && HONEY_NAME.test(i.baseName)) || unlisted.has('honey');
+  const redMeat = hasRedMeat(ingredients, unlisted.has('redmeat'));
   let baseTag;
   if (hasMeat) {
     baseTag = 'Omnivore';
-  } else if (hasDairy || hasEgg) {
+  } else if (hasDairy || hasEgg || hasHoney) {
     baseTag = 'Vegetarian';
   } else {
     baseTag = 'Vegan';
@@ -208,14 +265,14 @@ function classifyRecipe(ingredients, unlisted = new Set()) {
   tags.push(baseTag);
 
   // ---- Plant-Based/Flexitarian ----
-  const onlyLighterMeat = hasMeat && !hasRedMeat(ingredients);
+  const onlyLighterMeat = hasMeat && !redMeat;
   if (baseTag === 'Vegan' || baseTag === 'Vegetarian' || onlyLighterMeat) {
     tags.push('Plant-Based/Flexitarian');
   }
 
   // ---- Mediterranean ----
   const hasOliveOil = hasIngredient(ingredients, 'Fats', 'Olive Oil (Extra Virgin)');
-  if (hasOliveOil && !hasRedMeat(ingredients)) {
+  if (hasOliveOil && !redMeat) {
     tags.push('Mediterranean');
   }
 
@@ -260,7 +317,10 @@ function classifyRecipe(ingredients, unlisted = new Set()) {
   // ---- High-Protein ----
   const hasProteinLegume = hasAnyFromSet(ingredients, PROTEIN_LEGUMES);
   const hasHighProteinDairy = hasAnyFromSet(ingredients, HIGH_PROTEIN_DAIRY);
-  if (hasMeat || hasProteinLegume || hasEgg || hasHighProteinDairy) {
+  // Meat as a protein: lard, gelatine and a stock flavour a dish without
+  // making it a protein source.
+  const hasProteinMeat = hasCategory(ingredients, 'Meat') || unlistedAnimal;
+  if (hasProteinMeat || hasProteinLegume || hasEgg || hasHighProteinDairy) {
     tags.push('High-Protein');
   }
 
