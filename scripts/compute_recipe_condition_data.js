@@ -83,27 +83,21 @@
 //   node scripts/compute_recipe_condition_data.js
 // Writes scripts/_recipe_condition_data_output.json.
 
-const { execFileSync } = require('child_process');
+const { DatabaseSync } = require('node:sqlite');
 const fs = require('fs');
 const path = require('path');
 
-const SQLITE3 = 'C:/Users/TonyR/AppData/Local/Android/Sdk/platform-tools/sqlite3.exe';
 const DB = path.join(__dirname, '..', 'assets', 'data', 'foods_reference.db');
 
+// Through node:sqlite since 2026-10-29. It used to hand the filled SQL to
+// sqlite3.exe as a command-line argument, and Windows passes arguments in
+// the console code page, so a base name with an accent in it (Gruyère,
+// Tilapia rå, Wienerpølse) reached sqlite3 garbled, matched nothing, and
+// that ingredient was left out of every condition check without a word
+// beyond an UNRESOLVED line.
+const db = new DatabaseSync(DB, { readOnly: true });
 function runSql(sql, params = []) {
-  // Simple positional '?' substitution -- every value used here is a
-  // controlled, internally-generated string/number, never external
-  // input, so straightforward inline quoting is safe.
-  let i = 0;
-  const filled = sql.replace(/\?/g, () => {
-    const v = params[i++];
-    if (v === null || v === undefined) return 'NULL';
-    if (typeof v === 'number') return String(v);
-    return `'${String(v).replace(/'/g, "''")}'`;
-  });
-  const out = execFileSync(SQLITE3, ['-json', DB, filled], { maxBuffer: 1024 * 1024 * 128 });
-  const text = out.toString('utf8').trim();
-  return text ? JSON.parse(text) : [];
+  return db.prepare(sql).all(...params.map((v) => (v === undefined ? null : v)));
 }
 
 // ---------------------------------------------------------------------

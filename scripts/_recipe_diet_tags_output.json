@@ -200,6 +200,1481 @@
     "Paleo",
     "AIP"
   ],
+  "curated_cn_ba_bao_fan": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_cn_bai_qie_ji": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_ban_li_shao_ji": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_bao_zai_fan": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_base_bao_dough": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_base_black_bean_garlic_sauce": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_base_char_siu": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_base_dumpling_dipping_sauce": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_base_five_spice_powder": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_cn_base_ginger_scallion_sauce": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_cn_base_hand_pulled_noodle_dough": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_base_har_gow_wrapper_dough": [
+    "Omnivore",
+    "Dairy-Free"
+  ],
+  "curated_cn_base_hong_you": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_cn_base_jiaozi_wrappers": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_base_lu_shui": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_base_pao_cai": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_cn_base_plain_congee": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_cn_base_pork_bone_stock": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_cn_base_qing_tang": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_cn_base_sichuan_pepper_salt": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_cn_base_spring_roll_wrappers": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_base_steamed_glutinous_rice": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_cn_base_steamed_jasmine_rice": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_cn_base_sweet_and_sour_sauce": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_base_wonton_wrappers": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_base_xo_sauce": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_beijing_kao_ya": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_biang_biang_mian": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_cantonese_crispy_chow_mein": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_cha_ye_dan": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_char_siu_bao": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_char_siu_fan": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_cheung_fun": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_chun_juan": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_cong_you_ban_mian": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_cong_you_bing": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_cu_liu_bai_cai": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_dan_chao_fan": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_dan_dan_mian": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_dan_hua_tang": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_dan_tat": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_cn_di_san_xian": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_dong_gua_tang": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_cn_dongpo_rou": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_dou_chi_chao_xian": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_dou_hua": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_cn_dou_jiang": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_cn_fan_qie_dan_hua_tang": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_fan_qie_niu_nan": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_fu_ru_kong_xin_cai": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_cn_fu_yung_dan": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_fun_guo": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_gai_lan_chao_niu_rou": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_gan_bian_niu_rou_si": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_gan_bian_si_ji_dou": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_gon_chow_ngau_ho": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_gong_bao_ji_ding": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_gong_bao_xia_qiu": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_gu_lou_yuk": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_guo_qiao_mi_xian": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_cn_guotie": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_hainan_chicken_rice": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_hao_you_gai_lan": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_cn_hao_you_niu_rou": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_har_gow": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_he_lan_dou_chao": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_cn_hei_jiao_niu_liu": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_hong_dou_tang": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_cn_hong_kong_milk_tea": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_cn_hong_shao_rou": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_hong_shao_yu": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_hong_you_chao_shou": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_hu_pi_jian_jiao": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_hui_guo_rou": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_jia_chang_dou_fu": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_jian_dui": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_cn_jiang_cong_xie": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_jiao_yan_pai_gu": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_jiao_yan_xia": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_cn_jiaozi": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_jiu_cai_jiaozi": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_kou_shui_ji": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_la_zi_ji": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_lanzhou_niu_rou_mian": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_lap_cheong_fan": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_lian_ou_pai_gu_tang": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_cn_liang_pi": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_lo_bak_go": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_lo_mai_gai": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_lo_mein": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_lu_niu_rou": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_luo_han_zhai": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_ma_jiang_liang_mian": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_ma_la_huo_guo": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_ma_yi_shang_shu": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_mango_pudding": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_cn_mapo_dou_fu": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_mei_cai_kou_rou": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_mu_xu_rou": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_pai_huang_gua": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_pei_dan_shou_rou_zhou": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_pi_dan_dou_fu": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_qing_zheng_yu": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_re_gan_mian": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_san_bei_ji": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_see_yau_gai": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_shengjian_bao": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_shi_zi_tou": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_shui_zhu_niu_rou": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_shui_zhu_yu": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_siu_mai": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_siu_yuk": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_steamed_pork_patty_with_salted_egg": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_su_baozi": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_su_mi_geng": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_cn_suan_cai_yu": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_suan_la_tang": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_suan_la_tu_dou_si": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_cn_suan_rong_bai_cai": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_cn_tang_cu_pai_gu": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_tang_yuan": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_cn_wonton_soup": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_xi_hong_shi_chao_dan": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_xi_hu_cu_yu": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_xi_hu_niu_rou_geng": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_xiao_long_bao": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_xing_ren_dou_fu": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_cn_yan_ju_ji": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_yang_rou_chuan": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_yangzhou_chao_fan": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_yong_tau_foo": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_yu_pian_zhou": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_yu_tou_dou_fu_tang": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_yu_xiang_qie_zi": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_yu_xiang_rou_si": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_yue_bing": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_zha_jiang_mian": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_zheng_shui_dan": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_zi_ran_yang_rou": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_zongzi": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_cn_zui_ji": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_de_apfelpfannkuchen": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_apfelstrudel": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_de_arme_ritter": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_backfisch": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_de_base_apfelmus": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_de_base_bratenso_e": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_base_butterschmalz": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_de_base_fischfond": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_base_frankfurter_grune_so_e": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_base_gemusebruhe": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_de_base_geriebener_meerrettich": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_de_base_gewurzgurken": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_de_base_griebenschmalz": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_de_base_hefeteig": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_base_huhnerbruhe": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_de_base_jagerso_e": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_base_laugenteig": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_de_base_meerrettichso_e": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_base_murbeteig": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_base_nudelteig": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_de_base_pflaumenmus": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_de_base_quark": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_de_base_quark_ol_teig": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_base_rahmso_e": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_base_rinderbruhe": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_de_base_roggensauerteig": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_de_base_spatzleteig": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_de_base_su_er_senf": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_de_base_weinkraut": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_de_bauernbrot": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_de_berliner_pfannkuchen": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_bienenstich": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_bismarckhering": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_de_bohnensalat": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_de_bratapfel": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_bratkartoffeln": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_christstollen": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_de_currywurst": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_de_dampfnudeln": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_dinkelbrot": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_de_donauwelle": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_eisbein": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_de_erbsensuppe": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_falscher_hase": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_fischfrikadellen": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_fladlesuppe": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_forelle_mullerin_art": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_frankfurter_kranz": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_frikadellen": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_gaisburger_marsch": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_germknodel": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_grie_brei": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_de_grie_nockerlsuppe": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_grune_bohneneintopf": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_grunkohl_mit_pinkel": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_de_gulaschsuppe": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_de_gurkensalat": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_de_hamburger_pannfisch": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_hefezopf": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_heringssalat": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_himmel_und_erde": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_de_hochzeitssuppe": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_huhnerfrikassee": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_jagerschnitzel": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_kaiserbrotchen": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_de_kaiserschmarrn": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_kartoffelknodel": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_kartoffelpuffer": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_kartoffelpuree": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_de_kartoffelsuppe": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_kasekuchen": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_kasespatzle": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_kasseler_mit_sauerkraut": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_de_kohlrabi_in_rahmso_e": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_de_kohlrouladen": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_de_konigsberger_klopse": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_krautsalat": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_de_labskaus": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_laugenbrezel": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_de_laugenbrotchen": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_de_leberkase": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_de_leberknodelsuppe": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_leipziger_allerlei": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_linseneintopf": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_marmorkuchen": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_matjes_nach_hausfrauenart": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_maultaschen": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_norddeutscher_kartoffelsalat": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_nurnberger_lebkuchen": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_de_obatzda": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_de_pellkartoffeln_mit_quark": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_de_pichelsteiner_eintopf": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_de_quarkkeulchen": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_rahmspinat": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_de_rahmwirsing": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_de_rhabarberkuchen": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_rindergulasch": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_rinderrouladen": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_roggenmischbrot": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_de_rollmops": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_de_rosenkohl_mit_speck": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_rote_bete_salat": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_de_rote_grutze": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_rotkohl": [
+    "Omnivore",
+    "Dairy-Free"
+  ],
+  "curated_de_salzkartoffeln": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_de_sauerbraten": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_schnitzel_wiener_art": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_scholle_finkenwerder_art": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_schupfnudeln": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_schwabischer_kartoffelsalat": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_de_schwarzwalder_kirschtorte": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_schweinebraten": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_de_schweinshaxe": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_semmelknodel": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_senfeier": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_spargel_mit_sauce_hollandaise": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_de_spargelcremesuppe": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_spatzle": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_spekulatius": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_strammer_max": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_streuselkuchen": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_vollkornbrot": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_de_wurstsalat": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_de_zimtsterne": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_de_zwetschgendatschi": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_de_zwiebelkuchen": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_de_zwiebelrostbraten": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
   "curated_dessert_baked_cinnamon_apples": [
     "Vegetarian",
     "Plant-Based/Flexitarian",
@@ -522,6 +1997,861 @@
     "Gluten-Free",
     "Dairy-Free"
   ],
+  "curated_fr_aligot": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_fr_baguette": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_fr_base_aioli": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_fr_base_beurre_blanc": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_fr_base_beurre_clarifie": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_fr_base_beurre_maitre_dhotel": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_fr_base_court_bouillon": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_fr_base_creme_anglaise": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_base_creme_fraiche_maison": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_fr_base_creme_patissiere": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_base_croutons": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_fr_base_demi_glace": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_fr_base_duxelles": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_fr_base_fond_blanc_de_volaille": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_fr_base_fond_brun_de_veau": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_fr_base_fumet_de_poisson": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_base_mayonnaise": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_fr_base_oignons_confits": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_fr_base_pate_a_choux": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_base_pate_a_crepes": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_base_pate_a_galettes": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_fr_base_pate_brisee": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_base_pate_feuilletee": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_fr_base_pate_sucree": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_base_persillade": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_fr_base_roux_blond": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_fr_base_sauce_bearnaise": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_base_sauce_bechamel": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_fr_base_sauce_espagnole": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_fr_base_sauce_hollandaise": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_base_sauce_mornay": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_base_sauce_tomate": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_fr_base_sauce_veloute": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_base_vinaigrette_a_la_moutarde": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_fr_bisque_de_homard": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_blanquette_de_veau": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_fr_boeuf_bourguignon": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_fr_bouillabaisse": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_fr_brandade_de_morue": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_brioche": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_canard_a_lorange": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_fr_caneles": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_carbonnade_flamande": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_fr_carottes_rapees": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_fr_carottes_vichy": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_fr_cassoulet": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_fr_celeri_remoulade": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_fr_champignons_a_la_provencale": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_fr_choucroute_garnie": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_fr_clafoutis_aux_cerises": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_confit_de_canard": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_fr_coq_au_vin": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_fr_coquilles_saint_jacques": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_creme_brulee": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_creme_caramel": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_creme_du_barry": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_crepes_au_sucre": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_crepes_suzette": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_croissants": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_croque_madame": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_croque_monsieur": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_daube_provencale": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_fr_eclairs_au_chocolat": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_endives_braisees": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_epinards_a_la_creme": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_fr_escargots_a_la_bourguignonne": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_far_breton": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_filet_mignon_de_porc_a_la": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_financiers": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_flageolets": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_fr_fougasse": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free"
+  ],
+  "curated_fr_galette_complete": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_garbure": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_fr_gateau_basque": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_gigot_dagneau": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_fr_gougeres": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_gratin_dauphinois": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_fr_hachis_parmentier": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_ile_flottante": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_jambon_persille": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_fr_kouign_amann": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_fr_lapin_a_la_moutarde": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_lentilles_du_puy": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_lotte_a_larmoricaine": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_fr_macarons": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_madeleines": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_magret_de_canard": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_fr_mille_feuille": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_moules_marinieres": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_mousse_au_chocolat": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_fr_mousse_de_foies_de_volaille": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_navarin_dagneau": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_fr_oeufs_en_cocotte": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_oeufs_en_meurette": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_oeufs_mimosa": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_fr_omelette_aux_fines_herbes": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_pain_au_chocolat": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_pain_de_campagne": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_fr_pain_de_mie": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_fr_pain_depices": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_fr_paris_brest": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_pate_de_campagne": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_petit_sale_aux_lentilles": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_fr_petits_pois_a_la_francaise": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_piperade": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_fr_pissaladiere": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_fr_poires_belle_helene": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_pommes_anna": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_fr_pommes_frites": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_fr_pommes_sarladaises": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_fr_pot_au_feu": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_fr_potage_parmentier": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_potage_saint_germain": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_poulet_basquaise": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_fr_poulet_chasseur": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_fr_poulet_roti": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_poulet_vallee_dauge": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_profiteroles": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_puree_de_pommes_de_terre": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_fr_quenelles_de_brochet": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_quiche_lorraine": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_raie_au_beurre_noir": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_ratatouille": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_fr_rillettes_de_porc": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_fr_salade_de_chevre_chaud": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean"
+  ],
+  "curated_fr_salade_de_lentilles": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_fr_salade_lyonnaise": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_salade_nicoise": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_fr_saumon_en_papillote": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_fr_sole_meuniere": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_souffle_au_fromage": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_soupe_a_loignon_gratinee": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_fr_soupe_au_pistou": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_steak_au_poivre": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_tapenade": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_fr_tarte_a_loignon": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_tarte_au_citron": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_tarte_aux_fraises": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_tarte_fine_aux_pommes": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_fr_tarte_flambee": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_tarte_tatin": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_tartiflette": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_fr_thon_basquaise": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_fr_tian_provencal": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_fr_truite_aux_amandes": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_veloute_de_champignons": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_fr_vichyssoise": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
   "curated_handheld_bison_roasted_vegetable_wrap": [
     "Omnivore",
     "Dairy-Free",
@@ -581,6 +2911,897 @@
     "Gluten-Free",
     "Dairy-Free",
     "High-Protein"
+  ],
+  "curated_it_abbacchio_alla_romana": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_it_acquacotta": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_affogato_al_caffe": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_agnolotti_del_plin": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_amaretti": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_arancini": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_baccala_alla_vicentina": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "High-Protein"
+  ],
+  "curated_it_base_besciamella": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_it_base_brodo_di_carne": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_it_base_brodo_vegetale": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_it_base_crema_pasticcera": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_base_fumetto_di_pesce": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_it_base_giardiniera": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_it_base_gnocchi_di_patate": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_it_base_gremolata": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_it_base_impasto_per_focaccia": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free"
+  ],
+  "curated_it_base_impasto_per_pizza_napoletana": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_it_base_olio_santo": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_it_base_pan_di_spagna": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_base_pangrattato_tostato": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_it_base_pasta_di_semola": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_it_base_pasta_fresca_alluovo": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_base_pasta_frolla": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_it_base_pesto_alla_genovese": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free"
+  ],
+  "curated_it_base_polenta": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_it_base_ragu_alla_bolognese": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_base_ragu_napoletano": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_it_base_ricotta_fatta_in_casa": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_it_base_salsa_verde": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_base_soffritto": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_it_base_sugo_di_pomodoro": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free"
+  ],
+  "curated_it_bistecca_alla_fiorentina": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_it_bomboloni": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_it_bonet": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_braciole_alla_napoletana": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_branzino_al_forno": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_it_brasato_al_barolo": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_bruschetta_al_pomodoro": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_it_bucatini_allamatriciana": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_busiate_alla_trapanese": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean"
+  ],
+  "curated_it_cacciucco": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_calamari_ripieni": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_calzone": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_canederli": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_cannelloni": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "High-Protein"
+  ],
+  "curated_it_cannoli_siciliani": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_it_cantucci": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_caponata": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_it_carciofi_alla_giudia": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_it_carciofi_alla_romana": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_it_carpaccio_di_manzo": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_ciabatta": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free"
+  ],
+  "curated_it_cicoria_ripassata": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_it_coda_alla_vaccinara": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_it_cotoletta_alla_milanese": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_crostata_di_marmellata": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_it_crostini_di_fegatini": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_fagioli_alluccelletto": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_fettuccine_al_burro": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_it_fiori_di_zucca_fritti": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_it_focaccia_barese": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free"
+  ],
+  "curated_it_focaccia_genovese": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free"
+  ],
+  "curated_it_frittata_di_zucchine": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_fritto_misto_di_mare": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_funghi_trifolati": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_it_gnocchi_alla_sorrentina": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "High-Protein"
+  ],
+  "curated_it_gnocchi_burro_e_salvia": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_it_gnudi": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_it_granita_al_limone": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_it_grissini": [
+    "Omnivore",
+    "Dairy-Free"
+  ],
+  "curated_it_impepata_di_cozze": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_it_insalata_caprese": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free"
+  ],
+  "curated_it_insalata_di_finocchi_e_arance": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_it_involtini_di_manzo": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_it_lasagne_alla_bolognese": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_linguine_allo_scoglio": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_maiale_al_latte": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_minestra_maritata": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_minestrone": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_it_olive_allascolana": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_orecchiette_con_le_cime_di_rapa": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_ossobuco_alla_milanese": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_pane_toscano": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_it_panforte": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_it_panna_cotta": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_it_panzanella": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_it_panzerotti": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean"
+  ],
+  "curated_it_pappa_al_pomodoro": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_it_parmigiana_di_melanzane": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "High-Protein"
+  ],
+  "curated_it_pasta_al_forno": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_pasta_alla_genovese": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_pasta_alla_norma": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean"
+  ],
+  "curated_it_pasta_con_le_sarde": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_pasta_e_ceci": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_pasta_e_fagioli": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free"
+  ],
+  "curated_it_pastiera_napoletana": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_it_patate_al_forno": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_it_peperonata": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_it_pesce_allacqua_pazza": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_it_pesce_spada_alla_siciliana": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_it_piadina_romagnola": [
+    "Omnivore"
+  ],
+  "curated_it_pici_allaglione": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free"
+  ],
+  "curated_it_piselli_al_prosciutto": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_it_pizza_margherita": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean"
+  ],
+  "curated_it_pizza_marinara": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free"
+  ],
+  "curated_it_polenta_concia": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian"
+  ],
+  "curated_it_pollo_al_mattone": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_it_pollo_alla_cacciatora": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_it_polpette_al_sugo": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_polpo_e_patate": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_it_porchetta": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_ravioli_ricotta_e_spinaci": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_it_ribollita": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_rigatoni_alla_gricia": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_risi_e_bisi": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_risotto_ai_funghi_porcini": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_risotto_al_radicchio": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_it_risotto_alla_milanese": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_salsiccia_e_friarielli": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_it_saltimbocca_alla_romana": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_sarde_a_beccafico": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "High-Protein"
+  ],
+  "curated_it_scaloppine_al_limone": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_sfincione": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "High-Protein"
+  ],
+  "curated_it_sfogliatelle": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_spaghetti_aglio_olio_e_peperoncino": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free"
+  ],
+  "curated_it_spaghetti_al_pomodoro": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free"
+  ],
+  "curated_it_spaghetti_alla_carbonara": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_spaghetti_alla_puttanesca": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_spaghetti_alle_vongole": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_stracciatella": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_suppli": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_tagliatelle_al_ragu": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_taralli": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free"
+  ],
+  "curated_it_tiramisu": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_tonnarelli_cacio_e_pepe": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_it_torta_caprese": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_torta_della_nonna": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_it_tortellini": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_tortellini_in_brodo": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_it_trippa_alla_romana": [
+    "Omnivore",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_it_trofie_al_pesto": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Mediterranean"
+  ],
+  "curated_it_verdure_grigliate": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_it_vitello_tonnato": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_it_zabaione": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_it_zeppole_di_san_giuseppe": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_it_zucchine_alla_scapece": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_it_zuppa_di_lenticchie": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Gluten-Free",
+    "Dairy-Free"
   ],
   "curated_mx_agua_de_horchata": [
     "Vegetarian",
@@ -3743,6 +6964,732 @@
     "Dairy-Free",
     "High-Protein"
   ],
+  "curated_th_base_ajad": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_th_base_hom_jiew": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_th_base_kati": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_th_base_khao_khua": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_th_base_khao_niao": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_th_base_khao_suay": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_th_base_moo_krob": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_th_base_nam_jim_jaew": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_th_base_nam_jim_kai": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_th_base_nam_jim_satay": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_th_base_nam_jim_seafood": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_th_base_nam_makham": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_th_base_nam_pla_prik": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_th_base_nam_prik_noom": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_th_base_nam_prik_ong": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_th_base_nam_prik_pao": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_th_base_nam_soup_gai": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_th_base_prik_gaeng_hang_lay": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_th_base_prik_gaeng_kari": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_th_base_prik_gaeng_khao_soi": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_th_base_prik_gaeng_kiew_wan": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_th_base_prik_gaeng_massaman": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_th_base_prik_gaeng_pa": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_th_base_prik_gaeng_panang": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_th_base_prik_gaeng_phed": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_th_base_prik_gaeng_som": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_th_base_prik_pon": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_th_bua_loy": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_th_cha_manao": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_th_cha_yen": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_th_choo_chee_pla": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_gaeng_hang_lay_moo": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_gaeng_jued_tao_hoo": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_gaeng_kari_gai": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_gaeng_kiew_wan_gai": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_gaeng_massaman_neua": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_gaeng_pa": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_gaeng_phed_fak_thong": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_gaeng_phed_ped_yang": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_gaeng_som_goong": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_gaeng_tai_pla": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_gai_pad_khing": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_gai_pad_med_mamuang": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_gai_tod_hat_yai": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_gai_yang": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_goong_ob_woon_sen": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_guay_teow_kua_gai": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_jok": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_kai_jeow": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_kai_look_keuy": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_th_kanom_jeen_nam_ngiao": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_th_kanom_jeen_nam_ya": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_khanom_chan": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_th_khanom_krok": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_th_khanom_tako": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_th_khao_kha_moo": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_khao_man_gai": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_khao_mok_gai": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_th_khao_moo_daeng": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_khao_niao_mamuang": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_th_khao_pad": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_khao_pad_sapparot": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_khao_soi_gai": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_khao_tom": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_khao_yum": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_kluay_buat_chee": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_th_kor_moo_yang": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_th_kuay_teow_reua": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_kuay_teow_tom_yum": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_larb_moo": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_moo_kratiem": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_moo_ping": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_th_moo_tod_kratiem": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_nam_takrai": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_th_nam_tok_neua": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_oliang": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_th_pad_cha_talay": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_pad_kana_moo_krob": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_pad_kee_mao": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_pad_kra_pao": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_pad_pak_boong": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_th_pad_pak_ruam": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_pad_prik_gaeng_moo": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_pad_prik_khing": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_pad_see_ew": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_pad_thai": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_panang_neua": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_pla_pao": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_pla_rad_prik": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_plaa_goong": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_th_poh_taek": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_rad_na": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_sangkaya_fak_thong": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_th_satay_gai": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_seua_rong_hai": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_som_tam_lao": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_th_som_tam_thai": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_th_tod_mun_pla": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_tom_kha_gai": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_tom_kha_hed": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Mediterranean",
+    "Dairy-Free"
+  ],
+  "curated_th_tom_saep": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_tom_yum_goong": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_tub_tim_grob": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_th_yum_mamuang": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_th_yum_neua": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP",
+    "High-Protein"
+  ],
+  "curated_th_yum_pla_duk_fu": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_yum_som_o": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_th_yum_talay": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_th_yum_woon_sen": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
   "curated_vegan_apple_rice_pudding_cinnamon": [
     "Vegan",
     "Plant-Based/Flexitarian",
@@ -4833,5 +8780,667 @@
     "Gluten-Free",
     "Dairy-Free",
     "Paleo"
+  ],
+  "curated_vn_banh_beo": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_banh_bo_nuong": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_banh_bot_loc": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_banh_canh_cua": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_banh_chuoi_nuong": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "High-Protein"
+  ],
+  "curated_vn_banh_cuon": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_banh_da_lon": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_banh_flan": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_vn_banh_khot": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_banh_mi_op_la": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_banh_mi_thit": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_vn_banh_mi_xiu_mai": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_banh_xeo": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_base_banh_mi": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_vn_base_banh_pho_tuoi": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_base_cha_lua": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_base_com_trang": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_base_do_chua": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_base_dua_cai_chua": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_vn_base_hanh_phi": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_vn_base_mo_hanh": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_vn_base_muoi_tieu_chanh": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_vn_base_nuoc_cham": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_base_nuoc_cham_chay": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Dairy-Free"
+  ],
+  "curated_vn_base_nuoc_dung_bun_bo_hue": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_base_nuoc_dung_chay": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "AIP"
+  ],
+  "curated_vn_base_nuoc_dung_pho_bo": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_base_nuoc_dung_pho_ga": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_base_nuoc_dung_xuong_heo": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_base_nuoc_mam_gung": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_base_nuoc_mau": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_base_pa_te_gan": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_vn_base_sa_te": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_base_sot_mayonnaise_banh_mi": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_vn_base_thinh": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_base_tuong_cham_goi_cuon": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo"
+  ],
+  "curated_vn_base_xoi_trang": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_bo_bia": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_bo_kho": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_bo_luc_lac": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_bo_nuong_la_lot": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_bo_tai_chanh": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_bun_bo_hue": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_bun_bo_nam_bo": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_bun_ca": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_bun_cha_gio": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_bun_cha_ha_noi": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_bun_dau_mam_tom": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_bun_moc": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_bun_rieu_cua": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_bun_thang": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_bun_thit_nuong": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_ca_kho_to": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_ca_phe_sua_da": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_vn_ca_phe_trung": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "curated_vn_ca_tim_nuong_mo_hanh": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_canh_bau_tom": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_canh_bi_dao": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_canh_cai_thit_bam": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_canh_chua_ca": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_canh_kho_qua_nhoi_thit": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_canh_rau_ngot": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_cao_lau": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_cha_ca_la_vong": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_cha_gio": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_chao_ga": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_chao_tom": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_che_ba_mau": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_che_chuoi": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_che_dau_xanh": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_che_troi_nuoc": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_com_chien": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_com_ga_hoi_an": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_com_hen": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_com_rang_dua_bo": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_com_tam_suon_nuong": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_dau_hu_sot_ca_chua": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_dau_que_xao_toi": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_dua_gia": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_ga_kho_gung": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_ga_nuong_sa": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_ga_xao_sa_ot": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_goi_cuon": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_vn_goi_du_du": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_goi_ga_bap_cai": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_goi_ngo_sen": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_hu_tieu_nam_vang": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_lau_ca": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_mi_quang": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_mien_xao_cua": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
+    "High-Protein"
+  ],
+  "curated_vn_muc_xao": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_nem_nuong_cuon": [
+    "Omnivore",
+    "High-Protein"
+  ],
+  "curated_vn_nom_hoa_chuoi": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_pho_bo_tai": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_pho_chay": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_pho_cuon": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_pho_ga": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_pho_xao": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_rau_cu_luoc_cham_kho_quet": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_rau_muong_xao_toi": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_sinh_to_bo": [
+    "Vegetarian",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free"
+  ],
+  "curated_vn_sua_dau_nanh": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_suon_ram_man": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_sup_cua": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_thit_kho_trung": [
+    "Omnivore",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_tom_rim": [
+    "Omnivore",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free",
+    "High-Protein"
+  ],
+  "curated_vn_xoi_gac": [
+    "Vegan",
+    "Plant-Based/Flexitarian",
+    "Gluten-Free",
+    "Dairy-Free"
+  ],
+  "curated_vn_xoi_man": [
+    "Omnivore",
+    "Dairy-Free",
+    "High-Protein"
   ]
 }

@@ -169,4 +169,8 @@
 // curated_recipe_unlisted_ingredients (what the food database does not
 // hold), and curated_recipe_ingredients gained from_component. A stale
 // copy has none of these recipes, so phones need the new rows.
-export const REFERENCE_DB_VERSION = "20261029120000";
+// BUMPED 2026-10-29. 779 more System Recipes: French, Italian, German,
+// Chinese, Thai and Vietnamese, each with the bases it is made from, and
+// two older recipes now name pure maple syrup by its database name. A
+// stale copy has none of these recipes, so phones need the new rows.
+export const REFERENCE_DB_VERSION = "20261029180000";

@@ -2424,6 +2424,4979 @@
         }
       ],
       "curationNote": "Andrea Nguyen food processor Vietnamese baguette (1 packet yeast, 1 1/2 cups water, 3 1/2 cups low-protein flour, salt, sugar, three rises, 450°F with steam), shaped as 8 short bánh mì rolls instead of two loaves, so baking time is shortened. Wikipedia says the bread often includes rice flour; Andrea Nguyen calls that a myth and says the lightness comes from low-protein flour and dough conditioners, so no rice flour is used. About 100 g a roll."
+    },
+    {
+      "id": "curated_vn_pho_bo_tai",
+      "name": "Phở Bò Tái (Beef Phở with Rare Steak)",
+      "builderType": "soup",
+      "dishGroup": "Phở & Noodle Soups",
+      "region": "Northern / Hà Nội",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Clear, spiced beef broth poured boiling over soft rice noodles and paper-thin raw steak that turns pink as you watch, brightened by herbs, lime and chile.",
+      "healthBenefit": "A bowl gives protein from the steak and brisket slices, carbohydrate from the rice noodles and fresh herbs and sprouts on the side; the broth is well salted, so it is a sodium-rich meal.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_nuoc_dung_pho_bo",
+          "servings": 16,
+          "note": "2 cups per bowl, at a rolling boil; the chuck simmered in it is sliced for the bowls"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "PastaNoodles",
+          "baseName": "Pasta, rice noodles, dry",
+          "quantity": 800,
+          "unit": "g",
+          "cutPrep": "flat bánh phở, soaked 30 minutes",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Beef Eye of Round (Raw)",
+          "quantity": 225,
+          "unit": "g",
+          "cutPrep": "partly frozen, sliced paper thin across the grain",
+          "cookingMethod": null,
+          "prepNote": "cooked by the boiling broth in the bowl"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 0.5,
+          "unit": "each",
+          "cutPrep": "sliced paper thin, soaked 30 minutes in cold water",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "green parts, thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Thai basil (húng quế)",
+          "contains": "none",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "culantro (ngò gai)",
+          "contains": "none",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "leaves, torn",
+          "prepNote": null
+        },
+        {
+          "category": "Sprouts",
+          "baseName": "Mung Bean Sprouts (Raw)",
+          "quantity": 225,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "Thai or serrano, sliced thin",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "SaucesCondiments",
+          "baseName": "Hoisinsaus, hjemmelaget",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "optional, for the table"
+        }
+      ],
+      "instructions": [
+        "Bring the broth to a rolling boil and keep it there while you build the bowls. Taste it once more for salt and fish sauce.",
+        "Soak the dried noodles in hot tap water for 15 to 30 minutes until pliable, then drain. Slice the cooked chuck from the broth and the raw eye of round as thin as you can.",
+        "Set out the herbs, sprouts, chile and lime on a plate for the table.",
+        "For each bowl, dip a portion of noodles in a pot of boiling water for 10 to 20 seconds until soft but not mushy, shake dry and drop into a warmed bowl.",
+        "Lay slices of cooked chuck and raw eye of round over the noodles, then scatter onion, scallion and cilantro on top.",
+        "Ladle about 2 cups of boiling broth over each bowl so the raw beef cooks to pink at once. Serve right away with the herb plate, lime and hoisin."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the raw eye of round and the chuck cooked in the broth."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the beef."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "From the seasoned broth; the herbs and lime bring brightness without more salt."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Beef Pho Noodle Soup",
+          "url": "https://www.vietworldkitchen.com/blog/2008/10/pho-beef-noodle-soup.html"
+        }
+      ],
+      "curationNote": "Andrea Nguyen beef pho bowls as written: 8 bowls, 1.5 to 2 lb noodles, half a pound of eye of round sliced thin, onion soaked in water, scallion, cilantro, Thai basil, ngò gai, half a pound of sprouts, chile, lime. Hà Nội cooks serve phở bò with fewer table herbs than the south; the plate is kept for those who want it. Broth linked as a component, 16 cups for 8 bowls."
+    },
+    {
+      "id": "curated_vn_pho_ga",
+      "name": "Phở Gà (Chicken Phở)",
+      "builderType": "soup",
+      "dishGroup": "Phở & Noodle Soups",
+      "region": "Northern / Hà Nội",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "A golden, gently spiced chicken broth, sweeter and lighter than beef phở, over soft noodles with tender poached chicken, raw onion and a sharp hit of black pepper and lime.",
+      "healthBenefit": "Lean protein from the poached chicken and carbohydrate from the noodles in a well-seasoned broth; it is a lighter bowl than beef phở but still high in sodium.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_nuoc_dung_pho_ga",
+          "servings": 16,
+          "note": "2 cups per bowl; the poached chicken from the broth is shredded for the bowls"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "PastaNoodles",
+          "baseName": "Pasta, rice noodles, dry",
+          "quantity": 800,
+          "unit": "g",
+          "cutPrep": "flat bánh phở, soaked 30 minutes",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 0.5,
+          "unit": "each",
+          "cutPrep": "sliced paper thin, soaked 30 minutes in cold water",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "freshly ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "sliced thin",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sprouts",
+          "baseName": "Mung Bean Sprouts (Raw)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "cookingMethod": null,
+          "prepNote": "optional, more of a southern habit"
+        }
+      ],
+      "instructions": [
+        "Bring the broth back to a boil. Pull the chicken from the bone and tear it into thin strips, keeping the skin if you like it.",
+        "Soak the noodles in hot tap water for 15 to 30 minutes until pliable, then drain.",
+        "Blanch each portion of noodles in boiling water for 10 to 20 seconds, shake dry and drop into a warmed bowl.",
+        "Top with chicken, onion, scallion and cilantro and a grind of black pepper.",
+        "Ladle about 2 cups of boiling broth into each bowl and serve with chile, lime and sprouts on the side."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the poached whole chicken shredded into each bowl."
+        },
+        {
+          "nutrient": "Niacin",
+          "note": "From the chicken meat."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Chicken Pho Noodle Soup",
+          "url": "https://www.vietworldkitchen.com/blog/2007/06/chicken_pho_noo.html"
+        }
+      ],
+      "curationNote": "Andrea Nguyen phở gà bowls: 8 bowls, chicken from the broth shredded on top, thin onion, scallion, cilantro, pepper, lime and chile. The chicken is counted inside the broth component, since all 16 cups (the whole batch) go into these 8 bowls."
+    },
+    {
+      "id": "curated_vn_bun_bo_hue",
+      "name": "Bún Bò Huế",
+      "builderType": "soup",
+      "dishGroup": "Phở & Noodle Soups",
+      "region": "Central / Huế",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Fiery, lemongrass-heavy broth with a funky depth of shrimp paste, slick round noodles, tender beef shank, pork and peppery chả Huế, finished with a mountain of crisp shaved vegetables.",
+      "healthBenefit": "A hearty bowl with plenty of protein and iron from beef, pork and blood cake and fiber from the raw banana blossom, cabbage and herbs; it is rich, spicy and high in sodium.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_nuoc_dung_bun_bo_hue",
+          "servings": 20,
+          "note": "2.5 cups per bowl, with the beef shank and pork hock sliced from it"
+        },
+        {
+          "recipeId": "curated_vn_base_sa_te",
+          "servings": 4,
+          "note": "on the table for more heat"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "PastaNoodles",
+          "baseName": "Pasta, rice noodles, dry",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "thick round bún bò Huế noodles",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "chả Huế (Huế peppered pork roll)",
+          "contains": "meat",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "cooked pork blood cake (huyết heo)",
+          "contains": "meat",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "cut in 1-inch cubes",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 0.5,
+          "unit": "each",
+          "cutPrep": "sliced paper thin",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, spearmint, fresh",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Thai basil (húng quế)",
+          "contains": "none",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "prepNote": null
+        },
+        {
+          "category": "Sprouts",
+          "baseName": "Mung Bean Sprouts (Raw)",
+          "quantity": 225,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "banana blossom (bắp chuối)",
+          "contains": "none",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "thinly shaved and soaked in lemon water",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cabbage",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "shaved thin",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "water spinach stems (rau muống chẻ)",
+          "contains": "none",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "split into thin curls",
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Cook the noodles in plenty of boiling water for 8 to 12 minutes, or as the package says, until soft but springy. Rinse under cold water and drain.",
+        "Bring the broth back to a simmer and warm the blood cake cubes in it for 3 to 5 minutes.",
+        "Slice the beef shank and pork hock from the broth and the chả Huế into bite-size pieces.",
+        "Put a portion of noodles into each bowl, lay on beef, pork, chả Huế and blood cake, and top with onion, scallion and cilantro.",
+        "Ladle about 2.5 cups of hot broth into each bowl.",
+        "Serve with a big plate of mint, Thai basil, sprouts, banana blossom, cabbage, water spinach curls, lime and sa tế for each person to add."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the beef shank, pork hock, chả Huế and blood cake."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the beef and the pork blood cake."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From the banana blossom, cabbage, water spinach and herbs added raw."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Hungry Huy, Bún Bò Huế",
+          "url": "https://www.hungryhuy.com/bun-bo-hue-recipe/"
+        },
+        {
+          "source": "Vicky Pham, Vietnamese Spicy Beef Noodle Soup (Bún Bò Huế)",
+          "url": "https://vickypham.com/blog/vietnamese-spicy-beef-noodle-soup-bun-bo-hue/"
+        }
+      ],
+      "curationNote": "Hungry Huy and Vicky Pham compared. Both use thick round noodles (14 oz for the pot), chả Huế, blood cake, beef shank and pork hock from the broth, and a raw plate of mint, Thai basil, sprouts, banana blossom, cabbage and water spinach. The chả Huế quantity is from Hungry Huy (1 lb). Chả Huế and blood cake are not in the food database. The whole 20-cup broth batch goes into these 8 bowls, so its meat is counted once."
+    },
+    {
+      "id": "curated_vn_bun_rieu_cua",
+      "name": "Bún Riêu Cua (Crab and Tomato Noodle Soup)",
+      "builderType": "soup",
+      "dishGroup": "Phở & Noodle Soups",
+      "region": "Southern / Sài Gòn",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "A tangy, tomato-red broth with soft, crab-scented clouds of riêu floating on top, slippery vermicelli, fried tofu and a briny shrimp-paste depth cut with lime and herbs.",
+      "healthBenefit": "Protein from crab, pork, egg and tofu and vitamin C and lycopene from the tomatoes, with greens added raw; the shrimp paste and fish sauce make it a salty bowl.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_nuoc_dung_xuong_heo",
+          "servings": 12,
+          "note": "about 1.5 cups per bowl"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Spare Ribs (Raw)",
+          "quantity": 700,
+          "unit": "g",
+          "cutPrep": "cut in 2-inch pieces, parboiled and rinsed",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried shrimp (tôm khô)",
+          "contains": "fish",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Crab Crustaceans",
+          "quantity": 160,
+          "unit": "g",
+          "cutPrep": "picked crab meat",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "jarred spiced crab paste for riêu (gia vị nấu riêu cua)",
+          "contains": "fish",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Ground Pork (Raw)",
+          "quantity": 225,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "beaten",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 900,
+          "unit": "g",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Tomato ketchup",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "mắm ruốc (fermented shrimp paste)",
+          "contains": "fish",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "rock sugar, crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PastaNoodles",
+          "baseName": "Pasta, rice noodles, dry",
+          "quantity": 900,
+          "unit": "g",
+          "cutPrep": "medium round bún",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Legume",
+          "baseName": "Tofu, firm, prepared with calcium sulfate and magnesium chloride (nigari)",
+          "quantity": 225,
+          "unit": "g",
+          "cutPrep": "cut in cubes",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "cooked pork blood cake (huyết heo)",
+          "contains": "meat",
+          "quantity": 225,
+          "unit": "g",
+          "cutPrep": "cut in 1-inch cubes",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "water spinach stems (rau muống chẻ)",
+          "contains": "none",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "split into thin curls",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, green leaf",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sprouts",
+          "baseName": "Mung Bean Sprouts (Raw)",
+          "quantity": 225,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Perilla, \"Shiso\", leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, spearmint, fresh",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring the pork bone broth to a simmer with the parboiled ribs and cook gently for 45 minutes to 1 hour, until the ribs are tender, skimming as needed.",
+        "Soak the dried shrimp in warm water for 20 minutes, drain and chop fine. Fry them in 2 tbsp oil with half the shallot and garlic for 3 to 5 minutes, then cool.",
+        "Mix the cooled shrimp with the crab meat, crab paste, ground pork and eggs. Drop spoonfuls into the barely simmering broth and leave them alone for 15 to 20 minutes, until they float and set into soft clouds.",
+        "In a skillet, fry the rest of the shallot and garlic in 2 tbsp oil, add the tomatoes and cook 2 to 5 minutes until just soft, then slide them into the pot.",
+        "Loosen the shrimp paste with a ladle of broth, let it settle and pour in only the clear liquid. Season with ketchup, fish sauce, rock sugar and salt; it should taste bright, a little sweet and salty.",
+        "Cook the noodles as the package says, rinse and drain. Add the fried tofu and blood cake to the pot for the last 5 minutes.",
+        "Put noodles in each bowl, ladle in broth with riêu, ribs, tofu, blood cake and tomato, top with scallion and serve with the greens, herbs and lime."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the crab, pork, eggs, tofu and ribs."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the tomatoes, lime and raw greens."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the dried shrimp, eaten shell and all, and the tofu."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Vicky Pham, Vietnamese Crab Noodle Soup (Bún Riêu)",
+          "url": "https://vickypham.com/blog/vietnamese-crab-noodle-soup-bun-rieu/"
+        },
+        {
+          "source": "Hungry Huy, Bún Riêu",
+          "url": "https://www.hungryhuy.com/bun-rieu-recipe/"
+        }
+      ],
+      "curationNote": "Vicky Pham (pork rib stock, dried shrimp and jarred crab paste riêu with ground pork and eggs, tomatoes, ketchup, mắm ruốc, fried tofu, blood cake, water spinach) compared with Hungry Huy (canned crab with fresh crab and ground pork, 1 tsp shrimp paste, rock sugar, 4 tbsp ketchup, perilla and mint). The southern rib version with ketchup and fried tofu is written here; Hà Nội bún riêu is plainer, built on pounded field crab. The plain pork bone base replaces her stock, with the ribs simmered in it. Quantities scaled to 8 bowls."
+    },
+    {
+      "id": "curated_vn_hu_tieu_nam_vang",
+      "name": "Hủ Tiếu Nam Vang",
+      "builderType": "soup",
+      "dishGroup": "Phở & Noodle Soups",
+      "region": "Southern / Sài Gòn",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "A clear, sweet pork broth deepened with dried squid and shrimp, over chewy rice sticks with pork slices, liver, shrimp and crisp fried garlic, eaten with lettuce, chives and lime.",
+      "healthBenefit": "A bowl brings protein from pork, shrimp and liver, and the liver adds vitamin A, B12 and iron; it is a salty broth, and liver is best eaten only now and then in pregnancy.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_nuoc_dung_xuong_heo",
+          "servings": 16,
+          "note": "2 cups per bowl; the pork loin cooked in it is sliced for the bowls"
+        },
+        {
+          "recipeId": "curated_vn_base_hanh_phi",
+          "servings": 4,
+          "note": "on top"
+        }
+      ],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "dried squid (mực khô)",
+          "contains": "fish",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "toasted and rinsed",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried shrimp (tôm khô)",
+          "contains": "fish",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "prepNote": null
+        },
+        {
+          "category": "PastaNoodles",
+          "baseName": "Pasta, rice noodles, dry",
+          "quantity": 800,
+          "unit": "g",
+          "cutPrep": "hủ tiếu dried clear rice sticks, soaked 20 minutes",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Liver (Raw)",
+          "quantity": 350,
+          "unit": "g",
+          "cutPrep": "sliced thin",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Ground Pork (Raw)",
+          "quantity": 225,
+          "unit": "g",
+          "cutPrep": "crumbled",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Shrimp Crustaceans",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "16 medium shrimp, peeled",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": "Fried",
+          "prepNote": "fried golden in the oil for tỏi phi"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Chinese Chive Leaves",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "cut in 2-inch lengths",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Celery",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "Chinese celery leaves and thin stems, chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sprouts",
+          "baseName": "Mung Bean Sprouts (Raw)",
+          "quantity": 225,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, green leaf",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "leaves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, white, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Toast the dried squid over a flame or in a dry pan until fragrant, then rinse it with the dried shrimp. Simmer both in the pork broth for 30 to 45 minutes, then lift them out.",
+        "Fry the garlic in the oil over medium-low heat for 2 to 4 minutes until pale gold, then pour into a bowl; it keeps cooking as it cools.",
+        "In a small pot of broth, poach the liver for 2 to 3 minutes, the ground pork until no longer pink, about 3 minutes, and the shrimp for 2 to 3 minutes until pink. Slice the pork loin from the broth.",
+        "Blanch each portion of noodles in boiling water for 20 to 40 seconds, shake dry and put in a bowl.",
+        "Top with pork loin, liver, ground pork and shrimp, a spoon of fried garlic and its oil, fried shallots, chives, celery and cilantro, and a pinch of white pepper.",
+        "Ladle about 2 cups of boiling broth into each bowl. Serve with lettuce, sprouts, chile and lime."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the pork liver."
+        },
+        {
+          "nutrient": "Vitamin B12",
+          "note": "From the liver, shrimp and pork."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From pork loin, ground pork, liver and shrimp."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Hu Tieu Nam Vang",
+          "url": "https://www.vietworldkitchen.com/blog/2007/11/hu-tieu-nam-van.html"
+        },
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Hủ Tiếu Noodle Soup Deep Dive",
+          "url": "https://www.vietworldkitchen.com/blog/2019/09/hu-tieu-noodle-soup-deep-dive-bonus-and-a-recipe.html"
+        }
+      ],
+      "curationNote": "Andrea Nguyen hủ tiếu Nam Vang (2007) and her later deep dive compared: dried squid and dried shrimp in the pork broth, pork loin, pork liver, ground pork, 16 shrimp, fried garlic, chives, sprouts, lettuce. The squid and shrimp are added here to the plain pork bone base, which leaves them out. 8 bowls of 2 cups use the whole broth batch, so its loin is counted once. Hủ tiếu noodles (tapioca or rice sticks) are written as dried rice noodles, the closest database row."
+    },
+    {
+      "id": "curated_vn_mi_quang",
+      "name": "Mì Quảng",
+      "builderType": "soup",
+      "dishGroup": "Phở & Noodle Soups",
+      "region": "Central / Quảng Nam",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Wide turmeric-yellow noodles in just a shallow pool of rich, golden pork and shrimp broth, with caramelized pork belly and shrimp, roasted peanuts and crackling rice crackers broken over the top.",
+      "healthBenefit": "Protein from pork, shrimp and quail eggs, and fiber from the raw greens and herbs; the pork belly makes it a rich bowl.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_hanh_phi",
+          "servings": 4,
+          "note": "on top"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Gris fläskben rå",
+          "quantity": 1360,
+          "unit": "g",
+          "cutPrep": "neck bones, parboiled and rinsed",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "cut in bite-size slices",
+          "cookingMethod": "Braised",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Shrimp Crustaceans",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "head on, heads and shells pulled off and kept",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1900,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "annatto seeds (hạt điều màu)",
+          "contains": "none",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "halved",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 18,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Turmeric, dried, ground",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "divided between broth, pork and shrimp"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Paprika",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "divided"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "divided"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "divided"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "divided"
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Quail Egg (Raw)",
+          "quantity": 12,
+          "unit": "each",
+          "cutPrep": "boiled and peeled",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "fresh mì Quảng noodles (wide turmeric rice noodles)",
+          "contains": "none",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "blanched"
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Peanut",
+          "quantity": 70,
+          "unit": "g",
+          "cutPrep": "roasted, coarsely crushed",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sprouts",
+          "baseName": "Mung Bean Sprouts (Raw)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cabbage",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "shaved thin",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, green leaf",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "torn",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, spearmint, fresh",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "sesame rice crackers (bánh tráng mè)",
+          "contains": "none",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "grilled or microwaved until puffed",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Warm the annatto seeds in the oil over low heat for 2 to 3 minutes until the oil turns deep orange, then strain out the seeds.",
+        "Fry the shrimp heads and shells in 1 tbsp of the annatto oil for about 5 minutes, until red and fragrant. Add the bones, onion and water, bring to a boil, then simmer gently for 45 minutes. Strain.",
+        "Toss the pork belly with a third of the turmeric, paprika, fish sauce, sugar and salt and half the shallot and garlic. Brown it in 1 tbsp annatto oil for about 5 minutes, then simmer it in the broth for 15 minutes until tender.",
+        "Toss the shrimp with the same seasonings, fry the rest of the shallot and garlic in the last of the oil, and cook the shrimp for about 3 minutes until caramelized. Season the broth with what remains; it should be strong, since only a little goes in each bowl.",
+        "Add the quail eggs to the broth to color them. Blanch the noodles for a few seconds and divide among wide bowls over a bed of sprouts, cabbage and lettuce.",
+        "Top with pork, shrimp and two eggs, ladle in about 1 cup of broth, which should only half cover the noodles, and finish with peanuts, fried shallots, scallion and cilantro. Break a rice cracker over each bowl and serve with herbs, lime and chile."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the shrimp, pork belly and quail eggs."
+        },
+        {
+          "nutrient": "Healthy fats",
+          "note": "From the roasted peanuts; the pork belly adds saturated fat."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From the bed of raw greens and herbs."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Vicky Pham, Mì Quảng",
+          "url": "https://vickypham.com/blog/central-vietnams-must-eat-noodle-dish-mi-quang/"
+        },
+        {
+          "source": "Helen's Recipes, Mì Quảng Tôm Thịt Trứng",
+          "url": "https://helenrecipes.com/mi-quang-tom-thit-trung/"
+        }
+      ],
+      "curationNote": "Vicky Pham mì quảng (3 lb pork bones, 1 lb pork belly, 1 lb head-on shrimp, 2 qt water, shrimp heads fried for the broth, turmeric and paprika, 2 packs yellow noodles, about 1 cup broth a bowl, sesame crackers) compared with Helen Le (quail eggs, caramelized shrimp, annatto oil, fresh turmeric, more peanuts, and her note that there is no single master recipe). Kept Vicky as the frame and Helen quail eggs and annatto oil. Region named as Quảng Nam, where the dish comes from. Pork bones are counted from the Swedish raw pork bone row in the database."
+    },
+    {
+      "id": "curated_vn_banh_canh_cua",
+      "name": "Bánh Canh Cua (Crab Tapioca Noodle Soup)",
+      "builderType": "soup",
+      "dishGroup": "Phở & Noodle Soups",
+      "region": "Southern / Sài Gòn",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "A thick, glossy, orange-tinted broth that clings to fat, chewy tapioca noodles, with sweet crab, shrimp and fall-apart pork ribs.",
+      "healthBenefit": "Protein from crab, shrimp and pork ribs; the noodles and the tapioca-thickened broth are mostly starch, so it is a filling, salty bowl.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_nuoc_dung_xuong_heo",
+          "servings": 12,
+          "note": "2 cups per bowl"
+        },
+        {
+          "recipeId": "curated_vn_base_hanh_phi",
+          "servings": 3,
+          "note": "on top"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Spare Ribs (Raw)",
+          "quantity": 700,
+          "unit": "g",
+          "cutPrep": "cut in 2-inch pieces, parboiled and rinsed",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "annatto seeds (hạt điều màu)",
+          "contains": "none",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": "half warmed with the annatto, half for the crab"
+        },
+        {
+          "category": "Grain",
+          "baseName": "Tapioca (granulated cassava starch)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "tapioca starch",
+          "cookingMethod": null,
+          "prepNote": "stirred into 120 ml cold water"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": "cold",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "bánh canh noodles (thick tapioca and rice flour noodles)",
+          "contains": "none",
+          "quantity": 900,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "fresh, boiled as the package says"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Sesamolja",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Crab Crustaceans",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "cooked crab meat",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Shrimp Crustaceans",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "15 large shrimp, peeled and cooked",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Simmer the parboiled ribs in the pork bone broth, uncovered and very gently, for about 1 hour until tender.",
+        "Warm the annatto seeds in 1 tbsp oil over low heat for 2 to 3 minutes, strain and stir the colored oil into the broth. Season with sugar, salt and fish sauce.",
+        "Stir the tapioca starch into the cold water, pour it into the simmering broth while stirring, and cook about 5 minutes until it thickens slightly and turns glossy.",
+        "Boil the noodles as the package says, drain and toss with the sesame oil so they do not stick.",
+        "Fry the garlic in the remaining oil over medium-high heat until fragrant, add the crab and toss for 1 to 2 minutes.",
+        "Divide the noodles among bowls, ladle in broth with ribs, top with crab and 2 or 3 shrimp, and finish with pepper, scallion, cilantro and fried shallots. Serve with lime."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the crab, shrimp and pork ribs."
+        },
+        {
+          "nutrient": "Zinc",
+          "note": "From the crab meat."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Vicky Pham, Bánh Canh Cua (Vietnamese Crab Thick Noodle Soup)",
+          "url": "https://vickypham.com/blog/vietnamese-shrimp-crab-thick-noodle-soup-banh-canh-tom-cua/"
+        }
+      ],
+      "curationNote": "Vicky Pham bánh canh cua (3 lb pork bones in 3 qt water with daikon, sugar, salt, fish sauce, annatto oil, 1/4 cup tapioca starch to thicken, 2 lb noodles, 1 lb crab fried with garlic, 15 shrimp). The plain pork bone base, which has the daikon, stands in for her stock, with the ribs simmered in it to eat. Bouillon powder left out. Single opened source."
+    },
+    {
+      "id": "curated_vn_bun_moc",
+      "name": "Bún Mọc (Pork Meatball Noodle Soup)",
+      "builderType": "soup",
+      "dishGroup": "Phở & Noodle Soups",
+      "region": "Northern / Hà Nội",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "A clear, mild pork broth with springy pork meatballs flecked with wood ear and fried shallot, over soft round noodles with a fresh lift of herbs and lime.",
+      "healthBenefit": "Protein from the pork meatballs in a light broth with mushrooms; a gentle, lower-fat noodle soup that is still well salted.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_nuoc_dung_xuong_heo",
+          "servings": 8,
+          "note": "2 cups per bowl"
+        },
+        {
+          "recipeId": "curated_vn_base_hanh_phi",
+          "servings": 4,
+          "note": "mixed into the meatballs"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Ground Pork (Raw)",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "lean, very cold",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tbsp in the meatballs, 2 in the broth"
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Potato Starch",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baking powder",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": "ice cold",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Mushroom",
+          "baseName": "Jew's ear (cloud or wood ear, pepeao)",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "dried, soaked and minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Mushroom",
+          "baseName": "Shiitake mushroom dried",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "4 mushrooms, soaked and sliced",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "halved",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PastaNoodles",
+          "baseName": "Pasta, rice noodles, dry",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "round bún",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Make the giò sống: pulse the cold pork with 1 tbsp fish sauce, the potato starch, baking powder and ice water in a food processor until smooth and sticky, 2 to 3 minutes. Fold in the wood ear, fried shallots and pepper. Chill 30 minutes.",
+        "Bring the broth to a simmer with the onion and shiitake for 15 to 20 minutes.",
+        "Wet your hands or a spoon and drop walnut-size balls into the barely simmering broth. Cook 10 to 15 minutes, until they float and feel springy.",
+        "Season the broth with the rest of the fish sauce, salt and sugar. Lift out the onion.",
+        "Cook the noodles as the package says, rinse and drain, and divide among bowls.",
+        "Ladle in broth, meatballs and mushrooms, and top with cilantro and scallion. Serve with lime and chile."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the pork meatballs."
+        },
+        {
+          "nutrient": "Thiamin",
+          "note": "From the pork."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Vicky Pham, Vietnamese Pork Meatball Noodle Soup (Bún Mọc)",
+          "url": "https://vickypham.com/blog/vietnamese-pork-meatball-noodle-soup-bun-moc/"
+        }
+      ],
+      "curationNote": "Vicky Pham bún mọc (1 lb giò sống, 10 g wood ear, 1/4 cup fried shallot, pepper, broth with onion and 4 shiitake, salt, fish sauce, sugar, 1 lb round noodles). She buys giò sống; it is made here from ground pork with fish sauce, potato starch, baking powder and ice water, the same paste as the Chả Lụa base. Bouillon left out and the plain pork bone base replaces her water broth. Single opened source."
+    },
+    {
+      "id": "curated_vn_bun_thang",
+      "name": "Bún Thang",
+      "builderType": "soup",
+      "dishGroup": "Phở & Noodle Soups",
+      "region": "Northern / Hà Nội",
+      "servings": 5,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "A delicate, crystal-clear chicken and dried shrimp broth over fine vermicelli, topped with neat threads of egg crêpe, pork roll and chicken, with a whisper of rau răm.",
+      "healthBenefit": "Lean protein from chicken, egg and pork roll in a clear broth; a light, elegant soup that is easy to eat.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_cha_lua",
+          "servings": 4,
+          "note": "about 225 g, cut in thin strips"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Chicken, broiler or fryers",
+          "quantity": 900,
+          "unit": "g",
+          "cutPrep": "or a mix of legs and breast",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "charred and peeled",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried shrimp (tôm khô)",
+          "contains": "fish",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2400,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "beaten with a pinch of salt",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "PastaNoodles",
+          "baseName": "Pasta, rice noodles, dry",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "thin vermicelli",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Vietnamese coriander (rau răm)",
+          "contains": "none",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "mắm tôm (fermented shrimp sauce)",
+          "contains": "fish",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the chicken, charred onion and dried shrimp in the water, bring to a boil, skim, then simmer gently for 15 to 20 minutes until the chicken is just cooked.",
+        "Lift out the chicken, cool it and tear the meat into fine shreds. Return the bones to the pot and simmer 20 to 30 minutes more, then strain and season with fish sauce and salt.",
+        "Wipe a nonstick pan with a little oil and cook the egg in paper-thin sheets over low heat, about 1 minute each. Roll them up and slice into fine threads.",
+        "Cook the noodles as the package says, rinse and drain, and divide among bowls.",
+        "Arrange chicken, egg threads and strips of chả lụa in neat sections over the noodles, and add scallion, cilantro and rau răm.",
+        "Ladle in hot broth. Serve with chile, lime and a dab of mắm tôm for those who want it."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From chicken, egg and chả lụa."
+        },
+        {
+          "nutrient": "Choline",
+          "note": "From the eggs."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Hungry Huy, Bún Thang (Hà Nội Noodle Soup)",
+          "url": "https://www.hungryhuy.com/bun-thang-vietnamese-hanoi-soup/"
+        }
+      ],
+      "curationNote": "Hungry Huy bún thang (5 bowls: 2 lb chicken, onion, 2 tbsp dried shrimp, fish sauce, 8 to 12 cups water, 4 eggs in thin sheets, half a pound of chả lụa, 16 oz vermicelli, rau răm, optional mắm tôm). Other versions add shiitake and dried squid, seen in search and not opened. The bones go back in for a second simmer, a common Hà Nội step. Chả lụa linked to the base. Single opened source."
+    },
+    {
+      "id": "curated_vn_pho_chay",
+      "name": "Phở Chay (Vegetarian Phở)",
+      "builderType": "soup",
+      "dishGroup": "Phở & Noodle Soups",
+      "region": "Northern / Hà Nội",
+      "servings": 5,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "A sweet, clean vegetable broth perfumed with charred ginger, star anise and cinnamon, over flat noodles with golden fried tofu, five-spice mushrooms and a pile of fresh herbs.",
+      "healthBenefit": "A plant-based phở with protein and calcium from tofu, fiber from the mushrooms and sprouts and plenty of fresh herbs; lighter in fat than beef phở.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_nuoc_dung_chay",
+          "servings": 10,
+          "note": "2 cups per bowl"
+        }
+      ],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "dried tofu skin (tàu hũ ky)",
+          "contains": "none",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "soaked 15 minutes in warm water, cut in strips",
+          "prepNote": null
+        },
+        {
+          "category": "Legume",
+          "baseName": "Tofu, firm, prepared with calcium sulfate and magnesium chloride (nigari)",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "cut in bite-size pieces",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": "what the tofu absorbs"
+        },
+        {
+          "category": "Mushroom",
+          "baseName": "Oyster mushroom",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "torn",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "five-spice powder",
+          "contains": "none",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PastaNoodles",
+          "baseName": "Pasta, rice noodles, dry",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "flat bánh phở",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "culantro (ngò gai)",
+          "contains": "none",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "leaves, torn",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Thai basil (húng quế)",
+          "contains": "none",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "prepNote": null
+        },
+        {
+          "category": "Sprouts",
+          "baseName": "Mung Bean Sprouts (Raw)",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "blanched",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "SaucesCondiments",
+          "baseName": "Hoisinsaus, hjemmelaget",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "optional"
+        }
+      ],
+      "instructions": [
+        "Bring the vegetable broth to a simmer and taste for salt.",
+        "Fry the tofu in hot oil, about 350°F (175°C), for 5 to 7 minutes until golden on all sides, then drain.",
+        "Toss the tofu, tofu skin and mushrooms separately with the salt, sugar and five-spice. Sauté the mushrooms in a little oil for 3 to 4 minutes.",
+        "Soak and cook the noodles as the package says, rinse in cold then hot water, and drain well so they stay fluffy.",
+        "Fill each bowl a third full with noodles, top with tofu, tofu skin, mushrooms and chopped ngò gai, then ladle about 2 cups of hot broth over.",
+        "Serve with Thai basil, more ngò gai, blanched sprouts, lime, chile and hoisin."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the fried tofu and tofu skin."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "From the tofu set with calcium sulfate."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From mushrooms, sprouts and herbs."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Helen's Recipes, Phở Chay (Vegetarian Phở)",
+          "url": "https://helenrecipes.com/recipe-pho-chay-vegetarian-pho/"
+        }
+      ],
+      "curationNote": "Helen Le phở chay toppings and bowl (400 g fried tofu, 100 g tofu skin or vegan slices, 250 g mushrooms, five-spice, 450 g dried flat noodles, 100 g sawtooth herb, 100 g basil, 500 g sprouts) for 4 to 6, written for 5. Her phở chay broth (apple, pear, carrot, kohlrabi, charred ginger and spices) is close to the Nước Dùng Chay base, which is linked instead. Single opened source. Hoisin is the homemade row and has no animal products; mushroom seasoning powder left out."
+    },
+    {
+      "id": "curated_vn_bun_ca",
+      "name": "Bún Cá (Fish Noodle Soup)",
+      "builderType": "soup",
+      "dishGroup": "Phở & Noodle Soups",
+      "region": "Mekong Delta",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "A clean, slightly sweet pork broth with silky poached fish, soft shrimp and egg, sharp pickled leek and chile, and a cool tangle of sprouts, cucumber and rau răm.",
+      "healthBenefit": "Lean protein from fish, shrimp and egg in a light broth, with raw vegetables and herbs; the fish sauce makes it salty.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_nuoc_dung_xuong_heo",
+          "servings": 8,
+          "note": "2 cups per bowl"
+        },
+        {
+          "recipeId": "curated_vn_base_hanh_phi",
+          "servings": 4,
+          "note": "on top"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 3.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1.5 tbsp in the broth, 2 tbsp in the leek relish"
+        },
+        {
+          "category": "Meat",
+          "baseName": "Shrimp Crustaceans",
+          "quantity": 170,
+          "unit": "g",
+          "cutPrep": "peeled, chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "beaten",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg Yolk (Raw)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "beaten with the egg",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Paprika",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "pickled leeks (củ kiệu)",
+          "contains": "none",
+          "quantity": 75,
+          "unit": "g",
+          "cutPrep": "sliced, with 1 tbsp brine",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": "2 for the relish, 1 for the table"
+        },
+        {
+          "category": "PastaNoodles",
+          "baseName": "Pasta, rice noodles, dry",
+          "quantity": 225,
+          "unit": "g",
+          "cutPrep": "round bún",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Tilapia rå",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "fillets cut in chunks, or catfish",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Sprouts",
+          "baseName": "Mung Bean Sprouts (Raw)",
+          "quantity": 270,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cucumber",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "cut in matchsticks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Vietnamese coriander (rau răm)",
+          "contains": "none",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Season the hot broth with 1.5 tbsp fish sauce and keep it at a gentle simmer.",
+        "Fry the garlic and paprika in the oil for 30 seconds, add the shrimp and cook 1 to 2 minutes, then pour in the beaten egg and yolk and stir until just set and broken into soft bits.",
+        "Mix the pickled leeks, their brine, 2 sliced chiles and 2 tbsp fish sauce for the relish.",
+        "Cook the noodles as the package says, rinse and drain.",
+        "Poach the fish in the simmering broth for 2 to 4 minutes, just until opaque.",
+        "Put sprouts, cucumber and noodles in each bowl, add fish, the shrimp and egg, and ladle in broth. Top with rau răm, scallion and fried shallots, and serve with the leek relish and lime."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the fish, shrimp and egg."
+        },
+        {
+          "nutrient": "Vitamin B12",
+          "note": "From the fish and shrimp."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Kiên Giang Fish and Shrimp Noodle Soup (Bún Cá Kiên Giang)",
+          "url": "https://www.vietworldkitchen.com/blog/2020/09/kien-giang-fish-shrimp-noodle-soup-bun-ca-kien-giang.html"
+        }
+      ],
+      "curationNote": "Andrea Nguyen bún cá Kiên Giang (2.5 lb pork bones, 12 cups water simmered to 8 cups, 1.5 tbsp fish sauce, 6 oz shrimp scrambled with egg and paprika or annatto, pickled leek relish, 8 oz noodles, 1 lb catfish or tilapia poached 2 to 4 minutes, 3 cups sprouts, cucumber, rau răm). The plain pork bone base stands in for her broth (same bones, onion and rock sugar). Catfish is not in the food database, so tilapia, which she lists, is used. Single opened source."
+    },
+    {
+      "id": "curated_vn_bun_cha_ha_noi",
+      "name": "Bún Chả Hà Nội",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Noodle Bowls",
+      "region": "Northern / Hà Nội",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Smoky, caramelized pork patties and belly slices bobbing in a warm, sweet-sour fish sauce broth, dunked with cool vermicelli and a bundle of fresh herbs.",
+      "healthBenefit": "Protein from the grilled pork with lots of raw lettuce and herbs; the pork belly and sweet sauce make it a rich, salty treat.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_thinh",
+          "servings": 1,
+          "note": "in the patties"
+        },
+        {
+          "recipeId": "curated_vn_base_nuoc_cham",
+          "servings": 16,
+          "note": "thinned with warm water into the dipping broth"
+        },
+        {
+          "recipeId": "curated_vn_base_do_chua",
+          "servings": 4,
+          "note": "served in the dipping broth"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Ground Pork (Raw)",
+          "quantity": 340,
+          "unit": "g",
+          "cutPrep": "fatty, for the patties",
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
+          "quantity": 340,
+          "unit": "g",
+          "cutPrep": "sliced thin",
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, oyster sauce",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Brown Sugar (Commercial)",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "lemongrass",
+          "contains": "none",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "minced, about 1/4 cup",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": "warm",
+          "cookingMethod": null,
+          "prepNote": "thins the nước chấm into a dipping broth"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "sliced, for the broth",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "sliced, for the broth",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PastaNoodles",
+          "baseName": "Pasta, rice noodles, dry",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "thin vermicelli",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, green leaf",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "leaves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Perilla, \"Shiso\", leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, spearmint, fresh",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Vietnamese balm (kinh giới)",
+          "contains": "none",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mix the fish sauce, oyster sauce, brown sugar, lemongrass, garlic and shallot. Divide it between the ground pork (with the thính) and the sliced belly and marinate at least 1 hour, or overnight.",
+        "Shape the ground pork into small flat patties. Grill patties and belly slices over hot charcoal, or under a broiler, for 3 to 5 minutes a side, until charred at the edges and cooked through.",
+        "Stir the nước chấm with the warm water, sliced garlic and chile to make a light dipping broth, and add the pickles.",
+        "Cook the noodles as the package says, rinse and drain, and let them sit to firm up a little.",
+        "Drop the hot pork into individual bowls of dipping broth. Serve with noodles and the herb basket on the side; each bite is noodles and herbs dipped into the broth with the pork."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the ground pork and pork belly."
+        },
+        {
+          "nutrient": "Vitamin K",
+          "note": "From the lettuce and fresh herbs."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Vicky Pham, Bún Chả Hà Nội",
+          "url": "https://vickypham.com/blog/bun-cha-hanoi/"
+        },
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Vietnamese Bún Rice Noodle Salad Basics",
+          "url": "https://www.vietworldkitchen.com/blog/2025/05/vietnamese-bun-rice-noodle-salad-basics.html"
+        }
+      ],
+      "curationNote": "Vicky Pham bún chả Hà Nội (1.5 lb fatty pork, fish sauce, oyster sauce, brown sugar, thính, lemongrass, garlic, shallot, a sweet fish sauce dipping broth with lime, pickled green papaya, 14 oz vermicelli) with Andrea Nguyen bún basics for the herb basket. The pork is split into patties and sliced belly, the two kinds of chả served in Hà Nội. Her coconut soda sauce is replaced with the Nước Chấm base thinned with water. Đồ chua stands in for her green papaya pickle. Kinh giới is not in the food database."
+    },
+    {
+      "id": "curated_vn_bun_thit_nuong",
+      "name": "Bún Thịt Nướng",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Noodle Bowls",
+      "region": "Southern / Sài Gòn",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Charred, sweet lemongrass pork over cool vermicelli and crisp greens, with tangy pickles, crunchy peanuts and fried shallots, all drenched in nước chấm.",
+      "healthBenefit": "Protein from the pork with a big share of raw lettuce, cucumber and herbs; the sweet marinade and nước chấm add sugar and sodium.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_nuoc_cham",
+          "servings": 16,
+          "note": "about 1/4 cup per bowl"
+        },
+        {
+          "recipeId": "curated_vn_base_do_chua",
+          "servings": 2.5,
+          "note": "about 2/3 cup"
+        },
+        {
+          "recipeId": "curated_vn_base_hanh_phi",
+          "servings": 4,
+          "note": "on top"
+        },
+        {
+          "recipeId": "curated_vn_base_mo_hanh",
+          "servings": 4,
+          "note": "spooned over the pork"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "sliced thin",
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "lemongrass",
+          "contains": "none",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "minced, about 3 tbsp",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "dark soy sauce",
+          "contains": "gluten",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 1.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PastaNoodles",
+          "baseName": "Pasta, rice noodles, dry",
+          "quantity": 210,
+          "unit": "g",
+          "cutPrep": "thin vermicelli",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, green leaf",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, spearmint, fresh",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "torn",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Perilla, \"Shiso\", leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "torn",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sprouts",
+          "baseName": "Mung Bean Sprouts (Raw)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cucumber",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "cut in matchsticks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Peanut",
+          "quantity": 95,
+          "unit": "g",
+          "cutPrep": "roasted, chopped",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mix the lemongrass, shallot, garlic, sugar, dark soy, fish sauce and oil, toss with the pork and marinate 30 minutes to 2 hours.",
+        "Grill the pork over a hot fire, or under a broiler, for 6 to 8 minutes, turning, until charred at the edges.",
+        "Cook the noodles as the package says, rinse and drain well.",
+        "In each bowl put lettuce, herbs, sprouts and cucumber, then noodles on top.",
+        "Add the hot pork, a spoon of scallion oil, pickles, peanuts and fried shallots. Pour nước chấm over at the table and toss."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the grilled pork shoulder."
+        },
+        {
+          "nutrient": "Healthy fats",
+          "note": "From the roasted peanuts."
+        },
+        {
+          "nutrient": "Vitamin K",
+          "note": "From lettuce and herbs."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Restaurant-Style Grilled Lemongrass Pork (Thit Heo Nuong Xa)",
+          "url": "https://www.vietworldkitchen.com/blog/2009/04/vietnamese-restaurantstyle-grilled-lemongrass-pork-thit-heo-nuong-xa.html"
+        },
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Vietnamese Bún Rice Noodle Salad Basics",
+          "url": "https://www.vietworldkitchen.com/blog/2025/05/vietnamese-bun-rice-noodle-salad-basics.html"
+        },
+        {
+          "source": "Vicky Pham, Vermicelli Noodles with Grilled Pork and Egg Rolls (Bún Thịt Nướng Chả Giò)",
+          "url": "https://vickypham.com/blog/vermicelli-noodles-with-grilled-pork-and-egg-rolls-bun-thit-nuong-cha-gio/"
+        }
+      ],
+      "curationNote": "Andrea Nguyen grilled lemongrass pork (600 g shoulder, lemongrass, shallot, garlic, sugar, dark soy, fish sauce, oil, 6 to 8 minutes over a hot fire) built into her bún basics bowl for 4 (1 cup nước chấm, 180 to 240 g dried bún, 4 to 6 cups lettuce, herbs, sprouts, cucumber, 1/2 to 3/4 cup đồ chua, 2/3 cup peanuts, 1/4 cup fried shallots). Vicky Pham version checked for the pan method and scallion oil. Dark soy sauce kept as notInDatabase since the database row is regular shoyu."
+    },
+    {
+      "id": "curated_vn_bun_bo_nam_bo",
+      "name": "Bún Bò Nam Bộ",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Noodle Bowls",
+      "region": "Southern / Sài Gòn",
+      "servings": 5,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Hot, garlicky lemongrass beef seared fast and piled on cool noodles and greens, with peanuts, fried shallots and pickles, dressed in nước chấm.",
+      "healthBenefit": "Protein, iron and zinc from the beef with a generous share of raw vegetables and herbs; the nước chấm adds sugar and sodium.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_nuoc_cham",
+          "servings": 16,
+          "note": "poured over"
+        },
+        {
+          "recipeId": "curated_vn_base_do_chua",
+          "servings": 2,
+          "note": "about 1/2 cup"
+        },
+        {
+          "recipeId": "curated_vn_base_hanh_phi",
+          "servings": 4,
+          "note": "on top"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Top Sirloin (Raw)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "sliced thin against the grain",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, oyster sauce",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "lemongrass",
+          "contains": "none",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "minced, about 1 tbsp",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "PastaNoodles",
+          "baseName": "Pasta, rice noodles, dry",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "thin vermicelli",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Peanut",
+          "quantity": 36,
+          "unit": "g",
+          "cutPrep": "roasted, crushed",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, green leaf",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, spearmint, fresh",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "torn",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Perilla, \"Shiso\", leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "torn",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sprouts",
+          "baseName": "Mung Bean Sprouts (Raw)",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cucumber",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "cut in matchsticks",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Toss the beef with the oyster sauce, garlic, lemongrass, salt, pepper and sugar and let it sit 15 minutes.",
+        "Cook the noodles as the package says, rinse and drain.",
+        "Heat the oil in a wok over high heat until it shimmers and stir-fry the beef in two batches for 1 to 2 minutes each, just until browned.",
+        "Line each bowl with lettuce, herbs, sprouts and cucumber, add noodles and top with the hot beef and its juices.",
+        "Finish with pickles, peanuts and fried shallots and pour nước chấm over just before eating."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Iron",
+          "note": "From the beef sirloin."
+        },
+        {
+          "nutrient": "Zinc",
+          "note": "From the beef."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the raw herbs, cucumber and pickles."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Helen's Recipes, Bún Bò Xào (Vietnamese Noodle Salad)",
+          "url": "https://helenrecipes.com/recipe-37-bun-bo-xao-vietnamese-noodle-salad/"
+        },
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Vietnamese Bún Rice Noodle Salad Basics",
+          "url": "https://www.vietworldkitchen.com/blog/2025/05/vietnamese-bun-rice-noodle-salad-basics.html"
+        }
+      ],
+      "curationNote": "Helen Le bún bò xào (500 g rump steak, oyster sauce, garlic, lemongrass, salt, pepper, sugar, 3 tbsp oil, high-heat stir-fry, 500 g vermicelli, 1/2 cup đồ chua, fried shallots, peanuts, lettuce, mint, perilla, cilantro, 200 g sprouts, cucumber, nước chấm) for 4 to 6, written for 5, with Andrea Nguyen bún basics for the bowl order. Top sirloin is the closest database row to rump. Her 5 to 10 minute fry time is shortened to batches of 1 to 2 minutes so the beef stays tender."
+    },
+    {
+      "id": "curated_vn_bun_cha_gio",
+      "name": "Bún Chả Giò",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Noodle Bowls",
+      "region": "Southern / Sài Gòn",
+      "servings": 5,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Shatteringly crisp pork egg rolls cut over cool vermicelli and crunchy greens, with pickles, peanuts and plenty of nước chấm.",
+      "healthBenefit": "Protein from the pork filling and fiber from the raw vegetables and herbs; the deep-fried rolls make it a rich bowl.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_cha_gio",
+          "servings": 15,
+          "note": "fried, cut in pieces"
+        },
+        {
+          "recipeId": "curated_vn_base_nuoc_cham",
+          "servings": 16,
+          "note": "poured over"
+        },
+        {
+          "recipeId": "curated_vn_base_do_chua",
+          "servings": 3,
+          "note": "on top"
+        },
+        {
+          "recipeId": "curated_vn_base_hanh_phi",
+          "servings": 3,
+          "note": "on top"
+        },
+        {
+          "recipeId": "curated_vn_base_mo_hanh",
+          "servings": 3,
+          "note": "on top"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "PastaNoodles",
+          "baseName": "Pasta, rice noodles, dry",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "thin vermicelli",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, green leaf",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, spearmint, fresh",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "torn",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Perilla, \"Shiso\", leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "torn",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sprouts",
+          "baseName": "Mung Bean Sprouts (Raw)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cucumber",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "cut in matchsticks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Peanut",
+          "quantity": 70,
+          "unit": "g",
+          "cutPrep": "roasted, chopped",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Soak the wood ear and glass noodles in hot water for 10 minutes, drain and mince. Mix with the pork, scallion, onion, sugar, pepper, sesame oil, salt and oyster sauce.",
+        "Put about 2 tbsp filling near a corner of a wrapper, roll partway, fold in the sides, roll up and seal the edge with egg yolk. Make 15 rolls.",
+        "Heat oil in a wok to 325°F (165°C) and fry the rolls in small batches, not touching, for about 5 minutes until deep golden. Drain on a rack.",
+        "Cook the noodles as the package says, rinse and drain.",
+        "Fill each bowl with lettuce, herbs, sprouts and cucumber, then noodles, and top with three rolls cut in pieces.",
+        "Add pickles, peanuts, fried shallots and scallion oil, and pour nước chấm over at the table."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the pork filling."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From lettuce, sprouts, cucumber and herbs."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Vicky Pham, Vietnamese Egg Rolls (Chả Giò)",
+          "url": "https://vickypham.com/blog/vietnamese-egg-rolls-cha-gio/"
+        },
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Vietnamese Bún Rice Noodle Salad Basics",
+          "url": "https://www.vietworldkitchen.com/blog/2025/05/vietnamese-bun-rice-noodle-salad-basics.html"
+        }
+      ],
+      "curationNote": "Vicky Pham chả giò (2 lb pork for 30 rolls, wood ear, bean thread noodles, scallion, onion, sugar, pepper, sesame oil, salt, oyster sauce, wheat pastry wrappers sealed with yolk, fried at 325°F about 5 minutes) halved to 15 rolls, built into Andrea Nguyen bún basics bowl, scaled to 5. Bouillon left out. The rolls are written inline rather than linked, since the Chả Giò recipe is in the other Vietnamese file and not yet written; it can become a component once it exists. Southern cooks also wrap chả giò in rice paper, which would make the bowl gluten-free. The egg rolls were first written out inline and are now linked to Chả Giò (15 of its 30 rolls)."
+    },
+    {
+      "id": "curated_vn_bun_dau_mam_tom",
+      "name": "Bún Đậu Mắm Tôm",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Noodle Bowls",
+      "region": "Northern / Hà Nội",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Crisp, custardy fried tofu, pressed vermicelli and sliced pork belly dipped in a pungent, frothy shrimp sauce with lime, chile and herbs.",
+      "healthBenefit": "Protein from tofu and pork belly with calcium from the tofu; the mắm tôm is very salty and the belly is rich, so it is a treat.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Legume",
+          "baseName": "Tofu, firm, prepared with calcium sulfate and magnesium chloride (nigari)",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "cut in 2-inch cubes and drained",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": "what the tofu absorbs, plus 1 to 2 tbsp hot oil for the sauce"
+        },
+        {
+          "notInDatabase": true,
+          "name": "mắm tôm (fermented shrimp sauce)",
+          "contains": "fish",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "juiced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PastaNoodles",
+          "baseName": "Pasta, rice noodles, dry",
+          "quantity": 320,
+          "unit": "g",
+          "cutPrep": "vermicelli, cooked and pressed into cakes",
+          "cookingMethod": "Boiled",
+          "prepNote": "about 1 kg fresh bún"
+        },
+        {
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "whole piece",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cucumber",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Perilla, \"Shiso\", leaves",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Vietnamese balm (kinh giới)",
+          "contains": "none",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Thai basil (húng quế)",
+          "contains": "none",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Simmer the pork belly in water for 30 to 40 minutes until a skewer goes in easily, cool and slice thin.",
+        "Cook the noodles as the package says, rinse and drain, then press them in a tray and cut into squares once set, 20 to 30 minutes.",
+        "Deep-fry the tofu in plenty of oil at 400°F (200°C), turning quickly, for 3 to 5 minutes until golden and crisp outside and soft inside. Drain and cut in bite-size pieces.",
+        "Stir the sugar and chile into the mắm tôm, add 1 to 2 tbsp hot frying oil, then the lime juice, and whisk until the sauce foams and turns pale.",
+        "Arrange tofu, noodles, pork, cucumber and herbs on a tray and serve with small bowls of sauce for dipping."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the tofu set with calcium sulfate and magnesium chloride."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From tofu and pork belly."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Helen's Recipes, Bún Đậu Mắm Tôm",
+          "url": "https://helenrecipes.com/recipe-55-bun-dau-mam-tom-fermented-shrimp-paste-with-fried-tofu-and-rice-vermicelli/"
+        }
+      ],
+      "curationNote": "Helen Le bún đậu mắm tôm (400 g firm tofu fried at 400°F, 3 tbsp mắm tôm with 2 tbsp sugar, chile, hot oil and lime whisked until foamy, 1 kg vermicelli, 300 g boiled pork belly, cucumber, kinh giới and basil). Her 1 kg is fresh bún, written as about 320 g dried. She gives no servings; written for 4. Single opened source."
+    },
+    {
+      "id": "curated_vn_cao_lau",
+      "name": "Cao Lầu",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Noodle Bowls",
+      "region": "Central / Hội An",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Chewy, firm noodles with a faint smoky edge, glossy five-spice pork, a spoonful of rich pan juices and crisp fried noodle squares over a bed of herbs and greens, eaten barely warm.",
+      "healthBenefit": "Protein from the pork and fiber and vitamins from the bed of greens and herbs; little broth means less sodium than a soup.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_nuoc_dung_xuong_heo",
+          "servings": 2,
+          "note": "about 1/2 cup per bowl, simmered with the pork juices"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "one piece",
+          "cookingMethod": "Braised",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "five-spice powder",
+          "contains": "none",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": "2 tbsp for the pork, 2 for frying the noodle squares"
+        },
+        {
+          "notInDatabase": true,
+          "name": "cao lầu noodles (rice noodles made with ash lye water)",
+          "contains": "none",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "fresh; about 60 g cut in squares and fried crisp"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, green leaf",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "torn",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sprouts",
+          "baseName": "Mung Bean Sprouts (Raw)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "blanched",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Mustard greens",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "young leaves, blanched",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, spearmint, fresh",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Perilla, \"Shiso\", leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Thai basil (húng quế)",
+          "contains": "none",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Vietnamese coriander (rau răm)",
+          "contains": "none",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rub the pork with five-spice, sugar, salt, pepper, garlic and soy sauce and marinate at least 1 hour.",
+        "Brown the pork in 2 tbsp oil on all sides, 6 to 8 minutes, then add the pork broth, cover and braise on low for 40 to 50 minutes, turning, until tender. Lift out the pork, cool and slice thin, and keep the juices.",
+        "Cut about 60 g of the noodles into small squares and fry them in 2 tbsp oil for 3 to 4 minutes until crisp and golden.",
+        "Blanch the rest of the noodles in boiling water for 30 to 60 seconds and drain.",
+        "Line each bowl with lettuce, sprouts, mustard greens and herbs, add noodles, then pork, and spoon 2 to 3 tbsp of the warm pan juices over.",
+        "Top with crisp noodle squares and serve with lime and chile, mixed together before eating."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the braised pork shoulder."
+        },
+        {
+          "nutrient": "Vitamin K",
+          "note": "From the mustard greens, lettuce and herbs."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia, Cao lầu",
+          "url": "https://en.wikipedia.org/wiki/Cao_l%E1%BA%A7u"
+        },
+        {
+          "source": "Wikipedia (Tiếng Việt), Cao lầu",
+          "url": "https://vi.wikipedia.org/wiki/Cao_l%E1%BA%A7u"
+        }
+      ],
+      "curationNote": "Written mostly from description. No recipe page opened (Hungry Huy and Helen Le have none, Điện Máy Xanh refused the connection). English Wikipedia describes rice noodles soaked in ash lye water, pork marinated in five-spice, sugar, salt, pepper, garlic and soy then fried and sliced, a little pork bone broth, a bed of lettuce, sprouts and herbs, crisp fried noodle squares, served barely warm and mixed; Vietnamese Wikipedia confirms xá xíu pork, very little broth and greens. Cao lầu noodles are made only in Hội An and are not in the food database; dried thick udon-style rice noodles are the usual stand-in abroad."
+    },
+    {
+      "id": "curated_vn_pho_xao",
+      "name": "Phở Xào (Stir-Fried Phở Noodles)",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Noodle Bowls",
+      "region": "Northern / Hà Nội",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Wide rice noodles tossed in a hot wok with savory oyster and soy sauce, lightly charred onion, crisp-edged beef and bok choy.",
+      "healthBenefit": "Protein and iron from the beef and greens from the bok choy; frying the beef and the soy and oyster sauces make it rich and salty.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, oyster sauce",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Ginger, dried, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "five-spice powder",
+          "contains": "none",
+          "quantity": 0.75,
+          "unit": "tsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 180,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "120 ml in the sauce, 60 ml in the beef"
+        },
+        {
+          "category": "Meat",
+          "baseName": "Beef Flank (Raw)",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "sliced thin against the grain",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "minced, divided",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Bicarbonate de soude",
+          "quantity": 0.125,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "beaten",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Cornstarch",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": "what the beef absorbs plus 3 tbsp for the wok"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Bok choy",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "leaves separated",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "cut in 2-inch lengths, whites and greens apart",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PastaNoodles",
+          "baseName": "Pasta, rice noodles, dry",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "flat bánh phở",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Stir together the soy sauce, oyster sauce, ground ginger, half the five-spice, sugar and 120 ml water.",
+        "Toss the beef with the salt, pepper, the rest of the five-spice, half the garlic, the baking soda, 60 ml water, egg and cornstarch, and marinate at least 20 minutes.",
+        "Blanch the bok choy in boiling water for 30 seconds to 1 minute, then cook the noodles in the same water for about 5 minutes until tender but chewy. Drain, rinse and toss with a little oil.",
+        "Heat 1/4 inch of oil to 350°F (175°C) in a dry wok and shallow-fry the beef in batches until just browned. Drain.",
+        "Pour off all but 3 tbsp oil and cook the onion over medium-high heat until lightly charred, then add the scallion whites and the rest of the garlic, about 5 minutes in all.",
+        "Add the noodles and sauce and toss, then the beef, bok choy and scallion greens, and stir-fry 1 to 2 minutes until combined. Serve hot."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the flank steak."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the bok choy."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Vicky Pham, Phở Xào Bò (Vietnamese Stir-Fried Flat Rice Noodles with Beef)",
+          "url": "https://vickypham.com/blog/vietnamese-stir-fried-flat-rice-noodles-with-beef-pho-xao-bo/"
+        }
+      ],
+      "curationNote": "Vicky Pham phở xào bò as written (sauce of light soy, oyster sauce, ground ginger, five-spice, sugar, water; flank velveted with baking soda, egg and cornstarch and shallow-fried at 350°F; bok choy, onion, scallion, 14 oz dried flat noodles). Hà Nội street versions skip the cornstarch coating; hers is kept since it is the one opened. Bouillon left out. Single opened source."
+    },
+    {
+      "id": "curated_vn_mien_xao_cua",
+      "name": "Miến Xào Cua (Glass Noodles with Crab)",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Noodle Bowls",
+      "region": "Northern / Hà Nội",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Springy, translucent glass noodles tossed with sweet crab, crunchy wood ear and sprouts, Chinese celery and threads of egg, with a hit of black pepper.",
+      "healthBenefit": "Protein from crab and egg and vegetables throughout; glass noodles are gluten-free and a light, quick plate.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Crab Crustaceans",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "crab meat",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PastaNoodles",
+          "baseName": "Glass noodles made from mung bean starch",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "soaked 15 minutes",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Sesamolja",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Mushroom",
+          "baseName": "Jew's ear (cloud or wood ear, pepeao)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "dried, soaked and shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sprouts",
+          "baseName": "Mung Bean Sprouts (Raw)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Celery",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "Chinese celery, cut in 3-inch lengths",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "beaten, cooked into a thin omelette and sliced into strips",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "chicken stock powder",
+          "contains": "meat",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "cracked",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 1.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Season the crab with half the pepper, the stock powder and fish sauce and let it rest 15 minutes. Drain the noodles and toss with the sesame oil.",
+        "Cook the beaten egg in a thin layer in an oiled pan over low heat, about 1 minute, roll and slice into strips.",
+        "Heat 1 tbsp oil in a wok and fry the garlic until golden, then add the crab and stir-fry about 30 seconds.",
+        "Add carrot, onion and wood ear and stir-fry 1 minute, then the sprouts and celery for about 30 seconds. Taste for seasoning.",
+        "Push everything to the side, add the last of the oil and the noodles and stir over medium-high heat for 2 to 3 minutes until translucent, then toss all together.",
+        "Plate and top with egg strips, the rest of the pepper, cilantro and chile."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the crab meat and egg."
+        },
+        {
+          "nutrient": "Zinc",
+          "note": "From the crab."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Helen's Recipes, Crab Meat and Glass Noodle Stir-fry (Miến Xào Cua)",
+          "url": "https://helenrecipes.com/recipe-crab-meat-and-glass-noodle-stir-fry-mien-xao-cua/"
+        }
+      ],
+      "curationNote": "Helen Le miến xào cua as written for 4 (200 g crab, 200 g glass noodles, 20 g wood ear, 100 g sprouts, 50 g Chinese celery, omelette strips, carrot, onion, chicken stock powder, fish sauce, pepper, garlic, chile). Chinese celery is counted as celery, the closest row. Single opened source."
+    },
+    {
+      "id": "curated_vn_com_tam_suon_nuong",
+      "name": "Cơm Tấm Sườn Nướng (Broken Rice with Grilled Pork Chop)",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Rice Dishes",
+      "region": "Southern / Sài Gòn",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Fluffy, nutty broken rice beside a smoky, sweet lemongrass pork chop glazed with scallion oil, with cool pickles, cucumber and tomato and a bowl of nước chấm.",
+      "healthBenefit": "Protein, thiamin and zinc from the pork chop with fresh vegetables on the side; the sweet marinade and nước chấm add sugar and sodium.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_mo_hanh",
+          "servings": 4,
+          "note": "brushed over the chops"
+        },
+        {
+          "recipeId": "curated_vn_base_do_chua",
+          "servings": 3,
+          "note": "on the side"
+        },
+        {
+          "recipeId": "curated_vn_base_nuoc_cham",
+          "servings": 16,
+          "note": "spooned over at the table"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Grain",
+          "baseName": "Grains, rice, white, long-grain, regular, dry",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "broken rice (cơm tấm), rinsed until clear",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 720,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Chop (Raw)",
+          "quantity": 900,
+          "unit": "g",
+          "cutPrep": "6 thin bone-in chops, pounded",
+          "cookingMethod": "Grilled",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, oyster sauce",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Standard Honey (Blossom Honey)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "lemongrass",
+          "contains": "none",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "minced, about 1/4 cup",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "white parts, minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cucumber",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mix the fish sauce, oyster sauce, sugar, honey, pepper, lemongrass, garlic, scallion whites and oil. Coat the chops and marinate at least 2 hours, or overnight.",
+        "Rinse the broken rice until the water runs clear, drain well and cook with the water in a rice cooker, or covered on low for 15 to 18 minutes, then rest 10 minutes and fluff.",
+        "Grill the chops over medium-high heat, or at 400°F (200°C), for about 8 minutes a side for thin chops and 10 for thicker ones, until caramelized and cooked through.",
+        "Brush the hot chops with scallion oil.",
+        "Plate a mound of rice with a chop, cucumber, tomato and pickles, and serve nước chấm to spoon over."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the pork chop."
+        },
+        {
+          "nutrient": "Thiamin",
+          "note": "From the pork."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Vicky Pham, Cơm Tấm",
+          "url": "https://vickypham.com/blog/com-tam/"
+        }
+      ],
+      "curationNote": "Vicky Pham cơm tấm page: broken rice 1 to 1 with water, sườn nướng sả (2 lb bone-in chops, fish sauce, oyster sauce, sugar, honey, pepper, lemongrass, garlic, scallion, oil, 2 hours, grilled 8 to 10 minutes a side), brushed with mỡ hành. Her rice is scaled to 6 plates. Bì and chả trứng, which make it cơm tấm sườn bì chả, are on her page and left out to keep to the named dish. Broken rice is the same grain as long-grain white rice and is counted as that row. Single opened source."
+    },
+    {
+      "id": "curated_vn_com_ga_hoi_an",
+      "name": "Cơm Gà Hội An",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Rice Dishes",
+      "region": "Central / Hội An",
+      "servings": 5,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Fragrant turmeric-gold rice cooked in chicken broth, with shredded chicken tossed in lime, onion and rau răm, crisp pickles, fresh chile and a small bowl of broth.",
+      "healthBenefit": "Lean protein from the chicken with herbs and pickled vegetables; a balanced plate, though the rice cooked in fat and broth is richer than plain rice.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_do_chua",
+          "servings": 3,
+          "note": "on the side"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Chicken, broiler or fryers",
+          "quantity": 1100,
+          "unit": "g",
+          "cutPrep": "rubbed with salt and rinsed",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2800,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Simmered",
+          "prepNote": "about 900 ml of the broth cooks the rice, the rest is served"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Ginger root",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Grain",
+          "baseName": "Grains, rice, white, long-grain, regular, dry",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "rinsed and drained",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Turmeric, dried, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": "or rendered chicken fat"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 0.5,
+          "unit": "each",
+          "cutPrep": "sliced thin, soaked in ice water",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Vietnamese coriander (rau răm)",
+          "contains": "none",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "sliced, for the broth",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the chicken and ginger in the water with 1 tsp salt, bring to a boil, then poach uncovered for 30 minutes, turning once. Turn off the heat, cover and leave 15 minutes.",
+        "Lift out the chicken and chill it in ice water for 10 minutes, then pull the meat into shreds. Strain the broth.",
+        "Fry the garlic and turmeric in the oil or chicken fat for 1 minute, add the rice and toast for 5 to 10 minutes, stirring, until it smells nutty.",
+        "Cook the rice with about 900 ml of the broth in a rice cooker, or covered on low for 18 to 20 minutes, then rest 10 minutes.",
+        "Mix the lime juice, sugar, the rest of the salt and the pepper, and toss with the chicken, onion and rau răm.",
+        "Plate the yellow rice with the chicken salad, pickles and chile, and serve the rest of the broth hot in small bowls with scallion."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the poached chicken."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the lime and fresh herbs."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Vicky Pham, Vietnamese Ginger Chicken Rice",
+          "url": "https://vickypham.com/blog/vietnamese-ginger-chicken-rice/"
+        },
+        {
+          "source": "Helen's Recipes, Vegan Hội An Chicken Rice (Cơm Gà Hội An Chay)",
+          "url": "https://helenrecipes.com/vegan-hoi-an-chicken-rice-com-ga-hoi-an-chay/"
+        }
+      ],
+      "curationNote": "Written partly from description. No recipe page for the meat version of cơm gà Hội An opened. Helen Le vegan Hội An chicken rice gives the plate as it is in Hội An: turmeric rice cooked in stock, shredded salad with onion soaked in ice water, rau răm, lime, sugar and salt, pickles and a bowl of soup. Vicky Pham ginger chicken rice gives the poaching (30 minutes, 15 minutes resting, ice bath) and the rice toasted in chicken fat then cooked in about 3 3/4 cups of broth. Hội An stalls often serve pickled green papaya; đồ chua, which Helen uses, is linked."
+    },
+    {
+      "id": "curated_vn_com_chien",
+      "name": "Cơm Chiên (Vietnamese Fried Rice)",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Rice Dishes",
+      "region": "Southern / Sài Gòn",
+      "servings": 5,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Fluffy, separate grains of day-old rice fried hot with garlic, sweet caramelized Chinese sausage, egg, peas and carrots.",
+      "healthBenefit": "Starch from the rice with egg protein and some vegetables; the Chinese sausage is fatty, salty and sweet, so it is an everyday treat.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_com_trang",
+          "servings": 6,
+          "note": "day-old, about 6 cups"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 9,
+          "unit": "g",
+          "cutPrep": "finely minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Chinese sausage (lạp xưởng)",
+          "contains": "meat",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "sliced thin on the diagonal",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Green Peas",
+          "quantity": 110,
+          "unit": "g",
+          "cutPrep": "frozen",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "diced small",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "beaten",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Garlic powder",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat the oil in a large wok over medium-high heat and fry the garlic for about 20 seconds until fragrant.",
+        "Add the sausage and cook about 2 minutes until the edges caramelize.",
+        "Add the peas and carrots and cook 2 minutes more.",
+        "Push everything aside, pour in the eggs and stir until just set, about 1 minute, then mix through.",
+        "Add the rice, breaking up clumps with the back of a spoon, and toss over high heat for 2 to 3 minutes.",
+        "Season with garlic powder, salt, sugar and pepper, toss until even, and top with scallion."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs and Chinese sausage."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the carrots."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Vicky Pham, Fried Rice with Chinese Sausage (Cơm Chiên Lạp Xưởng)",
+          "url": "https://vickypham.com/blog/fluffy-fragrant-fried-rice/"
+        },
+        {
+          "source": "Wikipedia, Fried rice",
+          "url": "https://en.wikipedia.org/wiki/Fried_rice"
+        }
+      ],
+      "curationNote": "Vicky Pham cơm chiên lạp xưởng as written for 5 (3 tbsp oil, garlic, 3 Chinese sausages, 1 1/2 cups peas and carrots, 2 eggs, 6 cups day-old rice, garlic powder, salt, sugar, pepper, scallion). Wikipedia confirms Vietnamese cơm chiên commonly carries Chinese sausage, scrambled egg and onion with soy or fish sauce. Bouillon powder left out. Chinese sausage is not in the food database."
+    },
+    {
+      "id": "curated_vn_xoi_gac",
+      "name": "Xôi Gấc",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Rice Dishes",
+      "region": "Northern / Hà Nội",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Glossy, deep red-orange sticky rice, chewy and gently sweet and salty, with the mild, buttery taste of gấc and a richness from coconut milk.",
+      "healthBenefit": "Gấc fruit owes its red to carotenoids such as beta-carotene and lycopene, though gấc is not counted in the nutrient totals here; the dish is mostly starch and sugar, a festive treat for Tết and weddings.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Grain",
+          "baseName": "Grains, rice, white, glutinous, dry",
+          "quantity": 680,
+          "unit": "g",
+          "cutPrep": "soaked 3 to 8 hours",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "gấc fruit pulp",
+          "contains": "none",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "red arils, seeds removed",
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Coconut milk",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 65,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Soak the rice in cold water for 3 to 8 hours, then drain well.",
+        "Rub the gấc pulp off the seeds and mix it through the rice with the salt until every grain is red.",
+        "Steam the rice in a lined steamer over simmering water for about 30 minutes, stirring once halfway.",
+        "Stir the coconut milk and sugar into the rice and steam 10 to 15 minutes more until the grains are tender and glossy.",
+        "Press into a mold or bowl and turn out to serve warm."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the beta-carotene in the gấc fruit."
+        },
+        {
+          "nutrient": "Lycopene",
+          "note": "From the gấc fruit, which gives the rice its colour."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Vicky Pham, Vietnamese Red Sticky Rice (Xôi Gấc)",
+          "url": "https://vickypham.com/blog/red-sticky-rice/"
+        }
+      ],
+      "curationNote": "Vicky Pham xôi gấc (1.5 lb glutinous rice, 1 cup coconut milk, 1/3 cup sugar, 1/2 tsp salt, 1/2 cup gấc). Gấc is not in the food database, so its carotenoids are not counted in the nutrient totals; the health line is cautious for that reason and the tier is moderate."
+    },
+    {
+      "id": "curated_vn_xoi_man",
+      "name": "Xôi Mặn (Savory Sticky Rice)",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Rice Dishes",
+      "region": "Southern / Sài Gòn",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Chewy, savory sticky rice studded with sweet Chinese sausage, earthy shiitake and briny dried shrimp, glossed with scallion oil and crisp fried shallots.",
+      "healthBenefit": "A filling plate of starch with protein from the shrimp and sausage; the sausage makes it fatty and salty, so it is a treat.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_mo_hanh",
+          "servings": 4,
+          "note": "brushed on top"
+        },
+        {
+          "recipeId": "curated_vn_base_hanh_phi",
+          "servings": 4,
+          "note": "on top"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Grain",
+          "baseName": "Grains, rice, white, glutinous, dry",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "soaked 4 hours or overnight",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Chinese sausage (lạp xưởng)",
+          "contains": "meat",
+          "quantity": 170,
+          "unit": "g",
+          "cutPrep": "sliced thin on the diagonal",
+          "prepNote": null
+        },
+        {
+          "category": "Mushroom",
+          "baseName": "Shiitake mushroom dried",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "10 mushrooms, soaked and sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "dried shrimp (tôm khô)",
+          "contains": "fish",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Soak the rice for 4 hours or overnight, then rinse until the water runs clear and drain.",
+        "Soak the shrimp and shiitake in hot water for 20 minutes, drain, and slice the mushrooms.",
+        "Stir-fry the shrimp, sausage and mushrooms in the oil over medium-high heat for about 5 minutes, then add the soy sauce and sugar and toss.",
+        "Toss the rice with the salt and steam it in a lined steamer over simmering water for 20 minutes.",
+        "Mix in the stir-fried sausage, mushrooms and shrimp and steam 15 minutes more until tender.",
+        "Pack into small bowls and turn out, then brush with scallion oil and top with fried shallots."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the dried shrimp and Chinese sausage."
+        },
+        {
+          "nutrient": "Copper",
+          "note": "From the shiitake mushrooms."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Vicky Pham, Savory Sticky Rice (Xôi Mặn)",
+          "url": "https://vickypham.com/blog/savory-sticky-rice-recipe-xoi-man/"
+        }
+      ],
+      "curationNote": "Vicky Pham xôi mặn as written (3 cups glutinous rice, 6 oz Chinese sausage, 10 dried shiitake, 1/3 cup dried shrimp, salt, sugar, 3 tbsp soy, steamed 20 then 15 minutes, scallion oil and fried shallots). Street xôi mặn in Sài Gòn often adds chả lụa, pork floss and quail eggs. Single opened source."
+    },
+    {
+      "id": "curated_vn_chao_ga",
+      "name": "Cháo Gà (Chicken Rice Porridge)",
+      "builderType": "soup",
+      "dishGroup": "Rice Dishes",
+      "region": "Southern / Sài Gòn",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Silky, gingery rice porridge cooked in chicken broth, topped with tender shredded chicken, black pepper and fried shallots, with rau răm and sprouts for freshness.",
+      "healthBenefit": "Protein from chicken in a soft, warming porridge that is easy to eat, with ginger and herbs; a gentle meal, seasoned with salt.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_hanh_phi",
+          "servings": 4,
+          "note": "on top"
+        },
+        {
+          "recipeId": "curated_vn_base_muoi_tieu_chanh",
+          "servings": 4,
+          "note": "for dipping the chicken"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Chicken, broiler or fryers",
+          "quantity": 1600,
+          "unit": "g",
+          "cutPrep": "rubbed with salt and rinsed",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2800,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Ginger root",
+          "quantity": 85,
+          "unit": "g",
+          "cutPrep": "sliced in coins",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "a bunch, for the pot",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Grain",
+          "baseName": "Grains, rice, white, long-grain, regular, dry",
+          "quantity": 185,
+          "unit": "g",
+          "cutPrep": "rinsed until clear",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": "or rendered chicken fat"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Turmeric, dried, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Vietnamese coriander (rau răm)",
+          "contains": "none",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "prepNote": null
+        },
+        {
+          "category": "Sprouts",
+          "baseName": "Mung Bean Sprouts (Raw)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the chicken, shallots, ginger and cilantro in the water, bring to a boil and simmer for about 30 minutes, until the juices run clear at the thigh.",
+        "Lift out the chicken, discard the aromatics, and rub the skin with a little oil mixed with the turmeric. Shred the meat.",
+        "Toast the rice in the rest of the oil or rendered chicken fat over medium-high heat for about 5 minutes.",
+        "Add the rice to the broth and simmer on medium-low for about 30 minutes, stirring the bottom often, until thick and creamy.",
+        "Season with salt and sugar.",
+        "Ladle into bowls, top with chicken, pepper, fried shallots and scallion, and serve with rau răm, sprouts and the salt, pepper and lime dip."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken."
+        },
+        {
+          "nutrient": "Niacin",
+          "note": "From the chicken meat."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Vicky Pham, Vietnamese Chicken Porridge (Cháo Gà)",
+          "url": "https://vickypham.com/blog/vietnamese-chicken-porridge-chao-ga/"
+        }
+      ],
+      "curationNote": "Vicky Pham cháo gà as written (3 1/2 lb chicken, 3 qt water, shallots, 3 oz ginger, cilantro, 1 cup jasmine rice toasted in chicken fat, salt, sugar, turmeric rubbed on the chicken, rau răm, sprouts and muối tiêu chanh). Bouillon left out. Long-grain white rice is the closest row to jasmine. Single opened source."
+    },
+    {
+      "id": "curated_vn_com_hen",
+      "name": "Cơm Hến (Huế Clam Rice)",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Rice Dishes",
+      "region": "Central / Huế",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Cool rice tossed with savory stir-fried baby clams, crunchy pork cracklings, peanuts, sour starfruit and shaved greens, fiery with chile and moistened with hot clam broth.",
+      "healthBenefit": "Clams bring protein, iron and vitamin B12, and the raw greens and starfruit add fiber and vitamin C; the shrimp paste and cracklings make it salty and rich.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_com_trang",
+          "servings": 4,
+          "note": "cooled to room temperature"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Clam Mollusks",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "baby basket clam meat (hến), from about 1.5 kg in the shell",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Boiled",
+          "prepNote": "the clams are boiled in it and it becomes the broth"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": "1 tbsp for the clams, 2 for the chile oil"
+        },
+        {
+          "notInDatabase": true,
+          "name": "lemongrass",
+          "contains": "none",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "minced",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "crushed",
+          "cookingMethod": "Fried",
+          "prepNote": "fried in oil for ớt màu"
+        },
+        {
+          "notInDatabase": true,
+          "name": "mắm ruốc (fermented shrimp paste)",
+          "contains": "fish",
+          "quantity": 4,
+          "unit": "tsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "pork cracklings (tóp mỡ)",
+          "contains": "meat",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Peanut",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "roasted whole",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Carambola (star fruit)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "sour starfruit, sliced thin",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "banana blossom (bắp chuối)",
+          "contains": "none",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "thinly shaved and soaked in lemon water",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "taro stem (bạc hà, dọc mùng)",
+          "contains": "none",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "peeled and sliced thin",
+          "prepNote": null
+        },
+        {
+          "category": "Sprouts",
+          "baseName": "Mung Bean Sprouts (Raw)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, spearmint, fresh",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "torn",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "sesame rice crackers (bánh tráng mè)",
+          "contains": "none",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "grilled until puffed, broken",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Soak live clams in rice water for 1 to 2 hours to purge them, rinse, then boil in the water until they open, 3 to 5 minutes. Let the liquid settle and pour off the clear broth; pick out the clam meat.",
+        "Fry the lemongrass and garlic in 1 tbsp oil until fragrant, add the clam meat and stir-fry over high heat for 2 to 3 minutes. Season with fish sauce and pepper.",
+        "Warm the crushed chile in 2 tbsp oil for 1 minute to make a red chile oil.",
+        "Bring the clam broth back to a boil and keep it hot.",
+        "Put cool rice in each bowl and top with clams, cracklings, peanuts, starfruit, banana blossom, taro stem, sprouts and mint, plus a dab of mắm ruốc and chile oil.",
+        "Add a little hot clam broth, break crackers over, and mix everything together before eating."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin B12",
+          "note": "From the clams."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the clams."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From banana blossom, taro stem, sprouts and starfruit."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia, Cơm hến",
+          "url": "https://en.wikipedia.org/wiki/C%C6%A1m_h%E1%BA%BFn"
+        },
+        {
+          "source": "Wikipedia (Tiếng Việt), Cơm hến",
+          "url": "https://vi.wikipedia.org/wiki/C%C6%A1m_h%E1%BA%BFn"
+        },
+        {
+          "source": "Helen's Recipes, Baby Clams with Rice Cracker (Hến Xúc Bánh Tráng)",
+          "url": "https://helenrecipes.com/baby-clams-with-rice-cracker-hen-xuc-banh-trang/"
+        }
+      ],
+      "curationNote": "Written mostly from description. No cơm hến recipe page opened. Vietnamese Wikipedia lists cool white rice, stir-fried hến and its broth, mắm ruốc, fish sauce, pepper, chile in several forms, taro stem, banana blossom, rau má, herbs and sprouts, sour starfruit, pork cracklings, fried pork skin and roasted peanuts, all served cool with hot broth on the side; English Wikipedia agrees. Helen Le hến xúc bánh tráng gives the stir-fry (clams with lemongrass, garlic and spring onion, fish sauce, pepper, chile, rau răm) and the sesame crackers. Hến are counted as clams, the closest database row."
+    },
+    {
+      "id": "curated_vn_com_rang_dua_bo",
+      "name": "Cơm Rang Dưa Bò (Fried Rice with Beef and Pickled Greens)",
+      "builderType": "side",
+      "dishRole": "main",
+      "dishGroup": "Rice Dishes",
+      "region": "Northern / Hà Nội",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Smoky day-old rice fried with tender seared beef and sour, crunchy pickled mustard greens, with garlic and scallion.",
+      "healthBenefit": "Protein, iron and zinc from the beef and greens from the pickled mustard; the pickle brings salt, so the rice needs little more.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_com_trang",
+          "servings": 4,
+          "note": "day-old"
+        },
+        {
+          "recipeId": "curated_vn_base_dua_cai_chua",
+          "servings": 3,
+          "note": "about 1 1/2 cups, squeezed and chopped"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Top Sirloin (Raw)",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "sliced thin against the grain",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tsp on the beef, 1 tsp in the rice"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Toss the beef with 1 tsp fish sauce, the pepper and half the garlic and let it sit 10 minutes.",
+        "Sear the beef in 1 tbsp very hot oil for 1 minute, just until browned, and lift it out.",
+        "Fry the rest of the garlic in 1 tbsp oil, add the pickled greens, tomato and sugar and stir-fry 2 to 3 minutes. Lift out.",
+        "Heat the last of the oil until it shimmers and fry the rice over high heat, tossing, for 3 to 5 minutes until hot and lightly toasted. Season with the last of the fish sauce.",
+        "Return the greens and beef, toss for 1 minute, and finish with scallion."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Iron",
+          "note": "From the beef."
+        },
+        {
+          "nutrient": "Zinc",
+          "note": "From the beef."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia, Fried rice",
+          "url": "https://en.wikipedia.org/wiki/Fried_rice"
+        },
+        {
+          "source": "Vicky Pham, Fried Rice with Chinese Sausage (Cơm Chiên Lạp Xưởng)",
+          "url": "https://vickypham.com/blog/fluffy-fragrant-fried-rice/"
+        }
+      ],
+      "curationNote": "Written mostly from description. The Điện Máy Xanh cơm rang dưa bò recipe page refused the connection and no other recipe page opened. Built from the general Vietnamese cơm rang described on Wikipedia, the hot wok method of Vicky Pham fried rice, and the well-known Hà Nội pairing of quick-seared beef with dưa cải chua stir-fried with tomato, the base this file holds. Quantities are modest so the pickle leads."
     }
   ]
 }

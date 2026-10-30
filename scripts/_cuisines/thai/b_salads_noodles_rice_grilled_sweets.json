@@ -7112,6 +7112,1355 @@
         }
       ],
       "curationNote": "Hungry in Thailand (serves 2: 4 eggs, 1/3 cup shallots, 6 dried chilies, 3 tbsp water, 4 tbsp tamarind paste, 2 tbsp fish sauce, 3.5 tbsp palm sugar, coriander, boiled then fried golden, sauce over low to medium heat) compared with Grantourismo (serves 2: 6 eggs soft boiled 6 minutes, fried in 1 cup oil at 190°C, 2 tbsp tamarind, 2 tbsp palm sugar, 1 tbsp fish sauce, fried shallots, garlic and chilies). Six eggs with the Hungry in Thailand sauce, served as 3. Only the oil taken up is counted. Nam makham 4 servings of 1 tbsp and hom jiew 3 servings of 1 tbsp from the bases file."
+    },
+    {
+      "id": "curated_th_khao_niao_mamuang",
+      "name": "Khao Niao Mamuang (Mango Sticky Rice)",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Drinks",
+      "region": "Central",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "plate",
+      "flavorProfile": "Chewy, glossy sticky rice soaked in sweet, faintly salty coconut milk beside cold slices of ripe mango, with a spoon of thick coconut sauce and crisp mung beans on top.",
+      "healthBenefit": "Ripe mango brings vitamin C and vitamin A, while the sweet coconut rice is rich in sugar and saturated fat, so this is a treat to share rather than an everyday dessert.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Grain",
+          "baseName": "Rice, white, glutinous, unenriched, uncooked",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "about 1/2 cup, soaked at least 4 hours",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Coconut milk",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": "for soaking the rice",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 38,
+          "unit": "g",
+          "cutPrep": "about 3 tbsp",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Coconut milk",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": "for the topping sauce",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 19,
+          "unit": "g",
+          "cutPrep": "about 1.5 tbsp, for the sauce",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.125,
+          "unit": "tsp",
+          "cutPrep": "for the sauce",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Rice flour",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "about 1/4 tsp, for the sauce",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Mango",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "2 ripe mangoes, peeled and sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Legume",
+          "baseName": "Mung beans, mature seeds",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "split, toasted until crisp, about 1 tbsp",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Soak the sticky rice in water for at least 4 hours, up to overnight, then drain it and steam it until tender and translucent, 30 to 40 minutes.",
+        "While the rice steams, warm 1/2 cup coconut milk with 3 tbsp sugar and 1/4 tsp salt until the sugar dissolves, 2 to 3 minutes, without letting it boil.",
+        "Stir the hot rice into the sweet coconut milk, cover it and leave it to soak it up for 15 to 20 minutes.",
+        "For the sauce, warm the remaining coconut milk with the rest of the sugar, the pinch of salt and the rice flour, stirring until it thickens slightly, 1 to 2 minutes.",
+        "Serve the rice beside sliced mango, spoon the sauce over the rice and scatter the crisp mung beans on top."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the sticky rice, sugar and mango."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the ripe mango."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "From the coconut milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Rachel Cooks Thai, Mango Sticky Rice",
+          "url": "https://rachelcooksthai.com/mango-sticky-rice/"
+        },
+        {
+          "source": "Wikipedia, Mango sticky rice",
+          "url": "https://en.wikipedia.org/wiki/Mango_sticky_rice"
+        }
+      ],
+      "curationNote": "Rachel Cooks Thai (serves 4: 1/2 cup sticky rice soaked at least 4 hours and steamed about 40 minutes, 1/2 cup coconut milk with 3 tbsp sugar and 1/4 tsp salt, rested 20 minutes; sauce of 1/4 cup coconut milk, 1.5 tbsp sugar, 1/8 tsp salt and 1/4 tsp rice flour; 2 mangoes and 1 tbsp crisp mung beans) followed. Wikipedia notes palm sugar as an alternative and warming the coconut milk without boiling. The rice is written raw here rather than from the sticky rice base, because it is soaked in coconut milk straight from the steamer."
+    },
+    {
+      "id": "curated_th_khanom_krok",
+      "name": "Khanom Krok (Coconut Rice Pancakes)",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Drinks",
+      "region": "Central",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Little round cakes crisp at the bottom and soft as custard on top, the salty rice and coconut base under a sweet coconut cream layer, with a few slices of scallion.",
+      "healthBenefit": "Small pieces of rice flour and coconut, fairly high in saturated fat from the coconut cream and in sugar, best shared as a snack.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_th_base_khao_suay",
+          "servings": 0.33,
+          "note": "about 1/3 cup cooked jasmine rice, blended into the batter"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Rice flour",
+          "quantity": 160,
+          "unit": "g",
+          "cutPrep": "about 1 cup, soaked in the first water",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": "for soaking the flour",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": "blended into the batter",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Nuts, coconut meat, desiccated, unsweetened",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "about 1/2 cup grated dried coconut",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Coconut cream",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": "for the topping",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "about 1/2 cup, for the topping",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "for the topping",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": "to grease the pan",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Soak the rice flour in 1 cup water for at least 1 hour.",
+        "Blend the cooked jasmine rice, dried coconut, 1/2 tsp salt and the second cup of water until smooth, 1 to 2 minutes, then stir it into the soaked flour.",
+        "For the topping, stir the coconut cream, sugar and remaining salt until the sugar dissolves.",
+        "Heat a khanom krok pan or an aebleskiver pan over medium heat and oil each cup well.",
+        "Fill each cup two thirds with the base batter, then add about 2 tsp of the topping and a few slices of scallion.",
+        "Cover and cook until the bottoms are crisp and golden and the tops are just set, 8 to 10 minutes, then lift them out with a spoon and serve warm."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the rice flour, rice and sugar."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "From the coconut cream and dried coconut."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "From the salt in both layers."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Import Food, Thai Coconut Pudding (Khanom Krok)",
+          "url": "https://importfood.com/recipes/recipe/10-thai-coconut-pudding-khanom-krok"
+        },
+        {
+          "source": "Hungry in Thailand, Kanom Krok Recipe",
+          "url": "https://hungryinthailand.com/recipe/kanom-krok-recipe"
+        }
+      ],
+      "curationNote": "Import Food (serves 4: 1 cup rice flour soaked in 1 cup water at least 1 hour, 1/3 cup cooked jasmine rice, 1/2 cup grated dried coconut, 1/2 tsp salt and 1 cup water blended in; 1 cup coconut cream, 1/2 cup sugar, 1.5 tsp salt and a green onion on top; pan filled two thirds plus 2 tsp topping, covered 8 to 10 minutes over medium heat) followed. The topping salt is cut to 1 tsp, as in the Hungry in Thailand filling (1 2/3 cups coconut milk with 1 tsp salt). The cooked rice is 0.33 of a 1 cup serving from the rice base."
+    },
+    {
+      "id": "curated_th_tub_tim_grob",
+      "name": "Tub Tim Grob (Red Rubies in Coconut Milk)",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Drinks",
+      "region": "Central",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Crunchy cubes of water chestnut in a slippery red tapioca coat, floating in cold, sweet coconut milk over crushed ice.",
+      "healthBenefit": "Water chestnuts give a little fibre and potassium, but this is mostly starch, sugar and coconut fat, a cold sweet for a hot afternoon.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Water chestnuts, canned, drained",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "about 1 cup, cut in 1/4 inch (6 mm) cubes",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "red food colouring",
+          "contains": "none",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": "about 20 drops",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": "to mix the colouring",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "tapioca starch",
+          "contains": "none",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "about 1 cup, to coat",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": "for the syrup",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "about 1/2 cup, for the syrup",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "pandan leaves",
+          "contains": "none",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "tied in a knot",
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Coconut milk",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 480,
+          "unit": "ml",
+          "cutPrep": "as crushed ice, to serve",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Soak the water chestnut cubes in the coloured water until they turn a deep red, about 10 minutes, then drain them.",
+        "Toss them in the tapioca starch until each cube is well coated, shaking off the excess.",
+        "Drop them into a pot of boiling water and cook until they float and the coating turns clear, 1 to 2 minutes, then move them to a bowl of ice water.",
+        "Simmer the water, sugar and pandan leaf until the sugar dissolves, 2 to 3 minutes, cool it, take out the leaf and stir in the coconut milk.",
+        "Drain the rubies, divide them among bowls, pour the sweet coconut milk over and top with crushed ice."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the tapioca starch, sugar and water chestnuts."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "From the coconut milk."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "A little from the water chestnuts."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Rachel Cooks Thai, Red Rubies in Coconut Milk",
+          "url": "https://rachelcooksthai.com/red-rubies-in-coconut-milk/"
+        },
+        {
+          "source": "Wikipedia, Tub tim krob",
+          "url": "https://en.wikipedia.org/wiki/Tub_tim_krob"
+        }
+      ],
+      "curationNote": "Rachel Cooks Thai (serves 4: 1 cup water chestnuts in 1/4 inch cubes, 20 drops red colouring in 2 tbsp water for 10 minutes, 1 cup tapioca starch, boiled about 1 minute until floating then ice water; syrup of 1/2 cup water and 1/2 cup sugar with an optional pandan leaf, cooled, plus 1 cup coconut milk, on crushed ice) followed, with Wikipedia for the dish itself."
+    },
+    {
+      "id": "curated_th_bua_loy",
+      "name": "Bua Loy (Rice Balls in Coconut Milk)",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Drinks",
+      "region": "Central",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Soft, chewy little rice balls in three colours, taro, sweet potato and pandan green, warm in salty sweet coconut milk scented with pandan.",
+      "healthBenefit": "Taro and sweet potato add some fibre and vitamin A to the dough, though the coconut milk and sugar make it a rich sweet.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Grains, rice, white, glutinous, flour",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "just over 1/4 cup for each of the three doughs",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "tapioca starch",
+          "contains": "none",
+          "quantity": 27,
+          "unit": "g",
+          "cutPrep": "1 tbsp for each dough",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Taro",
+          "quantity": 85,
+          "unit": "g",
+          "cutPrep": "peeled, steamed and mashed",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Sweet potato",
+          "quantity": 85,
+          "unit": "g",
+          "cutPrep": "peeled, steamed and mashed",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "pandan leaves",
+          "contains": "none",
+          "quantity": 5,
+          "unit": "each",
+          "cutPrep": "blended with the water and strained, for the green dough",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 135,
+          "unit": "ml",
+          "cutPrep": "about 3 tbsp for each dough",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Coconut milk",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 220,
+          "unit": "ml",
+          "cutPrep": "for the coconut milk",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "about 1/2 cup",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "pandan leaves",
+          "contains": "none",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "tied in a knot",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Make three doughs: knead a third of the flour and starch with the mashed taro, a third with the mashed sweet potato and a third with the pandan juice, adding water a little at a time until each is soft and smooth, 3 to 5 minutes each.",
+        "Roll each dough into small balls about the size of a fingertip.",
+        "Drop them into boiling water and cook until they float, then 2 to 3 minutes more, and lift them into cold water.",
+        "Warm the coconut milk, water, sugar, salt and pandan leaves over medium heat until the sugar dissolves, 3 to 5 minutes, without boiling hard.",
+        "Add the drained rice balls, warm them through for 1 to 2 minutes, take out the pandan and serve warm."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the glutinous rice flour, taro, sweet potato and sugar."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the sweet potato."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "From the coconut milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Hungry in Thailand, Bua Loy Dessert",
+          "url": "https://hungryinthailand.com/bua-loy-dessert/"
+        },
+        {
+          "source": "Wikibooks Cookbook, Thai Rice Balls in Coconut Milk (Bua Loi)",
+          "url": "https://en.wikibooks.org/wiki/Cookbook:Thai_Rice_Balls_in_Coconut_Milk_(Bua_Loi)"
+        }
+      ],
+      "curationNote": "Hungry in Thailand (serves 6: three doughs of just over 1/4 cup glutinous rice flour, 1 tbsp tapioca flour, 3 oz taro, sweet potato or pandan juice and 3 tbsp water; simmered 2 to 3 minutes after floating; just over 2 cups coconut milk, 1/2 cup sugar, just under 1 cup water, 1 tsp salt, 2 pandan leaves) followed. Wikibooks confirms the coconut cream, sugar, salt and pandan and adds poached eggs, the bua loy khai wan version, which is left out here as Hungry in Thailand marks it optional. The pandan dough takes its green from leaves blended with its water."
+    },
+    {
+      "id": "curated_th_kluay_buat_chee",
+      "name": "Kluay Buat Chee (Bananas in Coconut Milk)",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Drinks",
+      "region": "Central",
+      "servings": 2,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Small, dense Thai bananas warmed in pale, salty sweet coconut milk with palm sugar and pandan, soft but still holding their shape.",
+      "healthBenefit": "Bananas bring potassium and fibre, and the dish is simple, though the coconut milk and palm sugar make it rich and sweet.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fruit",
+          "baseName": "Banana",
+          "quantity": 420,
+          "unit": "g",
+          "cutPrep": "7 small Thai bananas, boiled in their skins then peeled and halved",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Coconut milk",
+          "quantity": 270,
+          "unit": "ml",
+          "cutPrep": "about 1 cup plus 2 tbsp",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "palm sugar",
+          "contains": "none",
+          "quantity": 36,
+          "unit": "g",
+          "cutPrep": "about 3 tbsp",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "pandan leaves",
+          "contains": "none",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "tied in a knot",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Boil the bananas in their skins until tender, about 10 minutes, then cool, peel and halve them.",
+        "Warm the coconut milk with the palm sugar, salt and pandan leaves over medium heat, stirring until the sugar dissolves, 3 to 5 minutes, without letting it boil hard.",
+        "Add the bananas and warm them through, 1 to 2 minutes, take out the pandan and serve warm."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Potassium",
+          "note": "From the bananas."
+        },
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the bananas and palm sugar."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "From the coconut milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Hungry in Thailand, Bananas in Coconut Milk",
+          "url": "https://hungryinthailand.com/bananas-in-coconut-milk/"
+        },
+        {
+          "source": "Wikipedia, Kluai buat chi",
+          "url": "https://en.wikipedia.org/wiki/Kluai_buat_chi"
+        }
+      ],
+      "curationNote": "Hungry in Thailand (serves 2: 7 Thai bananas boiled in their skins about 10 minutes, cooled and peeled; 1 cup plus 2 tbsp coconut milk, 3 tbsp palm sugar, 1 tsp salt, 2 pandan leaves over medium heat; bananas warmed 1 to 2 minutes) followed, with Wikipedia for coconut milk, sugar and salt as the base. The banana weight assumes about 60 g each for small Thai bananas."
+    },
+    {
+      "id": "curated_th_sangkaya_fak_thong",
+      "name": "Sangkaya Fak Thong (Pumpkin Custard)",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Drinks",
+      "region": "Central",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "A whole kabocha steamed with a palm sugar and coconut custard inside, cut in wedges so the sweet orange squash and the pale, set custard come together.",
+      "healthBenefit": "Kabocha gives vitamin A and fibre and the eggs add protein, with palm sugar and coconut milk making it a rich dessert.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Squash, winter",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "1 small kabocha, top cut off and seeds scooped out",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 4,
+          "unit": "each",
+          "cutPrep": "beaten",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Coconut milk",
+          "quantity": 180,
+          "unit": "ml",
+          "cutPrep": "about 3/4 cup",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "palm sugar",
+          "contains": "none",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "about 1/2 cup",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "pandan paste",
+          "contains": "none",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": "about 5 drops",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Cut a lid from the top of the kabocha, scoop out the seeds and dry the inside.",
+        "Whisk the eggs, coconut milk, palm sugar, salt and pandan paste until the sugar dissolves, 3 to 5 minutes, then strain it.",
+        "Pour the custard into the kabocha, set it in a heatproof bowl and steam it over medium-high heat until the custard is set and the squash is tender, 40 to 50 minutes.",
+        "Cool it completely, then chill it before cutting it into wedges."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the kabocha."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "From the eggs."
+        },
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the squash and palm sugar."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Rachel Cooks Thai, Pumpkin Custard",
+          "url": "https://rachelcooksthai.com/pumpkin-custard/"
+        },
+        {
+          "source": "Import Food, Thai Pumpkin Custard (Sankaya Phak Tong)",
+          "url": "https://importfood.com/recipes/appetizers-dessert/recipe/36-thai-pumpkin-custard-sankaya-phak-tong"
+        }
+      ],
+      "curationNote": "Rachel Cooks Thai (serves 6: 1 small kabocha, 4 eggs, 3/4 cup coconut milk, 1/2 cup palm sugar, 1/4 tsp salt, 1 tsp vanilla, steamed 45 minutes over medium-high heat) followed, with the pandan paste from Import Food (2 to 2.5 lb kabocha, 5 eggs, 1 cup coconut cream, 1 cup palm sugar, 5 drops pandan paste, steamed 30 to 45 minutes) in place of the vanilla. The kabocha weight assumes a small squash of about 2 lb (900 g to 1 kg)."
+    },
+    {
+      "id": "curated_th_khanom_chan",
+      "name": "Khanom Chan (Layered Pandan Cake)",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Drinks",
+      "region": "Central",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "A springy, chewy cake of thin steamed layers, green with pandan and white with coconut, that peel apart one at a time.",
+      "healthBenefit": "Starch, sugar and coconut milk with little else, a sweet to have in small pieces.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 255,
+          "unit": "g",
+          "cutPrep": "about 9 oz",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Coconut milk",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Arrowroot flour",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Rice flour",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "tapioca starch",
+          "contains": "none",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "pandan leaves",
+          "contains": "none",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "cut up and blended with the water, then strained",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": "for the pandan juice",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 5,
+          "unit": "ml",
+          "cutPrep": "to grease the mould",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Blend the pandan leaves with the water and strain it through cloth for a deep green juice.",
+        "Warm the coconut milk with the sugar and salt just until the sugar dissolves, 2 to 3 minutes, then cool it.",
+        "Whisk the arrowroot, rice flour and tapioca starch into the coconut milk until smooth, then divide the batter in two and stir the pandan juice into one half.",
+        "Grease an 8 inch (20 cm) mould and heat it in a steamer for 5 minutes.",
+        "Pour in a thin layer of the white batter and steam until set, about 5 minutes, then add a green layer and steam again, alternating until the batter is used and finishing with green.",
+        "Cool it completely, 2 to 3 hours, before cutting it with an oiled knife."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the starches and sugar."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "From the coconut milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Hungry in Thailand, Khanom Chan Recipe",
+          "url": "https://hungryinthailand.com/khanom-chan-recipe/"
+        },
+        {
+          "source": "Rachel Cooks Thai, Layered Dessert",
+          "url": "https://rachelcooksthai.com/layered-dessert/"
+        }
+      ],
+      "curationNote": "Hungry in Thailand (serves 4 as written, cut here into 8 pieces: 9 oz sugar, 17 fl oz coconut milk, 0.5 tsp salt, 1.8 oz arrowroot, 1.8 oz rice flour, 5.3 oz tapioca starch, 1.8 oz pandan leaves; layers steamed 5 minutes each in a greased 8 inch mould) followed. The water for the pandan juice follows the Rachel Cooks Thai ratio (1/2 cup leaves to 1/4 cup water), and her jasmine essence is left out as optional."
+    },
+    {
+      "id": "curated_th_khanom_tako",
+      "name": "Khanom Tako (Coconut Pandan Cups)",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Drinks",
+      "region": "Central",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Little pandan leaf cups holding a sweet green jelly with corn and crunchy water chestnut, set under a smooth, salty white coconut cream.",
+      "healthBenefit": "Small portions with a little fibre from the corn and water chestnut, but mostly starch, sugar and coconut fat.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "pandan leaves",
+          "contains": "none",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "blended with the water and strained, plus more leaves folded into 12 cups",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 946,
+          "unit": "ml",
+          "cutPrep": "for the pandan juice",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 130,
+          "unit": "g",
+          "cutPrep": "for the pudding",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Rice flour",
+          "quantity": 70,
+          "unit": "g",
+          "cutPrep": "for the pudding",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "tapioca starch",
+          "contains": "none",
+          "quantity": 65,
+          "unit": "g",
+          "cutPrep": "for the pudding",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Corn, sweet, yellow",
+          "quantity": 75,
+          "unit": "g",
+          "cutPrep": "kernels",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Water chestnuts, canned, drained",
+          "quantity": 75,
+          "unit": "g",
+          "cutPrep": "diced small",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Coconut milk",
+          "quantity": 800,
+          "unit": "ml",
+          "cutPrep": "for the topping",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Rice flour",
+          "quantity": 70,
+          "unit": "g",
+          "cutPrep": "for the topping",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "for the topping",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Fold strips of pandan leaf into 12 small square cups and pin them, or use small heatproof cups.",
+        "Blend the remaining pandan with the water and strain it. Whisk in the sugar, rice flour and tapioca starch and cook over medium heat, stirring all the time, until thick and glossy, 8 to 10 minutes. Stir in the corn and water chestnuts.",
+        "Fill each cup about two thirds with the pandan pudding.",
+        "Whisk the coconut milk, rice flour, sugar and salt and cook over medium-low heat, stirring, until it thickens to a smooth cream, 5 to 8 minutes.",
+        "Spoon the coconut cream over the pudding to fill each cup, cool, then chill for at least 3 hours until set."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the rice flour, starch, sugar and corn."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "From the coconut milk topping."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Crafts to Crumbs, Tako",
+          "url": "https://craftstocrumbs.com/recipes/tako/"
+        },
+        {
+          "source": "V for Veganista, Khanom Tako",
+          "url": "https://www.vforveganista.com/recipes/khanom-tako-thai-pudding-with-coconut-topping/"
+        }
+      ],
+      "curationNote": "Crafts to Crumbs (12 cups: 946 ml pandan juice, 130 g sugar, 70 g rice flour, 65 g tapioca flour with corn and water chestnuts; topping of 800 ml coconut milk, 70 g rice flour, 100 g sugar, 1/2 tsp salt over medium-low heat) followed. Neither source gives the weight of corn or water chestnut for 12 cups, so 75 g of each is a standard proportion. V for Veganista confirms the pandan leaf cups, the water chestnut layer and chilling at least 3 hours. The pandan leaf weight for the juice is also assumed. Tier is moderate because the corn, water chestnut and pandan amounts are estimated."
+    },
+    {
+      "id": "curated_th_cha_yen",
+      "name": "Cha Yen (Thai Iced Tea)",
+      "builderType": "beverage",
+      "dishGroup": "Sweets & Drinks",
+      "region": "Central",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "glass",
+      "flavorProfile": "Strong, smoky orange black tea, very sweet with condensed milk and finished with a creamy float of evaporated milk over plenty of ice.",
+      "healthBenefit": "Black tea gives caffeine and polyphenols, though the sugar and condensed milk make each glass a sweet drink rather than a light one.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Brewing",
+          "baseName": "Black Tea (Brewed)",
+          "quantity": 960,
+          "unit": "ml",
+          "cutPrep": "brewed strong from about 1/2 cup (40 g) Thai tea mix",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "about 1/4 cup",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "sweetened condensed milk",
+          "contains": "dairy",
+          "quantity": 8,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "evaporated milk",
+          "contains": "dairy",
+          "quantity": 8,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 600,
+          "unit": "ml",
+          "cutPrep": "as crushed ice, to serve",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring the water to a boil, add the Thai tea mix and simmer for 3 to 5 minutes, then turn off the heat and let it steep a few minutes more.",
+        "Strain it through a tea sock or a cloth until it runs clear of leaves.",
+        "Stir in the sugar and condensed milk while the tea is hot, then chill it for several hours.",
+        "Fill tall glasses with ice, pour in the tea and float 2 tbsp evaporated milk over each glass."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Caffeine",
+          "note": "From the black tea."
+        },
+        {
+          "nutrient": "Sugar",
+          "note": "From the sugar and condensed milk."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Rachel Cooks Thai, Thai Iced Tea",
+          "url": "https://rachelcooksthai.com/thai-iced-tea/"
+        },
+        {
+          "source": "Wikipedia, Thai tea",
+          "url": "https://en.wikipedia.org/wiki/Thai_tea"
+        }
+      ],
+      "curationNote": "Rachel Cooks Thai street style (serves 4: 4 cups water, 1/2 cup Thai tea mix, 1/4 cup sugar, 1/2 cup sweetened condensed milk, 1/2 cup evaporated milk at 2 tbsp a glass; 3 to 5 minutes, steeped, strained through a sock, chilled several hours) followed, with Wikipedia for the strong black tea, condensed milk and evaporated milk over ice. The brewed tea is written as brewed black tea, since the dye and flavour in the mix are not in the database."
+    },
+    {
+      "id": "curated_th_oliang",
+      "name": "Oliang (Thai Iced Coffee)",
+      "builderType": "beverage",
+      "dishGroup": "Sweets & Drinks",
+      "region": "Central",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "glass",
+      "flavorProfile": "Black, sweet and very cold, with a roasted, smoky taste from the coffee blended with roasted grains and seeds, drunk through a straw over crushed ice.",
+      "healthBenefit": "A black coffee with caffeine and no milk, though 2 tbsp of sugar a glass makes it a sweet drink.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Brewing",
+          "baseName": "Brewed Black Coffee",
+          "quantity": 480,
+          "unit": "ml",
+          "cutPrep": "brewed from 2 tbsp oliang powder (coffee with roasted corn, soybeans, rice and sesame)",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "about 2 tbsp a glass",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 600,
+          "unit": "ml",
+          "cutPrep": "as crushed ice, to serve",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the oliang powder in a cloth coffee sock and pour boiling water through it into a pan.",
+        "Lift the sock to drain, pour the coffee back through it and repeat once more, so it passes through three times, or let the sock steep in the coffee for about 10 minutes until strong.",
+        "Put 2 tbsp sugar in each glass, pour in the hot coffee and stir until the sugar dissolves.",
+        "Pour it over large glasses of crushed ice and serve with a straw."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Caffeine",
+          "note": "From the coffee."
+        },
+        {
+          "nutrient": "Sugar",
+          "note": "From the added sugar."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Import Food, Thai Coffee (Oleang)",
+          "url": "https://importfood.com/recipes/recipe/1297-thai-coffee-oleang"
+        },
+        {
+          "source": "Wikipedia, Oliang",
+          "url": "https://en.wikipedia.org/wiki/Oliang"
+        }
+      ],
+      "curationNote": "Import Food (serves 4: 2 cups water, 2 tbsp oleang mix through a muslin filter three times with boiling water, 2 to 3 tbsp sugar a glass, crushed ice, a straw) followed at the lower sugar amount. Wikipedia gives the blend (Robusta coffee with brown sugar, cardamom, corn, soybeans, rice and sesame), the cloth bag brewing with about 10 minutes of steeping, and notes condensed or evaporated milk served on the side for those who want it. Written as brewed black coffee, since the roasted grains in the powder are not in the database."
+    },
+    {
+      "id": "curated_th_cha_manao",
+      "name": "Cha Manao (Thai Lime Tea)",
+      "builderType": "beverage",
+      "dishGroup": "Sweets & Drinks",
+      "region": "Central",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "glass",
+      "flavorProfile": "Dark, strong Thai tea with no milk, sweet and sharp with fresh lime juice, poured over ice.",
+      "healthBenefit": "Black tea with caffeine and polyphenols and a little vitamin C from the lime, though it carries a good deal of sugar.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Brewing",
+          "baseName": "Black Tea (Brewed)",
+          "quantity": 960,
+          "unit": "ml",
+          "cutPrep": "brewed from about 1/4 cup (20 g) Thai tea mix",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "about 3/4 cup",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": "about 4 tbsp, freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "sliced, to garnish",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 600,
+          "unit": "ml",
+          "cutPrep": "as crushed ice, to serve",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring the water to a boil, turn off the heat and stir in the Thai tea mix and the sugar until it dissolves, steeping briefly, 2 to 5 minutes.",
+        "Strain it through a tea sock or a paper coffee filter.",
+        "Chill it completely, about 2 hours.",
+        "Stir in the lime juice only once the tea is cold, pour it over glasses of ice, add a lime slice and serve right away."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Caffeine",
+          "note": "From the black tea."
+        },
+        {
+          "nutrient": "Sugar",
+          "note": "From the added sugar."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "A little from the lime juice."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Rachel Cooks Thai, Thai Lime Tea (Cha Manao)",
+          "url": "https://rachelcooksthai.com/cha-manao/"
+        },
+        {
+          "source": "Hungry in Thailand, Cha Manao Recipe (Thai Lime Iced Tea)",
+          "url": "https://hungryinthailand.com/cha-manao-recipe-thai-lime-iced-tea/"
+        }
+      ],
+      "curationNote": "Rachel Cooks Thai (serves 4: 4 cups water, 1/4 cup Thai tea mix, 3/4 cup sugar, 4 tbsp lime juice, strained through a sock, chilled about 2 hours, lime added once cold) followed. Hungry in Thailand (serves 2: 3 tbsp tea leaves, 1 3/4 cups hot water, 6 tbsp sugar, 3 tbsp lime juice, steeped about 2 minutes) matches it closely, and its notes and Rachel both say to adjust the sugar and lime to taste. Wikipedia mentions mint as an occasional addition, left out here."
+    },
+    {
+      "id": "curated_th_nam_takrai",
+      "name": "Nam Takrai (Lemongrass Drink)",
+      "builderType": "beverage",
+      "dishGroup": "Sweets & Drinks",
+      "region": "Central",
+      "servings": 2,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "glass",
+      "flavorProfile": "A pale, fragrant lemongrass infusion with a little warmth from ginger, lightly sweet with honey, served hot or over ice.",
+      "healthBenefit": "Caffeine free and mostly water, with only the honey adding sugar, a light drink for any time of day.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "lemongrass",
+          "contains": "none",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "2 stalks, bruised and cut in short lengths",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Ginger root",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "5 thin slices",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 720,
+          "unit": "ml",
+          "cutPrep": "about 3 cups",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Standard Honey (Blossom Honey)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bruise the lemongrass with the back of a knife and cut it in short lengths.",
+        "Simmer the lemongrass and ginger in the water until it turns pale gold and fragrant, about 10 minutes.",
+        "Strain it and stir in the honey while it is warm.",
+        "Serve it hot, or cool it and pour it over ice."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sugar",
+          "note": "From the honey, about 1 tbsp a glass."
+        },
+        {
+          "nutrient": "Water",
+          "note": "Mostly water, caffeine free."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Hungry in Thailand, Lemongrass Ginger Tea Recipe",
+          "url": "https://hungryinthailand.com/lemongrass-ginger-tea-recipe/"
+        },
+        {
+          "source": "Wikipedia, List of Thai dishes",
+          "url": "https://en.wikipedia.org/wiki/List_of_Thai_dishes"
+        }
+      ],
+      "curationNote": "Hungry in Thailand (serves 2: 5 thin slices ginger, 2 lemongrass stalks, 3 cups water simmered about 10 minutes, 2 tbsp honey, hot or over ice) followed. The second source, the Wikipedia list of Thai dishes, gives only a description (nam takhrai, a refreshing lemongrass drink served hot or with ice), so the quantities rest on the one recipe. The lemongrass weight assumes about 20 g a stalk."
     }
   ]
 }

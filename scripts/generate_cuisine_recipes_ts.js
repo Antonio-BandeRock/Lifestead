@@ -187,10 +187,6 @@ ${r.nutritionHighlights.map((h) => `        { nutrient: ${q(h.nutrient)}, note: 
   },
 `;
 }
-
-let source = fs.readFileSync(RECIPES_TS, 'utf8');
-const crlf = source.includes('\r\n');
-source = source.replace(/\r\n/g, '\n');
 return block;
 }
 
@@ -213,7 +209,15 @@ for (const c of CUISINES) {
   }
   if (recipes.length === 0) continue;
   const header = `${BEGIN} (scripts/generate_cuisine_recipes_ts.js writes everything up to END)\n`;
-  source = source.slice(0, at) + header + blockFor(recipes) + END + '\n' + source.slice(at);
+  // Each cuisine is spread in as an array asserted to DigestEntry[] of its
+  // own. One literal holding every recipe made tsc give up (TS2590, a union
+  // too complex to represent) once the six cuisines after Mexican went in,
+  // and a cuisine checked on its own stays well inside that limit. The
+  // entries keep their indentation, which the line-based readers of this
+  // file (the diet tag and condition appliers, the subgroup audit) rely on.
+  const opener = '  ...([\n';
+  const closer = '  ] as DigestEntry[]),\n';
+  source = source.slice(0, at) + header + opener + blockFor(recipes) + closer + END + '\n' + source.slice(at);
   total += recipes.length;
   console.log(`${c.cuisine}: ${recipes.length} recipe entries`);
 }

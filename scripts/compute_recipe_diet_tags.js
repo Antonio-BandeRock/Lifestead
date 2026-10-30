@@ -56,17 +56,18 @@
 // Writes scripts/_recipe_diet_tags_output.json, a { [recipeId]: string[] }
 // map, for the follow-up step that writes these into lib/digest/recipes.ts.
 
-const { execFileSync } = require('child_process');
+const { DatabaseSync } = require('node:sqlite');
 const fs = require('fs');
 const path = require('path');
 
-const SQLITE3 = 'C:/Users/TonyR/AppData/Local/Android/Sdk/platform-tools/sqlite3.exe';
 const DB = path.join(__dirname, '..', 'assets', 'data', 'foods_reference.db');
 
+// Through node:sqlite since 2026-10-29, the same change as in
+// compute_recipe_condition_data.js, where going through sqlite3.exe on the
+// command line garbled accented food names on Windows.
+const db = new DatabaseSync(DB, { readOnly: true });
 function runSql(sql) {
-  const out = execFileSync(SQLITE3, ['-json', DB, sql], { maxBuffer: 1024 * 1024 * 64 });
-  const text = out.toString('utf8').trim();
-  return text ? JSON.parse(text) : [];
+  return db.prepare(sql).all();
 }
 
 const rows = runSql(`
