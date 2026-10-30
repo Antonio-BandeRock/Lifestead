@@ -17,6 +17,7 @@ import { contextCaveat } from './patternContext';
 import { EXPERIMENT_LIMIT, removalEndsOn, subjectLabel, subjectOf, type ExperimentSubject } from './foodExperiment';
 import type { PatternFinderResult } from './patternFinder';
 import type { ReportListSection } from './reportGenerator';
+import { foodDisplayName } from './ingredientShortName';
 
 /** The window the report counts in, the same one Trends opens on. */
 export const NOTICED_WINDOW_HOURS = 24;
@@ -48,7 +49,7 @@ export function noticedSection(result: NoticedInput | null): ReportListSection {
   }
   const hours = result.basis.windowHours;
   const rows: string[] = [
-    ...result.foodCandidates.map((c) => `Hypothesis: ${c.foodName}. ${tail(c, hours)}`),
+    ...result.foodCandidates.map((c) => `Hypothesis: ${foodDisplayName(c.foodName)}. ${tail(c, hours)}`),
     ...result.dimensionCandidates.map(
       (c) => `Hypothesis: foods rated ${c.tier} for ${c.subCriterion}, relevant to ${c.conditionName}. ${tail(c, hours)}`,
     ),
@@ -159,10 +160,10 @@ export function experimentsSection(
       const lines = experiment.lines.filter((line) => line !== EXPERIMENT_LIMIT);
       const food = subjectOf(experiment.subject) === 'food';
       const opening = experiment.stepped
-        ? `${experiment.foodName}, brought back in steps from ${experiment.removalStartedOn}`
+        ? `${foodDisplayName(experiment.foodName)}, brought back in steps from ${experiment.removalStartedOn}`
         : food
-        ? `${experiment.foodName}, left out from ${experiment.removalStartedOn}`
-        : `${experiment.foodName} (${subjectLabel(experiment.subject).toLowerCase()}), from ${experiment.removalStartedOn}`;
+        ? `${foodDisplayName(experiment.foodName)}, left out from ${experiment.removalStartedOn}`
+        : `${foodDisplayName(experiment.foodName)} (${subjectLabel(experiment.subject).toLowerCase()}), from ${experiment.removalStartedOn}`;
       return `${opening}, ${experimentStage(experiment, rangeEnd)}. ${lines.join(' ')}`.trim();
     }),
     empty:

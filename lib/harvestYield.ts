@@ -35,6 +35,7 @@ import {
 } from './harvestTrade';
 import { summarizeCareBeforePicking, type CareBand, type CareEvent } from './plantingEvents';
 import { convertToGrams, type MeasurementUnit } from './unitConversion';
+import { foodDisplayName } from './ingredientShortName';
 
 export type MeasureSystem = 'metric' | 'imperial';
 
@@ -446,8 +447,8 @@ export function summarizeTiming(plantings: PlantingTiming[], endDate: string): T
       const where = planting.plotName ? ` in ${planting.plotName}` : '';
       const line =
         difference == null
-          ? `${planting.foodName}${where}: ${actualDays} ${plural(actualDays, 'day', 'days')} from planting to first picking. No date was expected for it, so there is nothing to compare it against.`
-          : `${planting.foodName}${where}: ${actualDays} ${plural(actualDays, 'day', 'days')} from planting to first picking, ${describeDifference(difference)}.`;
+          ? `${foodDisplayName(planting.foodName)}${where}: ${actualDays} ${plural(actualDays, 'day', 'days')} from planting to first picking. No date was expected for it, so there is nothing to compare it against.`
+          : `${foodDisplayName(planting.foodName)}${where}: ${actualDays} ${plural(actualDays, 'day', 'days')} from planting to first picking, ${describeDifference(difference)}.`;
       runs.push({
         plantingId: planting.id,
         foodName: planting.foodName,
@@ -467,7 +468,7 @@ export function summarizeTiming(plantings: PlantingTiming[], endDate: string): T
         plantingId: planting.id,
         foodName: planting.foodName,
         daysPast,
-        line: `${planting.foodName}${where}: ${daysPast} ${plural(daysPast, 'day', 'days')} past the date you expected to start picking, and nothing logged from it yet.`,
+        line: `${foodDisplayName(planting.foodName)}${where}: ${daysPast} ${plural(daysPast, 'day', 'days')} past the date you expected to start picking, and nothing logged from it yet.`,
       });
     }
   }
@@ -493,7 +494,7 @@ export function summarizeTiming(plantings: PlantingTiming[], endDate: string): T
         foodName: group.foodName,
         runs: group.differences.length,
         median: groupMedian,
-        line: `${group.foodName}, over ${group.differences.length} plantings: ${describeDifference(groupMedian)} in the middle case.`,
+        line: `${foodDisplayName(group.foodName)}, over ${group.differences.length} plantings: ${describeDifference(groupMedian)} in the middle case.`,
       };
     })
     .sort((a, b) => b.runs - a.runs);

@@ -56,6 +56,7 @@ import { RecipeDepthReport } from './RecipeDepthReport';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 // Deliberately last of the ten Food-tab builders, per this app's own build
 // order (see CLAUDE.md's Next steps) -- this is the only one that assembles
@@ -1344,7 +1345,7 @@ export function MealBuilder({
     <AppActionSheet
       visible={reconciliationPrompt !== null}
       onClose={() => setReconciliationPrompt(null)}
-      title={reconciliationPrompt ? `${reconciliationPrompt.next.foodName} (no longer in this meal)` : undefined}
+      title={reconciliationPrompt ? `${foodDisplayName(reconciliationPrompt.next.foodName)} (no longer in this meal)` : undefined}
       message="You removed it, or changed how much of it you had down to none, and a food trial is actively riding on this meal as proof it was eaten. What actually happened?"
       actions={reconciliationActions}
     />
@@ -1907,7 +1908,7 @@ export function MealBuilder({
         <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]} keyboardShouldPersistTaps="handled">
           <View style={[styles.formCard, { borderColor: tabColor }]}>
             <Text style={[styles.mealTitle, { color: tabColor }]} numberOfLines={2}>
-              {correctingTrial.foodName}
+              {foodDisplayName(correctingTrial.foodName)}
             </Text>
             <Text style={styles.pendingSubtitle}>When did you actually eat it?</Text>
             <View style={styles.pillWrap}>

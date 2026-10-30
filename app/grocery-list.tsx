@@ -92,6 +92,7 @@ import {
 import { ThumbEndRow } from '../components/ThumbEndRow';
 import { useWalkMark } from '../components/WalkMark';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 const DEFAULT_DAYS = 3;
 
@@ -911,7 +912,7 @@ export default function GroceryListScreen() {
                   <Text style={styles.previewCategory}>{section.category}</Text>
                   {section.items.map((item) => (
                     <Text key={`${item.foodName}|${item.unit}`} style={styles.previewLine}>
-                      {item.foodName}:{' '}
+                      {foodDisplayName(item.foodName)}:{' '}
                       {[{ quantity: item.quantity, unit: item.unit }, ...item.extraAmounts]
                         .map((amount) => `${roundForPreview(amount.quantity)} ${amount.unit}`.trim())
                         .join(' + ')}
@@ -1130,7 +1131,7 @@ export default function GroceryListScreen() {
                       {item.checked ? <Ionicons name="checkmark" size={16} color={colors.background} /> : null}
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.itemTextWrap} activeOpacity={0.85} onPress={() => handleExpand(item)}>
-                      <Text style={[styles.rowName, item.checked && styles.rowNameChecked]}>{item.foodName}</Text>
+                      <Text style={[styles.rowName, item.checked && styles.rowNameChecked]}>{foodDisplayName(item.foodName)}</Text>
                       <Text style={styles.rowMeta}>
                         {formatMergedAmounts({ primary: { quantity: item.quantity, unit: item.unit }, extras: item.extraAmounts })}
                         {item.price != null

@@ -75,6 +75,7 @@ import { ThumbEndRow } from './ThumbEndRow';
 import { useWalkMark } from './WalkMark';
 import { t } from '../lib/i18n';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 type DispositionForm = {
   itemId: string;
@@ -291,7 +292,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
         note: 'Running low',
       });
     });
-    showInfoAlert('Added', `${item.foodName} is on your grocery list.`);
+    showInfoAlert('Added', `${foodDisplayName(item.foodName)} is on your grocery list.`);
   }
 
   async function handleDisposition(item: KitchenInventoryItem) {
@@ -345,14 +346,14 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
       const note = describeValuation(valuation);
       showInfoAlert(
         'In your kitchen',
-        `${received.map((good) => `${formatQuantity(good.quantity, good.unit)} of ${good.foodName}`).join(', ')} added.${note ? ` ${note}` : ''}`,
+        `${received.map((good) => `${formatQuantity(good.quantity, good.unit)} of ${foodDisplayName(good.foodName)}`).join(', ')} added.${note ? ` ${note}` : ''}`,
       );
     }
   }
 
   async function handleMarkGone(item: KitchenInventoryItem) {
     const ok = await confirmSheet({
-      title: `${item.foodName} is gone?`,
+      title: `${foodDisplayName(item.foodName)} is gone?`,
       message: 'It stops showing here and stops counting against your grocery list. What it was stays on record.',
       confirmLabel: 'It is gone',
     });
@@ -590,7 +591,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
                       setUseAmount('');
                     }}
                   >
-                    <Text style={styles.itemName}>{item.foodName}</Text>
+                    <Text style={styles.itemName}>{foodDisplayName(item.foodName)}</Text>
                     <Text style={past ? styles.placeWarning : styles.itemMeta}>
                       {describeUseBy(item.useBy, useByToday)}
                     </Text>
@@ -621,7 +622,7 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
                     setUseAmount('');
                   }}
                 >
-                  <Text style={styles.itemName}>{item.foodName}</Text>
+                  <Text style={styles.itemName}>{foodDisplayName(item.foodName)}</Text>
                   <Text style={styles.itemMeta}>
                     {partly
                       ? t('{left} left of {total}', { left: formatGroceryAmount(item.quantityRemaining, item.unit), total: formatGroceryAmount(item.quantity, item.unit) })

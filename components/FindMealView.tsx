@@ -85,6 +85,7 @@ import {
 import { buildTime24, describeTimeInputProblem, formatTime12, type TimeOfDayInput } from '../lib/timeOfDay';
 import { useWalkMark } from './WalkMark';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 // How many rows are loaded at once. High enough that a personal history is
 // covered whole, and the search runs in SQL rather than over this list, so a
@@ -961,7 +962,7 @@ export function FindMealView({
             ))}
             {outFoods.map((food) => (
               <View key={food.key} style={[styles.rowWrap, styles.row]}>
-                <Text style={[styles.rowName, styles.outFoodName]}>{food.foodName}</Text>
+                <Text style={[styles.rowName, styles.outFoodName]}>{foodDisplayName(food.foodName)}</Text>
                 <AppTextInput
                   value={food.grams}
                   onChangeText={(text) =>
@@ -1293,7 +1294,7 @@ export function FindMealView({
                           {detail && detail.ingredients.length > 0 ? (
                             detail.ingredients.map((line, index) => (
                               <Text key={`${item.key}-ing-${index}`} style={styles.ingredientLine}>
-                                {line.amount ? `${line.foodName} · ${line.amount}` : line.foodName}
+                                {line.amount ? `${foodDisplayName(line.foodName)} · ${line.amount}` : foodDisplayName(line.foodName)}
                               </Text>
                             ))
                           ) : (

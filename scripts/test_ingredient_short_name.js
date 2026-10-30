@@ -17,7 +17,7 @@ const source = fs.readFileSync(path.join(__dirname, '..', 'lib', 'ingredientShor
 const { outputText } = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } });
 const loaded = { exports: {} };
 new Function('exports', 'module', outputText)(loaded.exports, loaded);
-const { ingredientShortName } = loaded.exports;
+const { ingredientShortName, foodDisplayName } = loaded.exports;
 
 let failures = 0;
 const CASES = [
@@ -54,6 +54,25 @@ for (const [input, expected] of CASES) {
   if (got !== expected) {
     failures += 1;
     console.log(`FAIL "${input}"\n  expected ${expected}\n  got      ${got}`);
+  }
+}
+
+// 3. foodDisplayName shortens only names written the database's way and
+//    leaves a name the person typed exactly as written.
+const DISPLAY_CASES = [
+  ['Water, tap', 'Water'],
+  ['Table Salt', 'Salt'],
+  ['Common salt/table salt', 'Salt'],
+  ["Grandma's chili", "Grandma's chili"],
+  ['tomatoes from the garden', 'tomatoes from the garden'],
+  ['Kale', 'Kale'],
+  ['', ''],
+];
+for (const [input, expected] of DISPLAY_CASES) {
+  const got = foodDisplayName(input);
+  if (got !== expected) {
+    failures += 1;
+    console.log(`FAIL foodDisplayName "${input}"\n  expected ${expected}\n  got      ${got}`);
   }
 }
 

@@ -16,6 +16,7 @@
 // a series is tried once, which is one run.
 
 import { EXPERIMENT_LIMIT } from './foodExperiment';
+import { foodDisplayName } from './ingredientShortName';
 
 export const SERIES_LIMIT = EXPERIMENT_LIMIT;
 
@@ -112,8 +113,8 @@ export function seriesSummaryLines(series: SeriesInput): string[] {
   if (open) {
     lines.push(
       itemState(open) === 'trialing'
-        ? `Now: ${open.foodName}, being watched.`
-        : `Now: ${open.foodName}, waiting to start.`,
+        ? `Now: ${foodDisplayName(open.foodName)}, being watched.`
+        : `Now: ${foodDisplayName(open.foodName)}, waiting to start.`,
     );
   }
 

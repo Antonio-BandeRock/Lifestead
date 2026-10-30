@@ -69,6 +69,7 @@ import { VoiceInputButton } from './VoiceInputButton';
 import { useNavigationHand } from '../lib/navigationHand';
 import { useWalkMark } from './WalkMark';
 import { t } from '../lib/i18n';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 const NUTRIENT_GROUP_LABELS: Record<string, string> = {
   macro: 'Macronutrients',
@@ -1754,7 +1755,7 @@ export function FoodLookup({
           {availableHarvests.map((harvest) => (
             <TouchableOpacity key={harvest.id} style={styles.harvestRow} onPress={() => handlePickHarvest(harvest)}>
               <Text style={styles.harvestText} numberOfLines={1}>
-                {harvest.foodName}: {harvest.quantityRemaining} {harvest.unit} left
+                {foodDisplayName(harvest.foodName)}: {harvest.quantityRemaining} {harvest.unit} left
               </Text>
             </TouchableOpacity>
           ))}

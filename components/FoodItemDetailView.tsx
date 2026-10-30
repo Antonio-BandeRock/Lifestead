@@ -73,6 +73,7 @@ import {
 import { getPersonalizationProfile, type PersonalizationProfile } from '../lib/foodPersonalization';
 import { isFlaggedTier } from '../lib/sixDimensionsReference';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 // Step 2 of "save a Side, then actually be able to see it" (step 1:
 // app/food-items.tsx's own list screen) -- reuses Insights' own
@@ -119,13 +120,13 @@ function describeMakePlan(plan: MakePlan, servings: number): string {
     taking.length === 0
       ? 'Nothing in your kitchen matches this, so nothing comes out.'
       : `Comes out of your kitchen: ${taking
-          .map((line) => `${line.foodName} ${formatGroceryAmount(line.covered, line.unit)}`)
+          .map((line) => `${foodDisplayName(line.foodName)} ${formatGroceryAmount(line.covered, line.unit)}`)
           .join(', ')}.`,
   );
   if (short.length > 0) {
     parts.push(
       `Not covered: ${short
-        .map((line) => `${line.foodName} ${formatGroceryAmount(Math.max(0, line.needed - line.covered), line.unit)}`)
+        .map((line) => `${foodDisplayName(line.foodName)} ${formatGroceryAmount(Math.max(0, line.needed - line.covered), line.unit)}`)
         .join(', ')}. Those are left alone.`,
     );
   }
@@ -388,7 +389,7 @@ export function FoodItemDetailView({
                       <>
                         <Text style={styles.stockBody}>
                           {shortfallsFrom(stockPlan)
-                            .map((short) => `${short.foodName} ${formatGroceryAmount(short.quantity, short.unit)}`)
+                            .map((short) => `${foodDisplayName(short.foodName)} ${formatGroceryAmount(short.quantity, short.unit)}`)
                             .join(', ')}
                         </Text>
                         <TouchableOpacity
@@ -478,7 +479,7 @@ export function FoodItemDetailView({
                 </TouchableOpacity>
                 {ingredients.map((ingredient) => (
                   <View key={ingredient.id} style={styles.ingredientCard}>
-                    <Text style={styles.ingredientName}>{ingredient.foodName}</Text>
+                    <Text style={styles.ingredientName}>{foodDisplayName(ingredient.foodName)}</Text>
                     <Text style={styles.ingredientDetail}>
                       {ingredient.quantity} {ingredient.unit} · {ingredient.cutPrep} · {ingredient.cookingMethod}
                     </Text>

@@ -49,6 +49,7 @@ import { ThumbEndRow } from './ThumbEndRow';
 import { t } from '../lib/i18n';
 import { appLocale } from '@/lib/language';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 // Garden > Growing Conditions > Sensors on Your Network (I20, 2026-09-28):
 // an Ecowitt gateway read over the home network while the app is open.
@@ -182,7 +183,7 @@ export function EcowittGatewaySection(props: {
     if (mine.length === 0) return [];
     return [
       { label: 'The area as a whole', value: NO_PLANTING },
-      ...sortByLabel(mine.map((planting) => ({ label: planting.foodName, value: planting.id }))),
+      ...sortByLabel(mine.map((planting) => ({ label: foodDisplayName(planting.foodName), value: planting.id }))),
     ];
   }
 

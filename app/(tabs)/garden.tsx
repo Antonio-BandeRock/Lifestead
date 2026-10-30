@@ -142,6 +142,7 @@ import { useOnVaultChange } from '../../lib/vaultReads';
 import { t, tl } from '../../lib/i18n';
 import { appLocale } from '@/lib/language';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../../constants/buttons';
+import { foodDisplayName } from '../../lib/ingredientShortName';
 
 // This page's own identity color -- see constants/colors.ts's own comment
 // on tabGarden for how it was chosen.
@@ -1662,13 +1663,13 @@ function PlotsAndPlantingsLens({
                     // A planting with anything recorded against it is a
                     // record: Pulled out is its status, not Remove.
                     const doneEntries = plotFacts[plot.id]?.eventsByPlanting[planting.id] ?? 0;
-                    const plantingTitle = planting.varietyNote ? `${planting.foodName} (${planting.varietyNote})` : planting.foodName;
+                    const plantingTitle = planting.varietyNote ? `${foodDisplayName(planting.foodName)} (${planting.varietyNote})` : foodDisplayName(planting.foodName);
                     const guide = findCropGuide(planting.foodName);
                     return (
                       <View key={planting.id}>
                       <View style={styles.plantingRow}>
                         <Text style={[styles.bodyText, styles.plantingName]}>
-                          {planting.foodName}
+                          {foodDisplayName(planting.foodName)}
                           {planting.varietyNote ? ` (${planting.varietyNote})` : ''}
                         </Text>
                         {planting.status === 'planned' ? (
@@ -1844,7 +1845,7 @@ function PlotsAndPlantingsLens({
                   </Text>
                   {plantings.map((planting) => (
                     <Text key={planting.id} style={styles.captionText}>
-                      {planting.foodName}
+                      {foodDisplayName(planting.foodName)}
                       {planting.varietyNote ? ` (${planting.varietyNote})` : ''}: {plantingStatusLabel(planting.status)}
                     </Text>
                   ))}
@@ -2222,7 +2223,7 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
         {justSaved ? (
           <>
             <Text style={styles.bodyText}>
-              Saved: {formatQuantity(justSaved.quantity, justSaved.unit)} of {justSaved.foodName}.
+              Saved: {formatQuantity(justSaved.quantity, justSaved.unit)} of {foodDisplayName(justSaved.foodName)}.
             </Text>
             <Text style={styles.bodyText}>Add this harvest to My Whole Foods, your on-hand home-grown foods?</Text>
             <Text style={styles.captionText}>
@@ -2281,7 +2282,7 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
                     setPickingPlanting(false);
                   }}
                 >
-                  <Text style={styles.bodyText}>{planting.foodName}</Text>
+                  <Text style={styles.bodyText}>{foodDisplayName(planting.foodName)}</Text>
                   <Text style={styles.captionText}>
                     {plotNameById[planting.plotId] ?? 'Unknown plot'} · {plantingStatusLabel(planting.status)}
                   </Text>
@@ -2313,7 +2314,7 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
               <View style={styles.harvestRow}>
                 <View style={styles.harvestRowText}>
                   <Text style={styles.bodyText}>
-                    {harvest.foodName}: {formatQuantity(harvest.quantityRemaining, harvest.unit)} of{' '}
+                    {foodDisplayName(harvest.foodName)}: {formatQuantity(harvest.quantityRemaining, harvest.unit)} of{' '}
                     {formatQuantity(harvest.quantity, harvest.unit)} left
                   </Text>
                   {Number(harvest.onHand) === 1 ? null : (

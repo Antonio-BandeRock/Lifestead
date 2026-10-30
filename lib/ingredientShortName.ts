@@ -198,6 +198,22 @@ function trimDescriptors(segment: string): string {
   return words.join(' ');
 }
 
+// For any food name shown anywhere in the app, whether it came from the
+// reference database or was typed by the person (2026-10-30, direct
+// request: "Check for anywhere else that still uses the full name"). Only
+// a name written the database's way (a comma, a slash, brackets, or a
+// state word at either end such as Table or Tap) is shortened; anything
+// else is returned exactly as written, so a typed "Grandma's chili" keeps
+// its spelling and case.
+export function foodDisplayName(name: string | null | undefined): string {
+  if (!name) return name ?? '';
+  const words = name.trim().split(' ').filter(Boolean);
+  const edgeWord =
+    words.length > 1 && (TRIM_WORDS.has(words[0].toLowerCase()) || TRIM_WORDS.has(words[words.length - 1].toLowerCase()));
+  if (!/[,/()[\]［]/.test(name) && !edgeWord) return name;
+  return ingredientShortName(name);
+}
+
 export function ingredientShortName(baseName: string): string {
   const original = baseName.trim();
   if (!original) return original;

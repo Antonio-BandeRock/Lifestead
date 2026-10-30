@@ -42,6 +42,7 @@ import {
 import { formatTime12 } from './timeOfDay';
 import { localDay, localHour } from './trendsMore';
 import { describeUpkeepStanding, type UpkeepStanding } from './upkeep';
+import { foodDisplayName } from './ingredientShortName';
 
 const TAKEN = new Set(['logged', 'partial', 'replaced']);
 
@@ -318,7 +319,7 @@ function checkinTitle(checkin: SignalCheckin): string {
 function checkinCaption(checkin: SignalCheckin): string {
   return [
     clockOf(checkin.loggedAt),
-    checkin.foodName ? `about ${checkin.foodName}` : null,
+    checkin.foodName ? `about ${foodDisplayName(checkin.foodName)}` : null,
     checkin.tags.length > 0 ? checkin.tags.join(', ') : null,
     checkin.notes,
   ]
@@ -750,12 +751,12 @@ export function buildKitchenView(input: KitchenInputs): ReadingView {
       items: [
         ...low.map((item) => ({
           key: `low-${item.id}`,
-          title: item.foodName,
+          title: foodDisplayName(item.foodName),
           caption: `${amountText(item.quantityRemaining, item.unit)} left of ${amountText(item.quantity, item.unit)}`,
         })),
         ...old.slice(0, 15).map(({ item, age }) => ({
           key: `old-${item.id}`,
-          title: item.foodName,
+          title: foodDisplayName(item.foodName),
           caption: [`on hand ${plural(age, 'day')}`, item.location].filter(Boolean).join(' · '),
         })),
       ],
@@ -832,7 +833,7 @@ export function buildGardenView(input: GardenInputs): ReadingView {
         const when = start <= today
           ? planting.expectedEnd ? `window open until ${shortDate(planting.expectedEnd)}` : 'window open'
           : `expected from ${shortDate(start)}`;
-        return { key: `pl-${index}`, title: planting.foodName, caption: [when, planting.plotName].filter(Boolean).join(' · ') };
+        return { key: `pl-${index}`, title: foodDisplayName(planting.foodName), caption: [when, planting.plotName].filter(Boolean).join(' · ') };
       }),
       notes: ['The window is the one entered with the planting. The plant decides.'],
     });
@@ -847,7 +848,7 @@ export function buildGardenView(input: GardenInputs): ReadingView {
       lines: [`${plural(input.onHand.length, 'harvest')} with some still on hand.`],
       items: input.onHand.map((harvest, index) => ({
         key: `h-${index}`,
-        title: harvest.foodName,
+        title: foodDisplayName(harvest.foodName),
         caption: [
           `${amountText(harvest.quantityRemaining, harvest.unit)} left`,
           `picked ${shortDate(harvest.harvestedOn)}`,
@@ -887,7 +888,7 @@ export function buildGardenView(input: GardenInputs): ReadingView {
       lines,
       rows: shares.length > 0 ? shares : undefined,
       items: shares.length === 0
-        ? input.weekUses.map((use, index) => ({ key: `u-${index}`, title: use.foodName, caption: `${amountText(use.quantity, use.unit)} · ${shortDate(use.usedOn)}` }))
+        ? input.weekUses.map((use, index) => ({ key: `u-${index}`, title: foodDisplayName(use.foodName), caption: `${amountText(use.quantity, use.unit)} · ${shortDate(use.usedOn)}` }))
         : undefined,
       notes,
     });

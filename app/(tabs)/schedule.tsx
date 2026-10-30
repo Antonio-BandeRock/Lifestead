@@ -341,6 +341,7 @@ import { t } from '../../lib/i18n';
 import { appLocale } from '@/lib/language';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
+import { foodDisplayName } from '../../lib/ingredientShortName';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -2136,7 +2137,7 @@ function MealsLens() {
                 </Text>
                 <View style={styles.pillRow}>
                   <View style={[styles.pill, styles.pillActive]}>
-                    <Text style={[styles.pillText, styles.pillTextActive]}>{ingredient.foodName}</Text>
+                    <Text style={[styles.pillText, styles.pillTextActive]}>{foodDisplayName(ingredient.foodName)}</Text>
                   </View>
                   {(ingredient.rotationAlternates ?? []).map((alternate, alternateIndex) => (
                     <TouchableOpacity
@@ -2144,7 +2145,7 @@ function MealsLens() {
                       style={styles.pill}
                       onPress={() => selectRotationAlternate(ingredientIndex, alternateIndex)}
                     >
-                      <Text style={styles.pillText}>{alternate.foodName}</Text>
+                      <Text style={styles.pillText}>{foodDisplayName(alternate.foodName)}</Text>
                     </TouchableOpacity>
                   ))}
                 </View>
@@ -4728,7 +4729,7 @@ function TodaysMealsLens() {
                         <FoodSafetyRow
                           key={`${ingredient.foodName}-${ingredientIndex}`}
                           foodName={ingredient.foodName}
-                          primaryText={`${ingredient.foodName}: ${roundForDisplay(ingredient.quantity)} ${ingredient.unit}`}
+                          primaryText={`${foodDisplayName(ingredient.foodName)}: ${roundForDisplay(ingredient.quantity)} ${ingredient.unit}`}
                           metaText={ingredient.notes ? ingredient.notes : null}
                           marks={marks}
                         />

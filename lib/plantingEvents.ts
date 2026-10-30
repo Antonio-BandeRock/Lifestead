@@ -10,6 +10,8 @@
 // what was recorded before the first picking, with the plain limit that one
 // garden cannot say which of them made the difference.
 
+import { foodDisplayName } from './ingredientShortName';
+
 export type PlantingEventRecord = {
   id: string;
   plantingId: string;
@@ -121,7 +123,7 @@ export function summarizeCareBeforePicking(plantings: PickedPlanting[], events: 
   let without = 0;
   for (const planting of picked) {
     const before = (byPlanting.get(planting.id) ?? []).filter((event) => event.occurredOn <= (planting.firstHarvestOn as string));
-    const title = planting.plotName ? `${planting.foodName}, ${planting.plotName}` : planting.foodName;
+    const title = planting.plotName ? `${foodDisplayName(planting.foodName)}, ${planting.plotName}` : foodDisplayName(planting.foodName);
     if (before.length === 0) {
       without += 1;
       continue;

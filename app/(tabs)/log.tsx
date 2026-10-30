@@ -186,6 +186,7 @@ import type { VaultCategory } from '../../lib/vault';
 import { t, tl } from '../../lib/i18n';
 import { appLocale } from '@/lib/language';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
+import { foodDisplayName } from '../../lib/ingredientShortName';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -2087,7 +2088,7 @@ function NewFoodsLens({
           {seriesFoods.map((food, index) => (
             <View key={`${food.foodName}-${index}`} style={styles.rowActions}>
               <Text style={styles.rowMeta}>
-                {index + 1}. {food.foodName}
+                {index + 1}. {foodDisplayName(food.foodName)}
               </Text>
               {index > 0 ? (
                 <TouchableOpacity onPress={() => moveSeriesFoodUp(index)}>
@@ -2530,7 +2531,7 @@ function NewFoodsLens({
                 <View style={[styles.rowActions, { marginTop: 10 }]}>
                   {!row.stoppedAt && skippable ? (
                     <TouchableOpacity onPress={() => handleSkipSeriesItem(skippable.id)}>
-                      <Text style={styles.actionText}>Skip {skippable.foodName}</Text>
+                      <Text style={styles.actionText}>Skip {foodDisplayName(skippable.foodName)}</Text>
                     </TouchableOpacity>
                   ) : null}
                   {!row.stoppedAt && !finished ? (
@@ -2580,7 +2581,7 @@ function NewFoodsLens({
             return (
               <View key={trial.id} style={styles.row}>
                 <View style={styles.rowTextCol}>
-                  <Text style={styles.rowTitle}>{trial.foodName}</Text>
+                  <Text style={styles.rowTitle}>{foodDisplayName(trial.foodName)}</Text>
                   {trialSubject !== 'food' ? (
                     <Text style={styles.rowMeta}>Experiment about {subjectLabel(trial.subjectKind).toLowerCase()}</Text>
                   ) : null}

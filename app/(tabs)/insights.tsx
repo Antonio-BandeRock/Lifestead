@@ -175,6 +175,7 @@ import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
 import { useCategoryClosed } from '../../lib/vaultSession';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../../constants/buttons';
+import { foodDisplayName } from '../../lib/ingredientShortName';
 
 // 'YYYY-MM-DD' in LOCAL time -- same reasoning as the rest of the app
 // (see lib/db.ts/app/(tabs)/index.tsx): UTC's calendar date is wrong for
@@ -183,6 +184,14 @@ function todayDateString(): string {
   const now = new Date();
   const pad = (n: number) => String(n).padStart(2, '0');
   return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+}
+
+// A food row's caption when its title is the short name: the full database
+// name first, so two foods that shorten alike can still be told apart, then
+// the subcategory. Null when there is nothing to add.
+function fullNameCaption(baseName: string, subcategory: string | null | undefined): string | null {
+  const parts = [foodDisplayName(baseName) !== baseName ? baseName : null, subcategory || null].filter(Boolean);
+  return parts.length > 0 ? parts.join(' · ') : null;
 }
 
 function capitalize(text: string): string {
@@ -668,7 +677,7 @@ function scopeBreadcrumbs<M extends NavigableMeal>(
 
   const item = side.items[scope.itemIndex];
   if (!item) return crumbs;
-  crumbs.push({ label: item.foodName, scope });
+  crumbs.push({ label: foodDisplayName(item.foodName), scope });
   return crumbs;
 }
 
@@ -1577,7 +1586,7 @@ function contributorsForNutrient(
   const contributors: NutrientContributor[] = [];
   const addItem = (item: { foodName: string; totals: DailyNutrientScopeTotals }) => {
     const amount = item.totals[nutrientCode] ?? 0;
-    if (amount > 0) contributors.push({ label: item.foodName, amount });
+    if (amount > 0) contributors.push({ label: foodDisplayName(item.foodName), amount });
   };
 
   if (scope.level === 'day') {
@@ -2527,7 +2536,7 @@ function ScopeHub<M extends NavigableMeal>({
     const side = resolveScopeSide(breakdown, scope);
     children = (side?.items ?? []).map((item, itemIndex) => ({
       key: `item-${itemIndex}`,
-      label: item.foodName,
+      label: foodDisplayName(item.foodName),
       scope: { level: 'item', mealIndex: scope.mealIndex, sideIndex: scope.sideIndex, itemIndex },
     }));
   }
@@ -2735,7 +2744,7 @@ export function SixDsView({
                                   {showFoodBreakdown
                                     ? sc.entries.map((entry, index) => (
                                         <View key={`${entry.foodName}_${index}`} style={styles.detailFoodRow}>
-                                          <Text style={styles.detailFoodName}>{entry.foodName}</Text>
+                                          <Text style={styles.detailFoodName}>{foodDisplayName(entry.foodName)}</Text>
                                           <Text style={[styles.detailFoodTier, severityTextStyle(tierSeverity(entry.tier))]}>
                                             {entry.tier}
                                           </Text>
@@ -2838,8 +2847,8 @@ function itemsInScope(breakdown: DailySixDimensionsBreakdown, scope: Scope): Pre
 // spelled out, but once you've drilled into that side, repeating its name
 // on every row inside it is just noise.
 function prepRowTitle(row: PrepRow, scopeLevel: Scope['level']): string {
-  if (scopeLevel === 'day') return `${row.foodName} · ${row.mealName}, ${row.sideName}`;
-  if (scopeLevel === 'meal') return `${row.foodName} · ${row.sideName}`;
+  if (scopeLevel === 'day') return `${foodDisplayName(row.foodName)} · ${row.mealName}, ${row.sideName}`;
+  if (scopeLevel === 'meal') return `${foodDisplayName(row.foodName)} · ${row.sideName}`;
   return row.foodName;
 }
 
@@ -3110,9 +3119,10 @@ function NutrientRankingView({
         <Text style={styles.rankNumber}>{rank}</Text>
         <View style={styles.rankTextWrap}>
           <Text style={styles.rankFoodName}>
-            {food.baseName}
+            {foodDisplayName(food.baseName)}
           </Text>
           <Text style={styles.rankFoodCategory}>
+            {foodDisplayName(food.baseName) !== food.baseName ? `${food.baseName} · ` : ""}
             {categoryLabel(food.category)}
             {food.subcategory ? ` · ${food.subcategory}` : ''}
             {/* Only shown for a real, non-default prep state -- 2026-08-11.
@@ -3347,7 +3357,7 @@ function NutrientRankingView({
             <ThumbEndRow style={[styles.rankFoodSummaryRow, styles.rankSpaced]}>
               <View style={styles.rankTextWrap}>
                 <Text style={styles.rankFoodSummaryText}>
-                  {rankingFood.baseName} · {categoryLabel(rankingFood.category)}
+                  {foodDisplayName(rankingFood.baseName)} · {categoryLabel(rankingFood.category)}
                 </Text>
                 {/* 2026-08-14, direct request -- "a suggested serving size
                     of however much." A real, cited natural-unit weight
@@ -3375,7 +3385,7 @@ function NutrientRankingView({
               // food has no measured nutrients," and deserves its own,
               // clearer message rather than reading as a possible bug.
               <Text style={[styles.emptyText, styles.rankSpaced, styles.panelStandalone]}>
-                {rankingFood.baseName} is {PREP_STATE_GROUP_LABELS[classifyPrepStateGroup(rankingFood.prepMethod)].toLowerCase()},
+                {foodDisplayName(rankingFood.baseName)} is {PREP_STATE_GROUP_LABELS[classifyPrepStateGroup(rankingFood.prepMethod)].toLowerCase()},
                 not {PREP_STATE_GROUP_LABELS[prepGroup].toLowerCase()}; switch the Prep state filter below to see how it ranks.
               </Text>
             ) : foodRankings.length === 0 ? (
@@ -3552,11 +3562,11 @@ function SafeFoodsView({
               <Ionicons name="shield-checkmark-outline" size={16} color={tabColor} style={textShadow} />
               <View style={styles.rankTextWrap}>
                 <Text style={styles.rankFoodName}>
-                  {food.baseName}
+                  {foodDisplayName(food.baseName)}
                 </Text>
-                {food.subcategory ? (
+                {fullNameCaption(food.baseName, food.subcategory) ? (
                   <Text style={styles.rankFoodCategory}>
-                    {food.subcategory}
+                    {fullNameCaption(food.baseName, food.subcategory)}
                   </Text>
                 ) : null}
               </View>
@@ -3598,11 +3608,11 @@ function HealingStageView({
       <View key={`${food.foodId}|${food.source}`} style={styles.rankRow}>
         <View style={styles.rankTextWrap}>
           <Text style={styles.rankFoodName}>
-            {food.baseName}
+            {foodDisplayName(food.baseName)}
           </Text>
-          {food.subcategory ? (
+          {fullNameCaption(food.baseName, food.subcategory) ? (
             <Text style={styles.rankFoodCategory}>
-              {food.subcategory}
+              {fullNameCaption(food.baseName, food.subcategory)}
             </Text>
           ) : null}
         </View>
@@ -4337,7 +4347,7 @@ function AdvisoriesView({ advisories, loading, tabColor }: { advisories: Trigger
             <Text style={[styles.rankGroupHeading, styles.rankSpaced]}>Today</Text>
             {items.map((item, index) => (
               <Text key={index} style={styles.myMedsMessage}>
-                {item.foodName} · {item.mealName}
+                {foodDisplayName(item.foodName)} · {item.mealName}
               </Text>
             ))}
           </View>

@@ -31,6 +31,7 @@ import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
 import { useOnVaultChange } from '../lib/vaultReads';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT, PILL, PILL_TEXT } from '../constants/buttons';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 // My Safe Foods: the person's list, kept by the person.
 //
@@ -328,7 +329,7 @@ export function MySafeFoodsView({ onClose, onChanged }: { onClose: () => void; o
 
           {draft ? (
             <View style={styles.draftCard}>
-              <Text style={styles.draftName}>{draft.foodName}</Text>
+              <Text style={styles.draftName}>{foodDisplayName(draft.foodName)}</Text>
               {draft.category ? <Text style={styles.draftMeta}>{categoryLabel(draft.category)}</Text> : null}
 
               <View style={styles.verdictRow}>

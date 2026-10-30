@@ -51,7 +51,7 @@ import { CollapsibleOverlayCard } from './CollapsibleOverlayCard';
 import { isAlcoholicFood } from '../lib/alcoholAdvisory';
 import { AlcoholCalculatorPanel } from './AlcoholCalculator';
 import { DimensionFlags } from './DimensionFlags';
-import { ingredientShortName } from '../lib/ingredientShortName';
+import { ingredientShortName, foodDisplayName } from '../lib/ingredientShortName';
 import { FoodSourceNote } from './FoodSourceNote';
 import { FoodLookup, type ResolvedFoodSelection } from './FoodLookup';
 import { SpokenIngredientsPanel, SpokenQueueNote } from './SpokenIngredientsPanel';
@@ -1365,7 +1365,7 @@ export function SaucesBuilder({
   async function confirmRemoveIngredient(index: number) {
     const ingredient = ingredients[index];
     const ok = await confirmSheet({
-      title: `Remove ${ingredient.resolved.baseName}?`,
+      title: `Remove ${foodDisplayName(ingredient.resolved.baseName)}?`,
       confirmLabel: 'Remove',
       destructive: true,
     });

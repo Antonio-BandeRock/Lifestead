@@ -17,6 +17,7 @@ import { analyzeNutrientIntake, type NutrientStatus } from './nutrientAnalysis';
 import { dailyScaleSeries, type DailyScaleKey, type DailyScalePoint } from './dailyScales';
 import { trackerDailySeries, type CustomTracker, type TrackerPoint } from './customTrackers';
 import { listCustomTrackers, listTrackerEntriesSince } from './customTrackersDb';
+import { foodDisplayName } from './ingredientShortName';
 
 // The "chart it over time" layer Trends needs. Rebuilt 2026-08-15 -- the
 // original version of this file called lib/db.ts's single-date
@@ -374,7 +375,7 @@ export async function getCheckinSeverityTrendSeries(checkinTypes: CheckinType[],
         onTen: severityOnTen(entry.severity, entry.severityTen) ?? 0,
         tenGiven: entry.severityTen != null,
         checkinType: entry.checkinType,
-        label: entry.foodName ?? (entry.checkinType === 'flare' ? 'Flare' : 'Reaction'),
+        label: entry.foodName ? foodDisplayName(entry.foodName) : (entry.checkinType === 'flare' ? 'Flare' : 'Reaction'),
       });
     }
   }

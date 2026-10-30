@@ -34,6 +34,7 @@
 import { formatQuantity, formatTradeMoney, harvestUnitForPricing, valueReceivedGoods, type RecordedPrice } from './harvestTrade';
 import { shortDate, type VarietyWeek } from './eatingVariety';
 import type { PeriodRow, YieldMonth } from './harvestYield';
+import { foodDisplayName } from './ingredientShortName';
 
 // ---------------------------------------------------------------------------
 // Small shared pieces
@@ -467,7 +468,7 @@ export function summarizePlateValue(inputs: PlateValueInputs, months: YieldMonth
     .map(([foodName, amount]) => ({ foodName, amount: roundMoney(amount) }))
     .sort((a, b) => (b.amount === a.amount ? a.foodName.localeCompare(b.foodName) : b.amount - a.amount))
     .slice(0, 5)
-    .map((crop) => ({ ...crop, line: `${formatTradeMoney(crop.amount)} of ${crop.foodName}.` }));
+    .map((crop) => ({ ...crop, line: `${formatTradeMoney(crop.amount)} of ${foodDisplayName(crop.foodName)}.` }));
 
   const unpriced = valuation.unvalued.length;
   const unpricedLine =

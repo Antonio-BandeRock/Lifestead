@@ -35,6 +35,7 @@ import { PopoverSelect } from './PopoverSelect';
 import { QuickAreaForm } from './QuickAreaForm';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 // Garden > Growing Conditions > Import Readings from a File (I19,
 // 2026-09-28): a controller's history file read into garden_readings with
@@ -131,7 +132,7 @@ export function ReadingImportForm(props: {
     if (mine.length === 0) return [];
     return [
       { label: 'The area as a whole', value: NO_PLANTING },
-      ...sortByLabel(mine.map((planting) => ({ label: planting.foodName, value: planting.id }))),
+      ...sortByLabel(mine.map((planting) => ({ label: foodDisplayName(planting.foodName), value: planting.id }))),
     ];
   }, [plotId, props.plantings]);
 

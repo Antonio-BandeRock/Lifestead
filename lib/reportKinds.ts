@@ -16,6 +16,7 @@ import { describeRepeat } from './eatingVariety';
 import { MEAL_SOURCE_LABELS, describeMealRepeat, type MealVarietySummary } from './mealVariety';
 import type { ReadingView } from './readingBands';
 import type { ReportListSection, ReportSection, ReportTableSection } from './reportGenerator';
+import { foodDisplayName } from './ingredientShortName';
 
 export type ReportKind =
   | 'overview'
@@ -441,8 +442,8 @@ export function gardenYieldSections(summary: HarvestYieldSummary): ReportSection
       rows: sharing.hasAnything
         ? [
             sharing.headline,
-            ...sharing.outgoing.map((entry) => `${entry.foodName}: ${entry.display}, ${entry.kinds}`),
-            ...sharing.received.map((entry) => `${entry.foodName}: ${entry.display}${entry.from ? `, from ${entry.from}` : ''}`),
+            ...sharing.outgoing.map((entry) => `${foodDisplayName(entry.foodName)}: ${entry.display}, ${entry.kinds}`),
+            ...sharing.received.map((entry) => `${foodDisplayName(entry.foodName)}: ${entry.display}${entry.from ? `, from ${entry.from}` : ''}`),
             sharing.receivedLine,
           ].filter((line): line is string => Boolean(line))
         : [],
@@ -480,7 +481,7 @@ export function eatingVarietySections(summary: MealVarietySummary): ReportSectio
       kind: 'list',
       heading: 'Foods that came back most',
       note: [rotation.headline, rotation.concentrationNote].filter(Boolean).join(' '),
-      rows: rotation.mostRepeated.map((food) => `${food.foodName}: ${describeRepeat(food)}`),
+      rows: rotation.mostRepeated.map((food) => `${foodDisplayName(food.foodName)}: ${describeRepeat(food)}`),
       empty: 'Nothing logged in this range yet.',
     },
     {

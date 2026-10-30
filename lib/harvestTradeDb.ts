@@ -22,6 +22,7 @@ import { createEntry } from './financeDb';
 import { addKitchenItem, consumeKitchenItem } from './kitchenDb';
 import type { DispositionKind, DispositionRecord, ReceivedGood, RecipientKind, RecordedPrice } from './harvestTrade';
 import { readOrClosed } from './vaultReads';
+import { foodDisplayName } from './ingredientShortName';
 
 export type RecordDispositionInput = {
   occurredOn: string;
@@ -128,7 +129,7 @@ export async function recordDisposition(input: RecordDispositionInput): Promise<
       direction: 'income',
       amount: input.amount as number,
       category: 'goods_sold',
-      description: `Sold ${input.quantityGiven} ${input.unit} ${input.foodName}`.trim(),
+      description: `Sold ${input.quantityGiven} ${input.unit} ${foodDisplayName(input.foodName)}`.trim(),
       incomeStreamId: input.incomeStreamId ?? null,
     });
   }

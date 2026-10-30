@@ -20,6 +20,7 @@
 // check it; reading and writing are in lib/seedInventoryDb.ts.
 
 import { findCropGuide } from './cropGuides';
+import { foodDisplayName } from './ingredientShortName';
 
 export const SEED_STOCK_OWNER_KIND = 'seed_stock';
 
@@ -230,7 +231,7 @@ export function describeTest(test: Pick<SeedTest, 'sown' | 'sprouted'>): string 
 
 /** The folded line for a packet: crop and variety. */
 export function packetTitle(packet: Pick<SeedPacket, 'foodName' | 'variety'>): string {
-  return packet.variety && packet.variety.trim() ? `${packet.foodName}, ${packet.variety.trim()}` : packet.foodName;
+  return packet.variety && packet.variety.trim() ? `${foodDisplayName(packet.foodName)}, ${packet.variety.trim()}` : foodDisplayName(packet.foodName);
 }
 
 /** Packets that could be sown as this planting: the same food, or the

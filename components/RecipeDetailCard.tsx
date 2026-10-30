@@ -53,6 +53,7 @@ import { shareFileIfAvailable } from '../lib/nativeSharing';
 import { encodeShareLinkFromCuratedRecipe, writeIsFileForCuratedRecipe } from '../lib/sharing';
 import { ThumbEndRow } from './ThumbEndRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 // A recipe's linkedBuilderType maps onto one param per builder in
 // app/(tabs)/food.tsx (openSideRecipeId, openSaladRecipeId, and so on),
@@ -477,7 +478,7 @@ export function CuratedRecipeShareButton({
       }
       const recipe = await getCuratedRecipe(recipeId);
       const ingredientLines = (recipe?.ingredients ?? [])
-        .map((ingredient) => `${ingredient.quantity} ${ingredient.unit} ${ingredient.foodName}`)
+        .map((ingredient) => `${ingredient.quantity} ${ingredient.unit} ${foodDisplayName(ingredient.foodName)}`)
         .join('\n');
       const message = [recipe?.name ?? '', ingredientLines, `Shared from Lifestead by ${fromName}.`]
         .filter(Boolean)

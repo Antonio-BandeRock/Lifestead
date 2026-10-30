@@ -56,15 +56,16 @@ import { getConnectionByPublicKey } from '../lib/connections';
 import { decodeShareEnvelope, stageSharedItem, type ShareEnvelope } from '../lib/sharing';
 import { ThumbRow } from '../components/ThumbRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 function previewIngredientLines(envelope: ShareEnvelope): string[] {
   if (envelope.payload.kind === 'component') {
     return envelope.payload.builder.ingredients.map(
-      (ingredient) => `${ingredient.quantity} ${ingredient.unit} ${ingredient.foodName}`,
+      (ingredient) => `${ingredient.quantity} ${ingredient.unit} ${foodDisplayName(ingredient.foodName)}`,
     );
   }
   return envelope.payload.components.flatMap((component) =>
-    component.builder.ingredients.map((ingredient) => `${ingredient.quantity} ${ingredient.unit} ${ingredient.foodName}`),
+    component.builder.ingredients.map((ingredient) => `${ingredient.quantity} ${ingredient.unit} ${foodDisplayName(ingredient.foodName)}`),
   );
 }
 

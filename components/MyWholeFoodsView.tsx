@@ -19,6 +19,7 @@ import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, HomeSectionBand } fr
 import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
 import { t, tl } from '../lib/i18n';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 // My Whole Foods: what the person has on hand from their own garden, and
 // from other people's.
@@ -162,7 +163,7 @@ export function MyWholeFoodsView({ onClose, onChanged }: { onClose: () => void; 
       <View key={harvest.id} style={styles.itemRow}>
         <View style={styles.rowTextWrap}>
           <Text style={styles.rowTitle} numberOfLines={2}>
-            {harvest.foodName}
+            {foodDisplayName(harvest.foodName)}
           </Text>
           <Text style={styles.rowMeta} numberOfLines={2}>
             {showRemaining
@@ -204,7 +205,7 @@ export function MyWholeFoodsView({ onClose, onChanged }: { onClose: () => void; 
             {valuation.unvalued
               .map(
                 (entry) =>
-                  `${formatQuantity(entry.quantity, entry.unit)} of ${entry.foodName}${entry.reason === 'differentUnit' ? ' (last priced in a different unit)' : ''}`,
+                  `${formatQuantity(entry.quantity, entry.unit)} of ${foodDisplayName(entry.foodName)}${entry.reason === 'differentUnit' ? ' (last priced in a different unit)' : ''}`,
               )
               .join('; ')}
             .
@@ -266,7 +267,7 @@ export function MyWholeFoodsView({ onClose, onChanged }: { onClose: () => void; 
                 <View key={share.id} style={styles.itemRow}>
                   <View style={styles.rowTextWrap}>
                     <Text style={styles.rowTitle} numberOfLines={2}>
-                      {share.foodName}
+                      {foodDisplayName(share.foodName)}
                     </Text>
                     <Text style={styles.rowMeta} numberOfLines={2}>
                       {formatQuantity(share.quantity, share.unit)}

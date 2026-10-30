@@ -55,6 +55,7 @@ import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
 import { t } from '../lib/i18n';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 const TAB_COLOR = colors.tabGarden;
 // 1.0.61.7, extended to every Garden lens in 1.0.61.8: the calm look
@@ -268,7 +269,7 @@ function PacketForm({
 
   return (
     <View style={styles.card}>
-      <Text style={styles.fieldLabel}>{draft.isNew ? `New Packet of ${draft.foodName}` : `Change ${draft.foodName}`}</Text>
+      <Text style={styles.fieldLabel}>{draft.isNew ? `New Packet of ${foodDisplayName(draft.foodName)}` : `Change ${foodDisplayName(draft.foodName)}`}</Text>
       <AppTextInput style={styles.textInput} value={draft.variety} onChangeText={(t) => set({ variety: t })} placeholder="Variety, as printed on the packet" />
       <AppTextInput style={styles.textInput} value={draft.fromWhere} onChangeText={(t) => set({ fromWhere: t })} placeholder="Where it came from: a seller, a swap, saved seed" />
       <AppTextInput style={styles.textInput} value={draft.packedOn} onChangeText={(t) => set({ packedOn: t })} placeholder="Packed for: a year such as 2025, or a date" />
@@ -299,7 +300,7 @@ function PacketForm({
       />
       {days.status === 'invalid' ? <Text style={styles.errorText}>{packetDaysRangeLine()}</Text> : null}
       <AppTextInput style={styles.textInput} value={draft.notes} onChangeText={(t) => set({ notes: t })} placeholder="Notes" multiline />
-      <PhotoStrip ownerKind={SEED_STOCK_OWNER_KIND} ownerId={draft.id} tabColor={TAB_COLOR} addLabel="Photo of the Packet" title={`${draft.foodName} seed packet`} />
+      <PhotoStrip ownerKind={SEED_STOCK_OWNER_KIND} ownerId={draft.id} tabColor={TAB_COLOR} addLabel="Photo of the Packet" title={`${foodDisplayName(draft.foodName)} seed packet`} />
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
       <ThumbRow primary="first" style={styles.row}>
         <TouchableOpacity ref={walkMark.ref('seeds.save')} style={styles.primaryButton} onPress={save}>
@@ -350,7 +351,7 @@ function PacketBand({
         <PacketFacts packet={packet} uses={uses} />
         <UseList uses={uses} unit={packet.amountUnit} />
         <TestSection seedId={packet.id} tests={tests} onChanged={onChanged} />
-        <PhotoStrip ownerKind={SEED_STOCK_OWNER_KIND} ownerId={packet.id} tabColor={TAB_COLOR} addLabel="Photo of the Packet" title={`${packet.foodName} seed packet`} />
+        <PhotoStrip ownerKind={SEED_STOCK_OWNER_KIND} ownerId={packet.id} tabColor={TAB_COLOR} addLabel="Photo of the Packet" title={`${foodDisplayName(packet.foodName)} seed packet`} />
         <PacketActions packet={packet} uses={uses} tests={tests} onEdit={onEdit} onChanged={onChanged} />
       </View>
     </HomeSectionBand>

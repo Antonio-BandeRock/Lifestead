@@ -28,6 +28,7 @@ import {
 } from '../lib/packagedSwap';
 import { isSideDish } from '../lib/recipeDishRole';
 import { useHouseholdPeople } from './HouseholdFitBand';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 const RECIPE_CANDIDATES = RECIPES_ENTRIES.filter((entry) => entry.recipeCard).map((entry) => ({
   id: entry.id,
@@ -139,7 +140,7 @@ export function MadeAtHomeBand({
           }
         >
           <Ionicons name="leaf-outline" size={18} color={tabColor} style={styles.icon} />
-          <Text style={styles.rowText}>{food.baseName}</Text>
+          <Text style={styles.rowText}>{foodDisplayName(food.baseName)}</Text>
           <Ionicons name="chevron-forward" size={16} color={colors.textSecondary} style={styles.icon} />
         </TouchableOpacity>
       ))}

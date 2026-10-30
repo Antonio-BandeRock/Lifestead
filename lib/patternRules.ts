@@ -41,6 +41,8 @@
 // next step and is named in interactionRules.ts as a cheap future addition;
 // this module is written so that day changes one function.
 
+import { foodDisplayName } from './ingredientShortName';
+
 export type PatternRuleProposal = {
   /** Pre-filled wording, editable before it is saved. */
   description: string;
@@ -86,7 +88,7 @@ export function proposeFoodPatternRule(input: {
 }): PatternRuleProposal {
   const keyword = input.keyword.trim() || keywordFromFoodName(input.foodName);
   return {
-    description: `${input.foodName} was in what I ate before ${flareCount(
+    description: `${foodDisplayName(input.foodName)} was in what I ate before ${flareCount(
       input.occurrenceCount,
       input.totalSymptomInstances,
       input.words,

@@ -31,6 +31,7 @@ import { buildTagNightsBands, type TagNightsInputs } from './tagNights';
 import { formatTime12 } from './timeOfDay';
 import { usualSentence } from './yourUsual';
 import { SCALE_LABELS, WORK_DIMENSIONS, weekOf } from './workMeaning';
+import { foodDisplayName } from './ingredientShortName';
 
 export type DayRange = { start: string; end: string };
 
@@ -665,7 +666,7 @@ export function buildReactionsView(input: ReactionsInputs): ReadingView {
         .sort((a, b) => b.startedAt.localeCompare(a.startedAt))
         .map((t) => ({
           key: `${t.foodName}-${t.startedAt}`,
-          title: t.foodName,
+          title: foodDisplayName(t.foodName),
           caption: [
             t.subjectKind && t.subjectKind !== 'food'
               ? 'a change, then back to usual'

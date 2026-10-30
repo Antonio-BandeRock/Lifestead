@@ -179,6 +179,7 @@ import { useListedClosed } from '../../lib/vaultSession';
 import { t } from '../../lib/i18n';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
 import { PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
+import { foodDisplayName } from '../../lib/ingredientShortName';
 
 // Every text box on this page belongs to this one page's own tab, so
 // there's no per-box lookup needed the way Home's multi-tab dashboard
@@ -1838,7 +1839,7 @@ export default function TrendsScreen() {
   // at the top of the picker rather than being alphabetized among
   // one-off purchases.
   const groceryFoodOptions = useMemo(
-    () => groceryFoods.map((food) => ({ label: food.foodName, value: food.foodName })),
+    () => groceryFoods.map((food) => ({ label: foodDisplayName(food.foodName), value: food.foodName })),
     [groceryFoods],
   );
 
@@ -2254,7 +2255,7 @@ export default function TrendsScreen() {
                     {varietySummary.rotation.mostRepeated.map((repeat) => (
                       <View key={repeat.foodKey} style={styles.patternRow}>
                         <View style={styles.patternRowText}>
-                          <Text style={styles.patternRowTitle}>{repeat.foodName}</Text>
+                          <Text style={styles.patternRowTitle}>{foodDisplayName(repeat.foodName)}</Text>
                           <Text style={styles.patternRowCaption}>{describeRepeat(repeat)}</Text>
                         </View>
                       </View>
@@ -2385,7 +2386,7 @@ export default function TrendsScreen() {
                         ) : null}
                         {plateShare.crops.map((crop) => (
                           <View key={`plateCrop:${crop.foodName}`} style={styles.patternRow}>
-                            <Text style={styles.patternRowTitle}>{crop.foodName}</Text>
+                            <Text style={styles.patternRowTitle}>{foodDisplayName(crop.foodName)}</Text>
                             <Text style={styles.patternRowCaption}>{crop.line}</Text>
                           </View>
                         ))}
@@ -2682,7 +2683,7 @@ export default function TrendsScreen() {
                     <Text style={styles.patternRowCaption}>{harvestSummary.sharing.headline}</Text>
                     {harvestSummary.sharing.outgoing.map((row) => (
                       <View key={`out:${row.foodName}:${row.display}`} style={styles.patternRow}>
-                        <Text style={styles.patternRowTitle}>{row.foodName}</Text>
+                        <Text style={styles.patternRowTitle}>{foodDisplayName(row.foodName)}</Text>
                         <Text style={styles.patternRowCaption}>{`${row.display}, ${row.kinds}`}</Text>
                       </View>
                     ))}
@@ -2691,7 +2692,7 @@ export default function TrendsScreen() {
                     ) : null}
                     {harvestSummary.sharing.received.map((row) => (
                       <View key={`in:${row.foodName}:${row.display}`} style={styles.patternRow}>
-                        <Text style={styles.patternRowTitle}>{row.foodName}</Text>
+                        <Text style={styles.patternRowTitle}>{foodDisplayName(row.foodName)}</Text>
                         <Text style={styles.patternRowCaption}>
                           {row.from ? `${row.display}, from ${row.from}` : row.display}
                         </Text>
@@ -2982,7 +2983,7 @@ export default function TrendsScreen() {
                         ) : null}
                         {plateValue.crops.map((crop) => (
                           <View key={`plateValue:${crop.foodName}`} style={styles.patternRow}>
-                            <Text style={styles.patternRowTitle}>{crop.foodName}</Text>
+                            <Text style={styles.patternRowTitle}>{foodDisplayName(crop.foodName)}</Text>
                             <Text style={styles.patternRowCaption}>{crop.line}</Text>
                           </View>
                         ))}
@@ -3647,7 +3648,7 @@ export default function TrendsScreen() {
                             <View key={key}>
                               <View style={styles.patternRow}>
                                 <View style={styles.patternRowText}>
-                                  <Text style={styles.patternRowTitle}>{candidate.foodName}</Text>
+                                  <Text style={styles.patternRowTitle}>{foodDisplayName(candidate.foodName)}</Text>
                                   <Text style={styles.patternRowCaption}>
                                     {comparisonSentence(candidate.comparison, patternResult.basis.windowHours)}
                                     {candidate.delay ? ` ${delaySentence(candidate.delay, outcomeWords)}` : ''}

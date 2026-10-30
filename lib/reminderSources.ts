@@ -72,6 +72,7 @@ import { cropPlanReminders } from './cropPlan';
 import { listCropPlanSteps, listCropPlans } from './cropPlanDb';
 import { readCachedFrostDates } from './homeSky';
 import { frostAnchor } from './sowingWindows';
+import { foodDisplayName } from './ingredientShortName';
 
 /** Where a tapped reminder lands, each a lens that already takes a deep
  *  link (openLifeLens in app/(tabs)/life.tsx, openGardenLens in
@@ -290,7 +291,7 @@ export async function listDatedReminderSources(today: string): Promise<DatedRemi
     sources.push({
       kind: 'useBy',
       sourceId: item.id,
-      title: item.foodName,
+      title: foodDisplayName(item.foodName),
       detail: item.location ? `${left}, ${item.location}` : left,
       dueOn: item.useBy,
       tab: 'life',

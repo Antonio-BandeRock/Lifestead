@@ -19,6 +19,7 @@
 // amount per 100 g is the whole claim.
 
 import { formatAmount } from './nutrientAnalysis';
+import { foodDisplayName } from './ingredientShortName';
 
 export type RichFood = {
   foodId: number;
@@ -93,7 +94,7 @@ export function pickRichFoods(
 /** A row's text: the food, its preparation when not plain raw, and the amount per 100 g. */
 export function richFoodLabel(food: RichFood, unit: string): string {
   const prep = food.prepMethod && food.prepMethod !== 'Raw' ? `, ${food.prepMethod}` : '';
-  return `${food.baseName}${prep}: ${formatAmount(food.amountPer100g, unit)}`;
+  return `${foodDisplayName(food.baseName)}${prep}: ${formatAmount(food.amountPer100g, unit)}`;
 }
 
 /** The value a row carries, so a tap finds its food again. */

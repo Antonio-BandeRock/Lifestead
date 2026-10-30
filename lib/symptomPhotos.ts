@@ -21,6 +21,8 @@
 // No I/O and no React. Words for symptoms, areas and severity are handed in,
 // so the module imports nothing and the test can run it directly.
 
+import { foodDisplayName } from './ingredientShortName';
+
 export type SymptomPhoto = {
   id: string;
   /** The entry it was taken with. */
@@ -164,7 +166,7 @@ export function entryCaption(entry: PhotoEntry | null, words: Words): string {
   const head = [KIND_WORDS[entry.checkinType] ?? 'Entry', words.severity(entry.severity, entry.severityTen)]
     .filter(Boolean)
     .join(', ');
-  const parts = [entry.foodName ? `${head}, after ${entry.foodName}` : head];
+  const parts = [entry.foodName ? `${head}, after ${foodDisplayName(entry.foodName)}` : head];
   if (entry.tags.length > 0) parts.push(entry.tags.map(words.tag).join(', '));
   if (entry.bodyRegions.length > 0) parts.push(entry.bodyRegions.map(words.region).join(', '));
   return parts.join(' · ');

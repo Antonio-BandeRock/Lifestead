@@ -57,6 +57,7 @@ import {
 import { getConnectionByPublicKey } from './connections';
 import { getSharedFromName, listSharedRecipes, type ShareComponentPayload, type ShareMealPayload } from './sharing';
 import type { DigestEntry, RecipeCheckIngredient } from './digest/types';
+import { foodDisplayName } from './ingredientShortName';
 
 const COMPONENT_TYPES: MealComponentType[] = [
   'side',
@@ -108,7 +109,7 @@ function formatIngredientText(ingredient: {
   cutPrep?: string;
   cookingMethod?: string;
 }): string {
-  const base = `${formatNumber(ingredient.quantity)} ${ingredient.unit} ${ingredient.foodName}`;
+  const base = `${formatNumber(ingredient.quantity)} ${ingredient.unit} ${foodDisplayName(ingredient.foodName)}`;
   const details = [ingredient.cutPrep, ingredient.cookingMethod]
     .filter((value): value is string => Boolean(value) && value !== 'N/A')
     .map((value) => value.toLowerCase());

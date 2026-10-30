@@ -106,6 +106,7 @@ import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
 import { t, tl } from '../lib/i18n';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 const WHOLE_AREA = '__whole_area__';
 const NO_AREA = '__anything__';
@@ -354,7 +355,7 @@ export function DaysUntilSection({
     { label: 'The whole area', value: WHOLE_AREA },
     ...[...offeredPlantings]
       .sort((a, b) => a.foodName.toLowerCase().localeCompare(b.foodName.toLowerCase()))
-      .map((planting) => ({ label: planting.varietyNote ? `${planting.foodName} (${planting.varietyNote})` : planting.foodName, value: planting.id })),
+      .map((planting) => ({ label: planting.varietyNote ? `${foodDisplayName(planting.foodName)} (${planting.varietyNote})` : foodDisplayName(planting.foodName), value: planting.id })),
   ];
   // Garden scope with no area yet has nowhere to put a counter. The other
   // scopes always have somewhere, since Anything needs nothing to exist

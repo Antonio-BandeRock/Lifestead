@@ -35,6 +35,7 @@ import { getPlateOfferForMeal, keepPlateUses } from '../lib/plateSourceDb';
 import { describePantryAction, describePantryOffer, type PantryOffer } from '../lib/onHand';
 import { getPantryOffersForMeal, keepPantryUses } from '../lib/onHandDb';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 type Open = {
   mealId: string;
@@ -135,7 +136,7 @@ export function GardenPlateOfferHost() {
                     accessibilityRole="checkbox"
                     accessibilityState={{ checked: on }}
                   >
-                    <Text style={styles.rowName}>{offer.foodName}</Text>
+                    <Text style={styles.rowName}>{foodDisplayName(offer.foodName)}</Text>
                     <Text style={styles.rowLine}>{offer.line}</Text>
                   </TouchableOpacity>
                 );
@@ -151,7 +152,7 @@ export function GardenPlateOfferHost() {
                     accessibilityRole="checkbox"
                     accessibilityState={{ checked: on, disabled: !offer.takeable }}
                   >
-                    <Text style={styles.rowName}>{offer.foodName}</Text>
+                    <Text style={styles.rowName}>{foodDisplayName(offer.foodName)}</Text>
                     <Text style={styles.rowLine}>{offer.line}</Text>
                   </TouchableOpacity>
                 );

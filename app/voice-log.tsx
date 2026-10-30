@@ -78,6 +78,7 @@ import { desktopHearsSpeech, isDesktopApp } from '../lib/desktop/bridge';
 import { offerGardenUse } from '../lib/gardenPlateOffer';
 import { explainNotYet } from '../lib/notYet';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 // meals.eaten_at's own stored format: 'YYYY-MM-DDTHH:mm', local time. See
 // listMealsForDate in lib/db.ts for why a UTC toISOString() would break every
@@ -562,7 +563,7 @@ export default function VoiceLogScreen() {
           >
             <Ionicons name="checkmark-circle-outline" size={16} color={colors.accent} />
             <Text style={styles.matchName} numberOfLines={2}>
-              {item.foodName}
+              {foodDisplayName(item.foodName)}
             </Text>
             {item.candidates.length > 1 ? (
               <Text style={styles.matchSwapHint}>

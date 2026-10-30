@@ -48,6 +48,8 @@
 // own potatoes were worth is exactly the unknown this app refuses to invent,
 // and a trade valued on both sides would also be double counting one event.
 
+import { foodDisplayName } from './ingredientShortName';
+
 export type DispositionKind = 'sold' | 'traded' | 'given';
 
 // Who received it, 2026-09-05, from "Are we accounting for donations? They
@@ -175,7 +177,7 @@ export function describeValuation(result: ValuationResult): string | null {
 
   if (result.valued.length > 0) {
     const items = result.valued
-      .map((entry) => `${formatQuantity(entry.quantity, entry.unit)} of ${entry.foodName} at the ${formatTradeMoney(entry.pricePaid)} ${perUnit(entry.unit)} you paid on ${entry.pricedOn}`)
+      .map((entry) => `${formatQuantity(entry.quantity, entry.unit)} of ${foodDisplayName(entry.foodName)} at the ${formatTradeMoney(entry.pricePaid)} ${perUnit(entry.unit)} you paid on ${entry.pricedOn}`)
       .join(', ');
     parts.push(
       `About ${formatTradeMoney(result.avoidedCost)} you did not have to spend: ${items}. That is money you kept, not money you earned, so it stays out of your income.`,
@@ -385,7 +387,7 @@ export function describeGiving(summary: GivingSummary): string {
 
   if (summary.goodsLots > 0) {
     const items = summary.goodsByFood
-      .map((entry) => `${formatQuantity(entry.quantity, entry.unit)} of ${entry.foodName}`)
+      .map((entry) => `${formatQuantity(entry.quantity, entry.unit)} of ${foodDisplayName(entry.foodName)}`)
       .join(', ');
     parts.push(`${items}, across ${summary.goodsLots} ${summary.goodsLots === 1 ? 'lot' : 'lots'}.`);
     if (summary.toOrganizations > 0) {

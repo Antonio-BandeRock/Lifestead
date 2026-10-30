@@ -99,6 +99,7 @@ import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { useWalkMark } from './WalkMark';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { foodDisplayName } from '../lib/ingredientShortName';
 
 // Growing Conditions, a lens of Garden (2026-09-23).
 //
@@ -404,7 +405,7 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
     if (mine.length === 0) return [];
     return [
       { label: scopeLabel('area', kind, !!area?.insidePlotId), value: NO_PLANTING },
-      ...sortByLabel(mine.map((planting) => ({ label: planting.foodName, value: planting.id }))),
+      ...sortByLabel(mine.map((planting) => ({ label: foodDisplayName(planting.foodName), value: planting.id }))),
     ];
   }, [draft.plotId, plantings, areas]);
 
