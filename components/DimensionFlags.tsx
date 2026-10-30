@@ -1,6 +1,7 @@
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import type { FoodScore } from '../lib/db';
+import { t } from '../lib/i18n';
 import {
   getSubCriterionSources,
   getTierDefinition,
@@ -63,11 +64,14 @@ export function DimensionFlags({
       {flagged.map((score, index) => (
         <TouchableOpacity
           key={`${score.subCriterion}-${index}`}
-          style={[styles.box, { width: size, height: size, borderRadius: size / 4 }, styles.boxRed]}
+          style={styles.touch}
           hitSlop={6}
+          accessibilityRole="button"
           accessibilityLabel={`${score.subCriterion}: ${score.tier}. Tap for details.`}
           onPress={() => onExplain(...buildExplanation(score, scores))}
-        />
+        >
+          <View style={[styles.box, { width: size, height: size, borderRadius: size / 4 }, styles.boxRed]} />
+        </TouchableOpacity>
       ))}
     </View>
   );
@@ -93,11 +97,22 @@ function buildExplanation(score: FoodScore, allScores: FoodScore[]): [string, st
 
   parts.push(`Source:\n${getSubCriterionSources(score.subCriterion)}`);
 
+  parts.push(t(SQUARES_LEGEND));
+
   return [title, parts.join('\n\n')];
 }
 
+// What every square means, added to each explanation, 2026-10-30, direct
+// instruction: tapping a square gives "a quick explanation of why it is
+// there, as well as what each version of the squares mean."
+export const SQUARES_LEGEND =
+  'What the squares mean:\nEach red square under an ingredient is one serious concern this food carries, such as high sodium, high saturated fat or gluten. Tap a square to see which one. An ingredient with no squares has no serious concern recorded, or has not been rated yet. Milder concerns are left off so the squares stay worth noticing.';
+
 const styles = StyleSheet.create({
-  row: { flexDirection: 'row', alignItems: 'center', gap: 3, flexShrink: 0 },
+  row: { flexDirection: 'row', alignItems: 'center', flexShrink: 0 },
+  // Padding around each square widens what a finger can land on without
+  // making the square itself any bigger.
+  touch: { padding: 3 },
   box: { borderWidth: 1 },
   // Reuses the app's own existing status palette (colors.danger /
   // colors.statusYellow, the same pair Home's nutrient rings and Trends

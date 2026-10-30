@@ -355,6 +355,7 @@ export type ToolMark =
   | 'builder.addIngredients'
   | 'builder.saveAddNew'
   | 'builder.saveFinish'
+  | 'builder.done'
   | 'builder.nudge'
   | 'builder.favorite'
   | 'builder.preview'
@@ -667,6 +668,7 @@ function builderHowTos(o: {
         ...first,
         { say: 'Under Find a Recipe, tap System Recipes (built into the app).', mark: 'builder.systemRecipes' },
         { say: 'Find the recipe, open it, and tap Build This Recipe.' },
+        { say: 'The recipe opens for reading, with Add Ingredients above it for anything more. When it is right, tap Done Adding Ingredients.', mark: 'builder.done' },
       ],
       forYou: 'The builder opens with the recipe filled in, ready for you to change what you need before saving it.',
     },

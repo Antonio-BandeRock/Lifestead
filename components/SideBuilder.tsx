@@ -7,7 +7,7 @@ import { KEYBOARD_HEIGHT } from '../constants/appKeyboard';
 import { colors, inputBackground } from '../constants/colors';
 import { SIDE_BUILDER_CATEGORIES } from '../constants/foodBuilderCategories';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
-import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, homeBandNoHairlines, HomeSectionBand, homeBandStyle } from './HomeSectionBand';
+import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandNoHairlines, HomeSectionBand, homeBandStyle } from './HomeSectionBand';
 import { textShadow, typography } from '../constants/typography';
 import {
   getBuilderFavorite,
@@ -1575,7 +1575,7 @@ export function SideBuilder({
   // connected picker sitting flush beneath it anymore; CollapsibleOverlayCard's
   // own overlay already sizes itself to its real content, up to its own
   // real maxHeight.
-  function renderSummaryCardContent() {
+  function renderSummaryCardContent(inline = false) {
     return (
       <>
         {/* 2026-08-17, direct report: "it already has the name of the side
@@ -1606,7 +1606,7 @@ export function SideBuilder({
         {ingredients.length === 0 ? (
           <Text style={[styles.summaryEmptyText, { marginTop: 4 }]}>No ingredients yet.</Text>
         ) : (
-          <ScrollView style={styles.overlayIngredientScroll} showsVerticalScrollIndicator={false}>
+          <ScrollView style={inline ? undefined : styles.overlayIngredientScroll} scrollEnabled={!inline} showsVerticalScrollIndicator={false}>
             {ingredients.map((ingredient, index) => (
               <View key={index} style={styles.overviewIngredientRow}>
                 <View style={styles.overviewIngredientTextWrap}>
@@ -1643,25 +1643,26 @@ export function SideBuilder({
             always be available here. */}
         {editSideId ? (
           <TouchableOpacity
-            style={styles.summaryDoneRow}
+            style={styles.summaryBackButton}
             onPress={() => {
               setSummaryExpanded(false);
               dismissKeyboard();
               setAddingIngredient(false);
             }}
           >
-            <Text style={[styles.summaryDoneText, { color: tabColor }]}>← Back to overview</Text>
+            <Text style={styles.summaryBackText}>Back to Overview</Text>
           </TouchableOpacity>
         ) : ingredients.length > 0 && finishStep === 'building' ? (
           <TouchableOpacity
-            style={styles.summaryDoneRow}
+            ref={walkMark.ref('builder.done')}
+            style={styles.summaryDoneButton}
             onPress={() => {
               setSummaryExpanded(false);
               dismissKeyboard();
               setFinishStep('reviewing');
             }}
           >
-            <Text style={[styles.summaryDoneText, { color: tabColor }]}>Done adding ingredients →</Text>
+            <Text style={styles.summaryDoneText}>Done Adding Ingredients</Text>
           </TouchableOpacity>
         ) : null}
       </>
@@ -1967,31 +1968,43 @@ export function SideBuilder({
       );
     }
 
-    // Nothing chosen yet -- the collapsed dish/ingredients card (point 2)
-    // plus a real, hand-aware "Add Ingredients" button (points
-    // 3/5) opening the 3-way source chooser.
+    // Nothing chosen yet: Add Ingredients, opening the source chooser,
+    // then the recipe so far laid out in bands.
     return (
-      <View style={styles.pickerScreen}>
-        <CollapsibleOverlayCard
-          collapsedLabel={dishName.trim() || 'Side Dish'}
-          tabColor={tabColor}
-          expanded={summaryExpanded}
-          onExpand={() => setSummaryExpanded(true)}
-          onCollapse={() => setSummaryExpanded(false)}
-        >
-          {renderSummaryCardContent()}
-        </CollapsibleOverlayCard>
-        <TouchableOpacity
-          ref={walkMark.ref('builder.addIngredients')}
-          style={[
-            styles.addIngredientsButton,
-            { borderColor: tabColor },
-            navigationHand === 'left' ? styles.addIngredientsButtonLeft : styles.addIngredientsButtonRight,
-          ]}
-          onPress={openIngredientSourceChooser}
-        >
-          <Text style={[styles.addIngredientsButtonText, { color: tabColor }]}>Add Ingredients</Text>
-        </TouchableOpacity>
+      <>
+        {infoAlertElement}
+        {confirmSheetElement}
+        {/* Opened for reading, 2026-10-30, direct instruction: "It should
+            have the add ingredients button above the recipe, and the recipe
+            should be opened for viewing." The recipe sits in bands the way
+            Home lays everything out, rather than folded into a pill that
+            had to be tapped open. Shares scrollViewRef with the other
+            branches, which are never mounted at the same time. */}
+        <ScrollView ref={scrollViewRef} contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}>
+          <TouchableOpacity
+            ref={walkMark.ref('builder.addIngredients')}
+            style={[
+              styles.addIngredientsButton,
+              { borderColor: tabColor },
+              navigationHand === 'left' ? styles.addIngredientsButtonLeft : styles.addIngredientsButtonRight,
+            ]}
+            onPress={openIngredientSourceChooser}
+          >
+            <Text style={[styles.addIngredientsButtonText, { color: tabColor }]}>Add Ingredients</Text>
+          </TouchableOpacity>
+          <View style={styles.bandOut}>
+            <HomeSectionBand kind="static" title={dishName.trim() || 'Side Dish'} icon="list-outline" color={tabColor}>
+              {renderSummaryCardContent(true)}
+            </HomeSectionBand>
+          </View>
+          {steps.length > 0 ? (
+            <View style={styles.bandOut}>
+              <HomeSectionBand kind="static" title="Steps (optional)" icon="reader-outline" color={tabColor}>
+                {renderStepsSection(false)}
+              </HomeSectionBand>
+            </View>
+          ) : null}
+        </ScrollView>
         <AppActionSheet
           visible={sourceChooserVisible}
           onClose={() => setSourceChooserVisible(false)}
@@ -2006,7 +2019,7 @@ export function SideBuilder({
             { label: 'Cancel', onPress: () => {} },
           ]}
         />
-      </View>
+      </>
     );
   }
 
@@ -2453,8 +2466,10 @@ export function SideBuilder({
               <Text style={styles.summaryDetailText}>
                 Makes {servings || '?'} serving{servings === '1' ? '' : 's'} ({servingSizeAmount || '?'} {servingSizeUnit ?? '?'} each)
               </Text>
+            </View>
 
-              <Text style={[styles.formLabel, { color: tabColor, marginTop: 14 }]}>Ingredients</Text>
+            <View style={styles.bandOut}>
+              <HomeSectionBand kind="static" title="Ingredients" icon="list-outline" color={tabColor}>
               {ingredients.map((ingredient, index) => (
                 <View key={index} style={styles.recipeIngredientRow}>
                   <Text style={styles.recipeIngredientBullet}>•</Text>
@@ -2482,7 +2497,13 @@ export function SideBuilder({
                   section sits in a real recipe card (Ingredients, then "How
                   to make it," see RecipeCardDetail in
                   app/(tabs)/purple-digest.tsx). */}
-              <View style={{ marginTop: 16 }}>{renderStepsSection()}</View>
+              </HomeSectionBand>
+            </View>
+
+            <View style={styles.bandOut}>
+              <HomeSectionBand kind="static" title="Steps (optional)" icon="reader-outline" color={tabColor}>
+                {renderStepsSection(false)}
+              </HomeSectionBand>
 
               {/* Real, live-computed nutrition/condition preview, point 7 --
                   the exact same real detail a saved side's own Digest My
@@ -2606,7 +2627,7 @@ const styles = StyleSheet.create({
   // Deliberately NOT a ScrollView -- see this component's own render-time
   // comment for why FoodLookup can never sit inside one.
   pickerScreen: { flex: 1, paddingHorizontal: 16, paddingTop: 5 },
-  scrollContent: { padding: 16, paddingTop: 5, gap: HOME_BAND_ACCENT_WIDTH },
+  scrollContent: { padding: 16, paddingTop: 5, gap: HOME_BAND_GAP },
   // The band look, 2026-09-12 (see components/HomeSectionBand.tsx): a 4px
   // accent and hairlines in the tab colour (borderColor is set inline at
   // every site), no right edge, no radius, and edge to edge by cancelling
@@ -2878,13 +2899,13 @@ const styles = StyleSheet.create({
   // Real padding, not just a bare TouchableOpacity, 2026-08-17 -- matches
   // this whole file's own established anti-mis-tap discipline for the
   // last real thing tapped before a genuinely different screen shows.
-  summaryDoneRow: {
-    paddingVertical: 10,
-  },
-  summaryDoneText: {
-    ...typography.captionEmphasis,
-    ...textShadow,
-  },
+  // A system button, 2026-10-30, direct instruction: "The 'Done adding
+  // ingredients' link should be like a system button and be more
+  // prominent." Back to Overview is the edit-mode twin, secondary.
+  summaryDoneButton: { ...BUTTON_PRIMARY, marginTop: 12 },
+  summaryDoneText: { ...BUTTON_PRIMARY_TEXT },
+  summaryBackButton: { ...BUTTON_SECONDARY, marginTop: 12 },
+  summaryBackText: { ...BUTTON_SECONDARY_TEXT },
   // Food name and its warning flags on one line, flags pinned right --
   // alignItems 'flex-start' (not 'center') so the boxes stay level with
   // the FIRST line of a name that wraps to two, rather than floating to

@@ -313,6 +313,13 @@ const BY_HAND: Readonly<Record<string, string>> = {
   'Open {title} in cook mode': 'Abrir {title} en modo cocina',
   'Back to {title}': 'Volver a {title}',
   'Cook a recipe one step at a time': 'Cocinar una receta paso a paso',
+  // Builders open a recipe for reading, with a Done button (2026-10-30).
+  'Done Adding Ingredients': 'Terminé de agregar ingredientes',
+  'Back to Overview': 'Regresar al resumen',
+  'The recipe opens for reading, with Add Ingredients above it for anything more. When it is right, tap Done Adding Ingredients.':
+    'La receta se abre para leerla, con Agregar ingredientes arriba para lo que falte. Cuando esté lista, toca Terminé de agregar ingredientes.',
+  'What the squares mean:\nEach red square under an ingredient is one serious concern this food carries, such as high sodium, high saturated fat or gluten. Tap a square to see which one. An ingredient with no squares has no serious concern recorded, or has not been rated yet. Milder concerns are left off so the squares stay worth noticing.':
+    'Qué significan los cuadros:\nCada cuadro rojo debajo de un ingrediente es una preocupación seria de ese alimento, como mucho sodio, mucha grasa saturada o gluten. Toca un cuadro para ver cuál es. Un ingrediente sin cuadros no tiene ninguna preocupación seria registrada, o todavía no se ha calificado. Las preocupaciones menores se dejan fuera para que los cuadros sigan valiendo la pena.',
 };
 
 export const ES: Readonly<Record<string, string>> = { ...ES_PARTS, ...BY_HAND };
