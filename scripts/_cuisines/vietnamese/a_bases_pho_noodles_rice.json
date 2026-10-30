@@ -1,0 +1,2429 @@
+{
+  "recipes": [
+    {
+      "id": "curated_vn_base_nuoc_dung_pho_bo",
+      "name": "Nước Dùng Phở Bò (Beef Phở Broth)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Broths",
+      "region": "Northern / Hà Nội",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Clear, deep beef broth with charred onion and ginger sweetness and a warm haze of star anise, clove and cinnamon.",
+      "healthBenefit": "A long simmer of marrow and knuckle bones with a piece of chuck gives a savory broth that carries some protein and minerals from the meat, with sodium from the salt and fish sauce.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "notInDatabase": true,
+          "name": "beef marrow and knuckle bones",
+          "contains": "meat",
+          "quantity": 2500,
+          "unit": "g",
+          "cutPrep": "cut in pieces",
+          "prepNote": "parboiled 2 to 3 minutes and rinsed before the main simmer"
+        },
+        {
+          "category": "Meat",
+          "baseName": "Beef Chuck (Raw)",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "one piece",
+          "cookingMethod": "Simmered",
+          "prepNote": "lifted out after about 1.5 hours, cooled and sliced thin for the bowls"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "unpeeled, charred whole",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Ginger root",
+          "quantity": 115,
+          "unit": "g",
+          "cutPrep": "unpeeled, charred whole and smashed",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "star anise",
+          "contains": "none",
+          "quantity": 5,
+          "unit": "each",
+          "cutPrep": "whole pods",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": "6 whole cloves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "one 3-inch stick",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "rock sugar, crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 5700,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Char the onions and ginger over a gas flame or under the broiler for 15 to 20 minutes, turning, until blackened in spots and soft. Cool, rub off the burnt skin, halve the onions and smash the ginger.",
+        "Cover the bones with cold water in a large stockpot, bring to a hard boil for 2 to 3 minutes, drain, and rinse the bones and the pot clean.",
+        "Return the bones to the pot with 6 quarts (5.7 L) fresh water, bring to a boil, then lower to a bare simmer and skim off the scum for 15 to 20 minutes.",
+        "Add the onion, ginger, star anise, cloves, cinnamon, salt, fish sauce, rock sugar and the piece of chuck. Keep at a gentle simmer, never a rolling boil, so the broth stays clear.",
+        "After about 1.5 hours lift out the chuck, plunge it into cold water for 10 minutes to stop it darkening, then refrigerate it for slicing.",
+        "Simmer the broth 1.5 hours more, about 3 hours in all. Strain through a fine sieve, skim the fat (keep a little for flavor) and taste: it should taste slightly too salty from the spoon, since noodles and garnishes soften it. You should have about 4 quarts (3.8 L)."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chuck simmered in the broth and the gelatin drawn from the knuckle bones."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "From the salt and fish sauce; a cup of broth is well seasoned, so the bowl needs no extra salt."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Beef Pho Noodle Soup",
+          "url": "https://www.vietworldkitchen.com/blog/2008/10/pho-beef-noodle-soup.html"
+        }
+      ],
+      "curationNote": "Andrea Nguyen 2008 beef pho broth, kept nearly as written: charred onion and ginger, parboiled marrow and knuckle bones, star anise, clove, cinnamon, rock sugar, fish sauce, chuck pulled at 1.5 hours. Yields about 16 cups; the bowls in Phở Bò Tái use 2 cups each. Bones are not in the food database and are listed as notInDatabase, so the broth counts the chuck and seasonings only."
+    },
+    {
+      "id": "curated_vn_base_nuoc_dung_pho_ga",
+      "name": "Nước Dùng Phở Gà (Chicken Phở Broth)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Broths",
+      "region": "Northern / Hà Nội",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Light golden chicken broth, clean and sweet, scented with charred ginger, toasted coriander seed and a little clove.",
+      "healthBenefit": "A whole chicken plus backs give a broth with protein and some B vitamins from the meat, lighter in fat than the beef version once skimmed.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Chicken, broiler or fryers",
+          "quantity": 1800,
+          "unit": "g",
+          "cutPrep": "one whole bird",
+          "cookingMethod": "Simmered",
+          "prepNote": "lifted out after 25 minutes; the meat is shredded for the bowls and the bones go back in"
+        },
+        {
+          "category": "Meat",
+          "baseName": "Chicken, broiler, back, meat and skin",
+          "quantity": 1350,
+          "unit": "g",
+          "cutPrep": "backs and necks, chopped",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "unpeeled, charred whole",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Ginger root",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "a 4-inch piece, unpeeled, charred and smashed",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, coriander seed",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": "toasted in a dry pan",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.2,
+          "unit": "tsp",
+          "cutPrep": "4 whole cloves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "stems from one bunch, tied",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "rock sugar, crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 4700,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Char the onions and ginger over a flame or under the broiler for 15 to 20 minutes until blistered, then peel off the burnt skin and smash the ginger.",
+        "Rinse the chicken and backs. Put them in a large pot with 5 quarts (4.7 L) water, bring to a boil, then lower to a gentle simmer and skim for 10 minutes.",
+        "Add the onion, ginger, coriander seed, cloves, cilantro stems, salt, fish sauce and rock sugar. Simmer 20 to 25 minutes, then lift out the whole chicken and cool it in cold water.",
+        "Pull the breast and thigh meat off the bird, cover and chill it for the bowls, and return the carcass to the pot.",
+        "Simmer the broth 1.5 hours more, skimming now and then. Strain, skim most of the fat, and taste for salt. You should have about 16 cups (3.8 L)."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the chicken meat and backs simmered in the pot."
+        },
+        {
+          "nutrient": "Niacin",
+          "note": "Chicken is a good source, and some of it moves into the broth."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Chicken Pho Noodle Soup",
+          "url": "https://www.vietworldkitchen.com/blog/2007/06/chicken_pho_noo.html"
+        }
+      ],
+      "curationNote": "Andrea Nguyen chicken pho broth followed closely: whole chicken pulled at 25 minutes and its frame returned, backs and necks, charred onion and ginger, toasted coriander seed, cloves, cilantro bunch, rock sugar and fish sauce. About 16 cups; Phở Gà bowls use 2 cups each."
+    },
+    {
+      "id": "curated_vn_base_nuoc_dung_bun_bo_hue",
+      "name": "Nước Dùng Bún Bò Huế (Huế Beef Noodle Broth)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Broths",
+      "region": "Central / Huế",
+      "servings": 20,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Bold, red, lemongrass-heavy beef and pork broth with the funk of fermented shrimp paste, a little sweetness and a slow chili heat.",
+      "healthBenefit": "Beef shank and pork hock give the broth protein and collagen, and lemongrass and chili bring aroma; it is a salty, rich broth best enjoyed as a full meal rather than sipped often.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_sa_te",
+          "servings": 2,
+          "note": "stirred into the finished broth"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Hind Shank / Shin (Raw)",
+          "quantity": 900,
+          "unit": "g",
+          "cutPrep": "one piece",
+          "cookingMethod": "Simmered",
+          "prepNote": "lifted out when tender, about 2 to 2.5 hours, and sliced for the bowls"
+        },
+        {
+          "notInDatabase": true,
+          "name": "oxtail, cut in sections",
+          "contains": "meat",
+          "quantity": 900,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "pork hock (giò heo), cut in rounds",
+          "contains": "meat",
+          "quantity": 900,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "lifted out when tender, about 1 hour"
+        },
+        {
+          "category": "Meat",
+          "baseName": "Gris fläskben rå",
+          "quantity": 900,
+          "unit": "g",
+          "cutPrep": "neck bones in chunks",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "lemongrass",
+          "contains": "none",
+          "quantity": 10,
+          "unit": "each",
+          "cutPrep": "stalks trimmed, bruised and tied",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "peeled and halved",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Pineapple",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "a wedge with the core",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Ginger root",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "unpeeled, smashed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 5700,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "rock sugar, crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "mắm ruốc (fermented shrimp paste)",
+          "contains": "fish",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "annatto seeds (hạt điều màu)",
+          "contains": "none",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 18,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Cover the beef shank, oxtail, pork hock and neck bones with cold water, boil hard for 5 minutes, drain, and rinse every piece and the pot well.",
+        "Return the meat and bones to the pot with 6 quarts (5.7 L) water, the tied lemongrass, onion, pineapple and ginger. Bring to a boil, then hold at a gentle simmer, partly covered, skimming as needed.",
+        "Lift out the pork hock after about 1 hour and the beef shank after 2 to 2.5 hours, when each is tender. Cool them in cold water, then chill and slice.",
+        "Strain out the bones and aromatics. Whisk the mắm ruốc with a ladle of broth, let it settle 10 minutes, and pour in only the clear liquid. Season with salt, rock sugar and fish sauce.",
+        "Warm the oil with the annatto seeds over medium heat for 2 to 3 minutes until the oil turns deep red, then remove the seeds. Fry the shallot and garlic in that oil for 1 to 2 minutes until golden and pour it all into the broth.",
+        "Stir in 2 tablespoons sa tế, taste for salt, sweet and heat, and keep hot. You should have about 5 quarts (4.7 L)."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the beef shank and pork bones simmered in the broth."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "Fish sauce, shrimp paste and salt make this a well-seasoned broth."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Hungry Huy, Bún Bò Huế",
+          "url": "https://www.hungryhuy.com/bun-bo-hue-recipe/"
+        },
+        {
+          "source": "Vicky Pham, Vietnamese Spicy Beef Noodle Soup (Bún Bò Huế)",
+          "url": "https://vickypham.com/blog/vietnamese-spicy-beef-noodle-soup-bun-bo-hue/"
+        },
+        {
+          "source": "Wikipedia, Bún bò Huế",
+          "url": "https://en.wikipedia.org/wiki/B%C3%BAn_b%C3%B2_Hu%E1%BA%BF"
+        }
+      ],
+      "curationNote": "Hungry Huy and Vicky Pham compared: both parboil beef shank and pork hocks, simmer with a lot of lemongrass, season with mắm ruốc, salt, sugar and fish sauce, and color with annatto oil. Kept Vicky Pham pineapple and ginger and her method of whisking the shrimp paste in, here letting it settle first so only the clear liquid goes in, and Hungry Huy annatto oil with shallot and garlic and 2 tbsp sa tế stirred in. Skipped chicken broth and bouillon powder. Oxtail and pork hock are not in the food database. Yields about 20 cups; bowls use 2.5 cups."
+    },
+    {
+      "id": "curated_vn_base_nuoc_dung_xuong_heo",
+      "name": "Nước Dùng Xương Heo (Pork Bone Broth)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Broths",
+      "region": "Southern / Sài Gòn",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Mild, clean and slightly sweet pork bone broth, rounded by onion and daikon, the everyday base of southern noodle soups.",
+      "healthBenefit": "Pork bones and a piece of loin give a light broth with some protein, and daikon adds a little vitamin C and sweetness without extra sugar.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Gris fläskben rå",
+          "quantity": 2700,
+          "unit": "g",
+          "cutPrep": "neck and back bones in chunks",
+          "cookingMethod": "Simmered",
+          "prepNote": "parboiled 3 to 5 minutes and rinsed before the main simmer"
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Loin (Raw)",
+          "quantity": 560,
+          "unit": "g",
+          "cutPrep": "one piece",
+          "cookingMethod": "Simmered",
+          "prepNote": "lifted out after about 40 minutes and sliced for the bowls"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "peeled and halved",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Radish, oriental (daikon)",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "peeled and cut in large chunks",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "rock sugar, crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 4700,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Cover the pork bones with cold water, boil hard for 3 to 5 minutes, drain, and rinse the bones and pot well.",
+        "Char the onion halves cut side down in a dry pan for 4 to 5 minutes until browned.",
+        "Return the bones to the pot with 5 quarts (4.7 L) water, bring to a boil, lower to a gentle simmer and skim for 15 minutes.",
+        "Add the onion, daikon, rock sugar, salt and the pork loin. Lift out the loin after 35 to 45 minutes, when cooked through, and cool it for slicing.",
+        "Simmer the broth 1.5 to 2 hours in all, never boiling hard. Strain, season with fish sauce and taste for salt. You should have about 16 cups (3.8 L)."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the pork loin and the pork bones."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "A little from the daikon simmered in the pot."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Hu Tieu Nam Vang",
+          "url": "https://www.vietworldkitchen.com/blog/2007/11/hu-tieu-nam-van.html"
+        },
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Hủ Tiếu Noodle Soup Deep Dive",
+          "url": "https://www.vietworldkitchen.com/blog/2019/09/hu-tieu-noodle-soup-deep-dive-bonus-and-a-recipe.html"
+        }
+      ],
+      "curationNote": "The plain pork bone broth southern cooks keep for hủ tiếu, bún mọc and bún riêu, built on the Andrea Nguyen hủ tiếu Nam Vang broth (6 lb pork bones, 5 quarts water, onion, rock sugar, salt, pork loin pulled when cooked) with the dried squid and dried shrimp left out so it stays neutral; Hủ Tiếu Nam Vang adds them itself. Daikon is the usual sweetener in nước dùng xương heo across Vietnamese home cooking. About 16 cups."
+    },
+    {
+      "id": "curated_vn_base_nuoc_dung_chay",
+      "name": "Nước Dùng Chay (Vegetable Broth)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Broths",
+      "region": "Northern / Hà Nội",
+      "servings": 10,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "A clear, sweet vegetable broth with charred onion and ginger, kombu and shiitake depth, and the phở spices of star anise and cinnamon.",
+      "healthBenefit": "Daikon, carrot, kombu and shiitake make a plant broth with savory depth, low in fat, with a little iodine from the kelp.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "unpeeled, charred",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "unpeeled, charred",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Ginger root",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "charred and sliced",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "star anise",
+          "contains": "none",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "whole pods",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": "one small stick, toasted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "black cardamom pod",
+          "contains": "none",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "toasted and cracked",
+          "prepNote": null
+        },
+        {
+          "category": "Algae",
+          "baseName": "Naga-kombu",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "two pieces, wiped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Mushroom",
+          "baseName": "Shiitake mushroom dried",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": "rinsed",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "sugar cane",
+          "contains": "none",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "peeled and split",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": "one carrot, cut in chunks",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Radish, oriental (daikon)",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "one small daikon, cut in chunks",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 3000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Char the onion, shallots and ginger over a flame or in a dry pan for 8 to 10 minutes until blackened in spots, then peel off the burnt skin.",
+        "Toast the star anise, cinnamon and black cardamom in a dry pan for 1 to 2 minutes until fragrant, and tie them in a spice bag.",
+        "Put everything except the salt in a pot with 3 L water, bring to a boil, then simmer gently for 45 minutes to 1 hour.",
+        "Strain, season with salt and taste. You should have about 10 cups (2.4 L)."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Iodine",
+          "note": "From the kombu simmered in the pot."
+        },
+        {
+          "nutrient": "Potassium",
+          "note": "From the daikon, carrot and shiitake."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Helen's Recipes, Phở Gạo Lứt Chay (Vegan Brown Rice Phở)",
+          "url": "https://www.helenrecipes.com/pho-ga/"
+        }
+      ],
+      "curationNote": "Helen Le vegan brown rice phở broth (the page at helenrecipes.com/pho-ga is that recipe): charred onion, shallots and ginger, star anise, cinnamon, black cardamom, kelp, shiitake, sugar cane, carrot and daikon in about 3 L water for an hour. Left out her pickled radish and miso so the base stays plain for any chay soup. Single recipe source, written to her method."
+    },
+    {
+      "id": "curated_vn_base_nuoc_cham",
+      "name": "Nước Chấm (Dipping Fish Sauce)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Sauces & Dips",
+      "region": "Southern / Sài Gòn",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Bright, sweet, sour and salty all at once, with garlic and chile bite and a few shreds of carrot.",
+      "healthBenefit": "A spoonful dresses a whole bowl of herbs and noodles with little fat; it carries sodium and some sugar, so it is meant to be used by the spoonful.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 3.5,
+          "unit": "tbsp",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 2.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": "lukewarm",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 3.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "one clove, minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "one Thai chile, thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "finely shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Stir the lime juice, sugar and lukewarm water in a bowl until the sugar dissolves.",
+        "Add the fish sauce a little at a time and taste: it should be balanced between sour, sweet and salty, slightly strong from the spoon.",
+        "Stir in the garlic, chile and carrot and let it sit 15 to 30 minutes before serving. Makes about 1 cup and keeps 3 to 4 days chilled."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "A little from the fresh lime juice."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "From the fish sauce."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Basic Vietnamese Dipping Sauce (Nuoc Cham)",
+          "url": "https://www.vietworldkitchen.com/blog/2008/11/basic-vietnamese-dipping-sauce-nuoc-cham.html"
+        }
+      ],
+      "curationNote": "Andrea Nguyen basic nước chấm: lime, sugar, lukewarm water, fish sauce, garlic, Thai chile and shredded carrot, quantities taken from the middle of her ranges. Makes 1 cup, 16 tablespoons."
+    },
+    {
+      "id": "curated_vn_base_nuoc_mam_gung",
+      "name": "Nước Mắm Gừng (Ginger Fish Sauce)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Sauces & Dips",
+      "region": "Northern / Hà Nội",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Hot with fresh ginger, sweet and salty, with lime and chile; the dip for poached chicken and duck.",
+      "healthBenefit": "Fresh ginger brings its warm pungency, and a tablespoon carries mostly sodium and a little sugar.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Herbs",
+          "baseName": "Ginger root",
+          "quantity": 56,
+          "unit": "g",
+          "cutPrep": "peeled and finely minced or pounded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "one clove, minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": "warm",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Pound or mince the ginger, garlic and chiles to a coarse paste.",
+        "Stir the sugar into the warm water until dissolved, then add the fish sauce and lime juice.",
+        "Stir in the ginger paste and rest 10 minutes before serving. Makes about 1 cup and keeps 1 week chilled."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sodium",
+          "note": "From the fish sauce."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Runaway Rice, Ginger Fish Sauce (Nuoc Mam Gung)",
+          "url": "https://runawayrice.com/sauces-pickles/ginger-fish-sauce-nuoc-mam-gung/"
+        }
+      ],
+      "curationNote": "Runaway Rice nước mắm gừng as written: 2 oz ginger, a garlic clove, warm water, 1/4 cup each sugar and fish sauce, 2 tbsp lime, 2 chiles, 10 minute rest. Single source; it matches the ginger fish sauce served with Cơm Gà and gà luộc everywhere."
+    },
+    {
+      "id": "curated_vn_base_tuong_cham_goi_cuon",
+      "name": "Tương Chấm Gỏi Cuốn (Peanut Hoisin Dip)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Sauces & Dips",
+      "region": "Southern / Sài Gòn",
+      "servings": 16,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Thick, sweet and savory hoisin and peanut dip with fried garlic and crushed peanuts on top.",
+      "healthBenefit": "Peanut butter and peanuts give it protein and mostly unsaturated fat; it is rich and sweet, so a couple of spoonfuls go a long way.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 9,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": "or pork broth",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Peanut butter",
+          "quantity": 128,
+          "unit": "g",
+          "cutPrep": "creamy",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "SaucesCondiments",
+          "baseName": "Hoisinsaus, hjemmelaget",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Peanut",
+          "quantity": 70,
+          "unit": "g",
+          "cutPrep": "toasted and coarsely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "thinly sliced, to serve",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Warm the oil in a small pot over medium-high heat and fry the garlic for 20 to 30 seconds until fragrant.",
+        "Add the water and peanut butter and whisk until smooth.",
+        "Stir in the hoisin and simmer on low for 1 to 2 minutes until it just bubbles. Thin with water or simmer longer to reach a thick, pourable dip; it thickens as it cools.",
+        "Serve in small bowls topped with the chopped peanuts and chile. Makes about 2 cups."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the peanut butter and toasted peanuts."
+        },
+        {
+          "nutrient": "Vitamin E",
+          "note": "From the peanuts."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Vicky Pham, Vietnamese Peanut Dipping Sauce for Spring Rolls (Tương Chấm Gỏi Cuốn)",
+          "url": "https://vickypham.com/blog/vietnamese-peanut-sauce-spring-rolls/"
+        }
+      ],
+      "curationNote": "Vicky Pham tương chấm: garlic fried in oil, water or stock, peanut butter and hoisin, topped with peanuts. Helen Le and Hungry Huy versions (seen in search, not opened) add pork broth or more hoisin; the water can be swapped for Nước Dùng Xương Heo. Homemade hoisin from the food database stands in for jarred."
+    },
+    {
+      "id": "curated_vn_base_do_chua",
+      "name": "Đồ Chua (Pickled Carrot and Daikon)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Sauces & Dips",
+      "region": "Southern / Sài Gòn",
+      "servings": 12,
+      "servingSizeAmount": 0.25,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Crunchy, sweet-sour matchsticks of carrot and daikon that cut through grilled meat and rich pâté.",
+      "healthBenefit": "Carrot brings beta-carotene and daikon some vitamin C, in a crisp pickle that is low in fat; most of the brine sugar stays in the jar.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "one large carrot, cut in matchsticks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Radish, oriental (daikon)",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "cut in matchsticks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for kneading, rinsed off"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 110,
+          "unit": "g",
+          "cutPrep": "2 tsp for kneading plus 1/2 cup for the brine",
+          "cookingMethod": null,
+          "prepNote": "most of the brine sugar is left in the jar"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Distilled Vinegar (White)",
+          "quantity": 300,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": "lukewarm",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Toss the carrot and daikon with the salt and 2 teaspoons sugar and knead for about 3 minutes, until the daikon bends without snapping and the liquid pools in the bowl.",
+        "Rinse in a colander, press out the water and pack into a jar.",
+        "Stir the 1/2 cup sugar into the vinegar and lukewarm water until dissolved, pour it over the vegetables to cover, and let stand at least 1 hour.",
+        "Refrigerate. It keeps about 4 weeks; open the jar to let the daikon smell out before serving. Makes about 3 cups."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin A",
+          "note": "Beta-carotene from the carrot."
+        },
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the daikon."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Daikon and Carrot Pickle (Do Chua)",
+          "url": "https://www.vietworldkitchen.com/blog/2009/05/daikon-and-carrot-pickle-recipe-do-chua.html"
+        }
+      ],
+      "curationNote": "Andrea Nguyen đồ chua followed as written: 1 large carrot, 1 lb daikon, salt and sugar knead, then a brine of 1 1/4 cups distilled vinegar, 1 cup water and 1/2 cup sugar. About 3 cups drained, 12 quarter-cup servings. Sugar is counted in full though most stays in the brine."
+    },
+    {
+      "id": "curated_vn_base_mo_hanh",
+      "name": "Mỡ Hành (Scallion Oil)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Sauces & Dips",
+      "region": "Southern / Sài Gòn",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Glossy, gently sweet scallion oil spooned over grilled meats, broken rice and noodles.",
+      "healthBenefit": "Mostly canola oil, so it is a fat for finishing; scallions add a little vitamin K.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "one large bunch, finely chopped",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.125,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Trim the roots, rinse the scallions, pat them very dry and chop them finely.",
+        "Warm the scallions, oil and salt in a small pan over medium heat for 3 to 4 minutes, stirring now and then, until the scallions just wilt and stay bright green.",
+        "Pour into a bowl and cool slightly before spooning over food. Makes about 1/2 cup."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin K",
+          "note": "From the scallions."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Runaway Rice, Scallion Oil (Mo Hanh)",
+          "url": "https://runawayrice.com/sauces-pickles/scallion-oil-mo-hanh/"
+        }
+      ],
+      "curationNote": "Runaway Rice mỡ hành as written. Cooks often use lard for mỡ hành (the name means scallion fat); canola is the source version. Single source."
+    },
+    {
+      "id": "curated_vn_base_sa_te",
+      "name": "Sa Tế (Lemongrass Chili Oil)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Sauces & Dips",
+      "region": "Central / Huế",
+      "servings": 32,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Deep red chili oil thick with fried lemongrass and garlic, hot, fragrant and a little sweet.",
+      "healthBenefit": "A spoonful adds heat and aroma; chiles and paprika bring carotenoids, and it is mostly oil, so it is used sparingly.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "two bulbs, cloves smashed and peeled",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "lemongrass",
+          "contains": "none",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "stalks, tender part sliced and finely ground",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 3,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
+          "quantity": 56,
+          "unit": "g",
+          "cutPrep": "crushed into flakes",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Paprika",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Pulse the lemongrass in a food processor for about 45 seconds, scrape down, add the garlic and shallot and pulse another 45 seconds to a fine mince.",
+        "Heat the oil in a skillet over medium-high heat, add the mince, sugar and salt, and fry for about 2 minutes, stirring, until fragrant and pale gold.",
+        "Take the pan off the heat and cool 3 to 4 minutes, then stir in the chile flakes and paprika so they do not scorch.",
+        "Return to low heat for 2 minutes more, then cool completely and store in a jar in the refrigerator for up to 3 months. Makes about 2 cups."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin A",
+          "note": "Carotenoids from the dried chiles and paprika."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Runaway Rice, Satay Chili Paste (Ot Sa Te)",
+          "url": "https://runawayrice.com/sauces-pickles/satay-chili-paste-ot-sa-te/"
+        },
+        {
+          "source": "Hungry Huy, Bún Bò Huế",
+          "url": "https://www.hungryhuy.com/bun-bo-hue-recipe/"
+        }
+      ],
+      "curationNote": "Runaway Rice ớt sa tế (garlic, lemongrass, oil, sugar, salt, red pepper flakes, paprika) with shallot added as in the Hungry Huy saté for bún bò Huế. Fish sauce left out so the oil stays plant only. About 2 cups."
+    },
+    {
+      "id": "curated_vn_base_muoi_tieu_chanh",
+      "name": "Muối Tiêu Chanh (Salt, Pepper and Lime Dip)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Sauces & Dips",
+      "region": "Southern / Sài Gòn",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Sharp and salty, a pinch of salt and white pepper loosened with lime for dipping chicken, seafood and shaking beef.",
+      "healthBenefit": "Lime brings a little vitamin C; the dip is mostly salt, used a pinch at a time.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": "coarse salt",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, white, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "cut in wedges",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "thinly sliced, optional",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Set out the salt, white pepper, lime wedges and chile in separate small dishes, about 2 parts salt to 1 part pepper.",
+        "Each diner puts a pinch of salt and pepper in a small saucer, squeezes in a wedge of lime and muddles in chile if they like, then dips each bite just before eating."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the fresh lime."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Salt, Pepper and Lime Dipping Sauce (Muoi Tieu Chanh)",
+          "url": "https://www.vietworldkitchen.com/blog/2009/01/salt-pepper-and-lime-dipping-sauce-muoi-tieu-chanh.html"
+        }
+      ],
+      "curationNote": "Andrea Nguyen muối tiêu chanh: coarse salt and white pepper at 2 to 1, lime wedges, optional chile, mixed by each diner. She gives no amounts, so the batch is sized for four."
+    },
+    {
+      "id": "curated_vn_base_nuoc_mau",
+      "name": "Nước Màu (Caramel Sauce)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Sauces & Dips",
+      "region": "Southern / Sài Gòn",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Dark, bittersweet caramel used in small amounts to color and deepen braises and grilled marinades.",
+      "healthBenefit": "This is sugar cooked dark, used by the teaspoon for color and flavor rather than as a source of nutrients.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 105,
+          "unit": "ml",
+          "cutPrep": "3 tbsp for melting the sugar plus 1/4 cup hot water at the end",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the sugar and 3 tablespoons water in a medium saucepan over medium heat. In about 3 minutes it melts and bubbles; stir and keep cooking.",
+        "Watch it turn golden at about 4 minutes, rich brown at about 6, and deep reddish brown with a little smoke at 7 to 8. Cook 30 to 45 seconds more, then turn off the heat and let it settle for about 10 minutes.",
+        "Carefully add the 1/4 cup hot water, return to medium heat and stir until it boils again, then turn off the heat and stir about 1 minute more.",
+        "Cool at least 10 minutes and pour into a clean jar. It thickens as it cools and keeps up to a year in a cool, dry place. Makes about 3/4 cup."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "All from the caramelized sugar."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Runaway Rice, Caramel Sauce (Nuoc Mau)",
+          "url": "https://runawayrice.com/cooking-basics/caramel-sauce-nuoc-mau/"
+        }
+      ],
+      "curationNote": "Runaway Rice nước màu with her minute by minute color cues. Single source; the method is the standard one for nước màu."
+    },
+    {
+      "id": "curated_vn_base_nuoc_cham_chay",
+      "name": "Nước Chấm Chay (Vegetarian Dipping Sauce)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Sauces & Dips",
+      "region": "Southern / Sài Gòn",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "The sweet, sour and savory balance of nước chấm with soy sauce in place of fish sauce, sharp with lime and chile.",
+      "healthBenefit": "A plant-only dipping sauce that keeps vegetarian dishes free of fish; it carries sodium from the soy sauce and some sugar.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 2.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 150,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "one clove, minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Stir the lime juice, sugar and water until the sugar dissolves.",
+        "Add the soy sauce and salt and taste, adjusting until tart, sweet and savory are balanced.",
+        "Add the garlic and chile and rest about 10 minutes before serving. Makes about 1 cup."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sodium",
+          "note": "From the soy sauce and salt."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Vegetarian Fish Sauce Dipping Sauce (Nuoc Cham Chay)",
+          "url": "https://www.vietworldkitchen.com/blog/2010/10/vegetarian-fish-sauce-dipping-sauce-recipe-nuoc-cham-chay.html"
+        }
+      ],
+      "curationNote": "Andrea Nguyen nước chấm chay scaled up from 1/4 cup to 1 cup: lime, sugar, water, a soy seasoning in place of fish sauce, chile, 10 minute rest. Her Japanese vegan soy concentrate is replaced with ordinary soy sauce plus a pinch of salt, the swap she suggests elsewhere. Soy sauce made with wheat means this is not gluten-free; tamari would make it so."
+    },
+    {
+      "id": "curated_vn_base_sot_mayonnaise_banh_mi",
+      "name": "Sốt Mayonnaise Bánh Mì",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Sauces & Dips",
+      "region": "Southern / Sài Gòn",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Rich, pale yellow egg yolk mayonnaise, soft and a little tangy, spread thick inside bánh mì.",
+      "healthBenefit": "Made from egg yolks and canola oil, it is a rich spread high in fat, much of it unsaturated, used by the spoonful.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg Yolk (Raw)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "pasteurized eggs if possible",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, white, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, mustard seed, yellow",
+          "quantity": 0.125,
+          "unit": "tsp",
+          "cutPrep": "ground to a powder",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Lemon Juice",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, rice vinegar",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put the yolks, salt, white pepper, mustard powder, lemon juice and rice vinegar in a large bowl and beat with a hand mixer on low for 10 seconds.",
+        "Add 1 tablespoon oil and beat 30 seconds, then raise the mixer to high.",
+        "Keep adding oil 1 tablespoon every 30 seconds until it is all in; the sauce thickens around the halfway point and ends thick and creamy.",
+        "Refrigerate and use within a week. Makes about 1 cup."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin E",
+          "note": "From the canola oil."
+        },
+        {
+          "nutrient": "Choline",
+          "note": "From the egg yolks."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Runaway Rice, Mayonnaise",
+          "url": "https://runawayrice.com/sauces-pickles/mayonnaise/"
+        },
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Bánh Mì Recipe for Making Vietnamese Sandwiches Anytime",
+          "url": "https://www.vietworldkitchen.com/blog/2025/07/banh-mi-recipe-for-making-vietnamese-sandwiches-anytime.html"
+        }
+      ],
+      "curationNote": "Runaway Rice mayonnaise as written (two yolks, salt, white pepper, mustard powder, lemon, rice vinegar, 1 cup canola). Andrea Nguyen master bánh mì recipe confirms mayonnaise as the standard spread. Yolk-rich and unsweetened like the bơ in Sài Gòn bánh mì shops."
+    },
+    {
+      "id": "curated_vn_base_com_trang",
+      "name": "Cơm Trắng (Steamed Jasmine Rice)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Southern / Sài Gòn",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Fluffy, fragrant jasmine rice with separate, tender grains.",
+      "healthBenefit": "Plain steamed rice is an easy-to-digest source of carbohydrate for energy, naturally gluten-free and low in fat.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Grain",
+          "baseName": "Grains, rice, white, long-grain, regular, dry",
+          "quantity": 380,
+          "unit": "g",
+          "cutPrep": "jasmine rice, washed 2 to 3 times",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 600,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rinse the rice in a pot of cool water, swishing, and pour off the cloudy water 2 to 3 times until it runs nearly clear. Drain well.",
+        "Add the 600 ml water, bring to a boil over medium-high heat, then lower to a simmer for 1 to 3 minutes until the water drops to the level of the rice.",
+        "Cover, turn the heat to low and cook 10 minutes. Turn off the heat and rest 10 minutes covered.",
+        "Fluff the rice with a paddle, cover again and rest 10 minutes more before serving. Makes about 6 cups."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the jasmine rice."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Perfect Jasmine Rice, the 10-10-10 Method",
+          "url": "https://www.vietworldkitchen.com/blog/2026/04/perfect-jasmine-rice-the-10-10-10-method.html"
+        }
+      ],
+      "curationNote": "Andrea Nguyen 10-10-10 jasmine rice: 2 cups rice to 2 1/2 cups water, about 6 cups cooked. The database has no jasmine rice row, so long-grain white rice stands in as the same kind of grain."
+    },
+    {
+      "id": "curated_vn_base_xoi_trang",
+      "name": "Xôi Trắng (Steamed Sticky Rice)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Northern / Hà Nội",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Chewy, glossy steamed sticky rice, lightly salted, the base for xôi toppings at breakfast.",
+      "healthBenefit": "Glutinous rice is a dense source of carbohydrate and is naturally gluten-free despite its name.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Grain",
+          "baseName": "Grains, rice, white, glutinous, dry",
+          "quantity": 680,
+          "unit": "g",
+          "cutPrep": "rinsed until clear and soaked",
+          "cookingMethod": "Steamed",
+          "prepNote": "soaked 3 to 8 hours in cold water, then drained"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rinse the rice until the water runs clear, then soak it in plenty of cold water for at least 3 hours or overnight. Drain well.",
+        "Toss the drained rice with the salt. Line a steamer with cheesecloth or a banana leaf if the holes are large, and spread the rice in an even layer.",
+        "Steam covered over medium heat for 30 minutes, then fluff and turn the rice and steam 10 to 15 minutes more, until every grain is glossy, translucent and chewy.",
+        "Serve warm, pressed into a bowl or wrapped in leaves. Makes about 6 cups."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the glutinous rice."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Vicky Pham, Vietnamese Red Sticky Rice (Xôi Gấc)",
+          "url": "https://vickypham.com/blog/red-sticky-rice/"
+        }
+      ],
+      "curationNote": "Plain xôi from the Vicky Pham xôi gấc method with the gấc, coconut milk and sugar left out: rinse, soak 3 hours, salt, steam 30 minutes then 15 more. Search results from Hungry Huy and Helen Le agree on soaking 3 to 8 hours and steaming until translucent. One opened source."
+    },
+    {
+      "id": "curated_vn_base_banh_pho_tuoi",
+      "name": "Bánh Phở Tươi (Fresh Rice Noodles)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Northern / Hà Nội",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Soft, silky and slightly chewy fresh rice noodles, steamed in thin sheets and cut into wide ribbons.",
+      "healthBenefit": "Rice flour and starch make a naturally gluten-free noodle that is mostly carbohydrate.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Rice flour",
+          "quantity": 160,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Grain",
+          "baseName": "Tapioca (granulated cassava starch)",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "tapioca starch",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Potato Starch",
+          "quantity": 70,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 950,
+          "unit": "ml",
+          "cutPrep": "room temperature",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": "for brushing the sheets",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Whisk the rice flour, tapioca starch, potato starch, salt and water until smooth and rest 30 minutes. Whisk again before every pour, since the starch settles quickly.",
+        "Set a shallow bowl in a wide pot with about 2 inches of water, set a 9-inch nonstick cake pan on it, and bring the water to a boil over medium-high heat.",
+        "Pour about 1/3 cup batter into the pan, swirl it thin, cover and steam about 2 minutes, until translucent.",
+        "Lift the pan out, loosen the sheet with a wooden chopstick and slide it onto an oiled tray. Brush with a little oil and repeat with the rest of the batter.",
+        "Stack the cooled sheets and cut them into ribbons about 1/4 to 1/2 inch wide. Use within the day."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the rice flour and starches."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Vicky Pham, Vietnamese Steamed Rice Noodle Sheets (Bánh Ướt)",
+          "url": "https://vickypham.com/blog/ban-uot/"
+        }
+      ],
+      "curationNote": "Vicky Pham bánh ướt batter (1 cup rice flour, 1/2 cup tapioca, 1/2 cup potato starch, 4 cups water, salt), steamed in thin sheets and cut into ribbons, which is how bánh phở is made: steamed rice sheets cut into strands (Viet World Kitchen describes this, seen in search, not opened). About 4 bowl portions. Single opened source."
+    },
+    {
+      "id": "curated_vn_base_cha_lua",
+      "name": "Chả Lụa (Vietnamese Pork Roll)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Southern / Sài Gòn",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "slice",
+      "flavorProfile": "Springy, smooth, pale pork roll seasoned with fish sauce and white pepper, with a faint scent of banana leaf.",
+      "healthBenefit": "Mostly pork, so it brings protein and B vitamins; it is salty and fairly rich, so a couple of slices is a usual portion.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Ground Pork (Raw)",
+          "quantity": 900,
+          "unit": "g",
+          "cutPrep": "80/20, well chilled",
+          "cookingMethod": "Steamed",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": "ice cold",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "plus a little for brushing the leaves"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Potato Starch",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, white, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baking powder",
+          "quantity": 0.75,
+          "unit": "tsp",
+          "cutPrep": "fresh",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "banana leaves",
+          "contains": "none",
+          "quantity": 6,
+          "unit": "each",
+          "cutPrep": "about 14 inches square, cleaned",
+          "prepNote": "for wrapping only, not eaten"
+        }
+      ],
+      "instructions": [
+        "Whisk the ice water, fish sauce, oil, sugar, potato starch and white pepper, then stir in the baking powder.",
+        "Mix the liquid into the pork on low speed for 3 to 4 minutes, spread it thin in a metal pan and chill about 3 hours, until firm but not frozen.",
+        "Working in two batches and keeping the meat cold, pulse it in a food processor 10 seconds on and 10 seconds off for about 5 minutes, scraping down, until it is a smooth, sticky paste.",
+        "Shape each batch into a log in plastic wrap and chill 20 minutes. Wrap each log snugly in 2 to 3 oiled banana leaves, then in plastic wrap, and tie loosely with twine.",
+        "Bring the steamer water to a boil, lower to a gentle steam and steam the rolls 20 to 25 minutes, until firm. Cool 15 to 20 minutes, unwrap and slice. Makes 2 rolls of about 1 lb (450 g)."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "From the pork."
+        },
+        {
+          "nutrient": "Thiamin",
+          "note": "Pork is one of the richest common sources."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Runaway Rice, Steamed Pork Roll (Cha Lua / Gio Lua)",
+          "url": "https://runawayrice.com/main-dishes/steamed-pork-roll-cha-lua/"
+        },
+        {
+          "source": "Wikipedia, Chả lụa",
+          "url": "https://en.wikipedia.org/wiki/Ch%E1%BA%A3_l%E1%BB%A5a"
+        }
+      ],
+      "curationNote": "Runaway Rice chả lụa (giò lụa in the north): 2 lb pork, ice water, fish sauce, oil, sugar, potato starch, white pepper, baking powder, pounded smooth, wrapped in banana leaf and steamed. Wikipedia confirms pork paste seasoned with fish sauce and pepper, wrapped in banana leaves and steamed. 16 slices of about 55 g."
+    },
+    {
+      "id": "curated_vn_base_pa_te_gan",
+      "name": "Pa Tê Gan (Liver Pâté)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Southern / Sài Gòn",
+      "servings": 24,
+      "servingSizeAmount": 2,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Rich, coarse, savory pork liver pâté with shallot, garlic and five-spice, smooth enough to spread thick on bánh mì.",
+      "healthBenefit": "Pork liver makes this one of the richest sources of vitamin A, iron and B12 in the kitchen; it is also rich in fat, and liver is best eaten in small amounts, especially in pregnancy because of its vitamin A.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_vn_base_banh_mi",
+          "servings": 0.5,
+          "note": "half a roll, torn and soaked in milk"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Liver (Raw)",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "trimmed, cut in pieces, soaked 30 minutes in milk and rinsed",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for soaking the liver and bread; most is poured off"
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Back Fat (Raw)",
+          "quantity": 225,
+          "unit": "g",
+          "cutPrep": "cut small",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Ground Pork (Raw)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "three shallots, minced",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 18,
+          "unit": "g",
+          "cutPrep": "six cloves, minced",
+          "cookingMethod": "Sauteed",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 28,
+          "unit": "g",
+          "cutPrep": "two tablespoons",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Chinese five-spice powder",
+          "contains": "none",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Soak the liver pieces in half the milk and the torn bread in the rest for 30 minutes. Rinse the liver and squeeze the bread dry.",
+        "Warm the oil and half the butter in a skillet over medium heat and cook half the shallot and garlic for 1 minute. Add the liver and five-spice and cook 3 to 4 minutes, until browned outside but still pink in the middle. Scrape into a bowl.",
+        "In the same pan cook the rest of the shallot and garlic with the back fat, ground pork, remaining butter, salt, sugar and pepper for 5 to 6 minutes, until the pork is lightly browned.",
+        "Blend the liver, pork mixture, bread and egg until smooth, in batches if needed. Scrape into a greased 8 by 4 inch loaf pan and cover tightly with foil.",
+        "Steam over simmering water for 1 to 1 1/4 hours, until a skewer comes out clean. Cool, then chill at least 2 hours before spreading. Makes about 3 cups."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin A",
+          "note": "Pork liver is very rich in it."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the liver, in its easily absorbed form."
+        },
+        {
+          "nutrient": "Vitamin B12",
+          "note": "From the liver."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Cooking Therapy, The Best Vietnamese Pate for Banh Mi",
+          "url": "https://www.cooking-therapy.com/vietnamese-pate"
+        },
+        {
+          "source": "Vicky Pham, Easy Vietnamese Liver Pâté for Bánh Mì",
+          "url": "https://vickypham.com/blog/pate/"
+        },
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Bánh Mì Recipe for Making Vietnamese Sandwiches Anytime",
+          "url": "https://www.vietworldkitchen.com/blog/2025/07/banh-mi-recipe-for-making-vietnamese-sandwiches-anytime.html"
+        }
+      ],
+      "curationNote": "Cooking Therapy steamed Vietnamese pâté (liver and bread soaked in milk, pork fat, ground pork, shallot, garlic, five-spice, butter, egg, steamed in a loaf pan 1 to 1 1/4 hours) with the pork liver raised to the 1 lb of Vicky Pham recipe, so liver leads as it does in shop pâté. Vicky Pham notes pork liver is traditional and the Vietnamese style is coarser than French. The bread is half a Bánh Mì roll. Milk is counted in full though most is poured off. Pregnancy note on liver vitamin A is standard public health guidance."
+    },
+    {
+      "id": "curated_vn_base_hanh_phi",
+      "name": "Hành Phi (Fried Shallots)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Southern / Sài Gòn",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Crisp, sweet, golden brown shallot shards, scattered over noodles, rice and soups.",
+      "healthBenefit": "A garnish used by the spoonful; shallots bring a little fiber and the frying oil adds fat.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "thinly sliced and blotted dry",
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": "fried in about 1 1/2 cups (360 ml) oil; this is the share the shallots hold, the rest is strained off and kept as shallot oil"
+        }
+      ],
+      "instructions": [
+        "Separate the shallot slices into rings and blot them very dry on paper towels.",
+        "Put the shallots in a wide pan with the oil, starting cold or over medium-low heat, and cook 5 to 6 minutes, stirring now and then, until fragrant and light golden.",
+        "Keep stirring constantly for about 4 minutes more as they soften, then stiffen and crisp. Lift them out with a slotted spoon when most are rich golden brown, since they darken off the heat.",
+        "Spread on a paper towel lined plate to cool and crisp. Keep the strained oil for cooking. The shallots stay crisp about 8 hours uncovered, or longer in an airtight jar. Makes about 1 cup."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fat",
+          "note": "From the oil the shallots take up while frying."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Crispy Caramelized Shallots (Hanh Phi)",
+          "url": "https://www.vietworldkitchen.com/blog/2007/11/crispy-carameli.html"
+        }
+      ],
+      "curationNote": "Andrea Nguyen hành phi method (dry slices, medium-low oil, about 10 minutes, pull at rich golden brown), scaled up to a 1 cup batch in more oil as Vicky Pham does (seen in search, not opened). Only the oil the shallots absorb is counted."
+    },
+    {
+      "id": "curated_vn_base_thinh",
+      "name": "Thính (Toasted Rice Powder)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Northern / Hà Nội",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Nutty, toasty and fragrant, a fine powder that adds aroma and a slight grit to bún chả patties, nem chua and bì.",
+      "healthBenefit": "Toasted rice ground to a powder, used by the spoonful for flavor; naturally gluten-free.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Grain",
+          "baseName": "Grains, rice, white, glutinous, dry",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "rinsed and dried",
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rinse the rice, drain and let it dry on a towel for 15 to 20 minutes.",
+        "Toast in a dry skillet over medium heat, stirring and tossing almost constantly, for 12 to 15 minutes, until deep golden and nutty smelling.",
+        "Tip into a bowl and cool completely so it stops toasting.",
+        "Grind to a fine powder in a spice grinder or mortar. Keep in a jar for a few weeks. Makes about 1/2 cup."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the toasted rice."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Vicky Pham, Bún Chả Hà Nội",
+          "url": "https://vickypham.com/blog/bun-cha-hanoi/"
+        }
+      ],
+      "curationNote": "Vicky Pham bún chả FAQ: toast rice in a dry skillet, tossing, until browned, then grind. Northern cooks usually toast sticky rice for thính, which is used here; search results (Viet World Kitchen, not opened) give about 15 minutes over medium-low. Written mostly from description."
+    },
+    {
+      "id": "curated_vn_base_dua_cai_chua",
+      "name": "Dưa Cải Chua (Pickled Mustard Greens)",
+      "builderType": "fermentation",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Southern / Sài Gòn",
+      "servings": 20,
+      "servingSizeAmount": 0.5,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Tart, crunchy, pale gold mustard greens, sour and a little pungent, for soups, stir-fries and alongside braised pork.",
+      "healthBenefit": "A lacto-fermented vegetable that keeps much of the mustard greens' vitamin K and fiber and may carry live lactic acid bacteria; it is salty, so drain and rinse if watching sodium.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Mustard greens",
+          "quantity": 2000,
+          "unit": "g",
+          "cutPrep": "leaves cut 2 to 3 inches, stems cut 1 inch, washed and air-dried overnight",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "one third of an onion, thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1650,
+          "unit": "ml",
+          "cutPrep": "boiled and cooled to warm",
+          "cookingMethod": null,
+          "prepNote": "brine, mostly drained off before eating"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "dissolved in the brine"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Brown Sugar (Commercial)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": "heaping",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Trim the mustard greens, wash them well and let them air-dry overnight so they wilt slightly.",
+        "Bring the water to a gentle boil, cool it about 45 minutes until warm, and stir in the salt and brown sugar until dissolved.",
+        "Cut the leaves into 2 to 3 inch pieces and the stems into 1 inch pieces. Layer the leaves with some onion in a clean gallon jar, then the stems and the rest of the onion on top.",
+        "Pour in the brine and weight the greens under it with a sealed bag of water. Cover the mouth with plastic wrap before the lid.",
+        "Leave in a warm, sunny spot for 3 to 6 days, until the greens turn pale yellow and taste pleasantly sour. Drain and refrigerate; eat within a month. Makes about 10 cups."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin K",
+          "note": "From the mustard greens."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "From the leaves and stems."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Runaway Rice, Pickled Mustard Greens (Dua Cai Chua)",
+          "url": "https://runawayrice.com/sauces-pickles/pickled-mustard-greens/"
+        }
+      ],
+      "curationNote": "Runaway Rice dưa cải chua as written: 4 1/2 lb mustard greens, onion, 7 cups warm boiled water, 2 1/2 tbsp salt, brown sugar, 3 to 6 days. Single source. Live bacteria and sodium wording kept cautious, hence the moderate tier."
+    },
+    {
+      "id": "curated_vn_base_banh_mi",
+      "name": "Bánh Mì (Vietnamese Baguette)",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Southern / Sài Gòn",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "roll",
+      "flavorProfile": "Short, light rolls with a thin, crackling crust and a cottony, faintly sweet crumb.",
+      "healthBenefit": "A white wheat bread that is mostly carbohydrate with some protein, enriched flour adding iron and B vitamins.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Baker's yeast",
+          "quantity": 7,
+          "unit": "g",
+          "cutPrep": "one packet active dry yeast",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 360,
+          "unit": "ml",
+          "cutPrep": "warm, 105 to 115°F (40 to 46°C)",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 440,
+          "unit": "g",
+          "cutPrep": "low-protein, unbleached",
+          "cookingMethod": "Baked",
+          "prepNote": "plus a little for shaping"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Stir the yeast into 1/2 cup of the warm water and let it foam for about 5 minutes.",
+        "Pulse the flour, salt and sugar in a food processor, add the yeast and the remaining 1 cup water, and run until a soft dough forms a ball, then 30 to 45 seconds more to knead.",
+        "Let the dough rise covered for about 1 hour, until it nearly fills the bowl. Deflate with a pulse or two and let it rise twice more, each time shorter than the last.",
+        "Divide into 8 pieces and shape each into a short torpedo about 7 inches long. Proof on a floured sheet for about 30 minutes, until just shy of doubled.",
+        "Heat the oven to 450°F (230°C) for 30 minutes with a pan of hot water on the lowest rack. Slash each roll once lengthwise, mist with water and bake in the upper third for 15 to 20 minutes, misting twice in the first 6 minutes, until deep golden and crisp all over.",
+        "Cool on a rack. The rolls are best the day they are baked; recrisp in a hot oven for 3 to 5 minutes before filling."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "From the wheat flour."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the enriched flour."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), Vietnamese Baguette (Banh Mi Tay)",
+          "url": "https://www.vietworldkitchen.com/blog/2007/05/vietnamese_bagu.html"
+        },
+        {
+          "source": "Viet World Kitchen (Andrea Nguyen), How to Find Good Bread for Bánh Mì",
+          "url": "https://www.vietworldkitchen.com/blog/2025/07/how-to-find-good-bread-for-banh-mi.html"
+        },
+        {
+          "source": "Wikipedia, Bánh mì",
+          "url": "https://en.wikipedia.org/wiki/B%C3%A1nh_m%C3%AC"
+        }
+      ],
+      "curationNote": "Andrea Nguyen food processor Vietnamese baguette (1 packet yeast, 1 1/2 cups water, 3 1/2 cups low-protein flour, salt, sugar, three rises, 450°F with steam), shaped as 8 short bánh mì rolls instead of two loaves, so baking time is shortened. Wikipedia says the bread often includes rice flour; Andrea Nguyen calls that a myth and says the lightness comes from low-protein flour and dough conditioners, so no rice flour is used. About 100 g a roll."
+    }
+  ]
+}
