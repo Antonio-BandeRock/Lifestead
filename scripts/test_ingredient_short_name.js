@@ -41,6 +41,13 @@ const CASES = [
   ['Okra canned, drained', 'Okra'],
   ['Seaweed, kelp', 'Kelp'],
   ['Chili with beans', 'Chili with Beans'],
+  ['Common salt/table salt', 'Salt'],
+  ['Seasoned salt/herb salt', 'Seasoned Salt'],
+  ['Whisky/whiskey', 'Whisky'],
+  ['Coffee/Chocolate Liqueur (with milk/cream)', 'Coffee Liqueur'],
+  ['Rum, Dark/Aged', 'Rum'],
+  ['Chard/leaf beet, braised without fat', 'Chard'],
+  ['Soupe de poissons et / ou crustacés, préemballée à réchauffer', 'Soupe de Poissons'],
 ];
 for (const [input, expected] of CASES) {
   const got = ingredientShortName(input);

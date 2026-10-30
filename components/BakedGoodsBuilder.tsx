@@ -284,7 +284,7 @@ function formatFinalIngredientText(ingredient: BakedGoodsIngredient): string {
   const details = [ingredient.cutPrep, ingredient.cookingMethod]
     .filter((value) => value && value !== 'N/A')
     .map((value) => value.toLowerCase());
-  const base = `${ingredient.quantity} ${ingredient.unit} ${ingredient.resolved.baseName}`;
+  const base = `${ingredient.quantity} ${ingredient.unit} ${ingredientShortName(ingredient.resolved.baseName)}`;
   return details.length > 0 ? `${base} (${details.join(', ')})` : base;
 }
 

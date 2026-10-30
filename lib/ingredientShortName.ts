@@ -150,15 +150,39 @@ const NEEDS_CUT_AFTER = new Set(['chicken', 'beef', 'pork', 'lamb', 'turkey', 'd
 const SMALL_WORDS = new Set(['and', 'or', 'with', 'of', 'in', 'on', 'the', 'a', 'au', 'ou', 'et', 'de', 'med', 'och', 'og']);
 
 function titleCase(text: string): string {
-  return text
-    .split(' ')
-    .filter(Boolean)
+  const words = text.split(' ').filter(Boolean);
+  // A name never ends on a joining word ("Soupe de poissons et").
+  while (words.length > 1 && SMALL_WORDS.has(words[words.length - 1].toLowerCase())) words.pop();
+  return words
     .map((word, at) => {
       const lower = word.toLowerCase();
       if (at > 0 && SMALL_WORDS.has(lower)) return lower;
       return word.length <= 1 ? word.toUpperCase() : word[0].toUpperCase() + word.slice(1).toLowerCase();
     })
     .join(' ');
+}
+
+// A segment naming one food two ways ("Common salt/table salt", "Whisky/
+// whiskey") keeps the first. When the first is one word that the last way
+// completes ("Coffee/Chocolate Liqueur", "Bitter/herb/spice liqueur"), the
+// last way's ending goes with it: Coffee Liqueur. A slash beside a number
+// (37.5/40 % vol) is left alone.
+// Only drinks are named this way often enough to join safely; "Chard/leaf
+// beet" stays Chard.
+const JOINED_ENDINGS = new Set(['liqueur', 'liqueurs', 'spirit', 'wine', 'beer']);
+
+function firstAlternative(segment: string): string {
+  if (/\d\s*\/|\/\s*\d/.test(segment) || !segment.includes('/')) return segment;
+  const ways = segment
+    .split('/')
+    .map((way) => way.trim())
+    .filter(Boolean);
+  if (ways.length < 2) return segment;
+  const first = ways[0];
+  const lastWords = ways[ways.length - 1].split(' ').filter(Boolean);
+  const ending = lastWords[lastWords.length - 1].toLowerCase();
+  if (!first.includes(' ') && lastWords.length > 1 && JOINED_ENDINGS.has(ending)) return `${first} ${lastWords.slice(1).join(' ')}`;
+  return first;
 }
 
 function isDescriptor(segment: string): boolean {
@@ -184,7 +208,7 @@ export function ingredientShortName(baseName: string): string {
     .trim();
   let segments = cleaned
     .split(',')
-    .map((segment) => segment.trim())
+    .map((segment) => firstAlternative(segment.trim()))
     .filter(Boolean);
   if (segments.length === 0) return original;
   if (segments.length > 1 && GROUP_WORDS.has(segments[0].toLowerCase())) segments = segments.slice(1);
