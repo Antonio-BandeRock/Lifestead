@@ -134,9 +134,13 @@ import {
   type MealPhotoDraft,
   type MealRecord,
   type ScheduleItemRecord,
+  type TodaysMeal,
   type TodaysReminder,
   type WellbeingCheckin,
+  listTodaysMealsWithRecipes,
 } from '../../lib/db';
+import { CookModeButton } from '../../components/CookMode';
+import { foodDisplayName } from '../../lib/ingredientShortName';
 import {
   analyzeNutrientIntake,
   findExcessRisks,
@@ -664,6 +668,9 @@ type DashboardData = {
   // G25, 2026-09-27: the meal usually logged in the slot the clock is near,
   // or null, which is most of the day.
   usualMeal: UsualMealsCard | null;
+  // Today's Meals, 2026-10-30: the scheduled meals still to come today,
+  // each with its dishes' ingredients and steps for Cook mode.
+  comingMeals: TodaysMeal[];
   // Part 2 of the usual meals redesign, 2026-09-27: tomorrow's meals left
   // open, from 4pm, to choose what each will be.
   tomorrowPacks: TomorrowSlot[];
@@ -858,6 +865,12 @@ const HOME_LENS_DESTINATIONS: Partial<
     scrollTo: true,
   },
   // What you put in.
+  todaysMeals: {
+    label: "Today's Meals",
+    icon: 'restaurant-outline',
+    color: colors.tabFood,
+    href: { pathname: '/schedule', params: { openScheduleLens: 'todaysMeals' } } as Href,
+  },
   usualMeal: {
     label: 'Your Usual Meals',
     icon: 'repeat',
@@ -1078,6 +1091,7 @@ const HOME_LENS_ORDER: HomeSectionKey[] = [
   'nextThing',
   'yourStory',
   'captureInbox',
+  'todaysMeals',
   'usualMeal',
   'logAgain',
   'scanProduct',
@@ -1524,6 +1538,7 @@ export default function HomeScreen() {
     if (key === 'weekTrend') return Boolean(weekTrend);
     if (key === 'outsideUsual') return (data?.outsideUsual.length ?? 0) > 0;
     if (key === 'pacingToday') return (data?.pacingToday.length ?? 0) > 0;
+    if (key === 'todaysMeals') return (data?.comingMeals.length ?? 0) > 0;
     if (key === 'usualMeal') return Boolean(data?.usualMeal) || usualMealLogged != null || (data?.tomorrowPacks.length ?? 0) > 0;
     return true;
   }
@@ -1777,6 +1792,9 @@ export default function HomeScreen() {
       getFuelGaugeChoice(),
       // G33, 2026-09-27. One indexed MAX over meals.eaten_at.
       getLastMealEatenAt(),
+      // Today's Meals, 2026-10-30. Today's scheduled meals with the dishes
+      // behind each, the same read Schedules > Today's Meals makes.
+      listTodaysMealsWithRecipes(date),
     ]).then(
       ([
         todaysMeals,
@@ -1808,6 +1826,7 @@ export default function HomeScreen() {
         tomorrowPacks,
         gaugeChoice,
         lastMealAt,
+        scheduledMealsWithRecipes,
       ]) => {
         setFirstName(profile.firstName);
         setGaugeCodes(gaugeChoice);
@@ -1870,6 +1889,9 @@ export default function HomeScreen() {
           yourWeek: buildYourWeek(yourWeekInputs),
           pacingToday,
           usualMeal,
+          // Still to come: neither eaten nor skipped. One that is past its
+          // time stays, since a late dinner is still cooked.
+          comingMeals: scheduledMealsWithRecipes.filter((meal) => meal.status === 'planned'),
           tomorrowPacks,
           lastMealAt,
           eatingWindow: windowFromProfile(profile),
@@ -4372,6 +4394,66 @@ export default function HomeScreen() {
     );
   }
 
+  // Today's Meals, 2026-10-30, direct request: "For each coming meal on the
+  // schedule, on the Home screen in the Food band there needs to be under
+  // food Today's meals for the person to have quick access to them for
+  // being able to cook them." Each meal still to come today, its dishes,
+  // and Cook mode on every dish that has steps. The meal's name opens
+  // Schedules > Today's Meals, where the full recipe is laid out.
+  function renderTodaysMeals() {
+    if (!homeSectionHasContent('todaysMeals') || !isHomeSectionVisible(visualPrefs, 'todaysMeals')) return null;
+    const meals = data?.comingMeals ?? [];
+    const openLens = () => router.navigate({ pathname: '/schedule', params: { openScheduleLens: 'todaysMeals' } });
+    return renderBand(
+      'todaysMeals',
+      "Today's Meals",
+      <View style={styles.bandBody}>
+        {meals.map((meal, mealIndex) => {
+          const time = formatTime12(meal.scheduledFor.slice(11, 16));
+          const kind = meal.mealType ? capitalize(meal.mealType) : 'Meal';
+          const cookable = meal.components.filter((component) => component.instructions.some((step) => step.trim().length > 0));
+          const caption = !meal.hasComponents
+            ? 'Entered directly, so there is no recipe to cook from.'
+            : meal.components.map((component) => component.name).join(', ');
+          return (
+            <View key={meal.scheduleItemId} style={styles.todaysMealBlock}>
+              <TouchableOpacity style={styles.bandWayInRow} activeOpacity={0.8} onPress={openLens}>
+                <View style={styles.reminderBody}>
+                  <Text style={styles.reminderTitle}>
+                    {time} · {kind} · {meal.title}
+                  </Text>
+                  <Text style={styles.reminderDetail}>{caption}</Text>
+                </View>
+                <Ionicons name="chevron-forward" size={18} color={colors.textSecondary} style={textShadow} />
+              </TouchableOpacity>
+              {cookable.map((component, dishIndex) => (
+                <View
+                  key={component.name}
+                  ref={mealIndex === 0 && dishIndex === 0 ? walkMark.ref('home.todaysMealCook') : undefined}
+                  collapsable={false}
+                  style={styles.todaysMealDish}
+                >
+                  {meal.components.length > 1 ? <Text style={styles.reminderDetail}>{component.name}</Text> : null}
+                  <CookModeButton
+                    steps={component.instructions}
+                    title={component.name}
+                    tabColor={colors.tabFood}
+                    ingredients={component.ingredients.map((ingredient) => ({
+                      text: `${ingredient.quantity} ${ingredient.unit} ${foodDisplayName(ingredient.foodName)}${ingredient.notes ? ` (${ingredient.notes})` : ''}`,
+                    }))}
+                  />
+                </View>
+              ))}
+              {meal.hasComponents && cookable.length === 0 ? (
+                <Text style={styles.reminderDetail}>No steps were written for these dishes yet. Editing a dish in its builder adds them.</Text>
+              ) : null}
+            </View>
+          );
+        })}
+      </View>,
+    );
+  }
+
   // Start a Workout, H11 part 4. Today's planned exercise first, then the
   // workouts on Life > Workouts, each one press from the player.
   function renderStartWorkout() {
@@ -4826,6 +4908,8 @@ export default function HomeScreen() {
         return renderCountdowns();
       case 'startWorkout':
         return renderStartWorkout();
+      case 'todaysMeals':
+        return renderTodaysMeals();
       case 'groceryQuickAdd':
         return renderGroceryQuickAdd();
       case 'dayTimeline':
@@ -5469,6 +5553,8 @@ const styles = StyleSheet.create({
   usualMealActions: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   usualMealButton: { flexGrow: 1 },
   usualMealGroup: { gap: 6 },
+  todaysMealBlock: { gap: 6 },
+  todaysMealDish: { gap: 4, alignItems: 'flex-start' },
   // The plant chips, the feeling tags and the two tabPill rows keep the colour
   // of the tab they lead to, the way every Home card does, so they are not on
   // the shared PILL look (scripts/audit_pill_style.js EXEMPT).

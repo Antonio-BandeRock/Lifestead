@@ -62,6 +62,7 @@ export const HOME_SECTION_TAB_PATH: Record<HomeSectionKey, string | null> = {
   lowStimulation: '/profile',
   logAgain: '/food',
   usualMeal: '/food',
+  todaysMeals: '/food',
   scanProduct: '/food',
   groceryList: '/life',
   groceryQuickAdd: '/life',

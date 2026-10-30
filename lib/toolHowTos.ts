@@ -226,6 +226,7 @@ export type ToolMark =
   | 'home.mealPhoto'
   | 'home.mealFind'
   | 'home.usualHad'
+  | 'home.todaysMealCook'
   | 'home.usualElse'
   | 'home.usualList'
   | 'home.usualNotToday'
@@ -2298,6 +2299,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Log or schedule a meal.', mark: 'home.mealFind' },
       ],
       forYou: 'Food opens on a list of every meal, with a search box, so you can find one by any word in its name.',
+    },
+    {
+      key: 'todaysMealsCook',
+      title: "Cook a meal on today's schedule",
+      steps: [
+        { say: 'Open the band with the name of Food, if it is closed.', mark: 'homeGroup.food', stay: true },
+        { say: "Open the band with the name of Today's Meals. It is there while a meal is still to come today.", mark: 'homeBand.todaysMeals', stay: true },
+        { say: 'Tap Cook mode under the dish you are making.', mark: 'home.todaysMealCook' },
+      ],
+      forYou: "Cook mode opens on the first step, with the ingredients each step uses and a timer for anything that cooks for a while. Tapping the meal's name opens it on Schedules with the whole recipe.",
     },
     {
       key: 'usualMeal',
