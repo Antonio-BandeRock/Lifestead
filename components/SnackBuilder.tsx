@@ -48,6 +48,7 @@ import { AppActionSheet } from './AppActionSheet';
 import { AppTextInput } from './AppTextInput';
 import { CollapsibleOverlayCard } from './CollapsibleOverlayCard';
 import { DimensionFlags } from './DimensionFlags';
+import { ingredientShortName } from '../lib/ingredientShortName';
 import { FoodSourceNote } from './FoodSourceNote';
 import { FoodLookup, type ResolvedFoodSelection } from './FoodLookup';
 import { SpokenIngredientsPanel, SpokenQueueNote } from './SpokenIngredientsPanel';
@@ -1444,11 +1445,14 @@ export function SnackBuilder({
                 <View style={styles.overviewIngredientTextWrap}>
                   {/* Real padding, not hitSlop -- see overviewRemoveButton's
                       own comment further down for why. */}
-                  <Text style={styles.overviewIngredientText}>
-                    {ingredient.resolved.baseName} — {ingredient.quantity} {ingredient.unit}
+                  <Text style={styles.overviewIngredientText} accessibilityLabel={ingredient.resolved.baseName}>
+                    {ingredientShortName(ingredient.resolved.baseName)}
                   </Text>
                   <DimensionFlags scores={ingredient.scores} onExplain={showInfoAlert} />
                 </View>
+                <Text style={styles.overviewIngredientAmount}>
+                  {ingredient.quantity} {ingredient.unit}
+                </Text>
                 <TouchableOpacity
                   style={styles.overviewRemoveButton}
                   onPress={() => confirmRemoveIngredient(index)}
@@ -1633,11 +1637,14 @@ export function SnackBuilder({
               ingredients.map((ingredient, index) => (
                 <View key={index} style={styles.overviewIngredientRow}>
                   <View style={styles.overviewIngredientTextWrap}>
-                    <Text style={styles.overviewIngredientText}>
-                      {ingredient.resolved.baseName} — {ingredient.quantity} {ingredient.unit}
+                    <Text style={styles.overviewIngredientText} accessibilityLabel={ingredient.resolved.baseName}>
+                      {ingredientShortName(ingredient.resolved.baseName)}
                     </Text>
                     <DimensionFlags scores={ingredient.scores} onExplain={showInfoAlert} />
                   </View>
+                  <Text style={styles.overviewIngredientAmount}>
+                    {ingredient.quantity} {ingredient.unit}
+                  </Text>
                   <TouchableOpacity
                     style={styles.overviewRemoveButton}
                     onPress={() => confirmRemoveIngredient(index)}
@@ -2706,6 +2713,16 @@ const styles = StyleSheet.create({
     ...typography.body,
     color: colors.textPrimary,
     ...textShadow,
+  },
+  // The amounts stand in a column of their own, 2026-10-30, direct
+  // request: "have a column for all of the amounts of the ingredients, and
+  // the trash bin."
+  overviewIngredientAmount: {
+    ...typography.body,
+    color: colors.textPrimary,
+    ...textShadow,
+    width: 92,
+    textAlign: 'right',
   },
   overviewRemoveButton: {
     padding: 10,

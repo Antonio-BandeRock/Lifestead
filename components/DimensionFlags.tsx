@@ -65,7 +65,7 @@ export function DimensionFlags({
         <TouchableOpacity
           key={`${score.subCriterion}-${index}`}
           style={styles.touch}
-          hitSlop={6}
+          hitSlop={2}
           accessibilityRole="button"
           accessibilityLabel={`${score.subCriterion}: ${score.tier}. Tap for details.`}
           onPress={() => onExplain(...buildExplanation(score, scores))}
@@ -109,10 +109,13 @@ export const SQUARES_LEGEND =
   'What the squares mean:\nEach red square under an ingredient is one serious concern this food carries, such as high sodium, high saturated fat or gluten. Tap a square to see which one. An ingredient with no squares has no serious concern recorded, or has not been rated yet. Milder concerns are left off so the squares stay worth noticing.';
 
 const styles = StyleSheet.create({
-  row: { flexDirection: 'row', alignItems: 'center', flexShrink: 0 },
+  // Spaced apart, 2026-10-30, direct request, so a finger lands on the
+  // square it meant rather than the same one again: the gap is wider than
+  // the hitSlop on both neighbours together, leaving dead space between.
+  row: { flexDirection: 'row', alignItems: 'center', flexShrink: 0, flexWrap: 'wrap', gap: 10 },
   // Padding around each square widens what a finger can land on without
   // making the square itself any bigger.
-  touch: { padding: 3 },
+  touch: { padding: 4 },
   box: { borderWidth: 1 },
   // Reuses the app's own existing status palette (colors.danger /
   // colors.statusYellow, the same pair Home's nutrient rings and Trends
