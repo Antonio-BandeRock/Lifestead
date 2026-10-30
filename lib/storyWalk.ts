@@ -81,6 +81,7 @@ export type WalkMark =
   | 'bookmarks'
   | 'profile.backup'
   | 'profile.backupOneDrive'
+  | 'profile.syncGuide'
   | 'profile.personal-info'
   | 'profile.conditions'
   | 'profile.diet-preferences'

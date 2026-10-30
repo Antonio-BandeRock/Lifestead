@@ -5808,6 +5808,22 @@ export default function ProfileScreen() {
                 </Text>
               </TouchableOpacity>
             </View>
+            {/* The written steps for pairing the two, 1.0.78.1, shown whether
+                or not a folder is set up yet, since setting one up is the
+                first step. */}
+            <View style={styles.concernRow}>
+              <Text style={styles.subLabel}>Phone and computer</Text>
+              <Text style={styles.derivedText}>
+                Every step for keeping Lifestead on your phone and on your computer in step with each other.
+              </Text>
+              <TouchableOpacity
+                ref={walkMark.ref('profile.syncGuide')}
+                style={[styles.checkinButton, walkMark('profile.syncGuide')]}
+                onPress={() => router.push('/sync-guide')}
+              >
+                <Text style={styles.checkinButtonText}>How to Set Up Both</Text>
+              </TouchableOpacity>
+            </View>
             {/* AUTOMATIC SYNC WITH THE OTHER DEVICE, 1.0.42.28. The whole
                 database, encrypted with one password, saved to the Backups
                 folder shortly after anything changes here and loaded from
