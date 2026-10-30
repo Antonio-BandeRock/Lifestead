@@ -1397,6 +1397,7 @@ export function SmoothieBuilder({
       <StepsEditor
         steps={steps}
         cookTitle={smoothieName}
+        cookIngredients={ingredients.map((ingredient) => ({ text: formatFinalIngredientText(ingredient) }))}
         onChange={setSteps}
         tabColor={tabColor}
         label={labelled ? 'Steps (optional)' : ''}

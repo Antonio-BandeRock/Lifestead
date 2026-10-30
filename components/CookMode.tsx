@@ -13,6 +13,13 @@
 //
 // The screen stays on while cook mode is open (lib/keepScreenOn.ts, R1).
 //
+// Each step lists the ingredients it uses, with their amounts, under its
+// words (lib/cookStepIngredients.ts), so nobody has to leave cook mode to
+// look back at the list (direct instruction, 2026-10-30). The whole list is
+// one tap away for anything the matching misses, and an ingredient made
+// first from another recipe opens that recipe's steps in cook mode on top,
+// with Back returning here.
+//
 // Opened from CookModeButton, which sits under a recipe's steps in
 // RecipeDetailCard (System Recipes), StepsEditor (every builder) and
 // RecipeImportView.
@@ -37,7 +44,12 @@ import {
 import { modalAnimationType } from '../lib/visualPreferences';
 import { useKeepScreenOn } from '../lib/keepScreenOn';
 import { inAppLanguage } from '@/lib/notificationWords';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, PILL, PILL_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT, PILL, PILL_TEXT } from '../constants/buttons';
+import { ingredientsForSteps, portionLabel, type CookIngredientLine } from '../lib/cookStepIngredients';
+import { t } from '../lib/i18n';
+
+/** A recipe made first, opened in cook mode over the one being cooked. */
+export type CookRecipe = { title: string; steps: string[]; ingredients: CookIngredientLine[] };
 
 type CookTimer = {
   id: string;
@@ -98,11 +110,17 @@ export function CookModeButton({
   title,
   tabColor,
   style,
+  ingredients,
+  openMadeFirst,
 }: {
   steps: string[];
   title?: string | null;
   tabColor: string;
   style?: object;
+  /** The recipe's ingredient lines, listed under the steps that use them. */
+  ingredients?: CookIngredientLine[];
+  /** Looks up a made-first recipe by its id so cook mode can open it. */
+  openMadeFirst?: (id: string) => CookRecipe | null;
 }) {
   const [open, setOpen] = useState(false);
   const usable = steps.filter((step) => step.trim().length > 0);
@@ -118,7 +136,17 @@ export function CookModeButton({
         <Ionicons name="restaurant-outline" size={16} color={colors.textPrimary} />
         <Text style={styles.openButtonText}>Cook mode</Text>
       </TouchableOpacity>
-      {open ? <CookMode visible steps={usable} title={title} tabColor={tabColor} onClose={() => setOpen(false)} /> : null}
+      {open ? (
+        <CookMode
+          visible
+          steps={usable}
+          title={title}
+          tabColor={tabColor}
+          ingredients={ingredients}
+          openMadeFirst={openMadeFirst}
+          onClose={() => setOpen(false)}
+        />
+      ) : null}
     </>
   );
 }
@@ -129,12 +157,19 @@ export function CookMode({
   title,
   tabColor,
   onClose,
+  ingredients,
+  openMadeFirst,
+  backTo,
 }: {
   visible: boolean;
   steps: string[];
   title?: string | null;
   tabColor: string;
   onClose: () => void;
+  ingredients?: CookIngredientLine[];
+  openMadeFirst?: (id: string) => CookRecipe | null;
+  /** Title of the recipe underneath, when this one was opened from it. */
+  backTo?: string | null;
 }) {
   const insets = useSafeAreaInsets();
   const key = useMemo(() => storeKey(title, steps), [title, steps]);
@@ -215,6 +250,41 @@ export function CookMode({
   const found: StepTimer[] = useMemo(() => timersInStep(step), [step]);
   const isLast = safeIndex === steps.length - 1;
   const styles2 = useMemo(() => accentStyles(tabColor), [tabColor]);
+  const lines = useMemo(() => (ingredients ?? []).filter((line) => line.text.trim().length > 0), [ingredients]);
+  const perStep = useMemo(() => ingredientsForSteps(steps, lines), [steps, lines]);
+  const inThisStep = perStep[safeIndex] ?? [];
+  const [showAll, setShowAll] = useState(false);
+  const [madeFirst, setMadeFirst] = useState<CookRecipe | null>(null);
+
+  const renderLine = (line: CookIngredientLine, key: string | number, portion: string | null) => {
+    const recipe = line.makeFirst && openMadeFirst ? openMadeFirst(line.makeFirst) : null;
+    const body = (
+      <View style={styles.ingredientText}>
+        <Text style={styles.ingredientLine}>{line.text}</Text>
+        {portion ? <Text style={[styles.ingredientPortion, styles2.accentText]}>{t(portion)}</Text> : null}
+        {recipe ? <Text style={styles.caption}>Made first. Tap for its steps.</Text> : null}
+      </View>
+    );
+    if (!recipe) {
+      return (
+        <View key={key} style={styles.ingredientRow}>
+          {body}
+        </View>
+      );
+    }
+    return (
+      <TouchableOpacity
+        key={key}
+        style={styles.ingredientRow}
+        onPress={() => setMadeFirst(recipe)}
+        accessibilityRole="button"
+        accessibilityLabel={t('Open {title} in cook mode', { title: recipe.title })}
+      >
+        {body}
+        <Ionicons name="chevron-forward" size={20} color={colors.textPrimary} />
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <Modal
@@ -234,8 +304,13 @@ export function CookMode({
               </Text>
             ) : null}
           </View>
-          <TouchableOpacity onPress={onClose} style={styles.closeButton} accessibilityRole="button" accessibilityLabel="Close cook mode">
-            <Ionicons name="close" size={26} color={colors.textPrimary} />
+          <TouchableOpacity
+            onPress={onClose}
+            style={styles.closeButton}
+            accessibilityRole="button"
+            accessibilityLabel={backTo ? t('Back to {title}', { title: backTo }) : 'Close cook mode'}
+          >
+            <Ionicons name={backTo ? 'arrow-back' : 'close'} size={26} color={colors.textPrimary} />
           </TouchableOpacity>
         </View>
 
@@ -244,6 +319,26 @@ export function CookMode({
             Step {safeIndex + 1} of {steps.length}
           </Text>
           <Text style={styles.stepText}>{step}</Text>
+
+          {inThisStep.length > 0 ? (
+            <View style={styles.ingredientList}>
+              <Text style={styles.eyebrow}>In this step</Text>
+              {inThisStep.map((item) => renderLine(item.line, item.index, item.portion ? portionLabel(item.portion) : null))}
+            </View>
+          ) : null}
+
+          {lines.length > 0 ? (
+            <TouchableOpacity
+              style={styles.allButton}
+              onPress={() => setShowAll((shown) => !shown)}
+              accessibilityRole="button"
+              accessibilityState={{ expanded: showAll }}
+            >
+              <Ionicons name={showAll ? 'chevron-up' : 'list-outline'} size={18} color={colors.textPrimary} />
+              <Text style={styles.allButtonText}>{showAll ? 'Hide all ingredients' : 'All ingredients'}</Text>
+            </TouchableOpacity>
+          ) : null}
+          {showAll ? <View style={styles.ingredientList}>{lines.map((line, at) => renderLine(line, `all-${at}`, null))}</View> : null}
 
           {found.map((timer) => {
             const caption = rangeCaption(timer);
@@ -334,6 +429,18 @@ export function CookMode({
           </TouchableOpacity>
         </View>
       </View>
+      {madeFirst ? (
+        <CookMode
+          visible
+          steps={madeFirst.steps.filter((s) => s.trim().length > 0)}
+          title={madeFirst.title}
+          tabColor={tabColor}
+          ingredients={madeFirst.ingredients}
+          openMadeFirst={openMadeFirst}
+          backTo={title?.trim() || null}
+          onClose={() => setMadeFirst(null)}
+        />
+      ) : null}
     </Modal>
   );
 }
@@ -392,6 +499,24 @@ const styles = StyleSheet.create({
   extraChip: { ...PILL },
   extraChipText: { ...PILL_TEXT },
   timerList: { gap: 8, marginTop: 4 },
+  ingredientList: { gap: 6 },
+  ingredientRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    backgroundColor: colors.surface,
+  },
+  // The row's surface again, since the text block is built apart from its row.
+  ingredientText: { flex: 1, gap: 2, backgroundColor: colors.surface },
+  ingredientLine: { ...typography.body, fontSize: 18, lineHeight: scaledLineHeight(18), color: colors.textPrimary, ...textShadow },
+  ingredientPortion: { ...typography.bodyEmphasis, ...textShadow },
+  allButton: { ...BUTTON_SECONDARY_COMPACT, flexDirection: 'row', alignSelf: 'flex-start', gap: 6 },
+  allButtonText: { ...BUTTON_SECONDARY_TEXT },
   timerRow: {
     flexDirection: 'row',
     alignItems: 'center',

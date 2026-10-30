@@ -20,7 +20,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { CookModeButton } from './CookMode';
+import { CookModeButton, type CookRecipe } from './CookMode';
+import { useWalkMark } from './WalkMark';
 import { HouseholdFitBand, useHouseholdPeople } from './HouseholdFitBand';
 import { useInfoAlert } from './InfoAlert';
 import { useConditionScope } from '../hooks/useConditionScope';
@@ -115,6 +116,15 @@ function conditionsNamedIn(noteConditionText: string): string[] {
 // Whether one conditionNotes entry belongs on the active condition's
 // page. No active condition shows everything, which is what the list form
 // below exists to replace for ordinary recipe browsing.
+
+// A recipe made first, for cook mode to open on top of the one being cooked.
+function cookRecipeById(id: string): CookRecipe | null {
+  const entry = findDigestEntryById(id);
+  const card = entry && 'recipeCard' in entry ? entry.recipeCard : undefined;
+  if (!entry || !card?.instructions?.length) return null;
+  return { title: 'title' in entry ? entry.title : '', steps: card.instructions, ingredients: card.ingredients };
+}
+
 export function conditionNoteAppliesTo(noteConditionText: string, activeConditionCode?: string): boolean {
   if (!activeConditionCode) return true;
   const named = conditionsNamedIn(noteConditionText);
@@ -238,6 +248,7 @@ export function RecipeDetailCard({
   activeConditionCode?: string;
 }) {
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
+  const walkMark = useWalkMark();
   const router = useRouter();
   const styles = useMemo(() => makeRecipeStyles(tabColor, tabTextColor), [tabColor, tabTextColor]);
 
@@ -376,7 +387,15 @@ export function RecipeDetailCard({
               {index + 1}. {step}
             </Text>
           ))}
-          <CookModeButton steps={card.instructions} title={recipeTitle} tabColor={tabColor} />
+          <View ref={walkMark.ref('recipes.cook')} collapsable={false}>
+            <CookModeButton
+              steps={card.instructions}
+              title={recipeTitle}
+              tabColor={tabColor}
+              ingredients={card.ingredients}
+              openMadeFirst={cookRecipeById}
+            />
+          </View>
         </>
       ) : null}
 

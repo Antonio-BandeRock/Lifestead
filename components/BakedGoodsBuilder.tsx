@@ -1314,6 +1314,7 @@ export function BakedGoodsBuilder({
       <StepsEditor
         steps={steps}
         cookTitle={bakedGoodName}
+        cookIngredients={ingredients.map((ingredient) => ({ text: formatFinalIngredientText(ingredient) }))}
         onChange={setSteps}
         tabColor={tabColor}
         label={labelled ? 'Steps (optional)' : ''}

@@ -27,24 +27,11 @@ const RECIPES_TS = path.join(__dirname, '..', 'lib', 'digest', 'recipes.ts');
 const beginMarker = (c) => `  // BEGIN ${c.cuisine.toUpperCase()} RECIPES`;
 const endMarker = (c) => `  // END ${c.cuisine.toUpperCase()} RECIPES`;
 
-// Database base names written as a cook would say them. Anything not here is
-// lowercased.
-const DISPLAY_NAME = {
-  'Olive Oil (Extra Virgin)': 'olive oil',
-  'Common salt/table salt': 'salt',
-  'Pepper, black, ground': 'black pepper',
-  'Spices, cinnamon, ground': 'ground cinnamon',
-  'Water, tap': 'water',
-  'Pork Lard': 'lard',
-  'Coriander (cilantro) leaves': 'cilantro',
-};
+// Database base names written as a cook would say them, from
+// scripts/ingredient_display_names.js.
+const { cookName: displayName } = require('./ingredient_display_names');
 
 const FRACTIONS = { 0.25: '¼', 0.5: '½', 0.75: '¾', 0.125: '⅛', 0.33: '⅓', 0.333: '⅓', 0.67: '⅔', 0.667: '⅔', 1.5: '1½', 2.5: '2½' };
-
-function displayName(baseName) {
-  const mapped = DISPLAY_NAME[baseName];
-  return mapped !== undefined ? mapped : baseName.toLowerCase();
-}
 
 function formatQuantity(q) {
   return FRACTIONS[q] || String(Math.round(q * 100) / 100);

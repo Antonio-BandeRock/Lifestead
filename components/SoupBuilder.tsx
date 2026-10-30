@@ -1398,6 +1398,7 @@ export function SoupBuilder({
       <StepsEditor
         steps={steps}
         cookTitle={soupName}
+        cookIngredients={ingredients.map((ingredient) => ({ text: formatFinalIngredientText(ingredient) }))}
         onChange={setSteps}
         tabColor={tabColor}
         label={labelled ? 'Steps (optional)' : ''}

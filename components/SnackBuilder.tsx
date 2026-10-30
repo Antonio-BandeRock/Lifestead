@@ -1330,6 +1330,7 @@ export function SnackBuilder({
       <StepsEditor
         steps={steps}
         cookTitle={snackName}
+        cookIngredients={ingredients.map((ingredient) => ({ text: formatFinalIngredientText(ingredient) }))}
         onChange={setSteps}
         tabColor={tabColor}
         label={labelled ? 'Steps (optional)' : ''}

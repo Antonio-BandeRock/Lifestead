@@ -1380,6 +1380,7 @@ export function SaucesBuilder({
       <StepsEditor
         steps={steps}
         cookTitle={sauceName}
+        cookIngredients={ingredients.map((ingredient) => ({ text: formatFinalIngredientText(ingredient) }))}
         onChange={setSteps}
         tabColor={tabColor}
         label={labelled ? 'Steps (optional)' : ''}

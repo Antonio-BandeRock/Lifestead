@@ -1393,6 +1393,7 @@ export function DessertBuilder({
       <StepsEditor
         steps={steps}
         cookTitle={dessertName}
+        cookIngredients={ingredients.map((ingredient) => ({ text: formatFinalIngredientText(ingredient) }))}
         onChange={setSteps}
         tabColor={tabColor}
         label={labelled ? 'Steps (optional)' : ''}

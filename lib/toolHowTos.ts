@@ -402,6 +402,7 @@ export type ToolMark =
   | 'recipes.group'
   | 'recipes.recipe'
   | 'recipes.build'
+  | 'recipes.cook'
   | 'import.read'
   | 'import.paste'
   | 'import.readLines'
@@ -3709,6 +3710,18 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Change what you need in the builder, then save it.' },
       ],
       forYou: 'It goes in My Recipes as yours, ready to log, schedule or change again.',
+    },
+    {
+      key: 'cook',
+      title: 'Cook a recipe one step at a time',
+      steps: [
+        { say: 'Open a recipe.', mark: 'recipes.recipe', stay: true },
+        { say: 'Under How to make it, tap Cook mode.', mark: 'recipes.cook' },
+        { say: 'Read the step. Under In this step are the ingredients it uses, with their amounts, and half or the rest where the step uses only part of one.' },
+        { say: 'Where an ingredient is a recipe made first, tap it to cook that recipe, then tap the back arrow to return.' },
+        { say: 'Tap All ingredients to see the whole list, and Next to move on. A step that names a time offers a timer.' },
+      ],
+      forYou: 'Everything a step needs is on the screen with it, so you never leave cook mode to look back at the list.',
     },
   ],
   '/food#importRecipe': [

@@ -1384,6 +1384,7 @@ export function HandheldsBuilder({
       <StepsEditor
         steps={steps}
         cookTitle={handheldName}
+        cookIngredients={ingredients.map((ingredient) => ({ text: formatFinalIngredientText(ingredient) }))}
         onChange={setSteps}
         tabColor={tabColor}
         label={labelled ? 'Steps (optional)' : ''}

@@ -1753,6 +1753,7 @@ export function FermentationBuilder({
       <StepsEditor
         steps={steps}
         cookTitle={fermentationName}
+        cookIngredients={ingredients.map((ingredient) => ({ text: formatFinalIngredientText(ingredient) }))}
         onChange={setSteps}
         tabColor={tabColor}
         label={labelled ? 'Steps (optional)' : ''}

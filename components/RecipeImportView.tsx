@@ -597,7 +597,12 @@ export function RecipeImportView({
                     {step}
                   </Text>
                 ))}
-                <CookModeButton steps={record.instructions} title={record.title} tabColor={colors.tabFood} />
+                <CookModeButton
+                  steps={record.instructions}
+                  title={record.title}
+                  tabColor={colors.tabFood}
+                  ingredients={record.lines.filter((line) => !line.isHeader).map((line) => ({ text: line.original }))}
+                />
               </View>
             ) : null}
           </HomeSectionBand>

@@ -8,6 +8,7 @@ import { useActiveField, useActiveInputControls } from './ActiveInputContext';
 import { AppTextInput } from './AppTextInput';
 import { useConfirmSheet } from './ConfirmSheet';
 import { CookModeButton } from './CookMode';
+import type { CookIngredientLine } from '../lib/cookStepIngredients';
 import { useInfoAlert } from './InfoAlert';
 import { VoiceInputButton } from './VoiceInputButton';
 import { useNavigationHand } from '../lib/navigationHand';
@@ -52,6 +53,7 @@ export function StepsEditor({
   placeholder,
   scrollViewRef,
   cookTitle,
+  cookIngredients,
 }: {
   steps: string[];
   onChange: (next: string[]) => void;
@@ -72,6 +74,9 @@ export function StepsEditor({
   // The dish's name, for cook mode's heading and its timer notifications
   // (G4, 2026-09-26). Cook mode is offered whenever there are steps.
   cookTitle?: string | null;
+  // The dish's ingredient lines, which cook mode lists under the steps
+  // that use them (2026-10-30).
+  cookIngredients?: CookIngredientLine[];
 }) {
   const navigationHand = useNavigationHand();
   const activeField = useActiveField();
@@ -192,7 +197,7 @@ export function StepsEditor({
         ))
       )}
 
-      {steps.length > 0 && !composing ? <CookModeButton steps={steps} title={cookTitle} tabColor={tabColor} /> : null}
+      {steps.length > 0 && !composing ? <CookModeButton steps={steps} title={cookTitle} tabColor={tabColor} ingredients={cookIngredients} /> : null}
 
       {composing ? (
         <View style={styles.stepComposer}>

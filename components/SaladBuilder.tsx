@@ -1406,6 +1406,7 @@ export function SaladBuilder({
       <StepsEditor
         steps={steps}
         cookTitle={saladName}
+        cookIngredients={ingredients.map((ingredient) => ({ text: formatFinalIngredientText(ingredient) }))}
         onChange={setSteps}
         tabColor={tabColor}
         label={labelled ? 'Steps (optional)' : ''}

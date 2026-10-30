@@ -301,6 +301,18 @@ const BY_HAND: Readonly<Record<string, string>> = {
   '{count} nights recorded across {days}, {span}.': '{count} noches registradas en {days}, {span}.',
   'Made with Lifestead {app}, using food reference data and interaction rules dated {date} (build {build}).':
     'Hecho con Lifestead {app}, con datos de referencia de alimentos y reglas de interacción con fecha {date} (compilación {build}).',
+  // Cook mode lists each step's ingredients (2026-10-30).
+  'In this step': 'En este paso',
+  'All ingredients': 'Todos los ingredientes',
+  'Hide all ingredients': 'Ocultar todos los ingredientes',
+  'Made first. Tap for its steps.': 'Se prepara antes. Toca para ver sus pasos.',
+  'half of it': 'la mitad',
+  'the rest of it': 'el resto',
+  'a third of it': 'un tercio',
+  'a quarter of it': 'un cuarto',
+  'Open {title} in cook mode': 'Abrir {title} en modo cocina',
+  'Back to {title}': 'Volver a {title}',
+  'Cook a recipe one step at a time': 'Cocinar una receta paso a paso',
 };
 
 export const ES: Readonly<Record<string, string>> = { ...ES_PARTS, ...BY_HAND };
