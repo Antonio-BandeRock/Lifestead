@@ -1696,17 +1696,16 @@ function PlotsAndPlantingsLens({
                       ) : null}
                       {planting.status === 'planned' ? (
                         <Text style={styles.captionText}>
-                          To sow {dateLabel(planting.plantedAt)}
-                          {planting.plantedAt < todayDateString() ? `, ${daysBetween(planting.plantedAt, todayDateString())} days ago` : ''}
-                          {planting.expectedHarvestStart ? `; first harvest then about ${dateLabel(planting.expectedHarvestStart)}` : ''}.
+                          {t('To sow {date}', { date: dateLabel(planting.plantedAt) })}
+                          {planting.plantedAt < todayDateString() ? t(', {count} days ago', { count: daysBetween(planting.plantedAt, todayDateString()) }) : ''}
+                          {planting.expectedHarvestStart ? t('; first harvest then about {date}', { date: dateLabel(planting.expectedHarvestStart) }) : ''}.
                         </Text>
                       ) : null}
                       {planting.status === 'growing' && planting.expectedHarvestStart ? (
                         <Text style={styles.captionText}>
-                          First harvest expected {dateLabel(planting.expectedHarvestStart)}
                           {planting.expectedHarvestEnd && planting.expectedHarvestEnd !== planting.expectedHarvestStart
-                            ? ` to ${dateLabel(planting.expectedHarvestEnd)}`
-                            : ''}
+                            ? t('First harvest expected {start} to {end}', { start: dateLabel(planting.expectedHarvestStart), end: dateLabel(planting.expectedHarvestEnd) })
+                            : t('First harvest expected {date}', { date: dateLabel(planting.expectedHarvestStart) })}
                           .
                         </Text>
                       ) : null}

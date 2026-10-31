@@ -226,6 +226,15 @@ const BY_HAND: Readonly<Record<string, string>> = {
   More: 'Más',
   Less: 'Menos',
 
+  // ---- Profile > Backup & Restore, labels put together from the kind of
+  // device, so the coverage script never sees them whole.
+  'Load the Copy from Your Phone': 'Cargar la copia de tu teléfono',
+  'Load the Copy from Your Computer': 'Cargar la copia de tu computadora',
+  'You are reading this on your phone. Do the phone steps first, then the computer steps.':
+    'Estás leyendo esto en tu teléfono. Haz primero los pasos del teléfono y luego los de la computadora.',
+  'You are reading this on your computer. Do the phone steps first, then the computer steps.':
+    'Estás leyendo esto en tu computadora. Haz primero los pasos del teléfono y luego los de la computadora.',
+
   // ---- Profile > Appearance & Navigation.
   'Appearance & Navigation': 'Apariencia y navegación',
   'Navigation Hand': 'Mano para navegar',

@@ -530,7 +530,9 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
               <View style={styles.nestedForm}>
                 <Text style={styles.fieldLabel}>Before {kindRemoval.name} is removed</Text>
                 <Text style={styles.captionText}>
-                  {kindRemoval.count === 1 ? '1 cost is' : `${kindRemoval.count} costs are`} recorded under {kindRemoval.name}. Pick the kind to move {kindRemoval.count === 1 ? 'it' : 'them'} to; nothing is deleted.
+                  {kindRemoval.count === 1
+                    ? t('1 cost is recorded under {name}. Pick the kind to move it to; nothing is deleted.', { name: kindRemoval.name })
+                    : t('{count} costs are recorded under {name}. Pick the kind to move them to; nothing is deleted.', { count: kindRemoval.count, name: kindRemoval.name })}
                 </Text>
                 <View style={styles.fieldRow}>
                   <Text style={styles.fieldLabel}>Move to</Text>

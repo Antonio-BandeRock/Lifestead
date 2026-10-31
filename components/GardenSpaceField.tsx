@@ -50,6 +50,7 @@ import {
 import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
+import { t } from '../lib/i18n';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
 const TAB_COLOR = colors.tabGarden;
@@ -187,8 +188,13 @@ export function GardenSpaceField({ label, selected, onSelect, width = 220 }: Pro
         <View style={styles.nestedForm}>
           <Text style={styles.fieldLabel}>Before {removal.name} is removed</Text>
           <Text style={styles.captionText}>
-            {removal.counts.current === 1 ? '1 area is' : `${removal.counts.current} areas are`} recorded under {removal.name}. Pick the space to move {removal.counts.current === 1 ? 'it' : 'them'} to; nothing is deleted.
-            {removal.counts.past > 0 ? ` ${removal.counts.past === 1 ? 'A past area keeps' : `${removal.counts.past} past areas keep`} ${removal.name} as part of ${removal.counts.past === 1 ? 'its' : 'their'} record.` : ''}
+            {removal.counts.current === 1
+              ? t('1 area is recorded under {name}. Pick the space to move it to; nothing is deleted.', { name: removal.name })
+              : t('{count} areas are recorded under {name}. Pick the space to move them to; nothing is deleted.', { count: removal.counts.current, name: removal.name })}
+            {removal.counts.past === 1 ? ` ${t('A past area keeps {name} as part of its record.', { name: removal.name })}` : ''}
+            {removal.counts.past > 1
+              ? ` ${t('{count} past areas keep {name} as part of their record.', { count: removal.counts.past, name: removal.name })}`
+              : ''}
           </Text>
           <View style={styles.fieldRow}>
             <Text style={styles.fieldLabel}>Move to</Text>

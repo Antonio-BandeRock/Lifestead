@@ -348,11 +348,12 @@ export function MyWholeFoodsView({ onClose, onChanged }: { onClose: () => void; 
           >
             <Text style={styles.intro}>
               {harvests && harvests.length === 1
-                ? `One harvest kept for eating, on ${harvests[0].harvestedAt.slice(0, 10)}`
-                : `${harvests?.length ?? 0} harvests kept for eating${harvests && harvests.length > 0 ? ` since ${harvests[0].harvestedAt.slice(0, 10)}` : ''}`}
-              {shares.length === 1 ? ', and one thing given to you.' : shares.length > 1 ? `, and ${shares.length} things given to you.` : '.'}{' '}
-              Each is priced only at what you have recorded paying for that food on a grocery list, in the same unit.
-              Anything else is counted and not priced, because a guessed price would be a made-up saving.
+                ? t('One harvest kept for eating, on {date}', { date: harvests[0].harvestedAt.slice(0, 10) })
+                : harvests && harvests.length > 0
+                  ? t('{count} harvests kept for eating since {date}', { count: harvests.length, date: harvests[0].harvestedAt.slice(0, 10) })
+                  : t('No harvests kept for eating yet')}
+              {shares.length === 1 ? t(', and one thing given to you.') : shares.length > 1 ? t(', and {count} things given to you.', { count: shares.length }) : '.'}{' '}
+              {t('Each is priced only at what you have recorded paying for that food on a grocery list, in the same unit. Anything else is counted and not priced, because a guessed price would be a made-up saving.')}
             </Text>
             <View style={styles.moneyCard}>
               <Text style={styles.moneyTotal}>{describeGardenNet(picture.summary)}</Text>

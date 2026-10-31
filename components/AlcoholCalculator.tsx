@@ -14,6 +14,7 @@ import {
   calculateAlcoholEstimate,
 } from '../lib/alcoholCalculator';
 import type { AlcoholCalculatorOverride } from '../lib/db';
+import { t } from '../lib/i18n';
 import { parseAmountValue } from '../lib/measurement';
 import { volumeToMl } from '../lib/unitConversion';
 import { PopoverSelect } from './PopoverSelect';
@@ -256,8 +257,9 @@ export function AlcoholCalculatorPanel({
                 </Text>
               )}
               <Text style={styles.resultLine}>
-                Ethanol: {roundTo(result.ethanolGramsRetained, 1)} g
-                {retentionOption.retainedPercent < 100 ? ` (${roundTo(result.ethanolGramsRaw, 1)} g before cooking)` : ''}
+                {retentionOption.retainedPercent < 100
+                  ? t('Ethanol: {grams} g ({raw} g before cooking)', { grams: roundTo(result.ethanolGramsRetained, 1), raw: roundTo(result.ethanolGramsRaw, 1) })
+                  : t('Ethanol: {grams} g', { grams: roundTo(result.ethanolGramsRetained, 1) })}
               </Text>
               <Text style={styles.resultLine}>Calories from alcohol: ~{Math.round(result.ethanolCalories)} kcal</Text>
               {parsedSugar > 0 && (

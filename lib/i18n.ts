@@ -425,8 +425,23 @@ function lookup(table: Compiled, english: string, depth: number): string | undef
 // and screen code and the test scripts can still load it on their own.
 let missListener: ((english: string) => void) | null = null;
 
+// What the table has already turned into another language. A Text drawing
+// words that t() or tl() translated looks them up a second time, and that
+// second look finds nothing, since the table is keyed by the English; those
+// are kept here so the listener never hears Spanish reported as missing.
+// Filled only while a listener is on, and emptied when it grows large.
+const produced = new Set<string>();
+const PRODUCED_LIMIT = 20000;
+
+function rememberProduced(words: string): void {
+  if (!missListener) return;
+  if (produced.size >= PRODUCED_LIMIT) produced.clear();
+  produced.add(words);
+}
+
 export function setMissListener(listener: ((english: string) => void) | null): void {
   missListener = listener;
+  if (!listener) produced.clear();
 }
 
 /** The words in `language`, or the English itself when the table has none. */
@@ -434,9 +449,13 @@ export function translateIn(language: AppLanguage, english: string): string {
   const table = compile(language);
   if (!table || typeof english !== 'string') return english;
   const remembered = table.memo.get(english);
-  if (remembered !== undefined) return remembered;
+  if (remembered !== undefined) {
+    if (remembered !== english) rememberProduced(remembered);
+    return remembered;
+  }
   const looked = lookup(table, english, 0);
-  if (looked === undefined && missListener) missListener(english);
+  if (looked === undefined && missListener && !produced.has(english)) missListener(english);
+  if (looked !== undefined) rememberProduced(looked);
   const found = looked ?? english;
   if (table.memo.size >= MEMO_LIMIT) table.memo.clear();
   table.memo.set(english, found);
@@ -471,11 +490,13 @@ export function hasTranslation(language: AppLanguage, english: string): boolean 
 export function t(english: string, values?: Readonly<Record<string, string | number>>): string {
   const words = translateIn(getLanguage(), english);
   if (!values) return words;
-  return oneStop(
+  const filled = oneStop(
     words.replace(/\{(\w+)\}/g, (whole, name: string) =>
       Object.prototype.hasOwnProperty.call(values, name) ? String(values[name]) : whole,
     ),
   );
+  if (words !== english) rememberProduced(filled);
+  return filled;
 }
 
 /** A value of the app's own (a unit, a label from a list) in the app's language. */
@@ -528,6 +549,7 @@ function composite(children: unknown[], language: AppLanguage): unknown[] | null
     if (match.index > last) out.push(found.slice(last, match.index));
     const index = Number(match[1] ?? match[2]);
     const element = elements[index];
+    if (match[3] !== undefined) rememberProduced(match[3]);
     if (element) {
       out.push(
         match[1] !== undefined

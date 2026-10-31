@@ -1198,8 +1198,9 @@ export default function LifeScreen() {
           {picture.loggedIncome > 0 ? renderStat('Extra income logged', formatFinanceMoney(picture.loggedIncome)) : null}
           {picture.incompleteRecords > 0 ? (
             <Text style={styles.footnote}>
-              {picture.incompleteRecords} {picture.incompleteRecords === 1 ? 'record has' : 'records have'} no amount
-              recorded, so this is a floor rather than a total. Nothing is estimated to fill the gap.
+              {picture.incompleteRecords === 1
+                ? t('1 record has no amount recorded, so this is a floor rather than a total. Nothing is estimated to fill the gap.')
+                : t('{count} records have no amount recorded, so this is a floor rather than a total. Nothing is estimated to fill the gap.', { count: picture.incompleteRecords })}
             </Text>
           ) : null}
           {tracked.kitchenCoveredLines > 0 ? (

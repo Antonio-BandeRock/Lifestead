@@ -1997,15 +1997,15 @@ function MealsLens() {
                         <Text style={styles.rowTitle}>{item.title}</Text>
                         <Text style={styles.rowMeta}>
                           {capitalize(item.mealType ?? '')}
-                          {item.sourceFavoriteId ? ' · Favorite' : item.sourceMealId ? ' · Template' : ''}
+                          {item.sourceFavoriteId ? ` · ${t('Favorite')}` : item.sourceMealId ? ` · ${t('Template')}` : ''}
                           {statusSuffix(item.status)}
                           {repeatCaption(item)}
-                          {item.linkedDeviceCalendarEventId ? ' · On phone calendar' : ''}
+                          {item.linkedDeviceCalendarEventId ? ` · ${t('On phone calendar')}` : ''}
                           {/* Marked, not hidden or warned about again: the
                               person already made this call deliberately, so
                               this is a plain factual label for their own
                               records and for trends, not a nag. */}
-                          {item.outsideEatingWindow ? ' · Outside eating window' : ''}
+                          {item.outsideEatingWindow ? ` · ${t('Outside eating window')}` : ''}
                           {mealServingsLabel(item.servings) ? ` · ${mealServingsLabel(item.servings)}` : ''}
                           {cookCaption(item.leftoverCount) ? ` · ${cookCaption(item.leftoverCount)}` : ''}
                           {item.leftoverOf || item.leftoverOfMeal
@@ -3618,7 +3618,9 @@ function DailyPlanFullReport({
       <Text style={[styles.label, { color: ratingColors.text }]}>{ratingWord}</Text>
       <Text style={[styles.helperText, { color: ratingColors.text }]}>{healthRatingLabel(day.healthRating)}</Text>
       <Text style={styles.helperText}>
-        Total carbohydrate: {Math.round(day.totalCarbGrams)}g{day.carbCeiling ? ` (target: under ${day.carbCeiling}g)` : ''}
+        {day.carbCeiling
+          ? t('Total carbohydrate: {grams}g (target: under {ceiling}g)', { grams: Math.round(day.totalCarbGrams), ceiling: day.carbCeiling })
+          : t('Total carbohydrate: {grams}g', { grams: Math.round(day.totalCarbGrams) })}
       </Text>
       {energyLines(day.nutrientTotals, day.energy, day.carbCeiling !== null).map((line, index) => (
         <Text key={`energy-${index}`} style={styles.helperText}>
@@ -6817,7 +6819,7 @@ function AppointmentsLens() {
                         {item.providerName ? ` · ${item.providerName}` : ''}
                         {item.location ? ` · ${item.location}` : ''}
                         {statusSuffix(item.status)}
-                        {item.linkedDeviceCalendarEventId ? ' · On phone calendar' : ''}
+                        {item.linkedDeviceCalendarEventId ? ` · ${t('On phone calendar')}` : ''}
                       </Text>
                       <RecordPhotos ownerKind="appointment" ownerId={item.id} tabColor={TAB_COLOR} title={item.title} />
                     </View>

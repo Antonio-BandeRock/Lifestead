@@ -224,11 +224,13 @@ export function FinanceMoneySection({ tabColor }: Props) {
             </View>
             {interest.monthly > 0 ? (
               <Text style={styles.footnote}>
-                Your debts are costing about {formatAccountMoney(interest.monthly)} a month in interest, roughly{' '}
-                {formatAccountMoney(interest.monthly * 12)} a year, before you pay a penny off them. That is a bill in
-                every sense that matters. It is just not one anybody sends you.
-                {interest.missingRate > 0
-                  ? ` ${interest.missingRate} more ${interest.missingRate === 1 ? 'debt has' : 'debts have'} no rate recorded and ${interest.missingRate === 1 ? 'is' : 'are'} not in that figure.`
+                {t('Your debts are costing about {monthly} a month in interest, roughly {yearly} a year, before you pay a penny off them. That is a bill in every sense that matters. It is just not one anybody sends you.', {
+                  monthly: formatAccountMoney(interest.monthly),
+                  yearly: formatAccountMoney(interest.monthly * 12),
+                })}
+                {interest.missingRate === 1 ? ` ${t('1 more debt has no rate recorded and is not in that figure.')}` : ''}
+                {interest.missingRate > 1
+                  ? ` ${t('{count} more debts have no rate recorded and are not in that figure.', { count: interest.missingRate })}`
                   : ''}
               </Text>
             ) : null}
@@ -471,9 +473,9 @@ export function FinanceMoneySection({ tabColor }: Props) {
 
             {incomplete.length > 0 ? (
               <Text style={styles.footnote}>
-                {incomplete.map((a) => a.name).join(', ')} {incomplete.length === 1 ? 'has' : 'have'} no interest rate or
-                minimum payment recorded, so {incomplete.length === 1 ? 'it is' : 'they are'} left out rather than
-                treated as interest-free.
+                {incomplete.length === 1
+                  ? t('{names} has no interest rate or minimum payment recorded, so it is left out rather than treated as interest-free.', { names: incomplete[0].name })
+                  : t('{names} have no interest rate or minimum payment recorded, so they are left out rather than treated as interest-free.', { names: incomplete.map((a) => a.name).join(', ') })}
               </Text>
             ) : null}
           </>

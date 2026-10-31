@@ -176,7 +176,7 @@ import { VaultClosedBand } from '../../components/VaultClosedBand';
 import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
 import { useListedClosed } from '../../lib/vaultSession';
-import { t } from '../../lib/i18n';
+import { t, tl } from '../../lib/i18n';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
 import { PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
 import { foodDisplayName } from '../../lib/ingredientShortName';
@@ -3375,9 +3375,12 @@ export default function TrendsScreen() {
                         />
                         {latest ? (
                           <Text style={styles.caption}>
-                            {`Most recently ${formatMoney(latest.price)} ${groceryPriceUnitLabel(latest.priceUnit ?? 'total')}`}
-                            {latest.storeName ? ` at ${latest.storeName}` : ''}
-                            {summary ? ` · on ${summary.timesListed} ${summary.timesListed === 1 ? 'list' : 'lists'} so far` : ''}
+                            {latest.storeName
+                              ? t('Most recently {price} {unit} at {store}', { price: formatMoney(latest.price), unit: tl(groceryPriceUnitLabel(latest.priceUnit ?? 'total')), store: latest.storeName })
+                              : t('Most recently {price} {unit}', { price: formatMoney(latest.price), unit: tl(groceryPriceUnitLabel(latest.priceUnit ?? 'total')) })}
+                            {summary
+                              ? ` · ${summary.timesListed === 1 ? t('on 1 list so far') : t('on {count} lists so far', { count: summary.timesListed })}`
+                              : ''}
                           </Text>
                         ) : null}
                         {saleCount > 0 ? (

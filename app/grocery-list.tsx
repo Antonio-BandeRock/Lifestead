@@ -92,6 +92,7 @@ import {
 import { ThumbEndRow } from '../components/ThumbEndRow';
 import { useWalkMark } from '../components/WalkMark';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { t } from '../lib/i18n';
 import { foodDisplayName } from '../lib/ingredientShortName';
 
 const DEFAULT_DAYS = 3;
@@ -1017,7 +1018,9 @@ export default function GroceryListScreen() {
           </View>
           {totals.unresolvedPriceCount > 0 ? (
             <Text style={styles.muted}>
-              {totals.unresolvedPriceCount} {totals.unresolvedPriceCount === 1 ? 'line needs' : 'lines need'} a weight before the price can be counted.
+              {totals.unresolvedPriceCount === 1
+                ? t('1 line needs a weight before the price can be counted.')
+                : t('{count} lines need a weight before the price can be counted.', { count: totals.unresolvedPriceCount })}
             </Text>
           ) : null}
           {kitchenHoldLine ? <Text style={styles.muted}>{kitchenHoldLine}</Text> : null}

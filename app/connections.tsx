@@ -64,6 +64,7 @@ import { isDesktopApp } from '../lib/desktop/bridge';
 import { explainNotYet } from '../lib/notYet';
 import { phoneOnlyNotice } from '../lib/desktop/phoneOnly';
 import { getMyKeyFingerprint } from '../lib/deviceIdentity';
+import { t } from '../lib/i18n';
 import {
   isLanSyncAvailable,
   startLanSync,
@@ -552,8 +553,11 @@ export default function ConnectionsScreen() {
               </TouchableOpacity>
               {lanSync.phase === 'listening' ? (
                 <Text style={styles.fingerprintHint}>
-                  Listening on this Wi-Fi{lanSync.origin ? ` at ${lanSync.origin.replace(/^https?:\/\//, '')}` : ''}.
-                  Tap Done Syncing once both phones say what they got.
+                  {lanSync.origin
+                    ? t('Listening on this Wi-Fi at {address}. Tap Done Syncing once both phones say what they got.', {
+                        address: lanSync.origin.replace(/^https?:\/\//, ''),
+                      })
+                    : t('Listening on this Wi-Fi. Tap Done Syncing once both phones say what they got.')}
                 </Text>
               ) : null}
               {lanSync.phase === 'listening' || lanSync.phase === 'stopped' || lanSync.phase === 'failed'
