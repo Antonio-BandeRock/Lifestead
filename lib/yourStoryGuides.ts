@@ -95,7 +95,9 @@ export type GuideRecordKey =
   | 'goals'
   | 'medicalBill'
   | 'insurancePlan'
-  | 'familyInMealPlan';
+  | 'familyInMealPlan'
+  | 'interest'
+  | 'interestProject';
 
 // Where a step belongs in the order that leads to a result soonest.
 export type GuideWhen = 'start' | 'daily' | 'whenItHappens' | 'onceThereIsData' | 'more';
@@ -1393,6 +1395,7 @@ export const TAB_NAMES: Record<string, string> = {
   '/schedule': 'Schedules',
   '/trends': 'Trends',
   '/garden': 'Garden',
+  '/interests': 'Interests',
   '/insights': 'Insights',
   '/food': 'Food',
   '/log': 'Signals',
@@ -1457,6 +1460,10 @@ export const LENS_NAMES: Record<string, Record<string, string>> = {
     seeds: 'Seeds',
     growingCosts: 'Growing Costs',
     horticulture: 'Horticulture',
+  },
+  '/interests': {
+    myInterests: 'My Interests',
+    projects: 'Projects',
   },
   '/insights': {
     nutrients: 'Nutrients',

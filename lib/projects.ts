@@ -39,6 +39,9 @@ export type Project = {
   name: string;
   about: string | null;
   area: ProjectArea;
+  /** One record the project belongs to, such as an interest, if named. */
+  linkKind: string | null;
+  linkId: string | null;
   status: ProjectStatus;
   /** When it was paused, and the note of where it was left off. */
   pausedAt: string | null;

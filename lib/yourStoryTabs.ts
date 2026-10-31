@@ -93,6 +93,16 @@ export const TAB_GUIDES: TabGuideDef[] = [
     open: route('/garden'),
   },
   {
+    path: '/interests',
+    title: 'Interests',
+    group: 'goesIn',
+    beats: [],
+    gives: 'The things you do because you want to, each kept as one record that can grow from following to practising, sharing or earning, with projects that belong to them.',
+    needs: [],
+    readyLine: 'Works from the start. Add an interest whenever one comes to mind.',
+    open: route('/interests'),
+  },
+  {
     path: '/schedule',
     title: 'Schedules',
     group: 'goesIn',

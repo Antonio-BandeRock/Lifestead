@@ -32,6 +32,7 @@ const TABS = [
   { path: '/trends', file: 'app/(tabs)/trends.tsx', list: 'TRENDS_LENSES', param: 'openTrendsLens' },
   { path: '/reports', file: 'lib/reportKinds.ts', list: 'REPORT_KINDS', param: 'openReportsLens' },
   { path: '/garden', file: 'app/(tabs)/garden.tsx', list: 'GARDEN_LENSES', param: 'openGardenLens' },
+  { path: '/interests', file: 'app/(tabs)/interests.tsx', list: 'LENSES', param: 'openInterestsLens' },
   { path: '/life', file: 'app/(tabs)/life.tsx', list: 'LIFE_LENSES', param: 'openLifeLens' },
 ];
 

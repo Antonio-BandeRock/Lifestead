@@ -221,7 +221,7 @@ const tabRow = (guide, pathName) => guide.tabs.find((tab) => tab.def.path === pa
 
 const freshTabs = tabs.buildTabGuide(fresh);
 same(freshTabs.before.map((entry) => entry.def.key), ['beats', 'backup'], 'before choosing, the question and a backup come first');
-same(freshTabs.tabs.length, 8, 'every tab is listed from the start');
+same(freshTabs.tabs.length, 9, 'every tab is listed from the start');
 check(freshTabs.tabs.every((tab) => tab.status === 'waitingOnChoice'), 'each tab waits on the question');
 same(freshTabs.startHere, null, 'nothing marked start here while the question is open');
 check(tabs.tabGuideLine(freshTabs, '').startsWith('First: Choose the parts of your life'), 'the folded line asks the question');

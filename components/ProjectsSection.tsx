@@ -1,6 +1,7 @@
 // Projects (2026-10-30): something with several steps that may take weeks,
 // be put down and picked up again, and end either finished or stopped.
-// Life > Projects shows every one; the Interests tab will show its own.
+// Life > Projects shows every one; the Interests tab shows its own, each
+// able to name the interest it belongs to (link_kind 'interest').
 //
 // A project leads with its next step, so opening one after a month away
 // says what to do now rather than what was planned. Pausing asks where it
@@ -44,6 +45,8 @@ import {
   updateProjectStep,
 } from '../lib/projectsDb';
 import { readTodoWhen } from '../lib/todos';
+import { interestChoices, type Interest } from '../lib/interests';
+import { listInterests } from '../lib/interestsDb';
 import { addCountdown } from '../lib/countdownDb';
 import { calendarDaysBetween } from '../lib/countdown';
 import { explainNotYet } from '../lib/notYet';
@@ -68,7 +71,7 @@ type Props = {
   scope: ProjectScope;
 };
 
-type ProjectForm = { id: string | null; name: string; about: string; when: string; area: ProjectArea };
+type ProjectForm = { id: string | null; name: string; about: string; when: string; area: ProjectArea; interestId: string | null };
 type StepForm = { id: string; text: string; waitingOn: string; when: string };
 
 /** A day read from typed words, ignoring any repeat. */
@@ -87,6 +90,7 @@ const DAY_HELP = 'The day could not be read. Try "tomorrow", "15 November" or "n
 
 export function ProjectsSection({ tabColor, scope }: Props) {
   const [projects, setProjects] = useState<Project[]>([]);
+  const [interests, setInterests] = useState<Interest[]>([]);
   const [steps, setSteps] = useState<ProjectStep[]>([]);
   const [form, setForm] = useState<ProjectForm | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
@@ -103,6 +107,7 @@ export function ProjectsSection({ tabColor, scope }: Props) {
     const list = await listProjects(scope);
     setProjects(list);
     setSteps(await listProjectSteps(list.map((project) => project.id)));
+    if (scope === 'interests') setInterests(await listInterests());
   }, [scope]);
 
   useFocusEffect(
@@ -126,12 +131,19 @@ export function ProjectsSection({ tabColor, scope }: Props) {
 
   function startNew() {
     setFormError(null);
-    setForm({ id: null, name: '', about: '', when: '', area: scope === 'everything' ? 'life' : scope });
+    setForm({ id: null, name: '', about: '', when: '', area: scope === 'everything' ? 'life' : scope, interestId: null });
   }
 
   function startChange(project: Project) {
     setFormError(null);
-    setForm({ id: project.id, name: project.name, about: project.about ?? '', when: project.dueOn ?? '', area: project.area });
+    setForm({
+      id: project.id,
+      name: project.name,
+      about: project.about ?? '',
+      when: project.dueOn ?? '',
+      area: project.area,
+      interestId: project.linkKind === 'interest' ? project.linkId : null,
+    });
   }
 
   async function saveForm() {
@@ -146,7 +158,14 @@ export function ProjectsSection({ tabColor, scope }: Props) {
       setFormError(DAY_HELP);
       return;
     }
-    const input = { name, about: form.about, area: form.area, dueOn: day.dueOn };
+    const input = {
+      name,
+      about: form.about,
+      area: form.area,
+      dueOn: day.dueOn,
+      // Only the Interests tab offers the choice, so only it changes the link.
+      ...(scope === 'interests' ? { link: form.interestId ? { kind: 'interest', id: form.interestId } : null } : {}),
+    };
     if (form.id) {
       await updateProject(form.id, input);
       setForm(null);
@@ -351,6 +370,25 @@ export function ProjectsSection({ tabColor, scope }: Props) {
             })}
           </View>
         ) : null}
+        {scope === 'interests' && interests.length > 0 ? (
+          <>
+            <Text style={styles.captionText}>Which interest it belongs to (optional)</Text>
+            <View style={styles.pillRow}>
+              {[...interestChoices(interests, form.interestId), { label: 'None', value: '' }].map((choice) => {
+                const on = (form.interestId ?? '') === choice.value;
+                return (
+                  <TouchableOpacity
+                    key={choice.value || 'none'}
+                    style={[styles.pill, on && styles.pillActive]}
+                    onPress={() => setForm({ ...form, interestId: choice.value || null })}
+                  >
+                    <Text style={[styles.pillText, on ? styles.pillTextOn : null]}>{choice.label}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </>
+        ) : null}
         {formError ? <Text style={styles.errorText}>{formError}</Text> : null}
         <ThumbRow primary="first" style={styles.actionRow}>
           <TouchableOpacity ref={walkMark.ref('project.save')} style={styles.primaryButton} onPress={saveForm}>
@@ -460,7 +498,12 @@ export function ProjectsSection({ tabColor, scope }: Props) {
     const leftOff = describeLeftOff(project);
     const ordered = orderSteps(own);
     const firstStepId = ordered.find((step) => !step.doneAt)?.id;
-    const where = scope === 'everything' && project.area !== 'life' ? PROJECT_AREA_LABELS[project.area] : null;
+    const where =
+      scope === 'interests'
+        ? (project.linkKind === 'interest' ? interests.find((interest) => interest.id === project.linkId)?.name : null) ?? null
+        : scope === 'everything' && project.area !== 'life'
+          ? PROJECT_AREA_LABELS[project.area]
+          : null;
     return (
       <View key={project.id} style={[styles.projectBlock, { borderLeftColor: tabColor }]}>
         <TouchableOpacity

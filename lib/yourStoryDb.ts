@@ -199,6 +199,8 @@ const GUIDE_RECORD_SQL: Record<GuideRecordKey, string[]> = {
   medicalBill: ['SELECT MIN(created_at) AS at FROM finance_medical_bills'],
   insurancePlan: ['SELECT MIN(created_at) AS at FROM finance_insurance_plans'],
   familyInMealPlan: ['SELECT MIN(created_at) AS at FROM family_members WHERE include_in_meal_plan = 1'],
+  interest: ['SELECT MIN(created_at) AS at FROM interests'],
+  interestProject: ["SELECT MIN(created_at) AS at FROM projects WHERE area = 'interests'"],
 };
 
 export async function lookForGuideRecords(db: Db): Promise<GuideRecords> {

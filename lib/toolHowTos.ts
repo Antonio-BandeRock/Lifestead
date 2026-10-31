@@ -72,6 +72,14 @@ export type ToolMark =
   | 'project.pause'
   | 'project.finish'
   | 'project.countDays'
+  | 'interest.explained'
+  | 'interest.new'
+  | 'interest.save'
+  | 'interest.open'
+  | 'interest.stage'
+  | 'interest.leftOff'
+  | 'interest.change'
+  | 'interest.stepBack'
   | 'work.overview'
   | 'work.todos'
   | 'work.have'
@@ -2661,6 +2669,112 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Count the Days to It on the open project.', mark: 'project.countDays' },
       ],
       forYou: 'A counter starts in Life > Days Until and lands on the project day.',
+    },
+  ],
+  '/interests#myInterests': [
+    {
+      key: 'add',
+      title: 'Add an interest',
+      steps: [
+        { say: 'Tap Add an Interest.', mark: 'interest.new', stay: true },
+        { say: 'Give it a name, and a kind if one fits. The last entry in the list lets you name a kind yourself.' },
+        { say: 'Tap the ways you are part of it: Following, Practising, Sharing or Earning. Any of them, or none yet.' },
+        { say: 'Tap Add the Interest.', mark: 'interest.save' },
+      ],
+      forYou: 'It goes into the list, and the ways you chose are kept with the day you chose them.',
+    },
+    {
+      key: 'explained',
+      title: 'Read what an interest and a hobby are here',
+      steps: [
+        { say: 'Tap Interests and hobbies at the top.', mark: 'interest.explained' },
+      ],
+      forYou: 'Four short parts on how one record holds something you follow, practise, share or earn from.',
+    },
+    {
+      key: 'stage',
+      title: 'Change how you are part of it',
+      steps: [
+        { say: 'Tap the interest to open it.', mark: 'interest.open', stay: true },
+        { say: 'Tap a stage to turn it on or off.', mark: 'interest.stage' },
+      ],
+      forYou: 'The change is kept with its day under How it has changed, so the interest shows how it grew.',
+    },
+    {
+      key: 'leftOff',
+      title: 'Note where you left off',
+      steps: [
+        { say: 'Tap the interest to open it.', mark: 'interest.open', stay: true },
+        { say: 'Tap Where I Left Off.', mark: 'interest.leftOff', stay: true },
+        { say: 'Write a few words and tap Keep It.' },
+      ],
+      forYou: 'The note shows first the next time you open the interest, with the day you wrote it.',
+    },
+    {
+      key: 'change',
+      title: 'Change its name, kind or since when',
+      steps: [
+        { say: 'Tap the interest to open it.', mark: 'interest.open', stay: true },
+        { say: 'Tap Change.', mark: 'interest.change', stay: true },
+        { say: 'Change what you need and tap Save.' },
+      ],
+      forYou: 'A kind you named can be renamed there too, and the new name reaches every interest that has it.',
+    },
+    {
+      key: 'stepBack',
+      title: 'Step back from an interest, or come back to it',
+      steps: [
+        { say: 'Tap the interest to open it.', mark: 'interest.open', stay: true },
+        { say: 'Tap Step Back, or Come Back to It on one under Stepped Back.', mark: 'interest.stepBack' },
+      ],
+      forYou: 'Nothing is lost. It waits under Stepped Back with its history and its projects.',
+    },
+  ],
+  '/interests#projects': [
+    {
+      key: 'start',
+      title: 'Start a project for an interest',
+      steps: [
+        { say: 'Tap Start a Project.', mark: 'project.new', stay: true },
+        { say: 'Give it a name, and pick the interest it belongs to if you like.' },
+        { say: 'Tap Start the Project.', mark: 'project.save' },
+      ],
+      forYou: 'It opens straight away, ready for its first step, and shows on Life > Projects as well.',
+    },
+    {
+      key: 'steps',
+      title: 'Add the steps',
+      steps: [
+        { say: 'Tap the project to open it.', mark: 'project.open', stay: true },
+        { say: 'Type a step in the box at the bottom and tap Add.', mark: 'project.addStep' },
+      ],
+      forYou: 'The first step not done shows under the project name as Next.',
+    },
+    {
+      key: 'stepDone',
+      title: 'Tick a step',
+      steps: [
+        { say: 'Tap the box beside the step.', mark: 'project.stepDone' },
+      ],
+      forYou: 'It moves below the plan with the day it was done.',
+    },
+    {
+      key: 'pause',
+      title: 'Put a project down, or pick it up again',
+      steps: [
+        { say: 'Tap Pause on an open project, or Go Again on a paused one.', mark: 'project.pause', stay: true },
+        { say: 'When pausing, write where you left off if you like, then tap Pause It.' },
+      ],
+      forYou: 'Where you left off is the first thing you read when you open it again.',
+    },
+    {
+      key: 'change',
+      title: 'Change which interest it belongs to',
+      steps: [
+        { say: 'Tap Change on the open project.', mark: 'project.change', stay: true },
+        { say: 'Pick another interest, or None, and tap Save.' },
+      ],
+      forYou: 'The project stays where it is with every step it has.',
     },
   ],
   '/life#todos': [

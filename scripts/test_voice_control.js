@@ -45,7 +45,7 @@ check('ampersand', t.voiceKey('Backup & Restore'), 'backup and restore');
 const dirSource = fs.readFileSync(require.resolve('../lib/voiceLensDirectory.ts'), 'utf8');
 const dir = {};
 new Function('exports', ts.transpileModule(dirSource, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2019 } }).outputText)(dir);
-const titles = { '/': 'Home', '/food': 'Food', '/schedule': 'Schedules', '/log': 'Signals', '/insights': 'Insights', '/trends': 'Trends', '/reports': 'Reports', '/garden': 'Garden', '/life': 'Life' };
+const titles = { '/': 'Home', '/food': 'Food', '/schedule': 'Schedules', '/log': 'Signals', '/insights': 'Insights', '/trends': 'Trends', '/reports': 'Reports', '/garden': 'Garden', '/interests': 'Interests', '/life': 'Life' };
 const elsewhere = dir.VOICE_LENS_DIRECTORY.filter((l) => l.tab !== '/').map((l) => ({ id: `${l.tab}|${l.key}`, name: l.label, tab: titles[l.tab] }));
 const home = { tabs: screen.tabs, lenses: [], controls: named(['Save']), fields: [], currentTab: 'Home', elsewhere };
 check('every tab is in the directory', Object.keys(titles).every((tab) => dir.VOICE_LENS_DIRECTORY.some((l) => l.tab === tab)), true);

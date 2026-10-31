@@ -138,6 +138,7 @@ export default function TabLayout() {
                 constants/tabs.ts's own TAB_ROUTES entry for the full
                 reasoning. */}
             <Tabs.Screen name="garden" options={{ title: 'Garden' }} />
+            <Tabs.Screen name="interests" options={{ title: 'Interests' }} />
             {/* The 10th real tab, added 2026-09-04 -- see
                 constants/tabs.ts's own TAB_ROUTES entry for the full
                 reasoning, including why the icon is an abstract mark. */}

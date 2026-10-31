@@ -10605,6 +10605,41 @@ async function runDatabaseInitialization() {
       CREATE INDEX IF NOT EXISTS idx_web_pages_note ON web_pages(capture_note_id);
     `);
 
+    // Interests, the tenth tab (2026-10-30, lib/interests.ts). One row per
+    // interest, its four stages as 0/1 columns that can be on in any mix.
+    // kind is a built-in code or the person's own words, so a kind nobody
+    // uses any more simply stops appearing. retired_at is stepping back and
+    // keeps everything. interest_stage_changes is append-only: one line each
+    // time a stage is turned on or off, dated by the local day.
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS interests (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        kind TEXT,
+        about TEXT,
+        following INTEGER NOT NULL DEFAULT 0,
+        practising INTEGER NOT NULL DEFAULT 0,
+        sharing INTEGER NOT NULL DEFAULT 0,
+        earning INTEGER NOT NULL DEFAULT 0,
+        started_on TEXT,
+        left_off TEXT,
+        left_off_at TEXT,
+        retired_at TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE TABLE IF NOT EXISTS interest_stage_changes (
+        id TEXT PRIMARY KEY,
+        interest_id TEXT NOT NULL,
+        stage TEXT NOT NULL,
+        turned_on INTEGER NOT NULL,
+        changed_on TEXT NOT NULL,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_interest_stage_changes_interest ON interest_stage_changes(interest_id);
+    `);
+
     // Ties a lightweight daily during-a-trial check-in (or its escalated
     // full symptom log -- same table either way, see recordCheckin's own
     // comment) back to the real trial it belongs to, so a trial's own

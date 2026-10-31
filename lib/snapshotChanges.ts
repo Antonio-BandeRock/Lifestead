@@ -251,6 +251,8 @@ const AREAS: readonly Area[] = [
   // 2026-10-30. A step is part of its project, so a project and its five
   // steps read as one more project.
   { one: 'project', many: 'projects', count: ['projects'], quiet: ['project_steps'] },
+  // 2026-10-30. A stage turned on or off is part of its interest.
+  { one: 'interest', many: 'interests', count: ['interests'], quiet: ['interest_stage_changes'] },
   {
     one: 'piece of grow setup',
     many: 'pieces of grow setup',

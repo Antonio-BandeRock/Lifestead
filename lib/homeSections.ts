@@ -144,6 +144,7 @@ export const HOME_SECTION_TAB_PATH: Record<HomeSectionKey, string | null> = {
   tutorialsLife: '/life',
   tutorialsFood: '/food',
   tutorialsGarden: '/garden',
+  tutorialsInterests: '/interests',
   tutorialsSchedule: '/schedule',
   tutorialsSignals: '/log',
   tutorialsInsights: '/insights',
@@ -157,6 +158,7 @@ export const TUTORIAL_SECTION_PATH = {
   tutorialsLife: '/life',
   tutorialsFood: '/food',
   tutorialsGarden: '/garden',
+  tutorialsInterests: '/interests',
   tutorialsSchedule: '/schedule',
   tutorialsSignals: '/log',
   tutorialsInsights: '/insights',
@@ -309,7 +311,7 @@ export function reorderWithinHomeGroup(
 // HOME_GROUP_MENU_ORDER to TAB_ROUTES. Spelled out here rather than read
 // from constants/tabs.ts because this file imports nothing at runtime.
 export const HOME_GROUP_MENU_ORDER_BEFORE_1070 = ['/', '/profile', '/food', '/schedule', '/log', '/insights', '/trends', '/reports', '/garden', '/life', '/digest'];
-export const HOME_GROUP_MENU_ORDER = ['/', '/life', '/food', '/garden', '/schedule', '/log', '/insights', '/trends', '/reports', '/profile', '/digest'];
+export const HOME_GROUP_MENU_ORDER = ['/', '/life', '/food', '/garden', '/interests', '/schedule', '/log', '/insights', '/trends', '/reports', '/profile', '/digest'];
 
 // A saved order whose groups still run in the old menu order was never
 // rearranged by group, so its groups take the new order once, each keeping

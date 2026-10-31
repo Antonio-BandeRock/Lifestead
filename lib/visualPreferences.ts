@@ -393,6 +393,7 @@ export type HomeSectionKey =
   | 'tutorialsLife'
   | 'tutorialsFood'
   | 'tutorialsGarden'
+  | 'tutorialsInterests'
   | 'tutorialsSchedule'
   | 'tutorialsSignals'
   | 'tutorialsInsights'
@@ -450,6 +451,8 @@ export const ALL_HOME_SECTION_KEYS: HomeSectionKey[] = [
   'daysUntil',
   'logHarvest',
   'tutorialsGarden',
+  // Interests.
+  'tutorialsInterests',
   // Schedules. mealsLoggedToday is stated here beside its tab-mates
   // rather than further down: the grouping pulled it up anyway, and a
   // default order that needs regrouping to read correctly is a trap.
@@ -570,6 +573,7 @@ export const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
   tutorialsLife: 'Life Tutorials',
   tutorialsFood: 'Food Tutorials',
   tutorialsGarden: 'Garden Tutorials',
+  tutorialsInterests: 'Interests Tutorials',
   tutorialsSchedule: 'Schedules Tutorials',
   tutorialsSignals: 'Signals Tutorials',
   tutorialsInsights: 'Insights Tutorials',

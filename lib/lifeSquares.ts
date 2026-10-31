@@ -29,10 +29,10 @@
 
 export const SQUARE_MIN = 44;
 
-export type SquareTab = 'food' | 'schedule' | 'log' | 'insights' | 'life' | 'garden';
+export type SquareTab = 'food' | 'schedule' | 'log' | 'insights' | 'life' | 'garden' | 'interests';
 
 /** The order parts of life are listed in, which is the tab order. */
-export const SQUARE_TAB_ORDER: SquareTab[] = ['life', 'food', 'garden', 'schedule', 'log', 'insights'];
+export const SQUARE_TAB_ORDER: SquareTab[] = ['life', 'food', 'garden', 'interests', 'schedule', 'log', 'insights'];
 
 export const SQUARE_TAB_PATH: Record<SquareTab, string> = {
   food: '/food',
@@ -41,6 +41,7 @@ export const SQUARE_TAB_PATH: Record<SquareTab, string> = {
   insights: '/insights',
   life: '/life',
   garden: '/garden',
+  interests: '/interests',
 };
 
 export const SQUARE_TAB_NAME: Record<SquareTab, string> = {
@@ -50,6 +51,7 @@ export const SQUARE_TAB_NAME: Record<SquareTab, string> = {
   insights: 'Insights',
   life: 'Life',
   garden: 'Garden',
+  interests: 'Interests',
 };
 
 const LENS_PARAM: Record<SquareTab, string> = {
@@ -59,6 +61,7 @@ const LENS_PARAM: Record<SquareTab, string> = {
   insights: 'openInsightsLens',
   life: 'openLifeLens',
   garden: 'openGardenLens',
+  interests: 'openInterestsLens',
 };
 
 export type SquareSource = {
@@ -110,6 +113,7 @@ export const SQUARE_SOURCES: SquareSource[] = [
   { key: 'routine', label: 'Routine finished', tab: 'life', lens: 'routines', lensLabel: 'Routines', icon: 'footsteps-outline', table: 'routine_runs', column: 'completed_at', where: 'completed_at IS NOT NULL', title: "COALESCE(NULLIF(routine_name, ''), 'A routine')" },
   { key: 'upkeep', label: 'Upkeep done', tab: 'life', lens: 'upkeep', lensLabel: 'Upkeep', icon: 'construct-outline', table: 'upkeep_doings', column: 'done_on', title: "COALESCE(NULLIF(item_name, ''), 'Upkeep')" },
   { key: 'todo', label: 'Task done', tab: 'life', lens: 'todos', lensLabel: 'Tasks', icon: 'checkbox-outline', table: 'todo_doings', column: 'done_at', where: "done_at IS NOT NULL AND kind = 'done'", title: "COALESCE((SELECT title FROM todos WHERE todos.id = todo_doings.todo_id), 'A task')" },
+  { key: 'interestStage', label: 'Interest changed', tab: 'interests', lens: 'myInterests', lensLabel: 'My Interests', icon: 'color-palette-outline', table: 'interest_stage_changes', column: 'changed_on', title: "CASE turned_on WHEN 1 THEN 'Started ' ELSE 'Stepped back from ' END || stage || ' ' || COALESCE((SELECT name FROM interests WHERE interests.id = interest_stage_changes.interest_id), 'an interest')" },
   { key: 'projectStep', label: 'Project step done', tab: 'life', lens: 'projects', lensLabel: 'Projects', icon: 'layers-outline', table: 'project_steps', column: 'done_at', where: 'done_at IS NOT NULL', title: "COALESCE(NULLIF(text, ''), 'A project step')" },
   { key: 'money', label: 'Money in or out', tab: 'life', lens: 'finances', lensLabel: 'Finances', icon: 'wallet-outline', table: 'finance_entries', column: 'occurred_on', title: "COALESCE(NULLIF(description, ''), NULLIF(category, ''), 'An entry')" },
   { key: 'work', label: 'Work check-in', tab: 'life', lens: 'work', lensLabel: 'Work', icon: 'briefcase-outline', table: 'work_checkins', column: 'week_of', title: "'Work check-in'" },

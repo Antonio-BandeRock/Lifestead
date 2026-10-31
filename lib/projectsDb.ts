@@ -18,6 +18,8 @@ type ProjectRow = {
   name: string;
   about: string | null;
   area: string;
+  linkKind: string | null;
+  linkId: string | null;
   status: string;
   pausedAt: string | null;
   pausedNote: string | null;
@@ -39,7 +41,7 @@ type StepRow = {
   createdAt: string;
 };
 
-const PROJECT_COLUMNS = `id, name, about, area, status, paused_at AS pausedAt, paused_note AS pausedNote,
+const PROJECT_COLUMNS = `id, name, about, area, link_kind AS linkKind, link_id AS linkId, status, paused_at AS pausedAt, paused_note AS pausedNote,
   finished_at AS finishedAt, stopped_at AS stoppedAt, due_on AS dueOn, created_at AS createdAt`;
 const STEP_COLUMNS = `id, project_id AS projectId, text, position, parked, waiting_on AS waitingOn, due_on AS dueOn,
   done_at AS doneAt, created_at AS createdAt`;
@@ -53,6 +55,8 @@ function fromProjectRow(row: ProjectRow): Project {
     name: row.name,
     about: row.about,
     area: AREAS.includes(row.area as ProjectArea) ? (row.area as ProjectArea) : 'life',
+    linkKind: row.linkKind,
+    linkId: row.linkId,
     status: STATUSES.includes(row.status as ProjectStatus) ? (row.status as ProjectStatus) : 'active',
     pausedAt: row.pausedAt,
     pausedNote: row.pausedNote,
@@ -120,6 +124,8 @@ export type ProjectInput = {
   about?: string | null;
   area: ProjectArea;
   dueOn: string | null;
+  /** Left out, an edit keeps the link it had; null clears it. */
+  link?: { kind: string; id: string } | null;
 };
 
 export async function addProject(input: ProjectInput): Promise<string> {
@@ -127,12 +133,14 @@ export async function addProject(input: ProjectInput): Promise<string> {
   const id = newId('project');
   const now = new Date().toISOString();
   await db.runAsync(
-    `INSERT INTO projects (id, name, about, area, status, due_on, created_at, updated_at)
-     VALUES (?, ?, ?, ?, 'active', ?, ?, ?)`,
+    `INSERT INTO projects (id, name, about, area, link_kind, link_id, status, due_on, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, 'active', ?, ?, ?)`,
     id,
     cleanProjectText(input.name),
     cleanOrNull(input.about),
     input.area,
+    input.link?.kind ?? null,
+    input.link?.id ?? null,
     input.dueOn,
     now,
     now,
@@ -151,6 +159,14 @@ export async function updateProject(id: string, input: ProjectInput): Promise<vo
     new Date().toISOString(),
     id,
   );
+  if (input.link !== undefined) {
+    await db.runAsync(
+      'UPDATE projects SET link_kind = ?, link_id = ? WHERE id = ?',
+      input.link?.kind ?? null,
+      input.link?.id ?? null,
+      id,
+    );
+  }
 }
 
 /**

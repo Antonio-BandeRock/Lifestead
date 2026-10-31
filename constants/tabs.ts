@@ -34,7 +34,7 @@ export type TabRoute = {
 //   Schedules, Signals           what you do daily
 //   Insights, Trends, Reports    what it tells you
 //
-// Interests goes between Garden and Schedules when it is built. The swipe
+// Interests sits between Garden and Schedules since 1.0.77.11. The swipe
 // wraps, so Reports leads back to Home and Home back to Reports. Until
 // 1.0.70.1 it read Food, Schedules, Signals, then the three outputs, then
 // Garden and Life as the wider world, which put Life, the tab the rest sit
@@ -96,6 +96,11 @@ export const TAB_ROUTES: TabRoute[] = [
   // as well. Placed by meaning since 2026-09-05, see the block comment
   // above.
   { path: '/garden', title: 'Garden', icon: 'leaf', color: colors.tabGarden },
+  // 2026-10-30. What a person follows, practises, shares or earns from, one
+  // record per interest, with its projects beside it. Rose, reserved for it
+  // on 2026-10-29. A palette rather than a trophy or a briefcase, since the
+  // tab never pushes an interest toward earning.
+  { path: '/interests', title: 'Interests', icon: 'color-palette', color: colors.tabInterests },
   { path: '/schedule', title: 'Schedules', icon: 'calendar', color: colors.tabSchedules },
   { path: '/log', title: 'Signals', icon: 'compass', color: colors.tabBioCompass },
   { path: '/insights', title: 'Insights', icon: 'medical', color: colors.tabInsights },

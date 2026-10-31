@@ -307,7 +307,7 @@ export const EATING_STYLES: EatingStyle[] = [
 
 // THE TOUR: WHAT EACH TAB IS FOR.
 
-export type TourPath = '/' | '/life' | '/schedule' | '/log' | '/food' | '/garden' | '/insights' | '/trends' | '/reports';
+export type TourPath = '/' | '/life' | '/schedule' | '/log' | '/food' | '/garden' | '/interests' | '/insights' | '/trends' | '/reports';
 
 // 1.0.52.6, direct instruction, 2026-09-25: "We need to describe Life. What
 // does the Life tab actually do for you? How does it help you take control of
@@ -361,6 +361,7 @@ const scheduleLens = lens('/schedule', 'openScheduleLens');
 const signalsLens = lens('/log', 'openSignalsLens');
 const foodLens = lens('/food', 'openFoodLens');
 const gardenLens = lens('/garden', 'openGardenLens');
+const interestsLens = lens('/interests', 'openInterestsLens');
 const insightsLens = lens('/insights', 'openInsightsLens');
 const profile = route('/profile');
 
@@ -444,6 +445,10 @@ export const TOUR_LENS_NAMES: Record<string, Record<string, string>> = {
     harvestLog: 'Harvest Log',
     growingCosts: 'Growing Costs',
     horticulture: 'Horticulture',
+  },
+  '/interests': {
+    myInterests: 'My Interests',
+    projects: 'Projects',
   },
   '/insights': {
     nutrients: 'Nutrients',
@@ -592,6 +597,10 @@ export const TOUR_LENS_LINES: Record<string, Record<string, string>> = {
     harvestLog: 'Every harvest, how much, and where it went.',
     growingCosts: 'Every cost of growing, including the electricity an indoor grow uses.',
     horticulture: 'Reading on how to grow, soil life and the plants themselves.',
+  },
+  '/interests': {
+    myInterests: 'Each thing you are into, and how you are part of it: following, practising, sharing or earning, with the day each one started.',
+    projects: 'Projects with steps that belong to an interest, the same projects Life keeps, shown here on their own.',
   },
   '/insights': {
     nutrients: 'Each nutrient against your target for the day, and the foods and supplements it came from.',
@@ -857,6 +866,37 @@ export const TOUR_TABS: TourTabDef[] = [
     open: route('/garden'),
   },
   {
+    path: '/interests',
+    title: 'Interests',
+    question: 'What is Interests for?',
+    answer:
+      'Interests keeps the things you do because you want to. Each one is a single record that can grow: something you only read about can become something you practise, then something you share with others, and some people earn a little from it too. Each change is kept with its day, a note says where you left off, and anything with steps becomes a project that belongs to it.',
+    relyOn: [
+      'To keep every interest in one place, including the ones you have stepped back from.',
+      'To remember where you left off, so coming back after months takes no working out.',
+      'To hold the steps of a project that belongs to an interest, with the next one showing first.',
+    ],
+    groups: [
+      { title: 'What you are into', lenses: ['myInterests'] },
+      { title: 'What you are making of it', lenses: ['projects'] },
+    ],
+    steps: [
+      {
+        doThis: 'Add something you are into.',
+        why: 'Everything else on Interests belongs to one.',
+        record: 'interest',
+        destination: interestsLens('myInterests'),
+      },
+      {
+        doThis: 'Start a project for it, if it has steps.',
+        why: 'What to do next then shows first whenever you come back to it.',
+        record: 'interestProject',
+        destination: interestsLens('projects'),
+      },
+    ],
+    open: route('/interests'),
+  },
+  {
     path: '/schedule',
     title: 'Schedules',
     question: 'What is Schedules for?',
@@ -1090,6 +1130,7 @@ const LENS_PARAMS: Partial<Record<TourPath, string>> = {
   '/log': 'openSignalsLens',
   '/food': 'openFoodLens',
   '/garden': 'openGardenLens',
+  '/interests': 'openInterestsLens',
   '/insights': 'openInsightsLens',
   '/trends': 'openTrendsLens',
   '/reports': 'openReportsLens',

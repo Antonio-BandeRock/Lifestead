@@ -129,7 +129,7 @@ same('describe nothing', M.describeTabs([]), 'nothing recorded');
 // --- sources --------------------------------------------------------------------------
 const keys = M.SQUARE_SOURCES.map((s) => s.key);
 ok('source keys unique', new Set(keys).size === keys.length, keys);
-const tabFiles = { food: 'food.tsx', schedule: 'schedule.tsx', log: 'log.tsx', insights: 'insights.tsx', life: 'life.tsx', garden: 'garden.tsx' };
+const tabFiles = { food: 'food.tsx', schedule: 'schedule.tsx', log: 'log.tsx', insights: 'insights.tsx', life: 'life.tsx', garden: 'garden.tsx', interests: 'interests.tsx' };
 const tabSource = {};
 for (const source of M.SQUARE_SOURCES) {
   const file = tabFiles[source.tab];
@@ -169,6 +169,12 @@ if (desktopDb && fs.existsSync(desktopDb)) {
   const db = new DatabaseSync(desktopDb, { readOnly: true });
   for (const source of M.SQUARE_SOURCES) {
     const where = source.where ? ` AND (${source.where})` : '';
+    // A table added since the installed desktop app was built is not in its
+    // database yet; say so rather than fail on a schema that is only behind.
+    if (!db.prepare("SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ?").get(source.table)) {
+      console.log(`(${source.key}: ${source.table} is not in the installed desktop database yet; query skipped)`);
+      continue;
+    }
     try {
       db.prepare(`SELECT CAST(rowid AS TEXT) AS rid, ${source.title} AS title, ${source.column} AS stamp FROM ${source.table} WHERE ${source.column} >= ? AND ${source.column} < ?${where} LIMIT 1`).all('2000-01-01', '2100-01-01');
     } catch (error) {
