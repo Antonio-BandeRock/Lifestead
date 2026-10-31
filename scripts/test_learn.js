@@ -104,7 +104,15 @@ check('sitting done with more now', S.describeSittingDone(0, 5, null, today) ===
 check('sitting done with more tomorrow', S.describeSittingDone(2, 0, '2026-10-31', today) === 'That is every card ready for now. More are ready tomorrow. 2 things you now know.');
 check('grade labels', S.LEARN_GRADES.map((g) => S.LEARN_GRADE_LABELS[g]).join() === 'Not Yet,With Effort,Knew It,Easily');
 
-// The decks.
+// The decks. Entry ids are read from the reading corpus files as text, so
+// the corpus need not load here.
+const digestDir = path.join(root, 'lib/digest');
+const entryIds = new Set();
+for (const file of fs.readdirSync(digestDir)) {
+  if (!file.endsWith('.ts')) continue;
+  const text = fs.readFileSync(path.join(digestDir, file), 'utf8');
+  for (const m of text.matchAll(/\bid: '([^']+)'/g)) entryIds.add(m[1]);
+}
 const cardIds = new Set();
 check('there is a deck', D.LEARN_DECKS.length > 0);
 for (const deck of D.LEARN_DECKS) {
@@ -119,6 +127,7 @@ for (const deck of D.LEARN_DECKS) {
     check(`${card.id}: front and back`, Boolean(card.front && card.back));
     const problems = K.cardProblems(card);
     check(`${card.id}: parts fit its kind`, problems.length === 0, problems);
+    if (card.entryId) check(`${card.id}: entry ${card.entryId} is in the reading`, entryIds.has(card.entryId));
     if (card.source) {
       check(`${card.id}: source named`, Boolean(card.source.source));
       check(`${card.id}: source is https`, /^https:\/\//.test(card.source.url), card.source.url);
@@ -128,6 +137,8 @@ for (const deck of D.LEARN_DECKS) {
 }
 const kindsUsed = new Set(D.LEARN_DECKS.flatMap((deck) => deck.cards.map((card) => K.kindOf(card))));
 check('every kind is used in a ready-made deck', K.LEARN_KINDS.every((kind) => kindsUsed.has(kind)), [...kindsUsed]);
+const fromReading = D.LEARN_DECKS.filter((deck) => deck.cards.length > 0 && deck.cards.every((card) => card.entryId));
+check('at least three decks are drawn from the reading', fromReading.length >= 3, fromReading.map((d) => d.id));
 check('cardById finds a card', D.cardById('evidence-rct')?.deck.id === 'evidence');
 
 // The kinds of question.

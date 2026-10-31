@@ -128,6 +128,7 @@ export type ToolMark =
   | 'learn.turn'
   | 'learn.grade'
   | 'learn.source'
+  | 'learn.entry'
   | 'capture.keepInLibrary'
   | 'work.overview'
   | 'work.todos'
@@ -3053,7 +3054,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Turn a card over. When it rests on a study, the study is named under the answer.' },
         { say: 'Tap the name to open the study.', mark: 'learn.source' },
       ],
-      forYou: 'Cards with no study named are about how to weigh a claim, rather than a finding.',
+      forYou: 'A card drawn from the reading opens its entry instead, where every study it rests on is listed.',
+    },
+    {
+      key: 'entry',
+      title: 'Open the reading a card comes from',
+      steps: [
+        { say: 'Study The Gut and What Feeds It, What Gets Added to Food or Living Soil, and turn a card over.' },
+        { say: 'Under the answer, Read the Entry names the entry the card is drawn from. Tap it to open the entry where it lives.', mark: 'learn.entry' },
+      ],
+      forYou: 'Each of these cards says only what its entry says, so the entry’s sources and the strength of its evidence stand behind the card.',
     },
   ],
   '/interests#makingItPay': readingHowTos('Making It Pay', 'Each entry names the source and year of every figure in it, and says who the figures cover.'),

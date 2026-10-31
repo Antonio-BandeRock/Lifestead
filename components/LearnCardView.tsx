@@ -9,10 +9,13 @@
 // decides the grade, since the person knows whether a right pick was a guess.
 // The sentences describePick and describeBlank in lib/learnKinds.ts give
 // are put together here from pieces, so each piece is translated.
+// A card drawn from the reading (entryId) also offers Read the Entry, which
+// opens that entry where it lives, so its citations stay one tap away.
 // The parent gives this a key per card, so every card starts fresh.
 
 import { useState } from 'react';
 import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useRouter } from 'expo-router';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import {
@@ -26,6 +29,8 @@ import {
   PILL_TEXT,
 } from '../constants/buttons';
 import type { LearnCard } from '../lib/learnDecks';
+import { findDigestEntryById } from '../lib/digest';
+import { routeForDigestEntry } from '../lib/digestNavigation';
 import {
   KIND_PROMPTS,
   PAIRS_ALL_MATCHED,
@@ -52,6 +57,8 @@ type Props = {
 
 export function LearnCardView({ card, day, onGrade }: Props) {
   const walkMark = useWalkMark();
+  const router = useRouter();
+  const entry = card.entryId ? findDigestEntryById(card.entryId) : undefined;
   const kind = kindOf(card);
   const seed = `${card.id}:${day}`;
   const [turned, setTurned] = useState(false);
@@ -348,6 +355,19 @@ export function LearnCardView({ card, day, onGrade }: Props) {
               accessibilityRole="link"
             >
               <Text style={styles.linkText}>{card.source.source}</Text>
+            </TouchableOpacity>
+          ) : null}
+          {entry ? (
+            <TouchableOpacity
+              ref={walkMark.ref('learn.entry')}
+              style={walkMark('learn.entry')}
+              onPress={() => {
+                if (card.entryId) router.push(routeForDigestEntry(card.entryId));
+              }}
+              accessibilityRole="link"
+            >
+              <Text style={styles.captionText}>Read the Entry</Text>
+              <Text style={styles.linkText}>{'title' in entry ? entry.title : entry.foodName}</Text>
             </TouchableOpacity>
           ) : null}
           <Text style={styles.captionText}>How did that go?</Text>
