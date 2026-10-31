@@ -5,15 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <title>Lifestead: Is It for You?</title>
-<meta name="description" content="Lifestead is still being built and is not available yet. Here is what it does: food and health worked out for your body, the details of daily life held for you, care for the people you look after, and a garden kept as a living record.">
+<meta name="description" content="Lifestead holds the whole of a life in one place: food and health worked out for your body, the details of every day, the people you look after, your home, money, work, garden, bees and interests, and in the end your life told in your words. On your devices and nowhere else.">
 <!-- C21, 2026-10-02: a page somebody can read before installing anything.
      It collects nothing: no form, no cookie, no analytics, no script, no
-     font or image from anywhere else. Everything it describes is built.
-     No database sizes are claimed until the unified food database is
-     finished and counted (direct instruction, 2026-10-02). -->
+     font or image from anywhere else. No database sizes are claimed until
+     the unified food database is finished and counted (direct instruction,
+     2026-10-02).
+     2026-10-31: rewritten by direct instruction to describe the finished
+     app rather than what is working today ("it is the completed app that
+     should be talked about"). The notice at the top says so. The rules the
+     app keeps still bind this page: never a diagnosis, never diet as a
+     treatment for ADHD or autism, safety never behind a paywall, no company
+     server. -->
 <style>
   :root {
-    --bg: #1f2a2c; --surface: #2a3739; --text: #f4efe6; --muted: #c9c2b6; --accent: #e6c98f; --line: #3a4a4d; --notice: #4a3b1c; --notice-text: #f7e6c0; 
+    --bg: #1f2a2c; --surface: #2a3739; --text: #f4efe6; --muted: #c9c2b6; --accent: #e6c98f; --line: #3a4a4d; --notice: #4a3b1c; --notice-text: #f7e6c0;
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 Georgia, "Times New Roman", serif; }
@@ -46,13 +52,14 @@
 <body>
 <main>
   <div class="notice" role="note">
-    <span class="head">Under construction</span>
-    Lifestead is still being built. It is not in any app store and cannot be downloaded yet. This page describes what is working today, so you can decide whether it is for you when it opens.
+    <span class="head">Coming soon</span>
+    Lifestead is being tested now and is not in the app stores yet. This page describes Lifestead as it will be when it opens to everyone, so you can decide whether it is for you.
   </div>
 
   <h1>Everything in your life has a place.</h1>
-  <p class="lead">Lifestead keeps the whole of a person’s life in one place: what you eat and how your body answers, your medicines, your days, the people you look after, your money and your garden. Then it does the hard part for you. It connects the pieces, finds what your records are saying, and turns it into plain next steps.</p>
-  <p class="lead">It began with food and autoimmune health, and that is where it goes deepest. It has grown into a place for everything a person needs to keep track of, and you do not need a diagnosis to use it.</p>
+  <p class="lead">Lifestead holds the whole of a life in one place: what you eat and how your body answers, your medicines, your days, the people you look after, your home, your money, your work, your garden and the things you love doing. Then it does the hard part for you. It connects the pieces, finds what your records are saying, and turns it into plain next steps.</p>
+  <p class="lead">It began with food and autoimmune health, and that is where it goes deepest. It has grown into a place for everything a person needs to keep track of. You do not need a diagnosis to use it, and you can start with whichever part of life matters to you today.</p>
+  <p class="lead">And in the end it gives something back: the story of your life, told through your eyes from what you kept over the years, to leave with the people you choose.</p>
 
   <h2 id="who">Who it is for</h2>
   <p>Find yourself below. Each one opens the part of the page written for you.</p>
@@ -60,21 +67,29 @@
     <a href="#body"><strong>You were just diagnosed</strong><span>and nobody told you what to eat now. Every food is scored and explained for your condition, with recipes and a meal plan ready to follow.</span></a>
     <a href="#body"><strong>You live with more than one condition</strong><span>and the advice for one fights the advice for the other. Lifestead weighs them all at once, so one plate works for every one of them.</span></a>
     <a href="#body"><strong>You think food is behind how you feel</strong><span>but cannot pin it down. Log what you eat and how you feel, and the app looks for what tends to come before a bad day, then helps you test it.</span></a>
-    <a href="#day"><strong>Your head is too full</strong><span>with ADHD, autism, grief, recovery or just too much. Routines, reminders you answer from the notification, and one tap to record that the stove is off.</span></a>
-    <a href="#care"><strong>You look after other people</strong><span>a family at the table, a partner, a parent. Meal plans that work for everyone, a shared shopping list, an emergency card and a caregiver report.</span></a>
+    <a href="#day"><strong>Your head is too full</strong><span>with ADHD, autism, grief, recovery or just too much. Routines, reminders you answer from the lock screen, and one clear next thing on the first screen.</span></a>
+    <a href="#care"><strong>You look after other people</strong><span>children, a partner, a parent. Meal plans for everyone at the table, a caregiver link, an emergency card and the family health history in one tree.</span></a>
     <a href="#body"><strong>You juggle medicines and supplements</strong><span>and never know when to take what. They sit on the same clock as your meals, and the app says when one is too close to a food that gets in its way.</span></a>
-    <a href="#body"><strong>You see doctors often</strong><span>and lose track between visits. Eight ready-made reports, for your doctor, nutritionist, trainer or caregiver, made on your phone or computer and sent nowhere.</span></a>
+    <a href="#body"><strong>You see doctors often</strong><span>and lose track between visits. Ready-made reports for your doctor, nutritionist, trainer or caregiver, made on your device and sent nowhere.</span></a>
     <a href="#body"><strong>You want to eat well, no diagnosis needed</strong><span>and would rather get nutrients from food than a pill. Fuel gauges show where you stand today and what food can supply.</span></a>
-    <a href="#garden"><strong>You grow your own food</strong><span>or want to start. Beds drawn to scale, seed packets, care reminders and crop guides that fix problems from the soil up.</span></a>
+    <a href="#garden"><strong>You grow food or keep bees</strong><span>or want to start. Beds drawn to scale, crop guides that fix problems from the soil up, and a complete hive log.</span></a>
+    <a href="#interests"><strong>You have a hobby, a project or something to learn</strong><span>Follow it, practise it, collect for it and learn it, with flashcards that teach you to weigh what you read.</span></a>
+    <a href="#home"><strong>You keep a household running</strong><span>Bills, insurance claims and their deadlines, upkeep, the kitchen, work and a resume made from your records.</span></a>
+    <a href="#story"><strong>You want to leave something behind</strong><span>Your life, in your words, for the people you choose, in a form that outlasts any app.</span></a>
   </div>
 
   <nav aria-label="Jump to">
     <a href="#body">Food and your body</a>
     <a href="#day">Your day, held for you</a>
     <a href="#care">The people you care for</a>
-    <a href="#garden">Your garden</a>
-    <a href="#life">The rest of life</a>
+    <a href="#garden">Garden and bees</a>
+    <a href="#interests">Interests and learning</a>
+    <a href="#home">Home, money and work</a>
+    <a href="#story">Your life, in your words</a>
+    <a href="#nature">Living with nature</a>
+    <a href="#everywhere">Every device, your language</a>
     <a href="#privacy">Your data stays yours</a>
+    <a href="#cost">What it costs</a>
   </nav>
 
   <section id="body">
@@ -85,28 +100,31 @@
       <li>Choose the conditions you live with, one or several, and every food you look up is scored and explained for them. Celiac and gout together? It weighs both at once.</li>
       <li>Hundreds of recipes, each marked with what it means for your conditions, and a meal plan of up to six weeks built around them, with the shopping list made for you.</li>
       <li>For conditions that heal in stages, the foods suited to where you are now come first. Nothing is hidden; everything is explained.</li>
+      <li>The family at your table counts too: add their conditions and the plan works for every plate.</li>
     </ul>
     <h3>It finds your patterns</h3>
     <ul>
-      <li>Log meals, symptoms, flares, sleep, mood and labs. Pattern Finder lists the foods that tend to come before your flares, says how often it has seen it, and compares that with an ordinary day so chance does not fool you.</li>
+      <li>Log meals, symptoms, flares, sleep, mood, your cycle and labs. Pattern Finder lists what tends to come before your flares, says how often it has seen it, and compares that with an ordinary day so chance does not fool you. It never assumes food is the answer; a cold, a course of antibiotics or a short night are set beside the meals.</li>
       <li>Suspect a food? The app runs a leave-it-out-then-bring-it-back test with you and shows before, without and after side by side.</li>
-      <li>Trends lays your sleep, weight, steps, labs and intake out over time, shows your usual range, and can set the weather beside your symptoms.</li>
-      <li>Turn anything you discover into a rule of your own, and the app keeps it in mind from then on.</li>
+      <li>Trends lays your sleep, weight, steps, labs, intake, spending and more out over time, shows your usual range, and can set the weather beside your symptoms.</li>
+      <li>Turn anything you discover into a rule, and the app keeps it in mind from then on.</li>
     </ul>
     <h3>It gets your nutrients from food first</h3>
     <ul>
-      <li>Fuel gauges show where you stand on every nutrient today, and say how much came from food and how much from a supplement.</li>
+      <li>Fuel gauges show where you stand on every nutrient today, and say how much came from food, how much from sunlight and how much from a supplement.</li>
       <li>Your medicines and supplements sit on the same clock as your meals. Take levothyroxine too close to a calcium-rich breakfast and it tells you, with how far apart they are.</li>
-      <li>Turn it on, and FDA recalls are checked against your medicines and the products you scan.</li>
+      <li>It reminds you how to prepare for a blood draw, and when a recheck is due after a dose change.</li>
+      <li>Turn it on, and recalls are checked against your medicines and the products you scan.</li>
     </ul>
     <h3>Logging takes seconds</h3>
     <ul>
       <li>Repeat a usual meal with one tap, scan a barcode, say it out loud, or photograph the label. Eating out? Read the menu in, or log it with a stand-in.</li>
-      <li>Builders for salads, smoothies, ferments and more show you a meal’s full picture before you save it.</li>
+      <li>Builders for salads, smoothies, ferments, home brews and more show you a meal’s full picture before you save it, and ingredients rotate so the same ones do not come round every day.</li>
+      <li>Cooking for guests? Tell it who is coming and what they cannot eat, and the menu works for everyone.</li>
     </ul>
     <h3>Ready for your doctor</h3>
     <ul>
-      <li>Eight reports, made on your phone as a PDF: for your doctor, nutritionist, trainer or caregiver, a look back, your medical costs, and your garden.</li>
+      <li>Reports made on your device: for your doctor, nutritionist, trainer or caregiver, a look back, your medical costs, what you eat over time, and your garden. Save them as a PDF or in open formats, to a folder you choose.</li>
       <li>Every claim in the app says how strong the evidence behind it is. It never diagnoses and never tells you to change a prescription.</li>
     </ul>
     <p class="muted">Conditions covered in depth: Hashimoto’s, Graves’ disease, celiac disease, inflammatory bowel disease, irritable bowel syndrome, chronic kidney disease, rheumatoid arthritis, psoriasis and psoriatic arthritis, lupus, multiple sclerosis, type 1 and type 2 diabetes, PCOS, cardiovascular disease, fatty liver disease, migraine, gout, Sjögren’s syndrome and prostate health.</p>
@@ -116,60 +134,108 @@
     <h2>Your day, held for you</h2>
     <p>For many people, including many with ADHD or autism, and anyone recovering, grieving or simply carrying too much, the hardest part of a day is the hundred small things that have to be remembered. Lifestead holds them so your head does not have to. You can use it for this alone and never touch the food side.</p>
     <ul>
+      <li><span class="name">One next thing</span> on the first screen, and a simple view that shows only what you need today.</li>
       <li><span class="name">Routines</span> you walk through one step at a time, morning, evening or anything in between.</li>
       <li><span class="name">Did I Do It</span> for the things you can never remember doing: the stove, the door, the pill. One tap, and it is recorded with the time.</li>
-      <li><span class="name">Reminders you can answer</span> right from the notification: took it, skipped it, done.</li>
+      <li><span class="name">Reminders you answer from the lock screen</span>: took it, skipped it, done, without unlocking the phone.</li>
+      <li><span class="name">Capture</span> a voice note or a photo straight from the lock screen, and sort it later when you have the room. Save a web page or a link to Lifestead from any app.</li>
       <li><span class="name">Where Did I Put It</span>: tell it once, find it later with one search.</li>
-      <li><span class="name">Days Until</span> counters for anything you are waiting on or working toward.</li>
-      <li><span class="name">Upkeep</span> for the house, the car and everything else that needs doing every so often.</li>
-      <li><span class="name">Quick capture</span> by typing or voice, sorted later when you have the room.</li>
+      <li><span class="name">Ready for Tomorrow</span>: one evening look at what tomorrow holds, with anything that needs starting tonight.</li>
+      <li><span class="name">Waiting On</span> for the call back, the parcel and the test result, and <span class="name">Days Until</span> counters for anything you are counting down to.</li>
+      <li><span class="name">A diary</span> that stays private until you choose otherwise.</li>
       <li><span class="name">Keeping Up</span> shows what you got done over the weeks, kindly. No scores, no streaks to break, and a week you did not log is left blank, never counted as a failure.</li>
     </ul>
-    <p>A guided tour called Your Story walks you through the app at your pace, one part of life at a time.</p>
+    <p>Your Guide walks you through the app at your pace, one part of life at a time, and every tool has a step-by-step how-to.</p>
   </section>
 
   <section id="care">
     <h2>For the people you look after</h2>
     <ul>
-      <li>Add family members and their conditions, and the meal plan works for everyone at the table.</li>
-      <li>Share a shopping list with a partner, checked off from either phone. Pairing takes an invitation from inside the app, and only what you choose is shared.</li>
-      <li>An emergency card with medicines, conditions and contacts, ready when someone needs it.</li>
-      <li>A caregiver report that pulls together what another person needs to know.</li>
+      <li>A partner’s phone linked to yours: meals and the shopping list shared both ways, and only the health records each of you chooses to show.</li>
+      <li>A household that sees the meal plan and shopping list and can tick things off, without ever seeing your health records.</li>
+      <li>Your children’s records kept by you, with what they can see and do opened up at the pace you set.</li>
+      <li>A caregiver link for an adult who wants help: meals, medicines, symptoms and appointments handled on their behalf, with their consent area by area, and each person you care for kept apart.</li>
+      <li>Family health history on a family tree, both sides, with ancestry brought in from the usual family tree files. Never a risk score.</li>
+      <li>Contacts brought in one person at a time, so everyone in your life is one record.</li>
+      <li>An emergency card with medicines, conditions and contacts, readable from the lock screen when someone needs it.</li>
     </ul>
   </section>
 
   <section id="garden">
-    <h2>A garden kept as a living record</h2>
-    <p>Grow your own food and Lifestead becomes your garden journal, planner and teacher.</p>
+    <h2>A garden and a hive, kept as a living record</h2>
+    <p>Grow food or keep bees and Lifestead becomes your journal, planner and teacher.</p>
     <ul>
-      <li>Your beds drawn to scale with plantings placed, the seed packets on hand with how long each keeps, and germination tests.</li>
+      <li>Your beds drawn to scale with plantings placed, the seed packets on hand with how long each keeps, germination tests, and the seed you save from your plants.</li>
       <li>Care reminders for each crop, companion planting with the evidence behind it, and crop guides that fix problems from the soil up.</li>
-      <li>Harvests, compost piles, indoor grow setups with their lights and electricity, readings from your weather station, and what the garden costs and gives back.</li>
+      <li>Harvests, preserving what you harvest, compost piles fed by the food you did not eat, indoor grow setups with their lights and electricity, readings from your weather station, the water at your tap, and what the garden costs and gives back.</li>
       <li>Cook with what you grew and the app takes it off what the garden still has.</li>
-      <li>It favours living soil, compost and the insects already working for you, and explains plainly why.</li>
+      <li>A complete hive log: colonies, queens, inspections, mite counts and treatments, feeding, harvests, swarms, losses, equipment and costs, native and stingless bees included, with reading on every kind of bee and every way of keeping them.</li>
     </ul>
   </section>
 
-  <section id="life">
-    <h2>And the rest of life</h2>
+  <section id="interests">
+    <h2>Interests and learning</h2>
+    <p>The things you love doing are part of your life too, and they get a place of their own.</p>
     <ul>
-      <li>Finances, medical bills and what your health costs over time.</li>
-      <li>Work, movement and exercise, with your phone’s activity data brought in.</li>
-      <li>Your kitchen: what is in it and where it is.</li>
-      <li>A library to read: every condition explained with its sources, plus health literacy and the food system.</li>
-      <li>On your phone and on a Windows computer, kept in step through a folder you choose.</li>
+      <li>Follow an interest, then practise it: sessions, supplies and equipment, collections, a wish list, a library, and the people and places that go with it.</li>
+      <li>Projects of any size, anywhere in the app, with their steps, supplies and costs.</li>
+      <li>Learn: flashcards and quizzes from ready-made decks, from a table you bring in, or from your records, spaced so you remember. Most questions ask you to weigh evidence, not just recall it. Your progress is what you now know, and it only grows.</li>
+      <li>If you ever wonder whether a hobby could pay its way, plain reading and a worksheet to think it through. It never tells you to start a business or leave a job.</li>
+    </ul>
+  </section>
+
+  <section id="home">
+    <h2>Home, money and work</h2>
+    <ul>
+      <li>Finances, medical bills, insurance claims with their appeal deadlines, and what your health costs over time.</li>
+      <li>Upkeep for the house, the car and everything else that needs doing every so often.</li>
+      <li>Your kitchen: what is in it, where it is, and what was thrown out.</li>
+      <li>Ready for a storm or a power cut: supplies, medicines that need cold, and a plan.</li>
+      <li>Work, education, credentials and skills, made into a resume you can send as a document and bring back after editing. Your health never appears on it unless you put it there.</li>
+      <li>Movement and exercise, with your phone’s activity data brought in.</li>
+      <li>A library to read: every condition explained with its sources, plus health literacy, gardening and how food reaches your plate.</li>
+    </ul>
+  </section>
+
+  <section id="story">
+    <h2>Your life, in your words</h2>
+    <p>Over years, the things you keep in Lifestead become a record of how you lived. When you are ready, the app helps you gather the parts you choose into the story of your life, told through your eyes, to leave with the people you name and, if you wish, with archives built to last.</p>
+    <ul>
+      <li>The words are yours. The app gathers, lays out and prompts. It never writes your story for you.</li>
+      <li>It outlives the app: a printed book or PDF, and an open archive anyone can read with nothing installed.</li>
+      <li>Nothing goes in quietly. You pick every part, and anyone else named in an entry is shown to you before it is included.</li>
+    </ul>
+  </section>
+
+  <section id="nature">
+    <h2>Living with nature</h2>
+    <p>Lifestead leans toward working with living things rather than against them: your gut as an ecosystem to tend, soil fed by compost and cover crops, native plants and pollinators, food before a pill. Where nature needs help, from a medicine you need to a hive that needs treating, it says so plainly. The evidence always comes first.</p>
+  </section>
+
+  <section id="everywhere">
+    <h2>Every device, your language</h2>
+    <ul>
+      <li>Android, iPhone, Windows and Mac, kept in step through a folder you choose.</li>
+      <li>English and Spanish, with German, French, Finnish, Norwegian, Swedish and Japanese to follow. It opens in your phone’s language.</li>
+      <li>Food data from many countries, so what you eat at home is in it wherever home is.</li>
     </ul>
   </section>
 
   <section id="privacy">
     <h2>Your data stays yours</h2>
-    <p>Your records live on your phone or computer. No company server holds your health information, and there is no account to create. To use two devices, you pick a folder in your OneDrive, and the copy kept there is encrypted with a password only you know.</p>
-    <p>When the app looks something up, such as the weather or the FDA recall list, it asks for the public information and does the matching on your device. Nothing about you goes with the request.</p>
+    <p>Your records live on your phone or computer. No company server holds your health information, and there is no account to create. To use more than one device, you pick a folder in your cloud drive, and the copy kept there is encrypted with a password only you know.</p>
+    <p>App Lock encrypts the records themselves, not just the screen, and a vault keeps the categories you choose closed until you open them. Warnings that keep you safe always show.</p>
+    <p>When the app looks something up, such as the weather or a recall list, it asks for the public information and does the matching on your device. Nothing about you goes with the request.</p>
     <p>This page collects nothing: no form, no cookies, no tracking.</p>
   </section>
 
+  <section id="cost">
+    <h2>What it costs</h2>
+    <p>There is a free version that is useful on its own. Paying adds depth, the people in your life, and time saved. Safety is never behind a paywall: the emergency card, medicine and supplement timing warnings, and allergy cautions are on every version, free included.</p>
+  </section>
+
   <footer>
-    <p>Lifestead is under construction and not available to download yet.</p>
+    <p>Lifestead is being tested now and is not in the app stores yet.</p>
     <p><a href="/">Home</a> · <a href="/terms/">Terms of Use</a> · <a href="/privacy/">Privacy Policy</a></p>
   </footer>
   <a class="maker" href="https://ghostead.com"><img src="/ghostead-icon.svg" alt="" width="56" height="56">Made by Ghostead</a>
