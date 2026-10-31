@@ -11,6 +11,7 @@
 // are put together here from pieces, so each piece is translated.
 // A card drawn from the reading (entryId) also offers Read the Entry, which
 // opens that entry where it lives, so its citations stay one tap away.
+// A card a person made can carry a photo, shown above the question.
 // The parent gives this a key per card, so every card starts fresh.
 
 import { useState } from 'react';
@@ -42,10 +43,12 @@ import {
   orderIsRight,
   shuffledIndexes,
 } from '../lib/learnKinds';
+import { MY_DECK_PREFIX } from '../lib/learnMyDecks';
 import { LEARN_GRADES, LEARN_GRADE_LABELS, type LearnGrade } from '../lib/learnSchedule';
 import { explainNotYet } from '../lib/notYet';
 import { t, tl } from '../lib/i18n';
 import { AppTextInput } from './AppTextInput';
+import { LearnCardPhoto } from './LearnCardPhoto';
 import { useWalkMark } from './WalkMark';
 
 type Props = {
@@ -339,6 +342,7 @@ export function LearnCardView({ card, day, onGrade }: Props) {
     <View style={styles.cardBlock}>
       <Text style={styles.captionText}>{KIND_PROMPTS[kind]}</Text>
       {card.story ? <Text style={styles.bodyText}>{card.story}</Text> : null}
+      {card.id.startsWith(MY_DECK_PREFIX) ? <LearnCardPhoto cardId={card.id} /> : null}
       <Text style={styles.bodyText}>{card.front}</Text>
       {question}
       {turned ? (

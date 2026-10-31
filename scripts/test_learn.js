@@ -299,6 +299,54 @@ check('a blank with no gap is caught', K.cardProblems({ kind: 'blank', front: 'q
 check('a case with no story is caught', K.cardProblems({ kind: 'case', front: 'q', back: 'a', options: [{ text: 'a', why: 'x' }, { text: 'b', why: 'y' }], answer: 0 }).length > 0);
 check('pairs with a repeated tile are caught', K.cardProblems({ kind: 'pairs', front: 'q', back: 'a', pairs: [{ left: 'a', right: 'x' }, { left: 'a', right: 'y' }, { left: 'b', right: 'z' }] }).length > 0);
 
+// Cards from a table.
+const I = load('lib/learnImport.ts');
+const idT = (text, values) => (values ? text.replace(/\{(\w+)\}/g, (_, key) => String(values[key])) : text);
+check('a comma table splits', JSON.stringify(I.parseTable('a,b\nc,d')) === JSON.stringify([['a', 'b'], ['c', 'd']]));
+check('a tab table splits on tabs, keeping commas in a cell', JSON.stringify(I.parseTable('one, two\tthree\n')) === JSON.stringify([['one, two', 'three']]));
+check('a semicolon table splits on semicolons', JSON.stringify(I.parseTable('a;b;c\r\nd;e;f')) === JSON.stringify([['a', 'b', 'c'], ['d', 'e', 'f']]));
+check('a quoted cell keeps its comma, its line break and its quotes', JSON.stringify(I.parseTable('"Hello, ""you""\nthere",b')) === JSON.stringify([['Hello, "you"\nthere', 'b']]));
+check('a leading byte order mark is dropped', I.parseTable('﻿front,back')[0][0] === 'front');
+check('markup is taken out of a cell', I.plainCell('<b>Big</b>&nbsp;bird<br/>here &amp; there') === 'Big bird here & there');
+{
+  const r = I.importTable('Front,Back\nCapital of France?,Paris\nWhy test twice?,Chance,yes\n');
+  check('a heading row is read as headings', r.headings === true && r.drafts.length === 2);
+  check('a plain row becomes a question and answer card', r.drafts[0].kind === 'flip' && r.drafts[0].front === 'Capital of France?' && r.drafts[0].back === 'Paris' && r.drafts[0].thinking === false);
+  check('a third column reading yes marks a thinking card', r.drafts[1].thinking === true);
+}
+{
+  const r = I.importTable('pregunta;respuesta\nEl ____ es azul;cielo|mar');
+  check('Spanish headings are read as headings', r.headings === true);
+  check('a front holding the gap becomes a gap to fill', r.drafts[0].kind === 'blank' && r.drafts[0].back === 'cielo' && r.drafts[0].accept === 'cielo\nmar');
+}
+{
+  const r = I.importTable('Paris,France\nonly one\n,empty front\nempty back,\nParis,france\n\n');
+  check('a first row that names no columns is a card', r.headings === false && r.drafts.length === 1);
+  check('one column is left out with why', r.skipped.some((x) => x.row === 2 && x.reason.includes('one column')));
+  check('an empty front is left out with why', r.skipped.some((x) => x.row === 3 && x.reason === 'its front is empty'));
+  check('an empty back is left out with why', r.skipped.some((x) => x.row === 4 && x.reason === 'its back is empty'));
+  check('a repeated row is left out, whatever its case', r.skipped.some((x) => x.row === 5 && x.reason.includes('same card')));
+  check('an empty row is passed over without a word', r.skipped.length === 4);
+  const lines = I.describeImport(r, idT);
+  check('the lines say what is ready', lines[0] === '1 card is ready to add.');
+  check('the lines name each row left out', lines.some((l) => l === 'Row 3 is left out: its front is empty.'));
+}
+{
+  const many = Array.from({ length: I.IMPORT_ROW_LIMIT + 7 }, (_, i) => `q${i},a${i}`).join('\n');
+  const r = I.importTable(many);
+  check('one import stops at the limit and counts the rest', r.drafts.length === I.IMPORT_ROW_LIMIT && r.cut === 7);
+  check('the cut is said', I.describeImport(r, idT).some((l) => l.includes('7 after them were not read')));
+  const skips = I.importTable(Array.from({ length: 8 }, (_, i) => `only${i}`).join('\n'));
+  const skipLines = I.describeImport(skips, idT);
+  check('nothing ready is said plainly', skipLines[0] === 'No row of this table can become a card yet.');
+  check('past five rows left out, the rest are counted', skipLines.includes('3 more rows are left out for the same kinds of reason.'));
+}
+check('the editor imports through the pure module', read0('components/LearnMyDecksEditor.tsx').includes('importTable(text)'));
+check('imported cards are kept in one transaction', read0('lib/learnMyDecksDb.ts').includes('withTransactionAsync'));
+check('a card shows its photo above the question', read0('components/LearnCardView.tsx').includes('<LearnCardPhoto'));
+check('a deleted card takes its photo with it', read0('lib/learnMyDecksDb.ts').includes('removePhotosOf(LEARN_CARD_OWNER_KIND'));
+check('a cancelled new card forgets its photo', read0('components/LearnMyDecksEditor.tsx').includes('forgetPhotos([cardForm.newId])'));
+
 // Wiring.
 const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
 check('the table', read('lib/db.ts').includes('CREATE TABLE IF NOT EXISTS learn_reviews'));
@@ -313,7 +361,7 @@ const FORBIDDEN = [
   'streak', 'points', 'score', 'level', 'badge', 'well done', 'great job', 'missed', 'overdue', 'behind',
   'fail', 'wrong', 'must', 'you should', 'real ', 'genuine', 'honestly', '—', '–', ' -- ', 'percent', '%',
 ];
-const FILES = ['lib/learnSchedule.ts', 'lib/learnDecks.ts', 'lib/learnDb.ts', 'components/LearnSection.tsx', 'lib/learnKinds.ts', 'components/LearnCardView.tsx', 'lib/learnRecordDecks.ts', 'lib/learnRecordDecksDb.ts', 'lib/learnMyDecks.ts', 'lib/learnMyDecksDb.ts', 'components/LearnMyDecksEditor.tsx'];
+const FILES = ['lib/learnSchedule.ts', 'lib/learnDecks.ts', 'lib/learnDb.ts', 'components/LearnSection.tsx', 'lib/learnKinds.ts', 'components/LearnCardView.tsx', 'lib/learnRecordDecks.ts', 'lib/learnRecordDecksDb.ts', 'lib/learnMyDecks.ts', 'lib/learnMyDecksDb.ts', 'components/LearnMyDecksEditor.tsx', 'lib/learnImport.ts', 'components/LearnCardPhoto.tsx'];
 const re = /'((?:[^'\\\n]|\\.)*)'|"((?:[^"\\\n]|\\.)*)"|`((?:[^`\\]|\\.)*)`/g;
 for (const rel of FILES) {
   const text = read(rel)

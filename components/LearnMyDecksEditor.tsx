@@ -13,7 +13,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
-import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { useTier } from '../lib/entitlement';
 import { BLANK, LEARN_KINDS, type LearnKind } from '../lib/learnKinds';
 import type { LearnDeck } from '../lib/learnDecks';
@@ -24,6 +24,7 @@ import {
   draftProblem,
   emptyDraft,
   KIND_LABELS,
+  LEARN_CARD_OWNER_KIND,
   MAKE_PAID_LINE,
   rowToDraft,
   type CardDraft,
@@ -31,19 +32,24 @@ import {
 } from '../lib/learnMyDecks';
 import {
   addMyDeck,
+  forgetPhotos,
   listMyCardRows,
+  newMyCardId,
   planRemovingMyCard,
   planRemovingMyDeck,
   removeMyCard,
   removeMyDeck,
+  saveImportedCards,
   saveMyCard,
   updateMyDeck,
 } from '../lib/learnMyDecksDb';
+import { describeImport, importTable, type ImportResult } from '../lib/learnImport';
 import { isFunctionWalled } from '../lib/paidFeatures';
 import { explainNotYet } from '../lib/notYet';
 import { t } from '../lib/i18n';
 import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { AppTextInput } from './AppTextInput';
+import { PhotoStrip } from './PhotoStrip';
 import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
 import { useWalkMark } from './WalkMark';
@@ -55,7 +61,10 @@ type Props = {
 };
 
 type DeckForm = { id: string | null; title: string; about: string };
-type CardForm = { deckId: string; cardId: string | null; draft: CardDraft };
+// A new card is handed its id before it is kept, so a photo taken in the
+// form has somewhere to belong; Cancel takes the photo away again.
+type CardForm = { deckId: string; cardId: string | null; newId: string; draft: CardDraft };
+type ImportForm = { deckId: string; text: string; result: ImportResult | null };
 
 const CHOICE_KINDS: LearnKind[] = ['choice', 'estimate', 'case'];
 
@@ -67,6 +76,7 @@ export function LearnMyDecksEditor({ tabColor, decks, onChanged }: Props) {
   const [openDeckId, setOpenDeckId] = useState<string | null>(null);
   const [cards, setCards] = useState<MyCardRow[]>([]);
   const [cardForm, setCardForm] = useState<CardForm | null>(null);
+  const [importForm, setImportForm] = useState<ImportForm | null>(null);
   const [saidBack, setSaidBack] = useState<string | null>(null);
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
 
@@ -77,7 +87,8 @@ export function LearnMyDecksEditor({ tabColor, decks, onChanged }: Props) {
   }
 
   async function openDeck(deckId: string | null) {
-    setCardForm(null);
+    cancelCard();
+    setImportForm(null);
     setOpenDeckId(deckId);
     setCards(deckId ? await listMyCardRows(deckId) : []);
   }
@@ -112,7 +123,64 @@ export function LearnMyDecksEditor({ tabColor, decks, onChanged }: Props) {
   function startCard(deckId: string, row?: MyCardRow) {
     if (waitsForPlan()) return;
     setSaidBack(null);
-    setCardForm({ deckId, cardId: row?.id ?? null, draft: row ? rowToDraft(row) : emptyDraft() });
+    cancelCard();
+    setImportForm(null);
+    setCardForm({ deckId, cardId: row?.id ?? null, newId: newMyCardId(), draft: row ? rowToDraft(row) : emptyDraft() });
+  }
+
+  function cancelCard() {
+    if (cardForm && !cardForm.cardId) void forgetPhotos([cardForm.newId]);
+    setCardForm(null);
+  }
+
+  function startImport(deckId: string) {
+    if (waitsForPlan()) return;
+    setSaidBack(null);
+    cancelCard();
+    setImportForm({ deckId, text: '', result: null });
+  }
+
+  function readImport(text: string) {
+    if (!importForm) return;
+    setImportForm({ ...importForm, text, result: text.trim() ? importTable(text) : null });
+  }
+
+  async function openImportFile() {
+    let uri: string | null = null;
+    try {
+      const { File } = await import('expo-file-system');
+      const picked = await File.pickFileAsync();
+      const file = Array.isArray(picked) ? picked[0] : picked;
+      if (file) uri = file.uri;
+    } catch {
+      // Backing out of the picker is not a problem to report.
+      return;
+    }
+    if (!uri) return;
+    try {
+      const { File } = await import('expo-file-system');
+      readImport(await new File(uri).text());
+    } catch {
+      explainNotYet('That file could not be read. Save the table as CSV, or as a text file with a tab between the sides, and open it again.');
+    }
+  }
+
+  async function keepImport() {
+    if (!importForm) return;
+    if (!importForm.result) {
+      explainNotYet('Paste a table first, or open a file that holds one.');
+      return;
+    }
+    if (importForm.result.drafts.length === 0) {
+      explainNotYet('No row of this table can become a card yet. The lines under the box say why.');
+      return;
+    }
+    const deckId = importForm.deckId;
+    const kept = await saveImportedCards(deckId, importForm.result.drafts);
+    setImportForm(null);
+    setSaidBack(kept === 1 ? '1 card is added to the deck.' : t('{n} cards are added to the deck.', { n: kept }));
+    await onChanged();
+    setCards(await listMyCardRows(deckId));
   }
 
   async function saveCard() {
@@ -122,7 +190,7 @@ export function LearnMyDecksEditor({ tabColor, decks, onChanged }: Props) {
       explainNotYet(problem);
       return;
     }
-    await saveMyCard(cardForm.deckId, cardForm.draft, cardForm.cardId ?? undefined);
+    await saveMyCard(cardForm.deckId, cardForm.draft, cardForm.cardId ?? undefined, cardForm.newId);
     setSaidBack(cardForm.cardId ? 'The card is changed. Its place in the schedule carries on.' : 'The card is kept. It comes up the next time this deck is studied.');
     const deckId = cardForm.deckId;
     setCardForm(null);
@@ -350,6 +418,15 @@ export function LearnMyDecksEditor({ tabColor, decks, onChanged }: Props) {
         ) : null}
         {kind === 'order' ? renderItems(draft) : null}
         {kind === 'pairs' ? renderPairs(draft) : null}
+        <View ref={walkMark.ref('learn.cardPhoto')} style={walkMark('learn.cardPhoto')}>
+          <PhotoStrip
+            ownerKind={LEARN_CARD_OWNER_KIND}
+            ownerId={cardForm.cardId ?? cardForm.newId}
+            tabColor={tabColor}
+            addLabel="A Photo on the Front"
+            title={draft.front.trim() || undefined}
+          />
+        </View>
         <AppTextInput
           style={styles.textInput}
           value={draft.back}
@@ -369,7 +446,42 @@ export function LearnMyDecksEditor({ tabColor, decks, onChanged }: Props) {
           <TouchableOpacity ref={walkMark.ref('learn.cardSave')} style={[styles.primaryButton, walkMark('learn.cardSave')]} onPress={() => void saveCard()}>
             <Text style={styles.primaryButtonText}>{cardForm.cardId ? 'Save' : 'Keep the Card'}</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setCardForm(null)}>
+          <TouchableOpacity onPress={cancelCard}>
+            <Text style={styles.linkText}>Cancel</Text>
+          </TouchableOpacity>
+        </ThumbRow>
+      </View>
+    );
+  }
+
+  function renderImportForm() {
+    if (!importForm) return null;
+    const lines = importForm.result ? describeImport(importForm.result, t) : [];
+    return (
+      <View style={[styles.nestedForm, { borderLeftColor: tabColor }]}>
+        <Text style={styles.captionText}>
+          Paste a table, or open a spreadsheet saved as CSV or the text file a flashcard app exports. The first column is the front and the second the back. A third column reading yes marks a card that asks how to weigh something. A front holding {BLANK} becomes a gap to fill, with answers that fill it separated by |.
+        </Text>
+        <AppTextInput
+          style={[styles.textInput, styles.pasteBox]}
+          value={importForm.text}
+          onChangeText={readImport}
+          placeholder="Paste the table here"
+          multiline
+        />
+        <TouchableOpacity style={styles.secondaryButton} onPress={() => void openImportFile()}>
+          <Text style={styles.secondaryButtonText}>Open a File</Text>
+        </TouchableOpacity>
+        {lines.map((line) => (
+          <Text key={line} style={styles.captionText}>
+            {line}
+          </Text>
+        ))}
+        <ThumbRow primary="first" style={styles.actionRow}>
+          <TouchableOpacity ref={walkMark.ref('learn.importKeep')} style={[styles.primaryButton, walkMark('learn.importKeep')]} onPress={() => void keepImport()}>
+            <Text style={styles.primaryButtonText}>Add These Cards</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => setImportForm(null)}>
             <Text style={styles.linkText}>Cancel</Text>
           </TouchableOpacity>
         </ThumbRow>
@@ -404,10 +516,17 @@ export function LearnMyDecksEditor({ tabColor, decks, onChanged }: Props) {
         )}
         {cardForm && !cardForm.cardId ? (
           renderCardForm()
+        ) : importForm ? (
+          renderImportForm()
         ) : (
-          <TouchableOpacity ref={walkMark.ref('learn.addCard')} style={[styles.primaryButton, walkMark('learn.addCard')]} onPress={() => startCard(deck.id)}>
-            <Text style={styles.primaryButtonText}>Add a Card</Text>
-          </TouchableOpacity>
+          <View style={styles.links}>
+            <TouchableOpacity ref={walkMark.ref('learn.addCard')} style={[styles.primaryButton, walkMark('learn.addCard')]} onPress={() => startCard(deck.id)}>
+              <Text style={styles.primaryButtonText}>Add a Card</Text>
+            </TouchableOpacity>
+            <TouchableOpacity ref={walkMark.ref('learn.import')} style={[styles.secondaryButton, walkMark('learn.import')]} onPress={() => startImport(deck.id)}>
+              <Text style={styles.secondaryButtonText}>Add Cards From a Table</Text>
+            </TouchableOpacity>
+          </View>
         )}
         <View style={styles.links}>
           <TouchableOpacity onPress={() => startDeck(deck)}>
@@ -492,5 +611,8 @@ const styles = StyleSheet.create({
   actionRow: { flexDirection: 'row', alignItems: 'center', gap: 16, marginTop: 4 },
   primaryButton: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
   primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
+  secondaryButton: { ...BUTTON_SECONDARY_COMPACT, alignSelf: 'flex-start' },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
+  pasteBox: { minHeight: 120, textAlignVertical: 'top' },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
 });

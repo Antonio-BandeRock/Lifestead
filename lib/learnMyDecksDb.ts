@@ -6,6 +6,7 @@ import { getDatabase } from './db';
 import {
   buildMyDeck,
   draftParts,
+  LEARN_CARD_OWNER_KIND,
   MY_DECK_PREFIX,
   planCardRemoval,
   planDeckRemoval,
@@ -66,8 +67,16 @@ export async function updateMyDeck(id: string, title: string, about: string): Pr
   );
 }
 
-/** Keeps a card. Returns its id. Changing a card keeps its id, so its schedule carries on. */
-export async function saveMyCard(deckId: string, draft: CardDraft, cardId?: string): Promise<string> {
+/** An id for a card not kept yet, so a photo can be added to it while it is written. */
+export function newMyCardId(): string {
+  return newId('card');
+}
+
+/**
+ * Keeps a card. Returns its id. Changing a card keeps its id, so its schedule
+ * carries on; a new card takes `newCardId` when the form handed one out.
+ */
+export async function saveMyCard(deckId: string, draft: CardDraft, cardId?: string, newCardId?: string): Promise<string> {
   const db = await getDatabase();
   const parts = JSON.stringify(draftParts(draft));
   const front = draft.front.trim();
@@ -85,7 +94,7 @@ export async function saveMyCard(deckId: string, draft: CardDraft, cardId?: stri
     );
     return cardId;
   }
-  const id = newId('card');
+  const id = newCardId ?? newId('card');
   const last = await db.getFirstAsync<{ top: number | null }>('SELECT MAX(position) AS top FROM learn_my_cards WHERE deck_id = ?', deckId);
   await db.runAsync(
     'INSERT INTO learn_my_cards (id, deck_id, kind, front, back, thinking, parts, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
@@ -119,10 +128,33 @@ export async function planRemovingMyDeck(deckId: string): Promise<RemovalPlan> {
   );
 }
 
+/** A deleted card takes its photo with it; a card put away keeps it, with its answers. */
+export async function forgetPhotos(cardIds: string[]): Promise<void> {
+  if (cardIds.length === 0) return;
+  const { removePhotosOf } = await import('./mediaDb');
+  for (const id of cardIds) await removePhotosOf(LEARN_CARD_OWNER_KIND, id).catch(() => undefined);
+}
+
+/** Keeps every card an import made ready, in the order of the table. Returns how many were kept. */
+export async function saveImportedCards(deckId: string, drafts: CardDraft[]): Promise<number> {
+  const db = await getDatabase();
+  let kept = 0;
+  await db.withTransactionAsync(async () => {
+    for (const draft of drafts) {
+      await saveMyCard(deckId, draft);
+      kept += 1;
+    }
+  });
+  return kept;
+}
+
 export async function removeMyCard(cardId: string): Promise<RemovalPlan> {
   const db = await getDatabase();
   const plan = await planRemovingMyCard(cardId);
-  if (plan === 'delete') await db.runAsync('DELETE FROM learn_my_cards WHERE id = ?', cardId);
+  if (plan === 'delete') {
+    await db.runAsync('DELETE FROM learn_my_cards WHERE id = ?', cardId);
+    await forgetPhotos([cardId]);
+  }
   else await db.runAsync("UPDATE learn_my_cards SET retired_at = datetime('now'), updated_at = datetime('now') WHERE id = ?", cardId);
   return plan;
 }
@@ -131,7 +163,9 @@ export async function removeMyDeck(deckId: string): Promise<RemovalPlan> {
   const db = await getDatabase();
   const plan = await planRemovingMyDeck(deckId);
   if (plan === 'delete') {
+    const cards = await listMyCardRows(deckId);
     await db.runAsync('DELETE FROM learn_my_cards WHERE deck_id = ?', deckId);
+    await forgetPhotos(cards.map((card) => card.id));
     await db.runAsync('DELETE FROM learn_my_decks WHERE id = ?', deckId);
   } else {
     await db.runAsync("UPDATE learn_my_decks SET retired_at = datetime('now'), updated_at = datetime('now') WHERE id = ?", deckId);

@@ -134,6 +134,9 @@ export type ToolMark =
   | 'learn.deckSave'
   | 'learn.addCard'
   | 'learn.cardSave'
+  | 'learn.cardPhoto'
+  | 'learn.import'
+  | 'learn.importKeep'
   | 'capture.keepInLibrary'
   | 'work.overview'
   | 'work.todos'
@@ -3100,6 +3103,27 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Keep the Card.', mark: 'learn.cardSave' },
       ],
       forYou: 'A card that is not ready yet says what it still needs. Changing a card later keeps its place in the schedule.',
+    },
+    {
+      key: 'photo',
+      title: 'Put a photo on a card',
+      steps: [
+        { say: 'Under Your Decks, tap the deck, then Add a Card, or Change on a card already there.', mark: 'learn.addCard', stay: true },
+        { say: 'Tap A Photo on the Front, and take the photo or pick one.', mark: 'learn.cardPhoto', stay: true },
+        { say: 'Write the question, then tap Keep the Card.', mark: 'learn.cardSave' },
+      ],
+      forYou: 'The photo shows above the question when the card comes up, on every device the records reach. A card put away keeps its photo; a card deleted takes it with it.',
+    },
+    {
+      key: 'import',
+      title: 'Add cards from a table',
+      steps: [
+        { say: 'Under Your Decks, tap the deck, then Add Cards From a Table.', mark: 'learn.import', stay: true },
+        { say: 'Paste the table, or tap Open a File for a spreadsheet saved as CSV or the text file a flashcard app exports.' },
+        { say: 'Read the lines under the box: how many cards are ready, and any row left out with why.' },
+        { say: 'Tap Add These Cards.', mark: 'learn.importKeep' },
+      ],
+      forYou: 'The first column is the front and the second the back. A table makes question and answer cards and gaps to fill; the other kinds are made in the card form.',
     },
   ],
   '/interests#makingItPay': readingHowTos('Making It Pay', 'Each entry names the source and year of every figure in it, and says who the figures cover.'),

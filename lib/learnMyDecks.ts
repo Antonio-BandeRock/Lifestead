@@ -22,6 +22,13 @@ import type { LearnCard, LearnDeck } from './learnDecks';
 /** The prefix every card and deck a person makes carries, so its id never meets a ready-made one. */
 export const MY_DECK_PREFIX = 'my-';
 
+/**
+ * What a card's photo is kept under in the photo layer (lib/media.ts), so it
+ * travels between the person's devices with every other photo. A photo shows
+ * on the front, above the question.
+ */
+export const LEARN_CARD_OWNER_KIND = 'learn_card';
+
 export type CardDraft = {
   kind: LearnKind;
   front: string;
