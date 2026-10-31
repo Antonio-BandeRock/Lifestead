@@ -222,6 +222,7 @@ export type ToolMark =
   | 'home.captureType'
   | 'home.captureSay'
   | 'home.captureSort'
+  | 'capture.readPage'
   | 'home.nextGo'
   | 'home.welcomeGo'
   | 'home.welcomeNotNow'
@@ -2221,6 +2222,17 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Sort It Out.', mark: 'home.captureSort' },
       ],
       forYou: 'Each note is offered as the record it reads like: a grocery item, a task, a reminder, a place you put something. You say yes or change it.',
+    },
+    {
+      key: 'captureReadPage',
+      title: 'Read a page you kept',
+      steps: [
+        { say: 'Share a link to Lifestead from your browser, or paste one into a note.' },
+        { say: 'Open the band with the name of Sort It Out.', mark: 'homeBand.captureInbox', stay: true },
+        { say: 'Tap Sort It Out.', mark: 'home.captureSort' },
+        { say: 'Tap Read the Page under the note with the link.', mark: 'capture.readPage' },
+      ],
+      forYou: 'The page is read only when you tap, and its title, site, author, date and a few lines are kept beside the note. A recipe can go straight into Food, and a product page is offered to the grocery list.',
     },
     {
       key: 'nextThing',

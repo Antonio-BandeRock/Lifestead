@@ -144,7 +144,7 @@ const AREAS: readonly Area[] = [
     count: ['done_checks'],
     quiet: ['done_check_marks'],
   },
-  { one: 'capture', many: 'captures', count: ['capture_notes'], quiet: [] },
+  { one: 'capture', many: 'captures', count: ['capture_notes'], quiet: ['web_pages'] },
   {
     one: 'medication or supplement',
     many: 'medications and supplements',

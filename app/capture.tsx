@@ -75,6 +75,14 @@ import { PlanSentencePanel } from '../components/PlanSentencePanel';
 import { describePlainDate, plainDateToLocalDateTime, readPlainDates } from '../lib/plainDate';
 import { ThumbEndRow } from '../components/ThumbEndRow';
 import { PILL, PILL_TEXT } from '../constants/buttons';
+import {
+  describePageSource,
+  linkInNote,
+  offerForPage,
+  WEB_PAGE_KIND_LABELS,
+  type WebPage,
+} from '../lib/webCapture';
+import { forgetPageForNote, listWebPagesForNotes, readPageForNote } from '../lib/webCaptureDb';
 
 // A destination wears the colour and icon of the tab it hands off to, rather
 // than a palette invented here, so "In the garden" reads as Garden before the
@@ -137,11 +145,20 @@ export default function CaptureScreen() {
   // C8: what the suggestions reason from, reloaded with the notes so a sort
   // just made teaches the next one straight away.
   const [suggestModel, setSuggestModel] = useState<SuggestModel | null>(null);
+  // Pages read from the links in notes (lib/webCapture.ts), keyed by note,
+  // and the note whose page is being read right now.
+  const [pages, setPages] = useState<Map<string, WebPage>>(new Map());
+  const [readingId, setReadingId] = useState<string | null>(null);
 
   const refresh = useCallback(async () => {
     const rows = await listCaptureNotes();
     setNotes(rows);
     setLoading(false);
+    setPages(
+      await listWebPagesForNotes(rows.filter((row) => linkInNote(row.text)).map((row) => row.id)).catch(
+        () => new Map<string, WebPage>(),
+      ),
+    );
     setSuggestModel(await loadSuggestModel().catch(() => null));
   }, []);
 
@@ -235,6 +252,30 @@ export default function CaptureScreen() {
     await refresh();
   }
 
+  // Nothing is fetched until this is tapped. The page is read on the device
+  // and only what it says about itself is kept beside the note.
+  async function readPage(note: CaptureNote) {
+    if (readingId) return;
+    setReadingId(note.id);
+    try {
+      await readPageForNote(note.id, note.text);
+      await refresh();
+    } catch (error) {
+      showInfoAlert('The page could not be read', error instanceof Error ? error.message : String(error));
+    } finally {
+      setReadingId(null);
+    }
+  }
+
+  async function forgetPage(note: CaptureNote) {
+    await forgetPageForNote(note.id);
+    await refresh();
+  }
+
+  function importRecipe(url: string) {
+    router.push({ pathname: '/food', params: { openFoodLens: 'importRecipe', importRecipeUrl: url } } as Href);
+  }
+
   function openDestination(destination: CaptureDestination) {
     if (!destination.open) return;
     const { pathname, params } = destination.open;
@@ -246,10 +287,16 @@ export default function CaptureScreen() {
   const sortedGroups = groupSortedByDestination(notes);
   const done = notes.filter((note) => note.status === 'done');
   const now = new Date();
+  // The ring for the Read the Page how-to goes on the first note it applies to.
+  const firstLinkedNoteId = notes.find((note) => note.status !== 'done' && linkInNote(note.text))?.id ?? null;
 
   function renderNoteRow(note: CaptureNote) {
     const destination = captureDestination(note.destination);
     const editing = editingId === note.id;
+    const link = linkInNote(note.text);
+    const page = pages.get(note.id) ?? null;
+    const pageOffer = page && note.status !== 'done' ? offerForPage(page, note.destination) : null;
+    const offerOption = pageOffer?.kind === 'destination' ? captureDestination(pageOffer.key) : null;
     return (
       <View key={note.id} style={styles.noteCard}>
         {editing ? (
@@ -299,6 +346,45 @@ export default function CaptureScreen() {
         ) : (
           <RecordPhotos ownerKind="capture_note" ownerId={note.id} tabColor={colors.accent} title={note.text} />
         )}
+        {/* The page read from the note's link: what it is, where it is from,
+            and a few lines of what it says. Never the article itself. */}
+        {page ? (
+          <View style={styles.pageBlock}>
+            <Text style={styles.pageKind}>{WEB_PAGE_KIND_LABELS[page.kind]}</Text>
+            <Text style={styles.pageTitle}>{page.title}</Text>
+            {describePageSource(page) ? <Text style={styles.pageSource}>{describePageSource(page)}</Text> : null}
+            {page.excerpt ? <Text style={styles.pageExcerpt}>{page.excerpt}</Text> : null}
+            <TouchableOpacity onPress={() => void forgetPage(note)} hitSlop={8} accessibilityRole="button">
+              <Text style={styles.pageForget}>Let the page go, keep the note</Text>
+            </TouchableOpacity>
+          </View>
+        ) : null}
+        {pageOffer?.kind === 'recipe' ? (
+          <TouchableOpacity
+            style={[styles.suggestRow, { borderColor: colors.tabFood }]}
+            onPress={() => importRecipe(pageOffer.url)}
+            accessibilityRole="button"
+            accessibilityLabel="The page holds a recipe. Tap to import it into Food."
+          >
+            <Ionicons name="restaurant-outline" size={15} color={colors.tabFood} />
+            <Text style={styles.suggestText}>
+              <Text style={{ color: colors.tabFood }}>Import as a Recipe?</Text> The page holds a recipe, and Food can
+              read its ingredients and steps.
+            </Text>
+          </TouchableOpacity>
+        ) : pageOffer?.kind === 'destination' && offerOption ? (
+          <TouchableOpacity
+            style={[styles.suggestRow, { borderColor: destinationColor(offerOption) }]}
+            onPress={() => void sortNote(note, pageOffer.key)}
+            accessibilityRole="button"
+            accessibilityLabel={`${offerOption.label}? ${pageOffer.reason} Tap to put it there.`}
+          >
+            <Ionicons name={DESTINATION_ICONS[pageOffer.key]} size={15} color={destinationColor(offerOption)} />
+            <Text style={styles.suggestText}>
+              <Text style={{ color: destinationColor(offerOption) }}>{offerOption.label}?</Text> {pageOffer.reason}
+            </Text>
+          </TouchableOpacity>
+        ) : null}
         {/* C8: where it probably goes, only when the evidence is clear, with
             the reason, and filed only when tapped. */}
         {note.status === 'waiting' && !note.destination && suggestModel
@@ -345,6 +431,18 @@ export default function CaptureScreen() {
             >
               <Ionicons name="color-wand-outline" size={15} color={colors.accent} />
               <Text style={styles.noteActionText}>Turn it into…</Text>
+            </TouchableOpacity>
+          ) : null}
+          {link && note.status !== 'done' ? (
+            <TouchableOpacity
+              ref={note.id === firstLinkedNoteId ? walkMark.ref('capture.readPage') : undefined}
+              style={[styles.noteAction, note.id === firstLinkedNoteId ? walkMark('capture.readPage') : null]}
+              onPress={() => void readPage(note)}
+            >
+              <Ionicons name="globe-outline" size={15} color={colors.accent} />
+              <Text style={styles.noteActionText}>
+                {readingId === note.id ? 'Reading the page…' : page ? 'Read It Again' : 'Read the Page'}
+              </Text>
             </TouchableOpacity>
           ) : null}
           {destination?.open ? (
@@ -710,6 +808,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   suggestText: { ...typography.caption, color: colors.textSecondary, flex: 1, ...textShadow },
+  // A surface of its own, so the page reads as kept beside the note.
+  pageBlock: { gap: 3, padding: 10, borderRadius: 10, backgroundColor: colors.surfaceMuted },
+  pageKind: { ...typography.caption, color: colors.textMuted },
+  pageTitle: { ...typography.body, color: colors.textPrimary },
+  pageSource: { ...typography.caption, color: colors.textSecondary },
+  pageExcerpt: { ...typography.caption, color: colors.textSecondary },
+  pageForget: { ...typography.caption, color: colors.accent, marginTop: 4 },
   noteActionRow: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: 14 },
   noteAction: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   noteActionText: { ...typography.caption, color: colors.accent, ...textShadow },

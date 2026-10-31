@@ -148,6 +148,8 @@ export async function deleteCaptureNote(id: string): Promise<void> {
   await db.runAsync(`DELETE FROM capture_notes WHERE id = ?`, id);
   // Its photos go with it (1.0.53.7), so none is left pointing at nothing.
   await (await import('./mediaDb')).removePhotosOf('capture_note', id);
+  // So does a page read from its link.
+  await db.runAsync(`DELETE FROM web_pages WHERE capture_note_id = ?`, id);
 }
 
 /**

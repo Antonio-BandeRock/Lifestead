@@ -34,15 +34,20 @@ export type FetchedRecipe =
   | { kind: 'recipe'; recipe: ImportedRecipe }
   | { kind: 'noRecipe'; url: string; site: string; pageTitle: string };
 
-/** Reads the page and looks for its Recipe block. Rejects with a sentence. */
-export async function fetchRecipeFromUrl(rawUrl: string): Promise<FetchedRecipe> {
+/**
+ * Reads one web page, on the phone or through the desktop main process.
+ * Rejects with a sentence. Shared by the recipe import and Capture's Read
+ * the Page (lib/webCaptureDb.ts), so both say the same thing when a site
+ * cannot be reached.
+ */
+export async function fetchPageHtml(rawUrl: string): Promise<{ html: string; url: string; finalUrl: string }> {
   const url = rawUrl.trim();
   if (!isFetchableUrl(url)) throw new Error('That does not look like a web address. It should start with http:// or https://.');
   let html: string;
   let finalUrl = url;
   if (isDesktopApp()) {
     const web = getDesktopBridge().web;
-    if (!web) throw new Error('This version of the desktop app cannot read web pages. Install the newest one to import from a link.');
+    if (!web) throw new Error('This version of the desktop app cannot read web pages. Install the newest one to read a page from a link.');
     const page = await web.fetchPage(url);
     html = page.text;
     finalUrl = page.finalUrl || url;
@@ -64,6 +69,12 @@ export async function fetchRecipeFromUrl(rawUrl: string): Promise<FetchedRecipe>
       clearTimeout(timer);
     }
   }
+  return { html, url, finalUrl };
+}
+
+/** Reads the page and looks for its Recipe block. Rejects with a sentence. */
+export async function fetchRecipeFromUrl(rawUrl: string): Promise<FetchedRecipe> {
+  const { html, url, finalUrl } = await fetchPageHtml(rawUrl);
   const recipe = extractRecipeFromHtml(html, url);
   if (recipe) return { kind: 'recipe', recipe: { ...recipe, sourceUrl: url, sourceSite: siteNameFromUrl(finalUrl) || recipe.sourceSite } };
   return { kind: 'noRecipe', url, site: siteNameFromUrl(finalUrl), pageTitle: pageTitleFromHtml(html) };

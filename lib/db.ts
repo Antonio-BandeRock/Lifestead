@@ -10581,6 +10581,30 @@ async function runDatabaseInitialization() {
       CREATE INDEX IF NOT EXISTS idx_project_steps_project ON project_steps(project_id);
     `);
 
+    // A web page kept from a Capture note (2026-10-30, lib/webCapture.ts).
+    // Read on the device only when Read the Page is tapped, and only what the
+    // page says about itself: never the article, so a short excerpt at most.
+    // One row per note; reading again replaces it.
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS web_pages (
+        id TEXT PRIMARY KEY,
+        capture_note_id TEXT NOT NULL,
+        url TEXT NOT NULL,
+        final_url TEXT,
+        site TEXT,
+        title TEXT,
+        author TEXT,
+        published_on TEXT,
+        excerpt TEXT,
+        -- recipe, study, product, video, article or page.
+        kind TEXT NOT NULL DEFAULT 'page',
+        fetched_at TEXT NOT NULL,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_web_pages_note ON web_pages(capture_note_id);
+    `);
+
     // Ties a lightweight daily during-a-trial check-in (or its escalated
     // full symptom log -- same table either way, see recordCheckin's own
     // comment) back to the real trial it belongs to, so a trial's own
