@@ -45,6 +45,7 @@ import type {
   KeepingUpSummary,
   KeepingUpUpkeepDoing,
   KeepingUpUpkeepStanding,
+  KeepingUpInterestSession,
   KeepingUpWorkCheckin,
 } from './keepingUp';
 import { upkeepStanding } from './upkeep';
@@ -238,6 +239,21 @@ export async function getKeepingUpInputs(startDate: string, endDate: string): Pr
     drain: row.drain,
   }));
 
+  // done_on is a plain local date, so it needs none of dayOf.
+  const sessionRows = await db.getAllAsync<{ interestId: string; interestName: string | null; doneOn: string; minutes: number | null }>(
+    `SELECT s.interest_id AS interestId, i.name AS interestName, s.done_on AS doneOn, s.minutes AS minutes
+       FROM interest_sessions s LEFT JOIN interests i ON i.id = s.interest_id
+      WHERE s.running = 0 AND s.done_on >= ? AND s.done_on <= ?`,
+    startDate,
+    endDate,
+  );
+  const interestSessions: KeepingUpInterestSession[] = sessionRows.map((row) => ({
+    interestId: row.interestId,
+    interestName: row.interestName ?? 'An interest',
+    date: row.doneOn.slice(0, 10),
+    minutes: row.minutes === null ? null : Number(row.minutes),
+  }));
+
   return {
     startDate,
     endDate,
@@ -248,6 +264,7 @@ export async function getKeepingUpInputs(startDate: string, endDate: string): Pr
     upkeepDoings,
     upkeepStanding: standing,
     workCheckins,
+    interestSessions,
   };
 }
 

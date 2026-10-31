@@ -113,6 +113,13 @@ export type KeepingUpWorkCheckin = {
   drain: number;
 };
 
+export type KeepingUpInterestSession = {
+  interestId: string;
+  interestName: string;
+  date: string;
+  minutes: number | null;
+};
+
 export type KeepingUpInputs = {
   startDate: string;
   endDate: string;
@@ -123,6 +130,8 @@ export type KeepingUpInputs = {
   upkeepDoings: KeepingUpUpkeepDoing[];
   upkeepStanding: KeepingUpUpkeepStanding;
   workCheckins: KeepingUpWorkCheckin[];
+  /** Finished sessions on an interest; a timer still going is left out. */
+  interestSessions?: KeepingUpInterestSession[];
 };
 
 // ---------------------------------------------------------------------------
@@ -712,6 +721,80 @@ export function summarizeWork(inputs: KeepingUpInputs): WorkBand {
 }
 
 // ---------------------------------------------------------------------------
+// Band 6: time on interests
+// ---------------------------------------------------------------------------
+
+export type InterestTimeStanding = {
+  interestId: string;
+  interestName: string;
+  sessions: number;
+  minutes: number;
+  line: string;
+};
+
+export type InterestTimeBand = {
+  hasSessions: boolean;
+  headline: string;
+  weeks: WeekCount[];
+  gapNote: string | null;
+  standings: InterestTimeStanding[];
+  caveat: string;
+};
+
+function minutesPhrase(total: number): string {
+  const hours = Math.floor(total / 60);
+  const minutes = total % 60;
+  const parts: string[] = [];
+  if (hours > 0) parts.push(`${hours} ${plural(hours, 'hour', 'hours')}`);
+  if (minutes > 0 || hours === 0) parts.push(`${minutes} ${plural(minutes, 'minute', 'minutes')}`);
+  return parts.join(' ');
+}
+
+export function summarizeInterestTime(inputs: KeepingUpInputs): InterestTimeBand {
+  const sessions = (inputs.interestSessions ?? []).filter(
+    (session) => session.date >= inputs.startDate && session.date <= inputs.endDate,
+  );
+  const weeksBase = blankWeeks(inputs.startDate, inputs.endDate);
+  const weeks = countWeeks(weeksBase, (week) => sessions.filter((session) => inWeek(session.date, week)).length);
+
+  const byInterest = new Map<string, InterestTimeStanding>();
+  for (const session of sessions) {
+    const held =
+      byInterest.get(session.interestId) ??
+      ({ interestId: session.interestId, interestName: session.interestName, sessions: 0, minutes: 0, line: '' } as InterestTimeStanding);
+    held.sessions += 1;
+    held.minutes += session.minutes ?? 0;
+    byInterest.set(session.interestId, held);
+  }
+  const standings = Array.from(byInterest.values()).sort((a, b) =>
+    a.interestName.localeCompare(b.interestName, undefined, { sensitivity: 'base' }),
+  );
+  for (const standing of standings) {
+    const count = `${standing.sessions} ${plural(standing.sessions, 'session', 'sessions')}`;
+    standing.line = standing.minutes > 0 ? `${count}, ${minutesPhrase(standing.minutes)} timed.` : `${count}, none of them timed.`;
+  }
+
+  const timed = sessions.reduce((sum, session) => sum + (session.minutes ?? 0), 0);
+  let headline: string;
+  if (sessions.length === 0) {
+    headline = 'No sessions kept on an interest in this range. This fills in from the next one on the Interests tab.';
+  } else {
+    headline = `${sessions.length} ${plural(sessions.length, 'session', 'sessions')} across ${standings.length} ${plural(standings.length, 'interest', 'interests')}`;
+    headline = timed > 0 ? `${headline}, ${minutesPhrase(timed)} of them timed.` : `${headline}.`;
+  }
+
+  return {
+    hasSessions: sessions.length > 0,
+    headline,
+    weeks,
+    gapNote: gapNote(weeks, 'no session was kept in them.'),
+    standings,
+    caveat:
+      'Only the sessions you kept. Time you spent and did not write down is not missing from your life, only from this list, and no amount here is the right amount.',
+  };
+}
+
+// ---------------------------------------------------------------------------
 // The whole lens
 // ---------------------------------------------------------------------------
 
@@ -722,6 +805,7 @@ export type KeepingUpSummary = {
   captures: CapturesBand;
   upkeep: UpkeepBand;
   work: WorkBand;
+  interestTime: InterestTimeBand;
 };
 
 export function summarizeKeepingUp(inputs: KeepingUpInputs): KeepingUpSummary {
@@ -730,6 +814,7 @@ export function summarizeKeepingUp(inputs: KeepingUpInputs): KeepingUpSummary {
   const captures = summarizeCaptures(inputs);
   const upkeep = summarizeUpkeepTimeliness(inputs);
   const work = summarizeWork(inputs);
+  const interestTime = summarizeInterestTime(inputs);
   return {
     hasAnything:
       checks.hasChecks ||
@@ -737,12 +822,14 @@ export function summarizeKeepingUp(inputs: KeepingUpInputs): KeepingUpSummary {
       captures.hasCaptures ||
       upkeep.hasHistory ||
       work.hasCheckins ||
+      interestTime.hasSessions ||
       inputs.upkeepStanding.overdue + inputs.upkeepStanding.dueSoon + inputs.upkeepStanding.settled > 0,
     checks,
     routines,
     captures,
     upkeep,
     work,
+    interestTime,
   };
 }
 

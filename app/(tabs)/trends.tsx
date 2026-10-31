@@ -2539,6 +2539,31 @@ export default function TrendsScreen() {
                     ) : null}
                     <Text style={styles.patternRowCaption}>{keepingUpSummary.work.caveat}</Text>
                   </TabBand>
+
+                  <TabBand markRef={walkMark.ref('trends.band')}
+                    folds={folds}
+                    color={TAB_COLOR}
+                    id="trends:keepingUp:interestTime"
+                    title="Time on your interests"
+                    icon="timer-outline"
+                  >
+                    <Text style={styles.patternRowCaption}>{keepingUpSummary.interestTime.headline}</Text>
+                    {keepingUpSummary.interestTime.hasSessions ? (
+                      <>
+                        {renderWeekRows(keepingUpSummary.interestTime.weeks, 'none kept')}
+                        {keepingUpSummary.interestTime.gapNote ? (
+                          <Text style={styles.patternRowCaption}>{keepingUpSummary.interestTime.gapNote}</Text>
+                        ) : null}
+                        {keepingUpSummary.interestTime.standings.map((standing) => (
+                          <View key={standing.interestId} style={styles.patternRow}>
+                            <Text style={styles.patternRowTitle}>{standing.interestName}</Text>
+                            <Text style={styles.patternRowCaption}>{standing.line}</Text>
+                          </View>
+                        ))}
+                      </>
+                    ) : null}
+                    <Text style={styles.patternRowCaption}>{keepingUpSummary.interestTime.caveat}</Text>
+                  </TabBand>
                 </>
               )
             ) : lens === 'harvest' ? (

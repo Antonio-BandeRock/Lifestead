@@ -253,6 +253,7 @@ const AREAS: readonly Area[] = [
   { one: 'project', many: 'projects', count: ['projects'], quiet: ['project_steps'] },
   // 2026-10-30. A stage turned on or off is part of its interest.
   { one: 'interest', many: 'interests', count: ['interests'], quiet: ['interest_stage_changes'] },
+  { one: 'interest session', many: 'interest sessions', count: ['interest_sessions'], quiet: [] },
   {
     one: 'piece of grow setup',
     many: 'pieces of grow setup',

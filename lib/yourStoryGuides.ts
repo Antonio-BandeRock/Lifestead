@@ -97,6 +97,7 @@ export type GuideRecordKey =
   | 'insurancePlan'
   | 'familyInMealPlan'
   | 'interest'
+  | 'interestSession'
   | 'interestProject';
 
 // Where a step belongs in the order that leads to a result soonest.
@@ -1463,6 +1464,7 @@ export const LENS_NAMES: Record<string, Record<string, string>> = {
   },
   '/interests': {
     myInterests: 'My Interests',
+    sessions: 'Sessions',
     projects: 'Projects',
   },
   '/insights': {

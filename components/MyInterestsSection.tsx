@@ -221,11 +221,19 @@ export function MyInterestsSection({ tabColor }: Props) {
 
   async function askRemove(interest: Interest) {
     const references = await countInterestReferences(interest.id);
-    if (references > 0) {
+    if (references.projects > 0) {
       explainNotYet(
-        references === 1
+        references.projects === 1
           ? 'A project names this interest, so removing it would leave that project pointing at nothing. Step back from it instead, which keeps everything.'
-          : `${references} projects name this interest, so removing it would leave them pointing at nothing. Step back from it instead, which keeps everything.`,
+          : `${references.projects} projects name this interest, so removing it would leave them pointing at nothing. Step back from it instead, which keeps everything.`,
+      );
+      return;
+    }
+    if (references.sessions > 0) {
+      explainNotYet(
+        references.sessions === 1
+          ? 'A session is kept for this interest, and removing it would take that record with it. Step back from it instead, which keeps everything.'
+          : `${references.sessions} sessions are kept for this interest, and removing it would take those records with it. Step back from it instead, which keeps everything.`,
       );
       return;
     }

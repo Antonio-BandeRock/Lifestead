@@ -100,6 +100,7 @@ export function waitingGroupFor(kind: string): WaitingGroupKey {
     case 'check':
     case 'todo':
     case 'project':
+    case 'practice':
     case 'routine':
       return 'todo';
     case 'garden':

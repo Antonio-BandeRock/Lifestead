@@ -52,6 +52,9 @@ export type Interest = {
   leftOffAt: string | null;
   /** Stepped back from. Everything is kept. */
   retiredAt: string | null;
+  /** The practice reminder (lib/interestSessions.ts): Date.getDay numbers and 'HH:MM'. */
+  practiceDays?: number[];
+  practiceTime?: string | null;
   createdAt: string;
 };
 

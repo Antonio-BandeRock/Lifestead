@@ -13,6 +13,7 @@ import { PageIdentityLabel } from '../../components/PageIdentityLabel';
 import { SwipeableTabScreen } from '../../components/SwipeableTabScreen';
 import { MyInterestsSection } from '../../components/MyInterestsSection';
 import { ProjectsSection } from '../../components/ProjectsSection';
+import { InterestSessionsSection } from '../../components/InterestSessionsSection';
 import { colors } from '../../constants/colors';
 import { typography, textShadow } from '../../constants/typography';
 import { useFloatingButtonScrollPadding } from '../../constants/floatingButton';
@@ -33,10 +34,11 @@ import { useOnVaultChange } from '../../lib/vaultReads';
 const TAB_COLOR = colors.tabInterests;
 const band = makeTabBandStyles(TAB_COLOR, { calm: true });
 
-type InterestsLens = 'myInterests' | 'projects';
+type InterestsLens = 'myInterests' | 'sessions' | 'projects';
 
 const LENS_FULL_NAMES: Record<InterestsLens, string> = {
   myInterests: 'My Interests',
+  sessions: 'Sessions',
   projects: 'Projects',
 };
 
@@ -55,6 +57,21 @@ const MY_INTERESTS_HELP: HelpSection[] = [
   },
 ];
 
+const SESSIONS_HELP: HelpSection[] = [
+  {
+    heading: 'What this is for',
+    body: 'Time you give to an interest: an hour at the workbench, twenty minutes of scales, an afternoon of birding. Start a timer while you go, or add it afterwards with the day and how long. A note and where you left off are optional.',
+  },
+  {
+    heading: 'Practice times',
+    body: 'Pick the days and a time for an interest and a reminder comes then. Done keeps a session for that day, and a day left unanswered is let go with nothing more said about it.',
+  },
+  {
+    heading: 'Only a record',
+    body: 'Sessions are listed by month with what they come to. A week with none is simply a week with none.',
+  },
+];
+
 const PROJECTS_HELP: HelpSection[] = [
   {
     heading: 'What this is for',
@@ -68,6 +85,7 @@ const PROJECTS_HELP: HelpSection[] = [
 
 const LENSES: LensOption<InterestsLens>[] = [
   { key: 'myInterests', label: 'My Interests', icon: 'color-palette-outline', help: MY_INTERESTS_HELP },
+  { key: 'sessions', label: 'Sessions', icon: 'timer-outline', help: SESSIONS_HELP },
   { key: 'projects', label: 'Projects', icon: 'layers-outline', help: PROJECTS_HELP },
 ];
 
@@ -78,7 +96,7 @@ const HELP_SECTIONS: HelpSection[] = [
   },
   {
     heading: 'Where to start',
-    body: 'Open My Interests and add one. Projects is for anything with steps that belongs to an interest.',
+    body: 'Open My Interests and add one. Sessions keeps the time you give it, and Projects is for anything with steps that belongs to an interest.',
   },
 ];
 
@@ -93,7 +111,7 @@ export default function InterestsScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      if (openInterestsLens === 'myInterests' || openInterestsLens === 'projects') {
+      if (openInterestsLens === 'myInterests' || openInterestsLens === 'sessions' || openInterestsLens === 'projects') {
         setLens(openInterestsLens);
         setRevealed(true);
         return;
@@ -129,6 +147,12 @@ export default function InterestsScreen() {
                 <View style={band.box}>
                   <Text style={styles.cardTitle}>My Interests</Text>
                   <MyInterestsSection tabColor={TAB_COLOR} />
+                </View>
+              ) : null}
+              {lens === 'sessions' ? (
+                <View style={band.box}>
+                  <Text style={styles.cardTitle}>Sessions</Text>
+                  <InterestSessionsSection tabColor={TAB_COLOR} />
                 </View>
               ) : null}
               {lens === 'projects' ? (

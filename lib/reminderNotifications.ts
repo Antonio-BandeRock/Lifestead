@@ -107,6 +107,9 @@ import { quietDecision, SNOOZE_MINUTES } from './quietHours';
 import { markUpkeepDone, listUpkeepItems } from './upkeepDb';
 import { getTodo, markTodoDone } from './todosDb';
 import { getProjectStep, setProjectStepDone } from './projectsDb';
+import { listInterests } from './interestsDb';
+import { addInterestSession, listInterestSessionsOn } from './interestSessionsDb';
+import { hasSessionOn, practiceFireTimes, practiceReminderText } from './interestSessions';
 import { getMorningCheckin, saveMorningCheckin } from './morningCheckinDb';
 import { isLockedNow, reminderDetailHidden } from './appLockSession';
 import { isRelayWake } from './relayWake';
@@ -291,7 +294,7 @@ export type ReminderKind = ReminderKindKey;
 const NUDGEABLE_TIMED_KINDS: ReminderKind[] = ['dose', 'meal', 'hydration', 'garden', 'reminder', 'routine', 'check'];
 
 type ScheduleLens = 'meds' | 'appointments' | 'meals' | 'todaysMeals' | 'hydration' | 'exercise';
-type ReminderTab = 'schedule' | 'garden' | 'life' | 'reconcile' | 'routine' | 'signals' | 'camera' | 'home' | 'workout' | 'checkinFlow';
+type ReminderTab = 'schedule' | 'garden' | 'life' | 'reconcile' | 'routine' | 'signals' | 'camera' | 'home' | 'workout' | 'checkinFlow' | 'interests';
 // The two check-in reminders land on Signals (C1).
 type SignalsReminderLens = 'generalNote' | 'flares';
 // 'plotsAndPlantings' is what a 1.0.42.13 payload says for a counter; it
@@ -311,7 +314,7 @@ type ReminderPayload = {
   /** Which tab a tap opens. Absent on anything queued before 1.0.39.8, and
    *  read back as 'schedule', which is the only thing it could have been. */
   tab?: ReminderTab;
-  lens: ScheduleLens | GardenReminderLens | LifeReminderLens | SignalsReminderLens | 'reconcile' | 'walk' | 'guide' | 'morningCheckin' | 'morningEnergy' | 'yourWeek';
+  lens: ScheduleLens | GardenReminderLens | LifeReminderLens | SignalsReminderLens | 'reconcile' | 'walk' | 'sessions' | 'guide' | 'morningCheckin' | 'morningEnergy' | 'yourWeek';
   /** A Photo Series only: what the photo is of and its name, so a tap opens
    *  the camera on that owner without reading the database first. */
   ownerKind?: string;
@@ -939,6 +942,28 @@ function buildExercisePlanned(plan: ExercisePlan, title: string, date: string, f
   };
 }
 
+// An interest's practice time (2026-10-30). One a day it falls on, the day
+// in the identifier so the week's coexist. An offer of time, never a nudge
+// about missing one: no follow-ups, and a day let go says nothing more.
+function buildPracticePlanned(interest: { id: string; name: string; leftOff: string | null }, fireAt: Date): PlannedNotification {
+  const words = practiceReminderText(interest.name, interest.leftOff);
+  return {
+    identifier: `${IDENTIFIER_PREFIX}practice:${interest.id}:${localDateString(fireAt)}`,
+    title: words.title,
+    body: `${words.body} ${answerLine('practice')}`,
+    fireAt,
+    payload: {
+      kind: 'practice',
+      scheduleItemId: interest.id,
+      fireAt: fireAt.toISOString(),
+      tab: 'interests',
+      lens: 'sessions',
+      title: words.title,
+      subject: interest.name,
+    },
+  };
+}
+
 // A To Do List thing (C2). The name they gave it is the title, one
 // notification for each of its times, and the time is in the identifier so
 // the 8am and the 8pm one coexist. dueAt says which time it is, so Done
@@ -1482,6 +1507,7 @@ function groupChannelFor(kind: ReminderKind): string {
     kind === 'reminder' ||
     kind === 'routine' ||
     kind === 'exercise' ||
+    kind === 'practice' ||
     kind === 'check' ||
     kind === 'checkin' ||
     kind === 'morning' ||
@@ -1693,6 +1719,23 @@ async function runSync(): Promise<ReminderSyncResult> {
       }
     } catch (error) {
       console.warn('[reminderNotifications] could not read planned exercise', error);
+    }
+  }
+
+  // Practice times on Interests > Sessions. The next one ahead is a
+  // first-time reminder and the rest of the week queues behind. An interest
+  // stepped back from says nothing.
+  if (isReminderKindEnabled(preferences, 'practice')) {
+    try {
+      for (const interest of await listInterests()) {
+        if (interest.retiredAt) continue;
+        practiceFireTimes(interest.practiceDays ?? [], interest.practiceTime ?? null, now, LOOKAHEAD_DAYS).forEach((fireAt, index) => {
+          const planned = buildPracticePlanned(interest, fireAt);
+          (index === 0 ? first : followUps).set(planned.identifier, planned);
+        });
+      }
+    } catch (error) {
+      console.warn('[reminderNotifications] could not read practice times', error);
     }
   }
 
@@ -1979,6 +2022,7 @@ export type ReminderTapTarget =
   | { pathname: '/garden'; params: { openGardenLens: GardenReminderLens } }
   | { pathname: '/life'; params: { openLifeLens: LifeReminderLens } }
   | { pathname: '/routine'; params: { id: string } }
+  | { pathname: '/interests'; params: { openInterestsLens: 'sessions' } }
   | { pathname: '/workout'; params: { id: string; planId: string; on: string } }
   | { pathname: '/log'; params: { openSignalsLens: SignalsReminderLens } }
   | { pathname: '/reconcile' }
@@ -2055,6 +2099,9 @@ export function resolveReminderTap(response: Notifications.NotificationResponse 
   // A planned workout opens the player on it, carrying the plan and day so
   // finishing it marks that day done. A workout since removed lands on
   // Life > Workouts, which app/workout.tsx already does for an unknown id.
+  if (data?.tab === 'interests') {
+    return { pathname: '/interests', params: { openInterestsLens: 'sessions' } };
+  }
   if (data?.tab === 'workout') {
     if (typeof data.workoutId === 'string' && data.workoutId && typeof data.scheduleItemId === 'string' && typeof data.onDate === 'string') {
       return { pathname: '/workout', params: { id: data.workoutId, planId: data.scheduleItemId, on: data.onDate } };
@@ -2656,6 +2703,13 @@ async function recordAnswer(
     const todo = await getTodo(id);
     if (!todo || todo.doneAt) return;
     await markTodoDone(id, today);
+    return;
+  }
+  if (plan.write === 'practiceSession') {
+    // The id names the interest. A session already kept today, by hand or
+    // by an earlier press, means this adds nothing.
+    if (hasSessionOn(await listInterestSessionsOn(today), id, today)) return;
+    await addInterestSession({ interestId: id, projectId: null, doneOn: today, minutes: null, note: null, leftOff: null });
     return;
   }
   if (plan.write === 'projectStepDone') {

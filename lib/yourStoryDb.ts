@@ -200,6 +200,7 @@ const GUIDE_RECORD_SQL: Record<GuideRecordKey, string[]> = {
   insurancePlan: ['SELECT MIN(created_at) AS at FROM finance_insurance_plans'],
   familyInMealPlan: ['SELECT MIN(created_at) AS at FROM family_members WHERE include_in_meal_plan = 1'],
   interest: ['SELECT MIN(created_at) AS at FROM interests'],
+  interestSession: ['SELECT MIN(created_at) AS at FROM interest_sessions WHERE running = 0'],
   interestProject: ["SELECT MIN(created_at) AS at FROM projects WHERE area = 'interests'"],
 };
 

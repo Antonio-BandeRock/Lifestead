@@ -72,6 +72,7 @@ const {
   summarizeUpkeepTimeliness,
   drainDirection,
   summarizeWork,
+  summarizeInterestTime,
   summarizeKeepingUp,
   describeKeepingUpHome,
 } = K;
@@ -504,6 +505,28 @@ check('the drain is what the weekly rows carry', [work.weeks[0].value, work.week
 check('the caveat is always there', work.caveat,
   'Four answers a week on a scale of one to five. There is no score here and nothing being graded. What it took out of you is the one worth putting beside your flares, since that is the answer that might line up with them.');
 
+// Time on interests: counted per week, never ranked, a timer never invented.
+const noTime = summarizeInterestTime(inputs());
+check('no sessions says where they come from', noTime.headline,
+  'No sessions kept on an interest in this range. This fills in from the next one on the Interests tab.');
+check('and every week reads as not kept', noTime.gapNote,
+  '2 of these 2 weeks have nothing to read: no session was kept in them.');
+const time = summarizeInterestTime(inputs({
+  interestSessions: [
+    { interestId: 'g', interestName: 'Guitar', date: '2026-09-12', minutes: 45 },
+    { interestId: 'g', interestName: 'Guitar', date: '2026-09-20', minutes: 30 },
+    { interestId: 'b', interestName: 'birding', date: '2026-09-21', minutes: null },
+    { interestId: 'b', interestName: 'birding', date: '2026-08-01', minutes: 90 },
+  ],
+}));
+check('sessions in range only, with timed minutes', time.headline,
+  '3 sessions across 2 interests, 1 hour 15 minutes of them timed.');
+check('interests read alphabetically, not by the most time', time.standings.map((s) => s.interestName), ['birding', 'Guitar']);
+check('an untimed session is said plainly', time.standings[0].line, '1 session, none of them timed.');
+check('a timed one gives its total', time.standings[1].line, '2 sessions, 1 hour 15 minutes timed.');
+check('weekly counts', [time.weeks[0].value, time.weeks[1].value], [1, 2]);
+checkTrue('sessions alone show the lens', summarizeKeepingUp(inputs({ interestSessions: [{ interestId: 'g', interestName: 'Guitar', date: '2026-09-20', minutes: 5 }] })).hasAnything);
+
 // ---------------------------------------------------------------------------
 // 11. The whole lens, and the Home card.
 // ---------------------------------------------------------------------------
@@ -576,6 +599,10 @@ const everySentence = [
   work.headline,
   work.needsLine,
   work.caveat,
+  noTime.headline,
+  time.headline,
+  time.caveat,
+  ...time.standings.map((s) => s.line),
   drainDirection([2, 2, 4, 4]),
   home.line,
   home.caption,

@@ -12,6 +12,7 @@ import {
   type InterestStage,
   type InterestStageChange,
 } from './interests';
+import { readPracticeDays, writePracticeDays } from './interestSessions';
 
 type InterestRow = {
   id: string;
@@ -26,6 +27,8 @@ type InterestRow = {
   leftOff: string | null;
   leftOffAt: string | null;
   retiredAt: string | null;
+  practiceDays: string | null;
+  practiceTime: string | null;
   createdAt: string;
 };
 
@@ -38,7 +41,8 @@ type ChangeRow = {
 };
 
 const COLUMNS = `id, name, kind, about, following, practising, sharing, earning, started_on AS startedOn,
-  left_off AS leftOff, left_off_at AS leftOffAt, retired_at AS retiredAt, created_at AS createdAt`;
+  left_off AS leftOff, left_off_at AS leftOffAt, retired_at AS retiredAt, practice_days AS practiceDays, practice_time AS practiceTime,
+  created_at AS createdAt`;
 
 function fromRow(row: InterestRow): Interest {
   return {
@@ -56,6 +60,8 @@ function fromRow(row: InterestRow): Interest {
     leftOff: row.leftOff,
     leftOffAt: row.leftOffAt,
     retiredAt: row.retiredAt,
+    practiceDays: readPracticeDays(row.practiceDays),
+    practiceTime: row.practiceTime,
     createdAt: row.createdAt,
   };
 }
@@ -207,6 +213,19 @@ export async function setInterestRetired(id: string, retired: boolean): Promise<
   await db.runAsync('UPDATE interests SET retired_at = ?, updated_at = ? WHERE id = ?', retired ? now : null, now, id);
 }
 
+/** The practice reminder. No days or no time turns it off. */
+export async function setInterestPractice(id: string, days: readonly number[], time: string | null): Promise<void> {
+  const db = await getDatabase();
+  const stored = writePracticeDays(days);
+  await db.runAsync(
+    'UPDATE interests SET practice_days = ?, practice_time = ?, updated_at = ? WHERE id = ?',
+    stored,
+    stored ? time : null,
+    new Date().toISOString(),
+    id,
+  );
+}
+
 /** Renames a kind the person named, on every interest that carries it. */
 export async function renameInterestKind(from: string, to: string): Promise<void> {
   const cleaned = cleanOrNull(to);
@@ -217,15 +236,17 @@ export async function renameInterestKind(from: string, to: string): Promise<void
 
 /**
  * What else refers to an interest. Deleting is only offered when nothing
- * does, so a project never ends up naming an interest that is gone.
+ * does, so a project never ends up naming an interest that is gone and a
+ * session is never left belonging to nothing.
  */
-export async function countInterestReferences(id: string): Promise<number> {
+export async function countInterestReferences(id: string): Promise<{ projects: number; sessions: number }> {
   const db = await getDatabase();
-  const row = await db.getFirstAsync<{ n: number }>(
+  const projects = await db.getFirstAsync<{ n: number }>(
     `SELECT COUNT(*) AS n FROM projects WHERE link_kind = 'interest' AND link_id = ?`,
     id,
   );
-  return Number(row?.n ?? 0);
+  const sessions = await db.getFirstAsync<{ n: number }>('SELECT COUNT(*) AS n FROM interest_sessions WHERE interest_id = ? AND running = 0', id);
+  return { projects: Number(projects?.n ?? 0), sessions: Number(sessions?.n ?? 0) };
 }
 
 /** Removes an interest and its own stage history, and nothing else. */
@@ -233,6 +254,8 @@ export async function deleteInterest(id: string): Promise<void> {
   const db = await getDatabase();
   await db.withTransactionAsync(async () => {
     await db.runAsync('DELETE FROM interest_stage_changes WHERE interest_id = ?', id);
+    // Only a timer left going can remain, since a finished session blocks removing.
+    await db.runAsync('DELETE FROM interest_sessions WHERE interest_id = ?', id);
     await db.runAsync('DELETE FROM interests WHERE id = ?', id);
   });
 }

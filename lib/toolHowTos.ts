@@ -80,6 +80,16 @@ export type ToolMark =
   | 'interest.leftOff'
   | 'interest.change'
   | 'interest.stepBack'
+  | 'session.timer'
+  | 'session.start'
+  | 'session.stop'
+  | 'session.log'
+  | 'session.save'
+  | 'session.row'
+  | 'session.change'
+  | 'session.practice'
+  | 'session.practiceOpen'
+  | 'session.practiceSave'
   | 'work.overview'
   | 'work.todos'
   | 'work.have'
@@ -2728,6 +2738,48 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Step Back, or Come Back to It on one under Stepped Back.', mark: 'interest.stepBack' },
       ],
       forYou: 'Nothing is lost. It waits under Stepped Back with its history and its projects.',
+    },
+  ],
+  '/interests#sessions': [
+    {
+      key: 'timer',
+      title: 'Time a session while you go',
+      steps: [
+        { say: 'Tap Start a Timer.', mark: 'session.timer', stay: true },
+        { say: 'Pick the interest, and a project if it is for one.' },
+        { say: 'Tap Start the Timer.', mark: 'session.start', stay: true },
+        { say: 'When you finish, write what you did and where you left off if you like, then tap Stop and Keep.', mark: 'session.stop' },
+      ],
+      forYou: 'The time is kept under its month. Where you left off also shows first on the interest in My Interests.',
+    },
+    {
+      key: 'log',
+      title: 'Add a session afterwards',
+      steps: [
+        { say: 'Tap Add a Session.', mark: 'session.log', stay: true },
+        { say: 'Pick the interest. Type the day, or leave it empty for today, and how long if you know.' },
+        { say: 'Tap Keep the Session.', mark: 'session.save' },
+      ],
+      forYou: 'A session with no length is kept as not timed, never as zero.',
+    },
+    {
+      key: 'change',
+      title: 'Change or remove a session',
+      steps: [
+        { say: 'Tap the session to open it.', mark: 'session.row', stay: true },
+        { say: 'Tap Change, or Remove.', mark: 'session.change' },
+      ],
+      forYou: 'A changed session moves to the month of its new day.',
+    },
+    {
+      key: 'practice',
+      title: 'Set a practice time',
+      steps: [
+        { say: 'Tap Practice Times.', mark: 'session.practice', stay: true },
+        { say: 'Tap the interest.', mark: 'session.practiceOpen', stay: true },
+        { say: 'Tap the days, type the time, and tap Save.', mark: 'session.practiceSave' },
+      ],
+      forYou: 'A reminder comes on those days at that time. Done keeps a session for the day, and one left unanswered is let go.',
     },
   ],
   '/interests#projects': [

@@ -10640,6 +10640,37 @@ async function runDatabaseInitialization() {
       CREATE INDEX IF NOT EXISTS idx_interest_stage_changes_interest ON interest_stage_changes(interest_id);
     `);
 
+    // Sessions on an interest (2026-10-30, lib/interestSessions.ts): time
+    // given to it, typed afterwards or kept by a timer. A timer still going
+    // is a row with running = 1, so it travels to the other device like any
+    // record and every reader that counts leaves it out. minutes is null for
+    // a session that was not timed, never 0. done_on is the local day.
+    // practice_days ("1,3,5", Date.getDay numbers) and practice_time
+    // ('HH:MM') on interests are the practice reminder.
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS interest_sessions (
+        id TEXT PRIMARY KEY,
+        interest_id TEXT NOT NULL,
+        project_id TEXT,
+        done_on TEXT NOT NULL,
+        started_at TEXT,
+        minutes INTEGER,
+        note TEXT,
+        left_off TEXT,
+        running INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_interest_sessions_interest ON interest_sessions(interest_id);
+      CREATE INDEX IF NOT EXISTS idx_interest_sessions_day ON interest_sessions(done_on);
+    `);
+    const interestColumns = await db.getAllAsync<{ name: string }>('PRAGMA table_info(interests)');
+    for (const practiceColumn of ['practice_days', 'practice_time']) {
+      if (!interestColumns.some((column) => column.name === practiceColumn)) {
+        await db.execAsync(`ALTER TABLE interests ADD COLUMN ${practiceColumn} TEXT;`);
+      }
+    }
+
     // Ties a lightweight daily during-a-trial check-in (or its escalated
     // full symptom log -- same table either way, see recordCheckin's own
     // comment) back to the real trial it belongs to, so a trial's own

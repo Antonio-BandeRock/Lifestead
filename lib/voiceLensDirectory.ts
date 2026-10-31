@@ -160,6 +160,7 @@ export const VOICE_LENS_DIRECTORY: VoiceLensPlace[] = [
   { tab: '/garden', param: 'openGardenLens', key: 'growingCosts', label: 'Growing Costs' },
   { tab: '/garden', param: 'openGardenLens', key: 'horticulture', label: 'Horticulture' },
   { tab: '/interests', param: 'openInterestsLens', key: 'myInterests', label: 'My Interests' },
+  { tab: '/interests', param: 'openInterestsLens', key: 'sessions', label: 'Sessions' },
   { tab: '/interests', param: 'openInterestsLens', key: 'projects', label: 'Projects' },
   { tab: '/life', param: 'openLifeLens', key: 'groceryList', label: 'Grocery List' },
   { tab: '/life', param: 'openLifeLens', key: 'conditions', label: 'Conditions' },
