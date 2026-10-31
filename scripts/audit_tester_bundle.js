@@ -30,6 +30,8 @@ const DEVELOPER_ONLY = [
   ['components/TellClaudeHost.tsx', '[tellClaude] could not write the wording edit'],
   ['components/TellClaudeHost.tsx', '[tellClaude] could not write the untranslated words'],
   ['lib/devSeed.ts', 'INSERT INTO dev_seed_records'],
+  ['lib/testerApprove.ts', 'tester_approval_seed_v1'],
+  ['components/DeveloperToolsCard.tsx', '[testerApprove] could not send the approval key'],
 ];
 
 function exportBundle(variant) {

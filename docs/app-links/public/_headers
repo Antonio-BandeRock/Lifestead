@@ -16,3 +16,11 @@
 /tester/*
   Cache-Control: max-age=300
   X-Robots-Tag: noindex
+
+/approve/*
+  Cache-Control: max-age=300
+  X-Robots-Tag: noindex
+
+/activate/*
+  Cache-Control: max-age=300
+  X-Robots-Tag: noindex
