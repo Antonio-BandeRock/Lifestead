@@ -292,6 +292,7 @@ export type ToolMark =
   | 'home.arrangeDone'
   | 'home.captureType'
   | 'report.button'
+  | 'tester.report'
   | 'home.captureSay'
   | 'home.captureSort'
   | 'capture.readPage'
@@ -2221,6 +2222,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Write the Email. Your email app opens with the report in it, and nothing goes until you press Send there.' },
       ],
       forYou: 'What you found reaches the people building the app with the version and the screen already on it, so it can be put right.',
+    },
+    {
+      key: 'testerWelcome',
+      title: 'Read what testing asks of you',
+      testerOnly: true,
+      steps: [
+        { say: 'Open the band with the name of Thank You for Testing Lifestead. It stays on Home, and the same words are in Getting Set Up.', mark: 'homeBand.testerWelcome', stay: true },
+        { say: 'Tap Report a Problem under it to say what you found, the same as the flag at the edge.', mark: 'tester.report' },
+      ],
+      forYou: 'What this version is, how to say what you found, and the version number to quote are always one look away.',
     },
     {
       key: 'openBand',

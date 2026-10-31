@@ -356,6 +356,19 @@ const BY_HAND: Readonly<Record<string, string>> = {
   'Pick what kind it is, then type it, or tap the mic and say it.': 'Elige qué tipo es, y luego escríbelo, o toca el micrófono y dilo.',
   'Tap Write the Email. Your email app opens with the report in it, and nothing goes until you press Send there.': 'Toca Escribir el correo. Tu app de correo se abre con el reporte, y no se envía nada hasta que presiones Enviar ahí.',
   'What you found reaches the people building the app with the version and the screen already on it, so it can be put right.': 'Lo que encontraste llega a quienes hacen la app con la versión y la pantalla ya incluidas, para que se pueda corregir.',
+  // The tester welcome, T5 (2026-10-31).
+  'For Testers': 'Para quienes prueban',
+  'Thank You for Testing Lifestead': 'Gracias por probar Lifestead',
+  'This is the test version. It has everything the paid version has, and it keeps your records on this phone the way the finished app will.': 'Esta es la versión de prueba. Tiene todo lo que tiene la versión de pago, y guarda tus registros en este teléfono como lo hará la app terminada.',
+  'When something goes wrong, or you wish something worked differently, tap the flag at the edge of the screen, or press and hold any band. Say what happened by typing or with the mic, and it goes by email to the people building the app.': 'Cuando algo salga mal, o quieras que algo funcione de otra manera, toca la bandera en el borde de la pantalla, o mantén presionada cualquier sección. Cuenta qué pasó escribiendo o con el micrófono, y se va por correo a quienes hacen la app.',
+  'Updates arrive by themselves and never take away what you have put in.': 'Las actualizaciones llegan solas y nunca quitan lo que has guardado.',
+  'Please keep this version to yourself. It was made for you and this device.': 'Por favor, guarda esta versión solo para ti. Se hizo para ti y para este dispositivo.',
+  'Version {version}. Questions go to {address}.': 'Versión {version}. Las preguntas van a {address}.',
+  'Report a Problem': 'Reportar un problema',
+  'Read what testing asks of you': 'Lee lo que pide la prueba',
+  'Open the band with the name of Thank You for Testing Lifestead. It stays on Home, and the same words are in Getting Set Up.': 'Abre la sección llamada Gracias por probar Lifestead. Se queda en Inicio, y lo mismo está en Preparándote.',
+  'Tap Report a Problem under it to say what you found, the same as the flag at the edge.': 'Toca Reportar un problema debajo para contar lo que encontraste, igual que con la bandera del borde.',
+  'What this version is, how to say what you found, and the version number to quote are always one look away.': 'Qué es esta versión, cómo contar lo que encontraste y el número de versión que debes mencionar siempre están a la vista.',
 };
 
 export const ES: Readonly<Record<string, string>> = { ...ES_PARTS, ...BY_HAND };

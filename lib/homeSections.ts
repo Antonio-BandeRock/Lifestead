@@ -36,6 +36,8 @@ export const HOME_SECTION_TAB_PATH: Record<HomeSectionKey, string | null> = {
   // to say where each one fits. A top-level row, like Capture.
   yourStory: null,
   nextThing: null,
+  // The tester welcome, T5: about the app being tested, not any one tab.
+  testerWelcome: null,
   // Waiting for an Answer, 1.0.60.3. Null because the reminders waiting
   // come from every tab at once.
   waitingAnswers: null,
