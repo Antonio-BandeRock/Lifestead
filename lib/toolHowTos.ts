@@ -3028,6 +3028,17 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'A card you knew comes back after a longer gap each time. One you did not know yet comes back once more at the end of the sitting and again tomorrow.',
     },
     {
+      key: 'kinds',
+      title: 'Answer the other kinds of card',
+      steps: [
+        { say: 'Read the line at the top of the card. It says what the card asks: pick one, make your best guess, fill in the gap, put them in order, match the pairs, or say it in your words.' },
+        { say: 'Answer it: tap an option, type in the gap and tap Check, tap the items first to last, tap a tile on the left and then its pair, or say or type your answer and tap Turn It Over.', mark: 'learn.turn', stay: true },
+        { say: 'Read the answer, and for a pick that was not it, why not. Show the Answer opens it at any time.' },
+        { say: 'Tap how it went. You decide that, not the check.', mark: 'learn.grade' },
+      ],
+      forYou: 'Every option on a card says why it is or is not the answer, so a pick that was not it still teaches something.',
+    },
+    {
       key: 'known',
       title: 'See what you now know',
       steps: [

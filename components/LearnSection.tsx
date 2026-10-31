@@ -11,16 +11,14 @@
 
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
-import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
-import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 import { localDayOf } from '../lib/interests';
 import { LEARN_DECKS, cardById, deckById } from '../lib/learnDecks';
 import { addLearnReview, listLearnReviews } from '../lib/learnDb';
 import {
-  LEARN_GRADES,
-  LEARN_GRADE_LABELS,
   countKnown,
   deckStanding,
   describeDeckReady,
@@ -32,6 +30,7 @@ import {
 } from '../lib/learnSchedule';
 import { explainNotYet } from '../lib/notYet';
 import { t } from '../lib/i18n';
+import { LearnCardView } from './LearnCardView';
 import { useWalkMark } from './WalkMark';
 
 type Props = { tabColor: string };
@@ -40,7 +39,6 @@ type SittingState = {
   deckId: string;
   queue: string[];
   index: number;
-  turned: boolean;
   /** Cards already put back once for practice, so each comes back only once. */
   practised: string[];
 };
@@ -80,7 +78,7 @@ export function LearnSection({ tabColor }: Props) {
       return;
     }
     setDoneLine(null);
-    setSitting({ deckId, queue: plan.cardIds, index: 0, turned: false, practised: [] });
+    setSitting({ deckId, queue: plan.cardIds, index: 0, practised: [] });
   }
 
   async function answer(grade: LearnGrade) {
@@ -97,7 +95,7 @@ export function LearnSection({ tabColor }: Props) {
     }
     const next = sitting.index + 1;
     if (next < queue.length) {
-      setSitting({ ...sitting, queue, practised, index: next, turned: false });
+      setSitting({ ...sitting, queue, practised, index: next });
       return;
     }
     const deck = deckById(sitting.deckId);
@@ -147,49 +145,12 @@ export function LearnSection({ tabColor }: Props) {
                 <Text style={styles.captionText}>
                   {t('Card {n} of {total}', { n: sitting.index + 1, total: sitting.queue.length })}
                 </Text>
-                <Text style={styles.bodyText}>{current.card.front}</Text>
-                {!sitting.turned ? (
-                  <TouchableOpacity
-                    ref={walkMark.ref('learn.turn')}
-                    style={[styles.primaryButton, walkMark('learn.turn')]}
-                    onPress={() => setSitting({ ...sitting, turned: true })}
-                    accessibilityRole="button"
-                  >
-                    <Text style={styles.primaryButtonText}>Turn It Over</Text>
-                  </TouchableOpacity>
-                ) : (
-                  <>
-                    <Text style={styles.answerText}>{current.card.back}</Text>
-                    {current.card.source ? (
-                      <TouchableOpacity
-                        ref={walkMark.ref('learn.source')}
-                        style={walkMark('learn.source')}
-                        onPress={() => {
-                          if (current.card.source) void Linking.openURL(current.card.source.url);
-                        }}
-                        accessibilityRole="link"
-                      >
-                        <Text style={styles.linkText}>{current.card.source.source}</Text>
-                      </TouchableOpacity>
-                    ) : null}
-                    <Text style={styles.captionText}>How did that go?</Text>
-                    <View
-                      ref={walkMark.ref('learn.grade')}
-                      style={[styles.pillRow, walkMark('learn.grade')]}
-                    >
-                      {LEARN_GRADES.map((grade) => (
-                        <TouchableOpacity
-                          key={grade}
-                          style={styles.pill}
-                          onPress={() => void answer(grade)}
-                          accessibilityRole="button"
-                        >
-                          <Text style={styles.pillText}>{LEARN_GRADE_LABELS[grade]}</Text>
-                        </TouchableOpacity>
-                      ))}
-                    </View>
-                  </>
-                )}
+                <LearnCardView
+                  key={`${sitting.index}:${current.card.id}`}
+                  card={current.card}
+                  day={day}
+                  onGrade={(grade) => void answer(grade)}
+                />
                 <TouchableOpacity onPress={() => setSitting(null)} accessibilityRole="button">
                   <Text style={styles.linkText}>Stop for Now</Text>
                 </TouchableOpacity>
@@ -209,11 +170,7 @@ const styles = StyleSheet.create({
   cardBlock: { gap: 8, marginTop: 4 },
   groupHeading: { ...typography.label, color: colors.textPrimary, ...textShadow },
   bodyText: { ...typography.body, color: colors.textPrimary, ...textShadow },
-  answerText: { ...typography.body, color: colors.textPrimary, ...textShadow },
   captionText: { ...typography.caption, color: colors.textMuted, ...textShadow },
-  pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  pill: { ...PILL },
-  pillText: { ...PILL_TEXT },
   primaryButton: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
   primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },

@@ -22,6 +22,7 @@ function load(rel) {
 }
 const S = load('lib/learnSchedule.ts');
 const D = load('lib/learnDecks.ts');
+const K = load('lib/learnKinds.ts');
 
 let pass = 0;
 let fail = 0;
@@ -116,6 +117,8 @@ for (const deck of D.LEARN_DECKS) {
     check(`${card.id}: unique id`, !cardIds.has(card.id));
     cardIds.add(card.id);
     check(`${card.id}: front and back`, Boolean(card.front && card.back));
+    const problems = K.cardProblems(card);
+    check(`${card.id}: parts fit its kind`, problems.length === 0, problems);
     if (card.source) {
       check(`${card.id}: source named`, Boolean(card.source.source));
       check(`${card.id}: source is https`, /^https:\/\//.test(card.source.url), card.source.url);
@@ -123,11 +126,45 @@ for (const deck of D.LEARN_DECKS) {
   }
   check(`${deck.id}: deckById`, D.deckById(deck.id) === deck);
 }
+const kindsUsed = new Set(D.LEARN_DECKS.flatMap((deck) => deck.cards.map((card) => K.kindOf(card))));
+check('every kind is used in a ready-made deck', K.LEARN_KINDS.every((kind) => kindsUsed.has(kind)), [...kindsUsed]);
 check('cardById finds a card', D.cardById('evidence-rct')?.deck.id === 'evidence');
+
+// The kinds of question.
+check('typed answers are read kindly', K.normalizeAnswer('  The Confounder! ') === 'confounder');
+check('accents are read kindly', K.normalizeAnswer('Factor de Confusión') === 'factor de confusion');
+check('a blank takes any accepted answer', K.checkBlank(['confounder', 'confounding factor'], 'a Confounding factor.'));
+check('a blank does not take another word', !K.checkBlank(['confounder'], 'placebo'));
+check('an empty blank is not an answer', !K.checkBlank(['confounder'], '   '));
+const sh1 = K.shuffledIndexes(5, 'card:2026-10-30');
+check('a shuffle is the same all day', sh1.join() === K.shuffledIndexes(5, 'card:2026-10-30').join());
+check('a shuffle holds every item once', [...sh1].sort().join() === '0,1,2,3,4');
+let neverRight = true;
+for (let i = 0; i < 200; i++) {
+  for (const n of [2, 3, 5]) {
+    const order = K.shuffledIndexes(n, `seed${i}`);
+    if (order.every((v, j) => v === j)) neverRight = false;
+  }
+}
+check('a shuffle never starts in the right order', neverRight);
+check('one item shuffles to itself', K.shuffledIndexes(1, 'x').join() === '0');
+check('an order in place', K.orderIsRight(['a', 'b', 'c'], ['a', 'b', 'c']));
+check('an order out of place', !K.orderIsRight(['a', 'b', 'c'], ['b', 'a', 'c']));
+check('an order not finished', !K.orderIsRight(['a', 'b', 'c'], ['a', 'b']));
+check('a pair', K.isPair([{ left: 'x', right: 'y' }], 'x', 'y') && !K.isPair([{ left: 'x', right: 'y' }], 'y', 'x'));
+check('a pick that is it', K.describePick({ text: 'a', why: 'Because.' }, true) === 'That is it. Because.');
+check('a pick that is not it', K.describePick({ text: 'a', why: 'Because.' }, false) === 'Not this one. Because.');
+check('a blank answer named', K.describeBlank(false, ['confounder']) === 'The gap holds "confounder".');
+check('every kind has a prompt', K.LEARN_KINDS.every((kind) => Boolean(K.KIND_PROMPTS[kind])));
+check('a choice with no reasons is caught', K.cardProblems({ kind: 'choice', front: 'q', back: 'a', options: [{ text: 'a', why: '' }, { text: 'b', why: 'x' }], answer: 0 }).length > 0);
+check('a blank with no gap is caught', K.cardProblems({ kind: 'blank', front: 'q', back: 'a', accept: ['x'] }).length > 0);
+check('a case with no story is caught', K.cardProblems({ kind: 'case', front: 'q', back: 'a', options: [{ text: 'a', why: 'x' }, { text: 'b', why: 'y' }], answer: 0 }).length > 0);
+check('pairs with a repeated tile are caught', K.cardProblems({ kind: 'pairs', front: 'q', back: 'a', pairs: [{ left: 'a', right: 'x' }, { left: 'a', right: 'y' }, { left: 'b', right: 'z' }] }).length > 0);
 
 // Wiring.
 const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
 check('the table', read('lib/db.ts').includes('CREATE TABLE IF NOT EXISTS learn_reviews'));
+check('the section draws cards through the card view', read('components/LearnSection.tsx').includes('<LearnCardView'));
 check('the lens', read('app/(tabs)/interests.tsx').includes("lens === 'learn'"));
 check('how-tos', read('lib/toolHowTos.ts').includes("'/interests#learn'"));
 check('voice', read('lib/voiceLensDirectory.ts').includes("key: 'learn'"));
@@ -138,7 +175,7 @@ const FORBIDDEN = [
   'streak', 'points', 'score', 'level', 'badge', 'well done', 'great job', 'missed', 'overdue', 'behind',
   'fail', 'wrong', 'must', 'you should', 'real ', 'genuine', 'honestly', '—', '–', ' -- ', 'percent', '%',
 ];
-const FILES = ['lib/learnSchedule.ts', 'lib/learnDecks.ts', 'lib/learnDb.ts', 'components/LearnSection.tsx'];
+const FILES = ['lib/learnSchedule.ts', 'lib/learnDecks.ts', 'lib/learnDb.ts', 'components/LearnSection.tsx', 'lib/learnKinds.ts', 'components/LearnCardView.tsx'];
 const re = /'((?:[^'\\\n]|\\.)*)'|"((?:[^"\\\n]|\\.)*)"|`((?:[^`\\]|\\.)*)`/g;
 for (const rel of FILES) {
   const text = read(rel)

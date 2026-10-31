@@ -11,10 +11,14 @@
 // 3. Cards say what the evidence shows and how strong it is. None tells the
 //    person what to do about their health, and none scores them.
 // 4. Each card stands alone, so a sitting can offer any card in any order.
+// 5. A card's kind and its parts (lib/learnKinds.ts) agree, and every option
+//    of a choice says why it is or is not the answer.
+
+import type { LearnCardParts } from './learnKinds';
 
 export type LearnSource = { source: string; url: string };
 
-export type LearnCard = {
+export type LearnCard = LearnCardParts & {
   id: string;
   /** The question side. */
   front: string;
@@ -146,6 +150,109 @@ const EVIDENCE: LearnDeck = {
       front: 'Why is what you learn from your records worth having, even though it is a sample of one?',
       back: 'It is about the one body you live in. A trial says what happens on average across many people, and you may not be average. Your records cannot prove a cause, but they can tell you what is worth testing.',
       thinking: true,
+    },
+    {
+      id: 'evidence-strongest-choice',
+      kind: 'choice',
+      front: 'Which of these usually gives the strongest evidence that a treatment works?',
+      options: [
+        { text: 'A case report about one patient', why: 'It describes what happened to one person, with nobody to compare them with.' },
+        { text: 'An expert’s opinion', why: 'An opinion with no study to rest on counts for least, however experienced the expert.' },
+        { text: 'A systematic review of randomized trials', why: 'It gathers the trials in which chance decided who was treated, and weighs them together.' },
+        { text: 'A survey of people who tried it', why: 'People who felt better are likelier to answer, and nobody who went without it is compared.' },
+      ],
+      answer: 2,
+      back: 'A systematic review of randomized trials. Chance deciding who is treated rules out most other explanations, and pooling trials keeps one unusual result from deciding it.',
+      thinking: true,
+    },
+    {
+      id: 'evidence-ladder-order',
+      kind: 'order',
+      front: 'Put these in order, from the weakest evidence that a treatment works to the strongest.',
+      items: [
+        'An expert’s opinion',
+        'A case report',
+        'A study watching people over time',
+        'A randomized controlled trial',
+        'A systematic review of randomized trials',
+      ],
+      back: 'An opinion rests on no data, a case report has no comparison, a study watching people has a comparison that chance did not decide, a trial has one chance decided, and a review pools several trials.',
+      thinking: true,
+    },
+    {
+      id: 'evidence-terms-pairs',
+      kind: 'pairs',
+      front: 'Match each word to what it means in a study.',
+      pairs: [
+        { left: 'Confounder', right: 'Something that moves two things at once' },
+        { left: 'Placebo', right: 'A dummy that looks the same as the treatment' },
+        { left: 'Randomized', right: 'Chance decides who gets what' },
+        { left: 'Blinded', right: 'Who got what is kept hidden' },
+      ],
+      back: 'A confounder moves two things at once, a placebo looks the same as the treatment, randomized means chance decides who gets what, and blinded means who got what is kept hidden.',
+      thinking: false,
+    },
+    {
+      id: 'evidence-confounder-blank',
+      kind: 'blank',
+      front: 'Something that moves two things at once, making them look connected, is called a ____.',
+      accept: ['confounder', 'confounding factor', 'confounding variable', 'factor de confusión'],
+      back: 'A confounder. Hot weather is what drives ice cream sales and drownings rising together.',
+      thinking: false,
+    },
+    {
+      id: 'evidence-doubling-estimate',
+      kind: 'estimate',
+      front: 'A risk of 1 in 10,000 doubles. About how many people in 10,000 does it now affect?',
+      options: [
+        { text: 'About 2', why: 'Twice 1 is 2, so one more person in every ten thousand.' },
+        { text: 'About 200', why: 'That would be two hundred times as many, not twice.' },
+        { text: 'About 2,000', why: 'That would be one person in five.' },
+        { text: 'About half of them', why: 'Doubling a small risk leaves it small.' },
+      ],
+      answer: 0,
+      back: 'About 2 in 10,000. Doubles sounds large, and here it means one more person in ten thousand.',
+      thinking: true,
+    },
+    {
+      id: 'evidence-worst-week-case',
+      kind: 'case',
+      story: 'Ana starts a supplement in the worst week of joint pain she has had all year. Two weeks later the pain is much better, and she tells everyone the supplement did it.',
+      front: 'What is the first other explanation worth ruling out?',
+      options: [
+        { text: 'The pain was easing by itself after its worst point', why: 'Pain at its worst usually eases back toward usual whatever is started then. This is regression to the mean.' },
+        { text: 'The supplement is not what its label says', why: 'Nothing in the story suggests that, and a supplement that is what it says may still not be the reason.' },
+        { text: 'She imagined the pain', why: 'Nothing suggests the pain was not there. The question is what eased it.' },
+        { text: 'It only works for people like her', why: 'It might, but the timing alone cannot show it worked at all.' },
+      ],
+      answer: 0,
+      back: 'That the pain was easing anyway. Starting something at the worst moment makes it look as if it worked. A few more ups and downs on record would say more than one improvement.',
+      thinking: true,
+    },
+    {
+      id: 'evidence-together-explain',
+      kind: 'explain',
+      front: 'In your words, why does two things happening together not show that one causes the other?',
+      back: 'Something else may drive both, the cause may run the other way, or it may be chance. Showing a cause needs a comparison where only the one thing differs, which is what a randomized trial sets up.',
+      thinking: true,
+    },
+    {
+      id: 'evidence-chocolate-choice',
+      kind: 'choice',
+      front: 'A headline says eating chocolate is linked to winning Nobel prizes. What does linked most likely mean here?',
+      options: [
+        { text: 'Countries that eat more chocolate have more Nobel winners for their size', why: 'That is what a 2012 comparison of countries found, and it says nothing about any one person.' },
+        { text: 'People who ate more chocolate won more prizes', why: 'The comparison was between whole countries. Nobody’s eating was looked at.' },
+        { text: 'Chocolate makes people cleverer', why: 'A link between countries cannot show what chocolate does to anyone. Wealth, for one, goes with both.' },
+        { text: 'Nobel winners were given chocolate', why: 'Nothing like that was studied.' },
+      ],
+      answer: 0,
+      back: 'That countries eating more chocolate had more laureates for their population. Comparing whole countries can hide a confounder such as wealth, and says nothing about one person.',
+      thinking: true,
+      source: {
+        source: 'Messerli, New England Journal of Medicine, 2012',
+        url: 'https://doi.org/10.1056/NEJMon1211064',
+      },
     },
   ],
 };
