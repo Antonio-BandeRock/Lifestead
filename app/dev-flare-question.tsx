@@ -4,12 +4,12 @@
 // queues the question twenty seconds ahead, time enough to lock the phone,
 // and goes straight on to Home. A testing build only: in a store build the
 // link does nothing but open Home.
-import * as Updates from 'expo-updates';
+import { isDeveloperBuild } from '../lib/appVariant';
 import { router } from 'expo-router';
 import { useEffect } from 'react';
 import { sendTestFlareQuestion } from '../lib/reminderNotifications';
 
-const TESTING_BUILD = __DEV__ || Updates.channel === 'preview';
+const TESTING_BUILD = isDeveloperBuild();
 
 export default function DevFlareQuestion() {
   useEffect(() => {

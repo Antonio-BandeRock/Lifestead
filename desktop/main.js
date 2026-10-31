@@ -374,7 +374,9 @@ function createWindow() {
   // A link to somewhere else (a citation, a store page) opens in the
   // person's browser rather than inside this window.
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
-    if (/^https?:/.test(url)) {
+    // mailto: is Report a Problem in the tester version, which hands the
+    // report to the person's email app (lib/problemReportSend.ts).
+    if (/^(https?|mailto):/.test(url)) {
       shell.openExternal(url);
     }
     return { action: 'deny' };
@@ -382,7 +384,7 @@ function createWindow() {
   mainWindow.webContents.on('will-navigate', (event, url) => {
     if (!url.startsWith(`${SCHEME}://`) && !url.startsWith(process.env.LIFESTEAD_DEV_URL || '\u0000')) {
       event.preventDefault();
-      if (/^https?:/.test(url)) {
+      if (/^(https?|mailto):/.test(url)) {
         shell.openExternal(url);
       }
     }

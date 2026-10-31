@@ -53,6 +53,7 @@ import {
 import { SHOW_ME_LABEL, requestShowMe, subscribeSpotTapped } from '../lib/walkSpots';
 import { GuideStripAnchor } from './GuideRoom';
 import { WalkButton } from './StoryWalkHost';
+import { isTesterBuild } from '../lib/appVariant';
 
 export function useTutorialRun(): TutorialRun | null {
   const [run, setRun] = useState<TutorialRun | null>(getTutorialRun);
@@ -79,7 +80,7 @@ export function TutorialHost() {
   const [small, setSmall] = useState(false);
   // The keys and lines are the same whichever tab comes first, so one
   // lookup serves every run.
-  const byKey = useMemo(() => howToByKey(buildTutorials(null)), []);
+  const byKey = useMemo(() => howToByKey(buildTutorials(null, isTesterBuild())), []);
 
   // A guide walk started from anywhere ends the tutorial, keeping its place.
   useEffect(

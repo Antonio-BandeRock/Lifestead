@@ -155,7 +155,11 @@ function lensKeys(tab: TourTabDef): string[] {
   return keys;
 }
 
-function homeTutorial(tab: TourTabDef, entries: GuideEntry[]): LensTutorial {
+function shownTools(key: string, testerTools: boolean): ToolHowTo[] {
+  return (TOOL_HOW_TOS[key] ?? []).filter((tool) => testerTools || !tool.testerOnly);
+}
+
+function homeTutorial(tab: TourTabDef, entries: GuideEntry[], testerTools: boolean): LensTutorial {
   const tour: WalkStep[] = [
     { say: GO_HOME, point: 'hub', mark: 'hub', until: { pathname: '/' } },
     { say: tab.answer, point: null },
@@ -170,12 +174,12 @@ function homeTutorial(tab: TourTabDef, entries: GuideEntry[]): LensTutorial {
     howTos: [
       { key: `${HOME_KEY}:about`, title: `Find your way round ${tab.title}`, steps: tour },
       ...entries.map((entry) => entryHowTo(HOME_KEY, entry)),
-      ...(TOOL_HOW_TOS[HOME_KEY] ?? []).map((tool) => toolHowTo(HOME_KEY, gettingThere('/'), tool)),
+      ...shownTools(HOME_KEY, testerTools).map((tool) => toolHowTo(HOME_KEY, gettingThere('/'), tool)),
     ],
   };
 }
 
-function lensTutorial(path: TourPath, lens: string, entries: GuideEntry[]): LensTutorial {
+function lensTutorial(path: TourPath, lens: string, entries: GuideEntry[], testerTools: boolean): LensTutorial {
   const name = lensName(path, lens);
   const line = lensLine(path, lens);
   const key = lensKey(path, lens);
@@ -189,13 +193,16 @@ function lensTutorial(path: TourPath, lens: string, entries: GuideEntry[]): Lens
     howTos: [
       { key: `${key}:about`, title: `Get to ${name}`, steps: about },
       ...entries.map((entry) => entryHowTo(key, entry)),
-      ...(TOOL_HOW_TOS[key] ?? []).map((tool) => toolHowTo(key, gettingThere(path, lens, name), tool)),
+      ...shownTools(key, testerTools).map((tool) => toolHowTo(key, gettingThere(path, lens, name), tool)),
     ],
   };
 }
 
 /** Every tab's tutorial, the chosen tab first and the rest in tour order. */
-export function buildTutorials(startPath: TourPath | null): TabTutorial[] {
+// testerTools: whether tools only the tester version has are shown. The
+// app passes isTesterBuild(); scripts/test_tutorials.js leaves it on so every
+// how-to is checked.
+export function buildTutorials(startPath: TourPath | null, testerTools = true): TabTutorial[] {
   const byPlace = entriesByPlace();
   const ordered = startPath ? [...TOUR_TABS.filter((tab) => tab.path === startPath), ...TOUR_TABS.filter((tab) => tab.path !== startPath)] : TOUR_TABS;
   return ordered.map((tab) => ({
@@ -204,8 +211,8 @@ export function buildTutorials(startPath: TourPath | null): TabTutorial[] {
     answer: tab.answer,
     lenses:
       tab.path === '/'
-        ? [homeTutorial(tab, byPlace.get(HOME_KEY) ?? [])]
-        : lensKeys(tab).map((lens) => lensTutorial(tab.path, lens, byPlace.get(lensKey(tab.path, lens)) ?? [])),
+        ? [homeTutorial(tab, byPlace.get(HOME_KEY) ?? [], testerTools)]
+        : lensKeys(tab).map((lens) => lensTutorial(tab.path, lens, byPlace.get(lensKey(tab.path, lens)) ?? [], testerTools)),
   }));
 }
 

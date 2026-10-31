@@ -16,6 +16,8 @@
 // original. expo-crypto provides the randomness and the hash, both already
 // installed.
 
+import { ownLink } from './appVariant';
+
 /**
  * The Application (client) ID from the Microsoft Entra app registration.
  *
@@ -34,11 +36,15 @@ export const ONEDRIVE_CLIENT_ID: string | null = '6be57e5d-131b-485a-afaf-792009
  * already handled (it is how a tapped connect link reaches app/connect.tsx), so
  * the browser can hand the result back with nothing new compiled in.
  *
+ * Each version of the app has a scheme of its own (lib/appVariant.ts), and
+ * each one's redirect is registered: hashimotosapp, lifestead, lifesteadtest
+ * and lifesteaddev, all followed by ://oauth/onedrive.
+ *
  * A path rather than a bare scheme, and no query string. Entra refuses query
  * parameters in a redirect URI for any registration that allows personal
  * Microsoft accounts, which is exactly what OneDrive personal is.
  */
-export const ONEDRIVE_REDIRECT_URI = 'hashimotosapp://oauth/onedrive';
+export const ONEDRIVE_REDIRECT_URI = ownLink('hashimotosapp://oauth/onedrive');
 
 /**
  * What this app asks permission to do.

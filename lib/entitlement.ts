@@ -10,8 +10,14 @@
 // as 'paid', which is how the app behaved before the switch existed.
 //
 // What is paid is decided in one place, lib/paidFeatures.ts.
+//
+// The tester version (tester plan T3, 2026-10-31) is always Paid: the people
+// trying it get everything, and nothing on that phone can set it to Free,
+// since the version is read from the package compiled into the build
+// (lib/appVariant.ts) and not from a file anybody could change.
 import { File, Paths } from 'expo-file-system';
 import { useSyncExternalStore } from 'react';
+import { isTesterBuild } from './appVariant';
 import { versionPreview } from './desktop/bridge';
 import type { Tier } from './paidFeatures';
 
@@ -35,14 +41,14 @@ let current: Tier | null = null;
 const listeners = new Set<() => void>();
 
 export function getTier(): Tier {
-  if (current === null) current = versionPreview()?.tier ?? readTier();
+  if (current === null) current = isTesterBuild() ? 'paid' : (versionPreview()?.tier ?? readTier());
   return current;
 }
 
 /** True when the tier comes from a version opened from the versions picker
  *  (P34), which the Profile switch then leaves alone. */
 export function tierSetByVersion(): boolean {
-  return versionPreview() !== null;
+  return isTesterBuild() || versionPreview() !== null;
 }
 
 export function setTier(tier: Tier): void {

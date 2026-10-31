@@ -119,4 +119,31 @@ if (process.env.LIFESTEAD_DESKTOP === '1') {
   };
 }
 
+// The tester and store versions (tester plan T2, 2026-10-31). app.config.js
+// makes three versions from APP_VARIANT, and in the tester and store ones the
+// developer-only modules below resolve to stand-ins in lib/variantStubs/, so
+// Profile's Developer Tools card, Tell Claude, the 90-day seeder, the
+// voiceover recorder and the versions bar
+// are not in those bundles at all. A file is matched by where it resolved
+// to, so every import path reaches the same stand-in. The developer version
+// and a build from before the versions keep everything.
+// lib/appVariant.ts is the second guard, at run time.
+// scripts/audit_tester_bundle.js checks an exported tester bundle.
+if (process.env.APP_VARIANT === 'test' || process.env.APP_VARIANT === 'store') {
+  const nothing = path.join(__dirname, 'lib', 'variantStubs', 'NothingHere.tsx');
+  const devOnly = new Map([
+    [path.join(__dirname, 'components', 'TellClaudeHost.tsx'), nothing],
+    [path.join(__dirname, 'components', 'VersionPreviewBar.tsx'), nothing],
+    [path.join(__dirname, 'components', 'VoiceoverRecorder.tsx'), nothing],
+    [path.join(__dirname, 'components', 'DeveloperToolsCard.tsx'), nothing],
+    [path.join(__dirname, 'lib', 'devSeed.ts'), path.join(__dirname, 'lib', 'variantStubs', 'devSeed.ts')],
+  ]);
+  const variantResolveRequest = config.resolver.resolveRequest;
+  config.resolver.resolveRequest = (context, moduleName, platform) => {
+    const result = (variantResolveRequest || context.resolveRequest)(context, moduleName, platform);
+    const stub = result && result.type === 'sourceFile' ? devOnly.get(path.normalize(result.filePath)) : undefined;
+    return stub ? { type: 'sourceFile', filePath: stub } : result;
+  };
+}
+
 module.exports = config;

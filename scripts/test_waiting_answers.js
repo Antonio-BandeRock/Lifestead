@@ -179,7 +179,7 @@ const home = fs.readFileSync(path.join(__dirname, '..', 'app', '(tabs)', 'index.
 check('Home draws the list', home.includes('<WaitingAnswersList') && home.includes("case 'waitingAnswers':"));
 check('Home draws it only while something waits', /const count = countWaiting\(groups\);\s*if \(count === 0\) return null;/.test(home));
 const prefs = fs.readFileSync(path.join(__dirname, '..', 'lib', 'visualPreferences.ts'), 'utf8');
-check('the card is first after the weather', /ALL_HOME_SECTION_KEYS: HomeSectionKey\[\] = \[\s*'weather',[\s\S]*?'waitingAnswers',\s*'sharedFolderSetup'/.test(prefs));
+check('the card is first after the weather', /DESIGNED_HOME_SECTION_KEYS: HomeSectionKey\[\] = \[\s*'weather',[\s\S]*?'waitingAnswers',\s*'sharedFolderSetup'/.test(prefs));
 
 console.log(failures === 0 ? 'All ' + checks + ' checks passed.' : failures + ' of ' + checks + ' checks failed.');
 process.exit(failures === 0 ? 0 : 1);

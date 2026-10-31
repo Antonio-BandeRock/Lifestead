@@ -50,6 +50,8 @@ import { TOUR_BRING_BACK_LABEL, offersTourBack, subscribeTourChanged } from '../
 import { showGuidedTour } from '../lib/guidedTourDb';
 import { currentGuideKey, guideCardLine, openGuideLabel, type GuideRecords, type GuideView } from '../lib/yourStoryGuides';
 import { SetupCardShelves } from './SetupCardShelves';
+import { TesterWelcome } from './TesterWelcome';
+import { isTesterBuild } from '../lib/appVariant';
 import type { SetupCardView } from '../lib/setupCards';
 import {
   BEFORE_ANYTHING_CAPTION,
@@ -329,6 +331,13 @@ export function YourStorySection({ mode, view, guides, interview, records, onCha
     const before = renderBefore();
     return (
       <View style={styles.page}>
+        {/* The tester welcome, T5: in Getting Set Up as well as on Home.
+            Draws nothing outside the tester version. */}
+        {isTesterBuild() ? (
+          <View style={styles.sectionCard}>
+            <TesterWelcome showHeading />
+          </View>
+        ) : null}
         {interview && !interview.finished ? (
           <View style={styles.sectionCard}>
             <YourStoryInterview mode="card" interview={interview} onChanged={onChanged} go={goElsewhere} />

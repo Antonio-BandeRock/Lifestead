@@ -45,6 +45,7 @@ import { AppActionSheet } from '../../components/AppActionSheet';
 import { useInfoAlert } from '../../components/InfoAlert';
 import { YourStorySection, useStoryGo, useYourStory } from '../../components/YourStorySection';
 import { NextThing } from '../../components/NextThing';
+import { TesterWelcome, TESTER_WELCOME_TITLE } from '../../components/TesterWelcome';
 import { WaitingAnswersList } from '../../components/WaitingAnswersList';
 import { nextLine, type StoryDestination } from '../../lib/yourStory';
 import { buildTabGuide, tabGuideLine } from '../../lib/yourStoryTabs';
@@ -2007,8 +2008,8 @@ export default function HomeScreen() {
       await setLastSeenAppVersion(APP_VERSION);
       if (notes.length === 0) return;
       showInfoAlert(
-        `Updated to ${APP_VERSION}`,
-        `Lifestead updated itself and restarted. Here's what changed:\n\n${formatReleaseNotesMessage(notes)}`,
+        t('Updated to {version}', { version: APP_VERSION }),
+        `${t("Lifestead updated itself and restarted. Here's what changed:")}\n\n${formatReleaseNotesMessage(notes, t)}`,
       );
     } catch (error) {
       // A failure here should never block Home from finishing its own
@@ -4614,6 +4615,19 @@ export default function HomeScreen() {
     );
   }
 
+  // The tester welcome, T5 of the tester plan. ALL_HOME_SECTION_KEYS holds
+  // it only in the tester version, so this is never reached in any other.
+  function renderTesterWelcome() {
+    return renderBand(
+      'testerWelcome',
+      TESTER_WELCOME_TITLE,
+      <View style={styles.bandBody}>
+        <TesterWelcome />
+      </View>,
+      { icon: 'flag-outline', color: colors.homeNoTab },
+    );
+  }
+
   // C16 and C18: one sentence, one button. See components/NextThing.tsx.
   function renderNextThing() {
     if (!isHomeSectionVisible(visualPrefs, 'nextThing')) return null;
@@ -4919,6 +4933,8 @@ export default function HomeScreen() {
         return renderDoneChecks();
       case 'nextThing':
         return renderNextThing();
+      case 'testerWelcome':
+        return renderTesterWelcome();
       case 'waitingAnswers':
         return renderWaitingAnswers();
       case 'todayPicks':

@@ -26,6 +26,7 @@ import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import type { useBandFolds } from '../hooks/useBandFolds';
 import { openTellClaude, useTellClaudeOn } from '../lib/tellClaude';
+import { openReportProblem, useReportProblemOn } from '../lib/reportProblem';
 import {
   HOME_BAND_ACCENT_WIDTH,
   HOME_BAND_CONTENT_PADDING,
@@ -68,6 +69,9 @@ export function TabBand({
   // band is already how sections are rearranged; the button beside the
   // corner box covers Home and anything else outside a band.
   const tellClaude = useTellClaudeOn();
+  // In the tester version the same long press opens Report a Problem for
+  // this band instead (tester plan T4). The two are never on together.
+  const reportProblem = useReportProblemOn();
   return (
     <HomeSectionBand
       kind="fold"
@@ -77,7 +81,13 @@ export function TabBand({
       color={color}
       expanded={folds.isOpen(id)}
       onToggle={() => folds.toggle(id)}
-      onLongPress={tellClaude ? () => openTellClaude({ bandId: id, bandTitle: title }) : undefined}
+      onLongPress={
+        tellClaude
+          ? () => openTellClaude({ bandId: id, bandTitle: title })
+          : reportProblem
+            ? () => openReportProblem({ bandId: id, bandTitle: title })
+            : undefined
+      }
     >
       {children}
     </HomeSectionBand>

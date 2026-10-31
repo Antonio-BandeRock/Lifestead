@@ -33,6 +33,7 @@
 import { File, Paths } from 'expo-file-system';
 import type { GroundTheme } from '../constants/colors';
 import type { DigestCategoryKey } from './digest';
+import { isTesterBuild } from './appVariant';
 import { getDatabase } from './db';
 import { followNewMenuOrder, groupHomeSectionKeysByTab } from './homeSections';
 import { setPlayfulWordingEnabled } from './playfulCopy';
@@ -229,6 +230,11 @@ export const GENERIC_PALETTE_LABELS: Record<GenericPalette, string> = {
 // each section actually renders in on Home.
 export type HomeSectionKey =
   | 'weather'
+  // The tester welcome, T5 of the tester plan (2026-10-31,
+  // components/TesterWelcome.tsx). Exists only in the tester version: every
+  // other version leaves it out of ALL_HOME_SECTION_KEYS below, so it has no
+  // switch, no place in the order and nothing in Profile.
+  | 'testerWelcome'
   | 'sharedFolderSetup'
   // The capture inbox, 2026-09-16. Belongs to no tab on purpose, so it
   // renders as a top-level row rather than inside a band: a thought
@@ -410,8 +416,11 @@ export type HomeSectionKey =
 // for good once done. Whatever order a person saves in Profile is grouped
 // the same way on the way out (getOrderedHomeSectionKeys below), so this
 // default is only ever a starting point, not the one arrangement.
-export const ALL_HOME_SECTION_KEYS: HomeSectionKey[] = [
+const DESIGNED_HOME_SECTION_KEYS: HomeSectionKey[] = [
   'weather',
+  // The tester welcome leads, since testing is the reason that version is
+  // on the phone at all.
+  'testerWelcome',
   // Waiting for an Answer, 1.0.60.3: "It should be at the top when there
   // are reminders waiting for answers." Placed straight after weather, so
   // a saved order gains it at the top too (getOrderedHomeSectionKeys puts
@@ -520,6 +529,11 @@ export const ALL_HOME_SECTION_KEYS: HomeSectionKey[] = [
 // card, so there is nothing to give a position to. Derived from
 // ALL_HOME_SECTION_KEYS rather than a second hand-maintained list that
 // could drift out of sync with it.
+// The tester welcome is in the tester version's list and in no other.
+export const ALL_HOME_SECTION_KEYS: HomeSectionKey[] = DESIGNED_HOME_SECTION_KEYS.filter(
+  (key) => key !== 'testerWelcome' || isTesterBuild(),
+);
+
 export const REORDERABLE_HOME_SECTION_KEYS: HomeSectionKey[] = ALL_HOME_SECTION_KEYS.filter((key) => key !== 'weather');
 
 // The label Profile's own toggle grid shows for each section -- kept here,
@@ -573,6 +587,7 @@ export const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
   groceryQuickAdd: 'Add to the Grocery List',
   todayPicks: 'Today I Want To',
   nextThing: 'One Next Thing',
+  testerWelcome: 'For Testers',
   waitingAnswers: 'Waiting for an Answer',
   tutorialsHome: 'Home Tutorials',
   tutorialsLife: 'Life Tutorials',
@@ -880,7 +895,11 @@ export function isHomeSectionVisible(prefs: VisualPreferences, key: HomeSectionK
 // the map with it. A written exception to "every Home card is
 // individually toggleable"; Profile and the arranging list both leave the
 // switch off these rather than offering one that does nothing.
-export const HOME_SECTIONS_ALWAYS_SHOWN: ReadonlySet<HomeSectionKey> = new Set<HomeSectionKey>(['yourStory']);
+export const HOME_SECTIONS_ALWAYS_SHOWN: ReadonlySet<HomeSectionKey> = new Set<HomeSectionKey>([
+  'yourStory',
+  // The tester welcome, by the same decision (2026-10-30): it stays on Home.
+  'testerWelcome',
+]);
 
 // Simple View, P1 (1.0.68.5). Chosen for someone who came to run their day:
 // the greeting, the one next thing, Sort It Out, and reminders waiting for an
@@ -889,6 +908,7 @@ export const HOME_SECTIONS_ALWAYS_SHOWN: ReadonlySet<HomeSectionKey> = new Set<H
 // 1.0.75.15, direct instruction: "Their To Do List and Routines need to be
 // visible in the Simple View."
 export const SIMPLE_VIEW_SECTIONS: ReadonlySet<HomeSectionKey> = new Set<HomeSectionKey>([
+  'testerWelcome',
   'today',
   'nextThing',
   'captureInbox',

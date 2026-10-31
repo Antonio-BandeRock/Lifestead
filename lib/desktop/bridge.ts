@@ -255,6 +255,9 @@ export type DesktopBridge = {
   versionPreview?: DesktopVersionPreview | null;
   /** Missing on an installer built before 1.0.68.9. */
   versions?: { showPicker(): Promise<void> };
+  /** Which installer this is (tester plan T9): 'test' for Lifestead Test,
+   *  'dev' for the developer's. Missing on an installer built before it. */
+  appVariant?: string;
 };
 
 /** One version of the app, opened side by side from the versions picker. */

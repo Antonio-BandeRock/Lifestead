@@ -115,7 +115,16 @@ import { isLockedNow, reminderDetailHidden } from './appLockSession';
 import { isRelayWake } from './relayWake';
 import { reminderWords } from './lockedReminderText';
 import { keepAnswerForUnlock, takeWaitingAnswers } from './lockedAnswers';
-import { ANDROID_GROUP_PREFIX, androidGroupFor, countWaiting, groupWaiting, SUMMARY_FROM, summaryBody, summaryTitle, type ShowingReminder, type WaitingGroup } from './waitingAnswers';
+import { ANDROID_GROUP_PREFIX, androidGroupFor as groupFieldsFor, countWaiting, groupWaiting, SUMMARY_FROM, summaryBody, summaryTitle, type ShowingReminder, type WaitingGroup } from './waitingAnswers';
+import { ownLink } from './appVariant';
+
+// The group fields with the summary's link in this version's scheme
+// (lib/appVariant.ts), so a tap on the group opens this app and not
+// another version on the same phone.
+function androidGroupFor(kind: string): ReturnType<typeof groupFieldsFor> {
+  const fields = groupFieldsFor(kind);
+  return { ...fields, androidGroupLink: ownLink(fields.androidGroupLink) };
+}
 import { YOUR_WEEK_NOTIFICATION_BODY, YOUR_WEEK_NOTIFICATION_TITLE } from './weeklySummary';
 import { buildWeekPlanBody, WEEK_PLAN_NOTIFICATION_TITLE, weekPlanDays } from './weekPlanNotice';
 import { buildGardenMonthBody, GARDEN_MONTH_NOTIFICATION_TITLE, nextGardenMonthFire, type GardenMonthPlace } from './gardenMonthNotice';

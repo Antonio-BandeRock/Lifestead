@@ -204,7 +204,7 @@ check('make a report is reports own group', groupHomeSectionsForDisplay(['weekTr
 // opens the app."
 const tabsSource = fs.readFileSync(path.join(__dirname, '..', 'constants/tabs.ts'), 'utf8');
 const tabPaths = [...tabsSource.matchAll(/\{ path: '([^']+)'/g)].map((m) => m[1]);
-const orderMatch = prefsSource.match(/export const ALL_HOME_SECTION_KEYS: HomeSectionKey\[\] = \[([\s\S]*?)\n\];/);
+const orderMatch = prefsSource.match(/const DESIGNED_HOME_SECTION_KEYS: HomeSectionKey\[\] = \[([\s\S]*?)\n\];/);
 const defaultOrder = orderMatch[1]
   .split('\n')
   .filter((line) => !line.trim().startsWith('//'))
