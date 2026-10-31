@@ -329,6 +329,33 @@ const BY_HAND: Readonly<Record<string, string>> = {
     'La receta se abre para leerla, con Agregar ingredientes arriba para lo que falte. Cuando esté lista, toca Terminé de agregar ingredientes.',
   'What the squares mean:\nEach red square under an ingredient is one serious concern this food carries, such as high sodium, high saturated fat or gluten. Tap a square to see which one. An ingredient with no squares has no serious concern recorded, or has not been rated yet. Milder concerns are left off so the squares stay worth noticing.':
     'Qué significan los cuadros:\nCada cuadro rojo debajo de un ingrediente es una preocupación seria de ese alimento, como mucho sodio, mucha grasa saturada o gluten. Toca un cuadro para ver cuál es. Un ingrediente sin cuadros no tiene ninguna preocupación seria registrada, o todavía no se ha calificado. Las preocupaciones menores se dejan fuera para que los cuadros sigan valiendo la pena.',
+  // Report a Problem, the tester version (2026-10-31).
+  'Report a problem or a wish': 'Reportar un problema o un deseo',
+  'Something went wrong': 'Algo salió mal',
+  'A wish or an idea': 'Un deseo o una idea',
+  'Something to change': 'Algo que cambiar',
+  'What you did, what you expected, and what happened instead.': 'Qué hiciste, qué esperabas y qué pasó en su lugar.',
+  'Something you would like the app to do that it does not do yet.': 'Algo que te gustaría que la app hiciera y que todavía no hace.',
+  'Something the app does that would work better another way.': 'Algo que la app hace y que funcionaría mejor de otra manera.',
+  'Say what happened, or what you would like, first. Type it, or tap the mic and say it.': 'Primero di qué pasó o qué te gustaría. Escríbelo, o toca el micrófono y dilo.',
+  'Not one place in particular': 'Ningún lugar en particular',
+  'Not one place': 'Ningún lugar',
+  'What kind': 'Qué tipo',
+  'Type it, or tap the mic and say it': 'Escríbelo, o toca el micrófono y dilo',
+  'It goes to {address} from your email app, with the version and the kind of phone added. Nothing is sent until you press Send there.': 'Se va a {address} desde tu app de correo, con la versión y el tipo de teléfono agregados. No se envía nada hasta que presiones Enviar ahí.',
+  'Leave It': 'Dejarlo así',
+  'Write the Email': 'Escribir el correo',
+  'Opening': 'Abriendo',
+  'The app closed by itself last time. What were you doing? The details of what went wrong are added for you.': 'La app se cerró sola la última vez. ¿Qué estabas haciendo? Los detalles de lo que salió mal se agregan solos.',
+  'Your email app is open with the report in it. Read it over, then press Send there.': 'Tu app de correo está abierta con el reporte. Léelo y luego presiona Enviar ahí.',
+  'No email app opened, so the report is copied. Paste it into an email to {address}.': 'No se abrió ninguna app de correo, así que el reporte quedó copiado. Pégalo en un correo para {address}.',
+  'No email app opened and the report could not be copied. Write to {address} and say what happened.': 'No se abrió ninguna app de correo y el reporte no se pudo copiar. Escribe a {address} y cuenta qué pasó.',
+  'Report a problem, a wish or something to change': 'Reportar un problema, un deseo o algo que cambiar',
+  'Tap the flag against the edge of the screen. On any tab, a long press on the name of a band does the same and names that band.': 'Toca la bandera en el borde de la pantalla. En cualquier pestaña, mantener presionado el nombre de una sección hace lo mismo y nombra esa sección.',
+  'Check where it is about. It starts as the screen you were on, and a tap on another tab changes it.': 'Revisa de qué lugar se trata. Empieza con la pantalla en la que estabas, y tocar otra pestaña lo cambia.',
+  'Pick what kind it is, then type it, or tap the mic and say it.': 'Elige qué tipo es, y luego escríbelo, o toca el micrófono y dilo.',
+  'Tap Write the Email. Your email app opens with the report in it, and nothing goes until you press Send there.': 'Toca Escribir el correo. Tu app de correo se abre con el reporte, y no se envía nada hasta que presiones Enviar ahí.',
+  'What you found reaches the people building the app with the version and the screen already on it, so it can be put right.': 'Lo que encontraste llega a quienes hacen la app con la versión y la pantalla ya incluidas, para que se pueda corregir.',
 };
 
 export const ES: Readonly<Record<string, string>> = { ...ES_PARTS, ...BY_HAND };

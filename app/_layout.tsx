@@ -36,6 +36,9 @@ import { NotYetHost } from '../components/NotYetHost';
 import { DesktopSpeechHost } from '../components/DesktopSpeechHost';
 import { UnlockSummaryHost } from '../components/UnlockSummaryHost';
 import { TellClaudeHost } from '../components/TellClaudeHost';
+import { ReportProblemHost } from '../components/ReportProblemHost';
+import { isTesterBuild } from '../lib/appVariant';
+import { installCrashNote } from '../lib/crashNote';
 import '../lib/translateAlerts';
 import { HandSwitchButton } from '../components/HandSwitchButton';
 import { AskRecordsSheet } from '../components/AskRecordsSheet';
@@ -73,6 +76,10 @@ import { refreshWidgets } from '../lib/widgets/taskHandler';
 // with no font-loading code anywhere; this is that infrastructure's actual
 // first use.
 SplashScreen.preventAutoHideAsync();
+
+// The tester version keeps what went wrong when it closes by itself, so the
+// next open can offer to send it (tester plan T4, lib/crashNote.ts).
+if (isTesterBuild()) installCrashNote();
 
 // Where a touch began, so a drag or a scroll is not taken for a tap on a
 // ringed button (1.0.68.14, lib/walkSpots.ts).
@@ -586,6 +593,10 @@ function UnlockedApp() {
                   has a text box, and the drawn keyboard has to paint on top
                   of it. */}
               <TellClaudeHost />
+              {/* Report a Problem (tester plan T4): the tester version's button
+                  and sheet, drawing nothing in any other version. Before
+                  AppKeyboard for the reason Tell Claude is. */}
+              <ReportProblemHost />
               {/* The navigation switch (1.0.61.13): the edge tab above the footer
                   on the far side from the hubs, components/HandSwitchButton.tsx. */}
               <HandSwitchButton />
