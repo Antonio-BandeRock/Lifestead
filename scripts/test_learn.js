@@ -17,7 +17,9 @@ function load(rel) {
     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 },
   });
   const m = { exports: {} };
-  new Function('module', 'exports', 'require', outputText)(m, m.exports, () => ({}));
+  const dir = path.dirname(rel);
+  const need = (name) => (name.startsWith('./') ? load(path.posix.join(dir, name) + '.ts') : {});
+  new Function('module', 'exports', 'require', outputText)(m, m.exports, need);
   return m.exports;
 }
 const S = load('lib/learnSchedule.ts');
@@ -204,6 +206,68 @@ check('a timing rule with one half matched makes no hours card', !halfTiming.som
 check('the section reads the record decks', read0('components/LearnSection.tsx').includes('loadRecordDecks(today(), t)'));
 check('the medicine deck reads the same matching as the advisories', read0('lib/interactionRules.ts').includes('export async function rulesConcerningMyMeds'));
 
+// Decks a person makes (Learn part 6e).
+const M = load('lib/learnMyDecks.ts');
+const empty = M.emptyDraft();
+check('an empty card says it needs a question', M.draftProblem(empty) === 'The card needs a question on its front first.');
+check('a card with no answer says so', M.draftProblem({ ...empty, front: 'What is a shrub?' }) === 'The card needs an answer for its back first.');
+const flip = { ...empty, front: 'What is a shrub?', back: 'A woody plant with many stems.' };
+check('a flip card with both sides is ready', M.draftProblem(flip) === null);
+const choice = { ...flip, kind: 'choice', options: [{ text: 'Oak', why: 'A tree, one trunk.' }, { text: 'Lilac', why: 'Many stems from the ground.' }, { text: '', why: '' }], answer: 1 };
+check('a choice with two whole options is ready', M.draftProblem(choice) === null, M.draftProblem(choice));
+check('an option with no reason is named', /why it is or is not/.test(M.draftProblem({ ...choice, options: [{ text: 'Oak', why: '' }, choice.options[1]] }) || ''));
+check('an answer on an empty option is named', M.draftProblem({ ...choice, answer: 2 }) === 'Mark which option is the answer.');
+check('a case needs its story', /story/.test(M.draftProblem({ ...choice, kind: 'case' }) || ''));
+check('a blank needs its gap', /where the gap goes/.test(M.draftProblem({ ...flip, kind: 'blank', accept: 'x' }) || ''));
+check('a blank needs what fills it', /fills the gap/.test(M.draftProblem({ ...flip, kind: 'blank', front: 'A ____ has many stems.' }) || ''));
+check('an order needs three', /three things/.test(M.draftProblem({ ...flip, kind: 'order', items: ['a', 'b', ''] }) || ''));
+check('an order with a repeat is named', /say the same/.test(M.draftProblem({ ...flip, kind: 'order', items: ['a', 'b', 'A'] }) || ''));
+check('pairs need both tiles', /both of its tiles/.test(M.draftProblem({ ...flip, kind: 'pairs', pairs: [{ left: 'a', right: '' }] }) || ''));
+const pairsDraft = { ...flip, kind: 'pairs', pairs: [{ left: 'a', right: '1' }, { left: 'b', right: '2' }, { left: 'c', right: '3' }, { left: '', right: '' }] };
+check('three whole pairs are ready', M.draftProblem(pairsDraft) === null);
+// Every ready draft of every kind makes a card the study view accepts.
+const ready = {
+  flip,
+  explain: { ...flip, kind: 'explain' },
+  choice,
+  estimate: { ...choice, kind: 'estimate' },
+  case: { ...choice, kind: 'case', story: 'A plant in the yard has five stems.' },
+  blank: { ...flip, kind: 'blank', front: 'A ____ has many stems.', accept: 'shrub\nbush\n' },
+  order: { ...flip, kind: 'order', items: ['seed', 'sprout', 'flower', ''] },
+  pairs: pairsDraft,
+};
+check('every kind is offered in the form', K.LEARN_KINDS.every((kind) => M.KIND_LABELS[kind] && ready[kind]));
+for (const [kind, draft] of Object.entries(ready)) {
+  check(`${kind}: ready`, M.draftProblem(draft) === null, M.draftProblem(draft));
+  const row = { id: 'my-card-1', deckId: 'my-deck-1', kind: draft.kind, front: draft.front, back: draft.back, thinking: false, parts: JSON.stringify(M.draftParts(draft)), position: 0 };
+  const card = M.rowToCard(row);
+  check(`${kind}: the kept card passes the kind check`, K.cardProblems(card).length === 0, K.cardProblems(card));
+  const back = M.rowToDraft(row);
+  check(`${kind}: opens again in the form as it was kept`, M.draftProblem(back) === null && back.kind === draft.kind);
+}
+check('the answer follows its option past an empty one', M.rowToCard({ id: 'x', deckId: 'd', kind: 'choice', front: 'q', back: 'a', thinking: false, parts: JSON.stringify(M.draftParts({ ...choice, options: [{ text: '', why: '' }, ...choice.options.slice(0, 2)], answer: 2 })), position: 0 }).answer === 1);
+check('a stored card with broken parts still opens', M.rowToCard({ id: 'x', deckId: 'd', kind: 'nonsense', front: 'q', back: 'a', thinking: true, parts: '{', position: 0 }).front === 'q');
+check('cards keep their order', M.buildMyDeck({ id: 'd', title: 'T', about: '' }, [
+  { id: 'b', deckId: 'd', kind: 'flip', front: '2', back: '2', thinking: false, parts: '{}', position: 1 },
+  { id: 'a', deckId: 'd', kind: 'flip', front: '1', back: '1', thinking: false, parts: '{}', position: 0 },
+]).cards.map((c) => c.id).join() === 'a,b');
+check('a deck needs a name', M.deckTitleProblem('  ') === 'The deck needs a name first.' && M.deckTitleProblem('Knots') === null);
+const answered = new Set(['my-card-1']);
+check('an answered card is retired', M.planCardRemoval('my-card-1', answered) === 'retire');
+check('an unanswered card is deleted', M.planCardRemoval('my-card-2', answered) === 'delete');
+check('a deck with an answered card is retired', M.planDeckRemoval(['my-card-2', 'my-card-1'], answered) === 'retire');
+check('a deck with no answers is deleted', M.planDeckRemoval(['my-card-2'], answered) === 'delete');
+check('a retired card still counts', /still counts/.test(M.describeRemoval('card', 'retire')) && /still counts/.test(M.describeRemoval('deck', 'retire')));
+check('the thinking line shows when recall cards are most', M.describeThinkingShare([{ thinking: false }, { thinking: false }, { thinking: true }]) !== null);
+check('the thinking line stays away at half', M.describeThinkingShare([{ thinking: false }, { thinking: true }]) === null && M.describeThinkingShare([]) === null);
+check('the thinking line has no count in it', !/[0-9]/.test(M.describeThinkingShare([{ thinking: false }]) || ''));
+check('ids never meet a ready-made one', read0('lib/learnMyDecksDb.ts').includes('`${MY_DECK_PREFIX}${what}-'));
+check('the tables', read0('lib/db.ts').includes('CREATE TABLE IF NOT EXISTS learn_my_decks') && read0('lib/db.ts').includes('CREATE TABLE IF NOT EXISTS learn_my_cards'));
+check('making is paid', read0('lib/paidFeatures.ts').includes('learnMake:') && read0('components/LearnMyDecksEditor.tsx').includes("isFunctionWalled(tier, 'learnMake')"));
+check('on Free the buttons say why', read0('components/LearnMyDecksEditor.tsx').includes('explainNotYet(MAKE_PAID_LINE)'));
+check('the section studies decks you made', read0('components/LearnSection.tsx').includes('listMyDecks()') && read0('components/LearnSection.tsx').includes('<LearnMyDecksEditor'));
+check('sync words for decks you made', read0('lib/snapshotChanges.ts').includes("count: ['learn_my_decks']") && read0('lib/snapshotChanges.ts').includes("count: ['learn_my_cards']"));
+
 // The kinds of question.
 check('typed answers are read kindly', K.normalizeAnswer('  The Confounder! ') === 'confounder');
 check('accents are read kindly', K.normalizeAnswer('Factor de Confusión') === 'factor de confusion');
@@ -249,7 +313,7 @@ const FORBIDDEN = [
   'streak', 'points', 'score', 'level', 'badge', 'well done', 'great job', 'missed', 'overdue', 'behind',
   'fail', 'wrong', 'must', 'you should', 'real ', 'genuine', 'honestly', '—', '–', ' -- ', 'percent', '%',
 ];
-const FILES = ['lib/learnSchedule.ts', 'lib/learnDecks.ts', 'lib/learnDb.ts', 'components/LearnSection.tsx', 'lib/learnKinds.ts', 'components/LearnCardView.tsx', 'lib/learnRecordDecks.ts', 'lib/learnRecordDecksDb.ts'];
+const FILES = ['lib/learnSchedule.ts', 'lib/learnDecks.ts', 'lib/learnDb.ts', 'components/LearnSection.tsx', 'lib/learnKinds.ts', 'components/LearnCardView.tsx', 'lib/learnRecordDecks.ts', 'lib/learnRecordDecksDb.ts', 'lib/learnMyDecks.ts', 'lib/learnMyDecksDb.ts', 'components/LearnMyDecksEditor.tsx'];
 const re = /'((?:[^'\\\n]|\\.)*)'|"((?:[^"\\\n]|\\.)*)"|`((?:[^`\\]|\\.)*)`/g;
 for (const rel of FILES) {
   const text = read(rel)

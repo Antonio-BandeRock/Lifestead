@@ -10772,6 +10772,33 @@ async function runDatabaseInitialization() {
         created_at TEXT NOT NULL DEFAULT (datetime('now'))
       );
       CREATE INDEX IF NOT EXISTS idx_learn_reviews_card ON learn_reviews(card_id);
+      -- Interests > Learn (2026-10-30, Learn part 6e): decks and cards a
+      -- person makes. parts is JSON of what the card's kind needs beyond
+      -- its front and back (lib/learnMyDecks.ts). A deck or card with
+      -- answers in learn_reviews is retired, never deleted, so no answer
+      -- names a card that has gone.
+      CREATE TABLE IF NOT EXISTS learn_my_decks (
+        id TEXT PRIMARY KEY,
+        title TEXT NOT NULL,
+        about TEXT NOT NULL DEFAULT '',
+        retired_at TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE TABLE IF NOT EXISTS learn_my_cards (
+        id TEXT PRIMARY KEY,
+        deck_id TEXT NOT NULL,
+        kind TEXT NOT NULL,
+        front TEXT NOT NULL,
+        back TEXT NOT NULL,
+        thinking INTEGER NOT NULL DEFAULT 0,
+        parts TEXT NOT NULL DEFAULT '{}',
+        position INTEGER NOT NULL DEFAULT 0,
+        retired_at TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_learn_my_cards_deck ON learn_my_cards(deck_id);
     `);
     // Interests > Days Until (2026-10-30): a free counter can belong to an
     // interest. Null for every counter that belongs to nothing.

@@ -18,6 +18,7 @@ import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/button
 import { localDayOf } from '../lib/interests';
 import { LEARN_DECKS, type LearnDeck } from '../lib/learnDecks';
 import { loadRecordDecks } from '../lib/learnRecordDecksDb';
+import { listMyDecks } from '../lib/learnMyDecksDb';
 import { addLearnReview, listLearnReviews } from '../lib/learnDb';
 import {
   countKnown,
@@ -32,6 +33,7 @@ import {
 import { explainNotYet } from '../lib/notYet';
 import { t } from '../lib/i18n';
 import { LearnCardView } from './LearnCardView';
+import { LearnMyDecksEditor } from './LearnMyDecksEditor';
 import { useWalkMark } from './WalkMark';
 
 type Props = { tabColor: string };
@@ -54,14 +56,22 @@ export function LearnSection({ tabColor }: Props) {
   const [sitting, setSitting] = useState<SittingState | null>(null);
   const [doneLine, setDoneLine] = useState<{ deckId: string; text: string } | null>(null);
   const [recordDecks, setRecordDecks] = useState<LearnDeck[]>([]);
+  const [myDecks, setMyDecks] = useState<LearnDeck[]>([]);
 
   const load = useCallback(async () => {
-    const [all, fromRecords] = await Promise.all([listLearnReviews(), loadRecordDecks(today(), t)]);
+    const [all, fromRecords, mine] = await Promise.all([
+      listLearnReviews(),
+      loadRecordDecks(today(), t),
+      listMyDecks().catch((): LearnDeck[] => []),
+    ]);
     setReviews(all);
     setRecordDecks(fromRecords);
+    setMyDecks(mine);
   }, []);
 
-  const allDecks = [...LEARN_DECKS, ...recordDecks];
+  const studyMine = myDecks.filter((deck) => deck.cards.length > 0);
+  const allDecks = [...LEARN_DECKS, ...studyMine, ...recordDecks];
+  const firstRecord = LEARN_DECKS.length + studyMine.length;
   const deckById = (id: string) => allDecks.find((deck) => deck.id === id);
   const cardById = (id: string) => {
     for (const deck of allDecks) {
@@ -129,19 +139,20 @@ export function LearnSection({ tabColor }: Props) {
     <View style={styles.section}>
       <Text style={styles.knownText}>{describeKnown(known)}</Text>
 
-      {[...LEARN_DECKS, ...recordDecks].map((deck, index) => {
+      {allDecks.map((deck, index) => {
         const ids = deck.cards.map((card) => card.id);
         const standing = deckStanding(ids, reviews, day);
         const open = sitting?.deckId === deck.id;
         return (
           <View key={deck.id} style={styles.deckGroup}>
-            {index === LEARN_DECKS.length ? <Text style={styles.groupHeading}>From Your Records</Text> : null}
+            {studyMine.length > 0 && index === LEARN_DECKS.length ? <Text style={styles.groupHeading}>Decks You Made</Text> : null}
+            {index === firstRecord ? <Text style={styles.groupHeading}>From Your Records</Text> : null}
             <View
-              ref={index === LEARN_DECKS.length ? walkMark.ref('learn.records') : walkMark.ref('learn.deck')}
+              ref={index === firstRecord ? walkMark.ref('learn.records') : walkMark.ref('learn.deck')}
               style={[
                 styles.deckBlock,
                 { borderLeftColor: tabColor },
-                index === LEARN_DECKS.length ? walkMark('learn.records') : walkMark('learn.deck'),
+                index === firstRecord ? walkMark('learn.records') : walkMark('learn.deck'),
               ]}
             >
               <Text style={styles.groupHeading}>{deck.title}</Text>
@@ -185,6 +196,7 @@ export function LearnSection({ tabColor }: Props) {
           in Garden, meals in Food, or time on an interest in Sessions.
         </Text>
       ) : null}
+      <LearnMyDecksEditor tabColor={tabColor} decks={myDecks} onChanged={load} />
     </View>
   );
 }

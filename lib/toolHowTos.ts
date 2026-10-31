@@ -130,6 +130,10 @@ export type ToolMark =
   | 'learn.source'
   | 'learn.entry'
   | 'learn.records'
+  | 'learn.make'
+  | 'learn.deckSave'
+  | 'learn.addCard'
+  | 'learn.cardSave'
   | 'capture.keepInLibrary'
   | 'work.overview'
   | 'work.todos'
@@ -3075,6 +3079,27 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'On a guess card, pick before you look, then turn it over to see what the records show.' },
       ],
       forYou: 'These decks are made again every time Learn opens, so a medicine you stop or a crop you pull leaves its cards by itself. A deck shows once there is something to make it from.',
+    },
+    {
+      key: 'make',
+      title: 'Make a deck of your own',
+      steps: [
+        { say: 'Under Your Decks, tap Make a Deck.', mark: 'learn.make', stay: true },
+        { say: 'Give it a name, and a line about it if you like.' },
+        { say: 'Tap Make the Deck.', mark: 'learn.deckSave' },
+      ],
+      forYou: 'Making decks is part of Individual. A deck you made stays open to study on Free.',
+    },
+    {
+      key: 'card',
+      title: 'Add a card to your deck',
+      steps: [
+        { say: 'Under Your Decks, tap the deck, then Add a Card.', mark: 'learn.addCard', stay: true },
+        { say: 'Pick what kind of card it is: a question and answer, pick one, a best guess, a short case, a gap to fill, an order, pairs, or one to explain in your words.' },
+        { say: 'Write the question and the answer, and whatever its kind asks for. Turn on Asks how to weigh something when the card asks why or how sure anyone can be.' },
+        { say: 'Tap Keep the Card.', mark: 'learn.cardSave' },
+      ],
+      forYou: 'A card that is not ready yet says what it still needs. Changing a card later keeps its place in the schedule.',
     },
   ],
   '/interests#makingItPay': readingHowTos('Making It Pay', 'Each entry names the source and year of every figure in it, and says who the figures cover.'),

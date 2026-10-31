@@ -203,3 +203,19 @@ export function paidWallWords(paid: PaidLens): { title: string; message: string;
     kept: 'Nothing you have recorded is lost. Everything you have entered stays on this device, and shows here again as soon as the plan is on.',
   };
 }
+
+// Paid functions inside a lens that is itself Free, keyed by a name the
+// screen reads. Each says why through explainNotYet rather than a wall,
+// since the rest of the lens stays open.
+export const PAID_FUNCTIONS: Record<string, PaidLens> = {
+  learnMake: {
+    board: 'int-learn-make',
+    gives: 'making decks of your own, with every kind of card',
+    plan: 'Individual',
+  },
+};
+
+/** True when this function waits for a plan on the tier given. */
+export function isFunctionWalled(tier: Tier, name: keyof typeof PAID_FUNCTIONS): boolean {
+  return tier === 'free' && PAID_FUNCTIONS[name] !== undefined;
+}
