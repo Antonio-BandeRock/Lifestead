@@ -459,3 +459,62 @@ export async function evaluateInteractionRules(date: string): Promise<Interactio
 
   return { warnings: sortBySeverity(warnings), referenceOnly: sortBySeverity(referenceOnly), personalRules };
 }
+
+// Interests > Learn part 6d: every cited rule that concerns what the person
+// takes, whatever today's dose times are, for the medicine deck in
+// lib/learnRecordDecks.ts. The same subject matching as
+// evaluateInteractionRules, so the deck never shows a rule the advisories
+// would not; a timing rule needs both halves matched, any other rule its
+// first. Age and appointment rules stay with the advisories, since they
+// turn on a birth date or a booking rather than on what is taken.
+export type RuleConcerningMe = {
+  ruleId: string;
+  ruleType: string;
+  title: string;
+  guidance: string;
+  citation: string;
+  hours: number | null;
+  namesA: string[];
+  namesB: string[];
+};
+
+export async function rulesConcerningMyMeds(): Promise<RuleConcerningMe[]> {
+  const [rules, activeSupplements, activePrescriptions, activeOtc] = await Promise.all([
+    listInteractionRules(),
+    listSupplementTreatments(true),
+    listPrescriptionTreatments(true),
+    listOtcTreatments(true),
+  ]);
+  if (activeSupplements.length + activePrescriptions.length + activeOtc.length === 0) return [];
+  const ingredientsByTreatment: Record<string, { nutrientCode: string }[]> = {};
+  await Promise.all(
+    activeSupplements.map(async (treatment) => {
+      ingredientsByTreatment[treatment.id] = await getTreatmentNutrients(treatment.id);
+    }),
+  );
+  const context = {
+    supplementTreatments: activeSupplements,
+    ingredientsByTreatment,
+    prescriptionTreatments: [...activePrescriptions, ...activeOtc],
+  };
+  const concerning: RuleConcerningMe[] = [];
+  for (const rule of sortBySeverity(rules)) {
+    if (rule.ruleType === 'age_threshold_caution' || rule.ruleType === 'appointment_caution') continue;
+    const treatmentsA = activeTreatmentsForSubject(rule.subjectAKind, rule.subjectA, context);
+    if (treatmentsA.length === 0) continue;
+    const treatmentsB =
+      rule.subjectBKind && rule.subjectB ? activeTreatmentsForSubject(rule.subjectBKind, rule.subjectB, context) : [];
+    if (rule.ruleType === 'timing_separation' && treatmentsB.length === 0) continue;
+    concerning.push({
+      ruleId: rule.id,
+      ruleType: rule.ruleType,
+      title: rule.title,
+      guidance: rule.guidance,
+      citation: rule.citation,
+      hours: rule.ruleType === 'timing_separation' ? rule.minSeparationHours : null,
+      namesA: treatmentsA.map((treatment) => treatment.name),
+      namesB: treatmentsB.map((treatment) => treatment.name),
+    });
+  }
+  return concerning;
+}

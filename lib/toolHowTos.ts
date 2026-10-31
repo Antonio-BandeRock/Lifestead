@@ -129,6 +129,7 @@ export type ToolMark =
   | 'learn.grade'
   | 'learn.source'
   | 'learn.entry'
+  | 'learn.records'
   | 'capture.keepInLibrary'
   | 'work.overview'
   | 'work.todos'
@@ -3064,6 +3065,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Under the answer, Read the Entry names the entry the card is drawn from. Tap it to open the entry where it lives.', mark: 'learn.entry' },
       ],
       forYou: 'Each of these cards says only what its entry says, so the entry’s sources and the strength of its evidence stand behind the card.',
+    },
+    {
+      key: 'records',
+      title: 'Study a deck made from your records',
+      steps: [
+        { say: 'Under From Your Records, find Your Medicines and Supplements, What You Are Growing or Guess Your Records.', mark: 'learn.records' },
+        { say: 'Tap Study under it. Each card is made from what your records hold today.', mark: 'learn.study' },
+        { say: 'On a guess card, pick before you look, then turn it over to see what the records show.' },
+      ],
+      forYou: 'These decks are made again every time Learn opens, so a medicine you stop or a crop you pull leaves its cards by itself. A deck shows once there is something to make it from.',
     },
   ],
   '/interests#makingItPay': readingHowTos('Making It Pay', 'Each entry names the source and year of every figure in it, and says who the figures cover.'),

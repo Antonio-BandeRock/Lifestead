@@ -16,7 +16,8 @@ import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 import { localDayOf } from '../lib/interests';
-import { LEARN_DECKS, cardById, deckById } from '../lib/learnDecks';
+import { LEARN_DECKS, type LearnDeck } from '../lib/learnDecks';
+import { loadRecordDecks } from '../lib/learnRecordDecksDb';
 import { addLearnReview, listLearnReviews } from '../lib/learnDb';
 import {
   countKnown,
@@ -52,10 +53,23 @@ export function LearnSection({ tabColor }: Props) {
   const [reviews, setReviews] = useState<LearnReview[]>([]);
   const [sitting, setSitting] = useState<SittingState | null>(null);
   const [doneLine, setDoneLine] = useState<{ deckId: string; text: string } | null>(null);
+  const [recordDecks, setRecordDecks] = useState<LearnDeck[]>([]);
 
   const load = useCallback(async () => {
-    setReviews(await listLearnReviews());
+    const [all, fromRecords] = await Promise.all([listLearnReviews(), loadRecordDecks(today(), t)]);
+    setReviews(all);
+    setRecordDecks(fromRecords);
   }, []);
+
+  const allDecks = [...LEARN_DECKS, ...recordDecks];
+  const deckById = (id: string) => allDecks.find((deck) => deck.id === id);
+  const cardById = (id: string) => {
+    for (const deck of allDecks) {
+      const card = deck.cards.find((c) => c.id === id);
+      if (card) return { deck, card };
+    }
+    return undefined;
+  };
 
   useFocusEffect(
     useCallback(() => {
@@ -115,50 +129,62 @@ export function LearnSection({ tabColor }: Props) {
     <View style={styles.section}>
       <Text style={styles.knownText}>{describeKnown(known)}</Text>
 
-      {LEARN_DECKS.map((deck) => {
+      {[...LEARN_DECKS, ...recordDecks].map((deck, index) => {
         const ids = deck.cards.map((card) => card.id);
         const standing = deckStanding(ids, reviews, day);
         const open = sitting?.deckId === deck.id;
         return (
-          <View
-            key={deck.id}
-            ref={walkMark.ref('learn.deck')}
-            style={[styles.deckBlock, { borderLeftColor: tabColor }, walkMark('learn.deck')]}
-          >
-            <Text style={styles.groupHeading}>{deck.title}</Text>
-            <Text style={styles.captionText}>{deck.about}</Text>
-            {!open ? (
-              <>
-                <Text style={styles.bodyText}>{describeDeckReady(standing, day)}</Text>
-                {doneLine?.deckId === deck.id ? <Text style={styles.bodyText}>{doneLine.text}</Text> : null}
-                <TouchableOpacity
-                  ref={walkMark.ref('learn.study')}
-                  style={[styles.primaryButton, walkMark('learn.study')]}
-                  onPress={() => startSitting(deck.id)}
-                  accessibilityRole="button"
-                >
-                  <Text style={styles.primaryButtonText}>Study</Text>
-                </TouchableOpacity>
-              </>
-            ) : current && sitting ? (
-              <View style={styles.cardBlock}>
-                <Text style={styles.captionText}>
-                  {t('Card {n} of {total}', { n: sitting.index + 1, total: sitting.queue.length })}
-                </Text>
-                <LearnCardView
-                  key={`${sitting.index}:${current.card.id}`}
-                  card={current.card}
-                  day={day}
-                  onGrade={(grade) => void answer(grade)}
-                />
-                <TouchableOpacity onPress={() => setSitting(null)} accessibilityRole="button">
-                  <Text style={styles.linkText}>Stop for Now</Text>
-                </TouchableOpacity>
-              </View>
-            ) : null}
+          <View key={deck.id} style={styles.deckGroup}>
+            {index === LEARN_DECKS.length ? <Text style={styles.groupHeading}>From Your Records</Text> : null}
+            <View
+              ref={index === LEARN_DECKS.length ? walkMark.ref('learn.records') : walkMark.ref('learn.deck')}
+              style={[
+                styles.deckBlock,
+                { borderLeftColor: tabColor },
+                index === LEARN_DECKS.length ? walkMark('learn.records') : walkMark('learn.deck'),
+              ]}
+            >
+              <Text style={styles.groupHeading}>{deck.title}</Text>
+              <Text style={styles.captionText}>{deck.about}</Text>
+              {!open ? (
+                <>
+                  <Text style={styles.bodyText}>{describeDeckReady(standing, day)}</Text>
+                  {doneLine?.deckId === deck.id ? <Text style={styles.bodyText}>{doneLine.text}</Text> : null}
+                  <TouchableOpacity
+                    ref={walkMark.ref('learn.study')}
+                    style={[styles.primaryButton, walkMark('learn.study')]}
+                    onPress={() => startSitting(deck.id)}
+                    accessibilityRole="button"
+                  >
+                    <Text style={styles.primaryButtonText}>Study</Text>
+                  </TouchableOpacity>
+                </>
+              ) : current && sitting ? (
+                <View style={styles.cardBlock}>
+                  <Text style={styles.captionText}>
+                    {t('Card {n} of {total}', { n: sitting.index + 1, total: sitting.queue.length })}
+                  </Text>
+                  <LearnCardView
+                    key={`${sitting.index}:${current.card.id}`}
+                    card={current.card}
+                    day={day}
+                    onGrade={(grade) => void answer(grade)}
+                  />
+                  <TouchableOpacity onPress={() => setSitting(null)} accessibilityRole="button">
+                    <Text style={styles.linkText}>Stop for Now</Text>
+                  </TouchableOpacity>
+                </View>
+              ) : null}
+            </View>
           </View>
         );
       })}
+      {recordDecks.length === 0 ? (
+        <Text style={styles.captionText}>
+          Decks from your records appear here once there is something to make them from: what you take in Life &gt; My Meds, what is growing
+          in Garden, meals in Food, or time on an interest in Sessions.
+        </Text>
+      ) : null}
     </View>
   );
 }
@@ -166,11 +192,20 @@ export function LearnSection({ tabColor }: Props) {
 const styles = StyleSheet.create({
   section: { gap: 10 },
   knownText: { ...typography.label, color: colors.textPrimary, ...textShadow },
+  deckGroup: { gap: 6 },
   deckBlock: { gap: 6, paddingLeft: 8, borderLeftWidth: 2 },
   cardBlock: { gap: 8, marginTop: 4 },
-  groupHeading: { ...typography.label, color: colors.textPrimary, ...textShadow },
+  groupHeading: {
+    ...typography.label,
+    color: colors.textPrimary,
+    ...textShadow,
+  },
   bodyText: { ...typography.body, color: colors.textPrimary, ...textShadow },
-  captionText: { ...typography.caption, color: colors.textMuted, ...textShadow },
+  captionText: {
+    ...typography.caption,
+    color: colors.textMuted,
+    ...textShadow,
+  },
   primaryButton: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
   primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },

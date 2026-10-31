@@ -141,6 +141,69 @@ const fromReading = D.LEARN_DECKS.filter((deck) => deck.cards.length > 0 && deck
 check('at least three decks are drawn from the reading', fromReading.length >= 3, fromReading.map((d) => d.id));
 check('cardById finds a card', D.cardById('evidence-rct')?.deck.id === 'evidence');
 
+// Decks made from the person's records (part 6d), built from made-up inputs.
+const R = load('lib/learnRecordDecks.ts');
+const read0 = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
+const tr = (text, values) => (values ? text.replace(/\{(\w+)\}/g, (_, k) => String(values[k])) : text);
+const noGuess = { foodDays: [], mealDays: 0, plantings: [], interestMinutes: [] };
+check('no records make no decks', R.buildRecordDecks({ meds: [], crops: [], guess: noGuess }, tr).length === 0);
+const timing = { ruleId: 'levo_calcium', ruleType: 'timing_separation', title: 'Levothyroxine and calcium need hours between them', guidance: 'Calcium can lower absorption.', citation: 'A label', hours: 4, namesA: ['Levo'], namesB: ['Cal-Mag', 'Cal-Mag'] };
+const caution = { ruleId: 'biotin_assay', ruleType: 'reference_only', title: 'Biotin can upset thyroid tests', guidance: 'Biotin can upset some tests.', citation: 'A review', hours: null, namesA: ['Hair vitamins'], namesB: [] };
+const crop = (key) => ({ key, name: key[0].toUpperCase() + key.slice(1), problems: [1, 2, 3].map((n) => ({ label: `${key} trouble ${n}`, looks: `Looks ${n}.`, why: `Why ${n}.`, fix: `Fix ${n}.` })) });
+const recFull = R.buildRecordDecks(
+  {
+    meds: [timing, caution],
+    crops: ['tomato', 'bean', 'kale', 'pea', 'leek', 'okra'].map(crop),
+    guess: {
+      foodDays: [{ name: 'Oats', days: 12 }, { name: 'Kale', days: 7 }, { name: 'Rice', days: 7 }, { name: 'Eggs', days: 3 }, { name: 'Figs', days: 1 }],
+      mealDays: 22,
+      plantings: [{ name: 'Kale', plantedAt: '2026-09-02' }, { name: 'Bean', plantedAt: '2026-08-15' }, { name: 'Leek', plantedAt: '2026-09-20' }, { name: 'Kale', plantedAt: '2026-10-01' }],
+      interestMinutes: [{ name: 'Knitting', minutes: 300 }, { name: 'Chess', minutes: 45 }],
+    },
+  },
+  tr,
+);
+check('three record decks', recFull.map((d) => d.id).join() === R.RECORD_DECK_IDS.join(), recFull.map((d) => d.id));
+const recIds = new Set();
+for (const deck of recFull) {
+  const thinking = deck.cards.filter((card) => card.thinking).length;
+  check(`${deck.id}: thinking cards are the majority`, thinking * 2 > deck.cards.length, `${thinking} of ${deck.cards.length}`);
+  check(`${deck.id}: title has no colon subtitle`, !deck.title.includes(': '), deck.title);
+  for (const card of deck.cards) {
+    check(`${card.id}: unique record id`, !recIds.has(card.id) && !cardIds.has(card.id));
+    recIds.add(card.id);
+    check(`${card.id}: parts fit its kind`, K.cardProblems(card).length === 0, K.cardProblems(card));
+    check(`${card.id}: no gap left unfilled`, !/\{\w+\}/.test(card.front + card.back));
+  }
+}
+const meds = recFull.find((d) => d.id === 'rec-meds');
+const hoursCard = meds.cards.find((c) => c.kind === 'estimate');
+check('a timing card asks the rule hours', hoursCard.options[hoursCard.answer].text === '4 hours', hoursCard.options[hoursCard.answer]);
+check('a timing card names both, once each', /your Levo and your Cal-Mag\?/.test(hoursCard.front), hoursCard.front);
+check('a timing card id carries the hours', hoursCard.id === 'rec-med-levo_calcium-4');
+check('a caution card says what the rule says', meds.cards.some((c) => c.id === 'rec-med-biotin_assay' && c.back === caution.guidance));
+check('each rule has a card on its source', meds.cards.filter((c) => /-source$/.test(c.id)).length === 2);
+check('the medicine deck leaves a dose to the prescriber', meds.cards.some((c) => /prescriber/.test(c.back)));
+const garden = recFull.find((d) => d.id === 'rec-garden');
+check('the garden deck stops at five crops', !garden.cards.some((c) => c.id.startsWith('rec-crop-okra')));
+const sign = garden.cards.find((c) => c.id === 'rec-crop-tomato-1');
+check('a sign card answers with the problem it shows', sign.options[sign.answer].text === 'tomato trouble 2', sign.options);
+check('a sign card says why the others are not it', sign.options.filter((o, i) => i !== sign.answer).every((o) => /^Not this one\./.test(o.why)));
+const guess = recFull.find((d) => d.id === 'rec-guess');
+const food = guess.cards.find((c) => c.id.startsWith('rec-guess-food'));
+check('the food guess answers with the most days', food && food.options[food.answer].text === 'Oats' && food.id === 'rec-guess-food-oats', food);
+const mealDays = guess.cards.find((c) => c.id.startsWith('rec-guess-meal-days'));
+check('the meal days guess picks its band', mealDays.options[mealDays.answer].text === '20 to 25' && mealDays.id === 'rec-guess-meal-days-20');
+const planted = guess.cards.find((c) => c.kind === 'order');
+check('the planting order runs first to last, one line a crop', planted.items.join() === 'Bean,Kale,Leek', planted.items);
+check('the interest guess', guess.cards.some((c) => c.id === 'rec-guess-interest-knitting'));
+const tied = R.buildRecordDecks({ meds: [], crops: [], guess: { ...noGuess, foodDays: [{ name: 'A', days: 3 }, { name: 'B', days: 3 }, { name: 'C', days: 1 }] } }, tr);
+check('a tie for most eaten makes no food card', tied.length === 0);
+const halfTiming = R.buildRecordDecks({ meds: [{ ...timing, namesB: [] }], crops: [], guess: noGuess }, tr);
+check('a timing rule with one half matched makes no hours card', !halfTiming.some((d) => d.cards.some((c) => c.kind === 'estimate')));
+check('the section reads the record decks', read0('components/LearnSection.tsx').includes('loadRecordDecks(today(), t)'));
+check('the medicine deck reads the same matching as the advisories', read0('lib/interactionRules.ts').includes('export async function rulesConcerningMyMeds'));
+
 // The kinds of question.
 check('typed answers are read kindly', K.normalizeAnswer('  The Confounder! ') === 'confounder');
 check('accents are read kindly', K.normalizeAnswer('Factor de Confusión') === 'factor de confusion');
@@ -186,7 +249,7 @@ const FORBIDDEN = [
   'streak', 'points', 'score', 'level', 'badge', 'well done', 'great job', 'missed', 'overdue', 'behind',
   'fail', 'wrong', 'must', 'you should', 'real ', 'genuine', 'honestly', '—', '–', ' -- ', 'percent', '%',
 ];
-const FILES = ['lib/learnSchedule.ts', 'lib/learnDecks.ts', 'lib/learnDb.ts', 'components/LearnSection.tsx', 'lib/learnKinds.ts', 'components/LearnCardView.tsx'];
+const FILES = ['lib/learnSchedule.ts', 'lib/learnDecks.ts', 'lib/learnDb.ts', 'components/LearnSection.tsx', 'lib/learnKinds.ts', 'components/LearnCardView.tsx', 'lib/learnRecordDecks.ts', 'lib/learnRecordDecksDb.ts'];
 const re = /'((?:[^'\\\n]|\\.)*)'|"((?:[^"\\\n]|\\.)*)"|`((?:[^`\\]|\\.)*)`/g;
 for (const rel of FILES) {
   const text = read(rel)
