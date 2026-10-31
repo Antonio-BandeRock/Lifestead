@@ -203,6 +203,7 @@
         }
       ],
       "expo-secure-store",
+      "expo-mail-composer",
       [
         "expo-speech-recognition",
         {

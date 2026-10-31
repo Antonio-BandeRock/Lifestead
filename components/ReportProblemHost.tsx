@@ -16,7 +16,7 @@
 // is a View drawn at the root, and a Modal would cover it.
 import { Ionicons } from '@expo/vector-icons';
 import { useCallback, useEffect, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { colors } from '../constants/colors';
 import { TAB_ROUTES } from '../constants/tabs';
@@ -36,6 +36,7 @@ import {
 import type { ProblemReportKind, ProblemReportPlace } from '../lib/problemReport';
 import { describeReportDevice, sendProblemReport } from '../lib/problemReportSend';
 import { registerReportProblemOpener, setReportProblemEnabled } from '../lib/reportProblem';
+import { takeScreenPicture } from '../lib/screenPicture';
 import type { ReportProblemTarget } from '../lib/reportProblem';
 import { currentTellClaudeScreen } from '../lib/tellClaude';
 import { t } from '../lib/i18n';
@@ -55,9 +56,11 @@ type Open = {
   start: ProblemReportPlace;
   place: ProblemReportPlace;
   crash: string | null;
+  /** The screen as it was when the sheet was asked for, in the cache folder. */
+  picture: string | null;
 };
 
-type Done = 'opened' | 'copied' | 'failed';
+type Done = 'opened' | 'openedNoPicture' | 'copied' | 'failed';
 
 export function ReportProblemHost() {
   const on = isTesterBuild();
@@ -70,22 +73,27 @@ export function ReportProblemHost() {
   const [problem, setProblem] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState<Done | null>(null);
+  const [addPicture, setAddPicture] = useState(true);
 
   useEffect(() => {
     setReportProblemEnabled(on);
   }, [on]);
 
-  const start = useCallback((target: ReportProblemTarget, crash: string | null = null) => {
+  const start = useCallback(async (target: ReportProblemTarget, crash: string | null = null) => {
     const where = currentTellClaudeScreen();
     const place: ProblemReportPlace = { tab: where.tab, lens: where.lens, bandTitle: target.bandTitle ?? null };
-    setOpen({ start: place, place, crash });
+    // After a crash the screen is the app starting again, which shows
+    // nothing of what went wrong, so no picture is taken.
+    const picture = crash ? null : await takeScreenPicture();
+    setOpen({ start: place, place, crash, picture });
+    setAddPicture(true);
     setKind('problem');
     setBody('');
     setProblem(null);
     setDone(null);
   }, []);
 
-  useEffect(() => registerReportProblemOpener((target) => start(target)), [start]);
+  useEffect(() => registerReportProblemOpener((target) => void start(target)), [start]);
 
   // After the app closed by itself, the next open offers to send what went
   // wrong. Once, at start: a crash note is cleared whichever way the sheet
@@ -93,7 +101,7 @@ export function ReportProblemHost() {
   useEffect(() => {
     if (!on) return;
     const crash = readCrashNote();
-    if (crash) start({}, crash);
+    if (crash) void start({}, crash);
   }, [on, start]);
 
   if (!on) return null;
@@ -128,7 +136,7 @@ export function ReportProblemHost() {
         device: describeReportDevice(),
         crash: open.crash,
         sentAt: new Date(),
-      });
+      }, open.picture && addPicture ? open.picture : null);
       if (result !== 'failed' && open.crash) clearCrashNote();
       setDone(result);
     } finally {
@@ -144,7 +152,7 @@ export function ReportProblemHost() {
         <TouchableOpacity
           ref={walkMark.ref('report.button')}
           style={[styles.button, edge, walkMark('report.button')]}
-          onPress={() => start({})}
+          onPress={() => void start({})}
           accessibilityLabel="Report a problem or a wish"
           hitSlop={8}
         >
@@ -162,9 +170,11 @@ export function ReportProblemHost() {
                   <Text style={styles.message}>
                     {done === 'opened'
                       ? 'Your email app is open with the report in it. Read it over, then press Send there.'
-                      : done === 'copied'
+                      : done === 'openedNoPicture'
+                        ? 'Your email app is open with the report in it, without the picture of the screen, which only goes when an email account is set up on this phone. Read it over, then press Send there.'
+                        : done === 'copied'
                         ? t('No email app opened, so the report is copied. Paste it into an email to {address}.', { address: PROBLEM_REPORT_ADDRESS })
-                        : t('No email app opened and the report could not be copied. Write to {address} and say what happened.', { address: PROBLEM_REPORT_ADDRESS })}
+                          : t('No email app opened and the report could not be copied. Write to {address} and say what happened.', { address: PROBLEM_REPORT_ADDRESS })}
                   </Text>
                   <View style={styles.buttonRow}>
                     <TouchableOpacity style={styles.okButton} onPress={() => setOpen(null)} hitSlop={8}>
@@ -228,6 +238,31 @@ export function ReportProblemHost() {
                     placeholderTextColor={colors.textMuted}
                   />
                   {problem ? <Text style={styles.error}>{problem}</Text> : null}
+                  {open.picture ? (
+                    <>
+                      <Text style={styles.section}>Picture of the screen</Text>
+                      <Image source={{ uri: open.picture }} style={styles.picture} resizeMode="contain" accessibilityLabel="The screen as it was" />
+                      <View style={styles.pillRow}>
+                        <TouchableOpacity
+                          style={[styles.pill, addPicture ? styles.pillActive : null]}
+                          onPress={() => setAddPicture(true)}
+                          hitSlop={6}
+                        >
+                          <Text style={[styles.pillText, addPicture ? styles.pillTextActive : null]}>Add It</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          style={[styles.pill, !addPicture ? styles.pillActive : null]}
+                          onPress={() => setAddPicture(false)}
+                          hitSlop={6}
+                        >
+                          <Text style={[styles.pillText, !addPicture ? styles.pillTextActive : null]}>Leave It Out</Text>
+                        </TouchableOpacity>
+                      </View>
+                      <Text style={styles.caption}>
+                        It shows what was on the screen when you opened this, records included. Leave it out if anything there should stay with you.
+                      </Text>
+                    </>
+                  ) : null}
                   <Text style={styles.caption}>
                     {t('It goes to {address} from your email app, with the version and the kind of phone added. Nothing is sent until you press Send there.', {
                       address: PROBLEM_REPORT_ADDRESS,
@@ -323,6 +358,7 @@ const styles = StyleSheet.create({
     ...textShadow,
   },
   error: { ...typography.caption, color: colors.danger, marginTop: 6, ...textShadow },
+  picture: { width: '100%', height: 180, marginTop: 6, marginBottom: 8, borderRadius: 8, backgroundColor: colors.background },
   buttonRow: { flexDirection: 'row', gap: 12, marginTop: 14, justifyContent: 'flex-start' },
   cancelButton: { paddingHorizontal: 16, paddingVertical: 10 },
   cancelButtonText: { ...typography.bodyEmphasis, color: colors.textSecondary, ...textShadow },

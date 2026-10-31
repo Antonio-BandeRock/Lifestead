@@ -369,6 +369,14 @@ const BY_HAND: Readonly<Record<string, string>> = {
   'Open the band with the name of Thank You for Testing Lifestead. It stays on Home, and the same words are in Getting Set Up.': 'Abre la sección llamada Gracias por probar Lifestead. Se queda en Inicio, y lo mismo está en Preparándote.',
   'Tap Report a Problem under it to say what you found, the same as the flag at the edge.': 'Toca Reportar un problema debajo para contar lo que encontraste, igual que con la bandera del borde.',
   'What this version is, how to say what you found, and the version number to quote are always one look away.': 'Qué es esta versión, cómo contar lo que encontraste y el número de versión que debes mencionar siempre están a la vista.',
+  // The picture of the screen on a report, T8 (2026-10-31).
+  'Picture of the screen': 'Foto de la pantalla',
+  'A picture of the screen as it was is added. Tap Leave It Out if anything on it should stay with you.': 'Se agrega una foto de la pantalla como estaba. Toca Dejarla fuera si algo en ella debe quedarse contigo.',
+  'Add It': 'Agregarla',
+  'Leave It Out': 'Dejarla fuera',
+  'It shows what was on the screen when you opened this, records included. Leave it out if anything there should stay with you.': 'Muestra lo que había en la pantalla cuando abriste esto, registros incluidos. Déjala fuera si algo ahí debe quedarse contigo.',
+  'Your email app is open with the report in it, without the picture of the screen, which only goes when an email account is set up on this phone. Read it over, then press Send there.': 'Tu app de correo está abierta con el reporte, sin la foto de la pantalla, que solo se manda cuando hay una cuenta de correo configurada en este teléfono. Revísalo y luego presiona Enviar ahí.',
+  'The screen as it was': 'La pantalla como estaba',
   // Update notes for testers, T6 (2026-10-31).
   'Updated to {version}': 'Actualizada a {version}',
   'Lifestead updated itself and restarted. Here\'s what changed:': 'Lifestead se actualizó sola y volvió a abrirse. Esto es lo que cambió:',

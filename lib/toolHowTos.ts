@@ -2221,6 +2221,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap the flag against the edge of the screen. On any tab, a long press on the name of a band does the same and names that band.', mark: 'report.button' },
         { say: 'Check where it is about. It starts as the screen you were on, and a tap on another tab changes it.' },
         { say: 'Pick what kind it is, then type it, or tap the mic and say it.' },
+        { say: 'A picture of the screen as it was is added. Tap Leave It Out if anything on it should stay with you.' },
         { say: 'Tap Write the Email. Your email app opens with the report in it, and nothing goes until you press Send there.' },
       ],
       forYou: 'What you found reaches the people building the app with the version and the screen already on it, so it can be put right.',

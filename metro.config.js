@@ -101,6 +101,8 @@ if (process.env.LIFESTEAD_DESKTOP === '1') {
     'expo-quick-actions/router': 'lib/desktop/unavailableModule.ts',
     'expo-share-intent': 'lib/desktop/unavailableModule.ts',
     'expo-contacts': 'lib/desktop/unavailableModule.ts',
+    'react-native-view-shot': 'lib/desktop/unavailableModule.ts',
+    'expo-mail-composer': 'lib/desktop/unavailableModule.ts',
     'expo-location': 'lib/desktop/unavailableModule.ts',
     'react-native-webview': 'lib/desktop/unavailableModule.ts',
   };
