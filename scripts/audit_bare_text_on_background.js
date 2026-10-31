@@ -110,6 +110,12 @@ const ALLOWED = [
     reason:
       '2026-08-30, direct request: "remove both backgrounds". The version label floats over every screen at 9px and a fill read as a badge in the corner. Legibility rests on textShadow, the same thing the two hub labels beside it rely on.',
   },
+  {
+    file: 'components/TesterWatermark.tsx',
+    style: 'mark',
+    reason:
+      '2026-10-31, tester plan T12: the first name of the tester drawn faintly across every screen of Lifestead Test so a shared screenshot says whose copy it came from. It is a mark meant to sit on whatever is underneath, never something to read, so a surface behind it would defeat it.',
+  },
 ];
 
 function isAllowed(file, styles) {

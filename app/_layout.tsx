@@ -18,6 +18,8 @@ import { DatabaseSetupScreen } from '../components/DatabaseSetupScreen';
 import { FirstLaunchAgreement } from '../components/FirstLaunchAgreement';
 import { FirstSetup } from '../components/FirstSetup';
 import { TestDataFiller } from '../components/TestDataFiller';
+import { TesterGate } from '../components/TesterGate';
+import { TesterWatermark } from '../components/TesterWatermark';
 import { GuidedTourHost } from '../components/GuidedTourHost';
 import { GardenPlateOfferHost } from '../components/GardenPlateOfferHost';
 import { StartupFailureScreen } from '../components/StartupFailureScreen';
@@ -663,6 +665,10 @@ function UnlockedApp() {
               {/* The desktop's Test data version fills itself here on first open,
                   over setup and everything else (lib/testDataGenerator.ts). */}
               <TestDataFiller />
+              {/* Tester plan T12: Lifestead Test opens only for an approved
+                  device, over everything but pickers and the keyboard. Draws
+                  nothing in any other version. */}
+              <TesterGate />
               {/* Before AppKeyboard, deliberately -- see OverlayContext.tsx's own
                   comment: the keyboard must always paint on top of an open
                   dropdown's backdrop/menu, never the other way around. */}
@@ -677,6 +683,10 @@ function UnlockedApp() {
                   makes the same call and lifts nothing. */}
               {isDesktopApp() ? null : <AppKeyboard />}
               <VersionLabel />
+              {/* The tester's first name, faint, across every screen of
+                  Lifestead Test (T12), so a shared screenshot says whose
+                  copy it came from. Touches nothing. */}
+              <TesterWatermark />
             </KeyboardLiftProvider>
           </OverlayProvider>
           </WordingEditProvider>
@@ -832,6 +842,26 @@ function RootStack() {
           establishes for exactly this "receive an out-of-band
           invite, decode it, show an explicit accept/decline choice"
           pattern. */}
+      {/* Tester plan T12: the developer version approves a tester from
+          the request link, and Lifestead Test opens with the approval. */}
+      <Stack.Screen
+        name="approve"
+        options={{
+          headerShown: true,
+          title: 'Approve a Tester',
+          headerStyle: { backgroundColor: colors.background },
+          headerTintColor: colors.textPrimary,
+        }}
+      />
+      <Stack.Screen
+        name="activate"
+        options={{
+          headerShown: true,
+          title: 'Lifestead Test',
+          headerStyle: { backgroundColor: colors.background },
+          headerTintColor: colors.textPrimary,
+        }}
+      />
       <Stack.Screen
         name="connect"
         options={{

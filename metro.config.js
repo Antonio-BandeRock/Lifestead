@@ -139,6 +139,8 @@ if (process.env.APP_VARIANT === 'test' || process.env.APP_VARIANT === 'store') {
     [path.join(__dirname, 'components', 'VoiceoverRecorder.tsx'), nothing],
     [path.join(__dirname, 'components', 'DeveloperToolsCard.tsx'), nothing],
     [path.join(__dirname, 'lib', 'devSeed.ts'), path.join(__dirname, 'lib', 'variantStubs', 'devSeed.ts')],
+    [path.join(__dirname, 'components', 'ApproveTesterPanel.tsx'), nothing],
+    [path.join(__dirname, 'lib', 'testerApprove.ts'), path.join(__dirname, 'lib', 'variantStubs', 'testerApprove.ts')],
   ]);
   const variantResolveRequest = config.resolver.resolveRequest;
   config.resolver.resolveRequest = (context, moduleName, platform) => {

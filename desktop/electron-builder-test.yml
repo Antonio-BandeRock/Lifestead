@@ -1,0 +1,14 @@
+# The tester installer (tester plan T9, 2026-10-31): `npm run dist:test`.
+# Everything comes from electron-builder.yml; this changes only what keeps
+# the tester version apart from the developer's on the same computer. Its
+# own app id, so Windows installs it beside the other rather than over it;
+# its own name; and lifesteadVariant, which desktop/variant.js reads to keep
+# the records in %APPDATA%/lifestead-test and which the app reads to be the
+# tester version.
+extends: ./electron-builder.yml
+appId: com.ghostead.lifestead.test
+productName: Lifestead Test
+directories:
+  output: dist-test
+extraMetadata:
+  lifesteadVariant: test

@@ -9,6 +9,9 @@
 // T6 added the two ways a tester learns about updates: What Changed reads
 // the last few release notes again, and a line appears when a new installer
 // is needed, since an update over the air cannot bring native changes.
+//
+// T12 added how long this device's access lasts, and Ask to Renew once
+// the end is two weeks away or less (lib/testerAccess.ts).
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -19,8 +22,11 @@ import { textShadow, typography } from '../constants/typography';
 import { APP_VERSION } from '../constants/version';
 import { isTesterBuild } from '../lib/appVariant';
 import { t } from '../lib/i18n';
+import { explainNotYet } from '../lib/notYet';
 import { PROBLEM_REPORT_ADDRESS } from '../lib/problemReport';
 import { openReportProblem } from '../lib/reportProblem';
+import { askForAccess, useTesterAccess } from '../lib/testerAccess';
+import { endDay } from '../lib/testerApproval';
 import type { InstallerWaiting } from '../lib/testerInstaller';
 import { checkTesterInstaller } from '../lib/testerInstallerCheck';
 import { useInfoAlert } from './InfoAlert';
@@ -41,6 +47,8 @@ export function TesterWelcome({ showHeading = false }: Props) {
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [installer, setInstaller] = useState<InstallerWaiting | null>(null);
   const tester = isTesterBuild();
+  const access = useTesterAccess();
+  const [renewSent, setRenewSent] = useState<string | null>(null);
 
   useEffect(() => {
     if (!tester) return;
@@ -72,9 +80,50 @@ export function TesterWelcome({ showHeading = false }: Props) {
     });
   };
 
+  const okState = access.state.kind === 'ok' ? access.state : null;
+  const askToRenew = async () => {
+    const name = access.name || okState?.approval.name || '';
+    if (!name) {
+      explainNotYet(t('Your name is missing from this device, so the request would not say who it is from. Write to {address} instead.', { address: PROBLEM_REPORT_ADDRESS }));
+      return;
+    }
+    const sent = await askForAccess(name, true);
+    setRenewSent(
+      sent === 'opened'
+        ? t('Your email app has the request ready. Send it, and the new link will come back by email.')
+        : sent === 'copied'
+          ? t('No email app opened, so the request is copied. Paste it into an email to {address}.', { address: PROBLEM_REPORT_ADDRESS })
+          : t('The request could not be made. Write to {address} and ask for more time.', { address: PROBLEM_REPORT_ADDRESS }),
+    );
+  };
+
   return (
     <View style={styles.body}>
       {showHeading ? <Text style={styles.heading}>{TESTER_WELCOME_TITLE}</Text> : null}
+      {okState ? (
+        <View style={styles.installer}>
+          <Text style={styles.line}>
+            {okState.renewSoon
+              ? t('This device can open the test version until {day}, {count} days from now. Ask for more time now and nothing stops in between.', { day: endDay(okState.approval), count: okState.daysLeft })
+              : t('This device can open the test version until {day}.', { day: endDay(okState.approval) })}
+          </Text>
+          {okState.renewSoon ? (
+            <View style={styles.buttonRow}>
+              <TouchableOpacity
+                ref={walkMark.ref('tester.renew')}
+                style={styles.primaryButton}
+                activeOpacity={0.8}
+                onPress={() => void askToRenew()}
+                accessibilityRole="button"
+              >
+                <Ionicons name="time-outline" size={18} color={colors.textPrimary} />
+                <Text style={styles.primaryButtonText}>Ask to Renew</Text>
+              </TouchableOpacity>
+            </View>
+          ) : null}
+          {renewSent ? <Text style={styles.caption}>{renewSent}</Text> : null}
+        </View>
+      ) : null}
       {installer ? (
         <View style={styles.installer}>
           <Text style={styles.line}>

@@ -16,3 +16,7 @@ export function VoiceoverRecorder() {
 export function DeveloperToolsCard() {
   return null;
 }
+
+export function ApproveTesterPanel() {
+  return null;
+}

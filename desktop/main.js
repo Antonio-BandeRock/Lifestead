@@ -36,6 +36,7 @@ const print = require('./print');
 const hello = require('./hello');
 const speech = require('./speech');
 const versions = require('./versions');
+const variant = require('./variant');
 
 const APP_ID = 'com.insidestoryapp.app';
 const SCHEME = 'app';
@@ -52,6 +53,9 @@ const REFERENCE_DB_FILE = 'foods_reference.db';
 // tried again next time.
 function dataFolder() {
   const appData = app.getPath('appData');
+  // The tester version (variant.js) starts in a folder of its own and has
+  // nothing from before 1.0.66 to bring across.
+  if (variant.dataFolderName) return path.join(appData, variant.dataFolderName);
   const current = path.join(appData, 'lifestead-desktop');
   const before = path.join(appData, 'inside-story-desktop');
   if (fs.existsSync(current) || !fs.existsSync(before)) return current;
@@ -67,7 +71,7 @@ function dataFolder() {
 // own, and --lifestead-versions is the picker that opens them. Each keeps
 // its folder apart from the person's records, and the single-instance lock,
 // taken per folder, brings an open one forward rather than opening it twice.
-const START = versions.startKind(process.argv);
+const START = variant.versionsAllowed ? versions.startKind(process.argv) : { kind: 'own' };
 if (START.kind === 'version') {
   app.setPath('userData', versions.folderFor(app.getPath('appData'), START.version.key));
 } else if (START.kind === 'picker') {
@@ -198,6 +202,9 @@ function registerIpc() {
   });
   ipcMain.handle('versions:showPicker', () => versions.openPicker(app));
 
+  ipcMain.on('app:variant', (event) => {
+    event.returnValue = variant.VARIANT;
+  });
   ipcMain.on('app:version', (event) => {
     event.returnValue = app.getVersion();
   });
@@ -326,7 +333,7 @@ function createWindow() {
   // what a resized window does to the popup menus without dragging one.
   const sizeOverride = /^(\d+)x(\d+)$/.exec(process.env.LIFESTEAD_WINDOW || '');
   const place = START.kind === 'version' ? versions.boundsFrom(process.argv) : null;
-  const title = START.kind === 'version' ? `Lifestead (${START.version.label})` : 'Lifestead';
+  const title = START.kind === 'version' ? `Lifestead (${START.version.label})` : variant.title;
   mainWindow = new BrowserWindow({
     ...(place ? { x: place.x, y: place.y } : {}),
     width: place ? place.width : sizeOverride ? Number(sizeOverride[1]) : Math.min(DEFAULT_WIDTH, workArea.width),
@@ -517,9 +524,11 @@ app.whenReady().then(() => {
   }
   protocol.handle(SCHEME, serveWebFile);
   registerIpc();
-  zoom.install(app.getPath('userData'), () => mainWindow, [
-    { label: 'Versions Side by Side', click: () => versions.openPicker(app) },
-  ]);
+  zoom.install(
+    app.getPath('userData'),
+    () => mainWindow,
+    variant.versionsAllowed ? [{ label: 'Versions Side by Side', click: () => versions.openPicker(app) }] : [],
+  );
   createWindow();
 
   app.on('activate', () => {

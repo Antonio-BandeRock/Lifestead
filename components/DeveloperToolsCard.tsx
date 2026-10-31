@@ -6,6 +6,7 @@
 // Everything here was in the card before; see the comments inside for why
 // each part exists.
 
+import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { Text, TouchableOpacity, View } from 'react-native';
@@ -18,6 +19,7 @@ import { clearShippedDevNotes, listDevNotes, syncDevNotes } from '../lib/devNote
 import { setTier, tierSetByVersion, useTier } from '../lib/entitlement';
 import { explainNotYet } from '../lib/notYet';
 import { seedKitchenSources } from '../lib/testData';
+import { getMyApprovalKey, sendMyApprovalKey } from '../lib/testerApprove';
 import { useVisualPreferences } from '../hooks/useVisualPreferences';
 import { setVisualPreferences } from '../lib/visualPreferences';
 import { VoiceoverRecorder } from './VoiceoverRecorder';
@@ -50,6 +52,10 @@ export function DeveloperToolsCard({ styles, showAlert }: Props) {
   // C8: how the capture sorting suggestions would have done on this
   // person's own sorted notes, run on request.
   const [suggestCheck, setSuggestCheck] = useState<string | null>(null);
+  // Tester plan T12: what Send My Approval Key to Claude said back.
+  const router = useRouter();
+  const [testerKeyMessage, setTesterKeyMessage] = useState<string | null>(null);
+  const [testerKeyBusy, setTesterKeyBusy] = useState(false);
 
   useEffect(() => {
     if (!visualPrefs.developerNotes) {
@@ -206,6 +212,39 @@ export function DeveloperToolsCard({ styles, showAlert }: Props) {
           ) : null}
         </>
       ) : null}
+      {/* Tester plan T12: approving testers, and sending this device's
+          approval key so the tester version accepts what it signs. */}
+      <Text style={styles.helpText}>
+        Testers ask for access by email. Open the link in their email here, or paste it into Approve a Tester. This device&apos;s approvals
+        open the tester version once its key has been sent and added.
+      </Text>
+      {testerKeyMessage ? <Text style={styles.helpText}>{testerKeyMessage}</Text> : null}
+      <TouchableOpacity style={styles.addAllergyButton} onPress={() => router.push('/approve')}>
+        <Text style={styles.addAllergyButtonText}>Approve a Tester</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.addAllergyButton}
+        disabled={testerKeyBusy}
+        onPress={async () => {
+          setTesterKeyBusy(true);
+          try {
+            const mine = await getMyApprovalKey();
+            if (mine.trusted) {
+              setTesterKeyMessage('This device\'s key is already in the tester version.');
+              return;
+            }
+            const problem = await sendMyApprovalKey();
+            setTesterKeyMessage(problem ? `Kept as a note, but not sent yet: ${problem}` : 'Sent as a note for Claude, who adds it to the tester version in the next update.');
+          } catch (error) {
+            console.error('[testerApprove] could not send the approval key', error);
+            setTesterKeyMessage('Could not send the key.');
+          } finally {
+            setTesterKeyBusy(false);
+          }
+        }}
+      >
+        <Text style={styles.addAllergyButtonText}>{testerKeyBusy ? 'Working…' : 'Send My Approval Key to Claude'}</Text>
+      </TouchableOpacity>
       {/* C8: the sorting suggestions checked against every note already
           sorted, each left out in turn. */}
       <TouchableOpacity

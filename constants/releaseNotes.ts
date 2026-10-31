@@ -41,6 +41,22 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.78.23',
+    date: '2026-10-31',
+    changes: [
+      'The test version asks you to agree to a few things the first time it opens, then opens on devices that have been approved. Asking takes your name and one press, and the approval comes back by email as a link.',
+      'Each approval lasts 90 days on the device that asked. Two weeks before it ends, For Testers on Home has Ask to Renew, and your records stay where they are whatever happens.',
+      'Your first name shows faintly across the screens of the test version, so a screenshot says whose copy it came from.',
+    ],
+  },
+  {
+    version: '1.0.78.22',
+    date: '2026-10-31',
+    changes: [
+      'On a computer the test version is an installer of its own, Lifestead Test. It keeps its records apart from any other copy of Lifestead on the same computer.',
+    ],
+  },
+  {
     version: '1.0.78.21',
     date: '2026-10-31',
     changes: [
