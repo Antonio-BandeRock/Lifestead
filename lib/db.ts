@@ -10757,6 +10757,21 @@ async function runDatabaseInitialization() {
         created_at TEXT NOT NULL DEFAULT (datetime('now')),
         updated_at TEXT NOT NULL DEFAULT (datetime('now'))
       );
+      -- Interests > Learn (2026-10-30, Learn part 6a): one row per time a
+      -- card is answered, append-only and never changed. A card's schedule
+      -- is worked out by replaying its rows (lib/learnSchedule.ts), so
+      -- nothing else stores it. deck_id and card_id name a ready-made deck
+      -- in lib/learnDecks.ts; day is the local calendar day of the answer.
+      CREATE TABLE IF NOT EXISTS learn_reviews (
+        id TEXT PRIMARY KEY,
+        deck_id TEXT NOT NULL,
+        card_id TEXT NOT NULL,
+        grade TEXT NOT NULL,
+        day TEXT NOT NULL,
+        answered_at TEXT NOT NULL,
+        created_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_learn_reviews_card ON learn_reviews(card_id);
     `);
     // Interests > Days Until (2026-10-30): a free counter can belong to an
     // interest. Null for every counter that belongs to nothing.

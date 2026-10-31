@@ -1473,6 +1473,7 @@ export const LENS_NAMES: Record<string, Record<string, string>> = {
     money: 'Money',
     daysUntil: 'Days Until',
     projects: 'Projects',
+    learn: 'Learn',
     makingItPay: 'Making It Pay',
   },
   '/insights': {

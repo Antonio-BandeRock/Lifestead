@@ -123,6 +123,11 @@ export type ToolMark =
   | 'pay.interests'
   | 'pay.work'
   | 'pay.result'
+  | 'learn.deck'
+  | 'learn.study'
+  | 'learn.turn'
+  | 'learn.grade'
+  | 'learn.source'
   | 'capture.keepInLibrary'
   | 'work.overview'
   | 'work.todos'
@@ -3008,6 +3013,36 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Remove beside it. It goes straight away, with no question first.', mark: 'daysUntil.remove' },
       ],
       forYou: 'The reminder for its day goes with it.',
+    },
+  ],
+  '/interests#learn': [
+    {
+      key: 'study',
+      title: 'Go through a deck',
+      steps: [
+        { say: 'Find the deck you want. The line under it says how many cards are ready.', mark: 'learn.deck' },
+        { say: 'Tap Study.', mark: 'learn.study', stay: true },
+        { say: 'Read the question and answer it in your head, then tap Turn It Over.', mark: 'learn.turn', stay: true },
+        { say: 'Tap how it went: Not Yet, With Effort, Knew It or Easily.', mark: 'learn.grade' },
+      ],
+      forYou: 'A card you knew comes back after a longer gap each time. One you did not know yet comes back once more at the end of the sitting and again tomorrow.',
+    },
+    {
+      key: 'known',
+      title: 'See what you now know',
+      steps: [
+        { say: 'Look at the top of Learn. Things you now know counts every card you have recalled on two separate days.' },
+      ],
+      forYou: 'The count only grows. A card you later forget comes back to be gone over and stays counted.',
+    },
+    {
+      key: 'source',
+      title: 'Read where a card comes from',
+      steps: [
+        { say: 'Turn a card over. When it rests on a study, the study is named under the answer.' },
+        { say: 'Tap the name to open the study.', mark: 'learn.source' },
+      ],
+      forYou: 'Cards with no study named are about how to weigh a claim, rather than a finding.',
     },
   ],
   '/interests#makingItPay': readingHowTos('Making It Pay', 'Each entry names the source and year of every figure in it, and says who the figures cover.'),

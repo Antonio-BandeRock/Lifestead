@@ -32,6 +32,7 @@ import { listProjects } from '../../lib/projectsDb';
 import { countInterestThings } from '../../lib/interestThingsDb';
 import type { ThingKind } from '../../lib/interestThings';
 import { countLibraryAndPeople } from '../../lib/interestLibraryDb';
+import { LearnSection } from '../../components/LearnSection';
 import { useOnVaultChange } from '../../lib/vaultReads';
 
 // The Interests tab, 2026-10-30 (1.0.77.11). What a person follows,
@@ -64,6 +65,7 @@ type InterestsLens =
   | 'money'
   | 'daysUntil'
   | 'projects'
+  | 'learn'
   | 'makingItPay';
 
 const LENS_KEYS: InterestsLens[] = [
@@ -77,6 +79,7 @@ const LENS_KEYS: InterestsLens[] = [
   'money',
   'daysUntil',
   'projects',
+  'learn',
   'makingItPay',
 ];
 
@@ -91,6 +94,7 @@ const LENS_FULL_NAMES: Record<InterestsLens, string> = {
   money: 'Money',
   daysUntil: 'Days Until',
   projects: 'Projects',
+  learn: 'Learn',
   makingItPay: 'Making It Pay',
 };
 
@@ -230,6 +234,21 @@ const PROJECTS_HELP: HelpSection[] = [
   },
 ];
 
+const LEARN_HELP: HelpSection[] = [
+  {
+    heading: 'What this is for',
+    body: 'Decks of cards gone through a few at a time. Read the question, answer it in your head, turn the card over and say how it went. Most cards are about how to weigh a claim: what kind of study it rests on and what a headline leaves out.',
+  },
+  {
+    heading: 'When a card comes back',
+    body: 'A card you knew comes back after a longer gap each time, and one you did not know yet comes back tomorrow. Only the first answer to a card on a day moves when it comes back, so going over one again is practice.',
+  },
+  {
+    heading: 'Things you now know',
+    body: 'A card counts once it has come back to you and you recalled it on two separate days. The count only grows, and a card waiting longer than its gap is simply ready.',
+  },
+];
+
 const MAKING_IT_PAY_HELP: HelpSection[] = [
   {
     heading: 'What this is for',
@@ -253,6 +272,7 @@ const LENSES: LensOption<InterestsLens>[] = [
   { key: 'money', label: 'Money', icon: 'cash-outline', help: MONEY_HELP },
   { key: 'daysUntil', label: 'Days Until', icon: 'hourglass-outline', help: DAYS_UNTIL_HELP },
   { key: 'projects', label: 'Projects', icon: 'layers-outline', help: PROJECTS_HELP },
+  { key: 'learn', label: 'Learn', icon: 'school-outline', help: LEARN_HELP },
   { key: 'makingItPay', label: 'Making It Pay', icon: 'trending-up-outline', help: MAKING_IT_PAY_HELP },
 ];
 
@@ -263,7 +283,7 @@ const HELP_SECTIONS: HelpSection[] = [
   },
   {
     heading: 'Where to start',
-    body: 'Open My Interests and add one. Sessions keeps the time you give it, Supplies & Equipment, Collections and Wish List keep what it has and what you would like for it, Library and People & Places keep what you learn it from and who you do it with, Money keeps what went out and came in, Days Until counts to what an interest is waiting on, Projects is for anything with steps that belongs to an interest, and Making It Pay is reading with figures for anyone wondering about selling from one.',
+    body: 'Open My Interests and add one. Sessions keeps the time you give it, Supplies & Equipment, Collections and Wish List keep what it has and what you would like for it, Library and People & Places keep what you learn it from and who you do it with, Money keeps what went out and came in, Days Until counts to what an interest is waiting on, Projects is for anything with steps that belongs to an interest, Learn goes through decks of cards a few at a time, and Making It Pay is reading with figures for anyone wondering about selling from one.',
   },
 ];
 
@@ -394,6 +414,12 @@ export default function InterestsScreen() {
                 <View style={band.box}>
                   <Text style={styles.cardTitle}>Projects</Text>
                   <ProjectsSection scope="interests" tabColor={TAB_COLOR} />
+                </View>
+              ) : null}
+              {lens === 'learn' ? (
+                <View style={band.box}>
+                  <Text style={styles.cardTitle}>Learn</Text>
+                  <LearnSection tabColor={TAB_COLOR} />
                 </View>
               ) : null}
               {lens === 'makingItPay' ? (

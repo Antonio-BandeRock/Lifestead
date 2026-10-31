@@ -255,6 +255,7 @@ const AREAS: readonly Area[] = [
   { one: 'interest', many: 'interests', count: ['interests'], quiet: ['interest_stage_changes'] },
   { one: 'interest session', many: 'interest sessions', count: ['interest_sessions'], quiet: [] },
   { one: 'supply, collected thing or wish', many: 'supplies, collected things and wishes', count: ['interest_things'], quiet: [] },
+  { one: 'card answered', many: 'cards answered', count: ['learn_reviews'], quiet: [] },
   { one: 'thing in an interest library', many: 'things in interest libraries', count: ['interest_library'], quiet: [] },
   { one: 'person or place for an interest', many: 'people and places for interests', count: ['interest_people'], quiet: [] },
   { one: 'amount for an interest', many: 'amounts for interests', count: ['interest_money'], quiet: [] },

@@ -457,6 +457,7 @@ export const TOUR_LENS_NAMES: Record<string, Record<string, string>> = {
     money: 'Money',
     daysUntil: 'Days Until',
     projects: 'Projects',
+    learn: 'Learn',
     makingItPay: 'Making It Pay',
   },
   '/insights': {
@@ -618,6 +619,7 @@ export const TOUR_LENS_LINES: Record<string, Record<string, string>> = {
     money: 'What has gone out on an interest and what has come in from it, each on its day, with the prices kept on its supplies counted in, and a Could This Pay? worksheet for working out what selling from it would come to.',
     daysUntil: 'Counters to what an interest is waiting on, such as a show opening or a course starting, with a reminder on the day.',
     projects: 'Projects with steps that belong to an interest, the same projects Life keeps, shown here on their own.',
+    learn: 'Decks of cards gone through a few at a time, each coming back on the day it is due, most of them about how to weigh a claim. The one figure is things you now know, which only grows.',
     makingItPay: 'Reading for anyone wondering about selling from an interest: figures on how small businesses fare, what an hour comes to, the tax a self-employed person carries, and where to ask, each with its source and year and none of it advice.',
   },
   '/insights': {
@@ -895,6 +897,7 @@ export const TOUR_TABS: TourTabDef[] = [
       'To keep the time you give each one, and a reminder on the days you practise.',
       'To know what you have for each one and where it is kept, what you collect, and what you would like next.',
       'To keep what you are reading or watching for each one with where you stopped, and who you do it with.',
+      'To go through a few cards at a time and have each come back just before it would slip.',
       'To keep what each one costs and what comes in from it, without typing a price twice.',
       'To read what the figures show about selling from an interest, with the source and year of each, before deciding anything.',
       'To count down to what an interest is waiting on, with a reminder on the day.',
@@ -904,7 +907,7 @@ export const TOUR_TABS: TourTabDef[] = [
       { title: 'What you are into', lenses: ['myInterests'] },
       { title: 'What you are making of it', lenses: ['sessions', 'projects', 'daysUntil'] },
       { title: 'What you keep for it', lenses: ['supplies', 'collections', 'wishList'] },
-      { title: 'Who and what you learn it from', lenses: ['library', 'people'] },
+      { title: 'Who and what you learn it from', lenses: ['library', 'people', 'learn'] },
       { title: 'What it costs and brings in', lenses: ['money', 'makingItPay'] },
     ],
     steps: [
