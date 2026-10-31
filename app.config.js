@@ -1,3 +1,4 @@
+/* global __dirname */
 // The three versions of the app, made from one codebase (tester plan T1,
 // 2026-10-31).
 //
@@ -45,6 +46,15 @@ const VARIANTS = {
   },
 };
 
+function firebaseKnows(file, packageName) {
+  try {
+    const text = require('fs').readFileSync(require('path').join(__dirname, file), 'utf8');
+    return text.includes(`"package_name": "${packageName}"`);
+  } catch {
+    return false;
+  }
+}
+
 module.exports = ({ config }) => {
   const key = process.env.APP_VARIANT;
   if (!key) return config;
@@ -54,6 +64,14 @@ module.exports = ({ config }) => {
   }
 
   const android = { ...config.android, package: variant.package };
+  // google-services.json names the packages Firebase knows, and the Gradle
+  // step fails on a package it does not list. Until that package is added in
+  // the Firebase console and the file downloaded again, the build goes without
+  // it: the push wake is missing (lib/pushWake.ts checks the relay on every
+  // open instead), and everything else works.
+  if (android.googleServicesFile && !firebaseKnows(android.googleServicesFile, variant.package)) {
+    delete android.googleServicesFile;
+  }
   const ios = { ...config.ios, bundleIdentifier: variant.package };
   let icon = config.icon;
   if (variant.inverted) {
