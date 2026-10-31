@@ -79,6 +79,13 @@ object ShadeButtons {
     prefs(context).edit().putBoolean("shade_$kind", on).apply()
   }
 
+  // Each version of the app has its own link scheme (app.config.js), written
+  // by plugins/withCaptureTile.js as the lifestead_scheme string.
+  private fun scheme(context: Context): String {
+    val id = context.resources.getIdentifier("lifestead_scheme", "string", context.packageName)
+    return if (id != 0) context.getString(id) else "hashimotosapp"
+  }
+
   private fun appLockOn(context: Context) = File(context.filesDir, "app-lock.json").exists()
 
   private fun target(context: Context, b: Button): PendingIntent {
@@ -88,7 +95,7 @@ object ShadeButtons {
         "photo" -> "capture?photo=1"
         else -> "capture?speak=1"
       }
-      Intent(Intent.ACTION_VIEW, Uri.parse("hashimotosapp://$path")).apply {
+      Intent(Intent.ACTION_VIEW, Uri.parse("${scheme(context)}://$path")).apply {
         setPackage(context.packageName)
         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
       }

@@ -51,7 +51,7 @@ const TILES = [
 const LAUNCHER = '.CaptureLauncherActivity';
 const LOCKED = '.LockedCaptureActivity';
 
-function tileSource(pkg, tile) {
+function tileSource(pkg, tile, scheme) {
   return `package ${pkg}
 
 import android.app.PendingIntent
@@ -84,7 +84,7 @@ class ${tile.className} : TileService() {
         "photo" -> "capture?photo=1"
         else -> "capture?speak=1"
       }
-      val app = Intent(Intent.ACTION_VIEW, Uri.parse("hashimotosapp://" + path)).apply {
+      val app = Intent(Intent.ACTION_VIEW, Uri.parse("${scheme}://" + path)).apply {
         setPackage(packageName)
         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
       }
@@ -112,7 +112,7 @@ class ${tile.className} : TileService() {
 `;
 }
 
-function launcherSource(pkg) {
+function launcherSource(pkg, scheme) {
   return `package ${pkg}
 
 import android.app.Activity
@@ -212,7 +212,7 @@ class CaptureLauncherActivity : Activity() {
       "photo" -> "?photo=1"
       else -> ""
     }
-    val target = if (mode == "command") "hashimotosapp://voice-control" else "hashimotosapp://capture$query"
+    val target = if (mode == "command") "${scheme}://voice-control" else "${scheme}://capture$query"
     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(target)).apply {
       setPackage(packageName)
       addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -335,12 +335,27 @@ function withCaptureSources(config) {
     async (cfg) => {
       const pkg = cfg.android?.package;
       if (!pkg) throw new Error('withCaptureTile: android.package is not set');
+      // The link scheme differs per version (app.config.js), so the tiles
+      // open the version they belong to. Kotlin outside this package (the
+      // shade buttons in modules/locked-capture) reads the same value from
+      // the lifestead_scheme string written below.
+      const scheme = Array.isArray(cfg.scheme) ? cfg.scheme[0] : cfg.scheme || 'hashimotosapp';
       const root = cfg.modRequest.platformProjectRoot;
       const dir = path.join(root, 'app/src/main/java', ...pkg.split('.'));
       fs.mkdirSync(dir, { recursive: true });
-      for (const tile of TILES) fs.writeFileSync(path.join(dir, `${tile.className}.kt`), tileSource(pkg, tile));
-      fs.writeFileSync(path.join(dir, 'CaptureLauncherActivity.kt'), launcherSource(pkg));
+      for (const tile of TILES) fs.writeFileSync(path.join(dir, `${tile.className}.kt`), tileSource(pkg, tile, scheme));
+      fs.writeFileSync(path.join(dir, 'CaptureLauncherActivity.kt'), launcherSource(pkg, scheme));
       fs.writeFileSync(path.join(dir, 'LockedCaptureActivity.kt'), lockedSource(pkg));
+      const values = path.join(root, 'app/src/main/res/values');
+      fs.mkdirSync(values, { recursive: true });
+      fs.writeFileSync(
+        path.join(values, 'lifestead_scheme.xml'),
+        `<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="lifestead_scheme" translatable="false">${scheme}</string>
+</resources>
+`,
+      );
       const drawables = path.join(root, 'app/src/main/res/drawable');
       fs.mkdirSync(drawables, { recursive: true });
       for (const [name, xml] of Object.entries(DRAWABLES)) fs.writeFileSync(path.join(drawables, `${name}.xml`), xml);

@@ -20,7 +20,30 @@
     },
     "production": {
       "autoIncrement": true,
-      "channel": "production"
+      "channel": "production",
+      "env": {
+        "APP_VARIANT": "store"
+      }
+    },
+    "dev": {
+      "distribution": "internal",
+      "channel": "dev",
+      "env": {
+        "APP_VARIANT": "dev"
+      },
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "tester": {
+      "distribution": "internal",
+      "channel": "testers",
+      "env": {
+        "APP_VARIANT": "test"
+      },
+      "android": {
+        "buildType": "apk"
+      }
     }
   },
   "submit": {
