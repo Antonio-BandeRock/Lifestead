@@ -8,6 +8,7 @@
 // Android RemoteViews; nothing from react-native renders here. Text scales
 // with the phone's font size, since all of it is reading text.
 import { FlexWidget, TextWidget } from 'react-native-android-widget';
+import { ownLink } from '../appVariant';
 import { LOG_GLASS_ACTION, type WidgetContent, type WidgetName } from '../widgetContent';
 
 type Palette = { background: `#${string}`; heading: `#${string}`; text: `#${string}`; quiet: `#${string}`; accent: `#${string}` };
@@ -23,7 +24,7 @@ function Body({ name, content, palette }: { name: WidgetName; content: WidgetCon
   return (
     <FlexWidget
       clickAction={isGlass ? LOG_GLASS_ACTION : 'OPEN_URI'}
-      clickActionData={isGlass ? {} : { uri: content.uri }}
+      clickActionData={isGlass ? {} : { uri: ownLink(content.uri) }}
       accessibilityLabel={isGlass ? 'Log a glass of water' : `${content.heading}. ${content.lines.join('. ')}`}
       style={{
         height: 'match_parent',
@@ -56,7 +57,7 @@ function Body({ name, content, palette }: { name: WidgetName; content: WidgetCon
         ) : null}
       </FlexWidget>
       {isGlass ? (
-        <FlexWidget clickAction="OPEN_URI" clickActionData={{ uri: content.uri }} accessibilityLabel="Open Hydration" style={{ paddingHorizontal: 6, paddingVertical: 4 }}>
+        <FlexWidget clickAction="OPEN_URI" clickActionData={{ uri: ownLink(content.uri) }} accessibilityLabel="Open Hydration" style={{ paddingHorizontal: 6, paddingVertical: 4 }}>
           <TextWidget text="Open" style={{ fontSize: 12, color: palette.accent }} />
         </FlexWidget>
       ) : null}

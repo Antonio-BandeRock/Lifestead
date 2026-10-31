@@ -48,6 +48,7 @@ import {
   wordingEditProblem,
 } from '../lib/devNotes';
 import type { DevNoteKind } from '../lib/devNotes';
+import { isDeveloperBuild } from '../lib/appVariant';
 import { addDevNote, reloadWordingEdits, syncDevNotes } from '../lib/devNotesDb';
 import {
   currentTellClaudeScreen,
@@ -101,9 +102,13 @@ export function TellClaudeHost() {
   // band can ask without every band subscribing to the preferences, and to
   // lib/wordingEdits.ts so every piece of text can.
   useEffect(() => {
-    setTellClaudeEnabled(developerNotes);
-    setWordingEditsAvailable(developerNotes, developerNotesPreview);
-    if (developerNotes) {
+    // Only the developer version ever turns it on (tester plan T2): the
+    // tester and store versions swap this whole file out at bundle time
+    // (metro.config.js), and this is the second guard behind that.
+    const on = developerNotes && isDeveloperBuild();
+    setTellClaudeEnabled(on);
+    setWordingEditsAvailable(on, developerNotesPreview);
+    if (on) {
       reloadWordingEdits().catch((error) => console.error('[tellClaude] could not read the wording edits', error));
     }
   }, [developerNotes, developerNotesPreview]);

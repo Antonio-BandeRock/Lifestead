@@ -31,6 +31,7 @@
 // linking, not instead of it. Any URL that isn't a real content:///file://
 // URI is left completely untouched here, for Expo Router's own existing
 // hashimotosapp:// handling to keep working exactly as it always has.
+import { isOwnLink } from './appVariant';
 import { encodeBase64Utf8 } from './sharing';
 import { connectionInviteDataFromFile } from './connections';
 
@@ -91,7 +92,7 @@ type PushToShareScreen = (params:
 export async function handleIncomingIsFile(url: string, push: PushToShareScreen): Promise<void> {
   // This app's own hashimotosapp:// scheme is left completely alone --
   // Expo Router already owns routing those, correctly, on its own.
-  if (url.startsWith('hashimotosapp://')) return;
+  if (isOwnLink(url)) return;
   // Anything else that isn't a real content://\file:// URI (e.g. an
   // http(s) link opened for an unrelated reason) is also left alone --
   // this module's only real job is the .is file-open path.
