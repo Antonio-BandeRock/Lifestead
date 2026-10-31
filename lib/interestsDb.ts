@@ -239,7 +239,9 @@ export async function renameInterestKind(from: string, to: string): Promise<void
  * does, so a project never ends up naming an interest that is gone and a
  * session is never left belonging to nothing.
  */
-export async function countInterestReferences(id: string): Promise<{ projects: number; sessions: number; things: number }> {
+export async function countInterestReferences(
+  id: string,
+): Promise<{ projects: number; sessions: number; things: number; library: number; people: number }> {
   const db = await getDatabase();
   const projects = await db.getFirstAsync<{ n: number }>(
     `SELECT COUNT(*) AS n FROM projects WHERE link_kind = 'interest' AND link_id = ?`,
@@ -247,7 +249,15 @@ export async function countInterestReferences(id: string): Promise<{ projects: n
   );
   const sessions = await db.getFirstAsync<{ n: number }>('SELECT COUNT(*) AS n FROM interest_sessions WHERE interest_id = ? AND running = 0', id);
   const things = await db.getFirstAsync<{ n: number }>('SELECT COUNT(*) AS n FROM interest_things WHERE interest_id = ?', id);
-  return { projects: Number(projects?.n ?? 0), sessions: Number(sessions?.n ?? 0), things: Number(things?.n ?? 0) };
+  const library = await db.getFirstAsync<{ n: number }>('SELECT COUNT(*) AS n FROM interest_library WHERE interest_id = ?', id);
+  const people = await db.getFirstAsync<{ n: number }>('SELECT COUNT(*) AS n FROM interest_people WHERE interest_id = ?', id);
+  return {
+    projects: Number(projects?.n ?? 0),
+    sessions: Number(sessions?.n ?? 0),
+    things: Number(things?.n ?? 0),
+    library: Number(library?.n ?? 0),
+    people: Number(people?.n ?? 0),
+  };
 }
 
 /** Removes an interest and its own stage history, and nothing else. */

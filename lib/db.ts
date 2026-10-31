@@ -10690,6 +10690,45 @@ async function runDatabaseInitialization() {
         updated_at TEXT NOT NULL DEFAULT (datetime('now'))
       );
       CREATE INDEX IF NOT EXISTS idx_interest_things_interest ON interest_things(interest_id);
+      -- Interests > Library (2026-10-30, Interests stage 4): what is read,
+      -- watched, taken or followed for an interest. kind is the person's
+      -- words (a book, a channel, a course). status is want, going,
+      -- following or done; done_on is kept when it is finished. from_note_id
+      -- names the Capture note a read page came from. Nothing rates an entry.
+      CREATE TABLE IF NOT EXISTS interest_library (
+        id TEXT PRIMARY KEY,
+        interest_id TEXT NOT NULL,
+        kind TEXT,
+        title TEXT NOT NULL,
+        by_whom TEXT,
+        link TEXT,
+        status TEXT NOT NULL DEFAULT 'want',
+        left_off TEXT,
+        about TEXT,
+        published TEXT,
+        done_on TEXT,
+        from_note_id TEXT,
+        retired_at TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_interest_library_interest ON interest_library(interest_id);
+      -- Interests > People & Places (2026-10-30): the friend who does it
+      -- too, a teacher, a club, a shop, a show, a place to go. kind is the
+      -- person's words. retired_at is No Longer Part of It, keeping it all.
+      CREATE TABLE IF NOT EXISTS interest_people (
+        id TEXT PRIMARY KEY,
+        interest_id TEXT NOT NULL,
+        kind TEXT,
+        name TEXT NOT NULL,
+        reach TEXT,
+        place TEXT,
+        about TEXT,
+        retired_at TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_interest_people_interest ON interest_people(interest_id);
     `);
     const interestColumns = await db.getAllAsync<{ name: string }>('PRAGMA table_info(interests)');
     for (const practiceColumn of ['practice_days', 'practice_time']) {

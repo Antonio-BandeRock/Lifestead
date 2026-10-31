@@ -452,6 +452,8 @@ export const TOUR_LENS_NAMES: Record<string, Record<string, string>> = {
     supplies: 'Supplies & Equipment',
     collections: 'Collections',
     wishList: 'Wish List',
+    library: 'Library',
+    people: 'People & Places',
     projects: 'Projects',
   },
   '/insights': {
@@ -608,6 +610,8 @@ export const TOUR_LENS_LINES: Record<string, Record<string, string>> = {
     supplies: 'The tools, materials and gear an interest uses, with where each is kept and what it cost if you want that kept.',
     collections: 'What you collect for an interest, in sets if you like, with when and how each thing came.',
     wishList: 'What you would like for an interest, with where to get it, moved over by Got It once you have it.',
+    library: 'What you read, watch, take or follow for an interest, with where you left off and the day you finished.',
+    people: 'Who and where an interest happens with: friends, teachers, clubs, shops, shows and places to go.',
     projects: 'Projects with steps that belong to an interest, the same projects Life keeps, shown here on their own.',
   },
   '/insights': {
@@ -884,12 +888,14 @@ export const TOUR_TABS: TourTabDef[] = [
       'To remember where you left off, so coming back after months takes no working out.',
       'To keep the time you give each one, and a reminder on the days you practise.',
       'To know what you have for each one and where it is kept, what you collect, and what you would like next.',
+      'To keep what you are reading or watching for each one with where you stopped, and who you do it with.',
       'To hold the steps of a project that belongs to an interest, with the next one showing first.',
     ],
     groups: [
       { title: 'What you are into', lenses: ['myInterests'] },
       { title: 'What you are making of it', lenses: ['sessions', 'projects'] },
       { title: 'What you keep for it', lenses: ['supplies', 'collections', 'wishList'] },
+      { title: 'Who and what you learn it from', lenses: ['library', 'people'] },
     ],
     steps: [
       {

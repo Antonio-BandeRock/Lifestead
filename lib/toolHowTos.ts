@@ -105,6 +105,17 @@ export type ToolMark =
   | 'thing.wishRow'
   | 'thing.wishChange'
   | 'thing.wishGot'
+  | 'library.add'
+  | 'library.save'
+  | 'library.row'
+  | 'library.status'
+  | 'library.leftOff'
+  | 'library.change'
+  | 'people.add'
+  | 'people.save'
+  | 'people.row'
+  | 'people.change'
+  | 'capture.keepInLibrary'
   | 'work.overview'
   | 'work.todos'
   | 'work.have'
@@ -2268,6 +2279,17 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'The page is read only when you tap, and its title, site, author, date and a few lines are kept beside the note. A recipe can go straight into Food, and a product page is offered to the grocery list.',
     },
     {
+      key: 'captureKeepInLibrary',
+      title: "Keep a page you read in an interest's Library",
+      steps: [
+        { say: 'Open the band with the name of Sort It Out.', mark: 'homeBand.captureInbox', stay: true },
+        { say: 'Tap Sort It Out.', mark: 'home.captureSort' },
+        { say: "Under a page that has been read, tap Keep in an Interest's Library?", mark: 'capture.keepInLibrary' },
+        { say: 'Pick the interest, check what came across, and tap Keep It.' },
+      ],
+      forYou: 'The title, who wrote it, when it came out and the link go across, so nothing is typed, and the note is marked done.',
+    },
+    {
       key: 'nextThing',
       title: 'Do the one next thing',
       steps: [
@@ -2858,6 +2880,66 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Got It, then pick Supplies & Equipment or Collections.', mark: 'thing.wishGot' },
       ],
       forYou: 'Nothing is typed again. It moves with its price and where it came from, dated today.',
+    },
+  ],
+  '/interests#library': [
+    {
+      key: 'add',
+      title: 'Add something to the Library',
+      steps: [
+        { say: 'Tap Add to the Library.', mark: 'library.add', stay: true },
+        { say: 'Pick the interest and give it a title. Tap a kind, and pick where it stands: To Read or Watch, Going Through It, Following or Finished.' },
+        { say: 'Tap Keep It.', mark: 'library.save' },
+      ],
+      forYou: 'It shows under its interest and where it stands, with who made it and the site its link is on.',
+    },
+    {
+      key: 'leftOff',
+      title: 'Keep where you left off',
+      steps: [
+        { say: 'Tap the entry to open it.', mark: 'library.row', stay: true },
+        { say: 'Tap Where I Left Off, type a page, an episode or a chapter, and tap Keep It.', mark: 'library.leftOff' },
+      ],
+      forYou: 'It shows under the title as Left off at, so picking it up again starts where you stopped.',
+    },
+    {
+      key: 'status',
+      title: 'Move an entry along, or finish it',
+      steps: [
+        { say: 'Tap the entry to open it.', mark: 'library.row', stay: true },
+        { say: 'Tap where it stands now, such as Going Through It or Finished.', mark: 'library.status' },
+      ],
+      forYou: 'Finished keeps the day, and finished entries are listed newest first.',
+    },
+    {
+      key: 'change',
+      title: 'Change an entry, or let it go',
+      steps: [
+        { say: 'Tap the entry to open it.', mark: 'library.row', stay: true },
+        { say: 'Tap Change, or No Longer Part of It.', mark: 'library.change' },
+      ],
+      forYou: 'No Longer Part of It keeps the entry with everything it had, at the bottom, where Part of It Again brings it back.',
+    },
+  ],
+  '/interests#people': [
+    {
+      key: 'add',
+      title: 'Add a person or place',
+      steps: [
+        { say: 'Tap Add a Person or Place.', mark: 'people.add', stay: true },
+        { say: 'Pick the interest and give the name. Tap a kind, and add how to reach them and where if you like.' },
+        { say: 'Tap Keep It.', mark: 'people.save' },
+      ],
+      forYou: 'They show under their interest and the kind you gave them, alphabetically.',
+    },
+    {
+      key: 'change',
+      title: 'Change a person or place, or let them go',
+      steps: [
+        { say: 'Tap the name to open it.', mark: 'people.row', stay: true },
+        { say: 'Tap Change, or No Longer Part of It.', mark: 'people.change' },
+      ],
+      forYou: 'No Longer Part of It keeps what you wrote about them, at the bottom, where Part of It Again brings them back.',
     },
   ],
   '/interests#projects': [

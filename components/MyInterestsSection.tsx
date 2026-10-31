@@ -245,6 +245,15 @@ export function MyInterestsSection({ tabColor }: Props) {
       );
       return;
     }
+    const kept = references.library + references.people;
+    if (kept > 0) {
+      explainNotYet(
+        kept === 1
+          ? 'Something in its Library or People & Places is kept for this interest, and removing it would leave that pointing at nothing. Step back from it instead, which keeps everything.'
+          : `${kept} things in its Library or People & Places are kept for this interest, and removing it would leave them pointing at nothing. Step back from it instead, which keeps everything.`,
+      );
+      return;
+    }
     setConfirm({
       title: `Remove ${interest.name}?`,
       message: 'It comes off the list with its stage dates. To keep the record, step back from it instead.',

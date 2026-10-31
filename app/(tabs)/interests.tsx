@@ -15,6 +15,8 @@ import { MyInterestsSection } from '../../components/MyInterestsSection';
 import { ProjectsSection } from '../../components/ProjectsSection';
 import { InterestSessionsSection } from '../../components/InterestSessionsSection';
 import { InterestThingsSection } from '../../components/InterestThingsSection';
+import { InterestLibrarySection } from '../../components/InterestLibrarySection';
+import { InterestPeopleSection } from '../../components/InterestPeopleSection';
 import { colors } from '../../constants/colors';
 import { typography, textShadow } from '../../constants/typography';
 import { useFloatingButtonScrollPadding } from '../../constants/floatingButton';
@@ -23,6 +25,7 @@ import { listInterests } from '../../lib/interestsDb';
 import { listProjects } from '../../lib/projectsDb';
 import { countInterestThings } from '../../lib/interestThingsDb';
 import type { ThingKind } from '../../lib/interestThings';
+import { countLibraryAndPeople } from '../../lib/interestLibraryDb';
 import { useOnVaultChange } from '../../lib/vaultReads';
 
 // The Interests tab, 2026-10-30 (1.0.77.11). What a person follows,
@@ -31,16 +34,18 @@ import { useOnVaultChange } from '../../lib/vaultReads';
 // with steps sit beside them, the same projects as on Life, showing only
 // the ones started here. Sessions keep time given (1.0.77.12); Supplies &
 // Equipment, Collections and Wish List keep the things an interest has or
-// wants, one table told apart by kind (1.0.77.13). A library, people and
-// places, money and Learn come as further lenses. Nothing on this tab
+// wants, one table told apart by kind (1.0.77.13). Library keeps what is
+// read, watched or followed for an interest with where it was left off, and
+// People & Places keeps who and where it happens with (1.0.77.14). Money and
+// Learn come as further lenses. Nothing on this tab
 // scores, ranks, values a collection or pushes an interest toward earning.
 
 const TAB_COLOR = colors.tabInterests;
 const band = makeTabBandStyles(TAB_COLOR, { calm: true });
 
-type InterestsLens = 'myInterests' | 'sessions' | 'supplies' | 'collections' | 'wishList' | 'projects';
+type InterestsLens = 'myInterests' | 'sessions' | 'supplies' | 'collections' | 'wishList' | 'library' | 'people' | 'projects';
 
-const LENS_KEYS: InterestsLens[] = ['myInterests', 'sessions', 'supplies', 'collections', 'wishList', 'projects'];
+const LENS_KEYS: InterestsLens[] = ['myInterests', 'sessions', 'supplies', 'collections', 'wishList', 'library', 'people', 'projects'];
 
 const LENS_FULL_NAMES: Record<InterestsLens, string> = {
   myInterests: 'My Interests',
@@ -48,6 +53,8 @@ const LENS_FULL_NAMES: Record<InterestsLens, string> = {
   supplies: 'Supplies & Equipment',
   collections: 'Collections',
   wishList: 'Wish List',
+  library: 'Library',
+  people: 'People & Places',
   projects: 'Projects',
 };
 
@@ -120,6 +127,32 @@ const WISH_LIST_HELP: HelpSection[] = [
   },
 ];
 
+const LIBRARY_HELP: HelpSection[] = [
+  {
+    heading: 'What this is for',
+    body: 'What you read, watch, take or follow for an interest: a book, a channel, a course, a magazine. Each one is To Read or Watch, Going Through It, Following or Finished, and a tap on a status moves it.',
+  },
+  {
+    heading: 'Where I Left Off',
+    body: 'Where I Left Off keeps a page, an episode or a chapter, so picking it up again starts where you stopped. Finishing something keeps the day.',
+  },
+  {
+    heading: 'From Capture',
+    body: 'A link kept in Capture and read there can come here filled in with its title, who wrote it and when it came out, and its note is marked done.',
+  },
+];
+
+const PEOPLE_HELP: HelpSection[] = [
+  {
+    heading: 'What this is for',
+    body: 'Who and where an interest happens with: a friend who does it too, a teacher, a club, a shop or supplier, a show or event, a place to go. How to reach them and where they are are optional.',
+  },
+  {
+    heading: 'Only a record',
+    body: 'People and places are listed by the kind you gave them, alphabetically. Nothing here rates one against another, and No Longer Part of It keeps what you wrote about someone after they move on.',
+  },
+];
+
 const PROJECTS_HELP: HelpSection[] = [
   {
     heading: 'What this is for',
@@ -137,6 +170,8 @@ const LENSES: LensOption<InterestsLens>[] = [
   { key: 'supplies', label: 'Supplies & Equipment', icon: 'construct-outline', help: SUPPLIES_HELP },
   { key: 'collections', label: 'Collections', icon: 'albums-outline', help: COLLECTIONS_HELP },
   { key: 'wishList', label: 'Wish List', icon: 'gift-outline', help: WISH_LIST_HELP },
+  { key: 'library', label: 'Library', icon: 'library-outline', help: LIBRARY_HELP },
+  { key: 'people', label: 'People & Places', icon: 'people-outline', help: PEOPLE_HELP },
   { key: 'projects', label: 'Projects', icon: 'layers-outline', help: PROJECTS_HELP },
 ];
 
@@ -147,7 +182,7 @@ const HELP_SECTIONS: HelpSection[] = [
   },
   {
     heading: 'Where to start',
-    body: 'Open My Interests and add one. Sessions keeps the time you give it, Supplies & Equipment, Collections and Wish List keep what it has and what you would like for it, and Projects is for anything with steps that belongs to an interest.',
+    body: 'Open My Interests and add one. Sessions keeps the time you give it, Supplies & Equipment, Collections and Wish List keep what it has and what you would like for it, Library and People & Places keep what you learn it from and who you do it with, and Projects is for anything with steps that belongs to an interest.',
   },
 ];
 
@@ -155,7 +190,7 @@ export default function InterestsScreen() {
   useRegisterScreenHelp('Interests', HELP_SECTIONS, '/interests');
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const openLensHub = useAutoOpenLensHubSignal();
-  const { openInterestsLens } = useLocalSearchParams<{ openInterestsLens?: string }>();
+  const { openInterestsLens, libraryFromNote } = useLocalSearchParams<{ openInterestsLens?: string; libraryFromNote?: string }>();
   const [lens, setLens] = useState<InterestsLens>('myInterests');
   const [revealed, setRevealed] = useState(false);
   const [myOpen, setMyOpen] = useState(false);
@@ -176,11 +211,18 @@ export default function InterestsScreen() {
   const [interestCount, setInterestCount] = useState<number | undefined>(undefined);
   const [projectCount, setProjectCount] = useState<number | undefined>(undefined);
   const [thingCounts, setThingCounts] = useState<Record<ThingKind, number> | undefined>(undefined);
+  const [shelfCounts, setShelfCounts] = useState<{ library: number; people: number } | undefined>(undefined);
   const loadCounts = useCallback(async () => {
-    const [interests, projects, things] = await Promise.all([listInterests(), listProjects('interests'), countInterestThings()]);
+    const [interests, projects, things, shelves] = await Promise.all([
+      listInterests(),
+      listProjects('interests'),
+      countInterestThings(),
+      countLibraryAndPeople(),
+    ]);
     setInterestCount(interests.filter((interest) => !interest.retiredAt).length);
     setProjectCount(projects.filter((project) => project.status === 'active' || project.status === 'paused').length);
     setThingCounts(things);
+    setShelfCounts(shelves);
   }, []);
   useOnVaultChange(() => {
     void loadCounts();
@@ -194,6 +236,8 @@ export default function InterestsScreen() {
       count: thingCounts?.[kind],
       onPress: () => { setLens(thingLens); setRevealed(true); },
     })),
+    { id: 'library', label: 'Library', count: shelfCounts?.library, onPress: () => { setLens('library'); setRevealed(true); } },
+    { id: 'people', label: 'People & Places', count: shelfCounts?.people, onPress: () => { setLens('people'); setRevealed(true); } },
     { id: 'projects', label: 'Projects', count: projectCount, onPress: () => { setLens('projects'); setRevealed(true); } },
   ];
 
@@ -223,6 +267,18 @@ export default function InterestsScreen() {
                   </View>
                 ) : null,
               )}
+              {lens === 'library' ? (
+                <View style={band.box}>
+                  <Text style={styles.cardTitle}>Library</Text>
+                  <InterestLibrarySection tabColor={TAB_COLOR} fromNoteId={libraryFromNote || undefined} />
+                </View>
+              ) : null}
+              {lens === 'people' ? (
+                <View style={band.box}>
+                  <Text style={styles.cardTitle}>People & Places</Text>
+                  <InterestPeopleSection tabColor={TAB_COLOR} />
+                </View>
+              ) : null}
               {lens === 'projects' ? (
                 <View style={band.box}>
                   <Text style={styles.cardTitle}>Projects</Text>

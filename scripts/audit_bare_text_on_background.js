@@ -344,6 +344,11 @@ function coveredAtEveryUsage(functionName, fromFile) {
         // also a style key (FlipCard's headerRow, ConditionNoteRow's body).
         !(ts.isPropertyAccessExpression(node.parent) && node.parent.name === node) &&
         !(ts.isPropertyAssignment(node.parent) && node.parent.name === node) &&
+        // A type's field or a function's parameter of the same name is a
+        // declaration, not a usage: a `link: string` field on a library
+        // entry once read as a bare usage of YourStoryInterview's link().
+        !(ts.isPropertySignature(node.parent) && node.parent.name === node) &&
+        !(ts.isParameter(node.parent) && node.parent.name === node) &&
         !(ts.isCallExpression(node.parent) && node.parent.expression === node);
       if (isCall || isElement || isReference) usages.push({ file, node });
       ts.forEachChild(node, findUsages);

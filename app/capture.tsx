@@ -276,6 +276,12 @@ export default function CaptureScreen() {
     router.push({ pathname: '/food', params: { openFoodLens: 'importRecipe', importRecipeUrl: url } } as Href);
   }
 
+  // A page kept for an interest opens Interests > Library filled in from the
+  // page, and keeping it there marks this note done.
+  function keepInLibrary(note: CaptureNote) {
+    router.push({ pathname: '/interests', params: { openInterestsLens: 'library', libraryFromNote: note.id } } as Href);
+  }
+
   function openDestination(destination: CaptureDestination) {
     if (!destination.open) return;
     const { pathname, params } = destination.open;
@@ -382,6 +388,21 @@ export default function CaptureScreen() {
             <Ionicons name={DESTINATION_ICONS[pageOffer.key]} size={15} color={destinationColor(offerOption)} />
             <Text style={styles.suggestText}>
               <Text style={{ color: destinationColor(offerOption) }}>{offerOption.label}?</Text> {pageOffer.reason}
+            </Text>
+          </TouchableOpacity>
+        ) : null}
+        {page && note.status !== 'done' && page.kind !== 'recipe' && page.kind !== 'product' ? (
+          <TouchableOpacity
+            ref={note.id === firstLinkedNoteId ? walkMark.ref('capture.keepInLibrary') : undefined}
+            style={[styles.suggestRow, { borderColor: colors.tabInterests }]}
+            onPress={() => keepInLibrary(note)}
+            accessibilityRole="button"
+            accessibilityLabel="Keep the page in an interest's Library. Tap to open the Library filled in."
+          >
+            <Ionicons name="library-outline" size={15} color={colors.tabInterests} />
+            <Text style={styles.suggestText}>
+              <Text style={{ color: colors.tabInterests }}>{"Keep in an Interest's Library?"}</Text> The title, who wrote it and
+              when it came out go across, and this note is marked done.
             </Text>
           </TouchableOpacity>
         ) : null}
