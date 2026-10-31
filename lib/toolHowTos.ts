@@ -90,6 +90,21 @@ export type ToolMark =
   | 'session.practice'
   | 'session.practiceOpen'
   | 'session.practiceSave'
+  | 'thing.supplyAdd'
+  | 'thing.supplySave'
+  | 'thing.supplyRow'
+  | 'thing.supplyChange'
+  | 'thing.supplyRetire'
+  | 'thing.collectionAdd'
+  | 'thing.collectionSave'
+  | 'thing.collectionRow'
+  | 'thing.collectionChange'
+  | 'thing.collectionRetire'
+  | 'thing.wishAdd'
+  | 'thing.wishSave'
+  | 'thing.wishRow'
+  | 'thing.wishChange'
+  | 'thing.wishGot'
   | 'work.overview'
   | 'work.todos'
   | 'work.have'
@@ -2780,6 +2795,69 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap the days, type the time, and tap Save.', mark: 'session.practiceSave' },
       ],
       forYou: 'A reminder comes on those days at that time. Done keeps a session for the day, and one left unanswered is let go.',
+    },
+  ],
+  '/interests#supplies': [
+    {
+      key: 'add',
+      title: 'Add a supply or piece of equipment',
+      steps: [
+        { say: 'Tap Add a Supply.', mark: 'thing.supplyAdd', stay: true },
+        { say: 'Pick the interest and name the thing. Where it is kept, when it came and what it cost are all optional.' },
+        { say: 'Tap Keep It.', mark: 'thing.supplySave' },
+      ],
+      forYou: 'It shows under its interest, with what was paid across that interest where a price was kept.',
+    },
+    {
+      key: 'change',
+      title: 'Change a supply, or mark it no longer had',
+      steps: [
+        { say: 'Tap the supply to open it.', mark: 'thing.supplyRow', stay: true },
+        { say: 'Tap Change, or No Longer Have It.', mark: 'thing.supplyChange' },
+      ],
+      forYou: 'No Longer Have It keeps the thing with everything it had, under No Longer Have It at the bottom, where Have It Again brings it back.',
+    },
+  ],
+  '/interests#collections': [
+    {
+      key: 'add',
+      title: 'Add something to a collection',
+      steps: [
+        { say: 'Tap Add to a Collection.', mark: 'thing.collectionAdd', stay: true },
+        { say: 'Pick the interest and name the thing. Type a set, or tap one you have used before.' },
+        { say: 'Tap Keep It.', mark: 'thing.collectionSave' },
+      ],
+      forYou: 'Things show under their interest and their set, with how many are in each set.',
+    },
+    {
+      key: 'change',
+      title: 'Change something in a collection',
+      steps: [
+        { say: 'Tap the thing to open it.', mark: 'thing.collectionRow', stay: true },
+        { say: 'Tap Change, or No Longer Have It if it has gone.', mark: 'thing.collectionChange' },
+      ],
+      forYou: 'Something given away or sold stays under No Longer Have It with when and how it came.',
+    },
+  ],
+  '/interests#wishList': [
+    {
+      key: 'add',
+      title: 'Add a wish',
+      steps: [
+        { say: 'Tap Add a Wish.', mark: 'thing.wishAdd', stay: true },
+        { say: 'Pick the interest and name what you would like. Where to get it and about what it costs are optional.' },
+        { say: 'Tap Keep It.', mark: 'thing.wishSave' },
+      ],
+      forYou: 'The day you added it is kept, and stays with it once you have it.',
+    },
+    {
+      key: 'got',
+      title: 'Move a wish over once you have it',
+      steps: [
+        { say: 'Tap the wish to open it.', mark: 'thing.wishRow', stay: true },
+        { say: 'Tap Got It, then pick Supplies & Equipment or Collections.', mark: 'thing.wishGot' },
+      ],
+      forYou: 'Nothing is typed again. It moves with its price and where it came from, dated today.',
     },
   ],
   '/interests#projects': [

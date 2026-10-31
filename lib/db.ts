@@ -10664,6 +10664,33 @@ async function runDatabaseInitialization() {
       CREATE INDEX IF NOT EXISTS idx_interest_sessions_interest ON interest_sessions(interest_id);
       CREATE INDEX IF NOT EXISTS idx_interest_sessions_day ON interest_sessions(done_on);
     `);
+    // Things that belong to an interest (2026-10-30, lib/interestThings.ts):
+    // kind is supply, collection or wish, and a wish that is got changes its
+    // kind in place, keeping wished_on. cost is what was paid (or for a
+    // wish, what it costs), null when no price was kept. got_on is as exact
+    // as the person said ('YYYY', 'YYYY-MM' or 'YYYY-MM-DD'). retired_at is
+    // no longer having it, and keeps everything.
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS interest_things (
+        id TEXT PRIMARY KEY,
+        interest_id TEXT NOT NULL,
+        kind TEXT NOT NULL,
+        name TEXT NOT NULL,
+        about TEXT,
+        amount TEXT,
+        place TEXT,
+        cost REAL,
+        source TEXT,
+        came_by TEXT,
+        got_on TEXT,
+        set_name TEXT,
+        wished_on TEXT,
+        retired_at TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_interest_things_interest ON interest_things(interest_id);
+    `);
     const interestColumns = await db.getAllAsync<{ name: string }>('PRAGMA table_info(interests)');
     for (const practiceColumn of ['practice_days', 'practice_time']) {
       if (!interestColumns.some((column) => column.name === practiceColumn)) {

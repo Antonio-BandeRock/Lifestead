@@ -1465,6 +1465,9 @@ export const LENS_NAMES: Record<string, Record<string, string>> = {
   '/interests': {
     myInterests: 'My Interests',
     sessions: 'Sessions',
+    supplies: 'Supplies & Equipment',
+    collections: 'Collections',
+    wishList: 'Wish List',
     projects: 'Projects',
   },
   '/insights': {
