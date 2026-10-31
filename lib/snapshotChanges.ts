@@ -258,6 +258,7 @@ const AREAS: readonly Area[] = [
   { one: 'thing in an interest library', many: 'things in interest libraries', count: ['interest_library'], quiet: [] },
   { one: 'person or place for an interest', many: 'people and places for interests', count: ['interest_people'], quiet: [] },
   { one: 'amount for an interest', many: 'amounts for interests', count: ['interest_money'], quiet: [] },
+  { one: 'Could This Pay? worksheet', many: 'Could This Pay? worksheets', count: ['interest_pay_worksheets'], quiet: [] },
   {
     one: 'piece of grow setup',
     many: 'pieces of grow setup',

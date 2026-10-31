@@ -270,6 +270,14 @@ export function MyInterestsSection({ tabColor }: Props) {
       );
       return;
     }
+    if (references.worksheets > 0) {
+      explainNotYet(
+        references.worksheets === 1
+          ? 'A Could This Pay? worksheet on Money covers this interest, and removing it would leave that pointing at nothing. Step back from it instead, which keeps everything.'
+          : `${references.worksheets} Could This Pay? worksheets on Money cover this interest, and removing it would leave them pointing at nothing. Step back from it instead, which keeps everything.`,
+      );
+      return;
+    }
     setConfirm({
       title: `Remove ${interest.name}?`,
       message: 'It comes off the list with its stage dates. To keep the record, step back from it instead.',

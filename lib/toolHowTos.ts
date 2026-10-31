@@ -119,6 +119,10 @@ export type ToolMark =
   | 'money.save'
   | 'money.row'
   | 'money.change'
+  | 'pay.open'
+  | 'pay.interests'
+  | 'pay.work'
+  | 'pay.result'
   | 'capture.keepInLibrary'
   | 'work.overview'
   | 'work.todos'
@@ -2965,6 +2969,17 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Change, or Remove.', mark: 'money.change' },
       ],
       forYou: 'Remove asks first, then the amount goes from the month and the year.',
+    },
+    {
+      key: 'pay',
+      title: 'Work out whether selling from an interest could pay',
+      steps: [
+        { say: 'Tap Open the Worksheet, under Could This Pay?', mark: 'pay.open', stay: true },
+        { say: 'Pick the interest, or several to count together. What your records hold shows first.', mark: 'pay.interests', stay: true },
+        { say: 'Fill in a price and how many a month, and any costs and times you know. Then tap Work It Out.', mark: 'pay.work', stay: true },
+        { say: 'Read what comes in, what is left and what that is an hour, with every number used listed under it.', mark: 'pay.result' },
+      ],
+      forYou: 'The worksheet is kept for those interests and opens the way you left it. It is sums on your numbers, never advice to start, carry on or stop.',
     },
   ],
   '/interests#daysUntil': [

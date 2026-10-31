@@ -10746,6 +10746,17 @@ async function runDatabaseInitialization() {
         updated_at TEXT NOT NULL DEFAULT (datetime('now'))
       );
       CREATE INDEX IF NOT EXISTS idx_interest_money_interest ON interest_money(interest_id);
+      -- Interests > Money > Could This Pay? (2026-10-30): one worksheet per
+      -- set of interests, kept as typed. id is the interest ids sorted and
+      -- joined (worksheetKey in lib/couldThisPay.ts); words is JSON of the
+      -- fields as typed, so it opens the way it was left.
+      CREATE TABLE IF NOT EXISTS interest_pay_worksheets (
+        id TEXT PRIMARY KEY,
+        interest_ids TEXT NOT NULL,
+        words TEXT NOT NULL,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
     `);
     // Interests > Days Until (2026-10-30): a free counter can belong to an
     // interest. Null for every counter that belongs to nothing.

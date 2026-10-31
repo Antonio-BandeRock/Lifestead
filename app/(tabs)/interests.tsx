@@ -18,6 +18,7 @@ import { InterestThingsSection } from '../../components/InterestThingsSection';
 import { InterestLibrarySection } from '../../components/InterestLibrarySection';
 import { InterestPeopleSection } from '../../components/InterestPeopleSection';
 import { InterestMoneySection } from '../../components/InterestMoneySection';
+import { CouldThisPaySection } from '../../components/CouldThisPaySection';
 import { DaysUntilSection } from '../../components/DaysUntilSection';
 import { countInterestMoney } from '../../lib/interestMoneyDb';
 import { countRunningInterestCountdowns } from '../../lib/countdownDb';
@@ -195,6 +196,10 @@ const MONEY_HELP: HelpSection[] = [
     heading: 'Only a record',
     body: 'Each interest opens with its years in words. Nothing here calls an interest a profit or a loss, or says it ought to pay.',
   },
+  {
+    heading: 'Could This Pay?',
+    body: 'A worksheet for one interest or several together, for when you are wondering about selling from it. It starts from what your records hold, then works your numbers for a month into what comes in, what is left after costs and a share you set aside for tax, what that is an hour, and what to have put by before starting. Every number used is listed beside the result, with what the sums cannot say. It is sums, never advice to start, carry on or stop.',
+  },
 ];
 
 const DAYS_UNTIL_HELP: HelpSection[] = [
@@ -348,6 +353,12 @@ export default function InterestsScreen() {
                 <View style={band.box}>
                   <Text style={styles.cardTitle}>Money</Text>
                   <InterestMoneySection tabColor={TAB_COLOR} />
+                </View>
+              ) : null}
+              {lens === 'money' ? (
+                <View style={band.box}>
+                  <Text style={styles.cardTitle}>Could This Pay?</Text>
+                  <CouldThisPaySection tabColor={TAB_COLOR} />
                 </View>
               ) : null}
               {lens === 'daysUntil' ? (

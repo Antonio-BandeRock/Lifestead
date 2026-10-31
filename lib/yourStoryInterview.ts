@@ -614,7 +614,7 @@ export const TOUR_LENS_LINES: Record<string, Record<string, string>> = {
     wishList: 'What you would like for an interest, with where to get it, moved over by Got It once you have it.',
     library: 'What you read, watch, take or follow for an interest, with where you left off and the day you finished.',
     people: 'Who and where an interest happens with: friends, teachers, clubs, shops, shows and places to go.',
-    money: 'What has gone out on an interest and what has come in from it, each on its day, with the prices kept on its supplies counted in.',
+    money: 'What has gone out on an interest and what has come in from it, each on its day, with the prices kept on its supplies counted in, and a Could This Pay? worksheet for working out what selling from it would come to.',
     daysUntil: 'Counters to what an interest is waiting on, such as a show opening or a course starting, with a reminder on the day.',
     projects: 'Projects with steps that belong to an interest, the same projects Life keeps, shown here on their own.',
   },

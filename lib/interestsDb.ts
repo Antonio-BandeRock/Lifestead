@@ -241,7 +241,7 @@ export async function renameInterestKind(from: string, to: string): Promise<void
  */
 export async function countInterestReferences(
   id: string,
-): Promise<{ projects: number; sessions: number; things: number; library: number; people: number; money: number; countdowns: number }> {
+): Promise<{ projects: number; sessions: number; things: number; library: number; people: number; money: number; countdowns: number; worksheets: number }> {
   const db = await getDatabase();
   const projects = await db.getFirstAsync<{ n: number }>(
     `SELECT COUNT(*) AS n FROM projects WHERE link_kind = 'interest' AND link_id = ?`,
@@ -253,7 +253,12 @@ export async function countInterestReferences(
   const people = await db.getFirstAsync<{ n: number }>('SELECT COUNT(*) AS n FROM interest_people WHERE interest_id = ?', id);
   const money = await db.getFirstAsync<{ n: number }>('SELECT COUNT(*) AS n FROM interest_money WHERE interest_id = ?', id);
   const countdowns = await db.getFirstAsync<{ n: number }>('SELECT COUNT(*) AS n FROM countdowns WHERE interest_id = ?', id);
+  const worksheets = await db.getFirstAsync<{ n: number }>(
+    `SELECT COUNT(*) AS n FROM interest_pay_worksheets WHERE instr(',' || interest_ids || ',', ',' || ? || ',') > 0`,
+    id,
+  );
   return {
+    worksheets: Number(worksheets?.n ?? 0),
     money: Number(money?.n ?? 0),
     countdowns: Number(countdowns?.n ?? 0),
     projects: Number(projects?.n ?? 0),
