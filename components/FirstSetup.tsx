@@ -35,6 +35,9 @@
 // Mounted inside UnlockedApp so it never shows over the lock, and ahead of
 // OverlayRoot and AppKeyboard so a picker and the drawn keyboard draw over
 // it. The first-launch agreement is mounted after it and stays on top.
+//
+// In the tester version it waits for the tester gate (2026-10-31): setup
+// drew over the gate, so a new tester met setup before being let in.
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -43,7 +46,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
+import { isTesterBuild } from '../lib/appVariant';
 import { showGuidedTour } from '../lib/guidedTourDb';
+import { useTesterAccess } from '../lib/testerAccess';
 import { cardDoneOn, type SetupCardView } from '../lib/setupCards';
 import { setStoryWalk, startStoryWalk } from '../lib/storyWalk';
 import { startTutorials } from '../lib/tutorialDb';
@@ -109,6 +114,8 @@ export function FirstSetup() {
   const { bringToTop, onScroll } = useBringToTopHost(scroller, frame);
   // Run Setup Again shows setup even with nothing waiting.
   const reviewRef = useRef(false);
+  const testerAccess = useTesterAccess();
+  const gateOpen = !isTesterBuild() || testerAccess.state.kind === 'ok';
 
   const load = useCallback(async () => {
     try {
@@ -129,9 +136,9 @@ export function FirstSetup() {
   }, []);
 
   useEffect(() => {
-    if (putOffThisRun) return;
+    if (putOffThisRun || !gateOpen) return;
     void load();
-  }, [load]);
+  }, [load, gateOpen]);
 
   useEffect(
     () =>
@@ -185,7 +192,7 @@ export function FirstSetup() {
   // only its button on one row.
   const walking = !!walk;
 
-  if (phase === 'reading' || phase === 'closed' || !interview) return null;
+  if (!gateOpen || phase === 'reading' || phase === 'closed' || !interview) return null;
 
   if (phase === 'away') {
     const saved = !!awayCard && !!view && !!cardDoneOn(awayCard.def, view, records);

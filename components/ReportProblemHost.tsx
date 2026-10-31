@@ -291,8 +291,12 @@ const styles = StyleSheet.create({
   // draws in this one: the left edge at about mid-height, where nothing else
   // in the app draws. It moves to the right edge for right-handed
   // navigation (lib/navigationHand.ts).
+  // Above setup and the tester gate (zIndex 999 and 900), so a problem can
+  // be reported from the first screen; below the drawn keyboard (2000).
   button: {
     position: 'absolute',
+    zIndex: 950,
+    elevation: 950,
     left: 0,
     top: '45%',
     paddingVertical: 10,
@@ -319,6 +323,8 @@ const styles = StyleSheet.create({
   },
   backdrop: {
     ...StyleSheet.absoluteFillObject,
+    zIndex: 1100,
+    elevation: 1100,
     backgroundColor: 'rgba(0,0,0,0.6)',
     justifyContent: 'center',
     alignItems: 'center',

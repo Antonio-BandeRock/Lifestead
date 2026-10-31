@@ -494,11 +494,16 @@ const styles = StyleSheet.create({
   // rendered) -- see risenStyle's own comment. overflow: 'hidden' clips
   // `container` below to this box's own bounds, which is what keeps the
   // keyboard from ever visually reaching into the footer's space.
+  // zIndex and elevation (2026-10-31): Android draws a raised sibling over
+  // a later one with none, so the tester gate (elevation 900) hid the
+  // keyboard from its own name box. Above every cover.
   clipWrap: {
     position: 'absolute',
     left: 0,
     right: 0,
     overflow: 'hidden',
+    zIndex: 2000,
+    elevation: 2000,
   },
   // No longer position: 'absolute' (2026-08-01) -- it's a normal block
   // child of clipWrap now, sized to fill it exactly so risenStyle's own

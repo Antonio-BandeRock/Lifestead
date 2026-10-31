@@ -7,8 +7,11 @@
 // when the approval is for another device it says so. Nothing underneath is
 // touched: records stay where they are and open again once access is back.
 //
-// Drawn ahead of OverlayRoot and AppKeyboard in app/_layout.tsx, so the
-// keyboard draws over its text boxes.
+// Drawn ahead of OverlayRoot and AppKeyboard in app/_layout.tsx. Its
+// elevation keeps the edge buttons under it, so the keyboard carries a
+// higher one (2000) to draw over its text boxes, and Report a Problem's
+// flag and sheet sit between the two. Setup waits until this lets the
+// person in (components/FirstSetup.tsx).
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';

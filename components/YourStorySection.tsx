@@ -331,13 +331,6 @@ export function YourStorySection({ mode, view, guides, interview, records, onCha
     const before = renderBefore();
     return (
       <View style={styles.page}>
-        {/* The tester welcome, T5: in Getting Set Up as well as on Home.
-            Draws nothing outside the tester version. */}
-        {isTesterBuild() ? (
-          <View style={styles.sectionCard}>
-            <TesterWelcome showHeading />
-          </View>
-        ) : null}
         {interview && !interview.finished ? (
           <View style={styles.sectionCard}>
             <YourStoryInterview mode="card" interview={interview} onChanged={onChanged} go={goElsewhere} />
@@ -353,6 +346,14 @@ export function YourStorySection({ mode, view, guides, interview, records, onCha
           layout="bands"
           onCardGo={onCardGo}
         />
+        {/* The tester welcome, T5: in Getting Set Up as well as on Home.
+            Draws nothing outside the tester version. After the setup
+            steps (2026-10-31), so a new tester sees what to set up first. */}
+        {isTesterBuild() ? (
+          <View style={styles.sectionCard}>
+            <TesterWelcome showHeading />
+          </View>
+        ) : null}
         {infoAlertElement}
       </View>
     );

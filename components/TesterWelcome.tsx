@@ -12,15 +12,20 @@
 //
 // T12 added how long this device's access lasts, and Ask to Renew once
 // the end is two weeks away or less (lib/testerAccess.ts).
+//
+// What Changed shows only once this device has been updated past the
+// version it started on, and reads only the versions since then: a fresh
+// install has nothing that changed for the person holding it.
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 import { colors } from '../constants/colors';
-import { formatReleaseNotesMessage, getRecentReleaseNotes } from '../constants/releaseNotes';
+import { formatReleaseNotesMessage, getReleaseNotesSince } from '../constants/releaseNotes';
 import { textShadow, typography } from '../constants/typography';
 import { APP_VERSION } from '../constants/version';
 import { isTesterBuild } from '../lib/appVariant';
+import { getFirstAppVersion } from '../lib/db';
 import { t } from '../lib/i18n';
 import { explainNotYet } from '../lib/notYet';
 import { PROBLEM_REPORT_ADDRESS } from '../lib/problemReport';
@@ -49,10 +54,16 @@ export function TesterWelcome({ showHeading = false }: Props) {
   const tester = isTesterBuild();
   const access = useTesterAccess();
   const [renewSent, setRenewSent] = useState<string | null>(null);
+  const [firstVersion, setFirstVersion] = useState<string | null>(null);
 
   useEffect(() => {
     if (!tester) return;
     let live = true;
+    void getFirstAppVersion(APP_VERSION)
+      .then((found) => {
+        if (live) setFirstVersion(found);
+      })
+      .catch(() => undefined);
     void checkTesterInstaller().then((found) => {
       if (live) setInstaller(found);
     });
@@ -64,7 +75,7 @@ export function TesterWelcome({ showHeading = false }: Props) {
   if (!tester) return null;
 
   const showWhatChanged = () => {
-    const notes = getRecentReleaseNotes(APP_VERSION, NOTES_SHOWN);
+    const notes = getReleaseNotesSince(firstVersion, APP_VERSION).slice(0, NOTES_SHOWN);
     showInfoAlert(
       t('What Changed'),
       notes.length === 0
@@ -80,6 +91,7 @@ export function TesterWelcome({ showHeading = false }: Props) {
     });
   };
 
+  const updatedSinceInstall = !!firstVersion && firstVersion !== APP_VERSION;
   const okState = access.state.kind === 'ok' ? access.state : null;
   const askToRenew = async () => {
     const name = access.name || okState?.approval.name || '';
@@ -166,16 +178,18 @@ export function TesterWelcome({ showHeading = false }: Props) {
           <Ionicons name="flag-outline" size={18} color={colors.textPrimary} />
           <Text style={styles.buttonText}>Report a Problem</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          ref={walkMark.ref('tester.whatChanged')}
-          style={styles.button}
-          activeOpacity={0.8}
-          onPress={showWhatChanged}
-          accessibilityRole="button"
-        >
-          <Ionicons name="newspaper-outline" size={18} color={colors.textPrimary} />
-          <Text style={styles.buttonText}>What Changed</Text>
-        </TouchableOpacity>
+        {updatedSinceInstall ? (
+          <TouchableOpacity
+            ref={walkMark.ref('tester.whatChanged')}
+            style={styles.button}
+            activeOpacity={0.8}
+            onPress={showWhatChanged}
+            accessibilityRole="button"
+          >
+            <Ionicons name="newspaper-outline" size={18} color={colors.textPrimary} />
+            <Text style={styles.buttonText}>What Changed</Text>
+          </TouchableOpacity>
+        ) : null}
       </View>
       {infoAlertElement}
     </View>

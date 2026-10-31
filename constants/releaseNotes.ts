@@ -41,6 +41,15 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.78.24',
+    date: '2026-10-31',
+    changes: [
+      'On the test version, asking for access now comes before setup, and the keyboard shows when you tap the box for your name.',
+      'The Report a Problem flag works from the very first screen, including while setup or the access screen is showing.',
+      'Getting Set Up shows the setup steps first, with the thank-you card after them, and What Changed only appears once an update has arrived.',
+    ],
+  },
+  {
     version: '1.0.78.23',
     date: '2026-10-31',
     changes: [

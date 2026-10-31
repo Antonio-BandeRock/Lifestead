@@ -215,6 +215,8 @@ const SNAPSHOT_FILE_PREFIX = 'inside-story-snapshot-';
 //   mailbox_folder_name  The same kind of local addressing as the folder.
 //   last_seen_app_version What this device has already shown the person
 //                        about a new version.
+//   first_app_version    The version this device started on, so a fresh
+//                        install offers no What Changed.
 //   sync_change_baseline What this device last published or loaded,
 //                        table by table, so the next save can say what
 //                        changed since (lib/snapshotChanges.ts).
@@ -245,6 +247,7 @@ export const DEVICE_LOCAL_META_KEYS: readonly string[] = [
   'health_connect_last_sync',
   'mailbox_folder_name',
   'last_seen_app_version',
+  'first_app_version',
   'visual_fold_state',
   'backup_last_check',
   'backup_last_saved',

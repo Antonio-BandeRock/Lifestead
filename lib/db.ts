@@ -19417,6 +19417,23 @@ export async function getLastSeenAppVersion(): Promise<string | null> {
   return row?.value ?? null;
 }
 
+// The version this device started on (2026-10-31), written the first time
+// it is asked for and never changed, so What Changed in the tester welcome
+// has nothing to offer on a fresh install. Device-local (lib/snapshotSync.ts).
+const FIRST_APP_VERSION_KEY = 'first_app_version';
+
+export async function getFirstAppVersion(current: string): Promise<string> {
+  const db = await getDatabase();
+  await db.runAsync(
+    'INSERT OR IGNORE INTO app_meta (key, value, updated_at) VALUES (?, ?, ?)',
+    FIRST_APP_VERSION_KEY,
+    current,
+    new Date().toISOString(),
+  );
+  const row = await db.getFirstAsync<{ value: string }>('SELECT value FROM app_meta WHERE key = ?', FIRST_APP_VERSION_KEY);
+  return row?.value ?? current;
+}
+
 export async function setLastSeenAppVersion(value: string) {
   const db = await getDatabase();
   const now = new Date().toISOString();
