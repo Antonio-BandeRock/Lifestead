@@ -43,7 +43,9 @@ import {
 } from '../lib/learnSchedule';
 import { explainNotYet } from '../lib/notYet';
 import { t } from '../lib/i18n';
+import { kindOf } from '../lib/learnKinds';
 import { LearnCardView } from './LearnCardView';
+import { LearnHowItHasGone } from './LearnHowItHasGone';
 import { LearnMyDecksEditor } from './LearnMyDecksEditor';
 import { useWalkMark } from './WalkMark';
 
@@ -117,10 +119,11 @@ export function LearnSection({ tabColor }: Props) {
     setSitting({ deckId, queue: plan.cardIds, index: 0, practised: [] });
   }
 
-  async function answer(grade: LearnGrade) {
+  async function answer(grade: LearnGrade, matched: boolean | null) {
     if (!sitting) return;
     const cardId = sitting.queue[sitting.index];
-    const review = await addLearnReview(sitting.deckId, cardId, grade);
+    const found = cardById(cardId);
+    const review = await addLearnReview(sitting.deckId, cardId, grade, found ? kindOf(found.card) : null, matched);
     const all = [...reviews, review];
     setReviews(all);
     let queue = sitting.queue;
@@ -264,7 +267,7 @@ export function LearnSection({ tabColor }: Props) {
                     key={`${sitting.index}:${current.card.id}`}
                     card={current.card}
                     day={day}
-                    onGrade={(grade) => void answer(grade)}
+                    onGrade={(grade, matched) => void answer(grade, matched)}
                   />
                   <TouchableOpacity onPress={() => setSitting(null)} accessibilityRole="button">
                     <Text style={styles.linkText}>Stop for Now</Text>
@@ -282,6 +285,7 @@ export function LearnSection({ tabColor }: Props) {
         </Text>
       ) : null}
       <LearnMyDecksEditor tabColor={tabColor} decks={myDecks} onChanged={load} />
+      <LearnHowItHasGone decks={[...allDecks, ...myDecks]} answers={reviews.length} />
     </View>
   );
 }

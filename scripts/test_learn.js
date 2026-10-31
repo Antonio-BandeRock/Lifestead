@@ -382,8 +382,7 @@ check('a cancelled new card forgets its photo', read0('components/LearnMyDecksEd
 check('a deck goes through the signed envelope', read0('lib/sharing.ts').includes("parsed.payload.kind === 'deck'") && read0('lib/sharing.ts').includes('isDeckPayloadShape'));
 check('recipe paths never meet a deck', read0('lib/sharing.ts').includes('return envelope && !isDeckEnvelope(envelope) ? envelope : null;'));
 check('the import screen hands a deck to the deck preview', read0('app/import-shared.tsx').includes('<SharedDeckPreview'));
-check('a shared deck is kept as a deck of the person', read0('components/SharedDeckPreview.tsx',
-  'lib/learnPrint.ts').includes('addSharedDeck(read)'));
+check('a shared deck is kept as a deck of the person', read0('components/SharedDeckPreview.tsx').includes('addSharedDeck(read)'));
 check('the open deck offers Share the Deck', read0('components/LearnMyDecksEditor.tsx').includes('Share the Deck'));
 
 // Printing a deck.
@@ -415,6 +414,41 @@ check('the open deck offers Share the Deck', read0('components/LearnMyDecksEdito
 }
 check('every deck offers Print the Deck', read0('components/LearnSection.tsx').includes('Print the Deck') && read0('components/LearnSection.tsx').includes('renderDeckHtml(deck, layout, t)'));
 
+// How It Has Gone, the shares behind a link.
+{
+  const G = load('lib/learnHowItHasGone.ts');
+  const r = (deckId, cardId, day, grade, kind, matched) => ({ deckId, cardId, day, grade, kind, matched });
+  const reviews = [
+    r('d1', 'c1', '2026-09-03', 'knewIt', 'choice', true),
+    r('d1', 'c2', '2026-09-04', 'notYet', 'choice', false),
+    r('d1', 'c3', '2026-10-01', 'easily', 'flip', null),
+    r('d2', 'c4', '2026-10-02', 'withEffort', null, null),
+    r('gone', 'c5', '2026-10-03', 'knewIt', 'order', false),
+  ];
+  const titles = { d1: 'Soil', d2: 'Gut' };
+  const cards = { c4: { id: 'c4', front: 'Q', back: 'A', thinking: true, kind: 'pairs', pairs: [] } };
+  const all = G.howItHasGone(reviews, (id) => titles[id], (id) => cards[id]);
+  check('every answer is counted', all.total === 5);
+  check('a deck reads its share of answers recalled', all.decks.find((l) => l.label === 'Soil').text === '67% answered With Effort, Knew It or Easily, of 3 answers.', JSON.stringify(all.decks));
+  check('a deck no longer here is kept under its own line', all.decks.some((l) => l.label === 'Decks no longer here' && l.text.includes('of 1 answer.')));
+  check('an answer kept before kinds were takes the kind of its card', all.kinds.some((l) => l.label === 'Match the pairs'));
+  check('months run newest first by name', all.months[0].label === 'October 2026' && all.months[1].label === 'September 2026');
+  check('checks count only cards that could check', all.checks[0].text === 'The pick, gap, order or pairs matched the answer in 33% of 3 answers.', JSON.stringify(all.checks));
+  check('the check against Knew It or Easily reads both', all.checks[1].text === 'The check matched the answer in 50% of 2 answers.');
+  check('no answers make no lines', G.howItHasGone([], () => undefined, () => undefined).decks.length === 0);
+  check('a share is a whole number', G.shareOf(1, 3) === 33 && G.shareOf(0, 0) === 0);
+  const JUDGING = ['good', 'weak', 'well done', 'needs work', 'great', 'better', 'worse', 'improv', 'behind', 'strong', 'poor', 'excellent'];
+  for (const rel of ['lib/learnHowItHasGone.ts', 'components/LearnHowItHasGone.tsx']) {
+    const text = read0(rel).split('\n').filter((row) => !row.trim().startsWith('//')).join('\n').toLowerCase();
+    for (const word of JUDGING) check(`${rel} never judges: "${word}"`, !text.includes(word));
+  }
+  const lens = read0('components/LearnSection.tsx');
+  check('the lens reaches the shares only through the link', lens.includes('<LearnHowItHasGone') && !lens.includes('howItHasGone(') && !lens.includes('%'));
+  const panel = read0('components/LearnHowItHasGone.tsx');
+  check('the shares start closed every time', panel.includes('useState(false)') && !/AsyncStorage|app_meta|visual_fold/.test(panel));
+  check('the card view says whether its check matched', read0('components/LearnCardView.tsx').includes('onGrade(grade, checkMatched())'));
+  check('an answer keeps its kind and check', read0('lib/learnDb.ts').includes('answered_at, kind, matched)'));
+}
 // Wiring.
 const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
 check('the table', read('lib/db.ts').includes('CREATE TABLE IF NOT EXISTS learn_reviews'));
@@ -429,7 +463,9 @@ const FORBIDDEN = [
   'streak', 'points', 'score', 'level', 'badge', 'well done', 'great job', 'missed', 'overdue', 'behind',
   'fail', 'wrong', 'must', 'you should', 'real ', 'genuine', 'honestly', '—', '–', ' -- ', 'percent', '%',
 ];
-const FILES = ['lib/learnSchedule.ts', 'lib/learnDecks.ts', 'lib/learnDb.ts', 'components/LearnSection.tsx', 'lib/learnKinds.ts', 'components/LearnCardView.tsx', 'lib/learnRecordDecks.ts', 'lib/learnRecordDecksDb.ts', 'lib/learnMyDecks.ts', 'lib/learnMyDecksDb.ts', 'components/LearnMyDecksEditor.tsx', 'lib/learnImport.ts', 'components/LearnCardPhoto.tsx', 'lib/learnShare.ts', 'components/SharedDeckPreview.tsx'];
+// How It Has Gone is the one place a share may be written, so only these two files may hold one.
+const GONE_FILES = ['lib/learnHowItHasGone.ts', 'components/LearnHowItHasGone.tsx'];
+const FILES = ['lib/learnSchedule.ts', 'lib/learnDecks.ts', 'lib/learnDb.ts', 'components/LearnSection.tsx', 'lib/learnKinds.ts', 'components/LearnCardView.tsx', 'lib/learnRecordDecks.ts', 'lib/learnRecordDecksDb.ts', 'lib/learnMyDecks.ts', 'lib/learnMyDecksDb.ts', 'components/LearnMyDecksEditor.tsx', 'lib/learnImport.ts', 'components/LearnCardPhoto.tsx', 'lib/learnShare.ts', 'components/SharedDeckPreview.tsx', 'lib/learnPrint.ts', 'lib/learnHowItHasGone.ts', 'components/LearnHowItHasGone.tsx'];
 const re = /'((?:[^'\\\n]|\\.)*)'|"((?:[^"\\\n]|\\.)*)"|`((?:[^`\\]|\\.)*)`/g;
 for (const rel of FILES) {
   const text = read(rel)
@@ -442,6 +478,7 @@ for (const rel of FILES) {
     if (!value || !/[A-Za-z]{3,} [A-Za-z]/.test(value)) continue;
     const lower = value.toLowerCase();
     for (const word of FORBIDDEN) {
+      if (GONE_FILES.includes(rel) && (word === '%' || word === 'percent')) continue;
       if (lower.includes(word)) check(`${rel}: "${word}" stays out: "${value.slice(0, 70)}"`, false);
     }
   }

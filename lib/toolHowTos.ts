@@ -141,6 +141,7 @@ export type ToolMark =
   | 'learn.print'
   | 'learn.printLayout'
   | 'learn.printSend'
+  | 'learn.howItHasGone'
   | 'capture.keepInLibrary'
   | 'work.overview'
   | 'work.todos'
@@ -3148,6 +3149,12 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Print, or Save as a PDF to keep the file or send it on.', mark: 'learn.printSend' },
       ],
       forYou: 'Cards to Cut Out prints eight to a sheet, questions then answers. Print on both sides, flipping on the long edge, and each answer lands on the back of its question. Only the cards are printed, never how your answers have gone.',
+    },
+    {
+      key: 'howItHasGone',
+      title: 'See how your answers have gone',
+      steps: [{ say: 'At the foot of Learn, tap How It Has Gone.', mark: 'learn.howItHasGone' }],
+      forYou: 'It shows shares of your answers by deck, by kind of card and by month, and how often a card that could check agreed with you. It stays closed until you open it, and nothing from it shows anywhere else.',
     },
   ],
   '/interests#makingItPay': readingHowTos('Making It Pay', 'Each entry names the source and year of every figure in it, and says who the figures cover.'),

@@ -11005,6 +11005,19 @@ async function runDatabaseInitialization() {
         await db.execAsync('ALTER TABLE countdowns ADD COLUMN started_at TEXT;');
       }
     }
+    // What kind of card an answer was to, and whether the card's check (a
+    // pick, a gap, an order, pairs) matched the answer (Learn How It Has
+    // Gone, 1.0.78.5). matched is 1 or 0, NULL where the card had no check
+    // or the answer was shown without one; both NULL on every earlier row.
+    {
+      const columns = await db.getAllAsync<{ name: string }>('PRAGMA table_info(learn_reviews)');
+      if (!columns.some((existing) => existing.name === 'kind')) {
+        await db.execAsync('ALTER TABLE learn_reviews ADD COLUMN kind TEXT;');
+      }
+      if (!columns.some((existing) => existing.name === 'matched')) {
+        await db.execAsync('ALTER TABLE learn_reviews ADD COLUMN matched INTEGER;');
+      }
+    }
     // The person's symptom names, loaded once so every label lookup finds
     // them (D3). lib/customCheckinTagsDb.ts reloads after each change.
     setCustomCheckinTags(await readCustomCheckinTags(db));

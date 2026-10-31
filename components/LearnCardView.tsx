@@ -55,7 +55,8 @@ type Props = {
   card: LearnCard;
   /** The local day, so tiles are shuffled the same way all day. */
   day: string;
-  onGrade: (grade: LearnGrade) => void;
+  /** matched: whether the card's check agreed with the answer, null where there was none. */
+  onGrade: (grade: LearnGrade, matched: boolean | null) => void;
 };
 
 export function LearnCardView({ card, day, onGrade }: Props) {
@@ -72,6 +73,7 @@ export function LearnCardView({ card, day, onGrade }: Props) {
   const [leftOn, setLeftOn] = useState<string | null>(null);
   const [matched, setMatched] = useState<string[]>([]);
   const [pairLine, setPairLine] = useState<string | null>(null);
+  const [pairMisses, setPairMisses] = useState(0);
 
   const options = card.options ?? [];
   const items = card.items ?? [];
@@ -113,6 +115,7 @@ export function LearnCardView({ card, day, onGrade }: Props) {
       if (next.length === pairs.length) setTurned(true);
     } else {
       setPairLine(PAIRS_NOT_A_PAIR);
+      setPairMisses((n) => n + 1);
     }
     setLeftOn(null);
   }
@@ -121,6 +124,16 @@ export function LearnCardView({ card, day, onGrade }: Props) {
     const next = [...chosen, item];
     setChosen(next);
     if (next.length === items.length) setTurned(true);
+  }
+
+  // Whether the card's check agreed with the answer, for How It Has Gone.
+  // Null for a card with no check, or one whose answer was shown instead.
+  function checkMatched(): boolean | null {
+    if (kind === 'choice' || kind === 'estimate' || kind === 'case') return picked === null ? null : picked === card.answer;
+    if (kind === 'blank') return blankChecked;
+    if (kind === 'order') return chosen.length === items.length ? orderIsRight(items, chosen) : null;
+    if (kind === 'pairs') return matched.length === pairs.length ? pairMisses === 0 : null;
+    return null;
   }
 
   const showAnswerLink = (
@@ -377,7 +390,7 @@ export function LearnCardView({ card, day, onGrade }: Props) {
           <Text style={styles.captionText}>How did that go?</Text>
           <View ref={walkMark.ref('learn.grade')} style={[styles.pillRow, walkMark('learn.grade')]}>
             {LEARN_GRADES.map((grade) => (
-              <TouchableOpacity key={grade} style={styles.pill} onPress={() => onGrade(grade)} accessibilityRole="button">
+              <TouchableOpacity key={grade} style={styles.pill} onPress={() => onGrade(grade, checkMatched())} accessibilityRole="button">
                 <Text style={styles.pillText}>{LEARN_GRADE_LABELS[grade]}</Text>
               </TouchableOpacity>
             ))}
