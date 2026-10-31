@@ -69,7 +69,7 @@ const notifier = read('lib/reminderNotifications.ts');
 check('a time already gone is never queued', notifier.includes('if (planned.fireAt.getTime() <= Date.now()) continue;'));
 check('a press is written down before it is answered', /async function answerPress[\s\S]*?claimAnswer\(responseKey\(response\)\)/.test(notifier));
 check('the open app answers presses the same way', /handleResponse[\s\S]*?answerPress\(response\)/.test(notifier));
-check('the background answers presses, not taps', /answerFromBackground[\s\S]*?DEFAULT_ACTION_IDENTIFIER\) return;/.test(notifier));
+check('the background answers presses, not taps', /answerFromBackground[\s\S]*?if \(opensLikeATap\(response\.actionIdentifier\)\) return;/.test(notifier) && /function opensLikeATap[\s\S]{0,200}DEFAULT_ACTION_IDENTIFIER/.test(notifier));
 check('rescheduling cancels ours first', /rescheduleAllReminders[\s\S]*?cancelAllOurs\(\)[\s\S]*?syncReminderNotifications\(\)/.test(notifier));
 
 const entry = read('index.js');

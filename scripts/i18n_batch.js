@@ -149,7 +149,7 @@ function pending(foods) {
 // THE READING. Every entry in lib/digest, loaded by transpiling it, with
 // the strings a person reads taken field by field. Ids, links, keys the
 // code tests and the paper titles in citations are left out.
-const READING_SKIP = /^(id|category|overallTier|linkedCuratedRecipeId|linkedBuilderType|relatedIds|citations\.(url|source)|recipeCard\.safeForConditions|recipeCard\.dietTags|recipeCard\.conditionCautions\.\w+\.severity|recipeCard\.ingredients\.(foodId|category)|recipeCard\.checkIngredients\..*|relatedFoodNames)$/;
+const READING_SKIP = /^(id|category|overallTier|linkedCuratedRecipeId|linkedBuilderType|relatedIds|citations\.(url|source)|recipeCard\.safeForConditions|recipeCard\.dietTags|recipeCard\.conditionCautions\.\w+\.severity|recipeCard\.ingredients\.(foodId|category|makeFirst)|recipeCard\.checkIngredients\..*|relatedFoodNames)$/;
 let transpiled = null;
 
 function loadTs(abs) {

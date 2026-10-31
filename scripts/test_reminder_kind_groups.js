@@ -84,7 +84,7 @@ check('an unknown kind gets no switch', g.kindsShowing(['', 'something-old'], la
 const profile = fs.readFileSync(path.join(__dirname, '..', 'app', 'profile.tsx'), 'utf8');
 check('Profile lays the switches out by tab and lens', profile.includes('groupReminderKinds(ALL_REMINDER_KIND_KEYS, REMINDER_KIND_LABELS)'));
 check('each time picker sits under its switch', profile.includes('{on ? renderReminderTimes(key) : null}'));
-check('Profile can be opened onto Reminders', profile.includes("openSection !== 'reminders'"));
+check('Profile can be opened onto Reminders', profile.includes("openSection === 'reminders'"));
 const list = fs.readFileSync(path.join(__dirname, '..', 'components', 'WaitingAnswersList.tsx'), 'utf8');
 check('the list has a switch per kind showing', list.includes('kindsShowing('));
 check('a switch is followed by the reconcile', /setReminderKindEnabled\(key[\s\S]{0,80}await syncReminderNotifications\(\)/.test(list));
