@@ -382,8 +382,38 @@ check('a cancelled new card forgets its photo', read0('components/LearnMyDecksEd
 check('a deck goes through the signed envelope', read0('lib/sharing.ts').includes("parsed.payload.kind === 'deck'") && read0('lib/sharing.ts').includes('isDeckPayloadShape'));
 check('recipe paths never meet a deck', read0('lib/sharing.ts').includes('return envelope && !isDeckEnvelope(envelope) ? envelope : null;'));
 check('the import screen hands a deck to the deck preview', read0('app/import-shared.tsx').includes('<SharedDeckPreview'));
-check('a shared deck is kept as a deck of the person', read0('components/SharedDeckPreview.tsx').includes('addSharedDeck(read)'));
+check('a shared deck is kept as a deck of the person', read0('components/SharedDeckPreview.tsx',
+  'lib/learnPrint.ts').includes('addSharedDeck(read)'));
 check('the open deck offers Share the Deck', read0('components/LearnMyDecksEditor.tsx').includes('Share the Deck'));
+
+// Printing a deck.
+{
+  const P = load('lib/learnPrint.ts');
+  const D = load('lib/learnDecks.ts');
+  for (const deck of D.LEARN_DECKS) {
+    for (const layout of ['list', 'cards']) {
+      const html = P.renderDeckHtml(deck, layout);
+      check(`${deck.id} prints as ${layout} with every card`, deck.cards.every((card) => html.includes(card.id === '' ? '' : P.frontHtml(card))), deck.id);
+    }
+  }
+  const tricky = { id: 'x', title: 'A <b> & "c"', about: '', cards: [{ id: 'x1', front: '<script>alert(1)</script>', back: 'ok', thinking: true }] };
+  const htmlT = P.renderDeckHtml(tricky, 'list');
+  check('printed words are escaped, never run', !htmlT.includes('<script>') && htmlT.includes('&lt;script&gt;') && !htmlT.includes('<b> &'));
+  check('the backs of a sheet run the other way along each row', JSON.stringify(P.mirroredOrder(8)) === '[1,0,3,2,5,4,7,6]' && JSON.stringify(P.mirroredOrder(3)) === '[1,0,3,2]');
+  const nine = { id: 'n', title: 'Nine', about: '', cards: Array.from({ length: 9 }, (_, i) => ({ id: 'n' + i, front: 'Q' + i, back: 'A' + i, thinking: true })) };
+  const sheets = P.renderDeckHtml(nine, 'cards').split('class="sheet"').length - 1;
+  check('nine cards make two sheets of fronts and two of backs', sheets === 4, String(sheets));
+  const choice = { id: 'c', front: 'Which?', back: 'B is it', thinking: true, kind: 'choice', options: [{ text: 'One', why: 'Not this' }, { text: 'Two', why: 'This' }], answer: 1 };
+  check('a choice prints its answer letter and why every option is or is not it', P.backHtml(choice, true).includes('The answer is B: Two') && P.backHtml(choice, true).includes('Not this'));
+  const order = { id: 'o', front: 'Order', back: '', thinking: false, kind: 'order', items: ['a1', 'b2', 'c3'] };
+  const shown = P.frontHtml(order);
+  check('an order prints its items out of order on the front', shown.indexOf('a1') > shown.indexOf('b2') || shown.indexOf('a1') > shown.indexOf('c3'));
+  const blank = { id: 'b', front: 'Soil holds ____.', back: '', thinking: false, kind: 'blank', accept: ['life'] };
+  check('a gap prints as a line to write on', P.frontHtml(blank).includes('class="gap"') && !P.frontHtml(blank).includes('____'));
+  check('nothing about answers or schedule is printed', !/known|ready|streak|score|%/i.test(P.renderDeckHtml(D.LEARN_DECKS[0], 'list').replace(/<style>[\s\S]*?<\/style>/, '')));
+  check('a deck PDF has a readable name', P.deckFileBase({ title: 'The Gut and What Feeds It' }) === 'lifestead-deck-the-gut-and-what-feeds-it');
+}
+check('every deck offers Print the Deck', read0('components/LearnSection.tsx').includes('Print the Deck') && read0('components/LearnSection.tsx').includes('renderDeckHtml(deck, layout, t)'));
 
 // Wiring.
 const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');

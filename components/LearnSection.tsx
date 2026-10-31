@@ -14,7 +14,18 @@ import { useCallback, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
-import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import {
+  BUTTON_PRIMARY_COMPACT,
+  BUTTON_PRIMARY_TEXT,
+  BUTTON_SECONDARY_COMPACT,
+  BUTTON_SECONDARY_TEXT,
+  PILL_ON,
+  PILL_ON_TEXT,
+  PILL_SMALL,
+  PILL_TEXT,
+} from '../constants/buttons';
+import { deckFileBase, renderDeckHtml, type DeckPrintLayout } from '../lib/learnPrint';
+import { exportHtmlAsPdf, printHtml } from '../lib/reportPdf';
 import { localDayOf } from '../lib/interests';
 import { LEARN_DECKS, type LearnDeck } from '../lib/learnDecks';
 import { loadRecordDecks } from '../lib/learnRecordDecksDb';
@@ -57,6 +68,7 @@ export function LearnSection({ tabColor }: Props) {
   const [doneLine, setDoneLine] = useState<{ deckId: string; text: string } | null>(null);
   const [recordDecks, setRecordDecks] = useState<LearnDeck[]>([]);
   const [myDecks, setMyDecks] = useState<LearnDeck[]>([]);
+  const [printing, setPrinting] = useState<{ deckId: string; layout: DeckPrintLayout; busy: boolean; said: string | null } | null>(null);
 
   const load = useCallback(async () => {
     const [all, fromRecords, mine] = await Promise.all([
@@ -132,6 +144,23 @@ export function LearnSection({ tabColor }: Props) {
     setSitting(null);
   }
 
+  async function sendToPaper(deck: LearnDeck, how: 'print' | 'pdf') {
+    if (!printing || printing.busy) return;
+    const layout = printing.layout;
+    setPrinting({ ...printing, busy: true, said: null });
+    const html = renderDeckHtml(deck, layout, t);
+    let said: string | null = null;
+    if (how === 'print') {
+      const result = await printHtml(html);
+      if (result.status === 'failed') said = result.message;
+    } else {
+      const result = await exportHtmlAsPdf(html, deckFileBase(deck), 'Save this deck as a PDF');
+      if (result.status === 'failed') said = result.message;
+      else if (result.status === 'savedOnly') said = 'The PDF is saved on this device. Nothing here could take it further.';
+    }
+    setPrinting({ deckId: deck.id, layout, busy: false, said });
+  }
+
   const known = countKnown(reviews);
   const current = sitting ? cardById(sitting.queue[sitting.index]) : undefined;
 
@@ -169,6 +198,62 @@ export function LearnSection({ tabColor }: Props) {
                   >
                     <Text style={styles.primaryButtonText}>Study</Text>
                   </TouchableOpacity>
+                  {printing?.deckId === deck.id ? (
+                    <View style={styles.printBlock}>
+                      <View style={styles.pillRow}>
+                        {(['list', 'cards'] as const).map((layout) => (
+                          <TouchableOpacity
+                            key={layout}
+                            ref={layout === 'cards' ? walkMark.ref('learn.printLayout') : undefined}
+                            style={[styles.pill, printing.layout === layout && styles.pillActive, layout === 'cards' ? walkMark('learn.printLayout') : null]}
+                            onPress={() => setPrinting({ ...printing, layout, said: null })}
+                            accessibilityRole="button"
+                          >
+                            <Text style={printing.layout === layout ? styles.pillActiveText : styles.pillText}>
+                              {layout === 'list' ? 'A List to Read' : 'Cards to Cut Out'}
+                            </Text>
+                          </TouchableOpacity>
+                        ))}
+                      </View>
+                      <Text style={styles.captionText}>
+                        {printing.layout === 'list'
+                          ? 'Every card in turn, the question and then its answer, with why each option is or is not the answer.'
+                          : 'Eight cards to a sheet, a page of questions and then a page of answers. Print on both sides, flipping on the long edge, and each answer lands on the back of its question.'}
+                      </Text>
+                      <View style={styles.pillRow}>
+                        <TouchableOpacity
+                          ref={walkMark.ref('learn.printSend')}
+                          style={[styles.primaryButton, printing.busy && styles.busy, walkMark('learn.printSend')]}
+                          onPress={() => void sendToPaper(deck, 'print')}
+                          disabled={printing.busy}
+                          accessibilityRole="button"
+                        >
+                          <Text style={styles.primaryButtonText}>{printing.busy ? 'Getting it ready…' : 'Print'}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          style={[styles.secondaryButton, printing.busy && styles.busy]}
+                          onPress={() => void sendToPaper(deck, 'pdf')}
+                          disabled={printing.busy}
+                          accessibilityRole="button"
+                        >
+                          <Text style={styles.secondaryButtonText}>Save as a PDF</Text>
+                        </TouchableOpacity>
+                      </View>
+                      {printing.said ? <Text style={styles.bodyText}>{printing.said}</Text> : null}
+                      <TouchableOpacity onPress={() => setPrinting(null)} accessibilityRole="button">
+                        <Text style={styles.linkText}>Close</Text>
+                      </TouchableOpacity>
+                    </View>
+                  ) : (
+                    <TouchableOpacity
+                      ref={walkMark.ref('learn.print')}
+                      style={walkMark('learn.print')}
+                      onPress={() => setPrinting({ deckId: deck.id, layout: 'cards', busy: false, said: null })}
+                      accessibilityRole="button"
+                    >
+                      <Text style={styles.linkText}>Print the Deck</Text>
+                    </TouchableOpacity>
+                  )}
                 </>
               ) : current && sitting ? (
                 <View style={styles.cardBlock}>
@@ -221,4 +306,13 @@ const styles = StyleSheet.create({
   primaryButton: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
   primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
   linkText: { ...typography.body, color: colors.primary, ...textShadow },
+  printBlock: { gap: 8 },
+  pillRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  pill: { ...PILL_SMALL },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
+  pillActiveText: { ...PILL_ON_TEXT },
+  secondaryButton: { ...BUTTON_SECONDARY_COMPACT, alignSelf: 'flex-start' },
+  secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },
+  busy: { opacity: 0.6 },
 });

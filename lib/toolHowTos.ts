@@ -138,6 +138,9 @@ export type ToolMark =
   | 'learn.import'
   | 'learn.importKeep'
   | 'learn.share'
+  | 'learn.print'
+  | 'learn.printLayout'
+  | 'learn.printSend'
   | 'capture.keepInLibrary'
   | 'work.overview'
   | 'work.todos'
@@ -3135,6 +3138,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Whoever opens the file in Lifestead sees the deck and taps Add to Your Decks.' },
       ],
       forYou: 'The file is signed by this phone, so a changed file is turned away. Only the cards travel: what you know and when your cards come up stay with you. Photos go small, on up to 40 cards.',
+    },
+    {
+      key: 'print',
+      title: 'Print a deck',
+      steps: [
+        { say: 'Under any deck, tap Print the Deck.', mark: 'learn.print', stay: true },
+        { say: 'Pick A List to Read, or Cards to Cut Out for cards you can hold.', mark: 'learn.printLayout', stay: true },
+        { say: 'Tap Print, or Save as a PDF to keep the file or send it on.', mark: 'learn.printSend' },
+      ],
+      forYou: 'Cards to Cut Out prints eight to a sheet, questions then answers. Print on both sides, flipping on the long edge, and each answer lands on the back of its question. Only the cards are printed, never how your answers have gone.',
     },
   ],
   '/interests#makingItPay': readingHowTos('Making It Pay', 'Each entry names the source and year of every figure in it, and says who the figures cover.'),
