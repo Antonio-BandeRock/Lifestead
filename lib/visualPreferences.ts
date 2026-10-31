@@ -383,6 +383,10 @@ export type HomeSectionKey =
   // the phone, answerable in one list. At the very top, and drawn only
   // while something is waiting.
   | 'waitingAnswers'
+  // Inside Knowledge, 2026-10-31: things you now know and which Learn decks
+  // have cards back for their day, in the Interests group
+  // (components/InsideKnowledgeCard.tsx). Never a share of answers.
+  | 'insideKnowledge'
   // Tutorials inside each tab's band, 2026-10-28. Direct request: "we
   // could have them inside of each separate Tab band ... rather than one
   // Tutorials band on Home for all of them in one place." One key per tab,
@@ -452,6 +456,7 @@ export const ALL_HOME_SECTION_KEYS: HomeSectionKey[] = [
   'logHarvest',
   'tutorialsGarden',
   // Interests.
+  'insideKnowledge',
   'tutorialsInterests',
   // Schedules. mealsLoggedToday is stated here beside its tab-mates
   // rather than further down: the grouping pulled it up anyway, and a
@@ -573,6 +578,7 @@ export const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
   tutorialsLife: 'Life Tutorials',
   tutorialsFood: 'Food Tutorials',
   tutorialsGarden: 'Garden Tutorials',
+  insideKnowledge: 'Inside Knowledge',
   tutorialsInterests: 'Interests Tutorials',
   tutorialsSchedule: 'Schedules Tutorials',
   tutorialsSignals: 'Signals Tutorials',

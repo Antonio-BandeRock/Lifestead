@@ -298,6 +298,7 @@ export type ToolMark =
   | 'home.welcomeGo'
   | 'home.welcomeNotNow'
   | 'home.waitingOpen'
+  | 'home.insideKnowledgeOpen'
   | 'home.waitingAnswer'
   | 'home.waitingKinds'
   | 'home.waitingChoose'
@@ -2334,6 +2335,15 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Or tap Not now.', mark: 'home.welcomeNotNow' },
       ],
       forYou: 'It steps aside while you are here, and nothing is counted against you for it.',
+    },
+    {
+      key: 'insideKnowledge',
+      title: 'See what you now know from Learn',
+      steps: [
+        { say: 'Open the band with the name of Interests, then Inside Knowledge.', mark: 'homeBand.insideKnowledge', stay: true },
+        { say: 'Tap Open Learn to go through the decks with cards back today.', mark: 'home.insideKnowledgeOpen' },
+      ],
+      forYou: 'It shows things you now know, a count that only grows, and names the decks with cards back for their day. It never counts what is waiting.',
     },
     {
       key: 'waitingAnswer',

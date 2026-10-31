@@ -449,6 +449,28 @@ check('every deck offers Print the Deck', read0('components/LearnSection.tsx').i
   check('the card view says whether its check matched', read0('components/LearnCardView.tsx').includes('onGrade(grade, checkMatched())'));
   check('an answer keeps its kind and check', read0('lib/learnDb.ts').includes('answered_at, kind, matched)'));
 }
+// Inside Knowledge, the Home card.
+{
+  const K = load('lib/insideKnowledge.ts');
+  const deck = (id, title, n) => ({ id, title, about: '', cards: Array.from({ length: n }, (_, i) => ({ id: id + i, front: 'Q', back: 'A', thinking: true })) });
+  const decks = [deck('a', 'Soil', 3), deck('b', 'Gut', 3), deck('c', 'Bees', 3)];
+  const fresh = K.insideKnowledge(decks, [], '2026-10-31');
+  check('with no answers the card offers the ready-made decks', fresh.ready.startsWith('Learn has ready-made decks') && fresh.readyDecks.length === 0);
+  const old = { cardId: 'a0', day: '2026-10-01', grade: 'knewIt', answeredAt: '2026-10-01T10:00:00Z' };
+  const recent = { cardId: 'b0', day: '2026-10-31', grade: 'knewIt', answeredAt: '2026-10-31T10:00:00Z' };
+  const some = K.insideKnowledge(decks, [old, recent], '2026-10-31');
+  check('a deck with a card back for its day is named, one never opened is not', some.readyDecks.join() === 'Soil', JSON.stringify(some));
+  check('the ready line names the decks and counts nothing', some.ready === 'Cards are back for their day in Soil.' && !/[0-9]/.test(some.ready));
+  const waiting = K.insideKnowledge(decks, [recent], '2026-10-31');
+  check('when nothing is back the card says when the next comes', waiting.ready.startsWith('The next cards come back '), waiting.ready);
+  const two = K.insideKnowledge(decks, [old, { ...old, cardId: 'c0' }], '2026-10-31');
+  check('two decks read as a list in words', two.ready === 'Cards are back for their day in Soil and Bees.', two.ready);
+  check('the known line is the one Learn shows', some.known === load('lib/learnSchedule.ts').describeKnown(0));
+  const card = read0('components/InsideKnowledgeCard.tsx');
+  check('the Home card opens Learn and holds no share', card.includes("openInterestsLens: 'learn'") && !card.includes('%') && !card.includes('HowItHasGone'));
+  check('Inside Knowledge sits in the Interests group on Home', read0('lib/homeSections.ts').includes("insideKnowledge: '/interests'") && read0('app/(tabs)/index.tsx').includes("case 'insideKnowledge'"));
+}
+
 // Wiring.
 const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
 check('the table', read('lib/db.ts').includes('CREATE TABLE IF NOT EXISTS learn_reviews'));
@@ -464,7 +486,7 @@ const FORBIDDEN = [
   'fail', 'wrong', 'must', 'you should', 'real ', 'genuine', 'honestly', '—', '–', ' -- ', 'percent', '%',
 ];
 // How It Has Gone is the one place a share may be written, so only these two files may hold one.
-const GONE_FILES = ['lib/learnHowItHasGone.ts', 'components/LearnHowItHasGone.tsx'];
+const GONE_FILES = ['lib/learnHowItHasGone.ts', 'components/LearnHowItHasGone.tsx', 'lib/insideKnowledge.ts', 'components/InsideKnowledgeCard.tsx'];
 const FILES = ['lib/learnSchedule.ts', 'lib/learnDecks.ts', 'lib/learnDb.ts', 'components/LearnSection.tsx', 'lib/learnKinds.ts', 'components/LearnCardView.tsx', 'lib/learnRecordDecks.ts', 'lib/learnRecordDecksDb.ts', 'lib/learnMyDecks.ts', 'lib/learnMyDecksDb.ts', 'components/LearnMyDecksEditor.tsx', 'lib/learnImport.ts', 'components/LearnCardPhoto.tsx', 'lib/learnShare.ts', 'components/SharedDeckPreview.tsx', 'lib/learnPrint.ts', 'lib/learnHowItHasGone.ts', 'components/LearnHowItHasGone.tsx'];
 const re = /'((?:[^'\\\n]|\\.)*)'|"((?:[^"\\\n]|\\.)*)"|`((?:[^`\\]|\\.)*)`/g;
 for (const rel of FILES) {

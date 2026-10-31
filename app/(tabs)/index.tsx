@@ -22,6 +22,7 @@ import { LifeInSquares } from '../../components/LifeInSquares';
 import { GroceryQuickAdd } from '../../components/GroceryQuickAdd';
 import { TodayPicks } from '../../components/TodayPicks';
 import { DaysUntilSection } from '../../components/DaysUntilSection';
+import { InsideKnowledgeCard } from '../../components/InsideKnowledgeCard';
 import { StartWorkoutCard } from '../../components/StartWorkoutCard';
 import { DailyScalesPicker } from '../../components/DailyScalesPicker';
 import { DayArc } from '../../components/DayArc';
@@ -4722,6 +4723,20 @@ export default function HomeScreen() {
     );
   }
 
+  // Inside Knowledge, 2026-10-31: Interests > Learn on Home. Things you now
+  // know and which decks have cards back, never a share of answers.
+  function renderInsideKnowledge() {
+    if (!isHomeSectionVisible(visualPrefs, 'insideKnowledge')) return null;
+    return renderBand(
+      'insideKnowledge',
+      'Inside Knowledge',
+      <View style={styles.bandBody}>
+        <InsideKnowledgeCard />
+      </View>,
+      { icon: 'school-outline' },
+    );
+  }
+
   // The other half of Garden's group: picking something is the thing that
   // happens away from the phone and gets remembered later, so it is a
   // one-tap row into the Harvest Log rather than a card to read.
@@ -4892,6 +4907,8 @@ export default function HomeScreen() {
         return renderDaysUntil();
       case 'logHarvest':
         return renderLogHarvest();
+      case 'insideKnowledge':
+        return renderInsideKnowledge();
       case 'digestCards':
         return renderDigestCards();
       case 'routines':
