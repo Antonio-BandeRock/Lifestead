@@ -3050,7 +3050,9 @@ export default function HomeScreen() {
               onPress={() =>
                 source.tab === 'garden'
                   ? router.push({ pathname: '/garden', params: { openGardenLens: source.lens } })
-                  : router.push({ pathname: '/life', params: { openLifeLens: source.lens } })
+                  : source.tab === 'interests'
+                    ? router.push({ pathname: '/interests', params: { openInterestsLens: source.lens } })
+                    : router.push({ pathname: '/life', params: { openLifeLens: source.lens } })
               }
             >
               <Text style={styles.reminderTime} numberOfLines={1}>

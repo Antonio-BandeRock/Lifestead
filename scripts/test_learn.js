@@ -471,6 +471,27 @@ check('every deck offers Print the Deck', read0('components/LearnSection.tsx').i
   check('Inside Knowledge sits in the Interests group on Home', read0('lib/homeSections.ts').includes("insideKnowledge: '/interests'") && read0('app/(tabs)/index.tsx').includes("case 'insideKnowledge'"));
 }
 
+// The Learn reminder, off until asked for.
+{
+  const K = load('lib/insideKnowledge.ts');
+  const deck = (id, title, n) => ({ id, title, about: '', cards: Array.from({ length: n }, (_, i) => ({ id: id + i, front: 'Q', back: 'A', thinking: true })) });
+  const decks = [deck('a', 'Soil', 3), deck('b', 'Gut', 3), deck('c', 'Bees', 3)];
+  check('no answers, no Learn reminder', K.learnReminder(decks, [], '2026-10-31') === null);
+  const old = { cardId: 'a0', day: '2026-10-01', grade: 'knewIt', answeredAt: '2026-10-01T10:00:00Z' };
+  const now = K.learnReminder(decks, [old, { ...old, cardId: 'c0' }], '2026-10-31');
+  check('cards back today are today, both decks named', now && now.dueOn === '2026-10-31' && now.decks === 'Soil and Bees', JSON.stringify(now));
+  const recent = { cardId: 'b0', day: '2026-10-31', grade: 'knewIt', answeredAt: '2026-10-31T10:00:00Z' };
+  const later = K.learnReminder(decks, [recent], '2026-10-31');
+  check('nothing back today gives the next day, never a day gone by', later && later.dueOn > '2026-10-31' && later.decks === 'Gut', JSON.stringify(later));
+  const prefs = read0('lib/reminderPreferences.ts');
+  check('the Learn reminder starts off', /learnReady: false/.test(prefs));
+  const sources = read0('lib/reminderSources.ts');
+  check('it is only worked out when switched on, and carries Snooze only', sources.includes("isReminderKindEnabled(await getReminderPreferences(), 'learnReady')") && /kind: 'learnReady'[^\n]*markable: false/.test(sources));
+  const sched = read0('lib/reminderSchedule.ts');
+  check('it speaks once on its day and never nudges', sched.includes('learnReady: [0]') && !/NUDGES_WHILE_OVERDUE[^\n]*learnReady/.test(sched));
+  check('a tap opens Learn', read0('lib/reminderNotifications.ts').includes("data.lens === 'learn' ? 'learn' : 'sessions'"));
+}
+
 // Wiring.
 const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
 check('the table', read('lib/db.ts').includes('CREATE TABLE IF NOT EXISTS learn_reviews'));

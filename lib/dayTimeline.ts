@@ -637,12 +637,15 @@ function datedItem(source: TimelineDatedInput, today: string): DayTimelineItem |
   const route: TimelineRoute =
     source.tab === 'garden'
       ? { pathname: '/garden', params: { openGardenLens: source.lens } }
-      : { pathname: '/life', params: { openLifeLens: source.lens } };
+      : source.tab === 'interests'
+        ? { pathname: '/interests', params: { openInterestsLens: source.lens } }
+        : { pathname: '/life', params: { openLifeLens: source.lens } };
   return {
     id: `dated:${source.kind}:${source.sourceId}`,
     kind: isCounter ? 'countdown' : 'due',
     title: source.title,
-    caption: source.detail,
+    // A Learn day carries only the deck names, so it says what they are.
+    caption: source.kind === 'learnReady' ? 'Cards are back for their day in Learn' : source.detail,
     start: dayStartMs(source.dueOn),
     end: null,
     allDay: true,

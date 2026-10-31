@@ -45,6 +45,7 @@ export type ReminderKindKey =
   | 'useBy'
   | 'todo'
   | 'project'
+  | 'learnReady'
   | 'cropPrep'
   | 'cropSow'
   | 'photoSeries'
@@ -123,6 +124,9 @@ export const ALL_REMINDER_KIND_KEYS: ReminderKindKey[] = [
   // C10 (2026-09-30). A to-do given a day, once on that day.
   'todo',
   'project',
+  // 2026-10-31. Interests > Learn, the day a deck already opened has cards
+  // back. Starts off.
+  'learnReady',
   // 2026-10-01. A crop chosen in My Crops: a week before a sowing window to
   // get the area ready, and the day it opens. Dated like the ones above it.
   'cropPrep',
@@ -164,6 +168,7 @@ export const REMINDER_KIND_LABELS: Record<ReminderKindKey, string> = {
   useBy: 'Use it before its date',
   todo: 'A task on its day',
   project: 'A project step on its day',
+  learnReady: 'Learn cards back for their day',
   cropPrep: 'Get an area ready for a crop',
   cropSow: 'Time to sow a crop',
   photoSeries: 'Photo series',
@@ -213,6 +218,8 @@ export const REMINDER_KIND_CAPTIONS: Record<ReminderKindKey, string> = {
     'Something in Life > Kitchen with a use-by date you gave it, the day before and on the day. Marking it used or gone clears the reminder.',
   todo: 'A task on Life > Tasks or Work that you gave a day to, once on that day. Done on the reminder marks it done; one left open stays on the list and is not chased.',
   project: 'A step in a project on Life > Projects that you gave a day to, and the day of a project itself, once on that day. Done on the reminder for a step ticks it; a paused project says nothing.',
+  learnReady:
+    'Once, on the morning a deck you have studied in Interests > Learn has cards back for their day, naming the decks. It never counts the cards and never comes back for a day let go by, and a deck you have not opened says nothing.',
   cropPrep:
     'A week before a sowing window opens for a crop in Garden > Sowing Calendar > My Crops, word to get its area ready. Prepped on the reminder records it. Only crops you chose, and only once a place is saved in My Zone.',
   cropSow:
@@ -283,6 +290,9 @@ const DEFAULT_REMINDER_KIND_ENABLED: Record<ReminderKindKey, boolean> = {
   // On. A to-do only has a day because somebody gave it one.
   todo: true,
   project: true,
+  // Off. Learn is studied at the pace somebody picks, so a word that cards
+  // are back is something to ask for, never a habit the app starts.
+  learnReady: false,
   cropPrep: true,
   cropSow: true,
   // On. A series exists only because somebody started one to take a photo

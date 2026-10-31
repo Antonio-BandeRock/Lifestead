@@ -1495,6 +1495,7 @@ function groupChannelFor(kind: ReminderKind): string {
     kind === 'useBy' ||
     kind === 'todo' ||
     kind === 'project' ||
+    kind === 'learnReady' ||
     kind === 'cropPrep' ||
     kind === 'cropSow'
   ) {
@@ -2022,7 +2023,7 @@ export type ReminderTapTarget =
   | { pathname: '/garden'; params: { openGardenLens: GardenReminderLens } }
   | { pathname: '/life'; params: { openLifeLens: LifeReminderLens } }
   | { pathname: '/routine'; params: { id: string } }
-  | { pathname: '/interests'; params: { openInterestsLens: 'sessions' } }
+  | { pathname: '/interests'; params: { openInterestsLens: 'sessions' | 'learn' } }
   | { pathname: '/workout'; params: { id: string; planId: string; on: string } }
   | { pathname: '/log'; params: { openSignalsLens: SignalsReminderLens } }
   | { pathname: '/reconcile' }
@@ -2100,7 +2101,7 @@ export function resolveReminderTap(response: Notifications.NotificationResponse 
   // finishing it marks that day done. A workout since removed lands on
   // Life > Workouts, which app/workout.tsx already does for an unknown id.
   if (data?.tab === 'interests') {
-    return { pathname: '/interests', params: { openInterestsLens: 'sessions' } };
+    return { pathname: '/interests', params: { openInterestsLens: data.lens === 'learn' ? 'learn' : 'sessions' } };
   }
   if (data?.tab === 'workout') {
     if (typeof data.workoutId === 'string' && data.workoutId && typeof data.scheduleItemId === 'string' && typeof data.onDate === 'string') {

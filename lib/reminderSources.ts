@@ -75,6 +75,13 @@ import { listCropPlanSteps, listCropPlans } from './cropPlanDb';
 import { readCachedFrostDates } from './homeSky';
 import { frostAnchor } from './sowingWindows';
 import { foodDisplayName } from './ingredientShortName';
+import { t } from './i18n';
+import { learnReminder } from './insideKnowledge';
+import { listLearnReviews } from './learnDb';
+import { LEARN_DECKS, type LearnDeck } from './learnDecks';
+import { listMyDecks } from './learnMyDecksDb';
+import { loadRecordDecks } from './learnRecordDecksDb';
+import { getReminderPreferences, isReminderKindEnabled } from './reminderPreferences';
 
 /** Where a tapped reminder lands, each a lens that already takes a deep
  *  link (openLifeLens in app/(tabs)/life.tsx, openGardenLens in
@@ -89,10 +96,11 @@ export type DatedReminderLens =
   | 'kitchen'
   | 'todos'
   | 'projects'
+  | 'learn'
   | 'sowingCalendar';
 /** A garden counter and a compost pile land on Garden when tapped;
  *  everything else on Life. */
-export type DatedReminderTab = 'life' | 'garden';
+export type DatedReminderTab = 'life' | 'garden' | 'interests';
 
 export type DatedReminderSource = {
   kind: DatedReminderKind;
@@ -328,6 +336,25 @@ export async function listDatedReminderSources(today: string): Promise<DatedRemi
     const projectSteps = await listProjectSteps(projects.map((project) => project.id));
     for (const r of projectReminders(projects, projectSteps, today)) {
       sources.push({ kind: 'project', ...r, tab: 'life', lens: 'projects' });
+    }
+  }
+
+  // Interests > Learn (2026-10-31): the next day a deck already opened has
+  // cards back, naming the decks. Read only when its switch is on, which it
+  // is not to start with, so a person who never asked hears nothing and
+  // sees nothing on Home or the day's timeline either. Snooze is its one
+  // button: the cards wait however long they are left.
+  if (isReminderKindEnabled(await getReminderPreferences(), 'learnReady')) {
+    const reviews = await listLearnReviews().catch(() => []);
+    if (reviews.length > 0) {
+      const [mine, fromRecords] = await Promise.all([
+        listMyDecks().catch((): LearnDeck[] => []),
+        loadRecordDecks(today, t).catch((): LearnDeck[] => []),
+      ]);
+      const next = learnReminder([...LEARN_DECKS, ...mine, ...fromRecords], reviews, today, t);
+      if (next) {
+        sources.push({ kind: 'learnReady', sourceId: 'learn', title: next.decks, detail: null, dueOn: next.dueOn, tab: 'interests', lens: 'learn', markable: false });
+      }
     }
   }
 

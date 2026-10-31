@@ -45,3 +45,32 @@ export function insideKnowledge(decks: LearnDeck[], reviews: LearnReview[], toda
   else ready = t('New cards are there whenever you want them.');
   return { known, ready, readyDecks };
 }
+
+export type LearnReminder = {
+  /** 'YYYY-MM-DD', the next day a deck already opened has a card back. */
+  dueOn: string;
+  /** The decks with a card back that day, by name, as one line. */
+  decks: string;
+};
+
+/**
+ * The one Learn reminder (2026-10-31), when Profile > Reminders has it on:
+ * the next day a deck the person has answered in has a card back for its
+ * day, naming those decks and counting nothing. A deck never opened says
+ * nothing, so nobody is asked to start anything. Null when no deck has a
+ * card coming back.
+ */
+export function learnReminder(decks: LearnDeck[], reviews: LearnReview[], today: string, t: Translate = plain): LearnReminder | null {
+  const answered = new Set(reviews.map((review) => review.cardId));
+  const days: { title: string; on: string }[] = [];
+  for (const deck of decks) {
+    const ids = deck.cards.map((card) => card.id);
+    if (!ids.some((id) => answered.has(id))) continue;
+    const sitting = planSitting(ids, reviews, today);
+    const on = sitting.readyCount > 0 ? today : sitting.nextReadyOn;
+    if (on) days.push({ title: t(deck.title), on: on < today ? today : on });
+  }
+  if (days.length === 0) return null;
+  const dueOn = days.reduce((first, day) => (day.on < first ? day.on : first), days[0].on);
+  return { dueOn, decks: listInWords(days.filter((day) => day.on === dueOn).map((day) => day.title), t) };
+}

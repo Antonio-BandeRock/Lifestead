@@ -57,6 +57,7 @@ export type DatedReminderKind =
   | 'useBy'
   | 'todo'
   | 'project'
+  | 'learnReady'
   | 'cropPrep'
   | 'cropSow';
 
@@ -70,6 +71,7 @@ export const ALL_DATED_REMINDER_KINDS: DatedReminderKind[] = [
   'useBy',
   'todo',
   'project',
+  'learnReady',
   'cropPrep',
   'cropSow',
 ];
@@ -117,6 +119,9 @@ export const LEAD_DAYS: Record<DatedReminderKind, number[]> = {
   // A project step or a project's own day, once on that day, the same as a
   // task: a step left open stays in its plan and is not chased.
   project: [0],
+  // Interests > Learn: the day a deck already opened has cards back, once.
+  // It never comes back for a day let go by; the cards simply wait.
+  learnReady: [0],
   // The week of warning is already in the due date (PREP_LEAD_DAYS in
   // lib/cropPlan.ts), so each speaks once, on its day. Neither repeats:
   // Prepped and Sown are what quiet them, and a window passes on its own.
@@ -312,6 +317,7 @@ export const DATED_KIND_PREFIX: Record<DatedReminderKind, string | null> = {
   useBy: 'Kitchen',
   todo: 'Task',
   project: 'Project',
+  learnReady: 'Learn',
   cropPrep: 'Get ready',
   cropSow: 'Sowing time',
 };
@@ -333,6 +339,7 @@ export function describeDatedDue(kind: DatedReminderKind, lead: number): string 
   if (kind === 'refill') return lead < 0 ? `Ask for more, the day was ${when}` : `Ask for more ${when}`;
   // A to-do past its day is still open, never late or missed.
   if (kind === 'todo' || kind === 'project') return lead < 0 ? `Still open from ${when}` : lead === 0 ? 'For today' : `For ${when}`;
+  if (kind === 'learnReady') return 'Cards are back for their day';
   if (kind === 'cropPrep') return lead < 0 ? `Was a week ahead of ${when}` : 'A week to get the area ready';
   if (kind === 'cropSow') return lead < 0 ? `The window opened ${when}` : 'The window opens today';
   if (kind === 'useBy') return lead < 0 ? `Its use-by date was ${when}` : lead === 0 ? 'Use it today' : `Use it by ${when}`;

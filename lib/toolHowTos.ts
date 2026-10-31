@@ -3166,6 +3166,15 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       steps: [{ say: 'At the foot of Learn, tap How It Has Gone.', mark: 'learn.howItHasGone' }],
       forYou: 'It shows shares of your answers by deck, by kind of card and by month, and how often a card that could check agreed with you. It stays closed until you open it, and nothing from it shows anywhere else.',
     },
+    {
+      key: 'cardsBackReminder',
+      title: 'Hear when cards are back',
+      steps: [
+        { say: 'Open Profile, then Reminders.' },
+        { say: 'Under Interests, then Learn, turn on Learn cards back for their day.' },
+      ],
+      forYou: 'Once, on the morning a deck you have studied has cards back, a notification names the decks. It never counts the cards, and a day let go by is not asked about again.',
+    },
   ],
   '/interests#makingItPay': readingHowTos('Making It Pay', 'Each entry names the source and year of every figure in it, and says who the figures cover.'),
   '/interests#projects': [
