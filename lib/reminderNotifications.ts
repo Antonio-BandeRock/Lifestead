@@ -704,7 +704,7 @@ function buildDatedPlanned(
     // of these: the same bill speaks three days out and again on the day,
     // and they have to be able to coexist rather than replace each other.
     identifier: `${IDENTIFIER_PREFIX}${source.kind}:${source.sourceId}:${day.on}`,
-    title: prefix ? `${tl(prefix)}: ${source.title}` : source.title,
+    title: prefix ? t('{kind}: {title}', { kind: tl(prefix), title: source.title }) : source.title,
     body: [`${pieces.join('. ')}.`, answerLine(source.kind, source.markable ?? true), `Records as of ${describeFreshness(now, fireAt)}.`]
       .filter(Boolean)
       .join(' '),

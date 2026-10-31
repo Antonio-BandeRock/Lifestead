@@ -10,9 +10,9 @@
 //
 // Three answers. 'en' and 'es' are fixed; 'phone' follows the phone's own
 // language setting and falls back to English for any language the app does
-// not have yet. Missing or unreadable reads as 'en' while the Spanish tables
-// are being filled in, so nothing changes for anybody who has not asked for
-// it. When Spanish is complete the default becomes 'phone'.
+// not have yet. Missing or unreadable reads as 'phone' since the Spanish
+// tables were finished (2026-10-31, 1.0.78.17): a phone set to Spanish opens in
+// Spanish, and any other phone opens in English as before.
 import { File, Paths } from 'expo-file-system';
 import * as Localization from 'expo-localization';
 import { useSyncExternalStore } from 'react';
@@ -39,7 +39,7 @@ function readChoice(): LanguageChoice {
   } catch {
     // Falls back to the default below.
   }
-  return 'en';
+  return 'phone';
 }
 
 /** The phone's language, when it is one the app has words for. */

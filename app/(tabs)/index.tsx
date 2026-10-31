@@ -3060,7 +3060,7 @@ export default function HomeScreen() {
               </Text>
               <View style={styles.reminderBody}>
                 <Text style={styles.reminderTitle} numberOfLines={1}>
-                  {prefix ? `${tl(prefix)}: ${source.title}` : source.title}
+                  {prefix ? t('{kind}: {title}', { kind: tl(prefix), title: source.title }) : source.title}
                 </Text>
                 <Text style={styles.reminderDetail} numberOfLines={2}>
                   {detail}

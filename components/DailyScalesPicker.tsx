@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { DAILY_SCALES, isScaleValue, type DailyScaleKey, type DailyScaleValues } from '../lib/dailyScales';
+import { t, tl } from '../lib/i18n';
 
 // Mood, energy and stress on a 1 to 5 scale (D1, 2026-09-26). One row of
 // five buttons per scale, used on Home's Today's Check-In and on Signals >
@@ -39,7 +40,7 @@ export function DailyScalesPicker({
                     onPress={() => choose(scale.key, value)}
                     accessibilityRole="button"
                     accessibilityState={{ selected: active }}
-                    accessibilityLabel={`${scale.label} ${value}, ${scale.words[value - 1]}`}
+                    accessibilityLabel={`${tl(scale.label)} ${value}, ${tl(scale.words[value - 1])}`}
                   >
                     <Text style={[styles.buttonText, active && styles.buttonTextActive]}>{value}</Text>
                   </TouchableOpacity>
@@ -48,8 +49,8 @@ export function DailyScalesPicker({
             </View>
             <Text style={styles.word}>
               {isScaleValue(chosen)
-                ? `${scale.words[chosen - 1]}. Tap ${chosen} again to clear it.`
-                : `1 is ${scale.words[0].toLowerCase()}, 5 is ${scale.words[4].toLowerCase()}.`}
+                ? t('{value}. Tap {chosen} again to clear it.', { value: tl(scale.words[chosen - 1]), chosen })
+                : t('1 is {low}, 5 is {high}.', { low: tl(scale.words[0]).toLowerCase(), high: tl(scale.words[4]).toLowerCase() })}
             </Text>
           </View>
         );

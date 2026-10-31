@@ -138,6 +138,9 @@ const CATEGORIES = [
     // "real time" and "real world" are set phrases, not the filler sense.
     allowNear: [
       /\breal[- ](?:time|world|estate|number)\b/i,
+      // Spanish, where real is a word in its own right: royal in a food's
+      // name (helecho real, salmón real, cuscús real) and tiempo real.
+      /(?:helecho|salmón|cuscús|tiempo) real\b/i,
       // Scare-quoted: the sentence is reporting somebody else's use of the
       // word, or holding it at arm's length. The quotes are the point.
       /["'\u201c\u2018]real["'\u201d\u2019]/i,
@@ -277,6 +280,7 @@ const CATEGORIES = [
       /\bvital signs?\b/i,
       // "Vital wheat gluten" is the ingredient's name on the package.
       /\bvital wheat gluten\b/i,
+      /\bgluten de trigo vital\b/i,
       /\bvitamin\b/i,
     ],
   },
@@ -431,7 +435,7 @@ function scan(src, allowJsx) {
         prevMeaning = 'value';
         continue;
       }
-      strings.push({ start, text: body });
+      strings.push({ start, end: i, text: body });
       prevMeaning = 'value';
       continue;
     }
@@ -580,6 +584,18 @@ function allowedAt(category, text, index, length) {
   return category.allowNear.some((re) => re.test(window));
 }
 
+// A key in a translation table (lib/translations/) is the English being
+// translated, copied word for word from wherever it is shown: a screen's
+// source, which this audit reads there, or the live reference database,
+// which it cannot be edited from. Fixing the key alone would only stop it
+// matching, so the key is skipped and the translation beside it is checked.
+function isTranslationKey(rel, src, chunk) {
+  if (!rel.startsWith('lib/translations/') || chunk.end === undefined) return false;
+  let j = chunk.end;
+  while (j < src.length && /s/.test(src[j])) j += 1;
+  return src[j] === ':';
+}
+
 function auditFile(file) {
   const src = fs.readFileSync(file, 'utf8');
   const rel = path.relative(ROOT, file).split(path.sep).join('/');
@@ -592,7 +608,11 @@ function auditFile(file) {
   // lowercase run, so an id, a style key or a colour never gets read as
   // writing.
   const prose = [...strings, ...jsx].filter(
-    (s) => s.text.length >= 18 && /\s/.test(s.text) && /[a-z]{3}/.test(s.text),
+    (s) =>
+      s.text.length >= 18 &&
+      /\s/.test(s.text) &&
+      /[a-z]{3}/.test(s.text) &&
+      !isTranslationKey(rel, src, s),
   );
 
   for (const category of CATEGORIES) {
