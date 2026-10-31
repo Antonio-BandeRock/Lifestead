@@ -60,6 +60,18 @@ export type ToolMark =
   | 'todo.remove'
   | 'todo.add'
   | 'todo.showDone'
+  | 'project.new'
+  | 'project.save'
+  | 'project.open'
+  | 'project.addStep'
+  | 'project.stepDone'
+  | 'project.stepMove'
+  | 'project.stepChange'
+  | 'project.stepLater'
+  | 'project.change'
+  | 'project.pause'
+  | 'project.finish'
+  | 'project.countDays'
   | 'work.overview'
   | 'work.todos'
   | 'work.have'
@@ -2549,6 +2561,94 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Profile opens at App Updates and looks for a newer version. If there is one, you are asked before the app restarts.' },
       ],
       forYou: 'A change sent out today reaches you now, without closing the app and opening it again to find out.',
+    },
+  ],
+  '/life#projects': [
+    {
+      key: 'start',
+      title: 'Start a project',
+      steps: [
+        { say: 'Tap Start a Project.', mark: 'project.new', stay: true },
+        { say: 'Give it a name, and a day to aim for if it has one.' },
+        { say: 'Tap Start the Project.', mark: 'project.save' },
+      ],
+      forYou: 'It opens straight away, ready for its first step.',
+    },
+    {
+      key: 'steps',
+      title: 'Add the steps',
+      steps: [
+        { say: 'Tap the project to open it.', mark: 'project.open', stay: true },
+        { say: 'Type a step in the box at the bottom and tap Add.', mark: 'project.addStep' },
+      ],
+      forYou: 'Steps go in the order you add them. The first one not done shows under the project name as Next.',
+    },
+    {
+      key: 'stepDone',
+      title: 'Tick a step',
+      steps: [
+        { say: 'Tap the box beside the step.', mark: 'project.stepDone' },
+      ],
+      forYou: 'It moves below the plan with the day it was done, and the next step takes its place under the name.',
+    },
+    {
+      key: 'order',
+      title: 'Change the order',
+      steps: [
+        { say: 'Tap Up or Down under a step.', mark: 'project.stepMove' },
+      ],
+      forYou: 'The plan changes when you learn more, and the order can change with it.',
+    },
+    {
+      key: 'waiting',
+      title: 'Mark a step as waiting, or give it a day',
+      steps: [
+        { say: 'Tap Change under the step.', mark: 'project.stepChange', stay: true },
+        { say: 'Fill in who or what it waits on, or its day, then tap Save.' },
+      ],
+      forYou: 'A waiting step stands aside so the next one shows as Next. A step with a day reminds you on that day, and Done on the reminder ticks it.',
+    },
+    {
+      key: 'later',
+      title: 'Keep an idea for later',
+      steps: [
+        { say: 'Tap Keep for Later under the step.', mark: 'project.stepLater' },
+      ],
+      forYou: 'It leaves the plan but stays in the project. Back in the Plan puts it at the end.',
+    },
+    {
+      key: 'pause',
+      title: 'Put a project down, or pick it up again',
+      steps: [
+        { say: 'Tap Pause on an open project, or Go Again on a paused one.', mark: 'project.pause', stay: true },
+        { say: 'When pausing, write where you left off if you like, then tap Pause It.' },
+      ],
+      forYou: 'Where you left off is the first thing you read when you open it again. A paused project sends no reminders.',
+    },
+    {
+      key: 'finish',
+      title: 'Finish a project',
+      steps: [
+        { say: 'Tap Finished on the open project.', mark: 'project.finish' },
+      ],
+      forYou: 'It moves to Finished with every step it took. Stop keeps one as a record without calling it finished.',
+    },
+    {
+      key: 'change',
+      title: 'Change the name or the day',
+      steps: [
+        { say: 'Tap Change on the open project.', mark: 'project.change', stay: true },
+        { say: 'Change what you need and tap Save.' },
+      ],
+      forYou: 'The day of a project reminds you once, on that day.',
+    },
+    {
+      key: 'countDays',
+      title: 'Count the days to a project day',
+      steps: [
+        { say: 'Tap Count the Days to It on the open project.', mark: 'project.countDays' },
+      ],
+      forYou: 'A counter starts in Life > Days Until and lands on the project day.',
     },
   ],
   '/life#todos': [

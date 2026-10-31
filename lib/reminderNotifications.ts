@@ -106,6 +106,7 @@ import { RECALL_NOTIFICATION_PREFIX } from './recalls';
 import { quietDecision, SNOOZE_MINUTES } from './quietHours';
 import { markUpkeepDone, listUpkeepItems } from './upkeepDb';
 import { getTodo, markTodoDone } from './todosDb';
+import { getProjectStep, setProjectStepDone } from './projectsDb';
 import { getMorningCheckin, saveMorningCheckin } from './morningCheckinDb';
 import { isLockedNow, reminderDetailHidden } from './appLockSession';
 import { isRelayWake } from './relayWake';
@@ -1468,6 +1469,7 @@ function groupChannelFor(kind: ReminderKind): string {
     kind === 'refill' ||
     kind === 'useBy' ||
     kind === 'todo' ||
+    kind === 'project' ||
     kind === 'cropPrep' ||
     kind === 'cropSow'
   ) {
@@ -1992,7 +1994,7 @@ const SCHEDULE_LENSES: ScheduleLens[] = ['meds', 'appointments', 'meals', 'today
 // The dated lenses that live on Life. 'compost' is a dated lens too and is
 // deliberately not here: it is on Garden, and this list is the fallback for
 // the Life branch below.
-const DATED_LENSES: LifeReminderLens[] = ['finances', 'upkeep', 'work', 'daysUntil', 'myMeds', 'didIDoIt', 'kitchen', 'todos'];
+const DATED_LENSES: LifeReminderLens[] = ['finances', 'upkeep', 'work', 'daysUntil', 'myMeds', 'didIDoIt', 'kitchen', 'todos', 'projects'];
 
 // Where a tapped reminder should land: the lens the thing lives in. Null for
 // any notification this module did not create.
@@ -2654,6 +2656,14 @@ async function recordAnswer(
     const todo = await getTodo(id);
     if (!todo || todo.doneAt) return;
     await markTodoDone(id, today);
+    return;
+  }
+  if (plan.write === 'projectStepDone') {
+    // Only a step carries Done. One already done, or removed since, writes
+    // nothing.
+    const step = await getProjectStep(id);
+    if (!step || step.doneAt) return;
+    await setProjectStepDone(id, true);
     return;
   }
   if (plan.write === 'cropStep') {

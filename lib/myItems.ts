@@ -86,5 +86,6 @@ export const MY_ITEM_KINDS: Record<MyItemsTab, MyItemKind[]> = {
     { id: 'didIt', label: 'To Do List', table: 'done_checks', lens: 'didIDoIt' },
     { id: 'countdowns', label: 'Days Until Counters', table: 'countdowns', lens: 'daysUntil' },
     { id: 'todos', label: 'Tasks', table: 'todos', lens: 'todos' },
+    { id: 'projects', label: 'Projects', table: 'projects', lens: 'projects' },
   ],
 };

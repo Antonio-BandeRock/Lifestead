@@ -68,6 +68,8 @@ import { listKitchenInventory } from './kitchenDb';
 import { formatGroceryAmount } from './groceryList';
 import { isUseByDate } from './useBy';
 import { listOpenTodos } from './todosDb';
+import { projectReminders } from './projects';
+import { listProjectSteps, listProjects } from './projectsDb';
 import { cropPlanReminders } from './cropPlan';
 import { listCropPlanSteps, listCropPlans } from './cropPlanDb';
 import { readCachedFrostDates } from './homeSky';
@@ -86,6 +88,7 @@ export type DatedReminderLens =
   | 'myMeds'
   | 'kitchen'
   | 'todos'
+  | 'projects'
   | 'sowingCalendar';
 /** A garden counter and a compost pile land on Garden when tapped;
  *  everything else on Life. */
@@ -315,6 +318,17 @@ export async function listDatedReminderSources(today: string): Promise<DatedRemi
       tab: 'life',
       lens: 'todos',
     });
+  }
+
+  // Projects (2026-10-30): a going project's steps with a day, which carry
+  // Done, and the project's own day, which does not. A paused project says
+  // nothing. See projectReminders in lib/projects.ts.
+  const projects = await listProjects('everything');
+  if (projects.some((project) => project.status === 'active')) {
+    const projectSteps = await listProjectSteps(projects.map((project) => project.id));
+    for (const r of projectReminders(projects, projectSteps, today)) {
+      sources.push({ kind: 'project', ...r, tab: 'life', lens: 'projects' });
+    }
   }
 
   // My Crops (2026-10-01): only the crops somebody chose, from the frost

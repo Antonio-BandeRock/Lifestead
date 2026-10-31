@@ -10540,6 +10540,47 @@ async function runDatabaseInitialization() {
       CREATE INDEX IF NOT EXISTS idx_trial_series_items_trial ON trial_series_items(trial_id);
     `);
 
+    // Projects, app-wide (2026-10-30, lib/projects.ts). A project holds its
+    // steps in order; area says which part of the app it belongs to, and
+    // link_kind and link_id may name one record there (a garden area, an
+    // interest) without a foreign key. status is active, paused, finished
+    // or stopped, and stopped is kept exactly as finished is. A step is
+    // parked when it is kept for later, and waiting_on names who or what it
+    // waits for. No cascade: removing a project removes its own steps in
+    // lib/projectsDb.ts and touches nothing else.
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS projects (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        about TEXT,
+        area TEXT NOT NULL DEFAULT 'life',
+        link_kind TEXT,
+        link_id TEXT,
+        status TEXT NOT NULL DEFAULT 'active',
+        paused_at TEXT,
+        paused_note TEXT,
+        finished_at TEXT,
+        stopped_at TEXT,
+        due_on TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_projects_area ON projects(area, status);
+      CREATE TABLE IF NOT EXISTS project_steps (
+        id TEXT PRIMARY KEY,
+        project_id TEXT NOT NULL,
+        text TEXT NOT NULL,
+        position INTEGER NOT NULL DEFAULT 0,
+        parked INTEGER NOT NULL DEFAULT 0,
+        waiting_on TEXT,
+        due_on TEXT,
+        done_at TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_project_steps_project ON project_steps(project_id);
+    `);
+
     // Ties a lightweight daily during-a-trial check-in (or its escalated
     // full symptom log -- same table either way, see recordCheckin's own
     // comment) back to the real trial it belongs to, so a trial's own

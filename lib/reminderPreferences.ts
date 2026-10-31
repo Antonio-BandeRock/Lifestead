@@ -43,6 +43,7 @@ export type ReminderKindKey =
   | 'refill'
   | 'useBy'
   | 'todo'
+  | 'project'
   | 'cropPrep'
   | 'cropSow'
   | 'photoSeries'
@@ -117,6 +118,7 @@ export const ALL_REMINDER_KIND_KEYS: ReminderKindKey[] = [
   'useBy',
   // C10 (2026-09-30). A to-do given a day, once on that day.
   'todo',
+  'project',
   // 2026-10-01. A crop chosen in My Crops: a week before a sowing window to
   // get the area ready, and the day it opens. Dated like the ones above it.
   'cropPrep',
@@ -156,6 +158,7 @@ export const REMINDER_KIND_LABELS: Record<ReminderKindKey, string> = {
   refill: 'Running low on a med',
   useBy: 'Use it before its date',
   todo: 'A task on its day',
+  project: 'A project step on its day',
   cropPrep: 'Get an area ready for a crop',
   cropSow: 'Time to sow a crop',
   photoSeries: 'Photo series',
@@ -202,6 +205,7 @@ export const REMINDER_KIND_CAPTIONS: Record<ReminderKindKey, string> = {
   useBy:
     'Something in Life > Kitchen with a use-by date you gave it, the day before and on the day. Marking it used or gone clears the reminder.',
   todo: 'A task on Life > Tasks or Work that you gave a day to, once on that day. Done on the reminder marks it done; one left open stays on the list and is not chased.',
+  project: 'A step in a project on Life > Projects that you gave a day to, and the day of a project itself, once on that day. Done on the reminder for a step ticks it; a paused project says nothing.',
   cropPrep:
     'A week before a sowing window opens for a crop in Garden > Sowing Calendar > My Crops, word to get its area ready. Prepped on the reminder records it. Only crops you chose, and only once a place is saved in My Zone.',
   cropSow:
@@ -269,6 +273,7 @@ const DEFAULT_REMINDER_KIND_ENABLED: Record<ReminderKindKey, boolean> = {
   useBy: true,
   // On. A to-do only has a day because somebody gave it one.
   todo: true,
+  project: true,
   cropPrep: true,
   cropSow: true,
   // On. A series exists only because somebody started one to take a photo

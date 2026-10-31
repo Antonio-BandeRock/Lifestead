@@ -248,6 +248,9 @@ const AREAS: readonly Area[] = [
   // C10, 2026-09-30. The doings are each time one was ticked, which the
   // to-do itself already says by moving on.
   { one: 'task', many: 'tasks', count: ['todos'], quiet: ['todo_doings'] },
+  // 2026-10-30. A step is part of its project, so a project and its five
+  // steps read as one more project.
+  { one: 'project', many: 'projects', count: ['projects'], quiet: ['project_steps'] },
   {
     one: 'piece of grow setup',
     many: 'pieces of grow setup',

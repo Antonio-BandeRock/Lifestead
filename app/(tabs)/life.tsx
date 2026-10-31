@@ -25,6 +25,7 @@ import { CalmBands } from '../../components/HomeSectionBand';
 import { TabBand, makeTabBandStyles } from '../../components/TabBand';
 import { DaysUntilSection } from '../../components/DaysUntilSection';
 import { TodoSection } from '../../components/TodoSection';
+import { ProjectsSection } from '../../components/ProjectsSection';
 import { DidIDoItSection } from '../../components/DidIDoItSection';
 import { KitchenSection } from '../../components/KitchenSection';
 import { RoutinesSection } from '../../components/RoutinesSection';
@@ -193,7 +194,8 @@ type LifeLens =
   | 'routines'
   | 'didIDoIt'
   | 'daysUntil'
-  | 'todos';
+  | 'todos'
+  | 'projects';
 type FinanceSection = 'overview' | 'health' | 'recurring' | 'spending' | 'upcoming' | 'money' | 'goals';
 
 const SECTIONS: { key: FinanceSection; label: string }[] = [
@@ -479,6 +481,29 @@ const DAYS_UNTIL_HELP_SECTIONS: HelpSection[] = [
   },
 ];
 
+const PROJECTS_HELP_SECTIONS: HelpSection[] = [
+  {
+    heading: 'What this is for',
+    body: 'Anything with several steps that may take a while: retiling a room, building a raised bed, learning a craft, sorting out old family papers. Start one with a name, then add its steps in the order you expect to do them. Up and Down change the order whenever the plan changes.',
+  },
+  {
+    heading: 'The next step comes first',
+    body: 'Each project shows its next step under its name, so opening one after weeks away says what to do now. A step can be waiting on someone or something, and then the next one along shows instead. Keep for Later takes an idea out of the plan without losing it.',
+  },
+  {
+    heading: 'Putting one down',
+    body: 'Pause asks where you left off, in a few words, and that note is the first thing you read when you open it again. A paused project waits under Paused for as long as it needs to, and Go Again picks it up.',
+  },
+  {
+    heading: 'Finished or stopped',
+    body: 'Finished keeps the project with every step it took. Stop keeps it too, as a record of what was done, and either one can go again. Remove takes it off the list with its steps, for one started by mistake.',
+  },
+  {
+    heading: 'Days',
+    body: 'A project and each step can have a day. A step with a day reminds you on that day, and Done on the reminder ticks the step. Count the Days to It starts a counter in Days Until for the project day.',
+  },
+];
+
 const TODO_HELP_SECTIONS: HelpSection[] = [
   {
     heading: 'What this is for',
@@ -563,6 +588,10 @@ const LIFE_LENSES: LensOption<LifeLens>[] = [
   // 2026-09-30 (C10). Things to do with an optional day and repeat, work and
   // personal together. See components/TodoSection.tsx.
   { key: 'todos', label: 'Tasks', icon: 'checkbox-outline', help: TODO_HELP_SECTIONS },
+  // 2026-10-30. Anything with several steps, paused and picked up again,
+  // ending finished or stopped. Every area's projects show here; the
+  // Interests tab will show its own. See components/ProjectsSection.tsx.
+  { key: 'projects', label: 'Projects', icon: 'layers-outline', help: PROJECTS_HELP_SECTIONS },
 ];
 
 const DIRECTION_OPTIONS = [
@@ -2072,6 +2101,12 @@ export default function LifeScreen() {
               <View style={band.box}>
                 <Text style={styles.cardTitle}>Tasks</Text>
                 <TodoSection scope="everything" tabColor={TAB_COLOR} />
+              </View>
+            ) : null}
+            {lens === 'projects' ? (
+              <View style={band.box}>
+                <Text style={styles.cardTitle}>Projects</Text>
+                <ProjectsSection scope="everything" tabColor={TAB_COLOR} />
               </View>
             ) : null}
 

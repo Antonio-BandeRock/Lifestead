@@ -282,6 +282,7 @@ export function categoryKeyFor(kind: string, markable = true): ReminderCategoryK
     case 'todo':
       return 'task';
     case 'routine':
+    case 'project':
       return markable ? 'task' : 'plain';
     case 'upkeep':
       return markable ? 'upkeep' : 'plain';
@@ -393,6 +394,7 @@ export type ReminderActionPlan =
   | { write: 'upkeepDone' }
   | { write: 'compostTurned' }
   | { write: 'todoDone' }
+  | { write: 'projectStepDone' }
   | { write: 'cropStep'; step: 'prepped' | 'sown' }
   | { write: 'checkinNote' }
   | { write: 'flare' }
@@ -451,6 +453,7 @@ export function planReminderAction(kind: string, action: string): ReminderAction
   if (action === 'doneToday' && kind === 'upkeep') return { write: 'upkeepDone' };
   if (action === 'turned' && kind === 'compost') return { write: 'compostTurned' };
   if (action === 'done' && kind === 'todo') return { write: 'todoDone' };
+  if (action === 'done' && kind === 'project') return { write: 'projectStepDone' };
   if (action === 'prepped' && kind === 'cropPrep') return { write: 'cropStep', step: 'prepped' };
   if (action === 'sown' && kind === 'cropSow') return { write: 'cropStep', step: 'sown' };
   return null;
@@ -476,6 +479,7 @@ export function answerLine(kind: string, markable = true): string | null {
       if (kind === 'check') return 'Done checks it off your To Do List.';
       if (kind === 'routine') return 'Done checks this step off and shows the next one here.';
       if (kind === 'todo') return 'Done marks it done on Tasks.';
+      if (kind === 'project') return 'Done ticks this step in Projects.';
       return 'Done marks it done.';
     case 'upkeep':
       return 'Done today records it in Upkeep.';
