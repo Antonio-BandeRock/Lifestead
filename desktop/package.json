@@ -9,6 +9,7 @@
     "export": "node build-web.js",
     "dist": "node check-packaged-files.js && node fetch-whisper.js && node build-web.js && electron-builder --win nsis",
     "dist:mac": "node check-packaged-files.js && node build-web.js && electron-builder --mac dmg",
+    "dist:test": "node check-packaged-files.js && node fetch-whisper.js && node build-web.js --variant test && electron-builder --win nsis --config electron-builder-test.yml",
     "pack": "node check-packaged-files.js && node fetch-whisper.js && electron-builder --win nsis"
   },
   "devDependencies": {

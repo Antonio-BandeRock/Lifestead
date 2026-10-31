@@ -11,6 +11,11 @@ const path = require('node:path');
 const projectRoot = path.join(__dirname, '..');
 const outputDir = path.join(__dirname, 'web-build');
 
+// --variant test exports the tester version: metro.config.js leaves the
+// developer tools out when APP_VARIANT is test or store (tester plan T2).
+const variantArg = process.argv.indexOf('--variant');
+const variant = variantArg === -1 ? process.env.APP_VARIANT : process.argv[variantArg + 1];
+
 fs.rmSync(outputDir, { recursive: true, force: true });
 
 const result = spawnSync(
@@ -20,7 +25,7 @@ const result = spawnSync(
     cwd: projectRoot,
     stdio: 'inherit',
     shell: process.platform === 'win32',
-    env: { ...process.env, LIFESTEAD_DESKTOP: '1', CI: '1' },
+    env: { ...process.env, LIFESTEAD_DESKTOP: '1', CI: '1', ...(variant ? { APP_VARIANT: variant } : {}) },
   },
 );
 
@@ -40,4 +45,4 @@ const versionSource = fs.readFileSync(path.join(projectRoot, 'constants', 'versi
 const versionMatch = /APP_VERSION\s*=\s*['"]([^'"]+)['"]/.exec(versionSource);
 if (versionMatch) fs.writeFileSync(path.join(outputDir, 'lifestead-version.txt'), versionMatch[1]);
 
-console.log(`web export ready in ${outputDir}`);
+console.log(`web export ready in ${outputDir}${variant ? ` (${variant} version)` : ''}`);

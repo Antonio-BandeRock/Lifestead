@@ -59,6 +59,8 @@ ipcRenderer.on('notifications:response', (_event, response) => {
 contextBridge.exposeInMainWorld('insideStoryDesktop', {
   platform: 'desktop',
   appVersion: ipcRenderer.sendSync('app:version'),
+  // Tester plan T9: 'test' in the tester installer, null in the developer's.
+  appVariant: ipcRenderer.sendSync('app:variant'),
   paths: ipcRenderer.sendSync('app:paths'),
   // P34: which version this window is, or null in the person's own app.
   versionPreview: ipcRenderer.sendSync('versions:current'),

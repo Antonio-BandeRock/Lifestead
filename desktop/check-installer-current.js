@@ -12,12 +12,19 @@
 // It reads desktop/dist rather than anything about this machine, so it
 // reports what was BUILT, not what is installed. Installing it is still a
 // person walking through the installer.
+//
+// Since tester plan T9 (2026-10-31) there are two installers: the
+// developer's in desktop/dist and the tester version's in desktop/dist-test
+// (`npm run dist:test`). Both are checked once the tester one has been built.
 
 const fs = require('fs');
 const path = require('path');
 
 const root = path.join(__dirname, '..');
-const dist = path.join(__dirname, 'dist');
+const KINDS = [
+  { folder: 'dist', name: 'Lifestead', build: 'npm run dist', always: true },
+  { folder: 'dist-test', name: 'Lifestead Test', build: 'npm run dist:test', always: false },
+];
 
 function repoVersion() {
   const text = fs.readFileSync(path.join(root, 'constants/version.ts'), 'utf8');
@@ -40,31 +47,40 @@ function isAfter(a, b) {
 
 const wanted = repoVersion();
 
-if (!fs.existsSync(dist)) {
-  process.stderr.write('No desktop/dist folder, so nothing has been built. The repo is at ' + wanted + '.\n');
-  process.exit(1);
+function escape(name) {
+  return name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-const built = fs
-  .readdirSync(dist)
-  .map((name) => name.match(/^Lifestead Setup (\d+\.\d+\.\d+\.\d+)\.exe$/))
-  .filter(Boolean)
-  .map((match) => match[1]);
-
-if (built.length === 0) {
-  process.stderr.write('No installer in desktop/dist, and the repo is at ' + wanted + '.\n');
-  process.exit(1);
+// 0 when this kind's newest installer is current, 1 otherwise.
+function check(kind) {
+  const dist = path.join(__dirname, kind.folder);
+  const label = kind.name + ' installer';
+  if (!fs.existsSync(dist)) {
+    if (!kind.always) return 0;
+    process.stderr.write('No desktop/' + kind.folder + ' folder, so no ' + label + ' has been built. The repo is at ' + wanted + '.\n');
+    return 1;
+  }
+  const pattern = new RegExp('^' + escape(kind.name) + ' Setup (\\d+\\.\\d+\\.\\d+\\.\\d+)\\.exe$');
+  const built = fs
+    .readdirSync(dist)
+    .map((name) => name.match(pattern))
+    .filter(Boolean)
+    .map((match) => match[1]);
+  if (built.length === 0) {
+    process.stderr.write('No ' + label + ' in desktop/' + kind.folder + ', and the repo is at ' + wanted + '.\n');
+    return 1;
+  }
+  const newest = built.reduce((best, one) => (isAfter(one, best) ? one : best));
+  if (!isAfter(wanted, newest)) {
+    process.stdout.write('The newest ' + label + ' is ' + newest + ', and the repo is at ' + wanted + '.\n');
+    return 0;
+  }
+  process.stderr.write(
+    'The newest ' + label + ' is ' + newest + ', and the repo is at ' + wanted + '.\n' +
+    'Nothing since ' + newest + ' has reached it.\n' +
+    'Build it: cd desktop && ' + kind.build + '\n');
+  return 1;
 }
 
-const newest = built.reduce((best, one) => (isAfter(one, best) ? one : best));
-
-if (!isAfter(wanted, newest)) {
-  process.stdout.write('The newest installer is ' + newest + ', and the repo is at ' + wanted + '.\n');
-  process.exit(0);
-}
-
-process.stderr.write(
-  'The newest installer is ' + newest + ', and the repo is at ' + wanted + '.\n' +
-  'Nothing since ' + newest + ' has reached the Windows app' + '.\n' +
-  'Build it: node desktop/build-web.js, then cd desktop && npm run dist\n');
-process.exit(1);
+const behind = KINDS.map(check).reduce((a, b) => a + b, 0);
+process.exit(behind === 0 ? 0 : 1);

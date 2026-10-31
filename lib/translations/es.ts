@@ -369,6 +369,8 @@ const BY_HAND: Readonly<Record<string, string>> = {
   'Open the band with the name of Thank You for Testing Lifestead. It stays on Home, and the same words are in Getting Set Up.': 'Abre la sección llamada Gracias por probar Lifestead. Se queda en Inicio, y lo mismo está en Preparándote.',
   'Tap Report a Problem under it to say what you found, the same as the flag at the edge.': 'Toca Reportar un problema debajo para contar lo que encontraste, igual que con la bandera del borde.',
   'What this version is, how to say what you found, and the version number to quote are always one look away.': 'Qué es esta versión, cómo contar lo que encontraste y el número de versión que debes mencionar siempre están a la vista.',
+  // The tester installer for computers, T9 (2026-10-31).
+  'On a computer the test version is an installer of its own, Lifestead Test. It keeps its records apart from any other copy of Lifestead on the same computer.': 'En una computadora la versión de prueba tiene su propio instalador, Lifestead Test. Guarda sus registros aparte de cualquier otra copia de Lifestead en la misma computadora.',
   // Update notes for testers, T6 (2026-10-31).
   'Updated to {version}': 'Actualizada a {version}',
   'Lifestead updated itself and restarted. Here\'s what changed:': 'Lifestead se actualizó sola y volvió a abrirse. Esto es lo que cambió:',
