@@ -12,3 +12,7 @@
 
 /try/*
   Cache-Control: max-age=300
+
+/tester/*
+  Cache-Control: max-age=300
+  X-Robots-Tag: noindex

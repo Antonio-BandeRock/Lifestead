@@ -2008,8 +2008,8 @@ export default function HomeScreen() {
       await setLastSeenAppVersion(APP_VERSION);
       if (notes.length === 0) return;
       showInfoAlert(
-        `Updated to ${APP_VERSION}`,
-        `Lifestead updated itself and restarted. Here's what changed:\n\n${formatReleaseNotesMessage(notes)}`,
+        t('Updated to {version}', { version: APP_VERSION }),
+        `${t("Lifestead updated itself and restarted. Here's what changed:")}\n\n${formatReleaseNotesMessage(notes, t)}`,
       );
     } catch (error) {
       // A failure here should never block Home from finishing its own

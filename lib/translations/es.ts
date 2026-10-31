@@ -369,6 +369,23 @@ const BY_HAND: Readonly<Record<string, string>> = {
   'Open the band with the name of Thank You for Testing Lifestead. It stays on Home, and the same words are in Getting Set Up.': 'Abre la sección llamada Gracias por probar Lifestead. Se queda en Inicio, y lo mismo está en Preparándote.',
   'Tap Report a Problem under it to say what you found, the same as the flag at the edge.': 'Toca Reportar un problema debajo para contar lo que encontraste, igual que con la bandera del borde.',
   'What this version is, how to say what you found, and the version number to quote are always one look away.': 'Qué es esta versión, cómo contar lo que encontraste y el número de versión que debes mencionar siempre están a la vista.',
+  // Update notes for testers, T6 (2026-10-31).
+  'Updated to {version}': 'Actualizada a {version}',
+  'Lifestead updated itself and restarted. Here\'s what changed:': 'Lifestead se actualizó sola y volvió a abrirse. Esto es lo que cambió:',
+  'Version {version}': 'Versión {version}',
+  'What Changed': 'Qué cambió',
+  'There are no notes for this version yet.': 'Todavía no hay notas para esta versión.',
+  'Could Not Open the Link': 'No se pudo abrir el enlace',
+  'Write to {address} and we will send the new installer.': 'Escribe a {address} y te mandaremos el instalador nuevo.',
+  'A new installer, version {version}, is ready. Updates cannot bring this one by themselves. Installing it over the one you have keeps everything you have put in.': 'Hay un instalador nuevo, la versión {version}. Las actualizaciones no pueden traerlo solas. Si lo instalas encima del que tienes, se queda todo lo que has guardado.',
+  'Get the New Installer': 'Descargar el instalador nuevo',
+  'Tap What Changed to read the notes for the last few updates again.': 'Toca Qué cambió para volver a leer las notas de las últimas actualizaciones.',
+  'When a new installer is needed, a line at the top of the band says so. Tap Get the New Installer and install it over the one you have; nothing you have put in is lost.': 'Cuando haga falta un instalador nuevo, una línea arriba en la sección lo dice. Toca Descargar el instalador nuevo e instálalo encima del que tienes; no se pierde nada de lo que has guardado.',
+  'For Testers on Home has a What Changed button, so the notes for the last few updates can be read again at any time.': 'Para quienes prueban, en Inicio, tiene un botón Qué cambió, para volver a leer en cualquier momento las notas de las últimas actualizaciones.',
+  'When a new installer is needed, For Testers says so and has a button to fetch it. Installing it over the one you have keeps everything you have put in.': 'Cuando hace falta un instalador nuevo, Para quienes prueban lo dice y tiene un botón para descargarlo. Si lo instalas encima del que tienes, se queda todo lo que has guardado.',
+  'The test version has a For Testers band on Home and at the start of Getting Set Up, saying what the test version is and how to tell us what you find.': 'La versión de prueba tiene una sección Para quienes prueban en Inicio y al principio de Preparándote, que dice qué es la versión de prueba y cómo contarnos lo que encuentres.',
+  'Report a Problem is on every screen: tap the flag at the edge, or press and hold any band. Say what went wrong, what you wish it did, or what to change, by typing or with the mic. If the app closed by itself, what happened is offered to send along.': 'Reportar un problema está en cada pantalla: toca la bandera del borde, o mantén presionada cualquier sección. Cuenta qué salió mal, qué te gustaría que hiciera o qué cambiar, escribiendo o con el micrófono. Si la app se cerró sola, se ofrece mandar lo que pasó junto con el reporte.',
+  'Lifestead is in Spanish as well as English, and it now follows the language your phone is set to. Profile > Appearance & Navigation > Language changes it.': 'Lifestead está en español además de inglés, y ahora sigue el idioma de tu teléfono. Perfil > Apariencia y navegación > Idioma lo cambia.',
 };
 
 export const ES: Readonly<Record<string, string>> = { ...ES_PARTS, ...BY_HAND };

@@ -41,6 +41,35 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.78.21',
+    date: '2026-10-31',
+    changes: [
+      'For Testers on Home has a What Changed button, so the notes for the last few updates can be read again at any time.',
+      'When a new installer is needed, For Testers says so and has a button to fetch it. Installing it over the one you have keeps everything you have put in.',
+    ],
+  },
+  {
+    version: '1.0.78.20',
+    date: '2026-10-31',
+    changes: [
+      'The test version has a For Testers band on Home and at the start of Getting Set Up, saying what the test version is and how to tell us what you find.',
+    ],
+  },
+  {
+    version: '1.0.78.19',
+    date: '2026-10-31',
+    changes: [
+      'Report a Problem is on every screen: tap the flag at the edge, or press and hold any band. Say what went wrong, what you wish it did, or what to change, by typing or with the mic. If the app closed by itself, what happened is offered to send along.',
+    ],
+  },
+  {
+    version: '1.0.78.17',
+    date: '2026-10-31',
+    changes: [
+      'Lifestead is in Spanish as well as English, and it now follows the language your phone is set to. Profile > Appearance & Navigation > Language changes it.',
+    ],
+  },
+  {
     version: '1.0.42.24',
     date: '2026-09-21',
     changes: [
@@ -2348,9 +2377,20 @@ export function getReleaseNotesSince(
  * caught up on at once get a version heading each, so it stays clear
  * which change arrived when.
  */
-export function formatReleaseNotesMessage(notes: ReleaseNote[]): string {
+export function formatReleaseNotesMessage(
+  notes: ReleaseNote[],
+  translate: (text: string, values?: Readonly<Record<string, string>>) => string = (text, values) =>
+    text.replace(/\{(\w+)\}/g, (whole, key: string) => values?.[key] ?? whole),
+): string {
   if (notes.length === 0) return '';
-  const bullets = (note: ReleaseNote) => note.changes.map((change) => `• ${change}`).join('\n\n');
+  const bullets = (note: ReleaseNote) => note.changes.map((change) => `• ${translate(change)}`).join('\n\n');
   if (notes.length === 1) return bullets(notes[0]);
-  return notes.map((note) => `Version ${note.version}\n\n${bullets(note)}`).join('\n\n\n');
+  return notes
+    .map((note) => `${translate('Version {version}', { version: note.version })}\n\n${bullets(note)}`)
+    .join('\n\n\n');
+}
+
+/** The newest few notes up to the running version, for reading them again. */
+export function getRecentReleaseNotes(currentVersion: string, count: number): ReleaseNote[] {
+  return RELEASE_NOTES.filter((note) => compareAppVersions(note.version, currentVersion) <= 0).slice(0, count);
 }

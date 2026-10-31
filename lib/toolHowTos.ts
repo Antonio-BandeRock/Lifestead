@@ -293,6 +293,8 @@ export type ToolMark =
   | 'home.captureType'
   | 'report.button'
   | 'tester.report'
+  | 'tester.whatChanged'
+  | 'tester.installer'
   | 'home.captureSay'
   | 'home.captureSort'
   | 'capture.readPage'
@@ -2230,6 +2232,8 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       steps: [
         { say: 'Open the band with the name of Thank You for Testing Lifestead. It stays on Home, and the same words are in Getting Set Up.', mark: 'homeBand.testerWelcome', stay: true },
         { say: 'Tap Report a Problem under it to say what you found, the same as the flag at the edge.', mark: 'tester.report' },
+        { say: 'Tap What Changed to read the notes for the last few updates again.', mark: 'tester.whatChanged' },
+        { say: 'When a new installer is needed, a line at the top of the band says so. Tap Get the New Installer and install it over the one you have; nothing you have put in is lost.' },
       ],
       forYou: 'What this version is, how to say what you found, and the version number to quote are always one look away.',
     },
