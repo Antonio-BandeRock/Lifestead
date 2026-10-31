@@ -9,7 +9,8 @@ import { findDigestEntryById, type DigestCategoryKey } from './digest';
 // each in the Life tab ... Let's remove Digest as a tab after everything
 // is moved." So every category now lives as a lens on some other tab:
 // the 19 conditions, Health Literacy and Earth Matters on Life,
-// Horticulture on Garden, and the recipe categories on Food. Anything
+// Horticulture on Garden, the recipe categories on Food, and (since
+// 2026-10-30) Making It Pay on Interests. Anything
 // that opens an entry by id (a Home flip card's Read More, Profile's
 // neurodivergence link, a Related chip tapped from another category, a
 // Search Reading hit) asks this rather than guessing a route. One place
@@ -25,11 +26,13 @@ export type LifeReadingLens = 'conditions' | 'healthLiteracy' | 'earthMatters';
 export type DigestEntryRoute =
   | { pathname: '/life'; params: { openLifeLens: LifeReadingLens; openEntryId: string } }
   | { pathname: '/garden'; params: { openGardenLens: 'horticulture'; openEntryId: string } }
-  | { pathname: '/food'; params: { openFoodLens: 'systemRecipes' | 'myRecipes'; openEntryId: string } };
+  | { pathname: '/food'; params: { openFoodLens: 'systemRecipes' | 'myRecipes'; openEntryId: string } }
+  | { pathname: '/interests'; params: { openInterestsLens: 'makingItPay'; openEntryId: string } };
 
 /** The tab an entry's category lives on, for colouring a card by its source. */
-export function tabPathForDigestCategory(category: DigestCategoryKey): '/life' | '/garden' | '/food' {
+export function tabPathForDigestCategory(category: DigestCategoryKey): '/life' | '/garden' | '/food' | '/interests' {
   if (category === 'homeGardening') return '/garden';
+  if (category === 'makingItPay') return '/interests';
   if (category === 'recipes' || category === 'myKitchen' || category === 'myFavorites') return '/food';
   return '/life';
 }
@@ -47,6 +50,9 @@ export function routeForDigestEntry(id: string): DigestEntryRoute {
   }
   if (category === 'homeGardening') {
     return { pathname: '/garden', params: { openGardenLens: 'horticulture', openEntryId: id } };
+  }
+  if (category === 'makingItPay') {
+    return { pathname: '/interests', params: { openInterestsLens: 'makingItPay', openEntryId: id } };
   }
   if (category === 'recipes') {
     return { pathname: '/food', params: { openFoodLens: 'systemRecipes', openEntryId: id } };

@@ -1044,6 +1044,49 @@ export function groupHomeGardeningEntries(entries: AnyDigestEntry[]): {
   return { topics, tyingTogether };
 }
 
+// Making It Pay (2026-10-30): five topics in reading order, keyed on the id
+// prefix each entry in lib/digest/makingItPay.ts carries.
+export type MakingItPayTopic =
+  | 'The Picture, With Data'
+  | 'Could It Pay?'
+  | 'The Overhead of Any Business'
+  | 'Health, Neurodivergence and Self-Employment'
+  | 'If You Decide to Try';
+
+export const MAKING_IT_PAY_TOPIC_ORDER: MakingItPayTopic[] = [
+  'The Picture, With Data',
+  'Could It Pay?',
+  'The Overhead of Any Business',
+  'Health, Neurodivergence and Self-Employment',
+  'If You Decide to Try',
+];
+
+export function classifyMakingItPayTopic(entry: AnyDigestEntry): MakingItPayTopic {
+  const id = entry.id.toLowerCase();
+  if (id.startsWith('pay-could-')) return 'Could It Pay?';
+  if (id.startsWith('pay-overhead-')) return 'The Overhead of Any Business';
+  if (id.startsWith('pay-health-')) return 'Health, Neurodivergence and Self-Employment';
+  if (id.startsWith('pay-trying-')) return 'If You Decide to Try';
+  return 'The Picture, With Data';
+}
+
+export function groupMakingItPayEntries(entries: AnyDigestEntry[]): {
+  topics: { label: string; entries: AnyDigestEntry[] }[];
+  tyingTogether: AnyDigestEntry | null;
+} {
+  const buckets = new Map<MakingItPayTopic, AnyDigestEntry[]>();
+  for (const entry of entries) {
+    const topic = classifyMakingItPayTopic(entry);
+    if (!buckets.has(topic)) buckets.set(topic, []);
+    buckets.get(topic)!.push(entry);
+  }
+  const topics = MAKING_IT_PAY_TOPIC_ORDER.map((topic) => ({
+    label: topic as string,
+    entries: buckets.get(topic) ?? [],
+  })).filter((group) => group.entries.length > 0);
+  return { topics, tyingTogether: null };
+}
+
 // Deliberately no "tying together" pull here -- RECIPES_ENTRIES has no such
 // closing synthesis entry (44 individual recipes, nothing to summarize
 // across), but the function still returns the same real
@@ -1086,6 +1129,7 @@ export function groupRecipesEntries(entries: AnyDigestEntry[]): {
 export function classifyTopicForCategory(entry: AnyDigestEntry, category: DigestCategoryKey): string {
   if (category === 'earthMatters') return classifyEarthMattersTopic(entry);
   if (category === 'homeGardening') return classifyHomeGardeningTopic(entry);
+  if (category === 'makingItPay') return classifyMakingItPayTopic(entry);
   if (category === 'recipes') return classifyRecipesTopic(entry);
   return classifyConditionTopic(entry);
 }
@@ -1110,6 +1154,7 @@ export function groupEntriesForLens(
 } {
   if (category === 'earthMatters') return groupEarthMattersEntries(entries);
   if (category === 'homeGardening') return groupHomeGardeningEntries(entries);
+  if (category === 'makingItPay') return groupMakingItPayEntries(entries);
   if (category === 'recipes') return groupRecipesEntries(entries);
   const conditionCode = DIGEST_KEY_TO_CONDITION_CODE[category];
   return groupConditionEntries(entries, conditionCode, conditionCode ? declaredStages?.[conditionCode] : undefined, dietPreferences);

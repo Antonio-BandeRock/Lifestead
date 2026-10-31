@@ -23,6 +23,7 @@ import { GRAVES_ENTRIES } from './graves';
 import { GUT_MICROBIOME_ENTRIES } from './gutMicrobiome';
 import { HEALING_STAGES_ENTRIES } from './healingStages';
 import { HOME_GARDENING_ENTRIES } from './homeGardening';
+import { MAKING_IT_PAY_ENTRIES } from './makingItPay';
 import { HORMONES_ENTRIES } from './hormones';
 import { HISTORY_ENTRIES } from './history';
 import { IBD_ENTRIES } from './ibd';
@@ -140,6 +141,7 @@ export const ALL_DIGEST_ENTRIES: AnyDigestEntry[] = [
   ...SLEEP_HEALTH_ENTRIES,
   ...MENTAL_HEALTH_ENTRIES,
   ...HOME_GARDENING_ENTRIES,
+  ...MAKING_IT_PAY_ENTRIES,
   ...BODY_SYSTEMS_ENTRIES,
   ...BODY_FAT_BIOLOGY_ENTRIES,
   ...RECIPES_ENTRIES,
@@ -400,6 +402,14 @@ export const DIGEST_CATEGORY_META: {
     label: 'Horticulture',
     icon: 'leaf-outline',
     description: "Growing even a modest amount of food yourself is a documented way to cut a grocery bill and eat fresher produce, what to grow, organized by climate zone so you can find guidance for where you actually live, plus container growing, beginner crops, and season extension.",
+  },
+  // 2026-10-30, the reading lens on Interests (stage 5d). See
+  // makingItPay.ts's header comment.
+  {
+    key: 'makingItPay',
+    label: 'Making It Pay',
+    icon: 'trending-up-outline',
+    description: 'What the figures show about selling from an interest: how long small businesses last, how income swings, what an hour comes to, the tax and social insurance a self-employed person carries in several countries, earning alongside disability benefits, and where to ask. Never advice to start, carry on or stop.',
   },
   // 2026-08-14, direct request: "a new category of Recipes for different
   // kinds of meals will be available." See recipes.ts's own header comment

@@ -1,6 +1,6 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useLocalSearchParams } from 'expo-router';
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import type { HelpSection } from '../../components/HelpButton';
 import { useRegisterScreenHelp } from '../../components/CurrentPageHelp';
@@ -20,6 +20,7 @@ import { InterestPeopleSection } from '../../components/InterestPeopleSection';
 import { InterestMoneySection } from '../../components/InterestMoneySection';
 import { CouldThisPaySection } from '../../components/CouldThisPaySection';
 import { DaysUntilSection } from '../../components/DaysUntilSection';
+import { DigestCategoryLens, DIGEST_READING_HELP } from '../../components/DigestCategoryLens';
 import { countInterestMoney } from '../../lib/interestMoneyDb';
 import { countRunningInterestCountdowns } from '../../lib/countdownDb';
 import { colors } from '../../constants/colors';
@@ -43,9 +44,11 @@ import { useOnVaultChange } from '../../lib/vaultReads';
 // read, watched or followed for an interest with where it was left off, and
 // People & Places keeps who and where it happens with (1.0.77.14). Money
 // keeps what went out and came in, and Days Until the counters that belong
-// to an interest (1.0.77.15). Making It Pay and
-// Learn come as further lenses. Nothing on this tab
-// scores, ranks, values a collection or pushes an interest toward earning.
+// to an interest (1.0.77.15), with the Could This Pay? worksheet under
+// Money (1.0.77.16). Making It Pay is reading, drawn by the same reading
+// lens as Horticulture, with figures and never advice (1.0.77.17). Learn
+// comes as a further lens. Nothing on this tab scores, ranks, values a
+// collection or pushes an interest toward earning.
 
 const TAB_COLOR = colors.tabInterests;
 const band = makeTabBandStyles(TAB_COLOR, { calm: true });
@@ -60,7 +63,8 @@ type InterestsLens =
   | 'people'
   | 'money'
   | 'daysUntil'
-  | 'projects';
+  | 'projects'
+  | 'makingItPay';
 
 const LENS_KEYS: InterestsLens[] = [
   'myInterests',
@@ -73,6 +77,7 @@ const LENS_KEYS: InterestsLens[] = [
   'money',
   'daysUntil',
   'projects',
+  'makingItPay',
 ];
 
 const LENS_FULL_NAMES: Record<InterestsLens, string> = {
@@ -86,6 +91,7 @@ const LENS_FULL_NAMES: Record<InterestsLens, string> = {
   money: 'Money',
   daysUntil: 'Days Until',
   projects: 'Projects',
+  makingItPay: 'Making It Pay',
 };
 
 const THING_LENSES: { lens: InterestsLens; kind: ThingKind }[] = [
@@ -224,6 +230,18 @@ const PROJECTS_HELP: HelpSection[] = [
   },
 ];
 
+const MAKING_IT_PAY_HELP: HelpSection[] = [
+  {
+    heading: 'What this is for',
+    body: 'Reading for anyone wondering about selling from an interest: how long small businesses tend to last, how often self-employed income changes month to month, what an hour comes to once every hour is counted, the tax and social insurance a self-employed person carries in the US, UK, Canada, Australia and Mexico, earning alongside disability benefits, and where to ask for free advice.',
+  },
+  {
+    heading: 'Figures, not advice',
+    body: 'Every figure names its source and its year, and says who it covers. Nothing here says whether to start, carry on or stop, and none of it is tax or legal advice: the tax office, an accountant or a benefits counsellor can say how it applies to you.',
+  },
+  DIGEST_READING_HELP,
+];
+
 const LENSES: LensOption<InterestsLens>[] = [
   { key: 'myInterests', label: 'My Interests', icon: 'color-palette-outline', help: MY_INTERESTS_HELP },
   { key: 'sessions', label: 'Sessions', icon: 'timer-outline', help: SESSIONS_HELP },
@@ -235,6 +253,7 @@ const LENSES: LensOption<InterestsLens>[] = [
   { key: 'money', label: 'Money', icon: 'cash-outline', help: MONEY_HELP },
   { key: 'daysUntil', label: 'Days Until', icon: 'hourglass-outline', help: DAYS_UNTIL_HELP },
   { key: 'projects', label: 'Projects', icon: 'layers-outline', help: PROJECTS_HELP },
+  { key: 'makingItPay', label: 'Making It Pay', icon: 'trending-up-outline', help: MAKING_IT_PAY_HELP },
 ];
 
 const HELP_SECTIONS: HelpSection[] = [
@@ -244,7 +263,7 @@ const HELP_SECTIONS: HelpSection[] = [
   },
   {
     heading: 'Where to start',
-    body: 'Open My Interests and add one. Sessions keeps the time you give it, Supplies & Equipment, Collections and Wish List keep what it has and what you would like for it, Library and People & Places keep what you learn it from and who you do it with, Money keeps what went out and came in, Days Until counts to what an interest is waiting on, and Projects is for anything with steps that belongs to an interest.',
+    body: 'Open My Interests and add one. Sessions keeps the time you give it, Supplies & Equipment, Collections and Wish List keep what it has and what you would like for it, Library and People & Places keep what you learn it from and who you do it with, Money keeps what went out and came in, Days Until counts to what an interest is waiting on, Projects is for anything with steps that belongs to an interest, and Making It Pay is reading with figures for anyone wondering about selling from one.',
   },
 ];
 
@@ -252,7 +271,11 @@ export default function InterestsScreen() {
   useRegisterScreenHelp('Interests', HELP_SECTIONS, '/interests');
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const openLensHub = useAutoOpenLensHubSignal();
-  const { openInterestsLens, libraryFromNote } = useLocalSearchParams<{ openInterestsLens?: string; libraryFromNote?: string }>();
+  const { openInterestsLens, libraryFromNote, openEntryId } = useLocalSearchParams<{ openInterestsLens?: string; libraryFromNote?: string; openEntryId?: string }>();
+  const scrollRef = useRef<ScrollView>(null);
+  const scrollTo = useCallback((y: number) => {
+    scrollRef.current?.scrollTo({ y, animated: true });
+  }, []);
   const [lens, setLens] = useState<InterestsLens>('myInterests');
   const [revealed, setRevealed] = useState(false);
   const [myOpen, setMyOpen] = useState(false);
@@ -316,7 +339,7 @@ export default function InterestsScreen() {
       <SwipeableTabScreen enabled={!revealed}>
         <CalmBands>
           <GatedTabContent pageTitle="Interests" variant="field" revealed={revealed} lens={lens}>
-            <ScrollView style={styles.scroll} contentContainerStyle={[band.column, { paddingBottom: scrollBottomPadding }]}>
+            <ScrollView ref={scrollRef} style={styles.scroll} contentContainerStyle={[band.column, { paddingBottom: scrollBottomPadding }]}>
               {lens === 'myInterests' ? (
                 <View style={band.box}>
                   <Text style={styles.cardTitle}>My Interests</Text>
@@ -372,6 +395,9 @@ export default function InterestsScreen() {
                   <Text style={styles.cardTitle}>Projects</Text>
                   <ProjectsSection scope="interests" tabColor={TAB_COLOR} />
                 </View>
+              ) : null}
+              {lens === 'makingItPay' ? (
+                <DigestCategoryLens categoryKey="makingItPay" tabColor={TAB_COLOR} openEntryId={openEntryId} scrollToY={scrollTo} />
               ) : null}
             </ScrollView>
           </GatedTabContent>

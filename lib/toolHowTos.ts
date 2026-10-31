@@ -3010,6 +3010,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'The reminder for its day goes with it.',
     },
   ],
+  '/interests#makingItPay': readingHowTos('Making It Pay', 'Each entry names the source and year of every figure in it, and says who the figures cover.'),
   '/interests#projects': [
     {
       key: 'start',

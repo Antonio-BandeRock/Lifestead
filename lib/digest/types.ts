@@ -243,6 +243,10 @@ export const DIGEST_CATEGORY_KEYS = [
   // personalized feature, since Profile carries no location/zone field to
   // build one against.
   'homeGardening',
+  // 2026-10-30, Interests stage 5d: Making It Pay, the reading lens on
+  // Interests. Self-employment figures with their sources and years, and
+  // never advice to start, carry on or stop. See makingItPay.ts.
+  'makingItPay',
   // 2026-08-14 -- a real, new "Recipes" category, direct request: "These
   // meals should all be available as pre-made choices already available to
   // be used in the app, and are automatically available to them from the
