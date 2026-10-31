@@ -347,6 +347,44 @@ check('a card shows its photo above the question', read0('components/LearnCardVi
 check('a deleted card takes its photo with it', read0('lib/learnMyDecksDb.ts').includes('removePhotosOf(LEARN_CARD_OWNER_KIND'));
 check('a cancelled new card forgets its photo', read0('components/LearnMyDecksEditor.tsx').includes('forgetPhotos([cardForm.newId])'));
 
+// Sharing a deck.
+{
+  const S = load('lib/learnShare.ts');
+  const M = load('lib/learnMyDecks.ts');
+  const idT = (text, values) => (values ? text.replace(/\{(\w+)\}/g, (_, key) => String(values[key])) : text);
+  const row = (id, draft, position) => ({ id, deckId: 'my-deck-1', kind: draft.kind, front: draft.front, back: draft.back, thinking: draft.thinking, parts: JSON.stringify(M.draftParts(draft)), position });
+  const flip = { ...M.emptyDraft('flip'), front: 'Why test twice?', back: 'Chance', thinking: true };
+  const choice = { ...M.emptyDraft('choice'), front: 'Which is a seed?', back: 'A bean', options: [{ text: 'A bean', why: 'It grows' }, { text: 'A stone', why: 'It does not' }], answer: 0 };
+  const rows = [row('my-card-a', flip, 0), row('my-card-b', choice, 1)];
+  const deck = { id: 'my-deck-1', title: 'Seeds', about: 'What grows' };
+  const payload = S.buildDeckPayload(deck, rows, new Map([['my-card-b', 'QUJD']]));
+  check('a shared deck carries its words and every card', payload.kind === 'deck' && payload.title === 'Seeds' && payload.cards.length === 2);
+  check('a photo rides on its own card', payload.cards[1].photoBase64 === 'QUJD' && !payload.cards[0].photoBase64);
+  check('no answer, schedule or position travels', !JSON.stringify(payload).includes('position') && !JSON.stringify(payload).includes('my-card-a'));
+  check('the shape check takes a deck', S.isDeckPayloadShape(payload));
+  check('the shape check turns away a deck with no cards', !S.isDeckPayloadShape({ ...payload, cards: [] }));
+  check('the shape check turns away a deck with no name', !S.isDeckPayloadShape({ ...payload, title: '  ' }));
+  const wire = JSON.parse(JSON.stringify(payload));
+  const read = S.readSharedDeck(wire);
+  check('every good card is read back', read.cards.length === 2 && read.skipped === 0);
+  check('a read card is the card that was sent', read.cards[1].options[1].text === 'A stone' && read.cards[0].thinking === true);
+  const bad = { ...wire, cards: [...wire.cards, { kind: 'teleport', front: 'x' }, { kind: 'flip', front: '', back: 'y' }, { kind: 'choice', front: 'q', back: 'a', options: [{ text: 'a', why: '' }], answer: 5 }, 'nonsense'] };
+  const readBad = S.readSharedDeck(bad);
+  check('a card of an unknown kind, an empty side, an answer past its options and a stray value are counted, never kept', readBad.cards.length === 2 && readBad.skipped === 4);
+  check('a photo that is not base64 is dropped', S.readSharedCard({ ...wire.cards[0], photoBase64: '<script>' }).photoBase64 === undefined);
+  const lines = S.describeSharedDeck(readBad, idT);
+  check('the receiving lines say how many cards, photos and cards left out', lines[0] === '2 cards.' && lines[1] === '1 of them has a photo.' && lines[2] === '4 cards in the file could not be read and are left out.');
+  check('photos past the limit are counted for the sender', S.photosLeftBehind(S.SHARE_DECK_PHOTO_LIMIT + 3) === 3 && S.photosLeftBehind(2) === 0);
+  const many = new Map(Array.from({ length: S.SHARE_DECK_PHOTO_LIMIT + 5 }, (_, i) => [`my-card-${i}`, 'QUJD']));
+  const manyRows = Array.from({ length: S.SHARE_DECK_PHOTO_LIMIT + 5 }, (_, i) => row(`my-card-${i}`, flip, i));
+  check('no more than the photo limit travel', S.buildDeckPayload(deck, manyRows, many).cards.filter((c) => c.photoBase64).length === S.SHARE_DECK_PHOTO_LIMIT);
+}
+check('a deck goes through the signed envelope', read0('lib/sharing.ts').includes("parsed.payload.kind === 'deck'") && read0('lib/sharing.ts').includes('isDeckPayloadShape'));
+check('recipe paths never meet a deck', read0('lib/sharing.ts').includes('return envelope && !isDeckEnvelope(envelope) ? envelope : null;'));
+check('the import screen hands a deck to the deck preview', read0('app/import-shared.tsx').includes('<SharedDeckPreview'));
+check('a shared deck is kept as a deck of the person', read0('components/SharedDeckPreview.tsx').includes('addSharedDeck(read)'));
+check('the open deck offers Share the Deck', read0('components/LearnMyDecksEditor.tsx').includes('Share the Deck'));
+
 // Wiring.
 const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
 check('the table', read('lib/db.ts').includes('CREATE TABLE IF NOT EXISTS learn_reviews'));
@@ -361,7 +399,7 @@ const FORBIDDEN = [
   'streak', 'points', 'score', 'level', 'badge', 'well done', 'great job', 'missed', 'overdue', 'behind',
   'fail', 'wrong', 'must', 'you should', 'real ', 'genuine', 'honestly', '—', '–', ' -- ', 'percent', '%',
 ];
-const FILES = ['lib/learnSchedule.ts', 'lib/learnDecks.ts', 'lib/learnDb.ts', 'components/LearnSection.tsx', 'lib/learnKinds.ts', 'components/LearnCardView.tsx', 'lib/learnRecordDecks.ts', 'lib/learnRecordDecksDb.ts', 'lib/learnMyDecks.ts', 'lib/learnMyDecksDb.ts', 'components/LearnMyDecksEditor.tsx', 'lib/learnImport.ts', 'components/LearnCardPhoto.tsx'];
+const FILES = ['lib/learnSchedule.ts', 'lib/learnDecks.ts', 'lib/learnDb.ts', 'components/LearnSection.tsx', 'lib/learnKinds.ts', 'components/LearnCardView.tsx', 'lib/learnRecordDecks.ts', 'lib/learnRecordDecksDb.ts', 'lib/learnMyDecks.ts', 'lib/learnMyDecksDb.ts', 'components/LearnMyDecksEditor.tsx', 'lib/learnImport.ts', 'components/LearnCardPhoto.tsx', 'lib/learnShare.ts', 'components/SharedDeckPreview.tsx'];
 const re = /'((?:[^'\\\n]|\\.)*)'|"((?:[^"\\\n]|\\.)*)"|`((?:[^`\\]|\\.)*)`/g;
 for (const rel of FILES) {
   const text = read(rel)

@@ -16,6 +16,7 @@ import {
   type RemovalPlan,
 } from './learnMyDecks';
 import type { LearnDeck } from './learnDecks';
+import { buildDeckPayload, SHARE_DECK_PHOTO_LIMIT, type ReadShare, type ShareDeckPayload } from './learnShare';
 
 function newId(what: 'deck' | 'card'): string {
   return `${MY_DECK_PREFIX}${what}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
@@ -146,6 +147,72 @@ export async function saveImportedCards(deckId: string, drafts: CardDraft[]): Pr
     }
   });
   return kept;
+}
+
+/**
+ * A deck gathered for sending: its words, its cards in order, and the photos
+ * on as many cards as travel (lib/learnShare.ts). A photo whose file has not
+ * reached this device yet, or that cannot be made small enough, goes without.
+ * Also says how many cards had a photo, so the sender can be told what stays.
+ */
+export async function gatherDeckToShare(deckId: string): Promise<{ payload: ShareDeckPayload; photoCount: number } | null> {
+  const deck = (await listMyDeckRows()).find((row) => row.id === deckId);
+  if (!deck) return null;
+  const cards = await listMyCardRows(deckId);
+  const [{ ensureMediaHere, listMediaFor, mediaFile }, { prepareSharePhoto }] = await Promise.all([import('./mediaDb'), import('./mealPhotos')]);
+  const photos = new Map<string, string>();
+  let photoCount = 0;
+  for (const card of cards) {
+    const item = (await listMediaFor(LEARN_CARD_OWNER_KIND, card.id).catch(() => []))[0];
+    if (!item) continue;
+    photoCount += 1;
+    if (photos.size >= SHARE_DECK_PHOTO_LIMIT) continue;
+    try {
+      if (!(await ensureMediaHere(item))) continue;
+      const base64 = await prepareSharePhoto((await mediaFile(item.fileName)).uri);
+      if (base64) photos.set(card.id, base64);
+    } catch {
+      // The card goes without its photo.
+    }
+  }
+  return { payload: buildDeckPayload(deck, cards, photos), photoCount };
+}
+
+/**
+ * Keeps a deck that arrived from somebody else as a deck of this person's, so
+ * it can be studied, changed and shared on like any other. Returns the new
+ * deck's id and how many photos could not be kept.
+ */
+export async function addSharedDeck(read: ReadShare): Promise<{ deckId: string; photosMissed: number }> {
+  const db = await getDatabase();
+  let deckId = '';
+  const photos: { cardId: string; base64: string }[] = [];
+  await db.withTransactionAsync(async () => {
+    deckId = await addMyDeck(read.title, read.about);
+    for (const card of read.cards) {
+      const { photoBase64, ...draft } = card;
+      const cardId = await saveMyCard(deckId, draft);
+      if (photoBase64) photos.push({ cardId, base64: photoBase64 });
+    }
+  });
+  let photosMissed = 0;
+  if (photos.length > 0) {
+    const [{ keepPhoto }, { Directory, File, Paths }] = await Promise.all([import('./mediaDb'), import('expo-file-system')]);
+    for (const photo of photos) {
+      try {
+        const dir = new Directory(Paths.cache, 'learn-shares');
+        dir.create({ intermediates: true, idempotent: true });
+        const file = new File(dir, `${photo.cardId}.jpg`);
+        file.write(photo.base64, { encoding: 'base64' });
+        // The size is not known here, and a shared photo is small on purpose, so the smallest-photo check is not asked.
+        const kept = await keepPhoto(file.uri, 0, 0, { kind: LEARN_CARD_OWNER_KIND, id: photo.cardId }, { deleteSource: true });
+        if (kept.status !== 'added') photosMissed += 1;
+      } catch {
+        photosMissed += 1;
+      }
+    }
+  }
+  return { deckId, photosMissed };
 }
 
 export async function removeMyCard(cardId: string): Promise<RemovalPlan> {

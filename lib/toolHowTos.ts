@@ -137,6 +137,7 @@ export type ToolMark =
   | 'learn.cardPhoto'
   | 'learn.import'
   | 'learn.importKeep'
+  | 'learn.share'
   | 'capture.keepInLibrary'
   | 'work.overview'
   | 'work.todos'
@@ -3124,6 +3125,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Add These Cards.', mark: 'learn.importKeep' },
       ],
       forYou: 'The first column is the front and the second the back. A table makes question and answer cards and gaps to fill; the other kinds are made in the card form.',
+    },
+    {
+      key: 'share',
+      title: 'Share a deck',
+      steps: [
+        { say: 'Under Your Decks, tap the deck you made.' },
+        { say: 'Tap Share the Deck, and pick where the file goes: a message, an email, or a folder.', mark: 'learn.share' },
+        { say: 'Whoever opens the file in Lifestead sees the deck and taps Add to Your Decks.' },
+      ],
+      forYou: 'The file is signed by this phone, so a changed file is turned away. Only the cards travel: what you know and when your cards come up stay with you. Photos go small, on up to 40 cards.',
     },
   ],
   '/interests#makingItPay': readingHowTos('Making It Pay', 'Each entry names the source and year of every figure in it, and says who the figures cover.'),

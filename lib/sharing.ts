@@ -79,6 +79,7 @@ import {
   type SideDetail,
 } from './db';
 import { base64ToBytes, bytesToBase64, getDeviceIdentity, signMessage, verifySignature } from './deviceIdentity';
+import { isDeckPayloadShape, type ShareDeckPayload } from './learnShare';
 import { deleteMealPhotoFile, getPhotoForTarget, prepareSharePhoto, saveSharePhotoFromBase64, setPhotoForTarget } from './mealPhotos';
 
 export type ShareComponentPayload = {
@@ -114,6 +115,17 @@ export type ShareEnvelope = {
   payload: ShareComponentPayload | ShareMealPayload;
   senderPublicKeyBase64: string;
 };
+
+// A deck from Interests > Learn (2026-10-31) travels in the same signed
+// envelope. It is a type of its own rather than a third member of
+// ShareEnvelope's payload, so every recipe path (staging, Shared Recipes,
+// the Food screen) keeps reading recipes only and never meets a deck.
+export type DeckEnvelope = Omit<ShareEnvelope, 'payload'> & { payload: ShareDeckPayload };
+export type AnyShareEnvelope = ShareEnvelope | DeckEnvelope;
+
+export function isDeckEnvelope(envelope: AnyShareEnvelope): envelope is DeckEnvelope {
+  return envelope.payload.kind === 'deck';
+}
 
 // Real, honest limitation carried straight over from the already-shipped
 // Favorites feature: BuilderFavoritePayload/BuilderFavoriteIngredient
@@ -293,9 +305,9 @@ type SignedEnvelopeWire = {
 // (the new file path) need the identical real "build the full envelope,
 // sign it, wrap it" work; only what happens to the resulting wire object
 // afterward (base64-into-a-URL vs. plain-JSON-into-a-file) differs.
-async function buildSignedWire(payload: ShareComponentPayload | ShareMealPayload, fromName: string): Promise<SignedEnvelopeWire> {
+async function buildSignedWire(payload: AnyShareEnvelope['payload'], fromName: string): Promise<SignedEnvelopeWire> {
   const identity = await getDeviceIdentity();
-  const envelope: ShareEnvelope = {
+  const envelope = {
     v: 2,
     fromName: fromName.trim() || 'A friend',
     payload,
@@ -350,7 +362,7 @@ export async function writeRawIsFile(content: unknown): Promise<string | null> {
   }
 }
 
-export async function writeIsFile(payload: ShareComponentPayload | ShareMealPayload, fromName: string): Promise<string | null> {
+export async function writeIsFile(payload: AnyShareEnvelope['payload'], fromName: string): Promise<string | null> {
   try {
     const wire = await buildSignedWire(payload, fromName);
     return await writeRawIsFile(wire);
@@ -501,11 +513,17 @@ export async function writeIsFileForMeal(mealFavoriteId: string, fromName: strin
 // to show a real "Verified" badge -- never to decide whether to accept the
 // share at all.
 export function decodeShareEnvelope(raw: string): ShareEnvelope | null {
+  const envelope = decodeAnyShareEnvelope(raw);
+  return envelope && !isDeckEnvelope(envelope) ? envelope : null;
+}
+
+// Every kind a .is file can carry, recipes and decks, checked the same way.
+export function decodeAnyShareEnvelope(raw: string): AnyShareEnvelope | null {
   try {
     const wire = JSON.parse(decodeBase64Utf8(raw)) as Partial<SignedEnvelopeWire>;
     if (typeof wire.unsignedJson !== 'string' || typeof wire.signature !== 'string') return null;
 
-    const parsed = JSON.parse(wire.unsignedJson) as Partial<ShareEnvelope>;
+    const parsed = JSON.parse(wire.unsignedJson) as Partial<AnyShareEnvelope>;
     if (
       parsed.v !== 2 ||
       typeof parsed.fromName !== 'string' ||
@@ -521,6 +539,8 @@ export function decodeShareEnvelope(raw: string): ShareEnvelope | null {
     } else if (parsed.payload.kind === 'meal') {
       const p = parsed.payload;
       if (!p.name || !Array.isArray(p.components) || p.components.length === 0) return null;
+    } else if (parsed.payload.kind === 'deck') {
+      if (!isDeckPayloadShape(parsed.payload)) return null;
     } else {
       return null;
     }
@@ -535,7 +555,7 @@ export function decodeShareEnvelope(raw: string): ShareEnvelope | null {
     const signatureBytes = base64ToBytes(wire.signature);
     if (!verifySignature(message, signatureBytes, parsed.senderPublicKeyBase64)) return null;
 
-    return parsed as ShareEnvelope;
+    return parsed as AnyShareEnvelope;
   } catch {
     return null;
   }

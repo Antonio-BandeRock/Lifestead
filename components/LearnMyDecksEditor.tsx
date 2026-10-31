@@ -33,6 +33,7 @@ import {
 import {
   addMyDeck,
   forgetPhotos,
+  gatherDeckToShare,
   listMyCardRows,
   newMyCardId,
   planRemovingMyCard,
@@ -44,6 +45,10 @@ import {
   updateMyDeck,
 } from '../lib/learnMyDecksDb';
 import { describeImport, importTable, type ImportResult } from '../lib/learnImport';
+import { photosLeftBehind } from '../lib/learnShare';
+import { shareFileIfAvailable } from '../lib/nativeSharing';
+import { writeIsFile } from '../lib/sharing';
+import { getUserProfile } from '../lib/db';
 import { isFunctionWalled } from '../lib/paidFeatures';
 import { explainNotYet } from '../lib/notYet';
 import { t } from '../lib/i18n';
@@ -78,6 +83,7 @@ export function LearnMyDecksEditor({ tabColor, decks, onChanged }: Props) {
   const [cardForm, setCardForm] = useState<CardForm | null>(null);
   const [importForm, setImportForm] = useState<ImportForm | null>(null);
   const [saidBack, setSaidBack] = useState<string | null>(null);
+  const [sharing, setSharing] = useState(false);
   const [confirm, setConfirm] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
 
   function waitsForPlan(): boolean {
@@ -218,6 +224,37 @@ export function LearnMyDecksEditor({ tabColor, decks, onChanged }: Props) {
         { label: 'Keep it', onPress: () => setConfirm(null) },
       ],
     });
+  }
+
+  async function shareDeck(deck: LearnDeck) {
+    if (deck.cards.length === 0) {
+      explainNotYet('This deck has no cards yet. Add a card first, then share it.');
+      return;
+    }
+    if (sharing) return;
+    setSharing(true);
+    setSaidBack(null);
+    try {
+      const gathered = await gatherDeckToShare(deck.id);
+      if (!gathered) return;
+      const fromName = (await getUserProfile()).firstName?.trim() || 'A friend';
+      const uri = await writeIsFile(gathered.payload, fromName);
+      if (!uri || !(await shareFileIfAvailable(uri, { mimeType: '*/*', dialogTitle: 'Share this deck' }))) {
+        explainNotYet('The deck could not be handed to another app from this device. Try again, or share it from the phone.');
+        return;
+      }
+      const left = photosLeftBehind(gathered.photoCount);
+      setSaidBack(
+        left === 0
+          ? 'The deck is shared as a file. Whoever opens it in Lifestead can add it to their decks.'
+          : t('The deck is shared as a file. Photos travel on the first {limit} cards that have one, so {n} went without theirs.', { limit: gathered.photoCount - left, n: left }),
+      );
+    } catch (error) {
+      console.error('[LearnMyDecksEditor] Could not share a deck', error);
+      explainNotYet('This deck could not be shared just now. Please try again.');
+    } finally {
+      setSharing(false);
+    }
   }
 
   async function askRemoveDeck(deck: LearnDeck) {
@@ -529,6 +566,9 @@ export function LearnMyDecksEditor({ tabColor, decks, onChanged }: Props) {
           </View>
         )}
         <View style={styles.links}>
+          <TouchableOpacity ref={walkMark.ref('learn.share')} style={walkMark('learn.share')} onPress={() => void shareDeck(deck)}>
+            <Text style={styles.linkText}>{sharing ? 'Getting it ready…' : 'Share the Deck'}</Text>
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => startDeck(deck)}>
             <Text style={styles.linkText}>Rename</Text>
           </TouchableOpacity>

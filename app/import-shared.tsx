@@ -53,7 +53,8 @@ import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from '../components/HomeSectionBand';
 import { getConnectionByPublicKey } from '../lib/connections';
-import { decodeShareEnvelope, stageSharedItem, type ShareEnvelope } from '../lib/sharing';
+import { decodeAnyShareEnvelope, isDeckEnvelope, stageSharedItem, type ShareEnvelope } from '../lib/sharing';
+import { SharedDeckPreview } from '../components/SharedDeckPreview';
 import { ThumbRow } from '../components/ThumbRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 import { foodDisplayName } from '../lib/ingredientShortName';
@@ -78,25 +79,28 @@ export default function ImportSharedScreen() {
   const { data } = useLocalSearchParams<{ data?: string }>();
   const scrollPadding = useFloatingButtonScrollPadding();
 
-  const envelope = useMemo(() => (typeof data === 'string' ? decodeShareEnvelope(data) : null), [data]);
+  // A deck from Interests > Learn arrives in the same envelope and gets a
+  // screen of its own below; everything else here reads recipes only.
+  const anyEnvelope = useMemo(() => (typeof data === 'string' ? decodeAnyShareEnvelope(data) : null), [data]);
+  const envelope = anyEnvelope && !isDeckEnvelope(anyEnvelope) ? anyEnvelope : null;
   const [status, setStatus] = useState<'preview' | 'saving' | 'saved' | 'error'>('preview');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [verifiedConnectionName, setVerifiedConnectionName] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!envelope) {
+    if (!anyEnvelope) {
       setVerifiedConnectionName(null);
       return;
     }
     let cancelled = false;
     (async () => {
-      const connection = await getConnectionByPublicKey(envelope.senderPublicKeyBase64);
+      const connection = await getConnectionByPublicKey(anyEnvelope.senderPublicKeyBase64);
       if (!cancelled) setVerifiedConnectionName(connection?.name ?? null);
     })();
     return () => {
       cancelled = true;
     };
-  }, [envelope]);
+  }, [anyEnvelope]);
 
   async function handleAdd() {
     if (!envelope) return;
@@ -109,6 +113,10 @@ export default function ImportSharedScreen() {
       setErrorMessage("Something went wrong saving this. Please try again.");
       setStatus('error');
     }
+  }
+
+  if (anyEnvelope && isDeckEnvelope(anyEnvelope)) {
+    return <SharedDeckPreview envelope={anyEnvelope} verifiedName={verifiedConnectionName} />;
   }
 
   if (!envelope) {
