@@ -115,6 +115,10 @@ export type ToolMark =
   | 'people.save'
   | 'people.row'
   | 'people.change'
+  | 'money.add'
+  | 'money.save'
+  | 'money.row'
+  | 'money.change'
   | 'capture.keepInLibrary'
   | 'work.overview'
   | 'work.todos'
@@ -2940,6 +2944,55 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Change, or No Longer Part of It.', mark: 'people.change' },
       ],
       forYou: 'No Longer Part of It keeps what you wrote about them, at the bottom, where Part of It Again brings them back.',
+    },
+  ],
+  '/interests#money': [
+    {
+      key: 'add',
+      title: 'Keep an amount that went out or came in',
+      steps: [
+        { say: 'Tap Add an Amount.', mark: 'money.add', stay: true },
+        { say: 'Pick the interest, then Went Out or Came In. Write the amount, what it was for and the day, and who it was with if you like.' },
+        { say: 'Tap Keep It.', mark: 'money.save' },
+      ],
+      forYou: 'It shows under its interest and month, and the interest opens with its years in words. A price kept on a supply or a collected thing is already counted, so it needs no second entry.',
+    },
+    {
+      key: 'change',
+      title: 'Change an amount, or remove it',
+      steps: [
+        { say: 'Tap the amount to open it.', mark: 'money.row', stay: true },
+        { say: 'Tap Change, or Remove.', mark: 'money.change' },
+      ],
+      forYou: 'Remove asks first, then the amount goes from the month and the year.',
+    },
+  ],
+  '/interests#daysUntil': [
+    {
+      key: 'add',
+      title: 'Count down to something an interest is waiting on',
+      steps: [
+        { say: 'Tap Add a Days Until Counter.', mark: 'daysUntil.add', stay: true },
+        { say: 'Under Which interest, pick the interest. Write what it is counting to, such as the show opening, and how many days it takes.' },
+        { say: 'Tap Start Counting.', mark: 'daysUntil.save' },
+      ],
+      forYou: 'The phone reminds you on the day. It shows on Life > Days Until too, with the name of its interest.',
+    },
+    {
+      key: 'done',
+      title: 'Mark a counter done',
+      steps: [
+        { say: 'Tap Done beside it.', mark: 'daysUntil.done' },
+      ],
+      forYou: 'It stays in the list as the record of how long the thing took.',
+    },
+    {
+      key: 'remove',
+      title: 'Remove a counter',
+      steps: [
+        { say: 'Tap Remove beside it. It goes straight away, with no question first.', mark: 'daysUntil.remove' },
+      ],
+      forYou: 'The reminder for its day goes with it.',
     },
   ],
   '/interests#projects': [

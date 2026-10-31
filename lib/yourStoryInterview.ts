@@ -454,6 +454,8 @@ export const TOUR_LENS_NAMES: Record<string, Record<string, string>> = {
     wishList: 'Wish List',
     library: 'Library',
     people: 'People & Places',
+    money: 'Money',
+    daysUntil: 'Days Until',
     projects: 'Projects',
   },
   '/insights': {
@@ -612,6 +614,8 @@ export const TOUR_LENS_LINES: Record<string, Record<string, string>> = {
     wishList: 'What you would like for an interest, with where to get it, moved over by Got It once you have it.',
     library: 'What you read, watch, take or follow for an interest, with where you left off and the day you finished.',
     people: 'Who and where an interest happens with: friends, teachers, clubs, shops, shows and places to go.',
+    money: 'What has gone out on an interest and what has come in from it, each on its day, with the prices kept on its supplies counted in.',
+    daysUntil: 'Counters to what an interest is waiting on, such as a show opening or a course starting, with a reminder on the day.',
     projects: 'Projects with steps that belong to an interest, the same projects Life keeps, shown here on their own.',
   },
   '/insights': {
@@ -889,13 +893,16 @@ export const TOUR_TABS: TourTabDef[] = [
       'To keep the time you give each one, and a reminder on the days you practise.',
       'To know what you have for each one and where it is kept, what you collect, and what you would like next.',
       'To keep what you are reading or watching for each one with where you stopped, and who you do it with.',
+      'To keep what each one costs and what comes in from it, without typing a price twice.',
+      'To count down to what an interest is waiting on, with a reminder on the day.',
       'To hold the steps of a project that belongs to an interest, with the next one showing first.',
     ],
     groups: [
       { title: 'What you are into', lenses: ['myInterests'] },
-      { title: 'What you are making of it', lenses: ['sessions', 'projects'] },
+      { title: 'What you are making of it', lenses: ['sessions', 'projects', 'daysUntil'] },
       { title: 'What you keep for it', lenses: ['supplies', 'collections', 'wishList'] },
       { title: 'Who and what you learn it from', lenses: ['library', 'people'] },
+      { title: 'What it costs and brings in', lenses: ['money'] },
     ],
     steps: [
       {

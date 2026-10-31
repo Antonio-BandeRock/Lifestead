@@ -73,6 +73,9 @@ export type Countdown = {
   endsAt?: string | null;
   /** The moment it started, set beside endsAt. */
   startedAt?: string | null;
+  /** The interest a free-form counter belongs to (Interests > Days Until,
+   *  2026-10-30). Null on a counter tied to nothing. */
+  interestId?: string | null;
 };
 
 /** Either kind, in the shape a list holding both reads in. The where line
@@ -89,6 +92,8 @@ export type AnyCountdown = {
   /** Set on a free-form counter in hours and minutes. */
   endsAt?: string | null;
   startedAt?: string | null;
+  /** A free-form counter's interest, named on the row by the screen. */
+  interestId?: string | null;
 };
 
 export type CountdownState = 'ahead' | 'today' | 'over' | 'done';
@@ -226,6 +231,7 @@ export function freeAsAny(row: Countdown): AnyCountdown {
     doneAt: row.doneAt,
     endsAt: row.endsAt ?? null,
     startedAt: row.startedAt ?? null,
+    interestId: row.interestId ?? null,
   };
 }
 

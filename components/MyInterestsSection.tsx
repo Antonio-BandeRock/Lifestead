@@ -254,6 +254,22 @@ export function MyInterestsSection({ tabColor }: Props) {
       );
       return;
     }
+    if (references.money > 0) {
+      explainNotYet(
+        references.money === 1
+          ? 'An amount on Money is kept for this interest, and removing it would leave that pointing at nothing. Step back from it instead, which keeps everything.'
+          : `${references.money} amounts on Money are kept for this interest, and removing it would leave them pointing at nothing. Step back from it instead, which keeps everything.`,
+      );
+      return;
+    }
+    if (references.countdowns > 0) {
+      explainNotYet(
+        references.countdowns === 1
+          ? 'A Days Until counter belongs to this interest, and removing it would leave that pointing at nothing. Step back from it instead, which keeps everything.'
+          : `${references.countdowns} Days Until counters belong to this interest, and removing it would leave them pointing at nothing. Step back from it instead, which keeps everything.`,
+      );
+      return;
+    }
     setConfirm({
       title: `Remove ${interest.name}?`,
       message: 'It comes off the list with its stage dates. To keep the record, step back from it instead.',

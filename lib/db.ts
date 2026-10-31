@@ -10729,7 +10729,30 @@ async function runDatabaseInitialization() {
         updated_at TEXT NOT NULL DEFAULT (datetime('now'))
       );
       CREATE INDEX IF NOT EXISTS idx_interest_people_interest ON interest_people(interest_id);
+      -- Interests > Money (2026-10-30): what went out on an interest and
+      -- what came in from it, each on its day. direction is 'out' or 'in'.
+      -- A price on a supply or collected thing stays on interest_things and
+      -- is read from there, never copied here (lib/interestMoney.ts).
+      CREATE TABLE IF NOT EXISTS interest_money (
+        id TEXT PRIMARY KEY,
+        interest_id TEXT NOT NULL,
+        direction TEXT NOT NULL DEFAULT 'out',
+        amount REAL NOT NULL,
+        on_day TEXT NOT NULL,
+        what TEXT NOT NULL,
+        who TEXT,
+        note TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_interest_money_interest ON interest_money(interest_id);
     `);
+    // Interests > Days Until (2026-10-30): a free counter can belong to an
+    // interest. Null for every counter that belongs to nothing.
+    const countdownInterestColumns = await db.getAllAsync<{ name: string }>('PRAGMA table_info(countdowns)');
+    if (!countdownInterestColumns.some((column) => column.name === 'interest_id')) {
+      await db.execAsync('ALTER TABLE countdowns ADD COLUMN interest_id TEXT;');
+    }
     const interestColumns = await db.getAllAsync<{ name: string }>('PRAGMA table_info(interests)');
     for (const practiceColumn of ['practice_days', 'practice_time']) {
       if (!interestColumns.some((column) => column.name === practiceColumn)) {

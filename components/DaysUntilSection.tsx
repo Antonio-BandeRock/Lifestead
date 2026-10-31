@@ -53,6 +53,13 @@
 // counter reads its time left to the minute, redrawn every 30 seconds while
 // one is running, and Start again starts it over from now for the same
 // length. The phone says when it ends (lib/reminderNotifications.ts).
+//
+// A fourth scope since 2026-10-30 (Interests stage 5): 'interests' is the
+// free-form counters that belong to an interest, a show opening, a course
+// starting, a kiln firing done, on Interests > Days Until. The form asks
+// which interest first. They are free-form counters with an interest named
+// on them, so Life's Days Until and Home's card show them too, each row
+// naming its interest.
 
 import { useFocusEffect } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
@@ -91,6 +98,7 @@ import {
   listCountdowns,
   listEveryCountdown,
   listEveryRunningCountdown,
+  listInterestCountdowns,
   listRunningCountdowns,
   restartTimedCountdown,
   setCountdownDone,
@@ -107,9 +115,13 @@ import { useWalkMark } from './WalkMark';
 import { t, tl } from '../lib/i18n';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 import { foodDisplayName } from '../lib/ingredientShortName';
+import { groupInterests, interestChoices, type Interest } from '../lib/interests';
+import { listInterests } from '../lib/interestsDb';
+import { explainNotYet } from '../lib/notYet';
 
 const WHOLE_AREA = '__whole_area__';
 const NO_AREA = '__anything__';
+const NO_INTEREST = '__no_interest__';
 // How many running counters a Home card shows before pointing at the lens.
 const COMPACT_LIMIT = 5;
 // How often a running counter in hours and minutes is redrawn.
@@ -129,7 +141,7 @@ function todayDateString(): string {
 
 /** Which counters this instance holds. 'garden' is the original: one area
  *  when a plot is given, the whole garden when none is. */
-export type CountdownScope = 'garden' | 'free' | 'everything';
+export type CountdownScope = 'garden' | 'free' | 'everything' | 'interests';
 
 type Props = {
   /** One area's counters, on Plots & Plantings. Garden scope only. */
@@ -167,7 +179,7 @@ export function DaysUntilSection({
   // area still in use, and the areas themselves read here for the form.
   const wholeGarden = scope === 'garden' && !plot;
   // The two scopes where a counter need not belong to an area at all.
-  const offersFree = scope === 'free' || scope === 'everything';
+  const offersFree = scope === 'free' || scope === 'everything' || scope === 'interests';
   // Which scopes need the area list loaded for the form.
   const needsAreas = wholeGarden || scope === 'everything';
   const [plots, setPlots] = useState<GardenPlot[]>([]);
@@ -189,13 +201,23 @@ export function DaysUntilSection({
   // prop.
   const [pickedPlantings, setPickedPlantings] = useState<GardenPlanting[]>([]);
   const [error, setError] = useState<string | null>(null);
+  // Every interest, to name a counter's interest on its row and, on
+  // Interests, to pick one in the form.
+  const [interests, setInterests] = useState<Interest[]>([]);
+  const [interestId, setInterestId] = useState<string>(NO_INTEREST);
 
   const areaId = plot?.id;
   const load = useCallback(async () => {
     const today = todayDateString();
+    if (offersFree) setInterests(await listInterests());
     if (areaId) {
       const rows = await listGardenCountdowns(areaId);
       setItems(rows.map((row) => gardenAsAny(row, { namesArea: false })));
+      return;
+    }
+    if (scope === 'interests') {
+      const rows = await listInterestCountdowns();
+      setItems((compact ? rows.filter((row) => !row.doneAt) : rows).map(freeAsAny));
       return;
     }
     if (scope === 'free') {
@@ -218,7 +240,7 @@ export function DaysUntilSection({
     ]);
     setItems(rows.map((row) => gardenAsAny(row)));
     setPlots(areas);
-  }, [areaId, compact, scope]);
+  }, [areaId, compact, scope, offersFree]);
 
   // On focus rather than on mount, so Home's card and the lens both read
   // what happened on another screen the moment the person comes back.
@@ -272,7 +294,19 @@ export function DaysUntilSection({
 
   const offeredPlantings = needsAreas ? pickedPlantings : (plantings ?? []);
   // Free-form is what this counter is when nothing ties it to an area.
-  const startingFree = scope === 'free' || (scope === 'everything' && plotId === NO_AREA);
+  const startingFree = scope === 'free' || scope === 'interests' || (scope === 'everything' && plotId === NO_AREA);
+  const currentInterests = groupInterests(interests).current;
+  // The one interest is picked for the person; with several, they pick.
+  useEffect(() => {
+    if (scope !== 'interests') return;
+    if (interestId !== NO_INTEREST && currentInterests.some((interest) => interest.id === interestId)) return;
+    if (currentInterests.length === 1) setInterestId(currentInterests[0].id);
+  }, [scope, interestId, currentInterests]);
+  const counterInterest = scope === 'interests' && interestId !== NO_INTEREST ? interestId : null;
+  const interestNameOf = (id: string) => interests.find((interest) => interest.id === id)?.name ?? null;
+  // What a row says it belongs to: its interest, then the line about it.
+  const whereOf = (item: AnyCountdown) =>
+    [item.interestId && scope !== 'interests' ? interestNameOf(item.interestId) : null, item.where].filter(Boolean).join(' · ');
 
   function clearForm() {
     setName('');
@@ -288,6 +322,10 @@ export function DaysUntilSection({
   }
 
   async function handleSave() {
+    if (scope === 'interests' && !counterInterest) {
+      setError('Pick the interest this counter belongs to.');
+      return;
+    }
     if (startingFree && unit === 'timed') {
       const timedProblem = timedCountdownFormProblem({ name, hours, minutes });
       if (timedProblem) {
@@ -295,7 +333,7 @@ export function DaysUntilSection({
         return;
       }
       const total = (hours.trim() ? Number(hours) : 0) * 60 + (minutes.trim() ? Number(minutes) : 0);
-      await addTimedCountdown({ name, about, startedAt: new Date().toISOString(), minutes: total });
+      await addTimedCountdown({ name, about, startedAt: new Date().toISOString(), minutes: total, interestId: counterInterest });
       clearForm();
       await load();
       void syncReminderNotifications();
@@ -308,7 +346,7 @@ export function DaysUntilSection({
       return;
     }
     if (startingFree) {
-      await addCountdown({ name, about, startedOn, days: Number(days) });
+      await addCountdown({ name, about, startedOn, days: Number(days), interestId: counterInterest });
     } else {
       if (!plotId || plotId === NO_AREA) {
         setError('Pick the area the counter is for.');
@@ -366,10 +404,19 @@ export function DaysUntilSection({
   // both when Playful wording is on (lib/playfulCopy.ts).
   const noneLead = wording(compact ? 'daysUntilNoneCompactLead' : 'daysUntilNoneLead', playful);
   const withLead = (text: string) => (noneLead ? `${noneLead} ${text}` : text);
-  const seeAllWhere = scope === 'garden' ? 'Garden > Days Until' : 'Life > Days Until';
+  const seeAllWhere = scope === 'garden' ? 'Garden > Days Until' : scope === 'interests' ? 'Interests > Days Until' : 'Life > Days Until';
+
+  function startAdding() {
+    if (scope === 'interests' && currentInterests.length === 0) {
+      explainNotYet('A counter here belongs to an interest. Add one on My Interests first, then come back here.');
+      return;
+    }
+    setAdding(true);
+  }
 
   function openSeeAll() {
     if (scope === 'garden') router.push({ pathname: '/garden', params: { openGardenLens: 'daysUntil' } });
+    else if (scope === 'interests') router.push({ pathname: '/interests', params: { openInterestsLens: 'daysUntil' } });
     else router.push({ pathname: '/life', params: { openLifeLens: 'daysUntil' } });
   }
 
@@ -380,7 +427,9 @@ export function DaysUntilSection({
         <Text style={styles.captionText}>
           {noAreaYet
             ? 'A garden counter lives under an area. Add an area on Plots & Plantings first, then count the days to germination, transplanting out, the first harvest, or the cover coming off here.'
-            : offersFree
+            : scope === 'interests'
+              ? withLead('Count the days to something an interest is waiting on: a show opening, a course starting, a glaze firing, a season opening. The phone reminds you on the day, and a counter keeps counting past its day until you mark it done.')
+              : offersFree
               ? compact
                 ? withLead('Name anything and count the days to it: a passport in the post, a course starting, a cast coming off. The phone reminds you on the day.')
                 : withLead('Name anything and count the days to it: a passport in the post, a course starting, a cast coming off, a batch of cider. The phone reminds you on the day, and a counter keeps counting past its day until you mark it done.')
@@ -399,7 +448,7 @@ export function DaysUntilSection({
             <View style={styles.itemText}>
               <Text style={[styles.bodyText, item.doneAt ? styles.doneText : null]}>
                 {item.name}
-                {item.where ? ` · ${item.where}` : ''}
+                {whereOf(item) ? ` · ${whereOf(item)}` : ''}
               </Text>
               <Text style={styles.captionText}>
                 {timed ? describeTimedCountdown(item, now) : describeCountdown(item, today)}
@@ -431,6 +480,19 @@ export function DaysUntilSection({
 
       {readOnly || noAreaYet ? null : adding ? (
         <View style={[styles.nestedForm, { borderLeftColor: tabColor }]}>
+          {scope === 'interests' ? (
+            <View style={styles.fieldRow}>
+              <Text style={styles.fieldLabel}>Which interest</Text>
+              <PopoverSelect
+                options={[{ label: 'Pick an interest', value: NO_INTEREST }, ...interestChoices(interests, counterInterest)]}
+                selected={interestId}
+                onSelect={setInterestId}
+                tabColor={tabColor}
+                searchable
+                width={220}
+              />
+            </View>
+          ) : null}
           {needsAreas ? (
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>{scope === 'everything' ? 'What it is for' : 'Area'}</Text>
@@ -443,7 +505,13 @@ export function DaysUntilSection({
               style={[styles.textInput, styles.wideInput]}
               value={name}
               onChangeText={setName}
-              placeholder={startingFree ? 'Passport back, course starts, cast off' : 'Germination, transplant, first harvest'}
+              placeholder={
+                scope === 'interests'
+                  ? 'Show opens, class starts, firing done'
+                  : startingFree
+                    ? 'Passport back, course starts, cast off'
+                    : 'Germination, transplant, first harvest'
+              }
             />
           </View>
           {startingFree ? (
@@ -496,7 +564,7 @@ export function DaysUntilSection({
           </ThumbRow>
         </View>
       ) : (
-        <TouchableOpacity ref={walkMark.ref('daysUntil.add')} style={styles.primaryButton} onPress={() => setAdding(true)}>
+        <TouchableOpacity ref={walkMark.ref('daysUntil.add')} style={styles.primaryButton} onPress={startAdding}>
           <Text style={styles.primaryButtonText}>+ Add a Days Until Counter</Text>
         </TouchableOpacity>
       )}

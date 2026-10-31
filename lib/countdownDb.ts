@@ -20,7 +20,7 @@ import type { AnyCountdown, Countdown } from './countdown';
 import { calendarDaysBetween, mergeCountdowns } from './countdown';
 
 const COLUMNS =
-  'id, name, about, started_on AS startedOn, days, done_at AS doneAt, ends_at AS endsAt, started_at AS startedAt';
+  'id, name, about, started_on AS startedOn, days, done_at AS doneAt, ends_at AS endsAt, started_at AS startedAt, interest_id AS interestId';
 
 /** Every free-form counter, running and done. The order is settled in
  *  lib/countdown.ts (sortCountdowns), since it depends on today's date. */
@@ -35,19 +35,28 @@ export async function listRunningCountdowns(): Promise<Countdown[]> {
   return db.getAllAsync<Countdown>(`SELECT ${COLUMNS} FROM countdowns WHERE done_at IS NULL ORDER BY started_on ASC`);
 }
 
-export async function addCountdown(input: Pick<Countdown, 'name' | 'about' | 'startedOn' | 'days'> & { id?: string }): Promise<string> {
+/** The counters that belong to an interest, for Interests > Days Until. */
+export async function listInterestCountdowns(): Promise<Countdown[]> {
+  const db = await getDatabase();
+  return db.getAllAsync<Countdown>(`SELECT ${COLUMNS} FROM countdowns WHERE interest_id IS NOT NULL ORDER BY created_at ASC`);
+}
+
+export async function addCountdown(
+  input: Pick<Countdown, 'name' | 'about' | 'startedOn' | 'days'> & { id?: string; interestId?: string | null },
+): Promise<string> {
   const db = await getDatabase();
   const id = input.id ?? newCountdownId();
   const now = new Date().toISOString();
   const about = input.about && input.about.trim() ? input.about.trim() : null;
   await db.runAsync(
-    `INSERT INTO countdowns (id, name, about, started_on, days, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO countdowns (id, name, about, started_on, days, interest_id, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
     id,
     input.name.trim(),
     about,
     input.startedOn,
     input.days,
+    input.interestId ?? null,
     now,
     now,
   );
@@ -64,6 +73,7 @@ export async function addTimedCountdown(input: {
   about?: string | null;
   startedAt: string;
   minutes: number;
+  interestId?: string | null;
 }): Promise<string> {
   const db = await getDatabase();
   const id = input.id ?? newCountdownId();
@@ -74,8 +84,8 @@ export async function addTimedCountdown(input: {
   const days = calendarDaysBetween(startedOn, localDay(end));
   const about = input.about && input.about.trim() ? input.about.trim() : null;
   await db.runAsync(
-    `INSERT INTO countdowns (id, name, about, started_on, days, started_at, ends_at, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO countdowns (id, name, about, started_on, days, started_at, ends_at, interest_id, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     id,
     input.name.trim(),
     about,
@@ -83,6 +93,7 @@ export async function addTimedCountdown(input: {
     days,
     start.toISOString(),
     end.toISOString(),
+    input.interestId ?? null,
     now,
     now,
   );
@@ -152,4 +163,12 @@ export async function listEveryCountdown(today: string): Promise<AnyCountdown[]>
 export async function listEveryRunningCountdown(today: string): Promise<AnyCountdown[]> {
   const [free, garden] = await Promise.all([listRunningCountdowns(), listRunningGardenCountdowns()]);
   return mergeCountdowns(free, garden, today);
+}
+
+/** How many counters that belong to an interest are still running, for the
+ *  My Interests menu. */
+export async function countRunningInterestCountdowns(): Promise<number> {
+  const db = await getDatabase();
+  const row = await db.getFirstAsync<{ n: number }>('SELECT COUNT(*) AS n FROM countdowns WHERE interest_id IS NOT NULL AND done_at IS NULL');
+  return Number(row?.n ?? 0);
 }

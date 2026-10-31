@@ -17,6 +17,10 @@ import { InterestSessionsSection } from '../../components/InterestSessionsSectio
 import { InterestThingsSection } from '../../components/InterestThingsSection';
 import { InterestLibrarySection } from '../../components/InterestLibrarySection';
 import { InterestPeopleSection } from '../../components/InterestPeopleSection';
+import { InterestMoneySection } from '../../components/InterestMoneySection';
+import { DaysUntilSection } from '../../components/DaysUntilSection';
+import { countInterestMoney } from '../../lib/interestMoneyDb';
+import { countRunningInterestCountdowns } from '../../lib/countdownDb';
 import { colors } from '../../constants/colors';
 import { typography, textShadow } from '../../constants/typography';
 import { useFloatingButtonScrollPadding } from '../../constants/floatingButton';
@@ -36,16 +40,39 @@ import { useOnVaultChange } from '../../lib/vaultReads';
 // Equipment, Collections and Wish List keep the things an interest has or
 // wants, one table told apart by kind (1.0.77.13). Library keeps what is
 // read, watched or followed for an interest with where it was left off, and
-// People & Places keeps who and where it happens with (1.0.77.14). Money and
+// People & Places keeps who and where it happens with (1.0.77.14). Money
+// keeps what went out and came in, and Days Until the counters that belong
+// to an interest (1.0.77.15). Making It Pay and
 // Learn come as further lenses. Nothing on this tab
 // scores, ranks, values a collection or pushes an interest toward earning.
 
 const TAB_COLOR = colors.tabInterests;
 const band = makeTabBandStyles(TAB_COLOR, { calm: true });
 
-type InterestsLens = 'myInterests' | 'sessions' | 'supplies' | 'collections' | 'wishList' | 'library' | 'people' | 'projects';
+type InterestsLens =
+  | 'myInterests'
+  | 'sessions'
+  | 'supplies'
+  | 'collections'
+  | 'wishList'
+  | 'library'
+  | 'people'
+  | 'money'
+  | 'daysUntil'
+  | 'projects';
 
-const LENS_KEYS: InterestsLens[] = ['myInterests', 'sessions', 'supplies', 'collections', 'wishList', 'library', 'people', 'projects'];
+const LENS_KEYS: InterestsLens[] = [
+  'myInterests',
+  'sessions',
+  'supplies',
+  'collections',
+  'wishList',
+  'library',
+  'people',
+  'money',
+  'daysUntil',
+  'projects',
+];
 
 const LENS_FULL_NAMES: Record<InterestsLens, string> = {
   myInterests: 'My Interests',
@@ -55,6 +82,8 @@ const LENS_FULL_NAMES: Record<InterestsLens, string> = {
   wishList: 'Wish List',
   library: 'Library',
   people: 'People & Places',
+  money: 'Money',
+  daysUntil: 'Days Until',
   projects: 'Projects',
 };
 
@@ -153,6 +182,32 @@ const PEOPLE_HELP: HelpSection[] = [
   },
 ];
 
+const MONEY_HELP: HelpSection[] = [
+  {
+    heading: 'What this is for',
+    body: 'What has gone out on an interest and what has come in from it, each on its day: a class, club dues, a stall fee, a sale, a commission. Who it went to or came from, and a note, are optional.',
+  },
+  {
+    heading: 'Nothing typed twice',
+    body: 'A price kept on something in Supplies & Equipment or Collections is counted here in the year it was got, so it needs no second entry. A price with no day is left out of the years, and the screen says how many.',
+  },
+  {
+    heading: 'Only a record',
+    body: 'Each interest opens with its years in words. Nothing here calls an interest a profit or a loss, or says it ought to pay.',
+  },
+];
+
+const DAYS_UNTIL_HELP: HelpSection[] = [
+  {
+    heading: 'What this is for',
+    body: 'Counting the days to something an interest is waiting on: a show opening, a course starting, a glaze firing, a season opening. Pick the interest, name it, and say how many days, or count in hours and minutes.',
+  },
+  {
+    heading: 'On the day',
+    body: 'The phone reminds you on the day. A counter keeps counting past its day until you mark it done, and done keeps it as the record of how long it took. These show on Life > Days Until too, each naming its interest.',
+  },
+];
+
 const PROJECTS_HELP: HelpSection[] = [
   {
     heading: 'What this is for',
@@ -172,6 +227,8 @@ const LENSES: LensOption<InterestsLens>[] = [
   { key: 'wishList', label: 'Wish List', icon: 'gift-outline', help: WISH_LIST_HELP },
   { key: 'library', label: 'Library', icon: 'library-outline', help: LIBRARY_HELP },
   { key: 'people', label: 'People & Places', icon: 'people-outline', help: PEOPLE_HELP },
+  { key: 'money', label: 'Money', icon: 'cash-outline', help: MONEY_HELP },
+  { key: 'daysUntil', label: 'Days Until', icon: 'hourglass-outline', help: DAYS_UNTIL_HELP },
   { key: 'projects', label: 'Projects', icon: 'layers-outline', help: PROJECTS_HELP },
 ];
 
@@ -182,7 +239,7 @@ const HELP_SECTIONS: HelpSection[] = [
   },
   {
     heading: 'Where to start',
-    body: 'Open My Interests and add one. Sessions keeps the time you give it, Supplies & Equipment, Collections and Wish List keep what it has and what you would like for it, Library and People & Places keep what you learn it from and who you do it with, and Projects is for anything with steps that belongs to an interest.',
+    body: 'Open My Interests and add one. Sessions keeps the time you give it, Supplies & Equipment, Collections and Wish List keep what it has and what you would like for it, Library and People & Places keep what you learn it from and who you do it with, Money keeps what went out and came in, Days Until counts to what an interest is waiting on, and Projects is for anything with steps that belongs to an interest.',
   },
 ];
 
@@ -212,13 +269,19 @@ export default function InterestsScreen() {
   const [projectCount, setProjectCount] = useState<number | undefined>(undefined);
   const [thingCounts, setThingCounts] = useState<Record<ThingKind, number> | undefined>(undefined);
   const [shelfCounts, setShelfCounts] = useState<{ library: number; people: number } | undefined>(undefined);
+  const [moneyCount, setMoneyCount] = useState<number | undefined>(undefined);
+  const [counterCount, setCounterCount] = useState<number | undefined>(undefined);
   const loadCounts = useCallback(async () => {
-    const [interests, projects, things, shelves] = await Promise.all([
+    const [interests, projects, things, shelves, money, counters] = await Promise.all([
       listInterests(),
       listProjects('interests'),
       countInterestThings(),
       countLibraryAndPeople(),
+      countInterestMoney(),
+      countRunningInterestCountdowns(),
     ]);
+    setMoneyCount(money);
+    setCounterCount(counters);
     setInterestCount(interests.filter((interest) => !interest.retiredAt).length);
     setProjectCount(projects.filter((project) => project.status === 'active' || project.status === 'paused').length);
     setThingCounts(things);
@@ -238,6 +301,8 @@ export default function InterestsScreen() {
     })),
     { id: 'library', label: 'Library', count: shelfCounts?.library, onPress: () => { setLens('library'); setRevealed(true); } },
     { id: 'people', label: 'People & Places', count: shelfCounts?.people, onPress: () => { setLens('people'); setRevealed(true); } },
+    { id: 'money', label: 'Money', count: moneyCount, onPress: () => { setLens('money'); setRevealed(true); } },
+    { id: 'daysUntil', label: 'Days Until', count: counterCount, onPress: () => { setLens('daysUntil'); setRevealed(true); } },
     { id: 'projects', label: 'Projects', count: projectCount, onPress: () => { setLens('projects'); setRevealed(true); } },
   ];
 
@@ -277,6 +342,18 @@ export default function InterestsScreen() {
                 <View style={band.box}>
                   <Text style={styles.cardTitle}>People & Places</Text>
                   <InterestPeopleSection tabColor={TAB_COLOR} />
+                </View>
+              ) : null}
+              {lens === 'money' ? (
+                <View style={band.box}>
+                  <Text style={styles.cardTitle}>Money</Text>
+                  <InterestMoneySection tabColor={TAB_COLOR} />
+                </View>
+              ) : null}
+              {lens === 'daysUntil' ? (
+                <View style={band.box}>
+                  <Text style={styles.cardTitle}>Days Until</Text>
+                  <DaysUntilSection scope="interests" tabColor={TAB_COLOR} showHeading={false} />
                 </View>
               ) : null}
               {lens === 'projects' ? (
