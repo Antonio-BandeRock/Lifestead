@@ -41,6 +41,14 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.79.4',
+    date: '2026-11-02',
+    changes: [
+      'The keyboard has a Paste key, beside Next and Done, so anything copied (a link from an email, an address, a code) can go into any box.',
+      'Approve a Tester asks how long the approval lasts: 90, 180, 270 or 365 days.',
+    ],
+  },
+  {
     version: '1.0.79.3',
     date: '2026-11-02',
     changes: [

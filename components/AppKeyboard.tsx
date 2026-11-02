@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import * as Clipboard from 'expo-clipboard';
 import { usePathname } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { AppState, Keyboard, Pressable, StyleSheet, Text, View } from 'react-native';
@@ -23,6 +24,7 @@ import { useFooterBandHeight } from '../constants/floatingButton';
 import { TAB_REVEAL_DURATION_MS } from '../constants/tabReveal';
 import { textShadow, typography } from '../constants/typography';
 import { useNavigationHand } from '../lib/navigationHand';
+import { explainNotYet } from '../lib/notYet';
 
 // 2026-08-21, a real, reported gap: there was no way to type an apostrophe
 // anywhere on this keyboard at all -- not in this letters layout, not in
@@ -230,6 +232,19 @@ export function AppKeyboard({ followsRoute = true, bottom }: { followsRoute?: bo
     onSelectionChange({ start: start - 1, end: start - 1 });
   }
 
+  // Paste (2026-11-02, 1.0.79.4). Every field hides the phone's own paste
+  // menu (AppTextInput), so without this key nothing copied could reach a
+  // field at all: a tester's link, an address, a code from an email.
+  async function paste() {
+    if (!activeField) return;
+    const copied = await Clipboard.getStringAsync().catch(() => '');
+    if (!copied) {
+      explainNotYet('Nothing is copied yet. Copy something first, then press Paste.');
+      return;
+    }
+    insertText(copied);
+  }
+
   function pressLetter(letter: string) {
     insertText(shiftActive ? letter.toUpperCase() : letter);
     if (shiftActive) setShiftActive(false);
@@ -354,6 +369,9 @@ export function AppKeyboard({ followsRoute = true, bottom }: { followsRoute?: bo
     <View style={[styles.searchRow, { flexDirection: navigationHand === 'left' ? 'row' : 'row-reverse' }]}>
       <Pressable accessibilityLabel="Next box" onPress={next} style={styles.accessoryButton}>
         <Ionicons name="arrow-forward-outline" size={16} color={colors.textPrimary} />
+      </Pressable>
+      <Pressable accessibilityLabel="Paste" onPress={() => void paste()} style={styles.accessoryButton}>
+        <Ionicons name="clipboard-outline" size={16} color={colors.textPrimary} />
       </Pressable>
       <Pressable accessibilityLabel="Done typing" onPress={done} style={[styles.accessoryButton, styles.accessoryButtonDone]}>
         <Ionicons name="checkmark" size={18} color={colors.textOnPrimary} />

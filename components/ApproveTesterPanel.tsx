@@ -9,7 +9,7 @@
 import * as Clipboard from 'expo-clipboard';
 import { useEffect, useRef, useState } from 'react';
 import { Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { t } from '../lib/i18n';
@@ -18,6 +18,10 @@ import { isDesktopApp } from '../lib/desktop/bridge';
 import { approveRequest, getMyApprovalKey, sendMyApprovalKey, type Approved, type MyApprovalKey } from '../lib/testerApprove';
 import { AppTextInput } from './AppTextInput';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
+
+// How long an approval can last. The tester version reads any length, so
+// this list is the developer's choice alone.
+const LENGTHS = [90, 180, 270, 365] as const;
 
 type Props = {
   /** The request that came in on a link, if one did. */
@@ -32,6 +36,7 @@ export function ApproveTesterPanel({ initial = '' }: Props) {
   const [busy, setBusy] = useState(false);
   const [keySent, setKeySent] = useState<string | null>(null);
   const approvedFor = useRef('');
+  const [days, setDays] = useState<number>(LENGTHS[0]);
 
   useEffect(() => {
     void getMyApprovalKey().then(setMine).catch(() => setMine(null));
@@ -45,7 +50,7 @@ export function ApproveTesterPanel({ initial = '' }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initial]);
 
-  async function approve(text: string = input) {
+  async function approve(text: string = input, length: number = days) {
     if (!text.trim()) {
       explainNotYet('Paste the link from the tester\'s email first.');
       return;
@@ -53,7 +58,7 @@ export function ApproveTesterPanel({ initial = '' }: Props) {
     setBusy(true);
     setCopied(false);
     try {
-      const done = await approveRequest(text);
+      const done = await approveRequest(text, length);
       setResult(done);
       if (done.ok) {
         // A copy without a press can be refused (a window not in front);
@@ -76,6 +81,13 @@ export function ApproveTesterPanel({ initial = '' }: Props) {
     }
     setInput(copied);
     void approve(copied);
+  }
+
+  // A different length after approving signs the same request again, so the
+  // copied reply always carries the length on screen.
+  function chooseLength(length: number) {
+    setDays(length);
+    if (result && result.ok) void approve(input, length);
   }
 
   async function sendKey() {
@@ -109,14 +121,28 @@ export function ApproveTesterPanel({ initial = '' }: Props) {
           autoCorrect={false}
           multiline
         />
+        <Text style={styles.label}>How long it lasts</Text>
+        <View style={styles.pills}>
+          {LENGTHS.map((length) => (
+            <TouchableOpacity
+              key={length}
+              style={[styles.pill, days === length && styles.pillActive]}
+              onPress={() => chooseLength(length)}
+              accessibilityRole="button"
+              accessibilityState={{ selected: days === length }}
+            >
+              <Text style={days === length ? styles.pillActiveText : styles.pillText}>{t('{count} days', { count: length })}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
         <TouchableOpacity style={[styles.primary, busy && styles.busy]} onPress={() => void pasteRequest()} disabled={busy} accessibilityRole="button">
           <Text style={styles.primaryText}>Paste and Approve</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.secondary, busy && styles.busy]} onPress={() => void approve()} disabled={busy} accessibilityRole="button">
-          <Text style={styles.secondaryText}>Approve for 90 Days</Text>
+          <Text style={styles.secondaryText}>{t('Approve for {count} Days', { count: days })}</Text>
         </TouchableOpacity>
         <Text style={styles.caption}>
-          Quickest: in the tester&apos;s email, tap the link, then Open in Lifestead. It is approved at once and the reply is copied.
+          Quickest: in the tester&apos;s email, tap the link, then Open in Lifestead. It is approved at once for the length chosen here, and the reply is copied. Choosing another length afterwards approves it again.
         </Text>
         {mine && !mine.trusted ? (
           <>
@@ -193,4 +219,9 @@ const styles = StyleSheet.create({
   secondary: { ...BUTTON_SECONDARY },
   secondaryText: { ...BUTTON_SECONDARY_TEXT },
   busy: { opacity: 0.6 },
+  pills: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  pill: { ...PILL },
+  pillActive: { ...PILL_ON },
+  pillText: { ...PILL_TEXT },
+  pillActiveText: { ...PILL_ON_TEXT },
 });
