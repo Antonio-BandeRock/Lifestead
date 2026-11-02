@@ -47,6 +47,18 @@ export function ApproveTesterPanel({ initial = '' }: Props) {
     }
   }
 
+  // The box hides Android's paste menu (AppTextInput), so the copied request
+  // is read from the clipboard here.
+  async function pasteRequest() {
+    const copied = await Clipboard.getStringAsync().catch(() => '');
+    if (!copied.trim()) {
+      explainNotYet('Nothing is copied yet. Copy the request link from the tester\'s email first.');
+      return;
+    }
+    setInput(copied);
+    setResult(null);
+  }
+
   async function send(url: string, name: string) {
     await Share.share({ message: `${name}, here is your link for Lifestead Test. Open it on the device you asked from:\n${url}` });
   }
@@ -73,6 +85,9 @@ export function ApproveTesterPanel({ initial = '' }: Props) {
           autoCorrect={false}
           multiline
         />
+        <TouchableOpacity style={[styles.secondary, busy && styles.busy]} onPress={() => void pasteRequest()} disabled={busy} accessibilityRole="button">
+          <Text style={styles.secondaryText}>Paste the Link</Text>
+        </TouchableOpacity>
         <TouchableOpacity style={[styles.primary, busy && styles.busy]} onPress={() => void approve()} disabled={busy} accessibilityRole="button">
           <Text style={styles.primaryText}>Approve for 90 Days</Text>
         </TouchableOpacity>

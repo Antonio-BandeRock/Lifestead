@@ -16,6 +16,7 @@
 // flag and sheet sit between the two. Setup waits until this lets the
 // person in (components/FirstSetup.tsx).
 import { Ionicons } from '@expo/vector-icons';
+import * as Clipboard from 'expo-clipboard';
 import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -92,14 +93,28 @@ function TesterGateInner() {
     }
   }
 
-  async function applyPasted() {
-    if (!pasted.trim()) {
+  // The app's own keyboard has no paste key and every box hides Android's
+  // Cut/Copy/Paste menu (AppTextInput's contextMenuHidden), so the copied
+  // link is read here and used in one press (2026-11-02: a tester had no way
+  // to paste it).
+  async function pasteAndUse() {
+    const copied = await Clipboard.getStringAsync().catch(() => '');
+    if (!copied.trim()) {
+      explainNotYet('Nothing is copied yet. In the approval email, press and hold the link, choose Copy link address, then come back and press Paste the Link.');
+      return;
+    }
+    setPasted(copied);
+    await applyPasted(copied);
+  }
+
+  async function applyPasted(text: string = pasted) {
+    if (!text.trim()) {
       explainNotYet('Paste the link from the approval email first.');
       return;
     }
     setBusy(true);
     try {
-      const result = await activateFromText(pasted);
+      const result = await activateFromText(text);
       // Once it works the next screen is the agreement, so a line saying it
       // worked would only be left behind for later.
       setMessage(result === 'ok' ? null : activateResultText(result));
@@ -240,9 +255,15 @@ function TesterGateInner() {
         autoCorrect={false}
         multiline
       />
-      <TouchableOpacity style={[styles.primary, busy && styles.busy]} onPress={() => void applyPasted()} disabled={busy} accessibilityRole="button">
-        <Text style={styles.primaryText}>Use This Link</Text>
+      <TouchableOpacity style={[styles.primary, busy && styles.busy]} onPress={() => void pasteAndUse()} disabled={busy} accessibilityRole="button">
+        <Text style={styles.primaryText}>Paste the Link</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={[styles.secondary, busy && styles.busy]} onPress={() => void applyPasted()} disabled={busy} accessibilityRole="button">
+        <Text style={styles.secondaryText}>Use This Link</Text>
+      </TouchableOpacity>
+      <Text style={styles.caption}>
+        Easiest of all: tap the link in the email on this device, then Open in Lifestead Test. Otherwise copy the link and press Paste the Link.
+      </Text>
     </View>
   );
 
