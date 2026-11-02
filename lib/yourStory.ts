@@ -212,7 +212,8 @@ const lifeLens = (lens: string): StoryDestination => ({ kind: 'route', pathname:
 const scheduleLens = (lens: string): StoryDestination => ({ kind: 'route', pathname: '/schedule', params: { openScheduleLens: lens } });
 const trendsLens = (lens: string): StoryDestination => ({ kind: 'route', pathname: '/trends', params: { openTrendsLens: lens } });
 const gardenLens = (lens: string): StoryDestination => ({ kind: 'route', pathname: '/garden', params: { openGardenLens: lens } });
-const profile: StoryDestination = { kind: 'route', pathname: '/profile' };
+// Profile opened at one card, never at the top of the page.
+const profile = (section: string): StoryDestination => ({ kind: 'route', pathname: '/profile', params: { section } });
 
 export const ITEMS: ItemDef[] = [
   // Front Page: What Matters to You.
@@ -234,7 +235,7 @@ export const ITEMS: ItemDef[] = [
     todo: 'Add your birth date and sex in Profile.',
     done: 'Your birth date and sex are on record.',
     why: 'Recommended amounts of most nutrients differ by age and sex. Without them the app uses general adult figures, which may not fit you.',
-    destination: profile,
+    destination: profile('personal-info'),
     setAside: {
       label: 'Leave these out',
       line: 'Set aside. The app uses general adult figures until these are added.',
@@ -248,7 +249,7 @@ export const ITEMS: ItemDef[] = [
     todo: 'If you have any of the 19 conditions this app follows, choose them in Profile.',
     done: 'Your conditions are chosen.',
     why: 'A condition changes what the app says about each food and which reading comes first. Choosing none hides nothing.',
-    destination: profile,
+    destination: profile('conditions'),
   },
   {
     key: 'allergies',
@@ -258,7 +259,7 @@ export const ITEMS: ItemDef[] = [
     todo: 'List any food allergies in Profile.',
     done: 'Your food allergies are listed.',
     why: 'Food lookups and meal plans mark what contains a listed allergen. The marking depends on how foods are labelled, so it helps you check and is never a promise a food is safe.',
-    destination: profile,
+    destination: profile('food-restrictions'),
   },
   {
     key: 'eatingStyle',
@@ -268,7 +269,7 @@ export const ITEMS: ItemDef[] = [
     todo: 'Choose an eating style in Profile, if you follow one.',
     done: 'Your eating style is chosen.',
     why: 'Meal plans and recipe suggestions keep to the eating style you choose, such as vegetarian or paleo.',
-    destination: profile,
+    destination: profile('diet-preferences'),
   },
   {
     key: 'neuro',
@@ -278,7 +279,7 @@ export const ITEMS: ItemDef[] = [
     todo: 'If autism, ADHD or dyslexia is part of your life, add it in Profile.',
     done: 'The settings made for how you work are listed in Profile.',
     why: 'It switches on settings like a quieter Home and reminders that speak before a thing rather than at it. It never changes what the app says about food.',
-    destination: profile,
+    destination: profile('conditions'),
   },
 
   // The Archive.
@@ -290,7 +291,7 @@ export const ITEMS: ItemDef[] = [
     todo: 'Save a backup, or turn on automatic saving to a shared folder, in Profile under Backup & Restore.',
     done: 'Your records are backed up.',
     why: 'Everything you record lives on this device. If it is lost or reset, a backup is the only way back, and nobody else holds a copy.',
-    destination: profile,
+    destination: profile('backup'),
   },
   {
     key: 'secondDevice',
@@ -300,7 +301,7 @@ export const ITEMS: ItemDef[] = [
     todo: 'Open Lifestead on a second device, such as a computer, and turn on automatic saving there with the same password.',
     done: 'Your records have arrived from your other device.',
     why: 'Two devices saving to the same shared folder keep each other up to date, and each one is a copy of the other.',
-    destination: profile,
+    destination: profile('backup'),
   },
 
   // On the Record.

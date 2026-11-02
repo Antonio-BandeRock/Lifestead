@@ -158,7 +158,6 @@ const gardenLens = (lens: string) => route('/garden', { openGardenLens: lens });
 const insightsLens = (lens: string) => route('/insights', { openInsightsLens: lens });
 const foodLens = (lens: string) => route('/food', { openFoodLens: lens });
 const signalsLens = (lens: string) => route('/log', { openSignalsLens: lens });
-const profile = route('/profile');
 
 type More = { when: GuideWhen; leadsTo?: string; takes?: string; taps?: string[] };
 
@@ -323,7 +322,7 @@ export const GUIDES: GuideDef[] = [
           'Tap Conditions & Check-In to open it.',
           'Find the stage question under your condition, and choose the answer that fits you now. It can be changed any time.',
         ],
-        destination: profile,
+        destination: route('/profile', { section: 'conditions' }),
       },
       fromItem(
         'meds',
@@ -479,7 +478,7 @@ export const GUIDES: GuideDef[] = [
         forYou: 'Trends, under Weight, draws it across the weeks with your usual range beside it, which says what your readings have been and never what they ought to be.',
         takes: 'Under a minute',
         taps: ['Tap Personal Info to open it.', 'Fill in Weight.'],
-        destination: profile,
+        destination: route('/profile', { section: 'personal-info' }),
       },
       {
         key: 'therapy',
@@ -689,7 +688,7 @@ export const GUIDES: GuideDef[] = [
         forYou: 'The day\'s gauges then measure against your figure instead of the general one.',
         takes: 'Under a minute',
         taps: ['Tap Nutrient Targets to open it.', 'Fill in the amount you were given.'],
-        destination: profile,
+        destination: route('/profile', { section: 'nutrient-targets' }),
       },
       fromItem(
         'trends',
@@ -1190,7 +1189,7 @@ export const GUIDES: GuideDef[] = [
         forYou: 'Reminders for meals, water, doses and dated things, only the ones you want, and none during the hours you keep quiet.',
         takes: 'A couple of minutes',
         taps: ['Tap Reminders to open it.', 'Turn on the ones you want.', 'Tap Quiet hours, then set From and Until.'],
-        destination: profile,
+        destination: route('/profile', { section: 'reminders' }),
       },
       fromItem(
         'neuro',

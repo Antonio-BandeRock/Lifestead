@@ -874,17 +874,14 @@ export default function ProfileScreen() {
   // runs each time Profile comes into view with a section named.
   useFocusEffect(
     useCallback(() => {
-      const target =
-        openSection === 'reminders'
-          ? { group: 'Your Health', section: 'reminders' as const }
-          : openSection === 'applock'
-            ? { group: 'Device & Account', section: 'applock' as const }
-            : openSection === 'backup'
-              ? { group: 'Device & Account', section: 'backup' as const }
-              : openSection === 'updates'
-                ? { group: 'Device & Account', section: 'app-updates' as const }
-                : null;
-      if (!target) return;
+      // Any card can be named (2026-11-02, 1.0.79.5, direct instruction:
+      // "EVERYTHING that points to the profile ... must ALWAYS go to that
+      // something"), so a link names the card it means rather than leaving
+      // the person at the top of Profile to look for it.
+      const key = openSection === 'updates' ? 'app-updates' : openSection;
+      const section = (ALL_CARD_SECTION_KEYS as readonly string[]).includes(key ?? '') ? (key as CardSectionKey) : null;
+      if (!section) return;
+      const target = { group: PROFILE_CARD_GROUP[section], section };
       setCollapsedGroups(new Set(Object.keys(PROFILE_GROUP_ICONS).filter((g) => g !== target.group)));
       setCollapsedSections(new Set(ALL_CARD_SECTION_KEYS.filter((k) => k !== target.section)));
       const timer = setTimeout(() => bringHeaderToTop(`card:${target.section}`), 400);

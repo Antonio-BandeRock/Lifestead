@@ -3109,7 +3109,7 @@ export default function HomeScreen() {
           <Text style={[styles.trendCaption, { color }]}>{SINCE_LAST_MEAL_CAPTION}</Text>
         </TouchableOpacity>
         {since.windowLine ? null : (
-          <TouchableOpacity onPress={() => router.push('/profile')} activeOpacity={0.75}>
+          <TouchableOpacity onPress={() => router.push({ pathname: '/profile', params: { section: 'meal-schedule' } })} activeOpacity={0.75}>
             <Text style={[styles.trendCaption, { color }]}>{`${NO_WINDOW_LINE} →`}</Text>
           </TouchableOpacity>
         )}

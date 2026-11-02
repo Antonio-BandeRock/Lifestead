@@ -123,7 +123,8 @@ export const CAPTURE_DESTINATIONS: CaptureDestination[] = [
     label: 'Health',
     hint: 'Something to mention at an appointment, or to keep an eye on.',
     tabPath: '/log',
-    open: { pathname: '/log' },
+    // Opened at General Note, where a health note is written (1.0.79.5).
+    open: { pathname: '/log', params: { openSignalsLens: 'generalNote' } },
   },
   {
     key: 'place',

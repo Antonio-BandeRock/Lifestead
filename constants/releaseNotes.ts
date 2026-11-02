@@ -41,6 +41,15 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.79.5',
+    date: '2026-11-02',
+    changes: [
+      'Setup keeps the parts of life question open while you choose, so you can pick as many as you like. It used to move on after the first one.',
+      'Every link to Profile opens the card it names: birth date and sex open Personal Info, allergies open Food Restrictions, and so on, rather than the top of Profile.',
+      'A health note from Capture opens Signals at General Note.',
+    ],
+  },
+  {
     version: '1.0.79.4',
     date: '2026-11-02',
     changes: [

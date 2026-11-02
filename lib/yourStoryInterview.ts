@@ -363,7 +363,6 @@ const foodLens = lens('/food', 'openFoodLens');
 const gardenLens = lens('/garden', 'openGardenLens');
 const interestsLens = lens('/interests', 'openInterestsLens');
 const insightsLens = lens('/insights', 'openInsightsLens');
-const profile = route('/profile');
 
 // What each lens is called on screen, checked by the test against the tab
 // screens.
@@ -728,7 +727,7 @@ export const TOUR_TABS: TourTabDef[] = [
       {
         doThis: 'Choose which cards Home shows, in Profile under Home.',
         why: 'Home works best showing only what you use, so hide the rest.',
-        destination: profile,
+        destination: route('/profile', { section: 'home-screen' }),
       },
     ],
     open: route('/'),

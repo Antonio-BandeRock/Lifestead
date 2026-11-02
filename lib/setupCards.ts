@@ -32,7 +32,6 @@ const insightsLens = (lens: string) => route('/insights', { openInsightsLens: le
 const foodLens = (lens: string) => route('/food', { openFoodLens: lens });
 const signalsLens = (lens: string) => route('/log', { openSignalsLens: lens });
 const report = (kind: string) => route('/reports', { openReportsLens: kind });
-const profile = route('/profile');
 
 // WHERE IT COMES BACK. Each is one place on Insights, Trends or Reports
 // that reads what the cards put in. `waitsOn` names the Your Story item
@@ -395,7 +394,7 @@ export const SETUP_TABS: SetupTabDef[] = [
             getsBack: ['foodLookup', 'safeFoods', 'healingStage', 'reportDoctor'],
             worksWith: ['allergies', 'meds'],
             item: 'conditions',
-            destination: profile,
+            destination: route('/profile', { section: 'conditions' }),
           },
           {
             key: 'emergency',
@@ -676,7 +675,7 @@ export const SETUP_TABS: SetupTabDef[] = [
             getsBack: ['foodLookup', 'safeFoods', 'reportCare'],
             worksWith: ['eatingStyle'],
             item: 'allergies',
-            destination: profile,
+            destination: route('/profile', { section: 'food-restrictions' }),
           },
           {
             key: 'eatingStyle',
@@ -689,7 +688,7 @@ export const SETUP_TABS: SetupTabDef[] = [
             getsBack: ['foodLookup', 'safeFoods'],
             worksWith: ['allergies'],
             item: 'eatingStyle',
-            destination: profile,
+            destination: route('/profile', { section: 'diet-preferences' }),
           },
           {
             key: 'safeFoods',
@@ -1040,7 +1039,7 @@ export const SETUP_TABS: SetupTabDef[] = [
             takes: 'Seconds',
             getsBack: ['weight', 'reportTrainer'],
             records: ['weight'],
-            destination: profile,
+            destination: route('/profile', { section: 'personal-info' }),
           },
           {
             key: 'bloodPressure',

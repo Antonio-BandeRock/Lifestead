@@ -645,7 +645,7 @@ export function ConditionsSection({
                 : 'The conditions you track, from Profile. These drive your food scores, meal plans and advisories.'}
             </Text>
             {ownMetas.length === 0 ? (
-              <TouchableOpacity onPress={() => router.push('/profile')}>
+              <TouchableOpacity onPress={() => router.push({ pathname: '/profile', params: { section: 'conditions' } })}>
                 <Text style={styles.actionText}>Open Profile</Text>
               </TouchableOpacity>
             ) : null}

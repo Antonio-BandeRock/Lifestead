@@ -128,7 +128,8 @@ function validBirthDate(year: number, month: number, day: number): boolean {
   return same && date.getTime() <= Date.now();
 }
 
-const profileRoute: Exclude<StoryDestination, { kind: 'beats' }> = { kind: 'route', pathname: '/profile' };
+// Profile opened at Conditions & Check-In, where autism, ADHD and dyslexia are chosen.
+const profileRoute: Exclude<StoryDestination, { kind: 'beats' }> = { kind: 'route', pathname: '/profile', params: { section: 'conditions' } };
 // Profile opened at Backup & Restore.
 const backupRoute: Exclude<StoryDestination, { kind: 'beats' }> = {
   kind: 'route',
@@ -322,7 +323,14 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
         return (
           <BeatPicker
             showQuestion={false}
-            onChanged={() => onChanged()}
+            // Held open while choosing (1.0.79.5): the first part of life
+            // chosen answers the question, and without the hold the next
+            // question took its place after one tap, so nobody could
+            // choose a second.
+            onChanged={() => {
+              setHolding(key);
+              onChanged();
+            }}
             onDone={() => {
               setHolding(null);
               onAnswered?.(key);
