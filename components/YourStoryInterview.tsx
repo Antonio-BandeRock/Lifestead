@@ -92,6 +92,7 @@ import {
 } from '../lib/yourStoryInterview';
 import { clearYourStoryAnswer, setYourStoryAnswer } from '../lib/yourStoryInterviewDb';
 import { BeatPicker } from './BeatPicker';
+import { useBringToTop } from './BringToTop';
 import { usePlayfulWording } from '../hooks/usePlayfulWording';
 import { wording } from '../lib/playfulCopy';
 import { setVisualPreferences } from '../lib/visualPreferences';
@@ -171,6 +172,20 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
   useEffect(() => {
     onQuestionShown?.(openKey);
   }, [openKey, onQuestionShown]);
+
+  // 2026-11-02, 1.0.79.6, direct request: after Done on conditions the
+  // Autism question opened further down and had to be hunted for. Whenever
+  // the question changes, whatever answered it (Done, None, Later, a single
+  // choice, Change), the new one is scrolled to the top of the screen. Not
+  // on the first draw, and nothing happens on a screen with no host.
+  const bringToTop = useBringToTop();
+  const questionRef = useRef<View>(null);
+  const shownKeyRef = useRef(openKey);
+  useEffect(() => {
+    if (shownKeyRef.current === openKey) return;
+    shownKeyRef.current = openKey;
+    if (openKey) bringToTop?.(questionRef.current);
+  }, [openKey, bringToTop]);
 
   useEffect(() => {
     if (open?.def.kind !== 'aboutYou') return;
@@ -624,7 +639,9 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
     return open ? (
       <View style={styles.cardWrap}>
         {renderJustAnswered(styles.bandInCard)}
-        {renderOpen(open, styles.bandInCard)}
+        <View ref={questionRef} collapsable={false}>
+          {renderOpen(open, styles.bandInCard)}
+        </View>
       </View>
     ) : null;
   }

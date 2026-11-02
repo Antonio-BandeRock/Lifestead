@@ -41,6 +41,14 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.79.6',
+    date: '2026-11-02',
+    changes: [
+      'On the first look at Home, under "Tap here to move around the app", a second line says a long press replaces the icon.',
+      'In setup, after Done, None or any other answer, the next question is moved to the top of the screen, so there is no hunting for it. Once the last question is answered, the setup cards that follow come to the top too.',
+    ],
+  },
+  {
     version: '1.0.79.5',
     date: '2026-11-02',
     changes: [

@@ -25,7 +25,7 @@
 // covered by that overlay for free, and appears exactly when the app is ready.
 import { Ionicons } from '@expo/vector-icons';
 import { useCallback, useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
 import { colors } from '../constants/colors';
 import { FLOATING_BUTTON_SIZE } from '../constants/floatingButton';
@@ -93,6 +93,11 @@ export function TabHubPointer({ buttonBottom }: { buttonBottom: number }) {
     >
       <View style={styles.pointerCard}>
         <Text style={styles.pointerText}>Tap here to move around the app</Text>
+        {/* 2026-11-02, 1.0.79.6, direct request: the same first look also says
+            the icon can be changed, which a long press does (TabHub.tsx). */}
+        <Text style={styles.pointerText}>
+          {Platform.OS === 'web' ? 'Right-click or long press to replace the icon.' : 'Long press to replace the icon.'}
+        </Text>
       </View>
       <Ionicons name="caret-down" size={18} color={colors.buttonColor} style={textShadow} />
     </View>
@@ -114,6 +119,8 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 14,
     marginBottom: 1,
+    alignItems: 'center',
+    gap: 2,
   },
   // 1.0.63.17: was caption size in buttonColor, about 2.2:1 against
   // menuSurface. Body size in textPrimary reads at about 4.9:1.

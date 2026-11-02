@@ -63,6 +63,7 @@ import { BeatPicker } from './BeatPicker';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
 import { useInfoAlert } from './InfoAlert';
 import { YourStoryInterview } from './YourStoryInterview';
+import { useBringToTop } from './BringToTop';
 
 // Loads Your Story whenever the screen holding it comes into focus, which is
 // how an item done on another tab is already ticked on the way back.
@@ -164,6 +165,17 @@ export function YourStorySection({ mode, view, guides, interview, records, onCha
   const changedRef = useRef(onChanged);
   changedRef.current = onChanged;
   useEffect(() => subscribeTourChanged(() => changedRef.current()), []);
+  // 1.0.79.6: in setup, once the last question is answered its card goes,
+  // and the setup cards that follow are scrolled to the top rather than
+  // left wherever the page happened to be.
+  const bringToTop = useBringToTop();
+  const setupPageRef = useRef<View>(null);
+  const wasFinished = useRef(interview?.finished ?? null);
+  useEffect(() => {
+    const finished = interview?.finished ?? null;
+    if (mode === 'setup' && wasFinished.current === false && finished === true) bringToTop?.(setupPageRef.current);
+    wasFinished.current = finished;
+  }, [interview?.finished, mode, bringToTop]);
   // Which item has its part-of-life chooser open in place.
   const [beatsOpen, setBeatsOpen] = useState(false);
   // On the full page, sections opened by hand beyond the current one.
@@ -330,7 +342,7 @@ export function YourStorySection({ mode, view, guides, interview, records, onCha
   if (mode === 'setup') {
     const before = renderBefore();
     return (
-      <View style={styles.page}>
+      <View ref={setupPageRef} collapsable={false} style={styles.page}>
         {interview && !interview.finished ? (
           <View style={styles.sectionCard}>
             <YourStoryInterview mode="card" interview={interview} onChanged={onChanged} go={goElsewhere} />
