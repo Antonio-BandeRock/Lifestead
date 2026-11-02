@@ -79,13 +79,37 @@ if (START.kind === 'version') {
 } else {
   app.setPath('userData', dataFolder());
 }
-const SINGLE = START.kind === 'own' || app.requestSingleInstanceLock();
+// The person's own app takes the lock too (2026-11-02), so a link opened
+// from the browser reaches the window already open rather than starting a
+// second app on the same records.
+const SINGLE = app.requestSingleInstanceLock();
 if (!SINGLE) app.quit();
-app.on('second-instance', () => {
+
+// Approving a tester from the PC (2026-11-02, 1.0.79.3). The request page's
+// Open in Lifestead button hands lifesteaddev://approve?r=CODE to Windows,
+// which starts this app with the address on its command line or, when it is
+// already open, passes it on through second-instance. Only the developer's
+// own app answers the scheme. The address waits here until the page asks
+// for it (links:take), so one that arrives before the page has loaded is
+// not lost.
+const LINK_SCHEME = variant.versionsAllowed && START.kind === 'own' ? 'lifesteaddev' : null;
+let waitingLink = null;
+function linkIn(argv) {
+  if (!LINK_SCHEME) return null;
+  return argv.find((arg) => typeof arg === 'string' && arg.toLowerCase().startsWith(LINK_SCHEME + '://')) || null;
+}
+waitingLink = linkIn(process.argv);
+
+app.on('second-instance', (_event, argv) => {
   const win = BrowserWindow.getAllWindows()[0];
   if (!win) return;
   if (win.isMinimized()) win.restore();
   win.focus();
+  const link = linkIn(argv || []);
+  if (link) {
+    waitingLink = link;
+    win.webContents.send('links:waiting');
+  }
 });
 
 // A phone-shaped window: the app lays itself out for one column, the
@@ -202,6 +226,11 @@ function registerIpc() {
   });
   ipcMain.handle('versions:showPicker', () => versions.openPicker(app));
 
+  ipcMain.handle('links:take', () => {
+    const link = waitingLink;
+    waitingLink = null;
+    return link;
+  });
   ipcMain.on('app:variant', (event) => {
     event.returnValue = variant.VARIANT;
   });
@@ -529,6 +558,7 @@ app.whenReady().then(() => {
     () => mainWindow,
     variant.versionsAllowed ? [{ label: 'Versions Side by Side', click: () => versions.openPicker(app) }] : [],
   );
+  if (LINK_SCHEME && app.isPackaged) app.setAsDefaultProtocolClient(LINK_SCHEME);
   createWindow();
 
   app.on('activate', () => {

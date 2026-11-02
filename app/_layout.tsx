@@ -29,6 +29,7 @@ import { PeerMailboxWatcher } from '../components/PeerMailboxWatcher';
 import EcowittPoller from '../components/EcowittPoller';
 import { PendingScanWatcher } from '../components/PendingScanWatcher';
 import { RecallWatcher } from '../components/RecallWatcher';
+import { DesktopLinkWatcher } from '../components/DesktopLinkWatcher';
 import { StoryReturnHost } from '../components/StoryReturnHost';
 import { StoryWalkHost } from '../components/StoryWalkHost';
 import { TutorialHost } from '../components/TutorialHost';
@@ -588,6 +589,8 @@ function UnlockedApp() {
               {/* Barcodes scanned with no signal (G21), looked up once there is one. */}
               <PendingScanWatcher />
               <RecallWatcher />
+              {/* A tester's request opened on the PC goes to Approve a Tester. */}
+              <DesktopLinkWatcher />
               {/* Tell Claude (1.0.49.8): the button and the sheet a note is
                   typed into. Renders nothing at all while the Profile switch
                   is off, which is every install but this one. Before

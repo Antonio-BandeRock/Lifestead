@@ -46,6 +46,16 @@ ipcRenderer.on('zoom:changed', (_event, factor) => {
     }
   }
 });
+const linkListeners = new Set();
+ipcRenderer.on('links:waiting', () => {
+  for (const listener of linkListeners) {
+    try {
+      listener();
+    } catch (error) {
+      console.error('link listener failed', error);
+    }
+  }
+});
 ipcRenderer.on('notifications:response', (_event, response) => {
   for (const listener of responseListeners) {
     try {
@@ -66,6 +76,15 @@ contextBridge.exposeInMainWorld('insideStoryDesktop', {
   versionPreview: ipcRenderer.sendSync('versions:current'),
   versions: {
     showPicker: () => ipcRenderer.invoke('versions:showPicker'),
+  },
+  links: {
+    take: () => ipcRenderer.invoke('links:take'),
+    onWaiting: (listener) => {
+      linkListeners.add(listener);
+      return () => {
+        linkListeners.delete(listener);
+      };
+    },
   },
   sqlite: {
     open: (name) => ipcRenderer.invoke('sqlite:open', name),

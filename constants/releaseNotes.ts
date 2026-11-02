@@ -41,6 +41,13 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.79.3',
+    date: '2026-11-02',
+    changes: [
+      'Approving a tester takes one tap on the phone or the computer: open the request link, press Open in Lifestead, and it is approved with the reply already copied for pasting into the email.',
+    ],
+  },
+  {
     version: '1.0.79.2',
     date: '2026-11-02',
     changes: [

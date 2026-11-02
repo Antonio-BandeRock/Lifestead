@@ -255,6 +255,16 @@ export type DesktopBridge = {
   versionPreview?: DesktopVersionPreview | null;
   /** Missing on an installer built before 1.0.68.9. */
   versions?: { showPicker(): Promise<void> };
+  /** Links the app was opened with, such as lifesteaddev://approve?r=CODE
+   *  from a tester's request (desktop/main.js). Missing on an installer
+   *  built before 1.0.79.3. */
+  links?: {
+    /** The address waiting, once; null when there is none. */
+    take(): Promise<string | null>;
+    /** Called when an address arrives while the app is open. Returns a
+     *  function that removes the listener. */
+    onWaiting(listener: () => void): () => void;
+  };
   /** Which installer this is (tester plan T9): 'test' for Lifestead Test,
    *  'dev' for the developer's. Missing on an installer built before it. */
   appVariant?: string;
