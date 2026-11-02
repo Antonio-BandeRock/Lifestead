@@ -2004,8 +2004,12 @@ export default function HomeScreen() {
     try {
       const previousVersion = await getLastSeenAppVersion();
       if (previousVersion === APP_VERSION) return;
-      const notes = getReleaseNotesSince(previousVersion, APP_VERSION);
       await setLastSeenAppVersion(APP_VERSION);
+      // A fresh install has no version before this one, so nothing has
+      // changed for the person holding it (direct instruction, 2026-11-02:
+      // a tester's first open showed this as an update to read).
+      if (previousVersion === null) return;
+      const notes = getReleaseNotesSince(previousVersion, APP_VERSION);
       if (notes.length === 0) return;
       showInfoAlert(
         t('Updated to {version}', { version: APP_VERSION }),

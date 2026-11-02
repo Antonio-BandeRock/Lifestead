@@ -48,7 +48,7 @@ import { textShadow, typography } from '../constants/typography';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { isTesterBuild } from '../lib/appVariant';
 import { showGuidedTour } from '../lib/guidedTourDb';
-import { useTesterAccess } from '../lib/testerAccess';
+import { testerDoorOpen, useTesterAccess } from '../lib/testerAccess';
 import { cardDoneOn, type SetupCardView } from '../lib/setupCards';
 import { setStoryWalk, startStoryWalk } from '../lib/storyWalk';
 import { startTutorials } from '../lib/tutorialDb';
@@ -115,7 +115,7 @@ export function FirstSetup() {
   // Run Setup Again shows setup even with nothing waiting.
   const reviewRef = useRef(false);
   const testerAccess = useTesterAccess();
-  const gateOpen = !isTesterBuild() || testerAccess.state.kind === 'ok';
+  const gateOpen = !isTesterBuild() || testerDoorOpen(testerAccess);
 
   const load = useCallback(async () => {
     try {

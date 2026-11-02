@@ -1,5 +1,7 @@
 // The words a tester agrees to before the tester version opens (tester plan
-// T12, 2026-10-31). Written out for review in docs/tester-agreement.md, which
+// T12, 2026-10-31). Since 1.0.79.1 they come after access is approved, and
+// hold what a fresh install used to show as an update message: how to
+// report, how updates arrive, and the name across the screens. Written out for review in docs/tester-agreement.md, which
 // says the same thing. Changing a point in a way a tester should read again
 // means raising TESTER_AGREEMENT_VERSION in lib/testerAccess.ts.
 import type { AgreementPoint } from './agreement';
@@ -7,7 +9,7 @@ import type { AgreementPoint } from './agreement';
 export const TESTER_AGREEMENT_TITLE = 'Before you start testing';
 
 export const TESTER_AGREEMENT_INTRO =
-  'This is a test version of Lifestead, made for you to try before anyone else can. A few things to agree to first.';
+  'This device is approved. This is a test version of Lifestead, made for you to try before anyone else can. A few things to know and agree to first.';
 
 export const TESTER_AGREEMENT_POINTS: readonly AgreementPoint[] = [
   {
@@ -38,7 +40,16 @@ export const TESTER_AGREEMENT_POINTS: readonly AgreementPoint[] = [
   {
     heading: 'Please tell us what you find',
     body:
-      'Report a Problem is on every screen. Anything that went wrong, anything confusing, and anything you wish it did is worth sending.',
+      'Tap the flag at the edge of any screen, or press and hold any band. Say what went wrong, what was confusing, or what you wish it did, by typing or with the mic. If the app closed by itself, what happened is offered to send along. It goes by email, and you read it before it goes.',
+  },
+  {
+    heading: 'Updates arrive by themselves',
+    body:
+      'Updates come over the air and keep everything you have put in. Once one has arrived, What Changed on the For Testers band on Home reads its notes. Now and then a change needs a new installer, and For Testers says so, with a button to fetch it.',
+  },
+  {
+    heading: 'Your first name shows faintly on every screen',
+    body: 'So a screenshot says whose copy it came from. It covers nothing and stops nothing from being tapped.',
   },
 ];
 

@@ -1,7 +1,11 @@
 # The tester agreement
 
 Drafted 2026-10-31 for tester plan T12, for Tony to review. This is what a
-tester reads and agrees to the first time the tester version opens. The
+tester reads and agrees to the first time the tester version opens, after
+asking for access and pasting the approval link (since 1.0.79.1). The same
+screen then shows Lifestead's general points ("Before you start", in
+`lib/agreement.ts`), and I Agree records both, so a tester reads one screen
+rather than two. The
 words in the app are in `lib/testerAgreement.ts`, with Spanish in
 `lib/translations/es.ts`; change both together. A change a tester should
 read again means raising `TESTER_AGREEMENT_VERSION` in `lib/testerAccess.ts`,
@@ -9,8 +13,8 @@ which asks every tester to agree again.
 
 Title: Before you start testing
 
-This is a test version of Lifestead, made for you to try before anyone else
-can. A few things to agree to first.
+This device is approved. This is a test version of Lifestead, made for you
+to try before anyone else can. A few things to know and agree to first.
 
 1. This copy is for you alone. Please do not pass the app, its installer or
    your activation link to anybody else, or post them anywhere. Each copy
@@ -32,9 +36,17 @@ can. A few things to agree to first.
    before it ends the app offers to ask for more time with one press. If it
    ends, your records stay where they are and open again once more time is
    approved.
-6. Please tell us what you find. Report a Problem is on every screen.
-   Anything that went wrong, anything confusing, and anything you wish it did
-   is worth sending.
+6. Please tell us what you find. Tap the flag at the edge of any screen, or
+   press and hold any band. Say what went wrong, what was confusing, or what
+   you wish it did, by typing or with the mic. If the app closed by itself,
+   what happened is offered to send along. It goes by email, and you read it
+   before it goes.
+7. Updates arrive by themselves. Updates come over the air and keep
+   everything you have put in. Once one has arrived, What Changed on the For
+   Testers band on Home reads its notes. Now and then a change needs a new
+   installer, and For Testers says so, with a button to fetch it.
+8. Your first name shows faintly on every screen. So a screenshot says whose
+   copy it came from. It covers nothing and stops nothing from being tapped.
 
 Button: I Agree
 

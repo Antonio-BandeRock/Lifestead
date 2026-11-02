@@ -65,6 +65,15 @@ function getSnapshot() {
   return snapshot;
 }
 
+/**
+ * Whether the tester version lets the person past its door: approved for
+ * this device AND the agreement read. Since 1.0.79.1 the agreement comes
+ * after approval, so setup and the general agreement wait on both.
+ */
+export function testerDoorOpen(access: TesterAccess): boolean {
+  return access.state.kind === 'ok' && access.agreed;
+}
+
 export function useTesterAccess(): TesterAccess {
   return useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
 }

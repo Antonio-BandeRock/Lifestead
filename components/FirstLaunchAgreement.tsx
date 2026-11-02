@@ -5,6 +5,11 @@
 // setup screen, so on a first install it is waiting when that screen
 // finishes. It covers the app with a solid background while it reads the
 // record, so nothing behind it can be tapped before the answer is known.
+//
+// In the tester version it waits behind the tester door (1.0.79.1): the
+// door's Before you start testing shows these same points and keeps this
+// agreement too, so on a first install this has nothing left to ask, and
+// a later change of wording is still asked once the door is open.
 import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -19,6 +24,8 @@ import {
   type AgreementRecord,
 } from '../lib/agreement';
 import { getAgreement, recordAgreement } from '../lib/agreementDb';
+import { isTesterBuild } from '../lib/appVariant';
+import { testerDoorOpen, useTesterAccess } from '../lib/testerAccess';
 import { AgreementPoints } from './AgreementPoints';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
 
@@ -28,8 +35,11 @@ export function FirstLaunchAgreement() {
   const insets = useSafeAreaInsets();
   const [state, setState] = useState<State>({ status: 'reading' });
   const [saving, setSaving] = useState(false);
+  const testerAccess = useTesterAccess();
+  const behindDoor = isTesterBuild() && !testerDoorOpen(testerAccess);
 
   useEffect(() => {
+    if (behindDoor) return;
     let cancelled = false;
     getAgreement()
       .then((record) => {
@@ -44,9 +54,9 @@ export function FirstLaunchAgreement() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [behindDoor]);
 
-  if (state.status === 'agreed') return null;
+  if (behindDoor || state.status === 'agreed') return null;
   if (state.status === 'reading') return <View style={styles.cover} />;
 
   const changed = agreementReason(state.record) === 'changed';

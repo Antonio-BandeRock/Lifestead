@@ -1,9 +1,12 @@
 // The door of the tester version (tester plan T12, 2026-10-31).
 //
 // Over the whole app, in the tester version only, until this device has an
-// approval that has not ended. In turn it shows the tester agreement, a
-// name and Ask for Access, then waiting with a box to paste the link that
-// comes back. When an approval ends it asks for more time with one press;
+// approval that has not ended and the agreement is read. In turn, by direct
+// instruction (2026-11-02, 1.0.79.1): a name and Ask for Access, which
+// emails testers@ghostead.com; then the box to paste the link that comes
+// back, with Ask Again under it; then Before you start testing, which holds
+// what a fresh install used to show as an update message and Lifestead's
+// general points; then setup (components/FirstSetup.tsx). When an approval ends it asks for more time with one press;
 // when the approval is for another device it says so. Nothing underneath is
 // touched: records stay where they are and open again once access is back.
 //
@@ -22,13 +25,18 @@ import { textShadow, typography } from '../constants/typography';
 import { isTesterBuild } from '../lib/appVariant';
 import { t } from '../lib/i18n';
 import { explainNotYet } from '../lib/notYet';
+import { AGREEMENT_FOOTNOTE } from '../lib/agreement';
+import { recordAgreement } from '../lib/agreementDb';
+import { useNavigationHand } from '../lib/navigationHand';
 import { PROBLEM_REPORT_ADDRESS } from '../lib/problemReport';
+import { REPORT_FLAG_ROOM } from '../lib/reportProblem';
 import {
   acceptTesterAgreement,
   activateFromText,
   activateResultText,
   askForAccess,
   startTesterAccessWatch,
+  testerDoorOpen,
   useTesterAccess,
   type AskResult,
 } from '../lib/testerAccess';
@@ -39,6 +47,7 @@ import {
   TESTER_AGREEMENT_POINTS,
   TESTER_AGREEMENT_TITLE,
 } from '../lib/testerAgreement';
+import { AgreementPoints } from './AgreementPoints';
 import { AppTextInput } from './AppTextInput';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
 
@@ -56,17 +65,19 @@ function askedText(result: AskResult): string {
 function TesterGateInner() {
   const insets = useSafeAreaInsets();
   const access = useTesterAccess();
+  const hand = useNavigationHand();
   const [name, setName] = useState('');
   const [pasted, setPasted] = useState('');
   const [message, setMessage] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [agreeing, setAgreeing] = useState(false);
 
   useEffect(() => startTesterAccessWatch(), []);
   useEffect(() => {
     if (access.name && !name) setName(access.name);
   }, [access.name, name]);
 
-  if (access.state.kind === 'ok') return null;
+  if (testerDoorOpen(access)) return null;
 
   async function ask(renewal: boolean) {
     if (!name.trim()) {
@@ -89,20 +100,44 @@ function TesterGateInner() {
     setBusy(true);
     try {
       const result = await activateFromText(pasted);
-      setMessage(activateResultText(result));
+      // Once it works the next screen is the agreement, so a line saying it
+      // worked would only be left behind for later.
+      setMessage(result === 'ok' ? null : activateResultText(result));
       if (result === 'ok') setPasted('');
     } finally {
       setBusy(false);
     }
   }
 
-  const content = { paddingTop: insets.top + HOME_BAND_GAP, paddingBottom: insets.bottom + HOME_BAND_GAP * 2 };
+  // The tester's points and Lifestead's general points are read on one
+  // screen, and I Agree keeps both, so FirstLaunchAgreement has nothing left
+  // to ask on a first install.
+  async function agree() {
+    if (agreeing) return;
+    setAgreeing(true);
+    try {
+      await recordAgreement().catch((error: unknown) => {
+        console.warn('[testerGate] could not keep the general agreement', error);
+      });
+      await acceptTesterAgreement();
+    } finally {
+      setAgreeing(false);
+    }
+  }
+
+  // The Report a Problem flag sits against one edge at mid-height, over
+  // this screen, so the words keep out from under it on that side.
+  const flagSide = hand === 'right' ? { paddingRight: REPORT_FLAG_ROOM } : { paddingLeft: REPORT_FLAG_ROOM };
+  const content = { paddingTop: insets.top + HOME_BAND_GAP, paddingBottom: insets.bottom + HOME_BAND_GAP * 2, ...flagSide };
 
   // Until the stored access is read, a plain cover, so the app never shows
   // for a moment before the gate.
   if (!access.loaded) return <View style={styles.cover} />;
 
-  if (!access.agreed) {
+  const state = access.state;
+
+  // Third, once this device is approved: what testing asks of somebody.
+  if (state.kind === 'ok') {
     return (
       <View style={styles.cover}>
         <ScrollView contentContainerStyle={[styles.content, content]}>
@@ -121,34 +156,95 @@ function TesterGateInner() {
               <Text style={styles.body}>{point.body}</Text>
             </View>
           ))}
+          <AgreementPoints />
           <View style={styles.band}>
-            <TouchableOpacity style={styles.primary} onPress={() => void acceptTesterAgreement()} accessibilityRole="button">
+            <TouchableOpacity
+              style={[styles.primary, agreeing && styles.busy]}
+              onPress={() => void agree()}
+              disabled={agreeing}
+              accessibilityRole="button"
+            >
               <Text style={styles.primaryText}>{TESTER_AGREEMENT_BUTTON}</Text>
             </TouchableOpacity>
+            <Text style={styles.caption}>{AGREEMENT_FOOTNOTE}</Text>
           </View>
         </ScrollView>
       </View>
     );
   }
 
-  const state = access.state;
   const renewal = state.kind === 'expired';
-  const title =
-    state.kind === 'expired'
-      ? 'Your test time has ended'
-      : state.kind === 'wrongDevice'
-        ? 'This copy was approved for a different device'
-        : access.askedAt
-          ? 'Waiting for approval'
-          : 'Ask for access';
-  const lead =
-    state.kind === 'expired'
-      ? t('Access on this device ended on {day}. Your records are all still here, and open again as soon as more time is approved.', { day: endDay(state.approval) })
-      : state.kind === 'wrongDevice'
-        ? 'Each phone or computer is approved by itself, so an approval cannot move to another device, and a restored backup asks again. Ask from this one.'
-        : access.askedAt
-          ? 'Once your request is sent and approved, a link comes back by email. Press it on this device, or copy it and paste it below.'
-          : 'Lifestead Test opens on devices that have been approved. Write your name and press Ask for Access, and your email app opens with the request ready to send.';
+  const wrongDevice = state.kind === 'wrongDevice';
+  // Second, once the request has gone (or an approval needs replacing): the
+  // box for the link that comes back, ahead of asking again.
+  const waiting = !!access.askedAt || renewal || wrongDevice;
+
+  const title = renewal
+    ? 'Your test time has ended'
+    : wrongDevice
+      ? 'This copy was approved for a different device'
+      : waiting
+        ? 'Enter your approval link'
+        : 'Ask for access';
+  const lead = renewal
+    ? t('Access on this device ended on {day}. Your records are all still here, and open again as soon as more time is approved.', { day: endDay(state.approval) })
+    : wrongDevice
+      ? 'Each phone or computer is approved by itself, so an approval cannot move to another device, and a restored backup asks again. Ask from this one.'
+      : waiting
+        ? 'Once your request is approved, a link comes back by email from testers@ghostead.com. Press it on this device, or copy it and paste it below.'
+        : 'Lifestead Test opens on devices that have been approved. Write your name and press Ask for Access, and your email app opens with a request to testers@ghostead.com, ready to send.';
+
+  const askBand = (
+    <View style={styles.band}>
+      {waiting && !renewal && !wrongDevice ? <Text style={styles.label}>No email yet, or did it go astray?</Text> : null}
+      {access.name && waiting ? null : (
+        <>
+          <Text style={styles.label}>Your name</Text>
+          <AppTextInput
+            style={styles.input}
+            value={name}
+            onChangeText={setName}
+            placeholder={t('First and last name')}
+            placeholderTextColor={colors.textSecondary}
+            autoCapitalize="words"
+            autoCorrect={false}
+          />
+        </>
+      )}
+      <TouchableOpacity
+        style={[waiting && !renewal ? styles.secondary : styles.primary, busy && styles.busy]}
+        onPress={() => void ask(renewal)}
+        disabled={busy}
+        accessibilityRole="button"
+      >
+        <Text style={waiting && !renewal ? styles.secondaryText : styles.primaryText}>
+          {renewal ? 'Ask to Renew' : waiting ? 'Ask Again' : 'Ask for Access'}
+        </Text>
+      </TouchableOpacity>
+      <Text style={styles.caption}>
+        The request carries your name and a code for this device, nothing else. It goes to testers@ghostead.com.
+      </Text>
+    </View>
+  );
+
+  const linkBand = (
+    <View style={styles.band}>
+      <Text style={styles.label}>The link from the approval email</Text>
+      <AppTextInput
+        style={styles.input}
+        value={pasted}
+        onChangeText={setPasted}
+        placeholder={t('Paste it here')}
+        placeholderTextColor={colors.textSecondary}
+        autoCapitalize="none"
+        autoCorrect={false}
+        multiline
+      />
+      <TouchableOpacity style={[styles.primary, busy && styles.busy]} onPress={() => void applyPasted()} disabled={busy} accessibilityRole="button">
+        <Text style={styles.primaryText}>Use This Link</Text>
+      </TouchableOpacity>
+    </View>
+  );
 
   return (
     <View style={styles.cover}>
@@ -159,58 +255,14 @@ function TesterGateInner() {
           </Text>
           <Text style={styles.body}>{lead}</Text>
         </View>
-        <View style={styles.band}>
-          {renewal && access.name ? null : (
-            <>
-              <Text style={styles.label}>Your name</Text>
-              <AppTextInput
-                style={styles.input}
-                value={name}
-                onChangeText={setName}
-                placeholder={t('First and last name')}
-                placeholderTextColor={colors.textSecondary}
-                autoCapitalize="words"
-                autoCorrect={false}
-              />
-            </>
-          )}
-          <TouchableOpacity
-            style={[access.askedAt && !renewal ? styles.secondary : styles.primary, busy && styles.busy]}
-            onPress={() => void ask(renewal)}
-            disabled={busy}
-            accessibilityRole="button"
-          >
-            <Text style={access.askedAt && !renewal ? styles.secondaryText : styles.primaryText}>
-              {renewal ? 'Ask to Renew' : access.askedAt ? 'Ask Again' : 'Ask for Access'}
-            </Text>
-          </TouchableOpacity>
-          <Text style={styles.caption}>
-            The request carries your name and a code for this device, nothing else. It goes to testers@ghostead.com.
-          </Text>
-        </View>
-        {access.askedAt || renewal || state.kind === 'wrongDevice' ? (
-          <View style={styles.band}>
-            <Text style={styles.label}>The link from the approval email</Text>
-            <AppTextInput
-              style={styles.input}
-              value={pasted}
-              onChangeText={setPasted}
-              placeholder={t('Paste it here')}
-              placeholderTextColor={colors.textSecondary}
-              autoCapitalize="none"
-              autoCorrect={false}
-              multiline
-            />
-            <TouchableOpacity style={[styles.primary, busy && styles.busy]} onPress={() => void applyPasted()} disabled={busy} accessibilityRole="button">
-              <Text style={styles.primaryText}>Use This Link</Text>
-            </TouchableOpacity>
-          </View>
-        ) : null}
         {message ? (
           <View style={styles.band}>
             <Text style={styles.body}>{message}</Text>
           </View>
         ) : null}
+        {renewal ? askBand : null}
+        {waiting ? linkBand : null}
+        {renewal ? null : askBand}
       </ScrollView>
     </View>
   );

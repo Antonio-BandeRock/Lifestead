@@ -6,6 +6,13 @@
 // developer's notes, kept apart so neither can open the other.
 import { useSyncExternalStore } from 'react';
 
+/**
+ * How much room the Report a Problem flag takes from its edge, so a screen
+ * drawn over everything (the tester door) can keep its words out from
+ * under it. components/ReportProblemHost.tsx draws the flag this wide.
+ */
+export const REPORT_FLAG_ROOM = 40;
+
 export type ReportProblemTarget = { bandId?: string; bandTitle?: string };
 
 type Opener = (target: ReportProblemTarget) => void;

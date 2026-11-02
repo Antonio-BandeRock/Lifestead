@@ -41,6 +41,14 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.79.1',
+    date: '2026-11-02',
+    changes: [
+      'The test version opens in this order: ask for access, then paste the approval link, then Before you start testing, then Getting Set Up.',
+      'A new install no longer shows an update message. What it used to say is on Before you start testing.',
+    ],
+  },
+  {
     version: '1.0.78.24',
     date: '2026-10-31',
     changes: [
