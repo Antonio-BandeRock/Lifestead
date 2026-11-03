@@ -91,6 +91,18 @@ const SURFACE_RENDER_HELPERS = new Set([
 const SURFACE_STYLE_SPREADS = new Set([
   // components/HomeSectionBand.tsx: backgroundColor: colors.surface.
   'homeBandStyle',
+  // constants/buttons.ts, the one button and pill look since 1.0.75.14:
+  // the two buttons and their compact sizes fill with colors.buttonColor or
+  // colors.surface, PILL with colors.surface (PILL_SMALL spreads PILL), and
+  // PILL_ON with colors.buttonColor. Without these every button's words
+  // read as bare text once its style stopped typing the fill itself.
+  'BUTTON_PRIMARY',
+  'BUTTON_PRIMARY_COMPACT',
+  'BUTTON_SECONDARY',
+  'BUTTON_SECONDARY_COMPACT',
+  'PILL',
+  'PILL_SMALL',
+  'PILL_ON',
 ]);
 
 const ROOTS = ['app', 'components'];

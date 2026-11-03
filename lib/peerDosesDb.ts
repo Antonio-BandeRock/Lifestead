@@ -174,23 +174,35 @@ export async function applyPeerDoses(connectionId: string, payload: { doses?: un
   return before?.doses_json !== json;
 }
 
-export type WatchedPerson = { connectionId: string; name: string; sentAt: string; doses: PeerDose[] };
+export type WatchedPerson = { connectionId: string; name: string; sentAt: string; doses: PeerDose[]; shown: boolean };
 
-export async function listDoseWatch(): Promise<WatchedPerson[]> {
+/**
+ * Everyone whose doses this phone holds. A person whose side is hidden here
+ * (show_theirs, 1.0.80.2) is left out unless includeHidden asks for them,
+ * which only the alert reconciler does, so it can take their alerts back.
+ */
+export async function listDoseWatch(options?: { includeHidden?: boolean }): Promise<WatchedPerson[]> {
   const db = await getDatabase();
-  const rows = await db.getAllAsync<{ connection_id: string; name: string; sent_at: string; doses_json: string }>(
-    `SELECT w.connection_id, c.name, w.sent_at, w.doses_json
+  const rows = await db.getAllAsync<{ connection_id: string; name: string; sent_at: string; doses_json: string; show_theirs: number | null }>(
+    `SELECT w.connection_id, c.name, w.sent_at, w.doses_json, c.show_theirs
      FROM peer_dose_watch w JOIN connections c ON c.id = w.connection_id
      ORDER BY c.name COLLATE NOCASE ASC`,
   );
-  return rows.map((row) => {
+  const shownRows = options?.includeHidden ? rows : rows.filter((row) => row.show_theirs == null || Number(row.show_theirs) === 1);
+  return shownRows.map((row) => {
     let doses: PeerDose[] = [];
     try {
       doses = cleanPeerDosePart({ items: JSON.parse(row.doses_json) })?.items ?? [];
     } catch {
       doses = [];
     }
-    return { connectionId: row.connection_id, name: row.name, sentAt: row.sent_at, doses };
+    return {
+      connectionId: row.connection_id,
+      name: row.name,
+      sentAt: row.sent_at,
+      doses,
+      shown: row.show_theirs == null || Number(row.show_theirs) === 1,
+    };
   });
 }
 
@@ -220,7 +232,7 @@ function identifierFor(connectionId: string, doseId: string): string {
 export async function reconcileDoseAlerts(): Promise<void> {
   const db = await getDatabase();
   const enabled = await getDoseWatchAlertsOn();
-  const people = await listDoseWatch();
+  const people = await listDoseWatch({ includeHidden: true });
   const alertRows = await db.getAllAsync<{ connection_id: string; dose_id: string; fire_at: string }>(
     'SELECT connection_id, dose_id, fire_at FROM peer_dose_alerts',
   );
@@ -230,7 +242,7 @@ export async function reconcileDoseAlerts(): Promise<void> {
   for (const person of people) {
     const alerted = new Map<string, number>();
     for (const row of alertRows) if (row.connection_id === person.connectionId) alerted.set(row.dose_id, Date.parse(row.fire_at));
-    const plan = planDoseAlerts({ doses: person.doses, nowMs: now, alerted, enabled });
+    const plan = planDoseAlerts({ doses: person.doses, nowMs: now, alerted, enabled: enabled && person.shown });
 
     for (const doseId of plan.cancel) {
       await Notifications.cancelScheduledNotificationAsync(identifierFor(person.connectionId, doseId)).catch(() => undefined);

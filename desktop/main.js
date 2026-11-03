@@ -30,6 +30,7 @@ const secrets = require('./secrets');
 const notifications = require('./notifications');
 const files = require('./files');
 const cloudFolder = require('./cloudFolder');
+const googleDrive = require('./googleDrive');
 const zoom = require('./zoom');
 const stationListener = require('./stationListener');
 const print = require('./print');
@@ -267,6 +268,7 @@ function registerIpc() {
   // The two dialogs wait on the person, so they answer asynchronously.
   ipcMain.handle('files:pick', (_event, options) => files.pick(() => mainWindow, options));
   ipcMain.handle('files:saveAs', (_event, uri, options) => files.saveAs(() => mainWindow, uri, options));
+  ipcMain.handle('files:open', (_event, uri) => files.openInDefaultApp(shell, userData, uri));
   // K11: a page of HTML to the printer, or laid out as a PDF file, in a
   // hidden window of its own (print.js).
   ipcMain.handle('print:html', (_event, html) => print.printHtml(files.folders(userData).cache, html));
@@ -279,6 +281,10 @@ function registerIpc() {
   // The shared folder: OneDrive's folder on this disk, no sign-in. Each
   // call answers a value or throws, and lib/desktop/cloudFolder.ts turns
   // the throw into the sentence the app shows.
+  ipcMain.handle('gdrive:isSignedIn', () => googleDrive.isSignedIn(userData));
+  ipcMain.handle('gdrive:signIn', () => googleDrive.signIn(userData));
+  ipcMain.handle('gdrive:signOut', () => googleDrive.signOut(userData));
+  ipcMain.handle('gdrive:request', (_event, request) => googleDrive.request(userData, request));
   ipcMain.handle('cloud:roots', () => cloudFolder.roots());
   ipcMain.handle('cloud:pickFolder', (_event, defaultPath) => cloudFolder.pickFolder(() => mainWindow, defaultPath));
   ipcMain.handle('cloud:stat', (_event, folder) => cloudFolder.stat(folder));

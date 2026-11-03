@@ -36,7 +36,7 @@ import {
   setPartnerMailboxFolder,
 } from '../lib/connections';
 import { computeKeyFingerprint, getDeviceIdentity } from '../lib/deviceIdentity';
-import { SHARE_SCOPES, defaultGrantsForRole, type ShareGrants } from '../lib/partners';
+import { ALWAYS_SHARED_SENTENCE, SWITCHABLE_SCOPES, defaultGrantsForRole, type ShareGrants } from '../lib/partners';
 import { canEncryptTo } from '../lib/partnerCrypto';
 import { confirmItsYou } from '../lib/freshAuth';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
@@ -364,7 +364,7 @@ export default function ConnectScreen() {
                 Your choice, not theirs. What they share with you is theirs to decide, and it arrives with
                 their link.
               </Text>
-              {SHARE_SCOPES.map((scope) => (
+              {SWITCHABLE_SCOPES.map((scope) => (
                 <TouchableOpacity
                   key={scope.code}
                   style={styles.grantRow}
@@ -380,6 +380,7 @@ export default function ConnectScreen() {
                   </View>
                 </TouchableOpacity>
               ))}
+              <Text style={styles.grantWhat}>{ALWAYS_SHARED_SENTENCE}</Text>
             </View>
           </>
         ) : null}

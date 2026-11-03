@@ -168,7 +168,13 @@ export type PartnerMealPlan = {
  * is stored exactly as it was sent, and what counts as past depends on when
  * somebody looks, not on when it landed.
  */
-export async function getPartnerMealPlan(connectionId: string): Promise<PartnerMealPlan> {
+/**
+ * A partner's plan from today on. With allDays, every day held, which is how
+ * a plan kept from somebody no longer shared with is read: it stopped
+ * changing the day the link went, so its past days are the record of what
+ * the two of them agreed to eat.
+ */
+export async function getPartnerMealPlan(connectionId: string, options?: { allDays?: boolean }): Promise<PartnerMealPlan> {
   const db = await getDatabase();
   const rows = await db.getAllAsync<PlanRow & { sent_at: string }>(
     `SELECT date, meal_type, recipe_ids_json, sent_at
@@ -176,7 +182,7 @@ export async function getPartnerMealPlan(connectionId: string): Promise<PartnerM
       WHERE connection_id = ? AND date >= ?
       ORDER BY date ASC`,
     connectionId,
-    today(),
+    options?.allDays ? '0000-00-00' : today(),
   );
   return { days: toPlannedDays(rows), sentAt: rows[0]?.sent_at ?? null };
 }
@@ -207,8 +213,8 @@ export type PartnerMealPlanNamed = {
  * phones already have and an id survives somebody renaming a dish. Resolving
  * them here is one query for the whole plan rather than one per meal.
  */
-export async function getPartnerMealPlanNamed(connectionId: string): Promise<PartnerMealPlanNamed> {
-  const plan = await getPartnerMealPlan(connectionId);
+export async function getPartnerMealPlanNamed(connectionId: string, options?: { allDays?: boolean }): Promise<PartnerMealPlanNamed> {
+  const plan = await getPartnerMealPlan(connectionId, options);
   const ids = [...new Set(plan.days.flatMap((day) => day.slots.flatMap((slot) => slot.recipeIds)))];
   if (ids.length === 0) return { days: [], sentAt: plan.sentAt, unknown: 0, dishes: [] };
 

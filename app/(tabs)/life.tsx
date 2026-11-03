@@ -19,6 +19,7 @@ import { FinanceMoneySection } from '../../components/FinanceMoneySection';
 import { useRegisterScreenHelp } from '../../components/CurrentPageHelp';
 import { GatedTabContent } from '../../components/GatedTabContent';
 import { RecordPhotos } from '../../components/RecordPhotos';
+import { AttachedFiles } from '../../components/AttachedFiles';
 import { photosGoWithItSentence } from '../../lib/media';
 import { countMediaFor } from '../../lib/mediaDb';
 import { CalmBands } from '../../components/HomeSectionBand';
@@ -1928,6 +1929,7 @@ export default function LifeScreen() {
                     tabColor={TAB_COLOR}
                     title={row.description || financeCategoryLabel(row.category)}
                   />
+                  <AttachedFiles ownerKind="money_entry" ownerId={row.id} tabColor={TAB_COLOR} />
                 </View>
                 <View style={styles.listRight}>
                   <Text style={[styles.listAmount, row.direction === 'income' && styles.statGood]}>

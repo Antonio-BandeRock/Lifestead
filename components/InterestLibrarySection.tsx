@@ -45,6 +45,7 @@ import { setCaptureNoteDone } from '../lib/captureNotesDb';
 import { explainNotYet } from '../lib/notYet';
 import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { useWalkMark } from './WalkMark';
+import { AttachedFiles } from './AttachedFiles';
 import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
@@ -446,6 +447,12 @@ export function InterestLibrarySection({ tabColor, fromNoteId }: Props) {
                 <Text style={[styles.linkText, { color: colors.danger }]}>Remove</Text>
               </TouchableOpacity>
             </View>
+            <AttachedFiles
+              ownerKind="library_entry"
+              ownerId={entry.id}
+              tabColor={tabColor}
+              openerRef={first ? walkMark.ref('library.files') : undefined}
+            />
           </>
         ) : null}
       </View>

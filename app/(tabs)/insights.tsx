@@ -130,6 +130,8 @@ import {
 import { DimensionChart } from '../../components/DimensionChart';
 import type { ConditionDimensionSummary } from '../../lib/conditionDimensions';
 import { AppTextInput } from '../../components/AppTextInput';
+import { AttachedFiles } from '../../components/AttachedFiles';
+import { t } from '../../lib/i18n';
 import { NotesInput } from '../../components/NotesInput';
 import { useConfirmSheet } from '../../components/ConfirmSheet';
 import { useRegisterScreenHelp } from '../../components/CurrentPageHelp';
@@ -3756,6 +3758,12 @@ function LabsView({
     if (!mostRecentByTest.has(result.testCode)) mostRecentByTest.set(result.testCode, result);
   }
   const recentResults = Array.from(mostRecentByTest.values()).sort((a, b) => b.testedAt.localeCompare(a.testedAt));
+  // The lab's report belongs to a draw, not to one test, so its files are
+  // kept by the day the blood was drawn (owner kind lab_draw), the newest
+  // six days that have results.
+  const drawDays = [...new Set(labResults.map((result) => result.testedAt.slice(0, 10)))]
+    .sort((a, b) => b.localeCompare(a))
+    .slice(0, 6);
 
   function resetForm() {
     setFormTestCode(null);
@@ -3841,6 +3849,22 @@ function LabsView({
           })}
         </View>
       )}
+
+      {drawDays.length > 0 ? (
+        <View style={[styles.table, styles.rankSpaced]}>
+          {drawDays.map((day, index) => (
+            <View key={day} style={[styles.labDrawRow, index === 0 && { borderTopWidth: 0 }]}>
+              <Text style={styles.rankFoodName}>{t('The report from {day}', { day })}</Text>
+              <AttachedFiles
+                ownerKind="lab_draw"
+                ownerId={day}
+                tabColor={tabColor}
+                openerRef={index === 0 ? walkMark.ref('labs.files') : undefined}
+              />
+            </View>
+          ))}
+        </View>
+      ) : null}
 
       {formOpen ? (
         <View style={[styles.formCard, styles.rankSpaced, { borderColor: tabColor }]}>
@@ -4955,6 +4979,13 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: colors.border,
     gap: 10,
+  },
+  labDrawRow: {
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    borderTopWidth: 1,
+    borderTopColor: colors.border,
+    gap: 4,
   },
   rankNumber: {
     ...typography.captionEmphasis,

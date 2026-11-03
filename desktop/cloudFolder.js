@@ -58,23 +58,49 @@ function isInside(folder, root) {
  * ("OneDrive", "OneDrive - Contoso"), so a work account and a personal one
  * read apart. Windows sets OneDrive, OneDriveConsumer and OneDriveCommercial
  * in the environment; a Mac keeps them under ~/Library/CloudStorage.
+ *
+ * Since 1.0.79.12 the same goes for iCloud Drive and Google Drive, whose
+ * clients also keep a folder on the disk in step: iCloud for Windows at
+ * C:\Users\<name>\iCloudDrive and a Mac at ~/Library/Mobile Documents/
+ * com~apple~CloudDocs, Google Drive for desktop under CloudStorage on a Mac
+ * and as a "My Drive" folder on its own drive letter on Windows. Each
+ * candidate carries the name a person knows it by, since the Mac folder's
+ * name means nothing to anybody. An Android phone cannot reach iCloud at
+ * all, so a folder there is for two computers, or a computer and an iPhone.
  */
 function roots() {
   const candidates = [];
+  const named = new Map();
+  const add = (folder, name) => {
+    candidates.push(folder);
+    if (name) named.set(normalizeFolder(folder), name);
+  };
   for (const key of ['OneDriveConsumer', 'OneDrive', 'OneDriveCommercial']) {
     if (process.env[key]) candidates.push(process.env[key]);
   }
   const home = os.homedir();
   candidates.push(path.join(home, 'OneDrive'));
+  add(path.join(home, 'iCloudDrive'), 'iCloud Drive');
+  add(path.join(home, 'Library', 'Mobile Documents', 'com~apple~CloudDocs'), 'iCloud Drive');
+  if (process.platform === 'win32') {
+    // Google Drive for desktop mounts a drive letter of its own, G: unless
+    // that was taken, holding "My Drive".
+    for (const letter of 'GHIJKLMNOPQRSTUVWXYZ') {
+      add(letter + ':\\My Drive', 'Google Drive');
+    }
+  }
   const cloudStorage = path.join(home, 'Library', 'CloudStorage');
   try {
     for (const entry of fs.readdirSync(cloudStorage, { withFileTypes: true })) {
       if (entry.isDirectory() && entry.name.startsWith('OneDrive')) {
         candidates.push(path.join(cloudStorage, entry.name));
+      } else if (entry.isDirectory() && entry.name.startsWith('GoogleDrive')) {
+        // GoogleDrive-<account>, holding "My Drive" beside shared drives.
+        add(path.join(cloudStorage, entry.name, 'My Drive'), 'Google Drive');
       }
     }
   } catch {
-    // No CloudStorage folder: not a Mac, or OneDrive is not installed.
+    // No CloudStorage folder: not a Mac, or neither client is installed.
   }
   try {
     for (const entry of fs.readdirSync(home, { withFileTypes: true })) {
@@ -95,7 +121,7 @@ function roots() {
     seen.add(key);
     try {
       if (fs.statSync(folder).isDirectory()) {
-        found.push({ name: path.basename(folder), path: folder });
+        found.push({ name: named.get(folder) ?? path.basename(folder), path: folder });
       }
     } catch {
       // Named in the environment but not on the disk: not a root.
@@ -108,7 +134,7 @@ function assertWritable(folder) {
   const target = normalizeFolder(folder);
   const allowed = [...roots().map((root) => root.path), os.homedir(), ...pickedThisRun];
   if (allowed.some((root) => isInside(target, root))) return;
-  throw new Error('The desktop app only writes inside your OneDrive or home folder: ' + target);
+  throw new Error('The desktop app only writes inside a cloud folder (OneDrive, iCloud Drive, Google Drive) or your home folder: ' + target);
 }
 
 /** A file name has to be one name, never a path into somewhere else. */

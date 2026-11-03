@@ -5,7 +5,7 @@ import { getCheckinReminderInputs } from './checkinReminderDb';
 import { seriesReminderBody, seriesReminderTitle } from './photoSeries';
 import { listSeriesReminderInputs } from './photoSeriesDb';
 import { addCompostEvent, listCompostPilesToTurn } from './compostDb';
-import { getDatabase, getDailyNutrientAnalysis, listReminderCandidates, listScheduledMealsForDateRange, recordCheckin, setScheduleItemStatus, type ReminderCandidate } from './db';
+import { getDatabase, getDailyNutrientAnalysis, listReminderCandidates, listScheduledMealsForDateRange, recordCheckin, scheduleAppointment, setScheduleItemStatus, type ReminderCandidate } from './db';
 import { withSessionGuardLifted } from './databaseActivity';
 import { getMovedWaterTarget } from './hydrationIndexDb';
 import { skipHydrationReminder, waterTargetReached } from './hydrationTarget';
@@ -55,9 +55,11 @@ import {
   gardenMonthDayOf,
   gardenMonthTimeOf,
   getReminderPreferences,
+  isCalendarEveryEventEnabled,
   isNudgeUntilDoneEnabled,
   isReminderKindEnabled,
   REMINDER_KIND_LABELS,
+  setReminderKindEnabled,
   type ReminderKindKey,
 } from './reminderPreferences';
 import {
@@ -140,6 +142,21 @@ import {
   takeBackupSetUpWaiting,
 } from './backupOffer';
 import { BACKUP_LAST_SAVED_META_KEY } from './dataBackup';
+import {
+  answerCalendarOffer,
+  appointmentTypeFromTitle,
+  CALENDAR_OFFER_PREFIX,
+  calendarOfferIdentifier,
+  calendarOfferText,
+  eventMinutes,
+  eventsToOffer,
+  leftToCalendar,
+  localDateTimeOf,
+  markOffered,
+  readCalendarOfferState,
+  writeCalendarOfferState,
+} from './calendarOffer';
+import { hasCalendarPermission, listUpcomingDeviceEvents } from './deviceCalendar';
 import { readSyncState } from './snapshotSyncDevice';
 import { markVaultOffered, takeVaultSetUpWaiting } from './vaultSession';
 import { APP_UPDATE_NOTIFICATION_ID, updateReadyText } from './appUpdate';
@@ -1282,6 +1299,108 @@ async function offerBackupIfDue(now: Date): Promise<void> {
   }));
 }
 
+// Events on the phone's calendar that no appointment is linked to, offered
+// to Appointments (lib/calendarOffer.ts). Only with the calendar already
+// readable, since the reconcile never asks for a permission, and marked
+// offered before they are shown, like the two offers above. Health visits
+// only, unless Every event is on in Profile > Reminders.
+async function offerCalendarEventsIfDue(now: Date, enabled: boolean, everyEvent: boolean): Promise<void> {
+  if (!enabled || Platform.OS === 'web') return;
+  const state = readCalendarOfferState();
+  if (state.stopWaiting) return;
+  if (!(await hasCalendarPermission())) return;
+  const events = await listUpcomingDeviceEvents(now, new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000));
+  if (events.length === 0) return;
+  const db = await getDatabase();
+  const linkedRows = await db.getAllAsync<{ id: string }>(
+    'SELECT DISTINCT linked_device_calendar_event_id AS id FROM schedule_items WHERE linked_device_calendar_event_id IS NOT NULL',
+  );
+  const offers = eventsToOffer(events, new Set(linkedRows.map((row) => row.id)), state, now, everyEvent);
+  if (offers.length === 0) return;
+  writeCalendarOfferState(markOffered(state, offers, now));
+  const hidden = reminderDetailHidden();
+  for (const event of offers) {
+    const { title, body } = calendarOfferText(event, now, hidden);
+    await Notifications.scheduleNotificationAsync(inAppLanguage({
+      identifier: calendarOfferIdentifier(event.id),
+      content: {
+        title,
+        body,
+        data: { tab: 'calendarOffer', eventId: event.id, startsAt: Date.parse(event.startDate) },
+        sound: false,
+        categoryIdentifier: REMINDER_CATEGORY_IDS.calendarOffer,
+      },
+      trigger: { channelId: ANDROID_DATED_CHANNEL_ID },
+    }));
+  }
+}
+
+// The linked calendar events, among these reminders' appointments, that
+// carry an alarm of their own.
+async function readCalendarAlarms(candidates: readonly TravelCandidate[], from: Date, until: Date): Promise<Set<string>> {
+  const linked = new Set(
+    candidates
+      .filter((candidate) => candidate.itemType === 'appointment' && candidate.linkedCalendarEventId)
+      .map((candidate) => candidate.linkedCalendarEventId as string),
+  );
+  if (linked.size === 0 || Platform.OS === 'web') return new Set();
+  try {
+    if (!(await hasCalendarPermission())) return new Set();
+    const events = await listUpcomingDeviceEvents(from, new Date(until.getTime() + 24 * 60 * 60 * 1000));
+    return new Set(events.filter((event) => event.hasAlarm && linked.has(event.id)).map((event) => event.id));
+  } catch (error) {
+    console.warn('[reminderNotifications] the calendar alarms could not be read', error);
+    return new Set();
+  }
+}
+
+// Add to Appointments pressed on an offer, written now that the records can
+// be: each event is read again from the calendar, so the file never held its
+// name, and one that was already added, moved or deleted is let go. Stop
+// Asking turns the switch off in Profile > Reminders here too.
+let addingCalendarEvents = false;
+export async function addWaitingCalendarEvents(): Promise<void> {
+  if (addingCalendarEvents || Platform.OS === 'web' || isLockedNow()) return;
+  const state = readCalendarOfferState();
+  if (state.toAdd.length === 0 && !state.stopWaiting) return;
+  addingCalendarEvents = true;
+  try {
+    writeCalendarOfferState({ ...state, toAdd: [], stopWaiting: false });
+    if (state.stopWaiting) await setReminderKindEnabled('calendarOffer', false);
+    let added = 0;
+    const db = await getDatabase();
+    for (const item of state.toAdd) {
+      try {
+        const linked = await db.getFirstAsync<{ id: string }>(
+          'SELECT id FROM schedule_items WHERE linked_device_calendar_event_id = ? LIMIT 1',
+          item.eventId,
+        );
+        if (linked) continue;
+        const events = await listUpcomingDeviceEvents(new Date(item.startsAt - 60_000), new Date(item.startsAt + 60_000));
+        const event = events.find((candidate) => candidate.id === item.eventId);
+        if (!event) continue;
+        await withSessionGuardLifted(() =>
+          scheduleAppointment({
+            title: event.title,
+            scheduledFor: localDateTimeOf(event.startDate),
+            appointmentType: appointmentTypeFromTitle(event.title),
+            location: event.location ?? undefined,
+            notes: event.notes ?? undefined,
+            linkedDeviceCalendarEventId: event.id,
+            durationMinutes: eventMinutes(event),
+          }),
+        );
+        added += 1;
+      } catch (error) {
+        console.error('[reminderNotifications] an offered calendar event could not be added', error);
+      }
+    }
+    if (added > 0 || state.stopWaiting) await syncReminderNotifications();
+  } finally {
+    addingCalendarEvents = false;
+  }
+}
+
 // An update has downloaded (lib/appUpdateWatcher.ts). No buttons, so it is
 // dismissed by a swipe on the locked phone; a tap opens Profile on App
 // Updates, which asks before restarting. Carries nothing about the person.
@@ -1665,6 +1784,12 @@ async function runSync(): Promise<ReminderSyncResult> {
   const now = new Date();
   await offerVaultIfDue(now).catch((error) => console.warn('[reminderNotifications] the vault offer could not be checked', error));
   await offerBackupIfDue(now).catch((error) => console.warn('[reminderNotifications] the backup reminder could not be checked', error));
+  await getReminderPreferences()
+    .then((prefs) => offerCalendarEventsIfDue(now, isReminderKindEnabled(prefs, 'calendarOffer'), isCalendarEveryEventEnabled(prefs)))
+    .catch((error) => console.warn('[reminderNotifications] the calendar offers could not be checked', error));
+  // Adds pressed while locked are written on the first reconcile after the
+  // unlock. Not awaited, since it asks for a reconcile of its own.
+  void addWaitingCalendarEvents().catch((error) => console.error('[reminderNotifications] calendar adds not written', error));
   const today = localDateString(now);
   const horizon = new Date(now);
   horizon.setDate(horizon.getDate() + LOOKAHEAD_DAYS);
@@ -1702,11 +1827,19 @@ async function runSync(): Promise<ReminderSyncResult> {
     }
   }
 
+  // An appointment linked to a calendar event that has an alarm of its own
+  // is reminded about by the calendar, so the hour-before reminder here
+  // would only say it twice (2026-11-02). Read only when there is such an
+  // appointment and the calendar can be read; a failed read keeps every
+  // reminder.
+  const calendarAlarms = await readCalendarAlarms(candidates, lookback, horizon);
+
   const first = new Map<string, PlannedNotification>();
   const followUps = new Map<string, PlannedNotification>();
 
   for (const candidate of candidates) {
     if (!isReminderKindEnabled(preferences, reminderKindFor(candidate))) continue;
+    if (candidate.itemType === 'appointment' && leftToCalendar(candidate.linkedCalendarEventId ?? null, calendarAlarms)) continue;
     const planned = buildPlanned(candidate, now);
     if (!planned) continue;
     if (reminderKindFor(candidate) === 'hydration' && skipHydrationReminder(planned.fireAt, now, waterReached)) continue;
@@ -2067,6 +2200,7 @@ export async function listQueuedReminders(): Promise<QueuedReminder[]> {
 
 export type ReminderTapTarget =
   | { pathname: '/schedule'; params: { openScheduleLens: ScheduleLens } }
+  | { pathname: '/schedule'; params: { openScheduleLens: 'appointments'; importCalendarEvent: string; importCalendarAt: string } }
   | { pathname: '/garden'; params: { openGardenLens: GardenReminderLens } }
   | { pathname: '/life'; params: { openLifeLens: LifeReminderLens } }
   | { pathname: '/routine'; params: { id: string } }
@@ -2103,6 +2237,18 @@ export function resolveReminderTap(response: Notifications.NotificationResponse 
   // where the vault is set up.
   if (request?.identifier === VAULT_OFFER_NOTIFICATION_ID) return { pathname: '/profile', params: { section: 'applock' } };
   if (request?.identifier === BACKUP_OFFER_NOTIFICATION_ID) return { pathname: '/profile', params: { section: 'backup' } };
+  // A calendar event offered to Appointments opens the import form filled in
+  // with that event, ready to check and save.
+  if (request?.identifier?.startsWith(CALENDAR_OFFER_PREFIX)) {
+    const data = (request.content.data ?? {}) as { eventId?: unknown; startsAt?: unknown };
+    if (typeof data.eventId === 'string' && typeof data.startsAt === 'number') {
+      return {
+        pathname: '/schedule',
+        params: { openScheduleLens: 'appointments', importCalendarEvent: data.eventId, importCalendarAt: String(data.startsAt) },
+      };
+    }
+    return { pathname: '/schedule', params: { openScheduleLens: 'appointments' } };
+  }
   if (request?.identifier === APP_UPDATE_NOTIFICATION_ID) return { pathname: '/profile', params: { section: 'updates', install: '1' } };
   // A16: an alert about somebody else's dose opens Meds, where the band of
   // doses you watch sits. Queued by lib/peerDosesDb.ts, not by this module.
@@ -2246,6 +2392,17 @@ function responseKey(response: Notifications.NotificationResponse): string {
 // answering on this phone, and the merge carries it across.
 async function answerPress(response: Notifications.NotificationResponse): Promise<void> {
   const request = response.notification.request;
+  // A calendar offer is answered into a plain file, locked or not, and the
+  // add itself is written once the records can be.
+  if (request.identifier.startsWith(CALENDAR_OFFER_PREFIX)) {
+    await Notifications.dismissNotificationAsync(request.identifier).catch(() => undefined);
+    const data = (request.content.data ?? {}) as { eventId?: unknown; startsAt?: unknown };
+    const eventId = typeof data.eventId === 'string' ? data.eventId : '';
+    const startsAt = typeof data.startsAt === 'number' ? data.startsAt : NaN;
+    writeCalendarOfferState(answerCalendarOffer(readCalendarOfferState(), response.actionIdentifier, eventId, startsAt));
+    await addWaitingCalendarEvents().catch((error) => console.error('[reminderNotifications] calendar adds not written', error));
+    return;
+  }
   // The vault offer is not a reminder and writes nothing to the database.
   if (request.identifier === BACKUP_OFFER_NOTIFICATION_ID) {
     await Notifications.dismissNotificationAsync(request.identifier).catch(() => undefined);
@@ -2798,6 +2955,8 @@ export function listenForReminderTaps(navigate: (target: ReminderTapTarget) => v
   // again just below finds itself already answered.
   applyWaitingAnswers()
     .catch((error) => console.error('[reminderNotifications] kept presses not written', error))
+    .then(() => addWaitingCalendarEvents())
+    .catch((error) => console.error('[reminderNotifications] calendar adds not written', error))
     .then(() => Notifications.getLastNotificationResponseAsync())
     .then((response) => {
       handleResponse(response, navigate);

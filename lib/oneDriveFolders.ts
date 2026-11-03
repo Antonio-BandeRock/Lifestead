@@ -12,6 +12,7 @@
 //   |- Backups               where backups are written
 //   |- Photos                every photo, encrypted, one file each
 //   |- Recordings            audio somebody brought in, one file each
+//   |- Files                 files attached to a record, encrypted, one each
 //   |- Videos                held for video, made only when the first is kept
 //
 // EACH KIND OF FILE HAS A FOLDER OF ITS OWN (2026-09-30, by direct
@@ -45,15 +46,21 @@
 // cannot, rather than reporting a Graph error about an id that means nothing
 // here or a disk path that means nothing on a phone.
 
-import { getOneDriveFolder, setOneDriveFolder, type StoredOneDriveFolder } from './db';
+import { getOneDriveFolder, setMailboxFolderName, setOneDriveFolder, type StoredOneDriveFolder } from './db';
 import { isDesktopApp } from './desktop/bridge';
 import { folderFromPhonePath, isDiskFolder } from './desktop/cloudFolder';
+import { FILES_FOLDER_NAME } from './attachments';
 import { PHOTOS_FOLDER_NAME, RECORDINGS_FOLDER_NAME } from './media';
 import { isSignedIn } from './oneDriveAuth';
+import { findOrMakeLifesteadFolder, isGoogleFolder } from './googleDrive';
+import { isGoogleSignedIn } from './googleDriveAuth';
+import { isPhoneFolder } from './phoneFolder';
 import {
   checkFolder,
   ensureChildFolder,
   folderFromComputerPath,
+  getMyDriveId,
+  listMyRootFolders,
   type DriveItemRef,
   type GraphResult,
 } from './oneDriveGraph';
@@ -63,7 +70,7 @@ export const MAILBOX_FOLDER_NAME = 'Mailbox';
 export const BACKUPS_FOLDER_NAME = 'Backups';
 
 /** Every folder the app keeps under the shared folder. */
-export type ChildFolder = 'mailbox' | 'backups' | 'photos' | 'recordings';
+export type ChildFolder = 'mailbox' | 'backups' | 'photos' | 'recordings' | 'files';
 
 /**
  * Resolved children, kept only for the life of this app run.
@@ -76,7 +83,7 @@ export type ChildFolder = 'mailbox' | 'backups' | 'photos' | 'recordings';
 let cache: { rootItemId: string; children: Partial<Record<ChildFolder, DriveItemRef>> } | null = null;
 
 export type SharedFolderState =
-  | { state: 'notSignedIn' }
+  | { state: 'notSignedIn'; service?: 'google' }
   | { state: 'notSetUp' }
   | { state: 'unreachable'; name: string; reason: string }
   | { state: 'ready'; folder: DriveItemRef };
@@ -90,12 +97,19 @@ export type SharedFolderState =
  * is not a problem; the stored copy is brought back in line and used.
  */
 export async function getSharedFolder(): Promise<SharedFolderState> {
-  if (!(await isSignedIn())) return { state: 'notSignedIn' };
-
   let stored = await getOneDriveFolder();
+  // A folder on this phone needs no sign-in: the app that keeps it in step
+  // is signed in to its own service.
+  // A folder in Google Drive answers to the Google sign-in, and its address
+  // is the same on a phone and a computer, so neither repair below applies.
+  if (isGoogleFolder(stored)) {
+    if (!(await isGoogleSignedIn())) return { state: 'notSignedIn', service: 'google' };
+  } else if (!isPhoneFolder(stored) && !(await isSignedIn())) {
+    return { state: 'notSignedIn' };
+  }
   if (!stored) return { state: 'notSetUp' };
 
-  if (isDesktopApp() && !isDiskFolder(stored)) {
+  if (isDesktopApp() && !isDiskFolder(stored) && !isGoogleFolder(stored)) {
     // Chosen on a phone. Its path sentence names the same folder under
     // OneDrive on this computer, if that folder is here.
     const adopted = await folderFromPhonePath(stored.path);
@@ -114,7 +128,7 @@ export async function getSharedFolder(): Promise<SharedFolderState> {
     return { state: 'ready', folder: stored };
   }
 
-  if (!isDesktopApp() && isDiskFolder(stored)) {
+  if (!isDesktopApp() && isDiskFolder(stored) && !isGoogleFolder(stored)) {
     // Chosen on a computer, and the sentence it stored names the same
     // folder in this OneDrive. Both directions repair themselves now: a
     // phone that loaded a snapshot saved on a computer used to be left
@@ -156,11 +170,25 @@ export async function getSharedFolder(): Promise<SharedFolderState> {
   return { state: 'ready', folder: stored };
 }
 
+/**
+ * Whether this device can reach a shared folder at all: signed in to
+ * OneDrive or Google Drive, or using a folder on this phone, which needs no
+ * sign-in.
+ */
+export async function isSharedFolderConnected(): Promise<boolean> {
+  const stored = await getOneDriveFolder();
+  if (isPhoneFolder(stored)) return true;
+  if (isGoogleFolder(stored)) return isGoogleSignedIn();
+  return isSignedIn();
+}
+
 /** Wording for a shared folder that is not usable, said the same way everywhere. */
 export function describeSharedFolderProblem(state: SharedFolderState): string {
   switch (state.state) {
     case 'notSignedIn':
-      return 'Sign in to OneDrive first, on the Shared Folder screen.';
+      return state.service === 'google'
+        ? 'Sign in to Google Drive first, on the Shared Folder screen.'
+        : 'Sign in to OneDrive first, on the Shared Folder screen.';
     case 'notSetUp':
       return 'No shared folder set up yet. Set one up on the Shared Folder screen.';
     case 'unreachable':
@@ -216,6 +244,11 @@ export async function getRecordingsFolder(): Promise<GraphResult<DriveItemRef>> 
   return resolveChild('recordings', RECORDINGS_FOLDER_NAME) as Promise<GraphResult<DriveItemRef>>;
 }
 
+/** Where every attached file's encrypted copy lives, made if it is missing. */
+export async function getFilesFolder(): Promise<GraphResult<DriveItemRef>> {
+  return resolveChild('files', FILES_FOLDER_NAME) as Promise<GraphResult<DriveItemRef>>;
+}
+
 /**
  * Makes both children now, rather than on first use.
  *
@@ -226,11 +259,104 @@ export async function getRecordingsFolder(): Promise<GraphResult<DriveItemRef>> 
  */
 export async function prepareSharedFolder(): Promise<{ ok: boolean; reason?: string }> {
   cache = null;
-  const mailbox = await getMailboxFolder();
-  if (!mailbox.ok) return { ok: false, reason: mailbox.reason };
-  const backups = await getBackupsFolder();
-  if (!backups.ok) return { ok: false, reason: backups.reason };
+  // Every folder the app keeps, so the shape described on the screen is the
+  // shape somebody finds. Videos waits for the first video.
+  for (const make of [getMailboxFolder, getBackupsFolder, getPhotosFolder, getRecordingsFolder, getFilesFolder]) {
+    const made = await make();
+    if (!made.ok) return { ok: false, reason: made.reason };
+  }
   return { ok: true };
+}
+
+/** Where the app makes its folder when nobody has chosen one. */
+export const DEFAULT_FOLDER_PARENT = 'Apps';
+export const DEFAULT_FOLDER_NAME = 'Lifestead';
+export const DEFAULT_FOLDER_SENTENCE = 'OneDrive / ' + DEFAULT_FOLDER_PARENT + ' / ' + DEFAULT_FOLDER_NAME;
+
+/**
+ * Apps / Lifestead in this OneDrive, found if it is there and made if it is
+ * not (1.0.80.2, by direct instruction: "if we can automate the creation of
+ * their Lifestead folder structure, we should").
+ *
+ * Found before made, so a second device signing in to the same account lands
+ * on the folder the first one made rather than a Lifestead 1 beside it. A
+ * computer with two OneDrive folders (a personal account and a work one) is
+ * not guessed between: it returns null and the person chooses.
+ */
+export async function findOrMakeDefaultFolder(): Promise<GraphResult<DriveItemRef | null>> {
+  let top: DriveItemRef;
+  if (isDesktopApp()) {
+    const existing = await folderFromPhonePath(DEFAULT_FOLDER_SENTENCE);
+    if (existing) return { ok: true, value: existing };
+    const roots = await listMyRootFolders();
+    if (!roots.ok) return roots;
+    if (roots.value.length !== 1) return { ok: true, value: null };
+    top = roots.value[0];
+  } else {
+    if (!(await isSignedIn())) return { ok: true, value: null };
+    const drive = await getMyDriveId();
+    if (!drive.ok) return drive;
+    // Graph reads "root" as the top of the drive.
+    top = { driveId: drive.value, itemId: 'root', name: 'OneDrive', path: 'OneDrive' };
+  }
+  const apps = await ensureChildFolder(top, DEFAULT_FOLDER_PARENT);
+  if (!apps.ok) return apps;
+  const lifestead = await ensureChildFolder(apps.value, DEFAULT_FOLDER_NAME);
+  if (!lifestead.ok) return lifestead;
+  return { ok: true, value: { ...lifestead.value, path: lifestead.value.path ?? DEFAULT_FOLDER_SENTENCE } };
+}
+
+/** The folders made inside the shared folder, named the way the screen says them. */
+export const SHARED_FOLDER_CHILDREN_SENTENCE =
+  MAILBOX_FOLDER_NAME + ', ' + BACKUPS_FOLDER_NAME + ', Photos, Recordings and Files';
+
+/**
+ * Sets up Apps / Lifestead as the shared folder when none has been chosen,
+ * with every folder inside it, and says what was done. Null when a folder is
+ * already chosen or this device cannot make one without being asked which.
+ */
+export async function adoptDefaultFolderIfNone(): Promise<{ folder: DriveItemRef; note: string } | null> {
+  if (await getOneDriveFolder()) return null;
+  const found = await findOrMakeDefaultFolder();
+  if (!found.ok || !found.value) return null;
+  await setOneDriveFolder(found.value);
+  await setMailboxFolderName(found.value.name);
+  forgetResolvedFolders();
+  const prepared = await prepareSharedFolder();
+  const shared = await getSharedFolder();
+  const folder = shared.state === 'ready' ? shared.folder : found.value;
+  const where = folder.path ?? DEFAULT_FOLDER_SENTENCE;
+  return {
+    folder,
+    note: prepared.ok
+      ? 'Your shared folder is ' + where + ', with ' + SHARED_FOLDER_CHILDREN_SENTENCE + ' inside it. Choose a different folder below if you would rather.'
+      : 'Your shared folder is ' + where + ', but its folders could not all be made yet. ' + (prepared.reason ?? ''),
+  };
+}
+
+/** The folder Google Drive keeps, named the way the screen says it. */
+export const GOOGLE_FOLDER_SENTENCE = 'Google Drive / Lifestead';
+
+/**
+ * Google Drive / Lifestead as the shared folder, with every folder inside it.
+ * The only Google folder there is to choose, since the app sees only what it
+ * made (lib/googleDrive.ts).
+ */
+export async function chooseGoogleFolder(): Promise<{ ok: true; folder: DriveItemRef; note: string } | { ok: false; reason: string }> {
+  const found = await findOrMakeLifesteadFolder();
+  if (!found.ok) return found;
+  await setOneDriveFolder(found.value);
+  await setMailboxFolderName(found.value.name);
+  forgetResolvedFolders();
+  const prepared = await prepareSharedFolder();
+  const where = found.value.path ?? GOOGLE_FOLDER_SENTENCE;
+  return {
+    ok: true,
+    folder: found.value,
+    note: prepared.ok
+      ? 'Your shared folder is ' + where + ', with ' + SHARED_FOLDER_CHILDREN_SENTENCE + ' inside it. Sign in to the same Google account on your other device and tap Use Google Drive there too.'
+      : 'Your shared folder is ' + where + ', but its folders could not all be made yet. ' + (prepared.reason ?? ''),
+  };
 }
 
 /** Drops what was resolved, for a sign-out or a change of folder. */

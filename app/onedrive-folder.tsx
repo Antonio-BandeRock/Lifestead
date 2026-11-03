@@ -33,6 +33,19 @@
 // in to: the 2026-09-21 report was a sign-in page that "kept waiting and
 // waiting and never completed", since Microsoft's redirect had nowhere to
 // land on a PC.
+//
+// ON A PHONE THERE IS A THIRD WAY: A FOLDER ON THE PHONE (2026-11-03). For
+// anyone whose files live somewhere other than OneDrive, Android's own
+// folder picker chooses a folder that another app keeps in step with their
+// storage (lib/phoneFolder.ts). It needs no sign-in here, so it is offered
+// whether or not OneDrive is signed in, and signing out of OneDrive leaves
+// it alone.
+//
+// AND ON BOTH, GOOGLE DRIVE (1.0.80.6). Google's narrowest permission lets
+// the app see only what it made, so there is nothing to browse: Use Google
+// Drive signs in and makes or finds Google Drive / Lifestead, the same
+// folder on every device signed in to that Google account. Signing out of
+// OneDrive leaves it alone, and signing out of Google clears it.
 
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -48,13 +61,26 @@ import { getOneDriveFolder, setMailboxFolderName, setOneDriveFolder } from '../l
 import { isDesktopApp } from '../lib/desktop/bridge';
 import { explainNotYet } from '../lib/notYet';
 import { pickFolder } from '../lib/desktop/cloudFolder';
+import { isPhoneFolder, pickFolder as pickPhoneFolder } from '../lib/phoneFolder';
 import { isOneDriveConfigured, isSignedIn, signIn, signOut } from '../lib/oneDriveAuth';
+import { isGoogleFolder } from '../lib/googleDrive';
 import {
+  googleDriveUnavailableReason,
+  isGoogleDriveAvailable,
+  isGoogleSignedIn,
+  signInToGoogle,
+  signOutOfGoogle,
+} from '../lib/googleDriveAuth';
+import {
+  adoptDefaultFolderIfNone,
   BACKUPS_FOLDER_NAME,
+  chooseGoogleFolder,
   forgetResolvedFolders,
+  GOOGLE_FOLDER_SENTENCE,
   getSharedFolder,
   MAILBOX_FOLDER_NAME,
   prepareSharedFolder,
+  SHARED_FOLDER_CHILDREN_SENTENCE,
 } from '../lib/oneDriveFolders';
 import {
   createFolder,
@@ -75,6 +101,7 @@ export default function OneDriveFolderScreen() {
   const desktop = isDesktopApp();
 
   const [signedIn, setSignedIn] = useState<boolean | null>(null);
+  const [googleSignedIn, setGoogleSignedIn] = useState(false);
   const [busy, setBusy] = useState(false);
   const [note, setNote] = useState<string | null>(null);
   // A computer has no Shared with me: a folder somebody shared sits inside
@@ -89,6 +116,10 @@ export default function OneDriveFolderScreen() {
   const [newFolderName, setNewFolderName] = useState('');
 
   const current = trail.length > 0 ? trail[trail.length - 1] : null;
+  const usingPhoneFolder = isPhoneFolder(chosen);
+  const usingGoogleFolder = isGoogleFolder(chosen);
+  // A folder that answers to no OneDrive sign-in.
+  const usingOtherFolder = usingPhoneFolder || usingGoogleFolder;
 
   const load = useCallback(async (nextRoot: Root, nextTrail: DriveItemRef[]) => {
     setBusy(true);
@@ -128,12 +159,25 @@ export default function OneDriveFolderScreen() {
 
   useEffect(() => {
     void (async () => {
-      const [alreadySignedIn, saved] = await Promise.all([isSignedIn(), getOneDriveFolder()]);
+      const [alreadySignedIn, saved, google] = await Promise.all([isSignedIn(), getOneDriveFolder(), isGoogleSignedIn()]);
       setSignedIn(alreadySignedIn);
+      setGoogleSignedIn(google);
       setChosen(saved);
-      if (!alreadySignedIn) return;
+      if (!alreadySignedIn) {
+        if (isPhoneFolder(saved) || isGoogleFolder(saved)) setChosen(await refreshStored(saved));
+        return;
+      }
       const currentFolder = await refreshStored(saved);
       setChosen(currentFolder);
+      if (!currentFolder) {
+        // Nothing chosen yet, so the app makes Apps / Lifestead rather than
+        // asking somebody to build a layout it keeps itself.
+        const made = await adoptDefaultFolderIfNone();
+        if (made) {
+          setChosen(made.folder);
+          setNote(made.note);
+        }
+      }
       if (desktop) {
         // Start inside the OneDrive folder itself when there is one, since
         // a listing that says only "OneDrive" is a tap for nothing. Two
@@ -159,22 +203,78 @@ export default function OneDriveFolderScreen() {
       return;
     }
     setSignedIn(true);
+    const made = await adoptDefaultFolderIfNone();
+    if (made) {
+      setChosen(made.folder);
+      setNote(made.note);
+    }
     await load(root, []);
   };
 
   const handleSignOut = async () => {
     await signOut();
+    setSignedIn(false);
+    setFolders([]);
+    setTrail([]);
+    if (usingPhoneFolder) {
+      // A folder on this phone never needed OneDrive, so it stays.
+      setNote('Signed out of OneDrive. Your shared folder is on this phone, so it is still in use.');
+      return;
+    }
+    if (usingGoogleFolder) {
+      setNote('Signed out of OneDrive. Your shared folder is in Google Drive, so it is still in use.');
+      return;
+    }
     // The folder goes with the account. Leaving an address behind that nothing
     // can open would show a folder that is set up and refuses every write, which
     // is worse than plainly showing nothing is set up.
     await setOneDriveFolder(null);
     await setMailboxFolderName(null);
     forgetResolvedFolders();
-    setSignedIn(false);
     setChosen(null);
-    setFolders([]);
-    setTrail([]);
     setNote('Signed out of OneDrive. The shared folder was cleared with it.');
+  };
+
+  /** Signs in to Google when needed, then makes or finds Google Drive / Lifestead. */
+  const handleUseGoogle = async () => {
+    if (!isGoogleDriveAvailable()) return explainNotYet(googleDriveUnavailableReason());
+    setBusy(true);
+    setNote(null);
+    if (!googleSignedIn) {
+      const signedInNow = await signInToGoogle();
+      if (!signedInNow.ok) {
+        setBusy(false);
+        setNote(signedInNow.reason);
+        return;
+      }
+      setGoogleSignedIn(true);
+    }
+    const used = await chooseGoogleFolder();
+    setBusy(false);
+    if (!used.ok) {
+      setNote(used.reason);
+      return;
+    }
+    setChosen(used.folder);
+    setNote(used.note);
+  };
+
+  const handleGoogleSignOut = async () => {
+    await signOutOfGoogle();
+    setGoogleSignedIn(false);
+    const ending =
+      ' To take away Lifestead\'s access completely, remove it under Security in your Google Account. Your files stay in Google Drive.';
+    if (!usingGoogleFolder) {
+      setNote('Signed out of Google Drive.' + ending);
+      return;
+    }
+    // The same reason as OneDrive: an address nothing can open is worse than
+    // plainly showing nothing is set up.
+    await setOneDriveFolder(null);
+    await setMailboxFolderName(null);
+    forgetResolvedFolders();
+    setChosen(null);
+    setNote('Signed out of Google Drive. The shared folder was cleared with it.' + ending);
   };
 
   const handleSwitchRoot = async (nextRoot: Root) => {
@@ -206,22 +306,19 @@ export default function OneDriveFolderScreen() {
     // is what this app opens; the name is what a person reads.
     await setMailboxFolderName(folder.name);
     setChosen(folder);
+    forgetResolvedFolders();
     // Made now rather than on first use, so somebody can open OneDrive straight
     // afterwards and see the shape they were told about.
     const prepared = await prepareSharedFolder();
     setBusy(false);
     setNote(
       prepared.ok
-        ? 'Using ' +
-          folder.name +
-          '. ' +
-          MAILBOX_FOLDER_NAME +
-          ' and ' +
-          BACKUPS_FOLDER_NAME +
-          ' are ready inside it.'
+        ? 'Using ' + folder.name + '. ' + SHARED_FOLDER_CHILDREN_SENTENCE + ' are ready inside it.'
         : 'Using ' + folder.name + ', but its folders could not be made yet. ' + (prepared.reason ?? ''),
     );
-    await load(root, nextTrail);
+    // A folder on this phone was chosen in Android's picker, so there is no
+    // OneDrive listing to move to.
+    if (!isPhoneFolder(folder)) await load(root, nextTrail);
   };
 
   const handleUse = async () => {
@@ -246,6 +343,20 @@ export default function OneDriveFolderScreen() {
     setTrail(nextTrail);
     setRoot('mine');
     await adoptFolder(picked.value, nextTrail);
+  };
+
+  /**
+   * Android's folder picker, for a folder another app keeps in step with
+   * wherever the person stores their files.
+   */
+  const handleChoosePhoneFolder = async () => {
+    const picked = await pickPhoneFolder();
+    if (!picked.ok) {
+      setNote(picked.reason);
+      return;
+    }
+    if (!picked.value) return;
+    await adoptFolder(picked.value, []);
   };
 
   const handleCreate = async () => {
@@ -285,13 +396,13 @@ export default function OneDriveFolderScreen() {
         <View style={styles.card}>
           <Text style={styles.label}>Your shared folder</Text>
           <Text style={styles.hint}>
-            One folder in OneDrive holding everything this app keeps there. Set it up once, whether or not you ever add
-            anyone, because backups need it too.
+            One folder holding everything this app keeps there. Set it up once, whether or not you ever add anyone,
+            because backups need it too.
           </Text>
           {/* Signed out, nothing is in use, whatever is remembered. The choice is
               kept (a sign-in Microsoft stopped honouring leaves it in place) so
               signing back in picks it up, and the sign-in card says so. */}
-          {signedIn === false ? (
+          {signedIn === false && !usingOtherFolder ? (
             <Text style={styles.hint}>Not signed in to OneDrive, so no folder is in use on this device.</Text>
           ) : chosen ? (
             <>
@@ -308,13 +419,48 @@ export default function OneDriveFolderScreen() {
               {/* Said once, plainly, because it is the consequence somebody is
                   least likely to have thought through. */}
               <Text style={styles.warning}>
-                Anything in this folder is visible to whoever you share it with in OneDrive, and that includes your
-                backups.
+                {usingPhoneFolder
+                  ? 'Anything in this folder is visible to whoever can see it where your storage app keeps it, and that includes your backups.'
+                  : usingGoogleFolder
+                    ? 'Anything in this folder is visible to whoever you share it with in Google Drive, and that includes your backups.'
+                    : 'Anything in this folder is visible to whoever you share it with in OneDrive, and that includes your backups.'}
               </Text>
+              {usingPhoneFolder ? (
+                <Text style={styles.hint}>
+                  The app that keeps this folder in step decides when it reaches your storage, so a change here reaches
+                  your other device as soon as that app has carried it across.
+                </Text>
+              ) : null}
             </>
           ) : (
             <Text style={styles.hint}>Nothing set up yet.</Text>
           )}
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.label}>Google Drive</Text>
+          <Text style={styles.hint}>
+            The app makes one folder, {GOOGLE_FOLDER_SENTENCE}, and works only inside it. Google is asked for the
+            narrowest permission it has: Lifestead can see the files it made and nothing else in your Drive.
+          </Text>
+          <Text style={styles.hint}>
+            For two devices, sign in to the same Google account on both and tap Use Google Drive on each. To share with
+            another person, use Connections rather than sharing this folder, since the app cannot see a folder somebody
+            else made.
+          </Text>
+          {usingGoogleFolder ? (
+            <Text style={styles.hint}>In use now.</Text>
+          ) : (
+            <TouchableOpacity style={styles.primaryButton} onPress={handleUseGoogle} disabled={busy}>
+              <Ionicons name="logo-google" size={18} color={colors.textOnButton} />
+              <Text style={styles.primaryButtonText}>Use Google Drive</Text>
+            </TouchableOpacity>
+          )}
+          {googleSignedIn ? (
+            <TouchableOpacity onPress={handleGoogleSignOut} hitSlop={8} disabled={busy}>
+              <Text style={styles.action}>Sign Out of Google Drive</Text>
+            </TouchableOpacity>
+          ) : null}
         </View>
 
         {signedIn === false ? (
@@ -342,6 +488,27 @@ export default function OneDriveFolderScreen() {
             </TouchableOpacity>
           </View>
         ) : null}
+
+        {desktop ? null : (
+          <View style={styles.card}>
+            <Text style={styles.label}>A folder on this phone</Text>
+            <Text style={styles.hint}>
+              For files kept anywhere other than OneDrive or Google Drive: Dropbox, Box, MEGA, pCloud, a Nextcloud, or a
+              computer at home.
+              Install an app that keeps a folder on this phone in step with that storage, such as Syncthing, FolderSync or
+              Autosync, then choose that folder here. No sign-in is needed in Lifestead.
+            </Text>
+            <Text style={styles.hint}>
+              Some storage apps, Dropbox among them, do not offer their folders in this list. Android also
+              will not hand over the top of the phone&apos;s storage or the Download folder itself, so choose a folder inside
+              one.
+            </Text>
+            <TouchableOpacity style={styles.primaryButton} onPress={handleChoosePhoneFolder} disabled={busy}>
+              <Ionicons name="phone-portrait-outline" size={18} color={colors.textOnButton} />
+              <Text style={styles.primaryButtonText}>Choose a Folder on This Phone</Text>
+            </TouchableOpacity>
+          </View>
+        )}
 
         {signedIn ? (
           <>

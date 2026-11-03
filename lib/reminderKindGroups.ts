@@ -26,6 +26,7 @@ export const REMINDER_KIND_PLACE: Record<ReminderKindKey, ReminderPlace> = {
   morning: { tab: 'Home', lens: 'Morning Check-In' },
   week: { tab: 'Home', lens: 'Your Week' },
   appointment: { tab: 'Schedules', lens: 'Appointments' },
+  calendarOffer: { tab: 'Schedules', lens: 'Appointments' },
   exercise: { tab: 'Schedules', lens: 'Exercise' },
   practice: { tab: 'Interests', lens: 'Sessions' },
   learnReady: { tab: 'Interests', lens: 'Learn' },

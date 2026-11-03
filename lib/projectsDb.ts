@@ -2,6 +2,7 @@
 // itself is decided in lib/projects.ts with no database; this carries out
 // the changes. See projects and project_steps in lib/db.ts.
 
+import { removeAttachmentsOf } from './attachmentsDb';
 import { getDatabase } from './db';
 import {
   cleanProjectText,
@@ -218,6 +219,7 @@ export async function deleteProject(id: string): Promise<void> {
     await db.runAsync('DELETE FROM project_steps WHERE project_id = ?', id);
     await db.runAsync('DELETE FROM projects WHERE id = ?', id);
   });
+  await removeAttachmentsOf('project', id);
 }
 
 export type StepInput = {

@@ -136,7 +136,7 @@ console.log('The peer allowlist');
 const ALL = { meals: true, shopping: true, conditions: true, photos: true };
 const NONE = { meals: false, shopping: false, conditions: false, photos: false };
 ok(P.tableNamesThatCross('partner', ALL).includes('household_meal_calendar'), 'a partner with Meals on shares the calendar');
-ok(!P.tableNamesThatCross('partner', { ...ALL, meals: false }).includes('household_meal_calendar'), 'with Meals off the calendar does not cross');
+ok(P.tableNamesThatCross('partner', { ...ALL, meals: false }).includes('household_meal_calendar'), 'the calendar is household, so an old Meals switch cannot stop it (1.0.80.2)');
 ok(P.tableNamesThatCross('partner', { ...ALL, shopping: false }).includes('household_meal_calendar'), 'Shopping does not govern the calendar');
 ok(P.tableNamesThatCross('recipe', ALL).length === 0, 'a recipe link carries nothing');
 const home = P.columnsThatStayHome('partner', ALL).household_meal_calendar || [];
@@ -154,7 +154,7 @@ for (const role of roles) {
   }
 }
 ok(leaked.length === 0, 'no role and no permission carries a health table or schedule_items' + (leaked.length ? ' ' + leaked.join(',') : ''));
-ok(JSON.stringify(P.tableNamesThatCross('partner', NONE).sort()) === JSON.stringify(['upkeep_doings', 'upkeep_items']), 'everything off carries only the chores somebody marked for the household (J8: that mark is the permission)');
+ok(JSON.stringify(P.tableNamesThatCross('partner', NONE).sort()) === JSON.stringify(['grocery_list_items', 'grocery_lists', 'household_meal_calendar', 'upkeep_doings', 'upkeep_items']), 'every switch off still carries the household: shopping, the calendar and the chores (1.0.80.2)');
 clean(P.areaFor('mealCalendar').what);
 clean(P.describeWhatMerges('partner', ALL, 'Sam'));
 

@@ -41,6 +41,79 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.80.6',
+    date: '2026-11-03',
+    changes: [
+      'Your shared folder can now be in Google Drive. On the Shared Folder screen, Use Google Drive signs in and makes one folder, Google Drive / Lifestead, which every device signed in to the same Google account uses. Lifestead asks Google for the narrowest permission there is, so it sees only the files it made and nothing else in your Drive.',
+      'On a computer the sign-in opens in your browser and comes back to Lifestead by itself. On a phone it needs the next installed version, and says so until then.',
+    ],
+  },
+  {
+    version: '1.0.80.5',
+    date: '2026-11-03',
+    changes: [
+      'Ready for the next installed version: sharing any file to Lifestead from another app, such as a PDF from your email or a recording, puts it on a Capture note as an attached file, with any photos shared beside it, so you can sort it from there. A file that cannot be kept is named on the note with the reason. Until that version is installed, Lifestead is offered only for text, links and photos.',
+    ],
+  },
+  {
+    version: '1.0.80.4',
+    date: '2026-11-03',
+    changes: [
+      'Files can now be kept with many more records, each under a Files line: appointments, meds and supplements, the lab report for a day blood was drawn, medical bills and your health plan, the emergency card, money in and out, upkeep items, kitchen items, work benefits, projects, family members, grow equipment, garden areas, seed packets, interests and library entries.',
+      'Each place keeps only the kinds of file that belong there, such as a PDF, a scan or a document for a medical bill, or a manual, a receipt or a how-to video for an upkeep item. A file of another kind is turned away with what the place takes. Projects, interests and Capture notes take anything.',
+      'Removing a record removes its files too, from this device and from the Files folder in your shared folder.',
+    ],
+  },
+  {
+    version: '1.0.80.3',
+    date: '2026-11-03',
+    changes: [
+      "Partners: whatever your partner switches on about themselves now shows under their name beside your records, read only: their meds and supplements on My Meds, their emergency card and contacts on Emergency, their appointments on Schedules > Appointments, and their accounts, budgets and goals, and insurance and health accounts on Finances. Each has a switch on their phone, and switching one off takes it off yours at the next send.",
+      "Conditions a partner tracks show on Life > Conditions under their name, and one you both track says so.",
+      "If a partner link ends, the meals you planned together and their dish photos stay on Schedules > Meal Plan under From their name, no longer changing, until you tap Let Go of This. What they shared about their health, emergency card and money comes off your phone.",
+    ],
+  },
+  {
+    version: '1.0.80.2',
+    date: '2026-11-03',
+    changes: [
+      'A Capture note can keep files now: under a note, tap Files, then Attach a File, and pick a PDF, a document, a spreadsheet or anything else. Each file opens in an app that reads its kind, and an encrypted copy goes to a Files folder inside your shared folder so your other device has it too.',
+      'Your shared folder sets itself up. Signing in to OneDrive makes OneDrive / Apps / Lifestead, with the Mailbox, Backups, Photos, Recordings and Files folders inside it, or uses it if your other device already made it. You can still choose a different folder.',
+      'Partners: only what you share about your health has a switch now (which conditions you track, and when a dose is not marked). Meals, the shopping list, the household meal calendar, the chores and photos of shared meals are always shared, since you run them together. A new switch on their row, Show their side on this phone, hides their meals, conditions, photos and dose alerts here without telling them and without throwing away what they sent.',
+      'Connections: the relay is the way shown first, since it works by itself. The shared folder and sending a file are under Other ways, closed until you open it.',
+    ],
+  },
+  {
+    version: '1.0.80.1',
+    date: '2026-11-03',
+    changes: [
+      "The shared folder no longer has to be in OneDrive. On the phone, Profile > Backup & Restore > Set Up the Shared Folder now offers A folder on this phone: choose a folder that another app keeps in step with wherever you keep your files (Dropbox, Box, MEGA, pCloud, a Nextcloud or a computer at home, through an app such as Syncthing, FolderSync or Autosync), and backups, sync and sharing with a partner all use it with no sign-in in Lifestead.",
+    ],
+  },
+  {
+    version: '1.0.79.14',
+    date: '2026-11-02',
+    changes: [
+      "Calendar offers now ask only about events whose names look like a health visit (a doctor, a lab draw, a dentist, a therapist), since that is where Appointments adds something the calendar cannot: the supplement check before a lab draw and what has changed since your last visit. Pick Every event in Profile > Reminders to be asked about everything. And an appointment brought in from a calendar event that already reminds you no longer gets a second one from the app an hour before.",
+    ],
+  },
+  {
+    version: '1.0.79.13',
+    date: '2026-11-02',
+    changes: [
+      "Events on your phone's calendar can now come to you as a notification asking whether to add them to Appointments, once Appointments has been let read the calendar. An event in the next two weeks that is not in Appointments yet is asked about once, three a day at most and never at night. Add to Appointments, Not This One and Stop Asking all work on the locked phone, and tapping the notification opens the event ready to check and save. Turn it off in Profile > Reminders under Events on your calendar.",
+    ],
+  },
+  {
+    version: '1.0.79.12',
+    date: '2026-11-02',
+    changes: [
+      "Who to call keeps one record per person. Picking someone from the phone's contacts who is already on the list opens them, with the number and where they came from brought up to date, instead of adding a second copy. Picking or typing a name that is already there asks whether it is the same person first, since two people can share a name.",
+      "On a computer, an iCloud Drive or Google Drive folder kept on the disk can now be the shared folder, beside OneDrive. An Android phone cannot reach iCloud, so an iCloud folder is for two computers.",
+      "Once the next phone update is installed, the notification for a routine you are walking through shows a running clock: counting down to the end of a step that has a length, and counting up from when the step came up for one that does not.",
+    ],
+  },
+  {
     version: '1.0.79.11',
     date: '2026-11-02',
     changes: [

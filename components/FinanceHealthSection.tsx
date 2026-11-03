@@ -6,6 +6,8 @@ import { NotesInput } from './NotesInput';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
 import { TabBand, useTabBandStyles } from './TabBand';
+import { PartnerBesideBand } from './PartnerBesideBand';
+import { AttachedFiles } from './AttachedFiles';
 import { useBandFolds } from '../hooks/useBandFolds';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
@@ -266,6 +268,7 @@ export function FinanceHealthSection({ tabColor }: Props) {
             }); setOpenForm('plan'); }} ref={walkMark.ref('finance.planEdit')}>
               <Text style={styles.actionText}>Edit plan</Text>
             </TouchableOpacity>
+            <AttachedFiles ownerKind="insurance_plan" ownerId={plan.id} tabColor={tabColor} openerRef={walkMark.ref('finance.planFiles')} />
           </>
         ) : (
           <>
@@ -442,6 +445,12 @@ export function FinanceHealthSection({ tabColor }: Props) {
                       <Text style={styles.actionTextRemove}>Remove</Text>
                     </TouchableOpacity>
                   </View>
+                  <AttachedFiles
+                    ownerKind="medical_bill"
+                    ownerId={bill.id}
+                    tabColor={tabColor}
+                    openerRef={index === 0 ? walkMark.ref('finance.medFiles') : undefined}
+                  />
                 </View>
                 <Text style={styles.listAmount}>{bill.youOwe != null ? formatHealthMoney(bill.youOwe) : '—'}</Text>
               </View>
@@ -517,6 +526,7 @@ export function FinanceHealthSection({ tabColor }: Props) {
           </ThumbRow>
         </View>
       ) : null}
+      <PartnerBesideBand kind="insurance" tabColor={tabColor} />
     </View>
   );
 }

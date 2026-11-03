@@ -57,6 +57,8 @@ export type EmergencyContact = {
   notes: string | null;
   /** Where the person came from, filled in by the app (lib/contactSource.ts). Null on a row saved before 1.0.79.11. */
   source: string | null;
+  /** The phone contact this person was picked from, so a second pick is known as them. Null when typed. */
+  contactKey: string | null;
 };
 
 export type EmergencyProfile = {

@@ -31,6 +31,7 @@ import { applySyncFileText, contentDigest, PARTNER_SYNC_FILE_KIND, planRecipeIds
 import { PEER_PHOTO_BUDGET_DIRECT } from './peerPhotos';
 import { peerPhotoPartFor } from './peerPhotosDb';
 import { peerDosePartFor } from './peerDosesDb';
+import { besidePartFor } from './peerBesideDb';
 import { talksAutomatically } from './peerRelationships';
 import { readPeerTables } from './peerSyncDevice';
 import { REFERENCE_DB_VERSION } from './referenceDbVersion';
@@ -42,11 +43,10 @@ import {
   uploadText,
   type DriveItemRef,
 } from './oneDriveGraph';
-import { isSignedIn } from './oneDriveAuth';
 import { describeSharedFolderProblem, getMailboxFolder, getSharedFolder } from './oneDriveFolders';
 
 export type MailboxStatus =
-  | { state: 'notSignedIn' }
+  | { state: 'notSignedIn'; service?: 'google' }
   | { state: 'noFolder' }
   | { state: 'unreachable'; folderName: string; reason: string }
   | { state: 'ready'; folder: DriveItemRef };
@@ -60,9 +60,8 @@ export type MailboxStatus =
  * the mailbox.
  */
 export async function getMailboxStatus(): Promise<MailboxStatus> {
-  if (!(await isSignedIn())) return { state: 'notSignedIn' };
-
   const shared = await getSharedFolder();
+  if (shared.state === 'notSignedIn') return { state: 'notSignedIn', service: shared.service };
   if (shared.state === 'notSetUp') return { state: 'noFolder' };
   if (shared.state !== 'ready') {
     return {
@@ -167,6 +166,7 @@ export async function sendViaOneDrive(options: { onlyWhenChanged?: boolean } = {
         allowFull: true,
       }),
       doses: await peerDosePartFor(partner),
+      beside: await besidePartFor(partner),
     });
 
     // The digest leaves out the send time, which differs on every send.

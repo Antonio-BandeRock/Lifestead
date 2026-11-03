@@ -7,6 +7,7 @@
 
 import { isDesktopApp } from './desktop/bridge';
 import { readFileBytes } from './desktop/cloudFolder';
+import { isGoogleFolder, readFileBytes as readGoogleBytes } from './googleDrive';
 import { getDatabase } from './db';
 import { forgetCacheUse, touchCacheUse } from './mediaCacheDb';
 import { shareFileIfAvailable } from './nativeSharing';
@@ -204,7 +205,9 @@ export async function recordingPlayUrl(item: Recording): Promise<PlayableResult>
   if (!bytes) {
     const folder = await getRecordingsFolder();
     if (!folder.ok) return { ok: false, reason: RECORDING_NOT_REACHABLE };
-    const read = await readFileBytes(folder.value, item.fileName);
+    const read = isGoogleFolder(folder.value)
+      ? await readGoogleBytes(folder.value, item.fileName)
+      : await readFileBytes(folder.value, item.fileName);
     if (!read.ok) return { ok: false, reason: RECORDING_ON_THE_WAY };
     bytes = read.value;
   }

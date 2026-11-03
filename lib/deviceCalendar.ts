@@ -18,6 +18,8 @@ export type DeviceCalendarEvent = {
   location: string | null;
   notes: string | null;
   calendarTitle: string;
+  /** The calendar reminds about it itself (one alarm or more on the event). */
+  hasAlarm: boolean;
 };
 
 export async function hasCalendarPermission(): Promise<boolean> {
@@ -86,6 +88,7 @@ export async function listDeviceEventsForTimeline(
       location: event.location || null,
       notes: event.notes || null,
       calendarTitle: calendarTitleById.get(event.calendarId) ?? 'Calendar',
+      hasAlarm: (event.alarms?.length ?? 0) > 0,
     };
   });
 }
@@ -121,6 +124,7 @@ export async function listUpcomingDeviceEvents(startDate: Date, endDate: Date): 
       location: event.location || null,
       notes: event.notes || null,
       calendarTitle: calendarTitleById.get(event.calendarId) ?? 'Calendar',
+      hasAlarm: (event.alarms?.length ?? 0) > 0,
     }))
     .sort((a, b) => a.startDate.localeCompare(b.startDate));
 }

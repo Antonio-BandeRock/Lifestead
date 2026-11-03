@@ -5,6 +5,10 @@
  * asks for the larger size, which comes the next time their phone sends,
  * and once it is here the same tap opens it. Nothing on this strip is
  * editable, since the photos are theirs.
+ *
+ * With frozen, the photos were kept from somebody no longer shared with
+ * (lib/connections.ts removeConnection): nothing can be asked for, so a tap
+ * opens what is here and says so when only the small size was kept.
  */
 import { Image } from 'expo-image';
 import { useFocusEffect } from 'expo-router';
@@ -15,6 +19,7 @@ import { textShadow, typography } from '../constants/typography';
 import { PEER_PHOTO_TAP_LINE, peerPhotoAskedLine } from '../lib/peerPhotos';
 import { listPeerDishPhotos, requestPeerPhoto, type PeerDishPhoto } from '../lib/peerPhotosDb';
 import { modalAnimationType } from '../lib/visualPreferences';
+import { t } from '../lib/i18n';
 import { useInfoAlert } from './InfoAlert';
 import { HorizontalScroll } from './HorizontalScroll';
 
@@ -25,11 +30,13 @@ export function PeerDishPhotos({
   personName,
   dishes,
   tabColor,
+  frozen = false,
 }: {
   connectionId: string;
   personName: string;
   dishes: readonly Dish[];
   tabColor: string;
+  frozen?: boolean;
 }) {
   const [photos, setPhotos] = useState<Map<string, PeerDishPhoto>>(new Map());
   const [open, setOpen] = useState<{ dish: Dish; photo: PeerDishPhoto } | null>(null);
@@ -56,6 +63,10 @@ export function PeerDishPhotos({
   async function handleTap(dish: Dish, photo: PeerDishPhoto) {
     if (photo.fullUri) {
       setOpen({ dish, photo });
+      return;
+    }
+    if (frozen) {
+      showInfoAlert(dish.name, t('Only the small size was kept from {name}.', { name: personName }));
       return;
     }
     if (!photo.requested) {
@@ -88,7 +99,7 @@ export function PeerDishPhotos({
           </TouchableOpacity>
         ))}
       </HorizontalScroll>
-      <Text style={styles.tapLine}>{PEER_PHOTO_TAP_LINE}</Text>
+      {frozen ? null : <Text style={styles.tapLine}>{PEER_PHOTO_TAP_LINE}</Text>}
 
       <Modal
         visible={open !== null}

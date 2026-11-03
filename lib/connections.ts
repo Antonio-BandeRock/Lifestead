@@ -28,7 +28,7 @@ import { getDeviceIdentity } from './deviceIdentity';
 import { decodeBase64Utf8, encodeBase64Utf8 } from './sharing';
 import { canEncryptTo } from './partnerCrypto';
 import { clearPartnerMealPlan } from './mealPlanSync';
-import { CONNECTION_ROLES, defaultGrantsForRole, type ConnectionRole, type ShareGrants } from './partners';
+import { CONNECTION_ROLES, defaultGrantsForRole, noGrants, SHARE_SCOPES, withHouseholdOn, type ConnectionRole, type ShareGrants } from './partners';
 import { areasTheyOwn } from './peerRelationships';
 
 /**
@@ -57,6 +57,12 @@ export type Connection = {
   fingerprintVerifiedAt: string | null;
   /** What YOU grant THEM. One direction only. */
   grants: ShareGrants;
+  /**
+   * Whether their side shows on this device (1.0.80.2): their meals, their
+   * conditions in the plan, their dose alerts and photos. The receiver's
+   * switch. Off keeps what they sent and hides it; nothing tells them.
+   */
+  showTheirs: boolean;
   /** Condition codes they shared. Never anything else about their health. */
   theirConditionCodes: string[];
   theirConditionsAt: string | null;
@@ -95,6 +101,13 @@ type ConnectionRow = {
   share_conditions: number | null;
   share_photos: number | null;
   share_doses: number | null;
+  share_meds: number | null;
+  share_emergency: number | null;
+  share_appointments: number | null;
+  share_accounts: number | null;
+  share_budgets: number | null;
+  share_insurance: number | null;
+  show_theirs: number | null;
   their_condition_codes_json: string | null;
   their_conditions_at: string | null;
 };
@@ -105,8 +118,25 @@ const CONNECTION_COLUMNS = `
   id, name, public_key_base64, encryption_public_key_base64, paired_at, role, they_have_me_at,
   mailbox_folder, outbox_file_uri, inbox_file_uri,
   fingerprint_verified_at, share_meals, share_shopping, share_conditions, share_photos, share_doses,
-  their_condition_codes_json, their_conditions_at
+  share_meds, share_emergency, share_appointments, share_accounts, share_budgets, share_insurance,
+  show_theirs, their_condition_codes_json, their_conditions_at
 `;
+
+// Every switch has a column named share_<scope>, so these two walk
+// SHARE_SCOPES rather than naming columns, and a switch added later is read
+// and written everywhere at once.
+const GRANT_COLUMNS = SHARE_SCOPES.map((scope) => `share_${scope.code}`);
+
+function grantsFromRow(row: ConnectionRow): ShareGrants {
+  const grants = noGrants();
+  const cells = row as unknown as Record<string, unknown>;
+  for (const scope of SHARE_SCOPES) grants[scope.code] = Number(cells[`share_${scope.code}`]) === 1;
+  return grants;
+}
+
+function grantValues(grants: ShareGrants): number[] {
+  return SHARE_SCOPES.map((scope) => (grants[scope.code] ? 1 : 0));
+}
 
 function fromRow(row: ConnectionRow): Connection {
   let theirConditionCodes: string[] = [];
@@ -142,13 +172,10 @@ function fromRow(row: ConnectionRow): Connection {
     // Number() rather than === 1, as a belt-and-braces guard: these columns
     // are INTEGER on both paths (verified against a scratch database), and
     // this still holds if one ever slips through as TEXT.
-    grants: {
-      meals: Number(row.share_meals) === 1,
-      shopping: Number(row.share_shopping) === 1,
-      conditions: Number(row.share_conditions) === 1,
-      photos: Number(row.share_photos) === 1,
-      doses: Number(row.share_doses) === 1,
-    },
+    // Household things read as on for any link that plans meals (1.0.80.2),
+    // so a row switched off before they stopped being switches still shares.
+    grants: withHouseholdOn(asRole(row.role), grantsFromRow(row)),
+    showTheirs: row.show_theirs == null || Number(row.show_theirs) === 1,
     theirConditionCodes,
     theirConditionsAt: row.their_conditions_at,
   };
@@ -171,18 +198,14 @@ export async function addConnection(
   // sharing meals and shopping and deliberately NOT conditions.
   const grants = options.grants ?? defaultGrantsForRole(role);
   await db.runAsync(
-    `INSERT INTO connections (id, name, public_key_base64, encryption_public_key_base64, role, share_meals, share_shopping, share_conditions, share_photos, share_doses)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO connections (id, name, public_key_base64, encryption_public_key_base64, role, ${GRANT_COLUMNS.join(', ')})
+     VALUES (?, ?, ?, ?, ?, ${GRANT_COLUMNS.map(() => '?').join(', ')})`,
     id,
     trimmedName || 'Unnamed connection',
     publicKeyBase64,
     options.encryptionPublicKeyBase64 ?? null,
     role,
-    grants.meals ? 1 : 0,
-    grants.shopping ? 1 : 0,
-    grants.conditions ? 1 : 0,
-    grants.photos ? 1 : 0,
-    grants.doses ? 1 : 0,
+    ...grantValues(grants),
   );
   const row = await db.getFirstAsync<ConnectionRow>(`SELECT ${CONNECTION_COLUMNS} FROM connections WHERE id = ?`, id);
   if (!row) throw new Error('Failed to save the new connection.');
@@ -227,25 +250,66 @@ export async function renameConnection(id: string, name: string): Promise<void> 
 }
 
 /**
- * Removes somebody, and everything held about them.
+ * Removes somebody.
  *
- * The condition codes they sent live on the row itself, so they go with it.
- * A meal plan they sent does not: it has its own table, keyed by connection
- * id, and a row left behind there would be a stranger's dinners sitting in
- * the database under an id nothing points at any more.
+ * What they shared about themselves goes with them: the condition codes on
+ * the row itself, their doses and the alerts about them (A16), and their
+ * meds, emergency card, appointments and money (lib/peerBesideDb.ts).
+ *
+ * What the two of them agreed to eat stays (direct answer, 2026-11-03:
+ * "Keep them"). Their meal plan copy and the photos of their dishes are kept,
+ * frozen, under "From {name}", which is why the name is written to
+ * former_partners before the row goes. A link that never sent a plan or a
+ * photo leaves nothing there.
  */
 export async function removeConnection(id: string): Promise<void> {
   const db = await getDatabase();
+  const row = await db.getFirstAsync<{ name: string }>('SELECT name FROM connections WHERE id = ?', id);
+  const kept = await db.getFirstAsync<{ n: number }>(
+    `SELECT (SELECT COUNT(*) FROM partner_meal_plan_slots WHERE connection_id = ?)
+          + (SELECT COUNT(*) FROM peer_photos WHERE connection_id = ?) AS n`,
+    id,
+    id,
+  );
+  if (row && (kept?.n ?? 0) > 0) {
+    await db.runAsync(
+      `INSERT INTO former_partners (connection_id, name, ended_at) VALUES (?, ?, ?)
+       ON CONFLICT(connection_id) DO UPDATE SET name = excluded.name, ended_at = excluded.ended_at`,
+      id,
+      row.name,
+      new Date().toISOString(),
+    );
+  }
   await db.runAsync('DELETE FROM connections WHERE id = ?', id);
-  await clearPartnerMealPlan(id);
-  // Their photos go with them. Imported on use, since lib/peerPhotosDb.ts
-  // reads connections itself.
-  const { clearPeerPhotos } = await import('./peerPhotosDb');
-  await clearPeerPhotos(id);
+  // Only what is waiting to go to them, since nothing more will.
+  await db.runAsync('DELETE FROM peer_photo_out WHERE connection_id = ?', id);
   // Their doses, any alert still queued about them, and the yes given for
-  // them (A16).
+  // them (A16). Imported on use, since these modules read connections.
   const { clearPeerDoses } = await import('./peerDosesDb');
   await clearPeerDoses(id);
+  const { clearPeerBeside } = await import('./peerBesideDb');
+  await clearPeerBeside(id);
+}
+
+export type FormerPartner = { connectionId: string; name: string; endedAt: string };
+
+/** People this person no longer shares with whose meal plan or dish photos
+ *  are kept here, frozen. */
+export async function listFormerPartners(): Promise<FormerPartner[]> {
+  const db = await getDatabase();
+  const rows = await db.getAllAsync<{ connection_id: string; name: string; ended_at: string }>(
+    'SELECT connection_id, name, ended_at FROM former_partners ORDER BY ended_at DESC',
+  );
+  return rows.map((row) => ({ connectionId: row.connection_id, name: row.name, endedAt: row.ended_at }));
+}
+
+/** Lets go of what was kept from somebody, when the person asks. */
+export async function forgetFormerPartner(connectionId: string): Promise<void> {
+  const db = await getDatabase();
+  await clearPartnerMealPlan(connectionId);
+  const { clearPeerPhotos } = await import('./peerPhotosDb');
+  await clearPeerPhotos(connectionId);
+  await db.runAsync('DELETE FROM former_partners WHERE connection_id = ?', connectionId);
 }
 
 // --- Partner links -----------------------------------------------------
@@ -268,7 +332,9 @@ export async function listPartners(): Promise<Connection[]> {
  * guessing which two of the three to use would be worse than saying so.
  */
 export async function getMealPlanningPartner(): Promise<{ partner: Connection | null; others: number }> {
-  const partners = await listPartners();
+  // A partner whose side is hidden on this device is left out of planning
+  // the way they would be if they had shared nothing.
+  const partners = (await listPartners()).filter((partner) => partner.showTheirs);
   return { partner: partners[0] ?? null, others: Math.max(0, partners.length - 1) };
 }
 
@@ -279,13 +345,9 @@ export async function setConnectionRole(id: string, role: ConnectionRole): Promi
   // granted, or the row would keep permissions its role no longer implies.
   const grants = defaultGrantsForRole(role);
   await db.runAsync(
-    'UPDATE connections SET role = ?, share_meals = ?, share_shopping = ?, share_conditions = ?, share_photos = ?, share_doses = ? WHERE id = ?',
+    `UPDATE connections SET role = ?, ${GRANT_COLUMNS.map((column) => `${column} = ?`).join(', ')} WHERE id = ?`,
     role,
-    grants.meals ? 1 : 0,
-    grants.shopping ? 1 : 0,
-    grants.conditions ? 1 : 0,
-    grants.photos ? 1 : 0,
-    grants.doses ? 1 : 0,
+    ...grantValues(grants),
     id,
   );
   // Their conditions are dropped when the new role does not carry them.
@@ -301,15 +363,16 @@ export async function setConnectionRole(id: string, role: ConnectionRole): Promi
   }
 }
 
+export async function setShowTheirs(id: string, show: boolean): Promise<void> {
+  const db = await getDatabase();
+  await db.runAsync('UPDATE connections SET show_theirs = ? WHERE id = ?', show ? 1 : 0, id);
+}
+
 export async function setConnectionGrants(id: string, grants: ShareGrants): Promise<void> {
   const db = await getDatabase();
   await db.runAsync(
-    'UPDATE connections SET share_meals = ?, share_shopping = ?, share_conditions = ?, share_photos = ?, share_doses = ? WHERE id = ?',
-    grants.meals ? 1 : 0,
-    grants.shopping ? 1 : 0,
-    grants.conditions ? 1 : 0,
-    grants.photos ? 1 : 0,
-    grants.doses ? 1 : 0,
+    `UPDATE connections SET ${GRANT_COLUMNS.map((column) => `${column} = ?`).join(', ')} WHERE id = ?`,
+    ...grantValues(grants),
     id,
   );
 }
@@ -675,14 +738,17 @@ export function decodeConnectionInvite(raw: string): ConnectionInvite | null {
     // screen whose whole job is to let someone accept or discard safely.
     const role: ConnectionRole = asRole(typeof parsed.role === 'string' ? parsed.role : null);
     const rawGrants = (parsed.grants ?? {}) as Partial<ShareGrants>;
+    // Only the household switches and conditions are read from an invite.
+    // Doses go only after a yes given on this phone (A16), and what someone
+    // shares about their meds, emergency card, appointments and money starts
+    // off until they switch it on themselves, so whatever the other side
+    // claims for those is read as off.
     const grants: ShareGrants = {
+      ...noGrants(),
       meals: rawGrants.meals === true,
       shopping: rawGrants.shopping === true,
       conditions: rawGrants.conditions === true,
       photos: rawGrants.photos === true,
-      // Never from an invite: doses go only after a yes given on this phone
-      // (A16), so whatever the other side claims is read as off.
-      doses: false,
     };
     // Codes are kept only when they were actually granted. A payload claiming
     // no condition grant while carrying codes anyway is contradicting itself,

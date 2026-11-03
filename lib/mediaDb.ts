@@ -7,6 +7,7 @@
 // them, the discipline lib/customBackgroundImage.ts set after a top-level
 // import once closed the app on launch.
 
+import type { AttachmentOwnerKind } from './attachments';
 import { isDesktopApp } from './desktop/bridge';
 import { getDatabase } from './db';
 import {
@@ -393,6 +394,11 @@ export async function removePhotosOf(ownerKind: MediaOwnerKind, ownerId: string)
     }
   }
   if (series.length > 0) await db.runAsync('DELETE FROM photo_series WHERE owner_kind = ? AND owner_id = ?', ownerKind, ownerId);
+  // Files kept with the same owner go with it (1.0.80.4), so every delete
+  // that already clears a record's photos clears its files too. An owner
+  // kind that takes no files simply finds none.
+  const { removeAttachmentsOf } = await import('./attachmentsDb');
+  await removeAttachmentsOf(ownerKind as AttachmentOwnerKind, ownerId);
 }
 
 /** How many photos one owner has, for a row that shows the count before

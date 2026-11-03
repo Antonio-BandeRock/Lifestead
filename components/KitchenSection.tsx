@@ -26,6 +26,7 @@ import { useConfirmSheet } from './ConfirmSheet';
 import { useInfoAlert } from './InfoAlert';
 import { TabBand, useTabBandStyles } from './TabBand';
 import { RecordPhotos } from './RecordPhotos';
+import { AttachedFiles } from './AttachedFiles';
 import { useBandFolds } from '../hooks/useBandFolds';
 import { colors, inputBackground } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
@@ -654,6 +655,9 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
                       tabColor={tabColor}
                       title={item.foodName}
                     />
+                    {item.source === 'garden' || item.source === 'fermentation' ? null : (
+                      <AttachedFiles ownerKind="item" ownerId={item.id} tabColor={tabColor} />
+                    )}
                     {item.source === 'garden' || item.source === 'fermentation' ? null : placeEditId === item.id ? (
                       <>
                         <Text style={styles.fieldLabel}>Where is it? (empty it to say you no longer know)</Text>

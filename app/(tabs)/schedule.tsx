@@ -189,7 +189,7 @@ import type { RecipeDietTag } from '../../lib/digest';
 import { describePlanningScope, resolvePlanningScope, type PlanningScope } from '../../lib/partnerPlanning';
 import { resolveHouseholdEaters } from '../../lib/householdEaters';
 import { describeHousehold, joinNames, type PlanEater, type PlanMeal } from '../../lib/householdPlan';
-import { getMealPlanningPartner } from '../../lib/connections';
+import { forgetFormerPartner, getMealPlanningPartner, listFormerPartners } from '../../lib/connections';
 import { getPartnerMealPlanNamed, type PartnerMealPlanNamed } from '../../lib/mealPlanSync';
 import { daysSinceSent } from '../../lib/partnerSync';
 import {
@@ -237,6 +237,7 @@ import {
   requestCalendarPermission,
   type DeviceCalendarEvent,
 } from '../../lib/deviceCalendar';
+import { appointmentTypeFromTitle } from '../../lib/calendarOffer';
 import { evaluateInteractionRules, type InteractionWarning, type ReferenceOnlyRule } from '../../lib/interactionRules';
 // Meals and doses read as one day, 2026-09-22. Every decision and every
 // sentence lives in this module, which has no database and no React in
@@ -267,6 +268,7 @@ import { MyItemsHub } from '../../components/MyItemsHub';
 import { PageIdentityLabel } from '../../components/PageIdentityLabel';
 import { PopoverSelect } from '../../components/PopoverSelect';
 import { RecordPhotos } from '../../components/RecordPhotos';
+import { AttachedFiles } from '../../components/AttachedFiles';
 import { SwipeableTabScreen } from '../../components/SwipeableTabScreen';
 import { WhyExplainer } from '../../components/WhyExplainer';
 import { RuleSeverityTag } from '../../components/RuleSeverityTag';
@@ -335,6 +337,7 @@ import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { SpokenAppointmentBox } from '../../components/SpokenAppointmentBox';
 import type { SpokenAppointment } from '../../lib/spokenAppointment';
 import { VaultClosedBand } from '../../components/VaultClosedBand';
+import { PartnerBesideBand } from '../../components/PartnerBesideBand';
 import { useVaultReloadKey } from '../../lib/vaultReads';
 import { useCategoryClosed } from '../../lib/vaultSession';
 import { t } from '../../lib/i18n';
@@ -3945,6 +3948,7 @@ function DailyMealPlanLens() {
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const folds = useBandFolds();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
+  const [confirmSheet, confirmSheetElement] = useConfirmSheet();
   const [carbLevel, setCarbLevel] = useState<CarbLevel>('any');
   // 2026-08-26, direct request: "less than a certain amount of sugar."
   // See lib/dailyMealPlan.ts's own comment on this same flag for why
@@ -4029,6 +4033,11 @@ function DailyMealPlanLens() {
   // mixed into it. Two people planning together still each have a plan, and a
   // screen that merged them would have to invent a rule for whose dinner wins.
   const [partnerPlan, setPartnerPlan] = useState<{ id: string; name: string; plan: PartnerMealPlanNamed } | null>(null);
+  // Plans kept from somebody no longer linked. Meals were the two of them
+  // agreeing on what to eat, so ending the link does not take that back:
+  // every day held is shown, frozen, until the person lets it go.
+  const [formerPlans, setFormerPlans] = useState<{ id: string; name: string; endedAt: string; plan: PartnerMealPlanNamed }[]>([]);
+  const [formerTick, setFormerTick] = useState(0);
 
   useFocusEffect(
     useCallback(() => {
@@ -4077,10 +4086,24 @@ function DailyMealPlanLens() {
           // Nobody linked, or nothing sent yet. Both are ordinary, and both
           // mean the same thing on screen: no band.
         });
+      listFormerPartners()
+        .then(async (former) => {
+          const kept = [];
+          for (const person of former) {
+            const plan = await getPartnerMealPlanNamed(person.connectionId, { allDays: true });
+            if (plan.days.length > 0 || plan.dishes.length > 0) {
+              kept.push({ id: person.connectionId, name: person.name, endedAt: person.endedAt, plan });
+            }
+          }
+          if (!cancelled) setFormerPlans(kept);
+        })
+        .catch(() => {
+          if (!cancelled) setFormerPlans([]);
+        });
       return () => {
         cancelled = true;
       };
-    }, []),
+    }, [formerTick]),
   );
 
   // The pools a plate swap chooses from, loaded the first time somebody
@@ -4268,6 +4291,7 @@ function DailyMealPlanLens() {
   return (
     <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
+      {confirmSheetElement}
       <View style={styles.formCard}>
         <Text style={styles.label}>What you eat</Text>
         <Text style={styles.helperText}>{BASE_DIET_CHOICES.find((choice) => choice.tag === planDiet.base)?.caption}</Text>
@@ -4509,6 +4533,63 @@ function DailyMealPlanLens() {
           />
         </ScheduleBand>
       ) : null}
+
+      {formerPlans.map((former, formerIndex) => (
+        <ScheduleBand
+          key={former.id}
+          folds={folds}
+          id={`schedule:mealPlan:former:${former.id}`}
+          title={t('From {name}', { name: former.name })}
+          icon="people-outline"
+          count={former.plan.days.length}
+        >
+          <Text style={styles.helperText}>
+            {t('Kept from when the two of you planned meals together. It stopped changing on {day}, when the link ended.', {
+              day: describeRelativeDate(former.endedAt.slice(0, 10)),
+            })}
+          </Text>
+          <View style={styles.table}>
+            {former.plan.days.map((day) => (
+              <View key={day.date} style={styles.row}>
+                <Text style={styles.rowTitle}>{capitalizeFirst(describeRelativeDate(day.date))}</Text>
+                {day.slots.map((slot) => (
+                  <Text key={slot.slot} style={styles.rowMeta}>
+                    {PARTNER_SLOT_LABELS[slot.slot]}: {slot.names.join(', ')}
+                  </Text>
+                ))}
+              </View>
+            ))}
+          </View>
+          <PeerDishPhotos
+            connectionId={former.id}
+            personName={former.name}
+            dishes={former.plan.dishes}
+            tabColor={TAB_COLOR}
+            frozen
+          />
+          <TouchableOpacity
+            ref={formerIndex === 0 ? walkMark.ref('mealPlan.letGoKept') : undefined}
+            style={styles.secondaryButton}
+            onPress={async () => {
+              const letGo = await confirmSheet({
+                title: t('Let go of what was kept from {name}?', { name: former.name }),
+                message: t('Their meal plan and dish photos come off this phone. Your meals stay as they are.'),
+                confirmLabel: t('Let Go'),
+                destructive: true,
+              });
+              if (!letGo) return;
+              try {
+                await forgetFormerPartner(former.id);
+                setFormerTick((n) => n + 1);
+              } catch (error) {
+                console.error('[MealPlan] Failed to let go of a kept plan', error);
+              }
+            }}
+          >
+            <Text style={styles.secondaryButtonText}>{t('Let Go of This')}</Text>
+          </TouchableOpacity>
+        </ScheduleBand>
+      ))}
 
       {singleDay ? (
         <DailyPlanFullReport day={singleDay} folds={folds} foldId="schedule:dailyPlan" swapper={swapperFor(0)} dishCosts={dishCosts} />
@@ -6304,8 +6385,12 @@ const DEVICE_IMPORT_WINDOW_DAYS = 90;
 // app (see lib/deviceCalendar.ts). Deliberately no recurrence here (see
 // scheduleAppointment's own note) -- most appointments get booked one at a
 // time by a provider's office anyway.
-function AppointmentsLens() {
+// A calendar event offered by notification (lib/calendarOffer.ts) arrives
+// as importCalendarEvent with its start, and opens the import form filled in
+// with that event, so the tap lands on the thing it named.
+function AppointmentsLens({ importCalendarEvent, importCalendarAt }: { importCalendarEvent?: string; importCalendarAt?: string }) {
   const walkMark = useWalkMark();
+  const consumedImport = useRef<string | null>(null);
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   // The list is left out while appointments are in a closed vault. Adding
   // one stays, and appointment reminders keep coming.
@@ -6347,12 +6432,25 @@ function AppointmentsLens() {
         // Same reason as the Meds lens: every save, complete, cancel and
         // remove reloads, so the phone's reminders get matched here.
         void syncReminderNotifications();
+        if (importCalendarEvent && consumedImport.current !== importCalendarEvent) {
+          consumedImport.current = importCalendarEvent;
+          const linked = loadedAppointments.some((item) => item.linkedDeviceCalendarEventId === importCalendarEvent);
+          const startsAt = Number(importCalendarAt);
+          if (!linked && granted && Number.isFinite(startsAt)) {
+            listUpcomingDeviceEvents(new Date(startsAt - 60_000), new Date(startsAt + 60_000))
+              .then((events) => {
+                const event = events.find((candidate) => candidate.id === importCalendarEvent);
+                if (event) handleStartImport(event);
+              })
+              .catch((error) => console.warn('[schedule] the offered calendar event could not be read', error));
+          }
+        }
       })
       .catch((error) => {
         setErrorMessage(`Could not load appointments: ${error instanceof Error ? error.message : String(error)}`);
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [importCalendarEvent, importCalendarAt]);
 
   useFocusEffect(
     useCallback(() => {
@@ -6563,7 +6661,7 @@ function AppointmentsLens() {
     setForm({
       editingId: null,
       title: event.title,
-      appointmentType: 'doctor',
+      appointmentType: appointmentTypeFromTitle(event.title),
       date: dateStr,
       time: splitTime24(timeStr),
       location: event.location ?? '',
@@ -6822,6 +6920,12 @@ function AppointmentsLens() {
                         {item.linkedDeviceCalendarEventId ? ` · ${t('On phone calendar')}` : ''}
                       </Text>
                       <RecordPhotos ownerKind="appointment" ownerId={item.id} tabColor={TAB_COLOR} title={item.title} />
+                      <AttachedFiles
+                        ownerKind="appointment"
+                        ownerId={item.id}
+                        tabColor={TAB_COLOR}
+                        openerRef={item.id === firstPlannedAppointmentId ? walkMark.ref('appointments.files') : undefined}
+                      />
                     </View>
                   </View>
 
@@ -6879,6 +6983,7 @@ function AppointmentsLens() {
           )}
         </>
       )}
+      <PartnerBesideBand kind="appointments" tabColor={TAB_COLOR} />
     </ScrollView>
   );
 }
@@ -7057,7 +7162,12 @@ export default function ScheduleScreen() {
   // 2026-08-26 -- the same deep-link mechanism every other tab takes, so
   // Profile can jump straight into the Daily Meal Plan lens rather than
   // leaving someone to find it themselves via LensHub afterward.
-  const { openScheduleLens, scheduleTreatmentId } = useLocalSearchParams<{ openScheduleLens?: string; scheduleTreatmentId?: string }>();
+  const { openScheduleLens, scheduleTreatmentId, importCalendarEvent, importCalendarAt } = useLocalSearchParams<{
+    openScheduleLens?: string;
+    scheduleTreatmentId?: string;
+    importCalendarEvent?: string;
+    importCalendarAt?: string;
+  }>();
   const [lens, setLens] = useState<Lens>('meals');
   const vaultKey = useVaultReloadKey();
   const activeLensLabel = LENSES.find((option) => option.key === lens)?.label;
@@ -7158,7 +7268,7 @@ export default function ScheduleScreen() {
           ) : lens === 'meds' ? (
             <MedsLens scheduleTreatmentId={scheduleTreatmentId} />
           ) : lens === 'appointments' ? (
-            <AppointmentsLens />
+            <AppointmentsLens importCalendarEvent={importCalendarEvent} importCalendarAt={importCalendarAt} />
           ) : lens === 'upkeep' ? (
             <UpkeepLens />
           ) : lens === 'timeline' ? (

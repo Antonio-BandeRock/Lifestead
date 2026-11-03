@@ -59,6 +59,7 @@ import {
   updateCaptureNoteText,
 } from '../lib/captureNotesDb';
 import { useWalkMark } from '../components/WalkMark';
+import { AttachedFiles } from '../components/AttachedFiles';
 import { PhotoStrip } from '../components/PhotoStrip';
 import { RecordPhotos } from '../components/RecordPhotos';
 import { PHOTO_CAPTURE_TEXT } from '../lib/captureNotes';
@@ -294,6 +295,7 @@ export default function CaptureScreen() {
   const done = notes.filter((note) => note.status === 'done');
   const now = new Date();
   // The ring for the Read the Page how-to goes on the first note it applies to.
+  const firstOpenNoteId = notes.find((note) => note.status !== 'done')?.id ?? null;
   const firstLinkedNoteId = notes.find((note) => note.status !== 'done' && linkInNote(note.text))?.id ?? null;
 
   function renderNoteRow(note: CaptureNote) {
@@ -352,6 +354,14 @@ export default function CaptureScreen() {
         ) : (
           <RecordPhotos ownerKind="capture_note" ownerId={note.id} tabColor={colors.accent} title={note.text} />
         )}
+        {/* Files kept with the note (1.0.80.2): a PDF, a document, anything. */}
+        <AttachedFiles
+          ownerKind="capture_note"
+          ownerId={note.id}
+          tabColor={colors.accent}
+          openerRef={note.id === firstOpenNoteId ? walkMark.ref('capture.attachFile') : undefined}
+          openerMarkStyle={note.id === firstOpenNoteId ? walkMark('capture.attachFile') : undefined}
+        />
         {/* The page read from the note's link: what it is, where it is from,
             and a few lines of what it says. Never the article itself. */}
         {page ? (

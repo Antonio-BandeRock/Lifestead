@@ -9,6 +9,7 @@ import { useInfoAlert } from './InfoAlert';
 import type { DropdownOption } from './Dropdown';
 import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandNoHairlines, homeBandStyle, useCalmBands } from './HomeSectionBand';
 import { TabBand } from './TabBand';
+import { PartnerBesideBand } from './PartnerBesideBand';
 import { RecallsBand } from './RecallsBand';
 import { PopoverSelect } from './PopoverSelect';
 import { WhyExplainer } from './WhyExplainer';
@@ -1199,6 +1200,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
           )}
         </>
       )}
+      <PartnerBesideBand kind="meds" tabColor={tabColor} />
     </View>
   );
 }

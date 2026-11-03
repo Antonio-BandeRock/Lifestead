@@ -114,7 +114,18 @@ export function isCareRole(role: ConnectionRole): boolean {
 // Absence of their data is absence of their grant, and the screen can say so
 // without keeping a second set of columns that could disagree with reality.
 
-export type ShareScope = 'meals' | 'shopping' | 'conditions' | 'photos' | 'doses';
+export type ShareScope =
+  | 'meals'
+  | 'shopping'
+  | 'conditions'
+  | 'photos'
+  | 'doses'
+  | 'meds'
+  | 'emergency'
+  | 'appointments'
+  | 'accounts'
+  | 'budgets'
+  | 'insurance';
 
 export const SHARE_SCOPES: {
   code: ShareScope;
@@ -122,18 +133,26 @@ export const SHARE_SCOPES: {
   what: string;
   /** Whether a fresh partner link starts with this on. */
   defaultOn: boolean;
+  /**
+   * A household thing both people run together (1.0.80.2). Always on for a
+   * link that plans meals, and never a switch: only what a person shares
+   * about their own health, family and money can be turned off.
+   */
+  household: boolean;
 }[] = [
   {
     code: 'meals',
     label: 'Meals',
     what: 'Permission to see what is planned for each day. The plan itself crosses when one of you sends it.',
     defaultOn: true,
+    household: true,
   },
   {
     code: 'shopping',
     label: 'Shopping lists',
-    what: 'Permission to see the list, so either of you can be the one who actually goes. The list itself does not cross between two phones yet.',
+    what: 'Permission to keep one list between you, so either of you can be the one who goes. Whatever either of you adds or ticks off, both of you end up with.',
     defaultOn: true,
+    household: true,
   },
   {
     code: 'conditions',
@@ -143,6 +162,7 @@ export const SHARE_SCOPES: {
     // your diagnoses is not, and defaulting it on would be this app deciding
     // something on your behalf that it has no business deciding.
     defaultOn: false,
+    household: false,
   },
   {
     code: 'photos',
@@ -152,6 +172,7 @@ export const SHARE_SCOPES: {
     // that is already being sent (lib/peerPhotos.ts), so it adds no new kind
     // of information, only a picture of something already shared.
     defaultOn: true,
+    household: true,
   },
   {
     code: 'doses',
@@ -161,20 +182,97 @@ export const SHARE_SCOPES: {
     // (the consent step from the Caregiver tier), since it is about the
     // person's meds rather than the household.
     defaultOn: false,
+    household: false,
+  },
+  // 1.0.80.3, direct instruction: what each person shares about themselves
+  // shows beside the other person's records, under their name and read only,
+  // until they take it away (lib/peerBeside.ts). All off until asked for,
+  // since none of it is a household thing.
+  {
+    code: 'meds',
+    label: 'Your meds and supplements',
+    what: 'The name, the amount and the times of each one you take, shown under your name beside theirs on My Meds. Never your notes.',
+    defaultOn: false,
+    household: false,
+  },
+  {
+    code: 'emergency',
+    label: 'Your emergency card',
+    what: 'Your drug allergies, blood type, devices, doctor, hospital, language, where your directive is kept, and your emergency contacts, shown under your name beside theirs on Emergency.',
+    defaultOn: false,
+    household: false,
+  },
+  {
+    code: 'appointments',
+    label: 'Your appointments',
+    what: 'When, what kind, with whom and where, shown under your name beside theirs on Appointments. Never your notes.',
+    defaultOn: false,
+    household: false,
+  },
+  {
+    code: 'accounts',
+    label: 'Your accounts and balances',
+    what: 'The name, kind and balance of each account, and the rate and minimum payment on a debt, shown under your name beside theirs on Finances. No account numbers are kept in this app, so none can go.',
+    defaultOn: false,
+    household: false,
+  },
+  {
+    code: 'budgets',
+    label: 'Your budgets and goals',
+    what: 'Each monthly budget, and each money goal with its reason and date, shown under your name beside theirs on Finances.',
+    defaultOn: false,
+    household: false,
+  },
+  {
+    code: 'insurance',
+    label: 'Your insurance and health accounts',
+    what: 'Each insurance plan with its deductible and the most you pay in a year, and each HSA or FSA with what went in and what was spent, shown under your name beside theirs on Finances.',
+    defaultOn: false,
+    household: false,
   },
 ];
 
+/** The switches a person has: what they share about themselves. */
+export const SWITCHABLE_SCOPES = SHARE_SCOPES.filter((scope) => !scope.household);
+/** What every link that plans meals shares, with no switch. */
+export const HOUSEHOLD_SCOPES = SHARE_SCOPES.filter((scope) => scope.household);
+
+/** The sentence under the switches, naming what is always shared. */
+export const ALWAYS_SHARED_SENTENCE =
+  'Always shared, because you run them together: ' +
+  HOUSEHOLD_SCOPES.map((scope) => scope.label.toLowerCase()).join(', ') +
+  ', the household meal calendar and the chores. What you share about yourself, your health and your money, has a switch, and whatever you switch on shows under your name beside their records until you switch it off.';
+
 export type ShareGrants = Record<ShareScope, boolean>;
+
+/** Every switch off, the start for anything read from outside. */
+export function noGrants(): ShareGrants {
+  return SHARE_SCOPES.reduce((acc, scope) => {
+    acc[scope.code] = false;
+    return acc;
+  }, {} as ShareGrants);
+}
 
 export function defaultGrantsForRole(role: ConnectionRole): ShareGrants {
   // A recipe link votes on none of these, so it starts with nothing allowed.
   // The other three all plan and shop together, so they start where a
   // partner starts, with the condition list still off until it is asked for.
-  if (role === 'recipe') return { meals: false, shopping: false, conditions: false, photos: false, doses: false };
+  if (role === 'recipe') return noGrants();
   return SHARE_SCOPES.reduce((acc, scope) => {
     acc[scope.code] = scope.defaultOn;
     return acc;
   }, {} as ShareGrants);
+}
+
+/**
+ * Grants as they stand for a role: household things on for any link that
+ * plans meals, whatever an older row or another device's invite says.
+ */
+export function withHouseholdOn(role: ConnectionRole, grants: ShareGrants): ShareGrants {
+  if (role === 'recipe') return grants;
+  const next = { ...grants };
+  for (const scope of HOUSEHOLD_SCOPES) next[scope.code] = true;
+  return next;
 }
 
 export function describeGrants(grants: ShareGrants): string {
@@ -205,7 +303,9 @@ export function describeGrants(grants: ShareGrants): string {
 export const PARTNER_SHARING_STATE =
   'Which conditions you track, and the meal plan built around both of you, cross between two paired phones ' +
   'whenever one of you sends them. Your shopping list is one list between you: whatever either of you adds or ' +
-  'ticks off, both of you end up with, and nothing either of you did is thrown away.';
+  'ticks off, both of you end up with, and nothing either of you did is thrown away. Whatever each of you switches on ' +
+  'about yourself (meds, emergency card, appointments, money) shows under your name beside what the other person keeps, ' +
+  'read only, until you switch it off. If the link ends, the meals you planned together stay on both phones and the rest comes off.';
 
 // --- Whether the link actually works both ways -------------------------------
 //

@@ -26,9 +26,16 @@
 // driveId 'disk' and the absolute path as the itemId, so nothing above this
 // module knows the difference. A runtime check rather than a metro swap,
 // because what changes is where the folder is, not which package answers.
+//
+// A FOLDER ON THE PHONE IS THE THIRD KIND. Any storage service a person
+// uses can keep a folder on the phone in step, and lib/phoneFolder.ts reads
+// and writes that folder. Its driveId is 'phone', so each function below
+// that takes a folder hands one of those off the same way.
 
 import { isDesktopApp } from './desktop/bridge';
 import * as disk from './desktop/cloudFolder';
+import * as phone from './phoneFolder';
+import * as google from './googleDrive';
 import { forgetAccessToken, getAccessToken } from './oneDriveAuth';
 import { ONEDRIVE_BUSY_LEAD } from './passingTrouble';
 import { FileInWords, fileInWords, fileNamesInWords } from './fileInWords';
@@ -251,7 +258,9 @@ export async function listSharedFolders(): Promise<GraphResult<DriveItemRef[]>> 
 
 /** Folders inside a folder, so the picker can go deeper than one level. */
 export async function listChildFolders(parent: DriveItemRef): Promise<GraphResult<DriveItemRef[]>> {
+  if (google.isGoogleFolder(parent)) return google.listChildFolders(parent);
   if (isDesktopApp()) return disk.listChildFolders(parent);
+  if (phone.isPhoneFolder(parent)) return phone.listChildFolders(parent);
   const result = await graphFetch(
     '/drives/' + parent.driveId + '/items/' + parent.itemId +
       '/children?$top=200&$select=id,name,folder,parentReference',
@@ -303,7 +312,9 @@ export async function createFolder(
   parent: DriveItemRef,
   name: string,
 ): Promise<GraphResult<DriveItemRef>> {
+  if (google.isGoogleFolder(parent)) return google.createFolder(parent, name);
   if (isDesktopApp()) return disk.createFolder(parent, name);
+  if (phone.isPhoneFolder(parent)) return phone.createFolder(parent, name);
   const result = await graphFetch('/drives/' + parent.driveId + '/items/' + parent.itemId + '/children', {
     method: 'POST',
     contentType: 'application/json',
@@ -333,7 +344,9 @@ export type DriveFileRef = { itemId: string; name: string };
  * cannot be done with a name at all.
  */
 export async function listFiles(folder: DriveItemRef): Promise<GraphResult<DriveFileRef[]>> {
+  if (google.isGoogleFolder(folder)) return google.listFiles(folder);
   if (isDesktopApp()) return disk.listFiles(folder);
+  if (phone.isPhoneFolder(folder)) return phone.listFiles(folder);
   const result = await graphFetch(
     '/drives/' + folder.driveId + '/items/' + folder.itemId + '/children?$top=200&$select=id,name,file',
   );
@@ -356,7 +369,9 @@ export async function moveFile(
   file: DriveFileRef,
   into: DriveItemRef,
 ): Promise<GraphResult<null>> {
+  if (google.isGoogleFolder(from)) return google.moveFile(from, file, into);
   if (isDesktopApp()) return disk.moveFile(from, file, into);
+  if (phone.isPhoneFolder(from)) return phone.moveFile(from, file, into);
   const result = await graphFetch('/drives/' + from.driveId + '/items/' + file.itemId, {
     method: 'PATCH',
     contentType: 'application/json',
@@ -367,7 +382,9 @@ export async function moveFile(
 }
 
 export async function listFileNames(folder: DriveItemRef): Promise<GraphResult<string[]>> {
+  if (google.isGoogleFolder(folder)) return google.listFileNames(folder);
   if (isDesktopApp()) return disk.listFileNames(folder);
+  if (phone.isPhoneFolder(folder)) return phone.listFileNames(folder);
   // Every page, not the first 200: the photo folder (lib/mediaSyncDevice.ts)
   // can hold thousands, and a name missing from the list would be uploaded
   // again. Graph hands back the next page as a full address.
@@ -400,7 +417,9 @@ export async function uploadText(
   fileName: string,
   text: string,
 ): Promise<GraphResult<null>> {
+  if (google.isGoogleFolder(folder)) return google.uploadText(folder, fileName, text);
   if (isDesktopApp()) return disk.uploadText(folder, fileName, text);
+  if (phone.isPhoneFolder(folder)) return phone.uploadText(folder, fileName, text);
   const result = await graphFetch(
     '/drives/' + folder.driveId + '/items/' + folder.itemId + ':/' +
       encodeURIComponent(fileName) + ':/content?@microsoft.graph.conflictBehavior=replace',
@@ -415,7 +434,9 @@ export async function downloadText(
   folder: DriveItemRef,
   fileName: string,
 ): Promise<GraphResult<string>> {
+  if (google.isGoogleFolder(folder)) return google.downloadText(folder, fileName);
   if (isDesktopApp()) return disk.downloadText(folder, fileName);
+  if (phone.isPhoneFolder(folder)) return phone.downloadText(folder, fileName);
   const result = await graphFetch(
     '/drives/' + folder.driveId + '/items/' + folder.itemId + ':/' +
       encodeURIComponent(fileName) + ':/content',
@@ -472,7 +493,9 @@ export async function uploadFile(
   localUri: string,
   mimeType: string,
 ): Promise<GraphResult<null>> {
+  if (google.isGoogleFolder(folder)) return google.uploadFile(folder, fileName, localUri, mimeType);
   if (isDesktopApp()) return disk.uploadFile(folder, fileName, localUri);
+  if (phone.isPhoneFolder(folder)) return phone.uploadFile(folder, fileName, localUri);
   const { File } = await import('expo-file-system');
   const file = new File(localUri);
   if (!file.exists) return { ok: false, reason: FileInWords(fileName) + ' is not on this device.' };
@@ -545,7 +568,9 @@ export async function downloadToFile(
   fileName: string,
   destUri: string,
 ): Promise<GraphResult<null>> {
+  if (google.isGoogleFolder(folder)) return google.downloadToFile(folder, fileName, destUri);
   if (isDesktopApp()) return { ok: false, reason: 'A computer reads the folder on its disk directly.' };
+  if (phone.isPhoneFolder(folder)) return phone.downloadToFile(folder, fileName, destUri);
   const meta = await graphFetch(
     '/drives/' + folder.driveId + '/items/' + folder.itemId + ':/' + encodeURIComponent(fileName) +
       '?$select=id,size,@microsoft.graph.downloadUrl',
@@ -569,7 +594,9 @@ export async function deleteFile(
   folder: DriveItemRef,
   fileName: string,
 ): Promise<GraphResult<null>> {
+  if (google.isGoogleFolder(folder)) return google.deleteFile(folder, fileName);
   if (isDesktopApp()) return disk.deleteFile(folder, fileName);
+  if (phone.isPhoneFolder(folder)) return phone.deleteFile(folder, fileName);
   const result = await graphFetch(
     '/drives/' + folder.driveId + '/items/' + folder.itemId + ':/' + encodeURIComponent(fileName),
     { method: 'DELETE' },
@@ -588,7 +615,9 @@ export async function deleteFile(
 export async function checkFolder(
   folder: DriveItemRef,
 ): Promise<GraphResult<{ name: string; path?: string }>> {
+  if (google.isGoogleFolder(folder)) return google.checkFolder(folder);
   if (isDesktopApp()) return disk.checkFolder(folder);
+  if (phone.isPhoneFolder(folder)) return phone.checkFolder(folder);
   const result = await graphFetch(
     '/drives/' + folder.driveId + '/items/' + folder.itemId + '?$select=id,name,folder,parentReference',
   );

@@ -750,7 +750,9 @@ const styles = StyleSheet.create({
   wellText: { flex: 1, gap: 2 },
   wellLabel: { ...typography.body, color: colors.textPrimary, ...textShadow },
   links: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 16, backgroundColor: colors.surface },
-  link: { flexDirection: 'row', alignItems: 'center', gap: 4, paddingVertical: 2 },
+  // The surface of the links row it always sits in, given here too so the
+  // words are covered wherever the helper is called from.
+  link: { flexDirection: 'row', alignItems: 'center', gap: 4, paddingVertical: 2, backgroundColor: colors.surface },
   linkText: { ...typography.caption, color: colors.primary, ...textShadow },
   linkMuted: { ...typography.caption, color: colors.textMuted, ...textShadow },
   choiceList: { gap: 10, backgroundColor: colors.surface },

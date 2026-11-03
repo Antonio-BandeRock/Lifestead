@@ -45,6 +45,7 @@ import { tablesToSend } from './peerMerge';
 import { cleanPeerPhotoPart, photosForPlan, type PeerPhotoPart } from './peerPhotos';
 import { cleanPeerDosePart, type PeerDosePart } from './doseWatch';
 import { holdOn } from './peerRelationships';
+import { BESIDE_KINDS, besidePartToSend, cleanBesidePart, type BesideBodies, type BesideKind, type BesidePart } from './peerBeside';
 import type { Row, Tables } from './snapshotMerge';
 
 export const SYNC_PAYLOAD_VERSION = 2;
@@ -94,6 +95,12 @@ export type SyncPayload = {
    * not, so this phone clears what it held; absent from an older phone.
    */
   doses?: PeerDosePart | null;
+  /**
+   * What they share about themselves, shown beside this person's own records
+   * (1.0.80.3, lib/peerBeside.ts). Every kind present, null for one they
+   * have switched off so this phone clears it; absent from an older phone.
+   */
+  beside?: BesidePart;
 } & PeerPhotoPart;
 
 /**
@@ -184,6 +191,9 @@ export function buildSyncPayload(input: {
   /** This phone's doses around now, already read only when a yes was
    *  given (lib/peerDosesDb.ts). Sent only with Doses granted. */
   doses?: PeerDosePart | null;
+  /** What this phone shares about itself, already read only for the kinds
+   *  switched on (lib/peerBesideDb.ts). Cut down here to the grants again. */
+  beside?: Partial<BesideBodies>;
 }): SyncPayload {
   const payload: SyncPayload = {
     v: SYNC_PAYLOAD_VERSION,
@@ -226,6 +236,13 @@ export function buildSyncPayload(input: {
     // empty list is news too. Otherwise null, so a withdrawn yes clears the
     // other phone's copy rather than leaving yesterday's doses on it.
     payload.doses = input.grants.doses && input.doses ? input.doses : null;
+  }
+  if (input.role !== 'recipe') {
+    // Every kind goes, the body or null, so a switch turned off clears the
+    // other phone on this send rather than leaving last week's copy there.
+    const granted = {} as Record<BesideKind, boolean>;
+    for (const kind of BESIDE_KINDS) granted[kind] = input.grants[kind] === true;
+    payload.beside = besidePartToSend(granted, input.beside ?? {});
   }
   return payload;
 }
@@ -291,6 +308,9 @@ export function readSyncPayload(
 
   const doses = cleanPeerDosePart((parsed as Record<string, unknown>).doses);
   if (doses !== undefined) payload.doses = doses;
+
+  const beside = cleanBesidePart((parsed as Record<string, unknown>).beside);
+  if (beside !== undefined) payload.beside = beside;
 
   if (Array.isArray(p.conditionCodes)) {
     const codes = cleanCodes(p.conditionCodes);

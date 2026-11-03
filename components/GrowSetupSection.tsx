@@ -50,6 +50,7 @@ import { NotesInput } from './NotesInput';
 import { GardenTermField } from './GardenTermField';
 import { PopoverSelect } from './PopoverSelect';
 import { RecordPhotos } from './RecordPhotos';
+import { AttachedFiles } from './AttachedFiles';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
@@ -370,6 +371,7 @@ export function GrowSetupSection({ plot, onChanged }: Props) {
             {item.name ? <Text style={styles.captionText}>{item.name}</Text> : null}
             {item.notes ? <Text style={styles.captionText}>{item.notes}</Text> : null}
             <RecordPhotos ownerKind="equipment" ownerId={item.id} tabColor={TAB_COLOR} title={describeEquipment(item, terms)} />
+            <AttachedFiles ownerKind="equipment" ownerId={item.id} tabColor={TAB_COLOR} />
           </View>
           <TouchableOpacity onPress={() => handleRetire(item)}>
             <Text style={styles.linkText}>No longer in use</Text>

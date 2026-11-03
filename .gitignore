@@ -138,3 +138,5 @@ modules/*/android/build/
 
 # The speech engine, fetched by desktop/fetch-whisper.js at build time.
 desktop/whisper/
+# The Google Drive desktop client, copied in by desktop/copy-google-oauth.js.
+desktop/google-oauth-desktop.json

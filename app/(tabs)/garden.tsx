@@ -98,6 +98,7 @@ import type { CustomGardenTerm } from '../../lib/growSetup';
 import { addGrowEquipment, listGardenTerms } from '../../lib/growSetupDb';
 import { useWalkMark } from '../../components/WalkMark';
 import { RecordPhotos } from '../../components/RecordPhotos';
+import { AttachedFiles } from '../../components/AttachedFiles';
 import { usePhotoRemovalConfirm } from '../../components/usePhotoRemovalConfirm';
 import { PlantingEventsSection } from '../../components/PlantingEventsSection';
 import { MeasuringPlanSection } from '../../components/MeasuringPlanSection';
@@ -1655,6 +1656,7 @@ function PlotsAndPlantingsLens({
                   <BedLayoutSection plot={plot} plantings={plantings} onSizeSaved={loadPlots} />
                 </View>
                 <RecordPhotos ownerKind="garden_area" ownerId={plot.id} tabColor={TAB_COLOR} title={plot.name} />
+                <AttachedFiles ownerKind="garden_area" ownerId={plot.id} tabColor={TAB_COLOR} />
                 {plantings.length === 0 ? (
                   <Text style={styles.captionText}>Nothing logged as planted here yet.</Text>
                 ) : (

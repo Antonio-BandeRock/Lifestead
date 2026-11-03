@@ -40,11 +40,12 @@ export async function listEmergencyContacts(): Promise<EmergencyContact[]> {
     is_primary: number;
     notes: string | null;
     source: string | null;
+    contact_key: string | null;
   }>(
     // Primary first, then by name, so the list on screen reads in the order
     // someone would actually work down it.
     `
-      SELECT id, name, relationship, phone, is_primary, notes, source
+      SELECT id, name, relationship, phone, is_primary, notes, source, contact_key
       FROM emergency_contacts
       ORDER BY is_primary DESC, name
     `,
@@ -57,6 +58,7 @@ export async function listEmergencyContacts(): Promise<EmergencyContact[]> {
     primary: Boolean(row.is_primary),
     notes: row.notes,
     source: row.source,
+    contactKey: row.contact_key,
   }));
 }
 
@@ -69,6 +71,8 @@ export async function upsertEmergencyContact(input: {
   notes?: string | null;
   /** Set by the app when the person was picked or typed; undefined leaves it as it was. */
   source?: string | null;
+  /** The phone contact they were picked from; undefined leaves it as it was. */
+  contactKey?: string | null;
 }): Promise<string> {
   const db = await getDatabase();
   const now = new Date().toISOString();
@@ -79,7 +83,7 @@ export async function upsertEmergencyContact(input: {
     await db.runAsync(
       `
         UPDATE emergency_contacts
-        SET name = ?, relationship = ?, phone = ?, is_primary = ?, notes = ?, source = COALESCE(?, source), updated_at = ?
+        SET name = ?, relationship = ?, phone = ?, is_primary = ?, notes = ?, source = COALESCE(?, source), contact_key = COALESCE(?, contact_key), updated_at = ?
         WHERE id = ?
       `,
       input.name.trim(),
@@ -88,14 +92,15 @@ export async function upsertEmergencyContact(input: {
       isPrimary,
       input.notes?.trim() || null,
       input.source ?? null,
+      input.contactKey ?? null,
       now,
       input.id,
     );
   } else {
     await db.runAsync(
       `
-        INSERT INTO emergency_contacts (id, name, relationship, phone, is_primary, notes, source, created_at, updated_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO emergency_contacts (id, name, relationship, phone, is_primary, notes, source, contact_key, created_at, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `,
       id,
       input.name.trim(),
@@ -104,6 +109,7 @@ export async function upsertEmergencyContact(input: {
       isPrimary,
       input.notes?.trim() || null,
       input.source ?? null,
+      input.contactKey ?? null,
       now,
       now,
     );

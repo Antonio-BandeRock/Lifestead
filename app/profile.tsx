@@ -40,8 +40,7 @@ import {
   homeBandStyle,
 } from '../components/HomeSectionBand';
 import { APP_VERSION } from '../constants/version';
-import { isSignedIn as isOneDriveSignedIn } from '../lib/oneDriveAuth';
-import { getBackupsFolder, getSharedFolder } from '../lib/oneDriveFolders';
+import { getBackupsFolder, getSharedFolder, isSharedFolderConnected } from '../lib/oneDriveFolders';
 import { backupTakenAt, pickNewestBackup, type BackupCandidate } from '../lib/newestBackup';
 import type { DriveItemRef } from '../lib/oneDriveGraph';
 import { downloadText, listFiles, uploadText } from '../lib/oneDriveGraph';
@@ -119,10 +118,12 @@ import { setTopicMuted } from '../lib/generalHealthPreferences';
 import { syncReminderNotifications } from '../lib/reminderNotifications';
 import {
   ALL_REMINDER_KIND_KEYS,
+  isCalendarEveryEventEnabled,
   isNudgeUntilDoneEnabled,
   isReminderKindEnabled,
   REMINDER_KIND_CAPTIONS,
   REMINDER_KIND_LABELS,
+  setCalendarEveryEvent,
   setNudgeUntilDone,
   setQuietHours,
   setReminderKindEnabled,
@@ -1041,6 +1042,21 @@ export default function ProfileScreen() {
             </PickerField>
           </View>
         );
+      case 'calendarOffer': {
+        const every = isCalendarEveryEventEnabled(reminderPrefs);
+        return (
+          <View style={styles.pillRow}>
+            <TouchableOpacity
+              style={[styles.pill, every && styles.pillActive]}
+              onPress={toggleCalendarEveryEvent}
+            >
+              <Text style={[styles.pillText, every && styles.pillTextActive]}>
+                Every event, not only health visits
+              </Text>
+            </TouchableOpacity>
+          </View>
+        );
+      }
       default:
         return null;
     }
@@ -1288,6 +1304,14 @@ export default function ProfileScreen() {
   // switch they moved.
   function toggleNudgeUntilDone() {
     void setNudgeUntilDone(!isNudgeUntilDoneEnabled(reminderPrefs)).then(() =>
+      syncReminderNotifications(),
+    );
+  }
+
+  // Calendar offers for every event rather than health visits only, which
+  // the next reconcile reads.
+  function toggleCalendarEveryEvent() {
+    void setCalendarEveryEvent(!isCalendarEveryEventEnabled(reminderPrefs)).then(() =>
       syncReminderNotifications(),
     );
   }
@@ -1650,7 +1674,7 @@ export default function ProfileScreen() {
   // the shape under that folder, so Backups is found or made there rather than
   // being one more thing to set up.
   const refreshBackupFolder = useCallback(async (): Promise<DriveItemRef | null> => {
-    const connected = await isOneDriveSignedIn();
+    const connected = await isSharedFolderConnected();
     setOneDriveConnected(connected);
     if (!connected) {
       setBackupFolder(null);

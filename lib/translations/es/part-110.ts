@@ -1,0 +1,37 @@
+// The app's words in Spanish: Google Drive as the shared folder, on the
+// Shared Folder screen and in what it says back (1.0.80.6).
+// See part-001.ts for how the table works.
+/* eslint-disable */
+export const PART: Readonly<Record<string, string>> = {
+ "Google Drive": "Google Drive",
+ "Use Google Drive": "Usar Google Drive",
+ "In use now.": "En uso ahora.",
+ "Sign Out of Google Drive": "Cerrar sesión de Google Drive",
+ "The app makes one folder, {}, and works only inside it. Google is asked for the narrowest permission it has: Lifestead can see the files it made and nothing else in your Drive.": "La app crea una carpeta, {}, y trabaja solo dentro de ella. A Google se le pide el permiso más limitado que tiene: Lifestead puede ver los archivos que creó y nada más de tu Drive.",
+ "For two devices, sign in to the same Google account on both and tap Use Google Drive on each. To share with another person, use Connections rather than sharing this folder, since the app cannot see a folder somebody else made.": "Para dos dispositivos, inicia sesión con la misma cuenta de Google en los dos y toca Usar Google Drive en cada uno. Para compartir con otra persona, usa Conexiones en lugar de compartir esta carpeta, porque la app no puede ver una carpeta que creó alguien más.",
+ "Anything in this folder is visible to whoever you share it with in Google Drive, and that includes your backups.": "Todo lo que hay en esta carpeta lo puede ver cualquier persona con quien la compartas en Google Drive, y eso incluye tus respaldos.",
+ "For files kept anywhere other than OneDrive or Google Drive: Dropbox, Box, MEGA, pCloud, a Nextcloud, or a computer at home. Install an app that keeps a folder on this phone in step with that storage, such as Syncthing, FolderSync or Autosync, then choose that folder here. No sign-in is needed in Lifestead.": "Para archivos guardados en cualquier lugar que no sea OneDrive ni Google Drive: Dropbox, Box, MEGA, pCloud, un Nextcloud o una computadora en casa. Instala una app que mantenga una carpeta de este teléfono al día con ese almacenamiento, como Syncthing, FolderSync o Autosync, y luego elige esa carpeta aquí. No hace falta iniciar sesión en Lifestead.",
+ "Some storage apps, Dropbox among them, do not offer their folders in this list. Android also will not hand over the top of the phone's storage or the Download folder itself, so choose a folder inside one.": "Algunas apps de almacenamiento, entre ellas Dropbox, no ofrecen sus carpetas en esta lista. Android tampoco entrega la raíz del almacenamiento del teléfono ni la carpeta Download en sí, así que elige una carpeta dentro de alguna.",
+ "Signed out of OneDrive. Your shared folder is in Google Drive, so it is still in use.": "Se cerró la sesión de OneDrive. Tu carpeta compartida está en Google Drive, así que sigue en uso.",
+ "Signed out of Google Drive. To take away Lifestead's access completely, remove it under Security in your Google Account. Your files stay in Google Drive.": "Se cerró la sesión de Google Drive. Para quitarle a Lifestead todo el acceso, quítalo en Seguridad de tu Cuenta de Google. Tus archivos se quedan en Google Drive.",
+ "Signed out of Google Drive. The shared folder was cleared with it. To take away Lifestead's access completely, remove it under Security in your Google Account. Your files stay in Google Drive.": "Se cerró la sesión de Google Drive y con ella se quitó la carpeta compartida. Para quitarle a Lifestead todo el acceso, quítalo en Seguridad de tu Cuenta de Google. Tus archivos se quedan en Google Drive.",
+ "Sign in to Google Drive first, on the Shared Folder screen.": "Primero inicia sesión en Google Drive, en la pantalla Carpeta compartida.",
+ "Google Drive needs the next version of Lifestead installed on this phone. Until then, use OneDrive or a folder on this phone.": "Google Drive necesita que la próxima versión de Lifestead esté instalada en este teléfono. Mientras tanto, usa OneDrive o una carpeta de este teléfono.",
+ "Google Drive needs the newest Lifestead installer on this computer. Until then, use the OneDrive folder on this computer.": "Google Drive necesita el instalador más reciente de Lifestead en esta computadora. Mientras tanto, usa la carpeta de OneDrive de esta computadora.",
+ "The Google sign-in was closed before it finished.": "El inicio de sesión de Google se cerró antes de terminar.",
+ "The Google sign-in did not finish.": "El inicio de sesión de Google no terminó.",
+ "Google could not be reached. Check the connection and try again.": "No se pudo conectar con Google. Revisa la conexión e inténtalo de nuevo.",
+ "Google Drive could not be reached. Check the connection and try again.": "No se pudo conectar con Google Drive. Revisa la conexión e inténtalo de nuevo.",
+ "Google wants the sign-in confirmed again. Open the Shared Folder screen and tap Use Google Drive.": "Google quiere que vuelvas a confirmar el inicio de sesión. Abre la pantalla Carpeta compartida y toca Usar Google Drive.",
+ "Google Drive did not accept the sign-in. Sign in to Google Drive again on the Shared Folder screen.": "Google Drive no aceptó el inicio de sesión. Vuelve a iniciar sesión en Google Drive en la pantalla Carpeta compartida.",
+ "Google Drive is full. Make room in it, or choose another shared folder.": "Google Drive está lleno. Libera espacio o elige otra carpeta compartida.",
+ "Google Drive no longer has that. It may have been removed or put in the bin.": "Google Drive ya no tiene eso. Puede que se haya quitado o mandado a la papelera.",
+ "Google Drive sent back something this app could not read.": "Google Drive devolvió algo que esta app no pudo leer.",
+ "The folder was made but Google Drive did not say where.": "La carpeta se creó, pero Google Drive no dijo dónde.",
+ "That is no longer a folder in Google Drive.": "Eso ya no es una carpeta en Google Drive.",
+ "Google Drive was not allowed, so nothing changed.": "No se permitió Google Drive, así que nada cambió.",
+ "This installer was built without its Google Drive setup. The next installer will have it.": "Este instalador se armó sin la configuración de Google Drive. El próximo instalador la tendrá.",
+ "Google no longer lets Lifestead into this Drive. Open the Shared Folder screen and tap Use Google Drive to sign in again.": "Google ya no deja entrar a Lifestead en este Drive. Abre la pantalla Carpeta compartida y toca Usar Google Drive para iniciar sesión de nuevo.",
+ "The Google sign-in waited five minutes with no answer, so it was stopped. Try again.": "El inicio de sesión de Google esperó cinco minutos sin respuesta, así que se detuvo. Inténtalo de nuevo.",
+ "The browser could not be opened for the Google sign-in.": "No se pudo abrir el navegador para el inicio de sesión de Google.",
+};

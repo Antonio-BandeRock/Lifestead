@@ -5,6 +5,7 @@ import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'rea
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { AppTextInput } from './AppTextInput';
+import { AttachedFiles } from './AttachedFiles';
 import { DIGEST_CONDITION_ICONS } from './DigestConditionIcons';
 import { DigestEntryBody, entryHeaderDotColor } from './DigestEntryDetail';
 import { DigestEntryRow, makeDigestRowStyles } from './DigestEntryRow';
@@ -59,6 +60,8 @@ import { ThumbRow } from './ThumbRow';
 import { VaultClosedBand } from './VaultClosedBand';
 import { useCategoryClosed } from '../lib/vaultSession';
 import { t, tl } from '../lib/i18n';
+import { listPartners, type Connection } from '../lib/connections';
+import { besideFreshness } from '../lib/peerBeside';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 
 // The 19 conditions, on the Life tab. Direct instruction, 2026-09-19:
@@ -174,6 +177,11 @@ function toggled<T>(list: T[], value: T): T[] {
 }
 
 /** The Digest category behind a condition code, or null for a code with no page yet. */
+function localToday(): string {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
 function metaForCode(code: string): ConditionMeta | null {
   const key = CONDITION_CODE_TO_DIGEST_KEY[code];
   if (!key) return null;
@@ -240,6 +248,9 @@ export function ConditionsSection({
   const [ownCodes, setOwnCodes] = useState<string[]>([]);
   const [curiousCodes, setCuriousCodes] = useState<string[]>([]);
   const [family, setFamily] = useState<FamilyMember[]>([]);
+  // Partners whose side is shown here and who share their conditions
+  // (1.0.80.3). Read only, never feeding scores, plans or advisories here.
+  const [partners, setPartners] = useState<Connection[]>([]);
   const [allConditions, setAllConditions] = useState<ConditionReference[]>([]);
   const [declaredStages, setDeclaredStages] = useState<Record<string, string>>({});
   const [dietPreferences, setDietPreferences] = useState<RecipeDietTag[]>([]);
@@ -279,6 +290,7 @@ export function ConditionsSection({
       setAllConditions(conditions);
       setDeclaredStages(stages);
       setDietPreferences(diets as RecipeDietTag[]);
+      setPartners((await listPartners().catch(() => [] as Connection[])).filter((partner) => partner.showTheirs && partner.theirConditionCodes.length > 0));
     } catch (error) {
       showInfoAlert('Could not load Conditions', error instanceof Error ? error.message : String(error));
     }
@@ -321,20 +333,28 @@ export function ConditionsSection({
   // so no condition shows twice and the groups never mix.
   const ownMetas = useMemo(() => sortedMetas(ownCodes), [ownCodes]);
   const ownKeys = useMemo(() => new Set(ownMetas.map((meta) => meta.key)), [ownMetas]);
+  const partnerMetas = useMemo(
+    () => sortedMetas(partners.flatMap((partner) => partner.theirConditionCodes)).filter((meta) => !ownKeys.has(meta.key)),
+    [partners, ownKeys],
+  );
+  const partnerKeys = useMemo(() => new Set(partnerMetas.map((meta) => meta.key)), [partnerMetas]);
   const familyMetas = useMemo(
-    () => sortedMetas(family.flatMap((member) => member.conditionCodes)).filter((meta) => !ownKeys.has(meta.key)),
-    [family, ownKeys],
+    () =>
+      sortedMetas(family.flatMap((member) => member.conditionCodes)).filter(
+        (meta) => !ownKeys.has(meta.key) && !partnerKeys.has(meta.key),
+      ),
+    [family, ownKeys, partnerKeys],
   );
   const familyKeys = useMemo(() => new Set(familyMetas.map((meta) => meta.key)), [familyMetas]);
   const otherMetas = useMemo(() => {
-    const curious = sortedMetas(curiousCodes).filter((meta) => !ownKeys.has(meta.key) && !familyKeys.has(meta.key));
+    const curious = sortedMetas(curiousCodes).filter((meta) => !ownKeys.has(meta.key) && !partnerKeys.has(meta.key) && !familyKeys.has(meta.key));
     const shown = new Set(curious.map((meta) => meta.key));
     const peeked = peekKeys
-      .filter((key) => !ownKeys.has(key) && !familyKeys.has(key) && !shown.has(key))
+      .filter((key) => !ownKeys.has(key) && !partnerKeys.has(key) && !familyKeys.has(key) && !shown.has(key))
       .map((key) => DIGEST_CATEGORY_META.find((meta) => meta.key === key))
       .filter((meta): meta is ConditionMeta => Boolean(meta));
     return [...curious, ...peeked].sort((a, b) => a.label.localeCompare(b.label));
-  }, [curiousCodes, ownKeys, familyKeys, peekKeys]);
+  }, [curiousCodes, ownKeys, partnerKeys, familyKeys, peekKeys]);
   const curiousKeys = useMemo(() => new Set(sortedMetas(curiousCodes).map((meta) => meta.key)), [curiousCodes]);
 
   // Who on the roster has each family condition, for the band's caption.
@@ -354,8 +374,8 @@ export function ConditionsSection({
   // Every condition on the page, for search and for deciding whether a
   // link target is already visible.
   const visibleKeys = useMemo(
-    () => new Set<DigestCategoryKey>([...ownMetas, ...familyMetas, ...otherMetas].map((meta) => meta.key)),
-    [ownMetas, familyMetas, otherMetas],
+    () => new Set<DigestCategoryKey>([...ownMetas, ...partnerMetas, ...familyMetas, ...otherMetas].map((meta) => meta.key)),
+    [ownMetas, partnerMetas, familyMetas, otherMetas],
   );
 
   // The row an open-in-place is waiting to bring to the top of the
@@ -408,7 +428,7 @@ export function ConditionsSection({
     if (trimmed.length === 0) return null;
     const pool: AnyDigestEntry[] = [];
     const labelFor = new Map<string, string>();
-    for (const meta of [...ownMetas, ...familyMetas, ...otherMetas]) {
+    for (const meta of [...ownMetas, ...partnerMetas, ...familyMetas, ...otherMetas]) {
       for (const entry of entriesFor(meta.key)) {
         pool.push(entry);
         labelFor.set(entry.id, meta.label);
@@ -418,7 +438,7 @@ export function ConditionsSection({
       entry: result.entry,
       groupLabel: labelFor.get(result.entry.id) ?? '',
     }));
-  }, [query, ownMetas, familyMetas, otherMetas, entriesFor]);
+  }, [query, ownMetas, partnerMetas, familyMetas, otherMetas, entriesFor]);
 
   // --- Family roster -------------------------------------------------------
 
@@ -653,6 +673,38 @@ export function ConditionsSection({
           )}
           {conditionsClosed ? null : ownMetas.map((meta) => renderConditionBand(meta))}
 
+          {conditionsClosed
+            ? null
+            : partners.map((partner) => {
+                const names = partner.theirConditionCodes
+                  .map((code) => allConditions.find((condition) => condition.code === code)?.name ?? code)
+                  .sort((a, b) => a.localeCompare(b));
+                const alsoYours = partner.theirConditionCodes.filter((code) => ownCodes.includes(code)).length;
+                return (
+                  <View key={partner.id} style={styles.groupHeadingChip}>
+                    <Text style={styles.groupHeadingText}>{t('{name} shared', { name: partner.name })}</Text>
+                    <Text style={styles.groupHeadingMeta}>
+                      {names.map((name) => tl(name)).join(', ')}
+                      {alsoYours > 0
+                        ? ` ${t(alsoYours === 1 ? 'One is also yours, shown above.' : '{count} are also yours, shown above.', { count: alsoYours })}`
+                        : ''}
+                    </Text>
+                    <Text style={styles.groupHeadingMeta}>
+                      {besideFreshness(partner.theirConditionsAt ?? '', localToday(), t)}{' '}
+                      {t('Meal plans check them beside yours. Nothing here changes your scores or advisories.')}
+                    </Text>
+                  </View>
+                );
+              })}
+          {conditionsClosed
+            ? null
+            : partnerMetas.map((meta) => {
+                const names = partners
+                  .filter((partner) => partner.theirConditionCodes.some((code) => CONDITION_CODE_TO_DIGEST_KEY[code] === meta.key))
+                  .map((partner) => partner.name);
+                return renderConditionBand(meta, names.length ? t('Tracked by {names}.', { names: names.join(', ') }) : undefined);
+              })}
+
           <View style={styles.groupHeadingChip}>
             <Text style={styles.groupHeadingText}>Family</Text>
             <Text style={styles.groupHeadingMeta}>
@@ -698,6 +750,12 @@ export function ConditionsSection({
                     {member.includeInMealPlan && tableParts.length > 0 ? (
                       <Text style={styles.memberMeta}>{tableParts.join(' ')}</Text>
                     ) : null}
+                    <AttachedFiles
+                      ownerKind="family_member"
+                      ownerId={member.id}
+                      tabColor={tabColor}
+                      openerRef={memberIndex === 0 ? walkMark.ref('family.files') : undefined}
+                    />
                   </View>
                   <View style={styles.memberActions}>
                     <TouchableOpacity
