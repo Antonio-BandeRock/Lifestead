@@ -41,6 +41,13 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.80.1',
+    date: '2026-11-03',
+    changes: [
+      "The shared folder no longer has to be in OneDrive. On the phone, Profile > Backup & Restore > Set Up the Shared Folder now offers A folder on this phone: choose a folder that another app keeps in step with wherever you keep your files (Dropbox, Box, MEGA, pCloud, a Nextcloud or a computer at home, through an app such as Syncthing, FolderSync or Autosync), and backups, sync and sharing with a partner all use it with no sign-in in Lifestead.",
+    ],
+  },
+  {
     version: '1.0.79.14',
     date: '2026-11-02',
     changes: [

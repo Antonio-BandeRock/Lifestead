@@ -13,8 +13,10 @@
 // the design depends on. Disproportionate for a few hundred bytes, and the
 // consent screen says so in those words to whoever is being asked. A folder the
 // person picks needs no registration, no scope and no provider at all: whatever
-// already syncs that folder moves the bytes, so the same code works over
-// OneDrive, Google Drive, Dropbox or a plain SD card without knowing which.
+// already syncs that folder moves the bytes, so the same code works over any
+// folder a sync app keeps on the phone, or a plain SD card, without knowing
+// which. The Google Drive and Dropbox apps do not offer their folders in
+// Android's picker, so those reach it through a sync app (lib/phoneFolder.ts).
 //
 // NOTHING FROM expo-file-system IS IMPORTED AT MODULE SCOPE. Every call goes
 // through an await import() inside the function that needs it, the discipline
@@ -48,7 +50,7 @@ export type SyncFolderProblem =
 
 export const SYNC_FOLDER_PROBLEM_TEXT: Record<SyncFolderProblem, string> = {
   notChosen:
-    'No shared folder has been picked yet. Choose one that both phones can see, such as a folder inside OneDrive, Google Drive or Dropbox.',
+    'No shared folder has been picked yet. Choose one that both phones can see, such as a folder that OneDrive, Syncthing or FolderSync keeps in step.',
   unreachable:
     'The shared folder could not be opened. It may have been moved or deleted, or this app may have lost permission to it. Pick the folder again.',
   writeFailed:
@@ -140,6 +142,15 @@ export async function writeSealedToFolder(input: {
 
   const uri = await getSyncFolderUri();
   if (!uri) return { written: false, problem: 'notChosen' };
+
+  if (uri.startsWith('content://')) {
+    // A folder from Android's picker cannot make a file by joining a name onto
+    // its address, which is what new File(directory, name) does, so the write
+    // goes the way lib/phoneFolder.ts writes into one.
+    const { PHONE_DRIVE_ID, uploadText } = await import('./phoneFolder');
+    const wrote = await uploadText({ driveId: PHONE_DRIVE_ID, itemId: uri, name: 'the shared folder' }, name, input.sealedBase64);
+    return wrote.ok ? { written: true, name } : { written: false, problem: 'writeFailed' };
+  }
 
   try {
     const { Directory, File } = await import('expo-file-system');

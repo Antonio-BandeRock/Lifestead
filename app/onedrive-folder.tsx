@@ -33,6 +33,13 @@
 // in to: the 2026-09-21 report was a sign-in page that "kept waiting and
 // waiting and never completed", since Microsoft's redirect had nowhere to
 // land on a PC.
+//
+// ON A PHONE THERE IS A THIRD WAY: A FOLDER ON THE PHONE (2026-11-03). For
+// anyone whose files live somewhere other than OneDrive, Android's own
+// folder picker chooses a folder that another app keeps in step with their
+// storage (lib/phoneFolder.ts). It needs no sign-in here, so it is offered
+// whether or not OneDrive is signed in, and signing out of OneDrive leaves
+// it alone.
 
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -48,6 +55,7 @@ import { getOneDriveFolder, setMailboxFolderName, setOneDriveFolder } from '../l
 import { isDesktopApp } from '../lib/desktop/bridge';
 import { explainNotYet } from '../lib/notYet';
 import { pickFolder } from '../lib/desktop/cloudFolder';
+import { isPhoneFolder, pickFolder as pickPhoneFolder } from '../lib/phoneFolder';
 import { isOneDriveConfigured, isSignedIn, signIn, signOut } from '../lib/oneDriveAuth';
 import {
   BACKUPS_FOLDER_NAME,
@@ -89,6 +97,7 @@ export default function OneDriveFolderScreen() {
   const [newFolderName, setNewFolderName] = useState('');
 
   const current = trail.length > 0 ? trail[trail.length - 1] : null;
+  const usingPhoneFolder = isPhoneFolder(chosen);
 
   const load = useCallback(async (nextRoot: Root, nextTrail: DriveItemRef[]) => {
     setBusy(true);
@@ -131,7 +140,10 @@ export default function OneDriveFolderScreen() {
       const [alreadySignedIn, saved] = await Promise.all([isSignedIn(), getOneDriveFolder()]);
       setSignedIn(alreadySignedIn);
       setChosen(saved);
-      if (!alreadySignedIn) return;
+      if (!alreadySignedIn) {
+        if (isPhoneFolder(saved)) setChosen(await refreshStored(saved));
+        return;
+      }
       const currentFolder = await refreshStored(saved);
       setChosen(currentFolder);
       if (desktop) {
@@ -164,16 +176,21 @@ export default function OneDriveFolderScreen() {
 
   const handleSignOut = async () => {
     await signOut();
+    setSignedIn(false);
+    setFolders([]);
+    setTrail([]);
+    if (usingPhoneFolder) {
+      // A folder on this phone never needed OneDrive, so it stays.
+      setNote('Signed out of OneDrive. Your shared folder is on this phone, so it is still in use.');
+      return;
+    }
     // The folder goes with the account. Leaving an address behind that nothing
     // can open would show a folder that is set up and refuses every write, which
     // is worse than plainly showing nothing is set up.
     await setOneDriveFolder(null);
     await setMailboxFolderName(null);
     forgetResolvedFolders();
-    setSignedIn(false);
     setChosen(null);
-    setFolders([]);
-    setTrail([]);
     setNote('Signed out of OneDrive. The shared folder was cleared with it.');
   };
 
@@ -206,6 +223,7 @@ export default function OneDriveFolderScreen() {
     // is what this app opens; the name is what a person reads.
     await setMailboxFolderName(folder.name);
     setChosen(folder);
+    forgetResolvedFolders();
     // Made now rather than on first use, so somebody can open OneDrive straight
     // afterwards and see the shape they were told about.
     const prepared = await prepareSharedFolder();
@@ -221,7 +239,9 @@ export default function OneDriveFolderScreen() {
           ' are ready inside it.'
         : 'Using ' + folder.name + ', but its folders could not be made yet. ' + (prepared.reason ?? ''),
     );
-    await load(root, nextTrail);
+    // A folder on this phone was chosen in Android's picker, so there is no
+    // OneDrive listing to move to.
+    if (!isPhoneFolder(folder)) await load(root, nextTrail);
   };
 
   const handleUse = async () => {
@@ -246,6 +266,20 @@ export default function OneDriveFolderScreen() {
     setTrail(nextTrail);
     setRoot('mine');
     await adoptFolder(picked.value, nextTrail);
+  };
+
+  /**
+   * Android's folder picker, for a folder another app keeps in step with
+   * wherever the person stores their files.
+   */
+  const handleChoosePhoneFolder = async () => {
+    const picked = await pickPhoneFolder();
+    if (!picked.ok) {
+      setNote(picked.reason);
+      return;
+    }
+    if (!picked.value) return;
+    await adoptFolder(picked.value, []);
   };
 
   const handleCreate = async () => {
@@ -285,13 +319,13 @@ export default function OneDriveFolderScreen() {
         <View style={styles.card}>
           <Text style={styles.label}>Your shared folder</Text>
           <Text style={styles.hint}>
-            One folder in OneDrive holding everything this app keeps there. Set it up once, whether or not you ever add
-            anyone, because backups need it too.
+            One folder holding everything this app keeps there. Set it up once, whether or not you ever add anyone,
+            because backups need it too.
           </Text>
           {/* Signed out, nothing is in use, whatever is remembered. The choice is
               kept (a sign-in Microsoft stopped honouring leaves it in place) so
               signing back in picks it up, and the sign-in card says so. */}
-          {signedIn === false ? (
+          {signedIn === false && !usingPhoneFolder ? (
             <Text style={styles.hint}>Not signed in to OneDrive, so no folder is in use on this device.</Text>
           ) : chosen ? (
             <>
@@ -308,9 +342,16 @@ export default function OneDriveFolderScreen() {
               {/* Said once, plainly, because it is the consequence somebody is
                   least likely to have thought through. */}
               <Text style={styles.warning}>
-                Anything in this folder is visible to whoever you share it with in OneDrive, and that includes your
-                backups.
+                {usingPhoneFolder
+                  ? 'Anything in this folder is visible to whoever can see it where your storage app keeps it, and that includes your backups.'
+                  : 'Anything in this folder is visible to whoever you share it with in OneDrive, and that includes your backups.'}
               </Text>
+              {usingPhoneFolder ? (
+                <Text style={styles.hint}>
+                  The app that keeps this folder in step decides when it reaches your storage, so a change here reaches
+                  your other device as soon as that app has carried it across.
+                </Text>
+              ) : null}
             </>
           ) : (
             <Text style={styles.hint}>Nothing set up yet.</Text>
@@ -342,6 +383,26 @@ export default function OneDriveFolderScreen() {
             </TouchableOpacity>
           </View>
         ) : null}
+
+        {desktop ? null : (
+          <View style={styles.card}>
+            <Text style={styles.label}>A folder on this phone</Text>
+            <Text style={styles.hint}>
+              For files kept anywhere other than OneDrive: Dropbox, Box, MEGA, pCloud, a Nextcloud, or a computer at home.
+              Install an app that keeps a folder on this phone in step with that storage, such as Syncthing, FolderSync or
+              Autosync, then choose that folder here. No sign-in is needed in Lifestead.
+            </Text>
+            <Text style={styles.hint}>
+              Some storage apps, Google Drive and Dropbox among them, do not offer their folders in this list. Android also
+              will not hand over the top of the phone&apos;s storage or the Download folder itself, so choose a folder inside
+              one.
+            </Text>
+            <TouchableOpacity style={styles.primaryButton} onPress={handleChoosePhoneFolder} disabled={busy}>
+              <Ionicons name="phone-portrait-outline" size={18} color={colors.textOnButton} />
+              <Text style={styles.primaryButtonText}>Choose a Folder on This Phone</Text>
+            </TouchableOpacity>
+          </View>
+        )}
 
         {signedIn ? (
           <>

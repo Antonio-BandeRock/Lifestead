@@ -35,6 +35,7 @@ const SECTIONS: GuideSection[] = [
       'A Microsoft account, the same one on both devices. A free account works.',
       'The OneDrive app installed on your computer and signed in with that account. Its icon sits by the clock at the bottom right of the screen.',
       'Lifestead installed on your phone and on your computer.',
+      'Files kept somewhere other than OneDrive? On the phone, Set Up the Shared Folder also offers A folder on this phone, for a folder that another app keeps in step with your storage. On the computer, choose the same folder where it sits on the disk.',
     ],
   },
   {

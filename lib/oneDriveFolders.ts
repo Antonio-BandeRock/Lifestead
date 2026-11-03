@@ -50,6 +50,7 @@ import { isDesktopApp } from './desktop/bridge';
 import { folderFromPhonePath, isDiskFolder } from './desktop/cloudFolder';
 import { PHOTOS_FOLDER_NAME, RECORDINGS_FOLDER_NAME } from './media';
 import { isSignedIn } from './oneDriveAuth';
+import { isPhoneFolder } from './phoneFolder';
 import {
   checkFolder,
   ensureChildFolder,
@@ -90,9 +91,10 @@ export type SharedFolderState =
  * is not a problem; the stored copy is brought back in line and used.
  */
 export async function getSharedFolder(): Promise<SharedFolderState> {
-  if (!(await isSignedIn())) return { state: 'notSignedIn' };
-
   let stored = await getOneDriveFolder();
+  // A folder on this phone needs no sign-in: the app that keeps it in step
+  // is signed in to its own service.
+  if (!isPhoneFolder(stored) && !(await isSignedIn())) return { state: 'notSignedIn' };
   if (!stored) return { state: 'notSetUp' };
 
   if (isDesktopApp() && !isDiskFolder(stored)) {
@@ -154,6 +156,15 @@ export async function getSharedFolder(): Promise<SharedFolderState> {
   }
 
   return { state: 'ready', folder: stored };
+}
+
+/**
+ * Whether this device can reach a shared folder at all: signed in to
+ * OneDrive, or using a folder on this phone, which needs no sign-in.
+ */
+export async function isSharedFolderConnected(): Promise<boolean> {
+  if (isPhoneFolder(await getOneDriveFolder())) return true;
+  return isSignedIn();
 }
 
 /** Wording for a shared folder that is not usable, said the same way everywhere. */

@@ -40,8 +40,7 @@ import {
   homeBandStyle,
 } from '../components/HomeSectionBand';
 import { APP_VERSION } from '../constants/version';
-import { isSignedIn as isOneDriveSignedIn } from '../lib/oneDriveAuth';
-import { getBackupsFolder, getSharedFolder } from '../lib/oneDriveFolders';
+import { getBackupsFolder, getSharedFolder, isSharedFolderConnected } from '../lib/oneDriveFolders';
 import { backupTakenAt, pickNewestBackup, type BackupCandidate } from '../lib/newestBackup';
 import type { DriveItemRef } from '../lib/oneDriveGraph';
 import { downloadText, listFiles, uploadText } from '../lib/oneDriveGraph';
@@ -1675,7 +1674,7 @@ export default function ProfileScreen() {
   // the shape under that folder, so Backups is found or made there rather than
   // being one more thing to set up.
   const refreshBackupFolder = useCallback(async (): Promise<DriveItemRef | null> => {
-    const connected = await isOneDriveSignedIn();
+    const connected = await isSharedFolderConnected();
     setOneDriveConnected(connected);
     if (!connected) {
       setBackupFolder(null);

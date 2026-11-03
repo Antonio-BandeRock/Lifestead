@@ -42,7 +42,6 @@ import {
   uploadText,
   type DriveItemRef,
 } from './oneDriveGraph';
-import { isSignedIn } from './oneDriveAuth';
 import { describeSharedFolderProblem, getMailboxFolder, getSharedFolder } from './oneDriveFolders';
 
 export type MailboxStatus =
@@ -60,9 +59,8 @@ export type MailboxStatus =
  * the mailbox.
  */
 export async function getMailboxStatus(): Promise<MailboxStatus> {
-  if (!(await isSignedIn())) return { state: 'notSignedIn' };
-
   const shared = await getSharedFolder();
+  if (shared.state === 'notSignedIn') return { state: 'notSignedIn' };
   if (shared.state === 'notSetUp') return { state: 'noFolder' };
   if (shared.state !== 'ready') {
     return {
