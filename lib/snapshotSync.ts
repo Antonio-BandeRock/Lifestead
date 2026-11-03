@@ -363,6 +363,9 @@ export const DEVICE_LOCAL_TABLES: readonly string[] = [
   // raises it, and the doses arrive again on whichever device is linked.
   'peer_dose_watch',
   'peer_dose_alerts',
+  // 1.0.80.3: what a partner shares about themselves, as their phone last
+  // sent it; it arrives again on whichever device is linked.
+  'peer_beside',
   'daily_nutrient_totals_cache',
   // A lookup this device could not make (G21); the other device has its own signal.
   'pending_barcode_scans',

@@ -370,6 +370,7 @@ export type ToolMark =
   | 'mealPlan.firstDay'
   | 'mealPlan.generate'
   | 'mealPlan.regenerateDay'
+  | 'mealPlan.letGoKept'
   | 'mealPlan.styles'
   | 'meds.checkBand'
   | 'meds.myMeds'
@@ -3639,6 +3640,15 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Add This Day to Schedule or Add This Plan to Schedule.', mark: 'mealPlan.addToSchedule' },
       ],
       forYou: 'Every meal lands on its day in Meals, and the grocery list picks them up.',
+    },
+    {
+      key: 'letGoKept',
+      title: 'Let go of a meal plan kept from a partner',
+      steps: [
+        { say: 'Open the band called From and their name. It is there only after a partner link has ended.' },
+        { say: 'Tap Let Go of This, then Let Go.', mark: 'mealPlan.letGoKept' },
+      ],
+      forYou: 'Their plan and dish photos come off this phone, and your meals stay as they are.',
     },
   ],
   '/schedule#hydration': [

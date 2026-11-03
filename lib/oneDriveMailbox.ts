@@ -31,6 +31,7 @@ import { applySyncFileText, contentDigest, PARTNER_SYNC_FILE_KIND, planRecipeIds
 import { PEER_PHOTO_BUDGET_DIRECT } from './peerPhotos';
 import { peerPhotoPartFor } from './peerPhotosDb';
 import { peerDosePartFor } from './peerDosesDb';
+import { besidePartFor } from './peerBesideDb';
 import { talksAutomatically } from './peerRelationships';
 import { readPeerTables } from './peerSyncDevice';
 import { REFERENCE_DB_VERSION } from './referenceDbVersion';
@@ -165,6 +166,7 @@ export async function sendViaOneDrive(options: { onlyWhenChanged?: boolean } = {
         allowFull: true,
       }),
       doses: await peerDosePartFor(partner),
+      beside: await besidePartFor(partner),
     });
 
     // The digest leaves out the send time, which differs on every send.

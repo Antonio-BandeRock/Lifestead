@@ -9,6 +9,7 @@ import { AppTextInput } from './AppTextInput';
 import { NotesInput } from './NotesInput';
 import { useInfoAlert } from './InfoAlert';
 import { TabBand, useTabBandStyles } from './TabBand';
+import { PartnerBesideBand } from './PartnerBesideBand';
 import { useBandFolds } from '../hooks/useBandFolds';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
@@ -932,6 +933,7 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
           </View>
         ))}
       </TabBand>
+      <PartnerBesideBand kind="emergency" tabColor={tabColor} />
     </View>
   );
 }

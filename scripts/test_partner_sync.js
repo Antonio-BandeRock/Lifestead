@@ -139,9 +139,11 @@ function build(grants, over = {}) {
   const nothing = build(NOTHING);
   check('with nothing granted, no conditions', nothing.conditionCodes, undefined);
   check('and no plan', nothing.plan, undefined);
-  check('what is left is only what identifies the message, plus an empty doses answer',
-    Object.keys(nothing).sort(), ['doses', 'fromFingerprint', 'referenceDbVersion', 'sentAt', 'v']);
+  check('what is left is only what identifies the message, plus empty doses and beside answers',
+    Object.keys(nothing).sort(), ['beside', 'doses', 'fromFingerprint', 'referenceDbVersion', 'sentAt', 'v']);
   check('and that doses answer is null, which clears the other phone', nothing.doses, null);
+  check('and every beside kind is null, which clears the copies on the other phone',
+    nothing.beside, { meds: null, emergency: null, appointments: null, accounts: null, budgets: null, insurance: null });
 
   const mealsOff = build({ meals: false, shopping: true, conditions: true });
   check('meals off drops the plan and keeps the conditions', mealsOff.plan, undefined);
@@ -268,7 +270,7 @@ check('and a future timestamp never goes negative', daysSinceSent('2026-12-01T00
   }
   check('the only keys are the declared ones',
     Object.keys(build(ALL)).sort(),
-    ['conditionCodes', 'doses', 'fromFingerprint', 'plan', 'referenceDbVersion', 'sentAt', 'v']);
+    ['beside', 'conditionCodes', 'doses', 'fromFingerprint', 'plan', 'referenceDbVersion', 'sentAt', 'v']);
 
   const wording = [
     describeSyncResult(readSyncPayload(serialised, { myReferenceDbVersion: DB }), 'Lisa'),
@@ -295,7 +297,7 @@ check('and a future timestamp never goes negative', daysSinceSent('2026-12-01T00
     Object.prototype.hasOwnProperty.call(smuggled.payload, 'secret'));
   check('and the result holds only the declared keys',
     Object.keys(smuggled.payload).sort(),
-    ['conditionCodes', 'doses', 'fromFingerprint', 'plan', 'referenceDbVersion', 'sentAt', 'v']);
+    ['beside', 'conditionCodes', 'doses', 'fromFingerprint', 'plan', 'referenceDbVersion', 'sentAt', 'v']);
 }
 
 // --- 8. THE ALLOWLIST HOLDS ON THE WAY OUT ---------------------------------

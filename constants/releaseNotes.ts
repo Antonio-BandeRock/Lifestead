@@ -41,6 +41,15 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.80.3',
+    date: '2026-11-03',
+    changes: [
+      "Partners: whatever your partner switches on about themselves now shows under their name beside your records, read only: their meds and supplements on My Meds, their emergency card and contacts on Emergency, their appointments on Schedules > Appointments, and their accounts, budgets and goals, and insurance and health accounts on Finances. Each has a switch on their phone, and switching one off takes it off yours at the next send.",
+      "Conditions a partner tracks show on Life > Conditions under their name, and one you both track says so.",
+      "If a partner link ends, the meals you planned together and their dish photos stay on Schedules > Meal Plan under From their name, no longer changing, until you tap Let Go of This. What they shared about their health, emergency card and money comes off your phone.",
+    ],
+  },
+  {
     version: '1.0.80.2',
     date: '2026-11-03',
     changes: [

@@ -189,7 +189,7 @@ import type { RecipeDietTag } from '../../lib/digest';
 import { describePlanningScope, resolvePlanningScope, type PlanningScope } from '../../lib/partnerPlanning';
 import { resolveHouseholdEaters } from '../../lib/householdEaters';
 import { describeHousehold, joinNames, type PlanEater, type PlanMeal } from '../../lib/householdPlan';
-import { getMealPlanningPartner } from '../../lib/connections';
+import { forgetFormerPartner, getMealPlanningPartner, listFormerPartners } from '../../lib/connections';
 import { getPartnerMealPlanNamed, type PartnerMealPlanNamed } from '../../lib/mealPlanSync';
 import { daysSinceSent } from '../../lib/partnerSync';
 import {
@@ -336,6 +336,7 @@ import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { SpokenAppointmentBox } from '../../components/SpokenAppointmentBox';
 import type { SpokenAppointment } from '../../lib/spokenAppointment';
 import { VaultClosedBand } from '../../components/VaultClosedBand';
+import { PartnerBesideBand } from '../../components/PartnerBesideBand';
 import { useVaultReloadKey } from '../../lib/vaultReads';
 import { useCategoryClosed } from '../../lib/vaultSession';
 import { t } from '../../lib/i18n';
@@ -3946,6 +3947,7 @@ function DailyMealPlanLens() {
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   const folds = useBandFolds();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
+  const [confirmSheet, confirmSheetElement] = useConfirmSheet();
   const [carbLevel, setCarbLevel] = useState<CarbLevel>('any');
   // 2026-08-26, direct request: "less than a certain amount of sugar."
   // See lib/dailyMealPlan.ts's own comment on this same flag for why
@@ -4030,6 +4032,11 @@ function DailyMealPlanLens() {
   // mixed into it. Two people planning together still each have a plan, and a
   // screen that merged them would have to invent a rule for whose dinner wins.
   const [partnerPlan, setPartnerPlan] = useState<{ id: string; name: string; plan: PartnerMealPlanNamed } | null>(null);
+  // Plans kept from somebody no longer linked. Meals were the two of them
+  // agreeing on what to eat, so ending the link does not take that back:
+  // every day held is shown, frozen, until the person lets it go.
+  const [formerPlans, setFormerPlans] = useState<{ id: string; name: string; endedAt: string; plan: PartnerMealPlanNamed }[]>([]);
+  const [formerTick, setFormerTick] = useState(0);
 
   useFocusEffect(
     useCallback(() => {
@@ -4078,10 +4085,24 @@ function DailyMealPlanLens() {
           // Nobody linked, or nothing sent yet. Both are ordinary, and both
           // mean the same thing on screen: no band.
         });
+      listFormerPartners()
+        .then(async (former) => {
+          const kept = [];
+          for (const person of former) {
+            const plan = await getPartnerMealPlanNamed(person.connectionId, { allDays: true });
+            if (plan.days.length > 0 || plan.dishes.length > 0) {
+              kept.push({ id: person.connectionId, name: person.name, endedAt: person.endedAt, plan });
+            }
+          }
+          if (!cancelled) setFormerPlans(kept);
+        })
+        .catch(() => {
+          if (!cancelled) setFormerPlans([]);
+        });
       return () => {
         cancelled = true;
       };
-    }, []),
+    }, [formerTick]),
   );
 
   // The pools a plate swap chooses from, loaded the first time somebody
@@ -4269,6 +4290,7 @@ function DailyMealPlanLens() {
   return (
     <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       {infoAlertElement}
+      {confirmSheetElement}
       <View style={styles.formCard}>
         <Text style={styles.label}>What you eat</Text>
         <Text style={styles.helperText}>{BASE_DIET_CHOICES.find((choice) => choice.tag === planDiet.base)?.caption}</Text>
@@ -4510,6 +4532,63 @@ function DailyMealPlanLens() {
           />
         </ScheduleBand>
       ) : null}
+
+      {formerPlans.map((former, formerIndex) => (
+        <ScheduleBand
+          key={former.id}
+          folds={folds}
+          id={`schedule:mealPlan:former:${former.id}`}
+          title={t('From {name}', { name: former.name })}
+          icon="people-outline"
+          count={former.plan.days.length}
+        >
+          <Text style={styles.helperText}>
+            {t('Kept from when the two of you planned meals together. It stopped changing on {day}, when the link ended.', {
+              day: describeRelativeDate(former.endedAt.slice(0, 10)),
+            })}
+          </Text>
+          <View style={styles.table}>
+            {former.plan.days.map((day) => (
+              <View key={day.date} style={styles.row}>
+                <Text style={styles.rowTitle}>{capitalizeFirst(describeRelativeDate(day.date))}</Text>
+                {day.slots.map((slot) => (
+                  <Text key={slot.slot} style={styles.rowMeta}>
+                    {PARTNER_SLOT_LABELS[slot.slot]}: {slot.names.join(', ')}
+                  </Text>
+                ))}
+              </View>
+            ))}
+          </View>
+          <PeerDishPhotos
+            connectionId={former.id}
+            personName={former.name}
+            dishes={former.plan.dishes}
+            tabColor={TAB_COLOR}
+            frozen
+          />
+          <TouchableOpacity
+            ref={formerIndex === 0 ? walkMark.ref('mealPlan.letGoKept') : undefined}
+            style={styles.secondaryButton}
+            onPress={async () => {
+              const letGo = await confirmSheet({
+                title: t('Let go of what was kept from {name}?', { name: former.name }),
+                message: t('Their meal plan and dish photos come off this phone. Your meals stay as they are.'),
+                confirmLabel: t('Let Go'),
+                destructive: true,
+              });
+              if (!letGo) return;
+              try {
+                await forgetFormerPartner(former.id);
+                setFormerTick((n) => n + 1);
+              } catch (error) {
+                console.error('[MealPlan] Failed to let go of a kept plan', error);
+              }
+            }}
+          >
+            <Text style={styles.secondaryButtonText}>{t('Let Go of This')}</Text>
+          </TouchableOpacity>
+        </ScheduleBand>
+      ))}
 
       {singleDay ? (
         <DailyPlanFullReport day={singleDay} folds={folds} foldId="schedule:dailyPlan" swapper={swapperFor(0)} dishCosts={dishCosts} />
@@ -6897,6 +6976,7 @@ function AppointmentsLens({ importCalendarEvent, importCalendarAt }: { importCal
           )}
         </>
       )}
+      <PartnerBesideBand kind="appointments" tabColor={TAB_COLOR} />
     </ScrollView>
   );
 }

@@ -6832,6 +6832,14 @@ async function runDatabaseInitialization() {
         share_conditions INTEGER NOT NULL DEFAULT 0,
         share_photos INTEGER NOT NULL DEFAULT 0,
         share_doses INTEGER NOT NULL DEFAULT 0,
+        -- What they share about themselves, 1.0.80.3: each off until the
+        -- person whose records they are switches it on (lib/peerBeside.ts).
+        share_meds INTEGER NOT NULL DEFAULT 0,
+        share_emergency INTEGER NOT NULL DEFAULT 0,
+        share_appointments INTEGER NOT NULL DEFAULT 0,
+        share_accounts INTEGER NOT NULL DEFAULT 0,
+        share_budgets INTEGER NOT NULL DEFAULT 0,
+        share_insurance INTEGER NOT NULL DEFAULT 0,
         -- The receiver's switch, 1.0.80.2: whether their side shows here.
         show_theirs INTEGER NOT NULL DEFAULT 1,
         --
@@ -9141,6 +9149,28 @@ async function runDatabaseInitialization() {
         doses_json TEXT NOT NULL,
         updated_at TEXT NOT NULL
       );
+      -- 1.0.80.3: what a partner shares about themselves, one row per kind
+      -- (meds, emergency, appointments, accounts, budgets, insurance), whole
+      -- as their phone last sent it, shown read only beside this person's
+      -- own records and never written into them. Device-local, the way
+      -- peer_dose_watch is: it arrives again on whichever device is linked.
+      CREATE TABLE IF NOT EXISTS peer_beside (
+        connection_id TEXT NOT NULL,
+        kind TEXT NOT NULL,
+        body_json TEXT NOT NULL,
+        sent_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        PRIMARY KEY (connection_id, kind)
+      );
+      -- 1.0.80.3: somebody this person no longer shares with. Their meal plan
+      -- copy and dish photos stay, frozen, under "From {name}" (direct
+      -- answer, 2026-11-03: "Keep them"), so the name has to outlive the
+      -- connections row it came from.
+      CREATE TABLE IF NOT EXISTS former_partners (
+        connection_id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        ended_at TEXT NOT NULL
+      );
       CREATE TABLE IF NOT EXISTS peer_dose_alerts (
         connection_id TEXT NOT NULL,
         dose_id TEXT NOT NULL,
@@ -9371,6 +9401,13 @@ async function runDatabaseInitialization() {
       // yes given on the phone whose doses they are.
       if (!connectionColumns.some((entry) => entry.name === 'share_doses')) {
         await db.execAsync('ALTER TABLE connections ADD COLUMN share_doses INTEGER NOT NULL DEFAULT 0;');
+      }
+      // What they share about themselves, 1.0.80.3. Off on every existing
+      // link: each is switched on by the person whose records they are.
+      for (const column of ['share_meds', 'share_emergency', 'share_appointments', 'share_accounts', 'share_budgets', 'share_insurance']) {
+        if (!connectionColumns.some((entry) => entry.name === column)) {
+          await db.execAsync(`ALTER TABLE connections ADD COLUMN ${column} INTEGER NOT NULL DEFAULT 0;`);
+        }
       }
       // show_theirs, 1.0.80.2. On for every existing link, so nothing that
       // showed before disappears.

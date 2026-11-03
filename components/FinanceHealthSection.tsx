@@ -6,6 +6,7 @@ import { NotesInput } from './NotesInput';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
 import { TabBand, useTabBandStyles } from './TabBand';
+import { PartnerBesideBand } from './PartnerBesideBand';
 import { useBandFolds } from '../hooks/useBandFolds';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
@@ -517,6 +518,7 @@ export function FinanceHealthSection({ tabColor }: Props) {
           </ThumbRow>
         </View>
       ) : null}
+      <PartnerBesideBand kind="insurance" tabColor={tabColor} />
     </View>
   );
 }

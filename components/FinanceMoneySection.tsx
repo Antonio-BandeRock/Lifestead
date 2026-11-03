@@ -5,6 +5,7 @@ import { AppTextInput } from './AppTextInput';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
 import { TabBand, useTabBandStyles } from './TabBand';
+import { PartnerBesideBand } from './PartnerBesideBand';
 import { useBandFolds } from '../hooks/useBandFolds';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
@@ -481,6 +482,7 @@ export function FinanceMoneySection({ tabColor }: Props) {
           </>
         )}
       </TabBand>
+      <PartnerBesideBand kind="accounts" tabColor={tabColor} />
     </View>
   );
 }

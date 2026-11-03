@@ -229,9 +229,15 @@ export default function ConnectionsScreen() {
 
   async function handleRemove(connection: Connection) {
     const ok = await confirmSheet({
-      title: 'Remove connection?',
-      message: `You won't be able to share directly with ${connection.name} until you connect again.`,
-      confirmLabel: 'Remove',
+      title: t('Remove connection?'),
+      message:
+        connection.role === 'recipe'
+          ? t("You won't be able to share directly with {name} until you connect again.", { name: connection.name })
+          : t(
+              "You won't be able to share directly with {name} until you connect again. The meals you planned together and their dish photos stay on Schedules > Meal Plan under From {name}. What {name} shared about their health, emergency card and money comes off this phone.",
+              { name: connection.name },
+            ),
+      confirmLabel: t('Remove'),
       destructive: true,
     });
     if (!ok) return;
