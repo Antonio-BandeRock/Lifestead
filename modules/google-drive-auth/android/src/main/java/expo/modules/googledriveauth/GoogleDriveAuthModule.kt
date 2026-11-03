@@ -1,9 +1,9 @@
 package expo.modules.googledriveauth
 
 import android.app.Activity
+import com.google.android.gms.auth.GoogleAuthUtil
 import com.google.android.gms.auth.api.identity.AuthorizationRequest
 import com.google.android.gms.auth.api.identity.AuthorizationResult
-import com.google.android.gms.auth.api.identity.ClearTokenRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.common.api.Scope
 import expo.modules.kotlin.Promise
@@ -74,10 +74,17 @@ class GoogleDriveAuthModule : Module() {
         promise.resolve(null)
         return@AsyncFunction
       }
-      Identity.getAuthorizationClient(context)
-        .clearToken(ClearTokenRequest.builder().setToken(token).build())
-        .addOnSuccessListener { promise.resolve(null) }
-        .addOnFailureListener { promise.resolve(null) }
+      // GoogleAuthUtil.clearToken waits on the network, so it runs off
+      // the module's thread. A token Google no longer knows is the same
+      // outcome as one cleared.
+      Thread {
+        try {
+          GoogleAuthUtil.clearToken(context, token)
+        } catch (error: Exception) {
+          // Nothing to clear.
+        }
+        promise.resolve(null)
+      }.start()
     }
 
     OnActivityResult { activity, payload ->
