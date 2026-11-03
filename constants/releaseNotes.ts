@@ -41,6 +41,13 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.80.5',
+    date: '2026-11-03',
+    changes: [
+      'Ready for the next installed version: sharing any file to Lifestead from another app, such as a PDF from your email or a recording, puts it on a Capture note as an attached file, with any photos shared beside it, so you can sort it from there. A file that cannot be kept is named on the note with the reason. Until that version is installed, Lifestead is offered only for text, links and photos.',
+    ],
+  },
+  {
     version: '1.0.80.4',
     date: '2026-11-03',
     changes: [

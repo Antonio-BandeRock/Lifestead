@@ -7,6 +7,12 @@
 // other app's. Capture is the inbox, so nothing shared is ever lost for
 // being the wrong kind.
 //
+// Any other file (piece 3, 2026-11-03: a PDF, a document, a recording) is
+// kept on a Capture note as an attached file, beside any photos shared with
+// it, so it can be sorted from there. Android lists Lifestead for every kind
+// of file once the rebuild widens the Share filter; until then only text and
+// images arrive and this path waits.
+//
 // Nothing is guessed from a page's contents: deciding a link is a recipe
 // would mean fetching it before the person asked, so the call is made from
 // the link and its words alone, and a recipe link that is missed lands in
@@ -19,14 +25,19 @@ export type SharedThing = {
   webUrl: string | null;
   /** Images handed over, as file paths or content URIs. */
   images: { uri: string; width: number | null; height: number | null }[];
+  /** Every other file handed over, kept on the note as an attachment. */
+  files: SharedFile[];
   /** A page title the other app sent, when it sent one. */
   title: string | null;
 };
+
+export type SharedFile = { uri: string; name: string | null; mimeType: string | null; sizeBytes: number | null };
 
 export type SharePlan =
   | { kind: 'recipe'; url: string }
   | { kind: 'capture'; text: string }
   | { kind: 'photos'; text: string | null; images: SharedThing['images'] }
+  | { kind: 'files'; text: string; images: SharedThing['images']; files: SharedFile[] }
   | { kind: 'nothing' };
 
 const URL_PATTERN = /\bhttps?:\/\/[^\s<>"']+/i;
@@ -57,9 +68,23 @@ function tidy(text: string | null): string {
   return (text ?? '').replace(/\s+/g, ' ').trim();
 }
 
+/** The words on a note of shared files that came with no words or names. */
+export const SHARED_FILE_WORDS = 'A shared file';
+
+/** The words on a note that holds shared files: what came with them, else their names. */
+export function sharedFilesText(text: string, title: string, files: readonly SharedFile[]): string {
+  if (text) return text;
+  if (title) return title;
+  const names = files.map((file) => tidy(file.name)).filter((name) => name.length > 0);
+  return names.length > 0 ? names.join(', ') : SHARED_FILE_WORDS;
+}
+
 export function planShare(thing: SharedThing): SharePlan {
   const text = tidy(thing.text);
   const title = tidy(thing.title);
+  if (thing.files.length > 0) {
+    return { kind: 'files', text: sharedFilesText(text, title, thing.files), images: thing.images, files: thing.files };
+  }
   if (thing.images.length > 0) {
     return { kind: 'photos', text: text || title || null, images: thing.images };
   }

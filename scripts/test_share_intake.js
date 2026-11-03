@@ -28,7 +28,7 @@ function ok(label, condition, detail) {
     console.log(`FAIL ${label}${detail !== undefined ? `: ${JSON.stringify(detail)}` : ''}`);
   }
 }
-const thing = (over) => ({ text: null, webUrl: null, images: [], title: null, ...over });
+const thing = (over) => ({ text: null, webUrl: null, images: [], files: [], title: null, ...over });
 
 // --- links -------------------------------------------------------------------
 ok('first link', s.firstLink('Look at https://example.com/a?b=1, nice') === 'https://example.com/a?b=1', s.firstLink('Look at https://example.com/a?b=1, nice'));
@@ -77,6 +77,17 @@ plan = s.planShare(thing({ images, text: 'https://example.com/recipes/x' }));
 ok('images win over a recipe link, so no photo is lost', plan.kind === 'photos' && plan.text === 'https://example.com/recipes/x', plan);
 plan = s.planShare(thing({ images: images.slice(0, 1), title: 'Receipt' }));
 ok('a photo carries the title as its words', plan.text === 'Receipt', plan);
+
+// --- other files -------------------------------------------------------------
+const pdf = { uri: 'content://x/1', name: 'Lab results.pdf', mimeType: 'application/pdf', sizeBytes: 2048 };
+plan = s.planShare(thing({ files: [pdf] }));
+ok('a file goes to Capture named for itself', plan.kind === 'files' && plan.text === 'Lab results.pdf' && plan.files.length === 1, plan);
+plan = s.planShare(thing({ files: [pdf], images: images.slice(0, 1), text: 'From the clinic' }));
+ok('photos shared with a file stay with it', plan.kind === 'files' && plan.images.length === 1 && plan.text === 'From the clinic', plan);
+plan = s.planShare(thing({ files: [pdf], text: 'https://example.com/recipes/x' }));
+ok('a file wins over a recipe link, so no file is lost', plan.kind === 'files', plan);
+plan = s.planShare(thing({ files: [{ ...pdf, name: null }] }));
+ok('a nameless file still gets words', plan.text === s.SHARED_FILE_WORDS, plan);
 
 // --- wiring ------------------------------------------------------------------
 const root = path.join(__dirname, '..');

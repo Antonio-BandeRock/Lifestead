@@ -118,4 +118,6 @@ export const PART: Readonly<Record<string, string>> = {
  "Press Send in your email app. The request carries your name and a code for this device, nothing else.": "Presiona Enviar en tu app de correo. La solicitud lleva tu nombre y un código de este dispositivo, nada más.",
  "When the reply comes, open the link in it on this device. The new day shows on the band.": "Cuando llegue la respuesta, abre el enlace en este dispositivo. El nuevo día aparece en la banda.",
  "The test version keeps opening without a gap, and everything you have put in stays where it is.": "La versión de prueba sigue abriendo sin interrupción, y todo lo que has guardado se queda donde está.",
+ "A shared file": "Un archivo compartido",
+ "{name} was not kept: {reason}": "{name} no se guardó: {reason}",
 };
