@@ -1,0 +1,7 @@
+{
+  "name": "google-drive-auth",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Google's own sign-in and consent sheet for Google Drive, asking only for the files Lifestead makes (drive.file), so the shared folder can live in Google Drive.",
+  "main": "../../lib/googleDriveAuth.ts"
+}
