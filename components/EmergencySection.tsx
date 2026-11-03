@@ -1,4 +1,6 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { Linking, Platform, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { isDesktopApp } from '../lib/desktop/bridge';
 import { useFocusEffect } from '@react-navigation/native';
@@ -71,7 +73,33 @@ import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY
 // app holds (drug allergies), say how old the card is, and produce something
 // that can actually be handed to a person.
 
-type Props = { tabColor: string };
+type Props = {
+  tabColor: string;
+  // The host's ScrollView, so a Still empty row can bring its field into
+  // view. The y is measured from the top of this section.
+  scrollToY?: (y: number) => void;
+  // Medications live on My Meds, another Life lens; the host switches to it
+  // and offers the way back.
+  onOpenMyMeds?: () => void;
+};
+
+// Where each Still empty row lands (direct instruction, 2026-11-02: "Nothing
+// in the app like this is supposed to be without a link directly to whatever
+// it is that is being told about"). A field key opens What only you can tell
+// it with that field ready to type in; contact opens Who to call with a blank
+// person; medications and conditions are kept elsewhere and go there.
+const GAP_FIELD: Record<string, keyof Omit<EmergencyProfile, 'confirmedAt'>> = {
+  drugAllergies: 'drugAllergies',
+  devices: 'devices',
+  language: 'language',
+  doctor: 'doctorName',
+  directive: 'directiveLocation',
+  bloodType: 'bloodType',
+};
+const WHO_TO_CALL_BAND = 'life:emergency:who-to-call';
+const ONLY_YOU_BAND = 'life:emergency:what-only-you-can-tell-it';
+// The room left above a field so it does not sit against the top edge.
+const GO_TO_INSET = 12;
 
 function todayLocal(): string {
   const d = new Date();
@@ -138,7 +166,7 @@ const PROFILE_FIELDS: {
   },
 ];
 
-export function EmergencySection({ tabColor }: Props) {
+export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
   // The outline on a button a Your Story walk line names (components/WalkMark.ts).
   const walkMark = useWalkMark();
   const [showInfoAlert, infoAlertElement] = useInfoAlert();
@@ -159,6 +187,24 @@ export function EmergencySection({ tabColor }: Props) {
   const styles = useMemo(() => makeStyles(tabColor), [tabColor]);
   const band = useTabBandStyles(tabColor);
   const folds = useBandFolds();
+  const router = useRouter();
+  const rootRef = useRef<View>(null);
+  const placeRefs = useRef<Record<string, View | null>>({});
+  // Which field a Still empty row asked for. It is measured once the band has
+  // opened and the field has drawn, then cleared.
+  const [goTo, setGoTo] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!goTo) return;
+    const timer = setTimeout(() => {
+      const place = placeRefs.current[goTo];
+      const root = rootRef.current;
+      setGoTo(null);
+      if (!place || !root || !scrollToY) return;
+      place.measureLayout(root, (_x, y) => scrollToY(Math.max(0, y - GO_TO_INSET)), () => {});
+    }, 350);
+    return () => clearTimeout(timer);
+  }, [goTo, scrollToY]);
 
   const load = useCallback(() => {
     setLoading(true);
@@ -304,11 +350,41 @@ export function EmergencySection({ tabColor }: Props) {
   }
 
   const draft = editing ?? {};
+
+  function openGap(code: string) {
+    if (code === 'medications') {
+      if (onOpenMyMeds) onOpenMyMeds();
+      else router.push({ pathname: '/life', params: { openLifeLens: 'myMeds' } });
+      return;
+    }
+    if (code === 'conditions') {
+      router.push({ pathname: '/profile', params: { section: 'conditions', returnTo: 'emergency' } });
+      return;
+    }
+    if (code === 'contact') {
+      if (!folds.isOpen(WHO_TO_CALL_BAND)) folds.toggle(WHO_TO_CALL_BAND);
+      if (!contactForm) setContactForm(blankContact());
+      setGoTo('contact');
+      return;
+    }
+    const field = GAP_FIELD[code];
+    if (!field || !profile) return;
+    if (!folds.isOpen(ONLY_YOU_BAND)) folds.toggle(ONLY_YOU_BAND);
+    if (!editing) setEditing({ ...profile });
+    setGoTo(field);
+  }
+
+  function gapGoesTo(code: string): string {
+    if (code === 'medications') return 'Opens My Meds';
+    if (code === 'conditions') return 'Opens Conditions in your Profile';
+    if (code === 'contact') return 'Opens Who to call';
+    return 'Opens the field to fill in';
+  }
   const valueFor = (key: keyof Omit<EmergencyProfile, 'confirmedAt'>) =>
     (editing ? draft[key] : profile[key]) ?? '';
 
   return (
-    <View style={band.column}>
+    <View ref={rootRef} style={band.column}>
       {infoAlertElement}
       <AppActionSheet
         visible={confirm !== null}
@@ -363,15 +439,25 @@ export function EmergencySection({ tabColor }: Props) {
           <Text style={styles.bodyText}>{describeMissing(gaps)}</Text>
           <Text style={styles.helperText}>
             Listed by how much each one actually matters rather than in the order the fields sit
-            in, because they are nowhere near equally useful.
+            in, because they are nowhere near equally useful. Tap one to go straight to it.
           </Text>
-          {gaps.map((gap) => (
-            <View key={gap.code} style={styles.row}>
+          {gaps.map((gap, index) => (
+            <TouchableOpacity
+              key={gap.code}
+              ref={index === 0 ? walkMark.ref('emergency.stillEmpty') : undefined}
+              style={[styles.row, styles.gapRow, index === 0 ? walkMark('emergency.stillEmpty') : null]}
+              onPress={() => openGap(gap.code)}
+              accessibilityRole="button"
+              accessibilityLabel={gap.label}
+              accessibilityHint={gapGoesTo(gap.code)}
+            >
               <View style={styles.rowMain}>
                 <Text style={styles.rowTitle}>{gap.label}</Text>
                 <Text style={styles.rowMeta}>{gap.why}</Text>
+                <Text style={styles.actionText}>{gapGoesTo(gap.code)}</Text>
               </View>
-            </View>
+              <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+            </TouchableOpacity>
           ))}
         </TabBand>
       ) : null}
@@ -450,7 +536,7 @@ export function EmergencySection({ tabColor }: Props) {
         )}
 
         {contactForm ? (
-          <View style={styles.inlineForm}>
+          <View ref={(view) => { placeRefs.current.contact = view; }} style={styles.inlineForm}>
             {CAN_PICK_CONTACTS ? (
               <TouchableOpacity ref={walkMark.ref('emergency.pickContact')} onPress={() => void fillContactFromPhone()} accessibilityLabel="Pick this person from contacts">
                 <Text style={styles.actionText}>Pick from contacts</Text>
@@ -526,7 +612,7 @@ export function EmergencySection({ tabColor }: Props) {
         {PROFILE_FIELDS.map((field) => {
           const value = String(valueFor(field.key));
           return (
-            <View key={field.key}>
+            <View key={field.key} ref={(view) => { placeRefs.current[field.key] = view; }}>
               <Text style={styles.label}>{field.label}</Text>
               {field.hint ? <Text style={styles.helperText}>{field.hint}</Text> : null}
               {editing ? (
@@ -768,6 +854,7 @@ function makeStyles(tabColor: string) {
       paddingVertical: 10, borderTopWidth: 1, borderTopColor: colors.border,
     },
     rowMain: { flex: 1 },
+    gapRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
     rowTitle: { ...typography.body, color: colors.textPrimary, ...textShadow },
     rowMeta: { ...typography.caption, color: colors.textMuted, marginTop: 2, ...textShadow },
     rowActions: { flexDirection: 'row', gap: 14, marginTop: 10, flexWrap: 'wrap' },

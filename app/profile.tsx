@@ -862,7 +862,8 @@ export default function ProfileScreen() {
     section: openSection,
     install: installParam,
     at: installAt,
-  } = useLocalSearchParams<{ section?: string; install?: string; at?: string }>();
+    returnTo,
+  } = useLocalSearchParams<{ section?: string; install?: string; at?: string; returnTo?: string }>();
   const scrollRef = useRef<ScrollView>(null);
   // Also opened straight onto App Lock (1.0.63.14) by the Your Story
   // question about keeping records closed, where the vault is chosen, and
@@ -3642,6 +3643,13 @@ export default function ProfileScreen() {
         {renderCardHeader('conditions', 'Conditions & Check-In')}
         {!collapsedSections.has('conditions') ? (
           <View style={styles.cardBody}>
+            {/* Opened from Emergency's Still empty Conditions row
+                (2026-11-02), so the way back sits where the page lands. */}
+            {returnTo === 'emergency' ? (
+              <TouchableOpacity style={[styles.addAllergyButton, styles.backToEmergency]} onPress={() => router.back()}>
+                <Text style={styles.addAllergyButtonText}>Back to Emergency</Text>
+              </TouchableOpacity>
+            ) : null}
             <Text style={styles.subLabel}>Your conditions</Text>
             <Text style={styles.helpText}>
               Select every condition that applies to you: this tells the app which condition-specific notes,
@@ -6666,6 +6674,7 @@ const styles = StyleSheet.create({
   },
   replayWelcomeButtonText: { ...BUTTON_PRIMARY_TEXT },
   addAllergyButton: { ...BUTTON_PRIMARY },
+  backToEmergency: { alignSelf: 'flex-start', marginBottom: 12 },
   addAllergyButtonText: { ...BUTTON_PRIMARY_TEXT },
   errorText: {
     ...typography.caption,

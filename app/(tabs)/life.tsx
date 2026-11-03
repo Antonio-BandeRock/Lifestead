@@ -807,6 +807,14 @@ export default function LifeScreen() {
   // An exercise being dragged in Workouts holds the page still (1.0.55.15).
   const [rowDragging, setRowDragging] = useState(false);
   const conditionsTop = useRef(0);
+  // Emergency's Still empty rows bring a field into view the same way.
+  const emergencyTop = useRef(0);
+  const scrollEmergencyTo = useCallback((y: number) => {
+    scrollRef.current?.scrollTo({ y: emergencyTop.current + y, animated: true });
+  }, []);
+  // A lens opened from another lens's link, so the way back is one tap
+  // (2026-11-02): Emergency's Current medications row opens My Meds.
+  const [returnToLens, setReturnToLens] = useState<{ lens: LifeLens; label: string } | null>(null);
   const scrollConditionsTo = useCallback((y: number) => {
     scrollRef.current?.scrollTo({ y: conditionsTop.current + y, animated: true });
   }, []);
@@ -2056,6 +2064,20 @@ export default function LifeScreen() {
             />
 
             <VaultClosedBand color={TAB_COLOR} categories={LIFE_LENS_VAULT[lens] ?? []} />
+            {returnToLens && returnToLens.lens !== lens ? (
+              <View style={band.box}>
+                <TouchableOpacity
+                  style={styles.secondaryButton}
+                  onPress={() => {
+                    setLens(returnToLens.lens);
+                    setReturnToLens(null);
+                    setRevealed(true);
+                  }}
+                >
+                  <Text style={styles.secondaryButtonText}>{returnToLens.label}</Text>
+                </TouchableOpacity>
+              </View>
+            ) : null}
             {lens === 'conditions' ? (
               <View onLayout={(event) => { conditionsTop.current = event.nativeEvent.layout.y; }}>
                 <ConditionsSection
@@ -2085,7 +2107,20 @@ export default function LifeScreen() {
             {lens === 'work' ? <WorkSection tabColor={TAB_COLOR} /> : null}
 
             {lens === 'upkeep' ? <UpkeepSection tabColor={TAB_COLOR} prefillName={upkeepName ?? null} /> : null}
-            {lens === 'emergency' ? <EmergencySection tabColor={TAB_COLOR} /> : null}
+            {lens === 'emergency' ? (
+              <View onLayout={(event) => { emergencyTop.current = event.nativeEvent.layout.y; }}>
+                <EmergencySection
+                  tabColor={TAB_COLOR}
+                  scrollToY={scrollEmergencyTo}
+                  onOpenMyMeds={() => {
+                    setReturnToLens({ lens: 'emergency', label: 'Back to Emergency' });
+                    setLens('myMeds');
+                    setRevealed(true);
+                    scrollRef.current?.scrollTo({ y: 0, animated: false });
+                  }}
+                />
+              </View>
+            ) : null}
             {lens === 'myMeds' ? <MyMedsSection tabColor={TAB_COLOR} focusTreatmentId={focusTreatmentId} /> : null}
             {lens === 'movement' ? <MovementSection key={vaultKey} tabColor={TAB_COLOR} /> : null}
             {lens === 'workouts' ? <WorkoutsSection tabColor={TAB_COLOR} onDragChange={setRowDragging} /> : null}
@@ -2172,6 +2207,7 @@ export default function LifeScreen() {
             return;
           }
           setJumpEntryId(undefined);
+          setReturnToLens(null);
           setLens(key);
           setRevealed(true);
         }}

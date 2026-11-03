@@ -41,6 +41,13 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.79.10',
+    date: '2026-11-02',
+    changes: [
+      "Every row under Still empty on the Emergency card now takes you to it. Drug allergies, devices, language, your doctor, an advance directive and blood type open the field ready to type in, Someone to call opens Who to call with a new person, Current medications opens My Meds and Conditions opens your Profile, and both of those have a Back to Emergency button.",
+    ],
+  },
+  {
     version: '1.0.79.9',
     date: '2026-11-02',
     changes: [

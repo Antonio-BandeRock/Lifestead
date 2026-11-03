@@ -49,6 +49,7 @@ export type ToolMark =
   | 'emergency.savePerson'
   | 'emergency.call'
   | 'emergency.checked'
+  | 'emergency.stillEmpty'
   | 'emergency.showCard'
   | 'emergency.sendCard'
   | 'emergency.copy'
@@ -1010,6 +1011,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     },
   ],
   '/life#emergency': [
+    {
+      key: 'stillEmpty',
+      title: 'Fill in what is still empty',
+      steps: [
+        { say: 'Open the band called Still empty.' },
+        { say: 'Tap the one you want to fill in.', mark: 'emergency.stillEmpty', stay: true },
+        { say: 'Type it in and tap Save.', mark: 'emergency.save' },
+      ],
+      forYou: 'Each one opens right where it is filled in. Medicines and conditions are kept on My Meds and in your Profile, and both have a Back to Emergency button.',
+    },
     {
       key: 'addPerson',
       title: 'Add someone to call',
