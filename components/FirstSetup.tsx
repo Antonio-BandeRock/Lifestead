@@ -8,12 +8,15 @@
 // the home screen. Move the option to continue to the Home screen to the top
 // inside of the Getting Set Up header."
 //
-// So setup is the same screen as Getting Set Up on Home
-// (components/YourStorySection.tsx in 'setup' mode): the interview's open
-// question while one is left, Before anything else, then a folding band per
-// tab of setup cards (components/SetupCardShelves.tsx), each band full width
-// with nothing indented. Opening a tab closes the one open before and brings
-// it to the top (components/BringToTop.tsx).
+// 2026-11-02, direct request: one part of setup on screen at a time. First
+// the parts of life to follow (components/BeatPicker.tsx, with Select all),
+// then "where would you like to start" as a list of those parts. Opening one
+// shows its questions, one at a time, then its setup cards, each with what it
+// feeds (lib/setupSections.ts holds which questions and cards belong to which
+// part, and every why). Done with this part or Skip this part goes back to
+// the list, a done part dimmed and a skipped one moved to the end. With every
+// part settled come the last questions: the neuro profile, backup, how
+// records are kept closed, then how much Home shows, and then Home.
 //
 //   - The header band comes first, with Finish Later at its top, which
 //     lets the person in. Setup comes back the next time the app starts
@@ -41,7 +44,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
@@ -49,13 +52,55 @@ import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { isTesterBuild } from '../lib/appVariant';
 import { showGuidedTour } from '../lib/guidedTourDb';
 import { testerDoorOpen, useTesterAccess } from '../lib/testerAccess';
-import { cardDoneOn, type SetupCardView } from '../lib/setupCards';
+import { cardDoneOn, setupCardByKey, viewSetupCard, type SetupCardView } from '../lib/setupCards';
 import { setStoryWalk, startStoryWalk } from '../lib/storyWalk';
 import { startTutorials } from '../lib/tutorialDb';
 import { SETUP_TUTORIALS_LABEL, SETUP_TUTORIALS_LINE } from '../lib/tutorials';
 import { GUIDES, type GuideRecords } from '../lib/yourStoryGuides';
-import { buildSetupFlow, firstOpenStep, SETUP_AWAY_CAPTION, subscribeRunSetupAgain } from '../lib/setupFlow';
-import { HEADING_TAKING_SHAPE, type StoryDestination, type YourStoryItemKey, type YourStoryView } from '../lib/yourStory';
+import { SETUP_AWAY_CAPTION, subscribeRunSetupAgain } from '../lib/setupFlow';
+import {
+  BEAT_LABELS,
+  HEADING_TAKING_SHAPE,
+  type BeatKey,
+  type StoryDestination,
+  type YourStoryItemKey,
+  type YourStoryView,
+} from '../lib/yourStory';
+import {
+  BEAT_START_PATH,
+  CARD_WHY,
+  CARD_WHY_LABEL,
+  CLOSING_HEADING,
+  LIST_ALL_SETTLED,
+  LIST_CHANGE_PARTS_LABEL,
+  LIST_FIRST_HEADING,
+  LIST_LEAD,
+  LIST_NEXT_HEADING,
+  PART_DONE,
+  PART_DONE_CAPTION,
+  PART_SKIPPED,
+  PART_SKIPPED_CAPTION,
+  partAnswerKey,
+  PARTS_NEXT_LABEL,
+  SECTION_BACK_LABEL,
+  SECTION_CARDS,
+  SECTION_CARDS_HEADING,
+  SECTION_CARDS_LEAD,
+  SECTION_DONE_LABEL,
+  SECTION_QUESTION_FIRST,
+  SECTION_SKIP_LABEL,
+  SECTION_WHY,
+  SECTION_WHY_LABEL,
+  SETUP_PARTS_CHOSEN,
+  SETUP_PARTS_KEY,
+  closingQuestions,
+  listParts,
+  sectionQuestions,
+  setupStage,
+  setupWaiting,
+} from '../lib/setupSections';
+import { explainNotYet } from '../lib/notYet';
+import { TAB_ROUTES } from '../constants/tabs';
 import {
   SETUP_AWAY_SAVED_CARD,
   SETUP_DONE_HEADING,
@@ -66,22 +111,45 @@ import {
   SETUP_LEAD,
   SETUP_OPEN_APP_LABEL,
   SETUP_RETURN_LABEL,
+  QUESTION_BY_KIND,
   type InterviewView,
 } from '../lib/yourStoryInterview';
-import { loadYourStoryEverything } from '../lib/yourStoryInterviewDb';
+import { loadYourStoryEverything, setYourStoryAnswer } from '../lib/yourStoryInterviewDb';
 import { BringToTopProvider, useBringToTopHost } from './BringToTop';
 import { goToStoryDestination } from './GuidedTourHost';
 import { GuideStripAnchor } from './GuideRoom';
 import { useStoryWalk } from './StoryWalkHost';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
-import { YourStorySection } from './YourStorySection';
-import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { YourStoryInterview } from './YourStoryInterview';
+import { BeatPicker } from './BeatPicker';
+import { SetupCard } from './SetupCardShelves';
+import { useInfoAlert } from './InfoAlert';
+import { TesterWelcome } from './TesterWelcome';
+import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 
 // Finish Later lasts until the app next starts, so it is kept here rather
 // than as an answer.
 let putOffThisRun = false;
 
 type Phase = 'reading' | 'asking' | 'away' | 'closed';
+
+// Which part of setup is on screen; only one at a time (direct request,
+// 2026-11-02: "none of the other parts are available on the screen until
+// they select either Done ... or they choose to skip that section").
+type Step = 'parts' | 'list' | 'section' | 'closing';
+
+const BEAT_ICONS: Record<BeatKey, keyof typeof Ionicons.glyphMap> = {
+  health: 'medkit-outline',
+  food: 'restaurant-outline',
+  movement: 'walk-outline',
+  home: 'home-outline',
+  garden: 'leaf-outline',
+  money: 'cash-outline',
+  routines: 'repeat-outline',
+  work: 'briefcase-outline',
+  family: 'people-outline',
+  interests: 'color-palette-outline',
+};
 
 // While a screen is open for a card, how often its record is looked for.
 const AWAY_LOOK_MS = 4000;
@@ -102,8 +170,17 @@ export function FirstSetup() {
   const [interview, setInterview] = useState<InterviewView | null>(null);
   const [view, setView] = useState<YourStoryView | null>(null);
   const [records, setRecords] = useState<GuideRecords>({});
-  // Nothing on the walk is waiting any more.
-  const [allDone, setAllDone] = useState(false);
+  // The part of life being set up, or null for the list of parts.
+  const [section, setSection] = useState<BeatKey | null>(null);
+  // Change the parts of life, from the list.
+  const [changingParts, setChangingParts] = useState(false);
+  // The question on screen, held until it is answered or put off.
+  const [held, setHeld] = useState<string | null>(null);
+  // Questions answered this run, so one answered with a choice that does
+  // not close it (a condition) is not shown again from a stale read.
+  const [passed, setPassed] = useState<string[]>([]);
+  const { width: windowWidth } = useWindowDimensions();
+  const [showInfoAlert, infoAlertElement] = useInfoAlert();
   const [phase, setPhase] = useState<Phase>(putOffThisRun ? 'closed' : 'reading');
   // The card opened from setup, so the strip can name it and say once it
   // is saved; null for anything else opened from here.
@@ -120,11 +197,10 @@ export function FirstSetup() {
   const load = useCallback(async () => {
     try {
       const everything = await loadYourStoryEverything(false);
-      const waiting = !!firstOpenStep(buildSetupFlow(everything.interview));
+      const waiting = setupWaiting(everything.interview);
       setInterview(everything.interview);
       setView(everything.view);
       setRecords(everything.records);
-      setAllDone(!waiting);
       setPhase((was) => {
         if (was !== 'reading') return was;
         return waiting || reviewRef.current ? 'asking' : 'closed';
@@ -146,6 +222,10 @@ export function FirstSetup() {
         putOffThisRun = false;
         reviewRef.current = true;
         setAwayCard(null);
+        setSection(null);
+        setChangingParts(false);
+        setHeld(null);
+        setPassed([]);
         setPhase('reading');
         void load();
       }),
@@ -187,6 +267,86 @@ export function FirstSetup() {
     setPhase('closed');
   }, []);
 
+  // After the last question, Home (direct request, 2026-11-02: "then they
+  // see the Home screen"), with the tour strip started.
+  const openApp = useCallback(() => {
+    close();
+    router.navigate('/');
+    void showGuidedTour();
+  }, [close, router]);
+
+  const stage = interview ? setupStage(interview) : 'parts';
+  const step: Step = changingParts || stage === 'parts' ? 'parts' : section ? 'section' : stage === 'closing' ? 'closing' : 'list';
+  const allDone = stage === 'finished';
+
+  // Each step opens at the top, so the new question or part is the first
+  // thing in view.
+  const stepKey = `${step}:${section ?? ''}`;
+  const shownStep = useRef(stepKey);
+  useEffect(() => {
+    if (shownStep.current === stepKey) return;
+    shownStep.current = stepKey;
+    scroller.current?.scrollTo({ y: 0, animated: false });
+  }, [stepKey]);
+
+  // The question showing in a part or in the last questions. It is held
+  // while it is being answered, since choosing one condition already counts
+  // as an answer and the rest may still be chosen; Done, Later or a single
+  // choice lets it go.
+  const waitingQuestions =
+    !interview ? [] : step === 'section' && section ? sectionQuestions(interview, section) : step === 'closing' ? closingQuestions(interview) : [];
+  const candidate = waitingQuestions.find((question) => !passed.includes(question.key)) ?? null;
+  const candidateKey = candidate?.key ?? null;
+  const shownQuestion = held ?? candidateKey;
+  useEffect(() => {
+    if (!held && candidateKey) setHeld(candidateKey);
+  }, [held, candidateKey]);
+  const answered = useCallback((key: string) => {
+    setPassed((was) => (was.includes(key) ? was : [...was, key]));
+    setHeld(null);
+  }, []);
+
+  const finishParts = useCallback(async () => {
+    try {
+      await setYourStoryAnswer(SETUP_PARTS_KEY, SETUP_PARTS_CHOSEN);
+    } catch (error) {
+      console.warn('Setup: could not keep the parts of life', error);
+    }
+    setChangingParts(false);
+    await load();
+  }, [load]);
+
+  const openPart = useCallback(
+    async (beat: BeatKey) => {
+      // The first part chosen is where the tour starts too.
+      if (interview && !interview.facts.answers.startTab) {
+        try {
+          await setYourStoryAnswer('startTab', BEAT_START_PATH[beat]);
+        } catch (error) {
+          console.warn('Setup: could not keep where to start', error);
+        }
+      }
+      setHeld(null);
+      setSection(beat);
+      await load();
+    },
+    [interview, load],
+  );
+
+  const settlePart = useCallback(
+    async (beat: BeatKey, how: typeof PART_DONE | typeof PART_SKIPPED) => {
+      try {
+        await setYourStoryAnswer(partAnswerKey(beat), how);
+      } catch (error) {
+        console.warn('Setup: could not keep how a part was left', error);
+      }
+      setHeld(null);
+      setSection(null);
+      await load();
+    },
+    [load],
+  );
+
   // A guide walk on the same card already says what to do, at the top of
   // the screen (1.0.75.5): the strip here then drops its own copy and keeps
   // only its button on one row.
@@ -214,6 +374,168 @@ export function FirstSetup() {
     );
   }
 
+  const shown = interview;
+
+  function renderQuestion() {
+    if (!shownQuestion) return null;
+    return (
+      <YourStoryInterview
+        mode="setup"
+        interview={shown}
+        showKey={shownQuestion}
+        onAnswered={answered}
+        onChanged={() => void load()}
+        go={goElsewhere}
+      />
+    );
+  }
+
+  function renderParts() {
+    const def = QUESTION_BY_KIND.beats;
+    return (
+      <View style={styles.band}>
+        <Text style={styles.heading}>{def.question}</Text>
+        <Text style={styles.lead}>{def.why}</Text>
+        <BeatPicker showQuestion={false} selectAll doneLabel={PARTS_NEXT_LABEL} onDone={() => void finishParts()} onChanged={() => void load()} />
+      </View>
+    );
+  }
+
+  function renderList() {
+    const parts = listParts(shown);
+    const first = parts.every((part) => part.state === 'open');
+    return (
+      <View style={styles.band}>
+        <Text style={styles.heading}>{allDone ? LIST_ALL_SETTLED : first ? LIST_FIRST_HEADING : LIST_NEXT_HEADING}</Text>
+        {allDone ? null : <Text style={styles.lead}>{LIST_LEAD}</Text>}
+        <View style={styles.parts}>
+          {parts.map((part) => {
+            const caption = part.state === 'done' ? PART_DONE_CAPTION : part.state === 'skipped' ? PART_SKIPPED_CAPTION : null;
+            return (
+              <TouchableOpacity
+                key={part.beat}
+                style={[styles.part, part.state === 'done' && styles.partDone]}
+                accessibilityRole="button"
+                accessibilityLabel={caption ? `${BEAT_LABELS[part.beat]}. ${caption}` : BEAT_LABELS[part.beat]}
+                onPress={() => void openPart(part.beat)}
+              >
+                <Ionicons
+                  name={part.state === 'done' ? 'checkmark-circle' : BEAT_ICONS[part.beat]}
+                  size={22}
+                  color={part.state === 'done' ? colors.statusGreenOnSurface : colors.primary}
+                  style={textShadow}
+                />
+                <View style={styles.partText}>
+                  <Text style={styles.partLabel}>{BEAT_LABELS[part.beat]}</Text>
+                  {caption ? <Text style={styles.caption}>{caption}</Text> : null}
+                </View>
+                <Ionicons name="chevron-forward" size={18} color={colors.textMuted} style={textShadow} />
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+        <TouchableOpacity style={styles.laterRow} accessibilityRole="button" onPress={() => setChangingParts(true)}>
+          <Text style={styles.laterLabel}>{LIST_CHANGE_PARTS_LABEL}</Text>
+          <Ionicons name="arrow-forward" size={13} color={colors.primary} style={textShadow} />
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  function renderSection(beat: BeatKey) {
+    if (!view) return null;
+    const questionWaiting = !!shownQuestion;
+    const cards = SECTION_CARDS[beat]
+      .map((key) => setupCardByKey(key))
+      .filter((found): found is NonNullable<typeof found> => !!found)
+      .map((found) => ({
+        card: viewSetupCard(found.def, view, records),
+        color: TAB_ROUTES.find((route) => route.path === found.tabPath)?.color ?? colors.primary,
+      }));
+    const cardWidth = Math.min(windowWidth - HOME_BAND_CONTENT_PADDING * 2, 480);
+    return (
+      <>
+        <View style={[styles.band, styles.bandAccent]}>
+          <View style={styles.partHead}>
+            <Ionicons name={BEAT_ICONS[beat]} size={22} color={colors.primary} style={textShadow} />
+            <Text style={styles.heading}>{BEAT_LABELS[beat]}</Text>
+          </View>
+          <Text style={styles.caption}>{SECTION_WHY_LABEL}</Text>
+          <Text style={styles.lead}>{SECTION_WHY[beat]}</Text>
+        </View>
+        {questionWaiting ? renderQuestion() : null}
+        {!questionWaiting && cards.length > 0 ? (
+          <View style={styles.band}>
+            <Text style={styles.heading}>{SECTION_CARDS_HEADING}</Text>
+            <Text style={styles.lead}>{SECTION_CARDS_LEAD}</Text>
+            {cards.map(({ card, color }) => (
+              <View key={card.def.key} style={styles.cardWrap}>
+                <SetupCard
+                  card={card}
+                  tabColor={color}
+                  width={cardWidth}
+                  view={view}
+                  go={goElsewhere}
+                  explain={showInfoAlert}
+                  onCardGo={goCard}
+                />
+                {CARD_WHY[card.def.key] ? (
+                  <View style={styles.cardWhy}>
+                    <Text style={styles.caption}>{CARD_WHY_LABEL}</Text>
+                    <Text style={styles.lead}>{CARD_WHY[card.def.key]}</Text>
+                  </View>
+                ) : null}
+              </View>
+            ))}
+          </View>
+        ) : null}
+        <View style={styles.band}>
+          <View style={styles.sectionButtons}>
+            <TouchableOpacity
+              style={styles.goButton}
+              accessibilityRole="button"
+              onPress={() => {
+                if (questionWaiting) {
+                  explainNotYet(SECTION_QUESTION_FIRST);
+                  return;
+                }
+                void settlePart(beat, PART_DONE);
+              }}
+            >
+              <Ionicons name="checkmark" size={16} color={colors.textOnButton} />
+              <Text style={styles.goText}>{SECTION_DONE_LABEL}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.secondButton} accessibilityRole="button" onPress={() => void settlePart(beat, PART_SKIPPED)}>
+              <Text style={styles.secondText}>{SECTION_SKIP_LABEL}</Text>
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity
+            style={styles.laterRow}
+            accessibilityRole="button"
+            onPress={() => {
+              setHeld(null);
+              setSection(null);
+            }}
+          >
+            <Ionicons name="arrow-back" size={13} color={colors.primary} style={textShadow} />
+            <Text style={styles.laterLabel}>{SECTION_BACK_LABEL}</Text>
+          </TouchableOpacity>
+        </View>
+      </>
+    );
+  }
+
+  function renderClosing() {
+    return (
+      <>
+        <View style={styles.band}>
+          <Text style={styles.heading}>{CLOSING_HEADING}</Text>
+        </View>
+        {renderQuestion()}
+      </>
+    );
+  }
+
   return (
     <View style={[styles.cover, { paddingTop: insets.top }]}>
       <View ref={frame} style={styles.frame} collapsable={false}>
@@ -230,14 +552,7 @@ export function FirstSetup() {
                   request, 2026-10-28), so it is never under a long list. */}
               {allDone ? (
                 <>
-                  <TouchableOpacity
-                    style={styles.goButton}
-                    accessibilityRole="button"
-                    onPress={() => {
-                      close();
-                      void showGuidedTour();
-                    }}
-                  >
+                  <TouchableOpacity style={styles.goButton} accessibilityRole="button" onPress={openApp}>
                     <Text style={styles.goText}>{SETUP_OPEN_APP_LABEL}</Text>
                     <Ionicons name="arrow-forward" size={16} color={colors.textOnButton} />
                   </TouchableOpacity>
@@ -278,18 +593,19 @@ export function FirstSetup() {
               <Text style={styles.heading}>{allDone ? SETUP_DONE_HEADING : HEADING_TAKING_SHAPE}</Text>
               <Text style={styles.lead}>{SETUP_LEAD}</Text>
             </View>
-            <YourStorySection
-              mode="setup"
-              view={view}
-              interview={interview}
-              records={records}
-              onChanged={() => void load()}
-              goOverride={goElsewhere}
-              onCardGo={goCard}
-            />
+            {step === 'parts' ? renderParts() : null}
+            {step === 'list' ? renderList() : null}
+            {step === 'section' && section ? renderSection(section) : null}
+            {step === 'closing' ? renderClosing() : null}
+            {isTesterBuild() && step === 'list' ? (
+              <View style={styles.band}>
+                <TesterWelcome showHeading />
+              </View>
+            ) : null}
           </ScrollView>
         </BringToTopProvider>
       </View>
+      {infoAlertElement}
     </View>
   );
 }
@@ -319,6 +635,28 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   goText: { ...BUTTON_PRIMARY_TEXT },
+  secondButton: { ...BUTTON_SECONDARY_COMPACT, alignSelf: 'flex-start' },
+  secondText: { ...BUTTON_SECONDARY_TEXT },
+  sectionButtons: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
+  parts: { gap: 6 },
+  part: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: colors.border,
+    backgroundColor: colors.surface,
+  },
+  // A part already set up, dimmed so the next one stands out.
+  partDone: { opacity: 0.55 },
+  partText: { flex: 1, gap: 1 },
+  partLabel: { ...typography.body, color: colors.textPrimary, ...textShadow },
+  partHead: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  cardWrap: { gap: 6 },
+  cardWhy: { gap: 2 },
   // At the top in its slot (components/GuideRoom.tsx), with the screen moved
   // down below it (1.0.74.10). It used to float 90 above the bottom edge,
   // which put it over the App Lock keys and buttons: "boxes telling them how

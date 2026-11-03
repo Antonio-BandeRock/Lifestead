@@ -83,7 +83,7 @@ export const PART: Readonly<Record<string, string>> = {
  "App Lock only": "Solo el Bloqueo de la app",
  "The vault only": "Solo la bóveda",
  "Plan meals this way": "Planear las comidas así",
- "Listing one changes no food score. The settings it can turn on are in Profile, each switched on or off separately.": "Marcar uno no cambia el puntaje de ningún alimento. Los ajustes que puede activar están en Perfil, cada uno se activa o desactiva por separado.",
+ "Listing one changes no food score. You can also choose any of these later in Profile, where each setting it can turn on is switched on or off separately.": "Marcar uno no cambia el puntaje de ningún alimento. También puedes elegir cualquiera de estos después en Perfil, donde cada ajuste que puede activar se activa o desactiva por separado.",
  "A few questions first": "Primero, unas preguntas",
  "Lifestead works better the more it knows about you. Answer what applies, one at a time; every answer can be changed later.": "Lifestead funciona mejor entre más sabe de ti. Contesta lo que aplique, una a la vez; cada respuesta se puede cambiar después.",
  "What you told Lifestead": "Lo que le dijiste a Lifestead",

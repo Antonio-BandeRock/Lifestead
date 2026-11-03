@@ -132,7 +132,7 @@ export const INTERVIEW_QUESTIONS: InterviewQuestionDef[] = [
   {
     kind: 'backup',
     question: 'Where should a copy of your records be kept?',
-    why: 'Everything you record lives on this device and nobody else holds a copy. A backup to a cloud folder you control is the only way back if the phone is lost or reset.',
+    why: 'Everything you record lives on this device and nobody else holds a copy. A backup to a cloud folder you control is the only way back if the phone is lost or reset. With Automatic Sync on, a fresh copy goes to that folder by itself a few minutes after you stop recording, with nothing to remember. Without it, Lifestead reminds you every few days.',
     beats: [],
   },
   // Direct instruction, 2026-10-07: health and money records go in the
@@ -176,7 +176,7 @@ export const PLAN_THIS_WAY_LABEL = 'Plan meals this way';
 export const READ_MORE_LABEL = 'Read more';
 export const CHANGE_LABEL = 'Change';
 export const NEURO_PROFILE_NOTE =
-  'Listing one changes no food score. The settings it can turn on are in Profile, each switched on or off separately.';
+  'Listing one changes no food score. You can also choose any of these later in Profile, where each setting it can turn on is switched on or off separately.';
 export const OPEN_PROFILE_LABEL = 'Open Profile';
 
 export const INTERVIEW_HEADING = 'A few questions first';
@@ -203,7 +203,7 @@ export const LATER_LABEL = 'Later';
 export const LATER_SUMMARY = 'Later. It comes first in the tour.';
 export const SETUP_HEADING = 'Setting up Lifestead';
 export const SETUP_LEAD =
-  'A few questions first, then the same cards as Getting Set Up on Home. Open a tab and set up what you want, in any order. Every answer can be changed later in Your Guide, or with Run Setup Again in Profile.';
+  'Choose the parts of life you want Lifestead to follow, then set them up one at a time, in the order you like. Each part says why it is asked for and what it feeds. Every answer can be changed later in Your Guide, or with Run Setup Again in Profile.';
 export const SETUP_BACK_LABEL = 'Back';
 export const SETUP_FINISH_LATER_LABEL = 'Finish Later';
 export const SETUP_FINISH_LATER_LINE = 'Goes on to Home now. Setup comes back the next time Lifestead opens while something is still waiting, and the same cards stay on Home.';

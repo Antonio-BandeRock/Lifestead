@@ -118,13 +118,6 @@ import { keepAnswerForUnlock, takeWaitingAnswers } from './lockedAnswers';
 import { ANDROID_GROUP_PREFIX, androidGroupFor as groupFieldsFor, countWaiting, groupWaiting, SUMMARY_FROM, summaryBody, summaryTitle, type ShowingReminder, type WaitingGroup } from './waitingAnswers';
 import { ownLink } from './appVariant';
 
-// The group fields with the summary's link in this version's scheme
-// (lib/appVariant.ts), so a tap on the group opens this app and not
-// another version on the same phone.
-function androidGroupFor(kind: string): ReturnType<typeof groupFieldsFor> {
-  const fields = groupFieldsFor(kind);
-  return { ...fields, androidGroupLink: ownLink(fields.androidGroupLink) };
-}
 import { YOUR_WEEK_NOTIFICATION_BODY, YOUR_WEEK_NOTIFICATION_TITLE } from './weeklySummary';
 import { buildWeekPlanBody, WEEK_PLAN_NOTIFICATION_TITLE, weekPlanDays } from './weekPlanNotice';
 import { buildGardenMonthBody, GARDEN_MONTH_NOTIFICATION_TITLE, nextGardenMonthFire, type GardenMonthPlace } from './gardenMonthNotice';
@@ -136,11 +129,31 @@ import { listRunningCountdowns } from './countdownDb';
 import { describeDuration } from './spokenCommand';
 import { VAULT_OFFER_NOTIFICATION_ID, vaultOfferText } from './vault';
 import { answerVaultOffer, vaultOfferDue } from './vaultOffer';
+import {
+  answerBackupOffer,
+  BACKUP_OFFER_NOTIFICATION_ID,
+  backupOfferClockStarts,
+  backupOfferDue,
+  backupOfferText,
+  markBackupOffered,
+  readBackupOfferState,
+  takeBackupSetUpWaiting,
+} from './backupOffer';
+import { BACKUP_LAST_SAVED_META_KEY } from './dataBackup';
+import { readSyncState } from './snapshotSyncDevice';
 import { markVaultOffered, takeVaultSetUpWaiting } from './vaultSession';
 import { APP_UPDATE_NOTIFICATION_ID, updateReadyText } from './appUpdate';
 import { APP_VERSION } from '../constants/version';
 import { inAppLanguage, queuedEnglish } from './notificationWords';
 import { t, tl } from './i18n';
+
+// The group fields with the summary's link in this version's scheme
+// (lib/appVariant.ts), so a tap on the group opens this app and not
+// another version on the same phone.
+function androidGroupFor(kind: string): ReturnType<typeof groupFieldsFor> {
+  const fields = groupFieldsFor(kind);
+  return { ...fields, androidGroupLink: ownLink(fields.androidGroupLink) };
+}
 
 // Local reminders: the scheduled doses in Schedules > Meds, the visits in
 // Schedules > Appointments, the meals and drinks on the schedule, the work
@@ -1245,6 +1258,30 @@ async function offerVaultIfDue(now: Date): Promise<void> {
   }));
 }
 
+// The reminder to back up every few days while Automatic Sync is off
+// (lib/backupOffer.ts). Shown at once and marked offered first, like the
+// vault offer, so two reconciles at the same moment do not show it twice.
+async function offerBackupIfDue(now: Date): Promise<void> {
+  const state = readBackupOfferState();
+  if (backupOfferClockStarts(state)) {
+    markBackupOffered(now.getTime());
+    return;
+  }
+  const sync = await readSyncState();
+  const db = await getDatabase();
+  const row = await db.getFirstAsync<{ value: string }>('SELECT value FROM app_meta WHERE key = ?', BACKUP_LAST_SAVED_META_KEY);
+  const times = [row?.value, sync.lastSavedAt].map((value) => (value ? Date.parse(value) : NaN)).filter((value) => Number.isFinite(value));
+  const lastBackupAt = times.length > 0 ? Math.max(...times) : null;
+  if (!backupOfferDue({ automaticSyncOn: sync.enabled, lastBackupAt, state, now })) return;
+  markBackupOffered(now.getTime());
+  const { title, body } = backupOfferText(lastBackupAt, now);
+  await Notifications.scheduleNotificationAsync(inAppLanguage({
+    identifier: BACKUP_OFFER_NOTIFICATION_ID,
+    content: { title, body, data: { tab: 'backupOffer' }, sound: false, categoryIdentifier: REMINDER_CATEGORY_IDS.backupOffer },
+    trigger: { channelId: ANDROID_DATED_CHANNEL_ID },
+  }));
+}
+
 // An update has downloaded (lib/appUpdateWatcher.ts). No buttons, so it is
 // dismissed by a swipe on the locked phone; a tap opens Profile on App
 // Updates, which asks before restarting. Carries nothing about the person.
@@ -1627,6 +1664,7 @@ async function runSync(): Promise<ReminderSyncResult> {
 
   const now = new Date();
   await offerVaultIfDue(now).catch((error) => console.warn('[reminderNotifications] the vault offer could not be checked', error));
+  await offerBackupIfDue(now).catch((error) => console.warn('[reminderNotifications] the backup reminder could not be checked', error));
   const today = localDateString(now);
   const horizon = new Date(now);
   horizon.setDate(horizon.getDate() + LOOKAHEAD_DAYS);
@@ -2038,7 +2076,7 @@ export type ReminderTapTarget =
   | { pathname: '/reconcile' }
   | { pathname: '/waiting-answers' }
   | { pathname: '/daily-checkin' }
-  | { pathname: '/profile'; params: { section: 'applock' } }
+  | { pathname: '/profile'; params: { section: 'applock' | 'backup' } }
   | { pathname: '/profile'; params: { section: 'updates'; install: '1' } }
   | { pathname: '/'; params: { openHomeSection: 'yourWeek' } }
   | { pathname: '/food'; params: { openFoodLens: 'myFoodProducts' } }
@@ -2064,6 +2102,7 @@ export function resolveReminderTap(response: Notifications.NotificationResponse 
   // The vault offer, tapped or Set It Up pressed, opens Profile on App Lock,
   // where the vault is set up.
   if (request?.identifier === VAULT_OFFER_NOTIFICATION_ID) return { pathname: '/profile', params: { section: 'applock' } };
+  if (request?.identifier === BACKUP_OFFER_NOTIFICATION_ID) return { pathname: '/profile', params: { section: 'backup' } };
   if (request?.identifier === APP_UPDATE_NOTIFICATION_ID) return { pathname: '/profile', params: { section: 'updates', install: '1' } };
   // A16: an alert about somebody else's dose opens Meds, where the band of
   // doses you watch sits. Queued by lib/peerDosesDb.ts, not by this module.
@@ -2208,6 +2247,11 @@ function responseKey(response: Notifications.NotificationResponse): string {
 async function answerPress(response: Notifications.NotificationResponse): Promise<void> {
   const request = response.notification.request;
   // The vault offer is not a reminder and writes nothing to the database.
+  if (request.identifier === BACKUP_OFFER_NOTIFICATION_ID) {
+    await Notifications.dismissNotificationAsync(request.identifier).catch(() => undefined);
+    answerBackupOffer(response.actionIdentifier);
+    return;
+  }
   if (request.identifier === VAULT_OFFER_NOTIFICATION_ID) {
     await Notifications.dismissNotificationAsync(request.identifier).catch(() => undefined);
     answerVaultOffer(response.actionIdentifier);
@@ -2766,6 +2810,8 @@ export function listenForReminderTaps(navigate: (target: ReminderTapTarget) => v
   // Set It Up on the vault offer, pressed on the notification, opens the
   // setup here, the next time the app is open and unlocked.
   if (takeVaultSetUpWaiting()) navigate({ pathname: '/profile', params: { section: 'applock' } });
+  // The same for Set It Up on the backup reminder.
+  else if (takeBackupSetUpWaiting()) navigate({ pathname: '/profile', params: { section: 'backup' } });
   const waitingTap = tapWhileLocked;
   tapWhileLocked = null;
   if (waitingTap) handleResponse(waitingTap, navigate);

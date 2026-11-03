@@ -62,7 +62,7 @@ const sectionKeys = (view) => view.sections.map((section) => section.def.key);
 const item = (view, key) => view.sections.flatMap((section) => section.items).find((entry) => entry.def.key === key);
 
 // Definitions hold together.
-same(story.ALL_BEATS.length, 9, 'nine parts of life');
+same(story.ALL_BEATS.length, 10, 'ten parts of life');
 check(story.ITEMS.every((def) => story.SECTIONS.some((section) => section.key === def.section)), 'every item names a section that exists');
 check(new Set(story.ITEMS.map((def) => def.key)).size === story.ITEMS.length, 'item keys are unique');
 check(story.ITEMS.filter((def) => def.kind === 'waiting').every((def) => def.need > 0 && typeof def.progress === 'function'), 'every waiting item says what it needs');

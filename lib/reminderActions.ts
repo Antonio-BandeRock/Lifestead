@@ -107,7 +107,10 @@ export type ReminderActionId =
   | 'sown'
   | 'vaultSetUp'
   | 'vaultNotNow'
-  | 'vaultStop';
+  | 'vaultStop'
+  | 'backupSetUp'
+  | 'backupNotNow'
+  | 'backupStop';
 
 export type ReminderCategoryKey =
   | 'plain'
@@ -124,7 +127,8 @@ export type ReminderCategoryKey =
   | 'energy'
   | 'cropPrep'
   | 'cropSow'
-  | 'vaultOffer';
+  | 'vaultOffer'
+  | 'backupOffer';
 
 // 'plain' keeps the identifier the single category always had, so a
 // reminder already queued is still correct and is left alone by the
@@ -148,6 +152,7 @@ export const REMINDER_CATEGORY_IDS: Record<ReminderCategoryKey, string> = {
   cropPrep: 'inside-story-reminder-crop-prep',
   cropSow: 'inside-story-reminder-crop-sow',
   vaultOffer: 'inside-story-vault-offer',
+  backupOffer: 'inside-story-backup-offer',
 };
 
 // The 1 to 5 value each morning button saves. Each title is that value's
@@ -235,7 +240,12 @@ export function reminderActionTitle(action: ReminderActionId, snoozeMinutes: num
     case 'vaultNotNow':
       return 'Not Now';
     case 'vaultStop':
+    case 'backupStop':
       return 'Stop Asking';
+    case 'backupSetUp':
+      return 'Set It Up';
+    case 'backupNotNow':
+      return 'Not Now';
   }
 }
 
@@ -261,6 +271,9 @@ export const CATEGORY_ACTIONS: Record<ReminderCategoryKey, ReminderActionId[]> =
   // answers and no Snooze, since Not Now is the snooze and it asks again in
   // a month.
   vaultOffer: ['vaultSetUp', 'vaultNotNow', 'vaultStop'],
+  // The reminder to back up (lib/backupOffer.ts), on the same three answers;
+  // Not Now asks again in a few days.
+  backupOffer: ['backupSetUp', 'backupNotNow', 'backupStop'],
 };
 
 /**

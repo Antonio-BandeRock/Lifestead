@@ -158,6 +158,7 @@ const gardenLens = (lens: string) => route('/garden', { openGardenLens: lens });
 const insightsLens = (lens: string) => route('/insights', { openInsightsLens: lens });
 const foodLens = (lens: string) => route('/food', { openFoodLens: lens });
 const signalsLens = (lens: string) => route('/log', { openSignalsLens: lens });
+const interestsLens = (lens: string) => route('/interests', { openInterestsLens: lens });
 
 type More = { when: GuideWhen; leadsTo?: string; takes?: string; taps?: string[] };
 
@@ -1372,6 +1373,48 @@ export const GUIDES: GuideDef[] = [
           'On their phone, they open the same screen and tap Scan Their Code, then point it at the code on yours.',
         ],
         destination: route('/connections'),
+      },
+    ],
+  },
+  {
+    key: 'interests',
+    name: 'Interests',
+    title: 'If your interests matter to you',
+    opening:
+      'Here is how Lifestead works for the things you do because you enjoy them. An interest you follow and one you practise are the same record at two stages, so it grows with you rather than starting over. Time spent on it can be kept as sessions, and a project on it keeps what is next in sight.',
+    firstResult: 'What you get first: one interest written down in a minute, with a place for everything that belongs to it.',
+    entries: [
+      {
+        key: 'interest',
+        record: 'interest',
+        when: 'start',
+        doThis: 'Add something you follow or do, in Interests under My Interests.',
+        forYou: 'It becomes the place everything about it is kept.',
+        leadsTo: 'Sessions and projects are kept under it.',
+        takes: 'A minute',
+        taps: ['Tap Add an Interest.', 'Give it a name and tap Add the Interest.'],
+        destination: interestsLens('myInterests'),
+      },
+      {
+        key: 'interestProject',
+        record: 'interestProject',
+        when: 'whenItHappens',
+        doThis: 'Start a project, in Interests under Projects.',
+        forYou: 'What is next shows under its name, so you can pick it up where you left it.',
+        takes: 'A couple of minutes',
+        taps: ['Tap Start a Project.', 'Name it and add the first thing to do.'],
+        destination: interestsLens('projects'),
+      },
+      {
+        key: 'interestSession',
+        record: 'interestSession',
+        when: 'whenItHappens',
+        doThis: 'Keep a session when you spend time on it, in Interests under Sessions.',
+        forYou: 'How much time went where, without anybody scoring it.',
+        leadsTo: 'Trends, under Keeping Up, shows the time week by week.',
+        takes: 'A few seconds',
+        taps: ['Tap Add a Session, or Start a Timer while you do it.', 'Pick the interest and tap Keep the Session.'],
+        destination: interestsLens('sessions'),
       },
     ],
   },

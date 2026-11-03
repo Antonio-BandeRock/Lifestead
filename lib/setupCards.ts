@@ -32,6 +32,7 @@ const insightsLens = (lens: string) => route('/insights', { openInsightsLens: le
 const foodLens = (lens: string) => route('/food', { openFoodLens: lens });
 const signalsLens = (lens: string) => route('/log', { openSignalsLens: lens });
 const report = (kind: string) => route('/reports', { openReportsLens: kind });
+const interestsLens = (lens: string) => route('/interests', { openInterestsLens: lens });
 
 // WHERE IT COMES BACK. Each is one place on Insights, Trends or Reports
 // that reads what the cards put in. `waitsOn` names the Your Story item
@@ -352,7 +353,7 @@ export type SetupShelfDef = {
 };
 
 export type SetupTabDef = {
-  path: '/life' | '/food' | '/garden' | '/schedule' | '/log';
+  path: '/life' | '/food' | '/garden' | '/schedule' | '/log' | '/interests';
   title: string;
   // What the tab is for, in one line, under its name.
   line: string;
@@ -382,6 +383,19 @@ export const SETUP_TABS: SetupTabDef[] = [
             worksWith: ['doseTimes', 'emergency'],
             item: 'meds',
             destination: lifeLens('myMeds'),
+          },
+          {
+            key: 'doseTimes',
+            title: 'Dose times',
+            icon: 'alarm-outline',
+            hook: 'A reminder at the right time, moved when a meal gets in the way.',
+            whatItIs: 'When each medicine and supplement is taken, checked against your meals.',
+            whatYouDo: 'Give each one on My Meds a time.',
+            takes: 'About a minute',
+            getsBack: ['doses', 'interactions', 'reportDoctor'],
+            worksWith: ['meds'],
+            records: ['doseTimes'],
+            destination: scheduleLens('meds'),
           },
           {
             key: 'conditions',
@@ -705,6 +719,39 @@ export const SETUP_TABS: SetupTabDef[] = [
         ],
       },
       {
+        key: 'foodDay',
+        title: 'Meals and water',
+        beats: ['food', 'health'],
+        cards: [
+          {
+            key: 'meal',
+            title: 'Meals',
+            icon: 'restaurant-outline',
+            hook: 'Every meal you log teaches the app something about your body.',
+            whatItIs: 'What you ate and when.',
+            whatYouDo: "Log today's first meal. Pick from recents or recipes, no blank form.",
+            takes: 'About a minute',
+            getsBack: ['nutrientsTrend', 'patterns', 'variety', 'eatingWindow', 'nutrientsToday', 'reportNutrition', 'reportVariety'],
+            worksWith: ['checkin', 'water'],
+            item: 'meal',
+            destination: scheduleLens('meals'),
+          },
+          {
+            key: 'water',
+            title: 'Water',
+            icon: 'water-outline',
+            hook: 'One tap a glass, and the days that run short show up.',
+            whatItIs: 'What you drink through the day.',
+            whatYouDo: 'Tap in your first glass.',
+            takes: 'Seconds',
+            getsBack: ['hydration', 'nutrientsToday'],
+            worksWith: ['meal'],
+            item: 'water',
+            destination: scheduleLens('hydration'),
+          },
+        ],
+      },
+      {
         key: 'foodCooking',
         title: 'Cooking and planning',
         beats: ['food', 'health'],
@@ -888,52 +935,13 @@ export const SETUP_TABS: SetupTabDef[] = [
   {
     path: '/schedule',
     title: 'Schedules',
-    line: 'Your day laid out by the clock: meals, water, doses and appointments.',
+    line: 'Your appointments, laid out by the clock beside your meals and doses.',
     shelves: [
       {
         key: 'scheduleDay',
         title: 'Your day',
         beats: ['health', 'food'],
         cards: [
-          {
-            key: 'meal',
-            title: 'Meals',
-            icon: 'restaurant-outline',
-            hook: 'Every meal you log teaches the app something about your body.',
-            whatItIs: 'What you ate and when.',
-            whatYouDo: "Log today's first meal. Pick from recents or recipes, no blank form.",
-            takes: 'About a minute',
-            getsBack: ['nutrientsTrend', 'patterns', 'variety', 'eatingWindow', 'nutrientsToday', 'reportNutrition', 'reportVariety'],
-            worksWith: ['checkin', 'water'],
-            item: 'meal',
-            destination: scheduleLens('meals'),
-          },
-          {
-            key: 'doseTimes',
-            title: 'Dose times',
-            icon: 'alarm-outline',
-            hook: 'A reminder at the right time, moved when a meal gets in the way.',
-            whatItIs: 'When each medicine and supplement is taken, checked against your meals.',
-            whatYouDo: 'Give each one on My Meds a time.',
-            takes: 'About a minute',
-            getsBack: ['doses', 'interactions', 'reportDoctor'],
-            worksWith: ['meds'],
-            records: ['doseTimes'],
-            destination: scheduleLens('meds'),
-          },
-          {
-            key: 'water',
-            title: 'Water',
-            icon: 'water-outline',
-            hook: 'One tap a glass, and the days that run short show up.',
-            whatItIs: 'What you drink through the day.',
-            whatYouDo: 'Tap in your first glass.',
-            takes: 'Seconds',
-            getsBack: ['hydration', 'nutrientsToday'],
-            worksWith: ['meal'],
-            item: 'water',
-            destination: scheduleLens('hydration'),
-          },
           {
             key: 'appointment',
             title: 'Appointments',
@@ -1057,6 +1065,47 @@ export const SETUP_TABS: SetupTabDef[] = [
       },
     ],
   },
+  // 2026-11-02 (1.0.79.7): Interests is a part of life setup follows.
+  {
+    path: '/interests',
+    title: 'Interests',
+    line: 'The things you do because you enjoy them, each with a place for everything that belongs to it.',
+    shelves: [
+      {
+        key: 'interestsYours',
+        title: 'Your interests',
+        beats: ['interests'],
+        cards: [
+          {
+            key: 'interest',
+            title: 'My Interests',
+            icon: 'color-palette-outline',
+            hook: 'One place for everything about the thing you love doing.',
+            whatItIs: 'Something you follow or practise: a craft, a sport, a subject, a collection.',
+            whatYouDo: 'Add one by name.',
+            takes: 'A minute',
+            getsBack: ['keepingUp'],
+            worksWith: ['interestProject'],
+            records: ['interest'],
+            destination: interestsLens('myInterests'),
+          },
+          {
+            key: 'interestProject',
+            title: 'Projects',
+            icon: 'layers-outline',
+            hook: 'Pick a project back up exactly where you left it.',
+            whatItIs: 'A project broken into the things to do, with what is next shown under its name.',
+            whatYouDo: 'Start one and add the first thing to do.',
+            takes: 'A couple of minutes',
+            getsBack: ['keepingUp'],
+            worksWith: ['interest'],
+            records: ['interestProject'],
+            destination: interestsLens('projects'),
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 // VIEWS.
@@ -1089,6 +1138,28 @@ export function cardDoneOn(def: SetupCardDef, view: YourStoryView, records: Guid
   return earliest([fromItem, ...fromRecords]);
 }
 
+export function viewSetupCard(def: SetupCardDef, view: YourStoryView, records: GuideRecords): SetupCardView {
+  const item = def.item ? view.allItems[def.item] : undefined;
+  return {
+    def,
+    doneOn: cardDoneOn(def, view, records),
+    setAside: item?.state === 'setAside',
+    areas: def.getsBack.map((key) => AREA_BY_KEY.get(key)).filter((area): area is GiveBackArea => !!area),
+  };
+}
+
+// A card by its key with the tab it sits on, for setup one part at a time
+// (lib/setupSections.ts), where a part's cards come from several tabs.
+export function setupCardByKey(key: string): { def: SetupCardDef; tabPath: SetupTabDef['path'] } | null {
+  for (const tab of SETUP_TABS) {
+    for (const shelf of tab.shelves) {
+      const def = shelf.cards.find((card) => card.key === key);
+      if (def) return { def, tabPath: tab.path };
+    }
+  }
+  return null;
+}
+
 function shelfShown(shelf: SetupShelfDef, beats: readonly BeatKey[]): boolean {
   // Before any part of life is chosen every row shows, so nothing looks
   // missing.
@@ -1106,15 +1177,7 @@ export function buildSetupShelves(view: YourStoryView, records: GuideRecords, st
     const shelves: SetupShelfView[] = [];
     for (const shelf of tab.shelves) {
       if (!shelfShown(shelf, view.beats)) continue;
-      const cards = shelf.cards.map((def) => {
-        const item = def.item ? view.allItems[def.item] : undefined;
-        return {
-          def,
-          doneOn: cardDoneOn(def, view, records),
-          setAside: item?.state === 'setAside',
-          areas: def.getsBack.map((key) => AREA_BY_KEY.get(key)).filter((area): area is GiveBackArea => !!area),
-        };
-      });
+      const cards = shelf.cards.map((def) => viewSetupCard(def, view, records));
       const open = cards.filter((card) => !card.doneOn && !card.setAside);
       const settled = cards.filter((card) => card.doneOn || card.setAside);
       shelves.push({ def: shelf, cards: [...open, ...settled], openCount: open.length });

@@ -41,6 +41,17 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.79.7',
+    date: '2026-11-02',
+    changes: [
+      'Setup now goes one part of life at a time. After choosing the parts for the app to keep track of, you pick where to start, and only that part is on the screen, with a line saying what each thing feeds in the app. Done with this part or Skip this part brings you back to the list, where finished parts are dimmed. Finish Later stays at the top the whole way.',
+      'Interests is now one of the parts of life setup asks about, and the Autism and ADHD question says it can be changed in Profile later.',
+      'Once every part is done or skipped, setup asks about backing up to OneDrive or Google Drive, then how your records are kept closed, then how much Home shows, and then Home opens.',
+      'If Automatic Sync is off, a reminder every three days says how long it has been since the last backup, with Set It Up, Not Now and Stop Asking, answerable on the locked phone.',
+      'In Getting Set Up on Home, Dose times now sits beside My Meds, and Meals and Water sit with Food.',
+    ],
+  },
+  {
     version: '1.0.79.6',
     date: '2026-11-02',
     changes: [

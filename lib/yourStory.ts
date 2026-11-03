@@ -38,9 +38,11 @@
 // PURE. No database, no React, no runtime imports, so
 // scripts/test_your_story.js runs it in plain node.
 
-export type BeatKey = 'health' | 'food' | 'movement' | 'home' | 'garden' | 'money' | 'routines' | 'work' | 'family';
+// Interests joined 2026-11-02 (1.0.79.7, direct request: "tracking
+// Interests should also be included").
+export type BeatKey = 'health' | 'food' | 'movement' | 'home' | 'garden' | 'money' | 'routines' | 'work' | 'family' | 'interests';
 
-export const ALL_BEATS: BeatKey[] = ['health', 'food', 'movement', 'home', 'garden', 'money', 'routines', 'work', 'family'];
+export const ALL_BEATS: BeatKey[] = ['health', 'food', 'movement', 'home', 'garden', 'money', 'routines', 'work', 'family', 'interests'];
 
 export const BEAT_LABELS: Record<BeatKey, string> = {
   health: 'Health',
@@ -52,6 +54,7 @@ export const BEAT_LABELS: Record<BeatKey, string> = {
   routines: 'Routines',
   work: 'Work',
   family: 'Family',
+  interests: 'Interests',
 };
 
 export const BEAT_CAPTIONS: Record<BeatKey, string> = {
@@ -64,6 +67,7 @@ export const BEAT_CAPTIONS: Record<BeatKey, string> = {
   routines: 'Mornings, evenings, the things you check',
   work: 'Benefits and how the week went',
   family: 'The people you look after',
+  interests: 'Hobbies, things you follow, projects',
 };
 
 export const BEATS_QUESTION = 'What parts of your life do you want Lifestead to follow?';
