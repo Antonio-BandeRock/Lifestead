@@ -41,6 +41,13 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.79.13',
+    date: '2026-11-02',
+    changes: [
+      "Events on your phone's calendar can now come to you as a notification asking whether to add them to Appointments, once Appointments has been let read the calendar. An event in the next two weeks that is not in Appointments yet is asked about once, three a day at most and never at night. Add to Appointments, Not This One and Stop Asking all work on the locked phone, and tapping the notification opens the event ready to check and save. Turn it off in Profile > Reminders under Events on your calendar.",
+    ],
+  },
+  {
     version: '1.0.79.12',
     date: '2026-11-02',
     changes: [

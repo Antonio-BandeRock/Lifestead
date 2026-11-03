@@ -237,6 +237,7 @@ import {
   requestCalendarPermission,
   type DeviceCalendarEvent,
 } from '../../lib/deviceCalendar';
+import { appointmentTypeFromTitle } from '../../lib/calendarOffer';
 import { evaluateInteractionRules, type InteractionWarning, type ReferenceOnlyRule } from '../../lib/interactionRules';
 // Meals and doses read as one day, 2026-09-22. Every decision and every
 // sentence lives in this module, which has no database and no React in
@@ -6304,8 +6305,12 @@ const DEVICE_IMPORT_WINDOW_DAYS = 90;
 // app (see lib/deviceCalendar.ts). Deliberately no recurrence here (see
 // scheduleAppointment's own note) -- most appointments get booked one at a
 // time by a provider's office anyway.
-function AppointmentsLens() {
+// A calendar event offered by notification (lib/calendarOffer.ts) arrives
+// as importCalendarEvent with its start, and opens the import form filled in
+// with that event, so the tap lands on the thing it named.
+function AppointmentsLens({ importCalendarEvent, importCalendarAt }: { importCalendarEvent?: string; importCalendarAt?: string }) {
   const walkMark = useWalkMark();
+  const consumedImport = useRef<string | null>(null);
   const scrollBottomPadding = useFloatingButtonScrollPadding();
   // The list is left out while appointments are in a closed vault. Adding
   // one stays, and appointment reminders keep coming.
@@ -6347,12 +6352,25 @@ function AppointmentsLens() {
         // Same reason as the Meds lens: every save, complete, cancel and
         // remove reloads, so the phone's reminders get matched here.
         void syncReminderNotifications();
+        if (importCalendarEvent && consumedImport.current !== importCalendarEvent) {
+          consumedImport.current = importCalendarEvent;
+          const linked = loadedAppointments.some((item) => item.linkedDeviceCalendarEventId === importCalendarEvent);
+          const startsAt = Number(importCalendarAt);
+          if (!linked && granted && Number.isFinite(startsAt)) {
+            listUpcomingDeviceEvents(new Date(startsAt - 60_000), new Date(startsAt + 60_000))
+              .then((events) => {
+                const event = events.find((candidate) => candidate.id === importCalendarEvent);
+                if (event) handleStartImport(event);
+              })
+              .catch((error) => console.warn('[schedule] the offered calendar event could not be read', error));
+          }
+        }
       })
       .catch((error) => {
         setErrorMessage(`Could not load appointments: ${error instanceof Error ? error.message : String(error)}`);
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [importCalendarEvent, importCalendarAt]);
 
   useFocusEffect(
     useCallback(() => {
@@ -6563,7 +6581,7 @@ function AppointmentsLens() {
     setForm({
       editingId: null,
       title: event.title,
-      appointmentType: 'doctor',
+      appointmentType: appointmentTypeFromTitle(event.title),
       date: dateStr,
       time: splitTime24(timeStr),
       location: event.location ?? '',
@@ -7057,7 +7075,12 @@ export default function ScheduleScreen() {
   // 2026-08-26 -- the same deep-link mechanism every other tab takes, so
   // Profile can jump straight into the Daily Meal Plan lens rather than
   // leaving someone to find it themselves via LensHub afterward.
-  const { openScheduleLens, scheduleTreatmentId } = useLocalSearchParams<{ openScheduleLens?: string; scheduleTreatmentId?: string }>();
+  const { openScheduleLens, scheduleTreatmentId, importCalendarEvent, importCalendarAt } = useLocalSearchParams<{
+    openScheduleLens?: string;
+    scheduleTreatmentId?: string;
+    importCalendarEvent?: string;
+    importCalendarAt?: string;
+  }>();
   const [lens, setLens] = useState<Lens>('meals');
   const vaultKey = useVaultReloadKey();
   const activeLensLabel = LENSES.find((option) => option.key === lens)?.label;
@@ -7158,7 +7181,7 @@ export default function ScheduleScreen() {
           ) : lens === 'meds' ? (
             <MedsLens scheduleTreatmentId={scheduleTreatmentId} />
           ) : lens === 'appointments' ? (
-            <AppointmentsLens />
+            <AppointmentsLens importCalendarEvent={importCalendarEvent} importCalendarAt={importCalendarAt} />
           ) : lens === 'upkeep' ? (
             <UpkeepLens />
           ) : lens === 'timeline' ? (

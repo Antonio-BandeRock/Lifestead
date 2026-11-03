@@ -110,7 +110,10 @@ export type ReminderActionId =
   | 'vaultStop'
   | 'backupSetUp'
   | 'backupNotNow'
-  | 'backupStop';
+  | 'backupStop'
+  | 'calendarAdd'
+  | 'calendarNotThis'
+  | 'calendarStop';
 
 export type ReminderCategoryKey =
   | 'plain'
@@ -128,7 +131,8 @@ export type ReminderCategoryKey =
   | 'cropPrep'
   | 'cropSow'
   | 'vaultOffer'
-  | 'backupOffer';
+  | 'backupOffer'
+  | 'calendarOffer';
 
 // 'plain' keeps the identifier the single category always had, so a
 // reminder already queued is still correct and is left alone by the
@@ -153,6 +157,7 @@ export const REMINDER_CATEGORY_IDS: Record<ReminderCategoryKey, string> = {
   cropSow: 'inside-story-reminder-crop-sow',
   vaultOffer: 'inside-story-vault-offer',
   backupOffer: 'inside-story-backup-offer',
+  calendarOffer: 'inside-story-calendar-offer',
 };
 
 // The 1 to 5 value each morning button saves. Each title is that value's
@@ -241,11 +246,16 @@ export function reminderActionTitle(action: ReminderActionId, snoozeMinutes: num
       return 'Not Now';
     case 'vaultStop':
     case 'backupStop':
+    case 'calendarStop':
       return 'Stop Asking';
     case 'backupSetUp':
       return 'Set It Up';
     case 'backupNotNow':
       return 'Not Now';
+    case 'calendarAdd':
+      return 'Add to Appointments';
+    case 'calendarNotThis':
+      return 'Not This One';
   }
 }
 
@@ -274,6 +284,10 @@ export const CATEGORY_ACTIONS: Record<ReminderCategoryKey, ReminderActionId[]> =
   // The reminder to back up (lib/backupOffer.ts), on the same three answers;
   // Not Now asks again in a few days.
   backupOffer: ['backupSetUp', 'backupNotNow', 'backupStop'],
+  // An event on the phone's calendar offered to Appointments
+  // (lib/calendarOffer.ts). Each event is asked about once, so Not This One
+  // is the end of it, and Stop Asking turns the offers off in Profile > Reminders.
+  calendarOffer: ['calendarAdd', 'calendarNotThis', 'calendarStop'],
 };
 
 /**

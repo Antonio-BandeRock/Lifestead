@@ -3729,7 +3729,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Import from Phone Calendar.', mark: 'appointments.import' },
         { say: 'Tap the one to bring in.' },
       ],
-      forYou: 'It is copied in with its date, time and place, ready for notes and reminders.',
+      forYou: 'It is copied in with its date, time and place, ready for notes and reminders. Once the calendar can be read, an event not brought in yet also comes up as a notification asking whether to add it.',
     },
     {
       key: 'done',

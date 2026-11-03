@@ -23,6 +23,7 @@ import { isValidQuietHours, type QuietHours } from './quietHours';
 export type ReminderKindKey =
   | 'dose'
   | 'appointment'
+  | 'calendarOffer'
   | 'meal'
   | 'hydration'
   | 'checkin'
@@ -64,6 +65,10 @@ export type ReminderKindKey =
 export const ALL_REMINDER_KIND_KEYS: ReminderKindKey[] = [
   'dose',
   'appointment',
+  // 2026-11-02. An event on the phone's calendar that no appointment is
+  // linked to, offered to Appointments (lib/calendarOffer.ts). Beside
+  // Appointments because that is where it goes.
+  'calendarOffer',
   'meal',
   'hydration',
   // C1 of the competitive build plan (2026-09-26). The two reminders that
@@ -146,6 +151,7 @@ export const ALL_REMINDER_KIND_KEYS: ReminderKindKey[] = [
 export const REMINDER_KIND_LABELS: Record<ReminderKindKey, string> = {
   dose: 'Medications & supplements',
   appointment: 'Appointments',
+  calendarOffer: 'Events on your calendar',
   meal: 'Meals',
   hydration: 'Water & drinks',
   checkin: 'Daily flare question',
@@ -178,6 +184,8 @@ export const REMINDER_KIND_LABELS: Record<ReminderKindKey, string> = {
 export const REMINDER_KIND_CAPTIONS: Record<ReminderKindKey, string> = {
   dose: 'Each dose time you set in Schedules > Meds, at the time it is due.',
   appointment: 'About an hour before an appointment starts.',
+  calendarOffer:
+    'An event in the next two weeks on the calendar Appointments can read, asking whether to add it. Three a day at most, between 9 in the morning and 9 at night, and each event is asked about once. Nothing comes until you have let Appointments read your calendar.',
   meal: 'Each meal you have scheduled, at the time you planned it for.',
   hydration:
     'Every drink on your Hydration schedule. A day the Meal Plan has filled a water gap for can hold six of these, so this one starts off.',
@@ -247,6 +255,9 @@ export const REMINDER_KIND_CAPTIONS: Record<ReminderKindKey, string> = {
 const DEFAULT_REMINDER_KIND_ENABLED: Record<ReminderKindKey, boolean> = {
   dose: true,
   appointment: true,
+  // On. It only reads a calendar somebody already let Appointments read,
+  // asks about each event once, and three a day at most.
+  calendarOffer: true,
   meal: true,
   hydration: false,
   // Off, both of them. Neither comes from anything the person scheduled,

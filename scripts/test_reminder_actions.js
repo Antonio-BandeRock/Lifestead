@@ -80,7 +80,7 @@ function check(label, ok) {
 // a question on a notification must be answerable on it).
 // Sets whose every button is an answer, so Snooze gives way: the flare
 // questions (1.0.67.1) are answered with Yes or No and then by tapping.
-const ALL_ANSWERS = ['morning', 'energy', 'vaultOffer', 'backupOffer', 'checkin', 'flareHowBad', 'flareWorse'];
+const ALL_ANSWERS = ['morning', 'energy', 'vaultOffer', 'backupOffer', 'calendarOffer', 'checkin', 'flareHowBad', 'flareWorse'];
 for (const key of ALL_REMINDER_CATEGORY_KEYS) {
   const actions = CATEGORY_ACTIONS[key];
   check(`${key} has at most three buttons`, actions.length <= 3);
@@ -140,6 +140,7 @@ for (const [kind, key] of Object.entries(expected)) check(`${kind} -> ${key}`, c
 // The vault offer: three answers, none of which opens the app (1.0.67.1).
 check('the vault offer has its three answers', CATEGORY_ACTIONS.vaultOffer.join() === 'vaultSetUp,vaultNotNow,vaultStop');
 check('the backup offer has its three answers', CATEGORY_ACTIONS.backupOffer.join() === 'backupSetUp,backupNotNow,backupStop');
+check('the calendar offer has its three answers', CATEGORY_ACTIONS.calendarOffer.join() === 'calendarAdd,calendarNotThis,calendarStop');
 check('Set It Up waits for the next time the app is open', planReminderAction('vaultOffer', 'vaultSetUp') === null);
 check('the vault offer writes no record', planReminderAction('vaultOffer', 'vaultNotNow') === null);
 check('upkeep that expires gets the plain set', categoryKeyFor('upkeep', false) === 'plain');
