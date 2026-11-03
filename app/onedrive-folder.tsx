@@ -58,11 +58,13 @@ import { pickFolder } from '../lib/desktop/cloudFolder';
 import { isPhoneFolder, pickFolder as pickPhoneFolder } from '../lib/phoneFolder';
 import { isOneDriveConfigured, isSignedIn, signIn, signOut } from '../lib/oneDriveAuth';
 import {
+  adoptDefaultFolderIfNone,
   BACKUPS_FOLDER_NAME,
   forgetResolvedFolders,
   getSharedFolder,
   MAILBOX_FOLDER_NAME,
   prepareSharedFolder,
+  SHARED_FOLDER_CHILDREN_SENTENCE,
 } from '../lib/oneDriveFolders';
 import {
   createFolder,
@@ -146,6 +148,15 @@ export default function OneDriveFolderScreen() {
       }
       const currentFolder = await refreshStored(saved);
       setChosen(currentFolder);
+      if (!currentFolder) {
+        // Nothing chosen yet, so the app makes Apps / Lifestead rather than
+        // asking somebody to build a layout it keeps itself.
+        const made = await adoptDefaultFolderIfNone();
+        if (made) {
+          setChosen(made.folder);
+          setNote(made.note);
+        }
+      }
       if (desktop) {
         // Start inside the OneDrive folder itself when there is one, since
         // a listing that says only "OneDrive" is a tap for nothing. Two
@@ -171,6 +182,11 @@ export default function OneDriveFolderScreen() {
       return;
     }
     setSignedIn(true);
+    const made = await adoptDefaultFolderIfNone();
+    if (made) {
+      setChosen(made.folder);
+      setNote(made.note);
+    }
     await load(root, []);
   };
 
@@ -230,13 +246,7 @@ export default function OneDriveFolderScreen() {
     setBusy(false);
     setNote(
       prepared.ok
-        ? 'Using ' +
-          folder.name +
-          '. ' +
-          MAILBOX_FOLDER_NAME +
-          ' and ' +
-          BACKUPS_FOLDER_NAME +
-          ' are ready inside it.'
+        ? 'Using ' + folder.name + '. ' + SHARED_FOLDER_CHILDREN_SENTENCE + ' are ready inside it.'
         : 'Using ' + folder.name + ', but its folders could not be made yet. ' + (prepared.reason ?? ''),
     );
     // A folder on this phone was chosen in Android's picker, so there is no

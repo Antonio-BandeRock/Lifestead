@@ -267,6 +267,7 @@ function registerIpc() {
   // The two dialogs wait on the person, so they answer asynchronously.
   ipcMain.handle('files:pick', (_event, options) => files.pick(() => mainWindow, options));
   ipcMain.handle('files:saveAs', (_event, uri, options) => files.saveAs(() => mainWindow, uri, options));
+  ipcMain.handle('files:open', (_event, uri) => files.openInDefaultApp(shell, userData, uri));
   // K11: a page of HTML to the printer, or laid out as a PDF file, in a
   // hidden window of its own (print.js).
   ipcMain.handle('print:html', (_event, html) => print.printHtml(files.folders(userData).cache, html));

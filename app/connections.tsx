@@ -15,7 +15,7 @@ import { AppTextInput } from '../components/AppTextInput';
 import { useConfirmSheet } from '../components/ConfirmSheet';
 import { AppActionSheet } from '../components/AppActionSheet';
 import { DOSE_CONSENT_CHOICES, DOSE_CONSENT_TITLE, consentLine, doseConsentMessage } from '../lib/doseWatch';
-import { getDoseConsents, giveDoseConsent, withdrawDoseConsent, type DoseConsent } from '../lib/peerDosesDb';
+import { getDoseConsents, giveDoseConsent, reconcileDoseAlerts, withdrawDoseConsent, type DoseConsent } from '../lib/peerDosesDb';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
@@ -25,6 +25,7 @@ import {
   removeConnection,
   renameConnection,
   setConnectionGrants,
+  setShowTheirs,
   setConnectionRole,
   type Connection,
 } from '../lib/connections';
@@ -33,7 +34,8 @@ import {
   describeGrants,
   describeLinkState,
   fingerprintStanding,
-  SHARE_SCOPES,
+  ALWAYS_SHARED_SENTENCE,
+  SWITCHABLE_SCOPES,
   linkState,
   type ShareScope,
 } from '../lib/partners';
@@ -124,6 +126,7 @@ export default function ConnectionsScreen() {
   // reads as though the other carrier did something it did not.
   const [relayNote, setRelayNote] = useState<string | null>(null);
   const [relayBusy, setRelayBusy] = useState<'send' | 'check' | null>(null);
+  const [otherWaysOpen, setOtherWaysOpen] = useState(false);
   // The Wi-Fi session lives in lib/lanSync.ts, not in this screen, so leaving
   // and coming back shows the same session rather than a fresh idle one. The
   // screen mirrors it here and stops it on unmount.
@@ -264,6 +267,13 @@ export default function ConnectionsScreen() {
     }
     const next = { ...connection.grants, [code]: !connection.grants[code] };
     await setConnectionGrants(connection.id, next);
+    load();
+  };
+
+  const handleToggleShowTheirs = async (connection: Connection) => {
+    await setShowTheirs(connection.id, !connection.showTheirs);
+    // Their dose alerts are taken back or queued again to match.
+    await reconcileDoseAlerts().catch(() => undefined);
     load();
   };
 
@@ -439,155 +449,6 @@ export default function ConnectionsScreen() {
           </View>
         ) : null}
 
-        {/* THE MAILBOX, AS A REAL ADDRESS RATHER THAN A NAME SOMEBODY TYPED.
-
-            What was here before asked for the folder's name and stored the
-            string. That told the app nothing it could open, which is exactly
-            what it was called out as: pretending a choice had been made. This
-            shows the folder actually picked out of the account, and every
-            button here reaches it.
-
-            Not gated any more. A gate that only checks somebody typed something
-            proves nothing, and a real folder can be chosen before or after
-            pairing without either one being wrong. */}
-        <View style={styles.fingerprintCard}>
-          <Text style={styles.fingerprintLabel}>Your shared folder</Text>
-          {sharedFolderState === null ? (
-            <Text style={styles.fingerprintHint}>Checking OneDrive...</Text>
-          ) : sharedFolderState.state === 'ready' ? (
-            <>
-              <Text style={styles.fingerprintValueName}>{sharedFolderState.folder.name}</Text>
-              <Text style={styles.fingerprintPath}>
-                {sharedFolderState.folder.path ?? 'OneDrive, in a folder shared with you.'}
-              </Text>
-            </>
-          ) : (
-            <Text style={styles.fingerprintHint}>{describeSharedFolderProblem(sharedFolderState)}</Text>
-          )}
-          <Text style={styles.fingerprintHint}>
-            One folder in OneDrive holding everything this app keeps there. Share it with them and what you send
-            each other passes through the {MAILBOX_FOLDER_NAME} folder inside it. Every partner and, later, every
-            child uses the same one.
-          </Text>
-          <TouchableOpacity onPress={() => router.push('/onedrive-folder')} hitSlop={8}>
-            <Text style={styles.rowActionText}>
-              {mailboxStatus?.state === 'ready' ? 'Change the Folder' : 'Choose the Folder'}
-            </Text>
-          </TouchableOpacity>
-
-          {mailboxStatus?.state === 'ready' ? (
-            <Text style={styles.fingerprintHint}>
-              While the app is open it checks the folder about every 30 seconds and sends what changed about 15
-              seconds after you change it. The two buttons below do the same at once, for when you want it to go straight
-              away.
-            </Text>
-          ) : null}
-          {mailboxStatus?.state === 'ready' ? (
-            <View style={styles.folderActions}>
-              <TouchableOpacity onPress={handleSendViaOneDrive} hitSlop={8}>
-                <Text style={styles.rowActionText}>Send Mine to Everyone</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={handleCheckOneDrive} hitSlop={8}>
-                <Text style={styles.rowActionText}>Check the Folder</Text>
-              </TouchableOpacity>
-            </View>
-          ) : null}
-        </View>
-
-        {/* HOW A CONDITION LIST ACTUALLY CROSSES BETWEEN TWO PHONES.
-
-            Three carriers were investigated and ruled out on evidence before this
-            one. A cloud API needs BOTH people to grant full read and write access
-            to their entire OneDrive, because Graph's createLink will not work at
-            the narrow scope and /shares needs a token on the reading side too. A
-            shared folder needs a storage app that supports folder selection, and
-            most cloud apps do not: OneDrive does not appear in the picker at all.
-            A QR code fits condition codes but not a plan of any length.
-
-            So the default is handing the file over through whatever the two people
-            already use. No account, no permission from anyone, works when they are
-            apart, and every byte of it is sealed so only the recipient can open it.
-            The cost is that it is a deliberate act rather than a background poll,
-            which is said plainly rather than hidden. */}
-        <View style={styles.fingerprintCard}>
-          <Text style={styles.fingerprintLabel}>Sharing with a partner</Text>
-          <Text style={styles.fingerprintHint}>
-            Send what you share as a file, through whatever you already use to send each other things: a message, an
-            email, or a folder in OneDrive that you both have. No account and no sign-in anywhere. Only the person you
-            sent it to can open it, so it stays private even passing through a messaging app.
-          </Text>
-          {/* Spelled out because the two system pickers behave differently and
-              nothing on screen would tell you which one you are looking at. The
-              file picker lists cloud apps; the folder picker below does not. */}
-          <Text style={styles.fingerprintHint}>
-            To use OneDrive: send it there from your share sheet, then on the other phone tap Get What They Sent and
-            choose OneDrive under Browse files in other apps.
-          </Text>
-
-          <TouchableOpacity onPress={handleImportFile} hitSlop={8} disabled={transferBusy !== null}>
-            <Text style={styles.rowActionText}>
-              {transferBusy === 'check' ? 'Opening…' : 'Get What They Sent'}
-            </Text>
-          </TouchableOpacity>
-
-          {transferNote ? <Text style={styles.fingerprintHint}>{transferNote}</Text> : null}
-
-          {/* Same sealed file, no carrier in between: when both phones are on
-              one Wi-Fi each serves its files for a few minutes and fetches the
-              other's. Both people tap, because each phone can only pull; nothing
-              is pushed onto a phone that did not ask. */}
-          {lanSyncAvailable ? (
-            <View style={styles.lanSyncBlock}>
-              <Text style={styles.fingerprintHint}>
-                In the same place? Tap Sync over Wi-Fi on both phones while they are on the same Wi-Fi and keep this
-                screen open. Each phone fetches what the other has for it, sealed the same way as a file.
-              </Text>
-              <TouchableOpacity onPress={handleLanSync} hitSlop={8} disabled={lanSync.phase === 'starting'}>
-                <Text style={styles.rowActionText}>
-                  {lanSync.phase === 'starting'
-                    ? 'Starting…'
-                    : lanSync.phase === 'listening'
-                      ? 'Done Syncing'
-                      : 'Sync over Wi-Fi'}
-                </Text>
-              </TouchableOpacity>
-              {lanSync.phase === 'listening' ? (
-                <Text style={styles.fingerprintHint}>
-                  {lanSync.origin
-                    ? t('Listening on this Wi-Fi at {address}. Tap Done Syncing once both phones say what they got.', {
-                        address: lanSync.origin.replace(/^https?:\/\//, ''),
-                      })
-                    : t('Listening on this Wi-Fi. Tap Done Syncing once both phones say what they got.')}
-                </Text>
-              ) : null}
-              {lanSync.phase === 'listening' || lanSync.phase === 'stopped' || lanSync.phase === 'failed'
-                ? lanSync.partners.map((partner) => (
-                    <Text
-                      key={partner.connectionId}
-                      style={partner.state === 'received' ? styles.lanSyncGood : partner.state === 'failed' || partner.state === 'noKey' ? styles.folderMismatch : styles.fingerprintHint}
-                    >
-                      {partner.name}: {partner.message ?? partner.state}
-                    </Text>
-                  ))
-                : null}
-              {lanSync.error ? <Text style={styles.folderMismatch}>{lanSync.error}</Text> : null}
-            </View>
-          ) : isDesktopApp() ? (
-            // The computer cannot join it, and says so rather than leaving the
-            // block out as if the feature did not exist (lib/desktop/phoneOnly.ts).
-            <View style={styles.lanSyncBlock}>
-              <Text style={styles.fingerprintHint}>{phoneOnlyNotice('wifiSync').message}</Text>
-            </View>
-          ) : null}
-
-          {/* Named rather than left to be discovered: what crosses is decided
-              per partner by the switches on their row, not by the carrier. */}
-          <Text style={styles.fingerprintHint}>
-            What crosses is which conditions each of you tracks and, if you allow it, the meal plan built around both
-            of you. Each of you chooses that separately on the other person’s row above.
-          </Text>
-        </View>
-
         {/* THE ONE CARRIER THAT PUTS A MACHINE OF OURS IN THE PATH.
 
             Every other way of sending here moves bytes between the two phones
@@ -635,6 +496,173 @@ export default function ConnectionsScreen() {
           </View>
           {relayNote ? <Text style={styles.fingerprintHint}>{relayNote}</Text> : null}
         </View>
+
+        {/* Other ways, closed until opened (1.0.80.2): the relay above works
+            by itself, so the folder and the file are there for whoever wants
+            them rather than standing in front of everybody. */}
+        <TouchableOpacity
+          style={[styles.fingerprintCard, styles.otherWaysHeader]}
+          activeOpacity={0.8}
+          onPress={() => setOtherWaysOpen((value) => !value)}
+          accessibilityRole="button"
+          accessibilityState={{ expanded: otherWaysOpen }}
+        >
+          <Text style={styles.fingerprintLabel}>Other ways</Text>
+          <Ionicons name={otherWaysOpen ? 'chevron-up' : 'chevron-down'} size={18} color={colors.textPrimary} />
+        </TouchableOpacity>
+        {otherWaysOpen ? (
+          <>
+          {/* THE MAILBOX, AS A REAL ADDRESS RATHER THAN A NAME SOMEBODY TYPED.
+
+              What was here before asked for the folder's name and stored the
+              string. That told the app nothing it could open, which is exactly
+              what it was called out as: pretending a choice had been made. This
+              shows the folder actually picked out of the account, and every
+              button here reaches it.
+
+              Not gated any more. A gate that only checks somebody typed something
+              proves nothing, and a real folder can be chosen before or after
+              pairing without either one being wrong. */}
+          <View style={styles.fingerprintCard}>
+            <Text style={styles.fingerprintLabel}>Your shared folder</Text>
+            {sharedFolderState === null ? (
+              <Text style={styles.fingerprintHint}>Checking OneDrive...</Text>
+            ) : sharedFolderState.state === 'ready' ? (
+              <>
+                <Text style={styles.fingerprintValueName}>{sharedFolderState.folder.name}</Text>
+                <Text style={styles.fingerprintPath}>
+                  {sharedFolderState.folder.path ?? 'OneDrive, in a folder shared with you.'}
+                </Text>
+              </>
+            ) : (
+              <Text style={styles.fingerprintHint}>{describeSharedFolderProblem(sharedFolderState)}</Text>
+            )}
+            <Text style={styles.fingerprintHint}>
+              One folder in OneDrive holding everything this app keeps there. Share it with them and what you send
+              each other passes through the {MAILBOX_FOLDER_NAME} folder inside it. Every partner and, later, every
+              child uses the same one.
+            </Text>
+            <TouchableOpacity onPress={() => router.push('/onedrive-folder')} hitSlop={8}>
+              <Text style={styles.rowActionText}>
+                {mailboxStatus?.state === 'ready' ? 'Change the Folder' : 'Choose the Folder'}
+              </Text>
+            </TouchableOpacity>
+
+            {mailboxStatus?.state === 'ready' ? (
+              <Text style={styles.fingerprintHint}>
+                While the app is open it checks the folder about every 30 seconds and sends what changed about 15
+                seconds after you change it. The two buttons below do the same at once, for when you want it to go straight
+                away.
+              </Text>
+            ) : null}
+            {mailboxStatus?.state === 'ready' ? (
+              <View style={styles.folderActions}>
+                <TouchableOpacity onPress={handleSendViaOneDrive} hitSlop={8}>
+                  <Text style={styles.rowActionText}>Send Mine to Everyone</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleCheckOneDrive} hitSlop={8}>
+                  <Text style={styles.rowActionText}>Check the Folder</Text>
+                </TouchableOpacity>
+              </View>
+            ) : null}
+          </View>
+
+          {/* HOW A CONDITION LIST ACTUALLY CROSSES BETWEEN TWO PHONES.
+
+              Three carriers were investigated and ruled out on evidence before this
+              one. A cloud API needs BOTH people to grant full read and write access
+              to their entire OneDrive, because Graph's createLink will not work at
+              the narrow scope and /shares needs a token on the reading side too. A
+              shared folder needs a storage app that supports folder selection, and
+              most cloud apps do not: OneDrive does not appear in the picker at all.
+              A QR code fits condition codes but not a plan of any length.
+
+              So the default is handing the file over through whatever the two people
+              already use. No account, no permission from anyone, works when they are
+              apart, and every byte of it is sealed so only the recipient can open it.
+              The cost is that it is a deliberate act rather than a background poll,
+              which is said plainly rather than hidden. */}
+          <View style={styles.fingerprintCard}>
+            <Text style={styles.fingerprintLabel}>Sharing with a partner</Text>
+            <Text style={styles.fingerprintHint}>
+              Send what you share as a file, through whatever you already use to send each other things: a message, an
+              email, or a folder in OneDrive that you both have. No account and no sign-in anywhere. Only the person you
+              sent it to can open it, so it stays private even passing through a messaging app.
+            </Text>
+            {/* Spelled out because the two system pickers behave differently and
+                nothing on screen would tell you which one you are looking at. The
+                file picker lists cloud apps; the folder picker below does not. */}
+            <Text style={styles.fingerprintHint}>
+              To use OneDrive: send it there from your share sheet, then on the other phone tap Get What They Sent and
+              choose OneDrive under Browse files in other apps.
+            </Text>
+
+            <TouchableOpacity onPress={handleImportFile} hitSlop={8} disabled={transferBusy !== null}>
+              <Text style={styles.rowActionText}>
+                {transferBusy === 'check' ? 'Opening…' : 'Get What They Sent'}
+              </Text>
+            </TouchableOpacity>
+
+            {transferNote ? <Text style={styles.fingerprintHint}>{transferNote}</Text> : null}
+
+            {/* Same sealed file, no carrier in between: when both phones are on
+                one Wi-Fi each serves its files for a few minutes and fetches the
+                other's. Both people tap, because each phone can only pull; nothing
+                is pushed onto a phone that did not ask. */}
+            {lanSyncAvailable ? (
+              <View style={styles.lanSyncBlock}>
+                <Text style={styles.fingerprintHint}>
+                  In the same place? Tap Sync over Wi-Fi on both phones while they are on the same Wi-Fi and keep this
+                  screen open. Each phone fetches what the other has for it, sealed the same way as a file.
+                </Text>
+                <TouchableOpacity onPress={handleLanSync} hitSlop={8} disabled={lanSync.phase === 'starting'}>
+                  <Text style={styles.rowActionText}>
+                    {lanSync.phase === 'starting'
+                      ? 'Starting…'
+                      : lanSync.phase === 'listening'
+                        ? 'Done Syncing'
+                        : 'Sync over Wi-Fi'}
+                  </Text>
+                </TouchableOpacity>
+                {lanSync.phase === 'listening' ? (
+                  <Text style={styles.fingerprintHint}>
+                    {lanSync.origin
+                      ? t('Listening on this Wi-Fi at {address}. Tap Done Syncing once both phones say what they got.', {
+                          address: lanSync.origin.replace(/^https?:\/\//, ''),
+                        })
+                      : t('Listening on this Wi-Fi. Tap Done Syncing once both phones say what they got.')}
+                  </Text>
+                ) : null}
+                {lanSync.phase === 'listening' || lanSync.phase === 'stopped' || lanSync.phase === 'failed'
+                  ? lanSync.partners.map((partner) => (
+                      <Text
+                        key={partner.connectionId}
+                        style={partner.state === 'received' ? styles.lanSyncGood : partner.state === 'failed' || partner.state === 'noKey' ? styles.folderMismatch : styles.fingerprintHint}
+                      >
+                        {partner.name}: {partner.message ?? partner.state}
+                      </Text>
+                    ))
+                  : null}
+                {lanSync.error ? <Text style={styles.folderMismatch}>{lanSync.error}</Text> : null}
+              </View>
+            ) : isDesktopApp() ? (
+              // The computer cannot join it, and says so rather than leaving the
+              // block out as if the feature did not exist (lib/desktop/phoneOnly.ts).
+              <View style={styles.lanSyncBlock}>
+                <Text style={styles.fingerprintHint}>{phoneOnlyNotice('wifiSync').message}</Text>
+              </View>
+            ) : null}
+
+            {/* Named rather than left to be discovered: what crosses is decided
+                per partner by the switches on their row, not by the carrier. */}
+            <Text style={styles.fingerprintHint}>
+              What crosses is the same whichever way it goes: the household things you run together, and what each of
+              you allows about your health on the other person’s row above.
+            </Text>
+          </View>
+
+          </>
+        ) : null}
 
         {/* A partner link is its own invitation rather than a setting applied
             afterwards, because what it shares has to be chosen before it is sent
@@ -721,7 +749,10 @@ export default function ConnectionsScreen() {
                         {/* Editable here rather than only at pairing, because what
                             somebody is willing to share changes, and unpairing to
                             change it would throw away the keys and the history. */}
-                        {SHARE_SCOPES.map((scope) => (
+                        {/* Only what a person shares about their own health has a
+                            switch (1.0.80.2); the household things they run
+                            together are named once, underneath. */}
+                        {SWITCHABLE_SCOPES.map((scope) => (
                           <TouchableOpacity
                             key={scope.code}
                             style={styles.grantRow}
@@ -748,6 +779,26 @@ export default function ConnectionsScreen() {
                             </View>
                           </TouchableOpacity>
                         ))}
+                        <Text style={styles.grantWhat}>{ALWAYS_SHARED_SENTENCE}</Text>
+                        {/* The receiver's switch: what they share, shown here or
+                            not. Their records stay on this phone either way. */}
+                        <TouchableOpacity
+                          style={styles.grantRow}
+                          activeOpacity={0.8}
+                          onPress={() => handleToggleShowTheirs(connection)}
+                        >
+                          <View style={[styles.checkBox, connection.showTheirs ? styles.checkBoxOn : null]}>
+                            {connection.showTheirs ? <Text style={styles.checkMark}>✓</Text> : null}
+                          </View>
+                          <View style={styles.grantTextWrap}>
+                            <Text style={styles.grantLabel}>{t("Show {name}'s side on this phone", { name: connection.name })}</Text>
+                            <Text style={styles.grantWhat}>
+                              {connection.showTheirs
+                                ? 'Their meals and conditions in the plan, their photos and their dose alerts show here. Turn this off to hide them on this phone. What they sent is kept, and they are not told.'
+                                : 'Hidden on this phone: their meals, conditions, photos and dose alerts. What they sent is kept, so turning this back on shows it again.'}
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
                         {/* Said on the row itself rather than left for someone to
                             discover. A partner card that lists what is shared,
                             while nothing can actually travel between the phones,
@@ -942,6 +993,7 @@ const styles = StyleSheet.create({
     padding: HOME_BAND_CONTENT_PADDING,
     gap: 6,
   },
+  otherWaysHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   fingerprintLabel: { ...typography.caption, color: colors.textMuted, ...textShadow },
   fingerprintValue: { ...typography.bodyEmphasis, color: colors.textPrimary, letterSpacing: 2, ...textShadow },
   fingerprintHint: { ...typography.caption, color: colors.textMuted, ...textShadow },

@@ -122,18 +122,26 @@ export const SHARE_SCOPES: {
   what: string;
   /** Whether a fresh partner link starts with this on. */
   defaultOn: boolean;
+  /**
+   * A household thing both people run together (1.0.80.2). Always on for a
+   * link that plans meals, and never a switch: only what a person shares
+   * about their own health, family and money can be turned off.
+   */
+  household: boolean;
 }[] = [
   {
     code: 'meals',
     label: 'Meals',
     what: 'Permission to see what is planned for each day. The plan itself crosses when one of you sends it.',
     defaultOn: true,
+    household: true,
   },
   {
     code: 'shopping',
     label: 'Shopping lists',
     what: 'Permission to see the list, so either of you can be the one who actually goes. The list itself does not cross between two phones yet.',
     defaultOn: true,
+    household: true,
   },
   {
     code: 'conditions',
@@ -143,6 +151,7 @@ export const SHARE_SCOPES: {
     // your diagnoses is not, and defaulting it on would be this app deciding
     // something on your behalf that it has no business deciding.
     defaultOn: false,
+    household: false,
   },
   {
     code: 'photos',
@@ -152,6 +161,7 @@ export const SHARE_SCOPES: {
     // that is already being sent (lib/peerPhotos.ts), so it adds no new kind
     // of information, only a picture of something already shared.
     defaultOn: true,
+    household: true,
   },
   {
     code: 'doses',
@@ -161,8 +171,20 @@ export const SHARE_SCOPES: {
     // (the consent step from the Caregiver tier), since it is about the
     // person's meds rather than the household.
     defaultOn: false,
+    household: false,
   },
 ];
+
+/** The switches a person has: what they share about their own health. */
+export const SWITCHABLE_SCOPES = SHARE_SCOPES.filter((scope) => !scope.household);
+/** What every link that plans meals shares, with no switch. */
+export const HOUSEHOLD_SCOPES = SHARE_SCOPES.filter((scope) => scope.household);
+
+/** The sentence under the switches, naming what is always shared. */
+export const ALWAYS_SHARED_SENTENCE =
+  'Always shared, because you run them together: ' +
+  HOUSEHOLD_SCOPES.map((scope) => scope.label.toLowerCase()).join(', ') +
+  ', the household meal calendar and the chores. Only what you share about your health has a switch; your family and your money join here when they can be shared.';
 
 export type ShareGrants = Record<ShareScope, boolean>;
 
@@ -175,6 +197,17 @@ export function defaultGrantsForRole(role: ConnectionRole): ShareGrants {
     acc[scope.code] = scope.defaultOn;
     return acc;
   }, {} as ShareGrants);
+}
+
+/**
+ * Grants as they stand for a role: household things on for any link that
+ * plans meals, whatever an older row or another device's invite says.
+ */
+export function withHouseholdOn(role: ConnectionRole, grants: ShareGrants): ShareGrants {
+  if (role === 'recipe') return grants;
+  const next = { ...grants };
+  for (const scope of HOUSEHOLD_SCOPES) next[scope.code] = true;
+  return next;
 }
 
 export function describeGrants(grants: ShareGrants): string {

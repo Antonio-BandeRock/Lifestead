@@ -112,8 +112,8 @@ check(!JSON.stringify(sent).includes('s1'), 'nothing from a health table is in t
 same(peer.tablesToSend(here, { role: 'recipe', grants: ALL }), {}, 'a recipe link sends nothing at all');
 same(
   peer.tablesToSend(here, { role: 'partner', grants: { ...ALL, shopping: false } }),
-  {},
-  'shopping switched off sends nothing at all',
+  sent,
+  'an old shopping switch left off still sends the list, since it is household (1.0.80.2)',
 );
 same(peer.tablesToSend({}, PARTNER), {}, 'a table nobody has yet is not invented');
 check(

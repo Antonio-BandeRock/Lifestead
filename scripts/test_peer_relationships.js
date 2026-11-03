@@ -111,8 +111,8 @@ for (const area of rel.PEER_AREAS) {
 check(rel.tableNamesThatCross('partner', ALL).includes('grocery_lists'), 'with shopping on, a partner shares the list');
 same(
   rel.tableNamesThatCross('partner', { ...ALL, shopping: false }),
-  ['household_meal_calendar', 'upkeep_items', 'upkeep_doings'],
-  'with shopping off, a partner shares no list at all, and the meal calendar and chores still cross',
+  ['grocery_lists', 'grocery_list_items', 'household_meal_calendar', 'upkeep_items', 'upkeep_doings'],
+  'shopping is household, so an old switch left off still shares the list (1.0.80.2)',
 );
 check(
   !rel.areasTheyOwn('partner', { ...ALL, conditions: false }).includes('conditions'),

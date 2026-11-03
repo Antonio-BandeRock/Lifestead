@@ -148,6 +148,12 @@ export type DesktopFilesBridge = {
    * null when the dialog was closed without a choice.
    */
   saveAs(uri: string, options: DesktopSaveAsOptions): Promise<string | null>;
+  /**
+   * Opens a file inside the app's data folder in the program the computer
+   * uses for its kind. Answers '' when it opened, otherwise what went
+   * wrong. Missing from an installer older than 1.0.80.2.
+   */
+  open?(uri: string): Promise<string>;
 };
 
 export type DesktopPickFileOptions = {

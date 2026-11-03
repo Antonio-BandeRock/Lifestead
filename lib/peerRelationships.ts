@@ -308,7 +308,7 @@ export const RELATIONSHIPS: readonly Relationship[] = [
     shared: ['shopping', 'mealCalendar', 'chores'],
     theirs: ['meals', 'conditions', 'doses'],
     onTheirBehalf: [],
-    granted: ['meals', 'shopping', 'conditions', 'doses'],
+    granted: ['conditions', 'doses'],
     linkable: true,
   },
   {
@@ -318,7 +318,7 @@ export const RELATIONSHIPS: readonly Relationship[] = [
     shared: ['shopping', 'mealCalendar', 'chores'],
     theirs: ['meals', 'conditions', 'doses'],
     onTheirBehalf: ['schedule', 'meds', 'symptoms'],
-    granted: ['meals', 'shopping', 'conditions', 'doses'],
+    granted: ['conditions', 'doses'],
     linkable: false,
     waitingOn:
       'a way to set up the link itself. The talking between the two phones works the same way it does between your own devices; what is missing is the setting-up, where you say which parts they can reach and at what pace.',
@@ -330,7 +330,7 @@ export const RELATIONSHIPS: readonly Relationship[] = [
     shared: ['shopping', 'mealCalendar', 'chores'],
     theirs: ['meals', 'conditions', 'doses'],
     onTheirBehalf: ['schedule', 'meds', 'symptoms'],
-    granted: ['meals', 'shopping', 'conditions', 'doses'],
+    granted: ['conditions', 'doses'],
     linkable: false,
     // The yes, or the statement of acting for someone who cannot, exists
     // now for doses (A16, dose_watch_consent). What is left is setting up

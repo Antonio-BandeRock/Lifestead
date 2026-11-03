@@ -346,12 +346,13 @@ check('and a future timestamp never goes negative', daysSinceSent('2026-12-01T00
   checkFalse('a recipe link carries no records at all',
     Object.prototype.hasOwnProperty.call(recipeOnly, 'shared'));
 
-  // Turning shopping off turns off the records that belong to it.
+  // Shopping and meals are household things with no switch (1.0.80.2), so
+  // an old row with them off still sends the shared records.
   const noShopping = build({ meals: true, shopping: false, conditions: true }, { shared: everything });
-  check('turning shopping off stops its records travelling, and only the meal calendar still goes',
-    Object.keys(noShopping.shared ?? {}).sort(), ['household_meal_calendar']);
+  check('an old shopping switch left off still sends the list and the meal calendar',
+    Object.keys(noShopping.shared ?? {}).sort(), ['grocery_list_items', 'grocery_lists', 'household_meal_calendar']);
   const nothing = build({ meals: false, shopping: false, conditions: true }, { shared: everything });
-  checkFalse('turning shopping and meals off stops every record travelling',
+  checkTrue('old meals and shopping switches left off still send the household records',
     Object.prototype.hasOwnProperty.call(nothing, 'shared'));
   checkFalse('the calendar copy this device made stays home',
     Object.prototype.hasOwnProperty.call((sent.household_meal_calendar ?? [{}])[0], 'my_schedule_item_id'));

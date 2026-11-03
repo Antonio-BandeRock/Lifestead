@@ -12,6 +12,7 @@
 //   |- Backups               where backups are written
 //   |- Photos                every photo, encrypted, one file each
 //   |- Recordings            audio somebody brought in, one file each
+//   |- Files                 files attached to a record, encrypted, one each
 //   |- Videos                held for video, made only when the first is kept
 //
 // EACH KIND OF FILE HAS A FOLDER OF ITS OWN (2026-09-30, by direct
@@ -45,9 +46,10 @@
 // cannot, rather than reporting a Graph error about an id that means nothing
 // here or a disk path that means nothing on a phone.
 
-import { getOneDriveFolder, setOneDriveFolder, type StoredOneDriveFolder } from './db';
+import { getOneDriveFolder, setMailboxFolderName, setOneDriveFolder, type StoredOneDriveFolder } from './db';
 import { isDesktopApp } from './desktop/bridge';
 import { folderFromPhonePath, isDiskFolder } from './desktop/cloudFolder';
+import { FILES_FOLDER_NAME } from './attachments';
 import { PHOTOS_FOLDER_NAME, RECORDINGS_FOLDER_NAME } from './media';
 import { isSignedIn } from './oneDriveAuth';
 import { isPhoneFolder } from './phoneFolder';
@@ -55,6 +57,8 @@ import {
   checkFolder,
   ensureChildFolder,
   folderFromComputerPath,
+  getMyDriveId,
+  listMyRootFolders,
   type DriveItemRef,
   type GraphResult,
 } from './oneDriveGraph';
@@ -64,7 +68,7 @@ export const MAILBOX_FOLDER_NAME = 'Mailbox';
 export const BACKUPS_FOLDER_NAME = 'Backups';
 
 /** Every folder the app keeps under the shared folder. */
-export type ChildFolder = 'mailbox' | 'backups' | 'photos' | 'recordings';
+export type ChildFolder = 'mailbox' | 'backups' | 'photos' | 'recordings' | 'files';
 
 /**
  * Resolved children, kept only for the life of this app run.
@@ -227,6 +231,11 @@ export async function getRecordingsFolder(): Promise<GraphResult<DriveItemRef>> 
   return resolveChild('recordings', RECORDINGS_FOLDER_NAME) as Promise<GraphResult<DriveItemRef>>;
 }
 
+/** Where every attached file's encrypted copy lives, made if it is missing. */
+export async function getFilesFolder(): Promise<GraphResult<DriveItemRef>> {
+  return resolveChild('files', FILES_FOLDER_NAME) as Promise<GraphResult<DriveItemRef>>;
+}
+
 /**
  * Makes both children now, rather than on first use.
  *
@@ -237,11 +246,79 @@ export async function getRecordingsFolder(): Promise<GraphResult<DriveItemRef>> 
  */
 export async function prepareSharedFolder(): Promise<{ ok: boolean; reason?: string }> {
   cache = null;
-  const mailbox = await getMailboxFolder();
-  if (!mailbox.ok) return { ok: false, reason: mailbox.reason };
-  const backups = await getBackupsFolder();
-  if (!backups.ok) return { ok: false, reason: backups.reason };
+  // Every folder the app keeps, so the shape described on the screen is the
+  // shape somebody finds. Videos waits for the first video.
+  for (const make of [getMailboxFolder, getBackupsFolder, getPhotosFolder, getRecordingsFolder, getFilesFolder]) {
+    const made = await make();
+    if (!made.ok) return { ok: false, reason: made.reason };
+  }
   return { ok: true };
+}
+
+/** Where the app makes its folder when nobody has chosen one. */
+export const DEFAULT_FOLDER_PARENT = 'Apps';
+export const DEFAULT_FOLDER_NAME = 'Lifestead';
+export const DEFAULT_FOLDER_SENTENCE = 'OneDrive / ' + DEFAULT_FOLDER_PARENT + ' / ' + DEFAULT_FOLDER_NAME;
+
+/**
+ * Apps / Lifestead in this OneDrive, found if it is there and made if it is
+ * not (1.0.80.2, by direct instruction: "if we can automate the creation of
+ * their Lifestead folder structure, we should").
+ *
+ * Found before made, so a second device signing in to the same account lands
+ * on the folder the first one made rather than a Lifestead 1 beside it. A
+ * computer with two OneDrive folders (a personal account and a work one) is
+ * not guessed between: it returns null and the person chooses.
+ */
+export async function findOrMakeDefaultFolder(): Promise<GraphResult<DriveItemRef | null>> {
+  let top: DriveItemRef;
+  if (isDesktopApp()) {
+    const existing = await folderFromPhonePath(DEFAULT_FOLDER_SENTENCE);
+    if (existing) return { ok: true, value: existing };
+    const roots = await listMyRootFolders();
+    if (!roots.ok) return roots;
+    if (roots.value.length !== 1) return { ok: true, value: null };
+    top = roots.value[0];
+  } else {
+    if (!(await isSignedIn())) return { ok: true, value: null };
+    const drive = await getMyDriveId();
+    if (!drive.ok) return drive;
+    // Graph reads "root" as the top of the drive.
+    top = { driveId: drive.value, itemId: 'root', name: 'OneDrive', path: 'OneDrive' };
+  }
+  const apps = await ensureChildFolder(top, DEFAULT_FOLDER_PARENT);
+  if (!apps.ok) return apps;
+  const lifestead = await ensureChildFolder(apps.value, DEFAULT_FOLDER_NAME);
+  if (!lifestead.ok) return lifestead;
+  return { ok: true, value: { ...lifestead.value, path: lifestead.value.path ?? DEFAULT_FOLDER_SENTENCE } };
+}
+
+/** The folders made inside the shared folder, named the way the screen says them. */
+export const SHARED_FOLDER_CHILDREN_SENTENCE =
+  MAILBOX_FOLDER_NAME + ', ' + BACKUPS_FOLDER_NAME + ', Photos, Recordings and Files';
+
+/**
+ * Sets up Apps / Lifestead as the shared folder when none has been chosen,
+ * with every folder inside it, and says what was done. Null when a folder is
+ * already chosen or this device cannot make one without being asked which.
+ */
+export async function adoptDefaultFolderIfNone(): Promise<{ folder: DriveItemRef; note: string } | null> {
+  if (await getOneDriveFolder()) return null;
+  const found = await findOrMakeDefaultFolder();
+  if (!found.ok || !found.value) return null;
+  await setOneDriveFolder(found.value);
+  await setMailboxFolderName(found.value.name);
+  forgetResolvedFolders();
+  const prepared = await prepareSharedFolder();
+  const shared = await getSharedFolder();
+  const folder = shared.state === 'ready' ? shared.folder : found.value;
+  const where = folder.path ?? DEFAULT_FOLDER_SENTENCE;
+  return {
+    folder,
+    note: prepared.ok
+      ? 'Your shared folder is ' + where + ', with ' + SHARED_FOLDER_CHILDREN_SENTENCE + ' inside it. Choose a different folder below if you would rather.'
+      : 'Your shared folder is ' + where + ', but its folders could not all be made yet. ' + (prepared.reason ?? ''),
+  };
 }
 
 /** Drops what was resolved, for a sign-out or a change of folder. */

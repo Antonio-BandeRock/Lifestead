@@ -28,7 +28,7 @@ import { getDeviceIdentity } from './deviceIdentity';
 import { decodeBase64Utf8, encodeBase64Utf8 } from './sharing';
 import { canEncryptTo } from './partnerCrypto';
 import { clearPartnerMealPlan } from './mealPlanSync';
-import { CONNECTION_ROLES, defaultGrantsForRole, type ConnectionRole, type ShareGrants } from './partners';
+import { CONNECTION_ROLES, defaultGrantsForRole, withHouseholdOn, type ConnectionRole, type ShareGrants } from './partners';
 import { areasTheyOwn } from './peerRelationships';
 
 /**
@@ -57,6 +57,12 @@ export type Connection = {
   fingerprintVerifiedAt: string | null;
   /** What YOU grant THEM. One direction only. */
   grants: ShareGrants;
+  /**
+   * Whether their side shows on this device (1.0.80.2): their meals, their
+   * conditions in the plan, their dose alerts and photos. The receiver's
+   * switch. Off keeps what they sent and hides it; nothing tells them.
+   */
+  showTheirs: boolean;
   /** Condition codes they shared. Never anything else about their health. */
   theirConditionCodes: string[];
   theirConditionsAt: string | null;
@@ -95,6 +101,7 @@ type ConnectionRow = {
   share_conditions: number | null;
   share_photos: number | null;
   share_doses: number | null;
+  show_theirs: number | null;
   their_condition_codes_json: string | null;
   their_conditions_at: string | null;
 };
@@ -105,7 +112,7 @@ const CONNECTION_COLUMNS = `
   id, name, public_key_base64, encryption_public_key_base64, paired_at, role, they_have_me_at,
   mailbox_folder, outbox_file_uri, inbox_file_uri,
   fingerprint_verified_at, share_meals, share_shopping, share_conditions, share_photos, share_doses,
-  their_condition_codes_json, their_conditions_at
+  show_theirs, their_condition_codes_json, their_conditions_at
 `;
 
 function fromRow(row: ConnectionRow): Connection {
@@ -142,13 +149,16 @@ function fromRow(row: ConnectionRow): Connection {
     // Number() rather than === 1, as a belt-and-braces guard: these columns
     // are INTEGER on both paths (verified against a scratch database), and
     // this still holds if one ever slips through as TEXT.
-    grants: {
+    // Household things read as on for any link that plans meals (1.0.80.2),
+    // so a row switched off before they stopped being switches still shares.
+    grants: withHouseholdOn(asRole(row.role), {
       meals: Number(row.share_meals) === 1,
       shopping: Number(row.share_shopping) === 1,
       conditions: Number(row.share_conditions) === 1,
       photos: Number(row.share_photos) === 1,
       doses: Number(row.share_doses) === 1,
-    },
+    }),
+    showTheirs: row.show_theirs == null || Number(row.show_theirs) === 1,
     theirConditionCodes,
     theirConditionsAt: row.their_conditions_at,
   };
@@ -268,7 +278,9 @@ export async function listPartners(): Promise<Connection[]> {
  * guessing which two of the three to use would be worse than saying so.
  */
 export async function getMealPlanningPartner(): Promise<{ partner: Connection | null; others: number }> {
-  const partners = await listPartners();
+  // A partner whose side is hidden on this device is left out of planning
+  // the way they would be if they had shared nothing.
+  const partners = (await listPartners()).filter((partner) => partner.showTheirs);
   return { partner: partners[0] ?? null, others: Math.max(0, partners.length - 1) };
 }
 
@@ -299,6 +311,11 @@ export async function setConnectionRole(id: string, role: ConnectionRole): Promi
       id,
     );
   }
+}
+
+export async function setShowTheirs(id: string, show: boolean): Promise<void> {
+  const db = await getDatabase();
+  await db.runAsync('UPDATE connections SET show_theirs = ? WHERE id = ?', show ? 1 : 0, id);
 }
 
 export async function setConnectionGrants(id: string, grants: ShareGrants): Promise<void> {

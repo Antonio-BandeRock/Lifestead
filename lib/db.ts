@@ -6832,6 +6832,8 @@ async function runDatabaseInitialization() {
         share_conditions INTEGER NOT NULL DEFAULT 0,
         share_photos INTEGER NOT NULL DEFAULT 0,
         share_doses INTEGER NOT NULL DEFAULT 0,
+        -- The receiver's switch, 1.0.80.2: whether their side shows here.
+        show_theirs INTEGER NOT NULL DEFAULT 1,
         --
         -- CONDITION CODES ONLY, decided directly. The names of what they
         -- track, so meals can be planned around both people at once. Never a
@@ -9370,6 +9372,11 @@ async function runDatabaseInitialization() {
       if (!connectionColumns.some((entry) => entry.name === 'share_doses')) {
         await db.execAsync('ALTER TABLE connections ADD COLUMN share_doses INTEGER NOT NULL DEFAULT 0;');
       }
+      // show_theirs, 1.0.80.2. On for every existing link, so nothing that
+      // showed before disappears.
+      if (!connectionColumns.some((entry) => entry.name === 'show_theirs')) {
+        await db.execAsync('ALTER TABLE connections ADD COLUMN show_theirs INTEGER NOT NULL DEFAULT 1;');
+      }
     }
 
     // garden_harvests.on_hand, 2026-09-20. INTEGER, so outside the TEXT loop
@@ -9782,6 +9789,26 @@ async function runDatabaseInitialization() {
         grp TEXT NOT NULL,
         used_at TEXT NOT NULL
       );
+    `);
+
+    // Files kept with a record (2026-11-03, 1.0.80.2): a PDF, a document or
+    // anything else attached to a Capture note. The file lives under
+    // Paths.document/attachments with an encrypted copy in the Files folder
+    // under the shared folder; the row travels between one person's devices
+    // and is not on the between-people allowlist. See lib/attachments.ts.
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS attachments (
+        id TEXT PRIMARY KEY,
+        owner_kind TEXT NOT NULL,
+        owner_id TEXT NOT NULL,
+        name TEXT NOT NULL,
+        file_name TEXT NOT NULL,
+        mime_type TEXT NOT NULL,
+        size_bytes INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_attachments_owner ON attachments (owner_kind, owner_id);
     `);
 
     // My Crops (2026-10-01, 1.0.58.3): the crops somebody intends to grow,

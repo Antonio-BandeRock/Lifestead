@@ -144,6 +144,7 @@ export type ToolMark =
   | 'learn.printSend'
   | 'learn.howItHasGone'
   | 'capture.keepInLibrary'
+  | 'capture.attachFile'
   | 'work.overview'
   | 'work.todos'
   | 'work.have'
@@ -2361,6 +2362,17 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Read the Page under the note with the link.', mark: 'capture.readPage' },
       ],
       forYou: 'The page is read only when you tap, and its title, site, author, date and a few lines are kept beside the note. A recipe can go straight into Food, and a product page is offered to the grocery list.',
+    },
+    {
+      key: 'captureAttachFile',
+      title: 'Keep a file with a note',
+      steps: [
+        { say: 'Open the band with the name of Sort It Out.', mark: 'homeBand.captureInbox', stay: true },
+        { say: 'Tap Sort It Out.', mark: 'home.captureSort' },
+        { say: 'Under a note, tap Files.', mark: 'capture.attachFile' },
+        { say: 'Tap Attach a File and pick the file: a PDF, a document, a spreadsheet or anything else.' },
+      ],
+      forYou: 'The file stays with the note and opens in whatever app reads its kind. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.',
     },
     {
       key: 'captureKeepInLibrary',

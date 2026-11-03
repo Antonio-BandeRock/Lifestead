@@ -217,8 +217,20 @@ async function saveAs(getWindow, sourceUri, options) {
   return destination;
 }
 
+// Opens a file in whichever program the computer uses for its kind, the
+// way double-clicking it would (1.0.80.2, files attached to a note). Only
+// a file inside the app's data folder, which is where the app puts the
+// copy it opens. Answers '' when it opened, otherwise what went wrong.
+async function openInDefaultApp(shell, userDataPath, uri) {
+  const file = toPath(uri);
+  assertWritable(userDataPath, file);
+  if (!fs.existsSync(file)) return 'That file is not on this computer.';
+  return shell.openPath(file);
+}
+
 module.exports = {
   folders,
+  openInDefaultApp,
   toUri,
   stat,
   readText,

@@ -41,6 +41,16 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.80.2',
+    date: '2026-11-03',
+    changes: [
+      'A Capture note can keep files now: under a note, tap Files, then Attach a File, and pick a PDF, a document, a spreadsheet or anything else. Each file opens in an app that reads its kind, and an encrypted copy goes to a Files folder inside your shared folder so your other device has it too.',
+      'Your shared folder sets itself up. Signing in to OneDrive makes OneDrive / Apps / Lifestead, with the Mailbox, Backups, Photos, Recordings and Files folders inside it, or uses it if your other device already made it. You can still choose a different folder.',
+      'Partners: only what you share about your health has a switch now (which conditions you track, and when a dose is not marked). Meals, the shopping list, the household meal calendar, the chores and photos of shared meals are always shared, since you run them together. A new switch on their row, Show their side on this phone, hides their meals, conditions, photos and dose alerts here without telling them and without throwing away what they sent.',
+      'Connections: the relay is the way shown first, since it works by itself. The shared folder and sending a file are under Other ways, closed until you open it.',
+    ],
+  },
+  {
     version: '1.0.80.1',
     date: '2026-11-03',
     changes: [
