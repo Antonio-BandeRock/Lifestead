@@ -119,10 +119,12 @@ import { setTopicMuted } from '../lib/generalHealthPreferences';
 import { syncReminderNotifications } from '../lib/reminderNotifications';
 import {
   ALL_REMINDER_KIND_KEYS,
+  isCalendarEveryEventEnabled,
   isNudgeUntilDoneEnabled,
   isReminderKindEnabled,
   REMINDER_KIND_CAPTIONS,
   REMINDER_KIND_LABELS,
+  setCalendarEveryEvent,
   setNudgeUntilDone,
   setQuietHours,
   setReminderKindEnabled,
@@ -1041,6 +1043,21 @@ export default function ProfileScreen() {
             </PickerField>
           </View>
         );
+      case 'calendarOffer': {
+        const every = isCalendarEveryEventEnabled(reminderPrefs);
+        return (
+          <View style={styles.pillRow}>
+            <TouchableOpacity
+              style={[styles.pill, every && styles.pillActive]}
+              onPress={toggleCalendarEveryEvent}
+            >
+              <Text style={[styles.pillText, every && styles.pillTextActive]}>
+                Every event, not only health visits
+              </Text>
+            </TouchableOpacity>
+          </View>
+        );
+      }
       default:
         return null;
     }
@@ -1288,6 +1305,14 @@ export default function ProfileScreen() {
   // switch they moved.
   function toggleNudgeUntilDone() {
     void setNudgeUntilDone(!isNudgeUntilDoneEnabled(reminderPrefs)).then(() =>
+      syncReminderNotifications(),
+    );
+  }
+
+  // Calendar offers for every event rather than health visits only, which
+  // the next reconcile reads.
+  function toggleCalendarEveryEvent() {
+    void setCalendarEveryEvent(!isCalendarEveryEventEnabled(reminderPrefs)).then(() =>
       syncReminderNotifications(),
     );
   }

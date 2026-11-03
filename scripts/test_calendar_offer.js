@@ -79,6 +79,14 @@ check(
   ids(offer.eventsToOffer(events, new Set(['linked']), marked, new Date(2026, 10, 3, 11, 0))) === 'later',
 );
 check('the day has no more room', offer.eventsToOffer(events, new Set(), marked, new Date(2026, 10, 2, 12, 0)).length === 0);
+const dinner = [event('dinner', at(3, 19), 60, 'Dinner with Lisa'), event('draw', at(4, 8), 15, 'Blood work')];
+check('health visits only by default', ids(offer.eventsToOffer(dinner, new Set(), empty, now)) === 'draw');
+check('every event when asked', ids(offer.eventsToOffer(dinner, new Set(), empty, now, true)) === 'dinner,draw');
+
+check('a linked event with an alarm is left to the calendar', offer.leftToCalendar('e1', new Set(['e1'])));
+check('a linked event with no alarm keeps the reminder', !offer.leftToCalendar('e2', new Set(['e1'])));
+check('an unlinked appointment keeps the reminder', !offer.leftToCalendar(null, new Set(['e1'])));
+
 const muchLater = offer.markOffered(marked, [], new Date(2026, 11, 30, 10, 0));
 check('long-past offers are forgotten', Object.keys(muchLater.offered).length === 0);
 
@@ -106,6 +114,11 @@ const full = offer.calendarOfferText(event('x', at(3, 9), 60, 'Dr. Ruiz'), now, 
 const kind = offer.calendarOfferText(event('x', at(3, 9), 60, 'Dr. Ruiz'), now, true);
 check('the full text names the event', full.title.includes('Dr. Ruiz') && full.body.includes('tomorrow at 9:00 am'));
 check('kind only keeps the name off', !kind.title.includes('Ruiz') && !kind.body.includes('Ruiz'));
+check('a doctor visit says what Appointments gathers', full.body.includes('since your last visit'));
+const lab = offer.calendarOfferText(event('x', at(3, 8), 15, 'Blood work'), now, false);
+check('a lab draw says it is checked against supplements', lab.body.includes('supplements'));
+const other = offer.calendarOfferText(event('x', at(3, 19), 60, 'Dinner with Lisa'), now, false);
+check('any other event keeps the plain line', other.body.includes('linked to the calendar'));
 
 const kinds = {
   'Blood work': 'lab_draw',
@@ -115,6 +128,9 @@ const kinds = {
   'Dr. Ruiz': 'doctor',
   Endocrinologist: 'doctor',
   'Dentist cleaning': 'doctor',
+  Therapist: 'doctor',
+  'Physio session': 'doctor',
+  'Eye exam': 'doctor',
   'Dinner with Lisa': 'other',
   'Laborday picnic': 'other',
 };
@@ -125,7 +141,7 @@ check('an hour long', offer.eventMinutes(event('x', at(3, 9), 60)) === 60);
 check('a length past a day is not kept', offer.eventMinutes(event('x', at(3, 9), 3000)) === null);
 check('local time as stored', offer.localDateTimeOf(at(3, 9, 5)) === '2026-11-03T09:05');
 
-for (const sentence of [full.title, full.body, kind.title, kind.body]) {
+for (const sentence of [full.title, full.body, kind.title, kind.body, lab.body, other.body]) {
   check(`no dash for punctuation: ${sentence}`, !/[–—]| -- /.test(sentence));
 }
 

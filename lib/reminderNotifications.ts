@@ -55,6 +55,7 @@ import {
   gardenMonthDayOf,
   gardenMonthTimeOf,
   getReminderPreferences,
+  isCalendarEveryEventEnabled,
   isNudgeUntilDoneEnabled,
   isReminderKindEnabled,
   REMINDER_KIND_LABELS,
@@ -149,6 +150,7 @@ import {
   calendarOfferText,
   eventMinutes,
   eventsToOffer,
+  leftToCalendar,
   localDateTimeOf,
   markOffered,
   readCalendarOfferState,
@@ -1300,8 +1302,9 @@ async function offerBackupIfDue(now: Date): Promise<void> {
 // Events on the phone's calendar that no appointment is linked to, offered
 // to Appointments (lib/calendarOffer.ts). Only with the calendar already
 // readable, since the reconcile never asks for a permission, and marked
-// offered before they are shown, like the two offers above.
-async function offerCalendarEventsIfDue(now: Date, enabled: boolean): Promise<void> {
+// offered before they are shown, like the two offers above. Health visits
+// only, unless Every event is on in Profile > Reminders.
+async function offerCalendarEventsIfDue(now: Date, enabled: boolean, everyEvent: boolean): Promise<void> {
   if (!enabled || Platform.OS === 'web') return;
   const state = readCalendarOfferState();
   if (state.stopWaiting) return;
@@ -1312,7 +1315,7 @@ async function offerCalendarEventsIfDue(now: Date, enabled: boolean): Promise<vo
   const linkedRows = await db.getAllAsync<{ id: string }>(
     'SELECT DISTINCT linked_device_calendar_event_id AS id FROM schedule_items WHERE linked_device_calendar_event_id IS NOT NULL',
   );
-  const offers = eventsToOffer(events, new Set(linkedRows.map((row) => row.id)), state, now);
+  const offers = eventsToOffer(events, new Set(linkedRows.map((row) => row.id)), state, now, everyEvent);
   if (offers.length === 0) return;
   writeCalendarOfferState(markOffered(state, offers, now));
   const hidden = reminderDetailHidden();
@@ -1329,6 +1332,25 @@ async function offerCalendarEventsIfDue(now: Date, enabled: boolean): Promise<vo
       },
       trigger: { channelId: ANDROID_DATED_CHANNEL_ID },
     }));
+  }
+}
+
+// The linked calendar events, among these reminders' appointments, that
+// carry an alarm of their own.
+async function readCalendarAlarms(candidates: readonly TravelCandidate[], from: Date, until: Date): Promise<Set<string>> {
+  const linked = new Set(
+    candidates
+      .filter((candidate) => candidate.itemType === 'appointment' && candidate.linkedCalendarEventId)
+      .map((candidate) => candidate.linkedCalendarEventId as string),
+  );
+  if (linked.size === 0 || Platform.OS === 'web') return new Set();
+  try {
+    if (!(await hasCalendarPermission())) return new Set();
+    const events = await listUpcomingDeviceEvents(from, new Date(until.getTime() + 24 * 60 * 60 * 1000));
+    return new Set(events.filter((event) => event.hasAlarm && linked.has(event.id)).map((event) => event.id));
+  } catch (error) {
+    console.warn('[reminderNotifications] the calendar alarms could not be read', error);
+    return new Set();
   }
 }
 
@@ -1763,7 +1785,7 @@ async function runSync(): Promise<ReminderSyncResult> {
   await offerVaultIfDue(now).catch((error) => console.warn('[reminderNotifications] the vault offer could not be checked', error));
   await offerBackupIfDue(now).catch((error) => console.warn('[reminderNotifications] the backup reminder could not be checked', error));
   await getReminderPreferences()
-    .then((prefs) => offerCalendarEventsIfDue(now, isReminderKindEnabled(prefs, 'calendarOffer')))
+    .then((prefs) => offerCalendarEventsIfDue(now, isReminderKindEnabled(prefs, 'calendarOffer'), isCalendarEveryEventEnabled(prefs)))
     .catch((error) => console.warn('[reminderNotifications] the calendar offers could not be checked', error));
   // Adds pressed while locked are written on the first reconcile after the
   // unlock. Not awaited, since it asks for a reconcile of its own.
@@ -1805,11 +1827,19 @@ async function runSync(): Promise<ReminderSyncResult> {
     }
   }
 
+  // An appointment linked to a calendar event that has an alarm of its own
+  // is reminded about by the calendar, so the hour-before reminder here
+  // would only say it twice (2026-11-02). Read only when there is such an
+  // appointment and the calendar can be read; a failed read keeps every
+  // reminder.
+  const calendarAlarms = await readCalendarAlarms(candidates, lookback, horizon);
+
   const first = new Map<string, PlannedNotification>();
   const followUps = new Map<string, PlannedNotification>();
 
   for (const candidate of candidates) {
     if (!isReminderKindEnabled(preferences, reminderKindFor(candidate))) continue;
+    if (candidate.itemType === 'appointment' && leftToCalendar(candidate.linkedCalendarEventId ?? null, calendarAlarms)) continue;
     const planned = buildPlanned(candidate, now);
     if (!planned) continue;
     if (reminderKindFor(candidate) === 'hydration' && skipHydrationReminder(planned.fireAt, now, waterReached)) continue;

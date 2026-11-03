@@ -18579,6 +18579,9 @@ export type ReminderCandidate = {
   // A7: 'home' when the med keeps home time while travelling; null for
   // everything else, which rings on the local clock.
   travelMode: string | null;
+  // The phone calendar event an appointment came from or was put on, so an
+  // event that reminds about itself is left to the calendar (2026-11-02).
+  linkedCalendarEventId: string | null;
 };
 
 export async function listReminderCandidates(fromLocalDateTime: string, toDate: string): Promise<ReminderCandidate[]> {
@@ -18598,7 +18601,8 @@ export async function listReminderCandidates(fromLocalDateTime: string, toDate: 
         CASE WHEN (SELECT ts.id FROM treatment_taper_steps ts WHERE ts.treatment_id = t.id AND substr(s.scheduled_for, 1, 10) BETWEEN ts.start_date AND ts.end_date LIMIT 1) IS NOT NULL THEN (SELECT COUNT(*) FROM treatment_taper_steps tc WHERE tc.treatment_id = t.id) END AS taperStepCount,
         t.units_per_day AS unitsPerDay, t.serving_unit_label AS servingUnitLabel,
         s.keep_reminding_minutes AS keepRemindingMinutes,
-        (SELECT tm.mode FROM treatment_time_mode tm WHERE tm.treatment_id = t.id) AS travelMode
+        (SELECT tm.mode FROM treatment_time_mode tm WHERE tm.treatment_id = t.id) AS travelMode,
+        s.linked_device_calendar_event_id AS linkedCalendarEventId
       FROM schedule_items s
       LEFT JOIN treatments t ON t.id = s.linked_treatment_id
       WHERE s.status = 'planned'

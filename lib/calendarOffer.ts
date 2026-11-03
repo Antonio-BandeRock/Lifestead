@@ -25,6 +25,17 @@
 //     so the file never holds what the event is called or where it is.
 //   - A repeating event shares one id across its days, so it is asked about
 //     once, and adding it adds the day that was offered.
+//   - Only events whose name looks like a health visit are offered (direct
+//     request, 2026-11-02, after asking what adding a dinner or a haircut
+//     brings): a lab draw, a doctor, a dentist, a therapist, a nutritionist,
+//     a trainer. Those are the ones Appointments does something with that
+//     the calendar cannot, the biotin caution before a lab draw, Before an
+//     Appointment, Since Your Last Visit and the doctor report. "Every
+//     event, not only health visits" in Profile > Reminders offers the rest.
+//   - An appointment linked to a calendar event that has its own alarm gets
+//     no hour-before reminder from here (leftToCalendar), since the calendar
+//     already says it. One with no alarm, such as one this app put on the
+//     calendar, keeps it.
 //
 // Pure apart from the file at the bottom, which scripts/test_calendar_offer.js
 // stubs.
@@ -71,6 +82,7 @@ export function eventsToOffer<T extends CalendarEventLike>(
   linkedIds: ReadonlySet<string>,
   state: CalendarOfferState,
   now: Date,
+  everyEvent = false,
 ): T[] {
   if (state.stopWaiting) return [];
   const hour = now.getHours();
@@ -86,6 +98,7 @@ export function eventsToOffer<T extends CalendarEventLike>(
       const starts = Date.parse(event.startDate);
       if (!Number.isFinite(starts) || starts <= at || starts > until) return false;
       if (linkedIds.has(event.id) || state.offered[event.id] || seen.has(event.id)) return false;
+      if (!everyEvent && !looksLikeHealthVisit(event.title)) return false;
       seen.add(event.id);
       return true;
     })
@@ -143,15 +156,21 @@ export function calendarOfferText(event: CalendarEventLike, now: Date, kindOnly:
   if (kindOnly) {
     return {
       title: t('An event on your calendar'),
-      body: t('Your calendar has something {when}. Add it to Appointments so it is reminded about with everything else?', { when }),
+      body: t('Your calendar has something {when}. Add it to Appointments to keep it with the rest of your day?', { when }),
     };
   }
+  // The body says what Appointments does with it that the calendar cannot,
+  // since a second reminder is not the reason (2026-11-02).
+  const kind = appointmentTypeFromTitle(event.title);
+  const values = { title: event.title, when };
   return {
     title: t('Add {title} to Appointments?', { title: event.title }),
-    body: t('Your calendar has {title} {when}. Add to Appointments puts it with the rest of your day, linked to the calendar.', {
-      title: event.title,
-      when,
-    }),
+    body:
+      kind === 'lab_draw'
+        ? t('Your calendar has {title} {when}. In Appointments it is checked against your supplements for anything that can change the results.', values)
+        : kind === 'other'
+          ? t('Your calendar has {title} {when}. Add to Appointments puts it with the rest of your day, linked to the calendar.', values)
+          : t('Your calendar has {title} {when}. In Appointments, what has changed since your last visit is gathered ready to bring.', values),
   };
 }
 
@@ -160,10 +179,26 @@ export function appointmentTypeFromTitle(title: string): string {
   if (/\b(?:labs?|lab work|bloodwork|blood work|blood tests?|blood draw)\b/i.test(title)) return 'lab_draw';
   if (/\b(?:nutritionist|dietitian|dietician)\b/i.test(title)) return 'nutritionist';
   if (/\b(?:trainer|personal training|training session)\b/i.test(title)) return 'trainer';
-  if (/\b(?:doctor|dr\.?|physician|gp|dentist|surgeon|specialist|check-?up|clinic|[a-z]+ologist|nurse practitioner)(?![a-z])/i.test(title)) {
+  if (
+    /\b(?:doctor|dr\.?|physician|gp|dentist|dental|orthodontist|surgeon|surgery|specialist|check-?up|physical exam|clinic|hospital|urgent care|telehealth|[a-z]+ologist|nurse practitioner|therapist|therapy|physio|physiotherapy|chiropractor|optometrist|optician|eye exam|counsell?or|counsell?ing|psychiatrist|podiatrist|infusion|vaccine|vaccination|mammogram|colonoscopy|ultrasound|x-?ray|mri|ct scan)(?![a-z])/i.test(title)
+  ) {
     return 'doctor';
   }
   return 'other';
+}
+
+/** Whether an event's name reads as a health visit, the kind offered by default. */
+export function looksLikeHealthVisit(title: string): boolean {
+  return appointmentTypeFromTitle(title) !== 'other';
+}
+
+/**
+ * Whether an appointment's hour-before reminder is left to the calendar: it
+ * is linked to a calendar event that carries an alarm of its own. An
+ * appointment with no link, or linked to an event with no alarm, keeps it.
+ */
+export function leftToCalendar(linkedEventId: string | null, eventsWithAlarm: ReadonlySet<string>): boolean {
+  return linkedEventId != null && eventsWithAlarm.has(linkedEventId);
 }
 
 /** The event's length in minutes, when it is a sensible one. */

@@ -183,9 +183,9 @@ export const REMINDER_KIND_LABELS: Record<ReminderKindKey, string> = {
 
 export const REMINDER_KIND_CAPTIONS: Record<ReminderKindKey, string> = {
   dose: 'Each dose time you set in Schedules > Meds, at the time it is due.',
-  appointment: 'About an hour before an appointment starts.',
+  appointment: 'About an hour before an appointment starts. One brought in from a calendar event that already reminds you is left to the calendar.',
   calendarOffer:
-    'An event in the next two weeks on the calendar Appointments can read, asking whether to add it. Three a day at most, between 9 in the morning and 9 at night, and each event is asked about once. Nothing comes until you have let Appointments read your calendar.',
+    'An event in the next two weeks on the calendar Appointments can read, asking whether to add it. Only events whose names look like a health visit (a doctor, a lab draw, a dentist, a therapist) unless you pick Every event below. Three a day at most, between 9 in the morning and 9 at night, and each event is asked about once. Nothing comes until you have let Appointments read your calendar.',
   meal: 'Each meal you have scheduled, at the time you planned it for.',
   hydration:
     'Every drink on your Hydration schedule. A day the Meal Plan has filled a water gap for can hold six of these, so this one starts off.',
@@ -322,6 +322,11 @@ const DEFAULT_REMINDER_KIND_ENABLED: Record<ReminderKindKey, boolean> = {
 // app gets its notifications switched off completely.
 const DEFAULT_NUDGE_UNTIL_DONE = false;
 
+// Calendar offers ask about health visits only (2026-11-02): Appointments
+// does something with a lab draw or a doctor that the calendar cannot, and
+// next to nothing with a dinner. Every event is the person's choice.
+const DEFAULT_CALENDAR_EVERY_EVENT = false;
+
 // When the daily check-in asks, as 'HH:mm'. Evening, so the question is
 // about a day that has mostly happened.
 export const DEFAULT_CHECKIN_TIME = '20:00';
@@ -350,6 +355,9 @@ export type ReminderPreferences = {
   // and for which kinds honestly cannot do it because nothing in the app
   // records that they were finished.
   nudgeUntilDone?: boolean;
+  // Whether calendar offers ask about every event rather than only the ones
+  // whose names look like a health visit. Undefined means the default above.
+  calendarEveryEvent?: boolean;
   // Quiet hours (Phase A, 2026-09-24): null or missing means off. See
   // lib/quietHours.ts for what they hold back and what they never do.
   quietHours?: QuietHours | null;
@@ -441,6 +449,10 @@ export function isNudgeUntilDoneEnabled(prefs: ReminderPreferences): boolean {
   return prefs.nudgeUntilDone ?? DEFAULT_NUDGE_UNTIL_DONE;
 }
 
+export function isCalendarEveryEventEnabled(prefs: ReminderPreferences): boolean {
+  return prefs.calendarEveryEvent ?? DEFAULT_CALENDAR_EVERY_EVENT;
+}
+
 // A synchronous answer for a first render, before the load below resolves.
 // Returns the cached value once there is one, otherwise the defaults, which
 // is what the reconcile would have done anyway.
@@ -466,6 +478,7 @@ export async function getReminderPreferences(): Promise<ReminderPreferences> {
         loaded = {
           enabledKinds: { ...(parsed.enabledKinds ?? {}) },
           nudgeUntilDone: typeof parsed.nudgeUntilDone === 'boolean' ? parsed.nudgeUntilDone : undefined,
+          calendarEveryEvent: typeof parsed.calendarEveryEvent === 'boolean' ? parsed.calendarEveryEvent : undefined,
           quietHours: isValidQuietHours(parsed.quietHours) ? parsed.quietHours : null,
           checkinTime: isValidTime(parsed.checkinTime) ? parsed.checkinTime : undefined,
           morningTime: isValidTime(parsed.morningTime) ? parsed.morningTime : undefined,
@@ -509,6 +522,12 @@ export async function setReminderKindEnabled(
 export async function setNudgeUntilDone(enabled: boolean): Promise<ReminderPreferences> {
   const current = await getReminderPreferences();
   return persist({ ...current, nudgeUntilDone: enabled });
+}
+
+// Same contract again.
+export async function setCalendarEveryEvent(enabled: boolean): Promise<ReminderPreferences> {
+  const current = await getReminderPreferences();
+  return persist({ ...current, calendarEveryEvent: enabled });
 }
 
 // Null switches quiet hours off. Reconciled by the caller, like the rest.

@@ -41,6 +41,13 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.79.14',
+    date: '2026-11-02',
+    changes: [
+      "Calendar offers now ask only about events whose names look like a health visit (a doctor, a lab draw, a dentist, a therapist), since that is where Appointments adds something the calendar cannot: the supplement check before a lab draw and what has changed since your last visit. Pick Every event in Profile > Reminders to be asked about everything. And an appointment brought in from a calendar event that already reminds you no longer gets a second one from the app an hour before.",
+    ],
+  },
+  {
     version: '1.0.79.13',
     date: '2026-11-02',
     changes: [
