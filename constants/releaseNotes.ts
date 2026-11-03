@@ -41,6 +41,13 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.79.8',
+    date: '2026-11-02',
+    changes: [
+      'In setup, tapping Year, Month or Day for your birth date now opens the list. Every list in setup opened behind the setup screen, where it could not be seen or chosen from.',
+    ],
+  },
+  {
     version: '1.0.79.7',
     date: '2026-11-02',
     changes: [

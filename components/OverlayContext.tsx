@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from 'react';
+import { StyleSheet, View } from 'react-native';
 
 // A stable, unique per-instance identity -- every real caller of useOverlay()
 // creates one via `useRef({})` once, on mount, and passes it to every
@@ -92,7 +93,18 @@ export function useOverlay(): OverlayControls {
   return context;
 }
 
+// Raised over setup's cover (zIndex 999) and the tester gate (900), and
+// under AppKeyboard (2000). 2026-11-02, reported: Year, Month and Day in
+// setup opened nothing, because coming later in the tree does not put a
+// sibling over one with a zIndex, so every list drew behind setup.
 export function OverlayRoot() {
   const content = useContext(OverlayContentContext);
-  return <>{content}</>;
+  if (!content) return null;
+  return (
+    <View style={overlayLayer} pointerEvents="box-none">
+      {content}
+    </View>
+  );
 }
+
+const overlayLayer = { ...StyleSheet.absoluteFillObject, zIndex: 1500, elevation: 1500 };
