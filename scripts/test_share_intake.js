@@ -91,7 +91,7 @@ ok('Food opens Import a Recipe from the param', food.includes("openFoodLens === 
 const appJson = JSON.parse(fs.readFileSync(path.join(root, 'app.json'), 'utf8'));
 const plugin = appJson.expo.plugins.find((p) => Array.isArray(p) && p[0] === 'expo-share-intent');
 const filters = plugin ? plugin[1].androidIntentFilters : [];
-ok('Share sheet offers text and images only', JSON.stringify(filters) === JSON.stringify(['text/*', 'image/*']), filters);
+ok('Share sheet offers Lifestead for every kind of file', JSON.stringify(filters) === JSON.stringify(['*/*']), filters);
 
 if (failures) {
   console.log(`${failures} failure(s).`);

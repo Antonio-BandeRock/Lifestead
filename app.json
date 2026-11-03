@@ -298,8 +298,7 @@
         "expo-share-intent",
         {
           "androidIntentFilters": [
-            "text/*",
-            "image/*"
+            "*/*"
           ],
           "disableIOS": true
         }
