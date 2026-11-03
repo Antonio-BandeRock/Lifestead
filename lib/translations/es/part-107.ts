@@ -133,4 +133,13 @@ export const PART: Readonly<Record<string, string>> = {
  "Samsung account": "cuenta Samsung",
  "another account": "otra cuenta",
  "Anyone in the phone's contacts can be picked, whichever account they were saved in. Or type them in below.": "Puedes elegir a cualquiera de los contactos del teléfono, sin importar en qué cuenta esté guardado. O escríbelo abajo.",
+ "Update {name}": "Actualizar a {name}",
+ "{name} is already on Who to call": "{name} ya está en A quién llamar",
+ "Picking them again would make a second copy. Their record opens instead, with the number and where they came from brought up to date.": "Elegirlo otra vez haría una segunda copia. En su lugar se abre su registro, con el número y de dónde vino ya actualizados.",
+ "Someone named {name} is already on Who to call": "Ya hay alguien llamado {name} en A quién llamar",
+ "If this is the same person, update the one already there so everything about them stays together.": "Si es la misma persona, actualiza el que ya está para que todo lo suyo quede junto.",
+ "Add as Someone Else": "Agregar como otra persona",
+ "Who to call keeps one record per person. Picking someone from the phone's contacts who is already on the list opens them, with the number and where they came from brought up to date, instead of adding a second copy. Picking or typing a name that is already there asks whether it is the same person first, since two people can share a name.": "A quién llamar guarda un solo registro por persona. Si eliges de los contactos del teléfono a alguien que ya está en la lista, se abre su registro con el número y de dónde vino ya actualizados, en lugar de agregar una segunda copia. Si eliges o escribes un nombre que ya está, primero te pregunta si es la misma persona, porque dos personas pueden llamarse igual.",
+ "On a computer, an iCloud Drive or Google Drive folder kept on the disk can now be the shared folder, beside OneDrive. An Android phone cannot reach iCloud, so an iCloud folder is for two computers.": "En una computadora, una carpeta de iCloud Drive o Google Drive guardada en el disco ya puede ser la carpeta compartida, además de OneDrive. Un teléfono Android no puede llegar a iCloud, así que una carpeta de iCloud sirve entre dos computadoras.",
+ "Once the next phone update is installed, the notification for a routine you are walking through shows a running clock: counting down to the end of a step that has a length, and counting up from when the step came up for one that does not.": "Cuando se instale la próxima actualización del teléfono, la notificación de una rutina que vas siguiendo muestra un reloj en marcha: cuenta hacia atrás hasta el final de un paso que tiene duración, y cuenta hacia adelante desde que empezó un paso que no la tiene.",
 };

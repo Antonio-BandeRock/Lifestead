@@ -51,7 +51,7 @@ const sourceMod = { exports: {} };
 new Function('module', 'exports', 'require', sourceOut.outputText)(sourceMod, sourceMod.exports, (name) => {
   throw new Error(`lib/contactSource.ts imported ${name}`);
 });
-const { sourceFromAccountTypes, contactSourceNames, accountKey } = sourceMod.exports;
+const { sourceFromAccountTypes, contactSourceNames, accountKey, findSamePerson } = sourceMod.exports;
 ok('no module says phone contacts', sourceFromAccountTypes(null) === 'contacts');
 ok('empty read says phone contacts', sourceFromAccountTypes([]) === 'contacts');
 ok('Google', accountKey('com.google') === 'google');
@@ -97,6 +97,24 @@ ok('My Meds picks pharmacy and prescriber', meds.includes("pickButton('pharmacy'
 ok('My Meds texts', meds.includes('textNumber('));
 const reach = read('lib/phoneReach.ts');
 ok('a text is opened, never sent by the app', reach.includes('sendSMSAsync') && !/sendSMSAsync[^\n]*\bauto/i.test(reach));
+
+// --- one person, one record ---------------------------------------------------
+const people = [
+  { id: 'a', name: 'María López', contactKey: 'key-1' },
+  { id: 'b', name: 'Sam Reed', contactKey: null },
+];
+const byKey = findSamePerson(people, { contactKey: 'key-1', name: 'Mom' }, null);
+ok('the same phone contact is certain', byKey && byKey.person.id === 'a' && byKey.certain === true);
+const byName = findSamePerson(people, { contactKey: null, name: '  maria   lopez ' }, null);
+ok('the same name, accents and case aside, is a question', byName && byName.person.id === 'a' && byName.certain === false);
+ok('the record being edited is not its own copy', findSamePerson(people, { contactKey: 'key-1', name: 'María López' }, 'a') === null);
+ok('someone new is nobody', findSamePerson(people, { contactKey: 'key-9', name: 'Ana' }, null) === null);
+ok('a blank name matches nobody', findSamePerson(people, { contactKey: null, name: '  ' }, null) === null);
+const screen = read('components/EmergencySection.tsx');
+ok('Who to call asks before a second copy', screen.includes('findSamePerson(contacts') && screen.includes("'Add as Someone Else'"));
+ok('the pick carries the phone key', src.includes('lookupKey'));
+const dbSrc = read('lib/emergencyDb.ts');
+ok('the key is kept unless a new one comes', dbSrc.includes('contact_key = COALESCE(?, contact_key)'));
 
 // --- words ---------------------------------------------------------------------
 for (const [file, text] of [['lib/contactPick.ts', src], ['lib/phoneReach.ts', reach], ['lib/contactSource.ts', sourceSrc]]) {

@@ -55,7 +55,7 @@ import { confirmItsYou } from '../lib/freshAuth';
 import { dialable } from '../lib/medSupply';
 import { copyLine, textNumber } from '../lib/phoneReach';
 import { CAN_PICK_CONTACTS, pickContact } from '../lib/contactPick';
-import { contactSourceNames, TYPED_SOURCE } from '../lib/contactSource';
+import { contactSourceNames, findSamePerson, TYPED_SOURCE } from '../lib/contactSource';
 import { t } from '../lib/i18n';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
@@ -118,10 +118,24 @@ type ContactForm = {
   notes: string;
   // Filled in by the app from the pick, never typed (lib/contactSource.ts).
   source: string | null;
+  contactKey: string | null;
 };
 
 function blankContact(): ContactForm {
-  return { id: null, name: '', relationship: '', phone: '', primary: false, notes: '', source: null };
+  return { id: null, name: '', relationship: '', phone: '', primary: false, notes: '', source: null, contactKey: null };
+}
+
+function formFor(contact: EmergencyContact): ContactForm {
+  return {
+    id: contact.id,
+    name: contact.name,
+    relationship: contact.relationship ?? '',
+    phone: contact.phone,
+    primary: contact.primary,
+    notes: contact.notes ?? '',
+    source: contact.source,
+    contactKey: contact.contactKey,
+  };
 }
 
 // "Came from: Google, WhatsApp", or null for a row saved before the app
@@ -279,8 +293,51 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
     if (outcome.kind === 'problem') showInfoAlert('Could not open contacts', outcome.reason);
     if (outcome.kind !== 'picked') return;
     const picked = outcome.contact;
-    setContactForm((form) =>
-      form ? { ...form, name: picked.name || form.name, phone: picked.phone || form.phone, source: picked.source } : form,
+    const fill = (form: ContactForm): ContactForm => ({
+      ...form,
+      name: picked.name || form.name,
+      phone: picked.phone || form.phone,
+      source: picked.source,
+      contactKey: picked.contactKey,
+    });
+    // One person, one record: a pick of someone already on Who to call
+    // opens them rather than starting a second copy (lib/contactSource.ts).
+    const same = findSamePerson(contacts, { contactKey: picked.contactKey, name: picked.name }, contactForm?.id ?? null);
+    if (!same) {
+      setContactForm((form) => (form ? fill(form) : form));
+      return;
+    }
+    const kept = same.person;
+    const update = {
+      label: t('Update {name}', { name: kept.name }),
+      onPress: () => {
+        setConfirm(null);
+        setContactForm(fill(formFor(kept)));
+      },
+    };
+    const cancel = { label: 'Cancel', onPress: () => setConfirm(null) };
+    setConfirm(
+      same.certain
+        ? {
+            title: t('{name} is already on Who to call', { name: kept.name }),
+            message: t('Picking them again would make a second copy. Their record opens instead, with the number and where they came from brought up to date.'),
+            actions: [update, cancel],
+          }
+        : {
+            title: t('Someone named {name} is already on Who to call', { name: kept.name }),
+            message: t('If this is the same person, update the one already there so everything about them stays together.'),
+            actions: [
+              update,
+              {
+                label: 'Add as Someone Else',
+                onPress: () => {
+                  setConfirm(null);
+                  setContactForm((form) => (form ? fill(form) : form));
+                },
+              },
+              cancel,
+            ],
+          },
     );
   }
 
@@ -345,6 +402,49 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
       showInfoAlert('Almost there', 'A number. A name with no number is not someone anybody can reach.');
       return;
     }
+    // A new person typed in under a name already kept: ask before making
+    // a second record, since two people can share a name.
+    if (!contactForm.id && !contactForm.contactKey) {
+      const same = findSamePerson(contacts, { contactKey: null, name: contactForm.name }, null);
+      if (same) {
+        const kept = same.person;
+        setConfirm({
+          title: t('Someone named {name} is already on Who to call', { name: kept.name }),
+          message: t('If this is the same person, update the one already there so everything about them stays together.'),
+          actions: [
+            {
+              label: t('Update {name}', { name: kept.name }),
+              onPress: () => {
+                setConfirm(null);
+                // What was typed wins; anything left blank keeps what they had.
+                void writeContact({
+                  ...contactForm,
+                  id: kept.id,
+                  relationship: contactForm.relationship.trim() || kept.relationship || '',
+                  notes: contactForm.notes.trim() || kept.notes || '',
+                  primary: contactForm.primary || kept.primary,
+                  source: null,
+                });
+              },
+            },
+            {
+              label: 'Add as Someone Else',
+              onPress: () => {
+                setConfirm(null);
+                void writeContact(contactForm);
+              },
+            },
+            { label: 'Cancel', onPress: () => setConfirm(null) },
+          ],
+        });
+        return;
+      }
+    }
+    await writeContact(contactForm);
+  }
+
+  async function writeContact(form: ContactForm) {
+    const contactForm = form;
     await upsertEmergencyContact({
       id: contactForm.id ?? undefined,
       name: contactForm.name,
@@ -354,6 +454,7 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
       notes: contactForm.notes,
       // A new person nobody picked was typed in; an edit keeps what it had.
       source: contactForm.source ?? (contactForm.id ? undefined : TYPED_SOURCE),
+      contactKey: contactForm.contactKey ?? undefined,
     });
     setContactForm(null);
     load();
@@ -532,15 +633,7 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() =>
-                      setContactForm({
-                        id: contact.id,
-                        name: contact.name,
-                        relationship: contact.relationship ?? '',
-                        phone: contact.phone,
-                        primary: contact.primary,
-                        notes: contact.notes ?? '',
-                        source: contact.source,
-                      })
+                      setContactForm(formFor(contact))
                     }
                   >
                     <Text style={styles.actionText}>Edit</Text>

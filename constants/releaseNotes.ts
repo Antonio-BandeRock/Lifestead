@@ -41,6 +41,15 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.79.12',
+    date: '2026-11-02',
+    changes: [
+      "Who to call keeps one record per person. Picking someone from the phone's contacts who is already on the list opens them, with the number and where they came from brought up to date, instead of adding a second copy. Picking or typing a name that is already there asks whether it is the same person first, since two people can share a name.",
+      "On a computer, an iCloud Drive or Google Drive folder kept on the disk can now be the shared folder, beside OneDrive. An Android phone cannot reach iCloud, so an iCloud folder is for two computers.",
+      "Once the next phone update is installed, the notification for a routine you are walking through shows a running clock: counting down to the end of a step that has a length, and counting up from when the step came up for one that does not.",
+    ],
+  },
+  {
     version: '1.0.79.11',
     date: '2026-11-02',
     changes: [

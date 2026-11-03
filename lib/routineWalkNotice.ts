@@ -3,11 +3,15 @@
 // which step they are on from the notification shade or the lock screen
 // without opening the app.
 //
-// It says the step and the time that step came up, not a ticking clock. A
-// running countdown or stopwatch in a notification needs Android's
-// chronometer, which expo-notifications does not expose, so that part
-// waits on a native rebuild. What is here updates each time the step
-// changes and is taken down when the walk finishes or the screen closes.
+// It says the step and the time that step came up, and since 1.0.79.12 it
+// carries a running clock too: a step with a length counts down to when it
+// should be done, and a step without one counts up from when it came up.
+// Android draws and ticks that clock itself (the chronometer, through the
+// patched notification builder in patches/expo-notifications+*.patch, so it
+// needs the rebuild); a build without it ignores the two data fields and
+// shows the words alone, which is why the words still say the time. It
+// updates each time the step changes and is taken down when the walk
+// finishes or the screen closes.
 //
 // Android only, and never on the desktop, the same as the emergency lines
 // in lib/emergencyLockScreen.ts, whose pattern this follows. It never asks
@@ -26,7 +30,13 @@ function supported(): boolean {
   return Platform.OS === 'android' && !isDesktopApp();
 }
 
-export type RoutineWalkNotice = { title: string; body: string };
+export type RoutineWalkNotice = {
+  title: string;
+  body: string;
+  /** Epoch milliseconds the clock counts from, or down to when countDown. */
+  clockAt: number;
+  countDown: boolean;
+};
 
 function clock(at: Date): string {
   const hours = at.getHours();
@@ -52,8 +62,11 @@ export function routineWalkNotice(input: {
       ? t(', about 1 minute')
       : t(', about {n} minutes', { n: input.stepMinutes })
     : '';
+  const started = input.stepStartedAt.getTime();
   return {
     title: t('{title}: step {n} of {m}', { title: input.routineName, n: input.position + 1, m: input.total }),
+    clockAt: input.stepMinutes ? started + input.stepMinutes * 60_000 : started,
+    countDown: Boolean(input.stepMinutes),
     body: t('{stepText}. Up since {clock}{length}.', { stepText: input.stepText, clock: t(clock(input.stepStartedAt)), length }),
   };
 }
@@ -74,7 +87,14 @@ export async function showRoutineWalkNotice(notice: RoutineWalkNotice): Promise<
     });
     await Notifications.scheduleNotificationAsync(inAppLanguage({
       identifier: NOTIFICATION_ID,
-      content: { title: notice.title, body: notice.body, sticky: true, autoDismiss: false, sound: false },
+      content: {
+        title: notice.title,
+        body: notice.body,
+        sticky: true,
+        autoDismiss: false,
+        sound: false,
+        data: { chronometerAt: notice.clockAt, chronometerCountDown: notice.countDown },
+      },
       trigger: { channelId: CHANNEL_ID },
     }));
   } catch (error) {

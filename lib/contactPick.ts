@@ -18,7 +18,13 @@ import { isDesktopApp } from './desktop/bridge';
 import { sourceFromAccountTypes } from './contactSource';
 import ContactAccounts from './contactAccounts';
 
-export type PickedContact = { name: string; phone: string; source: string };
+export type PickedContact = {
+  name: string;
+  phone: string;
+  source: string;
+  /** Android's lookup key for the joined contact, so a second pick of the same person is known (findSamePerson). */
+  contactKey: string | null;
+};
 export type PickOutcome =
   | { kind: 'picked'; contact: PickedContact }
   | { kind: 'cancelled' }
@@ -67,7 +73,19 @@ export async function pickContact(): Promise<PickOutcome> {
     const contact = await Contacts.presentContactPickerAsync();
     if (!contact) return { kind: 'cancelled' };
     const name = (contact.name || [contact.firstName, contact.lastName].filter(Boolean).join(' ')).trim();
-    return { kind: 'picked', contact: { name, phone: choosePhone(contact.phoneNumbers), source: await pickedSource(contact.id) } };
+    // expo-contacts returns lookupKey on Android without listing it in its
+    // types. It names the joined contact and survives edits, where the id
+    // can change when Android rejoins contacts, so the id is the fallback.
+    const lookupKey = (contact as { lookupKey?: string | null }).lookupKey;
+    return {
+      kind: 'picked',
+      contact: {
+        name,
+        phone: choosePhone(contact.phoneNumbers),
+        source: await pickedSource(contact.id),
+        contactKey: lookupKey || contact.id || null,
+      },
+    };
   } catch (error) {
     return { kind: 'problem', reason: error instanceof Error ? error.message : String(error) };
   }

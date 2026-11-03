@@ -11027,6 +11027,12 @@ async function runDatabaseInitialization() {
       if (!columns.some((existing) => existing.name === 'source')) {
         await db.execAsync('ALTER TABLE emergency_contacts ADD COLUMN source TEXT;');
       }
+      // The phone contact a person was picked from (Android's lookup key),
+      // so picking them again finds the record already kept rather than
+      // making a second one (1.0.79.12). NULL when typed in.
+      if (!columns.some((existing) => existing.name === 'contact_key')) {
+        await db.execAsync('ALTER TABLE emergency_contacts ADD COLUMN contact_key TEXT;');
+      }
     }
     // The person's symptom names, loaded once so every label lookup finds
     // them (D3). lib/customCheckinTagsDb.ts reloads after each change.

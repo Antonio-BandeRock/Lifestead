@@ -333,6 +333,18 @@ check('nothing filled in says nothing', describeFilledIn({ sleepMinutes: null, s
   });
   check('notice title', notice.title, 'Morning: step 2 of 6');
   check('notice body', notice.body, 'Take the levothyroxine with water. Up since 7:05 am, about 5 minutes.');
+  check('a timed step counts down to its end', notice.clockAt, new Date(2026, 8, 26, 7, 10).getTime());
+  check('a timed step is a countdown', notice.countDown, true);
+  const open = routineWalkNotice({
+    routineName: 'Morning',
+    position: 0,
+    total: 6,
+    stepText: 'Make the bed',
+    stepMinutes: null,
+    stepStartedAt: new Date(2026, 8, 26, 7, 0),
+  });
+  check('an untimed step counts up from when it came up', open.clockAt, new Date(2026, 8, 26, 7, 0).getTime());
+  check('an untimed step is a stopwatch', open.countDown, false);
 }
 
 // No sentence this module writes may use a dash in place of punctuation, or

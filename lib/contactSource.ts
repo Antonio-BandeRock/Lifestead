@@ -89,3 +89,50 @@ export function contactSourceNames(source: string | null | undefined): string[] 
   const keys = source.split(',').map((part) => part.trim()).filter((part): part is ContactSourceKey => part in NAMES);
   return ORDER.filter((key) => keys.includes(key)).map((key) => NAMES[key]);
 }
+
+// --- One person, one record ---------------------------------------------------
+//
+// Direct instruction, 2026-11-02: the app has to know two entries are the
+// same person, so one name does not end up as several records with the
+// information split between them. Android already joins the copies a
+// person has in Google, WhatsApp and Signal into one contact, and its lookup
+// key (contactKey) names that joined contact and survives edits to it. So a
+// person picked twice is the same person for certain. A name typed or picked
+// that matches a name already kept is only maybe the same person (two Marias
+// are two people), and the screen asks.
+
+export type SamePersonProbe = { contactKey: string | null; name: string };
+export type KeptPerson = { id: string; name: string; contactKey: string | null };
+export type SamePerson<T extends KeptPerson> = { person: T; certain: boolean };
+
+/** How names are compared: case, spacing and accents set aside. */
+export function sameNameKey(name: string): string {
+  return name
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * The record already kept for this person, if there is one, leaving out the
+ * record being edited. The same phone contact is certain; the same name is
+ * a question, and only when the kept record came from a different phone
+ * contact can it not be the same person through the key.
+ */
+export function findSamePerson<T extends KeptPerson>(
+  people: readonly T[],
+  probe: SamePersonProbe,
+  editingId: string | null,
+): SamePerson<T> | null {
+  const others = people.filter((person) => person.id !== editingId);
+  if (probe.contactKey) {
+    const byKey = others.find((person) => person.contactKey === probe.contactKey);
+    if (byKey) return { person: byKey, certain: true };
+  }
+  const name = sameNameKey(probe.name);
+  if (!name) return null;
+  const byName = others.find((person) => sameNameKey(person.name) === name);
+  return byName ? { person: byName, certain: false } : null;
+}
