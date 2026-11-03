@@ -53,6 +53,7 @@ import { explainNotYet } from '../lib/notYet';
 import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { useWalkMark } from './WalkMark';
+import { AttachedFiles } from './AttachedFiles';
 import { AppTextInput } from './AppTextInput';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
@@ -547,6 +548,12 @@ export function ProjectsSection({ tabColor, scope }: Props) {
                 </TouchableOpacity>
               </View>
             ) : null}
+            <AttachedFiles
+              ownerKind="project"
+              ownerId={project.id}
+              tabColor={tabColor}
+              openerRef={first ? walkMark.ref('project.files') : undefined}
+            />
             {pausing?.id === project.id ? (
               <View style={[styles.nestedForm, { borderLeftColor: tabColor }]}>
                 <AppTextInput

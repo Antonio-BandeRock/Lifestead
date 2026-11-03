@@ -7,6 +7,7 @@ import { NotesInput } from './NotesInput';
 import { useInfoAlert } from './InfoAlert';
 import { PopoverSelect } from './PopoverSelect';
 import { TabBand, useTabBandStyles } from './TabBand';
+import { AttachedFiles } from './AttachedFiles';
 import { TodoSection } from './TodoSection';
 import { useBandFolds } from '../hooks/useBandFolds';
 import { colors } from '../constants/colors';
@@ -532,6 +533,12 @@ export function WorkSection({ tabColor }: Props) {
                     <Text style={styles.actionTextRemove}>Remove</Text>
                   </TouchableOpacity>
                 </View>
+                <AttachedFiles
+                  ownerKind="work_benefit"
+                  ownerId={benefit.id}
+                  tabColor={tabColor}
+                  openerRef={index === 0 ? walkMark.ref('work.files') : undefined}
+                />
               </TabBand>
               </View>
             );

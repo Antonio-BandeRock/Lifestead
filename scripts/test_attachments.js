@@ -113,6 +113,24 @@ expect(
   ['a', 'b'],
 );
 
+// Each place keeps only the kinds of file that belong with it.
+expect('family pdf', a.attachmentFamily('application/pdf'), 'pdf');
+expect('family image', a.attachmentFamily('image/heic'), 'image');
+expect('family video', a.attachmentFamily('video/mp4'), 'video');
+expect('family unknown', a.attachmentFamily('application/x-thing'), 'other');
+expect('capture takes anything', a.attachmentSuits('capture_note', 'application/x-thing'), true);
+expect('a lab report takes a pdf', a.attachmentSuits('lab_draw', 'application/pdf'), true);
+expect('a lab report turns away a video', a.attachmentSuits('lab_draw', 'video/mp4'), false);
+expect('upkeep takes a how-to video', a.attachmentSuits('upkeep', 'video/mp4'), true);
+expect('an insurance plan turns away a song', a.attachmentSuits('insurance_plan', 'audio/mpeg'), false);
+expect('a fitting file has no problem', a.attachmentTypeProblem('appointment', { mimeType: 'application/pdf', fileName: 'x.pdf' }), null);
+const turned = a.attachmentTypeProblem('appointment', { mimeType: 'video/mp4', fileName: 'x.mp4' });
+expect('a turned-away file names what the place takes', turned !== null && turned.includes(a.ATTACHMENT_PLACES.appointment.takes), true);
+for (const [kind, place] of Object.entries(a.ATTACHMENT_PLACES)) {
+  expect('removal names the file: ' + kind, place.removal.includes('{name}'), true);
+  expect('takes is a sentence: ' + kind, /.$/.test(place.takes), true);
+}
+
 // No dash used as punctuation in anything a person reads.
 const words = [
   a.ATTACHMENT_ON_THE_WAY,
@@ -120,6 +138,8 @@ const words = [
   a.attachmentRemovalSentence('Lab.pdf'),
   a.attachmentProblem(0),
   a.attachmentProblem(a.ATTACHMENT_MAX_BYTES + 1),
+  ...Object.values(a.ATTACHMENT_PLACES).flatMap((p) => [p.takes, p.removal]),
+  turned,
 ];
 for (const line of words) expect('no dash in: ' + line, /[–—]| -- /.test(line), false);
 

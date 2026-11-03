@@ -48,6 +48,7 @@ import {
 import { explainNotYet } from '../lib/notYet';
 import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { useWalkMark } from './WalkMark';
+import { AttachedFiles } from './AttachedFiles';
 import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
 import { ThumbRow } from './ThumbRow';
@@ -440,6 +441,12 @@ export function MyInterestsSection({ tabColor }: Props) {
             {note ? <Text style={styles.bodyText}>{note}</Text> : null}
             {interest.about ? <Text style={styles.captionText}>{interest.about}</Text> : null}
             {!interest.retiredAt ? renderStagePills(interest.stages, (stage) => handleStage(interest, stage), first) : null}
+            <AttachedFiles
+              ownerKind="interest"
+              ownerId={interest.id}
+              tabColor={tabColor}
+              openerRef={first ? walkMark.ref('interest.files') : undefined}
+            />
             {leftOff?.id === interest.id ? (
               <View style={[styles.nestedForm, { borderLeftColor: tabColor }]}>
                 <AppTextInput

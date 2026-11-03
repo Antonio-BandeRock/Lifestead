@@ -24,7 +24,190 @@
 // result or an insurance letter as a recipe, so its copy in the folder is
 // sealed with the sync password the way a photo is.
 
-export type AttachmentOwnerKind = 'capture_note';
+// WHICH RECORDS TAKE FILES (1.0.80.4). Eighteen kinds, each named the way
+// the media table names the same owner where it already has photos, so a
+// record's photos and files sit under one owner and go together when the
+// record is deleted (removePhotosOf in lib/mediaDb.ts clears both). Each
+// place keeps only the kinds of file that belong there: a receipt is a PDF
+// or a photo, never a song, while a Capture note, a project or an interest
+// takes anything. A file that does not suit the place is turned away after
+// it is picked, with a sentence naming what the place takes, since the
+// system picker filters by one type and most places take several.
+export type AttachmentOwnerKind =
+  | 'capture_note'
+  | 'appointment'
+  | 'treatment'
+  | 'lab_draw'
+  | 'medical_bill'
+  | 'insurance_plan'
+  | 'emergency_card'
+  | 'money_entry'
+  | 'upkeep'
+  | 'item'
+  | 'work_benefit'
+  | 'project'
+  | 'family_member'
+  | 'equipment'
+  | 'garden_area'
+  | 'seed_stock'
+  | 'interest'
+  | 'library_entry';
+
+/** What a file is, in the terms a place keeps it by. */
+export type AttachmentFamily =
+  | 'pdf'
+  | 'image'
+  | 'document'
+  | 'spreadsheet'
+  | 'slides'
+  | 'text'
+  | 'audio'
+  | 'video'
+  | 'book'
+  | 'contact'
+  | 'zip'
+  | 'data'
+  | 'other';
+
+export type AttachmentPlace = {
+  /** The families this place keeps, or 'any'. */
+  accepts: readonly AttachmentFamily[] | 'any';
+  /** What the place takes, said when a file is turned away. */
+  takes: string;
+  /** What removing one file does, named for this place. */
+  removal: string;
+};
+
+export const ATTACHMENT_PLACES: Readonly<Record<AttachmentOwnerKind, AttachmentPlace>> = {
+  capture_note: {
+    accepts: 'any',
+    takes: 'A Capture note takes any kind of file.',
+    removal: '{name} goes from this note, from this device and from the Files folder in your shared folder. The note stays.',
+  },
+  appointment: {
+    accepts: ['pdf', 'image', 'document', 'text'],
+    takes: 'An appointment takes a PDF, a photo or scan, a document or a text file: a referral, a visit summary, a form to bring.',
+    removal: '{name} goes from this appointment, from this device and from the Files folder in your shared folder. The appointment stays.',
+  },
+  treatment: {
+    accepts: ['pdf', 'image', 'document', 'text'],
+    takes: 'A med takes a PDF, a photo or scan, a document or a text file: the leaflet, the prescription, a pharmacy printout.',
+    removal: '{name} goes from this med, from this device and from the Files folder in your shared folder. The med stays.',
+  },
+  lab_draw: {
+    accepts: ['pdf', 'image', 'document', 'spreadsheet', 'text'],
+    takes: "Lab results take a PDF, a photo or scan, a document, a spreadsheet or a text file: the lab's report, or a download from a patient portal.",
+    removal: '{name} goes from the results drawn that day, from this device and from the Files folder in your shared folder. The results stay.',
+  },
+  medical_bill: {
+    accepts: ['pdf', 'image', 'document', 'spreadsheet'],
+    takes: 'A medical bill takes a PDF, a photo or scan, a document or a spreadsheet: the bill, the explanation of benefits, a receipt.',
+    removal: '{name} goes from this bill, from this device and from the Files folder in your shared folder. The bill stays.',
+  },
+  insurance_plan: {
+    accepts: ['pdf', 'image', 'document'],
+    takes: 'An insurance plan takes a PDF, a photo or scan, or a document: the card, the summary of benefits, a letter.',
+    removal: '{name} goes from this plan, from this device and from the Files folder in your shared folder. The plan stays.',
+  },
+  emergency_card: {
+    accepts: ['pdf', 'image', 'document'],
+    takes: 'The emergency card takes a PDF, a photo or scan, or a document: an advance directive, a list of medications, a scan of an insurance card.',
+    removal: '{name} goes from the emergency card, from this device and from the Files folder in your shared folder. The card stays.',
+  },
+  money_entry: {
+    accepts: ['pdf', 'image', 'document', 'spreadsheet'],
+    takes: 'A money entry takes a PDF, a photo or scan, a document or a spreadsheet: a receipt, an invoice, a statement.',
+    removal: '{name} goes from this entry, from this device and from the Files folder in your shared folder. The entry stays.',
+  },
+  upkeep: {
+    accepts: ['pdf', 'image', 'document', 'video'],
+    takes: 'An upkeep item takes a PDF, a photo or scan, a document or a video: the manual, the warranty, a receipt, a how-to video.',
+    removal: '{name} goes from this upkeep item, from this device and from the Files folder in your shared folder. The item stays.',
+  },
+  item: {
+    accepts: ['pdf', 'image', 'document'],
+    takes: 'A kitchen item takes a PDF, a photo or scan, or a document: a manual, a warranty, a receipt.',
+    removal: '{name} goes from this kitchen item, from this device and from the Files folder in your shared folder. The item stays.',
+  },
+  work_benefit: {
+    accepts: ['pdf', 'image', 'document', 'spreadsheet'],
+    takes: 'A benefit takes a PDF, a photo or scan, a document or a spreadsheet: the plan summary, a statement, a claim form.',
+    removal: '{name} goes from this benefit, from this device and from the Files folder in your shared folder. The benefit stays.',
+  },
+  project: {
+    accepts: 'any',
+    takes: 'A project takes any kind of file.',
+    removal: '{name} goes from this project, from this device and from the Files folder in your shared folder. The project stays.',
+  },
+  family_member: {
+    accepts: ['pdf', 'image', 'document', 'text', 'audio', 'video', 'contact'],
+    takes: 'A family member takes a PDF, a photo or scan, a document, a text file, a recording, a video or a contact card: records, letters, a voice worth keeping.',
+    removal: '{name} goes from this family member, from this device and from the Files folder in your shared folder. Their record stays.',
+  },
+  equipment: {
+    accepts: ['pdf', 'image', 'document', 'video'],
+    takes: 'A piece of equipment takes a PDF, a photo or scan, a document or a video: the manual, the warranty, a receipt, a setup video.',
+    removal: '{name} goes from this equipment, from this device and from the Files folder in your shared folder. The equipment stays.',
+  },
+  garden_area: {
+    accepts: ['pdf', 'image', 'document', 'spreadsheet'],
+    takes: 'A garden area takes a PDF, a photo or scan, a document or a spreadsheet: a soil test, a plan of the beds, a planting list.',
+    removal: '{name} goes from this area, from this device and from the Files folder in your shared folder. The area stays.',
+  },
+  seed_stock: {
+    accepts: ['pdf', 'image', 'document'],
+    takes: 'Seeds take a PDF, a photo or scan, or a document: the packet, a catalog page, growing notes.',
+    removal: '{name} goes from these seeds, from this device and from the Files folder in your shared folder. The seeds stay.',
+  },
+  interest: {
+    accepts: 'any',
+    takes: 'An interest takes any kind of file.',
+    removal: '{name} goes from this interest, from this device and from the Files folder in your shared folder. The interest stays.',
+  },
+  library_entry: {
+    accepts: ['pdf', 'image', 'document', 'text', 'audio', 'video', 'book'],
+    takes: 'A library entry takes a PDF, a photo or scan, a document, a text file, a recording, a video or a book file.',
+    removal: '{name} goes from this library entry, from this device and from the Files folder in your shared folder. The entry stays.',
+  },
+};
+
+const FAMILY_BY_TYPE: Readonly<Record<string, AttachmentFamily>> = {
+  'application/pdf': 'pdf',
+  'application/msword': 'document',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'document',
+  'application/vnd.oasis.opendocument.text': 'document',
+  'application/rtf': 'document',
+  'application/vnd.ms-excel': 'spreadsheet',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'spreadsheet',
+  'application/vnd.oasis.opendocument.spreadsheet': 'spreadsheet',
+  'text/csv': 'spreadsheet',
+  'application/vnd.ms-powerpoint': 'slides',
+  'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'slides',
+  'application/vnd.oasis.opendocument.presentation': 'slides',
+  'application/epub+zip': 'book',
+  'application/zip': 'zip',
+  'text/vcard': 'contact',
+  'text/x-vcard': 'contact',
+  'application/json': 'data',
+};
+
+/** Which family a file belongs to, from its type. */
+export function attachmentFamily(mimeType: string): AttachmentFamily {
+  const type = mimeType.toLowerCase();
+  const known = FAMILY_BY_TYPE[type];
+  if (known) return known;
+  if (type.startsWith('image/')) return 'image';
+  if (type.startsWith('audio/')) return 'audio';
+  if (type.startsWith('video/')) return 'video';
+  if (type.startsWith('text/')) return 'text';
+  return 'other';
+}
+
+/** Whether a place keeps a file of this type. */
+export function attachmentSuits(ownerKind: AttachmentOwnerKind, mimeType: string): boolean {
+  const accepts = ATTACHMENT_PLACES[ownerKind].accepts;
+  return accepts === 'any' || accepts.includes(attachmentFamily(mimeType));
+}
 
 export type Attachment = {
   id: string;
@@ -305,6 +488,25 @@ export const ATTACHMENT_ON_THE_WAY =
 
 export const ATTACHMENT_NO_VIEWER = 'No app on this device offered to open that kind of file.';
 
-export function attachmentRemovalSentence(name: string, words: AttachmentWords = asWritten): string {
-  return words('{name} goes from this note, from this device and from the Files folder in your shared folder. The note stays.', { name });
+export function attachmentRemovalSentence(
+  name: string,
+  words: AttachmentWords = asWritten,
+  ownerKind: AttachmentOwnerKind = 'capture_note',
+): string {
+  return words(ATTACHMENT_PLACES[ownerKind].removal, { name });
+}
+
+/**
+ * Why a picked file is not kept in this place, or null when it is. Names
+ * the kind of file it was and what the place takes, so the person knows
+ * what to pick instead.
+ */
+export function attachmentTypeProblem(
+  ownerKind: AttachmentOwnerKind,
+  item: Pick<Attachment, 'mimeType' | 'fileName'>,
+  words: AttachmentWords = asWritten,
+): string | null {
+  if (attachmentSuits(ownerKind, item.mimeType)) return null;
+  const kind = attachmentKindLabel(item, words);
+  return `${words('That file ({kind}) is not a kind kept here.', { kind })} ${words(ATTACHMENT_PLACES[ownerKind].takes)}`;
 }

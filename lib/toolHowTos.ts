@@ -145,6 +145,16 @@ export type ToolMark =
   | 'learn.howItHasGone'
   | 'capture.keepInLibrary'
   | 'capture.attachFile'
+  | 'appointments.files'
+  | 'labs.files'
+  | 'finance.planFiles'
+  | 'finance.medFiles'
+  | 'emergency.files'
+  | 'work.files'
+  | 'project.files'
+  | 'family.files'
+  | 'interest.files'
+  | 'library.files'
   | 'work.overview'
   | 'work.todos'
   | 'work.have'
@@ -1011,6 +1021,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       ],
       forYou: 'A public checker covers far more drug pairs than the rules in this app, and nothing from the app is sent to it.',
     },
+    {
+      key: 'files',
+      title: "Keep a file with a med",
+      steps: [
+        { say: "Open the med to see its details." },
+        { say: "Tap Files under its photos." },
+        { say: "Tap Attach a File and pick it: the leaflet, the prescription or a pharmacy printout." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
+    },
   ],
   '/life#emergency': [
     {
@@ -1093,6 +1113,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       ],
       forYou: 'Someone helping you can read it without unlocking the phone.',
     },
+    {
+      key: 'files',
+      title: "Keep papers with the emergency card",
+      steps: [
+        { say: "Open the band called What only you can tell it." },
+        { say: "Tap Files at the bottom of the band.", mark: 'emergency.files', stay: true },
+        { say: "Tap Attach a File and pick it: an advance directive, a list of medications or a scan of an insurance card." },
+      ],
+      forYou: "The files stay on this phone with the card and are never printed on it. The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
+    },
   ],
   '/life#work': [
     {
@@ -1169,6 +1199,17 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Save this week.', mark: 'work.saveWeek' },
       ],
       forYou: 'The week reads as it went, and the band called Each one over time shows how each question has gone week by week.',
+    },
+    {
+      key: 'files',
+      title: "Keep a file with a benefit",
+      steps: [
+        { say: "Tap What I Get.", mark: 'work.have' },
+        { say: "Open the band with the name of the benefit." },
+        { say: "Tap Files.", mark: 'work.files', stay: true },
+        { say: "Tap Attach a File and pick it: the plan summary, a statement or a claim form." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
     },
   ],
   '/life#upkeep': [
@@ -1251,6 +1292,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       ],
       forYou: 'The list holds only what still needs doing.',
     },
+    {
+      key: 'files',
+      title: "Keep the manual with an upkeep item",
+      steps: [
+        { say: "Open the item." },
+        { say: "Tap Files under its photos." },
+        { say: "Tap Attach a File and pick it: the manual, the warranty, a receipt or a how-to video." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
+    },
   ],
   '/life#kitchen': [
     {
@@ -1332,6 +1383,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Point the camera at its barcode.' },
       ],
       forYou: 'Running low on soap or paper goes on the list without typing.',
+    },
+    {
+      key: 'files',
+      title: "Keep a file with a kitchen item",
+      steps: [
+        { say: "Open the item." },
+        { say: "Tap Files under its photos." },
+        { say: "Tap Attach a File and pick it: a manual, a warranty or a receipt." },
+      ],
+      forYou: "Food from the garden or a ferment keeps its record where it was made, so it has no Files here. The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
     },
   ],
   '/life#routines': [
@@ -1738,6 +1799,38 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       ],
       forYou: 'If you have only stopped for now, Set aside keeps all of it instead.',
     },
+    {
+      key: 'planFiles',
+      title: "Keep a file with your health plan",
+      steps: [
+        { say: "Tap Health.", mark: 'finance.health' },
+        { say: "Open the band called Your plan this year." },
+        { say: "Tap Files under Edit plan.", mark: 'finance.planFiles', stay: true },
+        { say: "Tap Attach a File and pick it: the card, the summary of benefits or a letter." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
+    },
+    {
+      key: 'billFiles',
+      title: "Keep a file with a medical bill",
+      steps: [
+        { say: "Tap Health.", mark: 'finance.health' },
+        { say: "Open the band called Medical bills." },
+        { say: "Tap Files under the bill.", mark: 'finance.medFiles', stay: true },
+        { say: "Tap Attach a File and pick it: the bill, the explanation of benefits or a receipt." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
+    },
+    {
+      key: 'entryFiles',
+      title: "Keep a receipt with money in or out",
+      steps: [
+        { say: "Find the entry in the list of money in and out." },
+        { say: "Tap Files under it." },
+        { say: "Tap Attach a File and pick it: a receipt, an invoice or a statement." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
+    },
   ],
   '/life#groceryList': [
     {
@@ -1973,6 +2066,15 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Remove to say yes.' },
       ],
       forYou: 'Their conditions stop being planned around and their bands leave this page. Nothing else changes.',
+    },
+    {
+      key: 'familyFiles',
+      title: "Keep a file with a family member",
+      steps: [
+        { say: "Under Family, tap Files under their name.", mark: 'family.files', stay: true },
+        { say: "Tap Attach a File and pick it: a record, a letter, a contact card, or a recording of their voice." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
     },
   ],
   '/life#movement': [
@@ -2823,6 +2925,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       ],
       forYou: 'A counter starts in Life > Days Until and lands on the project day.',
     },
+    {
+      key: 'files',
+      title: "Keep a file with a project",
+      steps: [
+        { say: "Tap the project to open it.", mark: 'project.open', stay: true },
+        { say: "Tap Files under the steps.", mark: 'project.files', stay: true },
+        { say: "Tap Attach a File and pick it: a plan, a quote, a drawing, anything at all." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
+    },
   ],
   '/interests#myInterests': [
     {
@@ -2881,6 +2993,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Step Back, or Come Back to It on one under Stepped Back.', mark: 'interest.stepBack' },
       ],
       forYou: 'Nothing is lost. It waits under Stepped Back with its history and its projects.',
+    },
+    {
+      key: 'files',
+      title: "Keep a file with an interest",
+      steps: [
+        { say: "Tap the interest to open it.", mark: 'interest.open', stay: true },
+        { say: "Tap Files.", mark: 'interest.files', stay: true },
+        { say: "Tap Attach a File and pick it: sheet music, a pattern, a map, anything at all." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
     },
   ],
   '/interests#sessions': [
@@ -3025,6 +3147,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Change, or No Longer Part of It.', mark: 'library.change' },
       ],
       forYou: 'No Longer Part of It keeps the entry with everything it had, at the bottom, where Part of It Again brings it back.',
+    },
+    {
+      key: 'files',
+      title: "Keep a file with a library entry",
+      steps: [
+        { say: "Tap the entry to open it.", mark: 'library.row', stay: true },
+        { say: "Tap Files under the links.", mark: 'library.files', stay: true },
+        { say: "Tap Attach a File and pick it: the book itself, a recording, a video or your notes." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
     },
   ],
   '/interests#people': [
@@ -3291,6 +3423,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Pick another interest, or None, and tap Save.' },
       ],
       forYou: 'The project stays where it is with every step it has.',
+    },
+    {
+      key: 'files',
+      title: "Keep a file with a project",
+      steps: [
+        { say: "Tap the project to open it.", mark: 'project.open', stay: true },
+        { say: "Tap Files under the steps.", mark: 'project.files', stay: true },
+        { say: "Tap Attach a File and pick it: a plan, a pattern, a drawing, anything at all." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
     },
   ],
   '/life#todos': [
@@ -3786,6 +3928,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'If it is on your phone calendar too, pick Remove here only or Remove from both.' },
       ],
       forYou: 'It comes off the list and its reminder stops.',
+    },
+    {
+      key: 'files',
+      title: "Keep a file with an appointment",
+      steps: [
+        { say: "Open the band called Appointments.", mark: 'appointments.listBand', stay: true },
+        { say: "Tap Files under the appointment.", mark: 'appointments.files', stay: true },
+        { say: "Tap Attach a File and pick it: a referral, a visit summary or a form to bring." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
     },
   ],
   '/schedule#upkeep': [
@@ -4647,6 +4799,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       ],
       forYou: 'The packet shows what is left, without counting seeds twice.',
     },
+    {
+      key: 'files',
+      title: "Keep a file with a seed packet",
+      steps: [
+        { say: "Open the band with the name of the packet.", mark: 'seeds.packet', stay: true },
+        { say: "Tap Files under its photos." },
+        { say: "Tap Attach a File and pick it: the packet, a catalog page or growing notes." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
+    },
   ],
   '/garden#plotsAndPlantings': [
     {
@@ -4707,6 +4869,26 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap the file you want: plantings, harvests or what was done.' },
       ],
       forYou: 'A CSV file holding everything recorded, for Excel, Google Sheets, Numbers or any program that reads CSV.',
+    },
+    {
+      key: 'areaFiles',
+      title: "Keep a file with a garden area",
+      steps: [
+        { say: "Open the area." },
+        { say: "Tap Files under its photos." },
+        { say: "Tap Attach a File and pick it: a soil test, a plan of the beds or a planting list." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
+    },
+    {
+      key: 'equipmentFiles',
+      title: "Keep the manual with a piece of equipment",
+      steps: [
+        { say: "Open the area and its Grow Setup." },
+        { say: "Tap Files under the piece." },
+        { say: "Tap Attach a File and pick it: the manual, the warranty, a receipt or a setup video." },
+      ],
+      forYou: "The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
     },
   ],
   '/garden#upcomingTasks': [
@@ -5216,6 +5398,15 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Read Recent results. Each line gives the value, the date and how long ago it was.' },
       ],
       forYou: 'For results over time, open Labs on Trends.',
+    },
+    {
+      key: 'files',
+      title: "Keep the lab's report",
+      steps: [
+        { say: "Under The report from, find the day the blood was drawn and tap Files.", mark: 'labs.files', stay: true },
+        { say: "Tap Attach a File and pick it: the PDF from the lab, a download from a patient portal, or a photo of the printout." },
+      ],
+      forYou: "The report is kept by the day of the draw, so every result from that day shares it. The file stays with it and opens in whatever app reads its kind. A file of a kind that does not belong there is turned away with what does. With sync on, an encrypted copy goes to the Files folder in your shared folder, so your other devices open it too.",
     },
   ],
   '/insights#myMeds': [

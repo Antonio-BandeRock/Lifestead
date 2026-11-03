@@ -41,6 +41,15 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.80.4',
+    date: '2026-11-03',
+    changes: [
+      'Files can now be kept with many more records, each under a Files line: appointments, meds and supplements, the lab report for a day blood was drawn, medical bills and your health plan, the emergency card, money in and out, upkeep items, kitchen items, work benefits, projects, family members, grow equipment, garden areas, seed packets, interests and library entries.',
+      'Each place keeps only the kinds of file that belong there, such as a PDF, a scan or a document for a medical bill, or a manual, a receipt or a how-to video for an upkeep item. A file of another kind is turned away with what the place takes. Projects, interests and Capture notes take anything.',
+      'Removing a record removes its files too, from this device and from the Files folder in your shared folder.',
+    ],
+  },
+  {
     version: '1.0.80.3',
     date: '2026-11-03',
     changes: [

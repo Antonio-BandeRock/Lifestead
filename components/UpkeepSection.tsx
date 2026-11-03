@@ -56,6 +56,7 @@ import { compareLabels } from '../lib/choiceOrder';
 import { parsePriceInput } from '../lib/groceryList';
 import { useWalkMark } from './WalkMark';
 import { RecordPhotos } from './RecordPhotos';
+import { AttachedFiles } from './AttachedFiles';
 import { describePlainDate, readPlainDateField, readPlainDates, type Lean } from '../lib/plainDate';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
@@ -830,6 +831,7 @@ export function UpkeepSection({ tabColor, prefillName }: Props) {
                     <Text style={styles.rowMeta}>{formatUpkeepMoney(item.cost)} when it comes round.</Text>
                   ) : null}
                   <RecordPhotos ownerKind="upkeep" ownerId={item.id} tabColor={tabColor} title={item.name} />
+                  <AttachedFiles ownerKind="upkeep" ownerId={item.id} tabColor={tabColor} />
 
                   {renewForm?.id === item.id ? (
                     <View style={styles.inlineForm}>

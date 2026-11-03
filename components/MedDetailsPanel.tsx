@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import { Linking, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppTextInput } from './AppTextInput';
 import { RecordPhotos } from './RecordPhotos';
+import { AttachedFiles } from './AttachedFiles';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import { saveTreatmentContacts, saveTreatmentSupply, type TreatmentDetails } from '../lib/medDetailsDb';
@@ -267,6 +268,7 @@ export function MedDetailsPanel({ treatmentId, treatmentName, details, reading, 
       </View>
 
       <RecordPhotos ownerKind="treatment" ownerId={treatmentId} tabColor={tabColor} title={treatmentName} />
+      <AttachedFiles ownerKind="treatment" ownerId={treatmentId} tabColor={tabColor} />
     </View>
   );
 }

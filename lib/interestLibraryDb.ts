@@ -3,6 +3,7 @@
 // no database; this carries out the changes. See interest_library and
 // interest_people in lib/db.ts.
 
+import { removeAttachmentsOf } from './attachmentsDb';
 import { getDatabase } from './db';
 import { cleanInterestText, localDayOf } from './interests';
 import { readLibraryStatus, type InterestPerson, type LibraryEntry, type LibraryStatus } from './interestLibrary';
@@ -119,6 +120,7 @@ export async function setLibraryRetired(id: string, retired: boolean): Promise<v
 export async function deleteLibraryEntry(id: string): Promise<void> {
   const db = await getDatabase();
   await db.runAsync('DELETE FROM interest_library WHERE id = ?', id);
+  await removeAttachmentsOf('library_entry', id);
 }
 
 // --- People & Places -------------------------------------------------------------

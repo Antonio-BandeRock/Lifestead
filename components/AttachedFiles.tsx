@@ -77,7 +77,7 @@ export function AttachedFiles({
   const handleRemove = async (item: Attachment) => {
     const ok = await confirm({
       title: t("Remove {name}?", { name: item.name }),
-      message: attachmentRemovalSentence(item.name, t),
+      message: attachmentRemovalSentence(item.name, t, ownerKind),
       confirmLabel: t('Remove'),
       destructive: true,
     });

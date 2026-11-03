@@ -5,6 +5,7 @@ import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'rea
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppActionSheet, type AppActionSheetAction } from './AppActionSheet';
 import { AppTextInput } from './AppTextInput';
+import { AttachedFiles } from './AttachedFiles';
 import { DIGEST_CONDITION_ICONS } from './DigestConditionIcons';
 import { DigestEntryBody, entryHeaderDotColor } from './DigestEntryDetail';
 import { DigestEntryRow, makeDigestRowStyles } from './DigestEntryRow';
@@ -749,6 +750,12 @@ export function ConditionsSection({
                     {member.includeInMealPlan && tableParts.length > 0 ? (
                       <Text style={styles.memberMeta}>{tableParts.join(' ')}</Text>
                     ) : null}
+                    <AttachedFiles
+                      ownerKind="family_member"
+                      ownerId={member.id}
+                      tabColor={tabColor}
+                      openerRef={memberIndex === 0 ? walkMark.ref('family.files') : undefined}
+                    />
                   </View>
                   <View style={styles.memberActions}>
                     <TouchableOpacity

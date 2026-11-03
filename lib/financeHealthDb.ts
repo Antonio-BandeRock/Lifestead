@@ -14,6 +14,7 @@
 // they are all part of what a condition costs. Tagging is what ties them
 // together, and nothing here infers a tag that was not given.
 
+import { removeAttachmentsOf } from './attachmentsDb';
 import { getDatabase } from './db';
 import type {
   ConditionCost,
@@ -111,6 +112,7 @@ export async function getActiveInsurancePlan(): Promise<InsurancePlan | null> {
 export async function deleteInsurancePlan(id: string): Promise<void> {
   const db = await getDatabase();
   await db.runAsync('DELETE FROM finance_insurance_plans WHERE id = ?', id);
+  await removeAttachmentsOf('insurance_plan', id);
 }
 
 // --- Medical bills ----------------------------------------------------------
@@ -173,6 +175,7 @@ export async function setMedicalBillStatus(id: string, status: BillStatus, paidA
 export async function deleteMedicalBill(id: string): Promise<void> {
   const db = await getDatabase();
   await db.runAsync('DELETE FROM finance_medical_bills WHERE id = ?', id);
+  await removeAttachmentsOf('medical_bill', id);
 }
 
 export async function listMedicalBills(limit = 200): Promise<MedicalBill[]> {

@@ -10,6 +10,7 @@ import { NotesInput } from './NotesInput';
 import { useInfoAlert } from './InfoAlert';
 import { TabBand, useTabBandStyles } from './TabBand';
 import { PartnerBesideBand } from './PartnerBesideBand';
+import { AttachedFiles } from './AttachedFiles';
 import { useBandFolds } from '../hooks/useBandFolds';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
@@ -770,6 +771,12 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
             <Text style={styles.primaryButtonText}>Edit these</Text>
           </TouchableOpacity>
         )}
+        <AttachedFiles
+          ownerKind="emergency_card"
+          ownerId="card"
+          tabColor={tabColor}
+          openerRef={walkMark.ref('emergency.files')}
+        />
       </TabBand>
 
       <TabBand folds={folds} color={tabColor} id="life:emergency:the-card" title="The card" icon="medkit-outline">

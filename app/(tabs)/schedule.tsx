@@ -268,6 +268,7 @@ import { MyItemsHub } from '../../components/MyItemsHub';
 import { PageIdentityLabel } from '../../components/PageIdentityLabel';
 import { PopoverSelect } from '../../components/PopoverSelect';
 import { RecordPhotos } from '../../components/RecordPhotos';
+import { AttachedFiles } from '../../components/AttachedFiles';
 import { SwipeableTabScreen } from '../../components/SwipeableTabScreen';
 import { WhyExplainer } from '../../components/WhyExplainer';
 import { RuleSeverityTag } from '../../components/RuleSeverityTag';
@@ -6919,6 +6920,12 @@ function AppointmentsLens({ importCalendarEvent, importCalendarAt }: { importCal
                         {item.linkedDeviceCalendarEventId ? ` · ${t('On phone calendar')}` : ''}
                       </Text>
                       <RecordPhotos ownerKind="appointment" ownerId={item.id} tabColor={TAB_COLOR} title={item.title} />
+                      <AttachedFiles
+                        ownerKind="appointment"
+                        ownerId={item.id}
+                        tabColor={TAB_COLOR}
+                        openerRef={item.id === firstPlannedAppointmentId ? walkMark.ref('appointments.files') : undefined}
+                      />
                     </View>
                   </View>
 

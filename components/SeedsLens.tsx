@@ -46,6 +46,7 @@ import {
 } from '../lib/seedInventoryDb';
 import { packetDaysRangeLine, readPacketDays } from '../lib/seedPacket';
 import { AppTextInput } from './AppTextInput';
+import { AttachedFiles } from './AttachedFiles';
 import { FoodLookup } from './FoodLookup';
 import { HOME_BAND_ACCENT_WIDTH, HomeSectionBand } from './HomeSectionBand';
 import { PhotoStrip } from './PhotoStrip';
@@ -352,6 +353,7 @@ function PacketBand({
         <UseList uses={uses} unit={packet.amountUnit} />
         <TestSection seedId={packet.id} tests={tests} onChanged={onChanged} />
         <PhotoStrip ownerKind={SEED_STOCK_OWNER_KIND} ownerId={packet.id} tabColor={TAB_COLOR} addLabel="Photo of the Packet" title={`${foodDisplayName(packet.foodName)} seed packet`} />
+        <AttachedFiles ownerKind={SEED_STOCK_OWNER_KIND} ownerId={packet.id} tabColor={TAB_COLOR} />
         <PacketActions packet={packet} uses={uses} tests={tests} onEdit={onEdit} onChanged={onChanged} />
       </View>
     </HomeSectionBand>

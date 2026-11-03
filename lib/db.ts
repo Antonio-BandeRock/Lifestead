@@ -21003,6 +21003,8 @@ export async function deleteFamilyMember(id: string): Promise<void> {
   await db.runAsync('DELETE FROM family_member_conditions WHERE member_id = ?', id);
   await db.runAsync('DELETE FROM family_member_food WHERE member_id = ?', id);
   await db.runAsync('DELETE FROM family_members WHERE id = ?', id);
+  const { removeAttachmentsOf } = await import('./attachmentsDb');
+  await removeAttachmentsOf('family_member', id);
 }
 
 // The person's own real diet preferences -- see diet_preferences' own

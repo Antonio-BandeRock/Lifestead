@@ -2,6 +2,7 @@
 // itself is decided in lib/interests.ts with no database; this carries out
 // the changes. See interests and interest_stage_changes in lib/db.ts.
 
+import { removeAttachmentsOf } from './attachmentsDb';
 import { getDatabase } from './db';
 import {
   cleanInterestText,
@@ -278,4 +279,5 @@ export async function deleteInterest(id: string): Promise<void> {
     await db.runAsync('DELETE FROM interest_sessions WHERE interest_id = ?', id);
     await db.runAsync('DELETE FROM interests WHERE id = ?', id);
   });
+  await removeAttachmentsOf('interest', id);
 }

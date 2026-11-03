@@ -5,6 +5,7 @@
 // lib/workMeaning.ts with no database so they can be tested without one, and
 // the reading and writing here.
 
+import { removeAttachmentsOf } from './attachmentsDb';
 import { getDatabase } from './db';
 import type { Benefit, BenefitKind, ResetCadence } from './workBenefits';
 import { weekOf, type WorkCheckin } from './workMeaning';
@@ -100,6 +101,7 @@ export async function setBenefitActive(id: string, active: boolean): Promise<voi
 export async function deleteBenefit(id: string): Promise<void> {
   const db = await getDatabase();
   await db.runAsync('DELETE FROM work_benefits WHERE id = ?', id);
+  await removeAttachmentsOf('work_benefit', id);
 }
 
 export async function listBenefits(): Promise<Benefit[]> {

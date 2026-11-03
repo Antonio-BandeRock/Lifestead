@@ -18,6 +18,7 @@ import {
   attachmentFileName,
   attachmentMimeType,
   attachmentProblem,
+  attachmentTypeProblem,
   ATTACHMENT_NO_VIEWER,
   ATTACHMENT_ON_THE_WAY,
   extensionForType,
@@ -33,6 +34,7 @@ import { decryptBackupPayload, encryptBackupPayload, isEncryptedBackupWire } fro
 import { getDesktopBridge, isDesktopApp } from './desktop/bridge';
 import { base64ToBytes } from './deviceIdentity';
 import { getDatabase } from './db';
+import { t } from './i18n';
 import { shareFileIfAvailable } from './nativeSharing';
 import { deleteFile, downloadText, listFileNames, uploadText, type DriveItemRef } from './oneDriveGraph';
 import { getFilesFolder } from './oneDriveFolders';
@@ -138,6 +140,8 @@ export async function addAttachmentFromFile(
     const ext = attachmentExtension(source.name ?? '') ?? extensionForType(source.mimeType);
     const name = attachmentDisplayName(source.name, ext);
     const mimeType = attachmentMimeType(name, source.mimeType);
+    const unsuited = attachmentTypeProblem(ownerKind, { mimeType, fileName: name }, t);
+    if (unsuited) return { status: 'problem', message: unsuited };
     const id = newAttachmentId(Date.now(), Math.random().toString(36).slice(2));
     const fileName = attachmentFileName(id, ext);
 
