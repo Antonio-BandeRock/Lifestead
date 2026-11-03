@@ -41,6 +41,13 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.79.9',
+    date: '2026-11-02',
+    changes: [
+      "In setup, skipping something now skips what depends on it too. Tapping Later or I take nothing on your medicines leaves Dose times out, and the same goes for a family member's conditions without a family member, and for plantings, harvests, growing conditions, grow setup and growing costs without a garden area. Each one shows again once what it needs is added, and on Your Guide a card set aside takes the cards that depend on it with it.",
+    ],
+  },
+  {
     version: '1.0.79.8',
     date: '2026-11-02',
     changes: [

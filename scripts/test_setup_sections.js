@@ -130,6 +130,37 @@ check(parsed && parsed.offeredAt === 5 && parsed.stopped && !parsed.setUpWaiting
 check(offer.parseBackupOfferState('not json') === null, 'a broken offer file reads as nothing');
 
 // The words.
+// A card that needs another is skipped with it (2026-11-02, reported:
+// medicines skipped, then Dose times asked for straight after).
+{
+  const all = cards.SETUP_TABS.flatMap((tab) => tab.shelves.flatMap((shelf) => shelf.cards));
+  const byKey = new Map(all.map((card) => [card.key, card]));
+  for (const card of all) {
+    if (!card.needs) continue;
+    check(byKey.has(card.needs), `${card.key} needs ${card.needs}, which exists`);
+    const seen = new Set([card.key]);
+    let at = byKey.get(card.needs);
+    while (at && !seen.has(at.key)) {
+      seen.add(at.key);
+      at = at.needs ? byKey.get(at.needs) : undefined;
+    }
+    check(!at, `${card.key} needs no loop`);
+  }
+  for (const [card, need] of [['doseTimes', 'meds'], ['familyConditions', 'familyMember'], ['planting', 'gardenArea'], ['harvest', 'planting'], ['gardenReading', 'gardenArea'], ['gardenSetup', 'gardenArea'], ['gardenCost', 'gardenArea']]) {
+    check(byKey.get(card)?.needs === need, `${card} needs ${need}`);
+  }
+  const dose = byKey.get('doseTimes');
+  const harvest = byKey.get('harvest');
+  const none = { allItems: {} };
+  check(cards.cardWaitingOn(dose, none, {})?.key === 'meds', 'Dose times waits while no med is recorded');
+  check(cards.cardWaitingOn(dose, { allItems: { meds: { doneOn: '2026-11-02', state: 'done' } } }, {}) === null, 'Dose times shows once a med is recorded');
+  check(cards.cardWaitingOn(byKey.get('meds'), none, {}) === null, 'My Meds waits on nothing');
+  check(cards.cardSetAside(dose, { allItems: { meds: { doneOn: null, state: 'setAside' } } }), 'Nothing on medicines sets Dose times aside too');
+  check(!cards.cardSetAside(dose, none), 'Dose times is not set aside while medicines are open');
+  check(cards.cardSetAside(harvest, { allItems: { gardenArea: { doneOn: null, state: 'setAside' } } }), 'an area set aside sets a harvest aside, down the chain');
+  check(cards.viewSetupCard(dose, { allItems: { meds: { doneOn: null, state: 'setAside' } } }, {}).setAside, 'Your Guide shows Dose times set aside with medicines');
+}
+
 const words = [
   ...Object.values(sections.SECTION_WHY),
   ...Object.values(sections.CARD_WHY),

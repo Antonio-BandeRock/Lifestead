@@ -340,6 +340,11 @@ export type SetupCardDef = {
   // exists. A card with neither is never marked done.
   item?: YourStoryItemKey;
   records?: GuideRecordKey[];
+  // The card this one cannot be done without, by key: dose times need a
+  // med, a harvest needs a planting. When that card is skipped this one is
+  // skipped with it (direct instruction, 2026-11-02: "if the user skips
+  // anything, the things that go along with them should also get skipped").
+  needs?: string;
   destination: Go;
 };
 
@@ -386,6 +391,7 @@ export const SETUP_TABS: SetupTabDef[] = [
           },
           {
             key: 'doseTimes',
+            needs: 'meds',
             title: 'Dose times',
             icon: 'alarm-outline',
             hook: 'A reminder at the right time, moved when a meal gets in the way.',
@@ -652,6 +658,7 @@ export const SETUP_TABS: SetupTabDef[] = [
           },
           {
             key: 'familyConditions',
+            needs: 'familyMember',
             title: 'Their conditions',
             icon: 'heart-outline',
             hook: 'Meal plans that suit the whole table.',
@@ -848,6 +855,7 @@ export const SETUP_TABS: SetupTabDef[] = [
           },
           {
             key: 'planting',
+            needs: 'gardenArea',
             title: 'Plantings',
             icon: 'flower-outline',
             hook: 'Know what went in where and when, every season.',
@@ -861,6 +869,7 @@ export const SETUP_TABS: SetupTabDef[] = [
           },
           {
             key: 'harvest',
+            needs: 'planting',
             title: 'Harvests',
             icon: 'basket-outline',
             hook: 'See what your garden gave you, season after season.',
@@ -893,6 +902,7 @@ export const SETUP_TABS: SetupTabDef[] = [
           },
           {
             key: 'gardenReading',
+            needs: 'gardenArea',
             title: 'Growing conditions',
             icon: 'thermometer-outline',
             hook: 'Learn what each bed is like through the year.',
@@ -905,6 +915,7 @@ export const SETUP_TABS: SetupTabDef[] = [
           },
           {
             key: 'gardenSetup',
+            needs: 'gardenArea',
             title: 'Grow Setup',
             icon: 'bulb-outline',
             hook: 'Every light, pot and pump, with what each one cost.',
@@ -918,6 +929,7 @@ export const SETUP_TABS: SetupTabDef[] = [
           },
           {
             key: 'gardenCost',
+            needs: 'gardenArea',
             title: 'Growing costs',
             icon: 'pricetag-outline',
             hook: 'What your garden costs beside what it gives.',
@@ -1138,12 +1150,33 @@ export function cardDoneOn(def: SetupCardDef, view: YourStoryView, records: Guid
   return earliest([fromItem, ...fromRecords]);
 }
 
+const CARD_BY_KEY = new Map(SETUP_TABS.flatMap((tab) => tab.shelves.flatMap((shelf) => shelf.cards)).map((card) => [card.key, card]));
+
+// Set aside on Your Story, or needing a card that is, all the way down:
+// a harvest needs a planting, which needs an area.
+export function cardSetAside(def: SetupCardDef, view: YourStoryView): boolean {
+  const seen = new Set<string>();
+  for (let card: SetupCardDef | undefined = def; card && !seen.has(card.key); card = card.needs ? CARD_BY_KEY.get(card.needs) : undefined) {
+    seen.add(card.key);
+    if (card.item && view.allItems[card.item]?.state === 'setAside') return true;
+  }
+  return false;
+}
+
+// The card this one needs while that card has nothing recorded, or null.
+// Setup leaves a card out while it waits, so skipping My Meds also skips
+// Dose times.
+export function cardWaitingOn(def: SetupCardDef, view: YourStoryView, records: GuideRecords): SetupCardDef | null {
+  const need = def.needs ? CARD_BY_KEY.get(def.needs) : undefined;
+  if (!need) return null;
+  return cardDoneOn(need, view, records) ? null : need;
+}
+
 export function viewSetupCard(def: SetupCardDef, view: YourStoryView, records: GuideRecords): SetupCardView {
-  const item = def.item ? view.allItems[def.item] : undefined;
   return {
     def,
     doneOn: cardDoneOn(def, view, records),
-    setAside: item?.state === 'setAside',
+    setAside: cardSetAside(def, view),
     areas: def.getsBack.map((key) => AREA_BY_KEY.get(key)).filter((area): area is GiveBackArea => !!area),
   };
 }
@@ -1279,8 +1312,7 @@ export function buildLensFeeders(
       for (const def of shelf.cards) {
         if (!def.getsBack.some((key) => wanted.has(key))) continue;
         if (hidden.includes(def.key)) continue;
-        const item = def.item ? view.allItems[def.item] : undefined;
-        if (item?.state === 'setAside') continue;
+        if (cardSetAside(def, view)) continue;
         const doneOn = cardDoneOn(def, view, records);
         if (doneOn) continue;
         cards.push({

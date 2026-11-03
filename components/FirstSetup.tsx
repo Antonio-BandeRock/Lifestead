@@ -52,7 +52,7 @@ import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { isTesterBuild } from '../lib/appVariant';
 import { showGuidedTour } from '../lib/guidedTourDb';
 import { testerDoorOpen, useTesterAccess } from '../lib/testerAccess';
-import { cardDoneOn, setupCardByKey, viewSetupCard, type SetupCardView } from '../lib/setupCards';
+import { cardDoneOn, cardWaitingOn, setupCardByKey, viewSetupCard, type SetupCardView } from '../lib/setupCards';
 import { setStoryWalk, startStoryWalk } from '../lib/storyWalk';
 import { startTutorials } from '../lib/tutorialDb';
 import { SETUP_TUTORIALS_LABEL, SETUP_TUTORIALS_LINE } from '../lib/tutorials';
@@ -448,6 +448,9 @@ export function FirstSetup() {
     const cards = SECTION_CARDS[beat]
       .map((key) => setupCardByKey(key))
       .filter((found): found is NonNullable<typeof found> => !!found)
+      // A card that needs one with nothing recorded is skipped with it:
+      // Later or I take nothing on medicines leaves Dose times out.
+      .filter((found) => !cardWaitingOn(found.def, view, records))
       .map((found) => ({
         card: viewSetupCard(found.def, view, records),
         color: TAB_ROUTES.find((route) => route.path === found.tabPath)?.color ?? colors.primary,
