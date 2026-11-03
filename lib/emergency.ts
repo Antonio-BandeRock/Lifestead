@@ -55,6 +55,8 @@ export type EmergencyContact = {
   /** The one to try first. Exactly one is primary, enforced on write. */
   primary: boolean;
   notes: string | null;
+  /** Where the person came from, filled in by the app (lib/contactSource.ts). Null on a row saved before 1.0.79.11. */
+  source: string | null;
 };
 
 export type EmergencyProfile = {

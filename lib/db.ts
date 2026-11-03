@@ -11018,6 +11018,16 @@ async function runDatabaseInitialization() {
         await db.execAsync('ALTER TABLE learn_reviews ADD COLUMN matched INTEGER;');
       }
     }
+    // Where a person on Who to call came from, filled in by the app and
+    // never typed (1.0.79.11): typed, the phone's contacts, or the accounts
+    // holding them, as lib/contactSource.ts stores it. NULL on every
+    // earlier row, which shows nothing rather than a guess.
+    {
+      const columns = await db.getAllAsync<{ name: string }>('PRAGMA table_info(emergency_contacts)');
+      if (!columns.some((existing) => existing.name === 'source')) {
+        await db.execAsync('ALTER TABLE emergency_contacts ADD COLUMN source TEXT;');
+      }
+    }
     // The person's symptom names, loaded once so every label lookup finds
     // them (D3). lib/customCheckinTagsDb.ts reloads after each change.
     setCustomCheckinTags(await readCustomCheckinTags(db));

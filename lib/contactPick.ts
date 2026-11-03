@@ -8,11 +8,17 @@
 // Android asks for permission to read contacts the first time. A refusal
 // leaves the boxes as they were and says the numbers can still be typed.
 // Phone only: the desktop has no address book to open.
+//
+// Since 2026-11-02 a pick also says where the person came from (Google,
+// WhatsApp, Signal, the phone itself), read by modules/contact-accounts for
+// that one contact only. lib/contactSource.ts turns it into the stored value.
 import { Platform } from 'react-native';
 import * as Contacts from 'expo-contacts';
 import { isDesktopApp } from './desktop/bridge';
+import { sourceFromAccountTypes } from './contactSource';
+import ContactAccounts from './contactAccounts';
 
-export type PickedContact = { name: string; phone: string };
+export type PickedContact = { name: string; phone: string; source: string };
 export type PickOutcome =
   | { kind: 'picked'; contact: PickedContact }
   | { kind: 'cancelled' }
@@ -34,6 +40,18 @@ export function choosePhone(numbers: readonly NumberLike[] | null | undefined): 
   return (mobile ?? usable[0]).number!.trim();
 }
 
+// Which accounts hold the picked contact. A failed read is not a failed
+// pick: the name and number still fill in, and the record says only that
+// the person came from the phone's contacts.
+async function pickedSource(contactId: string | undefined): Promise<string> {
+  if (!ContactAccounts || !contactId) return sourceFromAccountTypes(null);
+  try {
+    return sourceFromAccountTypes(await ContactAccounts.accountTypes(contactId));
+  } catch {
+    return sourceFromAccountTypes(null);
+  }
+}
+
 export async function pickContact(): Promise<PickOutcome> {
   if (!CAN_PICK_CONTACTS) return { kind: 'problem', reason: 'Contacts can be picked on the phone. Type the name and number here instead.' };
   try {
@@ -49,7 +67,7 @@ export async function pickContact(): Promise<PickOutcome> {
     const contact = await Contacts.presentContactPickerAsync();
     if (!contact) return { kind: 'cancelled' };
     const name = (contact.name || [contact.firstName, contact.lastName].filter(Boolean).join(' ')).trim();
-    return { kind: 'picked', contact: { name, phone: choosePhone(contact.phoneNumbers) } };
+    return { kind: 'picked', contact: { name, phone: choosePhone(contact.phoneNumbers), source: await pickedSource(contact.id) } };
   } catch (error) {
     return { kind: 'problem', reason: error instanceof Error ? error.message : String(error) };
   }

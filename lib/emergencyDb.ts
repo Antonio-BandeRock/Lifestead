@@ -39,11 +39,12 @@ export async function listEmergencyContacts(): Promise<EmergencyContact[]> {
     phone: string;
     is_primary: number;
     notes: string | null;
+    source: string | null;
   }>(
     // Primary first, then by name, so the list on screen reads in the order
     // someone would actually work down it.
     `
-      SELECT id, name, relationship, phone, is_primary, notes
+      SELECT id, name, relationship, phone, is_primary, notes, source
       FROM emergency_contacts
       ORDER BY is_primary DESC, name
     `,
@@ -55,6 +56,7 @@ export async function listEmergencyContacts(): Promise<EmergencyContact[]> {
     phone: row.phone,
     primary: Boolean(row.is_primary),
     notes: row.notes,
+    source: row.source,
   }));
 }
 
@@ -65,6 +67,8 @@ export async function upsertEmergencyContact(input: {
   phone: string;
   primary?: boolean;
   notes?: string | null;
+  /** Set by the app when the person was picked or typed; undefined leaves it as it was. */
+  source?: string | null;
 }): Promise<string> {
   const db = await getDatabase();
   const now = new Date().toISOString();
@@ -75,7 +79,7 @@ export async function upsertEmergencyContact(input: {
     await db.runAsync(
       `
         UPDATE emergency_contacts
-        SET name = ?, relationship = ?, phone = ?, is_primary = ?, notes = ?, updated_at = ?
+        SET name = ?, relationship = ?, phone = ?, is_primary = ?, notes = ?, source = COALESCE(?, source), updated_at = ?
         WHERE id = ?
       `,
       input.name.trim(),
@@ -83,14 +87,15 @@ export async function upsertEmergencyContact(input: {
       input.phone.trim(),
       isPrimary,
       input.notes?.trim() || null,
+      input.source ?? null,
       now,
       input.id,
     );
   } else {
     await db.runAsync(
       `
-        INSERT INTO emergency_contacts (id, name, relationship, phone, is_primary, notes, created_at, updated_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO emergency_contacts (id, name, relationship, phone, is_primary, notes, source, created_at, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
       `,
       id,
       input.name.trim(),
@@ -98,6 +103,7 @@ export async function upsertEmergencyContact(input: {
       input.phone.trim(),
       isPrimary,
       input.notes?.trim() || null,
+      input.source ?? null,
       now,
       now,
     );

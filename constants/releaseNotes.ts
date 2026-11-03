@@ -41,6 +41,13 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.79.11',
+    date: '2026-11-02',
+    changes: [
+      "Adding someone to Who to call on the Emergency card now starts with a Pick from contacts button, and the app records where the person came from: typed in by hand or the phone's contacts. Each person shows it as Came from, and nobody types it. Once the next phone update is installed it names the account too, such as Google, WhatsApp or Signal.",
+    ],
+  },
+  {
     version: '1.0.79.10',
     date: '2026-11-02',
     changes: [

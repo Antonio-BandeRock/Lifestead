@@ -55,6 +55,8 @@ import { confirmItsYou } from '../lib/freshAuth';
 import { dialable } from '../lib/medSupply';
 import { copyLine, textNumber } from '../lib/phoneReach';
 import { CAN_PICK_CONTACTS, pickContact } from '../lib/contactPick';
+import { contactSourceNames, TYPED_SOURCE } from '../lib/contactSource';
+import { t } from '../lib/i18n';
 import { ThumbRow } from './ThumbRow';
 import { ThumbEndRow } from './ThumbEndRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
@@ -114,10 +116,20 @@ type ContactForm = {
   phone: string;
   primary: boolean;
   notes: string;
+  // Filled in by the app from the pick, never typed (lib/contactSource.ts).
+  source: string | null;
 };
 
 function blankContact(): ContactForm {
-  return { id: null, name: '', relationship: '', phone: '', primary: false, notes: '' };
+  return { id: null, name: '', relationship: '', phone: '', primary: false, notes: '', source: null };
+}
+
+// "Came from: Google, WhatsApp", or null for a row saved before the app
+// kept where a person came from.
+function cameFromLine(source: string | null): string | null {
+  const names = contactSourceNames(source);
+  if (names.length === 0) return null;
+  return t('Came from: {names}', { names: names.map((name) => t(name)).join(', ') });
 }
 
 // One row per field, so the form is a list rather than fourteen hand-written
@@ -268,7 +280,7 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
     if (outcome.kind !== 'picked') return;
     const picked = outcome.contact;
     setContactForm((form) =>
-      form ? { ...form, name: picked.name || form.name, phone: picked.phone || form.phone } : form,
+      form ? { ...form, name: picked.name || form.name, phone: picked.phone || form.phone, source: picked.source } : form,
     );
   }
 
@@ -340,6 +352,8 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
       phone: contactForm.phone,
       primary: contactForm.primary,
       notes: contactForm.notes,
+      // A new person nobody picked was typed in; an edit keeps what it had.
+      source: contactForm.source ?? (contactForm.id ? undefined : TYPED_SOURCE),
     });
     setContactForm(null);
     load();
@@ -483,6 +497,7 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
                   {contact.primary ? ' · try first' : ''}
                 </Text>
                 {contact.notes ? <Text style={styles.rowMeta}>{contact.notes}</Text> : null}
+                {cameFromLine(contact.source) ? <Text style={styles.rowMeta}>{cameFromLine(contact.source)}</Text> : null}
                 <ThumbEndRow style={styles.rowActions}>
                   {Platform.OS !== 'web' && dialable(contact.phone) ? (
                     <>
@@ -524,6 +539,7 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
                         phone: contact.phone,
                         primary: contact.primary,
                         notes: contact.notes ?? '',
+                        source: contact.source,
                       })
                     }
                   >
@@ -537,11 +553,25 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
 
         {contactForm ? (
           <View ref={(view) => { placeRefs.current.contact = view; }} style={styles.inlineForm}>
+            {/* The first choice, since a person already in the phone needs
+                nothing typed (2026-11-02). Where they came from is filled
+                in by the app and shown, never asked for. */}
             {CAN_PICK_CONTACTS ? (
-              <TouchableOpacity ref={walkMark.ref('emergency.pickContact')} onPress={() => void fillContactFromPhone()} accessibilityLabel="Pick this person from contacts">
-                <Text style={styles.actionText}>Pick from contacts</Text>
-              </TouchableOpacity>
+              <>
+                <TouchableOpacity
+                  ref={walkMark.ref('emergency.pickContact')}
+                  style={[styles.pickButton, walkMark('emergency.pickContact')]}
+                  onPress={() => void fillContactFromPhone()}
+                  accessibilityLabel="Pick this person from contacts"
+                >
+                  <Text style={styles.primaryButtonText}>Pick from contacts</Text>
+                </TouchableOpacity>
+                <Text style={styles.helperText}>
+                  {"Anyone in the phone's contacts can be picked, whichever account they were saved in. Or type them in below."}
+                </Text>
+              </>
             ) : null}
+            {cameFromLine(contactForm.source) ? <Text style={styles.rowMeta}>{cameFromLine(contactForm.source)}</Text> : null}
             <Text style={styles.label}>Name</Text>
             <View style={styles.inlineRow}>
               <AppTextInput
@@ -870,6 +900,7 @@ function makeStyles(tabColor: string) {
 
     formActions: { flexDirection: 'row', gap: 10, marginTop: 16 },
     primaryButton: { ...BUTTON_PRIMARY, marginTop: 12 },
+    pickButton: { ...BUTTON_PRIMARY, alignSelf: 'flex-start' },
     primaryButtonText: { ...BUTTON_PRIMARY_TEXT },
     secondaryButton: { ...BUTTON_SECONDARY, marginTop: 12 },
     secondaryButtonText: { ...BUTTON_SECONDARY_TEXT },

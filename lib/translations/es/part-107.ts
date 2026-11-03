@@ -124,4 +124,13 @@ export const PART: Readonly<Record<string, string>> = {
  "Type it in and tap Save.": "Escríbelo y toca Guardar.",
  "Each one opens right where it is filled in. Medicines and conditions are kept on My Meds and in your Profile, and both have a Back to Emergency button.": "Cada uno se abre justo donde se llena. Los medicamentos y los padecimientos se guardan en Mis medicamentos y en tu perfil, y los dos tienen un botón Volver a Emergencia.",
  "Every row under Still empty on the Emergency card now takes you to it. Drug allergies, devices, language, your doctor, an advance directive and blood type open the field ready to type in, Someone to call opens Who to call with a new person, Current medications opens My Meds and Conditions opens your Profile, and both of those have a Back to Emergency button.": "Cada fila de Todavía vacío en la tarjeta de emergencia ahora te lleva a ella. Alergias a medicamentos, dispositivos, idioma, tu médico, una voluntad anticipada y tipo de sangre abren el campo listo para escribir, Alguien a quien llamar abre A quién llamar con una persona nueva, Medicamentos actuales abre Mis medicamentos y Padecimientos abre tu perfil, y los dos tienen un botón Volver a Emergencia.",
+ "Adding someone to Who to call on the Emergency card now starts with a Pick from contacts button, and the app records where the person came from: typed in by hand or the phone's contacts. Each person shows it as Came from, and nobody types it. Once the next phone update is installed it names the account too, such as Google, WhatsApp or Signal.": "Agregar a alguien en A quién llamar de la tarjeta de emergencia ahora empieza con un botón Elegir de los contactos, y la app guarda de dónde vino la persona: escrita a mano o de los contactos del teléfono. Cada persona lo muestra como Vino de, y nadie lo escribe. Con la próxima actualización del teléfono instalada también nombra la cuenta, como Google, WhatsApp o Signal.",
+ "Came from: {names}": "Vino de: {names}",
+ "typed in by hand": "escrito a mano",
+ "the phone's contacts": "los contactos del teléfono",
+ "kept on the phone only": "guardado solo en el teléfono",
+ "the SIM card": "la tarjeta SIM",
+ "Samsung account": "cuenta Samsung",
+ "another account": "otra cuenta",
+ "Anyone in the phone's contacts can be picked, whichever account they were saved in. Or type them in below.": "Puedes elegir a cualquiera de los contactos del teléfono, sin importar en qué cuenta esté guardado. O escríbelo abajo.",
 };
