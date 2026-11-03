@@ -128,6 +128,12 @@ contextBridge.exposeInMainWorld('insideStoryDesktop', {
     saveAs: (uri, options) => ipcRenderer.invoke('files:saveAs', uri, options),
     open: (uri) => ipcRenderer.invoke('files:open', uri),
   },
+  googleDrive: {
+    isSignedIn: () => ipcRenderer.invoke('gdrive:isSignedIn'),
+    signIn: () => ipcRenderer.invoke('gdrive:signIn'),
+    signOut: () => ipcRenderer.invoke('gdrive:signOut'),
+    request: (request) => ipcRenderer.invoke('gdrive:request', request),
+  },
   cloudFolder: {
     roots: () => ipcRenderer.invoke('cloud:roots'),
     pickFolder: (defaultPath) => ipcRenderer.invoke('cloud:pickFolder', defaultPath),

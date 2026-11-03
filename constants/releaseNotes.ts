@@ -41,6 +41,14 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.80.6',
+    date: '2026-11-03',
+    changes: [
+      'Your shared folder can now be in Google Drive. On the Shared Folder screen, Use Google Drive signs in and makes one folder, Google Drive / Lifestead, which every device signed in to the same Google account uses. Lifestead asks Google for the narrowest permission there is, so it sees only the files it made and nothing else in your Drive.',
+      'On a computer the sign-in opens in your browser and comes back to Lifestead by itself. On a phone it needs the next installed version, and says so until then.',
+    ],
+  },
+  {
     version: '1.0.80.5',
     date: '2026-11-03',
     changes: [

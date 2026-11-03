@@ -46,7 +46,7 @@ import {
 import { describeSharedFolderProblem, getMailboxFolder, getSharedFolder } from './oneDriveFolders';
 
 export type MailboxStatus =
-  | { state: 'notSignedIn' }
+  | { state: 'notSignedIn'; service?: 'google' }
   | { state: 'noFolder' }
   | { state: 'unreachable'; folderName: string; reason: string }
   | { state: 'ready'; folder: DriveItemRef };
@@ -61,7 +61,7 @@ export type MailboxStatus =
  */
 export async function getMailboxStatus(): Promise<MailboxStatus> {
   const shared = await getSharedFolder();
-  if (shared.state === 'notSignedIn') return { state: 'notSignedIn' };
+  if (shared.state === 'notSignedIn') return { state: 'notSignedIn', service: shared.service };
   if (shared.state === 'notSetUp') return { state: 'noFolder' };
   if (shared.state !== 'ready') {
     return {

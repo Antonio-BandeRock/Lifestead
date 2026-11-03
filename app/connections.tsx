@@ -92,7 +92,9 @@ import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SEC
 function describeMailboxStatus(status: MailboxStatus): string {
   switch (status.state) {
     case 'notSignedIn':
-      return 'Sign in to OneDrive first, on the Shared Folder screen.';
+      return status.service === 'google'
+        ? 'Sign in to Google Drive first, on the Shared Folder screen.'
+        : 'Sign in to OneDrive first, on the Shared Folder screen.';
     case 'noFolder':
       return 'No folder chosen yet. Pick one on the Shared Folder screen.';
     case 'unreachable':

@@ -271,9 +271,37 @@ export type DesktopBridge = {
      *  function that removes the listener. */
     onWaiting(listener: () => void): () => void;
   };
+  /** Google Drive through the browser sign-in (desktop/googleDrive.js).
+   *  Missing on an installer built before 1.0.80.6. */
+  googleDrive?: DesktopGoogleDriveBridge;
   /** Which installer this is (tester plan T9): 'test' for Lifestead Test,
    *  'dev' for the developer's. Missing on an installer built before it. */
   appVariant?: string;
+};
+
+/** One request to Google Drive, sent from the main process with the
+ *  sign-in attached, so the token never reaches the window. */
+export type DesktopGoogleRequest = {
+  method: string;
+  url: string;
+  headers?: Record<string, string>;
+  body?: string | Uint8Array;
+};
+
+export type DesktopGoogleResponse = {
+  status: number;
+  /** The Location header, which a resumable upload answers with. */
+  location: string | null;
+  body: Uint8Array;
+};
+
+export type DesktopGoogleDriveBridge = {
+  isSignedIn(): Promise<boolean>;
+  /** Opens Google's page in the browser and waits for its answer. */
+  signIn(): Promise<{ ok: true } | { ok: false; reason: string }>;
+  signOut(): Promise<void>;
+  /** Rejects with an Error carrying a sentence when Google cannot be reached or nobody is signed in. */
+  request(request: DesktopGoogleRequest): Promise<DesktopGoogleResponse>;
 };
 
 /** One version of the app, opened side by side from the versions picker. */
@@ -354,6 +382,11 @@ export function getDesktopBridge(): DesktopBridge {
     throw new Error('Lifestead desktop bridge is missing: this build only runs inside the desktop app.');
   }
   return bridge;
+}
+
+/** The bridge, or null on a phone. */
+export function desktopBridge(): DesktopBridge | null {
+  return typeof window !== 'undefined' ? window.insideStoryDesktop ?? null : null;
 }
 
 export function isDesktopApp(): boolean {
