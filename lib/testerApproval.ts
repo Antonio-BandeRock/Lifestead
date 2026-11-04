@@ -10,15 +10,17 @@
 // version checks the signature against the keys in testerApprovalKeys.ts, so
 // no server has to vouch for anything.
 //
-// Getting the approval back (1.0.80.11, by direct instruction: "it needs to
-// be some sort of code that activates the app"). The approver also leaves
-// the signed approval at lifestead.ghostead.com/tester/v1, sealed, under two
-// unguessable slots: one made from a secret only the asking device and the
-// request email carry (`pickup`), which the tester version checks by itself
-// while it waits, and one made from an eight-character code the reply email
-// carries, for typing in. The site holds ciphertext it has no key for, by a
-// slot it cannot turn back into the secret, for DROP_DAYS. The long link
-// still works, for a device that is offline.
+// Code in, code out (1.0.81.2, by direct instruction: "The tester Requests
+// for Access and their app sends me a code. I copy the code they send and
+// paste it into my developer app ... creates a new code that I then send back
+// to them. They receive the code and enter it"). Both ways a short code
+// stands for something left sealed at lifestead.ghostead.com/tester/v1: the
+// request, under the request code the tester emails (requestSecret), and the
+// signed approval, under the code the reply carries. The site holds
+// ciphertext it has no key for, by a slot it cannot turn back into the code,
+// for DROP_DAYS. The long links still work when the site cannot be reached.
+// The pickup a request carried in 1.0.80.11 and 1.0.81.1 is still read, so
+// an approval for one of those still reaches it, but nothing makes one now.
 //
 // What this stops: a copy of the installer passed to somebody else opens on
 // their device to the request screen and nothing more, and an activation
@@ -49,9 +51,12 @@ export type AccessRequest = {
   renewal: boolean;
   /** When it was asked, ms since 1970. */
   asked: number;
-  /** A secret this device made for picking up its approval by itself.
-   *  Missing on a request from before 1.0.80.11. */
+  /** A secret this device made for picking up its approval by itself, on
+   *  a request from 1.0.80.11 or 1.0.81.1 only. */
   pickup?: string;
+  /** Which copy of the app asked: its id and version. Missing on a request
+   *  from before 1.0.81.2. */
+  app?: string;
 };
 
 export type Approval = {
@@ -193,6 +198,7 @@ export function decodeRequest(code: string): AccessRequest | null {
     renewal: value.renewal === true,
     asked: value.asked,
     ...(typeof value.pickup === 'string' && /^[A-Za-z0-9_-]{16,44}$/.test(value.pickup) ? { pickup: value.pickup } : {}),
+    ...(typeof value.app === 'string' && value.app.trim() ? { app: value.app.trim().slice(0, 80) } : {}),
   };
 }
 
@@ -337,6 +343,28 @@ export function findCode(input: string): string | null {
   if (/[#?&]a=/.test(input)) return null;
   const match = input.match(/(?:^|[^A-Za-z0-9_-])([2-9A-HJ-NP-Za-hj-np-z]{4}-[2-9A-HJ-NP-Za-hj-np-z]{4})(?![A-Za-z0-9_-])/);
   return match ? normalizeCode(match[1]) : null;
+}
+
+/** Every code in what was pasted, in order and once each, so a reply that
+ *  quotes the request below it still yields the approval code: the caller
+ *  leaves out the code it sent itself. */
+export function findCodes(input: string): string[] {
+  const exact = normalizeCode(input);
+  if (exact) return [exact];
+  if (/[#?&]a=/.test(input)) return [];
+  const found: string[] = [];
+  const pattern = /(?:^|[^A-Za-z0-9_-])([2-9A-HJ-NP-Za-hj-np-z]{4}-[2-9A-HJ-NP-Za-hj-np-z]{4})(?![A-Za-z0-9_-])/g;
+  for (const match of input.matchAll(pattern)) {
+    const code = normalizeCode(match[1]);
+    if (code && !found.includes(code)) found.push(code);
+  }
+  return found;
+}
+
+/** What a request is sealed with on the site: its code, kept apart from
+ *  approval codes so one can never open the other. */
+export function requestSecret(code: string): string {
+  return `request:${code}`;
 }
 
 /** A fresh pickup secret from 16 random bytes. */

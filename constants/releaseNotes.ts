@@ -41,6 +41,15 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.81.2',
+    date: '2026-11-04',
+    changes: [
+      'Asking for Lifestead Test now goes one code each way. The request email carries a short request code, and the reply carries an approval code to type or paste on the waiting screen, then press Use This Code.',
+      'Paste keeps only the code, even when the whole email was copied.',
+      'When a newer version has downloaded, the waiting screen offers Restart Now.',
+    ],
+  },
+  {
     version: '1.0.81.1',
     date: '2026-11-04',
     changes: [

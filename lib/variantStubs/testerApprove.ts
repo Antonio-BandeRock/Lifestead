@@ -9,8 +9,24 @@ const NOT_HERE = 'Approving testers is only in the developer version.';
 export type MyApprovalKey = { id: string; label: string; publicKey: string; trusted: boolean };
 
 export type Approved =
-  | { ok: true; request: AccessRequest; link: string; until: string; trusted: boolean; code: string | null; pickup: boolean }
+  | { ok: true; recordId: string | null; request: AccessRequest; link: string; until: string; trusted: boolean; code: string | null; pickup: boolean }
   | { ok: false; reason: string };
+
+export type TesterApprovalRecord = {
+  id: string;
+  approvedAt: string;
+  name: string;
+  device: string;
+  platform: string;
+  app: string | null;
+  renewal: boolean;
+  untilDay: string;
+  code: string | null;
+};
+
+export async function listTesterApprovals(): Promise<TesterApprovalRecord[]> {
+  return [];
+}
 
 export async function getMyApprovalKey(): Promise<MyApprovalKey> {
   throw new Error(NOT_HERE);

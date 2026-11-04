@@ -8565,6 +8565,25 @@ async function runDatabaseInitialization() {
         done_at TEXT
       );
 
+      -- Testers approved from the developer version (1.0.81.2): who, which
+      -- device and which copy of the app each approval was signed for, and
+      -- the code that went back. Filled only in the developer version, by
+      -- lib/testerApprove.ts. device is the tester's deviceTag, never a key.
+      CREATE TABLE IF NOT EXISTS tester_approvals (
+        id TEXT PRIMARY KEY,
+        approved_at TEXT NOT NULL,
+        name TEXT NOT NULL,
+        device TEXT NOT NULL,
+        -- phone or computer.
+        platform TEXT NOT NULL,
+        -- The asking app's id and version, null on a request from before 1.0.81.2.
+        app TEXT,
+        renewal INTEGER NOT NULL DEFAULT 0,
+        until_day TEXT NOT NULL,
+        -- The code sent back, null when the site could not be reached.
+        code TEXT
+      );
+
       -- Compost, asked for as a lens: "tracks the materials added to the
       -- compost, when it was turned, watered, and everything else about
       -- making good compost." One row per pile, bin or tumbler; the record

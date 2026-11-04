@@ -6,33 +6,43 @@
 // The rules (what a request and an approval are, when one has ended) are in
 // lib/testerApproval.ts; this file keeps them and asks.
 //
-// Since 1.0.80.11 a request carries a pickup secret made here, and the
-// approver leaves the approval sealed on the site under it. This device looks
-// for it when it starts, when it comes to the front and every minute while it
-// waits, so an approved tester does nothing at all. The short code in the
-// reply email opens the same thing by hand, and the long link still works.
+// Since 1.0.81.2 it is a code each way, by direct instruction: Ask for
+// Access leaves the request sealed on the site under a short request code
+// and the email carries only that code; the developer pastes it into the
+// developer version, which sends back an approval code; the tester types or
+// pastes that into the box and presses Use This Code. Nothing opens by
+// itself any more, so there is one way in. When the site cannot be reached
+// the email carries the long request link instead, and an activation link
+// still opens as before.
+import * as Application from 'expo-application';
 import * as Clipboard from 'expo-clipboard';
 import * as Crypto from 'expo-crypto';
 import * as SecureStore from 'expo-secure-store';
 import { useSyncExternalStore } from 'react';
 import { AppState, Linking } from 'react-native';
+import { APP_VERSION } from '../constants/version';
+import { APP_VARIANT } from './appVariant';
 import { isDesktopApp } from './desktop/bridge';
 import { getDeviceIdentity } from './deviceIdentity';
 import { t } from './i18n';
 import { PROBLEM_REPORT_ADDRESS } from './problemReport';
 import {
   approvalState,
+  codeFromBytes,
+  CODE_LENGTH,
   deviceTag,
   dropSlot,
   DROP_URL,
   encodeRequest,
   extractCode,
-  findCode,
+  findCodes,
+  formatCode,
   laterApproval,
   openDrop,
-  pickupFromBytes,
   readApproval,
   requestLink,
+  requestSecret,
+  sealDrop,
   type AccessRequest,
   type Approval,
   type ApprovalState,
@@ -44,7 +54,10 @@ const LATEST_SEEN_KEY = 'tester_latest_seen_v1';
 const AGREEMENT_KEY = 'tester_agreement_v1';
 const NAME_KEY = 'tester_access_name';
 const ASKED_KEY = 'tester_access_asked';
+/** Left by 1.0.80.11 and 1.0.81.1, and cleared on load since nothing looks
+ *  for an approval by itself now. */
 const PICKUP_KEY = 'tester_pickup_v1';
+const REQUEST_CODE_KEY = 'tester_request_code_v1';
 
 /** Raised when the agreement's words change enough to be read again. */
 export const TESTER_AGREEMENT_VERSION = '1';
@@ -55,14 +68,16 @@ export type TesterAccess = {
   name: string;
   /** When this device last asked, ms, or null. */
   askedAt: number | null;
+  /** The request code this device last sent, or null when its request went
+   *  as a link or it has not asked. */
+  requestCode: string | null;
   state: ApprovalState;
 };
 
-let snapshot: TesterAccess = { loaded: false, agreed: false, name: '', askedAt: null, state: { kind: 'missing' } };
+let snapshot: TesterAccess = { loaded: false, agreed: false, name: '', askedAt: null, requestCode: null, state: { kind: 'missing' } };
 let tag: string | null = null;
 let approval: Approval | null = null;
 let latestSeen = 0;
-let pickup: string | null = null;
 const listeners = new Set<() => void>();
 
 function publish(next: Partial<TesterAccess>) {
@@ -109,24 +124,24 @@ async function recompute() {
 
 export async function loadTesterAccess(): Promise<void> {
   try {
-    const [token, seen, agreed, name, asked, waiting] = await Promise.all([
+    const [token, seen, agreed, name, asked, requestCode] = await Promise.all([
       SecureStore.getItemAsync(ACTIVATION_KEY),
       SecureStore.getItemAsync(LATEST_SEEN_KEY),
       SecureStore.getItemAsync(AGREEMENT_KEY),
       SecureStore.getItemAsync(NAME_KEY),
       SecureStore.getItemAsync(ASKED_KEY),
-      SecureStore.getItemAsync(PICKUP_KEY),
+      SecureStore.getItemAsync(REQUEST_CODE_KEY),
     ]);
-    pickup = waiting;
+    void SecureStore.deleteItemAsync(PICKUP_KEY).catch(() => {});
     approval = token ? readApproval(token, TRUSTED_APPROVAL_KEYS) : null;
     latestSeen = Number(seen) || 0;
     publish({
       agreed: agreed === TESTER_AGREEMENT_VERSION,
       name: name ?? '',
       askedAt: asked ? Number(asked) || null : null,
+      requestCode,
     });
     await recompute();
-    void lookForApproval();
   } catch (error) {
     // Nothing could be read: the gate stays up and asks, which is the safe
     // side, and the records underneath are untouched.
@@ -142,7 +157,15 @@ export async function acceptTesterAgreement(): Promise<void> {
 
 export type AskResult = 'opened' | 'copied' | 'failed';
 
-function accessEmail(request: AccessRequest, link: string): { subject: string; body: string } {
+/** Which copy of the app is asking, for the developer's record. */
+function appId(): string {
+  const id = Application.applicationId ?? (isDesktopApp() ? `computer, ${APP_VARIANT}` : APP_VARIANT);
+  return `${id} ${APP_VERSION}`;
+}
+
+/** The email carries the request code, or the long link when the site
+ *  could not take the request. */
+function accessEmail(request: AccessRequest, code: string | null, link: string): { subject: string; body: string } {
   const subject = request.renewal
     ? t('More time on Lifestead Test for {name}', { name: request.name })
     : t('Lifestead Test access for {name}', { name: request.name });
@@ -152,11 +175,29 @@ function accessEmail(request: AccessRequest, link: string): { subject: string; b
     t('Name: {name}', { name: request.name }),
     request.platform === 'phone' ? t('Device: a phone') : t('Device: a computer'),
     '',
-    link,
-    '',
-    t('This link carries only the name above and a code for this device. Nothing from the app is in it.'),
+    ...(code
+      ? [t('Request code: {code}', { code: formatCode(code) }), '', t('The code stands only for the name above, a code for this device and which copy of the app is asking. Nothing from the app is in it.')]
+      : [link, '', t('This link carries only the name above and a code for this device. Nothing from the app is in it.')]),
   ].join('\n');
   return { subject, body };
+}
+
+/** Leaves the request sealed on the site under its code. False when the
+ *  site could not be reached. */
+async function leaveRequest(code: string, request: AccessRequest): Promise<boolean> {
+  try {
+    const secret = requestSecret(code);
+    const nonce = await Crypto.getRandomBytesAsync(24);
+    const response = await fetch(`${DROP_URL}/put`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ slot: dropSlot(secret), body: sealDrop(encodeRequest(request), secret, nonce) }),
+    });
+    return response.ok;
+  } catch (error) {
+    console.warn('[testerAccess] could not reach the site', error);
+    return false;
+  }
 }
 
 /** Writes the request into the tester's email app, addressed to the
@@ -164,10 +205,6 @@ function accessEmail(request: AccessRequest, link: string): { subject: string; b
 export async function askForAccess(name: string, renewal: boolean): Promise<AskResult> {
   const clean = name.trim();
   await SecureStore.setItemAsync(NAME_KEY, clean).catch(() => {});
-  // A fresh pickup each time, so an older request's approval and a newer
-  // one never share a slot.
-  pickup = pickupFromBytes(await Crypto.getRandomBytesAsync(16));
-  await SecureStore.setItemAsync(PICKUP_KEY, pickup).catch(() => {});
   const request: AccessRequest = {
     v: 1,
     name: clean,
@@ -175,13 +212,19 @@ export async function askForAccess(name: string, renewal: boolean): Promise<AskR
     platform: isDesktopApp() ? 'computer' : 'phone',
     renewal,
     asked: Date.now(),
-    pickup,
+    app: appId(),
   };
+  // A fresh code each time, so an older request and a newer one never
+  // share a slot.
+  const fresh = codeFromBytes(await Crypto.getRandomBytesAsync(CODE_LENGTH));
+  const code = (await leaveRequest(fresh, request)) ? fresh : null;
   const link = requestLink(encodeRequest(request));
-  const email = accessEmail(request, link);
+  const email = accessEmail(request, code, link);
   const asked = Date.now();
   await SecureStore.setItemAsync(ASKED_KEY, String(asked)).catch(() => {});
-  publish({ name: clean, askedAt: asked });
+  if (code) await SecureStore.setItemAsync(REQUEST_CODE_KEY, code).catch(() => {});
+  else await SecureStore.deleteItemAsync(REQUEST_CODE_KEY).catch(() => {});
+  publish({ name: clean, askedAt: asked, requestCode: code });
   const mailto = `mailto:${PROBLEM_REPORT_ADDRESS}?subject=${encodeURIComponent(email.subject)}&body=${encodeURIComponent(email.body.replace(/\n/g, '\r\n'))}`;
   try {
     await Linking.openURL(mailto);
@@ -211,6 +254,9 @@ async function keepToken(token: string): Promise<ActivateResult> {
     approval = read;
     await SecureStore.setItemAsync(ACTIVATION_KEY, token);
   }
+  // The request is answered, so For Testers stops showing its code and box.
+  await SecureStore.deleteItemAsync(REQUEST_CODE_KEY).catch(() => {});
+  publish({ requestCode: null });
   await recompute();
   return 'ok';
 }
@@ -235,37 +281,22 @@ async function fetchDrop(secret: string): Promise<string | 'notFound' | 'offline
   }
 }
 
-let looking = false;
-
-/** Looks on the site for the approval this device asked for. Quiet: nothing
- *  waiting, or no internet, just means look again later. */
-async function lookForApproval(): Promise<void> {
-  if (!pickup || looking) return;
-  looking = true;
-  try {
-    const secret = pickup;
-    const found = await fetchDrop(secret);
-    if (found === 'notFound' || found === 'offline') return;
-    await keepToken(found);
-    // Kept, or for some reason never usable here: either way this pickup has
-    // been answered, so stop asking the site about it.
-    if (pickup === secret) {
-      pickup = null;
-      await SecureStore.deleteItemAsync(PICKUP_KEY).catch(() => {});
-    }
-  } finally {
-    looking = false;
-  }
-}
-
 /** Takes the short code from the reply email, or an activation link, typed,
  *  pasted or opened. */
 export async function activateFromText(input: string): Promise<ActivateResult> {
-  const typed = findCode(input);
-  if (typed) {
-    const found = await fetchDrop(typed);
-    if (found === 'notFound' || found === 'offline') return found;
-    return keepToken(found);
+  // A reply that quotes the request below it carries this device's request
+  // code too, which is never the approval.
+  const typed = findCodes(input).filter((one) => one !== snapshot.requestCode);
+  if (typed.length) {
+    let last: ActivateResult = 'notFound';
+    for (const one of typed) {
+      const found = await fetchDrop(one);
+      if (found === 'offline') return 'offline';
+      if (found === 'notFound') continue;
+      last = await keepToken(found);
+      if (last === 'ok') return 'ok';
+    }
+    return last;
   }
   const code = extractCode(input, 'a');
   if (!code) return 'notApproval';
@@ -293,26 +324,18 @@ export function activateResultText(result: ActivateResult): string {
 let watching = false;
 
 /** Checks again when the app comes back to the front, and every hour, so an
- *  approval ends at its end even with the app left open. While a request is
- *  waiting it also looks for the approval at those moments and every minute. */
+ *  approval ends at its end even with the app left open. */
 export function startTesterAccessWatch(): () => void {
   if (watching) return () => {};
   watching = true;
   void loadTesterAccess();
   const subscription = AppState.addEventListener('change', (next) => {
-    if (next === 'active') {
-      void recompute();
-      void lookForApproval();
-    }
+    if (next === 'active') void recompute();
   });
   const timer = setInterval(() => void recompute(), 60 * 60 * 1000);
-  const pickupTimer = setInterval(() => {
-    if (AppState.currentState === 'active') void lookForApproval();
-  }, 60 * 1000);
   return () => {
     watching = false;
     subscription.remove();
     clearInterval(timer);
-    clearInterval(pickupTimer);
   };
 }

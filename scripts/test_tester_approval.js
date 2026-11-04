@@ -160,6 +160,29 @@ check(A.openDrop(sealed, pickup) === null, 'another secret does not');
 check(A.openDrop(`${sealed.slice(0, -2)}AA`, typed) === null, 'a changed one does not');
 check(A.openDrop('', typed) === null && A.openDrop('!!', typed) === null, 'garbage does not');
 
+// A code each way (1.0.81.2): the request code, found in a whole email.
+{
+  const requestCode = A.codeFromBytes(Uint8Array.from([1, 2, 3, 4, 5, 6, 7, 8]));
+  const approvalCode = A.codeFromBytes(Uint8Array.from([9, 10, 11, 12, 13, 14, 15, 16]));
+  const email = `Hello,\n\nPlease approve me.\nRequest code: ${A.formatCode(requestCode)}\n\nThanks`;
+  check(A.findCodes(email).length === 1 && A.findCodes(email)[0] === requestCode, 'a request code is found in a whole email');
+  check(A.findCodes(A.formatCode(requestCode).toLowerCase())[0] === requestCode, 'a typed code alone is found, small letters forgiven');
+  const reply = `You are approved: ${A.formatCode(approvalCode)}\n\n> Request code: ${A.formatCode(requestCode)}`;
+  const both = A.findCodes(reply);
+  check(both.length === 2 && both[0] === approvalCode && both[1] === requestCode, 'a reply quoting the request yields both codes, approval first');
+  check(A.findCodes(`${A.formatCode(approvalCode)} and ${A.formatCode(approvalCode)}`).length === 1, 'a code repeated is found once');
+  check(A.findCodes('https://insidestoryapp.com/activate#a=ABCD-EFGH').length === 0, 'an activation link is never read as a code');
+  check(A.findCodes('nothing here').length === 0, 'text with no code finds none');
+  check(A.requestSecret(requestCode) !== requestCode, 'a request is sealed apart from an approval code');
+  check(A.dropSlot(A.requestSecret(requestCode)) !== A.dropSlot(requestCode), 'a request code and the same code as an approval use different slots');
+  const sealed = A.sealDrop('payload', A.requestSecret(requestCode), new Uint8Array(24));
+  check(A.openDrop(sealed, A.requestSecret(requestCode)) === 'payload', 'a sealed request opens with its request secret');
+  check(A.openDrop(sealed, requestCode) === null, 'a sealed request does not open as an approval');
+  const withApp = A.decodeRequest(A.encodeRequest({ ...request, app: `  com.ghostead.lifestead.test 1.0.81.2  ${'x'.repeat(100)}` }));
+  check(withApp && withApp.app.startsWith('com.ghostead.lifestead.test 1.0.81.2') && withApp.app.length <= 80, 'a request keeps which app asked, trimmed and capped');
+  check(A.decodeRequest(A.encodeRequest(request)).app === undefined, 'a request from an older version has no app');
+}
+
 // The shipped list.
 check(Array.isArray(K.TRUSTED_APPROVAL_KEYS) && K.TRUSTED_APPROVAL_KEYS.length > 0, 'at least one trusted key ships');
 const ids = new Set();

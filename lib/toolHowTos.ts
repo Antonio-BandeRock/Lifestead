@@ -2362,8 +2362,8 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       steps: [
         { say: 'Open the band with the name of Thank You for Testing Lifestead. Its first line says the day this device can open the test version until.', mark: 'homeBand.testerWelcome', stay: true },
         { say: 'From two weeks before that day, Ask to Renew appears under it. Tap it, and your email app opens with the request ready.', mark: 'tester.renew' },
-        { say: 'Press Send in your email app. The request carries your name and a code for this device, nothing else.' },
-        { say: 'When the reply comes, open the link in it on this device. The new day shows on the band.' },
+        { say: 'Press Send in your email app. The request carries your name, a code for this device and which copy of the app is asking, nothing else.' },
+        { say: 'The reply carries an approval code. Copy it, or the whole email, press Paste in the box under Ask to Renew, then press Use This Code. The new day shows on the band.' },
       ],
       forYou: 'The test version keeps opening without a gap, and everything you have put in stays where it is.',
     },

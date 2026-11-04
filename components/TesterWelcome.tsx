@@ -35,6 +35,7 @@ import { endDay } from '../lib/testerApproval';
 import type { InstallerWaiting } from '../lib/testerInstaller';
 import { checkTesterInstaller } from '../lib/testerInstallerCheck';
 import { useInfoAlert } from './InfoAlert';
+import { TesterCodeBox, TesterRequestCode } from './TesterCodeBox';
 import { useWalkMark } from './WalkMark';
 
 export const TESTER_WELCOME_TITLE = 'Thank You for Testing Lifestead';
@@ -102,7 +103,7 @@ export function TesterWelcome({ showHeading = false }: Props) {
     const sent = await askForAccess(name, true);
     setRenewSent(
       sent === 'opened'
-        ? t('Your email app has the request ready. Send it, and the new link will come back by email.')
+        ? t('Your email app has the request ready. Send it, and the reply carries an approval code to type below.')
         : sent === 'copied'
           ? t('No email app opened, so the request is copied. Paste it into an email to {address}.', { address: PROBLEM_REPORT_ADDRESS })
           : t('The request could not be made. Write to {address} and ask for more time.', { address: PROBLEM_REPORT_ADDRESS }),
@@ -134,6 +135,12 @@ export function TesterWelcome({ showHeading = false }: Props) {
             </View>
           ) : null}
           {renewSent ? <Text style={styles.caption}>{renewSent}</Text> : null}
+          {renewSent || access.requestCode ? (
+            <>
+              <TesterRequestCode />
+              <TesterCodeBox />
+            </>
+          ) : null}
         </View>
       ) : null}
       {installer ? (

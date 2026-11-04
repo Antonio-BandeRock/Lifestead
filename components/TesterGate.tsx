@@ -3,10 +3,12 @@
 // Over the whole app, in the tester version only, until this device has an
 // approval that has not ended and the agreement is read. In turn, by direct
 // instruction (2026-11-02, 1.0.79.1): a name and Ask for Access, which
-// emails testers@ghostead.com; then waiting for the approval, which since
-// 1.0.80.11 opens this screen by itself (lib/testerAccess.ts looks for it
-// every minute), with a box for the short code from the reply email in case
-// it does not, and Ask Again under it; then Before you start testing, which holds
+// emails testers@ghostead.com with a request code; then waiting for the
+// approval code that comes back by email, typed or pasted into the box and
+// used with Use This Code (components/TesterCodeBox.tsx, since 1.0.81.2 the
+// one way in, by direct instruction), with Ask Again under it, and Restart
+// Now once an update has downloaded, since a covered app could otherwise
+// never be told to take one; then Before you start testing, which holds
 // what a fresh install used to show as an update message and Lifestead's
 // general points; then setup (components/FirstSetup.tsx). When an approval ends it asks for more time with one press;
 // when the approval is for another device it says so. Nothing underneath is
@@ -18,9 +20,9 @@
 // flag and sheet sit between the two. Setup waits until this lets the
 // person in (components/FirstSetup.tsx).
 import { Ionicons } from '@expo/vector-icons';
-import * as Clipboard from 'expo-clipboard';
+import * as Updates from 'expo-updates';
 import { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 import { colors } from '../constants/colors';
@@ -33,10 +35,9 @@ import { recordAgreement } from '../lib/agreementDb';
 import { useNavigationHand } from '../lib/navigationHand';
 import { PROBLEM_REPORT_ADDRESS } from '../lib/problemReport';
 import { REPORT_FLAG_ROOM } from '../lib/reportProblem';
+import { restartApp } from '../lib/restartApp';
 import {
   acceptTesterAgreement,
-  activateFromText,
-  activateResultText,
   askForAccess,
   startTesterAccessWatch,
   testerDoorOpen,
@@ -53,6 +54,7 @@ import {
 import { AgreementPoints } from './AgreementPoints';
 import { AppTextInput } from './AppTextInput';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
+import { TesterCodeBox, TesterRequestCode } from './TesterCodeBox';
 
 export function TesterGate() {
   if (!isTesterBuild()) return null;
@@ -60,7 +62,7 @@ export function TesterGate() {
 }
 
 function askedText(result: AskResult): string {
-  if (result === 'opened') return 'Your email app is open with the request in it. Press Send there. Once it is approved this screen opens by itself, and the reply email carries a code too.';
+  if (result === 'opened') return 'Your email app is open with the request in it. Press Send there. The reply email carries your approval code.';
   if (result === 'copied') return t('No email app opened, so the request is copied. Paste it into an email to {address}.', { address: PROBLEM_REPORT_ADDRESS });
   return t('No email app opened and the request could not be copied. Write to {address} and ask for access.', { address: PROBLEM_REPORT_ADDRESS });
 }
@@ -70,9 +72,7 @@ function TesterGateInner() {
   const access = useTesterAccess();
   const hand = useNavigationHand();
   const [name, setName] = useState('');
-  const [pasted, setPasted] = useState('');
   const [message, setMessage] = useState<string | null>(null);
-  const [codeMessage, setCodeMessage] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [agreeing, setAgreeing] = useState(false);
 
@@ -91,36 +91,6 @@ function TesterGateInner() {
     setBusy(true);
     try {
       setMessage(askedText(await askForAccess(name, renewal)));
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  // The app's own keyboard has no paste key and every box hides Android's
-  // Cut/Copy/Paste menu (AppTextInput's contextMenuHidden), so what was
-  // copied is read here and used in one press. A whole copied email is fine:
-  // the code is found inside it (findCode).
-  async function pasteAndUse() {
-    const copied = await Clipboard.getStringAsync().catch(() => '');
-    if (!copied.trim()) {
-      explainNotYet('Nothing is copied yet. In the approval email, press and hold the code, choose Copy, then come back and press Paste.');
-      return;
-    }
-    await applyCode(copied);
-  }
-
-  async function applyCode(text: string = pasted) {
-    if (!text.trim()) {
-      explainNotYet('Type the code from the approval email first. It looks like K7M2-QX9P.');
-      return;
-    }
-    setBusy(true);
-    try {
-      const result = await activateFromText(text);
-      // Once it works the next screen is the agreement, so a line saying it
-      // worked would only be left behind for later.
-      setCodeMessage(result === 'ok' ? null : activateResultText(result));
-      if (result === 'ok') setPasted('');
     } finally {
       setBusy(false);
     }
@@ -208,7 +178,7 @@ function TesterGateInner() {
     : wrongDevice
       ? 'Each phone or computer is approved by itself, so an approval cannot move to another device, and a restored backup asks again. Ask from this one.'
       : waiting
-        ? 'Nothing to do here but wait. Once your request is approved, this screen opens by itself the next time Lifestead Test is open with internet. The approval email from testers@ghostead.com also carries a code, in case it has not opened within a few minutes.'
+        ? 'Once your request is approved, a reply comes from testers@ghostead.com with an approval code. Type or paste it below and press Use This Code.'
         : 'Lifestead Test opens on devices that have been approved. Write your name and press Ask for Access, and your email app opens with a request to testers@ghostead.com, ready to send.';
 
   const askBand = (
@@ -239,7 +209,7 @@ function TesterGateInner() {
         </Text>
       </TouchableOpacity>
       <Text style={styles.caption}>
-        The request carries your name and a code for this device, nothing else. It goes to testers@ghostead.com.
+        The request carries your name, a code for this device and which copy of the app is asking, nothing else. It goes to testers@ghostead.com.
       </Text>
       {message ? <Text style={styles.body}>{message}</Text> : null}
     </View>
@@ -247,24 +217,8 @@ function TesterGateInner() {
 
   const codeBand = (
     <View style={styles.band}>
-      <Text style={styles.label}>The code from the approval email</Text>
-      <AppTextInput
-        style={[styles.input, styles.codeInput]}
-        value={pasted}
-        onChangeText={setPasted}
-        placeholder="K7M2-QX9P"
-        placeholderTextColor={colors.textSecondary}
-        autoCapitalize="characters"
-        autoCorrect={false}
-      />
-      <TouchableOpacity style={[styles.primary, busy && styles.busy]} onPress={() => void applyCode()} disabled={busy} accessibilityRole="button">
-        <Text style={styles.primaryText}>Use This Code</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={[styles.secondary, busy && styles.busy]} onPress={() => void pasteAndUse()} disabled={busy} accessibilityRole="button">
-        <Text style={styles.secondaryText}>Paste</Text>
-      </TouchableOpacity>
-      {codeMessage ? <Text style={styles.body}>{codeMessage}</Text> : null}
-      <Text style={styles.caption}>Small letters, spaces and the dash do not matter. A code works for two weeks.</Text>
+      <TesterRequestCode />
+      <TesterCodeBox />
     </View>
   );
 
@@ -277,10 +231,38 @@ function TesterGateInner() {
           </Text>
           <Text style={styles.body}>{lead}</Text>
         </View>
+        {Platform.OS === 'web' ? null : <UpdateReadyBand />}
         {renewal ? askBand : null}
         {waiting ? codeBand : null}
         {renewal ? null : askBand}
       </ScrollView>
+    </View>
+  );
+}
+
+// An update downloads behind the door but is only put in place when the app
+// starts again, which a tester waiting here has no reason to do. Phone only:
+// the computer gets a new installer instead.
+function UpdateReadyBand() {
+  const { isUpdatePending } = Updates.useUpdates();
+  const [restarting, setRestarting] = useState(false);
+  if (!isUpdatePending) return null;
+  async function restart() {
+    setRestarting(true);
+    try {
+      await restartApp();
+    } catch (error) {
+      console.warn('[testerGate] could not restart', error);
+      explainNotYet('The restart did not go through. Close Lifestead Test completely and open it again, and the update is put in place.');
+      setRestarting(false);
+    }
+  }
+  return (
+    <View style={styles.band}>
+      <Text style={styles.body}>A newer version of Lifestead Test has downloaded. Restart to put it in place before going on.</Text>
+      <TouchableOpacity style={[styles.primary, restarting && styles.busy]} onPress={() => void restart()} disabled={restarting} accessibilityRole="button">
+        <Text style={styles.primaryText}>Restart Now</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -310,7 +292,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
   },
-  codeInput: { fontSize: 22, letterSpacing: 2, textAlign: 'center' },
   primary: { ...BUTTON_PRIMARY },
   primaryText: { ...BUTTON_PRIMARY_TEXT },
   secondary: { ...BUTTON_SECONDARY },

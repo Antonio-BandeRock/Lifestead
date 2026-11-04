@@ -3,16 +3,17 @@
 // Developer Tools. Developer only: metro.config.js leaves it out of the
 // tester and store versions.
 //
-// A request that arrives on a link (the phone's Open in Lifestead, or the
-// PC's, through DesktopLinkWatcher) is approved at once and the reply is
-// copied, so all that is left is Reply and Paste in the email.
-//
-// Since 1.0.80.11 the reply carries a short code and no link: the approval
-// is left sealed on the site, the asking device picks it up by itself, and
-// the code is the way to open it by hand. Only when the site cannot be
-// reached does the reply fall back to the link.
+// Since 1.0.81.2 it is a code each way, by direct instruction: the tester's
+// email carries a request code, pasted or typed here; Approve fetches the
+// request it stands for, keeps a record of who asked (name, which device,
+// which copy of the app), signs the approval and gives back an approval code
+// for the reply, which the tester types on the waiting screen. Every
+// approval is listed under Approved Testers. A request link from an older
+// tester version still works, and one arriving on a link (the phone's Open
+// in Lifestead, or the PC's, through DesktopLinkWatcher) is approved at once.
+// Only when the site cannot be reached does the reply carry a link instead.
 import * as Clipboard from 'expo-clipboard';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { colors } from '../constants/colors';
@@ -20,8 +21,16 @@ import { textShadow, typography } from '../constants/typography';
 import { t } from '../lib/i18n';
 import { explainNotYet } from '../lib/notYet';
 import { isDesktopApp } from '../lib/desktop/bridge';
-import { formatCode } from '../lib/testerApproval';
-import { approveRequest, getMyApprovalKey, sendMyApprovalKey, type Approved, type MyApprovalKey } from '../lib/testerApprove';
+import { extractCode, findCodes, formatCode } from '../lib/testerApproval';
+import {
+  approveRequest,
+  getMyApprovalKey,
+  listTesterApprovals,
+  sendMyApprovalKey,
+  type Approved,
+  type MyApprovalKey,
+  type TesterApprovalRecord,
+} from '../lib/testerApprove';
 import { AppTextInput } from './AppTextInput';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
 
@@ -41,12 +50,20 @@ export function ApproveTesterPanel({ initial = '' }: Props) {
   const [copied, setCopied] = useState(false);
   const [busy, setBusy] = useState(false);
   const [keySent, setKeySent] = useState<string | null>(null);
+  const [records, setRecords] = useState<TesterApprovalRecord[]>([]);
   const approvedFor = useRef('');
   const [days, setDays] = useState<number>(LENGTHS[0]);
 
+  const loadRecords = useCallback(() => {
+    void listTesterApprovals()
+      .then(setRecords)
+      .catch((error: unknown) => console.warn('[approveTester] could not read the list', error));
+  }, []);
+
   useEffect(() => {
     void getMyApprovalKey().then(setMine).catch(() => setMine(null));
-  }, []);
+    loadRecords();
+  }, [loadRecords]);
   useEffect(() => {
     if (!initial || approvedFor.current === initial) return;
     approvedFor.current = initial;
@@ -56,17 +73,18 @@ export function ApproveTesterPanel({ initial = '' }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initial]);
 
-  async function approve(text: string = input, length: number = days) {
+  async function approve(text: string = input, length: number = days, replaces?: string) {
     if (!text.trim()) {
-      explainNotYet('Paste the link from the tester\'s email first.');
+      explainNotYet('Type or paste the request code from the tester\'s email first. It looks like K7M2-QX9P.');
       return;
     }
     setBusy(true);
     setCopied(false);
     try {
-      const done = await approveRequest(text, length);
+      const done = await approveRequest(text, length, replaces);
       setResult(done);
       if (done.ok) {
+        loadRecords();
         // A copy without a press can be refused (a window not in front);
         // Copy the Reply is still there when it is.
         const went = await Clipboard.setStringAsync(replyText(done)).then(() => true, () => false);
@@ -77,23 +95,30 @@ export function ApproveTesterPanel({ initial = '' }: Props) {
     }
   }
 
-  // The box hides Android's paste menu (AppTextInput), so the copied request
-  // is read from the clipboard here.
-  async function pasteRequest() {
-    const copied = await Clipboard.getStringAsync().catch(() => '');
-    if (!copied.trim()) {
-      explainNotYet('Nothing is copied yet. Copy the request link from the tester\'s email first.');
+  // The box hides Android's paste menu (AppTextInput), so what was copied is
+  // read here. A whole copied email is fine: only the code goes in the box.
+  async function paste() {
+    const text = await Clipboard.getStringAsync().catch(() => '');
+    if (!text.trim()) {
+      explainNotYet('Nothing is copied yet. In the tester\'s email, press and hold the request code, choose Copy, then press Paste.');
       return;
     }
-    setInput(copied);
-    void approve(copied);
+    const code = findCodes(text)[0];
+    if (code) setInput(formatCode(code));
+    else if (extractCode(text, 'r')) setInput(text.trim());
+    else {
+      explainNotYet('No request code was found in what is copied. It looks like K7M2-QX9P: eight letters and numbers with a dash.');
+      return;
+    }
+    setResult(null);
   }
 
-  // A different length after approving signs the same request again, so the
-  // copied reply always carries the length on screen.
+  // A different length after approving signs the same request again, in
+  // place of the record just made, so the copied reply always carries the
+  // length on screen and the list holds one line for it.
   function chooseLength(length: number) {
     setDays(length);
-    if (result && result.ok) void approve(input, length);
+    if (result && result.ok) void approve(input, length, result.recordId ?? undefined);
   }
 
   async function sendKey() {
@@ -113,20 +138,22 @@ export function ApproveTesterPanel({ initial = '' }: Props) {
   return (
     <View style={styles.column}>
       <View style={styles.band}>
-        <Text style={styles.label}>The request link from the tester&apos;s email</Text>
+        <Text style={styles.label}>The request code from the tester&apos;s email</Text>
         <AppTextInput
-          style={styles.input}
+          style={[styles.input, styles.codeInput]}
           value={input}
           onChangeText={(text) => {
             setInput(text);
             setResult(null);
           }}
-          placeholder="Paste it here"
+          placeholder="K7M2-QX9P"
           placeholderTextColor={colors.textSecondary}
-          autoCapitalize="none"
+          autoCapitalize="characters"
           autoCorrect={false}
-          multiline
         />
+        <TouchableOpacity style={[styles.secondary, busy && styles.busy]} onPress={() => void paste()} disabled={busy} accessibilityRole="button">
+          <Text style={styles.secondaryText}>Paste</Text>
+        </TouchableOpacity>
         <Text style={styles.label}>How long it lasts</Text>
         <View style={styles.pills}>
           {LENGTHS.map((length) => (
@@ -141,19 +168,16 @@ export function ApproveTesterPanel({ initial = '' }: Props) {
             </TouchableOpacity>
           ))}
         </View>
-        <TouchableOpacity style={[styles.primary, busy && styles.busy]} onPress={() => void pasteRequest()} disabled={busy} accessibilityRole="button">
-          <Text style={styles.primaryText}>Paste and Approve</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.secondary, busy && styles.busy]} onPress={() => void approve()} disabled={busy} accessibilityRole="button">
-          <Text style={styles.secondaryText}>{t('Approve for {count} Days', { count: days })}</Text>
+        <TouchableOpacity style={[styles.primary, busy && styles.busy]} onPress={() => void approve()} disabled={busy} accessibilityRole="button">
+          <Text style={styles.primaryText}>{t('Approve for {count} Days', { count: days })}</Text>
         </TouchableOpacity>
         <Text style={styles.caption}>
-          Quickest: in the tester&apos;s email, tap the link, then Open in Lifestead. It is approved at once for the length chosen here, and the reply is copied. Choosing another length afterwards approves it again.
+          Approving reads the request the code stands for, keeps who asked in the list below, and gives back an approval code. The reply is copied. Choosing another length afterwards approves it again.
         </Text>
         {mine && !mine.trusted ? (
           <>
             <Text style={styles.warning}>
-              This device&apos;s approval key is not in the tester version yet, so its links will not open anything until it is.
+              This device&apos;s approval key is not in the tester version yet, so its approvals will not open anything until it is.
             </Text>
             <TouchableOpacity style={styles.secondary} onPress={() => void sendKey()} accessibilityRole="button">
               <Text style={styles.secondaryText}>Send My Approval Key to Claude</Text>
@@ -170,10 +194,15 @@ export function ApproveTesterPanel({ initial = '' }: Props) {
       {result && result.ok ? (
         <View style={styles.band}>
           <Text style={styles.body}>{approvedLine(result.request.name, result.request.platform, result.request.renewal, result.until)}</Text>
+          <Text style={styles.caption}>{t('Device: {device}', { device: shortDevice(result.request.device) })}</Text>
+          <Text style={styles.caption}>{t('App: {app}', { app: result.request.app ?? t('not given (an older test version)') })}</Text>
           {result.code ? (
-            <Text style={styles.code} selectable>
-              {formatCode(result.code)}
-            </Text>
+            <>
+              <Text style={styles.label}>The approval code to send back</Text>
+              <Text style={styles.code} selectable>
+                {formatCode(result.code)}
+              </Text>
+            </>
           ) : (
             <>
               <Text style={styles.warning}>The site could not be reached, so the reply carries the link instead of a code.</Text>
@@ -192,19 +221,39 @@ export function ApproveTesterPanel({ initial = '' }: Props) {
             </TouchableOpacity>
           )}
           <Text style={styles.caption}>
-            {result.pickup
-              ? 'The device that asked opens by itself the next time it is open with internet. The code is in case it does not, and works only on that device.'
-              : result.code
-                ? 'This request is from before automatic opening, so the tester types the code. It works only on the device that asked.'
-                : 'The link opens Lifestead Test only on the device that asked.'}
+            {result.code ? 'The approval code works only on the device that asked, for two weeks.' : 'The link opens Lifestead Test only on the device that asked.'}
           </Text>
         </View>
       ) : null}
+      <View style={styles.band}>
+        <Text style={styles.heading}>Approved Testers</Text>
+        {records.length === 0 ? (
+          <Text style={styles.caption}>Nobody has been approved from this device yet.</Text>
+        ) : (
+          records.map((record) => (
+            <View key={record.id} style={styles.record}>
+              <Text style={styles.body}>{approvedLine(record.name, record.platform === 'computer' ? 'computer' : 'phone', record.renewal, record.untilDay)}</Text>
+              <Text style={styles.caption}>
+                {t('Approved {day}. Device: {device}. App: {app}.', {
+                  day: record.approvedAt.slice(0, 10),
+                  device: shortDevice(record.device),
+                  app: record.app ?? t('not given (an older test version)'),
+                })}
+              </Text>
+            </View>
+          ))
+        )}
+      </View>
     </View>
   );
 }
 
 type Approval = Extract<Approved, { ok: true }>;
+
+/** Enough of the device code to tell two devices apart on the list. */
+function shortDevice(device: string): string {
+  return device.length > 12 ? device.slice(0, 12) : device;
+}
 
 function replyText(done: Approval): string {
   const name = done.request.name;
@@ -212,10 +261,11 @@ function replyText(done: Approval): string {
     return `${t('{name}, here is your link for Lifestead Test. Open it on the device you asked from:', { name })}
 ${done.link}`;
   }
-  const values = { name, day: done.until, code: formatCode(done.code) };
-  return done.pickup
-    ? t('{name}, you are approved for Lifestead Test until {day}. Open Lifestead Test on the device you asked from, with internet, and it opens by itself. If it has not within a few minutes, type this code there: {code}', values)
-    : t('{name}, you are approved for Lifestead Test until {day}. Type this code in Lifestead Test on the device you asked from: {code}', values);
+  return t('{name}, you are approved for Lifestead Test until {day}. On the device you asked from, type this code in Lifestead Test and press Use This Code: {code}', {
+    name,
+    day: done.until,
+    code: formatCode(done.code),
+  });
 }
 
 function approvedLine(name: string, platform: 'phone' | 'computer', renewal: boolean, day: string): string {
@@ -229,6 +279,8 @@ function approvedLine(name: string, platform: 'phone' | 'computer', renewal: boo
 const styles = StyleSheet.create({
   column: { gap: HOME_BAND_GAP },
   band: { ...homeBandStyle, borderColor: colors.tabProfile, padding: HOME_BAND_CONTENT_PADDING, gap: 10 },
+  heading: { ...typography.body, color: colors.tabProfileText, ...textShadow },
+  record: { gap: 2 },
   label: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   body: { ...typography.body, color: colors.textPrimary, ...textShadow },
   approvalLink: { ...typography.caption, color: colors.textPrimary, ...textShadow },
@@ -245,6 +297,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
   },
+  codeInput: { fontSize: 22, letterSpacing: 2, textAlign: 'center' },
   primary: { ...BUTTON_PRIMARY },
   primaryText: { ...BUTTON_PRIMARY_TEXT },
   secondary: { ...BUTTON_SECONDARY },
