@@ -26,13 +26,15 @@
 import type { BeatKey } from './yourStory';
 import type { InterviewQuestionView, InterviewView, TourPath } from './yourStoryInterview';
 
-// What each part asks before its cards, in this order. A question already
-// answered in an earlier part is not asked again. 'stage' stands for every
-// stage:<code> question.
+// What each part needs to know, in this order. 'stage' stands for every
+// stage:<code> question. Since 1.0.80.9 none of these is asked inside a
+// part: every one any chosen part needs is asked first, in REQUIRED_ORDER,
+// before the list of parts (see requiredQuestions below).
 export const SECTION_QUESTIONS: Record<BeatKey, string[]> = {
   health: ['aboutYou', 'conditions', 'stage', 'meds', 'allergies'],
   food: ['aboutYou', 'conditions', 'stage', 'meds', 'allergies', 'eatingStyle'],
-  movement: ['aboutYou'],
+  // Nothing Movement shows reads birth date or sex, so it asks for neither.
+  movement: [],
   home: [],
   garden: [],
   money: [],
@@ -41,6 +43,23 @@ export const SECTION_QUESTIONS: Record<BeatKey, string[]> = {
   family: [],
   interests: [],
 };
+
+// WHAT THE APP NEEDS BEFORE ANY PART, 1.0.80.9. Direct instruction,
+// 2026-11-03, after a person who chose Health was never asked for a birth
+// date and sex: "If they want those things to work, they need to be asked
+// for the information no matter which topic they start with. Once they have
+// answered all of the required information for the minimums for the app to
+// function for them, then they move to setting up the topic they selected to
+// go with first. And remember, we cannot have some things in front of others
+// that are required to make them work." So every question any chosen part
+// needs is gathered into one step straight after the parts are chosen, in
+// the order each one feeds the next: age and sex set every nutrient target,
+// conditions decide which stage questions there are, a stage needs its
+// condition, medicines and allergies are read by the emergency card and the
+// food checks, and a way of eating is read last by meal plans that already
+// know all of the above. Choosing another part later brings this step back
+// for anything the new part needs.
+export const REQUIRED_ORDER = ['aboutYou', 'conditions', 'stage', 'meds', 'allergies', 'eatingStyle'];
 
 // The cards of each part, by key in lib/setupCards.ts, in the order each
 // one makes the next more useful (the order Tony approved, 2026-11-02).
@@ -212,18 +231,34 @@ export function sectionQuestions(interview: InterviewView, beat: BeatKey): Inter
   return out;
 }
 
+// Every question the chosen parts need that is still waiting, in
+// REQUIRED_ORDER, whichever part is opened first.
+export function requiredQuestions(interview: InterviewView): InterviewQuestionView[] {
+  const needed = new Set(interview.facts.story.beats.flatMap((beat) => SECTION_QUESTIONS[beat] ?? []));
+  const out: InterviewQuestionView[] = [];
+  for (const kind of REQUIRED_ORDER) {
+    if (!needed.has(kind)) continue;
+    for (const question of interview.questions) {
+      if (!question.answered && question.def.kind === kind) out.push(question);
+    }
+  }
+  return out;
+}
+
 export function closingQuestions(interview: InterviewView): InterviewQuestionView[] {
   return CLOSING_QUESTIONS.map((key) => interview.questions.find((question) => question.key === key)).filter(
     (question): question is InterviewQuestionView => !!question && !question.answered,
   );
 }
 
-export type SetupStage = 'parts' | 'list' | 'closing' | 'finished';
+export type SetupStage = 'parts' | 'required' | 'list' | 'closing' | 'finished';
 
-// Where setup stands as a whole: choosing the parts, picking the next part,
-// the last questions, or nothing left.
+// Where setup stands as a whole: choosing the parts, what the app needs
+// before any of them, picking the next part, the last questions, or nothing
+// left.
 export function setupStage(interview: InterviewView): SetupStage {
   if (!partsChosen(interview)) return 'parts';
+  if (requiredQuestions(interview).length > 0) return 'required';
   if (!allPartsSettled(interview)) return 'list';
   if (closingQuestions(interview).length > 0) return 'closing';
   return 'finished';
@@ -255,3 +290,6 @@ export const SECTION_SKIP_LABEL = 'Skip this part';
 export const SECTION_BACK_LABEL = 'Back to the list';
 export const SECTION_QUESTION_FIRST = 'Answer the question above first, or tap Later on it.';
 export const CLOSING_HEADING = 'A few last questions';
+export const REQUIRED_HEADING = 'First, what the app needs to know';
+export const REQUIRED_LEAD =
+  'The parts you chose read these answers, so they come before any of them, one at a time. When they are done, you choose which part to set up first.';
