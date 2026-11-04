@@ -592,6 +592,7 @@ const back = load('lib/storyReturn.ts');
     neuro: [],
     neuroLabels: { adhd: 'ADHD' },
     diets: [],
+    cuisines: [],
     allergies: [],
     answers: {},
     records: {},

@@ -8,6 +8,9 @@
 //  2. Everything (Omnivore) is no restriction, and the strictest base wins.
 //  3. Every tag the recipes carry is reachable from the form.
 //  4. The sentences carry no dashes and no verdict words.
+//  5. A cuisine leans the plan inside the diet rules and never replaces
+//     them: Gluten-Free with Mexican is gluten-free Mexican dishes, and a
+//     meal with too few of them draws on every recipe (2026-11-03).
 //
 // Run with: node scripts/test_meal_plan_diet.js
 // Exits non-zero on any failure.
@@ -25,6 +28,7 @@ function loadModule(relPath) {
   });
   const module = { exports: {} };
   new Function('exports', 'module', 'require', outputText)(module.exports, module, (name) => {
+    if (name === './cuisineBands') return loadModule('lib/cuisineBands.ts');
     throw new Error(`unexpected import ${name}`);
   });
   return module.exports;
@@ -43,15 +47,46 @@ function check(label, actual, expected) {
 }
 
 // 1 and 2
-check('split', D.splitDietPreferences(['Paleo', 'Omnivore', 'Gluten-Free']), { base: null, styles: ['Paleo'], extras: ['Gluten-Free'] });
+check('split', D.splitDietPreferences(['Paleo', 'Omnivore', 'Gluten-Free']), { base: null, styles: ['Paleo'], extras: ['Gluten-Free'], cuisines: [] });
 check('strictest base', D.splitDietPreferences(['Vegetarian', 'Vegan']).base, 'Vegan');
-check('unknown dropped', D.splitDietPreferences(['Keto', 'Mediterranean']), { base: null, styles: ['Mediterranean'], extras: [] });
-check('tags', D.planDietTags({ base: 'Vegan', styles: ['Mediterranean'], extras: ['High-Protein'] }), ['Vegan', 'Mediterranean', 'High-Protein']);
-check('empty is no restriction', D.planDietTags({ base: null, styles: [], extras: [] }), []);
+check('unknown dropped', D.splitDietPreferences(['Keto', 'Mediterranean']), { base: null, styles: ['Mediterranean'], extras: [], cuisines: [] });
+check('tags', D.planDietTags({ base: 'Vegan', styles: ['Mediterranean'], extras: ['High-Protein'], cuisines: [] }), ['Vegan', 'Mediterranean', 'High-Protein']);
+check('empty is no restriction', D.planDietTags({ base: null, styles: [], extras: [], cuisines: [] }), []);
 check('toggle on', D.toggleTag(['Paleo'], 'AIP'), ['Paleo', 'AIP']);
 check('toggle off', D.toggleTag(['Paleo', 'AIP'], 'Paleo'), ['AIP']);
-check('same diet', D.sameDiet({ base: null, styles: ['Paleo'], extras: [] }, D.splitDietPreferences(['Paleo', 'Omnivore'])), true);
+check('same diet', D.sameDiet({ base: null, styles: ['Paleo'], extras: [], cuisines: [] }, D.splitDietPreferences(['Paleo', 'Omnivore'])), true);
 check('base label', D.baseChoiceLabel(null), 'Everything');
+
+// 5. Cuisines
+check('cuisines split', D.splitDietPreferences(['Gluten-Free'], ['Thai', 'Klingon', 'Mexican']).cuisines, ['Mexican', 'Thai']);
+check('cuisines do not join the diet tags', D.planDietTags(D.splitDietPreferences(['Gluten-Free'], ['Mexican'])), ['Gluten-Free']);
+check('cuisine changes the diet', D.sameDiet(D.splitDietPreferences([], ['Mexican']), D.splitDietPreferences([], [])), false);
+check('every cuisine band is a choice', D.CUISINE_CHOICES, ['Mexican', 'French', 'Italian', 'German', 'Chinese', 'Thai', 'Vietnamese']);
+check('cuisine toggle', D.toggleCuisine(['Mexican'], 'Thai'), ['Mexican', 'Thai']);
+const dishes = [
+  { id: 'taco', cuisine: 'Mexican' },
+  { id: 'pozole', cuisine: 'Mexican' },
+  { id: 'enchiladas', cuisine: 'Mexican' },
+  { id: 'pho', cuisine: 'Vietnamese' },
+  { id: 'salad' },
+];
+const cuisineOf = (dish) => dish.cuisine;
+check('lean narrows', D.leanToCuisines(dishes, ['Mexican'], cuisineOf).map((d) => d.id), ['taco', 'pozole', 'enchiladas']);
+check('lean with two cuisines', D.leanToCuisines(dishes, ['Mexican', 'Vietnamese'], cuisineOf).map((d) => d.id), ['taco', 'pozole', 'enchiladas', 'pho']);
+check('too few falls back to every dish', D.leanToCuisines(dishes, ['Vietnamese'], cuisineOf).length, dishes.length);
+check('no cuisine is every dish', D.leanToCuisines(dishes, [], cuisineOf).length, dishes.length);
+const generator = fs.readFileSync(path.join(__dirname, '..', 'lib/dailyMealPlan.ts'), 'utf8');
+const dietFilterAt = generator.indexOf('recipeMatchesAllDietPreferences(entry, dietPreferences)');
+const leanAt = generator.indexOf('leanToCuisines(');
+if (dietFilterAt < 0 || leanAt < 0 || leanAt < dietFilterAt) {
+  failures++;
+  console.log('FAIL the cuisine lean has to come after the diet filter in buildCandidatePools');
+}
+check(
+  'describe with a cuisine',
+  D.describePlanDiet(D.splitDietPreferences(['Gluten-Free'], ['Mexican'])),
+  'Every dish fits gluten-free eating. Dishes are Mexican wherever enough of them fit a meal; where too few do, that meal draws on every recipe.',
+);
 
 // 3. Every recipe tag except Omnivore is on the form.
 const typesSource = fs.readFileSync(path.join(__dirname, '..', 'lib/digest/types.ts'), 'utf8');
@@ -71,16 +106,17 @@ for (const tag of allTags) {
 }
 
 // 4. Sentences
-check('describe', D.describePlanDiet({ base: 'Vegetarian', styles: ['Mediterranean'], extras: ['Gluten-Free'] }), 'Every dish fits vegetarian, Mediterranean and gluten-free eating.');
+check('describe', D.describePlanDiet({ base: 'Vegetarian', styles: ['Mediterranean'], extras: ['Gluten-Free'], cuisines: [] }), 'Every dish fits vegetarian, Mediterranean and gluten-free eating.');
 const sentences = [
-  D.describePlanDiet({ base: null, styles: [], extras: [] }),
-  D.describePlanDiet({ base: null, styles: ['AIP'], extras: [] }),
-  D.describeDifferenceFromProfile({ base: 'Vegan', styles: [], extras: [] }, { base: null, styles: [], extras: [] }),
+  D.describePlanDiet({ base: null, styles: [], extras: [], cuisines: [] }),
+  D.describePlanDiet({ base: null, styles: ['AIP'], extras: [], cuisines: [] }),
+  D.describePlanDiet({ base: null, styles: [], extras: [], cuisines: ['Thai', 'French'] }),
+  D.describeDifferenceFromProfile({ base: 'Vegan', styles: [], extras: [], cuisines: [] }, { base: null, styles: [], extras: [], cuisines: [] }),
   ...D.BASE_DIET_CHOICES.map((c) => c.caption),
   ...D.EATING_STYLE_CHOICES.map((c) => c.caption),
   ...D.DIET_EXTRA_CHOICES.map((c) => c.caption),
 ];
-check('no difference said when the same', D.describeDifferenceFromProfile({ base: null, styles: [], extras: [] }, { base: null, styles: [], extras: [] }), null);
+check('no difference said when the same', D.describeDifferenceFromProfile({ base: null, styles: [], extras: [], cuisines: [] }, { base: null, styles: [], extras: [], cuisines: [] }), null);
 const FORBIDDEN = /\b(good|bad|best|healthy|healthier|should|clean|real|genuine|genuinely)\b|[–—]| -- /i;
 for (const sentence of sentences) {
   if (!sentence || FORBIDDEN.test(sentence)) {

@@ -41,6 +41,15 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.80.7',
+    date: '2026-11-03',
+    changes: [
+      'Meal plans can now lean toward a cuisine: Mexican, French, Italian, German, Chinese, Thai or Vietnamese. Pick them on the Meal Plan form, in Profile > Diet Preferences, or in setup under Plan meals this way.',
+      'A cuisine never loosens a diet. Gluten-Free with Mexican plans Mexican dishes that are gluten-free, and a meal with too few dishes of that cuisine draws on every recipe that fits.',
+      'Eight Mexican and French egg dishes can now be breakfast in a plan.',
+    ],
+  },
+  {
     version: '1.0.80.6',
     date: '2026-11-03',
     changes: [

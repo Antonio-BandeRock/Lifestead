@@ -185,6 +185,7 @@ const AREAS: readonly Area[] = [
       'user_condition_stages',
       'curious_about_conditions',
       'diet_preferences',
+      'cuisine_preferences',
       'user_food_allergies',
       'user_nutrient_targets',
       'user_nutrient_weekday_targets',

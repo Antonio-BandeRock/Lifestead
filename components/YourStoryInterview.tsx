@@ -37,11 +37,13 @@ import {
   removeFoodAllergy,
   removeNeuroProfile,
   setConditionStage,
+  setCuisinePreferenceSelected,
   setDietPreferenceSelected,
   setUserConditionSelected,
   setUserProfile,
 } from '../lib/db';
 import { routeForDigestEntry } from '../lib/digestNavigation';
+import { CUISINE_CHOICES } from '../lib/mealPlanDiet';
 import { ALL_NEURO_PROFILE_KEYS, NEURO_PROFILE_CAPTIONS, NEURO_PROFILE_LABELS, type NeuroProfileKey } from '../lib/neuroProfile';
 import type { StoryDestination } from '../lib/yourStory';
 import { bringYourStoryItemBack, setYourStoryItemAside } from '../lib/yourStoryDb';
@@ -52,6 +54,8 @@ import {
   BY_ITSELF_HEADING,
   CHANGE_LABEL,
   COMMON_ALLERGENS,
+  CUISINES_HEADING,
+  CUISINES_LINE,
   DONE_LABEL,
   EATING_STYLES,
   FREE_BEFORE_SETUP,
@@ -460,9 +464,26 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
                 );
               })}
             </View>
+            <View style={styles.styleRow}>
+              <Text style={styles.styleName}>{CUISINES_HEADING}</Text>
+              <Text style={styles.caption}>{CUISINES_LINE}</Text>
+              <View style={styles.links}>
+                {CUISINE_CHOICES.map((cuisine) => {
+                  const on = facts.cuisines.includes(cuisine);
+                  return well(
+                    cuisine,
+                    on,
+                    () => void act(() => setCuisinePreferenceSelected(cuisine, !on), key),
+                    cuisine,
+                    undefined,
+                    styles.wellInline,
+                  );
+                })}
+              </View>
+            </View>
             <View style={styles.links}>
-              {facts.diets.length > 0
-                ? link(DONE_LABEL, () => finishMulti(question, facts.diets.length))
+              {facts.diets.length + facts.cuisines.length > 0
+                ? link(DONE_LABEL, () => finishMulti(question, facts.diets.length + facts.cuisines.length))
                 : link(NO_STYLE_LABEL, () => finishMulti(question, 0))}
             </View>
           </>

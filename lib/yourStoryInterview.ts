@@ -114,7 +114,7 @@ export const INTERVIEW_QUESTIONS: InterviewQuestionDef[] = [
   {
     kind: 'eatingStyle',
     question: 'Do you follow a way of eating, or want to try one?',
-    why: 'Meal plans and recipe suggestions keep to the styles you choose. Read about any of them first; choosing one can be undone at any time.',
+    why: 'Meal plans and recipe suggestions keep to the styles you choose. A cuisine, such as Mexican, leans the plan toward its dishes inside those styles. Read about any style first; choosing one can be undone at any time.',
     beats: ['health', 'food'],
   },
   {
@@ -173,6 +173,10 @@ export const SECURITY_BOTH_LABEL = 'App Lock and the vault';
 export const SECURITY_APP_LOCK_LABEL = 'App Lock only';
 export const SECURITY_VAULT_LABEL = 'The vault only';
 export const PLAN_THIS_WAY_LABEL = 'Plan meals this way';
+// The cuisines under the eating styles (2026-11-03). A cuisine never loosens
+// a style: the plan leans toward it only among dishes every style allows.
+export const CUISINES_HEADING = 'Cuisines';
+export const CUISINES_LINE = 'Pick any the plan should lean toward. Every style chosen above still holds, so Gluten-Free with Mexican is Mexican dishes that are gluten-free.';
 export const READ_MORE_LABEL = 'Read more';
 export const CHANGE_LABEL = 'Change';
 export const NEURO_PROFILE_NOTE =
@@ -1202,6 +1206,8 @@ export type InterviewFacts = {
   neuro: string[];
   neuroLabels: Record<string, string>;
   diets: string[];
+  // The cuisines the meal plan leans toward (cuisine_preferences).
+  cuisines: string[];
   allergies: string[];
   answers: Record<string, InterviewAnswer>;
   records: GuideRecords;
@@ -1324,7 +1330,7 @@ function viewQuestion(def: InterviewQuestionDef, facts: InterviewFacts): Intervi
       return { ...base, answered: false, summary: null };
     }
     case 'eatingStyle':
-      if (facts.diets.length > 0) return { ...base, answered: true, summary: listSentence(facts.diets) };
+      if (facts.diets.length + facts.cuisines.length > 0) return { ...base, answered: true, summary: listSentence([...facts.diets, ...facts.cuisines]) };
       return { ...base, answered: !!answer, summary: answer ? `${NO_STYLE_LABEL}.` : null };
     case 'allergies':
       if (facts.allergies.length > 0) return { ...base, answered: true, summary: listSentence(facts.allergies) };
@@ -1492,9 +1498,12 @@ function switchedOnLine(question: InterviewQuestionView, facts: InterviewFacts):
         : `For ${question.condition.label}, no stage is chosen, so foods keep their usual order.`;
     }
     case 'eatingStyle':
+    {
+      const lean = facts.cuisines.length > 0 ? ` Where enough dishes fit, meals lean toward ${listSentence(facts.cuisines)} cooking.` : '';
       return facts.diets.length > 0
-        ? `Meal plans and recipe suggestions keep to ${listSentence(facts.diets)}.`
-        : 'Meal plans draw on every way of eating.';
+        ? `Meal plans and recipe suggestions keep to ${listSentence(facts.diets)}.${lean}`
+        : `Meal plans draw on every way of eating.${lean}`;
+    }
     case 'allergies':
       return facts.allergies.length > 0
         ? `Food lookups and meal plans mark anything containing ${listSentence(facts.allergies)}. The marking depends on how foods are labelled, so it helps you check and is never a promise.`

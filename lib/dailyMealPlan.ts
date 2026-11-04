@@ -95,6 +95,7 @@ import {
   type PlanEater,
   type PlanMeal,
 } from './householdPlan';
+import { leanToCuisines } from './mealPlanDiet';
 import { NUTRIENT_ANTAGONISM_RULES, NUTRIENT_SYNERGY_RULES } from './nutrientPairRules';
 import { addDays, overridesForDate, weekdayTargetNotes, type WeekdayTargetOverride } from './weekdayTargets';
 
@@ -321,6 +322,18 @@ export const BREAKFAST_ELIGIBLE_RECIPE_IDS = new Set<string>([
   'curated_snack_greek_yogurt_grapefruit_olive_oil_bowl',
   'curated_snack_greek_yogurt_apple_pistachio_bowl',
   'curated_snack_greek_yogurt_cantaloupe_olive_oil_bowl',
+  // 2026-11-03: the cuisine breakfasts, so a plan leaning Mexican or French
+  // has a breakfast of that cuisine to choose. They are also named in
+  // BREAKFAST_DISH_RECIPE_IDS below, so the same dish is not served again
+  // at dinner.
+  'curated_mx_chilorio_con_huevo',
+  'curated_mx_machaca_con_huevo',
+  'curated_mx_huevos_a_la_mexicana',
+  'curated_mx_huevos_motulenos',
+  'curated_mx_huevos_rancheros',
+  'curated_fr_omelette_aux_fines_herbes',
+  'curated_fr_oeufs_en_cocotte',
+  'curated_fr_galette_complete',
 ]);
 
 // ---------------------------------------------------------------------
@@ -513,6 +526,15 @@ export const BREAKFAST_DISH_RECIPE_IDS = new Set<string>([
   'curated_vegan_papaya_lime_smoothie_bowl',
   // Moved to the Baked Goods Builder. (1)
   'curated_vegan_baked_apple_cinnamon_oatmeal_cup',
+  // The cuisine breakfasts in BREAKFAST_ELIGIBLE_RECIPE_IDS. (8)
+  'curated_mx_chilorio_con_huevo',
+  'curated_mx_machaca_con_huevo',
+  'curated_mx_huevos_a_la_mexicana',
+  'curated_mx_huevos_motulenos',
+  'curated_mx_huevos_rancheros',
+  'curated_fr_omelette_aux_fines_herbes',
+  'curated_fr_oeufs_en_cocotte',
+  'curated_fr_galette_complete',
 ]);
 
 // ---------------------------------------------------------------------
@@ -1361,7 +1383,7 @@ async function mapWithLimit<T, R>(items: T[], limit: number, fn: (item: T) => Pr
   return results;
 }
 
-async function buildCandidatePools(conditionCodes: string[], dietPreferences: RecipeDietTag[]): Promise<CandidatePools> {
+async function buildCandidatePools(conditionCodes: string[], dietPreferences: RecipeDietTag[], cuisines: readonly string[] = []): Promise<CandidatePools> {
   const conditionAndDietPool = getEntriesForCategory('recipes').filter(isEligibleRecipeEntry).filter((entry) => {
     if (recipeSafeAcrossConditions(entry, conditionCodes) === null) return false;
     if (!recipeMatchesAllDietPreferences(entry, dietPreferences)) return false;
@@ -1392,7 +1414,12 @@ async function buildCandidatePools(conditionCodes: string[], dietPreferences: Re
   const myAvoidSetAsideFoods = Array.from(setAsideFoods).sort((a, b) => a.localeCompare(b));
   const myAvoidSetAsideCount = conditionAndDietPool.length - pool.length;
 
-  const breakfastPoolEntries = pool.filter((entry) => BREAKFAST_ELIGIBLE_RECIPE_IDS.has(entry.linkedCuratedRecipeId));
+  // 2026-11-03: a cuisine chosen on the form leans each meal toward its
+  // dishes. Every pool below is already inside the condition, diet and
+  // avoid rules, so the lean only narrows within them, and a meal with
+  // too few of that cuisine's dishes keeps every dish it had.
+  const lean = (entries: EligibleRecipeEntry[]) => leanToCuisines(entries, cuisines, (entry) => entry.recipeCard?.cuisine);
+  const breakfastPoolEntries = lean(pool.filter((entry) => BREAKFAST_ELIGIBLE_RECIPE_IDS.has(entry.linkedCuratedRecipeId)));
   const lunchMainTypes = new Set(['side', 'salad', 'soup', 'handheld', 'smoothie']);
   const dinnerMainTypes = new Set(['side', 'salad', 'soup', 'handheld']);
   // The builder says what tool makes a dish, not what meal it belongs to,
@@ -1405,8 +1432,8 @@ async function buildCandidatePools(conditionCodes: string[], dietPreferences: Re
   // reads from pool.
   const isMadeFirstBase = (entry: EligibleRecipeEntry) => entry.recipeCard?.shelf?.startsWith('Bases:') === true;
   const mainCandidates = pool.filter((entry) => !isBreakfastDish(entry) && !isMadeFirstBase(entry));
-  const lunchMainPoolEntries = mainCandidates.filter((entry) => lunchMainTypes.has(entry.linkedBuilderType));
-  const dinnerMainPoolEntries = mainCandidates.filter((entry) => dinnerMainTypes.has(entry.linkedBuilderType));
+  const lunchMainPoolEntries = lean(mainCandidates.filter((entry) => lunchMainTypes.has(entry.linkedBuilderType)));
+  const dinnerMainPoolEntries = lean(mainCandidates.filter((entry) => dinnerMainTypes.has(entry.linkedBuilderType)));
   // A side pairing has to be an actual side dish, which is a narrower
   // thing than a side-builder recipe: the Side Builder is this app's
   // generic single-dish tool, so 126 of the 131 recipes it holds are the
@@ -1415,8 +1442,8 @@ async function buildCandidatePools(conditionCodes: string[], dietPreferences: Re
   // SIDE_DISH_RECIPE_IDS names the five, and none of them is a breakfast
   // dish, so this reads from pool rather than mainCandidates.
   const sidePoolEntries = pool.filter((entry) => SIDE_DISH_RECIPE_IDS.has(entry.linkedCuratedRecipeId));
-  const saladPoolEntries = mainCandidates.filter((entry) => entry.linkedBuilderType === 'salad');
-  const beveragePoolEntries = pool.filter((entry) => entry.linkedBuilderType === 'beverage');
+  const saladPoolEntries = lean(mainCandidates.filter((entry) => entry.linkedBuilderType === 'salad'));
+  const beveragePoolEntries = lean(pool.filter((entry) => entry.linkedBuilderType === 'beverage'));
 
   // 2026-08-26 perf fix -- a recipe can legitimately belong to more than
   // one of the 6 pools above at once (a 'side' is a real lunch/dinner
@@ -2078,6 +2105,8 @@ function withOnHand(pools: CandidatePools, dishes: Map<string, OnHandDish> | und
 export async function generateDailyMealPlan(options: {
   conditionCodes: string[];
   dietPreferences: RecipeDietTag[];
+  // Cuisines the plan leans toward inside the diet (lib/mealPlanDiet.ts); none when absent.
+  cuisines?: string[];
   carbLevel: CarbLevel;
   // Optional and defaulted to false so every pre-existing caller keeps
   // behaving exactly as before.
@@ -2099,10 +2128,10 @@ export async function generateDailyMealPlan(options: {
   return retryOnceOnReleasedObject(async () => {
     const table = householdTable(options.household);
     if (table) {
-      const pools = withOnHand(await buildCandidatePools([], []), options.onHand);
+      const pools = withOnHand(await buildCandidatePools([], [], options.cuisines), options.onHand);
       return generateHouseholdDay(pools, table, options.carbLevel, options.limitAddedSugar ?? false, undefined, options.date, open, options.energy ?? null, options.budget ?? null);
     }
-    const pools = withOnHand(await buildCandidatePools(options.conditionCodes, options.dietPreferences), options.onHand);
+    const pools = withOnHand(await buildCandidatePools(options.conditionCodes, options.dietPreferences, options.cuisines), options.onHand);
     return generateOneDay(pools, options.conditionCodes, options.carbLevel, options.limitAddedSugar ?? false, undefined, options.date, open, options.energy ?? null, options.budget ?? null);
   });
 }
@@ -2129,6 +2158,8 @@ export async function generateDailyMealPlan(options: {
 export async function generateMealPlanDays(options: {
   conditionCodes: string[];
   dietPreferences: RecipeDietTag[];
+  // Cuisines the plan leans toward inside the diet (lib/mealPlanDiet.ts); none when absent.
+  cuisines?: string[];
   carbLevel: CarbLevel;
   days: number;
   limitAddedSugar?: boolean;
@@ -2148,7 +2179,7 @@ export async function generateMealPlanDays(options: {
   const days = Math.max(1, Math.min(42, Math.round(options.days)));
   const table = householdTable(options.household);
   return retryOnceOnReleasedObject(async () => {
-    const pools = withOnHand(table ? await buildCandidatePools([], []) : await buildCandidatePools(options.conditionCodes, options.dietPreferences), options.onHand);
+    const pools = withOnHand(table ? await buildCandidatePools([], [], options.cuisines) : await buildCandidatePools(options.conditionCodes, options.dietPreferences, options.cuisines), options.onHand);
     const rotationState = newRotationState();
     const results: DailyMealPlanResult[] = [];
     for (let dayIndex = 0; dayIndex < days; dayIndex++) {
@@ -2479,17 +2510,18 @@ export async function loadPlateSwapPools(
   conditionCodes: string[],
   dietPreferences: RecipeDietTag[],
   household?: PlanEater[],
+  cuisines: readonly string[] = [],
 ): Promise<PlateSwapPools> {
   const table = householdTable(household);
   if (!table) {
-    return retryOnceOnReleasedObject(async () => ({ pools: await buildCandidatePools(conditionCodes, dietPreferences), conditionCodes }));
+    return retryOnceOnReleasedObject(async () => ({ pools: await buildCandidatePools(conditionCodes, dietPreferences, cuisines), conditionCodes }));
   }
   // With a household, a dish traded onto a shared plate fits everybody the
   // plan feeds, since which of them are home for that meal can change by day.
   // That holds for a main dish too, so trading one in means nobody at that
   // meal needs a plate of their own any more (foldOwnPlates below).
   return retryOnceOnReleasedObject(async () => {
-    const pools = await buildCandidatePools([], []);
+    const pools = await buildCandidatePools([], [], cuisines);
     const forEveryone = (list: LoadedCandidate[]) => list.filter((c) => table.eaters.every((eater) => table.fits(eater, c)));
     return {
       pools: {

@@ -382,6 +382,7 @@ export type ToolMark =
   | 'mealPlan.regenerateDay'
   | 'mealPlan.letGoKept'
   | 'mealPlan.styles'
+  | 'mealPlan.cuisines'
   | 'meds.checkBand'
   | 'meds.myMeds'
   | 'meds.skipDose'
@@ -3731,6 +3732,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       steps: [
         { say: 'Pick what you eat.', mark: 'mealPlan.diet' },
         { say: 'Tap any eating style you follow. Hold one down to read what it means.', mark: 'mealPlan.styles' },
+        { say: 'Tap any cuisine the plan should lean toward, such as Mexican. Your eating style still holds.', mark: 'mealPlan.cuisines' },
         { say: 'Pick how many days.', mark: 'mealPlan.days' },
         { say: 'Tap Generate My Day or Generate My Plan.', mark: 'mealPlan.generate' },
       ],

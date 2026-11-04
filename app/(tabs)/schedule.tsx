@@ -27,6 +27,7 @@ import {
   ensureScheduleSeriesGenerated,
   getDailyNutrientAnalysis,
   getDayMealAndDoseTimeline,
+  getCuisinePreferences,
   getDietPreferences,
   getUpcomingScheduleCountsByType,
   getUserConditions,
@@ -218,13 +219,16 @@ import {
 } from '../../lib/dailyMealPlan';
 import {
   BASE_DIET_CHOICES,
+  CUISINE_CHOICES,
   DIET_EXTRA_CHOICES,
   EATING_STYLE_CHOICES,
   baseChoiceLabel,
   describeDifferenceFromProfile,
   describePlanDiet,
+  planCuisines,
   planDietTags,
   splitDietPreferences,
+  toggleCuisine,
   toggleTag,
   type PlanDiet,
 } from '../../lib/mealPlanDiet';
@@ -3977,11 +3981,12 @@ function DailyMealPlanLens() {
   // The eating style this plan is built around, asked on the form and
   // started from Profile > Diet Preferences. A change here holds for the
   // plan being made and is never written back to Profile.
-  const EMPTY_DIET: PlanDiet = { base: null, styles: [], extras: [] };
+  const EMPTY_DIET: PlanDiet = { base: null, styles: [], extras: [], cuisines: [] };
   const [planDiet, setPlanDiet] = useState<PlanDiet>(EMPTY_DIET);
   const [profileDiet, setProfileDiet] = useState<PlanDiet>(EMPTY_DIET);
   const dietTouchedRef = useRef(false);
   const dietPreferences: RecipeDietTag[] = planDietTags(planDiet);
+  const cuisines = planCuisines(planDiet);
   // The diet the plan on screen was built with, so a regenerated day or a
   // plate swap keeps to it even if the form has been changed since.
   const [plannedDiet, setPlannedDiet] = useState<PlanDiet | null>(null);
@@ -4042,13 +4047,13 @@ function DailyMealPlanLens() {
   useFocusEffect(
     useCallback(() => {
       let cancelled = false;
-      Promise.all([getUserConditions(), getDietPreferences(), getUserNutrientWeekdayTargets(), getOpenMealRules(), listUsualMeals()])
-        .then(([codes, tags, weekdayTargets, rules, usual]) => {
+      Promise.all([getUserConditions(), getDietPreferences(), getUserNutrientWeekdayTargets(), getOpenMealRules(), listUsualMeals(), getCuisinePreferences()])
+        .then(([codes, tags, weekdayTargets, rules, usual, cuisineNames]) => {
           if (cancelled) return;
           setOpenRules(rules);
           setUsualMeals(usual);
           setConditionCodes(codes);
-          const fromProfile = splitDietPreferences(tags);
+          const fromProfile = splitDietPreferences(tags, cuisineNames);
           setProfileDiet(fromProfile);
           // Profile fills the form until the person answers it here.
           if (!dietTouchedRef.current) setPlanDiet(fromProfile);
@@ -4113,12 +4118,13 @@ function DailyMealPlanLens() {
     if (!planningScope) return undefined;
     const scope = planningScope;
     const diet = plannedDiet ? planDietTags(plannedDiet) : dietPreferences;
+    const lean = plannedDiet ? planCuisines(plannedDiet) : cuisines;
     const household = planHousehold ?? undefined;
     return {
       load: () => {
-        const key = JSON.stringify([scope.conditionCodes, diet, household?.map((eater) => eater.id)]);
+        const key = JSON.stringify([scope.conditionCodes, diet, lean, household?.map((eater) => eater.id)]);
         if (!swapPoolsRef.current || swapPoolsRef.current.key !== key) {
-          const pools = loadPlateSwapPools(scope.conditionCodes, diet, household);
+          const pools = loadPlateSwapPools(scope.conditionCodes, diet, household, lean);
           swapPoolsRef.current = { key, pools };
           pools.catch(() => {
             if (swapPoolsRef.current?.pools === pools) swapPoolsRef.current = null;
@@ -4149,6 +4155,7 @@ function DailyMealPlanLens() {
       const results = await generateMealPlanDays({
         conditionCodes: scope.conditionCodes,
         dietPreferences,
+        cuisines,
         carbLevel,
         days: daysToGenerate,
         limitAddedSugar,
@@ -4195,6 +4202,7 @@ function DailyMealPlanLens() {
       const result = await generateDailyMealPlan({
         conditionCodes: scope.conditionCodes,
         dietPreferences: diet,
+        cuisines: plannedDiet ? planCuisines(plannedDiet) : cuisines,
         carbLevel,
         limitAddedSugar,
         energy,
@@ -4343,6 +4351,24 @@ function DailyMealPlanLens() {
                 onLongPress={() => showInfoAlert(choice.label, choice.caption)}
               >
                 <Text style={[styles.pillText, active && styles.pillTextActive]}>{choice.label}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+        <Text style={[styles.label, { marginTop: 12 }]}>Cuisine</Text>
+        <Text style={styles.helperText}>
+          Leans each meal toward the cuisines picked, inside the eating style above, so Gluten-Free with Mexican is Mexican dishes that are gluten-free. A meal with too few of them draws on every recipe.
+        </Text>
+        <View ref={walkMark.ref('mealPlan.cuisines')} collapsable={false} style={styles.pillRow}>
+          {CUISINE_CHOICES.map((cuisine) => {
+            const active = planDiet.cuisines.includes(cuisine);
+            return (
+              <TouchableOpacity
+                key={cuisine}
+                style={[styles.pill, active && styles.pillActive]}
+                onPress={() => changeDiet({ ...planDiet, cuisines: toggleCuisine(planDiet.cuisines, cuisine) })}
+              >
+                <Text style={[styles.pillText, active && styles.pillTextActive]}>{cuisine}</Text>
               </TouchableOpacity>
             );
           })}
