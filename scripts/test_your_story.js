@@ -779,7 +779,7 @@ const back = load('lib/storyReturn.ts');
   written.push(
     interview.NONE_OF_THESE_LABEL, interview.DONE_LABEL, interview.NOT_SURE_LABEL, interview.NO_ALLERGIES_LABEL,
     interview.NO_STYLE_LABEL, interview.ALL_TABS_LABEL, interview.NOT_NOW_LABEL, interview.TAKE_NOTHING_LABEL,
-    interview.ADD_MEDS_LABEL, interview.LEAVE_OUT_LABEL, interview.SET_UP_BACKUP_LABEL, interview.PLAN_THIS_WAY_LABEL,
+    interview.ADD_MEDS_LABEL, interview.LEAVE_OUT_LABEL, interview.SET_UP_BACKUP_LABEL, interview.SAVE_FIRST_BACKUP_LABEL, interview.PLAN_THIS_WAY_LABEL,
     interview.READ_MORE_LABEL, interview.CHANGE_LABEL, interview.NEURO_PROFILE_NOTE, interview.OPEN_PROFILE_LABEL,
     interview.INTERVIEW_HEADING, interview.INTERVIEW_LEAD, interview.INTERVIEW_ANSWERED_HEADING,
     interview.INTERVIEW_FINISHED_LINE, interview.TOUR_HEADING, interview.TOUR_LEAD, interview.TOUR_START_LABEL,

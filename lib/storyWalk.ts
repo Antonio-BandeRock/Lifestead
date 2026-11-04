@@ -80,6 +80,8 @@ export type WalkMark =
   | 'corner'
   | 'bookmarks'
   | 'profile.backup'
+  | 'profile.sharedFolder'
+  | 'profile.turnOnSync'
   | 'profile.backupOneDrive'
   | 'profile.syncGuide'
   | 'profile.personal-info'
@@ -118,7 +120,7 @@ export type WalkMark =
 // appears in two guides has the same taps in both, and null is a line with
 // no one button to point at (fill in a form, read down a list).
 export const TAP_MARKS: Record<string, (WalkMark | null)[]> = {
-  'item:backup': ['profile.backup', 'profile.backupOneDrive'],
+  'item:backup': ['profile.backup', 'profile.sharedFolder', 'profile.backupOneDrive', null, 'profile.turnOnSync'],
   'item:aboutYou': ['profile.personal-info'],
   'item:conditions': ['profile.conditions'],
   conditionStage: ['profile.conditions'],

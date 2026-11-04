@@ -237,6 +237,24 @@ export async function recordSharedBackupSeen(takenAtIso: string | null): Promise
   }
 }
 
+// Whether a backup has been saved from this device or seen in the shared
+// folder, which is step 2 of Profile's Backup & Restore (1.0.80.8). A backup
+// file written before the date was recorded still counts.
+export async function hasBackupBeenSaved(): Promise<boolean> {
+  try {
+    const db = await getDatabase();
+    const row = await db.getFirstAsync<{ n: number }>(
+      'SELECT COUNT(*) AS n FROM app_meta WHERE key IN (?, ?)',
+      BACKUP_LAST_SAVED_META_KEY,
+      BACKUP_SHARED_NEWEST_META_KEY,
+    );
+    if ((row?.n ?? 0) > 0) return true;
+    return (await listLocalBackupFiles()).length > 0;
+  } catch {
+    return false;
+  }
+}
+
 export async function exportBackupToFile(password: string): Promise<string | null> {
   try {
     const envelope = await buildBackupEnvelope();

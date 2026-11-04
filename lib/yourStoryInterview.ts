@@ -132,7 +132,7 @@ export const INTERVIEW_QUESTIONS: InterviewQuestionDef[] = [
   {
     kind: 'backup',
     question: 'Where should a copy of your records be kept?',
-    why: 'Everything you record lives on this device and nobody else holds a copy. A backup to a cloud folder you control is the only way back if the phone is lost or reset. With Automatic Sync on, a fresh copy goes to that folder by itself a few minutes after you stop recording, with nothing to remember. Without it, Lifestead reminds you every few days.',
+    why: 'Everything you record lives on this device and nobody else holds a copy. A backup to a cloud folder you control is the only way back if the phone is lost or reset. It goes in three steps: choose the shared folder, save the first backup there, then turn on Automatic Sync. With Automatic Sync on, a fresh copy goes to that folder by itself a few minutes after you stop recording, with nothing to remember. Without it, Lifestead reminds you every few days.',
     beats: [],
   },
   // Direct instruction, 2026-10-07: health and money records go in the
@@ -168,7 +168,13 @@ export const NOT_NOW_LABEL = 'Not now';
 export const TAKE_NOTHING_LABEL = 'I take nothing';
 export const ADD_MEDS_LABEL = 'Add them in My Meds';
 export const LEAVE_OUT_LABEL = 'Leave these out';
-export const SET_UP_BACKUP_LABEL = 'Set it up in Profile';
+// The backup question walks its steps in order (1.0.80.8, direct
+// instruction: "The order for exporting a backup needs to include setting up
+// a shared folder. They aren't separate."): with no shared folder the button
+// opens the folder screen, and once one is chosen it opens Backup & Restore
+// at the first backup, so choosing a folder alone never answers it.
+export const SET_UP_BACKUP_LABEL = 'Choose a shared folder';
+export const SAVE_FIRST_BACKUP_LABEL = 'Save the first backup';
 export const SECURITY_BOTH_LABEL = 'App Lock and the vault';
 export const SECURITY_APP_LOCK_LABEL = 'App Lock only';
 export const SECURITY_VAULT_LABEL = 'The vault only';
@@ -1343,7 +1349,6 @@ function viewQuestion(def: InterviewQuestionDef, facts: InterviewFacts): Intervi
     }
     case 'backup': {
       if (itemSettled(facts, 'backup') === 'done') return { ...base, answered: true, summary: 'Backed up.' };
-      if (facts.backupFolderSet) return { ...base, answered: true, summary: 'Your shared folder.' };
       return { ...base, answered: !!answer, summary: answer ? (answer.answer === LATER ? LATER_SUMMARY : 'Not yet.') : null };
     }
     case 'security': {
@@ -1517,8 +1522,8 @@ function switchedOnLine(question: InterviewQuestionView, facts: InterviewFacts):
     case 'backup':
       if (itemSettled(facts, 'backup') === 'done') return 'A copy of your records is kept in the folder you chose.';
       return facts.backupFolderSet
-        ? 'Your shared folder is chosen. Profile, under Backup & Restore, saves a backup there or turns on automatic saving.'
-        : 'Nothing is backed up yet. Profile, under Backup & Restore, sets it up whenever you are ready.';
+        ? 'Your shared folder is chosen. The next step is the first backup, in Profile under Backup & Restore, and then automatic saving.'
+        : 'Nothing is backed up yet. The first step is choosing a shared folder, then the first backup, then automatic saving.';
     case 'security': {
       const security = facts.security;
       if (security?.appLockOn && security.vaultCategories > 0) {
