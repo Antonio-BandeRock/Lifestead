@@ -41,6 +41,14 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.80.10',
+    date: '2026-11-03',
+    changes: [
+      'Setup now shows what is already on record, such as birth date and sex, conditions or medicines, each with a check mark and what it says. Tap one to change it where it is kept.',
+      'Answers kept from before are not asked again, and this list shows them so nothing looks missing.',
+    ],
+  },
+  {
     version: '1.0.80.9',
     date: '2026-11-03',
     changes: [

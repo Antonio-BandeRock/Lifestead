@@ -23,7 +23,7 @@
 // (setupPart:<beat>), so it travels with the records and Run Setup Again
 // shows it as it stands.
 
-import type { BeatKey } from './yourStory';
+import type { BeatKey, StoryDestination } from './yourStory';
 import type { InterviewQuestionView, InterviewView, TourPath } from './yourStoryInterview';
 
 // What each part needs to know, in this order. 'stage' stands for every
@@ -233,6 +233,55 @@ export function sectionQuestions(interview: InterviewView, beat: BeatKey): Inter
 
 // Every question the chosen parts need that is still waiting, in
 // REQUIRED_ORDER, whichever part is opened first.
+// What the chosen parts need that is already answered, in the same order,
+// each with where it is changed. Direct request, 2026-11-03, after setup
+// skipped a birth date already in Profile and that read as the question
+// being gone: show what was kept, "that way the user sees their progress,
+// too." The question being answered right now is left out, since it is on
+// the screen already.
+const ON_RECORD_NAMES: Record<string, string> = {
+  aboutYou: 'Birth date and sex',
+  conditions: 'Conditions',
+  meds: 'Medicines and supplements',
+  allergies: 'Allergies',
+  eatingStyle: 'The way you eat',
+};
+
+const profileCard = (section: string): StoryDestination => ({ kind: 'route', pathname: '/profile', params: { section } });
+
+const ON_RECORD_PLACES: Record<string, StoryDestination> = {
+  aboutYou: profileCard('personal-info'),
+  conditions: profileCard('conditions'),
+  stage: profileCard('conditions'),
+  meds: { kind: 'route', pathname: '/life', params: { openLifeLens: 'myMeds' } },
+  allergies: profileCard('food-restrictions'),
+  eatingStyle: profileCard('diet-preferences'),
+};
+
+export type OnRecordRow = {
+  key: string;
+  name: string;
+  summary: string | null;
+  // For a stage, the condition it is for, so the screen can put it into
+  // the sentence in any language.
+  condition: string | null;
+  destination: StoryDestination;
+};
+
+export function requiredOnRecord(interview: InterviewView, showingKey: string | null = null): OnRecordRow[] {
+  const needed = new Set(interview.facts.story.beats.flatMap((beat) => SECTION_QUESTIONS[beat] ?? []));
+  const out: OnRecordRow[] = [];
+  for (const kind of REQUIRED_ORDER) {
+    if (!needed.has(kind)) continue;
+    for (const question of interview.questions) {
+      if (!question.answered || question.def.kind !== kind || question.key === showingKey) continue;
+      const name = kind === 'stage' ? `Healing stage for ${question.condition?.label ?? 'a condition'}` : ON_RECORD_NAMES[kind] ?? kind;
+      out.push({ key: question.key, name, summary: question.summary, condition: kind === 'stage' ? question.condition?.label ?? null : null, destination: ON_RECORD_PLACES[kind] });
+    }
+  }
+  return out;
+}
+
 export function requiredQuestions(interview: InterviewView): InterviewQuestionView[] {
   const needed = new Set(interview.facts.story.beats.flatMap((beat) => SECTION_QUESTIONS[beat] ?? []));
   const out: InterviewQuestionView[] = [];
@@ -290,6 +339,8 @@ export const SECTION_SKIP_LABEL = 'Skip this part';
 export const SECTION_BACK_LABEL = 'Back to the list';
 export const SECTION_QUESTION_FIRST = 'Answer the question above first, or tap Later on it.';
 export const CLOSING_HEADING = 'A few last questions';
+export const ON_RECORD_HEADING = 'Already on record';
+export const ON_RECORD_LEAD = 'Kept from before, so these are not asked again. Tap one to change it where it is kept.';
 export const REQUIRED_HEADING = 'First, what the app needs to know';
 export const REQUIRED_LEAD =
   'The parts you chose read these answers, so they come before any of them, one at a time. When they are done, you choose which part to set up first.';

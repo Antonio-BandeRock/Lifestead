@@ -101,8 +101,12 @@ import {
   sectionQuestions,
   setupStage,
   setupWaiting,
+  ON_RECORD_HEADING,
+  ON_RECORD_LEAD,
+  requiredOnRecord,
 } from '../lib/setupSections';
 import { explainNotYet } from '../lib/notYet';
+import { t } from '../lib/i18n';
 import { TAB_ROUTES } from '../constants/tabs';
 import {
   SETUP_AWAY_SAVED_CARD,
@@ -549,6 +553,42 @@ export function FirstSetup() {
     );
   }
 
+  // What is already answered, so a question left out reads as kept rather
+  // than gone. On the required step and on the list of parts, since when
+  // everything was on record the required step never shows.
+  function renderOnRecord() {
+    if (!interview) return null;
+    const rows = requiredOnRecord(interview, shownQuestion);
+    if (rows.length === 0) return null;
+    return (
+      <View style={styles.band}>
+        <Text style={styles.heading}>{ON_RECORD_HEADING}</Text>
+        <Text style={styles.lead}>{ON_RECORD_LEAD}</Text>
+        <View style={styles.parts}>
+          {rows.map((row) => {
+            const name = row.condition ? t('Healing stage for {condition}', { condition: row.condition }) : row.name;
+            return (
+            <TouchableOpacity
+              key={row.key}
+              style={styles.part}
+              accessibilityRole="button"
+              accessibilityLabel={row.summary ? `${name}. ${row.summary}` : name}
+              onPress={() => goElsewhere(row.destination)}
+            >
+              <Ionicons name="checkmark-circle" size={22} color={colors.statusGreenOnSurface} style={textShadow} />
+              <View style={styles.partText}>
+                <Text style={styles.partLabel}>{name}</Text>
+                {row.summary ? <Text style={styles.caption}>{row.summary}</Text> : null}
+              </View>
+              <Ionicons name="chevron-forward" size={18} color={colors.textMuted} style={textShadow} />
+            </TouchableOpacity>
+            );
+          })}
+        </View>
+      </View>
+    );
+  }
+
   function renderRequired() {
     return (
       <>
@@ -557,6 +597,7 @@ export function FirstSetup() {
           <Text style={styles.lead}>{REQUIRED_LEAD}</Text>
         </View>
         {renderQuestion()}
+        {renderOnRecord()}
       </>
     );
   }
@@ -632,6 +673,7 @@ export function FirstSetup() {
             {step === 'parts' ? renderParts() : null}
             {step === 'required' ? renderRequired() : null}
             {step === 'list' ? renderList() : null}
+            {step === 'list' ? renderOnRecord() : null}
             {step === 'section' && section ? renderSection(section) : null}
             {step === 'closing' ? renderClosing() : null}
             {isTesterBuild() && step === 'list' ? (
