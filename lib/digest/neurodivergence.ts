@@ -114,7 +114,7 @@ export const NEURODIVERGENCE_ENTRIES: DigestEntry[] = [
       { source: 'The co-occurrence of autism and avoidant/restrictive food intake disorder (ARFID): a prevalence-based meta-analysis', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11891632/' },
     ],
     overallTier: 'moderate',
-    relatedIds: ['neuro-autism-feeding-differences', 'neuro-autism-nutrient-shortfalls', 'neuro-words-used-here'],
+    relatedIds: ['neuro-autism-feeding-differences', 'neuro-autism-nutrient-shortfalls', 'neuro-words-used-here', 'mentalhealth-ed-arfid'],
   },
   {
     id: 'neuro-autism-nutrient-shortfalls',
@@ -275,7 +275,7 @@ export const NEURODIVERGENCE_ENTRIES: DigestEntry[] = [
     title: 'Anxiety and Depression Are Common in Autism, and Commonly Missed',
     teaser: 'Pooled figures put current anxiety at 27% and lifetime at 42%, current depression at 23% and lifetime at 37%.',
     summary:
-      'Hollocks and colleagues pooled the available studies of autistic adults and found current anxiety in about 27% and lifetime anxiety in about 42%, with current depression at about 23% and lifetime depression at about 37%. All four figures sit well above general-population rates. Anxiety and depression often present differently here, and the presentation can be read as part of the autism rather than as a separate treatable thing. Increased rigidity, more repetitive behaviour, withdrawal from things previously enjoyed, more frequent shutdowns, or a change in eating or sleeping can all be a mood or anxiety disorder rather than a change in the autism, and they respond to treatment when they are recognised. This app’s Mental Health & Food topic covers the general biology, and none of it is a substitute for asking a clinician directly. If something has changed and stayed changed, that is the thing to raise.',
+      'Hollocks and colleagues pooled the available studies of autistic adults and found current anxiety in about 27% and lifetime anxiety in about 42%, with current depression at about 23% and lifetime depression at about 37%. All four figures sit well above general-population rates. Anxiety and depression often present differently here, and the presentation can be read as part of the autism rather than as a separate treatable thing. Increased rigidity, more repetitive behaviour, withdrawal from things previously enjoyed, more frequent shutdowns, or a change in eating or sleeping can all be a mood or anxiety disorder rather than a change in the autism, and they respond to treatment when they are recognised. This app’s Mental Health topic covers the general biology and the treatments that work, and none of it is a substitute for asking a clinician directly. If something has changed and stayed changed, that is the thing to raise.',
     citations: [
       { source: 'Anxiety and depression in adults with autism spectrum disorder: a systematic review and meta-analysis, Psychological Medicine', url: 'https://pubmed.ncbi.nlm.nih.gov/30178724/' },
     ],

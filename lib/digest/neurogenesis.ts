@@ -15,7 +15,7 @@ import type { DigestEntry } from './types';
 // chronic-stress effects, sleep's own real, duration-dependent role
 // (cross-linked to the existing Sleep & Health topic), and the real
 // "neurogenic hypothesis of depression" connecting this whole topic
-// directly to the existing Mental Health & Food topic.
+// directly to the existing Mental Health topic.
 //
 // This app's own core mission -- helping someone with an autoimmune
 // condition understand personal, food-and-lifestyle-driven patterns --
@@ -77,7 +77,7 @@ export const NEUROGENESIS_ENTRIES: DigestEntry[] = [
       { source: 'Exercise-Mediated Neurogenesis in the Hippocampus via BDNF, PMC5808288', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5808288/' },
     ],
     overallTier: 'strong',
-    relatedIds: ['neurogenesis-discovery-fundamentals', 'neurogenesis-stress-cortisol-diet'],
+    relatedIds: ['neurogenesis-discovery-fundamentals', 'neurogenesis-stress-cortisol-diet', 'mind-trial-exercise-and-the-hippocampus'],
   },
   {
     id: 'neurogenesis-stress-cortisol-diet',
@@ -113,7 +113,7 @@ export const NEUROGENESIS_ENTRIES: DigestEntry[] = [
     title: 'The Neurogenic Hypothesis of Depression Is a Directly Testable Idea About How Antidepressants Might Work',
     teaser: 'A landmark 2003 study found mice whose new-neuron growth was deliberately blocked stopped responding behaviorally to a common antidepressant, direct evidence neurogenesis itself might be required for the drug to work, not just a side effect of taking it.',
     summary:
-      "One of the more directly testable ideas connecting this whole topic to everyday mental health, covered in this app's dedicated Mental Health & Food research: the \"neurogenic hypothesis of depression\" proposes that reduced hippocampal neurogenesis contributes to depression itself, and that restoring it is part of how antidepressant medications work, not just a side observation. A landmark 2003 study provided direct, causal-style evidence for this: chronic treatment with fluoxetine (a common SSRI) reliably increased new-neuron production in mice, exactly as expected, but the more striking finding came next, when researchers used focal X-ray irradiation to specifically block hippocampal neurogenesis in a separate group of mice, fluoxetine no longer produced its usual behavioral, antidepressant-like effects in standard animal tests. This is a stronger kind of evidence than a simple correlation, it directly tested whether neurogenesis is REQUIRED for the drug's effect, not just happening alongside it. The limitation: this hypothesis remains contested, later research has found credible contradictory findings too, and not every case of depression or every antidepressant response follows this same pattern cleanly, an active, still-developing area of research rather than a fully settled explanation for how these medications work.",
+      "One of the more directly testable ideas connecting this whole topic to everyday mental health, covered in this app's Mental Health topic: the \"neurogenic hypothesis of depression\" proposes that reduced hippocampal neurogenesis contributes to depression itself, and that restoring it is part of how antidepressant medications work, not just a side observation. A landmark 2003 study provided direct, causal-style evidence for this: chronic treatment with fluoxetine (a common SSRI) reliably increased new-neuron production in mice, exactly as expected, but the more striking finding came next, when researchers used focal X-ray irradiation to specifically block hippocampal neurogenesis in a separate group of mice, fluoxetine no longer produced its usual behavioral, antidepressant-like effects in standard animal tests. This is a stronger kind of evidence than a simple correlation, it directly tested whether neurogenesis is REQUIRED for the drug's effect, not just happening alongside it. The limitation: this hypothesis remains contested, later research has found credible contradictory findings too, and not every case of depression or every antidepressant response follows this same pattern cleanly, an active, still-developing area of research rather than a fully settled explanation for how these medications work.",
     citations: [
       { source: 'Requirement of hippocampal neurogenesis for the behavioral effects of antidepressants, Science, Santarelli et al. 2003', url: 'https://pubmed.ncbi.nlm.nih.gov/12907793/' },
       { source: 'Depression, Antidepressants, and Neurogenesis: A Critical Reappraisal, Neuropsychopharmacology', url: 'https://www.nature.com/articles/npp2011220' },

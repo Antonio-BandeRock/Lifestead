@@ -41,6 +41,16 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.81.5',
+    date: '2026-11-04',
+    changes: [
+      "Life > Health Literacy's Mental Health & Food topic is now Mental Health, with 29 new entries in five subjects: depression, anxiety and stress, the treatments trials support, loneliness and grief, eating disorders, and finding help.",
+      "The eating disorder entries cover anorexia, binge eating, ARFID, orthorexia and insulin restriction in type 1 diabetes, why food tracking can feed one, and what to watch for in this app.",
+      "A new topic, Keeping the Mind Sharp, has 25 entries on what changes with age, the treatable causes of memory trouble, the fourteen risk factors a person can change, what the large trials found, what brain games can and cannot do, and the activities with evidence behind them.",
+      "The new entries link to the places in the app that hold what they describe, and related entries elsewhere now link to them.",
+    ],
+  },
+  {
     version: '1.0.81.4',
     date: '2026-11-04',
     changes: [

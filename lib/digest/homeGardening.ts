@@ -578,7 +578,7 @@ export const HOME_GARDENING_ENTRIES: DigestEntry[] = [
       },
     ],
     overallTier: 'moderate',
-    relatedIds: ['mentalhealth-overview', 'garden-community-gardens'],
+    relatedIds: ['mentalhealth-overview', 'garden-community-gardens', 'mind-active-learning-a-new-skill', 'mentalhealth-connect-what-helps'],
   },
   {
     id: 'garden-community-gardens',

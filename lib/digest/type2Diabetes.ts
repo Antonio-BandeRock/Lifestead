@@ -505,7 +505,7 @@ export const TYPE_2_DIABETES_ENTRIES: DigestEntry[] = [
       { source: 'Hearing Loss in Type 2 Diabetes in Association with Diabetic Neuropathy, PMID 29433858', url: 'https://pubmed.ncbi.nlm.nih.gov/29433858/' },
     ],
     overallTier: 'strong',
-    relatedIds: ['type2-microvascular-complications-screening', 'type2-individualized-hba1c-targets'],
+    relatedIds: ['type2-microvascular-complications-screening', 'type2-individualized-hba1c-targets', 'mind-risk-hearing'],
   },
   {
     id: 'type2-bariatric-surgery-real-10year-durability',

@@ -44,6 +44,8 @@ import { NUTRIENTS_ENTRIES } from './nutrients';
 import { COMPLEMENTARY_THERAPIES_ENTRIES } from './complementaryTherapies';
 import { HANDS_ON_THERAPIES_ENTRIES } from './handsOnTherapies';
 import { ORAL_HEALTH_ENTRIES } from './oralHealth';
+import { MENTAL_HEALTH_GENERAL_ENTRIES } from './mentalHealthGeneral';
+import { MIND_AGING_ENTRIES } from './mindAndAging';
 import { ORGAN_SYSTEMS_ENTRIES } from './organSystems';
 import { OTHER_AUTOIMMUNE_ENTRIES } from './otherAutoimmune';
 import { PCOS_ENTRIES } from './pcos';
@@ -106,6 +108,7 @@ export const ALL_DIGEST_ENTRIES: AnyDigestEntry[] = [
   ...COMPLEMENTARY_THERAPIES_ENTRIES,
   ...HANDS_ON_THERAPIES_ENTRIES,
   ...ORAL_HEALTH_ENTRIES,
+  ...MIND_AGING_ENTRIES,
   ...RHEUMATOID_ARTHRITIS_ENTRIES,
   ...PSORIASIS_ENTRIES,
   ...GRAVES_ENTRIES,
@@ -142,6 +145,7 @@ export const ALL_DIGEST_ENTRIES: AnyDigestEntry[] = [
   ...PLANT_BASED_NUTRITION_ENTRIES,
   ...SLEEP_HEALTH_ENTRIES,
   ...MENTAL_HEALTH_ENTRIES,
+  ...MENTAL_HEALTH_GENERAL_ENTRIES,
   ...HOME_GARDENING_ENTRIES,
   ...MAKING_IT_PAY_ENTRIES,
   ...BODY_SYSTEMS_ENTRIES,

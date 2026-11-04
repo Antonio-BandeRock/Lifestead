@@ -473,7 +473,7 @@ export const PCOS_ENTRIES: DigestEntry[] = [
       { source: 'Increased Prevalence of Binge Eating Disorder and Bulimia Nervosa in Women With Polycystic Ovary Syndrome: A Systematic Review and Meta-Analysis, PMID 39115340', url: 'https://pubmed.ncbi.nlm.nih.gov/39115340/' },
     ],
     overallTier: 'strong',
-    relatedIds: ['pcos-weight-loss-modest', 'pcos-sleep-mental-health-real-data'],
+    relatedIds: ['pcos-weight-loss-modest', 'pcos-sleep-mental-health-real-data', 'mentalhealth-ed-what-they-are'],
   },
   {
     id: 'pcos-hirsutism-quality-of-life-real-data',

@@ -66,7 +66,7 @@ export const SLEEP_HEALTH_ENTRIES: DigestEntry[] = [
       },
     ],
     overallTier: 'moderate',
-    relatedIds: ['sleep-architecture', 'sleep-circadian-rhythm-basics'],
+    relatedIds: ['sleep-architecture', 'sleep-circadian-rhythm-basics', 'mind-active-sleep'],
   },
   {
     id: 'sleep-circadian-rhythm-basics',

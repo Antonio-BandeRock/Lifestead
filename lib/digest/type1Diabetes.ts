@@ -490,7 +490,7 @@ export const TYPE_1_DIABETES_ENTRIES: DigestEntry[] = [
       { source: 'High prevalence with no gender difference of likely eating disorders in type 1 mellitus diabetes on insulin pump', url: 'https://www.sciencedirect.com/science/article/abs/pii/S0168822723001055' },
     ],
     overallTier: 'strong',
-    relatedIds: ['type1-diabetes-distress-psychological-burden', 'type1-dka-sick-day-rules'],
+    relatedIds: ['type1-diabetes-distress-psychological-burden', 'type1-dka-sick-day-rules', 'mentalhealth-ed-type1-insulin-restriction'],
   },
   {
     id: 'type1-skin-conditions-necrobiosis-vitiligo',

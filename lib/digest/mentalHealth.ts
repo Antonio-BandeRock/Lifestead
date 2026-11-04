@@ -1,6 +1,6 @@
 import type { DigestEntry } from './types';
 
-// Mental Health & Food -- new 2026-08-09, a real, deliberate deep-dive on a
+// Mental Health (called Mental Health & Food until 2026-11-04) -- new 2026-08-09, a real, deliberate deep-dive on a
 // topic this Digest had only ever covered scattered across individual
 // conditions (RA, celiac, CKD, psoriasis, PCOS, and IBS each carry their
 // own real depression/anxiety comorbidity entry). This is the real,
@@ -24,7 +24,7 @@ export const MENTAL_HEALTH_ENTRIES: DigestEntry[] = [
       },
     ],
     overallTier: 'strong',
-    relatedIds: ['mentalhealth-tying-together', 'mentalhealth-when-to-seek-help', 'garden-mental-health-benefits'],
+    relatedIds: ['mentalhealth-tying-together', 'mentalhealth-when-to-seek-help', 'garden-mental-health-benefits', 'mentalhealth-mood-depression-what-it-is', 'mentalhealth-ed-what-they-are'],
   },
   {
     id: 'mentalhealth-inflammation-link',
@@ -86,7 +86,7 @@ export const MENTAL_HEALTH_ENTRIES: DigestEntry[] = [
       },
     ],
     overallTier: 'moderate',
-    relatedIds: ['mentalhealth-smiles-trial'],
+    relatedIds: ['mentalhealth-smiles-trial', 'mentalhealth-treat-exercise-as-treatment', 'mind-trial-exercise-and-the-hippocampus'],
   },
   {
     id: 'mentalhealth-b12-folate-mood',
@@ -116,6 +116,7 @@ export const MENTAL_HEALTH_ENTRIES: DigestEntry[] = [
       },
     ],
     overallTier: 'strong',
+    relatedIds: ['mentalhealth-help-around-the-world', 'mentalhealth-help-talking-to-a-doctor', 'mentalhealth-help-using-this-app'],
   },
   {
     id: 'mentalhealth-tying-together',
@@ -162,7 +163,7 @@ export const MENTAL_HEALTH_ENTRIES: DigestEntry[] = [
   // "gut serotonin reaches the brain" framing is wrong, see
   // mentalhealth-gut-scfa-mood-mechanism below for the actual mechanism).
   // An overlap check ran first, not assumed: this category already had a
-  // dedicated Mental Health & Food topic (the entries above) covering
+  // dedicated Mental Health topic (the entries above) covering
   // the inflammation-CRP link, the SMILES trial, EPA/DHA, exercise, and
   // B12/folate, plus an individually-cited depression/anxiety comorbidity
   // entry for all 19 conditions. What the source conversation raised that

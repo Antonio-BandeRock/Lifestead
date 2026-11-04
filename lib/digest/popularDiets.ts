@@ -126,7 +126,7 @@ export const POPULAR_DIETS_ENTRIES: DigestEntry[] = [
       { source: 'How the Seven Countries Study contributed to the definition and development of the Mediterranean diet concept: A 50-year journey, Nutrition, Metabolism and Cardiovascular Diseases', url: 'https://www.nmcd-journal.com/article/S0939-4753(14)00347-0/abstract' },
     ],
     overallTier: 'strong',
-    relatedIds: ['cvd-global-seven-countries-mediterranean', 'ra-mediterranean-diet', 'psoriasis-mediterranean-diet', 'diet-sidebyside-comparison', 'diet-headtohead-network-metaanalysis'],
+    relatedIds: ['cvd-global-seven-countries-mediterranean', 'ra-mediterranean-diet', 'psoriasis-mediterranean-diet', 'diet-sidebyside-comparison', 'diet-headtohead-network-metaanalysis', 'mind-trial-mediterranean', 'mind-trial-mind-diet'],
   },
   {
     id: 'diet-keto',
@@ -338,6 +338,6 @@ export const POPULAR_DIETS_ENTRIES: DigestEntry[] = [
     summary: "This category reports evidence as it stands: some of these eating styles carry strong support, some carry open questions, and the app tracks whichever one someone follows the same way. The twelve Food-tab builders (Meal, Sides, Salads & Bowls, Smoothies, Fermentation, Beverages, Snacks, Baked Goods, Soups, Sauces, Handhelds, Desserts) are built from raw ingredients, meaning they work identically whether someone is eating keto, carnivore, vegan, Mediterranean, or anything else. Whatever someone builds and logs, the Insights tab shows a direct nutrient breakdown against established DRI targets, whether that reveals a keto-style low-carb pattern, a vegan-style protein-and-B12 gap named in the vegan entry, or anything in between. For anyone tracking a specific condition too, the condition-specific food scoring layers on top of whatever eating style someone follows. The Trends tab then looks across those days: Pattern Finder sets logged foods beside symptoms and flares, Therapy Response follows a treatment over time, and the nutrient, weight and movement charts show the direction things are moving, however someone eats.",
     citations: [],
     overallTier: 'strong',
-    relatedIds: ['diet-mediterranean', 'diet-vegan', 'diet-keto'],
+    relatedIds: ['diet-mediterranean', 'diet-vegan', 'diet-keto', 'mentalhealth-ed-tracking-apps'],
   },
 ];

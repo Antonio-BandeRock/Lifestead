@@ -303,10 +303,19 @@ export const BASIC_HEALTH_TOPICS: BasicHealthTopic[] = [
   // 2026-08-25: real subtopics, part of the same-day sweep named at "How
   // Your Body Works: Organs & Systems," above.
   {
-    label: 'Mental Health & Food',
-    description: 'How diet and specific nutrients affect mood, cognition, and mental health.',
+    // 2026-11-04, direct request for general mental health and food-related
+    // mental health: renamed from "Mental Health & Food", and the 29
+    // entries in lib/digest/mentalHealthGeneral.ts add five subjects around
+    // the food ones, with When to Seek Help folded into Finding Help.
+    label: 'Mental Health',
+    description:
+      'What depression, anxiety and stress are and what causes them, the treatments trials support, loneliness and grief, eating disorders and why food tracking can feed one, how diet and nutrients affect mood, and where to find help in any country.',
     subtopics: [
       { label: 'Overview & Framing', prefixes: ['mentalhealth-overview', 'mentalhealth-tying-together'] },
+      { label: 'Depression, Anxiety & Stress', prefixes: ['mentalhealth-mood-'] },
+      { label: 'Treatments That Work', prefixes: ['mentalhealth-treat-'] },
+      { label: 'Loneliness & Grief', prefixes: ['mentalhealth-connect-', 'mentalhealth-grief-'] },
+      { label: 'Eating Disorders', prefixes: ['mentalhealth-ed-'] },
       // The ADHD entries that used to share this fold with OCD moved to
       // "Autism, ADHD & Dyslexia" on 2026-09-19, so everything written
       // about ADHD is in one place. OCD stays: it is a mental health
@@ -315,7 +324,7 @@ export const BASIC_HEALTH_TOPICS: BasicHealthTopic[] = [
       { label: 'Gut-Brain Mechanisms', prefixes: ['mentalhealth-gut-scfa-mood-mechanism', 'mentalhealth-inflammation-link', 'mentalhealth-glycemic-instability-mood'] },
       { label: 'Nutrients & Mood', prefixes: ['mentalhealth-b12-folate-mood', 'mentalhealth-magnesium-zinc-mood', 'mentalhealth-omega3-epa-dha', 'mentalhealth-vitamin-d-mixed-evidence'] },
       { label: 'Diet Pattern & Lifestyle Evidence', prefixes: ['mentalhealth-smiles-trial', 'mentalhealth-ultraprocessed-food-risk', 'mentalhealth-exercise-honest-evidence'] },
-      { label: 'When to Seek Help', prefixes: ['mentalhealth-when-to-seek-help'] },
+      { label: 'Finding Help', prefixes: ['mentalhealth-help-', 'mentalhealth-when-to-seek-help'] },
     ],
   },
   // 2026-08-09, direct request: "an honest medical science evidence based
@@ -506,6 +515,21 @@ export const BASIC_HEALTH_TOPICS: BasicHealthTopic[] = [
     ],
   },
   {
+    // 2026-11-04, same request: "how to exercise your mind to help a person
+    // stay alert and with an active mind as they grow older." Twenty-five
+    // entries in lib/digest/mindAndAging.ts, in five subjects.
+    label: 'Keeping the Mind Sharp',
+    description:
+      'What changes in the mind with age and what does not, the warning signs and the treatable causes of memory trouble, the fourteen risk factors a person can change, what the large trials of diet, exercise, blood pressure and training found, what brain games can and cannot do, and the activities with evidence behind them.',
+    subtopics: [
+      { label: 'What Changes With Age', prefixes: ['mind-aging-'] },
+      { label: 'Risk Factors a Person Can Change', prefixes: ['mind-risk-'] },
+      { label: 'What the Trials Show', prefixes: ['mind-trial-'] },
+      { label: 'Brain Training Claims', prefixes: ['mind-training-'] },
+      { label: 'Keeping the Mind Active', prefixes: ['mind-active-'] },
+    ],
+  },
+  {
     label: 'Mitochondria & Metabolism',
     description: 'How your cells produce energy, and how diet and lifestyle affect that process.',
     prefixes: ['mito-'],
@@ -537,7 +561,7 @@ export const BASIC_HEALTH_TOPICS: BasicHealthTopic[] = [
   // can read it without declaring anything. See
   // lib/digest/neurodivergence.ts for the writing and for the line it
   // holds: nutrition supports a person, it does not treat these three.
-  // 2026-09-19: the three ADHD entries from "Mental Health & Food" joined
+  // 2026-09-19: the three ADHD entries from "Mental Health & Food" (renamed Mental Health on 2026-11-04) joined
   // this topic, so everything about ADHD is read in one place, and the
   // topic moved to the end of Health Literacy beside "Prevention &
   // Lifestyle by Condition" under a heading of its own: "Health Literacy

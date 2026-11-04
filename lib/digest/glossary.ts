@@ -895,7 +895,7 @@ export const GLOSSARY_ENTRIES: DigestEntry[] = [
       'CBT is a structured form of talk therapy that works by identifying and changing unhelpful thought patterns and behaviors. A specific version, CBT-I (for insomnia), is the current first-line, guideline-recommended treatment for chronic insomnia, ahead of sleep medication, covered directly in this app\'s Sleep & Health research.',
     citations: [],
     overallTier: 'strong',
-    relatedIds: ['sleep-cbti-first-line'],
+    relatedIds: ['sleep-cbti-first-line', 'mentalhealth-treat-therapy-cbt', 'mentalhealth-treat-anxiety-cbt'],
   },
   {
     id: 'glossary-ccp-anti-ccp',

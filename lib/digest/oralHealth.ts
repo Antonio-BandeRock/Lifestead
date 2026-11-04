@@ -264,7 +264,7 @@ export const ORAL_HEALTH_ENTRIES: DigestEntry[] = [
       },
     ],
     overallTier: 'weak',
-    relatedIds: ['oral-body-heart-association', 'body-brain-nervous-system'],
+    relatedIds: ['oral-body-heart-association', 'body-brain-nervous-system', 'mind-risk-lancet-fourteen'],
   },
   {
     id: 'oral-body-teeth-and-eating',
