@@ -196,6 +196,7 @@ import {
   getConditionStages,
   getCuriousAboutConditions,
   getDietaryReferenceIntakesForCurrentUser,
+  getCuisinePreferences,
   getDietPreferences,
   getFoodRestrictions,
   getFoodTrialsForCondition,
@@ -218,6 +219,7 @@ import {
   reopenFoodTrial,
   setConditionStage,
   setCuriousAboutConditionSelected,
+  setCuisinePreferenceSelected,
   setDietPreferenceSelected,
   setFoodRestrictionSelected,
   setStoredMeasurementSystem,
@@ -232,6 +234,7 @@ import {
 
 } from '../lib/db';
 import { RECIPE_DIET_TAGS, type RecipeDietTag } from '../lib/digest/types';
+import { CUISINE_CHOICES, toggleCuisine } from '../lib/mealPlanDiet';
 import { FOOD_RESTRICTIONS, FOOD_RESTRICTIONS_HELP, knownRestrictions, type FoodRestrictionKey } from '../lib/foodRestrictions';
 import { getConditionFoodConcerns, type ConditionFoodConcern } from '../lib/conditionFoodConcerns';
 import { ageFromBirthDate } from '../lib/profile';
@@ -1218,6 +1221,9 @@ export default function ProfileScreen() {
   // picker, so a person's own stated preference lines up directly against
   // real, existing data rather than a second, disconnected list.
   const [dietPreferences, setDietPreferences] = useState<RecipeDietTag[]>([]);
+  // 2026-11-03: the cuisines the Meal Plan leans toward, inside the diets
+  // above (cuisine_preferences, lib/db.ts).
+  const [cuisinePreferences, setCuisinePreferences] = useState<string[]>([]);
   // G19, 2026-09-27: Food Restrictions, beside Diet Preferences. Read by
   // Food Lookup, the scan report and Check a Label (lib/foodRestrictions.ts).
   const [foodRestrictions, setFoodRestrictions] = useState<FoodRestrictionKey[]>([]);
@@ -1991,6 +1997,11 @@ export default function ProfileScreen() {
       setSelectedConditions(storedConditions);
       setCuriousAboutConditions(storedCuriousAbout);
       setDietPreferences(storedDietPreferences as RecipeDietTag[]);
+      getCuisinePreferences()
+        .then((stored) => {
+          if (isMounted) setCuisinePreferences(stored);
+        })
+        .catch((error) => console.error('[Profile] Failed to read cuisines', error));
       setFoodAllergies(storedAllergies);
       setNeuroProfile(storedNeuroProfile);
       setConditionStageMap(storedConditionStages);
@@ -2159,6 +2170,13 @@ export default function ProfileScreen() {
     const nowSelected = !foodRestrictions.includes(key);
     setFoodRestrictions((current) => knownRestrictions(nowSelected ? [...current, key] : current.filter((k) => k !== key)));
     await setFoodRestrictionSelected(key, nowSelected);
+    flashSaved();
+  }
+
+  async function toggleCuisinePreference(cuisine: string) {
+    const nowSelected = !cuisinePreferences.includes(cuisine);
+    setCuisinePreferences((current) => toggleCuisine(current, cuisine));
+    await setCuisinePreferenceSelected(cuisine, nowSelected);
     flashSaved();
   }
 
@@ -4398,6 +4416,27 @@ export default function ProfileScreen() {
                     >
                       <Text style={[styles.pillText, styles.conditionPillText, active && styles.pillTextActive]}>
                         {tag}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                );
+              })}
+            </View>
+            <Text style={[styles.helpText, { marginTop: 12 }]}>
+              Cuisines the Meal Plan leans toward. Every diet chosen above still holds, so Gluten-Free with Mexican
+              plans Mexican dishes that are gluten-free.
+            </Text>
+            <View style={styles.conditionGrid}>
+              {CUISINE_CHOICES.map((cuisine) => {
+                const active = cuisinePreferences.includes(cuisine);
+                return (
+                  <View key={cuisine} style={styles.conditionGridItem}>
+                    <TouchableOpacity
+                      style={[styles.pill, styles.conditionPill, active && styles.pillActive]}
+                      onPress={() => toggleCuisinePreference(cuisine)}
+                    >
+                      <Text style={[styles.pillText, styles.conditionPillText, active && styles.pillTextActive]}>
+                        {cuisine}
                       </Text>
                     </TouchableOpacity>
                   </View>

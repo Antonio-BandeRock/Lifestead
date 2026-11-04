@@ -6513,6 +6513,17 @@ async function runDatabaseInitialization() {
         selected_at TEXT NOT NULL DEFAULT (datetime('now'))
       );
 
+      -- 2026-11-03: the cuisines a person's meal plan leans toward (Mexican,
+      -- French and the rest of CUISINE_BANDS in lib/cuisineBands.ts). Kept
+      -- apart from diet_preferences because a diet is a rule every dish must
+      -- keep while a cuisine is a lean within those rules, so a Gluten-Free
+      -- person choosing Mexican still gets only gluten-free dishes. cuisine
+      -- holds the band's name. Absence means no lean.
+      CREATE TABLE IF NOT EXISTS cuisine_preferences (
+        cuisine TEXT PRIMARY KEY,
+        selected_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+
       -- G19, 2026-09-27: the food restrictions a person holds themselves to
       -- beside allergies and diets (low histamine, low salicylate, no
       -- sulfites, alpha-gal, no nightshades, low lectin). restriction_key is
@@ -21037,6 +21048,26 @@ export async function setFoodRestrictionSelected(key: string, selected: boolean)
     await db.runAsync('INSERT OR IGNORE INTO food_restrictions (restriction_key) VALUES (?)', key);
   } else {
     await db.runAsync('DELETE FROM food_restrictions WHERE restriction_key = ?', key);
+  }
+}
+
+// The cuisines the plan leans toward, see cuisine_preferences' schema
+// comment. Names this app no longer knows are dropped by
+// splitDietPreferences in lib/mealPlanDiet.ts, never here.
+export async function getCuisinePreferences(): Promise<string[]> {
+  const db = await getDatabase();
+  const rows = await db.getAllAsync<{ cuisine: string }>(
+    'SELECT cuisine FROM cuisine_preferences ORDER BY selected_at',
+  );
+  return rows.map((row) => row.cuisine);
+}
+
+export async function setCuisinePreferenceSelected(cuisine: string, selected: boolean): Promise<void> {
+  const db = await getDatabase();
+  if (selected) {
+    await db.runAsync('INSERT OR IGNORE INTO cuisine_preferences (cuisine) VALUES (?)', cuisine);
+  } else {
+    await db.runAsync('DELETE FROM cuisine_preferences WHERE cuisine = ?', cuisine);
   }
 }
 

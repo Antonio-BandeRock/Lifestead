@@ -22,6 +22,7 @@ import { NEURO_PROFILE_LABELS } from './neuroProfile';
 import {
   getConditionStages,
   getDatabase,
+  getCuisinePreferences,
   getDietPreferences,
   getUserConditions,
   listAllConditions,
@@ -79,7 +80,7 @@ export async function loadYourStoryEverything(withGuides = true): Promise<YourSt
     await markYourStorySeen(seen.key, seen.day);
   }
   const db = await getDatabase();
-  const [records, conditions, allConditions, stages, diets, allergies, neuro, answers] = await Promise.all([
+  const [records, conditions, allConditions, stages, diets, allergies, neuro, answers, cuisines] = await Promise.all([
     safely(() => lookForGuideRecords(db), {} as GuideRecords),
     safely(getUserConditions, [] as string[]),
     safely(listAllConditions, []),
@@ -88,6 +89,7 @@ export async function loadYourStoryEverything(withGuides = true): Promise<YourSt
     safely(listFoodAllergies, [] as string[]),
     safely(listNeuroProfile, []),
     safely(readAnswers, {} as Record<string, InterviewAnswer>),
+    safely(getCuisinePreferences, [] as string[]),
   ]);
   const conditionNames: Record<string, string> = {};
   for (const condition of allConditions) conditionNames[condition.code] = condition.name;
@@ -116,6 +118,7 @@ export async function loadYourStoryEverything(withGuides = true): Promise<YourSt
     neuro,
     neuroLabels: NEURO_PROFILE_LABELS,
     diets,
+    cuisines,
     allergies,
     answers,
     records,

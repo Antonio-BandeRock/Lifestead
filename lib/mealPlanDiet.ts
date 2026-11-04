@@ -11,8 +11,16 @@
 // lean toward. The form starts from Profile and a change there holds for
 // the plan being made, never written back.
 //
+// 2026-11-03, direct request: "Plan meals this way should also list the
+// ethnic categories as well, such as Mexican." A cuisine is a fourth
+// question and a different kind of answer. The diet tags are rules every
+// dish has to keep; a cuisine is what the person would like to cook, so
+// the plan leans toward it inside those rules (leanToCuisines) and fills a
+// meal from every recipe where too few of that cuisine's dishes fit.
+//
 // Pure, with no React and no database, so scripts/test_meal_plan_diet.js
 // checks it without a phone.
+import { CUISINE_BANDS } from './cuisineBands';
 import type { RecipeDietTag } from './digest/types';
 
 export type BaseDietChoice = { label: string; tag: RecipeDietTag | null; caption: string };
@@ -41,22 +49,44 @@ export const DIET_EXTRA_CHOICES: StyleChoice[] = [
   { tag: 'High-Protein', label: 'High-Protein', caption: 'Every dish has meat, fish, eggs, beans, tofu or a high-protein dairy food in it.' },
 ];
 
+/** The cuisines on Food > System Recipes, in the order their bands show. */
+export const CUISINE_CHOICES: string[] = CUISINE_BANDS.map((band) => band.cuisine);
+
 export type PlanDiet = {
   base: RecipeDietTag | null;
   styles: RecipeDietTag[];
   extras: RecipeDietTag[];
+  cuisines: string[];
 };
+
+/** Fewer of a cuisine's dishes than this in one meal and that meal draws on every recipe, so a week does not turn on two dishes. */
+export const CUISINE_LEAN_MINIMUM = 3;
+
+/** The dishes of the chosen cuisines, or every dish given when too few of them are there. */
+export function leanToCuisines<T>(
+  entries: T[],
+  cuisines: readonly string[],
+  cuisineOf: (entry: T) => string | undefined,
+): T[] {
+  if (cuisines.length === 0) return entries;
+  const chosen = new Set(cuisines);
+  const leaning = entries.filter((entry) => {
+    const cuisine = cuisineOf(entry);
+    return cuisine !== undefined && chosen.has(cuisine);
+  });
+  return leaning.length >= CUISINE_LEAN_MINIMUM ? leaning : entries;
+}
 
 const STYLE_TAGS = new Set<string>(EATING_STYLE_CHOICES.map((choice) => choice.tag));
 const EXTRA_TAGS = new Set<string>(DIET_EXTRA_CHOICES.map((choice) => choice.tag));
 
-/** Profile's saved list, split into the three questions. Unknown tags are dropped. */
-export function splitDietPreferences(tags: readonly string[]): PlanDiet {
+/** Profile's saved lists, split into the four questions. Unknown tags and cuisines are dropped. */
+export function splitDietPreferences(tags: readonly string[], cuisines: readonly string[] = []): PlanDiet {
   // The strictest base wins, the same ordering BASE_DIET_TIER_RANK uses.
   const base: RecipeDietTag | null = tags.includes('Vegan') ? 'Vegan' : tags.includes('Vegetarian') ? 'Vegetarian' : null;
   const styles = EATING_STYLE_CHOICES.map((choice) => choice.tag).filter((tag) => tags.includes(tag));
   const extras = DIET_EXTRA_CHOICES.map((choice) => choice.tag).filter((tag) => tags.includes(tag));
-  return { base, styles, extras };
+  return { base, styles, extras, cuisines: CUISINE_CHOICES.filter((cuisine) => cuisines.includes(cuisine)) };
 }
 
 /** The tag list the generator filters by: every tag has to hold at once. */
@@ -68,6 +98,15 @@ export function planDietTags(diet: PlanDiet): RecipeDietTag[] {
   ];
 }
 
+/** The cuisines the plan leans toward, known ones only. */
+export function planCuisines(diet: PlanDiet): string[] {
+  return CUISINE_CHOICES.filter((cuisine) => diet.cuisines.includes(cuisine));
+}
+
+export function toggleCuisine(list: string[], cuisine: string): string[] {
+  return list.includes(cuisine) ? list.filter((item) => item !== cuisine) : [...list, cuisine];
+}
+
 export function toggleTag(list: RecipeDietTag[], tag: RecipeDietTag): RecipeDietTag[] {
   return list.includes(tag) ? list.filter((item) => item !== tag) : [...list, tag];
 }
@@ -77,7 +116,7 @@ export function baseChoiceLabel(base: RecipeDietTag | null): string {
 }
 
 export function sameDiet(a: PlanDiet, b: PlanDiet): boolean {
-  return JSON.stringify(planDietTags(a)) === JSON.stringify(planDietTags(b));
+  return JSON.stringify([planDietTags(a), planCuisines(a)]) === JSON.stringify([planDietTags(b), planCuisines(b)]);
 }
 
 function joinWords(words: string[]): string {
@@ -95,8 +134,12 @@ export function describePlanDiet(diet: PlanDiet): string {
   if (diet.base) parts.push(diet.base.toLowerCase());
   for (const tag of diet.styles) parts.push(tag === 'AIP' ? 'AIP' : labelOf(tag));
   for (const tag of diet.extras) parts.push(labelOf(tag).toLowerCase());
-  if (parts.length === 0) return 'Built from every recipe, with no eating style chosen.';
-  return `Every dish fits ${joinWords(parts)} eating.`;
+  const cuisines = planCuisines(diet);
+  const lean = cuisines.length > 0
+    ? `Dishes are ${joinWords(cuisines)} wherever enough of them fit a meal; where too few do, that meal draws on every recipe.`
+    : '';
+  if (parts.length === 0) return lean ? `No eating style is chosen. ${lean}` : 'Built from every recipe, with no eating style chosen.';
+  return lean ? `Every dish fits ${joinWords(parts)} eating. ${lean}` : `Every dish fits ${joinWords(parts)} eating.`;
 }
 
 /** Said when the form no longer matches Profile, so the person knows Profile is unchanged. */
