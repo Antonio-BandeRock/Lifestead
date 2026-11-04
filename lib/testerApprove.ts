@@ -9,6 +9,12 @@
 // Approval Key to Claude, a Tell Claude note, and is added to
 // lib/testerApprovalKeys.ts in the next update. Until then an approval from
 // this device is signed but not yet accepted, and the screen says so.
+//
+// Since 1.0.80.11 an approval is also left on the site, sealed, twice: once
+// under a short code for the reply email, and once under the pickup secret
+// the asking device put in its request, so that device unlocks by itself the
+// next time it is open with internet. The link stays as the way that needs
+// no site at all.
 import * as Crypto from 'expo-crypto';
 import * as SecureStore from 'expo-secure-store';
 import nacl from 'tweetnacl';
@@ -17,11 +23,16 @@ import { bytesToBase64, base64ToBytes } from './deviceIdentity';
 import { addDevNote, syncDevNotes } from './devNotesDb';
 import {
   activationLink,
+  codeFromBytes,
+  CODE_LENGTH,
   decodeRequest,
   deviceTag,
+  dropSlot,
+  DROP_URL,
   endDay,
   extractCode,
   makeApproval,
+  sealDrop,
   signApproval,
   type AccessRequest,
 } from './testerApproval';
@@ -50,8 +61,34 @@ export async function getMyApprovalKey(): Promise<MyApprovalKey> {
 }
 
 export type Approved =
-  | { ok: true; request: AccessRequest; link: string; until: string; trusted: boolean }
+  | {
+      ok: true;
+      request: AccessRequest;
+      link: string;
+      until: string;
+      trusted: boolean;
+      /** The code to type, when the site took the sealed approval; null when
+       *  it could not be reached, and the reply carries the link instead. */
+      code: string | null;
+      /** True when the asking device can pick it up by itself. */
+      pickup: boolean;
+    }
   | { ok: false; reason: string };
+
+async function leaveDrop(secret: string, token: string): Promise<boolean> {
+  try {
+    const nonce = await Crypto.getRandomBytesAsync(nacl.secretbox.nonceLength);
+    const response = await fetch(`${DROP_URL}/put`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ slot: dropSlot(secret), body: sealDrop(token, secret, nonce) }),
+    });
+    return response.ok;
+  } catch (error) {
+    console.warn('[testerApprove] could not reach the site', error);
+    return false;
+  }
+}
 
 /** Reads a request link or code and signs an approval for the device in it. */
 export async function approveRequest(input: string, days?: number): Promise<Approved> {
@@ -61,7 +98,21 @@ export async function approveRequest(input: string, days?: number): Promise<Appr
   const pair = await keyPair();
   const mine = await getMyApprovalKey();
   const approval = makeApproval(request, mine.id, Date.now(), days);
-  return { ok: true, request, link: activationLink(signApproval(approval, pair.secretKey)), until: endDay(approval), trusted: mine.trusted };
+  const token = signApproval(approval, pair.secretKey);
+  const typed = codeFromBytes(await Crypto.getRandomBytesAsync(CODE_LENGTH));
+  const [codeLeft, pickupLeft] = await Promise.all([
+    leaveDrop(typed, token),
+    request.pickup ? leaveDrop(request.pickup, token) : Promise.resolve(false),
+  ]);
+  return {
+    ok: true,
+    request,
+    link: activationLink(token),
+    until: endDay(approval),
+    trusted: mine.trusted,
+    code: codeLeft ? typed : null,
+    pickup: pickupLeft,
+  };
 }
 
 /** Leaves this device's public approval key as a Tell Claude note, for

@@ -3,8 +3,10 @@
 // Over the whole app, in the tester version only, until this device has an
 // approval that has not ended and the agreement is read. In turn, by direct
 // instruction (2026-11-02, 1.0.79.1): a name and Ask for Access, which
-// emails testers@ghostead.com; then the box to paste the link that comes
-// back, with Ask Again under it; then Before you start testing, which holds
+// emails testers@ghostead.com; then waiting for the approval, which since
+// 1.0.80.11 opens this screen by itself (lib/testerAccess.ts looks for it
+// every minute), with a box for the short code from the reply email in case
+// it does not, and Ask Again under it; then Before you start testing, which holds
 // what a fresh install used to show as an update message and Lifestead's
 // general points; then setup (components/FirstSetup.tsx). When an approval ends it asks for more time with one press;
 // when the approval is for another device it says so. Nothing underneath is
@@ -58,7 +60,7 @@ export function TesterGate() {
 }
 
 function askedText(result: AskResult): string {
-  if (result === 'opened') return 'Your email app is open with the request in it. Press Send there, and the link will come back to this email address.';
+  if (result === 'opened') return 'Your email app is open with the request in it. Press Send there. Once it is approved this screen opens by itself, and the reply email carries a code too.';
   if (result === 'copied') return t('No email app opened, so the request is copied. Paste it into an email to {address}.', { address: PROBLEM_REPORT_ADDRESS });
   return t('No email app opened and the request could not be copied. Write to {address} and ask for access.', { address: PROBLEM_REPORT_ADDRESS });
 }
@@ -70,6 +72,7 @@ function TesterGateInner() {
   const [name, setName] = useState('');
   const [pasted, setPasted] = useState('');
   const [message, setMessage] = useState<string | null>(null);
+  const [codeMessage, setCodeMessage] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [agreeing, setAgreeing] = useState(false);
 
@@ -94,22 +97,21 @@ function TesterGateInner() {
   }
 
   // The app's own keyboard has no paste key and every box hides Android's
-  // Cut/Copy/Paste menu (AppTextInput's contextMenuHidden), so the copied
-  // link is read here and used in one press (2026-11-02: a tester had no way
-  // to paste it).
+  // Cut/Copy/Paste menu (AppTextInput's contextMenuHidden), so what was
+  // copied is read here and used in one press. A whole copied email is fine:
+  // the code is found inside it (findCode).
   async function pasteAndUse() {
     const copied = await Clipboard.getStringAsync().catch(() => '');
     if (!copied.trim()) {
-      explainNotYet('Nothing is copied yet. In the approval email, press and hold the link, choose Copy link address, then come back and press Paste the Link.');
+      explainNotYet('Nothing is copied yet. In the approval email, press and hold the code, choose Copy, then come back and press Paste.');
       return;
     }
-    setPasted(copied);
-    await applyPasted(copied);
+    await applyCode(copied);
   }
 
-  async function applyPasted(text: string = pasted) {
+  async function applyCode(text: string = pasted) {
     if (!text.trim()) {
-      explainNotYet('Paste the link from the approval email first.');
+      explainNotYet('Type the code from the approval email first. It looks like K7M2-QX9P.');
       return;
     }
     setBusy(true);
@@ -117,7 +119,7 @@ function TesterGateInner() {
       const result = await activateFromText(text);
       // Once it works the next screen is the agreement, so a line saying it
       // worked would only be left behind for later.
-      setMessage(result === 'ok' ? null : activateResultText(result));
+      setCodeMessage(result === 'ok' ? null : activateResultText(result));
       if (result === 'ok') setPasted('');
     } finally {
       setBusy(false);
@@ -191,7 +193,7 @@ function TesterGateInner() {
   const renewal = state.kind === 'expired';
   const wrongDevice = state.kind === 'wrongDevice';
   // Second, once the request has gone (or an approval needs replacing): the
-  // box for the link that comes back, ahead of asking again.
+  // box for the code that comes back, ahead of asking again.
   const waiting = !!access.askedAt || renewal || wrongDevice;
 
   const title = renewal
@@ -199,14 +201,14 @@ function TesterGateInner() {
     : wrongDevice
       ? 'This copy was approved for a different device'
       : waiting
-        ? 'Enter your approval link'
+        ? 'Waiting for your approval'
         : 'Ask for access';
   const lead = renewal
     ? t('Access on this device ended on {day}. Your records are all still here, and open again as soon as more time is approved.', { day: endDay(state.approval) })
     : wrongDevice
       ? 'Each phone or computer is approved by itself, so an approval cannot move to another device, and a restored backup asks again. Ask from this one.'
       : waiting
-        ? 'Once your request is approved, a link comes back by email from testers@ghostead.com. Press it on this device, or copy it and paste it below.'
+        ? 'Nothing to do here but wait. Once your request is approved, this screen opens by itself the next time Lifestead Test is open with internet. The approval email from testers@ghostead.com also carries a code, in case it has not opened within a few minutes.'
         : 'Lifestead Test opens on devices that have been approved. Write your name and press Ask for Access, and your email app opens with a request to testers@ghostead.com, ready to send.';
 
   const askBand = (
@@ -239,31 +241,30 @@ function TesterGateInner() {
       <Text style={styles.caption}>
         The request carries your name and a code for this device, nothing else. It goes to testers@ghostead.com.
       </Text>
+      {message ? <Text style={styles.body}>{message}</Text> : null}
     </View>
   );
 
-  const linkBand = (
+  const codeBand = (
     <View style={styles.band}>
-      <Text style={styles.label}>The link from the approval email</Text>
+      <Text style={styles.label}>The code from the approval email</Text>
       <AppTextInput
-        style={styles.input}
+        style={[styles.input, styles.codeInput]}
         value={pasted}
         onChangeText={setPasted}
-        placeholder={t('Paste it here')}
+        placeholder="K7M2-QX9P"
         placeholderTextColor={colors.textSecondary}
-        autoCapitalize="none"
+        autoCapitalize="characters"
         autoCorrect={false}
-        multiline
       />
-      <TouchableOpacity style={[styles.primary, busy && styles.busy]} onPress={() => void pasteAndUse()} disabled={busy} accessibilityRole="button">
-        <Text style={styles.primaryText}>Paste the Link</Text>
+      <TouchableOpacity style={[styles.primary, busy && styles.busy]} onPress={() => void applyCode()} disabled={busy} accessibilityRole="button">
+        <Text style={styles.primaryText}>Use This Code</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.secondary, busy && styles.busy]} onPress={() => void applyPasted()} disabled={busy} accessibilityRole="button">
-        <Text style={styles.secondaryText}>Use This Link</Text>
+      <TouchableOpacity style={[styles.secondary, busy && styles.busy]} onPress={() => void pasteAndUse()} disabled={busy} accessibilityRole="button">
+        <Text style={styles.secondaryText}>Paste</Text>
       </TouchableOpacity>
-      <Text style={styles.caption}>
-        Easiest of all: tap the link in the email on this device, then Open in Lifestead Test. Otherwise copy the link and press Paste the Link.
-      </Text>
+      {codeMessage ? <Text style={styles.body}>{codeMessage}</Text> : null}
+      <Text style={styles.caption}>Small letters, spaces and the dash do not matter. A code works for two weeks.</Text>
     </View>
   );
 
@@ -276,13 +277,8 @@ function TesterGateInner() {
           </Text>
           <Text style={styles.body}>{lead}</Text>
         </View>
-        {message ? (
-          <View style={styles.band}>
-            <Text style={styles.body}>{message}</Text>
-          </View>
-        ) : null}
         {renewal ? askBand : null}
-        {waiting ? linkBand : null}
+        {waiting ? codeBand : null}
         {renewal ? null : askBand}
       </ScrollView>
     </View>
@@ -314,6 +310,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
   },
+  codeInput: { fontSize: 22, letterSpacing: 2, textAlign: 'center' },
   primary: { ...BUTTON_PRIMARY },
   primaryText: { ...BUTTON_PRIMARY_TEXT },
   secondary: { ...BUTTON_SECONDARY },

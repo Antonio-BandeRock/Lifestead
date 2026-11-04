@@ -40,3 +40,14 @@ CREATE TABLE IF NOT EXISTS push_tokens (
   token      TEXT NOT NULL,
   updated_at TEXT NOT NULL
 );
+
+-- Sealed approvals for Lifestead Test, waiting to be picked up (1.0.80.11).
+-- The Worker also creates this itself on first use. `slot` is a one-way hash
+-- of a secret the site never sees, and `body` is sealed with a key made from
+-- that same secret, so nothing here can be opened or traced back to a code.
+CREATE TABLE IF NOT EXISTS tester_drops (
+  slot       TEXT PRIMARY KEY,
+  body       TEXT NOT NULL,
+  stored_at  TEXT NOT NULL,
+  expires_at TEXT NOT NULL
+);

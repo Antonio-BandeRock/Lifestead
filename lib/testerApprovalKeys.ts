@@ -10,4 +10,5 @@ import type { ApprovalKey } from './testerApproval';
 
 export const TRUSTED_APPROVAL_KEYS: readonly ApprovalKey[] = [
   { id: 'pc-1', label: 'The PC (scripts/approve_tester.js)', publicKey: '1pb+xl5wjh7PLx/mfIRnSnwPIhkmm7KzJmMKCe2w97U=' },
+  { id: 'dev-dRFnjVlx', label: "The developer's phone", publicKey: 'fCCwYvd1oxp9VwhAl0osxEdiVUNG62+RybOvYuwlOJc=' },
 ];

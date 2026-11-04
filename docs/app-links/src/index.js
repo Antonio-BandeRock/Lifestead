@@ -570,6 +570,80 @@ async function handleRelay(request, env, url, ctx) {
   return fail(404, 'That is not something this relay does.');
 }
 
+// TESTER APPROVALS (1.0.80.11). A drop box for Lifestead Test, so a tester
+// types a short code or simply waits, rather than pasting a long link.
+//
+// The approver's app seals the signed approval with a key made from a secret
+// (the code in the reply email, or a pickup secret only the asking device and
+// its request email carry) and leaves it here under a slot made from the same
+// secret by a one-way hash. This Worker sees the slot and the ciphertext and
+// nothing else: it cannot open the approval, cannot get the code back from the
+// slot, and what it holds is useful only on the one device it names. So there
+// is no signature check on put. Somebody who could guess a slot could replace
+// an approval with garbage the tester version refuses, which costs the tester
+// one Ask Again, and guessing a slot means guessing a 40-bit code or a
+// 128-bit secret.
+//
+// See lib/testerApproval.ts (dropSlot, sealDrop, openDrop) for the other side.
+const DROP_TTL_DAYS = 14;
+const DROP_MAX_BYTES = 4096;
+const DROP_MAX_ROWS = 2000;
+const DROP_HEADERS = { ...JSON_HEADERS, 'access-control-allow-origin': '*', 'access-control-allow-headers': 'content-type', 'access-control-allow-methods': 'GET, POST, OPTIONS' };
+
+function dropJson(body, status = 200) {
+  return new Response(JSON.stringify(body), { status, headers: DROP_HEADERS });
+}
+
+let dropTableReady = false;
+
+async function ensureDropTable(env) {
+  if (dropTableReady) return;
+  await env.RELAY_DB.prepare(
+    'CREATE TABLE IF NOT EXISTS tester_drops (slot TEXT PRIMARY KEY, body TEXT NOT NULL, stored_at TEXT NOT NULL, expires_at TEXT NOT NULL)',
+  ).run();
+  dropTableReady = true;
+}
+
+async function handleTester(request, env, url) {
+  if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: DROP_HEADERS });
+  const route = url.pathname.replace(/^\/tester\/v1\/?/, '');
+  await ensureDropTable(env);
+  await env.RELAY_DB.prepare('DELETE FROM tester_drops WHERE expires_at < ?').bind(new Date().toISOString()).run();
+
+  if (route === 'get' && request.method === 'GET') {
+    const slot = url.searchParams.get('slot') || '';
+    if (!/^[A-Za-z0-9_-]{20,64}$/.test(slot)) return dropJson({ ok: false, reason: 'That is not a slot.' }, 400);
+    const row = await env.RELAY_DB.prepare('SELECT body FROM tester_drops WHERE slot = ?').bind(slot).first();
+    if (!row) return dropJson({ ok: false, reason: 'Nothing is waiting.' }, 404);
+    return dropJson({ ok: true, body: row.body });
+  }
+
+  if (route === 'put' && request.method === 'POST') {
+    let payload;
+    try {
+      payload = await request.json();
+    } catch {
+      return dropJson({ ok: false, reason: 'That request could not be read.' }, 400);
+    }
+    const slot = payload && payload.slot;
+    const body = payload && payload.body;
+    if (typeof slot !== 'string' || !/^[A-Za-z0-9_-]{20,64}$/.test(slot)) return dropJson({ ok: false, reason: 'That is not a slot.' }, 400);
+    if (typeof body !== 'string' || !/^[A-Za-z0-9_-]+$/.test(body) || body.length > DROP_MAX_BYTES) {
+      return dropJson({ ok: false, reason: 'That is not a sealed approval.' }, 400);
+    }
+    const total = await env.RELAY_DB.prepare('SELECT COUNT(*) AS n FROM tester_drops').first();
+    if (total && total.n >= DROP_MAX_ROWS) return dropJson({ ok: false, reason: 'The drop box is full. Send the link instead.' }, 503);
+    const now = new Date();
+    const expires = new Date(now.getTime() + DROP_TTL_DAYS * 24 * 60 * 60 * 1000);
+    await env.RELAY_DB.prepare(
+      'INSERT INTO tester_drops (slot, body, stored_at, expires_at) VALUES (?, ?, ?, ?) ON CONFLICT(slot) DO UPDATE SET body = excluded.body, stored_at = excluded.stored_at, expires_at = excluded.expires_at',
+    ).bind(slot, body, now.toISOString(), expires.toISOString()).run();
+    return dropJson({ ok: true, expiresAt: expires.toISOString() });
+  }
+
+  return dropJson({ ok: false, reason: 'That is not something this does.' }, 404);
+}
+
 // WHERE THE SITE LIVES (2026-10-09). The app's home moved from
 // insidestoryapp.com to lifestead.ghostead.com, with lifestead.app as the short
 // address people are given. All three hosts reach this one Worker and this one
@@ -580,7 +654,7 @@ async function handleRelay(request, env, url, ctx) {
 // relay's POSTs would not survive one, and a /connect link sent last month has
 // to keep working where it was sent.
 const HOME_HOST = 'lifestead.ghostead.com';
-const SERVED_ON_EVERY_HOST = ['/.well-known/', '/relay/', '/connect', '/import-shared'];
+const SERVED_ON_EVERY_HOST = ['/.well-known/', '/relay/', '/tester/', '/connect', '/import-shared'];
 
 export default {
   async fetch(request, env, ctx) {
@@ -599,6 +673,15 @@ export default {
         // phone cannot act on it, and this is the one place internals could show.
         console.error('relay', error && error.message ? error.message : error);
         return fail(500, 'The relay could not handle that. Try again, or send it another way.');
+      }
+    }
+
+    if (url.pathname.startsWith('/tester/')) {
+      try {
+        return await handleTester(request, env, url);
+      } catch (error) {
+        console.error('tester', error && error.message ? error.message : error);
+        return dropJson({ ok: false, reason: 'The drop box could not handle that. Try again.' }, 500);
       }
     }
 

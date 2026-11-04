@@ -7,12 +7,16 @@
 //   node scripts/approve_tester.js --new-key      makes a new PC key
 //
 // Signs with the seed in _backups/tester-approval/pc-approval-key.json, which
-// never enters the repo, and prints the activation link to send back. The
-// tester presses it, or pastes it into the tester version.
+// never enters the repo. Since 1.0.80.11 it leaves the approval sealed on the
+// site, as the developer version does (lib/testerApprove.ts), and prints a
+// reply carrying a short code: the asking device opens by itself, and the
+// code is the way by hand. Where the site cannot be reached the reply
+// carries the activation link instead.
 /* global __dirname */
 const fs = require('fs');
 const path = require('path');
 const ts = require('typescript');
+const crypto = require('crypto');
 const nacl = require('tweetnacl');
 
 const KEY_FILE = 'C:/Users/TonyR/OneDrive/Desktop/AppProject/_backups/tester-approval/pc-approval-key.json';
@@ -69,8 +73,37 @@ const pair = nacl.sign.keyPair.fromSeed(Uint8Array.from(Buffer.from(key.seed, 'b
 const approval = A.makeApproval(request, key.id, Date.now(), days);
 const token = A.signApproval(approval, pair.secretKey);
 
-console.log(`${request.name}, ${request.platform === 'phone' ? 'a phone' : 'a computer'}${request.renewal ? ', asking for more time' : ''}.`);
-console.log(`Asked ${new Date(request.asked).toLocaleString()}. Approved until ${A.endDay(approval)}.`);
-console.log('');
-console.log('Send this back to them:');
-console.log(A.activationLink(token));
+async function leaveDrop(secret) {
+  try {
+    const response = await fetch(`${A.DROP_URL}/put`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ slot: A.dropSlot(secret), body: A.sealDrop(token, secret, crypto.randomBytes(24)) }),
+    });
+    return response.ok;
+  } catch {
+    return false;
+  }
+}
+
+async function main() {
+  const typed = A.codeFromBytes(crypto.randomBytes(A.CODE_LENGTH));
+  const [codeLeft, pickupLeft] = await Promise.all([leaveDrop(typed), request.pickup ? leaveDrop(request.pickup) : false]);
+  const until = A.endDay(approval);
+  console.log(`${request.name}, ${request.platform === 'phone' ? 'a phone' : 'a computer'}${request.renewal ? ', asking for more time' : ''}.`);
+  console.log(`Asked ${new Date(request.asked).toLocaleString()}. Approved until ${until}.`);
+  console.log('');
+  console.log('Send this back to them:');
+  if (!codeLeft) {
+    console.log(`${request.name}, here is your link for Lifestead Test. Open it on the device you asked from:`);
+    console.log(A.activationLink(token));
+    console.log('');
+    console.log('(The site could not be reached, so this is the link rather than a code.)');
+  } else if (pickupLeft) {
+    console.log(`${request.name}, you are approved for Lifestead Test until ${until}. Open Lifestead Test on the device you asked from, with internet, and it opens by itself. If it has not within a few minutes, type this code there: ${A.formatCode(typed)}`);
+  } else {
+    console.log(`${request.name}, you are approved for Lifestead Test until ${until}. Type this code in Lifestead Test on the device you asked from: ${A.formatCode(typed)}`);
+  }
+}
+
+void main();

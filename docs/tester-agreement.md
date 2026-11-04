@@ -2,7 +2,7 @@
 
 Drafted 2026-10-31 for tester plan T12, for Tony to review. This is what a
 tester reads and agrees to the first time the tester version opens, after
-asking for access and pasting the approval link (since 1.0.79.1). The same
+asking for access and being approved (since 1.0.79.1; the approval arrives by itself, or by a typed code, since 1.0.80.11). The same
 screen then shows Lifestead's general points ("Before you start", in
 `lib/agreement.ts`), and I Agree records both, so a tester reads one screen
 rather than two. The

@@ -9,7 +9,7 @@ const NOT_HERE = 'Approving testers is only in the developer version.';
 export type MyApprovalKey = { id: string; label: string; publicKey: string; trusted: boolean };
 
 export type Approved =
-  | { ok: true; request: AccessRequest; link: string; until: string; trusted: boolean }
+  | { ok: true; request: AccessRequest; link: string; until: string; trusted: boolean; code: string | null; pickup: boolean }
   | { ok: false; reason: string };
 
 export async function getMyApprovalKey(): Promise<MyApprovalKey> {

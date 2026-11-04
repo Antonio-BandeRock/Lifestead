@@ -134,6 +134,32 @@ check(A.firstName('  Víctor Hernández') === 'Víctor', 'first name keeps its a
 check(A.firstName('Lisa') === 'Lisa', 'a one-word name');
 check([...A.firstName('Aaaaaaaaaaaaaaaaaaaaaaaaaaaa')].length === 20, 'a long first name is cut to 20');
 
+// The code and the sealed drop (1.0.80.11).
+const typed = A.codeFromBytes(new Uint8Array([0, 31, 32, 63, 5, 200, 17, 255]));
+check(typed.length === A.CODE_LENGTH && /^[2-9A-HJ-NP-Z]+$/.test(typed), 'a code uses only the plain letters and numbers');
+check(A.formatCode(typed) === `${typed.slice(0, 4)}-${typed.slice(4)}`, 'a code is shown in two groups of four');
+check(A.normalizeCode(` ${A.formatCode(typed).toLowerCase()} `) === typed, 'small letters, spaces and the dash are forgiven');
+check(A.normalizeCode(`${typed.slice(0, 4)} ${typed.slice(4)}`) === typed, 'a space in place of the dash');
+check(A.normalizeCode('ABCD-EFG0') === null && A.normalizeCode('ABCD-EFGO') === null, 'a 0 or an O is not in a code');
+check(A.normalizeCode(token) === null && A.normalizeCode(activate) === null, 'an approval or a link is never read as a code');
+check(A.findCode(`Tony, you are approved until 2027-02-02. Type this code there: ${A.formatCode(typed)}`) === typed, 'a whole pasted email gives up its code');
+check(A.findCode(`Here it is: ${activate}`) === null, 'text with an activation link is left to the link');
+check(A.findCode('nothing here') === null, 'words without a code');
+const pickup = A.pickupFromBytes(new Uint8Array(16).fill(3));
+check(/^[A-Za-z0-9_-]{22}$/.test(pickup), 'a pickup is 22 base64url characters');
+const withPickup = A.decodeRequest(A.encodeRequest({ ...request, pickup }));
+check(withPickup && withPickup.pickup === pickup, 'a request carries its pickup through');
+check(A.decodeRequest(A.encodeRequest({ ...request, pickup: 'short' })).pickup === undefined, 'a pickup that is not one is dropped');
+check(A.dropSlot(typed) === A.dropSlot(typed) && A.dropSlot(typed) !== A.dropSlot(pickup), 'a slot is the same for one secret and differs between two');
+check(!A.dropSlot(typed).includes(typed), 'a slot does not carry the code');
+const sealed = A.sealDrop(token, typed, new Uint8Array(24).fill(1));
+check(/^[A-Za-z0-9_-]+$/.test(sealed) && sealed.length < 4096, 'a sealed approval fits what the site takes');
+check(!sealed.includes(token.slice(0, 20)), 'a sealed approval does not show the approval');
+check(A.openDrop(sealed, typed) === token, 'the right code opens it');
+check(A.openDrop(sealed, pickup) === null, 'another secret does not');
+check(A.openDrop(`${sealed.slice(0, -2)}AA`, typed) === null, 'a changed one does not');
+check(A.openDrop('', typed) === null && A.openDrop('!!', typed) === null, 'garbage does not');
+
 // The shipped list.
 check(Array.isArray(K.TRUSTED_APPROVAL_KEYS) && K.TRUSTED_APPROVAL_KEYS.length > 0, 'at least one trusted key ships');
 const ids = new Set();

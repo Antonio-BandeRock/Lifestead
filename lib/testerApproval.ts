@@ -8,7 +8,17 @@
 // on the PC (scripts/approve_tester.js), which signs an approval naming that
 // device and when it ends, and sends back an activation link. The tester
 // version checks the signature against the keys in testerApprovalKeys.ts, so
-// nothing has to be online and no server holds anything.
+// no server has to vouch for anything.
+//
+// Getting the approval back (1.0.80.11, by direct instruction: "it needs to
+// be some sort of code that activates the app"). The approver also leaves
+// the signed approval at lifestead.ghostead.com/tester/v1, sealed, under two
+// unguessable slots: one made from a secret only the asking device and the
+// request email carry (`pickup`), which the tester version checks by itself
+// while it waits, and one made from an eight-character code the reply email
+// carries, for typing in. The site holds ciphertext it has no key for, by a
+// slot it cannot turn back into the secret, for DROP_DAYS. The long link
+// still works, for a device that is offline.
 //
 // What this stops: a copy of the installer passed to somebody else opens on
 // their device to the request screen and nothing more, and an activation
@@ -39,6 +49,9 @@ export type AccessRequest = {
   renewal: boolean;
   /** When it was asked, ms since 1970. */
   asked: number;
+  /** A secret this device made for picking up its approval by itself.
+   *  Missing on a request from before 1.0.80.11. */
+  pickup?: string;
 };
 
 export type Approval = {
@@ -179,6 +192,7 @@ export function decodeRequest(code: string): AccessRequest | null {
     platform: value.platform,
     renewal: value.renewal === true,
     asked: value.asked,
+    ...(typeof value.pickup === 'string' && /^[A-Za-z0-9_-]{16,44}$/.test(value.pickup) ? { pickup: value.pickup } : {}),
   };
 }
 
@@ -276,4 +290,86 @@ export function endDay(approval: Approval): string {
   const date = new Date(approval.expires);
   const pad = (n: number) => String(n).padStart(2, '0');
   return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
+
+// ---- The code and the sealed drop (1.0.80.11) ----
+
+/** Where approvals wait to be picked up. */
+export const DROP_URL = `${LINK_HOST}/tester/v1`;
+/** How long the site keeps a sealed approval. */
+export const DROP_DAYS = 14;
+
+/** No 0, 1, I or O, so nothing reads as something else. 32 letters, so a
+ *  random byte masked to five bits picks each one evenly. */
+const CODE_ALPHABET = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+export const CODE_LENGTH = 8;
+
+/** A code from CODE_LENGTH random bytes. */
+export function codeFromBytes(bytes: Uint8Array): string {
+  let code = '';
+  for (let i = 0; i < CODE_LENGTH; i += 1) code += CODE_ALPHABET[bytes[i] & 31];
+  return code;
+}
+
+/** As it is shown and written: two groups of four. */
+export function formatCode(code: string): string {
+  return `${code.slice(0, 4)}-${code.slice(4)}`;
+}
+
+/** The code in whatever was typed or pasted (spaces, dashes and small
+ *  letters forgiven), or null when it is not one. A link or a long approval
+ *  is never read as a code. */
+export function normalizeCode(input: string): string | null {
+  const text = input.trim();
+  if (!text || text.length > 40 || /[#?=./:]/.test(text)) return null;
+  const clean = text.toUpperCase().replace(/[\s-]/g, '');
+  if (clean.length !== CODE_LENGTH) return null;
+  for (const char of clean) if (!CODE_ALPHABET.includes(char)) return null;
+  return clean;
+}
+
+/** The code anywhere in what was pasted, so a whole copied email still
+ *  works: the text itself when it is a code, otherwise the first XXXX-XXXX
+ *  in it. Text carrying an activation link is left to extractCode. */
+export function findCode(input: string): string | null {
+  const exact = normalizeCode(input);
+  if (exact) return exact;
+  if (/[#?&]a=/.test(input)) return null;
+  const match = input.match(/(?:^|[^A-Za-z0-9_-])([2-9A-HJ-NP-Za-hj-np-z]{4}-[2-9A-HJ-NP-Za-hj-np-z]{4})(?![A-Za-z0-9_-])/);
+  return match ? normalizeCode(match[1]) : null;
+}
+
+/** A fresh pickup secret from 16 random bytes. */
+export function pickupFromBytes(bytes: Uint8Array): string {
+  return toBase64Url(bytes.slice(0, 16));
+}
+
+function derive(label: string, secret: string): Uint8Array {
+  return nacl.hash(utf8Bytes(`lifestead-tester-drop-v1:${label}:${secret}`));
+}
+
+/** The slot a secret (a pickup or a code) is left under. One way: the site
+ *  cannot get the secret back from it. */
+export function dropSlot(secret: string): string {
+  return toBase64Url(derive('slot', secret).slice(0, 24));
+}
+
+/** The approval token sealed with a key made from the secret. */
+export function sealDrop(token: string, secret: string, nonce: Uint8Array): string {
+  const key = derive('key', secret).slice(0, nacl.secretbox.keyLength);
+  const box = nacl.secretbox(utf8Bytes(token), nonce.slice(0, nacl.secretbox.nonceLength), key);
+  const out = new Uint8Array(nacl.secretbox.nonceLength + box.length);
+  out.set(nonce.slice(0, nacl.secretbox.nonceLength), 0);
+  out.set(box, nacl.secretbox.nonceLength);
+  return toBase64Url(out);
+}
+
+/** The approval token back out of a drop, or null when the secret is wrong
+ *  or anything was changed. */
+export function openDrop(body: string, secret: string): string | null {
+  const bytes = fromBase64Url(body);
+  if (!bytes || bytes.length <= nacl.secretbox.nonceLength) return null;
+  const key = derive('key', secret).slice(0, nacl.secretbox.keyLength);
+  const opened = nacl.secretbox.open(bytes.slice(nacl.secretbox.nonceLength), bytes.slice(0, nacl.secretbox.nonceLength), key);
+  return opened ? utf8Text(opened) : null;
 }

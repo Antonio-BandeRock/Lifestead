@@ -6,6 +6,11 @@
 // A request that arrives on a link (the phone's Open in Lifestead, or the
 // PC's, through DesktopLinkWatcher) is approved at once and the reply is
 // copied, so all that is left is Reply and Paste in the email.
+//
+// Since 1.0.80.11 the reply carries a short code and no link: the approval
+// is left sealed on the site, the asking device picks it up by itself, and
+// the code is the way to open it by hand. Only when the site cannot be
+// reached does the reply fall back to the link.
 import * as Clipboard from 'expo-clipboard';
 import { useEffect, useRef, useState } from 'react';
 import { Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -15,6 +20,7 @@ import { textShadow, typography } from '../constants/typography';
 import { t } from '../lib/i18n';
 import { explainNotYet } from '../lib/notYet';
 import { isDesktopApp } from '../lib/desktop/bridge';
+import { formatCode } from '../lib/testerApproval';
 import { approveRequest, getMyApprovalKey, sendMyApprovalKey, type Approved, type MyApprovalKey } from '../lib/testerApprove';
 import { AppTextInput } from './AppTextInput';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
@@ -63,7 +69,7 @@ export function ApproveTesterPanel({ initial = '' }: Props) {
       if (done.ok) {
         // A copy without a press can be refused (a window not in front);
         // Copy the Reply is still there when it is.
-        const went = await Clipboard.setStringAsync(replyText(done.link, done.request.name)).then(() => true, () => false);
+        const went = await Clipboard.setStringAsync(replyText(done)).then(() => true, () => false);
         setCopied(went);
       }
     } finally {
@@ -95,12 +101,12 @@ export function ApproveTesterPanel({ initial = '' }: Props) {
     setKeySent(problem ?? 'Sent. Tell Claude it is there, and the next update trusts this device.');
   }
 
-  async function send(url: string, name: string) {
-    await Share.share({ message: replyText(url, name) });
+  async function send(done: Approval) {
+    await Share.share({ message: replyText(done) });
   }
 
-  async function copy(url: string, name: string) {
-    await Clipboard.setStringAsync(replyText(url, name));
+  async function copy(done: Approval) {
+    await Clipboard.setStringAsync(replyText(done));
     setCopied(true);
   }
 
@@ -164,28 +170,52 @@ export function ApproveTesterPanel({ initial = '' }: Props) {
       {result && result.ok ? (
         <View style={styles.band}>
           <Text style={styles.body}>{approvedLine(result.request.name, result.request.platform, result.request.renewal, result.until)}</Text>
-          <Text style={styles.approvalLink} selectable>
-            {result.link}
-          </Text>
+          {result.code ? (
+            <Text style={styles.code} selectable>
+              {formatCode(result.code)}
+            </Text>
+          ) : (
+            <>
+              <Text style={styles.warning}>The site could not be reached, so the reply carries the link instead of a code.</Text>
+              <Text style={styles.approvalLink} selectable>
+                {result.link}
+              </Text>
+            </>
+          )}
           {copied ? <Text style={styles.body}>The reply is copied. Go back to their email, press Reply, and paste it.</Text> : null}
-          <TouchableOpacity style={styles.primary} onPress={() => void copy(result.link, result.request.name)} accessibilityRole="button">
+          <TouchableOpacity style={styles.primary} onPress={() => void copy(result)} accessibilityRole="button">
             <Text style={styles.primaryText}>{copied ? 'Copied' : 'Copy the Reply'}</Text>
           </TouchableOpacity>
           {isDesktopApp() ? null : (
-            <TouchableOpacity style={styles.secondary} onPress={() => void send(result.link, result.request.name)} accessibilityRole="button">
+            <TouchableOpacity style={styles.secondary} onPress={() => void send(result)} accessibilityRole="button">
               <Text style={styles.secondaryText}>Send Another Way</Text>
             </TouchableOpacity>
           )}
-          <Text style={styles.caption}>The link opens Lifestead Test only on the device that asked.</Text>
+          <Text style={styles.caption}>
+            {result.pickup
+              ? 'The device that asked opens by itself the next time it is open with internet. The code is in case it does not, and works only on that device.'
+              : result.code
+                ? 'This request is from before automatic opening, so the tester types the code. It works only on the device that asked.'
+                : 'The link opens Lifestead Test only on the device that asked.'}
+          </Text>
         </View>
       ) : null}
     </View>
   );
 }
 
-function replyText(url: string, name: string): string {
-  return `${t('{name}, here is your link for Lifestead Test. Open it on the device you asked from:', { name })}
-${url}`;
+type Approval = Extract<Approved, { ok: true }>;
+
+function replyText(done: Approval): string {
+  const name = done.request.name;
+  if (!done.code) {
+    return `${t('{name}, here is your link for Lifestead Test. Open it on the device you asked from:', { name })}
+${done.link}`;
+  }
+  const values = { name, day: done.until, code: formatCode(done.code) };
+  return done.pickup
+    ? t('{name}, you are approved for Lifestead Test until {day}. Open Lifestead Test on the device you asked from, with internet, and it opens by itself. If it has not within a few minutes, type this code there: {code}', values)
+    : t('{name}, you are approved for Lifestead Test until {day}. Type this code in Lifestead Test on the device you asked from: {code}', values);
 }
 
 function approvedLine(name: string, platform: 'phone' | 'computer', renewal: boolean, day: string): string {
@@ -202,6 +232,7 @@ const styles = StyleSheet.create({
   label: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   body: { ...typography.body, color: colors.textPrimary, ...textShadow },
   approvalLink: { ...typography.caption, color: colors.textPrimary, ...textShadow },
+  code: { ...typography.sectionTitle, fontSize: 28, letterSpacing: 3, textAlign: 'center', color: colors.textPrimary, ...textShadow },
   caption: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   warning: { ...typography.caption, color: colors.danger, ...textShadow },
   input: {
