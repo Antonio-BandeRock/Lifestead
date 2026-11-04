@@ -292,7 +292,7 @@ export const ITEMS: ItemDef[] = [
     section: 'archive',
     kind: 'needed',
     beats: [],
-    todo: 'Save a backup, or turn on automatic saving to a shared folder, in Profile under Backup & Restore.',
+    todo: 'Choose a shared folder, save the first backup there, then turn on automatic saving, in Profile under Backup & Restore.',
     done: 'Your records are backed up.',
     why: 'Everything you record lives on this device. If it is lost or reset, a backup is the only way back, and nobody else holds a copy.',
     destination: profile('backup'),

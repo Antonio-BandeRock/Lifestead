@@ -41,6 +41,15 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.80.8',
+    date: '2026-11-03',
+    changes: [
+      'Backup & Restore in Profile is now numbered steps in the order they are done: 1 choose your shared folder, 2 save the first backup, 3 turn on Automatic Sync, 4 check a backup opens, 5 add your other device. The top of the card names the next step not yet done.',
+      'Once a shared folder is chosen, the Shared Folder screen has Next: Save the First Backup, which goes straight to step 2.',
+      'In setup, the backup question opens the Shared Folder screen first when there is no folder yet, and Save the first backup once there is one. Choosing a folder no longer counts as backed up.',
+    ],
+  },
+  {
     version: '1.0.80.7',
     date: '2026-11-03',
     changes: [

@@ -82,6 +82,7 @@ import {
   OPEN_PROFILE_LABEL,
   PLAN_THIS_WAY_LABEL,
   READ_MORE_LABEL,
+  SAVE_FIRST_BACKUP_LABEL,
   SET_UP_BACKUP_LABEL,
   SECURITY_APP_LOCK_LABEL,
   SECURITY_BOTH_LABEL,
@@ -140,6 +141,13 @@ const backupRoute: Exclude<StoryDestination, { kind: 'beats' }> = {
   kind: 'route',
   pathname: '/profile',
   params: { section: 'backup' },
+};
+// The shared folder screen, the first step of a backup; once a folder is
+// chosen its Next button opens Backup & Restore at the first backup.
+const sharedFolderRoute: Exclude<StoryDestination, { kind: 'beats' }> = {
+  kind: 'route',
+  pathname: '/onedrive-folder',
+  params: { next: 'backup' },
 };
 // Profile opened at App Lock, where the vault's choices and code are.
 const appLockProfileRoute: Exclude<StoryDestination, { kind: 'beats' }> = {
@@ -561,9 +569,9 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
       case 'backup':
         return (
           <View style={styles.links}>
-            {link(SET_UP_BACKUP_LABEL, () => {
+            {link(facts.backupFolderSet ? SAVE_FIRST_BACKUP_LABEL : SET_UP_BACKUP_LABEL, () => {
               setHolding(null);
-              go(backupRoute);
+              go(facts.backupFolderSet ? backupRoute : sharedFolderRoute);
             })}
             {mode === 'setup'
               ? link(LATER_LABEL, () => void act(() => setYourStoryAnswer('backup', LATER), null), true)

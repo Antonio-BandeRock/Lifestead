@@ -98,6 +98,7 @@ import {
   recordBackupSaved,
   recordSharedBackupSeen,
   exportBackupToFile,
+  hasBackupBeenSaved,
   listLocalBackupFiles,
   parseBackupEnvelope,
   pickAndReadBackupFile,
@@ -1454,6 +1455,8 @@ export default function ProfileScreen() {
   // fresh every time, so this always reflects what's genuinely still
   // there, not a stale one-time snapshot.
   const [localBackups, setLocalBackups] = useState<LocalBackupFile[]>([]);
+  // Step 2 of Backup & Restore: whether a backup exists yet (1.0.80.8).
+  const [backupSaved, setBackupSaved] = useState(false);
   const [lastBackupCheck, setLastBackupCheck] = useState<BackupCheckRecord | null>(null);
   useEffect(() => {
     let isMounted = true;
@@ -1482,7 +1485,6 @@ export default function ProfileScreen() {
   const [peerPhotosWifiOnly, setPeerPhotosWifiOnlyState] = useState(true);
   // B5: the routine step timer's two switches, both off until turned on.
   const [stepTimer, setStepTimerState] = useState<StepTimerSettings>({ ring: false, signal: false });
-  const [oneDriveConnected, setOneDriveConnected] = useState(false);
   // Automatic snapshot sync with the other device (1.0.42.28), see
   // lib/snapshotSync.ts. Read from the secure store on every focus, the
   // same as the folder, since the watcher in app/_layout.tsx moves it on.
@@ -1674,6 +1676,7 @@ export default function ProfileScreen() {
   const refreshLocalBackups = useCallback(async () => {
     const files = await listLocalBackupFiles();
     setLocalBackups(files);
+    setBackupSaved(await hasBackupBeenSaved());
   }, []);
 
   // Derived from the shared folder rather than chosen separately: the app owns
@@ -1681,7 +1684,6 @@ export default function ProfileScreen() {
   // being one more thing to set up.
   const refreshBackupFolder = useCallback(async (): Promise<DriveItemRef | null> => {
     const connected = await isSharedFolderConnected();
-    setOneDriveConnected(connected);
     if (!connected) {
       setBackupFolder(null);
       return null;
@@ -1699,7 +1701,9 @@ export default function ProfileScreen() {
     if (folder) {
       void listFiles(folder)
         .then((listed) => {
-          if (listed.ok) void noteSharedBackups(listed.value.map((file) => file.name));
+          if (listed.ok) {
+            void noteSharedBackups(listed.value.map((file) => file.name)).then(async () => setBackupSaved(await hasBackupBeenSaved()));
+          }
         })
         .catch(() => {});
     }
@@ -1710,6 +1714,9 @@ export default function ProfileScreen() {
     let isMounted = true;
     listLocalBackupFiles().then((files) => {
       if (isMounted) setLocalBackups(files);
+    });
+    void hasBackupBeenSaved().then((saved) => {
+      if (isMounted) setBackupSaved(saved);
     });
     return () => {
       isMounted = false;
@@ -1776,13 +1783,23 @@ export default function ProfileScreen() {
   }
 
   const otherDeviceKind = isDesktopApp() ? 'phone' : 'computer';
+  // The first step of Backup & Restore not yet done, named at the top of the
+  // card so the next thing to do is never a search (1.0.80.8).
+  const nextBackupStep = !backupFolder
+    ? 'Start with step 1: choose your shared folder.'
+    : !backupSaved
+      ? 'Next is step 2: save the first backup.'
+      : !syncState.enabled
+        ? 'Next is step 3: turn on Automatic Sync.'
+        : !lastBackupCheck
+          ? 'Next is step 4: check that a backup opens.'
+          : otherDeviceKind === 'phone'
+            ? 'Steps 1 to 4 are done. Step 5 adds your phone.'
+            : 'Steps 1 to 4 are done. Step 5 adds your computer.';
 
   async function handleTurnOnSync() {
     if (syncBusy) return;
-    if (!backupFolder) {
-      showBackupAlert('No shared folder yet', 'Set up your shared folder first, then both devices have somewhere to meet.');
-      return;
-    }
+    if (!backupFolder) return explainNotYet('Choose your shared folder first, in step 1 above, so both devices have somewhere to meet.');
     if (!(await confirmItsYou('Before syncing begins'))) return;
     const password = await promptPassword(
       'set',
@@ -2711,10 +2728,7 @@ export default function ProfileScreen() {
   // the newest backup by name instead of asking somebody to go and find it.
   async function handleBackUpToOneDrive() {
     if (backupBusy) return;
-    if (!backupFolder) {
-      showBackupAlert('No shared folder yet', 'Set up your shared folder first, then backups have somewhere to go.');
-      return;
-    }
+    if (!backupFolder) return explainNotYet('Choose your shared folder first, in step 1 above, so the backup has somewhere to go.');
     if (!(await confirmItsYou('Before the backup is made'))) return;
     const password = await promptPassword(
       'set',
@@ -2735,7 +2749,7 @@ export default function ProfileScreen() {
         showBackupAlert('Something went wrong', 'Could not build a backup. Nothing was sent.');
         return;
       }
-      showBusy('Sending it to OneDrive...');
+      showBusy('Sending it to the shared folder...');
       let sent;
       try {
         sent = await uploadText(backupFolder, built.fileName, built.content);
@@ -2743,10 +2757,11 @@ export default function ProfileScreen() {
         hideBusy();
       }
       if (!sent.ok) {
-        showBackupAlert('It did not reach OneDrive', sent.reason);
+        showBackupAlert('It did not reach the shared folder', sent.reason);
         return;
       }
       await recordBackupSaved();
+      setBackupSaved(true);
       showBackupAlert(
         'Backed up',
         built.fileName + ' is now in ' + (backupFolder.path ?? backupFolder.name) + '.',
@@ -5720,32 +5735,180 @@ export default function ProfileScreen() {
         {renderCardHeader('backup', 'Backup & Restore')}
         {!collapsedSections.has('backup') ? (
           <View style={styles.cardBody}>
-            {/* WHICHEVER ROUTE ACTUALLY KNOWS WHERE THE FILE IS GOING LEADS.
-
-                Reported directly, 2026-09-09: "The backup folder is known to
-                it, so why is it asking me to go to the place where I want to
-                back up to?" Correct, and the fault was ordering, not the
-                backup itself. Export a Backup sat first, directly under this
-                text, and it always hands the file to the OS share sheet,
-                which is the thing that asks where to put it. Back Up to
-                OneDrive, the one that writes straight to the folder already
-                chosen, sat further down inside a block headed "Where backups
-                are kept", which reads as configuration rather than an action.
-
-                So the primary button now follows what the app actually knows:
-                with a folder set up it backs up there, and the share sheet
-                demotes to the fallback it always was. With no folder set up
-                the share sheet IS the only route, and leads, unchanged.
-
-                Both keep the one shared button style this app settled on
-                2026-08-24. Position is the signal here, not a second visual
-                tier. */}
+            {/* IN THE ORDER IT HAS TO BE DONE, 1.0.80.8. Direct instruction:
+                "The order for exporting a backup needs to include setting up
+                a shared folder. They aren't separate ... in order of what is
+                required first, and then in order of what they should do next
+                each time." So the card is numbered steps, the first not yet
+                done is named at the top, and a step that needs an earlier one
+                stays pressable and says which (explainNotYet). The share sheet
+                route stays in step 2 as the fallback for no shared folder. */}
             <Text style={styles.helpText}>
-              {backupFolder
-                ? 'Everything on this device (meals, schedule, conditions, trials, connections, and more) goes into one password-protected file in your shared folder, so it survives this phone being lost or replaced. It carries the references to your photos, not the photo files themselves.'
-                : "Export everything on this device (meals, schedule, conditions, trials, connections, and more) into one file you can save wherever you like (a cloud drive, an email to yourself). Doesn't include the actual photo files a saved dish or recipe may reference, only their stored references."}
+              Everything on this device (meals, schedule, conditions, trials, connections, and more) goes into one
+              password-protected file, so it survives this phone being lost or replaced. It carries the references to
+              your photos, not the photo files themselves.
             </Text>
             {photoStorageLine ? <Text style={styles.helpText}>{photoStorageLine}</Text> : null}
+            <Text style={styles.concernLabel}>{nextBackupStep}</Text>
+
+            {/* 1. WHERE BACKUPS ARE KEPT. A folder the app can address is one
+                it can write to, list, and read a backup back out of; the share
+                sheet never tells the app where a file landed. A different
+                folder from the mailbox, deliberately: the mailbox is shared
+                with a partner, a backup is the whole record. */}
+            <View style={styles.concernRow}>
+              <Text style={styles.subLabel}>1. Choose your shared folder</Text>
+              {backupFolder ? (
+                <>
+                  <Text style={styles.concernLabel}>{backupFolder.name}</Text>
+                  <Text style={styles.derivedText}>{backupFolder.path ?? 'Inside your shared folder.'}</Text>
+                </>
+              ) : (
+                <Text style={styles.derivedText}>
+                  No shared folder yet. OneDrive, Google Drive or a folder on this phone all work.
+                </Text>
+              )}
+              <TouchableOpacity
+                ref={walkMark.ref('profile.sharedFolder')}
+                style={[styles.checkinButton, walkMark('profile.sharedFolder')]}
+                disabled={backupBusy}
+                onPress={() => router.push({ pathname: '/onedrive-folder', params: { from: 'profile' } })}
+              >
+                <Text style={styles.checkinButtonText}>
+                  {backupFolder ? 'Change the Shared Folder' : 'Set Up the Shared Folder'}
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* 2. THE FIRST BACKUP. The route that knows where the file goes
+                leads (reported 2026-09-09: "The backup folder is known to it,
+                so why is it asking me to go to the place where I want to back
+                up to?"), and the share sheet follows as the fallback. */}
+            <View style={styles.concernRow}>
+              <Text style={styles.subLabel}>2. Save the first backup</Text>
+              <Text style={styles.derivedText}>
+                {backupFolder
+                  ? backupSaved
+                    ? 'A backup is saved. Save another whenever you like, or let step 3 do it for you.'
+                    : 'Saves a backup into your shared folder, encrypted with a password you choose.'
+                  : 'Needs the shared folder from step 1. Until then, a copy can be handed to the share sheet and saved wherever you like.'}
+              </Text>
+              <TouchableOpacity
+                ref={walkMark.ref('profile.backupOneDrive')}
+                style={[styles.checkinButton, walkMark('profile.backupOneDrive')]}
+                disabled={backupBusy}
+                onPress={handleBackUpToOneDrive}
+              >
+                <Text style={styles.checkinButtonText}>{backupBusy ? 'Working…' : 'Back Up to the Shared Folder'}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.checkinButton} disabled={backupBusy} onPress={handleExportBackup}>
+                <Text style={styles.checkinButtonText}>{backupBusy ? 'Working…' : 'Save a Copy Somewhere Else'}</Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* 3. AUTOMATIC SYNC WITH THE OTHER DEVICE, 1.0.42.28. The whole
+                database, encrypted with one password, saved to the Backups
+                folder shortly after anything changes here and loaded from
+                there when the other device saved something newer. The
+                decisions are in lib/snapshotSync.ts; the watcher in
+                app/_layout.tsx does the work while the app runs. This row
+                only turns it on and off and reports where things stand. */}
+            <View style={styles.concernRow}>
+              <Text style={styles.subLabel}>3. Turn on Automatic Sync</Text>
+              {backupFolder ? (
+                <>
+                  <Text style={styles.derivedText}>{describeSyncStatus(syncState, otherDeviceKind)}</Text>
+                  {/* Photos ride beside the snapshot, each encrypted (X1). */}
+                  <Text style={styles.derivedText}>
+                    {photoSyncSentence(getPhotoSyncStatus(), syncState.enabled, otherDeviceKind)}
+                  </Text>
+                </>
+              ) : (
+                <Text style={styles.derivedText}>
+                  {otherDeviceKind === 'phone'
+                    ? 'Saves every change to the shared folder from step 1 and keeps your phone in step.'
+                    : 'Saves every change to the shared folder from step 1 and keeps your computer in step.'}
+                </Text>
+              )}
+              {backupFolder && syncState.enabled ? (
+                <>
+                  <TouchableOpacity style={styles.checkinButton} disabled={syncBusy} onPress={handleSyncNow}>
+                    <Text style={styles.checkinButtonText}>{syncBusy ? 'Working…' : 'Save to the Shared Folder Now'}</Text>
+                  </TouchableOpacity>
+                  {/* Quietly, and the log is where it is read (1.0.49.9);
+                      ANNOUNCE_MERGES in lib/snapshotSync.ts brings the
+                      notices back. */}
+                  <Text style={styles.helpText}>
+                    {'Everything comes into step quietly, with your ' +
+                      otherDeviceKind +
+                      ' and with anybody you share with. What each of you changed is written down in the activity below.'}
+                  </Text>
+                  <TouchableOpacity style={styles.checkinButton} onPress={() => router.push('/sync-activity')}>
+                    <Text style={styles.checkinButtonText}>See Sync Activity</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.checkinButton} disabled={syncBusy} onPress={handleTurnOffSync}>
+                    <Text style={styles.checkinButtonText}>Turn Off Automatic Sync</Text>
+                  </TouchableOpacity>
+                </>
+              ) : (
+                <TouchableOpacity
+                  ref={walkMark.ref('profile.turnOnSync')}
+                  style={[styles.checkinButton, walkMark('profile.turnOnSync')]}
+                  disabled={syncBusy}
+                  onPress={handleTurnOnSync}
+                >
+                  <Text style={styles.checkinButtonText}>{syncBusy ? 'Working…' : 'Turn On Automatic Sync'}</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+
+            {/* 4. CHECK A BACKUP OPENS. */}
+            <View style={styles.concernRow}>
+              <Text style={styles.subLabel}>4. Check a backup opens</Text>
+              <Text style={[styles.helpText, styles.derivedText]}>
+                Opens a backup with its password and counts what is in it, without changing anything here. A backup
+                that has never been opened could have a forgotten password or a file cut short, and this is how to
+                find out before the day it is needed.
+              </Text>
+              <Text style={[styles.helpText, styles.derivedText]}>
+                {lastCheckLine(
+                  lastBackupCheck,
+                  lastBackupCheck ? new Date(lastBackupCheck.checkedAt).toLocaleString(appLocale()) : '',
+                  lastBackupCheck ? new Date(lastBackupCheck.exportedAt).toLocaleString(appLocale()) : '',
+                )}
+              </Text>
+              <TouchableOpacity
+                style={styles.checkinButton}
+                disabled={backupBusy}
+                onPress={() => void handleRestoreMostRecent('check')}
+              >
+                <Text style={styles.checkinButtonText}>{backupBusy ? 'Working…' : 'Check Most Recent Backup'}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.checkinButton}
+                disabled={backupBusy}
+                onPress={() => void handleRestoreFromFile('check')}
+              >
+                <Text style={styles.checkinButtonText}>{backupBusy ? 'Working…' : 'Check a File…'}</Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* 5. THE OTHER DEVICE. The written steps for pairing the two,
+                1.0.78.1. */}
+            <View style={styles.concernRow}>
+              <Text style={styles.subLabel}>{otherDeviceKind === 'phone' ? '5. Add your phone' : '5. Add your computer'}</Text>
+              <Text style={styles.derivedText}>
+                Every step for keeping Lifestead on your phone and on your computer in step with each other.
+              </Text>
+              <TouchableOpacity
+                ref={walkMark.ref('profile.syncGuide')}
+                style={[styles.checkinButton, walkMark('profile.syncGuide')]}
+                onPress={() => router.push('/sync-guide')}
+              >
+                <Text style={styles.checkinButtonText}>How to Set Up Both</Text>
+              </TouchableOpacity>
+            </View>
+
             {/* Files opened lately, 1.0.57.23. Photos and recordings live in
                 their own folders in the shared folder and this device keeps
                 the ones opened lately, up to the limit picked here. The
@@ -5770,136 +5933,6 @@ export default function ProfileScreen() {
                   <Text style={styles.checkinButtonText}>{cacheBusy ? 'Working…' : 'Clear Files Opened Lately'}</Text>
                 </TouchableOpacity>
                 {cacheMessage ? <Text style={styles.derivedText}>{cacheMessage}</Text> : null}
-              </View>
-            ) : null}
-            {backupFolder ? (
-              <>
-                <TouchableOpacity
-                  ref={walkMark.ref('profile.backupOneDrive')}
-                  style={[styles.checkinButton, walkMark('profile.backupOneDrive')]}
-                  disabled={backupBusy}
-                  onPress={handleBackUpToOneDrive}
-                >
-                  <Text style={styles.checkinButtonText}>
-                    {backupBusy ? 'Working…' : 'Back Up to OneDrive'}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.checkinButton} disabled={backupBusy} onPress={handleExportBackup}>
-                  <Text style={styles.checkinButtonText}>
-                    {backupBusy ? 'Working…' : 'Save a Copy Somewhere Else'}
-                  </Text>
-                </TouchableOpacity>
-              </>
-            ) : (
-              <TouchableOpacity style={styles.checkinButton} disabled={backupBusy} onPress={handleExportBackup}>
-                <Text style={styles.checkinButtonText}>{backupBusy ? 'Working…' : 'Export a Backup'}</Text>
-              </TouchableOpacity>
-            )}
-
-            {/* WHERE BACKUPS ARE KEPT, REPORTED THE SAME WAY THE SHARED
-                FOLDER IS.
-
-                Export a Backup above hands a file to the share sheet, and this
-                app never learns where it landed. That is why its own text says
-                "wherever you like" rather than naming anywhere: it genuinely
-                does not know. Choosing a folder here is what makes the
-                difference, because a folder the app can address is one it can
-                write to, list, and read a backup back out of.
-
-                A DIFFERENT FOLDER FROM THE MAILBOX, deliberately. The mailbox
-                is shared with a partner. A backup is the whole record, and
-                keeping the two together would hand every backup to whoever the
-                mailbox is shared with. */}
-            <View style={styles.concernRow}>
-              <Text style={styles.subLabel}>Where backups are kept</Text>
-              {backupFolder ? (
-                <>
-                  <Text style={styles.concernLabel}>{backupFolder.name}</Text>
-                  <Text style={styles.derivedText}>
-                    {backupFolder.path ?? 'Inside your shared folder.'}
-                  </Text>
-                </>
-              ) : (
-                <Text style={styles.derivedText}>
-                  {oneDriveConnected
-                    ? 'No shared folder set up yet, so backups are only handed to the share sheet.'
-                    : 'Not connected to OneDrive, so backups are only handed to the share sheet.'}
-                </Text>
-              )}
-              <TouchableOpacity
-                style={styles.checkinButton}
-                disabled={backupBusy}
-                onPress={() => router.push('/onedrive-folder')}
-              >
-                <Text style={styles.checkinButtonText}>
-                  {backupFolder ? 'Change the Shared Folder' : 'Set Up the Shared Folder'}
-                </Text>
-              </TouchableOpacity>
-            </View>
-            {/* The written steps for pairing the two, 1.0.78.1, shown whether
-                or not a folder is set up yet, since setting one up is the
-                first step. */}
-            <View style={styles.concernRow}>
-              <Text style={styles.subLabel}>Phone and computer</Text>
-              <Text style={styles.derivedText}>
-                Every step for keeping Lifestead on your phone and on your computer in step with each other.
-              </Text>
-              <TouchableOpacity
-                ref={walkMark.ref('profile.syncGuide')}
-                style={[styles.checkinButton, walkMark('profile.syncGuide')]}
-                onPress={() => router.push('/sync-guide')}
-              >
-                <Text style={styles.checkinButtonText}>How to Set Up Both</Text>
-              </TouchableOpacity>
-            </View>
-            {/* AUTOMATIC SYNC WITH THE OTHER DEVICE, 1.0.42.28. The whole
-                database, encrypted with one password, saved to the Backups
-                folder shortly after anything changes here and loaded from
-                there when the other device saved something newer. The
-                decisions are in lib/snapshotSync.ts; the watcher in
-                app/_layout.tsx does the work while the app runs. This row
-                only turns it on and off and reports where things stand. */}
-            {backupFolder ? (
-              <View style={styles.concernRow}>
-                <Text style={styles.subLabel}>Keep this device in step with your {otherDeviceKind}</Text>
-                <Text style={styles.derivedText}>{describeSyncStatus(syncState, otherDeviceKind)}</Text>
-                {/* Photos ride beside the snapshot, each encrypted (X1). */}
-                <Text style={styles.derivedText}>
-                  {photoSyncSentence(getPhotoSyncStatus(), syncState.enabled, otherDeviceKind)}
-                </Text>
-                {syncState.enabled ? (
-                  <>
-                    <TouchableOpacity style={styles.checkinButton} disabled={syncBusy} onPress={handleSyncNow}>
-                      <Text style={styles.checkinButtonText}>{syncBusy ? 'Working…' : 'Save to the Shared Folder Now'}</Text>
-                    </TouchableOpacity>
-                    {/* Quietly, and the log is where it is read. Direct
-                        instruction, 1.0.49.9: "we have proven the changes
-                        work and are reliable. Now we need to turn off the
-                        notifications until we see a reason to make them
-                        available, how and where." The Tell me what changed
-                        pill that stood here is gone with them; one line in
-                        lib/snapshotSync.ts (ANNOUNCE_MERGES) brings both
-                        back when there is an answer to where they belong.
-                        Nothing about the merging changed, and it covers a
-                        partner, a child or somebody who helps you the same
-                        way (lib/peerSyncDevice.ts). */}
-                    <Text style={styles.helpText}>
-                      {'Everything comes into step quietly, with your ' +
-                        otherDeviceKind +
-                        ' and with anybody you share with. What each of you changed is written down in the activity below.'}
-                    </Text>
-                    <TouchableOpacity style={styles.checkinButton} onPress={() => router.push('/sync-activity')}>
-                      <Text style={styles.checkinButtonText}>See Sync Activity</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.checkinButton} disabled={syncBusy} onPress={handleTurnOffSync}>
-                      <Text style={styles.checkinButtonText}>Turn Off Automatic Sync</Text>
-                    </TouchableOpacity>
-                  </>
-                ) : (
-                  <TouchableOpacity style={styles.checkinButton} disabled={syncBusy} onPress={handleTurnOnSync}>
-                    <Text style={styles.checkinButtonText}>{syncBusy ? 'Working…' : 'Turn On Automatic Sync'}</Text>
-                  </TouchableOpacity>
-                )}
               </View>
             ) : null}
             <AppActionSheet
@@ -5952,33 +5985,6 @@ export default function ProfileScreen() {
                 ))}
               </View>
             ) : null}
-            <Text style={styles.subLabel}>Check a backup opens</Text>
-            <Text style={[styles.helpText, styles.derivedText]}>
-              Opens a backup with its password and counts what is in it, without changing anything here. A backup
-              that has never been opened could have a forgotten password or a file cut short, and this is how to
-              find out before the day it is needed.
-            </Text>
-            <Text style={[styles.helpText, styles.derivedText]}>
-              {lastCheckLine(
-                lastBackupCheck,
-                lastBackupCheck ? new Date(lastBackupCheck.checkedAt).toLocaleString(appLocale()) : '',
-                lastBackupCheck ? new Date(lastBackupCheck.exportedAt).toLocaleString(appLocale()) : '',
-              )}
-            </Text>
-            <TouchableOpacity
-              style={styles.checkinButton}
-              disabled={backupBusy}
-              onPress={() => void handleRestoreMostRecent('check')}
-            >
-              <Text style={styles.checkinButtonText}>{backupBusy ? 'Working…' : 'Check Most Recent Backup'}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.checkinButton}
-              disabled={backupBusy}
-              onPress={() => void handleRestoreFromFile('check')}
-            >
-              <Text style={styles.checkinButtonText}>{backupBusy ? 'Working…' : 'Check a File…'}</Text>
-            </TouchableOpacity>
             <Text style={[styles.helpText, styles.derivedText]}>
               Restoring replaces everything currently on this device with what&apos;s in the backup. This can&apos;t
               be undone.

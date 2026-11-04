@@ -194,7 +194,7 @@ export const GUIDES: GuideDef[] = [
       ),
       fromItem(
         'backup',
-        'Save a backup, or turn on automatic saving to a shared folder, in Profile under Backup & Restore.',
+        'Choose a shared folder, save the first backup there, then turn on automatic saving, in Profile under Backup & Restore.',
         'Your records live on this device and nowhere else. A backup is the way back if the phone is lost or reset, and it is encrypted with a password only you know, so there is no way to recover a forgotten one.',
         {
           when: 'start',
@@ -202,8 +202,10 @@ export const GUIDES: GuideDef[] = [
           takes: 'A few minutes',
           taps: [
             'Tap Backup & Restore to open it.',
-            'Tap Back Up to OneDrive. If you do not use OneDrive, tap Save a Copy Somewhere Else instead.',
+            'Under 1, tap Set Up the Shared Folder and choose OneDrive, Google Drive or a folder on this phone, then tap Next: Save the First Backup.',
+            'Under 2, tap Back Up to the Shared Folder. Without a shared folder, tap Save a Copy Somewhere Else instead.',
             'Make up a password when it asks, and write it down somewhere safe. Nobody can open the backup without it, you included.',
+            'Under 3, tap Turn On Automatic Sync, so every change is saved there from now on.',
           ],
         },
       ),

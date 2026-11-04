@@ -48,7 +48,7 @@
 // OneDrive leaves it alone, and signing out of Google clears it.
 
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -97,6 +97,10 @@ type Root = 'shared' | 'mine';
 
 export default function OneDriveFolderScreen() {
   const router = useRouter();
+  // Opened from Profile's Backup & Restore (from=profile) the next step is
+  // back where the person came from; opened from setup or anywhere else it
+  // opens Backup & Restore at the first backup (1.0.80.8).
+  const { from } = useLocalSearchParams<{ from?: string }>();
   const scrollPadding = useFloatingButtonScrollPadding();
   const desktop = isDesktopApp();
 
@@ -628,6 +632,22 @@ export default function OneDriveFolderScreen() {
           </View>
         ) : null}
 
+        {chosen ? (
+          <View style={styles.card}>
+            <Text style={styles.hint}>Next, save the first backup into this folder, then turn on Automatic Sync.</Text>
+            <TouchableOpacity
+              style={styles.nextButton}
+              onPress={() => {
+                if (from === 'profile') router.back();
+                else router.replace({ pathname: '/profile', params: { section: 'backup' } });
+              }}
+              hitSlop={8}
+            >
+              <Text style={styles.nextButtonText}>Next: Save the First Backup</Text>
+            </TouchableOpacity>
+          </View>
+        ) : null}
+
         <TouchableOpacity style={styles.card} onPress={() => router.back()} hitSlop={8}>
           <Text style={styles.action}>Go Back</Text>
         </TouchableOpacity>
@@ -656,6 +676,8 @@ const styles = StyleSheet.create({
   // consequence of a choice, and it should be noticed without alarming.
   warning: { ...typography.caption, color: colors.statusYellowStandalone, ...textShadow },
   action: { ...typography.body, color: colors.accent, ...textShadow },
+  nextButton: { ...BUTTON_PRIMARY, alignSelf: 'flex-start' },
+  nextButtonText: { ...BUTTON_PRIMARY_TEXT },
   rootRow: { flexDirection: 'row', gap: 20 },
   rootActive: { ...typography.bodyEmphasis, color: colors.accent, ...textShadow },
   rootInactive: { ...typography.body, color: colors.textMuted, ...textShadow },
