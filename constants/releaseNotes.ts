@@ -41,6 +41,15 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.80.9',
+    date: '2026-11-03',
+    changes: [
+      'Setup now asks everything the app needs before you set up any part: birth date and sex, conditions, healing stage, medicines and supplements, allergies, then the way you eat, each before whatever reads it.',
+      'It asks only what the parts you chose read, whichever part you start with. Choosing another part later asks anything new it needs first.',
+      'Birth date and sex are not asked again when Profile already has them.',
+    ],
+  },
+  {
     version: '1.0.80.8',
     date: '2026-11-03',
     changes: [

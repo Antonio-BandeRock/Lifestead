@@ -71,6 +71,9 @@ import {
   CARD_WHY,
   CARD_WHY_LABEL,
   CLOSING_HEADING,
+  REQUIRED_HEADING,
+  REQUIRED_LEAD,
+  requiredQuestions,
   LIST_ALL_SETTLED,
   LIST_CHANGE_PARTS_LABEL,
   LIST_FIRST_HEADING,
@@ -136,7 +139,7 @@ type Phase = 'reading' | 'asking' | 'away' | 'closed';
 // Which part of setup is on screen; only one at a time (direct request,
 // 2026-11-02: "none of the other parts are available on the screen until
 // they select either Done ... or they choose to skip that section").
-type Step = 'parts' | 'list' | 'section' | 'closing';
+type Step = 'parts' | 'required' | 'list' | 'section' | 'closing';
 
 const BEAT_ICONS: Record<BeatKey, keyof typeof Ionicons.glyphMap> = {
   health: 'medkit-outline',
@@ -276,7 +279,17 @@ export function FirstSetup() {
   }, [close, router]);
 
   const stage = interview ? setupStage(interview) : 'parts';
-  const step: Step = changingParts || stage === 'parts' ? 'parts' : section ? 'section' : stage === 'closing' ? 'closing' : 'list';
+  // What the app needs comes before any part is opened (1.0.80.9).
+  const step: Step =
+    changingParts || stage === 'parts'
+      ? 'parts'
+      : stage === 'required'
+        ? 'required'
+        : section
+          ? 'section'
+          : stage === 'closing'
+            ? 'closing'
+            : 'list';
   const allDone = stage === 'finished';
 
   // Each step opens at the top, so the new question or part is the first
@@ -294,7 +307,15 @@ export function FirstSetup() {
   // as an answer and the rest may still be chosen; Done, Later or a single
   // choice lets it go.
   const waitingQuestions =
-    !interview ? [] : step === 'section' && section ? sectionQuestions(interview, section) : step === 'closing' ? closingQuestions(interview) : [];
+    !interview
+      ? []
+      : step === 'required'
+        ? requiredQuestions(interview)
+        : step === 'section' && section
+          ? sectionQuestions(interview, section)
+          : step === 'closing'
+            ? closingQuestions(interview)
+            : [];
   const candidate = waitingQuestions.find((question) => !passed.includes(question.key)) ?? null;
   const candidateKey = candidate?.key ?? null;
   const shownQuestion = held ?? candidateKey;
@@ -528,6 +549,18 @@ export function FirstSetup() {
     );
   }
 
+  function renderRequired() {
+    return (
+      <>
+        <View style={styles.band}>
+          <Text style={styles.heading}>{REQUIRED_HEADING}</Text>
+          <Text style={styles.lead}>{REQUIRED_LEAD}</Text>
+        </View>
+        {renderQuestion()}
+      </>
+    );
+  }
+
   function renderClosing() {
     return (
       <>
@@ -597,6 +630,7 @@ export function FirstSetup() {
               <Text style={styles.lead}>{SETUP_LEAD}</Text>
             </View>
             {step === 'parts' ? renderParts() : null}
+            {step === 'required' ? renderRequired() : null}
             {step === 'list' ? renderList() : null}
             {step === 'section' && section ? renderSection(section) : null}
             {step === 'closing' ? renderClosing() : null}

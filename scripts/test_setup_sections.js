@@ -102,6 +102,27 @@ const healthQuestions = sections.sectionQuestions(
 );
 check(healthQuestions.map((q) => q.key).join() === 'aboutYou,stage:HASH,meds', `a part asks its open questions in order (got ${healthQuestions.map((q) => q.key).join()})`);
 
+// What the app needs comes before any part (1.0.80.9, reported: Health
+// chosen and no birth date asked).
+{
+  const open = [['eatingStyle', false], ['meds', false], ['stage:HASH', false], ['aboutYou', false], ['allergies', false], ['conditions', false], ['backup', false]];
+  const gardenFirst = interview({ picked: ['garden', 'health'], questions: open });
+  check(sections.setupStage(gardenFirst) === 'required', 'parts chosen with questions waiting: what the app needs comes first');
+  const order = sections.requiredQuestions(gardenFirst).map((q) => q.key).join();
+  check(order === 'aboutYou,conditions,stage:HASH,meds,allergies', `asked in the order each feeds the next, whichever part is listed first (got ${order})`);
+  const withFood = sections.requiredQuestions(interview({ picked: ['food'], questions: open })).map((q) => q.key);
+  check(withFood[0] === 'aboutYou' && withFood[withFood.length - 1] === 'eatingStyle', 'a way of eating comes after everything it reads');
+  const movement = sections.requiredQuestions(interview({ picked: ['movement'], questions: open })).map((q) => q.key).join();
+  check(movement === '', `Movement alone asks nothing, since nothing it shows reads birth date or sex (got ${movement})`);
+  check(sections.requiredQuestions(interview({ picked: ['garden'], questions: open })).length === 0, 'a part that needs nothing asks nothing');
+  check(!sections.requiredQuestions(gardenFirst).some((q) => q.key === 'backup'), 'the last questions stay last');
+  const answeredAll = interview({ picked: ['health'], questions: open.map(([key]) => [key, key === 'backup' ? false : true]) });
+  check(sections.setupStage(answeredAll) === 'list', 'everything needed answered: the list of parts');
+  const idx = (k) => sections.REQUIRED_ORDER.indexOf(k);
+  check(idx('conditions') < idx('stage') && idx('aboutYou') < idx('eatingStyle') && idx('meds') < idx('eatingStyle'), 'nothing is asked before what it needs');
+  for (const beat of beats) for (const kind of sections.SECTION_QUESTIONS[beat]) check(sections.REQUIRED_ORDER.includes(kind), `${beat} question ${kind} has a place in the required order`);
+}
+
 // Shelves: Dose times beside My Meds, Meals and Water beside Food (2026-11-02).
 const tabOf = (key) => cards.setupCardByKey(key)?.tabPath;
 check(tabOf('doseTimes') === '/life', 'Dose times sits on Life beside My Meds');
