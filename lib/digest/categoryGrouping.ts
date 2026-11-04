@@ -461,10 +461,31 @@ export const BASIC_HEALTH_TOPICS: BasicHealthTopic[] = [
     // whether they help Hashimoto's specifically. Nine entries, so one
     // flat shelf is still the right shape here; if this grows past
     // roughly a dozen it needs subtopics, per the standing rule.
+    // 2026-11-04: 23 entries after the history, techniques and guidelines
+    // were added, so split by subject: history, how each is done, the pain
+    // guidelines, then the research on each therapy, then using them well.
     label: 'Hands-On & Complementary Therapies',
     description:
-      'What the research actually shows for chiropractic care, acupuncture, and deep tissue massage, including where it shows nothing at all. Also what can go wrong, what to tell a practitioner before a session, and how to work out whether any of it is helping you specifically rather than helping people on average.',
-    prefixes: ['handson-'],
+      'Chiropractic care, acupuncture and massage: where each came from and how its reputation was made, how each is done, where the pain guidelines put them, what the research shows for each including where it shows nothing, and how to work out whether one is helping you rather than helping people on average.',
+    subtopics: [
+      { label: 'History', prefixes: ['handson-history-'] },
+      { label: 'How Each Is Done', prefixes: ['handson-technique-'] },
+      {
+        label: 'Where Pain Guidelines Put Them',
+        prefixes: [
+          'handson-three-therapies-compared$',
+          'handson-evidence-guidelines-first-line$',
+          'handson-evidence-before-opioids$',
+        ],
+      },
+      { label: 'Chiropractic Research', prefixes: ['handson-chiropractic-'] },
+      { label: 'Acupuncture Research', prefixes: ['handson-acupuncture-', 'handson-evidence-acupuncture-'] },
+      {
+        label: 'Massage Research',
+        prefixes: ['handson-deep-tissue-', 'handson-targeted-', 'handson-evidence-massage-'],
+      },
+      { label: 'Using Them Well', prefixes: ['handson-safety-', 'handson-tracking-', 'handson-using-'] },
+    ],
   },
   {
     label: 'Mitochondria & Metabolism',
