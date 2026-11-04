@@ -123,6 +123,24 @@ check(healthQuestions.map((q) => q.key).join() === 'aboutYou,stage:HASH,meds', `
   for (const beat of beats) for (const kind of sections.SECTION_QUESTIONS[beat]) check(sections.REQUIRED_ORDER.includes(kind), `${beat} question ${kind} has a place in the required order`);
 }
 
+// What is already answered is shown as kept, in the same order, each
+// opening where it is changed (1.0.80.10).
+{
+  const mixed = interview({
+    picked: ['health'],
+    questions: [['meds', true], ['aboutYou', true], ['conditions', false], ['stage:HASH', true], ['allergies', true], ['backup', true]],
+  });
+  mixed.questions.find((q) => q.key === 'stage:HASH').condition = { code: 'HASH', label: "Hashimoto's" };
+  const rows = sections.requiredOnRecord(mixed);
+  check(rows.map((r) => r.key).join() === 'aboutYou,stage:HASH,meds,allergies', `on record in the order asked, unanswered and last questions left out (got ${rows.map((r) => r.key).join()})`);
+  check(rows[0].name === 'Birth date and sex' && rows[0].destination.params.section === 'personal-info', 'birth date and sex open Personal Info');
+  check(rows[1].condition === "Hashimoto's" && rows[1].name === "Healing stage for Hashimoto's", 'a stage names its condition');
+  check(rows.every((r) => r.destination && r.destination.kind === 'route'), 'every kept answer opens where it is changed');
+  check(!sections.requiredOnRecord(mixed, 'meds').some((r) => r.key === 'meds'), 'the question on the screen is not listed twice');
+  check(sections.requiredOnRecord(interview({ picked: ['garden'], questions: [['aboutYou', true]] })).length === 0, 'only what a chosen part needs is listed');
+  for (const kind of sections.REQUIRED_ORDER) check(!!sections.requiredOnRecord(interview({ picked: ['food'], questions: [[kind === 'stage' ? 'stage:HASH' : kind, true]] }))[0]?.destination, `${kind} has a place to change it`);
+}
+
 // Shelves: Dose times beside My Meds, Meals and Water beside Food (2026-11-02).
 const tabOf = (key) => cards.setupCardByKey(key)?.tabPath;
 check(tabOf('doseTimes') === '/life', 'Dose times sits on Life beside My Meds');
