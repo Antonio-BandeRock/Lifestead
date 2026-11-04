@@ -1,0 +1,20 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'com.insidestoryapp'
+version = '1.0.0'
+
+android {
+  namespace "expo.modules.googledriveauth"
+  defaultConfig {
+    versionCode 1
+    versionName "1.0.0"
+  }
+}
+
+dependencies {
+  // AuthorizationClient, and clearToken, which arrived in 21.3.0.
+  implementation 'com.google.android.gms:play-services-auth:21.3.0'
+}

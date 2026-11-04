@@ -1,5 +1,5 @@
 diff --git a/node_modules/expo-notifications/android/src/main/java/expo/modules/notifications/notifications/presentation/builders/ExpoNotificationBuilder.kt b/node_modules/expo-notifications/android/src/main/java/expo/modules/notifications/notifications/presentation/builders/ExpoNotificationBuilder.kt
-index 610d303..167f47f 100644
+index 610d303..3f146f8 100644
 --- a/node_modules/expo-notifications/android/src/main/java/expo/modules/notifications/notifications/presentation/builders/ExpoNotificationBuilder.kt
 +++ b/node_modules/expo-notifications/android/src/main/java/expo/modules/notifications/notifications/presentation/builders/ExpoNotificationBuilder.kt
 @@ -1,7 +1,9 @@
@@ -12,7 +12,7 @@ index 610d303..167f47f 100644
  import android.content.pm.PackageManager
  import android.graphics.Bitmap
  import android.graphics.BitmapFactory
-@@ -121,6 +123,14 @@ open class ExpoNotificationBuilder(
+@@ -121,6 +123,28 @@ open class ExpoNotificationBuilder(
        builder.setExtras(extras)
      }
  
@@ -24,10 +24,24 @@ index 610d303..167f47f 100644
 +      builder.setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_CHILDREN)
 +    }
 +
++    // Lifestead: a running clock in the notification (the routine walk,
++    // lib/routineWalkNotice.ts). chronometerAt is the moment in epoch
++    // milliseconds: a count up from it, or with chronometerCountDown a count
++    // down to it. Android draws and ticks the clock itself, so nothing in the
++    // app has to wake every second to move it on.
++    content.body?.optLong("chronometerAt", 0L)?.takeIf { it > 0L }?.let {
++      builder.setWhen(it)
++      builder.setShowWhen(true)
++      builder.setUsesChronometer(true)
++      if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
++        builder.setChronometerCountDown(content.body?.optBoolean("chronometerCountDown", false) == true)
++      }
++    }
++
      // Save the notification request in extras for later usage
      // eg. in ExpoPresentationDelegate when we fetch active notifications.
      // Otherwise we'd have to create expo.Notification from android.Notification
-@@ -139,13 +149,40 @@ open class ExpoNotificationBuilder(
+@@ -139,13 +163,40 @@ open class ExpoNotificationBuilder(
  
      val defaultAction =
        NotificationAction(NotificationResponse.DEFAULT_ACTION_IDENTIFIER, null, true)

@@ -1,0 +1,7 @@
+{
+  "name": "contact-accounts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Which accounts on the phone hold one picked contact (Google, WhatsApp, Signal), so Lifestead can record where a person came from.",
+  "main": "../../lib/contactAccounts.ts"
+}
