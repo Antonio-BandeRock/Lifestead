@@ -267,7 +267,7 @@ export const TYPE_2_DIABETES_ENTRIES: DigestEntry[] = [
       { source: 'Bidirectional association between periodontal disease and diabetes mellitus: a systematic review and meta-analysis of cohort studies, Scientific Reports', url: 'https://www.nature.com/articles/s41598-021-93062-6' },
     ],
     overallTier: 'strong',
-    relatedIds: ['type2-overview'],
+    relatedIds: ['type2-overview', 'oral-body-diabetes-treatment-lowers-a1c'],
   },
   {
     id: 'type2-remission-ada-consensus-definition',

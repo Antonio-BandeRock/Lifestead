@@ -41,6 +41,23 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.81.4',
+    date: '2026-11-04',
+    changes: [
+      "Life > Health Literacy has a new topic, Mouth & Teeth, with 20 entries on why a healthy mouth matters: how saliva and the mouth's bacteria protect it, how gum disease and decay start, and what the mouth does to the rest of the body.",
+      "Each link to the body carries the strength of its evidence: treating gum disease lowers blood sugar in diabetes, while for the heart, pregnancy and Alzheimer's disease the link is there and the benefit of treatment is not shown yet.",
+      "The diabetes, rheumatoid arthritis and Sjögren's entries about the mouth now link to the new topic.",
+    ],
+  },
+  {
+    version: '1.0.81.3',
+    date: '2026-11-04',
+    changes: [
+      'Life > Health Literacy > Hands-On & Complementary Therapies has 14 new entries: where chiropractic, acupuncture and massage came from, including the court ruling against the American Medical Association, how each is done, and where the pain guidelines put them.',
+      'The shelf is now split into History, How Each Is Done, Where Pain Guidelines Put Them, the research on each therapy, and Using Them Well.',
+    ],
+  },
+  {
     version: '1.0.81.2',
     date: '2026-11-04',
     changes: [

@@ -488,6 +488,24 @@ export const BASIC_HEALTH_TOPICS: BasicHealthTopic[] = [
     ],
   },
   {
+    // 2026-11-04, direct request: "we need some of that kind of
+    // information too, and why having a healthy mouth is beneficial."
+    // Twenty entries in lib/digest/oralHealth.ts, split four ways in the
+    // order the subject runs.
+    label: 'Mouth & Teeth',
+    description:
+      'Why a healthy mouth matters: how saliva and the mouth\'s bacteria protect it, how gum disease and tooth decay start, what the mouth does to blood sugar, the lungs, the heart, pregnancy and the brain at the strength of evidence behind each, and what keeps a mouth healthy.',
+    subtopics: [
+      {
+        label: 'How a Healthy Mouth Works',
+        prefixes: ['oral-why-', 'oral-mouth-', 'oral-saliva-', 'oral-nitrate-'],
+      },
+      { label: 'Gum Disease & Tooth Decay', prefixes: ['oral-gum-', 'oral-decay-'] },
+      { label: 'What the Mouth Does to the Rest of the Body', prefixes: ['oral-body-'] },
+      { label: 'Keeping a Mouth Healthy', prefixes: ['oral-care-'] },
+    ],
+  },
+  {
     label: 'Mitochondria & Metabolism',
     description: 'How your cells produce energy, and how diet and lifestyle affect that process.',
     prefixes: ['mito-'],

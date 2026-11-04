@@ -123,7 +123,7 @@ export const BODY_SYSTEMS_ENTRIES: DigestEntry[] = [
       },
     ],
     overallTier: 'strong',
-    relatedIds: ['calcium-tying-together', 'vitamink-tying-together', 'body-tying-together', 'body-endocrine-crosstalk'],
+    relatedIds: ['calcium-tying-together', 'vitamink-tying-together', 'body-tying-together', 'body-endocrine-crosstalk', 'oral-why-a-healthy-mouth-matters'],
   },
   {
     id: 'body-lymphatic-system',

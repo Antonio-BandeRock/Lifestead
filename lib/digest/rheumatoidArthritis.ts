@@ -339,7 +339,7 @@ export const RHEUMATOID_ARTHRITIS_ENTRIES: DigestEntry[] = [
       { source: 'Porphyromonas gingivalis Facilitates the Development and Progression of Destructive Arthritis through Its Unique Bacterial Peptidylarginine Deiminase (PAD), PLoS Pathogens 2013, PMID 24068934', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3771902/' },
     ],
     overallTier: 'strong',
-    relatedIds: ['ra-smoking-citrullination'],
+    relatedIds: ['ra-smoking-citrullination', 'oral-body-gut-and-autoimmune'],
   },
   {
     id: 'ra-nsaid-cardiovascular-risk',

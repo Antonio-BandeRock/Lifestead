@@ -544,7 +544,7 @@ export const TYPE_1_DIABETES_ENTRIES: DigestEntry[] = [
       { source: 'Glucose variability and periodontal disease in type 1 diabetes: the PARODIA project, PMC8413171', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8413171/' },
     ],
     overallTier: 'strong',
-    relatedIds: ['type1-long-term-complications-real-data', 'type1-hba1c-time-in-range'],
+    relatedIds: ['type1-long-term-complications-real-data', 'type1-hba1c-time-in-range', 'oral-body-diabetes-treatment-lowers-a1c'],
   },
   {
     id: 'type1-dental-caries-salivary-mechanism',
@@ -557,7 +557,7 @@ export const TYPE_1_DIABETES_ENTRIES: DigestEntry[] = [
       { source: 'Dental caries and bacterial load in saliva and dental biofilm of type 1 diabetics on continuous subcutaneous insulin infusion, Journal of Applied Oral Science, PMC6007967', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6007967/' },
     ],
     overallTier: 'strong',
-    relatedIds: ['type1-periodontal-disease-bidirectional-real-data', 'type1-long-term-complications-real-data'],
+    relatedIds: ['type1-periodontal-disease-bidirectional-real-data', 'type1-long-term-complications-real-data', 'oral-saliva-protects-teeth'],
   },
   {
     id: 'type1-fermented-drinks',

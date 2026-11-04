@@ -71,7 +71,7 @@ export const SJOGRENS_ENTRIES: DigestEntry[] = [
       { source: "Sjögren's Foundation Clinical Practice Guidelines: Oral", url: 'https://sjogrens.org/sites/default/files/inline-files/SF_PCG-Oral_0.pdf' },
     ],
     overallTier: 'strong',
-    relatedIds: ['sjogrens-dental-caries-risk'],
+    relatedIds: ['sjogrens-dental-caries-risk', 'oral-care-dry-mouth-medicines'],
   },
   {
     id: 'sjogrens-omega3-dry-eye-mouth',
@@ -310,7 +310,7 @@ export const SJOGRENS_ENTRIES: DigestEntry[] = [
       { source: "Multiple oral Candida infections in patients with Sjögren's syndrome: prevalence and clinical and drug susceptibility profiles, Journal of Rheumatology 2011, PMID 21844143", url: 'https://pubmed.ncbi.nlm.nih.gov/21844143/' },
     ],
     overallTier: 'strong',
-    relatedIds: ['sjogrens-dental-caries-risk', 'sjogrens-xylitol-saliva-stimulation'],
+    relatedIds: ['sjogrens-dental-caries-risk', 'sjogrens-xylitol-saliva-stimulation', 'oral-saliva-protects-teeth'],
   },
   {
     id: 'sjogrens-hydroxychloroquine-joquer-trial',
