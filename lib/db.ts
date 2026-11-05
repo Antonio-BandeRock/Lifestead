@@ -9581,6 +9581,14 @@ async function runDatabaseInitialization() {
       }
     }
 
+    // 2026-11-04: the menu a list made by hand follows ("Just make a list"
+    // needs to ask them what kind of menu should it follow), kept as JSON so
+    // the list can offer foods that menu's recipes use. NULL on every list
+    // built from the schedule, which follows the schedule instead.
+    const groceryListColumns = await db.getAllAsync<{ name: string }>('PRAGMA table_info(grocery_lists)');
+    if (groceryListColumns.length > 0 && !groceryListColumns.some((column) => column.name === 'menu_json')) {
+      await db.execAsync('ALTER TABLE grocery_lists ADD COLUMN menu_json TEXT;');
+    }
     // The Grocery List's own two later columns, 2026-09-01. The table shipped
     // in 1.0.32.1, so it can already exist on a device with neither of these:
     // same conditional pattern every other added column in this file uses.

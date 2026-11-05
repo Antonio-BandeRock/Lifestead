@@ -18,7 +18,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, ScrollView, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { AppActionSheet } from '../components/AppActionSheet';
@@ -34,8 +34,8 @@ import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from '../comp
 import { announcePhoneOnly } from '../lib/desktop/phoneOnly';
 import { recognizeTextFromImage } from '../lib/ocr';
 import { detectMeasurementSystemFromLocale } from '../lib/measurement';
-import { getStoredMeasurementSystem, getUpcomingShoppingList, type ShoppingListSection } from '../lib/db';
-import { addKitchenItemFromPurchase } from '../lib/kitchenDb';
+import { getCuisinePreferences, getDietPreferences, getStoredMeasurementSystem, getUpcomingShoppingList, type ShoppingListSection } from '../lib/db';
+import { addKitchenItemFromPurchase, listPurchasableFoods, type PurchasableFood } from '../lib/kitchenDb';
 import { newListKitchenMessage, TAKE_ALL_FROM_KITCHEN_LABEL, tookFromKitchenMessage, type ListCoverageLine } from '../lib/onHand';
 import { arrangeByAisle, type GroceryStoreLayout } from '../lib/groceryAisles';
 import { groceryListAsText, groceryListFileName, NOTHING_LEFT_TO_SEND } from '../lib/groceryListText';
@@ -51,6 +51,7 @@ import {
   listGroceryStores,
   type GroceryStoreRecord,
   createGroceryListFromSchedule,
+  createHandGroceryList,
   deleteGroceryList,
   deleteGroceryListItem,
   getActiveGroceryList,
@@ -94,6 +95,25 @@ import { useWalkMark } from '../components/WalkMark';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { t } from '../lib/i18n';
 import { foodDisplayName } from '../lib/ingredientShortName';
+import { FoodSetupGate } from '../components/FoodSetupGate';
+import { KitchenSection } from '../components/KitchenSection';
+import { DEFAULT_FILL_DAYS, FILL_DAY_OPTIONS, getAutoPlanSettings, planAndScheduleMeals, saveAutoPlanSettings } from '../lib/autoMealPlan';
+import { getMenuFoods, type MenuFood } from '../lib/menuShopping';
+import {
+  BASE_DIET_CHOICES,
+  baseChoiceLabel,
+  CUISINE_CHOICES,
+  describePlanDiet,
+  DIET_EXTRA_CHOICES,
+  EATING_STYLE_CHOICES,
+  sameDiet,
+  splitDietPreferences,
+  toggleCuisine,
+  toggleTag,
+  type PlanDiet,
+} from '../lib/mealPlanDiet';
+import { matchFoodName } from '../lib/groceryFoodMatch';
+import type { InterviewQuestionView, InterviewView } from '../lib/yourStoryInterview';
 
 const DEFAULT_DAYS = 3;
 
@@ -108,6 +128,56 @@ function roundForPreview(value: number): string {
 const MAX_PEOPLE = 12;
 
 type Mode = 'setup' | 'list';
+
+// The ways a list starts (2026-11-04, direct instruction: "All automatic
+// ways in the app to get them to a grocery list need to start with the setup
+// information about how they need to eat, and any conditions they might
+// have"). The three that build from meals ask the food questions first
+// (components/FoodSetupGate.tsx); Just Make a List asks which menu to follow.
+type SetupStep = 'choose' | 'questions' | 'plan' | 'pantry' | 'menu' | 'schedule';
+type StartKey = 'plan' | 'pantry' | 'menu' | 'schedule';
+
+const START_CHOICES: { key: StartKey; label: string; caption: string; icon: keyof typeof Ionicons.glyphMap }[] = [
+  {
+    key: 'plan',
+    label: 'Plan My Meals for Me',
+    caption: 'The app fills your schedule with meals that fit your conditions and how you eat, then lists what to buy.',
+    icon: 'sparkles-outline',
+  },
+  {
+    key: 'pantry',
+    label: 'Add to My Pantry',
+    caption: 'Say what you already have, and the meals are planned from it so the list holds only what is missing.',
+    icon: 'basket-outline',
+  },
+  {
+    key: 'menu',
+    label: 'Just Make a List',
+    caption: 'Pick a menu to follow and write the list yourself, with that menu\'s foods a tap away.',
+    icon: 'create-outline',
+  },
+  {
+    key: 'schedule',
+    label: 'Build From My Schedule',
+    caption: 'For meals already on your schedule: the list is worked out from them.',
+    icon: 'calendar-outline',
+  },
+];
+
+const EVERYTHING_MENU: PlanDiet = { base: null, styles: [], extras: [], cuisines: [] };
+
+function answerLabel(question: InterviewQuestionView): string {
+  if (question.key.startsWith('stage:')) return t('Healing stage, {condition}', { condition: question.condition?.label ?? '' });
+  if (question.key === 'conditions') return 'Conditions';
+  if (question.key === 'eatingStyle') return 'How you eat';
+  return 'Allergies';
+}
+
+function answerSection(question: InterviewQuestionView): string {
+  if (question.key === 'eatingStyle') return 'diet-preferences';
+  if (question.key === 'allergies') return 'food-restrictions';
+  return 'conditions';
+}
 
 type EditorState = {
   priceText: string;
@@ -191,6 +261,22 @@ export default function GroceryListScreen() {
   const [newName, setNewName] = useState('');
   const [newQuantity, setNewQuantity] = useState('');
   const [newUnit, setNewUnit] = useState('');
+  // Close foods for a typed name that was not plain enough to match alone.
+  const [addChoices, setAddChoices] = useState<PurchasableFood[]>([]);
+
+  // The ways in (2026-11-04).
+  const [setupStep, setSetupStep] = useState<SetupStep>('choose');
+  const [afterQuestions, setAfterQuestions] = useState<StartKey>('plan');
+  const [setupView, setSetupView] = useState<InterviewView | null>(null);
+  const [fillDays, setFillDays] = useState(DEFAULT_FILL_DAYS);
+  const [kitchenFirst, setKitchenFirst] = useState(true);
+  const [profileMenu, setProfileMenu] = useState<PlanDiet>(EVERYTHING_MENU);
+  const [menu, setMenu] = useState<PlanDiet>(EVERYTHING_MENU);
+  const [menuFoods, setMenuFoods] = useState<MenuFood[]>([]);
+  const [purchasable, setPurchasable] = useState<PurchasableFood[]>([]);
+  // The remembered choices are read once, so coming back to the screen does
+  // not undo a choice made a moment ago.
+  const settingsRead = useRef(false);
 
   // Takes what is already in the kitchen instead of buying it: draws the
   // harvest down and either ticks the line off or reduces it to what is still
@@ -247,7 +333,18 @@ export default function GroceryListScreen() {
       setHistory(past);
       setStores(await listGroceryStores());
       setStoreLayout(target ? await getGroceryStoreLayoutByName(target.storeName) : null);
+      setProfileMenu(splitDietPreferences(await getDietPreferences(), await getCuisinePreferences()));
+      let shopDays: number | null = null;
+      if (!settingsRead.current) {
+        settingsRead.current = true;
+        const settings = await getAutoPlanSettings(GROCERY_DAY_OPTIONS);
+        setFillDays(settings.fillDays);
+        setKitchenFirst(settings.kitchenFirst);
+        shopDays = settings.shopDays;
+        setPurchasable(await listPurchasableFoods());
+      }
       if (target) {
+        setMenuFoods(target.menu ? (await getMenuFoods(target.menu)).foods : []);
         setList(target);
         const listItems = await getGroceryListItems(target.id);
         setItems(listItems);
@@ -260,6 +357,8 @@ export default function GroceryListScreen() {
         setList(null);
         setItems([]);
         setKitchen(new Map());
+        setMenuFoods([]);
+        if (shopDays != null) setDaysAhead(shopDays);
         setMode('setup');
       }
     } catch (error) {
@@ -307,6 +406,20 @@ export default function GroceryListScreen() {
   // By category as before, or in the walking order of the store this list
   // names once that store has aisles (G6). lib/groceryAisles.ts.
   const sections = useMemo(() => arrangeByAisle(items, storeLayout, ADDED_BY_HAND_CATEGORY), [items, storeLayout]);
+
+  // The menu's foods not already on the list.
+  const menuChips = useMemo(() => {
+    const onList = new Set(items.map((item) => `${item.category}|${item.foodName}`));
+    return menuFoods.filter((food) => !onList.has(`${food.category}|${food.baseName}`));
+  }, [menuFoods, items]);
+
+  const questionsDone = useCallback(
+    (view: InterviewView) => {
+      setSetupView(view);
+      setSetupStep(afterQuestions);
+    },
+    [afterQuestions],
+  );
 
   const storeOptions = useMemo(() => {
     const options = [{ label: 'No store', value: NO_STORE }, ...stores.map((store) => ({ label: store.name, value: store.name }))];
@@ -457,18 +570,111 @@ export default function GroceryListScreen() {
     }
   }
 
+  // Written out one by one so scripts/test_tutorials.js finds each mark.
+  function startMark(key: StartKey) {
+    if (key === 'plan') return walkMark.ref('grocery.choosePlan');
+    if (key === 'pantry') return walkMark.ref('grocery.choosePantry');
+    if (key === 'menu') return walkMark.ref('grocery.chooseMenu');
+    return walkMark.ref('grocery.chooseSchedule');
+  }
+
+  function startWith(key: StartKey) {
+    setErrorMessage('');
+    if (key === 'menu') {
+      setMenu(profileMenu);
+      setSetupStep('menu');
+      return;
+    }
+    setAfterQuestions(key);
+    setSetupStep('questions');
+  }
+
+  async function openBuiltList(id: string) {
+    const created = await getGroceryList(id);
+    const listItems = await getGroceryListItems(id);
+    const coverage = await getKitchenCoverageForItems(id, listItems);
+    setList(created);
+    setItems(listItems);
+    setKitchen(coverage);
+    setMenuFoods(created?.menu ? (await getMenuFoods(created.menu)).foods : []);
+    setMode('list');
+  }
+
+  // Plan My Meals for Me and Add to My Pantry end here: the schedule is
+  // filled for the days chosen, then the list is built for the shopping days.
+  async function handlePlanAndBuild() {
+    setBusy(true);
+    setErrorMessage('');
+    try {
+      await saveAutoPlanSettings({ fillDays, shopDays: daysAhead, kitchenFirst });
+      const result = await planAndScheduleMeals({ days: fillDays, kitchenFirst });
+      const id = await createGroceryListFromSchedule({ daysAhead, peopleCount, storeName });
+      await openBuiltList(id);
+      const parts = [
+        result.scheduled === 1
+          ? t('One meal was put on your schedule for the next {days} days.', { days: result.days })
+          : t('{count} meals were put on your schedule for the next {days} days.', { count: result.scheduled, days: result.days }),
+      ];
+      if (result.skipped > 0) {
+        parts.push(
+          result.skipped === 1
+            ? t('One meal already planned was left as it was.')
+            : t('{count} meals already planned were left as they were.', { count: result.skipped }),
+        );
+      }
+      if (result.incompleteDays > 0) {
+        parts.push(
+          result.incompleteDays === 1
+            ? t('One day could not be given a full breakfast, lunch and dinner from the recipes that fit your answers. Schedules > Meal Plan can fill it in.')
+            : t('{count} days could not be given a full breakfast, lunch and dinner from the recipes that fit your answers. Schedules > Meal Plan can fill them in.', {
+                count: result.incompleteDays,
+              }),
+        );
+      }
+      if (daysAhead < result.days) {
+        parts.push(t('This list covers the first {count} days, so the food is fresh. When you shop again, Build From My Schedule makes the next list.', { count: daysAhead }));
+      }
+      showInfoAlert('Your meals are planned', parts.join(' '));
+    } catch (error) {
+      setErrorMessage(`Could not plan the meals: ${error instanceof Error ? error.message : String(error)}`);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleMakeMenuList() {
+    setBusy(true);
+    setErrorMessage('');
+    try {
+      const id = await createHandGroceryList(menu);
+      await openBuiltList(id);
+    } catch (error) {
+      setErrorMessage(`Could not start the list: ${error instanceof Error ? error.message : String(error)}`);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleAddMenuFood(food: MenuFood) {
+    if (!list || busy) return;
+    setBusy(true);
+    try {
+      await addGroceryListItem(list.id, { category: food.category, foodName: food.baseName });
+      await refreshItems(list.id);
+    } catch (error) {
+      setErrorMessage(`Could not add that: ${error instanceof Error ? error.message : String(error)}`);
+    } finally {
+      setBusy(false);
+    }
+  }
+
   async function handleBuild() {
     setBusy(true);
     setErrorMessage('');
     try {
+      await saveAutoPlanSettings({ fillDays, shopDays: daysAhead, kitchenFirst });
       const id = await createGroceryListFromSchedule({ daysAhead, peopleCount, storeName });
-      const created = await getGroceryList(id);
-      const listItems = await getGroceryListItems(id);
-      const coverage = await getKitchenCoverageForItems(id, listItems);
-      setList(created);
-      setItems(listItems);
-      setKitchen(coverage);
-      setMode('list');
+      await openBuiltList(id);
       // H1, 2026-09-28: no sheet offering to take from the kitchen after a
       // build any more. The list is already built around what the kitchen
       // holds (lib/groceryList.ts holdFromKitchen), and the header says how.
@@ -650,20 +856,36 @@ export default function GroceryListScreen() {
     }
   }
 
-  async function handleAddItem() {
+  // A typed name goes on under the food database's name when it plainly
+  // names one food, so the kitchen and the recipes find it (2026-11-04,
+  // lib/groceryFoodMatch.ts). Anything less sure offers close foods and Keep
+  // as Typed, and nothing is guessed.
+  async function handleAddItem(chosen?: PurchasableFood | 'typed') {
     if (!list) return;
     const name = newName.trim();
     if (!name) return explainNotYet('Type what to add to the list first.');
+    let food: { foodName: string; category?: string } = { foodName: name };
+    if (chosen && chosen !== 'typed') {
+      food = { foodName: chosen.baseName, category: chosen.category };
+    } else if (!chosen) {
+      const found = matchFoodName(name, purchasable, (english) => t(english));
+      if (found.kind === 'match') food = { foodName: found.food.baseName, category: found.food.category };
+      else if (found.kind === 'choose') {
+        setAddChoices(found.options);
+        return;
+      }
+    }
     setBusy(true);
     try {
       await addGroceryListItem(list.id, {
-        foodName: name,
+        ...food,
         quantity: parseNumberOrNull(newQuantity) ?? 1,
         unit: newUnit.trim(),
       });
       setNewName('');
       setNewQuantity('');
       setNewUnit('');
+      setAddChoices([]);
       await refreshItems(list.id);
     } finally {
       setBusy(false);
@@ -716,6 +938,7 @@ export default function GroceryListScreen() {
       setList(null);
       setItems([]);
       setExpandedId(null);
+      setSetupStep('choose');
       setMode('setup');
       setHistory(await listGroceryLists());
     } catch (error) {
@@ -826,6 +1049,105 @@ export default function GroceryListScreen() {
     );
   }
 
+  function explainFillDays() {
+    showInfoAlert(
+      'How many days to plan',
+      'The app puts breakfast, lunch and dinner on your schedule for this many days, from recipes that fit your conditions and how you eat. ' +
+        'How often you shop is a separate choice, so two weeks can be planned and shopped for a few days at a time. ' +
+        'A meal already on your schedule is never replaced. Both choices are remembered for next time.',
+    );
+  }
+
+  function renderShopDays(label: string) {
+    return (
+      <View style={styles.card}>
+        <View style={styles.labelRow}>
+          <Text style={styles.sectionLabel}>{label}</Text>
+          <TouchableOpacity onPress={explainDays} accessibilityLabel="About the number of days">
+            <Ionicons name="information-circle-outline" size={20} color={colors.textMuted} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.pillRow}>
+          {GROCERY_DAY_OPTIONS.map((option) => (
+            <TouchableOpacity
+              key={option}
+              ref={option === GROCERY_DAY_OPTIONS[0] ? walkMark.ref('grocery.days') : undefined}
+              style={[styles.pill, daysAhead === option && styles.pillActive]}
+              activeOpacity={0.85}
+              onPress={() => setDaysAhead(option)}
+            >
+              <Text style={[styles.pillText, daysAhead === option && styles.pillTextActive]}>{option}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+        <Text style={styles.muted}>
+          {isEncouragedGroceryWindow(daysAhead)
+            ? 'Shopping every few days keeps produce fresh.'
+            : 'Longer than four days is fine, though fresh produce is unlikely to last the whole window.'}
+        </Text>
+      </View>
+    );
+  }
+
+  function renderPeople() {
+    return (
+      <View style={styles.card}>
+        <View style={styles.labelRow}>
+          <Text style={styles.sectionLabel}>How many people are eating?</Text>
+          <TouchableOpacity onPress={explainPeopleCount} accessibilityLabel="About the number of people">
+            <Ionicons name="information-circle-outline" size={20} color={colors.textMuted} />
+          </TouchableOpacity>
+        </View>
+        <ThumbEndRow style={styles.stepperRow}>
+          <TouchableOpacity
+            style={styles.stepperButton}
+            activeOpacity={0.85}
+            onPress={() => setPeopleCount((value) => Math.max(1, value - 1))}
+            accessibilityLabel="One fewer person"
+          >
+            <Ionicons name="remove" size={20} color={colors.textOnButton} />
+          </TouchableOpacity>
+          <Text style={styles.stepperValue}>{peopleCount}</Text>
+          <TouchableOpacity
+            ref={walkMark.ref('grocery.people')}
+            style={styles.stepperButton}
+            activeOpacity={0.85}
+            onPress={() => setPeopleCount((value) => Math.min(MAX_PEOPLE, value + 1))}
+            accessibilityLabel="One more person"
+          >
+            <Ionicons name="add" size={20} color={colors.textOnButton} />
+          </TouchableOpacity>
+        </ThumbEndRow>
+        <Text style={styles.muted}>Recipes here are written for one person, so this multiplies every amount.</Text>
+      </View>
+    );
+  }
+
+  // What the plan follows, each answer a tap from where it is changed.
+  function renderAnswers() {
+    if (!setupView) return null;
+    return (
+      <View style={styles.card}>
+        <Text style={styles.sectionLabel}>Planned around</Text>
+        {setupView.questions.map((question) => (
+          <TouchableOpacity
+            key={question.key}
+            style={styles.historyRow}
+            activeOpacity={0.85}
+            onPress={() => router.push({ pathname: '/profile', params: { section: answerSection(question) } })}
+          >
+            <View style={styles.rowTextWrap}>
+              <Text style={styles.rowName}>{answerLabel(question)}</Text>
+              <Text style={styles.rowMeta}>{question.summary ?? 'Not answered yet'}</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+          </TouchableOpacity>
+        ))}
+        <Text style={styles.muted}>Tap one to change it in Profile.</Text>
+      </View>
+    );
+  }
+
   function explainDays() {
     showInfoAlert(
       'How many days',
@@ -855,15 +1177,28 @@ export default function GroceryListScreen() {
   }
 
   if (mode === 'setup') {
+    const stepTitle: Record<SetupStep, string> = {
+      choose: 'Start a Grocery List',
+      questions: 'Start a Grocery List',
+      plan: 'Plan My Meals for Me',
+      pantry: 'Add to My Pantry',
+      menu: 'Just Make a List',
+      schedule: 'Build From My Schedule',
+    };
     return (
       <View style={styles.screen}>
         <ScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
           <View style={styles.card}>
-            <Text style={styles.title}>Build a Grocery List</Text>
-            <Text style={styles.muted}>
-              This reads whatever is already on your schedule, works out how much of each ingredient those meals need, and writes it down as a list you can take
-              into a store.
-            </Text>
+            <Text style={styles.title}>{stepTitle[setupStep]}</Text>
+            {setupStep === 'choose' ? (
+              <Text style={styles.muted}>Pick how this list starts. Every way ends with a list you can take into a store.</Text>
+            ) : null}
+            {setupStep !== 'choose' ? (
+              <TouchableOpacity style={styles.linkRow} activeOpacity={0.85} onPress={() => setSetupStep('choose')}>
+                <Ionicons name="arrow-back" size={18} color={colors.textSecondary} />
+                <Text style={styles.linkText}>Other ways to start</Text>
+              </TouchableOpacity>
+            ) : null}
           </View>
 
           {errorMessage ? (
@@ -872,125 +1207,276 @@ export default function GroceryListScreen() {
             </View>
           ) : null}
 
-          <View style={styles.card}>
-            <View style={styles.labelRow}>
-              <Text style={styles.sectionLabel}>How many days are you shopping for?</Text>
-              <TouchableOpacity onPress={explainDays} accessibilityLabel="About the number of days">
-                <Ionicons name="information-circle-outline" size={20} color={colors.textMuted} />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.pillRow}>
-              {GROCERY_DAY_OPTIONS.map((option) => (
+          {setupStep === 'choose' ? (
+            <>
+              {START_CHOICES.map((choice) => (
                 <TouchableOpacity
-                  key={option}
-                  ref={option === GROCERY_DAY_OPTIONS[0] ? walkMark.ref('grocery.days') : undefined}
-                  style={[styles.pill, daysAhead === option && styles.pillActive]}
+                  key={choice.key}
+                  ref={startMark(choice.key)}
+                  style={[styles.card, styles.choiceBand]}
                   activeOpacity={0.85}
-                  onPress={() => setDaysAhead(option)}
+                  onPress={() => startWith(choice.key)}
                 >
-                  <Text style={[styles.pillText, daysAhead === option && styles.pillTextActive]}>{option}</Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-            <Text style={styles.muted}>
-              {isEncouragedGroceryWindow(daysAhead)
-                ? 'Shopping every few days keeps produce fresh.'
-                : 'Longer than four days is fine, though fresh produce is unlikely to last the whole window.'}
-            </Text>
-          </View>
-
-          <View style={styles.card}>
-            <Text style={styles.sectionLabel}>What those days need</Text>
-            {previewLoading ? (
-              <Text style={styles.muted}>Adding it up…</Text>
-            ) : preview.length === 0 ? (
-              <Text style={styles.muted}>
-                Nothing is scheduled in that window yet. Meals scheduled on the Schedules tab, by hand or from a meal plan, show up here.
-              </Text>
-            ) : (
-              preview.map((section) => (
-                <View key={section.category} style={styles.previewSection}>
-                  <Text style={styles.previewCategory}>{section.category}</Text>
-                  {section.items.map((item) => (
-                    <Text key={`${item.foodName}|${item.unit}`} style={styles.previewLine}>
-                      {foodDisplayName(item.foodName)}:{' '}
-                      {[{ quantity: item.quantity, unit: item.unit }, ...item.extraAmounts]
-                        .map((amount) => `${roundForPreview(amount.quantity)} ${amount.unit}`.trim())
-                        .join(' + ')}
-                      {item.approxAmount ? ` (${item.approxAmount})` : ''}
-                      {item.soldAs ? `, ${item.soldAs}` : ''}
-                    </Text>
-                  ))}
-                </View>
-              ))
-            )}
-            <Text style={styles.muted}>For the number of people below. A meal on Schedules given a number of people counts for that many instead.</Text>
-          </View>
-
-          <View style={styles.card}>
-            <View style={styles.labelRow}>
-              <Text style={styles.sectionLabel}>How many people are eating?</Text>
-              <TouchableOpacity onPress={explainPeopleCount} accessibilityLabel="About the number of people">
-                <Ionicons name="information-circle-outline" size={20} color={colors.textMuted} />
-              </TouchableOpacity>
-            </View>
-            <ThumbEndRow style={styles.stepperRow}>
-              <TouchableOpacity
-                style={styles.stepperButton}
-                activeOpacity={0.85}
-                onPress={() => setPeopleCount((value) => Math.max(1, value - 1))}
-                accessibilityLabel="One fewer person"
-              >
-                <Ionicons name="remove" size={20} color={colors.textOnButton} />
-              </TouchableOpacity>
-              <Text style={styles.stepperValue}>{peopleCount}</Text>
-              <TouchableOpacity
-                ref={walkMark.ref('grocery.people')}
-                style={styles.stepperButton}
-                activeOpacity={0.85}
-                onPress={() => setPeopleCount((value) => Math.min(MAX_PEOPLE, value + 1))}
-                accessibilityLabel="One more person"
-              >
-                <Ionicons name="add" size={20} color={colors.textOnButton} />
-              </TouchableOpacity>
-            </ThumbEndRow>
-            <Text style={styles.muted}>Recipes here are written for one person, so this multiplies every amount.</Text>
-          </View>
-
-          {renderStorePicker(
-            storeLayout
-              ? 'Saved with the list, and the list reads in this store\'s aisle order.'
-              : 'Saved with the list, so prices can later be compared between stores.',
-          )}
-
-          <TouchableOpacity ref={walkMark.ref('grocery.build')} style={[styles.inset, styles.primaryButton, busy && styles.disabled]} activeOpacity={0.85} onPress={handleBuild} disabled={busy}>
-            <Ionicons name="cart-outline" size={18} color={colors.textOnButton} />
-            <Text style={styles.primaryButtonText}>{busy ? 'Building…' : 'Build My Grocery List'}</Text>
-          </TouchableOpacity>
-
-          {history.length > 0 ? (
-            <View style={styles.card}>
-              <Text style={styles.sectionLabel}>Earlier lists</Text>
-              {history.map((past, index) => (
-                <TouchableOpacity
-                  key={past.id}
-                  ref={index === 0 ? walkMark.ref('grocery.earlier') : undefined}
-                  style={styles.historyRow}
-                  activeOpacity={0.85}
-                  onPress={() => router.replace(`/grocery-list?listId=${encodeURIComponent(past.id)}`)}
-                >
+                  <Ionicons name={choice.icon} size={24} color={colors.tabLife} />
                   <View style={styles.rowTextWrap}>
-                    <Text style={styles.rowName}>{past.name}</Text>
-                    <Text style={styles.rowMeta}>
-                      {describeGroceryWindow(past.daysAhead, past.peopleCount)}
-                      {past.storeName ? ` · ${past.storeName}` : ''}
-                      {past.status === 'completed' ? ' · done' : ' · still shopping'}
-                    </Text>
+                    <Text style={styles.sectionLabel}>{choice.label}</Text>
+                    <Text style={styles.muted}>{choice.caption}</Text>
                   </View>
                   <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
                 </TouchableOpacity>
               ))}
-            </View>
+              {history.length > 0 ? (
+                <View style={styles.card}>
+                  <Text style={styles.sectionLabel}>Earlier lists</Text>
+                  {history.map((past, index) => (
+                    <TouchableOpacity
+                      key={past.id}
+                      ref={index === 0 ? walkMark.ref('grocery.earlier') : undefined}
+                      style={styles.historyRow}
+                      activeOpacity={0.85}
+                      onPress={() => router.replace(`/grocery-list?listId=${encodeURIComponent(past.id)}`)}
+                    >
+                      <View style={styles.rowTextWrap}>
+                        <Text style={styles.rowName}>{past.name}</Text>
+                        <Text style={styles.rowMeta}>
+                          {describeGroceryWindow(past.daysAhead, past.peopleCount)}
+                          {past.storeName ? ` · ${past.storeName}` : ''}
+                          {past.status === 'completed' ? ' · done' : ' · still shopping'}
+                        </Text>
+                      </View>
+                      <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              ) : null}
+            </>
+          ) : null}
+
+          {setupStep === 'questions' ? (
+            <FoodSetupGate
+              onReady={questionsDone}
+              lead="The meals the app plans, and the list made from them, follow these answers. Each one is asked once and kept in Profile."
+            />
+          ) : null}
+
+          {setupStep === 'plan' ? (
+            <>
+              {renderAnswers()}
+              <View style={styles.card}>
+                <View style={styles.labelRow}>
+                  <Text style={styles.sectionLabel}>How many days should the app plan?</Text>
+                  <TouchableOpacity onPress={explainFillDays} accessibilityLabel="About the number of days to plan">
+                    <Ionicons name="information-circle-outline" size={20} color={colors.textMuted} />
+                  </TouchableOpacity>
+                </View>
+                <View ref={walkMark.ref('grocery.fillDays')} collapsable={false} style={styles.pillRow}>
+                  {FILL_DAY_OPTIONS.map((option) => (
+                    <TouchableOpacity
+                      key={option}
+                      style={[styles.pill, fillDays === option && styles.pillActive]}
+                      activeOpacity={0.85}
+                      onPress={() => setFillDays(option)}
+                    >
+                      <Text style={[styles.pillText, fillDays === option && styles.pillTextActive]}>{option}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+                <Text style={styles.muted}>
+                  {t('Breakfast, lunch and dinner go on your schedule for the next {count} days. A meal already planned is left as it is.', { count: fillDays })}
+                </Text>
+              </View>
+              {renderShopDays('How often do you shop?')}
+              {renderPeople()}
+              {renderStorePicker('Saved with the list, so prices can later be compared between stores.')}
+              <View style={styles.card}>
+                <TouchableOpacity
+                  ref={walkMark.ref('grocery.kitchenFirst')}
+                  style={styles.saleRow}
+                  activeOpacity={0.85}
+                  onPress={() => setKitchenFirst((was) => !was)}
+                  accessibilityRole="checkbox"
+                  accessibilityState={{ checked: kitchenFirst }}
+                >
+                  <View style={[styles.checkbox, kitchenFirst && styles.checkboxChecked]}>
+                    {kitchenFirst ? <Ionicons name="checkmark" size={18} color={colors.textOnButton} /> : null}
+                  </View>
+                  <View style={styles.rowTextWrap}>
+                    <Text style={styles.rowName}>Use what is in my kitchen first</Text>
+                    <Text style={styles.rowMeta}>Dishes made from the foods in Life &gt; Kitchen are picked before others.</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity
+                ref={walkMark.ref('grocery.planBuild')}
+                style={[styles.inset, styles.primaryButton, busy && styles.disabled]}
+                activeOpacity={0.85}
+                onPress={handlePlanAndBuild}
+                disabled={busy}
+              >
+                <Ionicons name="sparkles-outline" size={18} color={colors.textOnButton} />
+                <Text style={styles.primaryButtonText}>{busy ? 'Planning…' : 'Plan and Build My List'}</Text>
+              </TouchableOpacity>
+            </>
+          ) : null}
+
+          {setupStep === 'pantry' ? (
+            <>
+              <View style={styles.card}>
+                <Text style={styles.muted}>
+                  Add what you already have, one food at a time. When you are done, the app plans meals that start from these foods and lists only what is still missing.
+                </Text>
+              </View>
+              <KitchenSection tabColor={colors.tabLife} />
+              <TouchableOpacity
+                ref={walkMark.ref('grocery.pantryNext')}
+                style={[styles.inset, styles.primaryButton]}
+                activeOpacity={0.85}
+                onPress={() => {
+                  setKitchenFirst(true);
+                  setSetupStep('plan');
+                }}
+              >
+                <Ionicons name="arrow-forward" size={18} color={colors.textOnButton} />
+                <Text style={styles.primaryButtonText}>Plan From What I Have</Text>
+              </TouchableOpacity>
+            </>
+          ) : null}
+
+          {setupStep === 'menu' ? (
+            <>
+              <View style={styles.card}>
+                <Text style={styles.sectionLabel}>Which menu should this list follow?</Text>
+                <Text style={styles.muted}>
+                  Starts from Profile. The list then offers the foods that menu&apos;s recipes use, and you add anything else yourself.
+                </Text>
+                <Text style={styles.rowMeta}>{BASE_DIET_CHOICES.find((choice) => choice.tag === menu.base)?.caption}</Text>
+                <View ref={walkMark.ref('grocery.menuBase')} collapsable={false} style={styles.storePickerWrap}>
+                  <PopoverSelect
+                    selected={baseChoiceLabel(menu.base)}
+                    options={BASE_DIET_CHOICES.map((choice) => choice.label)}
+                    onSelect={(value) => setMenu({ ...menu, base: BASE_DIET_CHOICES.find((choice) => choice.label === value)?.tag ?? null })}
+                    placeholder="What you eat"
+                    tabColor={colors.tabLife}
+                    width={220}
+                  />
+                </View>
+                <Text style={styles.sectionLabel}>Eating style</Text>
+                <View style={styles.pillRow}>
+                  {EATING_STYLE_CHOICES.map((choice) => {
+                    const active = menu.styles.includes(choice.tag);
+                    return (
+                      <TouchableOpacity
+                        key={choice.tag}
+                        style={[styles.pill, active && styles.pillActive]}
+                        activeOpacity={0.85}
+                        onPress={() => setMenu({ ...menu, styles: toggleTag(menu.styles, choice.tag) })}
+                        onLongPress={() => showInfoAlert(choice.label, choice.caption)}
+                      >
+                        <Text style={[styles.pillText, active && styles.pillTextActive]}>{choice.label}</Text>
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
+                <Text style={styles.sectionLabel}>Also</Text>
+                <View style={styles.pillRow}>
+                  {DIET_EXTRA_CHOICES.map((choice) => {
+                    const active = menu.extras.includes(choice.tag);
+                    return (
+                      <TouchableOpacity
+                        key={choice.tag}
+                        style={[styles.pill, active && styles.pillActive]}
+                        activeOpacity={0.85}
+                        onPress={() => setMenu({ ...menu, extras: toggleTag(menu.extras, choice.tag) })}
+                        onLongPress={() => showInfoAlert(choice.label, choice.caption)}
+                      >
+                        <Text style={[styles.pillText, active && styles.pillTextActive]}>{choice.label}</Text>
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
+                <Text style={styles.sectionLabel}>Cuisine</Text>
+                <View style={styles.pillRow}>
+                  {CUISINE_CHOICES.map((cuisine) => {
+                    const active = menu.cuisines.includes(cuisine);
+                    return (
+                      <TouchableOpacity
+                        key={cuisine}
+                        style={[styles.pill, active && styles.pillActive]}
+                        activeOpacity={0.85}
+                        onPress={() => setMenu({ ...menu, cuisines: toggleCuisine(menu.cuisines, cuisine) })}
+                      >
+                        <Text style={[styles.pillText, active && styles.pillTextActive]}>{cuisine}</Text>
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
+                <Text style={styles.muted}>{describePlanDiet(menu)}</Text>
+                {sameDiet(menu, profileMenu) ? null : <Text style={styles.muted}>This list only. Profile &gt; Diet Preferences stays as it is.</Text>}
+              </View>
+              <TouchableOpacity
+                ref={walkMark.ref('grocery.menuMake')}
+                style={[styles.inset, styles.primaryButton, busy && styles.disabled]}
+                activeOpacity={0.85}
+                onPress={handleMakeMenuList}
+                disabled={busy}
+              >
+                <Ionicons name="create-outline" size={18} color={colors.textOnButton} />
+                <Text style={styles.primaryButtonText}>{busy ? 'Starting…' : 'Start My List'}</Text>
+              </TouchableOpacity>
+            </>
+          ) : null}
+
+          {setupStep === 'schedule' ? (
+            <>
+              <View style={styles.card}>
+                <Text style={styles.muted}>
+                  This reads whatever is already on your schedule, works out how much of each ingredient those meals need, and writes it down as a list you can take
+                  into a store.
+                </Text>
+              </View>
+              {renderShopDays('How many days are you shopping for?')}
+
+              <View style={styles.card}>
+                <Text style={styles.sectionLabel}>What those days need</Text>
+                {previewLoading ? (
+                  <Text style={styles.muted}>Adding it up…</Text>
+                ) : preview.length === 0 ? (
+                  <Text style={styles.muted}>
+                    Nothing is scheduled in that window yet. Meals scheduled on the Schedules tab, by hand or from a meal plan, show up here. Plan My Meals for Me fills the schedule for you.
+                  </Text>
+                ) : (
+                  preview.map((section) => (
+                    <View key={section.category} style={styles.previewSection}>
+                      <Text style={styles.previewCategory}>{section.category}</Text>
+                      {section.items.map((item) => (
+                        <Text key={`${item.foodName}|${item.unit}`} style={styles.previewLine}>
+                          {foodDisplayName(item.foodName)}:{' '}
+                          {[{ quantity: item.quantity, unit: item.unit }, ...item.extraAmounts]
+                            .map((amount) => `${roundForPreview(amount.quantity)} ${amount.unit}`.trim())
+                            .join(' + ')}
+                          {item.approxAmount ? ` (${item.approxAmount})` : ''}
+                          {item.soldAs ? `, ${item.soldAs}` : ''}
+                        </Text>
+                      ))}
+                    </View>
+                  ))
+                )}
+                <Text style={styles.muted}>For the number of people below. A meal on Schedules given a number of people counts for that many instead.</Text>
+              </View>
+
+              {renderPeople()}
+
+              {renderStorePicker(
+                storeLayout
+                  ? 'Saved with the list, and the list reads in this store\'s aisle order.'
+                  : 'Saved with the list, so prices can later be compared between stores.',
+              )}
+
+              <TouchableOpacity ref={walkMark.ref('grocery.build')} style={[styles.inset, styles.primaryButton, busy && styles.disabled]} activeOpacity={0.85} onPress={handleBuild} disabled={busy}>
+                <Ionicons name="cart-outline" size={18} color={colors.textOnButton} />
+                <Text style={styles.primaryButtonText}>{busy ? 'Building…' : 'Build My Grocery List'}</Text>
+              </TouchableOpacity>
+            </>
           ) : null}
         </ScrollView>
         {infoAlertElement}
@@ -1372,12 +1858,34 @@ export default function GroceryListScreen() {
           </View>
         ))}
 
+        {list?.menu && menuChips.length > 0 ? (
+          <View style={styles.card}>
+            <Text style={styles.sectionLabel}>Foods your menu uses</Text>
+            <Text style={styles.muted}>From the recipes on your menu, most used first. Tap one to put it on the list.</Text>
+            <View ref={walkMark.ref('grocery.menuFoods')} collapsable={false} style={styles.pillRow}>
+              {menuChips.map((food) => (
+                <TouchableOpacity
+                  key={`${food.category}|${food.baseName}`}
+                  style={styles.pill}
+                  activeOpacity={0.85}
+                  onPress={() => void handleAddMenuFood(food)}
+                >
+                  <Text style={styles.pillText}>{foodDisplayName(food.baseName)}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        ) : null}
+
         <View style={styles.card}>
           <Text style={styles.sectionLabel}>Add something else</Text>
           <AppTextInput
             style={styles.input}
             value={newName}
-            onChangeText={setNewName}
+            onChangeText={(text) => {
+              setNewName(text);
+              setAddChoices([]);
+            }}
             placeholder="What do you need?"
             placeholderTextColor={colors.textMuted}
           />
@@ -1398,13 +1906,37 @@ export default function GroceryListScreen() {
               placeholderTextColor={colors.textMuted}
             />
           </View>
-          <TouchableOpacity ref={walkMark.ref('grocery.addItem')} style={[styles.primaryButton, (busy || !newName.trim()) && styles.disabled]} activeOpacity={0.85} onPress={handleAddItem} disabled={busy}>
+          {addChoices.length > 0 ? (
+            <View style={styles.choiceBlock}>
+              <Text style={styles.rowMeta}>Did you mean</Text>
+              <View ref={walkMark.ref('grocery.didYouMean')} collapsable={false} style={styles.pillRow}>
+                {addChoices.map((food) => {
+                  const shortName = foodDisplayName(food.baseName);
+                  const twin = addChoices.some((other) => other !== food && foodDisplayName(other.baseName) === shortName);
+                  return (
+                    <TouchableOpacity
+                      key={`${food.category}|${food.baseName}`}
+                      style={styles.pill}
+                      activeOpacity={0.85}
+                      onPress={() => void handleAddItem(food)}
+                    >
+                      <Text style={styles.pillText}>{twin ? food.baseName : shortName}</Text>
+                    </TouchableOpacity>
+                  );
+                })}
+                <TouchableOpacity style={styles.pill} activeOpacity={0.85} onPress={() => void handleAddItem('typed')}>
+                  <Text style={styles.pillText}>Keep as Typed</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          ) : null}
+          <TouchableOpacity ref={walkMark.ref('grocery.addItem')} style={[styles.primaryButton, (busy || !newName.trim()) && styles.disabled]} activeOpacity={0.85} onPress={() => void handleAddItem()} disabled={busy}>
             <Ionicons name="add" size={18} color={colors.textOnButton} />
             <Text style={styles.primaryButtonText}>Add to List</Text>
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity ref={walkMark.ref('grocery.newList')} style={[styles.inset, styles.secondaryButton]} activeOpacity={0.85} onPress={() => { setList(null); setItems([]); setMode('setup'); }}>
+        <TouchableOpacity ref={walkMark.ref('grocery.newList')} style={[styles.inset, styles.secondaryButton]} activeOpacity={0.85} onPress={() => { setList(null); setItems([]); setMenuFoods([]); setSetupStep('choose'); setMode('setup'); }}>
           <Ionicons name="document-text-outline" size={18} color={colors.textSecondary} />
           <Text style={styles.secondaryButtonText}>Start a New List</Text>
         </TouchableOpacity>
@@ -1568,5 +2100,7 @@ const styles = StyleSheet.create({
   storeAddButton: { flex: 0, minWidth: 80 },
   linkRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 6, alignSelf: 'flex-start' },
   storePickerWrap: { alignSelf: 'flex-start' },
+  choiceBand: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  choiceBlock: { gap: 6 },
   linkText: { ...typography.body, color: colors.textSecondary, textDecorationLine: 'underline', ...textShadow },
 });

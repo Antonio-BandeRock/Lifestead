@@ -1423,6 +1423,26 @@ export function buildInterview(facts: InterviewFacts): InterviewView {
   return { questions, next, finished: next === null, startPath, tour: buildTour(facts, startPath), facts };
 }
 
+// THE FOOD QUESTIONS BEFORE A PLAN (2026-11-04, direct instruction: "All
+// automatic ways in the app to get them to a grocery list need to start with
+// the setup information about how they need to eat, and any conditions they
+// might have"). The same questions setup asks, picked out so the Grocery
+// List can ask them before it plans meals or builds a list: conditions, the
+// stage of any staged condition, a way of eating, and allergies. Asked of
+// everybody whatever parts of life were chosen, since a plan is about to be
+// made from the answers.
+export const FOOD_SETUP_KINDS: InterviewKind[] = ['conditions', 'stage', 'eatingStyle', 'allergies'];
+
+export function buildFoodSetup(facts: InterviewFacts): InterviewView {
+  const questions: InterviewQuestionView[] = [];
+  for (const kind of FOOD_SETUP_KINDS) {
+    if (kind === 'stage') questions.push(...stageQuestions(facts));
+    else questions.push(viewQuestion(QUESTION_BY_KIND[kind], facts));
+  }
+  const next = questions.find((question) => !question.answered) ?? null;
+  return { questions, next, finished: next === null, startPath: null, tour: [], facts };
+}
+
 // Whether the Free line shows: only while the first question still waits,
 // so it is read before setup and never comes back to sell anything.
 export function showsFreeLine(view: InterviewView): boolean {

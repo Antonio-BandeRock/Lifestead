@@ -256,6 +256,18 @@ export type ToolMark =
   | 'grocery.people'
   | 'grocery.build'
   | 'grocery.earlier'
+  | 'grocery.choosePlan'
+  | 'grocery.choosePantry'
+  | 'grocery.chooseMenu'
+  | 'grocery.chooseSchedule'
+  | 'grocery.fillDays'
+  | 'grocery.kitchenFirst'
+  | 'grocery.planBuild'
+  | 'grocery.pantryNext'
+  | 'grocery.menuBase'
+  | 'grocery.menuMake'
+  | 'grocery.menuFoods'
+  | 'grocery.didYouMean'
   | 'conditions.search'
   | 'conditions.curious'
   | 'conditions.extra'
@@ -336,6 +348,7 @@ export type ToolMark =
   | 'home.groceryType'
   | 'home.groceryAdd'
   | 'home.groceryQuickOpen'
+  | 'home.groceryDidYouMean'
   | 'home.pickFrom'
   | 'home.pickNew'
   | 'home.pickMark'
@@ -1890,8 +1903,17 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       steps: [
         { say: 'Under Add something else, write what you need, and an amount and unit if you like.' },
         { say: 'Tap Add to List.', mark: 'grocery.addItem' },
+        { say: 'If the app is not sure which food you mean, tap the one under Did you mean, or Keep as Typed.', mark: 'grocery.didYouMean' },
       ],
-      forYou: 'A line you add by hand stays put when the list is refreshed from your schedule.',
+      forYou: 'A food the app recognises goes on under its name in the food database, so your kitchen and recipes find it. A line you add by hand stays put when the list is refreshed from your schedule.',
+    },
+    {
+      key: 'menuFoods',
+      title: 'Add a food your menu uses',
+      steps: [
+        { say: 'Under Foods your menu uses, tap a food.', mark: 'grocery.menuFoods' },
+      ],
+      forYou: 'It goes on the list. This band shows on a list started with Just Make a List, from the recipes on the menu you picked.',
     },
     {
       key: 'refresh',
@@ -1972,10 +1994,45 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'If you only want it out of the way, Finish Shopping keeps it.',
     },
     {
+      key: 'planForMe',
+      title: 'Have the app plan your meals and make the list',
+      steps: [
+        { say: 'Tap Plan My Meals for Me.', mark: 'grocery.choosePlan', stay: true },
+        { say: 'Answer the food questions the app has not asked yet. Answers already given are not asked again.' },
+        { say: 'Pick how many days of meals to plan.', mark: 'grocery.fillDays', stay: true },
+        { say: 'Pick how often you shop, and how many people are eating.', mark: 'grocery.days', stay: true },
+        { say: 'Tap Plan and Build My List.', mark: 'grocery.planBuild' },
+      ],
+      forYou: 'Meals that fit your conditions and how you eat go on your schedule, and the list holds what to buy for the days until you shop again.',
+    },
+    {
+      key: 'pantry',
+      title: 'Plan from what is already in your kitchen',
+      steps: [
+        { say: 'Tap Add to My Pantry.', mark: 'grocery.choosePantry', stay: true },
+        { say: 'Answer any food questions the app has not asked yet.' },
+        { say: 'Add what you have, then tap Plan From What I Have.', mark: 'grocery.pantryNext', stay: true },
+        { say: 'Leave Plan from my kitchen first ticked, and tap Plan and Build My List.', mark: 'grocery.kitchenFirst', stay: true },
+        { say: 'Tap Plan and Build My List.', mark: 'grocery.planBuild' },
+      ],
+      forYou: 'The meals use what you have first, so the list holds only what is missing.',
+    },
+    {
+      key: 'menuList',
+      title: 'Write a list yourself, following a menu',
+      steps: [
+        { say: 'Tap Just Make a List.', mark: 'grocery.chooseMenu', stay: true },
+        { say: 'Pick the menu to follow. It starts from your answers in Profile.', mark: 'grocery.menuBase', stay: true },
+        { say: 'Tap Start My List.', mark: 'grocery.menuMake' },
+      ],
+      forYou: "An empty list opens with that menu's foods a tap away under Foods your menu uses. Profile is not changed.",
+    },
+    {
       key: 'newList',
-      title: 'Start a new list',
+      title: 'Start a new list from meals already scheduled',
       steps: [
         { say: 'Tap Start a New List at the bottom of the list.', mark: 'grocery.newList', stay: true },
+        { say: 'Tap Build From My Schedule, and answer any food questions not asked yet.', mark: 'grocery.chooseSchedule', stay: true },
         { say: 'Pick how many days you are shopping for.', mark: 'grocery.days', stay: true },
         { say: 'Tap the plus or minus for how many people are eating.', mark: 'grocery.people', stay: true },
         { say: 'Tap Build My Grocery List.', mark: 'grocery.build' },
@@ -2691,8 +2748,9 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Open the band with the name of Add to the Grocery List.', mark: 'homeBand.groceryQuickAdd', stay: true },
         { say: 'Type or say what you need. Several things can go in at once, like eggs, milk and bread.', mark: 'home.groceryType', stay: true },
         { say: 'Tap Add.', mark: 'home.groceryAdd' },
+        { say: 'If the app is not sure which food you mean, tap the one under Did you mean, or Keep as Typed.', mark: 'home.groceryDidYouMean' },
       ],
-      forYou: 'Each one goes on your open grocery list as a line of its own. Open the list shows them there.',
+      forYou: 'Each one goes on your open grocery list as a line of its own, under its name in the food database when the app recognises it. Open the list shows them there.',
     },
     {
       key: 'todayPicks',

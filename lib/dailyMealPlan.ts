@@ -113,7 +113,7 @@ export type MealPlanBudget = { ceiling: number; costs: Map<string, DishCost> };
 // but a plain .filter() callback returning boolean doesn't propagate
 // that narrowing to the resulting array's own type, so this is a real
 // type predicate, not just an equivalent-looking boolean check.
-type EligibleRecipeEntry = DigestEntry & {
+export type EligibleRecipeEntry = DigestEntry & {
   linkedCuratedRecipeId: string;
   linkedBuilderType: NonNullable<DigestEntry['linkedBuilderType']>;
 };
@@ -852,6 +852,16 @@ function recipeSafeAcrossConditions(entry: AnyDigestEntry, conditionCodes: strin
     if (tier === 'yellow') worst = 'yellow';
   }
   return worst;
+}
+
+/** The recipes a menu allows (Just Make a List, 2026-11-04): the same
+ *  condition and diet filters the generator starts from, leaning to the
+ *  chosen cuisines the same way, with nothing scored or picked. */
+export function recipesForMenu(conditionCodes: string[], dietPreferences: RecipeDietTag[], cuisines: readonly string[] = []): EligibleRecipeEntry[] {
+  const allowed = getEntriesForCategory('recipes')
+    .filter(isEligibleRecipeEntry)
+    .filter((entry) => recipeSafeAcrossConditions(entry, conditionCodes) !== null && recipeMatchesAllDietPreferences(entry, dietPreferences));
+  return leanToCuisines(allowed, cuisines, (entry) => entry.recipeCard?.cuisine);
 }
 
 // ---------------------------------------------------------------------

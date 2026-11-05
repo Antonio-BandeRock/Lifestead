@@ -11,7 +11,9 @@
 // The pure arithmetic (what a price means, what a line comes to) is in
 // lib/groceryList.ts, separately again, so it can be reasoned about and
 // tested with no database at all.
-import { consumeKitchenItem, listKitchenInventory, type KitchenItemKind } from './kitchenDb';
+import type { PlanDiet } from './mealPlanDiet';
+import { consumeKitchenItem, listKitchenInventory, listPurchasableFoods, type KitchenItemKind } from './kitchenDb';
+import { matchFoodName } from './groceryFoodMatch';
 import {
   getDatabase,
   getReferenceDatabase,
@@ -64,6 +66,8 @@ export type GroceryListRecord = {
   status: GroceryListStatus;
   createdAt: string;
   completedAt: string | null;
+  /** The menu a list made by hand follows (Just Make a List), or null for one built from the schedule. */
+  menu: PlanDiet | null;
 };
 
 export type GroceryListItemRecord = {
@@ -119,7 +123,7 @@ export type GroceryListItemRecord = {
   sortOrder: number;
 };
 
-type GroceryListRow = Omit<GroceryListRecord, 'status'> & { status: string };
+type GroceryListRow = Omit<GroceryListRecord, 'status' | 'menu'> & { status: string; menuJson: string | null };
 
 type GroceryListItemRow = Omit<
   GroceryListItemRecord,
@@ -148,7 +152,7 @@ type GroceryListItemRow = Omit<
 
 const GROCERY_LIST_COLUMNS = `
   id, name, start_date AS startDate, days_ahead AS daysAhead, people_count AS peopleCount,
-  store_name AS storeName, status, created_at AS createdAt, completed_at AS completedAt
+  store_name AS storeName, status, created_at AS createdAt, completed_at AS completedAt, menu_json AS menuJson
 `;
 
 const GROCERY_ITEM_COLUMNS = `
@@ -168,8 +172,27 @@ function toPriceUnit(value: string | null | undefined): GroceryPriceUnit | null 
   return GROCERY_PRICE_UNITS.includes(value as GroceryPriceUnit) ? (value as GroceryPriceUnit) : null;
 }
 
+// A menu that will not parse reads as no menu, the same way a bad JSON
+// column reads everywhere else on this list.
+function parseMenu(value: string | null): PlanDiet | null {
+  if (!value) return null;
+  try {
+    const parsed = JSON.parse(value) as Partial<PlanDiet> | null;
+    if (!parsed || typeof parsed !== 'object') return null;
+    return {
+      base: parsed.base ?? null,
+      styles: Array.isArray(parsed.styles) ? parsed.styles : [],
+      extras: Array.isArray(parsed.extras) ? parsed.extras : [],
+      cuisines: Array.isArray(parsed.cuisines) ? parsed.cuisines : [],
+    };
+  } catch {
+    return null;
+  }
+}
+
 function mapGroceryList(row: GroceryListRow): GroceryListRecord {
-  return { ...row, status: row.status === 'completed' ? 'completed' : 'active' };
+  const { menuJson, ...rest } = row;
+  return { ...rest, status: row.status === 'completed' ? 'completed' : 'active', menu: parseMenu(menuJson) };
 }
 
 // Malformed JSON reads as "none recorded" rather than throwing. A stored
@@ -371,29 +394,46 @@ function netAgainstKitchen(
 // capture note or the Home quick-add, when no list is being shopped). Unlike
 // createGroceryListFromSchedule it pulls nothing in from the schedule, since
 // somebody adding milk did not ask for tomorrow's meals to arrive with it.
-export async function createHandGroceryList(): Promise<string> {
+// Given a menu (Just Make a List, 2026-11-04), the list keeps it so it can
+// offer the foods that menu's recipes use.
+export async function createHandGroceryList(menu?: PlanDiet): Promise<string> {
   const db = await getDatabase();
   const startDate = new Date().toISOString().slice(0, 10);
   const id = `grocery_list_${Date.now()}`;
   await db.runAsync(
-    `INSERT INTO grocery_lists (id, name, start_date, days_ahead, people_count, store_name, status)
-     VALUES (?, ?, ?, 1, 1, NULL, 'active')`,
+    `INSERT INTO grocery_lists (id, name, start_date, days_ahead, people_count, store_name, status, menu_json)
+     VALUES (?, ?, ?, 1, 1, NULL, 'active', ?)`,
     id,
     defaultGroceryListName(startDate),
     startDate,
+    menu ? JSON.stringify(menu) : null,
   );
   return id;
 }
 
-/** Adds each name to the list being shopped, starting one when there is
- *  none, and says how many went on. */
-export async function addNamesToActiveGroceryList(names: string[]): Promise<number> {
-  const clean = names.map((name) => name.trim()).filter((name) => name.length > 0);
+/** Adds each food to the list being shopped, starting one when there is
+ *  none, and says how many went on. A category names the food's row in the
+ *  foods database, so the line matches the kitchen and the recipes. */
+export async function addFoodsToActiveGroceryList(foods: { foodName: string; category?: string }[]): Promise<number> {
+  const clean = foods.map((food) => ({ ...food, foodName: food.foodName.trim() })).filter((food) => food.foodName.length > 0);
   if (clean.length === 0) return 0;
   const active = await getActiveGroceryList();
   const listId = active ? active.id : await createHandGroceryList();
-  for (const foodName of clean) await addGroceryListItem(listId, { foodName });
+  for (const food of clean) await addGroceryListItem(listId, food);
   return clean.length;
+}
+
+/** Adds each name to the list being shopped. A name that plainly names one
+ *  food in the database (lib/groceryFoodMatch.ts) goes on under that food's
+ *  name; anything less sure goes on as it was typed or said (2026-11-04). */
+export async function addNamesToActiveGroceryList(names: string[]): Promise<number> {
+  const foods = await listPurchasableFoods();
+  return addFoodsToActiveGroceryList(
+    names.map((name) => {
+      const found = matchFoodName(name, foods);
+      return found.kind === 'match' ? { foodName: found.food.baseName, category: found.food.category } : { foodName: name };
+    }),
+  );
 }
 
 export async function getGroceryList(id: string): Promise<GroceryListRecord | null> {

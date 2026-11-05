@@ -41,6 +41,18 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.81.6',
+    date: '2026-11-04',
+    changes: [
+      "Every way the app makes a grocery list from meals now asks the food questions first: your conditions, the healing stage of a staged condition, how you eat and any allergies. A question already answered is not asked again.",
+      "Starting a grocery list offers four ways in: Plan My Meals for Me, Add to My Pantry, Just Make a List and Build From My Schedule.",
+      "Plan My Meals for Me fills your schedule with meals that fit your answers, for 3 days up to six weeks at once, and how often you shop is a separate choice. Both are remembered.",
+      "Add to My Pantry lets you add what you already have, then plans meals from it so the list holds only what is missing.",
+      "Just Make a List asks which menu to follow, starting from Profile, and the list offers the foods that menu's recipes use.",
+      "Food typed or said onto a grocery list, here or on Home, goes on under its name in the food database when it plainly names one food, and Did you mean offers the close ones when it does not.",
+    ],
+  },
+  {
     version: '1.0.81.5',
     date: '2026-11-04',
     changes: [
