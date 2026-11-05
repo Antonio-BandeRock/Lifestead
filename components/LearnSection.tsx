@@ -6,7 +6,8 @@
 // A sitting offers what is ready plus a few new cards. A card answered Not
 // Yet comes back once more at the end of the same sitting, as practice that
 // does not move its schedule. Nothing here counts what is waiting, how late
-// a card is, or how often an answer was wrong. Every sentence is in
+// a card is, or how often an answer was wrong. (A course's own screen says how
+// many cards are ready today, a written exception: see app/learn-course.tsx.) Every sentence is in
 // lib/learnSchedule.ts, checked by scripts/test_learn.js.
 
 import { useFocusEffect } from '@react-navigation/native';
@@ -30,7 +31,8 @@ import { localDayOf } from '../lib/interests';
 import { LEARN_DECKS, type LearnDeck } from '../lib/learnDecks';
 import { loadRecordDecks } from '../lib/learnRecordDecksDb';
 import { listMyDecks } from '../lib/learnMyDecksDb';
-import { addLearnReview, listLearnReviews } from '../lib/learnDb';
+import { addLearnReview, countCourseKnown, listLearnReviews } from '../lib/learnDb';
+import { LearnCoursesSection } from './LearnCoursesSection';
 import {
   countKnown,
   deckStanding,
@@ -66,6 +68,7 @@ function today(): string {
 export function LearnSection({ tabColor }: Props) {
   const walkMark = useWalkMark();
   const [reviews, setReviews] = useState<LearnReview[]>([]);
+  const [courseKnown, setCourseKnown] = useState(0);
   const [sitting, setSitting] = useState<SittingState | null>(null);
   const [doneLine, setDoneLine] = useState<{ deckId: string; text: string } | null>(null);
   const [recordDecks, setRecordDecks] = useState<LearnDeck[]>([]);
@@ -73,11 +76,13 @@ export function LearnSection({ tabColor }: Props) {
   const [printing, setPrinting] = useState<{ deckId: string; layout: DeckPrintLayout; busy: boolean; said: string | null } | null>(null);
 
   const load = useCallback(async () => {
-    const [all, fromRecords, mine] = await Promise.all([
+    const [all, fromRecords, mine, inCourses] = await Promise.all([
       listLearnReviews(),
       loadRecordDecks(today(), t),
       listMyDecks().catch((): LearnDeck[] => []),
+      countCourseKnown().catch(() => 0),
     ]);
+    setCourseKnown(inCourses);
     setReviews(all);
     setRecordDecks(fromRecords);
     setMyDecks(mine);
@@ -142,7 +147,7 @@ export function LearnSection({ tabColor }: Props) {
     const after = planSitting(ids, all, day);
     setDoneLine({
       deckId: sitting.deckId,
-      text: describeSittingDone(countKnown(all), after.cardIds.length, after.nextReadyOn, day),
+      text: describeSittingDone(countKnown(all) + courseKnown, after.cardIds.length, after.nextReadyOn, day),
     });
     setSitting(null);
   }
@@ -164,12 +169,13 @@ export function LearnSection({ tabColor }: Props) {
     setPrinting({ deckId: deck.id, layout, busy: false, said });
   }
 
-  const known = countKnown(reviews);
+  const known = countKnown(reviews) + courseKnown;
   const current = sitting ? cardById(sitting.queue[sitting.index]) : undefined;
 
   return (
     <View style={styles.section}>
       <Text style={styles.knownText}>{describeKnown(known)}</Text>
+      <LearnCoursesSection tabColor={tabColor} onChanged={load} />
 
       {allDecks.map((deck, index) => {
         const ids = deck.cards.map((card) => card.id);

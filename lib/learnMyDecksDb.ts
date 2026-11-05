@@ -113,7 +113,7 @@ export async function saveMyCard(deckId: string, draft: CardDraft, cardId?: stri
 
 async function answeredCardIds(): Promise<Set<string>> {
   const db = await getDatabase();
-  const rows = await db.getAllAsync<{ cardId: string }>('SELECT DISTINCT card_id AS cardId FROM learn_reviews');
+  const rows = await db.getAllAsync<{ cardId: string }>("SELECT DISTINCT card_id AS cardId FROM learn_reviews WHERE kind IS NOT 'course'");
   return new Set(rows.map((row) => row.cardId));
 }
 

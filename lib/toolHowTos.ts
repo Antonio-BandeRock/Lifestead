@@ -143,6 +143,18 @@ export type ToolMark =
   | 'learn.printLayout'
   | 'learn.printSend'
   | 'learn.howItHasGone'
+  | 'learn.course'
+  | 'learn.importCourse'
+  | 'learn.courseStudy'
+  | 'learn.courseMix'
+  | 'learn.courseStop'
+  | 'learn.courseCard'
+  | 'learn.courseGrade'
+  | 'learn.courseHear'
+  | 'learn.courseUnits'
+  | 'learn.courseChoose'
+  | 'learn.courseSettings'
+  | 'learn.courseCounts'
   | 'capture.keepInLibrary'
   | 'capture.attachFile'
   | 'appointments.files'
@@ -3300,6 +3312,83 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     },
   ],
   '/interests#learn': [
+    {
+      key: 'courseStudy',
+      title: 'Study a language course',
+      steps: [
+        { say: 'Under Courses, tap Open Course on the one you want.', mark: 'learn.course', stay: true },
+        { say: 'Tap Study Now. The line above it says how many cards are ready today and how many are new.', mark: 'learn.courseStudy', stay: true },
+        { say: 'Say the answer in your head, then tap the card to turn it over.', mark: 'learn.courseCard', stay: true },
+        { say: 'Tap how it went, or swipe right for Knew It and left for Not Yet.', mark: 'learn.courseGrade', stay: true },
+        { say: 'Tap Stop for Now whenever you like. What you answered is kept.', mark: 'learn.courseStop' },
+      ],
+      forYou: 'New cards come in the order the course builds, up to the number you set for a day, and a day away takes nothing from what you have learned.',
+    },
+    {
+      key: 'courseUnits',
+      title: 'Follow the study path of a course',
+      steps: [
+        { say: 'Open a course, then open the band called Study Path.', mark: 'learn.courseUnits', stay: true },
+        { say: 'Each unit says how many cards are learned, ready and new. Tap Study This Unit on one that is open.' },
+        { say: 'A later unit opens by itself once most of the one before it is learned. To go ahead sooner, tap Open This Unit.' },
+      ],
+      forYou: 'The path gives you the order, and you can step off it whenever you know what you want to work on.',
+    },
+    {
+      key: 'courseChoose',
+      title: 'Study one lesson, group or kind of card',
+      steps: [
+        { say: 'Open a course, then open the band called Choose Cards.', mark: 'learn.courseChoose', stay: true },
+        { say: 'Choose a unit, a group, a kind of card, a status or a source. A choice that would make no difference is left out.' },
+        { say: 'Tap Study These.' },
+      ],
+      forYou: 'Everything from one lesson is there the night before class, without changing where you are on the path.',
+    },
+    {
+      key: 'courseMix',
+      title: 'Mix cards from everything you have opened',
+      steps: [
+        { say: 'Open a course and tap Mix.', mark: 'learn.courseMix' },
+      ],
+      forYou: 'Cards you have seen come back in no set order, which is closer to how they turn up in a conversation.',
+    },
+    {
+      key: 'courseHear',
+      title: 'Hear a card spoken',
+      steps: [
+        { say: 'While you study, tap Hear It under the card.', mark: 'learn.courseHear' },
+      ],
+      forYou: 'It speaks with a voice on this device, so it works with no internet. If there is no voice for the language, the app says so once and leaves the button out until one is installed.',
+    },
+    {
+      key: 'courseSettings',
+      title: 'Change a course to suit you',
+      steps: [
+        { say: 'Open a course, then open the band called Settings.', mark: 'learn.courseSettings', stay: true },
+        { say: 'Under Which side comes first, choose what you are learning or what you already know.' },
+        { say: 'Under New cards a day, tap the number you want.' },
+        { say: 'On a course with verb tables, Type the Answer hides one form on each verb card for you to type.' },
+      ],
+      forYou: 'Settings belong to one course, and both directions share one schedule for each card.',
+    },
+    {
+      key: 'courseCounts',
+      title: 'See how a course is going',
+      steps: [
+        { say: 'Open a course, then open the band called Counts.', mark: 'learn.courseCounts' },
+      ],
+      forYou: 'Cards seen, cards learned, cards ready today and days studied. Days studied only goes up, and a day away never resets it.',
+    },
+    {
+      key: 'courseImport',
+      title: 'Import a course or update one',
+      steps: [
+        { say: 'Under Courses, tap Import a Course.', mark: 'learn.importCourse', stay: true },
+        { say: 'Choose an .xlsx workbook or a .json course file.' },
+        { say: 'Read what it would add or change, then tap Keep This Course.' },
+      ],
+      forYou: 'Cards match by their Card ID, so an updated file adds and changes cards without touching what you have studied. A card it no longer holds is put away with its history. The file stays on this device and travels only in your encrypted backup and sync.',
+    },
     {
       key: 'study',
       title: 'Go through a deck',

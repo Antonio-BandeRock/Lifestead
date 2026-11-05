@@ -1,0 +1,18 @@
+{
+  "deck": {
+    "id": "en-for-es",
+    "name": "English for Spanish Speakers (Inglés para hispanohablantes)",
+    "subject": "Languages",
+    "courseType": "Language course",
+    "targetLanguage": "English (US)",
+    "targetCode": "en-US",
+    "nativeLanguage": "Spanish (Mexico)",
+    "nativeCode": "es-MX",
+    "level": "Beginner to A2 (get by in daily life)",
+    "voice": "en-US (front side)",
+    "description": "One study path of 26 units for a Spanish speaker learning American English, in the order it builds. Explanations are in Spanish.",
+    "cardCount": 1516,
+    "unitCount": 26
+  },
+  "fingerprint": "h31t-lzg2wd"
+}

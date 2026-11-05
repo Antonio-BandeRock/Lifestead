@@ -41,6 +41,17 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.82.1',
+    date: '2026-11-05',
+    changes: [
+      "Interests > Learn has courses: long sets of cards studied in order, a unit at a time, with a study path that shows what is learned, ready and new in each unit.",
+      "The list puts courses for someone who reads the language the app is in first, and reorders when the app language changes. Browse All Courses shows the rest.",
+      "For each course you choose the number of new cards a day and which side comes first, and you can pick cards by unit, group, kind, status or source, or Mix what you have seen.",
+      "Hear It speaks the language being learned with a voice on the device, with no internet, and verb cards can ask you to type one form.",
+      "Import a Course reads an .xlsx workbook or a .json file. Importing it again adds and changes cards by their Card ID and keeps everything you have studied."
+    ],
+  },
+  {
     version: '1.0.81.6',
     date: '2026-11-04',
     changes: [

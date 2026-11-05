@@ -433,7 +433,7 @@ check('every deck offers Print the Deck', read0('components/LearnSection.tsx').i
   check('a deck no longer here is kept under its own line', all.decks.some((l) => l.label === 'Decks no longer here' && l.text.includes('of 1 answer.')));
   check('an answer kept before kinds were takes the kind of its card', all.kinds.some((l) => l.label === 'Match the pairs'));
   check('months run newest first by name', all.months[0].label === 'October 2026' && all.months[1].label === 'September 2026');
-  check('checks count only cards that could check', all.checks[0].text === 'The pick, gap, order or pairs matched the answer in 33% of 3 answers.', JSON.stringify(all.checks));
+  check('checks count only cards that could check', all.checks[0].text === 'The pick, gap, order, pairs or typed form matched the answer in 33% of 3 answers.', JSON.stringify(all.checks));
   check('the check against Knew It or Easily reads both', all.checks[1].text === 'The check matched the answer in 50% of 2 answers.');
   check('no answers make no lines', G.howItHasGone([], () => undefined, () => undefined).decks.length === 0);
   check('a share is a whole number', G.shareOf(1, 3) === 33 && G.shareOf(0, 0) === 0);

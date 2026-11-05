@@ -236,6 +236,10 @@ const PROJECTS_HELP: HelpSection[] = [
 
 const LEARN_HELP: HelpSection[] = [
   {
+    heading: 'Courses',
+    body: 'A course is a long set of cards studied in order, such as a language, split into units. Each course keeps your place, the number of new cards you want a day and your settings, and you can have several going at once. Cards you have recalled on two separate days count toward Things You Now Know, the same as a deck.',
+  },
+  {
     heading: 'What this is for',
     body: 'Decks of cards gone through a few at a time. Read the question, answer it in your head, turn the card over and say how it went. Most cards are about how to weigh a claim: what kind of study it rests on and what a headline leaves out.',
   },

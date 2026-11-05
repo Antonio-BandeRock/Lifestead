@@ -140,3 +140,6 @@ modules/*/android/build/
 desktop/whisper/
 # The Google Drive desktop client, copied in by desktop/copy-google-oauth.js.
 desktop/google-oauth-desktop.json
+
+# Course workbooks: scripts/build_course_files.js turns them into assets/courses/.
+assets/decks/

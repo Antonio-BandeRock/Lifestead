@@ -6,17 +6,17 @@ import { getDatabase } from './db';
 import { localDayOf } from './interests';
 import type { GoneReview } from './learnHowItHasGone';
 import { LEARN_KINDS, type LearnKind } from './learnKinds';
-import { readLearnGrade, type LearnGrade, type LearnReview } from './learnSchedule';
+import { KNOWN_AFTER_DAYS, readLearnGrade, type LearnGrade, type LearnReview } from './learnSchedule';
 
 function newId(): string {
   return `learn_review_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 }
 
-/** Every answer ever kept, which is what both the schedule and things you now know are worked out from. */
+/** Every answer kept on a deck, which is what both the schedule and things you now know are worked out from. A course's answers are read through lib/learnCoursesDb.ts. */
 export async function listLearnReviews(): Promise<LearnReview[]> {
   const db = await getDatabase();
   const rows = await db.getAllAsync<{ cardId: string; day: string; grade: string; answeredAt: string }>(
-    'SELECT card_id AS cardId, day, grade, answered_at AS answeredAt FROM learn_reviews ORDER BY answered_at',
+    "SELECT card_id AS cardId, day, grade, answered_at AS answeredAt FROM learn_reviews WHERE kind IS NOT 'course' ORDER BY answered_at",
   );
   return rows.map((row) => ({ ...row, grade: readLearnGrade(row.grade) }));
 }
@@ -32,9 +32,19 @@ export async function listGoneReviews(): Promise<GoneReview[]> {
     cardId: row.cardId,
     day: row.day,
     grade: readLearnGrade(row.grade),
-    kind: row.kind && (LEARN_KINDS as string[]).includes(row.kind) ? (row.kind as LearnKind) : null,
+    kind: row.kind === 'course' ? 'course' : row.kind && (LEARN_KINDS as string[]).includes(row.kind) ? (row.kind as LearnKind) : null,
     matched: row.matched === null || row.matched === undefined ? null : row.matched === 1,
   }));
+}
+
+/** Course cards known by the same test as a deck's: recalled on two separate days. Counted in the database, so a long course never has to be read to say a number. */
+export async function countCourseKnown(): Promise<number> {
+  const db = await getDatabase();
+  const row = await db.getFirstAsync<{ n: number }>(
+    "SELECT COUNT(*) AS n FROM (SELECT 1 FROM learn_reviews WHERE kind = 'course' AND grade IN ('withEffort', 'knewIt', 'easily') GROUP BY deck_id, card_id HAVING COUNT(DISTINCT day) >= ?)",
+    KNOWN_AFTER_DAYS,
+  );
+  return row?.n ?? 0;
 }
 
 /** Keeps one answer. Answers are never changed or removed. */
@@ -42,7 +52,7 @@ export async function addLearnReview(
   deckId: string,
   cardId: string,
   grade: LearnGrade,
-  kind: LearnKind | null = null,
+  kind: LearnKind | 'course' | null = null,
   matched: boolean | null = null,
 ): Promise<LearnReview> {
   const db = await getDatabase();

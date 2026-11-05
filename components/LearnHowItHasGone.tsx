@@ -10,6 +10,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
 import type { LearnDeck } from '../lib/learnDecks';
+import { listCourses } from '../lib/learnCoursesDb';
 import { listGoneReviews } from '../lib/learnDb';
 import { howItHasGone, type GoneLine, type HowItHasGone } from '../lib/learnHowItHasGone';
 import { t } from '../lib/i18n';
@@ -20,9 +21,11 @@ type Props = {
   decks: LearnDeck[];
   /** How many answers are kept, so an open page reads again after a sitting. */
   answers: number;
+  /** One course's screen: only that course's answers, and no band by deck. */
+  onlyDeck?: string;
 };
 
-export function LearnHowItHasGone({ decks, answers }: Props) {
+export function LearnHowItHasGone({ decks, answers, onlyDeck }: Props) {
   const walkMark = useWalkMark();
   const [open, setOpen] = useState(false);
   const [figures, setFigures] = useState<HowItHasGone | null>(null);
@@ -30,10 +33,11 @@ export function LearnHowItHasGone({ decks, answers }: Props) {
   useEffect(() => {
     if (!open) return;
     let live = true;
-    void listGoneReviews()
-      .then((reviews) => {
+    void Promise.all([listGoneReviews(), listCourses().catch(() => [])])
+      .then(([allReviews, courses]) => {
         if (!live) return;
-        const deckTitle = (id: string) => decks.find((deck) => deck.id === id)?.title;
+        const reviews = onlyDeck ? allReviews.filter((review) => review.deckId === onlyDeck) : allReviews;
+        const deckTitle = (id: string) => decks.find((deck) => deck.id === id)?.title ?? courses.find((course) => course.deck.id === id)?.deck.name;
         const cardById = (id: string) => {
           for (const deck of decks) {
             const card = deck.cards.find((c) => c.id === id);
@@ -52,7 +56,7 @@ export function LearnHowItHasGone({ decks, answers }: Props) {
     return () => {
       live = false;
     };
-  }, [open, decks, answers]);
+  }, [open, decks, answers, onlyDeck]);
 
   if (!open) {
     return (
@@ -76,10 +80,10 @@ export function LearnHowItHasGone({ decks, answers }: Props) {
       {figures === null ? (
         <Text style={styles.caption}>Reading your answers…</Text>
       ) : figures.total === 0 ? (
-        <Text style={styles.body}>There are no answers yet. Once you go through a deck, the shares appear here.</Text>
+        <Text style={styles.body}>{onlyDeck ? 'There are no answers yet. Once you go through some cards, the shares appear here.' : 'There are no answers yet. Once you go through a deck, the shares appear here.'}</Text>
       ) : (
         ([
-          ['By deck', figures.decks],
+          ['By deck', onlyDeck ? [] : figures.decks],
           ['By kind of card', figures.kinds],
           ['By month', figures.months],
           ['Where a card could check', figures.checks],

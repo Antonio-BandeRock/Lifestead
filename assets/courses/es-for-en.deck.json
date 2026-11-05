@@ -1,0 +1,18 @@
+{
+  "deck": {
+    "id": "es-for-en",
+    "name": "Spanish for English Speakers",
+    "subject": "Languages",
+    "courseType": "Language course",
+    "targetLanguage": "Spanish (Mexico)",
+    "targetCode": "es-MX",
+    "nativeLanguage": "English (US)",
+    "nativeCode": "en-US",
+    "level": "Beginner to A2 (get by in daily life)",
+    "voice": "es-MX (front side)",
+    "description": "One study path of 26 units: six lessons of a Spanish class plus everything needed to get by in Mexico, in the order it builds.",
+    "cardCount": 1977,
+    "unitCount": 26
+  },
+  "fingerprint": "n54g-187ch7z"
+}

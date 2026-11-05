@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Lifestead course file",
+  "description": "One course in Learn. A language course names a pair of languages by their BCP 47 codes; a course on any other subject may leave the language fields empty. lib/learnCourseFile.ts checks every file against the same rules, and also that seq runs from 1 with no gaps and that every card id is unique and starts with the deck id and a hyphen.",
+  "type": "object",
+  "required": ["schema", "deck", "cards"],
+  "properties": {
+    "schema": { "const": 1 },
+    "deck": {
+      "type": "object",
+      "required": ["id", "name", "subject", "courseType", "targetLanguage", "targetCode", "nativeLanguage", "nativeCode", "level", "voice", "description", "cardCount", "unitCount"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*$" },
+        "name": { "type": "string", "minLength": 1 },
+        "subject": { "type": "string", "minLength": 1 },
+        "courseType": { "type": "string" },
+        "targetLanguage": { "type": "string" },
+        "targetCode": { "type": "string" },
+        "nativeLanguage": { "type": "string" },
+        "nativeCode": { "type": "string" },
+        "level": { "type": "string" },
+        "voice": { "type": "string" },
+        "description": { "type": "string" },
+        "cardCount": { "type": "integer", "minimum": 1 },
+        "unitCount": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "cards": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "seq", "unit", "unitName", "group", "type", "status", "source", "target", "native", "exampleTarget", "exampleNative", "remember"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1, "description": "Stable and unique. All progress is keyed on it." },
+          "seq": { "type": "integer", "minimum": 1, "description": "New cards are introduced strictly in this order." },
+          "unit": { "type": "integer", "minimum": 1 },
+          "unitName": { "type": "string" },
+          "group": { "type": "string" },
+          "type": { "type": "string", "description": "Rule, Word, Phrase, Set, Contrast pair or Verb. Any other kind draws as a plain card." },
+          "status": { "enum": ["Core", "Recognize"] },
+          "source": { "type": "string" },
+          "target": { "type": "string", "minLength": 1 },
+          "native": { "type": "string", "minLength": 1 },
+          "exampleTarget": { "type": "string" },
+          "exampleNative": { "type": "string" },
+          "remember": { "type": "string" }
+        }
+      }
+    }
+  }
+}

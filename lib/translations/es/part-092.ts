@@ -12,7 +12,7 @@ export const PART: Readonly<Record<string, string>> = {
  "{share}% answered With Effort, Knew It or Easily, of {answers}.": "{share}% respondidas Con esfuerzo, La sabía o Fácilmente, de {answers}.",
  "Decks no longer here": "Mazos que ya no están",
  "Cards with a check": "Tarjetas con comprobación",
- "The pick, gap, order or pairs matched the answer in {share}% of {answers}.": "La elección, el espacio, el orden o los pares coincidieron con la respuesta en {share}% de {answers}.",
+ "The pick, gap, order, pairs or typed form matched the answer in {share}% of {answers}.": "La elección, el espacio, el orden, los pares o la forma escrita coincidieron con la respuesta en {share}% de {answers}.",
  "When you said Knew It or Easily": "Cuando dijiste La sabía o Fácilmente",
  "The check matched the answer in {share}% of {answers}.": "La comprobación coincidió con la respuesta en {share}% de {answers}.",
  "See how your answers have gone": "Ver cómo te ha ido con tus respuestas",

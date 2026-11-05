@@ -15,6 +15,7 @@ import {
 import { useActiveInputControls } from './ActiveInputContext';
 import { useKeyboardLift } from './KeyboardLift';
 import type { DropdownOption } from './Dropdown';
+import { CourseText } from './CourseText';
 import { useOverlay } from './OverlayContext';
 
 // Replaces components/WheelPicker.tsx entirely, 2026-08-01, the same day
@@ -199,6 +200,7 @@ export const PopoverSelect = memo(function PopoverSelect({
   groundSurface = false,
   openAbove = false,
   openBelow = false,
+  asWritten = false,
   onOpenChange,
   markRef,
 }: {
@@ -255,6 +257,8 @@ export const PopoverSelect = memo(function PopoverSelect({
   // both); openAbove wins if a future caller ever sets both by mistake,
   // see menuPosition's own resolution order below.
   openBelow?: boolean;
+  /** The options are somebody's words (a course's groups, say), so they are drawn as written and never looked up in the language's table. */
+  asWritten?: boolean;
   // 2026-08-14, a real, new, testable hypothesis for the still-open
   // "row tap takes 1-15 real, variable seconds to register" freeze --
   // confirmed via direct question that this ONLY happens on Nutrient
@@ -499,9 +503,13 @@ export const PopoverSelect = memo(function PopoverSelect({
                         : undefined
                     }
                   >
-                    <Text style={[styles.rowText, isRowSelected ? styles.rowTextSelected : null]}>
-                      {option.label}
-                    </Text>
+                    {asWritten ? (
+                      <CourseText style={[styles.rowText, isRowSelected ? styles.rowTextSelected : null]}>{option.label}</CourseText>
+                    ) : (
+                      <Text style={[styles.rowText, isRowSelected ? styles.rowTextSelected : null]}>
+                        {option.label}
+                      </Text>
+                    )}
                   </TouchableOpacity>
                 );
               })}
@@ -633,9 +641,13 @@ export const PopoverSelect = memo(function PopoverSelect({
       onPress={openMenu}
       activeOpacity={0.7}
     >
-      <Text style={[styles.fieldText, selectedLabel ? { color: colors.textOnButton } : styles.fieldTextPlaceholder]}>
-        {selectedLabel ?? placeholder}
-      </Text>
+      {asWritten && selectedLabel ? (
+        <CourseText style={[styles.fieldText, { color: colors.textOnButton }]}>{selectedLabel}</CourseText>
+      ) : (
+        <Text style={[styles.fieldText, selectedLabel ? { color: colors.textOnButton } : styles.fieldTextPlaceholder]}>
+          {selectedLabel ?? placeholder}
+        </Text>
+      )}
       <Text style={styles.chevron}>{'▾'}</Text>
     </TouchableOpacity>
   );

@@ -25,6 +25,7 @@ const root = path.resolve(__dirname, '..');
 // every bundle whether the module is or not. Each is checked against the
 // tables below.
 const DEVELOPER_ONLY = [
+  ['lib/learnCourseDevOnly.ts', 'es-for-en-16-llamandose'],
   ['components/DeveloperToolsCard.tsx', '[captureSuggest] could not run the check'],
   ['components/DeveloperToolsCard.tsx', '[tellClaude] could not clear the notes'],
   ['components/TellClaudeHost.tsx', '[tellClaude] could not write the wording edit'],

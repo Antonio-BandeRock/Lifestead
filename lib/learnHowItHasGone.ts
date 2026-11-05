@@ -18,12 +18,13 @@ import type { LearnCard } from './learnDecks';
 import { isRecalled, type LearnGrade } from './learnSchedule';
 
 /** An answer as How It Has Gone reads it: matched is whether a check agreed, null where the card had none. */
-export type GoneReview = { deckId: string; cardId: string; day: string; grade: LearnGrade; kind: LearnKind | null; matched: boolean | null };
+export type GoneKind = LearnKind | 'course';
+export type GoneReview = { deckId: string; cardId: string; day: string; grade: LearnGrade; kind: GoneKind | null; matched: boolean | null };
 
 type Translate = (text: string, values?: Record<string, string | number>) => string;
 const plain: Translate = (text, values) => (values ? text.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? '')) : text);
 
-export const KIND_NAMES: Record<LearnKind, string> = {
+export const KIND_NAMES: Record<GoneKind, string> = {
   flip: 'Question and answer',
   choice: 'Pick one',
   estimate: 'Best guess',
@@ -32,6 +33,7 @@ export const KIND_NAMES: Record<LearnKind, string> = {
   order: 'Put in order',
   pairs: 'Match the pairs',
   explain: 'In your words',
+  course: 'Course cards',
 };
 
 /** A whole-number share, never a decimal that reads as more exact than a handful of answers can be. */
@@ -76,12 +78,12 @@ export function byDeck(reviews: GoneReview[], deckTitle: (id: string) => string 
 }
 
 export function byKind(reviews: GoneReview[], t: Translate = plain): GoneLine[] {
-  const groups = new Map<LearnKind, GoneReview[]>();
+  const groups = new Map<GoneKind, GoneReview[]>();
   for (const review of reviews) {
     const kind = review.kind ?? 'flip';
     groups.set(kind, [...(groups.get(kind) ?? []), review]);
   }
-  return (Object.keys(KIND_NAMES) as LearnKind[]).filter((kind) => groups.has(kind)).map((kind) => ({ label: t(KIND_NAMES[kind]), text: recalledLine(groups.get(kind)!, t) }));
+  return (Object.keys(KIND_NAMES) as GoneKind[]).filter((kind) => groups.has(kind)).map((kind) => ({ label: t(KIND_NAMES[kind]), text: recalledLine(groups.get(kind)!, t) }));
 }
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -111,7 +113,7 @@ export function checksLines(reviews: GoneReview[], t: Translate = plain): GoneLi
   const lines: GoneLine[] = [
     {
       label: t('Cards with a check'),
-      text: t('The pick, gap, order or pairs matched the answer in {share}% of {answers}.', { share: shareOf(agreed, checked.length), answers: answersWord(checked.length, t) }),
+      text: t('The pick, gap, order, pairs or typed form matched the answer in {share}% of {answers}.', { share: shareOf(agreed, checked.length), answers: answersWord(checked.length, t) }),
     },
   ];
   const sure = checked.filter((review) => review.grade === 'knewIt' || review.grade === 'easily');

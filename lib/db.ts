@@ -10901,6 +10901,33 @@ async function runDatabaseInitialization() {
         updated_at TEXT NOT NULL DEFAULT (datetime('now'))
       );
       CREATE INDEX IF NOT EXISTS idx_learn_my_cards_deck ON learn_my_cards(deck_id);
+      -- Interests > Learn, courses (2026-11-05). A bundled course needs no row in
+      -- learn_courses, since its cards come from the app; an imported one keeps
+      -- its cards here so it travels in sync and backup. learn_course_state is the
+      -- person's settings for a course of either kind. Answers are in learn_reviews,
+      -- with deck_id the course, card_id the Card ID and kind 'course'.
+      CREATE TABLE IF NOT EXISTS learn_courses (
+        id TEXT PRIMARY KEY NOT NULL,
+        source TEXT NOT NULL DEFAULT 'import',
+        deck_json TEXT NOT NULL,
+        cards_json TEXT NOT NULL,
+        archived_json TEXT NOT NULL DEFAULT '[]',
+        fingerprint TEXT NOT NULL DEFAULT '',
+        retired_at TEXT,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE TABLE IF NOT EXISTS learn_course_state (
+        id TEXT PRIMARY KEY NOT NULL,
+        active INTEGER NOT NULL DEFAULT 0,
+        direction TEXT NOT NULL DEFAULT 'targetFirst',
+        daily_new_limit INTEGER NOT NULL DEFAULT 15,
+        opened_units TEXT NOT NULL DEFAULT '[]',
+        type_answer INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL DEFAULT (datetime('now')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_learn_reviews_deck ON learn_reviews(deck_id);
     `);
     // Interests > Days Until (2026-10-30): a free counter can belong to an
     // interest. Null for every counter that belongs to nothing.

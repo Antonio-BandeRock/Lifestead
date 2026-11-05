@@ -778,6 +778,15 @@ function RootStack() {
           headerTintColor: colors.textPrimary,
         }}
       />
+      <Stack.Screen
+        name="learn-course"
+        options={{
+          headerShown: true,
+          title: 'Course',
+          headerStyle: { backgroundColor: colors.background },
+          headerTintColor: colors.textPrimary,
+        }}
+      />
       {/* food-items and food-item-detail were Stack screens here
           from 2026-08-01 to 2026-09-13; they are Food's own lenses
           now (components/FoodItemsView.tsx and
