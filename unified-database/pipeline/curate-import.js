@@ -164,6 +164,36 @@ function main() {
     }
   }
 
+  // A cooked kohlrabi hidden by rule has no type of its own, yet the kept kohlrabi
+  // says what it is. Longest kept name found in the hidden row's words wins.
+  const wordsOf = (s) => ` ${String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim().split(' ').map((w) => w.replace(/(es|s)$/, '')).join(' ')} `;
+  const keptNames = [...new Map(out.filter((d) => d.name).map((d) => [wordsOf(d.name), d.type])).entries()]
+    .filter(([w, type]) => w.trim().length > 2 && type !== 'other')
+    .sort((a, b) => b[0].length - a[0].length);
+  const LAST_RESORT = [
+    ['water', /\bwater\b/i], ['processed_meat', /\b(sausage|wurst|kamaboko|pudding|schnitzel|salami|meat|loaf)\b/i],
+    ['fish', /\b(mullet|bream|turbot|flounder|saithe|mulloway|fish|seafood)\b/i],
+    ['sweetener', /\bsweetener/i], ['prepared_dish', /\b(soup|pizza|stew|dish|meal|burger)\b/i],
+    ['cultured_dairy', /\b(yogh?urt|yogourt)\b/i], ['milk_cream', /\b(milk|cream|creme)\b/i],
+  ];
+  let typed = 0;
+  for (const d of out) {
+    if (d.status !== 'hide' || d.type !== 'other') continue;
+    const en = d.row.en || d.row.orig || '';
+    const texts = [wordsOf(en.split(',')[0]), wordsOf(en)];
+    let found = null;
+    for (const t of texts) {
+      const hit = keptNames.find(([w]) => t.includes(w));
+      if (hit) { found = hit[1]; break; }
+    }
+    if (!found) {
+      const last = LAST_RESORT.find(([, re]) => re.test(en));
+      if (last) found = last[0];
+    }
+    if (found) { d.type = found; typed++; }
+  }
+  console.log(`hidden rows given a type from the kept names: ${typed}`);
+
   const tally = { hide: 0, show: 0, compare: 0, keep: 0 };
   out.forEach((d) => {
     tally[d.status]++;

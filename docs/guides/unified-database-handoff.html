@@ -347,6 +347,7 @@
     <div class="stat"><div class="n">750</div><div class="label">groups with 2+ members</div></div>
     <div class="stat"><div class="n">242</div><div class="label">classifications reviewed by a person</div></div>
   </div>
+  <p class="note"><strong>2026-11-06: these classification and match figures are now the older layer.</strong> The owner restarted curation from a blank view, and the decisions sit in a new table, <code>food_curation</code>: 2,073 foods listed under one short search name, 6,293 other rows held behind them for comparison, 24,341 hidden. See <a href="https://claude.ai/artifact/TK8WN9CaUE7ifYUXeEABC1">the curation report</a>.</p>
   <p class="note">The earlier version of this page said 757 groups with 2+ members and 13,764 with one. The database says 750 and 13,771. One group is flagged for splitting. Names: 26,916 verified from the source, 5,780 machine translated, 11 corrected.</p>
 
   <div class="table-scroll">
@@ -400,7 +401,7 @@
   <h2>The review tool</h2>
   <p>A published page: search and filter every classification and match group, override a call, flag a group for splitting, and export decisions as a JSON file that <code>apply-audit-decisions.js</code> applies to the database.</p>
   <p><a href="https://claude.ai/artifact/B6bHzhKpe7L4PH99yW7zQc">Open the Specimen Review</a></p>
-  <p class="note">Last published 2026-08-11. Review has started and is nowhere near finished: 242 classification overrides, 54 match-group member removals and 1 split flag applied, against 32,707 records. Ask before republishing this page, since a person may be partway through a review in it.</p>
+  <p class="note">Last published 2026-08-11. Review has started and is nowhere near finished: 242 classification overrides, 54 match-group member removals and 1 split flag applied, against 32,707 records. Ask before republishing this page, since a person may be partway through a review in it. Curation no longer runs through this page: its decisions were set aside by the owner's restart on 2026-11-06, and they stay in <code>whole_food_classifications</code>, undeleted.</p>
 
   <h2>How the classification rules got this far</h2>
   <p><code>classify.js</code> started from earlier keyword lists and went through about 15 rounds of refinement, from bug reports and from scans of random samples out of the review queue. The discipline throughout: every proposed fix is checked against every matching record in the database before being trusted. Two examples:</p>
@@ -408,7 +409,7 @@
     <li>One branded soy-protein "kebab" wrongly classed as a whole food led to a family of gaps: gravy, stuffed and filled dishes, "meat alternative" phrasing, mycoprotein and branded meat analogs. About 200 records were corrected in one pass, each confirmed as wrong first.</li>
     <li>A report that "Batavia, crue" had become "Batavia, flood" led to a scan of every machine-translated French name and 11 false-friend errors, where a French word has two meanings and the wrong one was picked. A correction mechanism now exists for that whole class.</li>
   </ul>
-  <p>The last change to the database was adding 8,712 lycopene values on 2026-08-12. The full history of every round is in <code>unified-database/README.md</code> (over 1,700 lines), which remains the authoritative record; this page is an orientation.</p>
+  <p>The last change to the source data was adding 8,712 lycopene values on 2026-08-12; the last change to the database is the <code>food_curation</code> table on 2026-11-06. The full history of every round is in <code>unified-database/README.md</code> (over 1,700 lines), which remains the authoritative record; this page is an orientation.</p>
 
   <h2>The phased plan</h2>
   <ul class="phase-list">
@@ -422,11 +423,11 @@
     </li>
     <li class="phase progress">
       <div class="dot">3</div>
-      <div><span class="title">Phase 3: whole-food classification review</span><span class="tag progress">Standing next step</span><div class="desc">Tooling is built. A person still has to review the 2,953 unresolved, plus any of the 29,754 classified that deserve a second look. Unmoved since August.</div></div>
+      <div><span class="title">Phase 3: whole-food classification review</span><span class="tag progress">First pass done, owner's calls open</span><div class="desc">Redone from a blank view on 2026-11-06 against the owner's filter: rules hid 20,370 rows and readers decided the other 12,337. Written to <code>food_curation</code>, read by <code>pipeline/curate-import.js</code> and reported by <code>curate-report.js</code>. The owner still has to answer the questions in <a href="https://claude.ai/artifact/TK8WN9CaUE7ifYUXeEABC1">the report</a>, white sugar first.</div></div>
     </li>
     <li class="phase progress">
       <div class="dot">4</div>
-      <div><span class="title">Phase 4: cross-source match review</span><span class="tag progress">Standing next step</span><div class="desc">Same tool. 750 matched groups and 13,771 single-member groups await confirmation. Unmoved since August.</div></div>
+      <div><span class="title">Phase 4: cross-source match review</span><span class="tag progress">First pass done, not confirmed by a person</span><div class="desc">The same pass grouped kept rows under one listing name, with a USDA row in front where one exists (1,076 foods) and the first country that has it otherwise (997). <code>equal_to_raw_id</code> holds the link. Those equalities came from readers and rest mostly on names, so they need checking before anyone compares countries on them.</div></div>
     </li>
     <li class="phase pending">
       <div class="dot">5</div>
@@ -472,7 +473,7 @@
     <li>Read <code>unified-database/README.md</code> in full for the dated history.</li>
     <li>Look at the data with <code>sqlite3 -readonly</code>. The tool is at <code>C:\Users\TonyR\AppData\Local\Android\Sdk\platform-tools\sqlite3.exe</code>.</li>
     <li>To confirm the environment, run these five, which stayed off the database on 2026-11-06: <code>node pipeline/classify.test.js</code>, <code>match.test.js</code>, <code>ingest.test.js</code>, <code>apply-audit-decisions.test.js</code> and <code>apply-translation-corrections.test.js</code>, from <code>unified-database/</code>. <strong>Do not run the ingest commands in the README's "Running what exists today" section just to test.</strong> They write to the database. <code>init-db.js --force</code> deletes it.</li>
-    <li>Open the <a href="https://claude.ai/artifact/B6bHzhKpe7L4PH99yW7zQc">review tool</a> before assuming anything about scope.</li>
+    <li>Open the <a href="https://claude.ai/artifact/TK8WN9CaUE7ifYUXeEABC1">curation report</a> before assuming anything about scope. It replaced the older <a href="https://claude.ai/artifact/B6bHzhKpe7L4PH99yW7zQc">review tool</a> as the place to look.</li>
     <li>After any change to either database, run <code>node scripts/backup_reference_dbs.js</code>, and never <code>git add</code> either file.</li>
     <li>Re-ingesting the legacy sources needs <code>ClaudeWork/unified_food_database_v3_full.sqlite.zip</code> at the repo root. It was there on 2026-11-06.</li>
   </ol>

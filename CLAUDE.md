@@ -271,9 +271,9 @@ Implementation: `lib/healingStage.ts`, `lib/healingStageAdvisory.ts`, `lib/condi
 
 **Why:** the current reference DB came from a one-time filter script with no testable rules. The pipeline rebuilds it reproducibly, discarding nothing, with a versioned rule engine and human review through a published audit tool.
 
-**Status (drifts, so verify via `sqlite3.exe unified_foods.sqlite`):** 9 sources ingested, classified and matched; review barely started. Audit tool: https://claude.ai/code/artifact/51c33d40-cbd9-4468-90b0-e1e460fd5b1d
+**Status (drifts, so verify via `sqlite3.exe unified_foods.sqlite`):** 9 sources ingested. Curation restarted 2026-11-06 into `food_curation`: 2,073 foods shown, 6,293 held to compare, 24,341 hidden. [Report and open questions](https://claude.ai/artifact/TK8WN9CaUE7ifYUXeEABC1).
 
-**Phases:** 1 and 2 done. **3 and 4 (human review) are the standing next step.** 5 (merge curated data), 6 (integrity verification) and 7 (atomic swap, gated on `REFERENCE_DB_VERSION`) not started. Nothing here is urgent.
+**Phases:** 1 and 2 done. **3 and 4 have a first pass; the owner's questions in the report are the next step.** 5 (merge curated data), 6 (integrity verification) and 7 (atomic swap, gated on `REFERENCE_DB_VERSION`) not started. Nothing here is urgent.
 
 **If picking this up fresh:** read `unified-database/README.md` in full first.
 
@@ -299,7 +299,7 @@ Each item's full wording is in the archive; rows live in the Project Tracker.
 8. **Sticky group headers spot-check** on the largest categories (Veg, Mixed, Meat).
 9. **A "home brew" ingredient-based path for beer, wine and spirits**, closer to Fermentation Builder than to barcodes. No design work.
 10. **The synthetic "Choline Bitartrate (Supplement Powder)" food row**: proposed, deliberately not added.
-11. **The unified database's Phase 3 and 4 human review**, the standing next step on that track (see its section above).
+11. **The owner's questions on the unified database's curation report**, the next step on that track (see its section above).
 12. **6-Week Meal Plan on-device walkthrough**; whether to extend past 6 weeks has not been asked.
 13. **Subtopic-sectioning the 19 condition pages' topics**: pull per-topic counts before designing any split.
 14. **Wiring conditions, allergies and diet through every tool:** still open for Today's Advisories, and whether builders' embedded `FoodLookup` gains the For You card (ask first).

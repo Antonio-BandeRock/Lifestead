@@ -15,6 +15,16 @@ replacement.
 never reads from `unified_foods.sqlite`. No app screen changes. That's
 deliberate — see "Safety" below.
 
+## Status: curation restarted from a blank view, 2026-11-06
+
+The owner's filter, with their changes: keep cheeses, honey, salts, enriched flour and tortilla mix; a kept food that equals a USDA item is marked equal to it and hidden differently, for comparing countries; everything else is hidden. Decisions are in a new table, `food_curation` (`show`, `compare`, `hide`, plus `listing_name`, `food_type`, `equal_to_raw_id`, `doubt_note`), and the older `whole_food_classifications` is left as it was.
+
+Result: 32,707 rows; 2,073 foods shown, 6,293 rows held for comparison, 24,341 hidden. Rules decided 20,370 hides, readers the other 12,337. Report: https://claude.ai/artifact/TK8WN9CaUE7ifYUXeEABC1
+
+Order to rerun, from a work folder holding the rule and reader files: `curate-first-pass.js`, `curate-batches.js`, the readers, `curate-corrections.js`, `curate-rescue.js`, `curate-import.js --write`, `curate-report.js`, then `scripts/backup_reference_dbs.js`. The work folder is session scratch and is not kept, so a rerun means reading again; the decisions themselves are in the table.
+
+Known limits: no source has an ingredient list, so most decisions rest on the name and nutrient values. An audit of hidden rows in the kept types found 51 mistakes, all fixed; other types were not audited row by row, and rule-hidden rows have word-guessed types.
+
 ## Status: lycopene added as a real, tracked nutrient — direct request, alongside the identical addition to the live app database — real data actually re-ingested, not just mapped in code
 
 Direct request: "Please research the use of lycopene in relation to prostate health... if we aren't yet tracking lycopene from the USDA data, please modify the app database to include it, and also modify the new future replacement database to also include the change." Confirmed first, not assumed: no lycopene tag existed anywhere in `sources/legacy-v3-shared.js`'s own `NUTRIENT_TAG_MAP` before this.

@@ -1,0 +1,164 @@
+<title>Whole Foods Curation</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@90,500;90,700;100,400;100,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a ledger read top to bottom. A header with the three totals, a tab row, and one view at a time.
+   Wide count tables scroll inside their own box. Everything stacks at phone width. */
+:root{--bg:#f4f6f3;--panel:#ffffff;--sunk:#e9edE7;--fg:#1a2420;--muted:#5a6a62;--line:#d3dbd4;--accent:#17694c;--accent-fg:#ffffff;--hide:#9a4a2f;--hide-rgb:154,74,47;--keep-rgb:23,105,76;--ask:#7a5a00;--ask-bg:#fbf2d0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121815;--panel:#1a221e;--sunk:#222c27;--fg:#e4ebe6;--muted:#9aaaa1;--line:#2f3b35;--accent:#5cc79d;--accent-fg:#0d1411;--hide:#e39a7f;--hide-rgb:227,154,127;--keep-rgb:92,199,157;--ask:#ecca6b;--ask-bg:#342c10;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121815;--panel:#1a221e;--sunk:#222c27;--fg:#e4ebe6;--muted:#9aaaa1;--line:#2f3b35;--accent:#5cc79d;--accent-fg:#0d1411;--hide:#e39a7f;--hide-rgb:227,154,127;--keep-rgb:92,199,157;--ask:#ecca6b;--ask-bg:#342c10;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:400 15px/1.5 Archivo,system-ui,sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px;display:flex;flex-direction:column;gap:22px}
+h1{font-size:30px;line-height:1.15;font-weight:700;font-stretch:90%;margin:0;text-wrap:balance}
+h2{font-size:21px;line-height:1.25;font-weight:700;font-stretch:90%;margin:0;text-wrap:balance}
+h3{font-size:15px;line-height:1.3;font-weight:600;margin:0}
+p{margin:0;max-width:72ch}
+.muted{color:var(--muted)}.small{font-size:13px}
+.num{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.totals{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.totals div{background:var(--panel);padding:14px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.totals b{font:500 26px/1.1 "IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding-block:8px;z-index:5;border-bottom:1px solid var(--line)}
+.tabs a{color:var(--fg);text-decoration:none;padding:6px 12px;border:1px solid var(--line);background:var(--panel);font-weight:600;font-size:14px}
+.tabs a[aria-current="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section{display:flex;flex-direction:column;gap:16px;min-width:0}
+.block{display:flex;flex-direction:column;gap:10px;min-width:0}
+.scroll{overflow-x:auto;border:1px solid var(--line);background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:5px 9px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{background:var(--sunk);font-weight:600;white-space:nowrap}
+td.n,th.n{text-align:right;font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+tfoot td{font-weight:600;background:var(--sunk)}
+th.stick,td.stick{position:sticky;left:0;background:var(--panel);z-index:1}
+thead th.stick,tfoot td.stick{background:var(--sunk)}
+.asks{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line)}
+.ask{background:var(--panel);padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+input[type=search],select{font:inherit;padding:7px 10px;border:1px solid var(--line);background:var(--panel);color:var(--fg);min-width:0;max-width:100%}
+input[type=search]{flex:1 1 240px}
+label.check{display:flex;gap:6px;align-items:center;font-size:14px}
+.foodlist{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--panel)}
+details.food{border-bottom:1px solid var(--line)}
+details.food summary{cursor:pointer;padding:7px 12px;display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,1.1fr) minmax(0,1.6fr);gap:10px;list-style:none;align-items:baseline}
+details.food summary::-webkit-details-marker{display:none}
+details.food .body{padding:4px 12px 12px;display:flex;flex-direction:column;gap:8px;background:var(--sunk)}
+.fname{font-weight:600}
+.flag{color:var(--ask);background:var(--ask-bg);padding:0 5px;font-size:12px;font-weight:600;white-space:nowrap}
+.q{color:var(--ask);background:var(--ask-bg);padding:6px 8px;font-size:13.5px}
+.typehead{padding:8px 12px;background:var(--sunk);font-weight:600;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;position:sticky;top:0}
+button{font:inherit;font-weight:600;padding:7px 14px;background:var(--panel);color:var(--fg);border:1px solid var(--line);cursor:pointer}
+@media (max-width:640px){details.food summary{grid-template-columns:1fr}h1{font-size:25px}.tabs{position:static}}
+</style>
+<div class="wrap">
+  <header class="block">
+    <p class="muted small">Lifestead unified food database, curation from a blank start, 2026-11-06</p>
+    <h1>Which foods stay, and which are hidden</h1>
+    <p id="lede"></p>
+  </header>
+  <div class="totals" id="totals"></div>
+  <nav class="tabs" id="tabs" aria-label="Report views"></nav>
+  <main id="view"></main>
+</div>
+<script>
+const D=/*DATA*/null;
+const fmt=n=>(n||0).toLocaleString('en-US');
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const TYPE={vegetable:'Vegetables',fish:'Fish',fruit:'Fruit',cheese:'Cheese',organ_meat:'Organ meat',flour:'Flour and meal',game:'Game',herb_spice:'Herbs and spices',beef:'Beef',poultry:'Poultry',grain:'Grains',juice:'Juice',legume:'Beans and other legumes',fungi:'Mushrooms and fungi',shellfish:'Shellfish',cultured_dairy:'Yogurt and cultured dairy',lamb_mutton:'Lamb, mutton, goat',nut:'Nuts',pork:'Pork',plant_oil:'Plant oils',milk_cream:'Milk and cream',butter_animal_fat:'Butter and animal fat',seaweed:'Seaweed',pasta_noodle:'Pasta and noodles',veal:'Veal',seed:'Seeds',roe:'Roe',eggs:'Eggs',starch:'Starches',vinegar_condiment:'Vinegar and condiments',sweetener:'Sweeteners',soy_ferment:'Soy ferments',tea_coffee:'Tea and coffee',cocoa:'Cocoa',other:'Other',leavener:'Leaveners',salt_mineral:'Salt and minerals',prepared_dish:'Prepared dishes',baked_goods:'Baked goods',sweets_snacks:'Sweets and snacks',processed_meat:'Processed meat',soft_drink:'Soft drinks',baby_food:'Baby food',alcohol:'Alcohol',water:'Water',supplement:'Supplements'};
+const WHY_KEPT={vegetable:'Raw, frozen or naturally dried, whole or cut, nothing added. Plain traditional ferments (salt and the vegetable) stay too, which was my gap suggestion.',fish:'Raw or frozen single fish, plus traditionally dried or salted fish with nothing else in it.',fruit:'Raw, frozen or naturally dried, nothing added.',cheese:'You said keep cheeses. Natural cheese of every fat level stays; process cheese, spreads and imitations do not (see Your calls).',organ_meat:'Raw or frozen organs from a single animal.',flour:'Mechanically milled from one grain, nut or bean. Enriched flour stays because you said so, and so does Tortilla mix.',game:'Raw or frozen wild or farmed game.',herb_spice:'Pure individual herbs and spices, whole or ground, fresh or dried.',beef:'Raw or frozen cuts, nothing added.',poultry:'Raw or frozen birds, nothing added.',grain:'Whole grains, plus milled staples with nothing added (white rice, rolled oats, pearl barley), which was my gap suggestion.',juice:'Plain juice from one fruit or vegetable with nothing added. Your prompt did not cover juice; this was my gap suggestion, so it is yours to overrule.',legume:'Dried or raw beans, peas and lentils, nothing added.',fungi:'Raw or naturally dried mushrooms and other fungi.',shellfish:'Raw or frozen shellfish.',cultured_dairy:'Plain milk and culture. Flavoured or sweetened versions are hidden.',lamb_mutton:'Raw or frozen cuts, nothing added.',nut:'Raw or dried nuts, whole, chopped or blanched, nothing added.',pork:'Raw or frozen cuts, nothing added, plus plain fatback.',plant_oil:'Mechanically pressed from the fruit or seed (olive, coconut, cold-pressed), which was my gap suggestion. Solvent-extracted seed oils are hidden.',milk_cream:'Raw or pasteurized milk and cream of any animal, plus plain dried milk and whey.',butter_animal_fat:'Plain butter, ghee, lard and tallow.',seaweed:'Raw or plainly dried seaweed.',pasta_noodle:'Flour and water, or flour and egg, nothing else. This was my call and reverses easily.',veal:'Raw or frozen cuts, nothing added.',seed:'Raw or dried seeds, plus ground sesame (tahini).',roe:'Raw single-animal roe with nothing added.',eggs:'Whole eggs, whites and yolks, raw, frozen or plainly dried.',starch:'Plain starch from one plant.',vinegar_condiment:'Vinegars, a traditional ferment of one ingredient, plus fish sauce, which is flagged on Your calls.',sweetener:'Your list: honey, maple syrup and sugar, molasses, sorghum, and unrefined cane sugars (raw sugar, whole cane sugar, jaggery, cane syrup). Malt syrup is my addition.',soy_ferment:'Traditional ferments: miso, natto, tempeh, soy sauce, tamari, rice koji. Flagged on Your calls.',tea_coffee:'Dry tea, matcha, ground coffee and chicory coffee powder. Brewed drinks are hidden, which was my gap suggestion.',cocoa:'Cocoa beans, mass, butter and powder, and unsweetened baking chocolate, nothing added.',other:'Single foods that fit no other heading: coconut milk and cream, nutritional yeast, royal jelly, bee pollen.',leavener:'Your list: baking soda, cream of tartar, active dry and fresh yeast. Baker\'s ammonia is also here, and flagged on Your calls.',salt_mineral:'You said keep salts: Salt, Sea salt, and Curing salt, which is flagged on Your calls. Fortified copies sit behind Salt for comparison.'};
+const REASON={cooked:'Cooked',prepared_meal:'Prepared meal or sauce',baked_goods:'Baked goods',sweets:'Sweets and candy',canned:'Canned or jarred',processed_meat:'Processed meat',added_sugar_or_flavor:'Added sugar or flavour',fast_food:'Fast food',multi_ingredient:'Several ingredients',soft_drink:'Soft drink',baby_food:'Baby food',alcohol:'Alcohol',seed_oil:'Refined seed oil',cereal_ready:'Ready-to-eat cereal',brand:'Named brand product',substitute:'Substitute or imitation',water:'Water',smoked:'Smoked',supplement:'Supplement',other:'Other, see the row',process_cheese:'Process cheese',breakfast_cereal_or_puffed:'Puffed or breakfast grain',refined_sugar:'Refined sugar',juice_from_concentrate:'Juice from concentrate',spice_blend:'Spice blend',fermented_aged_or_salted:'Aged or heavily salted',prepared_drink:'Brewed or prepared drink',tofu_or_soy_skin:'Tofu or soy skin',reduced_fat_formula:'Reduced-fat formula',mechanically_separated:'Mechanically separated',additive:'Additive',gelatin:'Gelatin',surimi:'Surimi'};
+const tName=t=>TYPE[t]||t, rName=r=>REASON[r]||r;
+const T=D.totals;
+document.getElementById('lede').textContent=`Every one of the ${fmt(T.rows)} rows from all nine national sources started unhidden. Each row got a decision from its name, source category, Latin name, food codes and nutrient values. What stays is one searchable name per food, with every country's copy held behind it for comparison.`;
+document.getElementById('totals').innerHTML=[[T.show,'foods listed under a short search name'],[T.compare,'other country copies, hidden from search, kept to compare'],[T.hide,'rows hidden']].map(x=>`<div><b>${fmt(x[0])}</b><span class="muted small">${x[1]}</span></div>`).join('');
+
+const ASKS=[
+['White sugar is hidden, and recipes use it','Your filter drops refined sugar, so I hid it. It appears in 525 recipe ingredient rows, and commercial brown sugar in 23 more. Raw sugar and Whole cane sugar are kept and could stand in, but that changes recipes. Decide before the swap.'],
+['Tap water and all other water are hidden','Water is not a raw agricultural food, and 145 rows are hidden. Tap water appears in 1,316 recipe rows, so recipes need it to stay usable somewhere.'],
+['Seed oils are hidden, as your filter says','Canola is the largest: Rapsolja alone is in 289 recipe rows, and corn oil (Majsolja, Maisolje) in 60. Those recipes need another fat or another decision.'],
+['Process cheese is hidden even though you said keep cheeses','57 rows. I read "keep cheeses" as your "traditional cheeses (milk, salt, culture, rennet)", which process cheese is not. Spreads and imitations are hidden the same way. One word from you flips these.'],
+['Self-rising flour and cornmeal are hidden even though you said keep enriched flour','11 rows: 7 USDA cornmeals and 4 wheat flours, most of them enriched. Each has baking powder mixed in, so I treated it as a mix. Plain enriched flour stays, as "Enriched white flour", with 11 rows behind it. Tortilla mix stays, as you said.'],
+['Baking powder is hidden','Your list names soda, cream of tartar and yeast, not baking powder, which is a mix. 12 rows, and 37 recipe rows use it.'],
+['Foods I hid that cooks may expect','Tomato paste and puree, canned tomatoes, vanilla extract, prepared mustard, tofu, gelatin, roasted nuts, smoked fish and meat, nut butters with salt or sugar, agave syrup, plain canned beans. Each is a fair reading of your filter and each is easy to reverse. The recipe view shows which ones recipes use.'],
+['Soy sauce, miso, tamari and fish sauce stay, and each has more than one ingredient','Traditional ferments of soybeans or fish with salt, and sometimes grain. They fail your first test read strictly, and pass as pre-industrial pantry staples. I kept them on the second reading, and they are easy to hide.'],
+['Juice stays, and you never said so','Plain single-fruit juice is kept under my suggestion. Your filter has no line about it. Say the word and all of it goes.'],
+['Plain dried pasta stays','Flour and water, or flour and egg. Filled, flavoured, coloured and instant pasta is hidden. My call.'],
+['Foods with no USDA equal stay visible',`${fmt(T.otherAnchor)} of the ${fmt(T.show)} foods have no USDA row, such as many Japanese and German foods. You said to mark foods equal to the USDA item; you did not say what happens when there is none. I kept them as searchable, each under the first country that has it. The other ${fmt(T.usdaAnchor)} have a USDA row at the front.`],
+['Kept by the rules, and worth your eye','Pokeberry shoots and bitter almonds are single raw foods, but both are poisonous untreated, so they should not be offered as plain foods without a warning, or at all. Also: Cottonseed flour, Owl, Sparrow, Baker\'s ammonia, Curing salt (contains nitrite), Wheat gluten, Nutritional yeast, Bee pollen, Royal jelly, Shea butter, Ucuhuba butter, and salt with fluoride or folic acid. Search any of them on the Every food view.'],
+['Human milk is hidden','Five rows across sources. Not a food someone would add from a search, so I hid it without asking. Tell me if that is wrong.'],
+];
+const VIEWS={
+ask:{label:'Your calls',render:renderAsk},
+hidden:{label:'Hidden, by type',render:renderHidden},
+kept:{label:'Not hidden, and why',render:renderKept},
+foods:{label:'Every food',render:renderFoods},
+search:{label:'Search hidden rows',render:renderSearch},
+recipes:{label:'Recipes affected',render:renderRecipes},
+method:{label:'How it was done',render:renderMethod},
+};
+const tabsEl=document.getElementById('tabs'),viewEl=document.getElementById('view');
+tabsEl.innerHTML=Object.entries(VIEWS).map(([k,v])=>`<a href="#${k}" data-k="${k}">${v.label}</a>`).join('');
+function route(){const k=VIEWS[location.hash.slice(1)]?location.hash.slice(1):'ask';tabsEl.querySelectorAll('a').forEach(a=>a.setAttribute('aria-current',a.dataset.k===k?'true':'false'));viewEl.innerHTML='';const s=document.createElement('section');viewEl.appendChild(s);VIEWS[k].render(s);}
+addEventListener('hashchange',route);
+
+function matrix(rowKeys,label,get,rowName,rgb){
+  const cols=D.sources.map((_,i)=>i);
+  const rows=rowKeys.map(k=>({k,v:cols.map(c=>get(k,c)||0)})).map(r=>({...r,t:r.v.reduce((a,b)=>a+b,0)})).filter(r=>r.t>0).sort((a,b)=>b.t-a.t);
+  const max=Math.max(1,...rows.flatMap(r=>r.v));
+  const cell=n=>{if(!n)return `<td class="n muted">&middot;</td>`;const a=(0.06+0.5*Math.log(n+1)/Math.log(max+1)).toFixed(2);return `<td class="n" style="background:rgba(var(${rgb}),${a})">${fmt(n)}</td>`};
+  const foot=cols.map(c=>rows.reduce((t,r)=>t+r.v[c],0));
+  return `<div class="scroll"><table><thead><tr><th class="stick">${label}</th>${D.sources.map(s=>`<th class="n">${s}</th>`).join('')}<th class="n">All</th></tr></thead><tbody>${rows.map(r=>`<tr><td class="stick">${esc(rowName(r.k))}</td>${r.v.map(cell).join('')}<td class="n"><b>${fmt(r.t)}</b></td></tr>`).join('')}</tbody><tfoot><tr><td class="stick">All</td>${foot.map(n=>`<td class="n">${fmt(n)}</td>`).join('')}<td class="n">${fmt(foot.reduce((a,b)=>a+b,0))}</td></tr></tfoot></table></div>`;
+}
+function catTable(s){const rows=Object.entries(D.catRows[s]||{}).sort((a,b)=>b[1][0]+b[1][1]-a[1][0]-a[1][1]);return `<div class="scroll"><table><thead><tr><th>${s} category</th><th class="n">Hidden</th><th class="n">Not hidden</th></tr></thead><tbody>${rows.map(([c,v])=>`<tr><td>${esc(c)}</td><td class="n">${fmt(v[0])}</td><td class="n">${fmt(v[1])}</td></tr>`).join('')}</tbody></table></div>`;}
+function renderAsk(el){
+  el.innerHTML=`<div class="block"><h2>Decisions that are yours</h2><p>Each of these changes what ends up in the list. I made a call on each so the work could finish; none of them is final, and nothing here touches the live app.</p></div><div class="asks">${ASKS.map(a=>`<div class="ask"><h3>${esc(a[0])}</h3><p class="small">${esc(a[1])}</p></div>`).join('')}</div>`;
+}
+function renderHidden(el){
+  const hideBy=D.sources.map((_,c)=>D.types.reduce((n,t)=>n+(D.typeHide[t+'|'+c]||0),0));
+  el.innerHTML=`<div class="block"><h2>Every source, start to finish</h2><div class="scroll"><table><thead><tr><th>Source</th><th class="n">Rows at the start</th><th class="n">Hidden</th><th class="n">Not hidden</th></tr></thead><tbody>${D.sources.map((s,c)=>`<tr><td>${s}</td><td class="n">${fmt(D.srcTotal[c])}</td><td class="n">${fmt(hideBy[c])}</td><td class="n">${fmt(D.srcTotal[c]-hideBy[c])}</td></tr>`).join('')}</tbody><tfoot><tr><td>All</td><td class="n">${fmt(T.rows)}</td><td class="n">${fmt(T.hide)}</td><td class="n">${fmt(T.rows-T.hide)}</td></tr></tfoot></table></div></div>
+  <div class="block"><h2>Hidden rows by type of food, in every source</h2><p>Rows are counted one by one, so the same food hidden in three countries counts three times. Row types for the hidden rows the rules decided are worked out from their names, so treat those splits as close, not exact. 316 could not be placed and sit in Other.</p>${matrix(D.types,'Type of food',(t,c)=>D.typeHide[t+'|'+c],tName,'--hide-rgb')}</div>
+  <div class="block"><h2>Why rows were hidden, in every source</h2>${matrix(D.reasons,'Reason',(r,c)=>D.reasonSrc[r+'|'+c],rName,'--hide-rgb')}</div>
+  <div class="block"><h2>Sweden and Norway, by their published categories</h2><p>These are the only two sources that came with categories of their own, so only these two can be counted under headings a source chose. The other seven have food names and nutrient values only, and the table above is the breakdown for them.</p>${catTable('Sweden')}${catTable('Norway')}</div>`;
+}
+function renderKept(el){
+  const types=Object.keys(D.byFoods).sort((a,b)=>D.byFoods[b]-D.byFoods[a]);
+  const copies=t=>D.sources.reduce((n,_,c)=>n+(D.typeKeep[t+'|'+c]||0),0);
+  el.innerHTML=`<div class="block"><h2>Not hidden, by type of food, and why</h2><p>Foods is what a person can find in search. Rows is that food plus every country's copy behind it.</p><div class="scroll"><table><thead><tr><th>Type of food</th><th class="n">Foods</th><th class="n">Rows</th><th>Why these stayed</th></tr></thead><tbody>${types.map(t=>`<tr><td>${esc(tName(t))}</td><td class="n">${fmt(D.byFoods[t])}</td><td class="n">${fmt(copies(t))}</td><td style="min-width:280px">${esc(WHY_KEPT[t]||'')}</td></tr>`).join('')}</tbody></table></div></div>
+  <div class="block"><h2>Not hidden rows by type, in every source</h2>${matrix(D.types,'Type of food',(t,c)=>D.typeKeep[t+'|'+c],tName,'--keep-rgb')}</div>`;
+}
+function renderFoods(el){
+  el.innerHTML=`<div class="block"><h2>Every food that was not hidden</h2><p>The first name is what a person would search for. Tap a row for every source's copy, the name that source uses, and whether that copy has nutrient values to compare.</p></div>
+  <div class="controls"><input type="search" id="fq" placeholder="Search a food" aria-label="Search foods"><select id="ft" aria-label="Type of food"><option value="">All types</option>${Object.keys(D.byFoods).sort((a,b)=>tName(a).localeCompare(tName(b))).map(t=>`<option value="${t}">${esc(tName(t))} (${D.byFoods[t]})</option>`).join('')}</select><label class="check"><input type="checkbox" id="fd"> Has a question</label><label class="check"><input type="checkbox" id="fn"> No USDA row</label></div>
+  <p class="small muted" id="fc"></p><div class="foodlist" id="fl"></div>`;
+  const q=el.querySelector('#fq'),t=el.querySelector('#ft'),d=el.querySelector('#fd'),n=el.querySelector('#fn'),list=el.querySelector('#fl'),count=el.querySelector('#fc');
+  let match=[];
+  const row=(f,i)=>{const c=f.c.length;const nut=f.c.filter(x=>x[2]).length;return `<details class="food" data-i="${i}"><summary><span class="fname">${esc(f.n)} ${f.q.length?'<span class="flag">question</span>':''}</span><span class="small muted">${esc(tName(f.t))}</span><span class="small muted">${D.sources[f.a]} first, ${c} ${c===1?'row':'rows'}, ${nut} with nutrients</span></summary></details>`};
+  const body=f=>`<div class="body"><p class="small"><b>Why:</b> ${esc(f.w)}</p>${f.q.map(x=>`<p class="q">${esc(x)}</p>`).join('')}<div class="scroll"><table><thead><tr><th>Source</th><th>Name in that source</th><th>Nutrients</th></tr></thead><tbody>${f.c.map(x=>`<tr><td>${D.sources[x[0]]}</td><td>${esc(x[1])}</td><td>${x[2]?'Yes':'No'}</td></tr>`).join('')}</tbody></table></div></div>`;
+  const draw=()=>{list.innerHTML=match.map(row).join('');count.textContent=`${fmt(match.length)} of ${fmt(D.foods.length)} foods`;};
+  list.addEventListener('toggle',e=>{const d=e.target;if(d.open&&!d.querySelector('.body'))d.insertAdjacentHTML('beforeend',body(match[+d.dataset.i]));},true);
+  const apply=()=>{const s=q.value.trim().toLowerCase();match=D.foods.filter(f=>(!t.value||f.t===t.value)&&(!d.checked||f.q.length)&&(!n.checked||f.a!==0)&&(!s||f.n.toLowerCase().includes(s)||f.c.some(x=>String(x[1]).toLowerCase().includes(s))));draw();};
+  [q,t,d,n].forEach(x=>x.addEventListener('input',apply));apply();
+}
+function renderSearch(el){
+  el.innerHTML=`<div class="block"><h2>Look up any hidden row</h2><p>For checking whether something you expected is gone, and why. ${fmt(D.hidden.length)} rows, name as the source wrote it. A rule decided the rows marked rule; the rest a reader decided.</p></div>
+  <div class="controls"><input type="search" id="hq" placeholder="Search hidden rows" aria-label="Search hidden rows"><select id="hs" aria-label="Source"><option value="">All sources</option>${D.sources.map((s,i)=>`<option value="${i}">${s}</option>`).join('')}</select><select id="hr" aria-label="Reason"><option value="">All reasons</option>${D.reasons.map((r,i)=>[rName(r),i]).sort((a,b)=>a[0].localeCompare(b[0])).map(x=>`<option value="${x[1]}">${esc(x[0])}</option>`).join('')}</select></div><p class="small muted" id="hc"></p><div class="scroll"><table><thead><tr><th>Name</th><th>Source</th><th>Why hidden</th><th>By</th></tr></thead><tbody id="hb"></tbody></table></div>
+  <div class="block"><h2>Hidden rows that carry a question (${fmt(D.hiddenDoubts.length)})</h2><div class="scroll"><table><thead><tr><th>Name</th><th>Source</th><th>Why hidden</th><th>Question</th></tr></thead><tbody>${D.hiddenDoubts.map(x=>`<tr><td>${esc(x[0])}</td><td>${D.sources[x[1]]}</td><td>${esc(rName(x[2]))}</td><td style="min-width:240px">${esc(x[3])}</td></tr>`).join('')}</tbody></table></div></div>`;
+  const q=el.querySelector('#hq'),s=el.querySelector('#hs'),r=el.querySelector('#hr'),b=el.querySelector('#hb'),c=el.querySelector('#hc');
+  const go=()=>{const w=q.value.trim().toLowerCase();const m=D.hidden.filter(x=>(!s.value||x[1]==s.value)&&(!r.value||x[2]==r.value)&&(!w||String(x[0]).toLowerCase().includes(w)));c.textContent=`${fmt(m.length)} rows`+(m.length>200?', showing the first 200':'');b.innerHTML=m.slice(0,200).map(x=>`<tr><td>${esc(x[0])}</td><td>${D.sources[x[1]]}</td><td>${esc(rName(D.reasons[x[2]]))}</td><td>${x[3]?'rule':'reader'}</td></tr>`).join('');};
+  [q,s,r].forEach(x=>x.addEventListener('input',go));go();
+}
+function renderRecipes(el){
+  const R=D.recipeTotals;
+  el.innerHTML=`<div class="block"><h2>Recipe ingredients this list would hide</h2><p>The 1,460 recipes in the live app use ${fmt(R.names)} different ingredient names across ${fmt(R.rows)} rows. ${fmt(R.exact)} rows match a kept food by name, and ${fmt(R.near)} more match closely, though a close match can be wrong and needs checking before the swap. These ${fmt(R.hiddenNames)} names, ${fmt(R.hiddenRows)} rows, point at something hidden. This is name matching and is approximate. The live app was only read, not changed.</p></div><div class="scroll"><table><thead><tr><th>Ingredient in recipes</th><th class="n">Rows</th><th>Why hidden</th></tr></thead><tbody>${D.recipeHidden.map(x=>`<tr><td>${esc(x[0])}</td><td class="n">${fmt(x[1])}</td><td>${esc(rName(x[2]))}</td></tr>`).join('')}</tbody></table></div>`;
+}
+function renderMethod(el){
+  el.innerHTML=`<div class="block"><h2>How it was done</h2>
+  <p><b>Rules first, then readers.</b> Rules hid ${fmt(T.byRule)} rows whose name or source heading plainly said cooked, canned, a branded meal and so on. Readers working in batches then decided the other ${fmt(T.byReader)} rows one at a time, and I corrected their work where they disagreed or a pattern was wrong.</p>
+  <p><b>What "all columns" came to.</b> You asked me to look at every column, and readers received every one, nutrients included. In practice no source has an ingredient list. Norway and Sweden have categories, Norway alone has Latin names and food codes, and the other sources have a name and nutrient values. Most decisions therefore rest on the name and nutrient values. A plain name can hide an additive that only an ingredient list would show.</p>
+  <p><b>How sure to be.</b> The rules were wrong in places. An audit I ran after the readers finished found 41 rule mistakes, including USDA honey, molasses, maple syrup and cocoa (filed under "Sweets") and every baking soda row (the soft drink rule matched "soda"). The readers had 10 more. All 51 are fixed. I audited the types you said to keep, so more mistakes could remain in other types. The hidden search is there for that.</p>
+  <p><b>Against your earlier decisions.</b> You asked me to ignore the ${fmt(D.earlierN)} rows you had already decided, and I did. They are still in the database. Compared afterwards, ${fmt(D.earlierN-D.differ.length)} agree and ${fmt(D.differ.length)} differ. Your earlier keeps of ale and advocaat look like slips to me, and the rest are judgement calls:</p></div>
+  <div class="scroll"><table><thead><tr><th>Row</th><th>Source</th><th>You</th><th>Now</th></tr></thead><tbody>${D.differ.map(x=>`<tr><td>${esc(x.en)}</td><td>${x.s}</td><td>${x.was}</td><td>${esc(x.now)}</td></tr>`).join('')}</tbody></table></div>
+  <div class="block"><p><b>What did not change.</b> The live database and the app. Nothing was deleted from the unified database either: the decisions sit in one table, food_curation, and every hidden row can come back.</p></div>`;
+}
+route();
+</script>
