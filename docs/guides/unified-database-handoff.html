@@ -1,0 +1,484 @@
+<title>Unified Database Handoff</title>
+<style>
+  :root {
+    --bg: #F3EFE7;
+    --bg-elevated: #FFFFFF;
+    --card: #FFFFFF;
+    --card-border: #DCD3C2;
+    --text: #2B2620;
+    --text-muted: #6B6255;
+    --text-faint: #7D7363;
+    --accent: #4F7D78;
+    --accent-strong: #3A5F5B;
+    --accent-tint: #E4EEEC;
+    --gold: #8F6A2C;
+    --gold-tint: #F6EDDA;
+    --danger: #B4553B;
+    --code-bg: #EDE6D6;
+    --rule: #DCD3C2;
+    --shadow: 0 1px 2px rgba(43,38,32,0.06), 0 8px 24px rgba(43,38,32,0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #232C40;
+      --bg-elevated: #2B3753;
+      --card: #2E3B58;
+      --card-border: #45526F;
+      --text: #E4D5C5;
+      --text-muted: #ABB8D0;
+      --text-faint: #9AA9C4;
+      --accent: #7FC7C3;
+      --accent-strong: #A6DAD7;
+      --accent-tint: #2E4A52;
+      --gold: #DFC28E;
+      --gold-tint: #3A3020;
+      --danger: #E0917A;
+      --code-bg: #26314A;
+      --rule: #45526F;
+      --shadow: 0 1px 2px rgba(0,0,0,0.25), 0 8px 24px rgba(0,0,0,0.3);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #232C40;
+    --bg-elevated: #2B3753;
+    --card: #2E3B58;
+    --card-border: #45526F;
+    --text: #E4D5C5;
+    --text-muted: #ABB8D0;
+    --text-faint: #9AA9C4;
+    --accent: #7FC7C3;
+    --accent-strong: #A6DAD7;
+    --accent-tint: #2E4A52;
+    --gold: #DFC28E;
+    --gold-tint: #3A3020;
+    --danger: #E0917A;
+    --code-bg: #26314A;
+    --rule: #45526F;
+    --shadow: 0 1px 2px rgba(0,0,0,0.25), 0 8px 24px rgba(0,0,0,0.3);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  code, .mono {
+    font-family: "SF Mono", "Cascadia Code", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.92em;
+  }
+  code {
+    background: var(--code-bg);
+    color: var(--accent-strong);
+    padding: 0.12em 0.4em;
+    border-radius: 4px;
+    overflow-wrap: anywhere;
+  }
+
+  .wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 56px 24px 96px;
+  }
+  @media (max-width: 480px) { .wrap { padding: 32px 16px 64px; } }
+
+  header.top { margin-bottom: 40px; }
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-strong);
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: 34px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+  .subtitle {
+    font-size: 17px;
+    color: var(--text-muted);
+    max-width: 62ch;
+  }
+  .meta-row {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    font-size: 13px;
+    color: var(--text-faint);
+  }
+
+  .callout {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-left: 3px solid var(--gold);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 28px 0;
+    box-shadow: var(--shadow);
+  }
+  .callout p { margin: 0 0 10px; }
+  .callout p:last-child { margin: 0; }
+  .callout strong { color: var(--gold); }
+
+  h2 {
+    font-size: 22px;
+    margin: 48px 0 14px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+  h3 {
+    font-size: 16px;
+    margin: 24px 0 8px;
+    color: var(--accent-strong);
+  }
+  p { margin: 0 0 14px; }
+  ul, ol { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  a { color: var(--accent-strong); text-decoration: underline; text-decoration-color: var(--card-border); text-underline-offset: 2px; }
+  a:hover { text-decoration-color: currentColor; }
+  .note { font-size: 14px; color: var(--text-muted); }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    margin: 20px 0 28px;
+  }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 14px 14px 12px;
+    box-shadow: var(--shadow);
+  }
+  .stat .n {
+    font-size: 22px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent-strong);
+  }
+  .stat .label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 12px 0 20px;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  th {
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  td.num, th.num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+  tfoot td { font-weight: 600; border-bottom: none; }
+  .table-scroll { overflow-x: auto; }
+
+  .phase-list { list-style: none; margin: 0 0 20px; padding: 0; }
+  .phase {
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    gap: 12px;
+    padding: 10px 0;
+    margin: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .phase:last-child { border-bottom: none; }
+  .phase > div:last-child { min-width: 0; }
+  .phase .dot {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+  .phase.done .dot { background: var(--accent); color: var(--bg-elevated); }
+  .phase.progress .dot { background: var(--gold-tint); color: var(--gold); border: 2px solid var(--gold); }
+  .phase.pending .dot { background: transparent; border: 2px solid var(--card-border); color: var(--text-faint); }
+  .phase .title { font-weight: 600; }
+  .phase .desc { color: var(--text-muted); font-size: 14px; margin-top: 2px; }
+  .phase .desc ul { margin: 6px 0 0; padding-left: 18px; }
+  .phase .desc li { margin-bottom: 4px; }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-left: 8px;
+  }
+  .tag.done { background: var(--accent-tint); color: var(--accent-strong); }
+  .tag.progress { background: var(--gold-tint); color: var(--gold); }
+  .tag.pending { background: transparent; color: var(--text-faint); border: 1px solid var(--card-border); }
+
+  .file-tree {
+    background: var(--code-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    font-family: "SF Mono", "Cascadia Code", Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .file-tree .path { color: var(--accent-strong); }
+  .file-tree .comment { color: var(--text-faint); }
+
+  .safety-list { list-style: none; padding: 0; margin: 0 0 20px; }
+  .safety-list li {
+    padding-left: 28px;
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .safety-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-size: 13px;
+    color: var(--text-faint);
+  }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Lifestead · unified-database/</div>
+    <h1>The Unified Whole-Foods Database</h1>
+    <p class="subtitle">A separate, unfinished successor to the food database the app ships with. What it is, what has been done, how far the app has moved since August, and what the merge now has to carry. Written so a session with no earlier context can pick it up.</p>
+    <div class="meta-row">
+      <span>Started 2026-08-10</span>
+      <span>·</span>
+      <span>Brought current 2026-11-06, app version 1.0.83.2</span>
+      <span>·</span>
+      <span><code>C:\Dev\lifestead-app\unified-database\</code></span>
+    </div>
+  </header>
+
+  <div class="callout">
+    <p><strong>Two databases. Confirm which one is meant before touching either.</strong></p>
+    <p><code>assets/data/foods_reference.db</code> is the live one: the shipped app reads it, and a change forces a slow re-import on every phone. <code>unified-database/unified_foods.sqlite</code> is this project: <code>lib/db.ts</code> never reads it and no screen changes because of it. A session once spent hours translating the live file while the owner believed the unified one was being worked on, at a cost of about 8 hours. If anyone says "the new database" or "the other database" without naming a file, stop and ask.</p>
+    <p><strong>Where it stands:</strong> this database has not changed since 2026-08-12. The app has changed a great deal, which is what this update records. Nothing here is urgent and no swap is scheduled.</p>
+  </div>
+
+  <h2>Why this exists</h2>
+  <p>The app's food data came from a one-time Python filter whose reasons for keeping or dropping any food were never captured as rules anybody could test or run again. This project rebuilds that work:</p>
+  <ul>
+    <li><strong>Nothing is discarded on the way in.</strong> Every source's full original record survives word for word, even after normalization.</li>
+    <li><strong>Classification is a versioned, unit-tested rule engine</strong>, so every decision has a name, a reason and a test.</li>
+    <li><strong>Cross-source matching uses evidence</strong> (species and Latin names, LanguaL codes) rather than fuzzy name guessing, so one food measured by two national agencies links correctly in any language.</li>
+    <li><strong>Every automated call can be reviewed.</strong> A published tool lets a person confirm or correct classifications and matches at scale: the tool proposes, a person decides.</li>
+  </ul>
+  <p>The end goal is a better-sourced, fully auditable database that takes over from the live one and carries forward what has been built on it: the scores for all 19 conditions, audit decisions, aliases, interaction rules and every recipe.</p>
+
+  <h2>What changed in the app since this page was written</h2>
+  <p>This page was last published in mid-August. Each row below changes something about the merge, the swap, or how a session should work here.</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>What changed</th><th>What it means for this project</th></tr></thead>
+      <tbody>
+        <tr><td><strong>The name and folder.</strong> The app has been Lifestead since 2026-10-09, in <code>C:\Dev\lifestead-app</code>, GitHub <code>Antonio-BandeRock/Lifestead</code>.</td><td>Old paths in the README's early history are history. The database file names did not change.</td></tr>
+        <tr><td><strong>The live database grew</strong> from 22,016 foods in 7 sources to 26,749 foods in 9 sources plus 6 hand-made rows.</td><td>This page used to say Norway and Sweden exist only here. They are now in the live file as well, unscored, with names in Norwegian and Swedish. See the finding below.</td></tr>
+        <tr><td><strong>10,603 live rows are hidden</strong> by decisions made in the Reference Database Audit tool.</td><td>Those are human decisions. The merge has to carry them or replace them on purpose. Neither Nordic source has any.</td></tr>
+        <tr><td><strong>Recipes went from 316 to 1,460.</strong> They hold 16,345 ingredient rows and reach foods by <code>category</code> plus <code>base_name</code>, not by id.</td><td>All 644 distinct pairs resolve today. A renamed food silently breaks recipes, so base names are now part of what must be kept.</td></tr>
+        <tr><td><strong>More reference tables sit beside the foods</strong>: medications, supplement forms, reference intakes, lab tests, assessments, purchase forms, unit weights.</td><td>The candidate export has to contain all of them. The list is under Phase 5.</td></tr>
+        <tr><td><strong>The person's own records point at foods.</strong> Garden plantings, seeds, harvests, crop plan steps, food trials and more store <code>food_id</code> and source. At least 20 column definitions in <code>lib/db.ts</code> carry a <code>food_id</code>.</td><td>A swap that renumbers a food orphans records on a phone. Ids must stay stable for every food that survives.</td></tr>
+        <tr><td><strong>People keep records now.</strong> The tester version is in use on two phones, and the rule since 2026-10-31 is that the database only grows.</td><td>The swap replaces the reference file only. It may not touch, wipe or recreate the personal database. <code>node scripts/audit_additive_migrations.js</code> stays at 0.</td></tr>
+        <tr><td><strong>Neither SQLite file is in git</strong> since 2026-09-21. EAS still uploads both.</td><td>This changes the rollback. A commit no longer holds the old database, so "reversible commit" is no longer true on its own. Backups live in <code>C:\Users\TonyR\OneDrive\Desktop\AppProject\_backups\reference-dbs\</code>; run <code>node scripts/backup_reference_dbs.js</code> after any change to either file.</td></tr>
+        <tr><td><strong>Delivery changed.</strong> Dev and Test stay matched, and there is a Windows desktop app.</td><td>A new reference database cannot ship over the air. It takes a rebuild of both Android versions from <code>C:/Dev/wt-tester</code>, with the database copied in, plus new Windows installers. Phones must reinstall, so gather every rebuild-gated change first.</td></tr>
+        <tr><td><strong>The Rule Engine became a named list</strong> of ten wiring points in <code>CLAUDE.md</code>.</td><td>Scoring, condition relevance and recipe cautions all read this data. New foods need running through that list, not only importing.</td></tr>
+        <tr><td><strong>The app has a Spanish version</strong> since 1.0.78, Mexican Spanish first.</td><td>The sources still include no Spanish-speaking country. The translation table is keyed by exact English, so check how food names reach it before any merge renames them. Not checked for this update.</td></tr>
+        <tr><td><strong>The Digest tab is gone.</strong> Reading lives on Life and Garden, recipes on Food.</td><td>"Digest" now names only the reading corpus. Screens that browse foods are unchanged in how they read the database.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <p><strong>Finding from this update: Norway and Sweden are live, and their names are not in English.</strong></p>
+    <p>All 2,121 Norway rows and 2,606 Sweden rows sit in <code>foods_reference.db</code> with no scores and none hidden, for example "Potatis höst rå" and "Kamskjell, rå". France's 1,252 visible rows are also in French: in all 2,775 France rows <code>name</code> equals <code>name_local</code>.</p>
+    <p>A long comment in <code>lib/db.ts</code> says these rows are held out of categories that show USDA foods only, and can still surface in the ones that skip that filter (Mushroom, Alcohol, PantryStaples, PastaNoodles, SaucesCondiments, CommercialPremade). That comment dates from August and I did not check it on a device.</p>
+    <p><code>CLAUDE.md</code> says about 1,400 France rows translated by hand stay live. The file does not show that: the same comment records a restore to the pre-translation copy on 2026-08-11, and no France row now differs from its French name. The standing instruction still holds: <strong>do not hand-translate these in the live file.</strong> The unified database already has them translated, and they wait for Phases 5 and 7.</p>
+  </div>
+
+  <h2>Current numbers</h2>
+  <p class="note">Read from both files with <code>sqlite3 -readonly</code> on 2026-11-06. Check the files directly rather than trusting this long-term.</p>
+  <div class="stat-grid">
+    <div class="stat"><div class="n">9</div><div class="label">sources ingested</div></div>
+    <div class="stat"><div class="n">32,707</div><div class="label">raw food records</div></div>
+    <div class="stat"><div class="n">1,027,048</div><div class="label">nutrient values, 39 nutrients</div></div>
+    <div class="stat"><div class="n">16,661</div><div class="label">classified whole food</div></div>
+    <div class="stat"><div class="n">13,093</div><div class="label">classified not whole food</div></div>
+    <div class="stat"><div class="n">2,953</div><div class="label">still unresolved</div></div>
+    <div class="stat"><div class="n">14,521</div><div class="label">match groups</div></div>
+    <div class="stat"><div class="n">750</div><div class="label">groups with 2+ members</div></div>
+    <div class="stat"><div class="n">242</div><div class="label">classifications reviewed by a person</div></div>
+  </div>
+  <p class="note">The earlier version of this page said 757 groups with 2+ members and 13,764 with one. The database says 750 and 13,771. One group is flagged for splitting. Names: 26,916 verified from the source, 5,780 machine translated, 11 corrected.</p>
+
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Source</th><th>Country</th><th>Lang.</th><th class="num">Unified records</th><th class="num">Live rows</th><th class="num">Live hidden</th><th class="num">Live scored</th></tr></thead>
+      <tbody>
+        <tr><td>USDA FoodData Central (SR Legacy)</td><td>United States</td><td>en</td><td class="num">7,793</td><td class="num">5,557</td><td class="num">2,069</td><td class="num">5,557</td></tr>
+        <tr><td>Bundeslebensmittelschlüssel (BLS)</td><td>Germany</td><td>en</td><td class="num">7,140</td><td class="num">5,876</td><td class="num">2,759</td><td class="num">5,876</td></tr>
+        <tr><td>Canadian Nutrient File (CNF)</td><td>Canada</td><td>en</td><td class="num">5,690</td><td class="num">4,198</td><td class="num">2,261</td><td class="num">4,198</td></tr>
+        <tr><td>Ciqual</td><td>France</td><td>fr</td><td class="num">3,185</td><td class="num">2,775</td><td class="num">1,523</td><td class="num">2,775</td></tr>
+        <tr><td>Livsmedelsverket</td><td>Sweden</td><td>sv</td><td class="num">2,606</td><td class="num">2,606</td><td class="num">0</td><td class="num">0</td></tr>
+        <tr><td>MEXT Standard Tables</td><td>Japan</td><td>en</td><td class="num">2,191</td><td class="num">1,950</td><td class="num">954</td><td class="num">1,950</td></tr>
+        <tr><td>Matvaretabellen</td><td>Norway</td><td>en</td><td class="num">2,121</td><td class="num">2,121</td><td class="num">0</td><td class="num">0</td></tr>
+        <tr><td>Australian Food Composition Database</td><td>Australia</td><td>en</td><td class="num">1,588</td><td class="num">1,381</td><td class="num">888</td><td class="num">1,381</td></tr>
+        <tr><td>CoFID</td><td>United Kingdom</td><td>en</td><td class="num">393</td><td class="num">279</td><td class="num">144</td><td class="num">279</td></tr>
+        <tr><td>Derived (hand-made spirit variants)</td><td>none</td><td>en</td><td class="num">0</td><td class="num">6</td><td class="num">5</td><td class="num">6</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total</td><td></td><td></td><td class="num">32,707</td><td class="num">26,749</td><td class="num">10,603</td><td class="num">22,022</td></tr></tfoot>
+    </table>
+  </div>
+  <p class="note">"Lang." is the language of the name held in the unified database. The live file also holds 616,974 scores, 835,093 nutrient values, 29 sub-criteria, 54 condition relevance rows, 19 conditions, 44 interaction rules and 28 aliases. The live version stamp is <code>REFERENCE_DB_VERSION = "20261029180000"</code> in <code>lib/referenceDbVersion.ts</code>.</p>
+
+  <h3>How the two databases link</h3>
+  <p>Every live row except the 6 Derived ones finds its unified record today:</p>
+  <ul>
+    <li><strong>Eight sources:</strong> live <code>food_id</code> equals unified <code>source_food_id</code>.</li>
+    <li><strong>Norway:</strong> live <code>source_code</code> equals unified <code>source_food_id</code>. Its <code>food_id</code> does not link.</li>
+  </ul>
+  <p>The source name must be part of the join. Live <code>source_code</code> also matches other records by coincidence in France (542 rows) and Japan (375 rows), so a join that tries both columns picks up the wrong foods.</p>
+
+  <h2>Architecture, in brief</h2>
+  <div class="file-tree">
+    <div><span class="path">unified-database/</span></div>
+    <div>&nbsp;&nbsp;schema.sql <span class="comment">: sources, raw_foods, raw_food_nutrients, whole_food_classifications, food_match_groups and members</span></div>
+    <div>&nbsp;&nbsp;unified_foods.sqlite <span class="comment">: about 115 MB, not in git</span></div>
+    <div>&nbsp;&nbsp;README.md <span class="comment">: the dated history, newest entry first</span></div>
+    <div>&nbsp;&nbsp;<span class="path">pipeline/</span> <span class="comment">: one script per stage, most with a test file</span></div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;init-db.js <span class="comment">: --force deletes the database</span></div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;ingest.js · classify.js · match.js · translate.js</div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;run-source.js · translate-source.js <span class="comment">: both write to the database</span></div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;reclassify-all.js <span class="comment">: re-runs classify.js on every row nobody has reviewed</span></div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;export-audit-data.js · build-audit-tool.js <span class="comment">: regenerate the review page</span></div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;apply-audit-decisions.js <span class="comment">: applies a person's export from the review page</span></div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;apply-translation-corrections.js <span class="comment">: applies data/translation-corrections.json</span></div>
+    <div>&nbsp;&nbsp;<span class="path">sources/</span> <span class="comment">: one adapter per source, plus legacy-v3-extract and legacy-v3-shared</span></div>
+    <div>&nbsp;&nbsp;<span class="path">audit-tool/</span> <span class="comment">: the review page and its data</span></div>
+  </div>
+  <p style="margin-top: 16px;">A tenth source means registering it in <code>sources</code> and writing one small adapter. Everything downstream works unchanged.</p>
+  <p><strong>Tests, run 2026-11-06:</strong> 378 passed and 0 failed across classify (337), match (15), ingest (10), apply-audit-decisions (7) and apply-translation-corrections (9). The database file's modified time did not change. <code>run-source.test.js</code> and <code>translate.test.js</code> were not run this time: the second makes a live network call, and I had not confirmed the first stays off the database. The whole set stood at 391 in August.</p>
+
+  <h2>The review tool</h2>
+  <p>A published page: search and filter every classification and match group, override a call, flag a group for splitting, and export decisions as a JSON file that <code>apply-audit-decisions.js</code> applies to the database.</p>
+  <p><a href="https://claude.ai/artifact/B6bHzhKpe7L4PH99yW7zQc">Open the Specimen Review</a></p>
+  <p class="note">Last published 2026-08-11. Review has started and is nowhere near finished: 242 classification overrides, 54 match-group member removals and 1 split flag applied, against 32,707 records. Ask before republishing this page, since a person may be partway through a review in it.</p>
+
+  <h2>How the classification rules got this far</h2>
+  <p><code>classify.js</code> started from earlier keyword lists and went through about 15 rounds of refinement, from bug reports and from scans of random samples out of the review queue. The discipline throughout: every proposed fix is checked against every matching record in the database before being trusted. Two examples:</p>
+  <ul>
+    <li>One branded soy-protein "kebab" wrongly classed as a whole food led to a family of gaps: gravy, stuffed and filled dishes, "meat alternative" phrasing, mycoprotein and branded meat analogs. About 200 records were corrected in one pass, each confirmed as wrong first.</li>
+    <li>A report that "Batavia, crue" had become "Batavia, flood" led to a scan of every machine-translated French name and 11 false-friend errors, where a French word has two meanings and the wrong one was picked. A correction mechanism now exists for that whole class.</li>
+  </ul>
+  <p>The last change to the database was adding 8,712 lycopene values on 2026-08-12. The full history of every round is in <code>unified-database/README.md</code> (over 1,700 lines), which remains the authoritative record; this page is an orientation.</p>
+
+  <h2>The phased plan</h2>
+  <ul class="phase-list">
+    <li class="phase done">
+      <div class="dot">✓</div>
+      <div><span class="title">Phase 1: schema and pipeline</span><span class="tag done">Done</span></div>
+    </li>
+    <li class="phase done">
+      <div class="dot">✓</div>
+      <div><span class="title">Phase 2: source ingestion</span><span class="tag done">Done</span><div class="desc">All 9 sources ingested, classified, translated where needed, and matched.</div></div>
+    </li>
+    <li class="phase progress">
+      <div class="dot">3</div>
+      <div><span class="title">Phase 3: whole-food classification review</span><span class="tag progress">Standing next step</span><div class="desc">Tooling is built. A person still has to review the 2,953 unresolved, plus any of the 29,754 classified that deserve a second look. Unmoved since August.</div></div>
+    </li>
+    <li class="phase progress">
+      <div class="dot">4</div>
+      <div><span class="title">Phase 4: cross-source match review</span><span class="tag progress">Standing next step</span><div class="desc">Same tool. 750 matched groups and 13,771 single-member groups await confirmation. Unmoved since August.</div></div>
+    </li>
+    <li class="phase pending">
+      <div class="dot">5</div>
+      <div><span class="title">Phase 5: merge the curated layer</span><span class="tag pending">Not started, wider now</span><div class="desc">Map today's live rows onto their unified records and carry forward:
+        <ul>
+          <li><strong>Food identity:</strong> <code>food_id</code> and source stable for every surviving food, since personal records point at them.</li>
+          <li><strong>Names recipes rely on:</strong> <code>base_name</code> and <code>category</code> for all 644 pairs.</li>
+          <li><strong>Scores:</strong> 616,974 scores on 29 sub-criteria, 54 condition relevance rows, 28 aliases, 44 interaction rules.</li>
+          <li><strong>Audit decisions:</strong> the 10,603 hidden flags.</li>
+          <li><strong>The 6 Derived rows</strong> (900001 to 900006, tequila, rum and gin), which have no unified record.</li>
+          <li><strong>Inositol,</strong> the one nutrient live has that unified lacks (40 against 39).</li>
+          <li><strong>Reference tables:</strong> <code>curated_recipes</code> and its ingredient, component, unlisted-ingredient and strain tables, <code>fermentation_strains</code>, <code>food_purchase_forms</code>, <code>food_unit_weights</code>, <code>common_medications</code>, <code>supplement_forms</code>, <code>dietary_reference_intakes</code>, <code>nutrient_interactions</code>, <code>nutrient_system_effects</code>, <code>nutrient_timing</code>, <code>lab_tests</code>, <code>lab_test_categories</code>, the three <code>assessment_</code> tables and <code>body_systems</code>.</li>
+        </ul>
+        To decide here: how Norway and Sweden get scored, since they have no scores to carry; whether the home-cooking rule hides more rows, since branded and commercial entries are not to be expanded; and what replaces <code>scripts/build_food_reference_db.py</code>, which builds the live file from the workbook today.</div></div>
+    </li>
+    <li class="phase pending">
+      <div class="dot">6</div>
+      <div><span class="title">Phase 6: automated verification</span><span class="tag pending">Not started</span><div class="desc">Every table the app queries, every score, alias and rule resolves against a candidate export. Now also: every recipe base name resolves, every hidden flag survives or is changed deliberately, and every <code>food_id</code> a person could have stored still exists. Then rerun <code>scripts/compute_recipe_condition_data.js</code> and read the differences, since recipe cautions come from this data.</div></div>
+    </li>
+    <li class="phase pending">
+      <div class="dot">7</div>
+      <div><span class="title">Phase 7: the swap</span><span class="tag pending">Not started</span><div class="desc">Change <code>REFERENCE_DB_VERSION</code>, which still triggers the re-import when it differs from the value on the device. Ships by rebuild (dev and tester, from <code>C:/Dev/wt-tester</code>, after <code>node scripts/test_notification_icon.js</code>) and by new Windows installers. Keep a separately named copy of the current file first, since git no longer holds it.</div></div>
+    </li>
+    <li class="phase pending">
+      <div class="dot">∞</div>
+      <div><span class="title">Ongoing: new sources</span><span class="tag pending">Named, not vetted</span><div class="desc">India (IFCT), Brazil (TACO), South Africa (SAFOODS), Denmark (Frida), Netherlands (NEVO), New Zealand, USDA Foundation Foods and EuroFIR. None checked for access or license terms. A Spanish-speaking country's source is a named gap in the international plan, and none has been picked.</div></div>
+    </li>
+  </ul>
+  <p class="note">None of this blocks anything else in the app. It proceeds at whatever pace a session picks it back up.</p>
+
+  <h2>Why this cannot break the live app</h2>
+  <ul class="safety-list">
+    <li><strong>Isolation while it is being built.</strong> No import path and no shared runtime connect this folder to the app.</li>
+    <li><strong>The export has to match the schema the bundled database uses</strong>, checked by an automated diff against every table <code>lib/db.ts</code> queries before any export is bundled.</li>
+    <li><strong>Every existing decision gets an integrity check.</strong> Each food and source pair, score, alias, rule, recipe name and hidden flag must resolve against the candidate, or be a deliberate, traceable change. Nothing is dropped silently.</li>
+    <li><strong>The swap replaces the reference file only.</strong> The re-import in <code>lib/db.ts</code> overwrites the bundled copy when the version stamp differs. The person's database, <code>inside_story.db</code>, is a separate file and is not touched.</li>
+    <li><strong>Rolling back means shipping the previous file</strong> with a new version stamp, through a rebuild. It works, and it is not instant: phones reinstall.</li>
+  </ul>
+
+  <h2>Picking this up in a fresh session</h2>
+  <ol>
+    <li>Confirm which database the owner means. Ask if a request does not name the file.</li>
+    <li>Read <code>unified-database/README.md</code> in full for the dated history.</li>
+    <li>Look at the data with <code>sqlite3 -readonly</code>. The tool is at <code>C:\Users\TonyR\AppData\Local\Android\Sdk\platform-tools\sqlite3.exe</code>.</li>
+    <li>To confirm the environment, run these five, which stayed off the database on 2026-11-06: <code>node pipeline/classify.test.js</code>, <code>match.test.js</code>, <code>ingest.test.js</code>, <code>apply-audit-decisions.test.js</code> and <code>apply-translation-corrections.test.js</code>, from <code>unified-database/</code>. <strong>Do not run the ingest commands in the README's "Running what exists today" section just to test.</strong> They write to the database. <code>init-db.js --force</code> deletes it.</li>
+    <li>Open the <a href="https://claude.ai/artifact/B6bHzhKpe7L4PH99yW7zQc">review tool</a> before assuming anything about scope.</li>
+    <li>After any change to either database, run <code>node scripts/backup_reference_dbs.js</code>, and never <code>git add</code> either file.</li>
+    <li>Re-ingesting the legacy sources needs <code>ClaudeWork/unified_food_database_v3_full.sqlite.zip</code> at the repo root. It was there on 2026-11-06.</li>
+  </ol>
+  <p class="note">The source of this page is <code>docs/guides/unified-database-handoff.html</code>. The Unified Whole-Foods Database section of <code>CLAUDE.md</code> holds the short version.</p>
+
+  <footer>
+    Lifestead · Unified Whole-Foods Database handoff · counts read from both database files on 2026-11-06 · full history in <code>unified-database/README.md</code>
+  </footer>
+</div>
