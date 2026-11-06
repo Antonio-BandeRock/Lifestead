@@ -80,7 +80,7 @@ module.exports = ({ listed, swap, home, named, missing, aid, SEED_OIL, G }) => {
   put(listed('Black tea'), 'loose black tea leaves');
   put(listed('Mamey sapote'), 'mamey sapote');
   put(listed('Mung bean noodles'), 'mung bean glass noodles');
-  put(listed('Peanut oil'), 'peanut or sunflower oil for deep frying', 'seed oil for frying (peanut or sunflower)', 'seed oil for deep frying (peanut or sunflower)');
+  put(listed('Sunflower oil'), 'peanut or sunflower oil for deep frying', 'seed oil for frying (peanut or sunflower)', 'seed oil for deep frying (peanut or sunflower)');
   put(listed('Pickled garlic'), 'pickled garlic');
   put(listed('Gurnard'), 'red gurnard (galinette)');
   put(listed('Scorpionfish'), 'scorpionfish, gurnard or dogfish (palombo) in pieces', 'scorpion fish (rascasse)');
@@ -154,9 +154,19 @@ module.exports = ({ listed, swap, home, named, missing, aid, SEED_OIL, G }) => {
   put(aid('Colour only'), 'red food colouring', 'natural food colouring', 'red food colouring (or a little cochineal, as was done before)');
   put(aid('A wrapper or lining'), 'banana leaves', 'dried corn husks', 'fresh green corn husks', 'fresh green corn plant leaves (hojas de milpa)', 'maguey leaves (pencas)', 'mixiote sheets (maguey membrane) or parchment', 'dried bamboo leaves', 'dried lotus leaves', 'tomatillo husks');
 
-  // Nothing listed does the job.
-  put(missing(G.ALCOHOL, 'Sake, if alcohol is listed'), 'shaoxing wine', 'shaoxing huadiao wine');
-  put(missing(G.ALCOHOL), 'cognac', 'dry white vermouth (noilly prat)', 'calvados', 'dark rum', 'baijiu (chinese grain spirit)', 'kirschwasser (cherry brandy)', 'pulque', 'vin santo', 'wheat beer (weißbier)', 'mei gui lu jiu (chinese rose wine)', 'rose wine (mei gui lu jiu)');
+  // Listed by the owner's fourth round, 2026-11-06.
+  put(listed('Shaoxing wine'), 'shaoxing wine', 'shaoxing huadiao wine');
+  put(listed('Cognac'), 'cognac');
+  put(listed('Dry vermouth'), 'dry white vermouth (noilly prat)');
+  put(listed('Calvados'), 'calvados');
+  put(listed('Rum'), 'dark rum');
+  put(listed('Wheat beer'), 'wheat beer (weißbier)');
+  put(swap('Dessert wine', 'Vin santo is a sweet dessert wine'), 'vin santo');
+  // No source has these, so the recipe keeps the name.
+  put(named(G.NOSOURCE, 'Vodka'), 'baijiu (chinese grain spirit)');
+  put(named(G.NOSOURCE, 'Brandy'), 'kirschwasser (cherry brandy)');
+  put(named(G.NOSOURCE, 'Liqueur'), 'mei gui lu jiu (chinese rose wine)', 'rose wine (mei gui lu jiu)');
+  put(named(G.NOSOURCE), 'pulque');
 
   // Listed by the owner's third round, 2026-11-06.
   put(listed('Powdered sugar'), 'icing sugar (powdered sugar)', 'powdered sugar');
@@ -186,7 +196,7 @@ module.exports = ({ listed, swap, home, named, missing, aid, SEED_OIL, G }) => {
   put(listed('Baking wafers'), 'edible wafer paper (ostia)', 'oblaten wafers, 70 mm', 'obleas (thin wafer rounds)');
   put(listed('Century egg'), 'century egg (pidan)');
   put(swap('White sugar', 'Pearl sugar is white sugar pressed into coarse grains'), 'pearl sugar (hagelzucker)');
-  put(swap('Peanut oil', SEED_OIL), 'sunflower oil');
+  put(listed('Sunflower oil'), 'sunflower oil');
   put(swap('Chorizo', 'A similar pork sausage'), 'fresh pork longaniza');
   put(swap('Wonton wrappers', 'A similar thin wrapper'), 'spring roll wrappers');
   // Bitter kernels carry the same cyanide risk as the bitter almonds the owner hid for safety.

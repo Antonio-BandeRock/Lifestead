@@ -64,18 +64,6 @@ for (const r of rows) {
 }
 
 const recipe = JSON.parse(fs.readFileSync(path.join(work, 'recipe_check.json'), 'utf8'));
-// What each decision would clear, added one at a time, in the order they are easiest to take.
-const LADDER = [
-  ['Alcohol used in cooking', 'List the wines, spirits and beers recipes cook with'],
-];
-const done = new Set();
-const ladder = LADDER.map(([group, step]) => {
-  if (!recipe.groups.some((g) => g.group === group)) throw new Error('no group ' + group);
-  done.add(group);
-  const cleared = recipe.waiting.filter((w) => w.items.every((i) => done.has(i.group))).length;
-  return { group, step, ready: recipe.recipes - recipe.waiting.length + cleared };
-});
-
 const data = {
   sources: SOURCES.map((s) => s[1]), types, reasons,
   totals: { rows: rows.length, hide: hidden.length, show: foods.length, compare: compare.length, byRule: count(rows, (r) => r.by).rule, byReader: count(rows, (r) => r.by).agent, usdaAnchor: anchorUsda.length, otherAnchor: foods.length - anchorUsda.length, compareNut: compare.filter((c) => c.nut > 0).length, doubts: rows.filter((r) => r.doubt).length },
@@ -84,11 +72,11 @@ const data = {
   typeKeep: count(kept, (r) => r.type + '|' + srcIdx.get(r.src)),
   reasonSrc: count(hidden, (r) => r.rc + '|' + srcIdx.get(r.src)),
   byFoods: count(foods, (f) => f.t),
-  catRows, foods, recipe, ladder, differ, earlierN: earlier.length,
+  catRows, foods, recipe, differ, earlierN: earlier.length,
   hiddenDoubts: hidden.filter((r) => r.doubt).map((r) => [r.en || r.orig, srcIdx.get(r.src), r.rc, r.doubt]),
   hidden: hidden.map((r) => [r.en || r.orig, srcIdx.get(r.src), reasons.indexOf(r.rc), r.by === 'rule' ? 1 : 0]),
 };
-console.log(JSON.stringify(data.totals), 'ladder', JSON.stringify(ladder.map((l) => l.ready)));
+console.log(JSON.stringify(data.totals));
 const page = fs.readFileSync(template, 'utf8').replace('/*DATA*/null', () => JSON.stringify(data).replace(/</g, '\\u003c'));
 fs.writeFileSync(output, page);
 console.log('page bytes', page.length);

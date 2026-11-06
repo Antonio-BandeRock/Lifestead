@@ -90,7 +90,7 @@ const HAND = {
   'Hibiscus / Fruit Tea (Unsweetened)': listed('Roselle'),
   'Tea, hibiscus': listed('Roselle'),
   // A listed food does the job, and the wording of the recipe changes.
-  Rapsolja: swap('Cold-pressed canola oil', 'Same plant, and the refined oil is what stays hidden'),
+  Rapsolja: listed('Canola oil'),
   'Tomatoes, canned products, whole, without salt': swap('Tomato', 'Fresh for canned'),
   'Crushed Tomato': swap('Tomato', 'Crush fresh tomatoes'),
   'Bamboo shoots, canned, drained': swap('Bamboo shoots', 'Fresh for canned'),
@@ -148,13 +148,27 @@ const HAND = {
   'Millet, puffed': listed('Puffed millet'),
   'Chicken Feet': listed('Chicken feet'),
   'Mushroom, straw, canned, drained solids': listed('Canned straw mushrooms'),
-  // The refined seed oils stay hidden by the owner's choice, so a listed oil does the job.
-  Majsolja: swap('Peanut oil', SEED_OIL),
-  Maisolje: swap('Peanut oil', SEED_OIL),
-  Solrosolja: swap('Peanut oil', SEED_OIL),
-  Solsikkeolje: swap('Peanut oil', SEED_OIL),
+  // Listed by the owner's fourth round, 2026-11-06.
+  Majsolja: listed('Corn oil'),
+  Maisolje: listed('Corn oil'),
+  Solrosolja: listed('Sunflower oil'),
+  Solsikkeolje: listed('Sunflower oil'),
+  'White Wine': listed('White wine'),
+  'Red Wine': listed('Red wine'),
+  'Rum 37.5/40 % vol': listed('Rum'),
+  'Rum 80 % vol': swap('Rum', 'Ordinary rum in place of overproof rum, so use a little more'),
+  'Pale beer': listed('Beer'),
+  'Dark beer': listed('Dark beer'),
+  'Pilsner beer': listed('Beer'),
+  Cider: listed('Hard cider'),
+  Liqueur: listed('Liqueur'),
+  'Starkvin vol. % 18 typ Madeira': listed('Madeira'),
+  'Alcoholic beverage, beer, regular, all': listed('Beer'),
+  'Alcoholic beverage, spirit, ~40% v/v, all (Brandy, Gin, Rum, Vodka and Whisky)': listed('Brandy'),
+  'Konjak el. brandy vol. % 40': listed('Brandy'),
+  'Dessert Wine': listed('Dessert wine'),
+  'Sterkvin, søt, portvin, 20 vol-% alkohol': listed('Port'),
 };
-for (const n of ['White Wine', 'Red Wine', 'Rum 37.5/40 % vol', 'Rum 80 % vol', 'Pale beer', 'Dark beer', 'Pilsner beer', 'Cider', 'Liqueur', 'Starkvin vol. % 18 typ Madeira', 'Alcoholic beverage, beer, regular, all', 'Alcoholic beverage, spirit, ~40% v/v, all (Brandy, Gin, Rum, Vodka and Whisky)', 'Konjak el. brandy vol. % 40', 'Dessert Wine', 'Sterkvin, søt, portvin, 20 vol-% alkohol']) HAND[n] = missing(ALCOHOL);
 
 const OUTSIDE = require('./curate-recipe-outside')({ listed, swap, home, named, missing, aid, SEED_OIL, G: { ALCOHOL, PANTRY, SAUCES, NOSOURCE, FERMENT, CURED } });
 const outsideRows = q(LIVE, 'select recipe_id, lower(trim(name)) name from curated_recipe_unlisted_ingredients');
