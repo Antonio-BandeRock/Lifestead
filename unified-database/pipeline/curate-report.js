@@ -66,14 +66,6 @@ for (const r of rows) {
 const recipe = JSON.parse(fs.readFileSync(path.join(work, 'recipe_check.json'), 'utf8'));
 // What each decision would clear, added one at a time, in the order they are easiest to take.
 const LADDER = [
-  ['Whole foods no source has', 'Foods no source measures stay as named ingredients, with no nutrition, the way the app already carries them'],
-  ['White and brown sugar', 'List white, brown and powdered sugar, or swap in raw sugar'],
-  ['Pantry items', 'List baking powder, gelatin, capers, dark chocolate and the like'],
-  ['Single foods hidden today', 'List chicken feet, canned straw mushrooms and century egg'],
-  ['Bottled sauces', 'List oyster sauce, Worcestershire and the like'],
-  ['Traditional ferments', 'List shrimp paste, doubanjiang, fermented black beans and the like, or carry them as named ingredients'],
-  ['Sausages and cured meats with no listing', 'List the rest, or carry them as named ingredients'],
-  ['Refined seed oils', 'List corn and sunflower oil, or swap in another oil'],
   ['Alcohol used in cooking', 'List the wines, spirits and beers recipes cook with'],
 ];
 const done = new Set();

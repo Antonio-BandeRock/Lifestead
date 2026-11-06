@@ -2,10 +2,12 @@
 // That table holds what recipes use and the live food list never had. Every name is placed by hand,
 // because a word match reads "banana leaves" as Banana and "wheat beer" as Wheat.
 // Names are lower case and trimmed, the way curate-recipe-check.js reads them.
-module.exports = ({ listed, swap, home, missing, aid, G }) => {
+const C = require('./curate-cautions');
+
+module.exports = ({ listed, swap, home, named, missing, aid, SEED_OIL, G }) => {
   const out = {};
   const put = (value, ...names) => { for (const n of names) { if (out[n]) throw new Error(`placed twice: ${n}`); out[n] = value; } };
-  const single = (stand) => missing(G.NOSOURCE, stand);
+  const single = (stand) => named(G.NOSOURCE, stand);
 
   // On the list, under this name or another one.
   put(listed('Beef marrow bone'), 'beef marrow and soup bones', 'beef marrow and knuckle bones', 'beef marrow bone', 'beef bones');
@@ -129,11 +131,11 @@ module.exports = ({ listed, swap, home, missing, aid, G }) => {
   put(home('Bread, dried and ground'), 'dry breadcrumbs', 'fine dry breadcrumbs (semmelbrösel)', 'breadcrumbs', 'pan molido (dry bread crumbs)', 'fine breadcrumbs');
   put(home('A mix of spices, which needs star anise and Sichuan pepper'), 'chinese five-spice powder', 'five-spice powder', 'chinese five spice powder');
   put(home('A mix of listed spices'), 'lebkuchen spice', 'lebkuchen spice (cinnamon, cloves, allspice, cardamom, coriander, nutmeg, ginger)', 'quatre-épices (pepper, nutmeg, clove and ginger)', 'quatre-épices (pepper, nutmeg, clove and ginger blend)');
-  put(home('Citrus peel simmered in raw sugar'), 'candied lemon peel (zitronat)', 'candied orange peel', 'candied orange peel (orangeat)', 'candied citron peel', 'candied citron and orange peel', 'candied cherries or candied orange peel');
+  put(home('Citrus peel simmered in sugar'), 'candied lemon peel (zitronat)', 'candied orange peel', 'candied orange peel (orangeat)', 'candied citron peel', 'candied citron and orange peel', 'candied cherries or candied orange peel');
   put(home('The peel of a mandarin, dried'), 'dried tangerine peel', 'dried tangerine peel (chenpi)');
-  put(home('Fruit and raw sugar'), 'fruit jam (apricot, peach or cherry)', 'jam (plum, raspberry or red currant)', 'raspberry jam', 'red currant jelly');
-  put(home('Almonds and raw sugar'), 'marzipan');
-  put(home('Adzuki beans and raw sugar'), 'sweetened red bean paste', 'sweetened red bean paste or lotus seed paste');
+  put(home('Fruit and sugar'), 'fruit jam (apricot, peach or cherry)', 'jam (plum, raspberry or red currant)', 'raspberry jam', 'red currant jelly');
+  put(home('Almonds and sugar'), 'marzipan');
+  put(home('Adzuki beans and sugar'), 'sweetened red bean paste', 'sweetened red bean paste or lotus seed paste');
   put(home('Pork blood, set by simmering'), 'cooked pork blood cake (huyết heo)', 'pork blood cake');
   put(home('Pork skin fried in its fat'), 'fried pork rind (tóp mỡ)', 'pork cracklings (tóp mỡ)', 'pork rinds (kaep moo)');
   put(home('Ground beef, worked and simmered'), 'beef balls');
@@ -141,7 +143,10 @@ module.exports = ({ listed, swap, home, missing, aid, G }) => {
   put(home('Duck legs cooked slowly in duck or goose fat'), 'duck or goose confit legs, with a little of their fat');
   put(home('Duck egg and salt'), 'salted duck egg yolk', 'salted duck egg yolks', 'salted duck eggs');
   put(home('Egg, flour, yeast and butter'), 'oaxacan pan de yema (egg bread)');
-  put(home('Radish, salt and raw sugar'), 'sweet preserved radish (chai po)');
+  put(home('Radish, salt and sugar'), 'sweet preserved radish (chai po)');
+  put(home('Sugar and water'), 'fondant icing');
+  put(home('Milk, cream, egg and sugar'), 'vanilla ice cream', 'vanilla or fior di latte gelato');
+  put(home('Flour, honey, sugar and spices'), 'aachener printen (spiced gingerbread)');
   put(home('Vegetable, vinegar and salt'), 'pickled leeks (củ kiệu)', 'pickled chiles güeros', 'pickled chilies (pao la jiao)', 'sichuan pickled chilies (pao jiao)', 'pickled long beans', 'pickled lotus stems (ngó sen)', 'pickle brine from the gewürzgurken');
 
   // Not eaten as a food, so no food list needs it: a wrapper, or something that does a job in the pot.
@@ -152,24 +157,55 @@ module.exports = ({ listed, swap, home, missing, aid, G }) => {
   // Nothing listed does the job.
   put(missing(G.ALCOHOL, 'Sake, if alcohol is listed'), 'shaoxing wine', 'shaoxing huadiao wine');
   put(missing(G.ALCOHOL), 'cognac', 'dry white vermouth (noilly prat)', 'calvados', 'dark rum', 'baijiu (chinese grain spirit)', 'kirschwasser (cherry brandy)', 'pulque', 'vin santo', 'wheat beer (weißbier)', 'mei gui lu jiu (chinese rose wine)', 'rose wine (mei gui lu jiu)');
-  put(missing(G.SUGAR, 'Raw sugar, ground fine'), 'icing sugar (powdered sugar)', 'powdered sugar', 'pearl sugar (hagelzucker)', 'rock sugar', 'vanilla sugar');
-  put(missing(G.SUGAR, 'Whole cane sugar'), 'maltose syrup', 'maltose');
-  put(missing(G.OILS, 'Peanut oil or Cold-pressed canola oil'), 'sunflower oil');
-  put(missing(G.SAUCES, 'Soy sauce'), 'golden mountain seasoning sauce', 'jugo sazonador (maggi seasoning sauce)', 'maggi seasoning sauce');
-  put(missing(G.SAUCES), 'salsa inglesa (worcestershire sauce)', 'worcestershire sauce', 'hoisin sauce', 'sriracha chili sauce', 'chipotle chiles in adobo', 'sweet bean sauce (tianmianjiang)', 'jarred spiced crab paste for riêu (gia vị nấu riêu cua)');
-  put(missing(G.FERMENT), 'shrimp paste (kapi)', 'mắm ruốc (fermented shrimp paste)', 'mắm tôm (fermented shrimp sauce)', 'mắm tôm (fermented shrimp paste)', 'doubanjiang (pixian chili bean paste)', 'doubanjiang (chili bean paste)', 'fermented black beans (douchi)', 'fermented black beans', 'fermented fish innards (tai pla)', 'nam budu (southern thai fermented fish sauce)', 'pla ra (fermented fish sauce)', 'red fermented bean curd (nam yu)', 'white fermented bean curd (fu ru)', 'mẻ (fermented rice)', 'salted field crab (pu dong)');
-  put(missing(G.FERMENT, 'Miso'), 'fermented soybean sauce (tao jiao)', 'fermented yellow soybean paste (tao jiao)', 'fermented soybean paste (tao jiao)');
-  put(missing(G.CURED), 'lap cheong (chinese sausage)', 'chinese sausage (lạp xưởng)', 'chinese sausage (kun chiang)', 'guanciale (cured pork cheek)', 'lardo (cured pork back fat)', 'lap yuk (cantonese cured pork belly)', 'speck (speck alto adige igp)', 'eisbein (cured pork hock)', 'kasseler (cured smoked pork chops)', 'kasseler (cured smoked pork loin)', 'kasseler (cured smoked pork loin), boneless', 'smoked pork shoulder (palette)', 'chả huế (huế peppered pork roll)', 'chicharrón prensado (pressed pork cracklings in chile)', 'fleischwurst or lyoner', 'fresh italian pork sausage (salsiccia)', 'fresh italian pork sausage (salsiccia), skin removed', 'fresh italian pork sausages', 'italian pork sausage', 'fresh pork longaniza', 'mettenden (smoked pork sausages)', 'montbéliard or morteau smoked sausage', 'montbéliard sausage', 'pinkel (smoked oat and pork sausage)', 'pork bratwurst, fine and unsmoked', 'strasbourg sausage (knack)', 'toulouse sausage');
-  put(missing(G.PANTRY), 'sweetened condensed milk', 'rice paper (bánh tráng), 22 cm rounds', 'spring roll wrappers', 'sesame rice crackers (bánh tráng mè)', 'edible wafer paper (ostia)', 'oblaten wafers, 70 mm', 'obleas (thin wafer rounds)', 'orange blossom water', 'almond extract', 'fondant icing', 'pandan paste', 'vanilla ice cream', 'vanilla or fior di latte gelato', 'aachener printen (spiced gingerbread)');
-  put(missing(G.PANTRY, 'Unsweetened baking chocolate with raw sugar'), 'oaxacan chocolate', 'mexican table chocolate', 'mexican table chocolate (chocolate de mesa)');
 
+  // Listed by the owner's third round, 2026-11-06.
+  put(listed('Powdered sugar'), 'icing sugar (powdered sugar)', 'powdered sugar');
+  put(listed('Rock sugar'), 'rock sugar');
+  put(listed('Vanilla sugar'), 'vanilla sugar');
+  put(listed('Maltose'), 'maltose syrup', 'maltose');
+  put(listed('Worcestershire sauce'), 'salsa inglesa (worcestershire sauce)', 'worcestershire sauce');
+  put(listed('Hoisin sauce'), 'hoisin sauce');
+  put(listed('Sriracha'), 'sriracha chili sauce');
+  put(listed('Sweet bean sauce'), 'sweet bean sauce (tianmianjiang)');
+  put(listed('Doubanjiang'), 'doubanjiang (pixian chili bean paste)', 'doubanjiang (chili bean paste)');
+  put(listed('Fuyu'), 'red fermented bean curd (nam yu)', 'white fermented bean curd (fu ru)');
+  put(listed('Eisbein'), 'eisbein (cured pork hock)');
+  put(listed('Kasseler'), 'kasseler (cured smoked pork chops)', 'kasseler (cured smoked pork loin)', 'kasseler (cured smoked pork loin), boneless');
+  put(listed('Smoked pork shoulder'), 'smoked pork shoulder (palette)');
+  put(listed('Lyon sausage'), 'fleischwurst or lyoner');
+  put(listed('Italian sausage'), 'fresh italian pork sausage (salsiccia)', 'fresh italian pork sausage (salsiccia), skin removed', 'fresh italian pork sausages', 'italian pork sausage');
+  put(listed('Mettwurst'), 'mettenden (smoked pork sausages)');
+  put(listed('Morteau sausage'), 'montbéliard or morteau smoked sausage');
+  put(listed('Montbéliard sausage'), 'montbéliard sausage');
+  put(listed('Pinkel sausage'), 'pinkel (smoked oat and pork sausage)');
+  put(listed('Bratwurst'), 'pork bratwurst, fine and unsmoked');
+  put(listed('Knackwurst'), 'strasbourg sausage (knack)');
+  put(listed('Toulouse sausage'), 'toulouse sausage');
+  put(listed('Sweetened condensed milk'), 'sweetened condensed milk');
+  put(listed('Rice paper'), 'rice paper (bánh tráng), 22 cm rounds');
+  put(listed('Baking wafers'), 'edible wafer paper (ostia)', 'oblaten wafers, 70 mm', 'obleas (thin wafer rounds)');
+  put(listed('Century egg'), 'century egg (pidan)');
+  put(swap('White sugar', 'Pearl sugar is white sugar pressed into coarse grains'), 'pearl sugar (hagelzucker)');
+  put(swap('Peanut oil', SEED_OIL), 'sunflower oil');
+  put(swap('Chorizo', 'A similar pork sausage'), 'fresh pork longaniza');
+  put(swap('Wonton wrappers', 'A similar thin wrapper'), 'spring roll wrappers');
+  // Bitter kernels carry the same cyanide risk as the bitter almonds the owner hid for safety.
+  put(swap('Almonds', 'Sweet almonds in place of bitter apricot kernels, which carry cyanide'), 'bitter apricot kernels (armelline)');
+
+  // No source has these, so the recipe keeps the name with no nutrition behind it, as the app does today (owner's call, 2026-11-06).
+  put(named(G.SAUCES, 'Soy sauce', C.SALT), 'golden mountain seasoning sauce', 'jugo sazonador (maggi seasoning sauce)', 'maggi seasoning sauce');
+  put(named(G.SAUCES, null, C.SALT), 'chipotle chiles in adobo', 'jarred spiced crab paste for riêu (gia vị nấu riêu cua)');
+  put(named(G.FERMENT, null, C.SALT_PRESERVED_SEAFOOD), 'shrimp paste (kapi)', 'mắm ruốc (fermented shrimp paste)', 'mắm tôm (fermented shrimp sauce)', 'mắm tôm (fermented shrimp paste)', 'fermented fish innards (tai pla)', 'nam budu (southern thai fermented fish sauce)', 'pla ra (fermented fish sauce)', 'salted field crab (pu dong)');
+  put(named(G.FERMENT, 'Miso', C.SALT), 'fermented black beans (douchi)', 'fermented black beans', 'fermented soybean sauce (tao jiao)', 'fermented yellow soybean paste (tao jiao)', 'fermented soybean paste (tao jiao)');
+  put(named(G.FERMENT), 'mẻ (fermented rice)');
+  put(named(G.CURED, null, C.PROCESSED_MEAT), 'lap cheong (chinese sausage)', 'chinese sausage (lạp xưởng)', 'chinese sausage (kun chiang)', 'guanciale (cured pork cheek)', 'lardo (cured pork back fat)', 'lap yuk (cantonese cured pork belly)', 'speck (speck alto adige igp)', 'chả huế (huế peppered pork roll)', 'chicharrón prensado (pressed pork cracklings in chile)');
+  put(named(G.PANTRY), 'sesame rice crackers (bánh tráng mè)', 'orange blossom water', 'almond extract', 'pandan paste');
+  put(named(G.PANTRY, 'Dark chocolate'), 'oaxacan chocolate', 'mexican table chocolate', 'mexican table chocolate (chocolate de mesa)');
   put(single('Whole cane sugar'), 'sugar cane', 'sugarcane', 'sugarcane sticks');
   put(single('Molasses'), 'rübenkraut (sugar beet syrup)');
   put(single('Anise seed, though the taste differs'), 'star anise');
   put(single('Sansho pepper, a close relative'), 'sichuan peppercorns', 'ground sichuan peppercorn', 'green sichuan peppercorns');
-  put(missing(G.OTHER), 'century egg (pidan)');
   put(single(), 'juniper berries', 'galangal', 'sand ginger (dried slices)', 'sand ginger powder', 'fingerroot (krachai)', 'krachai (fingerroot)', 'makrut lime leaves', 'makrut lime peel', 'pandan leaves', 'achiote (annatto) seeds', 'annatto seeds (hạt điều màu)', 'annatto seeds', 'avocado leaves', 'dried avocado leaves', 'dried avocado leaves (hojas de aguacate)', 'hoja santa leaves', 'hoja santa', 'lovage', 'mentuccia (lesser calamint) leaves', 'salad burnet (pimpinelle)', 'rice paddy herb (ngò om)', 'wild betel leaves (lá lốt)', 'sweet leaf (rau ngót, sauropus androgynus)', 'vietnamese balm (kinh giới)', 'romeritos (seepweed greens)', 'rosita de cacao flowers (quararibea funebris)', 'banana blossom (bắp chuối)', 'banana blossom', 'dried lily flowers (golden needles)', 'dried daylily buds (golden needles)', 'huitlacoche (fresh or frozen)', 'tejocotes', 'gấc fruit pulp', 'lima agria (yucatecan sweet lime)', 'mamey seed kernels (pixtle)', 'escamoles (ant larvae)', 'fresh chapulines (grasshoppers)', 'jumiles (taxco stink bugs)', 'dried charales');
-  put(single('Bitter almonds'), 'bitter apricot kernels (armelline)');
   put(single('Cilantro'), 'vietnamese coriander (rau răm)', 'culantro (ngò gai)', 'sawtooth coriander (culantro)', 'culantro (sawtooth coriander)');
   put(single('Dried chili peppers'), 'dried guajillo chiles', 'guajillo chiles', 'dried chiles de árbol', 'dried mulato chiles', 'dried cascabel chiles', 'dried chilhuacle negro chiles', 'dried chilcostle chiles', 'chile piquín, ground', 'ground chile piquín', "piment d'espelette", "piment d'espelette (ground basque chili)");
   put(single('Green chili peppers'), 'poblano chiles', 'poblano chile', 'habanero chile', 'fresh anaheim chiles', 'chiles de agua');

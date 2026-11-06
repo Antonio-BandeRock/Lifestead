@@ -1,9 +1,10 @@
 // Where the recipes stand against the curated list. Reads both databases, changes neither.
 //   node curate-recipe-check.js <output.json>
-// Every ingredient name in curated_recipe_ingredients and curated_recipe_unlisted_ingredients (live database) lands in one of five places:
+// Every ingredient name in curated_recipe_ingredients and curated_recipe_unlisted_ingredients (live database) lands in one of six places:
 //   listed   the curated list has this food, under this name or another one
 //   swap     a listed food does the job, and the recipe's wording would change (fresh for canned, and so on)
 //   home     made in a kitchen from listed foods
+//   named    no source has it, so the recipe keeps its name with no nutrition behind it, as the app does today (owner's call, 2026-11-06)
 //   missing  nothing listed does the job, so the owner decides
 //   aid      not eaten as a food (a wrapper, slaked lime, rennet), so no food list needs it and it blocks nothing
 // Names in the first table are matched on their words first, and every name that match got wrong or could not place is set by hand in HAND.
@@ -16,12 +17,9 @@ const LIVE = path.resolve(__dirname, '..', '..', 'assets', 'data', 'foods_refere
 const UNI = path.resolve(__dirname, '..', 'unified_foods.sqlite');
 const q = (db, s) => JSON.parse(execFileSync('sqlite3', ['-readonly', '-json', db, s], { maxBuffer: 2e9 }).toString() || '[]');
 
-const SUGAR = 'White and brown sugar';
-const OILS = 'Refined seed oils';
 const ALCOHOL = 'Alcohol used in cooking';
 const PANTRY = 'Pantry items';
 const SAUCES = 'Bottled sauces';
-const OTHER = 'Single foods hidden today';
 const NOSOURCE = 'Whole foods no source has';
 const FERMENT = 'Traditional ferments';
 const CURED = 'Sausages and cured meats with no listing';
@@ -29,9 +27,11 @@ const CURED = 'Sausages and cured meats with no listing';
 const listed = (to) => ({ kind: 'listed', to });
 const swap = (to, note) => ({ kind: 'swap', to, note });
 const home = (how, recipe) => ({ kind: 'home', how, recipe });
+const named = (group, stand, caution) => ({ kind: 'named', group, stand: stand || null, caution: caution || null });
 const missing = (group, stand) => ({ kind: 'missing', group, stand });
 const aid = (note) => ({ kind: 'aid', note });
 
+const SEED_OIL = 'A listed oil in place of corn or sunflower oil; cold-pressed canola also works';
 const BREAD = 'Flour, yeast, water and salt';
 const MUSTARD = 'Mustard seeds or powder, vinegar, water and salt';
 const HAND = {
@@ -118,7 +118,7 @@ const HAND = {
   'Mustard medium hot': home(MUSTARD),
   'Mustard hot': home(MUSTARD),
   'Mustard, prepared, yellow': home(MUSTARD),
-  'Tomato ketchup': home('Tomato paste, vinegar, raw sugar and spices'),
+  'Tomato ketchup': home('Tomato paste, vinegar, sugar and spices'),
   'Curry powder': home('A mix of listed spices'),
   'Spices, curry powder': home('A mix of listed spices'),
   'Herbes de Provence, séchées': home('A mix of listed dried herbs'),
@@ -127,35 +127,36 @@ const HAND = {
   'Meat substitute containing gluten (seitan)': home('Wheat gluten and water'),
   'Hot seasoning, Chinese chili oil': home('Chili and oil', 'Hong You (Sichuan Chili Oil)'),
   'Chilli sauce (Sambal Oelek)': home('Chili, salt and vinegar'),
-  'Hoisinsaus, hjemmelaget': home('Miso or soy sauce, raw sugar, garlic and spices'),
+  'Hoisinsaus, hjemmelaget': home('Miso or soy sauce, sugar, garlic and spices'),
   'Beetroot pickled, drained': home('Beets, vinegar and salt'),
   'Peppers, hot pickled': home('Hot peppers, vinegar and salt'),
-  // Nothing listed does the job.
-  'Sugar (Cane / Granulated)': missing(SUGAR, 'Raw sugar'),
-  'Brown Sugar (Commercial)': missing(SUGAR, 'Whole cane sugar'),
-  Majsolja: missing(OILS, 'Peanut oil or Cold-pressed canola oil'),
-  Maisolje: missing(OILS, 'Peanut oil or Cold-pressed canola oil'),
-  Solrosolja: missing(OILS, 'Peanut oil or Cold-pressed canola oil'),
-  Solsikkeolje: missing(OILS, 'Peanut oil or Cold-pressed canola oil'),
-  'Seasoning sauce, oyster sauce': missing(SAUCES),
-  'Seasoning sauce, Tian Mian Jiang (sweet soybean paste)': missing(SAUCES, 'Miso with raw sugar'),
-  'Baking powder': missing(PANTRY, 'Baking soda with cream of tartar'),
-  'Baking powder, dry powder': missing(PANTRY, 'Baking soda with cream of tartar'),
-  Gelatine: missing(PANTRY, 'Agar, though it sets differently'),
-  Capers: missing(PANTRY),
-  'Capers (In Vinegar / Raw)': missing(PANTRY),
-  'Dark chocolate': missing(PANTRY, 'Unsweetened baking chocolate with raw sugar'),
-  'Chocolate, dark, 45- 59% cacao solids': missing(PANTRY, 'Unsweetened baking chocolate with raw sugar'),
-  'Chocolate, dark, 60-69% cacao solids': missing(PANTRY, 'Unsweetened baking chocolate with raw sugar'),
-  Hominy: missing(PANTRY),
-  Savoiardikex: missing(PANTRY),
-  'Millet, puffed': missing(PANTRY),
-  'Chicken Feet': missing(OTHER),
-  'Mushroom, straw, canned, drained solids': missing(OTHER),
+  Savoiardikex: home('Egg, sugar and flour'),
+  // Listed by the owner's third round, 2026-11-06.
+  'Sugar (Cane / Granulated)': listed('White sugar'),
+  'Brown Sugar (Commercial)': listed('Brown sugar'),
+  'Seasoning sauce, oyster sauce': listed('Oyster sauce'),
+  'Seasoning sauce, Tian Mian Jiang (sweet soybean paste)': listed('Sweet bean sauce'),
+  'Baking powder': listed('Baking powder'),
+  'Baking powder, dry powder': listed('Baking powder'),
+  Gelatine: listed('Gelatin'),
+  Capers: listed('Capers'),
+  'Capers (In Vinegar / Raw)': listed('Capers'),
+  'Dark chocolate': listed('Dark chocolate'),
+  'Chocolate, dark, 45- 59% cacao solids': listed('Semisweet chocolate'),
+  'Chocolate, dark, 60-69% cacao solids': listed('Dark chocolate'),
+  Hominy: listed('Hominy'),
+  'Millet, puffed': listed('Puffed millet'),
+  'Chicken Feet': listed('Chicken feet'),
+  'Mushroom, straw, canned, drained solids': listed('Canned straw mushrooms'),
+  // The refined seed oils stay hidden by the owner's choice, so a listed oil does the job.
+  Majsolja: swap('Peanut oil', SEED_OIL),
+  Maisolje: swap('Peanut oil', SEED_OIL),
+  Solrosolja: swap('Peanut oil', SEED_OIL),
+  Solsikkeolje: swap('Peanut oil', SEED_OIL),
 };
 for (const n of ['White Wine', 'Red Wine', 'Rum 37.5/40 % vol', 'Rum 80 % vol', 'Pale beer', 'Dark beer', 'Pilsner beer', 'Cider', 'Liqueur', 'Starkvin vol. % 18 typ Madeira', 'Alcoholic beverage, beer, regular, all', 'Alcoholic beverage, spirit, ~40% v/v, all (Brandy, Gin, Rum, Vodka and Whisky)', 'Konjak el. brandy vol. % 40', 'Dessert Wine', 'Sterkvin, søt, portvin, 20 vol-% alkohol']) HAND[n] = missing(ALCOHOL);
 
-const OUTSIDE = require('./curate-recipe-outside')({ listed, swap, home, missing, aid, G: { SUGAR, OILS, ALCOHOL, PANTRY, SAUCES, OTHER, NOSOURCE, FERMENT, CURED } });
+const OUTSIDE = require('./curate-recipe-outside')({ listed, swap, home, named, missing, aid, SEED_OIL, G: { ALCOHOL, PANTRY, SAUCES, NOSOURCE, FERMENT, CURED } });
 const outsideRows = q(LIVE, 'select recipe_id, lower(trim(name)) name from curated_recipe_unlisted_ingredients');
 const ings = q(LIVE, 'select recipe_id, base_name from curated_recipe_ingredients');
 const recipes = q(LIVE, 'select id, name, builder_type from curated_recipes');
@@ -202,9 +203,9 @@ for (const i of ings) byRecipe.get(i.recipe_id).add(i.base_name);
 const usage = new Map();
 for (const i of ings) { const u = usage.get(i.base_name) || { rows: 0, recipes: new Set() }; u.rows += 1; u.recipes.add(i.recipe_id); usage.set(i.base_name, u); }
 
-const RANK = { listed: 0, swap: 1, home: 2, missing: 3 };
+const RANK = { listed: 0, swap: 1, home: 2, named: 3, missing: 4 };
 const rankOf = (p) => (p.kind === 'aid' ? 0 : RANK[p.kind]);
-const standing = { listed: 0, swap: 0, home: 0, missing: 0 };
+const standing = { listed: 0, swap: 0, home: 0, named: 0, missing: 0 };
 const missingFor = new Map();
 for (const r of recipes) {
   const ps = [...byRecipe.get(r.id)].map((n) => [n, placed.get(n)]);
@@ -212,7 +213,7 @@ for (const r of recipes) {
   standing[Object.keys(RANK)[worst]] += 1;
   missingFor.set(r.id, new Set(ps.filter(([, p]) => p.kind === 'missing').map(([, p]) => p.group)));
 }
-const groups = [...new Set([...Object.values(HAND), ...Object.values(OUTSIDE)].filter((h) => h.group).map((h) => h.group))];
+const groups = [...new Set([...Object.values(HAND), ...Object.values(OUTSIDE)].filter((h) => h.kind === 'missing').map((h) => h.group))];
 const groupRows = groups.map((g) => {
   const blocked = recipes.filter((r) => missingFor.get(r.id).has(g));
   return { group: g, recipes: blocked.length, alone: blocked.filter((r) => missingFor.get(r.id).size === 1).length };
@@ -234,7 +235,7 @@ const waiting = recipes.filter((r) => missingFor.get(r.id).size).map((r) => ({
 })).sort((a, b) => a.items.length - b.items.length || a.name.localeCompare(b.name));
 const builders = {};
 for (const r of recipes) {
-  const b = builders[r.builder_type] = builders[r.builder_type] || { builder: r.builder_type, recipes: 0, listed: 0, swap: 0, home: 0, missing: 0 };
+  const b = builders[r.builder_type] = builders[r.builder_type] || { builder: r.builder_type, recipes: 0, listed: 0, swap: 0, home: 0, named: 0, missing: 0 };
   b.recipes += 1;
   b[Object.keys(RANK)[Math.max(...[...byRecipe.get(r.id)].map((n) => rankOf(placed.get(n))), 0)]] += 1;
 }
@@ -246,7 +247,7 @@ const out = {
   waiting, builders: Object.values(builders).sort((a, b) => b.recipes - a.recipes), standIn, onlyOne, recipes: recipes.length, names: placed.size, rows: ings.length, standing, groups: groupRows,
   counts: Object.fromEntries([...Object.keys(RANK), 'aid'].map((k) => [k, list(k).length])),
   byName: list('listed').filter((x) => x.by === 'name').length, byWords: list('listed').filter((x) => x.by === 'words').length, byHand: list('listed').filter((x) => x.by === 'hand').length,
-  renamed: list('listed').filter((x) => x.by === 'hand'), matchedOnWords: list('listed').filter((x) => x.by === 'words'), swap: list('swap'), home: list('home'), missing: list('missing'), aid: list('aid'),
+  renamed: list('listed').filter((x) => x.by === 'hand'), matchedOnWords: list('listed').filter((x) => x.by === 'words'), swap: list('swap'), home: list('home'), named: list('named'), missing: list('missing'), aid: list('aid'),
   mainNames: [...placed.keys()].filter((n) => !n.startsWith(MARK)).length, outsideNames: outsideNames.size, outsideRows: outsideRows.length,
   namedRecipes: Object.fromEntries(['Baguette', 'Mayonnaise', 'Simple Whole Wheat Bread', 'Homemade Wheat Tortillas', 'Hong You (Sichuan Chili Oil)'].map((n) => { const r = recipes.find((x) => x.name === n); return [n, r ? [...missingFor.get(r.id)] : null]; })),
 };
@@ -256,6 +257,7 @@ console.table(groupRows);
 console.table(out.builders);
 console.log('waiting recipes where every missing item has a stand-in:', standIn, '| waiting on one item only:', onlyOne);
 console.log('missing:', out.missing.map((x) => `${x.name} ${x.recipes}`).join('; '));
+console.log('named:', out.named.map((x) => `${x.name} ${x.recipes}`).join('; '));
 console.log('home:', out.home.map((x) => `${x.name} ${x.recipes}`).join('; '));
 console.log('swap:', out.swap.map((x) => `${x.name} ${x.recipes}`).join('; '));
 console.log('named recipes blocked by:', JSON.stringify(out.namedRecipes));

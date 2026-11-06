@@ -271,7 +271,7 @@ Implementation: `lib/healingStage.ts`, `lib/healingStageAdvisory.ts`, `lib/condi
 
 **Why:** the current reference DB came from a one-time filter script with no testable rules. The pipeline rebuilds it reproducibly, discarding nothing, with a versioned rule engine and human review through a published audit tool.
 
-**Status (drifts, so verify via `sqlite3.exe unified_foods.sqlite`):** 9 sources ingested. Curation restarted 2026-11-06 into `food_curation`: 2,185 foods shown, 6,389 held to compare, 24,133 hidden; 775 of 1,460 recipes can be made from the list so far. [Report and open questions](https://claude.ai/artifact/TK8WN9CaUE7ifYUXeEABC1).
+**Status (drifts, so verify via `sqlite3.exe unified_foods.sqlite`):** 9 sources ingested. Curation restarted 2026-11-06 into `food_curation`: 2,254 foods shown, 6,521 held to compare, 23,932 hidden; 1,278 of 1,460 recipes can be made from the list, and the other 182 wait only on whether cooking alcohol is listed. [Report and open questions](https://claude.ai/artifact/TK8WN9CaUE7ifYUXeEABC1).
 
 **Phases:** 1 and 2 done. **3 and 4 have a first pass; the owner's questions in the report are the next step.** 5 (merge curated data), 6 (integrity verification) and 7 (atomic swap, gated on `REFERENCE_DB_VERSION`) not started. Nothing here is urgent.
 
