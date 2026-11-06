@@ -1,5 +1,5 @@
-// What lib/learnCourseDevOnly.ts becomes in the store and tester builds:
-// no courses, so their cards never enter those bundles. See metro.config.js.
+// What lib/learnCourseDevOnly.ts becomes in the store build: no courses, so
+// their cards never enter that bundle. See metro.config.js.
 
 import type { BundledCourse } from '../learnCourseFile';
 

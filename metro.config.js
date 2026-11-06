@@ -141,8 +141,12 @@ if (process.env.APP_VARIANT === 'test' || process.env.APP_VARIANT === 'store') {
     [path.join(__dirname, 'lib', 'devSeed.ts'), path.join(__dirname, 'lib', 'variantStubs', 'devSeed.ts')],
     [path.join(__dirname, 'components', 'ApproveTesterPanel.tsx'), nothing],
     [path.join(__dirname, 'lib', 'testerApprove.ts'), path.join(__dirname, 'lib', 'variantStubs', 'testerApprove.ts')],
-    [path.join(__dirname, 'lib', 'learnCourseDevOnly.ts'), path.join(__dirname, 'lib', 'variantStubs', 'learnCourseDevOnly.ts')],
   ]);
+  // Developer and Test stay matched until the app goes to testers (direct
+  // instruction, 2026-11-06), so only the store build leaves this set out.
+  if (process.env.APP_VARIANT === 'store') {
+    devOnly.set(path.join(__dirname, 'lib', 'learnCourseDevOnly.ts'), path.join(__dirname, 'lib', 'variantStubs', 'learnCourseDevOnly.ts'));
+  }
   const variantResolveRequest = config.resolver.resolveRequest;
   config.resolver.resolveRequest = (context, moduleName, platform) => {
     const result = (variantResolveRequest || context.resolveRequest)(context, moduleName, platform);
