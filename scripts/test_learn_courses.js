@@ -115,10 +115,9 @@ check('language part reads', basics.languagePart('es-MX') === 'es' && basics.lan
 check('an English app shows only the set taught from English', idsFor('en') === 'es-for-en');
 check('a Spanish app shows only the set taught from Spanish', idsFor('es') === 'en-for-es');
 {
-  const metro = fs.readFileSync(path.join(root, 'metro.config.js'), 'utf8').replace(/\r\n/g, '\n');
-  const storeBlock = metro.indexOf("if (process.env.APP_VARIANT === 'store') {");
-  const swap = metro.indexOf("'lib', 'learnCourseDevOnly.ts'");
-  check('the Spanish set is swapped out only inside the store-only block', storeBlock > 0 && swap > storeBlock && metro.indexOf('}', storeBlock) > swap);
+  const shipped = fs.readFileSync(path.join(root, 'lib', 'learnCoursesBundled.ts'), 'utf8');
+  const metro = fs.readFileSync(path.join(root, 'metro.config.js'), 'utf8');
+  check('both sets ship in every version', shipped.includes('es-for-en.json') && shipped.includes('en-for-es.json') && !metro.includes('learnCourse'));
 }
 check('a third language shows none, and hides nothing behind a shelf', idsFor('fi') === '');
 check('a new set needs no change in the code', idsFor('fi', [...sets, { deck: { ...es.deck, id: 'sv-for-fi', nativeCode: 'fi-FI' } }]) === 'sv-for-fi');

@@ -32,6 +32,5 @@ Then deploy the site (`docs/app-links`) with wrangler.
 ## Order for the first tester
 
 1. Tony and Lisa install their tester copies first, and Tony approves both from his dev build, so the whole loop is tried once before anybody else sees it.
-2. Before Victor gets anything, decide about Basic Spanish for English Speakers. It is in Test only so that Test matches the developer version. If the school whose lessons it follows has not said it is fine with this, swap `lib/learnCourseDevOnly.ts` for its stand-in in the test build too (`metro.config.js`) and publish.
-3. Victor next: share the folder with his address, send the invitation, approve his request when it arrives.
-4. The iPhone waits; there is no iPhone tester build yet.
+2. Victor next: share the folder with his address, send the invitation, approve his request when it arrives.
+3. The iPhone waits; there is no iPhone tester build yet.

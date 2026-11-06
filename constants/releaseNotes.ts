@@ -41,6 +41,13 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.83.2',
+    date: '2026-11-06',
+    changes: [
+      'Basic Spanish for English Speakers and Basic English for Spanish Speakers are now both part of every version of the app.',
+    ],
+  },
+  {
     version: '1.0.83.1',
     date: '2026-11-06',
     changes: [

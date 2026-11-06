@@ -5,10 +5,10 @@
 
 import type { BundledCourse, Course, CourseDeck } from './learnCourseFile';
 import type { LanguageOutline } from './languageBasics';
-import { DEV_ONLY_COURSES } from './learnCourseDevOnly';
 import englishForSpanish from '../assets/courses/en-for-es.deck.json';
+import spanishForEnglish from '../assets/courses/es-for-en.deck.json';
 
-const EVERY_BUILD: BundledCourse[] = [
+const BUNDLED: BundledCourse[] = [
   {
     deck: englishForSpanish.deck as CourseDeck,
     fingerprint: englishForSpanish.fingerprint,
@@ -17,10 +17,18 @@ const EVERY_BUILD: BundledCourse[] = [
      
     loadOutline: () => require('../assets/courses/en-for-es.outline.json') as LanguageOutline,
   },
+  {
+    deck: spanishForEnglish.deck as CourseDeck,
+    fingerprint: spanishForEnglish.fingerprint,
+     
+    load: () => require('../assets/courses/es-for-en.json') as Course,
+     
+    loadOutline: () => require('../assets/courses/es-for-en.outline.json') as LanguageOutline,
+  },
 ];
 
 export function bundledCourses(): BundledCourse[] {
-  return [...EVERY_BUILD, ...DEV_ONLY_COURSES];
+  return BUNDLED;
 }
 
 export function bundledCourse(id: string): BundledCourse | null {
