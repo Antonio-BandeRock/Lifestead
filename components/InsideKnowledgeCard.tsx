@@ -13,7 +13,7 @@ import { textShadow, typography } from '../constants/typography';
 import { t } from '../lib/i18n';
 import { localDayOf } from '../lib/interests';
 import { insideKnowledge, type InsideKnowledge } from '../lib/insideKnowledge';
-import { countCourseKnown, listLearnReviews } from '../lib/learnDb';
+import { listLearnReviews } from '../lib/learnDb';
 import { LEARN_DECKS, type LearnDeck } from '../lib/learnDecks';
 import { listMyDecks } from '../lib/learnMyDecksDb';
 import { loadRecordDecks } from '../lib/learnRecordDecksDb';
@@ -31,10 +31,9 @@ export function InsideKnowledgeCard() {
         listLearnReviews(),
         listMyDecks().catch((): LearnDeck[] => []),
         loadRecordDecks(today, t).catch((): LearnDeck[] => []),
-        countCourseKnown().catch(() => 0),
       ])
-        .then(([reviews, mine, fromRecords, courseKnown]) => {
-          if (live) setLines(insideKnowledge([...LEARN_DECKS, ...mine, ...fromRecords], reviews, today, t, courseKnown));
+        .then(([reviews, mine, fromRecords]) => {
+          if (live) setLines(insideKnowledge([...LEARN_DECKS, ...mine, ...fromRecords], reviews, today, t));
         })
         .catch(() => {
           if (live) setLines(null);

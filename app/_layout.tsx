@@ -779,10 +779,10 @@ function RootStack() {
         }}
       />
       <Stack.Screen
-        name="learn-course"
+        name="language-basics"
         options={{
           headerShown: true,
-          title: 'Course',
+          title: 'Languages',
           headerStyle: { backgroundColor: colors.background },
           headerTintColor: colors.textPrimary,
         }}

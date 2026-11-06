@@ -142,6 +142,7 @@ export const HOME_SECTION_TAB_PATH: Record<HomeSectionKey, string | null> = {
   routines: null,
   doneChecks: null,
   insideKnowledge: '/interests',
+  languageBasics: '/interests',
   // Each tab's tutorials, in that tab's group (2026-10-28).
   tutorialsHome: '/',
   tutorialsLife: '/life',

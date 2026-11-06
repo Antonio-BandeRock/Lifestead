@@ -1,9 +1,10 @@
-// The courses that ship with the app (2026-11-05). A course's Deck sheet is a small
-// file of its own, so the library can list every course without reading a card,
-// and the cards are required only when one opens. A new bundled course is one more
-// entry here; nothing else names any course.
+// The sets of language basics that ship with the app (2026-11-05). A set's Deck sheet
+// is a small file of its own, so the Languages lens can list every set without reading
+// a card, and the cards and outline are required only when asked for. A new set is one
+// more entry here; nothing else names any set.
 
 import type { BundledCourse, Course, CourseDeck } from './learnCourseFile';
+import type { LanguageOutline } from './languageBasics';
 import { DEV_ONLY_COURSES } from './learnCourseDevOnly';
 import englishForSpanish from '../assets/courses/en-for-es.deck.json';
 
@@ -11,8 +12,10 @@ const EVERY_BUILD: BundledCourse[] = [
   {
     deck: englishForSpanish.deck as CourseDeck,
     fingerprint: englishForSpanish.fingerprint,
-    // eslint-disable-next-line @typescript-eslint/no-require-imports -- required only when the course opens, so its cards are never parsed at startup.
+     
     load: () => require('../assets/courses/en-for-es.json') as Course,
+     
+    loadOutline: () => require('../assets/courses/en-for-es.outline.json') as LanguageOutline,
   },
 ];
 

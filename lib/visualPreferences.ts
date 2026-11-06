@@ -393,6 +393,9 @@ export type HomeSectionKey =
   // have cards back for their day, in the Interests group
   // (components/InsideKnowledgeCard.tsx). Never a share of answers.
   | 'insideKnowledge'
+  // Language basics, 2026-11-05: the units turned on under Interests > Languages,
+  // in the order they should be learned (components/LanguageBasicsHomeCard.tsx).
+  | 'languageBasics'
   // Tutorials inside each tab's band, 2026-10-28. Direct request: "we
   // could have them inside of each separate Tab band ... rather than one
   // Tutorials band on Home for all of them in one place." One key per tab,
@@ -466,6 +469,7 @@ const DESIGNED_HOME_SECTION_KEYS: HomeSectionKey[] = [
   'tutorialsGarden',
   // Interests.
   'insideKnowledge',
+  'languageBasics',
   'tutorialsInterests',
   // Schedules. mealsLoggedToday is stated here beside its tab-mates
   // rather than further down: the grouping pulled it up anyway, and a
@@ -594,6 +598,7 @@ export const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
   tutorialsFood: 'Food Tutorials',
   tutorialsGarden: 'Garden Tutorials',
   insideKnowledge: 'Inside Knowledge',
+  languageBasics: 'Language Basics',
   tutorialsInterests: 'Interests Tutorials',
   tutorialsSchedule: 'Schedules Tutorials',
   tutorialsSignals: 'Signals Tutorials',

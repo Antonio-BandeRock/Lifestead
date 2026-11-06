@@ -23,6 +23,7 @@ import { GroceryQuickAdd } from '../../components/GroceryQuickAdd';
 import { TodayPicks } from '../../components/TodayPicks';
 import { DaysUntilSection } from '../../components/DaysUntilSection';
 import { InsideKnowledgeCard } from '../../components/InsideKnowledgeCard';
+import { LanguageBasicsHomeCard } from '../../components/LanguageBasicsHomeCard';
 import { StartWorkoutCard } from '../../components/StartWorkoutCard';
 import { DailyScalesPicker } from '../../components/DailyScalesPicker';
 import { DayArc } from '../../components/DayArc';
@@ -4757,6 +4758,20 @@ export default function HomeScreen() {
     );
   }
 
+  // Language basics, 2026-11-05: the units turned on under Interests > Languages,
+  // in the order they should be learned, each opening that unit.
+  function renderLanguageBasics() {
+    if (!isHomeSectionVisible(visualPrefs, 'languageBasics')) return null;
+    return renderBand(
+      'languageBasics',
+      'Language Basics',
+      <View style={styles.bandBody}>
+        <LanguageBasicsHomeCard />
+      </View>,
+      { icon: 'language-outline' },
+    );
+  }
+
   // The other half of Garden's group: picking something is the thing that
   // happens away from the phone and gets remembered later, so it is a
   // one-tap row into the Harvest Log rather than a card to read.
@@ -4929,6 +4944,8 @@ export default function HomeScreen() {
         return renderLogHarvest();
       case 'insideKnowledge':
         return renderInsideKnowledge();
+      case 'languageBasics':
+        return renderLanguageBasics();
       case 'digestCards':
         return renderDigestCards();
       case 'routines':

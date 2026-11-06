@@ -41,6 +41,16 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.82.2',
+    date: '2026-11-05',
+    changes: [
+      "Interests has a new lens, Languages, separate from Learn. It shows only the basics taught from the language this app is in: 26 plainly named units, in the order they should be learned, each divided into small decks.",
+      "Turn a unit on and it appears on Home under Language Basics. Study one unit, one deck, or any number of units together, in learning order or at random.",
+      "An information icon on each deck says how it relates to the decks before it, which of those you have worked on, and which rules to keep in mind.",
+      "A card has three signs: + to see it more often, = to keep it in the same rotation, and the minus sign to see it less often. Swiping is gone, and language cards no longer count in Learn's Things You Now Know."
+    ],
+  },
+  {
     version: '1.0.82.1',
     date: '2026-11-05',
     changes: [

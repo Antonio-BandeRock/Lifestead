@@ -18,7 +18,7 @@ import type { LearnCard } from './learnDecks';
 import { isRecalled, type LearnGrade } from './learnSchedule';
 
 /** An answer as How It Has Gone reads it: matched is whether a check agreed, null where the card had none. */
-export type GoneKind = LearnKind | 'course';
+export type GoneKind = LearnKind;
 export type GoneReview = { deckId: string; cardId: string; day: string; grade: LearnGrade; kind: GoneKind | null; matched: boolean | null };
 
 type Translate = (text: string, values?: Record<string, string | number>) => string;
@@ -33,7 +33,6 @@ export const KIND_NAMES: Record<GoneKind, string> = {
   order: 'Put in order',
   pairs: 'Match the pairs',
   explain: 'In your words',
-  course: 'Course cards',
 };
 
 /** A whole-number share, never a decimal that reads as more exact than a handful of answers can be. */

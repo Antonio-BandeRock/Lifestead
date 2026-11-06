@@ -3,16 +3,16 @@
 // assets/courses/ is carried. For each workbook it writes:
 //
 //   assets/courses/<deck id>.json        the whole course, loaded when it opens
-//   assets/courses/<deck id>.deck.json   just the Deck sheet, for the library
+//   assets/courses/<deck id>.deck.json   just the Deck sheet, for the Languages lens
 //
 // Reads a workbook through lib/xlsxRead.ts and lib/learnCourseFile.ts, the
-// same code the in-app import uses, and stops on any problem or note.
+// same code scripts/test_learn_courses.js uses, and stops on any problem or note.
 //
 //   node scripts/build_course_files.js          writes the files
 //   node scripts/build_course_files.js --check  exit 1 if a file is out of date
 //
 // A workbook is left exactly as it is. What a course says in the app and is not
-// meant to carry from its workbook goes in SHIP_DESCRIPTIONS.
+// meant to carry from its workbook goes in SHIP_NAMES and SHIP_DESCRIPTIONS.
 /* global __dirname */
 const fs = require('fs');
 const path = require('path');
@@ -35,8 +35,13 @@ function load(rel) {
 
 // The Spanish course's workbook names the school whose lessons it follows. The
 // school's name does not ship, whichever version of the app carries the course.
+const SHIP_NAMES = {
+  'es-for-en': 'Basic Spanish for English Speakers',
+  'en-for-es': 'Basic English for Spanish Speakers',
+};
 const SHIP_DESCRIPTIONS = {
-  'es-for-en': 'One study path of 26 units: six lessons of a Spanish class plus everything needed to get by in Mexico, in the order it builds.',
+  'es-for-en': 'What to learn first so the rest gets easier: 26 plainly named units, in the order they should be learned, including what you need to get by in Mexico.',
+  'en-for-es': 'What to learn first so the rest gets easier: 26 plainly named units of American English, in the order they should be learned. The explanations are in Spanish.',
 };
 
 const { readCourseBytes, courseFingerprint } = load('lib/learnCourseFile.ts');
@@ -56,6 +61,7 @@ for (const file of fs.readdirSync(decksDir).filter((name) => name.endsWith('.xls
   }
   if (!read.course) continue;
   const course = read.course;
+  if (SHIP_NAMES[course.deck.id]) course.deck.name = SHIP_NAMES[course.deck.id];
   if (SHIP_DESCRIPTIONS[course.deck.id]) course.deck.description = SHIP_DESCRIPTIONS[course.deck.id];
   for (const card of course.cards) {
     if (seenIds.has(card.id)) {

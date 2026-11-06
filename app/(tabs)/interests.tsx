@@ -32,6 +32,7 @@ import { listProjects } from '../../lib/projectsDb';
 import { countInterestThings } from '../../lib/interestThingsDb';
 import type { ThingKind } from '../../lib/interestThings';
 import { countLibraryAndPeople } from '../../lib/interestLibraryDb';
+import { LanguagesSection } from '../../components/LanguagesSection';
 import { LearnSection } from '../../components/LearnSection';
 import { useOnVaultChange } from '../../lib/vaultReads';
 
@@ -66,6 +67,7 @@ type InterestsLens =
   | 'daysUntil'
   | 'projects'
   | 'learn'
+  | 'languages'
   | 'makingItPay';
 
 const LENS_KEYS: InterestsLens[] = [
@@ -80,6 +82,7 @@ const LENS_KEYS: InterestsLens[] = [
   'daysUntil',
   'projects',
   'learn',
+  'languages',
   'makingItPay',
 ];
 
@@ -95,6 +98,7 @@ const LENS_FULL_NAMES: Record<InterestsLens, string> = {
   daysUntil: 'Days Until',
   projects: 'Projects',
   learn: 'Learn',
+  languages: 'Languages',
   makingItPay: 'Making It Pay',
 };
 
@@ -234,11 +238,26 @@ const PROJECTS_HELP: HelpSection[] = [
   },
 ];
 
-const LEARN_HELP: HelpSection[] = [
+const LANGUAGES_HELP: HelpSection[] = [
   {
-    heading: 'Courses',
-    body: 'A course is a long set of cards studied in order, such as a language, split into units. Each course keeps your place, the number of new cards you want a day and your settings, and you can have several going at once. Cards you have recalled on two separate days count toward Things You Now Know, the same as a deck.',
+    heading: 'What this is for',
+    body: 'The basics of a language: what to learn first so the rest gets easier. A set has 26 plainly named units in the order they should be learned, and each unit is divided into small decks.',
   },
+  {
+    heading: 'How to use it',
+    body: 'Open a unit and study all of it or one deck. Turn a unit on with Show on Home and it waits for you on Home. Study Several Together takes any number of units, in learning order or at random. The information icon on a deck says how it relates to the ones before it and which rules to keep in mind.',
+  },
+  {
+    heading: 'The three signs on a card',
+    body: 'After you turn a card over, + shows it more often, = keeps it in the same rotation, and the minus sign shows it less often. Nothing is scored, and a day away takes nothing from anything.',
+  },
+  {
+    heading: 'Which languages',
+    body: 'You see the basics taught from the language this app is in.',
+  },
+];
+
+const LEARN_HELP: HelpSection[] = [
   {
     heading: 'What this is for',
     body: 'Decks of cards gone through a few at a time. Read the question, answer it in your head, turn the card over and say how it went. Most cards are about how to weigh a claim: what kind of study it rests on and what a headline leaves out.',
@@ -277,6 +296,7 @@ const LENSES: LensOption<InterestsLens>[] = [
   { key: 'daysUntil', label: 'Days Until', icon: 'hourglass-outline', help: DAYS_UNTIL_HELP },
   { key: 'projects', label: 'Projects', icon: 'layers-outline', help: PROJECTS_HELP },
   { key: 'learn', label: 'Learn', icon: 'school-outline', help: LEARN_HELP },
+  { key: 'languages', label: 'Languages', icon: 'language-outline', help: LANGUAGES_HELP },
   { key: 'makingItPay', label: 'Making It Pay', icon: 'trending-up-outline', help: MAKING_IT_PAY_HELP },
 ];
 
@@ -287,7 +307,7 @@ const HELP_SECTIONS: HelpSection[] = [
   },
   {
     heading: 'Where to start',
-    body: 'Open My Interests and add one. Sessions keeps the time you give it, Supplies & Equipment, Collections and Wish List keep what it has and what you would like for it, Library and People & Places keep what you learn it from and who you do it with, Money keeps what went out and came in, Days Until counts to what an interest is waiting on, Projects is for anything with steps that belongs to an interest, Learn goes through decks of cards a few at a time, and Making It Pay is reading with figures for anyone wondering about selling from one.',
+    body: 'Open My Interests and add one. Sessions keeps the time you give it, Supplies & Equipment, Collections and Wish List keep what it has and what you would like for it, Library and People & Places keep what you learn it from and who you do it with, Money keeps what went out and came in, Days Until counts to what an interest is waiting on, Projects is for anything with steps that belongs to an interest, Learn goes through decks of cards a few at a time, Languages holds the basics of a language, and Making It Pay is reading with figures for anyone wondering about selling from one.',
   },
 ];
 
@@ -424,6 +444,12 @@ export default function InterestsScreen() {
                 <View style={band.box}>
                   <Text style={styles.cardTitle}>Learn</Text>
                   <LearnSection tabColor={TAB_COLOR} />
+                </View>
+              ) : null}
+              {lens === 'languages' ? (
+                <View style={band.box}>
+                  <Text style={styles.cardTitle}>Languages</Text>
+                  <LanguagesSection />
                 </View>
               ) : null}
               {lens === 'makingItPay' ? (

@@ -1,7 +1,7 @@
 {
   "deck": {
     "id": "en-for-es",
-    "name": "English for Spanish Speakers (Inglés para hispanohablantes)",
+    "name": "Basic English for Spanish Speakers",
     "subject": "Languages",
     "courseType": "Language course",
     "targetLanguage": "English (US)",
@@ -10,9 +10,9 @@
     "nativeCode": "es-MX",
     "level": "Beginner to A2 (get by in daily life)",
     "voice": "en-US (front side)",
-    "description": "One study path of 26 units for a Spanish speaker learning American English, in the order it builds. Explanations are in Spanish.",
+    "description": "What to learn first so the rest gets easier: 26 plainly named units of American English, in the order they should be learned. The explanations are in Spanish.",
     "cardCount": 1516,
     "unitCount": 26
   },
-  "fingerprint": "h31t-lzg2wd"
+  "fingerprint": "h31y-1buuzyz"
 }

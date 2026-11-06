@@ -7,7 +7,7 @@
 
 import type { CourseCard } from './learnCourseFile';
 import { courseCardLayout } from './learnCourseCard';
-import { languagePart } from './learnCourseLibrary';
+import { languagePart } from './languageBasics';
 
 /** Each language's two endings for a word written with @, as [singular], with plurals built by adding s. */
 const AT_ENDINGS: Record<string, [string, string]> = {

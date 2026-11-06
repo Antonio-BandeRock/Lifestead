@@ -1,7 +1,7 @@
 {
   "deck": {
     "id": "es-for-en",
-    "name": "Spanish for English Speakers",
+    "name": "Basic Spanish for English Speakers",
     "subject": "Languages",
     "courseType": "Language course",
     "targetLanguage": "Spanish (Mexico)",
@@ -10,9 +10,9 @@
     "nativeCode": "en-US",
     "level": "Beginner to A2 (get by in daily life)",
     "voice": "es-MX (front side)",
-    "description": "One study path of 26 units: six lessons of a Spanish class plus everything needed to get by in Mexico, in the order it builds.",
+    "description": "What to learn first so the rest gets easier: 26 plainly named units, in the order they should be learned, including what you need to get by in Mexico.",
     "cardCount": 1977,
     "unitCount": 26
   },
-  "fingerprint": "n54g-187ch7z"
+  "fingerprint": "n55a-15nfodu"
 }

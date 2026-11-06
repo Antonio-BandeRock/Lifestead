@@ -25,7 +25,7 @@ export function useBandFolds() {
     let isCurrent = true;
     getVisualPreferences()
       .then((prefs) => {
-        if (isCurrent) setExpanded(prefs.bandExpanded ?? {});
+        if (isCurrent) setExpanded((current) => ({ ...(prefs.bandExpanded ?? {}), ...current }));
       })
       .catch((error) => {
         console.warn('[useBandFolds] Could not load band folds', error);
@@ -50,5 +50,13 @@ export function useBandFolds() {
     });
   }, []);
 
-  return { isOpen, toggle };
+  // For a screen sent to one band: opens it, and it stays open like any band tapped open.
+  const open = useCallback((key: string) => {
+    setExpanded((current) => ({ ...current, [key]: true }));
+    void setVisualPreferences({ bandExpanded: { [key]: true } }).catch((error) => {
+      console.warn('[useBandFolds] Could not save a band fold', error);
+    });
+  }, []);
+
+  return { isOpen, toggle, open };
 }

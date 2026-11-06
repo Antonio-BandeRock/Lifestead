@@ -25,7 +25,7 @@ function listInWords(names: string[], t: Translate): string {
   return t('{first} and {last}', { first: names.slice(0, -1).join(', '), last: names[names.length - 1] });
 }
 
-export function insideKnowledge(decks: LearnDeck[], reviews: LearnReview[], today: string, t: Translate = plain, courseKnown = 0): InsideKnowledge {
+export function insideKnowledge(decks: LearnDeck[], reviews: LearnReview[], today: string, t: Translate = plain): InsideKnowledge {
   const answered = new Set(reviews.map((review) => review.cardId));
   const readyDecks: string[] = [];
   let nextOn: string | null = null;
@@ -37,7 +37,7 @@ export function insideKnowledge(decks: LearnDeck[], reviews: LearnReview[], toda
     else if (sitting.nextReadyOn && (nextOn === null || sitting.nextReadyOn < nextOn)) nextOn = sitting.nextReadyOn;
   }
   // Left in English here: the Text that shows it translates the same pattern Learn shows.
-  const known = describeKnown(countKnown(reviews) + courseKnown);
+  const known = describeKnown(countKnown(reviews));
   let ready: string;
   if (readyDecks.length > 0) ready = t('Cards are back for their day in {decks}.', { decks: listInWords(readyDecks, t) });
   else if (answered.size === 0) ready = t('Learn has ready-made decks to start whenever you like, a few cards at a time.');

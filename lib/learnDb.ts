@@ -6,7 +6,7 @@ import { getDatabase } from './db';
 import { localDayOf } from './interests';
 import type { GoneReview } from './learnHowItHasGone';
 import { LEARN_KINDS, type LearnKind } from './learnKinds';
-import { KNOWN_AFTER_DAYS, readLearnGrade, type LearnGrade, type LearnReview } from './learnSchedule';
+import { readLearnGrade, type LearnGrade, type LearnReview } from './learnSchedule';
 
 function newId(): string {
   return `learn_review_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
@@ -25,26 +25,16 @@ export async function listLearnReviews(): Promise<LearnReview[]> {
 export async function listGoneReviews(): Promise<GoneReview[]> {
   const db = await getDatabase();
   const rows = await db.getAllAsync<{ deckId: string; cardId: string; day: string; grade: string; kind: string | null; matched: number | null }>(
-    'SELECT deck_id AS deckId, card_id AS cardId, day, grade, kind, matched FROM learn_reviews ORDER BY answered_at',
+    "SELECT deck_id AS deckId, card_id AS cardId, day, grade, kind, matched FROM learn_reviews WHERE kind IS NULL OR kind <> 'course' ORDER BY answered_at",
   );
   return rows.map((row) => ({
     deckId: row.deckId,
     cardId: row.cardId,
     day: row.day,
     grade: readLearnGrade(row.grade),
-    kind: row.kind === 'course' ? 'course' : row.kind && (LEARN_KINDS as string[]).includes(row.kind) ? (row.kind as LearnKind) : null,
+    kind: row.kind && (LEARN_KINDS as string[]).includes(row.kind) ? (row.kind as LearnKind) : null,
     matched: row.matched === null || row.matched === undefined ? null : row.matched === 1,
   }));
-}
-
-/** Course cards known by the same test as a deck's: recalled on two separate days. Counted in the database, so a long course never has to be read to say a number. */
-export async function countCourseKnown(): Promise<number> {
-  const db = await getDatabase();
-  const row = await db.getFirstAsync<{ n: number }>(
-    "SELECT COUNT(*) AS n FROM (SELECT 1 FROM learn_reviews WHERE kind = 'course' AND grade IN ('withEffort', 'knewIt', 'easily') GROUP BY deck_id, card_id HAVING COUNT(DISTINCT day) >= ?)",
-    KNOWN_AFTER_DAYS,
-  );
-  return row?.n ?? 0;
 }
 
 /** Keeps one answer. Answers are never changed or removed. */

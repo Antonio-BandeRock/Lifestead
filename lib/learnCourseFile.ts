@@ -1,12 +1,13 @@
-// The course file, the one format behind every course in Learn (2026-11-05).
+// The course file, the one format behind every set of basics in Languages (2026-11-05).
 // A course is a Deck sheet and a Cards sheet in a workbook, or the same thing
 // as JSON (assets/courses/course.schema.json). Nothing in here knows about any
 // one language or subject: the Deck sheet says what the course teaches and
 // from which language, in its codes.
 //
-// Pure, so scripts/build_course_files.js and the in-app import read a file the
-// same way and scripts/test_learn_courses.js can check it without a phone.
+// Pure, so scripts/build_course_files.js and scripts/test_learn_courses.js read a
+// file the same way without a phone.
 
+import type { LanguageOutline } from './languageBasics';
 import { looksLikeZip, readXlsx, type XlsxSheets } from './xlsxRead';
 
 export const COURSE_SCHEMA_VERSION = 1;
@@ -52,7 +53,7 @@ export type CourseCard = {
 export type Course = { schema: number; deck: CourseDeck; cards: CourseCard[] };
 
 /** A course that ships with the app. Its Deck sheet is always at hand, and its cards load only when it opens. */
-export type BundledCourse = { deck: CourseDeck; fingerprint: string; load: () => Course };
+export type BundledCourse = { deck: CourseDeck; fingerprint: string; load: () => Course; loadOutline: () => LanguageOutline };
 
 export type CourseRead = {
   /** Null when a problem stopped the file being read. */

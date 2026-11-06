@@ -1,14 +1,15 @@
-// One course card being studied (2026-11-05). Tap to turn it over, then swipe or
-// press one of the four grades. What a card holds is drawn through CourseText, so
-// it stays in the course's language whatever the app is in; the labels and buttons
-// around it are ordinary Text and follow the app.
+// One card of a set of language basics being studied (2026-11-05). Tap to turn it
+// over, then press one of three indicators: + shows it more often, = keeps it in the
+// same rotation, - shows it less often. What a card holds is drawn through CourseText,
+// so it stays as written whatever the app is in; the labels and buttons around it are
+// ordinary Text and follow the app.
 //
-// The check in Type the Answer shows the form and never decides the grade, the same
-// as everywhere else in Learn: the person grades, and the check is kept beside it.
+// The check in Type the Answer shows the form and never decides anything: the person
+// presses the indicator, and the check is kept beside it.
 
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { Animated, PanResponder, Platform, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useMemo, useRef, useState, type ReactNode } from 'react';
+import { Animated, Platform, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppTextInput } from './AppTextInput';
 import { useWalkMark } from './WalkMark';
 import { CourseText } from './CourseText';
@@ -18,14 +19,17 @@ import { textShadow, typography } from '../constants/typography';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import { checkTypedForm, courseCardLayout, facesOf, hiddenFormIndex, type CourseDirection, type CourseLayout, type TypedCheck } from '../lib/learnCourseCard';
 import type { CourseCard } from '../lib/learnCourseFile';
-import { LEARN_GRADES, LEARN_GRADE_LABELS, type LearnGrade } from '../lib/learnSchedule';
+import type { LearnGrade } from '../lib/learnSchedule';
 import { t } from '../lib/i18n';
 import { explainNotYet } from '../lib/notYet';
 
-/** How far a turned card has to travel before letting go grades it. */
-const SWIPE_GRADES_AT = 90;
-
 const useNativeDriver = Platform.OS !== 'web';
+
+const INDICATORS: { grade: LearnGrade; sign: string; word: string; label: string }[] = [
+  { grade: 'notYet', sign: '+', word: 'More often', label: 'Show this card more often' },
+  { grade: 'knewIt', sign: '=', word: 'Same', label: 'Keep this card in the same rotation' },
+  { grade: 'easily', sign: '−', word: 'Less often', label: 'Show this card less often' },
+];
 
 type Props = {
   card: CourseCard;
@@ -36,6 +40,8 @@ type Props = {
   canSpeak: boolean;
   onSpeak: (card: CourseCard) => void;
   onGrade: (grade: LearnGrade, matched: boolean | null) => void;
+  /** Opens what this card's deck builds on. Offered only once the card is turned, so it never gives the answer away. */
+  onInfo: () => void;
 };
 
 function FormList({ items, large }: { items: string[]; large?: boolean }) {
@@ -86,13 +92,12 @@ function Example({ text }: { text: string }) {
   return text ? <CourseText style={styles.example}>{text}</CourseText> : null;
 }
 
-export function CourseCardView({ card, direction, day, typeAnswer, showSource, canSpeak, onSpeak, onGrade }: Props) {
+export function CourseCardView({ card, direction, day, typeAnswer, showSource, canSpeak, onSpeak, onGrade, onInfo }: Props) {
   const walkMark = useWalkMark();
   const reducedMotion = useReducedMotion();
   const [turned, setTurned] = useState(false);
   const [typed, setTyped] = useState('');
   const [check, setCheck] = useState<TypedCheck | null>(null);
-  const [slide] = useState(() => new Animated.Value(0));
   const [squeeze] = useState(() => new Animated.Value(1));
 
   const layout = useMemo(() => courseCardLayout(card), [card]);
@@ -103,8 +108,6 @@ export function CourseCardView({ card, direction, day, typeAnswer, showSource, c
   const hiddenForm = layout.kind === 'verb' ? layout.targetForms[hiddenIndex] : '';
   const hiddenHint = layout.kind === 'verb' ? (layout.nativeForms?.[hiddenIndex] ?? '') : '';
 
-  // The latest of each, read from inside a gesture that began on an earlier render.
-  const gradeNow = useRef<(grade: LearnGrade) => void>(() => {});
   const graded = useRef(false);
 
   function grade(value: LearnGrade) {
@@ -112,10 +115,6 @@ export function CourseCardView({ card, direction, day, typeAnswer, showSource, c
     graded.current = true;
     onGrade(value, check === null ? null : check !== 'different');
   }
-
-  useEffect(() => {
-    gradeNow.current = grade;
-  });
 
   function turn(next: boolean) {
     if (reducedMotion) {
@@ -127,26 +126,6 @@ export function CourseCardView({ card, direction, day, typeAnswer, showSource, c
       Animated.timing(squeeze, { toValue: 1, duration: 90, useNativeDriver }).start();
     });
   }
-
-  const swipe = useMemo(
-    () =>
-      PanResponder.create({
-        onMoveShouldSetPanResponder: (_event, gesture) => turned && Math.abs(gesture.dx) > 12 && Math.abs(gesture.dx) > Math.abs(gesture.dy),
-        onPanResponderMove: (_event, gesture) => slide.setValue(gesture.dx),
-        onPanResponderRelease: (_event, gesture) => {
-          if (Math.abs(gesture.dx) < SWIPE_GRADES_AT) {
-            Animated.spring(slide, { toValue: 0, useNativeDriver }).start();
-            return;
-          }
-          const value: LearnGrade = gesture.dx > 0 ? 'knewIt' : 'notYet';
-          Animated.timing(slide, { toValue: gesture.dx > 0 ? 600 : -600, duration: reducedMotion ? 0 : 140, useNativeDriver }).start(() => gradeNow.current(value));
-        },
-        onPanResponderTerminate: () => {
-          Animated.spring(slide, { toValue: 0, useNativeDriver }).start();
-        },
-      }),
-    [turned, slide, reducedMotion],
-  );
 
   function runCheck() {
     if (!typed.trim()) {
@@ -223,7 +202,7 @@ export function CourseCardView({ card, direction, day, typeAnswer, showSource, c
 
   return (
     <View style={styles.wrap}>
-      <Animated.View {...swipe.panHandlers} ref={walkMark.ref('learn.courseCard')} style={[styles.card, walkMark('learn.courseCard'), { transform: [{ translateX: slide }, { scaleX: squeeze }] }]}>
+      <Animated.View ref={walkMark.ref('languages.card')} style={[styles.card, walkMark('languages.card'), { transform: [{ scaleX: squeeze }] }]}>
         <Pressable
           style={styles.face}
           onPress={() => turn(!turned)}
@@ -271,24 +250,32 @@ export function CourseCardView({ card, direction, day, typeAnswer, showSource, c
         </View>
       ) : null}
 
-      {speakerShows ? (
-        <TouchableOpacity ref={walkMark.ref('learn.courseHear')} style={[styles.speaker, walkMark('learn.courseHear')]} onPress={() => onSpeak(card)} accessibilityRole="button">
-          <Ionicons name="volume-medium-outline" size={18} color={colors.textPrimary} />
-          <Text style={styles.secondaryText}>Hear It</Text>
-        </TouchableOpacity>
+      {speakerShows || turned ? (
+        <View style={styles.row}>
+          {speakerShows ? (
+            <TouchableOpacity ref={walkMark.ref('languages.hear')} style={[styles.speaker, walkMark('languages.hear')]} onPress={() => onSpeak(card)} accessibilityRole="button">
+              <Ionicons name="volume-medium-outline" size={18} color={colors.textPrimary} />
+              <Text style={styles.secondaryText}>Hear It</Text>
+            </TouchableOpacity>
+          ) : null}
+          {turned ? (
+            <TouchableOpacity ref={walkMark.ref('languages.cardInfo')} style={[styles.speaker, walkMark('languages.cardInfo')]} onPress={onInfo} accessibilityRole="button">
+              <Ionicons name="information-circle-outline" size={18} color={colors.textPrimary} />
+              <Text style={styles.secondaryText}>How This Fits</Text>
+            </TouchableOpacity>
+          ) : null}
+        </View>
       ) : null}
 
       {turned ? (
-        <>
-          <View ref={walkMark.ref('learn.courseGrade')} style={[styles.grades, walkMark('learn.courseGrade')]}>
-            {LEARN_GRADES.map((value) => (
-              <TouchableOpacity key={value} style={styles.gradeButton} onPress={() => grade(value)} accessibilityRole="button">
-                <Text style={styles.secondaryText}>{LEARN_GRADE_LABELS[value]}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-          <Text style={styles.caption}>Swipe right for Knew It, left for Not Yet.</Text>
-        </>
+        <View ref={walkMark.ref('languages.grade')} style={[styles.grades, walkMark('languages.grade')]}>
+          {INDICATORS.map((indicator) => (
+            <TouchableOpacity key={indicator.grade} style={styles.gradeButton} onPress={() => grade(indicator.grade)} accessibilityRole="button" accessibilityLabel={t(indicator.label)}>
+              <Text style={styles.gradeSign}>{indicator.sign}</Text>
+              <Text style={styles.gradeWord}>{t(indicator.word)}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
       ) : !typing ? (
         <Text style={styles.caption}>Tap the card to turn it over.</Text>
       ) : null}
@@ -316,8 +303,10 @@ const styles = StyleSheet.create({
   typeBox: { gap: 8 },
   input: { ...typography.body, color: colors.textPrimary, backgroundColor: colors.surfaceMuted, borderRadius: 10, padding: 12 },
   row: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  grades: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  gradeButton: { ...BUTTON_SECONDARY_COMPACT, flexGrow: 1, alignItems: 'center' },
+  grades: { flexDirection: 'row', gap: 8 },
+  gradeButton: { ...BUTTON_SECONDARY_COMPACT, flex: 1, alignItems: 'center', gap: 2 },
+  gradeSign: { ...BUTTON_SECONDARY_TEXT, ...typography.sectionTitle },
+  gradeWord: { ...BUTTON_SECONDARY_TEXT, ...typography.caption, textAlign: 'center' },
   speaker: { ...BUTTON_SECONDARY_COMPACT, alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', gap: 6 },
   primaryButton: { ...BUTTON_PRIMARY_COMPACT, alignSelf: 'flex-start' },
   primaryText: BUTTON_PRIMARY_TEXT,

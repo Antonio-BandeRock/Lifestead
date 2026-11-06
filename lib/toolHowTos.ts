@@ -136,6 +136,21 @@ export type ToolMark =
   | 'learn.addCard'
   | 'learn.cardSave'
   | 'learn.cardPhoto'
+  | 'languages.open'
+  | 'languages.together'
+  | 'languages.studyTogether'
+  | 'languages.unit'
+  | 'languages.onHome'
+  | 'languages.studyUnit'
+  | 'languages.deckInfo'
+  | 'languages.deckStudy'
+  | 'languages.settings'
+  | 'languages.card'
+  | 'languages.cardInfo'
+  | 'languages.hear'
+  | 'languages.grade'
+  | 'languages.stop'
+  | 'languages.keepGoing'
   | 'learn.import'
   | 'learn.importKeep'
   | 'learn.share'
@@ -143,18 +158,6 @@ export type ToolMark =
   | 'learn.printLayout'
   | 'learn.printSend'
   | 'learn.howItHasGone'
-  | 'learn.course'
-  | 'learn.importCourse'
-  | 'learn.courseStudy'
-  | 'learn.courseMix'
-  | 'learn.courseStop'
-  | 'learn.courseCard'
-  | 'learn.courseGrade'
-  | 'learn.courseHear'
-  | 'learn.courseUnits'
-  | 'learn.courseChoose'
-  | 'learn.courseSettings'
-  | 'learn.courseCounts'
   | 'capture.keepInLibrary'
   | 'capture.attachFile'
   | 'appointments.files'
@@ -340,6 +343,8 @@ export type ToolMark =
   | 'home.welcomeNotNow'
   | 'home.waitingOpen'
   | 'home.insideKnowledgeOpen'
+  | 'home.languageBasicsOpen'
+  | 'home.languageBasicsUnit'
   | 'home.waitingAnswer'
   | 'home.waitingKinds'
   | 'home.waitingChoose'
@@ -2578,6 +2583,15 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'It steps aside while you are here, and nothing is counted against you for it.',
     },
     {
+      key: 'languageBasics',
+      title: 'Open a language unit from Home',
+      steps: [
+        { say: 'Open the band with the name of Interests, then Language Basics.', mark: 'homeBand.languageBasics', stay: true },
+        { say: 'Tap a unit to open it. The ones you turned on are listed in the order they should be learned.', mark: 'home.languageBasicsUnit' },
+      ],
+      forYou: 'Units go on and off from Interests, Languages, with Show on Home.',
+    },
+    {
       key: 'insideKnowledge',
       title: 'See what you now know from Learn',
       steps: [
@@ -3311,84 +3325,73 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'The reminder for its day goes with it.',
     },
   ],
-  '/interests#learn': [
+  '/interests#languages': [
     {
-      key: 'courseStudy',
-      title: 'Study a language course',
+      key: 'languagesStudyUnit',
+      title: 'Study a unit of language basics',
       steps: [
-        { say: 'Under Courses, tap Open Course on the one you want.', mark: 'learn.course', stay: true },
-        { say: 'Tap Study Now. The line above it says how many cards are ready today and how many are new.', mark: 'learn.courseStudy', stay: true },
-        { say: 'Say the answer in your head, then tap the card to turn it over.', mark: 'learn.courseCard', stay: true },
-        { say: 'Tap how it went, or swipe right for Knew It and left for Not Yet.', mark: 'learn.courseGrade', stay: true },
-        { say: 'Tap Stop for Now whenever you like. What you answered is kept.', mark: 'learn.courseStop' },
+        { say: 'Tap Open on the set of basics.', mark: 'languages.open', stay: true },
+        { say: 'Tap the unit you want. Units run in the order they should be learned.', mark: 'languages.unit', stay: true },
+        { say: 'Tap Study This Unit.', mark: 'languages.studyUnit', stay: true },
+        { say: 'Say the answer in your head, then tap the card to turn it over.', mark: 'languages.card', stay: true },
+        { say: 'Tap + to see it more often, = to keep it in the same rotation, or the minus sign to see it less often.', mark: 'languages.grade', stay: true },
+        { say: 'Tap Stop for Now whenever you like. What you answered is kept.', mark: 'languages.stop' },
       ],
-      forYou: 'New cards come in the order the course builds, up to the number you set for a day, and a day away takes nothing from what you have learned.',
+      forYou: 'New cards come in learning order, up to the number you set for a day. A card you mark + comes back once more at the end of the sitting, and a day away takes nothing from anything.',
     },
     {
-      key: 'courseUnits',
-      title: 'Follow the study path of a course',
+      key: 'languagesOnHome',
+      title: 'Put a unit on Home',
       steps: [
-        { say: 'Open a course, then open the band called Study Path.', mark: 'learn.courseUnits', stay: true },
-        { say: 'Each unit says how many cards are learned, ready and new. Tap Study This Unit on one that is open.' },
-        { say: 'A later unit opens by itself once most of the one before it is learned. To go ahead sooner, tap Open This Unit.' },
+        { say: 'Tap Open on the set of basics.', mark: 'languages.open', stay: true },
+        { say: 'Tap the unit.', mark: 'languages.unit', stay: true },
+        { say: 'Turn on Show on Home.', mark: 'languages.onHome' },
       ],
-      forYou: 'The path gives you the order, and you can step off it whenever you know what you want to work on.',
+      forYou: 'On Home the units you turned on sit under Language Basics, in the order they should be learned, and tapping one opens it here.',
     },
     {
-      key: 'courseChoose',
-      title: 'Study one lesson, group or kind of card',
+      key: 'languagesDeck',
+      title: 'See how a deck fits and study just that deck',
       steps: [
-        { say: 'Open a course, then open the band called Choose Cards.', mark: 'learn.courseChoose', stay: true },
-        { say: 'Choose a unit, a group, a kind of card, a status or a source. A choice that would make no difference is left out.' },
-        { say: 'Tap Study These.' },
+        { say: 'Tap Open on the set of basics.', mark: 'languages.open', stay: true },
+        { say: 'Tap the unit.', mark: 'languages.unit', stay: true },
+        { say: 'Tap the information icon beside a deck. It says what comes before this deck, which of those you have worked on, and which rules to keep in mind.', mark: 'languages.deckInfo', stay: true },
+        { say: 'Tap Study under that deck.', mark: 'languages.deckStudy' },
       ],
-      forYou: 'Everything from one lesson is there the night before class, without changing where you are on the path.',
+      forYou: 'A deck you choose yourself always opens, whatever the day\'s new cards limit says. While studying, How This Fits on a turned card shows the same thing for that card\'s deck.',
     },
     {
-      key: 'courseMix',
-      title: 'Mix cards from everything you have opened',
+      key: 'languagesTogether',
+      title: 'Study several units together',
       steps: [
-        { say: 'Open a course and tap Mix.', mark: 'learn.courseMix' },
+        { say: 'Tap Open on the set of basics.', mark: 'languages.open', stay: true },
+        { say: 'Open the band called Study Several Together and tick the units you want, or tap Choose Those That Are On.', mark: 'languages.together', stay: true },
+        { say: 'Choose In Learning Order or Random, then tap Study.', mark: 'languages.studyTogether' },
       ],
-      forYou: 'Cards you have seen come back in no set order, which is closer to how they turn up in a conversation.',
+      forYou: 'Random stirs the cards the same way all day and differently tomorrow, and a sitting is 20 cards with Keep Going at the end.',
     },
     {
-      key: 'courseHear',
+      key: 'languagesHear',
       title: 'Hear a card spoken',
       steps: [
-        { say: 'While you study, tap Hear It under the card.', mark: 'learn.courseHear' },
+        { say: 'While you study, tap Hear It under the card.', mark: 'languages.hear' },
       ],
       forYou: 'It speaks with a voice on this device, so it works with no internet. If there is no voice for the language, the app says so once and leaves the button out until one is installed.',
     },
     {
-      key: 'courseSettings',
-      title: 'Change a course to suit you',
+      key: 'languagesSettings',
+      title: 'Change how a set of basics studies',
       steps: [
-        { say: 'Open a course, then open the band called Settings.', mark: 'learn.courseSettings', stay: true },
+        { say: 'Tap Open on the set of basics.', mark: 'languages.open', stay: true },
+        { say: 'Open the band called Settings.', mark: 'languages.settings', stay: true },
         { say: 'Under Which side comes first, choose what you are learning or what you already know.' },
         { say: 'Under New cards a day, tap the number you want.' },
-        { say: 'On a course with verb tables, Type the Answer hides one form on each verb card for you to type.' },
+        { say: 'On a set with verb tables, Type the Answer hides one form on each verb card for you to type.' },
       ],
-      forYou: 'Settings belong to one course, and both directions share one schedule for each card.',
+      forYou: 'Settings belong to one set, and both directions share one place on the ladder for each card.',
     },
-    {
-      key: 'courseCounts',
-      title: 'See how a course is going',
-      steps: [
-        { say: 'Open a course, then open the band called Counts.', mark: 'learn.courseCounts' },
-      ],
-      forYou: 'Cards seen, cards learned, cards ready today and days studied. Days studied only goes up, and a day away never resets it.',
-    },
-    {
-      key: 'courseImport',
-      title: 'Import a course or update one',
-      steps: [
-        { say: 'Under Courses, tap Import a Course.', mark: 'learn.importCourse', stay: true },
-        { say: 'Choose an .xlsx workbook or a .json course file.' },
-        { say: 'Read what it would add or change, then tap Keep This Course.' },
-      ],
-      forYou: 'Cards match by their Card ID, so an updated file adds and changes cards without touching what you have studied. A card it no longer holds is put away with its history. The file stays on this device and travels only in your encrypted backup and sync.',
-    },
+  ],
+  '/interests#learn': [
     {
       key: 'study',
       title: 'Go through a deck',

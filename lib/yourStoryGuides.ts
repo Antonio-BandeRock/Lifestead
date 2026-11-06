@@ -1518,6 +1518,7 @@ export const LENS_NAMES: Record<string, Record<string, string>> = {
     daysUntil: 'Days Until',
     projects: 'Projects',
     learn: 'Learn',
+    languages: 'Languages',
     makingItPay: 'Making It Pay',
   },
   '/insights': {
