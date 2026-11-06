@@ -1,6 +1,6 @@
 // Builds the curation report page from food_curation as it stands.
 //   node curate-report.js <work folder> <template.html> <output.html>
-// Reads the unified database only. The work folder supplies recipe_match.json.
+// Reads the unified database only. The work folder supplies recipe_check.json, written by curate-recipe-check.js.
 const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
@@ -17,7 +17,7 @@ const SOURCES = [
 const srcIdx = new Map(SOURCES.map((s, i) => [s[0], i]));
 
 const rows = q(`select c.raw_id id, f.source_code src, f.name_english en, f.name_original orig, f.category_original cat,
-  c.status st, c.decided_by by, c.reason_code rc, c.reason_text why, c.listing_name name, c.food_type type, c.equal_to_raw_id eq, c.doubt_note doubt,
+  c.status st, c.decided_by by, c.reason_code rc, c.reason_text why, c.listing_name name, c.food_type type, c.equal_to_raw_id eq, c.doubt_note doubt, c.caution caution,
   (select count(*) from raw_food_nutrients n where n.raw_id=c.raw_id) nut
   from food_curation c join raw_foods f using(raw_id)`);
 for (const r of rows) if (!srcIdx.has(r.src)) throw new Error('unknown source ' + r.src);
@@ -37,7 +37,7 @@ const foods = [...byName.entries()].map(([name, copies]) => {
   if (!show) throw new Error('no show row for ' + name);
   const qs = [...new Set(copies.map((c) => c.doubt).filter(Boolean))];
   return {
-    n: name, t: show.type, a: srcIdx.get(show.src), w: show.why, q: qs,
+    n: name, t: show.type, a: srcIdx.get(show.src), w: show.why, q: qs, x: show.caution || null,
     c: copies.sort((x, y) => (x.st === 'show' ? -1 : y.st === 'show' ? 1 : srcIdx.get(x.src) - srcIdx.get(y.src)))
       .map((x) => [srcIdx.get(x.src), x.en || x.orig, x.nut > 0 ? 1 : 0]),
   };
@@ -63,21 +63,26 @@ for (const r of rows) {
   catRows[s][r.cat][r.st === 'hide' ? 0 : 1] += 1;
 }
 
-const recipe = JSON.parse(fs.readFileSync(path.join(work, 'recipe_match.json'), 'utf8'));
-const NONE_HIDDEN = { 'Sugar (Cane / Granulated)': 'refined_sugar', 'Brown Sugar (Commercial)': 'refined_sugar', Maisolje: 'seed_oil', Solsikkeolje: 'seed_oil', 'Kokt skinke': 'processed_meat' };
-const MADE_HIDDEN = { 'Pork Ham (Cured)': 'processed_meat', 'Hoisinsaus, hjemmelaget': 'prepared_meal', 'Capers (In Vinegar / Raw)': 'canned', 'Black Tea (Brewed)': 'prepared_drink', 'Green Tea (Brewed)': 'prepared_drink', 'Brewed Black Coffee': 'prepared_drink', 'Rundstykke, fint, med vann, hjemmebakt': 'baked_goods', 'Dessert Wine': 'alcohol' };
-const recipeHidden = [
-  ...recipe.hidden.map((x) => [x.base_name, x.n, x.why]),
-  ...recipe.none.filter((x) => NONE_HIDDEN[x.base_name] || /portvin|tortilla|wienerp/i.test(x.base_name)).map((x) => [x.base_name, x.n, NONE_HIDDEN[x.base_name] || (/portvin/i.test(x.base_name) ? 'alcohol' : /tortilla/i.test(x.base_name) ? 'baked_goods' : 'processed_meat')]),
-  ...recipe.madeNoMatch.filter((x) => MADE_HIDDEN[x.base_name]).map((x) => [x.base_name, x.n, MADE_HIDDEN[x.base_name]]),
-].sort((a, b) => b[1] - a[1]);
-const sum = (a, f) => a.reduce((t, x) => t + f(x), 0);
-const recipeTotals = {
-  rows: sum(['exact', 'near', 'hidden', 'madeNoMatch', 'none'], (k) => sum(recipe[k], (x) => x.n)),
-  names: sum(['exact', 'near', 'hidden', 'madeNoMatch', 'none'], (k) => recipe[k].length),
-  exact: sum(recipe.exact, (x) => x.n), near: sum(recipe.near, (x) => x.n),
-  hiddenRows: sum(recipeHidden, (x) => x[1]), hiddenNames: recipeHidden.length,
-};
+const recipe = JSON.parse(fs.readFileSync(path.join(work, 'recipe_check.json'), 'utf8'));
+// What each decision would clear, added one at a time, in the order they are easiest to take.
+const LADDER = [
+  ['Whole foods no source has', 'Foods no source measures stay as named ingredients, with no nutrition, the way the app already carries them'],
+  ['White and brown sugar', 'List white, brown and powdered sugar, or swap in raw sugar'],
+  ['Pantry items', 'List baking powder, gelatin, capers, dark chocolate and the like'],
+  ['Single foods hidden today', 'List chicken feet, canned straw mushrooms and century egg'],
+  ['Bottled sauces', 'List oyster sauce, Worcestershire and the like'],
+  ['Traditional ferments', 'List shrimp paste, doubanjiang, fermented black beans and the like, or carry them as named ingredients'],
+  ['Sausages and cured meats with no listing', 'List the rest, or carry them as named ingredients'],
+  ['Refined seed oils', 'List corn and sunflower oil, or swap in another oil'],
+  ['Alcohol used in cooking', 'List the wines, spirits and beers recipes cook with'],
+];
+const done = new Set();
+const ladder = LADDER.map(([group, step]) => {
+  if (!recipe.groups.some((g) => g.group === group)) throw new Error('no group ' + group);
+  done.add(group);
+  const cleared = recipe.waiting.filter((w) => w.items.every((i) => done.has(i.group))).length;
+  return { group, step, ready: recipe.recipes - recipe.waiting.length + cleared };
+});
 
 const data = {
   sources: SOURCES.map((s) => s[1]), types, reasons,
@@ -87,11 +92,11 @@ const data = {
   typeKeep: count(kept, (r) => r.type + '|' + srcIdx.get(r.src)),
   reasonSrc: count(hidden, (r) => r.rc + '|' + srcIdx.get(r.src)),
   byFoods: count(foods, (f) => f.t),
-  catRows, foods, recipeHidden, recipeTotals, differ, earlierN: earlier.length,
+  catRows, foods, recipe, ladder, differ, earlierN: earlier.length,
   hiddenDoubts: hidden.filter((r) => r.doubt).map((r) => [r.en || r.orig, srcIdx.get(r.src), r.rc, r.doubt]),
   hidden: hidden.map((r) => [r.en || r.orig, srcIdx.get(r.src), reasons.indexOf(r.rc), r.by === 'rule' ? 1 : 0]),
 };
-console.log(JSON.stringify(data.totals), 'recipes', JSON.stringify(recipeTotals));
+console.log(JSON.stringify(data.totals), 'ladder', JSON.stringify(ladder.map((l) => l.ready)));
 const page = fs.readFileSync(template, 'utf8').replace('/*DATA*/null', () => JSON.stringify(data).replace(/</g, '\\u003c'));
 fs.writeFileSync(output, page);
 console.log('page bytes', page.length);
