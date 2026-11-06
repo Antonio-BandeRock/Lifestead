@@ -19,7 +19,7 @@ deliberate — see "Safety" below.
 
 The owner's filter, with their changes: keep cheeses, honey, salts, enriched flour and tortilla mix; a kept food that equals a USDA item is marked equal to it and hidden differently, for comparing countries; everything else is hidden. Decisions are in a new table, `food_curation` (`show`, `compare`, `hide`, plus `listing_name`, `food_type`, `equal_to_raw_id`, `doubt_note`), and the older `whole_food_classifications` is left as it was.
 
-Result: 32,707 rows; 2,140 foods shown, 6,255 rows held for comparison, 24,312 hidden, after the owner's review the same day (`curate-foreign-gain.js`): tap water listed as Water, curing salt hidden, and foods no USDA row covers given their own listings. Rules decided 20,359 rows, readers the other 12,348. Report: https://claude.ai/artifact/TK8WN9CaUE7ifYUXeEABC1
+Result: 32,707 rows; 2,140 foods shown, 6,255 rows held for comparison, 24,312 hidden, after the owner's review the same day (`curate-foreign-gain.js`): tap water listed as Water, curing salt hidden, and foods no USDA row covers listed by name. Rules decided 20,359 rows, readers the other 12,348. Report: https://claude.ai/artifact/TK8WN9CaUE7ifYUXeEABC1
 
 Order to rerun, from a work folder holding the rule and reader files: `curate-first-pass.js`, `curate-batches.js`, the readers, `curate-corrections.js`, `curate-rescue.js`, `curate-import.js --write`, `curate-foreign-gain.js`, `curate-report.js`, then `scripts/backup_reference_dbs.js`. The work folder is session scratch and is not kept, so a rerun means reading again; the decisions themselves are in the table.
 
