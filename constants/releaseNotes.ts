@@ -41,6 +41,13 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.84.1',
+    date: '2026-11-09',
+    changes: [
+      'Salt measured by the teaspoon or tablespoon in a recipe now counts in the salt you eat. Before, it was left out of the totals for about 600 recipes. A teaspoon counts as 6 g.',
+    ],
+  },
+  {
     version: '1.0.83.2',
     date: '2026-11-06',
     changes: [
