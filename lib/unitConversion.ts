@@ -59,15 +59,44 @@ const VOLUME_TO_ML: Record<VolumeUnit, number> = {
   gallon: 3785.41,
 };
 
-export type DensityClass = 'water_like' | 'oil_fat';
+export type DensityClass = 'water_like' | 'oil_fat' | 'granular_salt';
 
 // Real, citable physical/food-science density constants -- deliberately
-// the only two classes uniform enough to trust a single number across an
+// the only classes uniform enough to trust a single number across an
 // entire food category.
+//
+// granular_salt, 2026-11-09 (owner's instruction: salt added to something
+// in a dish has to be counted in the salt a person eats). Salt sits in
+// the Herbs category, which has no density, so every "1 tsp salt" in a
+// recipe used to convert to nothing and its sodium was silently left out.
+// USDA FoodData Central, SR Legacy "Salt, table" (NDB 2047): 1 tsp = 6.0 g,
+// 1 tbsp = 18.0 g, which is 1.217 g/mL. Coarse and flaked salts weigh less
+// per spoon, so for them this counts somewhat more salt than was eaten,
+// the safer side for someone limiting it. It is never inferred from the
+// category: lib/db.ts's conversionOptionsFor passes it only for a food
+// whose own sodium figure says it is salt.
 const DENSITY_G_PER_ML: Record<DensityClass, number> = {
   water_like: 1.0, // water, juice, coffee/tea, milk, most beverages, diluted alcohol
   oil_fat: 0.92, // cooking oils and solid fats (butter, lard, shortening) cluster in a narrow ~0.90-0.92 g/mL band regardless of physical state at room temperature
+  granular_salt: 18.0 / 14.7868,
 };
+
+// Whether a food is salt, judged by its own sodium per 100 g. Pure salt is
+// about 39,000 mg; seasoned and herb salts sit above 30,000. Reduced-sodium
+// mineral salts fall to 20,000 to 26,000, so between 20,000 and 30,000 the
+// name has to say salt too, which keeps out baking soda (about 27,000 mg)
+// and stock powder, whose spoon weighs something else.
+export function isSaltBySodium(sodiumMgPer100g: number | null | undefined, names: (string | null | undefined)[]): boolean {
+  if (sodiumMgPer100g == null || !Number.isFinite(sodiumMgPer100g)) return false;
+  if (sodiumMgPer100g >= 30000) return true;
+  if (sodiumMgPer100g < 20000) return false;
+  return names.some((name) => !!name && /salt/i.test(name));
+}
+
+// True when the category alone already gives volume units a density.
+export function categoryHasDensity(foodCategory: string | null | undefined): boolean {
+  return !!foodCategory && foodCategory in CATEGORY_DENSITY_CLASS;
+}
 
 // Only these `foods.category` values are uniform enough in density to
 // resolve a densityClass automatically. Everything else (Veg, Fruit,

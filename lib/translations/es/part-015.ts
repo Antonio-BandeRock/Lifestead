@@ -409,6 +409,7 @@ export const PART: Readonly<Record<string, string>> = {
  "Paste at least one ingredient line.": "Pega al menos una línea de ingredientes.",
  "The recipe marks this optional.": "La receta marca esto como opcional.",
  "The recipe says to taste, so give an amount or leave it out.": "La receta dice al gusto, así que pon una cantidad o déjalo fuera.",
+ "Salt is counted in the salt you eat only once it has an amount. A pinch is about 0.4 g.": "La sal cuenta en la sal que comes solo cuando tiene una cantidad. Una pizca es como 0.4 g.",
  "Left out. It will not go to the builder.": "Se dejó fuera. No va a ir al creador.",
  "No food picked yet.": "Todavía no se eligió ningún alimento.",
  "Change the food": "Cambiar el alimento",

@@ -326,6 +326,11 @@ export function RecipeImportView({
     if (line.rangeNote) notes.push(line.rangeNote);
     if (line.optional) notes.push('The recipe marks this optional.');
     if (line.toTaste) notes.push('The recipe says to taste, so give an amount or leave it out.');
+    // Owner's instruction, 2026-11-09: salt added to a dish counts in the
+    // salt a person eats, and salt with no amount cannot be counted.
+    if (line.toTaste && /\bsalt\b/i.test(line.original)) {
+      notes.push('Salt is counted in the salt you eat only once it has an amount. A pinch is about 0.4 g.');
+    }
     return (
       <View key={index} style={[styles.lineCard, line.leftOut && styles.lineCardLeftOut]}>
         <Text style={styles.lineOriginal}>{line.original}</Text>

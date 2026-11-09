@@ -21,7 +21,18 @@ module.exports = {
   // Sodium with no claim either way about whether salt was added.
   sodium: (mg) => `${mg >= 600 ? 'High in sodium' : 'Contains sodium'}: ${amount(mg)}. ${LIMIT}`,
   // Allergy wording is allergen-aware and never promises that a food is safe.
-  PEANUT_OIL: 'Made from peanuts. Anyone with a peanut allergy should treat this oil as peanut. Highly refined peanut oil is exempt from allergen labelling in the United States because refining removes most of the protein, but cold-pressed oil keeps more of it and a label rarely says which is in the bottle. Whether any peanut oil is safe for one person is a question for their allergist.',
+  // Owner's fifth round, 2026-11-09: only where the evidence points. The
+  // WCRF finding is for food salted the traditional East Asian way; studies
+  // of Japanese salted pickles find more stomach cancer, studies of kimchi
+  // and of lactic sour pickles do not, and none measures sauerkraut.
+  SALT_PRESERVED_EAST_ASIAN: 'The World Cancer Research Fund rates food preserved by salting, as traditionally prepared in East Asia, as a probable cause of stomach cancer; for salted vegetables the studies, all from Asia, found about 9% more risk for each 20 g eaten a day (2018).',
+  // Owner's fifth round: for people in recovery, for medications that do not
+  // mix with alcohol, and because cooking leaves some of it in the dish
+  // (USDA Table of Nutrient Retention Factors, Release 6, 2007).
+  ALCOHOL: 'Contains alcohol. Anyone in recovery, or taking a medication that should not be mixed with alcohol, may want to leave it out. Cooking does not remove all of it: depending on the method and the time, from about 5% to 85% of the alcohol stays in the dish (USDA, 2007).',
+  SOY_OIL: 'Made from soybeans. Anyone with a soy allergy should treat this oil as soy. Highly refined soybean oil is exempt from allergen labelling in the United States because refining removes most of the protein, but cold-pressed oil keeps more of it and a label rarely says which is in the bottle. Whether any soybean oil is safe for one person is a question for their allergist.',
+  SESAME_OIL: 'Made from sesame. Anyone with a sesame allergy should treat this oil as sesame. Sesame oil is seldom highly refined, so it usually keeps the protein that causes a reaction. Whether any sesame oil is safe for one person is a question for their allergist.',
+  PEANUT_OIL:'Made from peanuts. Anyone with a peanut allergy should treat this oil as peanut. Highly refined peanut oil is exempt from allergen labelling in the United States because refining removes most of the protein, but cold-pressed oil keeps more of it and a label rarely says which is in the bottle. Whether any peanut oil is safe for one person is a question for their allergist.',
   NUT_OIL: 'Made from tree nuts. Anyone with a tree nut allergy should treat this oil as the nut it comes from. Cold-pressed nut oils keep more of the protein that causes a reaction, and a label rarely says how much is left. Whether any nut oil is safe for one person is a question for their allergist.',
   BLEND_OIL: 'A blend, and the oils in it change from brand to brand. Anyone with a peanut, tree nut, soy or sesame allergy should read the label before using it.',
 };

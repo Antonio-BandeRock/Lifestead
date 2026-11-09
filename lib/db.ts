@@ -35,7 +35,7 @@ import { nextQueued, shouldQueueNext, type SeriesItem, type SeriesTrialStatus } 
 import { DEFAULT_STEP_DAYS, DEFAULT_WASHOUT_DAYS, type RecordedStep, type StepKey } from './steppedReintroduction';
 import { localDayOf } from './dailyScales';
 import { buildPerConditionSummaries, type ConditionDimensionSummary } from './conditionDimensions';
-import { convertToGrams, MASS_UNITS, MeasurementUnit, VOLUME_UNITS } from './unitConversion';
+import { categoryHasDensity, convertToGrams, isSaltBySodium, MASS_UNITS, MeasurementUnit, VOLUME_UNITS } from './unitConversion';
 import {
   describeApproximateCount,
   isNonPurchasableIngredient,
@@ -2629,6 +2629,45 @@ export async function getFoodCategory(foodId: number, source: string) {
     source,
   );
   return row?.category ?? null;
+}
+
+// 2026-11-09, owner's instruction: salt added to something in a dish has to
+// be counted in the salt a person eats. Salt is in the Herbs category, which
+// gives volume units no density, so "1 tsp salt" used to convert to nothing
+// and its sodium was left out of every recipe, meal and daily total. This is
+// the one place that decides the options every nutrient conversion passes to
+// convertToGrams: the category as before, plus the salt density for a food
+// whose own sodium figure says it is salt (isSaltBySodium). Reference rows do
+// not change between imports, so the answer is kept for the session.
+const saltFoodCache = new Map<string, boolean>();
+
+async function isSaltFood(foodId: number, source: string): Promise<boolean> {
+  const key = `${foodId}|${source}`;
+  const known = saltFoodCache.get(key);
+  if (known !== undefined) return known;
+  const db = await getReferenceDatabase();
+  const row = await db.getFirstAsync<{ sodium: number | null; name: string; shortName: string | null; baseName: string | null }>(
+    `SELECT n.amount_per_100g AS sodium, f.name AS name, f.short_name AS shortName, f.base_name AS baseName
+     FROM foods f
+     LEFT JOIN food_nutrients n ON n.food_id = f.food_id AND n.source = f.source AND n.nutrient_code = 'sodium'
+     WHERE f.food_id = ? AND f.source = ?`,
+    foodId,
+    source,
+  );
+  const salt = !!row && isSaltBySodium(row.sodium, [row.name, row.shortName, row.baseName]);
+  saltFoodCache.set(key, salt);
+  return salt;
+}
+
+export async function conversionOptionsFor(
+  foodId: number,
+  source: string,
+  unit: string,
+  foodCategory: string | null | undefined,
+): Promise<{ foodCategory?: string; densityClass?: 'granular_salt' }> {
+  const options = { foodCategory: foodCategory ?? undefined };
+  if (!(VOLUME_UNITS as readonly string[]).includes(unit) || categoryHasDensity(foodCategory)) return options;
+  return (await isSaltFood(foodId, source)) ? { ...options, densityClass: 'granular_salt' } : options;
 }
 
 export type FoodUnitWeight = {
@@ -11656,7 +11695,7 @@ export async function getSideNutrientBreakdown(sideId: string): Promise<DailyNut
       const foodCategory = !(VOLUME_UNITS as readonly string[]).includes(unit)
         ? null
         : ingredient.category ?? (await getFoodCategory(foodId, source));
-      const conversion = convertToGrams(ingredient.quantity, unit, { foodCategory: foodCategory ?? undefined });
+      const conversion = convertToGrams(ingredient.quantity, unit, await conversionOptionsFor(foodId, source, unit, foodCategory));
       if (!conversion.ok) {
         unresolvedItems.push({ mealItemId: ingredient.id, foodName: ingredient.foodName, reason: conversion.reason });
         continue;
@@ -12080,7 +12119,7 @@ export async function getSaladNutrientBreakdown(saladId: string): Promise<DailyN
       const foodCategory = !(VOLUME_UNITS as readonly string[]).includes(unit)
         ? null
         : ingredient.category ?? (await getFoodCategory(foodId, source));
-      const conversion = convertToGrams(ingredient.quantity, unit, { foodCategory: foodCategory ?? undefined });
+      const conversion = convertToGrams(ingredient.quantity, unit, await conversionOptionsFor(foodId, source, unit, foodCategory));
       if (!conversion.ok) {
         unresolvedItems.push({ mealItemId: ingredient.id, foodName: ingredient.foodName, reason: conversion.reason });
         continue;
@@ -12425,7 +12464,7 @@ export async function getSmoothieNutrientBreakdown(smoothieId: string): Promise<
       const foodCategory = !(VOLUME_UNITS as readonly string[]).includes(unit)
         ? null
         : ingredient.category ?? (await getFoodCategory(foodId, source));
-      const conversion = convertToGrams(ingredient.quantity, unit, { foodCategory: foodCategory ?? undefined });
+      const conversion = convertToGrams(ingredient.quantity, unit, await conversionOptionsFor(foodId, source, unit, foodCategory));
       if (!conversion.ok) {
         unresolvedItems.push({ mealItemId: ingredient.id, foodName: ingredient.foodName, reason: conversion.reason });
         continue;
@@ -12822,7 +12861,7 @@ export async function getFermentationNutrientBreakdown(fermentationId: string): 
       const foodCategory = !(VOLUME_UNITS as readonly string[]).includes(unit)
         ? null
         : ingredient.category ?? (await getFoodCategory(foodId, source));
-      const conversion = convertToGrams(ingredient.quantity, unit, { foodCategory: foodCategory ?? undefined });
+      const conversion = convertToGrams(ingredient.quantity, unit, await conversionOptionsFor(foodId, source, unit, foodCategory));
       if (!conversion.ok) {
         unresolvedItems.push({ mealItemId: ingredient.id, foodName: ingredient.foodName, reason: conversion.reason });
         continue;
@@ -13248,7 +13287,7 @@ export async function getBeverageNutrientBreakdown(beverageId: string): Promise<
       const foodCategory = !(VOLUME_UNITS as readonly string[]).includes(unit)
         ? null
         : ingredient.category ?? (await getFoodCategory(foodId, source));
-      const conversion = convertToGrams(ingredient.quantity, unit, { foodCategory: foodCategory ?? undefined });
+      const conversion = convertToGrams(ingredient.quantity, unit, await conversionOptionsFor(foodId, source, unit, foodCategory));
       if (!conversion.ok) {
         unresolvedItems.push({ mealItemId: ingredient.id, foodName: ingredient.foodName, reason: conversion.reason });
         continue;
@@ -13599,7 +13638,7 @@ export async function getSnackNutrientBreakdown(snackId: string): Promise<DailyN
       const foodCategory = !(VOLUME_UNITS as readonly string[]).includes(unit)
         ? null
         : ingredient.category ?? (await getFoodCategory(foodId, source));
-      const conversion = convertToGrams(ingredient.quantity, unit, { foodCategory: foodCategory ?? undefined });
+      const conversion = convertToGrams(ingredient.quantity, unit, await conversionOptionsFor(foodId, source, unit, foodCategory));
       if (!conversion.ok) {
         unresolvedItems.push({ mealItemId: ingredient.id, foodName: ingredient.foodName, reason: conversion.reason });
         continue;
@@ -13952,7 +13991,7 @@ export async function getBakedGoodsNutrientBreakdown(bakedGoodId: string): Promi
       const foodCategory = !(VOLUME_UNITS as readonly string[]).includes(unit)
         ? null
         : ingredient.category ?? (await getFoodCategory(foodId, source));
-      const conversion = convertToGrams(ingredient.quantity, unit, { foodCategory: foodCategory ?? undefined });
+      const conversion = convertToGrams(ingredient.quantity, unit, await conversionOptionsFor(foodId, source, unit, foodCategory));
       if (!conversion.ok) {
         unresolvedItems.push({ mealItemId: ingredient.id, foodName: ingredient.foodName, reason: conversion.reason });
         continue;
@@ -14350,7 +14389,7 @@ export async function getSoupNutrientBreakdown(soupId: string): Promise<DailyNut
       const foodCategory = !(VOLUME_UNITS as readonly string[]).includes(unit)
         ? null
         : ingredient.category ?? (await getFoodCategory(foodId, source));
-      const conversion = convertToGrams(ingredient.quantity, unit, { foodCategory: foodCategory ?? undefined });
+      const conversion = convertToGrams(ingredient.quantity, unit, await conversionOptionsFor(foodId, source, unit, foodCategory));
       if (!conversion.ok) {
         unresolvedItems.push({ mealItemId: ingredient.id, foodName: ingredient.foodName, reason: conversion.reason });
         continue;
@@ -14751,7 +14790,7 @@ export async function getSauceNutrientBreakdown(sauceId: string): Promise<DailyN
       const foodCategory = !(VOLUME_UNITS as readonly string[]).includes(unit)
         ? null
         : ingredient.category ?? (await getFoodCategory(foodId, source));
-      const conversion = convertToGrams(ingredient.quantity, unit, { foodCategory: foodCategory ?? undefined });
+      const conversion = convertToGrams(ingredient.quantity, unit, await conversionOptionsFor(foodId, source, unit, foodCategory));
       if (!conversion.ok) {
         unresolvedItems.push({ mealItemId: ingredient.id, foodName: ingredient.foodName, reason: conversion.reason });
         continue;
@@ -15103,7 +15142,7 @@ export async function getHandheldNutrientBreakdown(handheldId: string): Promise<
       const foodCategory = !(VOLUME_UNITS as readonly string[]).includes(unit)
         ? null
         : ingredient.category ?? (await getFoodCategory(foodId, source));
-      const conversion = convertToGrams(ingredient.quantity, unit, { foodCategory: foodCategory ?? undefined });
+      const conversion = convertToGrams(ingredient.quantity, unit, await conversionOptionsFor(foodId, source, unit, foodCategory));
       if (!conversion.ok) {
         unresolvedItems.push({ mealItemId: ingredient.id, foodName: ingredient.foodName, reason: conversion.reason });
         continue;
@@ -15506,7 +15545,7 @@ export async function getDessertNutrientBreakdown(dessertId: string): Promise<Da
       const foodCategory = !(VOLUME_UNITS as readonly string[]).includes(unit)
         ? null
         : ingredient.category ?? (await getFoodCategory(foodId, source));
-      const conversion = convertToGrams(ingredient.quantity, unit, { foodCategory: foodCategory ?? undefined });
+      const conversion = convertToGrams(ingredient.quantity, unit, await conversionOptionsFor(foodId, source, unit, foodCategory));
       if (!conversion.ok) {
         unresolvedItems.push({ mealItemId: ingredient.id, foodName: ingredient.foodName, reason: conversion.reason });
         continue;
@@ -20506,7 +20545,7 @@ export async function estimateGramsForFood(
   if ((VOLUME_UNITS as readonly string[]).includes(normalized) && !foodCategory) {
     foodCategory = await getFoodCategory(numericFoodId, source);
   }
-  const conversion = convertToGrams(quantity, normalized, { foodCategory: foodCategory ?? undefined });
+  const conversion = convertToGrams(quantity, normalized, await conversionOptionsFor(numericFoodId, source, normalized, foodCategory));
   return conversion.ok ? conversion.grams : null;
 }
 
@@ -22341,7 +22380,7 @@ export async function getDailyNutrientBreakdown(date: string): Promise<DailyNutr
           ? null
           : item.category ?? (await getFoodCategory(foodId, source));
 
-        const conversion = convertToGrams(item.servingSize, unit, { foodCategory: foodCategory ?? undefined });
+        const conversion = convertToGrams(item.servingSize, unit, await conversionOptionsFor(foodId, source, unit, foodCategory));
         if (!conversion.ok) {
           unresolvedItems.push({ mealItemId: item.id, foodName: item.foodName, reason: conversion.reason });
           continue;
@@ -22699,7 +22738,7 @@ async function resolveIngredientNutrientTotals(
         foodCategory = caches.category.get(key) ?? null;
       }
     }
-    const conversion = convertToGrams(ingredient.rawAmount, unit, { foodCategory: foodCategory ?? undefined });
+    const conversion = convertToGrams(ingredient.rawAmount, unit, await conversionOptionsFor(foodId, source, unit, foodCategory));
     if (!conversion.ok) return null;
     grams = conversion.grams;
   }
