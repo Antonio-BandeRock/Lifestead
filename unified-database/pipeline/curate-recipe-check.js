@@ -262,6 +262,8 @@ const out = {
   counts: Object.fromEntries([...Object.keys(RANK), 'aid'].map((k) => [k, list(k).length])),
   byName: list('listed').filter((x) => x.by === 'name').length, byWords: list('listed').filter((x) => x.by === 'words').length, byHand: list('listed').filter((x) => x.by === 'hand').length,
   renamed: list('listed').filter((x) => x.by === 'hand'), matchedOnWords: list('listed').filter((x) => x.by === 'words'), swap: list('swap'), home: list('home'), named: list('named'), missing: list('missing'), aid: list('aid'),
+  // Every name and where it landed, for merge-candidate.js. A name starting with MARK comes from the unlisted table.
+  placements: [...placed].map(([n, p]) => ({ name: n.replace(MARK, ''), outside: n.startsWith(MARK), ...p })),
   mainNames: [...placed.keys()].filter((n) => !n.startsWith(MARK)).length, outsideNames: outsideNames.size, outsideRows: outsideRows.length,
   namedRecipes: Object.fromEntries(['Baguette', 'Mayonnaise', 'Simple Whole Wheat Bread', 'Homemade Wheat Tortillas', 'Hong You (Sichuan Chili Oil)'].map((n) => { const r = recipes.find((x) => x.name === n); return [n, r ? [...missingFor.get(r.id)] : null]; })),
 };

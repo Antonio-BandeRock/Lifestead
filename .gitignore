@@ -83,6 +83,9 @@ unified-database/.cache/
 # it whenever either one changes. Do not add either back to git.
 assets/data/foods_reference.db
 unified-database/unified_foods.sqlite
+# The phase 5 candidate, rebuilt from both databases by
+# unified-database/pipeline/merge-candidate.js, so never kept.
+unified-database/candidate/
 
 # The audit tool's own derived, fully-regeneratable build outputs --
 # audit-data.json (a plain SQL export of unified_foods.sqlite) and

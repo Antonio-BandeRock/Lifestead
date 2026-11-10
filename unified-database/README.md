@@ -15,6 +15,19 @@ replacement.
 never reads from `unified_foods.sqlite`. No app screen changes. That's
 deliberate — see "Safety" below.
 
+## Status: phases 5 and 6, a candidate built and checked, 2026-11-10
+
+`pipeline/merge-candidate.js <recipe_check.json>` builds `candidate/foods_reference_candidate.db` (git-ignored) from a copy of the live database plus `food_curation`. It reads both databases and writes neither. Every live food keeps its id, source, names and nutrient values, is paired with its curated row (by source code; Norway by `source_food_id`; Sweden by Swedish name; the 6 Derived spirits have no row and keep what they had) and is hidden unless the list shows it. The 5,964 curated rows the live database never had are added from id 1,000,000. A food gains any nutrient value the source gives that it lacked (200,283 values, 368 of them on shown foods already in the app). Recipe lines whose name the recipe check placed on the list point at that listing, and 217 names from the unlisted table move into the ingredient table. Aliases, unit weights and purchase forms naming a food now hidden point at the shown food with its listing name (6, 3 and 59 rows). Every changed row keeps its old target in `original_base_name`.
+
+`pipeline/verify-candidate.js [out.json]` runs 21 checks and exits 1 on any failure. All 21 pass: integrity; every live food, nutrient value and other table unchanged; the three repointed tables give back the live ones when the repoint is undone; 2,296 shown foods, exactly the list; units agree with the live values (90% or more within 2% on all 39 nutrients compared, so the g label in `raw_food_nutrients.unit` is only a label); salt reads 38,758 mg sodium and tomato paste 28,764 µg lycopene; every recipe line still there in order, every line placed on the list finding a shown food. Recipes with nutrition behind every eaten ingredient go from 875 to 1,020 of 1,460.
+
+What the checks found, to settle before phase 7:
+1. 24 purchase forms (the grocery list) name a food the list hides with no listing name, so nothing links them to a shown food: quinoa, flax seeds, pork chop, lamb chop, turkey breast, coconut milk, black and green tea, curry powder, mustard, vegetable stock and others. Each needs a hand match. Ten more were left alone because the shown food already has a form of its own.
+2. 134 shown foods have no scores (104 already in the app, 30 new), 30 of them used in recipes. Scores come only from the workbook.
+3. 139 recipe lines are made at home and have no nutrition, as today.
+4. 118 base names are shared by several shown foods in one category, which the app reads as one food, as it does today.
+5. The listing name is a column on `foods` but the app still shows `base_name`; wiring it in is phase 7.
+
 ## Status: curation restarted from a blank view, 2026-11-06
 
 The owner's filter, with their changes: keep cheeses, honey, salts, enriched flour and tortilla mix; a kept food that equals a USDA item is marked equal to it and hidden differently, for comparing countries; everything else is hidden. Decisions are in a new table, `food_curation` (`show`, `compare`, `hide`, plus `listing_name`, `food_type`, `equal_to_raw_id`, `doubt_note`), and the older `whole_food_classifications` is left as it was.
