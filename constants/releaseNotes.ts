@@ -41,6 +41,13 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.85.1',
+    date: '2026-11-10',
+    changes: [
+      'Salt that goes into pasta water, a brine or a rinse that is poured away no longer counts in the salt you eat. This changes 52 recipes. Where a note says some stays in the dish, only that part counts.',
+    ],
+  },
+  {
     version: '1.0.84.1',
     date: '2026-11-09',
     changes: [

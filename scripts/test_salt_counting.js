@@ -14,6 +14,10 @@
 //    sodium per 100 g counts as salt, baking soda and stock powder do not,
 //    and every salt a curated recipe measures by the spoon is recognised.
 // 4. lib/db.ts sends every nutrient conversion through conversionOptionsFor.
+// 5. Salt that goes into water, a brine or a rinse that is poured away is
+//    not counted (owner's instruction, 2026-11-10): every such note in the
+//    curated recipes, read only, gets the share it should, and every
+//    nutrient total in lib/db.ts goes through gramsEatenFromDish.
 //
 // Exits non-zero on any failure.
 
@@ -76,6 +80,35 @@ check('soy sauce is not salt', !U.isSaltBySodium(5600, ['Soy sauce']));
 check('salt substitute with no sodium is not salt', !U.isSaltBySodium(33, ['Salt substitute, potassium chloride']));
 check('no sodium figure is not salt', !U.isSaltBySodium(null, ['Salt']));
 
+// 5a. Reading a note: the share of the listed salt that counts.
+const kept = (note, g = 18) => U.saltGramsKeptInDish(g, note);
+const KEPT = [
+  ['', 1], [null, 1], ['to taste', 1], ['fine', 1],
+  ['for the pasta water', 0], ['for the pasta water, used lightly since the cheese and guanciale are salty', 0],
+  ['for the pasta water, lightly', 0], ['for the pasta water, used lightly', 0],
+  ['for the cooking water', 0], ['for the blanching water', 0], ['for the fennel water', 0],
+  ['for the poaching water', 0], ['in the poaching water', 0], ['for the water', 0],
+  ['about 1 tsp per litre of water', 0], ['for kneading, rinsed off', 0],
+  ['part for purging the clams, part for the pasta water', 0],
+  ['part for purging the clams, part for the pasta water, lightly', 0],
+  ['a little for the sauce, most for the pasta water', 1 / 8],
+  ['a pinch for the dough and sauce, most for the pasta water', 1 / 8],
+  ['a pinch for the pesto, most for the pasta water', 1 / 8],
+  ['in the soaking liquid; only a little reaches the eggs', 1 / 8],
+  ['mostly rinsed off before cooking', 1 / 4], ['mostly rinsed off before grilling', 1 / 4],
+  ['mostly for the cooking water', 1 / 4], ['most is poured away', 1 / 4],
+  ['a pinch, mostly drained off with the cucumber water', 1 / 4],
+  ['part for the filling, most for the pasta water', 1 / 4],
+  ['part for the filling, most for the blanching water', 1 / 4],
+  ['part for the blanching water', 1 / 2], ['part for the cooking water', 1 / 2],
+  ['part for the eggplant, part for the pasta water', 1 / 2],
+  ['for the cooking water and the sauce', 1 / 2],
+  ['plus more for the water', 1], ['plus a handful for the boiling water', 1],
+  ['dissolved in the brine', 1], ['a pinch, to draw out the water', 1],
+];
+for (const [note, share] of KEPT) check(`salt note "${note}" keeps ${share} of it`, near(kept(note), 18 * share));
+check('a stated half teaspoon for the dish counts 3 g', near(kept('1/2 tsp to season the chicken, the rest for the brine'), 3));
+
 // 3. The reference database, read only.
 const db = path.join(__dirname, '..', 'assets', 'data', 'foods_reference.db');
 let rows = null;
@@ -109,6 +142,26 @@ if (!rows) {
   for (const [base, id, source] of spoons) names.set(base, (names.get(base) || false) || salt.has(`${id}|${source}`));
   for (const [base, found] of names) check(`recipe salt "${base}" measured by the spoon is recognised`, found);
   check('recipes measure salt by the spoon', names.size > 0);
+
+  // 5b. Every salt note in the curated recipes that mentions water, a brine,
+  // a soak or a rinse has been read and given its share. A new note fails
+  // here until it is added to KEPT with what it should count.
+  const expected = new Map(KEPT.filter(([note]) => note).map(([note, share]) => [note, share]));
+  expected.set('1/2 tsp to season the chicken, the rest for the brine', null);
+  const notes = execFileSync('sqlite3.exe', ['-readonly', '-separator', '\t', db,
+    `SELECT DISTINCT r.prep_note FROM curated_recipe_ingredients r
+     WHERE lower(r.base_name) LIKE '%salt%' AND r.category IN ('Herbs','PantryStaples') AND coalesce(r.prep_note,'') <> ''`],
+    { encoding: 'utf8' }).trim().split(/\r?\n/).filter(Boolean);
+  let lessThanFull = 0;
+  for (const note of notes) {
+    if (!/water|brine|soak|rinse|drain|pour|purg|poach|blanch/i.test(note)) {
+      check(`salt note "${note}" counts in full`, kept(note) === 18);
+      continue;
+    }
+    check(`salt note "${note}" has been read (add it to KEPT)`, expected.has(note));
+    if (kept(note) < 18) lessThanFull += 1;
+  }
+  check(`at least 25 distinct salt notes count less than in full (${lessThanFull})`, lessThanFull >= 25);
 }
 
 // 4. Every nutrient conversion in lib/db.ts goes through conversionOptionsFor.
@@ -117,6 +170,14 @@ const calls = dbSource.match(/convertToGrams\([^\n]*/g) || [];
 const bare = calls.filter((c) => !c.includes('conversionOptionsFor('));
 check(`lib/db.ts has no conversion that skips conversionOptionsFor (${bare.length} found)`, bare.length === 0);
 check('lib/db.ts converts in at least 14 places', calls.length >= 14);
+
+// 5c. Every nutrient total reads what stays in the dish.
+const eaten = (dbSource.match(/await gramsEatenFromDish\(/g) || []).length;
+check(`every nutrient breakdown reads what stays in the dish (${eaten} of 13)`, eaten >= 13);
+check('the shared recipe path passes the note', /grams = await gramsEatenFromDish\(grams, foodId, source, ingredient\.note\)/.test(dbSource));
+check('curated recipe totals pass the prep note', /note: ingredient\.prepNote/.test(dbSource));
+check('meal items pass their notes', /note: item\.notes/.test(dbSource));
+check('cached daily totals are recomputed for the new rule', /DAILY_NUTRIENT_TOTALS_CACHE_FORMAT = [2-9]/.test(dbSource));
 
 console.log(`${checks - failures} of ${checks} checks passed`);
 process.exit(failures ? 1 : 0);

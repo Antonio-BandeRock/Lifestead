@@ -93,6 +93,48 @@ export function isSaltBySodium(sodiumMgPer100g: number | null | undefined, names
   return names.some((name) => !!name && /salt/i.test(name));
 }
 
+// How much of a salt line stays in the food, read from the recipe's note
+// (owner's instruction, 2026-11-10: salt that goes into water which is
+// then poured away is not counted). Returns the grams to count. A note
+// that names an amount for the dish counts that amount; otherwise:
+//   all of it into water, brine or a rinse that is poured away: nothing
+//   "a little" or "a pinch" for the dish, the rest in the water: an eighth
+//   "mostly" or "most" poured away: a quarter
+//   split between the dish and the water: half
+// Brine that is eaten with the food ("dissolved in the brine") and a
+// dough's salt "plus more for the water" count in full, since the listed
+// amount is what stays. The shares are a reading of the note, not a
+// measurement: the UK Food Standards Agency (2006) found what pasta, rice
+// and potatoes take up from salted water rises with how salty the water
+// is, so no one figure fits every pot. Weight conversion is untouched,
+// because a shopping list still needs the whole amount.
+const SALT_ON_WATER = /\b(water|brine|soaking liquid|poaching|blanching|purging)\b/i;
+const SALT_THROWN = /\b(rinsed off|poured away|drained off|soaking liquid)\b/i;
+
+export function saltGramsKeptInDish(grams: number, note: string | null | undefined): number {
+  const text = (note ?? '').trim().toLowerCase();
+  if (!text) return grams;
+  if (!SALT_ON_WATER.test(text) && !SALT_THROWN.test(text)) return grams;
+  // The listed amount is the dish's; the water's salt was never listed.
+  if (/^plus (more|a handful)\b/.test(text)) return grams;
+  if (/\bdissolved in the brine\b/.test(text)) return grams;
+  if (/\bto draw out the water\b/.test(text)) return grams;
+  // "1/2 tsp to season the chicken, the rest for the brine"
+  const stated = text.match(/^(\d+(?:\/\d+)?|\d*\.\d+)\s*(tsp|tbsp)\b[^,]*,\s*the rest\b/);
+  if (stated) {
+    const [num, den] = stated[1].split('/').map(Number);
+    const spoons = den ? num / den : num;
+    return Math.min(grams, spoons * (stated[2] === 'tbsp' ? 18 : 6));
+  }
+  // Both halves go down the drain: purged clams and the pasta water.
+  if (/purging/.test(text) && !/\b(sauce|filling|dough|pesto|eggplant|chicken)\b/.test(text)) return 0;
+  if (/^(a little|a pinch)\b.*\bmost\b/.test(text) || /^a pinch for\b/.test(text)) return grams / 8;
+  if (/\bonly a little reaches\b/.test(text)) return grams / 8;
+  if (/\bmost(ly)?\b/.test(text)) return grams / 4;
+  if (/^part for\b/.test(text) || /\band the (sauce|filling|dough)\b/.test(text)) return grams / 2;
+  return 0;
+}
+
 // True when the category alone already gives volume units a density.
 export function categoryHasDensity(foodCategory: string | null | undefined): boolean {
   return !!foodCategory && foodCategory in CATEGORY_DENSITY_CLASS;

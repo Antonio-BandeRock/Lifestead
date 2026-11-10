@@ -35,7 +35,7 @@ import { nextQueued, shouldQueueNext, type SeriesItem, type SeriesTrialStatus } 
 import { DEFAULT_STEP_DAYS, DEFAULT_WASHOUT_DAYS, type RecordedStep, type StepKey } from './steppedReintroduction';
 import { localDayOf } from './dailyScales';
 import { buildPerConditionSummaries, type ConditionDimensionSummary } from './conditionDimensions';
-import { categoryHasDensity, convertToGrams, isSaltBySodium, MASS_UNITS, MeasurementUnit, VOLUME_UNITS } from './unitConversion';
+import { categoryHasDensity, convertToGrams, isSaltBySodium, MASS_UNITS, MeasurementUnit, saltGramsKeptInDish, VOLUME_UNITS } from './unitConversion';
 import {
   describeApproximateCount,
   isNonPurchasableIngredient,
@@ -2318,6 +2318,7 @@ export async function getCuratedRecipeNutrientTotals(
         rawUnit: ingredient.unit,
         quantityMultiplier: 1,
         dishServings: recipe.servings,
+        note: ingredient.prepNote,
       },
       caches,
     );
@@ -2668,6 +2669,18 @@ export async function conversionOptionsFor(
   const options = { foodCategory: foodCategory ?? undefined };
   if (!(VOLUME_UNITS as readonly string[]).includes(unit) || categoryHasDensity(foodCategory)) return options;
   return (await isSaltFood(foodId, source)) ? { ...options, densityClass: 'granular_salt' } : options;
+}
+
+// The grams of an ingredient a person eats, which for salt can be less than
+// the grams that went in: salt in pasta water, a brine or a rinse that is
+// poured away is not counted (owner's instruction, 2026-11-10; the reading
+// of the note is saltGramsKeptInDish in lib/unitConversion.ts). Every
+// nutrient total goes through this; shopping amounts do not.
+async function gramsEatenFromDish(grams: number, foodId: number, source: string, note: string | null | undefined): Promise<number> {
+  if (!note) return grams;
+  const kept = saltGramsKeptInDish(grams, note);
+  if (kept === grams) return grams;
+  return (await isSaltFood(foodId, source)) ? kept : grams;
 }
 
 export type FoodUnitWeight = {
@@ -11703,6 +11716,7 @@ export async function getSideNutrientBreakdown(sideId: string): Promise<DailyNut
       grams = conversion.grams;
     }
 
+    grams = await gramsEatenFromDish(grams, foodId, source, ingredient.prepNote);
     const cacheKey = `${foodId}|${source}`;
     let nutrients = nutrientCache.get(cacheKey);
     if (!nutrients) {
@@ -12127,6 +12141,7 @@ export async function getSaladNutrientBreakdown(saladId: string): Promise<DailyN
       grams = conversion.grams;
     }
 
+    grams = await gramsEatenFromDish(grams, foodId, source, ingredient.prepNote);
     const cacheKey = `${foodId}|${source}`;
     let nutrients = nutrientCache.get(cacheKey);
     if (!nutrients) {
@@ -12472,6 +12487,7 @@ export async function getSmoothieNutrientBreakdown(smoothieId: string): Promise<
       grams = conversion.grams;
     }
 
+    grams = await gramsEatenFromDish(grams, foodId, source, ingredient.prepNote);
     const cacheKey = `${foodId}|${source}`;
     let nutrients = nutrientCache.get(cacheKey);
     if (!nutrients) {
@@ -12869,6 +12885,7 @@ export async function getFermentationNutrientBreakdown(fermentationId: string): 
       grams = conversion.grams;
     }
 
+    grams = await gramsEatenFromDish(grams, foodId, source, ingredient.prepNote);
     const cacheKey = `${foodId}|${source}`;
     let nutrients = nutrientCache.get(cacheKey);
     if (!nutrients) {
@@ -13295,6 +13312,7 @@ export async function getBeverageNutrientBreakdown(beverageId: string): Promise<
       grams = conversion.grams;
     }
 
+    grams = await gramsEatenFromDish(grams, foodId, source, ingredient.prepNote);
     const cacheKey = `${foodId}|${source}`;
     let nutrients = nutrientCache.get(cacheKey);
     if (!nutrients) {
@@ -13646,6 +13664,7 @@ export async function getSnackNutrientBreakdown(snackId: string): Promise<DailyN
       grams = conversion.grams;
     }
 
+    grams = await gramsEatenFromDish(grams, foodId, source, ingredient.prepNote);
     const cacheKey = `${foodId}|${source}`;
     let nutrients = nutrientCache.get(cacheKey);
     if (!nutrients) {
@@ -13999,6 +14018,7 @@ export async function getBakedGoodsNutrientBreakdown(bakedGoodId: string): Promi
       grams = conversion.grams;
     }
 
+    grams = await gramsEatenFromDish(grams, foodId, source, ingredient.prepNote);
     const cacheKey = `${foodId}|${source}`;
     let nutrients = nutrientCache.get(cacheKey);
     if (!nutrients) {
@@ -14397,6 +14417,7 @@ export async function getSoupNutrientBreakdown(soupId: string): Promise<DailyNut
       grams = conversion.grams;
     }
 
+    grams = await gramsEatenFromDish(grams, foodId, source, ingredient.prepNote);
     const cacheKey = `${foodId}|${source}`;
     let nutrients = nutrientCache.get(cacheKey);
     if (!nutrients) {
@@ -14798,6 +14819,7 @@ export async function getSauceNutrientBreakdown(sauceId: string): Promise<DailyN
       grams = conversion.grams;
     }
 
+    grams = await gramsEatenFromDish(grams, foodId, source, ingredient.prepNote);
     const cacheKey = `${foodId}|${source}`;
     let nutrients = nutrientCache.get(cacheKey);
     if (!nutrients) {
@@ -15150,6 +15172,7 @@ export async function getHandheldNutrientBreakdown(handheldId: string): Promise<
       grams = conversion.grams;
     }
 
+    grams = await gramsEatenFromDish(grams, foodId, source, ingredient.prepNote);
     const cacheKey = `${foodId}|${source}`;
     let nutrients = nutrientCache.get(cacheKey);
     if (!nutrients) {
@@ -15553,6 +15576,7 @@ export async function getDessertNutrientBreakdown(dessertId: string): Promise<Da
       grams = conversion.grams;
     }
 
+    grams = await gramsEatenFromDish(grams, foodId, source, ingredient.prepNote);
     const cacheKey = `${foodId}|${source}`;
     let nutrients = nutrientCache.get(cacheKey);
     if (!nutrients) {
@@ -17307,6 +17331,7 @@ export async function computeIngredientListNutrition(ingredients: MealIngredient
         rawUnit: ingredient.unit,
         dishServings: ingredient.dishServings,
         yourSharePercent: ingredient.yourSharePercent,
+        note: ingredient.notes,
       },
       caches,
     );
@@ -22388,6 +22413,7 @@ export async function getDailyNutrientBreakdown(date: string): Promise<DailyNutr
         grams = conversion.grams;
       }
 
+      grams = await gramsEatenFromDish(grams, foodId, source, item.notes);
       const totalGramsForDish = grams * (item.quantity ?? 1);
       const shareFraction = item.yourSharePercent != null ? item.yourSharePercent / 100 : 1 / (item.dishServings ?? 1);
       const gramsConsumedByThisPerson = totalGramsForDish * shareFraction;
@@ -22681,6 +22707,9 @@ type ResolvableIngredient = {
   quantityMultiplier?: number | null;
   dishServings?: number | null;
   yourSharePercent?: number | null;
+  // The recipe's note on this line, which says when salt goes into water
+  // that is poured away (gramsEatenFromDish).
+  note?: string | null;
 };
 
 // Exported 2026-08-26 so lib/dailyMealPlan.ts's own buildCandidatePools can
@@ -22743,6 +22772,7 @@ async function resolveIngredientNutrientTotals(
     grams = conversion.grams;
   }
 
+  grams = await gramsEatenFromDish(grams, foodId, source, ingredient.note);
   const totalGramsForDish = grams * (ingredient.quantityMultiplier ?? 1);
   const shareFraction = ingredient.yourSharePercent != null ? ingredient.yourSharePercent / 100 : 1 / (ingredient.dishServings ?? 1);
   const gramsConsumed = totalGramsForDish * shareFraction;
@@ -22786,7 +22816,9 @@ export function endOfLocalDay(dateOrDateTime: string): string {
 
 // Bump when the shape of totals_json or what goes into the signature
 // changes, so every cached day is recomputed once on the next read.
-const DAILY_NUTRIENT_TOTALS_CACHE_FORMAT = 1;
+// 2 (1.0.85.1): spooned salt counts since 1.0.84.1 and salt poured away
+// with its water stops counting, neither of which changes a meal item.
+const DAILY_NUTRIENT_TOTALS_CACHE_FORMAT = 2;
 
 type CachedDayRow = { date: string; signature: string; totals_json: string };
 
@@ -22806,6 +22838,7 @@ function dailyNutrientTotalsSignature(items: (MealItemRecord & { eatenAt: string
         item.quantity ?? '',
         item.dishServings ?? '',
         item.yourSharePercent ?? '',
+        item.notes ?? '',
       ].join(':'),
     )
     .sort();
@@ -22880,6 +22913,7 @@ export async function getNutrientTotalsByDateRange(startLocal: string, endLocal:
           quantityMultiplier: item.quantity,
           dishServings: item.dishServings,
           yourSharePercent: item.yourSharePercent,
+          note: item.notes,
         },
         caches,
       );
@@ -22998,6 +23032,7 @@ export async function getDayMealAndDoseTimeline(date: string): Promise<{
             rawUnit: ingredient.unit,
             dishServings: ingredient.dishServings,
             yourSharePercent: ingredient.yourSharePercent,
+            note: ingredient.notes,
           },
           caches,
         );
@@ -23166,6 +23201,7 @@ async function getProjectedIngredientsByDateRange(startDate: string, endDate: st
           rawUnit: ingredient.unit,
           dishServings: ingredient.dishServings,
           yourSharePercent: ingredient.yourSharePercent,
+          note: ingredient.notes,
         });
       }
     }
