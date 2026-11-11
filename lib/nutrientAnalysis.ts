@@ -152,6 +152,15 @@ const LOW_THRESHOLD = 0.9;
 // diet until the food data separates the two.)
 const UPPER_LIMIT_SUPPLEMENT_ONLY = new Set(['magnesium', 'folate_b9', 'niacin_b3', 'vitamin_e']);
 
+// False for the four nutrients above, whose upper limit applies only to
+// supplements and fortified food. Anything that totals food alone (the Meal
+// Plan, a dish, a logged day of meals) reads this before comparing an
+// amount with an upper limit. Added 2026-11-11: the Meal Plan compared food
+// magnesium and niacin with those limits and called ordinary days past them.
+export function upperLimitAppliesToFood(nutrientCode: string): boolean {
+  return !UPPER_LIMIT_SUPPLEMENT_ONLY.has(nutrientCode);
+}
+
 // The core gap analysis: for every nutrient with a known DRI, combines food
 // + supplement intake and classifies it. Sodium (the one CDRR/ceiling-type
 // row) is inverted on purpose -- for every other nutrient "more" moves

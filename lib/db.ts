@@ -45,8 +45,10 @@ import {
 } from './groceryList';
 import {
   cookingMethodIntent,
+  cookingTextMeansHeated,
   describePrepMismatch,
   isRawPrepMethod,
+  isUnaskedPreservedForm,
   preferredPrepMethodFor,
 } from './cookingMethodResolution';
 // Type-only -- lib/recipeDepth.ts imports several real functions FROM this
@@ -1825,10 +1827,14 @@ async function resolveNonRawPrepMethodMatch(category: string, baseName: string, 
     ...params,
     baseName,
   );
-  if (rows.length === 0) return null;
+  // 2026-11-11: dried, canned, frozen and pickled rows are not cooked rows.
+  // With nothing heat-cooked left, the caller falls through to the raw or
+  // standard row, which is closer to what the dish holds than a dried one.
+  const cooked = rows.filter((r) => !isUnaskedPreservedForm(r.prep_method, r.name, cookingMethod));
+  if (cooked.length === 0) return null;
   const lowerCooking = cookingMethod.toLowerCase();
-  const exact = rows.find((r) => r.prep_method && lowerCooking.includes(r.prep_method.toLowerCase()));
-  return toFoodOption(exact ?? rows[0]);
+  const exact = cooked.find((r) => r.prep_method && lowerCooking.includes(r.prep_method.toLowerCase()));
+  return toFoodOption(exact ?? cooked[0]);
 }
 
 
@@ -1896,8 +1902,9 @@ export async function resolveFoodForCookingMethod(
     prep_method: string | null;
     short_name: string | null;
     base_name: string;
+    name: string;
   }>(
-    `SELECT food_id, source, prep_method, short_name, base_name FROM foods
+    `SELECT food_id, source, prep_method, short_name, base_name, name FROM foods
      WHERE category = ? AND base_name = ? AND hidden = 0
      ORDER BY CASE WHEN source IN ('USDA', 'Derived') THEN 0 ELSE 1 END, food_id`,
     current.category,
@@ -1922,12 +1929,18 @@ export async function resolveFoodForCookingMethod(
 
   if (intent === 'raw') {
     if (isRawPrepMethod(current.prepMethod)) return unchanged();
-    const raw = rows.find((row) => isRawPrepMethod(row.prep_method));
+    const raw =
+      rows.find((row) => isRawPrepMethod(row.prep_method) && !isUnaskedPreservedForm(row.prep_method, row.name, cookingMethod)) ??
+      rows.find((row) => isRawPrepMethod(row.prep_method));
     if (raw) return pick(raw);
     return unchanged(describePrepMismatch(current.baseName, current.prepMethod, cookingMethod));
   }
 
-  const cookedRows = rows.filter((row) => !isRawPrepMethod(row.prep_method));
+  // A dried, canned or frozen row is not the cooked version of a food
+  // (2026-11-11), unless the cooking word itself names that form.
+  const cookedRows = rows.filter(
+    (row) => !isRawPrepMethod(row.prep_method) && !isUnaskedPreservedForm(row.prep_method, row.name, cookingMethod),
+  );
   if (cookedRows.length === 0) {
     // The honest case: this food has no cooked row at all. The ingredient
     // keeps the row it has, and the note is what stops the two answers
@@ -2151,51 +2164,68 @@ async function resolveCuratedRecipeIngredient(
 // salad) is left to fall through to the existing Raw-first behavior
 // completely unchanged.
 async function resolveCuratedRecipeIngredientUncached(category: string, baseName: string, cookingMethod: string | null) {
-  if (cookingMethod) {
+  // 2026-11-11: only cooking text that means heat looks for a cooked row.
+  // 'Raw' and 'N/A' used to take this path too, which is how a raw banana
+  // was scored as dried banana and a raw strawberry as frozen.
+  if (cookingMethod && cookingTextMeansHeated(cookingMethod)) {
     const viaCooked = await resolveNonRawPrepMethodMatch(category, baseName, cookingMethod);
     if (viaCooked) return viaCooked;
   }
 
-  const viaKnownPrep =
-    (await resolveFoodChoice(category, null, baseName, 'Raw')) ?? (await resolveFoodChoice(category, null, baseName, null));
-  if (viaKnownPrep) return viaKnownPrep;
-
-  // A real, found-not-guessed gap: several whole-food ingredients (Quinoa,
-  // Chickpea, Oregano, confirmed via direct query before this fallback was
-  // added) don't carry either a 'Raw' or an untagged prep_method row at
-  // all in this database -- their only real row is tagged something else
-  // entirely ('Cooked', 'Dried'). Rather than hand-enumerate every real
-  // prep_method value per ingredient, this final step picks any visible
-  // row for the (category, base_name) pair, regardless of prep tag --
-  // every real ingredient across every curated recipe was already
-  // confirmed to have at least one visible row before being written in
-  // (see curated_recipes.sql's own header comment), so this only ever
-  // matters for the "not Raw, not untagged" case, never a genuine miss.
+  // Every row for this (category, base_name), ranked in one place: a raw
+  // row, then an untagged one, then any other preparation, and a dried,
+  // canned, frozen or otherwise preserved form only when nothing else
+  // exists. Several whole foods (Quinoa, Chickpea, Oregano) carry neither a
+  // Raw nor an untagged row, so the third tier matters. A recipe may also
+  // name a food that is hidden from browsing (owner's instruction,
+  // 2026-11-10: "Don't leave out any of the hidden items"); its nutrients
+  // still count in the dish, so hidden rows are the last resort rather than
+  // left out.
   const db = await getReferenceDatabase();
-  const row = await db.getFirstAsync<{ food_id: number; source: string; name: string; short_name: string | null; category: string }>(
-    `SELECT food_id, source, name, short_name, category FROM foods
-     WHERE category = ? AND base_name = ? AND hidden = 0
-     ORDER BY CASE WHEN source IN ('USDA', 'Derived') THEN 0 ELSE 1 END, food_id
-     LIMIT 1`,
+  const rows = await db.getAllAsync<{
+    food_id: number;
+    source: string;
+    name: string;
+    short_name: string | null;
+    category: string;
+    prep_method: string | null;
+    hidden: number;
+  }>(
+    `SELECT food_id, source, name, short_name, category, prep_method, hidden FROM foods
+     WHERE category = ? AND base_name = ?`,
     category,
     baseName,
   );
-  if (row) return toFoodOption(row);
-
-  // A recipe may name a food that is hidden from browsing (owner's
-  // instruction, 2026-11-10: "Don't leave out any of the hidden items").
-  // Its nutrients still count in the dish; it stays out of every list a
-  // person browses, which is all hidden = 1 means.
-  const hiddenRow = await db.getFirstAsync<{ food_id: number; source: string; name: string; short_name: string | null; category: string }>(
-    `SELECT food_id, source, name, short_name, category FROM foods
-     WHERE category = ? AND base_name = ?
-     ORDER BY CASE WHEN prep_method = 'Raw' THEN 0 WHEN prep_method IS NULL THEN 1 ELSE 2 END,
-       CASE WHEN source IN ('USDA', 'Derived') THEN 0 ELSE 1 END, food_id
-     LIMIT 1`,
-    category,
-    baseName,
-  );
-  return hiddenRow ? toFoodOption(hiddenRow) : null;
+  if (rows.length === 0) return null;
+  const prepTier = (prep: string | null) => {
+    const key = (prep ?? '').trim().toLowerCase();
+    if (key === 'raw') return 0;
+    if (key === '') return 1;
+    return 2;
+  };
+  const saltTier = (name: string) => {
+    const lower = name.toLowerCase();
+    if (lower.includes('without salt') || lower.includes('no salt added') || lower.includes('unsalted')) return 0;
+    if (lower.includes('with salt') || lower.includes('salted')) return 2;
+    return 1;
+  };
+  const rank = (row: (typeof rows)[number]) => [
+    row.hidden ? 1 : 0,
+    isUnaskedPreservedForm(row.prep_method, row.name, cookingMethod) ? 1 : 0,
+    prepTier(row.prep_method),
+    row.source === 'USDA' || row.source === 'Derived' ? 0 : 1,
+    saltTier(row.name),
+    row.food_id,
+  ];
+  const ranked = rows
+    .map((row) => ({ row, key: rank(row) }))
+    .sort((a, b) => {
+      for (let i = 0; i < a.key.length; i += 1) {
+        if (a.key[i] !== b.key[i]) return a.key[i] - b.key[i];
+      }
+      return 0;
+    });
+  return toFoodOption(ranked[0].row);
 }
 
 // sharedIngredientChoiceCache is optional so every other, pre-existing

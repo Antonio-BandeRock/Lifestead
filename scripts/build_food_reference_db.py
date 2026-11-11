@@ -5897,6 +5897,7 @@ def build(xlsx_path, db_path):
                VALUES (?, ?, ?, ?)""",
             nutrient_rows,
         )
+        apply_nutrient_source_fixes(cur)
         conn.commit()
         cur.execute("VACUUM")
 
@@ -5917,6 +5918,58 @@ def build(xlsx_path, db_path):
             print(f"  {name}: {count}")
 
     conn.close()
+
+
+def apply_nutrient_source_fixes(cur):
+    # 2026-11-11, the same two corrections scripts/fix_nutrient_source_errors.js
+    # applies to an already-built database; see its header for the evidence.
+    # 1. Germany_BLS vitamin_b6 is in micrograms in a milligram column.
+    # 2. France_Ciqual records "below the detection limit" for selenium and
+    #    iodine as 20 or 50 micrograms; removed where other sources sit under
+    #    a third of it, so getFoodNutrients fills the value from a sibling.
+    def median(values):
+        if not values:
+            return None
+        ordered = sorted(values)
+        return ordered[len(ordered) // 2]
+
+    b6 = [r[0] for r in cur.execute(
+        "SELECT amount_per_100g FROM food_nutrients WHERE source = 'Germany_BLS' AND nutrient_code = 'vitamin_b6'")]
+    if b6 and median(b6) > 5:
+        cur.execute(
+            "UPDATE food_nutrients SET amount_per_100g = amount_per_100g / 1000.0 "
+            "WHERE source = 'Germany_BLS' AND nutrient_code = 'vitamin_b6'")
+        print(f"Germany_BLS vitamin_b6: {len(b6)} values divided by 1000")
+
+    for code in ("selenium", "iodine"):
+        by_sibling, by_sub, by_cat = {}, {}, {}
+        for category, subcategory, base_name, prep, amount in cur.execute(
+            """SELECT f.category, f.subcategory, f.base_name, COALESCE(f.prep_method, ''), fn.amount_per_100g
+               FROM food_nutrients fn JOIN foods f ON f.food_id = fn.food_id AND f.source = fn.source
+               WHERE fn.nutrient_code = ? AND fn.source != 'France_Ciqual'""", (code,)).fetchall():
+            by_sibling.setdefault((category, base_name, prep), []).append(amount)
+            by_sub.setdefault((category, subcategory or ""), []).append(amount)
+            by_cat.setdefault(category, []).append(amount)
+        removed = 0
+        for food_id, category, subcategory, base_name, prep, amount in cur.execute(
+            """SELECT f.food_id, f.category, f.subcategory, f.base_name, COALESCE(f.prep_method, ''), fn.amount_per_100g
+               FROM food_nutrients fn JOIN foods f ON f.food_id = fn.food_id AND f.source = fn.source
+               WHERE fn.nutrient_code = ? AND fn.source = 'France_Ciqual' AND fn.amount_per_100g IN (20, 50)""",
+            (code,)).fetchall():
+            sibling = by_sibling.get((category, base_name, prep))
+            sub = by_sub.get((category, subcategory or ""))
+            if sibling:
+                reference = median(sibling)
+            elif sub and len(sub) >= 5:
+                reference = median(sub)
+            else:
+                reference = median(by_cat.get(category, []))
+            if reference is not None and reference < amount / 3:
+                cur.execute(
+                    "DELETE FROM food_nutrients WHERE food_id = ? AND source = 'France_Ciqual' AND nutrient_code = ?",
+                    (food_id, code))
+                removed += 1
+        print(f"France_Ciqual {code}: {removed} detection-limit placeholders removed")
 
 
 def write_version_file(version_ts_path):

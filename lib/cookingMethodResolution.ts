@@ -90,6 +90,76 @@ export function isRawPrepMethod(prepMethod: string | null | undefined): boolean 
   return key === '' || key === 'raw' || key === 'unprepared';
 }
 
+// 2026-11-11: a preserved or dried form is never "the cooked version" of a
+// food. Before this, any row that was not Raw counted as cooked, so a
+// simmered tomato was scored as sun-dried tomato (about 14 times the
+// potassium, iron and magnesium per 100 g), sauteed tofu as freeze-dried
+// koyadofu, a raw banana as dried banana and baked salmon as canned salmon.
+// Whole days of meals read past the upper limit for iron, magnesium,
+// manganese and niacin because of it.
+//
+// Such a row is still the right answer when the cooking text itself names
+// that form ("canned"), and it stays reachable as a last resort when it is
+// the only row a food has.
+const PRESERVED_PREP_METHODS = new Set([
+  'dried',
+  'canned',
+  'frozen',
+  'deep-frozen',
+  'pickled',
+  'mashed (dehydrated)',
+  'marinated',
+  'in unsalted water',
+]);
+
+const PRESERVED_NAME_WORDS: { pattern: RegExp; stem: string }[] = [
+  { pattern: /\bsun[- ]dried\b/i, stem: 'dried' },
+  { pattern: /\bfreeze[- ]dried\b/i, stem: 'dried' },
+  { pattern: /\bdried\b/i, stem: 'dried' },
+  { pattern: /\bdehydrated\b/i, stem: 'dehydrated' },
+  { pattern: /\bdry\b(?![- ](roasted|heat))/i, stem: 'dry' },
+  { pattern: /\bcanned\b/i, stem: 'canned' },
+  { pattern: /\bfrozen\b/i, stem: 'frozen' },
+  { pattern: /\bpickled\b/i, stem: 'pickled' },
+  { pattern: /\bpowder(ed)?\b/i, stem: 'powder' },
+  { pattern: /\bconcentrate[ds]?\b/i, stem: 'concentrate' },
+  { pattern: /\bin (heavy |light |extra light )?syrup\b/i, stem: 'syrup' },
+  { pattern: /\bin brine\b/i, stem: 'brine' },
+  { pattern: /\bsmoked\b/i, stem: 'smoked' },
+  { pattern: /\bsalted\b/i, stem: 'salted' },
+];
+
+// True when this row is a preserved, dried or concentrated form of the food
+// that the stated cooking text does not ask for.
+export function isUnaskedPreservedForm(
+  prepMethod: string | null | undefined,
+  name: string | null | undefined,
+  cookingMethod: string | null | undefined,
+): boolean {
+  const asked = (cookingMethod ?? '').toLowerCase();
+  const prep = (prepMethod ?? '').trim().toLowerCase();
+  if (PRESERVED_PREP_METHODS.has(prep)) {
+    const stem = prep.split(/[ (]/)[0].replace('deep-', '');
+    if (!asked.includes(stem)) return true;
+  }
+  const text = name ?? '';
+  for (const word of PRESERVED_NAME_WORDS) {
+    if (word.pattern.test(text) && !asked.includes(word.stem)) return true;
+  }
+  return false;
+}
+
+// A recipe's free cooking text, read for whether heat is involved at all.
+// 'Raw', 'N/A', 'cold', 'soaked' and the fermenting words describe a food
+// served as it is, so they keep the raw or standard row.
+const UNHEATED_WORDS = new Set(['raw', 'n/a', 'none', 'fresh', 'uncooked', 'cold', 'soaked', 'chilled', 'fermented', 'wild-fermented']);
+
+export function cookingTextMeansHeated(cookingMethod: string | null | undefined): boolean {
+  const key = (cookingMethod ?? '').trim().toLowerCase();
+  if (!key) return false;
+  return !UNHEATED_WORDS.has(key);
+}
+
 // Says plainly when the numbers being used describe a different preparation
 // from the one the person stated. Returns null when the two agree, so a
 // caller renders nothing rather than reassurance nobody needs.

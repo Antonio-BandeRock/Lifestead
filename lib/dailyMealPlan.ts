@@ -98,6 +98,7 @@ import {
 import { leanToCuisines } from './mealPlanDiet';
 import { NUTRIENT_ANTAGONISM_RULES, NUTRIENT_SYNERGY_RULES } from './nutrientPairRules';
 import { addDays, overridesForDate, weekdayTargetNotes, type WeekdayTargetOverride } from './weekdayTargets';
+import { upperLimitAppliesToFood } from './nutrientAnalysis';
 
 /**
  * A daily food budget for one person (G38, lib/mealPlanBudget.ts): the
@@ -1306,7 +1307,10 @@ type CandidatePools = {
 // say so honestly rather than presenting an approximate number as exact.
 function buildConservativeDriByCode(driRows: DietaryReferenceIntake[]): Map<string, DietaryReferenceIntake> {
   const byCode = new Map<string, DietaryReferenceIntake>();
-  for (const row of driRows) {
+  for (const sourceRow of driRows) {
+    // A plan is food only, and four upper limits (magnesium, niacin, folate,
+    // vitamin E) apply only to supplements, so they are not limits here.
+    const row = upperLimitAppliesToFood(sourceRow.nutrientCode) ? sourceRow : { ...sourceRow, upperLimit: null };
     const existing = byCode.get(row.nutrientCode);
     if (!existing) {
       byCode.set(row.nutrientCode, row);
