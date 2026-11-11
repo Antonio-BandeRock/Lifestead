@@ -561,7 +561,7 @@ export const LUPUS_ENTRIES: DigestEntry[] = [
       { source: 'Malinow et al. 1982, Science: systemic lupus erythematosus-like syndrome in monkeys fed alfalfa sprouts, role of L-canavanine', url: 'https://www.science.org/doi/10.1126/science.7071589' },
     ],
     overallTier: 'moderate',
-    relatedIds: ['recipe-ferment-rejuvelac', 'recipe-ferment-tonic-elderberry-ginger-turmeric', 'recipe-ferment-garlic-honey-tonic'],
+    relatedIds: ['recipe-ferment-rejuvelac', 'recipe-ferment-tonic-elderberry-ginger-turmeric', 'recipe-ferment-fire-cider'],
   },
   // 2026-08-21, added after fact-checking NOVA's "The Truth About Fat"
   // (2020) documentary against the peer-reviewed literature, direct

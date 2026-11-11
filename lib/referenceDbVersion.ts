@@ -182,4 +182,8 @@
 // came from: amounts, seasonings and made-first servings corrected, nine
 // dishes with no source replaced, stale stock links dropped, and the
 // whole wheat loaf now cut into 10 slices. A stale copy has the old rows.
-export const REFERENCE_DB_VERSION = "20261111120000";
+// BUMPED again 2026-11-11 (1.0.86.2): made-first recipes matched to their
+// sources, unused sauce and stock links dropped, soup water added, Fire
+// Cider in place of the garlic honey tonic, skinless thigh where a recipe
+// says skinless. A stale copy has the old rows.
+export const REFERENCE_DB_VERSION = "20261111134600";

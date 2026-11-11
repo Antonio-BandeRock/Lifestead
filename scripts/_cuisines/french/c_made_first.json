@@ -468,7 +468,7 @@
       "ingredients": [
         {
           "category": "Meat",
-          "baseName": "Pork Shoulder (Raw)",
+          "baseName": "Porc, palette, crue",
           "quantity": 2000,
           "unit": "g",
           "cutPrep": "in one piece",
@@ -478,34 +478,16 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 36,
+          "quantity": 40,
           "unit": "g",
-          "cutPrep": null,
+          "cutPrep": "coarse",
           "cookingMethod": null,
           "prepNote": "the part the meat keeps; the steps give the full amount for the cure"
         },
         {
-          "category": "Herbs",
-          "baseName": "Thyme, dried, ground",
-          "quantity": 1,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, bay leaf",
-          "quantity": 0.5,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, cloves, ground",
-          "quantity": 0.5,
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 20,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -514,17 +496,44 @@
         {
           "category": "Herbs",
           "baseName": "Spices, pepper, black",
-          "quantity": 3,
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": "cracked",
+          "cookingMethod": null,
+          "prepNote": "2 spoonfuls"
+        },
+        {
+          "notInDatabase": true,
+          "name": "Juniper berries",
+          "contains": "none",
+          "quantity": 12,
+          "unit": "each",
+          "cutPrep": "crushed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.8,
+          "unit": "g",
+          "cutPrep": "crumbled",
+          "cookingMethod": null,
+          "prepNote": "4 leaves"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Thyme",
+          "quantity": 2,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 sprigs"
         }
       ],
       "instructions": [
-        "Bring 3 litres of water to the boil with 300 g salt, the thyme, bay, cloves and peppercorns. Cool completely.",
-        "Put the shoulder in the cold liquid, weigh it down so it stays under, and keep it in the fridge 3 days.",
-        "Lift it out, rinse and pat dry. For choucroute, cold smoke it 12 hours over beech. Cook it within 3 days; soak it 30 minutes before cooking for a milder taste. One serving is 50 g."
+        "Mix 80 g coarse salt with the sugar, cracked pepper, juniper, bay and thyme, and rub it into every side of the shoulder for about 10 minutes.",
+        "Wrap it in film and keep in the fridge 3 days, turning once a day and pouring off the juice it gives.",
+        "Rinse and pat dry. Soak in cold water for 12 hours before cooking to draw out some of the salt. One serving is 50 g."
       ],
       "nutritionHighlights": [
         {
@@ -533,16 +542,20 @@
         },
         {
           "nutrient": "Sodium",
-          "note": "About 700 mg per 50 g."
+          "note": "About 400 mg per 50 g, counting half the salt in the cure."
         }
       ],
       "citations": [
         {
-          "source": "Wikipedia (French): Petit salé",
-          "url": "https://fr.wikipedia.org/wiki/Petit_sal%C3%A9"
+          "source": "Cavelaregnere, Saumure et salaison maison",
+          "url": "https://cavelaregnere.com/blogs/recettes-de-cuisine/saumure-et-salaison-maison-recette"
+        },
+        {
+          "source": "Maison de l'Aveyron, Comment préparer la viande pour le petit salé",
+          "url": "https://maisondelaveyron.fr/comment-preparer-la-viande-pour-le-petit-sale/"
         }
       ],
-      "curationNote": null
+      "curationNote": "Cavelaregnere's dry cure, given per kg of pork (40 g coarse salt, 10 g sugar, a spoonful of cracked pepper, 6 juniper berries, 2 bay leaves, a sprig of thyme), applied to shoulder with its 3 days and 12 hour soak for petit salé. Half the salt is counted: the juice is poured off and the soak draws out more; the source does not measure what stays."
     },
     {
       "id": "curated_fr_base_travers_demi_sel",
@@ -571,34 +584,16 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 27,
+          "quantity": 30,
           "unit": "g",
-          "cutPrep": null,
+          "cutPrep": "coarse",
           "cookingMethod": null,
           "prepNote": "the part the meat keeps; the steps give the full amount for the cure"
         },
         {
-          "category": "Herbs",
-          "baseName": "Thyme, dried, ground",
-          "quantity": 1,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, bay leaf",
-          "quantity": 0.5,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, cloves, ground",
-          "quantity": 0.5,
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 15,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -607,17 +602,44 @@
         {
           "category": "Herbs",
           "baseName": "Spices, pepper, black",
-          "quantity": 3,
+          "quantity": 9,
+          "unit": "g",
+          "cutPrep": "cracked",
+          "cookingMethod": null,
+          "prepNote": "1.5 spoonfuls"
+        },
+        {
+          "notInDatabase": true,
+          "name": "Juniper berries",
+          "contains": "none",
+          "quantity": 9,
+          "unit": "each",
+          "cutPrep": "crushed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.6,
+          "unit": "g",
+          "cutPrep": "crumbled",
+          "cookingMethod": null,
+          "prepNote": "3 leaves"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Thyme",
+          "quantity": 1.5,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 sprigs"
         }
       ],
       "instructions": [
-        "Bring 2.5 litres of water to the boil with 250 g salt, the thyme, bay, cloves and peppercorns. Cool completely.",
-        "Put the ribs in the cold liquid, weigh them down and keep them in the fridge 2 days.",
-        "Lift out, rinse and pat dry. Cook within 3 days. One serving is 50 g."
+        "Mix 60 g coarse salt with the sugar, cracked pepper, juniper, bay and thyme, and rub it into every side of the ribs for about 10 minutes.",
+        "Wrap them in film and keep in the fridge 3 days, turning once a day and pouring off the juice it gives.",
+        "Rinse and pat dry. Soak in cold water for 12 hours before cooking to draw out some of the salt. One serving is 50 g."
       ],
       "nutritionHighlights": [
         {
@@ -626,16 +648,20 @@
         },
         {
           "nutrient": "Sodium",
-          "note": "About 700 mg per 50 g."
+          "note": "About 400 mg per 50 g, counting half the salt in the cure."
         }
       ],
       "citations": [
         {
-          "source": "Wikipedia (French): Petit salé",
-          "url": "https://fr.wikipedia.org/wiki/Petit_sal%C3%A9"
+          "source": "Cavelaregnere, Saumure et salaison maison",
+          "url": "https://cavelaregnere.com/blogs/recettes-de-cuisine/saumure-et-salaison-maison-recette"
+        },
+        {
+          "source": "Maison de l'Aveyron, Comment préparer la viande pour le petit salé",
+          "url": "https://maisondelaveyron.fr/comment-preparer-la-viande-pour-le-petit-sale/"
         }
       ],
-      "curationNote": null
+      "curationNote": "Cavelaregnere's dry cure, given per kg of pork (40 g coarse salt, 10 g sugar, a spoonful of cracked pepper, 6 juniper berries, 2 bay leaves, a sprig of thyme), with its 3 days and 12 hour soak for petit salé. Maison de l'Aveyron names ribs among the cuts for petit salé. Half the salt is counted: the juice is poured off and the soak draws out more; neither source measures what stays."
     },
     {
       "id": "curated_fr_base_jarret_demi_sel",
@@ -654,44 +680,26 @@
       "ingredients": [
         {
           "category": "Meat",
-          "baseName": "Gris lägg putsad rå u. svål",
+          "baseName": "Porc, jarret, cru",
           "quantity": 2000,
           "unit": "g",
-          "cutPrep": "two hocks",
+          "cutPrep": "whole hocks",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 36,
+          "quantity": 40,
           "unit": "g",
-          "cutPrep": null,
+          "cutPrep": "coarse",
           "cookingMethod": null,
           "prepNote": "the part the meat keeps; the steps give the full amount for the cure"
         },
         {
-          "category": "Herbs",
-          "baseName": "Thyme, dried, ground",
-          "quantity": 1,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, bay leaf",
-          "quantity": 0.5,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, cloves, ground",
-          "quantity": 0.5,
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 20,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -700,17 +708,44 @@
         {
           "category": "Herbs",
           "baseName": "Spices, pepper, black",
-          "quantity": 3,
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": "cracked",
+          "cookingMethod": null,
+          "prepNote": "2 spoonfuls"
+        },
+        {
+          "notInDatabase": true,
+          "name": "Juniper berries",
+          "contains": "none",
+          "quantity": 12,
+          "unit": "each",
+          "cutPrep": "crushed",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.8,
+          "unit": "g",
+          "cutPrep": "crumbled",
+          "cookingMethod": null,
+          "prepNote": "4 leaves"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Thyme",
+          "quantity": 2,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 sprigs"
         }
       ],
       "instructions": [
-        "Bring 3 litres of water to the boil with 300 g salt, the thyme, bay, cloves and peppercorns. Cool completely.",
-        "Put the hocks in the cold liquid, weigh them down and keep them in the fridge 3 days.",
-        "Lift out, rinse and pat dry. Cook within 3 days. One serving is 50 g."
+        "Mix 80 g coarse salt with the sugar, cracked pepper, juniper, bay and thyme, and rub it into every side of the hocks for about 10 minutes.",
+        "Wrap them in film and keep in the fridge 3 days, turning once a day and pouring off the juice it gives.",
+        "Rinse and pat dry. Soak in cold water for 12 hours before cooking to draw out some of the salt. One serving is 50 g."
       ],
       "nutritionHighlights": [
         {
@@ -719,16 +754,20 @@
         },
         {
           "nutrient": "Sodium",
-          "note": "About 700 mg per 50 g."
+          "note": "About 400 mg per 50 g, counting half the salt in the cure."
         }
       ],
       "citations": [
         {
-          "source": "Wikipedia (French): Petit salé",
-          "url": "https://fr.wikipedia.org/wiki/Petit_sal%C3%A9"
+          "source": "Cavelaregnere, Saumure et salaison maison",
+          "url": "https://cavelaregnere.com/blogs/recettes-de-cuisine/saumure-et-salaison-maison-recette"
+        },
+        {
+          "source": "Maison de l'Aveyron, Comment préparer la viande pour le petit salé",
+          "url": "https://maisondelaveyron.fr/comment-preparer-la-viande-pour-le-petit-sale/"
         }
       ],
-      "curationNote": null
+      "curationNote": "Cavelaregnere's dry cure gives 40 g coarse salt, 10 g sugar, a spoonful of cracked pepper, 6 juniper berries, 2 bay leaves and a sprig of thyme per kg of pork, and says petit salé is made from belly or hock salted 3 days, then soaked 12 hours. Maison de l'Aveyron names hock, ribs and plate for petit salé, salted 3 days. Half the salt is counted: the juice is poured off and the soak draws out more; neither source measures what stays."
     },
     {
       "id": "curated_fr_base_saucisse_de_toulouse",

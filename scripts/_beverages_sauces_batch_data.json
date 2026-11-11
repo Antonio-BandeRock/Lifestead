@@ -323,7 +323,7 @@
       {
         "category": "Fruit",
         "baseName": "Peach",
-        "quantity": 100,
+        "quantity": 50,
         "unit": "g",
         "cutPrep": "sliced",
         "cookingMethod": null,

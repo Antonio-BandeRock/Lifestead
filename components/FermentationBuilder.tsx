@@ -509,13 +509,14 @@ const FERMENTATION_SUBTYPE_CONFIG: Record<FermentationSubtypeKey, { allowedCateg
 
 // Which curated fermentation recipe belongs to each of the 10 leaf subtypes
 // above, used by the "Pick a Premade Recipe" menu below. Assigned one by
-// one rather than inferred from ingredient category at runtime: Fermented
-// Garlic Honey and Lemon Cheong are taken by the spoonful, not drunk, so a
+// one rather than inferred from ingredient category at runtime: Fire
+// Cider and Lemon Cheong are taken by the spoonful, not drunk, so a
 // category-based guess would misclassify both. somethingElseDrink and
 // somethingElseFood have no entries here; no recipe belongs to a catch-all,
 // so that menu shows every curated fermentation recipe unfiltered instead
 // (see curatedRecipesForSubtype below). Pozol was retired for the tejuino
-// the Mexican recipes already hold (2026-11-10 recipe audit).
+// the Mexican recipes already hold (2026-11-10 recipe audit). Garlic honey
+// was retired for Fire Cider: no tested method keeps garlic in honey safely.
 const CURATED_RECIPE_IDS_BY_SUBTYPE: Partial<Record<FermentationSubtypeKey, string[]>> = {
   fruitHerbalTonics: [
     'curated_ferment_tonic_tart_cherry_ginger_turmeric',
@@ -569,7 +570,7 @@ const CURATED_RECIPE_IDS_BY_SUBTYPE: Partial<Record<FermentationSubtypeKey, stri
   ],
   fermentedVegetables: ['curated_ferment_sauerkraut'],
   yogurt: ['curated_ferment_plain_yogurt', 'curated_ferment_probiotic_yogurt'],
-  syrupsSpoonableTonics: ['curated_ferment_garlic_honey_tonic', 'curated_ferment_lemon_cheong'],
+  syrupsSpoonableTonics: ['curated_ferment_fire_cider', 'curated_ferment_lemon_cheong'],
 };
 
 // 2026-08-27 -- one shared, catalog-wide fact ("can these be fermented

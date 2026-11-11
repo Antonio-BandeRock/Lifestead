@@ -1905,13 +1905,12 @@
     "Gluten-Free",
     "Dairy-Free"
   ],
-  "curated_ferment_garlic_honey_tonic": [
+  "curated_ferment_fire_cider": [
     "Vegetarian",
     "Plant-Based/Flexitarian",
     "Gluten-Free",
     "Dairy-Free",
-    "Paleo",
-    "AIP"
+    "Paleo"
   ],
   "curated_ferment_ginger_beer_traditional": [
     "Vegan",
@@ -2260,8 +2259,6 @@
     "Plant-Based/Flexitarian",
     "Gluten-Free",
     "Dairy-Free",
-    "Paleo",
-    "AIP",
     "High-Protein"
   ],
   "curated_fr_base_mayonnaise": [
@@ -2287,10 +2284,9 @@
   ],
   "curated_fr_base_palette_demi_sel": [
     "Omnivore",
+    "Plant-Based/Flexitarian",
     "Gluten-Free",
     "Dairy-Free",
-    "Paleo",
-    "AIP",
     "High-Protein"
   ],
   "curated_fr_base_pate_a_choux": [
@@ -2415,8 +2411,6 @@
     "Omnivore",
     "Gluten-Free",
     "Dairy-Free",
-    "Paleo",
-    "AIP",
     "High-Protein"
   ],
   "curated_fr_base_vinaigrette_a_la_moutarde": [
@@ -2681,10 +2675,9 @@
   ],
   "curated_fr_jambon_persille": [
     "Omnivore",
+    "Plant-Based/Flexitarian",
     "Gluten-Free",
     "Dairy-Free",
-    "Paleo",
-    "AIP",
     "High-Protein"
   ],
   "curated_fr_kouign_amann": [
@@ -2820,8 +2813,6 @@
     "Omnivore",
     "Gluten-Free",
     "Dairy-Free",
-    "Paleo",
-    "AIP",
     "High-Protein"
   ],
   "curated_fr_petits_pois_a_la_francaise": [
@@ -3273,8 +3264,6 @@
     "Omnivore",
     "Gluten-Free",
     "Dairy-Free",
-    "Paleo",
-    "AIP",
     "High-Protein"
   ],
   "curated_it_base_olio_santo": [
@@ -7566,15 +7555,6 @@
     "Dairy-Free",
     "Paleo"
   ],
-  "curated_th_base_pu_dong": [
-    "Omnivore",
-    "Plant-Based/Flexitarian",
-    "Gluten-Free",
-    "Dairy-Free",
-    "Paleo",
-    "AIP",
-    "High-Protein"
-  ],
   "curated_th_base_see_ew_dam_waan": [
     "Vegan",
     "Plant-Based/Flexitarian",
@@ -9328,13 +9308,6 @@
     "Paleo",
     "AIP"
   ],
-  "curated_vn_base_gia_vi_rieu_cua": [
-    "Omnivore",
-    "Plant-Based/Flexitarian",
-    "Gluten-Free",
-    "Dairy-Free",
-    "High-Protein"
-  ],
   "curated_vn_base_hanh_phi": [
     "Vegan",
     "Plant-Based/Flexitarian",
@@ -9588,6 +9561,7 @@
   ],
   "curated_vn_canh_bi_dao": [
     "Omnivore",
+    "Plant-Based/Flexitarian",
     "Gluten-Free",
     "Dairy-Free",
     "High-Protein"
@@ -9815,6 +9789,7 @@
   ],
   "curated_vn_pho_bo_tai": [
     "Omnivore",
+    "Gluten-Free",
     "Dairy-Free",
     "High-Protein"
   ],

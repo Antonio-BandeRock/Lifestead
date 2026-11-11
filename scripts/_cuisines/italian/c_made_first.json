@@ -406,11 +406,11 @@
       "builderType": "side",
       "dishRole": "side",
       "dishGroup": "Bases: Pantry & Building Blocks",
-      "region": "Colonnata, Tuscany",
+      "region": "Italy",
       "servings": 45,
       "servingSizeAmount": 1,
       "servingSizeUnit": "serving",
-      "flavorProfile": "Silky white fat scented with rosemary, garlic, pepper and warm spices.",
+      "flavorProfile": "Silky white fat cured with rosemary, garlic, black pepper, thyme, star anise and bay.",
       "healthBenefit": "Almost all fat; it is eaten in thin slices or melted into a dish.",
       "overallTier": "strong",
       "components": [],
@@ -420,110 +420,107 @@
           "baseName": "Pork Back Fat (Raw)",
           "quantity": 1000,
           "unit": "g",
-          "cutPrep": "in thick slabs, rind on",
+          "cutPrep": "in 2 pieces",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 30,
+          "quantity": 20,
           "unit": "g",
-          "cutPrep": null,
+          "cutPrep": "kosher",
           "cookingMethod": null,
-          "prepNote": "the part the fat keeps; about 500 g more is layered around it and brushed off"
+          "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Spices, pepper, black",
-          "quantity": 5,
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
           "unit": "g",
-          "cutPrep": "crushed",
+          "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Fresh Rosemary",
-          "quantity": 5,
+          "quantity": 20,
           "unit": "g",
-          "cutPrep": null,
+          "cutPrep": "chopped",
           "cookingMethod": null,
           "prepNote": null
         },
         {
-          "category": "Veg",
-          "baseName": "Garlic",
+          "category": "Herbs",
+          "baseName": "Garlic powder",
           "quantity": 10,
           "unit": "g",
-          "cutPrep": "sliced",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, cinnamon, ground",
-          "quantity": 0.5,
-          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
-          "baseName": "Spices, cloves, ground",
-          "quantity": 0.5,
+          "baseName": "Spices, pepper, black",
+          "quantity": 15,
           "unit": "g",
-          "cutPrep": null,
+          "cutPrep": "cracked",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
-          "baseName": "Spices, coriander seed",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "dried thyme"
+        },
+        {
+          "notInDatabase": true,
+          "name": "Star anise",
+          "contains": "none",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
           "quantity": 1,
           "unit": "g",
           "cutPrep": "crushed",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, sage, ground",
-          "quantity": 1,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, nutmeg, ground",
-          "quantity": 0.5,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "5 leaves"
         }
       ],
       "instructions": [
-        "Rub a stone or glass dish with garlic. Lay down a layer of salt, then fat, then the herbs and spices, and repeat, ending with salt.",
-        "Cover and keep cold (below 10 C, 50 F) for at least 6 months; the liquid the fat gives off stays in the dish.",
-        "Brush off the salt and slice very thin. One serving is 20 g."
+        "Mix the salt, sugar, rosemary, garlic powder, pepper, thyme, star anise and bay. The recipe allows 5 g smoked salt and 4 g curing salt No. 2 as well, which it uses as a guard against listeria and botulism; neither is counted here.",
+        "Weigh the mix, divide it in half and massage one half into each piece of fat. Vacuum seal each piece with its cure.",
+        "Set the packs in a container, cover with a plate smaller than the opening and weigh it down. Cure in the fridge 12 days, turning every 3 days.",
+        "Rinse well and pat dry. Run a string through one corner, wrap in cheesecloth and then loosely in foil to keep out light, and hang somewhere dark at 45 to 60°F (7 to 16°C) and 65 to 75% humidity for at least 2 weeks, better 4 to 8.",
+        "Slice very thin. One serving is 20 g."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Saturated fat",
           "note": "About 7 g per 20 g."
+        },
+        {
+          "nutrient": "Sugar",
+          "note": "About 2 g per 20 g, from the cure."
         }
       ],
       "citations": [
         {
-          "source": "Wikipedia: Lardo",
-          "url": "https://en.wikipedia.org/wiki/Lardo"
+          "source": "Cup of Yum, Lardo (Cured Pork Fatback)",
+          "url": "https://cupofyum.com/recipes/lardo-cured-pork-fatback"
         }
       ],
-      "curationNote": null
+      "curationNote": "Cup of Yum's home lardo, every amount kept for 1 kg of fat; it makes about 2 lb. The optional smoked salt and curing salt are named in the steps and left out of the count."
     },
     {
       "id": "curated_it_base_prosciutto",
@@ -616,6 +613,15 @@
           "prepNote": "all of it taken up by the meat"
         },
         {
+          "notInDatabase": true,
+          "name": "Cure #2 (curing salt with nitrite and nitrate)",
+          "contains": "none",
+          "quantity": 12.5,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "2.5 g per kg of meat, weighed exactly"
+        },
+        {
           "category": "Herbs",
           "baseName": "Spices, pepper, black",
           "quantity": 10,
@@ -671,7 +677,7 @@
         }
       ],
       "instructions": [
-        "Rub the salt, pepper, bay, garlic powder, rosemary, nutmeg and juniper into the meat, seal it and keep it in the fridge for 21 days, turning it every day or so.",
+        "Rub the salt, Cure #2, pepper, bay, garlic powder, rosemary, nutmeg and juniper into the meat, seal it and keep it in the fridge for 21 days, turning it every day or so.",
         "Dry it for about 15 days at around 20 °C (68 °F), cold smoking it about 4 hours a day over beech and never above 20 °C (68 °F).",
         "Hang it in a cool, airy room at 10 to 15 °C (50 to 59 °F) for 6 to 12 months, until it has lost about a third of its weight. One serving is 50 g."
       ],

@@ -41,6 +41,15 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.86.2',
+    date: '2026-11-11',
+    changes: [
+      'The recipes you make first, including hummus, vegetable stock, yellow mustard, almond milk, curry powder, seitan, ketchup and sambal, were checked against the recipes they came from, and their amounts now match.',
+      'Several soups now list the water their recipe adds, dishes no longer list a sauce or stock their recipe never uses, and Fire Cider replaces the garlic honey tonic, which has no tested safe method.',
+      'Six Thai dishes made with skinless chicken thigh now count skinless thigh, so their fat is lower and correct.',
+    ],
+  },
+  {
     version: '1.0.86.1',
     date: '2026-11-11',
     changes: [

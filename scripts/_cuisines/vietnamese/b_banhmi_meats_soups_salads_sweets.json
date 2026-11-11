@@ -9,7 +9,7 @@
       "servings": 6,
       "servingSizeAmount": 1,
       "servingSizeUnit": "sandwich",
-      "flavorProfile": "A crackling, airy baguette layered with rich pâté, cool pork roll, roast pork belly, tangy pickles, cucumber, cilantro and a bite of chili.",
+      "flavorProfile": "A crackling, airy baguette layered with rich pâté, cool pork roll, five-spice roast pork belly, tangy pickles, cucumber, cilantro and a bite of chili.",
       "healthBenefit": "Brings protein from three kinds of pork and some iron and vitamin A from the liver pâté, with the pickles and fresh herbs adding crunch; it is a rich, salty sandwich best eaten as a full meal.",
       "overallTier": "strong",
       "components": [
@@ -37,6 +37,11 @@
           "recipeId": "curated_vn_base_do_chua",
           "servings": 6,
           "note": "about 0.25 cup per sandwich, drained"
+        },
+        {
+          "recipeId": "curated_cn_base_five_spice_powder",
+          "servings": 0.17,
+          "note": "about 1/4 tsp, for the pork rub"
         }
       ],
       "ingredients": [
@@ -45,25 +50,16 @@
           "baseName": "Gris sidfläsk bit rå m. svål",
           "quantity": 500,
           "unit": "g",
-          "cutPrep": "whole slab, skin scored",
+          "cutPrep": "whole slab, flesh scored and skin pricked",
           "cookingMethod": null,
           "prepNote": "roasted, then sliced thin"
         },
         {
           "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "for the pork rub"
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 1,
+          "baseName": "Spices, pepper, white",
+          "quantity": 0.125,
           "unit": "tsp",
-          "cutPrep": null,
+          "cutPrep": "ground",
           "cookingMethod": null,
           "prepNote": "for the pork rub"
         },
@@ -72,18 +68,9 @@
           "baseName": "Garlic",
           "quantity": 2,
           "unit": "each",
-          "cutPrep": "cloves, minced",
+          "cutPrep": "cloves, chopped",
           "cookingMethod": null,
-          "prepNote": "for the pork rub"
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, pepper, black",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 for the pork rub, 1 for the seasoning sauce"
         },
         {
           "category": "Herbs",
@@ -95,11 +82,47 @@
           "prepNote": "rubbed into the skin"
         },
         {
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for the seasoning sauce"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for the seasoning sauce"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for the seasoning sauce"
+        },
+        {
           "category": "Veg",
           "baseName": "Cucumber",
-          "quantity": 1,
+          "quantity": 2,
           "unit": "each",
           "cutPrep": "cut in long thin spears",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "sliced",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -120,24 +143,15 @@
           "cutPrep": "thinly sliced",
           "cookingMethod": null,
           "prepNote": "2 bird's eye chilies"
-        },
-        {
-          "category": "Legume",
-          "baseName": "Soy sauce made from soy and wheat (shoyu)",
-          "quantity": 10.6,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "2 tsp at 5.3 g per tsp; in place of Maggi seasoning sauce, which the database does not hold"
         }
       ],
       "instructions": [
-        "Rub the pork belly flesh with fish sauce, sugar, garlic and pepper, rub the scored skin with salt, and leave it uncovered in the fridge 2 to 12 hours.",
-        "Roast the pork skin side up at 400°F (200°C) for 40 to 50 minutes, until the skin blisters and the meat is cooked through. Rest it 10 minutes and slice thin.",
-        "Warm the baguettes at 350°F (180°C) for 3 to 5 minutes until the crust crackles, then split each one along one side.",
-        "Spread pâté on one inner face and mayonnaise on the other.",
-        "Layer in chả lụa, roast pork, cucumber, pickled carrot and daikon, cilantro and chili.",
-        "Shake a few drops of Maggi over the filling, close the roll and eat it while the bread is still crisp."
+        "Score the flesh side of the pork belly and prick the skin all over. Set it skin side up on a rack in the sink, pour boiling water over the skin and pat it dry.",
+        "Rub the flesh with the white pepper, five-spice and 1 clove of the garlic, rub the salt into the skin, and leave it uncovered in the fridge overnight.",
+        "Roast at 350°F (180°C) for 45 minutes, then put it under a hot grill for 15 to 20 minutes until the skin crackles. Rest it 15 minutes and slice thin.",
+        "Stir the soy sauce, fish sauce, sugar and the other garlic clove together for the seasoning sauce.",
+        "Warm the rolls at 350°F (180°C) for 3 to 5 minutes until the crust crackles, split each along one side, and spread pâté on one face and mayonnaise on the other.",
+        "Fill with chả lụa, roast pork, cucumber, pickled carrot and daikon, spring onion, cilantro and chili, spoon over a little seasoning sauce, and eat while the bread is still crisp."
       ],
       "nutritionHighlights": [
         {
@@ -155,15 +169,15 @@
       ],
       "citations": [
         {
-          "source": "Helen's Recipes, Bánh Mì Thịt Nguội",
-          "url": "https://helenrecipes.com/recipe-49-banh-mi-thit-nguoi-vietnamese-sandwich/"
+          "source": "Adam Liaw, Roast Pork Banh Mi",
+          "url": "https://www.adamliaw.com/recipe/roast-pork-banh-mi"
         },
         {
-          "source": "Vicky Pham, Bánh Mì",
-          "url": "https://vickypham.com/blog/banh-mi/"
+          "source": "Helen's Recipes, Bánh Mì Thịt Nguội",
+          "url": "https://helenrecipes.com/recipe-49-banh-mi-thit-nguoi-vietnamese-sandwich/"
         }
       ],
-      "curationNote": "Helen's thịt nguội layering (pâté, chả lụa, pork belly, pickles, cucumber, cilantro, chili) followed, with the roast belly as the cooked meat; Vicky Pham's overview confirms the mayo and Maggi finish."
+      "curationNote": "Pork rub, roasting and seasoning sauce from Adam Liaw (2 kg belly for 6 rolls), the rub scaled to a quarter for 500 g; the seasoning sauce, cucumber and spring onion kept at his amounts for 6 rolls. Layering from Helen's. Spring onion, cilantro and chili have no amounts in either source."
     },
     {
       "id": "curated_vn_banh_mi_xiu_mai",
@@ -3596,7 +3610,7 @@
       "dishRole": "main",
       "dishGroup": "Meats & Seafood",
       "region": "Northern / Hà Nội",
-      "servings": 4,
+      "servings": 3,
       "servingSizeAmount": 1,
       "servingSizeUnit": "plate",
       "flavorProfile": "Golden turmeric and galangal fish sizzled with heaps of dill and spring onion, eaten over rice noodles with herbs, peanuts and a pungent shrimp paste dip.",
@@ -4778,17 +4792,21 @@
       "overallTier": "strong",
       "components": [
         {
-          "recipeId": "curated_vn_base_nuoc_dung_xuong_heo",
-          "servings": 4,
-          "note": "about 4 cups of pork bone broth, or water"
-        },
-        {
           "recipeId": "curated_vn_base_com_trang",
           "servings": 4,
           "note": "steamed rice eaten with the soup"
         }
       ],
       "ingredients": [
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 litre, hot"
+        },
         {
           "category": "Veg",
           "baseName": "Waxgourd (Chinese Preserving Melon)",
@@ -4874,7 +4892,7 @@
       "instructions": [
         "Pound the shrimp with half the shallot and 1.5 g salt, then mix in the fish sauce and pepper.",
         "Fry the rest of the shallot in the oil until fragrant, add the shrimp and stir over high heat until they turn orange.",
-        "Pour in the hot broth, add the remaining 3 g salt and the winter melon, and bring back to a boil; turn off the heat once it boils.",
+        "Pour in the 1 litre of hot water, add the remaining 3 g salt and the winter melon, and bring back to a boil; turn off the heat once it boils.",
         "Finish with scallion and cilantro and serve with rice."
       ],
       "nutritionHighlights": [
@@ -5030,17 +5048,21 @@
       "overallTier": "strong",
       "components": [
         {
-          "recipeId": "curated_vn_base_nuoc_dung_xuong_heo",
-          "servings": 5,
-          "note": "about 5 cups of pork bone broth"
-        },
-        {
           "recipeId": "curated_vn_base_com_trang",
           "servings": 4,
           "note": "steamed rice eaten with the soup"
         }
       ],
       "ingredients": [
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 946,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "4 cups"
+        },
         {
           "notInDatabase": true,
           "name": "sweet leaf (rau ngót, Sauropus androgynus)",
@@ -5126,7 +5148,7 @@
       "instructions": [
         "Fry the garlic and shallot in the oil about 20 seconds, until fragrant.",
         "Add the pork and cook until lightly browned, breaking it up.",
-        "Pour in the broth, bring to a gentle boil and simmer about 10 minutes, skimming.",
+        "Pour in the 4 cups of water, bring to a gentle boil and simmer about 10 minutes, skimming.",
         "Season with the fish sauce, salt, sugar and pepper, tasting as you go.",
         "Add the sweet leaves a handful at a time and cook about 8 minutes, until tender. Serve with rice."
       ],
@@ -5311,9 +5333,9 @@
       "overallTier": "strong",
       "components": [
         {
-          "recipeId": "curated_vn_base_nuoc_dung_xuong_heo",
-          "servings": 6,
-          "note": "about 6 cups of pork bone broth"
+          "recipeId": "curated_sauce_chicken_stock",
+          "servings": 4.5,
+          "note": "4½ cups, thinned with water"
         },
         {
           "recipeId": "curated_vn_base_com_trang",
@@ -5322,6 +5344,15 @@
         }
       ],
       "ingredients": [
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1600,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "6¾ cups, to thin the stock"
+        },
         {
           "category": "Veg",
           "baseName": "Balsam-Pear (Bitter Gourd, Bitter Melon) Pods",
@@ -5425,7 +5456,7 @@
       "instructions": [
         "Mix the pork, wood ear, glass noodles, onion, fish sauce, sugar, salt and pepper.",
         "Slit or split the bitter melons, scoop out the seeds and pack them firmly with the filling.",
-        "Bring the broth to a boil, lower in the stuffed melons and skim.",
+        "Bring the stock and water to a boil, lower in the stuffed melons and skim.",
         "Simmer gently 20 to 30 minutes, until the melon is fork tender, then taste the broth and thin it with a little hot water if it is too strong.",
         "Cut the melons into pieces and serve in the broth with scallion and cilantro."
       ],
@@ -6542,11 +6573,6 @@
       "healthBenefit": "A big plate of vegetables brings fibre and vitamins; the kho quẹt dip is salty and rich, so a little goes on each bite.",
       "overallTier": "strong",
       "components": [
-        {
-          "recipeId": "curated_vn_base_nuoc_mau",
-          "servings": 1,
-          "note": "about 1 tbsp of caramel for the dip"
-        },
         {
           "recipeId": "curated_vn_base_com_trang",
           "servings": 4,

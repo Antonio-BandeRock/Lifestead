@@ -286,10 +286,10 @@
       "builderType": "bakedGoods",
       "dishGroup": "Bases: Rice, Noodles & Pantry",
       "region": "Central Vietnam",
-      "servings": 15,
+      "servings": 18,
       "servingSizeAmount": 1,
       "servingSizeUnit": "each",
-      "flavorProfile": "Crisp and nutty, toasted over coals until they puff, with coconut and a little garlic.",
+      "flavorProfile": "Crisp and nutty, puffed over coals, with coconut, sesame and fried shallot.",
       "healthBenefit": "Sesame brings calcium, copper and healthy fats.",
       "overallTier": "strong",
       "components": [],
@@ -304,6 +304,33 @@
           "prepNote": null
         },
         {
+          "category": "Grain",
+          "baseName": "Starch, cassava starch",
+          "quantity": 65,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "tapioca starch; the source gives 50 to 80 g"
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Coconut milk",
+          "quantity": 650,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the source gives 600 to 700 ml"
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Coconut meat",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "fresh, shredded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
           "category": "NutSeed",
           "baseName": "Sesame seed",
           "quantity": 40,
@@ -313,55 +340,47 @@
           "prepNote": null
         },
         {
-          "category": "NutSeed",
-          "baseName": "Coconut milk",
-          "quantity": 100,
-          "unit": "ml",
-          "cutPrep": null,
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "3 shallots, sliced and fried crisp",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the frying oil is drained off and not counted"
         },
         {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 400,
-          "unit": "ml",
-          "cutPrep": null,
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "ground",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 20,
+          "quantity": 35,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source gives 30 to 40 g"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 3,
-          "unit": "g",
+          "quantity": 1,
+          "unit": "tsp",
           "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Garlic",
-          "quantity": 5,
-          "unit": "g",
-          "cutPrep": "crushed",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Whisk the rice flour, coconut milk, water, sugar, salt and garlic into a batter and stir in the sesame.",
-        "Steam thick 25 cm rounds on a cloth over boiling water, about 1 minute each.",
-        "Dry on racks in the sun or a 60 C (140 F) oven until hard. Toast over coals or a gas flame, turning, until they puff and crisp. Makes about 15."
+        "Whisk the rice flour, tapioca starch, coconut milk, sugar, salt and pepper into a smooth batter, stir in the shredded coconut, sesame and fried shallots, and let it rest 30 minutes.",
+        "Heat a nonstick pan, pour in a layer 1 to 2 mm thick, cover and cook 1 to 2 minutes until set. Lift it onto a rack and repeat, stirring the batter each time.",
+        "Dry the rounds in the sun for 1 to 2 days, or in the oven at 175 to 195°F (80 to 90°C) until hard.",
+        "Toast over charcoal for 1 to 2 minutes, turning, or in an air fryer at 320 to 340°F (160 to 170°C) for 2 to 4 minutes, until puffed and crisp. Makes 15 to 20."
       ],
       "nutritionHighlights": [
         {
@@ -370,16 +389,20 @@
         },
         {
           "nutrient": "Carbohydrate",
-          "note": "About 18 g per cracker."
+          "note": "From the rice flour and tapioca starch."
         }
       ],
       "citations": [
+        {
+          "source": "Hoàng Hà Mobile, Bánh tráng dừa",
+          "url": "https://hoanghamobile.com/tin-tuc/banh-trang-dua/"
+        },
         {
           "source": "Wikipedia (Vietnamese): Bánh tráng",
           "url": "https://vi.wikipedia.org/wiki/B%C3%A1nh_tr%C3%A1ng"
         }
       ],
-      "curationNote": null
+      "curationNote": "Hoàng Hà's bánh tráng dừa followed at the middle of each range it gives; it makes 15 to 20, counted as 18."
     },
     {
       "id": "curated_vn_base_me",
@@ -387,7 +410,7 @@
       "builderType": "fermentation",
       "dishGroup": "Bases: Rice, Noodles & Pantry",
       "region": "Northern Vietnam",
-      "servings": 23,
+      "servings": 20,
       "servingSizeAmount": 1,
       "servingSizeUnit": "tbsp",
       "flavorProfile": "Sour and mild, used like a vinegar in fish and soups.",
@@ -400,24 +423,25 @@
           "baseName": "Grains, rice, white, long-grain, regular, dry",
           "quantity": 100,
           "unit": "g",
-          "cutPrep": "cooked soft",
+          "cutPrep": "rinsed, then cooked soft",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 300,
+          "quantity": 400,
           "unit": "ml",
-          "cutPrep": "boiled and cooled",
+          "cutPrep": "the rice rinsing water, boiled and cooled",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Cook the rice soft and cool it. Put it in a clean jar with the cooled water and a spoon of old mẻ if you have it.",
-        "Cover with a cloth and leave at room temperature 5 to 7 days, stirring daily, until sour.",
-        "Mash or sieve before using. Keep feeding with a little fresh cooked rice. One serving is 1 tablespoon."
+        "Rinse the rice and keep the rinsing water. Cook the rice soft and let it cool.",
+        "Bring the rinsing water to a boil, let it cool, and pour it into a clean glass jar.",
+        "Add the cooked rice so the water covers it, seal the jar, and leave it at room temperature about 14 days, until the rice is sour, white and soft enough to mash.",
+        "Mash or sieve before using. One serving is 1 tablespoon."
       ],
       "nutritionHighlights": [
         {
@@ -427,11 +451,15 @@
       ],
       "citations": [
         {
+          "source": "Điện máy Chợ Lớn, Cách làm và nuôi cơm mẻ",
+          "url": "https://dienmaycholon.com/mon-ngon/cach-lam-va-nuoi-com-me"
+        },
+        {
           "source": "Wikipedia (Vietnamese): Mẻ",
           "url": "https://vi.wikipedia.org/wiki/M%E1%BA%BB"
         }
       ],
-      "curationNote": null
+      "curationNote": "Điện máy Chợ Lớn method 1 (500 g rice, 2 litres water) scaled to a fifth. 100 g rice cooks to about 20 tablespoons."
     },
     {
       "id": "curated_vn_base_bo_kho",
@@ -614,37 +642,65 @@
           "prepNote": "stands in for young lotus stems (ngó sen), which no food database here lists"
         },
         {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "juiced",
+          "cookingMethod": null,
+          "prepNote": "squeezed into the soaking water, which is poured off"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red or green",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "long red chili, sliced",
+          "cookingMethod": null,
+          "prepNote": "1 chili"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 200,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "in the brine"
+        },
+        {
           "category": "Herbs",
           "baseName": "Vinegar, rice vinegar",
-          "quantity": 25,
+          "quantity": 50,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "the share taken up; the brine holds 100 ml"
+          "prepNote": "the share taken up; the brine holds 200 ml"
         },
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 8,
+          "quantity": 50,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "the share taken up; the brine holds 30 g"
+          "prepNote": "the share taken up; the brine holds 200 g"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 3,
+          "quantity": 0.8,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "the share taken up; the brine holds 10 g"
+          "prepNote": "the share taken up; the brine holds 1/2 tsp"
         }
       ],
       "instructions": [
-        "Blanch the lotus stems 30 seconds and refresh in cold water.",
-        "Boil 400 ml water with 100 ml rice vinegar, 30 g sugar and 10 g salt, cool and pour over the stems in a jar.",
-        "Leave 1 to 2 days at room temperature, then keep in the fridge. Only about a quarter of the brine is eaten, so only that share is counted."
+        "Peel the lotus stems, cut them in 5 cm lengths, and drop them straight into cold water with the juice of the 2 limes so they stay white. Drain.",
+        "Boil 200 ml water with 200 ml vinegar, 200 g sugar and 1/2 tsp salt until the sugar dissolves, then let it cool completely.",
+        "Pack the stems and sliced chili into a clean glass jar and pour in the cooled brine until they are fully covered.",
+        "Leave about 2 days at room temperature, then keep in the fridge and eat within about 1 month. About a quarter of the brine is eaten with the stems, so only that share is counted."
       ],
       "nutritionHighlights": [
         {
@@ -654,121 +710,15 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia: Nelumbo nucifera",
-          "url": "https://en.wikipedia.org/wiki/Nelumbo_nucifera"
+          "source": "FPT Shop, Ngó sen muối chua",
+          "url": "https://fptshop.com.vn/tin-tuc/dien-may/ngo-sen-muoi-chua-177188"
+        },
+        {
+          "source": "Điện Máy Xanh, Cách làm ngó sen muối chua",
+          "url": "https://www.dienmayxanh.com/vao-bep/cach-lam-ngo-sen-muoi-chua-gion-ngon-cho-ngay-tet-them-tron-06269"
         }
       ],
-      "curationNote": "One serving is 50 g, from about 500 g."
-    },
-    {
-      "id": "curated_vn_base_gia_vi_rieu_cua",
-      "name": "Gia Vị Nấu Riêu Cua (Seasoned Crab Paste for Riêu)",
-      "builderType": "sauce",
-      "dishGroup": "Bases: Rice, Noodles & Pantry",
-      "region": "Northern Vietnam",
-      "servings": 25,
-      "servingSizeAmount": 1,
-      "servingSizeUnit": "tbsp",
-      "flavorProfile": "Rich, savoury and crabby, with fried shallot.",
-      "healthBenefit": "Crab brings protein, calcium and zinc.",
-      "overallTier": "moderate",
-      "components": [],
-      "ingredients": [
-        {
-          "category": "Meat",
-          "baseName": "Crab Crustaceans",
-          "quantity": 400,
-          "unit": "g",
-          "cutPrep": "field crab meat and roe, pounded",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Fats",
-          "baseName": "Peanøttolje",
-          "quantity": 40,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Shallot",
-          "quantity": 40,
-          "unit": "g",
-          "cutPrep": "minced",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 20,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Meat",
-          "baseName": "Shrimp Paste",
-          "quantity": 15,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "mắm tôm, about 1 tbsp"
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 4,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Pepper, black, ground",
-          "quantity": 1,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        }
-      ],
-      "instructions": [
-        "Fry the shallot in the oil until golden.",
-        "Add the crab paste and fry gently 5 minutes, stirring, then season with the fish sauce, shrimp paste, sugar, salt and pepper.",
-        "Cook 5 more minutes until thick and fragrant. Cool and keep in a jar in the fridge up to a week. It makes about 450 g."
-      ],
-      "nutritionHighlights": [
-        {
-          "nutrient": "Protein",
-          "note": "About 3 g protein per tablespoon."
-        },
-        {
-          "nutrient": "Sodium",
-          "note": "About 300 mg sodium per tablespoon."
-        }
-      ],
-      "citations": [
-        {
-          "source": "Wikipedia: Bún riêu",
-          "url": "https://en.wikipedia.org/wiki/B%C3%BAn_ri%C3%AAu"
-        }
-      ],
-      "curationNote": "The jarred paste sold for bún riêu is crab fried in oil with shallot and seasonings; this is the same made at home. One serving is one tablespoon, about 18 g."
+      "curationNote": "Both sources give the same brine for 500 g: 200 ml vinegar, 200 g sugar, 1/2 tsp salt, 200 ml water, 1 chili, 2 limes. One serving is 50 g."
     }
   ]
 }

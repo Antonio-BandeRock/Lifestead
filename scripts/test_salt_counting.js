@@ -132,6 +132,7 @@ const KEPT = [
   ['part for the radish, part drawn out with the water and squeezed away; 2.5% of the radish weight', 1 / 2],
   ['the share taken up; the brine holds 27 g (1 1/2 tbsp)', 1],
   ['6 g in the pork water, 1.5 g in the shrimp water; most is poured away with the water', 1 / 4],
+  ['the share taken up; the brine holds 1/2 tsp', 1],
 ];
 for (const [note, share] of KEPT) check(`salt note "${note}" keeps ${share} of it`, near(kept(note), 18 * share));
 check('a stated half teaspoon for the dish counts 3 g', near(kept('1/2 tsp to season the chicken, the rest for the brine'), 3));

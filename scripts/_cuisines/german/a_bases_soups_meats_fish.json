@@ -6553,15 +6553,6 @@
           "prepNote": null
         },
         {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 150,
-          "unit": "ml",
-          "cutPrep": "as crushed ice",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Herbs",
           "baseName": "Nitrite curing salt",
           "quantity": 15,
@@ -6628,7 +6619,7 @@
       "instructions": [
         "Mix the chilled meat and fat with the curing salt, paprika, white pepper, chili and mace and put everything in the freezer for 20 to 30 minutes, so it stays cold while it is worked.",
         "Grind it twice through the fine plate of a meat grinder.",
-        "Blend the ground meat in a food processor in batches with the crushed ice and grated onion to a smooth, pale, sticky paste, keeping it below 54°F (12°C).",
+        "Blend the ground meat in a food processor in batches with the grated onion to a smooth, pale, sticky paste, keeping it below 54°F (12°C).",
         "Heat the oven to 355°F (180°C), oil a loaf tin, press in the paste without air pockets, smooth the top and score it in a diamond pattern.",
         "Bake 15 minutes, then lower the oven to 250°F (120°C) and bake until the centre reaches 162°F (72°C), 60 to 90 minutes.",
         "Let it rest 10 minutes and serve in thick warm slices with sweet mustard, a pretzel or roll, or potato salad."

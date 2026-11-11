@@ -144,7 +144,7 @@
       "builderType": "salad",
       "dishGroup": "Salads",
       "region": "Isan",
-      "servings": 4,
+      "servings": 1,
       "servingSizeAmount": 1,
       "servingSizeUnit": "plate",
       "flavorProfile": "A fiercer, funkier papaya salad, deeply savoury from fermented fish and salted crab, hot with chilies and sour with lime, with almost no sweetness.",
@@ -153,22 +153,17 @@
       "components": [
         {
           "recipeId": "curated_th_base_pla_ra",
-          "servings": 2,
-          "note": "30 ml, the strained juice"
-        },
-        {
-          "recipeId": "curated_th_base_pu_dong",
-          "servings": 2,
-          "note": "2 each, cleaned and cracked"
+          "servings": 0.67,
+          "note": "10 ml, the strained juice"
         }
       ],
       "ingredients": [
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 9,
-          "unit": "g",
-          "cutPrep": "3 cloves, peeled",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "clove, peeled",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -177,80 +172,87 @@
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 5,
           "unit": "g",
-          "cutPrep": "bird's eye chilies",
+          "cutPrep": "red",
           "cookingMethod": null,
-          "prepNote": "5 bird's eye chilies"
+          "prepNote": "1 chilli"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Chilli (chili), dried, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": "whole",
+          "cookingMethod": null,
+          "prepNote": "1 dried red chilli"
         },
         {
           "category": "Veg",
           "baseName": "Yandlong beans, immature pods",
-          "quantity": 60,
+          "quantity": 30,
           "unit": "g",
-          "cutPrep": "cut in 5 cm pieces",
+          "cutPrep": "cut in 3 cm pieces",
           "cookingMethod": null,
           "prepNote": null
         },
         {
-          "category": "Veg",
-          "baseName": "Tomato",
-          "quantity": 200,
+          "category": "Meat",
+          "baseName": "Crustacean, processed crab, \"Ganzuke\" (salted and fermented fiddler crabs)",
+          "quantity": 25,
           "unit": "g",
-          "cutPrep": "Roma, cut in wedges",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Fruit",
-          "baseName": "Papaya",
-          "quantity": 300,
-          "unit": "g",
-          "cutPrep": "green, unripe, peeled and shredded",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 25.2,
-          "unit": "g",
-          "cutPrep": "shaved",
-          "cookingMethod": null,
-          "prepNote": "2 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 2,
-          "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 salted crab, bought in a jar; counted as the salted crab the database holds"
         },
         {
           "category": "Bev",
           "baseName": "Limes, juice, fresh",
-          "quantity": 30,
+          "quantity": 10,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
         {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 0.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
           "category": "Veg",
-          "baseName": "Eggplant",
+          "baseName": "Cherry Tomato",
           "quantity": 40,
           "unit": "g",
-          "cutPrep": "small Thai eggplant, quartered",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Papaya",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "green, unripe, peeled and cut in thin strips",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Eggplant",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": "apple eggplant, cut in wedges",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Pound the garlic and chilies in a clay mortar until broken down, about 20 to 30 seconds.",
-        "Add the long beans, eggplant and salted crab and bruise them, then add the tomatoes and press until they release their juice.",
-        "Add the palm sugar, fish sauce, pla ra juice and lime juice and stir until the sugar dissolves, about 1 minute.",
-        "Add the papaya and pound gently while turning with a spoon for 30 to 60 seconds, until it is well coated and slightly softened.",
-        "Taste, adding more pla ra for funk or lime for sourness, and serve at once with sticky rice, raw cabbage and long beans."
+        "Crush the garlic, fresh chilli and dried chilli in a mortar, then add the beans and bruise them lightly.",
+        "In a bowl, mix the salted crab with the lime juice, fish sauce, pla ra juice and tomatoes.",
+        "Add the papaya, eggplant and the chilli mixture, toss everything together and serve at once."
       ],
       "nutritionHighlights": [
         {
@@ -268,15 +270,15 @@
       ],
       "citations": [
         {
-          "source": "Import Food, Som Tum (Somtum Lao sai pla ra)",
-          "url": "https://importfood.com/recipes/recipe/1298-som-tum"
+          "source": "SBS Food, Green papaya and salted crab salad (som tum pu pla raa)",
+          "url": "https://www.sbs.com.au/food/recipe/green-papaya-and-salted-crab-salad-som-tum-pu-pla-raa/o2tn3l4un"
         },
         {
           "source": "Wikipedia, Green papaya salad",
           "url": "https://en.wikipedia.org/wiki/Green_papaya_salad"
         }
       ],
-      "curationNote": "Import Food, Som Tum (Somtum Lao sai pla ra) for every amount and step; serves 4, as ours."
+      "curationNote": "SBS Food's recipe, every amount kept; its quantities make one plate. The salted crab is bought in a jar, as it is in Thailand and Laos."
     },
     {
       "id": "curated_th_larb_moo",
@@ -1613,7 +1615,7 @@
         },
         {
           "category": "Meat",
-          "baseName": "Chicken Thigh (with skin)",
+          "baseName": "Chicken, broiler, thigh, meat without skin",
           "quantity": 150,
           "unit": "g",
           "cutPrep": "boneless, skinless, thinly sliced",
@@ -1779,7 +1781,7 @@
         },
         {
           "category": "Meat",
-          "baseName": "Chicken Thigh (with skin)",
+          "baseName": "Chicken, broiler, thigh, meat without skin",
           "quantity": 120,
           "unit": "g",
           "cutPrep": "boneless, skinless, thinly sliced",
@@ -2135,7 +2137,7 @@
         },
         {
           "category": "Meat",
-          "baseName": "Chicken Thigh (with skin)",
+          "baseName": "Chicken, broiler, thigh, meat without skin",
           "quantity": 120,
           "unit": "g",
           "cutPrep": "boneless, skinless, thinly sliced",
@@ -3036,7 +3038,7 @@
         },
         {
           "category": "Meat",
-          "baseName": "Chicken Thigh (with skin)",
+          "baseName": "Chicken, broiler, thigh, meat without skin",
           "quantity": 200,
           "unit": "g",
           "cutPrep": "boneless, skinless, thinly sliced",
@@ -3444,7 +3446,7 @@
         },
         {
           "category": "Meat",
-          "baseName": "Chicken Thigh (with skin)",
+          "baseName": "Chicken, broiler, thigh, meat without skin",
           "quantity": 200,
           "unit": "g",
           "cutPrep": "boneless, skinless, thinly sliced",

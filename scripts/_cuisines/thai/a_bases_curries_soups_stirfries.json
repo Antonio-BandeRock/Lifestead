@@ -4252,8 +4252,8 @@
       "name": "Gaeng Tai Pla (Southern Fish Organ Curry)",
       "region": "Southern",
       "servings": 4,
-      "flavorProfile": "Intensely savoury, pungent and hot, a turmeric yellow broth of fermented fish innards with grilled fish and vegetables.",
-      "healthBenefit": "Fish and vegetables in a coconut free broth, though the fermented fish makes it very salty.",
+      "flavorProfile": "Intensely savoury, pungent and hot, a turmeric yellow broth of fermented fish innards with dried fish and vegetables.",
+      "healthBenefit": "Fish and vegetables in a broth with no coconut milk, though the tai pla makes it very salty.",
       "components": [
         {
           "recipeId": "curated_th_base_khao_suay",
@@ -4265,74 +4265,56 @@
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "soaked and squeezed dry",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, turmeric, ground",
-          "quantity": 3.8,
-          "unit": "g",
-          "cutPrep": "peeled and chopped",
-          "cookingMethod": null,
-          "prepNote": "in place of fresh turmeric root, which the database does not hold; fresh root counted as a quarter of its weight in ground turmeric"
-        },
-        {
-          "category": "Veg",
-          "baseName": "Lemon grass (citronella)",
-          "quantity": 15,
-          "unit": "g",
-          "cutPrep": "sliced thin",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "galangal",
-          "contains": "none",
-          "quantity": 8,
-          "unit": "g",
-          "cutPrep": "sliced thin",
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Garlic",
           "quantity": 20,
           "unit": "g",
-          "cutPrep": "peeled",
+          "cutPrep": "whole, soaked and squeezed dry",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Shallot",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": "chopped",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Meat",
-          "baseName": "Shrimp Paste",
-          "quantity": 6,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "1 tsp at 6 g per tsp"
+          "prepNote": "3/4 cup whole dried chilies"
         },
         {
           "category": "Herbs",
-          "baseName": "Pepper, black, ground",
+          "baseName": "Common salt/table salt",
           "quantity": 1,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Grain",
+          "baseName": "Grains, rice, white, long-grain, regular, dry",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": "uncooked",
+          "cookingMethod": null,
+          "prepNote": "1 tbsp"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": "whole peppercorns",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
+          "quantity": 14,
+          "unit": "g",
+          "cutPrep": "sliced thin",
+          "cookingMethod": null,
+          "prepNote": "2 tbsp"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 17,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": "2 tbsp"
         },
         {
           "notInDatabase": true,
@@ -4345,46 +4327,64 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 72,
+          "baseName": "Spices, turmeric, ground",
+          "quantity": 3.8,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "4 tbsp at 18 g per tbsp; in place of fermented fish innards (tai pla), which the database does not hold"
+          "prepNote": "in place of fresh turmeric root, which the database does not hold; the source names turmeric without an amount"
+        },
+        {
+          "category": "Meat",
+          "baseName": "Shrimp Paste",
+          "quantity": 9,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1/2 tbsp at 6 g per tsp"
         },
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 750,
+          "quantity": 590,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 1/2 cups"
+        },
+        {
+          "notInDatabase": true,
+          "name": "tai pla (fermented fish innards)",
+          "contains": "fish",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "prepNote": "bought in a jar, never made at home; boiled in the water and strained, so only the liquid stays"
         },
         {
           "category": "Meat",
-          "baseName": "Mackerel Fish",
-          "quantity": 200,
+          "baseName": "Stockfish (cod unsalted, dried)",
+          "quantity": 80,
           "unit": "g",
-          "cutPrep": "grilled and flaked",
-          "cookingMethod": "Grilled",
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Eggplant",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "Thai round eggplants, quartered",
-          "cookingMethod": "Simmered",
-          "prepNote": null
+          "cutPrep": "cut in chunks",
+          "cookingMethod": null,
+          "prepNote": "1 whole dried fish, about 80 g; unsalted dried cod stands in for the Thai dried fish"
         },
         {
           "category": "Veg",
           "baseName": "Bamboo shoots, canned, drained",
-          "quantity": 150,
+          "quantity": 65,
           "unit": "g",
           "cutPrep": "sliced",
+          "cookingMethod": "Simmered",
+          "prepNote": "1/2 cup"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Eggplant",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "2 Thai round eggplants, quartered",
           "cookingMethod": "Simmered",
           "prepNote": null
         },
@@ -4395,37 +4395,46 @@
           "unit": "g",
           "cutPrep": "cut in 4 cm lengths",
           "cookingMethod": "Simmered",
+          "prepNote": "the source names green beans without an amount"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 1.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
-          "category": "Veg",
-          "baseName": "Pumpkin",
-          "quantity": 100,
-          "unit": "g",
-          "cutPrep": "cut in chunks",
-          "cookingMethod": "Simmered",
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
           "notInDatabase": true,
           "name": "makrut lime leaves",
           "contains": "none",
-          "quantity": 4,
+          "quantity": 10,
           "unit": "each",
           "cutPrep": "torn",
           "prepNote": null
         }
       ],
       "instructions": [
-        "Pound the chilies, turmeric, lemongrass, galangal, garlic, shallot, lime peel, black pepper and shrimp paste into a smooth paste, 10 to 15 minutes.",
-        "Boil the tai pla in the water for 5 minutes, then strain out the solids and return the liquid to the pot.",
-        "Stir in the paste and simmer 3 to 5 minutes, then add the pumpkin, eggplant, bamboo and beans and simmer 8 to 10 minutes.",
-        "Add the flaked grilled fish and lime leaves for 2 minutes. Taste before adding any salt, since tai pla is very salty. Serve with jasmine rice."
+        "Soak the dried chilies until soft and squeeze them dry. Pound them with the salt, raw rice, peppercorns, lemongrass, garlic, lime peel and turmeric, then the shrimp paste, into a smooth paste.",
+        "Bring the water to a boil, add the tai pla and boil 5 minutes, then strain out the solids and return the liquid to the pot.",
+        "Stir in the paste, bring back to a boil, and add the dried fish, bamboo shoot, eggplants and beans. Simmer until the vegetables are tender, about 10 minutes.",
+        "Season with the sugar and lime juice and tear in the lime leaves. Taste before adding any salt, since tai pla is very salty. Serve with jasmine rice."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Protein",
-          "note": "From the mackerel."
+          "note": "From the dried fish."
         },
         {
           "nutrient": "Sodium",
@@ -4434,15 +4443,15 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia, Kaeng tai pla",
-          "url": "https://en.wikipedia.org/wiki/Kaeng_tai_pla"
+          "source": "Import Food, Gaeng Tai Pla",
+          "url": "https://importfood.com/component/yoorecipe/recipe/1288"
         },
         {
-          "source": "Wikipedia, Kaeng som",
-          "url": "https://en.wikipedia.org/wiki/Kaeng_som"
+          "source": "Wikipedia, Kaeng tai pla",
+          "url": "https://en.wikipedia.org/wiki/Kaeng_tai_pla"
         }
       ],
-      "curationNote": "Written mostly from descriptions: no full recipe opened. Wikipedia describes the tai pla broth, grilled fish, vegetables and the southern turmeric paste; amounts come from standard southern paste proportions."
+      "curationNote": "Import Food's recipe from a Trang cook, serves 4, amounts kept. Tai pla is bought jarred. The dried fish weight is an estimate for one whole fish."
     },
     {
       "builderType": "soup",
@@ -4651,12 +4660,12 @@
         },
         {
           "category": "Meat",
-          "baseName": "Chicken Thigh (with skin)",
+          "baseName": "Chicken, broiler, thigh, meat without skin",
           "quantity": 450,
           "unit": "g",
-          "cutPrep": "boneless, sliced bite size",
+          "cutPrep": "boneless, skinless, sliced bite size",
           "cookingMethod": "Simmered",
-          "prepNote": "skin removed, boneless, cut in pieces (the database has only the skin-on thigh)"
+          "prepNote": null
         },
         {
           "category": "Mushroom",

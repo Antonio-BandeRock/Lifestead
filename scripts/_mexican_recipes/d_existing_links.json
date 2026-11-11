@@ -17,16 +17,16 @@
         {
           "category": "Legume",
           "baseName": "Chickpeas (garbanzo beans, bengal gram)",
-          "quantity": 480,
+          "quantity": 360,
           "unit": "g",
           "cutPrep": "cooked or canned, drained and rinsed",
           "cookingMethod": "Boiled",
-          "prepNote": "two 15 oz cans, drained, or about 1 1/4 cups dried, cooked"
+          "prepNote": "1½ cans (15 oz), drained, or about 1 cup dried, cooked"
         },
         {
           "category": "SaucesCondiments",
           "baseName": "Tahini",
-          "quantity": 120,
+          "quantity": 90,
           "unit": "g",
           "cutPrep": "stirred well",
           "cookingMethod": null,
@@ -35,25 +35,25 @@
         {
           "category": "Bev",
           "baseName": "Lemon",
-          "quantity": 90,
+          "quantity": 45,
           "unit": "g",
           "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": "about 6 tbsp juice, from 2 lemons"
+          "prepNote": "about 3 tbsp juice, from 1 to 2 lemons"
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 6,
+          "quantity": 4.5,
           "unit": "g",
           "cutPrep": "minced",
           "cookingMethod": null,
-          "prepNote": "2 cloves"
+          "prepNote": "1½ cloves"
         },
         {
           "category": "Fats",
           "baseName": "Olive Oil (Extra Virgin)",
-          "quantity": 30,
+          "quantity": 45,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -62,7 +62,7 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 60,
+          "quantity": 90,
           "unit": "ml",
           "cutPrep": "ice cold",
           "cookingMethod": null,
@@ -71,7 +71,7 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 3,
+          "quantity": 4.5,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -80,19 +80,28 @@
         {
           "category": "Herbs",
           "baseName": "Cumin (cummin) seed, dried, ground",
-          "quantity": 1,
+          "quantity": 0.8,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "optional"
+          "prepNote": null
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "a pinch",
+          "category": "Herbs",
+          "baseName": "Spices, pepper, red or cayenne",
+          "quantity": 0.15,
+          "unit": "g"
         }
       ],
       "instructions": [
         "Stir the lemon juice and cold water together in a small cup. Whisk the tahini with the olive oil in a second cup.",
-        "Put the chickpeas, garlic, salt and cumin in a food processor and grind for about 15 to 20 seconds until coarse.",
-        "Scrape down the bowl. With the machine running, pour in the lemon and water, then process for about 1 minute.",
-        "Scrape down again. With the machine running, pour in the tahini and oil and process for 1 to 2 minutes, until very smooth.",
-        "Taste for salt and lemon. Rest it for about 30 minutes so the flavors settle, then serve or chill.",
+        "Put the chickpeas, garlic, salt, cumin and cayenne in a food processor and process for about 15 seconds, until almost fully ground.",
+        "Scrape down the bowl. With the machine running, pour in the lemon and water in a steady stream, then process for about 1 minute.",
+        "Scrape down again. With the machine running, pour in the tahini and oil in a steady stream and process for about 15 seconds, until the hummus is smooth and creamy.",
+        "Move it to a bowl, cover and let it stand at room temperature for about 30 minutes so the flavors blend, then serve.",
         "Keep it covered in the refrigerator for up to 5 days. Stir before using, and loosen with a spoonful of water if it has thickened."
       ],
       "nutritionHighlights": [
@@ -112,10 +121,11 @@
       "citations": [
         {
           "source": "America's Test Kitchen, Classic Hummus",
-          "url": "https://www.americastestkitchen.com/recipes/6873-classic-hummus"
+          "url": "https://www.americastestkitchen.com/recipes/6873-classic-hummus",
+          "free": true
         }
       ],
-      "curationNote": "Doubled from the ATK method (one 15 oz can, 1/4 cup tahini, 2 tbsp lemon, 2 tbsp oil, 1/4 cup water, about 2 cups made). Lemon raised a little to match the ratio the shipped hummus dishes already use. 12 servings of 1/4 cup gives 40 g chickpeas and 10 g tahini per serving, which is the unit the hummus wraps and snack are linked by."
+      "curationNote": "America's Test Kitchen, Classic Hummus for every amount and step: one 15 oz can makes about 2 cups. Ours is 12 servings of 1/4 cup, about 3 cups, so every amount is 1½ times the source."
     },
     {
       "id": "curated_sauce_vegetable_stock",
@@ -134,7 +144,7 @@
         {
           "category": "Fats",
           "baseName": "Olive Oil (Extra Virgin)",
-          "quantity": 15,
+          "quantity": 35,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": "Sauteed",
@@ -143,92 +153,65 @@
         {
           "category": "Veg",
           "baseName": "Onion",
-          "quantity": 300,
+          "quantity": 175,
           "unit": "g",
-          "cutPrep": "quartered, skin left on",
+          "cutPrep": "sliced",
           "cookingMethod": "Simmered",
-          "prepNote": "2 medium"
+          "prepNote": "about 1½ medium"
         },
         {
           "category": "Veg",
           "baseName": "Carrot",
-          "quantity": 250,
+          "quantity": 170,
           "unit": "g",
-          "cutPrep": "cut in large chunks",
+          "cutPrep": "peeled and sliced",
           "cookingMethod": "Simmered",
-          "prepNote": "3 medium"
+          "prepNote": "about 2½ large"
         },
         {
           "category": "Veg",
-          "baseName": "Celery",
-          "quantity": 150,
+          "baseName": "Fennel Bulb",
+          "quantity": 185,
           "unit": "g",
-          "cutPrep": "cut in large chunks",
-          "cookingMethod": "Simmered",
-          "prepNote": "3 stalks"
-        },
-        {
-          "category": "Veg",
-          "baseName": "Leek",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "green tops, washed well",
+          "cutPrep": "sliced",
           "cookingMethod": "Simmered",
           "prepNote": null
         },
         {
           "category": "Veg",
-          "baseName": "Fennel Bulb",
-          "quantity": 100,
-          "unit": "g",
-          "cutPrep": "cut in large chunks",
-          "cookingMethod": "Simmered",
-          "prepNote": "optional"
-        },
-        {
-          "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 20,
+          "quantity": 16,
           "unit": "g",
-          "cutPrep": "halved crosswise",
+          "cutPrep": "crushed, peel on",
           "cookingMethod": "Simmered",
-          "prepNote": "half a head"
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Parsley Spices",
-          "quantity": 15,
-          "unit": "g",
-          "cutPrep": "stems and leaves",
-          "cookingMethod": null,
-          "prepNote": "a small bunch"
+          "prepNote": "a little under half a head"
         },
         {
           "category": "Herbs",
           "baseName": "Fresh Thyme",
-          "quantity": 3,
+          "quantity": 0.5,
           "unit": "g",
-          "cutPrep": "sprigs",
+          "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "4 or 5 sprigs"
+          "prepNote": "2 sprigs"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 0.6,
+          "quantity": 0.5,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "3 leaves"
+          "prepNote": "2 or 3 leaves"
         },
         {
           "category": "Herbs",
           "baseName": "Pepper, black, ground",
-          "quantity": 1,
+          "quantity": 1.2,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "or a few whole peppercorns"
+          "prepNote": "whole peppercorns, about ⅓ tsp"
         },
         {
           "category": "Bev",
@@ -238,15 +221,40 @@
           "cutPrep": "cold",
           "cookingMethod": "Simmered",
           "prepNote": null
+        },
+        {
+          "cutPrep": "peeled and sliced",
+          "cookingMethod": "Simmered",
+          "prepNote": "about ¾ medium celery root",
+          "category": "Veg",
+          "baseName": "Celeriac",
+          "quantity": 315,
+          "unit": "g"
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "5 large sprigs",
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 5,
+          "unit": "g"
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 sprig",
+          "category": "Herbs",
+          "baseName": "Fresh Rosemary",
+          "quantity": 0.8,
+          "unit": "g"
         }
       ],
       "instructions": [
-        "Warm the olive oil in a large stockpot over medium heat. Add the onion, carrot, celery, leek, fennel and garlic and cook, stirring now and then, for 10 to 15 minutes, until they start to color.",
-        "Add the parsley, thyme, bay leaves, pepper and cold water. Bring it up to a gentle simmer, around 190 to 200°F (88 to 93°C), without letting it boil hard.",
-        "Simmer partly covered for 1 to 2 hours, until the stock tastes of the vegetables.",
-        "Strain through a fine sieve, pressing lightly on the vegetables, and discard the solids. You should have about 2 litres (8 cups). If you have more, simmer it down.",
-        "Cool it quickly, then refrigerate for 4 to 5 days or freeze in 1 cup portions for 2 to 3 months.",
-        "Season the dish the stock goes into, not the stock, since it has no salt."
+        "Heat the oil in a very large pot over medium-high heat. Add the carrot, onion, fennel, celery root, garlic, parsley, bay leaves, rosemary and thyme and cook for about 15 minutes, until golden and starting to soften.",
+        "Add the water and bring to a boil. Add the peppercorns, lower the heat, cover and simmer for 2 hours.",
+        "Strain, pressing on the vegetables, and throw the solids away. Cool, then refrigerate covered for up to 5 days, or freeze in 1 cup portions.",
+        "It has no salt, so season the dish the stock goes into."
       ],
       "nutritionHighlights": [
         {
@@ -260,15 +268,12 @@
       ],
       "citations": [
         {
-          "source": "Center for Science in the Public Interest, Vegetable Stock",
-          "url": "https://www.cspi.org/recipe/vegetable-stock"
-        },
-        {
-          "source": "Sur La Table, Vegetable Stock",
-          "url": "https://www.surlatable.com/recipe/vegetable-stock/REC-175"
+          "source": "Sur La Table: Vegetable stock",
+          "url": "https://www.surlatable.com/recipe/vegetable-stock/REC-175",
+          "free": true
         }
       ],
-      "curationNote": "Combines the Sur La Table method (sweat the vegetables in oil, simmer about 2 hours covered) with the CSPI one (scraps, bay, thyme, peppercorns, short simmer and reduce). Tomato paste left out, since the database has no row for it. Unsalted on purpose. House convention: the strained vegetables are counted in full, the same as the oat milk counts all its oats, so the nutrient totals overstate what reaches the bowl. Replaces the bouillon powder row (PantryStaples Vegetable stock, about 22,000 mg sodium per 100 g) plus the water row in the soups."
+      "curationNote": "Sur La Table, Vegetable stock for every amount and step (3 tbsp olive oil, 3 carrots, 2 onions, 1 fennel bulb, 1 celery root, ½ head garlic, parsley, bay, rosemary, thyme and peppercorns in 16 cups water), scaled to 3 litres of water. Unsalted, as the source is. The strained vegetables are counted in full, the same as the oat milk counts all its oats, so the nutrient totals overstate what reaches the bowl."
     },
     {
       "id": "curated_sauce_chicken_stock",
@@ -368,47 +373,29 @@
         {
           "category": "Herbs",
           "baseName": "Mustard powder",
-          "quantity": 50,
+          "quantity": 100,
           "unit": "g",
           "cutPrep": "ground yellow mustard",
           "cookingMethod": null,
-          "prepNote": "about 1/2 cup"
+          "prepNote": "dry yellow mustard, about 1 cup"
         },
         {
           "category": "Herbs",
           "baseName": "Turmeric, dried, ground",
-          "quantity": 3,
+          "quantity": 1.5,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "about 1 tsp, for the color"
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Garlic powder",
-          "quantity": 1,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Onion powder",
-          "quantity": 1,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "½ tsp"
         },
         {
           "category": "Herbs",
           "baseName": "Paprika",
-          "quantity": 1,
+          "quantity": 0.3,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "⅛ tsp"
         },
         {
           "category": "Herbs",
@@ -417,31 +404,41 @@
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "1/2 tsp"
+          "prepNote": "1 tsp kosher salt"
         },
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 120,
+          "quantity": 315,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "cold"
         },
         {
-          "category": "Herbs",
-          "baseName": "Vinegar, cider",
-          "quantity": 60,
-          "unit": "ml",
+          "cutPrep": "minced and mashed to a paste with the salt",
+          "cookingMethod": null,
+          "prepNote": null,
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 3,
+          "unit": "g"
+        },
+        {
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "distilled white vinegar, 10½ Tbsp",
+          "category": "Herbs",
+          "baseName": "Distilled Vinegar (White)",
+          "quantity": 155,
+          "unit": "ml"
         }
       ],
       "instructions": [
-        "Whisk the mustard powder, turmeric, garlic powder, onion powder, paprika and salt with the water and vinegar in a small pan until smooth.",
-        "Cook over low heat, stirring often, for 10 to 15 minutes, until it thickens to a spreadable sauce.",
-        "Cool, spoon into a clean jar and keep in the fridge. The sharp edge softens after a day and it keeps for about a month."
+        "Whisk the water, mustard, salt, turmeric, garlic paste and paprika in a small saucepan until smooth.",
+        "Cook over low heat, stirring often, for 35 to 40 minutes, until it is a thick paste. Keep the kitchen well aired.",
+        "Stir in the vinegar and cook 7 to 10 minutes more. It thickens as it cools.",
+        "Cool, then keep in a covered jar in the refrigerator for up to 3 months. It is very sharp at first and mellows with time. Thin with a little cool water if it gets too thick."
       ],
       "nutritionHighlights": [
         {
@@ -455,8 +452,9 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia: Mustard (condiment)",
-          "url": "https://en.wikipedia.org/wiki/Mustard_(condiment)"
+          "source": "Emeril Lagasse: Homemade yellow mustard",
+          "url": "https://www.emerils.com/131612/homemade-yellow-mustard",
+          "free": true
         }
       ],
       "curationNote": null
@@ -520,8 +518,9 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia: Almond milk",
-          "url": "https://en.wikipedia.org/wiki/Almond_milk"
+          "source": "Minimalist Baker, How to Make Almond Milk",
+          "url": "https://minimalistbaker.com/how-to-make-almond-milk/",
+          "free": true
         }
       ],
       "curationNote": "The strained almond pulp is still counted in the nutrients, since the database has no figure for what passes the cloth."
@@ -543,7 +542,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, coriander seed",
-          "quantity": 10,
+          "quantity": 7.2,
           "unit": "g",
           "cutPrep": "ground",
           "cookingMethod": null,
@@ -552,7 +551,7 @@
         {
           "category": "Herbs",
           "baseName": "Cumin (cummin) seed, dried, ground",
-          "quantity": 9,
+          "quantity": 6.3,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -561,7 +560,7 @@
         {
           "category": "Herbs",
           "baseName": "Turmeric, dried, ground",
-          "quantity": 9.4,
+          "quantity": 18,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -579,7 +578,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, pepper, red or cayenne",
-          "quantity": 5.3,
+          "quantity": 0.45,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -588,7 +587,7 @@
         {
           "category": "Herbs",
           "baseName": "Pepper, black, ground",
-          "quantity": 4.6,
+          "quantity": 1.15,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -597,7 +596,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, mustard seed, yellow",
-          "quantity": 3.3,
+          "quantity": 3,
           "unit": "g",
           "cutPrep": "ground",
           "cookingMethod": null,
@@ -615,7 +614,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, ginger, ground",
-          "quantity": 1.8,
+          "quantity": 3.6,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -624,7 +623,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, cinnamon, ground",
-          "quantity": 1.3,
+          "quantity": 5.2,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -633,7 +632,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, cloves, ground",
-          "quantity": 0.3,
+          "quantity": 2.1,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -642,16 +641,24 @@
         {
           "category": "Herbs",
           "baseName": "Spices, nutmeg, ground",
-          "quantity": 0.3,
+          "quantity": 2.2,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "optional",
+          "category": "Herbs",
+          "baseName": "Spices, pepper, white",
+          "quantity": 2.4,
+          "unit": "g"
         }
       ],
       "instructions": [
-        "If starting from whole coriander, cumin, fenugreek and mustard seed, toast them in a dry pan over medium heat until fragrant, about 2 minutes, then cool and grind fine.",
-        "Mix with the ground turmeric, cayenne, pepper, cardamom, ginger, cinnamon, cloves and nutmeg.",
+        "Measure the turmeric, coriander, cumin, cinnamon, ginger, mustard, white pepper if using, fenugreek, cardamom, cloves, nutmeg, cayenne and black pepper into a bowl, and stir them together well.",
         "Keep in a closed jar away from light and use within 3 months."
       ],
       "nutritionHighlights": [
@@ -666,8 +673,9 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia: Curry powder",
-          "url": "https://en.wikipedia.org/wiki/Curry_powder"
+          "source": "Whole New Mom, Mild curry powder",
+          "url": "https://wholenewmom.com/curry-recipes-how-to-make-curry-curry-powder/",
+          "free": true
         }
       ],
       "curationNote": null
@@ -735,7 +743,7 @@
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "1 tsp"
+          "prepNote": "smoked, 1 tsp"
         },
         {
           "category": "Herbs",
@@ -762,14 +770,23 @@
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the share of 2 tablespoons in the broth that the seitan takes up"
+        },
+        {
+          "notInDatabase": true,
+          "name": "liquid smoke",
+          "contains": "none",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "prepNote": "in the simmering broth"
         }
       ],
       "instructions": [
-        "Mix the gluten, chickpea flour, nutritional yeast, garlic powder, paprika and salt. Stir in the water and vinegar and knead 2 to 3 minutes into an elastic dough.",
-        "Rest 10 minutes, then cut into 4 pieces.",
-        "Bring the stock to a bare simmer, add the pieces and cook gently, covered, for 45 minutes, turning once. Never let it boil hard or the seitan turns spongy.",
-        "Cool in the broth. Keep in the fridge up to 5 days."
+        "Mix the gluten, chickpea flour, nutritional yeast, salt, garlic powder and smoked paprika with the water until a ball forms. Knead on a clean surface for about 5 minutes until elastic.",
+        "Shape it into a log and let it rest for 5 minutes.",
+        "Bring the stock, 2 tablespoons of cider vinegar and 1 teaspoon of liquid smoke to a simmer in a pot just big enough to keep the log fully under the liquid. Lower it in, partly cover, and simmer for 1 hour.",
+        "Lift it out and let it cool until you can handle it, then slice, crumble or cut it as you need. Keep the broth for soup."
       ],
       "nutritionHighlights": [
         {
@@ -783,8 +800,9 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia: Wheat gluten (food)",
-          "url": "https://en.wikipedia.org/wiki/Wheat_gluten_(food)"
+          "source": "Live Eat Learn, How to make seitan",
+          "url": "https://www.liveeatlearn.com/how-to-make-seitan/",
+          "free": true
         }
       ],
       "curationNote": null
@@ -795,7 +813,7 @@
       "builderType": "sauce",
       "dishGroup": "Sauces & Dips",
       "region": "United States and Britain",
-      "servings": 128,
+      "servings": 96,
       "servingSizeAmount": 1,
       "servingSizeUnit": "tbsp",
       "flavorProfile": "Thick, sweet and sharp, with warm spice from allspice, clove and cinnamon.",
@@ -808,41 +826,32 @@
           "baseName": "Tomato",
           "quantity": 5000,
           "unit": "g",
-          "cutPrep": "ripe, cored and chopped",
+          "cutPrep": "ripe, peeled, cored and quartered",
           "cookingMethod": null,
           "prepNote": "about 11 lb"
         },
         {
           "category": "Veg",
           "baseName": "Onion",
-          "quantity": 300,
+          "quantity": 220,
           "unit": "g",
           "cutPrep": "chopped",
           "cookingMethod": null,
           "prepNote": null
         },
         {
-          "category": "Veg",
-          "baseName": "Garlic",
-          "quantity": 15,
-          "unit": "g",
-          "cutPrep": "crushed",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Herbs",
           "baseName": "Vinegar, cider",
-          "quantity": 375,
+          "quantity": 326,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "5% acidity"
         },
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 300,
+          "quantity": 138,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -851,81 +860,65 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 25,
+          "quantity": 33,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "about 4 tsp"
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Paprika",
-          "quantity": 6,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, mustard seed, yellow",
-          "quantity": 3,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about 2 Tbsp"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, allspice, ground",
-          "quantity": 2,
+          "quantity": 1.3,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "whole, in a spice bag, taken out"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, cinnamon, ground",
-          "quantity": 2,
+          "quantity": 3.6,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Pepper, black, ground",
-          "quantity": 2,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about 1½ sticks, crushed, in a spice bag, taken out"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, cloves, ground",
-          "quantity": 1,
+          "quantity": 3.9,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "whole, about 2 tsp, in a spice bag, taken out"
         },
         {
-          "category": "Herbs",
-          "baseName": "Spices, bay leaf",
-          "quantity": 0.3,
-          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "2 bay leaves"
+          "prepNote": "about ⅓ tsp",
+          "category": "Herbs",
+          "baseName": "Spices, pepper, red or cayenne",
+          "quantity": 0.6,
+          "unit": "g"
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 1½ Tbsp, in a spice bag, taken out",
+          "category": "Herbs",
+          "baseName": "Spices, celery seed",
+          "quantity": 9,
+          "unit": "g"
         }
       ],
       "instructions": [
-        "Simmer the tomatoes, onion and garlic, covered, for 30 minutes until soft, then press through a food mill or sieve and discard the skins and seeds.",
-        "Return to the pot with the vinegar, sugar, salt, spices and bay leaves.",
-        "Simmer uncovered, stirring more often as it thickens, for 2 to 3 hours until it holds a line on a plate. Take out the bay leaves.",
-        "Blend smooth, pour into clean jars and keep in the fridge up to a month, or process in a water bath to keep longer."
+        "Dip the tomatoes in boiling water until the skins split, then into cold water. Peel, core and quarter them.",
+        "Put the tomatoes, onion and cayenne in a large pot and simmer uncovered for 20 minutes. Cover, turn off the heat and let stand 20 minutes.",
+        "Tie the cloves, cinnamon, allspice and celery seed in a spice bag and bring it to a boil in the vinegar. Take the bag out.",
+        "Add the vinegar to the tomatoes and boil for about 30 minutes, then press through a food mill or sieve and return to the pot.",
+        "Add the sugar and salt and simmer gently, stirring often, until it has cooked down by half or holds its shape on a spoon.",
+        "Keep in the refrigerator, or fill hot pint jars leaving ⅛ inch of headspace and process in a boiling-water canner for 15 minutes (20 minutes above 1,000 ft, 25 above 6,000 ft)."
       ],
       "nutritionHighlights": [
         {
@@ -943,8 +936,9 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia: Ketchup",
-          "url": "https://en.wikipedia.org/wiki/Ketchup"
+          "source": "National Center for Home Food Preservation: Tomato ketchup",
+          "url": "https://nchfp.uga.edu/how/can/canning-tomatoes-and-tomato-products/tomato-ketchup/",
+          "free": true
         }
       ],
       "curationNote": "The skins and seeds pressed out in step 1 are still counted, since the database has no figure for strained tomato."
@@ -968,32 +962,43 @@
           "baseName": "Red Chilli (Chili)",
           "quantity": 500,
           "unit": "g",
-          "cutPrep": "stems removed",
+          "cutPrep": "stems removed, seeded and chopped",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 10,
+          "quantity": 6.5,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "about 2 tsp"
+          "prepNote": "about 1 tsp"
         },
         {
           "category": "Herbs",
           "baseName": "Vinegar, rice vinegar",
-          "quantity": 30,
+          "quantity": 33,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null,
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 33,
+          "unit": "ml"
         }
       ],
       "instructions": [
-        "Pound the chilies with the salt in a mortar, or pulse in a food processor, to a coarse paste with the seeds left in.",
-        "Stir in the vinegar, spoon into a clean jar and keep in the fridge for up to a month."
+        "Pulse the chilies with the water in a food processor to a coarse paste.",
+        "Heat the paste in a saucepan over medium heat for 3 to 5 minutes.",
+        "Stir in the vinegar and salt and keep cooking for about 10 minutes, stirring often.",
+        "Let it cool to room temperature. It can be used right away, and tastes best after a night in the refrigerator. Keep it refrigerated."
       ],
       "nutritionHighlights": [
         {
@@ -1007,8 +1012,9 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia: Sambal",
-          "url": "https://en.wikipedia.org/wiki/Sambal"
+          "source": "PepperScale, Homemade sambal oelek",
+          "url": "https://pepperscale.com/homemade-sambal-oelek/",
+          "free": true
         }
       ],
       "curationNote": null
@@ -2189,6 +2195,14 @@
       ],
       "reason": "Soy milk is made at home",
       "note": "20 ml"
+    },
+    {
+      "recipeId": "curated_handheld_turkey_avocado_wrap",
+      "componentRecipeId": "curated_fr_base_mayonnaise",
+      "servings": 1,
+      "replaces": [],
+      "reason": "the published wrap spreads 1 tbsp mayonnaise on each tortilla",
+      "note": "15 g"
     }
   ]
 }

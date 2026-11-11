@@ -51,7 +51,9 @@ function amountPhrase(quantity, unit, name) {
 function ingredientText(ing) {
   const name = ing.notInDatabase ? ing.name : displayName(ing.baseName);
   let text = amountPhrase(ing.quantity, ing.unit, name);
-  const descriptors = [ing.cutPrep, ing.notInDatabase ? null : ing.cookingMethod && ing.cookingMethod.toLowerCase()].filter(Boolean);
+  const method = ing.notInDatabase ? null : ing.cookingMethod && ing.cookingMethod.toLowerCase();
+  // a cut that already names the method ("roasted") does not say it twice
+  const descriptors = [ing.cutPrep, method && !(ing.cutPrep || '').toLowerCase().includes(method) ? method : null].filter(Boolean);
   if (descriptors.length > 0) text += `, ${descriptors.join(', ')}`;
   if (ing.prepNote === 'optional') text += ' (optional)';
   else if (ing.prepNote) text += ` (${ing.prepNote})`;
@@ -97,12 +99,23 @@ function componentText(c, comp) {
     const [amount, one, many, exact] = tbsp >= 1 ? [tbsp, 'tablespoon', 'tablespoons', cups * 16] : [halves(cups * 48), 'teaspoon', 'teaspoons', cups * 48];
     const shown = String(amount).replace(/\.5$/, '½').replace(/^0½$/, '½');
     measure = `${Math.abs(amount - exact) > 0.05 ? 'about ' : ''}${shown} ${amount <= 1 ? one : many}`;
+  } else if (unit === 'tbsp' && c.servings * comp.servingSizeAmount < 0.9) {
+    // Under a tablespoon a cook measures in teaspoons: 1 teaspoon, never about ¼ tbsp.
+    const exact = c.servings * comp.servingSizeAmount * 3;
+    const tsp = Math.max(0.25, Math.round(exact * 4) / 4);
+    const whole = Math.floor(tsp);
+    const shown = `${whole > 0 ? whole : ''}${QUARTERS[tsp - whole]}`;
+    measure = `${Math.abs(tsp - exact) > 0.05 ? 'about ' : ''}${shown} ${tsp <= 1 ? 'teaspoon' : 'teaspoons'}`;
   } else {
     const { text, value } = cookAmount(c.servings * comp.servingSizeAmount);
     measure = `${text} ${value <= 1 ? unit : PLURAL[unit] || unit}`;
   }
   let text = `${comp.name}, ${measure}`;
-  if (c.note) text += `, ${c.note}`;
+  // a note that only repeats the amount ("5 tbsp" after "5 tbsp") is left off
+  const same = (a) => a.toLowerCase().replace(/^about /, '').replace(/\btablespoons?\b/g, 'tbsp').replace(/\bteaspoons?\b/g, 'tsp').replace(/\s+/g, ' ').trim();
+  let note = c.note;
+  if (note && same(note).startsWith(same(measure) + ',')) note = note.slice(note.indexOf(',') + 1).trim();
+  if (note && same(note) !== same(measure)) text += `, ${note}`;
   return text;
 }
 

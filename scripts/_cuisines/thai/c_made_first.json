@@ -533,58 +533,6 @@
         }
       ],
       "curationNote": "Thailand Foundation, Pla ra: pla ra nua is freshwater fish, salt and rice bran at 4 to 1 to 1, fermented about 4 to 6 months in a closed jar, and generally at least 6 months. The page gives no step by step method; the overnight salting first follows Wikipedia. One serving is one tablespoon, about 18 g."
-    },
-    {
-      "id": "curated_th_base_pu_dong",
-      "name": "Pu Dong (Salted Field Crab)",
-      "builderType": "sauce",
-      "dishGroup": "Bases: Rice, Noodles & Pantry",
-      "region": "Isan, Northeast Thailand",
-      "servings": 20,
-      "servingSizeAmount": 1,
-      "servingSizeUnit": "each",
-      "flavorProfile": "Salty and briny, with a strong crab taste.",
-      "healthBenefit": "Small amounts season som tam; it is salty.",
-      "overallTier": "moderate",
-      "components": [],
-      "ingredients": [
-        {
-          "category": "Meat",
-          "baseName": "Crab Crustaceans",
-          "quantity": 500,
-          "unit": "g",
-          "cutPrep": "small field crabs, scrubbed",
-          "cookingMethod": null,
-          "prepNote": "about 20 crabs"
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "the share taken up; the brine holds 100 g in 1 litre of water"
-        }
-      ],
-      "instructions": [
-        "Scrub the crabs well and rinse in several changes of water.",
-        "Boil 1 litre of water with 100 g salt, cool completely and pour over the crabs in a jar. Close and leave 2 to 3 days in the fridge.",
-        "Crush a crab or two into the mortar for som tam. The brine is not eaten, so only the salt the crabs take up is counted."
-      ],
-      "nutritionHighlights": [
-        {
-          "nutrient": "Sodium",
-          "note": "About 600 mg sodium per crab."
-        }
-      ],
-      "citations": [
-        {
-          "source": "Wikipedia: Green papaya salad",
-          "url": "https://en.wikipedia.org/wiki/Green_papaya_salad"
-        }
-      ],
-      "curationNote": "Field crabs carry parasites when eaten raw; brining does not kill them, so many cooks now steam the crabs before salting. One serving is one crab, about 25 g."
     }
   ]
 }

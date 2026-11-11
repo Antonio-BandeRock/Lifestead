@@ -2400,11 +2400,6 @@
           "recipeId": "curated_vn_base_nuoc_dung_pho_bo",
           "servings": 16,
           "note": "2 cups per bowl, at a rolling boil; the chuck simmered in it is sliced for the bowls"
-        },
-        {
-          "recipeId": "curated_cn_base_hoisin",
-          "servings": 4,
-          "note": "4 tbsp, optional, for the table"
         }
       ],
       "ingredients": [
@@ -2847,11 +2842,6 @@
           "recipeId": "curated_side_pork_blood_cake",
           "servings": 2.25,
           "note": "225 g, cut in 1-inch cubes"
-        },
-        {
-          "recipeId": "curated_vn_base_gia_vi_rieu_cua",
-          "servings": 18.7,
-          "note": "397 g (14 oz), the jar of minced crab in spices"
         }
       ],
       "ingredients": [
@@ -2881,6 +2871,15 @@
           "cutPrep": "rinsed",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Minced crab in spice (gia vị nấu riêu cua)",
+          "contains": "fish",
+          "quantity": 397,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "one 14 oz jar, bought"
         },
         {
           "category": "Meat",
@@ -5879,13 +5878,7 @@
       "flavorProfile": "Springy, translucent glass noodles tossed with sweet crab, crunchy wood ear and sprouts, Chinese celery and threads of egg, with a hit of black pepper.",
       "healthBenefit": "Protein from crab and egg and vegetables throughout; glass noodles are gluten-free and a light, quick plate.",
       "overallTier": "strong",
-      "components": [
-        {
-          "recipeId": "curated_sauce_chicken_stock",
-          "servings": 0.25,
-          "note": "1/4 cup, in place of 1/2 tsp stock powder"
-        }
-      ],
+      "components": [],
       "ingredients": [
         {
           "category": "Meat",
