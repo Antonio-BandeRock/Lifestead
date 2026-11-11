@@ -386,7 +386,17 @@ function resolveCuratedRecipeIngredient(category, baseName) {
      LIMIT 1`,
     [category, baseName],
   );
-  return rows[0] ?? null;
+  if (rows[0]) return rows[0];
+  // Same hidden-row fallback as lib/db.ts resolveCuratedRecipeIngredientUncached.
+  const hidden = runSql(
+    `SELECT food_id, source FROM foods
+     WHERE category = ? AND base_name = ?
+     ORDER BY CASE WHEN prep_method = 'Raw' THEN 0 WHEN prep_method IS NULL THEN 1 ELSE 2 END,
+       CASE WHEN source IN ('USDA', 'Derived') THEN 0 ELSE 1 END, food_id
+     LIMIT 1`,
+    [category, baseName],
+  );
+  return hidden[0] ?? null;
 }
 
 // ---------------------------------------------------------------------

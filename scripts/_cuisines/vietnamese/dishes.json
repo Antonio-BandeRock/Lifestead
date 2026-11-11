@@ -648,6 +648,42 @@
       "name": "Bánh Bò Nướng (Honeycomb Cake)",
       "shelf": "Sweets & Drinks",
       "file": "b_banhmi_meats_soups_salads_sweets.json"
+    },
+    {
+      "id": "curated_vn_base_cu_kieu",
+      "name": "Củ Kiệu (Pickled Shallot Bulbs)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_vn_base_top_mo",
+      "name": "Tóp Mỡ (Pork Cracklings)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_vn_base_cha_hue",
+      "name": "Chả Huế (Huế Peppered Pork Roll)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_vn_base_banh_trang",
+      "name": "Bánh Tráng (Rice Paper)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_vn_base_banh_trang_me",
+      "name": "Bánh Tráng Mè (Sesame Rice Crackers)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_vn_base_me",
+      "name": "Mẻ (Fermented Rice)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "c_made_first.json"
     }
   ]
 }

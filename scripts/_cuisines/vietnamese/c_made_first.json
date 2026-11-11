@@ -1,0 +1,809 @@
+{
+  "recipes": [
+    {
+      "id": "curated_vn_base_cu_kieu",
+      "name": "Củ Kiệu (Pickled Shallot Bulbs)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Vietnam",
+      "servings": 20,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Crunchy, sweet and sour, with a gentle allium bite.",
+      "healthBenefit": "A crisp pickle that brings a little fiber; the brine is sweet.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Japanese scallion, \"Rakkyo\", mature bulb",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "trimmed and peeled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2 tsp taken up by the bulbs, the rest rinsed off"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Distilled Vinegar (White)",
+          "quantity": 300,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 200,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rub the bulbs with the salt and leave overnight, then rinse well and dry in the sun or on a towel for half a day.",
+        "Boil the vinegar, sugar and water until the sugar dissolves and cool.",
+        "Pack the bulbs and chili in clean jars, pour the brine over and close. Leave 1 to 2 weeks before eating. One serving is 50 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sugar",
+          "note": "The brine sugar is counted in full."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Allium chinense",
+          "url": "https://en.wikipedia.org/wiki/Allium_chinense"
+        }
+      ],
+      "curationNote": "The brine sugar is counted in full, though some of it stays in the jar."
+    },
+    {
+      "id": "curated_vn_base_top_mo",
+      "name": "Tóp Mỡ (Pork Cracklings)",
+      "builderType": "snack",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Vietnam",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Crisp, golden and rich, with a little salt.",
+      "healthBenefit": "Mostly fat, used a spoonful at a time for crunch.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Back Fat (Raw)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "what stays in the cracklings from 500 g back fat cut in small cubes; the rest renders off as lard",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "a pinch"
+        }
+      ],
+      "instructions": [
+        "Cook the cubed back fat in a dry pan over medium-low heat, stirring, for 20 to 30 minutes, until the cubes are golden and crisp.",
+        "Lift them out, drain on paper and salt. Keep the rendered lard for cooking."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Saturated fat",
+          "note": "High."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Pork rind",
+          "url": "https://en.wikipedia.org/wiki/Pork_rind"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_vn_base_cha_hue",
+      "name": "Chả Huế (Huế Peppered Pork Roll)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Huế, central Vietnam",
+      "servings": 23,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Springy pork roll with whole black peppercorns, garlic and fish sauce.",
+      "healthBenefit": "Lean pork brings protein, thiamine and zinc.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Gris skinka innanlår rå",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "very cold, cut in pieces",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 100,
+          "unit": "ml",
+          "cutPrep": "as crushed ice",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Potato Starch",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baking powder",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "whole",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Pound or process the cold pork with the fish sauce, sugar, starch and baking powder, adding the ice a little at a time, until smooth and sticky.",
+        "Mix in the garlic and whole peppercorns. Wrap tightly in banana leaves (or foil) into logs about 5 cm across.",
+        "Steam 45 minutes, cool and slice. It keeps 4 days in the fridge. One serving is 50 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 10 g per 50 g."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 400 mg per 50 g."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Chả lụa",
+          "url": "https://en.wikipedia.org/wiki/Ch%E1%BA%A3_l%E1%BB%A5a"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_vn_base_banh_trang",
+      "name": "Bánh Tráng (Rice Paper)",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Vietnam",
+      "servings": 40,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Thin, plain and slightly chewy once softened.",
+      "healthBenefit": "Rice and tapioca with a pinch of salt and nothing else.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Rice flour",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Grain",
+          "baseName": "Tapioca (granulated cassava starch)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 600,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "stays in the sheets"
+        }
+      ],
+      "instructions": [
+        "Whisk the rice flour, tapioca, salt and water into a thin batter and rest 1 hour.",
+        "Stretch a cloth over a pot of boiling water, spread a ladle of batter thin in a 22 cm round, cover and steam 30 seconds.",
+        "Lift onto a bamboo rack and dry in the sun or a 60 C (140 F) oven until crisp. Makes about 40 sheets; keep them dry and closed."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "About 9 g per sheet."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Rice paper",
+          "url": "https://en.wikipedia.org/wiki/Rice_paper"
+        },
+        {
+          "source": "Wikipedia (Vietnamese): Bánh tráng",
+          "url": "https://vi.wikipedia.org/wiki/B%C3%A1nh_tr%C3%A1ng"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_vn_base_banh_trang_me",
+      "name": "Bánh Tráng Mè (Sesame Rice Crackers)",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Central Vietnam",
+      "servings": 15,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Crisp and nutty, toasted over coals until they puff, with coconut and a little garlic.",
+      "healthBenefit": "Sesame brings calcium, copper and healthy fats.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Rice flour",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Sesame seed",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "black, toasted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Coconut milk",
+          "quantity": 100,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 400,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Whisk the rice flour, coconut milk, water, sugar, salt and garlic into a batter and stir in the sesame.",
+        "Steam thick 25 cm rounds on a cloth over boiling water, about 1 minute each.",
+        "Dry on racks in the sun or a 60 C (140 F) oven until hard. Toast over coals or a gas flame, turning, until they puff and crisp. Makes about 15."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "From the sesame."
+        },
+        {
+          "nutrient": "Carbohydrate",
+          "note": "About 18 g per cracker."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (Vietnamese): Bánh tráng",
+          "url": "https://vi.wikipedia.org/wiki/B%C3%A1nh_tr%C3%A1ng"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_vn_base_me",
+      "name": "Mẻ (Fermented Rice)",
+      "builderType": "fermentation",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Northern Vietnam",
+      "servings": 23,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Sour and mild, used like a vinegar in fish and soups.",
+      "healthBenefit": "A live ferment of rice and water; it adds sourness with almost no sugar or salt.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Grain",
+          "baseName": "Grains, rice, white, long-grain, regular, dry",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "cooked soft",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 300,
+          "unit": "ml",
+          "cutPrep": "boiled and cooled",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Cook the rice soft and cool it. Put it in a clean jar with the cooled water and a spoon of old mẻ if you have it.",
+        "Cover with a cloth and leave at room temperature 5 to 7 days, stirring daily, until sour.",
+        "Mash or sieve before using. Keep feeding with a little fresh cooked rice. One serving is 1 tablespoon."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "About 3 g per tablespoon."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (Vietnamese): Mẻ",
+          "url": "https://vi.wikipedia.org/wiki/M%E1%BA%BB"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_vn_base_bo_kho",
+      "name": "Bò Khô (Vietnamese Beef Jerky)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Vietnam",
+      "servings": 15,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Chewy, sweet, spicy and garlicky, with five spice.",
+      "healthBenefit": "Dense in protein and iron; also sweet and salty.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Round (Raw)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "trimmed and sliced thin across the grain",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 2 tbsp"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "pounded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "bottom of 2 stalks, minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Chilli (chili), dried, ground",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "star anise",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "ground",
+          "prepNote": null,
+          "contains": "none"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, fennel seed",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, \"Sansho\" (Japanese pepper), ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "stands in for Sichuan pepper"
+        }
+      ],
+      "instructions": [
+        "Mix the beef with everything else and marinate overnight in the fridge.",
+        "Lay the slices on racks and dry in a 70 C (160 F) oven, door ajar, for 4 to 6 hours, turning once, until dry and leathery but still pliable.",
+        "Tear into strips to serve. It makes about 450 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 20 g protein per 30 g serving."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "Beef supplies well absorbed heme iron."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Jerky",
+          "url": "https://en.wikipedia.org/wiki/Jerky"
+        }
+      ],
+      "curationNote": "Five spice is listed as its single spices. One serving is 30 g, from about 450 g finished."
+    },
+    {
+      "id": "curated_vn_base_ngo_sen_chua",
+      "name": "Ngó Sen Chua (Pickled Lotus Stems)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Vietnam",
+      "servings": 10,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Crisp, sour and lightly sweet.",
+      "healthBenefit": "A light, crunchy vegetable with fibre.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Lotus root",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "young stems, peeled and cut in 5 cm lengths",
+          "cookingMethod": null,
+          "prepNote": "stands in for young lotus stems (ngó sen), which no food database here lists"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, rice vinegar",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the share taken up; the brine holds 100 ml"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the share taken up; the brine holds 30 g"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the share taken up; the brine holds 10 g"
+        }
+      ],
+      "instructions": [
+        "Blanch the lotus stems 30 seconds and refresh in cold water.",
+        "Boil 400 ml water with 100 ml rice vinegar, 30 g sugar and 10 g salt, cool and pour over the stems in a jar.",
+        "Leave 1 to 2 days at room temperature, then keep in the fridge. Only about a quarter of the brine is eaten, so only that share is counted."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "Lotus stems are crisp and fibrous."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Nelumbo nucifera",
+          "url": "https://en.wikipedia.org/wiki/Nelumbo_nucifera"
+        }
+      ],
+      "curationNote": "One serving is 50 g, from about 500 g."
+    },
+    {
+      "id": "curated_vn_base_gia_vi_rieu_cua",
+      "name": "Gia Vị Nấu Riêu Cua (Seasoned Crab Paste for Riêu)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Northern Vietnam",
+      "servings": 25,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Rich, savoury and crabby, with fried shallot.",
+      "healthBenefit": "Crab brings protein, calcium and zinc.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Crab Crustaceans",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "field crab meat and roe, pounded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Peanøttolje",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Shrimp Paste",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "mắm tôm, about 1 tbsp"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Fry the shallot in the oil until golden.",
+        "Add the crab paste and fry gently 5 minutes, stirring, then season with the fish sauce, shrimp paste, sugar, salt and pepper.",
+        "Cook 5 more minutes until thick and fragrant. Cool and keep in a jar in the fridge up to a week. It makes about 450 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 3 g protein per tablespoon."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 300 mg sodium per tablespoon."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Bún riêu",
+          "url": "https://en.wikipedia.org/wiki/B%C3%BAn_ri%C3%AAu"
+        }
+      ],
+      "curationNote": "The jarred paste sold for bún riêu is crab fried in oil with shallot and seasonings; this is the same made at home. One serving is one tablespoon, about 18 g."
+    }
+  ]
+}

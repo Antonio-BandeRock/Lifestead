@@ -120,6 +120,51 @@
       "id": "curated_vn_base_banh_mi",
       "name": "Bánh Mì (Vietnamese Baguette)",
       "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_vn_base_cu_kieu",
+      "name": "Củ Kiệu (Pickled Shallot Bulbs)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_vn_base_top_mo",
+      "name": "Tóp Mỡ (Pork Cracklings)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_vn_base_cha_hue",
+      "name": "Chả Huế (Huế Peppered Pork Roll)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_vn_base_banh_trang",
+      "name": "Bánh Tráng (Rice Paper)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_vn_base_banh_trang_me",
+      "name": "Bánh Tráng Mè (Sesame Rice Crackers)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_vn_base_me",
+      "name": "Mẻ (Fermented Rice)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_vn_base_bo_kho",
+      "name": "Bò Khô (Vietnamese Beef Jerky)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_vn_base_ngo_sen_chua",
+      "name": "Ngó Sen Chua (Pickled Lotus Stems)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_vn_base_gia_vi_rieu_cua",
+      "name": "Gia Vị Nấu Riêu Cua (Seasoned Crab Paste for Riêu)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
     }
   ]
 }

@@ -90,11 +90,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lemon",
         "quantity": 7.5,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       },
@@ -201,11 +201,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Orange",
         "quantity": 30,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       },
@@ -523,11 +523,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lemon",
         "quantity": 7.5,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       },
@@ -706,11 +706,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lemon",
         "quantity": 7.5,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       },
@@ -962,11 +962,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lemon",
         "quantity": 7.5,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       },
@@ -1229,11 +1229,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
         "quantity": 7.5,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       },
@@ -1293,11 +1293,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lemon",
         "quantity": 10,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       },
@@ -1430,11 +1430,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lemon",
         "quantity": 10,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       },
@@ -1503,11 +1503,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lemon",
         "quantity": 10,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       },
@@ -1791,11 +1791,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lemon",
         "quantity": 7.5,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       },
@@ -1986,12 +1986,21 @@
       },
       {
         "category": "Fruit",
-        "baseName": "Orange",
-        "quantity": 40,
+        "baseName": "Orange peel",
+        "quantity": 9,
         "unit": "g",
-        "cutPrep": "zested and juiced",
+        "cutPrep": "finely grated",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "zest of 1 orange"
+      },
+      {
+        "category": "Bev",
+        "baseName": "Orange",
+        "quantity": 15,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
+        "cookingMethod": null,
+        "prepNote": "one tablespoon of the juice of 1 orange goes into the paste"
       }
     ],
     "instructions": [
@@ -2022,11 +2031,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
         "quantity": 7.5,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       }
@@ -2193,11 +2202,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lemon",
         "quantity": 10,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       },
@@ -2257,11 +2266,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lemon",
         "quantity": 15,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       },
@@ -2348,11 +2357,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lemon",
         "quantity": 7.5,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       },
@@ -2403,11 +2412,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
         "quantity": 7.5,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       },

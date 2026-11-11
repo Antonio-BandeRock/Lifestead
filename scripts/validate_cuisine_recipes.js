@@ -48,7 +48,7 @@ function validate(key, only) {
   const tags = loadUnlistedTags(c);
 
   const db = new DatabaseSync(DB_PATH, { readOnly: true });
-  const foodCheck = db.prepare('SELECT 1 AS ok FROM foods WHERE category = ? AND base_name = ? AND hidden = 0 LIMIT 1');
+  const foodCheck = db.prepare('SELECT 1 AS ok FROM foods WHERE category = ? AND base_name = ? LIMIT 1'); // hidden rows count: lib/db.ts falls back to them
 
   // Every recipe id in every cuisine's files, so a dish may point at a base
   // written in another file or another cuisine.

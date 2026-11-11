@@ -5,8 +5,8 @@
     "name": "Beef & Kale Breakfast Hash",
     "flavorProfile": "A quick morning hash of seared beef, braised kale, and carrot, finished with avocado.",
     "healthBenefit": "Beef top sirloin, kale, and carrot all check completely clean for Hashimoto's, a real whole-food way to start the day without grains or eggs.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -67,8 +67,8 @@
     "name": "Pork & Cabbage Breakfast Skillet",
     "flavorProfile": "Pan-seared pork tenderloin with cabbage and carrot braised soft, a savory grain-free breakfast.",
     "healthBenefit": "Pork tenderloin, cabbage, and carrot all check completely clean for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -120,8 +120,8 @@
     "name": "Salmon & Broccoli Breakfast Bowl",
     "flavorProfile": "Baked salmon with roasted broccoli and carrot, finished with avocado, a real omega-3-rich start to the day.",
     "healthBenefit": "Salmon, broccoli, and carrot all check completely clean for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -183,8 +183,8 @@
     "name": "Halibut & Fennel Breakfast Bowl",
     "flavorProfile": "Baked halibut with roasted fennel and zucchini, finished with avocado.",
     "healthBenefit": "Halibut, fennel, and zucchini all check completely clean for Hashimoto's, a real light, savory breakfast.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -246,8 +246,8 @@
     "name": "Cod & Cabbage Breakfast Skillet",
     "flavorProfile": "Pan-seared cod with cabbage and carrot braised soft, a real light way to start the day.",
     "healthBenefit": "Cod, cabbage, and carrot all check completely clean for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -299,8 +299,8 @@
     "name": "Shrimp & Zucchini Breakfast Skillet",
     "flavorProfile": "Shrimp sauteed with zucchini and carrot in a splash of water, finished with lime and avocado.",
     "healthBenefit": "Shrimp, zucchini, and carrot all check completely clean for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -340,13 +340,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Herbs",
@@ -370,8 +370,8 @@
     "name": "Beef & Broccoli Breakfast Bowl",
     "flavorProfile": "Seared beef with roasted broccoli and carrot, a real protein-forward start to the day.",
     "healthBenefit": "Beef top sirloin, broccoli, and carrot all check completely clean for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -424,8 +424,8 @@
     "name": "Pork & Kale Breakfast Hash",
     "flavorProfile": "A quick morning hash of seared pork tenderloin, braised kale, and carrot, finished with avocado.",
     "healthBenefit": "Pork tenderloin, kale, and carrot all check completely clean for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -486,8 +486,8 @@
     "name": "Salmon & Fennel Breakfast Bowl",
     "flavorProfile": "Baked salmon with roasted fennel and zucchini, a real light and savory breakfast.",
     "healthBenefit": "Salmon, fennel, and zucchini all check completely clean for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -539,8 +539,8 @@
     "name": "Halibut & Cabbage Breakfast Skillet",
     "flavorProfile": "Pan-seared halibut with cabbage and carrot braised soft, finished with avocado.",
     "healthBenefit": "Halibut, cabbage, and carrot all check completely clean for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -601,8 +601,8 @@
     "name": "Cod & Broccoli Breakfast Bowl",
     "flavorProfile": "Baked cod with roasted broccoli and carrot, a real light way to start the day.",
     "healthBenefit": "Cod, broccoli, and carrot all check completely clean for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -654,8 +654,8 @@
     "name": "Shrimp & Cabbage Breakfast Bowl",
     "flavorProfile": "Shrimp sauteed with cabbage and carrot, finished with lime and avocado.",
     "healthBenefit": "Shrimp, cabbage, and carrot all check completely clean for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -695,13 +695,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Herbs",
@@ -725,8 +725,8 @@
     "name": "Citrus & Avocado Breakfast Bowl",
     "flavorProfile": "Sliced avocado with orange and grapefruit segments, finished with lime and cilantro, a real no-cook morning bowl.",
     "healthBenefit": "Orange, grapefruit, and avocado all check completely clean for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -757,13 +757,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Veg",
@@ -786,8 +786,8 @@
     "name": "Tropical Breakfast Fruit Bowl",
     "flavorProfile": "Banana, pineapple, and papaya, a real quick no-cook breakfast.",
     "healthBenefit": "Banana, pineapple, and papaya all check completely clean for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -828,8 +828,8 @@
     "name": "Berry & Melon Breakfast Bowl",
     "flavorProfile": "Blueberry, strawberry, and cantaloupe, a real quick no-cook breakfast.",
     "healthBenefit": "Blueberry, strawberry, and cantaloupe all check completely clean for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {

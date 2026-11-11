@@ -24,22 +24,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "beef marrow and soup bones",
-          "contains": "meat",
-          "quantity": 1000,
-          "unit": "g",
-          "cutPrep": "rinsed, sawn in pieces",
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
+          "category": "CommercialPremade",
+          "baseName": "Soup, stock, beef, home-prepared",
           "quantity": 3500,
-          "unit": "ml",
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1000 g beef marrow and soup bones simmered in 3500 ml water, counted as 3500 g home-made beef stock (1 g per ml); the bones themselves are not eaten"
         },
         {
           "category": "Veg",
@@ -98,11 +89,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -181,12 +172,12 @@
       "components": [],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "boiling hen (Suppenhuhn), whole",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Chicken, stewing",
           "quantity": 1500,
           "unit": "g",
           "cutPrep": "rinsed",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -246,11 +237,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -384,11 +375,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -476,13 +467,13 @@
       "components": [],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "white fish bones and heads (plaice, cod, sole), gills removed",
-          "contains": "fish",
-          "quantity": 1000,
+          "category": "CommercialPremade",
+          "baseName": "Soup, stock, fish, home-prepared",
+          "quantity": 1500,
           "unit": "g",
-          "cutPrep": "rinsed well under cold water",
-          "prepNote": null
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1000 g white fish bones and heads (plaice, cod, sole), gills removed simmered in 1500 ml water, counted as 1500 g home-made fish stock (1 g per ml); the bones themselves are not eaten"
         },
         {
           "category": "Fats",
@@ -530,15 +521,6 @@
           "prepNote": null
         },
         {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 1500,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Veg",
           "baseName": "Fresh Parsley",
           "quantity": 10,
@@ -550,11 +532,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -635,13 +617,13 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "pork or veal bones, chopped small",
-          "contains": "meat",
-          "quantity": 1000,
+          "category": "CommercialPremade",
+          "baseName": "Soup, stock, beef, home-prepared",
+          "quantity": 400,
           "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1000 g pork or veal bones, chopped small simmered in 400 ml water, counted as 400 g home-made beef stock (1 g per ml); the bones themselves are not eaten"
         },
         {
           "category": "Fats",
@@ -698,22 +680,13 @@
           "prepNote": null
         },
         {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 400,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -1102,7 +1075,13 @@
       "flavorProfile": "A cool, bright green herb sauce, tangy with yoghurt and sour cream, grassy from seven fresh herbs and rich with chopped egg.",
       "healthBenefit": "A large handful of fresh herbs brings vitamin K, vitamin C and folate, with protein and calcium from the eggs and cultured dairy.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_base_moutarde_de_dijon",
+          "servings": 0.333,
+          "note": "1 tsp"
+        }
+      ],
       "ingredients": [
         {
           "category": "Veg",
@@ -1190,15 +1169,6 @@
           "baseName": "Wine vinegar",
           "quantity": 1,
           "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard hot",
-          "quantity": 1,
-          "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -1693,12 +1663,12 @@
         },
         {
           "category": "Fruit",
-          "baseName": "Lemon",
-          "quantity": 0.5,
-          "unit": "each",
-          "cutPrep": "zest only, finely grated",
+          "baseName": "Lemon peel",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "finely grated",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "zest of half a lemon"
         }
       ],
       "instructions": [
@@ -1804,12 +1774,12 @@
         },
         {
           "category": "Fruit",
-          "baseName": "Lemon",
-          "quantity": 0.5,
-          "unit": "each",
-          "cutPrep": "zest only",
+          "baseName": "Lemon peel",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "grated",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "zest of half a lemon"
         }
       ],
       "instructions": [
@@ -2103,12 +2073,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "coarse pretzel salt",
-          "contains": "none",
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
           "quantity": 10,
           "unit": "g",
           "cutPrep": "for sprinkling",
+          "cookingMethod": null,
           "prepNote": null
         }
       ],
@@ -2212,11 +2182,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 4,
-          "unit": "each",
+          "quantity": 0.6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 bay leaves"
         },
         {
           "category": "Herbs",
@@ -2750,12 +2720,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark rum",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Rum, Dark/Aged",
           "quantity": 30,
           "unit": "ml",
           "cutPrep": "optional, stirred in at the end",
+          "cookingMethod": null,
           "prepNote": null
         }
       ],
@@ -2954,11 +2924,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Veg",
@@ -3103,11 +3073,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -3377,6 +3347,16 @@
           "recipeId": "curated_de_base_rinderbruhe",
           "servings": 4,
           "note": "hot, about 1 litre"
+        },
+        {
+          "recipeId": "curated_de_base_mettenden",
+          "servings": 2,
+          "note": "2 each, sliced"
+        },
+        {
+          "recipeId": "curated_de_base_kasseler",
+          "servings": 4,
+          "note": "200 g, 2 slices, diced"
         }
       ],
       "ingredients": [
@@ -3446,29 +3426,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Mettenden (smoked pork sausages)",
-          "contains": "meat",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "sliced",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Kasseler (cured smoked pork loin)",
-          "contains": "meat",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": "2 slices, diced",
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Fats",
@@ -3689,11 +3651,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -3764,18 +3726,19 @@
           "recipeId": "curated_de_base_rinderbruhe",
           "servings": 4,
           "note": "hot, about 1 litre"
+        },
+        {
+          "recipeId": "curated_de_kaiserbrotchen",
+          "servings": 2,
+          "note": "2 each, stale, thinly sliced"
+        },
+        {
+          "recipeId": "curated_de_base_semmelbrosel",
+          "servings": 0.5,
+          "note": "2 tbsp"
         }
       ],
       "ingredients": [
-        {
-          "category": "Baked",
-          "baseName": "Rundstykke, fint, med vann, hjemmebakt",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "stale, thinly sliced",
-          "cookingMethod": null,
-          "prepNote": null
-        },
         {
           "category": "Dairy",
           "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
@@ -3840,22 +3803,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "breadcrumbs",
-          "contains": "gluten",
-          "quantity": 2,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "lemon zest",
-          "contains": "none",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "category": "Fruit",
+          "baseName": "Lemon peel",
+          "quantity": 1,
+          "unit": "g",
           "cutPrep": "grated",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "0.5 tsp at 2 g per tsp"
         },
         {
           "category": "Herbs",
@@ -4160,6 +4114,11 @@
           "recipeId": "curated_de_base_huhnerbruhe",
           "servings": 6,
           "note": "hot, about 1.5 litres"
+        },
+        {
+          "recipeId": "curated_de_base_semmelbrosel",
+          "servings": 0.5,
+          "note": "2 tbsp"
         }
       ],
       "ingredients": [
@@ -4215,15 +4174,6 @@
           "unit": "each",
           "cutPrep": "for the meatballs",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "breadcrumbs",
-          "contains": "gluten",
-          "quantity": 2,
-          "unit": "tbsp",
-          "cutPrep": null,
           "prepNote": null
         },
         {
@@ -4769,11 +4719,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "notInDatabase": true,
@@ -5021,6 +4971,21 @@
           "recipeId": "curated_de_base_rinderbruhe",
           "servings": 1,
           "note": "about 250 ml"
+        },
+        {
+          "recipeId": "curated_de_base_mittelscharfer_senf",
+          "servings": 1,
+          "note": "1 tbsp"
+        },
+        {
+          "recipeId": "curated_de_base_pinkel",
+          "servings": 4,
+          "note": "4 each"
+        },
+        {
+          "recipeId": "curated_de_base_kasseler",
+          "servings": 12,
+          "note": "3 each"
         }
       ],
       "ingredients": [
@@ -5052,38 +5017,11 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Pinkel (smoked oat and pork sausage)",
-          "contains": "meat,gluten",
-          "quantity": 4,
-          "unit": "each",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Kasseler (cured smoked pork chops)",
-          "contains": "meat",
-          "quantity": 3,
-          "unit": "each",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "pork belly, smoked",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Gris sidfläsk rökt",
           "quantity": 200,
           "unit": "g",
           "cutPrep": "2 slices",
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard medium hot",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
@@ -5179,6 +5117,16 @@
           "recipeId": "curated_de_base_butterschmalz",
           "servings": 4,
           "note": "4 tbsp, for searing"
+        },
+        {
+          "recipeId": "curated_sauce_red_currant_jelly",
+          "servings": 4,
+          "note": "4 tbsp"
+        },
+        {
+          "recipeId": "curated_de_base_aachener_printen",
+          "servings": 6,
+          "note": "150 g, crumbled"
         }
       ],
       "ingredients": [
@@ -5302,11 +5250,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 6,
-          "unit": "each",
+          "quantity": 0.9,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "6 bay leaves"
         },
         {
           "category": "Herbs",
@@ -5336,22 +5284,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Rübenkraut (sugar beet syrup)",
-          "contains": "none",
-          "quantity": 4,
-          "unit": "tbsp",
+          "category": "Sweets",
+          "baseName": "Dark Treacle/Molasses",
+          "quantity": 80,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "red currant jelly",
-          "contains": "none",
-          "quantity": 4,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "4 tbsp at 20 g per tbsp; in place of Rübenkraut (sugar beet syrup), which the database does not hold"
         },
         {
           "category": "Fruit",
@@ -5360,15 +5299,6 @@
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Aachener Printen (spiced gingerbread)",
-          "contains": "gluten",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "crumbled",
           "prepNote": null
         }
       ],
@@ -5439,6 +5369,11 @@
           "recipeId": "curated_de_base_rinderbruhe",
           "servings": 2,
           "note": "hot, about 500 ml"
+        },
+        {
+          "recipeId": "curated_de_base_mittelscharfer_senf",
+          "servings": 3,
+          "note": "3 tbsp"
         }
       ],
       "ingredients": [
@@ -5449,15 +5384,6 @@
           "unit": "g",
           "cutPrep": "4 thin slices from the leg, beaten flat",
           "cookingMethod": "Braised",
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard medium hot",
-          "quantity": 3,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5771,12 +5697,12 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "pork hocks (Schweinshaxen), hind, with rind",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Pork hindshank (hock)",
           "quantity": 2400,
           "unit": "g",
           "cutPrep": "4 hocks of about 600 g, rind scored every 1.5 inches (4 cm)",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5854,11 +5780,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Alcohol",
@@ -5918,6 +5844,11 @@
           "recipeId": "curated_de_base_butterschmalz",
           "servings": 10,
           "note": "about 140 g, for shallow frying"
+        },
+        {
+          "recipeId": "curated_de_base_semmelbrosel",
+          "servings": 3.333,
+          "note": "100 g"
         }
       ],
       "ingredients": [
@@ -5973,15 +5904,6 @@
           "unit": "tbsp",
           "cutPrep": "beaten into the eggs",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "fine dry breadcrumbs (Semmelbrösel)",
-          "contains": "gluten",
-          "quantity": 100,
-          "unit": "g",
-          "cutPrep": null,
           "prepNote": null
         },
         {
@@ -6151,6 +6073,16 @@
           "recipeId": "curated_de_base_rinderbruhe",
           "servings": 4,
           "note": "about 1 litre, for poaching and the sauce"
+        },
+        {
+          "recipeId": "curated_de_kaiserbrotchen",
+          "servings": 1,
+          "note": "1 each, stale, soaked in water and squeezed"
+        },
+        {
+          "recipeId": "curated_de_base_semmelbrosel",
+          "servings": 0.667,
+          "note": "20 g"
         }
       ],
       "ingredients": [
@@ -6173,15 +6105,6 @@
           "prepNote": null
         },
         {
-          "category": "Baked",
-          "baseName": "Rundstykke, fint, med vann, hjemmebakt",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "stale, soaked in water and squeezed",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Veg",
           "baseName": "Onion",
           "quantity": 2,
@@ -6197,15 +6120,6 @@
           "unit": "each",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "fine dry breadcrumbs (Semmelbrösel)",
-          "contains": "gluten",
-          "quantity": 20,
-          "unit": "g",
-          "cutPrep": null,
           "prepNote": null
         },
         {
@@ -6238,11 +6152,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -6382,7 +6296,13 @@
       "flavorProfile": "Juicy, well-browned patties of beef and pork, soft inside from soaked roll, with sweet onion, parsley and a little paprika.",
       "healthBenefit": "The meat gives protein, iron, zinc and vitamin B12; pan-fried, they are good hot or cold with mustard and a potato salad.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_de_kaiserbrotchen",
+          "servings": 1,
+          "note": "1 each, stale, soaked in water and squeezed"
+        }
+      ],
       "ingredients": [
         {
           "category": "Meat",
@@ -6400,15 +6320,6 @@
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Fried",
-          "prepNote": null
-        },
-        {
-          "category": "Baked",
-          "baseName": "Rundstykke, fint, med vann, hjemmebakt",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "stale, soaked in water and squeezed",
-          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -6540,18 +6451,19 @@
           "recipeId": "curated_de_base_gemusebruhe",
           "servings": 1,
           "note": "about 250 ml"
+        },
+        {
+          "recipeId": "curated_de_base_mittelscharfer_senf",
+          "servings": 4,
+          "note": "4 tbsp, to serve"
+        },
+        {
+          "recipeId": "curated_de_base_kasseler",
+          "servings": 14,
+          "note": "700 g, one piece or 4 thick slices"
         }
       ],
       "ingredients": [
-        {
-          "notInDatabase": true,
-          "name": "Kasseler (cured smoked pork loin), boneless",
-          "contains": "meat",
-          "quantity": 700,
-          "unit": "g",
-          "cutPrep": "one piece or 4 thick slices",
-          "prepNote": null
-        },
         {
           "category": "Veg",
           "baseName": "Onion",
@@ -6573,11 +6485,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 3,
-          "unit": "each",
+          "quantity": 0.45,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bay leaves"
         },
         {
           "notInDatabase": true,
@@ -6613,15 +6525,6 @@
           "unit": "g",
           "cutPrep": "peeled",
           "cookingMethod": "Boiled",
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard medium hot",
-          "quantity": 4,
-          "unit": "tbsp",
-          "cutPrep": "to serve",
-          "cookingMethod": null,
           "prepNote": null
         }
       ],
@@ -6676,18 +6579,19 @@
           "recipeId": "curated_ferment_sauerkraut",
           "servings": 14,
           "note": "about 1 kg"
+        },
+        {
+          "recipeId": "curated_de_base_mittelscharfer_senf",
+          "servings": 4,
+          "note": "4 tbsp, to serve"
+        },
+        {
+          "recipeId": "curated_de_base_eisbein",
+          "servings": 26,
+          "note": "1300 g, rinsed"
         }
       ],
       "ingredients": [
-        {
-          "notInDatabase": true,
-          "name": "Eisbein (cured pork hock)",
-          "contains": "meat",
-          "quantity": 1300,
-          "unit": "g",
-          "cutPrep": "rinsed",
-          "prepNote": null
-        },
         {
           "category": "Bev",
           "baseName": "Water, tap",
@@ -6754,11 +6658,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "notInDatabase": true,
@@ -6775,15 +6679,6 @@
           "quantity": 1,
           "unit": "tbsp",
           "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard medium hot",
-          "quantity": 4,
-          "unit": "tbsp",
-          "cutPrep": "to serve",
           "cookingMethod": null,
           "prepNote": null
         }
@@ -6864,12 +6759,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "curing salt (Nitritpökelsalz)",
-          "contains": "none",
+          "category": "Herbs",
+          "baseName": "Nitrite curing salt",
           "quantity": 15,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -6900,13 +6795,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "mace",
-          "contains": "none",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Spices, mace, ground",
+          "quantity": 0.9,
+          "unit": "g",
           "cutPrep": "ground",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "0.5 tsp at 1.7 g per tsp"
         },
         {
           "category": "Herbs",
@@ -6988,15 +6883,26 @@
       "flavorProfile": "Crisp-skinned fried sausage in bite-size pieces under a warm, sweet and tangy tomato curry sauce with a final dusting of curry powder.",
       "healthBenefit": "The sausage gives protein, but the sweet ketchup sauce and fried sausage make this a street-food treat that is high in salt and sugar.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_sauce_tomato_ketchup",
+          "servings": 16.667,
+          "note": "250 ml"
+        },
+        {
+          "recipeId": "curated_sauce_curry_powder",
+          "servings": 2.667,
+          "note": "4 tsp, 3 in the sauce, 1 to dust"
+        }
+      ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "pork Bratwurst, fine and unsmoked",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Pork Bratwurst",
           "quantity": 480,
           "unit": "g",
           "cutPrep": "4 sausages",
+          "cookingMethod": null,
           "prepNote": "Fried"
         },
         {
@@ -7055,28 +6961,10 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Tomato ketchup",
-          "quantity": 250,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Soya sauce",
           "quantity": 1,
           "unit": "tsp",
           "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, curry powder",
-          "quantity": 4,
-          "unit": "tsp",
-          "cutPrep": "3 in the sauce, 1 to dust",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -7147,16 +7035,26 @@
           "recipeId": "curated_de_rollmops",
           "servings": 4,
           "note": "one per plate, to serve"
+        },
+        {
+          "recipeId": "curated_de_base_rote_bete_eingelegt",
+          "servings": 3,
+          "note": "150 g, 70 g finely chopped, the rest to serve"
+        },
+        {
+          "recipeId": "curated_de_base_mittelscharfer_senf",
+          "servings": 0.667,
+          "note": "2 tsp"
         }
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "corned beef brisket (Pökelrinderbrust)",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Beef, corned",
           "quantity": 600,
           "unit": "g",
           "cutPrep": "in one piece",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -7171,11 +7069,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -7219,24 +7117,6 @@
           "quantity": 2,
           "unit": "tbsp",
           "cutPrep": "1 for the onions, 1 for the eggs",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Beetroot pickled, drained",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "70 g finely chopped, the rest to serve",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard medium hot",
-          "quantity": 2,
-          "unit": "tsp",
-          "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
@@ -7525,6 +7405,11 @@
           "recipeId": "curated_de_base_rinderbruhe",
           "servings": 2,
           "note": "about 500 ml"
+        },
+        {
+          "recipeId": "curated_de_base_mittelscharfer_senf",
+          "servings": 2,
+          "note": "2 tbsp"
         }
       ],
       "ingredients": [
@@ -7586,15 +7471,6 @@
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
           "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard medium hot",
-          "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7697,6 +7573,11 @@
           "recipeId": "curated_de_base_gemusebruhe",
           "servings": 1,
           "note": "about 250 ml"
+        },
+        {
+          "recipeId": "curated_fr_base_moutarde_de_dijon",
+          "servings": 3,
+          "note": "3 tbsp"
         }
       ],
       "ingredients": [
@@ -7761,15 +7642,6 @@
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Braised",
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard hot",
-          "quantity": 3,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -7852,6 +7724,16 @@
           "recipeId": "curated_de_base_rinderbruhe",
           "servings": 2,
           "note": "about 500 ml"
+        },
+        {
+          "recipeId": "curated_de_base_semmelbrosel",
+          "servings": 0.833,
+          "note": "25 g"
+        },
+        {
+          "recipeId": "curated_de_base_mittelscharfer_senf",
+          "servings": 1,
+          "note": "1 tbsp"
         }
       ],
       "ingredients": [
@@ -7871,15 +7753,6 @@
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Baked",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "fine dry breadcrumbs (Semmelbrösel)",
-          "contains": "gluten",
-          "quantity": 25,
-          "unit": "g",
-          "cutPrep": null,
           "prepNote": null
         },
         {
@@ -7933,15 +7806,6 @@
           "quantity": 1,
           "unit": "tsp",
           "cutPrep": "sweet",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard medium hot",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
@@ -8070,6 +7934,11 @@
           "recipeId": "curated_de_base_rinderbruhe",
           "servings": 2.5,
           "note": "about 600 ml"
+        },
+        {
+          "recipeId": "curated_de_base_mittelscharfer_senf",
+          "servings": 1,
+          "note": "1 tbsp, spread on one side"
         }
       ],
       "ingredients": [
@@ -8097,15 +7966,6 @@
           "quantity": 0.25,
           "unit": "tsp",
           "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard medium hot",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": "spread on one side",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -8192,17 +8052,14 @@
       "flavorProfile": "Buttered dark bread with salty ham and mild melting cheese under a soft fried egg, the yolk running into the bread.",
       "healthBenefit": "Eggs, ham and cheese give protein, vitamin B12 and calcium and the rye bread adds fibre; the cured ham makes it salty, so it is a hearty snack rather than an everyday lunch.",
       "overallTier": "strong",
-      "components": [],
-      "ingredients": [
+      "components": [
         {
-          "category": "Grain",
-          "baseName": "Rye Bread",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": "4 slices",
-          "cookingMethod": null,
-          "prepNote": null
-        },
+          "recipeId": "curated_de_bauernbrot",
+          "servings": 3.509,
+          "note": "200 g, 4 slices"
+        }
+      ],
+      "ingredients": [
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
@@ -8335,6 +8192,11 @@
           "recipeId": "curated_de_base_gemusebruhe",
           "servings": 3,
           "note": "hot, about 700 ml"
+        },
+        {
+          "recipeId": "curated_de_base_mittelscharfer_senf",
+          "servings": 4,
+          "note": "4 tbsp"
         }
       ],
       "ingredients": [
@@ -8388,15 +8250,6 @@
           "baseName": "Heavy Whipping Cream",
           "quantity": 100,
           "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard medium hot",
-          "quantity": 4,
-          "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -8503,17 +8356,24 @@
       "flavorProfile": "Soft, mild Matjes herring in a cool, creamy sauce that is gently sweet and sour, with crisp apple, sharp onion and dill.",
       "healthBenefit": "Herring is one of the richest sources of omega-3 fats and vitamin D, and the apple and onion add freshness; the cream makes it rich and the cured fish is salty.",
       "overallTier": "strong",
-      "components": [],
-      "ingredients": [
+      "components": [
         {
-          "notInDatabase": true,
-          "name": "Matjes herring fillets (mild-cured young herring)",
-          "contains": "fish",
-          "quantity": 400,
-          "unit": "g",
-          "cutPrep": "8 fillets",
-          "prepNote": null
+          "recipeId": "curated_de_base_mittelscharfer_senf",
+          "servings": 0.667,
+          "note": "2 tsp"
         },
+        {
+          "recipeId": "curated_sauce_curry_powder",
+          "servings": 0.083,
+          "note": "0.125 tsp, a pinch"
+        },
+        {
+          "recipeId": "curated_de_base_matjes",
+          "servings": 8,
+          "note": "400 g, 8 fillets"
+        }
+      ],
+      "ingredients": [
         {
           "category": "Fruit",
           "baseName": "Apple",
@@ -8561,15 +8421,6 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Mustard medium hot",
-          "quantity": 2,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Wine vinegar",
           "quantity": 2,
           "unit": "tsp",
@@ -8583,15 +8434,6 @@
           "quantity": 0.5,
           "unit": "tsp",
           "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, curry powder",
-          "quantity": 0.125,
-          "unit": "tsp",
-          "cutPrep": "a pinch",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -8727,11 +8569,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -8825,6 +8667,11 @@
           "recipeId": "curated_de_base_gewurzgurken",
           "servings": 2,
           "note": "in thin lengthwise strips"
+        },
+        {
+          "recipeId": "curated_de_base_mittelscharfer_senf",
+          "servings": 1,
+          "note": "1 tbsp, medium hot, optional"
         }
       ],
       "ingredients": [
@@ -8839,21 +8686,12 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Mustard medium hot",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": "medium hot, optional",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 8,
-          "unit": "each",
+          "quantity": 1.2,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "8 bay leaves"
         },
         {
           "category": "Herbs",
@@ -9047,7 +8885,13 @@
       "flavorProfile": "Flaky white fish in a light, crisp, golden beer batter, seasoned with mustard and lemon, served hot with potato salad.",
       "healthBenefit": "Redfish gives lean protein, vitamin B12 and selenium; frying in batter makes it richer, so a vegetable side helps balance the plate.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_de_base_mittelscharfer_senf",
+          "servings": 1,
+          "note": "3 tsp"
+        }
+      ],
       "ingredients": [
         {
           "category": "Meat",
@@ -9080,15 +8924,6 @@
           "category": "Bev",
           "baseName": "Lemon Juice",
           "quantity": 2,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard medium hot",
-          "quantity": 3,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -9214,13 +9049,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Lemon",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "1 juiced, 1 in wedges",
+          "quantity": 48,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of 1 lemon; 1 more lemon in wedges to serve is not counted"
         },
         {
           "category": "Herbs",
@@ -9319,6 +9154,21 @@
           "recipeId": "curated_de_base_butterschmalz",
           "servings": 3,
           "note": "3 tbsp, for frying"
+        },
+        {
+          "recipeId": "curated_de_kaiserbrotchen",
+          "servings": 3,
+          "note": "3 each, stale, soaked in 125 ml water and squeezed"
+        },
+        {
+          "recipeId": "curated_de_base_semmelbrosel",
+          "servings": 0.667,
+          "note": "20 g"
+        },
+        {
+          "recipeId": "curated_sauce_curry_powder",
+          "servings": 0.083,
+          "note": "0.125 tsp, a pinch"
         }
       ],
       "ingredients": [
@@ -9346,15 +9196,6 @@
           "quantity": 50,
           "unit": "g",
           "cutPrep": "small North Sea shrimp, peeled, chopped",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Baked",
-          "baseName": "Rundstykke, fint, med vann, hjemmebakt",
-          "quantity": 3,
-          "unit": "each",
-          "cutPrep": "stale, soaked in 125 ml water and squeezed",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -9404,29 +9245,11 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "fine dry breadcrumbs (Semmelbrösel)",
-          "contains": "gluten",
-          "quantity": 20,
-          "unit": "g",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
           "category": "Herbs",
           "baseName": "Spices, nutmeg, ground",
           "quantity": 0.125,
           "unit": "tsp",
           "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, curry powder",
-          "quantity": 0.125,
-          "unit": "tsp",
-          "cutPrep": "a pinch",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -9515,6 +9338,11 @@
           "recipeId": "curated_de_base_rinderbruhe",
           "servings": 1,
           "note": "about 250 ml, for the sauce"
+        },
+        {
+          "recipeId": "curated_de_base_mittelscharfer_senf",
+          "servings": 2,
+          "note": "2 tbsp"
         }
       ],
       "ingredients": [
@@ -9618,15 +9446,6 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Mustard medium hot",
-          "quantity": 2,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
           "quantity": 0.25,
@@ -9687,18 +9506,14 @@
           "recipeId": "curated_de_base_gewurzgurken",
           "servings": 4,
           "note": "finely diced"
+        },
+        {
+          "recipeId": "curated_de_base_matjes",
+          "servings": 6,
+          "note": "300 g, 6 fillets"
         }
       ],
       "ingredients": [
-        {
-          "notInDatabase": true,
-          "name": "Matjes herring fillets (mild-cured young herring)",
-          "contains": "fish",
-          "quantity": 300,
-          "unit": "g",
-          "cutPrep": "6 fillets",
-          "prepNote": null
-        },
         {
           "category": "Fruit",
           "baseName": "Apple",

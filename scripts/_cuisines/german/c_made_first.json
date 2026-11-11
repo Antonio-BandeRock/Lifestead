@@ -1,0 +1,1209 @@
+{
+  "recipes": [
+    {
+      "id": "curated_de_base_mittelscharfer_senf",
+      "name": "Mittelscharfer Senf (Medium Hot Mustard)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Germany",
+      "servings": 18,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Smooth and tangy with a moderate heat, a little sweetness and a clean vinegar edge.",
+      "healthBenefit": "Mustard seed brings selenium, and a spoonful carries little fat or sugar.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Herbs",
+          "baseName": "Spices, mustard seed, yellow",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "coarsely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Mustard powder",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 100,
+          "unit": "ml",
+          "cutPrep": "cold",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Distilled Vinegar (White)",
+          "quantity": 80,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "Branntweinessig"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tsp"
+        }
+      ],
+      "instructions": [
+        "Stir the ground seed and mustard powder with the cold water and leave 15 minutes for the heat to develop.",
+        "Add the vinegar, sugar and salt and blend until smooth.",
+        "Jar and leave 2 days in the fridge before using; it keeps for months."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Selenium",
+          "note": "From the mustard seed."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 130 mg per tablespoon."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (German): Senf",
+          "url": "https://de.wikipedia.org/wiki/Senf"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_de_base_semmelbrosel",
+      "name": "Semmelbrösel (Dry Breadcrumbs)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Germany and Austria",
+      "servings": 17,
+      "servingSizeAmount": 0.25,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Fine, plain and toasty, from white rolls.",
+      "healthBenefit": "Made from rolls at home, with nothing added.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_de_kaiserbrotchen",
+          "servings": 8,
+          "note": "all 8 rolls, a few days old, dried"
+        }
+      ],
+      "ingredients": [],
+      "instructions": [
+        "Slice the stale rolls and dry them in a 120 C (250 F) oven for about 1 hour, until crisp.",
+        "Cool and grind fine, then sift. Keep in a closed jar for a month."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "About 22 g per quarter cup."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Bread crumbs",
+          "url": "https://en.wikipedia.org/wiki/Bread_crumbs"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_de_base_lebkuchengewurz",
+      "name": "Lebkuchengewürz (Gingerbread Spice)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Germany",
+      "servings": 11,
+      "servingSizeAmount": 0.5,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Sweet, warm and fragrant, led by cinnamon and clove.",
+      "healthBenefit": "Single spices with no sugar or fillers.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, coriander seed",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cardamom, ground",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, ginger, ground",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, anise seed",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, mace, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mix the ground spices well.",
+        "Keep in a closed jar away from light and use within 3 months."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Manganese",
+          "note": "Cinnamon and cloves are rich in manganese for their weight."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (German): Lebkuchengewürz",
+          "url": "https://de.wikipedia.org/wiki/Lebkuchengew%C3%BCrz"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_de_base_aachener_printen",
+      "name": "Aachener Printen (Spiced Gingerbread)",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Aachen",
+      "servings": 32,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Hard, deeply spiced and dark, with a molasses sweetness and crunchy sugar.",
+      "healthBenefit": "Molasses brings iron, calcium and potassium, though these are still sweet biscuits.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_dessert_candied_orange_peel",
+          "servings": 3,
+          "note": "30 g, finely chopped"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Sweets",
+          "baseName": "Blackstrap Molasses (Pure)",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "Rübenkraut (beet syrup) is traditional; the database has blackstrap molasses"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "coarse",
+          "cookingMethod": null,
+          "prepNote": "Kandis (rock sugar) is traditional"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 50,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, Type 405",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Potash (99 % potassium carbonate, E 501)",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "dissolved in 1 tbsp water",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, anise seed",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, coriander seed",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cardamom, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, ginger, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Warm the syrup, sugar and water until the sugar mostly dissolves, then cool to lukewarm.",
+        "Mix in the flour, spices, candied peel and the dissolved potash and knead to a firm dough. Rest it overnight.",
+        "Roll 1 cm thick, cut into bars about 3 by 8 cm and bake at 190 C (375 F) for 12 to 15 minutes.",
+        "Cool and keep in a tin; they soften a little with time."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Iron",
+          "note": "Blackstrap molasses is rich in iron."
+        },
+        {
+          "nutrient": "Sugar",
+          "note": "About 9 g per bar."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Aachener Printen",
+          "url": "https://en.wikipedia.org/wiki/Aachener_Printen"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_de_base_rote_bete_eingelegt",
+      "name": "Rote Bete, eingelegt (Pickled Beets)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Germany",
+      "servings": 22,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Sweet, sour and earthy, with clove and allspice.",
+      "healthBenefit": "Beets bring folate and nitrate; the brine adds some sugar.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Beetroot",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "boiled in their skins until tender, peeled and sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Wine vinegar",
+          "quantity": 250,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 250,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2 tsp taken up by the beets, the rest stays in the brine"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "3 whole",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "5 whole berries",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2 bay leaves"
+        }
+      ],
+      "instructions": [
+        "Bring the vinegar, water, sugar, salt, cloves, allspice and bay to a boil.",
+        "Layer the beets and onion in clean jars, pour the hot brine over to cover and close.",
+        "Keep in the fridge and wait 2 days before eating. One serving is 50 g of beets."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Folate",
+          "note": "Beets are a good source of folate."
+        },
+        {
+          "nutrient": "Sugar",
+          "note": "The brine sugar is counted in full."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Beetroot",
+          "url": "https://en.wikipedia.org/wiki/Beetroot"
+        }
+      ],
+      "curationNote": "The brine sugar is counted in full, though some of it stays in the jar."
+    },
+    {
+      "id": "curated_de_base_mettenden",
+      "name": "Mettenden (Smoked Pork Sausages)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Northern and western Germany",
+      "servings": 10,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Coarse, smoky pork sausage with pepper, mace and a little garlic.",
+      "healthBenefit": "Pork brings protein, B vitamins and zinc.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 700,
+          "unit": "g",
+          "cutPrep": "coarsely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "skin removed, coarsely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Nitrite curing salt",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, mace, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, coriander seed",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork, offal and by-products, small intestine",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "soaked and rinsed",
+          "cookingMethod": null,
+          "prepNote": "about 2 m for 1 kg of filling"
+        }
+      ],
+      "instructions": [
+        "Mix the meat with the curing salt and spices until it binds. Keep everything cold.",
+        "Stuff into the hog casing and tie into 10 links of about 100 g.",
+        "Hang overnight in the fridge, then cold smoke 2 to 3 days over beech. They keep 2 weeks in the fridge and are heated in the soup or stew."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 16 g per sausage."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 800 mg per sausage."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Mettwurst",
+          "url": "https://en.wikipedia.org/wiki/Mettwurst"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_de_base_pinkel",
+      "name": "Pinkel (Smoked Oat and Pork Sausage)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Bremen and Oldenburg",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Soft, smoky and peppery, with oats soaking up the pork fat and onion.",
+      "healthBenefit": "Oat groats bring fibre, manganese and some protein; the rest is pork fat.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Grain",
+          "baseName": "Oat groats",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "coarse groats",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Back Fat (Raw)",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "finely diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "skin removed, finely diced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 14,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork, offal and by-products, small intestine",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "soaked and rinsed",
+          "cookingMethod": null,
+          "prepNote": "about 2 m for 1 kg of filling"
+        }
+      ],
+      "instructions": [
+        "Soak the oat groats in cold water 2 hours and drain well.",
+        "Mix with the fat, belly, onion, salt, pepper, allspice and nutmeg.",
+        "Stuff loosely into the hog casing (the oats swell) and tie into 8 links. Cold smoke 2 days over beech. Simmer them in the kale, never boil, or they burst."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fibre",
+          "note": "From the oat groats."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "From the back fat and belly."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Pinkel",
+          "url": "https://en.wikipedia.org/wiki/Pinkel"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_de_base_kasseler",
+      "name": "Kasseler (Cured Smoked Pork Loin)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Germany",
+      "servings": 37,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Pink, mildly salty and smoky, with bay and allspice.",
+      "healthBenefit": "Pork loin is lean, with protein, thiamine and selenium.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Loin (Raw)",
+          "quantity": 2000,
+          "unit": "g",
+          "cutPrep": "bone-in or boneless, or cut into chops of about 200 g",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Nitrite curing salt",
+          "quantity": 36,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the part the meat keeps; the steps give the full amount for the cure"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "juniper berries",
+          "contains": "none",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring 2 litres of water to the boil with 160 g nitrite curing salt, the sugar, bay, peppercorns, allspice and juniper. Cool completely.",
+        "Inject a little of the liquid along the bone, then put the loin in the rest, weighed down, in the fridge 3 days.",
+        "Rinse, dry 2 hours and hot smoke at 60 to 70 C (140 to 160 F) over beech until the centre reaches 60 C. It keeps a week in the fridge. One serving is 50 g; a chop is 4 servings."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 11 g per 50 g."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 700 mg per 50 g."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Kassler",
+          "url": "https://en.wikipedia.org/wiki/Kassler"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_de_base_eisbein",
+      "name": "Eisbein (Cured Pork Hock)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Berlin and northern Germany",
+      "servings": 39,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Mildly salty pork hock with soft rind and juniper, bay and clove.",
+      "healthBenefit": "Hock and rind bring protein and collagen; the rind is fat.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Gris lägg putsad rå u. svål",
+          "quantity": 1700,
+          "unit": "g",
+          "cutPrep": "two hocks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Gris svål rå",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "the rind left on the hocks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Nitrite curing salt",
+          "quantity": 36,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the part the meat keeps; the steps give the full amount for the cure"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "juniper berries",
+          "contains": "none",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring 2.5 litres of water to the boil with 200 g nitrite curing salt, the bay, peppercorns, allspice, cloves and juniper. Cool completely.",
+        "Put the hocks in the cold liquid, weigh them down and keep them in the fridge 5 to 7 days.",
+        "Rinse and cook within 3 days. One serving is 50 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 9 g per 50 g."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 700 mg per 50 g."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Eisbein",
+          "url": "https://en.wikipedia.org/wiki/Eisbein"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_de_base_matjes",
+      "name": "Matjes (Mild-Cured Herring)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Northern Germany and the Netherlands",
+      "servings": 20,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "fillet",
+      "flavorProfile": "Soft, mild and buttery herring with a light salt and a hint of allspice.",
+      "healthBenefit": "Herring is rich in omega-3 fats, vitamin D and B12.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Sill rå",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "very fresh fillets, skinned, frozen 4 days at -20 C first",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 27,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the part the fish keeps; the steps give the full amount for the cure"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, coriander seed",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Thaw the fillets in the fridge. Dissolve 120 g salt and the sugar in 1 litre of cold water and add the bay, allspice, peppercorns and coriander.",
+        "Lay the fillets in the liquid, cover and keep in the fridge 5 days.",
+        "Lift out and pat dry. They keep a week in the fridge under oil. One serving is one fillet of about 50 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Omega-3 fats",
+          "note": "About 1 g per fillet."
+        },
+        {
+          "nutrient": "Vitamin D",
+          "note": "Herring is one of the richest foods for it."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 500 mg per fillet."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (German): Matjes",
+          "url": "https://de.wikipedia.org/wiki/Matjes"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_de_base_fleischwurst",
+      "name": "Fleischwurst (Lyoner)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Preserves",
+      "region": "Germany",
+      "servings": 10,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Mild, smooth and lightly spiced, with garlic.",
+      "healthBenefit": "Pork protein, with a good deal of fat and salt.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "lean, very cold, cubed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Back Fat (Raw)",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "very cold, cubed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 150,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "as crushed ice"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Nitrite curing salt",
+          "quantity": 18,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, white, ground",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, mace, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, coriander seed",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cardamom, ground",
+          "quantity": 0.3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Paprika",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "pounded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Beef, offal and by-products, small intestine",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "beef runner casing, soaked and rinsed",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Grind the lean pork and fat finely while very cold. Process with the curing salt and half the ice until sticky, then add the rest of the ice, the spices and garlic and process to a smooth, cold paste, below 12 C (54 F).",
+        "Stuff into the casing, tie into rings and rest 1 hour.",
+        "Poach at 75 C (167 F) for about 1 hour, until the centre reaches 70 C (158 F). Cool in cold water. It makes about 1 kg."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 12 g protein per 100 g serving."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 700 mg sodium per 100 g serving."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Fleischwurst",
+          "url": "https://en.wikipedia.org/wiki/Fleischwurst"
+        }
+      ],
+      "curationNote": "Curing salt is table salt with about 0.4 to 0.5% sodium nitrite. One serving is 100 g, from about 1 kg."
+    }
+  ]
+}

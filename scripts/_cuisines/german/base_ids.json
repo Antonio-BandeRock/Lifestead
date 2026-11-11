@@ -125,6 +125,61 @@
       "id": "curated_de_base_weinkraut",
       "name": "Weinkraut (Sauerkraut Braised in Wine)",
       "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_mittelscharfer_senf",
+      "name": "Mittelscharfer Senf (Medium Hot Mustard)",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_semmelbrosel",
+      "name": "Semmelbrösel (Dry Breadcrumbs)",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_lebkuchengewurz",
+      "name": "Lebkuchengewürz (Gingerbread Spice)",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_aachener_printen",
+      "name": "Aachener Printen (Spiced Gingerbread)",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_rote_bete_eingelegt",
+      "name": "Rote Bete, eingelegt (Pickled Beets)",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_mettenden",
+      "name": "Mettenden (Smoked Pork Sausages)",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_pinkel",
+      "name": "Pinkel (Smoked Oat and Pork Sausage)",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_kasseler",
+      "name": "Kasseler (Cured Smoked Pork Loin)",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_eisbein",
+      "name": "Eisbein (Cured Pork Hock)",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_matjes",
+      "name": "Matjes (Mild-Cured Herring)",
+      "shelf": "Bases: Pantry & Preserves"
+    },
+    {
+      "id": "curated_de_base_fleischwurst",
+      "name": "Fleischwurst (Lyoner)",
+      "shelf": "Bases: Pantry & Preserves"
     }
   ]
 }

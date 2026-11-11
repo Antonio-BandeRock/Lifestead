@@ -126,6 +126,23 @@ const GLUTEN_INGREDIENTS = new Set([
   'Soy sauce made from soy and wheat (shoyu)',
   'Wheat flour, white, tortilla mix, enriched',
   'Whole-Grain Wheat Flour',
+  // 2026-11-10: Chinese and Thai pantry rows whose names do not say wheat.
+  // Pixian doubanjiang is fermented with wheat flour, Zhenjiang black vinegar
+  // with wheat and barley, yellow soybean paste (tao jiao, huang jiang) and
+  // sweet bean sauce with wheat flour, and maltose syrup is made with malt.
+  // Wonton and spring roll wrappers and wafer rounds are wheat dough.
+  'Hot seasoning, Doubanjiang',
+  'Vinegar, black rice vinegar',
+  'Soybean Paste',
+  'Seasoning sauce, Tian Mian Jiang (sweet soybean paste)',
+  'Maltose',
+  'Wonton wrapper (egg roll wrapper)',
+  'Round baking wafers',
+  // Worcestershire: the UK bottle is made with barley malt vinegar, the US
+  // one with distilled vinegar. A recipe cannot say which bottle is used, so
+  // it is read the cautious way.
+  'Sauce, Worcestershire, commercial',
+  'Worcestersaus',
 ]);
 
 const PROTEIN_LEGUMES = new Set([
@@ -151,7 +168,7 @@ const NIGHTSHADES = new Set(['Tomato', 'Potato', 'Eggplant', 'Red Bell Pepper', 
 // pepper, tomato paste and the red potato, which the Mexican recipes made
 // common. Black pepper is a different plant and sweet potato is not a
 // nightshade.
-const NIGHTSHADE_NAME = /(tomato|tomatillo|potato|eggplant|bell pepper|chile|chili|cayenne|pimiento)|^Pepper, (ancho|jalapeno|pasilla|serrano|poblano|chipotle|guajillo)|^Peppers, hot/i;
+const NIGHTSHADE_NAME = /\b(tomato|tomatillo|potato|eggplant|bell pepper|chile|chili|cayenne|pimiento)\b|^Pepper, (ancho|jalapeno|pasilla|serrano|poblano|chipotle|guajillo)|^Peppers, hot/i;
 const NOT_NIGHTSHADE_NAME = /sweet potato|black/i;
 
 function hasNightshadeName(ingredients) {
@@ -191,7 +208,7 @@ function hasAnyFromSet(ingredients, names) {
 // butter beans, sesame butter) named as exceptions. Checked against every
 // visible food in the database on 2026-10-29.
 const FLESH_NAME =
-  /\b(beef|pork|lamb|mutton|goat|veal|venison|bison|buffalo|chicken|turkey|duck|goose|quail|rabbit|bacon|ham|sausages?|chorizo|salami|prosciutto|pancetta|lard|tallow|suet|gelatine?|bouillon|broth|stock|consomm[eé]|dashi|anchov\w*|fish|salmon|tuna|cod|shrimps?|prawns?|crab|lobster|oysters?|clams?|mussels?|squid|octopus|scallops?|sardines?|mackerel|caviar|roe|liver|tripe|oxtail|meat|nam pla)\b/i;
+  /\b(beef|pork|lamb|mutton|goat|veal|venison|bison|buffalo|chicken|turkey|duck|goose|quail|rabbit|bacon|ham|sausages?|chorizo|salami|prosciutto|pancetta|lard|tallow|suet|gelatine?|bouillon|broth|stock|consomm[eé]|dashi|anchov\w*|fish|salmon|tuna|cod|shrimps?|prawns?|crab|lobster|oysters?|clams?|mussels?|squid|octopus|scallops?|sardines?|mackerel|caviar|roe|liver|tripe|oxtail|meat|nam pla|worcestershire)\b/i;
 const NOT_FLESH_NAME =
   /\beggs?\b|vegetable|vegan|vegetarian|plant|meat (substitute|extender|alternative)|alternativ|imitation|meatless|coconut|lettuce|squash|green caviar|u\. gelatin|seitan|tofu|mushroom/i;
 const DAIRY_NAME = /\b(milk|cream|cheese|butter|yogh?urt|ghee|whey|casein|kefir|curds?|quark|skyr|paneer|ricotta|mozzarella|parmesan)\b/i;
@@ -214,15 +231,24 @@ function withoutNegations(name) {
 
 function isFlesh(i) {
   if (i.category === 'Meat') return true;
-  if (['Mushroom', 'Algae', 'Veg'].includes(i.category)) return false;
+  // Dairy holds milks, cheeses and eggs, never flesh: "Cheese, goat" is not goat.
+  if (['Mushroom', 'Algae', 'Veg', 'Dairy'].includes(i.category)) return false;
   const name = withoutNegations(i.baseName);
   return FLESH_NAME.test(name) && !NOT_FLESH_NAME.test(name);
 }
+
+// 2026-11-10: milk in the Norwegian, Swedish and German rows (Kondensert
+// melk, Helmelk, Mjölkchoklad, Milch), inside compound words, so no word
+// boundary. Coconut milk and the rows that say they are made without milk
+// are named as exceptions.
+const NORDIC_MILK_NAME = /melk|mjölk|milch/i;
+const NOT_NORDIC_MILK_NAME = /kokos|mjölkfri|milchfrei|uten (salt og )?melk|u\. mjölk|morsmelk|modersmjölk|bröstmjölk/i;
 
 function isDairy(i) {
   if (i.category === 'Dairy') return !EGG_NAME.test(i.baseName) || DAIRY_NAME.test(i.baseName);
   if (i.category === 'Mushroom') return false;
   const name = withoutNegations(i.baseName);
+  if (NORDIC_MILK_NAME.test(name) && !NOT_NORDIC_MILK_NAME.test(name)) return true;
   return DAIRY_NAME.test(name) && !NOT_DAIRY_NAME.test(name);
 }
 

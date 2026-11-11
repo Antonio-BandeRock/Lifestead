@@ -11,12 +11,14 @@
 // medium apple") vary far too much by cut, ripeness, and packing for a
 // single constant to be honest -- USDA's own household-measure gram
 // weights for those are empirically weighed per food, not computed from a
-// formula, and this app doesn't have that data yet (a real future import
-// target: USDA FoodData Central's food_portion table). Guessing a
-// category-average density for solids would be exactly the kind of
-// fabricated, uncited figure this project has deliberately avoided
-// everywhere else -- so that case returns an explicit "not supported"
-// result instead of a silently wrong number.
+// formula. Since 2026-11-10 the reference database carries those weighed
+// figures for the foods recipes measure by spoon or cup (food_volume_weights,
+// from USDA FoodData Central SR Legacy food_portion), passed in as
+// options.gramsPerMl. Guessing a category-average density for solids would
+// be exactly the kind of fabricated, uncited figure this project has
+// deliberately avoided everywhere else -- so a solid with no weighed figure
+// still returns an explicit "not supported" result instead of a silently
+// wrong number.
 
 export type MassUnit = 'g' | 'kg' | 'oz' | 'lb';
 // pint/quart/gallon added 2026-08-02, alongside the liquid-builders' own
@@ -119,6 +121,9 @@ export function saltGramsKeptInDish(grams: number, note: string | null | undefin
   if (/^plus (more|a handful)\b/.test(text)) return grams;
   if (/\bdissolved in the brine\b/.test(text)) return grams;
   if (/\bto draw out the water\b/.test(text)) return grams;
+  // "the share taken up; the brine holds 15 g": the line already lists only
+  // what the food keeps.
+  if (/^the share taken up\b/.test(text)) return grams;
   // "1/2 tsp to season the chicken, the rest for the brine"
   const stated = text.match(/^(\d+(?:\/\d+)?|\d*\.\d+)\s*(tsp|tbsp)\b[^,]*,\s*the rest\b/);
   if (stated) {
@@ -175,13 +180,18 @@ export type GramConversionResult =
 export function convertToGrams(
   amount: number,
   unit: MeasurementUnit,
-  options: { densityClass?: DensityClass; foodCategory?: string } = {},
+  options: { densityClass?: DensityClass; foodCategory?: string; gramsPerMl?: number } = {},
 ): GramConversionResult {
   if (isMassUnit(unit)) {
     return { ok: true, grams: amount * MASS_TO_GRAMS[unit] };
   }
 
   if (isVolumeUnit(unit)) {
+    // A food's own USDA household-measure weight (food_volume_weights, read by
+    // conversionOptionsFor in lib/db.ts) wins over a category constant.
+    if (!options.densityClass && options.gramsPerMl && options.gramsPerMl > 0) {
+      return { ok: true, grams: amount * VOLUME_TO_ML[unit] * options.gramsPerMl };
+    }
     const densityClass = options.densityClass
       ?? (options.foodCategory ? CATEGORY_DENSITY_CLASS[options.foodCategory] : undefined);
 

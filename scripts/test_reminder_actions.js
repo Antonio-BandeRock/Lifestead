@@ -226,7 +226,7 @@ const said = [];
 for (const q of ['howBad', 'worse', 'what', 'why']) said.push(FLARE_QUESTION_TEXT[q].title, FLARE_QUESTION_TEXT[q].body);
 said.push(FLARE_ASK_TITLE);
 for (const kind of ['dose', 'hydration', 'meal', 'garden', 'reminder', 'upkeep', 'compost', 'checkin', 'cropPrep', 'cropSow']) said.push(answerLine(kind));
-const sentenceForbidden = /well done|good job|keep it up|great|you should|real|genuine|own|[—–]| -- /i;
+const sentenceForbidden = /well done|good job|keep it up|great|you should|\breal\b|\bgenuine|\bown\b|[—–]| -- /i;
 for (const line of said) check(`"${line}" has no praise, dashes or filler`, typeof line === 'string' && !sentenceForbidden.test(line));
 
 // Button wording follows the app's writing rules.

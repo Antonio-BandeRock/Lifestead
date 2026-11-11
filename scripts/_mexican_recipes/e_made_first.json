@@ -1,0 +1,1236 @@
+{
+  "recipes": [
+    {
+      "id": "curated_mx_base_pan_de_yema",
+      "name": "Pan de Yema (Oaxacan Egg Bread)",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Beans, Rice & Pantry",
+      "region": "Oaxaca",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bun",
+      "flavorProfile": "Soft, golden and lightly sweet, with a hint of cinnamon and sesame on top.",
+      "healthBenefit": "Egg yolks bring choline and vitamin A; it is an enriched bread with lard and sugar.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Grains, wheat flour, white, bread flour",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg Yolk (Raw)",
+          "quantity": 144,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "8 yolks"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "soft",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baker's yeast",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": "lukewarm",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Sesame seed",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "to sprinkle",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Dissolve the yeast in the water. Mix with the flour, sugar, salt, cinnamon and yolks and knead 10 minutes, then knead in the lard until smooth and elastic.",
+        "Let rise until doubled, about 2 hours.",
+        "Shape 8 round buns, let rise 1 hour, brush with water, sprinkle with sesame and bake at 180 C (350 F) for 20 to 25 minutes."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Choline",
+          "note": "From the egg yolks."
+        },
+        {
+          "nutrient": "Sugar",
+          "note": "About 12 g per bun."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia, Oaxacan cuisine",
+          "url": "https://en.wikipedia.org/wiki/Oaxacan_cuisine"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_mx_base_chiles_gueros_en_escabeche",
+      "name": "Chiles Güeros en Escabeche",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Beans, Rice & Pantry",
+      "region": "Mexico",
+      "servings": 14,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Tangy, mildly hot and herby, with carrot and onion in the brine.",
+      "healthBenefit": "Peppers and carrot bring vitamin C and carotenes in a pickle with little fat.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Hungarian Pepper",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "whole, a slit cut in each",
+          "cookingMethod": null,
+          "prepNote": "güero chilies; the database has Hungarian wax pepper"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "thickly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "sliced on the diagonal",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "4 cloves, whole",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Olive Oil (Extra Virgin)",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, cider",
+          "quantity": 250,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 250,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tsp taken up by the vegetables, the rest stays in the brine"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.45,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "3 bay leaves"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "Mexican, dried",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "whole peppercorns",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Fry the chilies, onion, carrot and garlic in the oil for 5 minutes, until the chilies blister.",
+        "Add the vinegar, water, salt, sugar, herbs and peppercorns and bring to a boil, then simmer 5 minutes.",
+        "Jar with the liquid, cool and keep in the fridge. Best after a day. One serving is 50 g of vegetables."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "From the peppers."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "From the carrot."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Escabeche",
+          "url": "https://en.wikipedia.org/wiki/Escabeche"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_mx_base_pan_molido",
+      "name": "Pan Molido (Dry Breadcrumbs)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Beans, Rice & Pantry",
+      "region": "Mexico",
+      "servings": 17,
+      "servingSizeAmount": 0.25,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Plain, toasty and fine.",
+      "healthBenefit": "Made from bolillos at home, with nothing added.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_mx_base_bolillo",
+          "servings": 10,
+          "note": "all 10 rolls, a few days old, dried"
+        }
+      ],
+      "ingredients": [],
+      "instructions": [
+        "Slice the stale bolillos and dry them in a 120 C (250 F) oven for about 1 hour, until crisp.",
+        "Cool and grind fine. Keep in a closed jar for a month."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "About 22 g per quarter cup."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Bread crumbs",
+          "url": "https://en.wikipedia.org/wiki/Bread_crumbs"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_mx_base_chocolate_de_mesa",
+      "name": "Chocolate de Mesa (Mexican Table Chocolate)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Beans, Rice & Pantry",
+      "region": "Mexico",
+      "servings": 17,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Grainy, sweet and cinnamon-scented, made for whisking into hot drinks and mole.",
+      "healthBenefit": "Cocoa brings magnesium, iron and flavanols; the sugar is high, so it is used by the piece.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Sweets",
+          "baseName": "Cocoa mass",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "from roasted, shelled cacao beans",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "Ceylon cinnamon (canela)"
+        }
+      ],
+      "instructions": [
+        "Grind the warm cocoa on a heated metate or in a food processor until it melts to a paste.",
+        "Grind in the sugar and cinnamon; it stays grainy.",
+        "Press into tablets and let them set. One piece is 30 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Magnesium",
+          "note": "From the cocoa."
+        },
+        {
+          "nutrient": "Sugar",
+          "note": "About 12 g per piece."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Metate",
+          "url": "https://en.wikipedia.org/wiki/Metate"
+        },
+        {
+          "source": "Wikipedia: Champurrado",
+          "url": "https://en.wikipedia.org/wiki/Champurrado"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_mx_base_chocolate_oaxaqueno",
+      "name": "Chocolate Oaxaqueño (Oaxacan Chocolate)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Beans, Rice & Pantry",
+      "region": "Oaxaca",
+      "servings": 19,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Grainy, sweet chocolate with toasted almond and cinnamon.",
+      "healthBenefit": "Cocoa brings magnesium and iron, and almonds add vitamin E.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Sweets",
+          "baseName": "Cocoa mass",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "from roasted, shelled cacao beans",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Almonds",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "toasted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "Ceylon cinnamon (canela)"
+        }
+      ],
+      "instructions": [
+        "Grind the warm cocoa and toasted almonds on a heated metate or in a food processor until they melt to a paste.",
+        "Grind in the sugar and cinnamon.",
+        "Press into tablets and let them set. One piece is 30 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Magnesium",
+          "note": "From the cocoa and almonds."
+        },
+        {
+          "nutrient": "Sugar",
+          "note": "About 11 g per piece."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Oaxacan cuisine",
+          "url": "https://en.wikipedia.org/wiki/Oaxacan_cuisine"
+        },
+        {
+          "source": "Wikipedia: Metate",
+          "url": "https://en.wikipedia.org/wiki/Metate"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_mx_base_chicharron_prensado",
+      "name": "Chicharrón Prensado (Pressed Pork Cracklings in Chile)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Beans, Rice & Pantry",
+      "region": "Central Mexico",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Rich, chewy pressed pork in a dark, mild chile sauce with garlic and cumin.",
+      "healthBenefit": "Pork and rind bring protein and collagen; pasilla adds vitamin A.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Gris svål rå",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": "with some fat, in pieces",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "in small pieces",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the fat the pieces keep after frying"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, pasilla",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "dried, stemmed and seeded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Fry the rind and pork pieces slowly in their fat until browned and crisp. Pour off all but a spoonful of the fat.",
+        "Toast and soak the pasillas, then blend with the garlic, onion, cumin, oregano, cloves, salt and 250 ml of their soaking water.",
+        "Simmer the cracklings in the sauce until it is absorbed, then press into a mould under a weight overnight. One serving is 50 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 12 g per 50 g."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "From the rind and lard."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (Spanish): Chicharrón",
+          "url": "https://es.wikipedia.org/wiki/Chicharr%C3%B3n"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_mx_base_asiento",
+      "name": "Asiento (Unrefined Pork Lard)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Beans, Rice & Pantry",
+      "region": "Oaxaca",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Toasty, savoury pork fat with browned crackling bits.",
+      "healthBenefit": "Almost all fat; spread thin on a tlayuda it carries flavour.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the fat left at the bottom of the chicharrón pot"
+        },
+        {
+          "category": "Meat",
+          "baseName": "Gris svål rå",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the browned bits that settle with it"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "When frying chicharrón, pour off the clear fat and keep the cloudy fat and browned bits at the bottom of the pot.",
+        "Stir in the salt and cool. Keep in the fridge up to a month.",
+        "One serving is 20 g, spread on a tlayuda or tortilla."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Saturated fat",
+          "note": "About 7 g per 20 g."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Tlayuda",
+          "url": "https://en.wikipedia.org/wiki/Tlayuda"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_mx_base_salchichas_viena",
+      "name": "Salchichas tipo Viena (Vienna Sausages)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Beans, Rice & Pantry",
+      "region": "Mexico",
+      "servings": 23,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Fine, mild, lightly smoked pork and beef sausages.",
+      "healthBenefit": "Pork and beef bring protein, iron, zinc and B12, with no fillers.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "finely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Beef Chuck (Raw)",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "finely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Back Fat (Raw)",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "finely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 200,
+          "unit": "ml",
+          "cutPrep": "as crushed ice",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Nitrite curing salt",
+          "quantity": 18,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, white, ground",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, coriander seed",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Paprika",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Garlic powder",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Onion powder",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork, offal and by-products, small intestine",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "soaked and rinsed",
+          "cookingMethod": null,
+          "prepNote": "about 10 m for 1 kg of filling; in place of natural sheep casing, which the database does not hold"
+        }
+      ],
+      "instructions": [
+        "Blend the meat and curing salt, adding the ice a little at a time, then the fat and spices, until smooth and below 12 C (54 F).",
+        "Stuff into the sheep casing and twist into links of about 50 g.",
+        "Dry 1 hour, hot smoke at 60 C (140 F) for 1 hour, then poach at 75 C (167 F) for 20 minutes and chill. Keep in the fridge up to a week."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 7 g per sausage."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 300 mg per sausage."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Vienna sausage",
+          "url": "https://en.wikipedia.org/wiki/Vienna_sausage"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_mx_base_jamon_cocido",
+      "name": "Jamón Cocido (Cooked Ham)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Beans, Rice & Pantry",
+      "region": "Mexico",
+      "servings": 54,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Mild, pink and juicy ham with clove, allspice and bay.",
+      "healthBenefit": "Pork leg is lean, with protein, thiamine, zinc and selenium.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Gris skinka ytterlår rå",
+          "quantity": 3000,
+          "unit": "g",
+          "cutPrep": "boned, skin and outer fat removed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Nitrite curing salt",
+          "quantity": 54,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the part the meat keeps; the steps give the full amount for the cure"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "quartered",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring 3 litres of water to the boil with 240 g nitrite curing salt, the sugar, bay, cloves, allspice, peppercorns, garlic and onion. Cool completely.",
+        "Inject some of the liquid into the thickest parts of the leg, then put it in the rest, weighed down, in the fridge 5 days.",
+        "Rinse, tie or press it into a tight shape and poach at 75 C (167 F) until the centre reaches 68 C (155 F), about 3 hours. Cool in the liquid, chill and slice. It keeps a week in the fridge. One serving is 50 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 10 g per 50 g."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 600 mg per 50 g."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Ham",
+          "url": "https://en.wikipedia.org/wiki/Ham"
+        },
+        {
+          "source": "Wikipedia (Spanish): Jamón cocido",
+          "url": "https://es.wikipedia.org/wiki/Jam%C3%B3n_cocido"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_mx_base_chipotles_en_adobo",
+      "name": "Chiles Chipotles en Adobo",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Beans, Rice & Pantry",
+      "region": "Central Mexico",
+      "servings": 32,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Smoky, hot, tangy and a little sweet.",
+      "healthBenefit": "Dried chillies and tomato; used a chile at a time.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "stems on, rinsed",
+          "cookingMethod": null,
+          "prepNote": "chipotles mecos or moritas, about 30; dried chillies stand in for the smoked ones"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "roasted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "roasted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "roasted",
+          "cookingMethod": null,
+          "prepNote": "about 4 cloves"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, cider",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 6 tbsp"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "grated",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 1 tsp"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2 bay leaves"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cumin seed",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 400,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Simmer the chipotles in the water 15 minutes until soft. Lift out the chiles.",
+        "Blend 2 of the chiles with the tomato, onion, garlic, vinegar, piloncillo, salt, cumin and herbs and a little of the cooking water.",
+        "Simmer the sauce with the whole chiles 30 minutes, until thick. Cool and keep in a jar in the fridge. It makes about 650 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin A",
+          "note": "Dried red chillies carry carotenoids."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 80 mg sodium per chile with its sauce."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Chipotle",
+          "url": "https://en.wikipedia.org/wiki/Chipotle"
+        }
+      ],
+      "curationNote": "No food database here lists smoked chipotle, so sun dried red chilli stands in. One serving is one chile with sauce, about 20 g."
+    },
+    {
+      "id": "curated_mx_base_longaniza",
+      "name": "Longaniza (Fresh Pork Sausage)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Beans, Rice & Pantry",
+      "region": "Mexico",
+      "servings": 10,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Garlicky, tangy and spiced, with chile.",
+      "healthBenefit": "Pork protein, with a good deal of fat and salt.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 800,
+          "unit": "g",
+          "cutPrep": "coarsely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Back Fat (Raw)",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "coarsely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "seeded, soaked and blended",
+          "cookingMethod": null,
+          "prepNote": "guajillo, about 5; dried red chilli stands in"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, ancho",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "seeded, soaked and blended",
+          "cookingMethod": null,
+          "prepNote": "about 2"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, cider",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 5 tbsp"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "pounded",
+          "cookingMethod": null,
+          "prepNote": "about 6 cloves"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 1 tbsp"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Paprika",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cumin seed",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork, offal and by-products, small intestine",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": "natural hog casing, soaked and rinsed",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Blend the soaked chiles with the vinegar, garlic and spices to a smooth paste.",
+        "Mix the paste and salt into the ground pork and fat until sticky. Rest overnight in the fridge.",
+        "Stuff loosely into the casing in one long rope and hang 1 to 2 days in the fridge to dry slightly. Fry or grill, or crumble out of the casing. It makes about 1 kg."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 15 g protein per 100 g serving."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 800 mg sodium per 100 g serving."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Longaniza",
+          "url": "https://en.wikipedia.org/wiki/Longaniza"
+        }
+      ],
+      "curationNote": "One serving is 100 g, from about 1 kg."
+    }
+  ]
+}

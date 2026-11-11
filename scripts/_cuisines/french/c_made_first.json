@@ -1,0 +1,1068 @@
+{
+  "recipes": [
+    {
+      "id": "curated_fr_base_moutarde_de_dijon",
+      "name": "Moutarde de Dijon (Dijon Mustard)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "Burgundy",
+      "servings": 20,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Smooth, sharp and strongly hot, with wine in the background.",
+      "healthBenefit": "Mustard seed brings selenium, and a spoonful flavors a sauce or dressing with little fat or sugar.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Herbs",
+          "baseName": "Spices, mustard seed, yellow",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "soaked overnight",
+          "cookingMethod": null,
+          "prepNote": "brown seed is traditional; the database has only yellow"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Mustard powder",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "White Wine",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": "dry",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Wine vinegar",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": "white",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tsp"
+        }
+      ],
+      "instructions": [
+        "Soak the mustard seed in the wine and vinegar overnight.",
+        "Blend with the mustard powder, water and salt until as smooth as you can get it, then press through a fine sieve for the classic texture.",
+        "Jar and keep in the fridge; it is very hot at first and settles after 2 days."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Selenium",
+          "note": "From the mustard seed."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 120 mg per tablespoon."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Dijon mustard",
+          "url": "https://en.wikipedia.org/wiki/Dijon_mustard"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_fr_base_herbes_de_provence",
+      "name": "Herbes de Provence",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "Provence",
+      "servings": 16,
+      "servingSizeAmount": 0.5,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Resinous and warm, led by thyme and savory with rosemary and marjoram.",
+      "healthBenefit": "Dried herbs only, no salt, so it seasons stews and vegetables without sodium.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, savory, ground",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Rosemary",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": "dried, crumbled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Marjoram Spices",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "dried",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Basil",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "dried",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Crumble the dried herbs together and mix well.",
+        "Keep in a closed jar away from light and use within 6 months."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sodium",
+          "note": "None added."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "Dried thyme is high in iron for its weight, though a teaspoon is a small amount."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Herbes de Provence",
+          "url": "https://en.wikipedia.org/wiki/Herbes_de_Provence"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_fr_base_quatre_epices",
+      "name": "Quatre-Épices (Four Spice)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "France",
+      "servings": 8,
+      "servingSizeAmount": 0.5,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Peppery and warm, with nutmeg, clove and ginger.",
+      "healthBenefit": "Single spices with no salt or fillers.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, white, ground",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "mostly white pepper",
+          "cookingMethod": null,
+          "prepNote": "some cooks use part black pepper"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, ginger, ground",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mix the ground spices well.",
+        "Keep in a closed jar away from light."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sodium",
+          "note": "None added."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Quatre épices",
+          "url": "https://en.wikipedia.org/wiki/Quatre_%C3%A9pices"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_fr_base_fondant",
+      "name": "Fondant (Pouring Icing)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "France",
+      "servings": 26,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Pure sweetness with a glossy, soft-set finish.",
+      "healthBenefit": "Sugar only; used in thin layers on choux and pastry.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 150,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Glukosesirup",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Boil the sugar, water and glucose syrup to 116 C (240 F), washing the sides of the pan with a wet brush.",
+        "Pour onto a wet marble or tray and cool to about 40 C, then work it with a scraper until it turns white and creamy.",
+        "Knead smooth, wrap and keep. To use, warm gently to body temperature with a few drops of water."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sugar",
+          "note": "About 20 g per tablespoon."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Fondant icing",
+          "url": "https://en.wikipedia.org/wiki/Fondant_icing"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_fr_base_chapelure",
+      "name": "Chapelure (Dry Breadcrumbs)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "France",
+      "servings": 17,
+      "servingSizeAmount": 0.25,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Plain, toasty and fine.",
+      "healthBenefit": "Made from bread at home, with nothing added.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_fr_pain_de_mie",
+          "servings": 16,
+          "note": "the whole loaf, dried"
+        }
+      ],
+      "ingredients": [],
+      "instructions": [
+        "Slice the stale loaf and dry the slices in a 120 C (250 F) oven for about 1 hour, until crisp right through.",
+        "Cool and grind fine in a food processor, then sift. Keep in a closed jar for a month."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Carbohydrate",
+          "note": "About 22 g per quarter cup."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Bread crumbs",
+          "url": "https://en.wikipedia.org/wiki/Bread_crumbs"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_fr_base_poitrine_salee",
+      "name": "Poitrine Salée (Salt-Cured Pork Belly)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "France",
+      "servings": 18,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Firm, salty and porky, with thyme and bay in the background.",
+      "healthBenefit": "Pork belly brings B vitamins and zinc; it is mostly fat and salt, so it seasons a dish rather than filling it.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "skin on, in one piece",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "all of it taken up by the meat"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": "crumbled",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mix the salt, sugar, pepper, thyme and bay and rub it into every side of the belly.",
+        "Seal it in a bag or covered dish and keep it in the fridge 5 days for poitrine salée, turning it each day. For demi-sel (half-salted) stop at 2 days.",
+        "Rinse, pat dry and leave uncovered on a rack in the fridge overnight. It keeps 2 weeks; cut into lardons as a recipe asks. One serving is 50 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sodium",
+          "note": "About 1,200 mg per 50 g."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "Most of the weight is fat."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (French): Petit salé",
+          "url": "https://fr.wikipedia.org/wiki/Petit_sal%C3%A9"
+        },
+        {
+          "source": "Wikipedia: Salt pork",
+          "url": "https://en.wikipedia.org/wiki/Salt_pork"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_fr_base_palette_demi_sel",
+      "name": "Palette Demi-sel (Half-Salted Pork Shoulder)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "France",
+      "servings": 38,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Mildly salted pork shoulder, tender after long cooking, with clove and thyme.",
+      "healthBenefit": "Pork shoulder brings protein, B vitamins and zinc.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 2000,
+          "unit": "g",
+          "cutPrep": "in one piece",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 36,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the part the meat keeps; the steps give the full amount for the cure"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring 3 litres of water to the boil with 300 g salt, the thyme, bay, cloves and peppercorns. Cool completely.",
+        "Put the shoulder in the cold liquid, weigh it down so it stays under, and keep it in the fridge 3 days.",
+        "Lift it out, rinse and pat dry. For choucroute, cold smoke it 12 hours over beech. Cook it within 3 days; soak it 30 minutes before cooking for a milder taste. One serving is 50 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 9 g per 50 g."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 700 mg per 50 g."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (French): Petit salé",
+          "url": "https://fr.wikipedia.org/wiki/Petit_sal%C3%A9"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_fr_base_travers_demi_sel",
+      "name": "Travers Demi-sel (Half-Salted Pork Ribs)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "France",
+      "servings": 29,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Mildly salted spare ribs with clove and thyme.",
+      "healthBenefit": "Pork ribs bring protein, B vitamins and zinc, with a good deal of fat.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Spare Ribs (Raw)",
+          "quantity": 1500,
+          "unit": "g",
+          "cutPrep": "in a rack",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 27,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the part the meat keeps; the steps give the full amount for the cure"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring 2.5 litres of water to the boil with 250 g salt, the thyme, bay, cloves and peppercorns. Cool completely.",
+        "Put the ribs in the cold liquid, weigh them down and keep them in the fridge 2 days.",
+        "Lift out, rinse and pat dry. Cook within 3 days. One serving is 50 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 8 g per 50 g."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 700 mg per 50 g."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (French): Petit salé",
+          "url": "https://fr.wikipedia.org/wiki/Petit_sal%C3%A9"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_fr_base_jarret_demi_sel",
+      "name": "Jarret Demi-sel (Half-Salted Pork Hock)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "France",
+      "servings": 39,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Mildly salted hock that turns soft and gelatinous with long cooking.",
+      "healthBenefit": "Hock brings protein and collagen.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Gris lägg putsad rå u. svål",
+          "quantity": 2000,
+          "unit": "g",
+          "cutPrep": "two hocks",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 36,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the part the meat keeps; the steps give the full amount for the cure"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Bring 3 litres of water to the boil with 300 g salt, the thyme, bay, cloves and peppercorns. Cool completely.",
+        "Put the hocks in the cold liquid, weigh them down and keep them in the fridge 3 days.",
+        "Lift out, rinse and pat dry. Cook within 3 days. One serving is 50 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 9 g per 50 g."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 700 mg per 50 g."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (French): Petit salé",
+          "url": "https://fr.wikipedia.org/wiki/Petit_sal%C3%A9"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_fr_base_saucisse_de_toulouse",
+      "name": "Saucisse de Toulouse",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "Toulouse, southwest France",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Coarse, juicy pork sausage seasoned only with salt and pepper.",
+      "healthBenefit": "Pork brings protein, B vitamins and zinc; no fillers or binders.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 800,
+          "unit": "g",
+          "cutPrep": "coarsely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "skin removed, coarsely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 18,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork, offal and by-products, small intestine",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "soaked and rinsed",
+          "cookingMethod": null,
+          "prepNote": "about 2 m for 1 kg of filling"
+        }
+      ],
+      "instructions": [
+        "Mix the ground shoulder and belly with the salt and pepper until the mixture just holds together. Keep everything cold.",
+        "Stuff into the hog casing without packing it too tight and twist or tie into 8 links of about 125 g.",
+        "Leave uncovered in the fridge overnight to dry the skins. Cook within 3 days or freeze."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 20 g per sausage."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 900 mg per sausage."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Toulouse sausage",
+          "url": "https://en.wikipedia.org/wiki/Toulouse_sausage"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_fr_base_saucisse_de_montbeliard",
+      "name": "Saucisse de Montbéliard (Smoked Sausage)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "Franche-Comté",
+      "servings": 8,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Firm, smoky pork sausage with cumin, garlic and pepper.",
+      "healthBenefit": "Pork brings protein, B vitamins and zinc.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 750,
+          "unit": "g",
+          "cutPrep": "coarsely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Back Fat (Raw)",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "coarsely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Nitrite curing salt",
+          "quantity": 18,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "White Wine",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork, offal and by-products, small intestine",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "soaked and rinsed",
+          "cookingMethod": null,
+          "prepNote": "about 2 m for 1 kg of filling"
+        }
+      ],
+      "instructions": [
+        "Mix the ground meat and fat with the curing salt, pepper, cumin, garlic and wine. Keep everything cold.",
+        "Stuff into the hog casing and tie into 8 links of about 120 g.",
+        "Hang overnight in the fridge, then cold smoke 48 hours over resinous wood (fir or spruce), as the tuyé chimneys of the Doubs do. For a Morteau-style sausage leave out the cumin. Cook within 2 weeks."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 18 g per sausage."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 850 mg per sausage."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (French): Saucisse de Montbéliard",
+          "url": "https://fr.wikipedia.org/wiki/Saucisse_de_Montb%C3%A9liard"
+        },
+        {
+          "source": "Wikipedia (French): Saucisse de Morteau",
+          "url": "https://fr.wikipedia.org/wiki/Saucisse_de_Morteau"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_fr_base_saucisse_de_strasbourg",
+      "name": "Saucisse de Strasbourg (Knack)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "Alsace",
+      "servings": 23,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Fine-textured, lightly smoked pork and beef sausage that snaps when bitten.",
+      "healthBenefit": "Pork and beef bring protein, iron, zinc and B12.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "finely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Beef Chuck (Raw)",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "finely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Back Fat (Raw)",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "finely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 200,
+          "unit": "ml",
+          "cutPrep": "as crushed ice",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Nitrite curing salt",
+          "quantity": 18,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, white, ground",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, coriander seed",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, mace, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork, offal and by-products, small intestine",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "soaked and rinsed",
+          "cookingMethod": null,
+          "prepNote": "about 10 m for 1 kg of filling; in place of natural sheep casing, which the database does not hold"
+        }
+      ],
+      "instructions": [
+        "Blend the meat and curing salt in a food processor, adding the ice a little at a time, then the fat and spices, until smooth and below 12 C (54 F).",
+        "Stuff into the sheep casing and twist into pairs of about 50 g each.",
+        "Dry 1 hour, hot smoke at 60 C (140 F) for 1 hour, then poach at 75 C (167 F) for 20 minutes and chill in cold water. Keep in the fridge up to a week and reheat in hot water before serving."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 7 g per sausage."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 300 mg per sausage."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (French): Saucisse de Strasbourg",
+          "url": "https://fr.wikipedia.org/wiki/Saucisse_de_Strasbourg"
+        }
+      ],
+      "curationNote": null
+    }
+  ]
+}

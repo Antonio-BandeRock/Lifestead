@@ -1,0 +1,594 @@
+{
+  "recipes": [
+    {
+      "id": "curated_th_base_chai_po",
+      "name": "Chai Po (Sweet Preserved Radish)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Thailand and Teochew China",
+      "servings": 30,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Salty, sweet and chewy, with a crunch.",
+      "healthBenefit": "Used by the spoonful for flavor; it is salty.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Radish, oriental (daikon)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "peeled and cut in thick strips",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2 tbsp taken up by the radish, the rest drawn out with the water and squeezed away"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Toss the radish with the salt and leave overnight under a weight. Squeeze out and pour away the liquid.",
+        "Dry in the sun or a 60 C (140 F) oven for 1 to 2 days, until leathery.",
+        "Toss with the sugar, pack into a jar and leave a week before using. Chop fine to use."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sodium",
+          "note": "High: about 1 g sodium per tablespoon."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Chai poh",
+          "url": "https://en.wikipedia.org/wiki/Chai_poh"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_th_base_luk_chin_nuea",
+      "name": "Luk Chin Nuea (Thai Beef Balls)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Thailand",
+      "servings": 40,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Springy, savory and peppery, with garlic and fish sauce.",
+      "healthBenefit": "Lean beef brings protein, iron and zinc.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Beef Round (Raw)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "lean, cubed and very cold",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 100,
+          "unit": "ml",
+          "cutPrep": "ice cold",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Grain",
+          "baseName": "Tapioca (granulated cassava starch)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "tapioca starch"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "white pepper is traditional"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1/2 tsp"
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baking powder",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Grind the cold beef very fine in a food processor with the garlic, fish sauce, sugar, salt and pepper.",
+        "Add the starch, baking powder and ice water bit by bit and process until a sticky, smooth paste forms. Chill 1 hour.",
+        "Squeeze balls of about 15 g through your fist into warm water, then simmer gently 8 to 10 minutes until they float and spring back. Drain."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 3 g per ball."
+        },
+        {
+          "nutrient": "Iron",
+          "note": "From the beef."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Beef ball",
+          "url": "https://en.wikipedia.org/wiki/Beef_ball"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_th_base_kaep_moo",
+      "name": "Kaep Moo (Pork Rinds)",
+      "builderType": "snack",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Northern Thailand",
+      "servings": 11,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Puffed, crackly and salty, with a rich pork taste.",
+      "healthBenefit": "Mostly protein from collagen and fat; a garnish rather than a main source of anything.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Gris svål rå",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "scraped clean",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pork Lard",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the fat the rind takes up in frying"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1/2 tsp"
+        }
+      ],
+      "instructions": [
+        "Boil the rind for 30 minutes until soft, cool and scrape off the fat underneath. Cut into strips.",
+        "Dry in the sun or a 90 C (195 F) oven until hard, 6 to 8 hours.",
+        "Fry in hot lard at 200 C (390 F) a few at a time until they puff, drain well and toss with the salt. One serving is 20 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "Mostly collagen."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "From the lard."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Pork rind",
+          "url": "https://en.wikipedia.org/wiki/Pork_rind"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_th_base_see_ew_dam_waan",
+      "name": "See Ew Dam Waan (Sweet Dark Soy Sauce)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Thailand",
+      "servings": 33,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Thick, dark, sweet and salty, with a molasses edge.",
+      "healthBenefit": "Used by the spoonful for colour and sweetness; it is high in sugar and salt.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 270,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 1 cup (250 ml); soy sauce weighs about 1.08 g per ml"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Dark Treacle/Molasses",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 1/2 cup"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "shaved",
+          "cookingMethod": null,
+          "prepNote": "stands in for Thai palm sugar, which no food database here lists"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 100,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Melt the sugar in the water over low heat, then stir in the molasses and soy sauce.",
+        "Simmer gently, stirring, for 10 to 15 minutes until it coats a spoon thickly. It thickens more as it cools.",
+        "Cool and keep in a clean jar in the fridge. It makes about 600 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sugars",
+          "note": "About 9 g sugar per tablespoon."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 450 mg sodium per tablespoon."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Soy sauce (Thailand)",
+          "url": "https://en.wikipedia.org/wiki/Soy_sauce"
+        }
+      ],
+      "curationNote": "Thai sweet dark soy is soy sauce cooked with molasses and sugar. One serving is one tablespoon, about 18 g, from a finished weight of about 600 g."
+    },
+    {
+      "id": "curated_th_base_sriracha",
+      "name": "Sriracha (Fermented Chilli Sauce)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Si Racha, Chonburi, Thailand",
+      "servings": 35,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Hot, garlicky, tangy and a little sweet.",
+      "healthBenefit": "Fresh chillies bring vitamin C; used by the spoonful.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "stems removed, roughly chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "peeled",
+          "cookingMethod": null,
+          "prepNote": "about 15 cloves"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 2 tsp"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Distilled Vinegar (White)",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 1/2 cup"
+        }
+      ],
+      "instructions": [
+        "Blend the chillies, garlic, sugar and salt to a coarse paste. Pack into a jar, cover loosely and leave at room temperature for 3 to 5 days, stirring daily, until it smells sour and bubbles.",
+        "Blend with the vinegar until smooth, then simmer 5 minutes.",
+        "Push through a sieve if you want it smooth, cool and keep in the fridge. It makes about 600 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "Fresh red chillies are rich in vitamin C, though some is lost in cooking."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 140 mg sodium per tablespoon."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Sriracha",
+          "url": "https://en.wikipedia.org/wiki/Sriracha"
+        }
+      ],
+      "curationNote": "One serving is one tablespoon, about 17 g, from a finished weight of about 600 g."
+    },
+    {
+      "id": "curated_th_base_kratiam_dong",
+      "name": "Kratiam Dong (Thai Pickled Garlic)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Thailand",
+      "servings": 25,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Sweet, sour and mellow garlic.",
+      "healthBenefit": "Garlic, softened by pickling; eaten a few cloves at a time.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "small whole heads, outer skin rubbed off",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, rice vinegar",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the share taken up by the garlic; the jar holds 250 ml"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the share taken up; the brine holds 100 g"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the share taken up; the brine holds 15 g"
+        }
+      ],
+      "instructions": [
+        "Soak the garlic heads in salted water overnight, drain and pack into a clean jar.",
+        "Boil 250 ml rice vinegar, 250 ml water, 100 g sugar and 15 g salt, cool and pour over the garlic.",
+        "Close and leave 3 to 4 weeks before using. Only about a quarter of the brine is eaten with the garlic, so only that share is counted."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Allicin compounds",
+          "note": "Pickling mellows the sharp sulfur compounds of raw garlic."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Thai cuisine, pickles",
+          "url": "https://en.wikipedia.org/wiki/Thai_cuisine"
+        }
+      ],
+      "curationNote": "The brine water is left out because it is not eaten. One serving is one tablespoon of cloves, about 20 g, from about 500 g of pickled garlic."
+    },
+    {
+      "id": "curated_th_base_pla_ra",
+      "name": "Pla Ra (Fermented Fish)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Isan, Northeast Thailand, and Laos",
+      "servings": 65,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Very salty, pungent and deeply savoury.",
+      "healthBenefit": "A seasoning used by the spoonful; it is very salty.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Carp",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "small freshwater fish, scaled, gutted and cleaned",
+          "cookingMethod": null,
+          "prepNote": "stands in for the mud carp and gourami used in Isan"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Grain",
+          "baseName": "Rice Bran",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "dry roasted until fragrant",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mix the cleaned fish with the salt and leave overnight in a covered jar.",
+        "Mix in the roasted rice bran, pack tightly into a clay or glass jar, seal and leave in a cool place for at least 6 months, up to a year.",
+        "For pla ra sauce, simmer fish and liquid with a little water and strain. It makes about 1.2 kg."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sodium",
+          "note": "Very high: about 1.4 g sodium per tablespoon."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "About 3 g protein per tablespoon."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Pla ra",
+          "url": "https://en.wikipedia.org/wiki/Pla_ra"
+        }
+      ],
+      "curationNote": "Isan pla ra uses small freshwater fish, salt and roasted rice bran or roasted rice. One serving is one tablespoon, about 18 g."
+    },
+    {
+      "id": "curated_th_base_pu_dong",
+      "name": "Pu Dong (Salted Field Crab)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Rice, Noodles & Pantry",
+      "region": "Isan, Northeast Thailand",
+      "servings": 20,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Salty and briny, with a strong crab taste.",
+      "healthBenefit": "Small amounts season som tam; it is salty.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Crab Crustaceans",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "small field crabs, scrubbed",
+          "cookingMethod": null,
+          "prepNote": "about 20 crabs"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the share taken up; the brine holds 100 g in 1 litre of water"
+        }
+      ],
+      "instructions": [
+        "Scrub the crabs well and rinse in several changes of water.",
+        "Boil 1 litre of water with 100 g salt, cool completely and pour over the crabs in a jar. Close and leave 2 to 3 days in the fridge.",
+        "Crush a crab or two into the mortar for som tam. The brine is not eaten, so only the salt the crabs take up is counted."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sodium",
+          "note": "About 600 mg sodium per crab."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Green papaya salad",
+          "url": "https://en.wikipedia.org/wiki/Green_papaya_salad"
+        }
+      ],
+      "curationNote": "Field crabs carry parasites when eaten raw; brining does not kill them, so many cooks now steam the crabs before salting. One serving is one crab, about 25 g."
+    }
+  ]
+}

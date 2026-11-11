@@ -110,6 +110,71 @@
       "id": "curated_cn_base_char_siu",
       "name": "Char Siu (Cantonese Barbecued Pork)",
       "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_hoisin",
+      "name": "Hoisin Sauce",
+      "shelf": "Bases: Stocks & Sauces"
+    },
+    {
+      "id": "curated_cn_base_pao_jiao",
+      "name": "Pao Jiao (Sichuan Pickled Chilies)",
+      "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_suan_dou_jiao",
+      "name": "Suan Dou Jiao (Pickled Long Beans)",
+      "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_chen_pi",
+      "name": "Chen Pi (Dried Citrus Peel)",
+      "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_xian_ya_dan",
+      "name": "Xian Ya Dan (Salted Duck Eggs)",
+      "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_xian_dan_huang",
+      "name": "Xian Dan Huang (Salted Egg Yolks)",
+      "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_dou_sha",
+      "name": "Dou Sha (Sweet Red Bean Paste)",
+      "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_lap_cheong",
+      "name": "Lap Cheong (Chinese Sausage)",
+      "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_lap_yuk",
+      "name": "Lap Yuk (Cantonese Cured Pork Belly)",
+      "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_dougan",
+      "name": "Wu Xiang Dougan (Spiced Dried Tofu)",
+      "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_fu_ru_white",
+      "name": "Bai Fu Ru (White Fermented Bean Curd)",
+      "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_nam_yu",
+      "name": "Nam Yu (Red Fermented Bean Curd)",
+      "shelf": "Bases: Rice & Pantry"
+    },
+    {
+      "id": "curated_cn_base_douchi",
+      "name": "Douchi (Fermented Black Soybeans)",
+      "shelf": "Bases: Rice & Pantry"
     }
   ]
 }

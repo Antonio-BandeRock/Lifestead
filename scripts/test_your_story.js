@@ -692,7 +692,7 @@ const back = load('lib/storyReturn.ts');
     setup.SETUP_HOW_HEADING,
     ...setup.SETUP_HOW_LINES.flatMap((entry) => [entry.label, entry.line]),
   ]) {
-    check(!/[–—]| -- |(real|genuinely?)|d+%/i.test(text), `setup text reads plainly: ${text}`);
+    check(!/[–—]| -- |\b(real|genuinely?)\b|\d+%/i.test(text), `setup text reads plainly: ${text}`);
   }
   const putOff = interview.buildInterview(
     interviewFacts(fresh, { answers: { meds: later, backup: later, startTab: { on: '2026-10-12', answer: '/life' } } }),

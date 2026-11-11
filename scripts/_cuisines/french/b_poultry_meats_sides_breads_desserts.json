@@ -87,11 +87,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Meat",
@@ -112,12 +112,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cognac",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Cognac",
           "quantity": 45,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "or marc de Bourgogne"
         },
         {
@@ -157,12 +157,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "sunflower oil",
-          "contains": "none",
+          "category": "Fats",
+          "baseName": "Solrosolja",
           "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -327,11 +327,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -343,13 +343,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "piment d'Espelette",
-          "contains": "none",
-          "quantity": 1.5,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Chilli (chili), dried, ground",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": "ground dried Espelette pepper, mild"
+          "cookingMethod": null,
+          "prepNote": "ground dried Espelette pepper, mild; 1.5 tsp at 2 g per tsp"
         },
         {
           "category": "Fats",
@@ -613,12 +613,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "calvados",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Calvados",
           "quantity": 60,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "apple brandy from Normandy"
         },
         {
@@ -764,11 +764,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -931,21 +931,39 @@
         },
         {
           "category": "Fruit",
-          "baseName": "Orange",
-          "quantity": 4,
-          "unit": "each",
-          "cutPrep": "zest of 2 in fine julienne, juice of all, 2 in segments",
+          "baseName": "Orange peel",
+          "quantity": 18,
+          "unit": "g",
+          "cutPrep": "in fine julienne, blanched",
           "cookingMethod": null,
-          "prepNote": "bitter Seville oranges are the classic"
+          "prepNote": "zest of 2 oranges; bitter Seville oranges are the classic"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Orange",
+          "quantity": 172,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": "juice of 2 oranges; from the 2 zested oranges"
         },
         {
           "category": "Fruit",
-          "baseName": "Lemon",
-          "quantity": 0.5,
+          "baseName": "Orange",
+          "quantity": 2,
           "unit": "each",
-          "cutPrep": "juiced",
+          "cutPrep": "peeled and cut into segments",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "warmed in the sauce"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Lemon",
+          "quantity": 24,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": "juice of half a lemon"
         },
         {
           "category": "Sweets",
@@ -1081,12 +1099,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cognac",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Cognac",
           "quantity": 40,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -1110,11 +1128,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "in the bouquet garni",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Fats",
@@ -1135,12 +1153,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "sunflower oil",
-          "contains": "none",
+          "category": "Fats",
+          "baseName": "Solrosolja",
           "quantity": 4,
           "unit": "tbsp",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -1328,11 +1346,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "in the bouquet garni",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Veg",
@@ -1513,11 +1531,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "in the bouquet garni",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Veg",
@@ -1641,7 +1659,13 @@
       "dishGroup": "Meats & Stews",
       "servingSizeAmount": 1,
       "servingSizeUnit": "plate",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_base_moutarde_de_dijon",
+          "servings": 6,
+          "note": "6 tbsp, moutarde forte de Dijon, at the table"
+        }
+      ],
       "id": "curated_fr_pot_au_feu",
       "name": "Pot-au-Feu",
       "region": "All of France",
@@ -1669,13 +1693,13 @@
           "prepNote": "jarret"
         },
         {
-          "notInDatabase": true,
-          "name": "beef marrow bone",
-          "contains": "meat",
-          "quantity": 1,
-          "unit": "each",
+          "category": "Meat",
+          "baseName": "Beef marrow",
+          "quantity": 40,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": "added 10 minutes before serving"
+          "cookingMethod": null,
+          "prepNote": "added 10 minutes before serving; 1 each at 40 g per each; the marrow from one bone, about 40 g, is eaten"
         },
         {
           "category": "Veg",
@@ -1761,11 +1785,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Veg",
@@ -1800,15 +1824,6 @@
           "quantity": 0.5,
           "unit": "tsp",
           "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard hot",
-          "quantity": 6,
-          "unit": "tbsp",
-          "cutPrep": "moutarde forte de Dijon, at the table",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -1867,6 +1882,11 @@
           "recipeId": "curated_fr_base_fond_brun_de_veau",
           "servings": 0.5,
           "note": "about 120 ml"
+        },
+        {
+          "recipeId": "curated_fr_base_herbes_de_provence",
+          "servings": 0.667,
+          "note": "1 tsp"
         }
       ],
       "id": "curated_fr_daube_provencale",
@@ -1987,21 +2007,12 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Herbes de Provence, séchées",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Fruit",
@@ -2081,6 +2092,16 @@
           "recipeId": "curated_fr_base_fond_blanc_de_volaille",
           "servings": 3,
           "note": "about 750 ml"
+        },
+        {
+          "recipeId": "curated_fr_base_chapelure",
+          "servings": 1.667,
+          "note": "50 g"
+        },
+        {
+          "recipeId": "curated_fr_base_saucisse_de_toulouse",
+          "servings": 3,
+          "note": "3 each, cut in thirds"
         }
       ],
       "id": "curated_fr_cassoulet",
@@ -2099,15 +2120,6 @@
           "cutPrep": "soaked 12 hours",
           "cookingMethod": "Baked",
           "prepNote": "lingot beans if you can find them"
-        },
-        {
-          "notInDatabase": true,
-          "name": "Toulouse sausage",
-          "contains": "meat",
-          "quantity": 3,
-          "unit": "each",
-          "cutPrep": "cut in thirds",
-          "prepNote": null
         },
         {
           "category": "Meat",
@@ -2193,20 +2205,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "in the bouquet garni",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "dry breadcrumbs",
-          "contains": "gluten",
-          "quantity": 50,
-          "unit": "g",
-          "cutPrep": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -2287,12 +2290,12 @@
           "prepNote": "shoulder, neck or breast"
         },
         {
-          "notInDatabase": true,
-          "name": "sunflower oil",
-          "contains": "none",
+          "category": "Fats",
+          "baseName": "Solrosolja",
           "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -2379,11 +2382,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Veg",
@@ -2466,6 +2469,11 @@
           "recipeId": "curated_fr_base_fond_brun_de_veau",
           "servings": 0.8,
           "note": "about 200 ml"
+        },
+        {
+          "recipeId": "curated_fr_base_moutarde_de_dijon",
+          "servings": 1,
+          "note": "1 tbsp, moutarde forte"
         }
       ],
       "id": "curated_fr_steak_au_poivre",
@@ -2504,21 +2512,21 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "sunflower oil",
-          "contains": "none",
+          "category": "Fats",
+          "baseName": "Solrosolja",
           "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cognac",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Cognac",
           "quantity": 50,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -2536,15 +2544,6 @@
           "quantity": 100,
           "unit": "ml",
           "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard hot",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": "moutarde forte",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -2607,6 +2606,11 @@
           "recipeId": "curated_fr_pain_depices",
           "servings": 4,
           "note": "4 slices"
+        },
+        {
+          "recipeId": "curated_fr_base_moutarde_de_dijon",
+          "servings": 0.333,
+          "note": "5 g, spread on the gingerbread"
         }
       ],
       "id": "curated_fr_carbonnade_flamande",
@@ -2655,15 +2659,6 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Mustard hot",
-          "quantity": 5,
-          "unit": "g",
-          "cutPrep": "spread on the gingerbread",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Fresh Thyme",
           "quantity": 2,
           "unit": "g",
@@ -2674,11 +2669,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Fats",
@@ -2690,12 +2685,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "sunflower oil",
-          "contains": "none",
+          "category": "Fats",
+          "baseName": "Solrosolja",
           "quantity": 30,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3023,7 +3018,28 @@
       "dishGroup": "Meats & Stews",
       "servingSizeAmount": 1,
       "servingSizeUnit": "plate",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_base_palette_demi_sel",
+          "servings": 8,
+          "note": "400 g"
+        },
+        {
+          "recipeId": "curated_fr_base_poitrine_salee",
+          "servings": 8,
+          "note": "400 g"
+        },
+        {
+          "recipeId": "curated_fr_base_saucisse_de_montbeliard",
+          "servings": 2,
+          "note": "2 each"
+        },
+        {
+          "recipeId": "curated_fr_base_saucisse_de_strasbourg",
+          "servings": 4,
+          "note": "4 each"
+        }
+      ],
       "id": "curated_fr_choucroute_garnie",
       "name": "Choucroute Garnie",
       "region": "Alsace",
@@ -3078,42 +3094,6 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "smoked pork shoulder (palette)",
-          "contains": "meat",
-          "quantity": 400,
-          "unit": "g",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "half-salted pork belly (poitrine demi-sel)",
-          "contains": "meat",
-          "quantity": 400,
-          "unit": "g",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Montbéliard or Morteau smoked sausage",
-          "contains": "meat",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Strasbourg sausage (knack)",
-          "contains": "meat",
-          "quantity": 4,
-          "unit": "each",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
           "category": "Veg",
           "baseName": "Potato",
           "quantity": 500,
@@ -3134,11 +3114,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -3362,7 +3342,23 @@
       "dishGroup": "Meats & Stews",
       "servingSizeAmount": 1,
       "servingSizeUnit": "plate",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_base_travers_demi_sel",
+          "servings": 10,
+          "note": "500 g"
+        },
+        {
+          "recipeId": "curated_fr_base_jarret_demi_sel",
+          "servings": 10,
+          "note": "500 g"
+        },
+        {
+          "recipeId": "curated_fr_base_saucisse_de_montbeliard",
+          "servings": 4,
+          "note": "4 each"
+        }
+      ],
       "id": "curated_fr_petit_sale_aux_lentilles",
       "name": "Petit Salé aux Lentilles",
       "region": "Auvergne",
@@ -3379,33 +3375,6 @@
           "cutPrep": "green Puy lentils, rinsed",
           "cookingMethod": "Simmered",
           "prepNote": "lentilles vertes du Puy"
-        },
-        {
-          "notInDatabase": true,
-          "name": "half-salted pork ribs (travers demi-sel)",
-          "contains": "meat",
-          "quantity": 500,
-          "unit": "g",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "half-salted pork hock (jarret demi-sel)",
-          "contains": "meat",
-          "quantity": 500,
-          "unit": "g",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Montbéliard sausage",
-          "contains": "meat",
-          "quantity": 4,
-          "unit": "each",
-          "cutPrep": null,
-          "prepNote": null
         },
         {
           "category": "Fats",
@@ -3473,11 +3442,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -3542,6 +3511,11 @@
           "recipeId": "curated_fr_base_fond_blanc_de_volaille",
           "servings": 0.8,
           "note": "about 200 ml"
+        },
+        {
+          "recipeId": "curated_fr_base_moutarde_de_dijon",
+          "servings": 3,
+          "note": "3 tbsp, Dijon, strong"
         }
       ],
       "id": "curated_fr_lapin_a_la_moutarde",
@@ -3616,15 +3590,6 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Mustard hot",
-          "quantity": 3,
-          "unit": "tbsp",
-          "cutPrep": "Dijon, strong",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Alcohol",
           "baseName": "White Wine",
           "quantity": 150,
@@ -3654,11 +3619,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -3773,12 +3738,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "calvados",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Calvados",
           "quantity": 50,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3857,7 +3822,13 @@
       "dishGroup": "Vegetables & Sides",
       "servingSizeAmount": 1,
       "servingSizeUnit": "serving",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_base_herbes_de_provence",
+          "servings": 2,
+          "note": "1 tbsp"
+        }
+      ],
       "id": "curated_fr_ratatouille",
       "name": "Ratatouille",
       "region": "Provence",
@@ -3935,15 +3906,6 @@
           "quantity": 5,
           "unit": "tbsp",
           "cutPrep": "divided between the vegetables",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Herbes de Provence, séchées",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
@@ -4071,11 +4033,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Fats",
@@ -4646,12 +4608,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Vichy or other sparkling mineral water",
-          "contains": "none",
+          "category": "Bev",
+          "baseName": "Natural mineral water carbonated",
           "quantity": 1000,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "plain water with a tiny pinch of baking soda is the usual stand-in"
         },
         {
@@ -4890,11 +4852,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "in the bouquet garni",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Meat",
@@ -5050,11 +5012,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "in the bouquet garni",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Bev",
@@ -5122,7 +5084,13 @@
       "dishGroup": "Vegetables & Sides",
       "servingSizeAmount": 1,
       "servingSizeUnit": "serving",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_base_herbes_de_provence",
+          "servings": 4,
+          "note": "2 tbsp"
+        }
+      ],
       "id": "curated_fr_tian_provencal",
       "name": "Tian Provençal",
       "region": "Provence",
@@ -5172,15 +5140,6 @@
           "baseName": "Olive Oil (Extra Virgin)",
           "quantity": 80,
           "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Herbes de Provence, séchées",
-          "quantity": 2,
-          "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -5350,13 +5309,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "tomme fraîche de l'Aubrac (or Laguiole)",
-          "contains": "dairy",
+          "category": "Dairy",
+          "baseName": "Cantal, Salers ou Laguiole",
           "quantity": 400,
           "unit": "g",
           "cutPrep": "in thin strips",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of tomme fraîche de l'Aubrac (or Laguiole), which the database does not hold"
         },
         {
           "category": "Dairy",
@@ -5397,11 +5356,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "in the cooking water",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -5862,6 +5821,11 @@
           "recipeId": "curated_fr_base_mayonnaise",
           "servings": 4,
           "note": "about 4 tbsp"
+        },
+        {
+          "recipeId": "curated_fr_base_moutarde_de_dijon",
+          "servings": 0.667,
+          "note": "2 tsp, strong Dijon mustard"
         }
       ],
       "id": "curated_fr_celeri_remoulade",
@@ -5882,22 +5846,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Lemon",
-          "quantity": 60,
+          "quantity": 48,
           "unit": "g",
-          "cutPrep": "1, juiced",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard hot",
-          "quantity": 2,
-          "unit": "tsp",
-          "cutPrep": "strong Dijon mustard",
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of 1 lemon"
         },
         {
           "category": "Veg",
@@ -5919,7 +5874,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Spices, pepper, black and white pepper mix, ground",
+          "baseName": "Spices, pepper, white, ground",
           "quantity": 0.25,
           "unit": "tsp",
           "cutPrep": null,
@@ -5964,7 +5919,13 @@
       "dishGroup": "Salads",
       "servingSizeAmount": 1,
       "servingSizeUnit": "serving",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_base_moutarde_de_dijon",
+          "servings": 1,
+          "note": "1 tbsp, Dijon"
+        }
+      ],
       "id": "curated_fr_carottes_rapees",
       "name": "Carottes Râpées",
       "region": "All of France",
@@ -6001,22 +5962,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Lemon",
-          "quantity": 60,
+          "quantity": 48,
           "unit": "g",
-          "cutPrep": "1, juiced",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard hot",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": "Dijon",
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of 1 lemon"
         },
         {
           "category": "Fats",
@@ -6113,12 +6065,12 @@
       "overallTier": "strong",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "crottin de Chavignol or other small goat cheese",
-          "contains": "dairy",
+          "category": "Dairy",
+          "baseName": "Cheese, goat, semisoft type",
           "quantity": 240,
           "unit": "g",
           "cutPrep": "2 crottins, halved across into 4 discs",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -6240,11 +6192,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Bev",
@@ -6984,7 +6936,13 @@
       "dishGroup": "Breads & Viennoiserie",
       "servingSizeAmount": 1,
       "servingSizeUnit": "slice",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_base_quatre_epices",
+          "servings": 0.667,
+          "note": "1 tsp"
+        }
+      ],
       "id": "curated_fr_pain_depices",
       "name": "Pain d'Épices",
       "region": "Reims and Alsace",
@@ -7072,15 +7030,6 @@
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "quatre-épices (pepper, nutmeg, clove and ginger)",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
           "prepNote": null
         },
         {
@@ -7220,11 +7169,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Meat",
@@ -7436,13 +7385,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "vanilla pod",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "split and scraped",
-          "prepNote": null
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 13,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 1 tbsp; or the seeds of 1 vanilla pod, as the method describes"
         },
         {
           "category": "Sweets",
@@ -7679,13 +7628,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Lemon",
-          "quantity": 0.5,
-          "unit": "each",
-          "cutPrep": "juice only, to keep the apples pale",
+          "quantity": 24,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of half a lemon; tossed with the apples to keep them pale"
         },
         {
           "category": "Fats",
@@ -7890,12 +7839,21 @@
         },
         {
           "category": "Fruit",
-          "baseName": "Orange",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "zest finely grated, then juiced, about 100 ml",
+          "baseName": "Orange peel",
+          "quantity": 18,
+          "unit": "g",
+          "cutPrep": "finely grated",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "zest of 2 oranges"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Orange",
+          "quantity": 100,
+          "unit": "ml",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": "juice of 2 oranges, about 100 ml"
         },
         {
           "category": "Alcohol",
@@ -7971,13 +7929,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Lemon",
-          "quantity": 0.5,
-          "unit": "each",
-          "cutPrep": "optional, juice squeezed over",
+          "quantity": 24,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of half a lemon; optional, squeezed over"
         }
       ],
       "instructions": [
@@ -8014,6 +7972,11 @@
           "recipeId": "curated_fr_base_pate_a_choux",
           "servings": 18,
           "note": "18 small puffs"
+        },
+        {
+          "recipeId": "curated_dessert_vanilla_ice_cream",
+          "servings": 4.167,
+          "note": "500 ml"
         }
       ],
       "overallTier": "strong",
@@ -8024,15 +7987,6 @@
       "flavorProfile": "Crisp, hollow little choux puffs filled with cold vanilla ice cream and drowned in warm, glossy dark chocolate sauce.",
       "healthBenefit": "A rich treat of butter, egg, cream and sugar; the dark chocolate adds a little iron and magnesium.",
       "ingredients": [
-        {
-          "notInDatabase": true,
-          "name": "vanilla ice cream",
-          "contains": "dairy,egg",
-          "quantity": 500,
-          "unit": "ml",
-          "cutPrep": null,
-          "prepNote": null
-        },
         {
           "category": "Sweets",
           "baseName": "Dark chocolate",
@@ -8100,6 +8054,11 @@
           "recipeId": "curated_fr_base_creme_patissiere",
           "servings": 8,
           "note": "about 2 cups, flavoured with chocolate"
+        },
+        {
+          "recipeId": "curated_fr_base_fondant",
+          "servings": 10,
+          "note": "200 g"
         }
       ],
       "overallTier": "strong",
@@ -8117,15 +8076,6 @@
           "unit": "g",
           "cutPrep": "chopped, stirred into the warm pastry cream",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "fondant icing",
-          "contains": "none",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": null,
           "prepNote": null
         },
         {
@@ -8260,12 +8210,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "icing sugar (powdered sugar)",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 10,
           "unit": "g",
           "cutPrep": "for dusting",
+          "cookingMethod": null,
           "prepNote": null
         }
       ],
@@ -8368,12 +8318,12 @@
         },
         {
           "category": "Fruit",
-          "baseName": "Lemon",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "zest only",
+          "baseName": "Lemon peel",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "grated",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "zest of 1 lemon"
         },
         {
           "category": "Fats",
@@ -8434,12 +8384,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "icing sugar (powdered sugar)",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 100,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -8547,12 +8497,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "icing sugar (powdered sugar)",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 50,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -8790,12 +8740,21 @@
         },
         {
           "category": "Fruit",
-          "baseName": "Lemon",
-          "quantity": 5,
-          "unit": "each",
-          "cutPrep": "zest of 2, juice of all, about 175 ml",
+          "baseName": "Lemon peel",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": "finely grated",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "zest of 2 lemons"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Lemon",
+          "quantity": 175,
+          "unit": "ml",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": "juice of 5 lemons, about 175 ml"
         },
         {
           "category": "Fats",
@@ -8860,12 +8819,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "icing sugar (powdered sugar)",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 160,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -8981,13 +8940,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "vanilla pod",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "split and scraped",
-          "prepNote": null
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 13,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 1 tbsp; or the seeds of 1 vanilla pod, as the method describes"
         },
         {
           "category": "Dairy",
@@ -9061,6 +9020,11 @@
           "recipeId": "curated_fr_base_creme_patissiere",
           "servings": 12,
           "note": "about 3 cups, cold"
+        },
+        {
+          "recipeId": "curated_fr_base_fondant",
+          "servings": 7.5,
+          "note": "150 g"
         }
       ],
       "overallTier": "strong",
@@ -9072,21 +9036,12 @@
       "healthBenefit": "A very rich pastry of butter, flour, milk, eggs and sugar; the pastry cream adds some calcium.",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "icing sugar (powdered sugar)",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 20,
           "unit": "g",
           "cutPrep": "to caramelize the pastry",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "fondant icing",
-          "contains": "none",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -9159,12 +9114,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "icing sugar (powdered sugar)",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 10,
           "unit": "g",
           "cutPrep": "optional, for dusting",
+          "cookingMethod": null,
           "prepNote": null
         }
       ],
@@ -9220,13 +9175,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "vanilla pod",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "split and scraped",
-          "prepNote": null
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 13,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 1 tbsp; or the seeds of 1 vanilla pod, as the method describes"
         },
         {
           "category": "Fats",
@@ -9322,7 +9277,13 @@
       "dishGroup": "Desserts & Pastry",
       "servingSizeAmount": 1,
       "servingSizeUnit": "bowl",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_dessert_vanilla_ice_cream",
+          "servings": 3.333,
+          "note": "400 ml"
+        }
+      ],
       "overallTier": "strong",
       "id": "curated_fr_poires_belle_helene",
       "name": "Poires Belle Hélène",
@@ -9359,31 +9320,22 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Lemon",
-          "quantity": 0.5,
-          "unit": "each",
-          "cutPrep": "juice",
+          "quantity": 24,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of half a lemon"
         },
         {
-          "notInDatabase": true,
-          "name": "vanilla pod",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "split and scraped",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "vanilla ice cream",
-          "contains": "dairy,egg",
-          "quantity": 400,
-          "unit": "ml",
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 13,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "about 1 tbsp; or the seeds of 1 vanilla pod, as the method describes"
         },
         {
           "category": "Sweets",
@@ -9544,12 +9496,12 @@
         },
         {
           "category": "Fruit",
-          "baseName": "Lemon",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "zest only",
+          "baseName": "Lemon peel",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "grated",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "zest of 1 lemon"
         },
         {
           "category": "Alcohol",

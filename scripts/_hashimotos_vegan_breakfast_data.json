@@ -5,8 +5,8 @@
     "name": "Blueberry Cinnamon Oatmeal",
     "flavorProfile": "Creamy coconut-milk oatmeal simmered plain, topped with warm blueberries and a real hit of cinnamon.",
     "healthBenefit": "Oats and coconut milk alone, with warm blueberries and cinnamon stirred through, a genuinely whole-food breakfast built entirely from ingredients that check clean for Hashimoto's, not just soy-free.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -53,6 +53,15 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "optional"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Common salt/table salt",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
       }
     ],
     "instructions": [
@@ -68,8 +77,8 @@
     "name": "Strawberry Banana Oatmeal",
     "flavorProfile": "Coconut-milk oatmeal with sliced banana stirred in and fresh strawberries piled on top.",
     "healthBenefit": "A simple, classic pairing built on the same clean oats-and-coconut-milk base, with real whole fruit doing all the sweetening work.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -116,6 +125,15 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "optional"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Common salt/table salt",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
       }
     ],
     "instructions": [
@@ -131,8 +149,8 @@
     "name": "Baked Apple Cinnamon Oatmeal Cup",
     "flavorProfile": "A single-serving baked oatmeal cup, sweetened only by diced apple and a real dose of cinnamon.",
     "healthBenefit": "Baking the oats concentrates the apple's natural sweetness instead of relying on any added sugar, and this whole dish is built from a genuinely clean, whole-food ingredient list.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "cup",
     "ingredients": [
       {
@@ -179,6 +197,15 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "optional"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Common salt/table salt",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
       }
     ],
     "instructions": [
@@ -194,8 +221,8 @@
     "name": "Date & Cinnamon Overnight Oats",
     "flavorProfile": "No-cook overnight oats soaked in coconut milk, sweetened only by chopped dates and cinnamon.",
     "healthBenefit": "A real make-ahead option built on the same clean base as this batch's other oat dishes, ready to eat straight from the fridge.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "jar",
     "ingredients": [
       {
@@ -247,8 +274,8 @@
     "name": "Orange Cranberry Rice Pudding",
     "flavorProfile": "Brown rice simmered slowly in coconut milk until creamy, finished with fresh orange segments and cranberries.",
     "healthBenefit": "A real rice pudding, built entirely on clean, whole-food ingredients, with orange and cranberry's natural tartness balancing the coconut milk's richness.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -295,6 +322,15 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "optional"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Common salt/table salt",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
       }
     ],
     "instructions": [
@@ -310,8 +346,8 @@
     "name": "Ginger Pear Rice Pudding",
     "flavorProfile": "Creamy coconut-milk rice pudding with fresh ginger and warm cinnamon, topped with sliced pear.",
     "healthBenefit": "Fresh ginger gives this rice pudding real warmth without needing any of the spices flagged for Hashimoto's in this app's reference database.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -367,6 +403,15 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "optional"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Common salt/table salt",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
       }
     ],
     "instructions": [
@@ -381,8 +426,8 @@
     "name": "Peach Sorghum Porridge",
     "flavorProfile": "Whole-grain sorghum simmered in coconut milk until tender and creamy, topped with warm sliced peach and cinnamon.",
     "healthBenefit": "Sorghum is a real, genuinely different whole grain from oats or rice, and one of the few this database scores completely clean for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -429,6 +474,15 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "optional"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Common salt/table salt",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
       }
     ],
     "instructions": [
@@ -443,8 +497,8 @@
     "name": "Raspberry Lime Sorghum Porridge",
     "flavorProfile": "Creamy sorghum porridge finished with fresh raspberries and a bright squeeze of lime.",
     "healthBenefit": "A genuinely different flavor direction from this batch's other porridges, real citrus brightening a rich, whole-grain base.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -475,13 +529,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Sweets",
@@ -491,6 +545,15 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "optional"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Common salt/table salt",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
       }
     ],
     "instructions": [
@@ -505,8 +568,8 @@
     "name": "Sweet Polenta with Warm Apricot Compote",
     "flavorProfile": "Creamy coconut-milk polenta topped with apricots stewed soft with cinnamon.",
     "healthBenefit": "Cornmeal polenta makes a genuinely different sweet breakfast base from any grain elsewhere in this batch, entirely clean for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -568,8 +631,8 @@
     "name": "Banana Polenta Porridge",
     "flavorProfile": "Smooth coconut-milk polenta with mashed banana stirred through and cinnamon on top.",
     "healthBenefit": "A genuinely different texture from oatmeal or rice pudding, sweetened almost entirely by real banana.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -616,6 +679,15 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "optional"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Common salt/table salt",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
       }
     ],
     "instructions": [
@@ -631,8 +703,8 @@
     "name": "Pineapple Coconut Tapioca Pudding",
     "flavorProfile": "Small tapioca pearls simmered slowly in coconut milk until glossy and thick, topped with fresh pineapple.",
     "healthBenefit": "A genuinely different texture from a porridge or rice pudding, real tapioca pearls cooked low and slow in coconut milk alone.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -670,6 +742,15 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "optional"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Common salt/table salt",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
       }
     ],
     "instructions": [
@@ -685,8 +766,8 @@
     "name": "Mixed Berry Coconut Tapioca Pudding",
     "flavorProfile": "Coconut-milk tapioca pudding topped with fresh blackberries and raspberries.",
     "healthBenefit": "The same clean tapioca-and-coconut-milk base as this batch's pineapple version, with a genuinely different, tart-berry finish.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -733,6 +814,15 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "optional"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Common salt/table salt",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
       }
     ],
     "instructions": [
@@ -748,8 +838,8 @@
     "name": "Tropical Fruit Bowl with Coconut",
     "flavorProfile": "A no-cook bowl of banana, pineapple, papaya, and orange, drizzled with a little coconut milk.",
     "healthBenefit": "A genuinely raw, no-cook option built entirely from real whole fruit, ready in minutes with nothing to simmer.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -809,8 +899,8 @@
     "name": "Citrus Avocado Breakfast Bowl",
     "flavorProfile": "Sliced avocado with orange and grapefruit segments, a squeeze of lime, and a pinch of salt.",
     "healthBenefit": "A genuinely savory-leaning, no-cook breakfast built on whole avocado, the one fat source in this batch that scores completely clean for Hashimoto's, unlike any pressed oil.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -841,13 +931,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Herbs",
@@ -870,8 +960,8 @@
     "name": "Berry Banana Coconut Smoothie",
     "flavorProfile": "A thick, no-cook smoothie of banana, blueberry, and strawberry blended with coconut milk and a splash of lime.",
     "healthBenefit": "A genuinely quick option for a busy morning, built entirely from this batch's clean fruit-and-coconut-milk palette.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "glass",
     "ingredients": [
       {
@@ -911,13 +1001,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       }
     ],
     "instructions": [
@@ -932,8 +1022,8 @@
     "name": "Savory Rice Bowl with Zucchini, Pepper & Tomato",
     "flavorProfile": "Simmered rice topped with zucchini, bell pepper, and tomato cooked soft in a splash of water, finished with fresh cilantro and lime.",
     "healthBenefit": "A genuinely savory option built without any oil at all, since every real cooking oil in this app's reference database is flagged for Hashimoto's -- the vegetables are cooked in a splash of water instead, a real, workable technique, not a compromise.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -991,13 +1081,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Herbs",
@@ -1022,8 +1112,8 @@
     "name": "Savory Polenta with Leeks & Tomato",
     "flavorProfile": "Smooth water-based polenta topped with leeks and tomato cooked soft, finished with fresh cilantro and lime.",
     "healthBenefit": "A genuinely different savory grain base from the rice bowl in this same batch, still built entirely without any pressed oil.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -1072,13 +1162,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Herbs",
@@ -1104,8 +1194,8 @@
     "name": "Zucchini & Fennel Breakfast Hash with Avocado",
     "flavorProfile": "Zucchini and fennel cooked soft with tomato, topped with sliced avocado, cilantro, and lime.",
     "healthBenefit": "A genuinely different vegetable combination from this batch's other savory dishes, with real sliced avocado standing in for the richness a pressed oil would normally add.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -1154,13 +1244,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Herbs",
@@ -1184,8 +1274,8 @@
     "name": "Cranberry Orange Oatmeal",
     "flavorProfile": "Coconut-milk oatmeal finished with fresh cranberries and orange segments.",
     "healthBenefit": "Cranberry's tartness against orange's sweetness gives this oatmeal a genuinely different flavor from this batch's other fruit pairings.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -1232,6 +1322,15 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "optional"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Common salt/table salt",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
       }
     ],
     "instructions": [
@@ -1246,8 +1345,8 @@
     "name": "Papaya Lime Smoothie Bowl",
     "flavorProfile": "A thick, no-cook smoothie bowl of papaya and banana blended with coconut milk and fresh lime.",
     "healthBenefit": "A genuinely different fruit base from this batch's berry-forward smoothie, ready in minutes with nothing to cook.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -1278,13 +1377,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       }
     ],
     "instructions": [
@@ -1299,8 +1398,8 @@
     "name": "Cantaloupe & Grapefruit Breakfast Bowl",
     "flavorProfile": "A no-cook bowl of fresh cantaloupe and grapefruit with a squeeze of lime.",
     "healthBenefit": "A genuinely light, refreshing option built entirely from real whole fruit, with no grain or coconut milk at all.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -1322,13 +1421,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       }
     ],
     "instructions": [
@@ -1342,8 +1441,8 @@
     "name": "Apple Rice Pudding with Cinnamon",
     "flavorProfile": "Creamy coconut-milk rice pudding with diced apple and cinnamon stirred through.",
     "healthBenefit": "A genuinely different fruit pairing from this batch's other rice puddings, apple and cinnamon a classic, simple combination.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -1390,6 +1489,15 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "optional"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Common salt/table salt",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
       }
     ],
     "instructions": [
@@ -1404,8 +1512,8 @@
     "name": "Date Sorghum Porridge",
     "flavorProfile": "Whole-grain sorghum simmered in coconut milk with chopped dates and cinnamon.",
     "healthBenefit": "A genuinely different sweetener direction from this batch's other sorghum porridge, real dates doing most of the sweetening.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -1443,6 +1551,15 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Common salt/table salt",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
       }
     ],
     "instructions": [
@@ -1457,8 +1574,8 @@
     "name": "Savory Fennel & Tomato Rice Bowl",
     "flavorProfile": "Simmered rice topped with fennel and tomato cooked soft in a splash of water, finished with fresh cilantro and lime.",
     "healthBenefit": "A genuinely different savory vegetable pairing from this batch's other rice bowl, still built entirely without any pressed oil.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -1507,13 +1624,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Herbs",
@@ -1538,8 +1655,8 @@
     "name": "Pear Ginger Overnight Oats",
     "flavorProfile": "No-cook overnight oats soaked in coconut milk with fresh ginger and diced pear.",
     "healthBenefit": "A genuinely different overnight-oats flavor from this batch's date-and-cinnamon version, fresh ginger giving it real warmth without needing any of the spices flagged for Hashimoto's in this app's reference database.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "jar",
     "ingredients": [
       {
@@ -1591,8 +1708,8 @@
     "name": "Blackberry Lime Rice Pudding",
     "flavorProfile": "Creamy coconut-milk rice pudding topped with fresh blackberries and a squeeze of lime.",
     "healthBenefit": "A genuinely different berry pairing from this batch's other rice puddings, lime brightening the blackberries' natural tartness.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -1623,13 +1740,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Sweets",
@@ -1639,6 +1756,15 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "optional"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Common salt/table salt",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
       }
     ],
     "instructions": [

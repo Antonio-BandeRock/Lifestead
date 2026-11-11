@@ -27,6 +27,8 @@
 //
 // Usage: node scripts/apply_recipe_condition_cautions.js
 
+/* global __dirname */
+
 const fs = require('fs');
 const path = require('path');
 
@@ -61,9 +63,36 @@ const safeForLineRe = /^(\s*)safeForConditions:\s*\[[^\]]*\],\s*$/;
 const cautionsSingleLineRe = /^(\s*)conditionCautions:\s*\{\},\s*$/;
 const cautionsOpenRe = /^(\s*)conditionCautions:\s*\{\s*$/;
 
+// 2026-11-10: every conditionCautions field already in the file is dropped
+// first, wherever it sits, the way apply_recipe_diet_tags.js and
+// apply_recipe_condition_data.js already drop theirs. The look-ahead below
+// only found one sitting directly after safeForConditions, but
+// apply_recipe_condition_data.js moves safeForConditions to the top of the
+// card, away from the empty conditionCautions generate_cuisine_recipes_ts.js
+// writes, so every regenerated cuisine recipe ended up with two (2,524
+// TS1117 errors, caught by tsc).
+let removed = 0;
+const stripped = [];
+for (let i = 0; i < lines.length; i++) {
+  if (cautionsSingleLineRe.test(lines[i])) { removed += 1; continue; }
+  const open = lines[i].match(cautionsOpenRe);
+  if (open) {
+    const closeRe = new RegExp(`^${open[1]}\\},\\s*$`);
+    let j = i + 1;
+    while (j < lines.length && !closeRe.test(lines[j])) j += 1;
+    if (j >= lines.length) throw new Error(`Unclosed conditionCautions at line ${i + 1}`);
+    i = j;
+    removed += 1;
+    continue;
+  }
+  stripped.push(lines[i]);
+}
+lines.length = 0;
+for (const kept of stripped) lines.push(kept);
+
 let pendingId = null;
 let applied = 0;
-let replaced = 0;
+let replaced = removed;
 const out = [];
 
 for (let i = 0; i < lines.length; i++) {

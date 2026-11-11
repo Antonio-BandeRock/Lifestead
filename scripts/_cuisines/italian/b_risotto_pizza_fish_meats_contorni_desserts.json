@@ -31,12 +31,12 @@
           "prepNote": "carnaroli is the Milanese choice; vialone nano or arborio also work"
         },
         {
-          "notInDatabase": true,
-          "name": "beef bone marrow",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Beef marrow",
           "quantity": 20,
           "unit": "g",
           "cutPrep": "finely chopped",
+          "cookingMethod": null,
           "prepNote": "midollo, the mark of the Milanese version"
         },
         {
@@ -584,22 +584,22 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "Fontina Valle d'Aosta DOP",
-          "contains": "dairy",
+          "category": "Dairy",
+          "baseName": "Fontina",
           "quantity": 200,
           "unit": "g",
           "cutPrep": "rind removed, diced",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Toma cheese",
-          "contains": "dairy",
+          "category": "Dairy",
+          "baseName": "Fontina",
           "quantity": 100,
           "unit": "g",
           "cutPrep": "rind removed, diced",
-          "prepNote": "a young Toma is fine"
+          "cookingMethod": null,
+          "prepNote": "a young Toma is fine; in place of Toma cheese, which the database does not hold"
         },
         {
           "category": "Fats",
@@ -671,18 +671,19 @@
           "recipeId": "curated_it_base_brodo_di_carne",
           "servings": 5,
           "note": "about 1.2 litres, hot, for serving"
+        },
+        {
+          "recipeId": "curated_it_pane_toscano",
+          "servings": 4.545,
+          "note": "250 g, stale white country bread, cut in small cubes, Knödelbrot in South Tyrol"
+        },
+        {
+          "recipeId": "curated_it_base_speck",
+          "servings": 3,
+          "note": "150 g, finely diced"
         }
       ],
       "ingredients": [
-        {
-          "category": "Grain",
-          "baseName": "Pain, baguette ou boule, de campagne",
-          "quantity": 250,
-          "unit": "g",
-          "cutPrep": "stale white country bread, cut in small cubes",
-          "cookingMethod": null,
-          "prepNote": "Knödelbrot in South Tyrol"
-        },
         {
           "category": "Dairy",
           "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
@@ -690,15 +691,6 @@
           "unit": "ml",
           "cutPrep": "warmed",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "speck (Speck Alto Adige IGP)",
-          "contains": "meat",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "finely diced",
           "prepNote": null
         },
         {
@@ -1891,7 +1883,13 @@
       "flavorProfile": "A tall, spongy Palermo pizza soaked with sweet onion and tomato sauce, studded with anchovies and caciocavallo and crusted with oregano breadcrumbs.",
       "healthBenefit": "Onions and tomato bring vitamin C and fibre and the anchovies add omega-3 fats, in a bread rich with oil and cheese and best shared in squares.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_it_base_pangrattato",
+          "servings": 1.333,
+          "note": "40 g, mixed with oregano and a little oil"
+        }
+      ],
       "ingredients": [
         {
           "category": "PantryStaples",
@@ -1975,22 +1973,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "caciocavallo cheese",
-          "contains": "dairy",
+          "category": "Dairy",
+          "baseName": "Provolone",
           "quantity": 200,
           "unit": "g",
           "cutPrep": "two thirds cubed, one third grated",
-          "prepNote": "a young, semi-aged caciocavallo"
-        },
-        {
-          "notInDatabase": true,
-          "name": "dry breadcrumbs",
-          "contains": "gluten",
-          "quantity": 40,
-          "unit": "g",
-          "cutPrep": "mixed with oregano and a little oil",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "a young, semi-aged caciocavallo; in place of caciocavallo cheese, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -2217,13 +2206,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "peanut or sunflower oil for deep frying",
-          "contains": "none",
-          "quantity": 1000,
+          "category": "Fats",
+          "baseName": "Peanøttolje",
+          "quantity": 100,
           "unit": "ml",
           "cutPrep": null,
-          "prepNote": "about 60 ml is taken up by the dough"
+          "cookingMethod": null,
+          "prepNote": "1000 ml peanut or sunflower oil for deep frying; 100 ml counted as soaked up by the food (a tenth of a deep-frying pan), the rest stays in the pan"
         }
       ],
       "instructions": [
@@ -2304,13 +2293,13 @@
           "prepNote": "Livorno uses scorpionfish, gurnard and dogfish as the catch allows"
         },
         {
-          "notInDatabase": true,
-          "name": "scorpionfish, gurnard or dogfish (palombo) in pieces",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Rockfish",
           "quantity": 400,
           "unit": "g",
           "cutPrep": "cleaned, cut through the bone",
-          "prepNote": "heads and bones go into the stock"
+          "cookingMethod": null,
+          "prepNote": "heads and bones go into the stock; in place of scorpionfish, gurnard or dogfish (palombo) in pieces, which the database does not hold"
         },
         {
           "category": "Meat",
@@ -2387,11 +2376,11 @@
         {
           "category": "Veg",
           "baseName": "Peppers, hot chile",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 1,
+          "unit": "g",
           "cutPrep": "small dried or fresh, chopped",
           "cookingMethod": "Sauteed",
-          "prepNote": null
+          "prepNote": "2 dried chilies"
         },
         {
           "category": "Veg",
@@ -2518,11 +2507,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 4,
-          "unit": "each",
+          "quantity": 0.6,
+          "unit": "g",
           "cutPrep": "fresh or dried leaves",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 bay leaves"
         },
         {
           "category": "Herbs",
@@ -2613,13 +2602,13 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "stockfish (stoccafisso), soaked",
-          "contains": "fish",
-          "quantity": 400,
+          "category": "Meat",
+          "baseName": "Stockfish (cod unsalted, dried)",
+          "quantity": 120,
           "unit": "g",
           "cutPrep": "soaked at least 48 hours, water changed every 4 hours, in pieces",
-          "prepNote": "Vicenza uses air-dried, unsalted cod and still calls it baccalà"
+          "cookingMethod": null,
+          "prepNote": "Vicenza uses air-dried, unsalted cod and still calls it baccalà; soaked weight counted as 0.3 of its weight in dried stockfish"
         },
         {
           "category": "Veg",
@@ -2808,13 +2797,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "seed oil for deep frying (peanut or sunflower)",
-          "contains": "none",
-          "quantity": 1000,
+          "category": "Fats",
+          "baseName": "Peanøttolje",
+          "quantity": 100,
           "unit": "ml",
           "cutPrep": null,
-          "prepNote": "only a small part is taken up"
+          "cookingMethod": null,
+          "prepNote": "1000 ml seed oil for deep frying (peanut or sunflower); 100 ml counted as soaked up by the food (a tenth of a deep-frying pan), the rest stays in the pan"
         },
         {
           "category": "Herbs",
@@ -2907,13 +2896,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Lemon",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "juiced, plus wedges",
+          "quantity": 48,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of 1 lemon; wedges to serve are not counted"
         },
         {
           "category": "Herbs",
@@ -2966,7 +2955,13 @@
       "flavorProfile": "Tender whole squid packed with a savoury filling of their chopped tentacles, anchovy, garlic, parsley and breadcrumbs, simmered in a basil tomato sauce with a little chile.",
       "healthBenefit": "Squid is lean protein with vitamin B12, copper and selenium, and the tomato sauce brings lycopene and vitamin C.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_it_base_pangrattato",
+          "servings": 2,
+          "note": "60 g, enough to make the filling hold"
+        }
+      ],
       "ingredients": [
         {
           "category": "Meat",
@@ -2976,15 +2971,6 @@
           "cutPrep": "8 medium squid, cleaned, bodies whole, tentacles and fins chopped",
           "cookingMethod": "Braised",
           "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "dry breadcrumbs",
-          "contains": "gluten",
-          "quantity": 60,
-          "unit": "g",
-          "cutPrep": null,
-          "prepNote": "enough to make the filling hold"
         },
         {
           "category": "Dairy",
@@ -3179,11 +3165,11 @@
         {
           "category": "Veg",
           "baseName": "Peppers, hot chile",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.5,
+          "unit": "g",
           "cutPrep": "optional, chopped",
           "cookingMethod": "Sauteed",
-          "prepNote": null
+          "prepNote": "1 dried chili"
         },
         {
           "category": "Veg",
@@ -3272,7 +3258,13 @@
       "flavorProfile": "Pairs of vinegar-cured fresh sardines sandwiched around a pecorino, garlic and parsley filling, then crumbed and fried golden, good hot or cold.",
       "healthBenefit": "Sardines are among the richest sources of omega-3 fats, vitamin D, vitamin B12 and calcium; fried and filled with cheese, they make a hearty dish.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_it_base_pangrattato",
+          "servings": 3.333,
+          "note": "100 g"
+        }
+      ],
       "ingredients": [
         {
           "category": "Meat",
@@ -3291,15 +3283,6 @@
           "cutPrep": "strong red wine vinegar, to cover",
           "cookingMethod": null,
           "prepNote": "mostly poured away"
-        },
-        {
-          "notInDatabase": true,
-          "name": "dry breadcrumbs",
-          "contains": "gluten",
-          "quantity": 100,
-          "unit": "g",
-          "cutPrep": null,
-          "prepNote": null
         },
         {
           "category": "Dairy",
@@ -3445,13 +3428,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Lemon",
-          "quantity": 0.5,
-          "unit": "each",
-          "cutPrep": "juiced",
+          "quantity": 24,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of half a lemon"
         },
         {
           "category": "Veg",
@@ -3465,11 +3448,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Boiled",
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Veg",
@@ -3573,11 +3556,11 @@
         {
           "category": "Veg",
           "baseName": "Peppers, hot chile",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.5,
+          "unit": "g",
           "cutPrep": "small, chopped",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "1 dried chili"
         },
         {
           "category": "Veg",
@@ -4206,7 +4189,13 @@
       "servingSizeAmount": 1,
       "servingSizeUnit": "plate",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_it_base_pangrattato",
+          "servings": 5,
+          "note": "150 g, fine, made from stale white bread"
+        }
+      ],
       "id": "curated_it_cotoletta_alla_milanese",
       "name": "Cotoletta alla Milanese",
       "dishGroup": "Meats & Poultry",
@@ -4231,15 +4220,6 @@
           "unit": "each",
           "cutPrep": "beaten",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "dry breadcrumbs",
-          "contains": "gluten",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "fine, made from stale white bread",
           "prepNote": null
         },
         {
@@ -4389,11 +4369,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "leaves",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -4518,12 +4498,12 @@
       "healthBenefit": "Pork gives protein, thiamine, zinc and selenium; the belly makes this a rich, fatty roast for a feast, eaten in thin slices.",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "fresh pork belly with skin",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
           "quantity": 2500,
           "unit": "g",
           "cutPrep": "one rectangular slab, skin scored",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -4565,11 +4545,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 6,
-          "unit": "each",
+          "quantity": 0.9,
+          "unit": "g",
           "cutPrep": "leaves",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "6 bay leaves"
         },
         {
           "category": "Veg",
@@ -4680,6 +4660,16 @@
           "recipeId": "curated_it_base_sugo_di_pomodoro",
           "servings": 4,
           "note": "about 750 ml, the meatballs finish cooking in it"
+        },
+        {
+          "recipeId": "curated_it_pane_toscano",
+          "servings": 1.091,
+          "note": "60 g, stale, crusts off"
+        },
+        {
+          "recipeId": "curated_it_base_salsiccia",
+          "servings": 1.5,
+          "note": "150 g"
         }
       ],
       "id": "curated_it_polpette_al_sugo",
@@ -4697,24 +4687,6 @@
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Simmered",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "fresh Italian pork sausage (salsiccia), skin removed",
-          "contains": "meat",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "category": "Grain",
-          "baseName": "Pain, baguette ou boule, de campagne",
-          "quantity": 60,
-          "unit": "g",
-          "cutPrep": "stale, crusts off",
-          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -4913,11 +4885,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "leaves",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Alcohol",
@@ -5033,12 +5005,21 @@
         },
         {
           "category": "Fruit",
-          "baseName": "Lemon",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "zest and juice",
+          "baseName": "Lemon peel",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "finely grated",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "zest of 1 lemon"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Lemon",
+          "quantity": 48,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": "juice of 1 lemon"
         },
         {
           "category": "Herbs",
@@ -5153,12 +5134,12 @@
       "healthBenefit": "Oxtail gives protein, zinc and collagen, celery and tomato add potassium and vitamin K, and the lard and long cooking make it a rich dish.",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "oxtail, cut through the joints",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Beef oxtail",
           "quantity": 1500,
           "unit": "g",
           "cutPrep": "soaked in cold water 1 hour, dried",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5209,11 +5190,11 @@
         {
           "category": "Veg",
           "baseName": "Peppers, hot chile",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.5,
+          "unit": "g",
           "cutPrep": "a small piece",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 dried chili"
         },
         {
           "category": "Herbs",
@@ -5345,7 +5326,13 @@
       "servingSizeAmount": 1,
       "servingSizeUnit": "plate",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_it_base_salsiccia",
+          "servings": 5,
+          "note": "500 g, 4 to 6 links, pricked"
+        }
+      ],
       "id": "curated_it_salsiccia_e_friarielli",
       "name": "Salsiccia e Friarielli",
       "dishGroup": "Meats & Poultry",
@@ -5354,15 +5341,6 @@
       "flavorProfile": "Fresh pork sausages browned and splashed with wine, then tossed with bitter, garlicky broccoli rabe sautéed in olive oil with chili, a sharp and satisfying Neapolitan pairing.",
       "healthBenefit": "Broccoli rabe is rich in vitamin K, vitamin C, folate and calcium, and the sausage gives protein; the sausage brings salt and fat, so this is a hearty plate.",
       "ingredients": [
-        {
-          "notInDatabase": true,
-          "name": "fresh Italian pork sausage (salsiccia)",
-          "contains": "meat",
-          "quantity": 500,
-          "unit": "g",
-          "cutPrep": "4 to 6 links, pricked",
-          "prepNote": null
-        },
         {
           "category": "Veg",
           "baseName": "Broccoli raab",
@@ -5393,11 +5371,11 @@
         {
           "category": "Veg",
           "baseName": "Peppers, hot chile",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.5,
+          "unit": "g",
           "cutPrep": "fresh or dried, sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 dried chili"
         },
         {
           "category": "Alcohol",
@@ -5738,11 +5716,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "leaves",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Alcohol",
@@ -5821,12 +5799,12 @@
       "healthBenefit": "Tripe is a lean source of protein, vitamin B12 and selenium, and the Pecorino adds calcium.",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "beef tripe (honeycomb and blanket), cleaned and precooked",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Beef Tripe",
           "quantity": 1000,
           "unit": "g",
           "cutPrep": "in strips",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5868,11 +5846,11 @@
         {
           "category": "Veg",
           "baseName": "Peppers, hot chile",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.5,
+          "unit": "g",
           "cutPrep": "a small piece",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 dried chili"
         },
         {
           "category": "Fats",
@@ -5929,13 +5907,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "mentuccia (lesser calamint) leaves",
-          "contains": "none",
+          "category": "Herbs",
+          "baseName": "Fresh Peppermint",
           "quantity": 5,
           "unit": "g",
           "cutPrep": "about 12 leaves",
-          "prepNote": "spearmint is used where mentuccia cannot be found"
+          "cookingMethod": null,
+          "prepNote": "spearmint is used where mentuccia cannot be found; in place of mentuccia (lesser calamint) leaves, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -6050,13 +6028,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Lemon",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "juiced, plus a few slices to serve",
+          "quantity": 48,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of 1 lemon; a few slices to serve are not counted"
         },
         {
           "category": "Herbs",
@@ -6329,13 +6307,13 @@
           "prepNote": "weight given is after trimming"
         },
         {
-          "category": "Fruit",
-          "baseName": "Lemon",
+          "notInDatabase": true,
+          "name": "lemon juice, for the soaking water",
+          "contains": "none",
           "quantity": 1,
           "unit": "each",
-          "cutPrep": "juiced, for the soaking water",
-          "cookingMethod": null,
-          "prepNote": null
+          "cutPrep": "juice of 1 lemon",
+          "prepNote": "in the water the cut artichokes wait in, poured away, not eaten"
         },
         {
           "category": "Veg",
@@ -6347,13 +6325,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "mentuccia (lesser calamint) leaves",
-          "contains": "none",
+          "category": "Herbs",
+          "baseName": "Fresh Peppermint",
           "quantity": 6,
           "unit": "g",
           "cutPrep": "chopped",
-          "prepNote": "spearmint is used where mentuccia cannot be found"
+          "cookingMethod": null,
+          "prepNote": "spearmint is used where mentuccia cannot be found; in place of mentuccia (lesser calamint) leaves, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -6460,22 +6438,22 @@
           "prepNote": "weight given is after trimming"
         },
         {
-          "category": "Fruit",
-          "baseName": "Lemon",
+          "notInDatabase": true,
+          "name": "lemon juice, for the soaking water",
+          "contains": "none",
           "quantity": 1,
           "unit": "each",
-          "cutPrep": "juiced, for the soaking water",
-          "cookingMethod": null,
-          "prepNote": null
+          "cutPrep": "juice of 1 lemon",
+          "prepNote": "in the water the cut artichokes wait in, poured away, not eaten"
         },
         {
-          "notInDatabase": true,
-          "name": "seed oil for frying (peanut or sunflower)",
-          "contains": "none",
-          "quantity": 80,
+          "category": "Fats",
+          "baseName": "Peanøttolje",
+          "quantity": 40,
           "unit": "ml",
           "cutPrep": null,
-          "prepNote": "the share taken up; fry in about 1 litre"
+          "cookingMethod": null,
+          "prepNote": "80 ml seed oil for frying (peanut or sunflower); 40 ml counted as soaked up by the food (half of a shallow-frying amount), the rest stays in the pan"
         },
         {
           "category": "Herbs",
@@ -6575,13 +6553,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "seed oil for frying (peanut or sunflower)",
-          "contains": "none",
-          "quantity": 150,
+          "category": "Fats",
+          "baseName": "Peanøttolje",
+          "quantity": 75,
           "unit": "ml",
           "cutPrep": null,
-          "prepNote": "the share taken up; fry in about 1 litre"
+          "cookingMethod": null,
+          "prepNote": "150 ml seed oil for frying (peanut or sunflower); 75 ml counted as soaked up by the food (half of a shallow-frying amount), the rest stays in the pan"
         },
         {
           "category": "Dairy",
@@ -6830,11 +6808,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "for the cooking water",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -6987,11 +6965,11 @@
         {
           "category": "Veg",
           "baseName": "Peppers, hot chile",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.5,
+          "unit": "g",
           "cutPrep": "fresh or dried, sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 dried chili"
         }
       ],
       "instructions": [
@@ -7080,11 +7058,11 @@
         {
           "category": "Veg",
           "baseName": "Peppers, hot chile",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.5,
+          "unit": "g",
           "cutPrep": "optional, whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 dried chili"
         },
         {
           "category": "Herbs",
@@ -7163,13 +7141,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "seed oil for frying (peanut or sunflower)",
-          "contains": "none",
-          "quantity": 60,
+          "category": "Fats",
+          "baseName": "Peanøttolje",
+          "quantity": 30,
           "unit": "ml",
           "cutPrep": null,
-          "prepNote": "the share taken up; fry in about 500 ml"
+          "cookingMethod": null,
+          "prepNote": "60 ml seed oil for frying (peanut or sunflower); 30 ml counted as soaked up by the food (half of a shallow-frying amount), the rest stays in the pan"
         },
         {
           "category": "Veg",
@@ -7309,11 +7287,11 @@
         {
           "category": "Veg",
           "baseName": "Peppers, hot chile",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.5,
+          "unit": "g",
           "cutPrep": "optional",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 dried chili"
         },
         {
           "category": "Herbs",
@@ -7749,7 +7727,13 @@
       "servingSizeAmount": 1,
       "servingSizeUnit": "serving",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_it_base_savoiardi",
+          "servings": 22.999,
+          "note": "250 g, savoiardi (ladyfingers)"
+        }
+      ],
       "id": "curated_it_tiramisu",
       "name": "Tiramisù",
       "dishGroup": "Desserts",
@@ -7791,15 +7775,6 @@
           "quantity": 0.125,
           "unit": "tsp",
           "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Baked",
-          "baseName": "Savoiardikex",
-          "quantity": 250,
-          "unit": "g",
-          "cutPrep": "savoiardi (ladyfingers)",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -7976,7 +7951,13 @@
       "servingSizeAmount": 1,
       "servingSizeUnit": "each",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_dessert_candied_orange_peel",
+          "servings": 4,
+          "note": "40 g, to decorate"
+        }
+      ],
       "id": "curated_it_cannoli_siciliani",
       "name": "Cannoli Siciliani",
       "dishGroup": "Desserts",
@@ -8040,13 +8021,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "seed oil for frying (peanut or sunflower)",
-          "contains": "none",
-          "quantity": 150,
+          "category": "Fats",
+          "baseName": "Peanøttolje",
+          "quantity": 75,
           "unit": "ml",
           "cutPrep": null,
-          "prepNote": "the share taken up; fry in about 1 litre"
+          "cookingMethod": null,
+          "prepNote": "150 ml seed oil for frying (peanut or sunflower); 75 ml counted as soaked up by the food (half of a shallow-frying amount), the rest stays in the pan"
         },
         {
           "category": "Dairy",
@@ -8058,12 +8039,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "icing sugar (powdered sugar)",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 200,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "sifted into the ricotta"
         },
         {
@@ -8085,21 +8066,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "candied cherries or candied orange peel",
-          "contains": "none",
-          "quantity": 40,
-          "unit": "g",
-          "cutPrep": "to decorate",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "icing sugar (powdered sugar)",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 10,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "for dusting"
         }
       ],
@@ -8382,12 +8354,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "icing sugar (powdered sugar)",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 15,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "for dusting"
         }
       ],
@@ -8435,6 +8407,11 @@
           "recipeId": "curated_it_base_pasta_frolla",
           "servings": 6,
           "note": "about 650 g of the pastry, for the base and lattice"
+        },
+        {
+          "recipeId": "curated_sauce_apricot_jam",
+          "servings": 20,
+          "note": "400 g, a thick jam holds best"
         }
       ],
       "id": "curated_it_crostata_di_marmellata",
@@ -8445,15 +8422,6 @@
       "flavorProfile": "A buttery, lemon-scented shortcrust tart filled with jam under a lattice of pastry, crumbly and fruity.",
       "healthBenefit": "A simple home tart of pastry and fruit jam; sweet, so best as a slice with coffee or at breakfast now and then.",
       "ingredients": [
-        {
-          "notInDatabase": true,
-          "name": "fruit jam (apricot, peach or cherry)",
-          "contains": "none",
-          "quantity": 400,
-          "unit": "g",
-          "cutPrep": null,
-          "prepNote": "a thick jam holds best"
-        },
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
@@ -8509,7 +8477,13 @@
       "servingSizeAmount": 1,
       "servingSizeUnit": "cup",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_it_base_gelato_fior_di_latte",
+          "servings": 4,
+          "note": "240 g, 4 scoops, fior di latte gelato is often made without egg"
+        }
+      ],
       "id": "curated_it_affogato_al_caffe",
       "name": "Affogato al Caffè",
       "dishGroup": "Desserts",
@@ -8518,15 +8492,6 @@
       "flavorProfile": "A scoop of cold vanilla gelato drowned in a shot of hot espresso, so it melts into a sweet, bitter, creamy coffee.",
       "healthBenefit": "A small dessert of gelato and coffee; the espresso brings caffeine, so it is one to have earlier in the day for anyone sensitive to it.",
       "ingredients": [
-        {
-          "notInDatabase": true,
-          "name": "vanilla or fior di latte gelato",
-          "contains": "dairy,egg",
-          "quantity": 240,
-          "unit": "g",
-          "cutPrep": "4 scoops",
-          "prepNote": "fior di latte gelato is often made without egg"
-        },
         {
           "category": "Bev",
           "baseName": "Coffee, brewed, espresso, restaurant prepared",
@@ -8575,6 +8540,16 @@
           "recipeId": "curated_it_base_pasta_frolla",
           "servings": 5,
           "note": "about 550 g of the pastry, for one 24 cm pastiera"
+        },
+        {
+          "recipeId": "curated_dessert_candied_orange_peel",
+          "servings": 5,
+          "note": "50 g, diced"
+        },
+        {
+          "recipeId": "curated_dessert_candied_lemon_peel",
+          "servings": 2.5,
+          "note": "25 g, diced"
         }
       ],
       "id": "curated_it_pastiera_napoletana",
@@ -8586,13 +8561,13 @@
       "healthBenefit": "Ricotta and eggs bring protein and calcium and the wheat brings some fibre; it is a sweet, rich tart for a holiday slice.",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "cooked wheat berries (grano cotto)",
-          "contains": "gluten",
-          "quantity": 250,
+          "category": "Grain",
+          "baseName": "Wheat, soft white",
+          "quantity": 100,
           "unit": "g",
           "cutPrep": null,
-          "prepNote": "sold ready cooked in jars in Italy; or soak and boil soft wheat berries"
+          "cookingMethod": null,
+          "prepNote": "sold ready cooked in jars in Italy; or soak and boil soft wheat berries; cooked weight counted as 0.4 of its weight in dry wheat"
         },
         {
           "category": "Dairy",
@@ -8658,31 +8633,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "candied orange peel",
-          "contains": "none",
-          "quantity": 50,
-          "unit": "g",
-          "cutPrep": "diced",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "candied citron peel",
-          "contains": "none",
-          "quantity": 25,
-          "unit": "g",
-          "cutPrep": "diced",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "orange blossom water",
-          "contains": "none",
+          "category": "Bev",
+          "baseName": "Water, tap",
           "quantity": 25,
           "unit": "ml",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of orange blossom water, which the database does not hold; flower water carries next to no nutrients, so it counts as water"
         },
         {
           "category": "Herbs",
@@ -8703,12 +8660,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "icing sugar (powdered sugar)",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 10,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "for dusting"
         }
       ],
@@ -8818,30 +8775,30 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "seed oil for frying (peanut or sunflower)",
-          "contains": "none",
-          "quantity": 60,
+          "category": "Fats",
+          "baseName": "Peanøttolje",
+          "quantity": 30,
           "unit": "ml",
           "cutPrep": null,
-          "prepNote": "the share taken up; fry in about 1 litre"
+          "cookingMethod": null,
+          "prepNote": "60 ml seed oil for frying (peanut or sunflower); 30 ml counted as soaked up by the food (half of a shallow-frying amount), the rest stays in the pan"
         },
         {
           "category": "Fruit",
           "baseName": "Sour Cherry",
-          "quantity": 8,
-          "unit": "each",
+          "quantity": 65.6,
+          "unit": "g",
           "cutPrep": "amarene in syrup, plus a little syrup",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "8 cherries"
         },
         {
-          "notInDatabase": true,
-          "name": "icing sugar (powdered sugar)",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 10,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "for dusting"
         }
       ],
@@ -8977,13 +8934,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "seed oil for frying (peanut or sunflower)",
-          "contains": "none",
-          "quantity": 80,
+          "category": "Fats",
+          "baseName": "Peanøttolje",
+          "quantity": 40,
           "unit": "ml",
           "cutPrep": null,
-          "prepNote": "the share taken up; fry in about 1 litre"
+          "cookingMethod": null,
+          "prepNote": "80 ml seed oil for frying (peanut or sunflower); 40 ml counted as soaked up by the food (half of a shallow-frying amount), the rest stays in the pan"
         },
         {
           "category": "Sweets",
@@ -9050,13 +9007,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "bitter apricot kernels (armelline)",
-          "contains": "none",
+          "category": "NutSeed",
+          "baseName": "Almonds",
           "quantity": 15,
           "unit": "g",
           "cutPrep": null,
-          "prepNote": "or 5 drops of bitter almond extract; these kernels are only used in this small amount"
+          "cookingMethod": null,
+          "prepNote": "or 5 drops of bitter almond extract; these kernels are only used in this small amount; in place of bitter apricot kernels (armelline), which the database does not hold"
         },
         {
           "category": "Sweets",
@@ -9068,12 +9025,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "icing sugar (powdered sugar)",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 125,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -9095,12 +9052,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "icing sugar (powdered sugar)",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 30,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "for rolling"
         }
       ],
@@ -9178,12 +9135,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "icing sugar (powdered sugar)",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 20,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "for dusting"
         }
       ],
@@ -9299,7 +9256,18 @@
       "servingSizeAmount": 1,
       "servingSizeUnit": "slice",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_dessert_candied_lemon_peel",
+          "servings": 12.5,
+          "note": "125 g, finely chopped"
+        },
+        {
+          "recipeId": "curated_dessert_candied_orange_peel",
+          "servings": 12.5,
+          "note": "125 g, finely chopped"
+        }
+      ],
       "id": "curated_it_panforte",
       "name": "Panforte",
       "dishGroup": "Desserts",
@@ -9315,24 +9283,6 @@
           "unit": "g",
           "cutPrep": "whole, skin on, toasted",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "candied citron peel",
-          "contains": "none",
-          "quantity": 125,
-          "unit": "g",
-          "cutPrep": "finely chopped",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "candied orange peel",
-          "contains": "none",
-          "quantity": 125,
-          "unit": "g",
-          "cutPrep": "finely chopped",
           "prepNote": null
         },
         {
@@ -9381,12 +9331,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "icing sugar (powdered sugar)",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 150,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "for the syrup"
         },
         {
@@ -9408,13 +9358,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "edible wafer paper (ostia)",
-          "contains": "gluten",
+          "category": "Baked",
+          "baseName": "Round baking wafers",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "1 sheet",
-          "prepNote": "some wafer paper is made from potato starch"
+          "cookingMethod": null,
+          "prepNote": "some wafer paper is made from potato starch; 1 each at 1 g per each"
         },
         {
           "category": "Fats",
@@ -9426,12 +9376,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "icing sugar (powdered sugar)",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 40,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "for dusting"
         }
       ],
@@ -9607,7 +9557,18 @@
       "servingSizeAmount": 1,
       "servingSizeUnit": "each",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_dessert_candied_orange_peel",
+          "servings": 2.5,
+          "note": "25 g of the 50 g, finely diced"
+        },
+        {
+          "recipeId": "curated_dessert_candied_lemon_peel",
+          "servings": 2.5,
+          "note": "25 g of the 50 g, finely diced, lemon peel in place of citron"
+        }
+      ],
       "id": "curated_it_sfogliatelle",
       "name": "Sfogliatelle",
       "dishGroup": "Desserts",
@@ -9716,30 +9677,21 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "candied citron and orange peel",
-          "contains": "none",
-          "quantity": 50,
-          "unit": "g",
-          "cutPrep": "finely diced",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "orange blossom water",
-          "contains": "none",
+          "category": "Bev",
+          "baseName": "Water, tap",
           "quantity": 5,
           "unit": "ml",
           "cutPrep": "1 teaspoon",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of orange blossom water, which the database does not hold; flower water carries next to no nutrients, so it counts as water"
         },
         {
-          "notInDatabase": true,
-          "name": "icing sugar (powdered sugar)",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 15,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "for dusting"
         }
       ],

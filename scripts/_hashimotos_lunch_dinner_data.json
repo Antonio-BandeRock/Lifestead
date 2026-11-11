@@ -5,8 +5,8 @@
     "name": "Baked Salmon with Broccoli & Carrots",
     "flavorProfile": "A simple baked salmon fillet with roasted broccoli and carrots, finished with lemon and avocado.",
     "healthBenefit": "Salmon, broccoli, and carrot all check completely clean for Hashimoto's in this app's own reference database, and avocado stands in for any pressed oil, which never does.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -46,11 +46,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lemon",
         "quantity": 10,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       },
@@ -78,8 +78,8 @@
     "name": "Halibut with Braised Cabbage & Carrots",
     "flavorProfile": "Baked halibut over cabbage and carrots braised soft, finished with lime and avocado.",
     "healthBenefit": "Halibut, cabbage, and carrot all check completely clean for Hashimoto's, and braising the cabbage (rather than serving it raw) is what keeps its own real goitrogenic flag from applying here.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -119,13 +119,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Herbs",
@@ -150,8 +150,8 @@
     "name": "Cod with Roasted Fennel & Zucchini",
     "flavorProfile": "Baked cod fillet with roasted fennel and zucchini, finished with lemon and avocado.",
     "healthBenefit": "Cod, fennel, and zucchini all check completely clean for Hashimoto's, a genuinely light, real whole-food plate.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -191,11 +191,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lemon",
         "quantity": 10,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       },
@@ -223,8 +223,8 @@
     "name": "Shrimp & Cabbage Stir-Fry",
     "flavorProfile": "Shrimp stir-fried with cabbage, carrot, and fresh ginger in a splash of water, finished with lime.",
     "healthBenefit": "Shrimp, cabbage, and carrot all check completely clean for Hashimoto's, cooked entirely without any pressed oil.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -273,13 +273,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Herbs",
@@ -304,8 +304,8 @@
     "name": "Beef Sirloin with Braised Kale & Carrots",
     "flavorProfile": "Seared beef sirloin with kale and carrots braised soft, finished with avocado.",
     "healthBenefit": "Beef top sirloin, kale, and carrot all check completely clean for Hashimoto's, braising the kale rather than serving it raw is what keeps its own real goitrogenic flag from applying here.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -366,8 +366,8 @@
     "name": "Pork Tenderloin with Braised Cabbage & Apple",
     "flavorProfile": "Baked pork tenderloin with cabbage and apple braised soft together, finished with cinnamon.",
     "healthBenefit": "Pork tenderloin, cabbage, and apple all check completely clean for Hashimoto's, a real, classic pairing built entirely from whole foods.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -428,8 +428,8 @@
     "name": "Salmon, Fennel & Leek Soup",
     "flavorProfile": "A light soup of salmon simmered with fennel, leek, and carrot in a real vegetable broth.",
     "healthBenefit": "Salmon, fennel, leek, and carrot all check completely clean for Hashimoto's, a genuinely light whole-food soup.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -518,8 +518,8 @@
     "name": "Shrimp Lettuce Wraps with Avocado & Lime",
     "flavorProfile": "Shrimp cooked in a splash of water, wrapped in lettuce with sliced avocado and a squeeze of lime.",
     "healthBenefit": "Shrimp, lettuce, and avocado all check completely clean for Hashimoto's, and the lettuce leaf stands in for a wrap without any grain at all.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "wrap",
     "ingredients": [
       {
@@ -550,13 +550,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Veg",
@@ -589,8 +589,8 @@
     "name": "Beef, Carrot & Fennel Salad",
     "flavorProfile": "Seared beef sliced over a raw carrot and fennel salad, finished with lemon and avocado.",
     "healthBenefit": "Beef top sirloin, carrot, and fennel all check completely clean for Hashimoto's, and neither carrot nor fennel carries any real raw-goitrogenic concern, so this salad genuinely works served raw.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -630,11 +630,11 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lemon",
         "quantity": 10,
         "unit": "g",
-        "cutPrep": "juiced",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       },
@@ -669,8 +669,8 @@
     "name": "Coconut Rice Bowl with Roasted Zucchini, Pepper & Tomato",
     "flavorProfile": "Rice simmered in coconut milk, topped with roasted zucchini, bell pepper, and tomato.",
     "healthBenefit": "Rice, coconut milk, zucchini, bell pepper, and tomato all check completely clean for Hashimoto's, a genuinely hearty vegan main.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -728,13 +728,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Herbs",
@@ -759,8 +759,8 @@
     "name": "Coconut Vegetable Soup with Fennel & Leek",
     "flavorProfile": "A light coconut-milk soup of fennel, leek, zucchini, and carrot, finished with fresh ginger.",
     "healthBenefit": "Coconut milk, fennel, leek, zucchini, and carrot all check completely clean for Hashimoto's, a genuinely warming vegan soup.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -848,8 +848,8 @@
     "name": "Avocado, Fennel & Citrus Salad",
     "flavorProfile": "Sliced avocado and shaved fennel with orange and grapefruit segments, finished with lime.",
     "healthBenefit": "Avocado, fennel, orange, and grapefruit all check completely clean for Hashimoto's, a genuinely bright, no-cook salad.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -889,13 +889,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Veg",
@@ -927,8 +927,8 @@
     "name": "Sorghum Bowl with Roasted Zucchini & Bell Pepper",
     "flavorProfile": "Sorghum simmered in coconut milk, topped with roasted zucchini and bell pepper.",
     "healthBenefit": "Sorghum, coconut milk, zucchini, and bell pepper all check completely clean for Hashimoto's, a genuinely different whole-grain base from rice.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -977,13 +977,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Herbs",
@@ -1008,8 +1008,8 @@
     "name": "Tomato Fennel Coconut Soup",
     "flavorProfile": "A creamy coconut-milk soup of tomato and fennel, finished with leek and fresh cilantro.",
     "healthBenefit": "Tomato, fennel, coconut milk, and leek all check completely clean for Hashimoto's, a genuinely rich vegan soup.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -1079,8 +1079,8 @@
     "name": "Avocado & Rice Lettuce Wraps",
     "flavorProfile": "Simmered rice and sliced avocado wrapped in lettuce with diced tomato and lime.",
     "healthBenefit": "Rice, avocado, lettuce, and tomato all check completely clean for Hashimoto's, and the lettuce leaf stands in for a wrap without any gluten at all.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "wrap",
     "ingredients": [
       {
@@ -1120,13 +1120,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Veg",

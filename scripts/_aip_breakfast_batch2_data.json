@@ -5,8 +5,8 @@
     "name": "Chicken & Broccoli Breakfast Bowl",
     "flavorProfile": "Baked chicken breast with roasted broccoli and carrot, finished with avocado.",
     "healthBenefit": "Chicken breast, broccoli, and carrot all check completely clean for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -68,8 +68,8 @@
     "name": "Chicken & Cabbage Breakfast Skillet",
     "flavorProfile": "Seared chicken breast with cabbage and carrot braised soft.",
     "healthBenefit": "Chicken breast, cabbage, and carrot all check completely clean for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -121,8 +121,8 @@
     "name": "Chicken & Kale Breakfast Hash",
     "flavorProfile": "A quick morning hash of seared chicken breast, braised kale, and carrot, finished with avocado.",
     "healthBenefit": "Chicken breast, kale, and carrot all check completely clean for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -183,8 +183,8 @@
     "name": "Chicken & Zucchini Breakfast Skillet",
     "flavorProfile": "Chicken breast sauteed with zucchini and carrot, finished with lime.",
     "healthBenefit": "Chicken breast, zucchini, and carrot all check completely clean for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -215,13 +215,13 @@
         "prepNote": null
       },
       {
-        "category": "Fruit",
+        "category": "Bev",
         "baseName": "Lime",
-        "quantity": 0.25,
-        "unit": "each",
-        "cutPrep": "juiced",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice of a quarter of a lime"
       },
       {
         "category": "Herbs",
@@ -245,8 +245,8 @@
     "name": "Turkey & Broccoli Breakfast Bowl",
     "flavorProfile": "Baked turkey breast with roasted broccoli and carrot, finished with avocado.",
     "healthBenefit": "Turkey breast, broccoli, and carrot all check completely clean for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -308,8 +308,8 @@
     "name": "Turkey & Cabbage Breakfast Skillet",
     "flavorProfile": "Seared turkey breast with cabbage and carrot braised soft.",
     "healthBenefit": "Turkey breast, cabbage, and carrot all check completely clean for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -361,8 +361,8 @@
     "name": "Turkey & Kale Breakfast Hash",
     "flavorProfile": "A quick morning hash of seared turkey breast, braised kale, and carrot, finished with avocado.",
     "healthBenefit": "Turkey breast, kale, and carrot all check completely clean for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -423,8 +423,8 @@
     "name": "Turkey & Fennel Breakfast Bowl",
     "flavorProfile": "Baked turkey breast with roasted fennel and zucchini.",
     "healthBenefit": "Turkey breast, fennel, and zucchini all check completely clean for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -476,8 +476,8 @@
     "name": "Beef & Fennel Breakfast Bowl",
     "flavorProfile": "Seared beef sirloin with roasted fennel and zucchini, finished with avocado.",
     "healthBenefit": "Beef top sirloin, fennel, and zucchini all check completely clean for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -538,8 +538,8 @@
     "name": "Pork & Broccoli Breakfast Skillet",
     "flavorProfile": "Seared pork tenderloin with roasted broccoli and carrot.",
     "healthBenefit": "Pork tenderloin, broccoli, and carrot all check completely clean for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -591,8 +591,8 @@
     "name": "Salmon & Kale Breakfast Bowl",
     "flavorProfile": "Baked salmon with braised kale and carrot, finished with avocado.",
     "healthBenefit": "Salmon, kale, and carrot all check completely clean for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -653,8 +653,8 @@
     "name": "Halibut & Broccoli Breakfast Bowl",
     "flavorProfile": "Baked halibut with roasted broccoli and carrot.",
     "healthBenefit": "Halibut, broccoli, and carrot all check completely clean for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -705,8 +705,8 @@
     "name": "Cod & Kale Breakfast Skillet",
     "flavorProfile": "Pan-seared cod with braised kale and carrot.",
     "healthBenefit": "Cod, kale, and carrot all check completely clean for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {

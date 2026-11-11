@@ -654,6 +654,24 @@
       "name": "Khanom Tako (Coconut Pandan Cups)",
       "shelf": "Sweets & Drinks",
       "file": "b_salads_noodles_rice_grilled_sweets.json"
+    },
+    {
+      "id": "curated_th_base_chai_po",
+      "name": "Chai Po (Sweet Preserved Radish)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_th_base_luk_chin_nuea",
+      "name": "Luk Chin Nuea (Thai Beef Balls)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_th_base_kaep_moo",
+      "name": "Kaep Moo (Pork Rinds)",
+      "shelf": "Bases: Rice, Noodles & Pantry",
+      "file": "c_made_first.json"
     }
   ]
 }

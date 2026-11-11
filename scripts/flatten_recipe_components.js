@@ -91,7 +91,7 @@ function flattenAll(db) {
       if (!compServings) throw new Error(`${id} uses ${c.component_recipe_id}, which is not a recipe`);
       const scale = c.servings / compServings;
       const inner = expand(c.component_recipe_id, [...trail, id]);
-      for (const row of inner.ingredients) result.ingredients.push({ ...row, quantity: round(row.quantity * scale) });
+      for (const row of inner.ingredients) result.ingredients.push({ ...row, quantity: round(row.quantity * scale), prep_note: scaleKeptSpoons(row.prep_note, scale) });
       for (const row of inner.unlisted) result.unlisted.push({ ...row, quantity: round(row.quantity * scale) });
     }
     memo.set(id, result);
@@ -117,7 +117,7 @@ function flattenAll(db) {
       const scale = c.servings / servingsOf.get(c.component_recipe_id);
       const inner = expand(c.component_recipe_id, [id]);
       for (const row of inner.ingredients) {
-        insertIngredient.run(id, row.category, row.base_name, round(row.quantity * scale), row.unit, row.cut_prep, row.cooking_method, row.prep_note, ++sort, c.component_recipe_id);
+        insertIngredient.run(id, row.category, row.base_name, round(row.quantity * scale), row.unit, row.cut_prep, row.cooking_method, scaleKeptSpoons(row.prep_note, scale), ++sort, c.component_recipe_id);
         rows++;
       }
       for (const row of inner.unlisted) {
@@ -131,6 +131,20 @@ function flattenAll(db) {
 
 function round(n) {
   return Math.round(n * 1000) / 1000;
+}
+
+// A salt note such as "2 tsp taken up by the bulbs, the rest rinsed off"
+// states what the WHOLE batch keeps, and saltGramsKeptInDish in
+// lib/unitConversion.ts caps the row at that many spoons. A flattened row
+// carries only part of the batch, so the stated spoons scale with it, or a
+// dish using 1/20 of the pickle would still be charged the full 2 tsp cap.
+function scaleKeptSpoons(note, scale) {
+  if (!note || scale === 1) return note;
+  const m = note.match(/^(\d+(?:\/\d+)?|\d*\.\d+)(\s*(?:tsp|tbsp)\b[^,]*,\s*the rest\b.*)$/i);
+  if (!m) return note;
+  const [num, den] = m[1].split('/').map(Number);
+  const spoons = (den ? num / den : num) * scale;
+  return `${Math.round(spoons * 1000) / 1000 || 0.001}${m[2]}`;
 }
 
 module.exports = { ensureSchema, flattenAll, DB_PATH };

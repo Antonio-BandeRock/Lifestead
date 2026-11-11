@@ -876,6 +876,78 @@
       "name": "Kouign-Amann",
       "shelf": "Desserts & Pastry",
       "file": "b_poultry_meats_sides_breads_desserts.json"
+    },
+    {
+      "id": "curated_fr_base_moutarde_de_dijon",
+      "name": "Moutarde de Dijon (Dijon Mustard)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_fr_base_herbes_de_provence",
+      "name": "Herbes de Provence",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_fr_base_quatre_epices",
+      "name": "Quatre-Épices (Four Spice)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_fr_base_fondant",
+      "name": "Fondant (Pouring Icing)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_fr_base_chapelure",
+      "name": "Chapelure (Dry Breadcrumbs)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_fr_base_poitrine_salee",
+      "name": "Poitrine Salée (Salt-Cured Pork Belly)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_fr_base_palette_demi_sel",
+      "name": "Palette Demi-sel (Half-Salted Pork Shoulder)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_fr_base_travers_demi_sel",
+      "name": "Travers Demi-sel (Half-Salted Pork Ribs)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_fr_base_jarret_demi_sel",
+      "name": "Jarret Demi-sel (Half-Salted Pork Hock)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_fr_base_saucisse_de_toulouse",
+      "name": "Saucisse de Toulouse",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_fr_base_saucisse_de_montbeliard",
+      "name": "Saucisse de Montbéliard (Smoked Sausage)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_fr_base_saucisse_de_strasbourg",
+      "name": "Saucisse de Strasbourg (Knack)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
     }
   ]
 }

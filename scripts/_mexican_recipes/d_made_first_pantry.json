@@ -1,0 +1,265 @@
+{
+  "recipes": [
+    {
+      "id": "curated_dessert_candied_orange_peel",
+      "name": "Candied Orange Peel",
+      "builderType": "dessert",
+      "dishGroup": "Pantry & Preserves",
+      "region": "Mediterranean",
+      "servings": 50,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Sweet and chewy with the bitter, perfumed edge of orange peel.",
+      "healthBenefit": "Mostly sugar, used in small amounts in cakes and pastries; the peel brings a little fiber.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Fruit", "baseName": "Apelsinskal", "quantity": 300, "unit": "g", "cutPrep": "peel of about 5 oranges, cut in strips or dice", "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 350, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "300 g for the syrup, 50 g to roll" },
+        { "category": "Bev", "baseName": "Water, tap", "quantity": 250, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "for the syrup" }
+      ],
+      "instructions": [
+        "Cover the peel with cold water, bring to a boil and drain. Repeat twice more to take away the harsh bitterness, pouring each water away.",
+        "Dissolve 300 g sugar in the 250 ml water, add the peel and simmer very gently for about 1 hour, until the peel is translucent and the syrup almost gone.",
+        "Lift out the peel, roll it in the last 50 g sugar and dry on a rack overnight. Keep in a closed jar for months."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Sugar", "note": "About 7 g per tablespoon." },
+        { "nutrient": "Fiber", "note": "A little from the peel." }
+      ],
+      "citations": [
+        { "source": "Wikipedia: Candied fruit", "url": "https://en.wikipedia.org/wiki/Candied_fruit" }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_dessert_candied_lemon_peel",
+      "name": "Candied Lemon Peel",
+      "builderType": "dessert",
+      "dishGroup": "Pantry & Preserves",
+      "region": "Mediterranean",
+      "servings": 50,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Sweet and chewy with the bitter, perfumed edge of lemon peel.",
+      "healthBenefit": "Mostly sugar, used in small amounts in cakes and pastries; the peel brings a little fiber.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Fruit", "baseName": "Sitronskall", "quantity": 300, "unit": "g", "cutPrep": "peel of about 8 lemons, cut in strips or dice", "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 350, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "300 g for the syrup, 50 g to roll" },
+        { "category": "Bev", "baseName": "Water, tap", "quantity": 250, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "for the syrup" }
+      ],
+      "instructions": [
+        "Cover the peel with cold water, bring to a boil and drain. Repeat twice more to take away the harsh bitterness, pouring each water away.",
+        "Dissolve 300 g sugar in the 250 ml water, add the peel and simmer very gently for about 1 hour, until the peel is translucent and the syrup almost gone.",
+        "Lift out the peel, roll it in the last 50 g sugar and dry on a rack overnight. Keep in a closed jar for months."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Sugar", "note": "About 7 g per tablespoon." },
+        { "nutrient": "Fiber", "note": "A little from the peel." }
+      ],
+      "citations": [
+        { "source": "Wikipedia: Succade", "url": "https://en.wikipedia.org/wiki/Succade" }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_sauce_apricot_jam",
+      "name": "Apricot Jam",
+      "builderType": "sauce",
+      "dishGroup": "Pantry & Preserves",
+      "region": "Europe",
+      "servings": 65,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Sweet and tangy, with soft pieces of apricot.",
+      "healthBenefit": "Mostly sugar; apricots bring some carotenes and fiber. A spoonful sweetens with fruit as well as sugar.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Fruit", "baseName": "Apricot", "quantity": 1000, "unit": "g", "cutPrep": "pitted and quartered", "cookingMethod": null, "prepNote": "about 1.2 kg whole" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 600, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Bev", "baseName": "Lemon Juice", "quantity": 30, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "2 tbsp" }
+      ],
+      "instructions": [
+        "Mix the apricots and sugar and leave 2 hours, or overnight in the fridge, until the juice runs.",
+        "Bring to a boil, add the lemon juice and boil hard, stirring, for 15 to 20 minutes, until a drop on a cold plate wrinkles when pushed.",
+        "Pour into hot clean jars, close and turn upside down to seal, or process in a water bath."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Sugar", "note": "About 9 g per tablespoon." },
+        { "nutrient": "Vitamin A", "note": "A little, from the apricots' carotenes." }
+      ],
+      "citations": [
+        { "source": "Wikipedia: Fruit preserves", "url": "https://en.wikipedia.org/wiki/Fruit_preserves" }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_sauce_raspberry_jam",
+      "name": "Raspberry Jam",
+      "builderType": "sauce",
+      "dishGroup": "Pantry & Preserves",
+      "region": "Europe",
+      "servings": 75,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Sweet, sharp and deeply fruity, with the seeds left in.",
+      "healthBenefit": "Mostly sugar, with some fiber from the seeds.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Fruit", "baseName": "Raspberry", "quantity": 1000, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 800, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Bev", "baseName": "Lemon Juice", "quantity": 30, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "2 tbsp" }
+      ],
+      "instructions": [
+        "Crush the raspberries in a wide pot and bring to a boil.",
+        "Add the sugar and lemon juice, stir until dissolved and boil hard for 5 to 8 minutes, until a drop on a cold plate wrinkles.",
+        "Pour into hot clean jars and seal."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Sugar", "note": "About 10 g per tablespoon." },
+        { "nutrient": "Fiber", "note": "A little from the seeds." }
+      ],
+      "citations": [
+        { "source": "Wikipedia: Fruit preserves", "url": "https://en.wikipedia.org/wiki/Fruit_preserves" }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_sauce_red_currant_jelly",
+      "name": "Red Currant Jelly",
+      "builderType": "sauce",
+      "dishGroup": "Pantry & Preserves",
+      "region": "Northern Europe",
+      "servings": 55,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Clear, tart and sweet, used with game and in sauces as much as on bread.",
+      "healthBenefit": "Mostly sugar, with the tartness of currants.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Fruit", "baseName": "Red currant", "quantity": 1000, "unit": "g", "cutPrep": "stripped from the stems", "cookingMethod": null, "prepNote": null },
+        { "category": "Bev", "baseName": "Water, tap", "quantity": 100, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 600, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null }
+      ],
+      "instructions": [
+        "Simmer the currants with the water for 10 minutes, crushing them, until they burst.",
+        "Pour into a jelly bag or cloth-lined sieve and let drip without squeezing for a few hours.",
+        "Boil the juice with the sugar for 5 to 8 minutes until it sets on a cold plate, skim, pour into hot clean jars and seal."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Sugar", "note": "About 11 g per tablespoon." }
+      ],
+      "citations": [
+        { "source": "Wikipedia: Redcurrant jelly", "url": "https://en.wikipedia.org/wiki/Redcurrant_jelly" }
+      ],
+      "curationNote": "The strained skins and seeds are still counted in the nutrients, since the database has no figure for currant juice alone."
+    },
+    {
+      "id": "curated_dessert_vanilla_ice_cream",
+      "name": "Vanilla Ice Cream",
+      "builderType": "dessert",
+      "dishGroup": "Desserts",
+      "region": "France and Italy",
+      "servings": 11,
+      "servingSizeAmount": 0.5,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Rich and smooth, a custard base with clear vanilla.",
+      "healthBenefit": "A dessert: it brings calcium and vitamin A from the milk and cream along with a fair amount of sugar and saturated fat.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 500, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Heavy Whipping Cream", "quantity": 500, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Dairy", "baseName": "Chicken Egg Yolk (Raw)", "quantity": 108, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "6 yolks" },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 150, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Vanilla extract", "quantity": 10, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "2 tsp" },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 0.5, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "a pinch" }
+      ],
+      "instructions": [
+        "Heat the milk and cream until steaming.",
+        "Whisk the yolks, sugar and salt, pour in the hot milk while whisking, return to the pan and stir over low heat until it coats a spoon (about 82 C / 180 F). Do not let it boil.",
+        "Strain, stir in the vanilla and chill overnight.",
+        "Churn in an ice cream maker and freeze until firm."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Calcium", "note": "About 90 mg per half cup." },
+        { "nutrient": "Sugar", "note": "About 14 g per half cup." },
+        { "nutrient": "Saturated fat", "note": "High, from the cream." }
+      ],
+      "citations": [
+        { "source": "Wikipedia: Ice cream", "url": "https://en.wikipedia.org/wiki/Ice_cream" }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_dessert_marzipan",
+      "name": "Marzipan",
+      "builderType": "dessert",
+      "dishGroup": "Pantry & Preserves",
+      "region": "Germany and the Mediterranean",
+      "servings": 21,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Sweet, dense and almondy.",
+      "healthBenefit": "More than half almonds, so it brings vitamin E, magnesium and mostly unsaturated fat along with the sugar.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "NutSeed", "baseName": "Nuts, almonds, blanched", "quantity": 250, "unit": "g", "cutPrep": "ground very fine", "cookingMethod": null, "prepNote": null },
+        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 150, "unit": "g", "cutPrep": "ground to powder", "cookingMethod": null, "prepNote": null },
+        { "category": "Bev", "baseName": "Water, tap", "quantity": 30, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "or rose water" }
+      ],
+      "instructions": [
+        "Grind the almonds and sugar together in a food processor until fine and starting to clump.",
+        "Add the water a little at a time and knead into a smooth, firm paste.",
+        "Wrap tightly and keep in the fridge for up to a month."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Vitamin E", "note": "From the almonds." },
+        { "nutrient": "Sugar", "note": "About 7 g per 20 g piece." }
+      ],
+      "citations": [
+        { "source": "Wikipedia: Marzipan", "url": "https://en.wikipedia.org/wiki/Marzipan" }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_side_pork_blood_cake",
+      "name": "Pork Blood Cake (Huyết)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Pantry & Preserves",
+      "region": "Vietnam, Thailand and southern China",
+      "servings": 15,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Soft and silky like firm tofu, mild and faintly mineral.",
+      "healthBenefit": "Very rich in iron, most of it heme iron, which the body takes up more easily than plant iron.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        { "category": "Meat", "baseName": "Gris blod rått", "quantity": 1000, "unit": "g", "cutPrep": "fresh, strained", "cookingMethod": null, "prepNote": null },
+        { "category": "Bev", "baseName": "Water, tap", "quantity": 500, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
+        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 5, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "stirred into the blood" }
+      ],
+      "instructions": [
+        "Stir the salt into the blood, then stir in the water.",
+        "Pour into a shallow tray, cover and steam over gentle heat for 15 to 20 minutes, until set like soft tofu.",
+        "Cool, cut into cubes and keep in the fridge up to 3 days. Warm through in the soup just before serving."
+      ],
+      "nutritionHighlights": [
+        { "nutrient": "Iron", "note": "Blood is one of the richest food sources of heme iron." },
+        { "nutrient": "Protein", "note": "About 7 g per 100 g serving." }
+      ],
+      "citations": [
+        { "source": "Wikipedia: Blood tofu", "url": "https://en.wikipedia.org/wiki/Blood_tofu" }
+      ],
+      "curationNote": null
+    }
+  ]
+}

@@ -202,7 +202,13 @@
       "flavorProfile": "Deep, glossy and sweet-savoury, with soy, rock sugar and a warm perfume of star anise, cassia and tangerine peel.",
       "healthBenefit": "A braising liquid rather than something to drink: it flavours meat, tofu and eggs, and it is high in sodium and sugar, so a little goes a long way.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_cn_base_chen_pi",
+          "servings": 2,
+          "note": "2 each, pieces"
+        }
+      ],
       "ingredients": [
         {
           "category": "Bev",
@@ -223,13 +229,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 120,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 129.6,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "120 ml at 1.08 g per ml; in place of dark soy sauce, which the database does not hold"
         },
         {
           "category": "Sweets",
@@ -241,22 +247,22 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 180,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "mei gui lu jiu (Chinese rose wine)",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Grain spirit",
           "quantity": 180,
           "unit": "ml",
           "cutPrep": null,
-          "prepNote": "or more Shaoxing wine"
+          "cookingMethod": null,
+          "prepNote": "or more Shaoxing wine; in place of mei gui lu jiu (Chinese rose wine), which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -295,15 +301,6 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried tangerine peel",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "pieces",
-          "prepNote": null
-        },
-        {
           "category": "Herbs",
           "baseName": "Spices, cloves, ground",
           "quantity": 1,
@@ -313,13 +310,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Sichuan peppercorns",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Spices, \"Sansho\" (Japanese pepper), ground",
+          "quantity": 1.7,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tsp at 1.7 g per tsp; in place of Sichuan peppercorns, which the database does not hold"
         }
       ],
       "instructions": [
@@ -391,29 +388,29 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "leaves",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
-          "notInDatabase": true,
-          "name": "Sichuan peppercorns",
-          "contains": "none",
-          "quantity": 3,
-          "unit": "tbsp",
+          "category": "Herbs",
+          "baseName": "Spices, \"Sansho\" (Japanese pepper), ground",
+          "quantity": 15,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "3 tbsp at 5 g per tbsp; in place of Sichuan peppercorns, which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "black cardamom",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "each",
+          "category": "Herbs",
+          "baseName": "Spices, cardamom, ground",
+          "quantity": 4,
+          "unit": "g",
           "cutPrep": "pods",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 each at 2 g per each; in place of black cardamom, which the database does not hold"
         },
         {
           "notInDatabase": true,
@@ -841,17 +838,14 @@
       "flavorProfile": "Deeply savoury and funky, salty fermented black beans mellowed in garlic-scented oil with a touch of sweetness and chili.",
       "healthBenefit": "A strong-flavoured seasoning used by the spoonful; the fermented beans bring savoury depth and the sauce is high in sodium.",
       "overallTier": "strong",
-      "components": [],
-      "ingredients": [
+      "components": [
         {
-          "notInDatabase": true,
-          "name": "fermented black beans (douchi)",
-          "contains": "none",
-          "quantity": 60,
-          "unit": "g",
-          "cutPrep": "rinsed and roughly chopped",
-          "prepNote": null
-        },
+          "recipeId": "curated_cn_base_douchi",
+          "servings": 6,
+          "note": "60 g, rinsed and roughly chopped"
+        }
+      ],
+      "ingredients": [
         {
           "category": "Veg",
           "baseName": "Garlic",
@@ -898,12 +892,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 30,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -967,30 +961,30 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "dried scallops (conpoy)",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Mollusks, giant ezo-scallop*, adductor muscle,  \"Niboshi\" (boiled and dried) ［*Syn. common scallop, Japanese scallop］",
           "quantity": 150,
           "unit": "g",
           "cutPrep": "soaked, drained and shredded",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried shrimp",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
           "quantity": 150,
           "unit": "g",
           "cutPrep": "soaked, drained and finely chopped",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 60,
           "unit": "ml",
           "cutPrep": "for soaking",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -1048,13 +1042,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 15,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 16.2,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "15 ml at 1.08 g per ml; in place of dark soy sauce, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -1770,31 +1764,31 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "baijiu (Chinese grain spirit)",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Grain spirit",
           "quantity": 20,
           "unit": "ml",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of baijiu (Chinese grain spirit), which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "Sichuan peppercorns",
-          "contains": "none",
+          "category": "Herbs",
+          "baseName": "Spices, \"Sansho\" (Japanese pepper), ground",
           "quantity": 15,
           "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of Sichuan peppercorns, which the database does not hold"
         },
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 6,
-          "unit": "each",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "6 dried chilies"
         },
         {
           "category": "Herbs",
@@ -1905,13 +1899,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Sichuan peppercorns",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "tbsp",
+          "category": "Herbs",
+          "baseName": "Spices, \"Sansho\" (Japanese pepper), ground",
+          "quantity": 5,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tbsp at 5 g per tbsp; in place of Sichuan peppercorns, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -1967,13 +1961,13 @@
       "components": [],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "Sichuan peppercorns",
-          "contains": "none",
-          "quantity": 3,
-          "unit": "tbsp",
+          "category": "Herbs",
+          "baseName": "Spices, \"Sansho\" (Japanese pepper), ground",
+          "quantity": 15,
+          "unit": "g",
           "cutPrep": "red Sichuan peppercorns, stems and seeds picked out",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "3 tbsp at 5 g per tbsp; in place of Sichuan peppercorns, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -2023,6 +2017,11 @@
           "recipeId": "curated_cn_base_five_spice_powder",
           "servings": 0.33,
           "note": "about 1/2 tsp"
+        },
+        {
+          "recipeId": "curated_cn_base_hoisin",
+          "servings": 1,
+          "note": "15 ml"
         }
       ],
       "ingredients": [
@@ -2072,12 +2071,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -2086,15 +2085,6 @@
           "quantity": 15,
           "unit": "ml",
           "cutPrep": "light soy sauce",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "SaucesCondiments",
-          "baseName": "Hoisinsaus, hjemmelaget",
-          "quantity": 15,
-          "unit": "ml",
-          "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
@@ -2126,12 +2116,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "maltose syrup",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Maltose",
           "quantity": 40,
           "unit": "g",
           "cutPrep": "about 2 tbsp",
+          "cookingMethod": null,
           "prepNote": "or honey"
         },
         {
@@ -2371,12 +2361,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -2557,13 +2547,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 10,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 10.8,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "10 ml at 1.08 g per ml; in place of dark soy sauce, which the database does not hold"
         },
         {
           "category": "Sweets",
@@ -2707,12 +2697,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -2839,12 +2829,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 30,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3003,12 +2993,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 10,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3066,13 +3056,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Sichuan peppercorns",
-          "contains": "none",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Spices, \"Sansho\" (Japanese pepper), ground",
+          "quantity": 0.9,
+          "unit": "g",
           "cutPrep": "toasted and ground",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "0.5 tsp at 1.7 g per tsp; in place of Sichuan peppercorns, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -3184,12 +3174,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3330,12 +3320,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3600,6 +3590,11 @@
           "recipeId": "curated_cn_base_steamed_glutinous_rice",
           "servings": 6,
           "note": "about 600 g raw, steamed"
+        },
+        {
+          "recipeId": "curated_cn_base_lap_cheong",
+          "servings": 2,
+          "note": "2 each, sausages, diced"
         }
       ],
       "ingredients": [
@@ -3622,15 +3617,6 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lap cheong (Chinese sausage)",
-          "contains": "meat,alcohol",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "sausages, diced",
-          "prepNote": null
-        },
-        {
           "category": "Mushroom",
           "baseName": "Shiitake mushroom dried",
           "quantity": 20,
@@ -3640,12 +3626,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried shrimp",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
           "quantity": 20,
           "unit": "g",
           "cutPrep": "soaked",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3667,21 +3653,21 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 15,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 16.2,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "15 ml at 1.08 g per ml; in place of dark soy sauce, which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3780,7 +3766,13 @@
       "flavorProfile": "Soft, savoury radish cake with a golden pan-fried crust, flecked with sweet sausage, dried shrimp and shiitake.",
       "healthBenefit": "Daikon brings vitamin C and the cake is mostly rice starch, though the sausage and frying make it a rich snack.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_cn_base_lap_cheong",
+          "servings": 2,
+          "note": "2 each, sausages, finely diced"
+        }
+      ],
       "ingredients": [
         {
           "category": "Veg",
@@ -3819,21 +3811,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lap cheong (Chinese sausage)",
-          "contains": "meat,alcohol",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "sausages, finely diced",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "dried shrimp",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
           "quantity": 20,
           "unit": "g",
           "cutPrep": "soaked and chopped",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -4014,12 +3997,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -4271,12 +4254,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -4380,6 +4363,11 @@
           "recipeId": "curated_cn_base_bao_dough",
           "servings": 10,
           "note": "the whole batch, cut in 14"
+        },
+        {
+          "recipeId": "curated_cn_base_dougan",
+          "servings": 1.2,
+          "note": "120 g, finely diced"
         }
       ],
       "ingredients": [
@@ -4399,15 +4387,6 @@
           "unit": "g",
           "cutPrep": "soaked and finely diced",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "spiced dry tofu (dougan)",
-          "contains": "none",
-          "quantity": 120,
-          "unit": "g",
-          "cutPrep": "finely diced",
           "prepNote": null
         },
         {
@@ -4551,12 +4530,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried shrimp",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
           "quantity": 20,
           "unit": "g",
           "cutPrep": "soaked and chopped",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -4710,13 +4689,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "sui mi ya cai (preserved mustard greens)",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Leaf mustard, \"Takana\", leaves, salted pickles",
           "quantity": 60,
           "unit": "g",
           "cutPrep": "rinsed",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of sui mi ya cai (preserved mustard greens), which the database does not hold"
         },
         {
           "category": "Fats",
@@ -4728,12 +4707,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -4746,22 +4725,22 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 5,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 5.4,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "5 ml at 1.08 g per ml; in place of dark soy sauce, which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "Sichuan peppercorns",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Spices, \"Sansho\" (Japanese pepper), ground",
+          "quantity": 3.4,
+          "unit": "g",
           "cutPrep": "toasted and ground",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 tsp at 1.7 g per tsp; in place of Sichuan peppercorns, which the database does not hold"
         },
         {
           "category": "Legume",
@@ -4872,13 +4851,13 @@
       "components": [],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "fresh alkaline wheat noodles",
-          "contains": "gluten",
+          "category": "PastaNoodles",
+          "baseName": "Common wheat, \"Udon\" (thick wheat noodles), uncooked",
           "quantity": 450,
           "unit": "g",
           "cutPrep": "fresh thick wheat noodles",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of fresh alkaline wheat noodles, which the database does not hold"
         },
         {
           "category": "Meat",
@@ -4917,12 +4896,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -4944,13 +4923,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 5,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 5.4,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "5 ml at 1.08 g per ml; in place of dark soy sauce, which the database does not hold"
         },
         {
           "category": "Sweets",
@@ -5098,21 +5077,21 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 15,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 16.2,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "15 ml at 1.08 g per ml; in place of dark soy sauce, which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5325,12 +5304,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5343,13 +5322,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 10,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 10.8,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "10 ml at 1.08 g per ml; in place of dark soy sauce, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -5475,13 +5454,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 10,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 10.8,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "10 ml at 1.08 g per ml; in place of dark soy sauce, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -5493,12 +5472,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5689,13 +5668,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Sichuan peppercorns",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Spices, \"Sansho\" (Japanese pepper), ground",
+          "quantity": 1.7,
+          "unit": "g",
           "cutPrep": "ground",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tsp at 1.7 g per tsp; in place of Sichuan peppercorns, which the database does not hold"
         },
         {
           "category": "PantryStaples",
@@ -5707,12 +5686,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5915,13 +5894,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Sichuan peppercorns",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Spices, \"Sansho\" (Japanese pepper), ground",
+          "quantity": 1.7,
+          "unit": "g",
           "cutPrep": "ground",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tsp at 1.7 g per tsp; in place of Sichuan peppercorns, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -6042,13 +6021,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Sichuan peppercorns",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "tbsp",
+          "category": "Herbs",
+          "baseName": "Spices, \"Sansho\" (Japanese pepper), ground",
+          "quantity": 5,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tbsp at 5 g per tbsp; in place of Sichuan peppercorns, which the database does not hold"
         },
         {
           "notInDatabase": true,
@@ -6080,20 +6059,20 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 3,
-          "unit": "each",
+          "quantity": 0.45,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bay leaves"
         },
         {
-          "notInDatabase": true,
-          "name": "black cardamom",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "each",
+          "category": "Herbs",
+          "baseName": "Spices, cardamom, ground",
+          "quantity": 4,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 each at 2 g per each; in place of black cardamom, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -6186,13 +6165,13 @@
       "components": [],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "fresh thin wheat noodles",
-          "contains": "gluten",
+          "category": "PastaNoodles",
+          "baseName": "Common wheat, \"Udon\" (thick wheat noodles), uncooked",
           "quantity": 450,
           "unit": "g",
           "cutPrep": "fresh thin wheat noodles",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of fresh thin wheat noodles, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -6222,13 +6201,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 30,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 32.4,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "30 ml at 1.08 g per ml; in place of dark soy sauce, which the database does not hold"
         },
         {
           "category": "Sweets",
@@ -6565,12 +6544,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "chicken fat (from the cavity of the chicken)",
-          "contains": "meat",
+          "category": "Fats",
+          "baseName": "Chicken Fat",
           "quantity": 30,
           "unit": "g",
           "cutPrep": "melted, for the surface",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -6639,17 +6618,22 @@
           "recipeId": "curated_cn_base_hong_you",
           "servings": 2,
           "note": "or to taste"
+        },
+        {
+          "recipeId": "curated_cn_base_suan_dou_jiao",
+          "servings": 3,
+          "note": "60 g, diced"
         }
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "fresh alkaline wheat noodles",
-          "contains": "gluten",
+          "category": "PastaNoodles",
+          "baseName": "Common wheat, \"Udon\" (thick wheat noodles), uncooked",
           "quantity": 450,
           "unit": "g",
           "cutPrep": "fresh alkaline noodles",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of fresh alkaline wheat noodles, which the database does not hold"
         },
         {
           "category": "Fats",
@@ -6679,13 +6663,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 10,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 10.8,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "10 ml at 1.08 g per ml; in place of dark soy sauce, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -6703,15 +6687,6 @@
           "unit": "ml",
           "cutPrep": "warm",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "pickled long beans",
-          "contains": "none",
-          "quantity": 60,
-          "unit": "g",
-          "cutPrep": "diced",
           "prepNote": null
         },
         {
@@ -6819,12 +6794,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "doubanjiang (Pixian chili bean paste)",
-          "contains": "gluten",
+          "category": "Herbs",
+          "baseName": "Hot seasoning, Doubanjiang",
           "quantity": 30,
           "unit": "g",
           "cutPrep": "about 2 tbsp",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -6846,12 +6821,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -6864,13 +6839,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 5,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 5.4,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "5 ml at 1.08 g per ml; in place of dark soy sauce, which the database does not hold"
         },
         {
           "category": "Sweets",
@@ -7028,12 +7003,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -7246,7 +7221,18 @@
       "flavorProfile": "Rice cooked in a clay pot under sweet Chinese sausage, cured pork and marinated chicken, with a crackling, toasty crust at the bottom and a sweet soy drizzle.",
       "healthBenefit": "Chicken brings protein and the greens add vitamins, though the cured sausage and pork are salty and rich.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_cn_base_lap_cheong",
+          "servings": 2,
+          "note": "2 each, sliced on the diagonal"
+        },
+        {
+          "recipeId": "curated_cn_base_lap_yuk",
+          "servings": 1.2,
+          "note": "60 g, thinly sliced"
+        }
+      ],
       "ingredients": [
         {
           "category": "Grain",
@@ -7264,24 +7250,6 @@
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "lap cheong (Chinese sausage)",
-          "contains": "meat,alcohol",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "sliced on the diagonal",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "lap yuk (Cantonese cured pork belly)",
-          "contains": "meat,alcohol",
-          "quantity": 60,
-          "unit": "g",
-          "cutPrep": "thinly sliced",
           "prepNote": null
         },
         {
@@ -7321,12 +7289,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -7375,13 +7343,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 15,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 16.2,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "15 ml at 1.08 g per ml; in place of dark soy sauce, which the database does not hold"
         },
         {
           "category": "Sweets",
@@ -7539,12 +7507,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "chicken fat (from the cavity of the chicken)",
-          "contains": "meat",
+          "category": "Fats",
+          "baseName": "Chicken Fat",
           "quantity": 55,
           "unit": "g",
           "cutPrep": "about 2 oz, rendered",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -7575,13 +7543,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 45,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 48.6,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "45 ml at 1.08 g per ml; in place of dark soy sauce, which the database does not hold"
         },
         {
           "category": "Sweets",
@@ -7721,12 +7689,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 5,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -7739,13 +7707,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "century egg (pidan)",
-          "contains": "egg",
-          "quantity": 2,
-          "unit": "each",
+          "category": "Dairy",
+          "baseName": "Eggs, domesticated duck, century egg (Pidan)",
+          "quantity": 120,
+          "unit": "g",
           "cutPrep": "peeled and diced",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 each at 60 g per each"
         },
         {
           "category": "Herbs",
@@ -7882,12 +7850,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 5,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -7995,7 +7963,18 @@
       "flavorProfile": "Glutinous rice wrapped in bamboo leaves around fatty pork, salted egg yolk, sausage and peanuts, slow-boiled until tender and fragrant with the leaves.",
       "healthBenefit": "Pork, egg yolk and peanuts bring protein and fats, though zongzi are dense and rich, so one is a full snack.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_cn_base_xian_dan_huang",
+          "servings": 6,
+          "note": "6 each, halved"
+        },
+        {
+          "recipeId": "curated_cn_base_lap_cheong",
+          "servings": 3,
+          "note": "3 each, cut in pieces"
+        }
+      ],
       "ingredients": [
         {
           "notInDatabase": true,
@@ -8070,12 +8049,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -8085,24 +8064,6 @@
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "salted duck egg yolk",
-          "contains": "egg",
-          "quantity": 6,
-          "unit": "each",
-          "cutPrep": "halved",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "lap cheong (Chinese sausage)",
-          "contains": "meat,alcohol",
-          "quantity": 3,
-          "unit": "each",
-          "cutPrep": "cut in pieces",
           "prepNote": null
         },
         {
@@ -8157,7 +8118,13 @@
       "flavorProfile": "Fluffy jasmine rice soaked with the sweet, savoury fat of Chinese sausage steamed on top, with a drizzle of soy and fresh scallion.",
       "healthBenefit": "A simple one-pot rice, with the sausage bringing flavour and some protein, though it is sweet, salty and fatty.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_cn_base_lap_cheong",
+          "servings": 3,
+          "note": "3 each, sliced on the diagonal"
+        }
+      ],
       "ingredients": [
         {
           "category": "Grain",
@@ -8178,15 +8145,6 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lap cheong (Chinese sausage)",
-          "contains": "meat,alcohol",
-          "quantity": 3,
-          "unit": "each",
-          "cutPrep": "sliced on the diagonal",
-          "prepNote": null
-        },
-        {
           "category": "Legume",
           "baseName": "Soy sauce made from soy and wheat (shoyu)",
           "quantity": 30,
@@ -8196,13 +8154,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 5,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 5.4,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "5 ml at 1.08 g per ml; in place of dark soy sauce, which the database does not hold"
         },
         {
           "category": "Sweets",
@@ -8395,6 +8353,11 @@
           "recipeId": "curated_cn_base_qing_tang",
           "servings": 8,
           "note": "about 2 litres"
+        },
+        {
+          "recipeId": "curated_cn_base_dougan",
+          "servings": 0.85,
+          "note": "85 g, pressed tofu, julienned"
         }
       ],
       "ingredients": [
@@ -8428,20 +8391,20 @@
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 1,
+          "unit": "g",
           "cutPrep": "optional",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 dried chilies"
         },
         {
-          "notInDatabase": true,
-          "name": "dried lily flowers (golden needles)",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Lily Bulb",
           "quantity": 8,
           "unit": "g",
           "cutPrep": "dried lily buds, soaked",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of dried lily flowers (golden needles), which the database does not hold"
         },
         {
           "category": "Mushroom",
@@ -8459,15 +8422,6 @@
           "unit": "g",
           "cutPrep": "soaked and julienned",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "spiced dry tofu (dougan)",
-          "contains": "none",
-          "quantity": 85,
-          "unit": "g",
-          "cutPrep": "pressed tofu, julienned",
           "prepNote": null
         },
         {
@@ -8525,13 +8479,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 10,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 10.8,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "10 ml at 1.08 g per ml; in place of dark soy sauce, which the database does not hold"
         },
         {
           "category": "Legume",
@@ -8818,12 +8772,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 30,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -9187,12 +9141,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 10,
           "unit": "ml",
           "cutPrep": "about 2 tsp",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -9580,13 +9534,13 @@
       "components": [],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "fish head (bighead or silver carp)",
-          "contains": "fish",
-          "quantity": 900,
+          "category": "Meat",
+          "baseName": "Carp",
+          "quantity": 360,
           "unit": "g",
           "cutPrep": "split, rinsed and patted dry",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "a head counted as 40% edible flesh"
         },
         {
           "category": "Herbs",
@@ -9625,12 +9579,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 30,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -9645,11 +9599,11 @@
         {
           "category": "Fruit",
           "baseName": "Chinese Jujube",
-          "quantity": 3,
-          "unit": "each",
+          "quantity": 30,
+          "unit": "g",
           "cutPrep": "pitted",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 dried jujubes"
         },
         {
           "category": "Fruit",
@@ -9752,6 +9706,11 @@
           "recipeId": "curated_cn_base_qing_tang",
           "servings": 8,
           "note": "about 2 litres"
+        },
+        {
+          "recipeId": "curated_cn_base_douchi",
+          "servings": 0.667,
+          "note": "2 tsp"
         }
       ],
       "ingredients": [
@@ -9765,13 +9724,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Sichuan peppercorns",
-          "contains": "none",
-          "quantity": 4,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Spices, \"Sansho\" (Japanese pepper), ground",
+          "quantity": 6.8,
+          "unit": "g",
           "cutPrep": "about 1 1/3 tbsp",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "4 tsp at 1.7 g per tsp; in place of Sichuan peppercorns, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -9794,11 +9753,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "notInDatabase": true,
@@ -9864,21 +9823,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "doubanjiang (Pixian chili bean paste)",
-          "contains": "gluten",
+          "category": "Herbs",
+          "baseName": "Hot seasoning, Doubanjiang",
           "quantity": 30,
           "unit": "g",
           "cutPrep": "about 2 tbsp",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "fermented black beans (douchi)",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "tsp",
-          "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -9891,12 +9841,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Shaoxing wine",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
           "quantity": 30,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {

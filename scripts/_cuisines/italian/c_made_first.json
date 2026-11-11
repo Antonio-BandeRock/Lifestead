@@ -1,0 +1,817 @@
+{
+  "recipes": [
+    {
+      "id": "curated_it_base_savoiardi",
+      "name": "Savoiardi (Ladyfingers)",
+      "builderType": "bakedGoods",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "Piedmont",
+      "servings": 36,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Light, dry and crisp, with a sugary crust and an eggy sweetness.",
+      "healthBenefit": "A light biscuit made mostly of egg, sugar and flour, with no butter.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "separated",
+          "cookingMethod": null,
+          "prepNote": "4 eggs"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 75,
+          "unit": "g",
+          "cutPrep": "sifted",
+          "cookingMethod": null,
+          "prepNote": "Italian 00 is traditional"
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Potato Starch",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "sifted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "to dust"
+        }
+      ],
+      "instructions": [
+        "Whisk the yolks with half the sugar until pale and thick. Whip the whites to soft peaks, then add the rest of the sugar and whip to firm peaks.",
+        "Fold the whites into the yolks, then fold in the flour and starch in two parts.",
+        "Pipe 10 cm fingers onto lined trays, dust twice with sugar and bake at 190 C (375 F) for 10 to 12 minutes, until lightly golden.",
+        "Cool and keep in a tin. Dry ones soak up coffee best."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 1.5 g per biscuit, from the eggs."
+        },
+        {
+          "nutrient": "Sugar",
+          "note": "About 4 g per biscuit."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Ladyfinger (biscuit)",
+          "url": "https://en.wikipedia.org/wiki/Ladyfinger_(biscuit)"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_it_base_gelato_fior_di_latte",
+      "name": "Gelato Fior di Latte",
+      "builderType": "dessert",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "Italy",
+      "servings": 19,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Clean, milky and lightly sweet, with no egg or vanilla.",
+      "healthBenefit": "Lower in fat than custard ice cream, since it is mostly milk, and it still brings calcium.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 750,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Heavy Whipping Cream",
+          "quantity": 250,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 170,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Heat the milk, cream and sugar to 85 C (185 F), stirring until the sugar dissolves.",
+        "Chill overnight.",
+        "Churn in an ice cream maker and serve soft, or freeze briefly. One serving is a 60 g scoop."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Calcium",
+          "note": "About 70 mg per scoop."
+        },
+        {
+          "nutrient": "Sugar",
+          "note": "About 11 g per scoop."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Gelato",
+          "url": "https://en.wikipedia.org/wiki/Gelato"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_it_base_pangrattato",
+      "name": "Pangrattato (Dry Breadcrumbs)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "Italy",
+      "servings": 20,
+      "servingSizeAmount": 0.25,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Plain and toasty, from unsalted country bread.",
+      "healthBenefit": "Made from bread with no salt, so it adds no sodium.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_it_pane_toscano",
+          "servings": 16,
+          "note": "the whole loaf, dried"
+        }
+      ],
+      "ingredients": [],
+      "instructions": [
+        "Cut the stale loaf in slices and dry them in a 120 C (250 F) oven for about 1 hour, until crisp right through.",
+        "Cool and grind fine, then sift. Keep in a closed jar for a month."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sodium",
+          "note": "Almost none, since Tuscan bread has no salt."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Bread crumbs",
+          "url": "https://en.wikipedia.org/wiki/Bread_crumbs"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_it_base_pancetta",
+      "name": "Pancetta (Cured Pork Belly)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "Italy",
+      "servings": 28,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Salty, sweet-fatted pork belly with black pepper, juniper and garlic.",
+      "healthBenefit": "Pork belly brings B vitamins and zinc; used a little at a time to season a dish.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
+          "quantity": 1850,
+          "unit": "g",
+          "cutPrep": "skin removed, in one flat piece",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 52,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "all of it taken up by the meat"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "coarsely crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "crumbled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "juniper berries",
+          "contains": "none",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mix the salt, sugar, half the pepper, the nutmeg, garlic, bay, thyme and juniper and rub it into every side of the belly.",
+        "Seal in a bag and keep in the fridge 7 to 10 days, turning daily, until it is firm all through.",
+        "Rinse, pat dry, press the rest of the pepper onto the meat side and hang flat (tesa) at 12 to 15 C (54 to 59 F) with good humidity for 3 weeks, until it has lost about a quarter of its weight. One serving is 50 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sodium",
+          "note": "About 1,000 mg per 50 g."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "Most of the weight is fat."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Pancetta",
+          "url": "https://en.wikipedia.org/wiki/Pancetta"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_it_base_guanciale",
+      "name": "Guanciale (Cured Pork Cheek)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "Lazio and Umbria",
+      "servings": 14,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Rich, sweet pork fat cured with pepper, garlic, thyme and rosemary.",
+      "healthBenefit": "Pork fat carries flavour; a little goes into a whole pot of pasta.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "skin on",
+          "cookingMethod": null,
+          "prepNote": "in place of pork cheek (jowl), which the database does not hold; the cut is close in fat and meat"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "all of it taken up by the meat"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "coarsely crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme, dried, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Rosemary",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rub the salt, sugar, half the pepper, the garlic, thyme and rosemary into the cheek (or belly).",
+        "Seal and keep in the fridge 7 days, turning daily.",
+        "Rinse, pat dry, coat with the rest of the pepper and hang at 12 to 15 C (54 to 59 F) for 3 weeks, until it has lost about 30 percent of its weight. One serving is 50 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Saturated fat",
+          "note": "Mostly fat by weight."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 1,100 mg per 50 g."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Guanciale",
+          "url": "https://en.wikipedia.org/wiki/Guanciale"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_it_base_lardo",
+      "name": "Lardo (Cured Pork Back Fat)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "Colonnata, Tuscany",
+      "servings": 45,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Silky white fat scented with rosemary, garlic, pepper and warm spices.",
+      "healthBenefit": "Almost all fat; it is eaten in thin slices or melted into a dish.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Back Fat (Raw)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "in thick slabs, rind on",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the part the fat keeps; about 500 g more is layered around it and brushed off"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Rosemary",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, coriander seed",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, sage, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rub a stone or glass dish with garlic. Lay down a layer of salt, then fat, then the herbs and spices, and repeat, ending with salt.",
+        "Cover and keep cold (below 10 C, 50 F) for at least 6 months; the liquid the fat gives off stays in the dish.",
+        "Brush off the salt and slice very thin. One serving is 20 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Saturated fat",
+          "note": "About 7 g per 20 g."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Lardo",
+          "url": "https://en.wikipedia.org/wiki/Lardo"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_it_base_prosciutto",
+      "name": "Prosciutto Crudo (Dry-Cured Ham)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "Parma, Emilia-Romagna",
+      "servings": 120,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Sweet, delicate and salty, from long air-drying.",
+      "healthBenefit": "Ham brings protein, B vitamins and zinc; it is salty, so it goes far in small amounts.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Gris skinka ytterlår rå",
+          "quantity": 9000,
+          "unit": "g",
+          "cutPrep": "boned, skin on",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 380,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the part the ham keeps; about 1 kg more is rubbed on and brushed off"
+        }
+      ],
+      "instructions": [
+        "Rub the leg with salt, more on the skin and less on the meat, and keep at 1 to 4 C (34 to 39 F) for a week. Brush off, salt again and leave 2 to 3 weeks more.",
+        "Brush off the salt and rest the ham 2 to 3 months in a cold room so the salt spreads through.",
+        "Hang in a cool, airy place for at least 12 months, until it has lost about a third of its weight. Slice paper thin. One serving is 50 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 13 g per 50 g."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 1,250 mg per 50 g."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Prosciutto",
+          "url": "https://en.wikipedia.org/wiki/Prosciutto"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_it_base_speck",
+      "name": "Speck Alto Adige (Smoked Cured Ham)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "South Tyrol",
+      "servings": 68,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Smoky, juniper-scented cured ham, firmer and saltier than prosciutto.",
+      "healthBenefit": "Ham brings protein, B vitamins and zinc.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Gris skinka ytterlår rå",
+          "quantity": 5000,
+          "unit": "g",
+          "cutPrep": "boned and split into flat pieces",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "all of it taken up by the meat"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "crumbled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Rosemary",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, coriander seed",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "juniper berries",
+          "contains": "none",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Rub the salt, pepper, bay, garlic, rosemary, coriander and juniper into the meat and keep it cold 3 weeks, turning it every few days.",
+        "Cold smoke a few hours a day over beech for 10 days, never above 20 C (68 F).",
+        "Hang in a cool, airy room about 5 months, until it has lost about a third of its weight. One serving is 50 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 14 g per 50 g."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 900 mg per 50 g."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Speck Alto Adige",
+          "url": "https://en.wikipedia.org/wiki/Speck_Alto_Adige"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_it_base_salsiccia",
+      "name": "Salsiccia (Fresh Italian Pork Sausage)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Pantry & Building Blocks",
+      "region": "Italy",
+      "servings": 10,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Coarse, juicy pork sausage with fennel seed, garlic and black pepper.",
+      "healthBenefit": "Pork brings protein, B vitamins and zinc; no fillers.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 800,
+          "unit": "g",
+          "cutPrep": "coarsely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "skin removed, coarsely ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, fennel seed",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": "lightly crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "White Wine",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork, offal and by-products, small intestine",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "soaked and rinsed",
+          "cookingMethod": null,
+          "prepNote": "about 2 m for 1 kg of filling"
+        }
+      ],
+      "instructions": [
+        "Mix the ground meat with the salt, pepper, fennel, garlic and wine until it just holds together. Keep everything cold.",
+        "Stuff into the hog casing and twist into 10 links of about 100 g.",
+        "Rest overnight in the fridge. Cook within 3 days or freeze. To use without the skin, slit and peel it off."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 16 g per sausage."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 800 mg per sausage."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Italian sausage",
+          "url": "https://en.wikipedia.org/wiki/Italian_sausage"
+        }
+      ],
+      "curationNote": null
+    }
+  ]
+}

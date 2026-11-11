@@ -42,7 +42,7 @@ function measurementUnit(unit: string): MeasurementUnit | null {
 }
 
 /** One serving's amount of an ingredient, in every form it converts to without a guess. */
-function servingAmount(row: { base_name: string; category: string; quantity: number; unit: string; servings: number; gramsPerUnit: number | null }): IngredientAmount {
+function servingAmount(row: { base_name: string; category: string; quantity: number; unit: string; servings: number; gramsPerUnit: number | null; gramsPerMl: number | null }): IngredientAmount {
   const share = row.quantity / Math.max(1, row.servings || 1);
   const amount: IngredientAmount = { name: row.base_name, grams: null, ml: null, count: null, gramsPerUnit: row.gramsPerUnit };
   if (row.unit.trim().toLowerCase() === 'each') {
@@ -52,7 +52,7 @@ function servingAmount(row: { base_name: string; category: string; quantity: num
   const unit = measurementUnit(row.unit);
   if (!unit) return amount;
   amount.ml = volumeToMl(share, unit);
-  const grams = convertToGrams(share, unit, { foodCategory: row.category });
+  const grams = convertToGrams(share, unit, { foodCategory: row.category, gramsPerMl: row.gramsPerMl ?? undefined });
   if (grams.ok) amount.grams = grams.grams;
   return amount;
 }
@@ -63,10 +63,11 @@ function servingAmount(row: { base_name: string; category: string; quantity: num
  */
 export async function getCuratedDishCosts(prices: Map<string, FoodPrices>): Promise<Map<string, DishCost>> {
   const ref = await getReferenceDatabase();
-  const rows = await ref.getAllAsync<{ recipe_id: string; category: string; base_name: string; quantity: number; unit: string; servings: number; gramsPerUnit: number | null }>(
+  const rows = await ref.getAllAsync<{ recipe_id: string; category: string; base_name: string; quantity: number; unit: string; servings: number; gramsPerUnit: number | null; gramsPerMl: number | null }>(
     `
       SELECT i.recipe_id, i.category, i.base_name, i.quantity, i.unit, r.servings,
-             (SELECT fuw.grams_per_unit FROM food_unit_weights fuw WHERE fuw.base_name = i.base_name LIMIT 1) AS gramsPerUnit
+             (SELECT fuw.grams_per_unit FROM food_unit_weights fuw WHERE fuw.base_name = i.base_name LIMIT 1) AS gramsPerUnit,
+             (SELECT v.grams_per_ml FROM food_volume_weights v WHERE v.category = i.category AND v.base_name = i.base_name) AS gramsPerMl
       FROM curated_recipe_ingredients i
       JOIN curated_recipes r ON r.id = i.recipe_id
       ORDER BY i.recipe_id, i.sort_order

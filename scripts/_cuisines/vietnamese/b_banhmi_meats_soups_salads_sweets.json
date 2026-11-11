@@ -41,12 +41,12 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "fresh pork belly with skin",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
           "quantity": 500,
           "unit": "g",
           "cutPrep": "whole slab, skin scored",
+          "cookingMethod": null,
           "prepNote": "roasted, then sliced thin"
         },
         {
@@ -116,19 +116,19 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 2,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "thinly sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bird's eye chilies"
         },
         {
-          "notInDatabase": true,
-          "name": "Maggi seasoning sauce",
-          "contains": "gluten",
-          "quantity": 2,
-          "unit": "tsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 10.6,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 tsp at 5.3 g per tsp; in place of Maggi seasoning sauce, which the database does not hold"
         }
       ],
       "instructions": [
@@ -439,13 +439,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Maggi seasoning sauce",
-          "contains": "gluten",
-          "quantity": 1,
-          "unit": "tsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 5.3,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tsp at 5.3 g per tsp; in place of Maggi seasoning sauce, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -478,10 +478,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bird's eye chili"
         }
       ],
       "instructions": [
@@ -529,16 +529,21 @@
           "recipeId": "curated_vn_base_tuong_cham_goi_cuon",
           "servings": 5,
           "note": "about 1 tbsp per roll, for dipping"
+        },
+        {
+          "recipeId": "curated_vn_base_banh_trang",
+          "servings": 10,
+          "note": "10 each"
         }
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "fresh pork belly with skin",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
           "quantity": 225,
           "unit": "g",
           "cutPrep": "whole piece",
+          "cookingMethod": null,
           "prepNote": "boiled, then sliced paper thin"
         },
         {
@@ -602,15 +607,6 @@
           "unit": "g",
           "cutPrep": "whole stalks",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "rice paper (bánh tráng), 22 cm rounds",
-          "contains": "none",
-          "quantity": 10,
-          "unit": "each",
-          "cutPrep": null,
           "prepNote": null
         }
       ],
@@ -751,13 +747,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "spring roll wrappers",
-          "contains": "gluten",
-          "quantity": 30,
-          "unit": "each",
+          "category": "Baked",
+          "baseName": "Wonton wrapper (egg roll wrapper)",
+          "quantity": 360,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": "wheat wrappers; rice paper is the other traditional choice"
+          "cookingMethod": null,
+          "prepNote": "30 wrappers at 12 g each"
         },
         {
           "category": "Dairy",
@@ -771,11 +767,11 @@
         {
           "category": "Fats",
           "baseName": "Rapsolja",
-          "quantity": 750,
+          "quantity": 75,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": "Fried",
-          "prepNote": "for deep frying; much of it stays in the pan"
+          "prepNote": "750 ml heated for deep frying; 75 ml counted as soaked up by the rolls, the rest stays in the pan"
         },
         {
           "category": "Veg",
@@ -923,12 +919,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "fresh pork belly with skin",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
           "quantity": 680,
           "unit": "g",
           "cutPrep": "sliced thin",
+          "cookingMethod": null,
           "prepNote": "Sauteed"
         },
         {
@@ -1116,11 +1112,11 @@
         {
           "category": "Meat",
           "baseName": "Shrimp Crustaceans",
-          "quantity": 14,
-          "unit": "each",
+          "quantity": 70,
+          "unit": "g",
           "cutPrep": "peeled and deveined",
           "cookingMethod": "Fried",
-          "prepNote": null
+          "prepNote": "14 small shrimp"
         },
         {
           "category": "Veg",
@@ -1601,15 +1597,31 @@
       "flavorProfile": "Soft rice paper rolls of sweet braised jicama and carrot, Chinese sausage, egg ribbons and dried shrimp, dipped in hoisin with crushed peanuts.",
       "healthBenefit": "The jicama and carrot bring fibre and vitamin A, and the eggs and dried shrimp add protein; the sausage and hoisin make it salty and sweet.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_cn_base_lap_cheong",
+          "servings": 3,
+          "note": "3 each, sliced thin lengthwise, pan-fried"
+        },
+        {
+          "recipeId": "curated_vn_base_banh_trang",
+          "servings": 12,
+          "note": "12 each"
+        },
+        {
+          "recipeId": "curated_cn_base_hoisin",
+          "servings": 2,
+          "note": "2 tbsp"
+        }
+      ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "dried shrimp",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
           "quantity": 40,
           "unit": "g",
           "cutPrep": "soaked 10 minutes and drained",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -1649,15 +1661,6 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Chinese sausage (lạp xưởng)",
-          "contains": "meat",
-          "quantity": 3,
-          "unit": "each",
-          "cutPrep": "sliced thin lengthwise",
-          "prepNote": "pan-fried"
-        },
-        {
           "category": "Dairy",
           "baseName": "Chicken Egg (Raw)",
           "quantity": 2,
@@ -1676,15 +1679,6 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "rice paper (bánh tráng), 22 cm rounds",
-          "contains": "none",
-          "quantity": 12,
-          "unit": "each",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
           "category": "Veg",
           "baseName": "Garlic",
           "quantity": 2,
@@ -1692,15 +1686,6 @@
           "cutPrep": "cloves, minced",
           "cookingMethod": null,
           "prepNote": "for the sauce"
-        },
-        {
-          "notInDatabase": true,
-          "name": "hoisin sauce",
-          "contains": "gluten",
-          "quantity": 2,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "prepNote": null
         },
         {
           "category": "Bev",
@@ -1780,12 +1765,12 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "fresh pork belly with skin",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
           "quantity": 225,
           "unit": "g",
           "cutPrep": "cut in small dice",
+          "cookingMethod": null,
           "prepNote": "Sauteed"
         },
         {
@@ -1807,12 +1792,12 @@
           "prepNote": "warmed with the annatto"
         },
         {
-          "notInDatabase": true,
-          "name": "dried shrimp",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
           "quantity": 55,
           "unit": "g",
           "cutPrep": "soaked 10 minutes and drained",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -1945,6 +1930,11 @@
           "recipeId": "curated_vn_base_nuoc_cham",
           "servings": 12,
           "note": "about 2 tbsp per plate"
+        },
+        {
+          "recipeId": "curated_vn_base_top_mo",
+          "servings": 2.133,
+          "note": "40 g, crushed"
         }
       ],
       "ingredients": [
@@ -2019,15 +2009,6 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "fried pork rind (tóp mỡ)",
-          "contains": "meat",
-          "quantity": 40,
-          "unit": "g",
-          "cutPrep": "crushed",
-          "prepNote": null
         }
       ],
       "instructions": [
@@ -2076,6 +2057,11 @@
           "recipeId": "curated_vn_base_pa_te_gan",
           "servings": 3,
           "note": "about 90 g worked into the dipping sauce"
+        },
+        {
+          "recipeId": "curated_vn_base_banh_trang",
+          "servings": 18,
+          "note": "18 each"
         }
       ],
       "ingredients": [
@@ -2152,22 +2138,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "rice paper (bánh tráng), 22 cm rounds",
-          "contains": "none",
-          "quantity": 18,
-          "unit": "each",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "green banana",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "each",
+          "category": "Fruit",
+          "baseName": "Green Plantain",
+          "quantity": 150,
+          "unit": "g",
           "cutPrep": "peeled and cut in thin strips",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 each at 150 g per each; in place of green banana, which the database does not hold"
         },
         {
           "category": "Fruit",
@@ -2347,12 +2324,12 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "fresh pork belly with skin",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
           "quantity": 500,
           "unit": "g",
           "cutPrep": "cut in 4 cm cubes",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -2470,12 +2447,12 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "catfish steaks, bone in",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Catfish",
           "quantity": 1300,
           "unit": "g",
           "cutPrep": "cut 2.5 cm thick",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -2554,10 +2531,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bird's eye chili"
         }
       ],
       "instructions": [
@@ -2709,10 +2686,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bird's eye chili"
         }
       ],
       "instructions": [
@@ -2936,6 +2913,16 @@
           "recipeId": "curated_vn_base_nuoc_dung_pho_ga",
           "servings": 2,
           "note": "about 2 cups of chicken broth"
+        },
+        {
+          "recipeId": "curated_sauce_curry_powder",
+          "servings": 0.667,
+          "note": "1 tsp, or bò kho spice mix"
+        },
+        {
+          "recipeId": "curated_cn_base_hoisin",
+          "servings": 2,
+          "note": "2 tbsp"
         }
       ],
       "ingredients": [
@@ -2967,15 +2954,6 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "hoisin sauce",
-          "contains": "gluten",
-          "quantity": 2,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
           "category": "Fats",
           "baseName": "Rapsolja",
           "quantity": 2,
@@ -3003,15 +2981,6 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Curry powder",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "or bò kho spice mix"
-        },
-        {
           "category": "Veg",
           "baseName": "Onion",
           "quantity": 1,
@@ -3030,12 +2999,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lemongrass",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
           "quantity": 40,
           "unit": "g",
           "cutPrep": "stalks bruised and cut in 10 cm lengths",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3048,13 +3017,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 2,
-          "unit": "tbsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 32,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 tbsp at 16 g per tbsp; in place of dark soy sauce, which the database does not hold"
         },
         {
           "notInDatabase": true,
@@ -3068,11 +3037,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 4,
-          "unit": "each",
+          "quantity": 0.6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 bay leaves"
         },
         {
           "category": "Bev",
@@ -3102,13 +3071,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Thai basil leaves (húng quế)",
-          "contains": "none",
+          "category": "Herbs",
+          "baseName": "Fresh Basil",
           "quantity": 20,
           "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of Thai basil leaves (húng quế), which the database does not hold"
         }
       ],
       "instructions": [
@@ -3172,12 +3141,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lemongrass",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
           "quantity": 30,
           "unit": "g",
           "cutPrep": "tender lower stalk, minced",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3211,10 +3180,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 2,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "minced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bird's eye chilies"
         },
         {
           "category": "Herbs",
@@ -3528,7 +3497,13 @@
       "flavorProfile": "Golden turmeric and galangal fish sizzled with heaps of dill and spring onion, eaten over rice noodles with herbs, peanuts and a pungent shrimp paste dip.",
       "healthBenefit": "White fish brings lean protein and the big handfuls of dill and spring onion add greens; the shrimp paste dip is salty, so use it sparingly.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_vn_base_me",
+          "servings": 1,
+          "note": "1 tbsp, plain yogurt is the usual stand-in"
+        }
+      ],
       "ingredients": [
         {
           "category": "Meat",
@@ -3567,22 +3542,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "mẻ (fermented rice)",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "tbsp",
+          "category": "Meat",
+          "baseName": "Shrimp Paste",
+          "quantity": 18,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": "plain yogurt is the usual stand-in"
-        },
-        {
-          "notInDatabase": true,
-          "name": "mắm tôm (fermented shrimp paste)",
-          "contains": "fish",
-          "quantity": 3,
-          "unit": "tsp",
-          "cutPrep": null,
-          "prepNote": "1 tsp for the marinade, 2 tbsp in the dip"
+          "cookingMethod": null,
+          "prepNote": "1 tsp for the marinade, 2 tbsp in the dip; 3 tsp at 6 g per tsp"
         },
         {
           "category": "Fats",
@@ -3678,10 +3644,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bird's eye chili"
         }
       ],
       "instructions": [
@@ -3735,6 +3701,11 @@
           "recipeId": "curated_vn_base_do_chua",
           "servings": 4,
           "note": "served alongside"
+        },
+        {
+          "recipeId": "curated_sauce_curry_powder",
+          "servings": 1.667,
+          "note": "2.5 tsp"
         }
       ],
       "ingredients": [
@@ -3778,15 +3749,6 @@
           "category": "Herbs",
           "baseName": "Spices, pepper, black",
           "quantity": 0.75,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Curry powder",
-          "quantity": 2.5,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4059,6 +4021,11 @@
           "recipeId": "curated_vn_base_mo_hanh",
           "servings": 2,
           "note": "brushed on after grilling"
+        },
+        {
+          "recipeId": "curated_sauce_sambal_oelek",
+          "servings": 1,
+          "note": "1 tbsp"
         }
       ],
       "ingredients": [
@@ -4117,27 +4084,18 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lemongrass",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
           "quantity": 50,
           "unit": "g",
           "cutPrep": "tender lower stalk, minced",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
           "quantity": 2,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Chilli sauce (Sambal Oelek)",
-          "quantity": 1,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4490,12 +4448,12 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "catfish or snakehead steaks",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Catfish",
           "quantity": 450,
           "unit": "g",
           "cutPrep": "cut 2.5 cm thick",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -4571,12 +4529,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "taro stem (bạc hà)",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Taro shoots",
           "quantity": 150,
           "unit": "g",
           "cutPrep": "peeled and sliced on the angle",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -4619,10 +4577,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bird's eye chili"
         }
       ],
       "instructions": [
@@ -5137,13 +5095,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "ground white pepper",
-          "contains": "none",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Spices, pepper, white, ground",
+          "quantity": 1.2,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "0.5 tsp at 2.4 g per tsp"
         },
         {
           "category": "Fats",
@@ -5378,12 +5336,12 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "catfish or snakehead fillets",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Catfish",
           "quantity": 700,
           "unit": "g",
           "cutPrep": "cut in thick pieces",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5516,10 +5474,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 2,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bird's eye chilies"
         }
       ],
       "instructions": [
@@ -5585,12 +5543,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried shrimp",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
           "quantity": 15,
           "unit": "g",
           "cutPrep": "soaked 10 minutes and drained",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5800,10 +5758,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bird's eye chili"
         }
       ],
       "instructions": [
@@ -5852,6 +5810,11 @@
           "recipeId": "curated_vn_base_nuoc_cham",
           "servings": 6,
           "note": "about 6 tbsp to dress the salad"
+        },
+        {
+          "recipeId": "curated_vn_base_bo_kho",
+          "servings": 2.833,
+          "note": "85 g, cut in strips"
         }
       ],
       "ingredients": [
@@ -5865,22 +5828,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Vietnamese beef jerky (bò khô)",
-          "contains": "meat",
-          "quantity": 85,
-          "unit": "g",
-          "cutPrep": "cut in strips",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Thai basil leaves (húng quế)",
-          "contains": "none",
+          "category": "Herbs",
+          "baseName": "Fresh Basil",
           "quantity": 15,
           "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of Thai basil leaves (húng quế), which the database does not hold"
         },
         {
           "category": "NutSeed",
@@ -5922,10 +5876,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bird's eye chili"
         }
       ],
       "instructions": [
@@ -6014,13 +5968,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
-          "baseName": "Lime",
+          "notInDatabase": true,
+          "name": "lime juice, for the soaking water",
+          "contains": "none",
           "quantity": 1,
           "unit": "each",
-          "cutPrep": "juiced into the soaking water",
-          "cookingMethod": null,
-          "prepNote": null
+          "cutPrep": "juice of 1 lime",
+          "prepNote": "in the water the sliced banana blossom waits in, poured away, not eaten"
         },
         {
           "notInDatabase": true,
@@ -6053,10 +6007,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bird's eye chili"
         }
       ],
       "instructions": [
@@ -6105,18 +6059,14 @@
           "recipeId": "curated_vn_base_hanh_phi",
           "servings": 2,
           "note": "scattered over"
+        },
+        {
+          "recipeId": "curated_vn_base_ngo_sen_chua",
+          "servings": 9,
+          "note": "450 g, rinsed, drained and halved lengthwise"
         }
       ],
       "ingredients": [
-        {
-          "notInDatabase": true,
-          "name": "pickled lotus stems (ngó sen)",
-          "contains": "none",
-          "quantity": 450,
-          "unit": "g",
-          "cutPrep": "rinsed, drained and halved lengthwise",
-          "prepNote": null
-        },
         {
           "category": "Meat",
           "baseName": "Shrimp Crustaceans",
@@ -6184,10 +6134,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bird's eye chili"
         }
       ],
       "instructions": [
@@ -6356,11 +6306,11 @@
         {
           "category": "Veg",
           "baseName": "Eggplant",
-          "quantity": 3,
-          "unit": "each",
+          "quantity": 450,
+          "unit": "g",
           "cutPrep": "long Asian eggplants",
           "cookingMethod": "Grilled",
-          "prepNote": null
+          "prepNote": "3 long Asian eggplants"
         },
         {
           "category": "NutSeed",
@@ -6375,10 +6325,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bird's eye chili"
         }
       ],
       "instructions": [
@@ -6482,12 +6432,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried shrimp",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
           "quantity": 20,
           "unit": "g",
           "cutPrep": "soaked 10 minutes and drained",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -6539,10 +6489,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "minced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bird's eye chili"
         }
       ],
       "instructions": [
@@ -6783,10 +6733,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bird's eye chili"
         }
       ],
       "instructions": [
@@ -7310,12 +7260,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "sweetened condensed milk",
-          "contains": "dairy",
+          "category": "PantryStaples",
+          "baseName": "Kondensert melk, søtet",
           "quantity": 200,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -7535,12 +7485,12 @@
           "prepNote": "from 2 tbsp dark-roast ground coffee dripped through a phin"
         },
         {
-          "notInDatabase": true,
-          "name": "sweetened condensed milk",
-          "contains": "dairy",
+          "category": "PantryStaples",
+          "baseName": "Kondensert melk, søtet",
           "quantity": 30,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -7605,12 +7555,12 @@
           "prepNote": "use a very fresh or pasteurised egg"
         },
         {
-          "notInDatabase": true,
-          "name": "sweetened condensed milk",
-          "contains": "dairy",
+          "category": "PantryStaples",
+          "baseName": "Kondensert melk, søtet",
           "quantity": 30,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -7689,12 +7639,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "sweetened condensed milk",
-          "contains": "dairy",
+          "category": "PantryStaples",
+          "baseName": "Kondensert melk, søtet",
           "quantity": 60,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {

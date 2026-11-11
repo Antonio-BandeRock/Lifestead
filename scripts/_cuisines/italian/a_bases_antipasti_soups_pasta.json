@@ -510,12 +510,12 @@
         },
         {
           "category": "Fruit",
-          "baseName": "Lemon",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "zest only, finely grated",
+          "baseName": "Lemon peel",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "finely grated",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "zest of 1 lemon"
         },
         {
           "category": "Herbs",
@@ -622,12 +622,12 @@
         },
         {
           "category": "Fruit",
-          "baseName": "Lemon",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "zest only, finely grated",
+          "baseName": "Lemon peel",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "finely grated",
           "cookingMethod": null,
-          "prepNote": "or a little vanilla"
+          "prepNote": "zest of 1 lemon; or a little vanilla"
         },
         {
           "category": "Herbs",
@@ -854,20 +854,20 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 3,
-          "unit": "each",
+          "quantity": 0.45,
+          "unit": "g",
           "cutPrep": "leaves",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bay leaves"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, cloves, ground",
-          "quantity": 3,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "whole cloves",
           "cookingMethod": null,
-          "prepNote": "pushed into the onion"
+          "prepNote": "3 whole cloves; pushed into the onion"
         },
         {
           "notInDatabase": true,
@@ -1029,11 +1029,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 3,
-          "unit": "each",
+          "quantity": 0.45,
+          "unit": "g",
           "cutPrep": "leaves",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bay leaves"
         },
         {
           "category": "Herbs",
@@ -1098,13 +1098,13 @@
       "components": [],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "white fish heads and bones (sea bass, sea bream, gurnard, scorpionfish)",
-          "contains": "fish",
-          "quantity": 1000,
+          "category": "CommercialPremade",
+          "baseName": "Soup, stock, fish, home-prepared",
+          "quantity": 2000,
           "unit": "g",
-          "cutPrep": "gills removed, rinsed in cold water",
-          "prepNote": "oily fish such as mackerel or sardine make it bitter"
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1000 g white fish heads and bones (sea bass, sea bream, gurnard, scorpionfish) simmered in 2000 ml water, counted as 2000 g home-made fish stock (1 g per ml); the bones themselves are not eaten"
         },
         {
           "category": "Fats",
@@ -1172,11 +1172,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "leaves",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -1184,15 +1184,6 @@
           "quantity": 0.5,
           "unit": "tsp",
           "cutPrep": "whole peppercorns",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 2000,
-          "unit": "ml",
-          "cutPrep": "cold",
           "cookingMethod": null,
           "prepNote": null
         }
@@ -1355,6 +1346,11 @@
           "recipeId": "curated_it_base_brodo_di_carne",
           "servings": 1.25,
           "note": "hot, added a ladle at a time"
+        },
+        {
+          "recipeId": "curated_it_base_pancetta",
+          "servings": 3,
+          "note": "150 g, finely chopped"
         }
       ],
       "ingredients": [
@@ -1365,15 +1361,6 @@
           "unit": "g",
           "cutPrep": "coarsely minced, ideally beef skirt or flank",
           "cookingMethod": "Braised",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "pancetta",
-          "contains": "meat",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "finely chopped",
           "prepNote": null
         },
         {
@@ -1504,7 +1491,13 @@
       "flavorProfile": "Dark, sweet and velvety, tomato cooked down for hours around whole pieces of beef and pork until it is almost jammy.",
       "healthBenefit": "The meat brings protein, iron and zinc and the long cooked tomato brings lycopene; it is a rich Sunday dish, with the meat eaten as a second course.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_it_base_salsiccia",
+          "servings": 3,
+          "note": "300 g, whole links"
+        }
+      ],
       "ingredients": [
         {
           "category": "Meat",
@@ -1522,15 +1515,6 @@
           "unit": "g",
           "cutPrep": "cut into ribs",
           "cookingMethod": "Braised",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Italian pork sausage",
-          "contains": "meat",
-          "quantity": 300,
-          "unit": "g",
-          "cutPrep": "whole links",
           "prepNote": null
         },
         {
@@ -1847,7 +1831,13 @@
       "flavorProfile": "Sharp, green and savoury, parsley and vinegar lifted by capers and anchovy, made to cut through boiled meats.",
       "healthBenefit": "Parsley brings vitamin K and vitamin C, the anchovies a little omega 3 fat, and olive oil makes up most of the rest.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_it_pane_toscano",
+          "servings": 0.545,
+          "note": "30 g, one slice of crumb, crust removed"
+        }
+      ],
       "ingredients": [
         {
           "category": "Veg",
@@ -1855,15 +1845,6 @@
           "quantity": 100,
           "unit": "g",
           "cutPrep": "flat leaf, leaves only",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Grain",
-          "baseName": "Pain, baguette ou boule, de campagne",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": "one slice of crumb, crust removed",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -2144,17 +2125,14 @@
       "flavorProfile": "Crisp, golden and toasty, a crunchy sand of bread and olive oil scattered over pasta in place of cheese.",
       "healthBenefit": "It turns stale bread into a topping, giving crunch and a little carbohydrate with olive oil fat; a spoonful goes a long way.",
       "overallTier": "strong",
-      "components": [],
-      "ingredients": [
+      "components": [
         {
-          "category": "Grain",
-          "baseName": "Pain, baguette ou boule, de campagne",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "stale country bread, crust and crumb, grated into coarse crumbs",
-          "cookingMethod": "Sauteed",
-          "prepNote": null
-        },
+          "recipeId": "curated_it_pane_toscano",
+          "servings": 2.727,
+          "note": "150 g, stale country bread, crust and crumb, grated into coarse crumbs"
+        }
+      ],
+      "ingredients": [
         {
           "category": "Fats",
           "baseName": "Olive Oil (Extra Virgin)",
@@ -2196,7 +2174,7 @@
           "url": "https://www.blogsicilia.it/food-drink/muddica-atturrata-parmigiano-poveri-spaghettata-sapore-intenso/575007/"
         }
       ],
-      "curationNote": "BlogSicilia describes muddica atturrata, breadcrumbs toasted in olive oil until golden like sand, the parmigiano of the poor, with garlic or anchovy as optional additions. Kept it plain so pasta con le sarde and other dishes can add their own. The food database has no breadcrumb row, so the stale country bread they are grated from is listed. About 150 g, 10 servings of 2 tbsp. One source opened; others were blocked."
+      "curationNote": "BlogSicilia describes muddica atturrata, breadcrumbs toasted in olive oil until golden like sand, the parmigiano of the poor, with garlic or anchovy as optional additions. Kept it plain so pasta con le sarde and other dishes can add their own. The stale country bread they are grated from is the pane toscano recipe. About 150 g, 10 servings of 2 tbsp. One source opened; others were blocked."
     },
     {
       "id": "curated_it_base_giardiniera",
@@ -2314,11 +2292,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 4,
-          "unit": "each",
+          "quantity": 0.6,
+          "unit": "g",
           "cutPrep": "leaves",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 bay leaves"
         },
         {
           "category": "Herbs",
@@ -2571,17 +2549,14 @@
       "flavorProfile": "Crisp, smoky toast rubbed with garlic under cool, juicy tomato, basil and green olive oil.",
       "healthBenefit": "Ripe tomatoes bring vitamin C and lycopene, and the extra virgin olive oil brings monounsaturated fat, on plain country bread.",
       "overallTier": "strong",
-      "components": [],
-      "ingredients": [
+      "components": [
         {
-          "category": "Grain",
-          "baseName": "Pain, baguette ou boule, de campagne",
-          "quantity": 320,
-          "unit": "g",
-          "cutPrep": "8 slices about 1 to 2 cm thick, a day old is best",
-          "cookingMethod": "Baked",
-          "prepNote": null
-        },
+          "recipeId": "curated_it_pane_toscano",
+          "servings": 5.818,
+          "note": "320 g, 8 slices about 1 to 2 cm thick, a day old is best"
+        }
+      ],
+      "ingredients": [
         {
           "category": "Veg",
           "baseName": "Tomato",
@@ -2833,11 +2808,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "leaves",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -2976,7 +2951,13 @@
       "flavorProfile": "A golden, crunchy shell around saffron rice with a hot heart of meat ragù, peas and melting cheese.",
       "healthBenefit": "A filling treat with protein from the meat and cheese and some fibre from the peas; it is fried, so it is rich.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_it_base_pangrattato",
+          "servings": 10,
+          "note": "300 g, dried and ground to fine breadcrumbs, from the pangrattato recipe"
+        }
+      ],
       "ingredients": [
         {
           "category": "Grain",
@@ -3114,13 +3095,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "caciocavallo cheese",
-          "contains": "dairy",
+          "category": "Dairy",
+          "baseName": "Provolone",
           "quantity": 60,
           "unit": "g",
           "cutPrep": "cut in small cubes",
-          "prepNote": "provola or mozzarella can stand in"
+          "cookingMethod": null,
+          "prepNote": "provola or mozzarella can stand in; in place of caciocavallo cheese, which the database does not hold"
         },
         {
           "category": "PantryStaples",
@@ -3139,15 +3120,6 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "for the batter"
-        },
-        {
-          "category": "Grain",
-          "baseName": "Pain, baguette ou boule, de campagne",
-          "quantity": 300,
-          "unit": "g",
-          "cutPrep": "dried and ground to fine breadcrumbs",
-          "cookingMethod": null,
-          "prepNote": "the database has no breadcrumbs, so dry country bread is counted"
         },
         {
           "category": "Fats",
@@ -3211,6 +3183,11 @@
           "recipeId": "curated_sauce_vegetable_stock",
           "servings": 1.75,
           "note": "hot, for cooking the rice"
+        },
+        {
+          "recipeId": "curated_it_base_pangrattato",
+          "servings": 6.667,
+          "note": "200 g, dried and ground to fine breadcrumbs, from the pangrattato recipe"
         }
       ],
       "ingredients": [
@@ -3305,15 +3282,6 @@
           "prepNote": "for the coating"
         },
         {
-          "category": "Grain",
-          "baseName": "Pain, baguette ou boule, de campagne",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": "dried and ground to fine breadcrumbs",
-          "cookingMethod": null,
-          "prepNote": "the database has no breadcrumbs, so dry country bread is counted"
-        },
-        {
           "category": "Fats",
           "baseName": "Solsikkeolje",
           "quantity": 80,
@@ -3370,7 +3338,13 @@
       "flavorProfile": "Paper-thin raw beef, cool and silky, crossed with a pale, tangy mayonnaise sauce.",
       "healthBenefit": "Lean beef brings protein, iron and vitamin B12; it is eaten raw, so only very fresh, well handled beef should be used and it is not for pregnancy or a weak immune system.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_base_mayonnaise",
+          "servings": 16.667,
+          "note": "250 g, homemade if possible"
+        }
+      ],
       "ingredients": [
         {
           "category": "Meat",
@@ -3382,15 +3356,6 @@
           "prepNote": "eaten raw"
         },
         {
-          "category": "Herbs",
-          "baseName": "Dressing, mayonnaise, whole egg type",
-          "quantity": 250,
-          "unit": "g",
-          "cutPrep": "homemade if possible",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Bev",
           "baseName": "Lemon Juice",
           "quantity": 5,
@@ -3400,13 +3365,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Worcestershire sauce",
-          "contains": "fish",
-          "quantity": 7,
-          "unit": "ml",
+          "category": "SaucesCondiments",
+          "baseName": "Sauce, Worcestershire, commercial",
+          "quantity": 7.7,
+          "unit": "g",
           "cutPrep": "1 to 2 tsp",
-          "prepNote": "it is made with anchovies"
+          "cookingMethod": null,
+          "prepNote": "it is made with anchovies; 7 ml at 1.1 g per ml"
         },
         {
           "category": "Dairy",
@@ -3657,7 +3622,13 @@
       "flavorProfile": "Big green olives stuffed with a soft, nutmeg-scented meat filling, crumbed and fried crisp, briny and rich in one bite.",
       "healthBenefit": "A fried treat with protein from three meats, eggs and Parmigiano, and fat from the olives; it is rich, so a few go a long way.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_it_base_pangrattato",
+          "servings": 5,
+          "note": "150 g, dried and ground to fine breadcrumbs, from the pangrattato recipe"
+        }
+      ],
       "ingredients": [
         {
           "category": "NutSeed",
@@ -3804,15 +3775,6 @@
           "prepNote": "for the coating"
         },
         {
-          "category": "Grain",
-          "baseName": "Pain, baguette ou boule, de campagne",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "dried and ground to fine breadcrumbs",
-          "cookingMethod": null,
-          "prepNote": "the database has no breadcrumbs, so dry country bread is counted"
-        },
-        {
           "category": "Fats",
           "baseName": "Solsikkeolje",
           "quantity": 70,
@@ -3874,6 +3836,11 @@
           "recipeId": "curated_it_base_brodo_di_carne",
           "servings": 0.85,
           "note": "hot"
+        },
+        {
+          "recipeId": "curated_it_pane_toscano",
+          "servings": 8.727,
+          "note": "480 g, Tuscan unsalted bread, 16 slices"
         }
       ],
       "ingredients": [
@@ -3925,19 +3892,19 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "leaf",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
-          "notInDatabase": true,
-          "name": "vin santo",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Dessert Wine",
           "quantity": 60,
           "unit": "ml",
           "cutPrep": "about half a glass",
+          "cookingMethod": null,
           "prepNote": "dry white wine can stand in"
         },
         {
@@ -3974,15 +3941,6 @@
           "unit": "g",
           "cutPrep": "chopped",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Grain",
-          "baseName": "Pain, baguette ou boule, de campagne",
-          "quantity": 480,
-          "unit": "g",
-          "cutPrep": "Tuscan unsalted bread, 16 slices",
-          "cookingMethod": "Baked",
           "prepNote": null
         }
       ],
@@ -4267,17 +4225,14 @@
       "flavorProfile": "Stale bread soaked soft and tangy, tossed with juicy tomato, crisp cucumber, sweet red onion and basil.",
       "healthBenefit": "Tomato, cucumber and onion bring vitamin C, potassium and fibre, and the olive oil brings monounsaturated fat; the bread makes it filling.",
       "overallTier": "strong",
-      "components": [],
-      "ingredients": [
+      "components": [
         {
-          "category": "Grain",
-          "baseName": "Pain, baguette ou boule, de campagne",
-          "quantity": 300,
-          "unit": "g",
-          "cutPrep": "stale Tuscan unsalted bread, 2 to 3 days old, in thick slices",
-          "cookingMethod": null,
-          "prepNote": null
-        },
+          "recipeId": "curated_it_pane_toscano",
+          "servings": 5.455,
+          "note": "300 g, stale Tuscan unsalted bread, 2 to 3 days old, in thick slices"
+        }
+      ],
+      "ingredients": [
         {
           "category": "Bev",
           "baseName": "Water, tap",
@@ -4608,7 +4563,13 @@
       "flavorProfile": "A dense, spoon-standing Tuscan soup of white beans, cavolo nero and bread, boiled again until thick and velvety.",
       "healthBenefit": "Beans, cavolo nero, cabbage and chard bring fibre, plant protein, folate, vitamin K and vitamin C; it is filling and lean.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_it_pane_toscano",
+          "servings": 5.455,
+          "note": "300 g, stale unsalted Tuscan bread, in large pieces"
+        }
+      ],
       "ingredients": [
         {
           "category": "Legume",
@@ -4716,15 +4677,6 @@
           "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": "Simmered",
-          "prepNote": null
-        },
-        {
-          "category": "Grain",
-          "baseName": "Pain, baguette ou boule, de campagne",
-          "quantity": 300,
-          "unit": "g",
-          "cutPrep": "stale unsalted Tuscan bread, in large pieces",
-          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -4894,11 +4846,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "leaves",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -5067,11 +5019,11 @@
         {
           "category": "Veg",
           "baseName": "Chili Pepper",
-          "quantity": 0.5,
-          "unit": "each",
+          "quantity": 3.05,
+          "unit": "g",
           "cutPrep": "optional, as Misya does",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "0.5 fresh chilies"
         },
         {
           "category": "Fats",
@@ -5265,6 +5217,11 @@
           "recipeId": "curated_it_base_brodo_di_carne",
           "servings": 7.5,
           "note": "strained, from capon and beef"
+        },
+        {
+          "recipeId": "curated_it_base_prosciutto",
+          "servings": 1.6,
+          "note": "80 g, sliced"
         }
       ],
       "ingredients": [
@@ -5287,21 +5244,12 @@
           "prepNote": "for browning the loin"
         },
         {
-          "notInDatabase": true,
-          "name": "prosciutto crudo di Parma",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Mortadella, beef, pork",
           "quantity": 80,
           "unit": "g",
           "cutPrep": "sliced",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "mortadella di Bologna",
-          "contains": "meat",
-          "quantity": 80,
-          "unit": "g",
-          "cutPrep": "sliced",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5393,6 +5341,11 @@
           "recipeId": "curated_it_base_brodo_vegetale",
           "servings": 1.9,
           "note": "hot"
+        },
+        {
+          "recipeId": "curated_it_pane_toscano",
+          "servings": 4.364,
+          "note": "240 g, 8 slices of stale Tuscan bread"
         }
       ],
       "ingredients": [
@@ -5449,15 +5402,6 @@
           "cutPrep": null,
           "cookingMethod": "Simmered",
           "prepNote": "one for each bowl"
-        },
-        {
-          "category": "Grain",
-          "baseName": "Pain, baguette ou boule, de campagne",
-          "quantity": 240,
-          "unit": "g",
-          "cutPrep": "8 slices of stale Tuscan bread",
-          "cookingMethod": "Baked",
-          "prepNote": null
         },
         {
           "category": "Veg",
@@ -5556,6 +5500,11 @@
           "recipeId": "curated_it_base_brodo_vegetale",
           "servings": 5.3,
           "note": "hot"
+        },
+        {
+          "recipeId": "curated_it_pane_toscano",
+          "servings": 7.273,
+          "note": "400 g, stale unsalted Tuscan bread, 3 to 4 days old, in cubes"
         }
       ],
       "ingredients": [
@@ -5567,15 +5516,6 @@
           "cutPrep": "ripe vine tomatoes, peeled and chopped",
           "cookingMethod": "Simmered",
           "prepNote": "passata or peeled tomatoes work out of season"
-        },
-        {
-          "category": "Grain",
-          "baseName": "Pain, baguette ou boule, de campagne",
-          "quantity": 400,
-          "unit": "g",
-          "cutPrep": "stale unsalted Tuscan bread, 3 to 4 days old, in cubes",
-          "cookingMethod": "Simmered",
-          "prepNote": null
         },
         {
           "category": "Veg",
@@ -5678,7 +5618,18 @@
       "flavorProfile": "A deep, rich pork broth married with a tangle of bitter and sweet winter greens, with tender meat and pockets of melting caciocavallo.",
       "healthBenefit": "Escarole, chicory, chard and cabbage bring fibre, folate, vitamin K and vitamin C, though the pork makes this a rich, festive dish.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_it_base_salsiccia",
+          "servings": 3,
+          "note": "300 g, 3 sausages"
+        },
+        {
+          "recipeId": "curated_it_base_lardo",
+          "servings": 5,
+          "note": "100 g, diced"
+        }
+      ],
       "ingredients": [
         {
           "category": "Meat",
@@ -5690,31 +5641,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "fresh pork cheek (guanciale fresco)",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
           "quantity": 400,
           "unit": "g",
           "cutPrep": "singed and cleaned",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "fresh Italian pork sausages",
-          "contains": "meat",
-          "quantity": 300,
-          "unit": "g",
-          "cutPrep": "3 sausages",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "lardo (cured pork back fat)",
-          "contains": "meat",
-          "quantity": 100,
-          "unit": "g",
-          "cutPrep": "diced",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of fresh pork cheek, which the database does not hold"
         },
         {
           "category": "Fats",
@@ -5807,22 +5740,22 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "caciocavallo cheese",
-          "contains": "dairy",
+          "category": "Dairy",
+          "baseName": "Provolone",
           "quantity": 100,
           "unit": "g",
           "cutPrep": "in small pieces",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of caciocavallo cheese, which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "Parmigiano Reggiano rind",
-          "contains": "dairy",
-          "quantity": 1,
-          "unit": "each",
+          "category": "Dairy",
+          "baseName": "Cheese, parmesan, dry grated",
+          "quantity": 10,
+          "unit": "g",
           "cutPrep": "one piece, halved",
-          "prepNote": "simmered for flavour, not eaten"
+          "cookingMethod": null,
+          "prepNote": "simmered for flavour, not eaten; 1 each at 10 g per each; about 10 g of cheese softens off a rind into the pot"
         },
         {
           "category": "Herbs",
@@ -5958,11 +5891,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "leaf",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Fats",
@@ -6047,7 +5980,13 @@
       "flavorProfile": "Glossy spaghetti coated in a silky cream of egg and sharp Pecorino, with crisp, fatty guanciale and plenty of black pepper.",
       "healthBenefit": "A rich dish: the eggs and Pecorino bring protein and calcium, and the guanciale makes it high in fat and salt, so it suits a smaller plate.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_it_base_guanciale",
+          "servings": 4,
+          "note": "200 g, rind removed, cut in strips about 1 cm wide"
+        }
+      ],
       "ingredients": [
         {
           "category": "PastaNoodles",
@@ -6056,15 +5995,6 @@
           "unit": "g",
           "cutPrep": "spaghetti",
           "cookingMethod": "Boiled",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "guanciale (cured pork cheek)",
-          "contains": "meat",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": "rind removed, cut in strips about 1 cm wide",
           "prepNote": null
         },
         {
@@ -6262,7 +6192,13 @@
       "flavorProfile": "Thick hollow spaghetti in a bright tomato sauce flavoured with crisp guanciale, a touch of chili and a shower of sharp Pecorino.",
       "healthBenefit": "Tomatoes bring lycopene, vitamin C and potassium, and Pecorino adds protein and calcium; the guanciale makes it a rich, salty plate.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_it_base_guanciale",
+          "servings": 3,
+          "note": "150 g, rind removed, cut in strips"
+        }
+      ],
       "ingredients": [
         {
           "category": "PastaNoodles",
@@ -6271,15 +6207,6 @@
           "unit": "g",
           "cutPrep": "bucatini",
           "cookingMethod": "Boiled",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "guanciale (cured pork cheek)",
-          "contains": "meat",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "rind removed, cut in strips",
           "prepNote": null
         },
         {
@@ -6303,11 +6230,11 @@
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.5,
+          "unit": "g",
           "cutPrep": "small, crumbled",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 dried chili"
         },
         {
           "category": "Fats",
@@ -6393,7 +6320,13 @@
       "flavorProfile": "Ridged tubes coated in a creamy, peppery Pecorino sauce bound by rendered guanciale fat, with crisp, chewy pieces of the pork throughout.",
       "healthBenefit": "A rich, simple plate with protein and calcium from the Pecorino; the guanciale makes it high in fat and salt.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_it_base_guanciale",
+          "servings": 4,
+          "note": "200 g, rind removed, cut in strips"
+        }
+      ],
       "ingredients": [
         {
           "category": "PastaNoodles",
@@ -6402,15 +6335,6 @@
           "unit": "g",
           "cutPrep": "rigatoni",
           "cookingMethod": "Boiled",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "guanciale (cured pork cheek)",
-          "contains": "meat",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": "rind removed, cut in strips",
           "prepNote": null
         },
         {
@@ -6528,11 +6452,11 @@
         {
           "category": "Veg",
           "baseName": "Chili Pepper",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 12.2,
+          "unit": "g",
           "cutPrep": "fresh red chilies, sliced",
           "cookingMethod": "Sauteed",
-          "prepNote": "or dried chili flakes"
+          "prepNote": "2 fresh chilies; or dried chili flakes"
         },
         {
           "category": "Veg",
@@ -6975,11 +6899,11 @@
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.5,
+          "unit": "g",
           "cutPrep": "crumbled",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 dried chili"
         },
         {
           "category": "Veg",
@@ -7121,13 +7045,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "ricotta salata",
-          "contains": "dairy",
+          "category": "Dairy",
+          "baseName": "Cheese, ricotta, whole milk",
           "quantity": 80,
           "unit": "g",
           "cutPrep": "coarsely grated",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of ricotta salata, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -7245,11 +7169,11 @@
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.5,
+          "unit": "g",
           "cutPrep": "small, crumbled",
           "cookingMethod": null,
-          "prepNote": "optional"
+          "prepNote": "1 dried chili; optional"
         },
         {
           "category": "Veg",
@@ -7373,11 +7297,11 @@
         {
           "category": "Veg",
           "baseName": "Chili Pepper",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 6.1,
+          "unit": "g",
           "cutPrep": "fresh red chili, chopped",
           "cookingMethod": "Sauteed",
-          "prepNote": "or a dried one"
+          "prepNote": "1 fresh chili; or a dried one"
         },
         {
           "category": "Herbs",
@@ -7717,6 +7641,11 @@
           "recipeId": "curated_it_base_pasta_fresca_alluovo",
           "servings": 3,
           "note": "rolled very thin, about 0.6 mm"
+        },
+        {
+          "recipeId": "curated_it_base_prosciutto",
+          "servings": 2,
+          "note": "100 g, sliced"
         }
       ],
       "ingredients": [
@@ -7739,21 +7668,12 @@
           "prepNote": "for browning the loin"
         },
         {
-          "notInDatabase": true,
-          "name": "prosciutto crudo di Parma",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Mortadella, beef, pork",
           "quantity": 100,
           "unit": "g",
           "cutPrep": "sliced",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "mortadella di Bologna",
-          "contains": "meat",
-          "quantity": 100,
-          "unit": "g",
-          "cutPrep": "sliced",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -8080,11 +8000,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Veg",
@@ -9000,11 +8920,11 @@
         {
           "category": "Veg",
           "baseName": "Chili Pepper",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 6.1,
+          "unit": "g",
           "cutPrep": "fresh red chili, sliced",
           "cookingMethod": "Sauteed",
-          "prepNote": null
+          "prepNote": "1 fresh chili"
         },
         {
           "category": "Alcohol",
@@ -9180,11 +9100,11 @@
         {
           "category": "Veg",
           "baseName": "Chili Pepper",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 6.1,
+          "unit": "g",
           "cutPrep": "small, optional",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "1 fresh chili"
         },
         {
           "category": "Herbs",

@@ -135,6 +135,46 @@
       "id": "curated_th_base_moo_krob",
       "name": "Moo Krob (Crispy Pork Belly)",
       "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_th_base_chai_po",
+      "name": "Chai Po (Sweet Preserved Radish)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_th_base_luk_chin_nuea",
+      "name": "Luk Chin Nuea (Thai Beef Balls)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_th_base_kaep_moo",
+      "name": "Kaep Moo (Pork Rinds)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_th_base_see_ew_dam_waan",
+      "name": "See Ew Dam Waan (Sweet Dark Soy Sauce)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_th_base_sriracha",
+      "name": "Sriracha (Fermented Chilli Sauce)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_th_base_kratiam_dong",
+      "name": "Kratiam Dong (Thai Pickled Garlic)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_th_base_pla_ra",
+      "name": "Pla Ra (Fermented Fish)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
+    },
+    {
+      "id": "curated_th_base_pu_dong",
+      "name": "Pu Dong (Salted Field Crab)",
+      "shelf": "Bases: Rice, Noodles & Pantry"
     }
   ]
 }

@@ -1,0 +1,1140 @@
+{
+  "recipes": [
+    {
+      "id": "curated_cn_base_hoisin",
+      "name": "Hoisin Sauce",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Stocks & Sauces",
+      "region": "Cantonese",
+      "servings": 20,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Thick, sweet and savory, with garlic, a little heat and five-spice warmth.",
+      "healthBenefit": "Fermented soybean paste brings protein and flavor; the sauce is sweet and salty, so a little goes far.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_cn_base_five_spice_powder",
+          "servings": 0.167,
+          "note": "1/4 tsp"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Legume",
+          "baseName": "Soybean Paste",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "fermented soybean paste"
+        },
+        {
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 75,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, rice vinegar",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Sesamolja",
+          "quantity": 10,
+          "unit": "ml",
+          "cutPrep": "toasted",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "grated",
+          "cookingMethod": null,
+          "prepNote": "2 cloves"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Put everything in a small pan and whisk smooth.",
+        "Simmer gently, stirring, for 5 minutes until glossy and thick.",
+        "Cool, jar and keep in the fridge for up to a month."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sodium",
+          "note": "About 400 mg per tablespoon."
+        },
+        {
+          "nutrient": "Sugar",
+          "note": "About 4 g per tablespoon."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Hoisin sauce",
+          "url": "https://en.wikipedia.org/wiki/Hoisin_sauce"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_cn_base_pao_jiao",
+      "name": "Pao Jiao (Sichuan Pickled Chilies)",
+      "builderType": "fermentation",
+      "dishGroup": "Bases: Rice & Pantry",
+      "region": "Sichuan",
+      "servings": 25,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Sour, salty and hot, with a rounded fermented depth.",
+      "healthBenefit": "A lacto-fermented pickle; chilies keep much of their vitamin C, and the brine is salty.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "whole, stems on, washed and dried",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": "boiled and cooled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tbsp taken up by the chilies, the rest stays in the brine"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Ginger root",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, \"Sansho\" (Japanese pepper), ground",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "whole",
+          "cookingMethod": null,
+          "prepNote": "in place of Sichuan peppercorns, which the database does not hold"
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Alcoholic beverage, spirit, ~40% v/v, all (Brandy, Gin, Rum, Vodka and Whisky)",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "baijiu is traditional"
+        }
+      ],
+      "instructions": [
+        "Dissolve the salt in the cooled boiled water in a clean pickling jar. Add the ginger, peppercorns and spirit.",
+        "Push the chilies under the brine, weight them down and close the jar, using a water-seal lid if you have one.",
+        "Leave at cool room temperature for 2 to 3 weeks, until sour. Keep the brine going with fresh vegetables. One serving is 20 g of chilies."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "Chilies keep much of their vitamin C in the brine."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "Salty: count it if you watch sodium."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Paocai",
+          "url": "https://en.wikipedia.org/wiki/Paocai"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_cn_base_suan_dou_jiao",
+      "name": "Suan Dou Jiao (Pickled Long Beans)",
+      "builderType": "fermentation",
+      "dishGroup": "Bases: Rice & Pantry",
+      "region": "Sichuan and Hunan",
+      "servings": 25,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Sour, crunchy and salty.",
+      "healthBenefit": "A lacto-fermented pickle that brings fiber; the brine is salty.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Yardlong bean",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "washed and dried",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": "boiled and cooled",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tbsp taken up by the beans, the rest stays in the brine"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Ginger root",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "whole",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Alcoholic beverage, spirit, ~40% v/v, all (Brandy, Gin, Rum, Vodka and Whisky)",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "baijiu is traditional"
+        }
+      ],
+      "instructions": [
+        "Dissolve the salt in the cooled boiled water in a clean jar and add the ginger, chilies and spirit.",
+        "Coil the beans into the jar under the brine, weight them down and close.",
+        "Leave at cool room temperature for 5 to 7 days, until sour and olive green. One serving is 20 g of beans."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fiber",
+          "note": "From the beans."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "Salty: count it if you watch sodium."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Paocai",
+          "url": "https://en.wikipedia.org/wiki/Paocai"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_cn_base_chen_pi",
+      "name": "Chen Pi (Dried Citrus Peel)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Rice & Pantry",
+      "region": "Guangdong",
+      "servings": 20,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Bittersweet, fragrant and citrusy, deepening as it ages.",
+      "healthBenefit": "Used a piece at a time for flavor; it adds almost nothing but aroma.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Fruit",
+          "baseName": "Apelsinskal",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "peel of about 8 oranges, white pith scraped thin",
+          "cookingMethod": null,
+          "prepNote": "mandarin peel is traditional; the database has orange peel"
+        }
+      ],
+      "instructions": [
+        "Scrape away most of the white pith and cut the peel into pieces.",
+        "Dry in the sun or a 50 C (120 F) oven until brittle, a few days in the sun or about 6 hours in the oven.",
+        "Keep in a closed jar; it improves with age. Soak a piece in warm water for 20 minutes before using."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fiber",
+          "note": "A little, from the peel."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Chenpi",
+          "url": "https://en.wikipedia.org/wiki/Chenpi"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_cn_base_xian_ya_dan",
+      "name": "Xian Ya Dan (Salted Duck Eggs)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Rice & Pantry",
+      "region": "China",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Very salty whites and rich, sandy, orange yolks.",
+      "healthBenefit": "Duck eggs are rich in protein, vitamin B12 and selenium; salting makes them very high in sodium.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Dairy",
+          "baseName": "Duck Egg (Raw)",
+          "quantity": 12,
+          "unit": "each",
+          "cutPrep": "washed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "3 tbsp taken up by the eggs, the rest stays in the brine"
+        }
+      ],
+      "instructions": [
+        "Boil the water with the salt until dissolved and cool completely.",
+        "Put the eggs in a clean jar, pour the brine over, weight them under and close.",
+        "Leave in a cool place for 30 to 40 days. Steam or boil before eating."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin B12",
+          "note": "Duck eggs are rich in B12."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "Very high; one egg carries most of a day's worth."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Salted duck egg",
+          "url": "https://en.wikipedia.org/wiki/Salted_duck_egg"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_cn_base_xian_dan_huang",
+      "name": "Xian Dan Huang (Salted Egg Yolks)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Rice & Pantry",
+      "region": "China",
+      "servings": 12,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Rich, sandy and savory, the center of zongzi and mooncakes.",
+      "healthBenefit": "Egg yolk brings vitamins A, D and B12 and choline; salting makes it high in sodium.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg Yolk (Raw)",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "from 12 eggs brined whole, whites set aside for another dish",
+          "cookingMethod": null,
+          "prepNote": "duck yolks are traditional; the database has chicken yolk"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "3 tbsp taken up by the yolks, the rest stays in the brine"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Brine 12 whole duck eggs as for salted duck eggs, 30 to 40 days.",
+        "Crack them, keep the whites for another dish and lift out the firm yolks.",
+        "Rinse each yolk, brush with a little spirit if you like and bake at 150 C (300 F) for 8 minutes before using."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Choline",
+          "note": "Egg yolk is one of the richest sources of choline."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "High."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Salted duck egg",
+          "url": "https://en.wikipedia.org/wiki/Salted_duck_egg"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_cn_base_dou_sha",
+      "name": "Dou Sha (Sweet Red Bean Paste)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Rice & Pantry",
+      "region": "China",
+      "servings": 36,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Sweet, earthy and smooth, with the taste of adzuki beans.",
+      "healthBenefit": "Adzuki beans bring fiber, folate and plant protein, alongside the sugar.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Legume",
+          "baseName": "Adzuki beans, mature seeds, whole",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "dry, soaked overnight",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1500,
+          "unit": "ml",
+          "cutPrep": "for cooking",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "peanut oil or lard is also used"
+        }
+      ],
+      "instructions": [
+        "Simmer the soaked beans in the water for about 1 1/2 hours, until they crush easily, topping up the water if needed.",
+        "Blend or mash, skins and all.",
+        "Cook the paste in a nonstick pan with the sugar, adding the oil a spoonful at a time, stirring constantly, until it is thick and pulls away from the pan, about 30 minutes.",
+        "Cool and keep in the fridge a week or freeze."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Fiber",
+          "note": "About 2 g per tablespoon."
+        },
+        {
+          "nutrient": "Sugar",
+          "note": "About 6 g per tablespoon."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Red bean paste",
+          "url": "https://en.wikipedia.org/wiki/Red_bean_paste"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_cn_base_lap_cheong",
+      "name": "Lap Cheong (Chinese Sausage)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Rice & Pantry",
+      "region": "Guangdong",
+      "servings": 20,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "each",
+      "flavorProfile": "Sweet, salty and fragrant, firm from drying, with diced fat that melts when cooked.",
+      "healthBenefit": "Pork brings protein and B vitamins; the sausage is sweet and fatty, so it seasons a dish.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Pork Shoulder (Raw)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "lean, cut in 5 mm dice",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Back Fat (Raw)",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "cut in 5 mm dice, blanched and drained",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 22,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "light soy"
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Alcoholic beverage, spirit, ~40% v/v, all (Brandy, Gin, Rum, Vodka and Whisky)",
+          "quantity": 40,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "in place of rose wine (mei kuei lu chiew), which the database does not hold"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, white, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork, offal and by-products, small intestine",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "soaked and rinsed",
+          "cookingMethod": null,
+          "prepNote": "about 2 m for 1 kg of filling"
+        }
+      ],
+      "instructions": [
+        "Mix the diced meat and fat with the sugar, salt, soy, spirit and white pepper and leave 1 hour.",
+        "Stuff into the hog casing, prick out any air and tie into 20 links of about 15 cm.",
+        "Hang in a cool, dry, airy place (or at 50 C, 122 F, in a low oven with the door ajar for the first day) for 7 to 10 days, until firm and about a third lighter. They keep a month in the fridge. Steam or slice into the dish."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sugar",
+          "note": "About 4 g per sausage."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 450 mg per sausage."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Chinese sausage",
+          "url": "https://en.wikipedia.org/wiki/Chinese_sausage"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_cn_base_lap_yuk",
+      "name": "Lap Yuk (Cantonese Cured Pork Belly)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Rice & Pantry",
+      "region": "Guangdong",
+      "servings": 14,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Sweet, salty and smoky-tasting pork belly, glossy and firm.",
+      "healthBenefit": "Pork belly brings B vitamins; it is mostly fat, so a little seasons a pot of rice.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "skin on, in strips 4 cm wide",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "all of it taken up by the meat"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 40,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "light soy"
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Alcoholic beverage, spirit, ~40% v/v, all (Brandy, Gin, Rum, Vodka and Whisky)",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "in place of rose wine (mei kuei lu chiew)"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, white, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mix the salt, sugar, soy, spirit and white pepper, coat the strips and leave in the fridge 1 day, turning twice.",
+        "Thread a string through one end of each strip and hang in a cool, dry, airy place for 7 to 10 days, until firm. Keep in the fridge up to a month.",
+        "Steam or slice into the dish. One serving is 50 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Saturated fat",
+          "note": "Mostly fat by weight."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 900 mg per 50 g."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia (Chinese): 臘肉 (lap yuk)",
+          "url": "https://zh.wikipedia.org/wiki/%E8%85%8A%E8%82%89"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_cn_base_dougan",
+      "name": "Wu Xiang Dougan (Spiced Dried Tofu)",
+      "builderType": "side",
+      "dishRole": "side",
+      "dishGroup": "Bases: Rice & Pantry",
+      "region": "Eastern and Southern China",
+      "servings": 7,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Firm, chewy and savoury, with five spice.",
+      "healthBenefit": "Pressing concentrates the protein of tofu.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Legume",
+          "baseName": "Tofu, firm, prepared with calcium sulfate and magnesium chloride (nigari)",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "pressed under a weight for 4 hours",
+          "cookingMethod": null,
+          "prepNote": "about a third of the weight is pressed out as water"
+        },
+        {
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 3 tbsp"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "star anise",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "prepNote": null,
+          "contains": "none"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "or a piece of cassia bark"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, fennel seed",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "or 3 whole cloves"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, \"Sansho\" (Japanese pepper), ground",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "stands in for Sichuan pepper, its close relative"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Press the tofu between boards under a heavy weight for 4 hours, until firm and dense.",
+        "Simmer the water, soy sauce, sugar, salt and spices for 10 minutes. Add the pressed tofu and simmer gently 30 minutes, then leave in the liquid overnight.",
+        "Lift out and dry on a rack, or in a low oven, until the surface is firm. It makes about 700 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 15 g protein per 100 g serving."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "Tofu set with calcium sulfate carries a good share of calcium."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Dried tofu",
+          "url": "https://en.wikipedia.org/wiki/Dried_tofu"
+        }
+      ],
+      "curationNote": "The simmering liquid is mostly not eaten; the full amount is counted, so salt is somewhat overstated. One serving is 100 g."
+    },
+    {
+      "id": "curated_cn_base_fu_ru_white",
+      "name": "Bai Fu Ru (White Fermented Bean Curd)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Rice & Pantry",
+      "region": "China",
+      "servings": 40,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Creamy, salty and pungent, a little like strong cheese.",
+      "healthBenefit": "Used a cube at a time as a seasoning; it is salty.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Legume",
+          "baseName": "Tofu, firm, prepared with calcium sulfate and magnesium chloride (nigari)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "pressed and cut in 2.5 cm cubes",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "rolled on the cubes, the rest dissolved in the brine they are kept and served in"
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Grain spirit",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "baijiu, for dipping the cubes"
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
+          "quantity": 100,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Chilli (chili), dried, ground",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "optional"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 150,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "boiled and cooled, for the brine"
+        }
+      ],
+      "instructions": [
+        "Set the tofu cubes apart on a rack or straw in a covered box at 15 to 20 C (60 to 68 F) for 5 to 7 days, until each is covered in fine white mould.",
+        "Dip each cube in the baijiu, roll in salt mixed with the chilli, and pack into a sterilised jar.",
+        "Pour in the Shaoxing wine and water, close and leave 1 to 2 months before using."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sodium",
+          "note": "About 380 mg sodium per cube."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "About 2 g protein per cube."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Fermented bean curd",
+          "url": "https://en.wikipedia.org/wiki/Fermented_bean_curd"
+        }
+      ],
+      "curationNote": "Home fermentation of tofu depends on the right mould; a cube that turns slimy, pink or black is thrown away. One serving is one cube, about 14 g."
+    },
+    {
+      "id": "curated_cn_base_nam_yu",
+      "name": "Nam Yu (Red Fermented Bean Curd)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Rice & Pantry",
+      "region": "Southern China",
+      "servings": 40,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "piece",
+      "flavorProfile": "Salty, winey and savoury, deep red.",
+      "healthBenefit": "Used a cube at a time as a seasoning; it is salty.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Legume",
+          "baseName": "Tofu, firm, prepared with calcium sulfate and magnesium chloride (nigari)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "pressed and cut in 2.5 cm cubes",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "rolled on the cubes, the rest dissolved in the brine they are kept and served in"
+        },
+        {
+          "category": "Grain",
+          "baseName": "Grains, rice, white, glutinous, dry",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": "stands in for red yeast rice (hong qu), which colours the brine; no food database here lists it"
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
+          "quantity": 150,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 100,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "boiled and cooled"
+        }
+      ],
+      "instructions": [
+        "Mould the tofu cubes as for white fermented bean curd, 5 to 7 days at 15 to 20 C (60 to 68 F).",
+        "Roll each in salt and pack into a sterilised jar. Grind the red yeast rice with the sugar, mix with the wine and water and pour over.",
+        "Close and leave 2 months before using. The red brine is used in cooking along with the cubes."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sodium",
+          "note": "About 380 mg sodium per cube."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Fermented bean curd",
+          "url": "https://en.wikipedia.org/wiki/Fermented_bean_curd"
+        }
+      ],
+      "curationNote": "Red yeast rice can contain monacolin K, the same compound as the statin lovastatin, in the small amounts used here. One serving is one cube with a little brine, about 18 g."
+    },
+    {
+      "id": "curated_cn_base_douchi",
+      "name": "Douchi (Fermented Black Soybeans)",
+      "builderType": "sauce",
+      "dishGroup": "Bases: Rice & Pantry",
+      "region": "Southern China",
+      "servings": 65,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Salty, savoury and slightly bitter.",
+      "healthBenefit": "A seasoning used by the spoonful; it is salty.",
+      "overallTier": "moderate",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Legume",
+          "baseName": "Dry Soybeans",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "soaked overnight",
+          "cookingMethod": null,
+          "prepNote": "black soybeans are traditional; no food database here lists them dry, so yellow soybeans stand in"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 75,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "optional"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Ginger root",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": "optional"
+        }
+      ],
+      "instructions": [
+        "Steam the soaked beans 2 to 3 hours until soft. Spread on a tray, cover with a cloth and keep warm, about 30 C (86 F), for 5 to 7 days, until covered in yellow green mould.",
+        "Rinse off the loose mould, mix the beans with the salt, ginger and wine, and pack into a jar. Leave 2 to 4 weeks.",
+        "Spread out and dry in the sun or a low oven until dry and wrinkled. It makes about 650 g."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Sodium",
+          "note": "About 450 mg sodium per tablespoon."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "About 3 g protein per tablespoon."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Douchi",
+          "url": "https://en.wikipedia.org/wiki/Douchi"
+        }
+      ],
+      "curationNote": "One serving is one tablespoon, about 10 g, from about 650 g finished."
+    }
+  ]
+}

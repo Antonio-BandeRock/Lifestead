@@ -173,4 +173,9 @@
 // Chinese, Thai and Vietnamese, each with the bases it is made from, and
 // two older recipes now name pure maple syrup by its database name. A
 // stale copy has none of these recipes, so phones need the new rows.
-export const REFERENCE_DB_VERSION = "20261029180000";
+// BUMPED 2026-11-10. Every item a recipe makes first now has a recipe of
+// its own that it points to (1,547 System Recipes in all), recipes list
+// their single seasonings in place of a mix, a recipe may name a hidden
+// food, and food_volume_weights carries USDA's weighed grams per ml for
+// foods measured by spoon or cup. A stale copy has none of these rows.
+export const REFERENCE_DB_VERSION = "20261110180000";

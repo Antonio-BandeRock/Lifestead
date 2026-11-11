@@ -41,6 +41,15 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.85.2',
+    date: '2026-11-10',
+    changes: [
+      'Everything a recipe asks you to make first, such as a sauce, a stock, a bread or a tortilla, now has a recipe of its own, and the recipe that uses it points to it. Its nutrients count in the dish.',
+      'Recipes now list each seasoning on its own, salt and pepper included, in place of a ready-made mix.',
+      'Spoon and cup amounts for 123 foods, mostly spices and herbs, now use the weight USDA measured for that food.',
+    ],
+  },
+  {
     version: '1.0.85.1',
     date: '2026-11-10',
     changes: [

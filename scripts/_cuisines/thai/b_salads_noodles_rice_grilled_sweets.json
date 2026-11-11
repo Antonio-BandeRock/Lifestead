@@ -27,10 +27,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 2,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "bird's eye chilies",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bird's eye chilies"
         },
         {
           "category": "Veg",
@@ -69,13 +69,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 25,
           "unit": "g",
           "cutPrep": "shaved",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -87,12 +87,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried shrimp",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
           "quantity": 10,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -150,7 +150,18 @@
       "flavorProfile": "A fiercer, funkier papaya salad, deeply savoury from fermented fish and salted crab, hot with chilies and sour with lime, with almost no sweetness.",
       "healthBenefit": "Raw papaya, tomatoes and beans bring vitamin C and fibre, while the fermented fish, salted crab and fish sauce make it a salty dish best eaten with plenty of fresh vegetables.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_th_base_pla_ra",
+          "servings": 2,
+          "note": "30 ml, the strained juice"
+        },
+        {
+          "recipeId": "curated_th_base_pu_dong",
+          "servings": 2,
+          "note": "2 each, cleaned and cracked"
+        }
+      ],
       "ingredients": [
         {
           "category": "Veg",
@@ -165,10 +176,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 5,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "bird's eye chilies",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "5 bird's eye chilies"
         },
         {
           "category": "Veg",
@@ -198,13 +209,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 20,
           "unit": "g",
           "cutPrep": "shaved",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -213,24 +224,6 @@
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "pla ra (fermented fish sauce)",
-          "contains": "fish",
-          "quantity": 30,
-          "unit": "ml",
-          "cutPrep": "the strained juice",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "salted field crab (pu dong)",
-          "contains": "fish",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "cleaned and cracked",
           "prepNote": null
         },
         {
@@ -631,10 +624,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 5,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "bird's eye chilies",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "5 bird's eye chilies"
         },
         {
           "category": "Veg",
@@ -753,13 +746,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 12,
           "unit": "g",
           "cutPrep": "shaved",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Bev",
@@ -837,10 +830,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 2,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "bird's eye chilies",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bird's eye chilies"
         }
       ],
       "instructions": [
@@ -900,12 +893,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "catfish",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Catfish",
           "quantity": 225,
           "unit": "g",
           "cutPrep": "skin on fillet or whole, grilled or baked then flaked",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -966,10 +959,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 4,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "bird's eye chilies",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 bird's eye chilies"
         }
       ],
       "instructions": [
@@ -1026,13 +1019,13 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 12,
           "unit": "g",
           "cutPrep": "shaved",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -1080,12 +1073,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried shrimp",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
           "quantity": 15,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         }
       ],
@@ -1188,10 +1181,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 4,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "bird's eye chilies",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 bird's eye chilies"
         },
         {
           "category": "Veg",
@@ -1328,22 +1321,22 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lemongrass",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
           "quantity": 20,
           "unit": "g",
           "cutPrep": "thinly sliced",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 2,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "bird's eye chilies",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bird's eye chilies"
         },
         {
           "notInDatabase": true,
@@ -1355,13 +1348,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 12,
           "unit": "g",
           "cutPrep": "shaved",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -1504,13 +1497,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 12,
           "unit": "g",
           "cutPrep": "shaved",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Bev",
@@ -1574,17 +1567,22 @@
           "recipeId": "curated_th_base_prik_pon",
           "servings": 0.25,
           "note": "to serve"
+        },
+        {
+          "recipeId": "curated_th_base_chai_po",
+          "servings": 3,
+          "note": "30 g, finely chopped"
         }
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 100,
           "unit": "g",
           "cutPrep": "shaved",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -1650,21 +1648,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried shrimp",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
           "quantity": 8,
           "unit": "g",
           "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "sweet preserved radish (chai po)",
-          "contains": "none",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": "finely chopped",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -1686,12 +1675,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "garlic chives",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Chinese Chive Leaves",
           "quantity": 30,
           "unit": "g",
           "cutPrep": "cut in 4 cm lengths",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -1807,13 +1796,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Thai dark soy sauce",
-          "contains": "gluten",
-          "quantity": 2,
-          "unit": "tbsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 32,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 tbsp at 16 g per tbsp; in place of Thai dark soy sauce, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -1952,13 +1941,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 8,
           "unit": "g",
           "cutPrep": "for the marinade",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -1988,13 +1977,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Thai dark soy sauce",
-          "contains": "gluten",
-          "quantity": 1,
-          "unit": "tsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 5.3,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tsp at 5.3 g per tsp; in place of Thai dark soy sauce, which the database does not hold"
         },
         {
           "category": "Fats",
@@ -2024,13 +2013,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "fermented yellow soybean paste (tao jiao)",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "tbsp",
+          "category": "Legume",
+          "baseName": "Soybean Paste",
+          "quantity": 18,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tbsp at 18 g per tbsp; in place of fermented yellow soybean paste (tao jiao), which the database does not hold"
         },
         {
           "category": "Legume",
@@ -2148,10 +2137,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 3,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "bird's eye chilies, pounded with the garlic",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bird's eye chilies"
         },
         {
           "category": "Meat",
@@ -2163,12 +2152,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "baby corn",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Sweetcorn, baby, canned, drained",
           "quantity": 40,
           "unit": "g",
           "cutPrep": "halved lengthwise",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -2199,31 +2188,31 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "fresh green peppercorns",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "each",
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 1.8,
+          "unit": "g",
           "cutPrep": "strands",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 each at 3 g per each; in place of fresh green peppercorns, which the database does not hold; fresh green peppercorns counted as 0.3 of their weight in ground black pepper"
         },
         {
-          "notInDatabase": true,
-          "name": "holy basil (bai kaprao)",
-          "contains": "none",
+          "category": "Herbs",
+          "baseName": "Fresh Basil",
           "quantity": 30,
           "unit": "g",
           "cutPrep": "leaves",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of holy basil (bai kaprao), which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "Thai dark soy sauce",
-          "contains": "gluten",
-          "quantity": 2,
-          "unit": "tbsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 32,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 tbsp at 16 g per tbsp; in place of Thai dark soy sauce, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -2344,13 +2333,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 15,
           "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Legume",
@@ -2362,13 +2351,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Thai dark soy sauce",
-          "contains": "gluten",
-          "quantity": 1,
-          "unit": "tbsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 16,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tbsp at 16 g per tbsp; in place of Thai dark soy sauce, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -2407,12 +2396,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "pickled mustard greens (pak gaad dong)",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Cabbage, mustard, salted",
           "quantity": 80,
           "unit": "g",
           "cutPrep": "chopped",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -2479,7 +2468,13 @@
       "flavorProfile": "A small, dark, intensely beefy bowl, spiced with star anise and cinnamon, thickened with a little blood, with soft rice noodles, tender beef, meatballs and fried garlic.",
       "healthBenefit": "Beef brings protein, iron and vitamin B12, and the long-simmered bones add some collagen, though the soy sauces make each bowl salty.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_th_base_luk_chin_nuea",
+          "servings": 24.667,
+          "note": "370 g, halved"
+        }
+      ],
       "ingredients": [
         {
           "category": "Meat",
@@ -2491,22 +2486,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "beef bones",
-          "contains": "meat",
-          "quantity": 800,
+          "category": "CommercialPremade",
+          "baseName": "Soup, stock, beef, home-prepared",
+          "quantity": 3000,
           "unit": "g",
           "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 3000,
-          "unit": "ml",
-          "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "800 g beef bones simmered in 3000 ml water, counted as 3000 g home-made beef stock (1 g per ml); the bones themselves are not eaten"
         },
         {
           "category": "Legume",
@@ -2518,13 +2504,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Thai dark soy sauce",
-          "contains": "gluten",
-          "quantity": 2,
-          "unit": "tbsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 32,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 tbsp at 16 g per tbsp; in place of Thai dark soy sauce, which the database does not hold"
         },
         {
           "notInDatabase": true,
@@ -2536,22 +2522,22 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "rock sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
           "quantity": 30,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "coriander roots",
-          "contains": "none",
-          "quantity": 6,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 18,
+          "unit": "g",
           "cutPrep": "scraped",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "6 each at 3 g per each; in place of coriander roots, which the database does not hold; leaves count for the root"
         },
         {
           "notInDatabase": true,
@@ -2563,12 +2549,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lemongrass",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
           "quantity": 60,
           "unit": "g",
           "cutPrep": "bruised",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -2608,22 +2594,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "beef balls",
-          "contains": "meat",
-          "quantity": 370,
+          "category": "Meat",
+          "baseName": "Beef blood liquid",
+          "quantity": 84,
           "unit": "g",
-          "cutPrep": "halved",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "beef blood",
-          "contains": "meat",
-          "quantity": 80,
-          "unit": "ml",
           "cutPrep": "fresh, strained",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "80 ml at 1.05 g per ml"
         },
         {
           "category": "PastaNoodles",
@@ -2683,10 +2660,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 8,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "bird's eye chilies, for the chili vinegar",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "8 bird's eye chilies"
         }
       ],
       "instructions": [
@@ -2961,13 +2938,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lemon basil (bai maenglak)",
-          "contains": "none",
+          "category": "Herbs",
+          "baseName": "Fresh Basil",
           "quantity": 10,
           "unit": "g",
           "cutPrep": "leaves",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of lemon basil (bai maenglak), which the database does not hold"
         },
         {
           "category": "Veg",
@@ -3094,22 +3071,22 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Golden Mountain seasoning sauce",
-          "contains": "gluten",
-          "quantity": 1,
-          "unit": "tbsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 16,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tbsp at 16 g per tbsp; in place of Golden Mountain seasoning sauce, which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "Thai dark soy sauce",
-          "contains": "gluten",
-          "quantity": 1,
-          "unit": "tsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 5.3,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tsp at 5.3 g per tsp; in place of Thai dark soy sauce, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -3221,17 +3198,27 @@
           "recipeId": "curated_th_base_prik_pon",
           "servings": 1,
           "note": "to serve"
+        },
+        {
+          "recipeId": "curated_th_base_kaep_moo",
+          "servings": 2,
+          "note": "40 g, to serve"
+        },
+        {
+          "recipeId": "curated_side_pork_blood_cake",
+          "servings": 1.5,
+          "note": "150 g, cubed, optional"
         }
       ],
       "ingredients": [
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 8,
-          "unit": "each",
+          "quantity": 4,
+          "unit": "g",
           "cutPrep": "dried red chilies, soaked and drained",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "8 dried chilies"
         },
         {
           "category": "Veg",
@@ -3261,22 +3248,22 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lemongrass",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
           "quantity": 20,
           "unit": "g",
           "cutPrep": "chopped",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "shrimp paste (kapi)",
-          "contains": "fish",
-          "quantity": 1,
-          "unit": "tbsp",
+          "category": "Meat",
+          "baseName": "Shrimp Paste",
+          "quantity": 18,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tbsp at 18 g per tbsp"
         },
         {
           "category": "Herbs",
@@ -3297,12 +3284,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "pork ribs",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Pork Spare Ribs (Raw)",
           "quantity": 600,
           "unit": "g",
           "cutPrep": "cut in 3 cm pieces",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3324,13 +3311,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "fermented soybean sauce (tao jiao)",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "tbsp",
+          "category": "Legume",
+          "baseName": "Soybean Paste",
+          "quantity": 36,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 tbsp at 18 g per tbsp; in place of fermented soybean sauce (tao jiao), which the database does not hold"
         },
         {
           "category": "Veg",
@@ -3369,30 +3356,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "pickled mustard greens (pak gaad dong)",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Cabbage, mustard, salted",
           "quantity": 200,
           "unit": "g",
           "cutPrep": "chopped",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "pork rinds (kaep moo)",
-          "contains": "meat",
-          "quantity": 40,
-          "unit": "g",
-          "cutPrep": "to serve",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "pork blood cake",
-          "contains": "meat",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "cubed, optional",
+          "cookingMethod": null,
           "prepNote": null
         }
       ],
@@ -3640,13 +3609,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cilantro roots",
-          "contains": "none",
-          "quantity": 6,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 18,
+          "unit": "g",
           "cutPrep": "scraped and pounded",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "6 each at 3 g per each; in place of cilantro roots, which the database does not hold; leaves count for the root"
         },
         {
           "category": "Bev",
@@ -3694,31 +3663,31 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "fermented soybean paste (tao jiao)",
-          "contains": "gluten",
-          "quantity": 60,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soybean Paste",
+          "quantity": 72,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "60 ml at 1.2 g per ml; in place of fermented soybean paste (tao jiao), which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 25,
           "unit": "g",
           "cutPrep": "shaved",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "Thai dark soy sauce",
-          "contains": "gluten",
-          "quantity": 3,
-          "unit": "tbsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 48,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "3 tbsp at 16 g per tbsp; in place of Thai dark soy sauce, which the database does not hold"
         },
         {
           "category": "Legume",
@@ -3742,10 +3711,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 4,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "bird's eye chilies, chopped",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 bird's eye chilies"
         },
         {
           "category": "Veg",
@@ -3854,6 +3823,16 @@
           "recipeId": "curated_th_base_nam_soup_gai",
           "servings": 1,
           "note": "for the gravy"
+        },
+        {
+          "recipeId": "curated_cn_base_five_spice_powder",
+          "servings": 2.667,
+          "note": "4 tsp"
+        },
+        {
+          "recipeId": "curated_cn_base_lap_cheong",
+          "servings": 2,
+          "note": "2 each, sliced on the bias"
         }
       ],
       "ingredients": [
@@ -3876,13 +3855,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cilantro roots",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": "scraped and pounded",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 each at 3 g per each; in place of cilantro roots, which the database does not hold; leaves count for the root"
         },
         {
           "category": "Herbs",
@@ -3912,30 +3891,21 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Chinese five spice powder",
-          "contains": "none",
-          "quantity": 4,
-          "unit": "tsp",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 45,
           "unit": "g",
           "cutPrep": "for the marinade",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "toasted sesame oil",
-          "contains": "none",
+          "category": "Fats",
+          "baseName": "Sesamolja",
           "quantity": 4,
           "unit": "tsp",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3948,13 +3918,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "fermented soybean sauce (tao jiao)",
-          "contains": "gluten",
-          "quantity": 2,
-          "unit": "tbsp",
+          "category": "Legume",
+          "baseName": "Soybean Paste",
+          "quantity": 36,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 tbsp at 18 g per tbsp; in place of fermented soybean sauce (tao jiao), which the database does not hold"
         },
         {
           "category": "NutSeed",
@@ -3975,22 +3945,22 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Thai dark soy sauce",
-          "contains": "gluten",
-          "quantity": 1,
-          "unit": "tbsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 16,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tbsp at 16 g per tbsp; in place of Thai dark soy sauce, which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 60,
           "unit": "g",
           "cutPrep": "for the gravy",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "PantryStaples",
@@ -4002,13 +3972,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Thai dark soy sauce",
-          "contains": "gluten",
-          "quantity": 1,
-          "unit": "tbsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 16,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tbsp at 16 g per tbsp; in place of Thai dark soy sauce, which the database does not hold"
         },
         {
           "category": "Legume",
@@ -4053,15 +4023,6 @@
           "unit": "each",
           "cutPrep": "red fresno-type chili, sliced",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Chinese sausage (kun chiang)",
-          "contains": "meat",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "sliced on the bias",
           "prepNote": null
         },
         {
@@ -4143,26 +4104,31 @@
           "recipeId": "curated_th_base_khao_suay",
           "servings": 5,
           "note": "cooked jasmine rice"
+        },
+        {
+          "recipeId": "curated_cn_base_five_spice_powder",
+          "servings": 4,
+          "note": "2 tbsp"
         }
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "pork leg (hock), bone-in with skin",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Pork hindshank (hock)",
           "quantity": 1000,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cilantro roots",
-          "contains": "none",
-          "quantity": 3,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 9,
+          "unit": "g",
           "cutPrep": "scraped and pounded",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "3 each at 3 g per each; in place of cilantro roots, which the database does not hold; leaves count for the root"
         },
         {
           "category": "Veg",
@@ -4174,13 +4140,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "black peppercorns",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": "cracked",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tsp at 3 g per tsp"
         },
         {
           "category": "Fats",
@@ -4210,31 +4176,22 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cinnamon sticks",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "each",
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 5,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 each at 2.5 g per each"
         },
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 60,
           "unit": "g",
           "cutPrep": "shaved",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Chinese five spice powder",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Legume",
@@ -4246,13 +4203,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Thai dark soy sauce",
-          "contains": "gluten",
-          "quantity": 2,
-          "unit": "tbsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 32,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 tbsp at 16 g per tbsp; in place of Thai dark soy sauce, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -4282,12 +4239,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "pickled mustard greens (pak gaad dong)",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Cabbage, mustard, salted",
           "quantity": 150,
           "unit": "g",
           "cutPrep": "rinsed and chopped",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -4303,10 +4260,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 3,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "bird's eye chilies, pounded",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bird's eye chilies"
         },
         {
           "category": "Herbs",
@@ -4387,6 +4344,11 @@
           "recipeId": "curated_th_base_hom_jiew",
           "servings": 2,
           "note": "to finish"
+        },
+        {
+          "recipeId": "curated_sauce_curry_powder",
+          "servings": 2,
+          "note": "1 tbsp"
         }
       ],
       "ingredients": [
@@ -4451,15 +4413,6 @@
           "unit": "each",
           "cutPrep": null,
           "cookingMethod": "Fried",
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Curry powder",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -4596,6 +4549,11 @@
           "recipeId": "curated_th_base_nam_soup_gai",
           "servings": 3,
           "note": "for the rice"
+        },
+        {
+          "recipeId": "curated_sauce_curry_powder",
+          "servings": 4,
+          "note": "2 tbsp"
         }
       ],
       "ingredients": [
@@ -4645,15 +4603,6 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Curry powder",
-          "quantity": 2,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Veg",
           "baseName": "Ginger root",
           "quantity": 15,
@@ -4683,11 +4632,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 4,
-          "unit": "each",
+          "quantity": 0.6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 bay leaves"
         },
         {
           "category": "Herbs",
@@ -4717,31 +4666,31 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cinnamon stick",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "each",
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 2.5,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 each at 2.5 g per each"
         },
         {
-          "notInDatabase": true,
-          "name": "whole cloves",
-          "contains": "none",
-          "quantity": 6,
-          "unit": "each",
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.6,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "6 each at 0.1 g per each"
         },
         {
-          "notInDatabase": true,
-          "name": "green cardamom pods",
-          "contains": "none",
-          "quantity": 6,
-          "unit": "each",
+          "category": "Herbs",
+          "baseName": "Spices, cardamom, ground",
+          "quantity": 1.8,
+          "unit": "g",
           "cutPrep": "lightly cracked",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "6 each at 0.3 g per each"
         },
         {
           "category": "Grain",
@@ -4891,13 +4840,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cilantro roots",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": "scraped and pounded",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 each at 3 g per each; in place of cilantro roots, which the database does not hold; leaves count for the root"
         },
         {
           "category": "Herbs",
@@ -4999,13 +4948,13 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "nam budu (Southern Thai fermented fish sauce)",
-          "contains": "fish",
-          "quantity": 125,
-          "unit": "ml",
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 150,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "125 ml at 1.2 g per ml; in place of nam budu (Southern Thai fermented fish sauce), which the database does not hold"
         },
         {
           "category": "Bev",
@@ -5017,12 +4966,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lemongrass",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
           "quantity": 15,
           "unit": "g",
           "cutPrep": "bruised, for the dressing",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5053,13 +5002,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 40,
           "unit": "g",
           "cutPrep": "shaved",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Meat",
@@ -5071,12 +5020,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried shrimp",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
           "quantity": 25,
           "unit": "g",
           "cutPrep": "pounded to a powder",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5134,12 +5083,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lemongrass",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
           "quantity": 20,
           "unit": "g",
           "cutPrep": "very thinly sliced, to serve",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5155,10 +5104,10 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 3,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "bird's eye chilies, sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bird's eye chilies"
         },
         {
           "category": "Fruit",
@@ -5256,13 +5205,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cilantro roots",
-          "contains": "none",
-          "quantity": 4,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 12,
+          "unit": "g",
           "cutPrep": "scraped and pounded",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "4 each at 3 g per each; in place of cilantro roots, which the database does not hold; leaves count for the root"
         },
         {
           "category": "Herbs",
@@ -5406,13 +5355,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cilantro roots",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": "scraped and pounded",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 each at 3 g per each; in place of cilantro roots, which the database does not hold; leaves count for the root"
         },
         {
           "category": "Legume",
@@ -5433,13 +5382,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Thai dark soy sauce",
-          "contains": "gluten",
-          "quantity": 0.5,
-          "unit": "tbsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 8,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "0.5 tbsp at 16 g per tbsp; in place of Thai dark soy sauce, which the database does not hold"
         },
         {
           "category": "Sweets",
@@ -5451,13 +5400,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 20,
           "unit": "g",
           "cutPrep": "about 1.5 tbsp, shaved",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Dairy",
@@ -5543,6 +5492,11 @@
           "recipeId": "curated_th_base_ajad",
           "servings": 4,
           "note": "to serve"
+        },
+        {
+          "recipeId": "curated_sauce_curry_powder",
+          "servings": 2,
+          "note": "1 tbsp"
         }
       ],
       "ingredients": [
@@ -5560,15 +5514,6 @@
           "baseName": "Coconut milk",
           "quantity": 180,
           "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Curry powder",
-          "quantity": 1,
-          "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -5696,13 +5641,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cilantro roots",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": "scraped and pounded",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 each at 3 g per each; in place of cilantro roots, which the database does not hold; leaves count for the root"
         },
         {
           "category": "Herbs",
@@ -5723,13 +5668,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Thai dark soy sauce",
-          "contains": "gluten",
-          "quantity": 0.5,
-          "unit": "tbsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 8,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "0.5 tbsp at 16 g per tbsp; in place of Thai dark soy sauce, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -5741,13 +5686,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 7,
           "unit": "g",
           "cutPrep": "shaved",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Dairy",
@@ -5862,12 +5807,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "tapioca starch",
-          "contains": "none",
+          "category": "Grain",
+          "baseName": "Starch, cassava starch",
           "quantity": 16,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -6138,19 +6083,19 @@
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 7,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "red bird's eye chilies, roughly chopped",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "7 bird's eye chilies"
         },
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 30,
           "unit": "g",
           "cutPrep": "about 2 tbsp",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -6232,6 +6177,11 @@
           "recipeId": "curated_th_base_khao_suay",
           "servings": 2,
           "note": "hot, to serve"
+        },
+        {
+          "recipeId": "curated_th_base_sriracha",
+          "servings": 2,
+          "note": "2 tbsp"
         }
       ],
       "ingredients": [
@@ -6278,15 +6228,6 @@
           "unit": "g",
           "cutPrep": "to garnish",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "sriracha chili sauce",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "tbsp",
-          "cutPrep": null,
           "prepNote": null
         }
       ],
@@ -6354,12 +6295,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lemongrass",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
           "quantity": 60,
           "unit": "g",
           "cutPrep": "2 stalks, bruised and cut to fit the belly",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -6518,13 +6459,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cilantro roots",
-          "contains": "none",
-          "quantity": 3,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 9,
+          "unit": "g",
           "cutPrep": "scraped and pounded",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "3 each at 3 g per each; in place of cilantro roots, which the database does not hold; leaves count for the root"
         },
         {
           "category": "Herbs",
@@ -6640,13 +6581,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cilantro roots",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": "scraped and pounded",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 each at 3 g per each; in place of cilantro roots, which the database does not hold; leaves count for the root"
         },
         {
           "category": "Herbs",
@@ -6721,30 +6662,30 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Thai dark soy sauce",
-          "contains": "gluten",
-          "quantity": 1,
-          "unit": "tbsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 16,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tbsp at 16 g per tbsp; in place of Thai dark soy sauce, which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "Golden Mountain seasoning sauce",
-          "contains": "gluten",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 32,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2 tbsp at 16 g per tbsp; in place of Golden Mountain seasoning sauce, which the database does not hold"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Sesamolja",
           "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "toasted sesame oil",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "tbsp",
-          "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -6849,13 +6790,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cilantro roots",
-          "contains": "none",
-          "quantity": 3,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 9,
+          "unit": "g",
           "cutPrep": "scraped and pounded",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "3 each at 3 g per each; in place of cilantro roots, which the database does not hold; leaves count for the root"
         },
         {
           "category": "Herbs",
@@ -6921,12 +6862,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "toasted sesame oil",
-          "contains": "none",
+          "category": "Fats",
+          "baseName": "Sesamolja",
           "quantity": 1,
           "unit": "tsp",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -7037,20 +6978,20 @@
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 6,
-          "unit": "each",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": "dried red chilies, fried until crisp",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "6 dried chilies"
         },
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 40,
           "unit": "g",
           "cutPrep": "about 3 tbsp",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -7438,12 +7379,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "tapioca starch",
-          "contains": "none",
+          "category": "Grain",
+          "baseName": "Starch, cassava starch",
           "quantity": 120,
           "unit": "g",
           "cutPrep": "about 1 cup, to coat",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -7549,12 +7490,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "tapioca starch",
-          "contains": "none",
+          "category": "Grain",
+          "baseName": "Starch, cassava starch",
           "quantity": 27,
           "unit": "g",
           "cutPrep": "1 tbsp for each dough",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -7705,13 +7646,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 36,
           "unit": "g",
           "cutPrep": "about 3 tbsp",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -7805,13 +7746,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "palm sugar",
-          "contains": "none",
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 100,
           "unit": "g",
           "cutPrep": "about 1/2 cup",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -7924,12 +7865,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "tapioca starch",
-          "contains": "none",
+          "category": "Grain",
+          "baseName": "Starch, cassava starch",
           "quantity": 150,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -8041,12 +7982,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "tapioca starch",
-          "contains": "none",
+          "category": "Grain",
+          "baseName": "Starch, cassava starch",
           "quantity": 65,
           "unit": "g",
           "cutPrep": "for the pudding",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -8166,22 +8107,22 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "sweetened condensed milk",
-          "contains": "dairy",
-          "quantity": 8,
-          "unit": "tbsp",
+          "category": "PantryStaples",
+          "baseName": "Kondensert melk, søtet",
+          "quantity": 155.2,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "8 tbsp at 19.4 g per tbsp"
         },
         {
-          "notInDatabase": true,
-          "name": "evaporated milk",
-          "contains": "dairy",
-          "quantity": 8,
-          "unit": "tbsp",
+          "category": "Dairy",
+          "baseName": "Evaporated milk min. 7.5 % fat",
+          "quantity": 128,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "8 tbsp at 16 g per tbsp"
         },
         {
           "category": "Bev",
@@ -8398,12 +8339,12 @@
       "components": [],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "lemongrass",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
           "quantity": 40,
           "unit": "g",
           "cutPrep": "2 stalks, bruised and cut in short lengths",
+          "cookingMethod": null,
           "prepNote": null
         },
         {

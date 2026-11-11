@@ -98,11 +98,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Veg",
@@ -176,13 +176,13 @@
       "healthBenefit": "A rich-tasting but lean stock that brings gelatin from the veal bones and a little potassium from the vegetables, with no salt added.",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "veal bones (knuckle and marrow bones)",
-          "contains": "meat",
-          "quantity": 1000,
+          "category": "CommercialPremade",
+          "baseName": "Soup, stock, beef, home-prepared",
+          "quantity": 2000,
           "unit": "g",
-          "cutPrep": "sawn in pieces",
-          "prepNote": null
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1000 g veal bones (knuckle and marrow bones) simmered in 2000 ml water, counted as 2000 g home-made beef stock (1 g per ml); the bones themselves are not eaten"
         },
         {
           "category": "Veg",
@@ -232,11 +232,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Veg",
@@ -244,15 +244,6 @@
           "quantity": 10,
           "unit": "g",
           "cutPrep": "stalks",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 2000,
-          "unit": "ml",
-          "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         }
@@ -302,13 +293,13 @@
       "healthBenefit": "A quick, lean stock that carries minerals and a little protein from the fish bones, made without salt.",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "white fish bones and heads (sole, turbot, whiting), gills removed",
-          "contains": "fish",
-          "quantity": 500,
+          "category": "CommercialPremade",
+          "baseName": "Soup, stock, fish, home-prepared",
+          "quantity": 600,
           "unit": "g",
-          "cutPrep": "rinsed and chopped",
-          "prepNote": null
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "500 g white fish bones and heads (sole, turbot, whiting), gills removed simmered in 600 ml water, counted as 600 g home-made fish stock (1 g per ml); the bones themselves are not eaten"
         },
         {
           "category": "Fats",
@@ -367,11 +358,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Veg",
@@ -389,15 +380,6 @@
           "unit": "ml",
           "cutPrep": "dry",
           "cookingMethod": "Simmered",
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 600,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
           "prepNote": null
         }
       ],
@@ -478,12 +460,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dry white vermouth (Noilly Prat)",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Vermouth dry",
           "quantity": 100,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "optional"
         },
         {
@@ -498,11 +480,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Veg",
@@ -722,6 +704,11 @@
           "recipeId": "curated_fr_base_roux_blond",
           "servings": 4,
           "note": "60 g, cooked on to a light brown"
+        },
+        {
+          "recipeId": "curated_fr_base_poitrine_salee",
+          "servings": 1,
+          "note": "50 g, cut in small lardons"
         }
       ],
       "overallTier": "strong",
@@ -735,15 +722,6 @@
       "flavorProfile": "Dark, glossy and deeply savory, with roasted veal, smoky salt pork and a round tomato sweetness.",
       "healthBenefit": "A concentrated brown sauce used in small amounts, bringing savory depth for very little fat.",
       "ingredients": [
-        {
-          "notInDatabase": true,
-          "name": "salted pork belly (lardons)",
-          "contains": "meat",
-          "quantity": 50,
-          "unit": "g",
-          "cutPrep": "cut in small lardons",
-          "prepNote": null
-        },
         {
           "category": "Veg",
           "baseName": "Carrot",
@@ -783,11 +761,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 0.5,
-          "unit": "each",
+          "quantity": 0.08,
+          "unit": "g",
           "cutPrep": "half a leaf",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "0.5 bay leaves"
         },
         {
           "category": "Herbs",
@@ -899,7 +877,13 @@
     },
     {
       "servingSizeAmount": 0.5,
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_base_poitrine_salee",
+          "servings": 3,
+          "note": "150 g, cut in small dice"
+        }
+      ],
       "overallTier": "strong",
       "id": "curated_fr_base_sauce_tomate",
       "name": "Sauce Tomate (French Tomato Sauce)",
@@ -918,15 +902,6 @@
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Sauteed",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "salted pork belly (poitrine salée)",
-          "contains": "meat",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "cut in small dice",
           "prepNote": null
         },
         {
@@ -995,11 +970,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Veg",
@@ -1121,12 +1096,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "piment d'Espelette",
-          "contains": "none",
+          "category": "Herbs",
+          "baseName": "Chilli (chili), dried, ground",
           "quantity": 0.5,
           "unit": "g",
           "cutPrep": "a pinch",
+          "cookingMethod": null,
           "prepNote": null
         }
       ],
@@ -1972,13 +1947,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "vanilla pod",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "split lengthways and seeds scraped",
-          "prepNote": null
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 13,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 1 tbsp; or the seeds of 1 vanilla pod, as the method describes"
         },
         {
           "category": "Dairy",
@@ -2074,13 +2049,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "vanilla pod",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "split lengthways and seeds scraped",
-          "prepNote": null
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 13,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 1 tbsp; or the seeds of 1 vanilla pod, as the method describes"
         },
         {
           "category": "Dairy",
@@ -2550,7 +2525,13 @@
     },
     {
       "servingSizeAmount": 1,
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_base_moutarde_de_dijon",
+          "servings": 0.333,
+          "note": "1 tsp, Dijon (moutarde forte)"
+        }
+      ],
       "overallTier": "strong",
       "id": "curated_fr_base_mayonnaise",
       "name": "Mayonnaise",
@@ -2573,15 +2554,6 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Mustard hot",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": "Dijon (moutarde forte)",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Wine vinegar",
           "quantity": 15,
           "unit": "ml",
@@ -2599,13 +2571,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "white pepper",
-          "contains": "none",
-          "quantity": 0.125,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Spices, pepper, white, ground",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "ground",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "0.125 tsp at 2.4 g per tsp"
         },
         {
           "category": "Fats",
@@ -2745,7 +2717,13 @@
     },
     {
       "servingSizeAmount": 1,
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_base_moutarde_de_dijon",
+          "servings": 1,
+          "note": "1 tbsp, Dijon (moutarde forte)"
+        }
+      ],
       "overallTier": "strong",
       "id": "curated_fr_base_vinaigrette_a_la_moutarde",
       "name": "Vinaigrette à la Moutarde",
@@ -2757,15 +2735,6 @@
       "flavorProfile": "A sharp, mustardy, lightly creamy dressing that clings to green leaves and cuts through rich food.",
       "healthBenefit": "A dressing of olive oil and vinegar that brings monounsaturated fat and helps the fat-soluble vitamins in a salad be absorbed.",
       "ingredients": [
-        {
-          "category": "Herbs",
-          "baseName": "Mustard hot",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": "Dijon (moutarde forte)",
-          "cookingMethod": null,
-          "prepNote": null
-        },
         {
           "category": "Herbs",
           "baseName": "Wine vinegar",
@@ -2893,7 +2862,13 @@
     },
     {
       "servingSizeAmount": 0.5,
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_baguette",
+          "servings": 1.579,
+          "note": "150 g, day-old, cut in 3/4 inch (2 cm) cubes or slices"
+        }
+      ],
       "overallTier": "strong",
       "id": "curated_fr_base_croutons",
       "name": "Croûtons",
@@ -2905,15 +2880,6 @@
       "flavorProfile": "Golden, crunchy cubes of day-old bread, buttery and lightly salted, that soak up soup without falling apart at once.",
       "healthBenefit": "A way to use up stale bread that adds crunch and some carbohydrate; toasting in butter makes them richer than plain bread.",
       "ingredients": [
-        {
-          "category": "Grain",
-          "baseName": "Pain, baguette, courante",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "day-old, cut in 3/4 inch (2 cm) cubes or slices",
-          "cookingMethod": "Baked",
-          "prepNote": null
-        },
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
@@ -3028,11 +2994,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -3089,6 +3055,11 @@
           "recipeId": "curated_fr_base_creme_fraiche_maison",
           "servings": 2.5,
           "note": "about 75 ml"
+        },
+        {
+          "recipeId": "curated_fr_base_quatre_epices",
+          "servings": 0.667,
+          "note": "1 tsp"
         }
       ],
       "overallTier": "strong",
@@ -3202,15 +3173,6 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "quatre-épices (pepper, nutmeg, clove and ginger blend)",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
           "category": "Meat",
           "baseName": "Pork Bacon",
           "quantity": 150,
@@ -3222,11 +3184,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 3,
-          "unit": "each",
+          "quantity": 0.45,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bay leaves"
         }
       ],
       "instructions": [
@@ -3326,11 +3288,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -3456,11 +3418,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -3472,12 +3434,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "orange zest",
-          "contains": "none",
+          "category": "Fruit",
+          "baseName": "Orange peel",
           "quantity": 2,
           "unit": "g",
           "cutPrep": "zest of half an unwaxed orange",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3682,12 +3644,12 @@
       "healthBenefit": "The cheese and eggs bring protein and calcium; they are buttery pastry, so a few with a drink is the idea.",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "Comté cheese",
-          "contains": "dairy",
+          "category": "Dairy",
+          "baseName": "Comté",
           "quantity": 120,
           "unit": "g",
           "cutPrep": "finely grated, 90 g in the dough and 30 g on top",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3857,7 +3819,13 @@
     },
     {
       "servingSizeAmount": 1,
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_baguette",
+          "servings": 1.263,
+          "note": "120 g, sliced, to serve"
+        }
+      ],
       "overallTier": "strong",
       "id": "curated_fr_escargots_a_la_bourguignonne",
       "name": "Escargots à la Bourguignonne",
@@ -3870,13 +3838,13 @@
       "healthBenefit": "Snails are lean and bring protein, iron and magnesium; the butter makes this a rich starter.",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "Burgundy snails, prepared, with their shells",
-          "contains": "meat",
-          "quantity": 48,
-          "unit": "each",
+          "category": "Meat",
+          "baseName": "Snails edible/escargots",
+          "quantity": 240,
+          "unit": "g",
           "cutPrep": "cooked and drained",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "48 each at 5 g per each"
         },
         {
           "category": "Fats",
@@ -3940,15 +3908,6 @@
           "cutPrep": "dry",
           "cookingMethod": null,
           "prepNote": null
-        },
-        {
-          "category": "Grain",
-          "baseName": "Pain, baguette, courante",
-          "quantity": 120,
-          "unit": "g",
-          "cutPrep": "sliced, to serve",
-          "cookingMethod": null,
-          "prepNote": null
         }
       ],
       "instructions": [
@@ -3982,7 +3941,18 @@
     },
     {
       "servingSizeAmount": 1,
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_base_moutarde_de_dijon",
+          "servings": 1,
+          "note": "1 tbsp, Dijon (moutarde forte)"
+        },
+        {
+          "recipeId": "curated_fr_base_palette_demi_sel",
+          "servings": 40,
+          "note": "2000 g, soaked 30 minutes to 2 hours to remove salt"
+        }
+      ],
       "overallTier": "strong",
       "id": "curated_fr_jambon_persille",
       "name": "Jambon Persillé",
@@ -3994,15 +3964,6 @@
       "flavorProfile": "Pink flakes of ham set in a clear, white wine jelly marbled bright green with parsley and garlic, cool and sharp with vinegar.",
       "healthBenefit": "Lean ham gives protein, and the parsley adds vitamin K and vitamin C; it is cured pork, so it is salty.",
       "ingredients": [
-        {
-          "notInDatabase": true,
-          "name": "lightly salted pork shoulder (palette demi-sel) or ham hock",
-          "contains": "meat",
-          "quantity": 2000,
-          "unit": "g",
-          "cutPrep": "soaked 30 minutes to 2 hours to remove salt",
-          "prepNote": null
-        },
         {
           "category": "Alcohol",
           "baseName": "White Wine",
@@ -4078,11 +4039,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -4117,15 +4078,6 @@
           "quantity": 60,
           "unit": "g",
           "cutPrep": "finely chopped",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard hot",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": "Dijon (moutarde forte)",
           "cookingMethod": null,
           "prepNote": null
         }
@@ -4177,6 +4129,11 @@
           "recipeId": "curated_fr_base_fond_blanc_de_volaille",
           "servings": 2,
           "note": "about 500 ml, hot"
+        },
+        {
+          "recipeId": "curated_fr_baguette",
+          "servings": 1.579,
+          "note": "150 g, cut in 1 cm slices, dried in the oven"
         }
       ],
       "overallTier": "strong",
@@ -4238,11 +4195,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -4269,15 +4226,6 @@
           "unit": "tsp",
           "cutPrep": "freshly grated",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Grain",
-          "baseName": "Pain, baguette, courante",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "cut in 1 cm slices, dried in the oven",
-          "cookingMethod": "Baked",
           "prepNote": null
         },
         {
@@ -4421,13 +4369,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "white pepper, ground",
-          "contains": "none",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Spices, pepper, white, ground",
+          "quantity": 0.6,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "0.25 tsp at 2.4 g per tsp"
         },
         {
           "category": "Veg",
@@ -4599,7 +4547,13 @@
     },
     {
       "servingSizeAmount": 1,
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_baguette",
+          "servings": 3.053,
+          "note": "250 g, sliced, toasted and rubbed with garlic; 40 g, crumb only, soaked in a little broth, for the rouille"
+        }
+      ],
       "overallTier": "strong",
       "id": "curated_fr_bouillabaisse",
       "name": "Bouillabaisse",
@@ -4686,19 +4640,19 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
-          "notInDatabase": true,
-          "name": "orange zest",
-          "contains": "none",
+          "category": "Fruit",
+          "baseName": "Orange peel",
           "quantity": 5,
           "unit": "g",
           "cutPrep": "a strip from half an orange",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -4711,13 +4665,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "small Mediterranean rock fish for the soup (girelles, rascasses, small wrasse)",
-          "contains": "fish",
-          "quantity": 1000,
+          "category": "Meat",
+          "baseName": "Rockfish",
+          "quantity": 500,
           "unit": "g",
           "cutPrep": "gutted and rinsed",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "whole small fish counted as half edible flesh"
         },
         {
           "category": "Bev",
@@ -4738,40 +4692,40 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "scorpion fish (rascasse)",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Rockfish",
           "quantity": 1000,
           "unit": "g",
           "cutPrep": "gutted, cut in pieces on the bone",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of scorpion fish (rascasse), which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "John Dory (Saint-Pierre)",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Rockfish",
           "quantity": 800,
           "unit": "g",
           "cutPrep": "cut in pieces on the bone",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of John Dory (Saint-Pierre), which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "conger eel",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Fish, common Japanese conger",
           "quantity": 500,
           "unit": "g",
           "cutPrep": "cut in thick slices",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "red gurnard (galinette)",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Rockfish",
           "quantity": 600,
           "unit": "g",
           "cutPrep": "gutted, cut in pieces",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of red gurnard (galinette), which the database does not hold"
         },
         {
           "category": "Meat",
@@ -4798,24 +4752,6 @@
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Grain",
-          "baseName": "Pain, baguette, courante",
-          "quantity": 250,
-          "unit": "g",
-          "cutPrep": "sliced, toasted and rubbed with garlic",
-          "cookingMethod": "Baked",
-          "prepNote": null
-        },
-        {
-          "category": "Grain",
-          "baseName": "Pain, baguette, courante",
-          "quantity": 40,
-          "unit": "g",
-          "cutPrep": "crumb only, soaked in a little broth, for the rouille",
-          "cookingMethod": "Baked",
           "prepNote": null
         },
         {
@@ -5003,12 +4939,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cognac",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Cognac",
           "quantity": 50,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5201,11 +5137,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, cloves, ground",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.1,
+          "unit": "g",
           "cutPrep": "1 whole clove",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 whole clove"
         },
         {
           "category": "Veg",
@@ -5344,6 +5280,11 @@
           "recipeId": "curated_fr_base_creme_fraiche_maison",
           "servings": 2,
           "note": "about 4 tbsp"
+        },
+        {
+          "recipeId": "curated_fr_pain_de_mie",
+          "servings": 2.857,
+          "note": "120 g, crusts removed, cut in small cubes"
         }
       ],
       "overallTier": "strong",
@@ -5437,15 +5378,6 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
-        },
-        {
-          "category": "Grain",
-          "baseName": "Pain de mie, courant",
-          "quantity": 120,
-          "unit": "g",
-          "cutPrep": "crusts removed, cut in small cubes",
-          "cookingMethod": "Fried",
-          "prepNote": null
         }
       ],
       "instructions": [
@@ -5485,7 +5417,23 @@
     },
     {
       "servingSizeAmount": 1,
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_confit_de_canard",
+          "servings": 4,
+          "note": "4 each"
+        },
+        {
+          "recipeId": "curated_fr_pain_de_campagne",
+          "servings": 6.522,
+          "note": "300 g, thick slices, toasted"
+        },
+        {
+          "recipeId": "curated_fr_base_poitrine_salee",
+          "servings": 10,
+          "note": "500 g, in large chunks"
+        }
+      ],
       "overallTier": "strong",
       "id": "curated_fr_garbure",
       "name": "Garbure",
@@ -5504,15 +5452,6 @@
           "unit": "g",
           "cutPrep": "ham hock (crosse de jambon), bone in",
           "cookingMethod": "Simmered",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "ventrèche or lard maigre (salt-cured pork belly)",
-          "contains": "meat",
-          "quantity": 500,
-          "unit": "g",
-          "cutPrep": "in large chunks",
           "prepNote": null
         },
         {
@@ -5572,11 +5511,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, cloves, ground",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.1,
+          "unit": "g",
           "cutPrep": "1 whole clove",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 whole clove"
         },
         {
           "category": "Veg",
@@ -5599,11 +5538,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Veg",
@@ -5615,13 +5554,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "piment d'Espelette",
-          "contains": "none",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Chilli (chili), dried, ground",
+          "quantity": 1,
+          "unit": "g",
           "cutPrep": "ground",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "0.5 tsp at 2 g per tsp"
         },
         {
           "category": "Herbs",
@@ -5648,24 +5587,6 @@
           "unit": "g",
           "cutPrep": "cored and cut in quarters or strips",
           "cookingMethod": "Simmered",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "duck or goose confit legs, with a little of their fat",
-          "contains": "meat",
-          "quantity": 4,
-          "unit": "each",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "category": "Grain",
-          "baseName": "Pain de campagne maison (avec farine pour machine à pain)",
-          "quantity": 300,
-          "unit": "g",
-          "cutPrep": "thick slices, toasted",
-          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5783,11 +5704,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Veg",
@@ -5973,13 +5894,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "white pepper, ground",
-          "contains": "none",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Spices, pepper, white, ground",
+          "quantity": 0.6,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "0.25 tsp at 2.4 g per tsp"
         },
         {
           "category": "Herbs",
@@ -6470,12 +6391,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Emmental, grated",
-          "contains": "dairy",
+          "category": "Dairy",
+          "baseName": "Cheese, Emmental",
           "quantity": 120,
           "unit": "g",
           "cutPrep": "grated",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -6688,6 +6609,11 @@
           "recipeId": "curated_fr_base_sauce_bechamel",
           "servings": 5,
           "note": "about 300 ml, cooled so it spreads thick"
+        },
+        {
+          "recipeId": "curated_fr_pain_de_mie",
+          "servings": 4.762,
+          "note": "200 g, 8 slices"
         }
       ],
       "overallTier": "strong",
@@ -6701,15 +6627,6 @@
       "flavorProfile": "A hot ham and cheese sandwich with a creamy béchamel inside and on top, browned and bubbling, crisp outside and soft within.",
       "healthBenefit": "Ham and cheese bring protein and calcium, though with the béchamel and white bread it is a rich, salty café sandwich.",
       "ingredients": [
-        {
-          "category": "Grain",
-          "baseName": "Pain de mie, courant",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": "8 slices",
-          "cookingMethod": null,
-          "prepNote": null
-        },
         {
           "category": "Meat",
           "baseName": "Kokt skinke",
@@ -6783,6 +6700,11 @@
           "recipeId": "curated_fr_base_sauce_bechamel",
           "servings": 5,
           "note": "about 300 ml, cooled so it spreads thick"
+        },
+        {
+          "recipeId": "curated_fr_pain_de_mie",
+          "servings": 4.762,
+          "note": "200 g, 8 slices"
         }
       ],
       "overallTier": "strong",
@@ -6796,15 +6718,6 @@
       "flavorProfile": "The croque-monsieur, browned and bubbling, with a fried egg on top whose yolk runs into the cheese and béchamel.",
       "healthBenefit": "The egg adds protein and choline to the ham and cheese, though it stays a rich, salty sandwich.",
       "ingredients": [
-        {
-          "category": "Grain",
-          "baseName": "Pain de mie, courant",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": "8 slices",
-          "cookingMethod": null,
-          "prepNote": null
-        },
         {
           "category": "Meat",
           "baseName": "Kokt skinke",
@@ -7080,13 +6993,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "fromage blanc (40% fat)",
-          "contains": "dairy",
+          "category": "Dairy",
+          "baseName": "Fromage blanc nature, 3% MG environ",
           "quantity": 100,
           "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of fromage blanc (40% fat), which the database does not hold; the database holds fromage blanc at 3% fat, not 40%"
         },
         {
           "category": "Veg",
@@ -7149,7 +7062,13 @@
     {
       "dishRole": "main",
       "servingSizeAmount": 1,
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_fr_pain_de_campagne",
+          "servings": 3.478,
+          "note": "160 g, 4 slices, toasted"
+        }
+      ],
       "overallTier": "strong",
       "id": "curated_fr_oeufs_en_meurette",
       "name": "Œufs en Meurette",
@@ -7209,11 +7128,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Veg",
@@ -7275,15 +7194,6 @@
           "quantity": 30,
           "unit": "ml",
           "cutPrep": "for the poaching water",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Grain",
-          "baseName": "Pain de campagne maison (avec farine pour machine à pain)",
-          "quantity": 160,
-          "unit": "g",
-          "cutPrep": "4 slices, toasted",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -7374,13 +7284,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "mild green frying peppers (piment d'Anglet)",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Green Bell Pepper",
           "quantity": 280,
           "unit": "g",
           "cutPrep": "seeded and cut in strips",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of mild green frying peppers (piment d'Anglet), which the database does not hold"
         },
         {
           "category": "Veg",
@@ -7412,11 +7322,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Sweets",
@@ -7428,13 +7338,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "piment d'Espelette (ground Basque chili)",
-          "contains": "none",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Chilli (chili), dried, ground",
+          "quantity": 1,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "0.5 tsp at 2 g per tsp"
         },
         {
           "category": "Herbs",
@@ -7908,12 +7818,21 @@
         },
         {
           "category": "Fruit",
-          "baseName": "Lemon",
-          "quantity": 0.5,
-          "unit": "each",
-          "cutPrep": "zest and juice",
+          "baseName": "Lemon peel",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "finely grated",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "zest of half a lemon"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Lemon",
+          "quantity": 24,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": "juice of half a lemon"
         },
         {
           "category": "Herbs",
@@ -8198,12 +8117,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cognac",
-          "contains": "alcohol",
+          "category": "Alcohol",
+          "baseName": "Cognac",
           "quantity": 45,
           "unit": "ml",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "for flaming; leave out or replace with more wine if you prefer"
         },
         {
@@ -8816,13 +8735,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "piment d'Espelette (ground Basque chili)",
-          "contains": "none",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Chilli (chili), dried, ground",
+          "quantity": 1,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "0.5 tsp at 2 g per tsp"
         },
         {
           "category": "Herbs",
@@ -8836,11 +8755,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",

@@ -1025,13 +1025,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Lime",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "juiced, 2 to 3 tablespoons",
+          "quantity": 2.5,
+          "unit": "tbsp",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of 2 limes, 2 to 3 tablespoons"
         },
         {
           "category": "Herbs",
@@ -1087,12 +1087,13 @@
       "components": [],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "dried chiles de árbol",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 6,
           "unit": "g",
           "cutPrep": "about 15, stems removed",
-          "prepNote": "toasted a few seconds"
+          "cookingMethod": null,
+          "prepNote": "toasted a few seconds; in place of dried chiles de árbol, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -1202,20 +1203,22 @@
           "prepNote": "any neutral seed oil; some Veracruz cooks use part olive oil"
         },
         {
-          "notInDatabase": true,
-          "name": "dried chiles de árbol",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 5,
           "unit": "g",
           "cutPrep": "about 10, stems removed",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of dried chiles de árbol, which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "dried chiles morita",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 15,
           "unit": "g",
           "cutPrep": "about 5, stems removed",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of dried chiles morita, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -1456,12 +1459,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "habanero chile",
-          "quantity": 1,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red or green",
+          "quantity": 8,
+          "unit": "g",
           "cutPrep": "seeded after charring",
-          "prepNote": "add half, then more to taste"
+          "cookingMethod": null,
+          "prepNote": "add half, then more to taste; 1 each at 8 g per each"
         },
         {
           "category": "Veg",
@@ -1562,13 +1566,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Lime",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "juiced",
+          "quantity": 44,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of 1 lime"
         },
         {
           "category": "Herbs",
@@ -2347,13 +2351,13 @@
           "prepNote": "to taste, depending on the stock"
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Lime",
-          "quantity": 0.5,
-          "unit": "each",
-          "cutPrep": "a few drops of juice",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "a few drops",
           "cookingMethod": null,
-          "prepNote": "optional, keeps the rice white"
+          "prepNote": "optional, keeps the rice white; about 1 tsp from half a lime"
         }
       ],
       "instructions": [
@@ -2417,12 +2421,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "poblano chiles",
-          "quantity": 2,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Green Bell Pepper",
+          "quantity": 240,
+          "unit": "g",
           "cutPrep": "stemmed, seeded and veined, in pieces",
-          "prepNote": "blended raw"
+          "cookingMethod": null,
+          "prepNote": "blended raw; 2 each at 120 g per each; in place of poblano chiles, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -2534,12 +2539,13 @@
       "components": [],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "dried guajillo chiles",
-          "quantity": 12,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
+          "quantity": 72,
+          "unit": "g",
           "cutPrep": "stemmed, seeded and deveined",
-          "prepNote": "about 70 g"
+          "cookingMethod": null,
+          "prepNote": "about 70 g; 12 each at 6 g per each"
         },
         {
           "category": "Veg",
@@ -2779,12 +2785,13 @@
       "components": [],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "dried guajillo chiles",
-          "quantity": 4,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
+          "quantity": 24,
+          "unit": "g",
           "cutPrep": "stemmed, seeded and deveined",
-          "prepNote": "about 24 g"
+          "cookingMethod": null,
+          "prepNote": "about 24 g; 4 each at 6 g per each"
         },
         {
           "category": "Veg",
@@ -2948,12 +2955,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "sour orange juice (naranja agria)",
-          "quantity": 720,
-          "unit": "ml",
+          "category": "Fruit",
+          "baseName": "Sour Orange",
+          "quantity": 748.8,
+          "unit": "g",
           "cutPrep": "freshly squeezed, heated",
-          "prepNote": "or 2 parts sweet orange juice to 1 part lime juice"
+          "cookingMethod": null,
+          "prepNote": "or 2 parts sweet orange juice to 1 part lime juice; 720 ml at 1.04 g per ml"
         },
         {
           "category": "Fats",
@@ -3089,16 +3097,22 @@
           "recipeId": "curated_mx_base_caldo_de_pollo",
           "servings": 4,
           "note": "about 1 L, added a little at a time"
+        },
+        {
+          "recipeId": "curated_mx_base_chocolate_de_mesa",
+          "servings": 1,
+          "note": "30 g, chopped, chocolate de mesa, ground cacao with sugar and canela"
         }
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "dried mulato chiles",
-          "quantity": 6,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Pepper, pasilla",
+          "quantity": 60,
+          "unit": "g",
           "cutPrep": "stemmed, seeded and deveined",
-          "prepNote": "about 60 g"
+          "cookingMethod": null,
+          "prepNote": "about 60 g; 6 each at 10 g per each; in place of dried mulato chiles, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -3245,14 +3259,6 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Mexican table chocolate",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": "chopped",
-          "prepNote": "chocolate de mesa, ground cacao with sugar and canela"
-        },
-        {
           "category": "Fats",
           "baseName": "Pork Lard",
           "quantity": 80,
@@ -3354,24 +3360,31 @@
           "recipeId": "curated_mx_base_caldo_de_pollo",
           "servings": 7,
           "note": "about 1.7 L"
+        },
+        {
+          "recipeId": "curated_mx_base_chocolate_oaxaqueno",
+          "servings": 1.5,
+          "note": "45 g, chopped, chocolate de mesa ground with sugar, almonds and canela"
         }
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "dried mulato chiles",
+          "category": "Veg",
+          "baseName": "Pepper, pasilla",
           "quantity": 140,
           "unit": "g",
           "cutPrep": "stemmed and seeded, seeds kept",
-          "prepNote": "about 12 chiles"
+          "cookingMethod": null,
+          "prepNote": "about 12 chiles; in place of dried mulato chiles, which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "dried chilhuacle negro chiles",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 40,
           "unit": "g",
           "cutPrep": "stemmed and seeded, seeds kept",
-          "prepNote": "about 6 chiles; more mulato or pasilla where there are none"
+          "cookingMethod": null,
+          "prepNote": "about 6 chiles; more mulato or pasilla where there are none; in place of dried chilhuacle negro chiles, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -3528,14 +3541,6 @@
         },
         {
           "notInDatabase": true,
-          "name": "Oaxacan chocolate",
-          "quantity": 45,
-          "unit": "g",
-          "cutPrep": "chopped",
-          "prepNote": "chocolate de mesa ground with sugar, almonds and canela"
-        },
-        {
-          "notInDatabase": true,
           "name": "avocado leaves",
           "quantity": 3,
           "unit": "each",
@@ -3624,6 +3629,16 @@
           "recipeId": "curated_mx_base_caldo_de_pollo",
           "servings": 3,
           "note": "about 720 ml, part of it for soaking the chiles"
+        },
+        {
+          "recipeId": "curated_mx_base_pan_de_yema",
+          "servings": 0.5,
+          "note": "0.5 each, one day old, torn, or half a bolillo"
+        },
+        {
+          "recipeId": "curated_mx_base_chocolate_oaxaqueno",
+          "servings": 2,
+          "note": "60 g, chopped, chocolate de mesa"
         }
       ],
       "ingredients": [
@@ -3637,12 +3652,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried chilcostle chiles",
-          "quantity": 6,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
+          "quantity": 30,
+          "unit": "g",
           "cutPrep": "stemmed and seeded",
-          "prepNote": "about 50 g; guajillo where there are none"
+          "cookingMethod": null,
+          "prepNote": "about 50 g; guajillo where there are none; 6 each at 5 g per each; in place of dried chilcostle chiles, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -3690,14 +3706,6 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Oaxacan pan de yema (egg bread)",
-          "quantity": 0.5,
-          "unit": "each",
-          "cutPrep": "one day old, torn",
-          "prepNote": "or half a bolillo"
-        },
-        {
           "category": "Herbs",
           "baseName": "Spices, cinnamon, ground",
           "quantity": 1,
@@ -3732,14 +3740,6 @@
           "cutPrep": "dried Oaxacan or Mexican oregano",
           "cookingMethod": null,
           "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Oaxacan chocolate",
-          "quantity": 60,
-          "unit": "g",
-          "cutPrep": "chopped",
-          "prepNote": "chocolate de mesa"
         },
         {
           "category": "Fats",
@@ -3826,11 +3826,12 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "dried guajillo chiles",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 45,
           "unit": "g",
           "cutPrep": "stemmed, seeded and torn flat",
+          "cookingMethod": null,
           "prepNote": "about 6; in Oaxaca chilcostle or chile costeño amarillo"
         },
         {
@@ -4273,11 +4274,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "radish leaves",
+          "category": "Veg",
+          "baseName": "Japanese radishes, Daikon, leaves",
           "quantity": 15,
           "unit": "g",
           "cutPrep": "about 1/2 cup, washed",
+          "cookingMethod": null,
           "prepNote": "or 1 hoja santa leaf"
         },
         {
@@ -4366,20 +4368,22 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "sour orange juice (naranja agria)",
-          "quantity": 240,
-          "unit": "ml",
+          "category": "Fruit",
+          "baseName": "Sour Orange",
+          "quantity": 249.6,
+          "unit": "g",
           "cutPrep": "freshly squeezed",
-          "prepNote": "or 160 ml lime juice with 80 ml orange juice"
+          "cookingMethod": null,
+          "prepNote": "or 160 ml lime juice with 80 ml orange juice; 240 ml at 1.04 g per ml"
         },
         {
-          "notInDatabase": true,
-          "name": "habanero chile",
-          "quantity": 1,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red or green",
+          "quantity": 8,
+          "unit": "g",
           "cutPrep": "charred, then slit or sliced into rings",
-          "prepNote": "or a charred jalapeño for less heat"
+          "cookingMethod": null,
+          "prepNote": "or a charred jalapeño for less heat; 1 each at 8 g per each"
         },
         {
           "category": "Herbs",
@@ -4402,11 +4406,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "whole leaves",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -4527,11 +4531,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 4,
-          "unit": "each",
+          "quantity": 0.6,
+          "unit": "g",
           "cutPrep": "whole leaves",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 bay leaves"
         },
         {
           "category": "Herbs",
@@ -4848,11 +4852,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried guajillo chiles",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 50,
           "unit": "g",
           "cutPrep": "stemmed, seeded and deveined",
+          "cookingMethod": null,
           "prepNote": "about 6"
         },
         {
@@ -4957,11 +4962,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "ground with the spices",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -5172,12 +5177,13 @@
           "prepNote": "optional"
         },
         {
-          "notInDatabase": true,
-          "name": "orange peel",
-          "quantity": 1,
-          "unit": "each",
+          "category": "Fruit",
+          "baseName": "Orange peel",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": "a strip of the coloured zest only, no white pith",
-          "prepNote": "optional"
+          "cookingMethod": null,
+          "prepNote": "optional; 1 each at 6 g per each"
         }
       ],
       "instructions": [

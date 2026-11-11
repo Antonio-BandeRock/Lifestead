@@ -118,7 +118,7 @@ try {
     for (const r of l.replaces) replacedRows += Number(removeReplaced.run(l.recipeId, r.category, r.baseName).changes);
     const sort = (linkSort.get(l.recipeId) || 0) + 1;
     linkSort.set(l.recipeId, sort);
-    insertComponent.run(l.recipeId, l.componentRecipeId, l.servings, null, sort);
+    insertComponent.run(l.recipeId, l.componentRecipeId, l.servings, l.note ?? null, sort);
     componentRows++;
   }
   console.log(`Linked ${linked.length} older recipes to what is made first (${links.length} links, ${replacedRows} replaced rows removed this run).`);

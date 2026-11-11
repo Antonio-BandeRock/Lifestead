@@ -15,13 +15,13 @@
       "components": [],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "beef marrow and knuckle bones",
-          "contains": "meat",
-          "quantity": 2500,
+          "category": "CommercialPremade",
+          "baseName": "Soup, stock, beef, home-prepared",
+          "quantity": 5700,
           "unit": "g",
-          "cutPrep": "cut in pieces",
-          "prepNote": "parboiled 2 to 3 minutes and rinsed before the main simmer"
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2500 g beef marrow and knuckle bones simmered in 5700 ml water, counted as 5700 g home-made beef stock (1 g per ml); the bones themselves are not eaten"
         },
         {
           "category": "Meat",
@@ -102,15 +102,6 @@
           "unit": "g",
           "cutPrep": "rock sugar, crushed",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 5700,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": "Simmered",
           "prepNote": null
         }
       ],
@@ -309,21 +300,21 @@
           "prepNote": "lifted out when tender, about 2 to 2.5 hours, and sliced for the bowls"
         },
         {
-          "notInDatabase": true,
-          "name": "oxtail, cut in sections",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Beef oxtail",
           "quantity": 900,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "pork hock (giò heo), cut in rounds",
-          "contains": "meat",
+          "category": "Meat",
+          "baseName": "Pork hindshank (hock)",
           "quantity": 900,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "lifted out when tender, about 1 hour"
         },
         {
@@ -336,13 +327,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lemongrass",
-          "contains": "none",
-          "quantity": 10,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
+          "quantity": 200,
+          "unit": "g",
           "cutPrep": "stalks trimmed, bruised and tied",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "10 each at 20 g per each"
         },
         {
           "category": "Veg",
@@ -408,13 +399,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "mắm ruốc (fermented shrimp paste)",
-          "contains": "fish",
-          "quantity": 2,
-          "unit": "tbsp",
+          "category": "Meat",
+          "baseName": "Shrimp Paste",
+          "quantity": 36,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 tbsp at 18 g per tbsp"
         },
         {
           "notInDatabase": true,
@@ -663,13 +654,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "black cardamom pod",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "each",
+          "category": "Herbs",
+          "baseName": "Spices, cardamom, ground",
+          "quantity": 2,
+          "unit": "g",
           "cutPrep": "toasted and cracked",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 each at 2 g per each; in place of black cardamom pod, which the database does not hold"
         },
         {
           "category": "Algae",
@@ -822,10 +813,10 @@
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "one Thai chile, thinly sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bird's eye chili"
         },
         {
           "category": "Veg",
@@ -932,10 +923,10 @@
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 2,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "minced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bird's eye chilies"
         }
       ],
       "instructions": [
@@ -969,7 +960,13 @@
       "flavorProfile": "Thick, sweet and savory hoisin and peanut dip with fried garlic and crushed peanuts on top.",
       "healthBenefit": "Peanut butter and peanuts give it protein and mostly unsaturated fat; it is rich and sweet, so a couple of spoonfuls go a long way.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_cn_base_hoisin",
+          "servings": 4,
+          "note": "60 ml"
+        }
+      ],
       "ingredients": [
         {
           "category": "Fats",
@@ -1008,15 +1005,6 @@
           "prepNote": null
         },
         {
-          "category": "SaucesCondiments",
-          "baseName": "Hoisinsaus, hjemmelaget",
-          "quantity": 60,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "NutSeed",
           "baseName": "Peanut",
           "quantity": 70,
@@ -1029,10 +1017,10 @@
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "thinly sliced, to serve",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bird's eye chili"
         }
       ],
       "instructions": [
@@ -1237,13 +1225,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lemongrass",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
+          "quantity": 40,
+          "unit": "g",
           "cutPrep": "stalks, tender part sliced and finely ground",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 each at 20 g per each"
         },
         {
           "category": "Veg",
@@ -1369,10 +1357,10 @@
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "thinly sliced, optional",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bird's eye chili"
         }
       ],
       "instructions": [
@@ -1518,10 +1506,10 @@
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "thinly sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bird's eye chili"
         }
       ],
       "instructions": [
@@ -1991,6 +1979,11 @@
           "recipeId": "curated_vn_base_banh_mi",
           "servings": 0.5,
           "note": "half a roll, torn and soaked in milk"
+        },
+        {
+          "recipeId": "curated_cn_base_five_spice_powder",
+          "servings": 0.333,
+          "note": "0.5 tsp"
         }
       ],
       "ingredients": [
@@ -2064,15 +2057,6 @@
           "unit": "g",
           "cutPrep": "two tablespoons",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Chinese five-spice powder",
-          "contains": "none",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": null,
           "prepNote": null
         },
         {
@@ -2442,6 +2426,11 @@
           "recipeId": "curated_vn_base_nuoc_dung_pho_bo",
           "servings": 16,
           "note": "2 cups per bowl, at a rolling boil; the chuck simmered in it is sliced for the bowls"
+        },
+        {
+          "recipeId": "curated_cn_base_hoisin",
+          "servings": 4,
+          "note": "4 tbsp, optional, for the table"
         }
       ],
       "ingredients": [
@@ -2491,13 +2480,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Thai basil (húng quế)",
-          "contains": "none",
+          "category": "Herbs",
+          "baseName": "Fresh Basil",
           "quantity": 30,
           "unit": "g",
           "cutPrep": "sprigs",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of Thai basil (húng quế), which the database does not hold"
         },
         {
           "notInDatabase": true,
@@ -2521,10 +2510,10 @@
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 3,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "Thai or serrano, sliced thin",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bird's eye chilies"
         },
         {
           "category": "Fruit",
@@ -2534,15 +2523,6 @@
           "cutPrep": "cut in wedges",
           "cookingMethod": null,
           "prepNote": null
-        },
-        {
-          "category": "SaucesCondiments",
-          "baseName": "Hoisinsaus, hjemmelaget",
-          "quantity": 4,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "optional, for the table"
         }
       ],
       "instructions": [
@@ -2644,10 +2624,10 @@
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 3,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced thin",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bird's eye chilies"
         },
         {
           "category": "Fruit",
@@ -2715,6 +2695,16 @@
           "recipeId": "curated_vn_base_sa_te",
           "servings": 4,
           "note": "on the table for more heat"
+        },
+        {
+          "recipeId": "curated_side_pork_blood_cake",
+          "servings": 3,
+          "note": "300 g, cut in 1-inch cubes"
+        },
+        {
+          "recipeId": "curated_vn_base_cha_hue",
+          "servings": 9,
+          "note": "450 g, sliced"
         }
       ],
       "ingredients": [
@@ -2725,24 +2715,6 @@
           "unit": "g",
           "cutPrep": "thick round bún bò Huế noodles",
           "cookingMethod": "Boiled",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "chả Huế (Huế peppered pork roll)",
-          "contains": "meat",
-          "quantity": 450,
-          "unit": "g",
-          "cutPrep": "sliced",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "cooked pork blood cake (huyết heo)",
-          "contains": "meat",
-          "quantity": 300,
-          "unit": "g",
-          "cutPrep": "cut in 1-inch cubes",
           "prepNote": null
         },
         {
@@ -2782,13 +2754,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Thai basil (húng quế)",
-          "contains": "none",
+          "category": "Herbs",
+          "baseName": "Fresh Basil",
           "quantity": 20,
           "unit": "g",
           "cutPrep": "sprigs",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of Thai basil (húng quế), which the database does not hold"
         },
         {
           "category": "Sprouts",
@@ -2818,12 +2790,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "water spinach stems (rau muống chẻ)",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Swamp cabbage (skunk cabbage, water convulvolus)",
           "quantity": 150,
           "unit": "g",
           "cutPrep": "split into thin curls",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -2887,6 +2859,21 @@
           "recipeId": "curated_vn_base_nuoc_dung_xuong_heo",
           "servings": 12,
           "note": "about 1.5 cups per bowl"
+        },
+        {
+          "recipeId": "curated_sauce_tomato_ketchup",
+          "servings": 4,
+          "note": "4 tbsp"
+        },
+        {
+          "recipeId": "curated_side_pork_blood_cake",
+          "servings": 2.25,
+          "note": "225 g, cut in 1-inch cubes"
+        },
+        {
+          "recipeId": "curated_vn_base_gia_vi_rieu_cua",
+          "servings": 11.111,
+          "note": "200 g"
         }
       ],
       "ingredients": [
@@ -2900,12 +2887,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried shrimp (tôm khô)",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
           "quantity": 60,
           "unit": "g",
           "cutPrep": "rinsed",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -2915,15 +2902,6 @@
           "unit": "g",
           "cutPrep": "picked crab meat",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "jarred spiced crab paste for riêu (gia vị nấu riêu cua)",
-          "contains": "fish",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": null,
           "prepNote": null
         },
         {
@@ -2981,22 +2959,13 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Tomato ketchup",
-          "quantity": 4,
-          "unit": "tbsp",
+          "category": "Meat",
+          "baseName": "Shrimp Paste",
+          "quantity": 54,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "mắm ruốc (fermented shrimp paste)",
-          "contains": "fish",
-          "quantity": 3,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "prepNote": null
+          "prepNote": "3 tbsp at 18 g per tbsp"
         },
         {
           "category": "Herbs",
@@ -3044,21 +3013,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "cooked pork blood cake (huyết heo)",
-          "contains": "meat",
-          "quantity": 225,
-          "unit": "g",
-          "cutPrep": "cut in 1-inch cubes",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "water spinach stems (rau muống chẻ)",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Swamp cabbage (skunk cabbage, water convulvolus)",
           "quantity": 200,
           "unit": "g",
           "cutPrep": "split into thin curls",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3177,21 +3137,21 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "dried squid (mực khô)",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Mollusks, processed squid,  \"Surume\" (dried squid)",
           "quantity": 60,
           "unit": "g",
           "cutPrep": "toasted and rinsed",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried shrimp (tôm khô)",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
           "quantity": 40,
           "unit": "g",
           "cutPrep": "rinsed",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3306,10 +3266,10 @@
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 3,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bird's eye chilies"
         },
         {
           "category": "Fruit",
@@ -3372,6 +3332,11 @@
           "recipeId": "curated_vn_base_hanh_phi",
           "servings": 4,
           "note": "on top"
+        },
+        {
+          "recipeId": "curated_vn_base_banh_trang_me",
+          "servings": 3,
+          "note": "3 each, grilled or microwaved until puffed"
         }
       ],
       "ingredients": [
@@ -3511,13 +3476,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "fresh mì Quảng noodles (wide turmeric rice noodles)",
-          "contains": "none",
+          "category": "PastaNoodles",
+          "baseName": "Rice, non-glutinous rice products, fresh noodles, rice noodles",
           "quantity": 600,
           "unit": "g",
           "cutPrep": null,
-          "prepNote": "blanched"
+          "cookingMethod": null,
+          "prepNote": "blanched; in place of fresh mì Quảng noodles (wide turmeric rice noodles), which the database does not hold"
         },
         {
           "category": "NutSeed",
@@ -3595,19 +3560,10 @@
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 2,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "sesame rice crackers (bánh tráng mè)",
-          "contains": "none",
-          "quantity": 3,
-          "unit": "each",
-          "cutPrep": "grilled or microwaved until puffed",
-          "prepNote": null
+          "prepNote": "2 bird's eye chilies"
         }
       ],
       "instructions": [
@@ -3742,13 +3698,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "bánh canh noodles (thick tapioca and rice flour noodles)",
-          "contains": "none",
+          "category": "PastaNoodles",
+          "baseName": "Rice, non-glutinous rice products, fresh noodles, rice noodles",
           "quantity": 900,
           "unit": "g",
           "cutPrep": null,
-          "prepNote": "fresh, boiled as the package says"
+          "cookingMethod": null,
+          "prepNote": "fresh, boiled as the package says; in place of bánh canh noodles (thick tapioca and rice flour noodles), which the database does not hold"
         },
         {
           "category": "Fats",
@@ -4013,10 +3969,10 @@
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 2,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bird's eye chilies"
         }
       ],
       "instructions": [
@@ -4084,12 +4040,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried shrimp (tôm khô)",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
           "quantity": 15,
           "unit": "g",
           "cutPrep": "rinsed",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -4177,10 +4133,10 @@
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 2,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bird's eye chilies"
         },
         {
           "category": "Fruit",
@@ -4192,13 +4148,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "mắm tôm (fermented shrimp sauce)",
-          "contains": "fish",
-          "quantity": 1,
-          "unit": "tsp",
+          "category": "Meat",
+          "baseName": "Shrimp Paste",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tsp at 6 g per tsp"
         }
       ],
       "instructions": [
@@ -4244,16 +4200,26 @@
           "recipeId": "curated_vn_base_nuoc_dung_chay",
           "servings": 10,
           "note": "2 cups per bowl"
+        },
+        {
+          "recipeId": "curated_cn_base_five_spice_powder",
+          "servings": 0.667,
+          "note": "1 tsp"
+        },
+        {
+          "recipeId": "curated_cn_base_hoisin",
+          "servings": 3,
+          "note": "3 tbsp, optional"
         }
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "dried tofu skin (tàu hũ ky)",
-          "contains": "none",
+          "category": "Legume",
+          "baseName": "Soybeans, \"Yuba\" (film formed on surface of warmed soy milk), dried, uncooked",
           "quantity": 50,
           "unit": "g",
           "cutPrep": "soaked 15 minutes in warm water, cut in strips",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -4281,15 +4247,6 @@
           "unit": "g",
           "cutPrep": "torn",
           "cookingMethod": "Sauteed",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "five-spice powder",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
           "prepNote": null
         },
         {
@@ -4329,13 +4286,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Thai basil (húng quế)",
-          "contains": "none",
+          "category": "Herbs",
+          "baseName": "Fresh Basil",
           "quantity": 50,
           "unit": "g",
           "cutPrep": "sprigs",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of Thai basil (húng quế), which the database does not hold"
         },
         {
           "category": "Sprouts",
@@ -4359,19 +4316,10 @@
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 2,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "SaucesCondiments",
-          "baseName": "Hoisinsaus, hjemmelaget",
-          "quantity": 3,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "optional"
+          "prepNote": "2 bird's eye chilies"
         }
       ],
       "instructions": [
@@ -4426,6 +4374,11 @@
           "recipeId": "curated_vn_base_hanh_phi",
           "servings": 4,
           "note": "on top"
+        },
+        {
+          "recipeId": "curated_vn_base_cu_kieu",
+          "servings": 1.5,
+          "note": "75 g, sliced, with 1 tbsp brine"
         }
       ],
       "ingredients": [
@@ -4493,22 +4446,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "pickled leeks (củ kiệu)",
-          "contains": "none",
-          "quantity": 75,
-          "unit": "g",
-          "cutPrep": "sliced, with 1 tbsp brine",
-          "prepNote": null
-        },
-        {
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 3,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": "2 for the relish, 1 for the table"
+          "prepNote": "3 bird's eye chilies; 2 for the relish, 1 for the table"
         },
         {
           "category": "PastaNoodles",
@@ -4677,13 +4621,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lemongrass",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
+          "quantity": 40,
+          "unit": "g",
           "cutPrep": "minced, about 1/4 cup",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 each at 20 g per each"
         },
         {
           "category": "Veg",
@@ -4725,10 +4669,10 @@
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 2,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced, for the broth",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bird's eye chilies"
         },
         {
           "category": "PastaNoodles",
@@ -4860,13 +4804,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lemongrass",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
+          "quantity": 40,
+          "unit": "g",
           "cutPrep": "minced, about 3 tbsp",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 each at 20 g per each"
         },
         {
           "category": "Veg",
@@ -4896,13 +4840,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dark soy sauce",
-          "contains": "gluten",
-          "quantity": 1,
-          "unit": "tsp",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 5.3,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tsp at 5.3 g per tsp; in place of dark soy sauce, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -5091,13 +5035,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lemongrass",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
+          "quantity": 20,
+          "unit": "g",
           "cutPrep": "minced, about 1 tbsp",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 each at 20 g per each"
         },
         {
           "category": "Herbs",
@@ -5419,13 +5363,13 @@
           "prepNote": "what the tofu absorbs, plus 1 to 2 tbsp hot oil for the sauce"
         },
         {
-          "notInDatabase": true,
-          "name": "mắm tôm (fermented shrimp sauce)",
-          "contains": "fish",
-          "quantity": 3,
-          "unit": "tbsp",
+          "category": "Meat",
+          "baseName": "Shrimp Paste",
+          "quantity": 54,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "3 tbsp at 18 g per tbsp"
         },
         {
           "category": "Sweets",
@@ -5437,22 +5381,22 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Lime",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "juiced",
+          "quantity": 44,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of 1 lime"
         },
         {
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 2,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bird's eye chilies"
         },
         {
           "category": "PastaNoodles",
@@ -5500,13 +5444,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Thai basil (húng quế)",
-          "contains": "none",
+          "category": "Herbs",
+          "baseName": "Fresh Basil",
           "quantity": 15,
           "unit": "g",
           "cutPrep": "sprigs",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of Thai basil (húng quế), which the database does not hold"
         }
       ],
       "instructions": [
@@ -5552,6 +5496,11 @@
           "recipeId": "curated_vn_base_nuoc_dung_xuong_heo",
           "servings": 2,
           "note": "about 1/2 cup per bowl, simmered with the pork juices"
+        },
+        {
+          "recipeId": "curated_cn_base_five_spice_powder",
+          "servings": 0.667,
+          "note": "1 tsp"
         }
       ],
       "ingredients": [
@@ -5562,15 +5511,6 @@
           "unit": "g",
           "cutPrep": "one piece",
           "cookingMethod": "Braised",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "five-spice powder",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
           "prepNote": null
         },
         {
@@ -5628,13 +5568,13 @@
           "prepNote": "2 tbsp for the pork, 2 for frying the noodle squares"
         },
         {
-          "notInDatabase": true,
-          "name": "cao lầu noodles (rice noodles made with ash lye water)",
-          "contains": "none",
+          "category": "PastaNoodles",
+          "baseName": "Rice, non-glutinous rice products, fresh noodles, rice noodles",
           "quantity": 600,
           "unit": "g",
           "cutPrep": null,
-          "prepNote": "fresh; about 60 g cut in squares and fried crisp"
+          "cookingMethod": null,
+          "prepNote": "fresh; about 60 g cut in squares and fried crisp; in place of cao lầu noodles (rice noodles made with ash lye water), which the database does not hold"
         },
         {
           "category": "Veg",
@@ -5682,13 +5622,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Thai basil (húng quế)",
-          "contains": "none",
+          "category": "Herbs",
+          "baseName": "Fresh Basil",
           "quantity": 10,
           "unit": "g",
           "cutPrep": "sprigs",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of Thai basil (húng quế), which the database does not hold"
         },
         {
           "notInDatabase": true,
@@ -5721,10 +5661,10 @@
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 2,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bird's eye chilies"
         }
       ],
       "instructions": [
@@ -5770,7 +5710,13 @@
       "flavorProfile": "Wide rice noodles tossed in a hot wok with savory oyster and soy sauce, lightly charred onion, crisp-edged beef and bok choy.",
       "healthBenefit": "Protein and iron from the beef and greens from the bok choy; frying the beef and the soy and oyster sauces make it rich and salty.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_cn_base_five_spice_powder",
+          "servings": 0.5,
+          "note": "0.75 tsp"
+        }
+      ],
       "ingredients": [
         {
           "category": "Legume",
@@ -5797,15 +5743,6 @@
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "five-spice powder",
-          "contains": "none",
-          "quantity": 0.75,
-          "unit": "tsp",
-          "cutPrep": null,
           "prepNote": null
         },
         {
@@ -5974,7 +5911,13 @@
       "flavorProfile": "Springy, translucent glass noodles tossed with sweet crab, crunchy wood ear and sprouts, Chinese celery and threads of egg, with a hit of black pepper.",
       "healthBenefit": "Protein from crab and egg and vegetables throughout; glass noodles are gluten-free and a light, quick plate.",
       "overallTier": "strong",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_sauce_chicken_stock",
+          "servings": 0.25,
+          "note": "1/4 cup, in place of 1/2 tsp stock powder"
+        }
+      ],
       "ingredients": [
         {
           "category": "Meat",
@@ -6058,15 +6001,6 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "chicken stock powder",
-          "contains": "meat",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
           "quantity": 1,
@@ -6106,10 +6040,10 @@
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 1,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bird's eye chili"
         },
         {
           "category": "Veg",
@@ -6122,11 +6056,11 @@
         }
       ],
       "instructions": [
-        "Season the crab with half the pepper, the stock powder and fish sauce and let it rest 15 minutes. Drain the noodles and toss with the sesame oil.",
+        "Season the crab with half the pepper and the fish sauce and let it rest 15 minutes. Drain the noodles and toss with the sesame oil.",
         "Cook the beaten egg in a thin layer in an oiled pan over low heat, about 1 minute, roll and slice into strips.",
         "Heat 1 tbsp oil in a wok and fry the garlic until golden, then add the crab and stir-fry about 30 seconds.",
         "Add carrot, onion and wood ear and stir-fry 1 minute, then the sprouts and celery for about 30 seconds. Taste for seasoning.",
-        "Push everything to the side, add the last of the oil and the noodles and stir over medium-high heat for 2 to 3 minutes until translucent, then toss all together.",
+        "Push everything to the side, add the last of the oil, the noodles and the stock and stir over medium-high heat for 2 to 3 minutes, until the stock is taken up and the noodles are translucent, then toss all together.",
         "Plate and top with egg strips, the rest of the pepper, cilantro and chile."
       ],
       "nutritionHighlights": [
@@ -6145,7 +6079,7 @@
           "url": "https://helenrecipes.com/recipe-crab-meat-and-glass-noodle-stir-fry-mien-xao-cua/"
         }
       ],
-      "curationNote": "Helen Le miến xào cua as written for 4 (200 g crab, 200 g glass noodles, 20 g wood ear, 100 g sprouts, 50 g Chinese celery, omelette strips, carrot, onion, chicken stock powder, fish sauce, pepper, garlic, chile). Chinese celery is counted as celery, the closest row. Single opened source."
+      "curationNote": "Helen Le miến xào cua as written for 4 (200 g crab, 200 g glass noodles, 20 g wood ear, 100 g sprouts, 50 g Chinese celery, omelette strips, carrot, onion, chicken stock powder, fish sauce, pepper, garlic, chile). Chinese celery is counted as celery, the closest row. The stock powder is replaced by 1/4 cup of the chicken stock recipe, added with the noodles. Single opened source."
     },
     {
       "id": "curated_vn_com_tam_suon_nuong",
@@ -6251,13 +6185,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lemongrass",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
+          "quantity": 40,
+          "unit": "g",
           "cutPrep": "minced, about 1/4 cup",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 each at 20 g per each"
         },
         {
           "category": "Veg",
@@ -6472,10 +6406,10 @@
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 3,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bird's eye chilies"
         },
         {
           "category": "Veg",
@@ -6535,6 +6469,11 @@
           "recipeId": "curated_vn_base_com_trang",
           "servings": 6,
           "note": "day-old, about 6 cups"
+        },
+        {
+          "recipeId": "curated_cn_base_lap_cheong",
+          "servings": 3,
+          "note": "150 g, sliced thin on the diagonal"
         }
       ],
       "ingredients": [
@@ -6554,15 +6493,6 @@
           "unit": "g",
           "cutPrep": "finely minced",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Chinese sausage (lạp xưởng)",
-          "contains": "meat",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "sliced thin on the diagonal",
           "prepNote": null
         },
         {
@@ -6777,6 +6707,11 @@
           "recipeId": "curated_vn_base_hanh_phi",
           "servings": 4,
           "note": "on top"
+        },
+        {
+          "recipeId": "curated_cn_base_lap_cheong",
+          "servings": 3.4,
+          "note": "170 g, sliced thin on the diagonal"
         }
       ],
       "ingredients": [
@@ -6790,15 +6725,6 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "Chinese sausage (lạp xưởng)",
-          "contains": "meat",
-          "quantity": 170,
-          "unit": "g",
-          "cutPrep": "sliced thin on the diagonal",
-          "prepNote": null
-        },
-        {
           "category": "Mushroom",
           "baseName": "Shiitake mushroom dried",
           "quantity": 30,
@@ -6808,12 +6734,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried shrimp (tôm khô)",
-          "contains": "fish",
+          "category": "Meat",
+          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
           "quantity": 40,
           "unit": "g",
           "cutPrep": "rinsed",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -7075,6 +7001,16 @@
           "recipeId": "curated_vn_base_com_trang",
           "servings": 4,
           "note": "cooled to room temperature"
+        },
+        {
+          "recipeId": "curated_vn_base_top_mo",
+          "servings": 3.2,
+          "note": "60 g"
+        },
+        {
+          "recipeId": "curated_vn_base_banh_trang_me",
+          "servings": 2,
+          "note": "2 each, grilled until puffed, broken"
         }
       ],
       "ingredients": [
@@ -7106,13 +7042,13 @@
           "prepNote": "1 tbsp for the clams, 2 for the chile oil"
         },
         {
-          "notInDatabase": true,
-          "name": "lemongrass",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
+          "quantity": 20,
+          "unit": "g",
           "cutPrep": "minced",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 each at 20 g per each"
         },
         {
           "category": "Veg",
@@ -7151,22 +7087,13 @@
           "prepNote": "fried in oil for ớt màu"
         },
         {
-          "notInDatabase": true,
-          "name": "mắm ruốc (fermented shrimp paste)",
-          "contains": "fish",
-          "quantity": 4,
-          "unit": "tsp",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "pork cracklings (tóp mỡ)",
-          "contains": "meat",
-          "quantity": 60,
+          "category": "Meat",
+          "baseName": "Shrimp Paste",
+          "quantity": 24,
           "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "4 tsp at 6 g per tsp"
         },
         {
           "category": "NutSeed",
@@ -7196,12 +7123,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "taro stem (bạc hà, dọc mùng)",
-          "contains": "none",
+          "category": "Veg",
+          "baseName": "Taro shoots",
           "quantity": 100,
           "unit": "g",
           "cutPrep": "peeled and sliced thin",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -7220,15 +7147,6 @@
           "unit": "g",
           "cutPrep": "torn",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "sesame rice crackers (bánh tráng mè)",
-          "contains": "none",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "grilled until puffed, broken",
           "prepNote": null
         }
       ],

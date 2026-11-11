@@ -2180,7 +2180,22 @@ async function resolveCuratedRecipeIngredientUncached(category: string, baseName
     category,
     baseName,
   );
-  return row ? toFoodOption(row) : null;
+  if (row) return toFoodOption(row);
+
+  // A recipe may name a food that is hidden from browsing (owner's
+  // instruction, 2026-11-10: "Don't leave out any of the hidden items").
+  // Its nutrients still count in the dish; it stays out of every list a
+  // person browses, which is all hidden = 1 means.
+  const hiddenRow = await db.getFirstAsync<{ food_id: number; source: string; name: string; short_name: string | null; category: string }>(
+    `SELECT food_id, source, name, short_name, category FROM foods
+     WHERE category = ? AND base_name = ?
+     ORDER BY CASE WHEN prep_method = 'Raw' THEN 0 WHEN prep_method IS NULL THEN 1 ELSE 2 END,
+       CASE WHEN source IN ('USDA', 'Derived') THEN 0 ELSE 1 END, food_id
+     LIMIT 1`,
+    category,
+    baseName,
+  );
+  return hiddenRow ? toFoodOption(hiddenRow) : null;
 }
 
 // sharedIngredientChoiceCache is optional so every other, pre-existing
@@ -2660,15 +2675,45 @@ async function isSaltFood(foodId: number, source: string): Promise<boolean> {
   return salt;
 }
 
+// 2026-11-10: grams per ml weighed by USDA for foods recipes measure by spoon
+// or cup (food_volume_weights, keyed by category and base_name, each row
+// citing its FoodData Central measure). Kept for the session like the salt
+// answer above.
+const gramsPerMlCache = new Map<string, number | null>();
+
+async function foodGramsPerMl(foodId: number, source: string): Promise<number | null> {
+  const key = `${foodId}|${source}`;
+  if (gramsPerMlCache.has(key)) return gramsPerMlCache.get(key) ?? null;
+  const db = await getReferenceDatabase();
+  let value: number | null = null;
+  try {
+    const row = await db.getFirstAsync<{ g: number }>(
+      `SELECT v.grams_per_ml AS g FROM foods f
+       JOIN food_volume_weights v ON v.category = f.category AND v.base_name = f.base_name
+       WHERE f.food_id = ? AND f.source = ?`,
+      foodId,
+      source,
+    );
+    value = row?.g ?? null;
+  } catch {
+    // A reference database from before the table existed: no figure.
+    value = null;
+  }
+  gramsPerMlCache.set(key, value);
+  return value;
+}
+
 export async function conversionOptionsFor(
   foodId: number,
   source: string,
   unit: string,
   foodCategory: string | null | undefined,
-): Promise<{ foodCategory?: string; densityClass?: 'granular_salt' }> {
+): Promise<{ foodCategory?: string; densityClass?: 'granular_salt'; gramsPerMl?: number }> {
   const options = { foodCategory: foodCategory ?? undefined };
   if (!(VOLUME_UNITS as readonly string[]).includes(unit) || categoryHasDensity(foodCategory)) return options;
-  return (await isSaltFood(foodId, source)) ? { ...options, densityClass: 'granular_salt' } : options;
+  if (await isSaltFood(foodId, source)) return { ...options, densityClass: 'granular_salt' };
+  const gramsPerMl = await foodGramsPerMl(foodId, source);
+  return gramsPerMl ? { ...options, gramsPerMl } : options;
 }
 
 // The grams of an ingredient a person eats, which for salt can be less than

@@ -105,6 +105,9 @@ const KEPT = [
   ['for the cooking water and the sauce', 1 / 2],
   ['plus more for the water', 1], ['plus a handful for the boiling water', 1],
   ['dissolved in the brine', 1], ['a pinch, to draw out the water', 1],
+  ['the share taken up; the brine holds 15 g', 1], ['the share taken up; the brine holds 10 g', 1],
+  ['the share taken up; the brine holds 100 g in 1 litre of water', 1],
+  ['rolled on the cubes, the rest dissolved in the brine they are kept and served in', 1],
 ];
 for (const [note, share] of KEPT) check(`salt note "${note}" keeps ${share} of it`, near(kept(note), 18 * share));
 check('a stated half teaspoon for the dish counts 3 g', near(kept('1/2 tsp to season the chicken, the rest for the brine'), 3));
@@ -156,6 +159,18 @@ if (!rows) {
   for (const note of notes) {
     if (!/water|brine|soak|rinse|drain|pour|purg|poach|blanch/i.test(note)) {
       check(`salt note "${note}" counts in full`, kept(note) === 18);
+      continue;
+    }
+    // "2 tsp taken up by the beets, the rest stays in the brine": the note
+    // states what the dish keeps, and a dish using part of the batch carries
+    // the spoons scaled down (flatten_recipe_components.js). The rule caps the
+    // row at that many spoons, 6 g a teaspoon and 18 g a tablespoon.
+    const stated = note.match(/^(\d+(?:\/\d+)?|\d*\.\d+)\s*(tsp|tbsp)\b[^,]*,\s*the rest\b/i);
+    if (stated) {
+      const [num, den] = stated[1].split('/').map(Number);
+      const cap = (den ? num / den : num) * (stated[2].toLowerCase() === 'tbsp' ? 18 : 6);
+      check(`salt note "${note}" caps 100 g of salt at ${cap} g`, near(kept(note, 100), Math.min(100, cap)));
+      if (kept(note) < 18) lessThanFull += 1;
       continue;
     }
     check(`salt note "${note}" has been read (add it to KEPT)`, expected.has(note));

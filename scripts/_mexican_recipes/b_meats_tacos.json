@@ -183,11 +183,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 3,
-          "unit": "each",
+          "quantity": 0.45,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bay leaves"
         },
         {
           "category": "Herbs",
@@ -257,19 +257,21 @@
       "overallTier": "moderate",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "bone-in goat (chivo)",
-          "quantity": 2000,
+          "category": "Meat",
+          "baseName": "Goat, meat, all cuts, untrimmed",
+          "quantity": 1500,
           "unit": "g",
           "cutPrep": "in pieces about 8 cm",
-          "prepNote": "lamb or beef shank where goat cannot be had"
+          "cookingMethod": null,
+          "prepNote": "lamb or beef shank where goat cannot be had; bone-in weight counted as three quarters meat"
         },
         {
-          "notInDatabase": true,
-          "name": "dried guajillo chiles",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 40,
           "unit": "g",
           "cutPrep": "stemmed and seeded",
+          "cookingMethod": null,
           "prepNote": "toasted and soaked"
         },
         {
@@ -291,12 +293,13 @@
           "prepNote": "toasted and soaked"
         },
         {
-          "notInDatabase": true,
-          "name": "dried cascabel chiles",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 24,
           "unit": "g",
           "cutPrep": "stemmed and seeded",
-          "prepNote": "toasted and soaked"
+          "cookingMethod": null,
+          "prepNote": "toasted and soaked; in place of dried cascabel chiles, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -373,11 +376,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 3,
-          "unit": "each",
+          "quantity": 0.45,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bay leaves"
         },
         {
           "category": "Herbs",
@@ -474,11 +477,12 @@
       "overallTier": "weak",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "pork stomach (buche)",
+          "category": "Meat",
+          "baseName": "Pork stomach",
           "quantity": 1000,
           "unit": "g",
           "cutPrep": "cleaned, fat trimmed",
+          "cookingMethod": null,
           "prepNote": "often sold already cleaned"
         },
         {
@@ -520,20 +524,20 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Orange",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "juiced, peel kept",
+          "quantity": 86,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of 1 orange; the squeezed peel goes into the pot for flavour and is lifted out, not eaten"
         },
         {
           "category": "Fats",
@@ -599,12 +603,13 @@
       "overallTier": "weak",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "beef head meat (cheek, snout, palate)",
+          "category": "Meat",
+          "baseName": "Beef Chuck (Raw)",
           "quantity": 2500,
           "unit": "g",
           "cutPrep": "on the bone or in large pieces, well washed",
-          "prepNote": "tongue, brains and eyes are cooked with it and sold separately"
+          "cookingMethod": null,
+          "prepNote": "tongue, brains and eyes are cooked with it and sold separately; in place of beef head meat (cheek, snout, palate), which the database does not hold"
         },
         {
           "category": "Veg",
@@ -627,11 +632,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 6,
-          "unit": "each",
+          "quantity": 0.9,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "6 bay leaves"
         },
         {
           "category": "Herbs",
@@ -706,12 +711,13 @@
       "overallTier": "weak",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "beef cheek (cachete)",
+          "category": "Meat",
+          "baseName": "Beef Chuck (Raw)",
           "quantity": 1500,
           "unit": "g",
           "cutPrep": "trimmed of silver skin",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of beef cheek (cachete), which the database does not hold"
         },
         {
           "category": "Veg",
@@ -734,11 +740,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 4,
-          "unit": "each",
+          "quantity": 0.6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 bay leaves"
         },
         {
           "category": "Herbs",
@@ -830,13 +836,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Orange",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "juiced, halves kept",
+          "quantity": 172,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of 2 oranges; the squeezed halves go into the pot for flavour and are lifted out, not eaten"
         },
         {
           "category": "Dairy",
@@ -859,11 +865,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -1035,11 +1041,12 @@
       "overallTier": "weak",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "pork belly with skin (or pork skin with some fat)",
+          "category": "Meat",
+          "baseName": "Gris sidfläsk bit rå m. svål",
           "quantity": 1000,
           "unit": "g",
           "cutPrep": "cut in 5 cm pieces",
+          "cookingMethod": null,
           "prepNote": "skin scored"
         },
         {
@@ -1081,11 +1088,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Bev",
@@ -1178,11 +1185,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried guajillo chiles",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 90,
           "unit": "g",
           "cutPrep": "stemmed and seeded",
+          "cookingMethod": null,
           "prepNote": "toasted and soaked"
         },
         {
@@ -1242,11 +1250,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -1322,12 +1330,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "fresh Anaheim chiles",
+          "category": "Veg",
+          "baseName": "Green Bell Pepper",
           "quantity": 150,
           "unit": "g",
           "cutPrep": "seeded and chopped",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of fresh Anaheim chiles, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -1416,12 +1425,13 @@
           "prepNote": "pierna and lomo, or falda"
         },
         {
-          "notInDatabase": true,
-          "name": "sour orange juice (naranja agria)",
-          "quantity": 500,
-          "unit": "ml",
+          "category": "Fruit",
+          "baseName": "Sour Orange",
+          "quantity": 520,
+          "unit": "g",
           "cutPrep": "freshly squeezed",
-          "prepNote": "or 2 parts sweet orange to 1 part lime"
+          "cookingMethod": null,
+          "prepNote": "or 2 parts sweet orange to 1 part lime; 500 ml at 1.04 g per ml"
         },
         {
           "category": "Veg",
@@ -1480,11 +1490,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 4,
-          "unit": "each",
+          "quantity": 0.6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 bay leaves"
         },
         {
           "notInDatabase": true,
@@ -1619,11 +1629,12 @@
       "overallTier": "weak",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "pork skin (cuero de cerdo)",
+          "category": "Meat",
+          "baseName": "Pork rind",
           "quantity": 600,
           "unit": "g",
           "cutPrep": "scraped clean",
+          "cookingMethod": null,
           "prepNote": "boiled until soft, then cut in strips"
         },
         {
@@ -1683,11 +1694,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -1969,12 +1980,13 @@
       "overallTier": "weak",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "beef lip (labio de res)",
+          "category": "Meat",
+          "baseName": "Beef Chuck (Raw)",
           "quantity": 1000,
           "unit": "g",
           "cutPrep": "well cleaned",
-          "prepNote": "from the cabeza"
+          "cookingMethod": null,
+          "prepNote": "from the cabeza; in place of beef lip (labio de res), which the database does not hold"
         },
         {
           "category": "Veg",
@@ -1997,11 +2009,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 3,
-          "unit": "each",
+          "quantity": 0.45,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bay leaves"
         },
         {
           "category": "Herbs",
@@ -2071,11 +2083,12 @@
       "overallTier": "moderate",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "beef tongue (lengua de res)",
+          "category": "Meat",
+          "baseName": "Beef tongue",
           "quantity": 1500,
           "unit": "g",
           "cutPrep": "washed and scrubbed",
+          "cookingMethod": null,
           "prepNote": "simmered, then skinned"
         },
         {
@@ -2117,11 +2130,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 3,
-          "unit": "each",
+          "quantity": 0.45,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bay leaves"
         },
         {
           "category": "Herbs",
@@ -2194,7 +2207,13 @@
       "dishGroup": "Meats & Seafood",
       "servingSizeAmount": 1,
       "servingSizeUnit": "serving",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_mx_base_longaniza",
+          "servings": 7.5,
+          "note": "750 g, cut in medium pieces, or out of its casing, from a trusted butcher"
+        }
+      ],
       "id": "curated_mx_longaniza_con_papas",
       "name": "Longaniza con Papas en Salsa Verde",
       "region": "Central Mexico",
@@ -2203,14 +2222,6 @@
       "healthBenefit": "Potato and nopales add fiber, potassium and vitamin C to the pork, though longaniza is salty and fatty, so this is a hearty dish.",
       "overallTier": "moderate",
       "ingredients": [
-        {
-          "notInDatabase": true,
-          "name": "fresh pork longaniza",
-          "quantity": 750,
-          "unit": "g",
-          "cutPrep": "cut in medium pieces, or out of its casing",
-          "prepNote": "from a trusted butcher"
-        },
         {
           "category": "Veg",
           "baseName": "Potato",
@@ -2529,19 +2540,21 @@
       "overallTier": "moderate",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "kid goat liver, heart and lung (asadura de cabrito)",
+          "category": "Meat",
+          "baseName": "Lamb Liver (Raw)",
           "quantity": 600,
           "unit": "g",
           "cutPrep": "trimmed and chopped",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of kid goat liver, heart and lung (asadura de cabrito), which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "kid goat intestine (tripa de leche)",
+          "category": "Meat",
+          "baseName": "Beef, offal and by-products, small intestine",
           "quantity": 300,
           "unit": "g",
           "cutPrep": "turned and washed very well",
+          "cookingMethod": null,
           "prepNote": "for wrapping and tying"
         },
         {
@@ -2592,11 +2605,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Fats",
@@ -2674,11 +2687,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried guajillo chiles",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 60,
           "unit": "g",
           "cutPrep": "stemmed and seeded",
+          "cookingMethod": null,
           "prepNote": "toasted and soaked"
         },
         {
@@ -2864,12 +2878,13 @@
       "overallTier": "weak",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "beef eye with surrounding meat (ojo de res)",
+          "category": "Meat",
+          "baseName": "Beef Chuck (Raw)",
           "quantity": 500,
           "unit": "g",
           "cutPrep": "cleaned",
-          "prepNote": "from the cabeza"
+          "cookingMethod": null,
+          "prepNote": "from the cabeza; in place of beef eye with surrounding meat (ojo de res), which the database does not hold"
         },
         {
           "category": "Veg",
@@ -2892,11 +2907,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -2961,11 +2976,12 @@
       "overallTier": "weak",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "beef brains (sesos de res)",
+          "category": "Meat",
+          "baseName": "Beef Brain",
           "quantity": 600,
           "unit": "g",
           "cutPrep": "membranes removed, soaked in cold water",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -2998,11 +3014,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Veg",
@@ -3145,11 +3161,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Fats",
@@ -3241,12 +3257,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "chiles de agua",
-          "quantity": 3,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red or green",
+          "quantity": 90,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": "grilled"
+          "cookingMethod": null,
+          "prepNote": "grilled; 3 each at 30 g per each"
         }
       ],
       "instructions": [
@@ -3301,11 +3318,12 @@
       "overallTier": "weak",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "beef small intestine (tripa de leche)",
+          "category": "Meat",
+          "baseName": "Beef, offal and by-products, small intestine",
           "quantity": 1000,
           "unit": "g",
           "cutPrep": "well washed and turned",
+          "cookingMethod": null,
           "prepNote": "cleaned by the butcher"
         },
         {
@@ -3487,11 +3505,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Veg",
@@ -3587,7 +3605,13 @@
       "dishGroup": "Meats & Seafood",
       "servingSizeAmount": 1,
       "servingSizeUnit": "serving",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_mx_base_chiles_gueros_en_escabeche",
+          "servings": 2,
+          "note": "100 g, whole, from a can or jar"
+        }
+      ],
       "id": "curated_mx_bacalao_a_la_vizcaina",
       "name": "Bacalao a la Vizcaína",
       "region": "Mexico City and Central Mexico (Christmas Eve)",
@@ -3597,11 +3621,12 @@
       "overallTier": "moderate",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "dried salt cod (bacalao)",
+          "category": "Meat",
+          "baseName": "Fish, cod (scrod), atlantic, dried and salted",
           "quantity": 500,
           "unit": "g",
           "cutPrep": "soaked and shredded",
+          "cookingMethod": null,
           "prepNote": "soaked at least 24 hours, water changed 2 or 3 times"
         },
         {
@@ -3688,11 +3713,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 4,
-          "unit": "each",
+          "quantity": 0.6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 bay leaves"
         },
         {
           "category": "Veg",
@@ -3711,14 +3736,6 @@
           "cutPrep": "green, pitted",
           "cookingMethod": null,
           "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "pickled chiles güeros",
-          "quantity": 100,
-          "unit": "g",
-          "cutPrep": "whole",
-          "prepNote": "from a can or jar"
         },
         {
           "category": "Veg",
@@ -3775,12 +3792,13 @@
       "overallTier": "strong",
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "dried charales",
+          "category": "Meat",
+          "baseName": "Fish, Shishamo smelt, semi-dried",
           "quantity": 250,
           "unit": "g",
           "cutPrep": "heads off the larger ones",
-          "prepNote": "soaked 15 to 30 minutes with a splash of lime or vinegar to soften the bitterness"
+          "cookingMethod": null,
+          "prepNote": "soaked 15 to 30 minutes with a splash of lime or vinegar to soften the bitterness; in place of dried charales, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -3819,12 +3837,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried cascabel chiles",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 25,
           "unit": "g",
           "cutPrep": "stemmed",
-          "prepNote": "6 chiles"
+          "cookingMethod": null,
+          "prepNote": "6 chiles; in place of dried cascabel chiles, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -3956,12 +3975,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried chiles de árbol",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 5,
           "unit": "g",
           "cutPrep": "stemmed",
-          "prepNote": "toasted"
+          "cookingMethod": null,
+          "prepNote": "toasted; in place of dried chiles de árbol, which the database does not hold"
         }
       ],
       "instructions": [
@@ -4242,11 +4262,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried guajillo chiles",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 40,
           "unit": "g",
           "cutPrep": "stemmed and seeded",
+          "cookingMethod": null,
           "prepNote": "toasted and soaked"
         },
         {
@@ -4268,13 +4289,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Orange",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "juiced, about 180 ml",
+          "quantity": 180,
+          "unit": "ml",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of 2 oranges, about 180 ml"
         },
         {
           "category": "Herbs",
@@ -4434,20 +4455,22 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "jugo sazonador (Maggi seasoning sauce)",
-          "quantity": 60,
-          "unit": "ml",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 64.8,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "60 ml at 1.08 g per ml; in place of jugo sazonador (Maggi seasoning sauce), which the database does not hold"
         },
         {
-          "notInDatabase": true,
-          "name": "salsa inglesa (Worcestershire sauce)",
-          "quantity": 60,
-          "unit": "ml",
+          "category": "SaucesCondiments",
+          "baseName": "Sauce, Worcestershire, commercial",
+          "quantity": 66,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "60 ml at 1.1 g per ml"
         },
         {
           "category": "Herbs",
@@ -4570,13 +4593,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Orange",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "juiced",
+          "quantity": 86,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of 1 orange"
         },
         {
           "category": "Herbs",
@@ -5231,6 +5254,11 @@
           "recipeId": "curated_mx_base_pico_de_gallo",
           "servings": 2,
           "note": "salsa bandera"
+        },
+        {
+          "recipeId": "curated_mx_base_chipotles_en_adobo",
+          "servings": 1.5,
+          "note": "30 g, chopped"
         }
       ],
       "ingredients": [
@@ -5349,14 +5377,6 @@
           "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "chipotle chiles in adobo",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": "chopped",
           "prepNote": null
         },
         {
@@ -5777,6 +5797,16 @@
           "recipeId": "curated_mx_base_pico_de_gallo",
           "servings": 4,
           "note": "salsa bandera"
+        },
+        {
+          "recipeId": "curated_sauce_yellow_mustard",
+          "servings": 0.333,
+          "note": "1 tsp"
+        },
+        {
+          "recipeId": "curated_fr_base_mayonnaise",
+          "servings": 5,
+          "note": "5 tbsp"
         }
       ],
       "ingredients": [
@@ -5826,15 +5856,6 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Mustard, prepared, yellow",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Alcohol",
           "baseName": "Pale beer",
           "quantity": 240,
@@ -5868,15 +5889,6 @@
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": "Fried",
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Dressing, mayonnaise, whole egg type",
-          "quantity": 5,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -6406,12 +6418,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "poblano chile",
+          "category": "Veg",
+          "baseName": "Green Bell Pepper",
           "quantity": 120,
           "unit": "g",
           "cutPrep": "stemmed, seeded and thinly sliced",
-          "prepNote": "sautéed, not roasted"
+          "cookingMethod": null,
+          "prepNote": "sautéed, not roasted; in place of poblano chile, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -6459,12 +6472,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "salsa inglesa (Worcestershire sauce)",
-          "quantity": 10,
-          "unit": "ml",
+          "category": "SaucesCondiments",
+          "baseName": "Sauce, Worcestershire, commercial",
+          "quantity": 11,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "10 ml at 1.1 g per ml"
         },
         {
           "category": "Herbs",
@@ -6571,26 +6585,19 @@
           "recipeId": "curated_mx_base_chiles_en_escabeche",
           "servings": 1,
           "note": "the jalapeños sliced"
+        },
+        {
+          "recipeId": "curated_fr_base_mayonnaise",
+          "servings": 5,
+          "note": "5 tbsp"
+        },
+        {
+          "recipeId": "curated_mx_base_jamon_cocido",
+          "servings": 6,
+          "note": "300 g, thinly sliced"
         }
       ],
       "ingredients": [
-        {
-          "category": "Herbs",
-          "baseName": "Dressing, mayonnaise, whole egg type",
-          "quantity": 5,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "jamón cocido (cooked ham)",
-          "quantity": 300,
-          "unit": "g",
-          "cutPrep": "thinly sliced",
-          "prepNote": null
-        },
         {
           "category": "Dairy",
           "baseName": "Queso Chihuahua",
@@ -6768,12 +6775,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "dried chiles de árbol",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 25,
           "unit": "g",
           "cutPrep": "stemmed",
-          "prepNote": "toasted"
+          "cookingMethod": null,
+          "prepNote": "toasted; in place of dried chiles de árbol, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -6864,6 +6872,31 @@
           "recipeId": "curated_mx_base_chiles_en_escabeche",
           "servings": 1,
           "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_pan_molido",
+          "servings": 3.333,
+          "note": "100 g"
+        },
+        {
+          "recipeId": "curated_fr_base_mayonnaise",
+          "servings": 4,
+          "note": "4 tbsp"
+        },
+        {
+          "recipeId": "curated_sauce_yellow_mustard",
+          "servings": 2,
+          "note": "2 tbsp"
+        },
+        {
+          "recipeId": "curated_mx_base_salchichas_viena",
+          "servings": 4,
+          "note": "4 each, split lengthwise, browned on the plancha"
+        },
+        {
+          "recipeId": "curated_mx_base_jamon_cocido",
+          "servings": 2.4,
+          "note": "120 g, sliced"
         }
       ],
       "ingredients": [
@@ -6883,30 +6916,6 @@
           "unit": "each",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "pan molido (dry bread crumbs)",
-          "quantity": 100,
-          "unit": "g",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "salchichas tipo Viena (Vienna sausages)",
-          "quantity": 4,
-          "unit": "each",
-          "cutPrep": "split lengthwise",
-          "prepNote": "browned on the plancha"
-        },
-        {
-          "notInDatabase": true,
-          "name": "jamón cocido (cooked ham)",
-          "quantity": 120,
-          "unit": "g",
-          "cutPrep": "sliced",
           "prepNote": null
         },
         {
@@ -6942,24 +6951,6 @@
           "quantity": 40,
           "unit": "g",
           "cutPrep": "thinly sliced",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Dressing, mayonnaise, whole egg type",
-          "quantity": 4,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard, prepared, yellow",
-          "quantity": 2,
-          "unit": "tbsp",
-          "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
@@ -7307,12 +7298,13 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "dried chiles de árbol",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 1,
           "unit": "g",
           "cutPrep": "stemmed",
-          "prepNote": "toasted"
+          "cookingMethod": null,
+          "prepNote": "toasted; in place of dried chiles de árbol, which the database does not hold"
         },
         {
           "notInDatabase": true,
@@ -7639,6 +7631,11 @@
           "recipeId": "curated_mx_base_salsa_verde",
           "servings": 4,
           "note": null
+        },
+        {
+          "recipeId": "curated_mx_base_chipotles_en_adobo",
+          "servings": 0.25,
+          "note": "5 g, chopped"
         }
       ],
       "ingredients": [
@@ -7676,14 +7673,6 @@
           "unit": "g",
           "cutPrep": "chopped",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "chipotle chiles in adobo",
-          "quantity": 5,
-          "unit": "g",
-          "cutPrep": "chopped",
           "prepNote": null
         },
         {
@@ -7810,20 +7799,22 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "dried guajillo chiles",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 40,
           "unit": "g",
           "cutPrep": "stemmed and seeded",
+          "cookingMethod": null,
           "prepNote": "toasted and soaked"
         },
         {
-          "notInDatabase": true,
-          "name": "dried chiles de árbol",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 4,
           "unit": "g",
           "cutPrep": "stemmed",
-          "prepNote": "toasted"
+          "cookingMethod": null,
+          "prepNote": "toasted; in place of dried chiles de árbol, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -7985,16 +7976,22 @@
           "recipeId": "curated_mx_base_caldo_de_pollo",
           "servings": 2,
           "note": "for the caldillo"
+        },
+        {
+          "recipeId": "curated_mx_base_pan_molido",
+          "servings": 0.667,
+          "note": "20 g, about 3 tbsp, to thicken the caldillo"
         }
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "poblano chiles",
-          "quantity": 6,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Green Bell Pepper",
+          "quantity": 720,
+          "unit": "g",
           "cutPrep": "large",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "6 each at 120 g per each; in place of poblano chiles, which the database does not hold"
         },
         {
           "category": "Dairy",
@@ -8067,14 +8064,6 @@
           "cutPrep": "peeled",
           "cookingMethod": "Roasted",
           "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "pan molido (dry bread crumbs)",
-          "quantity": 20,
-          "unit": "g",
-          "cutPrep": null,
-          "prepNote": "about 3 tbsp, to thicken the caldillo"
         },
         {
           "category": "Herbs",
@@ -8358,11 +8347,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",

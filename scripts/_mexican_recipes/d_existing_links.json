@@ -33,11 +33,11 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Lemon",
           "quantity": 90,
           "unit": "g",
-          "cutPrep": "juiced",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
           "prepNote": "about 6 tbsp juice, from 2 lemons"
         },
@@ -285,12 +285,13 @@
       "components": [],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "chicken backs, necks and wings, or a roast chicken carcass",
-          "quantity": 1360,
+          "category": "Herbs",
+          "baseName": "Soup stock, chicken bone stock",
+          "quantity": 2880,
           "unit": "g",
-          "cutPrep": "hacked into 2 inch pieces",
-          "prepNote": "about 3 lb"
+          "cutPrep": null,
+          "cookingMethod": "Simmered",
+          "prepNote": "about 3 lb chicken backs, necks and wings, or a roast chicken carcass, hacked into 2 inch pieces and simmered in 2880 ml (12 cups) cold water; counted as 2880 g unsalted chicken bone stock (1 g per ml), since the bones are not eaten"
         },
         {
           "category": "Veg",
@@ -318,15 +319,6 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "3 leaves"
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 2880,
-          "unit": "ml",
-          "cutPrep": "cold",
-          "cookingMethod": "Simmered",
-          "prepNote": "12 cups"
         }
       ],
       "instructions": [
@@ -344,7 +336,7 @@
         },
         {
           "nutrient": "Protein",
-          "note": "A small amount, mostly gelatin drawn from the bones; not counted here because bones are not in the food database."
+          "note": "A small amount, mostly gelatin drawn from the bones."
         }
       ],
       "citations": [
@@ -357,7 +349,669 @@
           "url": "https://www.cspi.org/recipe/easy-homemade-chicken-stock"
         }
       ],
-      "curationNote": "ATK proportions (3 lb bones, 12 cups water, 1 onion, 3 garlic, 3 bay, about 3 quarts made, keeps 2 days chilled or 4 months frozen), with the longer 3 to 4 hour simmer CSPI uses for a carcass offered as a range. The bones are notInDatabase: the database has no bones or backs row, and counting Meat Chicken would claim the meat itself is eaten. So the counted nutrients are only the onion and garlic, which the strained solids convention counts in full. Replaces the stock cube plus water rows in the chicken vegetable soup."
+      "curationNote": "ATK proportions (3 lb bones, 12 cups water, 1 onion, 3 garlic, 3 bay, about 3 quarts made, keeps 2 days chilled or 4 months frozen), with the longer 3 to 4 hour simmer CSPI uses for a carcass offered as a range. The bones and water are counted as the Japanese food table row for unsalted chicken bone stock (torigara), 1 g per ml of water, since no row holds bones and counting Meat Chicken would claim the meat itself is eaten. The onion and garlic are counted on top under the strained-solids convention, so the totals run a little high. Replaces the stock cube plus water rows in the chicken vegetable soup."
+    },
+    {
+      "id": "curated_sauce_yellow_mustard",
+      "name": "Yellow Mustard",
+      "builderType": "sauce",
+      "dishGroup": "Sauces & Dips",
+      "region": "United States",
+      "servings": 16,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Mild, tangy and bright yellow, with a soft heat that mellows after a day in the jar.",
+      "healthBenefit": "Mustard seed and turmeric bring a little selenium and the spice compounds that give it color, and a spoonful carries almost no fat or sugar.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Herbs",
+          "baseName": "Mustard powder",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "ground yellow mustard",
+          "cookingMethod": null,
+          "prepNote": "about 1/2 cup"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Turmeric, dried, ground",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 1 tsp, for the color"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Garlic powder",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Onion powder",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Paprika",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1/2 tsp"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 120,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, cider",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Whisk the mustard powder, turmeric, garlic powder, onion powder, paprika and salt with the water and vinegar in a small pan until smooth.",
+        "Cook over low heat, stirring often, for 10 to 15 minutes, until it thickens to a spreadable sauce.",
+        "Cool, spoon into a clean jar and keep in the fridge. The sharp edge softens after a day and it keeps for about a month."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Selenium",
+          "note": "Mustard seed is one of the richer plant sources of selenium for its weight."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 190 mg per tablespoon from the salt."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Mustard (condiment)",
+          "url": "https://en.wikipedia.org/wiki/Mustard_(condiment)"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_beverage_almond_milk",
+      "name": "Almond Milk",
+      "builderType": "beverage",
+      "dishGroup": "Drinks",
+      "region": "Mediterranean and Middle East",
+      "servings": 5,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "cup",
+      "flavorProfile": "Light, nutty and faintly sweet, thinner than cow's milk.",
+      "healthBenefit": "Made at home it is almonds and water only, so it brings vitamin E and a little calcium with no added sugar or gums.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "NutSeed",
+          "baseName": "Almonds",
+          "quantity": 143,
+          "unit": "g",
+          "cutPrep": "raw, soaked overnight and drained",
+          "cookingMethod": null,
+          "prepNote": "about 1 cup"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1200,
+          "unit": "ml",
+          "cutPrep": "fresh, for blending",
+          "cookingMethod": null,
+          "prepNote": "5 cups"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "a pinch"
+        }
+      ],
+      "instructions": [
+        "Soak the almonds overnight in plenty of water, then drain and rinse them and pour that water away.",
+        "Blend the almonds with the 1200 ml fresh water and the salt on high for about 2 minutes, until creamy.",
+        "Strain through a nut-milk bag or a cloth-lined sieve, squeezing well. Keep in the fridge and shake before use; it keeps 3 to 4 days."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin E",
+          "note": "Almonds are one of the richest food sources of vitamin E."
+        },
+        {
+          "nutrient": "Calcium",
+          "note": "Lower than dairy milk unless fortified, so it does not replace dairy calcium."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Almond milk",
+          "url": "https://en.wikipedia.org/wiki/Almond_milk"
+        }
+      ],
+      "curationNote": "The strained almond pulp is still counted in the nutrients, since the database has no figure for what passes the cloth."
+    },
+    {
+      "id": "curated_sauce_curry_powder",
+      "name": "Curry Powder",
+      "builderType": "sauce",
+      "dishGroup": "Sauces & Dips",
+      "region": "India and Britain",
+      "servings": 16,
+      "servingSizeAmount": 0.5,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Warm, earthy and gently hot, led by coriander, cumin and turmeric, with sweet notes from cinnamon and cardamom.",
+      "healthBenefit": "A blend of single spices with no salt or fillers, so it seasons without adding sodium.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Herbs",
+          "baseName": "Spices, coriander seed",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Cumin (cummin) seed, dried, ground",
+          "quantity": 9,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Turmeric, dried, ground",
+          "quantity": 9.4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fenugreek seed",
+          "quantity": 3.7,
+          "unit": "g",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, red or cayenne",
+          "quantity": 5.3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 4.6,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, mustard seed, yellow",
+          "quantity": 3.3,
+          "unit": "g",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cardamom, ground",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, ginger, ground",
+          "quantity": 1.8,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 1.3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 0.3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "If starting from whole coriander, cumin, fenugreek and mustard seed, toast them in a dry pan over medium heat until fragrant, about 2 minutes, then cool and grind fine.",
+        "Mix with the ground turmeric, cayenne, pepper, cardamom, ginger, cinnamon, cloves and nutmeg.",
+        "Keep in a closed jar away from light and use within 3 months."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Iron",
+          "note": "Cumin and turmeric add a little iron per spoonful."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "None added."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Curry powder",
+          "url": "https://en.wikipedia.org/wiki/Curry_powder"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_sauce_seitan",
+      "name": "Seitan",
+      "builderType": "sauce",
+      "dishGroup": "Sauces & Dips",
+      "region": "China and Japan",
+      "servings": 4,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Savory and chewy, with a meaty bite that takes on the broth it simmers in.",
+      "healthBenefit": "Very high in protein for its calories. It is wheat gluten, so it is off the table for celiac disease and gluten sensitivity.",
+      "overallTier": "strong",
+      "components": [
+        {
+          "recipeId": "curated_sauce_vegetable_stock",
+          "servings": 1,
+          "note": "the seitan takes up about 1 cup of the 6 cups it simmers in; the rest is kept as broth"
+        }
+      ],
+      "ingredients": [
+        {
+          "category": "Grain",
+          "baseName": "Vital wheat gluten",
+          "quantity": 120,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 1 cup"
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Chickpea flour",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Mushroom",
+          "baseName": "Yeast flakes/nutritional yeast",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Garlic powder",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tsp"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Paprika",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tsp"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tsp"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 236,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 cup"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, cider",
+          "quantity": 5,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Mix the gluten, chickpea flour, nutritional yeast, garlic powder, paprika and salt. Stir in the water and vinegar and knead 2 to 3 minutes into an elastic dough.",
+        "Rest 10 minutes, then cut into 4 pieces.",
+        "Bring the stock to a bare simmer, add the pieces and cook gently, covered, for 45 minutes, turning once. Never let it boil hard or the seitan turns spongy.",
+        "Cool in the broth. Keep in the fridge up to 5 days."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Protein",
+          "note": "About 30 g per 150 g serving."
+        },
+        {
+          "nutrient": "Gluten",
+          "note": "Made from wheat gluten, so it is not for celiac disease."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Wheat gluten (food)",
+          "url": "https://en.wikipedia.org/wiki/Wheat_gluten_(food)"
+        }
+      ],
+      "curationNote": null
+    },
+    {
+      "id": "curated_sauce_tomato_ketchup",
+      "name": "Tomato Ketchup",
+      "builderType": "sauce",
+      "dishGroup": "Sauces & Dips",
+      "region": "United States and Britain",
+      "servings": 128,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Thick, sweet and sharp, with warm spice from allspice, clove and cinnamon.",
+      "healthBenefit": "Cooking tomatoes down concentrates lycopene, and made at home the sugar and salt are what you choose. It still carries sugar, so it is a condiment, not a vegetable.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Tomato",
+          "quantity": 5000,
+          "unit": "g",
+          "cutPrep": "ripe, cored and chopped",
+          "cookingMethod": null,
+          "prepNote": "about 11 lb"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, cider",
+          "quantity": 375,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 4 tsp"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Paprika",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, mustard seed, yellow",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2 bay leaves"
+        }
+      ],
+      "instructions": [
+        "Simmer the tomatoes, onion and garlic, covered, for 30 minutes until soft, then press through a food mill or sieve and discard the skins and seeds.",
+        "Return to the pot with the vinegar, sugar, salt, spices and bay leaves.",
+        "Simmer uncovered, stirring more often as it thickens, for 2 to 3 hours until it holds a line on a plate. Take out the bay leaves.",
+        "Blend smooth, pour into clean jars and keep in the fridge up to a month, or process in a water bath to keep longer."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Lycopene",
+          "note": "Cooked tomato gives up more lycopene than raw."
+        },
+        {
+          "nutrient": "Sugar",
+          "note": "About 2.5 g added sugar per tablespoon."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 75 mg per tablespoon."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Ketchup",
+          "url": "https://en.wikipedia.org/wiki/Ketchup"
+        }
+      ],
+      "curationNote": "The skins and seeds pressed out in step 1 are still counted, since the database has no figure for strained tomato."
+    },
+    {
+      "id": "curated_sauce_sambal_oelek",
+      "name": "Sambal Oelek",
+      "builderType": "sauce",
+      "dishGroup": "Sauces & Dips",
+      "region": "Indonesia",
+      "servings": 34,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "tbsp",
+      "flavorProfile": "Fiery, fresh and salty, with the bright taste of raw red chili.",
+      "healthBenefit": "Raw chili keeps its vitamin C, and a spoonful flavors a whole dish.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 500,
+          "unit": "g",
+          "cutPrep": "stems removed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 2 tsp"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, rice vinegar",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Pound the chilies with the salt in a mortar, or pulse in a food processor, to a coarse paste with the seeds left in.",
+        "Stir in the vinegar, spoon into a clean jar and keep in the fridge for up to a month."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Vitamin C",
+          "note": "Raw red chili is rich in vitamin C."
+        },
+        {
+          "nutrient": "Sodium",
+          "note": "About 115 mg per tablespoon."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Wikipedia: Sambal",
+          "url": "https://en.wikipedia.org/wiki/Sambal"
+        }
+      ],
+      "curationNote": null
     }
   ],
   "links": [
@@ -919,6 +1573,422 @@
         }
       ],
       "reason": "The 2.5 g stock cube in 250 ml of water is the broth. 250 ml of homemade unsalted chicken stock is 1.04 cups."
+    },
+    {
+      "recipeId": "curated_sauce_garlic_herb_vinaigrette",
+      "componentRecipeId": "curated_sauce_yellow_mustard",
+      "servings": 0.167,
+      "replaces": [
+        {
+          "category": "Herbs",
+          "baseName": "Mustard, prepared, yellow"
+        }
+      ],
+      "reason": "Mustard, prepared, yellow is made at home",
+      "note": "2.5 g"
+    },
+    {
+      "recipeId": "curated_handheld_egg_salad_lettuce_wraps",
+      "componentRecipeId": "curated_sauce_yellow_mustard",
+      "servings": 0.167,
+      "replaces": [
+        {
+          "category": "Herbs",
+          "baseName": "Mustard, prepared, yellow"
+        }
+      ],
+      "reason": "Mustard, prepared, yellow is made at home",
+      "note": "2.5 g"
+    },
+    {
+      "recipeId": "curated_vegan_handheld_chickpea_egg_salad_lettuce_wraps",
+      "componentRecipeId": "curated_sauce_yellow_mustard",
+      "servings": 0.167,
+      "replaces": [
+        {
+          "category": "Herbs",
+          "baseName": "Mustard, prepared, yellow"
+        }
+      ],
+      "reason": "Mustard, prepared, yellow is made at home",
+      "note": "2.5 g"
+    },
+    {
+      "recipeId": "curated_sauce_lemon_mustard_vinaigrette",
+      "componentRecipeId": "curated_sauce_yellow_mustard",
+      "servings": 0.333,
+      "replaces": [
+        {
+          "category": "Herbs",
+          "baseName": "Mustard, prepared, yellow"
+        }
+      ],
+      "reason": "Mustard, prepared, yellow is made at home",
+      "note": "5 g"
+    },
+    {
+      "recipeId": "curated_handheld_grilled_chicken_sandwich",
+      "componentRecipeId": "curated_baked_whole_wheat_bread",
+      "servings": 0.86,
+      "replaces": [
+        {
+          "category": "Baked",
+          "baseName": "Bröd fullkorn vete råg fibrer ca 6%"
+        }
+      ],
+      "reason": "Bröd fullkorn vete råg fibrer ca 6% is made at home",
+      "note": "2 slice"
+    },
+    {
+      "recipeId": "curated_vegan_handheld_grilled_tempeh_sandwich",
+      "componentRecipeId": "curated_baked_whole_wheat_bread",
+      "servings": 0.86,
+      "replaces": [
+        {
+          "category": "Baked",
+          "baseName": "Bröd fullkorn vete råg fibrer ca 6%"
+        }
+      ],
+      "reason": "Bröd fullkorn vete råg fibrer ca 6% is made at home",
+      "note": "2 slice"
+    },
+    {
+      "recipeId": "curated_handheld_black_bean_sweet_potato_tacos",
+      "componentRecipeId": "curated_baked_wheat_tortillas",
+      "servings": 1,
+      "replaces": [
+        {
+          "category": "Baked",
+          "baseName": "Tortilla, wraps/burrito, hvetemel"
+        }
+      ],
+      "reason": "Tortilla, wraps/burrito, hvetemel is made at home",
+      "note": "1 each"
+    },
+    {
+      "recipeId": "curated_handheld_egg_salad_lettuce_wraps",
+      "componentRecipeId": "curated_fr_base_mayonnaise",
+      "servings": 1,
+      "replaces": [
+        {
+          "category": "Herbs",
+          "baseName": "Dressing, mayonnaise, whole egg type"
+        }
+      ],
+      "reason": "Dressing, mayonnaise, whole egg type is made at home",
+      "note": "15 g"
+    },
+    {
+      "recipeId": "curated_dessert_mixed_berry_chia_pudding",
+      "componentRecipeId": "curated_beverage_almond_milk",
+      "servings": 0.521,
+      "replaces": [
+        {
+          "category": "NutSeed",
+          "baseName": "Almond drink unsweetened"
+        }
+      ],
+      "reason": "Almond drink unsweetened is made at home",
+      "note": "125 ml, as the liquid base"
+    },
+    {
+      "recipeId": "curated_snack_buckwheat_porridge_blueberries_walnuts",
+      "componentRecipeId": "curated_beverage_almond_milk",
+      "servings": 0.5,
+      "replaces": [
+        {
+          "category": "NutSeed",
+          "baseName": "Almond drink unsweetened"
+        }
+      ],
+      "reason": "Almond drink unsweetened is made at home",
+      "note": "120 ml"
+    },
+    {
+      "recipeId": "curated_snack_millet_porridge_apricots",
+      "componentRecipeId": "curated_beverage_almond_milk",
+      "servings": 0.5,
+      "replaces": [
+        {
+          "category": "NutSeed",
+          "baseName": "Almond drink unsweetened"
+        }
+      ],
+      "reason": "Almond drink unsweetened is made at home",
+      "note": "120 ml"
+    },
+    {
+      "recipeId": "curated_side_chickpea_spinach_curry_bowl",
+      "componentRecipeId": "curated_sauce_curry_powder",
+      "servings": 1,
+      "replaces": [
+        {
+          "category": "Herbs",
+          "baseName": "Curry powder"
+        }
+      ],
+      "reason": "Curry powder is made at home",
+      "note": "3 g"
+    },
+    {
+      "recipeId": "curated_vegan_overnight_oats_chia_berries",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.625,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soybeans, soy milk, regular is made at home",
+      "note": "150 ml"
+    },
+    {
+      "recipeId": "curated_vegan_baked_oatmeal_cup_banana_cinnamon",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.417,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soybeans, soy milk, regular is made at home",
+      "note": "100 ml"
+    },
+    {
+      "recipeId": "curated_vegan_peach_almond_overnight_oats",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.625,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soybeans, soy milk, regular is made at home",
+      "note": "150 ml"
+    },
+    {
+      "recipeId": "curated_vegan_buckwheat_porridge_blueberries_walnuts",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.625,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soybeans, soy milk, regular is made at home",
+      "note": "150 ml"
+    },
+    {
+      "recipeId": "curated_vegan_millet_porridge_apricots",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.625,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soybeans, soy milk, regular is made at home",
+      "note": "150 ml"
+    },
+    {
+      "recipeId": "curated_vegan_nectarine_chia_pudding_cashews",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.625,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soybeans, soy milk, regular is made at home",
+      "note": "150 ml"
+    },
+    {
+      "recipeId": "curated_vegan_plum_walnut_overnight_oats",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.625,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soybeans, soy milk, regular is made at home",
+      "note": "150 ml"
+    },
+    {
+      "recipeId": "curated_vegan_fig_pistachio_overnight_oats",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.625,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soybeans, soy milk, regular is made at home",
+      "note": "150 ml"
+    },
+    {
+      "recipeId": "curated_vegan_apricot_coconut_overnight_oats",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.313,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soybeans, soy milk, regular is made at home",
+      "note": "75 ml"
+    },
+    {
+      "recipeId": "curated_vegan_fig_cashew_overnight_oats",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.625,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soybeans, soy milk, regular is made at home",
+      "note": "150 ml"
+    },
+    {
+      "recipeId": "curated_vegan_mango_pistachio_chia_pudding",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.25,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soybeans, soy milk, regular is made at home",
+      "note": "60 ml"
+    },
+    {
+      "recipeId": "curated_vegan_handheld_seitan_roasted_vegetable_wrap",
+      "componentRecipeId": "curated_sauce_seitan",
+      "servings": 0.8,
+      "replaces": [
+        {
+          "category": "Grain",
+          "baseName": "Meat substitute containing gluten (seitan)"
+        }
+      ],
+      "reason": "Meat substitute containing gluten (seitan) is made at home",
+      "note": "120 g, sliced"
+    },
+    {
+      "recipeId": "curated_vegan_side_baked_seitan_zucchini_tomatoes",
+      "componentRecipeId": "curated_sauce_seitan",
+      "servings": 1,
+      "replaces": [
+        {
+          "category": "Grain",
+          "baseName": "Meat substitute containing gluten (seitan)"
+        }
+      ],
+      "reason": "Meat substitute containing gluten (seitan) is made at home",
+      "note": "150 g"
+    },
+    {
+      "recipeId": "curated_vegan_side_braised_seitan_kohlrabi_carrot",
+      "componentRecipeId": "curated_sauce_seitan",
+      "servings": 1,
+      "replaces": [
+        {
+          "category": "Grain",
+          "baseName": "Meat substitute containing gluten (seitan)"
+        }
+      ],
+      "reason": "Meat substitute containing gluten (seitan) is made at home",
+      "note": "150 g, cubed"
+    },
+    {
+      "recipeId": "curated_vegan_side_herb_crusted_seitan_roast",
+      "componentRecipeId": "curated_sauce_seitan",
+      "servings": 1,
+      "replaces": [
+        {
+          "category": "Grain",
+          "baseName": "Meat substitute containing gluten (seitan)"
+        }
+      ],
+      "reason": "Meat substitute containing gluten (seitan) is made at home",
+      "note": "150 g"
+    },
+    {
+      "recipeId": "curated_vegan_side_seitan_chops_roasted_eggplant",
+      "componentRecipeId": "curated_sauce_seitan",
+      "servings": 1,
+      "replaces": [
+        {
+          "category": "Grain",
+          "baseName": "Meat substitute containing gluten (seitan)"
+        }
+      ],
+      "reason": "Meat substitute containing gluten (seitan) is made at home",
+      "note": "150 g"
+    },
+    {
+      "recipeId": "curated_vegan_side_seitan_chop_brussels_apple",
+      "componentRecipeId": "curated_sauce_seitan",
+      "servings": 1,
+      "replaces": [
+        {
+          "category": "Grain",
+          "baseName": "Meat substitute containing gluten (seitan)"
+        }
+      ],
+      "reason": "Meat substitute containing gluten (seitan) is made at home",
+      "note": "150 g"
+    },
+    {
+      "recipeId": "curated_vegan_side_seitan_turnip_kale",
+      "componentRecipeId": "curated_sauce_seitan",
+      "servings": 1,
+      "replaces": [
+        {
+          "category": "Grain",
+          "baseName": "Meat substitute containing gluten (seitan)"
+        }
+      ],
+      "reason": "Meat substitute containing gluten (seitan) is made at home",
+      "note": "150 g"
+    },
+    {
+      "recipeId": "curated_handheld_breakfast_burrito_eggs_black_beans",
+      "componentRecipeId": "curated_baked_wheat_tortillas",
+      "servings": 2,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, tortilla mix, enriched"
+        }
+      ],
+      "reason": "The burrito lists 60 g of tortilla flour, which is the flour of the tortilla it is rolled in. The homemade wheat tortilla uses 31.25 g flour per tortilla, so 60 g is 1.92 of its servings. Rounded to 2 tortillas (62.5 g flour), rolled out together as one large wrap.",
+      "note": "rolled out as one large wrap"
+    },
+    {
+      "recipeId": "curated_vegan_breakfast_burrito_tofu_black_beans",
+      "componentRecipeId": "curated_baked_wheat_tortillas",
+      "servings": 2,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, tortilla mix, enriched"
+        }
+      ],
+      "reason": "The burrito lists 60 g of tortilla flour, which is the flour of the tortilla it is rolled in. The homemade wheat tortilla uses 31.25 g flour per tortilla, so 60 g is 1.92 of its servings. Rounded to 2 tortillas (62.5 g flour), rolled out together as one large wrap.",
+      "note": "rolled out as one large wrap"
     }
   ]
 }

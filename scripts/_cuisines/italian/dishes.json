@@ -894,6 +894,60 @@
       "name": "Sfogliatelle",
       "shelf": "Desserts",
       "file": "b_risotto_pizza_fish_meats_contorni_desserts.json"
+    },
+    {
+      "id": "curated_it_base_savoiardi",
+      "name": "Savoiardi (Ladyfingers)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_it_base_gelato_fior_di_latte",
+      "name": "Gelato Fior di Latte",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_it_base_pangrattato",
+      "name": "Pangrattato (Dry Breadcrumbs)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_it_base_pancetta",
+      "name": "Pancetta (Cured Pork Belly)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_it_base_guanciale",
+      "name": "Guanciale (Cured Pork Cheek)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_it_base_lardo",
+      "name": "Lardo (Cured Pork Back Fat)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_it_base_prosciutto",
+      "name": "Prosciutto Crudo (Dry-Cured Ham)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_it_base_speck",
+      "name": "Speck Alto Adige (Smoked Cured Ham)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
+    },
+    {
+      "id": "curated_it_base_salsiccia",
+      "name": "Salsiccia (Fresh Italian Pork Sausage)",
+      "shelf": "Bases: Pantry & Building Blocks",
+      "file": "c_made_first.json"
     }
   ]
 }

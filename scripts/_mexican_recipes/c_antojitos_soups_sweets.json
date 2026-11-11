@@ -17,6 +17,11 @@
           "recipeId": "curated_mx_base_crema",
           "servings": 2,
           "note": "about 60 ml, brushed on first"
+        },
+        {
+          "recipeId": "curated_fr_base_mayonnaise",
+          "servings": 4,
+          "note": "60 g"
         }
       ],
       "ingredients": [
@@ -34,15 +39,6 @@
           "baseName": "Common salt/table salt",
           "quantity": 2,
           "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Dressing, mayonnaise, whole egg type",
-          "quantity": 60,
-          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -66,12 +62,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "ground chile piquín",
-          "quantity": 2,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Chilli (chili), dried, ground",
+          "quantity": 4,
+          "unit": "g",
           "cutPrep": "powdered",
-          "prepNote": "or chile de árbol powder"
+          "cookingMethod": null,
+          "prepNote": "or chile de árbol powder; 2 tsp at 2 g per tsp"
         },
         {
           "category": "Bev",
@@ -129,6 +126,11 @@
           "recipeId": "curated_mx_base_queso_fresco",
           "servings": 2,
           "note": "about 60 g, crumbled"
+        },
+        {
+          "recipeId": "curated_fr_base_mayonnaise",
+          "servings": 6,
+          "note": "90 g"
         }
       ],
       "ingredients": [
@@ -153,11 +155,11 @@
         {
           "category": "Veg",
           "baseName": "Peppers, hot chile",
-          "quantity": 4,
-          "unit": "each",
+          "quantity": 2,
+          "unit": "g",
           "cutPrep": "dried chile de árbol",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 dried chilies"
         },
         {
           "category": "Veg",
@@ -205,15 +207,6 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Dressing, mayonnaise, whole egg type",
-          "quantity": 90,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Dairy",
           "baseName": "Queso Cotija",
           "quantity": 40,
@@ -232,12 +225,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "ground chile piquín",
-          "quantity": 1,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Chilli (chili), dried, ground",
+          "quantity": 2,
+          "unit": "g",
           "cutPrep": "powdered",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tsp at 2 g per tsp"
         }
       ],
       "instructions": [
@@ -290,6 +284,11 @@
           "recipeId": "curated_mx_base_queso_fresco",
           "servings": 2,
           "note": "about 60 g"
+        },
+        {
+          "recipeId": "curated_mx_base_chicharron_prensado",
+          "servings": 3,
+          "note": "150 g, chopped fine"
         }
       ],
       "ingredients": [
@@ -336,14 +335,6 @@
           "unit": "ml",
           "cutPrep": "warm",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "chicharrón prensado (pressed pork cracklings in chile)",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "chopped fine",
           "prepNote": null
         },
         {
@@ -715,12 +706,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "queso Oaxaca",
+          "category": "Dairy",
+          "baseName": "Queso Asadero",
           "quantity": 250,
           "unit": "g",
           "cutPrep": "pulled into strings",
-          "prepNote": "or another mild stretching cheese"
+          "cookingMethod": null,
+          "prepNote": "or another mild stretching cheese; in place of queso Oaxaca, which the database does not hold"
         }
       ],
       "instructions": [
@@ -1108,17 +1100,19 @@
           "recipeId": "curated_mx_base_salsa_taquera",
           "servings": 4,
           "note": "chile de árbol salsa, for serving"
+        },
+        {
+          "recipeId": "curated_mx_base_asiento",
+          "servings": 3,
+          "note": "60 g, or unto; lard can stand in"
+        },
+        {
+          "recipeId": "curated_mx_tasajo",
+          "servings": 4.444,
+          "note": "400 g, grilled and cut in pieces"
         }
       ],
       "ingredients": [
-        {
-          "notInDatabase": true,
-          "name": "asiento (the browned pork fat from the bottom of the chicharrón pot)",
-          "quantity": 60,
-          "unit": "g",
-          "cutPrep": null,
-          "prepNote": "or unto; lard can stand in"
-        },
         {
           "notInDatabase": true,
           "name": "hoja santa",
@@ -1128,20 +1122,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "tasajo (thin salted, part-dried beef)",
-          "quantity": 400,
-          "unit": "g",
-          "cutPrep": "grilled and cut in pieces",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "quesillo (Oaxaca string cheese)",
+          "category": "Dairy",
+          "baseName": "Queso Asadero",
           "quantity": 250,
           "unit": "g",
           "cutPrep": "pulled into strings",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of quesillo (Oaxaca string cheese), which the database does not hold"
         },
         {
           "category": "Veg",
@@ -1237,6 +1224,11 @@
           "recipeId": "curated_mx_base_salsa_verde",
           "servings": 3,
           "note": "for serving"
+        },
+        {
+          "recipeId": "curated_mx_base_chipotles_en_adobo",
+          "servings": 2,
+          "note": "2 each, chopped, with a spoon of their sauce"
         }
       ],
       "ingredients": [
@@ -1279,19 +1271,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "chipotle chiles in adobo",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "chopped, with a spoon of their sauce",
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -1455,12 +1439,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "poblano chiles",
-          "quantity": 2,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Green Bell Pepper",
+          "quantity": 240,
+          "unit": "g",
           "cutPrep": "roasted, peeled, seeded and cut in strips",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 each at 120 g per each; in place of poblano chiles, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -1669,11 +1654,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 1,
-          "unit": "each",
+          "quantity": 0.15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Bev",
@@ -1813,12 +1798,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "sweetened condensed milk",
-          "quantity": 200,
-          "unit": "ml",
+          "category": "PantryStaples",
+          "baseName": "Kondensert melk, søtet",
+          "quantity": 258,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": "optional, for a sweeter tamal; leave out and add 50 g more sugar if you prefer"
+          "cookingMethod": null,
+          "prepNote": "optional, for a sweeter tamal; leave out and add 50 g more sugar if you prefer; 200 ml at 1.29 g per ml"
         },
         {
           "category": "Herbs",
@@ -1942,6 +1928,15 @@
           "prepNote": null
         },
         {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about ½ tsp"
+        },
+        {
           "category": "Fruit",
           "baseName": "Raisins, dark, seedless",
           "quantity": 40,
@@ -1969,7 +1964,7 @@
       ],
       "instructions": [
         "Beat the lard with the baking powder at high speed for 3 to 5 minutes until white and fluffy like meringue.",
-        "In a large bowl, beat the masa and water together by hand until no lumps are left. Add the sugar, raisins and colouring and mix again.",
+        "In a large bowl, beat the masa and water together by hand until no lumps are left. Add the sugar, salt, raisins and colouring and mix again.",
         "Fold in the beaten lard until the mixture is even.",
         "Spread about ⅓ cup of masa on each drained husk, fold the sides over each other and fold the point up without squeezing.",
         "Stand the tamales open end up in a steamer over water, bring to a full steam over high heat and cook for 1 hour. Turn off the heat and rest at least 20 minutes before serving."
@@ -2363,12 +2358,13 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "poblano chiles",
-          "quantity": 5,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Green Bell Pepper",
+          "quantity": 600,
+          "unit": "g",
           "cutPrep": "about 500 g, charred, peeled, seeded and cut in 1 cm strips",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "5 each at 120 g per each; in place of poblano chiles, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -2533,12 +2529,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "queso panela",
+          "category": "Dairy",
+          "baseName": "Cheese, queso fresco",
           "quantity": 250,
           "unit": "g",
           "cutPrep": "cubed",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of queso panela, which the database does not hold"
         }
       ],
       "instructions": [
@@ -2588,11 +2585,12 @@
       "components": [],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "dried shrimp",
+          "category": "Meat",
+          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
           "quantity": 125,
           "unit": "g",
           "cutPrep": "heads, tails and shells removed, ground to a fine powder",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3681,11 +3679,12 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "beef tripe (honeycomb, book and smooth, mixed)",
+          "category": "Meat",
+          "baseName": "Beef Tripe",
           "quantity": 1500,
           "unit": "g",
           "cutPrep": "cleaned and cut in bite-size pieces",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -3706,13 +3705,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
-          "baseName": "Lime",
+          "notInDatabase": true,
+          "name": "lime juice, for cleaning the tripe",
+          "contains": "none",
           "quantity": 5,
           "unit": "each",
-          "cutPrep": "juiced, for cleaning the tripe",
-          "cookingMethod": null,
-          "prepNote": null
+          "cutPrep": "juice of 5 limes",
+          "prepNote": "rubbed on the tripe and rinsed off, not eaten"
         },
         {
           "category": "Herbs",
@@ -3744,11 +3743,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 3,
-          "unit": "each",
+          "quantity": 0.45,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bay leaves"
         },
         {
           "category": "Bev",
@@ -3760,12 +3759,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "guajillo chiles",
-          "quantity": 6,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
+          "quantity": 36,
+          "unit": "g",
           "cutPrep": "stems, veins and seeds removed",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "6 each at 6 g per each"
         },
         {
           "category": "Veg",
@@ -3887,11 +3887,11 @@
         {
           "category": "Veg",
           "baseName": "Peppers, hot chile",
-          "quantity": 4,
-          "unit": "each",
+          "quantity": 2,
+          "unit": "g",
           "cutPrep": "toasted and crumbled, for the table",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 dried chilies"
         },
         {
           "category": "Fruit",
@@ -4004,11 +4004,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 3,
-          "unit": "each",
+          "quantity": 0.45,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 bay leaves"
         },
         {
           "category": "Herbs",
@@ -4038,12 +4038,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "guajillo chiles",
-          "quantity": 5,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
+          "quantity": 30,
+          "unit": "g",
           "cutPrep": "stems, veins and seeds removed",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "5 each at 6 g per each"
         },
         {
           "category": "Veg",
@@ -4138,11 +4139,11 @@
         {
           "category": "Veg",
           "baseName": "Peppers, hot chile",
-          "quantity": 6,
-          "unit": "each",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": "toasted and ground, for the table",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "6 dried chilies"
         }
       ],
       "instructions": [
@@ -4246,11 +4247,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -4289,12 +4290,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "poblano chiles",
-          "quantity": 2,
-          "unit": "each",
+          "category": "Veg",
+          "baseName": "Green Bell Pepper",
+          "quantity": 240,
+          "unit": "g",
           "cutPrep": "stems and seeds removed",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "2 each at 120 g per each; in place of poblano chiles, which the database does not hold"
         },
         {
           "category": "Veg",
@@ -4351,11 +4353,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "radish leaves",
+          "category": "Veg",
+          "baseName": "Japanese radishes, Daikon, leaves",
           "quantity": 30,
           "unit": "g",
           "cutPrep": "a small bunch, washed",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -4431,12 +4434,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "chile piquín, ground",
-          "quantity": 2,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Chilli (chili), dried, ground",
+          "quantity": 4,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": "for the table"
+          "cookingMethod": null,
+          "prepNote": "for the table; 2 tsp at 2 g per tsp"
         }
       ],
       "instructions": [
@@ -4503,12 +4507,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "pork head or spine (espinazo)",
+          "category": "Meat",
+          "baseName": "Pork Spare Ribs (Raw)",
           "quantity": 500,
           "unit": "g",
           "cutPrep": "cut in pieces by the butcher",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "in place of pork head or spine (espinazo), which the database does not hold"
         },
         {
           "category": "Bev",
@@ -4540,11 +4545,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
@@ -4619,12 +4624,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "chile piquín, ground",
-          "quantity": 2,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Chilli (chili), dried, ground",
+          "quantity": 4,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": "for the table"
+          "cookingMethod": null,
+          "prepNote": "for the table; 2 tsp at 2 g per tsp"
         }
       ],
       "instructions": [
@@ -4762,12 +4768,31 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lima agria (Yucatecan sweet lime)",
-          "quantity": 3,
+          "category": "Bev",
+          "baseName": "Lime",
+          "quantity": 66,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": "in place of the juice of 2 limas agrias (Yucatecan sweet lime), which no database holds: 3 parts lime juice to 1 part orange juice, about 88 g in all"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Orange",
+          "quantity": 22,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
+          "cookingMethod": null,
+          "prepNote": "the orange part of the lima stand-in"
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lime",
+          "quantity": 1,
           "unit": "each",
-          "cutPrep": "2 juiced, 1 thinly sliced",
-          "prepNote": "substitute 3 parts lime juice to 1 part orange juice"
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": "in place of 1 lima agria; the slices go in for the last 2 to 3 minutes"
         },
         {
           "category": "Herbs",
@@ -4867,19 +4892,21 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "sweetened condensed milk",
+          "category": "PantryStaples",
+          "baseName": "Kondensert melk, søtet",
           "quantity": 375,
           "unit": "g",
           "cutPrep": "1 can",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "evaporated milk",
+          "category": "Dairy",
+          "baseName": "Evaporated milk min. 7.5 % fat",
           "quantity": 360,
           "unit": "g",
           "cutPrep": "1 can",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5093,13 +5120,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Lime",
-          "quantity": 3,
-          "unit": "each",
-          "cutPrep": "juiced",
+          "quantity": 132,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of 3 limes"
         },
         {
           "category": "Sweets",
@@ -5461,15 +5488,6 @@
       "components": [],
       "ingredients": [
         {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 1000,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
           "quantity": 85,
@@ -5490,28 +5508,29 @@
         {
           "category": "Herbs",
           "baseName": "Cloves, dried, ground",
-          "quantity": 2,
-          "unit": "each",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": "whole cloves",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Fruit",
-          "baseName": "Orange",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "zest only, in wide strips",
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 whole cloves"
         },
         {
           "notInDatabase": true,
-          "name": "ground coffee, dark roast, medium-coarse grind",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": "about 4 tbsp",
-          "prepNote": null
+          "name": "orange peel, in wide strips",
+          "contains": "none",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "zest of 1 orange, in wide strips",
+          "prepNote": "steeped in the pot and strained out, not eaten"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Beverages, coffee, brewed, prepared with tap water",
+          "quantity": 1000,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "30 g ground coffee brewed in 1000 ml water; the grounds are strained out"
         }
       ],
       "instructions": [
@@ -5554,6 +5573,11 @@
           "recipeId": "curated_mx_base_nixtamal_masa",
           "servings": 1,
           "note": "about 100 g fresh masa"
+        },
+        {
+          "recipeId": "curated_mx_base_chocolate_de_mesa",
+          "servings": 6,
+          "note": "180 g, 2 tablets, broken up"
         }
       ],
       "ingredients": [
@@ -5573,14 +5597,6 @@
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Mexican table chocolate (chocolate de mesa)",
-          "quantity": 180,
-          "unit": "g",
-          "cutPrep": "2 tablets, broken up",
           "prepNote": null
         },
         {
@@ -5652,7 +5668,13 @@
       "flavorProfile": "Milk beaten with stone-ground Mexican chocolate, canela and vanilla until a thick foam rises, slightly gritty with sugar and almond in the old style.",
       "healthBenefit": "Cacao brings magnesium, iron and flavanols, the milk calcium and protein, and the almonds vitamin E; it is sweet, so a cup is a treat.",
       "overallTier": "moderate",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_mx_base_chocolate_de_mesa",
+          "servings": 6,
+          "note": "180 g, 2 tablets, broken up"
+        }
+      ],
       "ingredients": [
         {
           "category": "Dairy",
@@ -5661,14 +5683,6 @@
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Mexican table chocolate (chocolate de mesa)",
-          "quantity": 180,
-          "unit": "g",
-          "cutPrep": "2 tablets, broken up",
           "prepNote": null
         },
         {
@@ -5751,11 +5765,12 @@
       "components": [],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "mamey sapote",
+          "category": "Fruit",
+          "baseName": "Sapote, mamey",
           "quantity": 350,
           "unit": "g",
           "cutPrep": "1 ripe mamey, flesh only, seed removed",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -6239,13 +6254,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Lime",
-          "quantity": 4,
-          "unit": "each",
-          "cutPrep": "juiced, plus wedges for serving",
+          "quantity": 176,
+          "unit": "g",
+          "cutPrep": "freshly squeezed",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "juice of 4 limes; wedges to serve are not counted"
         },
         {
           "category": "Herbs",
@@ -6257,12 +6272,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "chile piquín, ground",
-          "quantity": 1,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Chilli (chili), dried, ground",
+          "quantity": 2,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": "for serving"
+          "cookingMethod": null,
+          "prepNote": "for serving; 1 tsp at 2 g per tsp"
         },
         {
           "category": "Bev",
@@ -6360,20 +6376,20 @@
         {
           "category": "Herbs",
           "baseName": "Cloves, dried, ground",
-          "quantity": 3,
-          "unit": "each",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "whole cloves, optional",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 whole cloves"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, allspice, ground",
-          "quantity": 4,
-          "unit": "each",
+          "quantity": 1.2,
+          "unit": "g",
           "cutPrep": "whole allspice berries, optional",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 allspice berries"
         },
         {
           "category": "Bev",
@@ -6523,12 +6539,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "chile piquín, ground",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "category": "Herbs",
+          "baseName": "Chilli (chili), dried, ground",
+          "quantity": 1,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": "optional"
+          "cookingMethod": null,
+          "prepNote": "optional; 0.5 tsp at 2 g per tsp"
         }
       ],
       "instructions": [
@@ -6605,13 +6622,13 @@
           "prepNote": null
         },
         {
-          "category": "Fruit",
+          "category": "Bev",
           "baseName": "Lime",
-          "quantity": 0.5,
-          "unit": "each",
-          "cutPrep": "juiced, a few drops",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "a few drops",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about 1 tsp from half a lime"
         },
         {
           "category": "Herbs",
@@ -7104,12 +7121,12 @@
         },
         {
           "category": "Fruit",
-          "baseName": "Lime",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "finely grated zest only",
+          "baseName": "Lemon peel",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": "finely grated",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "zest of 1 lime; counted as lemon peel, since no database holds lime peel"
         },
         {
           "notInDatabase": true,
@@ -7641,20 +7658,22 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "sweetened condensed milk",
+          "category": "PantryStaples",
+          "baseName": "Kondensert melk, søtet",
           "quantity": 387,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "1 can"
         },
         {
-          "notInDatabase": true,
-          "name": "evaporated milk",
-          "quantity": 360,
-          "unit": "ml",
+          "category": "Dairy",
+          "baseName": "Evaporated milk min. 7.5 % fat",
+          "quantity": 383.8,
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": "1 can"
+          "cookingMethod": null,
+          "prepNote": "1 can; 360 ml at 1.066 g per ml"
         },
         {
           "category": "Dairy",
@@ -7781,11 +7800,12 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "sweetened condensed milk",
+          "category": "PantryStaples",
+          "baseName": "Kondensert melk, søtet",
           "quantity": 387,
           "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "1 can"
         },
         {
@@ -8132,12 +8152,13 @@
       ],
       "ingredients": [
         {
-          "notInDatabase": true,
-          "name": "obleas (thin wafer rounds)",
+          "category": "Baked",
+          "baseName": "Round baking wafers",
           "quantity": 24,
-          "unit": "each",
+          "unit": "g",
           "cutPrep": null,
-          "prepNote": "about 10 cm across, from a dulcería"
+          "cookingMethod": null,
+          "prepNote": "about 10 cm across, from a dulcería; 24 each at 1 g per each"
         },
         {
           "category": "NutSeed",
