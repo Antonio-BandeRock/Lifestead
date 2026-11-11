@@ -41,6 +41,14 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.86.1',
+    date: '2026-11-11',
+    changes: [
+      'System Recipes were checked against the recipes they came from. Amounts, seasonings and how much of a stock or sauce each dish uses now match that recipe, and nine dishes with no recipe to check against were replaced.',
+      'The whole wheat loaf now makes about 10 slices, so a sandwich made with it counts two ordinary slices of bread.',
+    ],
+  },
+  {
     version: '1.0.85.2',
     date: '2026-11-10',
     changes: [

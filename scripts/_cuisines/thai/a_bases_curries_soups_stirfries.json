@@ -17,11 +17,11 @@
         {
           "category": "Veg",
           "baseName": "Green Chilli (Chili)",
-          "quantity": 20,
+          "quantity": 15,
           "unit": "g",
           "cutPrep": "bird chilies, stemmed and chopped",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "8 to 10 Thai hot chilies"
         },
         {
           "category": "Veg",
@@ -36,10 +36,10 @@
           "notInDatabase": true,
           "name": "makrut lime peel",
           "contains": "none",
-          "quantity": 2,
-          "unit": "tsp",
+          "quantity": 1,
+          "unit": "tbsp",
           "cutPrep": "finely chopped",
-          "prepNote": null
+          "prepNote": "zest of 1 makrut lime"
         },
         {
           "category": "Veg",
@@ -89,8 +89,8 @@
         {
           "category": "Herbs",
           "baseName": "Spices, cumin seed",
-          "quantity": 1.5,
-          "unit": "tsp",
+          "quantity": 1,
+          "unit": "tbsp",
           "cutPrep": "whole",
           "cookingMethod": "Roasted",
           "prepNote": null
@@ -98,8 +98,8 @@
         {
           "category": "Herbs",
           "baseName": "Spices, coriander seed",
-          "quantity": 2,
-          "unit": "tsp",
+          "quantity": 1,
+          "unit": "tbsp",
           "cutPrep": "whole",
           "cookingMethod": "Roasted",
           "prepNote": null
@@ -125,8 +125,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -163,7 +163,7 @@
           "url": "https://cannoneyed.com/recipes/thai/curry_pastes.html"
         }
       ],
-      "curationNote": "Amounts from Thai Cookbook TV converted to grams; pounding order from Import Food and Cannoneyed, which agree on hard aromatics first and shrimp paste last."
+      "curationNote": "Thai Cookbook TV, Thai Green Curry Paste for every amount and step; ours already holds one batch of its aromatics."
     },
     {
       "builderType": "sauce",
@@ -182,20 +182,20 @@
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 20,
+          "quantity": 12,
           "unit": "g",
-          "cutPrep": "long dried red chilies, seeded, soaked 15 minutes and squeezed dry",
+          "cutPrep": "cut small",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "7 to 8 long and 3 to 4 small dried chilies"
         },
         {
           "notInDatabase": true,
           "name": "galangal",
           "contains": "none",
-          "quantity": 15,
+          "quantity": 10,
           "unit": "g",
           "cutPrep": "peeled and sliced thin",
-          "prepNote": null
+          "prepNote": "1 1/2 tbsp"
         },
         {
           "category": "Veg",
@@ -211,8 +211,8 @@
           "name": "makrut lime peel",
           "contains": "none",
           "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": "finely chopped",
+          "unit": "tbsp",
+          "cutPrep": "grated",
           "prepNote": null
         },
         {
@@ -227,35 +227,35 @@
         {
           "category": "Veg",
           "baseName": "Shallot",
-          "quantity": 45,
+          "quantity": 100,
           "unit": "g",
-          "cutPrep": "chopped",
+          "cutPrep": "sliced thin",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3/4 cup"
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 30,
+          "quantity": 70,
           "unit": "g",
           "cutPrep": "peeled",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/2 cup"
         },
         {
           "category": "Meat",
           "baseName": "Shrimp Paste",
-          "quantity": 6,
+          "quantity": 27,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "1 tsp at 6 g per tsp"
+          "prepNote": "1 1/2 tbsp at 6 g per tsp"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -272,8 +272,8 @@
         {
           "category": "Herbs",
           "baseName": "Spices, cumin seed",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 1.5,
+          "unit": "tbsp",
           "cutPrep": "whole",
           "cookingMethod": "Roasted",
           "prepNote": null
@@ -281,7 +281,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, pepper, white",
-          "quantity": 1,
+          "quantity": 0.25,
           "unit": "tsp",
           "cutPrep": "whole peppercorns",
           "cookingMethod": null,
@@ -289,11 +289,11 @@
         }
       ],
       "instructions": [
-        "Toast the coriander and cumin seeds in a dry pan over medium heat for 2 to 3 minutes, until fragrant and a shade darker, then grind them fine with the peppercorns.",
-        "Pound the soaked chilies with the salt for 5 to 8 minutes, until they form a rough red mash.",
-        "Add the lemongrass, galangal, lime peel and coriander root a little at a time and pound 5 to 8 minutes more.",
-        "Add the shallot and garlic, pound 3 to 5 minutes, then work in the shrimp paste and ground spices until smooth.",
-        "Pack into a clean jar, press plastic onto the surface and keep refrigerated for up to 1 week, or freeze in tablespoon portions for up to 3 months."
+        "Toast the coriander seeds, cumin and peppercorns in a dry pan until lightly browned, then grind them to a fine powder in a mortar.",
+        "Add the chilies and salt and grind until fine.",
+        "Add the lemongrass, galangal and coriander root and pound until the fibres break apart.",
+        "Work in the shallots, then the garlic, until no pieces remain, then the lime peel.",
+        "Mash in the shrimp paste until fully combined. Keep refrigerated up to 1 week, or freeze in tablespoon portions for several months."
       ],
       "nutritionHighlights": [
         {
@@ -319,7 +319,7 @@
           "url": "https://importfood.com/recipes/sauces/recipe/1274-how-thai-curry-paste-is-made-our-step-by-step-photo-video-recipe"
         }
       ],
-      "curationNote": "Thai Cookbook TV proportions, checked against Cannoneyed; both soak dried long chilies and pound them first."
+      "curationNote": "Thai Cookbook TV, Thai Red Curry Paste for every amount and step; makes about 1 cup, our 16 tablespoons."
     },
     {
       "builderType": "sauce",
@@ -338,35 +338,35 @@
       "name": "Prik Gaeng Kari (Yellow Curry Paste)",
       "region": "Central",
       "servings": 10,
-      "flavorProfile": "Mild, golden and warmly spiced, with turmeric, curry powder and roasted shallot rounding out the chili.",
-      "healthBenefit": "Turmeric, ginger and roasted aromatics bring flavour in small amounts, though the paste is salty.",
+      "flavorProfile": "Mild, golden and warmly spiced, with fresh and ground turmeric, cumin, cinnamon and cloves rounding out the chili and shallot.",
+      "healthBenefit": "Turmeric, galangal, lemongrass and raw aromatics bring flavour in small amounts, though the shrimp paste and fish sauce make the paste salty.",
       "ingredients": [
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 10,
+          "quantity": 8,
           "unit": "g",
-          "cutPrep": "seeded, soaked 15 minutes and squeezed dry",
+          "cutPrep": "seeded and soaked",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about 4 Thai long chilies"
         },
         {
           "category": "Veg",
           "baseName": "Shallot",
-          "quantity": 40,
+          "quantity": 25,
           "unit": "g",
-          "cutPrep": "unpeeled",
-          "cookingMethod": "Roasted",
-          "prepNote": null
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": "2 1/2 tbsp"
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 25,
+          "quantity": 34,
           "unit": "g",
-          "cutPrep": "unpeeled",
-          "cookingMethod": "Roasted",
-          "prepNote": null
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": "about 3 3/4 tbsp"
         },
         {
           "category": "Veg",
@@ -375,87 +375,160 @@
           "unit": "g",
           "cutPrep": "sliced thin",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 1/2 tbsp"
         },
         {
           "notInDatabase": true,
           "name": "galangal",
           "contains": "none",
-          "quantity": 8,
+          "quantity": 15,
           "unit": "g",
           "cutPrep": "sliced thin",
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Ginger root",
-          "quantity": 8,
-          "unit": "g",
-          "cutPrep": "sliced thin",
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 1/2 tbsp"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, turmeric, ground",
-          "quantity": 2.5,
+          "quantity": 5,
           "unit": "g",
           "cutPrep": "peeled and chopped",
           "cookingMethod": null,
-          "prepNote": "in place of fresh turmeric root, which the database does not hold; fresh root counted as a quarter of its weight in ground turmeric"
+          "prepNote": "2 1/2 tbsp fresh turmeric; in place of fresh turmeric root, which the database does not hold; fresh root counted as a quarter of its weight in ground turmeric"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, coriander seed",
-          "quantity": 2,
+          "quantity": 1.25,
           "unit": "tsp",
           "cutPrep": "whole",
-          "cookingMethod": "Roasted",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Spices, cumin seed",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": "whole",
-          "cookingMethod": "Roasted",
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
+          "quantity": 1.25,
+          "unit": "tbsp",
+          "cutPrep": "ground",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Meat",
           "baseName": "Shrimp Paste",
-          "quantity": 6,
+          "quantity": 15,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "1 tsp at 6 g per tsp"
+          "prepNote": "2 1/2 tsp at 6 g per tsp"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": "1 1/4 tbsp; in place of coriander root, which the database does not hold; leaves count for the root"
+        },
+        {
+          "notInDatabase": true,
+          "name": "makrut lime leaves",
+          "contains": "none",
+          "quantity": 5,
+          "unit": "each",
+          "cutPrep": "centre rib removed, chopped fine",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Paprika",
+          "quantity": 1.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, turmeric, ground",
+          "quantity": 1.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the ground turmeric the source lists beside the fresh root"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.625,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 0.625,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Chilli (chili), dried, ground",
+          "quantity": 0.3,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "ground dried Thai hot chili"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Piloncillo / Unrefined Panela",
+          "quantity": 10.5,
+          "unit": "g",
+          "cutPrep": "shaved",
+          "cookingMethod": null,
+          "prepNote": "2 1/2 tsp at 4.2 g per tsp; in place of coconut sugar, which the database does not hold"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 2.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 2.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Roast the unpeeled shallots and garlic in a dry pan over medium heat for 8 to 10 minutes, turning, until soft and charred in spots, then peel.",
-        "Toast the coriander and cumin seeds in the same pan for 2 to 3 minutes, then grind them with the curry powder.",
-        "Pound the chilies and salt for 5 minutes, add the lemongrass, galangal, ginger and turmeric and pound 5 to 8 minutes more.",
-        "Add the roasted shallot and garlic, then the shrimp paste and spices, pounding until smooth.",
-        "Pack into a clean jar, press plastic onto the surface and keep refrigerated for up to 1 week, or freeze in tablespoon portions for up to 3 months."
+        "Strip the centre ribs from the lime leaves and chop them fine. Grind the coriander seeds.",
+        "Pound the galangal and lemongrass in a mortar to a rough pulp and set it aside.",
+        "Pound the coriander root, chilies, fresh turmeric, shallots, garlic and lime leaves to a fine paste.",
+        "Return the galangal and lemongrass and pound until everything is fine.",
+        "Mix in the cumin, coriander seed, paprika, ground turmeric, cloves, cinnamon and chili powder.",
+        "Work in the fish sauce, shrimp paste, sugar and oil until smooth and golden. Keep refrigerated up to 1 week, or freeze in tablespoon portions for up to 3 months."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Curcumin",
-          "note": "From the fresh turmeric root."
+          "note": "From the fresh and ground turmeric."
         },
         {
           "nutrient": "Sodium",
-          "note": "From the salt and shrimp paste."
+          "note": "From the shrimp paste and fish sauce."
         }
       ],
       "citations": [
@@ -468,7 +541,7 @@
           "url": "https://cannoneyed.com/recipes/thai/curry_pastes.html"
         }
       ],
-      "curationNote": "Thai Cookbook TV method of roasting shallot and garlic first, with Cannoneyed for the spice proportions."
+      "curationNote": "Thai Cookbook TV, Thai Yellow Curry Paste for every amount and step; makes about 1/2 cup; scaled by 1.25 to our 10 tablespoons."
     },
     {
       "builderType": "sauce",
@@ -481,53 +554,53 @@
       "name": "Prik Gaeng Massaman (Massaman Curry Paste)",
       "region": "Southern",
       "servings": 6,
-      "flavorProfile": "Dark, sweetly spiced and gentle in heat, with cardamom, clove, cinnamon and nutmeg over roasted shallot and chili.",
-      "healthBenefit": "Warm spices and roasted aromatics carry the flavour of the curry in small amounts, though the paste is salty.",
+      "flavorProfile": "Dark, sweetly spiced and gentle in heat, with clove, cinnamon and nutmeg over shallot, garlic and chili.",
+      "healthBenefit": "Warm spices and fresh aromatics carry the flavour of the curry in small amounts, though the paste is salty.",
       "ingredients": [
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 10,
+          "quantity": 20,
           "unit": "g",
-          "cutPrep": "seeded, soaked 15 minutes and squeezed dry",
+          "cutPrep": "seeded",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "15 Thai long dried chilies"
         },
         {
           "category": "Veg",
           "baseName": "Shallot",
-          "quantity": 40,
+          "quantity": 30,
           "unit": "g",
-          "cutPrep": "unpeeled",
-          "cookingMethod": "Roasted",
-          "prepNote": null
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": "3 tbsp"
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 25,
+          "quantity": 18,
           "unit": "g",
-          "cutPrep": "unpeeled",
-          "cookingMethod": "Roasted",
-          "prepNote": null
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": "2 tbsp"
         },
         {
           "category": "Veg",
           "baseName": "Lemon grass (citronella)",
-          "quantity": 10,
+          "quantity": 6,
           "unit": "g",
           "cutPrep": "sliced thin",
-          "cookingMethod": "Roasted",
-          "prepNote": null
+          "cookingMethod": null,
+          "prepNote": "1 tbsp"
         },
         {
           "notInDatabase": true,
           "name": "galangal",
           "contains": "none",
-          "quantity": 8,
+          "quantity": 4,
           "unit": "g",
-          "cutPrep": "sliced thin",
-          "prepNote": "dry roasted with the shallots"
+          "cutPrep": "grated",
+          "prepNote": "2 tsp"
         },
         {
           "category": "Herbs",
@@ -541,7 +614,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, cumin seed",
-          "quantity": 1,
+          "quantity": 1.5,
           "unit": "tsp",
           "cutPrep": "whole",
           "cookingMethod": "Roasted",
@@ -549,17 +622,8 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Spices, cardamom, ground",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Spices, cloves, ground",
-          "quantity": 0.25,
+          "quantity": 0.5,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -577,16 +641,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, nutmeg, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, mace, ground",
-          "quantity": 0.25,
+          "quantity": 0.5,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -597,7 +652,7 @@
           "baseName": "Spices, pepper, white",
           "quantity": 0.5,
           "unit": "tsp",
-          "cutPrep": "whole peppercorns",
+          "cutPrep": "finely ground",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -613,19 +668,36 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": "1 tbsp; in place of coriander root, which the database does not hold; leaves count for the root"
+        },
+        {
+          "notInDatabase": true,
+          "name": "makrut lime peel",
+          "contains": "none",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": "finely chopped",
+          "prepNote": "zest of 1 makrut lime"
         }
       ],
       "instructions": [
-        "Roast the unpeeled shallots and garlic with the lemongrass and galangal in a dry pan over medium heat for 8 to 10 minutes, until soft and charred in spots, then peel.",
-        "Toast the coriander seed, cumin and peppercorns for 2 to 3 minutes, then grind them fine with the cardamom, cloves, cinnamon, nutmeg and mace.",
-        "Pound the chilies and salt for 5 minutes, then add the roasted aromatics and pound 5 to 8 minutes more.",
-        "Work in the shrimp paste and the ground spices until the paste is smooth and dark.",
-        "Pack into a clean jar, press plastic onto the surface and keep refrigerated for up to 1 week, or freeze in tablespoon portions for up to 3 months."
+        "Toast the chilies, coriander seeds and cumin seeds in a dry pan over low heat until lightly browned and fragrant.",
+        "Grind them with the salt until very fine, then mix in the cinnamon, cloves, nutmeg and white pepper.",
+        "Chop the shallots, garlic, lemongrass, galangal, coriander root and lime peel finely.",
+        "Pound everything together to a smooth paste, then work in the shrimp paste. Keep refrigerated up to 1 week, or freeze in tablespoon portions for up to 3 months."
       ],
       "nutritionHighlights": [
         {
@@ -647,7 +719,7 @@
           "url": "https://importfood.com/recipes/main-courses/recipe/1272-massaman-beef-classic-thai-recipe"
         }
       ],
-      "curationNote": "Thai Cookbook TV paste with its roasting step; spice list checked against Import Food. Massaman is linked with the Muslim south and the old royal court, so region is given as Southern."
+      "curationNote": "Thai Cookbook TV, Massaman Curry Paste for every amount and step; makes 5 to 6 tbsp, our 6."
     },
     {
       "builderType": "sauce",
@@ -660,85 +732,76 @@
       "name": "Prik Gaeng Panang (Panang Curry Paste)",
       "region": "Central",
       "servings": 10,
-      "flavorProfile": "Thick, rich and nutty, a red paste softened with roasted peanuts and warm coriander seed.",
-      "healthBenefit": "The peanuts add some protein and unsaturated fat to a chili and aromatic paste that is used in small amounts.",
+      "flavorProfile": "Thick, hot and aromatic, a red paste of dried chilies and plenty of garlic with toasted coriander, cumin, mace and cardamom.",
+      "healthBenefit": "Chilies, garlic, shallot and toasted spices bring a lot of flavour to a paste used in small amounts, though the salt and shrimp paste make it salty.",
       "ingredients": [
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 15,
+          "quantity": 20,
           "unit": "g",
-          "cutPrep": "long dried red chilies, seeded, soaked 15 minutes and squeezed dry",
+          "cutPrep": "seeded, the green ones browned first",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about 16 red and 4 green long dried chilies"
         },
         {
           "notInDatabase": true,
           "name": "galangal",
           "contains": "none",
-          "quantity": 10,
+          "quantity": 19,
           "unit": "g",
-          "cutPrep": "sliced thin",
-          "prepNote": null
+          "cutPrep": "grated",
+          "prepNote": "a 2 1/2 inch piece"
         },
         {
           "category": "Veg",
           "baseName": "Lemon grass (citronella)",
-          "quantity": 15,
+          "quantity": 30,
           "unit": "g",
           "cutPrep": "sliced thin",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 1/2 stalks"
         },
         {
           "notInDatabase": true,
           "name": "makrut lime peel",
           "contains": "none",
-          "quantity": 1,
+          "quantity": 2.5,
           "unit": "tsp",
-          "cutPrep": "finely chopped",
+          "cutPrep": "grated",
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Coriander (cilantro) leaves",
-          "quantity": 5,
+          "quantity": 15,
           "unit": "g",
           "cutPrep": "scraped and chopped",
           "cookingMethod": null,
-          "prepNote": "1 tbsp at 5 g per tbsp; in place of coriander root, which the database does not hold; leaves count for the root"
+          "prepNote": "about 10 roots; in place of coriander root, which the database does not hold; leaves count for the root"
         },
         {
           "category": "Veg",
           "baseName": "Shallot",
-          "quantity": 30,
+          "quantity": 45,
           "unit": "g",
           "cutPrep": "chopped",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 to 5 red shallots"
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 20,
+          "quantity": 60,
           "unit": "g",
-          "cutPrep": "peeled",
+          "cutPrep": "chopped",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "NutSeed",
-          "baseName": "Peanut",
-          "quantity": 18,
-          "unit": "g",
-          "cutPrep": "skinned",
-          "cookingMethod": "Roasted",
-          "prepNote": null
+          "prepNote": "about 12 large cloves"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, coriander seed",
-          "quantity": 2,
+          "quantity": 2.5,
           "unit": "tsp",
           "cutPrep": "whole",
           "cookingMethod": "Roasted",
@@ -747,7 +810,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, cumin seed",
-          "quantity": 1,
+          "quantity": 1.25,
           "unit": "tsp",
           "cutPrep": "whole",
           "cookingMethod": "Roasted",
@@ -755,8 +818,8 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Spices, pepper, white",
-          "quantity": 0.5,
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.625,
           "unit": "tsp",
           "cutPrep": "whole peppercorns",
           "cookingMethod": null,
@@ -765,34 +828,48 @@
         {
           "category": "Meat",
           "baseName": "Shrimp Paste",
-          "quantity": 6,
+          "quantity": 7.5,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "1 tsp at 6 g per tsp"
+          "prepNote": "1 1/4 tsp at 6 g per tsp"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 4,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, mace, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 4 blades"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cardamom, ground",
+          "quantity": 0.3,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "seeds of about 3 pods"
         }
       ],
       "instructions": [
-        "Roast the peanuts in a dry pan over medium heat for 4 to 6 minutes, until golden, then cool.",
-        "Toast the coriander and cumin seeds in a dry pan over medium heat for 2 to 3 minutes, until fragrant and a shade darker, then grind them fine with the peppercorns.",
-        "Pound the chilies and salt for 5 minutes, then the lemongrass, galangal, lime peel and coriander root for 5 to 8 minutes.",
-        "Add the shallot and garlic, then the peanuts, shrimp paste and ground spices, pounding until thick and smooth.",
-        "Pack into a clean jar, press plastic onto the surface and keep refrigerated for up to 1 week, or freeze in tablespoon portions for up to 3 months."
+        "Toast the coriander and cumin seeds in a dry pan over low heat until lightly browned, then brown the mace and cardamom in the same pan.",
+        "Brown the green chilies on both sides, then open all the chilies and remove the seeds.",
+        "Grind the chilies, mace, cardamom, cumin, coriander seed and peppercorns as fine as possible.",
+        "Grate the galangal and lime peel, slice the lemongrass and chop the coriander root, garlic and shallots, then pound them in a mortar until smooth.",
+        "Add the ground spices and salt and keep pounding until fine, then work in the shrimp paste. Freeze in 2 tablespoon portions and thaw only once."
       ],
       "nutritionHighlights": [
-        {
-          "nutrient": "Protein",
-          "note": "A little, from the roasted peanuts."
-        },
         {
           "nutrient": "Sodium",
           "note": "From the salt and shrimp paste."
@@ -808,7 +885,7 @@
           "url": "https://importfood.com/recipes/main-courses/recipe/1330-thai-panang-pork-mae-pranom"
         }
       ],
-      "curationNote": "Thai Cookbook TV paste, with the peanuts pounded in as both sources describe."
+      "curationNote": "Thai Cookbook TV, Panang Curry Paste for every amount and step; makes about 1/2 cup; scaled by 1.25 to our 10 tablespoons."
     },
     {
       "builderType": "sauce",
@@ -827,88 +904,65 @@
       "name": "Prik Gaeng Khao Soi (Khao Soi Curry Paste)",
       "region": "Northern / Lanna",
       "servings": 8,
-      "flavorProfile": "Smoky and fragrant, with charred shallot, ginger and turmeric and a curry powder warmth.",
-      "healthBenefit": "Charred aromatics, turmeric and ginger give the curry its depth in small amounts.",
+      "flavorProfile": "Fragrant and warm, with toasted shallot, ginger, turmeric and coriander seed behind the dried chilies.",
+      "healthBenefit": "Toasted aromatics, turmeric and ginger give the curry its depth in small amounts.",
       "ingredients": [
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 10,
+          "quantity": 13,
           "unit": "g",
-          "cutPrep": "seeded, soaked 15 minutes and squeezed dry",
+          "cutPrep": "soaked 10 minutes in cold water and squeezed dry",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about 13 dried chilies"
         },
         {
           "category": "Veg",
           "baseName": "Shallot",
-          "quantity": 50,
+          "quantity": 27,
           "unit": "g",
-          "cutPrep": "unpeeled",
+          "cutPrep": "chopped",
           "cookingMethod": "Roasted",
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Garlic",
-          "quantity": 20,
-          "unit": "g",
-          "cutPrep": "unpeeled",
-          "cookingMethod": "Roasted",
-          "prepNote": null
+          "prepNote": "about 2 2/3 tbsp"
         },
         {
           "category": "Herbs",
           "baseName": "Ginger root",
-          "quantity": 10,
+          "quantity": 11,
           "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": "Roasted",
-          "prepNote": null
+          "prepNote": "about 5 tsp"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, turmeric, ground",
-          "quantity": 2.5,
-          "unit": "g",
-          "cutPrep": "peeled and sliced",
+          "quantity": 1.33,
+          "unit": "tsp",
+          "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "charred with the shallots; in place of fresh turmeric root, which the database does not hold; fresh root counted as a quarter of its weight in ground turmeric"
+          "prepNote": "ground"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, coriander seed",
-          "quantity": 1,
-          "unit": "tbsp",
+          "quantity": 2.67,
+          "unit": "tsp",
           "cutPrep": "whole",
           "cookingMethod": "Roasted",
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Char the unpeeled shallots and garlic with the ginger and turmeric in a dry pan over medium high heat for 8 to 10 minutes, then peel.",
-        "Toast the coriander seed for 2 to 3 minutes and grind it with the curry powder.",
-        "Pound the chilies with the salt for 5 minutes, add the charred aromatics and pound 5 to 8 minutes more.",
-        "Work in the ground spices until the paste is smooth.",
+        "Soak the chilies in cold water for 10 minutes, then drain and squeeze dry.",
+        "Wrap the chilies, shallots, ginger, coriander seed and turmeric in foil and toast over a burner or in a dry pan until fragrant.",
+        "Pound everything in a mortar to a smooth paste.",
         "Pack into a clean jar, press plastic onto the surface and keep refrigerated for up to 1 week, or freeze in tablespoon portions for up to 3 months."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Curcumin",
-          "note": "From the fresh turmeric."
-        },
-        {
-          "nutrient": "Sodium",
-          "note": "From the salt."
+          "note": "From the ground turmeric."
         }
       ],
       "citations": [
@@ -921,7 +975,7 @@
           "url": "https://en.wikipedia.org/wiki/Khao_soi"
         }
       ],
-      "curationNote": "Import Food is the recipe followed; Wikipedia confirms the Northern curry style. Only one full recipe opened, so the charring method and amounts are from standard northern paste proportions."
+      "curationNote": "Import Food, Chiang Mai Curry Noodles (Khao Soi) for every amount and step; its paste for 4 servings makes about 3 tbsp; scaled by 2.67 to our 8 tablespoons."
     },
     {
       "builderType": "sauce",
@@ -940,8 +994,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -1027,7 +1081,7 @@
           "url": "https://en.wikipedia.org/wiki/Kaeng_som"
         }
       ],
-      "curationNote": "Hungry in Thailand paste amounts; Wikipedia confirms the central paste has no lemongrass or galangal and that southern versions add turmeric."
+      "curationNote": "Hungry in Thailand, Kaeng Som for every amount and step; its paste matches ours."
     },
     {
       "builderType": "sauce",
@@ -1040,7 +1094,7 @@
       "name": "Prik Gaeng Pa (Jungle Curry Paste)",
       "region": "Central",
       "servings": 6,
-      "flavorProfile": "Fiery and herbal, with black pepper, fingerroot and lime leaf over dried chili and shrimp paste.",
+      "flavorProfile": "Fiery and herbal, with black pepper and lime leaf over dried chili and shrimp paste.",
       "healthBenefit": "A coconut free paste of chilies, roots and herbs, though it is salty and used sparingly.",
       "ingredients": [
         {
@@ -1048,9 +1102,9 @@
           "baseName": "Pepper, hot chili, red, sun-dried",
           "quantity": 3,
           "unit": "g",
-          "cutPrep": "soaked 15 minutes and squeezed dry",
+          "cutPrep": "soaked, seeded and squeezed dry",
           "cookingMethod": null,
-          "prepNote": "6 dried chilies"
+          "prepNote": "5 or 6 dried chilies"
         },
         {
           "notInDatabase": true,
@@ -1076,26 +1130,8 @@
           "contains": "none",
           "quantity": 5,
           "unit": "each",
-          "cutPrep": "shredded",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "makrut lime peel",
-          "contains": "none",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": "finely chopped",
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "fingerroot (krachai)",
-          "contains": "none",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "chopped",
-          "prepNote": null
+          "cutPrep": "dried, crumbled",
+          "prepNote": "4 or 5 dried leaves"
         },
         {
           "category": "Veg",
@@ -1131,22 +1167,11 @@
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tsp black peppercorns, ground"
         }
       ],
       "instructions": [
-        "Pound the chilies and salt for 5 minutes, then add the galangal, lemongrass, lime leaf, lime peel and fingerroot and pound 5 to 8 minutes.",
-        "Add the garlic and shallot and pound 3 to 5 minutes more.",
-        "Work in the shrimp paste and black pepper until smooth.",
+        "Blend or pound the chilies, galangal, lemongrass, lime leaves, garlic, shallot, shrimp paste and black pepper to a smooth paste, adding a little water if needed.",
         "Pack into a clean jar, press plastic onto the surface and keep refrigerated for up to 1 week, or freeze in tablespoon portions for up to 3 months."
       ],
       "nutritionHighlights": [
@@ -1169,7 +1194,7 @@
           "url": "https://en.wikipedia.org/wiki/Kaeng_pa"
         }
       ],
-      "curationNote": "Tasting Table paste, with the fingerroot and lime peel Wikipedia lists as typical of jungle curry."
+      "curationNote": "Tasting Table, Kaeng Pa With Fish for every amount and step; its paste for 6 servings, about our 6 tablespoons."
     },
     {
       "builderType": "sauce",
@@ -1188,47 +1213,38 @@
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 15,
+          "quantity": 8,
           "unit": "g",
-          "cutPrep": "seeded, soaked 15 minutes and squeezed dry",
+          "cutPrep": "soaked 30 minutes, seeded and squeezed dry",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "5 or 6 long dried chilies"
         },
         {
           "category": "Veg",
           "baseName": "Shallot",
-          "quantity": 50,
+          "quantity": 100,
           "unit": "g",
           "cutPrep": "chopped",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Garlic",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": "peeled",
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about 10 Asian shallots"
         },
         {
           "category": "Veg",
           "baseName": "Lemon grass (citronella)",
-          "quantity": 20,
+          "quantity": 50,
           "unit": "g",
           "cutPrep": "sliced thin",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 stalks"
         },
         {
           "notInDatabase": true,
           "name": "galangal",
           "contains": "none",
-          "quantity": 15,
+          "quantity": 10,
           "unit": "g",
           "cutPrep": "sliced thin",
-          "prepNote": null
+          "prepNote": "1 small piece"
         },
         {
           "category": "Meat",
@@ -1242,17 +1258,17 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Pound the chilies and salt for 5 to 8 minutes, until mashed.",
-        "Add the lemongrass and galangal and pound 5 to 8 minutes more.",
-        "Add the shallot and garlic, then the shrimp paste, and pound until smooth.",
+        "Pound the chilies and salt until mashed.",
+        "Add the lemongrass, shallots and galangal and pound until fine.",
+        "Pound in the shrimp paste until smooth.",
         "Pack into a clean jar, press plastic onto the surface and keep refrigerated for up to 1 week, or freeze in tablespoon portions for up to 3 months."
       ],
       "nutritionHighlights": [
@@ -1275,7 +1291,7 @@
           "url": "https://importfood.com/recipes/main-courses/recipe/146-northern-thai-pork-curry-gaeng-hanglay"
         }
       ],
-      "curationNote": "Both sources pound a plain dried chili paste and add the hang lay spice powder separately in the curry, which is how it is kept here."
+      "curationNote": "Thai Cookbook TV, Kaeng Hunglay for every amount and step; the paste for one curry, about our 10 tablespoons."
     },
     {
       "builderType": "sauce",
@@ -1294,79 +1310,98 @@
       "name": "Nam Prik Pao (Roasted Chili Jam)",
       "region": "Central",
       "servings": 16,
-      "flavorProfile": "Sticky, sweet, smoky and gently hot, with fried shallot and garlic and a savoury dried shrimp depth.",
+      "flavorProfile": "Sticky, sweet, smoky and gently hot, with roasted shallot and garlic and a savoury shrimp paste depth.",
       "healthBenefit": "A rich condiment, high in sugar and oil, so it is a spoonful for flavour rather than a source of nutrients.",
       "ingredients": [
         {
           "category": "Fats",
           "baseName": "Rapsolja",
-          "quantity": 120,
+          "quantity": 240,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": "Fried",
-          "prepNote": "part stays in the jam"
+          "prepNote": "1 cup; it stays in the jam"
         },
         {
           "category": "Veg",
           "baseName": "Shallot",
-          "quantity": 100,
+          "quantity": 140,
           "unit": "g",
-          "cutPrep": "sliced thin",
-          "cookingMethod": "Fried",
-          "prepNote": null
+          "cutPrep": "unpeeled",
+          "cookingMethod": "Roasted",
+          "prepNote": "8 to 10 red shallots"
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 60,
+          "quantity": 40,
           "unit": "g",
-          "cutPrep": "sliced thin",
-          "cookingMethod": "Fried",
-          "prepNote": null
+          "cutPrep": "unpeeled",
+          "cookingMethod": "Roasted",
+          "prepNote": "6 to 8 large cloves"
         },
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 30,
+          "quantity": 32,
           "unit": "g",
-          "cutPrep": "seeded",
-          "cookingMethod": "Fried",
-          "prepNote": null
+          "cutPrep": "seeds left in",
+          "cookingMethod": "Roasted",
+          "prepNote": "about 22 long and 45 small dried chilies"
         },
         {
           "category": "Meat",
-          "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
-          "quantity": 14,
+          "baseName": "Shrimp Paste",
+          "quantity": 18,
           "unit": "g",
-          "cutPrep": "rinsed and patted dry",
-          "cookingMethod": null,
-          "prepNote": "2 tbsp at 7 g per tbsp"
+          "cutPrep": null,
+          "cookingMethod": "Roasted",
+          "prepNote": "1 tbsp at 6 g per tsp"
         },
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 37.8,
+          "quantity": 201.6,
           "unit": "g",
           "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": "3 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
+          "prepNote": "1 cup at 12.6 g per tbsp; in place of coconut sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 2,
+          "quantity": 4,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 18,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tbsp"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 cup"
         }
       ],
       "instructions": [
-        "Heat the oil in a wok over medium heat to about 300°F (150°C). Fry the shallots for 6 to 8 minutes, then the garlic for 3 to 4 minutes, until golden, and lift both out.",
-        "Fry the chilies for 30 to 60 seconds, just until they darken, then the dried shrimp for 1 minute, and lift out.",
-        "Pound or blend the fried ingredients to a coarse paste with a few spoonfuls of the oil.",
-        "Return the paste to the wok with the remaining oil, the palm sugar, tamarind water and fish sauce and cook over low heat for 5 to 10 minutes, stirring, until thick and glossy.",
-        "Cool and keep in a jar in the refrigerator for up to 1 month."
+        "Dry roast the chilies in a wok over medium high heat until they crackle and darken in spots, then set aside.",
+        "Roast the unpeeled shallots and garlic in the same pan until soft and charred in places. Cool, then peel.",
+        "Wrap the shrimp paste in foil and heat it in the pan until dry and crumbly.",
+        "Grind the chilies coarsely, seeds and all. Pound the shallots, garlic, shrimp paste and tamarind until smooth, then pound in the chilies and salt.",
+        "Fry the paste in the oil over low to medium heat, mashing it until it loosens, then about 5 minutes on low.",
+        "Add the fish sauce, water and sugar and simmer on low, stirring, until the sugar dissolves, then about 2 minutes more. Cool and keep in a jar in the refrigerator for up to 1 month."
       ],
       "nutritionHighlights": [
         {
@@ -1375,7 +1410,7 @@
         },
         {
           "nutrient": "Added sugar",
-          "note": "From the palm sugar, so it is used by the spoonful."
+          "note": "From the palm sugar, a large amount, so it is used by the spoonful."
         }
       ],
       "citations": [
@@ -1384,7 +1419,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/sauces-and-condiments/roasted-thai-chili-paste-nam-phrik-pao"
         }
       ],
-      "curationNote": "Only one full recipe opened (Thai Cookbook TV), followed closely."
+      "curationNote": "Thai Cookbook TV, Roasted Thai Chili Paste (Nam Phrik Pao) for every amount and step; makes about 1/2 cup; doubled to our 16 servings of 1 tbsp."
     },
     {
       "builderType": "sauce",
@@ -1403,43 +1438,52 @@
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 90,
+          "quantity": 63,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about 4 tbsp"
         },
         {
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
-          "quantity": 6,
+          "quantity": 8,
           "unit": "g",
           "cutPrep": "bird chilies, sliced thin",
           "cookingMethod": null,
-          "prepNote": "6 bird's eye chilies"
+          "prepNote": "8 bird's eye chilies"
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 8,
+          "quantity": 2,
           "unit": "g",
-          "cutPrep": "sliced thin",
+          "cutPrep": "finely chopped",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about half a clove"
         },
         {
           "category": "Bev",
           "baseName": "Limes, juice, fresh",
-          "quantity": 1,
-          "unit": "tbsp",
+          "quantity": 36,
+          "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about 2 1/2 tbsp"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 9,
+          "unit": "g",
+          "cutPrep": "sliced thin",
+          "cookingMethod": null,
+          "prepNote": "half a small shallot"
         }
       ],
       "instructions": [
-        "Stir the fish sauce, chilies, garlic and lime juice together in a small bowl.",
-        "Let stand 10 to 15 minutes before serving so the chili flavours the sauce. Keep refrigerated up to 3 days."
+        "Stir the fish sauce, chilies, garlic, shallot and lime juice together in a small bowl.",
+        "Let stand 10 to 15 minutes before serving so the chili flavors the sauce. Keep refrigerated up to 3 days."
       ],
       "nutritionHighlights": [
         {
@@ -1457,7 +1501,7 @@
           "url": "https://importfood.com/recipes/recipe/1231-assorted-thai-table-condiments"
         }
       ],
-      "curationNote": "Both sources agree on fish sauce with sliced bird chilies; garlic and lime are the common additions kept here."
+      "curationNote": "Import Food, Assorted Thai Table Condiments for every amount and step; its nam pla prik makes about 12 tbsp; scaled by 0.6 to our 7."
     },
     {
       "builderType": "sauce",
@@ -1501,7 +1545,7 @@
         {
           "category": "Bev",
           "baseName": "Limes, juice, fresh",
-          "quantity": 2,
+          "quantity": 3,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -1509,44 +1553,26 @@
         },
         {
           "category": "Sweets",
-          "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 4.2,
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 8,
           "unit": "g",
-          "cutPrep": "shaved",
+          "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "1 tsp at 4.2 g per tsp; in place of palm sugar, which the database does not hold"
-        },
-        {
-          "category": "Veg",
-          "baseName": "Shallot",
-          "quantity": 15,
-          "unit": "g",
-          "cutPrep": "sliced thin",
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 tsp"
         },
         {
           "category": "Veg",
           "baseName": "Coriander (cilantro) leaves",
-          "quantity": 5,
+          "quantity": 2,
           "unit": "g",
-          "cutPrep": "chopped",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Onions, spring or scallions (includes tops and bulb)",
-          "quantity": 5,
-          "unit": "g",
-          "cutPrep": "sliced",
+          "cutPrep": "1 tbsp leaves",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Stir the fish sauce, lime juice, tamarind water and palm sugar together until the sugar dissolves.",
-        "Stir in the chili flakes and toasted rice, then the shallot, cilantro and scallion. Serve within 1 to 2 hours, before the rice softens."
+        "Stir the fish sauce, lime juice and sugar together until the sugar dissolves.",
+        "Stir in the chili flakes and toasted rice, then the cilantro. Serve within 1 to 2 hours, before the rice softens."
       ],
       "nutritionHighlights": [
         {
@@ -1568,7 +1594,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/sauces-and-condiments/dried-chili-dipping-sauce"
         }
       ],
-      "curationNote": "Both sources mix fish sauce, lime, tamarind, roasted chili and toasted rice; the chili flakes and toasted rice point at their bases."
+      "curationNote": "Thai Cookbook TV, Dried Chili Dipping Sauce for every amount and step; makes 1/2 cup, the same as our 8 servings of 1 tbsp; its 2 tsp each of dried chili and toasted rice match our two components."
     },
     {
       "builderType": "sauce",
@@ -1581,15 +1607,15 @@
       "name": "Nam Jim Seafood (Seafood Dipping Sauce)",
       "region": "Central",
       "servings": 12,
-      "flavorProfile": "Bright green, sour and fiery, with raw garlic and cilantro to cut through grilled seafood.",
+      "flavorProfile": "Bright green, sour and lightly hot, with raw garlic and cilantro to cut through grilled seafood.",
       "healthBenefit": "Fresh chili, garlic, cilantro and lime with no fat, though salty from the fish sauce.",
       "ingredients": [
         {
           "category": "Veg",
           "baseName": "Green Chilli (Chili)",
-          "quantity": 20,
+          "quantity": 3,
           "unit": "g",
-          "cutPrep": "bird chilies, chopped",
+          "cutPrep": "3 Thai hot chilies, chopped",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -1605,25 +1631,16 @@
         {
           "category": "Veg",
           "baseName": "Coriander (cilantro) leaves",
-          "quantity": 5,
+          "quantity": 20,
           "unit": "g",
-          "cutPrep": "scraped and chopped",
-          "cookingMethod": null,
-          "prepNote": "1 tbsp at 5 g per tbsp; in place of coriander root, which the database does not hold; leaves count for the root"
-        },
-        {
-          "category": "Veg",
-          "baseName": "Coriander (cilantro) leaves",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "chopped",
+          "cutPrep": "most of a bunch, chopped",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Bev",
           "baseName": "Limes, juice, fresh",
-          "quantity": 90,
+          "quantity": 45,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -1632,7 +1649,7 @@
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 60,
+          "quantity": 34,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -1640,31 +1657,32 @@
         },
         {
           "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
+          "baseName": "Piloncillo / Unrefined Panela",
+          "quantity": 18.9,
+          "unit": "g",
+          "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 1/2 tbsp at 12.6 g per tbsp; in place of coconut sugar, which the database does not hold"
         },
         {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 11,
+          "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "to dissolve the sugar"
         }
       ],
       "instructions": [
-        "Pound the chilies, garlic, coriander root and salt in a mortar for 3 to 5 minutes, until coarse.",
-        "Stir in the lime juice, fish sauce and sugar until dissolved, then the cilantro. Serve the same day."
+        "Pound the garlic and chilies in a mortar until coarse.",
+        "Dissolve the sugar in the water, then stir in the lime juice and fish sauce.",
+        "Mix in the garlic and chili and the cilantro. Serve the same day."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Vitamin C",
-          "note": "From the lime juice and chilies."
+          "note": "From the lime juice."
         },
         {
           "nutrient": "Sodium",
@@ -1677,7 +1695,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/sauces-and-condiments/garlic-lime-and-cilantro-seafood-sauce"
         }
       ],
-      "curationNote": "Only one recipe opened (Thai Cookbook TV), followed closely."
+      "curationNote": "Thai Cookbook TV, Garlic, Lime and Cilantro Seafood Sauce for every amount and step; makes about 1 cup; scaled by 3/4 to our 12 servings of 1 tbsp."
     },
     {
       "builderType": "sauce",
@@ -1696,9 +1714,9 @@
         {
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
-          "quantity": 20,
+          "quantity": 34,
           "unit": "g",
-          "cutPrep": "red spur chilies, chopped",
+          "cutPrep": "3 Thai long chilies and 3 to 4 Thai hot chilies, chopped",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -1714,7 +1732,7 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 150,
+          "quantity": 200,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -1723,7 +1741,7 @@
         {
           "category": "Herbs",
           "baseName": "Distilled Vinegar (White)",
-          "quantity": 120,
+          "quantity": 60,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -1732,7 +1750,7 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 120,
+          "quantity": 180,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -1741,17 +1759,26 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
+          "quantity": 9,
+          "unit": "g",
+          "cutPrep": "1/2 tbsp",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 7.5,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1/2 tbsp"
         }
       ],
       "instructions": [
         "Pound or blend the chilies and garlic to a coarse paste.",
-        "Bring the sugar, vinegar, water and salt to a boil, add the paste and simmer 10 to 15 minutes, until syrupy (about 220°F, 105°C).",
-        "Cool; it thickens as it cools. Keep refrigerated up to 1 month."
+        "Bring the sugar, vinegar, water and salt to a boil, add the paste, then lower the heat until it barely bubbles and cook 10 to 15 minutes, stirring often, until slightly thick.",
+        "Stir in the lime juice and cool; it thickens as it cools. Keep refrigerated up to 1 month."
       ],
       "nutritionHighlights": [
         {
@@ -1765,7 +1792,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/sauces-and-condiments/nam-jim-sweet-chili-dipping-sauce"
         }
       ],
-      "curationNote": "Only one recipe opened (Thai Cookbook TV), followed closely."
+      "curationNote": "Thai Cookbook TV, Nam Jim Sweet Chili Dipping Sauce for every amount and step; makes about 1 cup, the same as our 16 servings of 1 tbsp."
     },
     {
       "builderType": "sauce",
@@ -1789,59 +1816,50 @@
       "name": "Nam Jim Satay (Peanut Sauce)",
       "region": "Central",
       "servings": 24,
-      "flavorProfile": "Creamy, sweet and nutty, with red curry warmth and a little tamarind sourness.",
+      "flavorProfile": "Creamy, sweet and nutty, with red curry warmth and a little sharpness from vinegar.",
       "healthBenefit": "Peanuts bring protein and unsaturated fat, while the coconut milk and sugar make it rich.",
       "ingredients": [
         {
           "category": "NutSeed",
           "baseName": "Peanut",
-          "quantity": 150,
+          "quantity": 110,
           "unit": "g",
           "cutPrep": "skinned, roasted and ground",
           "cookingMethod": "Roasted",
-          "prepNote": null
+          "prepNote": "3/4 cup"
         },
         {
           "category": "NutSeed",
           "baseName": "Coconut milk",
-          "quantity": 400,
+          "quantity": 720,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "3 cups"
         },
         {
           "category": "Sweets",
-          "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 37.8,
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 150,
           "unit": "g",
-          "cutPrep": "shaved",
+          "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "3 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
+          "prepNote": "3/4 cup"
         },
         {
           "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1,
-          "unit": "tbsp",
+          "baseName": "Distilled Vinegar (White)",
+          "quantity": 90,
+          "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "6 tbsp"
         }
       ],
       "instructions": [
         "Simmer a third of the coconut milk in a saucepan over medium heat for 3 to 5 minutes, until the oil separates, then fry the curry paste in it for 1 to 2 minutes.",
-        "Add the rest of the coconut milk, the ground peanuts, palm sugar, tamarind water, fish sauce and salt.",
-        "Simmer over low heat for 10 to 15 minutes, stirring often, until thick enough to coat a spoon."
+        "Add the rest of the coconut milk, the ground peanuts, the sugar and the vinegar.",
+        "Simmer over low heat, stirring often, until it reduces and is thick enough to coat a spoon."
       ],
       "nutritionHighlights": [
         {
@@ -1863,7 +1881,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/sauces-and-condiments/sweet-peanut-sauce-for-satays"
         }
       ],
-      "curationNote": "Both sources fry red curry paste in coconut milk and simmer it with ground peanuts and palm sugar."
+      "curationNote": "Thai Cookbook TV, Sweet Peanut Sauce for Satays for every amount and step; makes 1 cup; scaled by 1.5 to our 24 servings of 1 tbsp."
     },
     {
       "builderType": "sauce",
@@ -1891,11 +1909,11 @@
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 30,
+          "quantity": 18,
           "unit": "g",
           "cutPrep": "unpeeled",
           "cookingMethod": "Grilled",
-          "prepNote": null
+          "prepNote": "6 cloves"
         },
         {
           "category": "Veg",
@@ -1969,7 +1987,7 @@
           "url": "https://en.wikipedia.org/wiki/Nam_phrik_num"
         }
       ],
-      "curationNote": "Thai Food Paradise amounts, scaled up; Wikipedia confirms the grilled chili, shallot and garlic base."
+      "curationNote": "Thai Food Paradise, Nam Prik Noom for every amount and step; no yield given; ours keeps its chilies and shallots near the source and its seasonings at the source amounts."
     },
     {
       "builderType": "sauce",
@@ -2024,8 +2042,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -2051,25 +2069,25 @@
         {
           "category": "Veg",
           "baseName": "Cherry Tomato",
-          "quantity": 300,
+          "quantity": 225,
           "unit": "g",
           "cutPrep": "halved",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "about 1 1/4 cups chopped"
         },
         {
           "category": "Sweets",
-          "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 12.6,
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 12.5,
           "unit": "g",
-          "cutPrep": "shaved",
+          "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "1 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
+          "prepNote": "3 tsp"
         },
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1,
+          "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2087,18 +2105,18 @@
         {
           "category": "Veg",
           "baseName": "Coriander (cilantro) leaves",
-          "quantity": 5,
+          "quantity": 2,
           "unit": "g",
-          "cutPrep": "chopped",
+          "cutPrep": "1 sprig, chopped",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
         "Pound the chilies with the salt, then the shallot, garlic and shrimp paste, into a smooth paste.",
-        "Fry the paste in the oil over medium heat for 2 to 3 minutes, until fragrant.",
-        "Add the pork and cook 4 to 5 minutes, breaking it up, then the tomatoes and water.",
-        "Simmer 15 to 20 minutes, until the tomatoes collapse into a thick sauce. Season with the palm sugar and fish sauce and top with cilantro."
+        "Fry the paste in the oil over low heat for 2 to 3 minutes, until fragrant.",
+        "Add the pork and tomatoes and cook, stirring, until the pork is cooked through.",
+        "Add the water, season with the fish sauce and sugar, and cook 5 to 7 minutes, stirring often, until most of the water has gone and the dip is thick. Top with the cilantro."
       ],
       "nutritionHighlights": [
         {
@@ -2116,7 +2134,7 @@
           "url": "https://importfood.com/recipes/sauces/recipe/201-spicy-pork-and-tomato-dip-with-veggies-nam-prik-ong"
         }
       ],
-      "curationNote": "Only one recipe opened (Import Food), followed for the paste and method. Serving is 4 tablespoons."
+      "curationNote": "Import Food, Spicy Pork and Tomato Dip (Nam Prik Ong) for every amount and step; serves 4 with about the same pork and tomato as ours; its bought chili paste stands where ours pounds its own from dried chili, shallot, garlic, shrimp paste and salt."
     },
     {
       "builderType": "sauce",
@@ -2135,56 +2153,47 @@
         {
           "category": "Herbs",
           "baseName": "Distilled Vinegar (White)",
-          "quantity": 60,
+          "quantity": 80,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/3 cup"
         },
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 50,
+          "quantity": 25,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 60,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 tbsp"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": null,
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "1 tsp",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Cucumber",
-          "quantity": 150,
+          "quantity": 65,
           "unit": "g",
           "cutPrep": "quartered lengthwise and sliced thin",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about 1/2 cup"
         },
         {
           "category": "Veg",
           "baseName": "Shallot",
-          "quantity": 30,
+          "quantity": 40,
           "unit": "g",
           "cutPrep": "sliced thin",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about 1/4 cup"
         },
         {
           "category": "Veg",
@@ -2193,7 +2202,7 @@
           "unit": "g",
           "cutPrep": "sliced thin",
           "cookingMethod": null,
-          "prepNote": "1 bird's eye chili"
+          "prepNote": "1 or 2 bird's eye chilies"
         },
         {
           "category": "Veg",
@@ -2206,8 +2215,8 @@
         }
       ],
       "instructions": [
-        "Warm the vinegar, sugar, water and salt over low heat for 2 to 3 minutes, just until the sugar dissolves, then cool completely.",
-        "Pour over the cucumber, shallot and chili, top with cilantro and serve within a few hours."
+        "Stir the vinegar, sugar and salt together, warming gently if needed, until the sugar and salt dissolve. Let it cool completely.",
+        "Pour it over the cucumber, shallot and chili, top with the cilantro and serve within a few hours."
       ],
       "nutritionHighlights": [
         {
@@ -2229,7 +2238,7 @@
           "url": "https://importfood.com/recipes/sauces/recipe/198-thai-style-peanut-sauce-nam-jim-satay"
         }
       ],
-      "curationNote": "Both sources use a cooled sugar and vinegar syrup over cucumber, shallot and chili."
+      "curationNote": "Thai Cookbook TV, Thai Cucumber Relish for Satays for every amount and step; makes about 1 cup, the same as our 8 servings of 2 tbsp."
     },
     {
       "builderType": "sauce",
@@ -2242,7 +2251,7 @@
       "name": "Nam Soup Gai (Thai Chicken Stock)",
       "region": "Central",
       "servings": 8,
-      "flavorProfile": "Clean, light and peppery, with coriander root and garlic, the base for clear soups and tom yum.",
+      "flavorProfile": "Clean and light, with coriander root, garlic and daikon, the base for clear soups and tom yum.",
       "healthBenefit": "A light stock that carries some protein and minerals from the bones and adds flavour with little fat once skimmed.",
       "ingredients": [
         {
@@ -2252,12 +2261,12 @@
           "unit": "g",
           "cutPrep": "rinsed",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "1 chicken carcass or the same weight of backs, rinsed"
         },
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 3000,
+          "quantity": 2500,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2270,50 +2279,69 @@
           "unit": "g",
           "cutPrep": "scraped and chopped",
           "cookingMethod": null,
-          "prepNote": "2 tbsp at 5 g per tbsp; in place of coriander root, which the database does not hold; leaves count for the root"
+          "prepNote": "3 coriander roots; the leaves row stands in, since the database holds no root"
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 20,
+          "quantity": 15,
           "unit": "g",
           "cutPrep": "smashed",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, pepper, white",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": "whole peppercorns, cracked",
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 cloves, smashed"
         },
         {
           "category": "Veg",
           "baseName": "Radish, oriental (daikon)",
-          "quantity": 200,
+          "quantity": 170,
           "unit": "g",
           "cutPrep": "cut in chunks",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "cut in chunks"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 9,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/2 tbsp"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 onion, halved"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Carrot",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1/2 carrot, in chunks"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Celeriac",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "celery root, in chunks"
         }
       ],
       "instructions": [
-        "Cover the chicken backs with the cold water, bring to a boil and skim the foam for 5 to 10 minutes.",
-        "Pound the coriander root, garlic and peppercorns together and add them with the daikon.",
-        "Simmer gently, just below a boil (about 195°F, 90°C), for 2 to 3 hours, until reduced to about 2 litres.",
-        "Strain, season with the salt and chill; lift off the fat. Keeps 4 days refrigerated or 3 months frozen."
+        "Bring the water to a boil in a large pot.",
+        "Add the chicken, daikon, coriander roots, onion, carrot, celery root, garlic and salt.",
+        "When it comes back to a gentle boil, turn the heat to low and skim off the foam.",
+        "Cover and simmer on low for 1 1/2 to 2 hours.",
+        "Strain through a fine sieve and discard the solids. Cool quickly, then refrigerate up to 4 days or freeze up to 3 months. It makes about 8 cups."
       ],
       "nutritionHighlights": [
         {
@@ -2327,15 +2355,11 @@
       ],
       "citations": [
         {
-          "source": "Import Food, Tom Yum Goong",
-          "url": "https://importfood.com/recipes/soups/recipe/1290-thai-prawn-soup-with-lemongrass-tom-yum-goong"
-        },
-        {
-          "source": "Thai Cookbook TV, Pork Bone Soup with Daikon and Cabbage",
-          "url": "https://www.thaicookbook.tv/thai-recipes/soups/pork-bone-soup-with-daikon-and-cabbage"
+          "source": "Hungry in Thailand, Thai Broth (Nam Stock)",
+          "url": "https://hungryinthailand.com/wprm_print/thai-broth-recipe-nam-stock"
         }
       ],
-      "curationNote": "Written from standard proportions: the Thai stock aromatics (coriander root, garlic, white pepper) and daikon follow the Thai Cookbook TV pork bone soup, applied to chicken as Import Food uses in tom yum."
+      "curationNote": "Hungry in Thailand, Thai Broth (Nam Stock) for every amount and step; serves 8, the same as ours: 2.5 l water, 1 chicken carcass, 170 g daikon, 3 coriander roots, 1 onion, 1/2 carrot, 10 g celery root, 1/2 tbsp salt, 3 garlic cloves, simmered 1 1/2 to 2 hours."
     },
     {
       "builderType": "sauce",
@@ -2354,24 +2378,24 @@
         {
           "category": "Fruit",
           "baseName": "Tamarind",
-          "quantity": 100,
+          "quantity": 140,
           "unit": "g",
           "cutPrep": "seedless pulp, broken up",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about 1 cup"
         },
         {
           "category": "Bev",
           "baseName": "Water, tap",
           "quantity": 120,
           "unit": "ml",
-          "cutPrep": "warm, about 120°F (50°C)",
+          "cutPrep": "just enough to cover",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Soak the tamarind in the warm water for 10 to 15 minutes, then squeeze and knead it with your fingers until the pulp comes away from the fibres.",
+        "Cover the tamarind with the water and leave it about 5 minutes without stirring, then squeeze and knead it with your fingers until the pulp comes away from the fibres.",
         "Press through a sieve, scraping the underside, and discard the fibres and any seeds. Keeps 1 week refrigerated."
       ],
       "nutritionHighlights": [
@@ -2386,7 +2410,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/recipe-components/tamarind-paste"
         }
       ],
-      "curationNote": "Only one recipe opened (Thai Cookbook TV), followed closely."
+      "curationNote": "Thai Cookbook TV, Tamarind Paste for every amount and step; 1 cup dried tamarind and 1/2 cup water make 1/2 cup, our 8 servings of 1 tbsp."
     },
     {
       "builderType": "side",
@@ -2467,8 +2491,8 @@
         }
       ],
       "instructions": [
-        "Soak the rice in plenty of cold water for 4 hours or overnight, then drain.",
-        "Steam it in a bamboo basket or lined steamer over boiling water for 20 to 25 minutes, flipping the mass once halfway, until translucent and tender.",
+        "Soak the rice in plenty of cold water for at least 4 hours or overnight, then drain.",
+        "Steam it in a bamboo basket or lined steamer over boiling water for at least 45 minutes, flipping the mass once halfway, until translucent and tender.",
         "Turn it out, spread briefly to release steam, then keep it in a covered basket."
       ],
       "nutritionHighlights": [
@@ -2483,7 +2507,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/recipe-components/how-to-make-thai-sticky-rice"
         }
       ],
-      "curationNote": "Only one recipe opened (Thai Cookbook TV), followed closely. Soaking water is not eaten and is left out."
+      "curationNote": "Thai Cookbook TV, How to Make Thai Sticky Rice for every amount and step; 3 cups raw rice make 5 cups; our 400 g is close to the share for 4 cups."
     },
     {
       "builderType": "sauce",
@@ -2611,8 +2635,8 @@
         }
       ],
       "instructions": [
-        "Heat the oil in a wok to 300 to 325°F (150 to 160°C) and add the shallots.",
-        "Fry 8 to 12 minutes, stirring, until evenly light golden, then lift out at once; they darken as they drain.",
+        "Heat the oil in a wok to about 120°C (250°F), checking twice that it has stopped rising, and add the shallots.",
+        "Fry, stirring, until they stop sizzling and begin to turn light golden, up to about 5 minutes, then lift them out at once; they darken as they drain.",
         "Drain on paper and cool completely before storing airtight for up to 2 weeks."
       ],
       "nutritionHighlights": [
@@ -2627,7 +2651,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/recipe-components/crispy-fried-shallots"
         }
       ],
-      "curationNote": "Only one recipe opened (Thai Cookbook TV), followed closely. Oil counted as the share absorbed."
+      "curationNote": "Thai Cookbook TV, Crispy Fried Shallots for every amount and step; 10 small shallots make 1/2 cup, our 8 servings of 1 tbsp."
     },
     {
       "builderType": "sauce",
@@ -2708,20 +2732,20 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": "half for boiling, half for the skin",
+          "quantity": 18,
+          "unit": "g",
+          "cutPrep": "1 tbsp",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "in the par-boiling water, which is poured away; the pork takes up only a little"
         },
         {
           "category": "Herbs",
           "baseName": "Distilled Vinegar (White)",
-          "quantity": 2,
+          "quantity": 1,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "in the par-boiling water, which is poured away"
         },
         {
           "category": "Fats",
@@ -2734,9 +2758,12 @@
         }
       ],
       "instructions": [
-        "Simmer the pork in salted water for 30 to 40 minutes, until a skewer goes through, then drain and pat dry.",
-        "Prick the skin all over, rub it with the vinegar and remaining salt and leave uncovered in the refrigerator 6 hours to overnight to dry.",
-        "Deep fry in oil at 350°F (175°C) for 10 to 15 minutes, skin side down first, until blistered and crisp. Drain and rest 10 minutes before cutting."
+        "Cut the belly into strips about 4 cm thick and 15 cm long.",
+        "Bring enough water to cover the pork to a boil with the salt and vinegar, add the pork and simmer 5 to 10 minutes, just until the outside firms.",
+        "Drain and leave the pieces to dry thoroughly.",
+        "Fry in deep oil over medium heat about 10 minutes, partly covered as the oil spits, until the meat is golden. Lift out.",
+        "Heat the oil until it just begins to smoke and fry the pieces again about 1 minute, until the skin puffs and crackles.",
+        "Drain on a rack and cool before slicing. Keep refrigerated up to a week and slice only as needed."
       ],
       "nutritionHighlights": [
         {
@@ -2754,7 +2781,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/recipe-components/moo-grob-crispy-deep-fried-pork-belly"
         }
       ],
-      "curationNote": "Only one recipe opened (Thai Cookbook TV), followed closely."
+      "curationNote": "Thai Cookbook TV, Moo Grob for every amount and step; 1 to 2 lb belly; ours uses 700 g."
     },
     {
       "builderType": "side",
@@ -2784,21 +2811,12 @@
       "ingredients": [
         {
           "category": "NutSeed",
-          "baseName": "Coconut cream",
-          "quantity": 120,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": "Fried",
-          "prepNote": null
-        },
-        {
-          "category": "NutSeed",
           "baseName": "Coconut milk",
-          "quantity": 480,
+          "quantity": 960,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "4 cups, in two halves"
         },
         {
           "category": "Meat",
@@ -2812,34 +2830,34 @@
         {
           "category": "Veg",
           "baseName": "Eggplant",
-          "quantity": 150,
+          "quantity": 220,
           "unit": "g",
           "cutPrep": "Thai round eggplants, quartered",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "10 to 12 Thai eggplants"
         },
         {
           "category": "Veg",
           "baseName": "Eggplant",
-          "quantity": 30,
+          "quantity": 120,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "in place of pea eggplant (makhuea phuang), which the database does not hold"
+          "prepNote": "1 cup; in place of pea eggplant (makhuea phuang), which the database does not hold"
         },
         {
           "notInDatabase": true,
           "name": "makrut lime leaves",
           "contains": "none",
-          "quantity": 4,
+          "quantity": 12,
           "unit": "each",
-          "cutPrep": "torn",
+          "cutPrep": "6 slivered, 6 whole",
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1.5,
+          "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2848,37 +2866,47 @@
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 12.6,
+          "quantity": 25.2,
           "unit": "g",
           "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": "1 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
+          "prepNote": "2 tbsp at 12.6 g per tbsp; in place of coconut sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
-          "quantity": 15,
+          "baseName": "Fresh Basil",
+          "quantity": 45,
           "unit": "g",
           "cutPrep": "Thai sweet basil (horapha) leaves",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about 3 cups loosely packed"
         },
         {
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
-          "quantity": 14,
+          "quantity": 28,
           "unit": "g",
           "cutPrep": "long red chili, sliced on the bias",
           "cookingMethod": null,
-          "prepNote": "1 long chili"
+          "prepNote": "2 long chilies"
+        },
+        {
+          "notInDatabase": true,
+          "name": "fresh green peppercorns",
+          "contains": "none",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "on the stem",
+          "prepNote": "4 to 6 small bunches"
         }
       ],
       "instructions": [
-        "Heat the coconut cream in a wok over medium heat for 3 to 5 minutes, stirring, until it bubbles and the oil separates (cracks).",
-        "Add the curry paste and fry 2 to 3 minutes, stirring, until fragrant and the oil turns green.",
-        "Add the chicken and stir 2 to 3 minutes to coat, then pour in the coconut milk and bring to a gentle simmer.",
-        "Add both eggplants and the lime leaves and simmer 6 to 8 minutes, until the chicken is cooked through (165°F, 74°C) and the eggplant is just tender.",
-        "Season with the fish sauce and palm sugar, then stir in the basil and chili off the heat. Serve with jasmine rice."
+        "Bring half the coconut milk to a bubble in a wok, add the curry paste and fry over medium heat for 2 to 3 minutes, until the oil separates, without letting it brown.",
+        "Add the chicken, coat it, cover and cook 2 to 3 minutes a side.",
+        "Stir in the sugar until it dissolves and cook about 1 minute more.",
+        "Add the rest of the coconut milk, the green peppercorns and the whole lime leaves and bring to a boil.",
+        "Add both eggplants, cover and simmer about 5 minutes, until the Thai eggplants just soften, adding a little water if needed.",
+        "Off the heat, season with the fish sauce, stir in most of the basil and serve topped with the chili, the rest of the basil and the slivered lime leaves, with jasmine rice."
       ],
       "nutritionHighlights": [
         {
@@ -2887,7 +2915,7 @@
         },
         {
           "nutrient": "Saturated fat",
-          "note": "From the coconut milk and cream."
+          "note": "From the coconut milk."
         }
       ],
       "citations": [
@@ -2904,7 +2932,7 @@
           "url": "https://en.wikipedia.org/wiki/Green_curry"
         }
       ],
-      "curationNote": "Both recipes crack coconut cream, fry the paste in it and add Thai and pea eggplants; amounts averaged and scaled to 4."
+      "curationNote": "Thai Cookbook TV, Green Curry with Chicken for every amount and step; serves 2 to 4 with 225 g chicken; doubled to match our 450 g."
     },
     {
       "builderType": "side",
@@ -2942,7 +2970,7 @@
           "baseName": "Coconut milk",
           "quantity": 600,
           "unit": "ml",
-          "cutPrep": "cream skimmed from the top for frying",
+          "cutPrep": "",
           "cookingMethod": "Simmered",
           "prepNote": null
         },
@@ -2967,11 +2995,11 @@
         {
           "category": "Veg",
           "baseName": "Eggplant",
-          "quantity": 150,
+          "quantity": 75,
           "unit": "g",
-          "cutPrep": "Thai round eggplants, quartered",
+          "cutPrep": "Thai baby eggplants, whole",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "1/2 cup"
         },
         {
           "category": "Fruit",
@@ -2986,7 +3014,7 @@
           "notInDatabase": true,
           "name": "makrut lime leaves",
           "contains": "none",
-          "quantity": 4,
+          "quantity": 5,
           "unit": "each",
           "cutPrep": "torn",
           "prepNote": null
@@ -2994,7 +3022,7 @@
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1.5,
+          "quantity": 1,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -3003,36 +3031,55 @@
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 12.6,
+          "quantity": 6.3,
           "unit": "g",
           "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": "1 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
+          "prepNote": "1 1/2 tsp at 4.2 g per tsp; in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
-          "quantity": 15,
+          "baseName": "Fresh Basil",
+          "quantity": 12,
           "unit": "g",
           "cutPrep": "Thai sweet basil leaves",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/2 cup"
         },
         {
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
-          "quantity": 14,
+          "quantity": 10,
           "unit": "g",
-          "cutPrep": "long red chili, sliced",
+          "cutPrep": "bird's eye chilies, whole",
           "cookingMethod": null,
-          "prepNote": "1 long chili"
+          "prepNote": "5 chilies"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 1.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Fried",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1/2 tsp"
         }
       ],
       "instructions": [
-        "Heat the thick cream from the top of the coconut milk in a wok over medium heat for 3 to 5 minutes, until the oil separates, then fry the curry paste 2 to 3 minutes.",
-        "Add the rest of the coconut milk and the stock and bring to a gentle simmer.",
-        "Add the eggplant and lime leaves and simmer 4 to 5 minutes, then the duck for 3 to 4 minutes to heat through.",
-        "Add the tomatoes and rambutan for 1 minute, season with fish sauce and palm sugar, and finish with basil and chili. Serve with jasmine rice."
+        "Warm the oil in a large pot over medium low heat and fry the curry paste until fragrant.",
+        "Pour in the coconut milk, turn the heat to medium high and bring to a boil.",
+        "Add the stock, chilies, eggplants, tomatoes, rambutan and lime leaves, then turn the heat down to medium low.",
+        "Season with the palm sugar, salt and fish sauce.",
+        "Add the duck and bring back to a boil, stirring gently so the skin stays whole. Stir in the basil, take off the heat and serve with jasmine rice or thin rice noodles."
       ],
       "nutritionHighlights": [
         {
@@ -3054,7 +3101,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/main-dishes/red-curry-with-bamboo-shoots-chicken-and-coconut"
         }
       ],
-      "curationNote": "Import Food for the duck and fruit; Thai Cookbook TV for the red curry method. The duck is bought roasted, as is usual in Thailand."
+      "curationNote": "Import Food, Roasted Duck Red Curry for every amount and step; serves 4, as ours."
     },
     {
       "builderType": "side",
@@ -3089,84 +3136,57 @@
       "ingredients": [
         {
           "category": "NutSeed",
-          "baseName": "Coconut cream",
-          "quantity": 120,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": "Fried",
-          "prepNote": null
-        },
-        {
-          "category": "NutSeed",
           "baseName": "Coconut milk",
-          "quantity": 680,
+          "quantity": 960,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": "Braised",
-          "prepNote": null
+          "prepNote": "4 cups, in two halves"
         },
         {
           "category": "Meat",
           "baseName": "Beef Chuck (Raw)",
-          "quantity": 700,
+          "quantity": 450,
           "unit": "g",
           "cutPrep": "cut in 4 cm chunks",
           "cookingMethod": "Braised",
-          "prepNote": null
+          "prepNote": "about 1 pound"
         },
         {
           "category": "Veg",
           "baseName": "Potato",
-          "quantity": 300,
+          "quantity": 450,
           "unit": "g",
           "cutPrep": "peeled and cut in chunks",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "5 small potatoes"
         },
         {
           "category": "Veg",
           "baseName": "Onion",
-          "quantity": 150,
+          "quantity": 30,
           "unit": "g",
           "cutPrep": "cut in wedges",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "1/4 onion"
         },
         {
           "category": "NutSeed",
           "baseName": "Peanut",
-          "quantity": 50,
+          "quantity": 73,
           "unit": "g",
           "cutPrep": "skinned",
           "cookingMethod": "Roasted",
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, cinnamon, ground",
-          "quantity": 2.5,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "1 each at 2.5 g per each"
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, bay leaf",
-          "quantity": 0.3,
-          "unit": "g",
-          "cutPrep": "leaves",
-          "cookingMethod": null,
-          "prepNote": "2 bay leaves"
+          "prepNote": "1/2 cup"
         },
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 25.2,
+          "quantity": 37.8,
           "unit": "g",
           "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": "2 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
+          "prepNote": "3 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -3176,13 +3196,22 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cherry Tomato",
+          "quantity": 75,
+          "unit": "g",
+          "cutPrep": "whole",
+          "cookingMethod": null,
+          "prepNote": "1/2 cup"
         }
       ],
       "instructions": [
-        "Simmer the beef in the coconut milk with the cinnamon and bay leaves, covered, over low heat (about 200°F, 93°C at the surface) for 1 hour 30 minutes to 2 hours, until tender.",
-        "Heat the coconut cream in a wok over medium heat for 3 to 5 minutes, stirring, until it bubbles and the oil separates (cracks). Fry the curry paste in it for 3 to 4 minutes, until dark and fragrant.",
-        "Stir the fried paste into the beef with the potatoes and onion and simmer 20 to 25 minutes, until the potatoes are soft.",
-        "Add the peanuts, palm sugar, tamarind water and fish sauce, balancing sweet, sour and salty, and simmer 5 minutes more. Serve with jasmine rice."
+        "Bring half the coconut milk to a boil in a pot over medium high heat and stir in the curry paste until smooth.",
+        "Lower the heat and add the beef, fish sauce, palm sugar, tamarind water, potatoes, peanuts, onion, half the tomatoes and the rest of the coconut milk.",
+        "Cover and simmer gently for about 1 hour, longer if the beef is not yet tender.",
+        "Stir in the rest of the tomatoes and serve with jasmine rice."
       ],
       "nutritionHighlights": [
         {
@@ -3208,7 +3237,7 @@
           "url": "https://importfood.com/recipes/main-courses/recipe/1272-massaman-beef-classic-thai-recipe"
         }
       ],
-      "curationNote": "Both braise the beef in coconut milk before adding the fried paste, potatoes and peanuts; balanced with tamarind, palm sugar and fish sauce."
+      "curationNote": "Import Food, Massaman Beef for every amount and step; serves 4, as ours; the closest of the two cited, since it uses fish sauce as ours does."
     },
     {
       "builderType": "side",
@@ -3301,7 +3330,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 10,
           "unit": "g",
           "cutPrep": "Thai sweet basil leaves",
@@ -3335,7 +3364,7 @@
           "url": "https://importfood.com/recipes/main-courses/recipe/1330-thai-panang-pork-mae-pranom"
         }
       ],
-      "curationNote": "Thai Cookbook TV beef version, checked against Import Food for the cream finish; Panang is kept thick with little liquid."
+      "curationNote": "Thai Cookbook TV, Panang Beef Curry for every amount and step; followed."
     },
     {
       "builderType": "side",
@@ -3390,11 +3419,11 @@
         {
           "category": "NutSeed",
           "baseName": "Coconut milk",
-          "quantity": 400,
+          "quantity": 240,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "1 cup"
         },
         {
           "category": "Meat",
@@ -3408,25 +3437,16 @@
         {
           "category": "Veg",
           "baseName": "Potato",
-          "quantity": 300,
+          "quantity": 225,
           "unit": "g",
           "cutPrep": "peeled and cut in chunks",
           "cookingMethod": "Simmered",
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Onion",
-          "quantity": 100,
-          "unit": "g",
-          "cutPrep": "cut in wedges",
-          "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "1 1/2 cups cubed"
         },
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1.5,
+          "quantity": 1,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -3435,18 +3455,18 @@
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 12.6,
+          "quantity": 4.2,
           "unit": "g",
           "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": "1 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
+          "prepNote": "1 tsp at 4.2 g per tsp; in place of palm sugar, which the database does not hold"
         }
       ],
       "instructions": [
-        "Heat the coconut cream in a wok over medium heat for 3 to 5 minutes, stirring, until it bubbles and the oil separates (cracks). Fry the paste 2 to 3 minutes.",
-        "Add the chicken and stir 2 to 3 minutes, then the coconut milk, stock and potatoes.",
-        "Simmer gently 20 to 25 minutes, until the potatoes are soft and the chicken is cooked (165°F, 74°C), adding the onion for the last 5 minutes.",
-        "Season with the fish sauce and palm sugar, top with fried shallots and serve with rice and the cucumber relish."
+        "Cook the chicken in the coconut milk in a pot over low heat until done.",
+        "In a wok, fry the curry paste until fragrant, then add the coconut cream a little at a time, stirring, until the oil rises.",
+        "Add the chicken, then tip everything back into the pot with the coconut milk.",
+        "Add the potatoes, bring to a boil, season with the fish sauce and palm sugar and simmer on low about 10 minutes, until the potatoes are soft. Top with fried shallots and serve with rice and the cucumber relish."
       ],
       "nutritionHighlights": [
         {
@@ -3468,7 +3488,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/main-dishes/chicken-yellow-curry-kaeng-kari-gai"
         }
       ],
-      "curationNote": "Both use chicken and potato in yellow paste and coconut milk; ajad on the side and fried shallots on top as is usual in Bangkok."
+      "curationNote": "Import Food, Thai Yellow Curry Chicken for every amount and step; serves 4, as ours."
     },
     {
       "builderType": "side",
@@ -3697,15 +3717,6 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Pepper, black, ground",
-          "quantity": 4.5,
-          "unit": "g",
-          "cutPrep": "on the stem",
-          "cookingMethod": null,
-          "prepNote": "in place of fresh green peppercorns, which the database does not hold; fresh green peppercorns counted as 0.3 of their weight in ground black pepper"
-        },
-        {
           "notInDatabase": true,
           "name": "makrut lime leaves",
           "contains": "none",
@@ -3726,11 +3737,11 @@
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 4.2,
+          "quantity": 12.6,
           "unit": "g",
           "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": "1 tsp at 4.2 g per tsp; in place of palm sugar, which the database does not hold"
+          "prepNote": "1 tbsp at 12.6 g per tbsp; in place of light brown sugar"
         },
         {
           "category": "Herbs",
@@ -3740,6 +3751,15 @@
           "cutPrep": "leaves picked",
           "cookingMethod": null,
           "prepNote": "in place of holy basil (kaphrao), which the database does not hold"
+        },
+        {
+          "notInDatabase": true,
+          "name": "fresh green peppercorns",
+          "contains": "none",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "on the stem",
+          "prepNote": "4 to 6 small bunches"
         }
       ],
       "instructions": [
@@ -3768,7 +3788,7 @@
           "url": "https://en.wikipedia.org/wiki/Kaeng_pa"
         }
       ],
-      "curationNote": "Tasting Table method and vegetables, made with pork, which Wikipedia lists as a usual meat for jungle curry, plus the fingerroot and green peppercorns it names."
+      "curationNote": "Tasting Table, Kaeng Pa With Fish for every amount and step; serves 6, as ours; made with pork in place of fish, with the fingerroot, green peppercorns and lime leaves Wikipedia names."
     },
     {
       "builderType": "side",
@@ -3832,74 +3852,74 @@
         {
           "category": "Herbs",
           "baseName": "Spices, coriander seed",
-          "quantity": 1,
+          "quantity": 0.72,
           "unit": "tbsp",
           "cutPrep": "toasted and ground",
           "cookingMethod": null,
-          "prepNote": "hang lay spice powder"
+          "prepNote": "part of 1/2 tbsp hang lay powder"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, cumin seed",
-          "quantity": 1,
+          "quantity": 0.24,
           "unit": "tsp",
           "cutPrep": "toasted and ground",
           "cookingMethod": null,
-          "prepNote": "hang lay spice powder"
+          "prepNote": "part of 1/2 tbsp hang lay powder"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, turmeric, ground",
-          "quantity": 1,
+          "quantity": 0.24,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "hang lay spice powder"
+          "prepNote": "part of 1/2 tbsp hang lay powder"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, cardamom, ground",
-          "quantity": 0.5,
+          "quantity": 0.12,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "hang lay spice powder"
+          "prepNote": "part of 1/2 tbsp hang lay powder"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, cinnamon, ground",
-          "quantity": 0.5,
+          "quantity": 0.12,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "hang lay spice powder"
+          "prepNote": "part of 1/2 tbsp hang lay powder"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, cloves, ground",
-          "quantity": 0.25,
+          "quantity": 0.06,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "hang lay spice powder"
+          "prepNote": "part of 1/2 tbsp hang lay powder"
         },
         {
           "category": "Herbs",
           "baseName": "Ginger root",
-          "quantity": 50,
+          "quantity": 25,
           "unit": "g",
           "cutPrep": "peeled and cut in matchsticks",
           "cookingMethod": "Braised",
-          "prepNote": null
+          "prepNote": "1/4 cup"
         },
         {
           "category": "NutSeed",
           "baseName": "Peanut",
-          "quantity": 50,
+          "quantity": 18,
           "unit": "g",
           "cutPrep": "skinned",
           "cookingMethod": "Roasted",
-          "prepNote": null
+          "prepNote": "2 tbsp"
         },
         {
           "category": "Sweets",
@@ -3911,29 +3931,30 @@
           "prepNote": "3 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
         },
         {
-          "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 2,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 750,
+          "quantity": 720,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 cups"
+        },
+        {
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "thin soy sauce"
         }
       ],
       "instructions": [
-        "Toss the pork with the curry paste, spice powder and dark soy and leave to marinate 1 hour, or overnight in the refrigerator.",
-        "Brown the pork in a heavy pot over medium heat for 8 to 10 minutes, letting the belly render.",
-        "Add the water, cover and braise gently (about 200°F, 93°C at the surface) for 1 hour 30 minutes to 2 hours, until very tender.",
-        "Add the ginger, pickled garlic, peanuts, tamarind water, palm sugar and fish sauce and simmer uncovered 15 to 20 minutes, until thick. Serve with sticky rice."
+        "Mix the pork with the curry paste, spice powder and the brine from the pickled garlic and leave 1 hour, stirring halfway.",
+        "Stir fry the pork over medium heat for 10 to 15 minutes, until no longer pink.",
+        "Add the water, bring to a boil, then cook on low for 30 minutes, skimming off fat if you like.",
+        "Add the pickled garlic cloves, ginger and peanuts and cook over medium low for 30 minutes.",
+        "Add the dark soy, thin soy, palm sugar and tamarind and cook 30 minutes more, until sour, sweet and a little salty. Serve with sticky rice."
       ],
       "nutritionHighlights": [
         {
@@ -3955,7 +3976,7 @@
           "url": "https://importfood.com/recipes/main-courses/recipe/146-northern-thai-pork-curry-gaeng-hanglay"
         }
       ],
-      "curationNote": "Both sources marinate belly and shoulder in the paste and hang lay powder, then braise with ginger, pickled garlic and tamarind. Served with sticky rice as in Chiang Mai."
+      "curationNote": "Import Food, Northern Thai Pork Curry for every amount and step; uses about the same 1.35 kg of pork as ours, with peanuts, palm sugar, tamarind, ginger and pickled garlic as ours does."
     },
     {
       "builderType": "side",
@@ -4022,11 +4043,11 @@
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 18.9,
+          "quantity": 24,
           "unit": "g",
           "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": "1.5 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
+          "prepNote": "in place of palm sugar, which the database does not hold"
         },
         {
           "notInDatabase": true,
@@ -4073,7 +4094,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/main-dishes/red-curry-with-bamboo-shoots-chicken-and-coconut"
         }
       ],
-      "curationNote": "Hungry in Thailand proportions (made with shrimp there, scaled to 4 with fried fish), with mackerel as named for coastal versions; Thai Cookbook TV for the red curry method."
+      "curationNote": "Hungry in Thailand, Choo Chee Curry for every amount and step; serves 2 with shrimp; doubled to our 4 with fried fish."
     },
     {
       "builderType": "side",
@@ -4175,7 +4196,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 15,
           "unit": "g",
           "cutPrep": "Thai sweet basil leaves",
@@ -4218,7 +4239,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/main-dishes/red-curry-with-bamboo-shoots-chicken-and-coconut"
         }
       ],
-      "curationNote": "Built from two Thai Cookbook TV recipes: the pumpkin and pork timings from its pumpkin curry and the red curry method from its bamboo shoot curry. No single red pumpkin recipe opened."
+      "curationNote": "Thai Cookbook TV, Yellow Curry with Pumpkin and Pork for every amount and step; no single red curry with pumpkin recipe could be opened; amounts kept."
     },
     {
       "builderType": "side",
@@ -4456,9 +4477,9 @@
         {
           "category": "Veg",
           "baseName": "Lemon grass (citronella)",
-          "quantity": 40,
+          "quantity": 60,
           "unit": "g",
-          "cutPrep": "2 stalks, cut in 4 cm lengths and bruised",
+          "cutPrep": "3 stalks, cut in 4 cm lengths and bruised",
           "cookingMethod": "Simmered",
           "prepNote": null
         },
@@ -4466,16 +4487,16 @@
           "notInDatabase": true,
           "name": "galangal",
           "contains": "none",
-          "quantity": 15,
+          "quantity": 10,
           "unit": "g",
-          "cutPrep": "sliced thin",
+          "cutPrep": "3 small slices",
           "prepNote": null
         },
         {
           "notInDatabase": true,
           "name": "makrut lime leaves",
           "contains": "none",
-          "quantity": 5,
+          "quantity": 6,
           "unit": "each",
           "cutPrep": "torn",
           "prepNote": null
@@ -4483,25 +4504,25 @@
         {
           "category": "Veg",
           "baseName": "Mushroom, straw, canned, drained solids",
-          "quantity": 150,
+          "quantity": 60,
           "unit": "g",
           "cutPrep": "halved",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "3 or 4 mushrooms"
         },
         {
           "category": "Meat",
           "baseName": "Shrimp Crustaceans",
-          "quantity": 400,
+          "quantity": 200,
           "unit": "g",
           "cutPrep": "peeled and deveined, heads kept for the broth if you have them",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "8 large shrimp at about 25 g each"
         },
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 3,
+          "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4510,7 +4531,7 @@
         {
           "category": "Bev",
           "baseName": "Limes, juice, fresh",
-          "quantity": 3,
+          "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4519,11 +4540,11 @@
         {
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
-          "quantity": 4,
+          "quantity": 5,
           "unit": "g",
           "cutPrep": "bird chilies, bruised",
           "cookingMethod": null,
-          "prepNote": "4 bird's eye chilies"
+          "prepNote": "5 bird's eye chilies"
         },
         {
           "category": "Veg",
@@ -4565,7 +4586,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/soups/tom-yum-goong-spicy-sour-soup-with-prawns"
         }
       ],
-      "curationNote": "Both cook the aromatics in stock, add shrimp briefly and season with lime off the heat; this is the clear style (nam sai) with chili jam."
+      "curationNote": "Import Food, Tom Yum Goong for every amount and step; serves 4 with 4 cups stock, as ours."
     },
     {
       "builderType": "soup",
@@ -4595,7 +4616,7 @@
         {
           "category": "NutSeed",
           "baseName": "Coconut milk",
-          "quantity": 480,
+          "quantity": 400,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": "Simmered",
@@ -4605,19 +4626,19 @@
           "notInDatabase": true,
           "name": "galangal",
           "contains": "none",
-          "quantity": 30,
+          "quantity": 25,
           "unit": "g",
           "cutPrep": "sliced thin",
-          "prepNote": null
+          "prepNote": "12 thin slices"
         },
         {
           "category": "Veg",
           "baseName": "Lemon grass (citronella)",
-          "quantity": 30,
+          "quantity": 20,
           "unit": "g",
           "cutPrep": "cut in lengths and bruised",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "1 stalk, lower part only, bruised and cut in lengths"
         },
         {
           "notInDatabase": true,
@@ -4626,43 +4647,43 @@
           "quantity": 5,
           "unit": "each",
           "cutPrep": "torn",
-          "prepNote": null
+          "prepNote": "bruised and torn"
         },
         {
           "category": "Meat",
           "baseName": "Chicken Thigh (with skin)",
-          "quantity": 300,
+          "quantity": 450,
           "unit": "g",
           "cutPrep": "boneless, sliced bite size",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "skin removed, boneless, cut in pieces (the database has only the skin-on thigh)"
         },
         {
           "category": "Mushroom",
           "baseName": "Oyster mushroom",
-          "quantity": 150,
+          "quantity": 160,
           "unit": "g",
           "cutPrep": "torn",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "torn"
         },
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 2.5,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Limes, juice, fresh",
           "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "half added with the coconut milk, the rest to taste"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 2.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "added off the heat"
         },
         {
           "category": "Sweets",
@@ -4671,16 +4692,16 @@
           "unit": "g",
           "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": "1 tsp at 4.2 g per tsp; in place of palm sugar, which the database does not hold"
+          "prepNote": "shaved (1 tsp; in place of palm sugar, which the database does not hold)"
         },
         {
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
-          "quantity": 3,
+          "quantity": 2,
           "unit": "g",
           "cutPrep": "bird chilies, bruised",
           "cookingMethod": null,
-          "prepNote": "3 bird's eye chilies"
+          "prepNote": "2 Thai chilies, lightly crushed (the source says 1 to 3)"
         },
         {
           "category": "Veg",
@@ -4689,14 +4710,24 @@
           "unit": "g",
           "cutPrep": "chopped",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "chopped, to serve (the source gives no amount)"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1/2 tsp"
         }
       ],
       "instructions": [
-        "Bring the coconut milk and stock to a gentle simmer (do not boil hard) with the galangal, lemongrass and lime leaves, and simmer 5 minutes.",
-        "Add the chicken and simmer 5 to 7 minutes, until cooked through (165°F, 74°C), then the mushrooms for 2 minutes.",
-        "Season with the fish sauce and palm sugar, then add the lime juice and chilies off the heat.",
-        "Top with cilantro and serve with jasmine rice."
+        "Bring the chicken stock to a boil, add the salt and the chicken, lower the heat and simmer gently about 15 minutes, until the chicken is tender and reaches 165°F (74°C).",
+        "Add the coconut milk, lemongrass, galangal, lime leaves, chilies, mushrooms, the sugar and about half the fish sauce, and stir gently.",
+        "Keep it at a gentle simmer, never a hard boil, for about 5 minutes so the aromatics flavor the broth and the mushrooms cook.",
+        "Taste, add the rest of the fish sauce only if it needs it, and turn off the heat.",
+        "Off the heat, stir in the lime juice, tasting as you go. Scatter the cilantro over and serve with jasmine rice. The lemongrass, galangal and lime leaves are not eaten."
       ],
       "nutritionHighlights": [
         {
@@ -4710,15 +4741,11 @@
       ],
       "citations": [
         {
-          "source": "Import Food, Tom Kha Gai",
-          "url": "https://importfood.com/recipes/soups/recipe/1273-thai-chicken-soup-with-coconut-milk-tom-kha-gai"
-        },
-        {
-          "source": "Thai Cookbook TV, Tom Kha Gai",
-          "url": "https://www.thaicookbook.tv/thai-recipes/soups/tom-kha-gai-chicken-and-galangal-soup-with-mushrooms"
+          "source": "Portail Asie, Tom Kha Gai",
+          "url": "https://portail-asie.com/en/recipes/tom-kha-gai/"
         }
       ],
-      "curationNote": "Both simmer chicken and mushrooms in coconut milk with galangal and season with lime off the heat."
+      "curationNote": "Portail Asie, Tom Kha Gai for every amount and step; serves 4, the same as ours: 500 ml unsalted chicken stock, 400 ml coconut milk, 1/2 tsp salt, 450 g skinless chicken thigh, 1 lemongrass stalk, 12 thin galangal slices, 5 makrut lime leaves, 1 to 3 Thai chilies, 160 g oyster mushrooms, 2 tbsp fish sauce, 1 tsp palm sugar, 2 1/2 tbsp lime juice, cilantro or scallions to serve. The Nam Soup Gai component (2 cups) stands for the 500 ml stock, made without salt."
     },
     {
       "builderType": "soup",
@@ -4929,25 +4956,16 @@
         {
           "category": "Legume",
           "baseName": "Soy sauce made from soy and wheat (shoyu)",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, pepper, white, ground",
-          "quantity": 0.5,
+          "quantity": 1.5,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "seasoning soy sauce"
         },
         {
-          "category": "PantryStaples",
-          "baseName": "Cornstarch",
-          "quantity": 1,
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4990,38 +5008,11 @@
           "prepNote": null
         },
         {
-          "category": "Mushroom",
-          "baseName": "Shiitake mushroom",
-          "quantity": 60,
-          "unit": "g",
-          "cutPrep": "sliced",
-          "cookingMethod": "Simmered",
-          "prepNote": null
-        },
-        {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1,
+          "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Onions, spring or scallions (includes tops and bulb)",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "sliced",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -5033,13 +5024,40 @@
           "cutPrep": "chopped",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": "whole peppercorns, pounded",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "pounded",
+          "cookingMethod": null,
+          "prepNote": "2 to 3 shallots"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "a pinch"
         }
       ],
       "instructions": [
-        "Mix the pork with the soy sauce, white pepper and cornstarch and leave 10 to 15 minutes.",
-        "Pound the garlic and coriander root together and simmer them in the stock for 5 minutes.",
-        "Drop in the pork in small balls and simmer 3 to 4 minutes, then add the cabbage and mushrooms for 3 minutes.",
-        "Slide in the tofu, season with the fish sauce and sugar and simmer 2 minutes more. Top with scallion, cilantro and fried shallots and serve with rice."
+        "Mix the pork with the soy sauce, ground black pepper and salt.",
+        "Pound the garlic, shallots, coriander root and peppercorns together and simmer them in the stock for 5 minutes.",
+        "Drop in the pork in small balls and simmer 3 to 4 minutes, then add the cabbage for 3 minutes.",
+        "Slide in the tofu, season with the fish sauce and simmer 2 minutes more. Top with cilantro and fried shallots and serve with rice."
       ],
       "nutritionHighlights": [
         {
@@ -5061,7 +5079,7 @@
           "url": "https://thai-awesome.com/en/recipe/Thai-Tofu-and-Pork-Soup--Gaeng-Jued-Tao-Hoo-Moo-Sub-"
         }
       ],
-      "curationNote": "World of Thai Food for the stock aromatics and amounts, Thai Awesome for the marinated pork and timings; soft silken tofu used rather than egg tofu."
+      "curationNote": "World of Thai Food, Thai Breakfast Soup with Egg Tofu and Pork Meatballs for every amount and step; serves 4, as ours; it lists ingredients only, so the steps are ours."
     },
     {
       "builderType": "soup",
@@ -5091,7 +5109,7 @@
         {
           "category": "NutSeed",
           "baseName": "Coconut milk",
-          "quantity": 480,
+          "quantity": 400,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": "Simmered",
@@ -5101,19 +5119,19 @@
           "notInDatabase": true,
           "name": "galangal",
           "contains": "none",
-          "quantity": 30,
+          "quantity": 25,
           "unit": "g",
           "cutPrep": "sliced thin",
-          "prepNote": null
+          "prepNote": "12 thin slices"
         },
         {
           "category": "Veg",
           "baseName": "Lemon grass (citronella)",
-          "quantity": 30,
+          "quantity": 20,
           "unit": "g",
           "cutPrep": "cut in lengths and bruised",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "1 stalk, lower part only, bruised and cut in lengths"
         },
         {
           "notInDatabase": true,
@@ -5122,7 +5140,7 @@
           "quantity": 5,
           "unit": "each",
           "cutPrep": "torn",
-          "prepNote": null
+          "prepNote": "bruised and torn"
         },
         {
           "category": "Veg",
@@ -5136,11 +5154,11 @@
         {
           "category": "Mushroom",
           "baseName": "Oyster mushroom",
-          "quantity": 150,
+          "quantity": 160,
           "unit": "g",
           "cutPrep": "torn",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "torn"
         },
         {
           "category": "Mushroom",
@@ -5149,7 +5167,7 @@
           "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "fresh, sliced"
         },
         {
           "category": "Legume",
@@ -5158,25 +5176,25 @@
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "in place of the fish sauce, one for one; half with the coconut milk, the rest to taste"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/2 tsp"
         },
         {
           "category": "Bev",
           "baseName": "Limes, juice, fresh",
-          "quantity": 2,
+          "quantity": 2.5,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "added off the heat"
         },
         {
           "category": "Sweets",
@@ -5185,16 +5203,16 @@
           "unit": "g",
           "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": "1 tsp at 4.2 g per tsp; in place of palm sugar, which the database does not hold"
+          "prepNote": "shaved (1 tsp; in place of palm sugar, which the database does not hold)"
         },
         {
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
-          "quantity": 3,
+          "quantity": 2,
           "unit": "g",
           "cutPrep": "bird chilies, bruised",
           "cookingMethod": null,
-          "prepNote": "3 bird's eye chilies"
+          "prepNote": "2 Thai chilies, lightly crushed (the source says 1 to 3)"
         },
         {
           "category": "Veg",
@@ -5203,14 +5221,15 @@
           "unit": "g",
           "cutPrep": "chopped",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "chopped, to serve (the source gives no amount)"
         }
       ],
       "instructions": [
-        "Bring the coconut milk and stock to a gentle simmer with the galangal, lemongrass and lime leaves and simmer 5 minutes.",
-        "Add all the mushrooms and simmer 4 to 5 minutes, until tender.",
-        "Season with the soy sauce, salt and palm sugar, then add the lime juice and chilies off the heat.",
-        "Top with cilantro and serve with jasmine rice."
+        "Bring the vegetable stock to a boil with the salt, then lower to a gentle simmer.",
+        "Add the coconut milk, lemongrass, galangal, lime leaves, chilies, all the mushrooms, the sugar and about half the soy sauce, and stir gently.",
+        "Keep it at a gentle simmer, never a hard boil, for about 5 minutes, until the mushrooms are tender.",
+        "Taste, add the rest of the soy sauce only if it needs it, and turn off the heat.",
+        "Off the heat, stir in the lime juice, tasting as you go. Scatter the cilantro over and serve with jasmine rice. The lemongrass, galangal and lime leaves are not eaten."
       ],
       "nutritionHighlights": [
         {
@@ -5224,19 +5243,11 @@
       ],
       "citations": [
         {
-          "source": "Import Food, Tom Kha Gai",
-          "url": "https://importfood.com/recipes/soups/recipe/1273-thai-chicken-soup-with-coconut-milk-tom-kha-gai"
-        },
-        {
-          "source": "Thai Cookbook TV, Tom Kha Gai",
-          "url": "https://www.thaicookbook.tv/thai-recipes/soups/tom-kha-gai-chicken-and-galangal-soup-with-mushrooms"
-        },
-        {
-          "source": "Thai Cookbook TV, Vegetarian Tom Yum",
-          "url": "https://www.thaicookbook.tv/thai-recipes/soups/vegetarian-tom-yum-spicy-and-sour-thai-soup"
+          "source": "Portail Asie, Tom Kha Gai",
+          "url": "https://portail-asie.com/en/recipes/tom-kha-gai/"
         }
       ],
-      "curationNote": "No stand alone tom kha hed recipe opened. Built from the tom kha gai recipes (Import Food notes a mushroom version) and the Thai Cookbook TV vegetarian tom yum, which seasons with soy and salt in place of fish sauce."
+      "curationNote": "Portail Asie, Tom Kha Gai, made with mushrooms in place of the chicken for every amount and step; serves 4. The page gives no vegetarian form; as before, the same base is used with soy sauce one for one in place of the fish sauce, vegetable stock in place of chicken stock, and the mushrooms (the page allows oyster, button, fresh shiitake or cremini) standing where the chicken was."
     },
     {
       "builderType": "soup",
@@ -5248,7 +5259,7 @@
       "name": "Poh Taek (Seafood Hot and Sour Soup)",
       "region": "Central",
       "servings": 4,
-      "flavorProfile": "Hot, sour and herbal, a clear tom yum style broth crowded with shrimp, squid, mussels and fish, with holy basil.",
+      "flavorProfile": "Hot, sour and herbal, a clear tom yum style broth crowded with shrimp, squid, mussels and fish, with sweet basil.",
       "healthBenefit": "Mixed seafood gives lean protein, iron and selenium in a broth with almost no fat, though salty.",
       "components": [
         {
@@ -5270,75 +5281,66 @@
           "unit": "g",
           "cutPrep": "2 stalks, bruised",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "2 stalks, cut in 1 1/2 to 2 inch lengths"
         },
         {
           "notInDatabase": true,
           "name": "galangal",
           "contains": "none",
-          "quantity": 15,
+          "quantity": 12,
           "unit": "g",
           "cutPrep": "sliced",
-          "prepNote": null
+          "prepNote": "6 slices"
         },
         {
           "notInDatabase": true,
           "name": "makrut lime leaves",
           "contains": "none",
-          "quantity": 6,
+          "quantity": 10,
           "unit": "each",
           "cutPrep": "torn",
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Shallot",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": "bruised",
-          "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "torn"
         },
         {
           "category": "Meat",
-          "baseName": "Snapper Fish",
-          "quantity": 150,
+          "baseName": "Bass Fish",
+          "quantity": 100,
           "unit": "g",
           "cutPrep": "cut in chunks",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "sea bass, skinned, in pieces"
         },
         {
           "category": "Meat",
           "baseName": "Squid Mollusks",
-          "quantity": 150,
+          "quantity": 100,
           "unit": "g",
           "cutPrep": "cut in rings",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "cut in 2 cm pieces"
         },
         {
           "category": "Meat",
           "baseName": "Mussel Mollusks",
-          "quantity": 150,
+          "quantity": 100,
           "unit": "g",
           "cutPrep": "in the shell, cleaned (weight of meat)",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "in shell, cleaned"
         },
         {
           "category": "Meat",
           "baseName": "Shrimp Crustaceans",
-          "quantity": 150,
+          "quantity": 100,
           "unit": "g",
           "cutPrep": "peeled",
           "cookingMethod": "Simmered",
-          "prepNote": null
+          "prepNote": "peeled and deveined, tails left on"
         },
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 2.5,
+          "quantity": 5,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -5347,7 +5349,7 @@
         {
           "category": "Bev",
           "baseName": "Limes, juice, fresh",
-          "quantity": 3,
+          "quantity": 5,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -5356,27 +5358,46 @@
         {
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
-          "quantity": 5,
+          "quantity": 6,
           "unit": "g",
           "cutPrep": "bird chilies, bruised",
           "cookingMethod": null,
-          "prepNote": "5 bird's eye chilies"
+          "prepNote": "6 green and red bird's eye chilies"
         },
         {
           "category": "Herbs",
           "baseName": "Fresh Basil",
-          "quantity": 15,
+          "quantity": 24,
           "unit": "g",
           "cutPrep": "leaves picked",
           "cookingMethod": null,
-          "prepNote": "in place of holy basil (kaphrao), which the database does not hold"
+          "prepNote": "1 cup sweet basil leaves, the leaf the source names"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.6,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "a pinch"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red, sun-dried",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2 dried red chilies, lightly fried and cut in 1/2 inch pieces, to garnish"
         }
       ],
       "instructions": [
-        "Boil the stock with the lemongrass, galangal, lime leaves and shallots for 5 minutes.",
-        "Add the fish and mussels and simmer 2 minutes, then the squid and shrimp for 1 to 2 minutes, until the mussels open and the shrimp turn pink. Discard any mussels that stay shut.",
-        "Turn off the heat, stir in the fish sauce, lime juice and chilies and add the holy basil.",
-        "Serve at once with jasmine rice."
+        "Bring the stock to a boil over medium heat with the salt. Add the lemongrass, galangal and lime leaves and cook until fragrant.",
+        "Add the fish, squid and mussels without stirring and cook until they change colour, then add the shrimp. Discard any mussels that stay shut.",
+        "Cook a few minutes more, until the shrimp turn pink, add the basil, swirl gently and turn off the heat.",
+        "Meanwhile, mix the lime juice, fresh chilies and fish sauce in a serving bowl.",
+        "Pour the seafood and broth into the serving bowl, mix from the bottom up, and scatter the fried dried chilies over. Serve with jasmine rice."
       ],
       "nutritionHighlights": [
         {
@@ -5394,15 +5415,11 @@
       ],
       "citations": [
         {
-          "source": "Import Food, Tom Yum Talay",
-          "url": "https://importfood.com/recipes/soups/recipe/1364-tom-yum-talay"
-        },
-        {
-          "source": "Thai Cookbook TV, Tom Yum Goong",
-          "url": "https://www.thaicookbook.tv/thai-recipes/soups/tom-yum-goong-spicy-sour-soup-with-prawns"
+          "source": "Family Cookbook Project, Thai Spicy Seafood (Po Taek) Soup",
+          "url": "https://www.familycookbookproject.com/recipe/4105006/thai-spicy-seafood-po-taek-soup.html"
         }
       ],
-      "curationNote": "Written mostly from descriptions: no poh taek recipe opened. Uses the tom yum talay method from Import Food with the holy basil that marks poh taek, as described in Thai sources."
+      "curationNote": "Family Cookbook Project, Thai Spicy Seafood (Po Taek) Soup for every amount and step; the page cites all-thailand-exp.com, which no longer opens. It uses 2 cups water or chicken stock, 50 g each of shrimp, sea bass, squid, mussels and crab (the last two optional), 5 lime leaves, 3 galangal slices, 1 lemongrass stalk, 2 1/2 tbsp fish sauce, 2 1/2 tbsp lime juice, 1/2 cup sweet basil, a pinch of salt, 3 bird's eye chilies and 1 fried dried chili. It gives no serving count and some fractions are garbled on the page; ours uses 4 cups of stock, so every amount is doubled."
     },
     {
       "builderType": "soup",
@@ -5443,18 +5460,18 @@
           "baseName": "Ground Pork (Raw)",
           "quantity": 115,
           "unit": "g",
-          "cutPrep": "mixed with a pinch of white pepper",
+          "cutPrep": "ground",
           "cookingMethod": "Simmered",
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 15,
+          "quantity": 8,
           "unit": "g",
           "cutPrep": "chopped",
           "cookingMethod": "Fried",
-          "prepNote": null
+          "prepNote": "2 cloves"
         },
         {
           "category": "Fats",
@@ -5484,31 +5501,13 @@
           "prepNote": null
         },
         {
-          "category": "Legume",
-          "baseName": "Soy sauce made from soy and wheat (shoyu)",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, pepper, white, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Veg",
           "baseName": "Onions, spring or scallions (includes tops and bulb)",
-          "quantity": 10,
+          "quantity": 30,
           "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 green onions"
         },
         {
           "category": "Veg",
@@ -5518,13 +5517,49 @@
           "cutPrep": "chopped",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 60,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": "about half of 7 to 8 shallots; the rest are the fried shallots"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
+          "quantity": 40,
+          "unit": "g",
+          "cutPrep": "cut in pieces, lifted out before serving",
+          "cookingMethod": null,
+          "prepNote": "2 stalks"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 45,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "3 tbsp"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, hot chili, red or green",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": "1 bird's eye chili"
         }
       ],
       "instructions": [
-        "Fry the garlic in the oil over medium low heat for 2 to 3 minutes, until golden, and set aside.",
-        "Bring the water to a boil, drop in the pork in small pieces and simmer 3 to 4 minutes.",
-        "Add the cooked rice and simmer 5 to 8 minutes, until the grains swell but stay whole. Season with the fish sauce, soy sauce and white pepper.",
-        "Ladle into bowls and top with the garlic oil, ginger, scallion, cilantro and fried shallots."
+        "Warm the oil in the soup pot and briefly fry the garlic and chopped shallots, then cook the pork until no pink remains.",
+        "Add the water and bring it to a boil, then add the lemongrass and most of the ginger and boil hard about 5 minutes.",
+        "Lift out the lemongrass, add the rice and stir in the green onion, cilantro, fish sauce and lime juice. Boil about 1 minute and turn off the heat.",
+        "Taste and adjust with fish sauce or lime, then serve topped with the fried shallots, the rest of the ginger, more green onion and cilantro, and the chili."
       ],
       "nutritionHighlights": [
         {
@@ -5546,7 +5581,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/soups/thai-rice-soup-khao-tom"
         }
       ],
-      "curationNote": "Both make khao tom from cooked rice in broth with garlic oil; pork is used as in Thai Cookbook TV rather than shrimp."
+      "curationNote": "Thai Cookbook TV, Thai Rice Soup for every amount and step; serves 2 to 4 with 4 cups cooked rice and 4 cups water, as ours."
     },
     {
       "builderType": "side",
@@ -5749,11 +5784,11 @@
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 15,
+          "quantity": 9,
           "unit": "g",
           "cutPrep": "chopped",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tbsp"
         },
         {
           "category": "Veg",
@@ -5819,35 +5854,17 @@
           "prepNote": null
         },
         {
-          "category": "Legume",
-          "baseName": "Soy sauce made from soy and wheat (shoyu)",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Herbs",
           "baseName": "Spices, pepper, white, ground",
+          "quantity": 0.125,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "a dash"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Sesamolja",
           "quantity": 0.25,
           "unit": "tsp",
           "cutPrep": null,
@@ -5856,10 +5873,10 @@
         }
       ],
       "instructions": [
-        "Heat a wok over high heat until it smokes lightly, about 400°F (205°C) at the surface, then add the oil. Fry the garlic 15 seconds.",
-        "Add the carrot and cauliflower and stir-fry 2 minutes, then the baby corn and mushrooms for 1 minute.",
-        "Add the snow peas, bok choy and stock, cover and cook 1 minute.",
-        "Season with the oyster sauce, soy sauce, fish sauce, sugar and pepper and toss 30 seconds. Serve with rice."
+        "Heat the oil in a wok over medium heat and fry the garlic until fragrant without letting it brown.",
+        "Raise the heat, add the carrot and cauliflower and stir-fry a minute, then add the corn, snow peas, mushrooms and the bok choy stems and stir-fry until they start to soften.",
+        "Add the bok choy leaves, the oyster sauce and the stock, stir, cover and cook 1 minute.",
+        "Uncover, sprinkle with the sesame oil and white pepper and serve with the rice."
       ],
       "nutritionHighlights": [
         {
@@ -5885,7 +5902,7 @@
           "url": "https://importfood.com/recipes/recipe/154-stir-fried-bok-choy"
         }
       ],
-      "curationNote": "Thai Cookbook TV for the order and timing of the vegetables, Import Food for the oyster sauce, stock and covered minute; the sweet and sour sauce is left out for the plain pad pak ruam."
+      "curationNote": "Import Food, Stir-Fried Bok Choy for every amount and step; serves 4 with 2 heads of bok choy; its seasonings are used for the mixed vegetables."
     },
     {
       "builderType": "side",
@@ -5899,7 +5916,7 @@
       "region": "Central",
       "servings": 4,
       "flavorProfile": "Dry, sweet and hot, pork and crunchy long beans fried in curry paste until it clings, with shredded lime leaf.",
-      "healthBenefit": "Long beans add fibre and vitamin C beside the pork, though the belly makes it rich.",
+      "healthBenefit": "Long beans add fibre and vitamin C beside the pork, though the belly and the frying oil make it rich.",
       "components": [
         {
           "recipeId": "curated_th_base_prik_gaeng_phed",
@@ -5916,11 +5933,11 @@
         {
           "category": "Fats",
           "baseName": "Rapsolja",
-          "quantity": 3,
-          "unit": "tbsp",
+          "quantity": 120,
+          "unit": "ml",
           "cutPrep": null,
           "cookingMethod": "Fried",
-          "prepNote": null
+          "prepNote": "1/4 cup doubled"
         },
         {
           "category": "Meat",
@@ -5943,11 +5960,11 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 60,
+          "quantity": 240,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/2 cup doubled"
         },
         {
           "category": "Sweets",
@@ -5965,7 +5982,7 @@
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source adds fish sauce to taste; 1 tbsp is a usual amount"
         },
         {
           "notInDatabase": true,
@@ -6003,7 +6020,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/main-dishes/spicy-pork-stir-fry"
         }
       ],
-      "curationNote": "Import Food method (paste fried in oil 4 to 5 minutes, water added gradually, beans last, lime leaf on top). Prik khing paste is a red curry paste fried dry, so the red paste base is used."
+      "curationNote": "Import Food, Pork Prik Khing for every amount and step; serves 4 with 1 cup pork; ours has twice the pork and beans, so amounts are doubled."
     },
     {
       "builderType": "side",
@@ -6048,11 +6065,11 @@
         {
           "category": "PantryStaples",
           "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
-          "quantity": 2,
+          "quantity": 4,
           "unit": "tbsp",
           "cutPrep": "to coat the chicken",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/4 cup"
         },
         {
           "category": "Fats",
@@ -6066,11 +6083,11 @@
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 4,
+          "quantity": 2,
           "unit": "g",
           "cutPrep": "long dried chilies, cut in 2 cm pieces",
           "cookingMethod": "Fried",
-          "prepNote": "8 dried chilies"
+          "prepNote": "3 to 4 dried chilies"
         },
         {
           "category": "NutSeed",
@@ -6093,11 +6110,11 @@
         {
           "category": "Veg",
           "baseName": "Onion",
-          "quantity": 100,
+          "quantity": 50,
           "unit": "g",
           "cutPrep": "cut in chunks",
           "cookingMethod": "Sauteed",
-          "prepNote": null
+          "prepNote": "1/2 small onion"
         },
         {
           "category": "Veg",
@@ -6106,7 +6123,7 @@
           "unit": "g",
           "cutPrep": "cut in chunks",
           "cookingMethod": "Sauteed",
-          "prepNote": null
+          "prepNote": "in place of 1 or 2 wax peppers, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -6120,11 +6137,11 @@
         {
           "category": "Legume",
           "baseName": "Soy sauce made from soy and wheat (shoyu)",
-          "quantity": 1,
-          "unit": "tbsp",
+          "quantity": 0.5,
+          "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "light soy sauce"
         },
         {
           "category": "Sweets",
@@ -6138,27 +6155,47 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 3,
-          "unit": "tbsp",
+          "quantity": 60,
+          "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/4 cup"
         },
         {
           "category": "Veg",
           "baseName": "Onions, spring or scallions (includes tops and bulb)",
-          "quantity": 30,
+          "quantity": 40,
           "unit": "g",
           "cutPrep": "cut in 4 cm lengths",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 to 3 green onions"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, white",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "ground"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 70,
+          "unit": "g",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": "5 long chilies"
         }
       ],
       "instructions": [
-        "Toss the chicken in the flour and fry in oil at 350°F (175°C) for 4 to 5 minutes, until golden and cooked through. Drain.",
-        "Fry the cashews 1 to 2 minutes until golden and the chilies 15 to 30 seconds until they darken, then lift out.",
-        "Pour off all but 2 tablespoons of oil, fry the garlic 15 seconds, then the onion and pepper for 1 minute.",
-        "Add the chili jam, sauces, sugar and water, then the chicken, cashews, chilies and scallion and toss 30 to 60 seconds. Serve with rice."
+        "Stir the white pepper into the flour and toss the chicken in it until lightly coated.",
+        "Heat the oil until just warm and fry the cashews over low heat about 5 minutes, until lightly browned, then drain. Fry the dried chilies a few seconds until they brighten and drain.",
+        "Fry the chicken on low heat about 5 minutes, until cooked through (165°F, 74°C), and drain.",
+        "Pour off all but about 1 tablespoon of oil, fry the garlic 30 seconds, then the onion 1 minute.",
+        "Add the oyster sauce, both soy sauces and the sugar with a little of the water to make a thick sauce, then the chicken and the rest of the water over high heat for 1 minute.",
+        "Add the cashews for 2 minutes, then the fresh chilies, peppers and green onions for 30 seconds. Top with the fried dried chilies and serve with rice."
       ],
       "nutritionHighlights": [
         {
@@ -6180,7 +6217,7 @@
           "url": "https://importfood.com/recipes/recipe/114-cashew-chicken"
         }
       ],
-      "curationNote": "Both fry coated chicken, cashews and whole dried chilies, then toss them in a light sauce; the Thai Cookbook TV chili jam sauce is used rather than the ketchup and sriracha sauce in Import Food."
+      "curationNote": "Thai Cookbook TV, Cashew Chicken for every amount and step; serves 2 to 4 with 450 g chicken, as ours."
     },
     {
       "builderType": "side",
@@ -6461,15 +6498,6 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Pepper, black, ground",
-          "quantity": 6,
-          "unit": "g",
-          "cutPrep": "on the stem",
-          "cookingMethod": null,
-          "prepNote": "in place of fresh green peppercorns, which the database does not hold; fresh green peppercorns counted as 0.3 of their weight in ground black pepper"
-        },
-        {
           "notInDatabase": true,
           "name": "makrut lime leaves",
           "contains": "none",
@@ -6522,6 +6550,15 @@
           "cutPrep": "leaves picked",
           "cookingMethod": null,
           "prepNote": "in place of holy basil (kaphrao), which the database does not hold"
+        },
+        {
+          "notInDatabase": true,
+          "name": "fresh green peppercorns",
+          "contains": "none",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "on the stem",
+          "prepNote": "4 to 5 strands at about 3 g each; neither database holds fresh green peppercorns"
         }
       ],
       "instructions": [
@@ -6550,7 +6587,7 @@
           "url": "https://importfood.com/recipes/recipe/1347-chilli-garlic-seafood-stir-fry"
         }
       ],
-      "curationNote": "Pots and Pans Thailand amounts followed (turkey berries left out); it gives no times, so timings follow the Import Food seafood stir fry."
+      "curationNote": "Pots and Pans Thailand, Stir-Fried Spicy Seafood (Pad Cha) for every amount and step; servings not stated; seafood counts, sauces, sugar, oil and stock match ours."
     },
     {
       "builderType": "side",
@@ -6563,8 +6600,8 @@
       "name": "Gai Pad Khing (Ginger Chicken)",
       "region": "Central",
       "servings": 4,
-      "flavorProfile": "Warm, savoury and lightly sweet, chicken with lots of fresh ginger, mushrooms and crunchy cloud ear.",
-      "healthBenefit": "Lean chicken breast gives protein and the mushrooms add B vitamins, with salt from the sauces.",
+      "flavorProfile": "Warm, savoury and lightly sweet, chicken with lots of fresh ginger, green onion and crunchy cloud ear.",
+      "healthBenefit": "Lean chicken breast gives protein, with salt from the oyster and soy sauces.",
       "components": [
         {
           "recipeId": "curated_th_base_nam_soup_gai",
@@ -6586,8 +6623,8 @@
         {
           "category": "Fats",
           "baseName": "Rapsolja",
-          "quantity": 3,
-          "unit": "tbsp",
+          "quantity": 4,
+          "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": "Fried",
           "prepNote": null
@@ -6595,11 +6632,11 @@
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 18,
+          "quantity": 27,
           "unit": "g",
           "cutPrep": "chopped",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "4 to 5 large cloves"
         },
         {
           "category": "Meat",
@@ -6613,52 +6650,34 @@
         {
           "category": "Herbs",
           "baseName": "Ginger root",
-          "quantity": 60,
+          "quantity": 130,
           "unit": "g",
           "cutPrep": "young ginger, cut in matchsticks",
           "cookingMethod": "Sauteed",
-          "prepNote": null
+          "prepNote": "about 1 1/3 cups"
         },
         {
           "category": "Mushroom",
           "baseName": "Mushrooms, tree ears, Cloud ear fungus, dried",
-          "quantity": 10,
+          "quantity": 15,
           "unit": "g",
           "cutPrep": "dried weight, soaked 20 to 30 minutes and sliced",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Mushroom",
-          "baseName": "Shiitake mushroom",
-          "quantity": 60,
-          "unit": "g",
-          "cutPrep": "sliced",
-          "cookingMethod": "Sauteed",
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Onion",
-          "quantity": 75,
-          "unit": "g",
-          "cutPrep": "sliced",
-          "cookingMethod": "Sauteed",
-          "prepNote": null
+          "prepNote": "about 130 g once soaked"
         },
         {
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
-          "quantity": 28,
+          "quantity": 37,
           "unit": "g",
           "cutPrep": "long red chilies, sliced",
           "cookingMethod": null,
-          "prepNote": "2 long chilies"
+          "prepNote": "2 to 3 long chilies"
         },
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, oyster sauce",
-          "quantity": 2,
+          "quantity": 2.67,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -6667,45 +6686,61 @@
         {
           "category": "Legume",
           "baseName": "Soy sauce made from soy and wheat (shoyu)",
-          "quantity": 1,
-          "unit": "tbsp",
+          "quantity": 2.67,
+          "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "light soy sauce"
         },
         {
           "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 0.5,
+          "baseName": "Piloncillo / Unrefined Panela",
+          "quantity": 5.6,
+          "unit": "g",
+          "cutPrep": "shaved",
+          "cookingMethod": null,
+          "prepNote": "1 1/3 tsp at 4.2 g per tsp; in place of palm sugar, which the database does not hold"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": "half cut in 2 cm lengths, half left whole",
+          "cookingMethod": null,
+          "prepNote": "5 green onions"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.67,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
         {
-          "category": "Veg",
-          "baseName": "Onions, spring or scallions (includes tops and bulb)",
-          "quantity": 20,
-          "unit": "g",
-          "cutPrep": "cut in 4 cm lengths",
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 40,
+          "unit": "ml",
+          "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Soak the cloud ear in warm water for 20 to 30 minutes, drain and slice. Have everything measured before you start.",
-        "Heat a wok over high heat until it smokes lightly, about 400°F (205°C) at the surface, then add the oil. Fry the garlic 15 seconds, then add the chicken and stir-fry 2 to 3 minutes.",
-        "Add the ginger, onion, both mushrooms and chilies and stir-fry 1 to 2 minutes.",
-        "Add the sauces, sugar and stock and toss 1 to 2 minutes, until the chicken is cooked (165°F, 74°C), then the scallion. Serve with rice."
+        "Soak the cloud ear in warm water for 20 to 30 minutes, trim off the hard base and tear it into pieces. Have everything measured before you start.",
+        "Warm the oil in a wok over low heat and fry the garlic gently for about 30 seconds.",
+        "Turn the heat to medium high, add the chicken and keep it moving for about 2 minutes.",
+        "Add the oyster sauce, soy sauce, sugar and black pepper, then the water, and cook about 2 minutes until the sauce thickens and the chicken is cooked (165°F, 74°C).",
+        "Stir in the cloud ear for about 2 minutes, then the ginger, cut green onions and chilies for about 1 minute.",
+        "Serve at once with rice, with the whole green onions alongside."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Protein",
           "note": "From the chicken breast."
-        },
-        {
-          "nutrient": "B vitamins",
-          "note": "From the shiitake."
         }
       ],
       "citations": [
@@ -6718,7 +6753,7 @@
           "url": "https://importfood.com/recipes/recipe/134-ginger-chicken"
         }
       ],
-      "curationNote": "Both use plenty of young ginger, mushrooms, oyster and dark soy with stock; cloud ear from Thai Cookbook TV, shiitake from Import Food."
+      "curationNote": "Thai Cookbook TV, Ginger Chicken for every amount and step; serves 2 to 4 with about 300 g chicken; scaled by 1.33 to our 400 g."
     },
     {
       "builderType": "side",
@@ -6746,70 +6781,34 @@
           "baseName": "Pork Fillet / Tenderloin (Raw)",
           "quantity": 250,
           "unit": "g",
-          "cutPrep": "sliced 6 mm thick and pounded",
+          "cutPrep": "thinly sliced",
           "cookingMethod": "Fried",
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 45,
+          "quantity": 12,
           "unit": "g",
-          "cutPrep": "half pounded to a paste, half chopped",
+          "cutPrep": "minced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 cloves"
         },
         {
           "category": "Veg",
           "baseName": "Coriander (cilantro) leaves",
-          "quantity": 5,
+          "quantity": 9,
           "unit": "g",
-          "cutPrep": "scraped and chopped",
+          "cutPrep": "finely chopped",
           "cookingMethod": null,
-          "prepNote": "1 tbsp at 5 g per tbsp; in place of coriander root, which the database does not hold; leaves count for the root"
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, pepper, white, ground",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, coriander seed",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": "ground",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "PantryStaples",
-          "baseName": "Cornstarch",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 each at 3 g per each; in place of coriander root, which the database does not hold; leaves count for the root"
         },
         {
           "category": "Legume",
           "baseName": "Soy sauce made from soy and wheat (shoyu)",
-          "quantity": 1,
+          "quantity": 0.5,
           "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
+          "cutPrep": "Thai light soy sauce",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -6825,11 +6824,11 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/2 tbsp at 12.6 g per tbsp"
         },
         {
           "category": "Fats",
@@ -6857,13 +6856,40 @@
           "cutPrep": "leaves",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the source says to taste; 1/2 tsp is a usual amount"
+        },
+        {
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 16,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tbsp at 16 g per tbsp; in place of Thai dark soy sauce, which the database does not hold"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "chopped and fried crisp, to top",
+          "cookingMethod": "Fried",
+          "prepNote": "the source tops with fried garlic without an amount; 15 g is a usual amount"
         }
       ],
       "instructions": [
-        "Pound half the garlic with the coriander root, white pepper and ground coriander into a paste and mix with the pork, cornstarch and sauces. Refrigerate 30 minutes or more.",
-        "Fry the pork in oil over medium heat, about 325°F (160°C), for 2 to 3 minutes a side, until golden. Lift out.",
-        "Fry the chopped garlic in the same oil for 1 to 2 minutes, lifting it out the moment it turns light gold, and drain.",
-        "Serve the pork over rice topped with the fried garlic, with cucumber and cilantro."
+        "Heat the oil in a wok over medium high heat and stir-fry the minced garlic, coriander and black pepper until fragrant and just golden.",
+        "Add the pork and stir-fry until nearly cooked through.",
+        "Add the oyster sauce, both soy sauces and the sugar and keep stir-frying until the pork is cooked and coated.",
+        "Serve over the rice, topped with the crisp fried garlic, with the cucumber and cilantro on the side."
       ],
       "nutritionHighlights": [
         {
@@ -6877,6 +6903,10 @@
       ],
       "citations": [
         {
+          "source": "Hungry in Thailand: Thai Garlic Pepper Pork (Moo Gratiem)",
+          "url": "https://hungryinthailand.com/garlic-pepper-pork/"
+        },
+        {
           "source": "Thai Cookbook TV, Garlic Pork over Rice",
           "url": "https://www.thaicookbook.tv/thai-recipes/one-dish-meals/garlic-pork-over-rice"
         },
@@ -6885,7 +6915,7 @@
           "url": "https://importfood.com/recipes/recipe/125-moo-tod-gratiem"
         }
       ],
-      "curationNote": "Both marinate pork in a pounded garlic, coriander and white pepper paste, fry it and top with crisp fried garlic."
+      "curationNote": "Hungry in Thailand, Thai Garlic Pepper Pork (Moo Gratiem) for every amount and step; 8 oz pork, close to our 250 g; seasonings taken at the source amounts."
     },
     {
       "builderType": "side",
@@ -7105,7 +7135,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 10,
           "unit": "g",
           "cutPrep": "Thai sweet basil leaves",
@@ -7134,7 +7164,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/one-dish-meals/pad-prik-gaeng-moo-grob"
         }
       ],
-      "curationNote": "Only one recipe opened (Thai Cookbook TV), followed closely."
+      "curationNote": "Thai Cookbook TV, Pad Prik Gaeng Moo Grob for every amount and step; followed closely."
     }
   ]
 }

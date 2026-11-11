@@ -507,18 +507,15 @@ const FERMENTATION_SUBTYPE_CONFIG: Record<FermentationSubtypeKey, { allowedCateg
   somethingElseFood: { allowedCategories: FERMENTATION_BUILDER_CATEGORIES },
 };
 
-// Which of this session's own 45 curated fermentation recipes (plus the 4
-// that predate them) belongs to each of the 10 leaf subtypes above --
-// used by the "Pick a Premade Recipe" menu below. A real, individually
-// assigned mapping, not inferred from ingredient category at runtime:
-// two recipes named "Tonic" (Fermented Garlic Honey Tonic, Rosemary
-// Cheong) are genuinely NOT drinks by their own recipe text ("taken by
-// the spoonful," "meant to be diluted... not drunk straight"), so a
-// category-based guess would have misclassified both. somethingElseDrink/
-// somethingElseFood deliberately have no entries here -- there's no real
-// "which of the 45 belongs to a catch-all" answer, so that menu shows
-// every curated fermentation recipe unfiltered instead (see
-// curatedRecipesForSubtype below).
+// Which curated fermentation recipe belongs to each of the 10 leaf subtypes
+// above, used by the "Pick a Premade Recipe" menu below. Assigned one by
+// one rather than inferred from ingredient category at runtime: Fermented
+// Garlic Honey and Lemon Cheong are taken by the spoonful, not drunk, so a
+// category-based guess would misclassify both. somethingElseDrink and
+// somethingElseFood have no entries here; no recipe belongs to a catch-all,
+// so that menu shows every curated fermentation recipe unfiltered instead
+// (see curatedRecipesForSubtype below). Pozol was retired for the tejuino
+// the Mexican recipes already hold (2026-11-10 recipe audit).
 const CURATED_RECIPE_IDS_BY_SUBTYPE: Partial<Record<FermentationSubtypeKey, string[]>> = {
   fruitHerbalTonics: [
     'curated_ferment_tonic_tart_cherry_ginger_turmeric',
@@ -541,7 +538,7 @@ const CURATED_RECIPE_IDS_BY_SUBTYPE: Partial<Record<FermentationSubtypeKey, stri
   vegetableRootFerments: [
     'curated_ferment_beet_kvass',
     'curated_ferment_kanji',
-    'curated_ferment_mauby_burdock_tonic',
+    'curated_ferment_mabi',
     'curated_ferment_burdock_dandelion_ale',
   ],
   kombuchaTeaGrainDrinks: [
@@ -555,13 +552,13 @@ const CURATED_RECIPE_IDS_BY_SUBTYPE: Partial<Record<FermentationSubtypeKey, stri
     'curated_ferment_rejuvelac',
     'curated_ferment_rye_style_kvass_quinoa',
     'curated_ferment_chicha',
-    'curated_ferment_pozol',
+    'curated_mx_tejuino',
+    'curated_ferment_maple_kombucha',
   ],
   waterCoconutKefir: [
     'curated_ferment_water_kefir',
     'curated_ferment_coconut_kefir',
     'curated_ferment_coconut_palm_wine_style',
-    'curated_ferment_maple_pulque_style',
   ],
   milkKefirCulturedDairyDrinks: [
     'curated_ferment_milk_kefir',
@@ -572,7 +569,7 @@ const CURATED_RECIPE_IDS_BY_SUBTYPE: Partial<Record<FermentationSubtypeKey, stri
   ],
   fermentedVegetables: ['curated_ferment_sauerkraut'],
   yogurt: ['curated_ferment_plain_yogurt', 'curated_ferment_probiotic_yogurt'],
-  syrupsSpoonableTonics: ['curated_ferment_garlic_honey_tonic', 'curated_ferment_rosemary_cheong'],
+  syrupsSpoonableTonics: ['curated_ferment_garlic_honey_tonic', 'curated_ferment_lemon_cheong'],
 };
 
 // 2026-08-27 -- one shared, catalog-wide fact ("can these be fermented

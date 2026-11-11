@@ -3,10 +3,10 @@
     "id": "curated_snack_greek_yogurt_olive_oil_pistachio_bowl",
     "builderType": "snack",
     "name": "Greek Yogurt with Olive Oil, Maple Syrup & Pistachio",
-    "flavorProfile": "Plain Greek yogurt drizzled with real olive oil and maple syrup, topped with pistachio, an authentic Mediterranean pairing.",
-    "healthBenefit": "Greek yogurt, olive oil, and pistachio all check safe for Hashimoto's, olive oil itself carries the same real Omega-3-vs-6 flag every Mediterranean recipe in this app shares.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "flavorProfile": "Plain Greek yogurt drizzled with olive oil and maple syrup, topped with pistachio, a Mediterranean pairing.",
+    "healthBenefit": "Greek yogurt, olive oil, and pistachio all check safe for Hashimoto's, olive oil itself carries the same Omega-3-vs-6 flag every Mediterranean recipe in this app shares.",
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -22,7 +22,7 @@
         "category": "Fats",
         "baseName": "Olive Oil (Extra Virgin)",
         "quantity": 1,
-        "unit": "tbsp",
+        "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
@@ -31,7 +31,7 @@
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
         "quantity": 1,
-        "unit": "tbsp",
+        "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
@@ -55,10 +55,10 @@
     "id": "curated_snack_mediterranean_egg_tomato_zucchini_skillet",
     "builderType": "snack",
     "name": "Mediterranean Egg, Tomato & Zucchini Skillet",
-    "flavorProfile": "Eggs cooked in real olive oil with tomato and zucchini, a real savory Mediterranean breakfast.",
+    "flavorProfile": "Eggs cooked in olive oil with tomato and zucchini, a savory Mediterranean breakfast.",
     "healthBenefit": "Egg, tomato, and zucchini all check safe for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -100,17 +100,44 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 1.5,
+        "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Veg",
+        "baseName": "Garlic",
+        "quantity": 3,
+        "unit": "g",
+        "cutPrep": "minced",
+        "cookingMethod": null,
+        "prepNote": "1 small clove"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Pepper, black, ground",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Oregano",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "dried"
       }
     ],
     "instructions": [
-      "Heat the olive oil in a pan over medium heat and add the tomato and zucchini.",
+      "Heat the olive oil in a pan over medium heat and cook the garlic for 30 seconds, until fragrant. Then add the tomato and zucchini.",
       "Saute for 4-5 minutes, until softened.",
-      "Crack the eggs into the pan and cook to your liking, seasoning with the salt."
+      "Crack the eggs into the pan and cook to your liking, seasoning with the salt, black pepper and oregano."
     ]
   },
   {
@@ -119,8 +146,8 @@
     "name": "Mediterranean Feta, Tomato & Egg Scramble",
     "flavorProfile": "Scrambled eggs with feta and tomato, cooked in real olive oil.",
     "healthBenefit": "Egg, feta, and tomato all check safe for Hashimoto's, feta itself checks completely clean.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -162,17 +189,44 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 1.5,
+        "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Veg",
+        "baseName": "Garlic",
+        "quantity": 3,
+        "unit": "g",
+        "cutPrep": "minced",
+        "cookingMethod": null,
+        "prepNote": "1 small clove"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Pepper, black, ground",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Oregano",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "dried"
       }
     ],
     "instructions": [
-      "Heat the olive oil in a pan over medium heat.",
+      "Heat the olive oil in a pan over medium heat and cook the garlic for 30 seconds, until fragrant.",
       "Add the beaten eggs and diced tomato, and scramble gently.",
-      "Fold in the crumbled feta just before the eggs finish setting, and season with the salt."
+      "Fold in the crumbled feta just before the eggs finish setting, and season with the salt, black pepper and oregano."
     ]
   },
   {
@@ -181,8 +235,8 @@
     "name": "Greek Yogurt with Berries & Olive Oil",
     "flavorProfile": "Plain Greek yogurt with blueberry and strawberry, finished with olive oil and maple syrup.",
     "healthBenefit": "Greek yogurt, blueberry, and strawberry all check safe for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -225,7 +279,7 @@
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
         "quantity": 1,
-        "unit": "tbsp",
+        "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
@@ -242,8 +296,8 @@
     "name": "Mediterranean Tomato, Pepper & Egg Skillet",
     "flavorProfile": "Eggs cooked into a real tomato and red bell pepper skillet with olive oil, a Mediterranean-style shakshuka.",
     "healthBenefit": "Egg, tomato, and red bell pepper all check safe for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -285,18 +339,45 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 1.5,
+        "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Veg",
+        "baseName": "Garlic",
+        "quantity": 3,
+        "unit": "g",
+        "cutPrep": "minced",
+        "cookingMethod": null,
+        "prepNote": "1 small clove"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Pepper, black, ground",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Oregano",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "dried"
       }
     ],
     "instructions": [
-      "Heat the olive oil in a pan over medium heat and add the tomato and red bell pepper.",
-      "Simmer for 8-10 minutes, until the tomato breaks down into a real sauce.",
+      "Heat the olive oil in a pan over medium heat and cook the garlic for 30 seconds, until fragrant. Then add the tomato and red bell pepper.",
+      "Simmer for 8-10 minutes, until the tomato breaks down into a sauce.",
       "Make two wells in the sauce, crack in the eggs, cover, and cook for 4-5 minutes, until the whites set.",
-      "Season with the salt."
+      "Season with the salt, black pepper and oregano."
     ]
   },
   {
@@ -305,8 +386,8 @@
     "name": "Greek Yogurt with Citrus & Pistachio",
     "flavorProfile": "Plain Greek yogurt with orange and grapefruit segments, olive oil, and pistachio.",
     "healthBenefit": "Greek yogurt, orange, grapefruit, and pistachio all check safe for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -358,7 +439,7 @@
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
         "quantity": 1,
-        "unit": "tbsp",
+        "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
@@ -373,10 +454,10 @@
     "id": "curated_snack_mediterranean_zucchini_feta_egg_skillet",
     "builderType": "snack",
     "name": "Mediterranean Zucchini, Feta & Egg Skillet",
-    "flavorProfile": "Eggs cooked with zucchini and feta in real olive oil.",
+    "flavorProfile": "Eggs cooked with zucchini and feta in olive oil.",
     "healthBenefit": "Egg, zucchini, and feta all check safe for Hashimoto's, feta itself checks completely clean.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -418,17 +499,44 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 1.5,
+        "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Veg",
+        "baseName": "Garlic",
+        "quantity": 3,
+        "unit": "g",
+        "cutPrep": "minced",
+        "cookingMethod": null,
+        "prepNote": "1 small clove"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Pepper, black, ground",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Oregano",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "dried"
       }
     ],
     "instructions": [
-      "Heat the olive oil in a pan over medium heat and saute the zucchini for 4-5 minutes, until softened.",
+      "Heat the olive oil in a pan over medium heat and cook the garlic for 30 seconds, until fragrant. Then saute the zucchini for 4-5 minutes, until softened.",
       "Crack in the eggs and cook to your liking.",
-      "Top with the crumbled feta and season with the salt."
+      "Top with the crumbled feta and season with the salt, black pepper and oregano."
     ]
   },
   {
@@ -437,8 +545,8 @@
     "name": "Greek Yogurt with Banana & Pistachio",
     "flavorProfile": "Plain Greek yogurt with sliced banana, olive oil, pistachio, and maple syrup.",
     "healthBenefit": "Greek yogurt, banana, and pistachio all check safe for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -481,7 +589,7 @@
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
         "quantity": 1,
-        "unit": "tbsp",
+        "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
@@ -498,8 +606,8 @@
     "name": "Mediterranean Fennel, Tomato & Egg Skillet",
     "flavorProfile": "Eggs cooked with fennel and tomato in real olive oil.",
     "healthBenefit": "Egg, fennel, and tomato all check safe for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -541,16 +649,43 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 1.5,
+        "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Veg",
+        "baseName": "Garlic",
+        "quantity": 3,
+        "unit": "g",
+        "cutPrep": "minced",
+        "cookingMethod": null,
+        "prepNote": "1 small clove"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Pepper, black, ground",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Oregano",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "dried"
       }
     ],
     "instructions": [
-      "Heat the olive oil in a pan over medium heat and saute the fennel and tomato for 5-6 minutes, until softened.",
-      "Crack in the eggs and cook to your liking, seasoning with the salt."
+      "Heat the olive oil in a pan over medium heat and cook the garlic for 30 seconds, until fragrant. Then saute the fennel and tomato for 5-6 minutes, until softened.",
+      "Crack in the eggs and cook to your liking, seasoning with the salt, black pepper and oregano."
     ]
   },
   {
@@ -559,8 +694,8 @@
     "name": "Greek Yogurt with Apple, Cinnamon & Olive Oil",
     "flavorProfile": "Plain Greek yogurt with diced apple, cinnamon, olive oil, and maple syrup.",
     "healthBenefit": "Greek yogurt and apple both check safe for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -584,11 +719,11 @@
       {
         "category": "Herbs",
         "baseName": "Spices, cinnamon, ground",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 0.4,
+        "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "a pinch"
       },
       {
         "category": "Fats",
@@ -603,7 +738,7 @@
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
         "quantity": 1,
-        "unit": "tbsp",
+        "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
@@ -618,10 +753,10 @@
     "id": "curated_snack_mediterranean_leek_tomato_egg_skillet",
     "builderType": "snack",
     "name": "Mediterranean Leek, Tomato & Egg Skillet",
-    "flavorProfile": "Eggs cooked with leek and tomato in real olive oil.",
+    "flavorProfile": "Eggs cooked with leek and tomato in olive oil.",
     "healthBenefit": "Egg, leek, and tomato all check safe for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -663,16 +798,43 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 1.5,
+        "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Veg",
+        "baseName": "Garlic",
+        "quantity": 3,
+        "unit": "g",
+        "cutPrep": "minced",
+        "cookingMethod": null,
+        "prepNote": "1 small clove"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Pepper, black, ground",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Oregano",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "dried"
       }
     ],
     "instructions": [
-      "Heat the olive oil in a pan over medium heat and saute the leek and tomato for 5-6 minutes, until softened.",
-      "Crack in the eggs and cook to your liking, seasoning with the salt."
+      "Heat the olive oil in a pan over medium heat and cook the garlic for 30 seconds, until fragrant. Then saute the leek and tomato for 5-6 minutes, until softened.",
+      "Crack in the eggs and cook to your liking, seasoning with the salt, black pepper and oregano."
     ]
   },
   {
@@ -681,8 +843,8 @@
     "name": "Greek Yogurt with Cantaloupe & Pistachio",
     "flavorProfile": "Plain Greek yogurt with diced cantaloupe, olive oil, and pistachio.",
     "healthBenefit": "Greek yogurt, cantaloupe, and pistachio all check safe for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -720,11 +882,20 @@
         "cutPrep": "chopped",
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Sweets",
+        "baseName": "Standard Honey (Blossom Honey)",
+        "quantity": 7,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "about 1 teaspoon"
       }
     ],
     "instructions": [
       "Spoon the Greek yogurt into a bowl and top with the diced cantaloupe.",
-      "Finish with a drizzle of olive oil and the chopped pistachio."
+      "Finish with a drizzle of olive oil and honey, and the chopped pistachio."
     ]
   },
   {
@@ -733,8 +904,8 @@
     "name": "Mediterranean Pepper, Feta & Egg Skillet",
     "flavorProfile": "Eggs cooked with red bell pepper and feta in real olive oil.",
     "healthBenefit": "Egg, red bell pepper, and feta all check safe for Hashimoto's, feta itself checks completely clean.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -776,17 +947,44 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 1.5,
+        "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Veg",
+        "baseName": "Garlic",
+        "quantity": 3,
+        "unit": "g",
+        "cutPrep": "minced",
+        "cookingMethod": null,
+        "prepNote": "1 small clove"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Pepper, black, ground",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Oregano",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "dried"
       }
     ],
     "instructions": [
-      "Heat the olive oil in a pan over medium heat and saute the red bell pepper for 4-5 minutes, until softened.",
+      "Heat the olive oil in a pan over medium heat and cook the garlic for 30 seconds, until fragrant. Then saute the red bell pepper for 4-5 minutes, until softened.",
       "Crack in the eggs and cook to your liking.",
-      "Top with the crumbled feta and season with the salt."
+      "Top with the crumbled feta and season with the salt, black pepper and oregano."
     ]
   },
   {
@@ -795,8 +993,8 @@
     "name": "Greek Yogurt with Orange, Banana & Olive Oil",
     "flavorProfile": "Plain Greek yogurt with orange and banana, olive oil, and maple syrup.",
     "healthBenefit": "Greek yogurt, orange, and banana all check safe for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -839,7 +1037,7 @@
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
         "quantity": 1,
-        "unit": "tbsp",
+        "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
@@ -856,8 +1054,8 @@
     "name": "Mediterranean Carrot, Zucchini & Egg Skillet",
     "flavorProfile": "Eggs cooked with carrot and zucchini in real olive oil, finished with cilantro.",
     "healthBenefit": "Egg, carrot, and zucchini all check safe for Hashimoto's.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -908,17 +1106,44 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 1.5,
+        "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Veg",
+        "baseName": "Garlic",
+        "quantity": 3,
+        "unit": "g",
+        "cutPrep": "minced",
+        "cookingMethod": null,
+        "prepNote": "1 small clove"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Pepper, black, ground",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Oregano",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "dried"
       }
     ],
     "instructions": [
-      "Heat the olive oil in a pan over medium heat and saute the carrot and zucchini for 5-6 minutes, until softened.",
+      "Heat the olive oil in a pan over medium heat and cook the garlic for 30 seconds, until fragrant. Then saute the carrot and zucchini for 5-6 minutes, until softened.",
       "Crack in the eggs and cook to your liking.",
-      "Season with the salt and finish with the fresh cilantro."
+      "Season with the salt, black pepper and oregano and finish with the fresh cilantro."
     ]
   }
 ]

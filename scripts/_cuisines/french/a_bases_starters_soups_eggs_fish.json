@@ -80,9 +80,9 @@
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 10,
+          "quantity": 5,
           "unit": "g",
-          "cutPrep": "2 cloves, crushed",
+          "cutPrep": "1 clove, crushed",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -116,9 +116,9 @@
         {
           "category": "Herbs",
           "baseName": "Spices, pepper, black",
-          "quantity": 1,
+          "quantity": 0.25,
           "unit": "tsp",
-          "cutPrep": "whole peppercorns",
+          "cutPrep": "a few whole peppercorns",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -159,7 +159,7 @@
           "url": "https://guide.michelin.com/fr/fr/article/dining-in/revision-des-bases-preparer-un-fond-blanc"
         }
       ],
-      "curationNote": "Michelin (750 g to 1 kg bones for 1.5 L, clove-studded onion, leek white, bouquet garni) and Meilleur du Chef (1 kg giblets, 1.5 L water, half a glass of white wine, peppercorns, about 1 h 30 simmer) agree. 2.5 L water reduces to about 1.5 L, so 6 servings of 1 cup (250 ml)."
+      "curationNote": "Guide Michelin, Révision des bases : préparer un fond blanc for every amount and step; 750 g to 1 kg bones for 1.5 L, carrot, 1 celery branch, 1 garlic clove, onion studded with 1 clove, leek white, bouquet garni, some pepper; white wine from Meilleur du Chef."
     },
     {
       "servingSizeAmount": 1,
@@ -498,25 +498,16 @@
         {
           "category": "Herbs",
           "baseName": "Spices, pepper, black",
-          "quantity": 1,
+          "quantity": 0.25,
           "unit": "tsp",
-          "cutPrep": "whole peppercorns",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
+          "cutPrep": "a few whole peppercorns",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Put the water, carrot, shallots, celery, vermouth, thyme, bay, parsley stalks, peppercorns and salt in a wide pan.",
-        "Bring to a boil, then cover and simmer for 10 to 15 minutes so the vegetables give up their flavour.",
+        "Put the water, carrot, shallots, celery, vermouth, thyme, bay, parsley stalks and peppercorns in a wide pan.",
+        "Bring to a boil, then cover and simmer for 10 to 15 minutes so the vegetables give up their flavor.",
         "Lower the fish or shellfish into the barely trembling liquid and poach 3 to 5 minutes for fillets, longer for a whole fish, without letting it boil.",
         "Strain and keep the liquid if it is wanted for a sauce."
       ],
@@ -532,7 +523,7 @@
           "url": "https://chefsimon.com/gourmets/chef-simon/recettes/poisson-au-court-bouillon"
         }
       ],
-      "curationNote": "Chef Simon: 600 ml water, 2 carrots, 3 shallots, 100 ml Noilly Prat (optional), thyme, bay, parsley stalks, 2 celery stalks, peppercorns, 10 minutes covered. About 750 ml, 3 servings of 1 cup. Noilly Prat is dry vermouth; the only vermouth row is sweet, so it is listed as not in the database."
+      "curationNote": "Chef Simon, Poisson au court-bouillon for every amount and step; 60 cl water, 2 carrots, 3 shallots, 10 cl Noilly Prat, thyme, 1 bay leaf, parsley stalks, 2 celery stalks, a few peppercorns; no salt."
     },
     {
       "servingSizeAmount": 0.25,
@@ -988,8 +979,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -1006,18 +997,18 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 5,
+          "quantity": 2,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 to 4 pinches"
         }
       ],
       "instructions": [
         "Heat the oven to 300°F (150°C).",
         "Melt the butter in a flameproof casserole and brown the diced pork belly for 4 to 5 minutes.",
         "Add the carrot, onion and garlic and colour lightly, 5 to 8 minutes. Sprinkle on the flour and stir for 2 to 3 minutes.",
-        "Stir in the tomato paste, then the hot water, the bouquet garni, salt, pepper and a pinch of sugar. Bring to a boil.",
+        "Stir in the tomato paste, then the hot water, a bouquet garni of the thyme, bay leaf and parsley stalks, salt, pepper and a pinch of sugar. Bring to a boil.",
         "Cover and cook in the oven for 1 hour 30 minutes to 2 hours.",
         "Strain through a fine sieve, pressing the vegetables, and check the seasoning."
       ],
@@ -1037,7 +1028,7 @@
           "url": "https://www.meilleurduchef.com/fr/recette/sauce-tomate.html"
         }
       ],
-      "curationNote": "Meilleur du Chef, the classic sauce tomate with salt pork and roux: 200 ml concentrate, 50 g butter, 150 g salted pork belly, 160 g carrot, 160 g onion, 4 garlic cloves, 50 g flour, bouquet garni, 1.5 L water, oven 150°C. About 1 L, 8 servings of 1/2 cup."
+      "curationNote": "Meilleur du Chef, Sauce tomate for every amount and step; 200 ml concentrate, 50 g butter, 150 g salted pork belly, 160 g carrot, 160 g onion, 4 garlic cloves, 50 g flour, bouquet garni, 1.5 L water; salt and pepper with no amount, sugar a pinch (the author says 3 to 4 pinches); same quantity as ours."
     },
     {
       "servingSizeAmount": 2,
@@ -1089,20 +1080,20 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Chilli (chili), dried, ground",
-          "quantity": 0.5,
+          "notInDatabase": true,
+          "name": "piment d'Espelette",
+          "contains": "none",
+          "quantity": 0.2,
           "unit": "g",
-          "cutPrep": "a pinch",
-          "cookingMethod": null,
-          "prepNote": null
+          "cutPrep": "ground",
+          "prepNote": "a pinch"
         }
       ],
       "instructions": [
@@ -1127,7 +1118,7 @@
           "url": "https://www.meilleurduchef.com/fr/recette/sauce-hollandaise.html"
         }
       ],
-      "curationNote": "Meilleur du Chef: 300 g clarified butter, 5 yolks, 1 tbsp water per yolk, juice of half a lemon, salt, Espelette, sabayon to 65°C. About 360 ml, 12 servings of 2 tbsp. Beurre Clarifié makes 30 tbsp-servings of about 13 g from 500 g, so 300 g butter clarified is 18."
+      "curationNote": "Meilleur du Chef, Sauce hollandaise for every amount and step; 300 g butter, 5 yolks, 1 tbsp water per yolk, juice of half a lemon, salt with no amount, a pinch of piment d'Espelette; same quantity as ours."
     },
     {
       "servingSizeAmount": 2,
@@ -1151,10 +1142,10 @@
       "ingredients": [
         {
           "category": "Herbs",
-          "baseName": "Wine vinegar",
+          "baseName": "Distilled Vinegar (White)",
           "quantity": 100,
           "unit": "ml",
-          "cutPrep": "white wine vinegar",
+          "cutPrep": null,
           "cookingMethod": "Simmered",
           "prepNote": null
         },
@@ -1215,8 +1206,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -1253,7 +1244,7 @@
           "url": "https://www.meilleurduchef.com/fr/recette/sauce-bearnaise.html"
         }
       ],
-      "curationNote": "Meilleur du Chef: 300 g clarified butter, 5 yolks, 100 ml vinegar, 50 g shallots, 5 g crushed pepper, 2 tbsp tarragon, chervil, salt, cayenne, reduced to a quarter, sabayon to 65°C. About 12 servings of 2 tbsp."
+      "curationNote": "Meilleur du Chef, Sauce béarnaise for every amount and step; 300 g butter, 5 yolks, 100 ml spirit vinegar, 50 g shallots, 5 g peppercorns, 2 tbsp tarragon, a pinch of chervil, salt and cayenne with no amount; same quantity as ours."
     },
     {
       "servingSizeAmount": 2,
@@ -1317,8 +1308,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 1.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -1351,7 +1342,7 @@
           "url": "https://www.meilleurduchef.com/fr/recette/beurre-blanc.html"
         }
       ],
-      "curationNote": "Meilleur du Chef: 80 g cold butter, juice of 1 lemon (reviewers find half enough, kept at 20 ml), 70 ml white wine, 1 shallot, 2 to 3 tbsp cold water. About 120 ml, 4 servings of 2 tbsp."
+      "curationNote": "Meilleur du Chef, Beurre blanc for every amount and step; 80 g butter, 7 cl wine, 1 lemon, 1 shallot, 2 to 3 tbsp water, salt and pepper to taste; same batch as ours."
     },
     {
       "servingSizeAmount": 0.25,
@@ -1495,11 +1486,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 0.4,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         }
       ],
       "instructions": [
@@ -1529,7 +1520,7 @@
           "url": "https://fr.wikibooks.org/wiki/Livre_de_cuisine/Pâte_brisée"
         }
       ],
-      "curationNote": "Meilleur du Chef: 200 g flour, 100 g butter, 1 egg, 50 to 65 g water, salt, about 400 g of dough. Wikilivres: 250 g flour, 125 g butter, optional egg, a little water, salt, blind bake at 200°C. Same 2:1 ratio. One 24 to 26 cm crust cut in 8."
+      "curationNote": "Meilleur du Chef, Pâte brisée for every amount and step; 200 g flour, 100 g butter, 1 egg, 50 to 65 g water, a pinch of salt; same quantity as ours."
     },
     {
       "servingSizeAmount": 1,
@@ -1584,11 +1575,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.4,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         },
         {
           "category": "Herbs",
@@ -1627,7 +1618,7 @@
           "url": "https://fr.wikibooks.org/wiki/Livre_de_cuisine/Pâte_brisée"
         }
       ],
-      "curationNote": "Meilleur du Chef pâte sucrée: 200 g flour, 100 g butter, 80 g icing sugar, salt, 1 egg, vanilla, creamed method, blind bake 170°C 10 to 15 min. Wikilivres sweet version adds 100 g powdered sugar to 250 g flour and 125 g butter. The database has no icing sugar row, so granulated cane sugar is listed with cutPrep icing sugar: it is the same sucrose, ground fine."
+      "curationNote": "Meilleur du Chef, Pâte sucrée for every amount and step; 200 g flour, 100 g butter, 80 g icing sugar, a pinch of salt, 1 egg, vanilla with no amount; same quantity as ours."
     },
     {
       "servingSizeAmount": 1,
@@ -1753,11 +1744,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 0.4,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         },
         {
           "category": "PantryStaples",
@@ -1805,7 +1796,7 @@
           "url": "https://fr.wikipedia.org/wiki/Pâte_à_choux"
         }
       ],
-      "curationNote": "Meilleur du Chef: 125 g milk, 125 g water, 165 g flour, 100 g butter, salt, 250 g eggs, 170°C 25 to 35 min. Wikipédia gives the 1-2-4-8-16 rule (1 L liquid, 20 g salt, 400 g butter, 800 g flour, 16 eggs), dry the panade 4 to 5 min, 180°C, never open the oven. Proportions agree. 250 g eggs is 5 large eggs. About 40 small choux."
+      "curationNote": "Meilleur du Chef, Pâte à choux for every amount and step; 125 g milk, 125 g water, 165 g flour, 100 g butter, a pinch of salt, 250 g eggs; same quantity as ours."
     },
     {
       "servingSizeAmount": 1,
@@ -1833,20 +1824,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.25,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 10,
+          "quantity": 0.4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         },
         {
           "category": "Dairy",
@@ -1895,7 +1877,7 @@
         }
       ],
       "instructions": [
-        "Put the flour, salt and sugar in a bowl, make a well, add the eggs and whisk from the middle outward to a thick, smooth paste.",
+        "Put the flour and salt in a bowl, make a well, add the eggs and whisk from the middle outward to a thick, smooth paste.",
         "Whisk in the cold milk a little at a time to keep it free of lumps, then the water, the melted butter and the rum.",
         "Cover and rest the batter in the fridge for at least 1 hour, or overnight.",
         "Heat a lightly buttered crêpe pan over medium high heat, pour in a small ladle of batter and swirl it thin over the base.",
@@ -1921,7 +1903,7 @@
           "url": "https://fr.wikipedia.org/wiki/Crêpe"
         }
       ],
-      "curationNote": "Meilleur du Chef: 125 g flour T55, 30 g melted butter, salt, optional sugar, 3 eggs, 300 ml cold milk, 2 tbsp water, 2 tsp dark rum or orange-flower water, rest 1 h, about 12 crêpes. Wikipédia confirms flour, eggs, milk and water, sugar for the sweet kind, a smooth batter and optional rest. The rum is optional; orange-flower water is not in the database so the rum was kept."
+      "curationNote": "Meilleur du Chef, Pâte à crêpes for every amount and step; 125 g flour, 30 g butter, a pinch of salt, optional sugar with no amount, 3 eggs, 300 ml milk, 2 tbsp water, 2 tsp rum; about 12 crêpes, same as ours."
     },
     {
       "servingSizeAmount": 0.25,
@@ -2221,15 +2203,6 @@
           "prepNote": null
         },
         {
-          "category": "Bev",
-          "baseName": "Lemon Juice",
-          "quantity": 5,
-          "unit": "ml",
-          "cutPrep": "freshly squeezed",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Veg",
           "baseName": "Fresh Parsley",
           "quantity": 10,
@@ -2241,8 +2214,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -2267,7 +2240,7 @@
         }
       ],
       "instructions": [
-        "Squeeze the chopped mushrooms in a clean cloth, a handful at a time, to press out as much liquid as you can, and toss them with the lemon juice.",
+        "Squeeze the chopped mushrooms in a clean cloth, a handful at a time, to press out as much liquid as you can.",
         "Melt the butter in a wide pan over medium heat and soften the shallot and onion for 3 to 5 minutes without browning.",
         "Add the mushrooms, turn the heat up and cook uncovered, stirring often, for 10 to 15 minutes, until all the moisture has gone and the mixture is dry and starting to stick.",
         "Season with salt, pepper and nutmeg, stir in the parsley and take off the heat.",
@@ -2293,7 +2266,7 @@
           "url": "https://aftouch-cuisine.com/recette/la-duxelles-de-champignons-1873.html?lang=en"
         }
       ],
-      "curationNote": "Wikipédia gives Escoffier: 250 g mushrooms pressed, onion and shallot, butter and oil, parsley, stewed dry. Aftouch: 500 g button mushrooms, 2 onions, 2 shallots, 50 g butter, salt, pepper, nutmeg, high heat 6 to 7 min until dry, then 100 ml cream. Kept the classic dry duxelles without cream, since it is a base; a cook can add cream for a stuffing. About 360 ml, 6 servings of 1/4 cup."
+      "curationNote": "Aftouch Cuisine, La duxelles de champignons for every amount and step; 500 g mushrooms, onions, shallots, 50 g butter, salt, pepper, nutmeg to taste; parsley from Escoffier's duxelles on Wikipédia; cream left out as ours is the dry base."
     },
     {
       "servingSizeAmount": 1,
@@ -2391,8 +2364,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 1.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -2433,7 +2406,7 @@
           "url": "https://fr.wikipedia.org/wiki/Beurre_maître_d'hôtel"
         }
       ],
-      "curationNote": "Meilleur du Chef: 100 g soft butter, 15 g chopped parsley, a squeeze of lemon, salt, pepper, rolled and chilled, about 120 g. Wikipédia gives Escoffier (250 g butter, a spoonful of parsley, 8 g salt, 1 g pepper, 5 or 6 drops of lemon) and Nignon. 8 slices of about 15 g."
+      "curationNote": "Meilleur du Chef, Beurre maître d'hôtel for every amount and step; 100 g butter, 15 g parsley, lemon, salt and pepper to taste; same batch as ours."
     },
     {
       "servingSizeAmount": 1,
@@ -2470,7 +2443,7 @@
         {
           "category": "Fats",
           "baseName": "Olive Oil (Extra Virgin)",
-          "quantity": 30,
+          "quantity": 45,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2479,25 +2452,25 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.4,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         },
         {
           "category": "Herbs",
           "baseName": "Pepper, black, ground",
-          "quantity": 0.125,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         }
       ],
       "instructions": [
         "Chop the parsley leaves and the garlic together on a board with a large knife until very fine.",
-        "Stir in the olive oil and season lightly with salt and pepper; leave out the oil when it is to be tossed into a hot pan at the end of cooking.",
+        "Stir in the olive oil and season with the pinch of salt and pinch of pepper; leave out the oil when it is to be tossed into a hot pan at the end of cooking.",
         "Scatter it over potatoes, mushrooms, fish, snails or grilled meat in the last 1 to 2 minutes of cooking or just before serving.",
         "Keep covered in the fridge for 3 to 5 days."
       ],
@@ -2521,7 +2494,7 @@
           "url": "https://fr.wikipedia.org/wiki/Persillade"
         }
       ],
-      "curationNote": "Wikipédia: parsley and garlic chopped together, sometimes shallot, olive oil, vinegar or breadcrumbs. Croq-Kilos: about 30 g flat parsley, 3 to 4 garlic cloves, 3 to 4 tbsp olive oil, optional lemon, keeps 3 to 5 days. Oil reduced to 2 tbsp so it stays a chopped seasoning. About 8 tbsp."
+      "curationNote": "Croq-Kilos, Recette de persillade maison for every amount and step; 30 g parsley, 3 to 4 garlic cloves, 3 to 4 tbsp olive oil, salt and pepper to taste (a pinch of each in the method)."
     },
     {
       "servingSizeAmount": 1,
@@ -2564,8 +2537,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 1.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -2616,7 +2589,7 @@
           "url": "https://fr.wikipedia.org/wiki/Mayonnaise"
         }
       ],
-      "curationNote": "Meilleur du Chef: 2 yolks, 1 glass of oil, 1 tsp mustard, 1 tbsp vinegar optional, salt, white pepper, keeps 24 h at 4°C, about 20 cl. Wikipédia: yolks, vinegar, oil, salt, pepper, mustard or lemon, oil added gradually. Neutral sunflower oil, as French home cooks use. Dijon is listed as the strong (hot) mustard row; white pepper is not in the database. About 240 ml, 16 tbsp."
+      "curationNote": "Meilleur du Chef, Mayonnaise for every amount and step; 2 yolks, 1 glass oil, 1 tsp mustard, 1 tbsp vinegar, salt and white pepper to taste; same batch."
     },
     {
       "servingSizeAmount": 1,
@@ -2685,13 +2658,22 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "piment d'Espelette",
+          "contains": "none",
+          "quantity": 0.2,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "a pinch, mild Basque chilli powder"
         }
       ],
       "instructions": [
         "Pound the garlic with the salt in a mortar for 2 to 3 minutes until it is a smooth, sticky paste.",
         "Work in the egg yolks with the pestle until combined.",
         "Add the olive oil a few drops at a time, turning the pestle steadily in one direction, then in a thin stream once the sauce has taken, until thick enough to hold the pestle upright.",
-        "Finish with the lemon juice and pepper, taste for salt, and serve within the day with poached cod, boiled vegetables and eggs for le grand aïoli."
+        "Finish with the lemon juice, pepper and a pinch of piment d'Espelette, taste for salt, and serve within the day with poached cod, boiled vegetables and eggs for le grand aïoli."
       ],
       "nutritionHighlights": [
         {
@@ -2713,7 +2695,7 @@
           "url": "https://fr.wikipedia.org/wiki/Aïoli"
         }
       ],
-      "curationNote": "Wikipédia: originally only garlic and olive oil pounded in a mortar; egg yolk, lemon, bread or potato are common additions. Meilleur du Chef: 2 yolks, half a lemon, 6 garlic cloves, 1 glass of oil, salt, pepper, Espelette, notes the Provence version with olive oil. Kept the yolk, which most Provençal home cooks now use because the pure garlic and oil emulsion breaks easily; the mortar is kept. About 16 tbsp."
+      "curationNote": "Meilleur du Chef, Aïoli for every amount and step; makes 25 cl, about 16 tbsp, same as ours."
     },
     {
       "servingSizeAmount": 1,
@@ -2738,7 +2720,7 @@
         {
           "category": "Herbs",
           "baseName": "Wine vinegar",
-          "quantity": 40,
+          "quantity": 30,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2747,8 +2729,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 1.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -2765,7 +2747,7 @@
         {
           "category": "Fats",
           "baseName": "Olive Oil (Extra Virgin)",
-          "quantity": 80,
+          "quantity": 90,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2785,15 +2767,15 @@
       ],
       "citations": [
         {
-          "source": "Meilleur du Chef, Vinaigrette",
-          "url": "https://www.meilleurduchef.com/fr/recette/vinaigrette.html"
+          "source": "clickMiam, Vinaigrette classique à la moutarde",
+          "url": "https://www.clickmiam.fr/recette/vinaigrette-classique-a-la-moutarde"
         },
         {
           "source": "Wikipédia, Vinaigrette (sauce)",
           "url": "https://fr.wikipedia.org/wiki/Vinaigrette_(sauce)"
         }
       ],
-      "curationNote": "Meilleur du Chef: 2 tbsp oil to 1 tbsp vinegar, salt. Wikipédia: generally one third vinegar to two thirds oil, a spoonful of mustard optional. Kept the 1 to 2 ratio and a full spoon of Dijon for the moutarde version. About 9 tbsp."
+      "curationNote": "clickMiam, Vinaigrette classique à la moutarde for every amount and step; 6 tbsp olive oil, 2 tbsp wine vinegar, 1 tbsp Dijon mustard, optional honey, salt and pepper to taste; about 9 tbsp, same as ours."
     },
     {
       "servingSizeAmount": 2,
@@ -2901,8 +2883,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.125,
-          "unit": "tsp",
+          "quantity": 0.8,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -2930,7 +2912,7 @@
           "url": "https://fr.wikipedia.org/wiki/Croûton"
         }
       ],
-      "curationNote": "Croq-Kilos: day-old bread cubed, olive oil or melted butter, optional garlic and herbs, oven 180°C 10 to 15 min turning halfway, or pan. Wikipédia: dry bread browned in butter, fried in oil or dried in the oven, served with onion soup and bouillabaisse. Butter chosen as the French soup croûton. 4 servings of 1/2 cup."
+      "curationNote": "Croq-Kilos, Comment réussir ses croûtons for every amount and step; bread, melted butter or oil, salt, optional garlic; no amounts."
     },
     {
       "servingSizeAmount": 2,
@@ -2958,7 +2940,7 @@
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 20,
+          "quantity": 15,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Sauteed",
@@ -3003,8 +2985,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 1.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -3023,7 +3005,7 @@
         "Melt the butter in a heavy pan over low heat, add the onions and a pinch of salt, cover and sweat for 10 to 15 minutes, stirring now and then, until soft.",
         "Uncover and cook over medium low heat for 20 to 25 minutes more, stirring often, until golden.",
         "Stir in the sugar for 3 to 5 minutes, then add the balsamic vinegar, thyme and bay.",
-        "Simmer gently for 15 to 25 minutes until syrupy and jam-like, then remove the herbs and season.",
+        "Simmer gently for 15 to 25 minutes until syrupy and jam-like, then remove the thyme and bay leaf and season with the pepper and the rest of the salt.",
         "Cool, spoon into a clean jar and keep in the fridge for up to 2 weeks."
       ],
       "nutritionHighlights": [
@@ -3046,7 +3028,7 @@
           "url": "https://www.croq-kilos.com/actus/recette-de-confit-doignons-un-delice-sucre-sale-a-deguster"
         }
       ],
-      "curationNote": "Demotivateur: 500 g sweet onions, 1 tbsp butter, 3 tbsp sugar, 3 tbsp balsamic, sweat then caramelise then simmer to confit, slow covered version 1 h to 1 h 30. Croq-Kilos: 500 g onions, 100 g sugar, 100 ml balsamic, olive oil, bay, thyme, about 1 h. Kept the lower sugar and the butter, with the thyme and bay. About 250 g, 8 servings of 2 tbsp."
+      "curationNote": "Demotivateur Food, Confit d'oignons maison for every amount and step; 500 g onions, 1 tbsp butter, 3 tbsp sugar, 3 tbsp balsamic, salt and pepper to taste; thyme and bay from Croq-Kilos."
     },
     {
       "servingSizeAmount": 1,
@@ -3166,8 +3148,8 @@
         {
           "category": "Herbs",
           "baseName": "Pepper, black, ground",
-          "quantity": 1.5,
-          "unit": "tsp",
+          "quantity": 7.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -3216,15 +3198,11 @@
       ],
       "citations": [
         {
-          "source": "Dubocalalassiette, Recette du Pâté de Campagne à l'Ancienne",
+          "source": "Du bocal à l'assiette, Recette du pâté de campagne à l'ancienne",
           "url": "https://dubocalalassiette.fr/blog/recette-pate-de-campagne-a-l-ancienne/"
-        },
-        {
-          "source": "Le Parfait, Pâté de campagne",
-          "url": "https://leparfait.com/blogs/recette/pate-de-campagne"
         }
       ],
-      "curationNote": "Dubocalalassiette: belly, pork liver, back fat, garlic, onion, parsley, eggs, crème fraîche, white wine, armagnac, 15 g salt and 5 g pepper per kilo, quatre-épices, lined with bacon and bay, bain-marie at 160°C, rest 48 h. Le Parfait: throat and belly with liver, egg, shallot, cognac or armagnac, quatre-épices. Kept the Dubocalalassiette version at a 1.5 kg batch. Armagnac is read through the brandy row. Caul fat omitted."
+      "curationNote": "Du bocal à l'assiette, Recette du pâté de campagne à l'ancienne for every amount and step; about 3 kg: 2 kg belly, 600 g liver, 400 g fat, 8 garlic cloves, 1 onion, 1 bunch parsley, 3 eggs, 15 cl crème fraîche, 20 cl white wine, 10 cl armagnac, 15 g salt and 5 g pepper per kg of meat, quatre-épices, bay and bacon with no amounts; halved for our 1.5 kg."
     },
     {
       "servingSizeAmount": 2,
@@ -3566,18 +3544,9 @@
         {
           "category": "Fats",
           "baseName": "Olive Oil (Extra Virgin)",
-          "quantity": 60,
+          "quantity": 45,
           "unit": "ml",
           "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Fresh Thyme",
-          "quantity": 1,
-          "unit": "g",
-          "cutPrep": "leaves only, optional",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -3593,9 +3562,9 @@
       ],
       "instructions": [
         "Put the olives, capers, anchovies and garlic in a mortar (or a food processor).",
-        "Pound or pulse them to a coarse paste, then add the lemon juice and thyme.",
+        "Pound or pulse them to a coarse paste, then add the lemon juice.",
         "Work in the olive oil a little at a time until the tapenade is thick and spreadable. Season with pepper; it needs no salt.",
-        "Let it rest for 1 hour before serving with toasted bread or raw vegetables. It keeps 1 week in the fridge under a film of oil."
+        "Chill it, covered, for at least 1 hour, and let it warm a few minutes before serving with toasted bread or raw vegetables. It keeps 1 week in the fridge under a film of oil."
       ],
       "nutritionHighlights": [
         {
@@ -3615,13 +3584,9 @@
         {
           "source": "Marseille Tourisme, La tapenade",
           "url": "https://www.marseille-tourisme.com/decouvrez-marseille/gastronomie/specialitees-culinaires-marseillaises/tapenade/"
-        },
-        {
-          "source": "Provenceweb, Tapenade",
-          "url": "https://provenceweb.fr/f/gastronomie/recettes-provencales/tapenade.htm"
         }
       ],
-      "curationNote": "Marseille Tourisme: 200 g pitted black olives, 2 tbsp capers, 4 anchovy fillets, 1 garlic clove, 2 tbsp lemon juice, 3 tbsp olive oil, pepper, 1 h rest; named after tapena (caper), Marseille around 1880, made in a mortar. Provenceweb: 200 to 300 g olives, 2 to 8 anchovies, capers, garlic, 100 ml olive oil, optional thyme. Followed Marseille Tourisme with oil between the two."
+      "curationNote": "Marseille Tourisme, La tapenade for every amount and step; 200 g pitted black olives, 2 tbsp capers, 4 anchovy fillets, 1 garlic clove, 2 tbsp lemon juice, 3 tbsp olive oil, pepper, no thyme or salt, 1 hour in the fridge. Followed alone in place of the blend with Provenceweb."
     },
     {
       "servingSizeAmount": 1,
@@ -3654,36 +3619,18 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Spices, nutmeg, ground",
-          "quantity": 0.125,
-          "unit": "tsp",
-          "cutPrep": "freshly grated",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Pepper, black, ground",
           "quantity": 0.25,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
-        },
-        {
-          "category": "Dairy",
-          "baseName": "Chicken Egg (Raw)",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "beaten, to glaze",
-          "cookingMethod": null,
-          "prepNote": null
         }
       ],
       "instructions": [
         "Heat the oven to 425°F (220°C) and line two trays with baking paper.",
-        "Make the choux paste and, while it is still warm, beat in 90 g of the grated Comté, the nutmeg and pepper.",
-        "Pipe or spoon walnut-sized mounds 3 to 4 cm (1.5 inches) apart, brush with beaten egg and scatter with the remaining cheese.",
+        "Make the choux paste and, while it is still warm, beat in 90 g of the grated Comté and the pepper.",
+        "Pipe or spoon walnut-sized mounds 3 to 4 cm (1.5 inches) apart and scatter with the remaining cheese.",
         "Bake for 5 minutes, then lower the oven to 350°F (180°C) and bake for 20 to 25 minutes more, without opening the door, until puffed, deep golden and light.",
         "Serve warm, the Burgundian way, with a glass of chilled white wine."
       ],
@@ -3707,7 +3654,7 @@
           "url": "https://culturecheesemag.com/recipes/gougeres/"
         }
       ],
-      "curationNote": "France.fr: 100 g Comté, 25 cl water, 120 g butter, 125 g flour, 4 eggs, bake 160°C 20 to 30 min. culture: 3.5 oz Comté, 3 eggs, 425°F 5 min then 350°F 25 min. The choux base (milk and water, 5 eggs) covers the paste; the extra cheese, nutmeg and glaze are added here. Comté is not in the food database."
+      "curationNote": "France.fr, Recette des gougères au comté for every amount and step; 100 g Comté, 25 cl water, 120 g butter, 125 g flour, 4 eggs, a pinch of salt, pepper; no nutmeg and no egg glaze. Our 120 g Comté is within the usual range."
     },
     {
       "servingSizeAmount": 1,
@@ -3748,19 +3695,10 @@
           "prepNote": null
         },
         {
-          "category": "Veg",
-          "baseName": "Fresh Parsley",
-          "quantity": 3,
-          "unit": "g",
-          "cutPrep": "finely chopped, optional",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 1.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -3768,18 +3706,9 @@
         {
           "category": "Herbs",
           "baseName": "Pepper, black, ground",
-          "quantity": 0.125,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Lettuce, green leaf",
-          "quantity": 40,
+          "quantity": 0.3,
           "unit": "g",
-          "cutPrep": "a few leaves, to serve",
+          "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         }
@@ -3788,8 +3717,8 @@
         "Lower the eggs into boiling water and cook for 9 to 10 minutes, then cool them at once in cold water.",
         "Peel the eggs, halve them lengthwise and lift out the yolks.",
         "Press the yolks through a fine sieve to make a fine powder: the mimosa.",
-        "Mix half the sieved yolk with the mayonnaise, season, and spoon it into the whites.",
-        "Scatter the rest of the yolk generously over the top with the chives and parsley, and serve on lettuce leaves. Eat within 24 hours, since the mayonnaise is made with raw yolk."
+        "Put a good spoonful of mayonnaise in the hollow of each white and season with the salt and pepper.",
+        "Cover each half generously with the sieved yolk, scatter over the chives and serve. Eat within 24 hours, since the mayonnaise is made with raw yolk."
       ],
       "nutritionHighlights": [
         {
@@ -3809,13 +3738,9 @@
         {
           "source": "Le Fooding, Œufs mimosa de Faggio Salumeria",
           "url": "https://lefooding.com/recettes/recette-453-oeufs-mimosa-faggio-salumeria"
-        },
-        {
-          "source": "Jardiner Malin, Œuf mimosa",
-          "url": "https://www.jardiner-malin.fr/recettes/oeuf-mimosa.html"
         }
       ],
-      "curationNote": "Le Fooding: 6 eggs boiled 9 min, mayonnaise from 3 yolks, mustard, wine vinegar and sunflower oil, yolks pressed through a chinois into a fine mimosa, chives. Jardiner Malin: 4 eggs 10 min, mayonnaise mixed with half the yolk, the rest crumbled on top, lettuce, parsley, optional paprika. Mayonnaise points at the base."
+      "curationNote": "Le Fooding, Œufs mimosa de Faggio Salumeria for every amount and step; 6 hard-boiled eggs, a homemade mayonnaise (3 yolks, mustard, wine vinegar, sunflower oil), a good spoonful of mayonnaise in each half, the yolks pressed through a sieve over the top, a third of a bunch of chives, salt and pepper to taste. No parsley or lettuce."
     },
     {
       "servingSizeAmount": 1,
@@ -3848,8 +3773,8 @@
         },
         {
           "category": "Fats",
-          "baseName": "Pure Butter (Unsalted)",
-          "quantity": 200,
+          "baseName": "Butter, plain, salted",
+          "quantity": 125,
           "unit": "g",
           "cutPrep": "softened",
           "cookingMethod": null,
@@ -3866,15 +3791,6 @@
         },
         {
           "category": "Veg",
-          "baseName": "Shallot",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "very finely chopped",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
           "baseName": "Fresh Parsley",
           "quantity": 30,
           "unit": "g",
@@ -3884,37 +3800,19 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 0.75,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Pepper, black, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Alcohol",
-          "baseName": "White Wine",
-          "quantity": 15,
-          "unit": "ml",
-          "cutPrep": "dry",
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a touch"
         }
       ],
       "instructions": [
-        "Beat the soft butter with the garlic, shallot, parsley, salt, pepper and white wine until evenly green.",
+        "Beat the soft salted butter with the garlic, parsley and pepper until evenly green.",
         "Push a little butter into each shell, slip in a snail and seal the opening with more butter.",
         "Stand the shells, opening up, in snail dishes or on a tray of coarse salt so they do not tip, and chill 15 to 30 minutes to firm the butter.",
-        "Bake at 400°F to 465°F (200°C to 240°C) for 8 to 12 minutes, until the butter bubbles and just browns.",
+        "Bake at 465°F (240°C) for about 8 minutes, until the butter bubbles.",
         "Serve at once with the baguette for the butter."
       ],
       "nutritionHighlights": [
@@ -3931,22 +3829,13 @@
         {
           "source": "Le Bonbon Dijon, Escargots de Bourgogne, la tradition",
           "url": "https://www.lebonbon.fr/dijon/recette/escargots-de-bourgogne-tradition/"
-        },
-        {
-          "source": "FrenchEntrée, Escargots à la bourguignonne",
-          "url": "https://www.frenchentree.com/living-in-france/local-life/food-recipes/escargots-a-la-bourguignonne/"
         }
       ],
-      "curationNote": "Le Bonbon: 4 dozen snails, 125 g demi-sel butter, 3 garlic, a bunch of parsley, pepper, 240°C 8 min. FrenchEntrée: 80 to 100 snails, 500 g butter, 300 g parsley, tarragon, garlic, spring onion, 2 tbsp white wine, 180°C 10 to 15 min. Kept about 50 g butter per dozen, between the two, with the small shallot and wine; tarragon left out as most Burgundian versions do. Snails are not in the food database."
+      "curationNote": "Le Bonbon Dijon, Escargots de Bourgogne, la tradition for every amount and step; for 4 like ours: 48 prepared snails, 125 g half-salted butter, 3 garlic cloves, a bunch of parsley, a touch of pepper, no added salt, shallot or wine, baked at 240°C for 8 minutes."
     },
     {
       "servingSizeAmount": 1,
       "components": [
-        {
-          "recipeId": "curated_fr_base_moutarde_de_dijon",
-          "servings": 1,
-          "note": "1 tbsp, Dijon (moutarde forte)"
-        },
         {
           "recipeId": "curated_fr_base_palette_demi_sel",
           "servings": 40,
@@ -3974,15 +3863,6 @@
           "prepNote": null
         },
         {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 1000,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Veg",
           "baseName": "Onion",
           "quantity": 150,
@@ -3994,45 +3874,36 @@
         {
           "category": "Herbs",
           "baseName": "Spices, cloves, ground",
-          "quantity": 0.125,
-          "unit": "tsp",
-          "cutPrep": "2 whole cloves stuck in the onion",
+          "quantity": 0.1,
+          "unit": "g",
+          "cutPrep": "1 whole clove stuck in the onion",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Carrot",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "peeled and cut in chunks",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Leek",
           "quantity": 100,
           "unit": "g",
-          "cutPrep": "washed and cut in chunks",
+          "cutPrep": "1, peeled and cut in chunks",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 35,
+          "quantity": 20,
           "unit": "g",
-          "cutPrep": "20 g whole for the broth, 15 g finely chopped",
+          "cutPrep": "4 cloves, peeled and finely chopped",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Spices, pepper, black",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": "whole peppercorns",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": "8 whole peppercorns",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -4047,17 +3918,8 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Fresh Thyme",
-          "quantity": 2,
-          "unit": "g",
-          "cutPrep": "a few sprigs",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Wine vinegar",
-          "quantity": 30,
+          "quantity": 240,
           "unit": "ml",
           "cutPrep": "white wine vinegar",
           "cookingMethod": null,
@@ -4066,7 +3928,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Gelatine",
-          "quantity": 10,
+          "quantity": 16,
           "unit": "g",
           "cutPrep": "soaked in cold water",
           "cookingMethod": null,
@@ -4084,10 +3946,10 @@
       ],
       "instructions": [
         "Soak the pork in cold water for 30 minutes to 2 hours (longer for a saltier piece), then drain.",
-        "Put it in a large pot with the white wine, water, onion with cloves, carrot, leek, the whole garlic, peppercorns, bay and thyme. Bring to a boil and skim.",
-        "Simmer gently for 2 hours 30 minutes to 4 hours, until the meat falls from the bone.",
+        "Put it in a large pot with the white wine, the onion stuck with the clove, the carrot, peppercorns and bay. Bring to a boil and skim.",
+        "Simmer gently for 2 hours 30 minutes to 4 hours, until the meat falls from the bone, adding a little water only if the meat is no longer covered.",
         "Lift out the meat. Strain the broth, boil it to reduce by half, stir in the vinegar and the soaked gelatine, and leave it to cool until it begins to thicken.",
-        "Flake the meat, removing skin and gristle, and mix it with the mustard, the chopped garlic and most of the parsley.",
+        "Flake the meat, removing skin and gristle, and mix it with the chopped garlic and most of the parsley.",
         "Pack the meat into a terrine or bowl in layers, scattering parsley between them, and pour the cool broth over to cover.",
         "Chill for 12 to 24 hours until set, then slice and serve with cornichons and bread."
       ],
@@ -4109,13 +3971,9 @@
         {
           "source": "Le Bonbon Dijon, Comment faire un jambon persillé",
           "url": "https://www.lebonbon.fr/dijon/recette/comment-faire-jambon-persille/"
-        },
-        {
-          "source": "Stefan Gourmet, Jambon persillé (ham hock terrine)",
-          "url": "https://stefangourmet.com/2013/05/12/jambon-persille-ham-hock-terrine/"
         }
       ],
-      "curationNote": "Le Bonbon: 2.5 kg palette demi-sel soaked 30 min, white Burgundy, wine vinegar, onion with clove, carrot, peppercorns, bay, simmer 4 h, broth reduced by half, 20 g gelatine, flaked with garlic and parsley, set 12 h or more. Stefan Gourmet: ham hocks, aligoté, leek, carrot, onion with cloves, white wine vinegar, Dijon, parsley, 2 to 3 h, reduced to 1 L, set 24 h. Lightly salted pork is not in the food database."
+      "curationNote": "Le Bonbon Dijon, Comment faire un jambon persillé for every amount and step; 2.5 kg lightly salted pork shoulder (the page prints 2,5 g), 75 cl white Burgundy, 30 cl wine vinegar, 1 onion stuck with 1 clove, 1 carrot, 4 garlic cloves, 10 black peppercorns, 2 bay leaves, 20 g gelatine, a bunch of flat parsley, thyme only as an option; no leek, mustard or added water. Scaled to our 2 kg of pork."
     },
     {
       "servingSizeAmount": 1,
@@ -4144,13 +4002,13 @@
       "region": "Paris (Les Halles bistrots)",
       "servings": 6,
       "servingSizeUnit": "bowl",
-      "flavorProfile": "Deep, sweet onions slowly browned in butter, a dark beefy broth with a splash of white wine, and a lid of toasted bread under bubbling, browned Gruyère.",
+      "flavorProfile": "Sweet onions cooked golden in plenty of butter, a dark beefy broth, and a lid of toasted bread under bubbling, browned Gruyère.",
       "healthBenefit": "Onions bring fibre and plant compounds and the cheese brings protein and calcium, though the cheese lid makes this a rich, salty bowl.",
       "ingredients": [
         {
           "category": "Veg",
           "baseName": "Onion",
-          "quantity": 1000,
+          "quantity": 600,
           "unit": "g",
           "cutPrep": "peeled, halved and thinly sliced",
           "cookingMethod": "Sauteed",
@@ -4159,56 +4017,20 @@
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 80,
+          "quantity": 150,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Sauteed",
           "prepNote": null
         },
         {
-          "category": "PantryStaples",
-          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
-          "quantity": 20,
-          "unit": "g",
-          "cutPrep": "sifted",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Alcohol",
-          "baseName": "White Wine",
-          "quantity": 150,
-          "unit": "ml",
-          "cutPrep": "dry",
-          "cookingMethod": "Simmered",
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Fresh Thyme",
-          "quantity": 2,
-          "unit": "g",
-          "cutPrep": "a few sprigs, in the bouquet garni",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, bay leaf",
-          "quantity": 0.15,
-          "unit": "g",
-          "cutPrep": "whole",
-          "cookingMethod": null,
-          "prepNote": "1 bay leaf"
-        },
-        {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1.5,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste"
         },
         {
           "category": "Herbs",
@@ -4222,16 +4044,16 @@
         {
           "category": "Herbs",
           "baseName": "Spices, nutmeg, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": "freshly grated",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         },
         {
           "category": "Dairy",
           "baseName": "Gruyère",
-          "quantity": 250,
+          "quantity": 300,
           "unit": "g",
           "cutPrep": "grated",
           "cookingMethod": "Baked",
@@ -4239,14 +4061,12 @@
         }
       ],
       "instructions": [
-        "Melt the butter in a heavy pot over medium heat, add the onions and a pinch of salt and cook, stirring often, for 40 to 60 minutes, until they are soft and an even deep golden brown.",
-        "Sprinkle in the flour and stir for 2 to 3 minutes so it cooks without burning.",
-        "Pour in the white wine and scrape up the brown bits from the bottom of the pot.",
-        "Add the hot brown veal stock and chicken stock, the thyme and the bay leaf, bring to a simmer and cook gently for 20 to 30 minutes.",
-        "Meanwhile dry the baguette slices in the oven at 350°F (180°C) for 8 to 10 minutes, until crisp.",
-        "Remove the thyme and bay, season with salt, pepper and a little nutmeg.",
-        "Heat the broiler to 475°F (250°C). Ladle the soup into 6 ovenproof bowls set on a baking sheet.",
-        "Lay the toasted bread on top, cover thickly with the Gruyère and broil for 5 to 8 minutes, until the cheese bubbles and browns. Serve at once."
+        "Heat the oven to 350°F (180°C).",
+        "Melt the butter in a heavy pot over low to medium heat, add the onions and cook them gently, stirring often, for 15 to 20 minutes, until soft and golden.",
+        "Pour in the hot brown veal stock and chicken stock and let it barely simmer for 10 minutes. Season with the salt, pepper and nutmeg.",
+        "Meanwhile dry the baguette slices in the oven for a few minutes, until crisp.",
+        "Heat the broiler. Ladle the soup into 6 ovenproof bowls set on a baking sheet.",
+        "Lay the dried bread on top, cover thickly with the Gruyère and broil briefly, until the cheese bubbles and browns. Serve at once."
       ],
       "nutritionHighlights": [
         {
@@ -4259,7 +4079,7 @@
         },
         {
           "nutrient": "Fibre",
-          "note": "From the kilo of onions."
+          "note": "From the onions."
         }
       ],
       "citations": [
@@ -4268,19 +4088,11 @@
           "url": "https://www.750g.com/soupe-a-l-oignon-gratinee-la-vraie-recette-comme-dans-les-bistrots-parisiens-a42898.htm"
         },
         {
-          "source": "Chef Simon, Gratinée au madère",
-          "url": "https://chefsimon.com/recettes/gratinee-au-madere"
-        },
-        {
-          "source": "Qui veut du fromage, Soupe à l'oignon gratinée au fromage",
-          "url": "https://www.quiveutdufromage.com/r-soupe-a-l-oignon-gratinee-au-fromage"
-        },
-        {
           "source": "Wikipédia, Soupe à l'oignon",
           "url": "https://fr.wikipedia.org/wiki/Soupe_%C3%A0_l%27oignon"
         }
       ],
-      "curationNote": "750g gives the bistrot method (butter, beef broth, dried baguette, Gruyère, broiled), Chef Simon the flour and the pot-au-feu broth, Qui veut du fromage the white wine with thyme and bay. Brown veal stock stands in the place of the beef broth, topped up with white chicken stock, both from the base shelf. Chef Simon's Madeira and yolk liaison was left out as a variation."
+      "curationNote": "750g, Soupe à l'oignon gratinée comme dans les bistrots parisiens for every amount and step; serves 4: 400 g onions, 100 g butter, 1 l beef broth, half a baguette, 200 g grated Gruyère, a pinch of nutmeg, salt and pepper to taste, no flour, wine or herbs (a bouquet garni only as an option); scaled to our 6. Followed alone in place of the blend with Chef Simon and Qui veut du fromage; the broth stays as the veal and chicken stocks from the base shelf."
     },
     {
       "servingSizeAmount": 1,
@@ -4294,30 +4106,21 @@
       "servings": 6,
       "servingSizeUnit": "cup",
       "flavorProfile": "Cold, silky and pale, with the gentle sweetness of leeks, the body of potato and fresh chives on top.",
-      "healthBenefit": "Leeks and potatoes bring potassium, vitamin C and some fibre, while the cream makes it a rich soup best served in a modest cup.",
+      "healthBenefit": "Leeks and potatoes bring potassium, vitamin C and some fibre, in a soup made with water and only a little cream spooned over each cup.",
       "ingredients": [
         {
           "category": "Veg",
           "baseName": "Leek",
-          "quantity": 400,
+          "quantity": 300,
           "unit": "g",
           "cutPrep": "white part, washed and thinly sliced",
           "cookingMethod": "Sauteed",
           "prepNote": null
         },
         {
-          "category": "Veg",
-          "baseName": "Onion",
-          "quantity": 100,
-          "unit": "g",
-          "cutPrep": "peeled and thinly sliced",
-          "cookingMethod": "Sauteed",
-          "prepNote": null
-        },
-        {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 40,
+          "quantity": 30,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Sauteed",
@@ -4335,16 +4138,7 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 750,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": "Simmered",
-          "prepNote": null
-        },
-        {
-          "category": "Dairy",
-          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
-          "quantity": 250,
+          "quantity": 1500,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": "Simmered",
@@ -4353,8 +4147,8 @@
         {
           "category": "Dairy",
           "baseName": "Heavy Whipping Cream",
-          "quantity": 250,
-          "unit": "ml",
+          "quantity": 1,
+          "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -4362,20 +4156,20 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1.5,
+          "quantity": 9,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the source says to taste"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, pepper, white, ground",
-          "quantity": 0.6,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "0.25 tsp at 2.4 g per tsp"
         },
         {
           "category": "Veg",
@@ -4388,13 +4182,11 @@
         }
       ],
       "instructions": [
-        "Melt the butter in a pot over low heat, add the leeks and onion and soften them for 10 to 15 minutes, without letting them color.",
-        "Add the potatoes, the water and the salt, bring to a boil and simmer for 15 to 25 minutes, until the potatoes fall apart.",
-        "Pour in the milk and bring back just to a simmer.",
-        "Blend until completely smooth, then pass through a fine sieve.",
-        "Stir in 200 ml of the cream, season with white pepper and taste for salt.",
-        "Cool, then chill for at least 3 to 4 hours, until very cold.",
-        "Serve in chilled cups with a spoonful of the remaining cream on each and the chives scattered over."
+        "Melt the butter in a pot over low heat, add the leeks and soften them for 10 to 15 minutes, without letting them color.",
+        "Add the potatoes, the water and the salt, cover, bring to a boil and simmer for 10 to 15 minutes, until the potatoes are soft.",
+        "Blend until completely smooth, then pass through a fine sieve. Season with the pepper.",
+        "Cool over ice or in the fridge until very cold.",
+        "Serve in chilled cups with a little of the cream on each and the chives scattered over."
       ],
       "nutritionHighlights": [
         {
@@ -4416,7 +4208,7 @@
           "url": "https://en.wikipedia.org/wiki/Vichyssoise"
         }
       ],
-      "curationNote": "RTBF gives the proportions (leek whites, floury potatoes, water, butter, blended, sieved, cream, chilled, whipped cream and chives). Wikipedia gives Louis Diat's account, after his mother's leek and potato soup near Vichy, finished with milk and cream and served cold with chives; both are kept."
+      "curationNote": "RTBF, Vichyssoise for every amount and step; serves 6: 300 g leek whites, 600 g floury potatoes, 1.5 l water, 30 g butter, 1 tbsp thick cream, chives, salt and pepper to taste; no onion or milk. Followed alone in place of the blend with Wikipedia's account of Louis Diat's soup."
     },
     {
       "servingSizeAmount": 1,
@@ -4491,11 +4283,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1.5,
-          "unit": "tsp",
+          "quantity": 9,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste"
         },
         {
           "category": "Herbs",
@@ -4508,7 +4300,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Chervil Spices",
+          "baseName": "Cerfeuil, frais",
           "quantity": 10,
           "unit": "g",
           "cutPrep": "leaves, chopped",
@@ -4543,7 +4335,7 @@
           "url": "https://www.lalanguefrancaise.com/dictionnaire/definition/parmentier"
         }
       ],
-      "curationNote": "Noovo Moi gives the quantities (butter, leek whites, a kilo of potatoes, poultry stock, cream). The 1869 Journal des demoiselles definition quoted by La langue française gives the classic finish of chervil and fried croutons, so both are kept."
+      "curationNote": "Noovo Moi, Potage Parmentier for every amount and step; serves 8: 30 ml butter, 2 to 3 leek whites, 1 kg potatoes, 2 l poultry stock, 125 ml cream, salt and pepper to taste; the chervil and croutons garnish is kept from the classic definition."
     },
     {
       "servingSizeAmount": 1,
@@ -4595,9 +4387,9 @@
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 30,
+          "quantity": 8,
           "unit": "g",
-          "cutPrep": "peeled and crushed",
+          "cutPrep": "2 cloves, peeled and crushed",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -4630,15 +4422,6 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Fresh Thyme",
-          "quantity": 2,
-          "unit": "g",
-          "cutPrep": "a few sprigs, in the bouquet garni",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Spices, bay leaf",
           "quantity": 0.15,
           "unit": "g",
@@ -4658,11 +4441,11 @@
         {
           "category": "Herbs",
           "baseName": "Saffron Spices",
-          "quantity": 0.5,
+          "quantity": 0.3,
           "unit": "g",
           "cutPrep": "threads",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 doses of 0.1 g"
         },
         {
           "category": "Meat",
@@ -4739,8 +4522,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 2.5,
-          "unit": "tsp",
+          "quantity": 15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -4764,24 +4547,6 @@
           "prepNote": null
         },
         {
-          "category": "Dairy",
-          "baseName": "Chicken Egg Yolk (Raw)",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "separated",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, pepper, red or cayenne",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": "ground",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Fats",
           "baseName": "Olive Oil (Extra Virgin)",
           "quantity": 200,
@@ -4789,14 +4554,23 @@
           "cutPrep": "for the rouille",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Peppers, hot chile",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": "2 small bird's eye chillies, for the rouille",
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Warm the olive oil in a wide pot over medium heat, add the onion, leek, garlic, tomatoes, fennel, parsley, thyme, bay, orange zest and half the saffron, and cook for 5 to 8 minutes.",
+        "Warm the olive oil in a wide pot over medium heat, add the onion, leek, garlic, tomatoes, fennel, parsley, bay leaf, orange zest and half the saffron, and cook for 5 to 8 minutes.",
         "Add the soup fish and cook, stirring, for 15 minutes, until they break down to a paste.",
         "Pour in the boiling water, salt lightly and keep it at a strong boil for 30 minutes to 1 hour so the oil and broth bind.",
         "Pass everything through a food mill, then through a fine sieve, pressing hard, and return the broth to the cleaned pot with the rest of the saffron.",
-        "Make the rouille: pound the garlic to a paste with a pinch of salt, add the squeezed bread crumb, the yolk, the cayenne and a pinch of saffron, then work in the 200 ml of olive oil drop by drop, as for a mayonnaise.",
+        "Make the rouille: pound the rouille garlic and the chillies to a paste with a pinch of salt, add the squeezed bread crumb and a pinch of the saffron, then work in the 200 ml of olive oil a little at a time, as for a mayonnaise.",
         "Bring the broth back to a boil, add the potatoes and the firm fish (conger, monkfish and scorpion fish) and cook for 10 to 15 minutes.",
         "Add the delicate fish (John Dory and gurnard) and cook for 5 to 10 minutes more, until all the fish is just cooked and the potatoes are tender. Taste for salt and pepper.",
         "Serve the broth first in hot plates over the garlic toasts with the rouille, then bring the fish and potatoes to the table on a warm platter, moistened with broth."
@@ -4825,7 +4599,7 @@
           "url": "https://www.routard.com/fr/mag/dossier/a/recette-de-la-bouillabaisse"
         }
       ],
-      "curationNote": "Marseille Tourisme gives the 1980 charter recipe: rascasse, Saint-Pierre, conger, galinette, vive and monkfish, soup fish cooked to a paste, a strong boil, food mill and sieve, potatoes and firm fish then delicate fish, and a saffron and hot pepper rouille. Le Routard gives the orange zest, the timings and the rouille proportions (bread, garlic, chile, olive oil). Weever (vive) was left out, since the charter asks for at least four species and five are kept. Most of these fish are not in the food database and are listed by name."
+      "curationNote": "Marseille Tourisme, La bouillabaisse, with Le Routard, Recette de la bouillabaisse for every amount and step; Marseille Tourisme gives the charter fish (about 4 kg) and names oil, garlic, saffron, salt, pepper, fennel and parsley with no amounts. Le Routard, for 8: 2 garlic cloves in the soup, zest of half an orange, a bouquet garni of fennel, parsley and bay, 3 doses of saffron, 1.4 kg potatoes; rouille of 3 garlic cloves, 2 bird's eye chillies, 2 pinches salt, 40 g bread crumb soaked in broth and 250 ml olive oil, no egg."
     },
     {
       "servingSizeAmount": 1,
@@ -4871,15 +4645,6 @@
           "baseName": "Olive Oil (Extra Virgin)",
           "quantity": 30,
           "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": "Sauteed",
-          "prepNote": null
-        },
-        {
-          "category": "Fats",
-          "baseName": "Pure Butter (Unsalted)",
-          "quantity": 20,
-          "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Sauteed",
           "prepNote": null
@@ -4958,7 +4723,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Tarragon Spices",
+          "baseName": "Estragon, frais",
           "quantity": 3,
           "unit": "g",
           "cutPrep": "a few fresh sprigs",
@@ -4986,32 +4751,41 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 0.4,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, pepper, red or cayenne",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": "ground",
           "cookingMethod": null,
+          "prepNote": "a pinch"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": "4 sprigs",
+          "cookingMethod": "Simmered",
           "prepNote": null
         }
       ],
       "instructions": [
         "Split the lobster lengthwise from the head, remove the gravel sac and chop the head and shell into pieces; keep the tail and claws aside.",
         "Heat the oil in a heavy pot over high heat and sear the shell pieces for 3 to 5 minutes, until bright red, then add the tail and claws for 2 to 3 minutes and lift them out.",
-        "Add the butter, carrot, celery and shallot and sweat over low heat for 5 minutes.",
+        "Lower the heat, add the carrot, celery and shallot to the oil and sweat for 5 minutes.",
         "Stir in the tomato paste, then pour in the cognac and let it reduce (or flame it carefully).",
-        "Add the white wine and reduce by half, then add the tomatoes, garlic, tarragon, rice, fish stock and water.",
+        "Add the white wine and reduce by half, then add the tomatoes, garlic, tarragon, parsley sprigs, rice, fish stock and water.",
         "Simmer gently, covered, for 35 to 40 minutes.",
         "Meanwhile pick the meat from the tail and claws and cut it in small pieces; put the emptied shells back in the pot.",
         "Blend the bisque with the shells in short bursts, then pass it through a fine sieve, pressing hard to get all the flavor.",
-        "Reheat gently, stir in the crème fraîche, season with salt and a pinch of cayenne, and serve with the lobster meat and small croutons."
+        "Reheat gently, stir in the crème fraîche, season with a pinch of salt if needed and the pinch of cayenne, and serve with the lobster meat and small croutons."
       ],
       "nutritionHighlights": [
         {
@@ -5037,7 +4811,7 @@
           "url": "https://chefsimon.com/gourmets/chef-simon/recettes/bisque-de-homard-fdf934f8-9479-4ae0-9a13-c370f8815a1d"
         }
       ],
-      "curationNote": "750g gives the method around a whole lobster (shell seared, vegetables, tomato paste, cognac, white wine, round rice as the thickener, fish stock, 40 minutes, blended and sieved, cayenne). Chef Simon gives the tarragon, the tomatoes, the crème fraîche finish and the lobster meat with croutons to serve; his arrowroot was left out because the rice already thickens it."
+      "curationNote": "750g, Bisque de homard for every amount and step; serves 6 like ours: 600 g lobster, 1.2 L fumet, round rice, 10 cl white wine, 5 cl cognac, carrot, celery, shallot, 1 garlic clove, 2 tbsp olive oil, tomato paste, a pinch of cayenne, 4 parsley sprigs; no salt or butter. Chef Simon adds tarragon, tomatoes and crème fraîche, also without salt or butter."
     },
     {
       "servingSizeAmount": 1,
@@ -5144,15 +4918,6 @@
           "prepNote": "1 whole clove"
         },
         {
-          "category": "Veg",
-          "baseName": "Leek",
-          "quantity": 100,
-          "unit": "g",
-          "cutPrep": "washed and sliced",
-          "cookingMethod": "Simmered",
-          "prepNote": null
-        },
-        {
           "category": "Herbs",
           "baseName": "Fresh Thyme",
           "quantity": 2,
@@ -5182,11 +4947,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 2,
-          "unit": "tsp",
+          "quantity": 12,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste"
         },
         {
           "category": "Herbs",
@@ -5227,7 +4992,7 @@
         {
           "category": "Dairy",
           "baseName": "Parmesan",
-          "quantity": 80,
+          "quantity": 100,
           "unit": "g",
           "cutPrep": "grated, at the table",
           "cookingMethod": null,
@@ -5236,7 +5001,7 @@
       ],
       "instructions": [
         "Drain the soaked beans, put them in a large pot with the water, the onion stuck with the clove and the thyme, bring to a boil and simmer for 45 minutes to 1 hour, until nearly tender (fresh beans need only 20 to 30 minutes).",
-        "Add the carrots, celery, leek, potatoes and tomatoes and simmer for 20 minutes.",
+        "Add the carrots, celery, potatoes and tomatoes and simmer for 20 minutes.",
         "Add the green beans and zucchini, season with salt and pepper and simmer 15 minutes more.",
         "Add the pasta and cook for 10 to 15 minutes, until tender; remove the onion and clove.",
         "Meanwhile make the pistou: pound the garlic with a pinch of salt in a mortar, add the basil leaves a handful at a time and pound to a paste, then work in the olive oil a little at a time.",
@@ -5260,13 +5025,9 @@
         {
           "source": "Le Routard, Recette de la soupe au pistou",
           "url": "https://www.routard.com/fr/mag/dossier/a/recette-de-la-soupe-au-pistou"
-        },
-        {
-          "source": "ProvenceWeb, Soupe au pistou",
-          "url": "https://www.provenceweb.fr/f/gastronomie/recettes-provencales/soupe-pistou.htm"
         }
       ],
-      "curationNote": "Le Routard gives the quantities (flat green beans, potatoes, celery, tomatoes, red and white coco beans, onion with a clove, short pasta, water) and a pistou of garlic, basil and olive oil. ProvenceWeb adds zucchini, carrots and leek, stresses no cheese in the pistou itself (grated at the table) and stirring it in off the heat, which is followed. Dried coco beans are listed with the fresh amount in the note, since fresh ones are only sold in summer."
+      "curationNote": "Le Routard, Recette de la soupe au pistou for every amount and step; serves 4 to 6: 400 g flat green beans, 300 g potatoes, 2 celery stalks, 250 g tomatoes, 250 g each fresh red and white coco beans, an onion stuck with a clove, thyme, 150 g short pasta, 3 l water, salt and pepper; pistou of 3 garlic cloves, a bunch of basil, 4 tbsp olive oil and 100 g cheese. Zucchini and carrots are named as optional additions and are kept; no leek. Dried beans in place of fresh are kept as written."
     },
     {
       "servingSizeAmount": 1,
@@ -5355,20 +5116,20 @@
         {
           "category": "Herbs",
           "baseName": "Spices, nutmeg, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": "freshly grated",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1.5,
-          "unit": "tsp",
+          "quantity": 9,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste"
         },
         {
           "category": "Herbs",
@@ -5407,13 +5168,9 @@
         {
           "source": "750g, Velouté de champignons de Paris",
           "url": "https://www.750g.com/veloute-de-champignons-de-paris-r4570.htm"
-        },
-        {
-          "source": "750g, Velouté crémeux aux champignons",
-          "url": "https://www.750g.com/veloute-de-champignons-r100355.htm"
         }
       ],
-      "curationNote": "The first 750g recipe is followed for the quantities and method (a kilo of champignons de Paris with lemon, butter and garlic, part blended, flour, poultry stock, milk and crème fraîche off the heat, nutmeg, pain de mie). The second, quicker one confirms the stock base and the cream finish."
+      "curationNote": "750g, Velouté de champignons de Paris for every amount and step; serves 8: 1 kg mushrooms, 1 l poultry stock, 5 slices pain de mie, 50 cl milk, 1 lemon, 100 g butter, 4 tbsp crème fraîche, 3 tbsp flour, 1 garlic clove, a pinch of nutmeg, salt and pepper to taste. Followed alone in place of the pair of 750g recipes."
     },
     {
       "servingSizeAmount": 1,
@@ -5430,8 +5187,8 @@
         },
         {
           "recipeId": "curated_fr_base_poitrine_salee",
-          "servings": 10,
-          "note": "500 g, in large chunks"
+          "servings": 20,
+          "note": "1 kg, in large chunks"
         }
       ],
       "overallTier": "strong",
@@ -5504,18 +5261,18 @@
           "baseName": "Onion",
           "quantity": 250,
           "unit": "g",
-          "cutPrep": "peeled, one stuck with the clove",
+          "cutPrep": "2, peeled, each stuck with a clove",
           "cookingMethod": "Simmered",
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Spices, cloves, ground",
-          "quantity": 0.1,
+          "quantity": 0.2,
           "unit": "g",
-          "cutPrep": "1 whole clove",
+          "cutPrep": "2 whole cloves",
           "cookingMethod": null,
-          "prepNote": "1 whole clove"
+          "prepNote": "2 whole cloves"
         },
         {
           "category": "Veg",
@@ -5555,15 +5312,6 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Chilli (chili), dried, ground",
-          "quantity": 1,
-          "unit": "g",
-          "cutPrep": "ground",
-          "cookingMethod": null,
-          "prepNote": "0.5 tsp at 2 g per tsp"
-        },
-        {
-          "category": "Herbs",
           "baseName": "Spices, pepper, black",
           "quantity": 1,
           "unit": "tsp",
@@ -5592,8 +5340,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -5603,11 +5351,11 @@
         "The night before, put the beans to soak in plenty of cold water.",
         "Put the ham hock and the pork belly in a large pot of cold water, bring to a boil, drain and rinse, then do it once more to draw out some of the salt.",
         "Return the meats to the cleaned pot with the 4 liters of water and simmer gently for 1 hour to 1 hour 30 minutes.",
-        "Add the drained beans, carrots, leek, turnips, onions, garlic, the bouquet garni of thyme, bay and parsley stalks, the Espelette pepper and the peppercorns, and simmer, covered, for 45 minutes to 1 hour.",
+        "Add the drained beans, carrots, leek, turnips, the clove-studded onions, garlic, the bouquet garni of thyme, bay and parsley stalks, and the peppercorns, and simmer, covered, for 45 minutes to 1 hour.",
         "Meanwhile blanch the cabbage in boiling water for 5 minutes, rinse in cold water and drain.",
         "Add the potatoes and cabbage to the pot and simmer for 30 to 45 minutes, until the beans are soft.",
         "Add the confit legs and a spoonful of their fat and simmer for 10 to 15 minutes more.",
-        "Remove the onion and bouquet garni, take the meat off the bones in pieces and taste for salt.",
+        "Remove the onions and bouquet garni, take the meat off the bones in pieces, and season with the salt to taste.",
         "Put a slice of toasted bread in each wide bowl, ladle the soup over and serve the meats alongside or in the bowls."
       ],
       "nutritionHighlights": [
@@ -5628,13 +5376,9 @@
         {
           "source": "Tourisme Occitanie, La recette de la garbure",
           "url": "https://www.tourisme-occitanie.com/loisirs/local-et-gourmand/produits-locaux/carnet-de-recettes-doccitanie/la-recette-de-la-garbure/"
-        },
-        {
-          "source": "Kate Hill, Garbure",
-          "url": "https://katehillfrance.substack.com/p/garbure-from-the-bottom-of-my-heart"
         }
       ],
-      "curationNote": "Tourisme Occitanie gives the quantities and the order (ham hock and lard maigre blanched twice, 4 liters of water, Tarbais beans with root vegetables and a clove-stuck onion, cabbage blanched, potatoes, goose confit at the end, bread). Kate Hill, cooking in Gascony, confirms the ventrèche, savoy cabbage, piment d'Espelette, confit with a little of its fat, and soup ladled over a slice of country bread. Duck or goose confit, ventrèche and Espelette are not in the food database and are listed by name."
+      "curationNote": "Tourisme Occitanie, La recette de la garbure for every amount and step; for 8 to 10 like ours: 1 ham hock, 1 kg lard maigre, 500 g Tarbais beans, 4 L water, 3 carrots, 1 leek, 4 turnips, 2 onions studded with cloves, garlic, a bouquet garni, 500 g potatoes, 1 green cabbage, goose confit, toasted country bread, salt and pepper to taste; no chilli or Espelette."
     },
     {
       "servingSizeAmount": 1,
@@ -5731,11 +5475,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "½ tsp"
         },
         {
           "category": "Herbs",
@@ -5757,7 +5501,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Chervil Spices",
+          "baseName": "Cerfeuil, frais",
           "quantity": 5,
           "unit": "g",
           "cutPrep": "leaves",
@@ -5793,13 +5537,9 @@
         {
           "source": "Mad About Macarons, Potage Saint-Germain",
           "url": "https://www.madaboutmacarons.com/french-pea-soup-potage-saint-germain"
-        },
-        {
-          "source": "French Cooking Academy, Potage Saint-Germain",
-          "url": "https://www.thefrenchcookingacademy.com/recipes/potage-saint-germain"
         }
       ],
-      "curationNote": "Mad About Macarons follows Escoffier's fresh-pea version (peas cooked with bacon, leek and herbs, garnished with whole peas and chervil), which is the one kept here. The French Cooking Academy gives the split-pea variation with pork belly, butter to finish and fried croutons; the croutons and butter are taken from it."
+      "curationNote": "Mad About Macarons, Potage Saint-Germain for every amount and step; serves 6: 600 g peas, 75 g bacon, 1 leek, 1 small carrot, bouquet garni of bay, thyme and parsley stalks, ½ tsp fleur de sel, 750 ml water, a knob of butter, pepper to taste, chervil to garnish and croutons to serve."
     },
     {
       "servingSizeAmount": 1,
@@ -5818,14 +5558,14 @@
       "region": "France (named for Madame du Barry)",
       "servings": 6,
       "servingSizeUnit": "bowl",
-      "flavorProfile": "A smooth, ivory cauliflower cream, mild and gently sweet, thickened at the end with egg yolks and cream, with small florets in the bottom of the bowl.",
+      "flavorProfile": "A smooth, ivory cauliflower cream, mild and gently sweet, thickened at the end with egg yolks and cream.",
       "healthBenefit": "Cauliflower brings vitamin C, vitamin K and fibre, while the cream and yolk liaison make it a rich soup.",
       "ingredients": [
         {
           "category": "Fats",
-          "baseName": "Pure Butter (Unsalted)",
-          "quantity": 50,
-          "unit": "g",
+          "baseName": "Olive Oil (Extra Virgin)",
+          "quantity": 15,
+          "unit": "ml",
           "cutPrep": null,
           "cookingMethod": "Sauteed",
           "prepNote": null
@@ -5840,21 +5580,12 @@
           "prepNote": null
         },
         {
-          "category": "PantryStaples",
-          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
-          "quantity": 40,
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 30,
           "unit": "g",
-          "cutPrep": "sifted",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 500,
-          "unit": "ml",
-          "cutPrep": "cold",
-          "cookingMethod": "Simmered",
+          "cutPrep": "diced",
+          "cookingMethod": "Sauteed",
           "prepNote": null
         },
         {
@@ -5887,24 +5618,24 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1.5,
-          "unit": "tsp",
+          "quantity": 9,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
-          "baseName": "Spices, pepper, white, ground",
+          "baseName": "Pepper, black, ground",
           "quantity": 0.6,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "0.25 tsp at 2.4 g per tsp"
+          "prepNote": null
         },
         {
           "category": "Herbs",
-          "baseName": "Chervil Spices",
+          "baseName": "Cerfeuil, frais",
           "quantity": 5,
           "unit": "g",
           "cutPrep": "leaves",
@@ -5913,13 +5644,11 @@
         }
       ],
       "instructions": [
-        "Blanch the cauliflower florets in boiling salted water for 3 to 4 minutes, drain and cool them in cold water; set aside 50 g of small florets.",
-        "Melt the butter in a pot and sweat the leeks over low heat for 5 minutes, without browning.",
-        "Stir in the flour and cook for 2 minutes.",
-        "Whisk in the cold water and the stock, bring to a boil, add the cauliflower and simmer for 25 to 40 minutes, until very soft.",
-        "Blend until smooth and pass through a sieve back into the pot.",
-        "Whisk the egg yolks with the cream and a ladleful of the hot soup, then stir this back in over low heat until it thickens slightly; do not let it boil again.",
-        "Season with salt and white pepper, put the reserved florets in the bowls and pour the soup over, with a few chervil leaves."
+        "Heat the olive oil in a large pot and soften the leek and shallot over low heat for 5 minutes, without browning.",
+        "Add the cauliflower florets and the stock, bring to a boil and simmer for 20 to 25 minutes, until the cauliflower is very soft.",
+        "Blend until smooth, adding a little water if it is too thick.",
+        "Whisk the egg yolks with the cream, stir in a ladleful of the hot soup, then stir this back into the pot over low heat until it thickens slightly; do not let it boil again.",
+        "Season with the salt and pepper and serve with a few chervil leaves on each bowl."
       ],
       "nutritionHighlights": [
         {
@@ -5937,15 +5666,11 @@
       ],
       "citations": [
         {
-          "source": "Ferme de Sainte-Marthe, Cream of Barry",
-          "url": "https://www.fermedesaintemarthe.com/en/blogs/recettes-de-cuisine/creme-du-barry"
-        },
-        {
           "source": "Pardon Your French, Crème du Barry",
           "url": "https://www.pardonyourfrench.com/cream-of-cauliflower-soup-creme-du-barry/"
         }
       ],
-      "curationNote": "Ferme de Sainte-Marthe gives the classic velouté method (leek whites sweated in butter, flour, cold liquid, blanched cauliflower, blended and sieved, yolk and cream liaison never boiled, reserved florets in the bowl). Pardon Your French gives the chicken stock, the shorter simmer, the chervil and the history of the name; the two liquids are combined here."
+      "curationNote": "Pardon Your French, Crème du Barry for every amount and step; for 6 like ours: 15 ml olive oil, 1 leek white (100 g), 1 shallot, 1 kg cauliflower, 1 L low sodium chicken stock, 120 ml cream, 2 yolks, chervil or parsley to garnish, salt and pepper to taste. The recipe had mixed this with Ferme de Sainte-Marthe's butter and flour velouté made with water; it now follows the one recipe whose stock it already used."
     },
     {
       "servingSizeAmount": 1,
@@ -5991,8 +5716,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1.5,
-          "unit": "tsp",
+          "quantity": 7.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -6026,7 +5751,7 @@
           "url": "https://www.meilleurduchef.com/fr/recette/galette-bretonne.html"
         }
       ],
-      "curationNote": "Added beyond base_ids.json because the galette complète needs a buckwheat batter and Pâte à Crêpes is a wheat and milk batter. Taste France: 330 g buckwheat flour, 750 ml water, 10 g coarse salt, 1 egg, about 20 galettes, rested 2 hours. Meilleur du Chef: 250 g buckwheat flour, 2 eggs, 500 ml water, 40 g melted butter, salt, rested 2 hours. Written at Taste France's ratio of flour to water with one egg, for 12 galettes. The Meilleur du Chef butter is left out as optional."
+      "curationNote": "Taste France, Original French galette complète for every amount and step; 330 g buckwheat flour, 750 ml water, 10 g coarse salt, 1 egg; ours uses 250 g flour, so salt scales to about 7.6 g."
     },
     {
       "dishRole": "main",
@@ -6088,24 +5813,33 @@
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, nutmeg, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": "freshly grated",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "a pinch; the source says to taste and the lardons are salty"
         }
       ],
       "instructions": [
-        "Heat the oven to 400°F to 410°F (200°C to 210°C). Line the tin with the pâte brisée, prick the base with a fork and chill it for 30 minutes.",
+        "Heat the oven to 350°F (180°C). Line the tin with the pâte brisée, prick the base with a fork and chill it for 30 minutes.",
         "Cook the lardons in a dry pan over medium heat for 5 to 8 minutes until they color and give up their fat, then drain them on paper.",
-        "Beat the eggs with the crème fraîche and milk, season with pepper and nutmeg; add no salt, since the lardons carry plenty.",
+        "Beat the eggs with the crème fraîche and milk, and season with a pinch of salt, the pepper and the nutmeg. Keep the salt light, since the lardons are salty.",
         "Scatter the lardons over the base and pour in the custard.",
-        "Bake for 30 to 45 minutes, until the top is golden and puffed and the center still shivers slightly; at 350°F (180°C) allow 45 to 50 minutes.",
+        "Bake for 45 to 50 minutes, until the top is golden and puffed and the center still shivers slightly.",
         "Rest 10 minutes before cutting, and serve warm."
       ],
       "nutritionHighlights": [
@@ -6124,15 +5858,11 @@
       ],
       "citations": [
         {
-          "source": "French Moments, Quiche lorraine",
-          "url": "https://frenchmoments.eu/quiche-lorraine/"
-        },
-        {
           "source": "Demotivateur, Quiche lorraine traditionnelle",
           "url": "https://www.demotivateur.fr/food/recette/quiche-lorraine-traditionnelle-1560"
         }
       ],
-      "curationNote": "French Moments: pâte brisée of 200 g flour and 100 g butter in a 28 cm tin, 150 to 200 g lardons cooked dry, 4 eggs and crème fraîche, pepper and no salt, 210°C about 30 minutes, and no cheese in the Lorraine original. Demotivateur for 6: 200 g lardons, 4 eggs, 200 ml crème fraîche, 200 ml milk, nutmeg, 180°C 45 to 50 minutes. Written without cheese, as in Lorraine."
+      "curationNote": "Demotivateur, Quiche lorraine traditionnelle for every amount and step; serves 6: 200 g lardons, 4 eggs, 200 ml crème fraîche, 200 ml milk, salt and pepper to taste, a pinch of nutmeg; 180°C for 45 to 50 minutes. Followed alone in place of the blend with French Moments."
     },
     {
       "dishRole": "main",
@@ -6178,7 +5908,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Tarragon Spices",
+          "baseName": "Estragon, frais",
           "quantity": 0.5,
           "unit": "g",
           "cutPrep": "leaves, chopped",
@@ -6187,7 +5917,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Chervil Spices",
+          "baseName": "Cerfeuil, frais",
           "quantity": 1,
           "unit": "g",
           "cutPrep": "leaves, chopped",
@@ -6196,9 +5926,9 @@
         },
         {
           "category": "Fats",
-          "baseName": "Pure Butter (Unsalted)",
-          "quantity": 15,
-          "unit": "g",
+          "baseName": "Olive Oil (Extra Virgin)",
+          "quantity": 3,
+          "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -6206,26 +5936,26 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.125,
-          "unit": "tsp",
+          "quantity": 0.3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a small pinch"
         },
         {
           "category": "Herbs",
           "baseName": "Pepper, black, ground",
-          "quantity": 0.125,
-          "unit": "tsp",
+          "quantity": 0.1,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a small pinch"
         }
       ],
       "instructions": [
         "Chop the herbs finely just before cooking so they keep their scent.",
         "Beat the eggs with a fork for 20 to 30 seconds, only until white and yolk are mixed, then stir in the salt, pepper and most of the herbs.",
-        "Heat an 8 inch (20 cm) pan over medium high heat, add the butter and wait until it foams and the foam just begins to settle.",
+        "Heat an 8 inch (20 cm) nonstick pan over medium high heat and brush it with the olive oil.",
         "Pour in the eggs, shake the pan and stir quickly with the flat of a fork for 20 to 30 seconds, until soft curds form but the top is still creamy.",
         "Stop stirring, let the base set for 10 seconds, then tilt the pan and fold the omelette in three onto a warm plate.",
         "Scatter the last of the herbs on top and serve at once."
@@ -6254,7 +5984,7 @@
           "url": "https://www.weightwatchers.com/fr/recipe/omelette-aux-fines-herbes/5625adc5f0f249113467bb06"
         }
       ],
-      "curationNote": "Wikipedia: fines herbes are parsley, chives, tarragon and chervil, and Escoffier insists on parsley and chives with a little chervil and tarragon. WW France: 4 eggs for 2, 3 tsp parsley, 3 tsp chives, half a tsp tarragon, 1 tsp chervil, beaten with the herbs, cooked and folded. Written for one person with three eggs and butter, as the classic omelette is cooked."
+      "curationNote": "WW France, Omelette aux fines herbes for every amount and step; serves 2: 4 eggs, 3 tsp parsley, 3 tsp chives, 1/2 tsp tarragon, 1 tsp chervil (all fresh), 1 tsp olive oil as a spray, a pinch each of salt and pepper. No butter."
     },
     {
       "servingSizeAmount": 1,
@@ -6306,8 +6036,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 1.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -6315,18 +6045,9 @@
         {
           "category": "Herbs",
           "baseName": "Pepper, black, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.5,
+          "unit": "g",
           "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 750,
-          "unit": "ml",
-          "cutPrep": "boiling, for the bain-marie",
           "cookingMethod": null,
           "prepNote": null
         }
@@ -6359,7 +6080,7 @@
           "url": "https://www.doitinparis.com/fr/recette-oeufs-cocotte-24105"
         }
       ],
-      "curationNote": "Zwilling: 4 eggs, 200 ml cream, 2 tbsp crème fraîche, with ham, Emmental, mushrooms, chives and nutmeg, in a bain-marie at 180°C for 8 to 10 minutes. Do it in Paris: 4 eggs, 10 cl cream, cèpes, shallot, garlic, butter, Tomme, bain-marie at 180°C 8 to 10 minutes. Written as the plain version both build on: butter, crème fraîche, egg and chives."
+      "curationNote": "Do it in Paris, Œufs cocotte for every amount and step; closest published version, serves 4: 4 eggs, 10 cl cream, 10 g butter, salt and pepper, bain-marie at 180°C for 8 to 10 minutes; its cèpes, Tomme, shallot and garlic are left out for the plain version, with chives as Zwilling's version uses."
     },
     {
       "servingSizeAmount": 1,
@@ -6393,7 +6114,7 @@
         {
           "category": "Dairy",
           "baseName": "Cheese, Emmental",
-          "quantity": 120,
+          "quantity": 200,
           "unit": "g",
           "cutPrep": "grated",
           "cookingMethod": null,
@@ -6419,10 +6140,19 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Pepper, black, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.4,
+          "unit": "g",
           "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "a pinch"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Chives",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "snipped",
           "cookingMethod": null,
           "prepNote": null
         }
@@ -6431,9 +6161,9 @@
         "Heat a crêpe pan or griddle over medium high heat and rub it with salted butter.",
         "Pour in a ladle of batter and spread it thin; cook 1 to 2 minutes until the underside is brown and the top dry.",
         "Without turning it, scatter a quarter of the Emmental over the middle, lay a slice of ham on it and break an egg in the center.",
-        "Cook 2 to 4 minutes until the white sets, covering the pan for a moment if it is slow; season with pepper.",
+        "Cook 2 to 4 minutes until the white sets, covering the pan for a moment if it is slow, and sprinkle the egg with a little of the salt.",
         "Fold the four edges toward the center to make a square, leaving the yolk showing, and slide it onto a warm plate.",
-        "Brush the edges with a little butter and serve at once; repeat for the other three."
+        "Brush the edges with a little butter, scatter over the chives and serve at once; repeat for the other three."
       ],
       "nutritionHighlights": [
         {
@@ -6459,7 +6189,7 @@
           "url": "https://www.meilleurduchef.com/fr/recette/galette-bretonne.html"
         }
       ],
-      "curationNote": "Taste France: buckwheat galette, butter, a filling of Emmental, a slice of ham and an egg, folded into a square. Meilleur du Chef: salted butter, fried egg, white ham, grated Emmental. Emmental is not in the food database and is listed as not counted. The ham is cooked white ham."
+      "curationNote": "Taste France, Original French galette complète for every amount and step; filling for 4 like ours: 4 eggs, 4 slices cooked ham, 200 g grated Emmental, chives, a pinch of salt, butter for the pan; no pepper."
     },
     {
       "dishRole": "main",
@@ -6479,7 +6209,7 @@
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 40,
+          "quantity": 30,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -6523,21 +6253,12 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Spices, nutmeg, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
-          "cutPrep": "freshly grated",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste"
         },
         {
           "category": "Herbs",
@@ -6568,12 +6289,12 @@
         }
       ],
       "instructions": [
-        "Butter a 6 to 7 inch (16 to 18 cm) soufflé dish, or four small ones, dust them with flour, tap out the excess and chill them.",
-        "Melt the butter in a saucepan, stir in the flour and cook 1 minute, then add the milk a little at a time, whisking, and cook 2 to 3 minutes until thick. Season with salt, pepper and nutmeg and take it off the heat.",
-        "Heat the oven to 400°F (200°C).",
+        "Butter four small soufflé moulds, dust them with flour, tap out the excess and chill them.",
+        "Melt the butter in a saucepan, stir in the flour and cook 1 minute, then add the milk a little at a time, whisking, and cook 2 to 3 minutes until thick. Season with most of the salt and the pepper and take it off the heat.",
+        "Heat the oven to 350°F (180°C).",
         "When the sauce has cooled a little, beat in the yolks one at a time, then the grated cheese.",
-        "Beat the whites with a pinch of salt to firm peaks. Stir a third into the sauce to loosen it, then fold in the rest gently with a spatula.",
-        "Fill the dish to just below the rim, run a thumb around the inside edge, and bake without opening the door for 30 to 35 minutes for one large soufflé, or 15 to 20 minutes for small ones, until risen and browned.",
+        "Beat the whites with the last pinch of salt to firm peaks. Stir a third into the sauce to loosen it, then fold in the rest gently with a spatula.",
+        "Fill the moulds to just below the rim, run a thumb around the inside edge, and bake without opening the door for about 20 minutes, until risen and browned.",
         "Serve at once."
       ],
       "nutritionHighlights": [
@@ -6592,15 +6313,11 @@
       ],
       "citations": [
         {
-          "source": "Jura Tourisme, Soufflé au Comté",
-          "url": "https://www.jura-tourism.com/?p=33012"
-        },
-        {
           "source": "Demotivateur, Soufflé au fromage",
           "url": "https://www.demotivateur.fr/food/recette/souffle-au-fromage-1588"
         }
       ],
-      "curationNote": "Jura Tourisme for 4: 160 g Comté, 3 eggs, 30 cl milk, 30 g flour, 60 g butter, nutmeg, 210°C for about 35 minutes. Demotivateur for 4: 30 g butter, 30 g flour, 250 ml milk, 4 eggs, 150 g Comté, Emmental or Gruyère, 180°C for 20 minutes in small moulds. Written between the two, with Gruyère, since Comté is not in the food database and Demotivateur names Gruyère as one of its cheeses."
+      "curationNote": "Demotivateur, Soufflé au fromage for every amount and step; serves 4: 30 g butter, 30 g flour, 250 ml milk, 4 eggs, 150 g Comté, Emmental or Gruyère, salt and pepper to taste, no nutmeg; 180°C for 20 minutes in buttered and floured individual moulds. Followed alone in place of the blend with Jura Tourisme."
     },
     {
       "servingSizeAmount": 1,
@@ -6753,22 +6470,13 @@
           "cutPrep": null,
           "cookingMethod": "Fried",
           "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Pepper, black, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
         }
       ],
       "instructions": [
         "Make the croque-monsieur: heat the oven to 375°F to 400°F (190°C to 200°C), butter the outside of the bread, spread béchamel inside, fill with ham and a third of the cheese and close.",
         "Spread the rest of the béchamel over the tops, cover with the remaining cheese and bake 10 to 12 minutes, then grill 1 to 2 minutes until browned.",
         "While they bake, melt a little butter in a frying pan over medium heat and fry the eggs for 3 to 4 minutes, until the whites are set and the yolks still runny.",
-        "Slide one egg on top of each sandwich, grind over some pepper and serve at once."
+        "Slide one egg on top of each sandwich and serve at once."
       ],
       "nutritionHighlights": [
         {
@@ -6798,7 +6506,7 @@
           "url": "https://www.demotivateur.fr/food/recette/croque-monsieur-a-la-bechamel-691"
         }
       ],
-      "curationNote": "Wikipédia: a croque-monsieur with a fried egg on top, pain de mie, Paris ham and cheese, the name said to come from the egg looking like a lady's hat. Wikipedia (English): a croque monsieur topped with a poached or lightly fried egg, the name dated to around 1960 without a citation. The sandwich follows the croque-monsieur written from Demotivateur and Le Tribunal du Net."
+      "curationNote": "Wikipédia, Croque-madame, with Le Tribunal du Net for the sandwich for every amount and step; a croque-monsieur with a fried egg on top; the sandwich follows Le Tribunal du Net for 4, which adds no pepper, and no opened source seasons the egg."
     },
     {
       "servingSizeAmount": 1,
@@ -6832,10 +6540,19 @@
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 60,
+          "quantity": 115,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "White Wine",
+          "quantity": 158,
+          "unit": "ml",
+          "cutPrep": "dry",
+          "cookingMethod": "Simmered",
           "prepNote": null
         },
         {
@@ -6870,24 +6587,15 @@
           "baseName": "Spices, caraway seed",
           "quantity": 1,
           "unit": "tsp",
-          "cutPrep": "whole, optional",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, nutmeg, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
-          "cutPrep": "freshly grated",
+          "cutPrep": "whole",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.75,
-          "unit": "tsp",
+          "quantity": 1.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -6900,15 +6608,25 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Gruyère",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "grated",
+          "cookingMethod": "Baked",
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Blind bake the pastry shell at 350°F to 375°F (180°C to 190°C) for 15 minutes with paper and beans, then 5 minutes without.",
-        "Melt the butter in a wide pan over low heat, add the onions and a pinch of salt and cook, stirring every 5 minutes, for 45 to 60 minutes, until soft, sweet and pale gold; do not let them brown hard.",
-        "Whisk the eggs with the cream, milk, caraway, nutmeg, the rest of the salt and the pepper, then stir in the onions.",
+        "Heat the oven to 350°F (180°C). Blind bake the pastry shell with paper and beans for 15 minutes, then take out the beans.",
+        "Melt the butter in a wide pan over medium low heat, add the onions and cook for 15 minutes, stirring every 5 minutes.",
+        "Pour in the white wine and keep cooking gently for about 30 minutes more, until the onions are soft and golden.",
+        "Whisk the eggs with the milk, cream, caraway, salt and pepper, then stir in the onions and the Gruyère.",
         "Pour the filling into the shell without filling it to the rim.",
-        "Bake at 350°F to 375°F (180°C to 190°C) for 35 to 45 minutes, until golden and just set with a slight wobble in the center.",
-        "Cool 15 minutes before cutting. Serve warm or at room temperature, as a starter."
+        "Bake for about 1 hour, until golden and set.",
+        "Cool at least 15 minutes before cutting. Serve warm or at room temperature, as a starter."
       ],
       "nutritionHighlights": [
         {
@@ -6934,7 +6652,7 @@
           "url": "https://en.wikipedia.org/wiki/Zewelwa%C3%AF"
         }
       ],
-      "curationNote": "Pardon Your French for 8 to 10: shortcrust of 260 g flour and 150 g butter, 1.5 kg onions cooked in 115 g butter with white wine, 125 ml milk, 125 ml cream, 3 eggs, optional caraway, 50 g Gruyère, 180°C about 1 hour. Wikipedia: an Alsatian starter of onions cooked slowly in fat and a custard of cream or crème fraîche and eggs, sometimes bacon, in a usually blind baked shortcrust. Written without the cheese and wine, which Wikipedia does not list, and without bacon."
+      "curationNote": "Pardon Your French, Alsatian onion tart for every amount and step; serves 8 to 10: 1.5 kg onions cooked in 115 g butter with 158 ml white wine, 125 ml milk, 125 ml cream, 3 eggs, 1 tsp caraway, 1/4 tsp salt, 1/4 tsp pepper, 50 g Gruyère, no nutmeg; 180°C for about 1 hour. Followed in full, with the wine and cheese the earlier version left out."
     },
     {
       "servingSizeAmount": 1,
@@ -7099,24 +6817,6 @@
           "prepNote": null
         },
         {
-          "category": "Veg",
-          "baseName": "Onion",
-          "quantity": 80,
-          "unit": "g",
-          "cutPrep": "peeled and finely chopped",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Garlic",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "peeled and crushed",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Herbs",
           "baseName": "Fresh Thyme",
           "quantity": 2,
@@ -7146,18 +6846,9 @@
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 50,
+          "quantity": 20,
           "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "PantryStaples",
-          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": "sifted",
+          "cutPrep": "softened, for the toast",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -7182,7 +6873,7 @@
         {
           "category": "Dairy",
           "baseName": "Chicken Egg (Raw)",
-          "quantity": 8,
+          "quantity": 4,
           "unit": "each",
           "cutPrep": null,
           "cookingMethod": "Boiled",
@@ -7190,44 +6881,33 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Wine vinegar",
-          "quantity": 30,
-          "unit": "ml",
-          "cutPrep": "for the poaching water",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 2,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "seasons the sauce; a pinch goes in the egg pan"
         },
         {
           "category": "Herbs",
           "baseName": "Pepper, black, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Melt 30 g of the butter in a saucepan and soften the shallots, onion and garlic over low heat for 5 minutes without browning.",
-        "Stir in the flour and cook 2 minutes, then whisk in the red wine, add the thyme, bay and parsley stalks, and simmer gently for 30 to 40 minutes until reduced by about half and glossy. Strain out the herbs and season.",
-        "Meanwhile cook the lardons in a dry pan for 5 to 8 minutes until crisp, lift them out, and brown the mushrooms in the fat with the rest of the butter for 5 minutes.",
-        "Bring a wide pan of water with the vinegar to a bare simmer. Break each egg into a cup and slide it in; poach 3 to 4 minutes, then lift out with a slotted spoon.",
-        "Toast the bread and put a slice on each warm plate, set two eggs on it and spoon the sauce over.",
-        "Scatter the lardons and mushrooms around and serve at once."
+        "Pour the wine into a saucepan with the shallots and a bouquet garni of the thyme, bay and parsley stalks. Simmer gently for about 30 minutes, until reduced by half. Take out the herbs and season with the pepper and some of the salt.",
+        "Meanwhile cook the lardons in a dry pan for 5 to 8 minutes until crisp, lift them out, and brown the mushrooms in their fat for 5 minutes.",
+        "Bring a wide pan of water with a pinch of the salt to a bare simmer. Break each egg into a cup and slide it in; poach 3 to 4 minutes, then lift out with a slotted spoon.",
+        "Toast the bread, butter it and put a slice on each warm plate. Set an egg on each, spoon the sauce over, scatter the lardons and mushrooms around and serve at once."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Protein",
-          "note": "From eight eggs and the pork."
+          "note": "From the eggs and the pork."
         },
         {
           "nutrient": "Choline",
@@ -7242,13 +6922,9 @@
         {
           "source": "Le Bonbon Dijon, La recette originale des œufs en meurette",
           "url": "https://www.lebonbon.fr/dijon/recette/recette-originale-oeufs-en-meurette/"
-        },
-        {
-          "source": "iDealwine, Œufs en meurette",
-          "url": "https://www.idealwine.net/?p=2362"
         }
       ],
-      "curationNote": "Le Bonbon for 4: 4 eggs, 150 g lardons, 2 shallots, 200 g mushrooms, a bottle of red Burgundy reduced by half over about 30 minutes with a bouquet garni, eggs poached 3 to 4 minutes, 4 slices of buttered pain de campagne. iDealwine for 6: 6 eggs, 125 g lardons, 2 garlic cloves, 4 shallots, 1 onion, 50 g butter, 40 g flour cooked with the aromatics, 50 cl red wine simmered 30 minutes, eggs poached about 3 minutes in vinegared water, pain de mie. Written with two eggs a person and the sauce thickened as iDealwine does."
+      "curationNote": "Le Bonbon Dijon, La recette originale des œufs en meurette for every amount and step; 4 eggs, a bottle of red Burgundy reduced by half over about 30 minutes with a bouquet garni (thyme, bay, parsley), 150 g lardons, 2 shallots, 200 g mushrooms, 4 slices of buttered country bread, a pinch of salt in the poaching water, salt and pepper to taste. No flour, onion, garlic or vinegar."
     },
     {
       "dishRole": "main",
@@ -7331,34 +7007,43 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 2,
+          "quantity": 0.4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         },
         {
           "category": "Herbs",
           "baseName": "Chilli (chili), dried, ground",
-          "quantity": 1,
+          "quantity": 0.2,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "0.5 tsp at 2 g per tsp"
+          "prepNote": "a pinch, in place of Espelette pepper"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.75,
-          "unit": "tsp",
+          "quantity": 0.4,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, white, ground",
+          "quantity": 0.1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "a pinch"
         },
         {
           "category": "Dairy",
           "baseName": "Chicken Egg (Raw)",
-          "quantity": 4,
+          "quantity": 3,
           "unit": "each",
           "cutPrep": "beaten",
           "cookingMethod": null,
@@ -7377,7 +7062,7 @@
       "instructions": [
         "Blanch the tomatoes for 30 seconds, peel them, seed them and chop them coarsely.",
         "Heat the olive oil in a wide pan and cook the onions, green peppers, red peppers and garlic over medium heat for 10 to 15 minutes, until soft.",
-        "Add the tomatoes, bay leaf, sugar, salt and Espelette, cover and simmer gently for 25 to 30 minutes, then uncover and cook a few minutes more until most of the tomato water has gone. Remove the bay leaf.",
+        "Add the tomatoes, bay leaf, sugar, salt, white pepper and chilli, cover and simmer gently for 25 to 30 minutes, then uncover and cook a few minutes more until most of the tomato water has gone. Remove the bay leaf.",
         "For a smoother base, blend about a quarter of the mixture and stir it back in.",
         "Pour in the beaten eggs and stir over low heat for 1 to 2 minutes, only until they are barely set.",
         "Meanwhile sear the ham slices in a dry pan for 30 seconds a side, and serve one on each plate with the pipérade."
@@ -7406,18 +7091,12 @@
           "url": "https://www.demotivateur.fr/food/recette/piperade-traditionnelle-1933"
         }
       ],
-      "curationNote": "Cuisine d'Aubery for 4: 50 g olive oil, 600 g tomatoes, 280 g mild green peppers, 400 g onions, 3 garlic cloves, 400 g red peppers, Espelette, sugar, salt, bay, simmered 25 to 30 minutes, a quarter blended, 3 eggs stirred in for a few seconds, and a slice of Bayonne ham each. Demotivateur for 6: 600 g onions, 1.2 kg mild peppers, 3 peppers, 3 garlic cloves, 1.5 kg tomatoes, bouquet garni, olive oil, a tablespoon of sugar and Espelette, about 45 minutes, without eggs. Written from Cuisine d'Aubery with one egg a person. The mild green Basque peppers and Espelette are not in the food database and are listed as not counted; the ham is the database's cured ham."
+      "curationNote": "Cuisine d'Aubery, La piperade de Estérençuby for every amount and step; serves 4: 50 g olive oil, 600 g tomatoes, 280 g mild green peppers, 400 g onions, 3 garlic cloves, 400 g red peppers, 1 bay leaf, a pinch each of Espelette, sugar, salt and white pepper, 3 eggs, 4 slices of cured ham."
     },
     {
       "dishRole": "main",
       "servingSizeAmount": 1,
-      "components": [
-        {
-          "recipeId": "curated_fr_base_beurre_clarifie",
-          "servings": 4,
-          "note": "4 tbsp, for frying the fish without burning"
-        }
-      ],
+      "components": [],
       "overallTier": "strong",
       "id": "curated_fr_sole_meuniere",
       "name": "Sole Meunière",
@@ -7468,9 +7147,9 @@
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 60,
+          "quantity": 200,
           "unit": "g",
-          "cutPrep": "cut in pieces",
+          "cutPrep": "a little to baste, the rest for the beurre noisette",
           "cookingMethod": "Fried",
           "prepNote": null
         },
@@ -7479,7 +7158,7 @@
           "baseName": "Lemon Juice",
           "quantity": 30,
           "unit": "ml",
-          "cutPrep": "freshly squeezed",
+          "cutPrep": "juice of 1 lemon",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -7488,7 +7167,7 @@
           "baseName": "Fresh Parsley",
           "quantity": 10,
           "unit": "g",
-          "cutPrep": "finely chopped",
+          "cutPrep": "coarsely chopped",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -7497,18 +7176,27 @@
           "baseName": "Lemon",
           "quantity": 1,
           "unit": "each",
-          "cutPrep": "cut in wedges",
+          "cutPrep": "peeled and cut in 4 thin slices",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Sunflower oil",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": "for frying",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Pat the fish dry, season it with salt and pepper and dredge it in the flour, shaking off the excess.",
-        "Heat the clarified butter in a wide frying pan over medium high heat until it shimmers.",
-        "Lay in the fish and fry fillets 2 to 3 minutes a side, or whole skinned sole 4 to 5 minutes a side, until golden and just opaque at the centre. Lift onto warm plates.",
-        "Wipe out the pan, add the whole butter and cook it over medium heat for 1 to 2 minutes, swirling, until it foams and smells of hazelnuts.",
-        "Take the pan off the heat, add the lemon juice and parsley, which will spit, and pour the hot butter straight over the fish.",
-        "Serve at once with lemon wedges and steamed potatoes."
+        "Season the fish with salt and pepper and dredge it in the flour, shaking off the excess.",
+        "Heat the oil in a wide frying pan and sear the fish, white skin side first.",
+        "Turn the fish and finish cooking over low heat. Add a little of the butter and baste the fish with it as it cooks.",
+        "Meanwhile, cook the rest of the butter in a small pan until it turns nut brown.",
+        "Dip the lemon slices in the parsley and set them on the fish, scattering a little parsley over too.",
+        "Pour the lemon juice over the fish, then the beurre noisette, which will foam at once. Serve straight away."
       ],
       "nutritionHighlights": [
         {
@@ -7522,15 +7210,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia (French), Sole meunière",
-          "url": "https://fr.wikipedia.org/wiki/Sole_meuni%C3%A8re"
-        },
-        {
-          "source": "Wikipedia, Sole meunière",
-          "url": "https://en.wikipedia.org/wiki/Sole_meuni%C3%A8re"
+          "source": "750g, Sole meunière",
+          "url": "https://www.750g.com/sole-meuniere-r98057.htm"
         }
       ],
-      "curationNote": "Both pages agree on the method: skinned sole floured, fried in butter, finished with a brown butter, lemon and parsley. The English page cites Escoffier and Elizabeth David's use of clarified butter for the frying, which is why the clarified butter base fries the fish and whole butter makes the sauce. Neither page gives amounts; they are written for four from common practice."
+      "curationNote": "750g, Sole meunière for every amount and step; serves 2, scaled to our 4: 2 sole, 100 g butter, 1 lemon (juice of half, two thin slices from the other half), 1 small bunch of parsley; oil, flour, salt and pepper with no amounts; seared in oil, basted with a little butter, finished with nut brown butter."
     },
     {
       "dishRole": "main",
@@ -7566,22 +7250,13 @@
           "prepNote": null
         },
         {
-          "category": "Veg",
-          "baseName": "Garlic",
-          "quantity": 6,
-          "unit": "g",
-          "cutPrep": "peeled and finely chopped",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 30,
+          "quantity": 10,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Sauteed",
-          "prepNote": null
+          "prepNote": "a small knob"
         },
         {
           "category": "Alcohol",
@@ -7605,27 +7280,26 @@
           "category": "Herbs",
           "baseName": "Pepper, black, ground",
           "quantity": 0.5,
-          "unit": "tsp",
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Dairy",
-          "baseName": "Heavy Whipping Cream",
+          "baseName": "Crème fraîche, 35 % fett",
           "quantity": 45,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 tbsp"
         }
       ],
       "instructions": [
-        "Melt the butter in a large pot over medium heat and soften the shallots and garlic for 2 to 3 minutes without letting them colour.",
-        "Pour in the white wine, add half the parsley and the pepper and bring it to a boil.",
-        "Tip in the mussels, cover tightly and cook over high heat for 4 to 6 minutes, shaking the pot once or twice, until the shells have opened.",
+        "Melt the butter in a large pot with a spoonful of water and soften the shallots for 2 to 3 minutes without letting them colour.",
+        "Tip in the mussels, pour in the white wine and add half the parsley. Bring to a boil, cover tightly and cook over low heat, shaking the pot once or twice, until the shells have opened, under 10 minutes.",
         "Lift the mussels into warm bowls with a slotted spoon, throwing away any that stayed shut.",
-        "Stir the cream into the broth if you like, let it bubble for 1 minute, taste it before adding any salt since the mussels are salty, and pour it over the mussels.",
+        "Strain the broth back into the pot, stir in the crème fraîche and the pepper and bring it just to a boil. Taste before adding any salt, since the mussels are salty, and pour it over the mussels.",
         "Scatter over the rest of the parsley and serve with bread or fries."
       ],
       "nutritionHighlights": [
@@ -7644,19 +7318,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia (French), Moules marinières",
-          "url": "https://fr.wikipedia.org/wiki/Moules_marini%C3%A8res"
-        },
-        {
-          "source": "Wikibooks (French), Livre de cuisine: Moules marinières",
+          "source": "Wikilivres, Livre de cuisine: Moules marinières",
           "url": "https://fr.wikibooks.org/wiki/Livre_de_cuisine/Moules_marini%C3%A8res"
-        },
-        {
-          "source": "Wikipedia, Moules-frites",
-          "url": "https://en.wikipedia.org/wiki/Moules-frites"
         }
       ],
-      "curationNote": "Wikibooks gives for four: 3 L of mussels, 2 to 3 shallots, 50 cl dry white wine, a knob of butter, parsley, under 10 minutes, and 1 to 3 spoons of crème fraîche as an option. Written to that, with 3 L of mussels taken as about 2 kg. The cream is optional and can be left out. The French Wikipedia page adds garlic and serving with fries."
+      "curationNote": "Wikilivres, Livre de cuisine: Moules marinières for every amount and step; the richer version for 4: 3 L mussels (about 2 kg), 2 or 3 shallots, 50 cl dry white wine, a knob of butter, parsley, pepper, 1 to 3 spoons of crème fraîche; salt only at the end if needed. No garlic."
     },
     {
       "dishRole": "main",
@@ -7915,11 +7581,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste"
         },
         {
           "category": "Herbs",
@@ -7942,7 +7608,7 @@
         {
           "category": "NutSeed",
           "baseName": "Almonds",
-          "quantity": 100,
+          "quantity": 150,
           "unit": "g",
           "cutPrep": "slivered",
           "cookingMethod": "Fried",
@@ -7956,32 +7622,14 @@
           "cutPrep": "dry",
           "cookingMethod": "Simmered",
           "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Lemon Juice",
-          "quantity": 15,
-          "unit": "ml",
-          "cutPrep": "freshly squeezed",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Fresh Parsley",
-          "quantity": 5,
-          "unit": "g",
-          "cutPrep": "chopped",
-          "cookingMethod": null,
-          "prepNote": null
         }
       ],
       "instructions": [
-        "Rinse the trout, pat them dry inside and out, season with salt and pepper and dredge them in flour, shaking off the excess.",
-        "Melt half the butter in a large frying pan over medium heat and fry the trout 4 to 6 minutes a side, until golden and the flesh lifts from the bone. Lift onto warm plates.",
-        "Add the rest of the butter and the almonds to the pan and stir for 2 to 3 minutes, until the almonds are golden. Watch them, since they turn quickly.",
-        "Pour in the white wine and the lemon juice and let it bubble for 1 minute, scraping the pan.",
-        "Spoon the almonds and the pan juices over the trout, scatter with parsley and serve with steamed potatoes."
+        "Rinse the trout, pat them dry inside and out, season with the salt and pepper and dust them lightly with flour, shaking off the excess.",
+        "Melt half the butter in a large frying pan over medium heat and brown the trout on both sides.",
+        "Add the rest of the butter and the almonds, turn the heat low and cook about 10 minutes, turning the trout once and stirring the almonds so they turn golden without burning. Lift the trout onto warm plates.",
+        "Pour the white wine into the pan and let it reduce for 2 minutes, scraping the pan.",
+        "Spoon the almonds and the pan juices over the trout and serve with steamed potatoes."
       ],
       "nutritionHighlights": [
         {
@@ -8007,23 +7655,12 @@
           "url": "https://en.wikipedia.org/wiki/Amandine_(culinary_term)"
         }
       ],
-      "curationNote": "Wikibooks gives one trout of 200 to 300 g a person, 150 g slivered almonds, butter and 30 cl dry white wine, oven-baked at 200°C for 30 minutes, with a pan version where the trout is floured, fried in butter about 10 minutes and the pan deglazed with wine. The pan version is written here, with less wine since it only deglazes. Wikipedia describes amandine dishes as cooked in butter with seasonings and finished with toasted almonds. Wikibooks is the only opened source with amounts."
+      "curationNote": "Wikibooks, Livre de cuisine: Truite aux amandes for every amount and step; one trout of 200 to 300 g a person, 150 g slivered almonds, butter, white wine, salt and pepper; the pan version flours the trout, fries it in butter with the almonds about 10 minutes over low heat and deglazes with a splash of wine. No lemon or parsley."
     },
     {
       "dishRole": "main",
       "servingSizeAmount": 1,
-      "components": [
-        {
-          "recipeId": "curated_fr_base_fumet_de_poisson",
-          "servings": 1,
-          "note": "1 cup"
-        },
-        {
-          "recipeId": "curated_fr_base_sauce_tomate",
-          "servings": 2,
-          "note": "1 cup"
-        }
-      ],
+      "components": [],
       "overallTier": "strong",
       "id": "curated_fr_lotte_a_larmoricaine",
       "name": "Lotte à l'Armoricaine",
@@ -8032,7 +7669,7 @@
       "region": "France (Brittany)",
       "servings": 4,
       "servingSizeUnit": "plate",
-      "flavorProfile": "Firm, sweet monkfish in a deep red sauce of tomato, shallot, white wine and fish stock, warmed with tarragon and a pinch of cayenne.",
+      "flavorProfile": "Firm, sweet monkfish in a deep red sauce of tomato, onion, white wine and cognac, with thyme, bay and a pinch of cayenne.",
       "healthBenefit": "Monkfish is a lean white fish, and the sauce is built on tomatoes, which supply lycopene.",
       "ingredients": [
         {
@@ -8047,7 +7684,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
-          "quantity": 20,
+          "quantity": 15,
           "unit": "g",
           "cutPrep": "for dusting",
           "cookingMethod": null,
@@ -8056,8 +7693,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 4,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -8065,8 +7702,8 @@
         {
           "category": "Herbs",
           "baseName": "Pepper, black, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -8083,7 +7720,7 @@
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 30,
+          "quantity": 22,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Sauteed",
@@ -8091,17 +7728,8 @@
         },
         {
           "category": "Veg",
-          "baseName": "Shallot",
-          "quantity": 50,
-          "unit": "g",
-          "cutPrep": "peeled and finely chopped",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
           "baseName": "Onion",
-          "quantity": 60,
+          "quantity": 90,
           "unit": "g",
           "cutPrep": "peeled and finely chopped",
           "cookingMethod": "Sauteed",
@@ -8119,16 +7747,16 @@
         {
           "category": "Alcohol",
           "baseName": "Cognac",
-          "quantity": 45,
+          "quantity": 27,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "for flaming; leave out or replace with more wine if you prefer"
+          "prepNote": "for flaming"
         },
         {
           "category": "Alcohol",
           "baseName": "White Wine",
-          "quantity": 200,
+          "quantity": 180,
           "unit": "ml",
           "cutPrep": "dry",
           "cookingMethod": "Braised",
@@ -8137,7 +7765,7 @@
         {
           "category": "Herbs",
           "baseName": "Tomato paste",
-          "quantity": 15,
+          "quantity": 22,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -8145,18 +7773,9 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Tarragon Spices",
-          "quantity": 4,
-          "unit": "g",
-          "cutPrep": "leaves, chopped",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Spices, pepper, red or cayenne",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -8164,21 +7783,45 @@
         {
           "category": "Veg",
           "baseName": "Fresh Parsley",
-          "quantity": 8,
+          "quantity": 4,
           "unit": "g",
           "cutPrep": "chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Tomato, red, ripe, canned, whole",
+          "quantity": 180,
+          "unit": "g",
+          "cutPrep": "peeled, with their juice, crushed",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 bay leaf"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Thyme",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "1 small sprig",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Season the monkfish with salt and pepper and dust it lightly with flour.",
-        "Heat the olive oil and half the butter in a wide sauté pan over medium high heat and brown the monkfish 2 minutes a side. Lift it out.",
-        "Lower the heat, add the shallots, onion and garlic and soften them 3 to 4 minutes without browning.",
-        "Return the fish, pour in the cognac and set it alight away from anything that can catch, or let it bubble off for 1 minute.",
-        "Add the white wine, the fish fumet, the tomato sauce, tomato paste, half the tarragon and the cayenne. Bring to a simmer, cover and cook gently for 10 to 12 minutes, until the fish is just firm.",
-        "Lift out the fish, boil the sauce 3 to 5 minutes to thicken it, then whisk in the rest of the butter off the heat.",
-        "Return the fish to the sauce, scatter over the rest of the tarragon and the parsley, and serve with rice."
+        "Cut the monkfish into thick medallions and dust them lightly with the flour.",
+        "Heat the butter and olive oil in a heavy casserole and brown the fish lightly, about 2 minutes a side. Off the heat, pour in the cognac and set it alight away from anything that can catch, or let it bubble off for 1 minute. Lift out the fish and keep its juices.",
+        "In the same pot soften the onion and garlic for 3 to 4 minutes. Add the tomatoes, tomato paste, wine, cayenne, bay leaf, thyme and the fish juices, bring nearly to a boil and simmer uncovered for about 30 minutes to reduce.",
+        "Return the fish and heat it gently for about 10 minutes, until just firm. Stir in the parsley, season with the salt and pepper, take out the bay leaf and thyme, and serve with rice."
       ],
       "nutritionHighlights": [
         {
@@ -8196,26 +7839,16 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia (French), Homard à l'américaine",
-          "url": "https://fr.wikipedia.org/wiki/Homard_%C3%A0_l%27am%C3%A9ricaine"
-        },
-        {
-          "source": "Wikipedia (French), Sauce américaine",
-          "url": "https://fr.wikipedia.org/wiki/Sauce_am%C3%A9ricaine"
+          "source": "Mad About Macarons, Lotte à l'armoricaine",
+          "url": "https://www.madaboutmacarons.com/wprm_print/french-monkfish-stew-lotte-a-larmoricaine"
         }
       ],
-      "curationNote": "Neither opened page names monkfish. Homard à l'américaine gives the sauce: cognac, white wine, tomatoes, shallots, onion, garlic, olive oil and butter, tarragon, parsley and cayenne, and says the name armoricaine comes from a 1938 Larousse mistake. Sauce américaine adds fish fumet, bouquet garni, chervil and flour. This dish is that sauce with monkfish in place of lobster. Since there are no lobster shells, the fumet and tomato bases carry the depth. Amounts are written from common practice. Cognac is listed as not in the food database."
+      "curationNote": "Mad About Macarons, Lotte à l'armoricaine for every amount and step; 2 kg monkfish for 6 with 4 tbsp flour, 50 g butter, 4 tbsp olive oil, 4 tbsp cognac, 3 garlic cloves, 1 large onion, 400 g canned tomatoes, 3 tbsp tomato purée, 400 ml white wine, 1/4 tsp cayenne, 2 bay leaves, 1 thyme branch, 2 tbsp parsley, salt and pepper to taste, crème fraîche optional. Scaled to our 900 g of fish (0.45)."
     },
     {
       "dishRole": "main",
       "servingSizeAmount": 1,
-      "components": [
-        {
-          "recipeId": "curated_fr_base_court_bouillon",
-          "servings": 3,
-          "note": "the whole batch, for poaching"
-        }
-      ],
+      "components": [],
       "overallTier": "strong",
       "id": "curated_fr_raie_au_beurre_noir",
       "name": "Raie au Beurre Noir",
@@ -8225,7 +7858,7 @@
       "servings": 4,
       "servingSizeUnit": "plate",
       "flavorProfile": "Soft, sweet ribbons of skate under dark nutty butter, sharp with vinegar and capers.",
-      "healthBenefit": "Skate is a lean fish, and poaching it in court bouillon cooks it with no added fat until the sauce goes on.",
+      "healthBenefit": "Skate is a lean fish; here it is browned in butter and served with a brown butter sauce, so nearly all the fat comes from the butter.",
       "ingredients": [
         {
           "category": "Meat",
@@ -8239,26 +7872,26 @@
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 80,
+          "quantity": 100,
           "unit": "g",
-          "cutPrep": "cut in pieces",
+          "cutPrep": "40 g to cook the fish, 60 g for the beurre noir",
           "cookingMethod": "Fried",
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Wine vinegar",
-          "quantity": 30,
+          "quantity": 90,
           "unit": "ml",
-          "cutPrep": null,
+          "cutPrep": "6 tbsp",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Capers (In Vinegar / Raw)",
-          "quantity": 30,
-          "unit": "g",
+          "quantity": 4,
+          "unit": "tbsp",
           "cutPrep": "drained",
           "cookingMethod": null,
           "prepNote": null
@@ -8268,7 +7901,7 @@
           "baseName": "Fresh Parsley",
           "quantity": 10,
           "unit": "g",
-          "cutPrep": "chopped",
+          "cutPrep": "chopped, optional",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -8289,24 +7922,13 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Potato",
-          "quantity": 600,
-          "unit": "g",
-          "cutPrep": "scrubbed",
-          "cookingMethod": "Steamed",
-          "prepNote": null
         }
       ],
       "instructions": [
-        "Rinse the skate wings well in cold water; a skate that smells of ammonia is not fresh.",
-        "Lay the wings in a wide pan, pour over the court bouillon, adding water if needed to cover, and bring it just to a shiver. Poach 8 to 10 minutes, without boiling, until the flesh lifts from the cartilage.",
-        "Drain the wings, peel off the skin on both sides and lay them on warm plates. Season with salt and pepper and scatter with capers and parsley.",
-        "Melt the butter in a small pan over medium heat and cook it 2 to 4 minutes, until it is dark brown and smells toasted, but not burnt.",
-        "Pour the butter over the fish, then pour the vinegar into the hot pan, let it boil for a few seconds and pour it over too.",
-        "Serve at once with steamed potatoes."
+        "Rinse the skate wings well in cold water and pat them dry; a skate that smells of ammonia is not fresh.",
+        "Melt 40 g of the butter in a wide frying pan, or two, and brown the wings on both sides until cooked through. Season with salt and pepper.",
+        "When the wings are almost done, melt the remaining 60 g of butter in another pan until it turns nut brown. Add the vinegar, which will bubble up, then the capers, and cook 1 minute.",
+        "Set the wings on a serving dish, scatter with the parsley and serve the beurre noir in a sauce boat, with white rice or wax beans."
       ],
       "nutritionHighlights": [
         {
@@ -8320,15 +7942,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia (French), Raie au beurre noir",
-          "url": "https://fr.wikipedia.org/wiki/Raie_au_beurre_noir"
-        },
-        {
-          "source": "Wikipedia (French), Beurre noir",
-          "url": "https://fr.wikipedia.org/wiki/Beurre_noir"
+          "source": "750g, Raie au beurre noir et aux câpres",
+          "url": "https://www.750g.com/raie-au-beurre-noir-et-aux-capres-r22908.htm"
         }
       ],
-      "curationNote": "Raie au beurre noir: skate wings poached about 10 minutes in court bouillon, finished with black butter and capers, parsley or lemon, served with steamed potatoes or rice. Beurre noir: butter cooked past hazelnut, the pan deglazed with vinegar or lemon, capers and parsley, poured on skate, Breton in origin. Written to both; neither page gives amounts, so they are from common practice."
+      "curationNote": "750g, Raie au beurre noir et aux câpres for every amount and step; serves 2, scaled to our 4: 2 skate wings browned in 20 g butter; beurre noir of 30 g butter browned, 3 tbsp wine vinegar and 2 tbsp capers cooked 1 minute; chopped parsley optional; salt and pepper with no amounts; served with white rice or wax beans."
     },
     {
       "dishRole": "main",
@@ -8336,8 +7954,8 @@
       "components": [
         {
           "recipeId": "curated_fr_base_sauce_bechamel",
-          "servings": 4,
-          "note": "1 cup, the base of the Nantua sauce"
+          "servings": 8,
+          "note": "500 ml (2 cups), the base of the Nantua sauce"
         }
       ],
       "overallTier": "strong",
@@ -8346,53 +7964,35 @@
       "builderType": "side",
       "dishGroup": "Fish & Shellfish",
       "region": "France (Lyon)",
-      "servings": 6,
-      "servingSizeUnit": "piece",
-      "flavorProfile": "Light, soufflé-like dumplings of pike baked in a creamy crayfish sauce until puffed and golden.",
-      "healthBenefit": "Pike is a lean freshwater fish, and the quenelles are bound with eggs and a flour panade rather than bread.",
+      "servings": 4,
+      "servingSizeUnit": "serving",
+      "flavorProfile": "Light, soufflé-like dumplings of pike baked in a creamy crayfish sauce until puffed.",
+      "healthBenefit": "Pike is a lean freshwater fish, and the quenelles are bound with eggs and a flour panade; the butter and cream make it a rich dish.",
       "ingredients": [
         {
-          "category": "Bev",
-          "baseName": "Water, tap",
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
           "quantity": 250,
           "unit": "ml",
-          "cutPrep": "for the panade",
-          "cookingMethod": "Boiled",
-          "prepNote": null
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for the panade"
         },
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
           "quantity": 150,
           "unit": "g",
-          "cutPrep": "diced, 50 g for the panade and 100 g for the fish",
+          "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "50 g for the panade, 100 g melted for the fish"
         },
         {
           "category": "PantryStaples",
           "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
-          "quantity": 125,
+          "quantity": 150,
           "unit": "g",
-          "cutPrep": "sifted",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
           "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, nutmeg, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
-          "cutPrep": "freshly grated",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -8401,90 +8001,98 @@
           "baseName": "Pike Fish",
           "quantity": 400,
           "unit": "g",
-          "cutPrep": "skinned and boned fillet, chilled",
+          "cutPrep": "skinned and boned, chilled",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Dairy",
           "baseName": "Chicken Egg (Raw)",
-          "quantity": 3,
+          "quantity": 4,
           "unit": "each",
           "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Dairy",
-          "baseName": "Chicken Egg White (Raw)",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "chilled",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
-          "baseName": "Pepper, black, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.8,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "a pinch for the quenelles and a pinch for the sauce"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "a pinch for the quenelles and a pinch for the sauce"
         },
         {
           "category": "Bev",
           "baseName": "Water, tap",
           "quantity": 2000,
           "unit": "ml",
-          "cutPrep": "lightly salted, for poaching",
-          "cookingMethod": "Simmered",
-          "prepNote": null
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for poaching"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for the poaching water, poured away"
+        },
+        {
+          "notInDatabase": true,
+          "name": "crayfish butter (beurre d'écrevisse)",
+          "contains": "dairy,fish",
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "butter pounded with crayfish shells and strained; sold ready made in France"
         },
         {
           "category": "Meat",
           "baseName": "Crayfish Crustaceans",
-          "quantity": 200,
+          "quantity": 100,
           "unit": "g",
-          "cutPrep": "cooked and shelled tails, for the sauce",
+          "cutPrep": "cooked and shelled tails",
           "cookingMethod": "Simmered",
           "prepNote": null
         },
         {
           "category": "Dairy",
-          "baseName": "Heavy Whipping Cream",
-          "quantity": 150,
+          "baseName": "Crème fraîche, 35 % fett",
+          "quantity": 100,
           "unit": "ml",
           "cutPrep": null,
-          "cookingMethod": "Simmered",
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, pepper, red or cayenne",
-          "quantity": 0.25,
-          "unit": "tsp",
-          "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Dairy",
-          "baseName": "Gruyère",
-          "quantity": 40,
-          "unit": "g",
-          "cutPrep": "grated",
-          "cookingMethod": "Baked",
           "prepNote": null
         }
       ],
       "instructions": [
-        "Make the panade: bring the water, 50 g of the butter, the salt and the nutmeg to a boil, tip in the flour all at once and stir over the heat for 1 to 2 minutes until the paste comes away from the pan. Spread it on a plate and chill it completely.",
-        "In a food processor, blend the chilled pike to a fine paste. Add the cold panade and blend, then the eggs and whites one at a time, then the remaining 100 g of soft butter, until smooth. Season with pepper. Chill the mixture at least 2 hours, or overnight.",
-        "Bring the salted water to a bare simmer. Shape the mixture between two wet tablespoons into ovals and slide them in a few at a time. Poach 8 to 10 minutes, turning once, until they float and feel firm. Lift them onto a cloth.",
-        "For the Nantua sauce, warm the béchamel with the cream, stir in the crayfish tails and a pinch of cayenne and simmer 2 to 3 minutes.",
-        "Heat the oven to 350°F (180°C). Lay the quenelles in a buttered gratin dish with room to swell, pour over the sauce and scatter with the Gruyère.",
-        "Bake 20 to 25 minutes, until the quenelles have puffed and the top is golden. Serve straight away, since they sink as they cool."
+        "Make the panade: bring the milk and 50 g of the butter to a boil, take the pan off the heat and tip in the flour all at once. Stir it over low heat until the paste dries and comes away from the sides. Let it cool until lukewarm.",
+        "Blend the pike to a fine paste. Add the panade, then the eggs one at a time, then the remaining 100 g of butter, melted, with the nutmeg and a pinch each of salt and pepper. Chill the mixture for 1 hour.",
+        "Bring the salted water to a bare simmer. Shape the mixture between two spoons into ovals and poach them a few at a time for about 10 minutes, lifting each out once it floats.",
+        "For the Nantua sauce, warm the béchamel and stir in the crayfish butter, then the crème fraîche and the crayfish tails. Season with a pinch of salt and pepper and simmer for a few minutes.",
+        "Heat the oven to 350°F (180°C). Lay the quenelles in a gratin dish, cover them with the sauce and bake for 20 minutes, until puffed. Serve straight away."
       ],
       "nutritionHighlights": [
         {
@@ -8493,28 +8101,24 @@
         },
         {
           "nutrient": "Saturated fat",
-          "note": "Butter and cream carry most of the fat."
+          "note": "Butter, crayfish butter and cream carry most of the fat."
         },
         {
           "nutrient": "Calcium",
-          "note": "The béchamel, cream and cheese supply calcium."
+          "note": "The béchamel and the milk in the panade supply calcium."
         }
       ],
       "citations": [
         {
+          "source": "Croq-Kilos, Recette de quenelles de brochet",
+          "url": "https://www.croq-kilos.com/actus/recette-de-quenelles-de-brochet-un-classique-de-la-gastronomie-lyonnaise"
+        },
+        {
           "source": "Wikipedia (French), Quenelle",
           "url": "https://fr.wikipedia.org/wiki/Quenelle"
-        },
-        {
-          "source": "Wikipedia, Quenelle",
-          "url": "https://en.wikipedia.org/wiki/Quenelle"
-        },
-        {
-          "source": "Dubo, ça la assiette, Quenelle de brochet sauce homard",
-          "url": "https://www.dubocalalassiette.fr/quenelle-de-brochet-sauce-homard/"
         }
       ],
-      "curationNote": "French Wikipedia: pike with a panade of flour and milk or water, eggs, butter in place of suet since Moyne in the 1920s, shaped with two spoons, poached and served in a crayfish Nantua sauce, often gratinéed. English Wikipedia agrees on panade, fish, shaping, poaching and Nantua sauce browned under the grill. Dubo, ça la assiette gives a choux-style panade of water, butter and flour, blended with pike, eggs, extra whites and butter, baked in sauce with Gruyère at 180°C for 25 minutes. None of the pages give amounts; they are written from common practice. The sauce here is béchamel with cream and crayfish tails, since a full Nantua made from crayfish shells and butter needs live crayfish."
+      "curationNote": "Croq-Kilos, Quenelles de brochet for every amount and step; serves 4, the same as ours: 400 g pike, 150 g flour, 150 g butter, 25 cl milk, 4 eggs, a pinch of nutmeg, salt and pepper; Nantua sauce of 50 cl béchamel, 80 g crayfish butter, 100 g crayfish tails, 10 cl crème fraîche. The béchamel is our base recipe."
     },
     {
       "dishRole": "main",
@@ -8528,7 +8132,7 @@
       "region": "France",
       "servings": 4,
       "servingSizeUnit": "fillet",
-      "flavorProfile": "Moist, tender salmon steamed in a paper parcel with thin vegetables, lemon, herbs and a splash of white wine.",
+      "flavorProfile": "Moist, tender salmon steamed in a paper parcel on thin strips of carrot, onion and courgette, with lemon juice and zest.",
       "healthBenefit": "Salmon is one of the best food sources of omega-3 fats and vitamin D, and the parcel steams it in its juices with very little fat added.",
       "ingredients": [
         {
@@ -8542,19 +8146,10 @@
         },
         {
           "category": "Veg",
-          "baseName": "Leek",
-          "quantity": 100,
-          "unit": "g",
-          "cutPrep": "white part, cut in thin strips",
-          "cookingMethod": "Steamed",
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
           "baseName": "Carrot",
-          "quantity": 100,
-          "unit": "g",
-          "cutPrep": "peeled and cut in thin matchsticks",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "peeled and cut in julienne",
           "cookingMethod": "Steamed",
           "prepNote": null
         },
@@ -8563,43 +8158,7 @@
           "baseName": "Lemon",
           "quantity": 1,
           "unit": "each",
-          "cutPrep": "thinly sliced",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Fresh Thyme",
-          "quantity": 2,
-          "unit": "g",
-          "cutPrep": "a few sprigs, in the bouquet garni",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Fresh Dill Weed",
-          "quantity": 4,
-          "unit": "g",
-          "cutPrep": "sprigs",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Alcohol",
-          "baseName": "White Wine",
-          "quantity": 60,
-          "unit": "ml",
-          "cutPrep": "dry",
-          "cookingMethod": "Steamed",
-          "prepNote": null
-        },
-        {
-          "category": "Fats",
-          "baseName": "Olive Oil (Extra Virgin)",
-          "quantity": 20,
-          "unit": "ml",
-          "cutPrep": null,
+          "cutPrep": "juice and grated zest",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -8620,15 +8179,32 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "cut in julienne",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Squash, summer, all varieties",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "courgette, cut in julienne",
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Heat the oven to 400°F (200°C). Cut 4 large rectangles of baking parchment.",
-        "Divide the leek and carrot strips between the middle of each sheet, lay a salmon portion on top and season with salt and pepper.",
-        "Top each with lemon slices, thyme and dill, drizzle with olive oil and spoon over a tablespoon of white wine.",
-        "Bring the long sides of the paper together over the fish and fold them down tightly, then twist or fold the ends so the parcel is sealed and steam cannot escape.",
-        "Set the parcels on a baking tray and bake 12 to 15 minutes, until the paper has puffed and the salmon is just opaque.",
-        "Serve the parcels on plates and open them at the table."
+        "Heat the oven to 350°F (180°C).",
+        "Cut the carrot, onion and courgette into thin strips and cook them gently in a covered pan until tender.",
+        "Cut 4 large sheets of baking paper. Divide the vegetables between them, lay a salmon fillet on each and add a little lemon juice, some zest, salt and pepper.",
+        "Fold the paper over and seal the parcels tightly so no steam escapes.",
+        "Bake 20 to 30 minutes, depending on the thickness of the fillets, and open the parcels at the table."
       ],
       "nutritionHighlights": [
         {
@@ -8646,15 +8222,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia, Papillote",
-          "url": "https://en.wikipedia.org/wiki/Papillote"
-        },
-        {
-          "source": "Wikipedia (French), Cuisson en papillote",
-          "url": "https://fr.wikipedia.org/wiki/Cuisson_en_papillote"
+          "source": "750g, Papillote de saumon toute simple",
+          "url": "https://www.750g.com/papillote-de-saumon-toute-simple-r100313.htm"
         }
       ],
-      "curationNote": "Both pages describe the method: fish sealed in parchment or foil and steamed in its juices, with wine or stock and herbs for moisture, opened at the table. Neither gives a recipe, temperatures or amounts. The oven heat, time and the leek, carrot, lemon and herb filling are written from common practice."
+      "curationNote": "750g, Papillote de saumon toute simple for every amount and step; serves 4, our servings: 4 salmon fillets, 1 carrot, 1 onion and 1 courgette cut in julienne and sweated, 1 lemon for juice and zest, salt and pepper with no amounts; 180°C for 20 to 30 minutes."
     },
     {
       "dishRole": "main",
@@ -8668,7 +8240,7 @@
       "region": "France (Basque Country)",
       "servings": 4,
       "servingSizeUnit": "plate",
-      "flavorProfile": "Seared tuna braised briefly in a soft, sweet sauce of peppers, onion and tomato, warmed with Espelette chili.",
+      "flavorProfile": "Floured, pan-fried tuna simmered in a soft, sweet sauce of red peppers, onion and tomato with a pinch of herbes de Provence.",
       "healthBenefit": "Tuna supplies protein and omega-3 fats, and the pipérade adds a large amount of vitamin C from the peppers.",
       "ingredients": [
         {
@@ -8676,7 +8248,7 @@
           "baseName": "Tuna Fish",
           "quantity": 700,
           "unit": "g",
-          "cutPrep": "4 thick steaks",
+          "cutPrep": "1 large slice or 4 thick steaks, skinned and boned",
           "cookingMethod": "Braised",
           "prepNote": null
         },
@@ -8685,34 +8257,25 @@
           "baseName": "Olive Oil (Extra Virgin)",
           "quantity": 45,
           "unit": "ml",
-          "cutPrep": null,
+          "cutPrep": "1 tbsp for the compote, the rest to sear the tuna",
           "cookingMethod": "Sauteed",
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Onion",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": "peeled and thinly sliced",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "peeled and cut in strips",
           "cookingMethod": "Sauteed",
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Red Bell Pepper",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": "seeded and cut in strips",
-          "cookingMethod": "Sauteed",
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Green Bell Pepper",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": "seeded and cut in strips",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "peeled and cut in strips",
           "cookingMethod": "Sauteed",
           "prepNote": null
         },
@@ -8721,45 +8284,18 @@
           "baseName": "Garlic",
           "quantity": 9,
           "unit": "g",
-          "cutPrep": "peeled and sliced",
+          "cutPrep": "3 cloves, peeled and chopped",
           "cookingMethod": "Sauteed",
           "prepNote": null
         },
         {
           "category": "Veg",
-          "baseName": "Tomato",
-          "quantity": 500,
+          "baseName": "Tomato, red, ripe, canned, whole",
+          "quantity": 800,
           "unit": "g",
-          "cutPrep": "peeled, seeded and chopped",
+          "cutPrep": "2 cans of peeled tomatoes, chopped",
           "cookingMethod": "Simmered",
           "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Chilli (chili), dried, ground",
-          "quantity": 1,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "0.5 tsp at 2 g per tsp"
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Fresh Thyme",
-          "quantity": 2,
-          "unit": "g",
-          "cutPrep": "a few sprigs, in the bouquet garni",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, bay leaf",
-          "quantity": 0.15,
-          "unit": "g",
-          "cutPrep": "whole",
-          "cookingMethod": null,
-          "prepNote": "1 bay leaf"
         },
         {
           "category": "Herbs",
@@ -8780,31 +8316,40 @@
           "prepNote": null
         },
         {
-          "category": "Alcohol",
-          "baseName": "White Wine",
-          "quantity": 100,
-          "unit": "ml",
-          "cutPrep": "dry",
-          "cookingMethod": "Braised",
+          "category": "Herbs",
+          "baseName": "Herbes de Provence, séchées",
+          "quantity": 0.4,
+          "unit": "g",
+          "cutPrep": "a pinch",
+          "cookingMethod": null,
           "prepNote": null
         },
         {
-          "category": "Veg",
-          "baseName": "Fresh Parsley",
-          "quantity": 8,
-          "unit": "g",
-          "cutPrep": "chopped",
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": "for coating the tuna",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": "a splash, plus more if needed",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Heat 30 ml of the olive oil in a wide pan over medium heat and cook the onion 5 minutes until soft.",
-        "Add the peppers and garlic and cook 10 to 15 minutes, stirring now and then, until the peppers are soft.",
-        "Add the tomatoes, thyme, bay leaf, Espelette, salt and pepper and simmer 15 to 20 minutes, until the sauce is thick.",
-        "Meanwhile pat the tuna dry, season it and sear it in the rest of the oil in a hot pan for 1 minute a side.",
-        "Pour the white wine into the sauce, lay the tuna in it, cover and cook gently 5 to 8 minutes, until the tuna is cooked as you like it; tuna dries if it cooks too long.",
-        "Scatter with parsley and serve with rice or potatoes."
+        "Heat 1 tbsp of the olive oil in a frying pan and soften the onions and peppers. Add a splash of water and a little of the salt, cover and stew over low heat.",
+        "Heat the rest of the oil in a large frying pan. Coat the tuna with flour on both sides and cook it about 10 minutes, turning once, until golden on both sides. Season with salt, lift it out and keep it warm, leaving the oil in the pan.",
+        "Add the chopped tomatoes and garlic to that pan and cook 15 minutes.",
+        "Stir in the pepper and onion compote and the herbes de Provence, and season with pepper.",
+        "Return the tuna, spoon some of the vegetables over it, cover and simmer gently 15 to 20 minutes, adding a little water if it gets dry.",
+        "Serve the tuna with the sauce, with white rice."
       ],
       "nutritionHighlights": [
         {
@@ -8822,15 +8367,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia (French), Cuisine basque",
-          "url": "https://fr.wikipedia.org/wiki/Cuisine_basque"
-        },
-        {
-          "source": "Wikipedia, Piperade",
-          "url": "https://en.wikipedia.org/wiki/Piperade"
+          "source": "750g, Thon et sa compotée de tomates et poivrons rouges",
+          "url": "https://www.750g.com/thon-et-sa-compotee-de-tomates-et-poivrons-rouges-r26700.htm"
         }
       ],
-      "curationNote": "Cuisine basque names thon kaskarote, tuna cooked with tomatoes, peppers, onions and chiles, and red tuna fried and served with pipérade; it does not use the name thon basquaise. Wikipedia's Piperade page gives the sauce as onions, green peppers and tomatoes with Espelette, garlic often added. Written as tuna seared and then simmered in pipérade. Amounts are from common practice. Large amounts of tuna are not advised for children or during pregnancy because of mercury."
+      "curationNote": "750g, Thon et sa compotée de tomates et poivrons rouges (closest published version) for every amount and step; no free published thon basquaise with amounts could be opened; this tuna braised in tomato with a red pepper and onion compote is the closest, serves 4, our servings: 1 large slice of tuna floured and seared in olive oil, 2 onions and 2 red peppers stewed in 1 tbsp olive oil with a splash of water, 2 cans peeled tomatoes, 3 garlic cloves, a pinch of herbes de Provence; flour, salt, pepper and the searing oil with no amounts."
     }
   ]
 }

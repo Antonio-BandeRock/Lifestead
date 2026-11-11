@@ -14,23 +14,59 @@
       "overallTier": "strong",
       "components": [],
       "ingredients": [
-        { "category": "Fruit", "baseName": "Apelsinskal", "quantity": 300, "unit": "g", "cutPrep": "peel of about 5 oranges, cut in strips or dice", "cookingMethod": null, "prepNote": null },
-        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 350, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "300 g for the syrup, 50 g to roll" },
-        { "category": "Bev", "baseName": "Water, tap", "quantity": 250, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "for the syrup" }
+        {
+          "category": "Fruit",
+          "baseName": "Apelsinskal",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "peel of about 5 oranges, cut in strips or dice",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 625,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "500 g for the syrup, 125 g to roll",
+          "q": 625,
+          "note": "500 g for the syrup, 125 g to roll"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 300,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for the syrup",
+          "q": 300
+        }
       ],
       "instructions": [
-        "Cover the peel with cold water, bring to a boil and drain. Repeat twice more to take away the harsh bitterness, pouring each water away.",
-        "Dissolve 300 g sugar in the 250 ml water, add the peel and simmer very gently for about 1 hour, until the peel is translucent and the syrup almost gone.",
-        "Lift out the peel, roll it in the last 50 g sugar and dry on a rack overnight. Keep in a closed jar for months."
+        "Cover the peel with cold water, bring to a boil and boil for 10 minutes, then drain. Repeat twice more with fresh water each time, pouring each water away.",
+        "Dissolve 500 g sugar in the 300 ml water, add the peel and simmer very gently until the peel is translucent, about 1 hour.",
+        "Lift out the peel, roll it in the last 125 g sugar and dry on a rack overnight. Keep in a closed jar for months. Any syrup left in the pan can be kept for sweetening drinks."
       ],
       "nutritionHighlights": [
-        { "nutrient": "Sugar", "note": "About 7 g per tablespoon." },
-        { "nutrient": "Fiber", "note": "A little from the peel." }
+        {
+          "nutrient": "Sugar",
+          "note": "About 7 g per tablespoon."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "A little from the peel."
+        }
       ],
       "citations": [
-        { "source": "Wikipedia: Candied fruit", "url": "https://en.wikipedia.org/wiki/Candied_fruit" }
+        {
+          "source": "Tara's Multicultural Table, Candied Citrus Peel",
+          "url": "https://tarasmulticulturaltable.com/candied-citrus-peel/"
+        }
       ],
-      "curationNote": null
+      "curationNote": "Tara's Multicultural Table, Candied Citrus Peel for every amount and step; peel of 4 oranges with 400 g sugar and 240 ml water for the syrup and 100 g to roll; scaled by 5/4 to our 5 oranges."
     },
     {
       "id": "curated_dessert_candied_lemon_peel",
@@ -46,23 +82,59 @@
       "overallTier": "strong",
       "components": [],
       "ingredients": [
-        { "category": "Fruit", "baseName": "Sitronskall", "quantity": 300, "unit": "g", "cutPrep": "peel of about 8 lemons, cut in strips or dice", "cookingMethod": null, "prepNote": null },
-        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 350, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "300 g for the syrup, 50 g to roll" },
-        { "category": "Bev", "baseName": "Water, tap", "quantity": 250, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "for the syrup" }
+        {
+          "category": "Fruit",
+          "baseName": "Sitronskall",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "peel of about 8 lemons, cut in strips or dice",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 667,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "533 g for the syrup, 134 g to roll",
+          "q": 667,
+          "note": "533 g for the syrup, 134 g to roll"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 320,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for the syrup",
+          "q": 320
+        }
       ],
       "instructions": [
-        "Cover the peel with cold water, bring to a boil and drain. Repeat twice more to take away the harsh bitterness, pouring each water away.",
-        "Dissolve 300 g sugar in the 250 ml water, add the peel and simmer very gently for about 1 hour, until the peel is translucent and the syrup almost gone.",
-        "Lift out the peel, roll it in the last 50 g sugar and dry on a rack overnight. Keep in a closed jar for months."
+        "Cover the peel with cold water, bring to a boil and boil for 10 minutes, then drain. Repeat twice more with fresh water each time, pouring each water away.",
+        "Dissolve 533 g sugar in the 320 ml water, add the peel and simmer very gently until the peel is translucent, about 1 hour.",
+        "Lift out the peel, roll it in the last 134 g sugar and dry on a rack overnight. Keep in a closed jar for months. Any syrup left in the pan can be kept for sweetening drinks."
       ],
       "nutritionHighlights": [
-        { "nutrient": "Sugar", "note": "About 7 g per tablespoon." },
-        { "nutrient": "Fiber", "note": "A little from the peel." }
+        {
+          "nutrient": "Sugar",
+          "note": "Most of the weight is sugar, from the syrup and the sugar coating."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "A little from the peel."
+        }
       ],
       "citations": [
-        { "source": "Wikipedia: Succade", "url": "https://en.wikipedia.org/wiki/Succade" }
+        {
+          "source": "Tara's Multicultural Table, Candied Citrus Peel",
+          "url": "https://tarasmulticulturaltable.com/candied-citrus-peel/"
+        }
       ],
-      "curationNote": null
+      "curationNote": "Tara's Multicultural Table, Candied Citrus Peel for every amount and step; peel of 6 lemons with 400 g sugar and 240 ml water for the syrup and 100 g to roll; scaled by 8/6 to our 8 lemons."
     },
     {
       "id": "curated_sauce_apricot_jam",
@@ -78,23 +150,58 @@
       "overallTier": "strong",
       "components": [],
       "ingredients": [
-        { "category": "Fruit", "baseName": "Apricot", "quantity": 1000, "unit": "g", "cutPrep": "pitted and quartered", "cookingMethod": null, "prepNote": "about 1.2 kg whole" },
-        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 600, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
-        { "category": "Bev", "baseName": "Lemon Juice", "quantity": 30, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "2 tbsp" }
+        {
+          "category": "Fruit",
+          "baseName": "Apricot",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "pitted and quartered",
+          "cookingMethod": null,
+          "prepNote": "about 1.08 kg whole"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 740,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Lemon Juice",
+          "quantity": 40,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 2⅔ tbsp"
+        }
       ],
       "instructions": [
-        "Mix the apricots and sugar and leave 2 hours, or overnight in the fridge, until the juice runs.",
-        "Bring to a boil, add the lemon juice and boil hard, stirring, for 15 to 20 minutes, until a drop on a cold plate wrinkles when pushed.",
-        "Pour into hot clean jars, close and turn upside down to seal, or process in a water bath."
+        "Put two or three small plates in the freezer for testing the set.",
+        "Combine the apricots, sugar and lemon juice in a large heavy pan. Bring to a boil over medium heat, stirring until the sugar dissolves.",
+        "Boil for 25 to 30 minutes, stirring often and skimming off the foam, until the fruit breaks down and the jam coats a spoon.",
+        "Test the set: it is ready at 220°F (104°C), or when a teaspoon on a frozen plate wrinkles after a minute when pushed. If not, boil 5 minutes more and test again.",
+        "Ladle into hot clean jars, leaving ¼ inch of space at the top, and close. Process 10 minutes in a boiling water bath to keep on the shelf, or keep in the fridge and use within a month."
       ],
       "nutritionHighlights": [
-        { "nutrient": "Sugar", "note": "About 9 g per tablespoon." },
-        { "nutrient": "Vitamin A", "note": "A little, from the apricots' carotenes." }
+        {
+          "nutrient": "Sugar",
+          "note": "Most of each tablespoon is sugar."
+        },
+        {
+          "nutrient": "Vitamin A",
+          "note": "A little, from the apricots' carotenes."
+        }
       ],
       "citations": [
-        { "source": "Wikipedia: Fruit preserves", "url": "https://en.wikipedia.org/wiki/Fruit_preserves" }
+        {
+          "source": "Alphafoodie, Easy apricot jam (no pectin)",
+          "url": "https://www.alphafoodie.com/wprm_print/easy-apricot-jam-recipe-no-pectin-required"
+        }
       ],
-      "curationNote": null
+      "curationNote": "Alphafoodie, Easy apricot jam (no pectin) for every amount and step; 4.8 lb (about 2.18 kg) whole apricots, 3.3 lb (about 1.5 kg) sugar and ⅓ cup lemon juice for 9 half-pint jars; our 1 kg of pitted apricot is about 1.08 kg whole, about half the source."
     },
     {
       "id": "curated_sauce_raspberry_jam",
@@ -110,23 +217,59 @@
       "overallTier": "strong",
       "components": [],
       "ingredients": [
-        { "category": "Fruit", "baseName": "Raspberry", "quantity": 1000, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
-        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 800, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
-        { "category": "Bev", "baseName": "Lemon Juice", "quantity": 30, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "2 tbsp" }
+        {
+          "category": "Fruit",
+          "baseName": "Raspberry",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 800,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Lemon Juice",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "¼ cup"
+        }
       ],
       "instructions": [
-        "Crush the raspberries in a wide pot and bring to a boil.",
-        "Add the sugar and lemon juice, stir until dissolved and boil hard for 5 to 8 minutes, until a drop on a cold plate wrinkles.",
-        "Pour into hot clean jars and seal."
+        "Put two small plates in the freezer for testing the set.",
+        "Put the raspberries and sugar in a large heavy pot and crush them gently with a potato masher, leaving some whole if you like.",
+        "Stir in the lemon juice. Bring to a full rolling boil, stirring all the time, and skim off the foam.",
+        "Simmer for 15 to 20 minutes, until the jam coats the back of a spoon.",
+        "Take the pot off the heat. Put a teaspoon of jam on a cold plate, freeze it for 1 to 2 minutes and push it with a finger: it is ready when it wrinkles, or at 220°F (104°C). If not, cook a few minutes more and test again.",
+        "Ladle into warm clean jars, leaving ¼ inch (0.5 cm) of space at the top, and seal. Keeps 3 to 4 weeks in the refrigerator or up to 6 months frozen; jars processed for 10 minutes in a boiling water bath keep 12 to 18 months in a cool dark place."
       ],
       "nutritionHighlights": [
-        { "nutrient": "Sugar", "note": "About 10 g per tablespoon." },
-        { "nutrient": "Fiber", "note": "A little from the seeds." }
+        {
+          "nutrient": "Sugar",
+          "note": "About 10 g per tablespoon."
+        },
+        {
+          "nutrient": "Fiber",
+          "note": "A little from the seeds."
+        }
       ],
       "citations": [
-        { "source": "Wikipedia: Fruit preserves", "url": "https://en.wikipedia.org/wiki/Fruit_preserves" }
+        {
+          "source": "Alphafoodie: Easy raspberry jam (no pectin)",
+          "url": "https://www.alphafoodie.com/wprm_print/easy-raspberry-jam-recipe-no-pectin"
+        }
       ],
-      "curationNote": null
+      "curationNote": "Alphafoodie, Easy raspberry jam (no pectin) for every amount and step; made at the source size: 2.2 lb raspberries, 28 oz sugar, ¼ cup lemon juice, about six 250 ml jars."
     },
     {
       "id": "curated_sauce_red_currant_jelly",
@@ -142,22 +285,54 @@
       "overallTier": "strong",
       "components": [],
       "ingredients": [
-        { "category": "Fruit", "baseName": "Red currant", "quantity": 1000, "unit": "g", "cutPrep": "stripped from the stems", "cookingMethod": null, "prepNote": null },
-        { "category": "Bev", "baseName": "Water, tap", "quantity": 100, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
-        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 600, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null }
+        {
+          "category": "Fruit",
+          "baseName": "Red currant",
+          "quantity": 1000,
+          "unit": "g",
+          "cutPrep": "stripped from the stems",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
       ],
       "instructions": [
-        "Simmer the currants with the water for 10 minutes, crushing them, until they burst.",
-        "Pour into a jelly bag or cloth-lined sieve and let drip without squeezing for a few hours.",
-        "Boil the juice with the sugar for 5 to 8 minutes until it sets on a cold plate, skim, pour into hot clean jars and seal."
+        "Rinse the currants and put them in a pot with the water. Simmer for about 30 minutes, mashing them near the end, until very soft.",
+        "Pour into a jelly bag and let it drip overnight. Do not squeeze the bag, or the jelly turns cloudy.",
+        "Measure the juice. Use 450 g of sugar for every 600 ml of juice.",
+        "Bring the juice to a full rolling boil, stir in the sugar until it dissolves, and boil for about 10 minutes, until it reaches 220°F (105°C) or a drop on a frozen plate wrinkles when pushed after 30 seconds.",
+        "Take it off the heat for a minute, skim the surface, and ladle into warm sterilized jars with ¼ inch of space at the top. Seal. Processed in a water bath, it keeps about a year."
       ],
       "nutritionHighlights": [
-        { "nutrient": "Sugar", "note": "About 11 g per tablespoon." }
+        {
+          "nutrient": "Sugar",
+          "note": "About 11 g per tablespoon."
+        }
       ],
       "citations": [
-        { "source": "Wikipedia: Redcurrant jelly", "url": "https://en.wikipedia.org/wiki/Redcurrant_jelly" }
+        {
+          "source": "Lovely Greens: Redcurrant jelly",
+          "url": "https://lovelygreens.com/wprm_print/redcurrant-jelly-recipe"
+        }
       ],
-      "curationNote": "The strained skins and seeds are still counted in the nutrients, since the database has no figure for currant juice alone."
+      "curationNote": "Lovely Greens, Redcurrant jelly for every amount and step; 1 kg redcurrants with 500 ml water; sugar is 450 g for every 600 ml of strained juice, which for this batch comes to about 600 g."
     },
     {
       "id": "curated_dessert_vanilla_ice_cream",
@@ -173,28 +348,92 @@
       "overallTier": "strong",
       "components": [],
       "ingredients": [
-        { "category": "Dairy", "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D", "quantity": 500, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
-        { "category": "Dairy", "baseName": "Heavy Whipping Cream", "quantity": 500, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
-        { "category": "Dairy", "baseName": "Chicken Egg Yolk (Raw)", "quantity": 108, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "6 yolks" },
-        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 150, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": null },
-        { "category": "Herbs", "baseName": "Vanilla extract", "quantity": 10, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "2 tsp" },
-        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 0.5, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "a pinch" }
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Heavy Whipping Cream",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg Yolk (Raw)",
+          "quantity": 108,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "6 yolks"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 15,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "3 tsp",
+          "q": 15,
+          "note": "3 tsp"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.75,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "⅛ tsp",
+          "q": 0.75,
+          "note": "⅛ tsp"
+        }
       ],
       "instructions": [
         "Heat the milk and cream until steaming.",
-        "Whisk the yolks, sugar and salt, pour in the hot milk while whisking, return to the pan and stir over low heat until it coats a spoon (about 82 C / 180 F). Do not let it boil.",
+        "Whisk the yolks, sugar and salt, pour in the hot milk while whisking, return to the pan and stir over low heat until it coats a spoon (about 180°F (82°C)). Do not let it boil.",
         "Strain, stir in the vanilla and chill overnight.",
         "Churn in an ice cream maker and freeze until firm."
       ],
       "nutritionHighlights": [
-        { "nutrient": "Calcium", "note": "About 90 mg per half cup." },
-        { "nutrient": "Sugar", "note": "About 14 g per half cup." },
-        { "nutrient": "Saturated fat", "note": "High, from the cream." }
+        {
+          "nutrient": "Calcium",
+          "note": "About 90 mg per half cup."
+        },
+        {
+          "nutrient": "Sugar",
+          "note": "About 14 g per half cup."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "High, from the cream."
+        }
       ],
       "citations": [
-        { "source": "Wikipedia: Ice cream", "url": "https://en.wikipedia.org/wiki/Ice_cream" }
+        {
+          "source": "Taste of Home, Best Ever Vanilla Ice Cream",
+          "url": "https://www.tasteofhome.com/recipes/best-ever-vanilla-ice-cream/"
+        }
       ],
-      "curationNote": null
+      "curationNote": "Taste of Home, Best Ever Vanilla Ice Cream for every amount and step; 2 cups cream, 2 cups milk, 6 yolks, ¾ cup sugar, ⅛ tsp salt, 1 vanilla bean or 3 tsp extract; matches our size."
     },
     {
       "id": "curated_dessert_marzipan",
@@ -210,23 +449,67 @@
       "overallTier": "strong",
       "components": [],
       "ingredients": [
-        { "category": "NutSeed", "baseName": "Nuts, almonds, blanched", "quantity": 250, "unit": "g", "cutPrep": "ground very fine", "cookingMethod": null, "prepNote": null },
-        { "category": "Sweets", "baseName": "Sugar (Cane / Granulated)", "quantity": 150, "unit": "g", "cutPrep": "ground to powder", "cookingMethod": null, "prepNote": null },
-        { "category": "Bev", "baseName": "Water, tap", "quantity": 30, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": "or rose water" }
+        {
+          "category": "NutSeed",
+          "baseName": "Nuts, almonds, blanched",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "ground very fine",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "ground to powder",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 37.5,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "boiled and cooled, or rose water",
+          "q": 37.5,
+          "note": "boiled and cooled"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 6.25,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        }
       ],
       "instructions": [
         "Grind the almonds and sugar together in a food processor until fine and starting to clump.",
-        "Add the water a little at a time and knead into a smooth, firm paste.",
+        "Add the vanilla, then the water a little at a time, and knead into a smooth, firm paste.",
         "Wrap tightly and keep in the fridge for up to a month."
       ],
       "nutritionHighlights": [
-        { "nutrient": "Vitamin E", "note": "From the almonds." },
-        { "nutrient": "Sugar", "note": "About 7 g per 20 g piece." }
+        {
+          "nutrient": "Vitamin E",
+          "note": "From the almonds."
+        },
+        {
+          "nutrient": "Sugar",
+          "note": "About 7 g per 20 g piece."
+        }
       ],
       "citations": [
-        { "source": "Wikipedia: Marzipan", "url": "https://en.wikipedia.org/wiki/Marzipan" }
+        {
+          "source": "Cakesperiments, Homemade Marzipan (Almond Paste)",
+          "url": "https://www.cakesperiments.com/homemade-marzipan-almond-paste/"
+        }
       ],
-      "curationNote": null
+      "curationNote": "Cakesperiments, Homemade Marzipan (Almond Paste) for every amount and step; 200 g almonds, scaled by 1.25 to our 250 g."
     },
     {
       "id": "curated_side_pork_blood_cake",
@@ -235,7 +518,7 @@
       "dishRole": "side",
       "dishGroup": "Pantry & Preserves",
       "region": "Vietnam, Thailand and southern China",
-      "servings": 15,
+      "servings": 20,
       "servingSizeAmount": 1,
       "servingSizeUnit": "serving",
       "flavorProfile": "Soft and silky like firm tofu, mild and faintly mineral.",
@@ -243,23 +526,67 @@
       "overallTier": "strong",
       "components": [],
       "ingredients": [
-        { "category": "Meat", "baseName": "Gris blod rått", "quantity": 1000, "unit": "g", "cutPrep": "fresh, strained", "cookingMethod": null, "prepNote": null },
-        { "category": "Bev", "baseName": "Water, tap", "quantity": 500, "unit": "ml", "cutPrep": null, "cookingMethod": null, "prepNote": null },
-        { "category": "Herbs", "baseName": "Common salt/table salt", "quantity": 5, "unit": "g", "cutPrep": null, "cookingMethod": null, "prepNote": "stirred into the blood" }
+        {
+          "cutPrep": null,
+          "cookingMethod": "Simmered",
+          "prepNote": "fresh, strained; bought already treated with salt by the seller",
+          "category": "Meat",
+          "baseName": "Gris blod rått",
+          "quantity": 1000,
+          "unit": "g"
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "one part water to one part blood, up to one and a half parts for a softer set",
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1000,
+          "unit": "ml"
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the salt the seller stirs into the blood to keep it liquid",
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 5,
+          "unit": "g"
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null,
+          "category": "Herbs",
+          "baseName": "Monosodium glutamate",
+          "quantity": 1,
+          "unit": "g"
+        }
       ],
       "instructions": [
-        "Stir the salt into the blood, then stir in the water.",
-        "Pour into a shallow tray, cover and steam over gentle heat for 15 to 20 minutes, until set like soft tofu.",
-        "Cool, cut into cubes and keep in the fridge up to 3 days. Warm through in the soup just before serving."
+        "Ask the seller how much salt went into the blood. If it is very salty, use more water.",
+        "Stir the water into the blood, one part water to one part blood, or up to one and a half parts water for a softer set. Add the MSG.",
+        "Stir gently and evenly, then cook over low heat with the pot uncovered. A lid or high heat makes it porous and dry.",
+        "Let it boil for 5 to 6 minutes, then turn off the heat and leave it in the pot for 8 to 10 minutes more, until set through.",
+        "Cool, cut into cubes and keep in the fridge up to 3 days. Warm through in the soup just before serving. One serving is 100 g."
       ],
       "nutritionHighlights": [
-        { "nutrient": "Iron", "note": "Blood is one of the richest food sources of heme iron." },
-        { "nutrient": "Protein", "note": "About 7 g per 100 g serving." }
+        {
+          "nutrient": "Iron",
+          "note": "Blood is one of the richest food sources of heme iron."
+        },
+        {
+          "nutrient": "Protein",
+          "note": "About 7 g per 100 g serving."
+        }
       ],
       "citations": [
-        { "source": "Wikipedia: Blood tofu", "url": "https://en.wikipedia.org/wiki/Blood_tofu" }
+        {
+          "source": "VnExpress: Cách làm đông tiết đã hãm",
+          "url": "https://vnexpress.net/cach-lam-dong-tiet-da-ham-4807547.html"
+        }
       ],
-      "curationNote": null
+      "curationNote": "VnExpress, Cách làm đông tiết đã hãm for every amount and step; a method with a ratio, not a fixed yield; 1 liter of blood and 1 liter of water set to about 2 kg, so 20 servings of 100 g."
     }
   ]
 }

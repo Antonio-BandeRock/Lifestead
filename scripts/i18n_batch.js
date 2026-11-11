@@ -54,9 +54,10 @@ function readPart(file) {
   const text = fs.readFileSync(file, 'utf8');
   const start = text.indexOf('{');
   const end = text.lastIndexOf('}');
-  // A part edited by hand can end its last entry with a comma, which
-  // TypeScript allows and JSON does not.
-  return JSON.parse(text.slice(start, end + 1).replace(/,(\s*)\}$/, '$1}'));
+  // A part edited by hand can end its last entry with a comma, or carry a
+  // comment line between entries, both of which TypeScript allows and JSON
+  // does not.
+  return JSON.parse(text.slice(start, end + 1).replace(/^\s*\/\/.*$/gm, '').replace(/,(\s*)\}$/, '$1}'));
 }
 
 /** Everything already in the table: the parts plus the entries in es.ts. */

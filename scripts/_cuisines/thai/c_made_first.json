@@ -26,11 +26,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 60,
+          "quantity": 25,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "2 tbsp taken up by the radish, the rest drawn out with the water and squeezed away"
+          "prepNote": "part for the radish, part drawn out with the water and squeezed away; 2.5% of the radish weight"
         },
         {
           "category": "Sweets",
@@ -43,23 +43,23 @@
         }
       ],
       "instructions": [
-        "Toss the radish with the salt and leave overnight under a weight. Squeeze out and pour away the liquid.",
-        "Dry in the sun or a 60 C (140 F) oven for 1 to 2 days, until leathery.",
-        "Toss with the sugar, pack into a jar and leave a week before using. Chop fine to use."
+        "Toss the radish with the salt and leave it overnight under a weight. Squeeze out and pour away the liquid.",
+        "Dry the strips in the sun, or in a 60 C (140 F) oven, for 1 to 2 days until leathery.",
+        "Toss them with the sugar until it melts into a light syrup, pack into a jar and cure in the refrigerator 2 to 3 days before using. Chop fine to use."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Sodium",
-          "note": "High: about 1 g sodium per tablespoon."
+          "note": "High: the radish is cured in salt, so a little goes a long way."
         }
       ],
       "citations": [
         {
-          "source": "Wikipedia: Chai poh",
+          "source": "Wikipedia, Chai poh",
           "url": "https://en.wikipedia.org/wiki/Chai_poh"
         }
       ],
-      "curationNote": null
+      "curationNote": "Wikipedia, Chai poh for every amount and step; gives sweet chai poh as 2 to 3% salt and 5 to 10% sugar by radish weight; the recipe pages it cites could not be opened."
     },
     {
       "id": "curated_th_base_luk_chin_nuea",
@@ -71,7 +71,7 @@
       "servings": 40,
       "servingSizeAmount": 1,
       "servingSizeUnit": "piece",
-      "flavorProfile": "Springy, savory and peppery, with garlic and fish sauce.",
+      "flavorProfile": "Springy, savory and peppery, seasoned with fish sauce.",
       "healthBenefit": "Lean beef brings protein, iron and zinc.",
       "overallTier": "strong",
       "components": [],
@@ -88,11 +88,11 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 100,
+          "quantity": 50,
           "unit": "ml",
           "cutPrep": "ice cold",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "ice cold"
         },
         {
           "category": "Herbs",
@@ -101,25 +101,7 @@
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Grain",
-          "baseName": "Tapioca (granulated cassava starch)",
-          "quantity": 20,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "tapioca starch"
-        },
-        {
-          "category": "Veg",
-          "baseName": "Garlic",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "minced",
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tbsp"
         },
         {
           "category": "Herbs",
@@ -128,45 +110,46 @@
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "white pepper is traditional"
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 5,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/2 tsp"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 3,
+          "quantity": 10,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "1/2 tsp"
+          "prepNote": "about 1 3/4 tsp"
         },
         {
           "category": "PantryStaples",
           "baseName": "Baking powder",
-          "quantity": 3,
+          "quantity": 4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tsp"
+        },
+        {
+          "category": "Baked",
+          "baseName": "Flour, cornflour, from maize starch",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "corn starch"
         }
       ],
       "instructions": [
-        "Grind the cold beef very fine in a food processor with the garlic, fish sauce, sugar, salt and pepper.",
-        "Add the starch, baking powder and ice water bit by bit and process until a sticky, smooth paste forms. Chill 1 hour.",
-        "Squeeze balls of about 15 g through your fist into warm water, then simmer gently 8 to 10 minutes until they float and spring back. Drain."
+        "Cube the beef and chill it until very cold.",
+        "Grind the cold beef very fine in a food processor with the fish sauce, salt and pepper.",
+        "Add the corn starch, baking powder and ice water bit by bit and process until a sticky, smooth paste forms. Chill 1 hour.",
+        "Squeeze balls of about 18 g through your fist into warm water, then simmer gently 8 to 10 minutes until they float and spring back. Drain. The batch makes about 30 balls."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Protein",
-          "note": "About 3 g per ball."
+          "note": "About 4 g per ball."
         },
         {
           "nutrient": "Iron",
@@ -175,11 +158,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia: Beef ball",
-          "url": "https://en.wikipedia.org/wiki/Beef_ball"
+          "source": "Cooking with Morgane, Thai Beef Balls",
+          "url": "https://cookingwithmorgane.com/en/recipe/thai-beef-balls.html"
         }
       ],
-      "curationNote": null
+      "curationNote": "Cooking with Morgane, Thai Beef Balls for every amount and step; 500 g beef, 15 g corn starch, 10 g salt, 1 tbsp fish sauce, 1 tsp baking powder, 1/2 tsp ground pepper, 50 ml water for 30 balls; the page sends the method to its video, so the steps keep the usual cold grind, beat and simmer."
     },
     {
       "id": "curated_th_base_kaep_moo",
@@ -205,28 +188,30 @@
           "prepNote": null
         },
         {
-          "category": "Fats",
-          "baseName": "Pork Lard",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "the fat the rind takes up in frying"
-        },
-        {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
           "quantity": 3,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
+          "prepNote": "1/2 tsp, tossed with the raw pieces"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Distilled Vinegar (White)",
+          "quantity": 2.5,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": "1/2 tsp"
         }
       ],
       "instructions": [
-        "Boil the rind for 30 minutes until soft, cool and scrape off the fat underneath. Cut into strips.",
-        "Dry in the sun or a 90 C (195 F) oven until hard, 6 to 8 hours.",
-        "Fry in hot lard at 200 C (390 F) a few at a time until they puff, drain well and toss with the salt. One serving is 20 g."
+        "Cut the pork skin into bite sized pieces and toss them in a bowl with the salt and vinegar.",
+        "Put the pieces in a wide pan with 120 ml (1/2 cup) water over medium heat. The skin takes up the water, then gives up its fat; keep cooking in that fat until the pieces turn golden, about 1 hour 10 minutes in all.",
+        "Leave the rinds sitting in the rendered fat for 1 hour.",
+        "Heat again and fry a second time until golden, puffed and crisp.",
+        "Drain well in a colander. One serving is 20 g."
       ],
       "nutritionHighlights": [
         {
@@ -235,16 +220,20 @@
         },
         {
           "nutrient": "Saturated fat",
-          "note": "From the lard."
+          "note": "From the fat the pork skin renders as it cooks."
         }
       ],
       "citations": [
         {
-          "source": "Wikipedia: Pork rind",
+          "source": "Hungry in Thailand, Hot and Spicy Pork Rinds",
+          "url": "https://hungryinthailand.com/wprm_print/hot-and-spicy-pork-rinds-recipe"
+        },
+        {
+          "source": "Wikipedia, Pork rind",
           "url": "https://en.wikipedia.org/wiki/Pork_rind"
         }
       ],
-      "curationNote": null
+      "curationNote": "Hungry in Thailand, Hot and Spicy Pork Rinds (plain rinds part) for every amount and step; the plain rinds use 1 kg pork skin, 1 tsp salt, 1 tsp vinegar and 1 cup water and fry in the fat the skin gives up; ours is half that batch. The spice blend tossed on at the end is a separate seasoning and is left out of this plain base."
     },
     {
       "id": "curated_th_base_see_ew_dam_waan",
@@ -255,70 +244,62 @@
       "servings": 33,
       "servingSizeAmount": 1,
       "servingSizeUnit": "tbsp",
-      "flavorProfile": "Thick, dark, sweet and salty, with a molasses edge.",
+      "flavorProfile": "Thick, dark, sweet and salty, with a burnt caramel edge.",
       "healthBenefit": "Used by the spoonful for colour and sweetness; it is high in sugar and salt.",
       "overallTier": "moderate",
       "components": [],
       "ingredients": [
         {
           "category": "Legume",
-          "baseName": "Soy sauce made from soy and wheat (shoyu)",
-          "quantity": 270,
+          "baseName": "Soy sauce made from soy (tamari)",
+          "quantity": 356,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "about 1 cup (250 ml); soy sauce weighs about 1.08 g per ml"
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Dark Treacle/Molasses",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "about 1/2 cup"
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": "shaved",
-          "cookingMethod": null,
-          "prepNote": "stands in for Thai palm sugar, which no food database here lists"
+          "prepNote": "about 1 1/3 cups (330 ml), wheat free; soy sauce weighs about 1.08 g per ml"
         },
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 100,
+          "quantity": 165,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about 2/3 cup"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Brown Sugars",
+          "quantity": 600,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "dark brown, about 2 3/4 cups packed"
         }
       ],
       "instructions": [
-        "Melt the sugar in the water over low heat, then stir in the molasses and soy sauce.",
-        "Simmer gently, stirring, for 10 to 15 minutes until it coats a spoon thickly. It thickens more as it cools.",
-        "Cool and keep in a clean jar in the fridge. It makes about 600 g."
+        "Put the water and brown sugar in a heavy pan and bring to a boil over high heat, stirring only until the sugar dissolves.",
+        "Turn the heat to medium low and leave it to bubble without stirring until it turns as dark as strong coffee.",
+        "Take the pan off the heat and pour in the soy sauce slowly; it will foam up hard.",
+        "Stir until it is smooth and thick like molasses. Cool, then keep it in a clean jar in the fridge for about a month."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Sugars",
-          "note": "About 9 g sugar per tablespoon."
+          "note": "High, from the caramelised brown sugar."
         },
         {
           "nutrient": "Sodium",
-          "note": "About 450 mg sodium per tablespoon."
+          "note": "High, from the tamari."
         }
       ],
       "citations": [
         {
-          "source": "Wikipedia: Soy sauce (Thailand)",
-          "url": "https://en.wikipedia.org/wiki/Soy_sauce"
+          "source": "Pranee's Thai Kitchen, Dark Soy Sauce",
+          "url": "https://praneesthaikitchen.com/2010/11/30/dark-soy-sauce-recipe-gluten-free-recipe/"
         }
       ],
-      "curationNote": "Thai sweet dark soy is soy sauce cooked with molasses and sugar. One serving is one tablespoon, about 18 g, from a finished weight of about 600 g."
+      "curationNote": "Pranee's Thai Kitchen, Dark Soy Sauce for every amount and step; 1/4 cup water, 1 cup dark brown sugar and 1/2 cup wheat free soy sauce make 3/4 cup (12 tbsp); ours makes 33 tbsp, so 2.75 times the batch."
     },
     {
       "id": "curated_th_base_sriracha",
@@ -329,7 +310,7 @@
       "servings": 35,
       "servingSizeAmount": 1,
       "servingSizeUnit": "tbsp",
-      "flavorProfile": "Hot, garlicky, tangy and a little sweet.",
+      "flavorProfile": "Hot, garlicky, tangy and sweet.",
       "healthBenefit": "Fresh chillies bring vitamin C; used by the spoonful.",
       "overallTier": "moderate",
       "components": [],
@@ -337,25 +318,25 @@
         {
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
-          "quantity": 500,
+          "quantity": 372,
           "unit": "g",
           "cutPrep": "stems removed, roughly chopped",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "red jalapeno or serrano peppers, stemmed"
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 60,
+          "quantity": 124,
           "unit": "g",
           "cutPrep": "peeled",
           "cookingMethod": null,
-          "prepNote": "about 15 cloves"
+          "prepNote": "peeled cloves"
         },
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 50,
+          "quantity": 248,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -364,26 +345,37 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 12,
+          "quantity": 59,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "about 2 tsp"
+          "prepNote": "about 3 1/4 tbsp"
         },
         {
           "category": "Herbs",
           "baseName": "Distilled Vinegar (White)",
-          "quantity": 120,
+          "quantity": 65,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "about 1/2 cup"
+          "prepNote": "about 1/4 cup"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 194,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "about 3/4 cup"
         }
       ],
       "instructions": [
-        "Blend the chillies, garlic, sugar and salt to a coarse paste. Pack into a jar, cover loosely and leave at room temperature for 3 to 5 days, stirring daily, until it smells sour and bubbles.",
-        "Blend with the vinegar until smooth, then simmer 5 minutes.",
-        "Push through a sieve if you want it smooth, cool and keep in the fridge. It makes about 600 g."
+        "Blend the peppers, garlic, vinegar and water until smooth.",
+        "Strain into a heavy pot through a sieve that is not too fine, pressing out as much liquid as you can; some pulp going through gives the sauce its body.",
+        "Whisk in the sugar and salt and bring to a boil over medium heat, stirring now and then.",
+        "Lower the heat and simmer uncovered, stirring now and then, until it thickens and cooks down to about 2 1/4 cups (35 tbsp).",
+        "Cool completely and keep in a clean glass jar in the fridge, using a clean spoon each time. Let it rest 2 days before using so the garlic mellows. It keeps about a month, or it can be frozen."
       ],
       "nutritionHighlights": [
         {
@@ -392,16 +384,16 @@
         },
         {
           "nutrient": "Sodium",
-          "note": "About 140 mg sodium per tablespoon."
+          "note": "From the salt; a tablespoon carries a good deal of it."
         }
       ],
       "citations": [
         {
-          "source": "Wikipedia: Sriracha",
-          "url": "https://en.wikipedia.org/wiki/Sriracha"
+          "source": "SheSimmers, Homemade Sriracha",
+          "url": "https://shesimmers.com/easyrecipe-print/839-0"
         }
       ],
-      "curationNote": "One serving is one tablespoon, about 17 g, from a finished weight of about 600 g."
+      "curationNote": "SheSimmers, Homemade Sriracha for every amount and step; makes about 4 cups (64 tbsp): 24 oz red jalapeno or serrano peppers, 8 oz peeled garlic, 4 fl oz white vinegar, 12 fl oz water, 16 oz sugar, 6 tbsp salt, blended, strained, then simmered down to about 4 cups; no fermenting. Scaled by 35/64 to our 35 tablespoons."
     },
     {
       "id": "curated_th_base_kratiam_dong",
@@ -424,40 +416,41 @@
           "unit": "g",
           "cutPrep": "small whole heads, outer skin rubbed off",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Vinegar, rice vinegar",
-          "quantity": 60,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "the share taken up by the garlic; the jar holds 250 ml"
+          "prepNote": "small whole heads; roots trimmed, outer skin peeled, washed"
         },
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 25,
+          "quantity": 38,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "the share taken up; the brine holds 100 g"
+          "prepNote": "the share taken up; the brine holds 150 g (3/4 cup)"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 4,
+          "quantity": 7,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "the share taken up; the brine holds 15 g"
+          "prepNote": "the share taken up; the brine holds 27 g (1 1/2 tbsp)"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Distilled Vinegar (White)",
+          "quantity": 30,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the share taken up; the jar holds 120 ml (1/2 cup)"
         }
       ],
       "instructions": [
-        "Soak the garlic heads in salted water overnight, drain and pack into a clean jar.",
-        "Boil 250 ml rice vinegar, 250 ml water, 100 g sugar and 15 g salt, cool and pour over the garlic.",
-        "Close and leave 3 to 4 weeks before using. Only about a quarter of the brine is eaten with the garlic, so only that share is counted."
+        "Trim the roots off the garlic heads, peel away the loose outer skin and wash them. Pack them into a clean jar.",
+        "Boil 240 ml (1 cup) water, 120 ml (1/2 cup) white vinegar, 150 g (3/4 cup) sugar and 27 g (1 1/2 tbsp) salt hard, then let the brine cool.",
+        "Pour the cooled brine over the garlic to cover, close the jar and leave it in a shady place for about 1 month before using. It keeps about a year.",
+        "Only about a quarter of the brine is eaten with the garlic, so only that share is counted."
       ],
       "nutritionHighlights": [
         {
@@ -467,11 +460,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia: Thai cuisine, pickles",
-          "url": "https://en.wikipedia.org/wiki/Thai_cuisine"
+          "source": "JIRCAS, Thai fermented foods database: Kra tiam dorng",
+          "url": "https://www.jircas.go.jp/en/database/thaifermented/kra-tiam-dorng"
         }
       ],
-      "curationNote": "The brine water is left out because it is not eaten. One serving is one tablespoon of cloves, about 20 g, from about 500 g of pickled garlic."
+      "curationNote": "JIRCAS Thai fermented foods database, Kra tiam dorng (pickled garlic) for every amount and step; per 1 kg fresh garlic bulbs: sugar 1 1/2 cups, vinegar 1 cup, salt 3 tbsp, water 2 cups; brine boiled, cooled and poured over, left in shade about 1 month. Ours is half that batch; about a quarter of the brine is counted as eaten."
     },
     {
       "id": "curated_th_base_pla_ra",
@@ -479,7 +472,7 @@
       "builderType": "sauce",
       "dishGroup": "Bases: Rice, Noodles & Pantry",
       "region": "Isan, Northeast Thailand, and Laos",
-      "servings": 65,
+      "servings": 83,
       "servingSizeAmount": 1,
       "servingSizeUnit": "tbsp",
       "flavorProfile": "Very salty, pungent and deeply savoury.",
@@ -494,7 +487,7 @@
           "unit": "g",
           "cutPrep": "small freshwater fish, scaled, gutted and cleaned",
           "cookingMethod": null,
-          "prepNote": "stands in for the mud carp and gourami used in Isan"
+          "prepNote": "stands in for the gourami, snakehead, catfish and small fish used in Isan"
         },
         {
           "category": "Herbs",
@@ -508,35 +501,38 @@
         {
           "category": "Grain",
           "baseName": "Rice Bran",
-          "quantity": 150,
+          "quantity": 250,
           "unit": "g",
-          "cutPrep": "dry roasted until fragrant",
+          "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Mix the cleaned fish with the salt and leave overnight in a covered jar.",
-        "Mix in the roasted rice bran, pack tightly into a clay or glass jar, seal and leave in a cool place for at least 6 months, up to a year.",
-        "For pla ra sauce, simmer fish and liquid with a little water and strain. It makes about 1.2 kg."
+        "Mix the cleaned fish with the salt, cover and leave it overnight.",
+        "Mix in the rice bran, pack it tightly into a clay or glass jar, close it and leave it in a cool, dark place for 4 to 6 months, or longer for a stronger flavour. It makes about 1.5 kg."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Sodium",
-          "note": "Very high: about 1.4 g sodium per tablespoon."
+          "note": "From the salt; very salty, so a little goes a long way."
         },
         {
           "nutrient": "Protein",
-          "note": "About 3 g protein per tablespoon."
+          "note": "From the fish."
         }
       ],
       "citations": [
+        {
+          "source": "Thailand Foundation, Pla ra: Thai fermented fish",
+          "url": "https://thailandfoundation.or.th/pla-ra-thai-fermented-fish/"
+        },
         {
           "source": "Wikipedia: Pla ra",
           "url": "https://en.wikipedia.org/wiki/Pla_ra"
         }
       ],
-      "curationNote": "Isan pla ra uses small freshwater fish, salt and roasted rice bran or roasted rice. One serving is one tablespoon, about 18 g."
+      "curationNote": "Thailand Foundation, Pla ra: pla ra nua is freshwater fish, salt and rice bran at 4 to 1 to 1, fermented about 4 to 6 months in a closed jar, and generally at least 6 months. The page gives no step by step method; the overnight salting first follows Wikipedia. One serving is one tablespoon, about 18 g."
     },
     {
       "id": "curated_th_base_pu_dong",

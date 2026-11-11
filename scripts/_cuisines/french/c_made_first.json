@@ -17,25 +17,16 @@
         {
           "category": "Herbs",
           "baseName": "Spices, mustard seed, yellow",
-          "quantity": 60,
+          "quantity": 94,
           "unit": "g",
           "cutPrep": "soaked overnight",
           "cookingMethod": null,
-          "prepNote": "brown seed is traditional; the database has only yellow"
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Mustard powder",
-          "quantity": 15,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source uses about one part brown seed to three of yellow; the database has only yellow"
         },
         {
           "category": "Alcohol",
           "baseName": "White Wine",
-          "quantity": 120,
+          "quantity": 100,
           "unit": "ml",
           "cutPrep": "dry",
           "cookingMethod": null,
@@ -44,34 +35,25 @@
         {
           "category": "Herbs",
           "baseName": "Wine vinegar",
-          "quantity": 60,
+          "quantity": 100,
           "unit": "ml",
           "cutPrep": "white",
           "cookingMethod": null,
           "prepNote": null
         },
         {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 60,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 6,
+          "quantity": 3.8,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "1 tsp"
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Soak the mustard seed in the wine and vinegar overnight.",
-        "Blend with the mustard powder, water and salt until as smooth as you can get it, then press through a fine sieve for the classic texture.",
+        "Soak the mustard seed in the wine and vinegar overnight, covered.",
+        "Blend with the salt until as smooth as you can get it, then press through a fine sieve for the classic texture.",
         "Jar and keep in the fridge; it is very hot at first and settles after 2 days."
       ],
       "nutritionHighlights": [
@@ -81,16 +63,20 @@
         },
         {
           "nutrient": "Sodium",
-          "note": "About 120 mg per tablespoon."
+          "note": "About 75 mg per tablespoon."
         }
       ],
       "citations": [
+        {
+          "source": "Food Faith Fitness, Dijon mustard",
+          "url": "https://www.foodfaithfitness.com/dijon-mustard-recipe/"
+        },
         {
           "source": "Wikipedia: Dijon mustard",
           "url": "https://en.wikipedia.org/wiki/Dijon_mustard"
         }
       ],
-      "curationNote": null
+      "curationNote": "Food Faith Fitness, Dijon mustard for every amount and step; 1/3 cup yellow and 2 tbsp brown seed, 1/3 cup each white wine vinegar and dry white wine, 1/2 tsp salt; scaled by 1.25 to fill our 20 tbsp."
     },
     {
       "id": "curated_fr_base_herbes_de_provence",
@@ -200,7 +186,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, pepper, white, ground",
-          "quantity": 15,
+          "quantity": 13,
           "unit": "g",
           "cutPrep": "mostly white pepper",
           "cookingMethod": null,
@@ -218,7 +204,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, cloves, ground",
-          "quantity": 2,
+          "quantity": 4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -227,7 +213,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, ginger, ground",
-          "quantity": 3,
+          "quantity": 4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -235,7 +221,7 @@
         }
       ],
       "instructions": [
-        "Mix the ground spices well.",
+        "Mix the ground white pepper, nutmeg, cloves and ginger well.",
         "Keep in a closed jar away from light."
       ],
       "nutritionHighlights": [
@@ -246,11 +232,15 @@
       ],
       "citations": [
         {
+          "source": "Il'Aux Épices, Quatre épices maison",
+          "url": "https://ileauxepices.com/blog/?p=17730"
+        },
+        {
           "source": "Wikipedia: Quatre épices",
           "url": "https://en.wikipedia.org/wiki/Quatre_%C3%A9pices"
         }
       ],
-      "curationNote": null
+      "curationNote": "Il'Aux Épices, Quatre épices maison for every amount and step; 20 g pepper, 6 g nutmeg, 6 g cloves, 6 g cinnamon, optional 6 g ginger; ours keeps the pepper, nutmeg, cloves and ginger set Wikipedia gives, at the same 20:6:6:6 ratio."
     },
     {
       "id": "curated_fr_base_fondant",
@@ -378,7 +368,7 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 30,
+          "quantity": 35,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -387,7 +377,7 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 5,
+          "quantity": 3.5,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -405,7 +395,7 @@
         {
           "category": "Herbs",
           "baseName": "Thyme, dried, ground",
-          "quantity": 1,
+          "quantity": 0.5,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -419,17 +409,26 @@
           "cutPrep": "crumbled",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "White Wine",
+          "quantity": 5,
+          "unit": "ml",
+          "cutPrep": "dry",
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Mix the salt, sugar, pepper, thyme and bay and rub it into every side of the belly.",
+        "Mix the salt, sugar, pepper, thyme and bay, rub it into every side of the belly, then sprinkle over the white wine.",
         "Seal it in a bag or covered dish and keep it in the fridge 5 days for poitrine salée, turning it each day. For demi-sel (half-salted) stop at 2 days.",
         "Rinse, pat dry and leave uncovered on a rack in the fridge overnight. It keeps 2 weeks; cut into lardons as a recipe asks. One serving is 50 g."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Sodium",
-          "note": "About 1,200 mg per 50 g."
+          "note": "High, from the salt cure."
         },
         {
           "nutrient": "Saturated fat",
@@ -437,6 +436,10 @@
         }
       ],
       "citations": [
+        {
+          "source": "Du bocal à l'assiette, Recette de poitrine de porc salée faite maison",
+          "url": "https://dubocalalassiette.fr/blog/poitrine-de-porc-salee/"
+        },
         {
           "source": "Wikipedia (French): Petit salé",
           "url": "https://fr.wikipedia.org/wiki/Petit_sal%C3%A9"
@@ -446,7 +449,7 @@
           "url": "https://en.wikipedia.org/wiki/Salt_pork"
         }
       ],
-      "curationNote": null
+      "curationNote": "Du bocal à l'assiette, Recette de poitrine de porc salée faite maison for every amount and step; per kg: 35 g coarse salt, 3.5 g sugar, 5 g white wine, 2 g pepper, about 1 g herbs and spices; ours is 1 kg."
     },
     {
       "id": "curated_fr_base_palette_demi_sel",
@@ -821,7 +824,7 @@
       "servings": 8,
       "servingSizeAmount": 1,
       "servingSizeUnit": "each",
-      "flavorProfile": "Firm, smoky pork sausage with cumin, garlic and pepper.",
+      "flavorProfile": "Firm, smoky pork sausage with caraway, nutmeg and pepper.",
       "healthBenefit": "Pork brings protein, B vitamins and zinc.",
       "overallTier": "strong",
       "components": [],
@@ -846,7 +849,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Nitrite curing salt",
+          "baseName": "Common salt/table salt",
           "quantity": 18,
           "unit": "g",
           "cutPrep": null,
@@ -864,28 +867,28 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Cumin (cummin) seed, dried, ground",
-          "quantity": 2,
+          "baseName": "Spices, caraway seed",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 1,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
         {
-          "category": "Veg",
-          "baseName": "Garlic",
-          "quantity": 5,
-          "unit": "g",
-          "cutPrep": "crushed",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Alcohol",
-          "baseName": "White Wine",
+          "category": "Bev",
+          "baseName": "Water, tap",
           "quantity": 30,
           "unit": "ml",
-          "cutPrep": null,
+          "cutPrep": "cold",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -900,9 +903,10 @@
         }
       ],
       "instructions": [
-        "Mix the ground meat and fat with the curing salt, pepper, cumin, garlic and wine. Keep everything cold.",
+        "Mix the ground meat with the salt and cold water until sticky, then add the pepper, caraway, nutmeg and fat and mix again. Keep everything cold.",
         "Stuff into the hog casing and tie into 8 links of about 120 g.",
-        "Hang overnight in the fridge, then cold smoke 48 hours over resinous wood (fir or spruce), as the tuyé chimneys of the Doubs do. For a Morteau-style sausage leave out the cumin. Cook within 2 weeks."
+        "Hang overnight in the fridge, then smoke over resinous wood (fir or spruce) at about 25 to 30 C for 6 hours.",
+        "Poach in water at 80 C (176 F) for 35 minutes, cool in cold water, dry and keep in the fridge. Use within 2 weeks."
       ],
       "nutritionHighlights": [
         {
@@ -916,15 +920,15 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia (French): Saucisse de Montbéliard",
-          "url": "https://fr.wikipedia.org/wiki/Saucisse_de_Montb%C3%A9liard"
+          "source": "Meats and Sausages, Saucisse de Montbéliard",
+          "url": "https://meatsandsausages.com/sausage-recipes/cooked/saucisse-montbeliard"
         },
         {
-          "source": "Wikipedia (French): Saucisse de Morteau",
-          "url": "https://fr.wikipedia.org/wiki/Saucisse_de_Morteau"
+          "source": "Wikipedia (French): Saucisse de Montbéliard",
+          "url": "https://fr.wikipedia.org/wiki/Saucisse_de_Montb%C3%A9liard"
         }
       ],
-      "curationNote": null
+      "curationNote": "Meats and Sausages, Saucisse de Montbéliard for every amount and step; per kg: 700 g lean pork, 300 g back fat, 18 g salt, 2 g pepper, 1 g cumin or caraway, 1 g nutmeg, 30 ml water; ours is 1 kg."
     },
     {
       "id": "curated_fr_base_saucisse_de_strasbourg",
@@ -971,9 +975,9 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 200,
+          "quantity": 60,
           "unit": "ml",
-          "cutPrep": "as crushed ice",
+          "cutPrep": "ice cold",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -1007,27 +1011,9 @@
         {
           "category": "Herbs",
           "baseName": "Spices, nutmeg, ground",
-          "quantity": 0.5,
+          "quantity": 1,
           "unit": "g",
           "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, mace, ground",
-          "quantity": 0.5,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Garlic",
-          "quantity": 3,
-          "unit": "g",
-          "cutPrep": "crushed",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -1039,12 +1025,21 @@
           "cutPrep": "soaked and rinsed",
           "cookingMethod": null,
           "prepNote": "about 10 m for 1 kg of filling; in place of natural sheep casing, which the database does not hold"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Paprika",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "sweet",
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Blend the meat and curing salt in a food processor, adding the ice a little at a time, then the fat and spices, until smooth and below 12 C (54 F).",
-        "Stuff into the sheep casing and twist into pairs of about 50 g each.",
-        "Dry 1 hour, hot smoke at 60 C (140 F) for 1 hour, then poach at 75 C (167 F) for 20 minutes and chill in cold water. Keep in the fridge up to a week and reheat in hot water before serving."
+        "Blend the meat, fat, curing salt, white pepper, coriander, nutmeg and paprika in a food processor, adding the cold water a little at a time, until smooth and below 12 C (54 F).",
+        "Stuff into the casing and twist into pairs of about 50 g each.",
+        "Dry 1 hour, hot smoke for 30 minutes, then poach at 80 C (176 F) for 25 minutes and chill in cold water. Keep in the fridge up to a week and reheat in hot water before serving."
       ],
       "nutritionHighlights": [
         {
@@ -1058,11 +1053,15 @@
       ],
       "citations": [
         {
+          "source": "Meats and Sausages, Saucisse de Strasbourg",
+          "url": "https://meatsandsausages.com/sausage-recipes/cooked/saucisse-strasbourg"
+        },
+        {
           "source": "Wikipedia (French): Saucisse de Strasbourg",
           "url": "https://fr.wikipedia.org/wiki/Saucisse_de_Strasbourg"
         }
       ],
-      "curationNote": null
+      "curationNote": "Meats and Sausages, Saucisse de Strasbourg for every amount and step; per kg: 700 g pork, 300 g fat, 18 g salt, 2.5 g cure, 2 g white pepper, 1 g each nutmeg, coriander and sweet paprika, 60 ml cold water; beef kept from Wikipédia."
     }
   ]
 }

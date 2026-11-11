@@ -48,7 +48,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -57,7 +66,7 @@
     ],
     "instructions": [
       "Preheat the oven to 400F (200C).",
-      "Toss the broccoli and carrot with the salt and roast for 12-15 minutes.",
+      "Toss the broccoli and carrot with the coconut oil and the salt and roast for 12-15 minutes.",
       "Add the chicken breast to the sheet and bake for another 15-18 minutes, until cooked through.",
       "Slice the chicken and serve over the roasted vegetables with the sliced avocado."
     ]
@@ -102,7 +111,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -111,7 +129,7 @@
     ],
     "instructions": [
       "Combine the cabbage and carrot in a covered pan with a splash of water, and braise over medium-low heat for 10-12 minutes.",
-      "Season the sliced chicken with the salt and sear in a dry, hot pan for 4-5 minutes per side, until cooked through.",
+      "Season the sliced chicken with the salt and sear in the coconut oil in a hot pan for 4-5 minutes per side, until cooked through.",
       "Serve the chicken over the braised cabbage and carrot."
     ]
   },
@@ -164,7 +182,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -173,7 +200,7 @@
     ],
     "instructions": [
       "Combine the kale and carrot in a covered pan with a splash of water, and braise over medium-low heat for 8-10 minutes.",
-      "Season the sliced chicken with the salt and sear in a dry, hot pan for 4-5 minutes per side, until cooked through.",
+      "Season the sliced chicken with the salt and sear in the coconut oil in a hot pan for 4-5 minutes per side, until cooked through.",
       "Serve the chicken over the braised kale and carrot, topped with the sliced avocado."
     ]
   },
@@ -226,7 +253,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -234,7 +270,7 @@
       }
     ],
     "instructions": [
-      "Saute the diced chicken in a splash of water over medium-high heat for 6-7 minutes, until cooked through.",
+      "Saute the diced chicken in the coconut oil over medium-high heat for 6-7 minutes, until cooked through.",
       "Add the zucchini and carrot and saute for another 4-5 minutes, until tender.",
       "Stir in the lime juice and salt just before serving."
     ]
@@ -288,7 +324,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -297,7 +342,7 @@
     ],
     "instructions": [
       "Preheat the oven to 400F (200C).",
-      "Toss the broccoli and carrot with the salt and roast for 12-15 minutes.",
+      "Toss the broccoli and carrot with the coconut oil and the salt and roast for 12-15 minutes.",
       "Add the turkey breast to the sheet and bake for another 15-18 minutes, until cooked through.",
       "Slice the turkey and serve over the roasted vegetables with the sliced avocado."
     ]
@@ -342,7 +387,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -351,7 +405,7 @@
     ],
     "instructions": [
       "Combine the cabbage and carrot in a covered pan with a splash of water, and braise over medium-low heat for 10-12 minutes.",
-      "Season the sliced turkey with the salt and sear in a dry, hot pan for 4-5 minutes per side, until cooked through.",
+      "Season the sliced turkey with the salt and sear in the coconut oil in a hot pan for 4-5 minutes per side, until cooked through.",
       "Serve the turkey over the braised cabbage and carrot."
     ]
   },
@@ -404,7 +458,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -413,7 +476,7 @@
     ],
     "instructions": [
       "Combine the kale and carrot in a covered pan with a splash of water, and braise over medium-low heat for 8-10 minutes.",
-      "Season the sliced turkey with the salt and sear in a dry, hot pan for 4-5 minutes per side, until cooked through.",
+      "Season the sliced turkey with the salt and sear in the coconut oil in a hot pan for 4-5 minutes per side, until cooked through.",
       "Serve the turkey over the braised kale and carrot, topped with the sliced avocado."
     ]
   },
@@ -457,7 +520,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -466,7 +538,7 @@
     ],
     "instructions": [
       "Preheat the oven to 400F (200C).",
-      "Toss the fennel and zucchini with the salt and roast for 10 minutes.",
+      "Toss the fennel and zucchini with the coconut oil and the salt and roast for 10 minutes.",
       "Add the turkey breast to the sheet and bake for another 15-18 minutes, until cooked through."
     ]
   },
@@ -519,7 +591,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -527,8 +608,8 @@
       }
     ],
     "instructions": [
-      "Preheat the oven to 400F (200C) and roast the fennel and zucchini with the salt for 15-18 minutes.",
-      "Season the sliced beef and sear in a dry, hot pan for 2-3 minutes per side.",
+      "Preheat the oven to 400F (200C) and roast the fennel and zucchini with the coconut oil and the salt for 15-18 minutes.",
+      "Season the sliced beef and sear in the coconut oil in a hot pan for 2-3 minutes per side.",
       "Serve the beef over the roasted vegetables, topped with the sliced avocado."
     ]
   },
@@ -572,7 +653,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -580,8 +670,8 @@
       }
     ],
     "instructions": [
-      "Preheat the oven to 400F (200C) and roast the broccoli and carrot with the salt for 15 minutes.",
-      "Season the sliced pork and sear in a dry, hot pan for 2-3 minutes per side.",
+      "Preheat the oven to 400F (200C) and roast the broccoli and carrot with the coconut oil and the salt for 15 minutes.",
+      "Season the sliced pork and sear in the coconut oil in a hot pan for 2-3 minutes per side.",
       "Serve the pork over the roasted broccoli and carrot."
     ]
   },
@@ -634,7 +724,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -643,7 +742,7 @@
     ],
     "instructions": [
       "Combine the kale and carrot in a covered pan with a splash of water, and braise over medium-low heat for 8-10 minutes.",
-      "Season the salmon with the salt and bake at 400F (200C) for 12-15 minutes, until it flakes easily.",
+      "Rub the salmon with the coconut oil, season it with the salt, and bake at 400F (200C) for 12-15 minutes, until it flakes easily.",
       "Serve the salmon over the braised kale and carrot, topped with the sliced avocado."
     ]
   },
@@ -687,7 +786,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -695,7 +803,7 @@
       }
     ],
     "instructions": [
-      "Preheat the oven to 400F (200C) and toss the broccoli and carrot with the salt.",
+      "Preheat the oven to 400F (200C) and toss the broccoli and carrot with the coconut oil and the salt.",
       "Roast for 12 minutes, then add the halibut fillet and roast for another 12-15 minutes, until it flakes easily."
     ]
   },
@@ -739,7 +847,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -748,7 +865,7 @@
     ],
     "instructions": [
       "Combine the kale and carrot in a covered pan with a splash of water, and braise over medium-low heat for 8-10 minutes.",
-      "Season the cod with the salt and sear in a dry, hot pan for 3-4 minutes per side, until it flakes easily.",
+      "Season the cod with the salt and sear in the coconut oil in a hot pan for 3-4 minutes per side, until it flakes easily.",
       "Serve the cod over the braised kale and carrot."
     ]
   }

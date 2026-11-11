@@ -3,10 +3,10 @@
     "id": "curated_snack_mediterranean_fennel_feta_egg_skillet",
     "builderType": "snack",
     "name": "Mediterranean Fennel, Feta & Egg Skillet",
-    "flavorProfile": "Eggs cooked with fennel and feta in real olive oil.",
+    "flavorProfile": "Eggs cooked with fennel and feta in olive oil.",
     "healthBenefit": "Egg, fennel, and feta all check safe for Hashimoto's, IBD, and CKD alike, feta itself checks completely clean.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -48,27 +48,54 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 1.5,
+        "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Veg",
+        "baseName": "Garlic",
+        "quantity": 3,
+        "unit": "g",
+        "cutPrep": "minced",
+        "cookingMethod": null,
+        "prepNote": "1 small clove"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Pepper, black, ground",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Oregano",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "dried"
       }
     ],
     "instructions": [
-      "Heat the olive oil in a pan over medium heat and saute the fennel for 5-6 minutes, until softened.",
+      "Heat the olive oil in a pan over medium heat and cook the garlic for 30 seconds, until fragrant. Then saute the fennel for 5-6 minutes, until softened.",
       "Crack in the eggs and cook to your liking.",
-      "Top with the crumbled feta and season with the salt."
+      "Top with the crumbled feta and season with the salt, black pepper and oregano."
     ]
   },
   {
     "id": "curated_snack_mediterranean_leek_feta_egg_skillet",
     "builderType": "snack",
     "name": "Mediterranean Leek, Feta & Egg Skillet",
-    "flavorProfile": "Eggs cooked with leek and feta in real olive oil.",
+    "flavorProfile": "Eggs cooked with leek and feta in olive oil.",
     "healthBenefit": "Egg, leek, and feta all check safe for Hashimoto's, IBD, and CKD alike, feta itself checks completely clean.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -110,17 +137,44 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 1.5,
+        "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Veg",
+        "baseName": "Garlic",
+        "quantity": 3,
+        "unit": "g",
+        "cutPrep": "minced",
+        "cookingMethod": null,
+        "prepNote": "1 small clove"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Pepper, black, ground",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Oregano",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "dried"
       }
     ],
     "instructions": [
-      "Heat the olive oil in a pan over medium heat and saute the leek for 5-6 minutes, until softened.",
+      "Heat the olive oil in a pan over medium heat and cook the garlic for 30 seconds, until fragrant. Then saute the leek for 5-6 minutes, until softened.",
       "Crack in the eggs and cook to your liking.",
-      "Top with the crumbled feta and season with the salt."
+      "Top with the crumbled feta and season with the salt, black pepper and oregano."
     ]
   },
   {
@@ -129,8 +183,8 @@
     "name": "Mediterranean Carrot, Tomato & Egg Skillet",
     "flavorProfile": "Eggs cooked with carrot and tomato in real olive oil.",
     "healthBenefit": "Egg, carrot, and tomato all check safe for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -172,26 +226,53 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 1.5,
+        "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Veg",
+        "baseName": "Garlic",
+        "quantity": 3,
+        "unit": "g",
+        "cutPrep": "minced",
+        "cookingMethod": null,
+        "prepNote": "1 small clove"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Pepper, black, ground",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Oregano",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "dried"
       }
     ],
     "instructions": [
-      "Heat the olive oil in a pan over medium heat and saute the carrot and tomato for 5-6 minutes, until softened.",
-      "Crack in the eggs and cook to your liking, seasoning with the salt."
+      "Heat the olive oil in a pan over medium heat and cook the garlic for 30 seconds, until fragrant. Then saute the carrot and tomato for 5-6 minutes, until softened.",
+      "Crack in the eggs and cook to your liking, seasoning with the salt, black pepper and oregano."
     ]
   },
   {
     "id": "curated_snack_mediterranean_zucchini_tomato_feta_skillet",
     "builderType": "snack",
     "name": "Mediterranean Zucchini, Tomato & Feta Skillet",
-    "flavorProfile": "Eggs cooked with zucchini, tomato, and feta in real olive oil.",
+    "flavorProfile": "Eggs cooked with zucchini, tomato, and feta in olive oil.",
     "healthBenefit": "Egg, zucchini, tomato, and feta all check safe for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -242,17 +323,44 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 1.5,
+        "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Veg",
+        "baseName": "Garlic",
+        "quantity": 3,
+        "unit": "g",
+        "cutPrep": "minced",
+        "cookingMethod": null,
+        "prepNote": "1 small clove"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Pepper, black, ground",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Oregano",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "dried"
       }
     ],
     "instructions": [
-      "Heat the olive oil in a pan over medium heat and saute the zucchini and tomato for 5-6 minutes, until softened.",
+      "Heat the olive oil in a pan over medium heat and cook the garlic for 30 seconds, until fragrant. Then saute the zucchini and tomato for 5-6 minutes, until softened.",
       "Crack in the eggs and cook to your liking.",
-      "Top with the crumbled feta and season with the salt."
+      "Top with the crumbled feta and season with the salt, black pepper and oregano."
     ]
   },
   {
@@ -261,8 +369,8 @@
     "name": "Mediterranean Pepper & Zucchini Egg Skillet",
     "flavorProfile": "Eggs cooked with red bell pepper and zucchini in real olive oil.",
     "healthBenefit": "Egg, red bell pepper, and zucchini all check safe for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -304,16 +412,43 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 1.5,
+        "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Veg",
+        "baseName": "Garlic",
+        "quantity": 3,
+        "unit": "g",
+        "cutPrep": "minced",
+        "cookingMethod": null,
+        "prepNote": "1 small clove"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Pepper, black, ground",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Oregano",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "dried"
       }
     ],
     "instructions": [
-      "Heat the olive oil in a pan over medium heat and saute the red bell pepper and zucchini for 5-6 minutes, until softened.",
-      "Crack in the eggs and cook to your liking, seasoning with the salt."
+      "Heat the olive oil in a pan over medium heat and cook the garlic for 30 seconds, until fragrant. Then saute the red bell pepper and zucchini for 5-6 minutes, until softened.",
+      "Crack in the eggs and cook to your liking, seasoning with the salt, black pepper and oregano."
     ]
   },
   {
@@ -322,8 +457,8 @@
     "name": "Mediterranean Fennel & Zucchini Egg Skillet",
     "flavorProfile": "Eggs cooked with fennel and zucchini in real olive oil.",
     "healthBenefit": "Egg, fennel, and zucchini all check safe for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
     "ingredients": [
       {
@@ -365,16 +500,43 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 1.5,
+        "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Veg",
+        "baseName": "Garlic",
+        "quantity": 3,
+        "unit": "g",
+        "cutPrep": "minced",
+        "cookingMethod": null,
+        "prepNote": "1 small clove"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Pepper, black, ground",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Oregano",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "dried"
       }
     ],
     "instructions": [
-      "Heat the olive oil in a pan over medium heat and saute the fennel and zucchini for 5-6 minutes, until softened.",
-      "Crack in the eggs and cook to your liking, seasoning with the salt."
+      "Heat the olive oil in a pan over medium heat and cook the garlic for 30 seconds, until fragrant. Then saute the fennel and zucchini for 5-6 minutes, until softened.",
+      "Crack in the eggs and cook to your liking, seasoning with the salt, black pepper and oregano."
     ]
   },
   {
@@ -383,8 +545,8 @@
     "name": "Greek Yogurt with Strawberry, Pistachio & Olive Oil",
     "flavorProfile": "Plain Greek yogurt with strawberry, olive oil, and pistachio.",
     "healthBenefit": "Greek yogurt, strawberry, and pistachio all check safe for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -427,7 +589,7 @@
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
         "quantity": 1,
-        "unit": "tbsp",
+        "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
@@ -444,8 +606,8 @@
     "name": "Greek Yogurt with Blueberry & Olive Oil",
     "flavorProfile": "Plain Greek yogurt with blueberry, olive oil, and maple syrup.",
     "healthBenefit": "Greek yogurt and blueberry both check safe for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -479,7 +641,7 @@
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
         "quantity": 1,
-        "unit": "tbsp",
+        "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
@@ -496,8 +658,8 @@
     "name": "Greek Yogurt with Grapefruit & Olive Oil",
     "flavorProfile": "Plain Greek yogurt with grapefruit segments, olive oil, and maple syrup.",
     "healthBenefit": "Greek yogurt and grapefruit both check safe for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -531,7 +693,7 @@
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
         "quantity": 1,
-        "unit": "tbsp",
+        "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
@@ -548,8 +710,8 @@
     "name": "Greek Yogurt with Apple & Pistachio",
     "flavorProfile": "Plain Greek yogurt with diced apple, olive oil, and pistachio.",
     "healthBenefit": "Greek yogurt, apple, and pistachio all check safe for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -592,7 +754,7 @@
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
         "quantity": 1,
-        "unit": "tbsp",
+        "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
@@ -609,8 +771,8 @@
     "name": "Greek Yogurt with Cantaloupe & Olive Oil",
     "flavorProfile": "Plain Greek yogurt with diced cantaloupe, olive oil, and maple syrup.",
     "healthBenefit": "Greek yogurt and cantaloupe both check safe for Hashimoto's, IBD, and CKD alike.",
-    "servings": 1.0,
-    "servingSizeAmount": 1.0,
+    "servings": 1,
+    "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
@@ -644,7 +806,7 @@
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
         "quantity": 1,
-        "unit": "tbsp",
+        "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null

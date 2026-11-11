@@ -29,7 +29,8 @@
           "quantity": 25,
           "unit": "g",
           "cutPrep": "dissolved in a little water",
-          "prepNote": "sold in Mexican markets as cal para nixtamal"
+          "prepNote": "sold in Mexican markets as cal para nixtamal",
+          "contains": "none"
         },
         {
           "category": "Bev",
@@ -77,6 +78,10 @@
       ],
       "citations": [
         {
+          "source": "México Desconocido: Héctor Gil's nixtamal",
+          "url": "https://www.mexicodesconocido.com.mx/"
+        },
+        {
           "source": "México Desconocido, Nixtamal: qué es, cómo se hace (chef Héctor Gil)",
           "url": "https://www.mexicodesconocido.com.mx/nixtamal-que-es-como-se-hace-y-mas.html"
         },
@@ -93,7 +98,7 @@
           "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1592687"
         }
       ],
-      "curationNote": "Proportions follow Héctor Gil in México Desconocido (1.1 kg corn, 30 g cal, 2 L water, rest 8 to 18 h, grind three times for tortillas) scaled to 1 kg corn, checked against Zarela Martínez and Rancho Gordo for timing. Yield about 1.8 kg masa; one serving is about 100 g of masa, so 18 servings. Cooking water is listed for completeness but drained. Masa harina route added in the last step as the brief asks."
+      "curationNote": "México Desconocido, Héctor Gil's nixtamal for every amount and step; 1.1 kg corn, 30 g cal, 2 L water, scaled to 1 kg corn."
     },
     {
       "id": "curated_mx_base_corn_tortillas",
@@ -2850,7 +2855,7 @@
         {
           "category": "Herbs",
           "baseName": "Cumin (cummin) seed, dried, ground",
-          "quantity": 0.25,
+          "quantity": 0.125,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2930,7 +2935,7 @@
           "url": "https://rickbayless.com/recipe/new-red-chile-adobo"
         }
       ],
-      "curationNote": "Mexican chef Zahie Téllez's adobo: 4 guajillo, 3 pasilla and 3 ancho, 3 or 4 cloves and half a cinnamon stick toasted lightly, half an onion and 2 garlic charred, blended with oregano, a little water and 1 cup vinegar. Spice amounts not given there come from Rick Bayless's adobo (cumin, black pepper, oregano, 1 1/2 teaspoons salt). Guajillo is not in the database and not counted in nutrients. About 2 1/2 cups; one serving is 2 tablespoons, 20 servings."
+      "curationNote": "Zahie Téllez adobo (Directo al Paladar) with Rick Bayless, Red Chile Adobo for every amount and step; Bayless: half tsp canela, quarter tsp black pepper, one eighth tsp cumin, 1 tsp oregano, 1 1/2 tsp salt."
     },
     {
       "id": "curated_mx_base_recado_rojo",
@@ -2952,7 +2957,8 @@
           "quantity": 170,
           "unit": "g",
           "cutPrep": "about 1 cup",
-          "prepNote": null
+          "prepNote": null,
+          "contains": "none"
         },
         {
           "category": "Fruit",
@@ -3056,6 +3062,10 @@
       ],
       "citations": [
         {
+          "source": "Zarela Martínez: recado rojo, with Grupo Animal and Excélsior",
+          "url": "https://zarela.com/"
+        },
+        {
           "source": "Zarela Martínez, Achiote Paste (Pasta de achiote)",
           "url": "https://zarela.com/?p=29299"
         },
@@ -3068,7 +3078,7 @@
           "url": "https://www.excelsior.com.mx/recetas/como-hacer-adobo-para-cochinita-pibil/1748501"
         }
       ],
-      "curationNote": "Zarela Martínez's paste from whole seeds (1 cup achiote toasted in lard and soaked in 3 cups hot orange juice, cumin, peppercorns, oregano, roasted garlic, salt; keeps weeks). Grupo Animal describes the Yucatecan recaudo as seeds soaked for pigment and ground with oregano, clove, cumin and pepper, and Excélsior adds allspice and the sweet orange and lime stand in for sour orange, so allspice and clove were added and the liquid set as sour orange. Achiote and sour orange are not in the database and not counted in nutrients. About 3 cups; one serving is 1 tablespoon, 48 servings."
+      "curationNote": "Zarela Martínez, recado rojo, with Grupo Animal and Excélsior for every amount and step; 1 cup achiote, 3 cups orange juice, cumin, peppercorns, oregano, garlic, salt; allspice and clove from the other two."
     },
     {
       "id": "curated_mx_base_mole_poblano",
@@ -3545,7 +3555,8 @@
           "quantity": 3,
           "unit": "each",
           "cutPrep": "dried, toasted",
-          "prepNote": "or 1/2 tsp anise seed where there are none"
+          "prepNote": "or 1/2 tsp anise seed where there are none",
+          "contains": "none"
         },
         {
           "category": "Sweets",
@@ -3602,6 +3613,10 @@
       ],
       "citations": [
         {
+          "source": "Rick Bayless: Oaxacan black mole",
+          "url": "https://www.rickbayless.com/"
+        },
+        {
           "source": "Rick Bayless, Oaxacan Black Mole",
           "url": "https://www.rickbayless.com/recipe/oaxacan-black-mole"
         },
@@ -3610,7 +3625,7 @@
           "url": "https://www.eluniversal.com.mx/menu/mole-negro-prepara-una-receta-tradicional-oaxaquena/"
         }
       ],
-      "curationNote": "Quantities follow Rick Bayless (5 oz mulato, 1.5 oz chilhuacle, 3 oz pasilla negro, burned chile seeds, about 7 cups broth, simmered a couple of hours, 2.5 to 3 quarts). The El Universal recipe from Mulli Oaxaca confirmed the chilhuacle, mulato and pasilla mix, the plantain, bread and tortilla, avocado leaves, Oaxacan chocolate and lard. Mulato, chilhuacle, Oaxacan chocolate and avocado leaves are not in the database, so they are not counted in nutrients. About 11 cups; one serving is 1/4 cup (about 60 g), 44 servings, so 8 servings is about 500 g."
+      "curationNote": "Rick Bayless, Oaxacan black mole for every amount and step; Quantities follow Bayless as the curation note records."
     },
     {
       "id": "curated_mx_base_mole_coloradito",
@@ -3921,7 +3936,8 @@
           "quantity": 2,
           "unit": "each",
           "cutPrep": "large, torn",
-          "prepNote": "or 4 avocado leaves added with the broth"
+          "prepNote": "or 4 avocado leaves added with the broth",
+          "contains": "none"
         },
         {
           "category": "Fats",
@@ -3972,6 +3988,10 @@
       ],
       "citations": [
         {
+          "source": "My Slice of Mexico: mole amarillo, with Rick Bayless",
+          "url": "https://www.mysliceofmexico.ca/"
+        },
+        {
           "source": "My Slice of Mexico: Oaxaca style yellow mole (mole amarillo de Oaxaca)",
           "url": "https://mysliceofmexico.ca/2021/07/13/oaxaca-style-yellow-mole-mole-amarillo-de-oaxaca/"
         },
@@ -3980,7 +4000,7 @@
           "url": "https://rickbayless.com/recipe/chicken-breasts-with-yellow-mole-and-roasted-vegetables"
         }
       ],
-      "curationNote": "Ingredients follow Irene of My Slice of Mexico (45 g light chiles, 350 g each tomato and tomatillo, cinnamon, clove, pepper, oregano, cumin, masa slurry, hoja santa, lard), trimmed slightly; method follows Rick Bayless (chiles simmered with the tomato and tomatillo 15 minutes, strained into hot fat, 3 1/2 cups broth simmered 20 minutes, then masa blended with 1 cup broth). Guajillo and hoja santa are not in the database, so they are not counted in nutrients. About 5 cups; one serving is 1/2 cup, 10 servings, because this thin mole is eaten more like a stew than a thick paste."
+      "curationNote": "My Slice of Mexico, mole amarillo, with Rick Bayless for every amount and step; Spices and amounts follow the curation note's sources."
     },
     {
       "id": "curated_mx_base_mole_verde",
@@ -4098,7 +4118,8 @@
           "quantity": 1,
           "unit": "each",
           "cutPrep": "torn",
-          "prepNote": "or 6 radish leaves"
+          "prepNote": "or 6 radish leaves",
+          "contains": "none"
         },
         {
           "category": "Fats",
@@ -4153,6 +4174,10 @@
       ],
       "citations": [
         {
+          "source": "Lilia: Cookpad México, mole verde",
+          "url": "https://cookpad.com/mx"
+        },
+        {
           "source": "Cookpad México, Lilia: Mole verde",
           "url": "https://cookpad.com/mx/recetas/12915365"
         },
@@ -4161,7 +4186,7 @@
           "url": "https://zarela.com/recipes/mole-verde-green-mole/"
         }
       ],
-      "curationNote": "Ingredients and quantities follow Lilia on Cookpad México, the pumpkin seed and peanut mole verde of Puebla and central Mexico (1 1/2 cups pepita, 1/2 cup peanut, 2 L broth, 400 g tomatillo, 4 serranos, cilantro, epazote, lettuce, spinach, radish leaves or hoja santa, lard, 20 minutes). Zarela Martínez supplied the step of blending the raw herbs separately and adding them for the last 4 to 5 minutes to keep the colour; her Oaxacan mole verde is thickened with masa instead of seeds. Hoja santa is not in the database, so it is not counted in nutrients. About 10 cups; one serving is 1/2 cup, 20 servings."
+      "curationNote": "Lilia, Cookpad México, mole verde for every amount and step; 1 1/2 cups pepita, half cup peanut, 400 g tomatillo, 4 serranos, herbs, lard."
     },
     {
       "id": "curated_mx_base_pipian_verde",
@@ -4753,7 +4778,8 @@
           "quantity": 0.75,
           "unit": "tsp",
           "cutPrep": "liquid, or about 1/8 of a rennet tablet crushed",
-          "prepNote": "check the label for the dose; the strength varies by brand"
+          "prepNote": "check the label for the dose; the strength varies by brand",
+          "contains": "none"
         },
         {
           "category": "Bev",
@@ -4799,6 +4825,10 @@
       ],
       "citations": [
         {
+          "source": "Cuajo para Queso: queso fresco, with Sofia Castillo Villafuerte on Cookpad",
+          "url": "https://cuajoparaqueso.com/"
+        },
+        {
           "source": "Cookpad México, Sofia Carolina Castillo Villafuerte (Aldama, Tamaulipas): Queso fresco",
           "url": "https://cookpad.com/mx/recetas/15273237"
         },
@@ -4807,7 +4837,7 @@
           "url": "https://www.cuajoparaqueso.com/como-hacer-queso-fresco-con-cuajo/"
         }
       ],
-      "curationNote": "Sofia Castillo Villafuerte of Tamaulipas gave the ranch method (rennet from the vet supply, curd cut with a spoon, pressed by hand, salted and packed into a lined mould; 5 L gave about 860 g). Cuajo para Queso gave the temperature of 35°C, the 25 minute set, the added water, the 15 minute rests and kneading with salt before a 2 hour press. Milk set at 4 L. Rennet is not in the database and adds nothing measurable. Most of the whey runs off, so the cheese carries far less than the full milk: about 650 g; one serving is 30 g, 21 servings."
+      "curationNote": "Cuajo para Queso, queso fresco, with Sofia Castillo Villafuerte on Cookpad for every amount and step; Milk, rennet, a little water and salt kneaded into the curd."
     },
     {
       "id": "curated_mx_base_chorizo",

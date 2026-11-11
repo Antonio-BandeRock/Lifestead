@@ -65,32 +65,14 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "for the cooking water"
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Pepper, black, ground",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Chives",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "finely snipped",
-          "cookingMethod": null,
-          "prepNote": null
         }
       ],
       "instructions": [
         "Heat the oven to 400°F (205°C) and butter a deep baking dish.",
         "Melt most of the butter in a wide pan and fry the onion rings over medium heat, stirring often, until deep golden, 15 to 20 minutes.",
         "Bring a large pot of water to a boil with the salt and press or scrape the Spätzle batter into it in batches. Lift each batch out with a slotted spoon 1 to 2 minutes after it floats.",
-        "Layer the hot Spätzle in the dish with the two cheeses and a grind of pepper, finishing with cheese.",
-        "Bake until the cheese is melted and bubbling, 15 to 20 minutes, then pile the onions on top and scatter the chives."
+        "Layer the hot Spätzle in the dish with the two cheeses, finishing with cheese.",
+        "Bake until the cheese is melted and bubbling, 15 to 20 minutes, then pile the onions on top and serve."
       ],
       "nutritionHighlights": [
         {
@@ -112,7 +94,7 @@
           "url": "https://www.quick-german-recipes.com/german-spaetzle-recipe.html"
         }
       ],
-      "curationNote": "Quick German Recipes layers Spätzle, onions and Emmental and bakes it; the Allgäu version mixes Emmental with Bergkäse, which is kept here as a not-in-database cheese rather than swapped for another."
+      "curationNote": "Quick German Recipes, Oma's Käsespätzle for every amount and step; 4 to 6 servings: 42 g butter, 2 large onions, 360 g cooked Spätzle, 226 to 339 g Emmental; noodles cooked in salted water; no pepper or herbs, garnished with onions only."
     },
     {
       "id": "curated_de_spatzle",
@@ -192,7 +174,7 @@
       "servings": 6,
       "servingSizeAmount": 1,
       "servingSizeUnit": "bowl",
-      "flavorProfile": "Large pasta pockets filled with meat, spinach and herbs, served in a clear, savoury beef broth with chives.",
+      "flavorProfile": "Large pasta pockets filled with meat, spinach and herbs, served in a clear, savoury beef broth.",
       "healthBenefit": "Brings protein and iron from the beef and pork and folate from the spinach, in a warming broth.",
       "overallTier": "strong",
       "components": [
@@ -311,15 +293,6 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Chives",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "snipped",
-          "cookingMethod": null,
-          "prepNote": "to serve"
         }
       ],
       "instructions": [
@@ -328,7 +301,7 @@
         "Mix the beef, pork, spinach, parsley, two eggs, salt, pepper, nutmeg, bread and onion into an even filling.",
         "Roll the noodle dough thin into long strips about 12 cm (5 in) wide. Spread or spoon the filling along one half, brush the edges with beaten egg, fold over and press firmly, then cut into squares about 8 cm (3 in) long.",
         "Simmer the Maultaschen in barely bubbling salted water until they float and the filling is cooked through, 10 to 15 minutes.",
-        "Lift them into bowls of hot beef broth and scatter with chives."
+        "Lift them into bowls of hot beef broth to serve."
       ],
       "nutritionHighlights": [
         {
@@ -354,7 +327,7 @@
           "url": "https://de.wikipedia.org/wiki/Maultasche"
         }
       ],
-      "curationNote": "Quick German Recipes gives the filling and serves them in beef broth but uses egg roll wrappers; the Swabian pasta dough from the Nudelteig base replaces those, as Wikipedia describes. Sausage meat is noted as an option on the ground pork."
+      "curationNote": "Quick German Recipes, Maultaschen for every amount and step; makes 6 to 8, ours 6."
     },
     {
       "id": "curated_de_kartoffelknodel",
@@ -471,7 +444,7 @@
       "servings": 6,
       "servingSizeAmount": 2,
       "servingSizeUnit": "dumpling",
-      "flavorProfile": "Light, savoury dumplings of soaked rolls with onion, bacon and plenty of parsley, soft enough to cut with a fork.",
+      "flavorProfile": "Light, savoury dumplings of soaked rolls with onion, bacon and parsley, soft enough to cut with a fork.",
       "healthBenefit": "Turns stale rolls into a filling side, with protein from the eggs and milk; the bacon makes it a salty one.",
       "overallTier": "strong",
       "components": [
@@ -526,11 +499,11 @@
         {
           "category": "Veg",
           "baseName": "Fresh Parsley",
-          "quantity": 30,
+          "quantity": 8,
           "unit": "g",
           "cutPrep": "finely chopped",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 tbsp"
         },
         {
           "category": "Dairy",
@@ -548,7 +521,7 @@
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "plus more for the water"
+          "prepNote": "1 tsp, for the dough; the source says to taste"
         },
         {
           "category": "Herbs",
@@ -558,13 +531,22 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 18,
+          "unit": "g",
+          "cutPrep": "in the cooking water",
+          "cookingMethod": null,
+          "prepNote": "1 tbsp, poured away"
         }
       ],
       "instructions": [
         "Toss the bread cubes with the salt, pour the hot milk over and leave to soak for 15 to 20 minutes.",
         "Fry the bacon and onion in the butter until the onion is translucent, 5 to 7 minutes, then stir in the parsley.",
         "Add the onion mixture, eggs and pepper to the bread and knead lightly with wet hands until it holds together, adding breadcrumbs only if it is too wet.",
-        "Shape 12 firm dumplings and lower them into a large pot of salted water at a slow simmer.",
+        "Shape 12 firm dumplings and lower them into a large pot of simmering water with 1 tbsp salt.",
         "Cook uncovered, without boiling, until firm and cooked through, 15 to 20 minutes, then lift out with a slotted spoon."
       ],
       "nutritionHighlights": [
@@ -587,7 +569,7 @@
           "url": "https://mydinner.co.uk/semmelknodel/"
         }
       ],
-      "curationNote": "Both sources soak stale rolls in hot milk, add fried onion, bacon, parsley and egg, and poach at a simmer. The rolls are the Kaiserbrötchen recipe in this file."
+      "curationNote": "Quick German Recipes, Oma's Semmelknödel for every amount and step; serves 6, same as ours: about 450 g bread, 360 ml milk, 28 g butter, 2 eggs, bacon; onion size from My Dinner."
     },
     {
       "id": "curated_de_kartoffelpuffer",
@@ -1033,13 +1015,22 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the source says to taste; a pinch"
         }
       ],
       "instructions": [
         "Boil the potatoes in salted water until soft, about 20 minutes, and hard boil the eggs for 8 to 10 minutes.",
         "Soften the onion over low heat for about 10 minutes, then stir in the warm broth, mustard, vinegar and sugar.",
         "Peel and cut the potatoes while warm, pour the broth mixture over them and leave to cool, 20 to 30 minutes.",
-        "Fold in the mayonnaise, yogurt, pickles, eggs and dill, season with salt and chill for at least 1 hour before serving."
+        "Fold in the mayonnaise, yogurt, pickles, eggs and dill, season with the salt and a pinch of pepper and chill for at least 1 hour before serving."
       ],
       "nutritionHighlights": [
         {
@@ -1061,7 +1052,7 @@
           "url": "https://www.quick-german-recipes.com/easy-potato-salad-recipe.html"
         }
       ],
-      "curationNote": "Quantities follow My Dinner; both sources give the northern style with mayonnaise, pickles and egg. Pickles point at the Gewürzgurken base."
+      "curationNote": "My Dinner, Northern German Potato Salad for every amount and step; serves 4, same as ours."
     },
     {
       "id": "curated_de_schupfnudeln",
@@ -1121,7 +1112,7 @@
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "plus more for the water"
+          "prepNote": "1 tsp, for the dough"
         },
         {
           "category": "Herbs",
@@ -1149,13 +1140,22 @@
           "cutPrep": "chopped",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": "in the cooking water",
+          "cookingMethod": null,
+          "prepNote": "1 tsp in the potato water and 1 tsp in the noodle water, poured away"
         }
       ],
       "instructions": [
-        "Boil the potatoes in salted water until soft, 15 to 20 minutes, drain and let them steam dry, then peel and rice them.",
+        "Boil the potatoes in water with 1 tsp salt until soft, 15 to 20 minutes, drain and let them steam dry, then peel and rice them.",
         "Knead the warm potato with the flour, cornstarch, egg, salt and nutmeg to a smooth dough that is not sticky.",
         "Roll walnut-size pieces between your palms into fingers about 6 cm (2.5 in) long with pointed ends.",
-        "Cook them in barely simmering salted water until they float, 2 to 3 minutes, and drain.",
+        "Cook them in barely simmering water with 1 tsp salt until they float, 2 to 3 minutes, and drain.",
         "Brown them in the butter over medium heat, 5 to 7 minutes, and scatter with parsley. Serve alone or tossed with sauerkraut."
       ],
       "nutritionHighlights": [
@@ -1178,7 +1178,7 @@
           "url": "https://de.wikipedia.org/wiki/Schupfnudel"
         }
       ],
-      "curationNote": "Quantities follow My Dinner; Wikipedia gives the shape, the boil then brown method and the classic pairing with sauerkraut."
+      "curationNote": "My Dinner, Easy Schupfnudeln for every amount and step; serves 4, same as ours."
     },
     {
       "id": "curated_de_salzkartoffeln",
@@ -1209,25 +1209,16 @@
           "baseName": "Common salt/table salt",
           "quantity": 6,
           "unit": "g",
-          "cutPrep": null,
+          "cutPrep": "in the cooking water",
           "cookingMethod": null,
-          "prepNote": "about 1 tsp per litre of water"
-        },
-        {
-          "category": "Veg",
-          "baseName": "Fresh Parsley",
-          "quantity": 5,
-          "unit": "g",
-          "cutPrep": "chopped",
-          "cookingMethod": null,
-          "prepNote": "optional"
+          "prepNote": "about 1 tsp per litre, poured away"
         }
       ],
       "instructions": [
         "Peel the potatoes, dropping them into cold water as you go so they stay white.",
         "Quarter them, cover with fresh water in a pot and add the salt.",
         "Bring to a boil, cover and boil gently until a knife slides in easily, about 20 minutes.",
-        "Drain, return the pot to the low heat for a minute to steam them dry and serve with parsley."
+        "Drain, return the pot to the low heat for a minute to steam them dry and serve."
       ],
       "nutritionHighlights": [
         {
@@ -1249,7 +1240,7 @@
           "url": "https://de.wikipedia.org/wiki/Salzkartoffel"
         }
       ],
-      "curationNote": "Both sources: peeled, cut, boiled in salted water and steamed dry."
+      "curationNote": "Quick German Recipes, Oma's Salzkartoffeln for every amount and step; one potato a person, about 1 tsp salt per quart of water."
     },
     {
       "id": "curated_de_kartoffelpuree",
@@ -1278,7 +1269,7 @@
         {
           "category": "Dairy",
           "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
-          "quantity": 200,
+          "quantity": 100,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -1296,27 +1287,45 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 6,
+          "quantity": 3,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "plus more for the water"
+          "prepNote": "1/2 tsp, plus more for the water"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, nutmeg, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch, freshly grated"
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Heavy Whipping Cream",
+          "quantity": 75,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "hot, with the milk"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "a pinch"
         }
       ],
       "instructions": [
         "Boil the peeled potatoes in salted water until very tender, 20 to 25 minutes, then drain and steam dry over low heat for 1 to 2 minutes.",
         "Press them through a ricer or mash them by hand, never in a blender, which turns them gluey.",
-        "Beat in the hot milk a little at a time with a wooden spoon, then the butter, until smooth and fluffy.",
-        "Season with salt and nutmeg and serve hot."
+        "Heat the milk and cream together and beat them in a little at a time with a wooden spoon, then the butter, until smooth and fluffy.",
+        "Season with salt, pepper and nutmeg and serve hot."
       ],
       "nutritionHighlights": [
         {
@@ -1330,15 +1339,15 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia (de), Kartoffelpüree",
-          "url": "https://de.wikipedia.org/wiki/Kartoffelp%C3%BCree"
+          "source": "Lecker, Klassischer Kartoffelbrei",
+          "url": "https://www.lecker.de/klassischer-kartoffelbrei-82767.html"
         },
         {
-          "source": "Quick German Recipes, Oma's Salzkartoffeln",
-          "url": "https://www.quick-german-recipes.com/how-to-boil-potatoes.html"
+          "source": "Wikipedia (de), Kartoffelpüree",
+          "url": "https://de.wikipedia.org/wiki/Kartoffelp%C3%BCree"
         }
       ],
-      "curationNote": "Written mostly from the Wikipedia description (boiled floury potatoes mashed with hot milk, butter, salt and nutmeg) with the boiling from Quick German Recipes. Quantities are standard proportions, not from one recipe."
+      "curationNote": "Lecker, Klassischer Kartoffelbrei for every amount and step; 1 kg potatoes, 100 ml milk, 5 tbsp cream, 50 g butter, 1/2 tsp salt in the milk, a pinch of pepper, freshly grated nutmeg."
     },
     {
       "id": "curated_de_himmel_und_erde",
@@ -1484,7 +1493,7 @@
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "for the cooking water"
+          "prepNote": "for the cooking water; the sources say a little"
         },
         {
           "category": "Dairy",
@@ -1506,15 +1515,6 @@
         },
         {
           "category": "Veg",
-          "baseName": "Fresh Parsley",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "finely chopped",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
           "baseName": "Garlic",
           "quantity": 1,
           "unit": "each",
@@ -1525,20 +1525,20 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 6,
+          "quantity": 1.5,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste; a usual amount for the quark"
         },
         {
           "category": "Herbs",
           "baseName": "Pepper, black, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste; a pinch"
         },
         {
           "category": "Fats",
@@ -1548,12 +1548,21 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "linseed oil, drizzled over, as in Lusatia"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "in the cooking water",
+          "cookingMethod": null,
+          "prepNote": "poured away with the water"
         }
       ],
       "instructions": [
-        "Cover the potatoes with water, add a little salt and the caraway, and boil until tender, 20 to 25 minutes.",
-        "Meanwhile stir the quark and sour cream together until smooth, then fold in the chives, parsley and garlic and season with salt and pepper.",
-        "Drain the potatoes and serve them hot in their skins, to be peeled at the table, with the herb quark and a drizzle of linseed oil."
+        "Cover the potatoes with water, add 1 tsp salt and the caraway, and boil until tender, 20 to 25 minutes.",
+        "Meanwhile stir the quark and sour cream together until smooth, then fold in the chives and garlic and season with the salt and a pinch of pepper.",
+        "Drain the potatoes and serve them hot in their skins, to be peeled at the table, with the chive quark and a drizzle of linseed oil."
       ],
       "nutritionHighlights": [
         {
@@ -1575,11 +1584,15 @@
           "url": "https://mydinner.co.uk/healthy-german-chive-quark-dip/"
         },
         {
+          "source": "Lecker, Pellkartoffeln mit Quark",
+          "url": "https://www.lecker.de/pellkartoffeln-mit-quark-2158.html"
+        },
+        {
           "source": "Wikipedia (de), Pellkartoffel",
           "url": "https://de.wikipedia.org/wiki/Pellkartoffel"
         }
       ],
-      "curationNote": "Herb quark follows My Dinner's chive and garlic version; Wikipedia gives jacket potatoes with caraway in the water and Quark mit Leinöl as the classic pairing."
+      "curationNote": "My Dinner, German Quark Dip for every amount and step; sour cream variation: quark, sour cream, 30 g chives, garlic, salt and pepper to taste; linseed oil 2 tbsp as in Lecker's Pellkartoffeln mit Quark."
     },
     {
       "id": "curated_de_kaiserbrotchen",
@@ -1727,39 +1740,39 @@
         },
         {
           "category": "Fats",
-          "baseName": "Pork Lard",
-          "quantity": 40,
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 50,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "or butter"
+          "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 0.5,
+          "quantity": 0.15,
           "unit": "g",
-          "cutPrep": "2 leaves",
+          "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Spices, cloves, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
-          "cutPrep": null,
+          "quantity": 0.4,
+          "unit": "g",
+          "cutPrep": "whole",
           "cookingMethod": null,
-          "prepNote": "or 4 whole cloves"
+          "prepNote": "4 whole cloves"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, cinnamon, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
-          "cutPrep": null,
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "stick",
           "cookingMethod": null,
-          "prepNote": "or a small piece of stick"
+          "prepNote": "1 cinnamon stick"
         },
         {
           "category": "Herbs",
@@ -1809,10 +1822,10 @@
       ],
       "instructions": [
         "Toss the shredded cabbage with the vinegar, sugar and salt in a bowl. If there is time, leave it covered overnight in the fridge so it keeps its colour.",
-        "Melt the lard in a wide pot over medium heat and soften the onion for 4 to 5 minutes without browning.",
-        "Add the apple, then the cabbage with its liquid, the water, bay leaves, cloves and cinnamon. Bring to a simmer.",
+        "Melt the butter in a wide pot over medium heat and soften the onion for 4 to 5 minutes without browning.",
+        "Add the apple, then the cabbage with its liquid, the water, bay leaf, cloves and cinnamon stick. Bring to a simmer.",
         "Cover and braise over low heat for 45 to 60 minutes, stirring now and then and adding a splash of water if it catches, until the cabbage is soft.",
-        "Remove the bay leaves and whole spices. Dust in the flour, stir and simmer 2 to 3 minutes until glossy. Taste for salt, sugar and vinegar."
+        "Remove the bay leaf and whole spices. If it is too liquid, stir the flour into 2 tbsp water, stir it in and simmer 2 to 3 minutes until glossy."
       ],
       "nutritionHighlights": [
         {
@@ -1838,7 +1851,7 @@
           "url": "https://de.wikipedia.org/wiki/Rotkohl"
         }
       ],
-      "curationNote": "My Dinner gives the apple, bay, clove, cinnamon and vinegar version with butter; Quick German Recipes uses bacon fat and binds with starch. Lard is kept as the older household fat with butter as the alternative. Six servings from 1 kg cabbage."
+      "curationNote": "My Dinner, German Red Cabbage with Apple for every amount and step; serves 4 as given; ours makes 6 from the same quantities."
     },
     {
       "id": "curated_de_spargel_mit_sauce_hollandaise",
@@ -1882,11 +1895,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 12,
+          "quantity": 6,
           "unit": "g",
-          "cutPrep": null,
+          "cutPrep": "in the cooking water",
           "cookingMethod": null,
-          "prepNote": "for the cooking water and the sauce"
+          "prepNote": "1 tsp, poured away"
         },
         {
           "category": "Fats",
@@ -1922,16 +1935,16 @@
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "from half a lemon"
+          "prepNote": "juice of half a lemon, for the sauce"
         },
         {
           "category": "Herbs",
-          "baseName": "Spices, pepper, red or cayenne",
-          "quantity": 0.06,
-          "unit": "tsp",
-          "cutPrep": "a pinch",
+          "baseName": "Spices, pepper, white, ground",
+          "quantity": 0.2,
+          "unit": "g",
+          "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         },
         {
           "category": "Meat",
@@ -1941,14 +1954,32 @@
           "cutPrep": "thinly sliced",
           "cookingMethod": null,
           "prepNote": "Black Forest or cooked ham"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "a pinch, for the sauce"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Lemon Juice",
+          "quantity": 5,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tsp, for the cooking water"
         }
       ],
       "instructions": [
         "Peel each spear from just below the tip downward and cut off the woody ends.",
-        "Bring a wide pot of water to the boil with the salt, sugar and 5 g butter. Lay in the asparagus and simmer gently for 10 to 15 minutes, depending on thickness, until a knife slides in.",
+        "Bring a wide pot of water to the boil with 1 tsp salt, the sugar, 5 g butter and 1 tsp lemon juice. Lay in the asparagus and simmer gently for 10 to 15 minutes, depending on thickness, until a knife slides in.",
         "Meanwhile melt the 200 g butter and skim off the foam. Keep it warm, about 140°F (60°C).",
         "Whisk the yolks with the wine in a metal bowl over barely simmering water until thick and pale, 3 to 5 minutes. Do not let the bowl get hotter than the hand can bear.",
-        "Off the heat, whisk in the warm butter in a thin stream until the sauce is thick and glossy. Season with lemon juice, salt and a pinch of cayenne.",
+        "Off the heat, whisk in the warm butter in a thin stream until the sauce is thick and glossy. Season with the remaining lemon juice and a pinch each of salt and white pepper.",
         "Lift out the asparagus, drain and plate it with the potatoes and ham. Spoon the sauce over just before serving."
       ],
       "nutritionHighlights": [
@@ -1969,13 +2000,9 @@
         {
           "source": "My Dinner, German Asparagus with Hollandaise Sauce",
           "url": "https://mydinner.co.uk/german-asparagus-hollandaise-sauce/"
-        },
-        {
-          "source": "Quick German Recipes, How to Cook Asparagus",
-          "url": "https://www.quick-german-recipes.com/how-to-cook-asparagus.html"
         }
       ],
-      "curationNote": "Both sources cook white asparagus in salted, sugared water; My Dinner gives the hollandaise (200 g butter, 4 yolks, 50 ml wine, half a lemon) and Quick German Recipes the classic plate with boiled potatoes and ham. The potatoes point at Salzkartoffeln."
+      "curationNote": "My Dinner, German Asparagus with Hollandaise Sauce for every amount and step; serves 4, same as ours; ham amount not given, ours kept."
     },
     {
       "id": "curated_de_rahmspinat",
@@ -2031,7 +2058,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Wheat flour, Type 405",
-          "quantity": 15,
+          "quantity": 8,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2049,7 +2076,7 @@
         {
           "category": "Dairy",
           "baseName": "Heavy Whipping Cream",
-          "quantity": 150,
+          "quantity": 180,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2062,7 +2089,7 @@
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "freshly grated"
+          "prepNote": "freshly grated; the source gives no amount, a usual amount"
         },
         {
           "category": "Herbs",
@@ -2071,7 +2098,7 @@
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste; a usual amount"
         },
         {
           "category": "Herbs",
@@ -2080,7 +2107,7 @@
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste"
         }
       ],
       "instructions": [
@@ -2110,7 +2137,7 @@
           "url": "https://www.quick-german-recipes.com/creamed-spinach-recipe.html"
         }
       ],
-      "curationNote": "Both sources use a butter and flour base with milk and cream, garlic and nutmeg, and chop the spinach fine. Spinach is set between their amounts (450 g and 1.36 kg) at 900 g for four."
+      "curationNote": "My Dinner, German Creamed Spinach for every amount and step; serves 4, same as ours; 500 g frozen spinach, about 900 g fresh."
     },
     {
       "id": "curated_de_kohlrabi_in_rahmso_e",
@@ -2233,15 +2260,15 @@
       ],
       "citations": [
         {
-          "source": "Lecker, Kohlrabigemüse kochen: das beste Rezept",
-          "url": "https://www.lecker.de/kohlrabigemuese-kochen-das-beste-rezept-79832"
+          "source": "Lecker, Kohlrabigemüse kochen",
+          "url": "https://www.lecker.de/kohlrabigemuese-kochen-das-beste-rezept-79832.html"
         },
         {
           "source": "Quick German Recipes, Kohlrabi Recipe",
           "url": "https://www.quick-german-recipes.com/kohlrabi-recipe.html"
         }
       ],
-      "curationNote": "Lecker gives the quantities (two kohlrabi, 100 ml stock, 100 ml cream, a little starch, the leaves chopped in at the end); Quick German Recipes confirms the cream and nutmeg treatment. Ham, which Quick German Recipes adds, is left out as optional."
+      "curationNote": "Lecker, Kohlrabigemüse kochen for every amount and step; 1 onion, 2 kohlrabi of about 300 g, 1 tbsp butter, 100 ml stock, 100 ml cream, 1 tsp starch, 4 tender leaves; salt, pepper and nutmeg to taste, so our usual amounts stand."
     },
     {
       "id": "curated_de_gurkensalat",
@@ -2296,7 +2323,7 @@
         {
           "category": "Fats",
           "baseName": "Solrosolja",
-          "quantity": 40,
+          "quantity": 60,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2364,7 +2391,7 @@
           "url": "https://www.quick-german-recipes.com/german-cucumber-salad.html"
         }
       ],
-      "curationNote": "Both salt and drain the cucumbers and dress them with vinegar, sugar and dill; My Dinner adds oil and onion, Quick German Recipes thins the vinegar with water. The sour cream version is a separate regional habit and is not written here."
+      "curationNote": "My Dinner, Gurkensalat for every amount and step; serves 4: 2 cucumbers, 50 g onion, 3 tbsp vinegar, 4 tbsp oil, 2 tsp sugar, 2 tbsp dill, about 2 tsp salt for draining, pepper to taste; Quick German Recipes thins the vinegar with water."
     },
     {
       "id": "curated_de_krautsalat",
@@ -2472,14 +2499,14 @@
       "citations": [
         {
           "source": "Lecker, Klassischer Krautsalat",
-          "url": "https://www.lecker.de/klassischer-krautsalat-77673"
+          "url": "https://www.lecker.de/klassischer-krautsalat-77673.html"
         },
         {
           "source": "Wikipedia (de), Krautsalat",
           "url": "https://de.wikipedia.org/wiki/Krautsalat"
         }
       ],
-      "curationNote": "Quantities from Lecker (600 g cabbage, 4 EL white wine vinegar, 1.5 EL oil, 1 TL caraway, kneaded 5 minutes); Wikipedia confirms the kneading and the warm Bavarian variant with Speck, which is left out here."
+      "curationNote": "Lecker, Klassischer Krautsalat for every amount and step; 600 g cabbage, 4 tbsp white wine vinegar, 1 small onion, 1.5 tbsp oil, 1 tsp caraway; salt, sugar and pepper to taste, so our usual amounts stand."
     },
     {
       "id": "curated_de_bohnensalat",
@@ -2491,7 +2518,7 @@
       "servingSizeAmount": 1,
       "servingSizeUnit": "serving",
       "flavorProfile": "Tender green beans in a sharp vinegar and oil dressing with onion and the peppery note of summer savory.",
-      "healthBenefit": "Green beans bring fibre, vitamin K and folate, and rapeseed oil adds some omega-3 fat.",
+      "healthBenefit": "Green beans bring fibre, vitamin K and folate, in a dressing of sunflower oil and wine vinegar.",
       "overallTier": "strong",
       "components": [],
       "ingredients": [
@@ -2525,7 +2552,7 @@
         {
           "category": "Herbs",
           "baseName": "Wine vinegar",
-          "quantity": 30,
+          "quantity": 60,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2533,17 +2560,17 @@
         },
         {
           "category": "Fats",
-          "baseName": "Rapsolja",
-          "quantity": 30,
+          "baseName": "Solrosolja",
+          "quantity": 90,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "rapeseed oil"
+          "prepNote": "sunflower oil"
         },
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 3,
+          "quantity": 1.2,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2556,7 +2583,7 @@
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "part for the cooking water"
+          "prepNote": "part for the cooking water; the source says to taste"
         },
         {
           "category": "Herbs",
@@ -2585,15 +2612,15 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia (de), Bohnensalat",
-          "url": "https://de.wikipedia.org/wiki/Bohnensalat"
+          "source": "Küchengötter, Grüner Bohnensalat",
+          "url": "https://www.kuechengoetter.de/rezepte/download/Gruner-Bohnensalat-2225.pdf"
         },
         {
-          "source": "Quick German Recipes, Cooking Green Beans",
-          "url": "https://www.quick-german-recipes.com/cooking-green-beans.html"
+          "source": "Wikipedia (de), Bohnensalat",
+          "url": "https://de.wikipedia.org/wiki/Bohnensalat"
         }
       ],
-      "curationNote": "Written partly from descriptions: Wikipedia describes the green bean salad dressed with vinegar, oil and onion; Quick German Recipes gives the cooking with summer savory. Quantities are standard proportions for four."
+      "curationNote": "Küchengötter, Grüner Bohnensalat for every amount and step; for 4: 500 g beans, 3 to 4 sprigs savory, 1 to 2 red onions, 4 tbsp wine vinegar, 6 tbsp sunflower oil, 3 pinches sugar, salt and pepper to taste."
     },
     {
       "id": "curated_de_rahmwirsing",
@@ -2613,11 +2640,6 @@
           "recipeId": "curated_de_base_butterschmalz",
           "servings": 2,
           "note": "2 tbsp"
-        },
-        {
-          "recipeId": "curated_de_base_gemusebruhe",
-          "servings": 0.5,
-          "note": "about 120 ml"
         }
       ],
       "ingredients": [
@@ -2677,10 +2699,11 @@
         }
       ],
       "instructions": [
-        "Blanch the cabbage strips in boiling salted water for 3 to 5 minutes, then drain and rinse cold so they stay green.",
-        "Melt the Butterschmalz in a wide pan over medium heat and soften the onion for 4 minutes.",
-        "Add the cabbage and stock, cover and braise 8 to 10 minutes.",
-        "Pour in the cream and simmer uncovered 5 to 8 minutes until it thickens and coats the cabbage. Season with nutmeg, salt and pepper."
+        "Take off the outer leaves, quarter the cabbage, cut out the core and slice it into thin strips.",
+        "Melt the Butterschmalz in a large pot over medium heat and soften the onion 2 to 3 minutes.",
+        "Stir in the cabbage and cook about 5 minutes, stirring now and then, until it starts to wilt.",
+        "Pour in the cream, bring it to a gentle boil, then cover and simmer about 10 minutes until the cabbage is tender.",
+        "Season with nutmeg, salt and pepper and serve hot."
       ],
       "nutritionHighlights": [
         {
@@ -2696,13 +2719,9 @@
         {
           "source": "Quick German Recipes, German Creamed Cabbage",
           "url": "https://www.quick-german-recipes.com/german-creamed-cabbage-recipe.html"
-        },
-        {
-          "source": "My Dinner, Creamed Cabbage",
-          "url": "https://mydinner.co.uk/creamed-cabbage/"
         }
       ],
-      "curationNote": "Quick German Recipes gives savoy, onion, Butterschmalz, 180 ml cream and nutmeg; My Dinner blanches the savoy first and adds vegetable stock. The bacon and apple Quick German Recipes lists as options are left out."
+      "curationNote": "Quick German Recipes, German Creamed Cabbage for every amount and step; serves 4 to 6; 1 Savoy cabbage of about 1 kg, 1 onion, 2 to 3 tbsp butter or Butterschmalz, 180 ml cream, salt, pepper and nutmeg to taste; not blanched, no broth or water, the cream is the only liquid."
     },
     {
       "id": "curated_de_leipziger_allerlei",
@@ -2714,7 +2733,7 @@
       "servings": 6,
       "servingSizeAmount": 1,
       "servingSizeUnit": "serving",
-      "flavorProfile": "Young spring vegetables, each cooked to its point, with morels and crayfish tails in a light butter and cream sauce.",
+      "flavorProfile": "Young spring vegetables, each cooked to its point, with morels and crayfish tails in a rich butter and cream sauce.",
       "healthBenefit": "A wide mix of vegetables brings fibre, vitamin A from carrots, vitamin C and folate, and the crayfish adds lean protein.",
       "overallTier": "strong",
       "components": [
@@ -2791,7 +2810,7 @@
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 40,
+          "quantity": 150,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2800,7 +2819,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Wheat flour, Type 405",
-          "quantity": 20,
+          "quantity": 60,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2809,7 +2828,7 @@
         {
           "category": "Dairy",
           "baseName": "Heavy Whipping Cream",
-          "quantity": 100,
+          "quantity": 70,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2822,7 +2841,7 @@
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste; a usual amount"
         },
         {
           "category": "Herbs",
@@ -2831,24 +2850,33 @@
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste; a usual amount"
         },
         {
-          "category": "Veg",
-          "baseName": "Fresh Parsley",
-          "quantity": 8,
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.4,
           "unit": "g",
-          "cutPrep": "chopped",
+          "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste; a pinch"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 0.4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "a small pinch in the stock"
         }
       ],
       "instructions": [
-        "Cook each vegetable separately in the simmering stock until just tender: asparagus 8 to 10 minutes, carrots and kohlrabi 6 to 8, cauliflower 5 to 7, peas 3 to 4. Lift each out and keep it warm, and keep the stock.",
-        "Melt half the butter in a small pan and fry the morels for 3 to 4 minutes.",
-        "Melt the rest of the butter in a pot, stir in the flour and cook 1 minute. Whisk in 300 ml of the stock and simmer 5 minutes, then add the cream and simmer 2 minutes more.",
-        "Season the sauce with nutmeg and salt, warm the crayfish tails in it for 1 to 2 minutes and fold in the vegetables and morels.",
-        "Scatter with parsley and serve at once."
+        "Add a small pinch of sugar to the simmering stock and cook each vegetable separately in it until just tender: asparagus 8 to 10 minutes, carrots and kohlrabi 6 to 8, cauliflower 5 to 7, peas 3 to 4. Lift each out and keep it warm, and keep the stock.",
+        "Melt 40 g of the butter in a small pan and fry the morels for 3 to 4 minutes.",
+        "Melt 75 g of the butter in a pot, stir in the flour and cook 1 minute. Whisk in 750 ml of the stock and simmer 5 minutes, then add the cream and simmer 2 minutes more.",
+        "Season the sauce with nutmeg, salt and pepper, stir in the last of the butter, warm the crayfish tails in it for 1 to 2 minutes and fold in the vegetables and morels.",
+        "Serve at once."
       ],
       "nutritionHighlights": [
         {
@@ -2874,7 +2902,7 @@
           "url": "https://de.wikipedia.org/wiki/Leipziger_Allerlei"
         }
       ],
-      "curationNote": "Both sources describe the classic: young peas, carrots, asparagus, kohlrabi and cauliflower with morels and crayfish, each vegetable cooked on its own and bound with a light sauce. Neither page gave quantities in a form I could read, so the amounts are standard proportions for six."
+      "curationNote": "Berliner Kurier, Leipziger Allerlei mit Spargel for every amount and step; serves 4, scaled to our 6; vegetables kept as ours with kohlrabi from Wikipedia."
     },
     {
       "id": "curated_de_rote_bete_salat",
@@ -2945,13 +2973,13 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Chervil Spices",
+          "notInDatabase": true,
+          "name": "Chervil, fresh",
+          "contains": "none",
           "quantity": 5,
           "unit": "g",
           "cutPrep": "leaves picked",
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source gives no amount"
         },
         {
           "category": "Herbs",
@@ -2960,16 +2988,16 @@
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste; a usual amount"
         },
         {
           "category": "Herbs",
           "baseName": "Pepper, black, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch; the source says to taste"
         }
       ],
       "instructions": [
@@ -2991,14 +3019,14 @@
       "citations": [
         {
           "source": "Lecker, Rote-Bete-Salat",
-          "url": "https://www.lecker.de/rote-bete-salat-32368"
+          "url": "https://www.lecker.de/rote-bete-salat-32368.html"
         },
         {
           "source": "My Dinner, Beetroot Salad",
           "url": "https://mydinner.co.uk/beetroot-salad/"
         }
       ],
-      "curationNote": "Quantities from Lecker (600 g beetroot, 6 EL cider vinegar, honey, rapeseed oil, 100 g walnuts, spring onions, chervil); My Dinner confirms boiled beetroot dressed with vinegar and onion. Oil raised slightly to 30 ml to carry the vinegar."
+      "curationNote": "Lecker, Rote-Bete-Salat for every amount and step; 600 g beetroot, 6 tbsp cider vinegar, 1 tsp honey, 2 tbsp rapeseed oil, 100 g walnuts, 4 spring onions; salt, pepper and chervil without amounts."
     },
     {
       "id": "curated_de_wurstsalat",
@@ -3087,11 +3115,11 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 4.5,
+          "quantity": 2,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "0.5 tsp"
         },
         {
           "category": "Herbs",
@@ -3151,7 +3179,7 @@
           "url": "https://de.wikipedia.org/wiki/Wurstsalat"
         }
       ],
-      "curationNote": "My Dinner gives the quantities (Fleischwurst, three pickles with their water, red onion, radish, cider vinegar, mustard, chill 1 hour); Quick German Recipes and Wikipedia confirm Lyoner and the vinegar marinade. The Swiss version with Emmental strips is left out. Fleischwurst is not in the food database."
+      "curationNote": "My Dinner, Wurstsalat for every amount and step; serves 4, same as ours; salt, pepper and chives unmeasured in the source, ours keeps usual amounts."
     },
     {
       "id": "curated_de_obatzda",
@@ -3410,7 +3438,7 @@
           "unit": "g",
           "cutPrep": "5 g for the dough, the rest for the filling",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "6 g (1 tsp) for the dough, 3 g for the filling, which the source leaves to taste"
         },
         {
           "category": "Herbs",
@@ -3422,19 +3450,19 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Spices, nutmeg, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 15,
+          "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tbsp, for the onions"
         }
       ],
       "instructions": [
-        "Stir the yeast and sugar into the lukewarm milk and leave 5 to 10 minutes. Add the flour, 5 g salt and the oil and knead 5 to 8 minutes to a smooth dough. Cover and let it rise 45 minutes to 1 hour.",
-        "Fry the bacon in a large pan until the fat runs, 4 to 5 minutes. Add the onions and cook gently, stirring, for 15 to 20 minutes until soft and pale gold. Let it cool.",
-        "Beat the sour cream with the eggs, caraway, the rest of the salt, pepper and nutmeg, and stir in the onions.",
+        "Stir the yeast and sugar into the lukewarm milk and leave 5 to 10 minutes. Add the flour, 6 g salt and 2 tbsp oil and knead 5 to 8 minutes to a smooth dough. Cover and let it rise 45 minutes to 1 hour.",
+        "Fry the bacon in a large pan with 1 tbsp oil until the fat runs, 4 to 5 minutes. Add the onions and cook gently, stirring, for 15 to 20 minutes until soft and pale gold. Let it cool.",
+        "Beat the sour cream with the eggs, caraway, the rest of the salt and the pepper, and stir in the onions.",
         "Heat the oven to 400°F (200°C). Roll the dough thin onto a lined baking sheet, pressing up a small rim, and spread the onion mixture over it.",
         "Bake 35 to 45 minutes until the top is set and golden in places. Serve warm, traditionally with new wine (Federweißer)."
       ],
@@ -3458,7 +3486,7 @@
           "url": "https://de.wikipedia.org/wiki/Zwiebelkuchen"
         }
       ],
-      "curationNote": "Quantities from My Dinner (yeast dough of 315 g flour and 180 ml milk, 900 g onions, smoked bacon, about 400 g sour cream, 3 eggs, caraway). Wikipedia confirms the yeast base, the sour cream and egg set and the regions. Cups converted to grams."
+      "curationNote": "My Dinner, Zwiebelkuchen (German Onion Cake) for every amount and step; 12 slices, same as ours; filling salt and pepper to taste, ours keeps usual amounts."
     },
     {
       "id": "curated_de_rosenkohl_mit_speck",
@@ -3500,12 +3528,12 @@
           "unit": "g",
           "cutPrep": "finely chopped",
           "cookingMethod": "Sauteed",
-          "prepNote": null
+          "prepNote": "red onion"
         },
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 15,
+          "quantity": 28,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -3514,11 +3542,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, nutmeg, ground",
-          "quantity": 0.06,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": "a pinch",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch; the source says to taste"
         },
         {
           "category": "Herbs",
@@ -3527,23 +3555,23 @@
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "mostly for the cooking water"
+          "prepNote": "mostly for the cooking water; the source says to taste"
         },
         {
           "category": "Herbs",
           "baseName": "Pepper, black, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch; the source says to taste"
         }
       ],
       "instructions": [
         "Cook the sprouts in salted boiling water for 6 to 8 minutes until just tender. Drain well.",
         "Fry the bacon in a wide pan over medium heat for 4 to 6 minutes until crisp. Add the onion and cook 2 to 3 minutes.",
         "Add the butter and the sprouts and toss over medium-high heat for 3 to 5 minutes until they take a little colour.",
-        "Season with nutmeg and pepper and serve."
+        "Season with nutmeg and pepper, and a little salt if needed, and serve."
       ],
       "nutritionHighlights": [
         {
@@ -3557,15 +3585,11 @@
       ],
       "citations": [
         {
-          "source": "Quick German Recipes, Brussels Sprouts with Bacon",
-          "url": "https://www.quick-german-recipes.com/brussels-sprouts-recipe.html"
-        },
-        {
-          "source": "Quick German Recipes, Brussel Sprouts Recipes",
-          "url": "https://www.quick-german-recipes.com/brussel-sprouts-recipes.html"
+          "source": "Gaumenfreundin, Rosenkohl mit Speck",
+          "url": "https://www.gaumenfreundin.de/wprm_print/38288"
         }
       ],
-      "curationNote": "Quick German Recipes gives sprouts with bacon and the boiled, buttered German way with nutmeg. This version blanches then pan-fries, which is how the dish is cooked in German homes; the oven method on the first page is not used."
+      "curationNote": "Gaumenfreundin, Rosenkohl mit Speck for every amount and step; serves 4, same as ours: 600 g sprouts, 1 red onion, 100 g bacon, 2 tbsp butter, salt, pepper and nutmeg to taste."
     },
     {
       "id": "curated_de_laugenbrezel",
@@ -3676,21 +3700,21 @@
       "servings": 16,
       "servingSizeAmount": 1,
       "servingSizeUnit": "slice",
-      "flavorProfile": "A dark-crusted loaf, mostly rye, with a moist, close crumb, a mild sourness and a breath of caraway and coriander.",
+      "flavorProfile": "A dark-crusted loaf, mostly rye, with a moist, close crumb and a mild sourness.",
       "healthBenefit": "Rye flour brings more fibre than white wheat, and the sourdough makes its minerals easier to take up.",
       "overallTier": "moderate",
       "components": [
         {
           "recipeId": "curated_de_base_roggensauerteig",
-          "servings": 5,
-          "note": "about 250 g ripe starter"
+          "servings": 1.5,
+          "note": "about 75 g ripe starter"
         }
       ],
       "ingredients": [
         {
           "category": "PantryStaples",
           "baseName": "Rye flour, Type 1150",
-          "quantity": 300,
+          "quantity": 400,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Baked",
@@ -3699,7 +3723,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Wheat flour, Type 1050",
-          "quantity": 200,
+          "quantity": 250,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Baked",
@@ -3708,17 +3732,17 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 300,
+          "quantity": 400,
           "unit": "ml",
-          "cutPrep": null,
+          "cutPrep": "lukewarm, about 350 ml for the pre-dough and 3 to 4 tbsp for the yeast",
           "cookingMethod": null,
           "prepNote": "lukewarm"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 12,
-          "unit": "g",
+          "quantity": 1,
+          "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -3726,37 +3750,29 @@
         {
           "category": "PantryStaples",
           "baseName": "Baker's yeast fresh, pressed",
-          "quantity": 5,
+          "quantity": 21,
           "unit": "g",
-          "cutPrep": null,
+          "cutPrep": "half a cube",
           "cookingMethod": null,
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Spices, caraway seed",
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
           "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": "lightly crushed",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, coriander seed",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": "ground",
+          "unit": "tbsp",
+          "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Dissolve the yeast in the water. Add the starter, both flours, salt and spices and mix for 6 to 8 minutes to a sticky, smooth dough; rye dough will not become elastic.",
-        "Cover and rest 45 minutes to 1 hour.",
-        "With wet hands shape a round or oval loaf and set it seam side down in a floured proofing basket. Let it rise 45 minutes to 1 hour, until cracks begin to show on the surface.",
-        "Heat the oven to 480°F (250°C) with a tray at the bottom. Turn the loaf onto a lined sheet, pour water into the tray for steam and bake 10 minutes.",
-        "Lower to 400°F (200°C) and bake 45 to 50 minutes more, until the loaf sounds hollow when tapped underneath. Cool at least 3 hours before cutting."
+        "The evening before, mix 250 g of the rye flour, all the wheat flour, the sourdough starter and about 350 ml lukewarm water to a dough. Cover and leave overnight at room temperature.",
+        "Next day, dissolve the yeast in 3 to 4 tbsp lukewarm water, work it into the pre-dough and leave it 30 minutes.",
+        "Knead in the rest of the rye flour, the salt and the sugar. Cover and let it rest about 3 hours.",
+        "Shape a round loaf on a floured bench, set it on a lined baking sheet and let it rise 1 more hour.",
+        "Heat the oven to 480°F (250°C). Put the loaf in, turn the oven straight down to 355°F (180°C) and bake 60 to 75 minutes.",
+        "Switch the oven off and leave the loaf inside 10 minutes more, then cool on a rack."
       ],
       "nutritionHighlights": [
         {
@@ -3770,15 +3786,11 @@
       ],
       "citations": [
         {
-          "source": "My Dinner, German Rye Bread",
-          "url": "https://mydinner.co.uk/german-rye-bread/"
-        },
-        {
-          "source": "Wikipedia (de), Mischbrot",
-          "url": "https://de.wikipedia.org/wiki/Mischbrot"
+          "source": "EAT SMARTER, Mischbrot",
+          "url": "https://eatsmarter.de/rezepte/mischbrot-1"
         }
       ],
-      "curationNote": "My Dinner gives a rye-heavy loaf with caraway and coriander and a little wheat; Wikipedia gives the rule that a Roggenmischbrot holds more rye than wheat and is leavened with sourdough. Here rye is about 68% of the flour, counting the starter. The vinegar My Dinner uses for sourness is replaced by the rye sourdough base."
+      "curationNote": "EAT SMARTER, Mischbrot for every amount and step; one loaf: 400 g rye flour 1150, 250 g wheat flour 1050, 75 g sourdough, 21 g fresh yeast, 1 tbsp salt, 1 tbsp sugar, about 350 ml lukewarm water plus 3 to 4 tbsp for the yeast; pre-dough rested overnight; 250°C dropped to 180°C, 60 to 75 minutes; no caraway or coriander."
     },
     {
       "id": "curated_de_vollkornbrot",
@@ -3789,30 +3801,30 @@
       "servings": 20,
       "servingSizeAmount": 1,
       "servingSizeUnit": "slice",
-      "flavorProfile": "A dense, moist, dark tin loaf of whole rye with linseed and sunflower seeds, gently sour and a little sweet.",
-      "healthBenefit": "Whole rye and seeds bring a lot of fibre, magnesium and plant omega-3 fat, and the slow rise keeps the bread filling.",
+      "flavorProfile": "A dense, moist, dark tin loaf of whole rye with linseed and sunflower seeds, gently sour and nutty.",
+      "healthBenefit": "Whole rye and seeds bring a lot of fibre, magnesium and plant omega-3 fat, which makes the bread filling.",
       "overallTier": "moderate",
       "components": [
         {
           "recipeId": "curated_de_base_roggensauerteig",
-          "servings": 4,
-          "note": "about 200 g ripe starter"
+          "servings": 3,
+          "note": "about 150 g ripe starter"
         }
       ],
       "ingredients": [
         {
           "category": "PantryStaples",
           "baseName": "Rye wholemeal flour",
-          "quantity": 400,
+          "quantity": 500,
           "unit": "g",
-          "cutPrep": "coarse, or half wholemeal flour and half cracked rye",
+          "cutPrep": null,
           "cookingMethod": "Baked",
           "prepNote": null
         },
         {
           "category": "PantryStaples",
           "baseName": "Wheat wholemeal flour",
-          "quantity": 100,
+          "quantity": 300,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Baked",
@@ -3821,64 +3833,72 @@
         {
           "category": "NutSeed",
           "baseName": "Linseed/flax seed",
-          "quantity": 50,
-          "unit": "g",
-          "cutPrep": "soaked",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": "half worked in, half on top",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "NutSeed",
           "baseName": "Sunflower seed",
-          "quantity": 60,
+          "quantity": 100,
           "unit": "g",
-          "cutPrep": "soaked",
+          "cutPrep": "shelled, half worked in, half on top",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 450,
+          "quantity": 500,
           "unit": "ml",
-          "cutPrep": "150 ml for soaking the seeds, the rest for the dough",
+          "cutPrep": "about 150 ml lukewarm for the pre-dough, 350 ml for the dough",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 13,
-          "unit": "g",
+          "quantity": 1,
+          "unit": "tsp",
           "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Baker's yeast fresh, pressed",
+          "quantity": 42,
+          "unit": "g",
+          "cutPrep": "1 cube",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Sweets",
-          "baseName": "Blackstrap Molasses (Pure)",
-          "quantity": 15,
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 0.4,
           "unit": "g",
-          "cutPrep": null,
+          "cutPrep": "a pinch, raw cane sugar",
           "cookingMethod": null,
-          "prepNote": "or sugar beet syrup (Rübenkraut)"
+          "prepNote": null
         },
         {
-          "category": "PantryStaples",
-          "baseName": "Baker's yeast fresh, pressed",
-          "quantity": 5,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
+          "notInDatabase": true,
+          "name": "bread spice mix (Brotgewürz)",
+          "contains": "none",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": "coarse",
           "prepNote": null
         }
       ],
       "instructions": [
-        "Pour 150 ml boiling water over the linseed and sunflower seeds and leave them to soak for 2 to 4 hours or overnight.",
-        "Dissolve the yeast and molasses in the remaining lukewarm water. Add the starter, both flours, the soaked seeds and the salt and mix for 5 to 8 minutes to a thick, sticky paste.",
-        "Spread it into a greased loaf tin of about 30 cm, smooth the top with a wet spoon and let it rise 1 to 2 hours, until it has risen by about a third and shows small holes.",
-        "Bake at 450°F (230°C) for 15 minutes, then at 375°F (190°C) for 60 to 70 minutes more, until it sounds hollow out of the tin.",
-        "Wrap the cooled loaf in a cloth and leave it 24 hours before slicing thin."
+        "Have everything at room temperature. Mix both flours in a large bowl and make a well in the middle. Crumble in the yeast, sprinkle the sugar over it and pour in about 150 ml lukewarm water. Stir in a little flour from the edge to a thick batter, cover and leave 15 minutes until it bubbles.",
+        "Add the remaining 350 ml water, the sourdough starter, the bread spice and the salt and mix everything. Knead on a floured bench 5 to 10 minutes until smooth, return it to the bowl, cover and let it rise in a warm place about 1.5 hours, until doubled.",
+        "Knead briefly and work in half the sunflower seeds and linseed. Shape a loaf, dust it with flour and set it in a greased loaf tin. Scatter the rest of the seeds on top and let it rise about 30 minutes.",
+        "Heat the oven to 445°F (230°C). Brush the loaf with water and prick it a few times with a fork. Bake 15 minutes, then lower to 390°F (200°C) and bake about 1 hour more. Cool completely before slicing."
       ],
       "nutritionHighlights": [
         {
@@ -3896,15 +3916,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia (de), Vollkornbrot",
-          "url": "https://de.wikipedia.org/wiki/Vollkornbrot"
-        },
-        {
-          "source": "Quick German Recipes, Rye Bread Recipe",
-          "url": "https://www.quick-german-recipes.com/rye-bread-recipe.html"
+          "source": "EAT SMARTER, Vollkornbrot",
+          "url": "https://eatsmarter.de/rezepte/vollkornbrot-17"
         }
       ],
-      "curationNote": "Written mostly from descriptions. Wikipedia gives the rule (at least 90% wholegrain, sourdough or yeast, salt, often seeds and syrup); Quick German Recipes gives the dense tin loaf with whole rye, linseed and molasses. Quantities are standard proportions for a 30 cm tin."
+      "curationNote": "EAT SMARTER, Vollkornbrot for every amount and step; one tin loaf: 500 g rye wholemeal flour, 300 g wheat wholemeal flour, 42 g fresh yeast, a pinch of raw cane sugar, 150 g liquid sourdough, 2 tbsp bread spice, 1 tsp salt, 100 g sunflower seeds, 4 tbsp linseed, about 150 ml lukewarm water for the pre-dough and 350 ml for the dough; 15 minute sponge, 1.5 hour rise, 30 minutes in the tin; 230°C 15 minutes then 200°C about 1 hour."
     },
     {
       "id": "curated_de_bauernbrot",
@@ -3921,8 +3937,8 @@
       "components": [
         {
           "recipeId": "curated_de_base_roggensauerteig",
-          "servings": 4,
-          "note": "about 200 g ripe starter"
+          "servings": 1.5,
+          "note": "about 75 g ripe starter"
         }
       ],
       "ingredients": [
@@ -3947,17 +3963,17 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 320,
+          "quantity": 350,
           "unit": "ml",
-          "cutPrep": null,
+          "cutPrep": "lukewarm",
           "cookingMethod": null,
           "prepNote": "lukewarm"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 12,
-          "unit": "g",
+          "quantity": 2,
+          "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -3965,19 +3981,27 @@
         {
           "category": "PantryStaples",
           "baseName": "Baker's yeast fresh, pressed",
-          "quantity": 8,
+          "quantity": 21,
           "unit": "g",
+          "cutPrep": "half a cube",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Maple Syrup (100% Pure)",
+          "quantity": 2,
+          "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Dissolve the yeast in the water, add the starter, both flours and the salt and knead 8 to 10 minutes to a soft, slightly sticky dough.",
-        "Cover and let it rise 1 hour.",
-        "Shape a round loaf on a floured bench and set it seam side up in a well-floured basket. Let it rise 45 minutes to 1 hour.",
-        "Heat the oven to 480°F (250°C) with a tray at the bottom. Turn the loaf out onto a lined sheet so the floured top faces up, pour water into the tray for steam and bake 10 minutes.",
-        "Lower to 410°F (210°C) and bake 40 to 50 minutes more, until dark and hollow sounding. Cool on a rack for at least 2 hours."
+        "Dissolve the yeast and maple syrup in the lukewarm water. Add both flours, the sourdough starter and the salt and knead to a smooth dough.",
+        "Cover and let it rise about 1.5 hours, until clearly bigger.",
+        "Knead again briefly, shape two loaves (or one large one) and set them on a lined baking sheet. Cover and let them rise 1 hour.",
+        "Heat the oven to 480°F (250°C). Bake the loaves a few minutes, then lower to 390°F (200°C) and bake about 30 minutes more, until they sound hollow underneath. A single large loaf needs longer. Cool on a rack."
       ],
       "nutritionHighlights": [
         {
@@ -3991,15 +4015,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia (de), Bauernbrot",
-          "url": "https://de.wikipedia.org/wiki/Bauernbrot"
-        },
-        {
-          "source": "Quick German Recipes, Artisan Bread Recipe",
-          "url": "https://www.quick-german-recipes.com/artisan-bread-recipe.html"
+          "source": "EAT SMARTER, Mischbrot",
+          "url": "https://eatsmarter.de/rezepte/mischbrot-5"
         }
       ],
-      "curationNote": "Written mostly from descriptions. Wikipedia defines Bauernbrot as a round, free-baked rye and wheat loaf with sourdough, salt, yeast and water and a floured, cracked crust; Quick German Recipes gives the hydration and steam baking. Equal rye and wheat, with the starter adding more rye."
+      "curationNote": "EAT SMARTER, Mischbrot (two loaves) for every amount and step; closest published version, a half rye, half wheat sourdough and yeast loaf: 250 g rye flour, 250 g wheat flour, 75 g sourdough, 21 g fresh yeast, 2 tbsp maple syrup, 2 tsp salt, 350 ml lukewarm water; risen 1.5 hours, shaped, risen 1 hour; 250°C then 200°C about 30 minutes."
     },
     {
       "id": "curated_de_dinkelbrot",
@@ -4011,23 +4031,14 @@
       "servingSizeAmount": 1,
       "servingSizeUnit": "slice",
       "flavorProfile": "A light, nutty spelt loaf with a crisp crust, a soft crumb and toasted sunflower seeds.",
-      "healthBenefit": "Part wholemeal spelt brings fibre, magnesium and B vitamins; spelt is a wheat and contains gluten.",
+      "healthBenefit": "Wholemeal spelt brings fibre, magnesium and B vitamins; spelt is a wheat and contains gluten.",
       "overallTier": "strong",
       "components": [],
       "ingredients": [
         {
           "category": "PantryStaples",
-          "baseName": "Spelt flour, Type 630",
-          "quantity": 300,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": "Baked",
-          "prepNote": null
-        },
-        {
-          "category": "PantryStaples",
           "baseName": "Spelt wholemeal flour",
-          "quantity": 200,
+          "quantity": 500,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Baked",
@@ -4036,26 +4047,26 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 360,
+          "quantity": 500,
           "unit": "ml",
-          "cutPrep": null,
+          "cutPrep": "lukewarm",
           "cookingMethod": null,
           "prepNote": "cool"
         },
         {
           "category": "PantryStaples",
           "baseName": "Baker's yeast fresh, pressed",
-          "quantity": 8,
+          "quantity": 42,
           "unit": "g",
-          "cutPrep": null,
+          "cutPrep": "1 cube",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 10,
-          "unit": "g",
+          "quantity": 1,
+          "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -4063,18 +4074,37 @@
         {
           "category": "NutSeed",
           "baseName": "Sunflower seed",
-          "quantity": 50,
+          "quantity": 150,
           "unit": "g",
-          "cutPrep": null,
+          "cutPrep": "about 130 g in the dough, the rest for the top",
           "cookingMethod": "Roasted",
           "prepNote": "toasted"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vinegar, cider",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Butter, unsalted",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "for the tin",
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Dissolve the yeast in the cool water. Add both flours and the salt and knead gently for only 5 to 6 minutes, since spelt tears when overworked. Work in the sunflower seeds at the end.",
-        "Cover and let it rise slowly in the fridge for 8 to 12 hours, or at room temperature for 1.5 to 2 hours.",
-        "Shape an oval loaf, set it in a floured basket or a greased tin and let it rise 45 minutes to 1 hour.",
-        "Heat the oven to 465°F (240°C) with a tray at the bottom. Bake with steam for 10 minutes, then at 410°F (210°C) for 30 to 40 minutes until golden brown and hollow sounding. Cool on a rack."
+        "Butter a 30 cm loaf tin.",
+        "Crumble the yeast into the lukewarm water and stir until dissolved. Stir in the salt and the cider vinegar.",
+        "Mix in the spelt flour and most of the sunflower seeds to a soft, sticky dough; it needs no kneading.",
+        "Spread the dough in the tin, scatter the rest of the seeds over the top and let it rise 20 minutes.",
+        "Bake in a 390°F (200°C) fan oven for about 1 hour. Turn it out and cool on a rack."
       ],
       "nutritionHighlights": [
         {
@@ -4088,15 +4118,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia (de), Dinkelbrot",
-          "url": "https://de.wikipedia.org/wiki/Dinkelbrot"
-        },
-        {
-          "source": "Quick German Recipes, Artisan Bread Recipe",
-          "url": "https://www.quick-german-recipes.com/artisan-bread-recipe.html"
+          "source": "EAT SMARTER, Schnelles Dinkelbrot",
+          "url": "https://eatsmarter.de/rezepte/schnelles-dinkelbrot"
         }
       ],
-      "curationNote": "Written mostly from descriptions. Wikipedia gives the rule that a German Dinkelbrot is at least 90% spelt; all the flour here is spelt. The slow, cool rise and steam baking follow Quick German Recipes' artisan loaf, with less kneading since spelt gluten is weaker."
+      "curationNote": "EAT SMARTER, Schnelles Dinkelbrot for every amount and step; one tin loaf, 20 slices: 1 cube fresh yeast (42 g), 500 ml lukewarm water, 1 tsp salt, 4 tbsp cider vinegar, 500 g wholemeal spelt flour, 150 g nuts or seeds of choice (some kept for the top), 1 tsp butter for the 30 cm tin; 20 minutes rising, 200°C fan about 1 hour."
     },
     {
       "id": "curated_de_hefezopf",
@@ -4132,13 +4158,13 @@
           "baseName": "Chicken Egg Yolk (Raw)",
           "quantity": 1,
           "unit": "each",
-          "cutPrep": "beaten with 1 tbsp milk",
+          "cutPrep": "beaten with 1 tbsp water",
           "cookingMethod": null,
           "prepNote": "for brushing"
         },
         {
-          "category": "Dairy",
-          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "category": "Bev",
+          "baseName": "Water, tap",
           "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
@@ -4148,27 +4174,18 @@
         {
           "category": "NutSeed",
           "baseName": "Almonds",
-          "quantity": 30,
+          "quantity": 50,
           "unit": "g",
           "cutPrep": "flaked",
           "cookingMethod": "Baked",
           "prepNote": null
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 15,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "optional"
         }
       ],
       "instructions": [
         "Make the Hefeteig and, after its first rise, knead in the raisins.",
         "Divide the dough into 3 equal pieces and roll each into a rope about 40 cm long. Press the tops together and braid them loosely, tucking the ends under.",
         "Set the braid on a lined baking sheet, cover and let it rise 30 to 40 minutes.",
-        "Brush with the yolk and milk and scatter with almonds and pearl sugar.",
+        "Brush with the yolk beaten with the water and scatter with the almonds.",
         "Bake at 350°F (180°C) for 30 to 35 minutes until deep golden, covering loosely with foil if it browns too fast. Cool on a rack."
       ],
       "nutritionHighlights": [
@@ -4191,7 +4208,7 @@
           "url": "https://de.wikipedia.org/wiki/Hefezopf"
         }
       ],
-      "curationNote": "Quick German Recipes gives a lemon-scented dough with raisins, a yolk wash and flaked almonds; Wikipedia defines the Hefezopf as a sweet braided yeast dough with egg and butter, sweet unlike the Swiss Zopf. The dough is the Hefeteig base; pearl sugar is not in the food database."
+      "curationNote": "Quick German Recipes, Braided Bread Recipe for every amount and step; 1 loaf, 10 to 12 servings; egg wash 1 yolk with 1 tbsp water; 50 g sliced almonds on top; no sugar sprinkled on top."
     },
     {
       "id": "curated_de_schwarzwalder_kirschtorte",
@@ -4426,7 +4443,7 @@
         {
           "category": "Fats",
           "baseName": "Rapsolja",
-          "quantity": 2,
+          "quantity": 1,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4435,7 +4452,7 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
+          "quantity": 0.4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4471,11 +4488,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, cinnamon, ground",
-          "quantity": 1,
+          "quantity": 0.125,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         },
         {
           "category": "Fruit",
@@ -4507,7 +4524,7 @@
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 100,
+          "quantity": 200,
           "unit": "g",
           "cutPrep": "melted",
           "cookingMethod": "Baked",
@@ -4521,11 +4538,20 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "for dusting; 2 tbsp at 7.8 g per tbsp"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Vanilla sugar",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Knead the flour, water, oil and salt for 8 to 10 minutes into a smooth, soft dough, brush with oil and rest it covered for 30 to 60 minutes.",
-        "Soak the raisins in the rum. Toss the apples with the lemon juice, sugar, cinnamon, raisins and almonds.",
+        "Knead the flour, water, oil and a pinch of salt for 8 to 10 minutes into a smooth, soft dough, brush with a little oil and rest it covered for 30 to 60 minutes.",
+        "Soak the raisins in the rum. Toss the apples with the lemon juice, sugar, vanilla sugar, a pinch of cinnamon, the raisins and the almonds.",
         "Toast the breadcrumbs in 40 g of the butter until golden, then set aside.",
         "Heat the oven to 375°F (190°C).",
         "Roll the dough out on a large floured cloth, then stretch it over the backs of your hands until it is thin enough to read through, and trim the thick edges.",
@@ -4546,19 +4572,19 @@
       ],
       "citations": [
         {
-          "source": "Quick German Recipes, German Apple Strudel",
-          "url": "https://www.quick-german-recipes.com/german-apple-strudel-recipe.html"
+          "source": "Vienna Tourist Board, Apfelstrudel",
+          "url": "https://www.wien.info/de/essen-trinken/wiener-kueche/rezepte/suesspeisen-und-desserts/apfelstrudel-339136"
         },
         {
-          "source": "My Dinner, Quick and Easy Apple Strudel",
-          "url": "https://mydinner.co.uk/apple-strudel-puff-pastry/"
+          "source": "Quick German Recipes, German Apple Strudel",
+          "url": "https://www.quick-german-recipes.com/german-apple-strudel-recipe.html"
         },
         {
           "source": "Wikipedia (de), Apfelstrudel",
           "url": "https://de.wikipedia.org/wiki/Apfelstrudel"
         }
       ],
-      "curationNote": "Both recipe sources use puff pastry as a shortcut; the filling (apples, lemon, sugar, cinnamon, raisins, almonds, buttered crumbs) follows them. The traditional pulled strudel dough of flour, water, oil and salt is written from the Wikipedia description and standard proportions. Breadcrumbs and powdered sugar are not in the food database."
+      "curationNote": "Vienna Tourist Board (wien.info), Apfelstrudel for every amount and step; one strudel, about 8 slices like ours; homemade pulled dough version."
     },
     {
       "id": "curated_de_bienenstich",
@@ -4608,15 +4634,6 @@
           "prepNote": null
         },
         {
-          "category": "Dairy",
-          "baseName": "Heavy Whipping Cream",
-          "quantity": 2,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": "Baked",
-          "prepNote": "for the topping"
-        },
-        {
           "category": "NutSeed",
           "baseName": "Almonds",
           "quantity": 100,
@@ -4646,7 +4663,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Cornstarch",
-          "quantity": 50,
+          "quantity": 80,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4664,7 +4681,7 @@
         {
           "category": "Herbs",
           "baseName": "Vanilla extract",
-          "quantity": 1,
+          "quantity": 2,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4691,7 +4708,7 @@
       ],
       "instructions": [
         "Press half the risen Hefeteig into a lined 26 cm springform tin and leave it to rise for 20 to 30 minutes.",
-        "Melt the butter, sugar, honey and 2 tbsp cream together, stir in the almonds and cook for 2 to 3 minutes until slightly thickened, then cool for a few minutes.",
+        "Melt the butter, sugar and honey together, stir in the almonds and cook for 2 to 3 minutes until slightly thickened, then cool for a few minutes.",
         "Heat the oven to 350°F (180°C). Spread the almond mixture over the dough and bake for 25 to 30 minutes until golden; cool completely.",
         "Whisk a little of the milk with the yolks, cornstarch and sugar. Bring the rest of the milk to a boil, whisk in the yolk mixture and cook for 1 to 2 minutes until thick.",
         "Take the pudding off the heat, stir in the vanilla and the squeezed gelatine until dissolved, and cool until just setting.",
@@ -4715,15 +4732,11 @@
           "url": "https://mydinner.co.uk/bee-sting-cake/"
         },
         {
-          "source": "Quick German Recipes, Bienenstich Recipe",
-          "url": "https://www.quick-german-recipes.com/bienenstich-recipe.html"
-        },
-        {
           "source": "Wikipedia (de), Bienenstich",
           "url": "https://de.wikipedia.org/wiki/Bienenstich"
         }
       ],
-      "curationNote": "My Dinner gives a quick version on a baking powder base; Quick German Recipes and Wikipedia describe the traditional yeast base, so the base here is half the Hefeteig and the honey almond topping and gelatine-set vanilla cream follow My Dinner."
+      "curationNote": "My Dinner, Bee Sting Cake for every amount and step; topping 100 g almonds, 50 g butter, 50 g sugar, 2 tbsp honey; filling 500 ml milk, 2 yolks, 80 g cornstarch, 2 tsp vanilla, 100 g sugar, 4 sheets gelatine, 200 g cream."
     },
     {
       "id": "curated_de_kasekuchen",
@@ -4789,7 +4802,7 @@
         {
           "category": "Herbs",
           "baseName": "Vanilla extract",
-          "quantity": 2,
+          "quantity": 1,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4798,11 +4811,11 @@
         {
           "category": "Fruit",
           "baseName": "Lemon peel",
-          "quantity": 6,
+          "quantity": 2,
           "unit": "g",
           "cutPrep": "grated",
           "cookingMethod": null,
-          "prepNote": "zest of 1 lemon"
+          "prepNote": "1 tsp"
         }
       ],
       "instructions": [
@@ -4832,7 +4845,7 @@
           "url": "https://www.quick-german-recipes.com/german-cheesecake-recipe.html"
         }
       ],
-      "curationNote": "Both sources use a shortcrust base and a quark filling bound with eggs and cornstarch, flavoured with lemon and vanilla. My Dinner's 900 g quark and five eggs are used; the base is the Mürbeteig recipe and the quark is the homemade quark base at 50 g per serving."
+      "curationNote": "My Dinner, German Cheesecake for every amount and step; 10 slices: filling 1 kg quark, 200 g sugar, 180 ml cream, 5 eggs, 4 tbsp cornstarch, 1 tsp vanilla extract, 1 tsp grated lemon zest."
     },
     {
       "id": "curated_de_streuselkuchen",
@@ -4884,11 +4897,11 @@
         {
           "category": "Herbs",
           "baseName": "Vanilla extract",
-          "quantity": 1,
+          "quantity": 2,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tsp for the streusel, 1 tsp for the cream"
         },
         {
           "category": "Dairy",
@@ -4933,7 +4946,7 @@
         "Heat the oven to 350°F (180°C). Press shallow dimples into the dough with your fingers and brush it with the melted butter.",
         "Scatter the streusel thickly over the dough and sprinkle with the sugar.",
         "Bake for 20 to 25 minutes, until the crumbs are golden.",
-        "Drizzle the cream over the hot cake so it soaks in, cool, dust with powdered sugar and cut into 24 squares."
+        "Stir the rest of the vanilla into the cream, drizzle it over the hot cake so it soaks in, cool, dust with powdered sugar and cut into 24 squares."
       ],
       "nutritionHighlights": [
         {
@@ -4959,7 +4972,7 @@
           "url": "https://de.wikipedia.org/wiki/Streuselkuchen"
         }
       ],
-      "curationNote": "Both recipe sources bake a sheet of sweet yeast dough under butter streusel; My Dinner's 500 g flour dough matches the Hefeteig base, and its streusel and cream finish are kept. Powdered sugar is not in the food database."
+      "curationNote": "My Dinner, Streuselkuchen for every amount and step; 24 pieces, same as ours."
     },
     {
       "id": "curated_de_zwetschgendatschi",
@@ -5027,19 +5040,19 @@
           "prepNote": null
         },
         {
-          "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 2,
-          "unit": "tbsp",
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "to sprinkle over the plums"
+          "prepNote": "for the streusel"
         }
       ],
       "instructions": [
         "Roll the risen Hefeteig thinly onto a greased baking tray (about 30 × 40 cm) and leave to rise for 15 to 20 minutes.",
         "Stand the plum halves upright and close together in rows over the whole dough, cut side up.",
-        "Rub the flour, sugar, butter and cinnamon into crumbs and scatter them over the plums; sprinkle with the remaining sugar.",
+        "Rub the flour, sugar, butter, cinnamon and vanilla into crumbs and scatter them over the plums.",
         "Bake at 400°F (200°C) for 25 to 35 minutes, until the dough is golden underneath and the plums are soft.",
         "Cool on the tray, cut into 20 pieces and serve with whipped cream."
       ],
@@ -5063,7 +5076,7 @@
           "url": "https://de.wikipedia.org/wiki/Zwetschgenkuchen"
         }
       ],
-      "curationNote": "My Dinner gives the yeast-dough plum cake with cinnamon streusel; Wikipedia describes the Augsburg Datschi as a thin yeast base covered tightly with prune plums. The base is the Hefeteig recipe and the plums are increased for a full tray as Wikipedia describes."
+      "curationNote": "My Dinner, German Plum Cake for every amount and step; streusel amounts match; ours is a full tray of 20 pieces with more plums."
     },
     {
       "id": "curated_de_frankfurter_kranz",
@@ -5219,6 +5232,15 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "for the Krokant"
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Raspberry",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "fresh, to decorate"
         }
       ],
       "instructions": [
@@ -5229,7 +5251,7 @@
         "Beat the butter with the powdered sugar for 5 minutes until fluffy, then beat in the cooled pudding a spoonful at a time.",
         "For the Krokant, melt the sugar with the butter to a golden caramel, stir in the almonds, spread on baking paper to cool, then crush finely.",
         "Cut the ring into three layers; spread the bottom two with jam and buttercream and stack them.",
-        "Coat the whole ring with buttercream, press the Krokant all over and pipe a few rosettes on top. Chill for 2 hours before slicing."
+        "Coat the whole ring with buttercream, press the Krokant all over, pipe a few rosettes on top and set the raspberries on them. Chill for 2 hours before slicing."
       ],
       "nutritionHighlights": [
         {
@@ -5251,7 +5273,7 @@
           "url": "https://de.wikipedia.org/wiki/Frankfurter_Kranz"
         }
       ],
-      "curationNote": "Quantities follow My Dinner: a starch-rich sponge, German pudding buttercream, raspberry jam and almond Krokant. Wikipedia confirms the ring shape, buttercream, red jam and Krokant coating of the Frankfurt original. Only one full recipe source was opened. Jam and powdered sugar are not in the food database."
+      "curationNote": "My Dinner, Frankfurter Kranz for every amount and step; quantities match within normal variation; source finishes with 50 g fresh raspberries."
     },
     {
       "id": "curated_de_donauwelle",
@@ -5369,7 +5391,7 @@
         {
           "category": "Herbs",
           "baseName": "Vanilla extract",
-          "quantity": 1,
+          "quantity": 2,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -5433,7 +5455,7 @@
           "url": "https://de.wikipedia.org/wiki/Donauwelle"
         }
       ],
-      "curationNote": "Quantities follow My Dinner; Wikipedia confirms the light and cocoa batters, sour cherries, buttercream and chocolate waves. A full tray of six eggs is cut into 24 pieces rather than the 12 the source names. Only one full recipe source was opened."
+      "curationNote": "My Dinner, Donauwelle for every amount and step; one tray: 250 g butter, 250 g sugar, 6 eggs, 350 g flour, 1 tsp baking powder, 3 tbsp cocoa, 2 jars sour cherries; buttercream 500 ml milk, 2 yolks, 40 g cornstarch, 60 g sugar, 2 tsp vanilla extract, 250 g butter; 200 g chocolate, 1 tbsp oil."
     },
     {
       "id": "curated_de_rote_grutze",
@@ -5515,11 +5537,11 @@
         {
           "category": "Herbs",
           "baseName": "Vanilla extract",
-          "quantity": 2,
+          "quantity": 3,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "split between berries and sauce"
+          "prepNote": "2 tsp for the berries, 1 tsp for the sauce"
         },
         {
           "category": "Dairy",
@@ -5542,11 +5564,11 @@
         {
           "category": "PantryStaples",
           "baseName": "Cornstarch",
-          "quantity": 2,
-          "unit": "tsp",
+          "quantity": 5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "for the vanilla sauce"
+          "prepNote": "2 tsp, for the vanilla sauce"
         },
         {
           "category": "Sweets",
@@ -5561,10 +5583,10 @@
       "instructions": [
         "Bring 250 ml of the water to a boil with the sugar and the currants and simmer for 2 to 3 minutes.",
         "Whisk the cornstarch into the remaining 50 ml water, stir it into the pan and boil for 1 minute until clear and thick.",
-        "Take the pan off the heat and fold in the raspberries, strawberries, cherries and half the vanilla so they keep their shape.",
+        "Take the pan off the heat and fold in the raspberries, strawberries, cherries and 2 tsp vanilla so they keep their shape.",
         "Pour into a bowl or glasses and chill for at least 2 hours.",
         "For the vanilla sauce, whisk the yolks with the cornstarch. Heat the milk with the sugar to a simmer, whisk it slowly into the yolks and return to low heat.",
-        "Stir for 3 to 5 minutes until the sauce coats a spoon, without letting it boil, then stir in the rest of the vanilla.",
+        "Stir for 3 to 5 minutes until the sauce coats a spoon, without letting it boil, then stir in 1 tsp vanilla.",
         "Serve the cold Grütze with the warm or cold vanilla sauce poured over."
       ],
       "nutritionHighlights": [
@@ -5591,7 +5613,7 @@
           "url": "https://www.quick-german-recipes.com/vanilla-sauce-recipe.html"
         }
       ],
-      "curationNote": "Both sources set mixed red berries with cornstarch in a little water and sugar; My Dinner adds jarred sour cherries, kept here, which lifts the yield to 6. The vanilla sauce follows Quick German Recipes."
+      "curationNote": "My Dinner, Rote Grütze for every amount and step; berries, cherries, 30 g cornstarch, 3 tbsp sugar, 300 ml water, 2 tsp vanilla; sauce from Quick German Recipes' vanilla sauce, 4 servings."
     },
     {
       "id": "curated_de_kaiserschmarrn",
@@ -5652,11 +5674,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
+          "quantity": 0.4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         },
         {
           "category": "Fruit",
@@ -5688,11 +5710,11 @@
         {
           "category": "Sweets",
           "baseName": "Sugars, reprocessed, powdered",
-          "quantity": 15.6,
+          "quantity": 50,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "for dusting; 2 tbsp at 7.8 g per tbsp"
+          "prepNote": "for dusting"
         }
       ],
       "instructions": [
@@ -5728,7 +5750,7 @@
           "url": "https://de.wikipedia.org/wiki/Kaiserschmarrn"
         }
       ],
-      "curationNote": "Both recipe sources separate the eggs, fold in beaten whites, add raisins, and tear and caramelise the pancake; My Dinner's quantities and oven finish are used. Apple sauce is the Apfelmus base, one of the two traditional accompaniments with plum compote. Powdered sugar is not in the food database."
+      "curationNote": "My Dinner, Kaiserschmarrn for every amount and step; serves 4: 6 eggs, 220 g flour, 250 ml milk, 4 tbsp sugar, a pinch of salt, 4 tbsp raisins, 2 tbsp butter, 2 tbsp oil, 50 g powdered sugar to serve."
     },
     {
       "id": "curated_de_germknodel",
@@ -5816,11 +5838,11 @@
         {
           "category": "Herbs",
           "baseName": "Vanilla extract",
-          "quantity": 2,
+          "quantity": 3,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "split between dough and sauce"
+          "prepNote": "2 tsp for the dough, 1 tsp for the sauce"
         },
         {
           "category": "Fruit",
@@ -5906,7 +5928,7 @@
       ],
       "instructions": [
         "Stir the yeast and a pinch of the sugar into the lukewarm milk and leave for 10 minutes until foamy.",
-        "Knead it with the flour, remaining sugar, soft butter, yolks, salt, half the vanilla and the lemon zest for 5 to 8 minutes into a smooth dough; cover and leave to rise for 45 to 60 minutes until doubled.",
+        "Knead it with the flour, remaining sugar, soft butter, yolks, salt, 2 tsp of the vanilla and the lemon zest for 5 to 8 minutes into a smooth dough; cover and leave to rise for 45 to 60 minutes until doubled.",
         "Stir the rum into the Pflaumenmus. Divide the dough into 4, flatten each, put 1 tbsp of plum butter in the middle, pinch the dough closed and roll into a ball.",
         "Leave the dumplings to rise, seam side down, for 15 to 20 minutes.",
         "Steam them over simmering water, or in a covered pan over a cloth stretched above boiling water, for 15 to 20 minutes without lifting the lid.",
@@ -5933,7 +5955,7 @@
           "url": "https://www.quick-german-recipes.com/vanilla-sauce-recipe.html"
         }
       ],
-      "curationNote": "The dough, the plum butter filling and the poppy seed and butter finish follow My Dinner; the vanilla sauce follows Quick German Recipes. The filling is the Pflaumenmus base. Powdered sugar is not in the food database."
+      "curationNote": "My Dinner, Germknödel for every amount and step; 4 dumplings: 125 ml milk, 7 g yeast, 40 g sugar, 250 g flour, 50 g butter, 2 yolks, a pinch of salt, 2 tsp vanilla, 1 tsp lemon peel; 4 tbsp plum butter, 1 tsp rum; 4 tbsp poppy seed, 2 tbsp icing sugar, 50 g butter. Sauce from Quick German Recipes: 4 yolks, 5 g cornstarch, 480 ml milk, 50 g sugar, 1 tsp vanilla."
     },
     {
       "id": "curated_de_dampfnudeln",
@@ -6193,22 +6215,13 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
-        },
-        {
-          "category": "NutSeed",
-          "baseName": "Nut, almond meal",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": "Baked",
-          "prepNote": "worked into the crumbs"
         }
       ],
       "instructions": [
         "Toss the rhubarb with the sugar, vanilla and cornstarch and leave for 15 to 20 minutes while the oven heats to 350°F (180°C).",
-        "Press two thirds of the Mürbeteig into a greased 23 to 26 cm springform tin, bringing it 2 cm up the sides.",
+        "Press three quarters of the Mürbeteig into a greased 23 to 26 cm springform tin, bringing it 2 cm up the sides.",
         "Spread the rhubarb and its juice over the base.",
-        "Rub the ground almonds into the remaining dough to make coarse crumbs and scatter them over the fruit.",
+        "Crumble the remaining dough over the fruit.",
         "Bake for 50 to 60 minutes, until the crumbs are golden and the juice bubbles at the edges.",
         "Cool in the tin for at least 1 hour so the filling sets before slicing."
       ],
@@ -6236,7 +6249,7 @@
           "url": "https://de.wikipedia.org/wiki/Rhabarberkuchen"
         }
       ],
-      "curationNote": "Both recipe sources use one butter dough as base and crumbs with the rhubarb between; My Dinner's 900 g rhubarb thickened with cornstarch is kept and the dough is the Mürbeteig base. Quick German Recipes works ground almonds into its crumbs, which is where the almonds come from."
+      "curationNote": "My Dinner, Rhubarb Streusel Cake for every amount and step; one cake; dough counted in the Mürbeteig base."
     },
     {
       "id": "curated_de_nurnberger_lebkuchen",
@@ -6289,7 +6302,7 @@
         {
           "category": "NutSeed",
           "baseName": "Nut, almond meal",
-          "quantity": 130,
+          "quantity": 200,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Baked",
@@ -6298,7 +6311,7 @@
         {
           "category": "NutSeed",
           "baseName": "Hazelnut ground",
-          "quantity": 130,
+          "quantity": 200,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Baked",
@@ -6334,7 +6347,7 @@
         {
           "category": "Sweets",
           "baseName": "Sugars, reprocessed, powdered",
-          "quantity": 60,
+          "quantity": 50,
           "unit": "g",
           "cutPrep": "stirred with a little water",
           "cookingMethod": null,
@@ -6373,7 +6386,7 @@
           "url": "https://de.wikipedia.org/wiki/Lebkuchen"
         }
       ],
-      "curationNote": "The Nuremberg style followed here is the nut-based Elisenlebkuchen on Oblaten from My Dinner. Quick German Recipes gives a flour-based bar with honey and molasses, used only to compare the spice and candied peel. Candied peel, Lebkuchen spice, Oblaten and powdered sugar are not in the food database."
+      "curationNote": "My Dinner, Elisenlebkuchen for every amount and step; makes 20, same as ours."
     },
     {
       "id": "curated_de_christstollen",
@@ -6476,7 +6489,7 @@
         {
           "category": "NutSeed",
           "baseName": "Almonds",
-          "quantity": 90,
+          "quantity": 150,
           "unit": "g",
           "cutPrep": "flaked, toasted",
           "cookingMethod": "Roasted",
@@ -6546,7 +6559,7 @@
         "Flatten the dough into an oval, lay the marzipan log along the middle, fold one long side over so it does not quite meet the other and press the edge to make the stollen shape.",
         "Bake on a lined tray for 50 to 60 minutes, covering with foil if it browns too fast.",
         "Brush the hot stollen all over with melted butter, roll it in the sugar, cool, then cover thickly with powdered sugar.",
-        "Wrap well and leave for 1 to 3 weeks before slicing, so the flavours settle."
+        "Wrap well and leave for 1 to 3 weeks before slicing, so the flavors settle."
       ],
       "nutritionHighlights": [
         {
@@ -6568,7 +6581,7 @@
           "url": "https://de.wikipedia.org/wiki/Stollen_(Geb%C3%A4ck)"
         }
       ],
-      "curationNote": "Quantities follow My Dinner's yeast stollen with a starter, rum raisins, almonds, candied peel and a marzipan seam. Wikipedia describes the Stollen as a heavy, butter-rich yeast dough with dried fruit, and the Christmas loaf as the same recipe. Quick German Recipes was opened but gives a quark stollen with baking powder, a different style, so it is not followed. Candied peel, marzipan, Lebkuchen spice and powdered sugar are not in the food database."
+      "curationNote": "My Dinner, Stollen for every amount and step; one stollen: 145 g raisins, 40 ml rum, 120 ml water, 120 ml milk, 2 tsp instant yeast, 435 g flour, 225 g butter, 150 g flaked almonds, 1 tsp gingerbread spice, 2 tsp vanilla, 1 tsp salt, 65 g sugar, candied peel, 55 g marzipan; 2 tbsp sugar, 2 tbsp butter, 120 g powdered sugar to coat."
     },
     {
       "id": "curated_de_berliner_pfannkuchen",
@@ -6698,19 +6711,15 @@
       ],
       "citations": [
         {
-          "source": "My Dinner, Authentic German Berliner",
+          "source": "My Dinner, Berliner donuts",
           "url": "https://mydinner.co.uk/berliner-donut/"
-        },
-        {
-          "source": "Quick German Recipes, Berliner Pfannkuchen or Krapfen",
-          "url": "https://www.quick-german-recipes.com/jelly-donut-recipe.html"
         },
         {
           "source": "Wikipedia (de), Berliner Pfannkuchen",
           "url": "https://de.wikipedia.org/wiki/Berliner_Pfannkuchen"
         }
       ],
-      "curationNote": "Both sources make an enriched yeast dough with egg yolks, fry it and pipe in jam; My Dinner's quantities and its covered-then-uncovered frying for the white ring are followed. The oil is entered as roughly what the doughnuts absorb. Jam and powdered sugar are not in the food database."
+      "curationNote": "My Dinner, Berliner donuts for every amount and step; 12 doughnuts; dough, frying oil, jam and powdered sugar all match ours."
     },
     {
       "id": "curated_de_marmorkuchen",
@@ -6729,7 +6738,7 @@
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 225,
+          "quantity": 250,
           "unit": "g",
           "cutPrep": "soft",
           "cookingMethod": "Baked",
@@ -6774,7 +6783,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Wheat flour, Type 405",
-          "quantity": 315,
+          "quantity": 300,
           "unit": "g",
           "cutPrep": "sifted",
           "cookingMethod": "Baked",
@@ -6792,11 +6801,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
+          "quantity": 0.4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         },
         {
           "category": "Brewing",
@@ -6808,18 +6817,9 @@
           "prepNote": null
         },
         {
-          "category": "Dairy",
-          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
-          "quantity": 2,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "for the cocoa batter"
-        },
-        {
           "category": "Sweets",
           "baseName": "Dark chocolate",
-          "quantity": 100,
+          "quantity": 200,
           "unit": "g",
           "cutPrep": "melted",
           "cookingMethod": null,
@@ -6827,9 +6827,9 @@
         },
         {
           "category": "Fats",
-          "baseName": "Rapsolja",
-          "quantity": 1,
-          "unit": "tsp",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 50,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "melted with the chocolate"
@@ -6839,10 +6839,10 @@
         "Heat the oven to 350°F (180°C). Butter a 22 cm Gugelhupf or Bundt tin and dust it with flour.",
         "Beat the butter, sugar and vanilla for 3 to 4 minutes until light, then beat in the eggs one at a time and mix in the cream.",
         "Sift in the flour, baking powder and salt and fold just until combined.",
-        "Spoon two thirds of the batter into the tin. Stir the cocoa and milk into the rest and spread it on top.",
+        "Spoon two thirds of the batter into the tin. Stir the cocoa into the rest and spread it on top.",
         "Draw a fork through both batters in a spiral to marble them.",
         "Bake for 50 to 60 minutes, until a skewer comes out clean. Cool for 10 minutes in the tin, then turn out.",
-        "Melt the chocolate with the oil and pour it over the cooled cake."
+        "Melt the chocolate with the butter and pour it over the cooled cake."
       ],
       "nutritionHighlights": [
         {
@@ -6868,7 +6868,7 @@
           "url": "https://de.wikipedia.org/wiki/Marmorkuchen"
         }
       ],
-      "curationNote": "Both sources make a butter cake, darken part of the batter and swirl it in a ring tin; My Dinner's cream-enriched batter with cocoa and a dark chocolate glaze is followed. The glaze is melted dark chocolate with a little oil, the homemade option the source describes."
+      "curationNote": "My Dinner, Marmorkuchen for every amount and step; makes 12 slices, same as ours."
     },
     {
       "id": "curated_de_apfelpfannkuchen",
@@ -7182,15 +7182,11 @@
           "url": "https://mydinner.co.uk/bratapfel/"
         },
         {
-          "source": "Quick German Recipes, Easy Recipe for Baked Apples (Bratäpfel)",
-          "url": "https://www.quick-german-recipes.com/easy-recipe-for-baked-apples.html"
-        },
-        {
           "source": "Wikipedia (de), Bratapfel",
           "url": "https://de.wikipedia.org/wiki/Bratapfel"
         }
       ],
-      "curationNote": "My Dinner's filling of caramelised nuts, raisins, cinnamon and marzipan with a vanilla sauce is followed; Quick German Recipes bakes the apples with nuts and spices too but sweetens with maple syrup, so it was used only to compare. The vanilla pod and marzipan are not in the food database."
+      "curationNote": "My Dinner, Bratapfel for every amount and step; 4 apples, 4 tbsp raisins, 2 tbsp rum, 50 g nuts, 2 tbsp butter, 1 tbsp brown sugar, 1 tbsp lemon juice, 0.5 tsp cinnamon, 50 g marzipan; sauce 500 g milk, 20 g cornstarch, 35 g sugar, pinch salt, 1 vanilla pod, 2 yolks; same as ours."
     },
     {
       "id": "curated_de_spekulatius",
@@ -7227,7 +7223,7 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 65,
+          "quantity": 75,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Baked",
@@ -7236,7 +7232,7 @@
         {
           "category": "Sweets",
           "baseName": "Brown Sugar (Commercial)",
-          "quantity": 50,
+          "quantity": 25,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Baked",
@@ -7281,8 +7277,8 @@
         {
           "category": "Herbs",
           "baseName": "Spices, cloves, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "a pinch"
@@ -7290,8 +7286,8 @@
         {
           "category": "Herbs",
           "baseName": "Spices, cardamom, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "a pinch"
@@ -7299,8 +7295,8 @@
         {
           "category": "Herbs",
           "baseName": "Spices, ginger, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "a pinch"
@@ -7308,15 +7304,15 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
+          "quantity": 0.4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         }
       ],
       "instructions": [
-        "Mix the spices together. Combine the flour, both sugars, spices, salt and ground almonds and make a well in the middle.",
+        "Mix the cinnamon, cloves, cardamom and ginger. Combine the flour, both sugars, the spices, salt and ground almonds and make a well in the middle.",
         "Add the egg, vanilla and cold butter and work everything together quickly with cold hands until a smooth dough forms, adding a teaspoon of water only if it stays crumbly.",
         "Wrap and chill overnight.",
         "Heat the oven to 350°F (180°C). Roll the dough 3 mm thin, or press it into floured Spekulatius moulds and knock it out, and cut or stamp about 30 biscuits.",
@@ -7343,7 +7339,7 @@
           "url": "https://de.wikipedia.org/wiki/Spekulatius"
         }
       ],
-      "curationNote": "Quantities follow My Dinner's spiced shortcrust with ground almonds. Wikipedia describes Spekulatius as a thin spiced shortcrust biscuit pressed in picture moulds, traditional in the Rhineland, Westphalia and the Low Countries."
+      "curationNote": "My Dinner, Easy Spekulatius for every amount and step; 30 biscuits, same as ours."
     },
     {
       "id": "curated_de_zimtsterne",
@@ -7380,11 +7376,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
+          "quantity": 0.4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         },
         {
           "category": "NutSeed",
@@ -7451,7 +7447,7 @@
           "url": "https://de.wikipedia.org/wiki/Zimtstern"
         }
       ],
-      "curationNote": "Quantities follow My Dinner: egg white meringue, ground unpeeled almonds, cinnamon and orange zest, a third of the meringue kept for glazing. Wikipedia describes the flourless almond and cinnamon star with its white glaze, at home in Swabia. Powdered sugar is not in the food database."
+      "curationNote": "My Dinner, Zimtsterne for every amount and step; 25 stars, same as ours; sugar and almond amounts within normal variation."
     },
     {
       "id": "curated_de_quarkkeulchen",
@@ -7517,16 +7513,16 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
+          "quantity": 0.4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         },
         {
           "category": "Fruit",
           "baseName": "Lemon peel",
-          "quantity": 3,
+          "quantity": 2,
           "unit": "g",
           "cutPrep": "grated",
           "cookingMethod": null,
@@ -7567,6 +7563,15 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "for the cinnamon sugar"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugars, reprocessed, powdered",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2 tbsp, to dust"
         }
       ],
       "instructions": [
@@ -7574,7 +7579,7 @@
         "Mix the potato, quark, flour, egg, sugar, salt, lemon zest and raisins into a soft dough.",
         "With floured hands, shape it into small flat cakes about 1.5 cm thick.",
         "Heat the oil in a frying pan and fry the cakes over medium heat for 3 to 4 minutes on each side until golden brown.",
-        "Mix the sugar and cinnamon and toss the warm Quarkkeulchen in it, then serve with the Apfelmus."
+        "Mix the sugar and cinnamon and toss the warm Quarkkeulchen in it, dust with the powdered sugar and serve with the Apfelmus."
       ],
       "nutritionHighlights": [
         {
@@ -7596,7 +7601,7 @@
           "url": "https://de.wikipedia.org/wiki/Quarkk%C3%A4ulchen"
         }
       ],
-      "curationNote": "Quantities follow My Dinner's Saxon potato and quark cakes with raisins and lemon, served with apple sauce and cinnamon sugar. Wikipedia describes them as flat pan-fried cakes of quark dough shaped like small patties. The quark is the homemade quark base at 50 g per serving and the apple sauce is the Apfelmus base."
+      "curationNote": "My Dinner, Quarkkeulchen for every amount and step; serves 4, same as ours."
     },
     {
       "id": "curated_de_grie_brei",
@@ -7641,7 +7646,7 @@
         },
         {
           "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
+          "baseName": "Vanilla sugar",
           "quantity": 8,
           "unit": "g",
           "cutPrep": null,
@@ -7712,7 +7717,7 @@
           "url": "https://de.wikipedia.org/wiki/Grie%C3%9Fbrei"
         }
       ],
-      "curationNote": "Quantities follow My Dinner. Wikipedia describes Grießbrei as soft wheat semolina cooked in milk and served with sugar, cinnamon, fruit, compote or apple sauce, which is how it is served here. Vanilla sugar is not in the food database."
+      "curationNote": "My Dinner, Simple Semolina Pudding (Grießbrei) for every amount and step; serves 4: 1 l milk, a pinch of salt, 4 tbsp sugar, 2 tsp vanilla sugar, 1 tsp lemon peel, 100 g fine semolina; cinnamon and sugar to serve with no amounts."
     },
     {
       "id": "curated_de_arme_ritter",
@@ -7791,8 +7796,8 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 2,
-          "unit": "tbsp",
+          "quantity": 4,
+          "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "for the cinnamon sugar"
@@ -7834,7 +7839,7 @@
           "url": "https://de.wikipedia.org/wiki/Arme_Ritter"
         }
       ],
-      "curationNote": "Quantities follow Quick German Recipes. Wikipedia describes Arme Ritter as stale rolls or white bread soaked in egg milk and fried in fat, a way of using up old bread, so the bread is the Kaiserbrötchen recipe here, left a day to go stale."
+      "curationNote": "Quick German Recipes, Arme Ritter for every amount and step; serves 4 like ours."
     }
   ]
 }

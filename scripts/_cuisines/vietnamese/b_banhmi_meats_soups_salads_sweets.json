@@ -369,13 +369,22 @@
           "cutPrep": "cut in spears",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for the sauce"
         }
       ],
       "instructions": [
         "Mix the pork, shrimp, half the onion, jicama, salt, pepper, fish sauce, sugar, potato starch and scallion until tacky, and roll into balls about 3 cm across.",
         "Steam the meatballs 10 to 12 minutes until firm, so they hold their shape in the sauce.",
         "Heat the oil, fry the garlic and remaining onion 2 to 3 minutes, add the tomatoes and cook until they slump, 5 to 8 minutes.",
-        "Add the water, sugar, salt and fish sauce, slide in the meatballs and simmer 15 to 20 minutes until the sauce thickens.",
+        "Add the water, sugar, salt, fish sauce and 0.25 tsp pepper, slide in the meatballs and simmer 15 to 20 minutes until the sauce thickens.",
         "Split the warm rolls, spoon in 3 or 4 meatballs with sauce, and top with pickles, cucumber and cilantro."
       ],
       "nutritionHighlights": [
@@ -398,7 +407,7 @@
           "url": "https://vickypham.com/blog/banh-mi/"
         }
       ],
-      "curationNote": "Single recipe source (Vicky Pham) for the meatballs and sauce, served in the Đà Lạt and central breakfast way inside bánh mì. Region set Central since the sandwich is most associated with Đà Lạt in the Central Highlands."
+      "curationNote": "Vicky Pham, Vietnamese Meatballs (Xíu Mại) for every amount and step; serves 5, same as ours."
     },
     {
       "id": "curated_vn_banh_mi_op_la",
@@ -409,14 +418,14 @@
       "servings": 2,
       "servingSizeAmount": 1,
       "servingSizeUnit": "sandwich",
-      "flavorProfile": "Runny fried eggs with lacy edges, seasoned with Maggi and black pepper, tucked into a crisp roll with cucumber, cilantro and chili.",
+      "flavorProfile": "Runny fried eggs with lacy edges, seasoned with Maggi and black pepper, tucked into a crisp roll with chili sauce, cucumber, rau răm and chili.",
       "healthBenefit": "The eggs bring protein, choline and vitamin B12 for a quick breakfast; the roll supplies most of the energy.",
       "overallTier": "strong",
       "components": [
         {
           "recipeId": "curated_vn_base_banh_mi",
           "servings": 2,
-          "note": "split and warmed"
+          "note": "split lengthwise"
         }
       ],
       "ingredients": [
@@ -461,34 +470,52 @@
           "baseName": "Cucumber",
           "quantity": 0.5,
           "unit": "each",
-          "cutPrep": "cut in spears",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Coriander (cilantro) leaves",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "sprigs",
+          "cutPrep": "thinly sliced",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
-          "quantity": 1,
+          "quantity": 2,
           "unit": "g",
-          "cutPrep": "sliced",
+          "cutPrep": "horn chili, finely chopped",
           "cookingMethod": null,
           "prepNote": "1 bird's eye chili"
+        },
+        {
+          "notInDatabase": true,
+          "name": "Vietnamese coriander (rau răm)",
+          "contains": "none",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.8,
+          "unit": "g",
+          "cutPrep": "a pinch per sandwich",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Chilli sauce (Sambal Oelek)",
+          "quantity": 2,
+          "unit": "tsp",
+          "cutPrep": "spread inside",
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Heat the oil in a small pan over medium high until it shimmers.",
-        "Crack in 2 eggs and fry 2 to 3 minutes, until the edges crisp and the yolks stay soft. Repeat with the other 2.",
-        "Shake Maggi over the eggs and grind on black pepper.",
-        "Slide 2 eggs into each warm roll and add cucumber, cilantro and chili."
+        "Slice the cucumber, rinse the rau răm and finely chop the chili.",
+        "Fry the eggs in the oil, keeping the yolks runny.",
+        "Split the rolls lengthwise, spread the chili sauce inside and lay in the cucumber.",
+        "Slide in the eggs, add the rau răm and chili and sprinkle with the salt, pepper and soy sauce. Close gently so the yolks do not break, and eat right away."
       ],
       "nutritionHighlights": [
         {
@@ -502,15 +529,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia, Bánh mì",
-          "url": "https://en.wikipedia.org/wiki/B%C3%A1nh_m%C3%AC"
-        },
-        {
-          "source": "Vicky Pham, Bánh Mì",
-          "url": "https://vickypham.com/blog/banh-mi/"
+          "source": "Cookpad Vietnam, Bánh Mì Việt Nam Kẹp Trứng Ốp-la",
+          "url": "https://cookpad.com/vn/cong-thuc/15545217"
         }
       ],
-      "curationNote": "Written mostly from description: no dedicated recipe page was opened. Wikipedia notes bánh mì eaten with fried eggs at breakfast; Vicky Pham covers the bread and Maggi. Eggs, Maggi, pepper, cucumber, cilantro and chili is the standard street version."
+      "curationNote": "Cookpad Vietnam, Bánh Mì Việt Nam Kẹp Trứng Ốp-la for every amount and step; 1 sandwich, doubled to our 2: 1 baguette, 2 eggs fried with runny yolks, a little rau răm, chopped horn chili to taste, a few cucumber slices, chili sauce spread inside; oil, salt, pepper and soy sauce with no amounts."
     },
     {
       "id": "curated_vn_goi_cuon",
@@ -529,11 +552,6 @@
           "recipeId": "curated_vn_base_tuong_cham_goi_cuon",
           "servings": 5,
           "note": "about 1 tbsp per roll, for dipping"
-        },
-        {
-          "recipeId": "curated_vn_base_banh_trang",
-          "servings": 10,
-          "note": "10 each"
         }
       ],
       "ingredients": [
@@ -558,11 +576,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 7.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "in the poaching water"
+          "prepNote": "6 g in the pork water, 1.5 g in the shrimp water; most is poured away with the water"
         },
         {
           "category": "Meat",
@@ -608,11 +626,29 @@
           "cutPrep": "whole stalks",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "in the pork water"
+        },
+        {
+          "category": "Baked",
+          "baseName": "Rice paper wrapper, soaked in water",
+          "quantity": 200,
+          "unit": "g",
+          "prepNote": "10 sheets, about 20 g each once dipped in water",
+          "cutPrep": null,
+          "cookingMethod": null
         }
       ],
       "instructions": [
-        "Simmer the pork belly with the onion and salt in water to cover for 25 to 30 minutes until a skewer goes in cleanly; cool and slice paper thin.",
-        "Drop the shrimp into the same simmering water for 2 to 3 minutes, until pink, then peel and halve each one lengthwise.",
+        "Simmer the pork belly with the onion, sugar and 6 g salt in water to cover by 2 cm for 25 to 30 minutes, until cooked through; cool covered and slice paper thin.",
+        "Boil the shrimp in just enough water to cover with the remaining salt for 2 minutes, until pink, cool under cold water, then peel and halve each one lengthwise.",
         "Boil the vermicelli 3 to 5 minutes, rinse in cold water and drain well.",
         "Dip one sheet of rice paper in warm water for 2 to 3 seconds and lay it flat; it softens as you fill it.",
         "Lay 3 shrimp halves cut side up in a row, then lettuce, noodles, mint and pork. Fold the sides in, roll tightly, and tuck a chive in so it pokes out of one end.",
@@ -634,7 +670,7 @@
           "url": "https://www.hungryhuy.com/how-to-make-goi-cuon-vietnamese-spring-rolls/"
         }
       ],
-      "curationNote": "Hungry Huy amounts kept for 10 rolls: half a pound each of pork belly and shrimp, a third of a pack of bún. The dip is the shared peanut hoisin base."
+      "curationNote": "Hungry Huy, How to Make Gỏi Cuốn for every amount and step; makes 10: 1/2 lb pork belly simmered with 1 onion, 1 tsp sugar, 1 tsp salt; 1/2 lb shrimp boiled with 1/4 tsp salt; lettuce, mint, chives, rice paper, rice noodles; peanut hoisin dip."
     },
     {
       "id": "curated_vn_cha_gio",
@@ -731,8 +767,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -783,15 +819,6 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Spices, spearmint, fresh",
-          "quantity": 20,
-          "unit": "g",
-          "cutPrep": "leaves",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Veg",
           "baseName": "Perilla, \"Shiso\", leaves",
           "quantity": 15,
@@ -799,14 +826,23 @@
           "cutPrep": "leaves",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Vietnamese coriander (rau răm)",
+          "contains": "none",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "leaves"
         }
       ],
       "instructions": [
         "Mix the pork, wood ear, glass noodles, scallion, onion, sugar, pepper, sesame oil, salt and oyster sauce until evenly combined.",
         "Lay a wrapper with a corner toward you, put a heaped tablespoon of filling near that corner and shape it into a log.",
         "Fold the bottom corner over, fold in the sides, roll tightly and seal the last corner with egg yolk. Repeat with the rest.",
-        "Heat the oil to 325°F (165°C) and fry the rolls in batches for 8 to 10 minutes, turning, until deep golden and cooked through.",
-        "Drain on a rack, then wrap each roll in lettuce with mint and perilla and dip it in nước chấm."
+        "Heat the oil to 325°F (165°C) and fry the rolls in small batches about 5 minutes, not touching, until golden brown.",
+        "Drain on a rack, then wrap each roll in lettuce with rau răm and perilla and dip it in nước chấm."
       ],
       "nutritionHighlights": [
         {
@@ -824,7 +860,7 @@
           "url": "https://vickypham.com/blog/vietnamese-egg-rolls-cha-gio/"
         }
       ],
-      "curationNote": "Vicky Pham's 30-roll batch kept as written (2 lb pork, wood ear, glass noodles, oyster sauce, yolk seal). Oil for deep frying listed at 750 ml; actual absorption is far less."
+      "curationNote": "Vicky Pham, Vietnamese Egg Rolls (Chả Giò) for every amount and step; makes 30: 2 lb pork, 1/2 cup dried wood ear, 2 oz bean thread, 2 green onions, 1 small onion, 1 tsp sugar, 1/4 tsp pepper, 2 tsp sesame oil, 1 tsp salt, 3 tbsp oyster sauce, 1 tsp bouillon; served with lettuce and herbs such as sorrel, fish mint, rau răm and perilla."
     },
     {
       "id": "curated_vn_banh_xeo",
@@ -1103,20 +1139,20 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "0.5 tsp, for the batter"
         },
         {
           "category": "Meat",
           "baseName": "Shrimp Crustaceans",
-          "quantity": 70,
+          "quantity": 200,
           "unit": "g",
           "cutPrep": "peeled and deveined",
           "cookingMethod": "Fried",
-          "prepNote": "14 small shrimp"
+          "prepNote": "14 large shrimp"
         },
         {
           "category": "Veg",
@@ -1162,12 +1198,31 @@
           "cutPrep": "leaves",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "0.25 tsp, for the shrimp"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
+          "quantity": 0.2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "a pinch, for the shrimp"
         }
       ],
       "instructions": [
         "Whisk the rice flour, cornstarch, water, coconut milk, turmeric, salt and scallion into a smooth batter and rest it 30 minutes.",
         "Heat a bánh khọt or aebleskiver pan over medium high and put about half a teaspoon of oil in each cup.",
         "Fill each cup nearly to the top with batter; it should sizzle. Cover and cook 2 to 3 minutes.",
+        "Toss the shrimp with 0.25 tsp salt and a pinch of pepper.",
         "Press a shrimp into each cake, cover again and cook 3 to 4 minutes more, until the bottoms are golden and crisp.",
         "Lift out, spoon scallion oil over, and serve wrapped in lettuce and herbs with nước chấm."
       ],
@@ -1187,7 +1242,7 @@
           "url": "https://vickypham.com/blog/vietnamese-mini-savory-pancakes-banh-khot/"
         }
       ],
-      "curationNote": "Vicky Pham's 14-piece batter followed (1 cup rice flour, coconut milk, turmeric, one shrimp per cake). Vũng Tàu is the home of the dish, in the south."
+      "curationNote": "Vicky Pham, Bánh Khọt for every amount and step; 14 cakes, same as ours; oil and herbs unmeasured in the source, ours keeps usual amounts."
     },
     {
       "id": "curated_vn_banh_cuon",
@@ -1440,8 +1495,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -1583,7 +1638,7 @@
           "url": "https://helenrecipes.com/recipe-fresh-rice-noodle-rolls-pho-cuon/"
         }
       ],
-      "curationNote": "Single source (Helen's Recipes), a Hà Nội dish from Ngũ Xã. Rump beef is matched to beef round."
+      "curationNote": "Helen's Recipes, Fresh Rice Noodle Rolls (Phở Cuốn) for every amount and step; serves 4: 1 cup rice flour, 1 cup tapioca starch, 2 cups water, 1/2 tsp salt, 2 tsp oil; 350 g beef, 1 tbsp garlic, 1 tsp ginger, 1/2 tsp pepper, fish sauce with no amount, 1 tbsp oil, 1 onion; lettuce, mint, perilla, cilantro; light fish sauce dip."
     },
     {
       "id": "curated_vn_bo_bia",
@@ -1602,11 +1657,6 @@
           "recipeId": "curated_cn_base_lap_cheong",
           "servings": 3,
           "note": "3 each, sliced thin lengthwise, pan-fried"
-        },
-        {
-          "recipeId": "curated_vn_base_banh_trang",
-          "servings": 12,
-          "note": "12 each"
         },
         {
           "recipeId": "curated_cn_base_hoisin",
@@ -1645,8 +1695,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 12,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -1654,11 +1704,11 @@
         {
           "category": "Fats",
           "baseName": "Rapsolja",
-          "quantity": 1,
-          "unit": "tbsp",
+          "quantity": 0.5,
+          "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "for the sauce"
         },
         {
           "category": "Dairy",
@@ -1681,7 +1731,7 @@
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 2,
+          "quantity": 1,
           "unit": "each",
           "cutPrep": "cloves, minced",
           "cookingMethod": null,
@@ -1713,12 +1763,30 @@
           "cutPrep": "roasted and crushed",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 240,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for cooking the jicama and carrot, cooked down"
+        },
+        {
+          "category": "Baked",
+          "baseName": "Rice paper wrapper, soaked in water",
+          "quantity": 240,
+          "unit": "g",
+          "prepNote": "12 sheets, about 20 g each once dipped in water",
+          "cutPrep": null,
+          "cookingMethod": null
         }
       ],
       "instructions": [
-        "Heat the oil, fry the dried shrimp 1 minute, add the jicama, carrot and salt and stir-fry 5 to 8 minutes until tender but not mushy. Cool.",
+        "Simmer the soaked dried shrimp, jicama and carrot with the salt in the cup of water, stirring, until tender but not mushy and most of the liquid has cooked off. Cool.",
         "Pan-fry the sausage slices 2 to 3 minutes, and cook the eggs as a thin omelette and slice it into ribbons.",
-        "Warm the garlic in a little oil, then stir in the hoisin, water and sugar and simmer 1 minute for the sauce.",
+        "Warm the garlic in the 1/2 tsp oil, then stir in the hoisin, the 2 tbsp water and sugar and simmer 1 minute for the sauce.",
         "Dip a sheet of rice paper, lay on lettuce, a spoon of jicama, sausage and egg, and roll tightly.",
         "Serve with the hoisin sauce topped with crushed peanuts."
       ],
@@ -1742,7 +1810,7 @@
           "url": "https://www.hungryhuy.com/cach-lam-bo-bia-recipe-vietnamese-spring-rolls-with-chinese-sausage-jicama-carrot-egg/"
         }
       ],
-      "curationNote": "Hungry Huy for 4 servings; three rolls each. The Hokkien popiah came to Sài Gòn with Chinese Vietnamese cooks."
+      "curationNote": "Hungry Huy, Bò Bía for every amount and step; serves 4: 3 to 4 tbsp dried shrimp, 1/2 lb jicama, 1 carrot, 2 tsp salt, 1 cup water, 3 sausages, 2 eggs; sauce 1 garlic clove, 1/2 tsp oil, 2 tbsp hoisin, 2 tbsp water, 1 tsp sugar, crushed peanuts."
     },
     {
       "id": "curated_vn_banh_bot_loc",
@@ -1866,11 +1934,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "0.5 tsp"
         },
         {
           "notInDatabase": true,
@@ -1880,12 +1948,21 @@
           "unit": "each",
           "cutPrep": "cut in 15 cm squares, wiped and softened over heat",
           "prepNote": "for wrapping; not eaten"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for the dough"
         }
       ],
       "instructions": [
         "Warm the oil with the annatto seeds 1 to 2 minutes until deep orange, then strain out the seeds.",
         "Fry the shallot and garlic in the annatto oil, add the pork belly and dried shrimp and cook 5 to 7 minutes, seasoning with fish sauce, sugar and pepper.",
-        "Pour the boiling water over the tapioca starch and salt, stir, then add the cool water and knead into a smooth, soft dough.",
+        "Pour the boiling water over the tapioca starch, salt and 1 tbsp oil, stir, then add the cool water and knead into a smooth, soft dough.",
         "Flatten small balls of dough into rounds, put a piece of pork and a shrimp on each, fold into a half moon and pinch shut.",
         "Wrap each dumpling in a banana leaf square and steam 15 to 20 minutes, until the dough turns clear.",
         "Serve warm with sweetened fish sauce."
@@ -1906,7 +1983,7 @@
           "url": "https://vickypham.com/blog/vietnamese-clear-pork-shrimp-dumpling-banh-bot-loc-la-chuoi/"
         }
       ],
-      "curationNote": "Vicky Pham amounts for 30 Huế dumplings (14 oz tapioca, 1.5 cups boiling water). Dipping sauce is the nước chấm base."
+      "curationNote": "Vicky Pham, Bánh Bột Lọc for every amount and step; 30 dumplings, same as ours."
     },
     {
       "id": "curated_vn_banh_beo",
@@ -1917,8 +1994,8 @@
       "servings": 6,
       "servingSizeAmount": 8,
       "servingSizeUnit": "piece",
-      "flavorProfile": "Tiny, soft rice cakes steamed in saucers, topped with pink shrimp floss, crisp pork rind bits and scallion oil, eaten with a spoonful of fish sauce.",
-      "healthBenefit": "A light, steamed rice snack; the shrimp topping brings protein and the fish sauce most of the salt.",
+      "flavorProfile": "Tiny, soft rice cakes steamed in saucers, topped with pink shrimp floss, crisp pork rind bits and scallion oil, eaten with a spoonful of dipping sauce.",
+      "healthBenefit": "A light, steamed rice snack; the shrimp topping brings protein, and the salted batter and shrimp make it fairly salty.",
       "overallTier": "strong",
       "components": [
         {
@@ -1968,11 +2045,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tsp, for the batter"
         },
         {
           "category": "Fats",
@@ -1994,29 +2071,29 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1,
-          "unit": "tsp",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "for the shrimp"
+          "prepNote": "0.5 tsp, for the shrimp"
         },
         {
-          "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black",
           "quantity": 0.5,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "for the shrimp"
         }
       ],
       "instructions": [
         "Whisk the rice flour, tapioca starch, water, salt and oil and let the batter rest at least 1 hour.",
         "Oil small saucers, heat them in the steamer 2 minutes, then fill each with a thin layer of batter and steam 5 to 7 minutes until set and slightly hollow in the middle.",
-        "Cook the shrimp in a dry pan with fish sauce and sugar 4 to 5 minutes, then pound or pulse into fluffy floss.",
+        "Cook the shrimp in a dry pan with 0.5 tsp salt and the pepper 4 to 5 minutes, then pound or pulse into fluffy floss.",
         "Top each cake with shrimp floss, crushed pork rind and scallion oil.",
-        "Spoon a little fish sauce over each cake and eat it straight from the saucer."
+        "Spoon a little dipping sauce over each cake and eat it straight from the saucer."
       ],
       "nutritionHighlights": [
         {
@@ -2038,7 +2115,7 @@
           "url": "https://vickypham.com/blog/vietnamese-steamed-rice-cakes-with-mung-bean-paste-dried-shrimp-banh-beo/"
         }
       ],
-      "curationNote": "Helen's Huế batter (400 g rice flour, 100 g tapioca, 1 L water) and shrimp topping; Vicky Pham's page (partly read) confirms scallion oil and fried pork rind. Six plates of 8 cakes."
+      "curationNote": "Helen's Recipes, Bánh Bèo for every amount and step; serves 4 to 6, ours 6, same amounts."
     },
     {
       "id": "curated_vn_nem_nuong_cuon",
@@ -2057,11 +2134,6 @@
           "recipeId": "curated_vn_base_pa_te_gan",
           "servings": 3,
           "note": "about 90 g worked into the dipping sauce"
-        },
-        {
-          "recipeId": "curated_vn_base_banh_trang",
-          "servings": 18,
-          "note": "18 each"
         }
       ],
       "ingredients": [
@@ -2081,7 +2153,7 @@
           "unit": "g",
           "cutPrep": "boiled 5 minutes and cut in tiny dice",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "soaked in boiling water 10 minutes, drained and tossed with 1 tsp of the sugar"
         },
         {
           "category": "Herbs",
@@ -2113,11 +2185,11 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 1,
-          "unit": "tbsp",
+          "quantity": 5,
+          "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 tsp in the pork, 1 tsp on the fat, 1 tsp in the sauce"
         },
         {
           "category": "Veg",
@@ -2126,16 +2198,16 @@
           "unit": "each",
           "cutPrep": "minced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "all in the pork"
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 8,
-          "unit": "each",
-          "cutPrep": "cloves, minced",
+          "quantity": 9,
+          "unit": "g",
+          "cutPrep": "minced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tbsp, for the sauce"
         },
         {
           "category": "Fruit",
@@ -2230,7 +2302,7 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 240,
+          "quantity": 150,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2239,7 +2311,7 @@
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1,
+          "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2255,21 +2327,58 @@
           "prepNote": null
         },
         {
-          "category": "NutSeed",
-          "baseName": "Peanut",
-          "quantity": 30,
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
           "unit": "g",
-          "cutPrep": "roasted and crushed",
+          "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "in the pork"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "in the pork"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2 tbsp colored with annatto for the pork, 2 tbsp for the sauce"
+        },
+        {
+          "notInDatabase": true,
+          "name": "annatto seeds (hạt điều màu)",
+          "contains": "none",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "prepNote": "steeped in 2 tbsp of the oil and strained out"
+        },
+        {
+          "category": "Baked",
+          "baseName": "Rice paper wrapper, soaked in water",
+          "quantity": 360,
+          "unit": "g",
+          "prepNote": "18 sheets, about 20 g each once dipped in water",
+          "cutPrep": null,
+          "cookingMethod": null
         }
       ],
       "instructions": [
-        "Mix the pork with fish sauce, tapioca starch, baking powder, sugar, half the shallot and half the garlic, then fold in the diced fat. Chill 1 hour.",
-        "With oiled hands, press the mixture onto skewers or shape into fingers, and grill over hot coals 10 to 12 minutes, turning, until browned and cooked through.",
-        "For the sauce, fry the rest of the shallot and garlic, add the pâté, peanut butter, fish sauce and the water whisked with the glutinous rice flour, and simmer 3 to 5 minutes until thick. Top with sesame and peanuts.",
-        "Roll each nem in a sheet of dampened rice paper with lettuce, herbs, cucumber, banana, star fruit, pineapple and mango.",
-        "Dip into the warm sauce."
+        "Warm the annatto seeds in 2 tbsp of the oil over low heat until it turns red, then strain out the seeds.",
+        "Mix the pork with the 2 tbsp fish sauce, salt, 3 tsp sugar, pepper, starch, baking powder, shallot and the annatto oil. Rest 30 minutes, then chill.",
+        "Soak the diced fat in boiling water 10 minutes, drain, toss with 1 tsp sugar and fold into the pork.",
+        "With oiled hands, press the mixture onto soaked skewers and grill over hot coals 10 to 12 minutes, turning, until browned and cooked through.",
+        "For the sauce, fry the garlic in the remaining 2 tbsp oil, add the pâté, peanut butter and the water, then stir in the glutinous rice flour mixed with a little of the water and simmer until thick. Season with 1 tsp sugar and the 2 tbsp fish sauce and top with sesame seeds.",
+        "Roll each nem in a sheet of dampened rice paper with lettuce, mint, perilla, cucumber, banana, star fruit, pineapple and mango, and dip into the warm sauce."
       ],
       "nutritionHighlights": [
         {
@@ -2289,13 +2398,9 @@
         {
           "source": "Helen's Recipes, Grilled Pork Skewer (Nem Nướng)",
           "url": "https://helenrecipes.com/recipe-grilled-pork-skewer-nem-nuong/"
-        },
-        {
-          "source": "Vicky Pham, Nem Nướng Nha Trang",
-          "url": "https://vickypham.com/blog/vietnamese-grilled-baked-pork-sausage-spring-rolls-orange-dipping-sauce-nem-nuong-nha-trang/"
         }
       ],
-      "curationNote": "Helen's nem itself (600 g pork, fat, baking powder, tapioca) and her pâté and peanut sauce, compared against Vicky Pham's Nha Trang assembly and glutinous rice sauce. Region Central (Huế and Nha Trang). Crispy rice paper (ram) left out for simplicity."
+      "curationNote": "Helen's Recipes, Grilled Pork Skewer (Nem Nướng) for every amount and step; 600 g pork, 100 g fat with 1 tsp sugar, 2 tbsp annatto oil, 2 tbsp fish sauce, 1/2 tsp salt, 3 tsp sugar, 1 tsp black pepper, 2 tbsp starch, 1/2 tsp baking powder, 4 shallots; sauce of 2 tbsp oil, 1 tbsp garlic, 3 tbsp pâté, 1 tbsp peanut butter, 1/2 cup plus 2 tbsp water, 1 tbsp glutinous rice flour, 1 tsp sugar, 2 tbsp fish sauce; sesame seeds; lettuce, herbs, green banana, star fruit, pineapple or green mango, cucumber; serving count not given, kept at our 6."
     },
     {
       "id": "curated_vn_thit_kho_trung",
@@ -2362,8 +2467,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 2,
-          "unit": "tsp",
+          "quantity": 12,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -2423,7 +2528,7 @@
           "url": "https://www.hungryhuy.com/how-to-make-thit-heo-kho-voi-trung-vietnamese-braised-pork-with-hard-boiled-eggs/"
         }
       ],
-      "curationNote": "Hungry Huy amounts (2 lb pork, belly and shoulder, 8 eggs, 4 tbsp nước màu) followed. Coconut soda written as coconut water, the traditional liquid in the south."
+      "curationNote": "Hungry Huy, Thịt Kho Trứng for every amount and step; serves 5: 2 lb pork half belly half shoulder, 3/4 cup coconut soda, 3 tbsp fish sauce, 2 tsp salt, water to cover, 4 tbsp nước màu, 8 eggs, 1 onion."
     },
     {
       "id": "curated_vn_ca_kho_to",
@@ -2512,7 +2617,7 @@
         {
           "category": "Veg",
           "baseName": "Onions, spring or scallions (includes tops and bulb)",
-          "quantity": 2,
+          "quantity": 1,
           "unit": "each",
           "cutPrep": "sliced",
           "cookingMethod": null,
@@ -2526,23 +2631,14 @@
           "cutPrep": "coarsely ground",
           "cookingMethod": null,
           "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Pepper, hot chili, red or green",
-          "quantity": 1,
-          "unit": "g",
-          "cutPrep": "sliced",
-          "cookingMethod": null,
-          "prepNote": "1 bird's eye chili"
         }
       ],
       "instructions": [
-        "Marinate the catfish with the fish sauce, 1 tbsp sugar, shallot and garlic for 30 minutes.",
-        "In a clay pot or heavy pan, cook the oil and remaining 2 tbsp sugar over medium heat 3 to 5 minutes, until the caramel is a deep amber.",
-        "Lay in the fish with its marinade, turn once to coat, and pour in the coconut water.",
-        "Simmer uncovered over low heat 30 to 40 minutes, spooning the sauce over, until it reduces to a thick glaze.",
-        "Finish with scallion, chili and plenty of black pepper, and serve in the pot with rice."
+        "Marinate the catfish with the fish sauce and 1 tbsp sugar for at least 30 minutes.",
+        "In a clay pot or wide pan, heat the oil over medium high, add the remaining 2 tbsp sugar and cook until the caramel turns dark amber.",
+        "Stir in the shallot and garlic for about 15 seconds, then lay in the fish with its marinade and turn to coat.",
+        "Pour in the coconut water and simmer on low, partly covered, about 20 minutes, turning the fish or spooning the sauce over it halfway.",
+        "Top with the scallion and black pepper and serve in the pot with rice."
       ],
       "nutritionHighlights": [
         {
@@ -2560,7 +2656,7 @@
           "url": "https://vickypham.com/blog/vietnamese-caramelized-catfish-ca-kho-to/"
         }
       ],
-      "curationNote": "Vicky Pham, 4 servings; 3 lb catfish written as 1300 g bone-in steaks. Catfish is not in the food database. A Mekong Delta clay-pot dish."
+      "curationNote": "Vicky Pham, Cá Kho Tộ for every amount and step; serves 4: 3 lb catfish, 4 tbsp fish sauce, 3 tbsp sugar, 1 tbsp oil, 1 shallot, 3 garlic, 6 oz coconut soda, 1 green onion, 1/4 tsp pepper; no chili."
     },
     {
       "id": "curated_vn_ga_kho_gung",
@@ -2622,7 +2718,7 @@
         {
           "category": "Herbs",
           "baseName": "Ginger root",
-          "quantity": 40,
+          "quantity": 25,
           "unit": "g",
           "cutPrep": "cut in thin matchsticks",
           "cookingMethod": null,
@@ -2693,11 +2789,11 @@
         }
       ],
       "instructions": [
-        "Marinate the chicken with 2 tbsp sugar, fish sauce, pepper, half the ginger, garlic and shallot for 30 minutes.",
-        "Cook the oil and remaining 2 tbsp sugar in a heavy pot over medium heat 3 to 5 minutes into a deep amber caramel.",
-        "Add the rest of the ginger, then the chicken, and turn it in the caramel 3 to 5 minutes.",
-        "Pour in the coconut water, cover and simmer 20 minutes, then uncover and cook 10 to 15 minutes more until the sauce is thick.",
-        "Top with cilantro, scallion and chili and serve with rice."
+        "Marinate the chicken with 2 tbsp sugar, the fish sauce and half the pepper for at least 30 minutes.",
+        "Cook the oil and remaining 2 tbsp sugar in a wide lidded pan over medium high until dark amber.",
+        "Add the ginger, garlic and shallot and fry about 30 seconds, then add the chicken and toss it in the caramel.",
+        "Pour in the coconut water, cover and simmer on low 10 minutes, tossing halfway, then uncover and cook about 10 minutes more until a little sauce is left.",
+        "Top with the rest of the pepper, cilantro, scallion and chili and serve with rice."
       ],
       "nutritionHighlights": [
         {
@@ -2715,7 +2811,7 @@
           "url": "https://vickypham.com/blog/vietnamese-ginger-chicken-ga-kho-gung/"
         }
       ],
-      "curationNote": "Vicky Pham, 3 lb chicken, 3-inch ginger piece (about 40 g). Coconut water used for the liquid, as her recipe allows water or coconut soda."
+      "curationNote": "Vicky Pham, Gà Kho Gừng for every amount and step; serves 5: 3 lb chicken, 2 tbsp sugar, 3 tbsp fish sauce, 1/4 tsp pepper in the marinade; 1/4 cup ginger, 1 tbsp garlic, 2 tbsp shallot; caramel of 1 tbsp oil and 2 tbsp sugar; 1 cup coconut soda; 1/4 tsp pepper, 2 tbsp cilantro or green onion and optional chilies on top; bouillon left out."
     },
     {
       "id": "curated_vn_bo_luc_lac",
@@ -2859,12 +2955,21 @@
           "cutPrep": "sliced",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "two dashes, for the tomato rice"
         }
       ],
       "instructions": [
         "Toss the beef with oyster sauce, soy sauce, half the garlic, sugar and cornstarch and leave 30 minutes.",
         "Fry the rest of the garlic in 2 tbsp oil until golden, strain it out and keep the garlic oil.",
-        "Fry the rice in a little garlic oil with the tomato paste 3 to 5 minutes until evenly red.",
+        "Fry the rice in a little garlic oil with the tomato paste and fish sauce 3 to 5 minutes until evenly red.",
         "Heat a wok until smoking, add a little oil and the beef in one layer, sear 1 minute without moving, then shake the pan 1 to 2 minutes for medium rare. Lift out.",
         "Stir-fry the onion, pepper and scallion 1 minute, return the beef and the garlic oil and toss.",
         "Serve on lettuce and tomato with the tomato rice and the salt, pepper and lime dip."
@@ -2889,7 +2994,7 @@
           "url": "https://www.hungryhuy.com/bo-luc-lac-recipe/"
         }
       ],
-      "curationNote": "Hungry Huy for 2 servings, with his tomato rice. The salt, pepper and lime dip is the muối tiêu chanh base."
+      "curationNote": "Hungry Huy, Bò Lúc Lắc for every amount and step; serves 2: 1 lb ribeye, 1 tbsp oyster sauce, 1 tbsp soy, garlic, 2 tbsp garlic oil, 1/2 tsp sugar, 1 tsp starch; tomato rice with 1 tbsp tomato paste and two dashes fish sauce; onion, bell pepper, green onion; lime, salt and pepper dip."
     },
     {
       "id": "curated_vn_bo_kho",
@@ -2938,8 +3043,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 12,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -3108,7 +3213,7 @@
           "url": "https://www.hungryhuy.com/bo-kho-recipe-vietnamese-beef-stew/"
         }
       ],
-      "curationNote": "Hungry Huy for 8 servings. The 2 cups of chicken broth point at the chicken phở broth base. Written as builderType soup since it is eaten in bowls, kept on the dishes.json shelf."
+      "curationNote": "Hungry Huy, Bò Kho for every amount and step; serves 8: 2 lb shank; marinade 2 tbsp soy, 2 tbsp hoisin, 2 tsp salt, 1 tsp stew seasoning; 2 tbsp oil, 4 garlic, 1 tsp paprika, 1 tbsp stew seasoning, onion, 1.5 tbsp ginger, 1 to 2 lemongrass, 2 tbsp tomato paste, 2 tbsp dark soy, 4 star anise, 4 bay, 2 cups chicken broth, 6 oz coconut soda, 5 cups water, carrots, Thai basil."
     },
     {
       "id": "curated_vn_ga_xao_sa_ot",
@@ -3188,8 +3293,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -3214,10 +3319,10 @@
         }
       ],
       "instructions": [
-        "Marinate the chicken with half the lemongrass, half the garlic, fish sauce, sugar and salt for 30 minutes.",
-        "Heat the oil over medium high and fry the rest of the lemongrass, garlic and chili 1 to 2 minutes until fragrant.",
-        "Add the chicken and stir-fry 6 to 8 minutes, until golden and cooked through.",
-        "Add the onion and cook 1 to 2 minutes more, until the sauce clings.",
+        "Marinate the chicken with half the lemongrass, half the garlic, the fish sauce, sugar, chili and salt for at least 1 hour.",
+        "Heat the oil on high and fry the rest of the lemongrass and garlic until fragrant, then add the chicken and stir until no longer pink.",
+        "Cover and cook on medium 5 to 10 minutes, then uncover and stir 2 to 3 minutes more.",
+        "Add the onion and stir 1 to 2 minutes, until translucent.",
         "Serve hot with rice."
       ],
       "nutritionHighlights": [
@@ -3236,7 +3341,7 @@
           "url": "https://helenrecipes.com/recipe-51-ga-xao-sa-ot-lemongrass-chili-chicken/"
         }
       ],
-      "curationNote": "Single source (Helen's Recipes), 500 g chicken. Thigh chosen for juiciness, as most home cooks use."
+      "curationNote": "Helen's Recipes, Gà Xào Sả Ớt for every amount and step; 500 g chicken, 2 tbsp lemongrass, 2 tbsp garlic, 3 tbsp fish sauce, 1 1/2 tbsp sugar, 1 to 2 tsp red chili, 1/2 tsp salt, 1 onion, 1 tbsp oil; no servings stated."
     },
     {
       "id": "curated_vn_tom_rim",
@@ -3325,7 +3430,7 @@
         {
           "category": "Veg",
           "baseName": "Onions, spring or scallions (includes tops and bulb)",
-          "quantity": 2,
+          "quantity": 1,
           "unit": "each",
           "cutPrep": "sliced",
           "cookingMethod": null,
@@ -3333,10 +3438,10 @@
         }
       ],
       "instructions": [
-        "Marinate the shrimp with fish sauce, sugar and pepper for 15 to 20 minutes.",
-        "Fry the garlic and shallot in the oil over medium heat 1 to 2 minutes until golden.",
-        "Add the shrimp and marinade and cook 10 to 15 minutes over medium low, turning, until the liquid reduces to a sticky glaze.",
-        "Scatter the scallion over and serve with rice."
+        "Marinate the shrimp with the fish sauce, sugar, half the pepper and half the garlic and shallot for at least 15 minutes.",
+        "Heat the oil over medium-high heat and fry the rest of the garlic and shallot with the scallion whites for about 15 seconds.",
+        "Add the shrimp and marinade, cover and simmer 2 minutes, then uncover and cook over medium about 8 minutes, until the liquid is gone and the shells are shiny.",
+        "Top with the scallion greens and the rest of the pepper and serve with rice."
       ],
       "nutritionHighlights": [
         {
@@ -3354,7 +3459,7 @@
           "url": "https://vickypham.com/blog/vietnamese-caramelized-shrimp-tom-rim/"
         }
       ],
-      "curationNote": "Single source (Vicky Pham), 2 lb shrimp for 8 servings as a rice accompaniment."
+      "curationNote": "Vicky Pham, Tôm Rim for every amount and step; serves 8: 2 lb small shrimp, 3 tbsp fish sauce, 1 tbsp bouillon powder, 1 1/2 tbsp sugar, 1/2 tsp pepper divided, optional MSG, 2 tbsp garlic and 3 tbsp shallot each half in the marinade, 2 tbsp oil, 1 green onion; salt rubbed on and rinsed off."
     },
     {
       "id": "curated_vn_suon_ram_man",
@@ -3452,7 +3557,7 @@
         {
           "category": "Veg",
           "baseName": "Onions, spring or scallions (includes tops and bulb)",
-          "quantity": 2,
+          "quantity": 1,
           "unit": "each",
           "cutPrep": "sliced",
           "cookingMethod": null,
@@ -3482,7 +3587,7 @@
           "url": "https://vickypham.com/blog/vietnamese-caramelized-pork-spareribs-suon-ram-man/"
         }
       ],
-      "curationNote": "Single source (Vicky Pham, opened through WebFetch): 2 lb ribs, 8-minute blanch, 30 to 40 minute braise."
+      "curationNote": "Vicky Pham, Sườn Ram Mặn for every amount and step; serves 3: 2 lb ribs, 1 shallot, 3 garlic, 1 tbsp bouillon powder, 2 tbsp fish sauce, 1/2 tsp pepper, 3 tbsp sugar divided, 3/4 cup coconut soda, 1/2 cup water, 1 green onion, 1 tsp salt in the blanching water."
     },
     {
       "id": "curated_vn_cha_ca_la_vong",
@@ -3544,11 +3649,11 @@
         {
           "category": "Meat",
           "baseName": "Shrimp Paste",
-          "quantity": 18,
+          "quantity": 42,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "1 tsp for the marinade, 2 tbsp in the dip; 3 tsp at 6 g per tsp"
+          "prepNote": "(1 tsp for the marinade, 2 tbsp for the dip; 7 tsp at 6 g per tsp)"
         },
         {
           "category": "Fats",
@@ -3557,7 +3662,7 @@
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "1 tbsp for the marinade, the rest for frying"
+          "prepNote": "(1 tbsp for the marinade, 1 tbsp for the dip, the rest for frying)"
         },
         {
           "category": "Herbs",
@@ -3614,24 +3719,6 @@
           "prepNote": "cooked as bún"
         },
         {
-          "category": "Herbs",
-          "baseName": "Spices, spearmint, fresh",
-          "quantity": 15,
-          "unit": "g",
-          "cutPrep": "leaves",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Coriander (cilantro) leaves",
-          "quantity": 15,
-          "unit": "g",
-          "cutPrep": "sprigs",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "NutSeed",
           "baseName": "Peanut",
           "quantity": 40,
@@ -3648,14 +3735,41 @@
           "cutPrep": "sliced",
           "cookingMethod": null,
           "prepNote": "1 bird's eye chili"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Perilla, \"Shiso\", leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Basil",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "in place of Asian basil"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
         "Marinate the fish with turmeric, galangal, rice flour, mẻ, 1 tsp shrimp paste, 1 tbsp oil and pepper for at least 1 hour.",
         "Bake the fish on an oiled tray at 400°F (200°C) for 5 to 7 minutes until just set.",
-        "Stir the remaining shrimp paste with the sugar and lime juice until it foams, and add chili.",
+        "For the dip, stir 2 tbsp shrimp paste with the sugar, lime juice, garlic and chili until it foams, then stir in 1 tbsp hot oil.",
         "Heat the rest of the oil in a skillet at the table or stove, fry the fish 2 to 3 minutes until golden, then pile on the spring onion and dill and toss 1 minute until just wilted.",
-        "Spoon fish and greens over bowls of bún with herbs and peanuts, and add a little of the shrimp paste dip."
+        "Spoon fish and greens over bowls of bún, add peanuts, shiso and basil, and drizzle with the shrimp paste dip."
       ],
       "nutritionHighlights": [
         {
@@ -3677,7 +3791,7 @@
           "url": "https://en.wikipedia.org/wiki/Ch%E1%BA%A3_c%C3%A1"
         }
       ],
-      "curationNote": "Helen's Hà Nội recipe with tilapia (traditionally hemibagrus fish); Wikipedia confirms Lã Vọng street origin, dill and shrimp paste. Bún is listed directly as dried rice noodles, since no bún base is in base_ids."
+      "curationNote": "Helen's Recipes, Chả Cá Lã Vọng for every amount and step; 500 g fish with turmeric, galangal, rice flour, mẻ, 1 tsp shrimp paste, oil, pepper; dip of 2 tbsp shrimp paste, 2 tbsp sugar, 1 tbsp hot oil, 1 tsp garlic and chili, 2 to 3 tbsp lime; 8 spring onions, 100 g dill, 500 g cooked bún, shiso and Asian basil, peanuts. Amounts kept as given; the page says 2 to 3 servings."
     },
     {
       "id": "curated_vn_bo_nuong_la_lot",
@@ -3739,8 +3853,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 2.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -3789,10 +3903,19 @@
           "cutPrep": "leaves",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1.5,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "club soda, to keep the filling moist"
         }
       ],
       "instructions": [
-        "Mix the beef with scallion, fish sauce, salt, pepper and curry powder and rest 15 minutes.",
+        "Mix the beef with scallion, fish sauce, salt, pepper, curry powder and the club soda and rest 15 minutes.",
         "Lay a leaf shiny side down, put a heaped teaspoon of beef at the stem end, roll it into a short log and set seam down.",
         "Thread the rolls onto skewers or set them in a grill basket and brush lightly with oil.",
         "Grill over medium hot coals or under a broiler 6 to 8 minutes, turning, until the leaves char a little and the beef is cooked.",
@@ -3814,7 +3937,7 @@
           "url": "https://www.vietworldkitchen.com/blog/2016/06/beef-wild-betel-leaf-recipe-la-lot.html"
         }
       ],
-      "curationNote": "Andrea Nguyen's amounts (1 lb beef, 115 g leaves, curry powder). Shelved under Meats & Seafood per dishes.json, written as a snack since it is shared as a starter."
+      "curationNote": "Viet World Kitchen, Beef in Wild Betel Leaf (Bò Lá Lốt) for every amount and step; 1 lb beef, 1/4 cup green onion, 2 tsp fish sauce, scant 1/2 tsp salt, 3/4 tsp pepper, 2 to 3 tsp curry powder, 1 to 2 tbsp club soda, 115 g leaves, 1 tbsp oil, lettuce."
     },
     {
       "id": "curated_vn_chao_tom",
@@ -3848,8 +3971,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 1.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -3961,14 +4084,32 @@
           "cutPrep": "leaves",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "sprigs"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Perilla, \"Shiso\", leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "sprigs"
         }
       ],
       "instructions": [
         "Pulse the shrimp with salt, cornstarch, sugar, pepper, fish sauce, egg, garlic and shallot into a sticky paste, then fold in the diced fat. Chill 30 minutes.",
-        "With oiled hands, press about 3 tbsp of paste around the middle of each sugarcane stick.",
-        "Steam the sticks 3 to 5 minutes until the paste is set.",
+        "With wet hands, flatten about 2 tbsp of paste into a round, set a stick on it and wrap the paste around the middle, smoothing it.",
+        "Steam the sticks 3 to 4 minutes until the paste is opaque and set.",
         "Brush with oil and grill over medium coals 5 to 7 minutes, turning, until golden and charred in spots.",
-        "Slide the shrimp off and wrap in lettuce and herbs with nước chấm, then chew the cane."
+        "Slide the shrimp off and wrap in lettuce with mint, cilantro and perilla, dip in nước chấm, then chew the cane."
       ],
       "nutritionHighlights": [
         {
@@ -3986,7 +4127,7 @@
           "url": "https://www.vietworldkitchen.com/blog/2009/05/grilled-shrimp-on-sugarcane-chao-tom-recipe.html"
         }
       ],
-      "curationNote": "Andrea Nguyen's Huế method (steam, then grill), 12 sticks from 1 lb shrimp. Sugarcane is not in the database and is not eaten."
+      "curationNote": "Viet World Kitchen, Chạo Tôm for every amount and step; makes 12: 1 lb shrimp, generous 1/4 tsp salt, 2 tsp cornstarch, 2 tsp palm or light brown sugar, generous 1/4 tsp pepper, 2 tsp fish sauce, 1 egg, 2 garlic, 2 tbsp shallot, 1 tbsp fatback; 1 to 2 tbsp oil; lettuce, cilantro, mint and perilla."
     },
     {
       "id": "curated_vn_ga_nuong_sa",
@@ -3998,7 +4139,7 @@
       "servings": 4,
       "servingSizeAmount": 1,
       "servingSizeUnit": "plate",
-      "flavorProfile": "Chicken thighs marinated in lemongrass, shallot, garlic and fish sauce, grilled until charred and juicy, served with rice, pickles and nước chấm.",
+      "flavorProfile": "Chicken thighs marinated in lemongrass, garlic, honey, oyster and soy sauces and a little five-spice, grilled until charred and juicy, served with rice, cucumber, tomato and pickles.",
       "healthBenefit": "Grilled chicken brings protein and niacin with little added fat; serve with pickles and greens for a balanced plate.",
       "overallTier": "strong",
       "components": [
@@ -4011,21 +4152,6 @@
           "recipeId": "curated_vn_base_do_chua",
           "servings": 4,
           "note": "served alongside"
-        },
-        {
-          "recipeId": "curated_vn_base_nuoc_cham",
-          "servings": 8,
-          "note": "about 2 tbsp per plate"
-        },
-        {
-          "recipeId": "curated_vn_base_mo_hanh",
-          "servings": 2,
-          "note": "brushed on after grilling"
-        },
-        {
-          "recipeId": "curated_sauce_sambal_oelek",
-          "servings": 1,
-          "note": "1 tbsp"
         }
       ],
       "ingredients": [
@@ -4039,38 +4165,11 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 1,
+          "quantity": 1.5,
           "unit": "tbsp",
           "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Fats",
-          "baseName": "Rapsolja",
-          "quantity": 2,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Shallot",
-          "quantity": 3,
-          "unit": "tbsp",
-          "cutPrep": "minced",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -4086,29 +4185,20 @@
         {
           "category": "Veg",
           "baseName": "Lemon grass (citronella)",
-          "quantity": 50,
-          "unit": "g",
-          "cutPrep": "tender lower stalk, minced",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": "tender lower stalk, finely minced",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 2,
-          "unit": "tbsp",
+          "quantity": 1.5,
+          "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Coconut water",
-          "quantity": 60,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "adds sweetness to the marinade"
         },
         {
           "category": "Veg",
@@ -4127,14 +4217,67 @@
           "cutPrep": "sliced",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, oyster sauce",
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Soya sauce",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": "all-purpose",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sweets, honey, strained or extracted",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Alcohol",
+          "baseName": "Fermented alcoholic beverage, Shaoxing wine",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "Chinese five-spice powder",
+          "contains": "none",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Blend or pound the lemongrass, shallot and garlic, then mix with salt, sugar, oil, fish sauce, sambal and coconut water.",
-        "Coat the chicken and marinate 2 hours or overnight in the fridge.",
-        "Grill over medium hot coals or on a grill pan 6 to 8 minutes a side, until charred in spots and 165°F (74°C) inside.",
-        "Brush with scallion oil, rest 5 minutes and slice.",
-        "Serve over rice with cucumber, tomato, pickles and nước chấm."
+        "Stir the oyster sauce, soy sauce, fish sauce, honey, sugar, Shaoxing wine, five-spice, pepper, garlic and lemongrass together.",
+        "Coat the chicken and marinate at least 1 hour, or overnight in the fridge.",
+        "Grill at about 400°F (200°C), skin side down first, 10 minutes a side (12 for bone-in), until 165°F (74°C) inside. To roast instead, cook skin side down on a rack at 400°F (200°C) 15 minutes, turn and cook 15 minutes more, then baste with the drippings and broil 1 to 2 minutes a side until crisp.",
+        "Serve over rice with cucumber, tomato and pickles."
       ],
       "nutritionHighlights": [
         {
@@ -4148,11 +4291,11 @@
       ],
       "citations": [
         {
-          "source": "Hungry Huy, Vietnamese Lemongrass Chicken",
-          "url": "https://www.hungryhuy.com/vietnamese-lemongrass-chicken/"
+          "source": "Vicky Pham, Vietnamese Lemongrass Roast Chicken (Gà Nướng)",
+          "url": "https://vickypham.com/blog/vietnamese-roasted-chicken/"
         }
       ],
-      "curationNote": "Single source. Hungry Huy's marinade (lemongrass, shallot, garlic, fish sauce, sambal, coconut juice) adapted from his pan braise to grilling, the cơm tấm stall way; amounts doubled to 2 lb for 4 plates."
+      "curationNote": "Vicky Pham, Vietnamese Lemongrass Roast Chicken (Gà Nướng) for every amount and step; 4 lb chicken thighs, halved to our 900 g: 1/2 cup oyster sauce, 1 tbsp soy sauce, 1 tbsp fish sauce, 1 tbsp honey, 3 tbsp sugar, 1 tbsp Shaoxing wine, 1 tsp five-spice, 1/2 tsp black pepper, 2 tbsp garlic, 1/2 cup lemongrass; marinated 1 hour to overnight; grilled at 400°F 10 minutes a side (12 for bone-in), or roasted; basted with drippings; no sauce served."
     },
     {
       "id": "curated_vn_muc_xao",
@@ -4364,8 +4507,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -4425,7 +4568,7 @@
           "url": "https://www.hungryhuy.com/how-to-make-dau-sot-ca-vietnamese-tofu-with-tomato-sauce/"
         }
       ],
-      "curationNote": "Hungry Huy for 4, his half teaspoon of fish sauce kept. A northern home dish also common across the country."
+      "curationNote": "Hungry Huy, Đậu Sốt Cà for every amount and step; serves 4: 1 lb firm tofu fried, 5 Roma tomatoes, 1 tbsp tomato paste, 1/2 tsp fish sauce, 1 tsp salt, 2 tsp sugar, 1/2 cup water, 1 green onion."
     },
     {
       "id": "curated_vn_canh_chua_ca",
@@ -4450,7 +4593,7 @@
         {
           "category": "Meat",
           "baseName": "Catfish",
-          "quantity": 450,
+          "quantity": 680,
           "unit": "g",
           "cutPrep": "cut 2.5 cm thick",
           "cookingMethod": null,
@@ -4459,16 +4602,16 @@
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 4,
+          "quantity": 1.5,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "1 tbsp to marinate the fish"
+          "prepNote": null
         },
         {
           "category": "Fruit",
           "baseName": "Tamarind",
-          "quantity": 12,
+          "quantity": 18,
           "unit": "g",
           "cutPrep": "pulp soaked in hot water and strained",
           "cookingMethod": null,
@@ -4486,7 +4629,7 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 3,
+          "quantity": 3.75,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4495,7 +4638,7 @@
         {
           "category": "Fats",
           "baseName": "Rapsolja",
-          "quantity": 1,
+          "quantity": 3,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4504,7 +4647,7 @@
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 4,
+          "quantity": 6,
           "unit": "each",
           "cutPrep": "cloves, minced",
           "cookingMethod": "Fried",
@@ -4581,14 +4724,23 @@
           "cutPrep": "sliced",
           "cookingMethod": null,
           "prepNote": "1 bird's eye chili"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 9,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Toss the fish with 1 tbsp fish sauce and leave 15 minutes.",
-        "Fry the garlic in the oil until golden and set it aside for the top.",
-        "Bring the water and tamarind liquid to a boil, add the remaining fish sauce and the sugar, then the fish, and simmer 8 to 10 minutes, skimming.",
-        "Add the pineapple, tomato and okra and simmer 3 minutes, then the taro stem for 1 minute.",
-        "Take off the heat, add the bean sprouts, and finish each bowl with the herbs, fried garlic and chili. Serve with rice."
+        "Fry the garlic in the oil until golden, lift it out for the top and keep the oil in the pot.",
+        "Sear the fish in the garlic oil about 10 seconds a side, pour in the water, bring to a boil and simmer gently 15 minutes, skimming.",
+        "Dissolve the tamarind in a cup of the hot broth, strain it back into the pot, and season with the fish sauce, salt and sugar; it should taste bold.",
+        "Add the pineapple, tomato, okra and taro stem, bring back to a simmer, then turn off the heat.",
+        "Add the bean sprouts and finish each bowl with the herbs, fried garlic and chili. Serve with rice."
       ],
       "nutritionHighlights": [
         {
@@ -4610,7 +4762,7 @@
           "url": "https://en.wikipedia.org/wiki/Canh_chua"
         }
       ],
-      "curationNote": "Vicky Pham (opened through WebFetch) for amounts, 1 lb fish and 12 g tamarind; Wikipedia confirms the Mekong Delta origin and the herbs. Catfish and taro stem are not in the database."
+      "curationNote": "Vicky Pham, Canh Chua Cá Bạc Hà for every amount and step; serves 4, scaled to our 6: 1 lb fish, 1 qt water, 2 to 3 tbsp oil, 4 garlic, 12 g tamarind, 1 tbsp fish sauce, 1 tsp salt, 2 1/2 tbsp sugar, taro stalk, tomatoes, herbs and chilies; stock powder left out. The pineapple, okra, bean sprouts and ngò gai follow the Wikipedia description of canh chua."
     },
     {
       "id": "curated_vn_canh_bi_dao",
@@ -4659,7 +4811,7 @@
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
           "quantity": 1,
-          "unit": "tbsp",
+          "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -4667,11 +4819,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 4.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1.5 g for the shrimp, 3 g for the soup"
         },
         {
           "category": "Herbs",
@@ -4694,7 +4846,7 @@
         {
           "category": "Fats",
           "baseName": "Rapsolja",
-          "quantity": 1,
+          "quantity": 2,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4720,11 +4872,10 @@
         }
       ],
       "instructions": [
-        "Season the minced shrimp with a little fish sauce and pepper.",
-        "Fry the shallot in the oil 1 minute, add the shrimp and stir 1 to 2 minutes until pink.",
-        "Pour in the broth, bring to a boil and add the winter melon.",
-        "Simmer 8 to 10 minutes, until the melon is translucent, and season with the rest of the fish sauce and the salt.",
-        "Finish with scallion, cilantro and pepper and serve with rice."
+        "Pound the shrimp with half the shallot and 1.5 g salt, then mix in the fish sauce and pepper.",
+        "Fry the rest of the shallot in the oil until fragrant, add the shrimp and stir over high heat until they turn orange.",
+        "Pour in the hot broth, add the remaining 3 g salt and the winter melon, and bring back to a boil; turn off the heat once it boils.",
+        "Finish with scallion and cilantro and serve with rice."
       ],
       "nutritionHighlights": [
         {
@@ -4742,7 +4893,7 @@
           "url": "https://helenrecipes.com/recipe-winter-melon-soup-canh-bi-dao/"
         }
       ],
-      "curationNote": "Single source (Helen's Recipes): 500 g winter melon, 200 g shrimp. Broth points at the pork bone base; water is the everyday option."
+      "curationNote": "Helen's Recipes, Canh Bí Đao for every amount and step; serves 4: 500 g winter melon, 200 g shrimp, 1 shallot, 1/4 tsp salt for the shrimp plus about 1/2 tsp for the soup, 1 tsp fish sauce, 1/4 tsp pepper, 2 tsp oil, 1 tsp chicken stock powder, spring onion and cilantro, 1 L hot water."
     },
     {
       "id": "curated_vn_canh_cai_thit_bam",
@@ -4753,15 +4904,10 @@
       "servings": 4,
       "servingSizeAmount": 1,
       "servingSizeUnit": "bowl",
-      "flavorProfile": "A simple clear broth with little meatballs of minced pork and peppery mustard greens, with a slight bitterness and ginger warmth.",
+      "flavorProfile": "A simple clear broth with stir-fried minced pork, wood ear and peppery mustard greens, with a slight bitterness and black pepper warmth.",
       "healthBenefit": "Mustard greens bring vitamins A, C and K and calcium, and the pork adds protein; an everyday soup that puts greens on the table.",
       "overallTier": "strong",
       "components": [
-        {
-          "recipeId": "curated_vn_base_nuoc_dung_xuong_heo",
-          "servings": 5,
-          "note": "about 5 cups of pork bone broth"
-        },
         {
           "recipeId": "curated_vn_base_com_trang",
           "servings": 4,
@@ -4772,7 +4918,7 @@
         {
           "category": "Meat",
           "baseName": "Ground Pork (Raw)",
-          "quantity": 200,
+          "quantity": 300,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Simmered",
@@ -4783,41 +4929,23 @@
           "baseName": "Mustard greens",
           "quantity": 400,
           "unit": "g",
-          "cutPrep": "cut in 4 cm pieces",
+          "cutPrep": "stalks and leaves apart, bite-size pieces",
           "cookingMethod": "Simmered",
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Shallot",
-          "quantity": 1,
+          "quantity": 2,
           "unit": "each",
-          "cutPrep": "minced",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Ginger root",
-          "quantity": 5,
-          "unit": "g",
-          "cutPrep": "thinly sliced",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1.5,
-          "unit": "tbsp",
-          "cutPrep": null,
+          "cutPrep": "finely chopped",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
+          "quantity": 1,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4826,27 +4954,45 @@
         {
           "category": "Herbs",
           "baseName": "Spices, pepper, black",
-          "quantity": 0.25,
+          "quantity": 0.5,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
         {
-          "category": "Veg",
-          "baseName": "Onions, spring or scallions (includes tops and bulb)",
-          "quantity": 1,
+          "category": "Mushroom",
+          "baseName": "Mushrooms, tree ears, Cloud ear, dried",
+          "quantity": 2,
           "unit": "each",
-          "cutPrep": "sliced",
+          "cutPrep": "pieces, soaked and chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1600,
+          "unit": "ml",
+          "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Mix the pork with the shallot, half the fish sauce and pepper.",
-        "Bring the broth to a boil with the ginger and drop in small spoonfuls of pork, simmering 3 to 5 minutes and skimming.",
-        "Add the mustard greens and cook 3 to 5 minutes, until tender but still green.",
-        "Season with the rest of the fish sauce and the salt, top with scallion and pepper, and serve with rice."
+        "Wash the mustard greens, keep the stalks and leaves apart and cut them in bite-size pieces. Chop the soaked wood ear and mix it into the ground pork.",
+        "Heat the oil in a pot and fry the shallot until fragrant. Add the pork and wood ear and stir-fry until it changes colour, then add the water and bring to a boil.",
+        "Add the mustard green stalks and cook 2 minutes.",
+        "Add the leaves and the salt and cook 1 to 2 minutes more. Sprinkle with pepper, take off the heat and serve with rice."
       ],
       "nutritionHighlights": [
         {
@@ -4864,11 +5010,11 @@
       ],
       "citations": [
         {
-          "source": "Helen's Recipes, Canh Cải",
-          "url": "https://helenrecipes.com/recipe-vietnamese-vegetable-soup-canh-cai/"
+          "source": "Cookpad Vietnam, SP.0991 Canh Cải Bẹ Xanh Nấu Thịt Bằm",
+          "url": "https://cookpad.com/vn/cong-thuc/25001058"
         }
       ],
-      "curationNote": "Helen's canh cải, written with minced pork as the dish name asks. Single source."
+      "curationNote": "Cookpad Vietnam, SP.0991 Canh Cải Bẹ Xanh Nấu Thịt Bằm for every amount and step; 2 bowls, doubled to our 4: 150 g ground pork, 1 piece wood ear, 200 g mustard greens, 1 shallot, 1 tbsp oil, 800 ml water, 1/2 tsp salt, 1/4 tsp pepper; stalks cooked 2 minutes, leaves 1 to 2 minutes more."
     },
     {
       "id": "curated_vn_canh_rau_ngot",
@@ -4899,7 +5045,7 @@
           "notInDatabase": true,
           "name": "sweet leaf (rau ngót, Sauropus androgynus)",
           "contains": "none",
-          "quantity": 300,
+          "quantity": 170,
           "unit": "g",
           "cutPrep": "leaves stripped, bruised and roughly chopped",
           "prepNote": null
@@ -4907,7 +5053,7 @@
         {
           "category": "Meat",
           "baseName": "Ground Pork (Raw)",
-          "quantity": 200,
+          "quantity": 225,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Simmered",
@@ -4926,15 +5072,6 @@
           "category": "Fats",
           "baseName": "Rapsolja",
           "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1.5,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4942,8 +5079,8 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 0.5,
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 2,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4951,8 +5088,35 @@
         },
         {
           "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
           "baseName": "Spices, pepper, black",
-          "quantity": 0.25,
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "cloves, minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 0.5,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4960,11 +5124,11 @@
         }
       ],
       "instructions": [
-        "Season the pork with a little fish sauce and pepper.",
-        "Fry the shallot in the oil 1 minute, add the pork and break it up 2 to 3 minutes.",
-        "Pour in the broth, bring to a boil and skim.",
-        "Add the sweet leaves and simmer 3 to 5 minutes, until soft and dark green.",
-        "Season with the remaining fish sauce and salt and serve with rice."
+        "Fry the garlic and shallot in the oil about 20 seconds, until fragrant.",
+        "Add the pork and cook until lightly browned, breaking it up.",
+        "Pour in the broth, bring to a gentle boil and simmer about 10 minutes, skimming.",
+        "Season with the fish sauce, salt, sugar and pepper, tasting as you go.",
+        "Add the sweet leaves a handful at a time and cook about 8 minutes, until tender. Serve with rice."
       ],
       "nutritionHighlights": [
         {
@@ -4982,7 +5146,7 @@
           "url": "https://vickypham.com/blog/authentic-vietnamese-sweet-leaf-soup-canh-rau-ngot/"
         }
       ],
-      "curationNote": "Single source (Vicky Pham, opened through WebFetch), written with minced pork. Sweet leaf is not in the database, so it is not counted in nutrients."
+      "curationNote": "Vicky Pham, Canh Rau Ngót for every amount and step; serves 4: 6 oz sweet leaf, 8 oz pork ribs or ground meat, 3 garlic, 1 shallot, 1 tbsp oil, 2 tsp fish sauce, 1 tsp salt, 1/2 tsp sugar, 1/2 tsp pepper, 4 cups water; bouillon or MSG left out."
     },
     {
       "id": "curated_vn_sup_cua",
@@ -5007,25 +5171,16 @@
         {
           "category": "Meat",
           "baseName": "Crab Crustaceans",
-          "quantity": 225,
+          "quantity": 70,
           "unit": "g",
           "cutPrep": "cooked and picked",
           "cookingMethod": "Simmered",
           "prepNote": null
         },
         {
-          "category": "Meat",
-          "baseName": "Chicken Breast (without skin)",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "poached and shredded",
-          "cookingMethod": "Boiled",
-          "prepNote": null
-        },
-        {
           "category": "Veg",
           "baseName": "Asparagus",
-          "quantity": 150,
+          "quantity": 340,
           "unit": "g",
           "cutPrep": "cut in short lengths",
           "cookingMethod": "Simmered",
@@ -5069,27 +5224,9 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -5132,16 +5269,16 @@
         }
       ],
       "instructions": [
-        "Bring the broth to a boil and season with fish sauce, salt and sugar.",
-        "Add the mushrooms, asparagus and shredded chicken and simmer 3 to 5 minutes.",
-        "Stir in the tapioca slurry a little at a time until the soup coats a spoon.",
-        "Slowly pour in the beaten egg while stirring in one direction to make ribbons.",
-        "Add the crab and quail eggs, heat 1 minute, and finish with sesame oil, white pepper, cilantro and scallion."
+        "Bring the broth to a boil, add the crab and mushrooms and simmer 5 minutes. Taste and add the salt only if it needs it.",
+        "Add the quail eggs, then slowly pour in the beaten egg while stirring in one direction to make ribbons.",
+        "Stir in the tapioca slurry and simmer until the soup thickens and coats a spoon.",
+        "Turn off the heat and add the asparagus to cook in the heat of the soup.",
+        "Ladle into bowls and finish with sesame oil, white pepper, cilantro and scallion."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Protein",
-          "note": "From the crab, chicken and eggs."
+          "note": "From the crab and eggs."
         },
         {
           "nutrient": "Zinc",
@@ -5158,7 +5295,7 @@
           "url": "https://vickypham.com/blog/vietnamese-crab-asparagus-soup-sup-mang-cua/"
         }
       ],
-      "curationNote": "Single source (Vicky Pham, opened through WebFetch): 5 cups stock, crab, quail eggs, asparagus, tapioca thickening. Broth points at the chicken phở base."
+      "curationNote": "Vicky Pham, Súp Măng Cua for every amount and step; serves 5: 5 cups stock, 1/2 cup lump crab, 10 quail eggs, 2 egg whites or whole eggs, 12 oz asparagus, 3 tbsp tapioca with 4 tbsp water, salt to taste (1 tsp for about 1 L of plain broth), optional mushrooms, cilantro or green onion, white pepper, sesame oil; no chicken, fish sauce or sugar."
     },
     {
       "id": "curated_vn_canh_kho_qua_nhoi_thit",
@@ -5188,7 +5325,7 @@
         {
           "category": "Veg",
           "baseName": "Balsam-Pear (Bitter Gourd, Bitter Melon) Pods",
-          "quantity": 4,
+          "quantity": 6,
           "unit": "each",
           "cutPrep": "cut in 5 cm rings and seeded",
           "cookingMethod": "Simmered",
@@ -5197,7 +5334,7 @@
         {
           "category": "Meat",
           "baseName": "Ground Pork (Raw)",
-          "quantity": 450,
+          "quantity": 680,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Simmered",
@@ -5222,18 +5359,9 @@
           "prepNote": null
         },
         {
-          "category": "Veg",
-          "baseName": "Shallot",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "minced",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 2,
+          "quantity": 0.75,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -5242,7 +5370,7 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 1,
+          "quantity": 3,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -5251,7 +5379,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, pepper, black",
-          "quantity": 0.5,
+          "quantity": 1.5,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -5260,8 +5388,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 9,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -5283,14 +5411,23 @@
           "cutPrep": "chopped",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 160,
+          "unit": "g",
+          "cutPrep": "finely chopped",
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Mix the pork, wood ear, glass noodles, shallot, 1 tbsp fish sauce, sugar and pepper.",
-        "Pack the filling firmly into the bitter melon rings.",
-        "Bring the broth to a boil, lower in the stuffed rings and any leftover filling as small balls, and skim.",
-        "Simmer gently 30 to 40 minutes, until the melon is soft and paler green.",
-        "Season with the rest of the fish sauce and salt and finish with scallion, cilantro and pepper."
+        "Mix the pork, wood ear, glass noodles, onion, fish sauce, sugar, salt and pepper.",
+        "Slit or split the bitter melons, scoop out the seeds and pack them firmly with the filling.",
+        "Bring the broth to a boil, lower in the stuffed melons and skim.",
+        "Simmer gently 20 to 30 minutes, until the melon is fork tender, then taste the broth and thin it with a little hot water if it is too strong.",
+        "Cut the melons into pieces and serve in the broth with scallion and cilantro."
       ],
       "nutritionHighlights": [
         {
@@ -5308,7 +5445,7 @@
           "url": "https://www.hungryhuy.com/bitter-melon-soup-canh-kho-qua/"
         }
       ],
-      "curationNote": "Single source (Hungry Huy): 4 bitter melons, 1 lb pork, wood ear and glass noodles. His broth amount is low, so the base portion follows the usual six bowls."
+      "curationNote": "Hungry Huy, Canh Khổ Qua for every amount and step; serves 4, scaled to our 6: 4 bitter melons, 1 lb pork, 1 medium onion (2/3 cup), 1/2 cup wood ear, 1 pack mung bean noodles, 2 tsp sugar, 1 tsp salt, 1 tsp pepper, 1/2 tbsp fish sauce; 3 cups light broth plus 4.5 cups water; cilantro and green onion."
     },
     {
       "id": "curated_vn_lau_ca",
@@ -5319,62 +5456,42 @@
       "servings": 6,
       "servingSizeAmount": 1,
       "servingSizeUnit": "bowl",
-      "flavorProfile": "A tamarind sour broth kept bubbling at the table, with fish, prawns, tomato, pineapple and greens cooked in it a little at a time and eaten over rice noodles.",
-      "healthBenefit": "Fish and prawns bring protein and the greens, tomato and pineapple add vitamin C and fibre; a shared meal heavy on vegetables.",
+      "flavorProfile": "A tamarind and pineapple sour broth kept bubbling at the table, with fish, tomato, mushrooms and greens cooked in it a little at a time and eaten over rice noodles.",
+      "healthBenefit": "Fish brings protein and the greens, tomato and pineapple add vitamin C and fibre; a shared meal heavy on vegetables.",
       "overallTier": "strong",
-      "components": [
-        {
-          "recipeId": "curated_vn_base_nuoc_dung_xuong_heo",
-          "servings": 10,
-          "note": "about 10 cups of broth, topped up through the meal"
-        },
-        {
-          "recipeId": "curated_vn_base_nuoc_mam_gung",
-          "servings": 6,
-          "note": "ginger fish sauce for dipping the fish"
-        }
-      ],
+      "components": [],
       "ingredients": [
         {
           "category": "Meat",
           "baseName": "Catfish",
           "quantity": 700,
           "unit": "g",
-          "cutPrep": "cut in thick pieces",
+          "cutPrep": "in pieces; the source uses snakehead (cá lóc), which is in neither database, so catfish stands in",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Meat",
-          "baseName": "Shrimp Crustaceans",
-          "quantity": 300,
-          "unit": "g",
-          "cutPrep": "shell on",
-          "cookingMethod": "Simmered",
           "prepNote": null
         },
         {
           "category": "Fruit",
           "baseName": "Tamarind",
-          "quantity": 20,
+          "quantity": 50,
           "unit": "g",
-          "cutPrep": "pulp soaked in hot water and strained",
+          "cutPrep": "soaked in hot water and strained for its sour liquid",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 4,
+          "quantity": 2,
           "unit": "tbsp",
-          "cutPrep": null,
+          "cutPrep": "in the broth",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 3,
+          "quantity": 1,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -5383,7 +5500,7 @@
         {
           "category": "Veg",
           "baseName": "Tomato",
-          "quantity": 3,
+          "quantity": 4,
           "unit": "each",
           "cutPrep": "cut in wedges",
           "cookingMethod": "Simmered",
@@ -5392,16 +5509,16 @@
         {
           "category": "Fruit",
           "baseName": "Pineapple",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": "cut in pieces",
+          "quantity": 1,
+          "unit": "each",
+          "cutPrep": "medium; half blended, half sliced",
           "cookingMethod": "Simmered",
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Okra",
-          "quantity": 8,
+          "quantity": 6,
           "unit": "each",
           "cutPrep": "sliced",
           "cookingMethod": null,
@@ -5410,7 +5527,7 @@
         {
           "category": "Sprouts",
           "baseName": "Mung Bean Sprouts (Raw)",
-          "quantity": 150,
+          "quantity": 300,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -5419,7 +5536,7 @@
         {
           "category": "Veg",
           "baseName": "Swamp cabbage (skunk cabbage, water convulvolus)",
-          "quantity": 300,
+          "quantity": 200,
           "unit": "g",
           "cutPrep": "cut in lengths",
           "cookingMethod": "Simmered",
@@ -5427,26 +5544,17 @@
         },
         {
           "category": "Veg",
-          "baseName": "Cabbage, napa",
-          "quantity": 300,
-          "unit": "g",
-          "cutPrep": "cut in pieces",
-          "cookingMethod": "Simmered",
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 4,
-          "unit": "each",
-          "cutPrep": "cloves, minced",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": "minced",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Fats",
           "baseName": "Rapsolja",
-          "quantity": 1,
+          "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -5457,7 +5565,7 @@
           "baseName": "Pasta, rice noodles, dry",
           "quantity": 300,
           "unit": "g",
-          "cutPrep": null,
+          "cutPrep": "cooked; the source says bún or rice without an amount",
           "cookingMethod": "Boiled",
           "prepNote": "cooked as bún"
         },
@@ -5467,30 +5575,93 @@
           "contains": "none",
           "quantity": 5,
           "unit": "g",
-          "cutPrep": null,
+          "cutPrep": "chopped",
           "prepNote": null
         },
         {
           "category": "Veg",
-          "baseName": "Pepper, hot chili, red or green",
+          "baseName": "Taro shoots",
           "quantity": 2,
-          "unit": "g",
-          "cutPrep": "sliced",
+          "unit": "each",
+          "cutPrep": "bạc hà stalks, peeled and sliced",
           "cookingMethod": null,
-          "prepNote": "2 bird's eye chilies"
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Mushrooms, straw, canned, drained",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "rice paddy herb (ngò om)",
+          "contains": "none",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "chopped",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Basil",
+          "quantity": 5,
+          "unit": "g",
+          "cutPrep": "Thai basil (rau quế), chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Monosodium glutamate",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": "a pinch",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 1500,
+          "unit": "ml",
+          "cutPrep": "or bone broth",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 6,
+          "unit": "tbsp",
+          "cutPrep": "plain, for dipping",
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Fry the garlic in the oil until golden, add the tomatoes and cook 2 to 3 minutes.",
-        "Add the broth and tamarind liquid, bring to a boil, and season with the fish sauce and sugar to a clear sour sweet.",
-        "Add the pineapple and set the pot on a burner at the table at a gentle boil.",
-        "Cook the fish and shrimp in the broth a few pieces at a time, 3 to 5 minutes, adding the okra, greens and bean sprouts as you go.",
-        "Ladle over bowls of bún with herbs and chili, dipping the fish in ginger fish sauce, and top the pot up with broth as it reduces."
+        "Rinse the fish and cut it in pieces. Strain the tamarind for its sour liquid. Blend half the pineapple and slice the rest. Clean the vegetables and chop the herbs.",
+        "Fry the garlic in the oil until fragrant and set it aside in a bowl.",
+        "Bring the water, tamarind liquid and blended pineapple to a boil in the pot. Add the sliced pineapple and a few tomato wedges and boil again, then season with the salt, sugar, MSG and fish sauce.",
+        "Cook the fish in the broth until done and lift it out. Add half the herbs and the fried garlic to the broth, set the fish on a plate and scatter the rest of the herbs over with the remaining tomato and pineapple.",
+        "At the table, bring the broth back to a boil, warm the fish in it and cook the okra, bạc hà, water spinach, mushrooms and bean sprouts as you go. Eat with the noodles and plain fish sauce for dipping."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Protein",
-          "note": "From the fish and shrimp."
+          "note": "From the fish."
         },
         {
           "nutrient": "Vitamin C",
@@ -5499,19 +5670,11 @@
       ],
       "citations": [
         {
-          "source": "Hungry Huy, Hot Pot at Home",
-          "url": "https://www.hungryhuy.com/hot-pot-at-home/"
-        },
-        {
-          "source": "Wikipedia, Hot pot",
-          "url": "https://en.wikipedia.org/wiki/Hot_pot"
-        },
-        {
-          "source": "Wikipedia, Canh chua",
-          "url": "https://en.wikipedia.org/wiki/Canh_chua"
+          "source": "Cookpad Vietnam, Lẩu Canh Chua Cá Lóc",
+          "url": "https://cookpad.com/vn/cong-thuc/882764"
         }
       ],
-      "curationNote": "Written mostly from description: Hungry Huy's hot pot setup, with the sour broth of canh chua (Vicky Pham and Wikipedia) as the southern lẩu canh chua cá. Amounts scaled for 6 at the table."
+      "curationNote": "Cookpad Vietnam, Lẩu Canh Chua Cá Lóc for every amount and step; servings not stated; one fish of 700 g to just over 1 kg, taken as our 6. 50 g tamarind, 1 medium pineapple (half blended into the broth), 4 or 5 tomatoes, 6 or more okra, 300 g bean sprouts, 2 stalks bạc hà, 200 g water spinach, 100 g straw mushrooms, ngò gai, ngò om and rau quế unmeasured, 1 tbsp minced garlic, sugar 1 giá nhỏ (unclear), 2 tbsp fish sauce, salt a pinch, 1/4 tsp MSG, 2 tbsp oil, 1.5 litres water or bone broth; plain fish sauce to dip; bún or rice."
     },
     {
       "id": "curated_vn_canh_bau_tom",
@@ -5522,7 +5685,7 @@
       "servings": 4,
       "servingSizeAmount": 1,
       "servingSizeUnit": "bowl",
-      "flavorProfile": "Soft, sweet slivers of bottle gourd in a clear broth sweetened by dried and fresh shrimp, mild and summery.",
+      "flavorProfile": "Soft, sweet slivers of bottle gourd in a clear broth sweetened by dried shrimp fried with garlic, mild and summery.",
       "healthBenefit": "The gourd is light and watery with a little vitamin C, and the shrimp add protein and calcium; a simple, low-fat soup.",
       "overallTier": "strong",
       "components": [
@@ -5545,35 +5708,17 @@
         {
           "category": "Meat",
           "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
-          "quantity": 15,
+          "quantity": 60,
           "unit": "g",
           "cutPrep": "soaked 10 minutes and drained",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Meat",
-          "baseName": "Shrimp Crustaceans",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "peeled and roughly chopped",
-          "cookingMethod": "Simmered",
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Shallot",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "minced",
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "(1/2 cup) soaked 5 minutes, rinsed and drained"
         },
         {
           "category": "Fats",
           "baseName": "Rapsolja",
           "quantity": 1,
-          "unit": "tsp",
+          "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -5581,7 +5726,7 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 1200,
+          "quantity": 960,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -5590,8 +5735,8 @@
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1,
-          "unit": "tbsp",
+          "quantity": 2,
+          "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -5599,8 +5744,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -5617,23 +5762,42 @@
         {
           "category": "Herbs",
           "baseName": "Spices, pepper, black",
-          "quantity": 0.25,
+          "quantity": 0.125,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "cloves, minced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "optional"
         }
       ],
       "instructions": [
-        "Fry the shallot in the oil 1 minute, add the dried and fresh shrimp and stir 1 to 2 minutes.",
-        "Pour in the water and bring to a boil, simmering 5 minutes for the dried shrimp to flavour it.",
-        "Add the gourd and simmer 5 to 7 minutes, until soft and translucent.",
-        "Season with fish sauce and salt, finish with scallion and pepper, and serve with rice."
+        "Fry the dried shrimp and garlic in the oil about 3 minutes, until fragrant.",
+        "Pour in the water and bring to a boil.",
+        "Add the gourd and cook about 7 minutes, until translucent.",
+        "Season with the salt, sugar and fish sauce, tasting as you go.",
+        "Finish with scallion and black pepper and serve with rice."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Protein",
-          "note": "From the fresh and dried shrimp."
+          "note": "From the dried shrimp."
         },
         {
           "nutrient": "Calcium",
@@ -5646,7 +5810,7 @@
           "url": "https://vickypham.com/blog/vietnamese-opo-squash-shrimp-soup-canh-bau-tom/"
         }
       ],
-      "curationNote": "Single source (Vicky Pham, opened through WebFetch): 1 lb opo squash with dried shrimp. Bottle gourd matched to white-flowered gourd (calabash)."
+      "curationNote": "Vicky Pham, Canh Bầu Tôm for every amount and step; serves 4: 1 lb opo squash, 1/2 cup dried shrimp (the author's correction in the comments; the card still says 1 cup), 1 tbsp oil, 3 garlic, 4 cups water, 1/2 tsp salt, 2 tsp fish sauce, 1/4 tsp sugar optional, 1 to 2 green onions, 1/8 tsp pepper; bouillon and MSG optional; no fresh shrimp or shallot."
     },
     {
       "id": "curated_vn_goi_ga_bap_cai",
@@ -5685,7 +5849,7 @@
         {
           "category": "Veg",
           "baseName": "Cabbage",
-          "quantity": 400,
+          "quantity": 250,
           "unit": "g",
           "cutPrep": "very finely shredded",
           "cookingMethod": null,
@@ -5702,10 +5866,10 @@
         },
         {
           "category": "Veg",
-          "baseName": "Onions, red onions, bulb",
-          "quantity": 0.5,
+          "baseName": "Onion",
+          "quantity": 1,
           "unit": "each",
-          "cutPrep": "thinly sliced and soaked in vinegar water",
+          "cutPrep": "very thinly sliced and soaked in cold water",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -5713,27 +5877,9 @@
           "notInDatabase": true,
           "name": "Vietnamese coriander (rau răm)",
           "contains": "none",
-          "quantity": 15,
+          "quantity": 50,
           "unit": "g",
           "cutPrep": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, spearmint, fresh",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "leaves",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "NutSeed",
-          "baseName": "Peanut",
-          "quantity": 40,
-          "unit": "g",
-          "cutPrep": "roasted and crushed",
-          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -5757,19 +5903,27 @@
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
-          "quantity": 1,
+          "quantity": 3,
           "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": "1 bird's eye chili"
+          "prepNote": "(3 bird's eye chilies)"
+        },
+        {
+          "notInDatabase": true,
+          "name": "makrut lime leaves",
+          "contains": "none",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": null,
+          "prepNote": "very finely shredded"
         }
       ],
       "instructions": [
-        "Poach the chicken breasts in simmering salted water 15 to 18 minutes, cool and shred by hand.",
-        "Soak the sliced onion in water with a splash of vinegar for 10 minutes and drain.",
-        "Toss the cabbage, carrot, onion and chicken with the lime juice, pepper and nước chấm.",
-        "Fold in the rau răm and mint just before serving.",
-        "Top with peanuts, fried shallots and chili."
+        "Poach the chicken breasts in simmering salted water 15 to 20 minutes, cool completely and shred by hand.",
+        "Soak the sliced onion in cold water 10 minutes and drain.",
+        "Toss the chicken with a few spoonfuls of nước chấm, the lime juice, pepper and lime leaves, then add the carrot, onion and cabbage with more nước chấm and toss again.",
+        "Fold in the rau răm just before serving and top with fried shallots, more pepper and chili."
       ],
       "nutritionHighlights": [
         {
@@ -5791,7 +5945,7 @@
           "url": "https://helenrecipes.com/recipe-chicken-salad-goi-ga-bap-cai/"
         }
       ],
-      "curationNote": "Single source (Helen's Recipes): 2 chicken breasts, cabbage, rau răm. Dressing points at the nước chấm base."
+      "curationNote": "Helen's Recipes, Gỏi Gà Bắp Cải for every amount and step; serves 4: 2 chicken breasts poached in salted water, 50 g rau răm, 1 carrot, 1/4 cabbage, 1 yellow onion, 1/4 cup fried shallots, dressing of 3 tbsp fish sauce, 2 tbsp sugar, 1 to 2 tbsp lime, garlic and chili, 3 lime leaves, pepper, 3 chilies; no mint or peanuts."
     },
     {
       "id": "curated_vn_goi_du_du",
@@ -5802,19 +5956,14 @@
       "servings": 6,
       "servingSizeAmount": 1,
       "servingSizeUnit": "plate",
-      "flavorProfile": "Crunchy strands of green papaya with chewy sweet beef jerky, Thai basil and peanuts in a sweet, sour and hot dressing, the Sài Gòn street snack.",
+      "flavorProfile": "Crunchy strands of green papaya with chewy sweet beef jerky and Thai basil in a sweet, sour and salty soy dressing with chile, the Sài Gòn street snack.",
       "healthBenefit": "Green papaya brings vitamin C and fibre and the herbs add freshness; the jerky makes it salty and sweet, so it is a snack portion.",
       "overallTier": "strong",
       "components": [
         {
-          "recipeId": "curated_vn_base_nuoc_cham",
-          "servings": 6,
-          "note": "about 6 tbsp to dress the salad"
-        },
-        {
           "recipeId": "curated_vn_base_bo_kho",
-          "servings": 2.833,
-          "note": "85 g, cut in strips"
+          "servings": 3.77,
+          "note": "about 113 g, cut in strips"
         }
       ],
       "ingredients": [
@@ -5830,45 +5979,36 @@
         {
           "category": "Herbs",
           "baseName": "Fresh Basil",
-          "quantity": 15,
-          "unit": "g",
-          "cutPrep": null,
+          "quantity": 4,
+          "unit": "tbsp",
+          "cutPrep": "Thai basil leaves, shredded",
           "cookingMethod": null,
           "prepNote": "in place of Thai basil leaves (húng quế), which the database does not hold"
         },
         {
-          "category": "NutSeed",
-          "baseName": "Peanut",
-          "quantity": 40,
-          "unit": "g",
-          "cutPrep": "roasted and crushed",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Herbs",
-          "baseName": "Distilled Vinegar (White)",
+          "baseName": "Vinegar, rice vinegar",
           "quantity": 1,
           "unit": "tbsp",
-          "cutPrep": null,
+          "cutPrep": "unseasoned",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
+          "quantity": 7,
+          "unit": "tsp",
+          "cutPrep": "1 tsp for the papaya, 2 tbsp for the dressing",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
+          "quantity": 1.5,
           "unit": "tsp",
-          "cutPrep": null,
+          "cutPrep": "for the papaya",
           "cookingMethod": null,
           "prepNote": "for salting the papaya"
         },
@@ -5877,16 +6017,35 @@
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 1,
           "unit": "g",
-          "cutPrep": "sliced",
+          "cutPrep": "Thai chile, finely chopped",
           "cookingMethod": null,
-          "prepNote": "1 bird's eye chili"
+          "prepNote": "1 bird's eye chili, about 1 g"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Soya sauce",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": "light",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "in place of dark soy sauce, which the database does not hold"
         }
       ],
       "instructions": [
-        "Toss the shredded papaya with the salt, leave 10 minutes, then rinse and squeeze dry.",
-        "Toss it with the vinegar and sugar and leave 10 minutes.",
-        "Drain, then toss with the nước chấm and most of the Thai basil.",
-        "Pile onto plates and top with the jerky, peanuts, the rest of the basil and chili."
+        "Stir the light and dark soy sauce, rice vinegar, 2 tbsp sugar and chile in a small bowl until the sugar dissolves, and set aside.",
+        "Peel and halve the papaya, scoop out the seeds and the white lining and shred it into long thin strands.",
+        "Put the shreds in a colander, add 1 tsp sugar and the salt and massage them a few minutes until limp but still firm. Rinse well under cold water.",
+        "Wring the papaya dry in a cloth towel, a batch at a time, then fluff it apart in a large bowl.",
+        "Just before serving, add the jerky and basil, pour on about three quarters of the dressing and toss. Serve the rest of the dressing on the side."
       ],
       "nutritionHighlights": [
         {
@@ -5904,7 +6063,7 @@
           "url": "https://www.vietworldkitchen.com/blog/2009/08/vietnamese-green-papaya-salad-with-beef-jerky-recipe-goi-du-du-bo-kho.html"
         }
       ],
-      "curationNote": "Andrea Nguyen's gỏi đu đủ bò khô, 2 lb papaya. Beef jerky is not in the database and is tagged meat."
+      "curationNote": "Viet World Kitchen, Green Papaya Salad with Beef Jerky (Gỏi Đu Đủ Bò Khô) for every amount and step; serves 4 to 6: 1 green papaya of about 2 lb, massaged with 1 tsp sugar and 1 1/2 tsp salt, rinsed and wrung dry; 4 oz beef jerky in strips; 1/4 cup shredded Thai basil; dressing of 2 tbsp light soy, 2 tbsp dark soy, 1 tbsp rice vinegar, 2 tbsp sugar, 1 to 2 chopped Thai chiles or 2 tsp Sriracha."
     },
     {
       "id": "curated_vn_nom_hoa_chuoi",
@@ -5935,7 +6094,7 @@
           "notInDatabase": true,
           "name": "banana blossom",
           "contains": "none",
-          "quantity": 500,
+          "quantity": 200,
           "unit": "g",
           "cutPrep": "outer bracts removed, finely shredded into lime water",
           "prepNote": null
@@ -5977,15 +6136,6 @@
           "prepNote": "in the water the sliced banana blossom waits in, poured away, not eaten"
         },
         {
-          "notInDatabase": true,
-          "name": "Vietnamese coriander (rau răm)",
-          "contains": "none",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": null,
-          "prepNote": null
-        },
-        {
           "category": "Herbs",
           "baseName": "Spices, spearmint, fresh",
           "quantity": 10,
@@ -6011,13 +6161,32 @@
           "cutPrep": "sliced",
           "cookingMethod": null,
           "prepNote": "1 bird's eye chili"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": "for the pork and shrimp"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for the pork and shrimp"
         }
       ],
       "instructions": [
         "Shred the banana blossom straight into water with lime juice so it does not darken, soak 15 minutes, then drain and squeeze dry.",
-        "Boil the pork 15 to 20 minutes and slice thinly; boil the shrimp 2 minutes, peel and halve.",
-        "Toss the blossom, carrot, pork and shrimp with the nước chấm.",
-        "Fold in the herbs and top with peanuts, fried shallots and chili."
+        "Season the pork and the shrimp separately with the shallot, pepper and a spoonful of the nước chấm.",
+        "Stir-fry the pork in a little of the oil from the fried shallots for about 3 minutes, then add the shrimp and cook over high heat until pink.",
+        "Toss the blossom, carrot, mint, pork and shrimp with the rest of the nước chấm.",
+        "Top with peanuts, fried shallots and chili."
       ],
       "nutritionHighlights": [
         {
@@ -6035,7 +6204,7 @@
           "url": "https://helenrecipes.com/nom-hoa-chuoi-banana-blossom-salad/"
         }
       ],
-      "curationNote": "Single source (Helen's Recipes). Banana blossom is not in the database, so its nutrients are not counted."
+      "curationNote": "Helen's Recipes, Nộm Hoa Chuối for every amount and step; serves 4: 200 g banana blossom, 100 g carrot, 200 g pork, 200 g shrimp, 1/2 cup mint, 10 g shallot and pepper for the proteins, which are stir-fried; dressing of garlic, chili, sugar, fish sauce and lime; fried shallot and peanuts; no rau răm."
     },
     {
       "id": "curated_vn_goi_ngo_sen",
@@ -6046,8 +6215,8 @@
       "servings": 6,
       "servingSizeAmount": 1,
       "servingSizeUnit": "plate",
-      "flavorProfile": "Crisp, pale lotus stems with shrimp, pork, carrot and herbs in a sweet and sour dressing, scooped up with prawn crackers at parties.",
-      "healthBenefit": "The shrimp and pork bring protein and the lotus stems and carrot add crunch and fibre; a festive salad.",
+      "flavorProfile": "Crisp, pale lotus stems with shrimp, carrot, cucumber and rau răm in a sweet and sour dressing, scooped up with prawn crackers at parties.",
+      "healthBenefit": "The shrimp brings protein and the lotus stems and carrot add crunch and fibre; a festive salad.",
       "overallTier": "strong",
       "components": [
         {
@@ -6070,18 +6239,9 @@
         {
           "category": "Meat",
           "baseName": "Shrimp Crustaceans",
-          "quantity": 450,
+          "quantity": 545,
           "unit": "g",
           "cutPrep": "boiled, peeled and halved lengthwise",
-          "cookingMethod": "Boiled",
-          "prepNote": null
-        },
-        {
-          "category": "Meat",
-          "baseName": "Pork Loin (Raw)",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": "boiled and thinly sliced",
           "cookingMethod": "Boiled",
           "prepNote": null
         },
@@ -6113,15 +6273,6 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Spices, spearmint, fresh",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "leaves",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "NutSeed",
           "baseName": "Peanut",
           "quantity": 40,
@@ -6142,14 +6293,14 @@
       ],
       "instructions": [
         "Rinse and drain the lotus stems and squeeze gently.",
-        "Boil the shrimp 2 minutes and the pork 15 to 20 minutes, then slice.",
-        "Toss the lotus stems, carrot, cucumber, shrimp and pork with the nước chấm and leave 5 minutes.",
-        "Fold in the herbs and top with peanuts, fried shallots and chili. Serve with prawn crackers if you like."
+        "Boil the shrimp 2 to 3 minutes, until pink, and halve them lengthwise.",
+        "Toss the lotus stems, carrot, cucumber, shrimp and rau răm with the nước chấm.",
+        "Top with peanuts, fried shallots and chili. Serve with prawn crackers if you like."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Protein",
-          "note": "From the shrimp and pork."
+          "note": "From the shrimp."
         },
         {
           "nutrient": "Vitamin A",
@@ -6162,7 +6313,7 @@
           "url": "https://vickypham.com/blog/lotus-root-shrimp-salad/"
         }
       ],
-      "curationNote": "Single source (Vicky Pham, opened through WebFetch): 16 oz lotus stems, 1 lb shrimp. Lotus stems are not in the database."
+      "curationNote": "Vicky Pham, Lotus Root Shrimp Salad for every amount and step; serves 5, scaled to our 6: 16 oz lotus in brine, 1 lb shrimp, a handful of rau răm, 1/4 cup peanuts, 1/4 cup fried shallots, red onion; dressing of fish sauce, lime, sugar, garlic and chili; carrot or cucumber mentioned as options; no pork or mint."
     },
     {
       "id": "curated_vn_rau_muong_xao_toi",
@@ -6184,14 +6335,14 @@
           "baseName": "Swamp cabbage (skunk cabbage, water convulvolus)",
           "quantity": 1360,
           "unit": "g",
-          "cutPrep": "cut in 10 cm lengths, stems split",
+          "cutPrep": "cut in 12 cm lengths, shoots and leaves kept apart",
           "cookingMethod": "Sauteed",
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 8,
+          "quantity": 6,
           "unit": "each",
           "cutPrep": "cloves, minced",
           "cookingMethod": null,
@@ -6209,17 +6360,8 @@
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, oyster sauce",
-          "quantity": 2,
+          "quantity": 3,
           "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1,
-          "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -6227,28 +6369,28 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 1,
+          "quantity": 3,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
         {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 2,
-          "unit": "tbsp",
-          "cutPrep": null,
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "for the blanching water",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Wash the water spinach and blanch it 30 seconds in boiling water, then drain well.",
-        "Heat the oil in a wok over high heat and fry half the garlic 30 seconds.",
-        "Add the greens and toss 1 to 2 minutes.",
-        "Add the oyster sauce, fish sauce, sugar and water and toss 1 minute more.",
-        "Stir in the rest of the garlic and serve right away."
+        "Trim the rough ends, cut the water spinach into lengths and keep the shoots and leaves apart.",
+        "Bring a wok half full of water to the boil with the salt. Blanch the shoots no more than 1 minute and the leaves no more than 30 seconds, cool them in iced water and drain well.",
+        "Mix the oyster sauce and sugar in a small bowl.",
+        "Dry the wok, heat the oil and fry the garlic until fragrant.",
+        "Add the water spinach and the oyster sauce mixture and toss lightly until coated. Serve right away with rice."
       ],
       "nutritionHighlights": [
         {
@@ -6266,11 +6408,11 @@
       ],
       "citations": [
         {
-          "source": "Vicky Pham, Rau Muống Xào Tỏi",
+          "source": "Vicky Pham, Stir-Fried Water Spinach with Beef (Rau Muống Xào Thịt Bò)",
           "url": "https://vickypham.com/blog/stir-fry-water-spinach-morning-glory-garlic-rau-muong-xao-toi/"
         }
       ],
-      "curationNote": "Single source (Vicky Pham, opened through WebFetch): 3 lb water spinach, oyster sauce."
+      "curationNote": "Vicky Pham, Stir-Fried Water Spinach with Beef (Rau Muống Xào Thịt Bò), garlic-only version for every amount and step; the page says the beef can be left out for a garlic and oyster sauce version; the water spinach part is 3 lb water spinach, 1 tsp salt in the blanching water, oil, 6 garlic cloves, 3 tbsp oyster sauce, 3 tsp sugar; blanched shoots 1 minute, leaves 30 seconds, iced; the final toss uses 2 tbsp oil."
     },
     {
       "id": "curated_vn_ca_tim_nuong_mo_hanh",
@@ -6282,20 +6424,10 @@
       "servings": 4,
       "servingSizeAmount": 1,
       "servingSizeUnit": "plate",
-      "flavorProfile": "Smoky, soft grilled eggplant split open and covered with warm scallion oil, fried shallots and nước chấm.",
+      "flavorProfile": "Smoky, soft grilled eggplant pulled into strips and covered with a sweet garlic and chili fish sauce, hot scallion oil, fried shallots and peanuts.",
       "healthBenefit": "Eggplant brings fibre and the scallion oil adds flavor; a light vegetable side.",
       "overallTier": "strong",
       "components": [
-        {
-          "recipeId": "curated_vn_base_mo_hanh",
-          "servings": 4,
-          "note": "about 4 tbsp of scallion oil"
-        },
-        {
-          "recipeId": "curated_vn_base_nuoc_cham",
-          "servings": 4,
-          "note": "about 4 tbsp to spoon over"
-        },
         {
           "recipeId": "curated_vn_base_hanh_phi",
           "servings": 1,
@@ -6308,7 +6440,7 @@
           "baseName": "Eggplant",
           "quantity": 450,
           "unit": "g",
-          "cutPrep": "long Asian eggplants",
+          "cutPrep": "3 long Asian eggplants",
           "cookingMethod": "Grilled",
           "prepNote": "3 long Asian eggplants"
         },
@@ -6326,16 +6458,61 @@
           "baseName": "Pepper, hot chili, red or green",
           "quantity": 1,
           "unit": "g",
-          "cutPrep": "sliced",
+          "cutPrep": "1 small chili, crushed",
           "cookingMethod": null,
-          "prepNote": "1 bird's eye chili"
+          "prepNote": "1 bird's eye chili, about 1 g"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 7,
+          "unit": "tsp",
+          "cutPrep": "2 tbsp for the fish sauce, 1 tsp crushed with the garlic",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "cloves, crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Onions, spring or scallions (includes tops and bulb)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "1 bunch, chopped",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Grill the eggplants whole over hot coals or a gas flame 10 to 15 minutes, turning, until the skin is black and the flesh collapses.",
-        "Rest 5 minutes, then peel off the skin and split the flesh into strips.",
-        "Spoon the scallion oil over the warm eggplant.",
-        "Finish with nước chấm, fried shallots, peanuts and chili."
+        "Prick the eggplants all over and grill them whole over charcoal or a gas flame 15 to 20 minutes, turning often, until the skin is charred and a toothpick goes in easily. Peel off the skin.",
+        "Crush the garlic, chili and 1 tsp sugar in a mortar. Stir the remaining 2 tbsp sugar into the fish sauce until dissolved, then add the crushed garlic and chili.",
+        "Heat the oil until it smokes and pour it over the chopped green onion.",
+        "Pick off any black bits, pull the eggplant flesh into thin strips with a fork and lay it on a plate. Spoon the sauce over, top with the scallion oil and scatter with fried shallots and peanuts."
       ],
       "nutritionHighlights": [
         {
@@ -6349,7 +6526,7 @@
           "url": "https://helenrecipes.com/recipe-grilled-eggplant-ca-tim-nuong-mo-hanh/"
         }
       ],
-      "curationNote": "Single source (Helen's Recipes): 3 eggplants with mỡ hành, which points at the scallion oil base."
+      "curationNote": "Helen's Recipes, Cà Tím Nướng Mỡ Hành for every amount and step; 3 eggplants grilled 15 to 20 minutes; sauce of 2 to 3 garlic cloves, 1 small chili and 1 tsp sugar crushed, stirred into 3 tbsp fish sauce with 2 tbsp sugar; scallion oil of 1 bunch green onion and 2 to 3 tbsp smoking hot oil; fried shallots and peanuts optional with no amounts."
     },
     {
       "id": "curated_vn_rau_cu_luoc_cham_kho_quet",
@@ -6379,18 +6556,18 @@
       "ingredients": [
         {
           "category": "Veg",
-          "baseName": "Cabbage",
-          "quantity": 300,
+          "baseName": "Cauliflower",
+          "quantity": 400,
           "unit": "g",
-          "cutPrep": "cut in wedges",
+          "cutPrep": "cut in florets",
           "cookingMethod": "Boiled",
-          "prepNote": null
+          "prepNote": "1 small head"
         },
         {
           "category": "Veg",
           "baseName": "Okra",
-          "quantity": 10,
-          "unit": "each",
+          "quantity": 200,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Boiled",
           "prepNote": null
@@ -6406,15 +6583,6 @@
         },
         {
           "category": "Veg",
-          "baseName": "Green beans",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": "Boiled",
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
           "baseName": "Squash, zucchini",
           "quantity": 1,
           "unit": "each",
@@ -6425,7 +6593,7 @@
         {
           "category": "Meat",
           "baseName": "Pork Back Fat (Raw)",
-          "quantity": 50,
+          "quantity": 25,
           "unit": "g",
           "cutPrep": "diced small",
           "cookingMethod": "Fried",
@@ -6443,16 +6611,16 @@
         {
           "category": "Veg",
           "baseName": "Shallot",
-          "quantity": 2,
+          "quantity": 1,
           "unit": "each",
-          "cutPrep": "minced",
+          "cutPrep": "thinly sliced",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 4,
+          "quantity": 3,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -6468,39 +6636,48 @@
           "prepNote": null
         },
         {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 4,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Herbs",
           "baseName": "Spices, pepper, black",
-          "quantity": 1,
+          "quantity": 0.5,
           "unit": "tsp",
           "cutPrep": "coarsely ground",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "some in the dip, some over the top"
         },
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
-          "quantity": 1,
+          "quantity": 3,
           "unit": "g",
           "cutPrep": "minced",
           "cookingMethod": null,
-          "prepNote": "1 bird's eye chili"
+          "prepNote": "(3 bird's eye chilies)"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "smashed",
+          "cookingMethod": null,
+          "prepNote": "small cloves"
+        },
+        {
+          "category": "Meat",
+          "baseName": "Pork Loin (Raw)",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Render the diced pork fat in a small clay pot or pan over medium heat 8 to 10 minutes until crisp, then lift out the cracklings.",
-        "Fry the shallot and dried shrimp in the fat 2 minutes.",
-        "Add the fish sauce, sugar, water and caramel and simmer over low heat 8 to 10 minutes, until thick and sticky.",
-        "Stir back in the cracklings with the pepper and chili.",
-        "Boil the vegetables one kind at a time 2 to 5 minutes until just tender, and serve them with the warm dip and rice."
+        "Stir the fish sauce and sugar together until the sugar dissolves.",
+        "Render the diced pork fat in a small clay pot or heavy pan over medium-high heat until crisp, then lift out the cracklings.",
+        "Fry the shallot and garlic in the fat until fragrant, then add the dried shrimp and pork and stir-fry until the pork is no longer pink.",
+        "Add the fish sauce mixture, the chilies and most of the pepper, and simmer uncovered over medium-low heat about 20 minutes, until thick and caramelized. Top with the cracklings and the rest of the pepper.",
+        "Boil the okra 4 to 5 minutes and blanch the cauliflower, carrot and zucchini 1 to 2 minutes each. Serve them around the pot with rice."
       ],
       "nutritionHighlights": [
         {
@@ -6518,7 +6695,7 @@
           "url": "https://helenrecipes.com/recipe-vegetable-dip-with-caramelized-fish-sauce-mam-kho-quet/"
         }
       ],
-      "curationNote": "Single source (Helen's Recipes) for the kho quẹt; the vegetable mix is a usual home choice."
+      "curationNote": "Helen's Recipes, Mắm Kho Quẹt for every amount and step; serves 4: 3 tbsp fish sauce, 3 tbsp sugar, optional stock, 2 tbsp diced pork fat, 1 shallot, 3 garlic, 3 tbsp dried shrimp, 30 g lean pork, 3 to 4 bird's eye chilies, pepper to taste; no water or caramel; vegetables: 1 small cauliflower or broccoli, 1 daikon, carrot or bitter melon, 1 opo squash or zucchini, 200 g okra."
     },
     {
       "id": "curated_vn_dau_que_xao_toi",
@@ -6530,7 +6707,7 @@
       "servings": 3,
       "servingSizeAmount": 1,
       "servingSizeUnit": "plate",
-      "flavorProfile": "Snappy green beans blistered in a hot wok with plenty of garlic and a touch of oyster sauce.",
+      "flavorProfile": "Snappy green beans, blanched and then tossed in olive oil with plenty of fried garlic, salt and pepper.",
       "healthBenefit": "Green beans bring fibre, vitamin C and vitamin K; a quick, light vegetable side.",
       "overallTier": "strong",
       "components": [],
@@ -6547,7 +6724,7 @@
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 4,
+          "quantity": 6,
           "unit": "each",
           "cutPrep": "cloves, minced",
           "cookingMethod": null,
@@ -6555,7 +6732,7 @@
         },
         {
           "category": "Fats",
-          "baseName": "Rapsolja",
+          "baseName": "Olive oil",
           "quantity": 1,
           "unit": "tbsp",
           "cutPrep": null,
@@ -6564,46 +6741,28 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Seasoning sauce, oyster sauce",
-          "quantity": 1,
-          "unit": "tbsp",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 0.5,
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.125,
           "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 2,
-          "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Blanch the beans in boiling salted water 2 minutes and drain.",
-        "Heat the oil in a wok over high heat and fry the garlic 30 seconds.",
-        "Add the beans and toss 2 to 3 minutes, until blistered in spots.",
-        "Add the oyster sauce, fish sauce, sugar and water and toss 1 minute until glossy."
+        "Blanch the beans in boiling salted water about 3 minutes, until bright green but still firm, then rinse under cold water and drain.",
+        "Heat the oil over medium heat and fry the sliced garlic about 30 seconds, until fragrant.",
+        "Add the beans and toss about 2 minutes, until just tender.",
+        "Season with the salt and pepper and serve."
       ],
       "nutritionHighlights": [
         {
@@ -6621,7 +6780,7 @@
           "url": "https://www.hungryhuy.com/garlic-sauteed-green-beans/"
         }
       ],
-      "curationNote": "Single source (Hungry Huy): 1/2 lb green beans."
+      "curationNote": "Hungry Huy, Garlic Sautéed Green Beans for every amount and step; serves 3: 1/2 lb green beans blanched in salted water, 1 tbsp butter or olive oil, 6 garlic cloves, 1/4 tsp salt, 1/8 tsp pepper."
     },
     {
       "id": "curated_vn_bo_tai_chanh",
@@ -6669,51 +6828,24 @@
         {
           "category": "Veg",
           "baseName": "Onions, red onions, bulb",
-          "quantity": 1,
+          "quantity": 2,
           "unit": "each",
           "cutPrep": "thinly sliced",
           "cookingMethod": null,
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 1,
+          "quantity": 3,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Vietnamese coriander (rau răm)",
-          "contains": "none",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Spices, spearmint, fresh",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "leaves",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Coriander (cilantro) leaves",
           "quantity": 10,
           "unit": "g",
           "cutPrep": "leaves",
@@ -6732,18 +6864,72 @@
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red or green",
-          "quantity": 1,
+          "quantity": 2,
           "unit": "g",
           "cutPrep": "sliced",
           "cookingMethod": null,
-          "prepNote": "1 bird's eye chili"
+          "prepNote": "(2 bird's eye chilies)"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Distilled Vinegar (White)",
+          "quantity": 3,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": "1 knob"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "culantro (ngò gai)",
+          "contains": "none",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "leaves"
+        },
+        {
+          "notInDatabase": true,
+          "name": "rice paddy herb (ngò om)",
+          "contains": "none",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "sprigs"
         }
       ],
       "instructions": [
-        "Toss the sliced beef in the lime juice and leave 10 to 15 minutes, turning, until most of it turns pale.",
-        "Squeeze the beef firmly to press out the lime juice.",
-        "Toss it with the onion, fish sauce, sugar and nước chấm.",
-        "Fold in the herbs and top with peanuts, fried shallots and chili."
+        "Soak the sliced onion in ice water 10 minutes, drain, and toss with 2 tablespoons of the sugar and the vinegar.",
+        "Toss the sliced beef in the lime juice and leave 10 to 15 minutes, turning, until most of it turns pale. Squeeze the beef firmly to press out the juice.",
+        "Toss the beef with the garlic, the last tablespoon of sugar, the salt and pepper, then mix in the drained onion and the chili.",
+        "Fold in the mint, rice paddy herb and culantro, top with peanuts and fried shallots, and serve with nước chấm for dipping."
       ],
       "nutritionHighlights": [
         {
@@ -6765,7 +6951,7 @@
           "url": "https://helenrecipes.com/recipe-bo-tai-chanh-rare-beef-in-lime-juice-salad/"
         }
       ],
-      "curationNote": "Single source (Helen's Recipes): 500 g beef round, the juice of about 6 limes."
+      "curationNote": "Helen's Recipes, Bò Tái Chanh for every amount and step; serves 4 to 6: 500 g beef, 2 onions, 4 limes, 1 knob garlic, 2 chilies, 3 tbsp sugar, 3 tbsp vinegar, about 1/2 tsp each salt, pepper and stock powder, mint, rice paddy herb, sawtooth coriander, fried shallot, peanuts, fish sauce dip."
     },
     {
       "id": "curated_vn_dua_gia",
@@ -6776,8 +6962,8 @@
       "servings": 8,
       "servingSizeAmount": 0.5,
       "servingSizeUnit": "cup",
-      "flavorProfile": "Crunchy, sour bean sprouts with chives and carrot, fermented a day or two in brine, the bright side for thịt kho at Tết.",
-      "healthBenefit": "A lacto-fermented vegetable with vitamin C and fibre; it cuts the richness of braised pork, and the brine carries some salt.",
+      "flavorProfile": "Crunchy, sour bean sprouts with chives, carrot, chili and ginger, pickled a day or two in a sweet vinegar brine, the bright side for thịt kho at Tết.",
+      "healthBenefit": "A quick vinegar pickle with vitamin C and fibre; it cuts the richness of braised pork, and the brine carries sugar and some salt.",
       "overallTier": "strong",
       "components": [],
       "ingredients": [
@@ -6793,7 +6979,7 @@
         {
           "category": "Veg",
           "baseName": "Chinese Chive Leaves",
-          "quantity": 50,
+          "quantity": 100,
           "unit": "g",
           "cutPrep": "cut in 4 cm lengths",
           "cookingMethod": null,
@@ -6811,17 +6997,17 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 1000,
+          "quantity": 240,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "boiled and cooled"
+          "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1.5,
-          "unit": "tbsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -6829,8 +7015,8 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 1,
-          "unit": "tbsp",
+          "quantity": 100,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -6838,18 +7024,36 @@
         {
           "category": "Herbs",
           "baseName": "Distilled Vinegar (White)",
-          "quantity": 1,
-          "unit": "tbsp",
+          "quantity": 240,
+          "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "optional, to start the sourness"
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": "cut in fine strips",
+          "cookingMethod": null,
+          "prepNote": "2 red chilies"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Ginger root",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "cut in fine strips",
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Dissolve the salt and sugar in the boiled water and let it cool to warm.",
-        "Pack the bean sprouts, chives and carrot into a clean jar.",
-        "Pour the brine over with the vinegar and weigh the vegetables down under it.",
-        "Leave at room temperature 1 to 2 days, until pleasantly sour, then refrigerate and eat within a week."
+        "Stir the water, vinegar, sugar and salt together until dissolved.",
+        "Toss the bean sprouts, chives, carrot, chili and ginger in a large bowl, pour the brine over and leave 1 to 2 hours, until the sprouts wilt.",
+        "Pack into a clean jar, keeping the vegetables under the brine, and keep somewhere cool.",
+        "Eat after 1 to 2 days; it keeps 1 to 2 weeks in the fridge."
       ],
       "nutritionHighlights": [
         {
@@ -6867,7 +7071,7 @@
           "url": "https://helenrecipes.com/dua-gia-vietnamese-pickled-bean-sprouts-recipe/"
         }
       ],
-      "curationNote": "Single source (Helen's Recipes), 500 g sprouts, written as the fermented version."
+      "curationNote": "Helen's Recipes, Dưa Giá for every amount and step; serves 4 to 6: 500 g bean sprouts, 100 g garlic chives, 1 carrot, 2 red chilies, a thumb of ginger, 1 cup water, 1 cup white vinegar, 1/2 cup sugar, 1/2 tsp salt. Amounts kept as given for the same 500 g of sprouts."
     },
     {
       "id": "curated_vn_che_ba_mau",
@@ -6885,10 +7089,10 @@
       "ingredients": [
         {
           "category": "Legume",
-          "baseName": "Kidney, Dark Red Beans",
-          "quantity": 150,
+          "baseName": "Kidney beans, mature seeds, \"Koshi-an\" (strained sweet bean paste)",
+          "quantity": 712,
           "unit": "g",
-          "cutPrep": "soaked overnight",
+          "cutPrep": "canned sweetened red bean paste, 1 1/2 cans",
           "cookingMethod": "Simmered",
           "prepNote": "red beans, as in the south; adzuki also used"
         },
@@ -6897,41 +7101,32 @@
           "baseName": "Mung beans, mature seeds",
           "quantity": 150,
           "unit": "g",
-          "cutPrep": "split and peeled, soaked 2 hours",
+          "cutPrep": "split and peeled, soaked at least 4 hours",
           "cookingMethod": "Steamed",
           "prepNote": null
         },
         {
           "category": "PantryStaples",
           "baseName": "Seaweed, agar",
-          "quantity": 5,
-          "unit": "g",
-          "cutPrep": "powder",
+          "quantity": 1.5,
+          "unit": "tbsp",
+          "cutPrep": "100% agar powder",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "pandan leaves",
-          "contains": "none",
-          "quantity": 6,
-          "unit": "each",
-          "cutPrep": "knotted",
           "prepNote": null
         },
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": null,
+          "quantity": 12,
+          "unit": "tbsp",
+          "cutPrep": "4 1/2 tbsp for the mung beans, 4 1/2 tbsp for the jelly, 3 tbsp for the sauce",
           "cookingMethod": null,
           "prepNote": "divided between the beans, mung paste and jelly"
         },
         {
           "category": "NutSeed",
-          "baseName": "Coconut milk",
-          "quantity": 400,
+          "baseName": "Coconut cream",
+          "quantity": 300,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -6940,9 +7135,9 @@
         {
           "category": "Grain",
           "baseName": "Starch, cassava starch",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
+          "quantity": 0.75,
+          "unit": "tsp",
+          "cutPrep": "tapioca starch",
           "cookingMethod": null,
           "prepNote": "to thicken the coconut sauce"
         },
@@ -6958,19 +7153,27 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 1500,
+          "quantity": 990,
           "unit": "ml",
-          "cutPrep": null,
+          "cutPrep": "270 ml for the mung beans, 720 ml for the jelly",
           "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "pandan extract",
+          "contains": "none",
+          "quantity": 0.375,
+          "unit": "tsp",
+          "cutPrep": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Simmer the red beans in water 1 to 1.5 hours until soft, then stir in a third of the sugar and simmer 10 minutes more.",
-        "Steam the mung beans 20 to 25 minutes until soft, mash with a third of the sugar and a little water into a smooth paste.",
-        "Blend the pandan with 500 ml water and strain, bring it to a boil with the agar and the last of the sugar, pour into a tray, set, and cut in strips.",
-        "Warm the coconut milk with the salt and thicken with the starch slurry, then cool.",
-        "Layer beans, mung paste and jelly in tall glasses, top with crushed ice and coconut sauce, and stir before eating."
+        "Soak the mung beans at least 4 hours or overnight and drain. Cook them with 270 ml water in a rice cooker on the regular setting, or simmer about 40 minutes, until soft. Mash, stir in 4 1/2 tbsp sugar and chill.",
+        "Bring 720 ml water to a boil and dissolve the agar and 4 1/2 tbsp sugar in it. Lower the heat, stir in the pandan extract and pour into a glass dish. Cool, chill about 2 hours until firm and cut in strips.",
+        "Heat the coconut cream, 3 tbsp sugar and salt over medium heat, whisk in the starch and cook 1 to 2 minutes until it thickens like a thin pudding. Cool and chill.",
+        "In each tall glass layer shaved ice, red bean paste, mung beans, pandan jelly and more ice, and top with the coconut sauce. Stir before eating."
       ],
       "nutritionHighlights": [
         {
@@ -6992,7 +7195,7 @@
           "url": "https://www.hungryhuy.com/che-ba-mau/"
         }
       ],
-      "curationNote": "Single source (Hungry Huy). Red beans matched to dark red kidney beans, the southern choice."
+      "curationNote": "Hungry Huy, Chè Ba Màu for every amount and step; serves 4, scaled x1.5 to our 6: 1/2 cup split mung beans soaked, cooked in 3/4 cup water, mashed with 3 tbsp sugar; jelly of 1 tbsp agar powder, 2 cups water, 1/4 tsp pandan extract, 3 tbsp sugar; 1 can (16.75 oz) boiled red bean paste; sauce of 7 oz coconut cream, 2 tbsp sugar, 1/3 tsp salt, 1/2 tsp tapioca starch; 4 cups shaved ice."
     },
     {
       "id": "curated_vn_che_chuoi",
@@ -7003,8 +7206,8 @@
       "servings": 6,
       "servingSizeAmount": 1,
       "servingSizeUnit": "bowl",
-      "flavorProfile": "Soft, sweet banana chunks and chewy tapioca pearls in warm salty sweet coconut milk, scattered with toasted sesame and peanuts.",
-      "healthBenefit": "Bananas bring potassium and the coconut milk makes it rich; a warm sweet treat.",
+      "flavorProfile": "Soft, sweet banana chunks and chewy tapioca pearls in warm salty sweet coconut cream, scattered with toasted sesame and peanuts.",
+      "healthBenefit": "Bananas bring potassium and the coconut cream makes it rich; a warm sweet treat.",
       "overallTier": "strong",
       "components": [],
       "ingredients": [
@@ -7020,7 +7223,7 @@
         {
           "category": "Grain",
           "baseName": "Tapioca, pearl, dry",
-          "quantity": 60,
+          "quantity": 36,
           "unit": "g",
           "cutPrep": "small pearls, soaked 20 minutes",
           "cookingMethod": "Boiled",
@@ -7028,8 +7231,8 @@
         },
         {
           "category": "NutSeed",
-          "baseName": "Coconut milk",
-          "quantity": 400,
+          "baseName": "Coconut cream",
+          "quantity": 240,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7038,7 +7241,7 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 500,
+          "quantity": 575,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7047,8 +7250,120 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 80,
+          "quantity": 136,
           "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 5.4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1.8 g in the pudding, 3.6 g in the topping"
+        },
+        {
+          "notInDatabase": true,
+          "name": "pandan leaves",
+          "contains": "none",
+          "quantity": 5,
+          "unit": "each",
+          "cutPrep": "knotted",
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Sesame seed",
+          "quantity": 2.4,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": "Roasted",
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Peanut",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": "roasted and crushed",
+          "cookingMethod": null,
+          "prepNote": null
+        }
+      ],
+      "instructions": [
+        "Soak the tapioca pearls in warm water about 20 minutes and drain.",
+        "Slice the bananas, coat them with the sugar and chill at least 30 minutes.",
+        "Boil the water with the knotted pandan leaves and simmer about 20 minutes.",
+        "Add the bananas with their sugar, the coconut cream, tapioca and 1.8 g salt, and simmer 15 to 20 minutes until the bananas are soft.",
+        "Mix the peanuts and sesame with the remaining salt and sprinkle over each bowl, warm or chilled."
+      ],
+      "nutritionHighlights": [
+        {
+          "nutrient": "Potassium",
+          "note": "From the bananas."
+        },
+        {
+          "nutrient": "Saturated fat",
+          "note": "From the coconut cream."
+        }
+      ],
+      "citations": [
+        {
+          "source": "Hungry Huy, Chè Chuối",
+          "url": "https://www.hungryhuy.com/vietnamese-banana-coconut-tapioca-dessert-che-chuoi/"
+        }
+      ],
+      "curationNote": "Hungry Huy, Chè Chuối for every amount and step; serves 5, scaled to our 6: 1 lb bananas, 3 tbsp small tapioca, 4 oz sugar, 2 cups water, 4 pandan leaves, 1/2 can coconut cream, 1/4 tsp salt; topping of 2 tbsp peanuts, 2 tbsp sesame, 1/2 tsp salt."
+    },
+    {
+      "id": "curated_vn_che_dau_xanh",
+      "name": "Chè Đậu Xanh (Mung Bean Pudding)",
+      "builderType": "dessert",
+      "dishGroup": "Sweets & Drinks",
+      "region": "Northern / Hà Nội",
+      "servings": 6,
+      "servingSizeAmount": 1,
+      "servingSizeUnit": "bowl",
+      "flavorProfile": "Whole mung beans simmered soft with red dates, sweetened with sugar and finished with coconut milk and vanilla, eaten warm, chilled or over ice.",
+      "healthBenefit": "Mung beans bring plant protein, fibre and folate; it is sweetened, so it is a dessert portion.",
+      "overallTier": "strong",
+      "components": [],
+      "ingredients": [
+        {
+          "category": "Legume",
+          "baseName": "Mung beans, mature seeds",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "whole, unpeeled, rinsed until clear",
+          "cookingMethod": "Simmered",
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2130,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "yellow rock sugar",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "NutSeed",
+          "baseName": "Coconut milk",
+          "quantity": 240,
+          "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -7063,151 +7378,29 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "pandan leaves",
-          "contains": "none",
-          "quantity": 3,
-          "unit": "each",
-          "cutPrep": "knotted",
-          "prepNote": null
-        },
-        {
-          "category": "NutSeed",
-          "baseName": "Sesame seed",
-          "quantity": 1,
+          "category": "Fruit",
+          "baseName": "Jujube (chinese date)",
+          "quantity": 16,
           "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": "Roasted",
-          "prepNote": null
-        },
-        {
-          "category": "NutSeed",
-          "baseName": "Peanut",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": "roasted and crushed",
-          "cookingMethod": null,
-          "prepNote": null
-        }
-      ],
-      "instructions": [
-        "Toss the banana pieces with 1 tbsp of the sugar and a pinch of salt and leave 15 minutes.",
-        "Bring the water to a boil with the pandan, add the tapioca and simmer 8 to 10 minutes until clear.",
-        "Add the coconut milk, remaining sugar and salt and bring back to a gentle simmer.",
-        "Add the bananas and simmer 5 minutes, just until soft.",
-        "Serve warm, topped with sesame and peanuts."
-      ],
-      "nutritionHighlights": [
-        {
-          "nutrient": "Potassium",
-          "note": "From the bananas."
-        },
-        {
-          "nutrient": "Saturated fat",
-          "note": "From the coconut milk."
-        }
-      ],
-      "citations": [
-        {
-          "source": "Hungry Huy, Chè Chuối",
-          "url": "https://www.hungryhuy.com/vietnamese-banana-coconut-tapioca-dessert-che-chuoi/"
-        }
-      ],
-      "curationNote": "Single source (Hungry Huy)."
-    },
-    {
-      "id": "curated_vn_che_dau_xanh",
-      "name": "Chè Đậu Xanh (Mung Bean Pudding)",
-      "builderType": "dessert",
-      "dishGroup": "Sweets & Drinks",
-      "region": "Northern / Hà Nội",
-      "servings": 6,
-      "servingSizeAmount": 1,
-      "servingSizeUnit": "bowl",
-      "flavorProfile": "Soft split mung beans in a lightly thickened sweet syrup with pandan, topped with coconut milk, eaten warm or over ice.",
-      "healthBenefit": "Mung beans bring plant protein, fibre and folate; it is sweetened, so it is a dessert portion.",
-      "overallTier": "strong",
-      "components": [],
-      "ingredients": [
-        {
-          "category": "Legume",
-          "baseName": "Mung beans, mature seeds",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": "split and peeled, soaked 2 hours",
-          "cookingMethod": "Simmered",
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 1200,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 120,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Grain",
-          "baseName": "Starch, cassava starch",
-          "quantity": 2,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "mixed with 4 tbsp water"
-        },
-        {
-          "notInDatabase": true,
-          "name": "pandan leaves",
-          "contains": "none",
-          "quantity": 3,
-          "unit": "each",
-          "cutPrep": "knotted",
-          "prepNote": null
-        },
-        {
-          "category": "NutSeed",
-          "baseName": "Coconut milk",
-          "quantity": 200,
-          "unit": "ml",
-          "cutPrep": null,
+          "cutPrep": "dried red dates, snipped",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 0.25,
+          "baseName": "Vanilla extract",
+          "quantity": 1,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
-        },
-        {
-          "category": "NutSeed",
-          "baseName": "Sesame seed",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": "Roasted",
-          "prepNote": null
         }
       ],
       "instructions": [
-        "Simmer the mung beans in the water with the pandan 25 to 30 minutes, until soft but holding shape.",
-        "Stir in the sugar until dissolved.",
-        "Stir in the starch slurry and cook 2 to 3 minutes until it turns clear and lightly thick.",
-        "Warm the coconut milk with the salt.",
-        "Serve the chè warm or over ice with coconut milk and sesame on top."
+        "Rinse the mung beans until the water runs clear and drain. Snip the red dates.",
+        "Put the beans, dates and water in a pot, bring to a boil and skim the foam. Simmer partly covered about 40 minutes, until the beans smash easily but keep a little bite (20 to 25 minutes if soaked 4 hours first). Take out the dates.",
+        "Stir in the rock sugar, salt, vanilla and coconut milk and simmer on low 5 minutes.",
+        "Serve warm, chilled or over crushed ice."
       ],
       "nutritionHighlights": [
         {
@@ -7221,11 +7414,11 @@
       ],
       "citations": [
         {
-          "source": "Helen's Recipes, Chè Hoa Cau",
-          "url": "https://helenrecipes.com/recipe-25-che-hoa-cau-mung-bean-pudding/"
+          "source": "Vicky Pham, Chè Đậu Xanh (Vietnamese Mung Bean Dessert with Coconut Milk)",
+          "url": "https://vickypham.com/blog/che-dau-xanh-vietnamese-mung-bean-dessert-with-coconut-milk/"
         }
       ],
-      "curationNote": "Single source (Helen's Recipes, chè hoa cau, the northern mung bean chè)."
+      "curationNote": "Vicky Pham, Chè Đậu Xanh (Vietnamese Mung Bean Dessert with Coconut Milk) for every amount and step; serves 6: 1 cup whole green mung beans, 9 cups water, 1 cup dried red dates, 1/4 cup sago optional, 3.5 oz yellow rock sugar, 1/2 tsp salt, 1 tsp vanilla, 1 cup coconut milk."
     },
     {
       "id": "curated_vn_banh_flan",
@@ -7236,7 +7429,7 @@
       "servings": 8,
       "servingSizeAmount": 1,
       "servingSizeUnit": "each",
-      "flavorProfile": "Smooth, silky custard of eggs, coconut milk and condensed milk under a bitter dark caramel, often with a splash of black coffee over the top.",
+      "flavorProfile": "Smooth, silky custard of eggs, coconut cream, milk and condensed milk under a bitter dark caramel, often with a splash of black coffee over the top.",
       "healthBenefit": "Eggs bring protein, choline and vitamin B12; with condensed milk and caramel it is a rich, sweet treat.",
       "overallTier": "strong",
       "components": [],
@@ -7244,7 +7437,7 @@
         {
           "category": "Dairy",
           "baseName": "Chicken Egg (Raw)",
-          "quantity": 4,
+          "quantity": 3,
           "unit": "each",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7262,7 +7455,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Kondensert melk, søtet",
-          "quantity": 200,
+          "quantity": 180,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7270,8 +7463,8 @@
         },
         {
           "category": "NutSeed",
-          "baseName": "Coconut milk",
-          "quantity": 250,
+          "baseName": "Coconut cream",
+          "quantity": 200,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7280,7 +7473,7 @@
         {
           "category": "Dairy",
           "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
-          "quantity": 250,
+          "quantity": 400,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7289,7 +7482,7 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 80,
+          "quantity": 100,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7298,7 +7491,7 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 2,
+          "quantity": 1,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7312,11 +7505,29 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for the caramel"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 1,
+          "unit": "tbsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for the ramekins"
         }
       ],
       "instructions": [
-        "Cook the sugar and water over medium heat 5 to 8 minutes into a dark amber caramel and pour a thin layer into 8 ramekins.",
-        "Warm the coconut milk, milk and condensed milk until steaming, not boiling.",
+        "Butter 8 ramekins. Cook the sugar and water over medium heat 5 to 8 minutes into a dark amber caramel, stir in the lime juice and pour a thin layer into each ramekin.",
+        "Warm the coconut cream, milk and condensed milk until steaming, not boiling.",
         "Whisk the eggs and yolks gently without making foam, then slowly whisk in the warm milk and vanilla, and strain.",
         "Pour into the ramekins, cover each, and steam over gentle heat 20 to 25 minutes, or bake in a water bath at 325°F (160°C) for 35 to 40 minutes, until just set.",
         "Chill at least 4 hours, run a knife round and turn out. Serve with crushed ice and a little black coffee if you like."
@@ -7341,7 +7552,7 @@
           "url": "https://helenrecipes.com/recipe-coconut-flan-banh-flan-dua/"
         }
       ],
-      "curationNote": "Helen's coconut flan, with the condensed milk the southern version uses. Single source."
+      "curationNote": "Helen's Recipes, Bánh Flan Dừa for every amount and step; makes 10 small moulds; ours fills 8 ramekins with the same batch."
     },
     {
       "id": "curated_vn_banh_chuoi_nuong",
@@ -7352,49 +7563,25 @@
       "servings": 10,
       "servingSizeAmount": 1,
       "servingSizeUnit": "slice",
-      "flavorProfile": "A dense, moist, pudding-like cake of ripe bananas, soaked bread and coconut milk, caramelized on top and fragrant with vanilla.",
-      "healthBenefit": "Bananas bring potassium and the eggs and milk add protein; with sugar, butter and bread it is a sweet treat.",
+      "flavorProfile": "A dense, moist, pudding-like cake of ripe bananas and bread soaked in coconut milk and condensed milk, caramelized on top and served chilled.",
+      "healthBenefit": "Bananas bring potassium; with sugar, condensed milk, butter and bread it is a sweet treat.",
       "overallTier": "strong",
-      "components": [
-        {
-          "recipeId": "curated_vn_base_banh_mi",
-          "servings": 2,
-          "note": "day-old rolls, torn and soaked"
-        }
-      ],
+      "components": [],
       "ingredients": [
         {
           "category": "Fruit",
           "baseName": "Banana",
-          "quantity": 8,
-          "unit": "each",
-          "cutPrep": "very ripe, half mashed and half sliced",
+          "quantity": 700,
+          "unit": "g",
+          "cutPrep": "peeled and sliced",
           "cookingMethod": "Baked",
           "prepNote": null
         },
         {
           "category": "NutSeed",
           "baseName": "Coconut milk",
-          "quantity": 400,
+          "quantity": 335,
           "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Dairy",
-          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
-          "quantity": 200,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Dairy",
-          "baseName": "Chicken Egg (Raw)",
-          "quantity": 3,
-          "unit": "each",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -7402,8 +7589,8 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 120,
-          "unit": "g",
+          "quantity": 3.5,
+          "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -7411,37 +7598,47 @@
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 40,
-          "unit": "g",
+          "quantity": 3,
+          "unit": "tbsp",
           "cutPrep": "melted",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
-          "baseName": "Vanilla extract",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "g",
+          "cutPrep": "a pinch",
           "cookingMethod": null,
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "notInDatabase": true,
+          "name": "sweetened condensed milk",
+          "contains": "dairy",
+          "quantity": 3,
+          "unit": "tbsp",
           "cutPrep": null,
+          "prepNote": null
+        },
+        {
+          "category": "Baked",
+          "baseName": "Bread, white wheat",
+          "quantity": 8,
+          "unit": "each",
+          "cutPrep": "sandwich slices, crusts removed, torn small",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Tear the bread and soak it in the coconut milk and milk 20 to 30 minutes, then mash smooth.",
-        "Heat the oven to 350°F (180°C) and butter a 23 cm cake tin.",
-        "Mix in the mashed bananas, eggs, most of the sugar, melted butter, vanilla and salt.",
-        "Pour into the tin, lay the banana slices on top and sprinkle with the rest of the sugar.",
-        "Bake 60 to 75 minutes until set and deep golden, then cool fully before slicing."
+        "Toss the banana slices with the sugar and chill at least 30 minutes.",
+        "Dissolve the condensed milk and salt in the coconut milk.",
+        "Tear the bread small, soak it in the coconut milk mixture and leave 15 minutes.",
+        "Gently fold in two thirds of the bananas. Pour into a buttered baking tin, level the top and lay the remaining banana slices over it.",
+        "Bake at 350°F (175°C) with bottom heat only for 15 minutes, brush with the melted butter, then bake with top and bottom heat about 30 minutes more, until the bananas caramelise and the edges are golden.",
+        "Cool completely, then chill a few hours or overnight until set. Serve cold; it keeps 7 to 10 days in the fridge."
       ],
       "nutritionHighlights": [
         {
@@ -7459,7 +7656,7 @@
           "url": "https://helenrecipes.com/recipe-48-banh-chuoi-nuong-baked-banana-cakepudding/"
         }
       ],
-      "curationNote": "Single source (Helen's Recipes), the bread pudding style. The bread points at the bánh mì base."
+      "curationNote": "Helen's Recipes, Bánh Chuối Nướng for every amount and step; 6 to 8 slices, scaled from 7 to our 10 (x1.4): 500 g bananas, 2 to 3 tbsp sugar, 2 tbsp rum (optional), 2 tbsp sweetened condensed milk, a pinch of salt, 1 cup coconut milk, 6 slices crustless sandwich bread, 2 tbsp melted butter; 175°C bottom heat 15 minutes, brushed with butter, then 30 minutes top and bottom; chilled before serving."
     },
     {
       "id": "curated_vn_ca_phe_sua_da",
@@ -7487,7 +7684,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Kondensert melk, søtet",
-          "quantity": 30,
+          "quantity": 38,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7523,13 +7720,9 @@
         {
           "source": "Vicky Pham, Cà Phê Sữa Đá",
           "url": "https://vickypham.com/blog/vietnamese-iced-coffee-ca-phe-sua-da/"
-        },
-        {
-          "source": "Viet World Kitchen, Vietnamese Iced Coffee Tips",
-          "url": "https://www.vietworldkitchen.com/blog/2012/05/vietnamese-iced-coffee-tips-ca-phe-sua-da.html"
         }
       ],
-      "curationNote": "Vicky Pham and Andrea Nguyen compared: about 2 tbsp coffee to 2 tbsp condensed milk, phin dripped. Ice written as water."
+      "curationNote": "Vicky Pham, Cà Phê Sữa Đá for every amount and step; serves 1: 2 heaping tbsp ground coffee, 2 tbsp sweetened condensed milk, hot water, 1 cup ice."
     },
     {
       "id": "curated_vn_ca_phe_trung",
@@ -7548,7 +7741,7 @@
         {
           "category": "Dairy",
           "baseName": "Chicken Egg Yolk (Raw)",
-          "quantity": 1,
+          "quantity": 2,
           "unit": "each",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7557,17 +7750,8 @@
         {
           "category": "PantryStaples",
           "baseName": "Kondensert melk, søtet",
-          "quantity": 30,
+          "quantity": 37,
           "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 1,
-          "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -7575,27 +7759,18 @@
         {
           "category": "Brewing",
           "baseName": "Brewed Black Coffee",
-          "quantity": 60,
+          "quantity": 120,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "strong, hot, from a phin"
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Vanilla extract",
-          "quantity": 0.25,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "optional"
+          "prepNote": "(from 8 g ground coffee and 110 g hot water, dripped through a phin)"
         }
       ],
       "instructions": [
-        "Drip the coffee into a small cup set in a bowl of hot water to keep it warm.",
-        "Whisk the yolk with the condensed milk, sugar and vanilla 3 to 5 minutes, by hand or with a mixer, until pale, thick and doubled.",
-        "Spoon the foam over the hot coffee.",
-        "Eat the foam with a spoon, then drink the coffee through it."
+        "Warm the phin and cup with a little hot water and pour it off.",
+        "Put the coffee in the phin, wet it with a splash of hot water for 30 seconds, then add the rest and let it drip 2 to 3 minutes.",
+        "Whisk the yolks with the condensed milk about 3 minutes, until pale, thick and frothy.",
+        "Spoon the egg cream over the hot coffee and serve straight away."
       ],
       "nutritionHighlights": [
         {
@@ -7613,7 +7788,7 @@
           "url": "https://www.hungryhuy.com/vietnamese-egg-coffee/"
         }
       ],
-      "curationNote": "Single source (Hungry Huy). Born at Café Giảng in Hà Nội in the 1940s, as his page tells it."
+      "curationNote": "Hungry Huy, Vietnamese Egg Coffee for every amount and step; serves 1: 8 g coffee brewed with 110 g water, 2 pasteurized egg yolks, 37 g condensed milk; no sugar or vanilla."
     },
     {
       "id": "curated_vn_sinh_to_bo",
@@ -7641,7 +7816,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Kondensert melk, søtet",
-          "quantity": 60,
+          "quantity": 76,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7650,7 +7825,7 @@
         {
           "category": "Dairy",
           "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
-          "quantity": 120,
+          "quantity": 180,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7669,7 +7844,7 @@
       "instructions": [
         "Put the avocado, condensed milk, milk and ice in a blender.",
         "Blend 30 to 60 seconds until thick and smooth.",
-        "Taste and add a little more condensed milk or milk if needed.",
+        "Taste and add a little more milk if you want it thinner.",
         "Pour into glasses and serve right away."
       ],
       "nutritionHighlights": [
@@ -7692,7 +7867,7 @@
           "url": "https://www.vietworldkitchen.com/blog/2015/05/avocado-shake-recipe-sinh-to-bo.html"
         }
       ],
-      "curationNote": "Single source (Andrea Nguyen). Written as builderType smoothie since it is a blended fruit drink."
+      "curationNote": "Viet World Kitchen, Avocado Shake (Sinh Tố Bơ) for every amount and step; serves 1, doubled for our 2: 1/2 avocado, 1/2 cup ice, 2 generous tbsp condensed milk, about 1/3 cup (90 ml) milk, optional pinch of salt."
     },
     {
       "id": "curated_vn_banh_da_lon",
@@ -7711,7 +7886,7 @@
         {
           "category": "Grain",
           "baseName": "Starch, cassava starch",
-          "quantity": 300,
+          "quantity": 200,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7720,7 +7895,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Rice flour",
-          "quantity": 60,
+          "quantity": 50,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7757,15 +7932,15 @@
           "notInDatabase": true,
           "name": "pandan leaves",
           "contains": "none",
-          "quantity": 10,
+          "quantity": 5,
           "unit": "each",
-          "cutPrep": "blended with 250 ml water and strained",
+          "cutPrep": "blended with a little of the water and strained",
           "prepNote": null
         },
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 400,
+          "quantity": 300,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7774,11 +7949,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.4,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         },
         {
           "category": "Fats",
@@ -7813,7 +7988,7 @@
           "url": "https://helenrecipes.com/recipe-46-banh-da-lon-steamed-layer-cake/"
         }
       ],
-      "curationNote": "Single source (Helen's Recipes)."
+      "curationNote": "Helen's Recipes, Bánh Da Lợn for every amount and step; one 20 cm cake listed as 8 servings; ours cuts the same cake into 12 thinner slices."
     },
     {
       "id": "curated_vn_sua_dau_nanh",
@@ -7832,18 +8007,18 @@
         {
           "category": "Legume",
           "baseName": "Dry Soybeans",
-          "quantity": 200,
+          "quantity": 150,
           "unit": "g",
-          "cutPrep": "soaked 8 to 12 hours and skins rubbed off",
+          "cutPrep": "soaked 10 to 12 hours, shrivelled beans removed, rinsed well",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 1600,
+          "quantity": 1350,
           "unit": "ml",
-          "cutPrep": null,
+          "cutPrep": "450 ml for blending the pandan, 900 ml for cooking",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -7851,7 +8026,7 @@
           "notInDatabase": true,
           "name": "pandan leaves",
           "contains": "none",
-          "quantity": 4,
+          "quantity": 15,
           "unit": "each",
           "cutPrep": "knotted",
           "prepNote": null
@@ -7864,22 +8039,13 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "to taste"
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 0.125,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
         }
       ],
       "instructions": [
-        "Drain the soaked beans and blend them with the water in batches 1 to 2 minutes until very smooth.",
-        "Strain through a fine cloth, squeezing well.",
-        "Bring the milk slowly to a boil with the pandan, stirring so it does not catch, and simmer 10 to 15 minutes, skimming the foam.",
-        "Take out the pandan, stir in the sugar and salt, and serve warm or chilled."
+        "Soak the soybeans overnight. Pick out any shrivelled beans and rinse several times so the milk does not taste beany.",
+        "Rinse the pandan leaves, blend them with 450 ml water, strain and let the liquid settle.",
+        "Put the soybeans, 900 ml water and the pandan water in a soy milk maker and run it, about 30 minutes; it switches off when done.",
+        "Strain the milk once more and stir in the sugar. Drink warm, or chill."
       ],
       "nutritionHighlights": [
         {
@@ -7893,15 +8059,11 @@
       ],
       "citations": [
         {
-          "source": "Viet World Kitchen, Making Soy Milk and Tofu at Home",
-          "url": "https://www.vietworldkitchen.com/blog/2013/02/making-soy-milk-and-tofu-at-home-ebook.html"
-        },
-        {
-          "source": "Wikipedia, Soy milk",
-          "url": "https://en.wikipedia.org/wiki/Soy_milk"
+          "source": "Cookpad Vietnam (Bếp của Quỳnh), Sữa đậu nành lá dứa",
+          "url": "https://cookpad.com/vn/cong-thuc/25781758"
         }
       ],
-      "curationNote": "Written mostly from description: Andrea Nguyen's page describes her method but does not give a full recipe, so the ratio and the pandan follow the usual Vietnamese street version. Needs a check against a full recipe."
+      "curationNote": "Cookpad Vietnam (Bếp của Quỳnh), Sữa đậu nành lá dứa for every amount and step; serves 4, scaled x1.5 to our 6: 100 g soybeans soaked overnight, 10 pandan leaves blended with about 300 ml water and strained, 600 ml water, sugar to taste and optional; cooked about 30 minutes in a soy milk maker, strained again."
     },
     {
       "id": "curated_vn_che_troi_nuoc",
@@ -7912,7 +8074,7 @@
       "servings": 6,
       "servingSizeAmount": 1,
       "servingSizeUnit": "bowl",
-      "flavorProfile": "Soft, chewy glutinous rice balls filled with savory sweet mung bean paste, floating in a warm ginger brown-sugar syrup with coconut cream and sesame.",
+      "flavorProfile": "Soft, chewy glutinous rice balls filled with savory sweet mung bean paste, floating in a warm ginger brown-sugar syrup with sesame.",
       "healthBenefit": "The mung beans bring a little protein and fibre and the ginger warmth; mostly starch and sugar, so it is a festival treat.",
       "overallTier": "strong",
       "components": [
@@ -7926,7 +8088,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Grains, rice, white, glutinous, flour",
-          "quantity": 250,
+          "quantity": 400,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7935,16 +8097,16 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 1200,
+          "quantity": 1360,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "about 200 ml for the dough, the rest for the syrup"
+          "prepNote": "(360 ml lukewarm for the dough, about 1 L for the syrup)"
         },
         {
           "category": "Legume",
           "baseName": "Mung beans, mature seeds",
-          "quantity": 120,
+          "quantity": 200,
           "unit": "g",
           "cutPrep": "split and peeled, soaked 2 hours",
           "cookingMethod": "Steamed",
@@ -7953,17 +8115,17 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 40,
+          "quantity": 12,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "for the filling"
+          "prepNote": "(1 tbsp, for the filling)"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -7971,7 +8133,7 @@
         {
           "category": "Fats",
           "baseName": "Rapsolja",
-          "quantity": 1,
+          "quantity": 3,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7980,7 +8142,7 @@
         {
           "category": "Sweets",
           "baseName": "Brown Sugar (Commercial)",
-          "quantity": 200,
+          "quantity": 300,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7997,15 +8159,6 @@
         },
         {
           "category": "NutSeed",
-          "baseName": "Coconut cream",
-          "quantity": 120,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "NutSeed",
           "baseName": "Sesame seed",
           "quantity": 1,
           "unit": "tbsp",
@@ -8015,11 +8168,11 @@
         }
       ],
       "instructions": [
-        "Steam the mung beans 20 to 25 minutes, mash with the sugar, salt, oil and fried shallots, and roll into small balls.",
-        "Knead the glutinous rice flour with warm water, a little at a time, into a soft dough like play clay.",
-        "Wrap each filling ball in a piece of dough and roll smooth.",
-        "Boil the balls in water 3 to 5 minutes until they float, then 1 minute more, and move them to cold water.",
-        "Simmer the brown sugar, ginger and 1 litre water 10 minutes, add the balls for 5 minutes, and serve with coconut cream and sesame."
+        "Cook the mung beans in 240 ml of the water until soft, mash with the sugar, salt, oil and fried shallots, and roll into 1 tbsp balls.",
+        "Work the lukewarm water into the glutinous rice flour a little at a time, knead, rest 30 minutes and knead again.",
+        "With oiled hands, flatten a piece of dough, wrap it around a filling ball with no gaps and roll smooth.",
+        "Boil the balls until they float, then 1 minute more.",
+        "Simmer the brown sugar and ginger in the rest of the water 5 to 10 minutes, add the balls and serve with sesame."
       ],
       "nutritionHighlights": [
         {
@@ -8037,7 +8190,7 @@
           "url": "https://helenrecipes.com/recipe-57-che-troi-nuoc-glutinous-rice-balls/"
         }
       ],
-      "curationNote": "Single source (Helen's Recipes). Fried shallots in the filling point at the hành phi base."
+      "curationNote": "Helen's Recipes, Chè Trôi Nước for every amount and step; serves 6 to 8 (22 balls): 200 g mung beans, 1 tsp salt, 1 tbsp sugar, 3 tbsp fried shallots, 3 tbsp oil; 400 g glutinous rice flour, 360 ml water; 300 g brown sugar, ginger, water; sesame to finish; no coconut cream. Taken at 6 servings."
     },
     {
       "id": "curated_vn_banh_bo_nuong",
@@ -8056,7 +8209,7 @@
         {
           "category": "Grain",
           "baseName": "Starch, cassava starch",
-          "quantity": 300,
+          "quantity": 250,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -8065,16 +8218,16 @@
         {
           "category": "Dairy",
           "baseName": "Chicken Egg (Raw)",
-          "quantity": 6,
+          "quantity": 10,
           "unit": "each",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about 530 g"
         },
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 250,
+          "quantity": 360,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -8083,7 +8236,7 @@
         {
           "category": "NutSeed",
           "baseName": "Coconut milk",
-          "quantity": 400,
+          "quantity": 240,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -8101,18 +8254,18 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "0.5 tsp"
         },
         {
           "notInDatabase": true,
           "name": "pandan leaves",
           "contains": "none",
-          "quantity": 10,
-          "unit": "each",
+          "quantity": 50,
+          "unit": "g",
           "cutPrep": "blended with a little coconut milk and strained",
           "prepNote": null
         },
@@ -8124,12 +8277,30 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "for the pan"
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Rice flour",
+          "quantity": 20,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "in place of 1 bag of vanilla powder"
         }
       ],
       "instructions": [
         "Warm the coconut milk with the pandan juice and sugar until dissolved, and cool.",
         "Whisk the eggs gently, without whipping in air, and stir into the coconut mixture.",
-        "Whisk in the tapioca starch, baking powder and salt, strain, and rest 30 minutes.",
+        "Whisk in the tapioca starch, rice flour, baking powder, salt and vanilla, strain, and rest 30 minutes.",
         "Heat the oven to 350°F (180°C) with the oiled bundt or cake pan inside for 10 minutes.",
         "Pour the batter into the hot pan and bake 45 to 55 minutes until the top is deep golden, then cool upside down fully before slicing."
       ],
@@ -8149,7 +8320,7 @@
           "url": "https://www.hungryhuy.com/banh-bo-nuong/"
         }
       ],
-      "curationNote": "Single source (Hungry Huy). Tapioca starch matched to cassava starch."
+      "curationNote": "Hungry Huy, Bánh Bò Nướng for every amount and step; one bundt cake, cut into our 12 slices; 2 bags of single-acting baking powder kept as 4 tsp."
     }
   ]
 }

@@ -16,64 +16,78 @@
       "components": [],
       "ingredients": [
         {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "roots and tops trimmed, outer skin peeled",
           "category": "Veg",
           "baseName": "Japanese scallion, \"Rakkyo\", mature bulb",
           "quantity": 1000,
-          "unit": "g",
-          "cutPrep": "trimmed and peeled",
-          "cookingMethod": null,
-          "prepNote": null
+          "unit": "g"
         },
         {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tsp taken up by the bulbs, the rest for the soaking water, rinsed off",
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "2 tsp taken up by the bulbs, the rest rinsed off"
+          "quantity": 100,
+          "unit": "g"
         },
         {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "dissolved in the second soak to keep the bulbs crisp, rinsed off",
+          "notInDatabase": true,
+          "contains": "none",
+          "name": "Alum (phèn chua)",
+          "quantity": 1,
+          "unit": "tbsp"
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null,
           "category": "Herbs",
-          "baseName": "Distilled Vinegar (White)",
-          "quantity": 300,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
+          "baseName": "Vinegar, rice vinegar",
+          "quantity": 200,
+          "unit": "ml"
         },
         {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null,
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 250,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
+          "quantity": 300,
+          "unit": "g"
         },
         {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null,
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 200,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
+          "quantity": 100,
+          "unit": "ml"
         },
         {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "3 chilies, sliced",
           "category": "Veg",
           "baseName": "Red Chilli (Chili)",
           "quantity": 10,
-          "unit": "g",
-          "cutPrep": "sliced",
-          "cookingMethod": null,
-          "prepNote": null
+          "unit": "g"
         }
       ],
       "instructions": [
-        "Rub the bulbs with the salt and leave overnight, then rinse well and dry in the sun or on a towel for half a day.",
-        "Boil the vinegar, sugar and water until the sugar dissolves and cool.",
-        "Pack the bulbs and chili in clean jars, pour the brine over and close. Leave 1 to 2 weeks before eating. One serving is 50 g."
+        "Trim the roots and tops of the bulbs and peel off the thin outer skin.",
+        "Dissolve the salt in enough water to cover the bulbs and soak them overnight, 8 to 10 hours, to take away the sharpness.",
+        "Drain, cover with fresh water, stir in the alum and soak for 2 hours more. Rinse well.",
+        "Spread the bulbs out and dry them in the sun for 1 to 2 days, until the skins are slightly wrinkled.",
+        "Boil the vinegar, sugar and water until the sugar dissolves, then let it cool completely.",
+        "Pack the bulbs and chili into clean, dry jars and pour the cooled brine over them to cover. Close the jars.",
+        "Leave 5 to 7 days before eating. One serving is 50 g."
       ],
       "nutritionHighlights": [
         {
@@ -83,11 +97,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia: Allium chinense",
-          "url": "https://en.wikipedia.org/wiki/Allium_chinense"
+          "source": "VTC News: Cách làm củ kiệu chua ngọt đơn giản",
+          "url": "https://vtcnews.vn/cach-lam-cu-kieu-chua-ngot-don-gian-ar917587.html"
         }
       ],
-      "curationNote": "The brine sugar is counted in full, though some of it stays in the jar."
+      "curationNote": "VTC News, Cách làm củ kiệu chua ngọt đơn giản for every amount and step; 1 kg of bulbs; servings are not stated, so 50 g a serving is kept."
     },
     {
       "id": "curated_vn_base_top_mo",
@@ -108,23 +122,24 @@
           "baseName": "Pork Back Fat (Raw)",
           "quantity": 150,
           "unit": "g",
-          "cutPrep": "what stays in the cracklings from 500 g back fat cut in small cubes; the rest renders off as lard",
+          "cutPrep": "what stays in the cracklings from 500 g pork fat, skin on, cut in pieces; the rest renders off as lard",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 2,
-          "unit": "g",
-          "cutPrep": null,
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "rubbed on and rinsed off",
           "cookingMethod": null,
           "prepNote": "a pinch"
         }
       ],
       "instructions": [
-        "Cook the cubed back fat in a dry pan over medium-low heat, stirring, for 20 to 30 minutes, until the cubes are golden and crisp.",
-        "Lift them out, drain on paper and salt. Keep the rendered lard for cooking."
+        "Rub the pork fat with the salt, rinse it clean and let it drain well.",
+        "Cook in an air fryer at 355°F (180°C) for 20 minutes, stirring now and then.",
+        "Raise to 390°F (200°C) for 15 minutes more, until the skin puffs and turns crisp. Pour off the rendered fat and keep it as lard."
       ],
       "nutritionHighlights": [
         {
@@ -134,11 +149,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia: Pork rind",
-          "url": "https://en.wikipedia.org/wiki/Pork_rind"
+          "source": "Cookpad Vietnam, Tóp mỡ da giòn rụm",
+          "url": "https://cookpad.com/vn/cong-thuc/26144822"
         }
       ],
-      "curationNote": null
+      "curationNote": "Cookpad Vietnam, Tóp mỡ da giòn rụm for every amount and step; 500 g pork fat with skin, 1 tsp salt rubbed on and rinsed off; air fryer 180°C 20 minutes, then 200°C 15 minutes until the skin puffs and crisps."
     },
     {
       "id": "curated_vn_base_cha_hue",
@@ -147,183 +162,123 @@
       "dishRole": "side",
       "dishGroup": "Bases: Rice, Noodles & Pantry",
       "region": "Huế, central Vietnam",
-      "servings": 23,
+      "servings": 17,
       "servingSizeAmount": 1,
       "servingSizeUnit": "serving",
-      "flavorProfile": "Springy pork roll with whole black peppercorns, garlic and fish sauce.",
-      "healthBenefit": "Lean pork brings protein, thiamine and zinc.",
+      "flavorProfile": "Springy pork roll steamed in banana leaves, with plenty of cracked black pepper, garlic and fish sauce.",
+      "healthBenefit": "Pork brings protein, thiamine and zinc; made with fatty pork and fish sauce, it is rich and salty.",
       "overallTier": "strong",
       "components": [],
       "ingredients": [
         {
+          "cutPrep": null,
+          "cookingMethod": "Steamed",
+          "prepNote": "with some fat, chilled until firm",
           "category": "Meat",
-          "baseName": "Gris skinka innanlår rå",
-          "quantity": 1000,
-          "unit": "g",
-          "cutPrep": "very cold, cut in pieces",
-          "cookingMethod": null,
-          "prepNote": null
+          "baseName": "Ground Pork (Raw)",
+          "quantity": 500,
+          "unit": "g"
         },
         {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null,
           "category": "Bev",
           "baseName": "Water, tap",
           "quantity": 100,
-          "unit": "ml",
-          "cutPrep": "as crushed ice",
-          "cookingMethod": null,
-          "prepNote": null
+          "unit": "ml"
         },
         {
-          "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 60,
-          "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "tapioca starch",
+          "category": "Grain",
+          "baseName": "Starch, cassava starch",
+          "quantity": 9,
+          "unit": "g"
         },
         {
-          "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 10,
-          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "PantryStaples",
-          "baseName": "Potato Starch",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
+          "prepNote": null,
           "category": "PantryStaples",
           "baseName": "Baking powder",
-          "quantity": 5,
-          "unit": "g",
+          "quantity": 2,
+          "unit": "g"
+        },
+        {
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 tbsp in the meat, a little more for the leaves",
+          "category": "Fats",
+          "baseName": "Vegetable Oil",
+          "quantity": 35,
+          "unit": "ml"
         },
         {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null,
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 30,
+          "unit": "ml"
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null,
+          "category": "Herbs",
+          "baseName": "Monosodium glutamate",
+          "quantity": 4,
+          "unit": "g"
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "crushed",
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 15,
-          "unit": "g",
-          "cutPrep": "minced",
-          "cookingMethod": null,
-          "prepNote": null
+          "quantity": 100,
+          "unit": "g"
         },
         {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "whole peppercorns, cracked",
           "category": "Herbs",
           "baseName": "Spices, pepper, black",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "whole",
-          "cookingMethod": null,
-          "prepNote": null
+          "quantity": 100,
+          "unit": "g"
         }
       ],
       "instructions": [
-        "Pound or process the cold pork with the fish sauce, sugar, starch and baking powder, adding the ice a little at a time, until smooth and sticky.",
-        "Mix in the garlic and whole peppercorns. Wrap tightly in banana leaves (or foil) into logs about 5 cm across.",
-        "Steam 45 minutes, cool and slice. It keeps 4 days in the fridge. One serving is 50 g."
+        "Put the ground pork in the freezer for about 2 hours, until firm but not frozen hard.",
+        "Mix the tapioca starch and baking powder into the water.",
+        "Process the pork, adding the starch water a little at a time, for about 15 minutes, until smooth and sticky.",
+        "Add 2 tablespoons of the oil, the fish sauce and the MSG and process again.",
+        "Crush the garlic and crack the peppercorns, then mix both into the pork until fragrant.",
+        "Rinse the banana leaves and dip them in hot water so they fold without tearing. Brush them lightly with the rest of the oil.",
+        "Wrap the pork tightly in the leaves and fold the ends to seal.",
+        "Steam for 20 minutes. It is done when a piece broken in half springs back. Cool, slice and keep in the fridge. One serving is about 50 g."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Protein",
-          "note": "About 10 g per 50 g."
+          "note": "From the pork."
         },
         {
           "nutrient": "Sodium",
-          "note": "About 400 mg per 50 g."
+          "note": "From the fish sauce and MSG."
         }
       ],
       "citations": [
         {
-          "source": "Wikipedia: Chả lụa",
-          "url": "https://en.wikipedia.org/wiki/Ch%E1%BA%A3_l%E1%BB%A5a"
+          "source": "Cookpad: Chả Huế gói lá chuối",
+          "url": "https://cookpad.com/vn/cong-thuc/4376738"
         }
       ],
-      "curationNote": null
-    },
-    {
-      "id": "curated_vn_base_banh_trang",
-      "name": "Bánh Tráng (Rice Paper)",
-      "builderType": "bakedGoods",
-      "dishGroup": "Bases: Rice, Noodles & Pantry",
-      "region": "Vietnam",
-      "servings": 40,
-      "servingSizeAmount": 1,
-      "servingSizeUnit": "each",
-      "flavorProfile": "Thin, plain and slightly chewy once softened.",
-      "healthBenefit": "Rice and tapioca with a pinch of salt and nothing else.",
-      "overallTier": "strong",
-      "components": [],
-      "ingredients": [
-        {
-          "category": "PantryStaples",
-          "baseName": "Rice flour",
-          "quantity": 300,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Grain",
-          "baseName": "Tapioca (granulated cassava starch)",
-          "quantity": 100,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 600,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 3,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "stays in the sheets"
-        }
-      ],
-      "instructions": [
-        "Whisk the rice flour, tapioca, salt and water into a thin batter and rest 1 hour.",
-        "Stretch a cloth over a pot of boiling water, spread a ladle of batter thin in a 22 cm round, cover and steam 30 seconds.",
-        "Lift onto a bamboo rack and dry in the sun or a 60 C (140 F) oven until crisp. Makes about 40 sheets; keep them dry and closed."
-      ],
-      "nutritionHighlights": [
-        {
-          "nutrient": "Carbohydrate",
-          "note": "About 9 g per sheet."
-        }
-      ],
-      "citations": [
-        {
-          "source": "Wikipedia: Rice paper",
-          "url": "https://en.wikipedia.org/wiki/Rice_paper"
-        },
-        {
-          "source": "Wikipedia (Vietnamese): Bánh tráng",
-          "url": "https://vi.wikipedia.org/wiki/B%C3%A1nh_tr%C3%A1ng"
-        }
-      ],
-      "curationNote": null
+      "curationNote": "Cookpad, Chả Huế gói lá chuối for every amount and step; servings are not stated; the batch is about 880 g, so 17 servings of about 50 g."
     },
     {
       "id": "curated_vn_base_banh_trang_me",
@@ -480,137 +435,147 @@
     },
     {
       "id": "curated_vn_base_bo_kho",
-      "name": "Bò Khô (Vietnamese Beef Jerky)",
+      "name": "Bò Khô (Vietnamese Dried Beef)",
       "builderType": "side",
       "dishRole": "side",
       "dishGroup": "Bases: Rice, Noodles & Pantry",
       "region": "Vietnam",
-      "servings": 15,
+      "servings": 20,
       "servingSizeAmount": 1,
       "servingSizeUnit": "serving",
       "flavorProfile": "Chewy, sweet, spicy and garlicky, with five spice.",
       "healthBenefit": "Dense in protein and iron; also sweet and salty.",
       "overallTier": "moderate",
-      "components": [],
+      "components": [
+        {
+          "recipeId": "curated_cn_base_five_spice_powder",
+          "servings": 0.167,
+          "note": "1/4 tsp"
+        }
+      ],
       "ingredients": [
         {
+          "cutPrep": "sliced across the grain into bite-size pieces",
+          "cookingMethod": "Baked",
+          "prepNote": null,
           "category": "Meat",
-          "baseName": "Beef Round (Raw)",
+          "baseName": "Beef Tenderloin (Raw)",
           "quantity": 1000,
-          "unit": "g",
-          "cutPrep": "trimmed and sliced thin across the grain",
-          "cookingMethod": null,
-          "prepNote": null
+          "unit": "g"
         },
         {
-          "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 30,
-          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "about 2 tbsp"
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 60,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 5,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
+          "prepNote": "1 bulb, peeled and lightly smashed",
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 20,
-          "unit": "g",
-          "cutPrep": "pounded",
-          "cookingMethod": null,
-          "prepNote": null
+          "quantity": 40,
+          "unit": "g"
         },
         {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "8 tbsp",
+          "category": "Sweets",
+          "baseName": "Standard Honey (Blossom Honey)",
+          "quantity": 168,
+          "unit": "g"
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2 tbsp",
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, oyster sauce",
+          "quantity": 36,
+          "unit": "g"
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tsp",
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 2.3,
+          "unit": "g"
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2 tbsp; in place of mai quế lộ, a rose-scented sorghum liquor the database does not hold",
+          "category": "Alcohol",
+          "baseName": "Grain spirit",
+          "quantity": 30,
+          "unit": "ml"
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1/4 tsp; in place of dark soy sauce, which the database does not hold",
+          "category": "Legume",
+          "baseName": "Soy sauce made from soy and wheat (shoyu)",
+          "quantity": 1.35,
+          "unit": "g"
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for frying the garlic and searing the beef",
+          "category": "Fats",
+          "baseName": "Vegetable Oil",
+          "quantity": 15,
+          "unit": "ml"
+        },
+        {
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "5 stalks, minced",
           "category": "Veg",
           "baseName": "Lemon grass (citronella)",
-          "quantity": 40,
-          "unit": "g",
-          "cutPrep": "bottom of 2 stalks, minced",
-          "cookingMethod": null,
-          "prepNote": null
+          "quantity": 100,
+          "unit": "g"
         },
         {
-          "category": "Herbs",
-          "baseName": "Chilli (chili), dried, ground",
-          "quantity": 10,
-          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "5 chilies, chopped",
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 15,
+          "unit": "g"
         },
         {
-          "notInDatabase": true,
-          "name": "star anise",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "ground",
+          "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null,
-          "contains": "none"
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 50,
+          "unit": "g"
         },
         {
-          "category": "Herbs",
-          "baseName": "Spices, cinnamon, ground",
-          "quantity": 1,
-          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, cloves, ground",
-          "quantity": 0.5,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, fennel seed",
-          "quantity": 1,
-          "unit": "g",
-          "cutPrep": "ground",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, \"Sansho\" (Japanese pepper), ground",
-          "quantity": 0.5,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "stands in for Sichuan pepper"
+          "prepNote": null,
+          "category": "Sweets",
+          "baseName": "Brown Sugar (Commercial)",
+          "quantity": 50,
+          "unit": "g"
         }
       ],
       "instructions": [
-        "Mix the beef with everything else and marinate overnight in the fridge.",
-        "Lay the slices on racks and dry in a 70 C (160 F) oven, door ajar, for 4 to 6 hours, turning once, until dry and leathery but still pliable.",
-        "Tear into strips to serve. It makes about 450 g."
+        "Slice the beef across the grain into bite-size pieces. Mix it with the garlic, honey, oyster sauce, pepper, liquor, five-spice and soy sauce and leave for 2 hours.",
+        "Heat the oil in a pan and fry the garlic from the marinade until golden, then lift it out.",
+        "Sear the beef over high heat until golden on both sides and drain it on paper towels.",
+        "In a second pan, fry the lemongrass and chilies until fragrant. Add the fish sauce and sugar and stir well.",
+        "Add the beef and simmer on low heat until most of the liquid has cooked away and the sauce thickens. Stir in the fried garlic.",
+        "Spread the beef on a foil-lined rack and dry it in a 100 C (210 F) oven for 45 to 60 minutes, longer for drier beef.",
+        "Cool, cover and keep in the fridge. One serving is 30 g."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Protein",
-          "note": "About 20 g protein per 30 g serving."
+          "note": "A concentrated amount from the dried beef in each 30 g serving."
         },
         {
           "nutrient": "Iron",
@@ -619,11 +584,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia: Jerky",
-          "url": "https://en.wikipedia.org/wiki/Jerky"
+          "source": "Cookpad: Bò khô cháy tỏi",
+          "url": "https://cookpad.com/vn/cong-thuc/7125354"
         }
       ],
-      "curationNote": "Five spice is listed as its single spices. One serving is 30 g, from about 450 g finished."
+      "curationNote": "Cookpad, Bò khô cháy tỏi for every amount and step; servings are not stated; 1 kg of beef dries to about 600 g with its glaze (an estimate), so 20 servings of 30 g."
     },
     {
       "id": "curated_vn_base_ngo_sen_chua",

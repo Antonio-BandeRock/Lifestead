@@ -178,4 +178,8 @@
 // their single seasonings in place of a mix, a recipe may name a hidden
 // food, and food_volume_weights carries USDA's weighed grams per ml for
 // foods measured by spoon or cup. A stale copy has none of these rows.
-export const REFERENCE_DB_VERSION = "20261110180000";
+// BUMPED 2026-11-11. Every System Recipe checked against the recipe it
+// came from: amounts, seasonings and made-first servings corrected, nine
+// dishes with no source replaced, stale stock links dropped, and the
+// whole wheat loaf now cut into 10 slices. A stale copy has the old rows.
+export const REFERENCE_DB_VERSION = "20261111120000";

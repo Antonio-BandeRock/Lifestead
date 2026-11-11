@@ -3,8 +3,8 @@
     "id": "curated_vegan_blueberry_cinnamon_oatmeal",
     "builderType": "snack",
     "name": "Blueberry Cinnamon Oatmeal",
-    "flavorProfile": "Creamy coconut-milk oatmeal simmered plain, topped with warm blueberries and a real hit of cinnamon.",
-    "healthBenefit": "Oats and coconut milk alone, with warm blueberries and cinnamon stirred through, a genuinely whole-food breakfast built entirely from ingredients that check clean for Hashimoto's, not just soy-free.",
+    "flavorProfile": "Creamy coconut-milk oatmeal sweetened with maple, topped with warm blueberries and a hit of cinnamon.",
+    "healthBenefit": "Oats simmered in coconut milk and water, with warm blueberries, cinnamon, maple and a little vanilla stirred through, a whole-food breakfast that is also soy-free.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
@@ -21,7 +21,7 @@
       {
         "category": "NutSeed",
         "baseName": "Coconut milk",
-        "quantity": 150,
+        "quantity": 105,
         "unit": "ml",
         "cutPrep": null,
         "cookingMethod": null,
@@ -48,11 +48,11 @@
       {
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
-        "quantity": 5,
+        "quantity": 18,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": "optional"
+        "prepNote": null
       },
       {
         "category": "Herbs",
@@ -62,13 +62,31 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "a pinch"
+      },
+      {
+        "category": "Bev",
+        "baseName": "Water, tap",
+        "quantity": 80,
+        "unit": "ml",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Vanilla extract",
+        "quantity": 0.45,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
       }
     ],
     "instructions": [
-      "Combine the oats and coconut milk in a small saucepan and bring to a gentle simmer.",
-      "Cook, stirring occasionally, for 5-7 minutes, until thick and creamy.",
-      "Fold in the blueberries and cinnamon, and cook 1-2 minutes more, just until the berries soften and release a little juice.",
-      "Drizzle with maple syrup if you'd like a touch of sweetness, and serve warm."
+      "Combine the oats, cinnamon, salt, coconut milk and water in a small saucepan and bring to a boil.",
+      "Lower the heat and simmer uncovered for 5 to 7 minutes, stirring often, until thick and creamy.",
+      "Fold in the blueberries and cook 1 to 2 minutes more, just until they soften.",
+      "Stir in the maple syrup and vanilla and serve warm."
     ]
   },
   {
@@ -76,7 +94,7 @@
     "builderType": "snack",
     "name": "Strawberry Banana Oatmeal",
     "flavorProfile": "Coconut-milk oatmeal with sliced banana stirred in and fresh strawberries piled on top.",
-    "healthBenefit": "A simple, classic pairing built on the same clean oats-and-coconut-milk base, with real whole fruit doing all the sweetening work.",
+    "healthBenefit": "A simple, classic pairing built on the same clean oats-and-coconut-milk base, with whole fruit doing all the sweetening work.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
@@ -93,7 +111,16 @@
       {
         "category": "NutSeed",
         "baseName": "Coconut milk",
-        "quantity": 150,
+        "quantity": 120,
+        "unit": "ml",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Bev",
+        "baseName": "Water, tap",
+        "quantity": 60,
         "unit": "ml",
         "cutPrep": null,
         "cookingMethod": null,
@@ -129,26 +156,35 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.4,
+        "quantity": 0.6,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Spices, cinnamon, ground",
+        "quantity": 0.25,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
       }
     ],
     "instructions": [
-      "Combine the oats and coconut milk in a small saucepan and bring to a gentle simmer.",
-      "Cook, stirring occasionally, for 5-7 minutes, until thick and creamy.",
-      "Stir in half the banana slices during the last minute of cooking, so they warm through and soften slightly.",
-      "Top with the remaining banana and the fresh strawberries, and a drizzle of maple syrup if using."
+      "Combine the oats, coconut milk, water, cinnamon and salt in a small saucepan and bring to a gentle boil, then turn the heat down to a simmer.",
+      "Cook, stirring now and then, for 5-7 minutes, until thick and creamy. Add a splash more water if it gets too thick.",
+      "Stir in half the banana slices during the last minute so they warm through.",
+      "Spoon into a bowl and top with the remaining banana, the strawberries and the maple syrup if using."
     ]
   },
   {
     "id": "curated_vegan_baked_apple_cinnamon_oatmeal_cup",
     "builderType": "snack",
     "name": "Baked Apple Cinnamon Oatmeal Cup",
-    "flavorProfile": "A single-serving baked oatmeal cup, sweetened only by diced apple and a real dose of cinnamon.",
-    "healthBenefit": "Baking the oats concentrates the apple's natural sweetness instead of relying on any added sugar, and this whole dish is built from a genuinely clean, whole-food ingredient list.",
+    "flavorProfile": "A single-serving baked oatmeal cup with diced apple, walnuts and cinnamon, sweet enough from the apple that the maple syrup is optional.",
+    "healthBenefit": "Baking the oats concentrates the apple's natural sweetness, so the maple syrup can be left out, and the whole dish is built from a short, whole-food ingredient list.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "cup",
@@ -192,7 +228,7 @@
       {
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
-        "quantity": 5,
+        "quantity": 15,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
@@ -206,13 +242,50 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Spices, nutmeg, ground",
+        "quantity": 0.125,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "PantryStaples",
+        "baseName": "Baking powder",
+        "quantity": 0.25,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Vanilla extract",
+        "quantity": 0.25,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "NutSeed",
+        "baseName": "Walnut",
+        "quantity": 15,
+        "unit": "g",
+        "cutPrep": "chopped",
+        "cookingMethod": null,
+        "prepNote": null
       }
     ],
     "instructions": [
-      "Preheat the oven to 350F (175C).",
-      "Stir the oats, coconut milk, diced apple, and cinnamon together in a small oven-safe ramekin or cup.",
-      "Bake for 25-30 minutes, until set and lightly golden on top.",
-      "Let cool for a couple of minutes before eating, and drizzle with maple syrup if you'd like."
+      "Preheat the oven to 350F (175C) and grease a small oven-safe ramekin or cup.",
+      "Stir the oats, baking powder, cinnamon, nutmeg and salt together in the ramekin.",
+      "Stir in the coconut milk, maple syrup if using, and vanilla, then fold in the diced apple and walnuts.",
+      "Bake for 25 to 30 minutes, until set and lightly golden on top.",
+      "Let cool for a couple of minutes before eating."
     ]
   },
   {
@@ -260,10 +333,19 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Common salt/table salt",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
       }
     ],
     "instructions": [
-      "Combine the oats, coconut milk, chopped dates, and cinnamon in a jar or container.",
+      "Combine the oats, coconut milk, chopped dates, cinnamon and the pinch of salt in a jar or container.",
       "Stir well, cover, and refrigerate overnight (at least 6 hours).",
       "Stir again before eating; add a splash more coconut milk if you prefer it looser."
     ]
@@ -273,7 +355,7 @@
     "builderType": "snack",
     "name": "Orange Cranberry Rice Pudding",
     "flavorProfile": "Brown rice simmered slowly in coconut milk until creamy, finished with fresh orange segments and cranberries.",
-    "healthBenefit": "A real rice pudding, built entirely on clean, whole-food ingredients, with orange and cranberry's natural tartness balancing the coconut milk's richness.",
+    "healthBenefit": "A rice pudding, built entirely on clean, whole-food ingredients, with orange and cranberry's natural tartness balancing the coconut milk's richness.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
@@ -317,11 +399,11 @@
       {
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
-        "quantity": 5,
+        "quantity": 15,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": "optional"
+        "prepNote": null
       },
       {
         "category": "Herbs",
@@ -331,13 +413,31 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Spices, cinnamon, ground",
+        "quantity": 0.25,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Vanilla extract",
+        "quantity": 0.33,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
       }
     ],
     "instructions": [
-      "Combine the rice and coconut milk in a saucepan and bring to a gentle simmer.",
-      "Cook uncovered, stirring often, for 30-35 minutes, until the rice is fully tender and the mixture is thick and creamy.",
-      "Stir in the cranberries during the last 5 minutes so they soften and release some color.",
-      "Top with the fresh orange segments just before serving, warm or chilled."
+      "Combine the rice, coconut milk, maple syrup, cinnamon and the pinch of salt in a saucepan and bring to a gentle simmer.",
+      "Cook uncovered, stirring often, for 40 to 50 minutes, adding a splash of water if it gets too thick, until the rice is fully tender and the mixture is thick and creamy.",
+      "Stir in the cranberries for the last 5 minutes so they soften and release some colour.",
+      "Take the pan off the heat, stir in the vanilla, and top with the orange segments just before serving, warm or chilled."
     ]
   },
   {
@@ -398,11 +498,11 @@
       {
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
-        "quantity": 5,
+        "quantity": 15,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": "optional"
+        "prepNote": null
       },
       {
         "category": "Herbs",
@@ -412,20 +512,29 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Vanilla extract",
+        "quantity": 0.33,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
       }
     ],
     "instructions": [
-      "Combine the rice, coconut milk, grated ginger, and cinnamon in a saucepan and bring to a gentle simmer.",
-      "Cook uncovered, stirring often, for 30-35 minutes, until the rice is fully tender and the mixture is thick and creamy.",
-      "Top with the fresh sliced pear just before serving, warm or chilled."
+      "Combine the rice, coconut milk, grated ginger, cinnamon, maple syrup and the pinch of salt in a saucepan and bring to a gentle simmer.",
+      "Cook uncovered, stirring often, for 40 to 50 minutes, adding a splash of water if it gets too thick, until the rice is fully tender and the mixture is thick and creamy.",
+      "Take the pan off the heat, stir in the vanilla, and top with the sliced pear just before serving, warm or chilled."
     ]
   },
   {
     "id": "curated_vegan_peach_sorghum_porridge",
     "builderType": "snack",
     "name": "Peach Sorghum Porridge",
-    "flavorProfile": "Whole-grain sorghum simmered in coconut milk until tender and creamy, topped with warm sliced peach and cinnamon.",
-    "healthBenefit": "Sorghum is a real, genuinely different whole grain from oats or rice, and one of the few this database scores completely clean for Hashimoto's.",
+    "flavorProfile": "Whole-grain sorghum simmered in coconut milk with cinnamon, ginger and vanilla, finished with chia and topped with sliced peach and almonds.",
+    "healthBenefit": "Sorghum is a different whole grain from oats or rice, and one of the few this database scores completely clean for Hashimoto's.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
@@ -442,7 +551,7 @@
       {
         "category": "NutSeed",
         "baseName": "Coconut milk",
-        "quantity": 180,
+        "quantity": 225,
         "unit": "ml",
         "cutPrep": null,
         "cookingMethod": null,
@@ -460,7 +569,7 @@
       {
         "category": "Herbs",
         "baseName": "Spices, cinnamon, ground",
-        "quantity": 0.5,
+        "quantity": 0.25,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -469,26 +578,54 @@
       {
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
-        "quantity": 5,
+        "quantity": 9,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": "optional"
+        "prepNote": null
       },
       {
         "category": "Herbs",
-        "baseName": "Common salt/table salt",
-        "quantity": 0.4,
+        "baseName": "Vanilla extract",
+        "quantity": 0.45,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Spices, ginger, ground",
+        "quantity": 0.125,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "NutSeed",
+        "baseName": "Chia seeds",
+        "quantity": 10,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": "a pinch"
+        "prepNote": "stirred in at the end"
+      },
+      {
+        "category": "NutSeed",
+        "baseName": "Almonds",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "sliced",
+        "cookingMethod": null,
+        "prepNote": null
       }
     ],
     "instructions": [
-      "Combine the sorghum and coconut milk in a saucepan and bring to a gentle simmer.",
-      "Cover and cook for 40-45 minutes, stirring occasionally and adding a splash of water if it gets too thick, until the sorghum is tender.",
-      "Stir in the cinnamon, top with the warm sliced peach, and drizzle with maple syrup if using."
+      "Rinse the sorghum, then combine it in a saucepan with the coconut milk, vanilla, cinnamon, ginger and maple syrup and bring to a gentle simmer.",
+      "Cover and cook for 40 to 45 minutes, stirring now and then and adding a splash of water if it gets too thick, until the sorghum is tender. You can also cook everything in a greased slow cooker on low for about 8 hours, as the source does.",
+      "Take off the heat, stir in the chia seeds and let it stand 5 to 10 minutes to thicken.",
+      "Top with the sliced peach and the sliced almonds."
     ]
   },
   {
@@ -513,7 +650,7 @@
       {
         "category": "NutSeed",
         "baseName": "Coconut milk",
-        "quantity": 180,
+        "quantity": 225,
         "unit": "ml",
         "cutPrep": null,
         "cookingMethod": null,
@@ -540,26 +677,63 @@
       {
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
-        "quantity": 5,
+        "quantity": 9,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": "optional"
+        "prepNote": null
       },
       {
         "category": "Herbs",
-        "baseName": "Common salt/table salt",
-        "quantity": 0.4,
+        "baseName": "Vanilla extract",
+        "quantity": 0.45,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Spices, cinnamon, ground",
+        "quantity": 0.25,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Spices, ginger, ground",
+        "quantity": 0.125,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "NutSeed",
+        "baseName": "Chia seeds",
+        "quantity": 10,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": "a pinch"
+        "prepNote": "stirred in at the end"
+      },
+      {
+        "category": "NutSeed",
+        "baseName": "Almonds",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "sliced",
+        "cookingMethod": null,
+        "prepNote": null
       }
     ],
     "instructions": [
-      "Combine the sorghum and coconut milk in a saucepan and bring to a gentle simmer.",
-      "Cover and cook for 40-45 minutes, stirring occasionally and adding a splash of water if it gets too thick, until the sorghum is tender.",
-      "Stir in the lime juice, top with the fresh raspberries, and drizzle with maple syrup if using."
+      "Rinse the sorghum, then combine it in a saucepan with the coconut milk, vanilla, cinnamon, ginger and maple syrup and bring to a gentle simmer.",
+      "Cover and cook for 40 to 45 minutes, stirring now and then and adding a splash of water if it gets too thick, until the sorghum is tender. You can also cook everything in a greased slow cooker on low for about 8 hours, as the source does.",
+      "Take off the heat, stir in the chia seeds and lime juice and let it stand 5 to 10 minutes to thicken.",
+      "Top with the raspberries and the sliced almonds."
     ]
   },
   {
@@ -567,7 +741,7 @@
     "builderType": "snack",
     "name": "Sweet Polenta with Warm Apricot Compote",
     "flavorProfile": "Creamy coconut-milk polenta topped with apricots stewed soft with cinnamon.",
-    "healthBenefit": "Cornmeal polenta makes a genuinely different sweet breakfast base from any grain elsewhere in this batch, entirely clean for Hashimoto's.",
+    "healthBenefit": "Cornmeal polenta cooked in coconut milk makes a different sweet breakfast base from any grain elsewhere in this batch.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
@@ -585,6 +759,15 @@
         "category": "NutSeed",
         "baseName": "Coconut milk",
         "quantity": 180,
+        "unit": "ml",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Bev",
+        "baseName": "Water, tap",
+        "quantity": 60,
         "unit": "ml",
         "cutPrep": null,
         "cookingMethod": null,
@@ -600,67 +783,22 @@
         "prepNote": null
       },
       {
-        "category": "Herbs",
-        "baseName": "Spices, cinnamon, ground",
-        "quantity": 0.5,
-        "unit": "tsp",
-        "cutPrep": null,
-        "cookingMethod": null,
-        "prepNote": null
-      },
-      {
-        "category": "Sweets",
-        "baseName": "Maple Syrup (100% Pure)",
-        "quantity": 5,
-        "unit": "g",
-        "cutPrep": null,
-        "cookingMethod": null,
-        "prepNote": "optional"
-      }
-    ],
-    "instructions": [
-      "Whisk the cornmeal into the coconut milk in a saucepan and bring to a gentle simmer, whisking often to prevent lumps.",
-      "Cook for 8-10 minutes, until thick and smooth.",
-      "Meanwhile, gently stew the sliced apricot with the cinnamon and a splash of water in a small pan for 5 minutes, until soft.",
-      "Spoon the warm apricot compote over the polenta and drizzle with maple syrup if using."
-    ]
-  },
-  {
-    "id": "curated_vegan_banana_polenta_porridge",
-    "builderType": "snack",
-    "name": "Banana Polenta Porridge",
-    "flavorProfile": "Smooth coconut-milk polenta with mashed banana stirred through and cinnamon on top.",
-    "healthBenefit": "A genuinely different texture from oatmeal or rice pudding, sweetened almost entirely by real banana.",
-    "servings": 1,
-    "servingSizeAmount": 1,
-    "servingSizeUnit": "bowl",
-    "ingredients": [
-      {
-        "category": "Grain",
-        "baseName": "Cornmeal, whole-grain, yellow",
-        "quantity": 40,
-        "unit": "g",
-        "cutPrep": null,
-        "cookingMethod": "simmered",
-        "prepNote": null
-      },
-      {
-        "category": "NutSeed",
-        "baseName": "Coconut milk",
-        "quantity": 180,
+        "category": "Bev",
+        "baseName": "Water, tap",
+        "quantity": 15,
         "unit": "ml",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
       },
       {
-        "category": "Fruit",
-        "baseName": "Banana",
-        "quantity": 70,
-        "unit": "g",
-        "cutPrep": "mashed",
+        "category": "Bev",
+        "baseName": "Lemon",
+        "quantity": 4,
+        "unit": "ml",
+        "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "juice"
       },
       {
         "category": "Herbs",
@@ -679,6 +817,69 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "optional"
+      }
+    ],
+    "instructions": [
+      "Bring the coconut milk and 60ml water to a gentle simmer in a saucepan, then whisk in the cornmeal a little at a time so no lumps form.",
+      "Cook for 8-10 minutes over low heat, whisking often, until thick and smooth. Add a splash of water if it gets too stiff.",
+      "Meanwhile, put the apricot, lemon juice, cinnamon and 1 tablespoon water in a small pan, cover and stew over low heat for 5-8 minutes, until soft and juicy.",
+      "Spoon the warm apricot compote over the polenta and drizzle with the maple syrup if using."
+    ]
+  },
+  {
+    "id": "curated_vegan_banana_polenta_porridge",
+    "builderType": "snack",
+    "name": "Banana Polenta Porridge",
+    "flavorProfile": "Smooth coconut-milk polenta topped with sliced banana, warm maple syrup and a dusting of cinnamon.",
+    "healthBenefit": "A different texture from oatmeal or rice pudding, with sliced banana and warm maple syrup on top.",
+    "servings": 1,
+    "servingSizeAmount": 1,
+    "servingSizeUnit": "bowl",
+    "ingredients": [
+      {
+        "category": "Grain",
+        "baseName": "Cornmeal, whole-grain, yellow",
+        "quantity": 40,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": "simmered",
+        "prepNote": null
+      },
+      {
+        "category": "NutSeed",
+        "baseName": "Coconut milk",
+        "quantity": 150,
+        "unit": "ml",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fruit",
+        "baseName": "Banana",
+        "quantity": 70,
+        "unit": "g",
+        "cutPrep": "sliced",
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Spices, cinnamon, ground",
+        "quantity": 0.25,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Sweets",
+        "baseName": "Maple Syrup (100% Pure)",
+        "quantity": 45,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "1 teaspoon cooked in, the rest warmed and drizzled on top"
       },
       {
         "category": "Herbs",
@@ -688,13 +889,32 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "a pinch"
+      },
+      {
+        "category": "Bev",
+        "baseName": "Water, tap",
+        "quantity": 150,
+        "unit": "ml",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Vanilla extract",
+        "quantity": 0.25,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
       }
     ],
     "instructions": [
-      "Whisk the cornmeal into the coconut milk in a saucepan and bring to a gentle simmer, whisking often to prevent lumps.",
-      "Cook for 8-10 minutes, until thick and smooth.",
-      "Stir in the mashed banana during the last minute of cooking.",
-      "Top with a dusting of cinnamon and a drizzle of maple syrup if using."
+      "Whisk the cornmeal slowly into the water, coconut milk, 1 teaspoon of the maple syrup, the salt and the vanilla in a small pot.",
+      "Bring to a boil over medium high heat, whisking often, then lower to a simmer and keep whisking for about 10 minutes, until it starts to thicken.",
+      "Switch to a spoon and simmer gently for about 20 minutes more, scraping the bottom and sides often, until smooth and soft.",
+      "Just before it is done, slice the banana and warm the rest of the maple syrup.",
+      "Spoon into a bowl, top with the banana, the warm maple syrup and a dusting of cinnamon, and serve warm."
     ]
   },
   {
@@ -702,7 +922,7 @@
     "builderType": "snack",
     "name": "Pineapple Coconut Tapioca Pudding",
     "flavorProfile": "Small tapioca pearls simmered slowly in coconut milk until glossy and thick, topped with fresh pineapple.",
-    "healthBenefit": "A genuinely different texture from a porridge or rice pudding, real tapioca pearls cooked low and slow in coconut milk alone.",
+    "healthBenefit": "A different texture from a porridge or rice pudding, tapioca pearls soaked and then cooked low and slow in coconut milk, with no other liquid.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
@@ -710,7 +930,7 @@
       {
         "category": "Grain",
         "baseName": "Tapioca, pearl, dry",
-        "quantity": 30,
+        "quantity": 15,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": "simmered",
@@ -719,7 +939,7 @@
       {
         "category": "NutSeed",
         "baseName": "Coconut milk",
-        "quantity": 220,
+        "quantity": 185,
         "unit": "ml",
         "cutPrep": null,
         "cookingMethod": null,
@@ -737,11 +957,11 @@
       {
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
-        "quantity": 5,
+        "quantity": 30,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": "optional"
+        "prepNote": null
       },
       {
         "category": "Herbs",
@@ -751,13 +971,22 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Vanilla extract",
+        "quantity": 0.3,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
       }
     ],
     "instructions": [
-      "Combine the tapioca pearls and coconut milk in a saucepan and let sit for 10 minutes to soften.",
-      "Bring to a gentle simmer, stirring frequently, and cook for 15-20 minutes, until the pearls turn translucent and the mixture thickens.",
-      "Let cool slightly (it will continue to thicken as it cools), then top with the fresh diced pineapple.",
-      "Drizzle with maple syrup if using, and serve warm or chilled."
+      "Soak the tapioca pearls in about a third of the coconut milk for 1 hour.",
+      "Pour the pearls and any liquid left into a saucepan with the rest of the coconut milk, the maple syrup, vanilla and salt. Bring to a boil over medium heat, stirring now and then.",
+      "Lower the heat and simmer for about 20 minutes, stirring now and then, until the pearls turn translucent and the pudding thickens.",
+      "Let cool for about 10 minutes to eat warm, or chill overnight. Top with the diced pineapple before eating."
     ]
   },
   {
@@ -773,7 +1002,7 @@
       {
         "category": "Grain",
         "baseName": "Tapioca, pearl, dry",
-        "quantity": 30,
+        "quantity": 15,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": "simmered",
@@ -782,7 +1011,7 @@
       {
         "category": "NutSeed",
         "baseName": "Coconut milk",
-        "quantity": 220,
+        "quantity": 185,
         "unit": "ml",
         "cutPrep": null,
         "cookingMethod": null,
@@ -809,11 +1038,11 @@
       {
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
-        "quantity": 5,
+        "quantity": 30,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": "optional"
+        "prepNote": null
       },
       {
         "category": "Herbs",
@@ -823,13 +1052,22 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Vanilla extract",
+        "quantity": 0.3,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
       }
     ],
     "instructions": [
-      "Combine the tapioca pearls and coconut milk in a saucepan and let sit for 10 minutes to soften.",
-      "Bring to a gentle simmer, stirring frequently, and cook for 15-20 minutes, until the pearls turn translucent and the mixture thickens.",
-      "Let cool slightly (it will continue to thicken as it cools), then top with the fresh blackberries and raspberries.",
-      "Drizzle with maple syrup if using, and serve warm or chilled."
+      "Soak the tapioca pearls in about a third of the coconut milk for 1 hour.",
+      "Pour the pearls and any liquid left into a saucepan with the rest of the coconut milk, the maple syrup, vanilla and salt. Bring to a boil over medium heat, stirring now and then.",
+      "Lower the heat and simmer for about 20 minutes, stirring now and then, until the pearls turn translucent and the pudding thickens.",
+      "Let cool for about 10 minutes to eat warm, or chill overnight. Top with the blackberries and raspberries before eating."
     ]
   },
   {
@@ -879,6 +1117,15 @@
         "prepNote": null
       },
       {
+        "category": "Bev",
+        "baseName": "Lime",
+        "quantity": 5,
+        "unit": "ml",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "juice"
+      },
+      {
         "category": "NutSeed",
         "baseName": "Coconut milk",
         "quantity": 30,
@@ -889,7 +1136,8 @@
       }
     ],
     "instructions": [
-      "Slice or dice all the fruit and arrange it together in a bowl.",
+      "Slice or dice all the fruit and combine it in a bowl.",
+      "Squeeze the lime juice over and toss gently, so the banana stays bright.",
       "Drizzle the coconut milk over the top just before serving."
     ]
   },
@@ -897,8 +1145,8 @@
     "id": "curated_vegan_citrus_avocado_breakfast_bowl",
     "builderType": "snack",
     "name": "Citrus Avocado Breakfast Bowl",
-    "flavorProfile": "Sliced avocado with orange and grapefruit segments, a squeeze of lime, and a pinch of salt.",
-    "healthBenefit": "A genuinely savory-leaning, no-cook breakfast built on whole avocado, the one fat source in this batch that scores completely clean for Hashimoto's, unlike any pressed oil.",
+    "flavorProfile": "Diced avocado with rounds of orange and grapefruit in a lime and vinegar dressing, with fresh mint.",
+    "healthBenefit": "A savory-leaning, no-cook breakfast built on whole avocado as its one fat source, with citrus rounds in a sharp lime and vinegar dressing.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
@@ -906,38 +1154,38 @@
       {
         "category": "Fruit",
         "baseName": "Avocado",
-        "quantity": 80,
+        "quantity": 75,
         "unit": "g",
-        "cutPrep": "sliced",
+        "cutPrep": "diced",
         "cookingMethod": null,
         "prepNote": null
       },
       {
         "category": "Fruit",
         "baseName": "Orange",
-        "quantity": 60,
+        "quantity": 120,
         "unit": "g",
-        "cutPrep": "segmented",
+        "cutPrep": "peeled and sliced into rounds",
         "cookingMethod": null,
         "prepNote": null
       },
       {
         "category": "Fruit",
         "baseName": "Grapefruit",
-        "quantity": 60,
+        "quantity": 110,
         "unit": "g",
-        "cutPrep": "segmented",
+        "cutPrep": "peeled and sliced into rounds",
         "cookingMethod": null,
         "prepNote": null
       },
       {
         "category": "Bev",
         "baseName": "Lime",
-        "quantity": 11,
+        "quantity": 15,
         "unit": "g",
         "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": "juice of a quarter of a lime"
+        "prepNote": "juice of half a lime"
       },
       {
         "category": "Herbs",
@@ -947,19 +1195,47 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Vinegar, red wine",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Spices, pepper, black, ground",
+        "quantity": 0.0625,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Spices, spearmint, fresh",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "leaves"
       }
     ],
     "instructions": [
-      "Arrange the sliced avocado with the orange and grapefruit segments in a bowl.",
-      "Squeeze the lime juice over the top and finish with a pinch of salt."
+      "Whisk the lime juice and vinegar in the bottom of a shallow bowl and season with most of the salt and the pepper.",
+      "Cut the peel and white pith off the orange and grapefruit, following the curve of the fruit, then slice them into thin rounds, pick out any seeds, and toss them in the dressing.",
+      "Dice the avocado and fold it in gently. Scatter the mint leaves and the last of the salt over the top and eat right away."
     ]
   },
   {
     "id": "curated_vegan_berry_banana_coconut_smoothie",
     "builderType": "snack",
     "name": "Berry Banana Coconut Smoothie",
-    "flavorProfile": "A thick, no-cook smoothie of banana, blueberry, and strawberry blended with coconut milk and a splash of lime.",
-    "healthBenefit": "A genuinely quick option for a busy morning, built entirely from this batch's clean fruit-and-coconut-milk palette.",
+    "flavorProfile": "A thick, no-cook smoothie of banana, blueberry, and strawberry blended with coconut milk, a little maple and a pinch of cinnamon.",
+    "healthBenefit": "A quick option for a busy morning, built entirely from this batch's clean fruit-and-coconut-milk palette.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "glass",
@@ -967,7 +1243,7 @@
       {
         "category": "Fruit",
         "baseName": "Banana",
-        "quantity": 80,
+        "quantity": 70,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
@@ -1002,18 +1278,36 @@
       },
       {
         "category": "Bev",
-        "baseName": "Lime",
-        "quantity": 11,
-        "unit": "g",
-        "cutPrep": "freshly squeezed",
+        "baseName": "Water, tap",
+        "quantity": 60,
+        "unit": "ml",
+        "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": "juice of a quarter of a lime"
+        "prepNote": null
+      },
+      {
+        "category": "Sweets",
+        "baseName": "Maple Syrup (100% Pure)",
+        "quantity": 7,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Spices, cinnamon, ground",
+        "quantity": 0.125,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
       }
     ],
     "instructions": [
-      "Combine the banana, blueberry, strawberry, coconut milk, and lime juice in a blender.",
-      "Blend until smooth, adding a splash more coconut milk if you prefer it thinner.",
-      "Pour into a glass and drink right away."
+      "Put the banana, blueberries, strawberries, coconut milk, water, maple syrup and cinnamon in a blender.",
+      "Blend for about 30 seconds, until smooth.",
+      "Add a few ice cubes if you like it colder, pour into a glass and drink right away."
     ]
   },
   {
@@ -1038,7 +1332,7 @@
       {
         "category": "Bev",
         "baseName": "Water, tap",
-        "quantity": 150,
+        "quantity": 105,
         "unit": "ml",
         "cutPrep": null,
         "cookingMethod": null,
@@ -1074,7 +1368,7 @@
       {
         "category": "Veg",
         "baseName": "Coriander (cilantro) leaves",
-        "quantity": 5,
+        "quantity": 2,
         "unit": "g",
         "cutPrep": "chopped",
         "cookingMethod": null,
@@ -1083,27 +1377,36 @@
       {
         "category": "Bev",
         "baseName": "Lime",
-        "quantity": 11,
+        "quantity": 5,
         "unit": "g",
         "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": "juice of a quarter of a lime"
+        "prepNote": null
       },
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 0.75,
+        "unit": "g",
         "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Bev",
+        "baseName": "Lemon",
+        "quantity": 2.5,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       }
     ],
     "instructions": [
-      "Combine the rice and filtered water in a saucepan, bring to a boil, then cover and simmer for 30-35 minutes, until tender.",
-      "Meanwhile, cook the zucchini and bell pepper in a splash of water in a covered pan over medium heat for 5-7 minutes, until soft, adding a little more water if the pan gets dry.",
+      "Combine the rice and filtered water in a saucepan, bring to a boil, then cover and simmer for 30-35 minutes, until tender and the water is absorbed.",
+      "Meanwhile, cook the zucchini and bell pepper in a tablespoon of water in a covered pan over medium heat for 5-7 minutes, until soft, adding a little more water if the pan gets dry.",
       "Stir in the diced tomato and cook 1-2 minutes more, just until warmed through.",
-      "Spoon the vegetables over the rice, finish with the cilantro, lime juice, and salt."
+      "Mix the hot rice with the cilantro, lime juice, lemon juice and salt, and spoon the vegetables over it."
     ]
   },
   {
@@ -1111,7 +1414,7 @@
     "builderType": "snack",
     "name": "Savory Polenta with Leeks & Tomato",
     "flavorProfile": "Smooth water-based polenta topped with leeks and tomato cooked soft, finished with fresh cilantro and lime.",
-    "healthBenefit": "A genuinely different savory grain base from the rice bowl in this same batch, still built entirely without any pressed oil.",
+    "healthBenefit": "A different savory grain base from the rice bowl in this same batch, still built entirely without any pressed oil.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
@@ -1128,7 +1431,7 @@
       {
         "category": "Bev",
         "baseName": "Water, tap",
-        "quantity": 180,
+        "quantity": 250,
         "unit": "ml",
         "cutPrep": null,
         "cookingMethod": null,
@@ -1137,7 +1440,7 @@
       {
         "category": "Veg",
         "baseName": "Leek",
-        "quantity": 50,
+        "quantity": 85,
         "unit": "g",
         "cutPrep": "sliced",
         "cookingMethod": "sauteed",
@@ -1155,7 +1458,7 @@
       {
         "category": "Veg",
         "baseName": "Coriander (cilantro) leaves",
-        "quantity": 5,
+        "quantity": 2,
         "unit": "g",
         "cutPrep": "chopped",
         "cookingMethod": null,
@@ -1164,28 +1467,37 @@
       {
         "category": "Bev",
         "baseName": "Lime",
-        "quantity": 11,
+        "quantity": 5,
         "unit": "g",
         "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": "juice of a quarter of a lime"
+        "prepNote": null
       },
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Pepper, black, ground",
+        "quantity": 0.1,
+        "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
       }
     ],
     "instructions": [
-      "Whisk the cornmeal into the filtered water in a saucepan and bring to a gentle simmer, whisking often to prevent lumps.",
-      "Cook for 8-10 minutes, until thick and smooth, and season with half the salt.",
-      "Meanwhile, cook the sliced leek in a splash of water in a covered pan over medium heat for 6-8 minutes, until soft.",
-      "Stir in the diced tomato and cook 1-2 minutes more, just until warmed through.",
-      "Spoon the leek and tomato over the polenta, finish with the cilantro, lime juice, and remaining salt."
+      "Cook the sliced leek in a tablespoon of the water in a covered saucepan over medium heat for about 10 minutes, stirring now and then, until soft. Spoon it out and set aside.",
+      "Bring the rest of the water to a boil in the same pan and slowly whisk in the cornmeal.",
+      "Lower the heat and stir often for 15-20 minutes until thick and creamy, adding the salt a little at a time.",
+      "Stir the diced tomato into the leek and warm it through for 1-2 minutes.",
+      "Spoon the leek and tomato over the polenta and finish with the pepper, cilantro and lime juice."
     ]
   },
   {
@@ -1193,7 +1505,7 @@
     "builderType": "snack",
     "name": "Zucchini & Fennel Breakfast Hash with Avocado",
     "flavorProfile": "Zucchini and fennel cooked soft with tomato, topped with sliced avocado, cilantro, and lime.",
-    "healthBenefit": "A genuinely different vegetable combination from this batch's other savory dishes, with real sliced avocado standing in for the richness a pressed oil would normally add.",
+    "healthBenefit": "A different vegetable combination from this batch's other savory dishes, with sliced avocado standing in for the richness a pressed oil would normally add.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "plate",
@@ -1214,6 +1526,15 @@
         "unit": "g",
         "cutPrep": "sliced",
         "cookingMethod": "sauteed",
+        "prepNote": null
+      },
+      {
+        "category": "Veg",
+        "baseName": "Garlic",
+        "quantity": 2,
+        "unit": "g",
+        "cutPrep": "minced",
+        "cookingMethod": null,
         "prepNote": null
       },
       {
@@ -1255,8 +1576,17 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 1.2,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Pepper, black, ground",
+        "quantity": 0.1,
+        "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
@@ -1264,8 +1594,9 @@
     ],
     "instructions": [
       "Cook the zucchini and fennel in a splash of water in a covered pan over medium heat for 7-9 minutes, until soft, adding a little more water if the pan gets dry.",
-      "Stir in the diced tomato and cook 1-2 minutes more, just until warmed through, then season with the salt.",
-      "Transfer to a plate and top with the sliced avocado, cilantro, and a squeeze of lime."
+      "Uncover, add the garlic and cook for 1 minute, until fragrant.",
+      "Stir in the tomato and cook 1-2 minutes more, just until warmed through, then season with the salt and pepper.",
+      "Transfer to a plate and top with the avocado, cilantro and a squeeze of lime."
     ]
   },
   {
@@ -1273,7 +1604,7 @@
     "builderType": "snack",
     "name": "Cranberry Orange Oatmeal",
     "flavorProfile": "Coconut-milk oatmeal finished with fresh cranberries and orange segments.",
-    "healthBenefit": "Cranberry's tartness against orange's sweetness gives this oatmeal a genuinely different flavor from this batch's other fruit pairings.",
+    "healthBenefit": "Cranberry's tartness against orange's sweetness gives this oatmeal a different flavor from this batch's other fruit pairings.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
@@ -1290,7 +1621,7 @@
       {
         "category": "NutSeed",
         "baseName": "Coconut milk",
-        "quantity": 150,
+        "quantity": 105,
         "unit": "ml",
         "cutPrep": null,
         "cookingMethod": null,
@@ -1317,11 +1648,11 @@
       {
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
-        "quantity": 5,
+        "quantity": 18,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": "optional"
+        "prepNote": null
       },
       {
         "category": "Herbs",
@@ -1331,12 +1662,39 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "a pinch"
+      },
+      {
+        "category": "Bev",
+        "baseName": "Water, tap",
+        "quantity": 80,
+        "unit": "ml",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Spices, cinnamon, ground",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Vanilla extract",
+        "quantity": 0.45,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
       }
     ],
     "instructions": [
-      "Combine the oats and coconut milk in a small saucepan and bring to a gentle simmer.",
-      "Cook, stirring occasionally, for 5-7 minutes, until thick and creamy, stirring in the cranberries during the last 2 minutes so they soften.",
-      "Top with the fresh orange segments and a drizzle of maple syrup if using."
+      "Combine the oats, cinnamon, salt, coconut milk and water in a small saucepan and bring to a boil.",
+      "Lower the heat and simmer uncovered for 5 to 7 minutes, stirring often, until thick and creamy, stirring in the cranberries for the last 2 minutes so they soften.",
+      "Stir in the maple syrup and vanilla, top with the orange segments, and serve warm."
     ]
   },
   {
@@ -1352,25 +1710,25 @@
       {
         "category": "Fruit",
         "baseName": "Papaya",
-        "quantity": 100,
+        "quantity": 105,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "frozen"
       },
       {
         "category": "Fruit",
         "baseName": "Banana",
-        "quantity": 60,
+        "quantity": 50,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "sliced and frozen"
       },
       {
         "category": "NutSeed",
         "baseName": "Coconut milk",
-        "quantity": 120,
+        "quantity": 60,
         "unit": "ml",
         "cutPrep": null,
         "cookingMethod": null,
@@ -1379,17 +1737,44 @@
       {
         "category": "Bev",
         "baseName": "Lime",
-        "quantity": 11,
+        "quantity": 30,
         "unit": "g",
         "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": "juice of a quarter of a lime"
+        "prepNote": "juice of 1 lime"
+      },
+      {
+        "category": "Bev",
+        "baseName": "Carrot",
+        "quantity": 60,
+        "unit": "ml",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "carrot juice"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Ginger root",
+        "quantity": 0.75,
+        "unit": "tsp",
+        "cutPrep": "minced",
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Sweets",
+        "baseName": "Sweetener, syrup, agave",
+        "quantity": 7,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "optional"
       }
     ],
     "instructions": [
-      "Combine the papaya, banana, coconut milk, and lime juice in a blender.",
-      "Blend until smooth and thick, adding a splash more coconut milk if needed.",
-      "Pour into a bowl and eat with a spoon."
+      "Put the frozen papaya and banana, the carrot juice, coconut milk, lime juice, ginger and the agave syrup if using in a blender.",
+      "Blend until creamy and smooth, adding a splash more carrot juice or coconut milk only if the blender struggles, so the bowl stays thick.",
+      "Taste and add more lime or ginger if you like, then spoon into a bowl and eat right away."
     ]
   },
   {
@@ -1397,7 +1782,7 @@
     "builderType": "snack",
     "name": "Cantaloupe & Grapefruit Breakfast Bowl",
     "flavorProfile": "A no-cook bowl of fresh cantaloupe and grapefruit with a squeeze of lime.",
-    "healthBenefit": "A genuinely light, refreshing option built entirely from real whole fruit, with no grain or coconut milk at all.",
+    "healthBenefit": "A light, refreshing option built from whole fruit, with no grain or coconut milk at all.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
@@ -1423,16 +1808,35 @@
       {
         "category": "Bev",
         "baseName": "Lime",
-        "quantity": 11,
+        "quantity": 6,
         "unit": "g",
         "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": "juice of a quarter of a lime"
+        "prepNote": "zest grated and juice squeezed, from a quarter of a lime"
+      },
+      {
+        "category": "Sweets",
+        "baseName": "Sugar (Cane / Granulated)",
+        "quantity": 7,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Spices, spearmint, fresh",
+        "quantity": 1,
+        "unit": "tsp",
+        "cutPrep": "minced",
+        "cookingMethod": null,
+        "prepNote": null
       }
     ],
     "instructions": [
-      "Combine the diced cantaloupe and grapefruit segments in a bowl.",
-      "Squeeze the lime juice over the top just before serving."
+      "Stir the sugar, minced mint and grated lime zest together in a small bowl. Make it no more than an hour before eating so the zest stays fragrant.",
+      "Combine the diced cantaloupe and grapefruit segments in a bowl and drizzle with the lime juice, stirring gently to coat.",
+      "Sprinkle the lime mint sugar over the fruit, turn it once or twice to coat, and eat right away."
     ]
   },
   {
@@ -1484,11 +1888,11 @@
       {
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
-        "quantity": 5,
+        "quantity": 15,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": "optional"
+        "prepNote": null
       },
       {
         "category": "Herbs",
@@ -1498,12 +1902,21 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Vanilla extract",
+        "quantity": 0.33,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
       }
     ],
     "instructions": [
-      "Combine the rice and coconut milk in a saucepan and bring to a gentle simmer.",
-      "Cook uncovered, stirring often, for 30-35 minutes, until the rice is fully tender and the mixture is thick and creamy, stirring in the apple and cinnamon during the last 10 minutes.",
-      "Drizzle with maple syrup if using, and serve warm or chilled."
+      "Combine the rice, coconut milk, maple syrup and the pinch of salt in a saucepan and bring to a gentle simmer.",
+      "Cook uncovered, stirring often, for 40 to 50 minutes, adding a splash of water if it gets too thick, until the rice is fully tender and the mixture is thick and creamy. Stir in the apple and cinnamon for the last 10 minutes.",
+      "Take the pan off the heat, stir in the vanilla, and serve warm or chilled."
     ]
   },
   {
@@ -1528,7 +1941,7 @@
       {
         "category": "NutSeed",
         "baseName": "Coconut milk",
-        "quantity": 180,
+        "quantity": 225,
         "unit": "ml",
         "cutPrep": null,
         "cookingMethod": null,
@@ -1554,18 +1967,55 @@
       },
       {
         "category": "Herbs",
-        "baseName": "Common salt/table salt",
-        "quantity": 0.4,
+        "baseName": "Vanilla extract",
+        "quantity": 0.45,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Spices, ginger, ground",
+        "quantity": 0.125,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Sweets",
+        "baseName": "Maple Syrup (100% Pure)",
+        "quantity": 9,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": "a pinch"
+        "prepNote": null
+      },
+      {
+        "category": "NutSeed",
+        "baseName": "Chia seeds",
+        "quantity": 10,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "stirred in at the end"
+      },
+      {
+        "category": "NutSeed",
+        "baseName": "Almonds",
+        "quantity": 11,
+        "unit": "g",
+        "cutPrep": "sliced",
+        "cookingMethod": null,
+        "prepNote": null
       }
     ],
     "instructions": [
-      "Combine the sorghum and coconut milk in a saucepan and bring to a gentle simmer.",
-      "Cover and cook for 40-45 minutes, stirring occasionally and adding a splash of water if it gets too thick, until the sorghum is tender.",
-      "Stir in the chopped dates and cinnamon during the last 5 minutes, so the dates soften slightly."
+      "Rinse the sorghum, then combine it in a saucepan with the coconut milk, vanilla, cinnamon, ginger and maple syrup and bring to a gentle simmer.",
+      "Cover and cook for 40 to 45 minutes, stirring now and then and adding a splash of water if it gets too thick, until the sorghum is tender. You can also cook everything in a greased slow cooker on low for about 8 hours, as the source does.",
+      "Stir in the chopped dates for the last 5 minutes so they soften.",
+      "Take off the heat, stir in the chia seeds and let it stand 5 to 10 minutes to thicken. Top with the sliced almonds."
     ]
   },
   {
@@ -1573,7 +2023,7 @@
     "builderType": "snack",
     "name": "Savory Fennel & Tomato Rice Bowl",
     "flavorProfile": "Simmered rice topped with fennel and tomato cooked soft in a splash of water, finished with fresh cilantro and lime.",
-    "healthBenefit": "A genuinely different savory vegetable pairing from this batch's other rice bowl, still built entirely without any pressed oil.",
+    "healthBenefit": "A different savory vegetable pairing from this batch's other rice bowl, still built entirely without any pressed oil.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
@@ -1590,7 +2040,7 @@
       {
         "category": "Bev",
         "baseName": "Water, tap",
-        "quantity": 150,
+        "quantity": 105,
         "unit": "ml",
         "cutPrep": null,
         "cookingMethod": null,
@@ -1617,7 +2067,7 @@
       {
         "category": "Veg",
         "baseName": "Coriander (cilantro) leaves",
-        "quantity": 5,
+        "quantity": 2,
         "unit": "g",
         "cutPrep": "chopped",
         "cookingMethod": null,
@@ -1626,27 +2076,36 @@
       {
         "category": "Bev",
         "baseName": "Lime",
-        "quantity": 11,
+        "quantity": 5,
         "unit": "g",
         "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": "juice of a quarter of a lime"
+        "prepNote": null
       },
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
-        "unit": "tsp",
+        "quantity": 0.75,
+        "unit": "g",
         "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Bev",
+        "baseName": "Lemon",
+        "quantity": 2.5,
+        "unit": "g",
+        "cutPrep": "freshly squeezed",
         "cookingMethod": null,
         "prepNote": null
       }
     ],
     "instructions": [
-      "Combine the rice and filtered water in a saucepan, bring to a boil, then cover and simmer for 30-35 minutes, until tender.",
-      "Meanwhile, cook the fennel in a splash of water in a covered pan over medium heat for 6-8 minutes, until soft, adding a little more water if the pan gets dry.",
+      "Combine the rice and filtered water in a saucepan, bring to a boil, then cover and simmer for 30-35 minutes, until tender and the water is absorbed.",
+      "Meanwhile, cook the fennel in a tablespoon of water in a covered pan over medium heat for 6-8 minutes, until soft, adding a little more water if the pan gets dry.",
       "Stir in the diced tomato and cook 1-2 minutes more, just until warmed through.",
-      "Spoon the vegetables over the rice, finish with the cilantro, lime juice, and salt."
+      "Mix the hot rice with the cilantro, lime juice, lemon juice and salt, and spoon the vegetables over it."
     ]
   },
   {
@@ -1694,10 +2153,19 @@
         "cutPrep": "grated",
         "cookingMethod": null,
         "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Common salt/table salt",
+        "quantity": 0.4,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a pinch"
       }
     ],
     "instructions": [
-      "Combine the oats, coconut milk, diced pear, and grated ginger in a jar or container.",
+      "Combine the oats, coconut milk, diced pear, grated ginger and the pinch of salt in a jar or container.",
       "Stir well, cover, and refrigerate overnight (at least 6 hours).",
       "Stir again before eating; add a splash more coconut milk if you prefer it looser."
     ]
@@ -1707,7 +2175,7 @@
     "builderType": "snack",
     "name": "Blackberry Lime Rice Pudding",
     "flavorProfile": "Creamy coconut-milk rice pudding topped with fresh blackberries and a squeeze of lime.",
-    "healthBenefit": "A genuinely different berry pairing from this batch's other rice puddings, lime brightening the blackberries' natural tartness.",
+    "healthBenefit": "A different berry pairing from this batch's other rice puddings, lime brightening the blackberries' natural tartness.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
@@ -1751,11 +2219,11 @@
       {
         "category": "Sweets",
         "baseName": "Maple Syrup (100% Pure)",
-        "quantity": 5,
+        "quantity": 15,
         "unit": "g",
         "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": "optional"
+        "prepNote": null
       },
       {
         "category": "Herbs",
@@ -1765,12 +2233,30 @@
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": "a pinch"
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Spices, cinnamon, ground",
+        "quantity": 0.25,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Vanilla extract",
+        "quantity": 0.33,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
       }
     ],
     "instructions": [
-      "Combine the rice and coconut milk in a saucepan and bring to a gentle simmer.",
-      "Cook uncovered, stirring often, for 30-35 minutes, until the rice is fully tender and the mixture is thick and creamy.",
-      "Stir in the lime juice, top with the fresh blackberries, and drizzle with maple syrup if using."
+      "Combine the rice, coconut milk, maple syrup, cinnamon and the pinch of salt in a saucepan and bring to a gentle simmer.",
+      "Cook uncovered, stirring often, for 40 to 50 minutes, adding a splash of water if it gets too thick, until the rice is fully tender and the mixture is thick and creamy.",
+      "Take the pan off the heat and stir in the vanilla and lime juice. Top with the blackberries and serve warm or chilled."
     ]
   }
 ]

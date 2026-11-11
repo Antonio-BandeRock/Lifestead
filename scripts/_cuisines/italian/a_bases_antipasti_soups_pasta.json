@@ -628,20 +628,11 @@
           "cutPrep": "finely grated",
           "cookingMethod": null,
           "prepNote": "zest of 1 lemon; or a little vanilla"
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "a pinch"
         }
       ],
       "instructions": [
         "Heat the oven to 170°C (340°F) and line the base of a 24 cm (9 inch) round pan with baking paper, leaving the sides ungreased so the batter can climb.",
-        "Whisk the eggs, sugar, salt and lemon zest with an electric whisk for 15 to 20 minutes, until pale, thick and about three times the volume; a ribbon falling from the whisk should sit on the surface.",
+        "Whisk the eggs, sugar and lemon zest with an electric whisk for 15 to 20 minutes, until pale, thick and about three times the volume; a ribbon falling from the whisk should sit on the surface.",
         "Sift the flour and starch over in three parts, folding each in gently from the bottom up with a spatula so the air stays in.",
         "Pour into the pan and bake for 35 to 45 minutes without opening the oven for the first 30, until golden and a skewer comes out clean.",
         "Turn it out upside down onto a rack and leave to cool completely, at least 2 hours, before slicing it into layers."
@@ -670,7 +661,7 @@
           "url": "https://www.misya.info/ricetta/pan-di-spagna.htm"
         }
       ],
-      "curationNote": "Recipes from Italy uses the classic ratio of one egg to 30 g sugar and 30 g flour, whisked 15 to 20 minutes and baked at 170°C for 40 minutes; Misya adds boiling water and baking powder. Kept the classic version raised only by eggs, with part of the flour as starch, as many Italian pastry cooks do. One serving is one slice, a tenth of a 24 cm cake."
+      "curationNote": "Recipes from Italy, Torta Diplomatica (Pan di Spagna) for every amount and step; 3 eggs, 90 g sugar, 90 g flour; doubled for our 24 cm cake. Lemon zest from Misya's version."
     },
     {
       "id": "curated_it_base_crema_pasticcera",
@@ -1270,7 +1261,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 10,
           "unit": "g",
           "cutPrep": "a few whole leaves",
@@ -1327,7 +1318,7 @@
           "url": "https://www.cookist.it/tutti-i-trucchi-di-giorgio-locatelli-per-un-sugo-al-pomodoro-perfetto/"
         }
       ],
-      "curationNote": "Ricette dal Mondo uses 400 g pulp and 700 ml passata with oil, half an onion, a pinch of sugar and basil for 20 to 25 minutes. Locatelli uses peeled tins, garlic warmed from a cold pan, crushes the tomatoes after the first simmer, no sugar and a knob of butter at the end. Kept the Locatelli method with a mix of tins and passata, no sugar. About 1.1 litres, enough for 500 g of pasta, 6 servings."
+      "curationNote": "Cookist, Giorgio Locatelli's tomato sauce for every amount and step; peeled tomatoes, oil, garlic warmed from cold, basil, salt, a knob of butter at the end, no sugar."
     },
     {
       "id": "curated_it_base_ragu_alla_bolognese",
@@ -1529,9 +1520,9 @@
         {
           "category": "Veg",
           "baseName": "Onion",
-          "quantity": 300,
+          "quantity": 150,
           "unit": "g",
-          "cutPrep": "thinly sliced",
+          "cutPrep": "1 onion, thinly sliced",
           "cookingMethod": "Braised",
           "prepNote": null
         },
@@ -1564,15 +1555,6 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "a sprig",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Common salt/table salt",
           "quantity": 2,
           "unit": "tsp",
@@ -1587,7 +1569,7 @@
         "Return the meat, pour in the wine and let it evaporate for 3 to 5 minutes.",
         "Stir in the tomato paste, then the passata and salt, and bring to a simmer.",
         "Set the lid ajar and cook on the lowest heat, the sauce barely blipping (\"pippiare\", as Naples says), for at least 6 hours, stirring every 20 to 30 minutes and adding a splash of water if it thickens too fast.",
-        "Add the basil at the end. Serve the sauce over ziti or rigatoni, and the meat after as a second course."
+        "Serve the sauce over ziti or rigatoni, and the meat after as a second course."
       ],
       "nutritionHighlights": [
         {
@@ -1613,7 +1595,7 @@
           "url": "https://www.cookist.it/ragu-napoletano/"
         }
       ],
-      "curationNote": "Misya: 600 g beef muscle, 2 pork ribs, 500 g pork, onion, red wine, 2 l passata, paste, at least 6 hours. Cookist: passata, brisket, pork ribs, sausages, pork rind and braciole, onion, red wine, about 6 hours. Kept beef, ribs and sausage with 2 l passata, and left out the braciole and cotica, which are separate preparations. Serves 8 with pasta, the meat counted in the total because it is eaten as the second course."
+      "curationNote": "Misya, Ragù napoletano for every amount and step; serves 4 with 600 g beef, 2 ribs, 500 g pork, 1 onion, half a glass of red wine, 2 l passata, 1 tbsp paste, oil and salt; Cookist (serves 6) adds sausages, 2 tbsp paste and a glass of wine."
     },
     {
       "id": "curated_it_base_pesto_alla_genovese",
@@ -1631,7 +1613,7 @@
       "ingredients": [
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 50,
           "unit": "g",
           "cutPrep": "young Genovese basil leaves, washed and dried",
@@ -1724,7 +1706,7 @@
           "url": "https://www.scattidigusto.it/pesto-al-mortaio-la-ricetta-di-roberto-panizza-da-fare-a-casa/"
         }
       ],
-      "curationNote": "Recipes from Italy gives 50 g basil, 120 ml oil, 70 g Parmigiano, 30 g Fiore Sardo, 1 to 2 garlic cloves, 15 g pine nuts and coarse salt. Roberto Panizza (Pesto World Championship) gives the mortar order: garlic with pine nuts, salt, basil worked with a rotating motion, cheeses, oil. About 290 g, 6 servings of 3 tbsp. curated_sauce_simple_pesto is the quick blender version; this one is the mortar original."
+      "curationNote": "Recipes from Italy, Original pesto genovese for every amount and step; 50 g basil, 120 ml oil, 70 g Parmigiano, 30 g Fiore Sardo, 1 to 2 garlic cloves, 15 g pine nuts, coarse salt."
     },
     {
       "id": "curated_it_base_besciamella",
@@ -2577,7 +2559,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 10,
           "unit": "g",
           "cutPrep": "about 10 leaves, torn",
@@ -2652,7 +2634,7 @@
           "url": "https://www.cookist.it/bruschette-al-pomodoro-ricetta/"
         }
       ],
-      "curationNote": "Recipes from Italy: 8 slices of 1 cm bread, 500 g tomatoes, 2 garlic cloves, 10 basil leaves, 80 ml oil, topping rested about 1 hour, toasted at 200°C. Cookist: 2 cm country bread toasted at 190°C, 500 g datterini, dried oregano, one garlic clove, topping chilled 30 minutes. Kept both: plain tomato, garlic rubbed on the toast, basil, optional oregano. Bread weight is about 40 g a slice."
+      "curationNote": "Recipes from Italy, Tomato Bruschetta for every amount and step; 8 slices, 500 g tomatoes, 2 garlic, 10 basil leaves, 80 ml oil, salt; Cookist adds oregano."
     },
     {
       "id": "curated_it_insalata_caprese",
@@ -2688,7 +2670,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 8,
           "unit": "g",
           "cutPrep": "a handful of whole leaves",
@@ -2753,7 +2735,7 @@
           "url": "https://www.recipesfromitaly.com/caprese-salad/"
         }
       ],
-      "curationNote": "Misya: 500 g buffalo mozzarella, 400 g tomatoes, basil, salt, oregano, oil, 1 cm slices, an hour in the fridge. Recipes from Italy: 4 tomatoes, 500 g mozzarella, 10 basil leaves, 4 tbsp oil, tomatoes salted 2 minutes. No balsamic, as neither source uses it. The database has no buffalo mozzarella, so plain mozzarella is counted."
+      "curationNote": "Recipes from Italy, Caprese Salad for every amount and step; 4 tomatoes, 500 g mozzarella, 10 basil leaves, 4 tbsp oil, salt; Misya adds oregano."
     },
     {
       "id": "curated_it_vitello_tonnato",
@@ -3011,7 +2993,7 @@
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "for the rice, which takes up all its cooking liquid"
         },
         {
           "category": "Veg",
@@ -3104,6 +3086,24 @@
           "prepNote": "provola or mozzarella can stand in; in place of caciocavallo cheese, which the database does not hold"
         },
         {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 1.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for the ragù, to taste"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.4,
+          "unit": "g",
+          "cutPrep": "freshly ground",
+          "cookingMethod": null,
+          "prepNote": "for the ragù, to taste"
+        },
+        {
           "category": "PantryStaples",
           "baseName": "Grains, wheat flour, white, all purpose, unbleached",
           "quantity": 200,
@@ -3122,6 +3122,15 @@
           "prepNote": "for the batter"
         },
         {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for the batter, about 1/3 tsp"
+        },
+        {
           "category": "Fats",
           "baseName": "Peanøttolje",
           "quantity": 60,
@@ -3135,9 +3144,9 @@
         "Bring the salted water to the boil, add the rice and cook it, stirring now and then, for 15 to 18 minutes until it has taken up all the water.",
         "Off the heat stir in the saffron with its water, the butter and the Parmigiano, then spread the rice on a tray and chill it for at least 2 hours, or overnight, until firm.",
         "For the ragù, soften the onion, carrot and celery in the oil for 5 to 8 minutes, add the pork and beef and brown them, then pour in the wine and let it bubble off.",
-        "Add the passata and simmer for 20 to 30 minutes, adding the peas for the last 10 minutes, until thick; cool it completely.",
+        "Add the passata and simmer for 20 to 30 minutes, adding the peas for the last 10 minutes, until thick. Season with salt and pepper and cool it completely.",
         "With wet hands, flatten a handful of rice (about 120 g) in your palm, put a spoon of ragù and a few cubes of caciocavallo in the middle and close the rice around it into a ball or a cone.",
-        "Whisk the flour and water into a smooth batter, dip each arancino in it, then roll it in the breadcrumbs.",
+        "Whisk the flour, water and a little salt into a smooth batter, dip each arancino in it, then roll it in the breadcrumbs.",
         "Fry 2 or 3 at a time in oil at 340 to 350°F (170 to 175°C) for 2 to 4 minutes, until deep gold; drain on paper and rest 5 minutes before eating."
       ],
       "nutritionHighlights": [
@@ -3164,7 +3173,7 @@
           "url": "https://www.misya.info/ricetta/arancini-di-riso.htm"
         }
       ],
-      "curationNote": "Recipes from Italy: 500 g rice in 1.2 L water with saffron, butter, 100 g Parmigiano, chilled 2 hours; ragù of pork, beef, wine, passata and peas; caciocavallo; flour and water batter and breadcrumbs; fried at 175°C. Misya: half the rice, the same ragù and caciocavallo, egg instead of batter. Kept the Palermo arancina al ragù with the flour batter (pastella) of the first source. Frying oil is counted as the absorbed share only."
+      "curationNote": "Recipes from Italy, Arancini (Sicilian Rice Balls) for every amount and step; makes 10, same as ours."
     },
     {
       "id": "curated_it_suppli",
@@ -3567,7 +3576,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 5,
           "unit": "g",
           "cutPrep": "a few leaves",
@@ -3608,7 +3617,7 @@
           "url": "https://www.recipesfromitaly.com/caponata-recipe-authentic-sicilian-version/"
         }
       ],
-      "curationNote": "Misya: 600 g eggplant, celery, onion, 80 g green olives, 25 g capers, tomato, paste, a spoon of sugar and a small cup of vinegar, for 4. Recipes from Italy: 3 large eggplants salted 30 minutes and fried in seed oil, onion, 2 celery stalks blanched 5 minutes, capers, 200 g olives, pine nuts, 150 ml passata, 60 ml white wine vinegar, 2 tsp sugar, rested overnight, for 6. Followed the Palermo style of the second (fried eggplant, blanched celery, pine nuts) with Misya's tomato paste. Frying oil is counted as the absorbed share only."
+      "curationNote": "Recipes from Italy, Caponata for every amount and step; for 6: 3 eggplants, onion, 2 celery stalks, capers, olives, pine nuts, 150 ml passata, 60 ml vinegar, 2 tsp sugar, basil; Misya adds tomato paste."
     },
     {
       "id": "curated_it_olive_allascolana",
@@ -4030,7 +4039,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 4,
           "unit": "g",
           "cutPrep": "a few leaves, torn",
@@ -4096,7 +4105,7 @@
           "url": "https://www.recipesfromitaly.com/frittata-recipe/"
         }
       ],
-      "curationNote": "Misya: 4 eggs, 400 g zucchini in thin rounds, 2 tbsp parmigiano, basil, 5 minutes then flipped. Recipes from Italy: 8 eggs, 100 g Parmigiano, 22 cm pan, low heat covered 7 to 8 minutes, flipped on a lid, 5 minutes more. Took 6 eggs as the middle ground for 400 g of zucchini, and the covered low-heat method with a flip."
+      "curationNote": "Misya, Frittata di zucchine for every amount and step; 4 eggs, 400 g zucchini, parmigiano, basil, salt and pepper; egg count raised toward Recipes from Italy."
     },
     {
       "id": "curated_it_fiori_di_zucca_fritti",
@@ -4280,7 +4289,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 6,
           "unit": "g",
           "cutPrep": "a good handful of leaves, torn",
@@ -4320,7 +4329,7 @@
         "Soak the bread in the cold water with half the vinegar for 15 to 20 minutes, until soft right through.",
         "Squeeze the bread firmly in your hands and crumble it into a large bowl.",
         "Add the tomatoes, cucumber, onion and basil, season with salt and pepper and dress with the oil and the rest of the vinegar.",
-        "Toss gently and leave it to rest in a cool place for 30 to 60 minutes so the flavours mingle, then serve."
+        "Toss gently and leave it to rest in a cool place for 30 to 60 minutes so the flavors mingle, then serve."
       ],
       "nutritionHighlights": [
         {
@@ -4346,7 +4355,7 @@
           "url": "https://www.misya.info/ricetta/panzanella.htm"
         }
       ],
-      "curationNote": "Recipes from Italy: 300 g stale bread soaked 20 minutes in 350 ml water with 50 ml white wine vinegar, 300 g tomatoes, onion, cucumber, basil, 5 tbsp oil, rested 1 hour. Misya: 4 slices stale bread soaked, cherry tomatoes, red onion, cucumber, basil, oil, vinegar, chilled 30 minutes. Kept the soaked and squeezed Tuscan bread with red onion and cucumber; no capers or peppers, which are later additions. The soaking water is counted though most of it is squeezed out."
+      "curationNote": "Recipes from Italy, Panzanella Salad for every amount and step; 300 g bread, 350 ml water, 50 ml vinegar, tomatoes, onion, cucumber, basil, 5 tbsp oil."
     },
     {
       "id": "curated_it_minestrone",
@@ -4499,7 +4508,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 4,
           "unit": "g",
           "cutPrep": "a few leaves",
@@ -4549,7 +4558,7 @@
           "url": "https://www.misya.info/ricetta/minestrone.htm"
         }
       ],
-      "curationNote": "Recipes from Italy: potatoes, onion, carrots, zucchini, celery, tomatoes, 100 g pumpkin, 100 g broccoli, 200 g borlotti or cannellini, 3 tbsp oil, 1.5 L water, 10 minute soffritto then about 35 minutes of simmering, for 6. Misya: potatoes, carrots, zucchini, cabbage, onion, spinach, celery, cherry tomatoes, peas and beans, cooked about an hour. Combined the two: the first source as the frame, with Misya's cabbage, spinach and herbs. There is no single official minestrone, which both say. Dried beans add time, so the simmer is longer than the first source gives for cooked beans."
+      "curationNote": "Recipes from Italy, Italian Minestrone Soup for every amount and step; for 6, with Misya's cabbage, spinach and herbs."
     },
     {
       "id": "curated_it_ribollita",
@@ -4582,7 +4591,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Rosemary",
+          "baseName": "Fresh Rosemary",
           "quantity": 2,
           "unit": "g",
           "cutPrep": "2 sprigs",
@@ -4740,7 +4749,7 @@
           "url": "https://www.misya.info/ricetta/ribollita.htm"
         }
       ],
-      "curationNote": "Recipes from Italy: 400 g dried cannellini cooked with rosemary, 300 g stale Tuscan bread, 400 g cavolo nero, 250 g savoy, 250 g chard, 250 g potatoes, 180 g peeled tomatoes, soffritto, thyme and rosemary, 2 L bean water, 2 hours simmering, half the beans puréed, layered with bread, chilled 2 hours and boiled again 15 minutes, for 6. Misya: cavolo nero, savoy, boiled beans, potato, zucchini, cherry tomatoes, soffritto, broth and stale bread, layered and reboiled, for 4. Followed the first, which is closer to the Florentine way. The bean water is counted as plain water."
+      "curationNote": "Recipes from Italy, Ribollita for every amount and step; for 6: 400 g cannellini, 300 g bread, cavolo nero, savoy, chard, potatoes, tomatoes, soffritto, thyme, rosemary, bean water."
     },
     {
       "id": "curated_it_pasta_e_fagioli",
@@ -4826,8 +4835,8 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Sage",
+          "category": "Veg",
+          "baseName": "Fresh Sage",
           "quantity": 2,
           "unit": "g",
           "cutPrep": "about 6 leaves",
@@ -4836,7 +4845,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Rosemary",
+          "baseName": "Fresh Rosemary",
           "quantity": 1,
           "unit": "g",
           "cutPrep": "1 sprig",
@@ -4893,7 +4902,7 @@
         "Soak the dried beans overnight, then simmer them in fresh water over low heat for 1.5 to 2 hours, until creamy inside; drain.",
         "In a large pot, warm the oil over low heat with the whole garlic, rosemary and sage for 2 to 3 minutes until the garlic is golden, then lift them out.",
         "Add the onion, carrot and celery and cook gently for 5 to 8 minutes, until soft.",
-        "Stir in the beans, then the passata, and let them take the flavour for 2 minutes.",
+        "Stir in the beans, then the passata, and let them take the flavor for 2 minutes.",
         "Pour in the hot broth, add the bay leaves, cover and simmer for about 20 minutes; season.",
         "Take out the bay leaves, blend 3 or 4 ladles of the soup smooth and set it aside.",
         "Add the pasta and cook it in the soup, stirring often, for the time on the packet less 1 minute, then stir the blended soup back in and serve with black pepper and a drizzle of oil."
@@ -4922,7 +4931,7 @@
           "url": "https://www.misya.info/ricetta/pasta-e-fagioli.htm"
         }
       ],
-      "curationNote": "Recipes from Italy: 700 g cooked borlotti (300 g dried), 200 g ditalini, onion, garlic, carrot, celery, 150 g passata, sage, rosemary, bay, 1 L vegetable broth, 5 tbsp oil, part blended, for 6. Misya: 350 g boiled borlotti, 250 g pasta mista, garlic, celery, cherry tomatoes, basil, cooked in water, for 4. Followed the first, the vegetarian version; both note others cook it with lard or pork rind. The broth points at Brodo Vegetale, 1 litre being about 4.25 cups. The bean cooking water is counted though it is drained off."
+      "curationNote": "Recipes from Italy, Pasta e Fagioli for every amount and step; 300 g dried borlotti, 200 g ditalini, soffritto, 150 g passata, sage, rosemary, bay, 1 L broth, 5 tbsp oil, for 6. The drained bean water row is kept as the curation note's stated convention."
     },
     {
       "id": "curated_it_pasta_e_ceci",
@@ -5009,7 +5018,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Rosemary",
+          "baseName": "Fresh Rosemary",
           "quantity": 2,
           "unit": "g",
           "cutPrep": "2 sprigs",
@@ -5085,7 +5094,7 @@
           "url": "https://www.misya.info/ricetta/pasta-e-ceci.htm"
         }
       ],
-      "curationNote": "Recipes from Italy: 300 g dried chickpeas (700 g cooked), 200 g ditaloni, soffritto, 2 garlic cloves, rosemary, 1.5 L vegetable broth, 50 g oil, half blended. Misya: 200 g dried chickpeas cooked 2 hours, part blended, garlic, chili, parsley and tagliatelle, for 4. Followed the first with Misya's optional chili, the Roman way. The broth points at Brodo Vegetale, 1.5 litres being about 6.3 cups."
+      "curationNote": "Recipes from Italy, Pasta e Ceci for every amount and step; 300 g dried chickpeas, 200 g ditaloni, soffritto, 2 garlic, rosemary, 1.5 L broth, 50 g oil; chili from Misya. The drained chickpea water row is kept as the app's stated convention for cooking water, as with the pasta water rows elsewhere in this slice."
     },
     {
       "id": "curated_it_stracciatella",
@@ -5387,7 +5396,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 4,
           "unit": "g",
           "cutPrep": "a few leaves, torn",
@@ -5481,7 +5490,7 @@
           "url": "https://www.dissapore.com/ricette/acquacotta/"
         }
       ],
-      "curationNote": "Cookist: 800 g onions, 300 g celery with leaves, 500 g peeled tomatoes, 450 ml water and 450 ml vegetable broth, 4 eggs, 8 slices bread toasted at 200°C, pecorino, basil, simmered 40 minutes, for 4. Dissapore: 2 onions, 2 celery stalks with leaves, 8 tbsp oil, a can of tomatoes, 1 litre boiling water, 6 eggs, Tuscan pecorino, 4 slices of Tuscan bread, 10 plus 20 minutes. Followed Cookist with Dissapore's generous oil. The broth points at Brodo Vegetale, 450 ml being about 1.9 cups."
+      "curationNote": "Cookist, Acquacotta maremmana for every amount and step; serves 4, same as ours; pepper from Dissapore's version, salt, oil and basil to taste in both."
     },
     {
       "id": "curated_it_pappa_al_pomodoro",
@@ -5528,7 +5537,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 10,
           "unit": "g",
           "cutPrep": "a good handful of leaves",
@@ -5604,7 +5613,7 @@
           "url": "https://cookist.it/pappa-al-pomodoro"
         }
       ],
-      "curationNote": "Recipes from Italy: 450 g stale bread, 500 g passata or peeled tomatoes, 1 L vegetable broth, 2 garlic cloves, oil, half a tablespoon of sugar, basil, about 45 minutes, for 6. Cookist: 500 g vine tomatoes, 250 g stale Tuscan bread, 1 L vegetable broth, 2 garlic cloves, basil, 20 minutes then 10 to 15 with the bread, rested 30 minutes, for 4. Followed Cookist's method with fresh tomatoes, scaled to 6, with the optional sugar from the first source. The broth points at Brodo Vegetale, 1.25 litres being about 5.3 cups."
+      "curationNote": "Cookist, Pappa al pomodoro for every amount and step; for 4: 500 g tomatoes, 250 g bread, 1 litre broth, 2 garlic, basil; scaled to 6 with the optional sugar from Recipes from Italy."
     },
     {
       "id": "curated_it_minestra_maritata",
@@ -5908,7 +5917,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Rosemary",
+          "baseName": "Fresh Rosemary",
           "quantity": 1,
           "unit": "g",
           "cutPrep": "a sprig, to serve",
@@ -5965,7 +5974,7 @@
           "url": "https://www.ricettedalmondo.it/zuppa-di-lenticchie.html"
         }
       ],
-      "curationNote": "Cookist: 250 g dried lentils, 250 g potatoes, carrot, onion, celery, 2 tbsp passata, 1 litre water, 4 tbsp oil, bay, rosemary to serve, 35 to 40 minutes, for 4. Ricette dal Mondo: 500 g lentils, soffritto, bay, 700 ml vegetable broth or water, about 30 minutes, for 4. Followed Cookist with the shorter optional soak."
+      "curationNote": "Cookist, Zuppa di lenticchie for every amount and step; for 4: 250 g lentils, 250 g potatoes, soffritto, 2 tbsp passata, 1 L water, 4 tbsp oil, bay, rosemary."
     },
     {
       "id": "curated_it_spaghetti_alla_carbonara",
@@ -7037,7 +7046,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 8,
           "unit": "g",
           "cutPrep": "a handful of leaves",
@@ -7104,7 +7113,7 @@
           "url": "https://www.ricettedalmondo.it/pasta-alla-norma.html"
         }
       ],
-      "curationNote": "Recipes from Italy: 350 g rigatoni, 500 g eggplant in 5 mm slices fried, 200 g ricotta salata, 500 g tomatoes, 2 garlic, basil, sauce 20 minutes, milled, then 10 to 15 minutes. Ricette dal Mondo: 380 g pasta, 1 large eggplant, 600 g peeled tomatoes, 80 g salted ricotta, seed oil for frying, sauce 15 minutes. Ricotta salata is not in the food database. Frying oil counts only the 60 ml or so the eggplant takes up."
+      "curationNote": "Ricette dal Mondo, Pasta alla Norma for every amount and step; 380 g pasta, 1 large eggplant, 600 g tomatoes, 80 g ricotta salata, basil, garlic."
     },
     {
       "id": "curated_it_spaghetti_alle_vongole",
@@ -8140,7 +8149,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 8,
           "unit": "g",
           "cutPrep": "a handful of leaves",
@@ -8198,7 +8207,7 @@
           "url": "https://www.misya.info/ricetta/spaghetti-al-pomodoro.htm"
         }
       ],
-      "curationNote": "Recipes from Italy: 350 g spaghetti, 40 g oil, 2 garlic, 800 g peeled tomatoes, basil, 30 to 35 minutes. Misya: 320 g spaghetti, 750 g peeled tomatoes, garlic and basil browned in oil, 15 minutes covered, blended, pasta finished in the sauce. Cheese is optional and left out."
+      "curationNote": "Recipes from Italy, Spaghetti al Pomodoro for every amount and step; 350 g spaghetti, 40 g oil, 2 garlic, 800 g peeled tomatoes, basil, salt."
     },
     {
       "id": "curated_it_pasta_con_le_sarde",
@@ -8543,12 +8552,21 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Rosemary",
+          "baseName": "Fresh Rosemary",
           "quantity": 1,
           "unit": "g",
           "cutPrep": "a sprig",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.15,
+          "unit": "g",
+          "cutPrep": "leaf",
+          "cookingMethod": null,
+          "prepNote": "1 bay leaf, for the roast"
         },
         {
           "category": "Alcohol",
@@ -8678,7 +8696,7 @@
         }
       ],
       "instructions": [
-        "Brown the pork and veal in the oil with the onion, carrot, celery, garlic and rosemary for 8 to 10 minutes, pour in the wine and cook covered over low heat for 40 to 60 minutes, until tender. Keep the cooking juices.",
+        "Brown the pork and veal in the oil with the onion, carrot, celery, garlic, rosemary and bay leaf for 8 to 10 minutes, pour in the wine and cook covered over low heat for 40 to 60 minutes, until tender. Keep the cooking juices and lift out the bay leaf.",
         "Boil the spinach, cabbage and escarole for 3 to 5 minutes, drain, squeeze dry.",
         "Mince the meat, vegetables and greens finely, then mix in the egg, Parmigiano, nutmeg, salt and pepper to a firm paste.",
         "Roll the pasta very thin and cut it in strips about 8 cm wide. Pipe or dot small balls of filling, about the size of a hazelnut, 2 cm apart along the middle.",
@@ -8710,7 +8728,7 @@
           "url": "https://www.scattidigusto.it/agnolotti-del-plin-piemontesi-al-canovaccio-ricetta-originale"
         }
       ],
-      "curationNote": "Dissapore: 300 g 00 flour and 3 eggs rested 30 minutes; filling of 200 g spinach, 200 g ground pork, 200 g ground veal, 1 egg, oil, onion, rosemary, garlic, bay, 50 g Parmigiano, browned, cooked with broth, chopped and bound; sheet 1 to 2 mm; 3 to 5 minutes; butter and sage plus roast juices. Scatti di Gusto: 200 g flour, 2 eggs; filling of 100 g pork loin, 100 g veal, 100 g rabbit roasted with carrot, celery, onion and white wine, 30 g savoy cabbage, 30 g escarole, 1 egg, 15 g cheese; served in a napkin or with roast juices. Rabbit is left out, since the only rabbit row in the database is wild rabbit, and the pork and veal are raised to cover it. Pasta points at Pasta Fresca all'Uovo (3 servings, 300 g flour and 3 eggs)."
+      "curationNote": "Dissapore, Agnolotti piemontesi for every amount and step; serves 4, same as ours; vegetables and wine from Scatti di Gusto's version as the recipe already says."
     },
     {
       "id": "curated_it_busiate_alla_trapanese",
@@ -8753,7 +8771,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 15,
           "unit": "g",
           "cutPrep": "a large handful of leaves",
@@ -8837,7 +8855,7 @@
           "url": "https://www.scattidigusto.it/busiate-alla-trapanese-la-ricetta-del-piatto-autentico-siciliano"
         }
       ],
-      "curationNote": "Dissapore: 400 g re-milled semola, 200 ml water, rest 30 minutes, shaped on a skewer, dried 2 hours; 250 g cherry tomatoes blanched 2 minutes, peeled, deseeded; 50 g almonds boiled 3 minutes and skinned; 10 basil leaves; garlic; oil; salt; mortar; 50 g pecorino at the end. Scatti di Gusto: 400 g semola, 200 ml cold water, rest 60 minutes; 250 g pomodori perini, 50 g almonds, 50 g basil, 1 tbsp pecorino, red garlic, oil; pasta cooked about 5 minutes. Pasta points at Pasta di Semola (4 servings, 400 g semola)."
+      "curationNote": "Dissapore, Busiate alla trapanese for every amount and step; 250 g cherry tomatoes, 50 g almonds, basil, garlic, oil, salt, pecorino."
     },
     {
       "id": "curated_it_linguine_allo_scoglio",

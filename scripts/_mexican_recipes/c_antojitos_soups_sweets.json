@@ -69,15 +69,6 @@
           "cutPrep": "powdered",
           "cookingMethod": null,
           "prepNote": "or chile de árbol powder; 2 tsp at 2 g per tsp"
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 3000,
-          "unit": "ml",
-          "cutPrep": "for boiling",
-          "cookingMethod": null,
-          "prepNote": null
         }
       ],
       "instructions": [
@@ -107,7 +98,7 @@
           "url": "https://camilamade.com/elote/"
         }
       ],
-      "curationNote": "Both sources dress the boiled or grilled ear with crema, mayonnaise, cotija, ground chile and lime; Mexico in My Kitchen boils it in the husk as in Mexico, so that is the main method."
+      "curationNote": "Camila Made, Elote for every amount and step."
     },
     {
       "id": "curated_mx_esquites",
@@ -1119,7 +1110,8 @@
           "quantity": 2,
           "unit": "each",
           "cutPrep": "leaves, blended into the beans",
-          "prepNote": null
+          "prepNote": null,
+          "contains": "none"
         },
         {
           "category": "Dairy",
@@ -1180,7 +1172,7 @@
           "url": "https://admin.animalgourmet.com/2025/09/16/tlayudas-oaxaca-receta/"
         }
       ],
-      "curationNote": "Animal Gourmet gives the Central Valleys version: asiento, black beans blended with hoja santa, tasajo, cabbage and quesillo. Larousse gives the fold-and-toast method with unto, 10 minutes a side. The tortilla itself is made here from the masa base, since no tlayuda shell base exists."
+      "curationNote": "Animal Gourmet, Cómo hacer tlayudas oaxaqueñas for every amount and step."
     },
     {
       "id": "curated_mx_tostadas_de_tinga",
@@ -1409,7 +1401,8 @@
           "quantity": 15,
           "unit": "each",
           "cutPrep": "washed",
-          "prepNote": "for wrapping, not eaten"
+          "prepNote": "for wrapping, not eaten",
+          "contains": "none"
         },
         {
           "category": "Fats",
@@ -1484,7 +1477,7 @@
           "url": "https://admin.animalgourmet.com/2014/12/30/que-son-y-como-se-preparan-las-corundas-michoacanas/"
         }
       ],
-      "curationNote": "Followed Margarita Carrillo Arronte (Larousse): 15 corundas from 1 kg masa and 350 g lard, wrapped in milpa leaves, tomato and poblano rajas sauce with crema. Animal Gourmet (Alicia Gironella) confirms the leaf folding and the 1 hour steam; its rice flour and cheese variant was not used."
+      "curationNote": "Larousse Cocina, Corundas (Margarita Carrillo) for every amount and step."
     },
     {
       "id": "curated_mx_uchepos",
@@ -1523,25 +1516,25 @@
           "unit": "g",
           "cutPrep": "kernels from about 10 to 12 tender ears",
           "cookingMethod": "Steamed",
-          "prepNote": null
+          "prepNote": "kernels from 12 tender ears"
         },
         {
           "category": "Dairy",
           "baseName": "Heavy Whipping Cream",
-          "quantity": 360,
+          "quantity": 720,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "stands in for nata, the skin skimmed from boiled milk"
+          "prepNote": "3 cups; stands in for nata, the skin skimmed from boiled milk"
         },
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 100,
+          "quantity": 200,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 cup"
         },
         {
           "category": "PantryStaples",
@@ -1567,7 +1560,8 @@
           "quantity": 24,
           "unit": "each",
           "cutPrep": "from the ears, rinsed",
-          "prepNote": "for wrapping, not eaten"
+          "prepNote": "for wrapping, not eaten",
+          "contains": "none"
         }
       ],
       "instructions": [
@@ -1589,15 +1583,11 @@
       ],
       "citations": [
         {
-          "source": "Larousse Cocina, Uchepos (Ricardo Muñoz Zurita)",
+          "source": "Larousse Cocina: Uchepos (Ricardo Muñoz Zurita)",
           "url": "https://laroussecocina.mx/receta/uchepos/"
-        },
-        {
-          "source": "Pati Jinich, Uchepos, tamales de elote",
-          "url": "https://patijinich.com/es/uchepos-tamales-de-elote/"
         }
       ],
-      "curationNote": "Ricardo Muñoz Zurita (Larousse): 12 tender ears, 3 cups nata, 1 cup sugar, baking powder, steamed 1 hour. Pati uses condensed milk and a little flour instead; the nata version was kept as the Michoacán one, with sugar trimmed to the lower end. Heavy cream stands in for nata. Michoacán serving with red salsa and cheese from the Larousse dictionary entry."
+      "curationNote": "Larousse Cocina, Uchepos (Ricardo Muñoz Zurita) for every amount and step; 12 tender ears, 3 cups nata, 1 cup sugar, baking powder, steamed 1 hour. Free to read; the site now asks for a free sign-up."
     },
     {
       "id": "curated_mx_tamales_rojos_de_cerdo",
@@ -1720,13 +1710,14 @@
           "quantity": 20,
           "unit": "each",
           "cutPrep": "soaked in hot water 20 to 30 minutes until pliable",
-          "prepNote": "for wrapping, not eaten"
+          "prepNote": "for wrapping, not eaten",
+          "contains": "none"
         }
       ],
       "instructions": [
         "Put the pork, garlic, onion, bay leaf and salt in a pot, cover with the water, bring to a boil and simmer partly covered for about 1 hour, skimming, until tender enough to shred. Shred the meat and keep the broth for the masa.",
         "Soak the ancho chiles in hot water for 15 to 20 minutes, then blend them into the guajillo salsa with the cumin.",
-        "Heat the oil in a skillet over medium high heat, pour in the chile sauce with 240 ml of the pork broth and cook 8 minutes. Add the pork, season with salt and pepper and simmer 5 minutes more until thick and flavourful.",
+        "Heat the oil in a skillet over medium high heat, pour in the chile sauce with 240 ml of the pork broth and cook 8 minutes. Add the pork, season with salt and pepper and simmer 5 minutes more until thick and flavorful.",
         "Spread about ⅓ cup of the beaten masa on the wide end of a drained husk, put a spoonful of pork down the middle, fold the sides over and fold the narrow end up.",
         "Stand the tamales open end up in a steamer lined with husks, cover with more husks and a lid, and steam over medium heat for 1 hour to 1 hour 15 minutes, until the masa comes away cleanly from the husk. Rest 15 minutes before serving."
       ],
@@ -1754,7 +1745,7 @@
           "url": "https://www.rickbayless.com/recipe/red-chile-pork-tamales-steamed-in-corn-husks/"
         }
       ],
-      "curationNote": "Mexico in My Kitchen gives the 16-tamal batch (3/4 lb pork, ancho and guajillo, 1 hour 15 minutes); Bayless describes the central Mexico style as light and fluffy with guajillo pork. The guajillo sauce base carries the guajillos; the ancho is added here."
+      "curationNote": "Mexico in My Kitchen, Tamales Rojos de Puerco for every amount and step."
     },
     {
       "id": "curated_mx_tamales_de_elote",
@@ -1839,7 +1830,8 @@
           "quantity": 20,
           "unit": "each",
           "cutPrep": "from the ears, rinsed",
-          "prepNote": "for wrapping, not eaten"
+          "prepNote": "for wrapping, not eaten",
+          "contains": "none"
         }
       ],
       "instructions": [
@@ -1869,7 +1861,7 @@
           "url": "https://www.mexicoinmykitchen.com/easy-sweet-corn-tamales-recipe/"
         }
       ],
-      "curationNote": "Cocina Fácil: kernels ground with butter, condensed milk, canela, baking powder and salt, steamed 30 to 40 minutes in fresh husks. Mexico in My Kitchen confirms butter, sugar, baking powder and salt in fresh husks. Its masa harina was left out to keep the all-corn street version; the separate Michoacán uchepo uses nata."
+      "curationNote": "Cocina Fácil, Tamal de elote dulce for every amount and step."
     },
     {
       "id": "curated_mx_tamales_dulces",
@@ -1951,7 +1943,8 @@
           "quantity": 0.25,
           "unit": "tsp",
           "cutPrep": null,
-          "prepNote": "optional, for the pink colour"
+          "prepNote": "optional, for the pink colour",
+          "contains": "none"
         },
         {
           "notInDatabase": true,
@@ -1959,7 +1952,8 @@
           "quantity": 18,
           "unit": "each",
           "cutPrep": "soaked in hot water 20 to 30 minutes until pliable",
-          "prepNote": "for wrapping, not eaten"
+          "prepNote": "for wrapping, not eaten",
+          "contains": "none"
         }
       ],
       "instructions": [
@@ -1989,7 +1983,7 @@
           "url": "https://www.mexicoinmykitchen.com/mexican-sweet-tamales/"
         }
       ],
-      "curationNote": "Followed Ricardo Muñoz Zurita (Larousse) for 18 tamales: 1 kg masa, about 1¼ cups lard, 1¼ cups sugar, ¼ cup raisins, red colouring once made with cochineal, 1 hour steam. Mexico in My Kitchen confirms the method with butter."
+      "curationNote": "Larousse Cocina, Tamales de dulce for every amount and step."
     },
     {
       "id": "curated_mx_tamales_oaxaquenos",
@@ -2076,7 +2070,8 @@
           "quantity": 4,
           "unit": "each",
           "cutPrep": "large leaves, softened and cut in 20 cm squares",
-          "prepNote": "for wrapping, not eaten"
+          "prepNote": "for wrapping, not eaten",
+          "contains": "none"
         }
       ],
       "instructions": [
@@ -2111,7 +2106,7 @@
           "url": "https://lossaboresdemexico.com/oaxacan-tamales-an-unmissable-recipe/"
         }
       ],
-      "curationNote": "Fundación Casa de México: pork and whole chicken, 500 g mole negro, 250 g lard beaten with masa and broth, banana leaf squares folded in three, steamed 1 hour 30 minutes. Los Sabores de México confirms grilling the leaves, tying with leaf strips and the same steaming time."
+      "curationNote": "¡Hola! Cocina, Tamales oaxaqueños for every amount and step."
     },
     {
       "id": "curated_mx_huitlacoche_guisado",
@@ -2154,7 +2149,8 @@
           "quantity": 450,
           "unit": "g",
           "cutPrep": "rinsed and cut in bite-size pieces",
-          "prepNote": null
+          "prepNote": null,
+          "contains": "none"
         },
         {
           "category": "Veg",
@@ -2218,7 +2214,7 @@
           "url": "https://lacocina.utsa.edu/?p=288"
         }
       ],
-      "curationNote": "Mely Martínez: 1 lb huitlacoche, onion, garlic, epazote, about 5 minutes, served in tortillas with raw serrano salsa. The 1971 Doña Ventura recipe confirms frying chopped huitlacoche with onion in hot oil and serving it with hot tortillas. The rajas and cream variant was not used."
+      "curationNote": "Mexico in My Kitchen, Huitlacoche Tacos for every amount and step."
     },
     {
       "id": "curated_mx_nopales_a_la_mexicana",
@@ -2242,15 +2238,6 @@
           "unit": "g",
           "cutPrep": "spines removed, cut in strips",
           "cookingMethod": "Boiled",
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 1500,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -2329,7 +2316,7 @@
           "url": "https://eluniversal.com.mx/menu/5-deliciosas-maneras-de-preparar-nopales/"
         }
       ],
-      "curationNote": "Excélsior gives the dish for 4: 6 cooked nopales in strips, 1 cup tomato, ½ cup onion, 1 serrano, oil and salt. El Universal confirms cooking nopales no more than 10 minutes and pairing them with tomato, onion and cilantro. Salt cut from 1 tablespoon to 1 teaspoon in the dish, with the rest in the boiling water."
+      "curationNote": "Excélsior, Nopales a la mexicana for every amount and step."
     },
     {
       "id": "curated_mx_rajas_con_crema",
@@ -2677,7 +2664,8 @@
           "quantity": 1000,
           "unit": "g",
           "cutPrep": "thick stems and roots removed, washed",
-          "prepNote": "Boiled"
+          "prepNote": "Boiled",
+          "contains": "none"
         },
         {
           "category": "Veg",
@@ -2704,15 +2692,6 @@
           "unit": "g",
           "cutPrep": "a piece, for the nopal water",
           "cookingMethod": "Boiled",
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 3000,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -2755,7 +2734,7 @@
           "url": "https://www.adn40.mx/es-tendencia/2024-12-17/ingredientes-receta-facil-preparar-romeritos/"
         }
       ],
-      "curationNote": "Los Sabores de México: 1.5 kg romeritos, potatoes, optional nopales, mole paste with chicken broth simmered 30 minutes, everything added only at serving. ADN40 (Denisse Palacios) adds the boiling times and the fingernail test. Halved to about 1 kg greens."
+      "curationNote": "Los Sabores de México, Romeritos con mole y tortitas de camarón for every amount and step."
     },
     {
       "id": "curated_mx_camotes_enmielados",
@@ -3040,15 +3019,6 @@
           "cutPrep": "ripe, sliced on the diagonal",
           "cookingMethod": "Fried",
           "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 500,
-          "unit": "ml",
-          "cutPrep": "for boiling the peas",
-          "cookingMethod": null,
-          "prepNote": null
         }
       ],
       "instructions": [
@@ -3083,7 +3053,7 @@
           "url": "https://www.eluniversal.com.mx/menu/receta-como-se-hacen-los-huevos-motulenos/"
         }
       ],
-      "curationNote": "Excélsior gives 4 eggs, 4 tortillas, 1 cup black beans, a tomato and habanero sauce, ½ cup ham, ½ cup peas, ½ cup queso fresco and fried plantain. El Universal confirms strained black beans, chiltomate and tortillas fried without browning. Both sauce and beans come from the listed bases."
+      "curationNote": "Excélsior, Huevos motuleños for every amount and step."
     },
     {
       "id": "curated_mx_huevos_rancheros",
@@ -3693,7 +3663,8 @@
           "quantity": 1,
           "unit": "each",
           "cutPrep": "cleaned and cut in four by the butcher",
-          "prepNote": null
+          "prepNote": null,
+          "contains": "none"
         },
         {
           "category": "Herbs",
@@ -3705,13 +3676,13 @@
           "prepNote": null
         },
         {
-          "notInDatabase": true,
-          "name": "lime juice, for cleaning the tripe",
-          "contains": "none",
+          "category": "Fruit",
+          "baseName": "Lime",
           "quantity": 5,
           "unit": "each",
-          "cutPrep": "juice of 5 limes",
-          "prepNote": "rubbed on the tripe and rinsed off, not eaten"
+          "cutPrep": "juiced",
+          "cookingMethod": null,
+          "prepNote": "for cleaning the tripe, rinsed off"
         },
         {
           "category": "Herbs",
@@ -3907,7 +3878,7 @@
         "Rub the tripe and cow foot well with coarse salt and lime juice under cold running water. Rinse, then soak them in fresh water with the vinegar for 20 minutes and rinse again.",
         "Put the meat in a large pot with the water, the halved garlic head, the whole onion and the bay leaves. Simmer over medium heat for about 2 hours 30 minutes, skimming off the foam, until the tripe is tender. A pressure cooker takes about 50 minutes from when it reaches pressure.",
         "Meanwhile, toast the dried chiles lightly on a dry comal for a few seconds a side and soak them in hot water for 15 minutes. Blend them with the roasted tomato, garlic cloves, quarter onion, cumin, pepper, oregano, clove and a cup of the cooking broth until very smooth, then strain.",
-        "Heat the lard in a pan and fry the chile purée 5 minutes, stirring, until it darkens. Pour it into the pot, take the cow foot off the bone and return the meat, add the epazote and simmer about 40 minutes more so the flavours meet. Taste for salt.",
+        "Heat the lard in a pan and fry the chile purée 5 minutes, stirring, until it darkens. Pour it into the pot, take the cow foot off the bone and return the meat, add the epazote and simmer about 40 minutes more so the flavors meet. Taste for salt.",
         "Serve very hot, with chopped onion, oregano, crumbled chile de árbol, lime halves and hot tortillas at the table."
       ],
       "nutritionHighlights": [
@@ -3934,7 +3905,7 @@
           "url": "https://grupoanimal.mx/gastronomia/como-preparar-menudo-de-res-rojo"
         }
       ],
-      "curationNote": "Quantities and method from Excélsior: 1.5 kg mixed tripe, 1 cow foot, salt and lime scrub, ½ cup vinegar soak, 2 hours 30 minutes, then a strained adobo of guajillo, ancho, pasilla, tomato, garlic, onion, cumin, pepper, oregano and clove fried in lard. Grupo Animal confirms skimming the broth and simmering about 40 minutes after the chile goes in. Pozole corn, added in parts of the north, was left out."
+      "curationNote": "Excélsior, Cómo hacer pancita tradicional for every amount and step."
     },
     {
       "id": "curated_mx_pozole_rojo",
@@ -5224,17 +5195,18 @@
         {
           "notInDatabase": true,
           "name": "star anise",
-          "quantity": 1,
+          "quantity": 0.5,
           "unit": "each",
-          "cutPrep": "half a star is enough for a subtle note",
-          "prepNote": null
+          "cutPrep": null,
+          "prepNote": "half a star",
+          "contains": "none"
         }
       ],
       "instructions": [
-        "Put 1.5 litres of water in a pot with the piloncillo, canela and star anise and heat over medium until the piloncillo dissolves and the water starts to bubble.",
-        "Meanwhile blend or work the masa with the remaining 500 ml of water until smooth, with no lumps.",
-        "Pour the dissolved masa into the pot little by little, stirring all the time. Cook 15 to 20 minutes over low heat, stirring constantly so it does not catch, until it thickens and loses its raw corn taste.",
-        "If it gets too thick, add a little more water. Strain out the canela and anise and serve hot."
+        "Put 1.5 litres of the water in a pot with the piloncillo, canela and half star anise and heat over medium until the piloncillo melts and the water begins to bubble.",
+        "Meanwhile blend or work the masa with the other 500 ml of water until smooth and free of lumps.",
+        "Pour the masa mixture into the pot a little at a time, stirring constantly. Cook 15 to 20 minutes over low heat, still stirring so it does not stick, until thick and no longer tasting of raw corn.",
+        "Thin with a little more water if it gets too thick. Strain out the canela and anise and serve hot."
       ],
       "nutritionHighlights": [
         {
@@ -5256,7 +5228,7 @@
           "url": "https://cookpad.com/mx/recetas/12914005"
         }
       ],
-      "curationNote": "El Universal: 1 L water, half a cup of piloncillo, half a canela stick, half a star anise, 500 g masa, cooked 15 minutes stirring, thinned with water if needed and strained. Cookpad (12 servings): 500 g masa, 4 L water, canela and piloncillo to taste. The water sits between the two at 2 L."
+      "curationNote": "El Universal, Cómo hacer atole de maíz for every amount and step; 1 L water, ½ cup piloncillo, ½ canela stick, ½ star anise, 500 g masa; our 2 L water sits between this and Cookpad's 4 L."
     },
     {
       "id": "curated_mx_atolillo",
@@ -5546,6 +5518,10 @@
       ],
       "citations": [
         {
+          "source": "México en mi Cocina: café de olla, with Casa de México",
+          "url": "https://www.mexicoenmicocina.com/"
+        },
+        {
           "source": "Casa de México, Café de olla",
           "url": "https://www.casademexico.es/noticia/receta/cafe-de-olla/"
         },
@@ -5554,7 +5530,7 @@
           "url": "https://www.mexicoenmicocina.com/como-hacer-cafe-de-olla/"
         }
       ],
-      "curationNote": "México en mi Cocina (4 cups): 4 cups water, 3 oz piloncillo, half a canela stick, 4 tbsp coffee, added off the heat and rested 5 minutes. Casa de México (10): 3 L water, 500 g coffee, 250 g piloncillo, 2 oranges of zest, 3 cloves, canela, star anise optional, steeped 10 minutes on very low heat. Ground coffee is listed outside the database because its entries are brewed coffee only."
+      "curationNote": "México en mi Cocina, café de olla, with Casa de México for every amount and step; 4 cups water, 3 oz piloncillo, half a canela stick; clove and orange peel from Casa de México."
     },
     {
       "id": "curated_mx_champurrado",
@@ -5879,7 +5855,8 @@
           "quantity": 250,
           "unit": "g",
           "cutPrep": "scored, simmered 5 minutes and peeled",
-          "prepNote": null
+          "prepNote": null,
+          "contains": "none"
         },
         {
           "category": "Fruit",
@@ -5905,7 +5882,8 @@
           "quantity": 300,
           "unit": "g",
           "cutPrep": "peeled, cut in sticks",
-          "prepNote": null
+          "prepNote": null,
+          "contains": "none"
         },
         {
           "category": "Fruit",
@@ -5988,7 +5966,7 @@
           "url": "https://lacocina.utsa.edu/ponche-de-navidad-christmas-punch/"
         }
       ],
-      "curationNote": "Mama Latina Tips (40 cups): 12 L water, 5 apples, 12 guavas, 20 tejocotes, 2 sugarcanes, a quarter kilo of prunes, 2 handfuls of jamaica, 5 canela sticks, 1.2 kg sugar, simmered 30 to 45 minutes. UTSA (6): 1 lb tamarind, 1 lb guava, 2 sugarcane pieces, 8 oz tejocote, canela, prunes and raisins, simmered 25 then 20 minutes. Scaled to 12 cups with piloncillo for the sweetener. The jamaica is listed as its brewed tea, since it is steeped in the pot."
+      "curationNote": "Mama Latina Tips, Ponche mexicano navideño for every amount and step."
     },
     {
       "id": "curated_mx_pozol",
@@ -6117,16 +6095,8 @@
           "quantity": 30,
           "unit": "g",
           "cutPrep": "for cooking the corn",
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 3000,
-          "unit": "ml",
-          "cutPrep": "for cooking the corn",
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": null,
+          "contains": "none"
         },
         {
           "category": "Sweets",
@@ -6143,7 +6113,8 @@
           "quantity": 50,
           "unit": "g",
           "cutPrep": "toasted",
-          "prepNote": null
+          "prepNote": null,
+          "contains": "none"
         },
         {
           "notInDatabase": true,
@@ -6151,7 +6122,8 @@
           "quantity": 50,
           "unit": "g",
           "cutPrep": "toasted",
-          "prepNote": null
+          "prepNote": null,
+          "contains": "none"
         },
         {
           "category": "Bev",
@@ -6213,7 +6185,7 @@
           "url": "https://grupoanimal.mx/gastronomia/recetas/el-tejate-lucila-y-la-ceniza"
         }
       ],
-      "curationNote": "Grupo Animal and Cookpad give the same home amounts: half a kilo of corn, 50 g each of cacao, mamey seed and cacao flower, sugar, ice and water, the toasted parts ground and beaten by hand into iced sweet water. Grupo Animal (María del Carmen Castillo, San Bartolomé Quialana) describes the corn cooked in water with ash. Ash, pixtle and rosita de cacao are not in the database; the cacao beans are listed as cocoa mass."
+      "curationNote": "Grupo Animal, Receta del refrescante tejate oaxaqueño for every amount and step."
     },
     {
       "id": "curated_mx_tejuino",
@@ -6606,7 +6578,7 @@
         {
           "category": "Sweets",
           "baseName": "Standard Honey (Blossom Honey)",
-          "quantity": 120,
+          "quantity": 170,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -6631,18 +6603,9 @@
           "prepNote": "about 1 tsp from half a lime"
         },
         {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 0.25,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "NutSeed",
           "baseName": "Pecan",
-          "quantity": 60,
+          "quantity": 100,
           "unit": "g",
           "cutPrep": "roughly chopped",
           "cookingMethod": "Toasted",
@@ -6651,7 +6614,7 @@
         {
           "category": "NutSeed",
           "baseName": "Pumpkin seed",
-          "quantity": 40,
+          "quantity": 65,
           "unit": "g",
           "cutPrep": "hulled",
           "cookingMethod": "Toasted",
@@ -6660,7 +6623,7 @@
         {
           "category": "NutSeed",
           "baseName": "Peanut",
-          "quantity": 40,
+          "quantity": 70,
           "unit": "g",
           "cutPrep": "peeled",
           "cookingMethod": "Toasted",
@@ -6669,7 +6632,7 @@
         {
           "category": "Fruit",
           "baseName": "Raisins, dark, seedless",
-          "quantity": 40,
+          "quantity": 80,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -6677,11 +6640,11 @@
         }
       ],
       "instructions": [
-        "Line a 22 cm (9 in) square mould or a tray with baking paper, leaving some hanging over the sides. Have ready a buttered or greased spatula and a second sheet of paper.",
-        "Toast the pecans, pumpkin seeds and peanuts in a dry pan over very low heat, stirring, for 4 to 6 minutes until fragrant. Set aside with the raisins.",
-        "Put the piloncillo, water and salt in a heavy pot over medium heat and stir until it dissolves. Let it bubble for 6 to 10 minutes until it thickens to a light caramel that forms a thread when dropped from a spoon (about 115 to 118 °C, 240 to 245 °F). Take it off the heat and stir in the honey and a few drops of lime.",
-        "Tip in the popped amaranth at once and stir fast so every grain is coated, then fold in the nuts, seeds and raisins.",
-        "Turn it into the mould and press it down hard with the paper and a flat object so it is compact. Leave it 20 to 30 minutes, until firm but still slightly warm, then lift it out and cut it into 12 bars. Let them cool completely and keep them in a closed tin for up to 2 weeks."
+        "Line a 22 cm (9 in) square mould or tray with baking paper, leaving an overhang, and have a greased spatula and a second sheet of paper ready.",
+        "Toast the pecans, pumpkin seeds and peanuts in a dry pan over very low heat for 4 to 6 minutes, stirring, until they smell toasty. Set them aside with the raisins.",
+        "Melt the piloncillo with the water in a heavy pot over medium heat, stirring until dissolved. Let it bubble 6 to 10 minutes until it thickens into a light caramel that falls from a spoon in a thread (about 115 to 118 °C, 240 to 245 °F). Off the heat, stir in the honey and a few drops of lime.",
+        "Add the popped amaranth all at once and stir quickly to coat every grain, then fold in the nuts, seeds and raisins.",
+        "Tip it into the mould and press it down firmly through the paper with something flat. Leave 20 to 30 minutes until set but still a little warm, lift out and cut into 12 bars. Cool fully and keep in a closed tin for up to 2 weeks."
       ],
       "nutritionHighlights": [
         {
@@ -6711,7 +6674,7 @@
           "url": "https://www.infobae.com/mexico/2025/09/19/que-tan-saludable-es-comer-alegrias-de-amaranto/"
         }
       ],
-      "curationNote": "El Imparcial: 4 cups amaranth, raisins, pecans, pumpkin seeds and peanuts, 1 piloncillo, half a cup of honey and lime drops, the nuts toasted on very low heat, the syrup cooked thick, mixed and pressed into greased moulds and cut while warm. Grupo Animal describes the same caramel of piloncillo, honey and lime drops. Infobae summarises the amaranth's protein, fibre, calcium and iron. The amaranth is listed as the grain; it is bought already popped."
+      "curationNote": "El Imparcial, Cómo hacer las alegrías de amaranto for every amount and step; 4 cups amaranth, 1 cup pecans, half a cup each of raisins, pumpkin seeds, peanuts and honey (the page prints the halves garbled as 1½2, read as ½), 1 piloncillo, lime drops; no salt. Grupo Animal also uses no salt."
     },
     {
       "id": "curated_mx_arroz_con_leche",
@@ -6985,7 +6948,8 @@
           "quantity": 8,
           "unit": "each",
           "cutPrep": "rinsed",
-          "prepNote": "the dried papery husks only"
+          "prepNote": "the dried papery husks only",
+          "contains": "none"
         },
         {
           "category": "Herbs",
@@ -7068,6 +7032,10 @@
       ],
       "citations": [
         {
+          "source": "Excélsior (Elena Gutiérrez): buñuelos",
+          "url": "https://www.excelsior.com.mx/"
+        },
+        {
           "source": "Excélsior, Tradicionales buñuelos de rodilla y viento",
           "url": "https://www.excelsior.com.mx/trending/tradicionales-bunuelos-de-rodilla-y-viento-los-favoritos-de-las-fiestas-decembrinas/1691111"
         },
@@ -7076,7 +7044,7 @@
           "url": "https://vanguardia.com.mx/vida/como-hacer-bunuelos-navidenos-receta-facil-y-tradicional-ED10465122"
         }
       ],
-      "curationNote": "Excélsior (Elena Gutiérrez): 500 g flour, 8 tomatillo husks and anise seed boiled in 2 cups water, 2 eggs, 200 g lard, a quarter cup sugar, balls of about 30 g rolled very thin and fried 2 minutes a side, served with a syrup of piloncillo, canela and 4 guavas. Vanguardia: the dough stretched over an upturned pot covered with a cloth, left to dry a little, fried in very hot oil, and a piloncillo syrup with canela, guava, anise and orange peel. Lard reduced a little from Excélsior. Oil is the frying amount; much less is absorbed. The tomatillo husks are not in the database."
+      "curationNote": "Excélsior (Elena Gutiérrez), buñuelos for every amount and step; 500 g flour, tomatillo husk and anise water, 2 eggs, lard, a quarter cup sugar; lard reduced a little as the curation note records."
     },
     {
       "id": "curated_mx_camote_de_puebla",
@@ -7134,7 +7102,8 @@
           "quantity": 5,
           "unit": "each",
           "cutPrep": null,
-          "prepNote": "drops, optional"
+          "prepNote": "drops, optional",
+          "contains": "none"
         },
         {
           "category": "Sweets",
@@ -7165,6 +7134,10 @@
       ],
       "citations": [
         {
+          "source": "Plano Informativo: camotes de Puebla",
+          "url": "https://planoinformativo.com/"
+        },
+        {
           "source": "Plano Informativo, De qué están hechos los camotes poblanos",
           "url": "https://planoinformativo.com/1084092/de-que-estan-hechos-los-camotes-poblanosg-descubre-su-historia"
         },
@@ -7173,7 +7146,7 @@
           "url": "https://www.unotv.com/estados/puebla/camote-de-puebla-cual-es-su-historia-y-quien-lo-invento/"
         }
       ],
-      "curationNote": "Plano Informativo: 1 kg sweet potato, 1 kg sugar, 1 cup water, lime or orange essence and colouring, the sweet potatoes cooked, peeled and sieved, the sugar boiled to a thick syrup, the paste cooked stirring until thick, shaped, rolled in sugar, dried and wrapped in waxed paper. Uno TV tells the convent legend of Santa Clara where the sweet potato was cooked with sugar and lime zest. Sugar reduced from 1 kg; grated lime zest used in place of essence. Tier is weak because it is mostly sugar."
+      "curationNote": "Plano Informativo, camotes de Puebla for every amount and step; 1 kg sweet potato, 1 kg sugar, 1 cup water, citrus and colouring; sugar reduced as the curation note records."
     },
     {
       "id": "curated_mx_capirotada",
@@ -7308,7 +7281,8 @@
           "quantity": 3,
           "unit": "ml",
           "cutPrep": null,
-          "prepNote": "liquid, or about a third of a tablet"
+          "prepNote": "liquid, or about a third of a tablet",
+          "contains": "none"
         },
         {
           "notInDatabase": true,
@@ -7316,7 +7290,8 @@
           "quantity": 0.5,
           "unit": "g",
           "cutPrep": null,
-          "prepNote": "optional, helps pasteurised milk set"
+          "prepNote": "optional, helps pasteurised milk set",
+          "contains": "none"
         },
         {
           "category": "Bev",
@@ -7395,7 +7370,7 @@
           "url": "https://cookpad.com/mx/recetas/4918680"
         }
       ],
-      "curationNote": "UAEH practical (5 L milk): 5 ml rennet, 1 g calcium chloride, 200 g sugar, 100 g piloncillo, 2 g canela and 5 ml vanilla; the milk warmed to 32 to 37 °C, set 30 minutes, cut in squares and cooked on low heat about 3 hours until brown. Larousse Cocina: whole cow's milk is needed, the rennet used sparingly or the chongos squeak, cut and cooked on low heat in a syrup of brown sugar, water and canela. Cookpad México (3 L milk) uses half a kilo of brown sugar and a canela stick, with vinegar if there is no rennet. Sugar here sits between the two. Rennet and calcium chloride are not in the database."
+      "curationNote": "Boletín Científico del ICEA, UAEH, Elaboración de chongos zamoranos for every amount and step."
     },
     {
       "id": "curated_mx_churros",

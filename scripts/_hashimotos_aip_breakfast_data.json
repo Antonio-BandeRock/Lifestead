@@ -48,7 +48,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -57,7 +66,7 @@
     ],
     "instructions": [
       "Combine the kale and carrot in a covered pan with a splash of water, and braise over medium-low heat for 8-10 minutes, until soft.",
-      "Season the beef with the salt and sear in a dry, hot pan for 2-3 minutes per side, then slice thin.",
+      "Season the beef with the salt and sear in the coconut oil in a hot pan for 2-3 minutes per side, then slice thin.",
       "Serve the beef over the braised kale and carrot, topped with the sliced avocado."
     ]
   },
@@ -101,7 +110,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -110,7 +128,7 @@
     ],
     "instructions": [
       "Combine the shredded cabbage and sliced carrot in a covered pan with a splash of water, and braise over medium-low heat for 10-12 minutes, until soft.",
-      "Season the sliced pork with the salt and sear in a dry, hot pan for 2-3 minutes per side, until cooked through.",
+      "Season the sliced pork with the salt and sear in the coconut oil in a hot pan for 2-3 minutes per side, until cooked through.",
       "Serve the pork over the braised cabbage and carrot."
     ]
   },
@@ -163,7 +181,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -172,7 +199,7 @@
     ],
     "instructions": [
       "Preheat the oven to 400F (200C).",
-      "Toss the broccoli and carrot with the salt and spread on a baking sheet.",
+      "Toss the broccoli and carrot with the coconut oil and the salt and spread on a baking sheet.",
       "Roast for 12-15 minutes, adding the salmon fillet to the sheet halfway through, until it flakes easily.",
       "Serve with the sliced avocado."
     ]
@@ -182,7 +209,7 @@
     "builderType": "snack",
     "name": "Halibut & Fennel Breakfast Bowl",
     "flavorProfile": "Baked halibut with roasted fennel and zucchini, finished with avocado.",
-    "healthBenefit": "Halibut, fennel, and zucchini all check completely clean for Hashimoto's, a real light, savory breakfast.",
+    "healthBenefit": "Halibut, fennel, and zucchini all check completely clean for Hashimoto's, a light, savory breakfast.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
@@ -226,7 +253,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -235,7 +271,7 @@
     ],
     "instructions": [
       "Preheat the oven to 400F (200C).",
-      "Toss the fennel and zucchini with the salt and spread on a baking sheet.",
+      "Toss the fennel and zucchini with the coconut oil and the salt and spread on a baking sheet.",
       "Roast for 10 minutes, then add the halibut fillet to the sheet and roast for another 12-15 minutes, until it flakes easily.",
       "Serve with the sliced avocado."
     ]
@@ -244,7 +280,7 @@
     "id": "curated_snack_cod_cabbage_breakfast_skillet",
     "builderType": "snack",
     "name": "Cod & Cabbage Breakfast Skillet",
-    "flavorProfile": "Pan-seared cod with cabbage and carrot braised soft, a real light way to start the day.",
+    "flavorProfile": "Pan-seared cod with cabbage and carrot braised soft, a light way to start the day.",
     "healthBenefit": "Cod, cabbage, and carrot all check completely clean for Hashimoto's.",
     "servings": 1,
     "servingSizeAmount": 1,
@@ -280,7 +316,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -289,7 +334,7 @@
     ],
     "instructions": [
       "Combine the shredded cabbage and sliced carrot in a covered pan with a splash of water, and braise over medium-low heat for 10-12 minutes, until soft.",
-      "Season the cod with the salt and sear in a dry, hot pan for 3-4 minutes per side, until it flakes easily.",
+      "Season the cod with the salt and sear in the coconut oil in a hot pan for 3-4 minutes per side, until it flakes easily.",
       "Serve the cod over the braised cabbage and carrot."
     ]
   },
@@ -297,7 +342,7 @@
     "id": "curated_snack_shrimp_zucchini_breakfast_skillet",
     "builderType": "snack",
     "name": "Shrimp & Zucchini Breakfast Skillet",
-    "flavorProfile": "Shrimp sauteed with zucchini and carrot in a splash of water, finished with lime and avocado.",
+    "flavorProfile": "Shrimp sauteed with zucchini and carrot in a little coconut oil, finished with lime and avocado.",
     "healthBenefit": "Shrimp, zucchini, and carrot all check completely clean for Hashimoto's.",
     "servings": 1,
     "servingSizeAmount": 1,
@@ -351,7 +396,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -359,7 +413,7 @@
       }
     ],
     "instructions": [
-      "Saute the zucchini and carrot in a splash of water over medium-high heat for 4-5 minutes, until just tender.",
+      "Saute the zucchini and carrot in the coconut oil over medium-high heat for 4-5 minutes, until just tender.",
       "Add the shrimp and cook for 2-3 minutes more, until pink and opaque all the way through.",
       "Stir in the lime juice and salt, and serve with the sliced avocado."
     ]
@@ -404,7 +458,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -413,8 +476,8 @@
     ],
     "instructions": [
       "Preheat the oven to 400F (200C).",
-      "Toss the broccoli and carrot with half the salt and roast for 15 minutes, until tender.",
-      "Season the sliced beef with the remaining salt and sear in a dry, hot pan for 2-3 minutes per side.",
+      "Toss the broccoli and carrot with the coconut oil and half the salt and roast for 15 minutes, until tender.",
+      "Season the sliced beef with the remaining salt and sear in the coconut oil in a hot pan for 2-3 minutes per side.",
       "Serve the beef over the roasted broccoli and carrot."
     ]
   },
@@ -467,7 +530,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -476,7 +548,7 @@
     ],
     "instructions": [
       "Combine the kale and carrot in a covered pan with a splash of water, and braise over medium-low heat for 8-10 minutes, until soft.",
-      "Season the sliced pork with the salt and sear in a dry, hot pan for 2-3 minutes per side, until cooked through.",
+      "Season the sliced pork with the salt and sear in the coconut oil in a hot pan for 2-3 minutes per side, until cooked through.",
       "Serve the pork over the braised kale and carrot, topped with the sliced avocado."
     ]
   },
@@ -520,7 +592,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -529,7 +610,7 @@
     ],
     "instructions": [
       "Preheat the oven to 400F (200C).",
-      "Toss the fennel and zucchini with the salt and spread on a baking sheet.",
+      "Toss the fennel and zucchini with the coconut oil and the salt and spread on a baking sheet.",
       "Roast for 10 minutes, then add the salmon fillet to the sheet and roast for another 12-15 minutes, until it flakes easily."
     ]
   },
@@ -582,7 +663,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -591,7 +681,7 @@
     ],
     "instructions": [
       "Combine the shredded cabbage and sliced carrot in a covered pan with a splash of water, and braise over medium-low heat for 10-12 minutes, until soft.",
-      "Season the halibut with the salt and sear in a dry, hot pan for 3-4 minutes per side, until it flakes easily.",
+      "Season the halibut with the salt and sear in the coconut oil in a hot pan for 3-4 minutes per side, until it flakes easily.",
       "Serve the halibut over the braised cabbage and carrot, topped with the sliced avocado."
     ]
   },
@@ -635,7 +725,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -644,7 +743,7 @@
     ],
     "instructions": [
       "Preheat the oven to 400F (200C).",
-      "Toss the broccoli and carrot with half the salt and roast for 12 minutes.",
+      "Toss the broccoli and carrot with the coconut oil and half the salt and roast for 12 minutes.",
       "Add the cod fillet, seasoned with the remaining salt, and roast for another 12-15 minutes, until it flakes easily."
     ]
   },
@@ -706,7 +805,16 @@
       {
         "category": "Herbs",
         "baseName": "Common salt/table salt",
-        "quantity": 0.25,
+        "quantity": 1.5,
+        "unit": "g",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Coconut oil",
+        "quantity": 1,
         "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
@@ -714,7 +822,7 @@
       }
     ],
     "instructions": [
-      "Saute the cabbage and carrot in a splash of water over medium-high heat for 4-5 minutes, until just tender.",
+      "Saute the cabbage and carrot in the coconut oil over medium-high heat for 4-5 minutes, until just tender.",
       "Add the shrimp and cook for 2-3 minutes more, until pink and opaque all the way through.",
       "Stir in the lime juice and salt, and serve with the sliced avocado."
     ]
@@ -722,62 +830,135 @@
   {
     "id": "curated_snack_citrus_avocado_breakfast_bowl",
     "builderType": "snack",
-    "name": "Citrus & Avocado Breakfast Bowl",
-    "flavorProfile": "Sliced avocado with orange and grapefruit segments, finished with lime and cilantro, a real no-cook morning bowl.",
+    "name": "Avocado Citrus Salad",
+    "flavorProfile": "Sliced avocado with orange and grapefruit segments under a light mustard dressing, scattered with mint, cilantro, scallion and hazelnuts.",
     "healthBenefit": "Orange, grapefruit, and avocado all check completely clean for Hashimoto's.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
     "ingredients": [
       {
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "segmented",
         "category": "Fruit",
         "baseName": "Orange",
-        "quantity": 70,
-        "unit": "g",
-        "cutPrep": "segmented",
-        "cookingMethod": null,
-        "prepNote": null
+        "quantity": 56,
+        "unit": "g"
       },
       {
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "segmented",
         "category": "Fruit",
         "baseName": "Grapefruit",
-        "quantity": 70,
-        "unit": "g",
-        "cutPrep": "segmented",
-        "cookingMethod": null,
-        "prepNote": null
+        "quantity": 92,
+        "unit": "g"
       },
       {
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "sliced",
         "category": "Fruit",
         "baseName": "Avocado",
-        "quantity": 50,
-        "unit": "g",
-        "cutPrep": "sliced",
-        "cookingMethod": null,
-        "prepNote": null
+        "quantity": 54,
+        "unit": "g"
       },
       {
-        "category": "Bev",
-        "baseName": "Lime",
-        "quantity": 11,
-        "unit": "g",
-        "cutPrep": "freshly squeezed",
+        "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": "juice of a quarter of a lime"
-      },
-      {
+        "prepNote": "a few leaves, torn",
         "category": "Veg",
         "baseName": "Coriander (cilantro) leaves",
-        "quantity": 5,
-        "unit": "g",
-        "cutPrep": "chopped",
+        "quantity": 0.4,
+        "unit": "g"
+      },
+      {
+        "cutPrep": null,
         "cookingMethod": null,
-        "prepNote": null
+        "prepNote": "a few leaves, torn",
+        "category": "Veg",
+        "baseName": "Fresh Mint",
+        "quantity": 0.6,
+        "unit": "g"
+      },
+      {
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "toasted and chopped, about 1 teaspoon",
+        "category": "NutSeed",
+        "baseName": "Hazelnut roasted without fat",
+        "quantity": 3.4,
+        "unit": "g"
+      },
+      {
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "thinly sliced, greens on top and whites in the dressing",
+        "category": "Veg",
+        "baseName": "Onions, spring or scallions (includes tops and bulb)",
+        "quantity": 3.6,
+        "unit": "g"
+      },
+      {
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "about ½ teaspoon",
+        "category": "Fats",
+        "baseName": "Olive Oil (Extra Virgin)",
+        "quantity": 2.7,
+        "unit": "g"
+      },
+      {
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "about ½ teaspoon; the source uses white balsamic, which the database does not hold",
+        "category": "Herbs",
+        "baseName": "Balsamic vinegar",
+        "quantity": 3,
+        "unit": "g"
+      },
+      {
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a dab; the source uses Dijon, which the database does not hold",
+        "category": "Herbs",
+        "baseName": "Mustard medium hot",
+        "quantity": 1,
+        "unit": "g"
+      },
+      {
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a few drops",
+        "category": "Sweets",
+        "baseName": "Standard Honey (Blossom Honey)",
+        "quantity": 1.4,
+        "unit": "g"
+      },
+      {
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a small pinch",
+        "category": "Herbs",
+        "baseName": "Common salt/table salt",
+        "quantity": 0.3,
+        "unit": "g"
+      },
+      {
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "a tiny pinch",
+        "category": "Herbs",
+        "baseName": "Spices, pepper, white, ground",
+        "quantity": 0.1,
+        "unit": "g"
       }
     ],
     "instructions": [
-      "Arrange the orange and grapefruit segments with the sliced avocado in a bowl.",
-      "Finish with the lime juice and cilantro."
+      "Whisk the olive oil, vinegar, scallion whites, mustard, honey, salt and white pepper together.",
+      "Arrange the orange and grapefruit segments with the avocado in a bowl.",
+      "Spoon the dressing over, then scatter the cilantro, mint, hazelnuts and scallion greens on top."
     ]
   },
   {

@@ -179,58 +179,31 @@
           "prepNote": null
         },
         {
-          "category": "Alcohol",
-          "baseName": "White Wine",
-          "quantity": 100,
-          "unit": "ml",
-          "cutPrep": "dry",
-          "cookingMethod": null,
-          "prepNote": "many cooks deglaze with it after toasting the rice"
-        },
-        {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 30,
+          "quantity": 15,
           "unit": "g",
           "cutPrep": "cold",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a knob"
         },
         {
           "category": "Dairy",
           "baseName": "Parmesan",
-          "quantity": 40,
+          "quantity": 6,
           "unit": "g",
           "cutPrep": "grated",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Fresh Parsley",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": "chopped",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "to taste"
+          "prepNote": "about 1 tablespoon"
         }
       ],
       "instructions": [
         "Soak the dried porcini in the warm water for 20 to 30 minutes. Lift them out, squeeze them and chop roughly, then strain the soaking water through a sieve lined with paper towel to catch the grit.",
         "Warm the oil in a wide pan and cook the onion over low heat until soft and pale gold, 10 to 15 minutes.",
-        "Add the rice and toast it, stirring, for 2 minutes. Pour in the wine and let it evaporate.",
+        "Add the rice and toast it, stirring, for 2 minutes.",
         "Add the porcini and a couple of ladles of hot broth. Cook over medium heat, stirring often and adding broth and the strained soaking water a ladle at a time as each is absorbed.",
         "When the rice is tender with a slight bite, 16 to 18 minutes, take it off the heat.",
-        "Beat in the cold butter and the Parmesan, scatter with parsley, rest 1 minute and serve."
+        "Beat in the cold butter and the Parmesan, rest 1 minute and serve."
       ],
       "nutritionHighlights": [
         {
@@ -248,7 +221,7 @@
           "url": "https://www.dissapore.com/ricette/risotto-ai-funghi-porcini/"
         }
       ],
-      "curationNote": "Dissapore's dried porcini version with vegetable broth and the strained soaking water, with a splash of white wine added as most northern home cooks do. The brodo vegetale base is served by the cup, so 1 litre is 4."
+      "curationNote": "Dissapore, Risotto ai funghi porcini secchi for every amount and step; for 4: 300 g carnaroli, 50 g dried porcini, half an onion, 1 L vegetable broth, 2 tbsp oil, a knob of butter, 1 tbsp Parmigiano; no wine, parsley or salt listed."
     },
     {
       "id": "curated_it_risi_e_bisi",
@@ -428,7 +401,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 6,
           "unit": "g",
           "cutPrep": "a handful of leaves, torn",
@@ -468,7 +441,7 @@
           "url": "https://www.dissapore.com/ricette/gnocchi-alla-sorrentina/"
         }
       ],
-      "curationNote": "Dissapore's method: gnocchi tossed in a short garlic, chili and basil tomato sauce with fior di latte, then browned under the grill in a terracotta dish, as in Sorrento. The sugo base stands in for the passata cooked with garlic. Uses the whole gnocchi base (4 plates); the sugo base gives 6 servings of 3/4 cup, so about 350 ml is 2 of them."
+      "curationNote": "Dissapore, Gnocchi alla sorrentina for every amount and step; tomato sauce from the sugo base, fior di latte, Parmesan, basil."
     },
     {
       "id": "curated_it_gnocchi_burro_e_salvia",
@@ -501,8 +474,8 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Sage",
+          "category": "Veg",
+          "baseName": "Fresh Sage",
           "quantity": 4,
           "unit": "g",
           "cutPrep": "12 fresh leaves",
@@ -560,7 +533,7 @@
           "url": "https://blog.giallozafferano.it/piattiprontiinunattimo/gnocchi-burro-e-salvia/"
         }
       ],
-      "curationNote": "Giallo Zafferano blog version (80 g butter, 12 sage leaves, nutmeg) compared with the Ricette dal Mondo proportions seen in search (100 g butter for 1 kg potatoes). Parmesan added as most northern cooks do. Uses the whole gnocchi base, 4 plates."
+      "curationNote": "Giallo Zafferano blog, Gnocchi burro e salvia for every amount and step; for 4: 80 g butter, 12 sage leaves, salt, nutmeg; Parmesan offered as an optional addition."
     },
     {
       "id": "curated_it_polenta_concia",
@@ -858,8 +831,8 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Sage",
+          "category": "Veg",
+          "baseName": "Fresh Sage",
           "quantity": 3,
           "unit": "g",
           "cutPrep": "about 10 leaves",
@@ -904,7 +877,7 @@
           "url": "https://www.visittuscany.com/it/ricette/ricetta-degli-gnudi/"
         }
       ],
-      "curationNote": "The Tuscan tourism board's recipe (250 g each ricotta and cooked spinach, one egg, nutmeg, flour for dusting, butter and sage), checked against several Giallo Zafferano blog versions seen in search that start from 500 g fresh spinach. The ricotta base makes about 500 g in 8 servings, so 250 g is 4 of them."
+      "curationNote": "Visit Tuscany, La ricetta degli gnudi for every amount and step; 250 g ricotta, 250 g cooked spinach, egg, nutmeg, flour, butter and sage."
     },
     {
       "id": "curated_it_risotto_al_radicchio",
@@ -1066,7 +1039,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 8,
           "unit": "g",
           "cutPrep": "a few leaves for each pizza",
@@ -1085,8 +1058,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "for the tomato"
@@ -1095,7 +1068,7 @@
       "instructions": [
         "Put a baking steel or pizza stone on the highest shelf and heat the oven as hot as it goes, 500 to 550 °F (260 to 290 °C), for 45 to 60 minutes. Turn on the grill for the last 5 minutes.",
         "Press one dough ball out from the centre with your fingertips, leaving a puffy rim of 1 to 2 cm, into a round about 30 cm across. Do not use a rolling pin.",
-        "Spread about 100 g crushed tomato in a spiral, leaving the rim bare. Scatter over a quarter of the mozzarella and a few basil leaves and pour over a spoon of oil.",
+        "Stir the salt into the crushed tomato. Spread about 100 g of it in a spiral, leaving the rim bare. Scatter over a quarter of the mozzarella and a few basil leaves and pour over a spoon of oil.",
         "Slide the pizza onto the hot stone and bake until the rim is puffed and spotted dark and the cheese has melted, 5 to 8 minutes in a home oven (60 to 90 seconds in a wood oven at 840 to 900 °F, 450 to 480 °C).",
         "Finish with a fresh basil leaf and serve at once, then shape and bake the other three."
       ],
@@ -1115,7 +1088,7 @@
           "url": "https://www.dissapore.com/ricette/pizza-margherita-fatta-in-casa-senza-errori/"
         }
       ],
-      "curationNote": "Dissapore's Verace Pizza Napoletana topping (about 100 g San Marzano and 80 g fior di latte per pizza, basil, oil, optional grated cheese) with home-oven times from the Scatti di Gusto and Linkiesta guides seen in search. Uses 4 of the pizza dough base's 6 balls."
+      "curationNote": "Dissapore, Pizza napoletana fatta in casa for every amount and step; per pizza about 100 g tomato, 80 g fior di latte, basil, oil, salt on the tomato."
     },
     {
       "id": "curated_it_pizza_marinara",
@@ -1539,7 +1512,7 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 11,
+          "quantity": 10,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -1548,7 +1521,7 @@
         {
           "category": "Fats",
           "baseName": "Olive Oil (Extra Virgin)",
-          "quantity": 1,
+          "quantity": 2.5,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -1573,13 +1546,9 @@
         {
           "source": "ChainBaker, How to make a 100% biga ciabatta",
           "url": "https://www.chainbaker.com/?p=8092"
-        },
-        {
-          "source": "Wikipedia, Ciabatta",
-          "url": "https://en.wikipedia.org/wiki/Ciabatta"
         }
       ],
-      "curationNote": "A biga method from ChainBaker, with the hydration raised to the high (about 76 percent) level the Wikipedia history and the bakery recipes seen in search describe; ciabatta was first baked by Arnaldo Cavallari in Adria in 1982, which the region records."
+      "curationNote": "ChainBaker, How to make a 100% biga ciabatta for every amount and step; 300 g flour all in the biga, 6 g salt (2%), 20 g olive oil; scaled to our 500 g flour; the higher hydration is kept as the recipe's stated choice."
     },
     {
       "id": "curated_it_pane_toscano",
@@ -1720,7 +1689,7 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 8,
+          "quantity": 1.5,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -1760,7 +1729,7 @@
           "url": "https://www.dissapore.com/grande-notizia/i-migliori-pani-italiani-regione-per-regione/"
         }
       ],
-      "curationNote": "Manu's Menu proportions and stretching method, with the butter replaced by lard as Dissapore's regional bread guide gives for grissini stirati (soft wheat, water, yeast, lard and salt). Salt raised from a quarter teaspoon to a usual bread level."
+      "curationNote": "Manu's Menu, Grissini torinesi for every amount and step; 500 g flour, 250 ml water, 1 tsp sugar, 2 g yeast, 20 g butter, 2 tbsp oil plus brushing, 1/4 tsp salt, 2 tbsp durum flour; lard in place of butter kept from Dissapore's bread guide."
     },
     {
       "id": "curated_it_calzone",
@@ -2365,8 +2334,8 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Sage",
+          "category": "Veg",
+          "baseName": "Fresh Sage",
           "quantity": 2,
           "unit": "g",
           "cutPrep": "5 leaves",
@@ -2451,7 +2420,7 @@
           "url": "https://www.visittuscany.com/it/ricette/la-ricetta-del-cacciucco-alla-livornese/"
         }
       ],
-      "curationNote": "Trattoria Galileo's version on Dissapore (red wine, octopus and cuttlefish first, fish, then shellfish, three toasts a bowl) compared with Visit Tuscany's (white wine, 2 dl oil, sage and chile soffritto, a thick broth of fish heads). The mixed rockfish are split between monkfish, which the database holds, and the rest listed as not counted. The fumetto base gives 6 servings of 1 cup, so about 1 litre is 4 of them; the toast is the whole 16-slice loaf of the Pane Toscano recipe in this file."
+      "curationNote": "Dissapore, Cacciucco alla livornese for every amount and step; for 6: octopus, cuttlefish, rockfish, crustaceans, mussels, 800 g tomatoes, 40 g paste, sage, onion, parsley, 2 glasses red wine, 4 garlic, 2 chilies, oil, black pepper."
     },
     {
       "id": "curated_it_branzino_al_forno",
@@ -3028,7 +2997,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 5,
           "unit": "g",
           "cutPrep": "a few leaves",
@@ -3091,7 +3060,7 @@
           "url": "https://www.dissapore.com/ricette/calamari-ripieni/"
         }
       ],
-      "curationNote": "Dissapore's filling of the squid's chopped tentacles, egg, anchovies, garlic, parsley and breadcrumbs, browned and then simmered in passata with basil and chile. Simmering time stretched from its minimum of 20 minutes to a range, since larger squid need longer to turn tender."
+      "curationNote": "Dissapore, Calamari ripieni for every amount and step; serves 4: 8 squid, breadcrumbs, egg, garlic, parsley, salt, black pepper, 3 anchovies; sauce of 6 tbsp oil, garlic, basil, 300 ml passata, salt, chili flakes."
     },
     {
       "id": "curated_it_pesce_spada_alla_siciliana",
@@ -3740,8 +3709,8 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Sage",
+          "category": "Veg",
+          "baseName": "Fresh Sage",
           "quantity": 2,
           "unit": "g",
           "cutPrep": "2 leaves",
@@ -3750,7 +3719,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Rosemary",
+          "baseName": "Fresh Rosemary",
           "quantity": 1,
           "unit": "g",
           "cutPrep": "1 small sprig",
@@ -3808,7 +3777,7 @@
           "url": "https://blog.giallozafferano.it/inventaricette/ossobuco-alla-milanese/"
         }
       ],
-      "curationNote": "Dissapore (4 shanks, flour, butter, soffritto, white wine, 1 litre broth, sage and rosemary, about 1 h 30) and Inventaricette (shanks 3 to 4 cm, 50 g butter, broth, 90 to 120 minutes, gremolada of lemon zest, garlic and parsley added 5 minutes before the end) agree closely. The tomato some add is left out, as the Milanese in bianco version is the older one. Gremolata points at the base; meat weight is entered without bone."
+      "curationNote": "Dissapore, Ossobuco alla milanese for every amount and step; 4 shanks, flour, butter, soffritto, white wine, broth, sage and rosemary, gremolata."
     },
     {
       "builderType": "side",
@@ -3844,8 +3813,8 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Sage",
+          "category": "Veg",
+          "baseName": "Fresh Sage",
           "quantity": 3,
           "unit": "g",
           "cutPrep": "8 leaves",
@@ -3920,7 +3889,7 @@
           "url": "https://www.misya.info/ricetta/saltimbocca-alla-romana.htm"
         }
       ],
-      "curationNote": "Dissapore (4 slices, 50 g butter, 150 ml wine, 1 to 2 minutes a side, flour optional) and Misya (30 g butter, 8 sage leaves, about 2 minutes a side) compared; eight smaller slices for four people as Misya does. Prosciutto entered as cured ham, the same food."
+      "curationNote": "Dissapore, Saltimbocca alla romana for every amount and step; veal, prosciutto, sage, 50 g butter, 150 ml wine, optional flour; Misya for 8 smaller slices."
     },
     {
       "builderType": "side",
@@ -4011,7 +3980,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Rosemary",
+          "baseName": "Fresh Rosemary",
           "quantity": 2,
           "unit": "g",
           "cutPrep": "1 sprig",
@@ -4096,7 +4065,7 @@
           "url": "https://www.misya.info/ricetta/pollo-alla-cacciatora.htm"
         }
       ],
-      "curationNote": "Dissapore gives the in bianco version (whole chicken, 4 carrots, celery, onion, garlic, green pepper, rosemary, half a glass of white wine, soffritto 15 minutes, braise 20 to 25 then 5 uncovered, optional olives); Misya adds cherry tomatoes and pancetta. Kept Dissapore with the Misya tomatoes as an optional line, and left out pancetta. Chicken entered without bone."
+      "curationNote": "Dissapore, Pollo alla cacciatora for every amount and step; chicken, carrot, celery, onion, garlic, green pepper, rosemary, white wine, optional olives; Misya's tomatoes."
     },
     {
       "builderType": "side",
@@ -4350,7 +4319,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Rosemary",
+          "baseName": "Fresh Rosemary",
           "quantity": 2,
           "unit": "g",
           "cutPrep": "1 sprig",
@@ -4358,11 +4327,20 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Sage",
+          "category": "Veg",
+          "baseName": "Fresh Sage",
           "quantity": 1,
           "unit": "g",
           "cutPrep": "a few leaves",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Thyme",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "1 sprig",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -4381,15 +4359,6 @@
           "quantity": 1,
           "unit": "g",
           "cutPrep": "a small piece of stick",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, cloves, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
-          "cutPrep": "2 or 3 whole cloves",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -4449,7 +4418,7 @@
         }
       ],
       "instructions": [
-        "Put the beef in a snug bowl with the vegetables, garlic, herbs and spices and pour over the whole bottle of wine. Cover and leave in the fridge 8 to 12 hours, turning it once or twice.",
+        "Put the beef in a snug bowl with the vegetables, garlic, rosemary, sage, thyme, bay leaves, cinnamon, nutmeg and pepper and pour over the whole bottle of wine. Cover and leave in the fridge 8 to 12 hours, turning it once or twice.",
         "Lift out the meat and pat it dry. Strain the marinade, keeping the wine and the vegetables apart.",
         "Brown the beef all over in the butter and oil in a heavy casserole, 8 to 10 minutes. Pour in the brandy if using and let it bubble off.",
         "Add the drained vegetables and stir for 5 minutes, then pour in the wine and season with salt. Bring to a bare simmer.",
@@ -4480,7 +4449,7 @@
           "url": "https://www.misya.info/ricetta/brasato-al-barolo.htm"
         }
       ],
-      "curationNote": "Dissapore (1 kg beef, vegetables, herb bundle, cinnamon, nutmeg, pepper, whole bottle of Barolo, butter, brandy, marinate 8 to 12 h, 4 h very low heat, sauce blended) and Misya (1.2 kg girello for 6, about 2 h). Kept the long Dissapore braise with the Misya amount for six. Barolo entered as red wine."
+      "curationNote": "Dissapore, Brasato al Barolo for every amount and step; thyme, bay, rosemary and sage, a pinch each of pepper, cinnamon and nutmeg, salt, Barolo, butter, brandy; no cloves. Misya (serves 6, 1.2 kg) gives the amount of meat."
     },
     {
       "builderType": "side",
@@ -4526,7 +4495,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Rosemary",
+          "baseName": "Fresh Rosemary",
           "quantity": 4,
           "unit": "g",
           "cutPrep": "2 sprigs, needles chopped",
@@ -4534,8 +4503,8 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Sage",
+          "category": "Veg",
+          "baseName": "Fresh Sage",
           "quantity": 4,
           "unit": "g",
           "cutPrep": "5 leaves, chopped",
@@ -4616,7 +4585,7 @@
         }
       ],
       "instructions": [
-        "Lay the belly skin side down. Score the meat side in a criss-cross. Mix the salt, sugar, pepper, fennel, garlic and chopped herbs and rub most of it into the meat.",
+        "Lay the belly skin side down. Score the meat side in a criss-cross. Mix the salt, sugar, pepper, fennel, garlic and chopped rosemary and sage and rub most of it into the meat.",
         "Rub the tenderloin with the rest of the mixture and the oil, lay it along one long edge with the bay leaves and roll the belly tightly round it. Tie with string every 2 to 3 cm.",
         "Prick the skin all over with the tip of a knife, then leave the roll uncovered in the fridge 6 hours or overnight so the skin dries.",
         "Roast on a rack over a tray with the wine and a little water at 250 °F (120 °C) until the center reads 145 °F (62 °C), about 3 to 4 hours. Keep a little liquid in the tray.",
@@ -4647,7 +4616,7 @@
           "url": "https://blog.giallozafferano.it/esplosionedigusto/ricetta-porchetta-fatta-in-casa-con-procedimento-completo/"
         }
       ],
-      "curationNote": "Il caldo sapore del sud gives the quantities (2.5 kg belly, 600 g tenderloin, bay, rosemary, sage, parsley, garlic, pepper, 25 g salt, 25 g sugar, 6 h marinade, 120 °C to 62 °C core then on to 78 to 82 °C, rest, 220 °C 30 minutes); Esplosione di gusto adds fennel seed and white wine in the tray. Pork belly with skin is not in the database."
+      "curationNote": "Giallo Zafferano blog (Il caldo sapore del sud), Porchetta fatta in casa for every amount and step; 2.5 kg belly, 600 g tenderloin, herbs, garlic, 25 g salt, 25 g sugar; fennel and wine from Esplosione di gusto."
     },
     {
       "builderType": "side",
@@ -4772,7 +4741,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 3,
           "unit": "g",
           "cutPrep": "a few leaves",
@@ -4811,7 +4780,7 @@
           "url": "https://www.misya.info/ricetta/polpette-al-sugo.htm"
         }
       ],
-      "curationNote": "Dissapore (250 g beef, 150 g sausage, breadcrumbs, Parmigiano, egg, parsley, garlic, nutmeg, fried, then a sauce of passata) and Misya (500 g beef, bread soaked in milk, pecorino, 2 eggs, 1 litre passata, chilled 30 minutes, 40 minutes in the sauce). Combined: beef and sausage from Dissapore, milk-soaked bread and the long simmer from Misya. The sauce points at sugo di pomodoro."
+      "curationNote": "Dissapore, Polpette al sugo for every amount and step; beef and sausage, Parmigiano, egg, parsley, garlic, nutmeg; Misya's milk-soaked bread and simmer."
     },
     {
       "builderType": "side",
@@ -4849,24 +4818,24 @@
         {
           "category": "Meat",
           "baseName": "Anchovy Fish",
-          "quantity": 30,
+          "quantity": 12,
           "unit": "g",
-          "cutPrep": "3 to 4 salted anchovies, rinsed and boned",
+          "cutPrep": "3 salted anchovy fillets, rinsed",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 12,
+          "quantity": 8,
           "unit": "g",
-          "cutPrep": "3 cloves, 2 crushed and 1 for the paste",
+          "cutPrep": "2 cloves, 1 crushed and 1 for the paste",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
-          "baseName": "Rosemary",
+          "baseName": "Fresh Rosemary",
           "quantity": 4,
           "unit": "g",
           "cutPrep": "2 sprigs",
@@ -4874,8 +4843,8 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Sage",
+          "category": "Veg",
+          "baseName": "Fresh Sage",
           "quantity": 2,
           "unit": "g",
           "cutPrep": "a few leaves",
@@ -4912,7 +4881,7 @@
         {
           "category": "Fats",
           "baseName": "Olive Oil (Extra Virgin)",
-          "quantity": 3,
+          "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4938,7 +4907,7 @@
         }
       ],
       "instructions": [
-        "Heat the oven to 350 °F (180 °C). Season the lamb with salt and pepper and toss it in a roasting pan with the oil, crushed garlic, rosemary, sage and bay.",
+        "Heat the oven to 350 °F (180 °C). Season the lamb with salt and pepper and toss it in a roasting pan with the oil, the crushed garlic clove, rosemary, sage and bay.",
         "Roast 20 minutes, then pour over the wine and half the vinegar.",
         "Roast 40 to 50 minutes more, turning and basting the pieces every 15 minutes, until the meat is browned and comes easily from the bone.",
         "Meanwhile pound the anchovies with the last garlic clove and a few rosemary needles, and loosen the paste with the rest of the vinegar.",
@@ -4968,7 +4937,7 @@
           "url": "https://blog.giallozafferano.it/ilricettariotimoelavanda/abbacchio-alla-romana/"
         }
       ],
-      "curationNote": "Dissapore (1.5 kg milk lamb, 3 anchovies, garlic, rosemary, sage, bay, white wine and vinegar, 180 °C about 1 h basting, anchovy paste at the end) and Il ricettario timo e lavanda (1 kg lamb, 4 anchovies, wine, half a glass of vinegar, covered pan 40 minutes) agree on the anchovy and vinegar finish. Oven method kept. Meat weight entered without bone, split between shoulder and leg."
+      "curationNote": "Dissapore, Abbacchio alla romana for every amount and step; serves 4, same as ours."
     },
     {
       "builderType": "side",
@@ -5022,8 +4991,8 @@
           "prepNote": "juice of 1 lemon"
         },
         {
-          "category": "Herbs",
-          "baseName": "Sage",
+          "category": "Veg",
+          "baseName": "Fresh Sage",
           "quantity": 6,
           "unit": "g",
           "cutPrep": "about 12 leaves",
@@ -5032,7 +5001,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Rosemary",
+          "baseName": "Fresh Rosemary",
           "quantity": 4,
           "unit": "g",
           "cutPrep": "2 sprigs, needles chopped",
@@ -5116,7 +5085,7 @@
           "url": "https://www.dissapore.com/cucina/ricetta-pollo-al-mattone/"
         }
       ],
-      "curationNote": "Audrey Le Goff (2.2 kg spatchcocked chicken, 120 ml oil, lemon, 12 sage leaves, rosemary, garlic, oregano, chili, 2 h marinade, 250 °C under hot trays and a brick, 25 plus 20 minutes, rest 10) followed; Dissapore confirms the weight and about 1 hour of cooking with dried herbs. Chicken entered without bone."
+      "curationNote": "Audrey Le Goff, Pollo al mattone for every amount and step; 2.2 kg chicken, 120 ml oil, lemon, sage, rosemary, garlic, oregano, chili."
     },
     {
       "builderType": "side",
@@ -5536,7 +5505,7 @@
         {
           "category": "Herbs",
           "baseName": "Tomato puree",
-          "quantity": 700,
+          "quantity": 500,
           "unit": "g",
           "cutPrep": "passata",
           "cookingMethod": null,
@@ -5548,15 +5517,6 @@
           "quantity": 200,
           "unit": "ml",
           "cutPrep": "as needed",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Basil",
-          "quantity": 3,
-          "unit": "g",
-          "cutPrep": "a few leaves",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -5585,7 +5545,7 @@
         "Melt the lard in a heavy pan and brown the rolls on all sides, 5 to 6 minutes. Add the onion and the rest of the garlic, cover and cook gently until the onion is very soft, 8 to 10 minutes, adding a spoon of water if it catches.",
         "Raise the heat, pour in the wine and let it bubble off while turning the rolls.",
         "Add the passata, lower the heat, cover and simmer very gently for 1 1/2 to 2 hours, until the meat is tender and the sauce dark and thick, adding water if it reduces too much.",
-        "Remove the string, add the basil and serve the braciole with a little sauce; the rest of the sauce traditionally dresses ziti or rigatoni as the first course."
+        "Remove the string and serve the braciole with a little sauce; the rest of the sauce traditionally dresses ziti or rigatoni as the first course."
       ],
       "nutritionHighlights": [
         {
@@ -5615,7 +5575,7 @@
           "url": "https://blog.giallozafferano.it/ricettepanedolci/braciole-napoletane/"
         }
       ],
-      "curationNote": "Memorie di Angelina (8 slices, parsley and garlic paste, cheese, raisins, pine nuts, lard, onion, red wine, 500 g passata, an hour or more) followed; Napolike (raisins soaked in Aglianico, braised in ragù 2 to 3 h) and Ricette pane e dolci (4 slices, Parmigiano, parsley, garlic, 500 g passata, at least 1 h) compared. A self-contained tomato sauce is used rather than the full ragù."
+      "curationNote": "Memorie di Angelina, Braciole alla napoletana for every amount and step; 8 slices, parsley, garlic, lard, cheese, raisins, pine nuts, salt and pepper; sauce of onion, garlic, red wine, 500 g passata; no basil."
     },
     {
       "builderType": "side",
@@ -5697,7 +5657,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Rosemary",
+          "baseName": "Fresh Rosemary",
           "quantity": 2,
           "unit": "g",
           "cutPrep": "1 sprig",
@@ -5705,8 +5665,8 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Sage",
+          "category": "Veg",
+          "baseName": "Fresh Sage",
           "quantity": 1,
           "unit": "g",
           "cutPrep": "2 leaves",
@@ -5752,7 +5712,7 @@
       ],
       "instructions": [
         "Season the pork with salt and pepper. Brown it all over in the butter and oil in a heavy casserole that just fits it, 8 to 10 minutes.",
-        "Add the onion, carrot, garlic and herbs and cook 5 minutes until soft. Pour in the wine and let it bubble off.",
+        "Add the onion, carrot, garlic, rosemary, sage and bay leaves and cook 5 minutes until soft. Pour in the wine and let it bubble off.",
         "Pour in the milk, which should come about halfway up the meat. Bring to a bare simmer, cover partly and cook over low heat for 1 1/2 to 2 hours, turning the meat every 20 minutes, until the center reads 150 to 155 °F (65 to 68 °C).",
         "Lift out the pork and rest it 10 minutes. Remove the herbs and blend the milk and vegetables into a smooth sauce, reducing it a little if thin.",
         "Slice the pork and serve with the warm sauce."
@@ -5781,7 +5741,7 @@
           "url": "https://blog.giallozafferano.it/ilcaldosaporedelsud/lonza-di-maiale-al-latte/"
         }
       ],
-      "curationNote": "Dissapore (1 kg loin, garlic, onion, carrot, rosemary, bay, sage, 500 ml milk, 180 °C about 1 h, sauce blended) and Il caldo sapore del sud (1 kg loin, 1 litre milk, butter and oil, 150 ml white wine, about 2 h on the stove, core 68 °C). Stove method with 750 ml milk taken between the two."
+      "curationNote": "Dissapore, Arista di maiale al latte for every amount and step; 1 kg loin, garlic, onion, carrot, rosemary, bay, sage, milk; wine and butter from the Il caldo sapore del sud version."
     },
     {
       "builderType": "side",
@@ -5890,7 +5850,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Rosemary",
+          "baseName": "Fresh Rosemary",
           "quantity": 1,
           "unit": "g",
           "cutPrep": "1 small sprig",
@@ -5965,7 +5925,7 @@
           "url": "https://www.dissapore.com/ricette/trippa-alla-romana/"
         }
       ],
-      "curationNote": "Sora Lella via Scatti di Gusto (1 kg tripe blanched 15 minutes, soffritto, 1 kg passed tomatoes, 2 cloves, half a glass of white wine, 150 g Pecorino, mentuccia at the end, 30 minutes) and Dissapore (500 ml passata, 3 cloves, rosemary, 100 g Pecorino, 12 mint leaves, 40 minutes). Tripe and mentuccia are not in the database."
+      "curationNote": "Scatti di Gusto, Trippa alla romana della Sora Lella for every amount and step; for 4: 1 kg tripe, 1 kg passata, soffritto, garlic, 1 chili, 2 cloves, half a glass of wine, 150 g Pecorino, mentuccia, salt and pepper to taste; rosemary from Dissapore."
     },
     {
       "builderType": "side",
@@ -6177,7 +6137,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 3,
           "unit": "g",
           "cutPrep": "a few leaves",
@@ -6280,7 +6240,7 @@
           "url": "https://www.turismoroma.it/it/page/involtini-di-carne-alla-romana"
         }
       ],
-      "curationNote": "Il chicco di mais (800 g beef slices, 150 g prosciutto, carrot and celery sticks inside, 500 g passata, wine, at least 1 hour) and Turismo Roma (8 slices of 60 to 70 g, raw ham, carrot, celery, basil and garlic inside, soffritto, 600 g peeled tomatoes, 50 to 60 minutes, parsley at the end) agree. Prosciutto entered as cured ham."
+      "curationNote": "Turismo Roma, Involtini di carne alla romana for every amount and step; 8 slices, raw ham, carrot, celery, basil and garlic, soffritto, 600 g tomatoes, parsley."
     },
     {
       "builderType": "side",
@@ -6581,7 +6541,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 8,
           "unit": "g",
           "cutPrep": "a handful of leaves",
@@ -6621,7 +6581,7 @@
           "url": "https://www.misya.info/ricetta/parmigiana-di-melanzane.htm"
         }
       ],
-      "curationNote": "Dissapore (1 kg eggplant salted 30 minutes, floured and fried, 500 ml passata cooked with garlic and oil, 300 g mozzarella, 100 g Parmigiano, basil, 180 °C 30 minutes then grill 5) followed; Misya (same weights, 50 g Parmigiano, an egg poured over the fried slices) compared and the egg left out. The sauce points at sugo di pomodoro."
+      "curationNote": "Dissapore, Parmigiana di melanzane for every amount and step; 1 kg eggplant salted, floured and fried, 500 ml sauce, 300 g mozzarella, 100 g Parmigiano, basil."
     },
     {
       "builderType": "side",
@@ -6712,7 +6672,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 3,
           "unit": "g",
           "cutPrep": "a few leaves",
@@ -6770,7 +6730,7 @@
           "url": "https://www.dissapore.com/ricette/peperonata/"
         }
       ],
-      "curationNote": "Misya gives the amounts and times (2 peppers, spring onion, garlic, 200 g tomatoes, 15 plus 15 minutes) for 4; Dissapore adds the guidance kept here: mostly red and yellow peppers in 2 cm chunks, a teaspoon of sugar per two peppers, a splash of vinegar at the end, rest 10 to 15 minutes. Pepper quantity raised to four for four people as a side."
+      "curationNote": "Misya, Peperonata for every amount and step; peppers, spring onion, garlic, 200 g tomatoes; sugar and vinegar as Dissapore gives them."
     },
     {
       "builderType": "side",
@@ -6815,8 +6775,8 @@
           "prepNote": "1 bay leaf"
         },
         {
-          "category": "Herbs",
-          "baseName": "Sage",
+          "category": "Veg",
+          "baseName": "Fresh Sage",
           "quantity": 4,
           "unit": "g",
           "cutPrep": "8 to 10 leaves",
@@ -6900,7 +6860,7 @@
           "url": "https://www.visittuscany.com/it/ricette/la-ricetta-dei-fagioli-alluccelletto/"
         }
       ],
-      "curationNote": "Dissapore (300 g dried cannellini soaked, boiled with garlic and bay at least 50 minutes, then garlic in oil and 200 ml passata) followed; Visit Tuscany (garlic and sage in oil until the sage crisps, cooking water, tomato, about 20 minutes, earthenware, sausages beside) adds the sage that gives the dish its name. Sausages left out to keep it a side."
+      "curationNote": "Dissapore, Fagioli all'uccelletto for every amount and step; 300 g cannellini, garlic, bay, 200 ml passata; Visit Tuscany adds the sage."
     },
     {
       "builderType": "side",
@@ -7048,7 +7008,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Rosemary",
+          "baseName": "Fresh Rosemary",
           "quantity": 3,
           "unit": "g",
           "cutPrep": "2 sprigs",
@@ -7114,7 +7074,7 @@
           "url": "https://www.dissapore.com/ricette/patate-al-forno/"
         }
       ],
-      "curationNote": "Misya (1.2 kg yellow potatoes, oil, garlic, rosemary, chili, 10 minute salted soak, 180 °C 30 minutes then 5 under the grill) and Dissapore (30 to 60 minute soak, unpeeled garlic, 200 °C 30 minutes then 180 °C about 10, single layer). Dissapore oven sequence kept; its parboil step left out as Misya does without it."
+      "curationNote": "Misya, Patate al forno for every amount and step; 1.2 kg potatoes, oil, garlic, rosemary, chili; Dissapore's oven sequence."
     },
     {
       "builderType": "side",
@@ -7443,7 +7403,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Rosemary",
+          "baseName": "Fresh Rosemary",
           "quantity": 2,
           "unit": "g",
           "cutPrep": "1 sprig",
@@ -7474,7 +7434,7 @@
         "Heat a ridged grill pan or barbecue until very hot. Grill the vegetables a few at a time so each slice lies flat on the surface: eggplant and zucchini 2 to 3 minutes a side, onion 3 to 4, pepper strips 4 to 5, tomatoes last as they give off water.",
         "Lay everything on a serving plate.",
         "Dress with the rest of the oil, the vinegar if using, the sliced garlic and a few more rosemary needles.",
-        "Leave them about an hour at room temperature before serving so the flavours settle."
+        "Leave them about an hour at room temperature before serving so the flavors settle."
       ],
       "nutritionHighlights": [
         {
@@ -7500,7 +7460,7 @@
           "url": "https://www.scattidigusto.it/verdure-grigliate-come-cucinare-melanzane-peperoni-zucchine-pomodori"
         }
       ],
-      "curationNote": "Dissapore gives the quantities (1 zucchini, 1 yellow pepper, 1 eggplant, 8 cherry tomatoes, white and Tropea onion, 30 ml oil with salt, pepper and rosemary, garlic slices to finish, rest about an hour); Scatti di Gusto adds the dressing of oil, a little wine vinegar and garlic for zucchini and eggplant. Grill times added from usual practice since neither gives them."
+      "curationNote": "Dissapore, Verdure grigliate for every amount and step; zucchini, yellow pepper, eggplant, cherry tomatoes, two onions, 30 ml oil with salt, pepper and rosemary, garlic; vinegar from Scatti di Gusto."
     },
     {
       "builderType": "salad",

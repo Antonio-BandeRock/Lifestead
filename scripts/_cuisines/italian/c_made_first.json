@@ -26,7 +26,7 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 120,
+          "quantity": 100,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -35,7 +35,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
-          "quantity": 75,
+          "quantity": 50,
           "unit": "g",
           "cutPrep": "sifted",
           "cookingMethod": null,
@@ -51,19 +51,37 @@
           "prepNote": null
         },
         {
+          "category": "Fruit",
+          "baseName": "Lemon peel",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "finely grated",
+          "cookingMethod": null,
+          "prepNote": "zest of 1 lemon"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "in place of a sachet of vanillin"
+        },
+        {
           "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
+          "baseName": "Sugars, reprocessed, powdered",
           "quantity": 20,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "to dust"
+          "prepNote": "icing sugar, to dust"
         }
       ],
       "instructions": [
-        "Whisk the yolks with half the sugar until pale and thick. Whip the whites to soft peaks, then add the rest of the sugar and whip to firm peaks.",
+        "Whisk the yolks with half the sugar, the lemon zest and the vanilla until pale and thick. Whip the whites to soft peaks, then add the rest of the sugar and whip to firm peaks.",
         "Fold the whites into the yolks, then fold in the flour and starch in two parts.",
-        "Pipe 10 cm fingers onto lined trays, dust twice with sugar and bake at 190 C (375 F) for 10 to 12 minutes, until lightly golden.",
+        "Pipe 10 cm fingers onto lined trays, dust with icing sugar, wait 5 minutes and dust again, then bake at 190 °C (375 °F) for about 10 minutes, until lightly golden.",
         "Cool and keep in a tin. Dry ones soak up coffee best."
       ],
       "nutritionHighlights": [
@@ -73,16 +91,16 @@
         },
         {
           "nutrient": "Sugar",
-          "note": "About 4 g per biscuit."
+          "note": "About 3.5 g per biscuit."
         }
       ],
       "citations": [
         {
-          "source": "Wikipedia: Ladyfinger (biscuit)",
-          "url": "https://en.wikipedia.org/wiki/Ladyfinger_(biscuit)"
+          "source": "Dissapore, Savoiardi",
+          "url": "https://www.dissapore.com/ricette/savoiardi/"
         }
       ],
-      "curationNote": null
+      "curationNote": "Dissapore, Savoiardi for every amount and step; 4 eggs, 100 g sugar, 50 g 00 flour, 50 g potato starch, vanillin, grated zest of 1 lemon, icing sugar dusted twice; 190 °C for 10 minutes."
     },
     {
       "id": "curated_it_base_gelato_fior_di_latte",
@@ -143,11 +161,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia: Gelato",
-          "url": "https://en.wikipedia.org/wiki/Gelato"
+          "source": "Ricette che passione (GialloZafferano blog), Gelato fior di latte",
+          "url": "https://blog.giallozafferano.it/ricettechepassione/ricetta-gelato-fior-di-latte/"
         }
       ],
-      "curationNote": null
+      "curationNote": "Ricette che passione (GialloZafferano blog), Gelato fior di latte for every amount and step; 400 g milk, 250 g cream, 100 g sugar; Gambero Rosso and other versions run from 500 g milk with 80 g cream to more cream; ours (750 ml milk, 250 ml cream, 170 g sugar) sits inside that range."
     },
     {
       "id": "curated_it_base_pangrattato",
@@ -197,7 +215,7 @@
       "servings": 28,
       "servingSizeAmount": 1,
       "servingSizeUnit": "serving",
-      "flavorProfile": "Salty, sweet-fatted pork belly with black pepper, juniper and garlic.",
+      "flavorProfile": "Salty, sweet-fatted pork belly with black pepper, fennel seed, nutmeg and garlic.",
       "healthBenefit": "Pork belly brings B vitamins and zinc; used a little at a time to season a dish.",
       "overallTier": "strong",
       "components": [],
@@ -214,7 +232,7 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 52,
+          "quantity": 55,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -223,7 +241,7 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 10,
+          "quantity": 28,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -232,7 +250,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, pepper, black",
-          "quantity": 10,
+          "quantity": 28,
           "unit": "g",
           "cutPrep": "coarsely crushed",
           "cookingMethod": null,
@@ -241,7 +259,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, nutmeg, ground",
-          "quantity": 1,
+          "quantity": 5.5,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -250,44 +268,35 @@
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 10,
+          "quantity": 15,
           "unit": "g",
-          "cutPrep": "crushed",
+          "cutPrep": "about 4 cloves, minced",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
-          "baseName": "Spices, bay leaf",
-          "quantity": 1,
+          "baseName": "Spices, fennel seed",
+          "quantity": 9,
           "unit": "g",
-          "cutPrep": "crumbled",
+          "cutPrep": "lightly crushed",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Thyme, dried, ground",
-          "quantity": 1,
+          "quantity": 9,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "juniper berries",
-          "contains": "none",
-          "quantity": 5,
-          "unit": "g",
-          "cutPrep": "crushed",
-          "prepNote": null
         }
       ],
       "instructions": [
-        "Mix the salt, sugar, half the pepper, the nutmeg, garlic, bay, thyme and juniper and rub it into every side of the belly.",
+        "Mix the salt, sugar, pepper, nutmeg, fennel seed, thyme and garlic and rub it into every side of the belly.",
         "Seal in a bag and keep in the fridge 7 to 10 days, turning daily, until it is firm all through.",
-        "Rinse, pat dry, press the rest of the pepper onto the meat side and hang flat (tesa) at 12 to 15 C (54 to 59 F) with good humidity for 3 weeks, until it has lost about a quarter of its weight. One serving is 50 g."
+        "Rinse, pat dry and hang it flat (tesa) in a dark, cool, airy place at about 16 °C (60 °F) and about 60 percent humidity for at least 1 week, until it has lost about a third of its weight. One serving is 50 g."
       ],
       "nutritionHighlights": [
         {
@@ -301,11 +310,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia: Pancetta",
-          "url": "https://en.wikipedia.org/wiki/Pancetta"
+          "source": "Stefan's Gourmet Blog, Homemade pancetta",
+          "url": "https://stefangourmet.com/2014/01/28/homemade-pancetta/"
         }
       ],
-      "curationNote": null
+      "curationNote": "Stefan's Gourmet Blog, Homemade pancetta for every amount and step; 1.5 kg belly: 45 g salt, 22.5 g pepper, 22.5 g sugar, 4.5 g nutmeg, 7.5 g fennel seed, 7.5 g dried thyme, 3 garlic cloves, no nitrite; scaled to our 1.85 kg."
     },
     {
       "id": "curated_it_base_guanciale",
@@ -317,7 +326,7 @@
       "servings": 14,
       "servingSizeAmount": 1,
       "servingSizeUnit": "serving",
-      "flavorProfile": "Rich, sweet pork fat cured with pepper, garlic, thyme and rosemary.",
+      "flavorProfile": "Rich, sweet pork fat cured with salt, black pepper and garlic.",
       "healthBenefit": "Pork fat carries flavour; a little goes into a whole pot of pasta.",
       "overallTier": "strong",
       "components": [],
@@ -343,7 +352,7 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 10,
+          "quantity": 15,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -352,7 +361,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, pepper, black",
-          "quantity": 10,
+          "quantity": 15,
           "unit": "g",
           "cutPrep": "coarsely crushed",
           "cookingMethod": null,
@@ -361,35 +370,17 @@
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 10,
+          "quantity": 7,
           "unit": "g",
-          "cutPrep": "crushed",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Thyme, dried, ground",
-          "quantity": 1,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Fresh Rosemary",
-          "quantity": 3,
-          "unit": "g",
-          "cutPrep": "chopped",
+          "cutPrep": "about 2 cloves, minced",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Rub the salt, sugar, half the pepper, the garlic, thyme and rosemary into the cheek (or belly).",
-        "Seal and keep in the fridge 7 days, turning daily.",
-        "Rinse, pat dry, coat with the rest of the pepper and hang at 12 to 15 C (54 to 59 F) for 3 weeks, until it has lost about 30 percent of its weight. One serving is 50 g."
+        "Rub the salt, sugar, pepper and garlic all over the cheek (or belly).",
+        "Seal it in a bag and keep it in the fridge for 1 week, turning it every day.",
+        "Rinse it, pat it dry and hang it in a cool, airy place at about 16 °C (60 °F) for about 4 weeks, until firm and much lighter. One serving is 50 g."
       ],
       "nutritionHighlights": [
         {
@@ -403,11 +394,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia: Guanciale",
-          "url": "https://en.wikipedia.org/wiki/Guanciale"
+          "source": "Stefan's Gourmet Blog, Homemade guanciale",
+          "url": "https://stefangourmet.com/2014/06/09/homemade-guanciale/"
         }
       ],
-      "curationNote": null
+      "curationNote": "Stefan's Gourmet Blog, Homemade guanciale for every amount and step; 1.2 kg jowl with 35 g salt, 17.5 g pepper, 17.5 g sugar and 2 garlic cloves; scaled to our 1 kg."
     },
     {
       "id": "curated_it_base_lardo",
@@ -618,7 +609,7 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 150,
+          "quantity": 148,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -636,36 +627,36 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 2,
+          "quantity": 2.5,
           "unit": "g",
-          "cutPrep": "crumbled",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Garlic",
-          "quantity": 15,
-          "unit": "g",
-          "cutPrep": "crushed",
+          "cutPrep": "ground",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
-          "baseName": "Fresh Rosemary",
-          "quantity": 2,
+          "baseName": "Garlic powder",
+          "quantity": 10,
           "unit": "g",
-          "cutPrep": "chopped",
+          "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
-          "baseName": "Spices, coriander seed",
-          "quantity": 2,
+          "baseName": "Rosemary",
+          "quantity": 10,
           "unit": "g",
-          "cutPrep": "crushed",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, nutmeg, ground",
+          "quantity": 2.5,
+          "unit": "g",
+          "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
@@ -673,16 +664,16 @@
           "notInDatabase": true,
           "name": "juniper berries",
           "contains": "none",
-          "quantity": 10,
+          "quantity": 2.5,
           "unit": "g",
           "cutPrep": "crushed",
           "prepNote": null
         }
       ],
       "instructions": [
-        "Rub the salt, pepper, bay, garlic, rosemary, coriander and juniper into the meat and keep it cold 3 weeks, turning it every few days.",
-        "Cold smoke a few hours a day over beech for 10 days, never above 20 C (68 F).",
-        "Hang in a cool, airy room about 5 months, until it has lost about a third of its weight. One serving is 50 g."
+        "Rub the salt, pepper, bay, garlic powder, rosemary, nutmeg and juniper into the meat, seal it and keep it in the fridge for 21 days, turning it every day or so.",
+        "Dry it for about 15 days at around 20 °C (68 °F), cold smoking it about 4 hours a day over beech and never above 20 °C (68 °F).",
+        "Hang it in a cool, airy room at 10 to 15 °C (50 to 59 °F) for 6 to 12 months, until it has lost about a third of its weight. One serving is 50 g."
       ],
       "nutritionHighlights": [
         {
@@ -696,11 +687,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia: Speck Alto Adige",
-          "url": "https://en.wikipedia.org/wiki/Speck_Alto_Adige"
+          "source": "Taste of Artisan, Homemade dry cured speck",
+          "url": "https://tasteofartisan.com/wprm_print/homemade-dry-cured-speck"
         }
       ],
-      "curationNote": null
+      "curationNote": "Taste of Artisan, Homemade dry cured speck for every amount and step; per 1 kg leg: 29.5 g salt, 2.5 g Cure #2, 0.5 g bay, 0.5 g juniper, 2 g pepper, 2 g garlic powder, 0.5 g nutmeg, 2 g ground rosemary; scaled to our 5 kg."
     },
     {
       "id": "curated_it_base_salsiccia",
@@ -712,7 +703,7 @@
       "servings": 10,
       "servingSizeAmount": 1,
       "servingSizeUnit": "each",
-      "flavorProfile": "Coarse, juicy pork sausage with fennel seed, garlic and black pepper.",
+      "flavorProfile": "Coarse, juicy pork sausage with garlic, black pepper and white wine.",
       "healthBenefit": "Pork brings protein, B vitamins and zinc; no fillers.",
       "overallTier": "strong",
       "components": [],
@@ -720,7 +711,7 @@
         {
           "category": "Meat",
           "baseName": "Pork Shoulder (Raw)",
-          "quantity": 800,
+          "quantity": 750,
           "unit": "g",
           "cutPrep": "coarsely ground",
           "cookingMethod": null,
@@ -729,7 +720,7 @@
         {
           "category": "Meat",
           "baseName": "Gris sidfläsk bit rå m. svål",
-          "quantity": 200,
+          "quantity": 250,
           "unit": "g",
           "cutPrep": "skin removed, coarsely ground",
           "cookingMethod": null,
@@ -738,7 +729,7 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 20,
+          "quantity": 18,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -754,18 +745,9 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Spices, fennel seed",
-          "quantity": 4,
-          "unit": "g",
-          "cutPrep": "lightly crushed",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 5,
+          "quantity": 10,
           "unit": "g",
           "cutPrep": "crushed",
           "cookingMethod": null,
@@ -774,7 +756,7 @@
         {
           "category": "Alcohol",
           "baseName": "White Wine",
-          "quantity": 30,
+          "quantity": 100,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -791,7 +773,7 @@
         }
       ],
       "instructions": [
-        "Mix the ground meat with the salt, pepper, fennel, garlic and wine until it just holds together. Keep everything cold.",
+        "Mix the ground meat with the salt, pepper, garlic and wine until it just holds together. Keep everything cold.",
         "Stuff into the hog casing and twist into 10 links of about 100 g.",
         "Rest overnight in the fridge. Cook within 3 days or freeze. To use without the skin, slit and peel it off."
       ],
@@ -807,11 +789,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipedia: Italian sausage",
-          "url": "https://en.wikipedia.org/wiki/Italian_sausage"
+          "source": "Stefan's Gourmet Blog, Homemade Italian pork sausage",
+          "url": "https://stefangourmet.com/2015/01/11/homemade-italian-pork-sausage-salsiccia-fatta-in-casa/"
         }
       ],
-      "curationNote": null
+      "curationNote": "Stefan's Gourmet Blog, Homemade Italian pork sausage (salsiccia fatta in casa) for every amount and step; 500 g meat (75% shoulder, 25% belly), 1.8% salt, 0.3% pepper, 10% white wine, 1% garlic; scaled to our 1 kg."
     }
   ]
 }

@@ -158,7 +158,7 @@
         },
         {
           "category": "Fats",
-          "baseName": "Solrosolja",
+          "baseName": "Olive Oil (Extra Virgin)",
           "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
@@ -177,8 +177,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1.5,
-          "unit": "tsp",
+          "quantity": 9,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -200,7 +200,7 @@
         "Soften the marinade vegetables in the casserole for 5 minutes, stir in the tomato paste and flour and cook for 2 minutes. Return the chicken, warm the cognac, pour it over and flame it.",
         "Pour in the wine and the warm stock, add the lardons back, bring to a simmer, cover and braise in the oven at 325 to 350°F (160 to 175°C) for 1 1/2 to 2 hours, until the meat is very tender.",
         "Meanwhile brown the mushrooms in half the butter, 6 to 8 minutes, and glaze the pearl onions in the rest with a splash of water until tender, 10 to 15 minutes.",
-        "Lift out the chicken, boil the sauce until it coats a spoon, 5 to 10 minutes, then return the chicken with the mushrooms and onions. Scatter with parsley and serve with boiled potatoes or bread."
+        "Lift out the chicken, boil the sauce until it coats a spoon, 5 to 10 minutes, and season it with the salt and pepper. Return the chicken with the mushrooms and onions, scatter with parsley and serve with boiled potatoes or bread."
       ],
       "nutritionHighlights": [
         {
@@ -226,7 +226,7 @@
           "url": "https://fr.wikipedia.org/wiki/Coq_au_vin"
         }
       ],
-      "curationNote": "Géraldine gives the quantities and the overnight wine marinade; Wikipédia confirms the traditional garnish of lardons, small onions and button mushrooms and the use of marc or brandy. Stock points at the fond blanc."
+      "curationNote": "La Cuisine de Géraldine, Coq au vin for every amount and step; for 6 like ours: 6 chicken legs, 750 ml red wine, 3 carrots, 1 onion, 3 garlic cloves, 5 thyme sprigs, 2 bay leaves, 8 oz bacon, 1 tbsp tomato paste, 3 tbsp cognac, 2 tbsp flour, 300 ml stock, 8 oz mushrooms, 12 pearl onions, 2 tbsp olive oil, 2 tbsp butter, parsley, salt and pepper with no amount."
     },
     {
       "builderType": "side",
@@ -327,18 +327,18 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 0.15,
+          "quantity": 0.3,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "1 bay leaf"
+          "prepNote": "2 bay leaves"
         },
         {
           "category": "Herbs",
-          "baseName": "Thyme, dried, ground",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
+          "baseName": "Fresh Thyme",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "a few sprigs",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -363,11 +363,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1.5,
-          "unit": "tsp",
+          "quantity": 9,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste"
         },
         {
           "category": "Herbs",
@@ -383,7 +383,7 @@
         "Heat half the olive oil in a wide casserole and soften the onions and garlic over medium heat for 8 to 10 minutes. Add the peppers and cook 10 minutes more, stirring now and then.",
         "Add the ham, tomatoes, tomato paste, bay, thyme and the piment d'Espelette, and simmer this piperade uncovered for 25 to 30 minutes until thick.",
         "Meanwhile season the chicken with salt and brown it in the rest of the oil in a frying pan, 8 to 10 minutes, until golden on all sides.",
-        "Pour off the fat, deglaze the pan with the white wine and tip it all into the piperade. Nestle in the chicken, cover and simmer gently for 30 to 35 minutes.",
+        "Pour off the fat, deglaze the pan with the white wine and tip it all into the piperade. Nestle in the chicken, season with pepper, cover and simmer gently for 30 to 35 minutes.",
         "Uncover and let the sauce reduce for 10 minutes. Taste for salt and Espelette, and serve with white rice."
       ],
       "nutritionHighlights": [
@@ -410,7 +410,7 @@
           "url": "https://fr.wikipedia.org/wiki/Poulet_basquaise"
         }
       ],
-      "curationNote": "Mimi Thorisson gives the quantities and the piperade first, chicken second order; Wikipédia confirms olive oil, red and green peppers, white wine, Espelette and optional Bayonne ham, served with rice."
+      "curationNote": "Mimi Thorisson, Basque chicken for every amount and step; serves 4 to 6: 1 chicken, 2 red and 1 green pepper, 2 onions, 4 garlic cloves, 230 g Bayonne ham, 6 tomatoes, 120 ml white wine, 1 tbsp tomato paste, 1 to 2 tsp Espelette, 2 bay leaves, a few sprigs of fresh thyme, olive oil, salt and pepper to taste."
     },
     {
       "builderType": "side",
@@ -465,21 +465,12 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Fresh Thyme",
-          "quantity": 2,
-          "unit": "g",
-          "cutPrep": "a few sprigs",
-          "cookingMethod": null,
-          "prepNote": "optional, in the cavity"
-        },
-        {
-          "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1.5,
-          "unit": "tsp",
+          "quantity": 9,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to salt lightly, twice"
         },
         {
           "category": "Herbs",
@@ -493,7 +484,7 @@
       ],
       "instructions": [
         "Take the chicken out of the fridge 30 minutes ahead and heat the oven to 410°F (210°C).",
-        "Set the bird in a roasting dish, rub it all over with butter, tuck small pieces under the wings and between the legs and breast, and drizzle with the oil. Put the thyme in the cavity if using.",
+        "Set the bird in a roasting dish, rub it all over with butter, tuck small pieces under the wings and between the legs and breast, and drizzle with the oil.",
         "Pour a thin layer of water into the dish, season the bird with pepper and lightly with salt, and roast for 45 minutes.",
         "Baste generously with the juices, salt again, lower the oven to 350°F (180°C) and roast 30 to 45 minutes more, until the skin is golden and the juice from the thigh runs clear.",
         "Rest the chicken on a board for 10 minutes. Stir a little hot water into the dish, scraping up the browned bits, and pour this jus into a jug.",
@@ -523,7 +514,7 @@
           "url": "https://fr.wikipedia.org/wiki/Poulet_rôti"
         }
       ],
-      "curationNote": "750g gives the plain home method (210 then 180°C, butter, a little water, basting); Wikipédia confirms the hot oven, butter or oil rub, trussing and frites on the side."
+      "curationNote": "750g, Poulet rôti au beurre for every amount and step; serves 4: a free-range chicken, butter, oil, water, salt lightly and pepper with no amounts; 45 minutes at 210°C then 30 to 45 at 180°C; no herbs."
     },
     {
       "builderType": "side",
@@ -537,7 +528,7 @@
       "region": "Normandy",
       "servings": 4,
       "flavorProfile": "Creamy and gently sweet with apple, cider and a breath of calvados, around tender chicken and smoky lardons.",
-      "healthBenefit": "Chicken gives protein and the apples and mushrooms add a little fibre, while the butter and crème fraîche make this a rich dish.",
+      "healthBenefit": "Chicken gives protein and the apples add a little fibre, while the butter and crème fraîche make this a rich dish.",
       "overallTier": "strong",
       "ingredients": [
         {
@@ -597,19 +588,10 @@
         {
           "category": "Herbs",
           "baseName": "Fresh Thyme",
-          "quantity": 2,
+          "quantity": 3,
           "unit": "g",
-          "cutPrep": "a few sprigs",
+          "cutPrep": "1 tbsp, chopped",
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Mushroom, common, fresh",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": "sliced",
-          "cookingMethod": "Sauteed",
           "prepNote": null
         },
         {
@@ -649,13 +631,22 @@
           "prepNote": "a firm eating apple"
         },
         {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
+          "category": "Veg",
+          "baseName": "Fresh Parsley",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": "1 tbsp, roughly chopped",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "the source says to taste"
         },
         {
           "category": "Herbs",
@@ -669,11 +660,11 @@
       ],
       "instructions": [
         "Melt half the butter in a casserole and fry the lardons until golden, 5 minutes. Lift them out.",
-        "Season the chicken and brown it in the same fat, skin side down first, 8 to 10 minutes. Add the onion, garlic and mushrooms and cook 5 minutes more.",
-        "Warm the calvados, pour it over the chicken and flame it, shaking the pan until the flames die.",
-        "Return the lardons, pour in the cider, add the thyme, cover and simmer gently for 45 to 50 minutes, until the chicken is tender.",
+        "Season the chicken with the salt and pepper and brown it in the same fat, skin side down first, about 5 minutes. Add the onion, garlic and thyme and cook 10 minutes more, until soft and golden.",
+        "Pour in the calvados and let it bubble gently until the alcohol has cooked off.",
+        "Return the lardons, pour in the cider, bring to the boil, cover and simmer gently for 45 to 50 minutes, until the chicken is tender.",
         "Meanwhile fry the apple wedges in the remaining butter until golden and just soft, 8 to 10 minutes.",
-        "Lift out the chicken, stir the crème fraîche into the pan and boil until it thickens a little, 3 to 5 minutes. Pour the sauce over the chicken and serve with the apples."
+        "Lift out the chicken, stir the crème fraîche into the pan and heat through for about 5 minutes. Pour the sauce over the chicken, scatter with the parsley and serve with the apples."
       ],
       "nutritionHighlights": [
         {
@@ -682,7 +673,7 @@
         },
         {
           "nutrient": "Fibre",
-          "note": "A little from the apples and mushrooms."
+          "note": "A little from the apples."
         },
         {
           "nutrient": "Vitamin A",
@@ -699,7 +690,7 @@
           "url": "https://fr.wikipedia.org/wiki/Poulet_vallée_d'Auge"
         }
       ],
-      "curationNote": "Complete France gives quantities, cider and the 45 to 50 minute simmer; Wikipédia adds the mushrooms, flambéed calvados and thick crème fraîche that define the vallée d'Auge style."
+      "curationNote": "Complete France, Poulet Vallée d'Auge for every amount and step; 60 g butter, 125 g smoked lardons, 4 chicken legs, 1 onion, 2 garlic cloves, 1 tbsp fresh thyme, 4 tbsp calvados, 500 ml dry cider, 100 g crème fraîche, 2 apples, 1 tbsp parsley, salt and pepper to taste; no mushrooms."
     },
     {
       "builderType": "side",
@@ -957,15 +948,6 @@
           "prepNote": "warmed in the sauce"
         },
         {
-          "category": "Bev",
-          "baseName": "Lemon",
-          "quantity": 24,
-          "unit": "g",
-          "cutPrep": "freshly squeezed",
-          "cookingMethod": null,
-          "prepNote": "juice of half a lemon"
-        },
-        {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
           "quantity": 1,
@@ -986,7 +968,7 @@
         {
           "category": "Alcohol",
           "baseName": "Liqueur",
-          "quantity": 60,
+          "quantity": 30,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -995,26 +977,35 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
-          "baseName": "Pepper, black, ground",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "baseName": "Spices, pepper, white, ground",
+          "quantity": 1,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "1 tbsp, finely chopped",
+          "cookingMethod": "Simmered",
           "prepNote": null
         }
       ],
       "instructions": [
-        "Heat the oven to 400°F (200°C). Prick the duck skin all over, season inside and out, rub with the butter and roast on a rack for 1 1/4 to 1 1/2 hours, pouring off the fat every 20 minutes.",
+        "Heat the oven to 400°F (200°C). Prick the duck skin all over, season inside and out with the salt and white pepper, rub with the butter and roast on a rack for 1 1/4 to 1 1/2 hours, pouring off the fat every 20 minutes.",
         "Blanch the julienned zest in boiling water for 2 minutes and drain.",
-        "Melt the sugar in a small pan until it turns amber, 3 to 4 minutes. Take it off the heat and add the vinegar (stand back), then the orange and lemon juice.",
+        "Melt the sugar in a small pan until it turns amber, 3 to 4 minutes. Take it off the heat and add the vinegar (stand back), then the shallot and the orange juice, and simmer 2 minutes.",
         "Add the demi-glace and simmer until the sauce coats a spoon, 8 to 10 minutes. Stir in the liqueur and the blanched zest.",
         "Rest the duck 10 minutes, pour the fat from the roasting tin, deglaze it with a splash of the sauce and strain it back in. Warm the orange segments in the sauce.",
         "Carve the duck and serve with the sauce spooned over and the segments around it."
@@ -1043,7 +1034,7 @@
           "url": "https://reluctantgourmet.com/bigarade-sauce-recipe/"
         }
       ],
-      "curationNote": "Wikipédia gives the Lasserre caramel, vinegar and orange juice gastrique and Escoffier's bigarade with stock and julienned zest; Reluctant Gourmet gives sauce proportions with demi-glace and orange liqueur. Roast timing is the usual one for a 2 kg duck."
+      "curationNote": "The Reluctant Gourmet, Bigarade sauce for every amount and step; sauce: zest and juice of an orange, 1 tbsp shallot, 2 tbsp butter, 1 tbsp vinegar, 1 oz orange liqueur, ½ cup demi-glace, sugar only to correct bitterness, salt and white pepper to taste; Wikipédia gives the caramel, vinegar and orange gastrique."
     },
     {
       "builderType": "side",
@@ -1163,7 +1154,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Tarragon Spices",
+          "baseName": "Estragon, frais",
           "quantity": 1,
           "unit": "tbsp",
           "cutPrep": "chopped",
@@ -1172,7 +1163,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Chervil Spices",
+          "baseName": "Cerfeuil, frais",
           "quantity": 1,
           "unit": "tbsp",
           "cutPrep": "chopped",
@@ -1191,11 +1182,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste"
         },
         {
           "category": "Herbs",
@@ -1208,7 +1199,7 @@
         }
       ],
       "instructions": [
-        "Season the chicken pieces. Heat the oil in a wide sauté pan and brown the chicken well on all sides, 10 to 12 minutes.",
+        "Season the chicken pieces with the salt and pepper. Heat the oil in a wide sauté pan and brown the chicken well on all sides, 10 to 12 minutes.",
         "Add the mushrooms and shallots and let them colour with the chicken, 5 minutes.",
         "Warm the cognac, pour it over and flame it, stirring until the flames die down.",
         "Add the white wine and let it reduce by half, then the stock, tomato sauce and a bouquet garni of thyme, bay and parsley stalks. Cover and simmer for 30 to 35 minutes, until the chicken is cooked through.",
@@ -1239,7 +1230,7 @@
           "url": "https://fr.wikipedia.org/wiki/Poulet_chasseur"
         }
       ],
-      "curationNote": "iDealwine gives quantities, the flambé and beurre manié finish; Wikipédia confirms tomato, mushrooms, shallots, white wine, brandy and tarragon."
+      "curationNote": "iDealwine, Sauté de poulet chasseur for every amount and step; serves 4: 1.8 kg chicken, 250 g mushrooms, 3 shallots, bouquet garni, parsley, a little chervil and tarragon, 150 ml stock, 100 ml dry white wine, tomato, a small glass of cognac, a dessert spoon each of butter and flour, 4 tbsp oil, salt and pepper to taste."
     },
     {
       "builderType": "side",
@@ -1353,15 +1344,6 @@
           "prepNote": "2 bay leaves"
         },
         {
-          "category": "Veg",
-          "baseName": "Fresh Parsley",
-          "quantity": 5,
-          "unit": "g",
-          "cutPrep": "stalks in the bouquet garni, leaves chopped to finish",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
           "quantity": 60,
@@ -1400,8 +1382,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1.5,
-          "unit": "tsp",
+          "quantity": 9,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -1414,15 +1396,24 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Rosemary",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "1 small sprig, in the bouquet garni",
+          "cookingMethod": "Braised",
+          "prepNote": null
         }
       ],
       "instructions": [
         "Pat the beef dry. In a heavy casserole, fry the lardons until golden, 5 to 7 minutes, and lift them out.",
         "Brown the beef in batches in the lardon fat with half the butter, 6 to 8 minutes a batch, and set aside.",
         "Soften the onion, carrot and garlic in the casserole for 5 minutes. Stir in the tomato paste and flour and cook for 2 minutes.",
-        "Return the beef and lardons, pour in the wine and the brown stock, tuck in the bouquet garni of thyme, bay and parsley stalks and bring to a simmer.",
+        "Return the beef and lardons, pour in the wine and the brown stock, tuck in the bouquet garni of thyme, bay and rosemary and bring to a simmer.",
         "Cover and braise in the oven at 325°F (160°C) for 2 1/2 to 3 hours, until the beef is very tender.",
-        "In the last 20 minutes, brown the mushrooms and shallots in the olive oil and the rest of the butter, 8 to 10 minutes, and stir them in. Season, scatter with parsley and serve with boiled potatoes or fresh pasta."
+        "In the last 20 minutes, brown the mushrooms and shallots in the olive oil and the rest of the butter, 8 to 10 minutes, and stir them in. Remove the bouquet garni, season with the salt and pepper and serve with boiled potatoes or fresh pasta."
       ],
       "nutritionHighlights": [
         {
@@ -1448,7 +1439,7 @@
           "url": "https://fr.wikipedia.org/wiki/B%C5%93uf_bourguignon"
         }
       ],
-      "curationNote": "Géraldine gives quantities and oven times; Wikipédia confirms the braising cuts, red Burgundy and the lardon, small onion and mushroom garnish. The broth points at the fond brun."
+      "curationNote": "La Cuisine de Géraldine, Traditional beef bourguignon for every amount and step; serves 6 like ours: 1.2 kg chuck, 200 g lardons, 750 ml red wine, 120 ml broth, onion, 2 carrots, 2 garlic cloves, 60 g butter, 2 tbsp tomato paste, 2 tbsp flour, oil, bouquet garni of thyme, bay and rosemary, 250 g mushrooms, 3 shallots; salt and pepper with no amount."
     },
     {
       "builderType": "side",
@@ -1767,8 +1758,8 @@
         {
           "category": "Herbs",
           "baseName": "Spices, cloves, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": "2 whole cloves",
           "cookingMethod": null,
           "prepNote": null
@@ -1783,13 +1774,13 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Spices, bay leaf",
-          "quantity": 0.15,
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 8,
           "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "1 bay leaf"
+          "cutPrep": "2 cloves, peeled",
+          "cookingMethod": "Simmered",
+          "prepNote": null
         },
         {
           "category": "Veg",
@@ -1812,11 +1803,11 @@
         {
           "category": "Herbs",
           "baseName": "Sea salt",
-          "quantity": 2,
-          "unit": "tsp",
+          "quantity": 12,
+          "unit": "g",
           "cutPrep": "coarse, plus more at the table",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a small handful"
         },
         {
           "category": "Herbs",
@@ -1840,10 +1831,10 @@
       "instructions": [
         "Rinse the beef, put it in a large pot with the cold water and bring slowly to a boil. Skim off the grey foam for about 10 minutes.",
         "Add a handful of coarse salt and keep the pot at a bare simmer for 1 1/2 hours.",
-        "Add the carrots, turnips, leeks, celery, onion with its cloves, thyme, bay and parsley, and simmer for 2 hours more. Add the cabbage for the last 30 to 40 minutes.",
+        "Add the carrots, turnips, leeks, celery, garlic, the onion with its cloves, the thyme and the parsley, and simmer for 2 hours more. Add the cabbage for the last 30 to 40 minutes.",
         "Boil the potatoes separately in salted water until tender, 20 to 25 minutes, so they do not cloud the broth.",
         "Slip in the marrow bone 10 minutes before serving.",
-        "Serve the strained broth first, then the sliced meat and vegetables with coarse salt, mustard and cornichons, and the marrow spread on toast."
+        "Serve the strained broth first, then the sliced meat and vegetables with coarse salt, pepper, mustard and cornichons, and the marrow spread on toast."
       ],
       "nutritionHighlights": [
         {
@@ -1869,7 +1860,7 @@
           "url": "https://fr.wikipedia.org/wiki/Pot-au-feu"
         }
       ],
-      "curationNote": "750g gives quantities and the 90 minutes of meat before the vegetables; Wikipédia confirms the mix of lean, gelatinous and marrow cuts, the clove-studded onion and serving the broth first. Potatoes cook apart, as Wikipédia advises."
+      "curationNote": "750g, Pot au feu for every amount and step; serves 6: 800 g cheek or chuck, 700 g shin, 6 potatoes, 5 l water, 5 carrots, 1 marrow bone, 1 cabbage, 2 turnips, 1 onion, 2 leek whites, parsley, a sprig of thyme, 1 celery stalk, 2 garlic cloves, 2 cloves, a small handful of coarse salt, pepper; no bay leaf."
     },
     {
       "builderType": "side",
@@ -1882,11 +1873,6 @@
           "recipeId": "curated_fr_base_fond_brun_de_veau",
           "servings": 0.5,
           "note": "about 120 ml"
-        },
-        {
-          "recipeId": "curated_fr_base_herbes_de_provence",
-          "servings": 0.667,
-          "note": "1 tsp"
         }
       ],
       "id": "curated_fr_daube_provencale",
@@ -1990,7 +1976,7 @@
         {
           "category": "Fruit",
           "baseName": "Orange",
-          "quantity": 0.5,
+          "quantity": 1,
           "unit": "each",
           "cutPrep": "peel only, in 2 or 3 wide strips",
           "cookingMethod": "Braised",
@@ -2015,6 +2001,24 @@
           "prepNote": "2 bay leaves"
         },
         {
+          "category": "Herbs",
+          "baseName": "Fresh Thyme",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "sprigs, tied with the bay leaves and rosemary",
+          "cookingMethod": "Braised",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Rosemary",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": "sprigs, tied with the bay leaves and thyme",
+          "cookingMethod": "Braised",
+          "prepNote": null
+        },
+        {
           "category": "Fruit",
           "baseName": "Ripe Olive",
           "quantity": 150,
@@ -2026,8 +2030,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1.5,
-          "unit": "tsp",
+          "quantity": 9,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -2043,12 +2047,12 @@
         }
       ],
       "instructions": [
-        "Put the beef in a bowl with the onions, carrots, celery, garlic, orange peel, cloves, herbs and wine, cover and marinate in the fridge overnight.",
+        "Put the beef in a bowl with the onions, carrots, celery, garlic, orange peel, cloves and a bouquet garni of the bay leaves, thyme and rosemary tied together, pour the wine over, cover and marinate in the fridge overnight.",
         "Lift out the beef and pat it dry; strain the marinade, keeping the wine and vegetables apart.",
         "In a heavy casserole, brown the lardons in the olive oil, then the beef in batches, 6 to 8 minutes a batch.",
         "Add the marinade vegetables and soften for 5 minutes, stir in the tomato paste and flour, then pour in the wine and the brown stock and bring to a simmer.",
         "Cover and braise in the oven at 250°F (120°C) for 4 to 5 hours, until the beef is very soft.",
-        "Stir in the olives for the last 15 minutes, season and serve with fresh pasta, polenta or boiled potatoes."
+        "Stir in the olives for the last 15 minutes, lift out the bouquet garni, season with the salt and pepper and serve with fresh pasta, polenta or boiled potatoes."
       ],
       "nutritionHighlights": [
         {
@@ -2074,7 +2078,7 @@
           "url": "https://fr.wikipedia.org/wiki/Daube_proven%C3%A7ale"
         }
       ],
-      "curationNote": "Géraldine gives quantities and the very low oven; Wikipédia confirms the overnight Provençal red wine marinade, orange zest, black olives and herbs. The stock points at the fond brun."
+      "curationNote": "La Cuisine de Géraldine, Daube provençale for every amount and step; for 6 like ours: 3½ lb beef, 7 oz smoked bacon, 1 bottle red wine, 2 tbsp olive oil, 2 onions, 2 carrots, 2 celery stalks, 4 garlic cloves, 3 tbsp tomato paste, 2 tbsp flour, peel of 1 orange, 5 cloves, a bouquet garni of 2 bay leaves with a few sprigs each of thyme and rosemary, 1 cup black olives, ½ cup beef stock if needed, salt and pepper to taste."
     },
     {
       "builderType": "side",
@@ -2214,8 +2218,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -2228,12 +2232,21 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Rosemary",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "1 sprig, in the bouquet garni",
+          "cookingMethod": "Simmered",
+          "prepNote": null
         }
       ],
       "instructions": [
         "Drain the soaked beans, cover with fresh water, bring to a boil for 5 minutes and drain again.",
         "In a large casserole, warm the duck fat and brown the lardons and sausage pieces, 6 to 8 minutes. Lift them out.",
-        "Soften the onion, carrot and garlic in the fat for 5 minutes, stir in the tomato paste, then add the crushed tomatoes, white wine, beans, stock and bouquet garni.",
+        "Soften the onion, carrot and garlic in the fat for 5 minutes, stir in the tomato paste, then add the crushed tomatoes, white wine, beans, stock, the salt and pepper, and a bouquet garni of the rosemary, thyme and bay leaves.",
         "Simmer gently for 1 hour, until the beans are just tender. Heat the oven to 350°F (180°C).",
         "Layer the beans in a deep earthenware dish (a cassole) with the confit duck, lardons and sausage, finishing with beans, and add enough cooking liquid to come just to the top.",
         "Bake uncovered for 1 to 1 1/2 hours, pushing the crust that forms back under a few times and adding liquid if it dries.",
@@ -2263,7 +2276,7 @@
           "url": "https://fr.wikipedia.org/wiki/Cassoulet"
         }
       ],
-      "curationNote": "Géraldine gives quantities and the oven sequence; Wikipédia names the Castelnaudary beans, confit, pork and sausage and the crust pushed back in. The confit points at the Confit de Canard recipe (1 serving is 1 leg), the stock at the fond blanc. Toulouse sausage is not in the database."
+      "curationNote": "La Cuisine de Géraldine, Cassoulet for every amount and step; for 6 like ours: 400 g beans, 2 confit legs, 1 tbsp duck fat, 200 g bacon, 3 sausages, 2 onions, 3 carrots, 2 garlic cloves, 2 tbsp tomato paste, 400 g crushed tomatoes, 100 ml white wine, 750 ml chicken stock, bouquet garni of 1 rosemary branch, 2 thyme branches and 2 bay leaves, 50 g breadcrumbs, salt and pepper with no amount."
     },
     {
       "builderType": "side",
@@ -2372,15 +2385,6 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Fresh Thyme",
-          "quantity": 2,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Spices, bay leaf",
           "quantity": 0.15,
           "unit": "g",
@@ -2409,26 +2413,26 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1.5,
-          "unit": "tsp",
+          "quantity": 15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about 1 tbsp coarse salt, plus a little for the meat"
         },
         {
           "category": "Herbs",
           "baseName": "Pepper, black, ground",
           "quantity": 0.5,
-          "unit": "tsp",
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Brown the lamb in the oil in a heavy casserole, in batches, 6 to 8 minutes a batch. Pour off most of the fat.",
+        "Season the lamb with a little of the salt and the pepper and brown it in the oil in a heavy casserole, in batches, 6 to 8 minutes a batch. Pour off most of the fat.",
         "Return the lamb with the onion, sprinkle with the flour and stir for 2 minutes, then stir in the tomato paste and garlic.",
-        "Add water to just cover, the thyme and bay, season and bring to a simmer. Cover and cook gently for 1 hour.",
+        "Add water to just cover, the bay leaf and the rest of the salt and bring to a simmer. Cover and cook gently for 1 hour.",
         "Add the turnips, carrots and potatoes and simmer 25 to 30 minutes more, until tender.",
         "Add the peas for the last 5 to 8 minutes, skim off any fat, scatter with parsley and serve."
       ],
@@ -2456,7 +2460,7 @@
           "url": "https://fr.wikipedia.org/wiki/Navarin_d%27agneau"
         }
       ],
-      "curationNote": "750g gives the quantities and simmer time; Wikipédia describes the floured, browned lamb wetted with liquid and the spring vegetables (turnips, carrots, potatoes, peas) added near the end."
+      "curationNote": "750g, Navarin d'agneau for every amount and step; serves 6: 2 tbsp oil, 1 tbsp flour, 3 tbsp tomato concentrate, 2 garlic cloves, 1 large onion, 6 turnips, 12 small carrots, 10 parsley sprigs, 1 bay leaf, 1 tbsp coarse salt plus salt and pepper for the meat, water to cover, at least 1 hour. The potatoes and peas follow Wikipédia's description of the spring version."
     },
     {
       "builderType": "side",
@@ -2505,7 +2509,7 @@
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 20,
+          "quantity": 10,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2513,7 +2517,7 @@
         },
         {
           "category": "Fats",
-          "baseName": "Solrosolja",
+          "baseName": "Grapeseed Oil",
           "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
@@ -2550,11 +2554,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.75,
-          "unit": "tsp",
+          "quantity": 4.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste"
         }
       ],
       "instructions": [
@@ -2588,7 +2592,7 @@
           "url": "https://fr.wikipedia.org/wiki/Steak_au_poivre"
         }
       ],
-      "curationNote": "750g gives quantities, the cognac, white wine, cream and veal stock sauce and the mustard finish. Wikipédia names fillet as the classic cut. Stock points at the fond brun."
+      "curationNote": "750g, Steak au poivre for every amount and step; serves 4: 4 steaks, 20 g crushed peppercorns, 10 g butter, 20 cl veal stock, 8 cl dry white wine, 5 cl cognac, 1 dl cream, 2 tbsp grapeseed oil, 1 tbsp strong mustard, salt to taste."
     },
     {
       "builderType": "side",
@@ -2669,11 +2673,11 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 0.3,
+          "quantity": 0.15,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "2 bay leaves"
+          "prepNote": "1 bay leaf"
         },
         {
           "category": "Fats",
@@ -2705,8 +2709,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -2726,7 +2730,7 @@
         "Soften the onions in the same pan until golden, 10 to 15 minutes, then stir in the sugar and let it melt.",
         "Pour in the beer and scrape up the browned bits, then add the stock, thyme, bay and the beef. Bring to a simmer, cover and cook in the oven for 1 hour.",
         "Spread the gingerbread slices with mustard and lay them on top, mustard side down. Cover and cook 2 to 2 1/2 hours more, until the gingerbread has melted into the sauce.",
-        "Stir in the cider vinegar, check the seasoning and serve with frites."
+        "Stir in the cider vinegar, season with the salt and pepper and serve with frites."
       ],
       "nutritionHighlights": [
         {
@@ -2752,7 +2756,7 @@
           "url": "https://fr.wikipedia.org/wiki/Carbonade_flamande"
         }
       ],
-      "curationNote": "750g gives quantities, the stock and the gingerbread layered on top; Wikipédia confirms the dark beer, onions, pain d'épices and cassonade or vergeoise and frites alongside. Stock points at the fond brun, the gingerbread at Pain d'Épices."
+      "curationNote": "750g, La meilleure façon de faire une carbonade flamande for every amount and step; for 4 like ours: 1 kg chuck, 200 g onions, 50 cl amber beer, 30 g vergeoise, 3 thyme sprigs, 1 bay leaf, 30 g butter, 30 g sunflower oil, 3 cl cider vinegar, 1 L fond brun, 4 slices pain d'épices, 5 g mustard, salt and pepper with no amount."
     },
     {
       "builderType": "side",
@@ -2796,16 +2800,16 @@
         {
           "category": "Fats",
           "baseName": "Butter, plain, salted",
-          "quantity": 60,
+          "quantity": 100,
           "unit": "g",
-          "cutPrep": "40 g for the onions, 20 g in flakes on top",
+          "cutPrep": "50 g for the onions, 50 g in thin slices on top",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Alcohol",
           "baseName": "White Wine",
-          "quantity": 150,
+          "quantity": 500,
           "unit": "ml",
           "cutPrep": "dry",
           "cookingMethod": null,
@@ -2822,29 +2826,11 @@
         },
         {
           "category": "Dairy",
-          "baseName": "Chicken Egg (Raw)",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "beaten into the meat",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Dairy",
           "baseName": "Gruyère",
-          "quantity": 100,
+          "quantity": 200,
           "unit": "g",
           "cutPrep": "grated",
           "cookingMethod": "Baked",
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
           "prepNote": null
         },
         {
@@ -2859,15 +2845,15 @@
       ],
       "instructions": [
         "Heat the oven to 400°F (200°C).",
-        "Soften the onions in 40 g of the butter until lightly browned, 10 to 12 minutes. Add the beef and cook until no longer pink, 6 to 8 minutes, breaking it up.",
-        "Pour in the wine and let it bubble away for 5 minutes, then take off the heat, stir in the parsley and egg and season.",
-        "Spread half the purée in a buttered baking dish, then the meat, then the rest of the purée, smoothing the top with a fork.",
-        "Scatter with the Gruyère and flakes of butter and bake for 15 to 25 minutes, until golden. Serve with a green salad."
+        "Brown the finely chopped onions in 50 g of the butter.",
+        "Add the beef, the parsley, the pepper and the wine, and cook, breaking up the meat, until it is cooked through and the wine has mostly cooked away.",
+        "Spread a little of the purée in a baking dish, add the meat, then cover with the rest of the purée.",
+        "Lay the remaining butter on top in thin slices, scatter with the Gruyère and bake for about 15 minutes, until the cheese is golden."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Protein",
-          "note": "From the beef, egg and cheese."
+          "note": "From the beef and cheese."
         },
         {
           "nutrient": "Potassium",
@@ -2882,13 +2868,9 @@
         {
           "source": "750g, Hachis parmentier grand-mère",
           "url": "https://www.750g.com/hachis-parmentier-grand-mere-r37372.htm"
-        },
-        {
-          "source": "Wikipédia, Hachis parmentier",
-          "url": "https://fr.wikipedia.org/wiki/Hachis_parmentier"
         }
       ],
-      "curationNote": "750g gives the quantities, the white wine and the purée, meat, purée layers under Gruyère; Wikipédia gives the traditional binding with onion, parsley and egg and the use of pot-au-feu leftovers. The mash points at Purée de Pommes de Terre. The 750g white wine (500 ml) was cut to a splash, as the page reads like a typing slip."
+      "curationNote": "750g, Hachis parmentier grand-mère for every amount and step; serves 6, our servings: 500 g ground beef, 2 large onions, 600 g purée, 200 g salted butter (100 g of it in the purée, which is the component here), 200 g Gruyère, 50 cl dry white wine, parsley and pepper with no amounts; the meat is not salted beyond the salted butter; 200°C for 15 minutes."
     },
     {
       "builderType": "side",
@@ -2943,7 +2925,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Rosemary",
+          "baseName": "Fresh Rosemary",
           "quantity": 2,
           "unit": "g",
           "cutPrep": "a branch",
@@ -2979,7 +2961,7 @@
         }
       ],
       "instructions": [
-        "Heat the oven to 375°F (190°C). Salt the lamb all over.",
+        "Heat the oven to 375°F (190°C). Season the lamb all over with the salt and pepper.",
         "Heat the olive oil in a roasting dish or cast-iron pot and brown the lamb on every side, 8 to 10 minutes.",
         "Scatter the unpeeled garlic, thyme and rosemary around it and roast, basting often: 12 minutes per 500 g (about 50 minutes) for pink, 15 minutes per 500 g (about 60 minutes) for medium.",
         "Lift out the lamb, cover with foil and rest for 20 to 30 minutes. Set the garlic aside.",
@@ -3010,7 +2992,7 @@
           "url": "https://fr.wikipedia.org/wiki/Gigot_d%27agneau"
         }
       ],
-      "curationNote": "750g gives quantities, the oven and minutes per 500 g; Wikipédia confirms roasting at high heat and the garlic gigot. Flageolets are served beside, as in the Flageolets recipe."
+      "curationNote": "750g, Gigot d'agneau rôti et son jus for every amount and step; for 6 like ours: 2 kg leg, 1 head of garlic, 5 cl olive oil, 1 sprig each of thyme and rosemary, 10 cl water for the juices, salt and pepper to taste, 190°C at 12 to 15 minutes per 500 g; matches, with the usual salt and pepper amounts."
     },
     {
       "builderType": "side",
@@ -3271,15 +3253,6 @@
           "prepNote": "Reblochon de Savoie AOP"
         },
         {
-          "category": "Veg",
-          "baseName": "Garlic",
-          "quantity": 4,
-          "unit": "g",
-          "cutPrep": "1 clove, to rub the dish",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Herbs",
           "baseName": "Pepper, black, ground",
           "quantity": 0.25,
@@ -3302,7 +3275,7 @@
         "Cook the lardons and onions in a large pan for 3 to 5 minutes, until they start to brown.",
         "Add the potatoes and cook over medium heat, turning often, for 20 minutes, until tender.",
         "Heat the oven to 400°F (200°C). Pour in the wine and cook 5 minutes more. Season with pepper and nutmeg; no salt is needed.",
-        "Rub a baking dish with the cut garlic. Halve the Reblochon horizontally and cut one half into small pieces.",
+        "Halve the Reblochon horizontally and cut one half into small pieces.",
         "Mix the potato mixture with the small pieces in the dish and lay the other half on top, rind up.",
         "Bake for 15 to 20 minutes, until the cheese is melted and golden. Serve hot with a green salad."
       ],
@@ -3326,15 +3299,11 @@
           "url": "https://www.reblochon.fr/nos-recettes/tartiflette-reblochon-de-savoie/"
         },
         {
-          "source": "750g, La vraie recette de la tartiflette",
-          "url": "https://www.750g.com/la-vraie-recette-de-la-tartiflette-a29602.htm"
-        },
-        {
           "source": "Wikipédia, Tartiflette",
           "url": "https://fr.wikipedia.org/wiki/Tartiflette"
         }
       ],
-      "curationNote": "The Reblochon interprofession gives the quantities and white wine; 750g adds the garlic-rubbed dish and keeps cream out; Wikipédia confirms Reblochon is the only cheese. No cream, as in both recipes."
+      "curationNote": "Reblochon de Savoie, Tartiflette for every amount and step; serves 4: 1 Reblochon, 1 kg firm potatoes, 200 g smoked lardons, 2 large onions, 10 cl white wine, pepper, optional nutmeg, no salt, 200°C for 15 to 20 minutes. Followed alone in place of the blend with 750g."
     },
     {
       "builderType": "side",
@@ -3424,8 +3393,8 @@
         {
           "category": "Herbs",
           "baseName": "Spices, cloves, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": "2 whole cloves",
           "cookingMethod": null,
           "prepNote": null
@@ -3452,7 +3421,7 @@
           "category": "Herbs",
           "baseName": "Pepper, black, ground",
           "quantity": 0.5,
-          "unit": "tsp",
+          "unit": "g",
           "cutPrep": "10 whole peppercorns",
           "cookingMethod": null,
           "prepNote": null
@@ -3460,11 +3429,11 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 3500,
+          "quantity": 150,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "one ladle of the pork cooking broth; the lentil water is drained away"
         }
       ],
       "instructions": [
@@ -3472,7 +3441,7 @@
         "Put the pork in a pot of fresh cold water with the clove-studded onion, thyme, bay and peppercorns. Bring to a boil, skim and simmer gently for 1 3/4 hours.",
         "Meanwhile soften the other onion, the garlic, carrot and celery in the lard for 5 minutes. Add the lentils and three times their volume of cold water and simmer 20 to 30 minutes, until just tender.",
         "Prick the sausages and add them to the pork for the last 30 minutes.",
-        "Drain the lentils, add the meats and a ladle of the pork broth and simmer together for 10 minutes. Taste before adding any salt and serve with mustard."
+        "Drain the lentils, add the meats and a ladle of the pork broth and simmer together for 10 minutes. Taste first: the salted cuts usually season it enough. Serve with mustard."
       ],
       "nutritionHighlights": [
         {
@@ -3498,7 +3467,7 @@
           "url": "https://fr.wikipedia.org/wiki/Petit_sal%C3%A9_aux_lentilles"
         }
       ],
-      "curationNote": "750g gives quantities and timings; Wikipédia confirms the salted cuts, the 2 hour desalting and lentilles vertes du Puy. Salted pork and Montbéliard sausage are not in the database."
+      "curationNote": "750g, La meilleure façon de faire un petit salé aux lentilles for every amount and step; serves 6: 4 Montbéliard sausages, 500 g pork ribs, 500 g salted hock, 600 g green lentils, 2 onions, 2 garlic cloves, 2 carrots, 30 g lard, 2 cloves, 1 celery stalk, 10 peppercorns, thyme, bay, salt and pepper to taste. Salt is not added here because the salted cuts season the dish."
     },
     {
       "builderType": "side",
@@ -3522,7 +3491,7 @@
       "name": "Lapin à la Moutarde",
       "region": "Burgundy",
       "servings": 4,
-      "flavorProfile": "Tangy and creamy, with tender rabbit in a mustard, white wine and cream sauce with mushrooms and lardons.",
+      "flavorProfile": "Tangy and creamy, with tender rabbit and mushrooms in a mustard and crème fraîche sauce.",
       "healthBenefit": "Rabbit is a lean meat rich in protein and vitamin B12, and the mushrooms add selenium; the cream keeps the sauce rich but the portion modest.",
       "overallTier": "strong",
       "ingredients": [
@@ -3536,15 +3505,6 @@
           "prepNote": "a farmed rabbit is the usual choice"
         },
         {
-          "category": "Meat",
-          "baseName": "Pork Bacon",
-          "quantity": 100,
-          "unit": "g",
-          "cutPrep": "in lardons",
-          "cookingMethod": "Fried",
-          "prepNote": null
-        },
-        {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
           "quantity": 20,
@@ -3556,27 +3516,9 @@
         {
           "category": "Veg",
           "baseName": "Onion",
-          "quantity": 150,
-          "unit": "g",
-          "cutPrep": "1, sliced",
-          "cookingMethod": "Braised",
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Shallot",
-          "quantity": 60,
+          "quantity": 250,
           "unit": "g",
           "cutPrep": "2, sliced",
-          "cookingMethod": "Braised",
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Carrot",
-          "quantity": 100,
-          "unit": "g",
-          "cutPrep": "1, in rounds",
           "cookingMethod": "Braised",
           "prepNote": null
         },
@@ -3590,46 +3532,28 @@
           "prepNote": null
         },
         {
-          "category": "Alcohol",
-          "baseName": "White Wine",
-          "quantity": 150,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": "Braised",
-          "prepNote": "a white Burgundy"
-        },
-        {
           "category": "Dairy",
           "baseName": "Crème fraîche, 35 % fett",
-          "quantity": 100,
+          "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tbsp"
         },
         {
           "category": "Herbs",
           "baseName": "Fresh Thyme",
-          "quantity": 2,
+          "quantity": 1,
           "unit": "g",
-          "cutPrep": null,
+          "cutPrep": "1 sprig",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
-          "baseName": "Spices, bay leaf",
-          "quantity": 0.15,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "1 bay leaf"
-        },
-        {
-          "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.75,
-          "unit": "tsp",
+          "quantity": 4,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -3638,18 +3562,17 @@
           "category": "Herbs",
           "baseName": "Pepper, black, ground",
           "quantity": 0.5,
-          "unit": "tsp",
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Brush the rabbit pieces with 1 tbsp of the mustard.",
-        "Melt the butter in a casserole and brown the lardons and rabbit, 8 to 10 minutes. Add the onion, shallots, carrot and mushrooms and soften for 5 minutes.",
-        "Pour in the wine and let it bubble for 2 minutes, then add the stock, the rest of the mustard, thyme and bay.",
-        "Cover and simmer gently for 40 to 50 minutes, until the rabbit is tender.",
-        "Stir in the crème fraîche, simmer 3 to 5 minutes to thicken, season and serve with tagliatelle or boiled potatoes."
+        "Melt the butter in a casserole and brown the rabbit pieces on every side, 8 to 10 minutes.",
+        "Add the sliced onions and mushrooms and let them soften for 5 minutes.",
+        "Pour in the stock, stir in the mustard and add the thyme. Cover and simmer gently for about 40 minutes, until the rabbit is tender.",
+        "Stir in the crème fraîche, season with the salt and pepper, take out the thyme and serve."
       ],
       "nutritionHighlights": [
         {
@@ -3669,13 +3592,9 @@
         {
           "source": "750g, Lapin à la moutarde de grand-mère",
           "url": "https://www.750g.com/lapin-a-la-moutarde-r58187.htm"
-        },
-        {
-          "source": "Wikipédia, Lapin à la moutarde",
-          "url": "https://fr.wikipedia.org/wiki/Lapin_%C3%A0_la_moutarde"
         }
       ],
-      "curationNote": "750g gives the quantities, mustard, mushrooms and cream; Wikipédia adds the lardons, carrots, shallots and white Burgundy. Stock points at the fond blanc in place of a bouillon cube. The database holds only wild rabbit, used here for rabbit."
+      "curationNote": "750g, Lapin à la moutarde de grand-mère for every amount and step; 1 rabbit, 200 g mushrooms, 3 tbsp strong mustard, 20 g butter, half a stock cube in 20 cl water, 1 tbsp thick crème fraîche, 2 onions, 1 thyme sprig, salt and pepper to taste; the page says 6 people for the one rabbit, ours keeps the one rabbit for 4. The stock stays the fond blanc."
     },
     {
       "builderType": "side",
@@ -3729,15 +3648,6 @@
           "prepNote": null
         },
         {
-          "category": "Fats",
-          "baseName": "Pure Butter (Unsalted)",
-          "quantity": 20,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Alcohol",
           "baseName": "Calvados",
           "quantity": 50,
@@ -3767,8 +3677,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -3784,11 +3694,11 @@
         }
       ],
       "instructions": [
-        "Brown the pork in the butter in a heavy pan over medium-high heat, 5 to 8 minutes, and lift it out.",
-        "Add the lardons, onion and mushrooms and cook until golden, 6 to 8 minutes.",
+        "Fry the lardons in a heavy pan over medium heat until they give up their fat, then brown the pork in that fat over medium-high heat, 5 to 8 minutes, and lift it out.",
+        "Add the onion and mushrooms to the pan and cook until golden, 6 to 8 minutes.",
         "Return the pork, pour in the calvados and flame it carefully.",
         "Add the cider, cover and simmer gently for 20 to 25 minutes, turning the pork once, until just cooked through (145°F, 63°C in the centre).",
-        "Lift out the pork, stir the crème fraîche into the pan and boil 2 to 3 minutes to thicken. Season, slice the pork and serve under the sauce, with apples sautéed in butter if you like."
+        "Lift out the pork, stir the crème fraîche into the pan and boil 2 to 3 minutes to thicken. Season with the salt and pepper, slice the pork and serve under the sauce."
       ],
       "nutritionHighlights": [
         {
@@ -3814,7 +3724,7 @@
           "url": "https://fr.wikipedia.org/wiki/Sauce_normande"
         }
       ],
-      "curationNote": "750g gives quantities, the calvados flambé, cider and cream; Wikipédia confirms that à la normande on meat means a cider and cream sauce."
+      "curationNote": "750g, Filet mignon de porc à la normande for every amount and step; for 4 like ours: 700 g pork fillet, 15 cl cider, 5 cl calvados, 10 cl crème fraîche, 50 g smoked lardons, 100 g button mushrooms, 1 onion, salt and pepper to taste; no butter and no apples."
     },
     {
       "builderType": "side",
@@ -3903,7 +3813,7 @@
         {
           "category": "Fats",
           "baseName": "Olive Oil (Extra Virgin)",
-          "quantity": 5,
+          "quantity": 3,
           "unit": "tbsp",
           "cutPrep": "divided between the vegetables",
           "cookingMethod": null,
@@ -3912,11 +3822,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste"
         },
         {
           "category": "Herbs",
@@ -3959,7 +3869,7 @@
           "url": "https://fr.wikipedia.org/wiki/Ratatouille"
         }
       ],
-      "curationNote": "Géraldine gives quantities and times; Wikipédia confirms the vegetable set and that traditionalists (Roger Vergé, Guy Gedda) cook each vegetable on its own first, which is the method kept here."
+      "curationNote": "La Cuisine de Géraldine, Ratatouille traditional recipe for every amount and step; serves 6: 3 tbsp olive oil, 1 eggplant, 2 zucchini, 1 red and 1 green pepper, 6 tomatoes, 1 onion, 3 garlic cloves, 1 tbsp herbes de Provence, salt and pepper to taste."
     },
     {
       "builderType": "side",
@@ -4023,7 +3933,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Rosemary",
+          "baseName": "Fresh Rosemary",
           "quantity": 1,
           "unit": "g",
           "cutPrep": "1 small sprig",
@@ -4107,7 +4017,7 @@
           "url": "https://fr.wikipedia.org/wiki/Gratin_dauphinois"
         }
       ],
-      "curationNote": "Géraldine gives the milk-and-cream quantities and oven time; Wikipédia confirms no cheese and no egg, unwashed 3 mm slices and the garlic-rubbed buttered dish. Géraldine offers cheese as an option, left out as not canonical."
+      "curationNote": "La Cuisine de Géraldine, Potatoes dauphinoise for every amount and step; for 8 like ours: 1.5 kg potatoes, 300 ml cream, 450 ml milk, 3 garlic cloves, 6 thyme sprigs, 1 rosemary sprig, 2 bay leaves, 1 tbsp butter, ¼ tsp nutmeg, 1 tsp salt, ½ tsp pepper; matches."
     },
     {
       "builderType": "side",
@@ -4154,11 +4064,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1.5,
-          "unit": "tsp",
+          "quantity": 9,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste"
         },
         {
           "category": "Herbs",
@@ -4171,7 +4081,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Pepper, black, ground",
+          "baseName": "Spices, pepper, white, ground",
           "quantity": 0.25,
           "unit": "tsp",
           "cutPrep": null,
@@ -4209,7 +4119,7 @@
           "url": "https://www.750g.com/puree-de-pommes-de-terre-a-lancienne-r63461.htm"
         }
       ],
-      "curationNote": "Both 750g recipes agree on floury potatoes, a ricer or food mill, warm milk and butter beaten in (cold butter in the first), with nutmeg. Scaled to 1.2 kg for 6 servings, so the hachis parmentier can use the whole batch as its topping."
+      "curationNote": "750g, La meilleure recette de purée maison for every amount and step; serves 4: 1 kg floury potatoes, 150 g butter, 200 g whole milk, coarse salt, salt, white pepper and nutmeg to taste; our 1.2 kg is within range."
     },
     {
       "builderType": "side",
@@ -4330,7 +4240,7 @@
         {
           "category": "Fats",
           "baseName": "Duck Fat (Adipose)",
-          "quantity": 3,
+          "quantity": 1,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4339,11 +4249,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste"
         },
         {
           "category": "Herbs",
@@ -4381,7 +4291,7 @@
           "url": "https://fr.wikipedia.org/wiki/Pommes_de_terre_sarladaises"
         }
       ],
-      "curationNote": "750g gives raw slices fried 15 to 20 minutes then 5 minutes covered with garlic and parsley; Wikipédia confirms duck or goose fat and the persillade finish (cèpes or truffle are optional and left out). The garlic and parsley point at the persillade base."
+      "curationNote": "750g, Pommes de terre sarladaises for every amount and step; 5 firm potatoes, 1 tbsp duck fat, 3 garlic cloves, parsley, salt and pepper to taste; fried 15 to 20 minutes then 5 minutes covered."
     },
     {
       "builderType": "side",
@@ -4800,7 +4710,7 @@
       "name": "Lentilles du Puy",
       "region": "Auvergne (Haute-Loire)",
       "servings": 6,
-      "flavorProfile": "Small green lentils that hold their shape, earthy and peppery, cooked with carrot, onion and herbs and finished with a little butter.",
+      "flavorProfile": "Small green lentils that hold their shape, earthy and peppery, cooked with lardons, carrot, onion and herbs.",
       "healthBenefit": "Lentils bring plant protein, fibre, iron and folate, and the Puy lentil is known for cooking quickly and staying firm.",
       "overallTier": "strong",
       "ingredients": [
@@ -4834,8 +4744,8 @@
         {
           "category": "Herbs",
           "baseName": "Spices, cloves, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": "2 whole cloves",
           "cookingMethod": null,
           "prepNote": null
@@ -4877,9 +4787,9 @@
           "prepNote": null
         },
         {
-          "category": "Fats",
-          "baseName": "Pure Butter (Unsalted)",
-          "quantity": 20,
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4887,18 +4797,9 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Pepper, black, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -4908,7 +4809,7 @@
         "In a heavy pot, cook the lardons over medium heat until lightly golden, 4 to 5 minutes. Add the carrot and cook 2 minutes more.",
         "Add the lentils, the clove-studded onion and the thyme and bay. Pour in the cold water and bring slowly to a simmer.",
         "Simmer gently, uncovered, 20 to 25 minutes, until the lentils are tender but still whole. Salt only in the last 5 minutes.",
-        "Drain off any extra liquid, lift out the onion and herbs, stir in the butter and pepper and serve with sausages, salt pork or fish."
+        "Drain off any extra liquid, lift out the onion and herbs, season with the pepper and serve with sausages, salt pork or fish."
       ],
       "nutritionHighlights": [
         {
@@ -4926,19 +4827,15 @@
       ],
       "citations": [
         {
-          "source": "750g, Ragoût de lentilles vertes du Puy",
-          "url": "https://www.750g.com/ragout-de-lentilles-vertes-du-puy-r3096.htm"
-        },
-        {
           "source": "750g, Lentilles vertes du Puy à la saucisse de Morteau",
           "url": "https://www.750g.com/lentilles-vertes-du-puy-a-la-saucisse-de-morteau-r10945.htm"
         },
         {
-          "source": "Wikipédia, Lentille verte du Puy",
-          "url": "https://fr.wikipedia.org/wiki/Lentille_verte_du_Puy"
+          "source": "750g, Ragoût de lentilles vertes du Puy",
+          "url": "https://www.750g.com/ragout-de-lentilles-vertes-du-puy-r3096.htm"
         }
       ],
-      "curationNote": "Both 750g recipes start the lentils with lardons, carrot and onion, one with a clove-studded onion, thyme and bay and about 30 minutes. Wikipédia notes the AOP lentil cooks quickly. The ragoût's tomato and cream were left out to keep the plain side."
+      "curationNote": "750g, Lentilles vertes du Puy à la saucisse de Morteau for every amount and step; closest published version: 300 g Puy lentils for 4 with an onion stuck with cloves, carrot, thyme, bay, salt and pepper (no amounts for the seasonings), about 30 minutes in plenty of water. The smoked lardons come from 750g's Ragoût de lentilles vertes du Puy (300 g for 600 g lentils); neither recipe uses butter."
     },
     {
       "builderType": "side",
@@ -5019,15 +4916,6 @@
           "prepNote": "2 bay leaves"
         },
         {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 2000,
-          "unit": "ml",
-          "cutPrep": "cold",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Fats",
           "baseName": "Butter, plain, salted",
           "quantity": 25,
@@ -5039,8 +4927,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -5076,7 +4964,7 @@
           "url": "https://www.750g.com/gigot-dagneau-aux-flageolets-r37774.htm"
         }
       ],
-      "curationNote": "The 750g article gives the 12-hour soak, carrot, clove-studded onion, unpeeled garlic, bouquet garni, salting at three quarters and the salted butter or gigot juice finish. The gigot recipe gives 400 g dried beans for 4 and about an hour of boiling; scaled to 6 side servings."
+      "curationNote": "750g, Pourquoi accompagne-t-on l'agneau de flageolets à Pâques for every amount and step; soaked beans cooked in cold water with 1 carrot, 1 onion studded with 2 cloves, a few unpeeled garlic cloves, a thyme and bay bouquet garni, salt added three quarters of the way through, then drained and finished with a knob of salted butter; the 750g gigot recipe gives 400 g dried beans."
     },
     {
       "builderType": "side",
@@ -5228,7 +5116,7 @@
         {
           "category": "Fats",
           "baseName": "Olive Oil (Extra Virgin)",
-          "quantity": 3,
+          "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -5237,8 +5125,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -5256,7 +5144,7 @@
       "instructions": [
         "Heat a large frying pan very hot and add the mushrooms in a single layer, in two batches if needed. Cook dry for 4 to 6 minutes, until their water has gone.",
         "Add the olive oil and keep cooking over high heat 5 to 7 minutes, until the mushrooms are well browned.",
-        "Scatter over the persillade, season and toss for 1 minute, just until the garlic smells sweet. Serve hot."
+        "Scatter over the persillade, season with the salt and pepper and toss for 1 minute, just until the garlic smells sweet. Serve hot."
       ],
       "nutritionHighlights": [
         {
@@ -5282,7 +5170,7 @@
           "url": "https://www.750g.com/champignons-a-la-provencale-r11682.htm"
         }
       ],
-      "curationNote": "Île aux épices gives 1 kg mushrooms for 6 cooked dry over high heat, then olive oil and persillade. The 750g version adds a tomato sauce; the garlic, parsley and olive oil version was kept as the classic side, and the garlic and parsley point at the persillade base."
+      "curationNote": "Île aux épices, Champignons à la persillade for every amount and step; for 6 like ours: 1 kg mushrooms, 2 tbsp olive oil, persillade (fresh: garlic and parsley), salt added late and pepper, no amounts for salt or pepper."
     },
     {
       "builderType": "side",
@@ -5338,9 +5226,9 @@
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 8,
+          "quantity": 4,
           "unit": "g",
-          "cutPrep": "2 cloves, crushed",
+          "cutPrep": "1 clove, peeled, in the cooking water",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -5374,9 +5262,9 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "coarse salt, in the cooking water",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -5391,8 +5279,8 @@
         }
       ],
       "instructions": [
-        "Simmer the potatoes in salted water with the thyme and bay for 25 to 30 minutes, until very tender. Drain well.",
-        "Mash the potatoes, still hot, in the pan over low heat with the butter and garlic.",
+        "Put the potatoes in cold water with the salt, garlic, thyme and bay, bring to the boil and simmer 25 to 30 minutes, until very tender. Drain well and lift out the thyme and bay, keeping the garlic.",
+        "Mash the potatoes and garlic, still hot, in the pan over low heat with the butter.",
         "Beat in the crème fraîche in two additions and season with nutmeg and pepper.",
         "Add the tomme a handful at a time, beating hard with a wooden spoon in a figure-of-eight for 5 to 10 minutes, until the aligot is smooth, glossy and stretches in long ribbons.",
         "Serve straight away, traditionally with Toulouse sausage."
@@ -5421,7 +5309,7 @@
           "url": "https://fr.wikipedia.org/wiki/Aligot"
         }
       ],
-      "curationNote": "750g gives 400 g tomme fraîche de l'Aubrac to 1 kg potatoes with 250 g crème fraîche, garlic, thyme, bay and nutmeg. Wikipédia confirms purée, cream, butter, garlic and tome de Laguiole or Aubrac, worked until elastic. Fresh tomme is not in the food database, so it is listed and not counted."
+      "curationNote": "750g, La meilleure façon de faire de l'aligot for every amount and step; serves 4, same as ours; butter kept from Wikipédia's description of the dish."
     },
     {
       "builderType": "side",
@@ -5477,36 +5365,27 @@
         {
           "category": "Herbs",
           "baseName": "Spices, nutmeg, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.2,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 0.4,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Pepper, black, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         }
       ],
       "instructions": [
         "Put the washed spinach in a large pan with only the water clinging to its leaves and a pinch of salt. Cover and cook 3 to 4 minutes, until wilted.",
         "Drain, cool under cold running water, squeeze out the water firmly with your hands and chop roughly.",
         "Soften the shallot in the butter over low heat for 3 to 4 minutes. Add the spinach and nutmeg and stir 2 minutes.",
-        "Stir in the crème fraîche and warm through 2 to 3 minutes until creamy. Season and serve hot."
+        "Stir in the crème fraîche and warm through 2 to 3 minutes until creamy. Serve hot."
       ],
       "nutritionHighlights": [
         {
@@ -5532,7 +5411,7 @@
           "url": "https://www.750g.com/epinards-de-mon-enfance-r48038.htm"
         }
       ],
-      "curationNote": "The 750g épinards à la crème gives 800 g spinach wilted 3 to 4 minutes, squeezed, then butter, shallot and nutmeg; its cream cheese was replaced by the traditional crème fraîche. Épinards de mon enfance shows the bound béchamel style with nutmeg, which confirmed the dairy finish."
+      "curationNote": "750g, Épinards à la crème for every amount and step; for 4 like ours: 800 g spinach, 1 shallot, 20 g butter, 100 g cream cheese, a pinch of nutmeg, a pinch of salt, no pepper. The crème fraîche the recipe uses in place of the cream cheese is kept, since the dish is named for cream and 750g's Épinards de mon enfance also finishes with dairy."
     },
     {
       "builderType": "salad",
@@ -5631,7 +5510,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 5,
           "unit": "g",
           "cutPrep": "a few leaves, torn",
@@ -5697,7 +5576,7 @@
           "url": "https://lacuisinedegeraldine.fr/en/salade-nicoise"
         }
       ],
-      "curationNote": "Wikipédia gives the traditional Niçois list: raw tomatoes, salad pepper, cébettes, celery, lettuce, hard-boiled eggs, anchovies or tuna, Niçoise olives, olive oil and basil, with potatoes and green beans named as Escoffier's later variant and no vinegar. Géraldine's 4-serving version (with potatoes and beans) was used for portion sizes only."
+      "curationNote": "Wikipédia, Salade niçoise (composition only) for every amount and step; Wikipédia gives the Niçois ingredient list without amounts; Géraldine's 4-serving recipe is a different version (potatoes, beans, tuna, capers, a mustard vinaigrette, 3 tomatoes, 2 eggs, 4 tbsp oil)."
     },
     {
       "builderType": "salad",
@@ -5705,11 +5584,6 @@
       "servingSizeAmount": 1,
       "servingSizeUnit": "plate",
       "components": [
-        {
-          "recipeId": "curated_fr_base_croutons",
-          "servings": 2,
-          "note": "about 1 cup of butter croutons"
-        },
         {
           "recipeId": "curated_fr_base_vinaigrette_a_la_moutarde",
           "servings": 4,
@@ -5720,8 +5594,8 @@
       "name": "Salade Lyonnaise",
       "region": "Lyon",
       "servings": 4,
-      "flavorProfile": "Bitter dandelion or frisée leaves wilted by hot smoky lardons and crunchy butter croutons, with a soft poached egg breaking over everything.",
-      "healthBenefit": "Dandelion greens are rich in vitamin K, vitamin A and calcium and the egg brings protein; the bacon and croutons make it hearty, so it is a meal in itself.",
+      "flavorProfile": "Bitter dandelion or frisée leaves dressed in vinaigrette and wilted by hot smoky lardons, with a soft poached egg breaking over everything.",
+      "healthBenefit": "Dandelion greens are rich in vitamin K, vitamin A and calcium and the egg brings protein; the bacon makes it hearty, so it is a meal in itself.",
       "overallTier": "strong",
       "ingredients": [
         {
@@ -5753,24 +5627,6 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Wine vinegar",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "for the poaching water"
-        },
-        {
-          "category": "Veg",
-          "baseName": "Fresh Parsley",
-          "quantity": 5,
-          "unit": "g",
-          "cutPrep": "chopped",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Pepper, black, ground",
           "quantity": 0.25,
           "unit": "tsp",
@@ -5781,9 +5637,9 @@
       ],
       "instructions": [
         "Cook the lardons in a dry frying pan over medium heat for 6 to 8 minutes, until golden. Keep them warm.",
-        "Bring a wide pan of water to a bare simmer with the vinegar. Break in the eggs one at a time and poach 3 to 4 minutes, until the whites are set and the yolks soft. Lift out and drain on paper towels.",
+        "Bring a wide pan of water to a bare simmer. Break in the eggs one at a time and poach 3 to 4 minutes, until the whites are set and the yolks soft. Lift out and drain on paper towels.",
         "Toss the greens with the vinaigrette and divide between plates.",
-        "Scatter over the hot lardons, the croutons and the parsley, set a poached egg on each plate, grind over pepper and serve at once."
+        "Scatter over the hot lardons, set a poached egg on each plate, grind over pepper and serve at once."
       ],
       "nutritionHighlights": [
         {
@@ -5803,13 +5659,9 @@
         {
           "source": "750g, Salade lyonnaise",
           "url": "https://www.750g.com/salade-lyonnaise-r2698.htm"
-        },
-        {
-          "source": "Wikipédia, Salade lyonnaise",
-          "url": "https://fr.wikipedia.org/wiki/Salade_lyonnaise"
         }
       ],
-      "curationNote": "750g gives 400 g dandelion, 200 g smoked bacon dry-fried and 4 poached eggs with a mustard vinaigrette, for 4. Wikipédia adds the butter-browned croutons and parsley and names frisée or dandelion. Wikipédia's walnut oil is a variant; the base mustard vinaigrette was kept."
+      "curationNote": "750g, Salade lyonnaise for every amount and step; serves 4: 400 g dandelion, 4 eggs, 200 g smoked bacon, a vinaigrette of 3 tbsp olive oil, 1 level tsp strong mustard, 1 tbsp wine vinegar, salt and pepper; no croutons and no parsley."
     },
     {
       "builderType": "salad",
@@ -6052,24 +5904,24 @@
         },
         {
           "recipeId": "curated_fr_base_vinaigrette_a_la_moutarde",
-          "servings": 4,
-          "note": "4 tbsp"
+          "servings": 9,
+          "note": "about 9 tbsp"
         }
       ],
       "id": "curated_fr_salade_de_chevre_chaud",
       "name": "Salade de Chèvre Chaud",
       "region": "Centre-Val de Loire",
       "servings": 4,
-      "flavorProfile": "Crisp leaves under warm toasts of country bread topped with soft, tangy goat cheese just starting to melt, with a touch of honey and thyme.",
+      "flavorProfile": "Crisp dressed leaves under warm toasts of country bread topped with soft, tangy goat cheese just starting to melt, with a grind of black pepper.",
       "healthBenefit": "Goat cheese brings protein and calcium and the leaves bring folate and vitamin K; cheese on bread makes it filling, so it works as a light meal.",
       "overallTier": "strong",
       "ingredients": [
         {
           "category": "Dairy",
           "baseName": "Cheese, goat, semisoft type",
-          "quantity": 240,
+          "quantity": 280,
           "unit": "g",
-          "cutPrep": "2 crottins, halved across into 4 discs",
+          "cutPrep": "halved across into 8 discs",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -6079,24 +5931,6 @@
           "quantity": 150,
           "unit": "g",
           "cutPrep": "washed and dried",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Standard Honey (Blossom Honey)",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Fresh Thyme",
-          "quantity": 1,
-          "unit": "g",
-          "cutPrep": "leaves from 2 sprigs",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -6111,10 +5945,10 @@
         }
       ],
       "instructions": [
-        "Heat the oven to 350°F (180°C). Set a disc of goat cheese on each slice of bread and lay them on a baking sheet lined with parchment.",
-        "Bake 8 to 10 minutes, until the cheese softens and turns lightly golden but still holds its shape.",
+        "Heat the oven to 320°F (160°C). Set two discs of goat cheese on each slice of bread and lay them on a baking sheet lined with parchment.",
+        "Bake about 10 minutes, until the cheese starts to melt.",
         "Meanwhile toss the leaves with the vinaigrette and divide between plates.",
-        "Drizzle each hot toast with a little honey, sprinkle with thyme and pepper and set it on the salad. Serve at once."
+        "Grind pepper over each hot toast, set it on the salad and serve at once."
       ],
       "nutritionHighlights": [
         {
@@ -6134,13 +5968,9 @@
         {
           "source": "750g, Salade de chèvre chaud",
           "url": "https://www.750g.com/salade-de-chevre-chaud-r31773.htm"
-        },
-        {
-          "source": "750g, Salade chèvre chaud au miel",
-          "url": "https://www.750g.com/salade-chevre-chaud-au-miel-r4602.htm"
         }
       ],
-      "curationNote": "The first 750g recipe gives crottin de Chavignol on country bread baked at 160°C for about 10 minutes, on lettuce with a mustard vinaigrette. The second gives country bread, goat cheese, a hot oven and a drizzle of honey. The bread points at the pain de campagne. Goat cheese is not in the food database, so it is listed and not counted."
+      "curationNote": "750g, Salade de chèvre chaud for every amount and step; serves 2: 140 g crottin, 2 slices country bread, 4 lettuce leaves, a vinaigrette of 1 tsp mustard, 4 tbsp olive oil, 1 tsp white wine vinegar, salt and pepper; 160°C for about 10 minutes; no honey and no herbs. Doubled for our 4."
     },
     {
       "builderType": "salad",
@@ -6150,8 +5980,8 @@
       "components": [
         {
           "recipeId": "curated_fr_base_vinaigrette_a_la_moutarde",
-          "servings": 6,
-          "note": "6 tbsp"
+          "servings": 8,
+          "note": "about 8 tbsp"
         }
       ],
       "id": "curated_fr_salade_de_lentilles",
@@ -6181,33 +6011,6 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Fresh Thyme",
-          "quantity": 1,
-          "unit": "g",
-          "cutPrep": "1 sprig",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, bay leaf",
-          "quantity": 0.15,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "1 bay leaf"
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 800,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Veg",
           "baseName": "Shallot",
           "quantity": 40,
@@ -6219,29 +6022,29 @@
         {
           "category": "Veg",
           "baseName": "Chives",
-          "quantity": 10,
+          "quantity": 20,
           "unit": "g",
-          "cutPrep": "snipped",
+          "cutPrep": "1 bunch, snipped",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Fresh Parsley",
-          "quantity": 10,
+          "quantity": 5,
           "unit": "g",
-          "cutPrep": "flat-leaf, chopped",
+          "cutPrep": "leaves of 5 sprigs, chopped",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.75,
-          "unit": "tsp",
+          "quantity": 4.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the source says to taste"
         },
         {
           "category": "Herbs",
@@ -6254,8 +6057,8 @@
         }
       ],
       "instructions": [
-        "Put the lentils and carrot in a saucepan with the thyme and bay, cover with the cold water and bring to a boil. Lower the heat and simmer 20 to 25 minutes, until tender but whole. Salt in the last 5 minutes.",
-        "Drain well and lift out the thyme and bay.",
+        "Put the lentils and carrot in a saucepan, cover with cold water and bring to a boil. Lower the heat and simmer about 20 minutes, until tender but whole. Salt in the last 5 minutes.",
+        "Drain well.",
         "Stir the shallot into the vinaigrette and pour it over the lentils while they are still warm, so they take it in.",
         "Leave to cool to room temperature, then fold in the chives and parsley and season with pepper. Serve tepid or cool."
       ],
@@ -6277,13 +6080,9 @@
         {
           "source": "750g, Salade de lentilles aux herbes fraîches",
           "url": "https://www.750g.com/salade-de-lentilles-aux-herbes-fraiches-r205815.htm"
-        },
-        {
-          "source": "750g, Salade de lentilles vertes du Puy traditionnelle",
-          "url": "https://www.750g.com/lentilles-vertes-du-puy-en-salade-et-oeuf-poche-r63638.htm"
         }
       ],
-      "curationNote": "The herbes fraîches recipe gives 250 g lentils with carrot in 60 cl water for about 20 minutes, then a mustard vinaigrette with shallot, chives and parsley. The traditional Puy recipe confirms herbs in the cooking, salting at the end and dressing the lentils tepid with vinegar and shallot. Its poached eggs and the goat cheese toast were left out."
+      "curationNote": "750g, Salade de lentilles aux herbes fraîches for every amount and step; serves 4: 250 g lentils, 1 carrot, 60 cl water, 1 shallot, 1 bunch chives, 5 sprigs flat parsley; vinaigrette of 6 tbsp olive oil, 2 tbsp vinegar, 1 tsp mustard, salt and pepper to taste; no thyme or bay."
     },
     {
       "builderType": "bakedGoods",
@@ -6947,7 +6746,7 @@
       "name": "Pain d'Épices",
       "region": "Reims and Alsace",
       "servings": 12,
-      "flavorProfile": "A dense, moist, honey-dark loaf warm with cinnamon, ginger and anise, better after a day or two wrapped up.",
+      "flavorProfile": "A dense, moist, honey-dark loaf warm with cinnamon, ginger and quatre-épices, better after a day or two wrapped up.",
       "healthBenefit": "Rye flour brings fibre and the spices bring their aroma with no fat to speak of, but the honey makes it a sweet, so a thin slice is the way to eat it.",
       "overallTier": "strong",
       "ingredients": [
@@ -7031,20 +6830,11 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, anise seed",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": "ground, optional",
-          "cookingMethod": null,
-          "prepNote": null
         }
       ],
       "instructions": [
         "Heat the oven to 320°F (160°C) and butter and line a loaf tin about 25 cm long.",
-        "Warm the spices in a small pan for a few seconds until they smell toasted. Add the milk, honey, sugar and butter and heat gently, stirring, just until everything melts. Do not boil.",
+        "Warm the cinnamon, ginger and quatre-épices in a small pan for a few seconds until they smell toasted. Add the milk, honey, sugar and butter and heat gently, stirring, just until everything melts. Do not boil.",
         "Mix the two flours with the baking powder in a bowl, pour in the warm honey mixture and stir to a smooth, thick batter.",
         "Pour into the tin and bake 40 to 50 minutes, until dark brown and a skewer comes out clean. Cover loosely with foil if the top darkens too fast.",
         "Cool in the tin 10 minutes, then on a rack. Wrap it and keep it 1 to 2 days before slicing; it grows moister and the spices deepen."
@@ -7069,7 +6859,7 @@
           "url": "https://fr.wikipedia.org/wiki/Pain_d%27%C3%A9pices"
         }
       ],
-      "curationNote": "Wikipédia: the Reims loaf is rye flour and honey, at first with no eggs, butter or milk, spiced with cinnamon, coriander, ginger and anise; the Alsatian style adds clove. Philippe Etchebest's recipe on 750g gave the method and amounts (250 g honey, 100 g cassonade, 125 g each of wheat and rye flour, 100 g milk, 40 g butter, a sachet of baking powder, a teaspoon each of cinnamon, ginger and quatre-épices, 40 minutes at 160°C); his optional icing is left off. A little anise is added from the Reims list. Cut in 12 slices so the carbonnade can point at 4 of them."
+      "curationNote": "750g, Le pain d'épices maison de Philippe Etchebest for every amount and step; 250 g honey, 100 g cassonade, 125 g each of wheat and rye flour, 100 g milk, 40 g butter, 1 sachet baking powder, 1 tsp each of cinnamon, ginger and quatre-épices, 40 minutes at 160°C; no anise and no salt."
     },
     {
       "builderType": "bakedGoods",
@@ -7088,7 +6878,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
-          "quantity": 300,
+          "quantity": 500,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7097,7 +6887,7 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 150,
+          "quantity": 200,
           "unit": "ml",
           "cutPrep": "lukewarm",
           "cookingMethod": null,
@@ -7106,7 +6896,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Baker's yeast fresh, pressed",
-          "quantity": 10,
+          "quantity": 15,
           "unit": "g",
           "cutPrep": "crumbled",
           "cookingMethod": null,
@@ -7115,7 +6905,7 @@
         {
           "category": "Fats",
           "baseName": "Olive Oil (Extra Virgin)",
-          "quantity": 4,
+          "quantity": 10,
           "unit": "tbsp",
           "cutPrep": "for the dough",
           "cookingMethod": null,
@@ -7124,11 +6914,29 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 5,
+          "quantity": 12,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 tsp"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tsp, for the dough"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Thyme Spices",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "dried, for the dough; the source gives no amount"
         },
         {
           "category": "Veg",
@@ -7151,29 +6959,29 @@
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 8,
+          "quantity": 12,
           "unit": "g",
-          "cutPrep": "2 cloves, crushed",
+          "cutPrep": "3 cloves, crushed",
           "cookingMethod": null,
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Fresh Thyme",
-          "quantity": 3,
-          "unit": "g",
-          "cutPrep": "a few sprigs",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, bay leaf",
-          "quantity": 0.15,
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 10,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "1 bay leaf"
+          "prepNote": "for the onions"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.4,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "a pinch, for the onions"
         },
         {
           "category": "Meat",
@@ -7204,11 +7012,11 @@
         }
       ],
       "instructions": [
-        "Dough: dissolve the yeast in the warm water, mix with the flour, salt and 4 tbsp olive oil and knead 10 minutes until smooth. Cover and rise 1 to 1.5 hours, until doubled.",
-        "Onions: meanwhile warm 5 tbsp olive oil in a wide heavy pan, add the onions, garlic, thyme and bay leaf and a pinch of salt. Cover and cook over the lowest heat 1.5 to 2 hours, stirring now and then, until the onions collapse into a soft, pale gold compote. They must stew, not brown; add a spoon of water if they catch. Take out the thyme stalks and bay leaf and season with pepper.",
+        "Dough: dissolve the yeast and the teaspoon of sugar in the warm water. Mix with the flour, the 2 tsp salt, the dried thyme and 10 tbsp olive oil and knead 10 minutes until smooth. Cover and leave to rise 1 to 1.5 hours, until doubled.",
+        "Onions: meanwhile warm 5 tbsp olive oil in a wide heavy pan, add the onions, garlic, 10 g sugar and a pinch of salt. Cover and cook over low heat, stirring now and then, until the onions are very soft and pale gold; add a spoon of water if they catch. Season with pepper.",
         "Heat the oven to 430°F (220°C). Oil a baking tray about 30 by 40 cm and press the dough out to fill it, leaving a slightly thicker rim.",
         "Spread the onions over the dough. Lay the anchovy fillets in a lattice over the top and set an olive in each diamond.",
-        "Bake 10 minutes at 430°F (220°C), then 10 to 15 minutes at 375°F (190°C), until the base is crisp and golden underneath. Serve warm or at room temperature, cut into 8 slices."
+        "Bake 10 minutes at 430°F (220°C), then 5 to 10 minutes at 375°F (190°C), until the base is crisp and golden underneath. Serve warm or at room temperature, cut into 8 slices."
       ],
       "nutritionHighlights": [
         {
@@ -7234,7 +7042,7 @@
           "url": "https://fr.wikipedia.org/wiki/Pissaladi%C3%A8re"
         }
       ],
-      "curationNote": "Wikipédia: a Niçois bread dough made with olive oil, covered with onions stewed covered in olive oil for 1.5 to 2.5 hours without browning, then pissalat or anchovy fillets and Nice olives, with no tomato and no cheese. 750g gave the bake (220°C then 190°C) and the olive-oil dough, scaled down. Its added sugar is left out because Wikipédia's Niçois onions are sweetened by long cooking alone. The onions are cooked here rather than pointing at the confit onion base, because that base makes only a cup and the dish is defined by a kilo of onions stewed this way. Pissalat is not in the food database and anchovy fillets are the common form, so fillets are used."
+      "curationNote": "750g, Pissaladière for every amount and step; one 30 by 40 cm tray: dough of 500 g flour, 20 cl water, 15 g fresh yeast, 10 tbsp olive oil, 2 tsp salt, 1 tsp sugar and dried thyme with no amount; topping of 8 large onions, 3 garlic cloves, 10 g sugar, olive oil, salt, pepper, a can of anchovies and olives; 10 minutes at 220°C then 5 to 10 at 190°C. Followed in full rather than blended with Wikipédia."
     },
     {
       "builderType": "bakedGoods",
@@ -7271,7 +7079,7 @@
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 30,
+          "quantity": 20,
           "unit": "g",
           "cutPrep": "melted, plus a little for the tin",
           "cookingMethod": null,
@@ -7298,11 +7106,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 9,
+          "quantity": 12,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 tsp"
         }
       ],
       "instructions": [
@@ -7332,7 +7140,7 @@
           "url": "https://fr.wikipedia.org/wiki/Pain_de_mie"
         }
       ],
-      "curationNote": "Wikipédia: a bread with a soft, very white crumb and a soft crust, made at home from flour, milk, water, butter, baker's yeast, sugar and salt, first baked in a tin mould in England around 1800. 750g gave the proportions and method (450 g flour, 230 ml liquid, 2 tbsp sugar, 1 tbsp dry yeast, 2 tsp salt, 1 hour rise, 45 minute proof in a loaf tin, 30 minutes at 200°C, unmoulded 5 minutes before the end). 750g used margarine; butter is used instead, following the home recipe Wikipédia gives, and milk is chosen from the water, apple juice or milk 750g allows."
+      "curationNote": "750g, Pain de mie for every amount and step; 450 g flour, 230 ml water, apple juice or milk, 20 g melted margarine, 2 tbsp sugar, 1 tbsp dry yeast, 2 tsp salt; 200°C for 30 minutes. Butter is kept in place of margarine as the curation chose, at the source's amount."
     },
     {
       "builderType": "dessert",
@@ -7615,7 +7423,7 @@
       "name": "Tarte Fine aux Pommes",
       "region": "Normandy",
       "servings": 6,
-      "flavorProfile": "A crisp, shattering sheet of puff pastry under fanned, paper-thin apple slices with caramelized edges and a buttery sugar glaze.",
+      "flavorProfile": "A crisp, shattering sheet of puff pastry under fanned, paper-thin apple slices with caramelized edges and a light brown sugar glaze.",
       "healthBenefit": "A treat made of butter pastry and sugar; the thin layer of apple adds a little fibre and potassium.",
       "ingredients": [
         {
@@ -7628,38 +7436,20 @@
           "prepNote": null
         },
         {
-          "category": "Bev",
-          "baseName": "Lemon",
-          "quantity": 24,
-          "unit": "g",
-          "cutPrep": "freshly squeezed",
-          "cookingMethod": null,
-          "prepNote": "juice of half a lemon; tossed with the apples to keep them pale"
-        },
-        {
-          "category": "Fats",
-          "baseName": "Pure Butter (Unsalted)",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": "melted",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Sweets",
           "baseName": "Brown Sugar (Commercial)",
-          "quantity": 30,
+          "quantity": 12,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tbsp"
         }
       ],
       "instructions": [
-        "Heat the oven to 400°F (200°C). Roll the puff pastry 3 mm thin, cut a 28 cm round or a long rectangle, and lay it on a lined tray. Prick it all over and chill 15 minutes.",
-        "Toss the apple slices with the lemon juice. Overlap them in tight rows or a rosette, leaving a 1 cm border.",
-        "Brush the apples and the border with the melted butter and scatter the brown sugar over.",
-        "Bake 25 to 35 minutes, until the pastry is puffed and deep golden and the apple edges have browned. Serve warm."
+        "Heat the oven to 350°F (180°C). Roll the puff pastry 3 mm thin, cut a 28 cm round or a long rectangle, and lay it on a lined tray. Prick it all over and chill 15 minutes.",
+        "Overlap the apple slices in tight rows or a rosette, leaving a 1 cm border.",
+        "Scatter the brown sugar over the apples.",
+        "Bake 35 to 40 minutes, until the pastry is puffed and golden and the apple edges have browned. Serve warm."
       ],
       "nutritionHighlights": [
         {
@@ -7677,7 +7467,7 @@
           "url": "https://fr.wikipedia.org/wiki/Tarte_aux_pommes"
         }
       ],
-      "curationNote": "Géraldine bakes thin apple slices and brown sugar on puff pastry at 180°C, with a layer of applesauce under them. Wikipédia describes the apple tart on puff or brisée pastry. The tarte fine is the thin version with no compote, only apples, butter and sugar, so the compote is left out here and the oven is hotter to crisp the thin sheet."
+      "curationNote": "La Cuisine de Géraldine, French apple tart for every amount and step; serves 6: puff pastry, about 400 g thinly sliced apples and 1 tbsp brown sugar over a layer of applesauce, 180°C for 35 to 40 minutes; no butter or lemon. The applesauce layer is left out, since a tarte fine is the thin version of this tart with apples only."
     },
     {
       "builderType": "dessert",
@@ -7739,18 +7529,9 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 10,
+          "quantity": 5,
           "unit": "g",
           "cutPrep": "for the dish",
           "cookingMethod": null,
@@ -7769,7 +7550,7 @@
       "instructions": [
         "Heat the oven to 350°F (175°C). Butter a 23 cm baking dish and dust it with the 10 g of sugar.",
         "Spread the cherries in the dish in one layer.",
-        "Whisk the eggs with the 75 g sugar and salt, then whisk in the flour until smooth and add the milk a little at a time until the batter is thin.",
+        "Whisk the eggs with the 75 g sugar, then whisk in the flour until smooth and add the milk a little at a time until the batter is thin.",
         "Pour the batter over the cherries and bake 35 to 40 minutes, until puffed and golden and set in the centre.",
         "Serve warm or at room temperature, warning everyone about the pits."
       ],
@@ -7797,7 +7578,7 @@
           "url": "https://fr.wikipedia.org/wiki/Clafoutis"
         }
       ],
-      "curationNote": "Géraldine bakes 500 g cherries in a batter of 3 eggs, 100 g flour, 75 g sugar and 300 ml milk at 175°C. Wikipédia places it in Limousin and notes the cherries traditionally keep their pits, which add flavour; that is kept here."
+      "curationNote": "La Cuisine de Géraldine, Cherry clafoutis for every amount and step; for 6 like ours: 500 g cherries, 3 eggs, 100 g flour, 75 g sugar, 300 ml milk, an optional 1 tsp flavoring, 1 tsp butter and 1 tbsp sugar for the dish; no salt."
     },
     {
       "builderType": "dessert",
@@ -7970,13 +7751,13 @@
       "components": [
         {
           "recipeId": "curated_fr_base_pate_a_choux",
-          "servings": 18,
-          "note": "18 small puffs"
+          "servings": 27,
+          "note": "about two thirds of a batch, close to the source's choux scaled to 6"
         },
         {
           "recipeId": "curated_dessert_vanilla_ice_cream",
-          "servings": 4.167,
-          "note": "500 ml"
+          "servings": 13,
+          "note": "about 1.5 kg"
         }
       ],
       "overallTier": "strong",
@@ -7990,36 +7771,27 @@
         {
           "category": "Sweets",
           "baseName": "Dark chocolate",
-          "quantity": 150,
+          "quantity": 300,
           "unit": "g",
-          "cutPrep": "about 70% cocoa, chopped",
+          "cutPrep": "finely chopped",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Dairy",
-          "baseName": "Heavy Whipping Cream",
-          "quantity": 150,
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 225,
           "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Fats",
-          "baseName": "Pure Butter (Unsalted)",
-          "quantity": 15,
-          "unit": "g",
-          "cutPrep": null,
+          "cutPrep": "for the sauce",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Heat the oven to 375°F (190°C). Pipe the choux paste into 18 mounds about 3 cm across on a lined tray, spaced well apart.",
-        "Bake 25 to 30 minutes, until puffed, deep golden and light. Do not open the door for the first 20 minutes. Pierce each puff once and cool on a rack.",
-        "For the sauce, bring the cream to a simmer, pour it over the chocolate, wait 1 minute, then stir until smooth and stir in the butter.",
-        "Just before serving, split each puff and fill it with a small scoop of ice cream. Set 3 on each plate and pour the warm sauce over."
+        "Heat the oven to 375°F (190°C), the base choux recipe's temperature, since the source gives none. Pipe the choux paste into puffs 4 to 5 cm across on a tray lined with baking paper.",
+        "Bake about 30 minutes, until puffed and golden, without opening the door for the first 20 minutes. Cool on a rack.",
+        "For the sauce, bring the milk to a simmer and pour it over the chopped chocolate. Cover, wait 30 seconds, then stir smooth with a spatula.",
+        "Cut the puffs in half, fill each with a scoop of vanilla ice cream, close them and serve with the hot sauce."
       ],
       "nutritionHighlights": [
         {
@@ -8029,15 +7801,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipédia",
-          "url": "https://fr.wikipedia.org/wiki/Profiterole"
-        },
-        {
-          "source": "Wikipedia",
-          "url": "https://en.wikipedia.org/wiki/Profiterole"
+          "source": "750g, Profiteroles, glace vanille et sauce au chocolat",
+          "url": "https://www.750g.com/profiteroles-glace-vanille-et-sauce-au-chocolat-r204793.htm"
         }
       ],
-      "curationNote": "Wikipédia describes the profiterole as choux once filled with crème pâtissière and now usually with vanilla ice cream, covered in chocolate sauce; the English article ties the choux to Carême. Ice cream is listed as not in the database. Sauce is a standard dark chocolate and cream ganache, written from those descriptions because the search budget had run out."
+      "curationNote": "750g, Profiteroles, glace vanille et sauce au chocolat for every amount and step; serves 4, scaled to our 6: choux of 75 g flour, 125 g semi-skimmed milk, 50 g butter, 5 g sugar, 2 g salt and 3 eggs, piped 4 to 5 cm and baked about 30 minutes (no temperature given); 1 kg vanilla ice cream; sauce of 200 g chocolate with 15 cl simmering milk poured over."
     },
     {
       "builderType": "dessert",
@@ -8139,12 +7907,7 @@
         {
           "recipeId": "curated_fr_base_pate_a_choux",
           "servings": 20,
-          "note": "half a batch, piped as a 20 cm ring"
-        },
-        {
-          "recipeId": "curated_fr_base_creme_patissiere",
-          "servings": 6,
-          "note": "about 1.5 cups, cold"
+          "note": "half a batch, close to the source's choux scaled to 8"
         }
       ],
       "overallTier": "strong",
@@ -8165,36 +7928,27 @@
           "prepNote": null
         },
         {
-          "category": "Dairy",
-          "baseName": "Chicken Egg (Raw)",
-          "quantity": 1,
-          "unit": "each",
-          "cutPrep": "beaten, for glazing",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "NutSeed",
           "baseName": "Hazelnut",
-          "quantity": 100,
+          "quantity": 53,
           "unit": "g",
-          "cutPrep": "for the praline",
+          "cutPrep": "for the praline paste",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "NutSeed",
           "baseName": "Almonds",
-          "quantity": 50,
+          "quantity": 27,
           "unit": "g",
-          "cutPrep": "whole, for the praline",
+          "cutPrep": "whole, for the praline paste",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 100,
+          "quantity": 53,
           "unit": "g",
           "cutPrep": "for the praline caramel",
           "cookingMethod": null,
@@ -8203,7 +7957,7 @@
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 120,
+          "quantity": 133,
           "unit": "g",
           "cutPrep": "soft",
           "cookingMethod": null,
@@ -8217,14 +7971,60 @@
           "cutPrep": "for dusting",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 333,
+          "unit": "ml",
+          "cutPrep": "for the cream",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg Yolk (Raw)",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "in place of 1 vanilla pod",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Cornstarch",
+          "quantity": 27,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 27,
+          "unit": "g",
+          "cutPrep": "for the cream",
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
-        "For the praline, toast the hazelnuts and whole almonds at 325°F (160°C) for 10 to 12 minutes. Melt the sugar in a dry pan to an amber caramel, 6 to 8 minutes, stir in the warm nuts, and spread on a lined tray to harden. Break it up and blend 3 to 6 minutes, scraping down, to a smooth paste.",
-        "Heat the oven to 350°F (180°C). Pipe a ring of choux 20 cm across, then a second ring inside it and a third on top along the join. Brush with beaten egg and scatter the flaked almonds over.",
-        "Bake 40 to 45 minutes, until deep golden and firm, without opening the door for the first 25 minutes. Cool on a rack and slice in half horizontally.",
-        "Beat the soft butter until pale, 2 to 3 minutes, then beat in the cold crème pâtissière a spoonful at a time and then the praline paste, until smooth and light.",
-        "Pipe the praline cream in thick rosettes over the bottom ring, set the top on, and dust with icing sugar. Chill 30 minutes to 1 hour before slicing."
+        "For the praline paste, toast the hazelnuts and whole almonds at 325°F (160°C) for 10 to 12 minutes. Melt the 53 g of sugar in a dry pan to an amber caramel, stir in the warm nuts, spread on a lined tray to harden, then break up and blend to a smooth paste.",
+        "For the cream, warm the milk with the vanilla. Whisk the yolks with the 27 g of sugar, then the cornflour. Pour in the hot milk gradually, return it to the pan and cook about 2 minutes. Cover the surface with film and chill at least 2 hours.",
+        "Heat the oven to 350°F (180°C). Pipe the choux through a large plain tip into two 20 cm rings side by side, then a third ring on top of the join. Scatter the flaked almonds over.",
+        "Bake 40 to 45 minutes, until deep golden and firm, without opening the door for the first 25 minutes. Cool on a rack and slice in half horizontally with a bread knife.",
+        "Whisk the very cold cream with the praline paste, then whisk in the soft butter a little at a time until smooth.",
+        "Pipe the praline cream through a fluted tip over the bottom ring, set the top on, dust with icing sugar and chill until serving."
       ],
       "nutritionHighlights": [
         {
@@ -8238,15 +8038,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipédia",
-          "url": "https://fr.wikipedia.org/wiki/Paris-brest"
-        },
-        {
-          "source": "Wikipedia",
-          "url": "https://en.wikipedia.org/wiki/Paris%E2%80%93Brest"
+          "source": "750g, Paris-Brest",
+          "url": "https://www.750g.com/paris-brest-r71317.htm"
         }
       ],
-      "curationNote": "Wikipédia describes a ring of choux topped with flaked almonds and filled with a praline mousseline (crème pâtissière beaten with butter and praline), created by Louis Durand around 1910 for the Paris to Brest bicycle race. Praline paste is made from the nuts here because the database has no praline; amounts are standard proportions, as the search budget had run out."
+      "curationNote": "750g, Paris-Brest for every amount and step; serves 6, scaled to our 8: choux of 50 g water, 50 g milk, 60 g flour, 40 g butter, 2 egg yolks and a pinch each of salt and sugar; flaked almonds and icing sugar with no amounts; praline cream of 25 cl milk, 2 yolks, 1 vanilla pod, 20 g cornflour, 20 g sugar, 100 g praline paste and 100 g butter; 180°C; no egg glaze."
     },
     {
       "builderType": "dessert",
@@ -8506,37 +8302,10 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 1500,
-          "unit": "ml",
-          "cutPrep": "kept at a bare simmer for poaching",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
           "quantity": 75,
           "unit": "g",
-          "cutPrep": "for the caramel",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 30,
-          "unit": "ml",
           "cutPrep": "for the caramel",
           "cookingMethod": null,
           "prepNote": null
@@ -8553,10 +8322,10 @@
       ],
       "instructions": [
         "Chill the crème anglaise at least 2 hours.",
-        "Whisk the whites with the salt to soft peaks, then add the icing sugar and whisk to firm, glossy peaks.",
+        "Whisk the whites to soft peaks, then add the icing sugar and whisk to firm, glossy peaks.",
         "Bring a wide pan of water to a bare simmer. Drop in large spoonfuls of meringue, a few at a time, and poach 2 to 3 minutes, then turn them and poach 1 minute more. Lift onto a clean cloth to drain.",
         "Pour the custard into 6 shallow bowls and set the meringues on top. Chill until serving.",
-        "For the caramel, heat the sugar and 30 ml water without stirring until amber, 6 to 8 minutes. Off the heat, drizzle it in thin threads over the meringues with a fork and scatter the toasted almonds over."
+        "For the caramel, melt the sugar alone in a dry pan over medium heat, without stirring, until amber, 6 to 8 minutes. Off the heat, drizzle it in thin threads over the meringues with a fork and scatter the toasted almonds over."
       ],
       "nutritionHighlights": [
         {
@@ -8578,7 +8347,7 @@
           "url": "https://fr.wikipedia.org/wiki/Œufs_à_la_neige"
         }
       ],
-      "curationNote": "Géraldine poaches 5 whites beaten with 50 g icing sugar for about 3 minutes and 1 minute, floats them on a 5 yolk crème anglaise, and finishes with caramel and toasted almonds. Wikipédia treats île flottante and oeufs à la neige as one dessert and notes the whites are often poached in milk; water is used here so the poaching liquid is not counted as eaten."
+      "curationNote": "La Cuisine de Géraldine, Île flottante for every amount and step; for 6 like ours: 5 whites with 50 g icing sugar poached in simmering water, a 5 yolk crème anglaise, ⅓ cup sugar melted to caramel with no water, toasted sliced almonds; no salt."
     },
     {
       "builderType": "dessert",
@@ -8591,7 +8360,7 @@
       "name": "Far Breton",
       "region": "Brittany",
       "servings": 8,
-      "flavorProfile": "A dense, custardy, slightly chewy flan baked dark on top, studded with soft prunes and rich with salted Breton butter.",
+      "flavorProfile": "A dense, custardy, slightly chewy flan baked dark on top and studded with soft prunes, with a buttery edge from the salted butter in the dish.",
       "healthBenefit": "A sweet treat, though made with milk rather than cream; the prunes bring fibre, potassium and vitamin K, and the eggs and milk add protein and calcium.",
       "ingredients": [
         {
@@ -8615,7 +8384,7 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 125,
+          "quantity": 80,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -8624,7 +8393,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
-          "quantity": 250,
+          "quantity": 125,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -8633,11 +8402,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
+          "quantity": 0.4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "a pinch"
         },
         {
           "category": "Dairy",
@@ -8651,18 +8420,18 @@
         {
           "category": "Fats",
           "baseName": "Butter, plain, salted",
-          "quantity": 40,
+          "quantity": 30,
           "unit": "g",
-          "cutPrep": "melted, plus a little for the dish",
+          "cutPrep": "for buttering the dish",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Heat the oven to 400°F (200°C). Butter a 24 cm round or 20 by 30 cm baking dish generously and scatter the prunes in it.",
-        "Whisk the eggs with the sugar and salt, then whisk in the flour until smooth. Add the milk gradually, then the melted salted butter, to a thin batter. Rest it 30 minutes to 1 hour if you have time.",
+        "Heat the oven to 350°F (180°C) with the fan on. Butter a 24 cm round or 20 by 30 cm baking dish with the salted butter and scatter the prunes in it.",
+        "Whisk the eggs with the sugar and salt, then whisk in the flour until smooth. Add the milk gradually to a thin batter.",
         "Pour the batter over the prunes.",
-        "Bake 40 to 50 minutes, until puffed and well browned on top and set in the centre; it sinks as it cools.",
+        "Bake 45 to 50 minutes, until golden on top and still slightly wobbly in the centre; it sinks as it cools.",
         "Cool to room temperature before slicing, or chill it, which firms the texture."
       ],
       "nutritionHighlights": [
@@ -8681,6 +8450,10 @@
       ],
       "citations": [
         {
+          "source": "Tourisme Bretagne, La recette du far breton aux pruneaux",
+          "url": "https://www.tourismebretagne.com/selon-mes-envies/gastronomie/recettes/la-recette-du-far-breton-aux-pruneaux/"
+        },
+        {
           "source": "Wikipédia",
           "url": "https://fr.wikipedia.org/wiki/Far_breton"
         },
@@ -8689,7 +8462,7 @@
           "url": "https://en.wikipedia.org/wiki/Far_Breton"
         }
       ],
-      "curationNote": "Wikipédia lists eggs, sugar, flour, milk, salted butter and prunes, baked around 200°C for 30 to 45 minutes. The English article notes the prunes are not traditionally soaked in alcohol and the top bakes dark. Proportions are standard ones for a 24 cm dish, written from those descriptions because the search budget had run out."
+      "curationNote": "Tourisme Bretagne, La recette du far breton aux pruneaux for every amount and step; for 6 to 8 like ours: 125 g flour, 80 g sugar, 4 eggs, 75 cl whole milk, 200 to 250 g pitted prunes, a pinch of salt, 30 g salted butter for the dish, an optional splash of rum or vanilla left out here, 180°C fan for 45 to 50 minutes."
     },
     {
       "builderType": "dessert",
@@ -8806,13 +8579,13 @@
       "name": "Macarons",
       "region": "Paris",
       "servings": 20,
-      "flavorProfile": "Two smooth, crisp almond meringue shells with ruffled feet and a chewy centre, sandwiched with a dark chocolate ganache.",
+      "flavorProfile": "Two smooth, crisp almond meringue shells with ruffled feet and a chewy centre, sandwiched with a white chocolate and honey ganache.",
       "healthBenefit": "A small sugary treat; the almonds add a little vitamin E, and one macaron is a light portion.",
       "ingredients": [
         {
           "category": "NutSeed",
           "baseName": "Nut, almond meal",
-          "quantity": 100,
+          "quantity": 125,
           "unit": "g",
           "cutPrep": "finely ground",
           "cookingMethod": null,
@@ -8821,7 +8594,7 @@
         {
           "category": "Sweets",
           "baseName": "Sugars, reprocessed, powdered",
-          "quantity": 160,
+          "quantity": 125,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -8830,25 +8603,16 @@
         {
           "category": "Dairy",
           "baseName": "Chicken Egg White (Raw)",
-          "quantity": 3,
-          "unit": "each",
-          "cutPrep": "about 100 g, at room temperature",
+          "quantity": 90,
+          "unit": "g",
+          "cutPrep": "about 3, at room temperature",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 50,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 0.5,
+          "quantity": 125,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -8856,8 +8620,8 @@
         },
         {
           "category": "Sweets",
-          "baseName": "Dark chocolate",
-          "quantity": 100,
+          "baseName": "Chocolate white",
+          "quantity": 150,
           "unit": "g",
           "cutPrep": "chopped, for the ganache",
           "cookingMethod": null,
@@ -8866,19 +8630,39 @@
         {
           "category": "Dairy",
           "baseName": "Heavy Whipping Cream",
-          "quantity": 100,
+          "quantity": 75,
           "unit": "ml",
+          "cutPrep": "for the ganache",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sweets, honey, strained or extracted",
+          "quantity": 8,
+          "unit": "g",
+          "cutPrep": "for the ganache",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 10,
+          "unit": "g",
           "cutPrep": "for the ganache",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Sift the ground almonds and icing sugar together twice, discarding any coarse bits.",
-        "Whisk the whites with the salt to soft peaks, then add the sugar a little at a time and whisk to stiff, glossy peaks.",
-        "Fold the almond mixture into the meringue, then keep folding and pressing the batter against the bowl (the macaronage) until it falls from the spatula in a thick ribbon, 40 to 60 strokes.",
-        "Pipe 3 cm rounds on lined trays, rap the trays on the counter to release air, and leave them 30 minutes to 1 hour until a skin forms and they are no longer sticky.",
-        "Heat the oven to 300°F (150°C) and bake one tray at a time 12 to 15 minutes, until the shells lift cleanly. Cool fully. For the ganache, pour the simmering cream over the chocolate, stir smooth, and cool until pipeable. Sandwich the shells in pairs and chill them 24 hours so the centres soften."
+        "Sift the ground almonds and icing sugar together, discarding any coarse bits.",
+        "Whisk the whites to soft peaks, then add the caster sugar a little at a time and whisk to stiff, glossy peaks.",
+        "Fold the almond mixture into the meringue, then keep folding and pressing the batter against the bowl until it falls from the spatula in a thick ribbon.",
+        "Pipe 3 cm rounds on lined trays, rap the trays on the counter to release air, and leave them 20 to 40 minutes until a skin forms and they no longer stick to a finger.",
+        "Heat the oven to 300°F (150°C), fan, and bake 12 to 14 minutes. Cool fully.",
+        "For the ganache, heat the cream with the honey, pour it over the chopped white chocolate, stir smooth and stir in the butter. Leave 2 to 3 hours at room temperature until firm enough to pipe.",
+        "Sandwich the shells in pairs with the ganache and chill them 24 hours before eating."
       ],
       "nutritionHighlights": [
         {
@@ -8888,15 +8672,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipédia",
-          "url": "https://fr.wikipedia.org/wiki/Macaron"
-        },
-        {
-          "source": "Wikipedia",
-          "url": "https://en.wikipedia.org/wiki/Macaron"
+          "source": "Gâteau et cuisine Rachida, Macarons à la meringue française",
+          "url": "https://gateauetcuisinerachida.com/macarons-a-la-meringue-francaise-recette-de-base"
         }
       ],
-      "curationNote": "Wikipédia describes the Paris macaron as equal weights of almond powder and icing sugar folded into whipped whites and sugar, two shells joined by ganache, made famous by Ladurée. The English article sets out the French and Italian meringue methods, the macaronage and the skin before baking. The French meringue method is used; amounts are standard proportions, written from those descriptions because the search budget had run out."
+      "curationNote": "Gâteau et cuisine Rachida, Macarons à la meringue française for every amount and step; the larger batch: 90 g whites, 125 g caster sugar, 125 g almond powder, 125 g icing sugar, 40 to 50 shells (about 20 to 25 macarons); ganache of 150 g white chocolate, 75 ml cream, 8 g honey, 10 g butter; rest 20 to 40 minutes, bake 150°C fan 12 to 14 minutes, chill 24 hours."
     },
     {
       "builderType": "dessert",
@@ -8915,17 +8695,8 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 100,
+          "quantity": 150,
           "unit": "g",
-          "cutPrep": "for the caramel",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 30,
-          "unit": "ml",
           "cutPrep": "for the caramel",
           "cookingMethod": null,
           "prepNote": null
@@ -8933,7 +8704,7 @@
         {
           "category": "Dairy",
           "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
-          "quantity": 500,
+          "quantity": 1000,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -8951,7 +8722,7 @@
         {
           "category": "Dairy",
           "baseName": "Chicken Egg (Raw)",
-          "quantity": 3,
+          "quantity": 4,
           "unit": "each",
           "cutPrep": null,
           "cookingMethod": null,
@@ -8960,7 +8731,7 @@
         {
           "category": "Dairy",
           "baseName": "Chicken Egg Yolk (Raw)",
-          "quantity": 2,
+          "quantity": 6,
           "unit": "each",
           "cutPrep": null,
           "cookingMethod": null,
@@ -8969,7 +8740,7 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 80,
+          "quantity": 100,
           "unit": "g",
           "cutPrep": "for the custard",
           "cookingMethod": null,
@@ -8977,23 +8748,27 @@
         }
       ],
       "instructions": [
-        "Heat the sugar and water without stirring until a deep amber caramel, 6 to 9 minutes. Pour it at once into 6 ramekins and tilt to coat the bases.",
-        "Heat the oven to 300°F (150°C). Warm the milk with the vanilla pod and seeds until steaming, then infuse 10 minutes.",
-        "Whisk the eggs, yolks and sugar together without making foam, pour in the warm milk, and strain.",
-        "Pour the custard over the caramel and set the ramekins in a deep tray with hot water halfway up their sides. Bake 35 to 45 minutes, until set at the edge with a slight wobble in the middle.",
-        "Cool, then chill at least 4 hours. Run a knife around each one and turn out onto a plate so the caramel runs down."
+        "Melt the 150 g caramel sugar alone in a dry pan over medium heat, without water and without stirring, swirling the pan until it is a deep amber caramel. Pour it at once into a 1.5 litre mould and tilt to coat the base.",
+        "Heat the oven to 250°F (120°C). Warm the milk with the split vanilla pod and its scraped seeds until steaming, then take off the heat.",
+        "Whisk the eggs, yolks and 100 g sugar together without making foam, pour in the warm milk while whisking, and strain out the pod.",
+        "Pour the custard over the caramel and bake for about 70 minutes, until set with a slight wobble in the middle.",
+        "Cool, then chill at least 4 hours. Run a knife around the edge and turn out onto a deep plate so the caramel runs down."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Calcium",
-          "note": "Half a litre of milk adds calcium."
+          "note": "A full litre of milk adds calcium."
         },
         {
           "nutrient": "Protein",
-          "note": "Eggs and milk give each custard some protein."
+          "note": "Eggs and milk give each serving some protein."
         }
       ],
       "citations": [
+        {
+          "source": "750g, Crème caramel",
+          "url": "https://www.750g.com/creme-caramel-r4159.htm"
+        },
         {
           "source": "Wikipédia",
           "url": "https://fr.wikipedia.org/wiki/Crème_caramel"
@@ -9003,7 +8778,7 @@
           "url": "https://en.wikipedia.org/wiki/Crème_caramel"
         }
       ],
-      "curationNote": "Wikipédia describes eggs, milk, sugar and a vanilla pod baked in a water bath in caramel-lined moulds; the English article adds the turning out. Proportions are standard ones for six ramekins, written from those descriptions because the search budget had run out."
+      "curationNote": "750g, Crème caramel for every amount and step; for 6 like ours: 150 g sugar for a dry caramel, 1 L whole milk, 1 vanilla pod, 4 eggs, 6 yolks, 100 g sugar for the custard, baked at 120°C for about 70 minutes."
     },
     {
       "builderType": "dessert",
@@ -9013,13 +8788,8 @@
       "components": [
         {
           "recipeId": "curated_fr_base_pate_feuilletee",
-          "servings": 10,
-          "note": "half a batch, rolled into one large thin sheet"
-        },
-        {
-          "recipeId": "curated_fr_base_creme_patissiere",
-          "servings": 12,
-          "note": "about 3 cups, cold"
+          "servings": 18,
+          "note": "about 1 kg, rolled into one large thin sheet"
         },
         {
           "recipeId": "curated_fr_base_fondant",
@@ -9047,19 +8817,76 @@
         {
           "category": "Sweets",
           "baseName": "Dark chocolate",
-          "quantity": 20,
+          "quantity": 150,
           "unit": "g",
           "cutPrep": "melted, for feathering",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Milk, whole, 3.25% milkfat, with added vitamin D",
+          "quantity": 500,
+          "unit": "ml",
+          "cutPrep": "for the cream",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
+          "unit": "tsp",
+          "cutPrep": "in place of 1 vanilla pod",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Dairy",
+          "baseName": "Chicken Egg Yolk (Raw)",
+          "quantity": 5,
+          "unit": "each",
+          "cutPrep": "about 100 g",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Cornstarch",
+          "quantity": 45,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 150,
+          "unit": "g",
+          "cutPrep": "soft",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Heat the oven to 400°F (200°C). Roll the puff pastry into a 30 by 40 cm sheet about 2 mm thin, lay it on a lined tray, prick it all over and chill 15 minutes.",
-        "Lay a sheet of paper and a second tray on the pastry so it rises evenly. Bake 15 to 20 minutes, then remove the top tray, dust with the icing sugar and bake 5 to 8 minutes more, until deep golden and glossy. Cool.",
-        "Trim and cut into 3 equal strips. Beat the cold crème pâtissière smooth and pipe half over one strip, cover with the second, pipe the rest, and set the third strip on top, flat side up.",
-        "Warm the fondant to about 95°F (35°C) and spread it over the top. Pipe thin lines of melted chocolate across and drag a knife through them in alternating directions to feather.",
-        "Chill 1 hour to set, then cut into 8 with a serrated knife."
+        "For the cream, heat the milk with the vanilla and half the sugar. Whisk the yolks with the rest of the sugar, then whisk in the cornflour and a little of the hot milk.",
+        "Pour it all back into the pan and cook over low heat for 4 minutes, whisking. Cover the surface with film and chill it quickly, about 20 minutes in the freezer.",
+        "Beat the butter until soft, then beat it gradually into the smoothed cold cream. Spoon it into a piping bag with a plain 1 cm tip and keep it cold.",
+        "Heat the oven to 350°F (180°C). Roll the puff pastry 2 mm thick into a rectangle about 70 by 25 cm, prick it, cover with baking paper and set a rack on top.",
+        "Bake 30 minutes. Take off the top paper, dust with the icing sugar and bake 10 minutes more, until caramelised. Cut into 3 strips and cool on a rack.",
+        "Pipe cream over the first strip, cover with the second, pipe more cream and finish with the third strip.",
+        "Melt the fondant and the chocolate separately. Spread the fondant over the top, pipe lines of chocolate across it and drag a skewer or knife through them to feather.",
+        "Chill to set, then cut into 8 with a serrated knife."
       ],
       "nutritionHighlights": [
         {
@@ -9069,15 +8896,11 @@
       ],
       "citations": [
         {
-          "source": "Wikipédia",
-          "url": "https://fr.wikipedia.org/wiki/Mille-feuille"
-        },
-        {
-          "source": "Wikipedia",
-          "url": "https://en.wikipedia.org/wiki/Mille-feuille"
+          "source": "750g, Mille-feuille traditionnel maison",
+          "url": "https://www.750g.com/mille-feuille-traditionnel-maison-r205026.htm"
         }
       ],
-      "curationNote": "Wikipédia describes three layers of puff pastry with two of crème pâtissière, glazed with fondant marbled with chocolate, and credits Seugnot with the modern form in 1867. Amounts and the pressed bake are standard method, written from those descriptions because the search budget had run out."
+      "curationNote": "750g, Mille-feuille traditionnel maison for every amount and step; serves 8, our servings: 1 kg puff pastry, fondant with no amount, 150 g dark chocolate, icing sugar with no amount to caramelise; crème mousseline of 500 g whole milk, 1 vanilla pod, 50 g sugar, 100 g egg yolks, 45 g cornflour and 150 g butter; 180°C for 30 minutes under a rack, then 10 minutes dusted with icing sugar."
     },
     {
       "builderType": "dessert",
@@ -9107,32 +8930,23 @@
         {
           "category": "Fruit",
           "baseName": "Strawberry",
-          "quantity": 500,
+          "quantity": 300,
           "unit": "g",
           "cutPrep": "hulled, halved if large",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Sugars, reprocessed, powdered",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "optional, for dusting",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Heat the oven to 350°F (175°C). Line a 23 cm tart tin with the pastry, prick it, line with paper and baking beans, and blind bake 15 minutes. Remove the beans and bake 5 to 10 minutes more, until golden. Cool completely.",
+        "Heat the oven to 350°F (175°C). Line a 23 cm tart tin with the pastry, prick it, line with paper and baking beans, and bake about 20 minutes in all, taking the beans out for the last few minutes, until golden. Cool completely.",
         "Beat the cold crème pâtissière until smooth and spread it evenly in the shell.",
         "Arrange the strawberries close together over the cream, points up.",
-        "Chill up to 2 hours and dust with icing sugar just before serving. It is best eaten the day it is made."
+        "Chill up to 2 hours before serving. It is best eaten the day it is made."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Vitamin C",
-          "note": "Half a kilo of fresh strawberries gives each slice a good share of vitamin C."
+          "note": "The fresh strawberries give each slice a good share of vitamin C."
         },
         {
           "nutrient": "Folate",
@@ -9141,15 +8955,11 @@
       ],
       "citations": [
         {
-          "source": "La Cuisine de Géraldine",
+          "source": "La Cuisine de Géraldine, Strawberry tartelettes with crème pâtissière",
           "url": "https://lacuisinedegeraldine.fr/en/strawberry-tartelettes-with-creme-patissiere"
-        },
-        {
-          "source": "La Cuisine de Géraldine",
-          "url": "https://lacuisinedegeraldine.fr/en/french-flan-patissier-recipe"
         }
       ],
-      "curationNote": "Géraldine fills sweet almond pastry shells, baked at 175°C, with crème pâtissière and 300 g strawberries for 8 tartlets; this is the same tart in one 23 cm shell with more fruit. Her flan pâtissier page sets out crème pâtissière as the base for tarts. A second, independent source could not be opened because the search budget had run out."
+      "curationNote": "La Cuisine de Géraldine, Strawberry tartelettes with crème pâtissière for every amount and step; 8 tartlets: almond sweet pastry baked 20 minutes at 175°C, crème pâtissière of 300 ml milk, and 300 g strawberries; no icing sugar. Made here as one 23 cm tart for 8."
     },
     {
       "builderType": "dessert",
@@ -9280,8 +9090,8 @@
       "components": [
         {
           "recipeId": "curated_dessert_vanilla_ice_cream",
-          "servings": 3.333,
-          "note": "400 ml"
+          "servings": 2.5,
+          "note": "about 290 g, the source's ice cream scaled to 4"
         }
       ],
       "overallTier": "strong",
@@ -9289,7 +9099,7 @@
       "name": "Poires Belle Hélène",
       "region": "Paris",
       "servings": 4,
-      "flavorProfile": "Whole pears poached soft in vanilla syrup, served cold with vanilla ice cream and hot, glossy dark chocolate sauce poured over at the table.",
+      "flavorProfile": "Pear halves poached soft in a light sugar syrup, served cold with vanilla ice cream and warm, glossy dark chocolate sauce poured over at the table.",
       "healthBenefit": "A sweet treat; the pears bring fibre and potassium, and the dark chocolate a little iron and magnesium.",
       "ingredients": [
         {
@@ -9297,14 +9107,14 @@
           "baseName": "Pear",
           "quantity": 4,
           "unit": "each",
-          "cutPrep": "firm, such as Williams, peeled with stems on",
+          "cutPrep": "peeled, halved and cored",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 1000,
+          "quantity": 400,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -9313,34 +9123,16 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 250,
+          "quantity": 48,
           "unit": "g",
-          "cutPrep": "for the syrup, most of it stays in the pan",
+          "cutPrep": "for the syrup",
           "cookingMethod": null,
           "prepNote": null
         },
         {
-          "category": "Bev",
-          "baseName": "Lemon",
-          "quantity": 24,
-          "unit": "g",
-          "cutPrep": "freshly squeezed",
-          "cookingMethod": null,
-          "prepNote": "juice of half a lemon"
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Vanilla extract",
-          "quantity": 13,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "about 1 tbsp; or the seeds of 1 vanilla pod, as the method describes"
-        },
-        {
           "category": "Sweets",
           "baseName": "Dark chocolate",
-          "quantity": 125,
+          "quantity": 120,
           "unit": "g",
           "cutPrep": "chopped",
           "cookingMethod": null,
@@ -9349,16 +9141,16 @@
         {
           "category": "Dairy",
           "baseName": "Heavy Whipping Cream",
-          "quantity": 100,
+          "quantity": 72,
           "unit": "ml",
-          "cutPrep": null,
+          "cutPrep": "about 5 tbsp",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 15,
+          "quantity": 24,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -9369,16 +9161,25 @@
           "baseName": "Almonds",
           "quantity": 20,
           "unit": "g",
-          "cutPrep": "flaked, toasted",
+          "cutPrep": "flaked, optional",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 24,
+          "unit": "ml",
+          "cutPrep": "about 1.5 tbsp, for the sauce",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Bring the water, sugar, lemon juice and vanilla pod to a boil, stirring until the sugar dissolves.",
-        "Rub the peeled pears with lemon, lower them into the syrup and keep it at a gentle simmer 10 to 25 minutes, depending on ripeness, until a knife slides in easily. Cool the pears in the syrup and chill.",
-        "For the sauce, bring the cream to a simmer, pour it over the chocolate, wait 1 minute, stir until smooth, and stir in the butter. Keep it warm.",
-        "Stand each drained pear in a bowl beside a scoop of ice cream, pour the hot chocolate sauce over and scatter with the toasted almonds."
+        "Peel the pears, halve them and carefully remove the cores.",
+        "Bring the water and sugar to a simmer and poach the pear halves gently until a knife goes in easily but they still hold their shape. Leave them to cool in the syrup.",
+        "For the sauce, melt the chocolate, butter and the 1.5 tbsp of water gently in a small pan, then stir in the cream.",
+        "Put a layer of vanilla ice cream in each bowl, set 2 pear halves on top and coat with the warm chocolate sauce. Scatter with flaked almonds if you like."
       ],
       "nutritionHighlights": [
         {
@@ -9392,15 +9193,11 @@
       ],
       "citations": [
         {
-          "source": "La Cuisine de Géraldine",
-          "url": "https://lacuisinedegeraldine.fr/en/poached-pears-recipe"
-        },
-        {
-          "source": "Wikipédia",
-          "url": "https://fr.wikipedia.org/wiki/Poire_Belle-Hélène"
+          "source": "750g, La célèbre poire Belle Hélène",
+          "url": "https://www.750g.com/la-celebre-poire-belle-helene-r59096.htm"
         }
       ],
-      "curationNote": "Géraldine poaches 4 pears in 1 litre of water with 250 g sugar and lemon for 10 to 25 minutes and serves them with warm chocolate and almonds. Wikipédia sets the classic version: pears poached in vanilla syrup with vanilla ice cream and hot dark chocolate sauce, named by Escoffier after Offenbach's 1864 opera. Ice cream is listed as not in the database; only part of the syrup sugar is eaten, so the totals run high on sugar."
+      "curationNote": "750g, La célèbre poire Belle Hélène for every amount and step; serves 5, scaled to our 4: 5 pears poached halved in 50 cl water with 60 g sugar; homemade vanilla ice cream of 20 cl milk, 6 cl crème fraîche, 40 g sugar, 3 yolks and half a vanilla pod; sauce of 150 g chocolate, 30 g butter and 2 tbsp water melted, then 6 tbsp liquid cream; flaked almonds optional with no amount."
     },
     {
       "builderType": "dessert",
@@ -9410,8 +9207,8 @@
       "components": [
         {
           "recipeId": "curated_fr_base_creme_patissiere",
-          "servings": 8,
-          "note": "about 2 cups, cold, flavoured with rum"
+          "servings": 4,
+          "note": "about 1 cup, cooled, with the ground almonds, butter and rum stirred in"
         }
       ],
       "overallTier": "strong",
@@ -9425,7 +9222,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
-          "quantity": 250,
+          "quantity": 270,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -9434,17 +9231,17 @@
         {
           "category": "NutSeed",
           "baseName": "Nut, almond meal",
-          "quantity": 50,
+          "quantity": 140,
           "unit": "g",
-          "cutPrep": null,
+          "cutPrep": "100 g for the dough, 40 g for the cream",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "PantryStaples",
           "baseName": "Baking powder",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -9452,25 +9249,34 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
+          "quantity": 3.4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 g for the dough, a pinch for the glaze"
         },
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 150,
+          "quantity": 190,
           "unit": "g",
-          "cutPrep": "soft",
+          "cutPrep": "cold, diced",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 150,
+          "quantity": 80,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Brown Sugar (Commercial)",
+          "quantity": 80,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -9479,9 +9285,9 @@
         {
           "category": "Dairy",
           "baseName": "Chicken Egg (Raw)",
-          "quantity": 1,
+          "quantity": 2,
           "unit": "each",
-          "cutPrep": null,
+          "cutPrep": "one for the dough, one beaten to glaze",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -9490,35 +9296,44 @@
           "baseName": "Chicken Egg Yolk (Raw)",
           "quantity": 2,
           "unit": "each",
-          "cutPrep": "one for the dough, one for glazing",
+          "cutPrep": "for the dough",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Fruit",
           "baseName": "Lemon peel",
-          "quantity": 6,
+          "quantity": 1.5,
           "unit": "g",
           "cutPrep": "grated",
           "cookingMethod": null,
-          "prepNote": "zest of 1 lemon"
+          "prepNote": "zest of a quarter of a lemon"
         },
         {
           "category": "Alcohol",
           "baseName": "Rum 37.5/40 % vol",
-          "quantity": 15,
+          "quantity": 25,
           "unit": "ml",
-          "cutPrep": "stirred into the pastry cream",
+          "cutPrep": "about 20 g, stirred into the pastry cream",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": "for the cream",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Beat the butter and sugar until creamy, then beat in the egg, one yolk and the lemon zest. Mix in the flour, ground almonds, baking powder and salt until just combined. Divide into two thirds and one third, wrap, and chill 1 to 2 hours.",
-        "Stir the rum into the cold crème pâtissière.",
-        "Heat the oven to 350°F (180°C). Butter a 22 to 24 cm cake tin. Roll the larger piece of dough 5 mm thick between sheets of paper and line the base and sides of the tin.",
-        "Spread the cream in it, roll the smaller piece into a lid, lay it over and press the edges to seal. Brush with the beaten last yolk and score a crosshatch with a fork.",
-        "Bake 40 to 50 minutes, until deep golden. Cool fully in the tin before slicing."
+        "Rub the cold butter into the flour, both sugars, 100 g ground almonds, the 3 g salt, the baking powder and the lemon zest until sandy. Add the egg and the two yolks and bring together into a dough without kneading. Divide into two thirds and one third, wrap and chill 1 to 2 hours.",
+        "Stir the 40 g ground almonds and 25 g butter into the warm crème pâtissière, let it cool, then stir in the rum.",
+        "Heat the oven to 340°F (170°C) with the fan on. Butter a 24 cm ring or tin. Roll the larger piece of dough 5 mm thick between sheets of paper and line the base and sides.",
+        "Spread the cream in it, roll the smaller piece into a lid, lay it over and press the edges to seal. Beat the second egg with the pinch of salt, brush it over the top and score a crosshatch with a fork.",
+        "Bake 40 to 50 minutes, turning the cake halfway, until deep golden. Cool fully in the tin before slicing."
       ],
       "nutritionHighlights": [
         {
@@ -9532,6 +9347,10 @@
       ],
       "citations": [
         {
+          "source": "Ma Pâtisserie, Gâteau basque traditionnel à la crème",
+          "url": "https://mapatisserie.fr/recette/dessert/recette-gateau-basque/"
+        },
+        {
           "source": "Wikipédia",
           "url": "https://fr.wikipedia.org/wiki/Gâteau_basque"
         },
@@ -9540,7 +9359,7 @@
           "url": "https://en.wikipedia.org/wiki/Gâteau_Basque"
         }
       ],
-      "curationNote": "Wikipédia describes a sablé dough filled with black cherry jam from Itxassou or with an almond or rum crème pâtissière, credited to Marianne Hirigoyen of Cambo. The English article notes the cream version is marked with a crosshatch and the cherry one with the Basque cross. The cream version is written here; dough amounts are standard proportions, as the search budget had run out."
+      "curationNote": "Ma Pâtisserie, Gâteau basque traditionnel à la crème for every amount and step; one 24 cm cake. Dough: 270 g flour, 80 g brown sugar, 80 g caster sugar, 3 g salt, 100 g ground almonds, 3 g baking powder, 190 g butter, 1 egg, 36 g yolks (2), vanilla or a quarter of a lemon's zest. Cream: 240 g milk, 2 yolks, 40 g sugar, 20 g cornflour, 40 g ground almonds, 25 g butter, 20 g rum. Glaze: 1 egg with a pinch of salt. 170°C fan, 40 to 50 minutes. The old dough was written without a recipe."
     },
     {
       "builderType": "dessert",
@@ -9568,7 +9387,7 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 160,
+          "quantity": 100,
           "unit": "ml",
           "cutPrep": "lukewarm",
           "cookingMethod": null,
@@ -9577,7 +9396,7 @@
         {
           "category": "PantryStaples",
           "baseName": "Baker's yeast fresh, pressed",
-          "quantity": 8,
+          "quantity": 10,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -9586,11 +9405,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 4,
+          "quantity": 0.8,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 pinches"
         },
         {
           "category": "Fats",
@@ -9615,8 +9434,8 @@
         "Dissolve the yeast in the water and mix with the flour and salt. Knead 5 to 8 minutes to a smooth dough. Cover and rise 1 hour, until doubled.",
         "Beat the cold salted butter flat between sheets of paper into a 15 cm square. Roll the dough into a 30 cm square, set the butter in the middle and fold the corners over it to enclose it.",
         "Roll into a long rectangle and fold in three. Chill 20 to 30 minutes. Roll and fold again, scattering a third of the sugar over before folding. Repeat twice more, until all the sugar is in, chilling between turns if the butter softens.",
-        "Heat the oven to 325°F (160°C). Roll the dough into a round about 24 cm across, fold the edges in, and press it into a buttered 24 cm tin. Leave it 20 to 30 minutes.",
-        "Bake 50 minutes to 1 hour, until deep amber and caramelized. Turn out onto a rack after 5 minutes, before the caramel sets in the tin. Eat warm or the same day."
+        "Heat the oven to 410°F (210°C). Roll the dough into a round about 24 cm across, fold the edges in, and press it into a buttered 24 cm tart dish. Leave it 30 minutes.",
+        "Bake about 35 minutes, until deep amber and caramelized. Turn out onto a rack after 5 minutes, before the caramel sets in the tin. Eat warm or the same day."
       ],
       "nutritionHighlights": [
         {
@@ -9626,6 +9445,10 @@
       ],
       "citations": [
         {
+          "source": "À vos assiettes, Le kouign amann",
+          "url": "https://avosassiettes.fr/le-kouign-amann/"
+        },
+        {
           "source": "Wikipédia",
           "url": "https://fr.wikipedia.org/wiki/Kouign-amann"
         },
@@ -9634,7 +9457,7 @@
           "url": "https://en.wikipedia.org/wiki/Kouign-amann"
         }
       ],
-      "curationNote": "Wikipédia gives the classic ratio of about 40 percent bread dough, 30 percent salted butter and 30 percent sugar, baked about an hour at 160°C, created by Yves-René Scordia in Douarnenez around 1860; the English article confirms the laminated dough. Weights follow that ratio for one 24 cm cake; method is standard lamination, written from those descriptions because the search budget had run out."
+      "curationNote": "À vos assiettes, Le kouign amann for every amount and step; one cake: 250 g flour, 200 g caster sugar, 10 cl water, 200 g salted butter, 10 g fresh yeast, 2 pinches of salt, baked in a buttered tart dish at 210°C for 35 minutes. The old amounts were written from Wikipédia's ratio without a recipe."
     }
   ]
 }

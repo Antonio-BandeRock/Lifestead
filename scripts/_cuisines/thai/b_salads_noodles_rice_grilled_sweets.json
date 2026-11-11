@@ -71,11 +71,11 @@
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 25,
+          "quantity": 50.4,
           "unit": "g",
           "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": "in place of palm sugar, which the database does not hold"
+          "prepNote": "4 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -89,11 +89,11 @@
         {
           "category": "Meat",
           "baseName": "Crustacean, processed shrimp, boiled and dried shrimp",
-          "quantity": 10,
+          "quantity": 6,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 tsp"
         },
         {
           "category": "NutSeed",
@@ -136,7 +136,7 @@
           "url": "https://en.wikipedia.org/wiki/Green_papaya_salad"
         }
       ],
-      "curationNote": "Rachel Cooks Thai (single serve: 1 garlic, 1 chili, 1/4 cup beans, 5 tomatoes, 1 cup papaya, 2 tbsp each lime and palm sugar, 1 tbsp fish sauce, 1 tsp dried shrimp, 2 tbsp peanuts) doubled, compared with Wikipedia on the Central Thai version being sweeter and carrying peanuts and dried shrimp."
+      "curationNote": "Rachel Cooks Thai, Som Tum Thai (Green Papaya Salad) for every amount and step; single serving, doubled for our 2."
     },
     {
       "id": "curated_th_som_tam_lao",
@@ -211,16 +211,16 @@
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 20,
+          "quantity": 25.2,
           "unit": "g",
           "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": "in place of palm sugar, which the database does not hold"
+          "prepNote": "2 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1,
+          "quantity": 2,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -276,7 +276,7 @@
           "url": "https://en.wikipedia.org/wiki/Green_papaya_salad"
         }
       ],
-      "curationNote": "Import Food 1298 (4 servings: 2 cups papaya, 3 Roma tomatoes, string beans, 5 chiles, 3 garlic, 2 tbsp each palm sugar, fish sauce, lime and pla ra juice) followed, with the salted crab and eggplant Wikipedia names for the Lao and Isan version. Dried shrimp and peanuts left out since this style does not carry them."
+      "curationNote": "Import Food, Som Tum (Somtum Lao sai pla ra) for every amount and step; serves 4, as ours."
     },
     {
       "id": "curated_th_larb_moo",
@@ -315,38 +315,38 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 45,
+          "quantity": 40,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 tbsp at 1.33 times"
         },
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 2,
-          "unit": "tbsp",
+          "quantity": 4,
+          "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tbsp at 1.33 times"
         },
         {
           "category": "Bev",
           "baseName": "Limes, juice, fresh",
-          "quantity": 45,
+          "quantity": 20,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tbsp at 1.33 times"
         },
         {
           "category": "Veg",
           "baseName": "Shallot",
-          "quantity": 40,
+          "quantity": 25,
           "unit": "g",
           "cutPrep": "thinly sliced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 tbsp at 1.33 times"
         },
         {
           "category": "Veg",
@@ -360,20 +360,20 @@
         {
           "category": "Herbs",
           "baseName": "Spices, spearmint, fresh",
-          "quantity": 15,
+          "quantity": 8,
           "unit": "g",
           "cutPrep": "leaves",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/4 cup at 1.33 times"
         },
         {
           "category": "Veg",
           "baseName": "Coriander (cilantro) leaves",
-          "quantity": 10,
+          "quantity": 6,
           "unit": "g",
           "cutPrep": "chopped",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/4 cup at 1.33 times"
         },
         {
           "notInDatabase": true,
@@ -415,7 +415,7 @@
           "url": "https://en.wikipedia.org/wiki/Larb"
         }
       ],
-      "curationNote": "Rachel Cooks Thai larb (1 cup meat, 2 tbsp water, 2 tbsp shallot, 1/4 cup each mint and cilantro, 1 tbsp each fish sauce, lime and toasted rice, 1/2 tsp chili flakes for 2) scaled to 300 g pork, the meat Wikipedia names as the common Isan choice. Khao khua assumed 16 servings of 1 tbsp, prik pon the same."
+      "curationNote": "Rachel Cooks Thai, Larb Gai (Ground Chicken Salad) for every amount and step; serves 2 with 1 cup (about 225 g) meat; ours has 300 g, so amounts are taken at 1.33 times."
     },
     {
       "id": "curated_th_nam_tok_neua",
@@ -605,11 +605,11 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 12,
+          "quantity": 12.6,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tbsp at 12.6 g per tbsp"
         },
         {
           "category": "Veg",
@@ -711,7 +711,7 @@
           "url": "https://en.wikipedia.org/wiki/Thai_salads"
         }
       ],
-      "curationNote": "Hungry in Thailand recipe for 2 followed (2.5 oz glass noodles, 1 cup pork, 2 tbsp fish sauce, 1 tbsp each lime and sugar, 1/4 cup pickled garlic water, 5 chilies, 1 onion, 8 tomatoes, 1/3 cup peanuts). Wikipedia lists yam wunsen with minced pork."
+      "curationNote": "Hungry in Thailand, Yum Woon Sen with Pork for every amount and step; serves 2, as ours."
     },
     {
       "id": "curated_th_yum_neua",
@@ -748,11 +748,11 @@
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 12,
+          "quantity": 12.6,
           "unit": "g",
           "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": "in place of palm sugar, which the database does not hold"
+          "prepNote": "1 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Bev",
@@ -867,7 +867,7 @@
           "url": "https://en.wikipedia.org/wiki/Thai_salads"
         }
       ],
-      "curationNote": "Hungry in Thailand recipe for 2 followed at its amounts (9 oz beef, 1 tbsp sesame oil, 1 tbsp palm sugar, 2 tbsp lime, 1.5 tbsp fish sauce, vegetables as listed). Wikipedia names yam nuea yang as the grilled beef yam."
+      "curationNote": "Hungry in Thailand, Yum Nua (Thai Beef Salad) for every amount and step; serves 2, as ours."
     },
     {
       "id": "curated_th_yum_pla_duk_fu",
@@ -904,11 +904,11 @@
         {
           "category": "Fats",
           "baseName": "Rapsolja",
-          "quantity": 80,
+          "quantity": 30,
           "unit": "ml",
-          "cutPrep": "for frying",
+          "cutPrep": "about 30 ml taken up from 80 ml of frying oil",
           "cookingMethod": "Fried",
-          "prepNote": null
+          "prepNote": "only the oil the catfish and cashews keep is counted"
         },
         {
           "category": "Herbs",
@@ -949,11 +949,11 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 4,
+          "quantity": 4.2,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tsp at 4.2 g per tsp"
         },
         {
           "category": "Veg",
@@ -996,7 +996,7 @@
           "url": "https://en.wikipedia.org/wiki/Thai_salads"
         }
       ],
-      "curationNote": "Thai Table recipe for 2 followed (1/4 cup cashews, 1/2 lb catfish, 2 tbsp fish sauce, 1/3 cup green mango, 1 lime, 2 shallots, 1 tsp sugar, 3 to 5 chilies, 1/3 cup oil). Wikipedia describes the fried flaked catfish with green mango. Catfish is not in the food database, so it is listed by name."
+      "curationNote": "Thai Table, Crispy Catfish Green Mango Salad for every amount and step; serves 2, as ours."
     },
     {
       "id": "curated_th_yum_mamuang",
@@ -1021,11 +1021,11 @@
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 12,
+          "quantity": 12.6,
           "unit": "g",
           "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": "in place of palm sugar, which the database does not hold"
+          "prepNote": "1 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -1107,7 +1107,7 @@
           "url": "https://en.wikipedia.org/wiki/Thai_salads"
         }
       ],
-      "curationNote": "Hungry in Thailand recipe for 2 followed at its amounts (1 tbsp each palm sugar, fish sauce and lime, 2 tsp chili flakes, 7 oz green mango, 1/3 cup shallot, 2 tbsp each peanuts and dried shrimp). Wikipedia Thai salads used for context on yam style."
+      "curationNote": "Hungry in Thailand, Thai Mango Salad (Yum Mamuang) for every amount and step; serves 2, as ours."
     },
     {
       "id": "curated_th_yum_talay",
@@ -1216,11 +1216,11 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 12,
+          "quantity": 12.6,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tbsp at 12.6 g per tbsp"
         }
       ],
       "instructions": [
@@ -1253,7 +1253,7 @@
           "url": "https://en.wikipedia.org/wiki/Thai_salads"
         }
       ],
-      "curationNote": "Hungry in Thailand recipe for 2 followed (1 lb mixed seafood, 1/2 cup each tomato, onion and celery, 4 chilies, 3 garlic, 2 tbsp fish sauce, 3 tbsp lime, 1 tbsp sugar), leaving out the optional pork. Wikipedia names yam tale with celery."
+      "curationNote": "Hungry in Thailand, Yum Talay (Thai Seafood Salad) for every amount and step; serves 2, as ours."
     },
     {
       "id": "curated_th_plaa_goong",
@@ -1350,11 +1350,11 @@
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 12,
+          "quantity": 12.6,
           "unit": "g",
           "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": "in place of palm sugar, which the database does not hold"
+          "prepNote": "1 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -1401,7 +1401,7 @@
           "url": "https://en.wikipedia.org/wiki/Thai_salads"
         }
       ],
-      "curationNote": "Rachel Cooks Thai recipe followed (3/4 lb shrimp, 3 cups lettuce, 1/4 cup each mint, cilantro and shallot, 1/8 cup lemongrass, 4 makrut leaves; dressing 2 tbsp nam prik pao, 1 tbsp palm sugar, 2 tbsp each fish sauce and lime). Wikipedia confirms phla kung with lemongrass, mint and nam phrik phao. Nam prik pao assumed 16 servings of 1 tbsp."
+      "curationNote": "Rachel Cooks Thai, Pla Goong (Spicy Grilled Shrimp Salad) for every amount and step; 3/4 lb shrimp, as ours."
     },
     {
       "id": "curated_th_yum_som_o",
@@ -1499,11 +1499,11 @@
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 12,
+          "quantity": 12.6,
           "unit": "g",
           "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": "in place of palm sugar, which the database does not hold"
+          "prepNote": "1 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Bev",
@@ -1542,7 +1542,7 @@
           "url": "https://en.wikipedia.org/wiki/Thai_salads"
         }
       ],
-      "curationNote": "Rachel Cooks Thai recipe followed (3 cups pomelo, 6 shrimp, 2 tbsp coconut flakes, 2 tbsp peanuts, 1 tbsp each fried shallot and garlic; dressing 2 tbsp coconut milk, 1 tbsp nam prik pao, 1 tbsp fish sauce, 1 tbsp palm sugar, 2 tbsp lime). Wikipedia confirms yam som o with palm sugar and coconut milk. Kati read as 4 servings of 1/2 cup from the bases file, hom jiew and nam prik pao 16 of 1 tbsp."
+      "curationNote": "Rachel Cooks Thai, Yum Som-O (Pomelo Salad) for every amount and step; followed."
     },
     {
       "id": "curated_th_pad_thai",
@@ -1578,11 +1578,11 @@
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 100,
+          "quantity": 100.8,
           "unit": "g",
           "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": "in place of palm sugar, which the database does not hold"
+          "prepNote": "1/2 cup at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -1742,7 +1742,7 @@
           "url": "https://en.wikipedia.org/wiki/Pad_thai"
         }
       ],
-      "curationNote": "Hungry in Thailand (serves 2: 1/2 cup palm sugar, 2 tbsp fish sauce, 3 tbsp tamarind, 1/4 cup water; 5 tbsp oil, 1 cup chicken, 1/4 cup shallot, 2 garlic, 1/4 cup tofu, 1 tbsp dried shrimp, 1/4 cup preserved radish, 5 oz dry noodles, 1 egg, 3 chive stalks, 1 cup sprouts) followed, compared with Wikipedia on tamarind as the base and the dried shrimp, tofu, radish and chives. Tamarind points at the tamarind water base, assumed 16 servings of 1 tbsp."
+      "curationNote": "Hungry in Thailand, Chicken Pad Thai for every amount and step; serves 2, as ours."
     },
     {
       "id": "curated_th_pad_see_ew",
@@ -1834,11 +1834,11 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 8,
+          "quantity": 8.4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 tsp at 4.2 g per tsp"
         },
         {
           "category": "Veg",
@@ -1857,15 +1857,6 @@
           "cutPrep": null,
           "cookingMethod": "Fried",
           "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, pepper, white, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
         }
       ],
       "instructions": [
@@ -1873,7 +1864,7 @@
         "Heat the oil in a wok over high heat, fry the garlic for 10 to 15 seconds, then add the chicken and fry until nearly cooked, 1 to 2 minutes.",
         "Add the Chinese broccoli stems and fry for 30 seconds, then the noodles and the sauce, and spread them out so they sear against the wok, tossing only every 20 to 30 seconds, 2 to 3 minutes in all.",
         "Push the noodles aside, scramble the egg in the gap until just set, about 1 minute, then add the leaves and toss until they wilt, 30 seconds to 1 minute.",
-        "Finish with white pepper and serve with chili vinegar and sugar on the table."
+        "Serve with chili vinegar on the table."
       ],
       "nutritionHighlights": [
         {
@@ -1899,7 +1890,7 @@
           "url": "https://en.wikipedia.org/wiki/Pad_see_ew"
         }
       ],
-      "curationNote": "Rachel Cooks Thai (serves 2: 8 oz fresh wide noodles, 1/2 cup chicken, 2 garlic, 2 cups Chinese broccoli, 1 egg, 2 tbsp sweet dark soy, 2 tbsp oyster, 2 tsp thin soy, 2 tsp vinegar, 2 tsp sugar) followed, compared with Wikipedia on gai lan, egg, both soy sauces and the white pepper finish."
+      "curationNote": "Rachel Cooks Thai, Pad See Ew for every amount and step; serves 2, as ours."
     },
     {
       "id": "curated_th_rad_na",
@@ -1943,11 +1934,11 @@
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 8,
+          "quantity": 6.3,
           "unit": "g",
           "cutPrep": "for the marinade",
           "cookingMethod": null,
-          "prepNote": "in place of palm sugar, which the database does not hold"
+          "prepNote": "1/2 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -1988,7 +1979,7 @@
         {
           "category": "Fats",
           "baseName": "Rapsolja",
-          "quantity": 30,
+          "quantity": 15,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2089,7 +2080,7 @@
           "url": "https://tasteasianfood.com/rad-na/"
         }
       ],
-      "curationNote": "Hungry in Thailand (serves 4: 300 g pork, 600 g noodles, 1 L water, 200 g Chinese broccoli, 1 tbsp soybean paste, 1.5 tbsp light soy, 1 tsp white pepper, 3 tbsp tapioca in 100 ml water) followed. Taste Asian Food uses stock in place of water, so the liquid points at the Thai chicken stock base, assumed 8 servings of 1 cup (4 servings for about 1 litre)."
+      "curationNote": "Hungry in Thailand, Lad Na for every amount and step; serves 4, as ours."
     },
     {
       "id": "curated_th_pad_kee_mao",
@@ -2189,15 +2180,6 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Pepper, black, ground",
-          "quantity": 1.8,
-          "unit": "g",
-          "cutPrep": "strands",
-          "cookingMethod": null,
-          "prepNote": "2 each at 3 g per each; in place of fresh green peppercorns, which the database does not hold; fresh green peppercorns counted as 0.3 of their weight in ground black pepper"
-        },
-        {
-          "category": "Herbs",
           "baseName": "Fresh Basil",
           "quantity": 30,
           "unit": "g",
@@ -2235,11 +2217,11 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 8,
+          "quantity": 8.4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 tsp at 4.2 g per tsp"
         },
         {
           "category": "Herbs",
@@ -2249,6 +2231,15 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "notInDatabase": true,
+          "name": "fresh green peppercorns",
+          "contains": "none",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "strands",
+          "prepNote": "2 strands at about 3 g each; neither database holds fresh green peppercorns"
         }
       ],
       "instructions": [
@@ -2282,7 +2273,7 @@
           "url": "https://en.wikipedia.org/wiki/Drunken_noodles"
         }
       ],
-      "curationNote": "Rachel Cooks Thai (serves 2: 2 tbsp oil, 8 oz wide noodles, 3 garlic, 3 chilies, 1/2 cup chicken, 1/4 cup each baby corn, carrot and long beans, 1 red jalapeno, 2 strands green peppercorn, 1 cup holy basil; 2 tbsp each dark soy and oyster, 2 tsp each thin soy, sugar and vinegar) followed, compared with Wikipedia on holy basil and fresh peppercorn pods."
+      "curationNote": "Rachel Cooks Thai, Drunken Noodles (Pad Kee Mao) for every amount and step; serves 2, as ours."
     },
     {
       "id": "curated_th_khao_soi_gai",
@@ -2335,11 +2326,11 @@
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 15,
+          "quantity": 12.6,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "in place of palm sugar, which the database does not hold"
+          "prepNote": "1 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Legume",
@@ -2454,7 +2445,7 @@
           "url": "https://importfood.com/recipes/recipe/176-chiang-mai-curry-noodles-khao-soi"
         }
       ],
-      "curationNote": "Rachel Cooks Thai (serves 4: 4 drumsticks, 2.5 cups coconut milk, 2 cups chicken broth, 2 cups water, 1 tbsp palm sugar, 1 tbsp each thin and dark soy, 16 oz fresh egg noodles with 4 oz fried) followed, compared with Import Food on the Chiang Mai garnishes. Paste assumed 16 servings of 1 tbsp (4 used), coconut milk read as 4 servings of 1/2 cup and stock 8 servings of 1 cup from the bases file. Rachel adds a chili oil; it is left as an optional table condiment and not counted."
+      "curationNote": "Rachel Cooks Thai, Khao Soi (Northern Thai Curry Noodles) for every amount and step; serves 4, as ours."
     },
     {
       "id": "curated_th_kuay_teow_reua",
@@ -2754,11 +2745,11 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 12,
+          "quantity": 12.6,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tbsp at 12.6 g per tbsp"
         },
         {
           "category": "PastaNoodles",
@@ -2855,7 +2846,7 @@
           "url": "https://thewoksoflife.com/tom-yum-noodle-soup-kuay-teow-tom-yum/"
         }
       ],
-      "curationNote": "Hungry in Thailand (serves 4: 3 1/3 cups broth, 7 oz ground pork, 3 tbsp lime, 2 tbsp fish sauce, 1 tbsp sugar, 9 oz noodles, 4 tbsp garlic oil, 6 tbsp peanuts) followed, compared with The Woks of Life on seasoning each bowl rather than the pot. Broth points at the chicken stock base, assumed 8 servings of 1 cup."
+      "curationNote": "Hungry in Thailand, Tom Yum Noodle Soup for every amount and step; serves 4, as ours."
     },
     {
       "id": "curated_th_kanom_jeen_nam_ya",
@@ -3602,11 +3593,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tbsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "the share taken up by the rice, sauce and soup; the poaching water holds 1 tbsp (18 g) and about a third of it is used"
         },
         {
           "category": "Veg",
@@ -3620,11 +3611,11 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 2800,
+          "quantity": 1200,
           "unit": "ml",
-          "cutPrep": "12 cups for poaching, 1 cup for the soup",
+          "cutPrep": "12 cups for poaching, of which about 4 cups go into the rice, sauce and soup, plus 1 cup for the soup",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "only the water eaten is counted"
         },
         {
           "category": "Fats",
@@ -3793,7 +3784,7 @@
           "url": "https://en.wikipedia.org/wiki/Khao_man_kai"
         }
       ],
-      "curationNote": "Rachel Cooks Thai (serves 6: 3 lb chicken, 1 tbsp salt, cilantro roots, 12 cups water; 2 cups jasmine rice, 3 cups broth, ginger, 2 tbsp garlic fried in 1/4 cup oil; 1/4 cup soybean paste, 2 tbsp palm sugar, 3 tbsp dark soy, 2 tbsp thin soy, 2 tbsp vinegar, 4 chilies, 3 tbsp ginger, 1 tbsp garlic; a winter gourd or daikon soup) followed, compared with Wikipedia on the Hainanese origin, the tauchu, thick soy, ginger and vinegar sauce, and the clear daikon broth. The chicken poaching makes the broth, so no stock base is listed. The soybean paste is marked gluten because many Thai brands add wheat."
+      "curationNote": "Rachel Cooks Thai, Thai Style Chicken and Rice (Khao Man Gai) for every amount and step; serves 6, as ours."
     },
     {
       "id": "curated_th_khao_moo_daeng",
@@ -4214,11 +4205,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 2,
-          "unit": "tsp",
+          "quantity": 12,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 tsp"
         },
         {
           "category": "Bev",
@@ -4268,11 +4259,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": "for the chili vinegar",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tsp"
         },
         {
           "category": "Herbs",
@@ -4319,7 +4310,7 @@
           "url": "https://en.wikipedia.org/wiki/Khao_kha_mu"
         }
       ],
-      "curationNote": "Hungry in Thailand (serves 5: 2.2 lb pork leg, 3 coriander roots, 3 garlic, 1 tsp peppercorns, 2 tbsp oil, 4 shiitake, 3 star anise, 2 cinnamon sticks, 4 tbsp palm sugar, 2 tbsp five spice, 5 tbsp light soy, 2 tbsp dark soy, 2 tsp salt, 6 1/4 cups water, about 3 hours) followed, compared with Import Food (2 lb shank, 5 eggs, pickled mustard greens, a chili vinegar of 2 to 3 chilies, 1 tsp salt and 1/2 cup vinegar) and Wikipedia on the Teochew roots and the gai lan and chili vinegar on the side. Water held at 1.5 litres for a smaller pot. Rice is 5 servings of 1 cup from the bases file."
+      "curationNote": "Hungry in Thailand, Khao Kha Moo for every amount and step; serves 5, as ours; chili vinegar from Import Food."
     },
     {
       "id": "curated_th_khao_pad_sapparot",
@@ -4623,11 +4614,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1.5,
-          "unit": "tsp",
+          "quantity": 9,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 1/2 tsp"
         },
         {
           "category": "Herbs",
@@ -4751,7 +4742,7 @@
           "url": "https://nomadette.com/khao-mok-gai/"
         }
       ],
-      "curationNote": "Thai Muslim dish of the South. Grantourismo (serves 2: coriander, ginger, turmeric, cumin, 2 tbsp curry powder, bay leaves, 4 thighs; a rice of 3 cups jasmine rice with turmeric, cinnamon, 6 cloves, 6 cardamom and bay; cucumber pickle and fried shallots) compared with Nomadette (300 g thighs in 1/4 cup yogurt with turmeric, cumin, coriander, cinnamon, garlic, ginger and fish sauce; rice cooked in broth and rested 10 minutes). The one-pot method from Nomadette is kept, scaled to 4. Ghee or oil was offered, and oil is used. Ajad is 4 servings of 2 tbsp, hom jiew 4 servings of 1 tbsp and stock 3 servings of 1 cup from the bases file."
+      "curationNote": "Nomadette, Khao Mok Gai for every amount and step; method and marinade, scaled to 4; rice spices from Grantourismo."
     },
     {
       "id": "curated_th_jok",
@@ -5225,11 +5216,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tsp"
         },
         {
           "category": "Herbs",
@@ -5299,7 +5290,7 @@
           "url": "https://en.wikipedia.org/wiki/Kai_yang"
         }
       ],
-      "curationNote": "Rachel Cooks Thai (serves 6: 1 head garlic, 1 tsp salt, 1.5 tsp white pepper, 3 tbsp honey, a 5 lb chicken, at least 2 hours, 350°F for 1 hour then 20 minutes on the second side and 8 minutes under the broiler; som tam, sticky rice and nam jim jaew) followed, with the fish sauce, turmeric and coriander root that Wikipedia names for the Isan marinade and its slow charcoal grilling. Sticky rice is 4 servings of 1 cup and jaew 6 servings of 1 tbsp from the bases file."
+      "curationNote": "Rachel Cooks Thai, Thai Grilled Chicken for every amount and step; serves 6, as ours; fish sauce, turmeric and coriander root from Wikipedia's account of the Isan marinade."
     },
     {
       "id": "curated_th_moo_ping",
@@ -5393,20 +5384,20 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 4,
+          "quantity": 4.2,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tsp at 4.2 g per tsp"
         },
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 20,
+          "quantity": 18.9,
           "unit": "g",
           "cutPrep": "about 1.5 tbsp, shaved",
           "cookingMethod": null,
-          "prepNote": "in place of palm sugar, which the database does not hold"
+          "prepNote": "1.5 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Dairy",
@@ -5467,7 +5458,7 @@
           "url": "https://en.wikipedia.org/wiki/Mu_ping"
         }
       ],
-      "curationNote": "Rachel Cooks Thai (serves 4: 680 g tenderloin, 10 garlic, 1.5 tsp white pepper, 2 cilantro roots, 2 tbsp thin soy, 2 tbsp oyster, 1/2 tbsp dark soy, 1 tsp sugar, 1.5 tbsp palm sugar, 1 cup milk, oil to brush and coconut milk to baste, about 5 minutes a side) followed, compared with Wikipedia on the coriander root, garlic and palm sugar marinade, the milk or soy base and sticky rice with jaew. The database has no raw tenderloin, so the raw loin row stands for it (tenderloin is a loin cut). Sticky rice 4 servings of 1 cup and jaew 4 servings of 1 tbsp from the bases file."
+      "curationNote": "Rachel Cooks Thai, Thai Grilled Pork Skewers for every amount and step; serves 4, as ours."
     },
     {
       "id": "curated_th_satay_gai",
@@ -5479,7 +5470,7 @@
       "servings": 4,
       "servingSizeAmount": 1,
       "servingSizeUnit": "serving",
-      "flavorProfile": "Golden, turmeric-yellow chicken on skewers, fragrant with curry powder and coconut milk and lightly charred, dipped in a sweet, rich peanut sauce with a sharp cucumber relish beside it.",
+      "flavorProfile": "Golden chicken on skewers, fragrant with curry powder and coconut milk and lightly charred, dipped in a sweet, rich peanut sauce with a sharp cucumber relish beside it.",
       "healthBenefit": "Chicken breast is lean protein, and the peanut sauce and coconut milk add fat, so the cucumber relish brings welcome freshness to a rich plate.",
       "overallTier": "strong",
       "components": [
@@ -5512,17 +5503,8 @@
         {
           "category": "NutSeed",
           "baseName": "Coconut milk",
-          "quantity": 180,
+          "quantity": 120,
           "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Turmeric, dried, ground",
-          "quantity": 1,
-          "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -5530,35 +5512,26 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 8,
+          "quantity": 4.2,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tsp at 4.2 g per tsp"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Legume",
-          "baseName": "Soy sauce made from soy and wheat (shoyu)",
-          "quantity": 1.5,
-          "unit": "tbsp",
-          "cutPrep": "Thai thin soy sauce",
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/2 tsp"
         }
       ],
       "instructions": [
-        "Mix 120 ml of the coconut milk with the curry powder, turmeric, sugar, salt and thin soy, add the chicken and marinate it in the fridge for at least 1 hour.",
+        "Mix the coconut milk with the curry powder, sugar and salt, add the chicken and marinate it in the fridge for at least 1 hour.",
         "Thread the chicken onto soaked bamboo skewers.",
-        "Grill over low to medium charcoal, basting with the last 60 ml of coconut milk, until browned and cooked through, 5 to 6 minutes a side.",
+        "Grill over medium heat until browned and cooked through, 5 to 6 minutes a side.",
         "Serve hot with the peanut sauce and the cucumber relish."
       ],
       "nutritionHighlights": [
@@ -5585,7 +5558,7 @@
           "url": "https://importfood.com/recipes/recipe/121-chicken-satay-satay-gai"
         }
       ],
-      "curationNote": "Rachel Cooks Thai (serves 4: 2 lb chicken, 1/2 cup coconut milk, 1 tbsp curry powder, 1 tsp sugar, 1/2 tsp salt, 5 to 6 minutes a side, peanut sauce and ajad) compared with Import Food (serves 4: 1 lb breast, 1 cup coconut milk, 1 tsp turmeric, 1 tbsp sugar, 1.5 tbsp thin soy, 1 hour, grilled low and basted). Rachel quantities kept with Import Food turmeric, soy and basting. Nam jim satay 8 servings of 1 tbsp and ajad 4 servings of 2 tbsp from the bases file."
+      "curationNote": "Rachel Cooks Thai, Easy Chicken Satay for every amount and step; serves 4 with 2 lb chicken, as ours."
     },
     {
       "id": "curated_th_kor_moo_yang",
@@ -5816,31 +5789,22 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 4,
+          "quantity": 4.2,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tsp at 4.2 g per tsp"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/2 tsp"
         },
         {
           "notInDatabase": true,
@@ -5881,7 +5845,7 @@
       ],
       "instructions": [
         "Pound or process the fish to a smooth, sticky paste, 3 to 5 minutes, then work in the curry paste.",
-        "Add the egg, tapioca starch, fish sauce, sugar and salt and keep pounding or stirring until the mixture is springy, then fold in the makrut leaves and long beans.",
+        "Add the egg, tapioca starch, sugar and salt and keep pounding or stirring until the mixture is springy, then fold in the makrut leaves and long beans.",
         "Chill the mixture for at least 30 minutes, up to overnight, so it firms up.",
         "With wet hands, shape it into small flat patties about 5 cm across.",
         "Shallow fry in batches over medium heat, turning once, until puffed and golden, 3 to 4 minutes a batch, and drain.",
@@ -5898,7 +5862,7 @@
         },
         {
           "nutrient": "Sodium",
-          "note": "From the curry paste and fish sauce."
+          "note": "From the curry paste and salt."
         }
       ],
       "citations": [
@@ -5911,7 +5875,7 @@
           "url": "https://hungryinthailand.com/tod-mun-pla/"
         }
       ],
-      "curationNote": "Import Food (serves 4: 450 g white fish, 1 egg plus 1 white, 3/4 cup long beans, 6 makrut leaves, 1 tsp sugar, 1/2 tsp salt, 1.5 tbsp red curry paste, fried over medium heat, ajad with peanuts) compared with Hungry in Thailand (1 lb fish, 2 tbsp curry paste, 5 makrut leaves, 2 tbsp tapioca starch, 1 tbsp fish sauce, 1 egg, 1/2 tbsp sugar, 2 long beans, chilled at least 1 hour). Import Food kept, with the tapioca starch, fish sauce and chilling from Hungry in Thailand. Tilapia (pla nil) is used for the white fish. Only the oil the cakes take up is counted. Red curry paste 2 servings of 1 tbsp and ajad 4 servings of 2 tbsp from the bases file."
+      "curationNote": "Import Food, Spicy Thai Fish Cakes (Tod Man Pla) for every amount and step; serves 4 with 450 g fish, as ours."
     },
     {
       "id": "curated_th_seua_rong_hai",
@@ -6091,11 +6055,11 @@
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 30,
+          "quantity": 25.2,
           "unit": "g",
           "cutPrep": "about 2 tbsp",
           "cookingMethod": null,
-          "prepNote": "in place of palm sugar, which the database does not hold"
+          "prepNote": "2 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
@@ -6157,7 +6121,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/main-dishes/fried-fish-with-sweet-chili-and-garlic-sauce/"
         }
       ],
-      "curationNote": "Import Food (serves 4: 1 lb tilapia, 2 tbsp garlic, 7 red chilies, 2 tbsp palm sugar, 2 tbsp fish sauce, 1 tbsp tamarind with 1 tbsp water, 1/4 cup water, fried about 8 minutes a side then 350°F for 10 minutes) compared with Thai Cookbook TV (1 large whole tilapia dusted in 2 tbsp flour, fried at 140°C, a sauce of garlic, chilies, 2 tbsp coconut sugar and 2 tbsp fish sauce cooked until sticky). Import Food sauce kept with the flour dusting from Thai Cookbook TV. Only the oil the fish takes up is counted. Nam makham 2 servings of 1 tbsp and rice 4 servings of 1 cup from the bases file."
+      "curationNote": "Import Food, Thai Crispy Fish Topped with Chili Sauce (Pla Rad Prik) for every amount and step; serves 4, as ours."
     },
     {
       "id": "curated_th_kai_jeow",
@@ -6341,7 +6305,7 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Basil",
+          "baseName": "Fresh Basil",
           "quantity": 15,
           "unit": "g",
           "cutPrep": "leaves",
@@ -6398,7 +6362,7 @@
           "url": "https://hungryinthailand.com/pla-pao/"
         }
       ],
-      "curationNote": "Rachel Cooks Thai (serves 6: 2 lb whole snapper or tilapia, 2 lemongrass, 4 makrut leaves, 1/2 cup coarse salt, grilled low to medium about 30 minutes; butter lettuce, 6 oz khanom jeen or somen, basil, mint, cilantro) followed, compared with Hungry in Thailand (2.2 lb tilapia, 3 lemongrass, 6 makrut leaves, 1/2 cup salt with 1/3 cup flour, rested 15 minutes, about 25 minutes to 145°F, seafood sauce). The crust salt is written as not in the database so it stays out of the nutrient count, since it is peeled away. Somen stands in for khanom jeen as Rachel allows. Nam jim seafood 6 servings of 1 tbsp from the bases file."
+      "curationNote": "Rachel Cooks Thai, Salt Crusted Grilled Fish for every amount and step; serves 6, as ours."
     },
     {
       "id": "curated_th_gai_tod_hat_yai",
@@ -6443,16 +6407,16 @@
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 40,
+          "quantity": 27,
           "unit": "g",
           "cutPrep": "one head, peeled",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "two thirds of a head"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, coriander seed",
-          "quantity": 2,
+          "quantity": 1.33,
           "unit": "tsp",
           "cutPrep": "whole",
           "cookingMethod": null,
@@ -6470,7 +6434,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, pepper, white, ground",
-          "quantity": 0.5,
+          "quantity": 0.33,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -6488,20 +6452,20 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 12,
+          "quantity": 8.4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 tsp at 4.2 g per tsp"
         },
         {
           "category": "PantryStaples",
           "baseName": "Rice flour",
-          "quantity": 60,
+          "quantity": 53,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/3 cup"
         },
         {
           "category": "Fats",
@@ -6545,7 +6509,7 @@
           "url": "https://www.thaicookbook.tv/thai-recipes/main-dishes/hat-yai-fried-chicken/"
         }
       ],
-      "curationNote": "Import Food (serves 4: 15 wings, 1 head garlic, 2 tsp coriander seed, 1/2 tsp white pepper, 6 tbsp fish sauce, 3 tsp sugar, 1/2 cup rice flour, at least 2 hours, fried 12 to 15 minutes on medium low then 2 to 3 minutes on high, sweet chili sauce) followed and scaled to 900 g of wings, compared with Thai Cookbook TV (1.5 to 2 lb wings, garlic, coriander root, peppercorns, soy sauces, 1 cup rice flour batter, fried at 175°C for 7 to 8 minutes, crisp fried shallots and sticky rice). Coriander root, fried shallots and sticky rice from Thai Cookbook TV. Only the oil the wings take up is counted. Hom jiew 4 servings of 1 tbsp, sticky rice 4 servings of 1 cup and nam jim kai 4 servings of 1 tbsp from the bases file."
+      "curationNote": "Import Food, Thai Chicken Fried Hat Yai Style for every amount and step; 15 wings for 4; ours uses 10 wings, so every amount is two thirds of the source."
     },
     {
       "id": "curated_th_goong_ob_woon_sen",
@@ -6790,15 +6754,6 @@
           "prepNote": null
         },
         {
-          "category": "Veg",
-          "baseName": "Coriander (cilantro) leaves",
-          "quantity": 9,
-          "unit": "g",
-          "cutPrep": "scraped and pounded",
-          "cookingMethod": null,
-          "prepNote": "3 each at 3 g per each; in place of cilantro roots, which the database does not hold; leaves count for the root"
-        },
-        {
           "category": "Herbs",
           "baseName": "Spices, coriander seed",
           "quantity": 1,
@@ -6809,21 +6764,12 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Pepper, black, ground",
+          "baseName": "Spices, pepper, white, ground",
           "quantity": 1,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": "ground dried chili",
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "Thai pepper powder is ground white pepper"
         },
         {
           "category": "PantryStaples",
@@ -6855,11 +6801,11 @@
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 4,
+          "quantity": 4.2,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tsp at 4.2 g per tsp"
         },
         {
           "category": "Fats",
@@ -6899,11 +6845,10 @@
         }
       ],
       "instructions": [
-        "Pound the half head of garlic with the cilantro roots, ground coriander, black pepper and chili to a paste, 2 to 3 minutes.",
-        "Mix the paste into the pork with the cornstarch, fish sauce, thin soy, sugar and sesame oil and marinate it in the fridge for at least 30 minutes.",
-        "Heat just enough oil to fry the pork in a wok over medium low heat and fry it in batches, turning once, until golden on both sides and cooked through, 3 to 5 minutes a batch.",
-        "Lift out the pork, scoop out any dark bits of garlic, then fry the chopped garlic in the same oil until light golden, 1 to 2 minutes, and drain it at once.",
-        "Pile the fried garlic over the pork and serve with jasmine rice, cucumber and cilantro."
+        "Pound the half head of garlic to a paste and mix it with the coriander powder, pepper, cornstarch, fish sauce, soy sauce, sugar and sesame oil. Coat the pounded pork and leave it 30 minutes.",
+        "Heat the frying oil over medium low heat and fry the pork until golden and cooked through, then lift it out to drain.",
+        "Fry the chopped garlic in the same oil until golden and crisp and lift it out.",
+        "Slice the pork, scatter the fried garlic and cilantro over it and serve with the rice and cucumber."
       ],
       "nutritionHighlights": [
         {
@@ -6929,7 +6874,7 @@
           "url": "https://hungryinthailand.com/garlic-pepper-pork/"
         }
       ],
-      "curationNote": "Import Food (serves 4: 1 lb lean pork pounded thin, 1 tsp coriander powder, half a head of garlic pounded and half chopped, 1 tsp Thai pepper powder, 2 tsp cornstarch, 2 tsp fish sauce, 1 tbsp thin soy, 1 tsp sugar, 1 tsp sesame oil, 30 minutes, fried over medium low heat, then the chopped garlic fried in the same oil) followed, with the coriander root and black pepper from Hungry in Thailand (3 garlic, 3 coriander roots, black pepper, oyster and soy sauces, stir-fried and topped with fried garlic over rice). Thai pepper powder read as ground dried chili. Only the oil the pork takes up is counted. Rice 4 servings of 1 cup from the bases file."
+      "curationNote": "Import Food, Thai Crispy Fried Pork with Garlic (Moo Tod Gratiem) for every amount and step; serves 4 with 1 lb pork, as ours."
     },
     {
       "id": "curated_th_kai_look_keuy",
@@ -6978,25 +6923,25 @@
         {
           "category": "Veg",
           "baseName": "Pepper, hot chili, red, sun-dried",
-          "quantity": 3,
+          "quantity": 4.5,
           "unit": "g",
           "cutPrep": "dried red chilies, fried until crisp",
           "cookingMethod": null,
-          "prepNote": "6 dried chilies"
+          "prepNote": "9 dried chilies"
         },
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 40,
+          "quantity": 66,
           "unit": "g",
-          "cutPrep": "about 3 tbsp",
+          "cutPrep": "shaved",
           "cookingMethod": null,
-          "prepNote": "in place of palm sugar, which the database does not hold"
+          "prepNote": "5 1/4 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
           "baseName": "Seasoning sauce, Nam pla (fish sauce)",
-          "quantity": 2,
+          "quantity": 3,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7005,7 +6950,7 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 45,
+          "quantity": 67,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -7052,7 +6997,7 @@
           "url": "https://grantourismotravels.com/thai-son-in-law-eggs-recipe/"
         }
       ],
-      "curationNote": "Hungry in Thailand (serves 2: 4 eggs, 1/3 cup shallots, 6 dried chilies, 3 tbsp water, 4 tbsp tamarind paste, 2 tbsp fish sauce, 3.5 tbsp palm sugar, coriander, boiled then fried golden, sauce over low to medium heat) compared with Grantourismo (serves 2: 6 eggs soft boiled 6 minutes, fried in 1 cup oil at 190°C, 2 tbsp tamarind, 2 tbsp palm sugar, 1 tbsp fish sauce, fried shallots, garlic and chilies). Six eggs with the Hungry in Thailand sauce, served as 3. Only the oil taken up is counted. Nam makham 4 servings of 1 tbsp and hom jiew 3 servings of 1 tbsp from the bases file."
+      "curationNote": "Hungry in Thailand, Thai Son-in-Law Eggs for every amount and step; 4 eggs for 2; ours uses 6 eggs for 3, so every amount is 1 1/2 times the source."
     },
     {
       "id": "curated_th_khao_niao_mamuang",
@@ -7098,11 +7043,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 1.5,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/4 tsp"
         },
         {
           "category": "NutSeed",
@@ -7125,11 +7070,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.125,
-          "unit": "tsp",
+          "quantity": 0.75,
+          "unit": "g",
           "cutPrep": "for the sauce",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/8 tsp"
         },
         {
           "category": "PantryStaples",
@@ -7190,7 +7135,7 @@
           "url": "https://en.wikipedia.org/wiki/Mango_sticky_rice"
         }
       ],
-      "curationNote": "Rachel Cooks Thai (serves 4: 1/2 cup sticky rice soaked at least 4 hours and steamed about 40 minutes, 1/2 cup coconut milk with 3 tbsp sugar and 1/4 tsp salt, rested 20 minutes; sauce of 1/4 cup coconut milk, 1.5 tbsp sugar, 1/8 tsp salt and 1/4 tsp rice flour; 2 mangoes and 1 tbsp crisp mung beans) followed. Wikipedia notes palm sugar as an alternative and warming the coconut milk without boiling. The rice is written raw here rather than from the sticky rice base, because it is soaked in coconut milk straight from the steamer."
+      "curationNote": "Rachel Cooks Thai, Mango Sticky Rice for every amount and step; serves 4, as ours."
     },
     {
       "id": "curated_th_khanom_krok",
@@ -7251,11 +7196,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/2 tsp"
         },
         {
           "category": "NutSeed",
@@ -7278,11 +7223,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 9,
+          "unit": "g",
           "cutPrep": "for the topping",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 1/2 tsp"
         },
         {
           "category": "Veg",
@@ -7335,7 +7280,7 @@
           "url": "https://hungryinthailand.com/recipe/kanom-krok-recipe"
         }
       ],
-      "curationNote": "Import Food (serves 4: 1 cup rice flour soaked in 1 cup water at least 1 hour, 1/3 cup cooked jasmine rice, 1/2 cup grated dried coconut, 1/2 tsp salt and 1 cup water blended in; 1 cup coconut cream, 1/2 cup sugar, 1.5 tsp salt and a green onion on top; pan filled two thirds plus 2 tsp topping, covered 8 to 10 minutes over medium heat) followed. The topping salt is cut to 1 tsp, as in the Hungry in Thailand filling (1 2/3 cups coconut milk with 1 tsp salt). The cooked rice is 0.33 of a 1 cup serving from the rice base."
+      "curationNote": "Import Food, Thai Coconut Pudding (Khanom Krok) for every amount and step; serves 4, as ours."
     },
     {
       "id": "curated_th_tub_tim_grob",
@@ -7564,8 +7509,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -7611,7 +7556,7 @@
           "url": "https://en.wikibooks.org/wiki/Cookbook:Thai_Rice_Balls_in_Coconut_Milk_(Bua_Loi)"
         }
       ],
-      "curationNote": "Hungry in Thailand (serves 6: three doughs of just over 1/4 cup glutinous rice flour, 1 tbsp tapioca flour, 3 oz taro, sweet potato or pandan juice and 3 tbsp water; simmered 2 to 3 minutes after floating; just over 2 cups coconut milk, 1/2 cup sugar, just under 1 cup water, 1 tsp salt, 2 pandan leaves) followed. Wikibooks confirms the coconut cream, sugar, salt and pandan and adds poached eggs, the bua loy khai wan version, which is left out here as Hungry in Thailand marks it optional. The pandan dough takes its green from leaves blended with its water."
+      "curationNote": "Hungry in Thailand, Bua Loy Dessert for every amount and step; serves 6, as ours."
     },
     {
       "id": "curated_th_kluay_buat_chee",
@@ -7648,20 +7593,20 @@
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 36,
+          "quantity": 37.8,
           "unit": "g",
           "cutPrep": "about 3 tbsp",
           "cookingMethod": null,
-          "prepNote": "in place of palm sugar, which the database does not hold"
+          "prepNote": "3 tbsp at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 1,
-          "unit": "tsp",
+          "quantity": 6,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tsp"
         },
         {
           "notInDatabase": true,
@@ -7702,7 +7647,7 @@
           "url": "https://en.wikipedia.org/wiki/Kluai_buat_chi"
         }
       ],
-      "curationNote": "Hungry in Thailand (serves 2: 7 Thai bananas boiled in their skins about 10 minutes, cooled and peeled; 1 cup plus 2 tbsp coconut milk, 3 tbsp palm sugar, 1 tsp salt, 2 pandan leaves over medium heat; bananas warmed 1 to 2 minutes) followed, with Wikipedia for coconut milk, sugar and salt as the base. The banana weight assumes about 60 g each for small Thai bananas."
+      "curationNote": "Hungry in Thailand, Bananas in Coconut Milk for every amount and step; serves 2, as ours."
     },
     {
       "id": "curated_th_sangkaya_fak_thong",
@@ -7748,35 +7693,35 @@
         {
           "category": "Sweets",
           "baseName": "Piloncillo / Unrefined Panela",
-          "quantity": 100,
+          "quantity": 100.8,
           "unit": "g",
           "cutPrep": "about 1/2 cup",
           "cookingMethod": null,
-          "prepNote": "in place of palm sugar, which the database does not hold"
+          "prepNote": "1/2 cup at 12.6 g per tbsp; in place of palm sugar, which the database does not hold"
         },
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.25,
+          "quantity": 1.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1/4 tsp"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Vanilla extract",
+          "quantity": 1,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "pandan paste",
-          "contains": "none",
-          "quantity": 0.25,
-          "unit": "tsp",
-          "cutPrep": "about 5 drops",
           "prepNote": null
         }
       ],
       "instructions": [
         "Cut a lid from the top of the kabocha, scoop out the seeds and dry the inside.",
-        "Whisk the eggs, coconut milk, palm sugar, salt and pandan paste until the sugar dissolves, 3 to 5 minutes, then strain it.",
-        "Pour the custard into the kabocha, set it in a heatproof bowl and steam it over medium-high heat until the custard is set and the squash is tender, 40 to 50 minutes.",
+        "Whisk the eggs, coconut milk, palm sugar, salt and vanilla until the sugar dissolves, 3 to 5 minutes, then strain it.",
+        "Pour the custard into the kabocha, set it in a heatproof bowl and steam it over medium-high heat until the custard is set and the squash is tender, about 45 minutes.",
         "Cool it completely, then chill it before cutting it into wedges."
       ],
       "nutritionHighlights": [
@@ -7803,7 +7748,7 @@
           "url": "https://importfood.com/recipes/appetizers-dessert/recipe/36-thai-pumpkin-custard-sankaya-phak-tong"
         }
       ],
-      "curationNote": "Rachel Cooks Thai (serves 6: 1 small kabocha, 4 eggs, 3/4 cup coconut milk, 1/2 cup palm sugar, 1/4 tsp salt, 1 tsp vanilla, steamed 45 minutes over medium-high heat) followed, with the pandan paste from Import Food (2 to 2.5 lb kabocha, 5 eggs, 1 cup coconut cream, 1 cup palm sugar, 5 drops pandan paste, steamed 30 to 45 minutes) in place of the vanilla. The kabocha weight assumes a small squash of about 2 lb (900 g to 1 kg)."
+      "curationNote": "Rachel Cooks Thai, Pumpkin Custard for every amount and step; serves 6, as ours."
     },
     {
       "id": "curated_th_khanom_chan",
@@ -7840,11 +7785,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/2 tsp"
         },
         {
           "category": "PantryStaples",
@@ -7929,7 +7874,7 @@
           "url": "https://rachelcooksthai.com/layered-dessert/"
         }
       ],
-      "curationNote": "Hungry in Thailand (serves 4 as written, cut here into 8 pieces: 9 oz sugar, 17 fl oz coconut milk, 0.5 tsp salt, 1.8 oz arrowroot, 1.8 oz rice flour, 5.3 oz tapioca starch, 1.8 oz pandan leaves; layers steamed 5 minutes each in a greased 8 inch mould) followed. The water for the pandan juice follows the Rachel Cooks Thai ratio (1/2 cup leaves to 1/4 cup water), and her jasmine essence is left out as optional."
+      "curationNote": "Hungry in Thailand, Khanom Chan Recipe for every amount and step; one batch, cut into 8 pieces."
     },
     {
       "id": "curated_th_khanom_tako",
@@ -8038,11 +7983,11 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 0.5,
-          "unit": "tsp",
+          "quantity": 3,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1/2 tsp"
         }
       ],
       "instructions": [
@@ -8072,7 +8017,7 @@
           "url": "https://www.vforveganista.com/recipes/khanom-tako-thai-pudding-with-coconut-topping/"
         }
       ],
-      "curationNote": "Crafts to Crumbs (12 cups: 946 ml pandan juice, 130 g sugar, 70 g rice flour, 65 g tapioca flour with corn and water chestnuts; topping of 800 ml coconut milk, 70 g rice flour, 100 g sugar, 1/2 tsp salt over medium-low heat) followed. Neither source gives the weight of corn or water chestnut for 12 cups, so 75 g of each is a standard proportion. V for Veganista confirms the pandan leaf cups, the water chestnut layer and chilling at least 3 hours. The pandan leaf weight for the juice is also assumed. Tier is moderate because the corn, water chestnut and pandan amounts are estimated."
+      "curationNote": "Crafts to Crumbs, Tako for every amount and step; 12 cups, as ours."
     },
     {
       "id": "curated_th_cha_yen",

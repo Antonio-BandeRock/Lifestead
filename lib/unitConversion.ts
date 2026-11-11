@@ -118,7 +118,7 @@ export function saltGramsKeptInDish(grams: number, note: string | null | undefin
   if (!text) return grams;
   if (!SALT_ON_WATER.test(text) && !SALT_THROWN.test(text)) return grams;
   // The listed amount is the dish's; the water's salt was never listed.
-  if (/^plus (more|a handful)\b/.test(text)) return grams;
+  if (/^(?:[^,;]*,\s*)?plus (more|a handful)\b/.test(text)) return grams;
   if (/\bdissolved in the brine\b/.test(text)) return grams;
   if (/\bto draw out the water\b/.test(text)) return grams;
   // "the share taken up; the brine holds 15 g": the line already lists only

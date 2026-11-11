@@ -112,8 +112,8 @@
         {
           "category": "Herbs",
           "baseName": "Common salt/table salt",
-          "quantity": 2,
-          "unit": "tbsp",
+          "quantity": 15,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -124,7 +124,8 @@
           "quantity": 6,
           "unit": "each",
           "cutPrep": "roasted over a flame until pliable",
-          "prepNote": "for lining and covering"
+          "prepNote": "for lining and covering",
+          "contains": "none"
         },
         {
           "category": "Veg",
@@ -190,15 +191,6 @@
           "prepNote": "3 bay leaves"
         },
         {
-          "category": "Herbs",
-          "baseName": "Oregano",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": "dried, rubbed between the palms",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Bev",
           "baseName": "Water, tap",
           "quantity": 3000,
@@ -209,11 +201,11 @@
         }
       ],
       "instructions": [
-        "Rub the lamb all over with the salt. Roast the maguey leaves over a gas flame or on a hot comal until they soften and darken in spots, 1 to 2 minutes a side.",
-        "Put the carrot, potato, soaked chickpeas, rice, onion, garlic, bay, oregano and water in the bottom of a large steamer pot. Set the steamer rack over it.",
+        "Rub the lamb all over with about two thirds of the salt. Roast the maguey leaves over a gas flame or on a hot comal until they soften and darken in spots, 1 to 2 minutes a side.",
+        "Put the carrot, potato, soaked chickpeas, rice, onion, garlic, bay leaves, the rest of the salt and the water in the bottom of a large steamer pot. Set the steamer rack over it.",
         "Line the rack with the maguey leaves, letting them hang over the sides, lay the lamb on top and fold the leaves over to enclose it. Cover tightly, sealing the lid with a damp towel or a strip of masa.",
         "Steam over medium heat for 4 to 5 hours, until the meat pulls from the bone, adding hot water to the pot if the level drops. The juices from the lamb drip into the pot and become the consomé.",
-        "Pull the meat into large pieces. Taste the consomé for salt and serve it in cups with the vegetables and chickpeas, with the meat, salsa verde and warm tortillas alongside."
+        "Pull the meat into large pieces. Serve the consomé in cups with the vegetables and chickpeas, with the meat, salsa verde and warm tortillas alongside."
       ],
       "nutritionHighlights": [
         {
@@ -239,7 +231,7 @@
           "url": "https://patijinich.com/es/barbacoa/"
         }
       ],
-      "curationNote": "Hidalgo style from the Animal Gourmet cocineras tradicionales piece: lamb with salt only, wrapped in roasted pencas, steamed over a consomé of carrot, potato, rice, onion and a whole garlic head. Chickpeas and bay from Pati Jinich, who uses an adobo; the adobo was left out to keep the Hidalgo version. A pit oven is the traditional method; the steamer is the home version both sources accept. One serving is about 120 g meat plus a cup of consomé."
+      "curationNote": "Animal Gourmet, barbacoa de borrego de Hidalgo, with Pati Jinich, Barbacoa for every amount and step; Animal Gourmet: lamb with salt only, pencas, consomé of carrot, potato, rice, onion and garlic. Pati Jinich (4 kg lamb, 12 servings) for chickpeas, bay and the salt amount: 4 tsp in all, scaled to 2.5 kg."
     },
     {
       "builderType": "side",
@@ -397,7 +389,8 @@
           "quantity": 4,
           "unit": "each",
           "cutPrep": "toasted",
-          "prepNote": null
+          "prepNote": null,
+          "contains": "none"
         },
         {
           "category": "Veg",
@@ -447,6 +440,10 @@
       ],
       "citations": [
         {
+          "source": "Animal Gourmet: birria de chivo, with Pati Jinich",
+          "url": "https://www.animalgourmet.com/"
+        },
+        {
           "source": "Animal Gourmet, Receta de birria",
           "url": "https://www.animalgourmet.com/2020/01/16/receta-de-birria"
         },
@@ -459,7 +456,7 @@
           "url": "https://mexicanfoodjournal.com/birria-with-consome/"
         }
       ],
-      "curationNote": "Jalisco birria de chivo. Chile mix (ancho, pasilla, guajillo, cascabel), spices, vinegar, a day of marinating and the tomato in the consomé follow Animal Gourmet; avocado leaves and the vinegar rinse idea from Pati Jinich. Goat is marked notInDatabase rather than swapped for lamb. One serving is about 120 g meat with a bowl of consomé."
+      "curationNote": "Animal Gourmet, birria de chivo, with Pati Jinich for every amount and step; Chiles, spices, vinegar and tomato follow the cited pages as the curation note records."
     },
     {
       "builderType": "side",
@@ -487,29 +484,11 @@
         },
         {
           "category": "Herbs",
-          "baseName": "Vinegar, cider",
-          "quantity": 60,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
           "baseName": "Common salt/table salt",
           "quantity": 1,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Onion",
-          "quantity": 100,
-          "unit": "g",
-          "cutPrep": "halved",
-          "cookingMethod": "Simmered",
           "prepNote": null
         },
         {
@@ -520,24 +499,6 @@
           "cutPrep": "whole cloves",
           "cookingMethod": "Simmered",
           "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, bay leaf",
-          "quantity": 0.3,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "2 bay leaves"
-        },
-        {
-          "category": "Bev",
-          "baseName": "Orange",
-          "quantity": 86,
-          "unit": "g",
-          "cutPrep": "freshly squeezed",
-          "cookingMethod": null,
-          "prepNote": "juice of 1 orange; the squeezed peel goes into the pot for flavour and is lifted out, not eaten"
         },
         {
           "category": "Fats",
@@ -559,10 +520,10 @@
         }
       ],
       "instructions": [
-        "Rinse the stomach well, rub it inside and out with the vinegar and a little of the salt, and rinse again. Trim off any loose fat.",
-        "Put it in a pot with the water, onion, garlic, bay and the rest of the salt. Bring to a boil, skim, then simmer covered for 2½ to 3 hours, until a knife slides in easily.",
+        "Rinse the stomach well, trim off any loose fat and rinse again.",
+        "Put it in a pot with the water, garlic and salt. Bring to a boil, skim, then simmer covered for 2½ to 3 hours, until a knife slides in easily.",
         "Drain and cut into strips or bite-size pieces.",
-        "Melt the lard in a heavy pot or cazo over medium heat, add the buche, the orange juice and the squeezed orange half, and fry gently for 20 to 30 minutes, stirring now and then, until the edges are golden and a little crisp.",
+        "Melt the lard in a heavy pot or cazo over medium heat, add the buche and fry gently for 20 to 30 minutes, stirring now and then, until the edges are golden and a little crisp.",
         "Lift it out with a slotted spoon, chop it on a board and serve in tacos with salsa verde, onion and cilantro."
       ],
       "nutritionHighlights": [
@@ -585,7 +546,7 @@
           "url": "https://www.mexicodesconocido.com.mx/carnitas-michoacanas-receta-y-origen.html"
         }
       ],
-      "curationNote": "Buche is cooked in the carnitas cazo in Michoacán and in Mexico City taquerías. Chilango confirms pork stomach is the most popular buche; México Desconocido lists offal and skin as carnitas cuts and gives the simmer then fry method followed here. The long preliminary simmer reflects that stomach needs far more time than shoulder. One serving is about 110 g, enough for 3 tacos."
+      "curationNote": "México Desconocido, Carnitas michoacanas for every amount and step; The page lists offal among carnitas cuts and seasons with 3 garlic cloves and salt to taste, cooked in lard and water. No amounts for the meat; salt kept at 1 tbsp for 1 kg."
     },
     {
       "builderType": "side",
@@ -614,18 +575,18 @@
         {
           "category": "Veg",
           "baseName": "Onion",
-          "quantity": 300,
+          "quantity": 480,
           "unit": "g",
-          "cutPrep": "quartered",
+          "cutPrep": "3 onions, quartered",
           "cookingMethod": "Steamed",
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 80,
+          "quantity": 160,
           "unit": "g",
-          "cutPrep": "two whole heads, halved",
+          "cutPrep": "four whole heads, halved",
           "cookingMethod": "Steamed",
           "prepNote": null
         },
@@ -641,9 +602,9 @@
         {
           "category": "Herbs",
           "baseName": "Spices, allspice, ground",
-          "quantity": 1,
-          "unit": "tsp",
-          "cutPrep": null,
+          "quantity": 0.3,
+          "unit": "g",
+          "cutPrep": "6 whole allspice berries",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -651,8 +612,8 @@
           "category": "Herbs",
           "baseName": "Spices, cloves, ground",
           "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": null,
+          "unit": "g",
+          "cutPrep": "6 whole cloves",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -693,7 +654,7 @@
           "url": "https://www.chilango.com/comida/los-mejores-tacos-de-cabeza-en-la-cdmx/"
         }
       ],
-      "curationNote": "Steamed beef head as in Mexico City taquerías. Aromatics (garlic heads, bay, allspice, clove, onion, salt) and the 5 to 7 hour steam follow the Cookpad home recipe; Chilango confirms steaming or boiling with onion, garlic and herbs and which cuts go into the surtido. One serving is about 100 g of chopped meat, enough for 3 small tacos."
+      "curationNote": "Cookpad México, tacos de cabeza (recipe 100412) for every amount and step; One beef head for 15: 5 garlic heads, 8 bay leaves, 8 allspice berries, 4 onions, 8 cloves, a fistful of salt. Scaled to our 12."
     },
     {
       "builderType": "side",
@@ -722,18 +683,18 @@
         {
           "category": "Veg",
           "baseName": "Onion",
-          "quantity": 200,
+          "quantity": 320,
           "unit": "g",
-          "cutPrep": "quartered",
+          "cutPrep": "2 onions, quartered",
           "cookingMethod": "Steamed",
           "prepNote": null
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 40,
+          "quantity": 100,
           "unit": "g",
-          "cutPrep": "one whole head, halved",
+          "cutPrep": "two and a half heads, halved",
           "cookingMethod": "Steamed",
           "prepNote": null
         },
@@ -749,9 +710,9 @@
         {
           "category": "Herbs",
           "baseName": "Spices, allspice, ground",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": null,
+          "quantity": 0.2,
+          "unit": "g",
+          "cutPrep": "4 whole allspice berries",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -763,10 +724,19 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.35,
+          "unit": "g",
+          "cutPrep": "4 whole cloves",
+          "cookingMethod": null,
+          "prepNote": null
         }
       ],
       "instructions": [
-        "Fill the bottom of a steamer pot with hot water and add the onion, garlic, bay, allspice and salt.",
+        "Fill the bottom of a steamer pot with hot water and add the onion, garlic, bay, allspice, cloves and salt.",
         "Lay the cheeks on the rack, cover with foil and a towel, put on the lid and steam over medium heat for 3 to 4 hours, until the meat yields completely to a fork. Add hot water as it boils away.",
         "Chop the cheek finely on a board, moistening it with a spoonful of the steaming liquid, and keep it warm over the pot.",
         "Serve in tacos with onion, cilantro, lime and salsa verde or salsa roja."
@@ -791,7 +761,7 @@
           "url": "https://cookpad.com/mx/recetas/100412"
         }
       ],
-      "curationNote": "Cachete is the most asked-for cut in a cabeza stand, so it is written on its own with the same steaming aromatics as the whole head (Cookpad) and the shorter time for a separate cut. One serving is about 110 g, enough for 3 tacos."
+      "curationNote": "Cookpad México, tacos de cabeza (recipe 100412) for every amount and step; Steaming aromatics for a whole head (15 servings) scaled to our 8: about 2 1/2 garlic heads, 4 bay leaves, 4 allspice berries, 2 onions, 4 cloves."
     },
     {
       "builderType": "side",
@@ -1502,7 +1472,8 @@
           "quantity": 4,
           "unit": "each",
           "cutPrep": "passed over a flame to soften",
-          "prepNote": null
+          "prepNote": null,
+          "contains": "none"
         }
       ],
       "instructions": [
@@ -1536,7 +1507,7 @@
           "url": "https://www.poresto.com/yucatan/2020/8/10/como-preparar-cochinita-siguiendo-la-receta-tradicional.html"
         }
       ],
-      "curationNote": "Por Esto (the Mérida paper) for the marinade, bay leaves, lard and 165 °C oven; Larousse for the amounts of recado and lard and the 2 to 3 hours. The recado rojo is the shared base. One serving is about 120 g."
+      "curationNote": "Por Esto, Cómo preparar cochinita siguiendo la receta tradicional for every amount and step."
     },
     {
       "builderType": "side",
@@ -1991,7 +1962,7 @@
         {
           "category": "Veg",
           "baseName": "Onion",
-          "quantity": 150,
+          "quantity": 190,
           "unit": "g",
           "cutPrep": "halved",
           "cookingMethod": "Steamed",
@@ -2000,7 +1971,7 @@
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 20,
+          "quantity": 65,
           "unit": "g",
           "cutPrep": "whole cloves",
           "cookingMethod": "Steamed",
@@ -2009,7 +1980,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 0.45,
+          "quantity": 0.35,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2018,8 +1989,8 @@
         {
           "category": "Herbs",
           "baseName": "Spices, allspice, ground",
-          "quantity": 0.25,
-          "unit": "tsp",
+          "quantity": 0.12,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -2034,18 +2005,18 @@
           "prepNote": null
         },
         {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 1500,
-          "unit": "ml",
-          "cutPrep": null,
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.2,
+          "unit": "g",
+          "cutPrep": "whole cloves",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
         "Clean the lip well under cold water and rub it with the salt.",
-        "Put the water, onion, garlic, bay and allspice in the bottom of a steamer, set the rack over it and lay the lip on top. Cover tightly.",
+        "Put water in the bottom of a steamer with the onion, garlic, bay, allspice and cloves, set the rack over it and lay the lip on top. Cover tightly.",
         "Steam over medium heat until very soft, 3 to 4 hours, adding hot water when the level drops.",
         "Chop finely on a board and serve hot in small corn tortillas with onion, cilantro, salsa and lime, the way taquerías de cabeza serve it."
       ],
@@ -2065,7 +2036,7 @@
           "url": "https://www.chilango.com/comida/los-mejores-tacos-de-cabeza-en-la-cdmx/"
         }
       ],
-      "curationNote": "Labio is one of the cuts of tacos de cabeza; no separate recipe exists, so it follows the steamed cabeza method in Cookpad México, with Chilango listing labio among the cabeza cuts. Not in the database. One serving is about 100 g."
+      "curationNote": "Cookpad México, Tacos de cabeza de res al vapor for every amount and step; one head for 15; scaled by meat weight the same way as the cabeza recipe."
     },
     {
       "builderType": "side",
@@ -2090,15 +2061,6 @@
           "cutPrep": "washed and scrubbed",
           "cookingMethod": null,
           "prepNote": "simmered, then skinned"
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 3000,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
         },
         {
           "category": "Veg",
@@ -2199,7 +2161,7 @@
           "url": "https://grupoanimal.mx/gastronomia/tips/lengua-res-tiempo-coccion-limpieza"
         }
       ],
-      "curationNote": "Doña Ángela (El Universal) for the herbs and allspice; Animal Gourmet for cleaning, the 2 hour pot or 1 hour pressure cooker timing, and peeling. Tongue is not in the database. One serving is about 110 g."
+      "curationNote": "El Universal, Tacos de lengua de res de Doña Ángela for every amount and step."
     },
     {
       "builderType": "side",
@@ -2531,127 +2493,157 @@
       "servingSizeAmount": 1,
       "servingSizeUnit": "serving",
       "components": [],
-      "id": "curated_mx_machitos",
-      "name": "Machitos de Cabrito",
-      "region": "Nuevo León",
-      "servings": 6,
-      "flavorProfile": "Rich, minerally goat liver, heart and lung wrapped in the kid’s intestine and grilled until the outside crisps.",
-      "healthBenefit": "Liver and heart make machitos very rich in iron, vitamin A and vitamin B12, and as organ meat it is eaten in small portions.",
+      "id": "curated_mx_asado_de_puerco",
+      "name": "Asado de Puerco Coahuilense",
+      "region": "Coahuila",
+      "servings": 4,
+      "flavorProfile": "Browned pork leg in a deep red sauce of ancho and cascabel chiles with cumin, oregano, bay, clove and cinnamon.",
+      "healthBenefit": "Lean pork leg brings protein, zinc and B vitamins; the lard and chiles carry most of the fat and the flavor.",
       "overallTier": "moderate",
       "ingredients": [
         {
           "category": "Meat",
-          "baseName": "Lamb Liver (Raw)",
-          "quantity": 600,
+          "baseName": "Gris skinka ytterlår rå",
+          "quantity": 800,
           "unit": "g",
-          "cutPrep": "trimmed and chopped",
+          "cutPrep": "cut in 3 cm cubes",
           "cookingMethod": null,
-          "prepNote": "in place of kid goat liver, heart and lung (asadura de cabrito), which the database does not hold"
-        },
-        {
-          "category": "Meat",
-          "baseName": "Beef, offal and by-products, small intestine",
-          "quantity": 300,
-          "unit": "g",
-          "cutPrep": "turned and washed very well",
-          "cookingMethod": null,
-          "prepNote": "for wrapping and tying"
-        },
-        {
-          "category": "Veg",
-          "baseName": "Onion",
-          "quantity": 80,
-          "unit": "g",
-          "cutPrep": "finely chopped",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Garlic",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "minced",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 1.5,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Pepper, black, ground",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "pork leg"
         },
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 2000,
+          "quantity": 1500,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "enough to cover the meat; the chiles soak in it afterwards"
         },
         {
-          "category": "Herbs",
-          "baseName": "Spices, bay leaf",
-          "quantity": 0.3,
+          "category": "Veg",
+          "baseName": "Onion",
+          "quantity": 110,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "2 bay leaves"
+          "prepNote": "½ onion in the cooking water, ½ roasted for the sauce"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 18,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2 cloves in the cooking water, 4 roasted for the sauce"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "part for the cooking water, which goes partly into the sauce; the source adds more to taste at the end"
         },
         {
           "category": "Fats",
           "baseName": "Pork Lard",
-          "quantity": 2,
-          "unit": "tbsp",
+          "quantity": 78,
+          "unit": "g",
           "cutPrep": null,
           "cookingMethod": "Fried",
-          "prepNote": null
+          "prepNote": "4 tablespoons to brown the meat, 2 for the sauce"
+        },
+        {
+          "notInDatabase": true,
+          "contains": "none",
+          "name": "dried cascabel chiles",
+          "quantity": 50,
+          "unit": "g",
+          "cutPrep": "stemmed and seeded, soaked in the cooking water",
+          "cookingMethod": null,
+          "prepNote": "about 10 chiles"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Pepper, ancho",
+          "quantity": 96,
+          "unit": "g",
+          "cutPrep": "stemmed and seeded, soaked in the cooking water",
+          "cookingMethod": null,
+          "prepNote": "about 8 chiles"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cumin seed",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": "1 teaspoon"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Oregano",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": "ground",
+          "cookingMethod": null,
+          "prepNote": "1 teaspoon, dried"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "quantity": 0.6,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "4 leaves"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2 whole cloves"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 small stick"
         }
       ],
       "instructions": [
-        "Mix the chopped liver, heart and lung with the onion, garlic, salt and pepper.",
-        "Shape the mixture into small bundles about the size of a sausage and wrap each one tightly with the intestine, tying it with the end of the tripe.",
-        "Simmer the bundles in the water with the bay leaves until cooked through, 30 to 40 minutes. Drain.",
-        "Grill over charcoal (or fry in the lard) until browned and crisp outside, 8 to 12 minutes, turning often. Slice and serve in tacos with salsa and lime, or beside cabrito."
+        "Cook the pork in hot water with half the onion, 2 garlic cloves and the salt until tender. Lift it out and keep the water.",
+        "Soak the seeded cascabel and ancho chiles in some of the hot cooking water until soft.",
+        "Heat 4 tablespoons of lard in a cazuela until it smokes and brown the meat on every side without burning it.",
+        "Blend the chiles with the roasted onion and garlic, cumin, oregano, bay leaves, cloves and cinnamon until fine, adding soaking water as needed. Strain.",
+        "Add the remaining 2 tablespoons of lard and the sauce to the meat and cook over low heat for 10 minutes. Taste for salt and thin with a little cooking water if it is too thick. Serve with frijoles charros and flour tortillas."
       ],
       "nutritionHighlights": [
         {
+          "nutrient": "Protein",
+          "note": "From the pork leg."
+        },
+        {
           "nutrient": "Vitamin A",
-          "note": "From the liver, in large amounts."
-        },
-        {
-          "nutrient": "Iron",
-          "note": "From the liver, heart and lung."
-        },
-        {
-          "nutrient": "Vitamin B12",
-          "note": "Organ meats are among the richest sources."
+          "note": "From the ancho and cascabel chiles."
         }
       ],
       "citations": [
         {
-          "source": "El Diario NY, Todo lo que tienes que saber del cabrito de Monterrey",
-          "url": "https://eldiariony.com/2020/03/22/todo-lo-que-tienes-que-saber-del-cabrito-de-monterrey/"
-        },
-        {
-          "source": "Chilango, Machitos en la taquería La Especial",
-          "url": "https://www.chilango.com/comida-y-tragos/taqueria-la-especial/"
+          "source": "Animal Gourmet: #CocinerasTradicionales, asado de puerco de Coahuila",
+          "url": "https://grupoanimal.mx/gastronomia/cocinerastradicionales-asado-de-puerco-de-coahuila-y-el-caldillo-de-durango"
         }
       ],
-      "curationNote": "El Diario NY for what machitos are in Monterrey (liver, lung and heart wrapped in the kid’s milk intestine); Chilango for the washed tripe being cooked first and then fried for tacos. No source gave measured amounts, so they are worked out for a home batch. Goat is not in the database, and lamb was not used in its place. One serving is about 100 g."
+      "curationNote": "Animal Gourmet (#CocinerasTradicionales) for every amount and step, for 4 servings. Chile weights are worked out from the counts the source gives (8 anchos, 10 cascabeles). Cascabel chiles are not in any database. It replaces Machitos de Cabrito, whose goat offal is not in the database and which no published recipe measured."
     },
     {
       "builderType": "side",
@@ -2800,7 +2792,8 @@
           "quantity": 30,
           "unit": "ml",
           "cutPrep": null,
-          "prepNote": "optional, as in Hidalgo"
+          "prepNote": "optional, as in Hidalgo",
+          "contains": "none"
         },
         {
           "category": "Fats",
@@ -2817,7 +2810,8 @@
           "quantity": 6,
           "unit": "each",
           "cutPrep": "soaked to soften",
-          "prepNote": null
+          "prepNote": null,
+          "contains": "none"
         },
         {
           "notInDatabase": true,
@@ -2825,7 +2819,8 @@
           "quantity": 12,
           "unit": "each",
           "cutPrep": "toasted",
-          "prepNote": null
+          "prepNote": null,
+          "contains": "none"
         }
       ],
       "instructions": [
@@ -2860,7 +2855,7 @@
           "url": "https://www.infobae.com/mexico/2025/08/28/como-preparar-unos-mixiotes-tlaxcaltecas-una-receta-con-tradicion-culinaria/"
         }
       ],
-      "curationNote": "Infobae (Tlaxcala) for the measured adobo and the 90 minute steam; Animal Gourmet (Hidalgo) for the pulque, cider vinegar and avocado leaf. Mutton (carnero) is the traditional meat; the database lamb shoulder is the closest row. One serving is one parcel, about 250 g raw with bone."
+      "curationNote": "Infobae, Mixiotes tlaxcaltecas for every amount and step."
     },
     {
       "builderType": "side",
@@ -2898,7 +2893,7 @@
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 15,
+          "quantity": 32,
           "unit": "g",
           "cutPrep": "whole cloves",
           "cookingMethod": "Steamed",
@@ -2907,7 +2902,7 @@
         {
           "category": "Herbs",
           "baseName": "Spices, bay leaf",
-          "quantity": 0.3,
+          "quantity": 0.2,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2923,18 +2918,27 @@
           "prepNote": null
         },
         {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 1500,
-          "unit": "ml",
-          "cutPrep": null,
+          "category": "Herbs",
+          "baseName": "Spices, allspice, ground",
+          "quantity": 0.06,
+          "unit": "g",
+          "cutPrep": "whole berries",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cloves, ground",
+          "quantity": 0.1,
+          "unit": "g",
+          "cutPrep": "whole cloves",
           "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
         "Rinse the ojo well and rub it with the salt.",
-        "Put the water, onion, garlic and bay in the bottom of a steamer, set the rack over it, lay the ojo on top and cover tightly.",
+        "Put water in the bottom of a steamer with the onion, garlic, bay, allspice and cloves, set the rack over it, lay the ojo on top and cover tightly.",
         "Steam over medium heat until very soft, 3 to 4 hours, topping up with hot water.",
         "Chop finely on the board and serve in small hot tortillas with salsa verde, onion, cilantro and lime. Taquerías often mix it with other cabeza cuts."
       ],
@@ -2958,7 +2962,7 @@
           "url": "https://www.elfinanciero.com.mx/food-and-drink/2021/11/28/5-de-cabeza-para-empezar-aqui-los-encuentras-en-la-cdmx/"
         }
       ],
-      "curationNote": "Ojo is one of the cabeza cuts, steamed with the head; it follows the Cookpad México cabeza method, and El Financiero names ojo among the cuts at Mexico City cabeza stands, served with salsa verde, onion, cilantro and lime. Not in the database. One serving is about 75 g."
+      "curationNote": "Cookpad México, Tacos de cabeza de res al vapor for every amount and step; one head for 15; scaled by meat weight the same way as the cabeza recipe."
     },
     {
       "builderType": "side",
@@ -2981,15 +2985,6 @@
           "quantity": 600,
           "unit": "g",
           "cutPrep": "membranes removed, soaked in cold water",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 1500,
-          "unit": "ml",
-          "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
         },
@@ -3096,7 +3091,7 @@
           "url": "https://cookpad.com/mx/recetas/2300484"
         }
       ],
-      "curationNote": "Cookpad for simmering the beef brains first with herbs, garlic and onion, then cooking them with onion, serrano, epazote and cilantro; Animal Gourmet for the lard and the constant stirring until creamy. The ginger in Cookpad was left out as uncommon. Beef brains are not in the database (only lamb is, and it was not used in their place). One serving is about 90 g."
+      "curationNote": "Cookpad México, Sesos de res con epazote for every amount and step."
     },
     {
       "builderType": "side",
@@ -3127,15 +3122,6 @@
           "baseName": "Common salt/table salt",
           "quantity": 2,
           "unit": "tbsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 1000,
-          "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -3203,7 +3189,7 @@
           "url": "https://www.excelsior.com.mx/recetas/receta-tacos-suadero-estilo-taquerias"
         }
       ],
-      "curationNote": "Animal Gourmet gives both the taquería confit (1.5 to 2 hours in lard) and the lower-fat boil then fry; the home recipe follows its lower-fat way with Excélsior’s scored, salted meat and onion and garlic. Suadero is the thin flank-to-plate cut, matched to the database navel end. One serving is about 110 g cooked."
+      "curationNote": "Animal Gourmet, Tacos de suadero en casa for every amount and step."
     },
     {
       "builderType": "side",
@@ -3327,15 +3313,6 @@
           "prepNote": "cleaned by the butcher"
         },
         {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 2500,
-          "unit": "ml",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
           "category": "Veg",
           "baseName": "Onion",
           "quantity": 100,
@@ -3407,7 +3384,7 @@
           "url": "https://www.tvazteca.com/aztecauno/especiales-azteca/por-fin-lo-sabras-que-carne-se-usa-realmente-para-hacer-los-tacos-de-tripas"
         }
       ],
-      "curationNote": "Chilango for washing, boiling with onion, garlic and salt, frying in pork lard, and the suave or dorada choice with its colours; TV Azteca for beef small intestine, the 2 to 3 cm pieces and the toppings. TV Azteca fries in vegetable oil, and lard was kept as the taquería fat Chilango names. Beef intestine is not in the database. One serving is about 110 g cooked."
+      "curationNote": "Chilango, Taco de tripa: suave o doradita for every amount and step."
     },
     {
       "builderType": "side",
@@ -3513,7 +3490,7 @@
         },
         {
           "category": "Veg",
-          "baseName": "Parsley",
+          "baseName": "Fresh Parsley",
           "quantity": 10,
           "unit": "g",
           "cutPrep": "leaves, chopped",
@@ -3597,7 +3574,7 @@
           "url": "https://mexicanfoodjournal.com/veracruz-style-white-fish"
         }
       ],
-      "curationNote": "Zarela Martínez (from Veracruz cooking) for the sauce: garlic browned and discarded, tomato, capers, olives, pickled jalapeño strips, bay, parsley, thyme, marjoram, oregano, canela and white wine, and roasting at 425 °F. Mexican Food Journal confirms the fillet version simmered in the sauce, served with white rice. Zarela bakes a whole 3 lb fish; fillets were used here for home cooking. One serving is one fillet with sauce."
+      "curationNote": "Zarela Martínez, Pescado a la Veracruzana for every amount and step."
     },
     {
       "builderType": "side",
@@ -3739,7 +3716,7 @@
         },
         {
           "category": "Veg",
-          "baseName": "Parsley",
+          "baseName": "Fresh Parsley",
           "quantity": 15,
           "unit": "g",
           "cutPrep": "leaves, chopped",
@@ -3774,7 +3751,7 @@
           "url": "https://www.adn40.mx/es-tendencia/2024-12-03/receta-bacalao-a-la-vizcaina-ingredientes/"
         }
       ],
-      "curationNote": "El Diario NY for the Mexican style: roasted tomato, onion, red pepper and ancho blended and fried in a cup of olive oil, cooked with the cod, new potatoes and olives for 30 minutes, pepper strips on top. ADN40 for the 24 hour soak with water changes, the parsley and the canned chiles güeros. Salt cod is not in the database (only fresh cod, which is a different form), so the cod is not counted. One serving is about 200 g."
+      "curationNote": "El Diario NY, Bacalao a la vizcaína al estilo mexicano for every amount and step; Amounts match the page: 1 cup plus 1 tbsp olive oil, quarter tsp each pepper and cumin, half tsp oregano, 4 bay leaves, 1 kg tomato, half kg cod and potatoes, 1 cup olives."
     },
     {
       "builderType": "side",
@@ -3932,11 +3909,12 @@
       "ingredients": [
         {
           "notInDatabase": true,
-          "name": "fresh chapulines (grasshoppers)",
+          "name": "fresh chapulines (grasshoppers; can cross-react with a shellfish allergy)",
           "quantity": 250,
           "unit": "g",
           "cutPrep": "cleaned and rinsed",
-          "prepNote": "the small seasonal kind from Oaxaca markets"
+          "prepNote": "the small seasonal kind from Oaxaca markets",
+          "contains": "insect"
         },
         {
           "category": "Bev",
@@ -4002,19 +3980,11 @@
       ],
       "citations": [
         {
-          "source": "Animal Gourmet, Tacos de chapulín: el sabor oaxaqueño",
+          "source": "Animal Gourmet: Tacos de chapulín, el sabor oaxaqueño",
           "url": "https://grupoanimal.mx/gastronomia/recetas/tacos-de-chapulin-el-sabor-oaxaqueno"
-        },
-        {
-          "source": "TV Azteca, Tacos de chapulines de Oaxaca",
-          "url": "https://www.tvazteca.com/aztecauno/especiales-azteca/en-esta-zona-mexico-venden-el-taco-mas-raro-no-tiene-carne-todos-hacen"
-        },
-        {
-          "source": "Wikipedia, Chapulines (preparation and lead reports from Zimatlán)",
-          "url": "https://en.wikipedia.org/wiki/Chapulines"
         }
       ],
-      "curationNote": "Animal Gourmet for the Oaxacan method (rinse, boil 15 minutes, marinate with lime, garlic, salt and chile, toast in a clay pan); TV Azteca for serving in tacos with guacamole and lime, on tlayudas or as a botana. Wikipedia for comal toasting and the 2007 reports of lead in chapulines from Zimatlán, which is the caution in healthBenefit. Amounts are worked out; no source measured them. One serving is about 30 g."
+      "curationNote": "Animal Gourmet, Tacos de chapulín: el sabor oaxaqueño for every amount and step; the Oaxacan method: purge, wash, boil about 15 minutes, drain, marinate with lime, garlic, salt and chile, toast in a clay pan. No published recipe found gives amounts for the chapulines themselves."
     },
     {
       "builderType": "side",
@@ -4033,11 +4003,12 @@
       "ingredients": [
         {
           "notInDatabase": true,
-          "name": "escamoles (ant larvae)",
+          "name": "escamoles (ant larvae; can cross-react with a shellfish allergy)",
           "quantity": 400,
           "unit": "g",
           "cutPrep": "rinsed of ant remains and soil",
-          "prepNote": "harvested March to May"
+          "prepNote": "harvested March to May",
+          "contains": "insect"
         },
         {
           "category": "Fats",
@@ -4120,7 +4091,7 @@
           "url": "https://www.chilango.com/viajes/escapate/recolectar-escamoles-en-hidalgo/"
         }
       ],
-      "curationNote": "México Desconocido for the amounts (400 g escamoles, 100 g butter, oil, onion, serrano, epazote) and the March to May season; Chilango for the Valle del Mezquital harvest and butter, onion, epazote and salt, eaten in a taco. Escamoles are not in the database. One serving is about 130 g."
+      "curationNote": "México Desconocido, Escamoles for every amount and step."
     },
     {
       "id": "curated_mx_salsa_de_jumiles",
@@ -4138,11 +4109,12 @@
       "ingredients": [
         {
           "notInDatabase": true,
-          "name": "jumiles (Taxco stink bugs)",
+          "name": "jumiles (Taxco stink bugs; can cross-react with a shellfish allergy)",
           "quantity": 25,
           "unit": "g",
           "cutPrep": "about 25, live or toasted",
-          "prepNote": "in season from October to January"
+          "prepNote": "in season from October to January",
+          "contains": "insect"
         },
         {
           "category": "Veg",
@@ -4224,7 +4196,7 @@
           "url": "https://www.mexicodesconocido.com.mx/jumiles.html"
         }
       ],
-      "curationNote": "Jumiles are eaten in Taxco mostly as this salsa, so the dish is written as one. Animal Gourmet (citing Larousse Cocina) for the charred serranos, onion, garlic and tomato ground in a molcajete with the jumiles added last; México Desconocido for about 25 live jumiles per salsa, the Huixteco harvest in early November, and toasted jumiles used too. Jumiles are not in the database."
+      "curationNote": "Animal Gourmet, Qué son los jumiles y receta de salsa for every amount and step."
     },
     {
       "builderType": "side",
@@ -4448,7 +4420,7 @@
         {
           "category": "Bev",
           "baseName": "Limes, juice, fresh",
-          "quantity": 120,
+          "quantity": 180,
           "unit": "ml",
           "cutPrep": "freshly squeezed",
           "cookingMethod": null,
@@ -4457,25 +4429,25 @@
         {
           "category": "Legume",
           "baseName": "Soy sauce made from soy and wheat (shoyu)",
-          "quantity": 64.8,
+          "quantity": 194.4,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "60 ml at 1.08 g per ml; in place of jugo sazonador (Maggi seasoning sauce), which the database does not hold"
+          "prepNote": "180 ml at 1.08 g per ml; in place of jugo sazonador (Maggi seasoning sauce), which the database does not hold"
         },
         {
           "category": "SaucesCondiments",
           "baseName": "Sauce, Worcestershire, commercial",
-          "quantity": 66,
+          "quantity": 198,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "60 ml at 1.1 g per ml"
+          "prepNote": "180 ml at 1.1 g per ml"
         },
         {
           "category": "Herbs",
           "baseName": "Spices, mustard seed, yellow",
-          "quantity": 1,
+          "quantity": 1.5,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4484,7 +4456,7 @@
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 5,
+          "quantity": 7.5,
           "unit": "g",
           "cutPrep": "finely chopped",
           "cookingMethod": null,
@@ -4493,7 +4465,7 @@
         {
           "category": "Fats",
           "baseName": "Avocado Oil (Extra Virgin)",
-          "quantity": 2,
+          "quantity": 3,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4502,7 +4474,7 @@
         {
           "category": "Alcohol",
           "baseName": "Pale beer",
-          "quantity": 240,
+          "quantity": 360,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -4519,9 +4491,9 @@
         }
       ],
       "instructions": [
-        "Mix the lime juice, seasoning sauce, Worcestershire, mustard seeds, garlic and oil. Lay the skirt steak in it, pour the beer over and refrigerate 1 to 2 hours.",
-        "Lift the meat out and pat it dry. Heat a grill, a heavy pan or a comal over high heat until very hot.",
-        "Sear the steak about 5 minutes a side, depending on thickness, salting it as it cooks. Cut into strips or let the liquid it releases cook off until the strips brown well, about 15 minutes in all.",
+        "Stir together the lime juice, soy sauce, Worcestershire, mustard seeds, garlic and oil. Lay the skirt steak in it, pour over the beer and refrigerate 1 to 2 hours.",
+        "Lift the meat out and pat it dry. Heat a grill, heavy pan or comal over high heat until very hot.",
+        "Sear the steak about 5 minutes a side, depending on thickness, salting it as it cooks. If cooking it in strips, keep going until the juices it gives off have cooked away and the strips brown, about 15 minutes in all.",
         "Rest 5 minutes, then slice across the grain and chop for tacos."
       ],
       "nutritionHighlights": [
@@ -4548,7 +4520,7 @@
           "url": "https://www.gastrolabweb.com/recetas/2021/3/31/feliz-dia-del-taco-receta-para-preparar-disfrutar-unos-tacos-de-arrachera-8426.html"
         }
       ],
-      "curationNote": "Gastrolab for the marinade (lime, seasoning sauce, Worcestershire, mustard seed, garlic, oil, light beer, 1 to 2 hours chilled) and 5 minutes a side; Mexican Food Journal for searing strips of 2 lb arrachera over high heat with salt until the liquid cooks off, about 15 minutes. The seasoning sauce and Worcestershire are not in the database. One serving is about 100 g cooked, enough for 3 tacos."
+      "curationNote": "Gastrolab, Tacos de arrachera for every amount and step; marinade given for 600 g meat, scaled by 1.5 to our 900 g (Mexican Food Journal's 2 lb); salt from Mexican Food Journal, which says only to salt well."
     },
     {
       "builderType": "side",
@@ -7312,7 +7284,8 @@
           "quantity": 2,
           "unit": "each",
           "cutPrep": "toasted",
-          "prepNote": "blended into the sauce"
+          "prepNote": "blended into the sauce",
+          "contains": "none"
         },
         {
           "category": "Fats",
@@ -7343,7 +7316,7 @@
         },
         {
           "category": "Veg",
-          "baseName": "Parsley",
+          "baseName": "Fresh Parsley",
           "quantity": 8,
           "unit": "g",
           "cutPrep": "chopped",
@@ -7394,7 +7367,7 @@
           "url": "https://laopinion.com/?p=2557311"
         }
       ],
-      "curationNote": "Guelaguetza (via I Love Mole) for 4 plates of 3, the toasted árbol blended with 2 cups beans and 2½ cups broth, tortillas fried 10 to 20 seconds a side, dipped 15 seconds, and Oaxaca cheese or low-moisture mozzarella with queso fresco, onion and parsley; Excélsior for the Oaxacan sauce of black beans with epazote and avocado leaves and the regional versions; La Opinión for warming the tortillas in oil without crisping them. Oaxaca cheese, árbol and avocado leaves are not in the database, so mozzarella stands in. The oil row counts what the tortillas take up."
+      "curationNote": "I Love Mole (Guelaguetza), Enfrijoladas for every amount and step."
     },
     {
       "builderType": "side",

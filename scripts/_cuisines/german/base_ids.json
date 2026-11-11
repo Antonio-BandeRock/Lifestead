@@ -162,21 +162,6 @@
       "shelf": "Bases: Pantry & Preserves"
     },
     {
-      "id": "curated_de_base_kasseler",
-      "name": "Kasseler (Cured Smoked Pork Loin)",
-      "shelf": "Bases: Pantry & Preserves"
-    },
-    {
-      "id": "curated_de_base_eisbein",
-      "name": "Eisbein (Cured Pork Hock)",
-      "shelf": "Bases: Pantry & Preserves"
-    },
-    {
-      "id": "curated_de_base_matjes",
-      "name": "Matjes (Mild-Cured Herring)",
-      "shelf": "Bases: Pantry & Preserves"
-    },
-    {
       "id": "curated_de_base_fleischwurst",
       "name": "Fleischwurst (Lyoner)",
       "shelf": "Bases: Pantry & Preserves"

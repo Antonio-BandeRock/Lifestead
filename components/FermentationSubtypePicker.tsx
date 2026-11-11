@@ -90,7 +90,7 @@ const FOOD_TYPE_OPTIONS: { key: FermentationSubtypeKey; label: string; descripti
   {
     key: 'syrupsSpoonableTonics',
     label: 'Syrups & Spoonable Tonics',
-    description: 'Fermented garlic honey, pine needle-style cheong, taken by the spoonful, not diluted into a drink.',
+    description: 'Fermented garlic honey and lemon cheong, sweet preserves taken by the spoonful or stirred into water.',
   },
   {
     key: 'somethingElseFood',

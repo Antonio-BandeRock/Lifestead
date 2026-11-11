@@ -1019,70 +1019,63 @@
       "recipeId": "curated_handheld_hummus_roasted_vegetable_wrap",
       "componentRecipeId": "curated_baked_wheat_tortillas",
       "servings": 2,
-      "replaces": [
+      "replaces": [],
+      "reason": "The wrap lists 60 g of tortilla flour, which is the flour of the tortilla it is rolled in. The homemade wheat tortilla uses 31.25 g flour per tortilla, so 60 g is 1.92 of its servings. Rounded to 2 tortillas (62.5 g flour), rolled out together as one large wrap.",
+      "note": "rolled out as one large wrap",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Wheat flour, white, tortilla mix, enriched"
         }
-      ],
-      "reason": "The wrap lists 60 g of tortilla flour, which is the flour of the tortilla it is rolled in. The homemade wheat tortilla uses 31.25 g flour per tortilla, so 60 g is 1.92 of its servings. Rounded to 2 tortillas (62.5 g flour), rolled out together as one large wrap.",
-      "note": "rolled out as one large wrap"
+      ]
     },
     {
       "recipeId": "curated_handheld_bison_roasted_vegetable_wrap",
       "componentRecipeId": "curated_baked_wheat_tortillas",
       "servings": 2,
-      "replaces": [
+      "replaces": [],
+      "reason": "The wrap lists 60 g of tortilla flour, which is the flour of the tortilla it is rolled in. The homemade wheat tortilla uses 31.25 g flour per tortilla, so 60 g is 1.92 of its servings. Rounded to 2 tortillas (62.5 g flour), rolled out together as one large wrap.",
+      "note": "rolled out as one large wrap",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Wheat flour, white, tortilla mix, enriched"
         }
-      ],
-      "reason": "The wrap lists 60 g of tortilla flour, which is the flour of the tortilla it is rolled in. The homemade wheat tortilla uses 31.25 g flour per tortilla, so 60 g is 1.92 of its servings. Rounded to 2 tortillas (62.5 g flour), rolled out together as one large wrap.",
-      "note": "rolled out as one large wrap"
-    },
-    {
-      "recipeId": "curated_vegan_handheld_seitan_roasted_vegetable_wrap",
-      "componentRecipeId": "curated_baked_wheat_tortillas",
-      "servings": 2,
-      "replaces": [
-        {
-          "category": "PantryStaples",
-          "baseName": "Wheat flour, white, tortilla mix, enriched"
-        }
-      ],
-      "reason": "The wrap lists 60 g of tortilla flour, which is the flour of the tortilla it is rolled in. The homemade wheat tortilla uses 31.25 g flour per tortilla, so 60 g is 1.92 of its servings. Rounded to 2 tortillas (62.5 g flour), rolled out together as one large wrap.",
-      "note": "rolled out as one large wrap"
+      ]
     },
     {
       "recipeId": "curated_handheld_turkey_avocado_wrap",
       "componentRecipeId": "curated_baked_wheat_tortillas",
       "servings": 1,
-      "replaces": [
+      "replaces": [],
+      "reason": "The wrap uses one store wheat tortilla. One homemade wheat tortilla takes its place, one for one; the homemade one is about 8 inches, so it may be smaller than the store wrap.",
+      "replacedBefore": [
         {
           "category": "Baked",
           "baseName": "Tortilla, wraps/burrito, hvetemel"
         }
-      ],
-      "reason": "The wrap uses one store wheat tortilla. One homemade wheat tortilla takes its place, one for one; the homemade one is about 8 inches, so it may be smaller than the store wrap."
+      ]
     },
     {
       "recipeId": "curated_vegan_handheld_chickpea_avocado_wrap",
       "componentRecipeId": "curated_baked_wheat_tortillas",
       "servings": 1,
-      "replaces": [
+      "replaces": [],
+      "reason": "The wrap uses one store wheat tortilla. One homemade wheat tortilla takes its place, one for one; the homemade one is about 8 inches, so it may be smaller than the store wrap.",
+      "replacedBefore": [
         {
           "category": "Baked",
           "baseName": "Tortilla, wraps/burrito, hvetemel"
         }
-      ],
-      "reason": "The wrap uses one store wheat tortilla. One homemade wheat tortilla takes its place, one for one; the homemade one is about 8 inches, so it may be smaller than the store wrap."
+      ]
     },
     {
       "recipeId": "curated_handheld_hummus_roasted_vegetable_wrap",
       "componentRecipeId": "curated_sauce_classic_hummus",
       "servings": 1.5,
-      "replaces": [
+      "replaces": [],
+      "reason": "The chickpeas, tahini, lemon, garlic and salt are the hummus, blended together in the instructions. Matched on chickpeas: 60 g over 40 g per serving of the hummus.",
+      "replacedBefore": [
         {
           "category": "Legume",
           "baseName": "Chickpeas (garbanzo beans, bengal gram)"
@@ -1103,14 +1096,15 @@
           "category": "Herbs",
           "baseName": "Common salt/table salt"
         }
-      ],
-      "reason": "The chickpeas, tahini, lemon, garlic and salt are the hummus, blended together in the instructions. Matched on chickpeas: 60 g over 40 g per serving of the hummus."
+      ]
     },
     {
       "recipeId": "curated_handheld_turkey_hummus_collard_wrap",
       "componentRecipeId": "curated_sauce_classic_hummus",
       "servings": 1,
-      "replaces": [
+      "replaces": [],
+      "reason": "The chickpeas, tahini, lemon, garlic and salt are an inline hummus. 40 g chickpeas and 10 g tahini are one serving of the hummus.",
+      "replacedBefore": [
         {
           "category": "Legume",
           "baseName": "Chickpeas (garbanzo beans, bengal gram)"
@@ -1131,32 +1125,7 @@
           "category": "Herbs",
           "baseName": "Common salt/table salt"
         }
-      ],
-      "reason": "The chickpeas, tahini, lemon, garlic and salt are an inline hummus. 40 g chickpeas and 10 g tahini are one serving of the hummus."
-    },
-    {
-      "recipeId": "curated_vegan_handheld_tempeh_hummus_collard_wrap",
-      "componentRecipeId": "curated_sauce_classic_hummus",
-      "servings": 1,
-      "replaces": [
-        {
-          "category": "Legume",
-          "baseName": "Chickpeas (garbanzo beans, bengal gram)"
-        },
-        {
-          "category": "SaucesCondiments",
-          "baseName": "Tahini"
-        },
-        {
-          "category": "Fruit",
-          "baseName": "Lemon"
-        },
-        {
-          "category": "Veg",
-          "baseName": "Garlic"
-        }
-      ],
-      "reason": "The chickpeas, tahini, lemon and garlic are an inline hummus, one serving of it by chickpeas and tahini. The salt row stays, since it also seasons the tempeh."
+      ]
     },
     {
       "recipeId": "curated_snack_hummus_cucumber",
@@ -1198,7 +1167,9 @@
       "recipeId": "curated_snack_carrot_tahini_dip",
       "componentRecipeId": "curated_sauce_tahini_lemon",
       "servings": 3,
-      "replaces": [
+      "replaces": [],
+      "reason": "The tahini, lemon, garlic and salt are the tahini lemon sauce without its water. 30 g tahini is the whole batch of that sauce, all 3 of its servings, so the dip gains a little lemon and water.",
+      "replacedBefore": [
         {
           "category": "SaucesCondiments",
           "baseName": "Tahini"
@@ -1215,14 +1186,15 @@
           "category": "Herbs",
           "baseName": "Common salt/table salt"
         }
-      ],
-      "reason": "The tahini, lemon, garlic and salt are the tahini lemon sauce without its water. 30 g tahini is the whole batch of that sauce, all 3 of its servings, so the dip gains a little lemon and water."
+      ]
     },
     {
       "recipeId": "curated_soup_butternut_squash",
       "componentRecipeId": "curated_sauce_vegetable_stock",
-      "servings": 0.78,
-      "replaces": [
+      "servings": 0.6,
+      "replaces": [],
+      "reason": "The 3.75 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 187.5 ml of water. 187.5 ml of homemade unsalted stock is 0.78 cups, which cuts the sodium sharply.",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Vegetable stock"
@@ -1231,14 +1203,15 @@
           "category": "Bev",
           "baseName": "Water, tap"
         }
-      ],
-      "reason": "The 3.75 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 187.5 ml of water. 187.5 ml of homemade unsalted stock is 0.78 cups, which cuts the sodium sharply."
+      ]
     },
     {
       "recipeId": "curated_soup_red_lentil",
       "componentRecipeId": "curated_sauce_vegetable_stock",
-      "servings": 1.04,
-      "replaces": [
+      "servings": 0.95,
+      "replaces": [],
+      "reason": "The 3.75 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 250 ml of water. 250 ml of homemade unsalted stock is 1.04 cups, which cuts the sodium sharply.",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Vegetable stock"
@@ -1247,14 +1220,15 @@
           "category": "Bev",
           "baseName": "Water, tap"
         }
-      ],
-      "reason": "The 3.75 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 250 ml of water. 250 ml of homemade unsalted stock is 1.04 cups, which cuts the sodium sharply."
+      ]
     },
     {
       "recipeId": "curated_soup_tomato_basil",
       "componentRecipeId": "curated_sauce_vegetable_stock",
       "servings": 0.52,
-      "replaces": [
+      "replaces": [],
+      "reason": "The 2.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 125 ml of water. 125 ml of homemade unsalted stock is 0.52 cups, which cuts the sodium sharply.",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Vegetable stock"
@@ -1263,62 +1237,15 @@
           "category": "Bev",
           "baseName": "Water, tap"
         }
-      ],
-      "reason": "The 2.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 125 ml of water. 125 ml of homemade unsalted stock is 0.52 cups, which cuts the sodium sharply."
-    },
-    {
-      "recipeId": "curated_soup_green_lentil_vegetable_stew",
-      "componentRecipeId": "curated_sauce_vegetable_stock",
-      "servings": 0.83,
-      "replaces": [
-        {
-          "category": "PantryStaples",
-          "baseName": "Vegetable stock"
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap"
-        }
-      ],
-      "reason": "The 7.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 200 ml of water. 200 ml of homemade unsalted stock is 0.83 cups, which cuts the sodium sharply."
-    },
-    {
-      "recipeId": "curated_soup_turkey_black_bean_chili",
-      "componentRecipeId": "curated_sauce_vegetable_stock",
-      "servings": 0.63,
-      "replaces": [
-        {
-          "category": "PantryStaples",
-          "baseName": "Vegetable stock"
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap"
-        }
-      ],
-      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 150 ml of water. 150 ml of homemade unsalted stock is 0.63 cups, which cuts the sodium sharply."
-    },
-    {
-      "recipeId": "curated_soup_mussels_tomato_garlic_broth",
-      "componentRecipeId": "curated_sauce_vegetable_stock",
-      "servings": 1.25,
-      "replaces": [
-        {
-          "category": "PantryStaples",
-          "baseName": "Vegetable stock"
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap"
-        }
-      ],
-      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 300 ml of water. 300 ml of homemade unsalted stock is 1.25 cups, which cuts the sodium sharply."
+      ]
     },
     {
       "recipeId": "curated_soup_white_bean_kale_soup",
       "componentRecipeId": "curated_sauce_vegetable_stock",
-      "servings": 0.92,
-      "replaces": [
+      "servings": 2,
+      "replaces": [],
+      "reason": "The 7.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 220 ml of water. 220 ml of homemade unsalted stock is 0.92 cups, which cuts the sodium sharply.",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Vegetable stock"
@@ -1327,14 +1254,15 @@
           "category": "Bev",
           "baseName": "Water, tap"
         }
-      ],
-      "reason": "The 7.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 220 ml of water. 220 ml of homemade unsalted stock is 0.92 cups, which cuts the sodium sharply."
+      ]
     },
     {
       "recipeId": "curated_soup_lentil_kale_soup",
       "componentRecipeId": "curated_sauce_vegetable_stock",
       "servings": 0.92,
-      "replaces": [
+      "replaces": [],
+      "reason": "The 7.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 220 ml of water. 220 ml of homemade unsalted stock is 0.92 cups, which cuts the sodium sharply.",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Vegetable stock"
@@ -1343,14 +1271,15 @@
           "category": "Bev",
           "baseName": "Water, tap"
         }
-      ],
-      "reason": "The 7.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 220 ml of water. 220 ml of homemade unsalted stock is 0.92 cups, which cuts the sodium sharply."
+      ]
     },
     {
       "recipeId": "curated_soup_crab_corn_chowder",
       "componentRecipeId": "curated_sauce_vegetable_stock",
-      "servings": 0.5,
-      "replaces": [
+      "servings": 0.6,
+      "replaces": [],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 120 ml of water. 120 ml of homemade unsalted stock is 0.5 cups, which cuts the sodium sharply.",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Vegetable stock"
@@ -1359,14 +1288,15 @@
           "category": "Bev",
           "baseName": "Water, tap"
         }
-      ],
-      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 120 ml of water. 120 ml of homemade unsalted stock is 0.5 cups, which cuts the sodium sharply."
+      ]
     },
     {
       "recipeId": "curated_soup_white_bean_swiss_chard_soup",
       "componentRecipeId": "curated_sauce_vegetable_stock",
-      "servings": 0.92,
-      "replaces": [
+      "servings": 1,
+      "replaces": [],
+      "reason": "The 7.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 220 ml of water. 220 ml of homemade unsalted stock is 0.92 cups, which cuts the sodium sharply.",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Vegetable stock"
@@ -1375,14 +1305,15 @@
           "category": "Bev",
           "baseName": "Water, tap"
         }
-      ],
-      "reason": "The 7.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 220 ml of water. 220 ml of homemade unsalted stock is 0.92 cups, which cuts the sodium sharply."
+      ]
     },
     {
       "recipeId": "curated_soup_mussels_tomato_fennel_broth",
       "componentRecipeId": "curated_sauce_vegetable_stock",
-      "servings": 1.25,
-      "replaces": [
+      "servings": 0.5,
+      "replaces": [],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 300 ml of water. 300 ml of homemade unsalted stock is 1.25 cups, which cuts the sodium sharply.",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Vegetable stock"
@@ -1391,14 +1322,15 @@
           "category": "Bev",
           "baseName": "Water, tap"
         }
-      ],
-      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 300 ml of water. 300 ml of homemade unsalted stock is 1.25 cups, which cuts the sodium sharply."
+      ]
     },
     {
       "recipeId": "curated_soup_turkey_white_bean_soup",
-      "componentRecipeId": "curated_sauce_vegetable_stock",
-      "servings": 0.83,
-      "replaces": [
+      "componentRecipeId": "curated_sauce_chicken_stock",
+      "servings": 1,
+      "replaces": [],
+      "reason": "The 7.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 200 ml of water. 200 ml of homemade unsalted stock is 0.83 cups, which cuts the sodium sharply.",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Vegetable stock"
@@ -1407,14 +1339,15 @@
           "category": "Bev",
           "baseName": "Water, tap"
         }
-      ],
-      "reason": "The 7.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 200 ml of water. 200 ml of homemade unsalted stock is 0.83 cups, which cuts the sodium sharply."
+      ]
     },
     {
       "recipeId": "curated_soup_salmon_fennel_leek_soup",
       "componentRecipeId": "curated_sauce_vegetable_stock",
-      "servings": 1.04,
-      "replaces": [
+      "servings": 0.4,
+      "replaces": [],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 250 ml of water. 250 ml of homemade unsalted stock is 1.04 cups, which cuts the sodium sharply.",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Vegetable stock"
@@ -1423,14 +1356,15 @@
           "category": "Bev",
           "baseName": "Water, tap"
         }
-      ],
-      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 250 ml of water. 250 ml of homemade unsalted stock is 1.04 cups, which cuts the sodium sharply."
+      ]
     },
     {
       "recipeId": "curated_vegan_soup_white_bean_vegetable_soup",
       "componentRecipeId": "curated_sauce_vegetable_stock",
       "servings": 1.04,
-      "replaces": [
+      "replaces": [],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 250 ml of water. 250 ml of homemade unsalted stock is 1.04 cups, which cuts the sodium sharply.",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Vegetable stock"
@@ -1439,14 +1373,15 @@
           "category": "Bev",
           "baseName": "Water, tap"
         }
-      ],
-      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 250 ml of water. 250 ml of homemade unsalted stock is 1.04 cups, which cuts the sodium sharply."
+      ]
     },
     {
       "recipeId": "curated_vegan_soup_hearts_of_palm_corn_chowder",
       "componentRecipeId": "curated_sauce_vegetable_stock",
       "servings": 0.5,
-      "replaces": [
+      "replaces": [],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 120 ml of water. 120 ml of homemade unsalted stock is 0.5 cups, which cuts the sodium sharply.",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Vegetable stock"
@@ -1455,14 +1390,15 @@
           "category": "Bev",
           "baseName": "Water, tap"
         }
-      ],
-      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 120 ml of water. 120 ml of homemade unsalted stock is 0.5 cups, which cuts the sodium sharply."
+      ]
     },
     {
       "recipeId": "curated_vegan_soup_white_bean_tomato_fennel_broth",
       "componentRecipeId": "curated_sauce_vegetable_stock",
       "servings": 1.04,
-      "replaces": [
+      "replaces": [],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 250 ml of water. 250 ml of homemade unsalted stock is 1.04 cups, which cuts the sodium sharply.",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Vegetable stock"
@@ -1471,14 +1407,15 @@
           "category": "Bev",
           "baseName": "Water, tap"
         }
-      ],
-      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 250 ml of water. 250 ml of homemade unsalted stock is 1.04 cups, which cuts the sodium sharply."
+      ]
     },
     {
       "recipeId": "curated_vegan_soup_white_bean_tomato_garlic_broth",
       "componentRecipeId": "curated_sauce_vegetable_stock",
       "servings": 1.04,
-      "replaces": [
+      "replaces": [],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 250 ml of water. 250 ml of homemade unsalted stock is 1.04 cups, which cuts the sodium sharply.",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Vegetable stock"
@@ -1487,14 +1424,15 @@
           "category": "Bev",
           "baseName": "Water, tap"
         }
-      ],
-      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 250 ml of water. 250 ml of homemade unsalted stock is 1.04 cups, which cuts the sodium sharply."
+      ]
     },
     {
       "recipeId": "curated_vegan_soup_lentil_black_bean_chili",
       "componentRecipeId": "curated_sauce_vegetable_stock",
       "servings": 0.63,
-      "replaces": [
+      "replaces": [],
+      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 150 ml of water. 150 ml of homemade unsalted stock is 0.63 cups, which cuts the sodium sharply.",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Vegetable stock"
@@ -1503,14 +1441,15 @@
           "category": "Bev",
           "baseName": "Water, tap"
         }
-      ],
-      "reason": "The 5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 150 ml of water. 150 ml of homemade unsalted stock is 0.63 cups, which cuts the sodium sharply."
+      ]
     },
     {
       "recipeId": "curated_vegan_soup_mushroom_white_bean_soup",
       "componentRecipeId": "curated_sauce_vegetable_stock",
       "servings": 0.83,
-      "replaces": [
+      "replaces": [],
+      "reason": "The 7.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 200 ml of water. 200 ml of homemade unsalted stock is 0.83 cups, which cuts the sodium sharply.",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Vegetable stock"
@@ -1519,50 +1458,28 @@
           "category": "Bev",
           "baseName": "Water, tap"
         }
-      ],
-      "reason": "The 7.5 g vegetable stock row is a bouillon powder (about 22,000 mg sodium per 100 g) dissolved in the 200 ml of water. 200 ml of homemade unsalted stock is 0.83 cups, which cuts the sodium sharply."
+      ]
     },
     {
       "recipeId": "curated_sauce_onion_gravy",
       "componentRecipeId": "curated_sauce_vegetable_stock",
       "servings": 1.25,
-      "replaces": [
+      "replaces": [],
+      "reason": "The gravy lists 300 ml of vegetable stock as its liquid. That much homemade stock is 1.25 cups, in place of the bouillon powder row with its very high sodium.",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Vegetable stock"
         }
-      ],
-      "reason": "The gravy lists 300 ml of vegetable stock as its liquid. That much homemade stock is 1.25 cups, in place of the bouillon powder row with its very high sodium."
-    },
-    {
-      "recipeId": "curated_side_braised_beef_kohlrabi_carrot",
-      "componentRecipeId": "curated_sauce_vegetable_stock",
-      "servings": 1,
-      "replaces": [
-        {
-          "category": "PantryStaples",
-          "baseName": "Vegetable stock"
-        }
-      ],
-      "reason": "The instructions braise in stock and water to about 1 cup of liquid, with 7.5 g of the bouillon powder row and no water row. One cup of homemade stock takes the place of both."
-    },
-    {
-      "recipeId": "curated_vegan_side_braised_seitan_kohlrabi_carrot",
-      "componentRecipeId": "curated_sauce_vegetable_stock",
-      "servings": 1,
-      "replaces": [
-        {
-          "category": "PantryStaples",
-          "baseName": "Vegetable stock"
-        }
-      ],
-      "reason": "The instructions braise in stock and water to about 1 cup of liquid, with 7.5 g of the bouillon powder row and no water row. One cup of homemade stock takes the place of both."
+      ]
     },
     {
       "recipeId": "curated_soup_chicken_vegetable",
       "componentRecipeId": "curated_sauce_chicken_stock",
       "servings": 1.04,
-      "replaces": [
+      "replaces": [],
+      "reason": "The 2.5 g stock cube in 250 ml of water is the broth. 250 ml of homemade unsalted chicken stock is 1.04 cups.",
+      "replacedBefore": [
         {
           "category": "Herbs",
           "baseName": "Chicken bouillon/stock/soup (stock cubes, powder)"
@@ -1571,125 +1488,77 @@
           "category": "Bev",
           "baseName": "Water, tap"
         }
-      ],
-      "reason": "The 2.5 g stock cube in 250 ml of water is the broth. 250 ml of homemade unsalted chicken stock is 1.04 cups."
-    },
-    {
-      "recipeId": "curated_sauce_garlic_herb_vinaigrette",
-      "componentRecipeId": "curated_sauce_yellow_mustard",
-      "servings": 0.167,
-      "replaces": [
-        {
-          "category": "Herbs",
-          "baseName": "Mustard, prepared, yellow"
-        }
-      ],
-      "reason": "Mustard, prepared, yellow is made at home",
-      "note": "2.5 g"
+      ]
     },
     {
       "recipeId": "curated_handheld_egg_salad_lettuce_wraps",
       "componentRecipeId": "curated_sauce_yellow_mustard",
       "servings": 0.167,
-      "replaces": [
+      "replaces": [],
+      "reason": "Mustard, prepared, yellow is made at home",
+      "note": "2.5 g",
+      "replacedBefore": [
         {
           "category": "Herbs",
           "baseName": "Mustard, prepared, yellow"
         }
-      ],
-      "reason": "Mustard, prepared, yellow is made at home",
-      "note": "2.5 g"
-    },
-    {
-      "recipeId": "curated_vegan_handheld_chickpea_egg_salad_lettuce_wraps",
-      "componentRecipeId": "curated_sauce_yellow_mustard",
-      "servings": 0.167,
-      "replaces": [
-        {
-          "category": "Herbs",
-          "baseName": "Mustard, prepared, yellow"
-        }
-      ],
-      "reason": "Mustard, prepared, yellow is made at home",
-      "note": "2.5 g"
-    },
-    {
-      "recipeId": "curated_sauce_lemon_mustard_vinaigrette",
-      "componentRecipeId": "curated_sauce_yellow_mustard",
-      "servings": 0.333,
-      "replaces": [
-        {
-          "category": "Herbs",
-          "baseName": "Mustard, prepared, yellow"
-        }
-      ],
-      "reason": "Mustard, prepared, yellow is made at home",
-      "note": "5 g"
+      ]
     },
     {
       "recipeId": "curated_handheld_grilled_chicken_sandwich",
       "componentRecipeId": "curated_baked_whole_wheat_bread",
-      "servings": 0.86,
-      "replaces": [
+      "servings": 2,
+      "replaces": [],
+      "reason": "Bröd fullkorn vete råg fibrer ca 6% is made at home",
+      "note": null,
+      "replacedBefore": [
         {
           "category": "Baked",
           "baseName": "Bröd fullkorn vete råg fibrer ca 6%"
         }
-      ],
-      "reason": "Bröd fullkorn vete råg fibrer ca 6% is made at home",
-      "note": "2 slice"
-    },
-    {
-      "recipeId": "curated_vegan_handheld_grilled_tempeh_sandwich",
-      "componentRecipeId": "curated_baked_whole_wheat_bread",
-      "servings": 0.86,
-      "replaces": [
-        {
-          "category": "Baked",
-          "baseName": "Bröd fullkorn vete råg fibrer ca 6%"
-        }
-      ],
-      "reason": "Bröd fullkorn vete råg fibrer ca 6% is made at home",
-      "note": "2 slice"
+      ]
     },
     {
       "recipeId": "curated_handheld_black_bean_sweet_potato_tacos",
       "componentRecipeId": "curated_baked_wheat_tortillas",
       "servings": 1,
-      "replaces": [
+      "replaces": [],
+      "reason": "Tortilla, wraps/burrito, hvetemel is made at home",
+      "note": null,
+      "replacedBefore": [
         {
           "category": "Baked",
           "baseName": "Tortilla, wraps/burrito, hvetemel"
         }
-      ],
-      "reason": "Tortilla, wraps/burrito, hvetemel is made at home",
-      "note": "1 each"
+      ]
     },
     {
       "recipeId": "curated_handheld_egg_salad_lettuce_wraps",
       "componentRecipeId": "curated_fr_base_mayonnaise",
       "servings": 1,
-      "replaces": [
+      "replaces": [],
+      "reason": "Dressing, mayonnaise, whole egg type is made at home",
+      "note": "15 g",
+      "replacedBefore": [
         {
           "category": "Herbs",
           "baseName": "Dressing, mayonnaise, whole egg type"
         }
-      ],
-      "reason": "Dressing, mayonnaise, whole egg type is made at home",
-      "note": "15 g"
+      ]
     },
     {
       "recipeId": "curated_dessert_mixed_berry_chia_pudding",
       "componentRecipeId": "curated_beverage_almond_milk",
       "servings": 0.521,
-      "replaces": [
+      "replaces": [],
+      "reason": "Almond drink unsweetened is made at home",
+      "note": "125 ml, as the liquid base",
+      "replacedBefore": [
         {
           "category": "NutSeed",
           "baseName": "Almond drink unsweetened"
         }
-      ],
-      "reason": "Almond drink unsweetened is made at home",
-      "note": "125 ml, as the liquid base"
+      ]
     },
     {
       "recipeId": "curated_snack_buckwheat_porridge_blueberries_walnuts",
@@ -1702,7 +1571,13 @@
         }
       ],
       "reason": "Almond drink unsweetened is made at home",
-      "note": "120 ml"
+      "note": "120 ml",
+      "replacedBefore": [
+        {
+          "category": "NutSeed",
+          "baseName": "Almond drink unsweetened"
+        }
+      ]
     },
     {
       "recipeId": "curated_snack_millet_porridge_apricots",
@@ -1715,20 +1590,13 @@
         }
       ],
       "reason": "Almond drink unsweetened is made at home",
-      "note": "120 ml"
-    },
-    {
-      "recipeId": "curated_side_chickpea_spinach_curry_bowl",
-      "componentRecipeId": "curated_sauce_curry_powder",
-      "servings": 1,
-      "replaces": [
+      "note": "120 ml",
+      "replacedBefore": [
         {
-          "category": "Herbs",
-          "baseName": "Curry powder"
+          "category": "NutSeed",
+          "baseName": "Almond drink unsweetened"
         }
-      ],
-      "reason": "Curry powder is made at home",
-      "note": "3 g"
+      ]
     },
     {
       "recipeId": "curated_vegan_overnight_oats_chia_berries",
@@ -1741,12 +1609,18 @@
         }
       ],
       "reason": "Soybeans, soy milk, regular is made at home",
-      "note": "150 ml"
+      "note": "150 ml",
+      "replacedBefore": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ]
     },
     {
       "recipeId": "curated_vegan_baked_oatmeal_cup_banana_cinnamon",
       "componentRecipeId": "curated_cn_dou_jiang",
-      "servings": 0.417,
+      "servings": 0.125,
       "replaces": [
         {
           "category": "Legume",
@@ -1754,7 +1628,13 @@
         }
       ],
       "reason": "Soybeans, soy milk, regular is made at home",
-      "note": "100 ml"
+      "note": "30 ml",
+      "replacedBefore": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ]
     },
     {
       "recipeId": "curated_vegan_peach_almond_overnight_oats",
@@ -1767,7 +1647,13 @@
         }
       ],
       "reason": "Soybeans, soy milk, regular is made at home",
-      "note": "150 ml"
+      "note": "150 ml",
+      "replacedBefore": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ]
     },
     {
       "recipeId": "curated_vegan_buckwheat_porridge_blueberries_walnuts",
@@ -1780,12 +1666,18 @@
         }
       ],
       "reason": "Soybeans, soy milk, regular is made at home",
-      "note": "150 ml"
+      "note": "150 ml",
+      "replacedBefore": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ]
     },
     {
       "recipeId": "curated_vegan_millet_porridge_apricots",
       "componentRecipeId": "curated_cn_dou_jiang",
-      "servings": 0.625,
+      "servings": 0.458,
       "replaces": [
         {
           "category": "Legume",
@@ -1793,7 +1685,13 @@
         }
       ],
       "reason": "Soybeans, soy milk, regular is made at home",
-      "note": "150 ml"
+      "note": "110 ml",
+      "replacedBefore": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ]
     },
     {
       "recipeId": "curated_vegan_nectarine_chia_pudding_cashews",
@@ -1806,7 +1704,13 @@
         }
       ],
       "reason": "Soybeans, soy milk, regular is made at home",
-      "note": "150 ml"
+      "note": "150 ml",
+      "replacedBefore": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ]
     },
     {
       "recipeId": "curated_vegan_plum_walnut_overnight_oats",
@@ -1819,7 +1723,13 @@
         }
       ],
       "reason": "Soybeans, soy milk, regular is made at home",
-      "note": "150 ml"
+      "note": "150 ml",
+      "replacedBefore": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ]
     },
     {
       "recipeId": "curated_vegan_fig_pistachio_overnight_oats",
@@ -1832,12 +1742,18 @@
         }
       ],
       "reason": "Soybeans, soy milk, regular is made at home",
-      "note": "150 ml"
+      "note": "150 ml",
+      "replacedBefore": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ]
     },
     {
       "recipeId": "curated_vegan_apricot_coconut_overnight_oats",
       "componentRecipeId": "curated_cn_dou_jiang",
-      "servings": 0.313,
+      "servings": 0.25,
       "replaces": [
         {
           "category": "Legume",
@@ -1845,7 +1761,13 @@
         }
       ],
       "reason": "Soybeans, soy milk, regular is made at home",
-      "note": "75 ml"
+      "note": "60 ml",
+      "replacedBefore": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ]
     },
     {
       "recipeId": "curated_vegan_fig_cashew_overnight_oats",
@@ -1858,7 +1780,13 @@
         }
       ],
       "reason": "Soybeans, soy milk, regular is made at home",
-      "note": "150 ml"
+      "note": "150 ml",
+      "replacedBefore": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ]
     },
     {
       "recipeId": "curated_vegan_mango_pistachio_chia_pudding",
@@ -1871,124 +1799,396 @@
         }
       ],
       "reason": "Soybeans, soy milk, regular is made at home",
-      "note": "60 ml"
-    },
-    {
-      "recipeId": "curated_vegan_handheld_seitan_roasted_vegetable_wrap",
-      "componentRecipeId": "curated_sauce_seitan",
-      "servings": 0.8,
-      "replaces": [
+      "note": "60 ml",
+      "replacedBefore": [
         {
-          "category": "Grain",
-          "baseName": "Meat substitute containing gluten (seitan)"
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
         }
-      ],
-      "reason": "Meat substitute containing gluten (seitan) is made at home",
-      "note": "120 g, sliced"
-    },
-    {
-      "recipeId": "curated_vegan_side_baked_seitan_zucchini_tomatoes",
-      "componentRecipeId": "curated_sauce_seitan",
-      "servings": 1,
-      "replaces": [
-        {
-          "category": "Grain",
-          "baseName": "Meat substitute containing gluten (seitan)"
-        }
-      ],
-      "reason": "Meat substitute containing gluten (seitan) is made at home",
-      "note": "150 g"
-    },
-    {
-      "recipeId": "curated_vegan_side_braised_seitan_kohlrabi_carrot",
-      "componentRecipeId": "curated_sauce_seitan",
-      "servings": 1,
-      "replaces": [
-        {
-          "category": "Grain",
-          "baseName": "Meat substitute containing gluten (seitan)"
-        }
-      ],
-      "reason": "Meat substitute containing gluten (seitan) is made at home",
-      "note": "150 g, cubed"
-    },
-    {
-      "recipeId": "curated_vegan_side_herb_crusted_seitan_roast",
-      "componentRecipeId": "curated_sauce_seitan",
-      "servings": 1,
-      "replaces": [
-        {
-          "category": "Grain",
-          "baseName": "Meat substitute containing gluten (seitan)"
-        }
-      ],
-      "reason": "Meat substitute containing gluten (seitan) is made at home",
-      "note": "150 g"
-    },
-    {
-      "recipeId": "curated_vegan_side_seitan_chops_roasted_eggplant",
-      "componentRecipeId": "curated_sauce_seitan",
-      "servings": 1,
-      "replaces": [
-        {
-          "category": "Grain",
-          "baseName": "Meat substitute containing gluten (seitan)"
-        }
-      ],
-      "reason": "Meat substitute containing gluten (seitan) is made at home",
-      "note": "150 g"
-    },
-    {
-      "recipeId": "curated_vegan_side_seitan_chop_brussels_apple",
-      "componentRecipeId": "curated_sauce_seitan",
-      "servings": 1,
-      "replaces": [
-        {
-          "category": "Grain",
-          "baseName": "Meat substitute containing gluten (seitan)"
-        }
-      ],
-      "reason": "Meat substitute containing gluten (seitan) is made at home",
-      "note": "150 g"
-    },
-    {
-      "recipeId": "curated_vegan_side_seitan_turnip_kale",
-      "componentRecipeId": "curated_sauce_seitan",
-      "servings": 1,
-      "replaces": [
-        {
-          "category": "Grain",
-          "baseName": "Meat substitute containing gluten (seitan)"
-        }
-      ],
-      "reason": "Meat substitute containing gluten (seitan) is made at home",
-      "note": "150 g"
+      ]
     },
     {
       "recipeId": "curated_handheld_breakfast_burrito_eggs_black_beans",
       "componentRecipeId": "curated_baked_wheat_tortillas",
       "servings": 2,
-      "replaces": [
+      "replaces": [],
+      "reason": "The burrito lists 60 g of tortilla flour, which is the flour of the tortilla it is rolled in. The homemade wheat tortilla uses 31.25 g flour per tortilla, so 60 g is 1.92 of its servings. Rounded to 2 tortillas (62.5 g flour), rolled out together as one large wrap.",
+      "note": "rolled out as one large wrap",
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Wheat flour, white, tortilla mix, enriched"
         }
-      ],
-      "reason": "The burrito lists 60 g of tortilla flour, which is the flour of the tortilla it is rolled in. The homemade wheat tortilla uses 31.25 g flour per tortilla, so 60 g is 1.92 of its servings. Rounded to 2 tortillas (62.5 g flour), rolled out together as one large wrap.",
-      "note": "rolled out as one large wrap"
+      ]
     },
     {
       "recipeId": "curated_vegan_breakfast_burrito_tofu_black_beans",
       "componentRecipeId": "curated_baked_wheat_tortillas",
       "servings": 2,
-      "replaces": [
+      "replaces": [],
+      "reason": "The burrito lists 60 g of tortilla flour, which is the flour of the tortilla it is rolled in. The homemade wheat tortilla uses 31.25 g flour per tortilla, so 60 g is 1.92 of its servings. Rounded to 2 tortillas (62.5 g flour), rolled out together as one large wrap.",
+      "note": "rolled out as one large wrap",
+      "replacedBefore": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, tortilla mix, enriched"
+        }
+      ]
+    },
+    {
+      "recipeId": "curated_salad_mackerel_radish_salad",
+      "componentRecipeId": "curated_fr_base_mayonnaise",
+      "servings": 2,
+      "replaces": [],
+      "reason": "the audited recipe makes this first",
+      "note": "2 tbsp (30 g)"
+    },
+    {
+      "recipeId": "curated_vegan_handheld_grilled_tempeh_sandwich",
+      "componentRecipeId": "curated_baked_whole_wheat_bread",
+      "servings": 2,
+      "replaces": [],
+      "replacedBefore": [
+        {
+          "category": "Baked",
+          "baseName": "Bröd fullkorn vete råg fibrer ca 6%"
+        }
+      ],
+      "reason": "Bröd fullkorn vete råg fibrer ca 6% is made at home",
+      "note": "toasted"
+    },
+    {
+      "recipeId": "curated_vegan_handheld_seitan_roasted_vegetable_wrap",
+      "componentRecipeId": "curated_baked_wheat_tortillas",
+      "servings": 2,
+      "replaces": [],
+      "replacedBefore": [
         {
           "category": "PantryStaples",
           "baseName": "Wheat flour, white, tortilla mix, enriched"
         }
       ],
-      "reason": "The burrito lists 60 g of tortilla flour, which is the flour of the tortilla it is rolled in. The homemade wheat tortilla uses 31.25 g flour per tortilla, so 60 g is 1.92 of its servings. Rounded to 2 tortillas (62.5 g flour), rolled out together as one large wrap.",
+      "reason": "The wrap lists 60 g of tortilla flour, which is the flour of the tortilla it is rolled in. The homemade wheat tortilla uses 31.25 g flour per tortilla, so 60 g is 1.92 of its servings. Rounded to 2 tortillas (62.5 g flour), rolled out together as one large wrap.",
       "note": "rolled out as one large wrap"
+    },
+    {
+      "recipeId": "curated_vegan_handheld_seitan_roasted_vegetable_wrap",
+      "componentRecipeId": "curated_sauce_seitan",
+      "servings": 1,
+      "replaces": [],
+      "replacedBefore": [
+        {
+          "category": "Grain",
+          "baseName": "Meat substitute containing gluten (seitan)"
+        }
+      ],
+      "reason": "Meat substitute containing gluten (seitan) is made at home",
+      "note": "a quarter of the log, sliced"
+    },
+    {
+      "recipeId": "curated_vegan_handheld_tempeh_hummus_collard_wrap",
+      "componentRecipeId": "curated_sauce_classic_hummus",
+      "servings": 2,
+      "replaces": [],
+      "replacedBefore": [
+        {
+          "category": "Legume",
+          "baseName": "Chickpeas (garbanzo beans, bengal gram)"
+        },
+        {
+          "category": "SaucesCondiments",
+          "baseName": "Tahini"
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Lemon"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic"
+        }
+      ],
+      "reason": "The chickpeas, tahini, lemon and garlic are an inline hummus, one serving of it by chickpeas and tahini. The salt row stays, since it also seasons the tempeh.",
+      "note": "¼ cup per leaf"
+    },
+    {
+      "recipeId": "curated_vegan_side_baked_seitan_zucchini_tomatoes",
+      "componentRecipeId": "curated_sauce_seitan",
+      "servings": 1,
+      "replaces": [],
+      "replacedBefore": [
+        {
+          "category": "Grain",
+          "baseName": "Meat substitute containing gluten (seitan)"
+        }
+      ],
+      "reason": "Meat substitute containing gluten (seitan) is made at home",
+      "note": "about 150 g cooked seitan, a quarter of the batch"
+    },
+    {
+      "recipeId": "curated_vegan_side_braised_seitan_kohlrabi_carrot",
+      "componentRecipeId": "curated_sauce_seitan",
+      "servings": 1,
+      "replaces": [],
+      "replacedBefore": [
+        {
+          "category": "Grain",
+          "baseName": "Meat substitute containing gluten (seitan)"
+        }
+      ],
+      "reason": "Meat substitute containing gluten (seitan) is made at home",
+      "note": "about 150 g cooked seitan, a quarter of the batch"
+    },
+    {
+      "recipeId": "curated_vegan_side_herb_crusted_seitan_roast",
+      "componentRecipeId": "curated_sauce_seitan",
+      "servings": 1,
+      "replaces": [],
+      "replacedBefore": [
+        {
+          "category": "Grain",
+          "baseName": "Meat substitute containing gluten (seitan)"
+        }
+      ],
+      "reason": "Meat substitute containing gluten (seitan) is made at home",
+      "note": "about 150 g cooked seitan, a quarter of the batch"
+    },
+    {
+      "recipeId": "curated_vegan_side_seitan_chops_roasted_eggplant",
+      "componentRecipeId": "curated_sauce_seitan",
+      "servings": 1,
+      "replaces": [],
+      "replacedBefore": [
+        {
+          "category": "Grain",
+          "baseName": "Meat substitute containing gluten (seitan)"
+        }
+      ],
+      "reason": "Meat substitute containing gluten (seitan) is made at home",
+      "note": "about 150 g cooked seitan, a quarter of the batch"
+    },
+    {
+      "recipeId": "curated_vegan_side_seitan_chop_brussels_apple",
+      "componentRecipeId": "curated_sauce_seitan",
+      "servings": 1,
+      "replaces": [],
+      "replacedBefore": [
+        {
+          "category": "Grain",
+          "baseName": "Meat substitute containing gluten (seitan)"
+        }
+      ],
+      "reason": "Meat substitute containing gluten (seitan) is made at home",
+      "note": "about 150g cooked seitan, a quarter of the batch"
+    },
+    {
+      "recipeId": "curated_vegan_side_seitan_turnip_kale",
+      "componentRecipeId": "curated_sauce_seitan",
+      "servings": 1,
+      "replaces": [],
+      "replacedBefore": [
+        {
+          "category": "Grain",
+          "baseName": "Meat substitute containing gluten (seitan)"
+        }
+      ],
+      "reason": "Meat substitute containing gluten (seitan) is made at home",
+      "note": "about 150g cooked seitan, a quarter of the batch"
+    },
+    {
+      "recipeId": "curated_vegan_breakfast_burrito_tofu_black_beans",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.125,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soybeans, soy milk, regular is made at home",
+      "note": "30 ml"
+    },
+    {
+      "recipeId": "curated_side_duck_cherry_wild_rice",
+      "componentRecipeId": "curated_sauce_chicken_stock",
+      "servings": 0.5,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Chicken stock"
+        }
+      ],
+      "reason": "Chicken stock is made at home",
+      "note": "120 ml"
+    },
+    {
+      "recipeId": "curated_side_shrimp_snow_pea_stir_fry_rice",
+      "componentRecipeId": "curated_sauce_chicken_stock",
+      "servings": 0.125,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Chicken stock"
+        }
+      ],
+      "reason": "Chicken stock is made at home",
+      "note": "30 ml"
+    },
+    {
+      "recipeId": "curated_side_sorghum_pilaf",
+      "componentRecipeId": "curated_sauce_chicken_stock",
+      "servings": 0.575,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Chicken stock"
+        }
+      ],
+      "reason": "Chicken stock is made at home",
+      "note": "138 ml"
+    },
+    {
+      "recipeId": "curated_side_baked_trout_parsnip_mash",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 0.1042,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        }
+      ],
+      "reason": "Vegetable stock is made at home",
+      "note": "25 ml"
+    },
+    {
+      "recipeId": "curated_side_braised_beef_kohlrabi_carrot",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 0.8333,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        }
+      ],
+      "reason": "Vegetable stock is made at home",
+      "note": "200 ml"
+    },
+    {
+      "recipeId": "curated_side_rainbow_stir_fry",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 0.0875,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        }
+      ],
+      "reason": "Vegetable stock is made at home",
+      "note": "21 ml"
+    },
+    {
+      "recipeId": "curated_side_teriyaki_baked_tofu",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 0.125,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        }
+      ],
+      "reason": "Vegetable stock is made at home",
+      "note": "30 ml"
+    },
+    {
+      "recipeId": "curated_vegan_side_chickpea_okra_tomato_skillet",
+      "componentRecipeId": "curated_sauce_vegetable_stock",
+      "servings": 0.25,
+      "replaces": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Vegetable stock"
+        }
+      ],
+      "reason": "Vegetable stock is made at home",
+      "note": "60 ml"
+    },
+    {
+      "recipeId": "curated_vegan_smoothie_berry_antioxidant",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.5,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soy milk is made at home",
+      "note": "120 ml"
+    },
+    {
+      "recipeId": "curated_vegan_smoothie_golden_turmeric",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.25,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soy milk is made at home",
+      "note": "60 ml"
+    },
+    {
+      "recipeId": "curated_vegan_smoothie_green_glow",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.5,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soy milk is made at home",
+      "note": "120 ml"
+    },
+    {
+      "recipeId": "curated_vegan_smoothie_iron_vitamin_c",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.25,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soy milk is made at home",
+      "note": "60 ml"
+    },
+    {
+      "recipeId": "curated_vegan_smoothie_tropical_ginger",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.25,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soy milk is made at home",
+      "note": "60 ml"
+    },
+    {
+      "recipeId": "curated_vegan_tofu_scramble_potatoes",
+      "componentRecipeId": "curated_cn_dou_jiang",
+      "servings": 0.0833,
+      "replaces": [
+        {
+          "category": "Legume",
+          "baseName": "Soybeans, soy milk, regular"
+        }
+      ],
+      "reason": "Soy milk is made at home",
+      "note": "20 ml"
     }
   ]
 }

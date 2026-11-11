@@ -88,6 +88,15 @@ function componentText(c, comp) {
     const { text, value } = cookAmount(c.servings);
     const [one, many] = EACH_WORD[comp.id] || ['serving', 'servings'];
     measure = `${text} ${value <= 1 ? one : many}`;
+  } else if (unit === 'cup' && c.servings * comp.servingSizeAmount < 0.22) {
+    // Under a quarter cup a cook measures with spoons: 20 ml reads as about
+    // 4 teaspoons, never as about ¼ cup.
+    const cups = c.servings * comp.servingSizeAmount;
+    const halves = (n) => Math.max(0.5, Math.round(n * 2) / 2);
+    const tbsp = halves(cups * 16);
+    const [amount, one, many, exact] = tbsp >= 1 ? [tbsp, 'tablespoon', 'tablespoons', cups * 16] : [halves(cups * 48), 'teaspoon', 'teaspoons', cups * 48];
+    const shown = String(amount).replace(/\.5$/, '½').replace(/^0½$/, '½');
+    measure = `${Math.abs(amount - exact) > 0.05 ? 'about ' : ''}${shown} ${amount <= 1 ? one : many}`;
   } else {
     const { text, value } = cookAmount(c.servings * comp.servingSizeAmount);
     measure = `${text} ${value <= 1 ? unit : PLURAL[unit] || unit}`;

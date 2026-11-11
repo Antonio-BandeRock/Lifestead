@@ -26,6 +26,7 @@ const { DB_PATH } = require('./flatten_recipe_components');
 const RECIPES_TS = path.join(__dirname, '..', 'lib', 'digest', 'recipes.ts');
 
 const WORDS = {
+  'Almond drink unsweetened': /almond/i,
   'Wheat flour, white, tortilla mix, enriched': /tortilla/i,
   'Tortilla, wraps/burrito, hvetemel': /tortilla/i,
   'Chickpeas (garbanzo beans, bengal gram)': /chickpea/i,
@@ -37,6 +38,8 @@ const WORDS = {
   'Water, tap': /water/i,
   'Vegetable stock': /stock|bouillon|broth/i,
   'Chicken bouillon/stock/soup (stock cubes, powder)': /stock|bouillon|broth/i,
+  'Chicken stock': /stock|broth/i,
+  'Soybeans, soy milk, regular': /soy ?milk/i,
 };
 
 const newRecipes = new Map(loadAllCuisineRecipes().map((r) => [r.id, r]));

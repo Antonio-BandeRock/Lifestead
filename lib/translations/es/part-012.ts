@@ -462,7 +462,7 @@ export const PART: Readonly<Record<string, string>> = {
  "Sauerkraut and other salt-brine vegetable ferments, eaten by the forkful, not poured into a glass.": "Chucrut y otros fermentos de verduras en salmuera, que se comen a tenedor y no se sirven en un vaso.",
  "Built around a specific starter culture, the one type where picking a Culture & Probiotic is an actual ingredient choice.": "Hechos alrededor de un cultivo iniciador específico, el único tipo donde elegir un cultivo y probiótico es una elección de ingrediente.",
  "Syrups & Spoonable Tonics": "Jarabes y tónicos de cucharada",
- "Fermented garlic honey, pine needle-style cheong, taken by the spoonful, not diluted into a drink.": "Miel fermentada con ajo, cheong tipo agujas de pino, que se toman a cucharadas y no se diluyen en una bebida.",
+ "Fermented garlic honey and lemon cheong, sweet preserves taken by the spoonful or stirred into water.": "Miel fermentada con ajo y cheong de limón, conservas dulces que se toman a cucharadas o se disuelven en agua.",
  "Something Else": "Otra cosa",
  "Not sure yet, or building something this list does not name: opens every ingredient category unfiltered.": "Si todavía no sabes, o armas algo que esta lista no nombra: abre todas las categorías de ingredientes sin filtro.",
  "Is This a Drink?": "¿Es una bebida?",
