@@ -190,4 +190,9 @@
 // their sources, truite aux amandes, salade nicoise and xi hu cu yu matched
 // to their sources, and volume weights added for fresh herbs, chives,
 // orange peel, oats, toasted sesame and mustard. A stale copy has the old rows.
-export const REFERENCE_DB_VERSION = "20261111170000";
+// BUMPED again 2026-11-11 (1.0.86.7): scripts/fix_nutrient_source_errors.js
+// divides Germany_BLS vitamin B6 by 1000 (stored in micrograms), removes
+// France_Ciqual selenium and iodine detection-limit placeholders, corrects
+// 16 single wrong values and two manganese groups, and hides five supplement
+// tablets and one mislabelled sweet potato. A stale copy has the old values.
+export const REFERENCE_DB_VERSION = "20261111220000";

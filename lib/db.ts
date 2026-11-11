@@ -1977,7 +1977,10 @@ export async function resolveFoodForCookingMethod(
 // rewrite past days' nutrient totals and trends that someone may already have
 // read and acted on, and that is a decision to put to a person rather than
 // make on their behalf during a launch.
-const COOKING_METHOD_REPAIR_KEY = 'cooking_method_reresolve_v1';
+// v2 (1.0.86.7): runs once more now that a dried, canned, frozen or other
+// preserved row no longer counts as the cooked form of a food, so a dish
+// saved with sun-dried tomato standing in for simmered tomato is corrected.
+const COOKING_METHOD_REPAIR_KEY = 'cooking_method_reresolve_v2';
 
 const INGREDIENT_TABLES = [
   'side_ingredients',
@@ -22899,7 +22902,10 @@ export function endOfLocalDay(dateOrDateTime: string): string {
 // changes, so every cached day is recomputed once on the next read.
 // 2 (1.0.85.1): spooned salt counts since 1.0.84.1 and salt poured away
 // with its water stops counting, neither of which changes a meal item.
-const DAILY_NUTRIENT_TOTALS_CACHE_FORMAT = 2;
+// 3 (1.0.86.7): reference values corrected (Germany_BLS vitamin B6 in
+// micrograms, Ciqual selenium and iodine placeholders, single wrong rows) and
+// preserved forms no longer stand in for cooked ones.
+const DAILY_NUTRIENT_TOTALS_CACHE_FORMAT = 3;
 
 type CachedDayRow = { date: string; signature: string; totals_json: string };
 

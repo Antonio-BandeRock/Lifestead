@@ -5971,6 +5971,46 @@ def apply_nutrient_source_fixes(cur):
                 removed += 1
         print(f"France_Ciqual {code}: {removed} detection-limit placeholders removed")
 
+    # 3 to 5: single values, two manganese groups and six rows that are not
+    # food as eaten, from the 2026-11-11 audit of every row; reasons are in
+    # scripts/fix_nutrient_source_errors.js.
+    row_fixes = [
+        ("Germany_BLS", 10455, "manganese", 1.2),
+        ("Canada_CNF", 20011, "manganese", 2.2),
+        ("Australia_AFCD", 26948, "manganese", None),
+        ("Norway_Matvaretabellen", 560, "iron", None),
+        ("Norway_Matvaretabellen", 560, "copper", None),
+        ("Norway_Matvaretabellen", 560, "riboflavin_b2", None),
+        ("USDA", 641, "manganese", None),
+        ("UK_CoFID", 8013, "iron", None),
+        ("France_Ciqual", 26325, "manganese", None),
+        ("USDA", 5663, "manganese", None),
+        ("USDA", 6670, "manganese", None),
+        ("Canada_CNF", 22899, "manganese", None),
+        ("Canada_CNF", 22895, "manganese", None),
+        ("Sweden_Livsmedelsverket", 7051, "riboflavin_b2", 0.21),
+        ("Canada_CNF", 22998, "thiamin_b1", None),
+        ("Australia_AFCD", 26715, "selenium", None),
+    ]
+    for source, food_id, code, value in row_fixes:
+        if value is None:
+            cur.execute("DELETE FROM food_nutrients WHERE source = ? AND food_id = ? AND nutrient_code = ?",
+                        (source, food_id, code))
+        else:
+            cur.execute("UPDATE food_nutrients SET amount_per_100g = ? WHERE source = ? AND food_id = ? AND nutrient_code = ?",
+                        (value, source, food_id, code))
+    cur.execute(
+        "DELETE FROM food_nutrients WHERE source = 'Germany_BLS' AND nutrient_code = 'manganese' "
+        "AND food_id IN (SELECT food_id FROM foods WHERE source = 'Germany_BLS' AND category = 'Mushroom')")
+    cur.execute(
+        "DELETE FROM food_nutrients WHERE source = 'Australia_AFCD' AND nutrient_code = 'manganese' AND amount_per_100g > 1 "
+        "AND food_id IN (SELECT food_id FROM foods WHERE source = 'Australia_AFCD' AND (lower(name) LIKE 'salmon%' "
+        "OR lower(name) LIKE 'trout%' OR lower(name) LIKE 'shark%' OR lower(name) LIKE 'abalone%'))")
+    for source, food_id in (("Norway_Matvaretabellen", 1191), ("Norway_Matvaretabellen", 1192),
+                            ("Norway_Matvaretabellen", 2065), ("Norway_Matvaretabellen", 2066),
+                            ("Norway_Matvaretabellen", 443), ("Japan_MEXT", 8361)):
+        cur.execute("UPDATE foods SET hidden = 1 WHERE source = ? AND food_id = ?", (source, food_id))
+
 
 def write_version_file(version_ts_path):
     # The app compares this against what it last imported on-device and

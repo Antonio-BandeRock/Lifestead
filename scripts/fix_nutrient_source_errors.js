@@ -1,3 +1,4 @@
+/* global __dirname */
 // Corrects two source-wide errors in the LIVE reference database
 // (assets/data/foods_reference.db), found 2026-11-11 while tracing why whole
 // days of meals read far past the upper limits.
@@ -102,5 +103,64 @@ for (const code of ['selenium', 'iodine']) {
   }
   console.log(`France_Ciqual ${code}: ${removed} placeholder values removed, ${kept} kept${dryRun ? ' (dry run)' : ''}`);
 }
+
+// 3. Single values found wrong by the 2026-11-11 audit of every row against
+//    the same food in other sources. Removing one lets getFoodNutrients fill
+//    it from a sibling row and say so; a replacement is used only where the
+//    measured value from another national source is clear.
+const ROW_FIXES = [
+  // [source, food_id, nutrient_code, new value or null to remove, why]
+  ['Germany_BLS', 10455, 'manganese', 1.2, 'loganberry stored 600'],
+  ['Canada_CNF', 20011, 'manganese', 2.2, 'raw chickpeas stored 21.3'],
+  ['Australia_AFCD', 26948, 'manganese', null, 'coconut oil stored 11'],
+  ['Norway_Matvaretabellen', 560, 'iron', null, 'roast goose meat at liver level'],
+  ['Norway_Matvaretabellen', 560, 'copper', null, 'roast goose meat at liver level'],
+  ['Norway_Matvaretabellen', 560, 'riboflavin_b2', null, 'roast goose meat at liver level'],
+  ['USDA', 641, 'manganese', null, 'dried jujube stored 31'],
+  ['UK_CoFID', 8013, 'iron', null, 'canned okra stored 5.4'],
+  ['France_Ciqual', 26325, 'manganese', null, 'meal replacement drink stored 20.3'],
+  ['USDA', 5663, 'manganese', null, 'shake mix stored 269'],
+  ['USDA', 6670, 'manganese', null, 'protein powder stored 125'],
+  ['Canada_CNF', 22899, 'manganese', null, 'protein powder stored 125'],
+  ['Canada_CNF', 22895, 'manganese', null, 'whey isolate stored 58'],
+  ['Sweden_Livsmedelsverket', 7051, 'riboflavin_b2', 0.21, 'aronia powder stored in micrograms (210)'],
+  ['Canada_CNF', 22998, 'thiamin_b1', null, 'meat stick stored 11'],
+  ['Australia_AFCD', 26715, 'selenium', null, 'chickpea flour stored 68'],
+];
+const setStmt = db.prepare('UPDATE food_nutrients SET amount_per_100g = ? WHERE source = ? AND food_id = ? AND nutrient_code = ?');
+const delStmt = db.prepare('DELETE FROM food_nutrients WHERE source = ? AND food_id = ? AND nutrient_code = ?');
+let rowFixes = 0;
+for (const [source, foodId, code, value] of ROW_FIXES) {
+  if (dryRun) { rowFixes += 1; continue; }
+  const r = value == null ? delStmt.run(source, foodId, code) : setStmt.run(value, source, foodId, code);
+  rowFixes += Number(r.changes);
+}
+console.log(`Single-row fixes: ${rowFixes}${dryRun ? ' (dry run)' : ''}`);
+
+// 4. Manganese on Germany_BLS mushrooms runs about four times Japan_MEXT and
+//    up to 24 times USDA (oyster mushroom 2.69 against 0.11), and Australia_AFCD
+//    salmon, trout and shark about a hundred times other sources. Removed, so
+//    the fill supplies a measured value from another source.
+const mn1 = dryRun ? { changes: 0 } : db.prepare(
+  "DELETE FROM food_nutrients WHERE source = 'Germany_BLS' AND nutrient_code = 'manganese' AND food_id IN (SELECT food_id FROM foods WHERE source = 'Germany_BLS' AND category = 'Mushroom')",
+).run();
+const mn2 = dryRun ? { changes: 0 } : db.prepare(
+  "DELETE FROM food_nutrients WHERE source = 'Australia_AFCD' AND nutrient_code = 'manganese' AND amount_per_100g > 1 AND food_id IN (SELECT food_id FROM foods WHERE source = 'Australia_AFCD' AND (lower(name) LIKE 'salmon%' OR lower(name) LIKE 'trout%' OR lower(name) LIKE 'shark%' OR lower(name) LIKE 'abalone%'))",
+).run();
+console.log(`Manganese removed: ${mn1.changes} BLS mushroom values, ${mn2.changes} AFCD fish values`);
+
+// 5. Rows that are not food as eaten. Five Norway supplement tablets carry
+//    tablet strength per 100 g (a multivitamin at 2,290 mg iron), and
+//    Japan_MEXT purple sweet potato "raw" holds the water and energy of a
+//    dried product (22 g water, 303 kcal). Hidden, never deleted, so nothing
+//    that refers to them breaks; supplements belong in My Meds.
+const hideStmt = db.prepare('UPDATE foods SET hidden = 1 WHERE source = ? AND food_id = ?');
+const HIDE = [
+  ['Norway_Matvaretabellen', 1191], ['Norway_Matvaretabellen', 1192], ['Norway_Matvaretabellen', 2065],
+  ['Norway_Matvaretabellen', 2066], ['Norway_Matvaretabellen', 443], ['Japan_MEXT', 8361],
+];
+let hidden = 0;
+for (const [source, foodId] of HIDE) if (!dryRun) hidden += Number(hideStmt.run(source, foodId).changes);
+console.log(`Rows hidden: ${hidden}${dryRun ? ' (dry run)' : ''}`);
 
 db.close();
