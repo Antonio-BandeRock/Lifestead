@@ -13,6 +13,13 @@
 //
 // A workbook is left exactly as it is. What a course says in the app and is not
 // meant to carry from its workbook goes in SHIP_NAMES and SHIP_DESCRIPTIONS.
+//
+// Corrections to cards go in scripts/course-fixes/<deck id>.json (2026-11-11):
+// tense names on verb cards in the learner's language, and per card a meaning
+// for a Rule card's front, a Remember line with glosses, or a target. Under
+// "remember", a whole Remember line maps to its glossed form on every card that
+// carries it. A fix that names a Card ID the course does not have, or a label or
+// Remember line that matches nothing, stops the build.
 /* global __dirname */
 const fs = require('fs');
 const path = require('path');
@@ -51,6 +58,70 @@ if (!fs.existsSync(decksDir)) {
   process.exit(0);
 }
 
+/** Puts a course's fixes file over the cards read from its workbook. False when a fix is stale. */
+function applyFixes(course) {
+  const file = path.join(root, 'scripts', 'course-fixes', `${course.deck.id}.json`);
+  if (!fs.existsSync(file)) return true;
+  const fixes = JSON.parse(fs.readFileSync(file, 'utf8'));
+  let ok = true;
+  // A label is matched whole; {x} in it stands for any words, carried into the replacement.
+  const escape = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const labels = Object.entries(fixes.labels || {}).map(([from, to]) => ({
+    name: from,
+    from: new RegExp(`^${escape(from).replace('\\{x\\}', '(.+)')}$`),
+    to: to.replace('{x}', '$1'),
+    used: 0,
+  }));
+  for (const card of course.cards) {
+    if (card.type !== 'Verb') continue;
+    const lines = card.target.split('\n');
+    const head = lines[0].split(' · ');
+    if (lines.length < 2 || head.length !== 2) continue;
+    const label = labels.find((each) => each.from.test(head[1]));
+    if (!label) continue;
+    label.used += 1;
+    lines[0] = `${head[0]} · ${head[1].replace(label.from, label.to)}`;
+    card.target = lines.join('\n');
+  }
+  for (const label of labels) {
+    if (label.used === 0) {
+      console.log(`${course.deck.id}: the label fix ${label.name} matches no card.`);
+      ok = false;
+    }
+  }
+  // A Remember line is matched whole and replaced on every card that carries it.
+  for (const [from, to] of Object.entries(fixes.remember || {})) {
+    let used = 0;
+    for (const card of course.cards) {
+      if (card.remember !== from) continue;
+      card.remember = to;
+      used += 1;
+    }
+    if (used === 0 || from === to) {
+      console.log(`${course.deck.id}: the Remember fix "${from.slice(0, 60)}" ${used === 0 ? 'matches no card' : 'changes nothing'}.`);
+      ok = false;
+    }
+  }
+  const byId = new Map(course.cards.map((card) => [card.id, card]));
+  for (const [id, fix] of Object.entries(fixes.cards || {})) {
+    const card = byId.get(id);
+    if (!card) {
+      console.log(`${course.deck.id}: the fix for ${id} names a card the course does not have.`);
+      ok = false;
+      continue;
+    }
+    for (const [field, value] of Object.entries(fix)) {
+      if (!['meaning', 'remember', 'target', 'native'].includes(field) || typeof value !== 'string') {
+        console.log(`${course.deck.id}: the fix for ${id} has a field ${field} the build does not apply.`);
+        ok = false;
+        continue;
+      }
+      card[field] = value;
+    }
+  }
+  return ok;
+}
+
 let failed = false;
 const seenIds = new Set();
 for (const file of fs.readdirSync(decksDir).filter((name) => name.endsWith('.xlsx') && !name.startsWith('~$'))) {
@@ -63,6 +134,7 @@ for (const file of fs.readdirSync(decksDir).filter((name) => name.endsWith('.xls
   const course = read.course;
   if (SHIP_NAMES[course.deck.id]) course.deck.name = SHIP_NAMES[course.deck.id];
   if (SHIP_DESCRIPTIONS[course.deck.id]) course.deck.description = SHIP_DESCRIPTIONS[course.deck.id];
+  if (!applyFixes(course)) failed = true;
   for (const card of course.cards) {
     if (seenIds.has(card.id)) {
       console.log(`${file}: the Card ID ${card.id} is in two courses.`);

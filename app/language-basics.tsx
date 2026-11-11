@@ -15,7 +15,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import { Stack, useLocalSearchParams } from 'expo-router';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
 import { CourseCardView } from '../components/CourseCardView';
 import { CourseText } from '../components/CourseText';
@@ -35,7 +35,7 @@ import { localDayOf } from '../lib/interests';
 import { deckInfo, deckKeyOf, newLeftToday, planSitting, replayLadder, unitsOf, type DeckInfo, type SittingOrder } from '../lib/languageBasics';
 import { courseCardLayout } from '../lib/learnCourseCard';
 import type { CourseCard } from '../lib/learnCourseFile';
-import { addCourseAnswer, getCourseSettings, listCourseReviews, loadCourse, saveCourseSettings, type CourseSettings, type OpenedCourse } from '../lib/learnCoursesDb';
+import { addCourseAnswer, getCourseSettings, listCourseReviews, loadCourse, saveCourseSettings, withStudyGroup, type CourseSettings, type OpenedCourse } from '../lib/learnCoursesDb';
 import type { LearnGrade, LearnReview } from '../lib/learnSchedule';
 import { explainNotYet } from '../lib/notYet';
 
@@ -52,7 +52,7 @@ function today(): string {
 }
 
 export default function LanguageBasicsScreen() {
-  const params = useLocalSearchParams<{ id: string; unit?: string; together?: string }>();
+  const params = useLocalSearchParams<{ id: string; unit?: string; together?: string; group?: string; order?: string }>();
   const setId = typeof params.id === 'string' ? params.id : '';
   const walkMark = useWalkMark();
   const scrollPadding = useFloatingButtonScrollPadding();
@@ -71,11 +71,14 @@ export default function LanguageBasicsScreen() {
   const [chosen, setChosen] = useState<number[]>([]);
   const [order, setOrder] = useState<SittingOrder>('learning');
   const [shown, setShown] = useState<ShownInfo | null>(null);
+  const [reloaded, setReloaded] = useState(0);
 
   const scrollRef = useRef<ScrollView>(null);
   // Where Home sent this screen, applied once and scrolled to when that band is laid out.
   const arrival = useRef(false);
   const scrollToUnit = useRef<number | null>(null);
+  // A group chosen on Home starts its sitting as soon as the set has loaded.
+  const startGroup = useRef<{ units: number[]; order: SittingOrder } | null>(null);
 
   const load = useCallback(() => {
     const opened = setId ? loadCourse(setId) : null;
@@ -93,13 +96,18 @@ export default function LanguageBasicsScreen() {
           scrollToUnit.current = unit;
           openFold(`language:${setId}:unit:${unit}`);
         }
+        const group = typeof params.group === 'string' ? params.group.split(',').map(Number).filter((value) => Number.isInteger(value) && value > 0) : [];
+        if (group.length > 0) {
+          startGroup.current = { units: group, order: params.order === 'random' ? 'random' : 'learning' };
+          setReloaded((count) => count + 1);
+        }
         if (params.together) {
           setChosen(kept.openedUnits);
           openFold(`language:${setId}:together`);
         }
       })
       .catch(() => setMissing(true));
-  }, [setId, params.unit, params.together, openFold]);
+  }, [setId, params.unit, params.together, params.group, params.order, openFold]);
 
   useFocusEffect(load);
 
@@ -145,6 +153,8 @@ export default function LanguageBasicsScreen() {
       explainNotYet(t('Choose at least one unit first.'));
       return;
     }
+    // Kept for Home, so the same group opens again in one tap.
+    if (settings) void changeSettings({ studyGroups: withStudyGroup(settings.studyGroups, { units: chosen, order }) });
     begin({ kind: 'units', units: chosen, order }, reviews);
   }
 
@@ -191,6 +201,15 @@ export default function LanguageBasicsScreen() {
     setChosen((current) => (current.includes(unit) ? current.filter((value) => value !== unit) : [...current, unit].sort((a, b) => a - b)));
   }
 
+  // A group chosen on Home: once the set and its answers are in, its sitting starts.
+  useEffect(() => {
+    const group = startGroup.current;
+    if (!group || !set || !settings || reloaded === 0) return;
+    startGroup.current = null;
+    begin({ kind: 'units', units: group.units, order: group.order }, reviews);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reloaded, set, settings, reviews]);
+
   const title = deck ? t(deck.name) : t('Languages');
   const infoModal = <LanguageDeckInfo title={shown?.title ?? null} info={shown?.info ?? null} cardRemember={shown?.cardRemember} onClose={() => setShown(null)} />;
 
@@ -215,7 +234,8 @@ export default function LanguageBasicsScreen() {
           <Stack.Screen options={{ title }} />
           {infoAlertElement}
           {infoModal}
-          <ScrollView contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]} keyboardShouldPersistTaps="handled">
+          {/* Its own key per card, so every card opens at the top instead of where the list or the last card was scrolled. */}
+          <ScrollView key={`sitting-${sitting.index}`}contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]} keyboardShouldPersistTaps="handled">
             <View style={[bands.box, styles.gap]}>
               <Text style={styles.caption}>{t('Card {n} of {total}', { n: sitting.index + 1, total: sitting.queue.length })}</Text>
               {sitting.goingOver ? <Text style={styles.caption}>Nothing is waiting here today, so these are extra cards to go over.</Text> : null}
@@ -252,7 +272,7 @@ export default function LanguageBasicsScreen() {
         <Stack.Screen options={{ title }} />
         {infoAlertElement}
         {infoModal}
-        <ScrollView ref={scrollRef} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
+        <ScrollView key="list" ref={scrollRef} contentContainerStyle={[styles.content, { paddingBottom: scrollPadding }]}>
           <View style={[bands.box, styles.gap]}>
             <Text style={styles.body}>{t(deck.name)}</Text>
             <Text style={styles.caption}>{t(deck.description)}</Text>
@@ -266,9 +286,24 @@ export default function LanguageBasicsScreen() {
 
           <TabBand folds={folds} color={TAB_COLOR} id={`language:${setId}:together`} title={t('Study Several Together')} icon="albums-outline" markRef={walkMark.ref('languages.together')}>
             <View style={styles.gap}>
-              <TouchableOpacity style={styles.secondaryButton} onPress={() => setChosen(settings.openedUnits)} accessibilityRole="button">
-                <Text style={styles.secondaryText}>Choose Those That Are On</Text>
-              </TouchableOpacity>
+              <View style={styles.row}>
+                <TouchableOpacity
+                  ref={walkMark.ref('languages.selectAll')}
+                  style={[styles.secondaryButton, walkMark('languages.selectAll')]}
+                  onPress={() => setChosen(units.map((unit) => unit.unit))}
+                  accessibilityRole="button"
+                >
+                  <Text style={styles.secondaryText}>Select All</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.secondaryButton} onPress={() => setChosen(settings.openedUnits)} accessibilityRole="button">
+                  <Text style={styles.secondaryText}>Choose Those That Are On</Text>
+                </TouchableOpacity>
+                {chosen.length > 0 ? (
+                  <TouchableOpacity style={styles.secondaryButton} onPress={() => setChosen([])} accessibilityRole="button">
+                    <Text style={styles.secondaryText}>Clear</Text>
+                  </TouchableOpacity>
+                ) : null}
+              </View>
               <View style={styles.gap}>
                 {units.map((unit) => {
                   const ticked = chosen.includes(unit.unit);

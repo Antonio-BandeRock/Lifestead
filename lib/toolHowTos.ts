@@ -139,6 +139,7 @@ export type ToolMark =
   | 'languages.open'
   | 'languages.together'
   | 'languages.studyTogether'
+  | 'languages.selectAll'
   | 'languages.unit'
   | 'languages.onHome'
   | 'languages.studyUnit'
@@ -345,6 +346,7 @@ export type ToolMark =
   | 'home.insideKnowledgeOpen'
   | 'home.languageBasicsOpen'
   | 'home.languageBasicsUnit'
+  | 'home.languageBasicsGroup'
   | 'home.waitingAnswer'
   | 'home.waitingKinds'
   | 'home.waitingChoose'
@@ -2592,6 +2594,15 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'Units go on and off from Interests, Languages, with Show on Home.',
     },
     {
+      key: 'languageGroupHome',
+      title: 'Study a group of units again from Home',
+      steps: [
+        { say: 'Open the band with the name of Interests, then Language Basics.', mark: 'homeBand.languageBasics', stay: true },
+        { say: 'Under Studied together before, tap a group. Its cards start right away.', mark: 'home.languageBasicsGroup' },
+      ],
+      forYou: 'A group shows here once you have studied those units together under Interests, Languages. The six most recent are kept.',
+    },
+    {
       key: 'insideKnowledge',
       title: 'See what you now know from Learn',
       steps: [
@@ -3366,9 +3377,10 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       steps: [
         { say: 'Tap Open on the set of basics.', mark: 'languages.open', stay: true },
         { say: 'Open the band called Study Several Together and tick the units you want, or tap Choose Those That Are On.', mark: 'languages.together', stay: true },
+        { say: 'To take every unit, tap Select All.', mark: 'languages.selectAll', stay: true },
         { say: 'Choose In Learning Order or Random, then tap Study.', mark: 'languages.studyTogether' },
       ],
-      forYou: 'Random stirs the cards the same way all day and differently tomorrow, and a sitting is 20 cards with Keep Going at the end.',
+      forYou: 'Random stirs the cards the same way all day and differently tomorrow, and a sitting is 20 cards with Keep Going at the end. The group you studied is kept on Home, under Language Basics, to start again in one tap.',
     },
     {
       key: 'languagesHear',

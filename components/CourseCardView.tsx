@@ -100,7 +100,10 @@ export function CourseCardView({ card, direction, day, typeAnswer, showSource, c
   const [check, setCheck] = useState<TypedCheck | null>(null);
   const [squeeze] = useState(() => new Animated.Value(1));
 
-  const layout = useMemo(() => courseCardLayout(card), [card]);
+  // A Rule card whose native side holds the rule carries its front in the learner's
+  // language as meaning: that is drawn as the card's native side, and the rule goes
+  // under the example on the back, smaller.
+  const layout = useMemo(() => courseCardLayout(card.meaning ? { ...card, native: card.meaning } : card), [card]);
   const faces = facesOf(card, direction);
   const targetFirst = direction === 'targetFirst';
   const typing = typeAnswer && layout.kind === 'verb';
@@ -212,6 +215,7 @@ export function CourseCardView({ card, direction, day, typeAnswer, showSource, c
           {turned ? back() : front()}
           {!turned && !typing ? <Example text={faces.frontExample} /> : null}
           {turned ? <Example text={faces.backExample} /> : null}
+          {turned && card.meaning ? <CourseText style={styles.rule}>{card.native}</CourseText> : null}
           {turned && check !== null ? (
             <Text style={styles.checkLine}>{check === 'match' ? t('That is it.') : check === 'accents' ? t('That is it, with the accents written this way:') : t('The form is:')}</Text>
           ) : null}
@@ -299,6 +303,7 @@ const styles = StyleSheet.create({
   remember: { gap: 2 },
   rememberText: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   small: { ...typography.caption, color: colors.textMuted, ...textShadow },
+  rule: { ...typography.body, color: colors.textSecondary, ...textShadow },
   checkLine: { ...typography.body, color: colors.textPrimary, ...textShadow },
   typeBox: { gap: 8 },
   input: { ...typography.body, color: colors.textPrimary, backgroundColor: colors.surfaceMuted, borderRadius: 10, padding: 12 },

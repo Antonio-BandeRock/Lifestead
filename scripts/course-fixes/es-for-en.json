@@ -1,0 +1,860 @@
+{
+  "about": "Applied by scripts/build_course_files.js on top of the workbook, which stays as it is. labels: a verb card's tense name on the Spanish face, put in English for the English speaker; {x} stands for any word and is carried across. cards: per Card ID, meaning (the front of a Rule card in English, shown large at the top of its back), remember (with a meaning beside each Spanish word) or target. remember (whole lines): a Remember line as the workbook has it, mapped to the same line with English beside each Spanish word, applied to every card that carries it.",
+  "labels": {
+    "Presente": "present",
+    "Presente (helper verb)": "present (helper verb)",
+    "Gerundio": "-ing form",
+    "Pretérito": "preterite (simple past)",
+    "Imperfecto": "imperfect (used to / was ___ing)",
+    "Futuro": "future (will)",
+    "Condicional": "conditional (would)",
+    "Pretérito perfecto (participio: {x})": "present perfect (participle: {x})",
+    "Pretérito perfecto": "present perfect",
+    "Mandatos": "commands",
+    "Presente de subjuntivo": "present subjunctive"
+  },
+  "cards": {
+    "es-for-en-01-como-estas-como-esta-usted": {
+      "meaning": "How are you? (to a friend) · How are you? (polite)"
+    },
+    "es-for-en-01-buenos-dias-buenas-tardes-buenas-noches": {
+      "meaning": "Good morning · Good afternoon · Good evening / Good night"
+    },
+    "es-for-en-01-ustedes": {
+      "meaning": "you all"
+    },
+    "es-for-en-01-": {
+      "meaning": "a question mark at both ends · an exclamation mark at both ends"
+    },
+    "es-for-en-01-si-si-tu-tu-el-el-solo-solo": {
+      "meaning": "yes · if · you · your · he · the · only · alone"
+    },
+    "es-for-en-01-me-llamo-nos-vemos-lo-siento-que-le-vaya": {
+      "meaning": "my name is · see you · I'm sorry · I hope it goes well for you"
+    },
+    "es-for-en-02-el-museo-la-plaza-los-museos-las-plazas": {
+      "meaning": "the museum · the square · the museums · the squares"
+    },
+    "es-for-en-02-o-m-a-f-cion-dad-f-some-ma-m": {
+      "meaning": "-o = masculine · -a = feminine · -ción, -dad = feminine · some -ma = masculine"
+    },
+    "es-for-en-02-el-hotel-los-hoteles-el-libro-los-libros": {
+      "meaning": "the hotel → the hotels · the book → the books"
+    },
+    "es-for-en-02-el-museo-famoso-la-plaza-famosa": {
+      "meaning": "the famous museum · the famous square"
+    },
+    "es-for-en-02-el-carro-rojo-muy-activo": {
+      "meaning": "the red car · very active"
+    },
+    "es-for-en-02-alto-altos-alta-altas": {
+      "meaning": "tall (one man) → tall (men) → tall (one woman) → tall (women)"
+    },
+    "es-for-en-02-un-buen-doctor-un-mal-dia": {
+      "meaning": "a good doctor · a bad day"
+    },
+    "es-for-en-02-estacion-nacion-decision": {
+      "meaning": "station · nation · decision"
+    },
+    "es-for-en-02-ciudad-universidad": {
+      "meaning": "city · university"
+    },
+    "es-for-en-02-escuela-estudiante-espana": {
+      "meaning": "school · student · Spain"
+    },
+    "es-for-en-02-enfermo-infirmary-dormido-dormitory": {
+      "meaning": "sick → infirmary · asleep → dormitory"
+    },
+    "es-for-en-03-soy-de-oregon-yo-soy-de-oregon": {
+      "meaning": "I'm from Oregon. (I am from Oregon)"
+    },
+    "es-for-en-03-la-mama-de-ana-el-carro-del-vecino": {
+      "meaning": "Ana's mom · the neighbor's car"
+    },
+    "es-for-en-03-el-mercado-es-activo-el-mercado-es-activ": {
+      "meaning": "The market is busy. → Is the market busy?"
+    },
+    "es-for-en-03-ella-no-es-maestra": {
+      "meaning": "She isn't a teacher."
+    },
+    "es-for-en-03-soy-eres-es-somos-son": {
+      "meaning": "I am · you are · he / she is, you (polite) are · we are · they are, you all are"
+    },
+    "es-for-en-03-soy-maestra": {
+      "meaning": "I'm a teacher."
+    },
+    "es-for-en-03-es-son": {
+      "meaning": "is · are"
+    },
+    "es-for-en-03-mi-mama-mi-papa-mis-hijos": {
+      "meaning": "my mom · my dad · my children"
+    },
+    "es-for-en-03-nuestro-carro-nuestra-casa": {
+      "meaning": "our car · our house"
+    },
+    "es-for-en-03-mio-tuyo-suyo-nuestro": {
+      "meaning": "mine · yours · his / hers / theirs · ours"
+    },
+    "es-for-en-04-un-taco-una-plaza-veintiun-tacos": {
+      "meaning": "a taco · a square · twenty-one tacos"
+    },
+    "es-for-en-04-once-doce-trece-catorce-quince": {
+      "meaning": "eleven · twelve · thirteen · fourteen · fifteen"
+    },
+    "es-for-en-04-cien-ciento": {
+      "meaning": "a hundred (exactly) · a hundred (and more)"
+    },
+    "es-for-en-04-doscientos-cincuenta-y-tres": {
+      "meaning": "two hundred fifty-three"
+    },
+    "es-for-en-04-es-la-una-son-las-dos": {
+      "meaning": "It's one o'clock. · It's two o'clock."
+    },
+    "es-for-en-04-que-hora-es-a-que-hora-es": {
+      "meaning": "What time is it? · What time is it at?"
+    },
+    "es-for-en-04-el-lunes-el-2-de-agosto-en-julio-en-vera": {
+      "meaning": "on Monday · on August 2 · in July · in summer"
+    },
+    "es-for-en-04-hoy-es-lunes-doce-de-abril": {
+      "meaning": "Today is Monday, April twelfth."
+    },
+    "es-for-en-04-el-lunes-los-lunes": {
+      "meaning": "on Monday · on Mondays"
+    },
+    "es-for-en-04-lunes-enero-espanol": {
+      "meaning": "Monday · January · Spanish"
+    },
+    "es-for-en-04-el-proximo-lunes-la-proxima-semana-este-": {
+      "meaning": "next Monday · next week · this month · this spring"
+    },
+    "es-for-en-04-esta-manana-en-la-manana": {
+      "meaning": "this morning · in the morning"
+    },
+    "es-for-en-05-al-del": {
+      "meaning": "to the · of the, from the"
+    },
+    "es-for-en-05-estoy-estas-esta-estamos-estan": {
+      "meaning": "I am · you are · he / she is, you (polite) are · we are · they are, you all are"
+    },
+    "es-for-en-05-mi-mama-esta-en-la-cocina-y-esta-ocupada": {
+      "meaning": "My mom is in the kitchen and she's busy."
+    },
+    "es-for-en-05-estoy-sentad-estoy-de-pie": {
+      "meaning": "I'm sitting down. · I'm standing up."
+    },
+    "es-for-en-05-el-gato-esta-encima-de-la-mesa": {
+      "meaning": "The cat is on top of the table."
+    },
+    "es-for-en-05-aqui-ahi-alla": {
+      "meaning": "here · there (near you) · over there"
+    },
+    "es-for-en-05-estoy-un-poco-cansad-todavia-estoy-nervi": {
+      "meaning": "I'm a little tired. · I'm still nervous."
+    },
+    "es-for-en-06-tengo-tienes-tiene-tenemos-tienen": {
+      "meaning": "I have · you have · he / she has, you (polite) have · we have · they have, you all have"
+    },
+    "es-for-en-06-tengo-treinta-anos": {
+      "meaning": "I'm thirty years old."
+    },
+    "es-for-en-06-tengo-hambre-tengo-frio": {
+      "meaning": "I'm hungry. · I'm cold."
+    },
+    "es-for-en-06-tengo-mucha-hambre-tengo-mucho-frio": {
+      "meaning": "I'm very hungry. · I'm very cold."
+    },
+    "es-for-en-06-tengo-frio-el-cafe-esta-frio": {
+      "meaning": "I'm cold. · The coffee is cold."
+    },
+    "es-for-en-06-tengo-que-pagar": {
+      "meaning": "I have to pay."
+    },
+    "es-for-en-06-hay-leche-hay-tres-perros": {
+      "meaning": "There's milk. · There are three dogs."
+    },
+    "es-for-en-06-hambre-hijo-hacer": {
+      "meaning": "hunger · son · to do, to make"
+    },
+    "es-for-en-06-tengo-hambre-tengo-30-anos": {
+      "meaning": "I'm hungry. · I'm 30 years old."
+    },
+    "es-for-en-06-dos-apellidos": {
+      "meaning": "two last names"
+    },
+    "es-for-en-07-donde-esta-el-bano": {
+      "meaning": "Where's the bathroom?"
+    },
+    "es-for-en-07-de-donde-eres-a-que-hora-es": {
+      "meaning": "Where are you from? · What time is it at?"
+    },
+    "es-for-en-07-que-quien-donde-cuando-como-por-que": {
+      "meaning": "what · who · where · when · how · why"
+    },
+    "es-for-en-07-estas-cansado-no-no-estoy-cansado": {
+      "meaning": "Are you tired? → No, I'm not tired."
+    },
+    "es-for-en-07-no-verdad": {
+      "meaning": "…, right? · …, right?"
+    },
+    "es-for-en-07-no-tengo-nada-nunca-estoy-aburrida": {
+      "meaning": "I don't have anything. · I'm never bored."
+    },
+    "es-for-en-07-i-don-t-have-anything-no-tengo-nada": {
+      "meaning": "I don't have anything."
+    },
+    "es-for-en-07-algun-problema-ningun-problema": {
+      "meaning": "any problem · no problem"
+    },
+    "es-for-en-07-yo-tambien-yo-tampoco": {
+      "meaning": "Me too. · Me neither."
+    },
+    "es-for-en-07-laura-e-ivan-siete-u-ocho": {
+      "meaning": "Laura and Iván · seven or eight"
+    },
+    "es-for-en-07-donde-es-la-fiesta-es-en-mi-casa": {
+      "meaning": "Where's the party? → It's at my house."
+    },
+    "es-for-en-07-como-es-tu-hermano-como-esta-tu-hermano": {
+      "meaning": "What's your brother like? · How's your brother doing?"
+    },
+    "es-for-en-07-es-list-esta-list": {
+      "meaning": "is clever · is ready"
+    },
+    "es-for-en-07-es-barato-hoy-esta-barato": {
+      "meaning": "it's cheap · today it's cheap"
+    },
+    "es-for-en-07-estoy-mal-la-leche-esta-mala": {
+      "meaning": "I'm not well. · The milk is bad."
+    },
+    "es-for-en-07-este-libro-esa-mesa": {
+      "meaning": "this book · that table"
+    },
+    "es-for-en-07-que-es-esto-que-es-eso": {
+      "meaning": "What's this? · What's that?"
+    },
+    "es-for-en-07-este-carro-rojo": {
+      "meaning": "this red car"
+    },
+    "es-for-en-07-tiene-el-pelo-largo-es-alta": {
+      "meaning": "She has long hair. · She's tall."
+    },
+    "es-for-en-07-largo-parado": {
+      "meaning": "long · standing"
+    },
+    "es-for-en-08-trabajar-comer-vivir": {
+      "meaning": "to work · to eat · to live"
+    },
+    "es-for-en-08-tengo-que-ir-algo-para-comer": {
+      "meaning": "I have to go. · something to eat"
+    },
+    "es-for-en-08-presente": {
+      "meaning": "the present tense"
+    },
+    "es-for-en-08-hablo-hablas-habla-hablamos-hablan": {
+      "meaning": "I speak · you speak · he / she speaks, you (polite) speak · we speak · they speak, you all speak"
+    },
+    "es-for-en-08-como-comes-come-comemos-comen": {
+      "meaning": "I eat · you eat · he / she eats, you (polite) eat · we eat · they eat, you all eat"
+    },
+    "es-for-en-08-vivo-vives-vive-vivimos-viven": {
+      "meaning": "I live · you live · he / she lives, you (polite) live · we live · they live, you all live"
+    },
+    "es-for-en-08-trabajo": {
+      "meaning": "I work. · I'm working. · I do work."
+    },
+    "es-for-en-08-hablas-ingles-donde-vives": {
+      "meaning": "Do you speak English? · Where do you live?"
+    },
+    "es-for-en-08-vosotros-hablais": {
+      "meaning": "you all (in Spain, casual) · you all speak"
+    },
+    "es-for-en-09-tengo-hago-traigo-digo": {
+      "meaning": "I have · I do, I make · I bring · I say"
+    },
+    "es-for-en-09-conozco-se-doy-veo-voy-estoy-soy": {
+      "meaning": "I know (someone, somewhere) · I know (a fact) · I give · I see · I go · I am (how, where) · I am (who, what)"
+    },
+    "es-for-en-09-entiendo-entiendes-entiende-entendemos-e": {
+      "meaning": "I understand · you understand · he / she understands, you (polite) understand · we understand · they understand, you all understand"
+    },
+    "es-for-en-09-puedo-puedes-puede-podemos-pueden": {
+      "meaning": "I can · you can · he / she can, you (polite) can · we can · they can, you all can"
+    },
+    "es-for-en-09-digo-dices-dice-decimos-dicen": {
+      "meaning": "I say · you say · he / she says, you (polite) say · we say · they say, you all say"
+    },
+    "es-for-en-09-voy-vas-va-vamos-van": {
+      "meaning": "I go · you go · he / she goes, you (polite) go · we go · they go, you all go"
+    },
+    "es-for-en-09-puedo-hablar-necesito-comprar-se-cocinar": {
+      "meaning": "I can talk. · I need to buy. · I know how to cook."
+    },
+    "es-for-en-09-se-conozco": {
+      "meaning": "I know (a fact, how to) · I know (someone, somewhere)"
+    },
+    "es-for-en-10-sigues-derecho-y-das-vuelta-en-la-esquin": {
+      "meaning": "You go straight and turn at the corner."
+    },
+    "es-for-en-13-me-llamo-te-llamas-se-llama": {
+      "meaning": "my name is · your name is · his / her name is, your (polite) name is"
+    },
+    "es-for-en-13-cuidarse-preocuparse-mejorarse": {
+      "meaning": "to take care of yourself · to worry · to get better"
+    },
+    "es-for-en-13-lo-la-los-las": {
+      "meaning": "it, him · it, her · them (m.) · them (f.)"
+    },
+    "es-for-en-13-lo-tengo-que-comprar-tengo-que-comprarlo": {
+      "meaning": "I have to buy it. (two ways to say it)"
+    },
+    "es-for-en-13-me-te-le-nos-les": {
+      "meaning": "to / for me · you · him, her, you (polite) · us · them, you all"
+    },
+    "es-for-en-13-llamo-a-ramon-conozco-a-gabriel": {
+      "meaning": "I call Ramón. · I know Gabriel."
+    },
+    "es-for-en-13-me-gusta-me-gustan": {
+      "meaning": "I like it · I like them"
+    },
+    "es-for-en-13-te-gusta-le-gusta-nos-gusta-les-gusta": {
+      "meaning": "you like it · he / she likes it, you (polite) like it · we like it · they like it, you all like it"
+    },
+    "es-for-en-13-para-mi-para-ti-con-el-conmigo-contigo": {
+      "meaning": "for me · for you · with him · with me · with you"
+    },
+    "es-for-en-13-se-dice-se-habla": {
+      "meaning": "people say, it's said · people speak, it's spoken"
+    },
+    "es-for-en-15-me-levanto-te-levantas-se-levanta-nos-le": {
+      "meaning": "I get up · you get up · he / she gets up · we get up · they get up"
+    },
+    "es-for-en-15-antes-de-desayunar-despues-de-comer": {
+      "meaning": "before having breakfast · after eating"
+    },
+    "es-for-en-16-estoy-trabajando": {
+      "meaning": "I'm working."
+    },
+    "es-for-en-16-estoy-trabajando-estamos-comiendo": {
+      "meaning": "I'm working. · We're eating."
+    },
+    "es-for-en-16-hablando-comiendo-viviendo": {
+      "meaning": "speaking · eating · living"
+    },
+    "es-for-en-16-leyendo-trayendo-creyendo-yendo": {
+      "meaning": "reading · bringing · believing · going"
+    },
+    "es-for-en-16-diciendo-sintiendo-pudiendo": {
+      "meaning": "saying · feeling · being able to"
+    },
+    "es-for-en-16-trabajo-manana-not-estoy-trabajando-mana": {
+      "meaning": "I'm working tomorrow."
+    },
+    "es-for-en-16-me-estoy-cuidando-estoy-cuidandome": {
+      "meaning": "I'm taking care of myself. (two ways to say it)"
+    },
+    "es-for-en-17-voy-a-infinitive": {
+      "meaning": "I'm going to + verb"
+    },
+    "es-for-en-17-mas-que-menos-que": {
+      "meaning": "more … than · less … than"
+    },
+    "es-for-en-17-mejor-peor-mayor-menor": {
+      "meaning": "better · worse · older · younger"
+    },
+    "es-for-en-17-para-por": {
+      "meaning": "for, in order to · for, by, through"
+    },
+    "es-for-en-17-hace-calor-hace-frio-hace-sol-hace-vient": {
+      "meaning": "it's hot · it's cold · it's sunny · it's windy"
+    },
+    "es-for-en-17-poquito-casita-perrito-ahorita": {
+      "meaning": "a little bit · little house · little dog · right now"
+    },
+    "es-for-en-17-acabar-de-infinitive": {
+      "meaning": "to have just + verb"
+    },
+    "es-for-en-17-volver-a-infinitive": {
+      "meaning": "to + verb again"
+    },
+    "es-for-en-17-tener-ganas-de-infinitive": {
+      "meaning": "to feel like + verb-ing"
+    },
+    "es-for-en-20-trabaje-trabajaste-trabajo-trabajamos-tr": {
+      "meaning": "I worked · you worked · he / she worked · we worked · they worked"
+    },
+    "es-for-en-20-comi-comiste-comio-comimos-comieron": {
+      "meaning": "I ate · you ate · he / she ate · we ate · they ate"
+    },
+    "es-for-en-20-hablo-hablo": {
+      "meaning": "I speak · he / she spoke"
+    },
+    "es-for-en-20-llegue-pague": {
+      "meaning": "I arrived · I paid"
+    },
+    "es-for-en-20-leyo-creyo-leyeron": {
+      "meaning": "he / she read · he / she believed · they read"
+    },
+    "es-for-en-20-tuve-estuve-pude-supe": {
+      "meaning": "I had · I was · I could, I managed to · I found out"
+    },
+    "es-for-en-20-hice-hizo-dije-dijeron-traje-trajeron": {
+      "meaning": "I did · he / she did · I said · they said · I brought · they brought"
+    },
+    "es-for-en-20-sintio-sintieron": {
+      "meaning": "he / she felt · they felt"
+    },
+    "es-for-en-20-supe-conoci-pude-no-pude": {
+      "meaning": "I found out · I met · I managed to · I couldn't (and didn't)"
+    },
+    "es-for-en-22-estaba-trabajando": {
+      "meaning": "I was working, he / she was working"
+    },
+    "es-for-en-22-trabajaba-trabajabas-trabajaba-trabajaba": {
+      "meaning": "I used to work · you used to work · he / she used to work · we used to work · they used to work"
+    },
+    "es-for-en-22-comia-comias-comia-comiamos-comian": {
+      "meaning": "I used to eat · you used to eat · he / she used to eat · we used to eat · they used to eat"
+    },
+    "es-for-en-22-era-iba-veia": {
+      "meaning": "was · used to go, was going · used to see"
+    },
+    "es-for-en-22-antes-vivia-en-monterrey": {
+      "meaning": "I used to live in Monterrey."
+    },
+    "es-for-en-22-eran-las-tres-tenia-diez-anos": {
+      "meaning": "It was three o'clock. · I was ten years old."
+    },
+    "es-for-en-22-comia-cuando-llamo-mi-hija": {
+      "meaning": "I was eating when my daughter called."
+    },
+    "es-for-en-22-habia-hubo": {
+      "meaning": "there was, there were (a description) · there was, there were (an event)"
+    },
+    "es-for-en-23-trabajare-trabajaras-trabajara-trabajare": {
+      "meaning": "I will work · you will work · he / she will work · we will work · they will work"
+    },
+    "es-for-en-23-tendre-hare-dire-podre-sabre-habra": {
+      "meaning": "I will have · I will do · I will say · I will be able to · I will know · there will be"
+    },
+    "es-for-en-23-donde-estara": {
+      "meaning": "Where could he / she be? I wonder where he / she is."
+    },
+    "es-for-en-23-trabajaria-trabajarias-trabajaria-trabaj": {
+      "meaning": "I would work · you would work · he / she would work · we would work · they would work"
+    },
+    "es-for-en-23-podria-ayudarme-me-gustaria": {
+      "meaning": "Could you help me? · I would like…"
+    },
+    "es-for-en-24-trabajado-comido-vivido": {
+      "meaning": "worked · eaten · lived"
+    },
+    "es-for-en-24-abierto-escrito-hecho-dicho-visto-roto": {
+      "meaning": "open, opened · written · done, made · said · seen · broken"
+    },
+    "es-for-en-24-la-puerta-esta-cerrada": {
+      "meaning": "The door is closed."
+    },
+    "es-for-en-24-he-has-ha-hemos-han": {
+      "meaning": "I have · you have · he / she has · we have · they have (+ done something)"
+    },
+    "es-for-en-24-ya-comiste-ya-has-comido": {
+      "meaning": "Did you eat yet? · Have you eaten yet?"
+    },
+    "es-for-en-24-lo-he-leido": {
+      "meaning": "I've read it."
+    },
+    "es-for-en-25-habla-come-escribe": {
+      "meaning": "Speak! · Eat! · Write! (to a friend)"
+    },
+    "es-for-en-25-ten-haz-di-ve-se": {
+      "meaning": "have · do, make · say · go · be (to a friend)"
+    },
+    "es-for-en-25-hable-coma-escriba": {
+      "meaning": "Speak! · Eat! · Write! (polite)"
+    },
+    "es-for-en-25-no-hables-no-comas": {
+      "meaning": "Don't speak! · Don't eat! (to a friend)"
+    },
+    "es-for-en-25-cuidate-cuidese-no-te-preocupes": {
+      "meaning": "take care (to a friend) · take care (polite) · don't worry"
+    },
+    "es-for-en-26-que-te-vaya-bien-que-se-mejore": {
+      "meaning": "I hope it goes well for you · I hope you get better"
+    },
+    "es-for-en-26-hable-hables-hable-hablemos-hablen": {
+      "meaning": "that I speak · that you speak · that he / she speaks · that we speak · that they speak"
+    },
+    "es-for-en-26-sea-este-vaya-sepa-de-haya": {
+      "meaning": "that … be · that … be (how, where) · that … go · that … know · that … give · that there be"
+    },
+    "es-for-en-26-entienda-entendamos-sienta-sintamos": {
+      "meaning": "that … understand · that we understand · that … feel · that we feel"
+    },
+    "es-for-en-26-ojala-que": {
+      "meaning": "I hope (that)…"
+    },
+    "es-for-en-26-no-te-preocupes-subjunctive": {
+      "meaning": "Don't worry."
+    }
+  },
+  "remember": {
+    "Casual words (¿qué onda?, órale, no manches) are for friends only.": "Casual words (¿qué onda? = what's up?, órale = OK, come on, no manches = no way) are for friends only.",
+    "bien and mal never change form.": "bien (well) and mal (badly) never change form.",
+    "From llamarse, literally \"I call myself\".": "From llamarse (to be called), literally \"I call myself\".",
+    "The little word de goes first.": "The little word de (of, from) goes first.",
+    "encantad@ matches the person speaking.": "encantad@ (delighted) matches the person speaking.",
+    "lo siento comes from sentir, to feel.": "lo siento (I'm sorry) comes from sentir, to feel.",
+    "A command form of pasar.": "A command form of pasar (to come in, to pass).",
+    "From entender.": "From entender (to understand).",
+    "puede + infinitive, from poder.": "puede (you can) + infinitive, from poder (to be able to).",
+    "a + el squeezes into al.": "a (to) + el (the) squeezes into al.",
+    "nos vemos is from verse, to see each other.": "nos vemos (see you) is from verse, to see each other.",
+    "The verb ending shows the person, so Spanish often drops the pronoun: Soy de Oregon.": "The verb ending shows the person, so Spanish often drops the pronoun: Soy de Oregon (I'm from Oregon).",
+    "Most -ma words are still feminine: la cama. Other exceptions met so far: el mapa, el día, la foto, la moto. agua is feminine but takes el.": "Most -ma words are still feminine: la cama (the bed). Other exceptions met so far: el mapa (map), el día (day), la foto (photo), la moto (motorbike). agua (water) is feminine but takes el.",
+    "Same for both genders: especial, natural, popular, tropical, diferente, excelente, interesante, importante, terrible, útil, común.": "Same for both genders: especial, natural, popular, tropical, diferente, excelente, interesante, importante, terrible, útil (useful), común (common).",
+    "A few common ones can go first: buen, mal, próximo.": "A few common ones can go first: buen (good), mal (bad), próximo (next).",
+    "idea is feminine; every -ma word here is masculine (el tema, el idioma).": "idea is feminine; every -ma word here is masculine (el tema, the topic; el idioma, the language).",
+    "grande stays the same for both genders.": "grande (big) stays the same for both genders.",
+    "Use viejo for things, mayor for people.": "Use viejo (old) for things, mayor (older) for people.",
+    "fácil is for things, not people.": "fácil (easy) is for things, not people.",
+    "A person: only after a noun, un cliente frecuente.": "A person: only after a noun, un cliente frecuente (a regular customer).",
+    "próximo matches its noun: la próxima semana.": "próximo (next) matches its noun: la próxima semana (next week).",
+    "de + el = del.": "de + el = del (of the).",
+    "✗ Soy una maestra.": "✗ Soy una maestra. (Say Soy maestra, I'm a teacher.)",
+    "Seen: el gusto es mío (L1), la tuya (L5).": "Seen: el gusto es mío, the pleasure is mine (L1); la tuya, yours (L5).",
+    "Always la pareja, even for a man, so the describing word stays feminine.": "Always la pareja (the partner), even for a man, so the describing word stays feminine.",
+    "persona is always feminine; gente is singular: la gente es…": "persona (person) is always feminine; gente (people) is singular: la gente es… (people are…)",
+    "No article after ser: not una maestra.": "No article after ser: not una maestra (a teacher).",
+    "contador comes from contar, to count.": "contador (accountant) comes from contar, to count.",
+    "carrera can also mean a race.": "carrera (career) can also mean a race.",
+    "Warmth climbs: guapo → bonito → hermoso.": "Warmth climbs: guapo (good-looking) → bonito (pretty) → hermoso (beautiful).",
+    "Use mayor, not viejo, for older people.": "Use mayor (older), not viejo (old), for older people.",
+    "fuerte also means a strong coffee or a loud noise.": "fuerte (strong) also means a strong coffee or a loud noise.",
+    "With estar, rico means tasty. Before a name, pobre = poor thing.": "With ser, rico means rich. With estar, rico means tasty. Before a name, pobre = poor thing.",
+    "Correct with ser or estar; está casada is the everyday way.": "Correct with ser or estar; está casada (she's married) is the everyday way.",
+    "content@ goes with estar; feliz works with both.": "content@ (happy) goes with estar; feliz (happy) works with both.",
+    "Before a masculine singular noun: buen, mal.": "Before a masculine singular noun: buen (good), mal (bad).",
+    "Understand them; not practice words. A vendor may call a customer güero.": "Understand them; not practice words. A vendor may call a customer güero (blondie, fair one).",
+    "DOCTOR uses. One thing es, more than one son.": "DOCTOR uses. One thing es (is), more than one son (are).",
+    "mil never takes un. ✗ doscientos y cincuenta": "mil (thousand) never takes un (a). ✗ doscientos y cincuenta (two hundred and fifty)",
+    "Where an event takes place uses ser: La fiesta es en mi casa.": "Where an event takes place uses ser: La fiesta es en mi casa (The party is at my house).",
+    "vacaciones is always plural.": "vacaciones (vacation) is always plural.",
+    "Before a noun uno becomes un or una: un taco, una plaza.": "Before a noun uno (one) becomes un or una (a): un taco, una plaza (a square).",
+    "16 to 19 fuse into one word: diez y seis → dieciséis.": "16 to 19 fuse into one word: diez y seis → dieciséis (sixteen).",
+    "21 to 29 are one word. Before a noun: veintiún, veintiuna.": "21 to 29 are one word. Before a noun: veintiún, veintiuna (twenty-one).",
+    "31 to 99: tens + y + ones: treinta y uno.": "31 to 99: tens + y (and) + ones: treinta y uno (thirty-one).",
+    "Three words: tens + y + ones.": "Three words: tens + y (and) + ones.",
+    "101 to 199 use ciento.": "101 to 199 use ciento (one hundred).",
+    "Hundreds match the noun: doscientos pesos, doscientas casas.": "Hundreds match the noun: doscientos pesos (two hundred pesos), doscientas casas (two hundred houses).",
+    "The three that break the pattern (not cincocientos).": "The three that break the pattern (500 is quinientos, not cincocientos).",
+    "mil never takes un. y joins only tens and ones: doscientos cincuenta y tres.": "mil (thousand) never takes un (a). y (and) joins only tens and ones: doscientos cincuenta y tres (253).",
+    "Months are lowercase and take en.": "Months are lowercase and take en (in).",
+    "Seasons take en. Spring is the only feminine one.": "Seasons take en (in). Spring is the only feminine one.",
+    "In general. Mexico says en la, not por la.": "In general. Mexico says en la (in the), not por la.",
+    "este / esta matches the noun.": "este / esta (this) matches the noun.",
+    "Minutes: y + number: son las dos y diez.": "Minutes: y + number: son las dos y diez (it's ten past two).",
+    "aquí, allí, ahí, allá never take de.": "aquí (here), allí, ahí (there), allá (over there) never take de (of).",
+    "sillón is a \"big chair\": silla + -ón.": "sillón is a \"big chair\": silla (chair) + -ón.",
+    "mapa is masculine despite the -a.": "mapa (map) is masculine despite the -a.",
+    "moto is feminine despite the -o.": "moto (motorbike) is feminine despite the -o.",
+    "ropa is singular: la ropa está.": "ropa (clothes) is singular: la ropa está (the clothes are).",
+    "sólo (only) never changes; sola agrees.": "sólo (only) never changes; sola (alone) agrees.",
+    "They agree like any describing word, except de pie, which never changes.": "They agree like any describing word, except de pie (standing), which never changes.",
+    "A person uses tener: tengo frío, tengo calor.": "A person uses tener: tengo frío (I'm cold), tengo calor (I'm hot).",
+    "todavía and ya usually come before estar.": "todavía (still) and ya (already, now) usually come before estar.",
+    "With a place after: cerca de, lejos de.": "With a place after: cerca de (near), lejos de (far from).",
+    "With a place after: adentro de, afuera de.": "With a place after: adentro de (inside), afuera de (outside).",
+    "Never changes. Don't confuse it with sol@ (alone).": "Never changes. Don't confuse it with sol@, which means alone.",
+    "muy is neutral; demasiado means it's a problem.": "muy (very) is neutral; demasiado (too much) means it's a problem.",
+    "a + el always squeezes into al.": "a (to) + el (the) always squeezes into al.",
+    "un café con leche · un café sin leche": "un café con leche (coffee with milk) · un café sin leche (coffee without milk)",
+    "Most place words link with de; de + el = del.": "Most place words link with de (of); de + el = del (of the).",
+    "entre links with y, not de.": "entre (between) links with y (and), not de (of).",
+    "✗ Soy treinta. ✗ Estoy treinta años.": "✗ Soy treinta. ✗ Estoy treinta años. (I'm thirty is Tengo treinta años.)",
+    "✗ Tengo la sed.": "✗ Tengo la sed. (I'm thirsty is Tengo sed.)",
+    "A little: un poco de frío.": "A little: un poco de frío (a little cold).",
+    "Never say estoy caliente about yourself.": "Never say estoy caliente about yourself: it means aroused, not warm.",
+    "agua is feminine but takes el: el agua.": "agua (water) is feminine but takes el: el agua.",
+    "medicina is also the field of study.": "medicina (medicine) is also the field of study.",
+    "receta also means recipe.": "receta (prescription) also means recipe.",
+    "With tener, no article: tengo fiebre.": "With tener, no article: tengo fiebre (I have a fever).",
+    "peso also means weight.": "peso (the currency) also means weight.",
+    "In Mexico el mandado is above all the food shopping.": "In Mexico el mandado (the errands) is above all the food shopping.",
+    "Mexicans carry two apellidos and go by the first one.": "Mexicans carry two apellidos (last names) and go by the first one.",
+    "No article. hambre and sed are feminine: mucha hambre.": "No article. hambre (hunger) and sed (thirst) are feminine: mucha hambre (very hungry).",
+    "Masculine: mucho frío. A thing está frío.": "Masculine: mucho frío (very cold). A thing está frío (is cold).",
+    "sueño is masculine; prisa is feminine.": "sueño (sleepiness) is masculine; prisa (hurry) is feminine.",
+    "Keep the que. Only tener changes.": "Keep the que (tener que = to have to). Only tener changes.",
+    "PASO uses: possession, age, sensation, obligation (tener que).": "PASO uses: possession, age, sensation, obligation (tener que, to have to).",
+    "✗ ¿Dónde el baño está?": "✗ ¿Dónde el baño está? (Say ¿Dónde está el baño?, where's the bathroom?)",
+    "✗ ¿Dónde eres de?": "✗ ¿Dónde eres de? (Say ¿De dónde eres?, where are you from?)",
+    "✗ Nadie no está. · ✗ Tengo nada.": "✗ Nadie no está. · ✗ Tengo nada. (Say No está nadie, nobody's here · No tengo nada, I don't have anything.)",
+    "✗ No tengo algo.": "✗ No tengo algo. (Say No tengo nada, I don't have anything.)",
+    "algún, ningún before masculine; alguna, ninguna before feminine.": "algún (some), ningún (no) before masculine; alguna, ninguna before feminine.",
+    "A person, thing or place uses estar: ¿Dónde está el baño?": "A person, thing or place uses estar: ¿Dónde está el baño? (Where's the bathroom?)",
+    "✗ el este libro. (el libro este exists in casual speech, often with a negative tone.)": "✗ el este libro (the this book). (el libro este exists in casual speech, often with a negative tone.)",
+    "A short person is baj@; short hair is el pelo corto.": "A short person is baj@ (short); short hair is el pelo corto.",
+    "¡qué + describing word! makes any exclamation.": "¡qué + describing word! (how …!) makes any exclamation.",
+    "que se mejore is a fixed wish form.": "que se mejore (get well soon) is a fixed wish form.",
+    "oye is for tú.": "oye (hey, listen) is for tú.",
+    "no te preocupes is a fixed negative command.": "no te preocupes (don't worry) is a fixed negative command.",
+    "Goes before the noun and takes the place of el / la.": "Goes before the noun and takes the place of el / la (the).",
+    "In Mexico ese often does the job of aquel too.": "In Mexico ese (that) often does the job of aquel (that over there) too.",
+    "Never ¿Quién es de…?": "Never ¿Quién es de…? (Who is from…?)",
+    "Four forms: rojo, roja, rojos, rojas.": "Four forms: rojo, roja, rojos, rojas (red).",
+    "Two forms: one and more (azul · azules). Not ripe yet: está verde.": "Two forms: one and more (azul · azules, blue). Not ripe yet: está verde (it's green).",
+    "Hair uses tener + el pelo. chino is curly in Mexico.": "Hair uses tener (to have) + el pelo (the hair). chino is curly in Mexico.",
+    "mal (how you are) never changes; malo, mala, malos, malas matches its noun.": "mal (how you are) never changes; malo, mala, malos, malas (bad) matches its noun.",
+    "Same pattern with caro, pesado, ligero, lento, oscuro, nervioso, tranquilo, ruidoso.": "Same pattern with caro (expensive), pesado (heavy), ligero (light), lento (slow), oscuro (dark), nervioso (nervous), tranquilo (calm), ruidoso (noisy).",
+    "sé is from saber. Learn no sé as a whole phrase for now.": "sé (I know) is from saber (to know). Learn no sé (I don't know) as a whole phrase for now.",
+    "de + el = del: depende del día.": "de + el = del: depende del día (it depends on the day).",
+    "Just sí or no after creo que, no extra words.": "Just sí (yes) or no after creo que (I think), no extra words.",
+    "claro alone is the short version.": "claro (sure) alone is the short version.",
+    "In Mexico you hear con gusto as often as de nada, especially in shops.": "In Mexico you hear con gusto (gladly) as often as de nada (you're welcome), especially in shops.",
+    "Add de su parte for extra politeness: muy amable de su parte.": "Add de su parte (on your part) for extra politeness: muy amable de su parte (very kind of you).",
+    "The answer to any question with ya.": "The answer to any question with ya (already, yet).",
+    "sale is friendly and casual; está bien works with anyone.": "sale (OK, sure) is friendly and casual; está bien (all right) works with anyone.",
+    "no pasa nada is the kind reply to an apology.": "no pasa nada (no problem) is the kind reply to an apology.",
+    "You already saw these in the stories: trabaja, estudia, llama.": "You already saw these in the stories: trabaja (works), estudia (studies), llama (calls).",
+    "Seen in Lesson 3: Gabriel vive en Guadalajara.": "Seen in Lesson 3: Gabriel vive en Guadalajara (Gabriel lives in Guadalajara).",
+    "Frequency words usually go before the verb or at the end. After the verb, nunca needs no: No manejo nunca.": "Frequency words usually go before the verb or at the end. After the verb, nunca (never) needs no: No manejo nunca (I never drive).",
+    "From llamar.": "From llamar (to call).",
+    "Fixed phrases from dedicarse. Politer than asking ¿cuál es tu trabajo?": "Fixed phrases from dedicarse (to do for a living). Politer than asking ¿cuál es tu trabajo? (what's your job?)",
+    "Estoy jubilad@ is also common. Both are correct.": "Estoy jubilad@ (I'm retired) is also common. Both are correct.",
+    "No un after trabajo de: Trabajo de mesero.": "No un (a) after trabajo de: Trabajo de mesero (I work as a waiter).",
+    "negocio also means a small shop: el negocio de la esquina.": "negocio (business) also means a small shop: el negocio de la esquina (the corner shop).",
+    "empresa is the most common word.": "empresa (company) is the most common word.",
+    "reunión also works; junta is the office word in Mexico.": "reunión (meeting) also works; junta (meeting) is the office word in Mexico.",
+    "Ranges use de… a….": "Ranges use de… a… (from… to…).",
+    "ganar also means to win.": "ganar (to earn) also means to win.",
+    "cada never changes: cada día, cada mes, cada año.": "cada (each, every) never changes: cada día, cada mes, cada año (every day, month, year).",
+    "Same meaning. todos los días is more common in speech. todo agrees: todas las semanas.": "Same meaning. todos los días (every day) is more common in speech. todo agrees: todas las semanas (every week).",
+    "seguido is the everyday Mexican word; a menudo sounds more bookish.": "seguido (often) is the everyday Mexican word; a menudo (often) sounds more bookish.",
+    "vez → veces (z becomes c).": "vez → veces (time → times) (z becomes c).",
+    "los + day = every: los martes, los fines de semana.": "los + day = every: los martes (on Tuesdays), los fines de semana (on weekends).",
+    "-ar verb. After tener que, hay que and para it never changes.": "-ar verb. After tener que (have to), hay que (one has to) and para (to, in order to) it never changes.",
+    "-er verb. After tener que, hay que and para it never changes.": "-er verb. After tener que (have to), hay que (one has to) and para (to, in order to) it never changes.",
+    "-ir verb. After tener que, hay que and para it never changes.": "-ir verb. After tener que (have to), hay que (one has to) and para (to, in order to) it never changes.",
+    "Later you'll meet more: pongo, salgo, vengo.": "Later you'll meet more: pongo (I put), salgo (I go out), vengo (I come).",
+    "Seen in Lesson 1: no entiendo.": "Seen in Lesson 1: no entiendo (I don't understand).",
+    "Seen in Lesson 1: ¿puede repetir?": "Seen in Lesson 1: ¿puede repetir? (can you repeat that?)",
+    "Seen in Lesson 4: dice, dicen.": "Seen in Lesson 4: dice, dicen (says, they say).",
+    "Seen in Lesson 3: no lo conozco. Lesson 4: ¿sabe dónde…?": "Seen in Lesson 3: no lo conozco (I don't know him). Lesson 4: ¿sabe dónde…? (do you know where…?)",
+    "querer + a thing needs nothing in between. quiero, quieres, quiere change e → ie (but queremos).": "querer (to want) + a thing needs nothing in between. quiero, quieres, quiere (I want, you want, he / she wants) change e → ie (but queremos, we want).",
+    "The second verb stays in its base form, just like puedo, necesito and tengo que.": "The second verb stays in its base form, just like puedo (I can), necesito (I need) and tengo que (I have to).",
+    "From saber.": "From saber (to know).",
+    "From decir.": "From decir (to say).",
+    "You'll also hear command forms (siga, dé vuelta, cruce). Those come in unit 25.": "You'll also hear command forms (siga, go on; dé vuelta, turn; cruce, cross). Those come in unit 25.",
+    "In directions, derecho never changes to agree with anything.": "In directions, derecho (straight) never changes to agree with anything.",
+    "Mexico's everyday way to say turn. From dar: doy, das, da.": "Mexico's everyday way to say turn. From dar (to give): doy, das, da.",
+    "Same meaning as dar vuelta. doblar also means to fold (clothes).": "Same meaning as dar vuelta (to turn). doblar (to turn) also means to fold (clothes).",
+    "seguir changes e → i: sigo, sigues, sigue. por here means along.": "seguir (to keep going) changes e → i: sigo, sigues, sigue. por here means along.",
+    "cruzar el puente, cruzar la avenida work the same way.": "cruzar el puente (cross the bridge), cruzar la avenida (cross the avenue) work the same way.",
+    "You already know pasar from pásale.": "You already know pasar (to come in, to pass) from pásale (come in).",
+    "hasta marks where to stop going.": "hasta (until, as far as) marks where to stop going.",
+    "Many glorietas have a statue or fountain and work as landmarks.": "Many glorietas (roundabouts) have a statue or fountain and work as landmarks.",
+    "Mexican addresses always include the colonia. Taxi drivers and deliveries ask for it.": "Mexican addresses always include the colonia (neighborhood). Taxi drivers and deliveries ask for it.",
+    "Mexicans give locations as one street \"esquina con\" another.": "Mexicans give locations as one street \"esquina con\" (on the corner of) another.",
+    "These agree with the noun: el primer semáforo, la primera calle. primero drops the -o before a masculine noun.": "These agree with the noun: el primer semáforo (the first traffic light), la primera calle (the first street). primero (first) drops the -o before a masculine noun.",
+    "Distance uses estar a + the distance.": "Distance uses estar a (to be … away) + the distance.",
+    "qué tan + describing word = how (far, big, expensive).": "qué tan (how) + describing word = how (far, big, expensive).",
+    "Same as ¿dónde está…? for places. You'll hear it a lot.": "Same as ¿dónde está…? (where is…?) for places. You'll hear it a lot.",
+    "Watch for topes in every Mexican town.": "Watch for topes (speed bumps) in every Mexican town.",
+    "pedir = to ask for, order. pido, pides, pide.": "pedir = to ask for, order. pido, pides, pide (I ask for, you ask for, he / she asks for).",
+    "Mexico stresses the last syllable: cho-FER. Spain writes and says chófer.": "Mexico stresses the last syllable: cho-FER (driver). Spain writes and says chófer.",
+    "Ask the chofer as you get on.": "Ask the chofer (driver) as you get on.",
+    "Call out ¡bajan! or press the button so the bus stops.": "Call out ¡bajan! (getting off!) or press the button so the bus stops.",
+    "Pay the chofer when you get on.": "Pay the chofer (driver) when you get on.",
+    "cada = every. Learn ¿cuánto tarda? as a whole phrase.": "cada = every. Learn ¿cuánto tarda? (how long does it take?) as a whole phrase.",
+    "camión is the everyday word for any bus. autobús is more formal and common on long-distance signs and tickets.": "camión (bus) is the everyday word for any bus. autobús (bus) is more formal and common on long-distance signs and tickets.",
+    "bici is short for bicicleta.": "bici (bike) is short for bicicleta (bicycle).",
+    "Never say un otro. otro / otra never takes un or una.": "Never say un otro (an another). otro / otra (another) never takes un or una (a).",
+    "In Mexico la comida is the big meal, about 2 to 4 p.m. Lunch at noon is rare.": "In Mexico la comida (the main meal) is the big meal, about 2 to 4 p.m. Lunch at noon is rare.",
+    "Mexico says reservación more than reserva.": "Mexico says reservación (reservation) more than reserva.",
+    "Both are used. menú can also mean the set lunch.": "Both are used. menú (menu) can also mean the set lunch.",
+    "A softer form of querer. Learn it as a fixed phrase for ordering and shopping.": "A softer form of querer (to want). Learn it as a fixed phrase for ordering and shopping.",
+    "Both are fine with por favor. quisiera sounds more polite.": "Both are fine with por favor (please). quisiera (I would like) sounds more polite.",
+    "From traer: literally \"do you bring me\".": "From traer (to bring): literally \"do you bring me\".",
+    "Taco stands sell by la orden, a plate of several tacos. Ask how many come in one.": "Taco stands sell by la orden (the order), a plate of several tacos. Ask how many come in one.",
+    "Learn ¿qué me recomienda? whole.": "Learn ¿qué me recomienda? (what do you recommend?) whole.",
+    "llevar here means to contain.": "llevar (to carry) here means to contain.",
+    "With tacos, con todo means with onion and cilantro.": "With tacos, con todo (with everything) means with onion and cilantro.",
+    "picar = to sting, burn. \"No pica\" can still mean \"a little\" to a local.": "picar = to sting, burn. \"No pica\" (it's not spicy) can still mean \"a little\" to a local.",
+    "picante describes the dish; ¿pica? asks about it.": "picante (spicy) describes the dish; ¿pica? (is it spicy?) asks about it.",
+    "Cheap, filling and only at midday. Look for it in small fondas.": "Cheap, filling and only at midday. Look for it in small fondas (family-run eateries).",
+    "¿me cobra? is what Mexicans say at a counter instead of asking for the check.": "¿me cobra? (can I pay?) is what Mexicans say at a counter instead of asking for the check.",
+    "Check the bill for \"servicio\". Some tourist places add it.": "Check the bill for \"servicio\" (service charge). Some tourist places add it.",
+    "popote is Mexican. Elsewhere it's pajita or pitillo.": "popote (straw) is Mexican. Elsewhere it's pajita or pitillo.",
+    "agua mineral is always fizzy. Ask for natural if you want plain.": "agua mineral (mineral water) is always fizzy. Ask for natural (plain) if you want plain.",
+    "agua is feminine but takes el in the singular: el agua fresca.": "agua (water) is feminine but takes el in the singular: el agua fresca (fruit water).",
+    "These agree with the food: pollo asado, carne asada.": "These agree with the food: pollo asado (roast chicken), carne asada (grilled beef).",
+    "Works like gustar (unit 13): queda for one thing, quedan for more than one.": "Works like gustar (to please, unit 13): queda (fits) for one thing, quedan for more than one.",
+    "-ería is a shop: zapatería, panadería, papelería.": "-ería is a shop: zapatería (shoe store), panadería (bakery), papelería (stationery store).",
+    "Sizes say chica, not pequeña. Matches la talla.": "Sizes say chica (small), not pequeña. Matches la talla (the size).",
+    "Learn it whole. lo / la matches the clothing.": "Learn it whole. lo / la (it) matches the clothing.",
+    "te queda for tú, le queda for usted.": "te queda (it fits you) for tú, le queda for usted.",
+    "playera is Mexican. Elsewhere it's camiseta.": "playera (T-shirt) is Mexican. Elsewhere it's camiseta.",
+    "Mexico says lentes. You may also hear gafas.": "Mexico says lentes (glasses). You may also hear gafas.",
+    "Remember: otro color, never un otro color.": "Remember: otro color (another color), never un otro color.",
+    "más barato = cheaper. Same pattern: más grande, más chico.": "más barato = cheaper. Same pattern: más grande (bigger), más chico (smaller).",
+    "Fixed phrase from llevar. lo / la matches the item.": "Fixed phrase from llevar (to take). lo / la (it) matches the item.",
+    "Seen: ya lo tengo (L5), no lo conozco (L3), si la necesitas (L4), lo siento (L1).": "Seen: ya lo tengo, I have it now (L5); no lo conozco, I don't know him (L3); si la necesitas, if you need it (L4); lo siento, I'm sorry (L1).",
+    "Seen in Lesson 5: le dice, les dice. Lesson 4: me da gusto.": "Seen in Lesson 5: le dice, les dice (says to him, says to them). Lesson 4: me da gusto (I'm glad).",
+    "Seen in Lesson 4: Marcela llama a Ramón.": "Seen in Lesson 4: Marcela llama a Ramón (Marcela calls Ramón).",
+    "Cousins you already know: mucho gusto, me da gusto.": "Cousins you already know: mucho gusto (nice to meet you), me da gusto (I'm glad).",
+    "Seen in Lesson 4: ¿Están contigo? · con él.": "Seen in Lesson 4: ¿Están contigo? (Are they with you?) · con él (with him).",
+    "Seen in Lesson 1: ¿cómo se dice…?": "Seen in Lesson 1: ¿cómo se dice…? (how do you say…?)",
+    "Two pronouns: the person (me, te, nos) comes first, then the thing (lo, la, los, las).": "Two pronouns: the person (me, te, nos: me, you, us) comes first, then the thing (lo, la, los, las: it, them).",
+    "le and les become se before lo, la, los, las. Never say \"le lo\".": "le and les (to him, her, them) become se before lo, la, los, las. Never say \"le lo\".",
+    "Swap the thing for lo / la, then le changes to se.": "Swap the thing for lo / la (it), then le (to him, her) changes to se.",
+    "se can mean him, her, you or them. Add a + person to make it clear.": "se can mean him, her, you or them. Add a (to) + person to make it clear.",
+    "parecer works like gustar: parece for one thing, parecen for more than one.": "parecer (to seem) works like gustar (to please): parece (seems) for one thing, parecen for more than one.",
+    "From conocer.": "From conocer (to know a person or place).",
+    "You'll hear se lo from every cashier.": "You'll hear se lo (it to you) from every cashier.",
+    "Same idea as creo que, a little softer.": "Same idea as creo que (I think), a little softer.",
+    "With usted: ¿le parece bien? ¿qué le parece?": "With usted: ¿le parece bien? (is that OK with you?) ¿qué le parece? (what do you think?)",
+    "-ar verb, reflexive. After tener que or para the pronoun attaches and matches the person: tengo que llamarme, tienes que llamarte.": "-ar verb, reflexive. After tener que (have to) or para (to, in order to) the pronoun attaches and matches the person: tengo que llamarme, tienes que llamarte.",
+    "-ar verb, reflexive. After tener que or para the pronoun attaches and matches the person: tengo que cuidarme, tienes que cuidarte.": "-ar verb, reflexive. After tener que (have to) or para (to, in order to) the pronoun attaches and matches the person: tengo que cuidarme, tienes que cuidarte.",
+    "-ar verb, reflexive. After tener que or para the pronoun attaches and matches the person: tengo que preocuparme, tienes que preocuparte.": "-ar verb, reflexive. After tener que (have to) or para (to, in order to) the pronoun attaches and matches the person: tengo que preocuparme, tienes que preocuparte.",
+    "-ar verb, reflexive. After tener que or para the pronoun attaches and matches the person: tengo que mejorarme, tienes que mejorarte.": "-ar verb, reflexive. After tener que (have to) or para (to, in order to) the pronoun attaches and matches the person: tengo que mejorarme, tienes que mejorarte.",
+    "doler works like gustar: duele for one body part, duelen for more than one.": "doler (to hurt) works like gustar (to please): duele (hurts) for one body part, duelen for more than one.",
+    "With body parts Spanish uses el / la, not my. The me already says whose.": "With body parts Spanish uses el / la (the), not my. The me (to me) already says whose.",
+    "le duele for usted, te duele for tú.": "le duele (it hurts you) for usted, te duele for tú.",
+    "A toothache is almost always una muela.": "A toothache is almost always una muela (a back tooth).",
+    "Chest pain: go to urgencias.": "Chest pain: go to urgencias (the emergency room).",
+    "la mano is feminine even though it ends in -o.": "la mano (the hand) is feminine even though it ends in -o.",
+    "Agrees with the body part: el pie hinchado, la mano hinchada.": "Agrees with the body part: el pie hinchado (the swollen foot), la mano hinchada (the swollen hand).",
+    "Mexico says gripa. You may hear gripe in other countries.": "Mexico says gripa (flu). You may hear gripe in other countries.",
+    "Pharmacies sell suero in bottles or packets.": "Pharmacies sell suero (rehydration drink) in bottles or packets.",
+    "From sentirse. Learn both whole.": "From sentirse (to feel). Learn both whole.",
+    "soy for a permanent allergy. tengo alergia for symptoms right now.": "soy (I am) for a permanent allergy. tengo alergia (I have an allergy) for symptoms right now.",
+    "Mexico says mosco more than mosquito.": "Mexico says mosco (mosquito) more than mosquito.",
+    "Many pharmacies have a consultorio next door with a cheap doctor's visit.": "Many pharmacies have a consultorio (doctor's office) next door with a cheap doctor's visit.",
+    "médico and doctor mean the same.": "médico and doctor (doctor) mean the same.",
+    "Look for the sign URGENCIAS at the hospital.": "Look for the sign URGENCIAS (emergency room) at the hospital.",
+    "cada = every. cada día, cada semana.": "cada = every. cada día, cada semana (every day, every week).",
+    "por + time = for how long.": "por (for) + time = for how long.",
+    "In the dictionary the se is on the end: levantarse.": "In the dictionary the se is on the end: levantarse (to get up).",
+    "In Mexico bañarse is the normal word for showering.": "In Mexico bañarse (to bathe) is the normal word for showering.",
+    "me visto is from vestirse (e → i).": "me visto (I get dressed) is from vestirse (to get dressed, (e → i).",
+    "rasurarse is the Mexican word for shave.": "rasurarse (to shave) is the Mexican word for shave.",
+    "In Mexico la comida is the big meal, around 2 to 4 p.m.": "In Mexico la comida (the main meal) is the big meal, around 2 to 4 p.m.",
+    "se me hace tarde is a fixed phrase. Learn it whole.": "se me hace tarde (I'm running late) is a fixed phrase. Learn it whole.",
+    "quedarse = stay. Without se, quedar has other meanings (see unit 17).": "quedarse = stay. Without se, quedar (to fit, to agree) has other meanings (see unit 17).",
+    "madrugada is from midnight until dawn.": "madrugada (the small hours) is from midnight until dawn.",
+    "Many people just use la alarma del celular.": "Many people just use la alarma del celular (the phone's alarm).",
+    "Mexico says regadera; Spain says ducha.": "Mexico says regadera (shower); Spain says ducha.",
+    "In Mexico it's la pijama (feminine).": "In Mexico it's la pijama (pajamas, feminine).",
+    "Use me / te / se when you do the action to yourself; drop it when you do it to something else.": "Use me / te / se (myself, yourself, himself or herself) when you do the action to yourself; drop it when you do it to something else.",
+    "-ar verb, reflexive. After tener que or para the pronoun attaches and matches the person: tengo que levantarme, tienes que levantarte.": "-ar verb, reflexive. After tener que (have to) or para (to, in order to) the pronoun attaches and matches the person: tengo que levantarme, tienes que levantarte.",
+    "-ar verb, reflexive. After tener que or para the pronoun attaches and matches the person: tengo que bañarme, tienes que bañarte.": "-ar verb, reflexive. After tener que (have to) or para (to, in order to) the pronoun attaches and matches the person: tengo que bañarme, tienes que bañarte.",
+    "-ar verb, reflexive. After tener que or para the pronoun attaches and matches the person: tengo que sentarme, tienes que sentarte.": "-ar verb, reflexive. After tener que (have to) or para (to, in order to) the pronoun attaches and matches the person: tengo que sentarme, tienes que sentarte.",
+    "-ar verb, reflexive. After tener que or para the pronoun attaches and matches the person: tengo que acostarme, tienes que acostarte.": "-ar verb, reflexive. After tener que (have to) or para (to, in order to) the pronoun attaches and matches the person: tengo que acostarme, tienes que acostarte.",
+    "-ar verb, reflexive. After tener que or para the pronoun attaches and matches the person: tengo que despertarme, tienes que despertarte.": "-ar verb, reflexive. After tener que (have to) or para (to, in order to) the pronoun attaches and matches the person: tengo que despertarme, tienes que despertarte.",
+    "-ar verb, reflexive. After tener que or para the pronoun attaches and matches the person: tengo que quedarme, tienes que quedarte.": "-ar verb, reflexive. After tener que (have to) or para (to, in order to) the pronoun attaches and matches the person: tengo que quedarme, tienes que quedarte.",
+    "Seen in Lesson 4: Estoy descansando.": "Seen in Lesson 4: Estoy descansando (I'm resting).",
+    "Later: dormir → durmiendo, pedir → pidiendo.": "Later: dormir → durmiendo (sleeping), pedir → pidiendo (asking for).",
+    "estar + -ndo = an action in progress right now (the A in PLACE). In Mexico people usually say voy al mercado instead of estoy yendo.": "estar + -ndo = an action in progress right now (the A in PLACE). In Mexico people usually say voy al mercado (I'm going to the market) instead of estoy yendo.",
+    "estar + -ndo = an action in progress right now (the A in PLACE). Not used; say me llamo. The pronoun can also go first: me estoy cuidando.": "estar + -ndo = an action in progress right now (the A in PLACE). Not used; say me llamo (my name is). The pronoun can also go first: me estoy cuidando (I'm taking care of myself).",
+    "estar + -ndo = an action in progress right now (the A in PLACE). The pronoun can also go first: me estoy cuidando.": "estar + -ndo = an action in progress right now (the A in PLACE). The pronoun can also go first: me estoy cuidando (I'm taking care of myself).",
+    "Works like gustar: the thing that hurts is the subject. One thing: está doliendo; more than one: están doliendo.": "Works like gustar: the thing that hurts is the subject. One thing: está doliendo (is hurting); more than one: están doliendo (are hurting).",
+    "Conjugate only ir: voy a, vas a, va a, vamos a, van a.": "Conjugate only ir (to go): voy a, vas a, va a, vamos a, van a.",
+    "Seen: más despacio (L1), más cercana (L4).": "Seen: más despacio, slower (L1); más cercana, closer (L4).",
+    "Seen in Lesson 4: ya está un poco mejor.": "Seen in Lesson 4: ya está un poco mejor (he's a little better now).",
+    "Fixed ones you know: por favor, por aquí, por qué, ¿para qué?": "Fixed ones you know: por favor (please), por aquí (this way), por qué (why), ¿para qué? (what for?)",
+    "Seen in Lesson 4: un poquito.": "Seen in Lesson 4: un poquito (a little bit).",
+    "More natural than adding otra vez.": "More natural than adding otra vez (again).",
+    "tener changes; ganas never does.": "tener (to have) changes; ganas (desire) never does.",
+    "A verb after para stays in its base form.": "A verb after para (to, in order to) stays in its base form.",
+    "Seen in Lesson 5: al mismo tiempo.": "Seen in Lesson 5: al mismo tiempo (at the same time).",
+    "From llover (o → ue).": "From llover (to rain, (o → ue).",
+    "Seen in Lesson 4: padrísim@.": "Seen in Lesson 4: padrísim@ (really cool).",
+    "en una hora also works in Mexico.": "en una hora (in an hour) also works in Mexico.",
+    "Answer with desde hace: desde hace tres años.": "Answer with desde hace: desde hace tres años (for three years).",
+    "una película is the film itself.": "una película (a movie) is the film itself.",
+    "In Mexico futbol has no accent.": "In Mexico futbol (soccer) has no accent.",
+    "jugar for games and sports; tocar for instruments. Mexicans often drop the al: jugar futbol.": "jugar (to play) for games and sports; tocar (to play, to touch) for instruments. Mexicans often drop the al: jugar futbol (play soccer).",
+    "encantar works like gustar: me encantan los tacos.": "encantar (to delight) works like gustar (to please): me encantan los tacos (I love tacos).",
+    "Friends only. With usted, say ¡claro! or con gusto.": "Friends only. With usted, say ¡claro! (of course!) or con gusto (gladly).",
+    "quedar de + infinitive is Mexican. Spain says quedar en.": "quedar de (to agree to) + infinitive is Mexican. Spain says quedar en.",
+    "que te diviertas is a fixed wish form.": "que te diviertas (have fun) is a fixed wish form.",
+    "Mexico says renta; Spain says alquiler.": "Mexico says renta (rent); Spain says alquiler.",
+    "Often shortened to el depa.": "Often shortened to el depa (the apartment).",
+    "depósito is also a bank deposit (unit 19).": "depósito (deposit) is also a bank deposit (unit 19).",
+    "la luz is light and electric power. se fue la luz is a fixed phrase.": "la luz (the light) is light and electric power. se fue la luz (the power went out) is a fixed phrase.",
+    "agua is feminine but takes el.": "agua (water) is feminine but takes el.",
+    "prender is the Mexican word; encender sounds formal.": "prender (to turn on) is the Mexican word; encender sounds formal.",
+    "no sirve is the everyday Mexican way to say it.": "no sirve (it doesn't work) is the everyday Mexican way to say it.",
+    "descompuesto for machines that stop working; roto for things physically broken.": "descompuesto (broken down) for machines that stop working; roto (broken) for things physically broken.",
+    "una fuga de gas is an emergency: leave and call for help.": "una fuga de gas (a gas leak) is an emergency: leave and call for help.",
+    "el técnico fixes A/C units and appliances.": "el técnico (the repair person) fixes A/C units and appliances.",
+    "Most people simply call her by name or la señora.": "Most people simply call her by name or la señora (the lady).",
+    "foco and contacto are the Mexican words.": "foco (light bulb) and contacto (outlet) are the Mexican words.",
+    "Only Mexico answers with bueno. Other countries say ¿aló? or ¿diga?": "Only Mexico answers with bueno (hello). Other countries say ¿aló? or ¿diga?",
+    "recado for a spoken message passed on by someone.": "recado (message) for a spoken message passed on by someone.",
+    "Many people just say mándame un whats.": "Many people just say mándame un whats (send me a WhatsApp).",
+    "In Mexico marcar often replaces llamar.": "In Mexico marcar (to dial) often replaces llamar (to call).",
+    "se cortó is a past form; learn it as a phrase for now.": "se cortó (it got cut off) is a past form; learn it as a phrase for now.",
+    "Mexicans often drop the una: tengo cita.": "Mexicans often drop the una (an): tengo cita (I have an appointment).",
+    "le for usted, te for tú.": "le (to you) for usted, te for tú.",
+    "el cajero is also the cashier. Context tells.": "el cajero (the ATM) is also the cashier. Context tells.",
+    "sacar is the everyday word; retirar is on the screen.": "sacar (to take out) is the everyday word; retirar (to withdraw) is on the screen.",
+    "saldo is also prepaid phone credit.": "saldo (balance) is also prepaid phone credit.",
+    "¿a cómo está…? is how Mexicans ask any going rate.": "¿a cómo está…? (how much is…?) is how Mexicans ask any going rate.",
+    "Mexicans say pagar la luz for paying the power bill.": "Mexicans say pagar la luz (pay the light) for paying the power bill.",
+    "At the register you'll hear: ¿débito o crédito?": "At the register you'll hear: ¿débito o crédito? (debit or credit?)",
+    "Mexico says NIP, not PIN.": "Mexico says NIP (the card's PIN), not PIN.",
+    "nosotros looks like the present (trabajamos); context tells you.": "nosotros (we) looks like the present (trabajamos, we work); context tells you.",
+    "Later: pidió, durmió.": "Later: pidió (asked for), durmió (slept).",
+    "pasado matches the noun.": "pasado (last) matches the noun.",
+    "A finished action at a set time: ayer, el lunes, una vez. Same preterite as ir: fui can mean I was or I went.": "A finished action at a set time: ayer (yesterday), el lunes (on Monday), una vez (once). Same preterite as ir: fui can mean I was or I went.",
+    "A finished action at a set time: ayer, el lunes, una vez.": "A finished action at a set time: ayer (yesterday), el lunes (on Monday), una vez (once).",
+    "A finished action at a set time: ayer, el lunes, una vez. Same preterite as ser: fui can mean I went or I was.": "A finished action at a set time: ayer (yesterday), el lunes (on Monday), una vez (once). Same preterite as ser: fui can mean I went or I was.",
+    "A finished action at a set time: ayer, el lunes, una vez. In the preterite, poder means managed to / was able to.": "A finished action at a set time: ayer (yesterday), el lunes (on Monday), una vez (once). In the preterite, poder means managed to / was able to.",
+    "A finished action at a set time: ayer, el lunes, una vez. In the preterite, conocer means met or got to know.": "A finished action at a set time: ayer (yesterday), el lunes (on Monday), una vez (once). In the preterite, conocer means met or got to know.",
+    "A finished action at a set time: ayer, el lunes, una vez. In the preterite, saber means found out.": "A finished action at a set time: ayer (yesterday), el lunes (on Monday), una vez (once). In the preterite, saber means found out.",
+    "A finished action at a set time: ayer, el lunes, una vez. In the preterite, quise often means I tried to; no quise means I refused.": "A finished action at a set time: ayer (yesterday), el lunes (on Monday), una vez (once). In the preterite, quise (I wanted) often means I tried to; no quise means I refused.",
+    "Works like gustar: the thing that hurts is the subject. One thing: dolió; more than one: dolieron.": "Works like gustar: the thing that hurts is the subject. One thing: dolió (hurt); more than one: dolieron (hurt).",
+    "auxilio is the shout when it's serious.": "auxilio (help!) is the shout when it's serious.",
+    "llame is an usted command; learn it as a phrase now (unit 25).": "llame (call) is an usted command; learn it as a phrase now (unit 25).",
+    "más cercano also works for the farmacia or the cajero.": "más cercano (nearest) also works for the farmacia (pharmacy) or the cajero (ATM).",
+    "herida for a woman.": "herida (injured) for a woman.",
+    "hubo is the past of hay.": "hubo (there was) is the past of hay (there is).",
+    "In Mexico a cartera is a wallet; a purse is una bolsa.": "In Mexico a cartera is a wallet; a purse is una bolsa (a bag).",
+    "ponchar is the Mexican word for a flat.": "ponchar (to get a puncture) is the Mexican word for a flat.",
+    "terremoto is a big one; temblor is the everyday word.": "terremoto (earthquake) is a big one; temblor (tremor) is the everyday word.",
+    "antes + imperfect = how things used to be.": "antes (before) + imperfect = how things used to be.",
+    "The past version of ¿a qué se dedica?": "The past version of ¿a qué se dedica? (what do you do for a living?)",
+    "extrañar is the Mexican word; Spain says echar de menos. Use a before people.": "extrañar (to miss) is the Mexican word; Spain says echar de menos. Use a (to) before people.",
+    "Same meaning as the imperfect: corría todos los días.": "Same meaning as the imperfect: corría todos los días (I used to run every day).",
+    "Past habits and background: antes, todos los días.": "Past habits and background: antes (before), todos los días (every day).",
+    "Works like gustar: the thing that hurts is the subject. One thing: dolía; more than one: dolían.": "Works like gustar: the thing that hurts is the subject. One thing: dolía (hurt); more than one: dolían (hurt).",
+    "From haber. Like hay, every tense has one form for one or many.": "From haber (to have, as a helper). Like hay (there is), every tense has one form for one or many.",
+    "In conversation, voy a trabajar is more common.": "In conversation, voy a trabajar (I'm going to work) is more common.",
+    "Later: pondr-, saldr-, vendr-, querr-.": "Later: pondr- (will put), saldr- (will go out), vendr- (will come), querr- (will want).",
+    "Irregulars use the future stems: tendría, haría, diría, podría, sabría, habría.": "Irregulars use the future stems: tendría (would have), haría (would do), diría (would say), podría (could), sabría (would know), habría (there would be).",
+    "Softer than ¿puede…? and quiero.": "Softer than ¿puede…? (can you…?) and quiero (I want).",
+    "Works like gustar: the thing that hurts is the subject. One thing: dolerá; more than one: dolerán.": "Works like gustar: the thing that hurts is the subject. One thing: dolerá (will hurt); more than one: dolerán (will hurt).",
+    "Works like gustar: the thing that hurts is the subject. One thing: dolería; more than one: dolerían.": "Works like gustar: the thing that hurts is the subject. One thing: dolería (would hurt); more than one: dolerían (would hurt).",
+    "leído, creído, traído keep an accent on the í.": "leído, creído, traído (read, believed, brought) keep an accent on the í.",
+    "haber (he, has, ha, hemos, han) + participle. In Mexico used mostly for ever, never, so far, lately.": "haber (to have, as a helper: he, has, ha, hemos, han) + participle. In Mexico used mostly for ever, never, so far, lately.",
+    "Works like gustar: the thing that hurts is the subject. One thing: ha dolido; more than one: han dolido.": "Works like gustar: the thing that hurts is the subject. One thing: ha dolido (has hurt); more than one: han dolido (have hurt).",
+    "Seen: pásale (pasa + -le, MX), toma asiento.": "Seen: pásale, come in (pasa + -le, MX); toma asiento, have a seat.",
+    "ve is also the command of ver; context tells you.": "ve is also the command of ver (to see); context tells you.",
+    "Yo-go verbs keep the g: tenga, haga, diga, traiga. Seen: disculpe, cuídese, tome asiento.": "Yo-go verbs keep the g: tenga, haga, diga, traiga (have, do, say, bring). Seen: disculpe (excuse me), cuídese (take care), tome asiento (have a seat).",
+    "Seen in Lesson 5: no te preocupes.": "Seen in Lesson 5: no te preocupes (don't worry).",
+    "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. Irregular tú form: sé.": "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. Irregular tú form: sé (be).",
+    "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. For tú, Mexicans usually say estate (está + te).": "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. For tú, Mexicans usually say estate, be or stay (está + te).",
+    "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. Irregular tú form: ten.": "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. Irregular tú form: ten (have).",
+    "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. Irregular tú form: ve.": "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. Irregular tú form: ve (go).",
+    "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. Irregular tú form: haz.": "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. Irregular tú form: haz (do, make).",
+    "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. Irregular tú form: di.": "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. Irregular tú form: di (say).",
+    "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. ve is also the tú command of ir; context tells you.": "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. ve is also the tú command of ir (to go); context tells you.",
+    "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. Irregular tú form: ven.": "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. Irregular tú form: ven (come).",
+    "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. Irregular tú form: sal.": "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. Irregular tú form: sal (go out).",
+    "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. Irregular tú form: pon.": "tú affirmative = the él present form. Usted and ustedes forms (affirmative and negative) and negative tú come from the subjunctive. Irregular tú form: pon (put).",
+    "necesario seen in Lesson 5.": "necesario (necessary) seen in Lesson 5.",
+    "Wishes and requests after que, ojalá, es importante que. Same forms as usted commands.": "Wishes and requests after que (that), ojalá (I hope), es importante que (it's important that). Same forms as usted commands."
+  }
+}

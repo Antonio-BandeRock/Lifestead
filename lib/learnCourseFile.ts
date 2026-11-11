@@ -48,6 +48,12 @@ export type CourseCard = {
   exampleTarget: string;
   exampleNative: string;
   remember: string;
+  /**
+   * Only on a Rule card whose native side states the rule (2026-11-11): its front in
+   * the learner's language, from scripts/course-fixes. The card then shows this as
+   * its native side, and the rule under the example.
+   */
+  meaning?: string;
 };
 
 export type Course = { schema: number; deck: CourseDeck; cards: CourseCard[] };

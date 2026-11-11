@@ -11,7 +11,7 @@
 // written or read, and stays because the database only grows.
 
 import { getDatabase } from './db';
-import { DEFAULT_DAILY_NEW, type LanguageOutline } from './languageBasics';
+import { DEFAULT_DAILY_NEW, type LanguageOutline, type StudyGroup } from './languageBasics';
 import { addLearnReview } from './learnDb';
 import type { CourseCard, CourseDeck } from './learnCourseFile';
 import type { CourseDirection } from './learnCourseCard';
@@ -26,15 +26,19 @@ export type CourseSettings = {
   /** The units turned on for Home. */
   openedUnits: number[];
   typeAnswer: boolean;
+  /** Units studied together, newest first, each offered again on Home. */
+  studyGroups: StudyGroup[];
 };
 
-const DEFAULT_SETTINGS: CourseSettings = { active: false, direction: 'targetFirst', dailyNewLimit: DEFAULT_DAILY_NEW, openedUnits: [], typeAnswer: false };
+export { STUDY_GROUP_LIMIT, withStudyGroup, type StudyGroup } from './languageBasics';
+
+const DEFAULT_SETTINGS: CourseSettings = { active: false, direction: 'targetFirst', dailyNewLimit: DEFAULT_DAILY_NEW, openedUnits: [], typeAnswer: false, studyGroups: [] };
 
 export type CourseEntry = { deck: CourseDeck; seen: number; settings: CourseSettings; loadOutline: () => LanguageOutline };
 
 export type OpenedCourse = { deck: CourseDeck; cards: CourseCard[]; outline: LanguageOutline };
 
-type StateRow = { id: string; active: number; direction: string; daily_new_limit: number; opened_units: string; type_answer: number };
+type StateRow = { id: string; active: number; direction: string; daily_new_limit: number; opened_units: string; type_answer: number; study_groups: string | null };
 
 function parseJson<T>(text: string | null | undefined, fallback: T): T {
   if (!text) return fallback;
@@ -43,6 +47,20 @@ function parseJson<T>(text: string | null | undefined, fallback: T): T {
   } catch {
     return fallback;
   }
+}
+
+function groupsOf(value: unknown): StudyGroup[] {
+  if (!Array.isArray(value)) return [];
+  const groups: StudyGroup[] = [];
+  for (const item of value) {
+    if (!item || typeof item !== 'object') continue;
+    const units = (item as { units?: unknown }).units;
+    if (!Array.isArray(units)) continue;
+    const kept = units.filter((unit): unit is number => typeof unit === 'number');
+    if (kept.length === 0) continue;
+    groups.push({ units: kept, order: (item as { order?: unknown }).order === 'random' ? 'random' : 'learning' });
+  }
+  return groups;
 }
 
 function settingsOf(row: StateRow | null | undefined): CourseSettings {
@@ -54,6 +72,7 @@ function settingsOf(row: StateRow | null | undefined): CourseSettings {
     dailyNewLimit: row.daily_new_limit > 0 ? row.daily_new_limit : DEFAULT_DAILY_NEW,
     openedUnits: Array.isArray(opened) ? opened.filter((unit): unit is number => typeof unit === 'number') : [],
     typeAnswer: row.type_answer === 1,
+    studyGroups: groupsOf(parseJson<unknown>(row.study_groups, [])),
   };
 }
 
@@ -61,7 +80,7 @@ function settingsOf(row: StateRow | null | undefined): CourseSettings {
 export async function listCourses(): Promise<CourseEntry[]> {
   const db = await getDatabase();
   const [states, seenRows] = await Promise.all([
-    db.getAllAsync<StateRow>('SELECT id, active, direction, daily_new_limit, opened_units, type_answer FROM learn_course_state'),
+    db.getAllAsync<StateRow>('SELECT id, active, direction, daily_new_limit, opened_units, type_answer, study_groups FROM learn_course_state'),
     db.getAllAsync<{ id: string; seen: number }>("SELECT deck_id AS id, COUNT(DISTINCT card_id) AS seen FROM learn_reviews WHERE kind = 'course' GROUP BY deck_id"),
   ]);
   const stateById = new Map(states.map((row) => [row.id, row]));
@@ -84,7 +103,7 @@ export function loadCourse(id: string): OpenedCourse | null {
 export async function getCourseSettings(id: string): Promise<CourseSettings> {
   const db = await getDatabase();
   return settingsOf(
-    await db.getFirstAsync<StateRow>('SELECT id, active, direction, daily_new_limit, opened_units, type_answer FROM learn_course_state WHERE id = ?', id),
+    await db.getFirstAsync<StateRow>('SELECT id, active, direction, daily_new_limit, opened_units, type_answer, study_groups FROM learn_course_state WHERE id = ?', id),
   );
 }
 
@@ -93,16 +112,17 @@ export async function saveCourseSettings(id: string, patch: Partial<CourseSettin
   const next = { ...(await getCourseSettings(id)), ...patch };
   const now = new Date().toISOString();
   await db.runAsync(
-    `INSERT INTO learn_course_state (id, active, direction, daily_new_limit, opened_units, type_answer, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    `INSERT INTO learn_course_state (id, active, direction, daily_new_limit, opened_units, type_answer, study_groups, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
      ON CONFLICT(id) DO UPDATE SET active = excluded.active, direction = excluded.direction, daily_new_limit = excluded.daily_new_limit,
-       opened_units = excluded.opened_units, type_answer = excluded.type_answer, updated_at = excluded.updated_at`,
+       opened_units = excluded.opened_units, type_answer = excluded.type_answer, study_groups = excluded.study_groups, updated_at = excluded.updated_at`,
     id,
     next.active ? 1 : 0,
     next.direction,
     next.dailyNewLimit,
     JSON.stringify(next.openedUnits),
     next.typeAnswer ? 1 : 0,
+    JSON.stringify(next.studyGroups),
     now,
     now,
   );

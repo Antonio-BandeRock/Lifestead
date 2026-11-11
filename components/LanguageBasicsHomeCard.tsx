@@ -15,9 +15,9 @@ import { textShadow, typography } from '../constants/typography';
 import { t } from '../lib/i18n';
 import { useLanguage } from '../lib/language';
 import { setsForLanguage, unitsTurnedOn } from '../lib/languageBasics';
-import { listCourses } from '../lib/learnCoursesDb';
+import { listCourses, type StudyGroup } from '../lib/learnCoursesDb';
 
-type OnHome = { id: string; name: string; units: { unit: number; name: string }[] };
+type OnHome = { id: string; name: string; units: { unit: number; name: string }[]; groups: StudyGroup[] };
 
 export function LanguageBasicsHomeCard() {
   const walkMark = useWalkMark();
@@ -31,8 +31,13 @@ export function LanguageBasicsHomeCard() {
         .then((all) => {
           if (!live) return;
           const on = setsForLanguage(all, language)
-            .filter((set) => set.settings.openedUnits.length > 0)
-            .map((set) => ({ id: set.deck.id, name: set.deck.name, units: unitsTurnedOn(set.loadOutline(), set.settings.openedUnits) }));
+            .filter((set) => set.settings.openedUnits.length > 0 || set.settings.studyGroups.length > 0)
+            .map((set) => ({
+              id: set.deck.id,
+              name: set.deck.name,
+              units: unitsTurnedOn(set.loadOutline(), set.settings.openedUnits),
+              groups: set.settings.studyGroups,
+            }));
           setSets(on);
         })
         .catch(() => {
@@ -81,13 +86,34 @@ export function LanguageBasicsHomeCard() {
               </TouchableOpacity>
             );
           })}
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => router.push({ pathname: '/language-basics', params: { id: set.id, together: '1' } })}
-            accessibilityRole="button"
-          >
-            <Text style={styles.buttonText}>Study These Together</Text>
-          </TouchableOpacity>
+          {set.units.length > 0 ? (
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => router.push({ pathname: '/language-basics', params: { id: set.id, together: '1' } })}
+              accessibilityRole="button"
+            >
+              <Text style={styles.buttonText}>Study These Together</Text>
+            </TouchableOpacity>
+          ) : null}
+          {set.groups.length > 0 ? <Text style={styles.caption}>Studied together before</Text> : null}
+          {set.groups.map((group, groupIndex) => {
+            const marked = setIndex === 0 && groupIndex === 0;
+            const label = group.units.length === 1 ? t('Unit {units}', { units: group.units[0] }) : t('Units {units}', { units: group.units.join(', ') });
+            return (
+              <TouchableOpacity
+                key={group.units.join(',')}
+                ref={marked ? walkMark.ref('home.languageBasicsGroup') : undefined}
+                style={[styles.row, marked ? walkMark('home.languageBasicsGroup') : null]}
+                activeOpacity={0.8}
+                onPress={() => router.push({ pathname: '/language-basics', params: { id: set.id, group: group.units.join(','), order: group.order } })}
+                accessibilityRole="button"
+              >
+                <Ionicons name="albums-outline" size={18} color={colors.textSecondary} style={textShadow} />
+                <Text style={styles.rowText}>{group.order === 'random' ? t('{label}, random order', { label }) : label}</Text>
+                <Ionicons name="play" size={18} color={colors.textSecondary} style={textShadow} />
+              </TouchableOpacity>
+            );
+          })}
         </View>
       ))}
     </View>

@@ -77,7 +77,10 @@ if (fs.existsSync(decksDir)) {
   const sheets = xlsx.readXlsx(new Uint8Array(fs.readFileSync(path.join(decksDir, 'english-for-spanish-speakers.xlsx'))));
   check('the Guide sheet is read as a sheet but never as cards', !!sheets.Guide && file.checkCourse(file.courseShapeFromSheets(sheets)).course.cards.length === 1516);
   const fromFile = file.readCourseBytes(new Uint8Array(fs.readFileSync(path.join(decksDir, 'english-for-spanish-speakers.xlsx'))));
-  check('a workbook and its JSON hold the same cards', JSON.stringify(fromFile.course.cards) === JSON.stringify(en.cards));
+  // The shipped JSON is the workbook with scripts/course-fixes/ laid over it, so only the fields a fix may set differ.
+  const FIXABLE = ['meaning', 'remember', 'target', 'native'];
+  const strip = (card) => JSON.stringify(Object.fromEntries(Object.entries(card).filter(([key]) => !FIXABLE.includes(key))));
+  check('a workbook and its JSON hold the same cards', fromFile.course.cards.length === en.cards.length && fromFile.course.cards.every((card, i) => strip(card) === strip(en.cards[i])));
   check('a line break in a cell survives', en.cards.some((c) => c.type === 'Verb' && c.target.includes('\n')));
 }
 
@@ -286,6 +289,28 @@ check('accents alone pass and are pointed out', typed('sere', 'yo seré') === 'a
 check('a wrong form is different', typed('fui', 'yo soy') === 'different' && typed('', 'yo soy') === 'different');
 check('a hidden form is steady all day and within the row', cardKit.hiddenFormIndex('a', '2026-06-01', 5) === cardKit.hiddenFormIndex('a', '2026-06-01', 5) && cardKit.hiddenFormIndex('a', '2026-06-01', 5) < 5);
 
+// ---- Corrections laid over the workbooks, in the learner's language ----
+for (const course of [es, en]) {
+  const id = course.deck.id;
+  const fixes = JSON.parse(fs.readFileSync(path.join(root, 'scripts', 'course-fixes', `${id}.json`), 'utf8'));
+  const ids = new Set(course.cards.map((card) => card.id));
+  check(`${id}: every fixed card is in the set`, Object.keys(fixes.cards || {}).every((cardId) => ids.has(cardId)));
+  const meant = course.cards.filter((card) => card.meaning !== undefined);
+  check(`${id}: every meaning says something other than the front`, meant.length > 0 && meant.every((card) => card.meaning.trim() && card.meaning !== card.target));
+  const shipped = new Set(course.cards.map((card) => card.remember));
+  const glossed = Object.entries(fixes.remember || {});
+  check(`${id}: every glossed Remember line ships, and the bare one is gone`, glossed.length > 0 && glossed.every(([from, to]) => shipped.has(to) && !shipped.has(from)));
+  const heads = course.cards.filter((card) => card.type === 'Verb' && card.target.includes('\n')).map((card) => card.target.split('\n')[0].split(' · ')[1]);
+  const untranslated = heads.filter((head) => head && Object.keys(fixes.labels || {}).some((label) => !label.includes('{x}') && head === label));
+  check(`${id}: no verb card names its tense in the language being learned`, untranslated.length === 0, untranslated.slice(0, 3).join(', '));
+}
+const studied = basics.withStudyGroup([{ units: [1, 2], order: 'learning' }], { units: [3, 1, 3], order: 'random' });
+check('a group studied together goes first, sorted, once each', JSON.stringify(studied[0]) === JSON.stringify({ units: [1, 3], order: 'random' }) && studied.length === 2);
+const again = basics.withStudyGroup(studied, { units: [2, 1], order: 'random' });
+check('the same units studied again move up and are not kept twice', again.length === 2 && again[0].units.join() === '1,2' && again[0].order === 'random');
+const tenGroups = Array.from({ length: 10 }, (_, i) => i + 1).reduce((groups, unit) => basics.withStudyGroup(groups, { units: [unit], order: 'learning' }), []);
+check('Home keeps the newest few groups', tenGroups.length === basics.STUDY_GROUP_LIMIT && tenGroups[0].units[0] === 10);
+
 // ---- Speech ----
 const say = speech.speechText;
 check('an @ word in Spanish says both forms', say('encantad@', 'es-MX') === 'encantado, encantada');
@@ -296,8 +321,8 @@ check('a language with no table never says the @', !say('amig@', 'fi-FI').includ
 check('dots, slashes and arrows become pauses', say('a · b / c → d', 'en-US') === 'a, b, c, d');
 check('no card in either set gives a voice a symbol to read', [...es.cards, ...en.cards].every((card) => !/[·→@]/.test(speech.speechParts(card, card.id.startsWith('es') ? 'es-MX' : 'en-US').join(' '))));
 check('a slash inside a word is left alone', say('he/she', 'en-US') === 'he/she');
-const verbSaid = speech.speechParts(byId(en, en.cards.find((card) => card.type === 'Verb' && card.target.includes('present simple')).id), 'en-US');
-check('a verb card leaves out the line naming the tense', !verbSaid[0].includes('present simple'));
+const verbSaid = speech.speechParts(byId(en, en.cards.find((card) => card.type === 'Verb' && card.target.split('\n')[0].endsWith(' · presente')).id), 'en-US');
+check('a verb card leaves out the line naming the tense', !verbSaid[0].includes('presente'));
 const voices = [
   { identifier: 'es-us-x-sfb-network', name: 'n', language: 'es-MX', quality: 'Enhanced' },
   { identifier: 'es-es-x-eea-local', name: 'l', language: 'es-ES', quality: 'Default' },

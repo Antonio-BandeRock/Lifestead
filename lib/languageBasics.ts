@@ -25,6 +25,18 @@ export const LADDER_START = 1;
 export const SITTING_SIZE = 20;
 export const DEFAULT_DAILY_NEW = 15;
 
+/** Units studied together, kept so Home can offer them again. */
+export type StudyGroup = { units: number[]; order: 'learning' | 'random' };
+
+/** How many studied groups a set keeps. A new one goes first and an equal one moves up. */
+export const STUDY_GROUP_LIMIT = 6;
+
+export function withStudyGroup(groups: StudyGroup[], group: StudyGroup): StudyGroup[] {
+  const units = [...new Set(group.units)].sort((a, b) => a - b);
+  const same = (other: StudyGroup) => other.units.length === units.length && other.units.every((unit, index) => unit === units[index]);
+  return [{ units, order: group.order }, ...groups.filter((other) => !same(other))].slice(0, STUDY_GROUP_LIMIT);
+}
+
 export type LadderState = { step: number; readyOn: string; firstDay: string; lastDay: string; answers: number };
 export type LadderStates = Map<string, LadderState>;
 

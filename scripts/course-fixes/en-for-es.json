@@ -1,0 +1,1098 @@
+{
+  "about": "Applied by scripts/build_course_files.js on top of the workbook, which stays as it is. labels: a verb card's tense name on the English face, put in Spanish for the Spanish speaker; {x} stands for any word and is carried across. cards: per Card ID, meaning (the front of a Rule card in Spanish, shown large at the top of its back), remember (with a meaning beside each English word) or target. remember (whole lines): a Remember line as the workbook has it, mapped to the same line with Spanish beside each English word, applied to every card that carries it.",
+  "labels": {
+    "verb forms": "formas del verbo",
+    "present simple": "presente",
+    "present continuous": "presente progresivo",
+    "present continuous (actions only)": "presente progresivo (solo acciones)",
+    "present": "presente",
+    "past simple": "pretérito",
+    "past": "pasado",
+    "present perfect": "pretérito perfecto"
+  },
+  "cards": {
+    "en-for-es-01-you-are-welcome-you-are-all-welcome": {
+      "meaning": "Eres bienvenido. · Todos son bienvenidos."
+    },
+    "en-for-es-01-it-s-raining-it-s-late": {
+      "meaning": "Está lloviendo. · Es tarde."
+    },
+    "en-for-es-01-i-m-from-mexico-she-s-tired": {
+      "meaning": "Soy de México. · Ella está cansada."
+    },
+    "en-for-es-01-it": {
+      "meaning": "eso (una cosa, un lugar o un animal)"
+    },
+    "en-for-es-01-i": {
+      "meaning": "yo"
+    },
+    "en-for-es-01-please-thank-you-thanks": {
+      "meaning": "por favor · gracias · gracias (más casual)"
+    },
+    "en-for-es-01-excuse-me-sorry": {
+      "meaning": "Con permiso, disculpe · Perdón, lo siento"
+    },
+    "en-for-es-02-a-e-i-o-u": {
+      "meaning": "las cinco vocales"
+    },
+    "en-for-es-02-ship-sheep-live-leave": {
+      "meaning": "barco / oveja · vivir / irse"
+    },
+    "en-for-es-02-cap-cape-hop-hope-not-note": {
+      "meaning": "gorra / capa · saltar / esperanza · no / nota"
+    },
+    "en-for-es-02-knife-write-hour-listen": {
+      "meaning": "cuchillo · escribir · hora · escuchar"
+    },
+    "en-for-es-02-house-hello-happy": {
+      "meaning": "casa · hola · feliz"
+    },
+    "en-for-es-02-think-three-thank-you": {
+      "meaning": "pensar · tres · gracias"
+    },
+    "en-for-es-02-the-this-mother": {
+      "meaning": "el, la · este, esta · madre"
+    },
+    "en-for-es-02-very-berry-vote-boat": {
+      "meaning": "muy / baya · votar / barco"
+    },
+    "en-for-es-02-she-cheese-shop-chop": {
+      "meaning": "ella / queso · tienda / picar"
+    },
+    "en-for-es-02-job-june-yes": {
+      "meaning": "trabajo · junio · sí"
+    },
+    "en-for-es-02-school-spain-street": {
+      "meaning": "escuela · España · calle"
+    },
+    "en-for-es-02-bed-bet-cap-cab-rice-rise": {
+      "meaning": "cama / apuesta · gorra / taxi · arroz / subir"
+    },
+    "en-for-es-02-works-dogs-watches": {
+      "meaning": "trabaja · perros · relojes"
+    },
+    "en-for-es-02-worked-played-wanted": {
+      "meaning": "trabajó · jugó · quiso"
+    },
+    "en-for-es-02-banana-tomato-computer": {
+      "meaning": "plátano · tomate · computadora"
+    },
+    "en-for-es-02-a-e-i": {
+      "meaning": "las letras A · E · I"
+    },
+    "en-for-es-02-g-j-h-r-y-w": {
+      "meaning": "las letras G · J · H · R · Y · W"
+    },
+    "en-for-es-03-the": {
+      "meaning": "el, la, los, las"
+    },
+    "en-for-es-03-a-book-an-apple": {
+      "meaning": "un libro · una manzana"
+    },
+    "en-for-es-03-an-hour-a-university-an-umbrella": {
+      "meaning": "una hora · una universidad · un paraguas"
+    },
+    "en-for-es-03-book-books": {
+      "meaning": "libro → libros"
+    },
+    "en-for-es-03-bus-buses-box-boxes-watch-watches": {
+      "meaning": "autobús → autobuses · caja → cajas · reloj → relojes"
+    },
+    "en-for-es-03-city-cities-day-days": {
+      "meaning": "ciudad → ciudades · día → días"
+    },
+    "en-for-es-03-man-men-woman-women-child-children": {
+      "meaning": "hombre → hombres · mujer → mujeres · niño → niños"
+    },
+    "en-for-es-03-person-people-foot-feet-tooth-teeth": {
+      "meaning": "persona → gente, personas · pie → pies · diente → dientes"
+    },
+    "en-for-es-03-this-that-these-those": {
+      "meaning": "este · ese, aquel · estos · esos, aquellos"
+    },
+    "en-for-es-04-i-am-you-are-he-she-it-is-we-are-they-ar": {
+      "meaning": "yo soy, estoy · tú eres, estás · él / ella es, está · nosotros somos, estamos · ellos son, están"
+    },
+    "en-for-es-04-i-m-you-re-he-s-it-s-we-re-they-re": {
+      "meaning": "soy · eres · él es · es · somos · son (formas cortas)"
+    },
+    "en-for-es-04-i-m-not-isn-t-aren-t": {
+      "meaning": "no soy, no estoy · no es, no está · no son, no están"
+    },
+    "en-for-es-04-are-you-ok-is-it-far": {
+      "meaning": "¿Estás bien? · ¿Está lejos?"
+    },
+    "en-for-es-04-yes-i-am-no-it-isn-t": {
+      "meaning": "Sí, lo estoy. · No, no lo está."
+    },
+    "en-for-es-04-i-m-mexican-i-speak-spanish": {
+      "meaning": "Soy mexicano. · Hablo español."
+    },
+    "en-for-es-05-thirteen-thirty-fifteen-fifty": {
+      "meaning": "trece / treinta · quince / cincuenta"
+    },
+    "en-for-es-05-first-second-third-21st": {
+      "meaning": "primero · segundo · tercero · 21.º"
+    },
+    "en-for-es-05-november-5th-the-5th-of-november": {
+      "meaning": "5 de noviembre · el 5 de noviembre"
+    },
+    "en-for-es-05-monday-january": {
+      "meaning": "lunes · enero"
+    },
+    "en-for-es-05-at-3-00-at-noon-at-night": {
+      "meaning": "a las 3:00 · al mediodía · en la noche"
+    },
+    "en-for-es-05-on-monday-on-may-5th-on-the-weekend": {
+      "meaning": "el lunes · el 5 de mayo · el fin de semana"
+    },
+    "en-for-es-05-in-may-in-2026-in-the-morning": {
+      "meaning": "en mayo · en 2026 · en la mañana"
+    },
+    "en-for-es-05-7-a-m-7-p-m": {
+      "meaning": "7 de la mañana · 7 de la noche"
+    },
+    "en-for-es-05-it-s-half-past-two-it-s-quarter-to-five": {
+      "meaning": "Son las dos y media. · Son cuarto para las cinco."
+    },
+    "en-for-es-05-4-50-1-200": {
+      "meaning": "4.50 dólares · 1,200 dólares"
+    },
+    "en-for-es-05-555-0142-oh": {
+      "meaning": "555-0142 · \"oh\" (cero)"
+    },
+    "en-for-es-06-my-your-his-her-its-our-their": {
+      "meaning": "mi · tu, su · su (de él) · su (de ella) · su (de una cosa) · nuestro · su (de ellos)"
+    },
+    "en-for-es-06-its-their": {
+      "meaning": "su (de una cosa o animal) · su (de ellos o ellas)"
+    },
+    "en-for-es-06-my-parents-house-the-kids-room": {
+      "meaning": "la casa de mis papás · el cuarto de los niños"
+    },
+    "en-for-es-07-in-the-box-in-the-kitchen-in-mexico": {
+      "meaning": "en la caja · en la cocina · en México"
+    },
+    "en-for-es-07-on-the-table-on-the-wall-on-main-street": {
+      "meaning": "sobre la mesa · en la pared · en la calle Main"
+    },
+    "en-for-es-07-at-home-at-work-at-25-oak-street": {
+      "meaning": "en casa · en el trabajo · en Oak Street 25"
+    },
+    "en-for-es-07-next-to-between-in-front-of-across-from": {
+      "meaning": "al lado de · entre · delante de · enfrente (cruzando)"
+    },
+    "en-for-es-08-i-have-he-has": {
+      "meaning": "yo tengo · él tiene"
+    },
+    "en-for-es-08-apples-rice": {
+      "meaning": "manzanas · arroz"
+    },
+    "en-for-es-08-many-much-a-lot-of": {
+      "meaning": "muchos · mucho · mucho, muchos"
+    },
+    "en-for-es-08-how-much-how-many": {
+      "meaning": "¿Cuánto? · ¿Cuántos?"
+    },
+    "en-for-es-08-some-any": {
+      "meaning": "algo de, algunos · algo de, nada de (en preguntas y negativas)"
+    },
+    "en-for-es-09-do-you-does-she": {
+      "meaning": "¿Tú…? · ¿Ella…? (preguntas con verbos normales)"
+    },
+    "en-for-es-09-does-she-work-no-works": {
+      "meaning": "¿Ella trabaja?",
+      "target": "Does she work? (sin -s: no \"works\")"
+    },
+    "en-for-es-09-i-don-t-she-doesn-t": {
+      "meaning": "yo no · ella no"
+    },
+    "en-for-es-09-yes-i-do-no-she-doesn-t": {
+      "meaning": "Sí. · No."
+    },
+    "en-for-es-09-where-do-you-live": {
+      "meaning": "¿Dónde vives?"
+    },
+    "en-for-es-09-what-which": {
+      "meaning": "¿Qué…?, ¿Cuál…? · ¿Cuál…? (entre pocas opciones)"
+    },
+    "en-for-es-10-i-work-she-works": {
+      "meaning": "yo trabajo · ella trabaja"
+    },
+    "en-for-es-10-watches-goes-does-fixes": {
+      "meaning": "mira · va · hace · arregla"
+    },
+    "en-for-es-10-study-studies-play-plays": {
+      "meaning": "estudiar → estudia · jugar → juega"
+    },
+    "en-for-es-10-i-always-i-usually-i-sometimes-i-never": {
+      "meaning": "yo siempre · yo normalmente · yo a veces · yo nunca"
+    },
+    "en-for-es-10-i-m-always-late-she-s-never-tired": {
+      "meaning": "Siempre llego tarde. · Ella nunca está cansada."
+    },
+    "en-for-es-10-i-work-at-a-bank-rutina": {
+      "meaning": "Trabajo en un banco."
+    },
+    "en-for-es-11-turn-left-go-straight-stop-here": {
+      "meaning": "Da vuelta a la izquierda. · Sigue derecho. · Párate aquí."
+    },
+    "en-for-es-11-on-the-corner-on-the-left-two-blocks": {
+      "meaning": "en la esquina · a la izquierda · dos cuadras"
+    },
+    "en-for-es-11-get-on-off-the-bus-get-in-out-of-the-car": {
+      "meaning": "subir al camión, bajar del camión · subir al carro, bajar del carro"
+    },
+    "en-for-es-11-by-bus-by-car-on-foot": {
+      "meaning": "en camión · en carro · a pie"
+    },
+    "en-for-es-11-miles-feet": {
+      "meaning": "millas · pies"
+    },
+    "en-for-es-12-i-d-like-can-i-have-could-i-get": {
+      "meaning": "Me gustaría… · ¿Me da…? · ¿Me podría traer…?"
+    },
+    "en-for-es-12-too-hot-not-hot-enough": {
+      "meaning": "demasiado caliente · no lo bastante caliente"
+    },
+    "en-for-es-12-the-check-tip": {
+      "meaning": "la cuenta · la propina"
+    },
+    "en-for-es-13-the-blue-one-the-big-ones": {
+      "meaning": "el azul · los grandes"
+    },
+    "en-for-es-13-try-it-on-try-on-the-shirt": {
+      "meaning": "probártelo · probarte la camisa"
+    },
+    "en-for-es-13-inches-feet-pounds": {
+      "meaning": "pulgadas · pies · libras"
+    },
+    "en-for-es-14-with-me-for-him-to-us": {
+      "meaning": "conmigo · para él · a nosotros"
+    },
+    "en-for-es-14-mine-yours-his-hers-ours-theirs": {
+      "meaning": "el mío · el tuyo · el de él · el de ella · el nuestro · el de ellos"
+    },
+    "en-for-es-14-i-like-it-i-love-them": {
+      "meaning": "Me gusta. · Me encantan."
+    },
+    "en-for-es-14-i-like-cooking-i-hate-waiting": {
+      "meaning": "Me gusta cocinar. · Odio esperar."
+    },
+    "en-for-es-14-i-want-to-go-i-need-to-rest": {
+      "meaning": "Quiero ir. · Necesito descansar."
+    },
+    "en-for-es-15-i-have-a-headache-i-have-a-cold": {
+      "meaning": "Me duele la cabeza. · Tengo un resfriado."
+    },
+    "en-for-es-15-i-feel-sick-i-feel-better": {
+      "meaning": "Me siento mal. · Me siento mejor."
+    },
+    "en-for-es-16-i-m-working-she-s-eating": {
+      "meaning": "Estoy trabajando. · Ella está comiendo."
+    },
+    "en-for-es-16-make-making-run-running-lie-lying": {
+      "meaning": "hacer → haciendo · correr → corriendo · mentir, acostarse → mintiendo, acostándose"
+    },
+    "en-for-es-16-i-m-working-tomorrow": {
+      "meaning": "Trabajo mañana."
+    },
+    "en-for-es-16-i-know-i-want-i-like": {
+      "meaning": "Ya sé. · Quiero. · Me gusta."
+    },
+    "en-for-es-17-get-up-wake-up-turn-on-pick-up": {
+      "meaning": "levantarse · despertarse · prender · recoger"
+    },
+    "en-for-es-17-turn-it-off-pick-them-up": {
+      "meaning": "apágalo · recógelos"
+    },
+    "en-for-es-17-take-a-shower-go-to-bed": {
+      "meaning": "bañarse · irse a dormir"
+    },
+    "en-for-es-18-i-m-going-to-gonna": {
+      "meaning": "Voy a… · voy a (al hablar)"
+    },
+    "en-for-es-18-can-can-t-could-should-must": {
+      "meaning": "puedo · no puedo · podría · debería · debo"
+    },
+    "en-for-es-18-he-can-she-should": {
+      "meaning": "Él puede. · Ella debería."
+    },
+    "en-for-es-18-can-you-i-can-t": {
+      "meaning": "¿Puedes…? · No puedo."
+    },
+    "en-for-es-18-can-can-t": {
+      "meaning": "puedo / no puedo"
+    },
+    "en-for-es-18-must-have-to": {
+      "meaning": "deber · tener que"
+    },
+    "en-for-es-18-bigger-older-cheaper": {
+      "meaning": "más grande · mayor, más viejo · más barato"
+    },
+    "en-for-es-18-more-expensive-more-interesting": {
+      "meaning": "más caro · más interesante"
+    },
+    "en-for-es-18-the-biggest-the-most-expensive": {
+      "meaning": "el más grande · el más caro"
+    },
+    "en-for-es-18-good-better-best": {
+      "meaning": "bueno · mejor · el mejor"
+    },
+    "en-for-es-18-bad-worse-worst-far-farther-farthest": {
+      "meaning": "malo · peor · el peor · lejos · más lejos · el más lejano"
+    },
+    "en-for-es-18-as-tall-as-not-as-big-as": {
+      "meaning": "tan alto como · no tan grande como"
+    },
+    "en-for-es-18-75-f": {
+      "meaning": "75 grados Fahrenheit (unos 24 °C)"
+    },
+    "en-for-es-18-do-you-want-to-let-s-how-about": {
+      "meaning": "¿Quieres…? · Vamos a… · ¿Qué tal si…?"
+    },
+    "en-for-es-19-it-doesn-t-work-it-s-broken": {
+      "meaning": "No funciona. · Está roto."
+    },
+    "en-for-es-19-there-s-no-hot-water": {
+      "meaning": "No hay agua caliente."
+    },
+    "en-for-es-21-work-worked-live-lived": {
+      "meaning": "trabajar → trabajó · vivir → vivió"
+    },
+    "en-for-es-21-study-studied-stop-stopped": {
+      "meaning": "estudiar → estudió · parar → paró"
+    },
+    "en-for-es-21-t-worked-d-played-id-wanted": {
+      "meaning": "trabajó · jugó · quiso (los tres sonidos de -ed)"
+    },
+    "en-for-es-21-go-went-eat-ate-buy-bought": {
+      "meaning": "ir → fue · comer → comió · comprar → compró"
+    },
+    "en-for-es-21-was-were": {
+      "meaning": "era, estaba (yo, él, ella) · eras, eran, estaban (tú, nosotros, ellos)"
+    },
+    "en-for-es-21-did-you-go-where-did-you-go": {
+      "meaning": "¿Fuiste? · ¿Adónde fuiste?"
+    },
+    "en-for-es-21-i-didn-t-go": {
+      "meaning": "No fui."
+    },
+    "en-for-es-22-call-911": {
+      "meaning": "¡Llama al 911!"
+    },
+    "en-for-es-23-i-used-to-live-in-texas": {
+      "meaning": "Antes vivía en Texas."
+    },
+    "en-for-es-23-i-didn-t-use-to-did-you-use-to": {
+      "meaning": "Antes no… · ¿Antes tú…?"
+    },
+    "en-for-es-23-i-was-cooking": {
+      "meaning": "Estaba cocinando."
+    },
+    "en-for-es-23-i-was-cooking-when-you-called": {
+      "meaning": "Estaba cocinando cuando llamaste."
+    },
+    "en-for-es-23-while-i-was-driving": {
+      "meaning": "mientras manejaba"
+    },
+    "en-for-es-24-i-ll-you-ll-won-t": {
+      "meaning": "yo voy a, yo haré · tú vas a, tú harás · no voy a, no haré"
+    },
+    "en-for-es-24-i-ll-help-you-i-ll-have-the-chicken": {
+      "meaning": "Te ayudo. · Voy a querer el pollo."
+    },
+    "en-for-es-24-would-you-could-you": {
+      "meaning": "¿Podría usted…? · ¿Me podrías…?"
+    },
+    "en-for-es-24-if-it-rains-i-ll-stay-home": {
+      "meaning": "Si llueve, me quedo en casa."
+    },
+    "en-for-es-24-don-t-can-t-won-t-i-d-i-ll": {
+      "meaning": "no (hago) · no puedo · no voy a · me gustaría, yo haría · voy a, haré"
+    },
+    "en-for-es-25-i-have-seen-she-has-eaten": {
+      "meaning": "He visto · Ella ha comido"
+    },
+    "en-for-es-25-have-you-ever-i-ve-never": {
+      "meaning": "¿Alguna vez has…? · Nunca he…"
+    },
+    "en-for-es-25-already-yet-just": {
+      "meaning": "ya · ya, todavía · acabo de"
+    },
+    "en-for-es-25-since-2025-for-two-years": {
+      "meaning": "desde 2025 · desde hace dos años"
+    },
+    "en-for-es-26-sit-down-come-in-wait-here": {
+      "meaning": "Siéntate. · Pasa. · Espera aquí."
+    },
+    "en-for-es-26-don-t-touch-don-t-worry": {
+      "meaning": "No toques. · No te preocupes."
+    },
+    "en-for-es-26-let-s-go-let-s-not-wait": {
+      "meaning": "Vámonos. · No esperemos."
+    },
+    "en-for-es-26-it-s-important-to-it-s-easy-to": {
+      "meaning": "Es importante… · Es fácil…"
+    },
+    "en-for-es-26-you-should-why-don-t-you": {
+      "meaning": "Deberías… · ¿Por qué no…?"
+    },
+    "en-for-es-26-could-you-would-you-mind": {
+      "meaning": "¿Podría…? · ¿Le molestaría…?"
+    },
+    "en-for-es-01-this-is-introducing-someone": {
+      "target": "This is… (para presentar a alguien)"
+    },
+    "en-for-es-01-excuse-me-to-get-attention": {
+      "target": "Excuse me! (para llamar la atención)"
+    },
+    "en-for-es-01-bless-you-after-a-sneeze": {
+      "target": "Bless you (después de un estornudo)"
+    },
+    "en-for-es-01-cheers-a-toast": {
+      "target": "Cheers! (para brindar)"
+    },
+    "en-for-es-04-i-m-a-teacher-a-an-with-jobs": {
+      "target": "I'm a teacher (a/an con profesiones)"
+    },
+    "en-for-es-04-cold-hot-a-person": {
+      "target": "cold · hot (una persona)"
+    },
+    "en-for-es-05-in-on-at-time": {
+      "target": "in · on · at (tiempo)"
+    },
+    "en-for-es-05-1-500-50-comma-and-point": {
+      "target": "1,500.50 (coma y punto)"
+    },
+    "en-for-es-06-my-son-my-hand-no-the": {
+      "target": "my son · my hand (sin \"the\")"
+    },
+    "en-for-es-07-in-place": {
+      "target": "in (lugar)"
+    },
+    "en-for-es-07-on-place": {
+      "target": "on (lugar)"
+    },
+    "en-for-es-07-at-place": {
+      "target": "at (lugar)"
+    },
+    "en-for-es-09-what-noun-what-time-what-color": {
+      "target": "what + sustantivo (what time, what color)"
+    },
+    "en-for-es-10-i-m-a-i-m-in-field": {
+      "target": "I'm a… · I'm in… (campo)"
+    },
+    "en-for-es-16-understand-no-ing-state-verb": {
+      "target": "understand · sin -ing (verbo de estado)\nI understand · ✗ I'm understanding"
+    },
+    "en-for-es-16-see-no-ing-state-verb": {
+      "target": "see · sin -ing (verbo de estado)\nI see · ✗ I'm seeing"
+    },
+    "en-for-es-16-know-no-ing-state-verb": {
+      "target": "know · sin -ing (verbo de estado)\nI know · ✗ I'm knowing"
+    },
+    "en-for-es-16-believe-no-ing-state-verb": {
+      "target": "believe · sin -ing (verbo de estado)\nI believe · ✗ I'm believing"
+    },
+    "en-for-es-16-need-no-ing-state-verb": {
+      "target": "need · sin -ing (verbo de estado)\nI need · ✗ I'm needing"
+    },
+    "en-for-es-16-want-no-ing-state-verb": {
+      "target": "want · sin -ing (verbo de estado)\nI want · ✗ I'm wanting"
+    },
+    "en-for-es-16-remember-no-ing-state-verb": {
+      "target": "remember · sin -ing (verbo de estado)\nI remember · ✗ I'm remembering"
+    },
+    "en-for-es-16-hear-no-ing-state-verb": {
+      "target": "hear · sin -ing (verbo de estado)\nI hear · ✗ I'm hearing"
+    }
+  },
+  "remember": {
+    "\"they\" sirve para hombres, mujeres y cosas. No hay \"ellas\" aparte.": "\"they\" (ellos, ellas) sirve para hombres, mujeres y cosas. No hay \"ellas\" aparte.",
+    "Para dejar claro el plural, en EE. UU. se oye \"you guys\" o \"you all\".": "Para dejar claro el plural, en EE. UU. se oye \"you guys\" o \"you all\" (ustedes).",
+    "Para ser formal usa please, sir, ma'am y un tono amable. En EE.UU. también oirás you guys = ustedes.": "Para ser formal usa please (por favor), sir (señor), ma'am (señora) y un tono amable. En EE.UU. también oirás you guys = ustedes.",
+    "Español dice \"soy de aquí\" sin \"yo\". Inglés siempre dice I, it, they… El verbo no muestra la persona.": "Español dice \"soy de aquí\" sin \"yo\". Inglés siempre dice I (yo), it (eso), they (ellos)… El verbo no muestra la persona.",
+    "hi es lo normal en EE.UU., incluso con desconocidos. La h suena como una j suave: \"jai\", \"jelóu\".": "hi (hola) es lo normal en EE.UU., incluso con desconocidos. La h suena como una j suave: \"jai\", \"jelóu\".",
+    "Trampa: good night es SOLO para despedirte. Al llegar de noche di good evening o hi.": "Trampa: good night es SOLO para despedirte. Al llegar de noche di good evening (buenas noches, al llegar) o hi (hola).",
+    "En inglés siempre dices el sujeto: I'm fine, nunca solo \"fine\" en frase completa.": "En inglés siempre dices el sujeto: I'm fine (estoy bien), nunca solo \"fine\" en frase completa.",
+    "En EE.UU. casi todos contestan good o great aunque el día vaya mal.": "En EE.UU. casi todos contestan good (bien) o great (muy bien) aunque el día vaya mal.",
+    "Muy comunes en EE.UU. con amigos y compañeros. Hey es casual, no grosero.": "Muy comunes en EE.UU. con amigos y compañeros. Hey (oye, hola) es casual, no grosero.",
+    "What's up no pide un informe; contesta Not much o Nothing much. Suena \"uátsap\".": "What's up no pide un informe; contesta Not much o Nothing much (no mucho, nada). Suena \"uátsap\".",
+    "En la tienda el cajero dice How are you doing? como saludo; contesta Good, thanks. You?": "En la tienda el cajero dice How are you doing? (¿cómo estás?) como saludo; contesta Good, thanks. You? (Bien, gracias. ¿Y tú?)",
+    "Inglés no usa \"llamarse\"; dice \"mi nombre es\". También: I'm Ana.": "Inglés no usa \"llamarse\"; dice \"mi nombre es\". También: I'm Ana (soy Ana).",
+    "El from va al final de la pregunta, no al principio como \"de dónde\".": "El from (de) va al final de la pregunta, no al principio como \"de dónde\".",
+    "\"too\" va al final. Suena \"náis tu mít iu\".": "\"too\" (también) va al final. Suena \"náis tu mít iu\".",
+    "You too es lo que más vas a oír. Likewise suena formal.": "You too (igualmente) es lo que más vas a oír. Likewise (igualmente) suena formal.",
+    "Mismo \"this is\" para hombre, mujer, amigo o jefe.": "Mismo \"this is\" (este es, esta es) para hombre, mujer, amigo o jefe.",
+    "Para llamar al mesero di Excuse me. Nunca \"young man\".": "Para llamar al mesero di Excuse me (disculpe). Nunca \"young man\" (joven).",
+    "En EE.UU. No problem y Sure son tan normales como You're welcome.": "En EE.UU. No problem (no hay problema) y Sure (claro) son tan normales como You're welcome (de nada).",
+    "Excuse me ANTES de molestar o pasar. Sorry DESPUÉS de un error o un empujón.": "Excuse me (disculpe) ANTES de molestar o pasar. Sorry (perdón) DESPUÉS de un error o un empujón.",
+    "En EE.UU. también se oye un simple Sorry al pasar entre gente.": "En EE.UU. también se oye un simple Sorry (perdón) al pasar entre gente.",
+    "What? a secas puede sonar brusco. Sorry? con tono de pregunta es lo más amable.": "What? (¿qué?) a secas puede sonar brusco. Sorry? (¿perdón?) con tono de pregunta es lo más amable.",
+    "Suena \"blés iu\". Si alguien te lo dice, contesta Thank you.": "Suena \"blés iu\". Si alguien te lo dice, contesta Thank you (gracias).",
+    "Lo oyes al salir de cualquier tienda. Contesta You too.": "Lo oyes al salir de cualquier tienda. Contesta You too (igualmente).",
+    "Frases fijas: Can you…? es la forma amable de pedir.": "Frases fijas: Can you…? (¿puedes…?) es la forma amable de pedir.",
+    "Idiomas y nacionalidades llevan mayúscula: English, Spanish.": "Idiomas y nacionalidades llevan mayúscula: English (inglés), Spanish (español).",
+    "Al final va mean sin s, porque ya está does.": "Al final va mean (significar) sin s, porque ya está does.",
+    "lost no cambia para hombre o mujer.": "lost (perdido, perdida) no cambia para hombre o mujer.",
+    "Just a second es más casual.": "Just a second (un segundo) es más casual.",
+    "bye es lo normal. goodbye suena más formal o definitivo.": "bye (adiós) es lo normal. goodbye (adiós) suena más formal o definitivo.",
+    "Frases fijas. En mensajes: TTYL = talk to you later.": "Frases fijas. En mensajes: TTYL = talk to you later (hablamos luego).",
+    "for me va al final.": "for me (para mí) va al final.",
+    "Una sola forma para tú y usted. No worries es muy casual.": "Una sola forma para tú y usted. No worries (no te preocupes) es muy casual.",
+    "OK suena \"oukéi\". Sounds good es muy de EE.UU. para aceptar un plan.": "OK suena \"oukéi\". Sounds good (me parece bien) es muy de EE.UU. para aceptar un plan.",
+    "Congratulations para un logro. Para un cumpleaños di Happy birthday.": "Congratulations (felicidades) para un logro. Para un cumpleaños di Happy birthday (feliz cumpleaños).",
+    "La e final casi nunca se pronuncia: cake = \"keik\".": "La e final casi nunca se pronuncia: cake (pastel) = \"keik\".",
+    "✗ \"ouse\" por house. ✗ \"ello\" por hello.": "✗ \"ouse\" por house (casa). ✗ \"ello\" por hello (hola).",
+    "✗ \"tank you\" (tank = tanque). ✗ \"sri\" por three.": "✗ \"tank you\" (tank = tanque). ✗ \"sri\" por three (tres).",
+    "✗ pronunciar job con la j española (\"jop\").": "✗ pronunciar job (trabajo) con la j española (\"jop\").",
+    "✗ decir \"be\" por bed.": "✗ decir \"be\" por bed (cama).",
+    "✗ buscar una palabra femenina para \"the\".": "✗ buscar una palabra femenina para \"the\" (el, la).",
+    "✗ childs, ✗ mans. women se pronuncia \"uí-min\".": "✗ childs, ✗ mans. women (mujeres) se pronuncia \"uí-min\".",
+    "✗ this books. ✗ these book. La i de this es corta; la ee de these es larga.": "✗ this books. ✗ these book. La i de this (este) es corta; la ee de these (estos) es larga.",
+    "Depende del SONIDO: an antes de sonido de vocal (an hour), a antes de sonido de consonante (a university).": "Depende del SONIDO: an antes de sonido de vocal (an hour, una hora), a antes de sonido de consonante (a university, una universidad).",
+    "How + adjetivo; What a + adjetivo + sustantivo.": "How (qué) + adjetivo; What a (qué) + adjetivo + sustantivo.",
+    "Plural irregular. women suena \"uímin\", muy distinto de woman \"úman\".": "Plural irregular. women (mujeres) suena \"uímin\", muy distinto de woman (mujer) \"úman\".",
+    "Trampa: people es plural: people ARE. Gente es singular en español.": "Trampa: people (gente) es plural: people ARE. Gente es singular en español.",
+    "Trampa: go home SIN \"to\". Nunca \"go to home\".": "Trampa: go home (ir a casa) SIN \"to\". Nunca \"go to home\".",
+    "En una tienda o restaurante di restroom. Nunca \"the service\".": "En una tienda o restaurante di restroom (baño). Nunca \"the service\".",
+    "at work, sin \"the\".": "at work (en el trabajo), sin \"the\".",
+    "at school sin \"the\" para estudiantes.": "at school (en la escuela) sin \"the\" para estudiantes.",
+    "ATM suena \"ei ti em\".": "ATM (cajero automático) suena \"ei ti em\".",
+    "drugstore no tiene nada que ver con drogas ilegales. Tiene medicinas y de todo.": "drugstore (farmacia) no tiene nada que ver con drogas ilegales. Tiene medicinas y de todo.",
+    "Abreviado: ER, suena \"i ar\". La h de hospital sí suena: \"jóspital\".": "Abreviado: ER (urgencias), suena \"i ar\". La h de hospital sí suena: \"jóspital\".",
+    "En EE.UU. para comprar comida se dice grocery store.": "En EE.UU. para comprar comida se dice grocery store (supermercado).",
+    "mall suena \"mol\". Para la plaza de un pueblo usa square.": "mall (centro comercial) suena \"mol\". Para la plaza de un pueblo usa square (plaza).",
+    "beach suena \"biich\", vocal larga. Con vocal corta suena a grosería.": "beach (playa) suena \"biich\", vocal larga. Con vocal corta suena a grosería.",
+    "neighborhood suena \"néiborjud\".": "neighborhood (barrio, colonia) suena \"néiborjud\".",
+    "Trampa: downtown sin \"the\" ni \"in\": I'm downtown.": "Trampa: downtown (el centro) sin \"the\" ni \"in\": I'm downtown (estoy en el centro).",
+    "idea suena \"aidía\". language suena \"lánguich\".": "idea suena \"aidía\". language (idioma) suena \"lánguich\".",
+    "old suena \"ould\", con o larga.": "old (viejo) suena \"ould\", con o larga.",
+    "cheap puede sonar a mala calidad. Más amable: affordable.": "cheap (barato) puede sonar a mala calidad. Más amable: affordable (accesible).",
+    "hard es lo más común. hard también es duro.": "hard (difícil) es lo más común. hard también es duro.",
+    "interesting suena \"íntresting\", con la fuerza al principio.": "interesting (interesante) suena \"íntresting\", con la fuerza al principio.",
+    "next week sin \"the\". the next one = el siguiente.": "next week (la próxima semana) sin \"the\". the next one = el siguiente.",
+    "fast es adjetivo y adverbio: He drives fast.": "fast (rápido) es adjetivo y adverbio: He drives fast (maneja rápido).",
+    "Para el clima: It's hot, It's cold. Para ti: I'm hot, I'm cold.": "Para el clima: It's hot (hace calor), It's cold (hace frío). Para ti: I'm hot (tengo calor), I'm cold (tengo frío).",
+    "Antes del adjetivo. Nunca con verbos: I like it a lot, no \"I very like\".": "Antes del adjetivo. Nunca con verbos: I like it a lot (me gusta mucho), no \"I very like\".",
+    "Trampa: inglés usa BE, no have. Nunca \"I have hunger\".": "Trampa: inglés usa BE (ser, estar), no have (tener). Nunca \"I have hunger\".",
+    "Con be. I'm hot puede sonar a \"estoy guapo\"; más seguro: I'm warm o It's hot in here.": "Con be. I'm hot puede sonar a \"estoy guapo\"; más seguro: I'm warm (tengo calor) o It's hot in here (hace calor aquí).",
+    "La edad va con be. years old es opcional: I'm forty.": "La edad va con be. years old (años) es opcional: I'm forty (tengo cuarenta).",
+    "Cool y awesome son casuales pero sirven con casi todos en EE.UU.": "Cool (padre) y awesome (increíble) son casuales pero sirven con casi todos en EE.UU.",
+    "No way también es un \"no\" fuerte: No way, it's too expensive.": "No way (ni loco) también es un \"no\" fuerte: No way, it's too expensive (ni loco, está demasiado caro).",
+    "Lucky you es más amable que I'm jealous. I'm glad + algo: I'm glad you're here.": "Lucky you (qué suerte) es más amable que I'm jealous (qué envidia). I'm glad (me alegra) + algo: I'm glad you're here (me alegra que estés aquí).",
+    "Feel better sirve para tú y usted. Más formal: I'm sorry to hear that.": "Feel better (que te mejores) sirve para tú y usted. Más formal: I'm sorry to hear that (lamento oír eso).",
+    "No digas \"I think that yes\"; di I think so.": "No digas \"I think that yes\"; di I think so (creo que sí).",
+    "La respuesta usa it's, no this is.": "La respuesta usa it's (es), no this is (este es).",
+    "Trampa: everyone usa verbo en singular: everyone IS, no \"are\".": "Trampa: everyone (todos) usa verbo en singular: everyone IS, no \"are\".",
+    "fat es muy fuerte y grosero para personas en EE.UU.": "fat (gordo) es muy fuerte y grosero para personas en EE.UU.",
+    "handsome casi siempre es para hombres; pretty para mujeres y cosas.": "handsome (guapo) casi siempre es para hombres; pretty (bonita) para mujeres y cosas.",
+    "old para personas puede sonar fuerte; elderly u older es más amable.": "old (viejo) para personas puede sonar fuerte; elderly (anciano) u older (mayor) es más amable.",
+    "smart es lo más común en EE.UU.": "smart (listo, inteligente) es lo más común en EE.UU.",
+    "funny también es \"raro\": That's funny.": "funny (chistoso) también es \"raro\": That's funny (qué raro).",
+    "lazy suena \"léizi\".": "lazy (flojo) suena \"léizi\".",
+    "favorite suena \"féivrit\".": "favorite (favorito) suena \"féivrit\".",
+    "Nunca cambian: a good man, good women.": "Nunca cambian: a good man (un buen hombre), good women (buenas mujeres).",
+    "closed suena \"clouzd\".": "closed (cerrado) suena \"clouzd\".",
+    "Para prender y apagar: turn on, turn off.": "Para prender y apagar: turn on (prender), turn off (apagar).",
+    "dirty suena \"dérti\".": "dirty (sucio) suena \"dérti\".",
+    "messy también para una persona: He's messy.": "messy (desordenado) también para una persona: He's messy.",
+    "Para aparatos: It's broken o It doesn't work.": "Para aparatos: It's broken (está roto) o It doesn't work (no funciona).",
+    "about = por, de. worried suena \"uérid\".": "about = por, de. worried (preocupado) suena \"uérid\".",
+    "busy suena \"bízi\". Teléfono ocupado: The line is busy.": "busy (ocupado) suena \"bízi\". Teléfono ocupado: The line is busy.",
+    "Para cómo te sientes usa excited: I'm excited (✗ I'm exciting).": "Para cómo te sientes usa excited (emocionado): I'm excited (✗ I'm exciting).",
+    "Con -ing en inglés: I'm sitting, nunca \"I'm sat\".": "Con -ing en inglés: I'm sitting (estoy sentado), nunca \"I'm sat\".",
+    "Con be: You're right, nunca \"you have reason\".": "Con be: You're right (tienes razón), nunca \"you have reason\".",
+    "I'm good es lo más común en EE.UU.": "I'm good (estoy bien) es lo más común en EE.UU.",
+    "on, no \"of\": on vacation.": "on, no \"of\": on vacation (de vacaciones).",
+    "Listo de inteligente = smart. ready suena \"rédi\".": "Listo de inteligente = smart. ready (listo) suena \"rédi\".",
+    "País después de from; nacionalidad después de I'm.": "País después de from (de); nacionalidad después de I'm (soy).",
+    "En EE.UU. America y American se refieren solo a ese país. Lleva \"the\": the US.": "En EE.UU. America y American se refieren solo a ese país. Lleva \"the\": the US (Estados Unidos).",
+    "Con be: I'm late. La tarde del día = the afternoon.": "Con be: I'm late (llego tarde). La tarde del día = the afternoon.",
+    "just también es \"acabo de\": I just ate.": "just también es \"acabo de\": I just ate (acabo de comer).",
+    "a bit es muy común en EE.UU.": "a bit (un poco) es muy común en EE.UU.",
+    "very es neutral; too dice que es un problema. Suena \"tu\", como two y to.": "very (muy) es neutral; too (demasiado) dice que es un problema. Suena \"tu\", como two y to.",
+    "too y as well van al final; also va antes del verbo o después de be.": "too y as well (también) van al final; also (también) va antes del verbo o después de be.",
+    "Me, no \"I\": Me too es lo correcto en la conversación.": "Me, no \"I\": Me too (yo también) es lo correcto en la conversación.",
+    "Si hay duda, di los dígitos: one five.": "Si hay duda, di los dígitos: one five (uno, cinco).",
+    "Forma corta y común. Forma larga: three dollars and fifty cents.": "Forma corta y común. Forma larga: three dollars and fifty cents (tres dólares con cincuenta centavos).",
+    "Grande a chico: in (mes, año), on (día), at (hora). Excepciones: in the morning, at night.": "Grande a chico: in (mes, año), on (día), at (hora). Excepciones: in the morning (en la mañana), at night (en la noche).",
+    "En EE.UU. la coma separa miles y el punto los decimales. 2.5 se dice \"two point five\".": "En EE.UU. la coma separa miles y el punto los decimales. 2.5 se dice \"two point five\" (dos punto cinco).",
+    "Dígito por dígito, en grupos. El 0 se dice \"oh\". 55 también puede ser \"double five\".": "Dígito por dígito, en grupos. El 0 se dice \"oh\". 55 también puede ser \"double five\" (doble cinco).",
+    "Con s al final para \"cada\": on Tuesdays.": "Con s al final para \"cada\": on Tuesdays (los martes).",
+    "Se escribe November 5 pero se dice con ordinal: \"fifth\".": "Se escribe November 5 pero se dice con ordinal: \"fifth\" (quinto).",
+    "at para la hora: at 5, at noon.": "at para la hora: at 5 (a las 5), at noon (al mediodía).",
+    "El dime es más chico que el nickel aunque vale más.": "El dime (10 centavos) es más chico que el nickel (5 centavos) aunque vale más.",
+    "change también es moneditas: Do you have change?": "change (cambio) también es moneditas: Do you have change? (¿Tienes cambio?)",
+    "address lleva dos d y dos s.": "address (dirección) lleva dos d y dos s.",
+    "birthday suena \"bérzdei\". On + fecha.": "birthday (cumpleaños) suena \"bérzdei\". On + fecha.",
+    "test es lo más común en EE.UU.": "test (examen) es lo más común en EE.UU.",
+    "a week = por semana. year suena \"yir\".": "a week = por semana. year (año) suena \"yir\".",
+    "on the weekend en EE.UU.; at the weekend es británico.": "on the weekend (el fin de semana) en EE.UU.; at the weekend es británico.",
+    "Trampa: el tiempo del clima es weather. hour: la h es muda, suena \"áuer\".": "Trampa: el tiempo del clima es weather. hour (hora): la h es muda, suena \"áuer\".",
+    "Sin \"the\" ni \"in\": I'm busy today.": "Sin \"the\" ni \"in\": I'm busy today (hoy estoy ocupado).",
+    "three con th: \"zri\". En teléfonos el 0 se dice \"oh\".": "three (tres) con th: \"zri\". En teléfonos el 0 se dice \"oh\".",
+    "eight suena \"eit\", gh mudo.": "eight (ocho) suena \"eit\", gh mudo.",
+    "eleven y twelve son irregulares. -teen lleva la fuerza al final.": "eleven (once) y twelve (doce) son irregulares. -teen lleva la fuerza al final.",
+    "twenty suena \"tuéni\" en EE.UU.": "twenty (veinte) suena \"tuéni\" en EE.UU.",
+    "Dos palabras con guion: twenty-one. No cambian antes del sustantivo.": "Dos palabras con guion: twenty-one (veintiuno). No cambian antes del sustantivo.",
+    "Ortografía: forty, sin u (aunque four sí lleva).": "Ortografía: forty (cuarenta), sin u (aunque four, cuatro, sí lleva).",
+    "En EE.UU. el \"and\" es opcional: one hundred (and) one.": "En EE.UU. el \"and\" es opcional: one hundred (and) one (ciento uno).",
+    "Trampa: hundred nunca lleva s después de un número: two hundred, no \"two hundreds\".": "Trampa: hundred nunca lleva s después de un número: two hundred (doscientos), no \"two hundreds\".",
+    "thousand: th suave. Sin s: three thousand.": "thousand (mil): th suave. Sin s: three thousand (tres mil).",
+    "Ojo: ninth sin e; eighth suena \"eitz\".": "Ojo: ninth (noveno) sin e; eighth (octavo) suena \"eitz\".",
+    "Solo el último número cambia: twenty-first, thirty-first.": "Solo el último número cambia: twenty-first (21.º), thirty-first (31.º).",
+    "half a pound o a half pound (las dos son comunes en EE. UU.). percent suena \"persént\".": "half a pound o a half pound (media libra) (las dos son comunes en EE. UU.). percent (por ciento) suena \"persént\".",
+    "Siempre con MAYÚSCULA. Wednesday suena \"uénsdei\"; Tuesday \"túsdei\"; Thursday \"zérsdei\".": "Siempre con MAYÚSCULA. Wednesday (miércoles) suena \"uénsdei\"; Tuesday (martes) \"túsdei\"; Thursday (jueves) \"zérsdei\".",
+    "Meses con MAYÚSCULA. February suena \"fébru-eri\".": "Meses con MAYÚSCULA. February (febrero) suena \"fébru-eri\".",
+    "July lleva la fuerza al final: \"yulái\".": "July (julio) lleva la fuerza al final: \"yulái\".",
+    "Ojo: at night, no \"in the night\".": "Ojo: at night (en la noche), no \"in the night\".",
+    "Sin \"the\" ni \"in\": next week.": "Sin \"the\" ni \"in\": next week (la próxima semana).",
+    "Sin \"in\": this week.": "Sin \"in\": this week (esta semana).",
+    "Siempre singular: It's three, nunca \"they are three\".": "Siempre singular: It's three (son las tres), nunca \"they are three\".",
+    "o'clock solo para horas exactas. Suena \"o-clók\".": "o'clock (en punto) solo para horas exactas. Suena \"o-clók\".",
+    "Se pronuncia igual que parents.": "Se pronuncia igual que parents (papás).",
+    "Nunca llevan s: my books, no \"mys books\".": "Nunca llevan s: my books (mis libros), no \"mys books\".",
+    "No cambian por género ni número. their suena como there: \"der\".": "No cambian por género ni número. their (su, de ellos) suena como there (ahí): \"der\".",
+    "Trampa del \"su\": depende del DUEÑO, no de la cosa. Si el dueño es Ana, siempre her.": "Trampa del \"su\": depende del DUEÑO, no de la cosa. Si el dueño es Ana, siempre her (su, de ella).",
+    "Suenan igual. El apóstrofo quiere decir que falta una letra: you're = you are.": "Suenan igual. El apóstrofo quiere decir que falta una letra: you're = you are (tú eres, tú estás).",
+    "mom y dad son lo normal. th de mother y father con la lengua entre los dientes.": "mom (mamá) y dad (papá) son lo normal. th de mother (madre) y father (padre) con la lengua entre los dientes.",
+    "Plural irregular: wives.": "Plural irregular: wives (esposas).",
+    "child / children es irregular. daughter suena \"dórer\", gh mudo.": "child / children (niño, niños) es irregular. daughter (hija) suena \"dórer\", gh mudo.",
+    "cousin sirve para primo y prima. aunt suena \"ant\" en casi todo EE.UU.": "cousin sirve para primo y prima. aunt (tía) suena \"ant\" en casi todo EE.UU.",
+    "niece suena \"nis\".": "niece (sobrina) suena \"nis\".",
+    "in-law sirve para todo: brother-in-law = cuñado.": "in-law (político) sirve para todo: brother-in-law = cuñado.",
+    "couple también es \"un par\": a couple of days.": "couple (pareja) también es \"un par\": a couple of days (un par de días).",
+    "Sin género. friend suena \"frend\", nunca \"fraind\".": "Sin género. friend (amigo, amiga) suena \"frend\", nunca \"fraind\".",
+    "En tienda o restaurante es customer. client es para abogado, contador, etc.": "En tienda o restaurante es customer (cliente). client es para abogado, contador, etc.",
+    "En tiendas de EE.UU. pide al manager, no al owner.": "En tiendas de EE.UU. pide al manager (gerente), no al owner (dueño).",
+    "nurse suena \"ners\".": "nurse (enfermero, enfermera) suena \"ners\".",
+    "lawyer suena \"lóyer\".": "lawyer (abogado) suena \"lóyer\".",
+    "an antes de sonido de vocal: an engineer.": "an antes de sonido de vocal: an engineer (un ingeniero).",
+    "En EE.UU. se dice server para hombre o mujer. waiter y waitress también se oyen.": "En EE.UU. se dice server (mesero) para hombre o mujer. waiter y waitress (mesero, mesera) también se oyen.",
+    "employee suena \"emplói-i\".": "employee (empleado) suena \"emplói-i\".",
+    "Sin género. La w de writer es muda: suena \"ráirer\".": "Sin género. La w de writer (escritor) es muda: suena \"ráirer\".",
+    "Con be y sin artículo: I'm retired.": "Con be y sin artículo: I'm retired (estoy jubilado).",
+    "En formularios de EE.UU. hay un solo last name; pon tus dos apellidos juntos o con guion.": "En formularios de EE.UU. hay un solo last name (apellido); pon tus dos apellidos juntos o con guion.",
+    "in a car, pero on a bus (transporte grande).": "in a car (en un carro), pero on a bus (en un camión) (transporte grande).",
+    "in para lo de adentro, ciudades y países.": "in (en, dentro de) para lo de adentro, ciudades y países.",
+    "on para encima de algo, calles y transporte grande (bus, plane).": "on (sobre, en) para encima de algo, calles y transporte grande (bus, plane).",
+    "at para un lugar como punto: dirección exacta, la tienda, una fiesta.": "at (en) para un lugar como punto: dirección exacta, la tienda, una fiesta.",
+    "Trampa: inglés cambia por número. There's = there is.": "Trampa: inglés cambia por número. There's = there is (hay).",
+    "Pregunta: Is there…? Are there…? Negativo: There isn't… There aren't any… ✗ Have a bank here.": "Pregunta: Is there…? Are there…? (¿Hay…?) Negativo: There isn't… There aren't any… (No hay…) ✗ Have a bank here.",
+    "En EE. UU. casi siempre se dice first floor; ground floor se oye menos.": "En EE. UU. casi siempre se dice first floor (planta baja); ground floor se oye menos.",
+    "couch y sofa son lo mismo. armchair = sillón individual.": "couch y sofa (sofá) son lo mismo. armchair = sillón individual.",
+    "drawer suena \"dror\".": "drawer (cajón) suena \"dror\".",
+    "knife: la k es muda, suena \"naif\". Plural: knives.": "knife (cuchillo): la k es muda, suena \"naif\". Plural: knives (cuchillos).",
+    "wallet es de hombre o mujer; purse es la bolsa de mujer.": "wallet (cartera) es de hombre o mujer; purse es la bolsa de mujer.",
+    "phone suena \"foun\". En EE.UU. todos dicen phone para el celular.": "phone (teléfono) suena \"foun\". En EE.UU. todos dicen phone para el celular.",
+    "TV suena \"ti vi\".": "TV (tele) suena \"ti vi\".",
+    "A/C suena \"ei si\".": "A/C (aire acondicionado) suena \"ei si\".",
+    "book suena \"buk\". En EE.UU. ticket también es multa: a parking ticket.": "book (libro) suena \"buk\". En EE.UU. ticket también es multa: a parking ticket.",
+    "bike es bici. motorcycle es motorcycle o motorbike.": "bike es bici. motorcycle (moto) es motorcycle o motorbike.",
+    "tree suena \"tri\", con r suave.": "tree (árbol) suena \"tri\", con r suave.",
+    "stuff no se cuenta: nunca \"stuffs\".": "stuff (cosas) no se cuenta: nunca \"stuffs\".",
+    "Trampa: clothes es plural (are). Suena \"clouz\", casi como close.": "Trampa: clothes (ropa) es plural (are). Suena \"clouz\", casi como close (cerrar).",
+    "there suena \"der\" con lengua entre los dientes. Nunca lleva \"in\".": "there (ahí, allá) suena \"der\" con lengua entre los dientes. Nunca lleva \"in\".",
+    "Con lugar: near the bank, close to the bank, far from the bank.": "Con lugar: near the bank, close to the bank (cerca del banco), far from the bank (lejos del banco).",
+    "También con lugar, sin \"of\": inside the house.": "También con lugar, sin \"of\": inside the house (dentro de la casa).",
+    "Sin \"the\" ni \"in\": It's upstairs.": "Sin \"the\" ni \"in\": It's upstairs (está arriba).",
+    "to con movimiento; at cuando ya llegaste. Excepción: go home.": "to (a) con movimiento; at (en) cuando ya llegaste. Excepción: go home (ir a casa).",
+    "Para dueño no uses of: Mario's car.": "Para dueño no uses of: Mario's car (el carro de Mario).",
+    "without suena \"uizáut\".": "without (sin) suena \"uizáut\".",
+    "Trampa: para + verbo es to: I'm here to learn, nunca \"for learn\".": "Trampa: para + verbo es to: I'm here to learn (estoy aquí para aprender), nunca \"for learn\".",
+    "above y below para posición sin tocar.": "above (arriba de) y below (debajo de) para posición sin tocar.",
+    "Sin \"of\" en behind.": "Sin \"of\" en behind (detrás de).",
+    "Trampa: \"enfrente de\" al otro lado de la calle es across from, no in front of.": "Trampa: \"enfrente de\" al otro lado de la calle es across from, no in front of (delante de).",
+    "Sin \"of\": next to, nunca \"next of\".": "Sin \"of\": next to (al lado de), nunca \"next of\".",
+    "between dos cosas; among = entre varios.": "between (entre) dos cosas; among = entre varios.",
+    "Trampa: near SIN of. Nunca \"near of\".": "Trampa: near (cerca de) SIN of. Nunca \"near of\".",
+    "on the corner de la calle; in the corner de un cuarto.": "on the corner (en la esquina) de la calle; in the corner (en el rincón) de un cuarto.",
+    "Para preguntar, there va después: Is there…? Are there…?": "Para preguntar, there va después: Is there…? Are there…? (¿Hay…?)",
+    "Lo que no se cuenta no lleva a ni s: water, rice, money, bread, information, advice.": "Lo que no se cuenta no lleva a ni s: water (agua), rice (arroz), money (dinero), bread (pan), information (información), advice (consejos).",
+    "has con he, she, it. Nunca \"she have\".": "has (tiene) con he, she, it. Nunca \"she have\".",
+    "Suena \"jáftu\". Sin \"que\": have to work.": "Suena \"jáftu\". Sin \"que\": have to work (tengo que trabajar).",
+    "Inglés no tiene \"hay que\": usa you o we + have to o need to.": "Inglés no tiene \"hay que\": usa you o we + have to (tener que) o need to (necesitar).",
+    "much para lo que no se cuenta (agua, dinero); many para lo que se cuenta (niños, tacos).": "much (mucho) para lo que no se cuenta (agua, dinero); many (muchos) para lo que se cuenta (niños, tacos).",
+    "a job se cuenta; work no: nunca \"a work\". Carrera universitaria = major o degree.": "a job (un empleo) se cuenta; work (trabajo) no: nunca \"a work\". Carrera universitaria = major o degree.",
+    "food no se cuenta: nunca \"foods\" para comida en general.": "food (comida) no se cuenta: nunca \"foods\" para comida en general.",
+    "Trampa: en EE.UU. lunch es al mediodía y dinner como a las 6. have breakfast = desayunar.": "Trampa: en EE.UU. lunch (comida) es al mediodía y dinner (cena) como a las 6. have breakfast = desayunar.",
+    "banana suena \"banána\" con la segunda a como \"e\" suave.": "banana (plátano) suena \"banána\" con la segunda a como \"e\" suave.",
+    "Plural con -es: tomatoes, potatoes. Abreviado: veggies.": "Plural con -es: tomatoes, potatoes (jitomates, papas). Abreviado: veggies (verduras).",
+    "bread y rice no se cuentan: some bread, nunca \"a bread\".": "bread (pan) y rice (arroz) no se cuentan: some bread (algo de pan), nunca \"a bread\".",
+    "La carne no se llama como el animal: cow → beef, pig → pork.": "La carne no se llama como el animal: cow (vaca) → beef (carne de res), pig (cerdo) → pork (carne de cerdo).",
+    "fish es pez y pescado. Plural: fish, shrimp, sin s.": "fish es pez y pescado. Plural: fish, shrimp (camarón), sin s.",
+    "No se cuentan: some water. Para contar: a glass of water.": "No se cuentan: some water (algo de agua). Para contar: a glass of water (un vaso de agua).",
+    "pepper también es chile: bell pepper = pimiento morrón.": "pepper (pimienta) también es chile: bell pepper = pimiento morrón.",
+    "a lot of sirve para todo. much se usa casi solo en negativo y preguntas.": "a lot of (mucho) sirve para todo. much (mucho) se usa casi solo en negativo y preguntas.",
+    "a few con lo que se cuenta; a little con lo que no.": "a few (unos cuantos) con lo que se cuenta; a little (un poco) con lo que no.",
+    "Así cuentas lo que no se cuenta: two pieces of bread.": "Así cuentas lo que no se cuenta: two pieces of bread (dos pedazos de pan).",
+    "En EE.UU. no se usan kilos ni litros. 1 lb ≈ 450 g · 1 gal ≈ 3.8 L. Abreviado: lb, oz.": "En EE.UU. no se usan kilos ni litros. 1 lb ≈ 450 g · 1 gal ≈ 3.8 L. Abreviado: lb (libra), oz (onza).",
+    "money no se cuenta: nunca \"moneys\".": "money (dinero) no se cuenta: nunca \"moneys\".",
+    "receipt: la p es muda, suena \"risít\".": "receipt (recibo): la p es muda, suena \"risít\".",
+    "No se cuentan: nunca \"homeworks\", \"advices\", \"informations\".": "No se cuentan: nunca \"homeworks\" (tareas), \"advices\", \"informations\".",
+    "hair no se cuenta: her hair IS long. Para el pelo usa have, no be.": "hair (pelo) no se cuenta: her hair IS long. Para el pelo usa have, no be.",
+    "blond suena \"blond\". Ojos: brown eyes, blue eyes.": "blond (rubio, güero) suena \"blond\". Ojos: brown eyes (ojos cafés), blue eyes (ojos azules).",
+    "I want suena directo; para pedir algo usa I'd like.": "I want (quiero) suena directo; para pedir algo usa I'd like (me gustaría).",
+    "why (pregunta) y because (respuesta) son palabras distintas.": "why (por qué, pregunta) y because (porque, respuesta) son palabras distintas.",
+    "✗ Which is your name? (Usa What para nombre, dirección, número.)": "✗ Which is your name? (Usa What, qué, para nombre, dirección, número.)",
+    "Sin \"de\": What color…?, no \"Of what color\".": "Sin \"de\": What color…? (¿De qué color…?), no \"Of what color\".",
+    "Español dice \"no tengo nada\". Inglés usa UN solo negativo: don't + anything, o nothing solo.": "Español dice \"no tengo nada\". Inglés usa UN solo negativo: don't + anything (nada), o nothing (nada) solo.",
+    "What's your name? usa what, no \"how\". what suena \"uát\".": "What's your name? (¿Cómo te llamas?) usa what (qué), no \"how\". what suena \"uát\".",
+    "El from se queda al final.": "El from (de) se queda al final.",
+    "Para describir algo usa What's … like?, no \"How is\".": "Para describir algo usa What's … like? (¿Cómo es…?), no \"How is\".",
+    "which cuando eliges entre pocas opciones a la vista.": "which (cuál) cuando eliges entre pocas opciones a la vista.",
+    "Sin \"at\" al principio: What time…?, no \"At what time\".": "Sin \"at\" al principio: What time…? (¿A qué hora…?), no \"At what time\".",
+    "cost sin s, porque ya está does.": "cost (costar) sin s, porque ya está does.",
+    "anything en preguntas y con not; nothing ya es negativo.": "anything (algo, nada) en preguntas y con not; nothing (nada) ya es negativo.",
+    "Igual que something / anything / nothing.": "Igual que something / anything / nothing (algo / algo, nada / nada).",
+    "anymore va al final de la frase negativa.": "anymore (ya no) va al final de la frase negativa.",
+    "Ojo con el orden: …where the pharmacy IS, el verbo al final.": "Ojo con el orden: …where the pharmacy IS (dónde está la farmacia), el verbo al final.",
+    "En la plática se oye \"I dunno\". ✗ I no know.": "En la plática se oye \"I dunno\" (no sé). ✗ I no know.",
+    "\"Beats me\" es muy casual, entre amigos.": "\"Beats me\" (ni idea) es muy casual, entre amigos.",
+    "depends ON, no \"depends of\". ✗ It depends of the day.": "depends ON (depende de), no \"depends of\". ✗ It depends of the day.",
+    "maybe va al principio. probably va antes del verbo: she probably works.": "maybe (tal vez) va al principio. probably (probablemente) va antes del verbo: she probably works (ella probablemente trabaja).",
+    "Ojo: a \"Do you mind?\" se contesta \"no\" si NO te molesta.": "Ojo: a \"Do you mind?\" (¿te molesta?) se contesta \"no\" si NO te molesta.",
+    "Sirven igual para contestar a \"thank you\" o a \"sorry\".": "Sirven igual para contestar a \"thank you\" (gracias) o a \"sorry\" (perdón).",
+    "Para decir \"sale\" o \"va\", lo más natural es sounds good.": "Para decir \"sale\" o \"va\", lo más natural es sounds good (me parece bien).",
+    "✗ How do you think? Es WHAT do you think.": "✗ How do you think? Es WHAT do you think (¿qué piensas?).",
+    "\"I don't care\" puede sonar grosero. Más suave: I don't mind.": "\"I don't care\" (me da igual) puede sonar grosero. Más suave: I don't mind (no me importa).",
+    "honest se dice \"ónest\": la h no suena.": "honest (honesto) se dice \"ónest\": la h no suena.",
+    "Son muletillas muy comunes. \"you know\" no siempre es pregunta.": "Son muletillas muy comunes. \"you know\" (¿sabes?) no siempre es pregunta.",
+    "\"Not really\" es una forma suave de decir que no.": "\"Not really\" (la verdad, no) es una forma suave de decir que no.",
+    "✗ I hope yes. Es I hope so.": "✗ I hope yes. Es I hope so (eso espero).",
+    "nice OF you, no \"nice for you\".": "nice OF you (muy amable de tu parte), no \"nice for you\".",
+    "Para un error pequeño entre amigos: My bad.": "Para un error pequeño entre amigos: My bad (mi culpa).",
+    "Same to you es para devolver un buen deseo. Same here es \"a mí también me pasa\".": "Same to you (igualmente) es para devolver un buen deseo. Same here es \"a mí también me pasa\".",
+    "Van ANTES del verbo normal, pero DESPUÉS de be: I'm always tired.": "Van ANTES del verbo normal, pero DESPUÉS de be: I'm always tired (siempre estoy cansado).",
+    "Trampa clásica: agree ya es un verbo. Nunca \"I am agree\".": "Trampa clásica: agree (estar de acuerdo) ya es un verbo. Nunca \"I am agree\".",
+    "Trampa: make a decision, no \"take\".": "Trampa: make a decision (tomar una decisión), no \"take\".",
+    "Con sustantivo: a lot of. Después del verbo: a lot, sin of.": "Con sustantivo: a lot of (mucho, muchos). Después del verbo: a lot, sin of.",
+    "-s con he, she, it. y → -ies: study → studies.": "-s con he, she, it. y → -ies: study → studies (estudiar → estudia).",
+    "at + lugar, for + empresa, as + puesto. ✗ I work of nurse.": "at (en) + lugar, for (para) + empresa, as (como) + puesto. ✗ I work of nurse.",
+    "business se dice \"BIS-nes\", dos sílabas.": "business (negocio) se dice \"BIS-nes\", dos sílabas.",
+    "✗ half time. Es part-time.": "✗ half time. Es part-time (medio tiempo).",
+    "work the night shift, sin \"in\".": "work the night shift (trabajar el turno de noche), sin \"in\".",
+    "✗ I work from my house. Se dice from home, sin artículo.": "✗ I work from my house. Se dice from home (desde casa), sin artículo.",
+    "En EE. UU. se dice \"Monday through Friday\" para incluir el viernes.": "En EE. UU. se dice \"Monday through Friday\" (de lunes a viernes) para incluir el viernes.",
+    "En EE. UU. es común cobrar cada dos semanas (biweekly).": "En EE. UU. es común cobrar cada dos semanas (biweekly, quincenal).",
+    "✗ win money (eso es en la lotería). Es make money.": "✗ win money (eso es en la lotería). Es make money (ganar dinero).",
+    "La respuesta usa once, twice, three times + a week/a month.": "La respuesta usa once, twice, three times (una vez, dos veces, tres veces) + a week/a month (por semana, al mes).",
+    "Van antes del verbo, como never y always.": "Van antes del verbo, como never (nunca) y always (siempre).",
+    "✗ in weekends. Es ON weekends.": "✗ in weekends. Es ON weekends (los fines de semana).",
+    "in the morning pero AT night.": "in the morning (en la mañana) pero AT night (en la noche).",
+    "usually suena \"IU-shua-li\".": "usually (normalmente) suena \"IU-shua-li\".",
+    "busy suena \"BI-zi\", con i.": "busy (ocupado) suena \"BI-zi\", con i.",
+    "get + adjetivo = ponerse o volverse: get tired, get angry, get sick.": "get + adjetivo = ponerse o volverse: get tired (cansarse), get angry (enojarse), get sick (enfermarse).",
+    "✗ You turn to left. Lo más natural: turn left.": "✗ You turn to left. Lo más natural: turn left (da vuelta a la izquierda).",
+    "Sin \"the\": by car. Caminando = on foot o I walk.": "Sin \"the\": by car (en carro). Caminando = on foot (a pie) o I walk (camino).",
+    "right también es \"correcto\". Para dirección: on the right, turn right.": "right también es \"correcto\". Para dirección: on the right (a la derecha), turn right (da vuelta a la derecha).",
+    "✗ Turn to the left. Basta con turn left.": "✗ Turn to the left. Basta con turn left (da vuelta a la izquierda).",
+    "until para tiempo y distancia en direcciones.": "until (hasta) para tiempo y distancia en direcciones.",
+    "En direcciones casi siempre dicen solo \"the light\".": "En direcciones casi siempre dicen solo \"the light\" (el semáforo).",
+    "Las calles con número se dicen con ordinal: 5th = Fifth Street.": "Las calles con número se dicen con ordinal: 5th = Fifth Street (calle Quinta).",
+    "of the street, con \"of\".": "of the street (de la calle), con \"of\".",
+    "further y farther se usan igual para distancia.": "further y farther (más lejos) se usan igual para distancia.",
+    "Para distancia: It's + medida + away.": "Para distancia: It's + medida + away (está a…).",
+    "near here, sin \"of\". ✗ near of here.": "near here (cerca de aquí), sin \"of\". ✗ near of here.",
+    "En direcciones escritas: Ave., St., Blvd., Hwy.": "En direcciones escritas: Ave. (avenida), St. (calle), Blvd. (bulevar), Hwy. (carretera).",
+    "freeway no siempre es gratis. toll = cuota, peaje.": "freeway (autopista) no siempre es gratis. toll = cuota, peaje.",
+    "En EE. UU. hay pocas glorietas. También se dice roundabout.": "En EE. UU. hay pocas glorietas. También se dice roundabout (glorieta).",
+    "address lleva dos d y dos s. direction = hacia dónde vas.": "address (dirección) lleva dos d y dos s. direction = hacia dónde vas.",
+    "✗ The sign puts. Es says.": "✗ The sign puts. Es says (dice).",
+    "conductor en EE. UU. es del tren o de una orquesta. Para carro y camión: driver.": "conductor en EE. UU. es del tren o de una orquesta. Para carro y camión: driver (chofer).",
+    "Con pronombre va en medio: drop me off.": "Con pronombre va en medio: drop me off (déjame).",
+    "Para transporte se usa take.": "Para transporte se usa take (tomar).",
+    "En Nueva York dicen subway; en otras ciudades \"the metro\" o \"light rail\".": "En Nueva York dicen subway (metro); en otras ciudades \"the metro\" o \"light rail\".",
+    "delayed se usa mucho en aeropuertos.": "delayed (retrasado) se usa mucho en aeropuertos.",
+    "La oficina de licencias es \"the DMV\".": "La oficina de licencias es \"the DMV\" (Departamento de Vehículos).",
+    "traffic es incontable: ✗ a traffic, ✗ traffics.": "traffic (tráfico) es incontable: ✗ a traffic, ✗ traffics.",
+    "ride a bike, no \"drive a bike\".": "ride a bike (andar en bici), no \"drive a bike\".",
+    "island se dice \"Ai-land\", la s no suena.": "island (isla) se dice \"Ai-land\", la s no suena.",
+    "✗ the account. account = cuenta de banco.": "✗ the account (para pedir la cuenta). account = cuenta de banco.",
+    "too va antes del adjetivo; enough va antes del sustantivo y después del adjetivo: big enough.": "too (demasiado) va antes del adjetivo; enough (suficiente) va antes del sustantivo y después del adjetivo: big enough (lo bastante grande).",
+    "✗ We are four. Lo natural: There are four of us, o solo \"Four\".": "✗ We are four. Lo natural: There are four of us (somos cuatro), o solo \"Four\".",
+    "a reservation FOR + hora o número de personas.": "a reservation (reservación) FOR + hora o número de personas.",
+    "En EE. UU. se dice más server. Para llamarlo: Excuse me!": "En EE. UU. se dice más server. Para llamarlo: Excuse me! (¡Disculpe!)",
+    "Si no: \"We need a few more minutes\".": "Si no: \"We need a few more minutes\" (necesitamos unos minutos más).",
+    "recommend lleva una c y dos m.": "recommend (recomendar) lleva una c y dos m.",
+    "También: without onions, hold the onions.": "También: without onions, hold the onions (sin cebolla).",
+    "Con ensalada siempre te preguntan \"What kind of dressing?\".": "Con ensalada siempre te preguntan \"What kind of dressing?\" (¿qué aderezo quiere?).",
+    "hot también es picante. Para no confundirte con caliente: spicy.": "hot también es picante. Para no confundirte con caliente: spicy (picante).",
+    "✗ an other. Se escribe junto: another.": "✗ an other. Se escribe junto: another (otro).",
+    "\"That's it\" es la respuesta más natural.": "\"That's it\" (es todo) es la respuesta más natural.",
+    "En EE. UU. el refresco y el café suelen tener refill gratis.": "En EE. UU. el refresco y el café suelen tener refill (rellenar el vaso) gratis.",
+    "drive-thru se lee \"draiv thru\".": "drive-thru (autoservicio en el carro) se lee \"draiv thru\".",
+    "gratuity aparece en el ticket. No dejes propina dos veces.": "gratuity (propina incluida) aparece en el ticket. No dejes propina dos veces.",
+    "En lugares públicos: restroom. \"toilet\" es el excusado mismo y suena feo.": "En lugares públicos: restroom (baño). \"toilet\" es el excusado mismo y suena feo.",
+    "diner es el restaurante típico americano con desayunos todo el día.": "diner (cafetería) es el restaurante típico americano con desayunos todo el día.",
+    "En partes del Medio Oeste dicen pop.": "En partes del Medio Oeste dicen pop (refresco).",
+    "En el desayuno siempre te preguntan \"How do you want your eggs?\".": "En el desayuno siempre te preguntan \"How do you want your eggs?\" (¿cómo quiere sus huevos?).",
+    "toast es incontable: some toast, a piece of toast.": "toast (pan tostado) es incontable: some toast, a piece of toast.",
+    "baked también es para pasteles y papas al horno.": "baked (horneado) también es para pasteles y papas al horno.",
+    "vegetarian se dice \"ve-je-TE-rian\".": "vegetarian (vegetariano) se dice \"ve-je-TE-rian\".",
+    "El mesero pregunta \"How is everything?\". Contesta \"Great, thanks\".": "El mesero pregunta \"How is everything?\" (¿qué tal todo?). Contesta \"Great, thanks\" (muy bien, gracias).",
+    "5'10\" se lee \"five ten\".": "5'10\" (cinco pies diez pulgadas, 1.78 m) se lee \"five ten\".",
+    "Una sola forma, nunca plural: two white chairs.": "Una sola forma, nunca plural: two white chairs (dos sillas blancas).",
+    "Fruta verde (no madura) también es green.": "Fruta verde (no madura) también es green (verde).",
+    "Café de color es brown, no coffee.": "Café de color es brown (café), no coffee.",
+    "Sin \"of\": What color, no \"Of what color\".": "Sin \"of\": What color (de qué color), no \"Of what color\".",
+    "También se oye \"browsing\": I'm just browsing.": "También se oye \"browsing\": I'm just browsing (solo estoy viendo).",
+    "En tiendas grandes pregunta el pasillo: What aisle?": "En tiendas grandes pregunta el pasillo: What aisle? (¿qué pasillo?)",
+    "Falso amigo: rope es soga. clothes suena casi como \"clouz\".": "Falso amigo: rope es soga. clothes (ropa) suena casi como \"clouz\".",
+    "En EE. UU. dicen \"I'm a medium\" o \"I wear a medium\".": "En EE. UU. dicen \"I'm a medium\" o \"I wear a medium\" (soy talla mediana).",
+    "try on es \"probarse ropa\". Para comida es solo try.": "try on es \"probarse ropa\". Para comida es solo try (probar).",
+    "\"me queda\" no se traduce con stay. Se dice It's too big (on me).": "\"me queda\" no se traduce con stay. Se dice It's too big (on me) (me queda grande).",
+    "fit = talla. Para el estilo: It looks good on you.": "fit = talla. Para el estilo: It looks good on you (se te ve bien).",
+    "shirt suena \"shert\". T-shirt es la playera.": "shirt (camisa) suena \"shert\". T-shirt es la playera.",
+    "underwear es incontable: ✗ an underwear.": "underwear (ropa interior) es incontable: ✗ an underwear.",
+    "sunglasses siempre es plural: a pair of sunglasses.": "sunglasses (lentes de sol) siempre es plural: a pair of sunglasses (unos lentes de sol).",
+    "bathing suit es lo mismo, un poco más antiguo.": "bathing suit (traje de baño) es lo mismo, un poco más antiguo.",
+    "sweater suena \"SUE-ter\", sin la a.": "sweater (suéter) suena \"SUE-ter\", sin la a.",
+    "scarf / scarves. Para la cabeza también se dice scarf.": "scarf / scarves (bufanda, bufandas). Para la cabeza también se dice scarf.",
+    "comfortable se dice \"KOMF-ter-bul\", tres sílabas.": "comfortable (cómodo) se dice \"KOMF-ter-bul\", tres sílabas.",
+    "in + color o talla: in blue, in a small.": "in + color o talla: in blue (en azul), in a small (en chica).",
+    "✗ in sale. Es ON sale. \"for sale\" = se vende.": "✗ in sale. Es ON sale (en oferta). \"for sale\" = se vende.",
+    "them para pants, shoes, jeans.": "them (los, las) para pants, shoes, jeans (pantalón, zapatos, jeans).",
+    "El cajero dice \"That'll be\" + el total.": "El cajero dice \"That'll be\" (son) + el total.",
+    "La terminal te dice qué hacer: Insert card, Tap or swipe.": "La terminal te dice qué hacer: Insert card (inserte la tarjeta), Tap or swipe (acerque o deslice).",
+    "Después de feel like va sustantivo o verbo con -ing.": "Después de feel like (tener ganas de) va sustantivo o verbo con -ing.",
+    "Es la forma amable de ofrecer. Contesta \"Yes, please\" o \"No, thanks\".": "Es la forma amable de ofrecer. Contesta \"Yes, please\" (sí, por favor) o \"No, thanks\" (no, gracias).",
+    "I'd rather + verbo sin \"to\". ✗ I'd rather to stay.": "I'd rather (prefiero) + verbo sin \"to\". ✗ I'd rather to stay.",
+    "\"I'm not a fan\" es una forma suave de decir que algo no te gusta.": "\"I'm not a fan\" (no me encanta) es una forma suave de decir que algo no te gusta.",
+    "like + -ing para actividades: I like swimming.": "like + -ing para actividades: I like swimming (me gusta nadar).",
+    "La parte del cuerpo es el sujeto, con my, no \"the\".": "La parte del cuerpo es el sujeto, con my (mi), no \"the\".",
+    "Medicina se \"toma\" igual: take medicine.": "Medicina se \"toma\" igual: take medicine (tomar medicina).",
+    "Con have y con a: I have a fever, a cold. Pero I have the flu.": "Con have y con a: I have a fever (tengo fiebre), a cold (gripa). Pero I have the flu (tengo influenza).",
+    "Inglés usa have: I have a headache. ache suena \"eik\".": "Inglés usa have: I have a headache (me duele la cabeza). ache suena \"eik\".",
+    "Plural irregular: tooth → teeth, foot → feet.": "Plural irregular: tooth → teeth (diente, dientes), foot → feet (pie, pies).",
+    "Suena \"inshúrans\".": "insurance (seguro) suena \"inshúrans\".",
+    "hurt es igual en pasado: it hurts today, it hurt yesterday.": "hurt (doler) es igual en pasado: it hurts today, it hurt yesterday.",
+    "pain se dice \"pein\". ✗ It's a strong pain. Mejor: a bad pain, a sharp pain.": "pain (dolor) se dice \"pein\". ✗ It's a strong pain. Mejor: a bad pain (un dolor fuerte), a sharp pain (un dolor punzante).",
+    "En inglés va el posesivo: my skin, my face.": "En inglés va el posesivo: my skin (mi piel), my face (mi cara).",
+    "shoulder suena \"SHOUL-der\", con sh.": "shoulder (hombro) suena \"SHOUL-der\", con sh.",
+    "tooth es singular, teeth plural. molar existe, pero al hablar se dice tooth.": "tooth (diente) es singular, teeth plural. molar existe, pero al hablar se dice tooth.",
+    "wrist: la w no suena. finger = dedo de la mano. thumb = pulgar.": "wrist (muñeca): la w no suena. finger = dedo de la mano. thumb = pulgar.",
+    "knee: la k no suena, \"ni\". foot / feet.": "knee (rodilla): la k no suena, \"ni\". foot / feet.",
+    "heart se dice \"jart\".": "heart (corazón) se dice \"jart\".",
+    "throw up es lo normal al hablar. vomit es más médico.": "throw up (vomitar) es lo normal al hablar. vomit es más médico.",
+    "stomach se dice \"STA-mak\".": "stomach (estómago) se dice \"STA-mak\".",
+    "dizzy no cambia para hombre o mujer.": "dizzy (mareado) no cambia para hombre o mujer.",
+    "cough se dice \"kof\".": "cough (tos) se dice \"kof\".",
+    "swollen se dice \"SWOU-len\".": "swollen (hinchado) se dice \"SWOU-len\".",
+    "allergic TO, no \"of\". allergic se dice \"a-LER-yic\".": "allergic TO (alérgico a), no \"of\". allergic se dice \"a-LER-yic\".",
+    "blood se dice \"blad\". pressure suena \"PRE-sher\".": "blood (sangre) se dice \"blad\". pressure (presión) suena \"PRE-sher\".",
+    "\"I'm on\" + medicina es muy común: I'm on insulin.": "\"I'm on\" + medicina es muy común: I'm on insulin (tomo insulina).",
+    "ER se dice \"i ar\". Solo para emergencias de verdad: es muy caro.": "ER (sala de emergencias) se dice \"i ar\". Solo para emergencias de verdad: es muy caro.",
+    "X-ray se dice \"EX-rei\".": "X-ray (radiografía) se dice \"EX-rei\".",
+    "shot es más común que injection al hablar.": "shot (inyección) es más común que injection al hablar.",
+    "En EE. UU. la farmacia prepara la receta y la recoges después. Pregunta: \"Is it ready?\".": "En EE. UU. la farmacia prepara la receta y la recoges después. Pregunta: \"Is it ready?\" (¿ya está lista?).",
+    "Get well soon se escribe mucho en tarjetas.": "Get well soon (que te mejores) se escribe mucho en tarjetas.",
+    "glasses siempre en plural. eye doctor = oculista.": "glasses (lentes) siempre en plural. eye doctor = oculista.",
+    "Agrega la palabra de tiempo: tomorrow, on Friday.": "Agrega la palabra de tiempo: tomorrow (mañana), on Friday (el viernes).",
+    "am / is / are + -ing: para lo que pasa ahora y también para planes (I'm working tomorrow).": "am / is / are + -ing: para lo que pasa ahora y también para planes (I'm working tomorrow, trabajo mañana).",
+    "have en -ing solo para acciones (comer, divertirse). Para poseer: I have a car (✗ I'm having a car).": "have en -ing solo para acciones (comer, divertirse). Para poseer: I have a car (tengo un carro) (✗ I'm having a car).",
+    "✗ turn off it. ✗ pick up them. Con sustantivo vale: turn off the light = turn the light off.": "✗ turn off it. ✗ pick up them. Con sustantivo vale: turn off the light = turn the light off (apaga la luz).",
+    "go off = sonar (alarma). turn it off: el pronombre va en medio.": "go off = sonar (alarma). turn it off (apágala): el pronombre va en medio.",
+    "En inglés siempre MY: my teeth, my face. ✗ I wash the hands.": "En inglés siempre MY: my teeth (mis dientes), my face (mi cara). ✗ I wash the hands.",
+    "put on / take off es para ropa. Con pronombre: put it on.": "put on / take off (ponerse, quitarse) es para ropa. Con pronombre: put it on (póntelo).",
+    "También: get changed.": "También: get changed (cambiarse de ropa).",
+    "comb: la b no suena, \"coum\".": "comb (peine): la b no suena, \"coum\".",
+    "Para comida se usa make, no do.": "Para comida se usa make (hacer), no do.",
+    "get home, sin \"to\". ✗ I get to home.": "get home (llegar a casa), sin \"to\". ✗ I get to home.",
+    "leave the house, sin \"of\". ✗ I leave of the house.": "leave the house (salir de la casa), sin \"of\". ✗ I leave of the house.",
+    "siesta también se entiende, pero nap es lo normal.": "siesta también se entiende, pero nap (siesta) es lo normal.",
+    "stay home, sin \"in the\". ✗ stay in the house.": "stay home (quedarse en casa), sin \"in the\". ✗ stay in the house.",
+    "Sin \"me\" ni \"se\": sit down, stand up.": "Sin \"me\" ni \"se\": sit down (siéntate), stand up (ponte de pie).",
+    "Con persona, el pronombre va en medio: wake me up.": "Con persona, el pronombre va en medio: wake me up (despiértame).",
+    "make the bed (no \"do\"). do the dishes (no \"wash the plates\").": "make the bed (tender la cama, no \"do\"). do the dishes (lavar los trastes) (no \"wash the plates\").",
+    "toothpaste es incontable: some toothpaste.": "toothpaste (pasta de dientes) es incontable: some toothpaste.",
+    "shower es la regadera y el baño. bath es en tina.": "shower es la regadera y el baño. bath (baño) es en tina.",
+    "ON a normal day, con \"on\".": "ON a normal day (en un día normal), con \"on\".",
+    "Si no estás seguro, pregunta: Can or can't?": "Si no estás seguro, pregunta: Can or can't? (¿puede o no puede?)",
+    "have to sí lleva \"to\"; must no.": "have to (tener que) sí lleva \"to\"; must (deber) no.",
+    "hobby se dice con h que suena: \"JO-bi\".": "hobby (pasatiempo) se dice con h que suena: \"JO-bi\".",
+    "\"What are you into?\" es muy casual.": "\"What are you into?\" (¿qué te gusta hacer?) es muy casual.",
+    "go swimming, go fishing, go dancing: go + -ing para actividades.": "go swimming, go fishing, go dancing (ir a nadar, a pescar, a bailar): go + -ing para actividades.",
+    "gym se dice \"yim\".": "gym (gimnasio) se dice \"yim\".",
+    "game es partido. match se usa más en tenis.": "game es partido. match (partido) se usa más en tenis.",
+    "Los deportes no llevan \"the\": I like baseball.": "Los deportes no llevan \"the\": I like baseball (me gusta el beisbol).",
+    "do yoga (no \"make yoga\").": "do yoga (hacer yoga, no \"make yoga\").",
+    "garden también es verbo.": "garden (jardín) también es verbo: cuidar el jardín.",
+    "live aquí suena \"laiv\", no \"liv\".": "live (en vivo) aquí suena \"laiv\", no \"liv\".",
+    "\"Why don't we\" es una sugerencia, no una pregunta real.": "\"Why don't we\" (¿por qué no…?) es una sugerencia, no una pregunta real.",
+    "\"It's a date\" también se oye entre amigos, sin sentido romántico.": "\"It's a date\" (quedamos) también se oye entre amigos, sin sentido romántico.",
+    "✗ Have a good fun. Es Have fun.": "✗ Have a good fun. Es Have fun (diviértete).",
+    "Junto al mar: boardwalk o waterfront.": "Junto al mar: boardwalk o waterfront (malecón).",
+    "IN the sun, IN the shade.": "IN the sun (al sol), IN the shade (a la sombra).",
+    "Negativo: can't. Pregunta: Can you…? (sin do).": "Negativo: can't. Pregunta: Can you…? (¿puedes…?, sin do).",
+    "✗ It no works. (It's not working también es muy común.)": "✗ It no works. (It's not working, no funciona, también es muy común.)",
+    "rent es renta y también rentar: We rent a house.": "rent es renta y también rentar: We rent a house (rentamos una casa).",
+    "landlord es para hombre o mujer. landlady se oye poco.": "landlord (casero) es para hombre o mujer. landlady se oye poco.",
+    "light es la lámpara o el foco. Para el servicio: power o electricity.": "light es la lámpara o el foco. Para el servicio: power o electricity (luz, electricidad).",
+    "water se dice casi \"WA-der\" en EE. UU.": "water (agua) se dice casi \"WA-der\" en EE. UU.",
+    "A/C se lee \"ei si\".": "A/C (aire acondicionado) se lee \"ei si\".",
+    "bill = recibo para pagar. En el restaurante es check.": "bill = recibo para pagar. En el restaurante es check (la cuenta).",
+    "garbage y trash son lo mismo. rubbish es británico.": "garbage y trash (basura) son lo mismo. rubbish es británico.",
+    "plumber: la b no suena, \"PLA-mer\".": "plumber (plomero): la b no suena, \"PLA-mer\".",
+    "fix es lo más común. repair es más formal.": "fix (arreglar) es lo más común. repair (reparar) es más formal.",
+    "stove se dice \"stouv\".": "stove (estufa) se dice \"stouv\".",
+    "mouse / mice. El que fumiga es the exterminator.": "mouse / mice (ratón, ratones). El que fumiga es the exterminator (el fumigador).",
+    "humid es para el clima. Para una pared o ropa: damp.": "humid (húmedo) es para el clima. Para una pared o ropa: damp (húmedo).",
+    "En EE. UU. se dice más house cleaner.": "En EE. UU. se dice más house cleaner (señora de la limpieza).",
+    "ring the bell (no \"touch\").": "ring the bell (tocar el timbre) (no \"touch\").",
+    "garage se dice \"ga-RASH\".": "garage (cochera) se dice \"ga-RASH\".",
+    "Al contestar se dice Hello?, nunca \"Good?\".": "Al contestar se dice Hello? (¿bueno?), nunca \"Good?\".",
+    "Contesta \"This is…\" o \"It's…\". ✗ I am Carmen (al teléfono suena raro).": "Contesta \"This is…\" o \"It's…\" (habla…). ✗ I am Carmen (al teléfono suena raro).",
+    "Puedes agregar: Can I take a message?": "Puedes agregar: Can I take a message? (¿le dejo un recado?)",
+    "take a message (quien contesta). leave a message (quien llama).": "take a message (tomar el recado, quien contesta). leave a message (dejar un recado, quien llama).",
+    "✗ equivocated number. Es wrong number.": "✗ equivocated number. Es wrong number (número equivocado).",
+    "En EE. UU. se deja mucho voicemail. Di tu nombre y tu número despacio.": "En EE. UU. se deja mucho voicemail (buzón de voz). Di tu nombre y tu número despacio.",
+    "text es sustantivo y verbo. WhatsApp se usa menos en EE. UU. que en México.": "text (mensaje, mandar mensaje) es sustantivo y verbo. WhatsApp se usa menos en EE. UU. que en México.",
+    "Se dice número por número: five five five, oh one four two.": "Se dice número por número: five five five, oh one four two (cinco cinco cinco, cero uno cuatro dos).",
+    "En EE. UU. dicen cell o cell phone. mobile es británico.": "En EE. UU. dicen cell o cell phone (celular). mobile es británico.",
+    "Para hablar con una persona di \"Representative\" o \"Agent\".": "Para hablar con una persona di \"Representative\" o \"Agent\" (representante, agente).",
+    "@ se dice \"at\". El punto se dice \"dot\".": "@ (arroba) se dice \"at\". El punto se dice \"dot\".",
+    "ATM se lee \"ei ti em\". cashier es la persona que cobra.": "ATM (cajero automático) se lee \"ei ti em\". cashier es la persona que cobra.",
+    "En EE. UU. aún se usan cheques. Se pueden depositar con foto en la app.": "En EE. UU. aún se usan cheques (checks). Se pueden depositar con foto en la app.",
+    "La cuenta del día a día es checking.": "La cuenta del día a día es checking (cuenta de cheques).",
+    "balance también es equilibrio.": "balance (saldo) también es equilibrio.",
+    "✗ How is the dollar? Pregunta por el exchange rate.": "✗ How is the dollar? Pregunta por el exchange rate (tipo de cambio).",
+    "exchange X FOR Y.": "exchange X FOR Y (cambiar X por Y).",
+    "PIN se lee \"pin\". ✗ PIN number (redundante, pero muchos lo dicen).": "PIN (NIP) se lee \"pin\". ✗ PIN number (redundante, pero muchos lo dicen).",
+    "bills de 50 y 100 a veces no los aceptan en tiendas pequeñas.": "bills (billetes) de 50 y 100 a veces no los aceptan en tiendas pequeñas.",
+    "En EE. UU. casi todo se paga en línea o con autopay.": "En EE. UU. casi todo se paga en línea o con autopay (pago automático).",
+    "interest es incontable: ✗ interests.": "interest (interés) es incontable: ✗ interests.",
+    "save también es \"salvar\" y \"guardar\" un archivo.": "save (ahorrar) también es \"salvar\" y \"guardar\" un archivo.",
+    "ID se lee \"ai di\". Te la piden en bancos, farmacias y bares.": "ID (identificación) se lee \"ai di\". Te la piden en bancos, farmacias y bares.",
+    "✗ \"walk-ed\". Solo suman sílaba los verbos que terminan en t o d: wanted, needed, waited.": "✗ \"walk-ed\". Solo suman sílaba los verbos que terminan en t o d: wanted, needed, waited (quiso, necesitó, esperó).",
+    "✗ ago two years. También: yesterday, last week (✗ the last week).": "✗ ago two years. También: yesterday (ayer), last week (la semana pasada) (✗ the last week).",
+    "could también es una forma amable: Could you repeat that?": "could también es una forma amable: Could you repeat that? (¿podría repetirlo?)",
+    "Di dónde estás primero. Puedes pedir intérprete: \"Spanish, please\".": "Di dónde estás primero. Puedes pedir intérprete: \"Spanish, please\" (español, por favor).",
+    "ambulance se dice \"AM-biu-lans\".": "ambulance (ambulancia) se dice \"AM-biu-lans\".",
+    "police es plural: The police are here.": "police (policía) es plural: The police are here (ya llegó la policía).",
+    "accident se dice \"AK-si-dent\".": "accident (accidente) se dice \"AK-si-dent\".",
+    "hit es igual en presente y pasado.": "hit (chocar, pegar) es igual en presente y pasado.",
+    "nobody ya es negativo: ✗ nobody isn't hurt.": "nobody (nadie) ya es negativo: ✗ nobody isn't hurt.",
+    "thief / thieves. th: la lengua entre los dientes.": "thief / thieves (ladrón, ladrones). th: la lengua entre los dientes.",
+    "El seguro casi siempre te pide el police report.": "El seguro casi siempre te pide el police report (reporte policial).",
+    "✗ I don't find. Lo natural: I can't find.": "✗ I don't find. Lo natural: I can't find (no encuentro).",
+    "fall / fell. En inglés no hay \"me\": I fell.": "fall / fell (caer, caí). En inglés no hay \"me\": I fell (me caí).",
+    "Siempre con posesivo: my back, his arm.": "Siempre con posesivo: my back (mi espalda), his arm (su brazo).",
+    "El seguro del carro a veces incluye roadside assistance.": "El seguro del carro a veces incluye roadside assistance (asistencia en el camino).",
+    "Si ves un letrero \"Tow-away zone\", no te estaciones.": "Si ves un letrero \"Tow-away zone\" (zona de grúa), no te estaciones.",
+    "Llama al banco y di \"I want to dispute a charge\".": "Llama al banco y di \"I want to dispute a charge\" (quiero reclamar un cargo).",
+    "eat / ate. Más formal: The ATM kept my card.": "eat / ate (comer, se comió). Más formal: The ATM kept my card (el cajero se quedó con mi tarjeta).",
+    "Watch out es para un peligro inmediato.": "Watch out (¡cuidado!) es para un peligro inmediato.",
+    "used to suena \"IUS-tu\", con s, no con z.": "used to (solía) suena \"IUS-tu\", con s, no con z.",
+    "En preguntas va use to (sin d): Did you use to…?": "En preguntas va use to (sin d): Did you use to…? (¿solías…?)",
+    "ago va después del tiempo: two years ago.": "ago (hace) va después del tiempo: two years ago (hace dos años).",
+    "grow / grew. raised = criado.": "grow / grew (crecer, crecí). raised = criado.",
+    "kid es muy común. child es más formal.": "kid (niño) es muy común. child (niño) es más formal.",
+    "for + tiempo. ✗ during thirty years.": "for (durante) + tiempo. ✗ during thirty years.",
+    "anymore va al final. ✗ I already don't work.": "anymore (ya no) va al final. ✗ I already don't work.",
+    "yet va al final, en negativo y preguntas: not yet = todavía no.": "yet (todavía) va al final, en negativo y preguntas: not yet = todavía no.",
+    "Muy común con for y since.": "Muy común con for (durante) y since (desde).",
+    "Agrega please para que no suene a orden.": "Agrega please (por favor) para que no suene a orden.",
+    "have / has + participio (arrived). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (arrived). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (bought). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (bought). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (cooked). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (cooked). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (drunk). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (drunk). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (eaten). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (eaten). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (gone). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (gone). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (gotten on). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (gotten on). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (listened). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (listened). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (lived). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (lived). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (opened). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (opened). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (paid). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (paid). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (read). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (read). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (run). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (run). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (sold). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (sold). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (shared). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (shared). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (spoken). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (spoken). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (studied). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (studied). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (taken). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (taken). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (used). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (used). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (worn). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (worn). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (walked). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (walked). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (worked). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (worked). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (written). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (written). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (done). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (done). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (made). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (made). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (helped). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (helped). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (washed). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (washed). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (called). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (called). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (checked). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (checked). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (brought). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (brought). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (traveled). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (traveled). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (understood). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (understood). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (said). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (said). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (told). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (told). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (felt). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (felt). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (seen). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (seen). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (watched). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (watched). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (stopped by). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (stopped by). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (known). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (known). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (believed). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (believed). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (given). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (given). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (needed). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (needed). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (rested). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (rested). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (worried). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (worried). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (returned). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (returned). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (gotten better). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (gotten better). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (waited for). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (waited for). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (looked at). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (looked at). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (finished). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (finished). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (forgotten). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (forgotten). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (driven). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (driven). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (rented). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (rented). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (charged). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (charged). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (changed). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (changed). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (earned). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (earned). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (sent). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (sent). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (cleaned). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (cleaned). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (fixed). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (fixed). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (asked). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (asked). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (answered). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (answered). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (entered). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (entered). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (gotten off). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (gotten off). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (invited). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (invited). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (visited). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (visited). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (taught). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (taught). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (looked for). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (looked for). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (taken out). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (taken out). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (crossed). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (crossed). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (deposited). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (deposited). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (canceled). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (canceled). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (chatted). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (chatted). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (spent). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (spent). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (stopped). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (stopped). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (turned). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (turned). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (learned). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (learned). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (wanted). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (wanted). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (come). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (come). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (left). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (left). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (put). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (put). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (slept). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (slept). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (ordered). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (ordered). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (thought). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (thought). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (found). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (found). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (come back). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (come back). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (started). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (started). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (closed). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (closed). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (remembered). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (remembered). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (played). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (played). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (lost). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (lost). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (heard). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (heard). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (followed). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (followed). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (tried). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (tried). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (gotten up). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (gotten up). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (taken a shower). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (taken a shower). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (sat down). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (sat down). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (gone to bed). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (gone to bed). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (woken up). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (woken up). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (stayed). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (stayed). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años).",
+    "have / has + participio (had). En inglés se usa más que en México: I've lived here for two years.": "have / has + participio (had). En inglés se usa más que en México: I've lived here for two years (he vivido aquí dos años)."
+  }
+}

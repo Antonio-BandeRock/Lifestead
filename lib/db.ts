@@ -11026,6 +11026,12 @@ async function runDatabaseInitialization() {
       );
       CREATE INDEX IF NOT EXISTS idx_learn_reviews_deck ON learn_reviews(deck_id);
     `);
+    // Languages (2026-11-11): units studied together are kept as a group, so Home
+    // can offer that group again in one tap. A JSON list of { units, order }.
+    const courseStateColumns = await db.getAllAsync<{ name: string }>('PRAGMA table_info(learn_course_state)');
+    if (!courseStateColumns.some((column) => column.name === 'study_groups')) {
+      await db.execAsync("ALTER TABLE learn_course_state ADD COLUMN study_groups TEXT NOT NULL DEFAULT '[]';");
+    }
     // Interests > Days Until (2026-10-30): a free counter can belong to an
     // interest. Null for every counter that belongs to nothing.
     const countdownInterestColumns = await db.getAllAsync<{ name: string }>('PRAGMA table_info(countdowns)');

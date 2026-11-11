@@ -41,6 +41,16 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.86.4',
+    date: '2026-11-11',
+    changes: [
+      "In Languages, every explanation on a card is now in your language: tense names, rules and the Remember notes. Each word of the language you are learning in a note now has its meaning beside it.",
+      "A rule card's back now shows the meaning of its front in large type first, then its example, then the rule in smaller type.",
+      "A unit you choose to study opens with its card in view, with no scrolling up to reach it, and Select All takes every unit at once.",
+      "Units you study together are kept on Home, under Language Basics, so the same group starts again in one tap.",
+    ],
+  },
+  {
     version: '1.0.86.3',
     date: '2026-11-11',
     changes: [
