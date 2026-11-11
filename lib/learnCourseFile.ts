@@ -54,6 +54,9 @@ export type CourseCard = {
    * its native side, and the rule under the example.
    */
   meaning?: string;
+  /** Something to say next in the language being learned, and its meaning (scripts/course-fixes/<deck>.replies.json). */
+  replyTarget?: string;
+  replyNative?: string;
 };
 
 export type Course = { schema: number; deck: CourseDeck; cards: CourseCard[] };

@@ -49,6 +49,7 @@ import { StoreLocationSheet } from '../components/StoreLocationSheet';
 import { VoiceCommandSheet } from '../components/VoiceCommandSheet';
 import { WakeWordListener } from '../components/WakeWordListener';
 import { LowStimulationSheet } from '../components/LowStimulationSheet';
+import { LanguageBasicsButton } from '../components/LanguageBasicsButton';
 import { QuickAccessButton } from '../components/QuickAccessButton';
 import { VoiceControlButton } from '../components/VoiceControlButton';
 import { QuickCaptureSheet } from '../components/QuickCaptureSheet';
@@ -605,6 +606,9 @@ function UnlockedApp() {
               {/* The navigation switch (1.0.61.13): the edge tab above the footer
                   on the far side from the hubs, components/HandSwitchButton.tsx. */}
               <HandSwitchButton />
+              {/* Language Basics (2026-11-11): one slot above the navigation switch while
+                  its switch is on, components/LanguageBasicsButton.tsx. */}
+              <LanguageBasicsButton />
               {/* Quick access (1.0.66.6): one edge tab on the thumb side opening
                   Voice Note, Low Stimulation, Where Is It and Ask Your Records,
                   components/QuickAccessButton.tsx. The voice note's sheet

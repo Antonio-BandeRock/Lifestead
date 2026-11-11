@@ -17,28 +17,31 @@ import { useLanguage } from '../lib/language';
 import { setsForLanguage, unitsTurnedOn } from '../lib/languageBasics';
 import { listCourses, type StudyGroup } from '../lib/learnCoursesDb';
 
-type OnHome = { id: string; name: string; units: { unit: number; name: string }[]; groups: StudyGroup[] };
+export type LanguageSetOnHome = { id: string; name: string; units: { unit: number; name: string }[]; groups: StudyGroup[] };
+
+/** The sets with a unit turned on or a group studied, named from the outline alone. */
+export async function loadLanguageSetsOnHome(language: string): Promise<LanguageSetOnHome[]> {
+  const all = await listCourses();
+  return setsForLanguage(all, language)
+    .filter((set) => set.settings.openedUnits.length > 0 || set.settings.studyGroups.length > 0)
+    .map((set) => ({
+      id: set.deck.id,
+      name: set.deck.name,
+      units: unitsTurnedOn(set.loadOutline(), set.settings.openedUnits),
+      groups: set.settings.studyGroups,
+    }));
+}
 
 export function LanguageBasicsHomeCard() {
-  const walkMark = useWalkMark();
   const language = useLanguage();
-  const [sets, setSets] = useState<OnHome[] | null>(null);
+  const [sets, setSets] = useState<LanguageSetOnHome[] | null>(null);
 
   useFocusEffect(
     useCallback(() => {
       let live = true;
-      void listCourses()
-        .then((all) => {
-          if (!live) return;
-          const on = setsForLanguage(all, language)
-            .filter((set) => set.settings.openedUnits.length > 0 || set.settings.studyGroups.length > 0)
-            .map((set) => ({
-              id: set.deck.id,
-              name: set.deck.name,
-              units: unitsTurnedOn(set.loadOutline(), set.settings.openedUnits),
-              groups: set.settings.studyGroups,
-            }));
-          setSets(on);
+      void loadLanguageSetsOnHome(language)
+        .then((on) => {
+          if (live) setSets(on);
         })
         .catch(() => {
           if (live) setSets([]);
@@ -50,6 +53,16 @@ export function LanguageBasicsHomeCard() {
   );
 
   if (sets === null) return null;
+  return <LanguageBasicsList sets={sets} />;
+}
+
+/** What the Home card shows, also opened from the Language Basics edge button (components/LanguageBasicsButton.tsx), which passes onLeave to close itself. */
+export function LanguageBasicsList({ sets, onLeave }: { sets: LanguageSetOnHome[]; onLeave?: () => void }) {
+  const walkMark = useWalkMark();
+  const go: typeof router.push = (href) => {
+    onLeave?.();
+    router.push(href);
+  };
   if (sets.length === 0) {
     return (
       <View style={styles.body}>
@@ -57,7 +70,7 @@ export function LanguageBasicsHomeCard() {
         <TouchableOpacity
           ref={walkMark.ref('home.languageBasicsOpen')}
           style={[styles.button, walkMark('home.languageBasicsOpen')]}
-          onPress={() => router.push({ pathname: '/interests', params: { openInterestsLens: 'languages' } })}
+          onPress={() => go({ pathname: '/interests', params: { openInterestsLens: 'languages' } })}
           accessibilityRole="button"
         >
           <Text style={styles.buttonText}>Open Languages</Text>
@@ -78,7 +91,7 @@ export function LanguageBasicsHomeCard() {
                 ref={marked ? walkMark.ref('home.languageBasicsUnit') : undefined}
                 style={[styles.row, marked ? walkMark('home.languageBasicsUnit') : null]}
                 activeOpacity={0.8}
-                onPress={() => router.push({ pathname: '/language-basics', params: { id: set.id, unit: String(unit.unit) } })}
+                onPress={() => go({ pathname: '/language-basics', params: { id: set.id, unit: String(unit.unit) } })}
                 accessibilityRole="button"
               >
                 <CourseText style={styles.rowText}>{`${unit.unit}. ${unit.name}`}</CourseText>
@@ -89,7 +102,7 @@ export function LanguageBasicsHomeCard() {
           {set.units.length > 0 ? (
             <TouchableOpacity
               style={styles.button}
-              onPress={() => router.push({ pathname: '/language-basics', params: { id: set.id, together: '1' } })}
+              onPress={() => go({ pathname: '/language-basics', params: { id: set.id, together: '1' } })}
               accessibilityRole="button"
             >
               <Text style={styles.buttonText}>Study These Together</Text>
@@ -105,7 +118,7 @@ export function LanguageBasicsHomeCard() {
                 ref={marked ? walkMark.ref('home.languageBasicsGroup') : undefined}
                 style={[styles.row, marked ? walkMark('home.languageBasicsGroup') : null]}
                 activeOpacity={0.8}
-                onPress={() => router.push({ pathname: '/language-basics', params: { id: set.id, group: group.units.join(','), order: group.order } })}
+                onPress={() => go({ pathname: '/language-basics', params: { id: set.id, group: group.units.join(','), order: group.order } })}
                 accessibilityRole="button"
               >
                 <Ionicons name="albums-outline" size={18} color={colors.textSecondary} style={textShadow} />

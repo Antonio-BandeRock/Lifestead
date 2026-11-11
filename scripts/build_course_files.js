@@ -119,6 +119,24 @@ function applyFixes(course) {
       card[field] = value;
     }
   }
+  // 2026-11-11, Tony: "could it also provide a conversational response the user could
+  // say after? ... fit as much learning in a short time as we can for every card for
+  // every language." <deck>.replies.json maps a card id to [what to say next in the
+  // language being learned, its meaning in the learner's language].
+  const repliesFile = path.join(root, 'scripts', 'course-fixes', `${course.deck.id}.replies.json`);
+  if (fs.existsSync(repliesFile)) {
+    for (const [id, pair] of Object.entries(JSON.parse(fs.readFileSync(repliesFile, 'utf8')))) {
+      const card = byId.get(id);
+      const good = Array.isArray(pair) && pair.length === 2 && pair.every((text) => typeof text === 'string' && text.trim() !== '');
+      if (!card || !good) {
+        console.log(`${course.deck.id}: the reply for ${id} ${card ? 'is not two lines of words' : 'names a card the course does not have'}.`);
+        ok = false;
+        continue;
+      }
+      card.replyTarget = pair[0].trim();
+      card.replyNative = pair[1].trim();
+    }
+  }
   return ok;
 }
 

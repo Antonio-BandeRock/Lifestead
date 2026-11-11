@@ -2600,7 +2600,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Open the band with the name of Interests, then Language Basics.', mark: 'homeBand.languageBasics', stay: true },
         { say: 'Under Studied together before, tap a group. Its cards start right away.', mark: 'home.languageBasicsGroup' },
       ],
-      forYou: 'A group shows here once you have studied those units together under Interests, Languages. The six most recent are kept.',
+      forYou: 'A group shows here once you have studied those units together under Interests, Languages. The six most recent are kept. With Simple View on, Profile, Simple View can keep this card on Home or put a Language Basics button at the edge of the screen.',
     },
     {
       key: 'insideKnowledge',

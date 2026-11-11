@@ -5505,6 +5505,29 @@ export default function ProfileScreen() {
                 );
               })}
             </View>
+            {/* 2026-11-11: Language Basics as a button of its own at the edge,
+                components/LanguageBasicsButton.tsx, drawn in either view. */}
+            <Text style={styles.helpText}>
+              A Language Basics button at the edge, with the language icon, opens your language units and the groups you studied together from any screen.
+            </Text>
+            <View style={styles.pillRow}>
+              {[false, true].map((value) => {
+                const active = visualPrefs.languageButton === value;
+                return (
+                  <TouchableOpacity
+                    key={value ? 'on' : 'off'}
+                    style={[styles.pill, active && styles.pillActive]}
+                    onPress={() => {
+                      void setVisualPreferences({ languageButton: value, languageSimpleViewAsked: true });
+                    }}
+                    accessibilityRole="button"
+                    accessibilityState={{ selected: active }}
+                  >
+                    <Text style={[styles.pillText, active && styles.pillTextActive]}>{value ? 'On' : 'Off'}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
           </View>
         ) : null}
       </View>

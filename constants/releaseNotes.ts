@@ -41,6 +41,14 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.86.5',
+    date: '2026-11-11',
+    changes: [
+      "In Languages, a card can now show something you could say next once you turn it over, with its meaning beside it. Phrases and words have them so far, plus word sets and look-alike pairs for people learning Spanish; the rest are on the way.",
+      "With Simple View on, your language sets can sit behind a button with the language icon at the edge of the screen. The first time you choose a unit to study, the app asks whether you want that button or the card on Home, and Profile can change it later.",
+    ],
+  },
+  {
     version: '1.0.86.4',
     date: '2026-11-11',
     changes: [

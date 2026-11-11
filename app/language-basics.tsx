@@ -35,6 +35,7 @@ import { localDayOf } from '../lib/interests';
 import { deckInfo, deckKeyOf, newLeftToday, planSitting, replayLadder, unitsOf, type DeckInfo, type SittingOrder } from '../lib/languageBasics';
 import { courseCardLayout } from '../lib/learnCourseCard';
 import type { CourseCard } from '../lib/learnCourseFile';
+import { askWhereLanguageBasicsGoes } from '../components/LanguageBasicsButton';
 import { addCourseAnswer, getCourseSettings, listCourseReviews, loadCourse, saveCourseSettings, withStudyGroup, type CourseSettings, type OpenedCourse } from '../lib/learnCoursesDb';
 import type { LearnGrade, LearnReview } from '../lib/learnSchedule';
 import { explainNotYet } from '../lib/notYet';
@@ -154,7 +155,7 @@ export default function LanguageBasicsScreen() {
       return;
     }
     // Kept for Home, so the same group opens again in one tap.
-    if (settings) void changeSettings({ studyGroups: withStudyGroup(settings.studyGroups, { units: chosen, order }) });
+    if (settings) void changeSettings({ studyGroups: withStudyGroup(settings.studyGroups, { units: chosen, order }) }).then(() => askWhereLanguageBasicsGoes());
     begin({ kind: 'units', units: chosen, order }, reviews);
   }
 
@@ -194,7 +195,9 @@ export default function LanguageBasicsScreen() {
 
   function toggleHome(unit: number, on: boolean) {
     if (!settings) return;
-    void changeSettings({ openedUnits: on ? [...settings.openedUnits, unit].sort((a, b) => a - b) : settings.openedUnits.filter((value) => value !== unit) });
+    void changeSettings({ openedUnits: on ? [...settings.openedUnits, unit].sort((a, b) => a - b) : settings.openedUnits.filter((value) => value !== unit) }).then(() => {
+      if (on) void askWhereLanguageBasicsGoes();
+    });
   }
 
   function toggleChosen(unit: number) {

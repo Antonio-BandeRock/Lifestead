@@ -216,6 +216,13 @@ export function CourseCardView({ card, direction, day, typeAnswer, showSource, c
           {!turned && !typing ? <Example text={faces.frontExample} /> : null}
           {turned ? <Example text={faces.backExample} /> : null}
           {turned && card.meaning ? <CourseText style={styles.rule}>{card.native}</CourseText> : null}
+          {turned && card.replyTarget ? (
+            <View style={styles.remember}>
+              <Text style={styles.small}>Then you could say</Text>
+              <CourseText style={styles.example}>{card.replyTarget}</CourseText>
+              {card.replyNative ? <CourseText style={styles.rememberText}>{card.replyNative}</CourseText> : null}
+            </View>
+          ) : null}
           {turned && check !== null ? (
             <Text style={styles.checkLine}>{check === 'match' ? t('That is it.') : check === 'accents' ? t('That is it, with the accents written this way:') : t('The form is:')}</Text>
           ) : null}

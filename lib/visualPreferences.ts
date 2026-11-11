@@ -834,6 +834,13 @@ export type VisualPreferences = {
   // Simple View. The Grocery List starts in it, since that was the card
   // asked for.
   simpleViewExtras: HomeSectionKey[];
+  // 2026-11-11, asked after Language Basics sat hidden under Simple View: "add it as
+  // its own quick access button" with a choice of that or keeping the card. On: an
+  // edge tab on the far side from the hand opens Language Basics
+  // (components/LanguageBasicsButton.tsx). Asked once, the first time a unit goes to
+  // Home or a group is studied while Simple View hides the card.
+  languageButton: boolean;
+  languageSimpleViewAsked: boolean;
   // How far ahead Home's To Do List looks (toDoListView in lib/routines.ts).
   toDoLookAhead: ToDoLookAhead;
 };
@@ -1050,6 +1057,8 @@ const DEFAULT_VISUAL_PREFERENCES: VisualPreferences = {
   playfulWording: true,
   simpleView: false,
   simpleViewExtras: ['groceryList'],
+  languageButton: false,
+  languageSimpleViewAsked: false,
   toDoLookAhead: DEFAULT_TO_DO_LOOK_AHEAD,
 };
 
