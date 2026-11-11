@@ -186,4 +186,8 @@
 // sources, unused sauce and stock links dropped, soup water added, Fire
 // Cider in place of the garlic honey tonic, skinless thigh where a recipe
 // says skinless. A stale copy has the old rows.
-export const REFERENCE_DB_VERSION = "20261111134600";
+// BUMPED again 2026-11-11 (1.0.86.3): older home recipes rewritten to
+// their sources, truite aux amandes, salade nicoise and xi hu cu yu matched
+// to their sources, and volume weights added for fresh herbs, chives,
+// orange peel, oats, toasted sesame and mustard. A stale copy has the old rows.
+export const REFERENCE_DB_VERSION = "20261111170000";

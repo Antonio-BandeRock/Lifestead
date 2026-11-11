@@ -5422,80 +5422,71 @@
       "id": "curated_fr_salade_nicoise",
       "name": "Salade Niçoise",
       "region": "Nice",
-      "servings": 4,
-      "flavorProfile": "Ripe tomatoes, crisp green pepper and young onion with salty anchovies, black olives, egg and basil, dressed only with good olive oil.",
+      "servings": 6,
+      "flavorProfile": "Ripe tomatoes, cucumber, young broad beans, artichoke and green pepper with anchovies, black olives, capers, egg and basil, dressed only with olive oil.",
       "healthBenefit": "Raw vegetables bring vitamin C and fibre, the eggs and anchovies bring protein and the anchovies add omega-3 fats, all carried by olive oil.",
       "overallTier": "strong",
       "ingredients": [
         {
           "category": "Veg",
           "baseName": "Tomato",
-          "quantity": 600,
+          "quantity": 1230,
           "unit": "g",
-          "cutPrep": "6 ripe, in quarters, salted lightly",
+          "cutPrep": "10 medium, in quarters",
           "cookingMethod": null,
           "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cucumber, common, peeled",
+          "quantity": 300,
+          "unit": "g",
+          "cutPrep": "1 large, peeled and thinly sliced",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Veg",
+          "baseName": "Broad, Fresh Bean",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "small young beans, shelled, raw",
+          "cookingMethod": null,
+          "prepNote": "or green beans"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Artichoke (Globe, French)",
+          "quantity": 480,
+          "unit": "g",
+          "cutPrep": "12 small artichokes, trimmed and sliced into thin rounds",
+          "cookingMethod": null,
+          "prepNote": "weight estimated, about 40 g each once trimmed"
         },
         {
           "category": "Veg",
           "baseName": "Green Bell Pepper",
-          "quantity": 120,
+          "quantity": 240,
           "unit": "g",
-          "cutPrep": "1 thin-skinned salad pepper, in thin rings",
+          "cutPrep": "2, in thin rings",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Veg",
-          "baseName": "Spring onion",
-          "quantity": 60,
+          "baseName": "Onion",
+          "quantity": 240,
           "unit": "g",
-          "cutPrep": "3 cébettes, sliced",
+          "cutPrep": "6 small white onions, in thin rings",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "weight estimated"
         },
         {
-          "category": "Veg",
-          "baseName": "Celery",
-          "quantity": 60,
+          "category": "Herbs",
+          "baseName": "Fresh Basil",
+          "quantity": 3,
           "unit": "g",
-          "cutPrep": "1 tender stalk, sliced",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Lettuce, green leaf",
-          "quantity": 80,
-          "unit": "g",
-          "cutPrep": "a few leaves to line the dish",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Dairy",
-          "baseName": "Chicken Egg (Raw)",
-          "quantity": 4,
-          "unit": "each",
-          "cutPrep": "hard-boiled, in quarters",
-          "cookingMethod": "Boiled",
-          "prepNote": null
-        },
-        {
-          "category": "Meat",
-          "baseName": "Anchovy Fish",
-          "quantity": 50,
-          "unit": "g",
-          "cutPrep": "8 to 12 fillets in olive oil or rinsed salted fillets",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Fruit",
-          "baseName": "Ripe Olive",
-          "quantity": 60,
-          "unit": "g",
-          "cutPrep": "small black Niçoise olives",
+          "cutPrep": "6 leaves, finely chopped",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -5509,18 +5500,45 @@
           "prepNote": null
         },
         {
-          "category": "Herbs",
-          "baseName": "Fresh Basil",
-          "quantity": 5,
+          "category": "Dairy",
+          "baseName": "Chicken Egg (Raw)",
+          "quantity": 3,
+          "unit": "each",
+          "cutPrep": "hard-boiled, in quarters or slices",
+          "cookingMethod": "Boiled",
+          "prepNote": null
+        },
+        {
+          "category": "Meat",
+          "baseName": "Anchovy Fish",
+          "quantity": 48,
           "unit": "g",
-          "cutPrep": "a few leaves, torn",
+          "cutPrep": "12 fillets, cut in pieces",
+          "cookingMethod": null,
+          "prepNote": "or 300 g tuna steak, not both"
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Ripe Olive",
+          "quantity": 100,
+          "unit": "g",
+          "cutPrep": "small black Niçoise olives",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Capers",
+          "quantity": 2,
+          "unit": "tbsp",
+          "cutPrep": "a handful",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Fats",
           "baseName": "Olive Oil (Extra Virgin)",
-          "quantity": 4,
+          "quantity": 6,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
@@ -5533,7 +5551,7 @@
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "to taste, part for the tomatoes"
         },
         {
           "category": "Herbs",
@@ -5542,20 +5560,21 @@
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "to taste"
         }
       ],
       "instructions": [
-        "Boil the eggs 9 to 10 minutes, cool them in cold water, peel and quarter them.",
-        "Rub a wide shallow bowl with the cut garlic and line it with the lettuce leaves.",
-        "Arrange the tomatoes, pepper rings, spring onion and celery over the lettuce. Season with salt and pepper.",
-        "Lay the eggs and anchovy fillets on top and scatter over the olives and torn basil. Canned tuna may take the place of the anchovies, but not both on one plate in the old Niçois way.",
-        "Drizzle with the olive oil just before serving. Everything stays raw except the eggs, and there is no vinegar."
+        "Hard-boil the eggs, cool them in cold water, peel them and cut them in quarters or slices.",
+        "Quarter the tomatoes, salt them lightly and leave them to drain.",
+        "Cut the anchovies into pieces about the size of the egg pieces. Peel and thinly slice the cucumber, cut the peppers and onions into thin rings and slice the artichokes into thin rounds.",
+        "Rub a large salad bowl with the cut garlic and put in everything except the tomatoes: cucumber, broad beans, artichokes, peppers, onions, eggs, anchovies, olives and capers.",
+        "Drain the tomatoes, salt them lightly once more and add them to the bowl.",
+        "Mix the olive oil with the basil, pepper and a little salt, pour it over the salad and chill it before serving. Nothing is cooked except the eggs, and there is no vinegar."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Vitamin C",
-          "note": "From the raw tomatoes and pepper."
+          "note": "From the raw tomatoes and peppers."
         },
         {
           "nutrient": "Protein",
@@ -5568,15 +5587,15 @@
       ],
       "citations": [
         {
-          "source": "Wikipédia, Salade niçoise",
-          "url": "https://fr.wikipedia.org/wiki/Salade_ni%C3%A7oise"
+          "source": "Wikibooks, Cookbook: Niçoise Salad",
+          "url": "https://en.wikibooks.org/wiki/Cookbook:Ni%C3%A7oise_Salad"
         },
         {
-          "source": "La Cuisine de Géraldine, Salade niçoise",
-          "url": "https://lacuisinedegeraldine.fr/en/salade-nicoise"
+          "source": "Wikipédia, Salade niçoise",
+          "url": "https://fr.wikipedia.org/wiki/Salade_ni%C3%A7oise"
         }
       ],
-      "curationNote": "Wikipédia, Salade niçoise (composition only) for every amount and step; Wikipédia gives the Niçois ingredient list without amounts; Géraldine's 4-serving recipe is a different version (potatoes, beans, tuna, capers, a mustard vinaigrette, 3 tomatoes, 2 eggs, 4 tbsp oil)."
+      "curationNote": "Wikibooks, Cookbook: Niçoise Salad (CC BY-SA) for every amount and step, 6 servings: 10 tomatoes, 1 large cucumber, 200 g young broad beans or green beans, 12 small artichokes, 2 green peppers, 6 small white onions, 6 basil leaves, 1 garlic clove, 3 eggs, 12 anchovy fillets or 300 g tuna, 100 g olives, a handful of capers, 6 spoonfuls olive oil, salt and pepper. Weights of tomatoes, cucumber, artichokes, peppers and onions estimated from the counts."
     },
     {
       "builderType": "salad",

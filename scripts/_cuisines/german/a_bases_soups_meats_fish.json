@@ -7182,65 +7182,64 @@
       "dishRole": "main",
       "dishGroup": "Meats & Sausages",
       "region": "Germany",
-      "servings": 6,
+      "servings": 4,
       "servingSizeAmount": 1,
       "servingSizeUnit": "plate",
-      "flavorProfile": "Tender beef in a thick, dark red sauce that is sweet with slow-cooked onion and deep with paprika, finished with a spoon of crème fraîche.",
-      "healthBenefit": "The beef gives protein, iron, zinc and vitamin B12, and the onions, tomatoes and paprika add vitamin C, which helps the iron along.",
+      "flavorProfile": "Tender beef in a thick, dark red sauce of slow-cooked onion, red wine and plenty of paprika, with marjoram and bay.",
+      "healthBenefit": "The beef gives protein, iron, zinc and vitamin B12, and the onion and paprika add some vitamin C.",
       "overallTier": "strong",
       "components": [
         {
-          "recipeId": "curated_de_base_butterschmalz",
-          "servings": 5,
-          "note": "about 70 g"
-        },
-        {
           "recipeId": "curated_de_base_rinderbruhe",
           "servings": 2,
-          "note": "about 500 ml"
-        },
-        {
-          "recipeId": "curated_de_base_mittelscharfer_senf",
-          "servings": 2,
-          "note": "2 tbsp"
+          "note": "2 cups"
         }
       ],
       "ingredients": [
         {
           "category": "Meat",
           "baseName": "Beef Chuck Stew Meat (Raw)",
-          "quantity": 1000,
+          "quantity": 680,
           "unit": "g",
-          "cutPrep": "in 1.5 inch (4 cm) cubes",
+          "cutPrep": "in 1 to 2.5 cm chunks",
           "cookingMethod": "Braised",
-          "prepNote": null
+          "prepNote": "1½ lb stewing beef"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null,
+          "quantity": 1,
+          "unit": "tbsp"
         },
         {
           "category": "Veg",
           "baseName": "Onion",
-          "quantity": 5,
-          "unit": "each",
+          "quantity": 400,
+          "unit": "g",
           "cutPrep": "diced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 large onion"
         },
         {
           "category": "Veg",
           "baseName": "Garlic",
-          "quantity": 2,
-          "unit": "each",
-          "cutPrep": "cloves, chopped",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "minced",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "2 cloves"
         },
         {
-          "category": "Herbs",
-          "baseName": "Paprika",
-          "quantity": 1,
-          "unit": "tbsp",
-          "cutPrep": "sweet rose paprika",
+          "category": "Alcohol",
+          "baseName": "Red Wine",
+          "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 cup, dry",
+          "quantity": 240,
+          "unit": "ml"
         },
         {
           "category": "Herbs",
@@ -7252,22 +7251,22 @@
           "prepNote": null
         },
         {
-          "category": "Veg",
-          "baseName": "Tomato",
-          "quantity": 280,
-          "unit": "g",
-          "cutPrep": "peeled, chopped",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Sweets",
-          "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 1,
+          "category": "Herbs",
+          "baseName": "Paprika",
+          "quantity": 3,
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "Hungarian paprika"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Marjoram Spices",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "dried",
+          "quantity": 0.5,
+          "unit": "tsp"
         },
         {
           "category": "Herbs",
@@ -7281,28 +7280,47 @@
         {
           "category": "Herbs",
           "baseName": "Spices, pepper, black",
-          "quantity": 0.25,
+          "quantity": 0.5,
           "unit": "tsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "freshly ground"
         },
         {
-          "category": "Dairy",
-          "baseName": "Crème fraîche, 35 % fett",
-          "quantity": 45,
-          "unit": "g",
-          "cutPrep": "3 tbsp",
+          "category": "Herbs",
+          "baseName": "Spices, bay leaf",
+          "cutPrep": "1 leaf",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": null,
+          "quantity": 0.15,
+          "unit": "g"
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Cornstarch",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": null,
+          "quantity": 2,
+          "unit": "tsp"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2 tbsp, to dissolve the cornstarch",
+          "quantity": 30,
+          "unit": "ml"
         }
       ],
       "instructions": [
-        "Brown the beef in the hot Butterschmalz in batches over high heat, 3 to 4 minutes a batch, and set aside.",
-        "Fry the onions in the same pot over medium heat until soft and golden, 10 to 15 minutes, stirring in the sugar toward the end.",
-        "Add the garlic and tomato paste and cook 1 minute, then take the pot off the heat and stir in the paprika so it does not turn bitter.",
-        "Return the beef with the tomatoes, broth and mustard, cover and braise over low heat until tender, 1.5 to 2 hours, stirring now and then.",
-        "Season with salt and pepper, stir in the crème fraîche, and serve with Spätzle, noodles, potatoes or bread dumplings."
+        "Brown the beef on all sides in the hot oil in a deep, heavy pan or Dutch oven, and set it aside.",
+        "Cook the onion until lightly browned, 6 to 8 minutes, then add the garlic and cook about 1 minute.",
+        "Pour in the red wine, bring it to a boil and simmer until reduced by about half, 3 to 4 minutes.",
+        "Stir in the tomato paste, paprika, marjoram, salt and pepper.",
+        "Return the beef with the broth and bay leaf, bring to a boil, then cover and simmer on low about 1 hour, until the beef is very tender.",
+        "Stir in the cornstarch dissolved in the water and simmer 1 to 2 minutes until thickened. Taste for salt and pepper, and serve with Spätzle, potato or bread dumplings, boiled potatoes or egg noodles."
       ],
       "nutritionHighlights": [
         {
@@ -7314,21 +7332,17 @@
           "note": "From the beef."
         },
         {
-          "nutrient": "Vitamin C",
-          "note": "From the tomatoes, onions and paprika."
+          "nutrient": "Vitamin B12",
+          "note": "From the beef."
         }
       ],
       "citations": [
         {
-          "source": "GuteKüche, Rindergulasch",
-          "url": "https://www.gutekueche.de/rindergulasch-rezept-162"
-        },
-        {
-          "source": "Wikibooks Kochbuch, Gulasch",
-          "url": "https://de.wikibooks.org/wiki/Kochbuch/_Gulasch"
+          "source": "The Daring Gourmet, Authentic German Goulash (Rindergulasch)",
+          "url": "https://www.daringgourmet.com/german-goulash-rindergulasch/"
         }
       ],
-      "curationNote": "GuteKüche, Rindergulasch for every amount and step; its 4 portions use the same quantities as our 6."
+      "curationNote": "The Daring Gourmet, German Goulash for every amount and step; serves 4. Replaced GuteKüche, whose 2 tbsp salt and 1 tbsp pepper per kg looked like a misprint."
     },
     {
       "id": "curated_de_kohlrouladen",

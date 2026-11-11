@@ -3956,11 +3956,11 @@
     "conditionCautions": {
       "hashimotos": {
         "severity": "red",
-        "note": "Soy sauce made from soy and wheat (shoyu): rated High Risk for gluten. A significant, well-documented concern."
+        "note": "Wheat flour, white, all-purpose, enriched, unbleached: rated High Risk for gluten. A significant, well-documented concern."
       },
       "rheumatoid_arthritis": {
         "severity": "red",
-        "note": "Soy sauce made from soy and wheat (shoyu): rated High Risk for gluten. A significant, well-documented concern."
+        "note": "Wheat flour, white, all-purpose, enriched, unbleached: rated High Risk for gluten. A significant, well-documented concern."
       },
       "chronic_kidney_disease": {
         "severity": "yellow",
@@ -3972,7 +3972,7 @@
       },
       "psoriasis": {
         "severity": "red",
-        "note": "Soy sauce made from soy and wheat (shoyu): rated High Risk for gluten. A significant, well-documented concern."
+        "note": "Wheat flour, white, all-purpose, enriched, unbleached: rated High Risk for gluten. A significant, well-documented concern."
       },
       "ibd": {
         "severity": "yellow",
@@ -6138,7 +6138,7 @@
       },
       "cardiovascular_disease": {
         "severity": "yellow",
-        "note": "Pork Ham (Cured): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+        "note": "Chicken, broiler or fryers: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       },
       "psoriasis": {
         "severity": "red",
@@ -6146,15 +6146,15 @@
       },
       "multiple_sclerosis": {
         "severity": "yellow",
-        "note": "Pork Ham (Cured): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+        "note": "Chicken, broiler or fryers: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       },
       "lupus": {
         "severity": "yellow",
-        "note": "Pork Ham (Cured): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+        "note": "Chicken, broiler or fryers: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       },
       "sjogrens": {
         "severity": "yellow",
-        "note": "Pork Ham (Cured): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+        "note": "Chicken, broiler or fryers: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       }
     },
     "stageAdvisoryNotes": [
@@ -7917,18 +7917,14 @@
   },
   "curated_cn_lanzhou_niu_rou_mian": {
     "safeForConditions": [
-      "cardiovascular_disease",
       "chronic_kidney_disease",
       "fatty_liver_disease",
       "gout",
       "graves",
       "ibd",
-      "lupus",
       "migraine",
-      "multiple_sclerosis",
       "pcos",
       "prostate_health",
-      "sjogrens",
       "type_1_diabetes",
       "type_2_diabetes"
     ],
@@ -7939,11 +7935,27 @@
       },
       "rheumatoid_arthritis": {
         "severity": "red",
-        "note": "Wheat flour, white, all-purpose, enriched, unbleached: rated High Risk for gluten. A significant, well-documented concern."
+        "note": "Noodle, wheat, fresh, soaked, drained: rated High Risk for gluten. A significant, well-documented concern."
+      },
+      "cardiovascular_disease": {
+        "severity": "yellow",
+        "note": "Beef bonemeat: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       },
       "psoriasis": {
         "severity": "red",
-        "note": "Wheat flour, white, all-purpose, enriched, unbleached: rated High Risk for gluten. A significant, well-documented concern."
+        "note": "Noodle, wheat, fresh, soaked, drained: rated High Risk for gluten. A significant, well-documented concern."
+      },
+      "multiple_sclerosis": {
+        "severity": "yellow",
+        "note": "Beef bonemeat: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+      },
+      "lupus": {
+        "severity": "yellow",
+        "note": "Beef bonemeat: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+      },
+      "sjogrens": {
+        "severity": "yellow",
+        "note": "Beef bonemeat: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       },
       "ibs": {
         "severity": "yellow",
@@ -11030,33 +11042,45 @@
   },
   "curated_cn_xiao_long_bao": {
     "safeForConditions": [
-      "cardiovascular_disease",
       "chronic_kidney_disease",
       "fatty_liver_disease",
       "gout",
       "graves",
       "ibd",
-      "lupus",
       "migraine",
-      "multiple_sclerosis",
       "pcos",
       "prostate_health",
-      "sjogrens",
       "type_1_diabetes",
       "type_2_diabetes"
     ],
     "conditionCautions": {
       "hashimotos": {
         "severity": "red",
-        "note": "Soy sauce made from soy and wheat (shoyu): rated High Risk for gluten. A significant, well-documented concern."
+        "note": "Wheat flour, white, all-purpose, enriched, unbleached: rated High Risk for gluten. A significant, well-documented concern."
       },
       "rheumatoid_arthritis": {
         "severity": "red",
-        "note": "Soy sauce made from soy and wheat (shoyu): rated High Risk for gluten. A significant, well-documented concern."
+        "note": "Wheat flour, white, all-purpose, enriched, unbleached: rated High Risk for gluten. A significant, well-documented concern."
+      },
+      "cardiovascular_disease": {
+        "severity": "yellow",
+        "note": "Pork bonemeat: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       },
       "psoriasis": {
         "severity": "red",
-        "note": "Soy sauce made from soy and wheat (shoyu): rated High Risk for gluten. A significant, well-documented concern."
+        "note": "Wheat flour, white, all-purpose, enriched, unbleached: rated High Risk for gluten. A significant, well-documented concern."
+      },
+      "multiple_sclerosis": {
+        "severity": "yellow",
+        "note": "Pork bonemeat: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+      },
+      "lupus": {
+        "severity": "yellow",
+        "note": "Pork bonemeat: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+      },
+      "sjogrens": {
+        "severity": "yellow",
+        "note": "Pork bonemeat: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       },
       "ibs": {
         "severity": "yellow",
@@ -18963,7 +18987,7 @@
     "conditionCautions": {
       "hashimotos": {
         "severity": "red",
-        "note": "Pea, green, fresh: rated High Risk for lectins (legumes). A significant, well-documented concern."
+        "note": "Cauliflower: rated Goitrogenic (Raw) for goitrogenic load in its raw form. Goitrogens can interfere with thyroid iodine uptake; cooking substantially reduces this for most foods."
       },
       "rheumatoid_arthritis": {
         "severity": "red",
@@ -20072,6 +20096,7 @@
       "chronic_kidney_disease",
       "fatty_liver_disease",
       "gout",
+      "graves",
       "ibd",
       "migraine",
       "pcos",
@@ -20092,10 +20117,6 @@
         "severity": "yellow",
         "note": "Beef Chuck Stew Meat (Raw): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       },
-      "graves": {
-        "severity": "red",
-        "note": "Spices, mustard seed, ground: rated Excess Risk for selenium. Eating a lot of this could push the level above a healthy range."
-      },
       "psoriasis": {
         "severity": "yellow",
         "note": "Beef Chuck Stew Meat (Raw): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
@@ -20114,7 +20135,7 @@
       },
       "ibs": {
         "severity": "yellow",
-        "note": "Distilled vinegar: rated Disruptive for irritants. This may work against or interfere with the process being measured."
+        "note": "Red Wine: rated Disruptive for irritants. This may work against or interfere with the process being measured."
       }
     },
     "stageAdvisoryNotes": [
@@ -23660,60 +23681,6 @@
     ]
   },
   "curated_ferment_plain_yogurt": {
-    "safeForConditions": [
-      "cardiovascular_disease",
-      "celiac",
-      "chronic_kidney_disease",
-      "fatty_liver_disease",
-      "gout",
-      "graves",
-      "ibd",
-      "ibs",
-      "lupus",
-      "migraine",
-      "multiple_sclerosis",
-      "pcos",
-      "prostate_health",
-      "psoriasis",
-      "rheumatoid_arthritis",
-      "sjogrens",
-      "type_1_diabetes",
-      "type_2_diabetes"
-    ],
-    "conditionCautions": {
-      "hashimotos": {
-        "severity": "yellow",
-        "note": "Yogurt, plain, low fat: rated Disruptive for fermentability. This may work against or interfere with the process being measured."
-      }
-    },
-    "stageAdvisoryNotes": [
-      {
-        "condition": "Hashimoto's Thyroiditis: Stage 2: Digging",
-        "note": "Dairy, the other food typically removed alongside gluten at this stage. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
-      },
-      {
-        "condition": "Hashimoto's Thyroiditis: Stage 3: Gut Repair",
-        "note": "Dairy. If you haven't reintroduced it yet, this is one to test carefully, one food at a time. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
-      },
-      {
-        "condition": "Hashimoto's Thyroiditis: Stage 4: Rebalancing",
-        "note": "Dairy. The same logic as gluten applies here: a food already tested and tolerated during Gut Repair does not need to keep being avoided at this stage. Still worth avoiding if it was never tested, or caused a reaction. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
-      },
-      {
-        "condition": "Hashimoto's Thyroiditis: Stage 5: Maintenance",
-        "note": "Dairy. The same logic as gluten applies here: a food already tested and tolerated during Gut Repair does not need to keep being avoided at this stage. Still worth avoiding if it was never tested, or caused a reaction. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
-      },
-      {
-        "condition": "Celiac Disease: Newly Diagnosed / Actively Healing",
-        "note": "Dairy. Secondary lactose intolerance is a well-documented finding at celiac diagnosis. Worth noticing if dairy still bothers you, not a lifelong rule. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
-      },
-      {
-        "condition": "Chronic Kidney Disease: On Dialysis",
-        "note": "A protein-light food. Dialysis itself removes protein your body now needs replaced, not restricted. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
-      }
-    ]
-  },
-  "curated_ferment_probiotic_yogurt": {
     "safeForConditions": [
       "cardiovascular_disease",
       "celiac",
@@ -34361,9 +34328,11 @@
   "curated_fr_salade_nicoise": {
     "safeForConditions": [
       "celiac",
+      "chronic_kidney_disease",
       "fatty_liver_disease",
       "gout",
       "graves",
+      "ibd",
       "ibs",
       "migraine",
       "pcos",
@@ -34373,16 +34342,12 @@
     ],
     "conditionCautions": {
       "hashimotos": {
-        "severity": "yellow",
-        "note": "Spring onion: rated Disruptive for fermentability. This may work against or interfere with the process being measured."
+        "severity": "red",
+        "note": "Broad, Fresh Bean: rated High Risk for lectins (legumes). A significant, well-documented concern."
       },
       "rheumatoid_arthritis": {
         "severity": "yellow",
         "note": "Chicken Egg (Raw): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
-      },
-      "chronic_kidney_disease": {
-        "severity": "yellow",
-        "note": "Celery: Moderate oxalate content, generally fine in normal portions."
       },
       "cardiovascular_disease": {
         "severity": "yellow",
@@ -34391,10 +34356,6 @@
       "psoriasis": {
         "severity": "yellow",
         "note": "Chicken Egg (Raw): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
-      },
-      "ibd": {
-        "severity": "yellow",
-        "note": "Celery: Moderate oxalate content, generally fine in normal portions."
       },
       "multiple_sclerosis": {
         "severity": "yellow",
@@ -35655,6 +35616,7 @@
   "curated_fr_truite_aux_amandes": {
     "safeForConditions": [
       "cardiovascular_disease",
+      "celiac",
       "fatty_liver_disease",
       "gout",
       "graves",
@@ -35663,6 +35625,8 @@
       "multiple_sclerosis",
       "pcos",
       "prostate_health",
+      "psoriasis",
+      "rheumatoid_arthritis",
       "sjogrens",
       "type_1_diabetes",
       "type_2_diabetes"
@@ -35670,19 +35634,11 @@
     "conditionCautions": {
       "hashimotos": {
         "severity": "red",
-        "note": "Wheat flour, white, all-purpose, enriched, unbleached: rated High Risk for gluten. A significant, well-documented concern."
-      },
-      "rheumatoid_arthritis": {
-        "severity": "red",
-        "note": "Wheat flour, white, all-purpose, enriched, unbleached: rated High Risk for gluten. A significant, well-documented concern."
+        "note": "Almonds: High oxalate load. Boil and discard the cooking water where applicable; pair with a calcium source at the same meal."
       },
       "chronic_kidney_disease": {
         "severity": "red",
         "note": "Almonds: High oxalate load. Boil and discard the cooking water where applicable; pair with a calcium source at the same meal."
-      },
-      "psoriasis": {
-        "severity": "red",
-        "note": "Wheat flour, white, all-purpose, enriched, unbleached: rated High Risk for gluten. A significant, well-documented concern."
       },
       "ibd": {
         "severity": "red",
@@ -35695,28 +35651,8 @@
     },
     "stageAdvisoryNotes": [
       {
-        "condition": "Hashimoto's Thyroiditis: Stage 2: Digging",
-        "note": "Contains gluten, one of the first things this stage typically removes. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
-      },
-      {
-        "condition": "Hashimoto's Thyroiditis: Stage 3: Gut Repair",
-        "note": "Contains gluten. If you haven't reintroduced it yet, this is one to watch closely when you do. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
-      },
-      {
-        "condition": "Hashimoto's Thyroiditis: Stage 4: Rebalancing",
-        "note": "Contains gluten. By this stage, food choices matter less than the broader lifestyle and hormone work ahead of you. If gluten was already reintroduced without a reaction, there is no reason to keep avoiding it here. If it was never tested, or did cause a reaction, it still belongs on the avoid list. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
-      },
-      {
-        "condition": "Hashimoto's Thyroiditis: Stage 5: Maintenance",
-        "note": "Contains gluten. By this stage, food choices matter less than the broader lifestyle and hormone work ahead of you. If gluten was already reintroduced without a reaction, there is no reason to keep avoiding it here. If it was never tested, or did cause a reaction, it still belongs on the avoid list. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
-      },
-      {
         "condition": "Irritable Bowel Syndrome: Phase 1: Elimination",
         "note": "Flagged as a digestive irritant, worth noticing during a restriction period for the same reason. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
-      },
-      {
-        "condition": "Celiac Disease: Newly Diagnosed / Actively Healing",
-        "note": "Contains gluten. Strict avoidance matters most during this often-long healing window; even small, repeated exposure can keep the gut from healing. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
       },
       {
         "condition": "Inflammatory Bowel Disease: Remission",
@@ -66843,6 +66779,7 @@
   },
   "curated_side_garlic_mashed_cauliflower": {
     "safeForConditions": [
+      "cardiovascular_disease",
       "celiac",
       "chronic_kidney_disease",
       "fatty_liver_disease",
@@ -66850,9 +66787,14 @@
       "graves",
       "ibd",
       "ibs",
+      "lupus",
       "migraine",
+      "multiple_sclerosis",
       "pcos",
       "prostate_health",
+      "psoriasis",
+      "rheumatoid_arthritis",
+      "sjogrens",
       "type_1_diabetes",
       "type_2_diabetes"
     ],
@@ -66860,30 +66802,6 @@
       "hashimotos": {
         "severity": "yellow",
         "note": "Cauliflower: rated Disruptive for fermentability. This may work against or interfere with the process being measured."
-      },
-      "rheumatoid_arthritis": {
-        "severity": "yellow",
-        "note": "Olive Oil (Extra Virgin): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
-      },
-      "cardiovascular_disease": {
-        "severity": "yellow",
-        "note": "Olive Oil (Extra Virgin): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
-      },
-      "psoriasis": {
-        "severity": "yellow",
-        "note": "Olive Oil (Extra Virgin): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
-      },
-      "multiple_sclerosis": {
-        "severity": "yellow",
-        "note": "Olive Oil (Extra Virgin): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
-      },
-      "lupus": {
-        "severity": "yellow",
-        "note": "Olive Oil (Extra Virgin): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
-      },
-      "sjogrens": {
-        "severity": "yellow",
-        "note": "Olive Oil (Extra Virgin): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       }
     },
     "stageAdvisoryNotes": [
@@ -67354,7 +67272,6 @@
       "gout",
       "graves",
       "ibd",
-      "ibs",
       "migraine",
       "pcos",
       "prostate_health",
@@ -67389,9 +67306,37 @@
       "sjogrens": {
         "severity": "yellow",
         "note": "Olive Oil (Extra Virgin): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+      },
+      "ibs": {
+        "severity": "yellow",
+        "note": "Wine, white, chardonnay: rated Disruptive for irritants. This may work against or interfere with the process being measured."
       }
     },
     "stageAdvisoryNotes": [
+      {
+        "condition": "Hashimoto's Thyroiditis: Stage 2: Digging",
+        "note": "A nightshade. The staged food guide leaves this one unresolved (anti-inflammatory evidence alongside patient-reported worsening). Worth testing for yourself rather than treating it as a firm rule. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+      },
+      {
+        "condition": "Hashimoto's Thyroiditis: Stage 3: Gut Repair",
+        "note": "A nightshade. The staged food guide leaves this one unresolved (anti-inflammatory evidence alongside patient-reported worsening). Worth testing for yourself rather than treating it as a firm rule. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+      },
+      {
+        "condition": "Hashimoto's Thyroiditis: Stage 4: Rebalancing",
+        "note": "A nightshade. The staged food guide leaves this one unresolved either way. If it hasn't bothered you through reintroduction, this stage's broader focus means it's reasonable to stop treating it as a concern. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+      },
+      {
+        "condition": "Hashimoto's Thyroiditis: Stage 5: Maintenance",
+        "note": "A nightshade. The staged food guide leaves this one unresolved either way. If it hasn't bothered you through reintroduction, this stage's broader focus means it's reasonable to stop treating it as a concern. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+      },
+      {
+        "condition": "Irritable Bowel Syndrome: Phase 1: Elimination",
+        "note": "Flagged as a digestive irritant, worth noticing during a restriction period for the same reason. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+      },
+      {
+        "condition": "Inflammatory Bowel Disease: Remission",
+        "note": "Flagged for a digestive-tolerance concern, worth noticing as a possible separate, overlapping IBS-type issue if remission is confirmed but symptoms persist. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+      },
       {
         "condition": "Chronic Kidney Disease: Pre-Dialysis",
         "note": "A protein-dense food, worth watching against the 0.6-0.8g/kg/day ceiling most pre-dialysis CKD guidance recommends. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
@@ -68040,8 +67985,8 @@
     ],
     "conditionCautions": {
       "hashimotos": {
-        "severity": "yellow",
-        "note": "Olive Oil (Extra Virgin): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+        "severity": "red",
+        "note": "Cumin (cummin) seed, dried, ground: rated Excess Risk for iron (contextual). Eating a lot of this could push the level above a healthy range."
       },
       "rheumatoid_arthritis": {
         "severity": "yellow",
@@ -69094,28 +69039,54 @@
   },
   "curated_side_shrimp_cabbage_carrot_stir_fry": {
     "safeForConditions": [
-      "cardiovascular_disease",
       "celiac",
-      "chronic_kidney_disease",
       "fatty_liver_disease",
       "gout",
       "graves",
-      "hashimotos",
-      "ibd",
       "ibs",
       "lupus",
       "migraine",
       "multiple_sclerosis",
       "pcos",
-      "prostate_health",
-      "psoriasis",
-      "rheumatoid_arthritis",
       "sjogrens",
       "type_1_diabetes",
       "type_2_diabetes"
     ],
-    "conditionCautions": {},
+    "conditionCautions": {
+      "hashimotos": {
+        "severity": "red",
+        "note": "Seeds, sesame seed kernels (toasted): High oxalate load. Boil and discard the cooking water where applicable; pair with a calcium source at the same meal."
+      },
+      "rheumatoid_arthritis": {
+        "severity": "yellow",
+        "note": "Sesame oil: rated Imbalanced for oxidation risk. The ratio being measured skews unfavorably here."
+      },
+      "chronic_kidney_disease": {
+        "severity": "red",
+        "note": "Seeds, sesame seed kernels (toasted): High oxalate load. Boil and discard the cooking water where applicable; pair with a calcium source at the same meal."
+      },
+      "cardiovascular_disease": {
+        "severity": "yellow",
+        "note": "Sesame oil: rated Imbalanced for oxidation risk. The ratio being measured skews unfavorably here."
+      },
+      "prostate_health": {
+        "severity": "yellow",
+        "note": "Seeds, sesame seed kernels (toasted): rated Use Carefully for zinc. This may need portion awareness or a doctor’s guidance."
+      },
+      "psoriasis": {
+        "severity": "yellow",
+        "note": "Sesame oil: rated Imbalanced for oxidation risk. The ratio being measured skews unfavorably here."
+      },
+      "ibd": {
+        "severity": "red",
+        "note": "Seeds, sesame seed kernels (toasted): High oxalate load. Boil and discard the cooking water where applicable; pair with a calcium source at the same meal."
+      }
+    },
     "stageAdvisoryNotes": [
+      {
+        "condition": "Chronic Kidney Disease: Pre-Dialysis",
+        "note": "A protein-dense food, worth watching against the 0.6-0.8g/kg/day ceiling most pre-dialysis CKD guidance recommends. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+      },
       {
         "condition": "Chronic Kidney Disease: On Dialysis",
         "note": "A protein-light food. Dialysis itself removes protein your body now needs replaced, not restricted. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
@@ -69641,7 +69612,6 @@
   },
   "curated_side_turkey_meatballs_tomato_sauce": {
     "safeForConditions": [
-      "celiac",
       "chronic_kidney_disease",
       "fatty_liver_disease",
       "gout",
@@ -69657,53 +69627,53 @@
     "conditionCautions": {
       "hashimotos": {
         "severity": "red",
-        "note": "Oregano: rated Excess Risk for iron (contextual). Eating a lot of this could push the level above a healthy range."
+        "note": "Spices, bay leaf: rated Excess Risk for iron (contextual). Eating a lot of this could push the level above a healthy range."
       },
       "rheumatoid_arthritis": {
-        "severity": "yellow",
-        "note": "Ground Turkey (Raw): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+        "severity": "red",
+        "note": "Bread crumbs, dry, grated, plain: rated High Risk for gluten. A significant, well-documented concern."
       },
       "cardiovascular_disease": {
         "severity": "yellow",
-        "note": "Ground Turkey (Raw): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+        "note": "Olive Oil (Extra Virgin): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       },
       "psoriasis": {
-        "severity": "yellow",
-        "note": "Ground Turkey (Raw): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+        "severity": "red",
+        "note": "Bread crumbs, dry, grated, plain: rated High Risk for gluten. A significant, well-documented concern."
       },
       "multiple_sclerosis": {
         "severity": "yellow",
-        "note": "Ground Turkey (Raw): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+        "note": "Olive Oil (Extra Virgin): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       },
       "lupus": {
         "severity": "yellow",
-        "note": "Ground Turkey (Raw): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+        "note": "Olive Oil (Extra Virgin): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       },
       "sjogrens": {
         "severity": "yellow",
-        "note": "Ground Turkey (Raw): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+        "note": "Olive Oil (Extra Virgin): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       }
     },
     "stageAdvisoryNotes": [
       {
         "condition": "Hashimoto's Thyroiditis: Stage 2: Digging",
-        "note": "Dairy, the other food typically removed alongside gluten at this stage. A nightshade. The staged food guide leaves this one unresolved (anti-inflammatory evidence alongside patient-reported worsening). Worth testing for yourself rather than treating it as a firm rule. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+        "note": "A nightshade. The staged food guide leaves this one unresolved (anti-inflammatory evidence alongside patient-reported worsening). Worth testing for yourself rather than treating it as a firm rule. Contains gluten, one of the first things this stage typically removes. Dairy, the other food typically removed alongside gluten at this stage. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
       },
       {
         "condition": "Hashimoto's Thyroiditis: Stage 3: Gut Repair",
-        "note": "Dairy. If you haven't reintroduced it yet, this is one to test carefully, one food at a time. A nightshade. The staged food guide leaves this one unresolved (anti-inflammatory evidence alongside patient-reported worsening). Worth testing for yourself rather than treating it as a firm rule. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+        "note": "A nightshade. The staged food guide leaves this one unresolved (anti-inflammatory evidence alongside patient-reported worsening). Worth testing for yourself rather than treating it as a firm rule. Contains gluten. If you haven't reintroduced it yet, this is one to watch closely when you do. Dairy. If you haven't reintroduced it yet, this is one to test carefully, one food at a time. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
       },
       {
         "condition": "Hashimoto's Thyroiditis: Stage 4: Rebalancing",
-        "note": "Dairy. The same logic as gluten applies here: a food already tested and tolerated during Gut Repair does not need to keep being avoided at this stage. Still worth avoiding if it was never tested, or caused a reaction. A nightshade. The staged food guide leaves this one unresolved either way. If it hasn't bothered you through reintroduction, this stage's broader focus means it's reasonable to stop treating it as a concern. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+        "note": "A nightshade. The staged food guide leaves this one unresolved either way. If it hasn't bothered you through reintroduction, this stage's broader focus means it's reasonable to stop treating it as a concern. Contains gluten. By this stage, food choices matter less than the broader lifestyle and hormone work ahead of you. If gluten was already reintroduced without a reaction, there is no reason to keep avoiding it here. If it was never tested, or did cause a reaction, it still belongs on the avoid list. Dairy. The same logic as gluten applies here: a food already tested and tolerated during Gut Repair does not need to keep being avoided at this stage. Still worth avoiding if it was never tested, or caused a reaction. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
       },
       {
         "condition": "Hashimoto's Thyroiditis: Stage 5: Maintenance",
-        "note": "Dairy. The same logic as gluten applies here: a food already tested and tolerated during Gut Repair does not need to keep being avoided at this stage. Still worth avoiding if it was never tested, or caused a reaction. A nightshade. The staged food guide leaves this one unresolved either way. If it hasn't bothered you through reintroduction, this stage's broader focus means it's reasonable to stop treating it as a concern. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+        "note": "A nightshade. The staged food guide leaves this one unresolved either way. If it hasn't bothered you through reintroduction, this stage's broader focus means it's reasonable to stop treating it as a concern. Contains gluten. By this stage, food choices matter less than the broader lifestyle and hormone work ahead of you. If gluten was already reintroduced without a reaction, there is no reason to keep avoiding it here. If it was never tested, or did cause a reaction, it still belongs on the avoid list. Dairy. The same logic as gluten applies here: a food already tested and tolerated during Gut Repair does not need to keep being avoided at this stage. Still worth avoiding if it was never tested, or caused a reaction. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
       },
       {
         "condition": "Celiac Disease: Newly Diagnosed / Actively Healing",
-        "note": "Dairy. Secondary lactose intolerance is a well-documented finding at celiac diagnosis. Worth noticing if dairy still bothers you, not a lifelong rule. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+        "note": "Contains gluten. Strict avoidance matters most during this often-long healing window; even small, repeated exposure can keep the gut from healing. Dairy. Secondary lactose intolerance is a well-documented finding at celiac diagnosis. Worth noticing if dairy still bothers you, not a lifelong rule. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
       },
       {
         "condition": "Chronic Kidney Disease: Pre-Dialysis",
@@ -69793,30 +69763,46 @@
       },
       "rheumatoid_arthritis": {
         "severity": "yellow",
-        "note": "Turkey Thigh (Raw): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+        "note": "Turkey, all classes, thigh, meat and skin: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       },
       "cardiovascular_disease": {
         "severity": "yellow",
-        "note": "Turkey Thigh (Raw): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+        "note": "Turkey, all classes, thigh, meat and skin: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       },
       "psoriasis": {
         "severity": "yellow",
-        "note": "Turkey Thigh (Raw): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+        "note": "Turkey, all classes, thigh, meat and skin: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       },
       "multiple_sclerosis": {
         "severity": "yellow",
-        "note": "Turkey Thigh (Raw): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+        "note": "Turkey, all classes, thigh, meat and skin: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       },
       "lupus": {
         "severity": "yellow",
-        "note": "Turkey Thigh (Raw): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+        "note": "Turkey, all classes, thigh, meat and skin: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       },
       "sjogrens": {
         "severity": "yellow",
-        "note": "Turkey Thigh (Raw): rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
+        "note": "Turkey, all classes, thigh, meat and skin: rated Imbalanced for omega-3 vs 6. The ratio being measured skews unfavorably here."
       }
     },
     "stageAdvisoryNotes": [
+      {
+        "condition": "Hashimoto's Thyroiditis: Stage 2: Digging",
+        "note": "A nightshade. The staged food guide leaves this one unresolved (anti-inflammatory evidence alongside patient-reported worsening). Worth testing for yourself rather than treating it as a firm rule. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+      },
+      {
+        "condition": "Hashimoto's Thyroiditis: Stage 3: Gut Repair",
+        "note": "A nightshade. The staged food guide leaves this one unresolved (anti-inflammatory evidence alongside patient-reported worsening). Worth testing for yourself rather than treating it as a firm rule. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+      },
+      {
+        "condition": "Hashimoto's Thyroiditis: Stage 4: Rebalancing",
+        "note": "A nightshade. The staged food guide leaves this one unresolved either way. If it hasn't bothered you through reintroduction, this stage's broader focus means it's reasonable to stop treating it as a concern. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+      },
+      {
+        "condition": "Hashimoto's Thyroiditis: Stage 5: Maintenance",
+        "note": "A nightshade. The staged food guide leaves this one unresolved either way. If it hasn't bothered you through reintroduction, this stage's broader focus means it's reasonable to stop treating it as a concern. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+      },
       {
         "condition": "Chronic Kidney Disease: Pre-Dialysis",
         "note": "A protein-dense food, worth watching against the 0.6-0.8g/kg/day ceiling most pre-dialysis CKD guidance recommends. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
@@ -98746,8 +98732,8 @@
     ],
     "conditionCautions": {
       "hashimotos": {
-        "severity": "red",
-        "note": "Radish, oriental (daikon): rated Goitrogenic (Raw) for goitrogenic load in its raw form. Goitrogens can interfere with thyroid iodine uptake; cooking substantially reduces this for most foods."
+        "severity": "yellow",
+        "note": "Pepper, black, ground: rated Use Carefully for iron (contextual). This may need portion awareness or a doctor’s guidance."
       },
       "ibs": {
         "severity": "yellow",
@@ -98757,19 +98743,19 @@
     "stageAdvisoryNotes": [
       {
         "condition": "Hashimoto's Thyroiditis: Stage 2: Digging",
-        "note": "A nightshade. The staged food guide leaves this one unresolved (anti-inflammatory evidence alongside patient-reported worsening). Worth testing for yourself rather than treating it as a firm rule. A raw goitrogenic (cruciferous) food. The staged food guide flags these specifically raw; cooking largely resolves the concern. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+        "note": "A nightshade. The staged food guide leaves this one unresolved (anti-inflammatory evidence alongside patient-reported worsening). Worth testing for yourself rather than treating it as a firm rule. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
       },
       {
         "condition": "Hashimoto's Thyroiditis: Stage 3: Gut Repair",
-        "note": "A nightshade. The staged food guide leaves this one unresolved (anti-inflammatory evidence alongside patient-reported worsening). Worth testing for yourself rather than treating it as a firm rule. A raw goitrogenic (cruciferous) food. The staged food guide flags these specifically raw; cooking largely resolves the concern. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+        "note": "A nightshade. The staged food guide leaves this one unresolved (anti-inflammatory evidence alongside patient-reported worsening). Worth testing for yourself rather than treating it as a firm rule. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
       },
       {
         "condition": "Hashimoto's Thyroiditis: Stage 4: Rebalancing",
-        "note": "A nightshade. The staged food guide leaves this one unresolved either way. If it hasn't bothered you through reintroduction, this stage's broader focus means it's reasonable to stop treating it as a concern. A raw goitrogenic (cruciferous) food. The staged food guide flags these specifically raw; cooking largely resolves the concern. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+        "note": "A nightshade. The staged food guide leaves this one unresolved either way. If it hasn't bothered you through reintroduction, this stage's broader focus means it's reasonable to stop treating it as a concern. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
       },
       {
         "condition": "Hashimoto's Thyroiditis: Stage 5: Maintenance",
-        "note": "A nightshade. The staged food guide leaves this one unresolved either way. If it hasn't bothered you through reintroduction, this stage's broader focus means it's reasonable to stop treating it as a concern. A raw goitrogenic (cruciferous) food. The staged food guide flags these specifically raw; cooking largely resolves the concern. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
+        "note": "A nightshade. The staged food guide leaves this one unresolved either way. If it hasn't bothered you through reintroduction, this stage's broader focus means it's reasonable to stop treating it as a concern. This is advisory only, based on this recipe's flagged ingredients: nothing here is hidden or blocked."
       },
       {
         "condition": "Irritable Bowel Syndrome: Phase 1: Elimination",

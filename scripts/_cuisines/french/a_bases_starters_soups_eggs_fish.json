@@ -7557,7 +7557,7 @@
       "region": "France",
       "servings": 4,
       "servingSizeUnit": "piece",
-      "flavorProfile": "Mild, sweet trout fried golden in butter under a scatter of toasted almonds and a splash of white wine.",
+      "flavorProfile": "Mild, sweet trout baked in white wine with herbs under slivered almonds, finished with almonds browned in butter.",
       "healthBenefit": "Trout supplies omega-3 fats and protein, and the almonds add vitamin E and magnesium.",
       "ingredients": [
         {
@@ -7566,43 +7566,7 @@
           "quantity": 1000,
           "unit": "g",
           "cutPrep": "4 whole trout of about 250 g, cleaned",
-          "cookingMethod": "Fried",
-          "prepNote": null
-        },
-        {
-          "category": "PantryStaples",
-          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
-          "quantity": 40,
-          "unit": "g",
-          "cutPrep": "for dredging",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Common salt/table salt",
-          "quantity": 6,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": "the source says to taste"
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Pepper, black, ground",
-          "quantity": 0.5,
-          "unit": "tsp",
-          "cutPrep": null,
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Fats",
-          "baseName": "Pure Butter (Unsalted)",
-          "quantity": 60,
-          "unit": "g",
-          "cutPrep": null,
-          "cookingMethod": "Fried",
+          "cookingMethod": "Baked",
           "prepNote": null
         },
         {
@@ -7610,26 +7574,72 @@
           "baseName": "Almonds",
           "quantity": 150,
           "unit": "g",
-          "cutPrep": "slivered",
-          "cookingMethod": "Fried",
+          "cutPrep": "slivered, a third over the fish and two thirds browned in butter",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Fats",
+          "baseName": "Pure Butter (Unsalted)",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Alcohol",
           "baseName": "White Wine",
-          "quantity": 100,
+          "quantity": 300,
           "unit": "ml",
           "cutPrep": "dry",
-          "cookingMethod": "Simmered",
+          "cookingMethod": null,
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "to taste; the source gives no amount"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Pepper, black, ground",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "to taste"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Basil",
+          "quantity": 4,
+          "unit": "g",
+          "cutPrep": "a few leaves",
+          "cookingMethod": null,
+          "prepNote": "or other fresh herbs"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Fresh Thyme",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "a few sprigs",
+          "cookingMethod": null,
           "prepNote": null
         }
       ],
       "instructions": [
-        "Rinse the trout, pat them dry inside and out, season with the salt and pepper and dust them lightly with flour, shaking off the excess.",
-        "Melt half the butter in a large frying pan over medium heat and brown the trout on both sides.",
-        "Add the rest of the butter and the almonds, turn the heat low and cook about 10 minutes, turning the trout once and stirring the almonds so they turn golden without burning. Lift the trout onto warm plates.",
-        "Pour the white wine into the pan and let it reduce for 2 minutes, scraping the pan.",
-        "Spoon the almonds and the pan juices over the trout and serve with steamed potatoes."
+        "Heat the oven to 400°F (200°C).",
+        "Lay the trout in a baking dish and cover them with a third of the almonds, keeping the rest aside.",
+        "Pour the white wine over them, season with salt and pepper and lay the basil and thyme on top.",
+        "Bake for 30 minutes.",
+        "Near the end, melt the butter in a frying pan and brown the remaining almonds in it.",
+        "Pour the cooking juices from the baking dish into the pan, let them bubble for a minute or two, then spoon the almonds and sauce over the trout."
       ],
       "nutritionHighlights": [
         {
@@ -7655,7 +7665,7 @@
           "url": "https://en.wikipedia.org/wiki/Amandine_(culinary_term)"
         }
       ],
-      "curationNote": "Wikibooks, Livre de cuisine: Truite aux amandes for every amount and step; one trout of 200 to 300 g a person, 150 g slivered almonds, butter, white wine, salt and pepper; the pan version flours the trout, fries it in butter with the almonds about 10 minutes over low heat and deglazes with a splash of wine. No lemon or parsley."
+      "curationNote": "Wikibooks, Livre de cuisine: Truite aux amandes, main (oven) version, for every amount and step: one trout of 200 to 300 g a person, 150 g slivered almonds, 10 g butter, 30 cl white wine, salt, pepper, basil and thyme or other herbs, 30 minutes at 200°C, the rest of the almonds browned in butter and deglazed with the cooking juices. Salt, pepper and herbs have no amount in the source."
     },
     {
       "dishRole": "main",

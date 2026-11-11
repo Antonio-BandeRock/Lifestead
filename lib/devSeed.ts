@@ -286,7 +286,7 @@ const BREAKFAST_TEMPLATES: MealTemplate[] = [
     title: 'Breakfast',
     mealType: 'breakfast',
     recipes: [
-      { recipeId: 'curated_ferment_probiotic_yogurt', componentType: 'fermentation' },
+      { recipeId: 'curated_ferment_plain_yogurt', componentType: 'fermentation' },
       { recipeId: 'curated_snack_trail_mix', componentType: 'snack' },
     ],
   },

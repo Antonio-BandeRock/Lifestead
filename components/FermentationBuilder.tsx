@@ -569,7 +569,7 @@ const CURATED_RECIPE_IDS_BY_SUBTYPE: Partial<Record<FermentationSubtypeKey, stri
     'curated_ferment_sobia',
   ],
   fermentedVegetables: ['curated_ferment_sauerkraut'],
-  yogurt: ['curated_ferment_plain_yogurt', 'curated_ferment_probiotic_yogurt'],
+  yogurt: ['curated_ferment_plain_yogurt'],
   syrupsSpoonableTonics: ['curated_ferment_fire_cider', 'curated_ferment_lemon_cheong'],
 };
 

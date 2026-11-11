@@ -365,9 +365,9 @@
   {
     "id": "curated_side_shrimp_cabbage_carrot_stir_fry",
     "builderType": "side",
-    "name": "Shrimp & Cabbage Stir-Fry",
-    "flavorProfile": "Shrimp stir-fried with cabbage, carrot, and fresh ginger in a splash of water, finished with lime.",
-    "healthBenefit": "Shrimp, cabbage, and carrot all check completely clean for Hashimoto's, cooked entirely without any pressed oil.",
+    "name": "Zesty Shrimp and Cabbage Stir-Fry",
+    "flavorProfile": "Shrimp seared in toasted sesame oil, then tossed with cabbage, carrot, garlic and ginger in a coconut aminos, lime and sriracha sauce.",
+    "healthBenefit": "A one-pan dinner for one: the shrimp cooks in about four minutes and the vegetables keep some crunch.",
     "servings": 1,
     "servingSizeAmount": 1,
     "servingSizeUnit": "bowl",
@@ -375,72 +375,129 @@
       {
         "category": "Meat",
         "baseName": "Shrimp Crustaceans",
-        "quantity": 130,
+        "quantity": 227,
         "unit": "g",
-        "cutPrep": null,
-        "cookingMethod": "sauteed",
+        "cutPrep": "peeled and deveined",
+        "cookingMethod": "Seared",
         "prepNote": null
       },
       {
         "category": "Veg",
         "baseName": "Cabbage",
-        "quantity": 70,
+        "quantity": 178,
         "unit": "g",
         "cutPrep": "shredded",
-        "cookingMethod": "sauteed",
+        "cookingMethod": "Stir-fried",
         "prepNote": null
       },
       {
         "category": "Veg",
         "baseName": "Carrot",
-        "quantity": 50,
+        "quantity": 64,
         "unit": "g",
         "cutPrep": "julienned",
-        "cookingMethod": "sauteed",
+        "cookingMethod": "Stir-fried",
+        "prepNote": null
+      },
+      {
+        "category": "Fats",
+        "baseName": "Sesame oil",
+        "quantity": 1,
+        "unit": "tbsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": "toasted"
+      },
+      {
+        "category": "Veg",
+        "baseName": "Garlic",
+        "quantity": 6,
+        "unit": "g",
+        "cutPrep": "minced",
+        "cookingMethod": null,
         "prepNote": null
       },
       {
         "category": "Veg",
         "baseName": "Ginger, peeled, fresh",
-        "quantity": 3,
-        "unit": "g",
+        "quantity": 1,
+        "unit": "tsp",
         "cutPrep": "grated",
         "cookingMethod": null,
         "prepNote": null
       },
       {
-        "category": "Bev",
-        "baseName": "Water, tap",
-        "quantity": 30,
-        "unit": "ml",
+        "notInDatabase": true,
+        "name": "coconut aminos",
+        "contains": "none",
+        "quantity": 2,
+        "unit": "tbsp",
         "cutPrep": null,
-        "cookingMethod": null,
         "prepNote": null
       },
       {
         "category": "Bev",
         "baseName": "Lime",
-        "quantity": 11,
+        "quantity": 15,
         "unit": "g",
         "cutPrep": "freshly squeezed",
         "cookingMethod": null,
-        "prepNote": "juice of a quarter of a lime"
+        "prepNote": null
+      },
+      {
+        "notInDatabase": true,
+        "name": "sriracha",
+        "contains": "none",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "cutPrep": null,
+        "prepNote": null
+      },
+      {
+        "category": "Veg",
+        "baseName": "Onions, spring or scallions (includes tops and bulb)",
+        "quantity": 30,
+        "unit": "g",
+        "cutPrep": "sliced",
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "NutSeed",
+        "baseName": "Seeds, sesame seed kernels (toasted)",
+        "quantity": 1,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
       },
       {
         "category": "Herbs",
-        "baseName": "Common salt/table salt",
-        "quantity": 1.5,
-        "unit": "g",
+        "baseName": "Sea salt",
+        "quantity": 0.25,
+        "unit": "tsp",
+        "cutPrep": null,
+        "cookingMethod": null,
+        "prepNote": null
+      },
+      {
+        "category": "Herbs",
+        "baseName": "Pepper, black, ground",
+        "quantity": 0.25,
+        "unit": "tsp",
         "cutPrep": null,
         "cookingMethod": null,
         "prepNote": null
       }
     ],
     "instructions": [
-      "Heat the water in a wide pan over medium-high heat and add the cabbage, carrot, and ginger.",
-      "Stir-fry for 4-5 minutes, until the vegetables begin to soften, adding a splash more water if the pan gets dry.",
-      "Add the shrimp and cook for 2-3 minutes more, until pink and opaque all the way through.",
-      "Stir in the lime juice and salt just before serving."
+      "Pat the shrimp dry and season them with the salt and pepper.",
+      "Heat the sesame oil in a large skillet or wok over medium-high heat. Sear the shrimp about 2 minutes on each side, until pink, then lift them onto a plate.",
+      "Add the garlic and ginger to the pan and stir for about 30 seconds, until fragrant.",
+      "Add the cabbage and carrot and stir-fry 3 to 4 minutes, until they soften but keep a little crunch.",
+      "Whisk the coconut aminos, lime juice and sriracha together in a small bowl.",
+      "Return the shrimp to the pan, pour in the sauce and toss for about 1 minute, until everything is coated and hot.",
+      "Serve topped with the green onion and sesame seeds."
     ]
   },
   {

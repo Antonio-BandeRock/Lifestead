@@ -88,7 +88,7 @@ const KEPT = [
   ['for the pasta water, lightly', 0], ['for the pasta water, used lightly', 0],
   ['for the cooking water', 0], ['for the blanching water', 0], ['for the fennel water', 0],
   ['for the poaching water', 0], ['in the poaching water', 0], ['for the water', 0],
-  ['about 1 tsp per litre of water', 0], ['for kneading, rinsed off', 0],
+  ['about 1 tsp per litre of water', 0], ['for kneading, rinsed off', 0], ['2 tsp, for the pickle, rinsed off', 0],
   ['part for purging the clams, part for the pasta water', 0],
   ['part for purging the clams, part for the pasta water, lightly', 0],
   ['a little for the sauce, most for the pasta water', 1 / 8],

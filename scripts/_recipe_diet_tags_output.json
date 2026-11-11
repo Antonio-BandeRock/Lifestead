@@ -1658,6 +1658,8 @@
   "curated_de_rindergulasch": [
     "Omnivore",
     "Gluten-Free",
+    "Dairy-Free",
+    "Paleo",
     "High-Protein"
   ],
   "curated_de_rinderrouladen": [
@@ -1980,11 +1982,6 @@
     "Gluten-Free"
   ],
   "curated_ferment_plain_yogurt": [
-    "Vegetarian",
-    "Plant-Based/Flexitarian",
-    "Gluten-Free"
-  ],
-  "curated_ferment_probiotic_yogurt": [
     "Vegetarian",
     "Plant-Based/Flexitarian",
     "Gluten-Free"
@@ -3068,6 +3065,7 @@
   "curated_fr_truite_aux_amandes": [
     "Omnivore",
     "Plant-Based/Flexitarian",
+    "Gluten-Free",
     "High-Protein"
   ],
   "curated_fr_veloute_de_champignons": [
@@ -5941,13 +5939,9 @@
     "AIP"
   ],
   "curated_side_garlic_mashed_cauliflower": [
-    "Vegan",
+    "Vegetarian",
     "Plant-Based/Flexitarian",
-    "Mediterranean",
-    "Gluten-Free",
-    "Dairy-Free",
-    "Paleo",
-    "AIP"
+    "Gluten-Free"
   ],
   "curated_side_garlicky_green_beans": [
     "Vegan",
@@ -6008,7 +6002,6 @@
     "Gluten-Free",
     "Dairy-Free",
     "Paleo",
-    "AIP",
     "High-Protein"
   ],
   "curated_side_lamb_skewers_couscous": [
@@ -6253,7 +6246,6 @@
     "Gluten-Free",
     "Dairy-Free",
     "Paleo",
-    "AIP",
     "High-Protein"
   ],
   "curated_side_shrimp_snow_pea_stir_fry_rice": [
@@ -6339,7 +6331,6 @@
     "Gluten-Free",
     "Dairy-Free",
     "Paleo",
-    "AIP",
     "High-Protein"
   ],
   "curated_side_turkey_wild_rice_cranberries": [

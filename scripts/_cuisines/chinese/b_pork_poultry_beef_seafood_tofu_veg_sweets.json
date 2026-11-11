@@ -818,8 +818,8 @@
       "servings": 3,
       "servingSizeAmount": 1,
       "servingSizeUnit": "plate",
-      "flavorProfile": "Silky shreds of pork with wood ear and carrot in a red sauce that is hot, sweet, sour and garlicky all at once, the classic Sichuan fish-fragrant balance with no fish in it.",
-      "healthBenefit": "Lean tenderloin gives protein with little fat, and the carrot and wood ear add vitamin A and fibre, though the sauce carries a fair amount of sugar and salt.",
+      "flavorProfile": "Silky shreds of pork in a red sauce that is hot, sweet, sour and garlicky all at once, the classic Sichuan fish-fragrant balance with no fish in it.",
+      "healthBenefit": "Lean tenderloin gives protein with little fat, though the sauce carries a fair amount of sugar and salt.",
       "overallTier": "strong",
       "components": [
         {
@@ -860,24 +860,6 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "1 tbsp for the marinade, 1 tbsp for the sauce"
-        },
-        {
-          "category": "Mushroom",
-          "baseName": "Mushrooms, tree ears, Cloud ear, dried",
-          "quantity": 8,
-          "unit": "g",
-          "cutPrep": "soaked and shredded",
-          "cookingMethod": "Stir Fried",
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Carrot",
-          "quantity": 60,
-          "unit": "g",
-          "cutPrep": "cut in thin shreds",
-          "cookingMethod": "Stir Fried",
-          "prepNote": "bamboo shoot is also used"
         },
         {
           "category": "Fats",
@@ -985,17 +967,13 @@
         "For the sauce, stir together 2 tsp light soy sauce, the vinegar, 5 tbsp water, 1 tbsp cornstarch, 2 tbsp sugar and 1/4 tsp salt.",
         "Heat 3 tbsp oil in a wok over high heat, add the pork and stir quickly for 1 to 2 minutes until it turns pale. Push it to one side.",
         "Lower the heat a little, fry the pickled chilies and bean paste for 30 seconds until the oil turns red, then add the garlic and ginger and stir for 20 seconds.",
-        "Add the wood ear and carrot and stir-fry for 1 minute, mix the pork back in, then pour in the sauce.",
+        "Mix the pork back in, then pour in the sauce.",
         "Toss for 30 seconds to 1 minute until the sauce thickens and turns glossy, add the rest of the scallion and serve with rice."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Protein",
           "note": "From the lean pork tenderloin."
-        },
-        {
-          "nutrient": "Vitamin A",
-          "note": "From the carrot."
         }
       ],
       "citations": [
@@ -5452,7 +5430,7 @@
         {
           "category": "Meat",
           "baseName": "Carp",
-          "quantity": 750,
+          "quantity": 907,
           "unit": "g",
           "cutPrep": "whole, cleaned, scored 2 or 3 times on each side",
           "cookingMethod": null,
@@ -5461,25 +5439,25 @@
         {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 1175,
+          "quantity": 1420,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "for poaching; about 100 ml stays in the sauce"
+          "prepNote": "for poaching; about 120 ml (1/2 cup) stays in the sauce"
         },
         {
           "category": "Herbs",
           "baseName": "Ginger root",
-          "quantity": 8,
+          "quantity": 10,
           "unit": "g",
-          "cutPrep": "4 thin slices",
+          "cutPrep": "4 or 5 thin slices",
           "cookingMethod": null,
           "prepNote": null
         },
         {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 41,
+          "quantity": 50,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -5488,7 +5466,7 @@
         {
           "category": "Herbs",
           "baseName": "Vinegar, black rice vinegar",
-          "quantity": 66,
+          "quantity": 79,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
@@ -5497,8 +5475,8 @@
         {
           "category": "Legume",
           "baseName": "Soy sauce made from soy and wheat (shoyu)",
-          "quantity": 25,
-          "unit": "ml",
+          "quantity": 2,
+          "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -5506,8 +5484,8 @@
         {
           "category": "Alcohol",
           "baseName": "Fermented alcoholic beverage, Shaoxing wine",
-          "quantity": 25,
-          "unit": "ml",
+          "quantity": 2,
+          "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "or water"
@@ -5515,8 +5493,8 @@
         {
           "category": "PantryStaples",
           "baseName": "Cornstarch",
-          "quantity": 5,
-          "unit": "tsp",
+          "quantity": 2,
+          "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": null
@@ -5535,7 +5513,7 @@
         "Rinse the fish, pat it dry and cut 2 or 3 shallow slashes into each side.",
         "Heat the water with the ginger in a wide pan to a bare simmer. Slide in the fish and poach it gently for 8 to 10 minutes, until the flesh is just opaque at the thickest part.",
         "Lift the fish onto a warm platter and blot it dry.",
-        "Pour away all but about 100 ml (scant 1/2 cup) of the poaching water and take out the ginger. Add the sugar, black vinegar and soy sauce and bring to a boil, stirring until the sugar dissolves.",
+        "Pour away all but about 120 ml (1/2 cup) of the poaching water and take out the ginger. Add the sugar, black vinegar and soy sauce and bring to a boil, stirring until the sugar dissolves.",
         "Stir the cornstarch into the Shaoxing wine, then whisk it into the sauce a little at a time until it is glossy and lightly thick. Taste and add the salt if it needs it.",
         "Pour the sauce over the fish and serve straight away with rice."
       ],
@@ -5563,7 +5541,7 @@
           "url": "https://en.wikipedia.org/wiki/West_Lake_Fish_in_Vinegar_Gravy"
         }
       ],
-      "curationNote": "Whats4eats, Xi Hu Cu Yu for every amount and step, scaled from its 2 lb (900 g) fish for 2 to our 750 g fish: 1 1/2 quarts water, 4 to 5 ginger slices, 1/4 cup sugar, 1/3 cup black vinegar, 2 tbsp soy sauce, 2 tbsp rice wine or water, 2 tbsp cornstarch, salt to taste. It still serves 2."
+      "curationNote": "Whats4eats, Xi Hu Cu Yu for every amount and step: a 2 lb (900 g) fish for 2, 1 1/2 quarts water, 4 to 5 ginger slices, 1/4 cup sugar, 1/3 cup black vinegar, 2 tbsp soy sauce, 2 tbsp rice wine or water, 2 tbsp cornstarch, salt to taste."
     },
     {
       "id": "curated_cn_suan_cai_yu",

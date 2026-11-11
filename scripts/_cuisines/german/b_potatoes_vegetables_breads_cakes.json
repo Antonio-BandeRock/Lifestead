@@ -2730,33 +2730,45 @@
       "dishRole": "side",
       "dishGroup": "Vegetables & Salads",
       "region": "Saxony (Leipzig)",
-      "servings": 6,
+      "servings": 4,
       "servingSizeAmount": 1,
       "servingSizeUnit": "serving",
-      "flavorProfile": "Young spring vegetables, each cooked to its point, with morels and crayfish tails in a rich butter and cream sauce.",
-      "healthBenefit": "A wide mix of vegetables brings fibre, vitamin A from carrots, vitamin C and folate, and the crayfish adds lean protein.",
+      "flavorProfile": "Spring vegetables, each cooked to its point, with morels and crab or crayfish in a rich butter and cream sauce.",
+      "healthBenefit": "A wide mix of vegetables brings fibre, vitamin A from carrots, vitamin C and folate, and the crab or crayfish adds lean protein.",
       "overallTier": "strong",
-      "components": [
-        {
-          "recipeId": "curated_de_base_gemusebruhe",
-          "servings": 1.5,
-          "note": "about 360 ml"
-        }
-      ],
+      "components": [],
       "ingredients": [
         {
           "category": "Veg",
-          "baseName": "Carrot",
-          "quantity": 250,
+          "baseName": "Asparagus",
+          "quantity": 240,
           "unit": "g",
-          "cutPrep": "young, cut in batons",
+          "cutPrep": "white, peeled, left whole",
           "cookingMethod": "Boiled",
-          "prepNote": null
+          "prepNote": "4 spears"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cauliflower",
+          "quantity": 400,
+          "unit": "g",
+          "cutPrep": "in florets",
+          "cookingMethod": "Boiled",
+          "prepNote": "1 small cauliflower"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Green beans",
+          "cutPrep": "trimmed",
+          "cookingMethod": null,
+          "prepNote": null,
+          "quantity": 250,
+          "unit": "g"
         },
         {
           "category": "Veg",
           "baseName": "Pea, green, fresh",
-          "quantity": 200,
+          "quantity": 250,
           "unit": "g",
           "cutPrep": "shelled",
           "cookingMethod": "Boiled",
@@ -2764,37 +2776,19 @@
         },
         {
           "category": "Veg",
-          "baseName": "Asparagus",
+          "baseName": "Carrot",
           "quantity": 250,
           "unit": "g",
-          "cutPrep": "white, peeled, in 4 cm pieces",
-          "cookingMethod": "Boiled",
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Kohlrabi",
-          "quantity": 250,
-          "unit": "g",
-          "cutPrep": "peeled, in batons",
-          "cookingMethod": "Boiled",
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Cauliflower",
-          "quantity": 250,
-          "unit": "g",
-          "cutPrep": "small florets",
+          "cutPrep": "cut in batons",
           "cookingMethod": "Boiled",
           "prepNote": null
         },
         {
           "category": "Mushroom",
           "baseName": "Morel",
-          "quantity": 60,
+          "quantity": 250,
           "unit": "g",
-          "cutPrep": "fresh, cleaned and halved",
+          "cutPrep": "fresh, cleaned",
           "cookingMethod": "Sauteed",
           "prepNote": null
         },
@@ -2805,21 +2799,30 @@
           "unit": "g",
           "cutPrep": "cooked tails, shelled",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "1 tin of crab meat or 1 pack of crayfish tails"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "for cooking the vegetables, kept as the stock for the sauce",
+          "quantity": 500,
+          "unit": "ml"
         },
         {
           "category": "Fats",
           "baseName": "Pure Butter (Unsalted)",
-          "quantity": 150,
+          "quantity": 100,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "75 g for the roux, 25 g to finish"
         },
         {
           "category": "PantryStaples",
           "baseName": "Wheat flour, Type 405",
-          "quantity": 60,
+          "quantity": 40,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
@@ -2828,11 +2831,11 @@
         {
           "category": "Dairy",
           "baseName": "Heavy Whipping Cream",
-          "quantity": 70,
+          "quantity": 45,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "3 tbsp"
         },
         {
           "category": "Herbs",
@@ -2868,15 +2871,15 @@
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "a small pinch in the stock"
+          "prepNote": "a small pinch in the cooking water"
         }
       ],
       "instructions": [
-        "Add a small pinch of sugar to the simmering stock and cook each vegetable separately in it until just tender: asparagus 8 to 10 minutes, carrots and kohlrabi 6 to 8, cauliflower 5 to 7, peas 3 to 4. Lift each out and keep it warm, and keep the stock.",
-        "Melt 40 g of the butter in a small pan and fry the morels for 3 to 4 minutes.",
-        "Melt 75 g of the butter in a pot, stir in the flour and cook 1 minute. Whisk in 750 ml of the stock and simmer 5 minutes, then add the cream and simmer 2 minutes more.",
-        "Season the sauce with nutmeg, salt and pepper, stir in the last of the butter, warm the crayfish tails in it for 1 to 2 minutes and fold in the vegetables and morels.",
-        "Serve at once."
+        "Clean and cut the vegetables, leaving the asparagus spears whole and breaking the cauliflower into florets.",
+        "Cook each vegetable separately in a little water seasoned with salt, pepper, nutmeg and a small pinch of sugar, the cauliflower in salted water only, until just tender. Lift each out and keep it warm, and pour the cooking water together as the stock.",
+        "Melt 75 g of the butter, stir in the flour and let it colour lightly. Whisk in 500 ml of the stock, add the crab or crayfish and simmer briefly.",
+        "Finish the sauce with the cream and the last 25 g of butter, and season with salt, pepper and nutmeg.",
+        "Divide the vegetables among 4 plates and pour the sauce with the crab or crayfish over them. Boiled potatoes go with it."
       ],
       "nutritionHighlights": [
         {
@@ -2885,11 +2888,11 @@
         },
         {
           "nutrient": "Fibre",
-          "note": "From the peas, cauliflower and kohlrabi."
+          "note": "From the peas, beans and cauliflower."
         },
         {
           "nutrient": "Protein",
-          "note": "From the crayfish and peas."
+          "note": "From the crab or crayfish and peas."
         }
       ],
       "citations": [
@@ -2902,7 +2905,7 @@
           "url": "https://de.wikipedia.org/wiki/Leipziger_Allerlei"
         }
       ],
-      "curationNote": "Berliner Kurier, Leipziger Allerlei mit Spargel for every amount and step; serves 4, scaled to our 6; vegetables kept as ours with kohlrabi from Wikipedia."
+      "curationNote": "Berliner Kurier, Leipziger Allerlei mit Spargel for every amount and step; serves 4."
     },
     {
       "id": "curated_de_rote_bete_salat",

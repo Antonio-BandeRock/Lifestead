@@ -223,7 +223,7 @@ const BREAKFASTS: [string, RecipeRef[]][] = [
   ['Green smoothie and oat cookies', [['curated_smoothie_green_glow', 'smoothie'], ['curated_baked_banana_oat_cookies', 'bakedGoods']]],
   ['Potatoes, golden milk and yogurt', [['curated_side_herb_roasted_potatoes', 'side'], ['curated_bev_golden_milk', 'beverage'], ['curated_ferment_plain_yogurt', 'fermentation']]],
   ['Berry smoothie and a biscuit', [['curated_smoothie_berry_antioxidant', 'smoothie'], ['curated_baked_buttermilk_biscuits', 'bakedGoods']]],
-  ['Yogurt and trail mix', [['curated_ferment_probiotic_yogurt', 'fermentation'], ['curated_snack_trail_mix', 'snack']]],
+  ['Yogurt and trail mix', [['curated_ferment_plain_yogurt', 'fermentation'], ['curated_snack_trail_mix', 'snack']]],
   ['Iron smoothie, toast and tonic', [['curated_smoothie_iron_vitamin_c', 'smoothie'], ['curated_baked_whole_wheat_bread', 'bakedGoods'], ['curated_bev_ginger_turmeric_tonic', 'beverage']]],
 ];
 const LUNCHES: [string, RecipeRef[]][] = [

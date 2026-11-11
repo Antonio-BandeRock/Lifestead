@@ -41,6 +41,15 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.86.3',
+    date: '2026-11-11',
+    changes: [
+      "Older home recipes were checked against the recipes they came from, and their amounts and seasonings now match. Where a recipe gives no amount for salt, it now says to taste.",
+      "Truite aux amandes now follows its oven recipe, salade niçoise follows a free recipe with no lettuce or vinegar, and West Lake fish in vinegar sauce uses its recipe's full amounts.",
+      "Spoon amounts of fresh sage, rosemary, chives, orange peel, oats, toasted sesame and mustard now use the weight USDA measured for them.",
+    ],
+  },
+  {
     version: '1.0.86.2',
     date: '2026-11-11',
     changes: [

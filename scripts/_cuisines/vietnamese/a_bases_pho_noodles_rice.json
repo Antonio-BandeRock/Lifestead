@@ -4442,44 +4442,25 @@
       "servings": 4,
       "servingSizeAmount": 1,
       "servingSizeUnit": "bowl",
-      "flavorProfile": "Smoky, caramelized pork patties and belly slices bobbing in a warm, sweet-sour fish sauce broth, dunked with cool vermicelli and a bundle of fresh herbs.",
-      "healthBenefit": "Protein from the grilled pork with lots of raw lettuce and herbs; the pork belly and sweet sauce make it a rich, salty treat.",
+      "flavorProfile": "Smoky, caramelized pork patties in a sweet-sour fish sauce dip with green papaya pickle, eaten with cool vermicelli and a platter of fresh herbs.",
+      "healthBenefit": "Protein from the grilled pork with lots of raw lettuce and herbs; the fatty pork and sweet sauce make it a rich, salty treat.",
       "overallTier": "strong",
       "components": [
         {
           "recipeId": "curated_vn_base_thinh",
           "servings": 1,
-          "note": "in the patties"
-        },
-        {
-          "recipeId": "curated_vn_base_nuoc_cham",
-          "servings": 16,
-          "note": "thinned with warm water into the dipping broth"
-        },
-        {
-          "recipeId": "curated_vn_base_do_chua",
-          "servings": 4,
-          "note": "served in the dipping broth"
+          "note": "1 tbsp, in the patties"
         }
       ],
       "ingredients": [
         {
           "category": "Meat",
           "baseName": "Ground Pork (Raw)",
-          "quantity": 340,
+          "quantity": 680,
           "unit": "g",
-          "cutPrep": "fatty, for the patties",
+          "cutPrep": "at least 20% fat",
           "cookingMethod": "Grilled",
-          "prepNote": null
-        },
-        {
-          "category": "Meat",
-          "baseName": "Gris sidfläsk bit rå m. svål",
-          "quantity": 340,
-          "unit": "g",
-          "cutPrep": "sliced thin",
-          "cookingMethod": "Grilled",
-          "prepNote": null
+          "prepNote": "1½ lb"
         },
         {
           "category": "Herbs",
@@ -4488,7 +4469,7 @@
           "unit": "tbsp",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "for the patties"
         },
         {
           "category": "Herbs",
@@ -4502,119 +4483,11 @@
         {
           "category": "Sweets",
           "baseName": "Brown Sugar (Commercial)",
-          "quantity": 40,
+          "quantity": 41,
           "unit": "g",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Lemon grass (citronella)",
-          "quantity": 40,
-          "unit": "g",
-          "cutPrep": "minced, about 1/4 cup",
-          "cookingMethod": null,
-          "prepNote": "2 each at 20 g per each"
-        },
-        {
-          "category": "Veg",
-          "baseName": "Garlic",
-          "quantity": 12,
-          "unit": "g",
-          "cutPrep": "minced",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Shallot",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": "minced",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Bev",
-          "baseName": "Water, tap",
-          "quantity": 240,
-          "unit": "ml",
-          "cutPrep": "warm",
-          "cookingMethod": null,
-          "prepNote": "thins the nước chấm into a dipping broth"
-        },
-        {
-          "category": "Veg",
-          "baseName": "Garlic",
-          "quantity": 6,
-          "unit": "g",
-          "cutPrep": "sliced, for the broth",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Red Chilli (Chili)",
-          "quantity": 2,
-          "unit": "g",
-          "cutPrep": "sliced, for the broth",
-          "cookingMethod": null,
-          "prepNote": "2 bird's eye chilies"
-        },
-        {
-          "category": "PastaNoodles",
-          "baseName": "Pasta, rice noodles, dry",
-          "quantity": 400,
-          "unit": "g",
-          "cutPrep": "thin vermicelli",
-          "cookingMethod": "Boiled",
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Lettuce, green leaf",
-          "quantity": 200,
-          "unit": "g",
-          "cutPrep": "leaves",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Perilla, \"Shiso\", leaves",
-          "quantity": 15,
-          "unit": "g",
-          "cutPrep": "sprigs",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Spices, spearmint, fresh",
-          "quantity": 15,
-          "unit": "g",
-          "cutPrep": "sprigs",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Veg",
-          "baseName": "Coriander (cilantro) leaves",
-          "quantity": 10,
-          "unit": "g",
-          "cutPrep": "sprigs",
-          "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "notInDatabase": true,
-          "name": "Vietnamese balm (kinh giới)",
-          "contains": "none",
-          "quantity": 15,
-          "unit": "g",
-          "cutPrep": "sprigs",
-          "prepNote": null
+          "prepNote": "3 tbsp"
         },
         {
           "category": "Herbs",
@@ -4626,6 +4499,42 @@
           "prepNote": null
         },
         {
+          "category": "Herbs",
+          "baseName": "Monosodium glutamate",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "optional",
+          "quantity": 0.5,
+          "unit": "tsp"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lemon grass (citronella)",
+          "quantity": 25,
+          "unit": "g",
+          "cutPrep": "minced",
+          "cookingMethod": null,
+          "prepNote": "¼ cup"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 12,
+          "unit": "g",
+          "cutPrep": "finely minced",
+          "cookingMethod": null,
+          "prepNote": "4 cloves, for the patties"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Shallot",
+          "quantity": 30,
+          "unit": "g",
+          "cutPrep": "finely minced",
+          "cookingMethod": null,
+          "prepNote": "1 small shallot"
+        },
+        {
           "category": "Fats",
           "baseName": "Rapsolja",
           "quantity": 2,
@@ -4633,19 +4542,182 @@
           "cutPrep": null,
           "cookingMethod": null,
           "prepNote": "for oiling your hands"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "cutPrep": "hot",
+          "cookingMethod": null,
+          "prepNote": "1 cup, for the dipping sauce",
+          "quantity": 240,
+          "unit": "ml"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "¾ cup, for the dipping sauce",
+          "quantity": 150,
+          "unit": "g"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Seasoning sauce, Nam pla (fish sauce)",
+          "quantity": 180,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "¾ cup, for the dipping sauce"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Limes, juice, fresh",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "3 tbsp, 1 lime",
+          "quantity": 45,
+          "unit": "ml"
+        },
+        {
+          "notInDatabase": true,
+          "name": "coconut soda",
+          "contains": "none",
+          "quantity": 480,
+          "unit": "ml",
+          "cutPrep": null,
+          "prepNote": "2 cups, for the dipping sauce"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 18,
+          "unit": "g",
+          "cutPrep": "finely minced",
+          "cookingMethod": null,
+          "prepNote": "6 cloves, for the dipping sauce"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Red Chilli (Chili)",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": "2 Thai chilies"
+        },
+        {
+          "category": "Fruit",
+          "baseName": "Papaya, unripe",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": "2 cups, for the pickle",
+          "quantity": 280,
+          "unit": "g"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2 tsp, for the pickle, rinsed off",
+          "quantity": 12,
+          "unit": "g"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tbsp, for the pickle",
+          "quantity": 12.5,
+          "unit": "g"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Distilled Vinegar (White)",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "2 tbsp, for the pickle",
+          "quantity": 30,
+          "unit": "ml"
+        },
+        {
+          "category": "PastaNoodles",
+          "baseName": "Pasta, rice noodles, dry",
+          "quantity": 397,
+          "unit": "g",
+          "cutPrep": "thin vermicelli",
+          "cookingMethod": "Boiled",
+          "prepNote": "14 oz"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Lettuce, green leaf",
+          "quantity": 200,
+          "unit": "g",
+          "cutPrep": "leaves",
+          "cookingMethod": null,
+          "prepNote": "the source gives no amount"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Perilla, \"Shiso\", leaves",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "cookingMethod": null,
+          "prepNote": "the source gives no amount"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, spearmint, fresh",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "cookingMethod": null,
+          "prepNote": "the source gives no amount"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Coriander (cilantro) leaves",
+          "quantity": 10,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "cookingMethod": null,
+          "prepNote": "the source gives no amount"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Cucumber",
+          "cutPrep": "sliced",
+          "cookingMethod": null,
+          "prepNote": "the source gives no amount",
+          "quantity": 150,
+          "unit": "g"
+        },
+        {
+          "notInDatabase": true,
+          "name": "Vietnamese balm (kinh giới)",
+          "contains": "none",
+          "quantity": 15,
+          "unit": "g",
+          "cutPrep": "sprigs",
+          "prepNote": "the source names Vietnamese herbs without listing them"
         }
       ],
       "instructions": [
-        "Mix the fish sauce, oyster sauce, brown sugar, pepper, lemongrass, garlic and shallot. Divide it between the ground pork (with the thính) and the sliced belly and marinate at least 1 hour, or overnight.",
-        "Oil your hands and shape the ground pork into small flat patties. Grill patties and belly slices over hot charcoal, or under a broiler, for 3 to 5 minutes a side, until charred at the edges and cooked through.",
-        "Stir the nước chấm with the warm water, sliced garlic and chile to make a light dipping broth, and add the pickles.",
-        "Cook the noodles as the package says, rinse and drain, and let them sit to firm up a little.",
-        "Drop the hot pork into individual bowls of dipping broth. Serve with noodles and the herb basket on the side; each bite is noodles and herbs dipped into the broth with the pork."
+        "Mix the ground pork with the fish sauce, oyster sauce, brown sugar, pepper, roasted rice powder, MSG if using, lemongrass, garlic and shallot.",
+        "Oil your hands and shape the mixture into 32 small patties. Grill them over charcoal about 8 minutes a side, or pan-fry or air-fry them, until lightly charred.",
+        "For the pickle, toss the papaya with the salt and leave 30 minutes, then rinse, squeeze dry and mix with the sugar and vinegar.",
+        "For the dipping sauce, dissolve the sugar in the hot water, then add the fish sauce, lime juice, coconut soda, garlic and chilies.",
+        "Cook the noodles as the package says, rinse and drain.",
+        "Serve the patties and pickled papaya in small bowls of the sauce, with the noodles, lettuce, cucumber and herbs on a platter on the side."
       ],
       "nutritionHighlights": [
         {
           "nutrient": "Protein",
-          "note": "From the ground pork and pork belly."
+          "note": "From the ground pork."
         },
         {
           "nutrient": "Vitamin K",
@@ -4662,7 +4734,7 @@
           "url": "https://www.vietworldkitchen.com/blog/2025/05/vietnamese-bun-rice-noodle-salad-basics.html"
         }
       ],
-      "curationNote": "Vicky Pham, Bún Chả Hà Nội for every amount and step; serves 4: 1 1/2 lb fatty ground pork, 2 tbsp fish sauce, 2 tbsp oyster sauce, 3 tbsp brown sugar, 1/2 tsp pepper, 1 tbsp rice powder, 1/4 cup lemongrass, 4 garlic, 1 shallot, 2 tsp oil for the hands, 14 oz vermicelli; dipping broth of hot water, sugar, fish sauce, lime, coconut soda, garlic and chili."
+      "curationNote": "Vicky Pham, Bún Chả Hà Nội for every amount and step: all ground pork, her dipping sauce and green papaya pickle; serves 4."
     },
     {
       "id": "curated_vn_bun_thit_nuong",

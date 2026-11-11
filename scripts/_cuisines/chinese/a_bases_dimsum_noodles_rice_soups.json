@@ -2429,11 +2429,6 @@
       "overallTier": "strong",
       "components": [
         {
-          "recipeId": "curated_cn_base_bao_dough",
-          "servings": 10,
-          "note": "the whole batch"
-        },
-        {
           "recipeId": "curated_cn_base_char_siu",
           "servings": 2.5,
           "note": "diced"
@@ -2446,22 +2441,60 @@
       ],
       "ingredients": [
         {
+          "category": "PantryStaples",
+          "baseName": "Baker's yeast",
+          "quantity": 3,
+          "unit": "g",
+          "cutPrep": "",
+          "prepNote": "active dry, 1 tsp, for the dough"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 180,
+          "unit": "ml",
+          "cutPrep": "warm",
+          "prepNote": "¾ cup, for the dough"
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 250,
+          "unit": "g",
+          "cutPrep": "",
+          "prepNote": "2 cups, for the dough"
+        },
+        {
+          "category": "PantryStaples",
+          "baseName": "Cornstarch",
+          "quantity": 128,
+          "unit": "g",
+          "cutPrep": "",
+          "prepNote": "1 cup, for the dough"
+        },
+        {
           "category": "Sweets",
           "baseName": "Sugar (Cane / Granulated)",
-          "quantity": 54,
+          "quantity": 62,
           "unit": "g",
-          "cutPrep": "for the dough, on top of the sugar in the bao dough",
-          "cookingMethod": null,
-          "prepNote": null
+          "cutPrep": "",
+          "prepNote": "5 tbsp, for the dough"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 60,
+          "unit": "ml",
+          "cutPrep": "",
+          "prepNote": "¼ cup, for the dough"
         },
         {
           "category": "PantryStaples",
           "baseName": "Baking powder",
-          "quantity": 2,
+          "quantity": 10,
           "unit": "g",
-          "cutPrep": "extra, about 1 tsp, for the dough",
-          "cookingMethod": null,
-          "prepNote": null
+          "cutPrep": "",
+          "prepNote": "2½ tsp, for the dough"
         },
         {
           "category": "Fats",
@@ -2470,7 +2503,7 @@
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "for the filling"
         },
         {
           "category": "Veg",
@@ -2537,11 +2570,12 @@
         }
       ],
       "instructions": [
-        "Make the bao dough with the extra sugar and baking powder kneaded in, and let it rise until doubled, 1 1/2 to 2 hours.",
+        "Dissolve the yeast in the warm water. Mix the flour, cornstarch and sugar in a bowl, add the yeast water and the oil, and knead into a smooth ball. Cover and rest 2 hours.",
         "Fry the shallot in the oil 1 to 2 minutes, then add the sugar, light and dark soy, oyster sauce and sesame oil.",
         "Whisk the flour into the stock, pour it in and stir until very thick, about 1 minute. Stir in the diced char siu and cool the filling completely.",
-        "Divide the dough into 10 pieces, roll each into a 10 cm round, and pleat it closed around a heaped tablespoon of filling.",
-        "Set each bun on a square of parchment and rest 15 minutes, then steam over high heat 12 to 15 minutes, until risen and split on top."
+        "Knead the baking powder into the rested dough and rest it 15 minutes more.",
+        "Divide the dough into 10 pieces, roll each into an 11 cm (4½ inch) round, and pleat it closed around a heaped tablespoon of filling.",
+        "Set each bun on a square of parchment and rest 15 minutes, then steam over high heat 12 minutes, until risen and split on top."
       ],
       "nutritionHighlights": [
         {
@@ -2704,37 +2738,48 @@
       "builderType": "handheld",
       "dishGroup": "Dim Sum & Dumplings",
       "region": "Shanghainese (Jiangnan)",
-      "servings": 5,
-      "servingSizeAmount": 8,
+      "servings": 6,
+      "servingSizeAmount": 3,
       "servingSizeUnit": "dumpling",
       "flavorProfile": "Delicate, thin pleated skins that burst with hot, rich pork broth around a tender, gingery meatball, eaten with black vinegar and ginger.",
       "healthBenefit": "Pork and the gelatin-rich aspic bring protein, though the filling is fatty, so these are rich.",
       "overallTier": "strong",
-      "components": [
-        {
-          "recipeId": "curated_cn_base_jiaozi_wrappers",
-          "servings": 40,
-          "note": "rolled extra thin, about 8 cm"
-        }
-      ],
+      "components": [],
       "ingredients": [
+        {
+          "category": "PantryStaples",
+          "baseName": "Wheat flour, white, all-purpose, enriched, unbleached",
+          "quantity": 130,
+          "unit": "g",
+          "cutPrep": null,
+          "prepNote": "for the dough"
+        },
         {
           "category": "Meat",
           "baseName": "Gris svål rå",
-          "quantity": 250,
+          "quantity": 225,
           "unit": "g",
           "cutPrep": "blanched and scraped clean",
           "cookingMethod": "Simmered",
           "prepNote": null
         },
         {
+          "category": "Meat",
+          "baseName": "Pork bonemeat",
+          "quantity": 450,
+          "unit": "g",
+          "cutPrep": "pork neck bones, blanched",
+          "cookingMethod": "Simmered",
+          "prepNote": "for the aspic, strained out"
+        },
+        {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 995,
+          "quantity": 1085,
           "unit": "ml",
-          "cutPrep": "950 ml for the aspic, 45 ml for the filling",
+          "cutPrep": "",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "950 ml for the aspic, 90 ml warm for the dough, 45 ml for the filling"
         },
         {
           "category": "Herbs",
@@ -2828,10 +2873,12 @@
         }
       ],
       "instructions": [
-        "Simmer the pork skin with 950 ml of the water, the ginger slices, the scallion and 1 tbsp Shaoxing wine for 2 to 3 hours, until reduced by about half.",
+        "Simmer the pork skin and neck bones with 950 ml of the water, the ginger slices, the scallion and 1 tbsp Shaoxing wine for 2 to 3 hours, until reduced by about half.",
         "Strain it, pour it into a dish, and chill 3 to 4 hours or overnight until set firm. Dice the aspic finely.",
-        "Mix the ground pork with the minced ginger, soy sauce, sugar, salt, sesame oil, white pepper, the rest of the Shaoxing and the remaining 45 ml water, stirring one way until sticky. Fold in about 300 g of the aspic.",
-        "Set a heaped teaspoon of filling on each thin wrapper and pleat it closed with 16 to 18 folds, twisting the top shut.",
+        "Mix the flour with 90 ml warm water into a smooth dough, knead 5 minutes, cover and rest 30 minutes.",
+        "Mix the ground pork with the minced ginger, soy sauce, sugar, salt, sesame oil, white pepper, the rest of the Shaoxing and the remaining 45 ml water, stirring one way until sticky. Fold in a heaping cup of the aspic.",
+        "Roll the dough into a rope, cut it into 18 to 20 pieces of about 11 g, and roll each into a thin 8 cm round.",
+        "Set about a tablespoon of filling on each wrapper and pleat it closed, twisting the top shut.",
         "Steam on parchment or napa leaves over boiling water 8 to 10 minutes.",
         "Serve at once with the black vinegar and the thin strips of fresh ginger. Bite a small hole and sip the soup first."
       ],
@@ -2855,7 +2902,7 @@
           "url": "https://en.wikipedia.org/wiki/Xiaolongbao"
         }
       ],
-      "curationNote": "The Woks of Life, Steamed Shanghai Soup Dumplings for every amount and step; makes 18 to 20 from 450 g pork; ours spreads the same filling over 40 smaller dumplings."
+      "curationNote": "The Woks of Life, Steamed Shanghai Soup Dumplings for every amount and step: 18 to 20 dumplings, serves 6."
     },
     {
       "id": "curated_cn_hong_you_chao_shou",
@@ -6312,48 +6359,52 @@
       "servings": 6,
       "servingSizeAmount": 1,
       "servingSizeUnit": "bowl",
-      "flavorProfile": "A clear, fragrant spiced beef broth with springy hand-pulled noodles, tender beef, white radish, red chili oil and green herbs.",
+      "flavorProfile": "A clear, fragrant spiced beef broth with chewy wheat noodles, tender beef, white radish, red chili oil and green herbs.",
       "healthBenefit": "Beef brings protein and iron and the broth is light, while daikon adds a little vitamin C.",
       "overallTier": "strong",
       "components": [
         {
-          "recipeId": "curated_cn_base_hand_pulled_noodle_dough",
-          "servings": 6,
-          "note": "1 1/2 batches, pulled thin"
-        },
-        {
-          "recipeId": "curated_cn_base_hong_you",
-          "servings": 6,
-          "note": "to finish"
+          "recipeId": "curated_cn_base_qing_tang",
+          "servings": 4,
+          "note": "4 cups"
         }
       ],
       "ingredients": [
         {
           "category": "Meat",
           "baseName": "Beef Hind Shank / Shin (Raw)",
-          "quantity": 900,
+          "quantity": 1000,
           "unit": "g",
           "cutPrep": "in one piece",
           "cookingMethod": "Simmered",
           "prepNote": null
         },
         {
+          "category": "Meat",
+          "baseName": "Beef bonemeat",
+          "quantity": 1814,
+          "unit": "g",
+          "cutPrep": "beef or pork soup bones",
+          "cookingMethod": "Roasted",
+          "prepNote": "4 lb, strained out of the broth"
+        },
+        {
+          "category": "Meat",
+          "baseName": "Chicken, roasting",
+          "quantity": 1100,
+          "unit": "g",
+          "cutPrep": "half a roasting chicken",
+          "cookingMethod": "Simmered",
+          "prepNote": "about 1.1 kg, the source gives no weight; lifted out of the broth"
+        },
+        {
           "category": "Bev",
           "baseName": "Water, tap",
-          "quantity": 4000,
+          "quantity": 2366,
           "unit": "ml",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": null
-        },
-        {
-          "category": "Herbs",
-          "baseName": "Ginger root",
-          "quantity": 30,
-          "unit": "g",
-          "cutPrep": "sliced",
-          "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "10 cups"
         },
         {
           "category": "Herbs",
@@ -6416,7 +6467,7 @@
           "unit": "g",
           "cutPrep": "to taste",
           "cookingMethod": null,
-          "prepNote": null
+          "prepNote": "about 1 tbsp, to taste"
         },
         {
           "category": "Herbs",
@@ -6489,14 +6540,97 @@
           "unit": "g",
           "cutPrep": "6 dried slices",
           "prepNote": "also sold as kencur"
+        },
+        {
+          "notInDatabase": true,
+          "name": "licorice root",
+          "contains": "none",
+          "quantity": 5,
+          "unit": "each",
+          "cutPrep": "slices",
+          "prepNote": "optional, in the spice bag"
+        },
+        {
+          "category": "PastaNoodles",
+          "baseName": "Noodle, wheat, fresh, soaked, drained",
+          "quantity": 454,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": "Boiled",
+          "prepNote": "1 lb fresh or dried white wheat noodles"
+        },
+        {
+          "category": "Fats",
+          "baseName": "Rapsolja",
+          "quantity": 180,
+          "unit": "ml",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "¾ cup, for the chili oil"
+        },
+        {
+          "notInDatabase": true,
+          "name": "star anise",
+          "contains": "none",
+          "quantity": 2,
+          "unit": "each",
+          "cutPrep": null,
+          "prepNote": "for the chili oil"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, cinnamon, ground",
+          "quantity": 1.5,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "half a small cinnamon stick, for the chili oil"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spices, \"Sansho\" (Japanese pepper), ground",
+          "quantity": 0.85,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "½ tsp, for the chili oil; in place of Sichuan peppercorns, which the database does not hold"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Spice, red hot pepper, ground",
+          "quantity": 16,
+          "unit": "g",
+          "cutPrep": "crushed red pepper flakes",
+          "cookingMethod": null,
+          "prepNote": "3 tbsp, for the chili oil"
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Common salt/table salt",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "1 tsp, for the chili oil"
+        },
+        {
+          "category": "Sweets",
+          "baseName": "Sugar (Cane / Granulated)",
+          "quantity": 1,
+          "unit": "g",
+          "cutPrep": null,
+          "cookingMethod": null,
+          "prepNote": "¼ tsp, for the chili oil"
         }
       ],
       "instructions": [
-        "Soak the beef in cold water 1 hour, then cover with fresh water, bring to a boil and boil 2 minutes. Drain and rinse.",
-        "Tie the Sichuan peppercorns, star anise, cinnamon, fennel, bay leaf, cardamom, white peppercorns, cloves, cumin, dried peel and sand ginger in muslin. Put the beef in a pot with 4 litres of water, the ginger and the spice bag and bring to a bare simmer. Skim well.",
-        "Simmer gently, uncovered, 2 to 3 hours, until the beef is tender. Lift it out, cool and slice it thin; strain the broth.",
-        "Season the broth with the salt and simmer the daikon in it 10 to 15 minutes until translucent.",
-        "Pull the noodles and boil them 1 to 3 minutes. Ladle the clear broth and radish over them in bowls, and top with beef, cilantro, scallion and a spoonful of chili oil."
+        "Roast the soup bones at 400°F (200°C) for 45 minutes.",
+        "Blanch the beef shank and the chicken in boiling water a few minutes, drain, and clean the pot.",
+        "Tie the star anise, cloves, cinnamon, bay leaves, sand ginger, fennel, cumin, Sichuan peppercorns, white peppercorns, licorice, dried peel and black cardamom in muslin.",
+        "Return the shank, chicken and roasted bones to the pot with the water, chicken stock, spice bag and salt and bring to a boil. Simmer on low about 2 hours.",
+        "Lift out the shank, add the radish and simmer 1 hour more. Remove the spice bag, chicken and bones and adjust the salt.",
+        "For the chili oil, warm the oil with the star anise, cinnamon and Sichuan peppercorns over very low heat for 15 minutes, strain out the spices, cool briefly, then toast the chili flakes in the oil until fragrant. Stir in the salt and sugar.",
+        "Slice the shank thin. Cook the noodles, divide them among 6 bowls, top with the beef, then the broth and radish, a spoonful of chili oil, and the scallion and cilantro."
       ],
       "nutritionHighlights": [
         {
@@ -6518,7 +6652,7 @@
           "url": "https://en.wikipedia.org/wiki/Lanzhou_beef_noodles"
         }
       ],
-      "curationNote": "The Woks of Life, Lanzhou Beef Noodle Soup for every amount and step; serves 6 like ours; spice bag follows the source."
+      "curationNote": "The Woks of Life, Lanzhou Beef Noodle Soup for every amount and step, its own chili oil included; serves 6."
     },
     {
       "id": "curated_cn_cong_you_ban_mian",
@@ -6843,17 +6977,44 @@
       "servings": 4,
       "servingSizeAmount": 1,
       "servingSizeUnit": "bowl",
-      "flavorProfile": "A scalding, golden chicken and pork broth that cooks paper-thin meats, quail egg and greens at the table, poured over soft rice noodles.",
+      "flavorProfile": "A scalding, golden chicken broth that cooks paper-thin meats, quail egg and greens at the table, poured over soft rice noodles.",
       "healthBenefit": "A varied bowl bringing protein from chicken, pork, squid and quail egg with greens, wood ear and yuba, and a light broth.",
       "overallTier": "strong",
-      "components": [
-        {
-          "recipeId": "curated_cn_base_qing_tang",
-          "servings": 8,
-          "note": "very hot, about 2 litres"
-        }
-      ],
+      "components": [],
       "ingredients": [
+        {
+          "category": "Meat",
+          "baseName": "Chicken, broiler or fryers",
+          "quantity": 1500,
+          "unit": "g",
+          "cutPrep": "whole",
+          "cookingMethod": "Simmered",
+          "prepNote": "a whole chicken, about 1.5 kg; the source gives no weight"
+        },
+        {
+          "category": "Veg",
+          "baseName": "Garlic",
+          "quantity": 6,
+          "unit": "g",
+          "cutPrep": "2 cloves",
+          "prepNote": null
+        },
+        {
+          "category": "Herbs",
+          "baseName": "Ginger root",
+          "quantity": 2,
+          "unit": "g",
+          "cutPrep": "finely sliced",
+          "prepNote": "1 tsp"
+        },
+        {
+          "category": "Bev",
+          "baseName": "Water, tap",
+          "quantity": 2500,
+          "unit": "ml",
+          "cutPrep": null,
+          "prepNote": "to cover the chicken, about 2.5 litres; the source gives no amount"
+        },
         {
           "category": "PastaNoodles",
           "baseName": "Rice, non-glutinous rice products, fresh noodles, rice noodles",
@@ -6893,18 +7054,18 @@
         {
           "category": "Dairy",
           "baseName": "Quail Egg (Raw)",
-          "quantity": 4,
+          "quantity": 1,
           "unit": "each",
           "cutPrep": null,
           "cookingMethod": null,
-          "prepNote": "one per bowl"
+          "prepNote": "cracked into a small bowl"
         },
         {
           "category": "Mushroom",
-          "baseName": "Mushrooms, tree ears, Cloud ear fungus, dried",
-          "quantity": 8,
+          "baseName": "Jew's ear (cloud or wood ear, pepeao)",
+          "quantity": 100,
           "unit": "g",
-          "cutPrep": "soaked and sliced",
+          "cutPrep": "sliced",
           "cookingMethod": null,
           "prepNote": null
         },
@@ -6924,7 +7085,7 @@
           "unit": "g",
           "cutPrep": "thinly sliced",
           "cookingMethod": null,
-          "prepNote": "optional"
+          "prepNote": "4 tbsp, optional"
         },
         {
           "category": "Herbs",
@@ -7000,11 +7161,12 @@
         }
       ],
       "instructions": [
+        "Put the whole chicken, garlic and ginger in a large pot with water to cover and simmer 2 to 3 hours, skimming off any foam. Lift out the chicken, cool it and chop the meat.",
+        "Lay out the thin slices of chicken breast, pork, kidney, squid and cured pork, the quail egg, wood ear, tofu skin, bok choy, chives and pickle on small plates.",
         "Pour boiling water over the fresh rice noodles, loosen them and drain.",
-        "Lay out the thin slices of chicken, pork, kidney, squid and cured pork, the quail eggs, wood ear, yuba, bok choy, chives and pickle on small plates.",
-        "Bring the stock to a hard boil and season it with the salt and light soy sauce.",
+        "Bring the broth to a hard boil and season it with the salt and light soy sauce.",
         "Warm 4 large, heavy bowls with boiling water, empty them, and ladle in the boiling broth.",
-        "At the table, slide in the meats and squid first, then crack in a quail egg, then add the wood ear, yuba, bok choy, chives and pickle, and finally the noodles. Top with the spring onion and coriander and wait 2 to 3 minutes before eating."
+        "At the table, slide in the quail egg and the raw meats and squid first, then the chopped cooked chicken, wood ear, tofu skin, bok choy, chives, pickle and noodles. Top with the spring onion and coriander."
       ],
       "nutritionHighlights": [
         {
@@ -7022,7 +7184,7 @@
           "url": "https://www.sbs.com.au/food/recipes/crossing-bridge-noodles"
         }
       ],
-      "curationNote": "SBS Food, Luke Nguyen, Crossing bridge noodles for every amount and step; closest published version; serves 4 like ours. The cited Woks of Life page is a different dish (Yunnan sour cabbage and ground pork noodle soup), so it was dropped. Our Qing Tang component stands in for the source's whole-chicken broth."
+      "curationNote": "SBS Food, Luke Nguyen, Crossing bridge noodles for every amount and step, its whole-chicken broth included; serves 4."
     },
     {
       "id": "curated_cn_re_gan_mian",
@@ -9873,7 +10035,7 @@
       "builderType": "soup",
       "dishGroup": "Soups",
       "region": "Jiangsu, Zhejiang and Cantonese",
-      "servings": 4,
+      "servings": 2,
       "servingSizeAmount": 1,
       "servingSizeUnit": "bowl",
       "flavorProfile": "A milky white, rich fish broth from a seared fish head boiled hard, with silky tofu, ginger, red dates and goji.",

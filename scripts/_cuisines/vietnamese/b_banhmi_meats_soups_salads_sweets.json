@@ -6295,6 +6295,15 @@
           "prepNote": null
         },
         {
+          "category": "Veg",
+          "baseName": "Onions, red onions, bulb",
+          "quantity": 35,
+          "unit": "g",
+          "cutPrep": "thinly sliced",
+          "cookingMethod": null,
+          "prepNote": "about half a small onion; the source names red onion but gives no amount"
+        },
+        {
           "notInDatabase": true,
           "name": "Vietnamese coriander (rau răm)",
           "contains": "none",
@@ -6325,7 +6334,7 @@
       "instructions": [
         "Rinse and drain the lotus stems and squeeze gently.",
         "Boil the shrimp 2 to 3 minutes, until pink, and halve them lengthwise.",
-        "Toss the lotus stems, carrot, cucumber, shrimp and rau răm with the nước chấm.",
+        "Toss the lotus stems, carrot, cucumber, red onion, shrimp and rau răm with the nước chấm.",
         "Top with peanuts, fried shallots and chili. Serve with prawn crackers if you like."
       ],
       "nutritionHighlights": [
