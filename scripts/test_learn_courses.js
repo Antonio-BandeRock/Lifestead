@@ -73,7 +73,7 @@ for (const course of [es, en]) {
 
 // ---- A line to say next, on every card (2026-11-11, Tony: "every card for every language") ----
 // A card type joins REPLIES_REQUIRED_TYPES once every card of that type has its line in both sets.
-const REPLIES_REQUIRED_TYPES = new Set(['Phrase', 'Word', 'Set', 'Contrast pair', 'Rule']);
+const REPLIES_REQUIRED_TYPES = new Set(['Phrase', 'Word', 'Set', 'Contrast pair', 'Rule', 'Verb']);
 for (const course of [es, en]) {
   const id = course.deck.id;
   const withReply = course.cards.filter((c) => c.replyTarget);
