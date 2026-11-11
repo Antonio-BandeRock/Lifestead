@@ -72,16 +72,19 @@ for (const course of [es, en]) {
 }
 
 // ---- A line to say next, on every card (2026-11-11, Tony: "every card for every language") ----
-// REPLIES_REQUIRED turns on once every card in a set has its line.
-const REPLIES_REQUIRED = new Set([]);
+// A card type joins REPLIES_REQUIRED_TYPES once every card of that type has its line in both sets.
+const REPLIES_REQUIRED_TYPES = new Set(['Phrase', 'Word', 'Set', 'Contrast pair', 'Rule']);
 for (const course of [es, en]) {
   const id = course.deck.id;
   const withReply = course.cards.filter((c) => c.replyTarget);
   check(`${id}: every reply has its meaning`, withReply.every((c) => c.replyNative && c.replyNative.trim() === c.replyNative));
   check(`${id}: no reply repeats its card`, withReply.every((c) => c.replyTarget !== c.target && c.replyTarget !== c.exampleTarget), withReply.filter((c) => c.replyTarget === c.target || c.replyTarget === c.exampleTarget).map((c) => c.id).join(', '));
   const missing = course.cards.filter((c) => !c.replyTarget);
-  if (REPLIES_REQUIRED.has(id)) check(`${id}: every card has a line to say next`, missing.length === 0, missing.slice(0, 5).map((c) => c.id).join(', '));
-  else console.log(`${id}: ${withReply.length} of ${course.cards.length} cards have a line to say next`);
+  for (const type of REPLIES_REQUIRED_TYPES) {
+    const gap = missing.filter((c) => c.type === type);
+    check(`${id}: every ${type} card has a line to say next`, gap.length === 0, gap.slice(0, 5).map((c) => c.id).join(', '));
+  }
+  console.log(`${id}: ${withReply.length} of ${course.cards.length} cards have a line to say next`);
 }
 
 // ---- The workbook reader against the workbooks, where they are on this computer ----
