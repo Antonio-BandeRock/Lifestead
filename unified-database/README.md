@@ -15,6 +15,16 @@ replacement.
 never reads from `unified_foods.sqlite`. No app screen changes. That's
 deliberate — see "Safety" below.
 
+## Status: every shown food in the group a person would look for it in, 2026-11-11
+
+Tony saw the live app's Herbs & Seasonings group holding ketchups, dressings and bouillon cubes, and asked whether the new database had every food in its right group. The new candidate was already cleaner (none of those are shown), but 137 shown foods still sat in a group nobody would look in: vinegars, misos, soy sauce and tamari under Legume or Grain, fresh parsley and cilantro under Veg, flours under Legume and NutSeed, mushrooms under Veg, Japanese citrus under Bev, juices under Fruit.
+
+Step 8 of `pipeline/merge-candidate.js` reads `pipeline/data/categories.json` and moves each listing to its group, with a subcategory where the app reads one (Bev and Juice for the juice advice, Fruit and Whole / Fresh Fruit, Meat and Fish & Seafood). Recipe lines, aliases, purchase forms and volume weights move with the food, and `base_name_renames` gains a "moved group" row so phone records follow at the swap. It refuses a listing that is not shown, is shown in two groups, or is already where it is sent.
+
+Judgement calls: every flour and starch is a pantry staple; bee pollen and royal jelly sit with Sweets beside honey; fresh herbs join Herbs; ginger, garlic and chili peppers stay in Veg, tomato paste too; olives stay in Sauces & Condiments; natto and tempeh stay in Legume; couscous and semolina stay in Grain. Two near duplicates are left for Tony: "Mushrooms" beside "Button mushrooms" and "Porcini" beside "Porcini mushrooms".
+
+Shown per group now: Herbs 71 (herbs, spices, salt, vanilla only), Sauces & Condiments 20, Pantry 93, Mushroom 45, Algae 34, Veg 354, Fruit 216. Verify has 27 checks, two new: every move landed and only there, and no vinegar, miso, sauce, juice, mushroom, seaweed or starch sits outside its group by its food type. All pass.
+
 ## Status: every shown food named by its listing name, 2026-11-11
 
 Item 4 of the database answers. Tony's call on barcodes: no matching a scanned product to a food here, since the scan already brings in the product's own nutrient panel. Step 7 of `pipeline/merge-candidate.js` now names every shown food by its listing name (`base_name` and `short_name` both), so the app names a food the way the list does and each listing is a food of its own. A shown food keeps what it was called in `original_base_name` and `original_short_name`; 0 shown foods now share a base name and category, against many listings folded together before.

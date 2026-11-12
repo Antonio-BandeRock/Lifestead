@@ -301,9 +301,33 @@ for (const w of q(OUT, `select id, base_name b, unit_label u from food_unit_weig
   weightsRenamed += 1;
 }
 
+// 8. Categories. A shown food sits in the group a person would look for it in (data/categories.json). Every row that
+// names it in its old group follows: hidden rows given its name, recipe lines, aliases, purchase forms, volume weights.
+// A rename already pointing at it points at the new group, and records on a phone that name it in the old group get a
+// rename of their own.
+const CAT = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'categories.json'), 'utf8'));
+let categoryMoves = 0;
+for (const [l, spec] of Object.entries(CAT.moves)) {
+  const [to, sub] = Array.isArray(spec) ? spec : [spec, null];
+  const cats = shownCats.get(l);
+  if (!cats) throw new Error(`categories.json: no shown food ${l}`);
+  if (cats.size !== 1) throw new Error(`categories.json: ${l} is shown in ${[...cats].join(' and ')}`);
+  const [from] = cats;
+  if (from === to) throw new Error(`categories.json: ${l} is already in ${to}`);
+  const L = esc(l);
+  s7.push(`UPDATE foods SET original_category=coalesce(original_category, category), category=${esc(to)}, subcategory=${esc(sub)} WHERE base_name=${L} AND category=${esc(from)};`);
+  s7.push(`UPDATE curated_recipe_ingredients SET original_base_name=coalesce(original_base_name, base_name), original_category=coalesce(original_category, category), category=${esc(to)} WHERE base_name=${L} AND category=${esc(from)};`);
+  for (const [t, cat] of [['food_aliases', 'food_category'], ['food_purchase_forms', 'category'], ['food_volume_weights', 'category']]) {
+    s7.push(`UPDATE OR IGNORE ${t} SET original_base_name=coalesce(original_base_name, base_name), original_category=coalesce(original_category, ${cat}), ${cat}=${esc(to)} WHERE base_name=${L} AND ${cat}=${esc(from)};`);
+  }
+  s7.push(`UPDATE base_name_renames SET new_category=${esc(to)} WHERE new_base_name=${L} AND new_category=${esc(from)};`);
+  s7.push(`INSERT OR IGNORE INTO base_name_renames SELECT ${L}, ${esc(from)}, ${L}, ${esc(to)}, 'moved group' WHERE EXISTS (SELECT 1 FROM foods WHERE food_id < ${FIRST_NEW_ID} AND coalesce(original_base_name, base_name)=${L} AND original_category=${esc(from)});`);
+  categoryMoves += 1;
+}
+
 s7.push(`CREATE TABLE candidate_build (key TEXT PRIMARY KEY, value TEXT);`);
 const build = { built_at: new Date().toISOString(), live_foods: live.length, added_foods: added, nutrients_gained: gained, recipe_names_pointed: pointed, unlisted_names_moved: moved,
-  names_renamed: renames.length, recipe_lines_renamed: linesRenamed, recipe_lines_by_their_words: linesByWords, unit_weights_renamed: weightsRenamed };
+  names_renamed: renames.length, category_moves: categoryMoves, recipe_lines_renamed: linesRenamed, recipe_lines_by_their_words: linesByWords, unit_weights_renamed: weightsRenamed };
 for (const [k, v] of Object.entries(build)) s7.push(`INSERT INTO candidate_build VALUES (${esc(k)}, ${esc(String(v))});`);
 s7.push('COMMIT;', 'VACUUM;');
 execFileSync('sqlite3', [OUT], { input: s7.join('\n'), maxBuffer: 2e9 });
@@ -311,5 +335,5 @@ execFileSync('sqlite3', [OUT], { input: s7.join('\n'), maxBuffer: 2e9 });
 const how = {};
 for (const r of renames) how[r.how] = (how[r.how] || 0) + 1;
 console.log(JSON.stringify({ out: OUT, liveFoods: live.length, paired: paired.size, added, nutrientsGained: gained, recipeNamesPointed: pointed, unlistedNamesMoved: moved,
-  namesRenamed: renames.length, renamedBy: how, recipeLinesRenamed: linesRenamed, recipeLinesByTheirWords: linesByWords, unitWeightsRenamed: weightsRenamed }));
+  namesRenamed: renames.length, renamedBy: how, categoryMoves, recipeLinesRenamed: linesRenamed, recipeLinesByTheirWords: linesByWords, unitWeightsRenamed: weightsRenamed }));
 if (process.argv[3]) fs.writeFileSync(process.argv[3], renames.filter((r) => r.names.length > 1).map((r) => `${r.old} (${r.category}) -> ${r.to} [${r.how}] of ${r.names.join(' / ')}`).join('\n'));

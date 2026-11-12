@@ -30,7 +30,8 @@ const liveFoods = one('select count(*) from L.foods');
 const wasShort = `case when f.original_base_name is not null then f.original_short_name else f.short_name end`;
 check('every live food is still there, same id, source, code, names (as they were before the short names) and category', one(`select count(*) from L.foods l left join foods f using(food_id, source)
   where f.food_id is null or f.source_code is not l.source_code or f.name is not l.name or f.name_local is not l.name_local or ${wasShort} is not l.short_name
-  or coalesce(f.original_base_name, f.base_name) is not l.base_name or f.prep_method is not l.prep_method or coalesce(f.original_category, f.category) is not l.category or f.subcategory is not l.subcategory`) === 0, `${liveFoods} live foods`);
+  or coalesce(f.original_base_name, f.base_name) is not l.base_name or f.prep_method is not l.prep_method or coalesce(f.original_category, f.category) is not l.category
+  or (f.subcategory is not l.subcategory and f.category is coalesce(f.original_category, f.category))`) === 0, `${liveFoods} live foods (a subcategory changes only with a group move)`);
 check('every live nutrient value is still there, unchanged', one(`select count(*) from (select food_id, source, nutrient_code, amount_per_100g from L.food_nutrients
   except select food_id, source, nutrient_code, amount_per_100g from food_nutrients)`) === 0);
 const REPOINTED = { food_aliases: 'food_category', food_purchase_forms: 'category', food_volume_weights: 'category', food_unit_weights: null };
@@ -74,6 +75,20 @@ check('each food carries the decision, listing name, type and caution from the l
   where f.curation_status is not c.status or f.listing_name is not c.listing_name or f.food_type is not c.food_type or f.caution is not c.caution`) === 0);
 check('every shown food has a base name and a category the app knows', one(`select count(*) from foods where hidden=0 and (coalesce(base_name,'')='' or category not in (select distinct category from L.foods))`) === 0);
 check('every shown food is named by its listing name', one(`select count(*) from foods where hidden=0 and listing_name is not null and (base_name is not listing_name or short_name is not listing_name)`) === 0);
+const CAT = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'categories.json'), 'utf8')).moves;
+const astray = Object.entries(CAT).filter(([l, spec]) => {
+  const to = Array.isArray(spec) ? spec[0] : spec;
+  const at = q(`select distinct category c from foods where hidden=0 and listing_name='${l.replace(/'/g, "''")}'`).map((r) => r.c);
+  return at.length !== 1 || at[0] !== to;
+}).map(([l]) => l);
+check('every food data/categories.json moves is shown in its new group, and only there', astray.length === 0, astray.join('; ') || `${Object.keys(CAT).length} moved`);
+const wrongGroup = q(`select listing_name l, category c, food_type t from foods where hidden=0 and (
+  (category='Herbs' and food_type not in ('herb_spice', 'salt_mineral', 'seed', 'vegetable'))
+  or (food_type='vinegar_condiment' and category<>'SaucesCondiments') or (food_type='fungi' and category<>'Mushroom')
+  or (food_type='juice' and category<>'Bev') or (food_type='seaweed' and category not in ('Algae', 'PantryStaples'))
+  or (food_type='starch' and category not in ('PantryStaples', 'Grain') ) or (food_type='starch' and category='Grain' and listing_name like '%starch%'))`);
+check('no sauce, condiment, vinegar or miso sits in Herbs, and every vinegar, mushroom, juice, seaweed and starch is in its own group', wrongGroup.length === 0,
+  wrongGroup.slice(0, 8).map((w) => `${w.l} (${w.c}, ${w.t})`).join('; ') || undefined);
 const renames = one('select count(*) from base_name_renames');
 check('every renamed old name points at a shown food, and no old name is still a shown name there', one(`select count(*) from base_name_renames n where not exists (select 1 from foods f where f.hidden=0 and f.base_name=n.new_base_name and f.category=n.new_category)
   or exists (select 1 from foods f where f.hidden=0 and f.base_name=n.old_base_name collate binary and f.category=n.category and n.old_base_name<>n.new_base_name collate nocase)`) === 0, `${renames} old names`);
