@@ -1,0 +1,739 @@
+# G <id> <listing>   make this row the shown head of a group under that listing name
+# L <id> <target>    this row is the same food as <target> (which must end up shown)
+# H <id> <reason>    hide: no exact equal and not a food to list on its own
+# Rules: same species, same cut, same form (fresh, dried, sprouted, salted, smoked,
+# defatted), same fat class for dairy, skin-on and skinless poultry kept apart,
+# grade and trim depth of red meat do not split a cut, Wagyu is its own food.
+
+# Acorns
+G 7781 Dried acorns
+L 23630 7781
+G 35485 Sweet acorns
+# Agar
+G 7306 Dried agar
+L 2544 7306
+L 23421 7306
+L 36120 7306
+L 37469 7306
+# Agave
+G 6209 Dried agave
+G 7030 Agave
+L 27677 7030
+# Appenzeller
+G 30223 Low-fat Appenzeller cheese
+G 30224 Appenzeller cheese
+L 20 30224
+# Salmon, wild and farmed kept apart
+G 10902 Wild Atlantic salmon
+L 23990 10902
+# Ayu
+G 36171 Farmed ayu
+G 36173 Farmed ayu viscera
+# Bacon
+G 3322 Lean bacon
+# Barley
+L 35131 7500
+G 23291 Dried barley malt extract
+# Beef liver product
+H 3288 A prepared liver mix with added fat and starch, not plain liver
+# Q <id> <note>      cooked or premade conflict held for Tony's answer
+# Beef offal and cuts (Japan)
+G 36837 Beef outside skirt
+# Bluefin: fatty belly meat (toro) is its own food
+G 36400 Fatty bluefin tuna
+L 36403 36400
+# Bratwurst: raw sausage meat heads; cooked rows held
+G 32796 Bratwurst
+L 32793 32796
+L 32803 32796
+Q 8836 USDA bratwurst row is cooked
+Q 20657 UK bratwurst row is cooked
+# Breadnut
+G 7768 Breadnut seeds
+L 23608 7768
+G 7769 Dried breadnut seeds
+L 23609 7769
+# Brined sheep cheese by fat class
+G 30235 Low-fat brined sheep cheese
+G 30316 Brined sheep cheese
+# Buckwheat
+Q 35245 Japanese buckwheat is parboiled
+# Camel
+G 21032 Camel cube roll
+# Camembert
+L 30299 37562
+# Capelin
+G 36328 Semi-dried capelin
+# Capicollo (Canadian deli meat, cooked) and coppa (dry-cured) are different
+G 39548 Coppa
+Q 26325 Canadian capicollo is a cooked deli meat
+# Chestnuts by species
+G 6629 Japanese chestnuts
+L 23705 6629
+L 35475 6629
+G 7380 Chinese chestnuts
+L 23645 7380
+# Whole chicken: with skin, without skin, stewing hen, with giblets
+G 8663 Chicken
+L 27069 8663
+L 27708 8663
+L 39775 8663
+L 39782 8663
+L 39783 8663
+L 39785 8663
+L 39789 8663
+L 32345 8663
+L 32349 8663
+L 32398 8663
+L 32400 8663
+L 503 8663
+L 504 8663
+L 3016 8663
+L 3020 8663
+G 8268 Skinless chicken
+L 27121 8268
+L 27710 8268
+L 10852 8268
+L 39776 8268
+L 39778 8268
+L 32335 8268
+L 32340 8268
+L 506 8268
+L 3015 8268
+L 3019 8268
+G 9616 Stewing hen
+L 27718 9616
+G 9618 Skinless stewing hen
+L 27720 9618
+G 8263 Whole chicken with giblets
+L 27020 8263
+L 27706 8263
+L 9610 8263
+G 10856 Whole stewing hen with giblets
+L 27716 10856
+# Chicken back
+G 8685 Chicken back
+L 27886 8685
+G 8289 Skinless chicken back
+L 27889 8289
+# Chicken breast
+G 8293 Skinless chicken breast
+L 21089 8293
+L 27896 8293
+L 39786 8293
+L 39803 8293
+L 39804 8293
+L 32353 8293
+L 32359 8293
+L 32547 8293
+L 36779 8293
+L 36785 8293
+L 490 8293
+L 3028 8293
+# Chicken dark meat
+G 8679 Chicken dark meat
+L 27321 8679
+G 8283 Skinless chicken dark meat
+L 27418 8283
+L 10854 8283
+G 9620 Stewing hen dark meat
+L 27725 9620
+# Chicken drumstick
+G 10830 Skinless chicken drumstick
+L 21094 10830
+L 27902 10830
+L 487 10830
+# NOTE: an L on a row that heads a group moves that group's members with it.
+# Chicken fat: raw fatty tissue vs rendered fat
+G 8684 Chicken fatty tissue
+L 21107 8684
+L 27885 8684
+# Chicken leg
+G 9594 Chicken leg
+L 491 9594
+L 3026 9594
+L 27515 9594
+G 10835 Skinless chicken leg
+# Chicken light meat
+G 8278 Chicken light meat
+L 27266 8278
+G 9614 Skinless chicken light meat
+# Chicken neck
+G 9598 Chicken neck
+L 27575 9598
+G 10839 Skinless chicken neck
+# Chicken thigh
+G 10843 Skinless chicken thigh
+L 500 10843
+L 3029 10843
+L 21113 10843
+L 27909 10843
+L 36781 10843
+L 36789 10843
+L 39784 10843
+L 39788 10843
+L 39792 10843
+# Chicken wing
+G 9606 Chicken wing
+L 3023 9606
+L 21122 9606
+L 27670 9606
+L 32364 9606
+L 32369 9606
+L 36777 9606
+L 36783 9606
+L 36848 9606
+L 36849 9606
+L 39791 9606
+G 10848 Skinless chicken wing
+# Salmon: Australian King salmon is farmed
+G 21906 Farmed chinook salmon
+# Chorizo by form
+G 26472 Dry chorizo
+L 39604 26472
+L 39605 26472
+G 26469 Semi-dried chorizo
+L 39606 26469
+L 1765 26469
+# Clams by species (Japan)
+G 36425 Bloody clams
+G 36427 Manila clams
+G 36443 Corbicula clams
+G 36450 Hen clams
+G 36451 Hard clams
+G 36455 Shield clams
+G 36461 Surf clams
+G 36462 Gaper clam siphon
+# Wood ear raw vs dried
+G 6453 Wood ear mushrooms
+L 23197 6453
+# Coconut
+G 21151 Young coconut flesh
+# Corned beef (German is canned and cooked)
+Q 33003 German corned beef is canned and cooked
+# Cornish hen
+G 8723 Cornish hen
+L 27876 8723
+G 8324 Skinless Cornish hen
+# Cottage cheese
+L 23767 9397
+# Cottonseed flour
+G 7362 Low-fat cottonseed flour
+L 23612 7362
+# Cream cheese
+H 4237 Fat of 65 g fits no cream cheese, a mislabelled row
+L 30354 6295
+# Creme fraiche (30 to 40 percent fat)
+G 30152 Creme fraiche
+L 30148 30152
+L 21197 30152
+L 673 30152
+# Dates
+G 29153 Fresh dates
+# Dehydrated (low-moisture) fruit
+G 11147 Dehydrated apples
+L 22586 11147
+G 8918 Dehydrated apricots
+L 22804 8918
+L 2601 11161
+L 37743 11161
+G 7148 Dehydrated peaches
+L 22737 7148
+L 37753 7148
+# Dried fish and meat by form
+G 27312 Dried arctic char with skin
+G 7820 Air-dried beef
+L 31636 7820
+G 36365 Dried herring fillet
+G 36366 Split dried herring
+G 36160 Kusaya
+G 36197 Semi-dried sardines
+L 36199 36197
+G 36198 Salted dried sardines
+G 4866 Partially dried seal meat
+G 36326 Shishamo
+G 27234 Dried narwhal meat
+G 39543 Lean smoked raw ham
+# Duck
+G 9624 Duck
+L 741 9624
+L 3008 9624
+L 21230 9624
+L 27734 9624
+G 11684 Wild duck
+L 27739 11684
+G 4833 White-winged scoter
+G 9626 Skinless duck
+# Duck, with skin
+L 32412 9624
+L 32418 9624
+L 36771 9624
+L 39815 9624
+G 39817 Duck breast
+G 11685 Skinless duck breast
+# Seaweed
+G 38687 Dried dulse
+# Cocoa
+G 7873 High-fat Dutch cocoa powder
+# Eel: European eel is the fatty species
+G 746 European eel
+L 3089 746
+L 31050 746
+# Flour
+G 9237 High-protein white flour
+# Faisselle
+G 38198 Fat-free faisselle
+# Fireweed
+G 6204 Young fireweed leaves
+L 27355 6204
+# Tofu: rows near 85 g water are regular tofu whatever the label
+L 2812 9692
+L 35404 9692
+L 24343 9692
+L 24354 9692
+L 9664 9692
+L 11506 9692
+# Flounder
+G 36381 Farmed olive flounder
+# Goat cheese by texture
+L 37655 10651
+L 870 10651
+L 36933 10651
+L 37663 10651
+L 37665 10651
+L 871 10649
+L 872 10649
+L 21072 10649
+L 30314 10649
+L 37656 10649
+L 37657 10649
+L 37658 10649
+L 37662 10649
+# Fresh pasta
+H 28968 Water of 66 g fits cooked pasta, not raw fresh pasta
+# Fromage blanc
+G 38206 Full-fat fromage blanc
+# Ginger
+G 35610 Young ginger
+# Goose
+G 11686 Goose
+L 874 11686
+L 3014 11686
+L 27741 11686
+L 32446 11686
+L 32451 11686
+L 39832 11686
+G 9629 Skinless goose
+G 26760 Wild goose breast
+G 10850 Skinless wild goose breast
+G 32456 Goose leg
+L 32460 32456
+# Yogurt
+G 26179 Rich Greek yogurt
+G 26509 Mediterranean-style yogurt
+L 4231 26509
+L 38251 26509
+# Ground meat by lean share
+G 9006 Extra-lean ground beef
+L 131 9006
+L 10326 9006
+L 10327 9006
+L 20816 9006
+L 25581 9006
+L 31625 9006
+L 31628 9006
+L 40108 9006
+G 11253 Regular ground beef
+L 23777 11253
+G 5868 Ground beef 70/30
+G 11637 Ground bison
+L 27176 11637
+G 12509 Grass-fed ground bison
+G 21403 Lean ground lamb
+G 1520 Lean ground pork
+L 2891 1520
+L 6406 1520
+G 10063 Fat-free ground turkey
+# Ham: cured hams are sold cooked
+Q 5511 Ham group: cooked ham, deli ham and city ham are cooked during curing
+# Hard cheese fat class
+G 2179 Full-fat hard cheese
+# Hemp
+G 4243 Whole hemp seeds
+L 35468 4243
+# Hen
+L 924 9618
+# Herring roe
+G 31068 Herring roe
+L 36368 31068
+# Jellyfish
+G 36515 Desalted jellyfish
+# Cooked cured pork and sausage
+Q 32999 Kasseler neck is cooked cured
+Q 11095 USDA kielbasa is fully cooked
+Q 26326 Canadian kielbasa is cooked
+Q 4863 Kippered salmon is hot-smoked, so cooked; two rows are canned
+# Kidney beans
+G 20794 Fresh red kidney beans
+# N <id> <english>   correct a wrong English translation of the source name
+# Lamb fat: separable fatty tissue heads; seam fat (44 g fat) kept apart
+G 11525 Lamb fat
+L 9788 11525
+L 9727 11525
+L 11650 11525
+L 11651 11525
+L 21367 11525
+L 24357 11525
+L 24376 11525
+L 32098 11525
+L 12108 11525
+L 30673 11525
+G 9873 Lamb seam fat
+# Lamb sweetbread: Swedish "Lamm bräss" is sweetbread, only the English was wrong
+N 3251 Lamb sweetbread, raw
+N 2829 Lamb breast, raw
+# Lentil sprouts: German row is long-sprouted (91 g water)
+G 29880 Long lentil sprouts
+# Light cream by fat class
+G 671 Coffee cream 10%
+L 30145 671
+G 26147 Cream 5%
+# Lima beans, mature
+L 29750 11468
+# Reduced-fat cheddar (about 20 percent fat) apart from low-fat (7 percent)
+G 8508 Reduced-fat cheddar cheese
+L 21064 8508
+L 27493 8508
+# Cream cheese and hard cheese fat classes
+G 2202 Extra-light cream cheese
+G 2190 Reduced-fat hard cheese
+G 37601 Reduced-fat Emmental cheese
+# Lyoner is a cooked sausage
+Q 36756 Lyoner is a cooked sausage
+Q 32818 German Lyon sausage group is cooked sausage
+# Mackerel by species
+G 36549 Spotted mackerel
+# Marjoram dried
+L 1125 8144
+L 37428 8144
+# Mimolette by age
+G 37635 Young Mimolette cheese
+# Miso by type
+G 37208 Sweet white miso
+G 37283 Reduced-salt miso
+G 37212 Soybean miso
+G 35433 Hishio miso
+H 1205 Water of 64 g and protein of 17 g fit no miso, a suspect row
+# Mortadella is a cooked sausage
+Q 11789 Mortadella group is cooked sausage
+# Fresh mozzarella (in brine, about 60 to 67 g water)
+G 419 Fresh mozzarella cheese
+L 38185 419
+L 30110 419
+# Mussels by species
+G 37345 Mediterranean mussels
+L 36435 37345
+# Mustard powder: Japanese karashi powder differs in fat
+G 37221 Japanese mustard powder
+# Neufchatel: French cheese is a different cheese from US neufchatel
+G 37573 French Neufchatel cheese
+# Nori
+H 1281 Water of 37 g and carbohydrate of 55 g fit no dried nori, a suspect row
+# Oysters by species
+G 11435 Pacific oysters
+L 21628 11435
+L 21630 11435
+L 24064 11435
+L 36438 11435
+L 37352 11435
+L 37329 11435
+L 3208 11435
+G 12388 Farmed eastern oysters
+L 24133 12388
+G 37353 European flat oysters
+L 31458 37353
+L 31463 37353
+L 1341 37353
+G 21629 Australian flat oysters
+G 21631 Sydney rock oysters
+G 9194 Wild eastern oysters
+# Oat flour
+N 4439 Oat flour, whole grain
+# Grated parmesan
+G 8463 Grated parmesan cheese
+L 21076 8463
+L 36914 8463
+L 24725 8463
+# Reduced-fat fresh mozzarella
+L 3830 419
+G 30113 Light fresh mozzarella cheese
+# Pastrami and pepperoni
+Q 7420 Pastrami is cured, smoked and steamed, so cooked
+Q 26332 Canadian deli pepperoni (55 g water) is a cooked deli meat, unlike dry pepperoni
+# Pea shoots (leaves and stems, not sprouted seeds)
+G 35837 Pea shoots
+# Peanut flour by fat class
+G 9651 Low-fat peanut flour
+L 24251 9651
+G 35811 Fresh green peanuts
+G 35604 Fresh shiso seeds
+# Persimmon by species
+G 7159 American persimmons
+L 22755 7159
+# Pheasant with and without skin
+G 11688 Pheasant
+L 27749 11688
+L 39830 11688
+L 32308 11688
+L 32310 11688
+L 3012 11688
+G 11689 Skinless pheasant
+N 3011 Pheasant, raw
+# Pigeon with and without skin
+G 11691 Pigeon
+L 21696 11691
+L 27757 11691
+L 39835 11691
+L 32536 11691
+L 32539 11691
+L 3010 11691
+G 8295 Skinless pigeon
+G 9652 Dried pigeon peas
+# Yogurt about 10 percent fat
+L 26172 26509
+L 30136 26509
+L 38192 26509
+# Pollock by species
+G 10941 Alaska pollock
+L 23980 10941
+L 39271 10941
+L 31186 10941
+L 31192 10941
+L 36345 10941
+L 5 10941
+L 4093 10941
+L 12346 10941
+G 1502 Pollack
+# Pork: composite of retail cuts apart from whole carcass
+G 5104 Pork
+L 21729 5104
+L 21786 5104
+L 26129 5104
+L 26145 5104
+L 31851 5104
+L 31935 5104
+L 31936 5104
+L 31937 5104
+L 31938 5104
+L 31939 5104
+L 4149 5104
+L 5026 5104
+L 5123 5104
+L 5436 5104
+L 5532 5104
+G 5435 Pork carcass
+# Pork fat
+L 31943 5029
+L 2123 5027
+N 2123 Pork back fat, raw
+L 39517 5027
+N 39517 Pork back fat, rindless, raw
+# Swedish pork names: fix English, move to the right cut
+L 2869 5059
+N 2869 Pork shoulder, raw
+N 2884 Pork belly piece, raw, with rind
+N 2885 Pork belly slices, raw, with rind
+L 2875 22876
+N 2875 Pork hock, raw
+N 2876 Pork picnic shoulder, raw
+N 2880 Pork shoulder blade roast, raw
+N 2882 Pork chop, raw, 2 mm fat edge
+N 2883 Pork shank, trimmed, raw, without rind
+# --- flags 961-1110 ---
+G 5376 Dehydrated prunes
+L 22770 5376
+G 9737 Domestic rabbit
+L 21864 9737
+L 24484 9737
+L 39769 9737
+L 32253 9737
+L 32256 9737
+L 36568 9737
+L 1606 9737
+L 2846 9737
+G 9635 Skinless quail
+G 9634 Quail
+L 21856 9634
+L 27754 9634
+L 39808 9634
+L 36772 9634
+G 35277 Fresh rice noodles
+H 21878 rice paper soaked in water, not a raw form
+G 36222 Angry rockfish
+G 36256 Kichiji rockfish
+G 1692 Rose hips
+L 29128 1692
+G 1695 Rowan berries
+G 6101 Dark rye flour
+L 25262 6101
+L 40458 6101
+L 28241 6101
+G 6102 Medium rye flour
+L 25187 6102
+L 21272 6102
+L 40460 6102
+L 28239 6102
+L 28240 6102
+G 6103 Light rye flour
+L 25188 6103
+L 40459 6103
+L 28237 6103
+L 28238 6103
+L 35262 6103
+L 1698 6103
+L 36287 31073
+G 597 Lightly salted cod
+G 36354 Salted Pacific cod
+G 36370 Desalted herring roe
+G 39325 European sardine
+L 31090 39325
+G 36193 Japanese pilchard
+G 36436 Japanese scallop
+N 36436 Japanese scallop, farmed, raw
+N 37362 Scallop meat, raw
+N 37363 American or Canadian scallop meat, raw
+N 37364 Scallop or Peruvian scallop meat, raw
+G 36517 Japanese sea cucumber
+G 7040 Sea lion meat with fat
+L 25942 7040
+G 30263 Semi-soft cheese 60%
+G 30294 Soft cheese 60%
+G 30295 Soft cheese 70%
+L 37574 30295
+G 7369 Partially defatted sesame flour
+L 23621 7369
+G 7776 Low-fat sesame flour
+L 23622 7776
+G 1510 Porbeagle shark
+Q 36201 shirasuboshi is boiled then dried
+Q 36202 shirasuboshi is boiled then dried
+G 36422 Japanese pond smelt
+H 27370 canned smoked salmon is cooked
+H 4830 canned smoked salmon is cooked
+H 4861 canned smoked salmon is cooked
+Q 7029 Alaska Native smoked sockeye strips are hot smoked and dried
+L 26135 7029
+Q 4831 Alaska Native smoked brined chinook is hot smoked
+L 27371 4831
+Q 3125 hot-smoked salmon is cooked
+N 3127 Rainbow trout, cold smoked
+G 3127 Cold-smoked rainbow trout
+N 3128 Rainbow trout, gutted, hot smoked
+Q 3128 hot-smoked rainbow trout is cooked
+G 36445 Pond snail
+G 36480 Tanner crab
+G 35246 Fresh soba noodles
+G 37653 Corsican soft sheep cheese
+G 11489 Full-fat soy flour
+L 1869 11489
+L 2813 11489
+G 11491 Defatted soy flour
+# --- flags 1111-1261 ---
+G 9660 Low-fat soy flour
+L 24262 11489
+L 29903 11489
+L 38667 11489
+L 24264 11491
+G 6500 Sprouted soybeans
+G 35795 Soybean sprouts
+L 29875 35795
+G 9455 Dried spearmint
+G 10691 Fresh spearmint
+L 4686 10691
+G 7711 Dried spirulina
+L 23424 7711
+L 37470 7711
+N 4086 Sprat, raw
+G 35342 Dried starch noodles
+Q 26330 summer sausage is cured and often cooked
+G 20618 Sun-dried tomatoes in oil
+H 35292 values read like a dried product, not a raw tuber
+G 6526 Tahitian taro
+L 23356 6526
+L 1987 8153
+G 37651 Low-fat tomme cheese
+G 8297 Turkey with skin
+L 27760 8297
+L 27824 8297
+L 32331 8297
+L 32484 8297
+L 32489 8297
+G 27788 Turkey back with skin
+G 8309 Turkey breast with skin
+L 8744 8309
+L 22105 8309
+G 8704 Turkey dark meat with skin
+L 27781 8704
+L 27804 8704
+L 27831 8704
+L 27851 8704
+G 8304 Turkey light meat with skin
+G 8749 Turkey thigh with skin
+L 26080 8749
+L 26097 8749
+L 26742 8749
+G 8348 Turkey wing with skin
+L 8711 8348
+L 27794 8348
+L 27819 8348
+L 27842 8348
+L 27862 8348
+L 32516 8348
+L 32522 8348
+L 39826 8348
+G 36808 Softshell turtle
+G 35160 Dried udon noodles
+G 31793 Fatty veal trimmings
+G 31850 Veal trimmings, 15% fat
+N 3260 Veal heart, raw
+G 36136 Dried wakame
+L 36132 36136
+L 36134 36136
+L 38683 36136
+G 38696 Dried Atlantic wakame
+N 37907 Walnuts, fresh
+G 37907 Fresh walnuts
+G 5246 Walrus meat with fat
+G 35490 Japanese water chestnuts
+G 4839 Bowhead whale blubber
+G 27226 Beluga blubber
+G 27235 Narwhal blubber
+G 36677 Whale blubber
+G 36676 Whale ventral groove meat
+G 4840 Bowhead muktuk
+G 27228 Beluga muktuk
+G 27238 Narwhal muktuk
+L 35139 6939
+G 35267 Fresh cold wheat noodles
+G 465 Brown whey cheese
+L 463 465
+L 468 465
+G 9238 High-protein white flour
+G 36541 Japanese whitebait
+# --- names that would have been shared by two shown rows ---
+# Cooked bratwurst keeps its own name while the owner decides on it
+G 8836 Cooked bratwurst
+L 20657 8836
+L 21061 419
+L 32316 11684
+G 32320 Wild duck leg
+L 23599 38687
+# Alaska Native herring eggs are loose spawn, not roe sacs
+G 7022 Pacific herring spawn
+G 26765 Wild goose leg
+L 4627 35837
+L 24252 9652
+G 6214 Wild rose hips
+G 29131 Sweet rowanberries
+L 4623 1695
+G 9237 Enriched high-protein white flour

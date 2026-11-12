@@ -53,6 +53,12 @@ const fs = require('fs');
 const { execFileSync } = require('child_process');
 const { extractZipTo } = require('./legacy-v3-extract.js');
 
+// Germany_BLS stores vitamin B6 in micrograms under the tag every other source fills in milligrams
+// (median near 165 against about 0.2 elsewhere). The live database divided its BLS values by 1000 on
+// 2026-11-11 (scripts/fix_nutrient_source_errors.js); this does the same on ingest, and the unified
+// database's existing 7,041 BLS values were divided once by hand the same day.
+const SOURCE_SCALE = { Germany_BLS: { vitamin_b6: 1 / 1000 } };
+
 const SQLITE_EXE =
   process.env.SQLITE_EXE ||
   'C:/Users/TonyR/AppData/Local/Android/Sdk/platform-tools/sqlite3.exe';
@@ -187,7 +193,7 @@ async function ingestLegacySource(legacySourceValue) {
     // -- both real synonyms for the identical nutrient in the SAME
     // real unit, confirmed above. First real value wins; not summed,
     // which would double-count.
-    if (!(code in bucket)) bucket[code] = r.value;
+    if (!(code in bucket)) bucket[code] = r.value * ((SOURCE_SCALE[legacySourceValue] || {})[code] || 1);
   }
 
   const needsTranslation = SOURCES_NEEDING_REAL_TRANSLATION.has(legacySourceValue);

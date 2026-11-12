@@ -153,6 +153,25 @@ const HAND = {
   'Soup, stock, fish, home-prepared': swap('Cod', 'Bones and heads of the listed fish, simmered in water'),
   'Glukosesirup': missing(PANTRY, 'Cane syrup'),
   'Potash (99 % potassium carbonate, E 501)': missing(PANTRY, 'Baking soda'),
+  // Names the live recipes use again after the 2026-11-10 pass, placed 2026-11-11. The made-first ones name the app's recipe for them.
+  'Fresh Coriander': listed('Cilantro'),
+  'Red, Pinot Noir': listed('Red wine'),
+  'Broad, Fresh Bean': listed('Fava beans'),
+  'Bass Fish': listed('Sea bass'),
+  'Pain pita': home(BREAD),
+  'Mustard medium hot': home(MUSTARD, 'Mittelscharfer Senf (Medium Hot Mustard)'),
+  'Mustard hot': home(MUSTARD, 'Moutarde de Dijon (Dijon Mustard)'),
+  Moutarde: home(MUSTARD, 'Moutarde de Dijon (Dijon Mustard)'),
+  'Spices, chili powder': home('Ground chili pepper, cumin, oregano and garlic'),
+  'Bread crumbs, dry, grated, plain': home('Dried bread, ground', 'Pan Molido (Dry Breadcrumbs)'),
+  'Herbes de Provence, séchées': home('A mix of listed dried herbs', 'Herbes de Provence'),
+  'Jelly extra quality': home('Red currants and sugar', 'Red Currant Jelly'),
+  '"Printen" brown gingerbread biscuits': home('Flour, honey, sugar syrup and spices', 'Aachener Printen (Spiced Gingerbread)'),
+  'Hot seasoning, Chinese chili oil': home('Chili and oil', 'Hong You (Sichuan Chili Oil)'),
+  'Chilli sauce (Sambal Oelek)': home('Chili, salt and vinegar', 'Sambal Oelek'),
+  'Monosodium glutamate': named(PANTRY),
+  'Chocolate white': named(PANTRY),
+  'Cutter additives phosphate-based (E 450)': aid('Sets, cures or firms a food'),
 };
 
 const OUTSIDE = require('./curate-recipe-outside')({ listed, swap, home, named, missing, aid, SEED_OIL, G: { ALCOHOL, PANTRY, SAUCES, NOSOURCE, FERMENT, CURED } });

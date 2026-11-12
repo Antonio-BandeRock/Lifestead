@@ -15,6 +15,18 @@ replacement.
 never reads from `unified_foods.sqlite`. No app screen changes. That's
 deliberate — see "Safety" below.
 
+## Status: every shown food matched to its USDA row, 2026-11-11
+
+Owner's instruction: every food from another country's table that is not hidden is matched to the same food in USDA wherever one exists, each group shares one short listing name ready for translation, and nothing shown is cooked unless it is a premade thing ("Boiled is cooked. I want matches, not near matches").
+
+`pipeline/curate-usda-match.js [--apply]` applies the 621 decisions in `pipeline/data/usda-match-decisions.txt` (G heads a group under a listing name, L makes a row the same food as another, H hides, N corrects an English name, Q writes a doubt note for the owner). It refuses to write when a link ends anywhere but a shown row, a chain loops, a non-hidden row has no listing name, or two shown rows would share a new name. Applied: 631 rows changed, 23 English names corrected (marked `translation_corrected`), 22 rows held with a note for the owner (premade or cooked foods such as bratwurst, hot-smoked salmon, shirasuboshi, parboiled grains). Shown 2,296 to 2,489, compared 6,690 to 6,487, hidden 23,721 to 23,731. A second run changes nothing.
+
+Germany_BLS vitamin B6 was in micrograms where every other source is in milligrams (average 164.68 against about 0.2). `sources/legacy-v3-shared.js` now divides it by 1000 on ingest, and the 7,041 values already in the database were divided once, matching the live database's fix of the same day.
+
+The recipe check places the 70 names the 2026-11-10 recipe pass brought in (52 outside the food table in `curate-recipe-outside.js`, 18 in the table in `curate-recipe-check.js`, each made-at-home one naming the app's recipe for it). The candidate rebuilds and all 21 checks pass: 2,489 shown, recipes with nutrition behind every eaten ingredient 935 live to 1,200 candidate of 1,539.
+
+Rerun order: `curate-usda-match.js --apply` goes after `curate-owner-round5.js --apply` and before `curate-report.js`.
+
 ## Status: phases 5 and 6, a candidate built and checked, 2026-11-10
 
 `pipeline/merge-candidate.js <recipe_check.json>` builds `candidate/foods_reference_candidate.db` (git-ignored) from a copy of the live database plus `food_curation`. It reads both databases and writes neither. Every live food keeps its id, source, names and nutrient values, is paired with its curated row (by source code; Norway by `source_food_id`; Sweden by Swedish name; the 6 Derived spirits have no row and keep what they had) and is hidden unless the list shows it. The 5,964 curated rows the live database never had are added from id 1,000,000. A food gains any nutrient value the source gives that it lacked (200,283 values, 368 of them on shown foods already in the app). Recipe lines whose name the recipe check placed on the list point at that listing, and 217 names from the unlisted table move into the ingredient table. Aliases, unit weights and purchase forms naming a food now hidden point at the shown food with its listing name (6, 3 and 59 rows). Every changed row keeps its old target in `original_base_name`.
