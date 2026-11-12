@@ -26,12 +26,14 @@ check('every score row belongs to a food', one('select count(*) from food_scores
 
 // B. Nothing the live database had is lost or changed.
 const liveFoods = one('select count(*) from L.foods');
-check('every live food is still there, same id, source, code, names and category', one(`select count(*) from L.foods l left join foods f using(food_id, source)
-  where f.food_id is null or f.source_code is not l.source_code or f.name is not l.name or f.name_local is not l.name_local or f.short_name is not l.short_name
-  or f.base_name is not l.base_name or f.prep_method is not l.prep_method or f.category is not l.category or f.subcategory is not l.subcategory`) === 0, `${liveFoods} live foods`);
+// A renamed food keeps what it was called in original_base_name and original_short_name, and a hidden one moved with its name keeps its category in original_category.
+const wasShort = `case when f.original_base_name is not null then f.original_short_name else f.short_name end`;
+check('every live food is still there, same id, source, code, names (as they were before the short names) and category', one(`select count(*) from L.foods l left join foods f using(food_id, source)
+  where f.food_id is null or f.source_code is not l.source_code or f.name is not l.name or f.name_local is not l.name_local or ${wasShort} is not l.short_name
+  or coalesce(f.original_base_name, f.base_name) is not l.base_name or f.prep_method is not l.prep_method or coalesce(f.original_category, f.category) is not l.category or f.subcategory is not l.subcategory`) === 0, `${liveFoods} live foods`);
 check('every live nutrient value is still there, unchanged', one(`select count(*) from (select food_id, source, nutrient_code, amount_per_100g from L.food_nutrients
   except select food_id, source, nutrient_code, amount_per_100g from food_nutrients)`) === 0);
-const REPOINTED = { food_aliases: 'food_category', food_purchase_forms: 'category', food_unit_weights: null };
+const REPOINTED = { food_aliases: 'food_category', food_purchase_forms: 'category', food_volume_weights: 'category', food_unit_weights: null };
 const tables = q(`select name from L.sqlite_master where type='table' and name not in ('foods','food_nutrients','curated_recipe_ingredients','curated_recipe_unlisted_ingredients',${Object.keys(REPOINTED).map((t) => `'${t}'`).join(',')}) order by name`).map((r) => r.name);
 // The three tables that name foods: the same rows, each either untouched or pointed somewhere new with its old target kept.
 for (const [t, cat] of Object.entries(REPOINTED)) {
@@ -71,6 +73,11 @@ check('the foods shown are exactly the ones the list shows', shown - derivedShow
 check('each food carries the decision, listing name, type and caution from the list', one(`select count(*) from foods f join U.food_curation c on c.raw_id=f.unified_raw_id
   where f.curation_status is not c.status or f.listing_name is not c.listing_name or f.food_type is not c.food_type or f.caution is not c.caution`) === 0);
 check('every shown food has a base name and a category the app knows', one(`select count(*) from foods where hidden=0 and (coalesce(base_name,'')='' or category not in (select distinct category from L.foods))`) === 0);
+check('every shown food is named by its listing name', one(`select count(*) from foods where hidden=0 and listing_name is not null and (base_name is not listing_name or short_name is not listing_name)`) === 0);
+const renames = one('select count(*) from base_name_renames');
+check('every renamed old name points at a shown food, and no old name is still a shown name there', one(`select count(*) from base_name_renames n where not exists (select 1 from foods f where f.hidden=0 and f.base_name=n.new_base_name and f.category=n.new_category)
+  or exists (select 1 from foods f where f.hidden=0 and f.base_name=n.old_base_name collate binary and f.category=n.category and n.old_base_name<>n.new_base_name collate nocase)`) === 0, `${renames} old names`);
+check('every hidden row under a renamed name follows it', one(`select count(*) from foods f join base_name_renames n on n.old_base_name=coalesce(f.original_base_name, f.base_name) and n.category=coalesce(f.original_category, f.category) where f.hidden=1 and (f.base_name is not n.new_base_name or f.category is not n.new_category)`) === 0);
 const dupNames = q(`select base_name, category, count(*) n from foods where hidden=0 group by 1,2 having n>1 order by n desc`);
 note('shown foods sharing a base name and category (the app reads them as one food, as it does today)', `${dupNames.length} names, e.g. ${dupNames.slice(0, 5).map((d) => `${d.base_name} (${d.n})`).join(', ')}`);
 note('shown foods by origin', q(`select case when food_id>=1000000 then 'new to the app' else 'already in the app' end k, count(*) n from foods where hidden=0 group by 1`));

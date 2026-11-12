@@ -20,6 +20,10 @@
 //      Lines made at home, kept by name, or not eaten (aid) stay where they are.
 //   6. Aliases, unit weights and purchase forms that named a food now hidden point at the shown food with its listing
 //      name, keeping what they said before in original_base_name (and original_category).
+//   7. Short names: every shown food takes its listing name as its base and short name. Where several shared an old
+//      name, recipe lines, aliases, weights, purchase forms and hidden rows move to one of them (data/short-names.json),
+//      and base_name_renames records each old name and where it went.
+//   node merge-candidate.js <recipe_check.json> [renames.txt] writes the shared names and their choices to renames.txt.
 // No score is made up: a food the live database never scored has none, and verify-candidate.js counts them.
 const { execFileSync } = require('child_process');
 const fs = require('fs');
@@ -186,10 +190,126 @@ sql.push(`ALTER TABLE food_unit_weights ADD COLUMN original_base_name TEXT;`);
 sql.push(`UPDATE food_unit_weights SET original_base_name=base_name, base_name=(SELECT sb FROM repoint_name r WHERE r.hb=food_unit_weights.base_name COLLATE NOCASE)
   WHERE ${unshown('food_unit_weights.base_name')} AND EXISTS (SELECT 1 FROM repoint_name r WHERE r.hb=food_unit_weights.base_name COLLATE NOCASE);`);
 
-sql.push(`CREATE TABLE candidate_build (key TEXT PRIMARY KEY, value TEXT);`);
-for (const [k, v] of Object.entries({ built_at: new Date().toISOString(), live_foods: live.length, added_foods: added, nutrients_gained: gained, recipe_names_pointed: pointed, unlisted_names_moved: moved }))
-  sql.push(`INSERT INTO candidate_build VALUES (${esc(k)}, ${esc(String(v))});`);
-sql.push('COMMIT;', 'VACUUM;');
-
+sql.push('COMMIT;');
 execFileSync('sqlite3', [OUT], { input: sql.join('\n'), maxBuffer: 2e9 });
-console.log(JSON.stringify({ out: OUT, liveFoods: live.length, paired: paired.size, added, nutrientsGained: gained, recipeNamesPointed: pointed, unlistedNamesMoved: moved }));
+
+// 7. Short names. Every shown food is named by its listing name, so the app names it the way the list does and each
+// listing is a food of its own. A shown food keeps what it was called in original_base_name and original_short_name.
+// Where several shown foods shared one old name, everything else that named it moves to one of them (see
+// data/short-names.json), and base_name_renames records each move so the records on a phone can follow.
+const SN = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'short-names.json'), 'utf8'));
+const FORM = /^(frozen|dried|pickled|smoked|salt|salted|parboiled|partially|fermented|canned|deep-frozen|hot-smoked|cold-smoked|skinless|fat-free|nonfat|low-fat|reduced-fat|grass-fed|whole)\b/i;
+const groups = new Map();
+for (const r of q(OUT, `select base_name b, category c, listing_name l from foods where hidden=0 and listing_name is not null`)) {
+  const k = `${r.b}|${r.c}`;
+  if (!groups.has(k)) groups.set(k, { old: r.b, category: r.c, names: new Set() });
+  groups.get(k).names.add(r.l);
+}
+// A food the list now names exactly as the old name (case aside) keeps it: "Tomato" stays fresh tomato even where the only
+// shown row that was called Tomato is sun-dried, since the fresh one is now the food named Tomato.
+const listingAt = new Map();
+for (const r of q(OUT, 'select distinct listing_name l, category c from foods where hidden=0 and listing_name is not null')) listingAt.set(r.l.toLowerCase() + '|' + r.c, r.l);
+// Where the only shown row under an old name is preserved (Germany's dried sweet cherry) and the raw one is kept to
+// compare under a plain listing shown elsewhere (Cherries), the old name meant the fresh food, so it goes there, to the
+// category that food is shown in (Germany files chanterelles under Mushroom, the list shows them under Veg).
+const PRESERVED = /^(frozen|dried|sun-dried|air-dried|freeze-dried|dry|pickled|smoked|hot-smoked|cold-smoked|salted|canned)\b/i;
+const kept = new Map();
+for (const r of q(OUT, `select base_name b, category c, listing_name l from foods where hidden=1 and curation_status='compare' and listing_name is not null`)) {
+  const k = `${r.b}|${r.c}`;
+  if (!kept.has(k)) kept.set(k, new Set());
+  kept.get(k).add(r.l);
+}
+const shownCats = new Map();
+for (const r of q(OUT, 'select distinct listing_name l, category c from foods where hidden=0 and listing_name is not null')) {
+  if (!shownCats.has(r.l)) shownCats.set(r.l, new Set());
+  shownCats.get(r.l).add(r.c);
+}
+const renames = [];
+const usedDefaults = new Set();
+for (const [k, g] of groups) {
+  const names = [...g.names];
+  let to;
+  let how;
+  const named = listingAt.get(g.old.toLowerCase() + '|' + g.category);
+  const fresh = names.length === 1 && PRESERVED.test(names[0])
+    ? [...(kept.get(k) || [])].filter((n) => !PRESERVED.test(n) && shownCats.has(n) && (shownCats.get(n).has(g.category) || shownCats.get(n).size === 1)) : [];
+  let toCat = g.category;
+  if (SN.defaults[k]) {
+    to = SN.defaults[k]; how = 'chosen'; usedDefaults.add(k);
+    if (!g.names.has(to)) throw new Error(`short-names.json: ${to} is not a shown food named ${k}`);
+  } else if (named) { to = named; how = g.names.has(named) ? 'same name' : 'now named so'; } else if (fresh.length === 1) { [to] = fresh; how = 'the fresh one'; if (!shownCats.get(to).has(g.category)) [toCat] = shownCats.get(to); } else if (names.length === 1) { [to] = names; how = 'only'; } else {
+    const same = names.filter((n) => n.toLowerCase() === g.old.toLowerCase());
+    const plain = names.filter((n) => !FORM.test(n));
+    if (same.length === 1) { [to] = same; how = 'same name'; } else if (plain.length === 1) { [to] = plain; how = 'only plain form'; } else throw new Error(`short-names.json needs a default for ${k}: ${names.join(' / ')}`);
+  }
+  if (to !== g.old || toCat !== g.category) renames.push({ ...g, to, toCat, how, names });
+}
+for (const k of Object.keys(SN.defaults)) if (!usedDefaults.has(k)) throw new Error(`short-names.json: ${k} is not a shared shown name`);
+const renameOf = new Map(renames.map((r) => [`${r.old}|${r.category}`, r]));
+const shownAt = new Set(q(OUT, `select listing_name||'|'||category k from foods where hidden=0 and listing_name is not null`).map((r) => r.k));
+for (const l of [...SN.lines, ...SN.unitWeights]) {
+  const cat = l.from.includes('|') ? l.from.split('|')[1] : groups.get([...groups.keys()].find((k) => k.startsWith(`${l.from}|`)))?.category;
+  if (!shownAt.has(`${l.to}|${cat}`)) throw new Error(`short-names.json: no shown food ${l.to} in ${cat}`);
+}
+
+const s7 = ['PRAGMA foreign_keys=OFF;', 'BEGIN;'];
+s7.push(`CREATE TABLE base_name_renames (old_base_name TEXT NOT NULL, category TEXT NOT NULL, new_base_name TEXT NOT NULL, new_category TEXT NOT NULL, how TEXT NOT NULL, PRIMARY KEY (old_base_name, category));`);
+for (const r of renames) s7.push(`INSERT INTO base_name_renames VALUES (${esc(r.old)}, ${esc(r.category)}, ${esc(r.to)}, ${esc(r.toCat)}, ${esc(r.how)});`);
+const ren = (b, c) => `(SELECT new_base_name FROM base_name_renames n WHERE n.old_base_name=${b} AND n.category=${c})`;
+const renCat = (b, c) => `(SELECT new_category FROM base_name_renames n WHERE n.old_base_name=${b} AND n.category=${c})`;
+const hasRen = (b, c) => `EXISTS (SELECT 1 FROM base_name_renames n WHERE n.old_base_name=${b} AND n.category=${c})`;
+s7.push('ALTER TABLE foods ADD COLUMN original_base_name TEXT;', 'ALTER TABLE foods ADD COLUMN original_short_name TEXT;', 'ALTER TABLE foods ADD COLUMN original_category TEXT;');
+// A hidden row under a renamed name follows the default, so a record pointing at it lands on the same food.
+s7.push(`UPDATE foods SET original_base_name=base_name, original_short_name=short_name, original_category=category,
+  base_name=${ren('foods.base_name', 'foods.category')}, category=${renCat('foods.base_name', 'foods.category')}
+  WHERE hidden=1 AND ${hasRen('foods.base_name', 'foods.category')};`);
+s7.push(`UPDATE foods SET original_base_name=base_name, original_short_name=short_name, base_name=listing_name, short_name=listing_name
+  WHERE hidden=0 AND listing_name IS NOT NULL AND (base_name IS NOT listing_name OR short_name IS NOT listing_name);`);
+
+// Recipe lines: the line's own words first, then the default.
+const rules = SN.lines.map((l) => ({ ...l, re: new RegExp(l.match, 'i'), fields: (l.fields || 'cut,note,recipe').split(',') }));
+let linesRenamed = 0;
+let linesByWords = 0;
+for (const line of q(OUT, `select r.rowid id, r.base_name b, r.category c, r.cut_prep cut, r.prep_note note, c.name recipe
+  from curated_recipe_ingredients r join curated_recipes c on c.id=r.recipe_id`)) {
+  const k = `${line.b}|${line.c}`;
+  const rule = rules.find((l) => l.from === k && l.fields.some((f) => l.re.test(line[f] || '')));
+  const to = rule ? rule.to : renameOf.get(k)?.to;
+  const toCat = rule ? line.c : renameOf.get(k)?.toCat;
+  if (!to || (to === line.b && toCat === line.c)) continue;
+  s7.push(`UPDATE curated_recipe_ingredients SET original_base_name=coalesce(original_base_name, base_name), original_category=coalesce(original_category, category), base_name=${esc(to)}, category=${esc(toCat)} WHERE rowid=${line.id};`);
+  linesRenamed += 1;
+  if (rule) linesByWords += 1;
+}
+
+// Aliases, purchase forms and volume weights carry a category; unit weights name a food without one, so they move
+// only where the old name means one food in every category, or a rule names the unit.
+s7.push('ALTER TABLE food_volume_weights ADD COLUMN original_base_name TEXT;', 'ALTER TABLE food_volume_weights ADD COLUMN original_category TEXT;');
+for (const [t, cat] of [['food_aliases', 'food_category'], ['food_purchase_forms', 'category'], ['food_volume_weights', 'category']]) {
+  s7.push(`UPDATE OR IGNORE ${t} SET original_base_name=coalesce(original_base_name, base_name), original_category=coalesce(original_category, ${cat}),
+    base_name=${ren(`${t}.base_name`, `${t}.${cat}`)}, ${cat}=${renCat(`${t}.base_name`, `${t}.${cat}`)} WHERE ${hasRen(`${t}.base_name`, `${t}.${cat}`)};`);
+}
+const byName = new Map();
+for (const r of renames) { if (!byName.has(r.old)) byName.set(r.old, new Set()); byName.get(r.old).add(r.to); }
+let weightsRenamed = 0;
+for (const w of q(OUT, `select id, base_name b, unit_label u from food_unit_weights`)) {
+  const rule = SN.unitWeights.find((l) => l.from === w.b && new RegExp(l.unit, 'i').test(w.u));
+  const tos = byName.get(w.b);
+  const to = rule ? rule.to : tos && tos.size === 1 ? [...tos][0] : null;
+  if (!to) continue;
+  s7.push(`UPDATE food_unit_weights SET original_base_name=coalesce(original_base_name, base_name), base_name=${esc(to)} WHERE id=${w.id};`);
+  weightsRenamed += 1;
+}
+
+s7.push(`CREATE TABLE candidate_build (key TEXT PRIMARY KEY, value TEXT);`);
+const build = { built_at: new Date().toISOString(), live_foods: live.length, added_foods: added, nutrients_gained: gained, recipe_names_pointed: pointed, unlisted_names_moved: moved,
+  names_renamed: renames.length, recipe_lines_renamed: linesRenamed, recipe_lines_by_their_words: linesByWords, unit_weights_renamed: weightsRenamed };
+for (const [k, v] of Object.entries(build)) s7.push(`INSERT INTO candidate_build VALUES (${esc(k)}, ${esc(String(v))});`);
+s7.push('COMMIT;', 'VACUUM;');
+execFileSync('sqlite3', [OUT], { input: s7.join('\n'), maxBuffer: 2e9 });
+
+const how = {};
+for (const r of renames) how[r.how] = (how[r.how] || 0) + 1;
+console.log(JSON.stringify({ out: OUT, liveFoods: live.length, paired: paired.size, added, nutrientsGained: gained, recipeNamesPointed: pointed, unlistedNamesMoved: moved,
+  namesRenamed: renames.length, renamedBy: how, recipeLinesRenamed: linesRenamed, recipeLinesByTheirWords: linesByWords, unitWeightsRenamed: weightsRenamed }));
+if (process.argv[3]) fs.writeFileSync(process.argv[3], renames.filter((r) => r.names.length > 1).map((r) => `${r.old} (${r.category}) -> ${r.to} [${r.how}] of ${r.names.join(' / ')}`).join('\n'));

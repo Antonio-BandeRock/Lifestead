@@ -36,6 +36,8 @@ const BREAD = 'Flour, yeast, water and salt';
 const MUSTARD = 'Mustard seeds or powder, vinegar, water and salt';
 const HAND = {
   // The word match picked the wrong listing.
+  // Goji is sold dried; the list shows no fresh goji, and the live row was dried.
+  'Goji berry': listed('Dried goji berries'),
   'Onions, spring or scallions (includes tops and bulb)': listed('Green onions'),
   'Chicken, broiler, back, meat and skin': listed('Chicken back'),
   'Chicken, broiler, leg, meat and skin': listed('Chicken leg'),
@@ -201,7 +203,11 @@ const toks = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-
 const key = (s) => toks(s).sort().join(' ');
 const exact = new Map();
 for (const r of rows) exact.set(key(r.listing_name), r.listing_name);
-for (const r of rows) for (const f of [r.en, r.o, (r.en || '').split(',')[0], (r.o || '').split(',')[0]]) { const k = key(f); if (k && !exact.has(k)) exact.set(k, r.listing_name); }
+// A name cut at its first comma stands for the food only when what was cut does not say it was preserved: Canada's
+// 'Leeks (bulb and lower-leaf portion), freeze-dried' is not 'Leeks (Bulb And Lower Leaf-Portion)'.
+const KEPT = /dried|dehydrated|frozen|canned|smoked|pickled|salted|cured|powder|candied|concentrate/i;
+const head = (s) => { const [h, ...t] = String(s || '').split(','); return KEPT.test(t.join(',')) ? '' : h; };
+for (const r of rows) for (const f of [r.en, r.o, head(r.en), head(r.o)]) { const k = key(f); if (k && !exact.has(k)) exact.set(k, r.listing_name); }
 const names = [...shown].map((n) => ({ n, t: toks(n) })).filter((x) => x.t.join('').length > 2).sort((a, b) => b.t.length - a.t.length || b.n.length - a.n.length);
 
 const place = (name) => {

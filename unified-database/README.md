@@ -15,6 +15,16 @@ replacement.
 never reads from `unified_foods.sqlite`. No app screen changes. That's
 deliberate — see "Safety" below.
 
+## Status: every shown food named by its listing name, 2026-11-11
+
+Item 4 of the database answers. Tony's call on barcodes: no matching a scanned product to a food here, since the scan already brings in the product's own nutrient panel. Step 7 of `pipeline/merge-candidate.js` now names every shown food by its listing name (`base_name` and `short_name` both), so the app names a food the way the list does and each listing is a food of its own. A shown food keeps what it was called in `original_base_name` and `original_short_name`; 0 shown foods now share a base name and category, against many listings folded together before.
+
+Where several shown foods shared one old name, everything that named it (recipe lines, aliases, purchase forms, volume and unit weights, hidden rows, and later the records on a phone) moves to one of them, and the new table `base_name_renames (old_base_name, category, new_base_name, new_category, how)` records each move so phone records can follow at the swap. The order, in `pipeline/data/short-names.json`: a default chosen there (46, e.g. Chicken, Pork liver, Tomato paste, Red chili peppers, Ground beef), the food the list now calls by the old name (Tomato stays fresh tomato, Mushrooms stays white mushrooms), the fresh food where the only one shown under the old name is preserved and the raw one is kept to compare (11: Sweet cherry to Cherries, Peeled Mango to Mango, Chanterelle under Mushroom to Chanterelles under Veg), or the only plain form. A recipe line goes elsewhere when its own words say which (19 rules, 176 lines: chicken backs, wings, thighs and breasts, tripe for Menudo, passata, butternut). 1,957 old names, 15,385 recipe lines and 57 unit weights renamed.
+
+Two fixes on the way. The recipe check cut a source name at its first comma, so Canada's "Leeks (bulb and lower-leaf portion), freeze-dried" read as the fresh leek and 83 recipe lines landed on Dried leeks; a cut that drops a preserving word is no longer used, which also moves Spearmint to Fresh spearmint, and Goji berry goes to Dried goji berries by hand (both live goji rows are dried). Every recipe line still on a dried or frozen food was checked by hand: dried thyme, field corn, dried shrimp and the like.
+
+Counts unchanged: show 2,482, recipes with full nutrition 1,158 of 1,539 (live 935). Verify has 25 checks now, four new on the names; all pass.
+
 ## Status: ten store-bought foods hidden, 2026-11-11
 
 Tony's answer on the thirteen store-bought foods still shown: keep soy sauce, fish sauce and tamari, hide the rest. Hoisin sauce, sriracha, Worcestershire sauce, oyster sauce, sweet bean sauce, doubanjiang, tortilla mix, baking wafers, beef jerky and farina are hidden by `H` lines at the end of `pipeline/data/usda-match-decisions.txt`, together with the ten rows that compared against them, so no compare row points at a hidden head. A store-bought product reaches the app through the barcode scan, which already brings in the nutrient panel the product's lookup reports.
