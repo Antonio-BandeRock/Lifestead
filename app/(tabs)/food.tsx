@@ -81,6 +81,25 @@ const TAB_COLOR = colors.tabFood;
 // with the meal not actually logged. Needs reconnecting once whichever
 // builder a "scheduled meal" maps to (almost certainly Meal Builder) is
 // rebuilt -- not fixed yet.
+// The eleven builders whose Find a Recipe links open My Recipes or System
+// Recipes; Back from those lists returns to the one named here.
+const RECIPE_LINK_BUILDERS = [
+  'sideBuilder',
+  'saladBuilder',
+  'smoothieBuilder',
+  'fermentationBuilder',
+  'beverageBuilder',
+  'snackBuilder',
+  'bakedGoodsBuilder',
+  'soupBuilder',
+  'saucesBuilder',
+  'handheldsBuilder',
+  'dessertBuilder',
+] as const;
+function builderLensOrNull(value: string | undefined): FoodLens | null {
+  return value && (RECIPE_LINK_BUILDERS as readonly string[]).includes(value) ? (value as FoodLens) : null;
+}
+
 type FoodLens =
   // Not a builder: the quickest way to log or schedule a meal that already
   // exists somewhere (logged, saved, scheduled, or a system recipe). A lens
@@ -543,6 +562,10 @@ export default function FoodScreen() {
     // A recipe link shared into the app from another one (C11,
     // lib/shareIntake.ts), arriving with openFoodLens 'importRecipe'.
     importRecipeUrl,
+    // With openFoodLens myRecipes or systemRecipes, the builder whose Find
+    // a Recipe links sent somebody here, so Back returns to it (2026-11-11:
+    // Back from these lists used to land on Food's resting screen).
+    recipesFrom,
   } = useLocalSearchParams<{
     editMealId?: string;
     editSideId?: string;
@@ -592,6 +615,7 @@ export default function FoodScreen() {
     groceryListId?: string;
     groceryItemId?: string;
     importRecipeUrl?: string;
+    recipesFrom?: string;
   }>();
   // Through the shared hook, switched off there on 2026-08-30. Until
   // 2026-09-13 this screen read the param directly, so Food alone still
@@ -637,6 +661,24 @@ export default function FoodScreen() {
     setListLens('myFoodsList');
     setLens('myFoodsList');
     setRevealed(true);
+  }
+  // The builder that opened My Recipes or System Recipes, when one did.
+  const [recipesReturnLens, setRecipesReturnLens] = useState<FoodLens | null>(null);
+  // Back from either recipe list: to the builder that sent somebody there,
+  // otherwise to the tab's resting screen. The param that opened the list
+  // is pointed at the builder rather than cleared: the focus effect reads a
+  // builder's key as an order to open it, and an empty one as an order to
+  // close everything.
+  function closeRecipeList() {
+    if (recipesReturnLens) {
+      const back = recipesReturnLens;
+      setRecipesReturnLens(null);
+      router.setParams({ openFoodLens: back, recipesFrom: '' });
+      setLens(back);
+      setRevealed(true);
+      return;
+    }
+    setRevealed(false);
   }
   function openMyRecipes() {
     setListLens('myRecipes');
@@ -753,6 +795,7 @@ export default function FoodScreen() {
         return;
       }
       if (openFoodLens === 'myRecipes') {
+        setRecipesReturnLens(builderLensOrNull(recipesFrom));
         openMyRecipes();
         return;
       }
@@ -762,6 +805,7 @@ export default function FoodScreen() {
         return;
       }
       if (openFoodLens === 'systemRecipes') {
+        setRecipesReturnLens(builderLensOrNull(recipesFrom));
         setLens('systemRecipes');
         setRevealed(true);
         return;
@@ -1008,6 +1052,7 @@ export default function FoodScreen() {
       openDessertRecipeId,
       openFoodLens,
       importRecipeUrl,
+      recipesFrom,
     ]),
   );
 
@@ -1260,7 +1305,10 @@ export default function FoodScreen() {
       label: 'My Recipes',
       icon: 'bookmarks-outline',
       count: myRecipesCount,
-      onPress: openMyRecipes,
+      onPress: () => {
+        setRecipesReturnLens(null);
+        openMyRecipes();
+      },
     },
     {
       // 2026-09-18, direct instruction: "the user should be responsible for
@@ -1312,6 +1360,7 @@ export default function FoodScreen() {
       icon: 'book-outline',
       count: countSystemRecipes(),
       onPress: () => {
+        setRecipesReturnLens(null);
         setLens('systemRecipes');
         setRevealed(true);
       },
@@ -1417,12 +1466,12 @@ export default function FoodScreen() {
                 setLens('myFoodsDetail');
               }}
               onOpenBuilder={(params) => router.push({ pathname: '/food', params })}
-              onClose={() => setRevealed(false)}
+              onClose={closeRecipeList}
             />
           ) : lens === 'systemRecipes' ? (
             <SystemRecipesView
               onOpenBuilder={(params) => router.push({ pathname: '/food', params })}
-              onClose={() => setRevealed(false)}
+              onClose={closeRecipeList}
               initialEntryId={openEntryId}
             />
           ) : lens === 'myFoodsDetail' && detailParams ? (

@@ -3,6 +3,7 @@ import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
+import { PILL, PILL_ON, PILL_ON_TEXT } from '../constants/buttons';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, HomeSectionBand } from './HomeSectionBand';
@@ -188,8 +189,8 @@ export function FoodItemsView({
       <ScrollView contentContainerStyle={[styles.container, { paddingBottom: scrollBottomPadding }]}>
         {/* The way back, at the top since the bottom belongs to the hub
             buttons now. Same pill as the Desktop's own "Back to My Foods". */}
-        <TouchableOpacity onPress={onClose} activeOpacity={0.7}>
-          <Text style={styles.backLink}>‹ Back</Text>
+        <TouchableOpacity style={styles.backPill} onPress={onClose} activeOpacity={0.7}>
+          <Text style={styles.backPillText}>‹ Back</Text>
         </TouchableOpacity>
         {intro ? (
           <View style={styles.introBox}>
@@ -947,19 +948,12 @@ const styles = StyleSheet.create({
   // went with the move into the tab: the list now reads top-down under
   // its own header like every other band in the app.
   container: { paddingHorizontal: 0, paddingTop: 5, gap: HOME_BAND_ACCENT_WIDTH },
-  backLink: {
-    ...typography.body,
-    color: colors.textOnPrimary,
-    fontWeight: '400',
-    alignSelf: 'flex-start',
-    marginLeft: HOME_BAND_CONTENT_PADDING,
-    backgroundColor: colors.tabFood,
-    borderRadius: 20,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  // The same Back pill Meal Builder carries, 2026-11-11: this one was
+  // filled with the Food tab's green, so arriving from a builder's Find a
+  // Recipe links showed a different button than Meal Builder's Start from a
+  // meal you have.
+  backPill: { ...PILL, ...PILL_ON, alignSelf: 'flex-start', marginLeft: HOME_BAND_CONTENT_PADDING },
+  backPillText: { ...PILL_ON_TEXT },
   bandBody: { gap: HOME_BAND_ACCENT_WIDTH },
   // A line of its own above the bands, on a surface rather than
   // straight on the Food background (see CLAUDE.md's standing rule).

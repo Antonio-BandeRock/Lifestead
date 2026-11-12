@@ -42,7 +42,6 @@ module.exports = ({ listed, swap, home, named, missing, aid, SEED_OIL, G }) => {
   put(listed('Sauerkraut juice'), 'sauerkraut brine');
   put(listed('Turmeric'), 'fresh turmeric root');
   put(listed('Lime'), 'lime zest');
-  put(listed('Sriracha'), 'sriracha');
   put(listed('Dried chili peppers'), 'dried cascabel chiles');
   put(listed('Ground chili pepper'), "piment d'espelette");
   put(listed('Tarragon'), 'tarragon, fresh');
@@ -57,7 +56,7 @@ module.exports = ({ listed, swap, home, named, missing, aid, SEED_OIL, G }) => {
   put(home('Caraway, fennel, anise and coriander seeds, ground'), 'bread spice mix (brotgewürz)');
   put(aid('Sets, cures or firms a food'), 'cutter phosphate (sausage binding salt)', 'cure #2 (curing salt with nitrite and nitrate)', 'alum (phèn chua)');
   put(named(G.FERMENT), 'nuruk (korean wheat fermentation starter)', 'plain kombucha, finished first ferment', 'red yeast rice powder', 'tai pla (fermented fish innards)');
-  put(named(G.SAUCES), 'coconut aminos', 'minced crab in spice (gia vị nấu riêu cua)', 'char siu seasoning mix (gia vị xá xíu)');
+  put(named(G.SAUCES), 'sriracha', 'coconut aminos', 'minced crab in spice (gia vị nấu riêu cua)', 'char siu seasoning mix (gia vị xá xíu)');
   put(named(G.PANTRY), 'liquid smoke', 'almond extract', 'pandan extract', 'chicken bouillon powder', 'chicken bouillon powder (hạt nêm)', 'coconut soda', 'dried ram (ram khô) for cao lầu', 'chinese five-spice powder');
   put(single('Anise seed, though the taste differs'), 'ground star anise');
   put(single('Whole cane sugar'), 'coconut palm sugar');

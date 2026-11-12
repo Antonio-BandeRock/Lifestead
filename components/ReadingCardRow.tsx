@@ -144,8 +144,10 @@ export function ReadingCardRow({
 
 const styles = StyleSheet.create({
   wrap: { gap: 8 },
-  head: { backgroundColor: colors.surfaceMuted, borderRadius: 8, paddingVertical: 6, paddingHorizontal: 10, alignSelf: 'flex-start' },
-  heading: { ...typography.eyebrow, ...textShadow },
+  // Raised from the 10pt eyebrow on 2026-11-11: Tony kept passing labels like Practices, Measured
+  // without noticing them. A subgroup's name is what a reader scans by, so it reads at section size.
+  head: { backgroundColor: colors.surfaceMuted, borderRadius: 8, paddingVertical: 8, paddingHorizontal: 12, alignSelf: 'flex-start', maxWidth: '100%' },
+  heading: { ...typography.sectionTitle, ...textShadow },
   row: { gap: CARD_GAP, paddingRight: CARD_GAP, alignItems: 'stretch' },
   card: { borderWidth: 1, borderRadius: 14, overflow: 'hidden', backgroundColor: colors.surfaceMuted },
   hero: { height: 64, alignItems: 'center', justifyContent: 'center' },

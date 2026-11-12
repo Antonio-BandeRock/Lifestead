@@ -2445,7 +2445,7 @@ const styles = StyleSheet.create({
   // The Back pill every converted Food screen carries at the top (see
   // FoodItemDetailView's own backLink): the tab colour as fill, dark text.
   backPill: { ...PILL, alignSelf: 'flex-start' },
-  backPillText: { ...PILL_TEXT },
+  backPillText: { ...PILL_ON_TEXT },
   // tabColor applied inline at both call sites -- matches SideBuilder's own
   // "Ingredients" heading (also typography.eyebrow), which gets the same
   // treatment despite being a section heading rather than a single-field

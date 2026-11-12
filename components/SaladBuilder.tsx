@@ -1951,7 +1951,7 @@ export function SaladBuilder({
               <Text style={[styles.findRecipeHeading, { color: tabColor }]}>Find a Recipe</Text>
               <TouchableOpacity
                 style={styles.findRecipeLink}
-                onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'myRecipes' } })}
+                onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'myRecipes', recipesFrom: 'saladBuilder' } })}
               >
                 <Text style={styles.findRecipeLinkText} numberOfLines={1}>
                   My Recipes (your saved salads)
@@ -1961,7 +1961,7 @@ export function SaladBuilder({
               <TouchableOpacity
                 ref={walkMark.ref('builder.systemRecipes')}
                 style={styles.findRecipeLink}
-                onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'systemRecipes' } })}
+                onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'systemRecipes', recipesFrom: 'saladBuilder' } })}
               >
                 <Text style={styles.findRecipeLinkText} numberOfLines={1}>
                   System Recipes (built into the app)

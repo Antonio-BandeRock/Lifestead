@@ -2056,7 +2056,7 @@ export function SideBuilder({
               <Text style={[styles.findRecipeHeading, { color: tabColor }]}>Find a Recipe</Text>
               <TouchableOpacity
                 style={styles.findRecipeLink}
-                onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'myRecipes' } })}
+                onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'myRecipes', recipesFrom: 'sideBuilder' } })}
               >
                 <Text style={styles.findRecipeLinkText} numberOfLines={1}>
                   My Recipes (your saved sides)
@@ -2066,7 +2066,7 @@ export function SideBuilder({
               <TouchableOpacity
                 ref={walkMark.ref('builder.systemRecipes')}
                 style={styles.findRecipeLink}
-                onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'systemRecipes' } })}
+                onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'systemRecipes', recipesFrom: 'sideBuilder' } })}
               >
                 <Text style={styles.findRecipeLinkText} numberOfLines={1}>
                   System Recipes (built into the app)

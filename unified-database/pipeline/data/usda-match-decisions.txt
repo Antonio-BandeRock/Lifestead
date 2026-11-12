@@ -777,3 +777,26 @@ H 5240 canned kippered salmon
 H 27369 canned kippered salmon
 # Parboiled is part cooked, and not one of the old ways of keeping food the owner named.
 H 35245 parboiled buckwheat is part cooked
+# Store-bought products Tony asked to hide, 2026-11-11: "Keep those 3 and hide the
+# others." Soy sauce, fish sauce and tamari stay shown. The rest reach the app through
+# the barcode scan, and each row that compared against one of them goes with it.
+H 10102 Store-bought hoisin sauce, hidden by Tony's choice
+H 21920 Store-bought hoisin sauce, hidden by Tony's choice
+H 25438 Store-bought hoisin sauce, hidden by Tony's choice
+H 8402 Store-bought sriracha, hidden by Tony's choice
+H 8826 Store-bought Worcestershire sauce, hidden by Tony's choice
+H 2100 Store-bought Worcestershire sauce, hidden by Tony's choice
+H 21939 Store-bought Worcestershire sauce, hidden by Tony's choice
+H 22387 Store-bought Worcestershire sauce, hidden by Tony's choice
+H 37195 Store-bought oyster sauce, hidden by Tony's choice
+H 20605 Store-bought oyster sauce, hidden by Tony's choice
+H 37270 Store-bought sweet bean sauce, hidden by Tony's choice
+H 37168 Store-bought doubanjiang, hidden by Tony's choice
+H 6940 Store-bought tortilla mix, hidden by Tony's choice
+H 25205 Store-bought tortilla mix, hidden by Tony's choice
+H 28658 Store-bought baking wafers, hidden by Tony's choice
+H 4752 Store-bought beef jerky, hidden by Tony's choice
+H 24874 Store-bought beef jerky, hidden by Tony's choice
+H 36672 Store-bought beef jerky, hidden by Tony's choice
+H 8874 Store-bought farina, hidden by Tony's choice
+H 11132 Store-bought farina, hidden by Tony's choice

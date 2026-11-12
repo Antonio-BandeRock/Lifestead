@@ -108,8 +108,13 @@ const HAND = {
   // Listed by the owner's third round, 2026-11-06.
   'Sugar (Cane / Granulated)': listed('White sugar'),
   'Brown Sugar (Commercial)': listed('Brown sugar'),
-  'Seasoning sauce, oyster sauce': listed('Oyster sauce'),
-  'Seasoning sauce, Tian Mian Jiang (sweet soybean paste)': listed('Sweet bean sauce'),
+  // Hidden 2026-11-11 by Tony's choice (store-bought), so the recipe keeps the name.
+  'Seasoning sauce, oyster sauce': named(SAUCES),
+  'Seasoning sauce, Tian Mian Jiang (sweet soybean paste)': named(SAUCES),
+  'Sauce, Worcestershire, commercial': named(SAUCES),
+  'Hot seasoning, Doubanjiang': named(SAUCES),
+  // Wafer paper for obleas, panforte and Lebkuchen, hidden with the other store-bought foods.
+  'Round baking wafers': named(PANTRY),
   'Baking powder': listed('Baking powder'),
   'Baking powder, dry powder': listed('Baking powder'),
   Gelatine: listed('Gelatin'),

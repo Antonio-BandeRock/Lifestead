@@ -41,6 +41,15 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.86.9',
+    date: '2026-11-11',
+    changes: [
+      "The group names in the reading lenses, such as Practices, Measured on Earth Matters, are larger, so they stand out from the stories under them.",
+      "In every builder, Back from My Recipes or System Recipes now returns to the builder you came from, the way Back already does in Meal Builder.",
+      "The Back button on My Recipes and System Recipes is the same colour as the one in Meal Builder.",
+    ],
+  },
+  {
     version: '1.0.86.8',
     date: '2026-11-11',
     changes: [

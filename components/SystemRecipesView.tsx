@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../constants/colors';
+import { PILL, PILL_ON, PILL_ON_TEXT } from '../constants/buttons';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
 import { EntryPhotoSection } from './EntryPhotoSection';
@@ -420,8 +421,8 @@ export function SystemRecipesView({
     <View style={styles.wrapper}>
       <ScrollView ref={scrollRef} contentContainerStyle={{ paddingBottom: scrollBottomPadding }}>
         <View ref={contentRef} style={styles.container}>
-          <TouchableOpacity onPress={onClose} activeOpacity={0.7}>
-            <Text style={styles.backLink}>‹ Back</Text>
+          <TouchableOpacity style={styles.backPill} onPress={onClose} activeOpacity={0.7}>
+            <Text style={styles.backPillText}>‹ Back</Text>
           </TouchableOpacity>
           <View style={styles.introBox}>
             <Text style={styles.introText}>
@@ -598,19 +599,12 @@ const styles = StyleSheet.create({
   // The Food background shows through, as it does behind every builder.
   wrapper: { flex: 1 },
   container: { paddingHorizontal: 0, paddingTop: 5, gap: HOME_BAND_ACCENT_WIDTH },
-  backLink: {
-    ...typography.body,
-    color: colors.textOnPrimary,
-    fontWeight: '400',
-    alignSelf: 'flex-start',
-    marginLeft: HOME_BAND_CONTENT_PADDING,
-    backgroundColor: colors.tabFood,
-    borderRadius: 20,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    textShadowColor: 'transparent',
-    textShadowRadius: 0,
-  },
+  // The same Back pill Meal Builder carries, 2026-11-11: this one was
+  // filled with the Food tab's green, so arriving from a builder's Find a
+  // Recipe links showed a different button than Meal Builder's Start from a
+  // meal you have.
+  backPill: { ...PILL, ...PILL_ON, alignSelf: 'flex-start', marginLeft: HOME_BAND_CONTENT_PADDING },
+  backPillText: { ...PILL_ON_TEXT },
   // gap: 0 on purpose. The rows space themselves through the divider
   // below, which carries the whole band gap with the line in its
   // middle, and a gap here would add to it.

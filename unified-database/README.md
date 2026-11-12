@@ -15,6 +15,14 @@ replacement.
 never reads from `unified_foods.sqlite`. No app screen changes. That's
 deliberate — see "Safety" below.
 
+## Status: ten store-bought foods hidden, 2026-11-11
+
+Tony's answer on the thirteen store-bought foods still shown: keep soy sauce, fish sauce and tamari, hide the rest. Hoisin sauce, sriracha, Worcestershire sauce, oyster sauce, sweet bean sauce, doubanjiang, tortilla mix, baking wafers, beef jerky and farina are hidden by `H` lines at the end of `pipeline/data/usda-match-decisions.txt`, together with the ten rows that compared against them, so no compare row points at a hidden head. A store-bought product reaches the app through the barcode scan, which already brings in the nutrient panel the product's lookup reports.
+
+Recipes that call for oyster sauce (49), doubanjiang (10), Worcestershire (4), sweet bean sauce (3) and sriracha (1) keep the name under Bottled sauces, and wafer paper (3) under Pantry items, with no nutrition behind the line, the same as coconut aminos. That costs the candidate 42 recipes with full nutrition: 1,158 of 1,539 against 1,200 before, still ahead of the live 935.
+
+Counts: show 2,482, compare 6,471, hide 23,754. All 21 candidate checks pass. Shown foods with no scores: 120 already in the app (all shown and unscored in the live app today, where 4,722 shown foods carry no scores), 31 new. The app reads a food with no scores as unscored, a third answer that is never counted as safe.
+
 ## Status: the owner's answers to the holds, 2026-11-11
 
 Owner's rules: nothing cooked and no store-bought mixture whose amounts and ingredients cannot be known (a ready potato salad). Smoked and dried fish stay, as ways people have always kept food. Sausages, deli and cured meats stay with the processed-meat caution about nitrite. Hot-smoked fish is its own food, separate from cold-smoked.

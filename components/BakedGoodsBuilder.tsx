@@ -1849,7 +1849,7 @@ export function BakedGoodsBuilder({
               <Text style={[styles.findRecipeHeading, { color: tabColor }]}>Find a Recipe</Text>
               <TouchableOpacity
                 style={styles.findRecipeLink}
-                onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'myRecipes' } })}
+                onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'myRecipes', recipesFrom: 'bakedGoodsBuilder' } })}
               >
                 <Text style={styles.findRecipeLinkText} numberOfLines={1}>
                   My Recipes (your saved baked goods)
@@ -1859,7 +1859,7 @@ export function BakedGoodsBuilder({
               <TouchableOpacity
                 ref={walkMark.ref('builder.systemRecipes')}
                 style={styles.findRecipeLink}
-                onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'systemRecipes' } })}
+                onPress={() => router.push({ pathname: '/food', params: { openFoodLens: 'systemRecipes', recipesFrom: 'bakedGoodsBuilder' } })}
               >
                 <Text style={styles.findRecipeLinkText} numberOfLines={1}>
                   System Recipes (built into the app)
