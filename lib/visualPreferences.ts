@@ -839,8 +839,12 @@ export type VisualPreferences = {
   // edge tab on the far side from the hand opens Language Basics
   // (components/LanguageBasicsButton.tsx). Asked once, the first time a unit goes to
   // Home or a group is studied while Simple View hides the card.
+  // Superseded 2026-11-12 by studyButton; kept so a stored value still reads.
   languageButton: boolean;
   languageSimpleViewAsked: boolean;
+  // 2026-11-12: the flip card tab at the far edge (components/LanguageBasicsButton.tsx),
+  // opening every flash card and all the reading. On unless switched off in Profile.
+  studyButton: boolean;
   // How far ahead Home's To Do List looks (toDoListView in lib/routines.ts).
   toDoLookAhead: ToDoLookAhead;
 };
@@ -1058,6 +1062,7 @@ const DEFAULT_VISUAL_PREFERENCES: VisualPreferences = {
   simpleView: false,
   simpleViewExtras: ['groceryList'],
   languageButton: false,
+  studyButton: true,
   languageSimpleViewAsked: false,
   toDoLookAhead: DEFAULT_TO_DO_LOOK_AHEAD,
 };

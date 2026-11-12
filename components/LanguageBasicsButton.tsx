@@ -11,8 +11,22 @@
 // never stacks into Voice Control or Search near the thumb. A tap opens the same
 // list the Home card shows (LanguageBasicsList), in the place and at the size
 // of a LensHub menu.
-import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useState } from 'react';
+//
+// 2026-11-12, widened to every flash card and all the reading. Direct request:
+// "a new quick select button on the left side of the screen to include the
+// different flash cards for language and others. Maybe this is a good place
+// also for a quick shortcut to all of the Reading material as well? It should
+// have the icon for it be a flipping card. A single card paired with a curved
+// two-way arrow effectively communicating the front-and-back active recall
+// process." So the tab now wears FlipCardIcon and is drawn unless switched off
+// (studyButton, on by default). A tap opens the edge-tab menu
+// (components/EdgeTabMenu.tsx) in two groups: Flash Cards (Language Basics,
+// which still opens the list below, Languages and Learn) and Reading (every
+// reading lens, and the Library cards on Home).
+import { useRouter } from 'expo-router';
+import { useCallback, useEffect, useState } from 'react';
+import Svg, { Path, Rect } from 'react-native-svg';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Alert, Modal, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 import { BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 import { colors } from '../constants/colors';
@@ -22,8 +36,11 @@ import { useVisualPreferences } from '../hooks/useVisualPreferences';
 import { t } from '../lib/i18n';
 import { useLanguage } from '../lib/language';
 import { farSide, getNavigationHand, useNavigationHand } from '../lib/navigationHand';
-import { getVisualPreferences, isShownOnHome, modalAnimationType, setVisualPreferences } from '../lib/visualPreferences';
-import { EDGE_TAB_HEIGHT, EdgeTab } from './EdgeTab';
+import { getVisualPreferences, isHomeSectionVisible, isShownOnHome, modalAnimationType, setVisualPreferences } from '../lib/visualPreferences';
+import { sortByLabel } from '../lib/choiceOrder';
+import { registerHubSpot } from '../lib/hubHandoff';
+import { EDGE_TAB_HEIGHT, EDGE_TAB_WIDTH, EdgeTab } from './EdgeTab';
+import { EdgeTabMenu, type EdgeMenuChoice } from './EdgeTabMenu';
 import { LanguageBasicsList, loadLanguageSetsOnHome, type LanguageSetOnHome } from './LanguageBasicsHomeCard';
 import { cardHeightFor } from './LensHub';
 
@@ -32,8 +49,24 @@ const ABOVE_FOOTER = 8 + EDGE_TAB_HEIGHT + 8;
 
 function whereItIs(side: 'left' | 'right'): string {
   return side === 'left'
-    ? t('Language Basics is the button with the language icon at the left edge, just above the navigation switch.')
-    : t('Language Basics is the button with the language icon at the right edge, just above the navigation switch.');
+    ? t('Language Basics is in the menu of the button with the flip card icon at the left edge, just above the navigation switch.')
+    : t('Language Basics is in the menu of the button with the flip card icon at the right edge, just above the navigation switch.');
+}
+
+/**
+ * A single card under a curved two-way arrow: the front and back of active
+ * recall. Drawn on a 24 grid to sit beside the Ionicons outline set.
+ */
+export function FlipCardIcon({ size = 18, color }: { size?: number; color: string }) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+      <Rect x={4} y={12} width={16} height={9} rx={1.6} transform="rotate(-6 12 16.5)" />
+      <Path d="M9.2 16.8l5.6-0.6" />
+      <Path d="M5.2 8.6 C6.8 2.6 17.2 2.6 18.8 8.6" />
+      <Path d="M3.6 7.6 L5.4 10.6 L7.3 7.9 Z" fill={color} strokeWidth={1.2} />
+      <Path d="M16.7 7.9 L18.6 10.6 L20.4 7.6 Z" fill={color} strokeWidth={1.2} />
+    </Svg>
+  );
 }
 
 /**
@@ -43,7 +76,7 @@ function whereItIs(side: 'left' | 'right'): string {
  */
 export async function askWhereLanguageBasicsGoes(): Promise<void> {
   const prefs = await getVisualPreferences();
-  if (!prefs.simpleView || prefs.languageSimpleViewAsked || prefs.languageButton) return;
+  if (!prefs.simpleView || prefs.languageSimpleViewAsked || prefs.studyButton !== false) return;
   if (isShownOnHome(prefs, 'languageBasics')) return;
   const side = farSide(getNavigationHand());
   Alert.alert(
@@ -68,7 +101,7 @@ export async function askWhereLanguageBasicsGoes(): Promise<void> {
       {
         text: t('A Button at the Edge'),
         onPress: () => {
-          void setVisualPreferences({ languageSimpleViewAsked: true, languageButton: true }).then(() =>
+          void setVisualPreferences({ languageSimpleViewAsked: true, studyButton: true }).then(() =>
             Alert.alert(t('Language Basics'), whereItIs(side)),
           );
         },
@@ -82,10 +115,27 @@ export function LanguageBasicsButton() {
   const hand = useNavigationHand();
   const footerHeight = useFooterBandHeight();
   const language = useLanguage();
+  const router = useRouter();
+  const insets = useSafeAreaInsets();
+  const [menuOpen, setMenuOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [sets, setSets] = useState<LanguageSetOnHome[] | null>(null);
 
-  const { fontScale } = useWindowDimensions();
+  const { fontScale, width: windowWidth, height: windowHeight } = useWindowDimensions();
+  const side = farSide(hand);
+  const bottom = footerHeight + ABOVE_FOOTER;
+  const menuBottom = bottom + EDGE_TAB_HEIGHT + 6;
+  const menuMaxHeight = Math.max(160, windowHeight - menuBottom - insets.top - 16);
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
+  const shown = prefs.studyButton !== false;
+
+  // A change of mind goes straight to another hub's menu (lib/hubHandoff.ts),
+  // the way the quick-access tab does it.
+  const tabLeft = side === 'right' ? windowWidth - EDGE_TAB_WIDTH : 0;
+  useEffect(() => {
+    if (!shown) return undefined;
+    return registerHubSpot({ key: 'study', left: tabLeft, bottom, width: EDGE_TAB_WIDTH, height: EDGE_TAB_HEIGHT, open: () => setMenuOpen(true) });
+  }, [shown, tabLeft, bottom]);
   const { left, width } = useHubMenuCardSpan();
   const sheetBottom = useMenuCardBottom();
   const fit = useMenuCardFit(cardHeightFor(fontScale), 200);
@@ -106,21 +156,54 @@ export function LanguageBasicsButton() {
     };
   }, [open, language]);
 
-  if (!prefs.languageButton) return null;
+  if (!shown) return null;
+
+  const lens = (pathname: string, param: string, key: string) => () => router.push({ pathname, params: { [param]: key } } as never);
+  // Each group alphabetical, top to bottom as drawn; icons are the lenses' own.
+  const flashCards: EdgeMenuChoice[] = sortByLabel([
+    { key: 'basics', label: 'Language Basics', icon: 'chatbubbles-outline', run: () => setOpen(true) },
+    { key: 'languages', label: 'Languages', icon: 'language-outline', run: lens('/interests', 'openInterestsLens', 'languages') },
+    { key: 'learn', label: 'Learn', icon: 'school-outline', run: lens('/interests', 'openInterestsLens', 'learn') },
+  ]);
+  const reading: EdgeMenuChoice[] = sortByLabel([
+    { key: 'conditions', label: 'Conditions', icon: 'pulse-outline', run: lens('/life', 'openLifeLens', 'conditions') },
+    { key: 'earthMatters', label: 'Earth Matters', icon: 'earth-outline', run: lens('/life', 'openLifeLens', 'earthMatters') },
+    { key: 'healthLiteracy', label: 'Health Literacy', icon: 'reader-outline', run: lens('/life', 'openLifeLens', 'healthLiteracy') },
+    { key: 'horticulture', label: 'Horticulture', icon: 'leaf-outline', run: lens('/garden', 'openGardenLens', 'horticulture') },
+    { key: 'searchReading', label: 'Search Reading', icon: 'search-outline', run: lens('/life', 'openLifeLens', 'searchReading') },
+    // The Library cards only while Home shows them; a hidden section's link would land elsewhere.
+    ...(isHomeSectionVisible(prefs, 'digestCards')
+      ? [{ key: 'library', label: 'Library', icon: 'library-outline' as const, run: lens('/', 'openHomeSection', 'digestCards') }]
+      : []),
+  ]);
 
   return (
     <>
       <EdgeTab
-        side={farSide(hand)}
-        bottom={footerHeight + ABOVE_FOOTER}
-        onPress={() => setOpen(true)}
+        side={side}
+        bottom={bottom}
+        onPress={() => setMenuOpen((was) => !was)}
         hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}
         accessibilityRole="button"
-        accessibilityLabel="Language Basics"
-        accessibilityHint="Opens the language units you put on Home and the groups you studied together"
+        accessibilityLabel="Flash cards and reading"
+        accessibilityHint="Opens Language Basics, Languages, Learn and every part of the reading"
+        accessibilityState={{ expanded: menuOpen }}
       >
-        <Ionicons name="language-outline" size={18} color={colors.textPrimary} />
+        <FlipCardIcon color={colors.textPrimary} />
       </EdgeTab>
+      {menuOpen ? (
+        <EdgeTabMenu
+          hubKey="study"
+          side={side}
+          bottom={menuBottom}
+          maxHeight={menuMaxHeight}
+          groups={[
+            { heading: 'Flash Cards', choices: flashCards },
+            { heading: 'Reading Material', choices: reading },
+          ]}
+          onClose={closeMenu}
+        />
+      ) : null}
       <Modal visible={open} transparent animationType={modalAnimationType('fade')} onRequestClose={() => setOpen(false)}>
         <View style={StyleSheet.absoluteFill}>
           <Pressable style={StyleSheet.absoluteFill} onPress={() => setOpen(false)} accessible={false} />

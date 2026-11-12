@@ -42,7 +42,9 @@
 // 'quick' is the quick-access menu on the thumb side (components/
 // QuickAccessButton.tsx), since 1.0.66.8. It is not a Modal and lives at the
 // root rather than on a screen, so it registers whenever it is mounted.
-export type HubKey = 'tab' | 'lens' | 'myItems' | 'quick';
+// 'study' is the flash cards and reading tab on the far side (components/
+// LanguageBasicsButton.tsx), since 2026-11-12, registered the same way.
+export type HubKey = 'tab' | 'lens' | 'myItems' | 'quick' | 'study';
 
 export type HubSpot = {
   key: HubKey;

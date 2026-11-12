@@ -33,30 +33,21 @@
 // about where something is located. We need a button for them to do that."
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { useEffect, useState, useSyncExternalStore, type ComponentProps } from 'react';
-import { BackHandler, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { useCallback, useEffect, useState } from 'react';
+import { useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../constants/colors';
 import { useFooterBandHeight } from '../constants/floatingButton';
-import { textShadow, typography } from '../constants/typography';
 import { useVisualPreferences } from '../hooks/useVisualPreferences';
 import { setVisualPreferences } from '../lib/visualPreferences';
 import { sortByLabel } from '../lib/choiceOrder';
 import { useNavigationHand } from '../lib/navigationHand';
-import { getHubSpots, otherHubSpots, registerHubSpot, subscribeHubSpots } from '../lib/hubHandoff';
+import { registerHubSpot } from '../lib/hubHandoff';
 import { openQuickAccessSheet } from '../lib/quickAccess';
 import { EDGE_TAB_HEIGHT, EDGE_TAB_WIDTH, EdgeTab } from './EdgeTab';
-import { HANDOFF_LABELS } from './HubHandoff';
+import { EdgeTabMenu, type EdgeMenuChoice } from './EdgeTabMenu';
 
 const GAP_ABOVE_FOOTER = 8;
-const MENU_WIDTH = 250;
-
-type Choice = {
-  key: string;
-  label: string;
-  icon: ComponentProps<typeof Ionicons>['name'];
-  run: () => void;
-};
 
 export function QuickAccessButton() {
   const hand = useNavigationHand();
@@ -83,25 +74,10 @@ export function QuickAccessButton() {
       registerHubSpot({ key: 'quick', left: tabLeft, bottom, width: EDGE_TAB_WIDTH, height: EDGE_TAB_HEIGHT, open: () => setOpen(true) }),
     [tabLeft, bottom],
   );
-  const allHubs = useSyncExternalStore(subscribeHubSpots, getHubSpots, getHubSpots);
-  const otherHubs = otherHubSpots(allHubs, 'quick');
-
-  useEffect(() => {
-    if (!open) return undefined;
-    const subscription = BackHandler.addEventListener('hardwareBackPress', () => {
-      setOpen(false);
-      return true;
-    });
-    return () => subscription.remove();
-  }, [open]);
-
-  function pick(run: () => void) {
-    setOpen(false);
-    run();
-  }
+  const close = useCallback(() => setOpen(false), []);
 
   // Alphabetical, top to bottom as drawn.
-  const choices: Choice[] = sortByLabel([
+  const choices: EdgeMenuChoice[] = sortByLabel([
     { key: 'ask', label: 'Ask Your Records', icon: 'help-circle-outline', run: () => openQuickAccessSheet('askRecords') },
     { key: 'where', label: 'Where Is It', icon: 'location-outline', run: () => router.push({ pathname: '/where-is-it', params: { listen: '1' } }) },
     { key: 'storeLocation', label: 'Store Its Location', icon: 'pin-outline', run: () => openQuickAccessSheet('storeLocation') },
@@ -130,8 +106,6 @@ export function QuickAccessButton() {
     { key: 'voice', label: 'Voice Note', icon: 'mic-outline', run: () => openQuickAccessSheet('voiceNote') },
   ]);
 
-  const menuSide = hand === 'right' ? { right: 8 } : { left: 8 };
-
   return (
     <>
       <EdgeTab
@@ -151,75 +125,8 @@ export function QuickAccessButton() {
         <Ionicons name="grid-outline" size={18} color={colors.textPrimary} />
       </EdgeTab>
       {open ? (
-        <View style={StyleSheet.absoluteFill} pointerEvents="box-none">
-          <Pressable style={StyleSheet.absoluteFill} onPress={() => setOpen(false)} accessible={false} />
-          {otherHubs.map((spot) => (
-            <Pressable
-              key={spot.key}
-              style={{ position: 'absolute', left: spot.left, bottom: spot.bottom, width: spot.width, height: spot.height }}
-              onPress={() => pick(spot.open)}
-              accessibilityRole="button"
-              accessibilityLabel={HANDOFF_LABELS[spot.key]}
-            />
-          ))}
-          <View style={[styles.panel, menuSide, { bottom: menuBottom, maxHeight }]}>
-            <ScrollView contentContainerStyle={styles.list} bounces={false}>
-              {choices.map((choice) => (
-                <Pressable
-                  key={choice.key}
-                  onPress={() => pick(choice.run)}
-                  accessibilityRole="button"
-                  accessibilityLabel={choice.label}
-                  style={({ pressed }) => [styles.well, pressed ? styles.wellPressed : null]}
-                >
-                  <Ionicons name={choice.icon} size={20} color={colors.textPrimary} style={textShadow} />
-                  <Text style={styles.label}>{choice.label}</Text>
-                </Pressable>
-              ))}
-            </ScrollView>
-          </View>
-        </View>
+        <EdgeTabMenu hubKey="quick" side={hand} bottom={menuBottom} maxHeight={maxHeight} groups={[{ choices }]} onClose={close} />
       ) : null}
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  // The panel behind every choice: the lighter menu grey with a firm border and a
-  // drop shadow, so the list lifts off the screen behind it.
-  panel: {
-    position: 'absolute',
-    width: MENU_WIDTH,
-    backgroundColor: colors.menuSurface,
-    borderRadius: 14,
-    borderWidth: 2,
-    borderColor: colors.border,
-    padding: 8,
-    shadowColor: '#000',
-    shadowOpacity: 0.35,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 4 },
-    elevation: 10,
-  },
-  // 8 to 4 and wells 12 to 6 padding in 1.0.66.7, direct instruction: half
-  // the space between, each choice about a quarter shorter (48 to 36 dp).
-  list: { gap: 4 },
-  // Each choice in a pressed-in well: darker than the panel, its top edge
-  // shaded and its bottom edge catching light, the way a recess reads.
-  well: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    paddingVertical: 6,
-    paddingHorizontal: 14,
-    borderRadius: 10,
-    backgroundColor: 'rgba(0,0,0,0.38)',
-    borderWidth: 1,
-    borderTopColor: 'rgba(0,0,0,0.6)',
-    borderLeftColor: 'rgba(0,0,0,0.45)',
-    borderRightColor: 'rgba(255,255,255,0.08)',
-    borderBottomColor: 'rgba(255,255,255,0.18)',
-  },
-  wellPressed: { backgroundColor: 'rgba(0,0,0,0.55)' },
-  label: { ...typography.bodyEmphasis, fontWeight: '400', color: colors.textPrimary, flexShrink: 1, ...textShadow },
-});

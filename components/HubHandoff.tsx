@@ -110,4 +110,5 @@ export const HANDOFF_LABELS: Record<HubKey, string> = {
   lens: 'Switch to the view menu',
   myItems: 'Switch to your saved items',
   quick: 'Switch to the quick-access menu',
+  study: 'Switch to the flash cards and reading menu',
 };

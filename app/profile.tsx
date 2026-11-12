@@ -5545,19 +5545,21 @@ export default function ProfileScreen() {
               })}
             </View>
             {/* 2026-11-11: Language Basics as a button of its own at the edge,
-                components/LanguageBasicsButton.tsx, drawn in either view. */}
+                components/LanguageBasicsButton.tsx, drawn in either view.
+                2026-11-12: widened to every flash card and all the reading,
+                on unless switched off here (studyButton). */}
             <Text style={styles.helpText}>
-              A Language Basics button at the edge, with the language icon, opens your language units and the groups you studied together from any screen.
+              The button with the flip card icon at the far edge opens Language Basics, Languages, Learn and every part of the reading from any screen.
             </Text>
             <View style={styles.pillRow}>
               {[false, true].map((value) => {
-                const active = visualPrefs.languageButton === value;
+                const active = (visualPrefs.studyButton !== false) === value;
                 return (
                   <TouchableOpacity
                     key={value ? 'on' : 'off'}
                     style={[styles.pill, active && styles.pillActive]}
                     onPress={() => {
-                      void setVisualPreferences({ languageButton: value, languageSimpleViewAsked: true });
+                      void setVisualPreferences({ studyButton: value, languageSimpleViewAsked: true });
                     }}
                     accessibilityRole="button"
                     accessibilityState={{ selected: active }}

@@ -2525,6 +2525,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'Your hands can stay on whatever they are doing.',
     },
     {
+      key: 'cardsAndReading',
+      title: 'Open flash cards or the reading from any screen',
+      steps: [
+        { say: 'Tap the tab with the flip card, a card under a curved two-way arrow, at the bottom edge of the screen on the side away from your thumb, just above the navigation switch.' },
+        { say: 'Under Flash Cards, tap Language Basics for the units you put on Home, Languages for every language set, or Learn for the ready-made decks and your own.' },
+        { say: 'Under Reading Material, tap Conditions, Earth Matters, Health Literacy, Horticulture or Search Reading, or Library for the cards on Home while Home shows them.' },
+      ],
+      forYou: 'Studying and reading are one tap away wherever you are. Profile, Simple View can take the button away.',
+    },
+    {
       key: 'captureSort',
       title: 'Sort out what is waiting',
       steps: [
@@ -2601,7 +2611,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Open the band with the name of Interests, then Language Basics.', mark: 'homeBand.languageBasics', stay: true },
         { say: 'Under Studied together before, tap a group. Its cards start right away.', mark: 'home.languageBasicsGroup' },
       ],
-      forYou: 'A group shows here once you have studied those units together under Interests, Languages. The six most recent are kept. With Simple View on, Profile, Simple View can keep this card on Home or put a Language Basics button at the edge of the screen.',
+      forYou: 'A group shows here once you have studied those units together under Interests, Languages. The six most recent are kept. With Simple View on, Profile, Simple View can keep this card on Home, and the flip card button at the edge of the screen opens Language Basics from any screen.',
     },
     {
       key: 'insideKnowledge',
