@@ -6,9 +6,11 @@
 //
 // Drawn only while languageButton is on (lib/visualPreferences.ts), chosen in
 // Profile > Simple View or in the one question app/language-basics.tsx asks
-// (askWhereLanguageBasicsGoes below). It sits on the far side from the hand,
-// one slot above the navigation switch (components/HandSwitchButton.tsx), so it
-// never stacks into Voice Control or Search near the thumb. A tap opens the same
+// (askWhereLanguageBasicsGoes below). It sits on the thumb side, one slot above
+// Voice Control (components/VoiceControlButton.tsx), with Search moved up one
+// slot above it (components/ThumbSearchButton.tsx). 2026-11-12, direct
+// correction: with left-hand navigation it had been drawn on the right, the far
+// side, "and it is supposed to be on the left", with the other quick buttons. A tap opens the same
 // list the Home card shows (LanguageBasicsList), in the place and at the size
 // of a LensHub menu.
 //
@@ -35,22 +37,24 @@ import { textShadow, typography } from '../constants/typography';
 import { useVisualPreferences } from '../hooks/useVisualPreferences';
 import { t } from '../lib/i18n';
 import { useLanguage } from '../lib/language';
-import { farSide, getNavigationHand, useNavigationHand } from '../lib/navigationHand';
+import { getNavigationHand, useNavigationHand } from '../lib/navigationHand';
 import { getVisualPreferences, isHomeSectionVisible, isShownOnHome, modalAnimationType, setVisualPreferences } from '../lib/visualPreferences';
 import { sortByLabel } from '../lib/choiceOrder';
 import { registerHubSpot } from '../lib/hubHandoff';
 import { EDGE_TAB_HEIGHT, EDGE_TAB_WIDTH, EdgeTab } from './EdgeTab';
+import { VOICE_CONTROL_ABOVE_FOOTER } from './VoiceControlButton';
 import { EdgeTabMenu, type EdgeMenuChoice } from './EdgeTabMenu';
 import { LanguageBasicsList, loadLanguageSetsOnHome, type LanguageSetOnHome } from './LanguageBasicsHomeCard';
 import { cardHeightFor } from './LensHub';
 
-// The navigation switch sits 8 above the footer and is EDGE_TAB_HEIGHT tall; this sits 8 above that.
-const ABOVE_FOOTER = 8 + EDGE_TAB_HEIGHT + 8;
+// Voice Control sits VOICE_CONTROL_ABOVE_FOOTER up and is EDGE_TAB_HEIGHT tall; this sits 8 above that.
+export const STUDY_ABOVE_FOOTER = VOICE_CONTROL_ABOVE_FOOTER + EDGE_TAB_HEIGHT + 8;
+const ABOVE_FOOTER = STUDY_ABOVE_FOOTER;
 
 function whereItIs(side: 'left' | 'right'): string {
   return side === 'left'
-    ? t('Language Basics is in the menu of the button with the flip card icon at the left edge, just above the navigation switch.')
-    : t('Language Basics is in the menu of the button with the flip card icon at the right edge, just above the navigation switch.');
+    ? t('Language Basics is in the menu of the button with the flip card icon at the left edge, just above Voice Control.')
+    : t('Language Basics is in the menu of the button with the flip card icon at the right edge, just above Voice Control.');
 }
 
 /**
@@ -78,7 +82,7 @@ export async function askWhereLanguageBasicsGoes(): Promise<void> {
   const prefs = await getVisualPreferences();
   if (!prefs.simpleView || prefs.languageSimpleViewAsked || prefs.studyButton !== false) return;
   if (isShownOnHome(prefs, 'languageBasics')) return;
-  const side = farSide(getNavigationHand());
+  const side = getNavigationHand();
   Alert.alert(
     t('Simple View hides Language Basics on Home'),
     t('Your units and the groups you study together can open from a button at the edge of the screen, or Simple View can keep the Language Basics card on Home. Either can be changed in Profile, under Simple View.'),
@@ -122,7 +126,7 @@ export function LanguageBasicsButton() {
   const [sets, setSets] = useState<LanguageSetOnHome[] | null>(null);
 
   const { fontScale, width: windowWidth, height: windowHeight } = useWindowDimensions();
-  const side = farSide(hand);
+  const side = hand;
   const bottom = footerHeight + ABOVE_FOOTER;
   const menuBottom = bottom + EDGE_TAB_HEIGHT + 6;
   const menuMaxHeight = Math.max(160, windowHeight - menuBottom - insets.top - 16);

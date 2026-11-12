@@ -606,9 +606,6 @@ function UnlockedApp() {
               {/* The navigation switch (1.0.61.13): the edge tab above the footer
                   on the far side from the hubs, components/HandSwitchButton.tsx. */}
               <HandSwitchButton />
-              {/* Language Basics (2026-11-11): one slot above the navigation switch while
-                  its switch is on, components/LanguageBasicsButton.tsx. */}
-              <LanguageBasicsButton />
               {/* Quick access (1.0.66.6): one edge tab on the thumb side opening
                   Voice Note, Low Stimulation, Where Is It and Ask Your Records,
                   components/QuickAccessButton.tsx. The voice note's sheet
@@ -617,11 +614,17 @@ function UnlockedApp() {
                   access, components/VoiceControlButton.tsx. Ahead of the menu so
                   an open menu draws over it. */}
               <VoiceControlButton />
+              {/* Search near the thumb (1.0.61.15): above the flash cards and reading
+                  tab, or above Voice Control while that tab is off, when the screen has
+                  a lens search box, components/ThumbSearchButton.tsx. Drawn before the
+                  flash cards and reading tab so that tab's menu covers it. */}
+              <ThumbSearchButton />
+              {/* Flash cards and reading (2026-11-12): on the thumb side just above
+                  Voice Control, components/LanguageBasicsButton.tsx. Drawn before
+                  quick access so the quick-access menu covers this tab. */}
+              <LanguageBasicsButton />
               <QuickAccessButton />
               <QuickCaptureSheet />
-              {/* Search near the thumb (1.0.61.15): above the Voice Control tab while
-                  the screen has a lens search box, components/ThumbSearchButton.tsx. */}
-              <ThumbSearchButton />
               {/* Low Stimulation's explain-then-ask card, opened from the
                   quick-access menu, components/LowStimulationSheet.tsx. */}
               <LowStimulationSheet />

@@ -2528,7 +2528,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       key: 'cardsAndReading',
       title: 'Open flash cards or the reading from any screen',
       steps: [
-        { say: 'Tap the tab with the flip card, a card under a curved two-way arrow, at the bottom edge of the screen on the side away from your thumb, just above the navigation switch.' },
+        { say: 'Tap the tab with the flip card, a card under a curved two-way arrow, at the bottom edge of the screen on your thumb side, just above Voice Control.' },
         { say: 'Under Flash Cards, tap Language Basics for the units you put on Home, Languages for every language set, or Learn for the ready-made decks and your own.' },
         { say: 'Under Reading Material, tap Conditions, Earth Matters, Health Literacy, Horticulture or Search Reading, or Library for the cards on Home while Home shows them.' },
       ],
