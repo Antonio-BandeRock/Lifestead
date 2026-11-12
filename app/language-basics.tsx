@@ -32,7 +32,7 @@ import { useBandFolds } from '../hooks/useBandFolds';
 import { useCourseVoice } from '../hooks/useCourseVoice';
 import { t } from '../lib/i18n';
 import { localDayOf } from '../lib/interests';
-import { deckInfo, deckKeyOf, newLeftToday, planSitting, replayLadder, unitsOf, type DeckInfo, type SittingOrder } from '../lib/languageBasics';
+import { cardFits, cardHasFits, deckInfo, deckKeyOf, newLeftToday, planSitting, replayLadder, unitsOf, type CardFits, type DeckInfo, type SittingOrder } from '../lib/languageBasics';
 import { courseCardLayout } from '../lib/learnCourseCard';
 import type { CourseCard } from '../lib/learnCourseFile';
 import { askWhereLanguageBasicsGoes } from '../components/LanguageBasicsButton';
@@ -46,7 +46,7 @@ const DAILY_CHOICES = [5, 10, 15, 20, 30, 50];
 /** What a sitting was asked for, so Keep Going can ask again. */
 type Scope = { kind: 'units'; units: number[]; order: SittingOrder } | { kind: 'deck'; key: string };
 type Sitting = { scope: Scope; goingOver: boolean; queue: string[]; index: number; practised: string[]; kept: LearnReview[] };
-type ShownInfo = { title: string; info: DeckInfo; cardRemember?: string };
+type ShownInfo = { title: string; info: DeckInfo | null; fits?: CardFits };
 
 function today(): string {
   return localDayOf(new Date().toISOString());
@@ -188,9 +188,9 @@ export default function LanguageBasicsScreen() {
     else finish(next);
   }
 
-  function infoFor(key: string, title: string, cardRemember?: string) {
+  function infoFor(key: string, title: string) {
     if (!set) return;
-    setShown({ title, info: deckInfo(key, cards, set.outline, answered), cardRemember });
+    setShown({ title, info: deckInfo(key, cards, set.outline, answered) });
   }
 
   function toggleHome(unit: number, on: boolean) {
@@ -214,7 +214,7 @@ export default function LanguageBasicsScreen() {
   }, [reloaded, set, settings, reviews]);
 
   const title = deck ? t(deck.name) : t('Languages');
-  const infoModal = <LanguageDeckInfo title={shown?.title ?? null} info={shown?.info ?? null} cardRemember={shown?.cardRemember} onClose={() => setShown(null)} />;
+  const infoModal = <LanguageDeckInfo title={shown?.title ?? null} info={shown?.info ?? null} fits={shown?.fits} onClose={() => setShown(null)} />;
 
   if (missing || !set || !deck || !settings) {
     return (
@@ -231,6 +231,7 @@ export default function LanguageBasicsScreen() {
 
   if (sitting) {
     const card = cardById.get(sitting.queue[sitting.index]);
+    const currentFits = card ? cardFits(card, cards) : null;
     return (
       <CalmBands>
         <View style={styles.screen}>
@@ -253,7 +254,7 @@ export default function LanguageBasicsScreen() {
                   canSpeak={voice.canSpeak}
                   onSpeak={voice.speak}
                   onGrade={(grade, matched) => void answer(grade, matched)}
-                  onInfo={() => infoFor(deckKeyOf(card), set.outline.groups[deckKeyOf(card)]?.name ?? card.group, card.remember)}
+                  onInfo={currentFits && cardHasFits(currentFits) ? () => setShown({ title: set.outline.groups[deckKeyOf(card)]?.name ?? card.group, info: null, fits: currentFits }) : undefined}
                 />
               ) : null}
               <TouchableOpacity ref={walkMark.ref('languages.stop')} style={[styles.secondaryButton, walkMark('languages.stop')]} onPress={() => finish(sitting)} accessibilityRole="button">

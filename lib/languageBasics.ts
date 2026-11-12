@@ -239,6 +239,111 @@ export function deckInfo(deckKey: string, cards: CourseCard[], outline: Language
   return { worked, notYet, rules, remember };
 }
 
+// ---- How one card fits ----
+//
+// Asked for 2026-11-11: How This Fits on a turned card says only what that card's own
+// words touch, never the unit's whole list of rules or the deck's links, which every
+// card in a deck would repeat. Two ways a rule card counts as touching a card:
+//   1. a word on the card's front or back is in the rule's pattern, and the word is
+//      uncommon across the set (under 4% of cards), so "es" or "the" ties nothing;
+//   2. on a verb card, its forms take the same endings as the rule's pattern, once the
+//      stem is taken off both (llevaré against trabajaré: é, ás, á, emos, án).
+// Only rules from this card's unit or earlier count, so nothing points ahead.
+
+/** A rule a card uses, and the word on the card that ties it there (empty when its endings do). */
+export type CardRule = { target: string; native: string; word: string };
+export type CardFits = { remember: string; rules: CardRule[] };
+
+const CARD_RULE_LIMIT = 3;
+const COMMON_SHARE = 0.04;
+// Subject words sit beside every verb form, and the helper forms beside every perfect,
+// so they are never what ties a card to a rule.
+const NEVER_TIES = new Set([
+  'yo', 'tú', 'él', 'ella', 'usted', 'le', 'nosotros', 'nosotras', 'ellos', 'ellas', 'ustedes', 'que', 'no', 'me', 'te', 'se', 'nos',
+  'i', 'you', 'he', 'she', 'we', 'they', 'it', 'will', 'would', 'have', 'has', 'had', 'was', 'were', 'am', 'is', 'are', 'do', 'does', "don't", "doesn't", 'not',
+]);
+
+function wordsOf(text: string): string[] {
+  return (text || '')
+    .toLowerCase()
+    .normalize('NFC')
+    .replace(/[¿?¡!.,;:()[\]→·/…"“”'’=+✗✓@_]/g, ' ')
+    .split(/\s+/)
+    .filter((word) => word.length > 1 && !/^\d+$/.test(word));
+}
+
+function commonPrefix(words: string[]): string {
+  if (words.length === 0) return '';
+  let prefix = words[0];
+  for (const word of words) while (!word.startsWith(prefix)) prefix = prefix.slice(0, -1);
+  return prefix;
+}
+
+/** A verb card's forms with the subject words taken off, and its base form. */
+function verbForms(card: CourseCard): { base: string; forms: string[] } | null {
+  if (card.type !== 'Verb') return null;
+  const [head, ...rest] = card.target.split('\n');
+  const base = wordsOf(head.split('·')[0])[0] ?? '';
+  const forms = wordsOf(rest.join(' ')).filter((word) => !NEVER_TIES.has(word));
+  return base && forms.length >= 3 ? { base, forms } : null;
+}
+
+/** How many of a card's forms end the way the rule's pattern ends, the stem taken off both. */
+function endingsShared(verb: { base: string; forms: string[] }, pattern: string[]): number {
+  const words = pattern.filter((word) => !NEVER_TIES.has(word));
+  if (words.length < 3) return 0;
+  const stem = commonPrefix(words);
+  if (stem.length < 2) return 0;
+  const ruleEndings = new Set(words.map((word) => word.slice(stem.length)));
+  let best = 0;
+  // The future keeps the whole base form and the present drops its last two letters,
+  // so the card's stem is tried both ways.
+  for (const cardStem of [verb.base, verb.base.replace(/se$/, '').slice(0, -2)]) {
+    const own = verb.forms.filter((form) => form.startsWith(cardStem)).map((form) => form.slice(cardStem.length));
+    best = Math.max(best, new Set(own.filter((ending) => ruleEndings.has(ending))).size);
+  }
+  return best;
+}
+
+const wordCounts = new WeakMap<CourseCard[], Map<string, number>>();
+function countsFor(cards: CourseCard[]): Map<string, number> {
+  const known = wordCounts.get(cards);
+  if (known) return known;
+  const counts = new Map<string, number>();
+  for (const card of cards) for (const word of new Set([...wordsOf(card.target), ...wordsOf(card.exampleTarget)])) counts.set(word, (counts.get(word) ?? 0) + 1);
+  wordCounts.set(cards, counts);
+  return counts;
+}
+
+export function cardFits(card: CourseCard, cards: CourseCard[]): CardFits {
+  const counts = countsFor(cards);
+  const common = Math.max(2, cards.length * COMMON_SHARE);
+  const own = new Set(wordsOf(card.target).filter((word) => !NEVER_TIES.has(word)));
+  const verb = verbForms(card);
+  const found: { rank: number; seq: number; rule: CardRule }[] = [];
+  for (const other of cards) {
+    if (other.type !== 'Rule' || other.id === card.id || other.unit > card.unit) continue;
+    const pattern = wordsOf(other.target);
+    const shared = pattern.filter((word) => own.has(word) && (counts.get(word) ?? 0) < common);
+    const rule = { target: other.target, native: other.native };
+    if (shared.length > 0) {
+      const rarest = shared.reduce((a, b) => ((counts.get(a) ?? 0) <= (counts.get(b) ?? 0) ? a : b));
+      found.push({ rank: counts.get(rarest) ?? 0, seq: other.seq, rule: { ...rule, word: rarest } });
+    } else if (verb && other.unit === card.unit && endingsShared(verb, pattern) >= Math.min(4, verb.forms.length)) {
+      found.push({ rank: cards.length, seq: other.seq, rule: { ...rule, word: '' } });
+    }
+  }
+  const rules = found
+    .sort((a, b) => a.rank - b.rank || a.seq - b.seq)
+    .slice(0, CARD_RULE_LIMIT)
+    .map((item) => item.rule);
+  return { remember: card.remember.trim(), rules };
+}
+
+export function cardHasFits(fits: CardFits): boolean {
+  return fits.remember.length > 0 || fits.rules.length > 0;
+}
+
 // ---- Which sets a person sees ----
 
 /** The language in a code, so es-MX and es_ES are both es. */

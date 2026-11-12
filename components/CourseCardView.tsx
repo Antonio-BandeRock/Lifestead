@@ -40,8 +40,9 @@ type Props = {
   canSpeak: boolean;
   onSpeak: (card: CourseCard) => void;
   onGrade: (grade: LearnGrade, matched: boolean | null) => void;
-  /** Opens what this card's deck builds on. Offered only once the card is turned, so it never gives the answer away. */
-  onInfo: () => void;
+  /** Opens what this one card's words touch. Offered only once the card is turned, so it never gives the answer away,
+   *  and left out when the card touches nothing, so the button never opens an empty panel. */
+  onInfo?: () => void;
 };
 
 function FormList({ items, large }: { items: string[]; large?: boolean }) {
@@ -269,7 +270,7 @@ export function CourseCardView({ card, direction, day, typeAnswer, showSource, c
               <Text style={styles.secondaryText}>Hear It</Text>
             </TouchableOpacity>
           ) : null}
-          {turned ? (
+          {turned && onInfo ? (
             <TouchableOpacity ref={walkMark.ref('languages.cardInfo')} style={[styles.speaker, walkMark('languages.cardInfo')]} onPress={onInfo} accessibilityRole="button">
               <Ionicons name="information-circle-outline" size={18} color={colors.textPrimary} />
               <Text style={styles.secondaryText}>How This Fits</Text>
@@ -303,7 +304,8 @@ const styles = StyleSheet.create({
   formList: { gap: 6 },
   form: { ...typography.body, color: colors.textPrimary, ...textShadow },
   formLarge: { ...typography.sectionTitle, color: colors.textPrimary, ...textShadow },
-  example: { ...typography.body, fontStyle: 'italic', color: colors.textSecondary, ...textShadow },
+  // Asked for larger on 2026-11-11: under the words, but big enough to read at a glance.
+  example: { ...typography.sectionTitle, fontWeight: '400', fontStyle: 'italic', color: colors.textSecondary, ...textShadow },
   table: { gap: 8 },
   tableRow: { flexDirection: 'row', gap: 10 },
   tableCell: { flex: 1 },

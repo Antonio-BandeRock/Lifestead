@@ -41,6 +41,14 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.86.8',
+    date: '2026-11-11',
+    changes: [
+      "How This Fits on a language card now shows only what that card touches: the note written for it and up to three rules its words use. A card that touches no rule and has no note no longer shows the button.",
+      "The example sentence under the words on a language card is larger and easier to read.",
+    ],
+  },
+  {
     version: '1.0.86.7',
     date: '2026-11-11',
     changes: [

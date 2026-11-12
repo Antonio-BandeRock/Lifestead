@@ -243,6 +243,32 @@ check('a unit\'s rule cards are the rules to keep in mind', firstInfo.rules.leng
 check('a rule deck does not repeat itself', basics.deckInfo('1|Rules', tiny, tinyOutline, new Set()).rules.length === 0);
 check('a unit with no rule falls back to what its cards say to remember', basics.deckInfo('2|First', [...tiny.slice(3).map((x) => ({ ...x, remember: 'Later note.' }))], tinyOutline, new Set()).remember.join() === 'Later note.');
 
+// ---- How one card fits (2026-11-11) ----
+const fitCard = (id, unit, type, target, extra = {}) => ({ id, seq: 0, unit, group: 'G', type, target, native: id, exampleTarget: '', exampleNative: '', remember: '', ...extra });
+const fitSet = [
+  fitCard('r1', 1, 'Rule', 'el museo · la plaza'),
+  fitCard('r2', 1, 'Rule', 'trabajaré · trabajarás · trabajará · trabajaremos · trabajarán'),
+  fitCard('r3', 3, 'Rule', 'la plaza grande'),
+  fitCard('w1', 2, 'Word', 'plaza (f.)', { remember: 'Feminine.' }),
+  fitCard('v1', 1, 'Verb', 'llevar · future\nyo llevaré · tú llevarás · él llevará · nosotros llevaremos · ellos llevarán'),
+  fitCard('x1', 2, 'Word', 'mesa'),
+  ...Array.from({ length: 120 }, (_, i) => fitCard('f' + i, 1, 'Word', 'filler' + i)),
+];
+const w1 = basics.cardFits(fitSet[3], fitSet);
+check('a card shows the rule its own word is in, with that word', w1.rules.length === 1 && w1.rules[0].native === 'r1' && w1.rules[0].word === 'plaza');
+check('a card never shows a rule from a later unit', !w1.rules.some((r) => r.native === 'r3'));
+check('a card keeps its own note', w1.remember === 'Feminine.');
+check('a verb card shows the rule whose endings it takes', basics.cardFits(fitSet[4], fitSet).rules.some((r) => r.native === 'r2' && r.word === ''));
+check('a rule card does not show itself', !basics.cardFits(fitSet[0], fitSet).rules.some((r) => r.native === 'r1'));
+const bare = basics.cardFits(fitSet[5], fitSet);
+check('a card that touches nothing has nothing to show, so no button', bare.rules.length === 0 && !basics.cardHasFits(bare));
+for (const course of [es, en]) {
+  const ruleUnit = new Map(course.cards.filter((o) => o.type === 'Rule').map((o) => [`${o.target}|${o.native}`, o.unit]));
+  const shown = course.cards.map((k) => basics.cardFits(k, course.cards));
+  check(`${course.deck.id}: no card shows more than three rules`, shown.every((f) => f.rules.length <= 3));
+  check(`${course.deck.id}: no card shows a rule from a later unit`, course.cards.every((k, i) => shown[i].rules.every((r) => ruleUnit.get(`${r.target}|${r.native}`) <= k.unit)));
+}
+
 // ---- The outlines, against the cards ----
 for (const course of [es, en]) {
   const id = course.deck.id;

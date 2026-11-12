@@ -3370,7 +3370,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap the information icon beside a deck. It says what comes before this deck, which of those you have worked on, and which rules to keep in mind.', mark: 'languages.deckInfo', stay: true },
         { say: 'Tap Study under that deck.', mark: 'languages.deckStudy' },
       ],
-      forYou: 'A deck you choose yourself always opens, whatever the day\'s new cards limit says. While studying, How This Fits on a turned card shows the same thing for that card\'s deck.',
+      forYou: 'A deck you choose yourself always opens, whatever the day\'s new cards limit says. While studying, How This Fits on a turned card shows only what that card touches: the note written for it and the rules its words use. A card that touches none has no How This Fits.',
     },
     {
       key: 'languagesTogether',

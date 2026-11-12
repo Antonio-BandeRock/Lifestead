@@ -1,14 +1,15 @@
 // The information icon on a deck of language basics (2026-11-05): how this deck relates
 // to the ones before it, whether the person has worked on them, and which rules to keep
-// in mind because of it. The structure comes from deckInfo in lib/languageBasics.ts and
-// the sentences around it are here. Deck names, reasons and rules are drawn as written.
+// in mind because of it. On a turned card it shows instead only what that card's own words
+// touch (cardFits, 2026-11-11), never the deck's links or the unit's whole list of rules.
+// The structure comes from lib/languageBasics.ts and the sentences around it are here. Deck names, reasons and rules are drawn as written.
 
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { CourseText } from './CourseText';
 import { BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
-import type { DeckInfo, DeckLink } from '../lib/languageBasics';
+import type { CardFits, DeckInfo, DeckLink } from '../lib/languageBasics';
 import { useNavigationHand } from '../lib/navigationHand';
 import { modalAnimationType } from '../lib/visualPreferences';
 
@@ -16,8 +17,8 @@ type Props = {
   /** The deck's name, or null while nothing is being shown. */
   title: string | null;
   info: DeckInfo | null;
-  /** On a card being studied, what that one card says to remember. */
-  cardRemember?: string;
+  /** On a card being studied, what that one card's words touch. Shown in place of the deck's information. */
+  fits?: CardFits;
   onClose: () => void;
 };
 
@@ -36,17 +37,37 @@ function Links({ heading, links }: { heading: string; links: DeckLink[] }) {
   );
 }
 
-export function LanguageDeckInfo({ title, info, cardRemember, onClose }: Props) {
+export function LanguageDeckInfo({ title, info, fits, onClose }: Props) {
   const navigationHand = useNavigationHand();
   const nothingBefore = !!info && info.worked.length === 0 && info.notYet.length === 0;
-  const hasRules = !!info && (info.rules.length > 0 || info.remember.length > 0 || !!cardRemember);
+  const hasRules = !!info && (info.rules.length > 0 || info.remember.length > 0);
   return (
     <Modal visible={title !== null} transparent animationType={modalAnimationType('fade')} onRequestClose={onClose}>
       <View style={styles.backdrop}>
         <Pressable accessibilityLabel="Close" style={StyleSheet.absoluteFill} onPress={onClose} />
         <View style={styles.card}>
           <CourseText style={styles.title}>{title ?? ''}</CourseText>
-          {info ? (
+          {fits ? (
+            <ScrollView style={styles.scroll} contentContainerStyle={styles.scrollContent}>
+              {fits.remember ? (
+                <View style={styles.block}>
+                  <Text style={styles.heading}>On this card</Text>
+                  <CourseText style={styles.text}>{fits.remember}</CourseText>
+                </View>
+              ) : null}
+              {fits.rules.length > 0 ? (
+                <View style={styles.block}>
+                  <Text style={styles.heading}>Rules this card uses</Text>
+                  {fits.rules.map((rule) => (
+                    <View key={`${rule.native}|${rule.target}`} style={styles.item}>
+                      <CourseText style={styles.text}>{rule.native}</CourseText>
+                      {rule.target ? <CourseText style={styles.example}>{rule.target}</CourseText> : null}
+                    </View>
+                  ))}
+                </View>
+              ) : null}
+            </ScrollView>
+          ) : info ? (
             <ScrollView style={styles.scroll} contentContainerStyle={styles.scrollContent}>
               <Links heading="You have worked on" links={info.worked} />
               <Links heading="Comes before this, not worked on yet" links={info.notYet} />
@@ -54,7 +75,6 @@ export function LanguageDeckInfo({ title, info, cardRemember, onClose }: Props) 
               {hasRules ? (
                 <View style={styles.block}>
                   <Text style={styles.heading}>Rules to keep in mind</Text>
-                  {cardRemember ? <CourseText style={styles.text}>{cardRemember}</CourseText> : null}
                   {info.rules.map((rule) => (
                     <View key={`${rule.native}|${rule.target}`} style={styles.item}>
                       <CourseText style={styles.text}>{rule.native}</CourseText>
