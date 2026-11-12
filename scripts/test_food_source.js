@@ -62,11 +62,19 @@ check('USDA does not say it fell back', !S.foodSourceCaption('USDA').includes('n
 check('Derived says worked out', S.foodSourceCaption('Derived').startsWith('Numbers worked out from USDA figures'));
 check('an unknown source still reads', S.foodSourceCaption('Mystery') === 'Numbers from Mystery. USDA has no entry for this food prepared this way.');
 
+// 1.0.86.7: another table put first in Profile.
+check('the chosen table says nothing more', S.foodSourceCaption('Germany_BLS', 'Germany_BLS') === 'Numbers from the German Nutrient Database (BLS), Germany.');
+check('USDA after a chosen table says why', S.foodSourceCaption('USDA', 'Germany_BLS').endsWith("The table you put first (Germany) has no entry for this food prepared this way, so USDA's is used."));
+check('a third table names both', S.foodSourceCaption('Japan_MEXT', 'Germany_BLS').includes('Neither the table you put first (Germany) nor USDA'));
+check('Derived after a chosen table reads as USDA', S.foodSourceCaption('Derived', 'Japan_MEXT').startsWith('Numbers from USDA FoodData Central'));
+
 // 4.
 const FORBIDDEN = /\b(best|better|more accurate|trusted|reliable|real|genuine|genuinely|own)\b|[–—]| -- /i;
 for (const source of sources.concat(S.NAMED_SOURCES)) {
-  const caption = S.foodSourceCaption(source);
+  for (const preferred of ['USDA', 'France_Ciqual']) {
+  const caption = S.foodSourceCaption(source, preferred);
   check(`"${caption}" has no dash, filler or ranking`, !FORBIDDEN.test(caption));
+  }
 }
 
 if (failures) {

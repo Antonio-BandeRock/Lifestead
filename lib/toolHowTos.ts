@@ -615,6 +615,7 @@ export type ToolMark =
   | 'labs.add'
   | 'labs.save'
   | 'labs.test'
+  | 'lookup.countries'
   | 'lookup.portion'
   | 'lookup.voice'
   | 'lookup.why'
@@ -5456,6 +5457,16 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'In the Portion column, type the amount. Tap the unit below it to go back to the suggested serving.', mark: 'lookup.portion' },
       ],
       forYou: 'Every row and the share of your daily target change to that amount.',
+    },
+    {
+      key: 'countries',
+      title: "See what each country's table lists for a nutrient",
+      steps: [
+        { say: 'Pick a food first.' },
+        { say: 'Tap any nutrient in the table.', mark: 'lookup.countries' },
+        { say: 'To change which table is read first, go to Profile, open How You Eat, then Food Tables.' },
+      ],
+      forYou: 'Every country that measured the food, with the number it lists and the one used here.',
     },
     {
       key: 'why',

@@ -5898,6 +5898,7 @@ def build(xlsx_path, db_path):
             nutrient_rows,
         )
         apply_nutrient_source_fixes(cur)
+        apply_food_equivalence(cur)
         conn.commit()
         cur.execute("VACUUM")
 
@@ -6010,6 +6011,43 @@ def apply_nutrient_source_fixes(cur):
                             ("Norway_Matvaretabellen", 2065), ("Norway_Matvaretabellen", 2066),
                             ("Norway_Matvaretabellen", 443), ("Japan_MEXT", 8361)):
         cur.execute("UPDATE foods SET hidden = 1 WHERE source = ? AND food_id = ?", (source, food_id))
+
+
+def apply_food_equivalence(cur):
+    # 2026-11-11 (1.0.86.7), the same table scripts/add_food_equivalence.js
+    # writes into an already-built database; see its header for what it is.
+    # Every row's group_key: a USDA or Derived row's own
+    # category|base_name|prep, another table's row the key of the USDA row it
+    # was matched to in scripts/data/food_equivalence_matches.json, else its own.
+    import json
+    matches_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "food_equivalence_matches.json")
+    with open(matches_path, encoding="utf-8") as f:
+        matches = json.load(f)
+    rows = cur.execute("SELECT food_id, source, category, base_name, prep_method FROM foods").fetchall()
+
+    def own_key(category, base_name, prep):
+        return "|".join([category or "", (base_name or "").lower(), (prep or "").lower()])
+
+    usda = {r[0]: own_key(r[2], r[3], r[4]) for r in rows if r[1] == "USDA"}
+    match_for = {}
+    for m in matches:
+        if m.get("usda") is not None and m["usda"] in usda:
+            match_for[(m["source"], m["food_id"])] = usda[m["usda"]]
+    cur.execute("""CREATE TABLE IF NOT EXISTS food_equivalence (
+        food_id INTEGER NOT NULL,
+        source TEXT NOT NULL,
+        group_key TEXT NOT NULL,
+        matched INTEGER NOT NULL DEFAULT 0,
+        PRIMARY KEY (food_id, source)
+    )""")
+    cur.execute("DELETE FROM food_equivalence")
+    out = []
+    for food_id, source, category, base_name, prep in rows:
+        mapped = None if source in ("USDA", "Derived") else match_for.get((source, food_id))
+        out.append((food_id, source, mapped or own_key(category, base_name, prep), 1 if mapped else 0))
+    cur.executemany("INSERT INTO food_equivalence (food_id, source, group_key, matched) VALUES (?, ?, ?, ?)", out)
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_food_equivalence_group ON food_equivalence (group_key)")
+    print(f"food_equivalence: {len(out)} rows, {sum(r[3] for r in out)} matched to a USDA row")
 
 
 def write_version_file(version_ts_path):

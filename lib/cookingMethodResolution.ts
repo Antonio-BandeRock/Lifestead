@@ -59,6 +59,7 @@ const COOKED_METHOD_TO_PREP: Record<string, string> = {
   simmered: 'Boiled',
   braised: 'Boiled',
   stewed: 'Boiled',
+  poached: 'Boiled',
   reduced: 'Boiled',
   baked: 'Baked',
   toasted: 'Baked',
@@ -147,6 +148,95 @@ export function isUnaskedPreservedForm(
     if (word.pattern.test(text) && !asked.includes(word.stem)) return true;
   }
   return false;
+}
+
+// 2026-11-11: which cooked row stands for a food, when a base name holds
+// many. "Chicken, broilers or fryers" holds 100 rows, from whole bird to
+// skin only, battered or stewed. Before this the first cooked row in table
+// order won whenever none carried the exact prep word, so a poached whole
+// chicken was scored as battered fried chicken with giblets, a simmered veal
+// breast as its separable fat, and a braised thigh as an oven-fried one.
+//
+// The rule, in order: a row whose prep matches the cooking word (Boiled also
+// matches Stewed, Simmered, Poached and moist heat, the same family the map
+// above already groups); then the row whose name shares the most words with
+// the row the ingredient started on, so a whole bird stays a whole bird and
+// a thigh a thigh; then table order, which is the person's table order. A
+// coated row (batter, breaded, flour) or a separable-fat row is never chosen
+// unless the cooking word or the starting row names it, while any other row
+// is left.
+const PREP_FAMILY: Record<string, string[]> = {
+  boiled: ['boiled', 'stewed', 'simmered', 'poached', 'moist heat', 'braised'],
+  fried: ['fried', 'sauteed', 'sautéed'],
+  roasted: ['roasted', 'baked'],
+  baked: ['baked', 'roasted'],
+  grilled: ['grilled', 'broiled'],
+  steamed: ['steamed'],
+};
+
+const COOKING_WORDS = new Set([
+  'raw', 'cooked', 'boiled', 'stewed', 'simmered', 'poached', 'braised', 'moist', 'heat', 'roasted', 'baked',
+  'grilled', 'broiled', 'fried', 'sauteed', 'steamed', 'without', 'with', 'fat', 'salt', 'drained', 'and', 'or',
+  'oven', 'pan', 'unprepared', 'prepared',
+]);
+
+function nameWords(name: string): Set<string> {
+  return new Set(
+    name
+      .toLowerCase()
+      .replace(/\([^)]*\)/g, ' ')
+      .split(/[^a-z\u00c0-\u024f]+/)
+      .filter((w) => w.length > 1 && !COOKING_WORDS.has(w)),
+  );
+}
+
+const UNASKED_ROW_WORDS: { pattern: RegExp; asked: RegExp }[] = [
+  { pattern: /\b(batter|breaded|flour)\b/i, asked: /\b(batter|breaded|flour|tempura|coated)\b/i },
+  { pattern: /\bseparable fat\b/i, asked: /\bseparable fat\b/i },
+  { pattern: /\bskin only\b/i, asked: /\bskin only\b/i },
+  { pattern: /\bgiblets\b/i, asked: /\bgiblets?\b/i },
+  { pattern: /\bwith (added )?salt\b/i, asked: /\b(with salt|salted)\b/i },
+];
+
+export type CookedRowCandidate = { food_id: number; source: string; prep_method: string | null; name: string };
+
+// Rows arrive in the person's table order. startName is the name of the row
+// the ingredient started on (or its base name when that row is not known).
+export function pickCookedRow<T extends CookedRowCandidate>(
+  rows: T[],
+  startName: string,
+  cookingMethod: string | null | undefined,
+  current?: { foodId: number; source: string },
+  baseName?: string,
+): T | undefined {
+  if (rows.length === 0) return undefined;
+  // Whether a coating, separable fat or salt was asked for is read from the
+  // cooking word and the base name, never from the row the ingredient sits
+  // on, since that row may be the wrong one this is here to correct.
+  const asked = `${cookingMethod ?? ''} ${baseName ?? startName}`;
+  const preferred = preferredPrepMethodFor(cookingMethod)?.toLowerCase() ?? null;
+  const family = preferred ? PREP_FAMILY[preferred] ?? [preferred] : [];
+  const start = nameWords(startName);
+  const allowed = rows.filter((row) => !UNASKED_ROW_WORDS.some((w) => w.pattern.test(row.name) && !w.asked.test(asked)));
+  const pool = allowed.length > 0 ? allowed : rows;
+  let best: T | undefined;
+  let bestScore = -Infinity;
+  for (const row of pool) {
+    const prep = `${row.prep_method ?? ''} ${row.name}`.toLowerCase();
+    const prepScore = preferred && (row.prep_method ?? '').toLowerCase().includes(preferred) ? 2 : family.some((w) => prep.includes(w)) ? 1 : 0;
+    const words = nameWords(row.name);
+    let shared = 0;
+    for (const w of words) if (start.has(w)) shared++;
+    const extra = words.size - shared;
+    const isCurrent = current != null && row.food_id === current.foodId && row.source === current.source;
+    const askedFor = UNASKED_ROW_WORDS.some((w) => w.pattern.test(row.name) && w.asked.test(asked)) ? 20 : 0;
+    const score = prepScore * 1000 + shared * 10 + askedFor - extra + (isCurrent ? 0.5 : 0);
+    if (score > bestScore) {
+      best = row;
+      bestScore = score;
+    }
+  }
+  return best;
 }
 
 // A recipe's free cooking text, read for whether heat is involved at all.

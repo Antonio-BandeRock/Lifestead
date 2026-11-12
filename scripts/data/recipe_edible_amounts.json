@@ -1,0 +1,2697 @@
+[
+ {
+  "key": "CHICKEN_3537",
+  "recipe_id": "curated_cn_bai_qie_ji",
+  "category": "Meat",
+  "base_name": "Chicken, broilers or fryers",
+  "from_quantity": 1800,
+  "unit": "g",
+  "to_quantity": 1224,
+  "prep_note": "the edible share of about 1800 g whole chicken; a free-range bird has the best texture"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_bai_qie_ji",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_ban_li_shao_ji",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_bao_zai_fan",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_base_plain_congee",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 150,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_cn_base_pork_bone_stock",
+  "category": "Meat",
+  "base_name": "Gris fläskben rå",
+  "from_quantity": 1360,
+  "unit": "g",
+  "to_quantity": 136,
+  "prep_note": "the share of about 1360 g pork bones the stock keeps"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_base_steamed_jasmine_rice",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "DUCK_WHOLE",
+  "recipe_id": "curated_cn_beijing_kao_ya",
+  "category": "Meat",
+  "base_name": "Duck (Raw)",
+  "from_quantity": 2200,
+  "unit": "g",
+  "to_quantity": 880,
+  "prep_note": "the cooked meat and skin of about 2200 g whole duck; a Pekin duck"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_char_siu_fan",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_dan_chao_fan",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 333.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_di_san_xian",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 133.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RIBS_BONE_IN",
+  "recipe_id": "curated_cn_dong_gua_tang",
+  "category": "Meat",
+  "base_name": "Pork Spare Ribs (Raw)",
+  "from_quantity": 900,
+  "unit": "g",
+  "to_quantity": 630,
+  "prep_note": "the edible share of about 900 g bone-in ribs"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_dongpo_rou",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_dou_chi_chao_xian",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 133.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_fan_qie_niu_nan",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_fu_yung_dan",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_gai_lan_chao_niu_rou",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_gan_bian_niu_rou_si",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_gong_bao_ji_ding",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_gong_bao_xia_qiu",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_gu_lou_yuk",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_hainan_chicken_rice",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 600,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_hao_you_niu_rou",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_hei_jiao_niu_liu",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_hong_shao_rou",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_hong_shao_yu",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_hui_guo_rou",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_jia_chang_dou_fu",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 133.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_jiang_cong_xie",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RIBS_BONE_IN",
+  "recipe_id": "curated_cn_jiao_yan_pai_gu",
+  "category": "Meat",
+  "base_name": "Pork Spare Ribs (Raw)",
+  "from_quantity": 1000,
+  "unit": "g",
+  "to_quantity": 700,
+  "prep_note": "the edible share of about 1000 g bone-in ribs; ask the butcher to cut across the bone"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_jiao_yan_pai_gu",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_kou_shui_ji",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_la_zi_ji",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_cn_lanzhou_niu_rou_mian",
+  "category": "Meat",
+  "base_name": "Beef bonemeat",
+  "from_quantity": 1814,
+  "unit": "g",
+  "to_quantity": 181,
+  "prep_note": "the share of about 1814 g beef bones the stock keeps; 4 lb, strained out of the broth"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_cn_lanzhou_niu_rou_mian",
+  "category": "Meat",
+  "base_name": "Chicken, roasting",
+  "from_quantity": 1100,
+  "unit": "g",
+  "to_quantity": 110,
+  "prep_note": "the share of about 1100 g chicken the stock keeps; about 1.1 kg, the source gives no weight; lifted out of the broth"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_lap_cheong_fan",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 300,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RIBS_BONE_IN",
+  "recipe_id": "curated_cn_lian_ou_pai_gu_tang",
+  "category": "Meat",
+  "base_name": "Pork Spare Ribs (Raw)",
+  "from_quantity": 900,
+  "unit": "g",
+  "to_quantity": 630,
+  "prep_note": "the edible share of about 900 g bone-in ribs"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_luo_han_zhai",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_mapo_dou_fu",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_mei_cai_kou_rou",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_mu_xu_rou",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_pei_dan_shou_rou_zhou",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 100,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_qing_zheng_yu",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 133.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_san_bei_ji",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "CHICKEN_3537",
+  "recipe_id": "curated_cn_see_yau_gai",
+  "category": "Meat",
+  "base_name": "Chicken, broilers or fryers",
+  "from_quantity": 1800,
+  "unit": "g",
+  "to_quantity": 1224,
+  "prep_note": "the edible share of about 1800 g whole chicken"
+ },
+ {
+  "key": "MASTER_STOCK",
+  "recipe_id": "curated_cn_see_yau_gai",
+  "category": "Legume",
+  "base_name": "Soy sauce made from soy and wheat (shoyu)",
+  "from_quantity": 480,
+  "unit": "ml",
+  "to_quantity": 48,
+  "prep_note": "the share of about 480 ml in the master stock served as sauce"
+ },
+ {
+  "key": "MASTER_STOCK",
+  "recipe_id": "curated_cn_see_yau_gai",
+  "category": "Legume",
+  "base_name": "Soy sauce made from soy and wheat (shoyu)",
+  "from_quantity": 129.6,
+  "unit": "g",
+  "to_quantity": 13,
+  "prep_note": "the share of about 130 g in the master stock served as sauce; 120 ml at 1.08 g per ml; in place of dark soy sauce, which the database does not hold"
+ },
+ {
+  "key": "MASTER_STOCK",
+  "recipe_id": "curated_cn_see_yau_gai",
+  "category": "Sweets",
+  "base_name": "Sugar (Cane / Granulated)",
+  "from_quantity": 350,
+  "unit": "g",
+  "to_quantity": 35,
+  "prep_note": "the share of about 350 g in the master stock served as sauce"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_see_yau_gai",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_shi_zi_tou",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_shui_zhu_niu_rou",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_shui_zhu_yu",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_siu_yuk",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 533.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_steamed_pork_patty_with_salted_egg",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_suan_cai_yu",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RIBS_BONE_IN",
+  "recipe_id": "curated_cn_tang_cu_pai_gu",
+  "category": "Meat",
+  "base_name": "Pork Spare Ribs (Raw)",
+  "from_quantity": 450,
+  "unit": "g",
+  "to_quantity": 315,
+  "prep_note": "the edible share of about 450 g bone-in ribs"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_tang_cu_pai_gu",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_xi_hong_shi_chao_dan",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 133.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_xi_hu_cu_yu",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 133.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "CHICKEN_3537",
+  "recipe_id": "curated_cn_yan_ju_ji",
+  "category": "Meat",
+  "base_name": "Chicken, broilers or fryers",
+  "from_quantity": 1350,
+  "unit": "g",
+  "to_quantity": 918,
+  "prep_note": "the edible share of about 1350 g whole chicken"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_yan_ju_ji",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_yangzhou_chao_fan",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 333.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_yong_tau_foo",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_yu_pian_zhou",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_yu_xiang_qie_zi",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 133.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_yu_xiang_rou_si",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_cn_zi_ran_yang_rou",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "BONE_IN_WEIGHT",
+  "recipe_id": "curated_de_schweinshaxe",
+  "category": "Meat",
+  "base_name": "Pork hindshank (hock)",
+  "from_quantity": 2400,
+  "unit": "g",
+  "to_quantity": 1440,
+  "prep_note": "the edible share of about 2400 g bone-in hock"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_fr_base_fond_blanc_de_volaille",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 1000,
+  "unit": "g",
+  "to_quantity": 100,
+  "prep_note": "the share of about 1000 g chicken backs the stock keeps"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_fr_base_sauce_veloute",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 500,
+  "unit": "g",
+  "to_quantity": 50,
+  "prep_note": "the share of about 500 g chicken backs the stock keeps"
+ },
+ {
+  "key": "RIBS_BONE_IN",
+  "recipe_id": "curated_fr_base_travers_demi_sel",
+  "category": "Meat",
+  "base_name": "Pork Spare Ribs (Raw)",
+  "from_quantity": 1500,
+  "unit": "g",
+  "to_quantity": 1050,
+  "prep_note": "the edible share of about 1500 g bone-in ribs"
+ },
+ {
+  "key": "DUCK_WHOLE",
+  "recipe_id": "curated_fr_canard_a_lorange",
+  "category": "Meat",
+  "base_name": "Duck (Raw)",
+  "from_quantity": 2000,
+  "unit": "g",
+  "to_quantity": 800,
+  "prep_note": "the cooked meat and skin of about 2000 g whole duck"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_fr_cassoulet",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 500,
+  "unit": "g",
+  "to_quantity": 50,
+  "prep_note": "the share of about 500 g chicken backs the stock keeps"
+ },
+ {
+  "key": "CHICKEN_BONE_IN",
+  "recipe_id": "curated_fr_coq_au_vin",
+  "category": "Meat",
+  "base_name": "Chicken Thigh (with skin)",
+  "from_quantity": 900,
+  "unit": "g",
+  "to_quantity": 675,
+  "prep_note": "the edible share of about 900 g bone-in chicken; a mature cockerel is the old way; legs are the usual choice now"
+ },
+ {
+  "key": "CHICKEN_BONE_IN",
+  "recipe_id": "curated_fr_coq_au_vin",
+  "category": "Meat",
+  "base_name": "Chicken Drumstick (with skin)",
+  "from_quantity": 900,
+  "unit": "g",
+  "to_quantity": 675,
+  "prep_note": "the edible share of about 900 g bone-in chicken"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_fr_coq_au_vin",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 208.333,
+  "unit": "g",
+  "to_quantity": 21,
+  "prep_note": "the share of about 208 g chicken backs the stock keeps"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_fr_creme_du_barry",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 666.667,
+  "unit": "g",
+  "to_quantity": 67,
+  "prep_note": "the share of about 667 g chicken backs the stock keeps"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_fr_lapin_a_la_moutarde",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 133.333,
+  "unit": "g",
+  "to_quantity": 13,
+  "prep_note": "the share of about 133 g chicken backs the stock keeps"
+ },
+ {
+  "key": "MUSSEL_SHELL",
+  "recipe_id": "curated_fr_moules_marinieres",
+  "category": "Meat",
+  "base_name": "Mussel Mollusks",
+  "from_quantity": 2000,
+  "unit": "g",
+  "to_quantity": 500,
+  "prep_note": "the meat of about 2000 g mussels in the shell"
+ },
+ {
+  "key": "RIBS_BONE_IN",
+  "recipe_id": "curated_fr_petit_sale_aux_lentilles",
+  "category": "Meat",
+  "base_name": "Pork Spare Ribs (Raw)",
+  "from_quantity": 517.241,
+  "unit": "g",
+  "to_quantity": 362,
+  "prep_note": "the edible share of about 517 g bone-in ribs"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_fr_potage_parmentier",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 1000,
+  "unit": "g",
+  "to_quantity": 100,
+  "prep_note": "the share of about 1000 g chicken backs the stock keeps"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_fr_poulet_chasseur",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 104.167,
+  "unit": "g",
+  "to_quantity": 10,
+  "prep_note": "the share of about 104 g chicken backs the stock keeps"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_fr_soupe_a_loignon_gratinee",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 333.333,
+  "unit": "g",
+  "to_quantity": 33,
+  "prep_note": "the share of about 333 g chicken backs the stock keeps"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_fr_veloute_de_champignons",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 666.667,
+  "unit": "g",
+  "to_quantity": 67,
+  "prep_note": "the share of about 667 g chicken backs the stock keeps"
+ },
+ {
+  "key": "RIBS_BONE_IN",
+  "recipe_id": "curated_it_base_ragu_napoletano",
+  "category": "Meat",
+  "base_name": "Pork Spare Ribs (Raw)",
+  "from_quantity": 500,
+  "unit": "g",
+  "to_quantity": 350,
+  "prep_note": "the edible share of about 500 g bone-in ribs"
+ },
+ {
+  "key": "PASTA_DRY",
+  "recipe_id": "curated_it_bucatini_allamatriciana",
+  "category": "PastaNoodles",
+  "base_name": "Durum wheat, macaroni and spaghetti, dry pasta",
+  "from_quantity": 350,
+  "unit": "g",
+  "to_base_name": "Durum wheat, macaroni and spaghetti, dry pasta, uncooked"
+ },
+ {
+  "key": "PASTA_DRY",
+  "recipe_id": "curated_it_linguine_allo_scoglio",
+  "category": "PastaNoodles",
+  "base_name": "Durum wheat, macaroni and spaghetti, dry pasta",
+  "from_quantity": 350,
+  "unit": "g",
+  "to_base_name": "Durum wheat, macaroni and spaghetti, dry pasta, uncooked"
+ },
+ {
+  "key": "RIBS_BONE_IN",
+  "recipe_id": "curated_it_minestra_maritata",
+  "category": "Meat",
+  "base_name": "Pork Spare Ribs (Raw)",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_quantity": 280,
+  "prep_note": "the edible share of about 400 g bone-in ribs"
+ },
+ {
+  "key": "PASTA_DRY",
+  "recipe_id": "curated_it_pasta_al_forno",
+  "category": "PastaNoodles",
+  "base_name": "Durum wheat, macaroni and spaghetti, dry pasta",
+  "from_quantity": 350,
+  "unit": "g",
+  "to_base_name": "Durum wheat, macaroni and spaghetti, dry pasta, uncooked"
+ },
+ {
+  "key": "PASTA_DRY",
+  "recipe_id": "curated_it_pasta_alla_genovese",
+  "category": "PastaNoodles",
+  "base_name": "Durum wheat, macaroni and spaghetti, dry pasta",
+  "from_quantity": 360,
+  "unit": "g",
+  "to_base_name": "Durum wheat, macaroni and spaghetti, dry pasta, uncooked"
+ },
+ {
+  "key": "PASTA_DRY",
+  "recipe_id": "curated_it_pasta_alla_norma",
+  "category": "PastaNoodles",
+  "base_name": "Durum wheat, macaroni and spaghetti, dry pasta",
+  "from_quantity": 350,
+  "unit": "g",
+  "to_base_name": "Durum wheat, macaroni and spaghetti, dry pasta, uncooked"
+ },
+ {
+  "key": "PASTA_DRY",
+  "recipe_id": "curated_it_pasta_con_le_sarde",
+  "category": "PastaNoodles",
+  "base_name": "Durum wheat, macaroni and spaghetti, dry pasta",
+  "from_quantity": 340,
+  "unit": "g",
+  "to_base_name": "Durum wheat, macaroni and spaghetti, dry pasta, uncooked"
+ },
+ {
+  "key": "PASTA_DRY",
+  "recipe_id": "curated_it_pasta_e_ceci",
+  "category": "PastaNoodles",
+  "base_name": "Durum wheat, macaroni and spaghetti, dry pasta",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_base_name": "Durum wheat, macaroni and spaghetti, dry pasta, uncooked"
+ },
+ {
+  "key": "PASTA_DRY",
+  "recipe_id": "curated_it_pasta_e_fagioli",
+  "category": "PastaNoodles",
+  "base_name": "Durum wheat, macaroni and spaghetti, dry pasta",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_base_name": "Durum wheat, macaroni and spaghetti, dry pasta, uncooked"
+ },
+ {
+  "key": "CHICKEN_BONELESS_ALREADY",
+  "recipe_id": "curated_it_pollo_alla_cacciatora",
+  "category": "Meat",
+  "base_name": "Chicken, broilers or fryers",
+  "from_quantity": 646,
+  "unit": "g",
+  "to_quantity": 950,
+  "prep_note": "weight given is the meat with skin, without bone"
+ },
+ {
+  "key": "PASTA_DRY",
+  "recipe_id": "curated_it_rigatoni_alla_gricia",
+  "category": "PastaNoodles",
+  "base_name": "Durum wheat, macaroni and spaghetti, dry pasta",
+  "from_quantity": 350,
+  "unit": "g",
+  "to_base_name": "Durum wheat, macaroni and spaghetti, dry pasta, uncooked"
+ },
+ {
+  "key": "PASTA_DRY",
+  "recipe_id": "curated_it_spaghetti_aglio_olio_e_peperoncino",
+  "category": "PastaNoodles",
+  "base_name": "Durum wheat, macaroni and spaghetti, dry pasta",
+  "from_quantity": 350,
+  "unit": "g",
+  "to_base_name": "Durum wheat, macaroni and spaghetti, dry pasta, uncooked"
+ },
+ {
+  "key": "PASTA_DRY",
+  "recipe_id": "curated_it_spaghetti_al_pomodoro",
+  "category": "PastaNoodles",
+  "base_name": "Durum wheat, macaroni and spaghetti, dry pasta",
+  "from_quantity": 350,
+  "unit": "g",
+  "to_base_name": "Durum wheat, macaroni and spaghetti, dry pasta, uncooked"
+ },
+ {
+  "key": "PASTA_DRY",
+  "recipe_id": "curated_it_spaghetti_alla_carbonara",
+  "category": "PastaNoodles",
+  "base_name": "Durum wheat, macaroni and spaghetti, dry pasta",
+  "from_quantity": 350,
+  "unit": "g",
+  "to_base_name": "Durum wheat, macaroni and spaghetti, dry pasta, uncooked"
+ },
+ {
+  "key": "PASTA_DRY",
+  "recipe_id": "curated_it_spaghetti_alla_puttanesca",
+  "category": "PastaNoodles",
+  "base_name": "Durum wheat, macaroni and spaghetti, dry pasta",
+  "from_quantity": 350,
+  "unit": "g",
+  "to_base_name": "Durum wheat, macaroni and spaghetti, dry pasta, uncooked"
+ },
+ {
+  "key": "PASTA_DRY",
+  "recipe_id": "curated_it_spaghetti_alle_vongole",
+  "category": "PastaNoodles",
+  "base_name": "Durum wheat, macaroni and spaghetti, dry pasta",
+  "from_quantity": 350,
+  "unit": "g",
+  "to_base_name": "Durum wheat, macaroni and spaghetti, dry pasta, uncooked"
+ },
+ {
+  "key": "PASTA_DRY",
+  "recipe_id": "curated_it_trofie_al_pesto",
+  "category": "PastaNoodles",
+  "base_name": "Durum wheat, macaroni and spaghetti, dry pasta",
+  "from_quantity": 340,
+  "unit": "g",
+  "to_base_name": "Durum wheat, macaroni and spaghetti, dry pasta, uncooked"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_mx_barbacoa",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 100,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_base_arroz_blanco",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_quantity": 20,
+  "prep_note": "the share of about 200 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_base_arroz_rojo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_quantity": 20,
+  "prep_note": "the share of about 200 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_base_arroz_verde",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 175,
+  "unit": "g",
+  "to_quantity": 18,
+  "prep_note": "the share of about 175 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_base_caldo_de_pollo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 1200,
+  "unit": "g",
+  "to_quantity": 120,
+  "prep_note": "the share of about 1200 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_base_masa_para_tamales",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 150,
+  "unit": "g",
+  "to_quantity": 15,
+  "prep_note": "the share of about 150 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_base_mole_amarillo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 450,
+  "unit": "g",
+  "to_quantity": 45,
+  "prep_note": "the share of about 450 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_base_mole_coloradito",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 300,
+  "unit": "g",
+  "to_quantity": 30,
+  "prep_note": "the share of about 300 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_base_mole_negro",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 700,
+  "unit": "g",
+  "to_quantity": 70,
+  "prep_note": "the share of about 700 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_base_mole_poblano",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_quantity": 40,
+  "prep_note": "the share of about 400 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_base_mole_verde",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 800,
+  "unit": "g",
+  "to_quantity": 80,
+  "prep_note": "the share of about 800 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_base_pipian_verde",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 300,
+  "unit": "g",
+  "to_quantity": 30,
+  "prep_note": "the share of about 300 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_base_salsa_entomatada",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 150,
+  "unit": "g",
+  "to_quantity": 15,
+  "prep_note": "the share of about 150 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_caldo_de_pollo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 800,
+  "unit": "g",
+  "to_quantity": 80,
+  "prep_note": "the share of about 800 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_carne_al_pastor",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 25,
+  "unit": "g",
+  "to_quantity": 2.5,
+  "prep_note": "the share of about 25 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "RIBS_BONE_IN",
+  "recipe_id": "curated_mx_carnitas",
+  "category": "Meat",
+  "base_name": "Pork Spare Ribs (Raw)",
+  "from_quantity": 500,
+  "unit": "g",
+  "to_quantity": 350,
+  "prep_note": "the edible share of about 500 g bone-in ribs"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_chilaquiles_rojos",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_quantity": 20,
+  "prep_note": "the share of about 200 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_chile_relleno",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_quantity": 20,
+  "prep_note": "the share of about 200 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_corundas",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 100,
+  "unit": "g",
+  "to_quantity": 10,
+  "prep_note": "the share of about 100 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "WHITE_CORN",
+  "recipe_id": "curated_mx_elote",
+  "category": "Veg",
+  "base_name": "White Corn",
+  "from_quantity": 6,
+  "unit": "each",
+  "to_base_name": "Sweet Corn"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_enmoladas",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 166.667,
+  "unit": "g",
+  "to_quantity": 17,
+  "prep_note": "the share of about 167 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_enmoladas",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 50,
+  "unit": "g",
+  "to_quantity": 5,
+  "prep_note": "the share of about 50 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_entomatadas",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 100,
+  "unit": "g",
+  "to_quantity": 10,
+  "prep_note": "the share of about 100 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_entomatadas",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 25,
+  "unit": "g",
+  "to_quantity": 2.5,
+  "prep_note": "the share of about 25 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "WHITE_CORN",
+  "recipe_id": "curated_mx_esquites",
+  "category": "Veg",
+  "base_name": "White Corn",
+  "from_quantity": 1100,
+  "unit": "g",
+  "to_base_name": "Sweet Corn"
+ },
+ {
+  "key": "CHICKEN_BONE_IN",
+  "recipe_id": "curated_mx_mole_amarillo_con_pollo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, leg, meat",
+  "from_quantity": 600,
+  "unit": "g",
+  "to_quantity": 450,
+  "prep_note": "the edible share of about 600 g bone-in chicken"
+ },
+ {
+  "key": "CHICKEN_BONE_IN",
+  "recipe_id": "curated_mx_mole_amarillo_con_pollo",
+  "category": "Meat",
+  "base_name": "Chicken Thigh (with skin)",
+  "from_quantity": 500,
+  "unit": "g",
+  "to_quantity": 375,
+  "prep_note": "the edible share of about 500 g bone-in chicken"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_mole_amarillo_con_pollo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 360,
+  "unit": "g",
+  "to_quantity": 36,
+  "prep_note": "the share of about 360 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "CHICKEN_BONE_IN",
+  "recipe_id": "curated_mx_mole_coloradito_con_pollo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, leg, meat",
+  "from_quantity": 900,
+  "unit": "g",
+  "to_quantity": 675,
+  "prep_note": "the edible share of about 900 g bone-in chicken"
+ },
+ {
+  "key": "CHICKEN_BONE_IN",
+  "recipe_id": "curated_mx_mole_coloradito_con_pollo",
+  "category": "Meat",
+  "base_name": "Chicken Thigh (with skin)",
+  "from_quantity": 700,
+  "unit": "g",
+  "to_quantity": 525,
+  "prep_note": "the edible share of about 700 g bone-in chicken"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_mole_coloradito_con_pollo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 225,
+  "unit": "g",
+  "to_quantity": 23,
+  "prep_note": "the share of about 225 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_mole_coloradito_con_pollo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 50,
+  "unit": "g",
+  "to_quantity": 5,
+  "prep_note": "the share of about 50 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_mole_coloradito_con_pollo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 300,
+  "unit": "g",
+  "to_quantity": 30,
+  "prep_note": "the share of about 300 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "CHICKEN_BONE_IN",
+  "recipe_id": "curated_mx_mole_negro_con_pollo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, leg, meat",
+  "from_quantity": 800,
+  "unit": "g",
+  "to_quantity": 600,
+  "prep_note": "the edible share of about 800 g bone-in chicken"
+ },
+ {
+  "key": "CHICKEN_BONE_IN",
+  "recipe_id": "curated_mx_mole_negro_con_pollo",
+  "category": "Meat",
+  "base_name": "Chicken Thigh (with skin)",
+  "from_quantity": 700,
+  "unit": "g",
+  "to_quantity": 525,
+  "prep_note": "the edible share of about 700 g bone-in chicken"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_mole_negro_con_pollo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 190.909,
+  "unit": "g",
+  "to_quantity": 19,
+  "prep_note": "the share of about 191 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_mole_negro_con_pollo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 50,
+  "unit": "g",
+  "to_quantity": 5,
+  "prep_note": "the share of about 50 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_mole_negro_con_pollo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_quantity": 20,
+  "prep_note": "the share of about 200 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_mole_verde_con_cerdo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_quantity": 40,
+  "prep_note": "the share of about 400 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "FRY_OIL",
+  "recipe_id": "curated_mx_molotes",
+  "category": "Fats",
+  "base_name": "Maisolje",
+  "from_quantity": 500,
+  "unit": "ml",
+  "to_quantity": 60,
+  "prep_note": "the share of about 500 ml frying oil the molotes keep"
+ },
+ {
+  "key": "CHICKEN_BONE_IN",
+  "recipe_id": "curated_mx_pipian_verde_con_pollo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, leg, meat",
+  "from_quantity": 600,
+  "unit": "g",
+  "to_quantity": 450,
+  "prep_note": "the edible share of about 600 g bone-in chicken"
+ },
+ {
+  "key": "CHICKEN_BONE_IN",
+  "recipe_id": "curated_mx_pipian_verde_con_pollo",
+  "category": "Meat",
+  "base_name": "Chicken Thigh (with skin)",
+  "from_quantity": 500,
+  "unit": "g",
+  "to_quantity": 375,
+  "prep_note": "the edible share of about 500 g bone-in chicken"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_pipian_verde_con_pollo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 150,
+  "unit": "g",
+  "to_quantity": 15,
+  "prep_note": "the share of about 150 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_pipian_verde_con_pollo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_quantity": 20,
+  "prep_note": "the share of about 200 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "CHICKEN_BONE_IN",
+  "recipe_id": "curated_mx_pollo_en_mole_poblano",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, leg, meat",
+  "from_quantity": 600,
+  "unit": "g",
+  "to_quantity": 450,
+  "prep_note": "the edible share of about 600 g bone-in chicken"
+ },
+ {
+  "key": "CHICKEN_BONE_IN",
+  "recipe_id": "curated_mx_pollo_en_mole_poblano",
+  "category": "Meat",
+  "base_name": "Chicken Thigh (with skin)",
+  "from_quantity": 500,
+  "unit": "g",
+  "to_quantity": 375,
+  "prep_note": "the edible share of about 500 g bone-in chicken"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_pollo_en_mole_poblano",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_quantity": 20,
+  "prep_note": "the share of about 200 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_pollo_en_mole_poblano",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 50,
+  "unit": "g",
+  "to_quantity": 5,
+  "prep_note": "the share of about 50 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "RIBS_BONE_IN",
+  "recipe_id": "curated_mx_pozole_blanco",
+  "category": "Meat",
+  "base_name": "Pork Spare Ribs (Raw)",
+  "from_quantity": 500,
+  "unit": "g",
+  "to_quantity": 350,
+  "prep_note": "the edible share of about 500 g bone-in ribs; in place of pork head or spine (espinazo), which the database does not hold"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_romeritos",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 133.333,
+  "unit": "g",
+  "to_quantity": 13,
+  "prep_note": "the share of about 133 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_romeritos",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_quantity": 40,
+  "prep_note": "the share of about 400 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_sopa_de_lima",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 600,
+  "unit": "g",
+  "to_quantity": 60,
+  "prep_note": "the share of about 600 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_tacos_al_pastor",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 10,
+  "unit": "g",
+  "to_quantity": 1,
+  "prep_note": "the share of about 10 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_mx_tacos_de_barbacoa",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 40,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RIBS_BONE_IN",
+  "recipe_id": "curated_mx_tacos_de_carnitas",
+  "category": "Meat",
+  "base_name": "Pork Spare Ribs (Raw)",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_quantity": 140,
+  "prep_note": "the edible share of about 200 g bone-in ribs"
+ },
+ {
+  "key": "WHITE_CORN",
+  "recipe_id": "curated_mx_tamales_de_elote",
+  "category": "Veg",
+  "base_name": "White Corn",
+  "from_quantity": 1500,
+  "unit": "g",
+  "to_base_name": "Sweet Corn"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_tamales_oaxaquenos",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 62.5,
+  "unit": "g",
+  "to_quantity": 6.3,
+  "prep_note": "the share of about 63 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_tamales_oaxaquenos",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 127.273,
+  "unit": "g",
+  "to_quantity": 13,
+  "prep_note": "the share of about 127 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_tamales_rojos_de_cerdo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 100,
+  "unit": "g",
+  "to_quantity": 10,
+  "prep_note": "the share of about 100 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "RIBS_BONE_IN",
+  "recipe_id": "curated_mx_torta_ahogada",
+  "category": "Meat",
+  "base_name": "Pork Spare Ribs (Raw)",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_quantity": 140,
+  "prep_note": "the edible share of about 200 g bone-in ribs"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_mx_torta_ahogada",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 350,
+  "unit": "g",
+  "to_quantity": 35,
+  "prep_note": "the share of about 350 g chicken backs the stock keeps; or one 1.5 kg whole chicken in pieces"
+ },
+ {
+  "key": "WHITE_CORN",
+  "recipe_id": "curated_mx_uchepos",
+  "category": "Veg",
+  "base_name": "White Corn",
+  "from_quantity": 1500,
+  "unit": "g",
+  "to_base_name": "Sweet Corn"
+ },
+ {
+  "key": "BOWL_DRY_LEGUME",
+  "recipe_id": "curated_side_chickpea_spinach_curry_bowl",
+  "category": "Legume",
+  "base_name": "Chickpeas (garbanzo beans, bengal gram)",
+  "from_quantity": 120,
+  "unit": "g",
+  "to_cooking_method": "Boiled"
+ },
+ {
+  "key": "MUSSEL_SHELL",
+  "recipe_id": "curated_soup_mussels_tomato_fennel_broth",
+  "category": "Meat",
+  "base_name": "Mussel Mollusks",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_quantity": 50,
+  "prep_note": "the meat of about 200 g mussels in the shell; about 1 pound in the shell"
+ },
+ {
+  "key": "MUSSEL_SHELL",
+  "recipe_id": "curated_soup_mussels_tomato_garlic_broth",
+  "category": "Meat",
+  "base_name": "Mussel Mollusks",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_quantity": 50,
+  "prep_note": "the meat of about 200 g mussels in the shell; about 1 pound in the shell"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_base_khao_suay",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_th_base_nam_soup_gai",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 1000,
+  "unit": "g",
+  "to_quantity": 100,
+  "prep_note": "the share of about 1000 g chicken backs the stock keeps; 1 chicken carcass or the same weight of backs, rinsed"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_choo_chee_pla",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_th_gaeng_jued_tao_hoo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 500,
+  "unit": "g",
+  "to_quantity": 50,
+  "prep_note": "the share of about 500 g chicken backs the stock keeps; 1 chicken carcass or the same weight of backs, rinsed"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_gaeng_jued_tao_hoo",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_th_gaeng_kari_gai",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 125,
+  "unit": "g",
+  "to_quantity": 13,
+  "prep_note": "the share of about 125 g chicken backs the stock keeps; 1 chicken carcass or the same weight of backs, rinsed"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_gaeng_kari_gai",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "CHICKEN_BONE_IN",
+  "recipe_id": "curated_th_gaeng_kiew_wan_gai",
+  "category": "Meat",
+  "base_name": "Chicken Thigh (with skin)",
+  "from_quantity": 450,
+  "unit": "g",
+  "to_quantity": 338,
+  "prep_note": "the edible share of about 450 g bone-in chicken"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_gaeng_kiew_wan_gai",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_gaeng_massaman_neua",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_th_gaeng_pa",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 250,
+  "unit": "g",
+  "to_quantity": 25,
+  "prep_note": "the share of about 250 g chicken backs the stock keeps; 1 chicken carcass or the same weight of backs, rinsed"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_gaeng_pa",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 400,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_gaeng_phed_fak_thong",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_th_gaeng_phed_ped_yang",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 62.5,
+  "unit": "g",
+  "to_quantity": 6.3,
+  "prep_note": "the share of about 63 g chicken backs the stock keeps; 1 chicken carcass or the same weight of backs, rinsed"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_gaeng_phed_ped_yang",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_gaeng_som_goong",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 133.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_gaeng_tai_pla",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_th_gai_pad_khing",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 62.5,
+  "unit": "g",
+  "to_quantity": 6.3,
+  "prep_note": "the share of about 63 g chicken backs the stock keeps; 1 chicken carcass or the same weight of backs, rinsed"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_gai_pad_khing",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "CHICKEN_BONE_IN",
+  "recipe_id": "curated_th_gai_pad_med_mamuang",
+  "category": "Meat",
+  "base_name": "Chicken Thigh (with skin)",
+  "from_quantity": 450,
+  "unit": "g",
+  "to_quantity": 338,
+  "prep_note": "the edible share of about 450 g bone-in chicken"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_gai_pad_med_mamuang",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "CHICKEN_3537",
+  "recipe_id": "curated_th_gai_yang",
+  "category": "Meat",
+  "base_name": "Chicken, broilers or fryers",
+  "from_quantity": 2300,
+  "unit": "g",
+  "to_quantity": 1564,
+  "prep_note": "the edible share of about 2300 g whole chicken"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_kai_jeow",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 133.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RIBS_BONE_IN",
+  "recipe_id": "curated_th_kanom_jeen_nam_ngiao",
+  "category": "Meat",
+  "base_name": "Pork Spare Ribs (Raw)",
+  "from_quantity": 600,
+  "unit": "g",
+  "to_quantity": 420,
+  "prep_note": "the edible share of about 600 g bone-in ribs"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_th_kanom_jeen_nam_ngiao",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 1000,
+  "unit": "g",
+  "to_quantity": 100,
+  "prep_note": "the share of about 1000 g chicken backs the stock keeps; 1 chicken carcass or the same weight of backs, rinsed"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_khanom_krok",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 22,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "BONE_IN_WEIGHT",
+  "recipe_id": "curated_th_khao_kha_moo",
+  "category": "Meat",
+  "base_name": "Pork hindshank (hock)",
+  "from_quantity": 1000,
+  "unit": "g",
+  "to_quantity": 600,
+  "prep_note": "the edible share of about 1000 g bone-in hock"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_khao_kha_moo",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 333.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "CHICKEN_3537",
+  "recipe_id": "curated_th_khao_man_gai",
+  "category": "Meat",
+  "base_name": "Chicken, broilers or fryers",
+  "from_quantity": 1400,
+  "unit": "g",
+  "to_quantity": 952,
+  "prep_note": "the edible share of about 1400 g whole chicken"
+ },
+ {
+  "key": "CHICKEN_BONE_IN",
+  "recipe_id": "curated_th_khao_mok_gai",
+  "category": "Meat",
+  "base_name": "Chicken Thigh (with skin)",
+  "from_quantity": 800,
+  "unit": "g",
+  "to_quantity": 600,
+  "prep_note": "the edible share of about 800 g bone-in chicken"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_th_khao_mok_gai",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 375,
+  "unit": "g",
+  "to_quantity": 38,
+  "prep_note": "the share of about 375 g chicken backs the stock keeps; 1 chicken carcass or the same weight of backs, rinsed"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_khao_moo_daeng",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 533.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_th_khao_moo_daeng",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 125,
+  "unit": "g",
+  "to_quantity": 13,
+  "prep_note": "the share of about 125 g chicken backs the stock keeps; 1 chicken carcass or the same weight of backs, rinsed"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_khao_pad",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_khao_pad_sapparot",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 200,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_th_khao_soi_gai",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 250,
+  "unit": "g",
+  "to_quantity": 25,
+  "prep_note": "the share of about 250 g chicken backs the stock keeps; 1 chicken carcass or the same weight of backs, rinsed"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_khao_tom",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_khao_yum",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_th_kuay_teow_tom_yum",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 412.5,
+  "unit": "g",
+  "to_quantity": 41,
+  "prep_note": "the share of about 413 g chicken backs the stock keeps; 1 chicken carcass or the same weight of backs, rinsed"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_moo_kratiem",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 133.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_moo_tod_kratiem",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_th_pad_cha_talay",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 37.5,
+  "unit": "g",
+  "to_quantity": 3.8,
+  "prep_note": "the share of about 38 g chicken backs the stock keeps; 1 chicken carcass or the same weight of backs, rinsed"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_pad_cha_talay",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 133.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_pad_kana_moo_krob",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 133.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_pad_kra_pao",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 133.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_pad_pak_boong",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_th_pad_pak_ruam",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 31.25,
+  "unit": "g",
+  "to_quantity": 3.1,
+  "prep_note": "the share of about 31 g chicken backs the stock keeps; 1 chicken carcass or the same weight of backs, rinsed"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_pad_pak_ruam",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_pad_prik_gaeng_moo",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 133.333,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_pad_prik_khing",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_panang_neua",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_pla_rad_prik",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_th_poh_taek",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 500,
+  "unit": "g",
+  "to_quantity": 50,
+  "prep_note": "the share of about 500 g chicken backs the stock keeps; 1 chicken carcass or the same weight of backs, rinsed"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_poh_taek",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_th_rad_na",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 500,
+  "unit": "g",
+  "to_quantity": 50,
+  "prep_note": "the share of about 500 g chicken backs the stock keeps; 1 chicken carcass or the same weight of backs, rinsed"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_th_tom_kha_gai",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 250,
+  "unit": "g",
+  "to_quantity": 25,
+  "prep_note": "the share of about 250 g chicken backs the stock keeps; 1 chicken carcass or the same weight of backs, rinsed"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_tom_kha_gai",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_tom_kha_hed",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "RIBS_BONE_IN",
+  "recipe_id": "curated_th_tom_saep",
+  "category": "Meat",
+  "base_name": "Pork Spare Ribs (Raw)",
+  "from_quantity": 700,
+  "unit": "g",
+  "to_quantity": 490,
+  "prep_note": "the edible share of about 700 g bone-in ribs"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_th_tom_yum_goong",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 500,
+  "unit": "g",
+  "to_quantity": 50,
+  "prep_note": "the share of about 500 g chicken backs the stock keeps; 1 chicken carcass or the same weight of backs, rinsed"
+ },
+ {
+  "key": "RICE_DRY",
+  "recipe_id": "curated_th_tom_yum_goong",
+  "category": "Grain",
+  "base_name": "Grains, rice, white, long-grain, regular",
+  "from_quantity": 266.667,
+  "unit": "g",
+  "to_base_name": "Grains, rice, white, long-grain, regular, dry"
+ },
+ {
+  "key": "BOWL_DRY_LEGUME",
+  "recipe_id": "curated_vegan_salad_chickpea_white_bean_salad",
+  "category": "Legume",
+  "base_name": "Chickpeas (garbanzo beans, bengal gram)",
+  "from_quantity": 120,
+  "unit": "g",
+  "to_cooking_method": "Boiled"
+ },
+ {
+  "key": "BOWL_DRY_LEGUME",
+  "recipe_id": "curated_vegan_salad_chickpea_white_bean_salad",
+  "category": "Legume",
+  "base_name": "White Beans",
+  "from_quantity": 83,
+  "unit": "g",
+  "to_cooking_method": "Boiled"
+ },
+ {
+  "key": "BOWL_DRY_LEGUME",
+  "recipe_id": "curated_vegan_side_white_bean_tomato_bowl",
+  "category": "Legume",
+  "base_name": "White Beans",
+  "from_quantity": 180,
+  "unit": "g",
+  "to_cooking_method": "Boiled"
+ },
+ {
+  "key": "RIBS_BONE_IN",
+  "recipe_id": "curated_vn_banh_canh_cua",
+  "category": "Meat",
+  "base_name": "Pork Spare Ribs (Raw)",
+  "from_quantity": 700,
+  "unit": "g",
+  "to_quantity": 490,
+  "prep_note": "the edible share of about 700 g bone-in ribs"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_vn_banh_canh_cua",
+  "category": "Meat",
+  "base_name": "Gris fläskben rå",
+  "from_quantity": 2025,
+  "unit": "g",
+  "to_quantity": 203,
+  "prep_note": "the share of about 2025 g pork bones the stock keeps; parboiled 3 to 5 minutes and rinsed before the main simmer"
+ },
+ {
+  "key": "BONE_IN_WEIGHT",
+  "recipe_id": "curated_vn_base_nuoc_dung_bun_bo_hue",
+  "category": "Meat",
+  "base_name": "Pork hindshank (hock)",
+  "from_quantity": 1360,
+  "unit": "g",
+  "to_quantity": 816,
+  "prep_note": "the edible share of about 1360 g bone-in hock; lifted out when tender, about 1 hour"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_vn_base_nuoc_dung_pho_ga",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 1350,
+  "unit": "g",
+  "to_quantity": 135,
+  "prep_note": "the share of about 1350 g chicken backs the stock keeps"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_vn_base_nuoc_dung_xuong_heo",
+  "category": "Meat",
+  "base_name": "Gris fläskben rå",
+  "from_quantity": 2700,
+  "unit": "g",
+  "to_quantity": 270,
+  "prep_note": "the share of about 2700 g pork bones the stock keeps; parboiled 3 to 5 minutes and rinsed before the main simmer"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_vn_bo_kho",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 168.75,
+  "unit": "g",
+  "to_quantity": 17,
+  "prep_note": "the share of about 169 g chicken backs the stock keeps"
+ },
+ {
+  "key": "BONE_IN_WEIGHT",
+  "recipe_id": "curated_vn_bun_bo_hue",
+  "category": "Meat",
+  "base_name": "Pork hindshank (hock)",
+  "from_quantity": 1360,
+  "unit": "g",
+  "to_quantity": 816,
+  "prep_note": "the edible share of about 1360 g bone-in hock; lifted out when tender, about 1 hour"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_vn_bun_ca",
+  "category": "Meat",
+  "base_name": "Gris fläskben rå",
+  "from_quantity": 1350,
+  "unit": "g",
+  "to_quantity": 135,
+  "prep_note": "the share of about 1350 g pork bones the stock keeps; parboiled 3 to 5 minutes and rinsed before the main simmer"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_vn_bun_moc",
+  "category": "Meat",
+  "base_name": "Gris fläskben rå",
+  "from_quantity": 1350,
+  "unit": "g",
+  "to_quantity": 135,
+  "prep_note": "the share of about 1350 g pork bones the stock keeps; parboiled 3 to 5 minutes and rinsed before the main simmer"
+ },
+ {
+  "key": "RIBS_BONE_IN",
+  "recipe_id": "curated_vn_bun_rieu_cua",
+  "category": "Meat",
+  "base_name": "Pork Spare Ribs (Raw)",
+  "from_quantity": 700,
+  "unit": "g",
+  "to_quantity": 490,
+  "prep_note": "the edible share of about 700 g bone-in ribs"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_vn_cao_lau",
+  "category": "Meat",
+  "base_name": "Gris fläskben rå",
+  "from_quantity": 337.5,
+  "unit": "g",
+  "to_quantity": 34,
+  "prep_note": "the share of about 338 g pork bones the stock keeps; parboiled 3 to 5 minutes and rinsed before the main simmer"
+ },
+ {
+  "key": "CHICKEN_BONE_IN",
+  "recipe_id": "curated_vn_ga_kho_gung",
+  "category": "Meat",
+  "base_name": "Chicken Thigh (with skin)",
+  "from_quantity": 1360,
+  "unit": "g",
+  "to_quantity": 1020,
+  "prep_note": "the edible share of about 1360 g bone-in chicken"
+ },
+ {
+  "key": "CHICKEN_BONE_IN",
+  "recipe_id": "curated_vn_ga_xao_sa_ot",
+  "category": "Meat",
+  "base_name": "Chicken Thigh (with skin)",
+  "from_quantity": 500,
+  "unit": "g",
+  "to_quantity": 375,
+  "prep_note": "the edible share of about 500 g bone-in chicken"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_vn_hu_tieu_nam_vang",
+  "category": "Meat",
+  "base_name": "Gris fläskben rå",
+  "from_quantity": 2700,
+  "unit": "g",
+  "to_quantity": 270,
+  "prep_note": "the share of about 2700 g pork bones the stock keeps; parboiled 3 to 5 minutes and rinsed before the main simmer"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_vn_mi_quang",
+  "category": "Meat",
+  "base_name": "Gris fläskben rå",
+  "from_quantity": 1360,
+  "unit": "g",
+  "to_quantity": 136,
+  "prep_note": "the share of about 1360 g pork bones the stock keeps"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_vn_pho_ga",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 1350,
+  "unit": "g",
+  "to_quantity": 135,
+  "prep_note": "the share of about 1350 g chicken backs the stock keeps"
+ },
+ {
+  "key": "RIBS_BONE_IN",
+  "recipe_id": "curated_vn_suon_ram_man",
+  "category": "Meat",
+  "base_name": "Pork Spare Ribs (Raw)",
+  "from_quantity": 900,
+  "unit": "g",
+  "to_quantity": 630,
+  "prep_note": "the edible share of about 900 g bone-in ribs"
+ },
+ {
+  "key": "STOCK_BONES",
+  "recipe_id": "curated_vn_sup_cua",
+  "category": "Meat",
+  "base_name": "Chicken, broiler, back, meat and skin",
+  "from_quantity": 421.875,
+  "unit": "g",
+  "to_quantity": 42,
+  "prep_note": "the share of about 422 g chicken backs the stock keeps"
+ },
+ {
+  "key": "CHICKEN_WHOLE_TYPO_BASE",
+  "recipe_id": "curated_fr_poulet_basquaise",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 1600,
+  "unit": "g",
+  "to_quantity": 1088,
+  "prep_note": "the edible share of about 1600 g whole chicken",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_WHOLE_TYPO_BASE",
+  "recipe_id": "curated_fr_poulet_roti",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 1500,
+  "unit": "g",
+  "to_quantity": 1020,
+  "prep_note": "the edible share of about 1500 g whole chicken; a poulet fermier if you can",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_WHOLE_TYPO_BASE",
+  "recipe_id": "curated_fr_poulet_chasseur",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 1800,
+  "unit": "g",
+  "to_quantity": 1224,
+  "prep_note": "the edible share of about 1800 g whole chicken",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_STOCK_TYPO_BASE",
+  "recipe_id": "curated_cn_base_qing_tang",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 2000,
+  "unit": "g",
+  "to_quantity": 200,
+  "prep_note": "the share of about 2000 g chicken the stock keeps",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_WHOLE_TYPO_BASE",
+  "recipe_id": "curated_cn_guo_qiao_mi_xian",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 1500,
+  "unit": "g",
+  "to_quantity": 1020,
+  "prep_note": "the edible share of about 1500 g whole chicken; a whole chicken, about 1.5 kg; the source gives no weight",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_WHOLE_TYPO_BASE",
+  "recipe_id": "curated_cn_hainan_chicken_rice",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 1500,
+  "unit": "g",
+  "to_quantity": 1020,
+  "prep_note": "the edible share of about 1500 g whole chicken",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_WHOLE_TYPO_BASE",
+  "recipe_id": "curated_vn_base_nuoc_dung_pho_ga",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 1800,
+  "unit": "g",
+  "to_quantity": 1224,
+  "prep_note": "the edible share of about 1800 g whole chicken; lifted out after 25 minutes; the meat is shredded for the bowls and the bones go back in",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_WHOLE_TYPO_BASE",
+  "recipe_id": "curated_vn_bun_thang",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 900,
+  "unit": "g",
+  "to_quantity": 612,
+  "prep_note": "the edible share of about 900 g whole chicken",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_WHOLE_TYPO_BASE",
+  "recipe_id": "curated_vn_com_ga_hoi_an",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 860,
+  "unit": "g",
+  "to_quantity": 585,
+  "prep_note": "the edible share of about 860 g whole chicken",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_WHOLE_TYPO_BASE",
+  "recipe_id": "curated_vn_chao_ga",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 1600,
+  "unit": "g",
+  "to_quantity": 1088,
+  "prep_note": "the edible share of about 1600 g whole chicken",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_STOCK_TYPO_BASE",
+  "recipe_id": "curated_cn_base_xo_sauce",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 141.667,
+  "unit": "g",
+  "to_quantity": 14,
+  "prep_note": "the share of about 142 g chicken the stock keeps",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_STOCK_TYPO_BASE",
+  "recipe_id": "curated_cn_cantonese_crispy_chow_mein",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 166.667,
+  "unit": "g",
+  "to_quantity": 17,
+  "prep_note": "the share of about 167 g chicken the stock keeps",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_STOCK_TYPO_BASE",
+  "recipe_id": "curated_cn_char_siu_bao",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 83.333,
+  "unit": "g",
+  "to_quantity": 8,
+  "prep_note": "the share of about 83 g chicken the stock keeps",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_STOCK_TYPO_BASE",
+  "recipe_id": "curated_cn_dan_hua_tang",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 666.667,
+  "unit": "g",
+  "to_quantity": 67,
+  "prep_note": "the share of about 667 g chicken the stock keeps",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_STOCK_TYPO_BASE",
+  "recipe_id": "curated_cn_fan_qie_dan_hua_tang",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 166.667,
+  "unit": "g",
+  "to_quantity": 17,
+  "prep_note": "the share of about 167 g chicken the stock keeps",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_STOCK_TYPO_BASE",
+  "recipe_id": "curated_cn_jiaozi",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 55.5,
+  "unit": "g",
+  "to_quantity": 6,
+  "prep_note": "the share of about 56 g chicken the stock keeps",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_STOCK_TYPO_BASE",
+  "recipe_id": "curated_cn_lanzhou_niu_rou_mian",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 666.667,
+  "unit": "g",
+  "to_quantity": 67,
+  "prep_note": "the share of about 667 g chicken the stock keeps",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_STOCK_TYPO_BASE",
+  "recipe_id": "curated_cn_ma_la_huo_guo",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 1333.333,
+  "unit": "g",
+  "to_quantity": 133,
+  "prep_note": "the share of about 1333 g chicken the stock keeps",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_STOCK_TYPO_BASE",
+  "recipe_id": "curated_cn_ma_yi_shang_shu",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 125,
+  "unit": "g",
+  "to_quantity": 13,
+  "prep_note": "the share of about 125 g chicken the stock keeps",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_STOCK_TYPO_BASE",
+  "recipe_id": "curated_cn_pei_dan_shou_rou_zhou",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 333.333,
+  "unit": "g",
+  "to_quantity": 33,
+  "prep_note": "the share of about 333 g chicken the stock keeps",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_STOCK_TYPO_BASE",
+  "recipe_id": "curated_cn_shengjian_bao",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 166.667,
+  "unit": "g",
+  "to_quantity": 17,
+  "prep_note": "the share of about 167 g chicken the stock keeps",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_STOCK_TYPO_BASE",
+  "recipe_id": "curated_cn_su_mi_geng",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 916.667,
+  "unit": "g",
+  "to_quantity": 92,
+  "prep_note": "the share of about 917 g chicken the stock keeps",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_STOCK_TYPO_BASE",
+  "recipe_id": "curated_cn_suan_la_tang",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 1333.333,
+  "unit": "g",
+  "to_quantity": 133,
+  "prep_note": "the share of about 1333 g chicken the stock keeps",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_STOCK_TYPO_BASE",
+  "recipe_id": "curated_cn_wonton_soup",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 1000,
+  "unit": "g",
+  "to_quantity": 100,
+  "prep_note": "the share of about 1000 g chicken the stock keeps",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_STOCK_TYPO_BASE",
+  "recipe_id": "curated_cn_xi_hu_niu_rou_geng",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 1000,
+  "unit": "g",
+  "to_quantity": 100,
+  "prep_note": "the share of about 1000 g chicken the stock keeps",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_STOCK_TYPO_BASE",
+  "recipe_id": "curated_cn_yu_pian_zhou",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 666.667,
+  "unit": "g",
+  "to_quantity": 67,
+  "prep_note": "the share of about 667 g chicken the stock keeps",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_WHOLE_TYPO_BASE",
+  "recipe_id": "curated_vn_bo_kho",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 225,
+  "unit": "g",
+  "to_quantity": 153,
+  "prep_note": "the edible share of about 225 g whole chicken; lifted out after 25 minutes; the meat is shredded for the bowls and the bones go back in",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_WHOLE_TYPO_BASE",
+  "recipe_id": "curated_vn_pho_ga",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 1800,
+  "unit": "g",
+  "to_quantity": 1224,
+  "prep_note": "the edible share of about 1800 g whole chicken; lifted out after 25 minutes; the meat is shredded for the bowls and the bones go back in",
+  "to_base_name": "Chicken, broilers or fryers"
+ },
+ {
+  "key": "CHICKEN_WHOLE_TYPO_BASE",
+  "recipe_id": "curated_vn_sup_cua",
+  "category": "Meat",
+  "base_name": "Chicken, broiler or fryers",
+  "from_quantity": 562.5,
+  "unit": "g",
+  "to_quantity": 383,
+  "prep_note": "the edible share of about 563 g whole chicken; lifted out after 25 minutes; the meat is shredded for the bowls and the bones go back in",
+  "to_base_name": "Chicken, broilers or fryers"
+ }
+]

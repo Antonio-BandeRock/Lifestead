@@ -10,6 +10,7 @@ import {
   getDietaryReferenceIntakesForCurrentUser,
   getFoodIdentity,
   getFoodNutrients,
+  getFoodNutrientsByCountry,
   getFoodUnitWeight,
   getPreparationMethods,
   getReferenceCategories,
@@ -24,6 +25,7 @@ import {
   searchReferenceFoodNamesAcrossCategories,
   type DietaryReferenceIntake,
   type FoodNutrient,
+  type FoodNutrientsByCountry,
   type FoodUnitWeight,
   type GardenHarvest,
   type GlobalFoodMatch,
@@ -32,6 +34,7 @@ import {
 } from '../lib/db';
 import { buildFoodNameGroups } from '../lib/foodNameGrouping';
 import { foodSourceCaption } from '../lib/foodSource';
+import { countryForFoodSource, useFoodSourcePreference } from '../lib/foodSourcePreference';
 import {
   evaluateFoodForPerson,
   getHouseholdPeople,
@@ -744,6 +747,12 @@ export function FoodLookup({
   // the resolve effect wait for the CURRENT baseName's own real answer.
   const [prepMethodsLoading, setPrepMethodsLoading] = useState(false);
   const [nutrients, setNutrients] = useState<FoodNutrient[] | null>(null);
+  // What every national table that measured this food lists (1.0.86.7), so
+  // tapping a nutrient shows each country's number beside the one used.
+  const [byCountry, setByCountry] = useState<FoodNutrientsByCountry | null>(null);
+  // Which table's numbers are read first (Profile > Food tables); a change
+  // there reloads the food on screen.
+  const preferredFoodSource = useFoodSourcePreference();
   // A real, cited typical-serving weight for this exact resolved food (see
   // getFoodUnitWeight's own comment) -- null for the (currently large)
   // majority of foods without one on file, in which case the table falls
@@ -1362,12 +1371,14 @@ export function FoodLookup({
         return Promise.all([
           getFoodNutrients(resolved.foodId, resolved.source),
           getFoodUnitWeight(resolved.foodId, resolved.source),
+          getFoodNutrientsByCountry(resolved.foodId, resolved.source).catch(() => null),
         ]);
       })
       .then((result) => {
         if (cancelled || !result) return;
-        const [rows, weight] = result;
+        const [rows, weight, countries] = result;
         setNutrients(rows);
+        setByCountry(countries);
         setUnitWeight(weight);
         setPortionGrams(weight ? String(Math.round(weight.gramsPerUnit)) : '100');
       })
@@ -1383,7 +1394,7 @@ export function FoodLookup({
       cancelled = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, subcategory, baseName, prepMethod, prepMethods.length, prepMethodsLoading, showNutrients]);
+  }, [category, subcategory, baseName, prepMethod, prepMethods.length, prepMethodsLoading, showNutrients, preferredFoodSource]);
 
   function selectCategory(next: string) {
     setCategory(next);
@@ -1547,6 +1558,34 @@ export function FoodLookup({
       );
     }
   }, [unitWeight, validPortionGrams, showInfoAlert]);
+
+  // What each national table lists for one nutrient of this food (1.0.86.7;
+  // owner's instruction, 2026-11-11: the person can always see what another
+  // country lists, whichever table is read first). Every table that has this
+  // food is named, with the name it uses, since the same food goes by
+  // different names in different tables.
+  function showCountryValues(nutrient: FoodNutrient) {
+    const rows = byCountry?.rows ?? [];
+    const amounts = byCountry?.nutrients.find((n) => n.code === nutrient.code)?.amounts ?? [];
+    const lines = rows.map((row) => {
+      const found = amounts.find((a) => a.source === row.source);
+      const country = countryForFoodSource(row.source);
+      const value = found ? formatAmount(found.amountPer100g, nutrient.unit) : t('not measured');
+      const used = row.source === nutrient.sourceUsed ? ` ${t('(used here)')}` : '';
+      return t('{country}, as "{name}": {value}{used}', { country, name: row.name, value, used });
+    });
+    const intro =
+      rows.length <= 1
+        ? t("Only {country}'s table has this food, so there is no other country's number to set beside it.", {
+            country: countryForFoodSource(nutrient.sourceUsed),
+          })
+        : t('What each country lists for this food, per 100g:');
+    const outro =
+      rows.length <= 1
+        ? ''
+        : `\n\n${t('Each table measured different samples, in different years and labs, so the numbers differ. The first number a table has is the one used; which table is read first is set in Profile under Food tables.')}`;
+    showInfoAlert(nutrient.displayName, `${intro}\n\n${lines.join('\n')}${outro}`);
+  }
 
   function showRdaInfo() {
     showInfoAlert(
@@ -1975,7 +2014,7 @@ export function FoodLookup({
           The builders show the same caption through FoodSourceNote. */}
       {resolvedSource ? (
         <View style={[styles.sourceFallbackNote, { borderColor: tabColor }]}>
-          <Text style={[styles.sourceFallbackText, styles.panelStandalone]}>{foodSourceCaption(resolvedSource)}</Text>
+          <Text style={[styles.sourceFallbackText, styles.panelStandalone]}>{foodSourceCaption(resolvedSource, preferredFoodSource)}</Text>
         </View>
       ) : null}
 
@@ -2210,13 +2249,20 @@ export function FoodLookup({
                 <Text style={[styles.tableGroupLabelText, { color: tabColor }]}>{section.title}</Text>
               </View>
             )}
-            renderItem={({ item: nutrient }) => {
+            renderItem={({ item: nutrient, index, section }) => {
               const percents = nutrientGapsByCode.get(nutrient.code);
+              // A value marked * came from another country's table, since
+              // the first table read has no number for it (1.0.86.7).
               return (
-                <View style={styles.tableRow}>
+                <TouchableOpacity
+                  ref={index === 0 && section === nutrientSections[0] ? walkMark.ref('lookup.countries') : undefined}
+                  style={styles.tableRow}
+                  onPress={() => showCountryValues(nutrient)}
+                >
                   <Text style={[styles.tableCell, { color: tabColor }, styles.tableCellNutrient]}>{nutrient.displayName}</Text>
                   <Text style={[styles.tableCell, { color: tabColor }, styles.tableCellAmount]}>
                     {formatAmount(nutrient.amountPer100g, nutrient.unit)}
+                    {nutrient.isSupplemented ? '*' : ''}
                   </Text>
                   <Text style={[styles.tableCell, { color: tabColor }, styles.tableCellPortion]}>
                     {formatAmount(nutrient.amountPer100g * servingScale, nutrient.unit)}
@@ -2224,10 +2270,19 @@ export function FoodLookup({
                   <Text style={[styles.tableCell, { color: tabColor }, styles.tableCellPercent]}>
                     {percents && percents.length > 0 ? percents.map((percent) => `${Math.round(percent)}%`).join(' / ') : '—'}
                   </Text>
-                </View>
+                </TouchableOpacity>
               );
             }}
           />
+        </View>
+      ) : null}
+      {!loading && !errorMessage && groupedNutrients ? (
+        <View style={[styles.sourceFallbackNote, { borderColor: tabColor }]}>
+          <Text style={[styles.sourceFallbackText, styles.panelStandalone]}>
+            {nutrients?.some((n) => n.isSupplemented)
+              ? t("Tap a nutrient to see what each country's table lists for it. * This number comes from another country's table, since the first one has none for it.")
+              : t("Tap a nutrient to see what each country's table lists for it.")}
+          </Text>
         </View>
       ) : null}
     </>

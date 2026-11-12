@@ -33,7 +33,7 @@ function loadModule() {
   return module.exports;
 }
 
-const { cookingMethodIntent, preferredPrepMethodFor, isRawPrepMethod, describePrepMismatch } = loadModule();
+const { cookingMethodIntent, preferredPrepMethodFor, isRawPrepMethod, describePrepMismatch, pickCookedRow } = loadModule();
 
 let failures = 0;
 let checks = 0;
@@ -109,6 +109,65 @@ check(
 // garlic and its salt, and nobody would read the section at all.
 check('an untagged food says nothing', describePrepMismatch('Olive Oil (Extra Virgin)', '', 'Sautéed'), null);
 check('a missing tag says nothing', describePrepMismatch('Common salt', null, 'Boiled'), null);
+
+// --- Which cooked row stands for the food (2026-11-11) ----------------------
+
+// A base name can hold many cooked rows. Table order once decided, so a
+// poached whole chicken was scored as battered fried chicken with giblets.
+const chickenRows = [
+  { food_id: 1, source: 'USDA', prep_method: 'Fried', name: 'Chicken, broilers or fryers, meat and skin and giblets and neck, fried, batter' },
+  { food_id: 2, source: 'USDA', prep_method: 'Roasted', name: 'Chicken, broilers or fryers, skin only, cooked, roasted' },
+  { food_id: 3, source: 'USDA', prep_method: 'Stewed', name: 'Chicken, broilers or fryers, thigh, meat and skin, cooked, stewed' },
+  { food_id: 4, source: 'USDA', prep_method: 'Stewed', name: 'Chicken, broilers or fryers, meat and skin, cooked, stewed' },
+  { food_id: 5, source: 'USDA', prep_method: 'Fried', name: 'Chicken, broilers or fryers, thigh, meat and skin, cooked, fried, flour' },
+  { food_id: 6, source: 'USDA', prep_method: 'Roasted', name: 'Chicken, broilers or fryers, thigh, meat and skin, cooked, roasted' },
+];
+const startWhole = 'Chicken, broilers or fryers, meat and skin, raw';
+const startThigh = 'Chicken, broilers or fryers, thigh, meat and skin, raw';
+const idOf = (row) => (row ? row.food_id : null);
+check('poached whole chicken stays a whole bird, stewed', idOf(pickCookedRow(chickenRows, startWhole, 'Poached')), 4);
+check('braised thigh stays a thigh, stewed', idOf(pickCookedRow(chickenRows, startThigh, 'Braised')), 3);
+check('roast thigh is the roasted thigh', idOf(pickCookedRow(chickenRows, startThigh, 'Roasted')), 6);
+check('pan-fried thigh is never the floured one unasked', idOf(pickCookedRow(chickenRows, startThigh, 'Pan-Fried')), 3);
+check('a floured fry, asked for, is chosen', idOf(pickCookedRow(chickenRows, startThigh, 'Fried in flour')), 5);
+check('skin only is never chosen unasked', idOf(pickCookedRow(chickenRows, startWhole, 'Roasted')), 6);
+check(
+  'a tie keeps the row already chosen',
+  idOf(pickCookedRow(
+    [
+      { food_id: 7, source: 'USDA', prep_method: 'Boiled', name: 'Beans, boiled' },
+      { food_id: 8, source: 'USDA', prep_method: 'Boiled', name: 'Beans, boiled' },
+    ],
+    'Beans, raw',
+    'Boiled',
+    { foodId: 8, source: 'USDA' },
+  )),
+  8,
+);
+check('a separable-fat row is passed over', idOf(pickCookedRow(
+  [
+    { food_id: 9, source: 'USDA', prep_method: 'Braised', name: 'Veal, breast, separable fat, cooked' },
+    { food_id: 10, source: 'USDA', prep_method: 'Braised', name: 'Veal, breast, whole, boneless, cooked, braised' },
+  ],
+  'Veal, breast, whole, boneless, raw',
+  'Simmered',
+)), 10);
+check('no rows, nothing chosen', pickCookedRow([], 'x', 'Boiled'), undefined);
+// A dish already on the battered row is moved off it: the starting row's
+// own name never counts as asking for a coating.
+check(
+  'a wrong battered starting row is corrected',
+  idOf(pickCookedRow(chickenRows, chickenRows[0].name, 'Poached', { foodId: 1, source: 'USDA' }, 'Chicken, broilers or fryers')),
+  4,
+);
+check('a salted row is passed over unasked', idOf(pickCookedRow(
+  [
+    { food_id: 1014, source: 'USDA', prep_method: 'Boiled', name: 'Corn, sweet, yellow, cooked, boiled, drained, with salt' },
+    { food_id: 1028, source: 'USDA', prep_method: 'Boiled', name: 'Corn, sweet, white, cooked, boiled, drained, without salt' },
+  ],
+  'Sweet Corn',
+  'Boiled',
+)), 1028);
 
 if (failures > 0) {
   console.error(`\nCooking method resolution: ${failures} of ${checks} checks failed.`);

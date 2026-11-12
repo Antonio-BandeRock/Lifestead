@@ -1,6 +1,8 @@
 import * as SQLite from 'expo-sqlite';
 import { File } from 'expo-file-system';
 import { REFERENCE_DB_VERSION } from './referenceDbVersion';
+import { DEFAULT_FOOD_SOURCE, foodSourceRank, foodSourceRankSql, getPreferredFoodSource, isFoodSourceKey, isOutsidePreferredSource, setPreferredFoodSourceInMemory, type FoodSourceKey } from './foodSourcePreference';
+import { mergeNutrientsInOrder, orderEquivalentRows, rowKey, type EquivalentRow, type NutrientAmount } from './foodEquivalence';
 import { toRuleSeverity, type RuleSeverity } from './ruleSeverity';
 import { attachWriteTracking } from './databaseActivity';
 import { withVaultBypass } from './vaultState';
@@ -49,7 +51,7 @@ import {
   describePrepMismatch,
   isRawPrepMethod,
   isUnaskedPreservedForm,
-  preferredPrepMethodFor,
+  pickCookedRow,
 } from './cookingMethodResolution';
 // Type-only -- lib/recipeDepth.ts imports several real functions FROM this
 // file (getFoodScores, getFoodScoresForCondition, getConditionStages), so
@@ -1628,10 +1630,49 @@ export async function getPreparationMethods(category: string, subcategory: strin
 // spirit variants no source measures separately, see build_food_reference_
 // db.py's own SYNTHETIC_SPIRIT_VARIANTS -- these are USDA data in every
 // real sense, just not stored under that literal source string).
-const USDA_PREFERRED_SOURCES = new Set(['USDA', 'Derived']);
-
+// 1.0.86.7: "the default" is now whichever table the person put first in
+// Profile (lib/foodSourcePreference.ts), USDA unless they chose another.
 export function isFallbackSource(source: string): boolean {
-  return !USDA_PREFERRED_SOURCES.has(source);
+  return isOutsidePreferredSource(source);
+}
+
+// Which country's table is read first, kept in app_meta so it travels with
+// the person's records. Loaded once before the first query that ranks
+// sources; saving it updates every reader at once through the listeners in
+// lib/foodSourcePreference.ts. Daily nutrient totals carry the choice in
+// their signature, so each cached day recomputes once after a change.
+const FOOD_SOURCE_PREFERENCE_KEY = 'food_source_preference';
+let foodSourcePreferenceLoad: Promise<FoodSourceKey> | null = null;
+
+export function loadFoodSourcePreference(): Promise<FoodSourceKey> {
+  if (!foodSourcePreferenceLoad) {
+    foodSourcePreferenceLoad = (async () => {
+      try {
+        const db = await getDatabase();
+        const row = await db.getFirstAsync<{ value: string }>('SELECT value FROM app_meta WHERE key = ?', FOOD_SOURCE_PREFERENCE_KEY);
+        const value = row?.value ?? DEFAULT_FOOD_SOURCE;
+        setPreferredFoodSourceInMemory(isFoodSourceKey(value) ? value : DEFAULT_FOOD_SOURCE);
+      } catch (error) {
+        console.warn('[db] Could not read the food table preference', error);
+        foodSourcePreferenceLoad = null;
+      }
+      return getPreferredFoodSource();
+    })();
+  }
+  return foodSourcePreferenceLoad;
+}
+
+export async function saveFoodSourcePreference(source: FoodSourceKey): Promise<void> {
+  const db = await getDatabase();
+  await db.runAsync(
+    `INSERT INTO app_meta (key, value, updated_at) VALUES (?, ?, ?)
+     ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = excluded.updated_at`,
+    FOOD_SOURCE_PREFERENCE_KEY,
+    source,
+    new Date().toISOString(),
+  );
+  foodSourcePreferenceLoad = Promise.resolve(source);
+  setPreferredFoodSourceInMemory(source);
 }
 
 // 2026-08-11, a real, direct requirement, restated in full since it
@@ -1661,6 +1702,7 @@ export function isFallbackSource(source: string): boolean {
 // all eleven Food builders, Insights' own Food Lookup lens) already reads
 // `.source` off the resolved selection.
 export async function resolveFoodChoice(category: string, subcategory: string | null, baseName: string, prepMethod: string | null) {
+  await loadFoodSourcePreference();
   const db = await getReferenceDatabase();
   const { clause, params } = buildScopeClause(category, subcategory, false);
   const normalizedPrep = prepMethod || 'Standard';
@@ -1672,7 +1714,7 @@ export async function resolveFoodChoice(category: string, subcategory: string | 
       WHERE ${clause} AND base_name = ?
         AND COALESCE(prep_method, 'Standard') = ?
       ORDER BY
-        CASE WHEN source IN ('USDA', 'Derived') THEN 0 ELSE 1 END,
+        ${foodSourceRankSql()},
         CASE
           WHEN name LIKE '%without salt%' OR name LIKE '%no salt added%' OR name LIKE '%unsalted%' THEN 0
           WHEN name LIKE '%with salt%' OR name LIKE '%salted%' THEN 2
@@ -1811,6 +1853,7 @@ export async function getCuratedRecipeSummariesByIds(ids: string[]): Promise<Cur
 // see resolveCuratedRecipeIngredientUncached's own comment for why any
 // non-Raw variant is an honest, sufficient answer here.
 async function resolveNonRawPrepMethodMatch(category: string, baseName: string, cookingMethod: string) {
+  await loadFoodSourcePreference();
   const db = await getReferenceDatabase();
   const { clause, params } = buildScopeClause(category, null, false);
   const rows = await db.getAllAsync<{
@@ -1823,7 +1866,7 @@ async function resolveNonRawPrepMethodMatch(category: string, baseName: string, 
   }>(
     `SELECT food_id, source, name, short_name, category, prep_method FROM foods
      WHERE ${clause} AND base_name = ? AND prep_method IS NOT NULL AND prep_method != 'Raw'
-     ORDER BY CASE WHEN source IN ('USDA', 'Derived') THEN 0 ELSE 1 END, food_id`,
+     ORDER BY ${foodSourceRankSql()}, food_id`,
     ...params,
     baseName,
   );
@@ -1879,6 +1922,7 @@ export async function resolveFoodForCookingMethod(
   },
   cookingMethod: string | null,
 ): Promise<CookingMethodResolution> {
+  await loadFoodSourcePreference();
   const unchanged = (mismatchNote: string | null = null): CookingMethodResolution => ({
     foodId: current.foodId,
     source: current.source,
@@ -1906,7 +1950,7 @@ export async function resolveFoodForCookingMethod(
   }>(
     `SELECT food_id, source, prep_method, short_name, base_name, name FROM foods
      WHERE category = ? AND base_name = ? AND hidden = 0
-     ORDER BY CASE WHEN source IN ('USDA', 'Derived') THEN 0 ELSE 1 END, food_id`,
+     ORDER BY ${foodSourceRankSql()}, food_id`,
     current.category,
     current.baseName,
   );
@@ -1948,16 +1992,20 @@ export async function resolveFoodForCookingMethod(
     return unchanged(describePrepMismatch(current.baseName, current.prepMethod, cookingMethod));
   }
 
-  const preferred = preferredPrepMethodFor(cookingMethod);
-  const exact = preferred
-    ? cookedRows.find((row) => (row.prep_method ?? '').toLowerCase().includes(preferred.toLowerCase()))
-    : undefined;
-  // An exact match wins. Failing that, a cooked row this ingredient is
-  // already on is kept rather than swapped for a different cooked row for no
-  // reason, since the two score the same and churning the id would make an
-  // edited dish look changed when nothing about it was.
-  const alreadyCooked = cookedRows.find((row) => row.food_id === current.foodId && row.source === current.source);
-  return pick(exact ?? alreadyCooked ?? cookedRows[0]);
+  // The row whose preparation matches the cooking word, then the one closest
+  // in name to the row the ingredient started on (a whole bird stays a whole
+  // bird), never an unasked battered or separable-fat row (2026-11-11). The
+  // row already chosen wins a tie, so an edited dish does not churn ids.
+  const startName =
+    rows.find((row) => row.food_id === current.foodId && row.source === current.source)?.name ?? current.baseName;
+  const chosen = pickCookedRow(
+    cookedRows,
+    startName,
+    cookingMethod,
+    { foodId: current.foodId, source: current.source },
+    current.baseName,
+  );
+  return pick(chosen ?? cookedRows[0]);
 }
 
 
@@ -2167,6 +2215,7 @@ async function resolveCuratedRecipeIngredient(
 // salad) is left to fall through to the existing Raw-first behavior
 // completely unchanged.
 async function resolveCuratedRecipeIngredientUncached(category: string, baseName: string, cookingMethod: string | null) {
+  await loadFoodSourcePreference();
   // 2026-11-11: only cooking text that means heat looks for a cooked row.
   // 'Raw' and 'N/A' used to take this path too, which is how a raw banana
   // was scored as dried banana and a raw strawberry as frozen.
@@ -2216,7 +2265,7 @@ async function resolveCuratedRecipeIngredientUncached(category: string, baseName
     row.hidden ? 1 : 0,
     isUnaskedPreservedForm(row.prep_method, row.name, cookingMethod) ? 1 : 0,
     prepTier(row.prep_method),
-    row.source === 'USDA' || row.source === 'Derived' ? 0 : 1,
+    foodSourceRank(row.source),
     saltTier(row.name),
     row.food_id,
   ];
@@ -3092,111 +3141,156 @@ export async function getSaferPrepAlternative(
 // actually came from. Nothing is deleted or rewritten; every source's own
 // row is untouched, so this is trivially reversible and easy to refine
 // later (e.g. a smarter sibling-source preference) without a migration.
-export async function getFoodNutrients(foodId: number, source: string) {
-  // A real, local barcode-scanned product, 2026-08-16 -- see
-  // getScannedProductNutrients' own comment for why this can't just be
-  // one more branch inside the SQL below.
+// 1.0.86.7: a food's numbers are read across every national table that
+// measured the same food, in the person's table order (Profile, USDA first
+// unless they chose another; owner's instruction, 2026-11-11). Which rows are
+// "the same food" comes from food_equivalence (scripts/add_food_equivalence.js),
+// which matched rows across tables one by one, rather than from the old
+// category + base_name + prep key alone, which missed Germany's "Tomato"
+// against USDA's "Red Tomato". The ordering itself is lib/foodEquivalence.ts.
+//
+// Before this the gap filler took the alphabetically first table, so a
+// missing USDA value came from Australia ahead of Canada for no reason.
+const EQUIVALENCE_CHUNK = 300;
+
+async function loadEquivalentRows(pairs: { foodId: number; source: string }[]): Promise<Map<string, EquivalentRow[]>> {
+  await loadFoodSourcePreference();
+  const preferred = getPreferredFoodSource();
+  const db = await getReferenceDatabase();
+  const unique = Array.from(new Map(pairs.map((p) => [rowKey(p), p])).values());
+  const selves = new Map<string, EquivalentRow>();
+  const groups = new Map<string, EquivalentRow[]>();
+  for (let i = 0; i < unique.length; i += EQUIVALENCE_CHUNK) {
+    const slice = unique.slice(i, i + EQUIVALENCE_CHUNK);
+    const placeholders = slice.map(() => '(?, ?)').join(', ');
+    const params = slice.flatMap((p) => [p.foodId, p.source]);
+    const selfRows = await db.getAllAsync<{ foodId: number; source: string; name: string; prepMethod: string | null }>(
+      `SELECT food_id AS foodId, source, name, prep_method AS prepMethod FROM foods WHERE (food_id, source) IN (VALUES ${placeholders})`,
+      ...params,
+    );
+    for (const row of selfRows) selves.set(rowKey(row), row);
+    const memberRows = await db.getAllAsync<{
+      selfId: number;
+      selfSource: string;
+      foodId: number;
+      source: string;
+      name: string;
+      prepMethod: string | null;
+    }>(
+      `SELECT me.food_id AS selfId, me.source AS selfSource, f.food_id AS foodId, f.source, f.name, f.prep_method AS prepMethod
+       FROM food_equivalence me
+       JOIN food_equivalence e ON e.group_key = me.group_key
+       JOIN foods f ON f.food_id = e.food_id AND f.source = e.source
+       WHERE (me.food_id, me.source) IN (VALUES ${placeholders})`,
+      ...params,
+    );
+    for (const row of memberRows) {
+      const key = `${row.selfId}|${row.selfSource}`;
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key)!.push({ foodId: row.foodId, source: row.source, name: row.name, prepMethod: row.prepMethod });
+    }
+  }
+  const result = new Map<string, EquivalentRow[]>();
+  for (const [key, self] of selves) {
+    result.set(key, orderEquivalentRows(self, groups.get(key) ?? [], preferred));
+  }
+  return result;
+}
+
+async function loadNutrientAmounts(rows: { foodId: number; source: string }[]): Promise<Map<string, NutrientAmount[]>> {
+  const db = await getReferenceDatabase();
+  const unique = Array.from(new Map(rows.map((r) => [rowKey(r), r])).values());
+  const result = new Map<string, NutrientAmount[]>();
+  for (let i = 0; i < unique.length; i += EQUIVALENCE_CHUNK) {
+    const slice = unique.slice(i, i + EQUIVALENCE_CHUNK);
+    const found = await db.getAllAsync<{ foodId: number; source: string; code: string; amountPer100g: number }>(
+      `SELECT food_id AS foodId, source, nutrient_code AS code, amount_per_100g AS amountPer100g
+       FROM food_nutrients WHERE (food_id, source) IN (VALUES ${slice.map(() => '(?, ?)').join(', ')}) AND amount_per_100g IS NOT NULL`,
+      ...slice.flatMap((r) => [r.foodId, r.source]),
+    );
+    for (const row of found) {
+      const key = rowKey(row);
+      if (!result.has(key)) result.set(key, []);
+      result.get(key)!.push({ code: row.code, amountPer100g: row.amountPer100g });
+    }
+  }
+  return result;
+}
+
+type NutrientInfo = { code: string; displayName: string; unit: string; group: string };
+let nutrientInfoCache: Promise<Map<string, NutrientInfo>> | null = null;
+
+function loadNutrientInfo(): Promise<Map<string, NutrientInfo>> {
+  if (!nutrientInfoCache) {
+    nutrientInfoCache = (async () => {
+      const db = await getReferenceDatabase();
+      const rows = await db.getAllAsync<NutrientInfo>(
+        'SELECT code, display_name AS displayName, unit, nutrient_group AS "group" FROM nutrients',
+      );
+      return new Map(rows.map((row) => [row.code, row]));
+    })().catch((error) => {
+      nutrientInfoCache = null;
+      throw error;
+    });
+  }
+  return nutrientInfoCache;
+}
+
+const NUTRIENT_GROUP_ORDER: Record<string, number> = { macro: 0, vitamin: 1, mineral: 2 };
+
+function sortNutrientsForDisplay<T extends { displayName: string; group: string }>(rows: T[]): T[] {
+  return rows.sort(
+    (a, b) =>
+      (NUTRIENT_GROUP_ORDER[a.group] ?? 3) - (NUTRIENT_GROUP_ORDER[b.group] ?? 3) ||
+      a.displayName.localeCompare(b.displayName),
+  );
+}
+
+export async function getFoodNutrients(foodId: number, source: string): Promise<FoodNutrient[]> {
+  // A barcode-scanned product lives in the person's own database, not the
+  // reference one, so it has no other tables to read across.
   if (source === 'Scanned') {
     return getScannedProductNutrients(foodId);
   }
-  const db = await getReferenceDatabase();
-  const rows = await db.getAllAsync<{
-    code: string;
-    displayName: string;
-    unit: string;
-    group: string;
-    amountPer100g: number;
-    sourceUsed: string;
-    isSupplemented: number;
-  }>(
-    `
-      -- MATERIALIZED and CROSS JOIN fix the order SQLite works in, 2026-09-27:
-      -- left to choose, it walked all 835,000 food_nutrients rows through
-      -- the nutrient index for every food, about six seconds a call, and
-      -- since every database call waits its turn, the whole app stalled
-      -- behind it on the phone and the desktop alike. Starting from the
-      -- one food, then its siblings, then their nutrients, it reads a few
-      -- hundred rows and returns the same result.
-      WITH primary_food AS MATERIALIZED (
-        SELECT category, base_name, prep_method FROM foods WHERE food_id = ? AND source = ?
-      ),
-      -- Other rows for the same real food (by the app's existing
-      -- category + base_name + prep_method equivalence key), excluding
-      -- the requested row itself.
-      siblings AS MATERIALIZED (
-        SELECT f.food_id, f.source
-        FROM primary_food pf
-        CROSS JOIN foods f
-        WHERE f.category = pf.category
-          AND f.base_name = pf.base_name
-          AND COALESCE(f.prep_method, '') = COALESCE(pf.prep_method, '')
-          AND NOT (f.food_id = ? AND f.source = ?)
-      ),
-      primary_nutrients AS MATERIALIZED (
-        SELECT nutrient_code, amount_per_100g
-        FROM food_nutrients
-        WHERE food_id = ? AND source = ?
-      ),
-      -- Deterministic pick when more than one sibling source has the same
-      -- nutrient the primary source is missing: alphabetically first
-      -- source name. Simple and stable; revisit if a real source-quality
-      -- preference is ever wanted -- this is the one place that logic
-      -- would go.
-      fallback_source AS (
-        SELECT fn.nutrient_code, MIN(fn.source) AS source
-        FROM siblings s
-        CROSS JOIN food_nutrients fn ON s.food_id = fn.food_id AND s.source = fn.source
-        WHERE fn.nutrient_code NOT IN (SELECT nutrient_code FROM primary_nutrients)
-        GROUP BY fn.nutrient_code
-      ),
-      -- fallback_source only picks one SOURCE per nutrient, not one ROW --
-      -- the app's own category/base_name/prep_method equivalence key isn't
-      -- always one real food per source (e.g. several distinct wine
-      -- varietals all filed under "Wine, red" from the same source), so
-      -- more than one sibling row can share that chosen source for the
-      -- same nutrient. ROW_NUMBER()/rn = 1 (lowest food_id, same
-      -- deterministic tie-break resolveFoodChoice already uses elsewhere)
-      -- picks exactly one, rather than letting every matching sibling row
-      -- flow through and produce duplicate nutrient_code rows in the final
-      -- result (surfaced 2026-07-27 as a real "two children with the same
-      -- key" duplicate in the UI, not just a rendering-layer bug).
-      fallback_nutrients AS (
-        SELECT nutrient_code, amount_per_100g, source
-        FROM (
-          SELECT
-            fn.nutrient_code,
-            fn.amount_per_100g,
-            fn.source,
-            ROW_NUMBER() OVER (PARTITION BY fn.nutrient_code ORDER BY fn.food_id) AS rn
-          FROM siblings s
-          CROSS JOIN food_nutrients fn ON s.food_id = fn.food_id AND s.source = fn.source
-          JOIN fallback_source fs ON fs.nutrient_code = fn.nutrient_code AND fs.source = fn.source
-        )
-        WHERE rn = 1
-      )
-      SELECT
-        n.code AS code,
-        n.display_name AS displayName,
-        n.unit AS unit,
-        n.nutrient_group AS "group",
-        COALESCE(pn.amount_per_100g, fbn.amount_per_100g) AS amountPer100g,
-        CASE WHEN pn.amount_per_100g IS NOT NULL THEN ? ELSE fbn.source END AS sourceUsed,
-        CASE WHEN pn.amount_per_100g IS NOT NULL THEN 0 ELSE 1 END AS isSupplemented
-      FROM nutrients n
-      LEFT JOIN primary_nutrients pn ON pn.nutrient_code = n.code
-      LEFT JOIN fallback_nutrients fbn ON fbn.nutrient_code = n.code
-      WHERE pn.amount_per_100g IS NOT NULL OR fbn.amount_per_100g IS NOT NULL
-      ORDER BY
-        CASE n.nutrient_group WHEN 'macro' THEN 0 WHEN 'vitamin' THEN 1 WHEN 'mineral' THEN 2 ELSE 3 END,
-        n.display_name
-    `,
-    foodId, source,
-    foodId, source,
-    foodId, source,
-    source,
-  );
+  const ordered = (await loadEquivalentRows([{ foodId, source }])).get(`${foodId}|${source}`) ?? [];
+  if (ordered.length === 0) return [];
+  const [amounts, info] = await Promise.all([loadNutrientAmounts(ordered), loadNutrientInfo()]);
+  const merged = mergeNutrientsInOrder(ordered, amounts);
+  const rows: FoodNutrient[] = [];
+  for (const n of merged) {
+    const meta = info.get(n.code);
+    if (!meta) continue;
+    rows.push({ ...meta, amountPer100g: n.amountPer100g, sourceUsed: n.sourceUsed, isSupplemented: n.isSupplemented });
+  }
+  return sortNutrientsForDisplay(rows);
+}
 
-  return rows.map((row) => ({ ...row, isSupplemented: Boolean(row.isSupplemented) }));
+// What every national table that measured this food lists, nutrient by
+// nutrient, for "What other countries list" under a food's numbers. The
+// first entry is the table whose numbers the app reads first.
+export type FoodNutrientsByCountry = {
+  rows: { foodId: number; source: string; name: string }[];
+  nutrients: (NutrientInfo & { amounts: { source: string; amountPer100g: number }[] })[];
+};
+
+export async function getFoodNutrientsByCountry(foodId: number, source: string): Promise<FoodNutrientsByCountry> {
+  if (source === 'Scanned') return { rows: [], nutrients: [] };
+  const ordered = (await loadEquivalentRows([{ foodId, source }])).get(`${foodId}|${source}`) ?? [];
+  const [amounts, info] = await Promise.all([loadNutrientAmounts(ordered), loadNutrientInfo()]);
+  const byCode = new Map<string, { source: string; amountPer100g: number }[]>();
+  for (const row of ordered) {
+    for (const n of amounts.get(rowKey(row)) ?? []) {
+      if (!byCode.has(n.code)) byCode.set(n.code, []);
+      byCode.get(n.code)!.push({ source: row.source, amountPer100g: n.amountPer100g });
+    }
+  }
+  const nutrients = [...byCode.entries()]
+    .filter(([code]) => info.has(code))
+    .map(([code, list]) => ({ ...info.get(code)!, amounts: list }));
+  return {
+    rows: ordered.filter((row) => amounts.has(rowKey(row))).map((row) => ({ foodId: row.foodId, source: row.source, name: row.name })),
+    nutrients: sortNutrientsForDisplay(nutrients),
+  };
 }
 
 // A real, bulk-scoped resolver for exactly the two fields
@@ -3221,18 +3315,9 @@ export async function getFoodNutrients(foodId: number, source: string) {
 // well under a second, then the per-item loop alone taking 37-41 SECONDS
 // on top of it.
 //
-// This resolves every distinct food's real nutrient rows in exactly two
-// bulk queries total (its own rows, plus every real sibling's rows across
-// the WHOLE set of distinct foods needed for the day), then replicates
-// getFoodNutrients' own exact fallback tie-break rule in plain JS: for any
-// nutrient code missing from a food's own rows, the sibling with the
-// alphabetically-first SOURCE providing that code wins, and among
-// siblings sharing that same source, the one with the lowest food_id --
-// the identical two-step rule getFoodNutrients' own fallback_source/
-// fallback_nutrients CTEs already use (MIN(source), then
-// ROW_NUMBER() OVER (PARTITION BY nutrient_code ORDER BY food_id)).
-// Verified directly against getFoodNutrients itself before trusting this,
-// not just reasoned about -- see this function's own test coverage.
+// This resolves every distinct food's nutrient rows in a few bulk queries
+// for the whole set. Since 1.0.86.7 it shares getFoodNutrients' reading
+// (loadEquivalentRows, mergeNutrientsInOrder), so the two cannot drift.
 //
 // Exported 2026-08-26 so lib/dailyMealPlan.ts's own buildCandidatePools
 // can pre-populate its shared nutrient cache with one bulk call covering
@@ -3249,102 +3334,22 @@ export async function getPrimaryNutrientAmountsBulk(
 ): Promise<Map<string, { code: string; amountPer100g: number }[]>> {
   const result = new Map<string, { code: string; amountPer100g: number }[]>();
   if (pairs.length === 0) return result;
-  const db = await getReferenceDatabase();
-
-  // Every target food's own real category/base_name/prep_method -- the
-  // app's own established equivalence key for "the same real food,
-  // measured by a different national source."
-  const foodKeyPlaceholders = pairs.map(() => '(?, ?)').join(', ');
-  const foodKeyParams = pairs.flatMap((p) => [p.foodId, p.source]);
-  const identityRows = await db.getAllAsync<{
-    foodId: number;
-    source: string;
-    category: string;
-    baseName: string;
-    prepMethod: string | null;
-  }>(
-    `SELECT food_id AS foodId, source, category, base_name AS baseName, prep_method AS prepMethod
-     FROM foods WHERE (food_id, source) IN (${foodKeyPlaceholders})`,
-    ...foodKeyParams,
-  );
-  const identityByKey = new Map(identityRows.map((r) => [`${r.foodId}|${r.source}`, r]));
-  const tripleKey = (category: string, baseName: string, prepMethod: string | null) =>
-    `${category} ${baseName} ${prepMethod ?? ''}`;
-
-  // Every real food anywhere in the reference database sharing one of
-  // those real identities -- the full sibling pool for the WHOLE day at
-  // once, not one food at a time.
-  const distinctTriples = Array.from(new Map(identityRows.map((r) => [tripleKey(r.category, r.baseName, r.prepMethod), r])).values());
-  const siblingFoods = distinctTriples.length
-    ? await db.getAllAsync<{ foodId: number; source: string; category: string; baseName: string; prepMethod: string | null }>(
-        `SELECT food_id AS foodId, source, category, base_name AS baseName, prep_method AS prepMethod
-         FROM foods WHERE (category, base_name, COALESCE(prep_method, '')) IN (${distinctTriples.map(() => '(?, ?, ?)').join(', ')})`,
-        ...distinctTriples.flatMap((r) => [r.category, r.baseName, r.prepMethod ?? '']),
-      )
-    : [];
-
-  // Every real nutrient row for the target foods AND every real sibling,
-  // in one more bulk fetch.
-  const allRelevantPairs = new Map<string, { foodId: number; source: string }>();
-  for (const r of identityRows) allRelevantPairs.set(`${r.foodId}|${r.source}`, r);
-  for (const r of siblingFoods) allRelevantPairs.set(`${r.foodId}|${r.source}`, r);
-  const allPairsArr = Array.from(allRelevantPairs.values());
-  const nutrientRows = allPairsArr.length
-    ? await db.getAllAsync<{ foodId: number; source: string; nutrientCode: string; amountPer100g: number }>(
-        `SELECT food_id AS foodId, source, nutrient_code AS nutrientCode, amount_per_100g AS amountPer100g
-         FROM food_nutrients WHERE (food_id, source) IN (${allPairsArr.map(() => '(?, ?)').join(', ')})`,
-        ...allPairsArr.flatMap((p) => [p.foodId, p.source]),
-      )
-    : [];
-  const nutrientsByFoodKey = new Map<string, { code: string; amountPer100g: number }[]>();
-  for (const row of nutrientRows) {
-    const key = `${row.foodId}|${row.source}`;
-    if (!nutrientsByFoodKey.has(key)) nutrientsByFoodKey.set(key, []);
-    nutrientsByFoodKey.get(key)!.push({ code: row.nutrientCode, amountPer100g: row.amountPer100g });
-  }
-
-  // Siblings grouped by their real identity triple, matching
-  // getFoodNutrients' own siblings CTE.
-  const siblingsByTriple = new Map<string, { foodId: number; source: string }[]>();
-  for (const r of siblingFoods) {
-    const triple = tripleKey(r.category, r.baseName, r.prepMethod);
-    if (!siblingsByTriple.has(triple)) siblingsByTriple.set(triple, []);
-    siblingsByTriple.get(triple)!.push({ foodId: r.foodId, source: r.source });
-  }
-
+  // 1.0.86.7: the same reading as getFoodNutrients, in bulk: every food's
+  // matched rows across the national tables, read in the person's table
+  // order (lib/foodEquivalence.ts), in a handful of chunked queries for the
+  // whole set rather than one round trip per food.
+  const orderedByKey = await loadEquivalentRows(pairs);
+  const allRows: EquivalentRow[] = [];
+  for (const rows of orderedByKey.values()) allRows.push(...rows);
+  const amounts = await loadNutrientAmounts(allRows);
   for (const pair of pairs) {
-    const key = `${pair.foodId}|${pair.source}`;
-    const identity = identityByKey.get(key);
-    const primary = nutrientsByFoodKey.get(key) ?? [];
-    const primaryCodes = new Set(primary.map((n) => n.code));
-    const combined = [...primary];
-
-    if (identity) {
-      const triple = tripleKey(identity.category, identity.baseName, identity.prepMethod);
-      const siblings = (siblingsByTriple.get(triple) ?? []).filter(
-        (s) => !(s.foodId === pair.foodId && s.source === pair.source),
-      );
-      const bestBySource = new Map<string, { source: string; amountPer100g: number; foodId: number }>();
-      for (const sibling of siblings) {
-        const siblingKey = `${sibling.foodId}|${sibling.source}`;
-        for (const n of nutrientsByFoodKey.get(siblingKey) ?? []) {
-          if (primaryCodes.has(n.code)) continue;
-          const existing = bestBySource.get(n.code);
-          if (
-            !existing ||
-            sibling.source < existing.source ||
-            (sibling.source === existing.source && sibling.foodId < existing.foodId)
-          ) {
-            bestBySource.set(n.code, { source: sibling.source, amountPer100g: n.amountPer100g, foodId: sibling.foodId });
-          }
-        }
-      }
-      for (const [code, best] of bestBySource) combined.push({ code, amountPer100g: best.amountPer100g });
-    }
-
-    result.set(key, combined);
+    const key = rowKey(pair);
+    const ordered = orderedByKey.get(key) ?? [];
+    result.set(
+      key,
+      mergeNutrientsInOrder(ordered, amounts).map((n) => ({ code: n.code, amountPer100g: n.amountPer100g })),
+    );
   }
-
   return result;
 }
 
@@ -22929,7 +22934,7 @@ function dailyNutrientTotalsSignature(items: (MealItemRecord & { eatenAt: string
       ].join(':'),
     )
     .sort();
-  return `v${DAILY_NUTRIENT_TOTALS_CACHE_FORMAT}|ref${REFERENCE_DB_VERSION}|${parts.join(';')}`;
+  return `v${DAILY_NUTRIENT_TOTALS_CACHE_FORMAT}|ref${REFERENCE_DB_VERSION}|src${getPreferredFoodSource()}|${parts.join(';')}`;
 }
 
 // Drops every cached day. Only needed when something a total depends on

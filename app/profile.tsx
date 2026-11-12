@@ -18,6 +18,7 @@ import { GenericBackground } from '../components/GenericBackground';
 import { HelpButton, type HelpSection } from '../components/HelpButton';
 import { ActiveRingCircle } from '../components/ActiveRingCircle';
 import { PopoverSelect } from '../components/PopoverSelect';
+import { FOOD_SOURCE_CHOICES, isFoodSourceKey, useFoodSourcePreference } from '../lib/foodSourcePreference';
 import { ReminderAlertSettings } from '../components/ReminderAlertSettings';
 import { NUTRIENT_TARGET_FIELDS, WEEKDAY_NAMES, WEEKDAY_ORDER, weekdayValuesFor, type NutrientTargetField, type WeekdayTargetOverride } from '../lib/weekdayTargets';
 import { usePasswordPrompt } from '../components/PasswordPrompt';
@@ -232,7 +233,7 @@ import {
   SymptomAssessmentRecord,
   type UserNutrientTargetOverride,
   UserProfile,
-
+  saveFoodSourcePreference,
 } from '../lib/db';
 import { RECIPE_DIET_TAGS, type RecipeDietTag } from '../lib/digest/types';
 import { CUISINE_CHOICES, toggleCuisine } from '../lib/mealPlanDiet';
@@ -449,6 +450,7 @@ const ALL_CARD_SECTION_KEYS = [
   'meal-plan',
   'meal-schedule',
   'nutrient-targets',
+  'food-tables',
   // Growing Your Own
   'garden-details',
   // How the App Looks
@@ -704,6 +706,7 @@ const PROFILE_CARD_GROUP: Record<CardSectionKey, string> = {
   'meal-plan': 'How You Eat',
   'meal-schedule': 'How You Eat',
   'nutrient-targets': 'How You Eat',
+  'food-tables': 'How You Eat',
   'garden-details': 'Growing Your Own',
   appearance: 'How the App Looks',
   'home-screen': 'How the App Looks',
@@ -742,6 +745,7 @@ const PROFILE_CARD_ICONS: Record<CardSectionKey, ComponentProps<typeof Ionicons>
   'meal-schedule': 'time-outline',
   'meal-plan': 'calendar-outline',
   'nutrient-targets': 'nutrition-outline',
+  'food-tables': 'globe-outline',
   'garden-details': 'map-outline',
   'simple-view': 'remove-circle-outline',
   'low-stimulation': 'moon-outline',
@@ -1276,6 +1280,7 @@ export default function ProfileScreen() {
   // background and each tab's own revealed background immediately, with no
   // extra local state to keep in sync.
   const visualPrefs = useVisualPreferences();
+  const preferredFoodSource = useFoodSourcePreference();
   const navigationHand = useNavigationHand();
   const languageChoice = useLanguageChoice();
   const playful = visualPrefs.playfulWording;
@@ -4868,6 +4873,40 @@ export default function ProfileScreen() {
                 </View>
               );
             })}
+          </View>
+        ) : null}
+      </View>
+
+      {/* Food Tables, 1.0.86.7. Owner's instruction, 2026-11-11: "US should
+          always come first unless the user, in their profile switches to any
+          of the other sources to be used first. If that happens, US becomes
+          the gap filler." Every other table stays readable on each food. */}
+      <View style={styles.card}>
+        {renderCardHeader('food-tables', 'Food Tables')}
+        {!collapsedSections.has('food-tables') ? (
+          <View style={styles.cardBody}>
+            <Text style={styles.helpText}>
+              A food&apos;s numbers come from national food composition tables. When more than one country measured the
+              same food, the table chosen here is read first. USDA is the default because it holds far more foods
+              than any other table.
+            </Text>
+            <PickerField label="Read first">
+              <PopoverSelect
+                options={FOOD_SOURCE_CHOICES.map((choice) => ({ label: choice.country, value: choice.key }))}
+                selected={preferredFoodSource}
+                tabColor={colors.menuIconMuted}
+                groundSurface
+                onSelect={(value) => {
+                  if (isFoodSourceKey(value)) void saveFoodSourcePreference(value);
+                }}
+              />
+            </PickerField>
+            <Text style={styles.helpText}>
+              {preferredFoodSource === 'USDA'
+                ? t("Where USDA has no number for a food, the next country's table fills it in.")
+                : t("Where this table has no number for a food, USDA's fills it in, then the other countries' tables.")}
+            </Text>
+            <Text style={styles.helpText}>Every food still shows what each country lists: tap a nutrient on the food.</Text>
           </View>
         ) : null}
       </View>

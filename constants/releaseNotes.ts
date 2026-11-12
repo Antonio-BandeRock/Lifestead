@@ -41,6 +41,17 @@ export type ReleaseNote = {
 // caught up on at once.
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: '1.0.86.7',
+    date: '2026-11-11',
+    changes: [
+      "Nutrient totals for System Recipes are much closer to what you actually eat. Stock bones, bone-in meat, whole birds, mussel shells and frying oil now count only the share that ends up on the plate, and dry rice and pasta are counted as dry.",
+      "A cooked food is now matched to the cooked version that fits it, so a poached chicken is no longer counted as battered fried chicken.",
+      "Several wrong values in the German and French food tables are fixed, including vitamin B6 that read a thousand times too high.",
+      "Niacin, magnesium and folate from food no longer count toward an upper limit, since those limits apply only to supplements.",
+      "USDA's numbers are now read first for every food. Profile, How You Eat, Food Tables lets you put another country's table first, and tapping a nutrient on any food shows what every country lists for it.",
+    ],
+  },
+  {
     version: '1.0.86.6',
     date: '2026-11-11',
     changes: [

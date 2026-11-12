@@ -29,20 +29,31 @@ const SOURCES: Record<string, SourceInfo> = {
 // USDA_PREFERRED_SOURCES in lib/db.ts, which this module cannot import.
 const PREFERRED = new Set(['USDA', 'Derived']);
 
-/** The one caption under a resolved food, naming where its numbers come from. */
-export function foodSourceCaption(source: string): string {
-  if (source === 'Derived') {
+/**
+ * The one caption under a resolved food, naming where its numbers come from.
+ * `preferred` is the table the person put first in Profile (1.0.86.7; USDA
+ * unless they chose another). A food from that table says only where it is
+ * from; from anywhere else, the second sentence says the first table had no
+ * entry, and when another table was chosen, that USDA was the next one tried.
+ */
+export function foodSourceCaption(source: string, preferred = 'USDA'): string {
+  if (source === 'Derived' && preferred === 'USDA') {
     return 'Numbers worked out from USDA figures, since no national table measures this one separately.';
   }
+  const first = `Numbers from ${where(source === 'Derived' ? 'USDA' : source)}.`;
+  if (source === preferred || (preferred === 'USDA' && PREFERRED.has(source))) return first;
+  if (preferred === 'USDA') return `${first} USDA has no entry for this food prepared this way.`;
+  const chosen = SOURCES[preferred]?.country ?? preferred;
+  if (source === 'USDA' || source === 'Derived') {
+    return `${first} The table you put first (${chosen}) has no entry for this food prepared this way, so USDA's is used.`;
+  }
+  return `${first} Neither the table you put first (${chosen}) nor USDA has an entry for this food prepared this way.`;
+}
+
+function where(source: string): string {
   const info = SOURCES[source];
-  const where = info
-    ? info.country
-      ? `${info.table}, ${info.country}`
-      : info.table
-    : source;
-  const first = `Numbers from ${where}.`;
-  if (PREFERRED.has(source)) return first;
-  return `${first} USDA has no entry for this food prepared this way.`;
+  if (!info) return source;
+  return info.country ? `${info.table}, ${info.country}` : info.table;
 }
 
 /** Every source this module can name, for the test script. */

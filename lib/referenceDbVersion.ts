@@ -195,4 +195,10 @@
 // France_Ciqual selenium and iodine detection-limit placeholders, corrects
 // 16 single wrong values and two manganese groups, and hides five supplement
 // tablets and one mislabelled sweet potato. A stale copy has the old values.
-export const REFERENCE_DB_VERSION = "20261111220000";
+// BUMPED again 2026-11-11: scripts/fix_recipe_edible_amounts.js sets 280
+// System Recipe ingredients to the share eaten (stock bones, bone-in meat,
+// whole birds, mussel shells, frying oil, master stock), names dry rice and
+// pasta by their dry rows, moves White Corn to Sweet Corn with a per-ear
+// weight, and moves the misspelled whole-chicken base to the whole-bird one.
+// A stale copy has the old amounts.
+export const REFERENCE_DB_VERSION = "20261111233000";
