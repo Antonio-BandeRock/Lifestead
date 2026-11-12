@@ -15,6 +15,12 @@ replacement.
 never reads from `unified_foods.sqlite`. No app screen changes. That's
 deliberate — see "Safety" below.
 
+## Status: the owner's answers to the holds, 2026-11-11
+
+Owner's rules: nothing cooked and no store-bought mixture whose amounts and ingredients cannot be known (a ready potato salad). Smoked and dried fish stay, as ways people have always kept food. Sausages, deli and cured meats stay with the processed-meat caution about nitrite. Hot-smoked fish is its own food, separate from cold-smoked.
+
+A new op, `R <id> <answer>`, removes a "Held for the owner:" note and keeps any doubt note before it. Applied: 21 holds answered (14 cured meats, 7 fish), new groups Hot-smoked salmon, Hot-smoked trout, Dried smoked chinook salmon and Dried smoked sockeye salmon, and canned kippered salmon (2 rows) and parboiled buckwheat hidden. Shown 2,489 to 2,492, compared 6,487 to 6,481, hidden 23,731 to 23,734. The candidate rebuilds and all 21 checks pass.
+
 ## Status: every shown food matched to its USDA row, 2026-11-11
 
 Owner's instruction: every food from another country's table that is not hidden is matched to the same food in USDA wherever one exists, each group shares one short listing name ready for translation, and nothing shown is cooked unless it is a premade thing ("Boiled is cooked. I want matches, not near matches").

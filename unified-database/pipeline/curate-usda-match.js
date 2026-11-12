@@ -12,6 +12,7 @@
 //   N <id> <english>  the machine translation was wrong; replace name_english
 //   Q <id> <note>     cooked or premade, held for the owner; only a doubt
 //                     note is written, the row keeps its place
+//   R <id> <answer>   the owner answered a hold: the held note is removed
 // Every compare row ends with the listing name of the shown row it points at.
 // Run with --apply to write; with no flag it prints what it would do.
 // Safe to run again: G, L and H set values, and N only replaces a name that
@@ -31,7 +32,7 @@ const now = new Date().toISOString();
 const decisions = [];
 fs.readFileSync(FILE, 'utf8').split(/\r?\n/).forEach((line, i) => {
   if (!line.trim() || line.startsWith('#')) return;
-  const m = line.match(/^([GLHNQ]) (\d+) (.+)$/);
+  const m = line.match(/^([GLHNQR]) (\d+) (.+)$/);
   if (!m) throw new Error(`line ${i + 1} not understood: ${line}`);
   decisions.push({ op: m[1], id: +m[2], arg: m[3].trim(), line: i + 1 });
 });
@@ -43,6 +44,7 @@ const touched = new Set();
 const why = new Map();
 const names = [];
 const doubts = [];
+const releases = [];
 
 for (const d of decisions) {
   const r = rows.get(d.id);
@@ -55,7 +57,10 @@ for (const d of decisions) {
     r.status = 'compare'; r.eq = t; touched.add(d.id); why.set(d.id, `same food as ${t}`);
   } else if (d.op === 'H') { r.status = 'hide'; r.eq = null; r.ln = null; touched.add(d.id); why.set(d.id, d.arg); }
   else if (d.op === 'N') names.push(d);
-  else doubts.push(d);
+  else if (d.op === 'R') {
+    for (let i = doubts.length - 1; i >= 0; i--) if (doubts[i].id === d.id) doubts.splice(i, 1);
+    releases.push(d);
+  } else doubts.push(d);
 }
 
 // Follow every compare link to its shown head.
@@ -119,10 +124,19 @@ for (const d of doubts) {
   held++;
   sql.push(`UPDATE food_curation SET doubt_note=${esc(dn ? `${dn} ${note}` : note)} WHERE raw_id=${d.id};`);
 }
+let released = 0;
+for (const d of releases) {
+  const dn = rows.get(d.id).dn || '';
+  const i = dn.indexOf('Held for the owner:');
+  if (i < 0) continue;
+  released++;
+  const rest = dn.slice(0, i).trim();
+  sql.push(`UPDATE food_curation SET doubt_note=${esc(rest || null)} WHERE raw_id=${d.id};`);
+}
 sql.push('COMMIT;');
 
 const count = (m, s) => [...m.values()].filter((r) => r.status === s).length;
-console.log(`decisions ${decisions.length}; rows changed ${moved} (hidden ${hidden}, brought back ${promoted}); names corrected ${renamed}; held notes ${held}`);
+console.log(`decisions ${decisions.length}; rows changed ${moved} (hidden ${hidden}, brought back ${promoted}); names corrected ${renamed}; held notes ${held}; holds answered ${released}`);
 console.log(`shown ${count(before, 'show')} -> ${count(rows, 'show')}, compare ${count(before, 'compare')} -> ${count(rows, 'compare')}, hidden ${count(before, 'hide')} -> ${count(rows, 'hide')}`);
 const shownNames = (m) => new Set([...m.values()].filter((r) => r.status === 'show').map((r) => r.ln));
 const after = shownNames(rows);

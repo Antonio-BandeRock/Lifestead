@@ -737,3 +737,43 @@ G 6214 Wild rose hips
 G 29131 Sweet rowanberries
 L 4623 1695
 G 9237 Enriched high-protein white flour
+
+# --- the owner's answers to the holds, 2026-11-11 ---
+# Sausages, deli meats and cured meats stay, with the processed-meat caution (it names nitrite).
+R 5511 sausages, deli and cured meats stay with the processed-meat caution
+R 7420 sausages, deli and cured meats stay with the processed-meat caution
+R 8836 sausages, deli and cured meats stay with the processed-meat caution
+R 11095 sausages, deli and cured meats stay with the processed-meat caution
+R 11789 sausages, deli and cured meats stay with the processed-meat caution
+R 20657 sausages, deli and cured meats stay with the processed-meat caution
+R 26325 sausages, deli and cured meats stay with the processed-meat caution
+R 26326 sausages, deli and cured meats stay with the processed-meat caution
+R 26330 sausages, deli and cured meats stay with the processed-meat caution
+R 26332 sausages, deli and cured meats stay with the processed-meat caution
+R 32818 sausages, deli and cured meats stay with the processed-meat caution
+R 32999 sausages, deli and cured meats stay with the processed-meat caution
+R 33003 sausages, deli and cured meats stay with the processed-meat caution
+R 36756 sausages, deli and cured meats stay with the processed-meat caution
+# Smoking and drying are the old ways of keeping food, so smoked and dried fish stay, apart from cold-smoked.
+R 36201 dried fish stays
+R 36202 dried fish stays
+R 4863 hot-smoked fish stays as its own food
+R 3125 hot-smoked fish stays as its own food
+R 3128 hot-smoked fish stays as its own food
+R 4831 hot-smoked and dried fish stays as its own food
+R 7029 hot-smoked and dried fish stays as its own food
+# Kippered is the US name for hot-smoked; USDA kippered king salmon and the Swedish hot-smoked salmon agree on water, protein and fat.
+G 4863 Hot-smoked salmon
+L 4862 4863
+L 3125 4863
+G 3128 Hot-smoked trout
+# The Alaska Native smoked rows are dried strips, about 24 g water per 100 g; chinook and sockeye differ in fat.
+G 4831 Dried smoked chinook salmon
+L 27371 4831
+G 7029 Dried smoked sockeye salmon
+L 26135 7029
+# Canned is cooked in the can, as with the canned smoked salmon hidden above.
+H 5240 canned kippered salmon
+H 27369 canned kippered salmon
+# Parboiled is part cooked, and not one of the old ways of keeping food the owner named.
+H 35245 parboiled buckwheat is part cooked
