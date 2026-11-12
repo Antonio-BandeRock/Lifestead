@@ -420,7 +420,7 @@
     <p class="dek">Its job in food and health is finding the personal patterns between what someone eats and how their body responds, and doing that work for the person. Records stay on the person's devices, and no company server holds them.</p>
     <p class="meta">Kept up to date as the app changes. <!--AUTO:version-->Last refreshed 2026-11-11 (1.0.86.9).<!--/AUTO:version--> The reading is called the Library: the purple group of flip cards on Home and the reading lenses on Life and Garden. Until 1.0.69.3 it was the Library, and dated history below that names the Digest tab or quotes a request means the same reading. To click through the navigation instead of reading about it, see the companion <a href="https://claude.ai/artifact/XzbKH1oPPniiucyxBhXknp" target="_blank" rel="noopener">Lifestead Walkthrough</a>.</p>
     <div class="stats">
-      <div class="stat"><span class="n">26,749</span><span class="l">foods in the reference database</span></div>
+      <div class="stat"><span class="n">16,140</span><span class="l">whole foods shown from the reference database</span></div>
       <div class="stat"><span class="n">10</span><span class="l">data sources (9 national tables plus a Derived set)</span></div>
       <div class="stat"><span class="n">12</span><span class="l">Food-tab builders</span></div>
       <div class="stat"><span class="n">19</span><span class="l">tracked conditions</span></div>
@@ -953,7 +953,7 @@
     <p class="section-dek">Every tab above draws from the same bundled reference database — this is what makes the food side of the app work at all.</p>
     <div class="grid2">
       <div class="plaincard">
-        <h4>26,749 foods, 9 national sources plus a Derived set</h4>
+        <h4>16,140 whole foods shown, from 9 national sources plus a Derived set</h4>
         <p>USDA, Canada's CNF, the UK's CoFID, Germany's BLS, Australia's AFCD, France's Ciqual, and Japan's MEXT — bundled as a compact SQLite asset, not a live network call. Every food carries up to 35 nutrient values and a real per-source-citation trail for its own D1–D6 scoring. Norway (Matvaretabellen) and Sweden (Livsmedelsverket) joined as a real 8th and 9th source in 2026-08-10 — 2,121 and 2,606 foods respectively, both genuinely imported and correct, but deliberately kept hidden from the app's own default browsing until a real name-translation pass exists, since every one of those entries is currently untranslated Norwegian/Swedish.</p>
       </div>
       <div class="plaincard">
@@ -966,7 +966,7 @@
       </div>
       <div class="plaincard">
         <h4>A living Reference Database Audit tool</h4>
-        <p>A separate, standalone tool used to hand-review and curate which of the 26,749 foods are actually shown, hide near-duplicates, fix miscategorizations, and bulk-apply thousands of curation decisions directly against the live database. A real, ongoing, iterative workflow — each exported decision batch (over 1,300 real decisions in the most recent one, 2026-08-10) gets resolved against whatever the live database actually looks like at apply time, not assumed to still match the state the tool's own view was built from, so review and apply can keep happening in separate sessions without the two ever silently drifting out of sync.</p>
+        <p>A separate, standalone tool used to hand-review and curate which foods in the reference database are actually shown, hide near-duplicates, fix miscategorizations, and bulk-apply thousands of curation decisions directly against the live database. A real, ongoing, iterative workflow — each exported decision batch (over 1,300 real decisions in the most recent one, 2026-08-10) gets resolved against whatever the live database actually looks like at apply time, not assumed to still match the state the tool's own view was built from, so review and apply can keep happening in separate sessions without the two ever silently drifting out of sync.</p>
       </div>
     </div>
   </section>
