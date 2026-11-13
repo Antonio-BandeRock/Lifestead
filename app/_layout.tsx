@@ -19,6 +19,7 @@ import { FirstLaunchAgreement } from '../components/FirstLaunchAgreement';
 import { FirstSetup } from '../components/FirstSetup';
 import { TestDataFiller } from '../components/TestDataFiller';
 import { TesterGate } from '../components/TesterGate';
+import { UsabilitySurveyHost } from '../components/UsabilitySurveyHost';
 import { TesterWatermark } from '../components/TesterWatermark';
 import { GuidedTourHost } from '../components/GuidedTourHost';
 import { GardenPlateOfferHost } from '../components/GardenPlateOfferHost';
@@ -675,6 +676,10 @@ function UnlockedApp() {
               {/* The desktop's Test data version fills itself here on first open,
                   over setup and everything else (lib/testDataGenerator.ts). */}
               <TestDataFiller />
+              {/* The ten ease-of-use questions, once, after two weeks
+                  (tester and developer versions only). Under TesterGate, so
+                  a closed door covers it. */}
+              <UsabilitySurveyHost />
               {/* Tester plan T12: Lifestead Test opens only for an approved
                   device, over everything but pickers and the keyboard. Draws
                   nothing in any other version. */}

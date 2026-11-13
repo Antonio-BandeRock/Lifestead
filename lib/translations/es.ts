@@ -523,6 +523,30 @@ const BY_HAND: Readonly<Record<string, string>> = {
   'The Report a Problem flag works from the very first screen, including while setup or the access screen is showing.': 'La banderita para reportar un problema funciona desde la primera pantalla, también mientras se ve la configuración o la pantalla de acceso.',
   'Getting Set Up shows the setup steps first, with the thank-you card after them, and What Changed only appears once an update has arrived.': 'Preparándote muestra primero los pasos de configuración, con la tarjeta de agradecimiento después, y Qué cambió solo aparece cuando ya llegó una actualización.',
   'Your first name shows faintly across the screens of the test version, so a screenshot says whose copy it came from.': 'Tu nombre aparece tenue en las pantallas de la versión de prueba, para que una captura de pantalla diga de quién es la copia.',
+
+  // ---- The ten ease-of-use questions (components/UsabilitySurveyHost.tsx).
+  'How easy is Lifestead to use?': '¿Qué tan fácil es usar Lifestead?',
+  'Ten short statements. Tap how much you agree with each one, from 1 for strongly disagree to 5 for strongly agree. Your answers go to the developer by email, and nothing from your records goes with them.':
+    'Diez frases cortas. Toca qué tanto estás de acuerdo con cada una, del 1 para totalmente en desacuerdo al 5 para totalmente de acuerdo. Tus respuestas le llegan al desarrollador por correo, y nada de tus registros va con ellas.',
+  'I think that I would like to use this app frequently.': 'Creo que me gustaría usar esta app con frecuencia.',
+  'I found the app unnecessarily complex.': 'La app me pareció complicada sin necesidad.',
+  'I thought the app was easy to use.': 'La app me pareció fácil de usar.',
+  'I think that I would need the support of a technical person to be able to use this app.': 'Creo que necesitaría la ayuda de alguien que sepa de tecnología para poder usar esta app.',
+  'I found the various functions in this app were well integrated.': 'Las distintas funciones de esta app me parecieron bien integradas.',
+  'I thought there was too much inconsistency in this app.': 'Me pareció que había demasiadas incongruencias en esta app.',
+  'I would imagine that most people would learn to use this app very quickly.': 'Me imagino que la mayoría de la gente aprendería a usar esta app muy rápido.',
+  'I found the app very awkward to use.': 'La app me pareció muy incómoda de usar.',
+  'I felt very confident using the app.': 'Me sentí con mucha confianza usando la app.',
+  'I needed to learn a lot of things before I could get going with this app.': 'Tuve que aprender muchas cosas antes de poder empezar con esta app.',
+  'Strongly disagree': 'Totalmente en desacuerdo',
+  'Strongly agree': 'Totalmente de acuerdo',
+  'Send Answers': 'Enviar respuestas',
+  "Don't ask me again": 'No volver a preguntar',
+  'Thank you.': 'Gracias.',
+  'Tap one answer for each of the ten. {count} still need an answer.': 'Toca una respuesta para cada una de las diez. Faltan {count} por responder.',
+  'Your email app has the answers written in. Press send there and they reach the developer.': 'Tu app de correo ya tiene las respuestas escritas. Toca enviar ahí y le llegan al desarrollador.',
+  'No email app opened, so the answers are copied. Paste them into an email to {address}.': 'No se abrió ninguna app de correo, así que las respuestas quedaron copiadas. Pégalas en un correo a {address}.',
+  'The answers could not be sent or copied. They are still here, so try again in a moment.': 'No se pudieron enviar ni copiar las respuestas. Siguen aquí, así que inténtalo de nuevo en un momento.',
 };
 
 export const ES: Readonly<Record<string, string>> = { ...ES_PARTS, ...BY_HAND };
