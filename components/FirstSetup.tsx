@@ -78,6 +78,7 @@ import {
   LIST_CHANGE_PARTS_LABEL,
   LIST_FIRST_HEADING,
   LIST_LEAD,
+  PART_SETS_UP,
   LIST_NEXT_HEADING,
   PART_DONE,
   PART_DONE_CAPTION,
@@ -463,7 +464,19 @@ export function FirstSetup() {
         {allDone ? null : <Text style={styles.lead}>{LIST_LEAD}</Text>}
         <View style={styles.parts}>
           {parts.map((part) => {
-            const caption = part.state === 'done' ? PART_DONE_CAPTION : part.state === 'skipped' ? PART_SKIPPED_CAPTION : null;
+            const setsUp = SECTION_CARDS[part.beat]
+              .map((key) => setupCardByKey(key)?.def.title)
+              .filter((title): title is string => !!title)
+              .map((title) => t(title))
+              .join(', ');
+            const caption =
+              part.state === 'done'
+                ? PART_DONE_CAPTION
+                : part.state === 'skipped'
+                  ? PART_SKIPPED_CAPTION
+                  : setsUp
+                    ? t(PART_SETS_UP, { list: setsUp })
+                    : null;
             return (
               <TouchableOpacity
                 key={part.beat}
