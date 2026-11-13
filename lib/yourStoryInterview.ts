@@ -228,9 +228,9 @@ export const SETUP_OPEN_APP_LABEL = 'Open Lifestead';
 // before the first question of setup, never after it, and nowhere else is an
 // offer shown. Kept in step with lib/paidFeatures.ts by hand, since that
 // table names lenses and this names what a person recognises.
-export const FREE_BEFORE_SETUP_HEADING = 'Before the questions';
+export const FREE_BEFORE_SETUP_HEADING = "What is free and what is paid";
 export const FREE_BEFORE_SETUP =
-  'None of these questions costs anything, and neither does running your day here. Free keeps your reminders, Capture, routines, the To Do List, tasks, Days Until, the grocery list, My Meds with every safety warning, and what you log about meals, symptoms, movement and the garden. Paying adds the reading on each condition, meal plans and the ready-made recipes, reports, Pattern Finder, most of Trends and Finances.';
+  "Setting up costs nothing, and neither does using Lifestead to run your day.\n\nFree, always: reminders, Capture for quick notes, routines, the To Do List, tasks, Days Until, the grocery list, My Meds with every safety warning, and logging your meals, symptoms, exercise and garden.\n\nA paid plan adds: the reading about each condition, meal plans, the ready-made recipes, reports, Pattern Finder, most of Trends, and Finances.";
 
 // P1: what Lifestead does by itself and what it needs from the person, one
 // short list each, shown on the Your Guide page once the questions have

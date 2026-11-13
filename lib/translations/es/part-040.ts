@@ -99,7 +99,7 @@ export const PART: Readonly<Record<string, string>> = {
  "Setup is done": "La configuración está lista",
  "A strip at the top of the screen now names one thing to do at a time, in the order that makes the app useful soonest, with Go there to take you to it. Hide it whenever you like; Your Guide on Home brings it back.": "Una franja arriba de la pantalla ahora te dice una cosa a la vez, en el orden que vuelve útil la app más pronto, con Ir ahí para llevarte. Escóndela cuando quieras; Tu guía en Inicio la regresa.",
  "Open Lifestead": "Abrir Lifestead",
- "Before the questions": "Antes de las preguntas",
+ "What is free and what is paid": "Qué es gratis y qué es de pago",
  "What Lifestead does by itself": "Lo que Lifestead hace solo",
  "What it needs from you": "Lo que necesita de ti",
  "Reminds you at the times you set, and takes the answer from the locked phone with a tap.": "Te recuerda a las horas que pones, y recibe la respuesta desde el teléfono bloqueado con un toque.",
