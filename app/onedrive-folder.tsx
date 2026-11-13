@@ -56,13 +56,14 @@ import { AppTextInput } from '../components/AppTextInput';
 import { colors } from '../constants/colors';
 import { useFloatingButtonScrollPadding } from '../constants/floatingButton';
 import { textShadow, typography } from '../constants/typography';
+import { t } from '../lib/i18n';
 import { CalmBands, HOME_BAND_ACCENT_WIDTH, HOME_BAND_CONTENT_PADDING, homeBandNoHairlines, homeBandStyle } from '../components/HomeSectionBand';
 import { getOneDriveFolder, setMailboxFolderName, setOneDriveFolder } from '../lib/db';
 import { isDesktopApp } from '../lib/desktop/bridge';
 import { explainNotYet } from '../lib/notYet';
 import { pickFolder } from '../lib/desktop/cloudFolder';
 import { isPhoneFolder, pickFolder as pickPhoneFolder } from '../lib/phoneFolder';
-import { isOneDriveConfigured, isSignedIn, signIn, signOut } from '../lib/oneDriveAuth';
+import { getSignInEnded, isOneDriveConfigured, isSignedIn, signIn, signOut, type SignInEnded } from '../lib/oneDriveAuth';
 import { isGoogleFolder } from '../lib/googleDrive';
 import {
   googleDriveUnavailableReason,
@@ -106,6 +107,9 @@ export default function OneDriveFolderScreen() {
 
   const [signedIn, setSignedIn] = useState<boolean | null>(null);
   const [googleSignedIn, setGoogleSignedIn] = useState(false);
+  // When Microsoft ended the sign-in, so a folder still remembered is named
+  // as remembered rather than looking lost (2026-11-12).
+  const [signInEnded, setSignInEnded] = useState<SignInEnded | null>(null);
   const [busy, setBusy] = useState(false);
   const [note, setNote] = useState<string | null>(null);
   // A computer has no Shared with me: a folder somebody shared sits inside
@@ -168,6 +172,7 @@ export default function OneDriveFolderScreen() {
       setGoogleSignedIn(google);
       setChosen(saved);
       if (!alreadySignedIn) {
+        setSignInEnded(await getSignInEnded());
         if (isPhoneFolder(saved) || isGoogleFolder(saved)) setChosen(await refreshStored(saved));
         return;
       }
@@ -407,7 +412,20 @@ export default function OneDriveFolderScreen() {
               kept (a sign-in Microsoft stopped honouring leaves it in place) so
               signing back in picks it up, and the sign-in card says so. */}
           {signedIn === false && !usingOtherFolder ? (
-            <Text style={styles.hint}>Not signed in to OneDrive, so no folder is in use on this device.</Text>
+            chosen ? (
+              <Text style={styles.hint}>
+                {signInEnded
+                  ? t('Microsoft ended the OneDrive sign-in on {day}, so {folder} is not in use on this device until you sign in again. It is still your shared folder, and signing in goes straight back to it.', {
+                      day: new Date(signInEnded.at).toLocaleDateString(),
+                      folder: chosen.path ?? chosen.name,
+                    })
+                  : t('Not signed in to OneDrive, so {folder} is not in use on this device until you sign in again. It is still your shared folder, and signing in goes straight back to it.', {
+                      folder: chosen.path ?? chosen.name,
+                    })}
+              </Text>
+            ) : (
+              <Text style={styles.hint}>Not signed in to OneDrive, so no folder is in use on this device.</Text>
+            )
           ) : chosen ? (
             <>
               <Text style={styles.chosen}>Currently using: {chosen.name}</Text>

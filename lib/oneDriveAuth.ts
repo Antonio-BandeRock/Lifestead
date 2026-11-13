@@ -55,6 +55,30 @@ const AUTHORITY = 'https://login.microsoftonline.com/common/oauth2/v2.0';
 
 const REFRESH_TOKEN_KEY = 'onedrive.refreshToken';
 
+// When Microsoft stopped honouring the sign-in, and what it said. 2026-11-12:
+// a sign-in Microsoft ended was cleared quietly, and the Shared Folder screen
+// then read "no folder is in use", which looked like the chosen folder had
+// been lost although its address was still stored. Kept here, beside the
+// token it describes, so the screen can say what happened and that signing
+// in again goes back to the same folder. Cleared by the next sign-in.
+const SIGN_IN_ENDED_KEY = 'onedrive.signInEnded';
+
+export type SignInEnded = { at: string; reason: string };
+
+/** When Microsoft ended this device's OneDrive sign-in, if it did and nobody has signed in since. */
+export async function getSignInEnded(): Promise<SignInEnded | null> {
+  if (isDesktopApp()) return null;
+  try {
+    const raw = await SecureStore.getItemAsync(SIGN_IN_ENDED_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Partial<SignInEnded>;
+    if (typeof parsed.at !== 'string') return null;
+    return { at: parsed.at, reason: typeof parsed.reason === 'string' ? parsed.reason : '' };
+  } catch {
+    return null;
+  }
+}
+
 /**
  * The PKCE verifier, kept only between opening the sign-in page and the
  * redirect coming back.
@@ -215,6 +239,7 @@ async function exchange(
   if (typeof json.refresh_token === 'string') {
     try {
       await SecureStore.setItemAsync(REFRESH_TOKEN_KEY, json.refresh_token);
+      await SecureStore.deleteItemAsync(SIGN_IN_ENDED_KEY).catch(() => {});
     } catch {
       // Losing the refresh token costs a second sign-in later, not this one.
     }
@@ -419,7 +444,17 @@ async function refreshAccessToken(): Promise<{ ok: true; token: string } | { ok:
 
   // A refresh token Microsoft will no longer honour is worse than none: every
   // later call fails the same way with no path out. Clearing it puts the person
-  // back at a plain Sign In button.
+  // back at a plain Sign In button. When it happened is written down first, so
+  // the screen can say Microsoft ended it rather than looking as though the
+  // folder was forgotten.
+  try {
+    await SecureStore.setItemAsync(
+      SIGN_IN_ENDED_KEY,
+      JSON.stringify({ at: new Date().toISOString(), reason: exchanged.reason }),
+    );
+  } catch {
+    // Without the note the screen still offers Sign In; it only says less.
+  }
   await signOut();
   return { ok: false, reason: 'The OneDrive sign-in expired. Sign in again.' };
 }

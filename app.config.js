@@ -8,8 +8,15 @@
 // link scheme, and the icon colours.
 //
 //   store      Lifestead        com.ghostead.lifestead        lifestead://
-//   test       Lifestead Test   com.ghostead.lifestead.test   lifesteadtest://
-//   dev        Lifestead        com.ghostead.lifestead.dev    lifesteaddev://
+//   test       Lifestead        com.ghostead.lifestead.test   lifesteadtest://
+//   dev        Lifestead Dev    com.ghostead.lifestead.dev    lifesteaddev://
+//
+// 2026-11-12, direct instruction: the tester version is called plain
+// Lifestead and wears the dark icon, the one testers and the store share, and
+// the developer version is Lifestead Dev and wears the light (inverted) icon,
+// so the odd one out on a phone is the one only the developer has. Names and
+// icons only; the packages and schemes are unchanged, so no records move.
+// The computer installers keep their names (desktop/variant.js).
 //
 // Each package is a separate app to Android, so the tester version installs
 // beside the developer one and neither can read the other's records. Each
@@ -33,16 +40,16 @@ const VARIANTS = {
     inverted: false,
   },
   test: {
-    name: 'Lifestead Test',
+    name: 'Lifestead',
     package: 'com.ghostead.lifestead.test',
     scheme: 'lifesteadtest',
-    inverted: true,
+    inverted: false,
   },
   dev: {
-    name: 'Lifestead',
+    name: 'Lifestead Dev',
     package: 'com.ghostead.lifestead.dev',
     scheme: 'lifesteaddev',
-    inverted: false,
+    inverted: true,
   },
 };
 
@@ -75,7 +82,7 @@ module.exports = ({ config }) => {
   const ios = { ...config.ios, bundleIdentifier: variant.package };
   let icon = config.icon;
   if (variant.inverted) {
-    // The tester icon is the same mark in inverted colours, so the two apps
+    // The developer icon is the same mark in inverted colours, so the two apps
     // on one phone are told apart at a glance (scripts/make_tester_icons.js).
     icon = './assets/brand/icon-test.png';
     android.adaptiveIcon = {

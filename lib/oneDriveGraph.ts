@@ -298,7 +298,7 @@ export async function ensureChildFolder(
   const found = existing.value.find((folder) => folder.name.toLowerCase() === lower);
   if (found) return { ok: true, value: found };
 
-  const made = await createFolder(parent, name);
+  const made = await createFolder(parent, name, 'fail');
   if (made.ok) return made;
 
   const retry = await listChildFolders(parent);
@@ -311,6 +311,7 @@ export async function ensureChildFolder(
 export async function createFolder(
   parent: DriveItemRef,
   name: string,
+  ifTaken: 'rename' | 'fail' = 'rename',
 ): Promise<GraphResult<DriveItemRef>> {
   if (google.isGoogleFolder(parent)) return google.createFolder(parent, name);
   if (isDesktopApp()) return disk.createFolder(parent, name);
@@ -323,8 +324,12 @@ export async function createFolder(
       folder: {},
       // Renames rather than failing or overwriting if the name is taken. A
       // second folder called "Lifestead 1" is recoverable; a silently
-      // replaced one is not.
-      '@microsoft.graph.conflictBehavior': 'rename',
+      // replaced one is not. ensureChildFolder asks for 'fail' instead: two
+      // setups running at once each found no Lifestead and each made one, and
+      // OneDrive kept both as Lifestead and Lifestead 1, with Files 1 and
+      // Mailbox 1 inside (found 2026-11-12). With 'fail' the second is
+      // refused and ensureChildFolder picks up the one the first made.
+      '@microsoft.graph.conflictBehavior': ifTaken,
     }),
   });
   if (!result.ok) return result;
