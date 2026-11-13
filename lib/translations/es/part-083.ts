@@ -70,7 +70,7 @@ export const PART: Readonly<Record<string, string>> = {
  "Tap how it went: Not Yet, With Effort, Knew It or Easily.": "Toca cómo te fue: Todavía no, Con esfuerzo, La sabía o Fácilmente.",
  "A card you knew comes back after a longer gap each time. One you did not know yet comes back once more at the end of the sitting and again tomorrow.": "Una tarjeta que sabías vuelve después de un intervalo más largo cada vez. Una que todavía no sabías vuelve una vez más al final de la sesión y otra vez mañana.",
  "See what you now know": "Ver lo que ya sabes",
- "Look at the top of Learn. Things you now know counts every card you have recalled on two separate days.": "Mira arriba en Aprender. Cosas que ya sabes cuenta cada tarjeta que has recordado en dos días distintos.",
+ "Look at the top of Flashcards. Things you now know counts every card you have recalled on two separate days.": "Mira arriba en Fichas. Cosas que ya sabes cuenta cada tarjeta que has recordado en dos días distintos.",
  "The count only grows. A card you later forget comes back to be gone over and stays counted.": "La cuenta solo crece. Una tarjeta que olvides después vuelve para repasarla y sigue contada.",
  "Read where a card comes from": "Leer de dónde viene una tarjeta",
  "Turn a card over. When it rests on a study, the study is named under the answer.": "Voltea una tarjeta. Cuando se apoya en un estudio, el estudio aparece nombrado debajo de la respuesta.",

@@ -40,7 +40,7 @@ export function insideKnowledge(decks: LearnDeck[], reviews: LearnReview[], toda
   const known = describeKnown(countKnown(reviews));
   let ready: string;
   if (readyDecks.length > 0) ready = t('Cards are back for their day in {decks}.', { decks: listInWords(readyDecks, t) });
-  else if (answered.size === 0) ready = t('Learn has ready-made decks to start whenever you like, a few cards at a time.');
+  else if (answered.size === 0) ready = t('Flashcards has ready-made decks to start whenever you like, a few cards at a time.');
   else if (nextOn) ready = t('The next cards come back {when}. New cards are there whenever you want them.', { when: t(describeReadyDay(nextOn, today)) });
   else ready = t('New cards are there whenever you want them.');
   return { known, ready, readyDecks };

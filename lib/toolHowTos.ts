@@ -2547,8 +2547,8 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       key: 'cardsAndReading',
       title: 'Open flash cards or the reading from any screen',
       steps: [
-        { say: 'Tap the tab with the flip card, a card under a curved two-way arrow, at the bottom edge of the screen on your thumb side, just above Voice Control.' },
-        { say: 'Under Flash Cards, tap Language Basics for the units you put on Home, Languages for every language set, or Learn for the ready-made decks and your own.' },
+        { say: 'Tap the tab with the graduation cap at the bottom edge of the screen on your thumb side, just above Voice Control.' },
+        { say: 'Under Flash Cards, tap Language Basics for the units you put on Home, Languages for every language set, or Flashcards for the ready-made decks and your own.' },
         { say: 'Under Reading Material, tap Conditions, Earth Matters, Health Literacy, Horticulture or Search Reading, or Library for the cards on Home while Home shows them.' },
       ],
       forYou: 'Studying and reading are one tap away wherever you are. Profile, Simple View can take the button away.',
@@ -2630,14 +2630,14 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Open the band with the name of Interests, then Language Basics.', mark: 'homeBand.languageBasics', stay: true },
         { say: 'Under Studied together before, tap a group. Its cards start right away.', mark: 'home.languageBasicsGroup' },
       ],
-      forYou: 'A group shows here once you have studied those units together under Interests, Languages. The six most recent are kept. With Simple View on, Profile, Simple View can keep this card on Home, and the flip card button at the edge of the screen opens Language Basics from any screen.',
+      forYou: 'A group shows here once you have studied those units together under Interests, Languages. The six most recent are kept. With Simple View on, Profile, Simple View can keep this card on Home, and the graduation cap button at the edge of the screen opens Language Basics from any screen.',
     },
     {
       key: 'insideKnowledge',
-      title: 'See what you now know from Learn',
+      title: 'See what you now know from Flashcards',
       steps: [
         { say: 'Open the band with the name of Interests, then Inside Knowledge.', mark: 'homeBand.insideKnowledge', stay: true },
-        { say: 'Tap Open Learn to go through the decks with cards back today.', mark: 'home.insideKnowledgeOpen' },
+        { say: 'Tap Open Flashcards to go through the decks with cards back today.', mark: 'home.insideKnowledgeOpen' },
       ],
       forYou: 'It shows things you now know, a count that only grows, and names the decks with cards back for their day. It never counts what is waiting.',
     },
@@ -3460,7 +3460,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       key: 'known',
       title: 'See what you now know',
       steps: [
-        { say: 'Look at the top of Learn. Things you now know counts every card you have recalled on two separate days.' },
+        { say: 'Look at the top of Flashcards. Things you now know counts every card you have recalled on two separate days.' },
       ],
       forYou: 'The count only grows. A card you later forget comes back to be gone over and stays counted.',
     },
@@ -3490,7 +3490,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Study under it. Each card is made from what your records hold today.', mark: 'learn.study' },
         { say: 'On a guess card, pick before you look, then turn it over to see what the records show.' },
       ],
-      forYou: 'These decks are made again every time Learn opens, so a medicine you stop or a crop you pull leaves its cards by itself. A deck shows once there is something to make it from.',
+      forYou: 'These decks are made again every time Flashcards opens, so a medicine you stop or a crop you pull leaves its cards by itself. A deck shows once there is something to make it from.',
     },
     {
       key: 'make',
@@ -3557,7 +3557,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
     {
       key: 'howItHasGone',
       title: 'See how your answers have gone',
-      steps: [{ say: 'At the foot of Learn, tap How It Has Gone.', mark: 'learn.howItHasGone' }],
+      steps: [{ say: 'At the foot of Flashcards, tap How It Has Gone.', mark: 'learn.howItHasGone' }],
       forYou: 'It shows shares of your answers by deck, by kind of card and by month, and how often a card that could check agreed with you. It stays closed until you open it, and nothing from it shows anywhere else.',
     },
     {
@@ -3565,7 +3565,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Hear when cards are back',
       steps: [
         { say: 'Open Profile, then Reminders.' },
-        { say: 'Under Interests, then Learn, turn on Learn cards back for their day.' },
+        { say: 'Under Interests, then Flashcards, turn on Flashcards back for their day.' },
       ],
       forYou: 'Once, on the morning a deck you have studied has cards back, a notification names the decks. It never counts the cards, and a day let go by is not asked about again.',
     },

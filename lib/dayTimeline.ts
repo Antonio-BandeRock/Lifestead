@@ -645,7 +645,7 @@ function datedItem(source: TimelineDatedInput, today: string): DayTimelineItem |
     kind: isCounter ? 'countdown' : 'due',
     title: source.title,
     // A Learn day carries only the deck names, so it says what they are.
-    caption: source.kind === 'learnReady' ? 'Cards are back for their day in Learn' : source.detail,
+    caption: source.kind === 'learnReady' ? 'Cards are back for their day in Flashcards' : source.detail,
     start: dayStartMs(source.dueOn),
     end: null,
     allDay: true,

@@ -28,7 +28,7 @@ export const PART: Readonly<Record<string, string>> = {
  "Kept as a note, but not sent yet: {problem}": "Guardado como nota, pero todavía sin enviar: {problem}",
  "Switch to the flash cards and reading menu": "Cambiar al menú de tarjetas y lectura",
  "Flash cards and reading": "Tarjetas y lectura",
- "Opens Language Basics, Languages, Learn and every part of the reading": "Abre Lo básico de un idioma, Idiomas, Aprender y cada parte de la lectura",
+ "Opens Language Basics, Languages, Flashcards and every part of the reading": "Abre Lo básico de un idioma, Idiomas, Fichas y cada parte de la lectura",
  "Nothing recorded yet ({count})": "Nada registrado todavía ({count})",
  "Opens Add to Grocery List, Ask Your Records, Log a Symptom, Low Stimulation, Normal View, Plan My Meals, Store Its Location, Type a Note, Voice Note and Where Is It": "Abre Agregar a la lista del súper, Pregunta a tus registros, Registrar un síntoma, Poco estímulo, Vista normal, Planear mis comidas, Guardar dónde está, Escribir una nota, Nota de voz y Dónde está",
  "File.{ext}": "File.{ext}",

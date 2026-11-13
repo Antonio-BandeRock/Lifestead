@@ -16,6 +16,6 @@ export const PART: Readonly<Record<string, string>> = {
  "When you said Knew It or Easily": "Cuando dijiste La sabía o Fácilmente",
  "The check matched the answer in {share}% of {answers}.": "La comprobación coincidió con la respuesta en {share}% de {answers}.",
  "See how your answers have gone": "Ver cómo te ha ido con tus respuestas",
- "At the foot of Learn, tap How It Has Gone.": "Al pie de Aprender, toca Cómo te ha ido.",
+ "At the foot of Flashcards, tap How It Has Gone.": "Al pie de Fichas, toca Cómo te ha ido.",
  "It shows shares of your answers by deck, by kind of card and by month, and how often a card that could check agreed with you. It stays closed until you open it, and nothing from it shows anywhere else.": "Muestra proporciones de tus respuestas por mazo, por tipo de tarjeta y por mes, y qué tan seguido una tarjeta que podía comprobar coincidió contigo. Se queda cerrado hasta que lo abras, y nada de ahí aparece en ningún otro lado."
 };

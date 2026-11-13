@@ -174,7 +174,7 @@ export const REMINDER_KIND_LABELS: Record<ReminderKindKey, string> = {
   useBy: 'Use it before its date',
   todo: 'A task on its day',
   project: 'A project step on its day',
-  learnReady: 'Learn cards back for their day',
+  learnReady: 'Flashcards back for their day',
   cropPrep: 'Get an area ready for a crop',
   cropSow: 'Time to sow a crop',
   photoSeries: 'Photo series',
@@ -227,7 +227,7 @@ export const REMINDER_KIND_CAPTIONS: Record<ReminderKindKey, string> = {
   todo: 'A task on Life > Tasks or Work that you gave a day to, once on that day. Done on the reminder marks it done; one left open stays on the list and is not chased.',
   project: 'A step in a project on Life > Projects that you gave a day to, and the day of a project itself, once on that day. Done on the reminder for a step ticks it; a paused project says nothing.',
   learnReady:
-    'Once, on the morning a deck you have studied in Interests > Learn has cards back for their day, naming the decks. It never counts the cards and never comes back for a day let go by, and a deck you have not opened says nothing.',
+    'Once, on the morning a deck you have studied in Interests > Flashcards has cards back for their day, naming the decks. It never counts the cards and never comes back for a day let go by, and a deck you have not opened says nothing.',
   cropPrep:
     'A week before a sowing window opens for a crop in Garden > Sowing Calendar > My Crops, word to get its area ready. Prepped on the reminder records it. Only crops you chose, and only once a place is saved in My Zone.',
   cropSow:

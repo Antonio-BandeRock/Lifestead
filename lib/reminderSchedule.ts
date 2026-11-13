@@ -317,7 +317,7 @@ export const DATED_KIND_PREFIX: Record<DatedReminderKind, string | null> = {
   useBy: 'Kitchen',
   todo: 'Task',
   project: 'Project',
-  learnReady: 'Learn',
+  learnReady: 'Flashcards',
   cropPrep: 'Get ready',
   cropSow: 'Sowing time',
 };

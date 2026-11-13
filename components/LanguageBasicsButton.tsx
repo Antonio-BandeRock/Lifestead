@@ -20,14 +20,17 @@
 // also for a quick shortcut to all of the Reading material as well? It should
 // have the icon for it be a flipping card. A single card paired with a curved
 // two-way arrow effectively communicating the front-and-back active recall
-// process." So the tab now wears FlipCardIcon and is drawn unless switched off
+// process." So the tab wore FlipCardIcon until 2026-11-13, when Tony moved
+// the flip card to Flashcards (the lens that was Learn) and gave this tab
+// Learn's old graduation cap. It is drawn unless switched off
 // (studyButton, on by default). A tap opens the edge-tab menu
 // (components/EdgeTabMenu.tsx) in two groups: Flash Cards (Language Basics,
-// which still opens the list below, Languages and Learn) and Reading (every
+// which still opens the list below, Languages and Flashcards) and Reading (every
 // reading lens, and the Library cards on Home).
+import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
-import Svg, { Path, Rect } from 'react-native-svg';
+import { FlipCardIcon } from './FlipCardIcon';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Alert, Modal, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 import { BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT } from '../constants/buttons';
@@ -53,25 +56,10 @@ const ABOVE_FOOTER = STUDY_ABOVE_FOOTER;
 
 function whereItIs(side: 'left' | 'right'): string {
   return side === 'left'
-    ? t('Language Basics is in the menu of the button with the flip card icon at the left edge, just above Voice Control.')
-    : t('Language Basics is in the menu of the button with the flip card icon at the right edge, just above Voice Control.');
+    ? t('Language Basics is in the menu of the button with the graduation cap icon at the left edge, just above Voice Control.')
+    : t('Language Basics is in the menu of the button with the graduation cap icon at the right edge, just above Voice Control.');
 }
 
-/**
- * A single card under a curved two-way arrow: the front and back of active
- * recall. Drawn on a 24 grid to sit beside the Ionicons outline set.
- */
-export function FlipCardIcon({ size = 18, color }: { size?: number; color: string }) {
-  return (
-    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-      <Rect x={4} y={12} width={16} height={9} rx={1.6} transform="rotate(-6 12 16.5)" />
-      <Path d="M9.2 16.8l5.6-0.6" />
-      <Path d="M5.2 8.6 C6.8 2.6 17.2 2.6 18.8 8.6" />
-      <Path d="M3.6 7.6 L5.4 10.6 L7.3 7.9 Z" fill={color} strokeWidth={1.2} />
-      <Path d="M16.7 7.9 L18.6 10.6 L20.4 7.6 Z" fill={color} strokeWidth={1.2} />
-    </Svg>
-  );
-}
 
 /**
  * Asked once, when a unit goes to Home or a group is studied while Simple View
@@ -167,7 +155,7 @@ export function LanguageBasicsButton() {
   const flashCards: EdgeMenuChoice[] = sortByLabel([
     { key: 'basics', label: 'Language Basics', icon: 'chatbubbles-outline', run: () => setOpen(true) },
     { key: 'languages', label: 'Languages', icon: 'language-outline', run: lens('/interests', 'openInterestsLens', 'languages') },
-    { key: 'learn', label: 'Learn', icon: 'school-outline', run: lens('/interests', 'openInterestsLens', 'learn') },
+    { key: 'learn', label: 'Flashcards', icon: (color) => <FlipCardIcon color={color} />, run: lens('/interests', 'openInterestsLens', 'learn') },
   ]);
   const reading: EdgeMenuChoice[] = sortByLabel([
     { key: 'conditions', label: 'Conditions', icon: 'pulse-outline', run: lens('/life', 'openLifeLens', 'conditions') },
@@ -190,10 +178,10 @@ export function LanguageBasicsButton() {
         hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}
         accessibilityRole="button"
         accessibilityLabel="Flash cards and reading"
-        accessibilityHint="Opens Language Basics, Languages, Learn and every part of the reading"
+        accessibilityHint="Opens Language Basics, Languages, Flashcards and every part of the reading"
         accessibilityState={{ expanded: menuOpen }}
       >
-        <FlipCardIcon color={colors.textPrimary} />
+        <Ionicons name="school-outline" size={18} color={colors.textPrimary} />
       </EdgeTab>
       {menuOpen ? (
         <EdgeTabMenu

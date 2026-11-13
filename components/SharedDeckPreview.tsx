@@ -65,7 +65,7 @@ export function SharedDeckPreview({ envelope, verifiedName }: { envelope: DeckEn
           <Ionicons name="checkmark-circle-outline" size={40} color={colors.accent} />
           <Text style={styles.title}>Added to Your Decks</Text>
           <Text style={styles.text}>
-            {t('{title} is under Your Decks in Interests > Learn, ready to study.', { title: read.title })}
+            {t('{title} is under Your Decks in Interests > Flashcards, ready to study.', { title: read.title })}
           </Text>
           {photosMissed > 0 ? (
             <Text style={styles.text}>
@@ -73,7 +73,7 @@ export function SharedDeckPreview({ envelope, verifiedName }: { envelope: DeckEn
             </Text>
           ) : null}
           <TouchableOpacity style={styles.primaryButton} activeOpacity={0.85} onPress={openLearn}>
-            <Text style={styles.primaryButtonText}>Open Learn</Text>
+            <Text style={styles.primaryButtonText}>Open Flashcards</Text>
           </TouchableOpacity>
         </View>
       </View>

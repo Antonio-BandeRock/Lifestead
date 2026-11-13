@@ -4,6 +4,7 @@ import { useCallback, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import type { HelpSection } from '../../components/HelpButton';
 import { useRegisterScreenHelp } from '../../components/CurrentPageHelp';
+import { FlipCardIcon } from '../../components/FlipCardIcon';
 import { GatedTabContent } from '../../components/GatedTabContent';
 import { CalmBands } from '../../components/HomeSectionBand';
 import { makeTabBandStyles } from '../../components/TabBand';
@@ -97,7 +98,7 @@ const LENS_FULL_NAMES: Record<InterestsLens, string> = {
   money: 'Money',
   daysUntil: 'Days Until',
   projects: 'Projects',
-  learn: 'Learn',
+  learn: 'Flashcards',
   languages: 'Languages',
   makingItPay: 'Making It Pay',
 };
@@ -295,7 +296,7 @@ const LENSES: LensOption<InterestsLens>[] = [
   { key: 'money', label: 'Money', icon: 'cash-outline', help: MONEY_HELP },
   { key: 'daysUntil', label: 'Days Until', icon: 'hourglass-outline', help: DAYS_UNTIL_HELP },
   { key: 'projects', label: 'Projects', icon: 'layers-outline', help: PROJECTS_HELP },
-  { key: 'learn', label: 'Learn', icon: 'school-outline', help: LEARN_HELP },
+  { key: 'learn', label: 'Flashcards', icon: 'school-outline', renderIcon: (size, color) => <FlipCardIcon size={size} color={color} />, help: LEARN_HELP },
   { key: 'languages', label: 'Languages', icon: 'language-outline', help: LANGUAGES_HELP },
   { key: 'makingItPay', label: 'Making It Pay', icon: 'trending-up-outline', help: MAKING_IT_PAY_HELP },
 ];
@@ -307,7 +308,7 @@ const HELP_SECTIONS: HelpSection[] = [
   },
   {
     heading: 'Where to start',
-    body: 'Open My Interests and add one. Sessions keeps the time you give it, Supplies & Equipment, Collections and Wish List keep what it has and what you would like for it, Library and People & Places keep what you learn it from and who you do it with, Money keeps what went out and came in, Days Until counts to what an interest is waiting on, Projects is for anything with steps that belongs to an interest, Learn goes through decks of cards a few at a time, Languages holds the basics of a language, and Making It Pay is reading with figures for anyone wondering about selling from one.',
+    body: 'Open My Interests and add one. Sessions keeps the time you give it, Supplies & Equipment, Collections and Wish List keep what it has and what you would like for it, Library and People & Places keep what you learn it from and who you do it with, Money keeps what went out and came in, Days Until counts to what an interest is waiting on, Projects is for anything with steps that belongs to an interest, Flashcards goes through decks of cards a few at a time, Languages holds the basics of a language, and Making It Pay is reading with figures for anyone wondering about selling from one.',
   },
 ];
 
@@ -442,7 +443,7 @@ export default function InterestsScreen() {
               ) : null}
               {lens === 'learn' ? (
                 <View style={band.box}>
-                  <Text style={styles.cardTitle}>Learn</Text>
+                  <Text style={styles.cardTitle}>Flashcards</Text>
                   <LearnSection tabColor={TAB_COLOR} />
                 </View>
               ) : null}

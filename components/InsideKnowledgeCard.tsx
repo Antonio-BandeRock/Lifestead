@@ -60,7 +60,7 @@ export function InsideKnowledgeCard() {
         accessibilityRole="button"
       >
         <Ionicons name="school-outline" size={18} color={colors.tabInterests} style={textShadow} />
-        <Text style={styles.rowText}>Open Learn</Text>
+        <Text style={styles.rowText}>Open Flashcards</Text>
         <Ionicons name="chevron-forward" size={18} color={colors.textSecondary} style={textShadow} />
       </TouchableOpacity>
     </View>

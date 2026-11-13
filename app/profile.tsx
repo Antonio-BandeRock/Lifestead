@@ -5535,7 +5535,7 @@ export default function ProfileScreen() {
                 2026-11-12: widened to every flash card and all the reading,
                 on unless switched off here (studyButton). */}
             <Text style={styles.helpText}>
-              The flip card button on your thumb side, just above Voice Control, opens Language Basics, Languages, Learn and all the reading from any screen.
+              The graduation cap button on your thumb side, just above Voice Control, opens Language Basics, Languages, Flashcards and all the reading from any screen.
             </Text>
             <View style={styles.pillRow}>
               {[false, true].map((value) => {
