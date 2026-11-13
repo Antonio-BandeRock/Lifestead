@@ -65,7 +65,7 @@ export const LINES: Readonly<Record<string, string>> = {
   'garden-grow-what-you-can-however-small':
     "Small gardens add up. By 1944, about 20 million home gardens in the US grew 42% of the nation's vegetables.",
   'garden-indoor-growing-methods-overview':
-    'Indoors, plants can grow in soil, in water, or with roots in mist. Mist systems gave about 30% more than soil, but each costs and works in its own way.',
+    'Indoors, plants can grow in soil, in water, or with roots in mist. Mist systems gave about 30% more than soil, but each one differs in cost and upkeep.',
   'garden-led-grow-lights-photoperiod':
     'Indoors, the grow light stands in for the sun. In one tomato study, the brightest light grew the most plant, but the dimmest used light most efficiently.',
   'garden-water-quality-filtration':

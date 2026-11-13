@@ -33,7 +33,7 @@ export const LINES: Readonly<Record<string, string>> = {
   'graves-history-milestones':
     "Graves' disease is named after the second doctor to describe it, in 1835, not the first. Drug treatment came in the 1940s.",
   'graves-pregnancy-fetal-thyrotoxicosis':
-    "A mother's Graves' antibodies can cross to the baby and speed up its thyroid. This can rarely happen even after her own Graves' was treated.",
+    "A mother's Graves' antibodies can cross to the baby and speed up its thyroid. This can rarely happen even after her Graves' was treated.",
   'graves-genetic-family-risk':
     "A twin study found genes explain about 80% of the risk of Graves'. Having a close relative with it raises your odds.",
   'graves-stress-trigger':
@@ -93,7 +93,7 @@ export const LINES: Readonly<Record<string, string>> = {
   'graves-longterm-low-dose-atd-maintenance':
     'In a trial of 184 people, staying on a low dose of methimazole cut relapse over 3 years from 41% to 11%. This is a choice to discuss with your doctor.',
   'graves-orbital-decompression-real-outcomes':
-    'Eye socket surgery can push bulging eyes back by about 3 to 4 mm on average. It has its own risks, which the entry lists.',
+    'Eye socket surgery can push bulging eyes back by about 3 to 4 mm on average. It carries risks too, which the entry lists.',
   'graves-mediterranean-diet-real-trial':
     'In a small trial of 40 people with mild eye disease, a Mediterranean diet high in selenium helped. Eye swelling calmed, and weight gain was less.',
   'graves-eye-disease-quality-of-life-real-data':

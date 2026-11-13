@@ -3811,8 +3811,7 @@ function DailyPlanFullReport({
       <Text style={styles.helperText}>
         Compared with the daily amounts for your age and sex. This is for your information and is not the
         rating above. Many whole foods, nuts, seeds and beans most of all, go well past 100% for some
-        nutrients. The safe upper limit for those is much higher, so a high number here is not a problem by
-        itself. A row is only flagged below when the amount is close to or over that
+        nutrients. The safe upper limit for those is much higher. A row is only flagged below when the amount is close to or over that
         ceiling.
       </Text>
       {day.nutrientCoverage

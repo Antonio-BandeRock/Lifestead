@@ -123,7 +123,7 @@ export const LINES: Readonly<Record<string, string>> = {
   'foodhistory-regen-antibiotic-resistance-livestock':
     'About 70% of the key antibiotics sold in the US go to farm animals. The CDC names food animals as one source of resistant germs, which kill 35,000 Americans a year.',
   'foodhistory-regen-seed-diversity-loss':
-    'The claim that 75% of crop variety was lost since 1900 is a rough estimate, not a count. A later study found the math behind an even scarier version was wrong.',
+    'The claim that 75% of crop variety was lost since 1900 is a rough estimate. A later study found the math behind an even scarier version was wrong.',
   'foodhistory-regen-seed-industry-consolidation':
     'In the 1980s, the ten biggest seed firms held under 15% of the market. Today four companies hold 56%, and they also make many pesticides.',
   'foodhistory-regen-svalbard-seed-vault':
@@ -137,7 +137,7 @@ export const LINES: Readonly<Record<string, string>> = {
   'foodhistory-regen-right-to-repair-farm-equipment':
     'Makers of farm machines often lock farmers out of repairs. In one survey, about 1 in 3 farmers feared losing the farm over a slow repair, and John Deere paid $99 million to settle.',
   'foodhistory-regen-soil-gut-microbiome-axis':
-    "One idea says soil microbes reach the human gut through the food we grow. The paper's own authors call the case mostly guesswork, so it is unproven.",
+    'One idea says soil microbes reach the human gut through the food we grow. The authors of the paper call the case mostly guesswork, so it is unproven.',
   'foodhistory-regen-old-friends-hypothesis':
     'This idea says the immune system needs steady contact with the germs people lived alongside for ages to learn self control. It is a strong idea, not settled fact.',
   'foodhistory-regen-karelia-biodiversity-study':
