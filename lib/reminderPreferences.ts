@@ -44,6 +44,7 @@ export type ReminderKindKey =
   | 'compost'
   | 'refill'
   | 'useBy'
+  | 'kitchenLow'
   | 'todo'
   | 'project'
   | 'learnReady'
@@ -126,6 +127,10 @@ export const ALL_REMINDER_KIND_KEYS: ReminderKindKey[] = [
   // H2 (2026-09-28). Something in the kitchen with a use-by date, the day
   // before and on the day. Dated like the ones above it.
   'useBy',
+  // 2026-11-13. Something in the kitchen running low, by the amount the
+  // person set or the estimate from how fast it has been used, asking
+  // whether to add it to the grocery list (lib/kitchenLow.ts).
+  'kitchenLow',
   // C10 (2026-09-30). A to-do given a day, once on that day.
   'todo',
   'project',
@@ -172,6 +177,7 @@ export const REMINDER_KIND_LABELS: Record<ReminderKindKey, string> = {
   compost: 'Turning the compost',
   refill: 'Running low on a med',
   useBy: 'Use it before its date',
+  kitchenLow: 'Running low',
   todo: 'A task on its day',
   project: 'A project step on its day',
   learnReady: 'Flashcards back for their day',
@@ -224,6 +230,8 @@ export const REMINDER_KIND_CAPTIONS: Record<ReminderKindKey, string> = {
     'A med or supplement on Life > My Meds whose counted supply is running low, a week ahead unless you picked another lead, then every few days until you save a fresh count.',
   useBy:
     'Something in Life > Kitchen with a use-by date you gave it, the day before and on the day. Marking it used or gone clears the reminder.',
+  kitchenLow:
+    'Something in Life > Kitchen that is used up, down to the amount you set for it, or about five days from running out at the rate it has been used, asking whether to add it to the grocery list. Not yet asks again in three days if it is still low. Nothing comes for a food already on the list.',
   todo: 'A task on Life > Tasks or Work that you gave a day to, once on that day. Done on the reminder marks it done; one left open stays on the list and is not chased.',
   project: 'A step in a project on Life > Projects that you gave a day to, and the day of a project itself, once on that day. Done on the reminder for a step ticks it; a paused project says nothing.',
   learnReady:
@@ -298,6 +306,7 @@ const DEFAULT_REMINDER_KIND_ENABLED: Record<ReminderKindKey, boolean> = {
   // On. A use-by date is only there because somebody typed one in to be
   // told about it, and there are two of these per date at most.
   useBy: true,
+  kitchenLow: true,
   // On. A to-do only has a day because somebody gave it one.
   todo: true,
   project: true,

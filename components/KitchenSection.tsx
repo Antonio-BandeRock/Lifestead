@@ -77,6 +77,8 @@ import { useWalkMark } from './WalkMark';
 import { t } from '../lib/i18n';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { foodDisplayName } from '../lib/ingredientShortName';
+import { daysLeftWords, foodKey, formatAmount } from '../lib/kitchenLow';
+import { addKitchenFoodToList, readKitchenFoods, setKitchenLowMark, type KitchenFoodReading } from '../lib/kitchenLowDb';
 
 type DispositionForm = {
   itemId: string;
@@ -144,6 +146,11 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
   const [disposition, setDisposition] = useState<DispositionForm | null>(null);
   // What this person has actually paid for things, used only to say what a
   // trade saved them. Never to price what they gave away.
+  // Each food read for whether it is running low (lib/kitchenLow.ts), by
+  // food rather than by row, since every purchase is a row of its own.
+  const [readings, setReadings] = useState<Map<string, KitchenFoodReading>>(new Map());
+  const [markEditKey, setMarkEditKey] = useState<string | null>(null);
+  const [markDraft, setMarkDraft] = useState('');
   const [lastPaid, setLastPaid] = useState<Record<string, RecordedPrice>>({});
 
   const load = useCallback(async () => {
@@ -153,6 +160,8 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
     } catch {
       setItems([]);
     } finally {
+      const foods = await readKitchenFoods().catch(() => [] as KitchenFoodReading[]);
+      setReadings(new Map(foods.map((food) => [food.key, food])));
       setLoading(false);
     }
   }, [kind]);
@@ -187,6 +196,17 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
   const useByToday = localToday();
   const useSoon = useMemo(() => selectUseSoon(items, (item) => item.useBy, useByToday), [items, useByToday]);
   const useSoonPast = useSoon.filter((item) => isPastUseBy(item.useBy, useByToday)).length;
+  const lowFoods = useMemo(
+    () =>
+      [...readings.values()]
+        .filter((food) => food.reading.low && food.kind === kind)
+        .sort((a, b) =>
+          a.reading.usedUp !== b.reading.usedUp
+            ? a.reading.usedUp ? -1 : 1
+            : (a.reading.daysLeft ?? Infinity) - (b.reading.daysLeft ?? Infinity),
+        ),
+    [readings, kind],
+  );
 
   async function run(action: () => Promise<void>) {
     setBusy(true);
@@ -294,6 +314,36 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
       });
     });
     showInfoAlert('Added', `${foodDisplayName(item.foodName)} is on your grocery list.`);
+  }
+
+  // Running low: onto the list being shopped, or a new list for things
+  // added by hand when none is open.
+  async function handleLowToList(food: KitchenFoodReading) {
+    let added = false;
+    await run(async () => {
+      added = await addKitchenFoodToList(food);
+    });
+    showInfoAlert(
+      added ? 'Added' : 'Already on the list',
+      added
+        ? t('{food} is on your grocery list.', { food: foodDisplayName(food.foodName) })
+        : t('{food} is already on the list being shopped.', { food: foodDisplayName(food.foodName) }),
+    );
+  }
+
+  // "Tell me when it gets down to", kept for the food, in the unit it is
+  // counted in. Empty clears it, leaving only the estimate.
+  async function handleSaveMark(item: KitchenInventoryItem) {
+    const text = markDraft.trim();
+    const amount = text === '' ? null : Number(text.replace(',', '.'));
+    if (amount != null && !(Number.isFinite(amount) && amount > 0)) {
+      showInfoAlert('Not a number', 'Type how much is left when it should tell you, as a number, or empty it to clear it.');
+      return;
+    }
+    await run(async () => {
+      await setKitchenLowMark({ category: item.category, foodName: item.foodName, belowAmount: amount, unit: item.unit });
+    });
+    setMarkEditKey(null);
   }
 
   async function handleDisposition(item: KitchenInventoryItem) {
@@ -567,6 +617,41 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
         </View>
       ) : (
         <>
+        {lowFoods.length > 0 ? (
+          <TabBand
+            folds={folds}
+            color={tabColor}
+            id={`life:kitchen:low:${kind}`}
+            title="Running low"
+            icon="trending-down-outline"
+            count={lowFoods.length}
+          >
+            <View style={band.rows}>
+              {lowFoods.map((food, index) => (
+                <View key={`low:${food.key}`} style={band.row}>
+                  <Text style={styles.itemName}>{foodDisplayName(food.foodName)}</Text>
+                  {food.reading.lines.map((line) => (
+                    <Text key={line.en} style={food.reading.usedUp ? styles.placeWarning : styles.itemMeta}>
+                      {t(line.en, line.values)}
+                    </Text>
+                  ))}
+                  <View style={styles.actionRow}>
+                    <TouchableOpacity
+                      ref={index === 0 ? walkMark.ref('kitchen.lowToList') : undefined}
+                      style={styles.smallButton}
+                      activeOpacity={0.85}
+                      disabled={busy}
+                      onPress={() => void handleLowToList(food)}
+                    >
+                      <Ionicons name="cart-outline" size={14} color={colors.textOnButton} />
+                      <Text style={styles.smallButtonText}>Add to list</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              ))}
+            </View>
+          </TabBand>
+        ) : null}
         {useSoon.length > 0 ? (
           <TabBand
             folds={folds}
@@ -644,6 +729,15 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
                     </Text>
                   ) : null}
                   {item.note ? <Text style={styles.itemMeta}>{item.note}</Text> : null}
+                  {(() => {
+                    // How long it lasts at the rate it has been used, only
+                    // once there is enough use to go on, and said to be an
+                    // estimate. Shown on the row whether or not it is low.
+                    const food = readings.get(foodKey(item.category, item.foodName));
+                    if (!food || food.reading.daysLeft == null || food.reading.usedUp) return null;
+                    const words = daysLeftWords(food.reading.daysLeft, food.reading.usesCounted);
+                    return <Text style={food.reading.low ? styles.placeWarning : styles.itemMeta}>{t(words.en, words.values)}</Text>;
+                  })()}
                 </TouchableOpacity>
 
                 {expanded ? (
@@ -778,6 +872,64 @@ export function KitchenSection({ tabColor }: { tabColor: string }) {
                         ) : null}
                       </View>
                     )}
+                    {item.source === 'garden' || item.source === 'fermentation'
+                      ? null
+                      : (() => {
+                          const key = foodKey(item.category, item.foodName);
+                          const mark = readings.get(key)?.mark ?? null;
+                          const markAmount = mark?.belowAmount ?? null;
+                          if (markEditKey === key) {
+                            return (
+                              <>
+                                <Text style={styles.fieldLabel}>
+                                  {t('Tell me when it gets down to ({unit}). Empty it to clear it.', { unit: item.unit || t('amount') })}
+                                </Text>
+                                <View style={styles.row}>
+                                  <AppTextInput
+                                    style={[styles.input, styles.rowGrow]}
+                                    value={markDraft}
+                                    onChangeText={setMarkDraft}
+                                    placeholder={item.unit || 'amount'}
+                                    keyboardType="numeric"
+                                  />
+                                  <TouchableOpacity
+                                    style={styles.smallButton}
+                                    activeOpacity={0.85}
+                                    disabled={busy}
+                                    onPress={() => void handleSaveMark(item)}
+                                  >
+                                    <Text style={styles.smallButtonText}>Save</Text>
+                                  </TouchableOpacity>
+                                </View>
+                              </>
+                            );
+                          }
+                          return (
+                            <>
+                              {markAmount != null && mark ? (
+                                <Text style={styles.itemMeta}>
+                                  {t('Tells you when it gets down to {mark} {unit}.', { mark: formatAmount(markAmount), unit: mark.unit })}
+                                </Text>
+                              ) : null}
+                              <View style={styles.actionRow}>
+                                <TouchableOpacity
+                                  ref={walkMark.ref('kitchen.lowMark')}
+                                  style={styles.secondaryButton}
+                                  activeOpacity={0.85}
+                                  disabled={busy}
+                                  onPress={() => {
+                                    setMarkEditKey(key);
+                                    setMarkDraft(markAmount != null ? formatAmount(markAmount) : '');
+                                  }}
+                                >
+                                  <Text style={styles.secondaryButtonText}>
+                                    {markAmount != null ? 'Change when it tells you' : 'Tell me when it gets low'}
+                                  </Text>
+                                </TouchableOpacity>
+                              </View>
+                            </>
+                          );
+                        })()}
                     <Text style={styles.fieldLabel}>Used how much?</Text>
                     <ThumbEndRow style={styles.row}>
                       <AppTextInput

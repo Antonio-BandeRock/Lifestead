@@ -113,7 +113,9 @@ export type ReminderActionId =
   | 'backupStop'
   | 'calendarAdd'
   | 'calendarNotThis'
-  | 'calendarStop';
+  | 'calendarStop'
+  | 'kitchenAdd'
+  | 'kitchenNotYet';
 
 export type ReminderCategoryKey =
   | 'plain'
@@ -132,7 +134,8 @@ export type ReminderCategoryKey =
   | 'cropSow'
   | 'vaultOffer'
   | 'backupOffer'
-  | 'calendarOffer';
+  | 'calendarOffer'
+  | 'kitchenLow';
 
 // 'plain' keeps the identifier the single category always had, so a
 // reminder already queued is still correct and is left alone by the
@@ -158,6 +161,7 @@ export const REMINDER_CATEGORY_IDS: Record<ReminderCategoryKey, string> = {
   vaultOffer: 'inside-story-vault-offer',
   backupOffer: 'inside-story-backup-offer',
   calendarOffer: 'inside-story-calendar-offer',
+  kitchenLow: 'inside-story-kitchen-low',
 };
 
 // The 1 to 5 value each morning button saves. Each title is that value's
@@ -256,6 +260,10 @@ export function reminderActionTitle(action: ReminderActionId, snoozeMinutes: num
       return 'Add to Appointments';
     case 'calendarNotThis':
       return 'Not This One';
+    case 'kitchenAdd':
+      return 'Add to list';
+    case 'kitchenNotYet':
+      return 'Not yet';
   }
 }
 
@@ -288,6 +296,10 @@ export const CATEGORY_ACTIONS: Record<ReminderCategoryKey, ReminderActionId[]> =
   // (lib/calendarOffer.ts). Each event is asked about once, so Not This One
   // is the end of it, and Stop Asking turns the offers off in Profile > Reminders.
   calendarOffer: ['calendarAdd', 'calendarNotThis', 'calendarStop'],
+  // Something in Life > Kitchen running low (lib/kitchenLow.ts). Add to list
+  // puts it on the list being shopped; Not yet asks again in a few days if it
+  // is still low.
+  kitchenLow: ['kitchenAdd', 'kitchenNotYet'],
 };
 
 /**

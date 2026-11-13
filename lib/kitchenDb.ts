@@ -20,11 +20,17 @@
 // so the draw-down arithmetic below never needs to know where a row came from.
 //
 // THE HONEST LIMIT, stated here because it is the whole risk of the feature:
-// nothing decrements any of this as someone cooks. Logging a meal does not
-// reach back into the pantry. An inventory left untended slowly claims food
-// that was eaten weeks ago. Every row therefore carries the date it arrived,
-// and the screen shows how long it has been sitting, because an amount the app
-// cannot verify should at least say how old it is.
+// nothing comes off any of this without the person saying so. Logging a meal
+// asks what it took from the kitchen (components/GardenPlateOfferHost.tsx,
+// since 2026-09-27) and "I Made This" shows its plan first, but a meal never
+// logged, or a "Not this time", leaves the kitchen claiming food that was
+// eaten. Every row therefore carries the date it arrived, and the screen shows
+// how long it has been sitting, because an amount the app cannot verify should
+// at least say how old it is.
+//
+// Every amount taken off a kitchen_items row is also written to
+// kitchen_usage_log (2026-11-13), which is what lib/kitchenLow.ts reads to say
+// when a food is running low.
 import {
   getDatabase,
   getReferenceDatabase,
@@ -33,6 +39,7 @@ import {
   recordFermentationHarvestUsage,
   recordHarvestUsage,
 } from './db';
+import { foodKey } from './kitchenLow';
 import { isUseByDate } from './useBy';
 import { cleanPlaceName, isPlaceNameUsable } from './whereIsIt';
 
@@ -383,13 +390,36 @@ export async function addKitchenItemFromPurchase(input: {
 // Uses some of something, whichever of the three tables it lives in. Clamped at
 // zero by each underlying call, so an amount larger than what is left empties
 // the row rather than going negative.
-export async function consumeKitchenItem(id: string, amountUsed: number): Promise<void> {
+//
+// A kitchen_items use is written to kitchen_usage_log too, for the running-low
+// estimate (lib/kitchenLow.ts). countAsUse is false for food given away in a
+// trade, which leaves the kitchen without saying anything about how fast the
+// household eats it.
+export async function consumeKitchenItem(id: string, amountUsed: number, options: { countAsUse?: boolean } = {}): Promise<void> {
   if (amountUsed <= 0) return;
   if (id.startsWith('garden:')) return recordHarvestUsage(id.slice('garden:'.length), amountUsed);
   if (id.startsWith('fermentation:')) {
     return recordFermentationHarvestUsage(id.slice('fermentation:'.length), amountUsed);
   }
   const db = await getDatabase();
+  if (options.countAsUse !== false) {
+    const row = await db.getFirstAsync<{ category: string; foodName: string; unit: string; left: number }>(
+      'SELECT category, food_name AS foodName, unit, quantity_remaining AS left FROM kitchen_items WHERE id = ?',
+      id,
+    );
+    const taken = row ? Math.min(amountUsed, Math.max(0, row.left)) : 0;
+    if (row && taken > 0) {
+      await db.runAsync(
+        'INSERT INTO kitchen_usage_log (id, kitchen_item_id, food_key, amount, unit, used_at) VALUES (?, ?, ?, ?, ?, ?)',
+        `use_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+        id,
+        foodKey(row.category, row.foodName),
+        taken,
+        row.unit,
+        new Date().toISOString(),
+      );
+    }
+  }
   await db.runAsync(
     'UPDATE kitchen_items SET quantity_remaining = MAX(0, quantity_remaining - ?) WHERE id = ?',
     amountUsed,

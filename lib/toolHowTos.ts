@@ -199,6 +199,8 @@ export type ToolMark =
   | 'kitchen.useBy'
   | 'kitchen.use'
   | 'kitchen.toList'
+  | 'kitchen.lowToList'
+  | 'kitchen.lowMark'
   | 'kitchen.gone'
   | 'kitchen.giveAway'
   | 'routines.steps'
@@ -283,6 +285,7 @@ export type ToolMark =
   | 'grocery.menuBase'
   | 'grocery.menuMake'
   | 'grocery.menuFoods'
+  | 'grocery.lowToList'
   | 'grocery.didYouMean'
   | 'conditions.search'
   | 'conditions.curious'
@@ -431,6 +434,7 @@ export type ToolMark =
   | 'schedule.addNote'
   | 'schedule.buyingFor'
   | 'schedule.calendarView'
+  | 'schedule.changeDishes'
   | 'schedule.dayBand'
   | 'schedule.days'
   | 'schedule.eatAgain'
@@ -1379,6 +1383,25 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'It goes on the grocery list you have open, in one tap.',
     },
     {
+      key: 'lowMark',
+      title: 'Be told when something gets low',
+      steps: [
+        { say: 'Tap the name of the food in the list to open it.', mark: 'kitchen.row' },
+        { say: 'Tap Tell me when it gets low, or Change when it tells you.', mark: 'kitchen.lowMark', stay: true },
+        { say: 'Type how much is left when you want to hear about it, in the unit shown, then tap Save. Empty it and tap Save to clear it.' },
+      ],
+      forYou: 'When it gets down to that amount it shows under Running low, and a notification asks whether to add it to the grocery list. Without an amount, it is still worked out from how fast you use it once there is enough use to go on.',
+    },
+    {
+      key: 'lowToList',
+      title: 'Add something running low to the grocery list',
+      steps: [
+        { say: 'Look in the band called Running low, at the top of the Kitchen.' },
+        { say: 'Tap Add to list beside the food.', mark: 'kitchen.lowToList' },
+      ],
+      forYou: 'It goes on the list being shopped, or a new list if none is open, and is not added twice.',
+    },
+    {
       key: 'place',
       title: 'Say where something is kept',
       steps: [
@@ -1934,6 +1957,14 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Under Foods your menu uses, tap a food.', mark: 'grocery.menuFoods' },
       ],
       forYou: 'It goes on the list. This band shows on a list started with Just Make a List, from the recipes on the menu you picked.',
+    },
+    {
+      key: 'lowToList',
+      title: 'Add what is running low in your kitchen',
+      steps: [
+        { say: 'Under Running low in your kitchen, tap Add to list beside a food.', mark: 'grocery.lowToList' },
+      ],
+      forYou: 'It goes on this list. The band shows while a list is being shopped and something in Life > Kitchen is used up, at or under the amount you set, or close to running out at the rate it has been used.',
     },
     {
       key: 'refresh',
@@ -3753,6 +3784,17 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Change what you need, then tap Save changes.', mark: 'schedule.saveMeal' },
       ],
       forYou: 'The day, the grocery list and the reminders follow the change.',
+    },
+    {
+      key: 'changeDishes',
+      title: 'Swap a dish in a planned meal',
+      steps: [
+        { say: 'Tap Change dishes under the meal.', mark: 'schedule.changeDishes' },
+        { say: 'Tap Replace beside a dish, or Add a dish to put another on the plate.' },
+        { say: 'Pick the kind of dish, then one of yours or one of the Lifestead recipes.' },
+        { say: 'Tap Save.' },
+      ],
+      forYou: 'Only this one meal changes, on whichever day it is. The grocery list follows the new dishes. To use a recipe with different ingredients, build your own version of it on Food first, and it is listed under Yours.',
     },
     {
       key: 'eatAgain',

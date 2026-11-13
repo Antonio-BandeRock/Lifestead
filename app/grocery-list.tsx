@@ -94,6 +94,8 @@ import { ThumbEndRow } from '../components/ThumbEndRow';
 import { useWalkMark } from '../components/WalkMark';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
 import { t } from '../lib/i18n';
+import { foodKey } from '../lib/kitchenLow';
+import { addKitchenFoodToList, listLowKitchenFoods, type KitchenFoodReading } from '../lib/kitchenLowDb';
 import { foodDisplayName } from '../lib/ingredientShortName';
 import { FoodSetupGate } from '../components/FoodSetupGate';
 import { KitchenSection } from '../components/KitchenSection';
@@ -254,6 +256,9 @@ export default function GroceryListScreen() {
   // aisle, but a harvest gets used up between opening the app and shopping, so
   // this one part should be current every time it is read.
   const [kitchen, setKitchen] = useState<Map<string, KitchenCoverage>>(new Map());
+  // What Life > Kitchen reads as running low (lib/kitchenLow.ts), offered
+  // here while a list is being shopped.
+  const [lowKitchen, setLowKitchen] = useState<KitchenFoodReading[]>([]);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [editor, setEditor] = useState<EditorState>(BLANK_EDITOR);
 
@@ -349,6 +354,7 @@ export default function GroceryListScreen() {
         const listItems = await getGroceryListItems(target.id);
         setItems(listItems);
         setKitchen(await getKitchenCoverageForItems(target.id, listItems));
+        setLowKitchen(target.status === 'active' ? await listLowKitchenFoods().catch(() => []) : []);
         setPeopleCount(target.peopleCount);
         setDaysAhead(target.daysAhead);
         setStoreName(target.storeName ?? '');
@@ -375,6 +381,22 @@ export default function GroceryListScreen() {
   );
 
   const totals = useMemo(() => groceryListTotals(items), [items]);
+
+  // Running low and not already waiting on the list.
+  const lowNotOnList = useMemo(() => {
+    const onList = new Set(items.filter((item) => !item.checked).map((item) => foodKey(item.category, item.foodName)));
+    return lowKitchen.filter((food) => !onList.has(food.key));
+  }, [items, lowKitchen]);
+
+  async function handleLowToList(food: KitchenFoodReading) {
+    setBusy(true);
+    try {
+      await addKitchenFoodToList(food);
+    } finally {
+      setBusy(false);
+    }
+    await load();
+  }
 
   // 2026-09-01, direct request: the list should say which meals it was
   // built for. Derived from the lines rather than stored on the list,
@@ -1857,6 +1879,33 @@ export default function GroceryListScreen() {
             })}
           </View>
         ))}
+
+        {lowNotOnList.length > 0 ? (
+          <View style={styles.card}>
+            <Text style={styles.sectionLabel}>Running low in your kitchen</Text>
+            <Text style={styles.muted}>From Life &gt; Kitchen: used up, at or under the amount you set, or about to run out at the rate it has been used.</Text>
+            {lowNotOnList.map((food, index) => (
+              <View key={food.key} style={styles.previewSection}>
+                <Text style={styles.sectionLabel}>{foodDisplayName(food.foodName)}</Text>
+                {food.reading.lines.map((line) => (
+                  <Text key={line.en} style={styles.muted}>{t(line.en, line.values)}</Text>
+                ))}
+                <View style={styles.pillRow}>
+                  <TouchableOpacity
+                    ref={index === 0 ? walkMark.ref('grocery.lowToList') : undefined}
+                    style={styles.secondaryButton}
+                    activeOpacity={0.85}
+                    disabled={busy}
+                    onPress={() => void handleLowToList(food)}
+                  >
+                    <Ionicons name="cart-outline" size={18} color={colors.textSecondary} />
+                    <Text style={styles.secondaryButtonText}>Add to list</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            ))}
+          </View>
+        ) : null}
 
         {list?.menu && menuChips.length > 0 ? (
           <View style={styles.card}>

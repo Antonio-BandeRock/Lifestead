@@ -46,6 +46,7 @@ export const REMINDER_KIND_PLACE: Record<ReminderKindKey, ReminderPlace> = {
   check: { tab: 'Life', lens: 'To Do List' },
   bill: { tab: 'Life', lens: 'Finances' },
   useBy: { tab: 'Life', lens: 'Kitchen' },
+  kitchenLow: { tab: 'Life', lens: 'Kitchen' },
   refill: { tab: 'Life', lens: 'My Meds' },
   routine: { tab: 'Life', lens: 'Routines' },
   todo: { tab: 'Life', lens: 'Tasks' },

@@ -86,7 +86,7 @@ export async function recordDisposition(input: RecordDispositionInput): Promise<
   );
 
   // 1. The goods leave.
-  await consumeKitchenItem(input.inventoryId, input.quantityGiven);
+  await consumeKitchenItem(input.inventoryId, input.quantityGiven, { countAsUse: false });
 
   // 2. For a trade, what came back goes into the kitchen. This is the part
   // the whole feature exists for: no money changed hands, and the food is

@@ -338,6 +338,7 @@ import { getOpenMealRules, listUsualMeals, saveOpenMealRules } from '../../lib/u
 import { useWalkMark } from '../../components/WalkMark';
 import { ExerciseScheduleSection } from '../../components/ExerciseScheduleSection';
 import { ThumbRow } from '../../components/ThumbRow';
+import { CHANGE_DISHES_LABEL, ChangeDishesSheet } from '../../components/ChangeDishesSheet';
 import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { SpokenAppointmentBox } from '../../components/SpokenAppointmentBox';
 import type { SpokenAppointment } from '../../lib/spokenAppointment';
@@ -1586,6 +1587,10 @@ function MealsLens() {
   }
 
   const [rotatingItem, setRotatingItem] = useState<ScheduleItemRecord | null>(null);
+  // Change dishes (2026-11-13): swap, take off or add dishes on one planned
+  // meal, on any day. Not offered on leftovers, which eat what another meal
+  // cooked, or on a meal repeated from a logged one, whose dishes live there.
+  const [changingDishesId, setChangingDishesId] = useState<string | null>(null);
   const [rotatingIngredients, setRotatingIngredients] = useState<MealIngredientInput[]>([]);
 
   function openRotateSheet(item: ScheduleItemRecord) {
@@ -1660,6 +1665,7 @@ function MealsLens() {
   const firstRotateId = selectedItems.find(
     (item) => item.status === 'planned' && favoriteRotatingIngredients(item.sourceFavoriteId).length > 0,
   )?.id;
+  const firstChangeDishesId = selectedItems.find((item) => item.status === 'planned' && canChangeDishes(item))?.id;
   const firstLeftoversId = selectedItems.find((item) => item.status !== 'planned' && item.status !== 'skipped' && canSaveLeftoversFrom(item))?.id;
   const firstRowId = selectedItems[0]?.id;
 
@@ -2048,6 +2054,14 @@ function MealsLens() {
                               <Text style={styles.actionText}>Rotate</Text>
                             </TouchableOpacity>
                           ) : null}
+                          {canChangeDishes(item) ? (
+                            <TouchableOpacity
+                              ref={item.id === firstChangeDishesId ? walkMark.ref('schedule.changeDishes') : undefined}
+                              onPress={() => setChangingDishesId(item.id)}
+                            >
+                              <Text style={styles.actionText}>{CHANGE_DISHES_LABEL}</Text>
+                            </TouchableOpacity>
+                          ) : null}
                           <TouchableOpacity
                             ref={item.id === firstPlannedId ? walkMark.ref('schedule.skip') : undefined}
                             onPress={() => handleToggleSkipped(item)}
@@ -2114,6 +2128,7 @@ function MealsLens() {
         )}
     </ScrollView>
 
+    <ChangeDishesSheet scheduleItemId={changingDishesId} tabColor={TAB_COLOR} onClose={() => setChangingDishesId(null)} onSaved={load} />
     <Modal visible={rotatingItem !== null} transparent animationType={modalAnimationType('slide')} onRequestClose={closeRotateSheet}>
       <View style={styles.backdrop}>
         <TouchableOpacity accessibilityLabel="Close" style={StyleSheet.absoluteFill} activeOpacity={1} onPress={closeRotateSheet} />
@@ -2326,6 +2341,10 @@ function cookFromLoggedMeal(meal: RecentLoggedMeal): LeftoverCook {
 
 // Save leftovers shows on an eaten meal from the last week that is not
 // itself a leftover.
+function canChangeDishes(item: ScheduleItemRecord): boolean {
+  return item.itemType === 'meal' && !item.leftoverOf && !item.leftoverOfMeal && !item.sourceMealId;
+}
+
 function canSaveLeftoversFrom(item: ScheduleItemRecord): boolean {
   if (item.status !== 'logged' && item.status !== 'partial') return false;
   if (item.leftoverOf || item.leftoverOfMeal) return false;

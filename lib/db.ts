@@ -9716,6 +9716,36 @@ async function runDatabaseInitialization() {
       }
     }
 
+    // When something in the kitchen is running low (2026-11-13,
+    // lib/kitchenLow.ts). Both keyed by the food (category and name, lower
+    // case), not by a kitchen row, since every purchase is a row of its own
+    // and the rate and the amount the person set outlive any one of them.
+    // kitchen_usage_log holds every amount taken off a kitchen_items row, in
+    // that row's unit; kitchen_low_marks the "tell me when it gets down to"
+    // amount, NULL when only the estimate is wanted. The id on a mark is what
+    // a notification carries, so a press kept while locked never writes a
+    // food's name to a plain file.
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS kitchen_usage_log (
+        id TEXT PRIMARY KEY,
+        kitchen_item_id TEXT NOT NULL,
+        food_key TEXT NOT NULL,
+        amount REAL NOT NULL,
+        unit TEXT NOT NULL DEFAULT '',
+        used_at TEXT NOT NULL
+      );
+      CREATE INDEX IF NOT EXISTS idx_kitchen_usage_log_food ON kitchen_usage_log(food_key, used_at);
+      CREATE TABLE IF NOT EXISTS kitchen_low_marks (
+        id TEXT PRIMARY KEY,
+        food_key TEXT NOT NULL UNIQUE,
+        food_name TEXT NOT NULL,
+        category TEXT NOT NULL DEFAULT '',
+        below_amount REAL,
+        unit TEXT NOT NULL DEFAULT '',
+        updated_at TEXT NOT NULL
+      );
+    `);
+
     // 2026-11-04: the menu a list made by hand follows ("Just make a list"
     // needs to ask them what kind of menu should it follow), kept as JSON so
     // the list can offer foods that menu's recipes use. NULL on every list
@@ -19218,6 +19248,114 @@ export async function moveScheduledMealToDay(id: string, scheduledFor: string): 
   const taken = await db.getFirstAsync<{ id: string }>('SELECT id FROM meal_plan_slots WHERE date = ? AND meal_type = ? AND id != ?', date, slot.mealType, slot.id);
   if (taken) await db.runAsync('UPDATE meal_plan_slots SET schedule_item_id = NULL WHERE id = ?', slot.id);
   else await db.runAsync('UPDATE meal_plan_slots SET date = ? WHERE id = ?', date, slot.id);
+}
+
+// Changing the dishes of one planned meal, on any day (2026-11-13, direct
+// request: replace a meal with your own or the app's, or replace one side).
+// A planned meal points at a meal favorite that carries its components, so a
+// change saves a new hidden favorite with the new set and points this one
+// occurrence at it. The old favorite is left alone: other occurrences of a
+// repeating meal, or a meal already logged from it, may still read it.
+//
+// Each dish carries the app recipe it was built from where that is known, so
+// a meal plan that travels to a partner names what is on the plate now. The
+// slot recorded those ids in dish order when the plan was placed; when the
+// counts no longer line up nobody can say which id belongs to which dish, so
+// none is claimed.
+export type ScheduledMealDish = {
+  componentType: MealComponentType;
+  componentId: string;
+  yourSharePercent: number;
+  name: string;
+  curatedRecipeId: string | null;
+};
+
+export async function getScheduledMealDishes(scheduleItemId: string): Promise<{
+  title: string;
+  mealType: string;
+  dishes: ScheduledMealDish[];
+} | null> {
+  const db = await getDatabase();
+  const item = await db.getFirstAsync<{ title: string; mealType: string | null; sourceFavoriteId: string | null }>(
+    'SELECT title, meal_type AS mealType, source_favorite_id AS sourceFavoriteId FROM schedule_items WHERE id = ?',
+    scheduleItemId,
+  );
+  if (!item) return null;
+  const favorite = item.sourceFavoriteId ? await getMealFavorite(item.sourceFavoriteId) : null;
+  const components = favorite?.components ?? [];
+  const slot = await db.getFirstAsync<{ recipeIdsJson: string }>(
+    'SELECT recipe_ids_json AS recipeIdsJson FROM meal_plan_slots WHERE schedule_item_id = ?',
+    scheduleItemId,
+  );
+  let slotIds: string[] = [];
+  try {
+    const parsed = slot ? JSON.parse(slot.recipeIdsJson) : [];
+    if (Array.isArray(parsed)) slotIds = parsed.filter((id): id is string => typeof id === 'string');
+  } catch {
+    slotIds = [];
+  }
+  const idsLineUp = slotIds.length === components.length;
+  const dishes: ScheduledMealDish[] = [];
+  for (let index = 0; index < components.length; index += 1) {
+    const component = components[index];
+    const info = await getMealComponentDisplayInfo(component.componentType, component.componentId);
+    dishes.push({
+      componentType: component.componentType,
+      componentId: component.componentId,
+      yourSharePercent: component.yourSharePercent,
+      name: info?.name ?? 'A dish that can no longer be found',
+      curatedRecipeId: idsLineUp ? slotIds[index] : null,
+    });
+  }
+  return { title: item.title, mealType: item.mealType ?? '', dishes };
+}
+
+export async function replaceScheduledMealDishes(scheduleItemId: string, dishes: ScheduledMealDish[]): Promise<{ title: string } | { error: string }> {
+  if (dishes.length === 0) return { error: 'A meal needs at least one dish. To take the whole meal off the schedule, use Skip or remove it instead.' };
+  const current = await getScheduledMealDishes(scheduleItemId);
+  if (!current) return { error: 'That meal is no longer on the schedule.' };
+  const db = await getDatabase();
+
+  // The title follows the dishes only when it was the dishes' names to begin
+  // with. A title somebody typed is theirs and stays. A plate made for one
+  // person keeps its "For Name:" lead.
+  const forMatch = /^(For [^:]+: )/.exec(current.title);
+  const lead = forMatch ? forMatch[1] : '';
+  const oldJoined = joinMealTitleParts(current.dishes.map((dish) => dish.name));
+  const titleFollowsDishes = current.dishes.length > 0 && current.title === `${lead}${oldJoined}`;
+  const title = titleFollowsDishes ? `${lead}${joinMealTitleParts(dishes.map((dish) => dish.name))}` : current.title;
+
+  const components: MealFavoriteComponent[] = dishes.map((dish) => ({
+    componentType: dish.componentType,
+    componentId: dish.componentId,
+    yourSharePercent: dish.yourSharePercent,
+  }));
+  const favorite = await saveMealFavorite({ name: title, mealType: current.mealType, components, autoGenerated: true });
+  const now = new Date().toISOString();
+  await db.runAsync(
+    // Rotate choices name ingredients of the dishes that were there, so they
+    // go with them rather than pointing into a dish that has left the plate.
+    'UPDATE schedule_items SET source_favorite_id = ?, title = ?, rotation_selections_json = NULL, updated_at = ? WHERE id = ?',
+    favorite.id,
+    title,
+    now,
+    scheduleItemId,
+  );
+  if (title !== current.title) {
+    await db.runAsync('UPDATE schedule_items SET title = ?, updated_at = ? WHERE leftover_of = ?', leftoverTitle(title), now, scheduleItemId);
+  }
+
+  // Only a plate made wholly of app recipes can be named to a partner by
+  // recipe id. Anything else lets go of the slot, the way a moved meal does
+  // when its new day is taken, so a partner is never sent a plate that is
+  // not the one on this schedule.
+  const ids = dishes.map((dish) => dish.curatedRecipeId);
+  if (ids.every((id): id is string => typeof id === 'string' && id.length > 0)) {
+    await db.runAsync('UPDATE meal_plan_slots SET recipe_ids_json = ? WHERE schedule_item_id = ?', JSON.stringify(ids), scheduleItemId);
+  } else {
+    await db.runAsync('UPDATE meal_plan_slots SET schedule_item_id = NULL WHERE schedule_item_id = ?', scheduleItemId);
+  }
+  return { title };
 }
 
 // How many people a planned meal is made for (G5). Null goes back to

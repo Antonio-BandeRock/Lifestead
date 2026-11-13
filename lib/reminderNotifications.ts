@@ -156,6 +156,9 @@ import {
   readCalendarOfferState,
   writeCalendarOfferState,
 } from './calendarOffer';
+import { answerKitchenLowOffer, lowOfferText, mayAsk } from './kitchenLow';
+import { addKitchenFoodToListByMarkId, keysOnActiveList, listLowKitchenFoods, lowMarkIdFor } from './kitchenLowDb';
+import { KITCHEN_LOW_PREFIX, kitchenLowIdentifier, readKitchenLowState, writeKitchenLowState } from './kitchenLowOffer';
 import { hasCalendarPermission, listUpcomingDeviceEvents } from './deviceCalendar';
 import { readSyncState } from './snapshotSyncDevice';
 import { markVaultOffered, takeVaultSetUpWaiting } from './vaultSession';
@@ -1335,6 +1338,64 @@ async function offerCalendarEventsIfDue(now: Date, enabled: boolean, everyEvent:
   }
 }
 
+// Something in Life > Kitchen running low (lib/kitchenLow.ts), asked about
+// one food at a time with Add to list and Not yet. Marked asked before it is
+// shown, like the offers above, and never for a food already on the list
+// being shopped. Two at most in one reconcile, so a kitchen restocked all at
+// once and then run down does not fill the shade.
+const KITCHEN_LOW_PER_RECONCILE = 2;
+async function offerKitchenLowIfDue(now: Date, enabled: boolean): Promise<void> {
+  if (!enabled || Platform.OS === 'web' || isLockedNow()) return;
+  const low = await listLowKitchenFoods(now);
+  if (low.length === 0) return;
+  const onList = await keysOnActiveList();
+  const state = readKitchenLowState();
+  const hidden = reminderDetailHidden();
+  let shown = 0;
+  for (const food of low) {
+    if (shown >= KITCHEN_LOW_PER_RECONCILE) break;
+    if (onList.has(food.key)) continue;
+    const markId = await lowMarkIdFor(food);
+    if (!mayAsk(state.entries[markId], food.remaining, now.getTime())) continue;
+    state.entries[markId] = { at: now.getTime(), answer: 'asked', remaining: food.remaining };
+    writeKitchenLowState(state);
+    const words = lowOfferText(food.foodName, food.reading, hidden);
+    const body = hidden || food.reading.lines.length === 0
+      ? t(words.body.en)
+      : `${food.reading.lines.map((line) => t(line.en, line.values)).join(' ')} ${t(words.body.en)}`;
+    await Notifications.scheduleNotificationAsync(inAppLanguage({
+      identifier: kitchenLowIdentifier(markId),
+      content: {
+        title: t(words.title.en, words.title.values),
+        body,
+        data: { tab: 'kitchenLow', markId },
+        sound: false,
+        categoryIdentifier: REMINDER_CATEGORY_IDS.kitchenLow,
+      },
+      trigger: { channelId: ANDROID_DATED_CHANNEL_ID },
+    }));
+    shown += 1;
+  }
+}
+
+// Add to list pressed on a running-low notification, written once the
+// records can be opened. A food already on the list is left as it is.
+let addingKitchenFoods = false;
+export async function addWaitingKitchenFoods(): Promise<void> {
+  if (addingKitchenFoods || Platform.OS === 'web' || isLockedNow()) return;
+  const state = readKitchenLowState();
+  if (state.toAdd.length === 0) return;
+  addingKitchenFoods = true;
+  try {
+    writeKitchenLowState({ ...state, toAdd: [] });
+    for (const markId of state.toAdd) {
+      await addKitchenFoodToListByMarkId(markId).catch((error) => console.error('[reminderNotifications] a low food was not added', error));
+    }
+  } finally {
+    addingKitchenFoods = false;
+  }
+}
+
 // The linked calendar events, among these reminders' appointments, that
 // carry an alarm of their own.
 async function readCalendarAlarms(candidates: readonly TravelCandidate[], from: Date, until: Date): Promise<Set<string>> {
@@ -1790,6 +1851,10 @@ async function runSync(): Promise<ReminderSyncResult> {
   // Adds pressed while locked are written on the first reconcile after the
   // unlock. Not awaited, since it asks for a reconcile of its own.
   void addWaitingCalendarEvents().catch((error) => console.error('[reminderNotifications] calendar adds not written', error));
+  await getReminderPreferences()
+    .then((prefs) => offerKitchenLowIfDue(now, isReminderKindEnabled(prefs, 'kitchenLow')))
+    .catch((error) => console.warn('[reminderNotifications] the kitchen could not be checked for low food', error));
+  void addWaitingKitchenFoods().catch((error) => console.error('[reminderNotifications] low foods not added', error));
   const today = localDateString(now);
   const horizon = new Date(now);
   horizon.setDate(horizon.getDate() + LOOKAHEAD_DAYS);
@@ -2249,6 +2314,9 @@ export function resolveReminderTap(response: Notifications.NotificationResponse 
     }
     return { pathname: '/schedule', params: { openScheduleLens: 'appointments' } };
   }
+  // Something running low, tapped rather than answered, opens the Kitchen,
+  // where its mark and Add to list sit.
+  if (request?.identifier?.startsWith(KITCHEN_LOW_PREFIX)) return { pathname: '/life', params: { openLifeLens: 'kitchen' } };
   if (request?.identifier === APP_UPDATE_NOTIFICATION_ID) return { pathname: '/profile', params: { section: 'updates', install: '1' } };
   // A16: an alert about somebody else's dose opens Meds, where the band of
   // doses you watch sits. Queued by lib/peerDosesDb.ts, not by this module.
@@ -2401,6 +2469,15 @@ async function answerPress(response: Notifications.NotificationResponse): Promis
     const startsAt = typeof data.startsAt === 'number' ? data.startsAt : NaN;
     writeCalendarOfferState(answerCalendarOffer(readCalendarOfferState(), response.actionIdentifier, eventId, startsAt));
     await addWaitingCalendarEvents().catch((error) => console.error('[reminderNotifications] calendar adds not written', error));
+    return;
+  }
+  // A running-low offer, answered into a plain file the same way.
+  if (request.identifier.startsWith(KITCHEN_LOW_PREFIX)) {
+    await Notifications.dismissNotificationAsync(request.identifier).catch(() => undefined);
+    const data = (request.content.data ?? {}) as { markId?: unknown };
+    const markId = typeof data.markId === 'string' ? data.markId : '';
+    writeKitchenLowState(answerKitchenLowOffer(readKitchenLowState(), response.actionIdentifier, markId, Date.now()));
+    await addWaitingKitchenFoods().catch((error) => console.error('[reminderNotifications] low foods not added', error));
     return;
   }
   // The vault offer is not a reminder and writes nothing to the database.
@@ -2957,6 +3034,8 @@ export function listenForReminderTaps(navigate: (target: ReminderTapTarget) => v
     .catch((error) => console.error('[reminderNotifications] kept presses not written', error))
     .then(() => addWaitingCalendarEvents())
     .catch((error) => console.error('[reminderNotifications] calendar adds not written', error))
+    .then(() => addWaitingKitchenFoods())
+    .catch((error) => console.error('[reminderNotifications] low foods not added', error))
     .then(() => Notifications.getLastNotificationResponseAsync())
     .then((response) => {
       handleResponse(response, navigate);
