@@ -233,8 +233,8 @@ export function MyWholeFoodsView({ onClose, onChanged }: { onClose: () => void; 
             <>
               <Text style={styles.emptyText}>Nothing on hand yet.</Text>
               <Text style={styles.intro}>
-                Anything you harvest from the garden and enter in the Harvest Log on the Garden tab shows up here,
-                and is drawn from when you add that food to a meal in your schedule. Each time you log a harvest,
+                Whatever you enter in the Harvest Log on the Garden tab shows up here. When you add that
+                food to a meal in your schedule, it comes out of what you have. Each time you log a harvest,
                 the app asks whether to keep it on hand as one of your home-grown whole foods.
               </Text>
             </>

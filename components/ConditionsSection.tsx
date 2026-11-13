@@ -8,6 +8,7 @@ import { AppTextInput } from './AppTextInput';
 import { AttachedFiles } from './AttachedFiles';
 import { DIGEST_CONDITION_ICONS } from './DigestConditionIcons';
 import { DigestEntryBody, entryHeaderDotColor } from './DigestEntryDetail';
+import { inShortOf } from '../lib/digest/inShort';
 import { DigestEntryRow, makeDigestRowStyles } from './DigestEntryRow';
 import { ReadingCardRow } from './ReadingCardRow';
 import { EntryScrollAnchor, type EntryScrollTarget } from './EntryScrollAnchor';
@@ -604,9 +605,9 @@ export function ConditionsSection({
       <View style={styles.introBox}>
         <Text style={styles.introText}>
           Everything the app knows about the conditions in your life, grouped by whose they are. Yours come
-          first, then your family&apos;s, then any you want to read about. Open a condition to see its topics, and a
-          topic to read its entries: the research, the food, the meals that clear it, and the labs and
-          medication timing, each with its evidence and its sources.
+          first, then your family&apos;s, then any you want to read about. Open a condition to see its topics, then a topic to read about it: the research, the food, meals
+          that suit it, labs and when to take medicine. Each shows how strong the evidence is and where it
+          comes from.
         </Text>
       </View>
 
@@ -932,8 +933,9 @@ export function ConditionsSection({
                     tabColor={tabColor}
                   />
                   <Text style={styles.helperText}>
-                    Age and sex set the daily amounts of calcium, iron, vitamin D, protein, fiber and B12 their
-                    meals are compared with, so a side can be added where their day comes up short. Without them,
+                    Age and sex set how much calcium, iron, vitamin D, protein, fiber and B12 they need each
+                    day. Their meals are checked against that, so a side can be added when a day falls
+                    short. Without them,
                     adult amounts are used.
                   </Text>
                 </>
@@ -1104,7 +1106,7 @@ function ConditionBandBody({
       items={rows.map((entry) => ({
         id: entry.id,
         title: isProblemFoodEntry(entry) ? entry.foodName : entry.title,
-        line: entry.teaser,
+        line: inShortOf(entry) ?? entry.teaser,
         dotColor: entryHeaderDotColor(entry, conditionCode),
       }))}
       openId={openEntry}

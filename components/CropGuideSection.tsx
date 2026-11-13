@@ -470,7 +470,7 @@ export function CropGuideSection({
         contentStyle={styles.bandBody}
       >
         <Text style={styles.topicDescription}>
-          Sun, soil, pH, sowing, spacing, water and three problems each crop is known for, each put right from the soil first, with the advisory page, an organic growing guide and the research behind it. Figures are typical ranges; the linked page has the detail for your climate. In a hot climate, cool-season crops go in during the coolest months.
+          Sun, soil, pH, sowing, spacing and water for each crop, plus three common problems and how to fix them, starting with the soil. Each links to the advisory page, an organic growing guide and the research. Figures are typical ranges; the linked page has the detail for your climate. In a hot climate, cool-season crops go in during the coolest months.
         </Text>
         <EntrySearchInput placeholder="Find a crop..." style={styles.searchField} tabColor={tabColor} onDebouncedChange={setQuery} />
         {matches ? (
@@ -532,7 +532,7 @@ export function CropGuideSection({
         contentStyle={styles.bandBody}
       >
         <Text style={styles.topicDescription}>
-          Feed the soil and the soil feeds the plant. How compost, no-dig beds, cover crops, liquid feeds and Korean Natural Farming work, why this app leans away from synthetic fertiliser and sprays, and how strong the evidence is for each.
+          Feed the soil and the soil feeds the plant. How compost, no-dig beds, cover crops, liquid feeds and Korean Natural Farming work. Why this app steers away from synthetic fertiliser and sprays. How strong the evidence is for each.
         </Text>
         <View style={styles.detailBody}>
           {LIVING_SOIL_GUIDE.map((item) => (

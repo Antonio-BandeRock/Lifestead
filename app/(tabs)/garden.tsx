@@ -814,8 +814,8 @@ function MyZoneLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
           <Text style={[styles.cardTitle, { color: TAB_COLOR }]}>Zone {zone}: {bandInfo.bandLabel}</Text>
           {bandInfo.belowCoverage ? (
             <Text style={styles.captionText}>
-              This app&apos;s crop-band research currently starts at zone 3, so the cold/short-season guidance below is
-              the closest match, not a perfect one for your specific zone.
+              The crop advice here starts at zone 3, so the cold, short-season advice below is the closest
+              match for your zone, not an exact one.
             </Text>
           ) : null}
           <Text style={styles.cardBody}>
@@ -1930,7 +1930,7 @@ function PlotsAndPlantingsLens({
                 />
               </View>
               <Text style={styles.captionText}>
-                A tent or a section in a grow room, or a bed in a larger garden, can stand inside that area and keep separate lights, fans, heating, cooling, readings and plantings. The room keeps separate ones as well.
+                A tent in a grow room, or a bed in a bigger garden, can sit inside that area with its lights, fans, heating, cooling, readings and plantings kept apart. The room keeps separate ones as well.
               </Text>
             </>
           ) : null}
@@ -1987,7 +1987,7 @@ function PlotsAndPlantingsLens({
               <LightFields draft={newAreaLight} onChange={setNewAreaLight} terms={gardenTerms} onTermsChanged={reloadGardenTerms} />
               <Text style={styles.captionText}>
                 {newAreaLocationType === 'indoor'
-                  ? 'Indoors, the light is the sun, so it is asked for here in place of sun hours. What it cost is recorded under Growing Costs for this area. Containers, fans, exhaust, cooling, water filtration, humidity and the rest of the setup go under Grow Setup once the area is saved, each with what it cost to buy and what it runs on.'
+                  ? 'Indoors, the light is the sun, so it is asked for here in place of sun hours. What it cost is recorded under Growing Costs for this area. Once the area is saved, add its gear under Grow Setup: containers, fans, cooling, filters and the rest. Note what each cost and what powers it.'
                   : 'What the lights cost is recorded under Growing Costs for this area. The rest of the setup goes under Grow Setup once the area is saved.'}
               </Text>
             </View>
@@ -2335,8 +2335,8 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
             ))
           )}
           <Text style={styles.captionText}>
-            Anything kept on hand with an amount left is listed under My Whole Foods on the Food tab, and is selectable as
-            &quot;From Your Harvest&quot; the next time you add an ingredient in any Food tool.
+            Anything with some left on hand shows under My Whole Foods on the Food tab. You can pick it as
+            From Your Harvest the next time you add an ingredient in any Food tool.
           </Text>
         </View>
       </TabBand>

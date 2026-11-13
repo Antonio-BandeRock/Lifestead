@@ -4705,8 +4705,8 @@ export default function HomeScreen() {
       'Sort It Out',
       <View style={styles.bandBody}>
         <Text style={styles.bandCaption}>
-          The thoughts you put down with Type a Note or Voice Note in the quick-access menu wait here to be named and
-          put where they go, beside anything scheduled whose time passed with no answer.
+          Notes you make with Type a Note or Voice Note in the quick-access menu wait here until you name
+          them and put them away. Anything scheduled that passed with no answer waits here too.
         </Text>
         {answerLine ? <Text style={styles.bandCaption}>{answerLine}</Text> : null}
         {summary ? <Text style={styles.bandCaption}>{summary}</Text> : null}

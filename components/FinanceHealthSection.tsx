@@ -412,8 +412,8 @@ export function FinanceHealthSection({ tabColor }: Props) {
       <TabBand folds={folds} color={tabColor} id="life:finances:medical-bills" title="Medical bills" icon="medkit-outline">
         {bills.length === 0 ? (
           <Text style={styles.bodyText}>
-            Add a bill with the figures from its Explanation of Benefits and this checks the arithmetic: what your plan
-            allowed, minus what insurance paid, is what you owe. What the provider billed is not part of that, and
+            Add a bill with the numbers from its Explanation of Benefits, and this checks the math. What
+            your plan allowed, minus what insurance paid, is what you owe. What the provider billed is not part of that, and
             treating it as if it were is the most common way people end up paying more than they should.
           </Text>
         ) : (

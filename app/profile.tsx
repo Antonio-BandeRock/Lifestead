@@ -3386,8 +3386,8 @@ export default function ProfileScreen() {
     >
       <View style={styles.introBox}>
         <Text style={styles.intro}>
-          Everything below is optional. This app works fine with nothing set here; unset fields simply mean
-          you’ll see recommendations for every applicable population instead of one tailored to you. Nothing here
+          Everything below is optional. The app works fine with nothing set here. When a field is blank, you see advice for everyone
+          instead of advice made for you. Nothing here
           is guessed on your behalf.
         </Text>
       </View>
@@ -3471,8 +3471,8 @@ export default function ProfileScreen() {
 
             <Text style={styles.subLabelDivided}>Units</Text>
             <Text style={styles.helpText}>
-              Used across the app for quantities and measurements: meal ingredient amounts, height, weight,
-              and body measurements.
+              Used for amounts all through the app: ingredients in meals, height, weight and body
+              measurements.
             </Text>
             <View style={styles.pillRow}>
               {([
@@ -3625,9 +3625,9 @@ export default function ProfileScreen() {
 
             <Text style={styles.subLabelDivided}>Weight</Text>
             <Text style={styles.helpText}>
-              Your current weight, also useful for a doctor report. Each time you set it here, it&apos;s logged as
-              a new reading (the same way a weight-tracking history works), not just overwritten; a full
-              trend view isn&apos;t built yet, but even one current reading is useful right away. Follows your
+              Your current weight, also useful for a doctor report. Each time you set it here, it is saved as a new reading, the way a weight history is kept, so
+              the old one is not lost. There is no full trend view for it yet, but even one reading helps
+              right away. Follows your
               Units setting above.
             </Text>
             <View style={styles.dateRow}>
@@ -3666,8 +3666,8 @@ export default function ProfileScreen() {
 
             <Text style={styles.subLabelDivided}>Activity Level</Text>
             <Text style={styles.helpText}>
-              Feeds Insights&apos; Energy &amp; Portions lens: how much you move day to day, alongside your
-              weight above, is what turns a plain calorie estimate into a target that actually fits your body.
+              Used by Insights &gt; Energy &amp; Portions. How much you move each day, with your weight
+              above, turns a rough calorie guess into a target that fits your body.
             </Text>
             <View style={styles.pillRow}>
               {([{ value: null, label: 'Not set' }] as { value: TriState<ActivityLevel>; label: string }[])
@@ -3815,11 +3815,10 @@ export default function ProfileScreen() {
             </PickerField>
             <Text style={styles.subLabelDivided}>Curious about other conditions</Text>
             <Text style={styles.helpText}>
-              Learn about a condition without adding it to what this app tracks and helps with for you personally,
-              whether you are wondering about yourself or someone else. Anything selected here gets a separate
-              Other Conditions list in Life &gt; Conditions, apart from yours, shows up among the Home tab&apos;s
-              Something to Read cards, and a recipe carrying a note about it lists that note separately from the ones
-              about you. Nothing selected here ever changes your food scores, meal plans, advisories or safe
+              Read about a condition without adding it to the ones the app tracks for you. Use it when you
+              wonder about yourself or someone else. Anything you pick here goes on a separate list, Other Conditions, in Life &gt; Conditions,
+              apart from yours. It also shows up in the Something to Read cards on Home. A recipe note about
+              it is listed apart from the notes about you. Nothing selected here ever changes your food scores, meal plans, advisories or safe
               foods.
             </Text>
             {conditionsClosed ? null : (
@@ -3853,8 +3852,8 @@ export default function ProfileScreen() {
                 user_conditions, since an allergy isn't a tracked disease. */}
             <Text style={styles.subLabelDivided}>Food allergies</Text>
             <Text style={styles.helpText}>
-              Separate from the condition-based food scoring above: an allergy or intolerance, not a
-              preference. Multiple are fully supported. Tap a common allergen below, or add your own.
+              This is apart from the food scores above. It is for an allergy or intolerance, not a food you
+              simply do not like. Multiple are fully supported. Tap a common allergen below, or add your own.
             </Text>
             {conditionsClosed ? (
               <VaultClosedBand inline color={colors.tabProfile} categories={['conditions']} />
@@ -4531,9 +4530,8 @@ export default function ProfileScreen() {
                 never a question of which one is real. */}
             <Text style={styles.subLabelDivided}>Meals already scheduled</Text>
             <Text style={styles.helpText}>
-              Changes you make in Meal Timing only affect meals scheduled from that point on. A meal plan
-              already on your schedule keeps the times it was created with, and generating a plan again will not
-              fix it, because days already scheduled are left alone. Tap the button below to update them,
+              Changes you make in Meal Timing only affect meals scheduled from that point on. A meal plan already on your schedule keeps the times it had when it was made. Making a new
+              plan will not change it, because days already planned are left alone. Tap the button below to update them,
               keeping the same meals on the same days, from today forward. Meals you have already logged are
               left alone.
             </Text>
@@ -4776,11 +4774,10 @@ export default function ProfileScreen() {
           <View style={styles.cardBody}>
             <Text style={styles.helpText}>
               Every nutrient the Daily Meal Plan generator tracks already defaults to a published DRI figure
-              for your age and sex. Set a custom number below only if you need more of one (protein,
-              fiber) or a stricter ceiling on one (sodium) than the general population. Leave a field blank to go
-              back to your default at any time. Under each one you can also give a different number for
-              chosen days of the week, such as more protein on a day you train; the Daily Meal Plan uses it on
-              those days only.
+              for your age and sex. Set a number below only if you need more of something (protein, fiber) or a lower limit on
+              something (sodium) than most people. Leave a field blank to go
+              back to your default at any time. Under each one you can set a different number for some days of the week, such as more protein
+              on days you train. The Daily Meal Plan uses it on those days only.
             </Text>
             {NUTRIENT_TARGET_FIELDS.map((field) => {
               const matchingRows = nutrientDriRows.filter((row) => row.nutrientCode === field.nutrientCode);
@@ -5169,9 +5166,9 @@ export default function ProfileScreen() {
             {renderAppearanceSubsectionHeader('progressPictures', 'Pictures of your progress', false)}
             {!collapsedAppearanceSubsections.has('progressPictures') ? (
               <View style={styles.subsectionBody}>                <Text style={styles.helpText}>
-                  A quiet picture on a tab&apos;s resting screen, drawn from what you have recorded there: jars on a
-                  pantry shelf for each kind of food you have eaten, the plants you are growing, a star for each day
-                  you checked in. It never moves and never takes a tap. It starts on over the built-in backgrounds and
+                  A quiet picture on a tab&apos;s resting screen, made from what you recorded there: a jar
+                  on a shelf for each kind of food you ate, the plants you grow, a star for each day you
+                  checked in. It never moves and never takes a tap. It starts on over the built-in backgrounds and
                   off over a photo you added, and Low Stimulation turns every one off.
                 </Text>
                 <TouchableOpacity style={styles.checkinButton} onPress={() => router.push('/progress')}>
@@ -5231,8 +5228,8 @@ export default function ProfileScreen() {
             {!collapsedAppearanceSubsections.has('tabHubIcon') ? (
               <View style={styles.subsectionBody}>                <Text style={styles.helpText}>
                   The main floating button used to open the app&apos;s navigation menu. Shows the Lifestead
-                  icon by default. Pick any tracked condition&apos;s icon, any insect or pollinator icon, or any of the
-                  animal portraits below to personalize it instead. Only one can be active at a time.
+                  icon by default. You can pick a condition&apos;s icon, an insect or pollinator, or one of the animal
+                  pictures below instead. Only one can be active at a time.
                 </Text>
                 <Text style={styles.helpText}>
                   {isDesktopApp()
@@ -5434,9 +5431,8 @@ export default function ProfileScreen() {
             {!collapsedAppearanceSubsections.has('homeOrder') ? (
               <View style={styles.subsectionBody}>
                 <Text style={styles.helpText}>
-                  Home is arranged on Home itself. Hold your finger on any band there and the page turns into a
-                  list: drag a group or a card by its grip to move it up or down, and tap its eye to hide it or
-                  show it again. Hold a group&apos;s name to move the groups, or a card to move the cards inside
+                  Home is arranged on Home itself. Hold your finger on any band there and the page turns into a list. Drag a group or card by
+                  its grip to move it. Tap its eye to hide it or show it again. Hold a group&apos;s name to move the groups, or a card to move the cards inside
                   that group. Cards from the same tab always stay together.
                 </Text>
                 <TouchableOpacity
@@ -5539,7 +5535,7 @@ export default function ProfileScreen() {
                 2026-11-12: widened to every flash card and all the reading,
                 on unless switched off here (studyButton). */}
             <Text style={styles.helpText}>
-              The button with the flip card icon on your thumb side, just above Voice Control, opens Language Basics, Languages, Learn and every part of the reading from any screen.
+              The flip card button on your thumb side, just above Voice Control, opens Language Basics, Languages, Learn and all the reading from any screen.
             </Text>
             <View style={styles.pillRow}>
               {[false, true].map((value) => {
@@ -5606,8 +5602,8 @@ export default function ProfileScreen() {
         {!collapsedSections.has('playful-wording') ? (
           <View style={styles.cardBody}>
             <Text style={styles.helpText}>
-              A few empty screens and notices carry a light joke after the facts, about the app, the technology or
-              the data industry and never about you. Off keeps every line plain and direct. What the app tells you
+              A few empty screens and notices add a light joke after the facts. The jokes are about the app,
+              technology or the data industry, never about you. Off keeps every line plain and direct. What the app tells you
               is the same either way.
             </Text>
             <View style={styles.pillRow}>
@@ -5627,8 +5623,8 @@ export default function ProfileScreen() {
               })}
             </View>
             <Text style={styles.helpText}>
-              Never in anything about your health: symptoms, flares, labs, medications, the emergency card,
-              conditions, patterns and advice all stay plain whatever this is set to.
+              Never on anything about your health. Symptoms, flares, labs, medications, the emergency card,
+              conditions, patterns and advice always stay plain.
             </Text>
           </View>
         ) : null}
@@ -5760,8 +5756,8 @@ export default function ProfileScreen() {
         {!collapsedSections.has('app-updates') ? (
           <View style={styles.cardBody}>
             <Text style={styles.helpText}>
-              Lifestead checks for a new version when it opens and whenever you come back to it, downloads it
-              quietly and sends a notification when it is ready. Tap that notification to restart into it, or
+              Lifestead looks for a new version each time you open it or come back to it. It downloads it
+              quietly and tells you when it is ready. Tap that notification to restart into it, or
               check here if you know an update was just sent out.
             </Text>
             <Text style={[styles.helpText, styles.derivedText]}>
@@ -5798,8 +5794,9 @@ export default function ProfileScreen() {
                 stays pressable and says which (explainNotYet). The share sheet
                 route stays in step 2 as the fallback for no shared folder. */}
             <Text style={styles.helpText}>
-              Everything on this device (meals, schedule, conditions, trials, connections, and more) goes into one
-              password-protected file, so it survives this phone being lost or replaced. It carries the references to
+              Everything on this device goes into one file with a password: meals, schedule, conditions,
+              trials, connections and more. If this phone is lost or replaced, your records are safe in that
+              file. It carries the references to
               your photos, not the photo files themselves.
             </Text>
             {photoStorageLine ? <Text style={styles.helpText}>{photoStorageLine}</Text> : null}
@@ -6174,8 +6171,8 @@ export default function ProfileScreen() {
         {!collapsedSections.has('agreement') ? (
           <View style={styles.cardBody}>
             <Text style={styles.helpText}>
-              The points you agreed to when you first opened the app: general information and your records, not
-              medical advice, not a diagnosis, and never allergy-safe.
+              What you agreed to when you first opened the app. It gives general information and keeps your
+              records. It is not medical advice, not a diagnosis, and never allergy-safe.
             </Text>
             <TouchableOpacity style={styles.checkinButton} onPress={() => router.push('/agreement')}>
               <Text style={styles.checkinButtonText}>Read It Again</Text>

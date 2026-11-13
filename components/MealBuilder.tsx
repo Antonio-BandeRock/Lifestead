@@ -1835,8 +1835,8 @@ export function MealBuilder({
             </Text>
             <Text style={styles.pendingSubtitle}>What time each day?</Text>
             <Text style={styles.hydrationRoutineHelperText}>
-              This repeats every day, indefinitely, starting today, on the same recurring schedule Supplements and Prescriptions
-              already use. Manage or remove it anytime from the Hydration lens.
+              This repeats every day from today with no end date, the same way supplements and prescriptions
+              repeat. Manage or remove it anytime from the Hydration lens.
             </Text>
             <View style={styles.timeRow}>
               <View style={styles.timeField}>

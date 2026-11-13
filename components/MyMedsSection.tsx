@@ -1035,8 +1035,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
                 </View>
               ) : medForm.manualEntry ? (
                 <Text style={styles.helperText}>
-                  Not in this app&apos;s researched list yet, but you can still track it with the details you know. Looking this up
-                  online automatically is a planned future capability, not built yet.
+                  Not in this app&apos;s researched list yet, but you can still track it with the details you know. The app cannot look this up online yet.
                 </Text>
               ) : null}
 
@@ -1052,7 +1051,7 @@ export function MyMedsSection({ tabColor, focusTreatmentId }: Props) {
 
               {medForm.manualEntry ? (
                 <>
-                  <Text style={styles.label}>Generic name (optional, helps interaction checking)</Text>
+                  <Text style={styles.label}>Generic name (optional, helps check interactions)</Text>
                   <AppTextInput
                     onVoiceResult={(text) => setMedForm((current) => ({ ...current, genericName: text }))}
                     micColor={tabColor}

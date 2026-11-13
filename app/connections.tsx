@@ -473,9 +473,8 @@ export default function ConnectionsScreen() {
           <Text style={styles.fingerprintLabel}>Through the relay</Text>
           <Text style={styles.fingerprintHint}>
             Leaves a sealed message waiting at lifestead.ghostead.com until the other phone picks it up. Nothing to sign
-            in to, no folder to share, and you do not both have to be here at once. It works by itself: whenever
-            something you share changes, a sealed copy goes, and on Android the other phone is woken to collect it,
-            even with the app closed. The buttons below are there for when you want it now.
+            in to, no folder to share, and you do not both have to be here at once. It works by itself. When something you share changes, a sealed copy is sent. On Android the
+            other phone wakes up to collect it, even with the app closed. The buttons below are there for when you want it now.
           </Text>
           <Text style={styles.fingerprintHint}>
             The wake-up goes through Google, the same way every Android app is woken. It carries one word and nothing
@@ -593,8 +592,8 @@ export default function ConnectionsScreen() {
           <View style={styles.fingerprintCard}>
             <Text style={styles.fingerprintLabel}>Sharing with a partner</Text>
             <Text style={styles.fingerprintHint}>
-              Send what you share as a file, through whatever you already use to send each other things: a message, an
-              email, or a folder in OneDrive that you both have. No account and no sign-in anywhere. Only the person you
+              Send what you share as a file, the way you already send each other things: a message, an email
+              or a OneDrive folder you both use. No account and no sign-in anywhere. Only the person you
               sent it to can open it, so it stays private even passing through a messaging app.
             </Text>
             {/* Spelled out because the two system pickers behave differently and
@@ -664,8 +663,8 @@ export default function ConnectionsScreen() {
             {/* Named rather than left to be discovered: what crosses is decided
                 per partner by the switches on their row, not by the carrier. */}
             <Text style={styles.fingerprintHint}>
-              What crosses is the same whichever way it goes: the household things you run together, and what each of
-              you allows about your health on the other person’s row above.
+              The same things are sent whichever way you choose: the household things you run together, plus
+              what each of you allows about your health on the other person’s row above.
             </Text>
           </View>
 

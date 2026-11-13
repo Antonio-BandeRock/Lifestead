@@ -184,7 +184,7 @@ function readingPieces() {
         seen.add(id);
         // What shows on every card (titles, teasers, food names) goes first,
         // so a reader sees Spanish on the shelves before the long reading.
-        out.push({ id, key: value, first: /^(title|teaser|foodName)$/.test(at) });
+        out.push({ id, key: value, first: /^(inShort|title|teaser|foodName)$/.test(at) });
       }
     } else if (Array.isArray(value)) value.forEach((item) => walk(item, at));
     else if (value && typeof value === 'object') for (const [k, v] of Object.entries(value)) walk(v, at ? `${at}.${k}` : k);

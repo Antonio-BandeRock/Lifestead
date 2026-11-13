@@ -71,7 +71,7 @@ export function LabelCheckView({ tabColor, profile, onOpenReading }: Props) {
           />
         </View>
         <Text style={styles.hint}>
-          Checked against your allergies, diet preferences, food restrictions and conditions from Profile, plus lists that apply to anybody.
+          Checked against the allergies, diet, food limits and conditions in your Profile, plus lists that apply to everyone.
         </Text>
       </View>
       {householdLines.length > 1 ? (

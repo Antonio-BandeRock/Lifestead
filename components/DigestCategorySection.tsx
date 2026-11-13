@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { DigestEntryBody, entryHeaderDotColor } from './DigestEntryDetail';
+import { inShortOf } from '../lib/digest/inShort';
 import { DigestEntryRow, makeDigestRowStyles } from './DigestEntryRow';
 import { ReadingCardRow } from './ReadingCardRow';
 import type { EntryScrollTarget } from './EntryScrollAnchor';
@@ -247,7 +248,7 @@ export function DigestCategorySection({
       items={rows.map((entry) => ({
         id: entry.id,
         title: isProblemFoodEntry(entry) ? entry.foodName : entry.title,
-        line: entry.teaser,
+        line: inShortOf(entry) ?? entry.teaser,
         dotColor: entryHeaderDotColor(entry),
       }))}
       openId={openEntry}

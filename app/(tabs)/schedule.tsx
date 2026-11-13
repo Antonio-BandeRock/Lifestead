@@ -3809,9 +3809,10 @@ function DailyPlanFullReport({
   const coverage = (
     <>
       <Text style={styles.helperText}>
-        Against your age/sex-based RDA targets, informational, not the rating above. Many whole foods, nuts, seeds, and legumes
-        especially, naturally run well past 100% for a nutrient with a small RDA and a much larger safety ceiling, so a high
-        percentage here is not automatically a problem. A row is only flagged below when the amount is close to or over that
+        Compared with the daily amounts for your age and sex. This is for your information and is not the
+        rating above. Many whole foods, nuts, seeds and beans most of all, go well past 100% for some
+        nutrients. The safe upper limit for those is much higher, so a high number here is not a problem by
+        itself. A row is only flagged below when the amount is close to or over that
         ceiling.
       </Text>
       {day.nutrientCoverage
@@ -4397,7 +4398,7 @@ function DailyMealPlanLens() {
         </View>
         <Text style={[styles.label, { marginTop: 12 }]}>Cuisine</Text>
         <Text style={styles.helperText}>
-          Leans each meal toward the cuisines picked, inside the eating style above, so Gluten-Free with Mexican is Mexican dishes that are gluten-free. A meal with too few of them draws on every recipe.
+          Leans each meal toward the cuisines you pick, inside the eating style above. Gluten-Free with Mexican means Mexican dishes that are gluten-free. A meal with too few of them draws on every recipe.
         </Text>
         <View ref={walkMark.ref('mealPlan.cuisines')} collapsable={false} style={styles.pillRow}>
           {CUISINE_CHOICES.map((cuisine) => {
@@ -5003,8 +5004,8 @@ function TodaysMealsLens() {
       ) : timeline.length === 0 ? (
         <View style={[styles.bandBox, styles.calmEdges]}>
         <Text style={styles.emptyText}>
-          Nothing scheduled to eat today yet. Anything you schedule on the Meals lens, or generate from a meal plan,
-          shows up here with its steps ready to cook from, and any dose you have scheduled shows up beside it.
+          Nothing scheduled to eat today yet. Anything you schedule on Meals, or make with a meal plan, shows up here with its steps ready to
+          cook. Any dose you scheduled shows up beside it.
         </Text>
         </View>
       ) : (

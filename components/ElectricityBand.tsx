@@ -169,7 +169,7 @@ export function ElectricityBand({ folds, plotOptions, noPlotValue, groupPrefix, 
     <TabBand folds={folds} color={TAB_COLOR} markRef={walkMark.ref('costs.electricity')} id="garden:costs:electricity" title="Electricity" icon="flash-outline" count={bills.length}>
       <View style={styles.card}>
         <Text style={styles.captionText}>
-          Record the bill you have now, from before the grow starts, and mark it as the baseline. Every bill after it is compared with that one per day, so a short bill and a long one compare fairly, and the difference is what the grow is costing in electricity. A bill is the whole household&apos;s, so it lives here rather than under one area.
+          Record the bill you have now, from before the grow starts, and mark it as the baseline. Each later bill is compared with that one per day, so short and long bills compare fairly. The difference is what the grow costs in electricity. A bill is the whole household&apos;s, so it lives here rather than under one area.
         </Text>
         <Text style={styles.moneyTotal}>{describeElectricity(comparison)}</Text>
         {setupLine ? <Text style={styles.captionText}>From the equipment recorded under your areas: {setupLine}</Text> : null}

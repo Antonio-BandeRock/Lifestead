@@ -542,6 +542,10 @@ export type DigestEntry = {
   id: string;
   category: DigestEntryCategory;
   title: string;
+  // 1.0.87.7: the plain "In short" line, grade 8 or under, shown first on
+  // the card. Filled from lib/digest/inShort by index.ts, so the entry
+  // files themselves stay as they were.
+  inShort?: string;
   // One sentence, shown on the category's own list card before it's
   // opened -- has to earn the tap on its own.
   teaser: string;
@@ -636,6 +640,10 @@ export type ProblemFoodEntry = {
   // A problem-food entry makes a claim about a food like any other entry,
   // and until this field existed the lens showed it with no tier at all.
   overallTier: EvidenceTier;
+  // 1.0.87.7: the plain "In short" line, grade 8 or under, shown first on
+  // the card. Filled from lib/digest/inShort by index.ts, so the entry
+  // files themselves stay as they were.
+  inShort?: string;
   // The one-line reason this food shows up here at all.
   teaser: string;
   // What the real problem is, in plain terms -- not assumed universal (see

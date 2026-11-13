@@ -2300,8 +2300,8 @@ function NewFoodsLens({
           ) : null}
           {allergyMatch ? (
             <Text style={[styles.helperText, styles.flaggedText]}>
-              This may match your declared allergy to {allergyMatch}. This feature is for testing a sensitivity or
-              reintroduction, not an allergy, so talk to a doctor before testing a known allergen.
+              This may match your declared allergy to {allergyMatch}. This is for testing a sensitivity or bringing a food back, not for allergies. Talk to a doctor
+              before testing a food you are allergic to.
             </Text>
           ) : null}
           {foodHistory.length > 0 ? (
@@ -2486,8 +2486,8 @@ function NewFoodsLens({
             </Text>
           ) : (
             <Text style={styles.helperText}>
-              3 days is a common starting point for &ldquo;probably fine.&rdquo; A daily reminder runs the whole
-              window either way, even if something feels off partway through. A delayed second reaction is exactly
+              Three days is a common time to wait before calling a food probably fine. A reminder comes each
+              day for the whole time, even if something feels off partway. A delayed second reaction is exactly
               what the full window is meant to catch. You can still mark it cleared or flagged earlier yourself if
               you&apos;d rather not wait.
             </Text>

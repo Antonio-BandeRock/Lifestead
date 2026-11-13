@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { DigestEntryBody, entryHeaderDotColor } from './DigestEntryDetail';
+import { inShortOf } from '../lib/digest/inShort';
 import { HOME_BAND_GAP } from './HomeSectionBand';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
@@ -58,7 +59,7 @@ export function DigestEntryRow({
             {dotColor ? <View style={[styles.tierDot, { backgroundColor: dotColor }]} /> : null}
             <Text style={styles.itemTitle}>{isProblemFoodEntry(entry) ? entry.foodName : entry.title}</Text>
           </View>
-          <Text style={styles.itemSubtitle}>{entry.teaser}</Text>
+          <Text style={styles.itemSubtitle}>{inShortOf(entry) ?? entry.teaser}</Text>
           {below ?? null}
         </View>
         <Ionicons name={expanded ? 'chevron-up' : 'chevron-down'} size={18} color={colors.textSecondary} />

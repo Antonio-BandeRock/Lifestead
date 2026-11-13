@@ -521,9 +521,8 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
       <TabBand folds={folds} color={tabColor} id="life:emergency:how-old-this-is" title="How old this is" icon="medkit-outline">
         <Text style={[styles.bodyText, fresh.stale ? styles.warn : null]}>{describeFreshness(fresh)}</Text>
         <Text style={styles.helperText}>
-          Confirming means going through the whole thing and saying it is still right. It is a
-          separate act from editing a field, so changing your hospital does not quietly declare a
-          six-month-old medication list current.
+          Confirming means going through the whole thing and saying it is still right. This is apart from editing a field. Changing your hospital does not mark an old medication list as
+          up to date.
         </Text>
         <TouchableOpacity
           ref={walkMark.ref('emergency.checked')}
@@ -729,8 +728,8 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
 
       <TabBand folds={folds} color={tabColor} id="life:emergency:what-only-you-can-tell-it" title="What only you can tell it" icon="medkit-outline">
         <Text style={styles.helperText}>
-          Your conditions, medications and food allergies are already recorded elsewhere in the app
-          and are read straight onto the card, so they are not asked for again here. These are the
+          Your conditions, medications and food allergies come onto the card from where you recorded them,
+          so you are not asked for them again here. These are the
           ones the app has nowhere else to keep.
         </Text>
 
@@ -808,9 +807,8 @@ export function EmergencySection({ tabColor, scrollToY, onOpenMyMeds }: Props) {
           </View>
         ) : null}
         <Text style={styles.helperText}>
-          Somewhere it can actually be found matters more than this screen. Written on paper in a
-          wallet, or set up on the medical ID screen your phone already has, it is reachable when
-          your phone is locked and you are not able to unlock it.
+          Somewhere it can actually be found matters more than this screen. On paper in your wallet, or on your phone&apos;s medical ID screen, it can be seen when your phone is
+          locked and you cannot unlock it.
         </Text>
       </TabBand>
 

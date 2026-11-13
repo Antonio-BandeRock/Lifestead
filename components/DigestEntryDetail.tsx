@@ -26,6 +26,7 @@ import {
   type EvidenceTier,
 } from '../lib/digest';
 import { resolveActiveConditionCaution, resolveActiveConditionSeverity } from '../lib/digest/conditionGrouping';
+import { inShortOf } from '../lib/digest/inShort';
 import { PILL, PILL_TEXT } from '../constants/buttons';
 
 export function tierColor(tier: EvidenceTier): string {
@@ -330,6 +331,7 @@ export function DigestEntryBody({
           {tierLabel(entry.overallTier)}
         </Text>
         <EntryMetaRow entry={entry} tabColor={tabColor} tabTextColor={tabTextColor} />
+        {inShortOf(entry) ? <Text style={styles.detailText}>{entry.teaser}</Text> : null}
         <Text style={labelStyle}>The problem</Text>
         <Text style={styles.detailText}>{renderRichText(entry.problem, emphasis)}</Text>
         <Text style={labelStyle}>The mechanism</Text>
@@ -353,6 +355,7 @@ export function DigestEntryBody({
         {tierLabel(entry.overallTier)}
       </Text>
       <EntryMetaRow entry={entry} tabColor={tabColor} tabTextColor={tabTextColor} />
+      {inShortOf(entry) ? <Text style={[styles.detailText, styles.teaserLead]}>{entry.teaser}</Text> : null}
       <Text style={styles.detailText}>{renderRichText(entry.summary, emphasis)}</Text>
       {entry.linkedCuratedRecipeId && entry.linkedBuilderType ? (
         <RecipeBuildRow
@@ -417,6 +420,9 @@ const styles = StyleSheet.create({
   crossConditionPillText: { ...typography.caption, ...textShadow, fontSize: 11 },
   detailLabel: { ...typography.eyebrow, ...textShadow, fontWeight: '400', marginTop: 8, marginBottom: 2 },
   detailText: { ...typography.body, color: colors.textPrimary, lineHeight: 19, ...textShadow },
+  // The teaser, once In short has taken its place on the card, leads the
+  // opened entry so nothing it said is lost.
+  teaserLead: { fontWeight: '600', marginBottom: 6 },
   swapText: { ...typography.body, color: colors.textPrimary, lineHeight: 19, marginTop: 2, ...textShadow },
   feedbackRow: {
     flexDirection: 'row',

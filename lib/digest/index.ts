@@ -1,6 +1,7 @@
 import type { Ionicons } from '@expo/vector-icons';
 import type { ComponentProps } from 'react';
 import { APP_HELPS_ENTRIES } from './appHelps';
+import { IN_SHORT } from './inShort';
 import { readingTranslator } from './searchLanguage';
 import { BIG_PICTURE_ENTRIES } from './bigPicture';
 import { BODY_FAT_BIOLOGY_ENTRIES } from './bodyFatBiology';
@@ -84,7 +85,7 @@ export const PURPLE_DIGEST_VERSION = '20260827070000';
 // AnyDigestEntry) -- category-specific screens tell the two apart with
 // isProblemFoodEntry (types.ts) rather than the aggregator needing two
 // parallel lists.
-export const ALL_DIGEST_ENTRIES: AnyDigestEntry[] = [
+const AUTHORED_ENTRIES: AnyDigestEntry[] = [
   ...GLOSSARY_ENTRIES,
   ...FOOD_ADDITIVES_ENTRIES,
   ...FERMENTED_FOODS_ENTRIES,
@@ -152,6 +153,13 @@ export const ALL_DIGEST_ENTRIES: AnyDigestEntry[] = [
   ...BODY_FAT_BIOLOGY_ENTRIES,
   ...RECIPES_ENTRIES,
 ];
+
+// The In short lines join the entries here, so search, translation and
+// every card read them from the entry like any other field.
+export const ALL_DIGEST_ENTRIES: AnyDigestEntry[] = AUTHORED_ENTRIES.map((entry) => {
+  const inShort = IN_SHORT[entry.id];
+  return inShort ? { ...entry, inShort } : entry;
+});
 
 // The old `| 'problemFoods'` union member is gone as of the 2026-08-08
 // restructure -- ProblemFoodEntry.category now carries a real

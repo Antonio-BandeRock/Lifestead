@@ -167,7 +167,7 @@ export function AppLockSettings() {
       <Text style={styles.caption}>
         {state.reminderDetail === 'kind'
           ? `A reminder says only what kind it is, such as "Time for your scheduled dose", so nobody near the ${deviceWord()} sees which medicine, meal or note it is about. Its buttons still answer it without unlocking.`
-          : `A reminder shows its whole text, including medicine names and notes, to anybody who can see the ${deviceWord()}, and its buttons answer it without unlocking.`}
+          : `Anyone who can see the ${deviceWord()} can read the whole reminder, with medicine names and notes. Its buttons answer it without unlocking.`}
       </Text>
 
       <VaultChoices appLockOn />

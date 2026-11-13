@@ -1542,6 +1542,7 @@ export default function InsightsScreen() {
       <LensHub
         pageTitle="Insights"
         options={LENSES}
+        recentKey="Insights"
         selected={revealed ? lens : undefined}
         columns={3}
         autoOpenSignal={autoOpenLensHub}
@@ -2121,8 +2122,8 @@ export function NutrientsTable({
           {isDayScope && !breakdown.profileComplete ? (
             <View style={styles.noticeCard}>
               <Text style={styles.noticeText}>
-                Your sex and birth date aren&apos;t set in Profile, so these targets cover every applicable population
-                rather than one tailored to you.
+                Your sex and birth date are not set in Profile, so these targets are for everyone, not made
+                for you.
               </Text>
             </View>
           ) : null}
@@ -2186,14 +2187,14 @@ function HydrationView({ breakdown, tabColor }: { breakdown: DailyNutrientBreakd
         {NUTRIENT_STATUS_LABELS[water.status] ?? water.status} ({Math.round(water.percentOfTarget)}%)
       </Text>
       <Text style={styles.hydrationNote}>
-        Counts everything logged today, drinks and water-rich foods alike (soup, watermelon, and similar all
-        contribute), not just what you drank directly.
+        Counts everything logged today, both drinks and watery foods like soup and watermelon, not only what
+        you drank.
       </Text>
       {!breakdown.profileComplete ? (
         <View style={styles.noticeCard}>
           <Text style={styles.noticeText}>
-            Your sex and birth date aren&apos;t set in Profile, so this target covers every applicable population
-            rather than one tailored to you.
+            Your sex and birth date are not set in Profile, so this target is for everyone, not made for
+            you.
           </Text>
         </View>
       ) : null}
@@ -2302,8 +2303,8 @@ function PortionsView({
     <>
       <View style={styles.noticeCard}>
         <Text style={styles.noticeText}>
-          Estimated from your weight, height, age, and activity level, a maintenance estimate, not a
-          prescribed target or a diagnosis. See the Portions &amp; Recommended Amounts topic in Health Literacy, on the Life tab, for the
+          Worked out from your weight, height, age and how active you are. It is a rough guide to what keeps
+          your weight steady, not a prescribed target or a diagnosis. See the Portions &amp; Recommended Amounts topic in Health Literacy, on the Life tab, for the
           full method and citations.
         </Text>
       </View>
@@ -2363,8 +2364,8 @@ function PortionsView({
         ))}
       </View>
       <Text style={styles.footerNote}>
-        Fat and carbohydrate split using the midpoint of NASEM&apos;s Acceptable Macronutrient Distribution
-        Range, applied to whatever&apos;s left once your weight-based protein target above is subtracted.
+        Fat and carbs share what is left after your protein target above. The split uses the middle of the
+        NASEM recommended range for each.
       </Text>
 
       <Text style={styles.portionsSectionHeading}>Produce guide</Text>

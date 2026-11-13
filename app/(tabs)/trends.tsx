@@ -177,6 +177,7 @@ import type { VaultCategory } from '../../lib/vault';
 import { useOnVaultChange, useVaultReloadKey } from '../../lib/vaultReads';
 import { useListedClosed } from '../../lib/vaultSession';
 import { t, tl } from '../../lib/i18n';
+import { listEmptyTrendsLenses } from '../../lib/trendsLensRecords';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
 import { PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
 import { foodDisplayName } from '../../lib/ingredientShortName';
@@ -916,6 +917,22 @@ const TRENDS_LENSES: LensOption<TrendsLens>[] = [
   },
 ];
 
+// 1.0.87.7 (ease-of-use pass, fix 4): 31 lenses in one flat grid were too
+// many to scan, so the menu is grouped by subject, with the lenses opened
+// lately on top and the ones with nothing recorded yet folded at the foot
+// (lib/lensMenu.ts, lib/trendsLensRecords.ts). Every lens is in exactly one
+// group; scripts/test_lens_menu.js checks that.
+const TRENDS_LENS_GROUPS: readonly { group: string; keys: readonly TrendsLens[] }[] = [
+  { group: 'Food and drink', keys: ['nutrients', 'sixDs', 'variety', 'eatingWindow', 'planned', 'reactions', 'hydration', 'ferments'] },
+  { group: 'Body and health', keys: ['symptoms', 'nights', 'weight', 'bloodPressure', 'bodySignals', 'cycle', 'labs', 'doses', 'therapyResponse', 'care'] },
+  { group: 'Moving', keys: ['movement', 'workouts', 'pacing'] },
+  { group: 'Home, garden and money', keys: ['keepingUp', 'work', 'harvest', 'conditions', 'groceries', 'cost'] },
+  { group: 'Looking across everything', keys: ['patterns', 'compare', 'squares', 'trackers'] },
+];
+const TRENDS_MENU: LensOption<TrendsLens>[] = TRENDS_LENS_GROUPS.flatMap(({ group, keys }) =>
+  keys.map((key) => ({ ...TRENDS_LENSES.find((option) => option.key === key)!, group })),
+);
+
 // The plain "Last 7d/30d/90d" picker -- kept exactly as it was for the four
 // lenses this range redesign doesn't apply to (Symptoms/Weight/Labs/Pattern
 // Finder are all sparse, real, already-happened events, none of which have
@@ -1211,6 +1228,16 @@ export default function TrendsScreen() {
   );
   const autoOpenLensHub = useAutoOpenLensHubSignal();
   const [lens, setLens] = useState<TrendsLens>('nutrients');
+  // The lenses with nothing recorded yet, read again each time Trends comes
+  // into view, so a lens moves up into its group the day its first record exists.
+  const [emptyLenses, setEmptyLenses] = useState<ReadonlySet<TrendsLens>>(new Set());
+  useFocusEffect(
+    useCallback(() => {
+      listEmptyTrendsLenses()
+        .then((keys) => setEmptyLenses(keys as Set<TrendsLens>))
+        .catch(() => setEmptyLenses(new Set()));
+    }, []),
+  );
   const lensVault = TRENDS_LENS_VAULT[lens] ?? [];
   // A listed category (doses, conditions, appointments) is never refused at
   // the database, so the lens is left out here while it is closed.
@@ -3212,8 +3239,8 @@ export default function TrendsScreen() {
                     </Text>
                   ) : null}
                   <Text style={styles.caption}>
-                    Counts only meals scheduled in the app. A meal logged directly on Food is not counted, and meal-plan
-                    meals never are, since the generator moves them to fit your window rather than booking them outside it.
+                    Counts only meals scheduled in the app. Meals logged straight on Food are not counted. Meal plan meals are never counted either,
+                    because the plan moves them to fit your window.
                   </Text>
                 </View>
               )
@@ -4083,7 +4110,9 @@ export default function TrendsScreen() {
       />
       <LensHub
         pageTitle="Trends"
-        options={TRENDS_LENSES}
+        options={TRENDS_MENU}
+        recentKey="Trends"
+        emptyKeys={emptyLenses}
         selected={revealed ? lens : undefined}
         columns={3}
         autoOpenSignal={autoOpenLensHub}

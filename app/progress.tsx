@@ -91,9 +91,9 @@ export default function ProgressScreen() {
           <View style={styles.introBox}>
             <Text style={styles.introTitle}>Made of what you have recorded</Text>
             <Text style={styles.caption}>
-              Everything here is read from your records as they stand today, so it only ever grows as they do. Each tab below
-              says what you have started, how many different things, the weeks you came back to it, what you are keeping
-              alive, and what each part of the app needs before it can answer you.
+              Everything here is read from your records as they stand today, so it only ever grows as they do. Each tab below shows what you started and how many different things. It shows the weeks you
+              came back, what you are keeping alive, and what each part of the app still needs before it can
+              answer you.
             </Text>
           </View>
 

@@ -968,9 +968,8 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
                       placeholder="kPa"
                     />
                     <Text style={styles.captionText}>
-                      It is kept on the readings recorded in it and is on this measurement&apos;s list from then on. Figures
-                      in one unit are never turned into another unless the two mean the same quantity, so a reading in a
-                      unit of your own is charted on its own terms.
+                      It is kept on the readings recorded in it and is on this measurement&apos;s list from then on. A number is only changed to another unit when both units measure the same thing. A
+                      reading in a unit you made up is charted as it is.
                     </Text>
                     <ThumbRow primary="first" style={styles.actionRow}>
                       <TouchableOpacity

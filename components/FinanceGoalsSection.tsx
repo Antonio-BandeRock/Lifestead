@@ -519,9 +519,8 @@ export function FinanceGoalsSection({ tabColor }: Props) {
             hours behind it is not halfway either: the money is finished and the work has not started.
           </Text>
           <Text style={styles.footnote}>
-            So each cost is tracked in the unit it came in, and nothing is ever turned into anything else. What the app tells you
-            instead is how many costs are met and which one is furthest behind, which is what actually says whether the
-            thing in your way is money or a weekend.
+            So each cost is tracked in the unit it came in, and nothing is ever turned into anything else. Instead, the app tells you how many costs are covered and which one is furthest behind. That
+            shows whether what stands in your way is money or a weekend.
           </Text>
         </TabBand>
       ) : null}

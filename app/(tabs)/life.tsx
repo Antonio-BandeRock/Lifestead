@@ -595,6 +595,20 @@ const LIFE_LENSES: LensOption<LifeLens>[] = [
   { key: 'projects', label: 'Projects', icon: 'layers-outline', help: PROJECTS_HELP_SECTIONS },
 ];
 
+
+// 1.0.87.7 (ease-of-use pass, fix 4): the 18 Life lenses are grouped by
+// subject, with the lenses opened lately on top (lib/lensMenu.ts). Every
+// lens is in exactly one group; scripts/test_lens_menu.js checks that.
+const LIFE_LENS_GROUPS: readonly { group: string; keys: readonly LifeLens[] }[] = [
+  { group: 'Day to day', keys: ['groceryList', 'kitchen', 'todos', 'didIDoIt', 'routines', 'upkeep', 'daysUntil', 'projects'] },
+  { group: 'Health', keys: ['conditions', 'myMeds', 'emergency', 'movement', 'workouts'] },
+  { group: 'Money and work', keys: ['finances', 'work'] },
+  { group: 'Reading', keys: ['healthLiteracy', 'earthMatters', 'searchReading'] },
+];
+const LIFE_MENU: LensOption<LifeLens>[] = LIFE_LENS_GROUPS.flatMap(({ group, keys }) =>
+  keys.map((key) => ({ ...LIFE_LENSES.find((option) => option.key === key)!, group })),
+);
+
 const DIRECTION_OPTIONS = [
   { label: 'Money going out', value: 'expense' },
   { label: 'Money coming in', value: 'income' },
@@ -1224,8 +1238,8 @@ export default function LifeScreen() {
             summary.monthlyLeftOver < 0 ? 'warn' : 'good',
           )}
           <Text style={styles.footnote}>
-            Worked out from {summary.activeCount} active {summary.activeCount === 1 ? 'entry' : 'entries'}, with weekly
-            and every-two-weeks amounts converted using the number of payments in a year (52 or 26) rather than four a month.
+            Worked out from {summary.activeCount} active {summary.activeCount === 1 ? 'entry' : 'entries'}. Weekly amounts count 52 times a year and
+            every-two-weeks amounts 26 times, not four times a month.
           </Text>
         </TabBand>
 
@@ -2197,7 +2211,8 @@ export default function LifeScreen() {
       />
       <LensHub
         pageTitle="Life"
-        options={LIFE_LENSES}
+        options={LIFE_MENU}
+        recentKey="Life"
         selected={revealed ? lens : undefined}
         columns={3}
         autoOpenSignal={autoOpenLensHub}

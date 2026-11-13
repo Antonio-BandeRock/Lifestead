@@ -362,7 +362,7 @@ export function GrowSetupSection({ plot, onChanged }: Props) {
         <Text style={styles.captionText}>No light is recorded for this indoor area yet. Indoors, the light is the sun, so it is the first thing to add.</Text>
       ) : null}
       {items.length === 0 ? (
-        <Text style={styles.captionText}>Nothing recorded here yet. Lights, containers, hydroponic gear, humidity, timers, cooling, heating, water filtration, fans, exhaust, air filters and meters all go here, each with what it cost and what it runs on.</Text>
+        <Text style={styles.captionText}>Nothing recorded here yet. Put your grow gear here: lights, containers, hydroponics, timers, fans, heaters, coolers, filters, meters and more. Note what each cost and what powers it.</Text>
       ) : null}
       {inUse.map((item) => (
         <View key={item.id} style={styles.itemRow}>

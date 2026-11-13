@@ -45,7 +45,10 @@ import { focusOf, registerVoiceLenses } from '../lib/voiceControlRegistry';
 import { useWalkMark } from './WalkMark';
 import { useNavigationHand } from '../lib/navigationHand';
 import { useLanguage } from '../lib/language';
-import { translateIn } from '../lib/i18n';
+import { t, translateIn } from '../lib/i18n';
+import { arrangeLensMenu } from '../lib/lensMenu';
+import { noteLensOpened, useRecentLenses } from '../lib/recentLenses';
+import { useVisualPreferences } from '../hooks/useVisualPreferences';
 import { splitLabelEvenly } from '../lib/labelSplit';
 
 export type LensOption<T extends string> = {
@@ -365,6 +368,8 @@ export function LensHub<T extends string>({
   gridPillSize = GRID_ITEM_PILL_SIZE,
   gridCustomIconSize = GRID_ITEM_CUSTOM_ICON_SIZE,
   gridIconSize = GRID_ITEM_ICON_SIZE,
+  recentKey,
+  emptyKeys,
 }: {
   // Used to find this page's own entry in TAB_ROUTES, for the trigger
   // button's icon/color (see below) -- must match a `title` there exactly.
@@ -506,6 +511,16 @@ export function LensHub<T extends string>({
   gridPillSize?: number;
   gridCustomIconSize?: number;
   gridIconSize?: number;
+  // The long menus (Trends, Insights, Life), 1.0.87.7: set to the tab's name
+  // to show an "Opened lately" row of the last few lenses picked on this
+  // device above the groups (lib/recentLenses.ts, lib/lensMenu.ts). Every
+  // other tab leaves it out and its menu draws exactly as before.
+  recentKey?: string;
+  // Lenses with no records behind them yet, folded into one closed line at
+  // the bottom, "Nothing recorded yet (n)", that opens with a tap. Simple
+  // View leaves the line out. Only Trends passes it: its lenses only read
+  // records, while a lens on Life or Insights is where recording starts.
+  emptyKeys?: ReadonlySet<T>;
 }) {
   // 2026-07-26: used to auto-open on arrival (a `forceOpen` prop, driven by
   // the calling screen's own GatedTabContent.tsx resting state) so the
@@ -537,6 +552,10 @@ export function LensHub<T extends string>({
   // the first of them soonest. Rows still read top to bottom.
   const hand = useNavigationHand();
   const [open, setOpen] = useState(false);
+  const recent = useRecentLenses(recentKey);
+  const simpleView = useVisualPreferences().simpleView;
+  const [foldOpen, setFoldOpen] = useState(false);
+  const layout = arrangeLensMenu(options, recentKey ? recent : [], emptyKeys, simpleView);
 
   // Voice control (1.0.66.11): "Open Horticulture" picks this tab's lens by
   // name, only while this tab is the one in front.
@@ -693,6 +712,7 @@ export function LensHub<T extends string>({
   // RN's Modal doesn't expose that duration directly to time against, so
   // this is an estimate, not a measured value.
   function choose(key: T) {
+    if (recentKey) noteLensOpened(recentKey, key);
     setOpen(false);
     setTimeout(() => onSelect(key), TAB_REVEAL_DURATION_MS);
   }
@@ -753,7 +773,7 @@ export function LensHub<T extends string>({
   // break a group header does, so it has to disable this centering math
   // the same way -- otherwise Digest's own divider line would silently
   // throw off where Info lands.
-  const hasGroups = options.some((option) => option.group !== undefined || option.dividerBefore);
+  const hasGroups = layout.rows.some((row) => row.group !== undefined || row.option.dividerBefore) || layout.foldedCount > 0;
   const blanksBeforeInfo = hasGroups ? 0 : gridColumns % 2 === 0 ? 0 : rowPadding + Math.floor(gridColumns / 2);
 
   // Everything a tap on the corner button does, in one place, because a tap
@@ -975,10 +995,14 @@ export function LensHub<T extends string>({
                 // page's options never set `group`, so showGroupHeader is
                 // always false there and this renders exactly as it always
                 // did, just wrapped in one extra Fragment per item.
+                // 1.0.87.7: the rows come from arrangeLensMenu (lib/lensMenu.ts),
+                // which puts Opened lately first and holds back the lenses
+                // with nothing recorded yet. A tab that passes neither
+                // recentKey nor emptyKeys gets its options back unchanged.
                 let lastGroupShown: string | undefined;
-                return options.map((option) => {
-                  const showGroupHeader = option.group !== undefined && option.group !== lastGroupShown;
-                  if (option.group !== undefined) lastGroupShown = option.group;
+                const renderRow = ({ option, group, rowKey }: { option: LensOption<T>; group: string | undefined; rowKey: string }) => {
+                  const showGroupHeader = group !== undefined && group !== lastGroupShown;
+                  if (group !== undefined) lastGroupShown = group;
                   const active = option.key === selected;
                   // 2026-08-21 -- see LensOption's own `dividerBefore`
                   // comment. `width: '100%'` on dividerRow (styles below)
@@ -1007,7 +1031,7 @@ export function LensHub<T extends string>({
                   // colors.primary regardless of which page's menu it was.
                   const labelColor = lighten(active ? tabColor : colors.textMuted, MENU_LABEL_LIGHTEN_FRACTION);
                   return (
-                    <Fragment key={option.key}>
+                    <Fragment key={rowKey}>
                       {option.dividerBefore ? (
                         <View style={styles.dividerRow}>
                           <View style={[styles.dividerLine, { backgroundColor: tabColor }]} />
@@ -1016,7 +1040,7 @@ export function LensHub<T extends string>({
                       {showGroupHeader ? (
                         <View style={styles.groupHeaderRow}>
                           <Text style={[styles.groupHeaderText, { color: tabColor }]} maxFontSizeMultiplier={MENU_MAX_FONT_SCALE}>
-                            {option.group}
+                            {group}
                           </Text>
                         </View>
                       ) : null}
@@ -1066,7 +1090,26 @@ export function LensHub<T extends string>({
                       </TouchableOpacity>
                     </Fragment>
                   );
-                });
+                };
+                return (
+                  <>
+                    {layout.rows.map(renderRow)}
+                    {layout.folded.length > 0 ? (
+                      <TouchableOpacity
+                        style={[styles.groupHeaderRow, styles.foldRow]}
+                        onPress={() => setFoldOpen((was) => !was)}
+                        accessibilityRole="button"
+                        accessibilityState={{ expanded: foldOpen }}
+                      >
+                        <Text style={[styles.groupHeaderText, { color: tabColor }]} maxFontSizeMultiplier={MENU_MAX_FONT_SCALE}>
+                          {t('Nothing recorded yet ({count})', { count: layout.foldedCount })}
+                        </Text>
+                        <Ionicons name={foldOpen ? 'chevron-up' : 'chevron-down'} size={16} color={tabColor} />
+                      </TouchableOpacity>
+                    ) : null}
+                    {foldOpen ? layout.folded.map((row) => renderRow({ ...row, group: undefined })) : null}
+                  </>
+                );
               })()}
               {/* Info as a real grid item, centered on its own row, only
                   for pages that asked for this (see showInfoInGrid's own
@@ -1365,6 +1408,14 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 2,
     paddingHorizontal: 4,
+  },
+  // 1.0.87.7: the closed "Nothing recorded yet" line is a button, so it is
+  // tall enough to tap and carries its chevron on the same line.
+  foldRow: {
+    minHeight: 44,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
   },
   groupHeaderText: {
     ...typography.eyebrow,

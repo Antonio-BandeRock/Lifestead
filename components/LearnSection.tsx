@@ -280,8 +280,9 @@ export function LearnSection({ tabColor }: Props) {
       })}
       {recordDecks.length === 0 ? (
         <Text style={styles.captionText}>
-          Decks from your records appear here once there is something to make them from: what you take in Life &gt; My Meds, what is growing
-          in Garden, meals in Food, or time on an interest in Sessions.
+          Decks made from your records show up here once there is something to make them from. That can be
+          what you take in Life &gt; My Meds, what grows in Garden, meals in Food, or time on an interest in
+          Sessions.
         </Text>
       ) : null}
       <LearnMyDecksEditor tabColor={tabColor} decks={myDecks} onChanged={load} />

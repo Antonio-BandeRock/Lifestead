@@ -182,7 +182,7 @@ export function CouldThisPaySection({ tabColor }: Props) {
   return (
     <View style={styles.section}>
       <Text style={styles.captionText}>
-        Sums for an interest, or several together, if you are wondering about selling from it: what comes in a month, what is left after costs and a tax set-aside, what that is an hour, and what to have put by before starting. Every number used is listed beside the result.
+        Rough sums for selling from an interest, or several together: what comes in a month, what is left after costs and money kept for tax, what that is per hour, and what to save before you start. Every number used is listed beside the result.
       </Text>
       {!open ? (
         <TouchableOpacity ref={walkMark.ref('pay.open')} style={styles.secondaryButton} onPress={startWorksheet}>

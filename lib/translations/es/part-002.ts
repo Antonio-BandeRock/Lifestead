@@ -11,7 +11,7 @@ export const PART: Readonly<Record<string, string>> = {
  "Already know your zone, or want to check it directly? Set it here; this always overrides whatever the lookup above found. The USDA's published map (usda.gov/plant-hardiness-zone) or a local agricultural extension office are both direct ways to double-check either result.": "¿Ya conoces tu zona o quieres revisarla directamente? Configúrala aquí; esto siempre reemplaza lo que haya encontrado la búsqueda de arriba. El mapa publicado por el USDA (usda.gov/plant-hardiness-zone) o una oficina local de extensión agrícola son formas directas de comprobar cualquiera de los dos resultados.",
  "Frost Dates": "Fechas de helada",
  "Reading {FROST_YEARS} years of temperatures for this place.": "Leyendo {FROST_YEARS} años de temperaturas de este lugar.",
- "Reading": "Leyendo",
+ "Reading": "Lectura",
  "years of temperatures for this place.": "años de temperaturas de este lugar.",
  "Find your zone above with a country and postal code, and the last frost of spring and the first after summer for that place show here.": "Busca tu zona arriba con un país y un código postal, y aquí aparecen la última helada de la primavera y la primera después del verano para ese lugar.",
  "Try Again": "Intentar de nuevo",

@@ -206,8 +206,8 @@ function SearchMatchDemo({ styles }: { styles: MatchStyles }) {
     <View style={styles.demoBlock}>
       <Text style={styles.demoHeading}>Example: searching {DEMO_QUERY_LABEL}</Text>
       <Text style={styles.demoIntro}>
-        Three illustrative entries below (not actual entries in this app) show how the same three-word search can
-        produce different dot patterns, depending on what each entry actually says.
+        The three made-up entries below show how one three-word search can light up different dots,
+        depending on what each entry says.
       </Text>
       {DEMO_EXAMPLES.map((example) => (
         <View key={example.title} style={styles.demoExample}>
@@ -230,8 +230,8 @@ function SearchMatchDemo({ styles }: { styles: MatchStyles }) {
       ))}
 
       <Text style={styles.demoClosing}>
-        Dots and pills always mean the same three things: filled in the tab&apos;s colour is a title match, outlined is a
-        body or citation match, and dim grey means that word did not match this entry at all. Dots are the compact
+        Dots and pills always mean one of three things. Filled in the tab&apos;s colour: the word is in the
+        title. Outlined: it is in the text or a source. Dim grey: the word is not in this entry. Dots are the compact
         version, used inside the search on every reading lens. Pills are the fuller version, used only in Search
         Reading, where there is room to write out the actual matched word.
       </Text>
@@ -450,7 +450,7 @@ export function DigestSearchLens({
             <Text style={styles.headerText}>Search Reading</Text>
           </View>
           <Text style={styles.headerDescription}>
-            Search across all {ALL_DIGEST_ENTRIES.length} entries at once: every condition, Health Literacy, Earth
+            Search all {ALL_DIGEST_ENTRIES.length} entries at once: every condition, Health Literacy, Earth
             Matters, Horticulture and the recipes. A mechanism, a food, an author&apos;s name, anything an entry
             actually says somewhere.
           </Text>

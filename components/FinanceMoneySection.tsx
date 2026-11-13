@@ -305,8 +305,8 @@ export function FinanceMoneySection({ tabColor }: Props) {
           ) : rateKind === 'market' ? (
             <Text style={styles.helperText}>
               No rate is asked for here, on purpose. This kind of account moves with the market, so there is no rate to
-              enter. Update the balance now and then and the app reports what actually happened instead of applying an
-              average that is a description of the past rather than a rate anything is growing at.
+              enter. Update the balance now and then, and the app shows what happened. It does not use an average,
+              because an average only describes the past and is not a rate anything grows at.
             </Text>
           ) : null}
 
