@@ -443,7 +443,9 @@ type FlipCardEntry = {
 // enough to the limit, so a card teases rather than dumps the whole
 // entry, with FlipCard's own new "Read more" link (see that component)
 // carrying someone the rest of the way to the real card in Digest.
-function flipCardExcerpt(text: string, maxLength = 200): string {
+function flipCardExcerpt(full: string, maxLength = 200): string {
+  // The reading is written in paragraphs; a card's back is one short run of text.
+  const text = full.replace(/\n\n/g, ' ');
   if (text.length <= maxLength) return text;
   const truncated = text.slice(0, maxLength);
   const lastSentenceEnd = Math.max(truncated.lastIndexOf('. '), truncated.lastIndexOf('! '), truncated.lastIndexOf('? '));
