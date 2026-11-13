@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
   },
   hint: {
     ...typography.caption,
-    color: colors.textMuted,
+    color: colors.textSecondary,
     marginBottom: 4,
     ...textShadow,
   },

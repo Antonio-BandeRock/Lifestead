@@ -417,7 +417,7 @@
     <h1>What is inside Lifestead, and how it is put together</h1>
     <p class="dek">Lifestead is an everything-about-a-person's-life app, tagline "Everything in your life has a place." It started with, and runs deepest on, food and autoimmune health: 19 tracked conditions, each a target for the same depth, alone or combined. It is also for somebody who needs an outside place to hold the details of daily living so they stop taking up room in their head, through Life, Schedules, reminders and capture. Garden, budget, family, interests, learning and the body are all in scope.</p>
     <p class="dek">Its job in food and health is finding the personal patterns between what someone eats and how their body responds, and doing that work for the person. Records stay on the person's devices, and no company server holds them.</p>
-    <p class="meta">Kept up to date as the app changes. <!--AUTO:version-->Last refreshed 2026-11-12 (1.0.87.5).<!--/AUTO:version--> The reading is called the Library: the purple group of flip cards on Home and the reading lenses on Life and Garden. To click through the navigation instead of reading about it, see the companion <a href="https://claude.ai/artifact/XzbKH1oPPniiucyxBhXknp" target="_blank" rel="noopener">Lifestead Walkthrough</a>.</p>
+    <p class="meta">Kept up to date as the app changes. <!--AUTO:version-->Last refreshed 2026-11-12 (1.0.87.6).<!--/AUTO:version--> The reading is called the Library: the purple group of flip cards on Home and the reading lenses on Life and Garden. To click through the navigation instead of reading about it, see the companion <a href="https://claude.ai/artifact/XzbKH1oPPniiucyxBhXknp" target="_blank" rel="noopener">Lifestead Walkthrough</a>.</p>
     <div class="stats">
       <div class="stat"><span class="n">16,140</span><span class="l">whole foods shown from the reference database</span></div>
       <div class="stat"><span class="n">10</span><span class="l">data sources (9 national tables plus a Derived set)</span></div>
@@ -444,7 +444,7 @@
       </div>
       <div class="plaincard">
         <h4>The edge tabs</h4>
-        <p>Small tabs sit at the bottom edges of every screen. On the thumb side, from the bottom: quick access (Ask Your Records, Where Is It, Store Its Location, notes, Plan My Meals, Simple View and Low Stimulation), Voice Control, a tab wearing a flip card (one card under a curved two-way arrow), and search on screens that have a search box. On the far side: the navigation switch, which moves the menus to the other hand. The flip card tab opens Flash Cards (Language Basics, Languages, Learn) and Reading Material (Conditions, Earth Matters, Health Literacy, Horticulture, Search Reading, and the Library while Home shows it). Opening any edge tab while another menu is open switches straight to it.</p>
+        <p>Small tabs sit at the bottom edges of every screen. On the thumb side, from the bottom: quick access (Ask Your Records, Where Is It, Store Its Location, notes, Log a Symptom, Add to Grocery List, Plan My Meals, Simple View and Low Stimulation), Voice Control, a tab wearing a flip card (one card under a curved two-way arrow), and search on screens that have a search box. On the far side: the navigation switch, which moves the menus to the other hand. The flip card tab opens Flash Cards (Language Basics, Languages, Learn) and Reading Material (Conditions, Earth Matters, Health Literacy, Horticulture, Search Reading, and the Library while Home shows it). Opening any edge tab while another menu is open switches straight to it.</p>
       </div>
     </div>
     <p style="margin-top:16px;color:var(--text-dim);font-size:14.5px;line-height:1.62;">The ten tabs, in menu and swipe order: <strong>Home, Life, Food, Garden, Interests, Schedules, Signals, Insights, Trends, Reports</strong>, then Profile and Info in the same menu. One list (<code>constants/tabs.ts</code>) drives the menu, the swipe order and the header dots together. The reading lives on Life (Conditions, Health Literacy, Earth Matters, Search Reading), Garden (Horticulture) and Food (recipes). Which hand works the navigation is a live setting on each device, and the hubs mirror to match it. A lens is a subject holding several bands behind the fold, and a thing is defined where it lives and gets its timeline on Schedules.</p>
@@ -519,7 +519,7 @@
         <li><strong>Library</strong>: Short cards, each the start of an entry from the reading on Life or Garden, in the colour of the tab it lives on.</li>
         <li><strong>Inside Knowledge</strong>: What you now know from Learn, a count that only grows, and the decks with cards back for their day. It never counts what is waiting.</li>
         <li><strong>Language Basics</strong>: The language units you turned on, in the order they should be learned, and the groups of units you studied together. Tapping one opens it on Interests.</li>
-        <li><strong>Simple View</strong>: Home reduced to the one next thing. Nothing you set up is lost and every tab is still in the menu.</li>
+        <li><strong>Simple View</strong>: Home reduced to the one next thing. A new install starts here, and setup offers Everything. Nothing you set up is lost and every tab is still in the menu. Every button and choice is at least 44 points tall, so it is easy to hit.</li>
       </ul>
     </div>
   </section>

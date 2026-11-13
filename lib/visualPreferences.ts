@@ -1059,7 +1059,9 @@ const DEFAULT_VISUAL_PREFERENCES: VisualPreferences = {
   developerNotesPreview: true,
   trendsCycleShading: false,
   playfulWording: true,
-  simpleView: false,
+  // A new install starts in Simple View (2026-11-12, the ease-of-use pass);
+  // setup still offers Everything, and a saved record keeps its own choice.
+  simpleView: true,
   simpleViewExtras: ['groceryList'],
   languageButton: false,
   studyButton: true,
@@ -1381,6 +1383,9 @@ export async function getVisualPreferences(): Promise<VisualPreferences> {
               ? (parsed.homeSectionOrder ?? [])
               : followNewMenuOrder(parsed.homeSectionOrder ?? []),
           homeOrderFollowsMenu1070: true,
+          // Someone with preferences saved before Simple View became the
+          // starting view keeps the full Home they already had.
+          simpleView: typeof parsed.simpleView === 'boolean' ? parsed.simpleView : false,
           simpleViewExtras: Array.isArray(parsed.simpleViewExtras)
             ? parsed.simpleViewExtras.filter((key) => ALL_HOME_SECTION_KEYS.includes(key))
             : DEFAULT_VISUAL_PREFERENCES.simpleViewExtras,

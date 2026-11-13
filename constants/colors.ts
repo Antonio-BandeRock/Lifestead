@@ -97,7 +97,7 @@ export const GROUND_THEMES: Record<GroundTheme, GroundFamily> = {
   // the same color levels from Ghostead." Every one-hue ground below is its
   // hue at Ghostead's S17 L15, with the family at the same offsets as
   // always (surface S-9/L+10, surfaceMuted S-1/L+7, border S-9/L+22,
-  // textMuted S-8/L+38, keySurface S+5/L+38) and buttonColor at the hue's
+  // textMuted S-8/L+38, raised on 2026-11-12 to the lightness that clears 4.6:1 on surface and surfaceMuted, keySurface S+5/L+38) and buttonColor at the hue's
   // L61, Ghostead's own button lightness. Charcoal keeps its near-zero
   // saturation (S6), since a neutral is what it is for. Button text
   // (textOnButton) clears 4.5:1 on every one. Generated, not hand-typed.
@@ -110,7 +110,7 @@ export const GROUND_THEMES: Record<GroundTheme, GroundFamily> = {
     surface: 'rgba(59, 62, 69, 0.85)',
     surfaceMuted: 'rgba(47, 53, 65, 0.85)',
     border: '#575B66',
-    textMuted: '#7C8392',
+    textMuted: '#A0A5B0',
     keySurface: '#6D7DA2',
     buttonColor: '#8B95AC',
   },
@@ -120,7 +120,7 @@ export const GROUND_THEMES: Record<GroundTheme, GroundFamily> = {
     surface: 'rgba(59, 67, 69, 0.85)',
     surfaceMuted: 'rgba(47, 62, 65, 0.85)',
     border: '#576366',
-    textMuted: '#7C8E92',
+    textMuted: '#A0ADB0',
     keySurface: '#6D99A2',
     buttonColor: '#8BA7AC',
   },
@@ -130,7 +130,7 @@ export const GROUND_THEMES: Record<GroundTheme, GroundFamily> = {
     surface: 'rgba(65, 59, 69, 0.85)',
     surfaceMuted: 'rgba(59, 47, 65, 0.85)',
     border: '#615766',
-    textMuted: '#8B7C92',
+    textMuted: '#ABA0B0',
     keySurface: '#906DA2',
     buttonColor: '#A18BAC',
   },
@@ -140,7 +140,7 @@ export const GROUND_THEMES: Record<GroundTheme, GroundFamily> = {
     surface: 'rgba(64, 64, 64, 0.85)',
     surfaceMuted: 'rgba(53, 55, 59, 0.85)',
     border: '#5E5E5E',
-    textMuted: '#878787',
+    textMuted: '#A8A8A8',
     keySurface: '#7A8294',
     buttonColor: '#9699A2',
   },
@@ -150,7 +150,7 @@ export const GROUND_THEMES: Record<GroundTheme, GroundFamily> = {
     surface: 'rgba(69, 59, 60, 0.85)',
     surfaceMuted: 'rgba(65, 47, 50, 0.85)',
     border: '#665759',
-    textMuted: '#927C80',
+    textMuted: '#B1A2A4',
     keySurface: '#A26D76',
     buttonColor: '#AC8B90',
   },
@@ -165,7 +165,7 @@ export const GROUND_THEMES: Record<GroundTheme, GroundFamily> = {
     surface: 'rgba(58, 67, 68, 0.85)',
     surfaceMuted: 'rgba(46, 62, 64, 0.85)',
     border: '#566365',
-    textMuted: '#7B8E92',
+    textMuted: '#9EACAF',
     keySurface: '#6B99A1',
     buttonColor: '#8CA9AE',
   },
@@ -182,7 +182,7 @@ export const GROUND_THEMES: Record<GroundTheme, GroundFamily> = {
     surface: 'rgba(59, 69, 65, 0.85)',
     surfaceMuted: 'rgba(47, 65, 58, 0.85)',
     border: '#576660',
-    textMuted: '#7C9289',
+    textMuted: '#A0B0AA',
     keySurface: '#B97A55',
     buttonColor: '#C49A82',
   },
@@ -192,7 +192,7 @@ export const GROUND_THEMES: Record<GroundTheme, GroundFamily> = {
     surface: 'rgba(59, 61, 69, 0.85)',
     surfaceMuted: 'rgba(47, 51, 65, 0.85)',
     border: '#575A66',
-    textMuted: '#7C8192',
+    textMuted: '#A0A4B0',
     keySurface: '#C19E4E',
     buttonColor: '#CAB37D',
   },
@@ -202,7 +202,7 @@ export const GROUND_THEMES: Record<GroundTheme, GroundFamily> = {
     surface: 'rgba(69, 59, 69, 0.85)',
     surfaceMuted: 'rgba(65, 47, 65, 0.85)',
     border: '#665766',
-    textMuted: '#927C92',
+    textMuted: '#B1A2B1',
     keySurface: '#95B05E',
     buttonColor: '#ACBD89',
   },
@@ -212,7 +212,7 @@ export const GROUND_THEMES: Record<GroundTheme, GroundFamily> = {
     surface: 'rgba(59, 65, 69, 0.85)',
     surfaceMuted: 'rgba(47, 58, 65, 0.85)',
     border: '#576066',
-    textMuted: '#7C8992',
+    textMuted: '#A0AAB0',
     keySurface: '#C56249',
     buttonColor: '#CD8A79',
   },
@@ -222,7 +222,7 @@ export const GROUND_THEMES: Record<GroundTheme, GroundFamily> = {
     surface: 'rgba(63, 69, 59, 0.85)',
     surfaceMuted: 'rgba(55, 65, 47, 0.85)',
     border: '#5D6657',
-    textMuted: '#85927C',
+    textMuted: '#A5AF9F',
     keySurface: '#8161AE',
     buttonColor: '#AA98C3',
   },
@@ -232,7 +232,7 @@ export const GROUND_THEMES: Record<GroundTheme, GroundFamily> = {
     surface: 'rgba(69, 59, 59, 0.85)',
     surfaceMuted: 'rgba(65, 47, 49, 0.85)',
     border: '#665758',
-    textMuted: '#927C7E',
+    textMuted: '#B1A2A3',
     keySurface: '#68A687',
     buttonColor: '#91B6A3',
   },
@@ -929,7 +929,9 @@ export function lighten(hex: string, fraction: number): string {
 // need... still a lighter color of font" once seen against the first
 // pass. See menuLabelShadow's own comment in constants/typography.ts for
 // the matching drop-shadow follow-up.
-export const MENU_LABEL_LIGHTEN_FRACTION = 0.45;
+// Raised to 0.5 on 2026-11-12 with the ease-of-use contrast pass, so an
+// unselected label on the menu panel reaches 4.5:1 against menuSurface.
+export const MENU_LABEL_LIGHTEN_FRACTION = 0.5;
 
 // 2026-08-17: the whole iridescent system that used to live here
 // (hueShift, IRIDESCENT_PALETTE, rotatedIridescentPalette, iridescentSheen)

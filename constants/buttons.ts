@@ -27,7 +27,13 @@ import { textShadow, typography } from './typography';
 
 export const BUTTON_RADIUS = 10;
 
+// Every button and pill is at least TAP_MIN_HEIGHT tall (2026-11-12, the
+// ease-of-use pass): Apple asks for 44 points and Android for 48 dp, and the
+// small pills measured about 33. The words stay centred in the extra room.
+export const TAP_MIN_HEIGHT = 44;
+
 const shape = {
+  minHeight: TAP_MIN_HEIGHT,
   borderRadius: BUTTON_RADIUS,
   paddingVertical: 12,
   paddingHorizontal: 18,
@@ -100,6 +106,7 @@ export const BUTTON_SECONDARY_TEXT = {
 export const PILL_RADIUS = 999;
 
 const pillShape = {
+  minHeight: TAP_MIN_HEIGHT,
   borderRadius: PILL_RADIUS,
   paddingVertical: 8,
   paddingHorizontal: 14,

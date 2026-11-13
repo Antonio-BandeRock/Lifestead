@@ -167,10 +167,9 @@ export function AlcoholCalculatorPanel({
       {expanded && (
         <Animated.View layout={LinearTransition} style={[styles.panel, { borderColor: tabColor }]}>
           <Text style={styles.panelIntro}>
-            Tell us about your actual drink (its size, proof, and how many pours) and we&apos;ll use that,
-            instead of the database&apos;s standard serving, to track this ingredient&apos;s calories and carbs.
-            Fill in Volume and ABV below and this takes over from Quantity and Unit above automatically; clear
-            either one back out and Quantity/Unit take over again.
+            Tell us about your drink: its size, its strength and how many pours. We use that in place of the standard
+            serving to count its calories and carbs. Once Volume and ABV below are filled in, they replace Quantity and
+            Unit above. Clear either one and Quantity and Unit count again.
           </Text>
 
           <View style={styles.fieldBlock}>
@@ -228,9 +227,9 @@ export function AlcoholCalculatorPanel({
               width={220}
             />
             <Text style={styles.fieldHint}>
-              The natural sugar left over in the drink itself, separate from the alcohol: higher in a sweet
-              wine, cordial, or liqueur, close to zero in a dry wine or a plain spirit like vodka or whiskey.
-              Leave at &quot;Dry / None&quot; if you&apos;re not sure.
+              The sugar left in the drink, apart from the alcohol. It is higher in a sweet wine, cordial or liqueur, and
+              close to zero in a dry wine or a plain spirit like vodka or whiskey. If you are not sure, leave it at
+              &quot;Dry / None&quot;.
             </Text>
           </View>
 

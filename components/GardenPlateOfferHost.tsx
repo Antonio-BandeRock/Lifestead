@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     maxWidth: 460,
   },
   title: { ...typography.bodyEmphasis, color: colors.textPrimary, fontSize: 18, ...textShadow },
-  where: { ...typography.caption, color: colors.textMuted, marginTop: 2, marginBottom: 12, ...textShadow },
+  where: { ...typography.caption, color: colors.textSecondary, marginTop: 2, marginBottom: 12, ...textShadow },
   headline: { ...typography.body, color: colors.textSecondary, marginBottom: 10, ...textShadow },
   message: { ...typography.body, color: colors.textSecondary, marginTop: 6, ...textShadow },
   // Capped so a meal built from eight things out of the garden scrolls rather
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
   rowOn: { borderColor: colors.primary, opacity: 1 },
   rowName: { ...typography.bodyEmphasis, color: colors.textPrimary, ...textShadow },
   rowLine: { ...typography.caption, color: colors.textSecondary, marginTop: 3, ...textShadow },
-  caption: { ...typography.caption, color: colors.textMuted, marginTop: 10, ...textShadow },
+  caption: { ...typography.caption, color: colors.textSecondary, marginTop: 10, ...textShadow },
   buttonRow: { flexDirection: 'row', gap: 12, marginTop: 14, justifyContent: 'flex-start' },
   cancelButton: { ...BUTTON_SECONDARY },
   cancelButtonText: { ...BUTTON_SECONDARY_TEXT },

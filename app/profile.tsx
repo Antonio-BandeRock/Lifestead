@@ -3714,9 +3714,8 @@ export default function ProfileScreen() {
             ) : null}
             <Text style={styles.subLabel}>Your conditions</Text>
             <Text style={styles.helpText}>
-              Select every condition that applies to you: this tells the app which condition-specific notes,
-              scoring, and medications are relevant to you personally. Multiple selections are fully supported;
-              having more than one is common.
+              Choose every condition you have. The app uses them to pick which notes, scores and medicines matter to
+              you. You can choose more than one, and many people have more than one.
             </Text>
             {/* An even 2-column grid, 2026-08-21, direct report: the plain
                 pillRow every other picker on this screen uses (flexWrap
@@ -3963,9 +3962,8 @@ export default function ProfileScreen() {
               <>
                 <Text style={styles.subLabelDivided}>Where you’re at</Text>
                 <Text style={styles.helpText}>
-                  A short check-in covering hypothyroid symptoms, digestive/IBS symptoms, and overall wellbeing.
-                  Early on, day-to-day change can feel invisible because everything is happening at once; this
-                  is what turns that into an actual, visible trend over time.
+                  A short check-in on thyroid symptoms, gut symptoms and how you feel overall. Day to day, change is
+                  hard to see. Taking it now and then shows the change over weeks.
                 </Text>
                 {symptomsClosed ? (
                   <VaultClosedBand inline color={colors.tabProfile} categories={['symptoms']} />
@@ -4006,10 +4004,9 @@ export default function ProfileScreen() {
                   <View key={model.conditionCode}>
                     <Text style={styles.subLabelDivided}>{model.conditionLabel} stage</Text>
                     <Text style={styles.helpText}>
-                      {model.frameworkName}. {model.frameworkNote} Purely advisory: your food builders will start
-                      surfacing a tappable note on foods worth a second look for your current stage;
-                      nothing is ever hidden or blocked based on this. See the matching condition in Life &gt; Conditions
-                      for the full, cited detail.
+                      {model.frameworkName}. {model.frameworkNote} This only gives advice. Your food builders add a note
+                      you can tap to foods worth a second look at your stage. Nothing is ever hidden or blocked. Life
+                      &gt; Conditions has the full detail with sources.
                     </Text>
                     <View style={styles.pillRow}>
                       {model.stages.map((stage) => {
@@ -4133,10 +4130,9 @@ export default function ProfileScreen() {
         {!collapsedSections.has('general-health') ? (
           <View style={styles.cardBody}>
             <Text style={styles.helpText}>
-              These are condition-agnostic notes (glycemic impact, cooking method, portion size, and similar) that
-              can show up while building a meal, regardless of which conditions you track. Turn any one off below if
-              it&apos;s not useful to you. Your Trends and any report you generate still show the full picture
-              either way; this only affects what appears while you&apos;re actively cooking.
+              These notes are for everyone, whatever conditions you track: how fast a food raises blood sugar, how it is
+              cooked, portion size and the like. They show up while you build a meal. Turn off any you do not want.
+              Trends and your reports still show everything; this only changes what you see while cooking.
             </Text>
             <View style={styles.pillRow}>
               {GENERAL_HEALTH_RULES.map((rule) => {
@@ -4517,10 +4513,8 @@ export default function ProfileScreen() {
         {!collapsedSections.has('meal-plan') ? (
           <View style={styles.cardBody}>
             <Text style={styles.helpText}>
-              Generate up to 6 weeks of full meals at once, built from your tracked conditions, diet
-              preference(s), and food allergies above: whole meals combining a main dish with a side,
-              salad, or beverage when doing so helps round out your nutrient intake, not just one
-              recipe standing in for the whole plate.
+              Plan up to 6 weeks of meals at once. The plan follows your conditions, diet and food allergies above. When
+              it helps you get enough nutrients, a meal pairs a main dish with a side, a salad or a drink.
             </Text>
             <TouchableOpacity
               style={styles.checkinButton}
@@ -4928,10 +4922,9 @@ export default function ProfileScreen() {
           <View style={styles.cardBody}>
             <Text style={styles.subLabelDivided}>Growing Zone</Text>
             <Text style={styles.helpText}>
-              Your USDA Plant Hardiness Zone (e.g. &quot;7a&quot;): powers the Garden tab&apos;s
-              cited crop guidance for your climate. Picking it here only sets the zone letter itself, not a
-              location, so Home&apos;s weather/sunrise/sunset section stays off until you set your postal code
-              in Garden&apos;s My Zone lens, which sets both at once.
+              Your USDA plant hardiness zone, such as 7a. Garden uses it for crop advice that fits your climate.
+              Choosing it here sets only the zone, not where you are. To see weather, sunrise and sunset on Home, enter
+              your postal code in Garden &gt; My Zone, which sets both.
             </Text>
             <View style={styles.dateRow}>
               <PickerField label="Zone">
@@ -4984,10 +4977,9 @@ export default function ProfileScreen() {
             {renderAppearanceSubsectionHeader('genericPalette', 'Generic color combination', true)}
             {!collapsedAppearanceSubsections.has('genericPalette') ? (
               <View style={styles.subsectionBody}>                <Text style={styles.helpText}>
-                  Used by any tab background (or the shared background) set to &ldquo;Generic.&rdquo; The
-                  app&apos;s name at the top of every screen, the fine divider lines in the header and footer, and
-                  every colored ring around a selected item all take their color from this setting. One shared
-                  pick, not a separate one per tab, and always flat and static now, never animated.
+                  Used by any tab background set to Generic, and by the shared background when it is. This color also
+                  tints the app name at the top of each screen, the thin lines in the header and footer, and the ring
+                  around anything you select. One choice covers every tab, and it never moves.
                 </Text>
                 <View style={styles.pillRow}>
                   {GENERIC_PALETTE_OPTIONS.map((palette) => {
@@ -5224,14 +5216,12 @@ export default function ProfileScreen() {
                   </Text>
                 ) : null}
                 <Text style={styles.helpText}>
-                  The flowery scene behind Home, and behind every tab left on Photo under Individual tab backgrounds until you pick a function. &ldquo;Generic&rdquo; swaps
-                  it for a calm gradient instead (pick it under Generic color combination); &ldquo;Off&rdquo; removes it
-                  entirely, leaving the same flat background color as the header and footer. &ldquo;Custom
-                  image&rdquo; lets you upload a photo; it&apos;s automatically resized and compressed to
-                  comply with a reasonable size (up to {CUSTOM_BACKGROUND_MAX_DIMENSION}px, under{' '}
-                  {Math.round(CUSTOM_BACKGROUND_MAX_FILE_SIZE_BYTES / (1024 * 1024))}MB on disk); a too-small
-                  photo (under {CUSTOM_BACKGROUND_MIN_DIMENSION}px on its shorter side) is rejected rather than
-                  stretched blurry.
+                  The flowery scene behind Home, and behind every tab left on Photo under Individual tab backgrounds
+                  until you pick a function. Generic shows a calm gradient instead; pick its colors under Generic color
+                  combination. Off leaves a plain background, the same color as the header and footer. Custom image uses
+                  a photo of yours, made smaller to fit (up to {CUSTOM_BACKGROUND_MAX_DIMENSION}px and under{' '}
+                  {Math.round(CUSTOM_BACKGROUND_MAX_FILE_SIZE_BYTES / (1024 * 1024))}MB). A photo under{' '}
+                  {CUSTOM_BACKGROUND_MIN_DIMENSION}px on its shorter side is turned down so it does not look blurry.
                 </Text>
                 {renderBackgroundOptionsRow(SHARED_BACKGROUND_SCOPE_KEY, true, visualPrefs.homeBackgroundStyle)}
               </View>

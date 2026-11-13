@@ -783,7 +783,7 @@ const styles = StyleSheet.create({
   // words are covered wherever the helper is called from.
   link: { flexDirection: 'row', alignItems: 'center', gap: 4, paddingVertical: 2, backgroundColor: colors.surface },
   linkText: { ...typography.caption, color: colors.primary, ...textShadow },
-  linkMuted: { ...typography.caption, color: colors.textMuted, ...textShadow },
+  linkMuted: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   choiceList: { gap: 10, backgroundColor: colors.surface },
   styleRow: { gap: 4, backgroundColor: colors.surface },
   styleName: { ...typography.label, color: colors.textPrimary, ...textShadow },

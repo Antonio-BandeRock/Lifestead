@@ -781,7 +781,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     ...typography.caption,
-    color: colors.textMuted,
+    color: colors.textSecondary,
     paddingHorizontal: 12,
     paddingVertical: 10,
 

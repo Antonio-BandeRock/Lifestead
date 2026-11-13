@@ -103,6 +103,21 @@ export function QuickAccessButton() {
       run: () => router.push({ pathname: '/schedule', params: { openScheduleLens: 'dailyMealPlan' } }),
     },
     { key: 'type', label: 'Type a Note', icon: 'create-outline', run: () => router.push('/capture') },
+    // 2026-11-12, the ease-of-use pass: a symptom and the grocery list each took
+    // about four taps from Home, so each is two from here. A symptom is logged
+    // on Signals > Flares, which covers any stretch when things get worse.
+    {
+      key: 'symptom',
+      label: 'Log a Symptom',
+      icon: 'pulse-outline',
+      run: () => router.push({ pathname: '/log', params: { openSignalsLens: 'flares' } }),
+    },
+    {
+      key: 'grocery',
+      label: 'Add to Grocery List',
+      icon: 'cart-outline',
+      run: () => router.push({ pathname: '/life', params: { openLifeLens: 'groceryList' } }),
+    },
     { key: 'voice', label: 'Voice Note', icon: 'mic-outline', run: () => openQuickAccessSheet('voiceNote') },
   ]);
 
@@ -117,8 +132,8 @@ export function QuickAccessButton() {
         accessibilityLabel="Quick access"
         accessibilityHint={
           prefs.simpleView
-            ? 'Opens Ask Your Records, Low Stimulation, Normal View, Plan My Meals, Store Its Location, Type a Note, Voice Note and Where Is It'
-            : 'Opens Ask Your Records, Low Stimulation, Plan My Meals, Simple View, Store Its Location, Type a Note, Voice Note and Where Is It'
+            ? 'Opens Add to Grocery List, Ask Your Records, Log a Symptom, Low Stimulation, Normal View, Plan My Meals, Store Its Location, Type a Note, Voice Note and Where Is It'
+            : 'Opens Add to Grocery List, Ask Your Records, Log a Symptom, Low Stimulation, Plan My Meals, Simple View, Store Its Location, Type a Note, Voice Note and Where Is It'
         }
         accessibilityState={{ expanded: open }}
       >

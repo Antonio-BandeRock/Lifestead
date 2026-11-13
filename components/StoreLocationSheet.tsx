@@ -402,7 +402,7 @@ const styles = StyleSheet.create({
   },
   micListening: { backgroundColor: colors.primary },
   heardBox: { gap: 2, padding: 10, borderRadius: 10, backgroundColor: colors.surfaceMuted },
-  heardLabel: { ...typography.caption, color: colors.textMuted, ...textShadow },
+  heardLabel: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   savedBox: {
     gap: 2,
     padding: 12,
@@ -411,7 +411,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.primary,
   },
-  savedLabel: { ...typography.caption, color: colors.textMuted, ...textShadow },
+  savedLabel: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   savedWhat: { ...typography.bodyEmphasis, fontWeight: '400', color: colors.textPrimary, ...textShadow },
   input: {
     ...typography.body,

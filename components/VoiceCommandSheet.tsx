@@ -670,7 +670,7 @@ const styles = StyleSheet.create({
   },
   micListening: { backgroundColor: colors.primary },
   heardBox: { gap: 2, padding: 10, borderRadius: 10, backgroundColor: colors.surfaceMuted },
-  heardLabel: { ...typography.caption, color: colors.textMuted, ...textShadow },
+  heardLabel: { ...typography.caption, color: colors.textSecondary, ...textShadow },
   choice: {
     gap: 2,
     padding: 10,

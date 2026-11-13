@@ -341,7 +341,7 @@ const styles = StyleSheet.create({
   title: { ...typography.bodyEmphasis, color: colors.textPrimary, fontSize: 18, ...textShadow },
   crash: { ...typography.body, color: colors.textSecondary, marginTop: 8, ...textShadow },
   section: { ...typography.bodyEmphasis, color: colors.textPrimary, marginTop: 14, ...textShadow },
-  where: { ...typography.caption, color: colors.textMuted, marginTop: 2, marginBottom: 8, ...textShadow },
+  where: { ...typography.caption, color: colors.textSecondary, marginTop: 2, marginBottom: 8, ...textShadow },
   message: { ...typography.body, color: colors.textSecondary, marginTop: 6, ...textShadow },
   pillRow: { flexDirection: 'row', gap: 8, paddingRight: 8 },
   pill: { ...PILL },
@@ -350,7 +350,7 @@ const styles = StyleSheet.create({
   // Dark text: cancel the shadow the base style carries. See
   // constants/typography.ts.
   pillTextActive: { ...PILL_ON_TEXT },
-  caption: { ...typography.caption, color: colors.textMuted, marginTop: 10, marginBottom: 8, ...textShadow },
+  caption: { ...typography.caption, color: colors.textSecondary, marginTop: 10, marginBottom: 8, ...textShadow },
   input: {
     ...typography.body,
     color: colors.textPrimary,

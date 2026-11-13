@@ -699,9 +699,8 @@ function MyZoneLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
       <View style={[band.box, styles.card]}>
         <Text style={[styles.cardTitle, { color: TAB_COLOR }]}>Find My Zone</Text>
         <Text style={styles.cardBody}>
-          Enter your country and ZIP or postal code. This works anywhere on Earth, not just the US: a US ZIP gets the
-          official USDA zone directly; everywhere else gets an estimate computed from that location&apos;s historical
-          temperature data, using the same USDA temperature bands.
+          Enter your country and postal code. This works anywhere in the world. A US ZIP code gets the official USDA
+          zone; anywhere else gets an estimate from past temperatures there, on the same USDA scale.
         </Text>
         <View style={styles.fieldRow}>
           <Text style={styles.fieldLabel}>Country</Text>
@@ -748,8 +747,8 @@ function MyZoneLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
       <View style={[band.box, styles.card]}>
         <Text style={[styles.cardTitle, { color: TAB_COLOR }]}>Your Growing Zone</Text>
         <Text style={styles.cardBody}>
-          A USDA Plant Hardiness Zone: based on your area&apos;s average annual minimum winter temperature, the standard
-          reference for what can survive and thrive where you actually live.
+          Your USDA plant hardiness zone. It comes from how cold your winters get on average, and it is the usual guide
+          to what can grow well where you live.
         </Text>
         <View ref={walkMark.ref('garden.zone')} collapsable={false} style={styles.fieldRow}>
           <Text style={styles.fieldLabel}>Zone</Text>
@@ -762,9 +761,8 @@ function MyZoneLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
           />
         </View>
         <Text style={styles.captionText}>
-          Already know your zone, or want to check it directly? Set it here; this always overrides whatever the lookup above
-          found. The USDA&apos;s published map (usda.gov/plant-hardiness-zone) or a local agricultural extension office are
-          both direct ways to double-check either result.
+          Already know your zone? Set it here, and it always wins over the lookup above. To check either one, see the
+          USDA map at usda.gov/plant-hardiness-zone or ask a local farm extension office.
         </Text>
       </View>
 
@@ -1912,7 +1910,7 @@ function PlotsAndPlantingsLens({
               </TouchableOpacity>
             ))}
           </View>
-          <Text style={styles.captionText}>Determines temperature exposure, humidity levels, and natural climate risks.</Text>
+          <Text style={styles.captionText}>This sets the temperature, humidity and weather risks the space faces.</Text>
 
           {plots.length > 0 ? (
             <>
@@ -1941,7 +1939,9 @@ function PlotsAndPlantingsLens({
             <GardenSpaceField label="What type of space are you growing in?" selected={newAreaSpaceType} onSelect={setNewAreaSpaceType} />
           </View>
           <Text style={styles.captionText}>
-            Dictates soil depth limitations, drainage styles, root spacing rules, and indoor requirements. Lights, hydroponic gear and climate control are not spaces; they are the area&apos;s Grow Setup, added once the area is saved.
+            This sets how deep the soil can be, how it drains, how far apart roots go and what an indoor space needs.
+            Lights, hydroponic gear and climate control are not spaces; they go under the area&apos;s Grow Setup once it
+            is saved.
           </Text>
 
           {newAreaLocationType !== 'indoor' ? (
@@ -2068,9 +2068,8 @@ function PlotsAndPlantingsLens({
             <Text style={styles.captionText}>Current zone for this area: {newAreaZone}</Text>
           ) : null}
           <Text style={styles.captionText}>
-            Instantly calculates frost dates and local climate constraints from a country + ZIP/postal code, the same
-            lookup as My Zone, pre-filled from your profile if already set there, editable here if this specific
-            area is somewhere else.
+            Finds frost dates and the local climate from a country and postal code, the same way as My Zone. It starts
+            from your profile, and you can change it here if this area is somewhere else.
           </Text>
 
           <ThumbRow primary="first" style={styles.actionRow}>

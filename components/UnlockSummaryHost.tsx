@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   list: { marginBottom: 16 },
   row: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 8 },
   line: { ...typography.body, color: colors.textPrimary, flex: 1, ...textShadow },
-  undoneLine: { ...typography.caption, color: colors.textMuted, paddingVertical: 6, ...textShadow },
+  undoneLine: { ...typography.caption, color: colors.textSecondary, paddingVertical: 6, ...textShadow },
   undoButton: {
     paddingHorizontal: 14,
     paddingVertical: 8,

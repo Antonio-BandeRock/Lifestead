@@ -2505,6 +2505,25 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'The plan is picked from the recipes in the app that suit the conditions and diet you set in Profile, from any screen you are on.',
     },
     {
+      key: 'quickSymptom',
+      title: 'Log a symptom from the quick-access menu',
+      steps: [
+        { say: 'Tap the quick-access tab at the bottom edge of the screen on your thumb side.' },
+        { say: 'Tap Log a Symptom. It opens Flares on Signals.' },
+        { say: 'Choose what it was like and how bad it was, then save it.' },
+      ],
+      forYou: 'A symptom is kept in two taps from any screen, while you still remember how it felt.',
+    },
+    {
+      key: 'quickGrocery',
+      title: 'Add groceries from the quick-access menu',
+      steps: [
+        { say: 'Tap the quick-access tab at the bottom edge of the screen on your thumb side.' },
+        { say: 'Tap Add to Grocery List. It opens the Grocery List on Life.' },
+      ],
+      forYou: 'Something you just ran out of goes on the list from any screen, before it slips your mind.',
+    },
+    {
       key: 'simpleView',
       title: 'Switch Home to Simple View and back',
       steps: [

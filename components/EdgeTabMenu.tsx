@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   // the space between, each choice about a quarter shorter (48 to 36 dp).
   list: { gap: 4 },
   // A group's name sits on the panel itself, which is its surface.
-  heading: { ...typography.caption, color: colors.textMuted, paddingHorizontal: 6, paddingTop: 2, ...textShadow },
+  heading: { ...typography.caption, color: colors.textSecondary, paddingHorizontal: 6, paddingTop: 2, ...textShadow },
   headingAfter: { paddingTop: 8 },
   // Each choice in a pressed-in well: darker than the panel, its top edge
   // shaded and its bottom edge catching light, the way a recess reads.
