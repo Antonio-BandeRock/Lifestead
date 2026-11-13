@@ -233,6 +233,20 @@ export const FREE_BEFORE_SETUP_HEADING = "What is free and what is paid";
 export const FREE_BEFORE_SETUP =
   "Setting up costs nothing, and neither does using Lifestead to run your day.\n\nFree, always: reminders, Capture for quick notes, routines, the To Do List, tasks, Days Until, the grocery list, My Meds with every safety warning, and logging your meals, symptoms, exercise and garden.\n\nA paid plan adds: the reading about each condition, meal plans, the ready-made recipes, reports, Pattern Finder, most of Trends, and Finances.";
 
+// Shown under the way-of-eating question in setup (direct request,
+// 2026-11-13): how the meal plan picks, where the grocery list comes from,
+// what the kitchen takes off it, and what the app cannot control. Checked
+// against lib/dailyMealPlan.ts (random pick, least-used dish first),
+// lib/groceryDb.ts (netAgainstKitchen) and lib/kitchenDb.ts. The live food
+// table has a few foods with no figures or only some, so no count is given.
+export const EATING_NOTE_HEADING = 'How meal plans and the grocery list work';
+export const EATING_NOTE: string[] = [
+  'Meal plans. Lifestead can fill up to six weeks of meals for you. Dishes are drawn at random from the recipes that fit your ways of eating, your conditions and your allergies, and a dish does not come back until the others have had a turn, so no two plans are the same. Any meal can be changed, and you can schedule meals of your own.',
+  'The grocery list. The list is built from the meals on your schedule, whether Lifestead planned them or you added them yourself. You choose how many days to shop for and how many people are eating, and it adds up the amounts.',
+  'What you already have. Before asking you to buy something, the list takes away what your kitchen holds: food in the fridge and freezer, pantry items, garden harvests and finished ferments. Fridge and pantry items count once you add them in Life > Kitchen, which is a step in the Food part of setup. Ticking a line on the list puts it in the kitchen. Logging a meal does not take anything out by itself, so the kitchen stays accurate only as long as you keep it up.',
+  'What Lifestead cannot control. A few foods have no nutrient figures, or are missing some, because no documented laboratory testing of them exists; where a figure is missing, Lifestead leaves it out rather than guessing. A product you scan is only as accurate as its label and the product database it comes from. Every amount is an estimate, since sizes and growing conditions vary.',
+];
+
 // P1: what Lifestead does by itself and what it needs from the person, one
 // short list each, shown on the Your Guide page once the questions have
 // answers. Every line is something the app does today.

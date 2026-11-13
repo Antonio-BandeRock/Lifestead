@@ -65,7 +65,7 @@ export const REQUIRED_ORDER = ['aboutYou', 'conditions', 'stage', 'meds', 'aller
 // one makes the next more useful (the order Tony approved, 2026-11-02).
 export const SECTION_CARDS: Record<BeatKey, string[]> = {
   health: ['doseTimes', 'emergency', 'appointment', 'checkin', 'flare', 'labs'],
-  food: ['safeFoods', 'meal', 'water', 'mealPlan', 'groceryList', 'savedRecipe', 'fermentation', 'scannedProduct'],
+  food: ['safeFoods', 'meal', 'water', 'mealPlan', 'kitchen', 'groceryList', 'savedRecipe', 'fermentation', 'scannedProduct'],
   movement: ['exercise', 'weight', 'bloodPressure'],
   routines: ['routine', 'didIDoIt', 'capture', 'todo', 'daysUntil'],
   home: ['upkeep', 'kitchen'],

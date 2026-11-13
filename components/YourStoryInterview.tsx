@@ -58,6 +58,8 @@ import {
   CUISINES_LINE,
   DONE_LABEL,
   EATING_STYLES,
+  EATING_NOTE,
+  EATING_NOTE_HEADING,
   FREE_BEFORE_SETUP,
   FREE_BEFORE_SETUP_HEADING,
   FULL_HOME_LABEL,
@@ -629,6 +631,21 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
     );
   }
 
+  // How the meal plan, the grocery list and the kitchen fit together, and
+  // what the app cannot control, under the way-of-eating question in setup.
+  function renderEatingNote() {
+    return (
+      <View style={styles.eatingNote}>
+        <Text style={styles.subheading}>{EATING_NOTE_HEADING}</Text>
+        {EATING_NOTE.map((paragraph) => (
+          <Text key={paragraph} style={styles.caption}>
+            {paragraph}
+          </Text>
+        ))}
+      </View>
+    );
+  }
+
   function renderOpen(question: InterviewQuestionView, bandStyle: ViewStyle = styles.bandOpen) {
     return (
       <View style={[styles.band, bandStyle]}>
@@ -636,6 +653,7 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
         <Text style={styles.question}>{question.question}</Text>
         <Text style={styles.why}>{question.def.why}</Text>
         {renderChoices(question)}
+        {mode === 'setup' && question.def.kind === 'eatingStyle' ? renderEatingNote() : null}
         {mode !== 'setup' && holding === question.key && question.answered ? (
           <View style={styles.links}>{link('Close', () => setHolding(null), true)}</View>
         ) : null}
@@ -757,6 +775,13 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
+    backgroundColor: colors.surface,
+  },
+  eatingNote: {
+    gap: 6,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: colors.border,
     backgroundColor: colors.surface,
   },
   // The quick access menu's panel and wells (components/QuickAccessButton.tsx),
