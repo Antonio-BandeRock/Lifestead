@@ -239,7 +239,22 @@ export function sectionQuestions(interview: InterviewView, beat: BeatKey): Inter
 // being gone: show what was kept, "that way the user sees their progress,
 // too." The question being answered right now is left out, since it is on
 // the screen already.
+//
+// EVERY ANSWER, NOT ONLY THE REQUIRED ONES, 1.0.88.7. Reported 2026-11-13:
+// "Already on record doesn't seem to be collecting everything selected."
+// It listed only what Health or Food needs, and only when one of them was
+// chosen, so the parts chosen, autism, ADHD or dyslexia, the backup, how
+// records are kept closed and how much Home shows never appeared, and a
+// condition answered with Garden chosen did not either. Now every setup
+// question with an answer is listed, in the order setup asks them: the
+// parts, then the required questions, then the last ones. The start tab is
+// left out, since setup sets it from the first part chosen.
 const ON_RECORD_NAMES: Record<string, string> = {
+  beats: 'Parts of life to follow',
+  neuro: 'Autism, ADHD or dyslexia',
+  backup: 'Backup',
+  security: 'How records are kept closed',
+  homeView: 'How much Home shows',
   aboutYou: 'Birth date and sex',
   conditions: 'Conditions',
   meds: 'Medicines and supplements',
@@ -250,6 +265,11 @@ const ON_RECORD_NAMES: Record<string, string> = {
 const profileCard = (section: string): StoryDestination => ({ kind: 'route', pathname: '/profile', params: { section } });
 
 const ON_RECORD_PLACES: Record<string, StoryDestination> = {
+  beats: { kind: 'beats' },
+  neuro: profileCard('conditions'),
+  backup: profileCard('backup'),
+  security: profileCard('applock'),
+  homeView: profileCard('simple-view'),
   aboutYou: profileCard('personal-info'),
   conditions: profileCard('conditions'),
   stage: profileCard('conditions'),
@@ -268,11 +288,11 @@ export type OnRecordRow = {
   destination: StoryDestination;
 };
 
+export const ON_RECORD_ORDER = ['beats', ...REQUIRED_ORDER, ...CLOSING_QUESTIONS];
+
 export function requiredOnRecord(interview: InterviewView, showingKey: string | null = null): OnRecordRow[] {
-  const needed = new Set(interview.facts.story.beats.flatMap((beat) => SECTION_QUESTIONS[beat] ?? []));
   const out: OnRecordRow[] = [];
-  for (const kind of REQUIRED_ORDER) {
-    if (!needed.has(kind)) continue;
+  for (const kind of ON_RECORD_ORDER) {
     for (const question of interview.questions) {
       if (!question.answered || question.def.kind !== kind || question.key === showingKey) continue;
       const name = kind === 'stage' ? `Healing stage for ${question.condition?.label ?? 'a condition'}` : ON_RECORD_NAMES[kind] ?? kind;
@@ -342,7 +362,7 @@ export const SECTION_BACK_LABEL = 'Back to the list';
 export const SECTION_QUESTION_FIRST = 'Answer the question above first, or tap Later on it.';
 export const CLOSING_HEADING = 'A few last questions';
 export const ON_RECORD_HEADING = 'Already on record';
-export const ON_RECORD_LEAD = 'Kept from before, so these are not asked again. Tap one to change it where it is kept.';
+export const ON_RECORD_LEAD = 'Everything answered so far, so nothing is asked twice. Tap one to change it where it is kept.';
 export const REQUIRED_HEADING = 'First, what the app needs to know';
 export const REQUIRED_LEAD =
   'The parts you chose read these answers, so they come before any of them, one at a time. When they are done, you choose which part to set up first.';

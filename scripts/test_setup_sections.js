@@ -132,12 +132,14 @@ check(healthQuestions.map((q) => q.key).join() === 'aboutYou,stage:HASH,meds', `
   });
   mixed.questions.find((q) => q.key === 'stage:HASH').condition = { code: 'HASH', label: "Hashimoto's" };
   const rows = sections.requiredOnRecord(mixed);
-  check(rows.map((r) => r.key).join() === 'aboutYou,stage:HASH,meds,allergies', `on record in the order asked, unanswered and last questions left out (got ${rows.map((r) => r.key).join()})`);
+  check(rows.map((r) => r.key).join() === 'aboutYou,stage:HASH,meds,allergies,backup', `every answer on record in the order asked, unanswered left out (got ${rows.map((r) => r.key).join()})`);
   check(rows[0].name === 'Birth date and sex' && rows[0].destination.params.section === 'personal-info', 'birth date and sex open Personal Info');
   check(rows[1].condition === "Hashimoto's" && rows[1].name === "Healing stage for Hashimoto's", 'a stage names its condition');
   check(rows.every((r) => r.destination && r.destination.kind === 'route'), 'every kept answer opens where it is changed');
   check(!sections.requiredOnRecord(mixed, 'meds').some((r) => r.key === 'meds'), 'the question on the screen is not listed twice');
-  check(sections.requiredOnRecord(interview({ picked: ['garden'], questions: [['aboutYou', true]] })).length === 0, 'only what a chosen part needs is listed');
+  const gardenOnly = sections.requiredOnRecord(interview({ picked: ['garden'], questions: [['conditions', true], ['neuro', true], ['homeView', true], ['security', true], ['startTab', true]] })).map((r) => r.key).join();
+  check(gardenOnly === 'conditions,neuro,security,homeView', `answers are listed whatever parts were chosen, start tab left out (got ${gardenOnly})`);
+  for (const kind of sections.ON_RECORD_ORDER) check(!!sections.requiredOnRecord(interview({ picked: ['garden'], questions: [[kind === 'stage' ? 'stage:HASH' : kind, true]] }))[0]?.destination, `${kind} on record has a place to change it`);
   for (const kind of sections.REQUIRED_ORDER) check(!!sections.requiredOnRecord(interview({ picked: ['food'], questions: [[kind === 'stage' ? 'stage:HASH' : kind, true]] }))[0]?.destination, `${kind} has a place to change it`);
 }
 

@@ -585,8 +585,9 @@ export function FirstSetup() {
   }
 
   // What is already answered, so a question left out reads as kept rather
-  // than gone. On the required step and on the list of parts, since when
-  // everything was on record the required step never shows.
+  // than gone. On the required step, the list of parts and the last
+  // questions, since when everything was on record the required step never
+  // shows.
   function renderOnRecord() {
     if (!interview) return null;
     const rows = requiredOnRecord(interview, shownQuestion);
@@ -604,7 +605,7 @@ export function FirstSetup() {
               style={styles.part}
               accessibilityRole="button"
               accessibilityLabel={row.summary ? `${name}. ${row.summary}` : name}
-              onPress={() => goElsewhere(row.destination)}
+              onPress={() => (row.destination.kind === 'beats' ? setChangingParts(true) : goElsewhere(row.destination))}
             >
               <Ionicons name="checkmark-circle" size={22} color={colors.statusGreenOnSurface} style={textShadow} />
               <View style={styles.partText}>
@@ -640,6 +641,7 @@ export function FirstSetup() {
           <Text style={styles.heading}>{CLOSING_HEADING}</Text>
         </View>
         {renderQuestion()}
+        {renderOnRecord()}
       </>
     );
   }

@@ -134,4 +134,10 @@ export const PART: Readonly<Record<string, string>> = {
   "Tap Replace beside a dish, or Add a dish to put another on the plate.": "Toca Reemplazar junto a un platillo, o Agregar un platillo para poner otro en el plato.",
   "Pick the kind of dish, then one of yours or one of the Lifestead recipes.": "Elige el tipo de platillo, y luego uno de los tuyos o una de las recetas de Lifestead.",
   "Only this one meal changes, on whichever day it is. The grocery list follows the new dishes. To use a recipe with different ingredients, build your own version of it on Food first, and it is listed under Yours.": "Solo cambia esta comida, el día que sea. La lista del súper sigue los platillos nuevos. Para usar una receta con otros ingredientes, primero arma tu versión en Comida, y aparece en Tuyo.",
+  "Parts of life to follow": "Partes de tu vida a seguir",
+  "Autism, ADHD or dyslexia": "Autismo, TDAH o dislexia",
+  "Backup": "Respaldo",
+  "How records are kept closed": "Cómo se mantienen cerrados tus registros",
+  "How much Home shows": "Cuánto muestra Inicio",
+  "Everything answered so far, so nothing is asked twice. Tap one to change it where it is kept.": "Todo lo que has contestado hasta ahora, para no preguntarte nada dos veces. Toca uno para cambiarlo donde se guarda.",
 };
