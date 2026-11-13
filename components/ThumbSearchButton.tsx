@@ -39,6 +39,7 @@ export function ThumbSearchButton() {
     <EdgeTab
       side={hand}
       bottom={footerHeight + aboveFooter}
+      hubKey="search"
       onPress={() => {
         openThumbSearch();
       }}

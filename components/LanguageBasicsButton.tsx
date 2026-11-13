@@ -43,8 +43,7 @@ import { useLanguage } from '../lib/language';
 import { getNavigationHand, useNavigationHand } from '../lib/navigationHand';
 import { getVisualPreferences, isHomeSectionVisible, isShownOnHome, modalAnimationType, setVisualPreferences } from '../lib/visualPreferences';
 import { sortByLabel } from '../lib/choiceOrder';
-import { registerHubSpot } from '../lib/hubHandoff';
-import { EDGE_TAB_HEIGHT, EDGE_TAB_WIDTH, EdgeTab } from './EdgeTab';
+import { EDGE_TAB_HEIGHT, EdgeTab } from './EdgeTab';
 import { VOICE_CONTROL_ABOVE_FOOTER } from './VoiceControlButton';
 import { EdgeTabMenu, type EdgeMenuChoice } from './EdgeTabMenu';
 import { LanguageBasicsList, loadLanguageSetsOnHome, type LanguageSetOnHome } from './LanguageBasicsHomeCard';
@@ -113,7 +112,7 @@ export function LanguageBasicsButton() {
   const [open, setOpen] = useState(false);
   const [sets, setSets] = useState<LanguageSetOnHome[] | null>(null);
 
-  const { fontScale, width: windowWidth, height: windowHeight } = useWindowDimensions();
+  const { fontScale, height: windowHeight } = useWindowDimensions();
   const side = hand;
   const bottom = footerHeight + ABOVE_FOOTER;
   const menuBottom = bottom + EDGE_TAB_HEIGHT + 6;
@@ -121,13 +120,8 @@ export function LanguageBasicsButton() {
   const closeMenu = useCallback(() => setMenuOpen(false), []);
   const shown = prefs.studyButton !== false;
 
-  // A change of mind goes straight to another hub's menu (lib/hubHandoff.ts),
-  // the way the quick-access tab does it.
-  const tabLeft = side === 'right' ? windowWidth - EDGE_TAB_WIDTH : 0;
-  useEffect(() => {
-    if (!shown) return undefined;
-    return registerHubSpot({ key: 'study', left: tabLeft, bottom, width: EDGE_TAB_WIDTH, height: EDGE_TAB_HEIGHT, open: () => setMenuOpen(true) });
-  }, [shown, tabLeft, bottom]);
+  // A change of mind goes straight to another hub's menu (lib/hubHandoff.ts):
+  // the EdgeTab below registers this tab as 'study', opening the menu.
   const { left, width } = useHubMenuCardSpan();
   const sheetBottom = useMenuCardBottom();
   const fit = useMenuCardFit(cardHeightFor(fontScale), 200);
@@ -174,6 +168,8 @@ export function LanguageBasicsButton() {
       <EdgeTab
         side={side}
         bottom={bottom}
+        hubKey="study"
+        hubOpen={() => setMenuOpen(true)}
         onPress={() => setMenuOpen((was) => !was)}
         hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}
         accessibilityRole="button"

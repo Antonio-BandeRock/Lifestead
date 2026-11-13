@@ -27,6 +27,7 @@ export function VoiceControlButton() {
     <EdgeTab
       side={hand}
       bottom={footerHeight + VOICE_CONTROL_ABOVE_FOOTER}
+      hubKey="voice"
       onPress={() => openQuickAccessSheet('voiceCommand')}
       hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}
       accessibilityRole="button"

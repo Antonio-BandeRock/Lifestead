@@ -10,6 +10,7 @@ import { Platform, Pressable, type ViewStyle } from 'react-native';
 import {
   getHubSpots,
   handoffTiming,
+  hubSpotBox,
   otherHubSpots,
   registerHubSpot,
   subscribeHubSpots,
@@ -17,7 +18,7 @@ import {
   type HubSpot,
 } from '../lib/hubHandoff';
 
-export type HubButtonBox = Pick<HubSpot, 'left' | 'bottom' | 'width' | 'height'>;
+export type HubButtonBox = { left: number; bottom: number; width: number; height: number };
 
 export type HubHandoff = {
   /** Rendered inside the hub's Modal, right after its backdrop Pressable and before its card. */
@@ -80,13 +81,7 @@ export function useHubHandoff(key: HubKey, box: HubButtonBox | null, open: () =>
   const targets = useMemo(
     () =>
       others.map((spot) => {
-        const style: ViewStyle = {
-          position: 'absolute',
-          left: spot.left,
-          bottom: spot.bottom,
-          width: spot.width,
-          height: spot.height,
-        };
+        const style: ViewStyle = { position: 'absolute', ...hubSpotBox(spot) };
         return (
           <Pressable
             key={spot.key}
@@ -111,4 +106,34 @@ export const HANDOFF_LABELS: Record<HubKey, string> = {
   myItems: 'Switch to your saved items',
   quick: 'Switch to the quick-access menu',
   study: 'Switch to the flash cards and reading menu',
+  hand: 'Close this menu and show the navigation switch',
+  voice: 'Close this menu and open Voice Control',
+  search: 'Close this menu and search near my thumb',
+  updates: 'Close this menu and check for updates',
 };
+
+/**
+ * The stand-ins for a menu that is not a Modal (the edge tab menus, the
+ * navigation switch's note): one Pressable over every other registered
+ * button, each closing this menu and then doing what that button does.
+ * Rendered right after the menu's backdrop, so they sit over it.
+ */
+export function HubStandIns({ selfKey, close }: { selfKey: HubKey; close: () => void }) {
+  const all = useSyncExternalStore(subscribeHubSpots, getHubSpots, getHubSpots);
+  return (
+    <>
+      {otherHubSpots(all, selfKey).map((spot) => (
+        <Pressable
+          key={spot.key}
+          style={{ position: 'absolute', ...hubSpotBox(spot) }}
+          onPress={() => {
+            close();
+            spot.open();
+          }}
+          accessibilityRole="button"
+          accessibilityLabel={HANDOFF_LABELS[spot.key]}
+        />
+      ))}
+    </>
+  );
+}

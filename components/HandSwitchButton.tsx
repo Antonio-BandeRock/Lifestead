@@ -27,6 +27,7 @@ import { textShadow, typography } from '../constants/typography';
 import { farSide, setNavigationHand, useNavigationHand, type NavigationHand } from '../lib/navigationHand';
 import { useConfirmSheet } from './ConfirmSheet';
 import { EDGE_TAB_HEIGHT, EdgeTab } from './EdgeTab';
+import { HubStandIns } from './HubHandoff';
 
 const GAP_ABOVE_FOOTER = 8;
 const FLYOUT_SHOWN_MS = 6000;
@@ -85,8 +86,12 @@ export function HandSwitchButton() {
   return (
     <>
       {flyout ? (
-        <Pressable style={StyleSheet.absoluteFill} onPress={hideFlyout} accessible={false}>
+        <View style={StyleSheet.absoluteFill} pointerEvents="box-none">
+        <Pressable style={StyleSheet.absoluteFill} onPress={hideFlyout} accessible={false} />
+        {/* The other buttons stay reachable while the note is up (lib/hubHandoff.ts). */}
+        <HubStandIns selfKey="hand" close={hideFlyout} />
           <View
+            pointerEvents="none"
             style={[
               styles.flyout,
               { bottom: bottom + EDGE_TAB_HEIGHT + 8 },
@@ -99,11 +104,12 @@ export function HandSwitchButton() {
               {handName(side)}.
             </Text>
           </View>
-        </Pressable>
+        </View>
       ) : null}
       <EdgeTab
         side={side}
         bottom={bottom}
+        hubKey="hand"
         onPress={showFlyout}
         onLongPress={() => void askToSwitch()}
         delayLongPress={450}

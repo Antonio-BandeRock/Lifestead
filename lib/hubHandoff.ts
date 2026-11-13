@@ -44,18 +44,35 @@
 // root rather than on a screen, so it registers whenever it is mounted.
 // 'study' is the flash cards and reading tab on the far side (components/
 // LanguageBasicsButton.tsx), since 2026-11-12, registered the same way.
-export type HubKey = 'tab' | 'lens' | 'myItems' | 'quick' | 'study';
+//
+// 2026-11-13, direct request: "Just like the TabHub menu, and the LensHub
+// menu buttons, make it so all of the small quick access menu icons are
+// always active to be selected while other menus have focus. Same for the
+// Updates button in the top right corner." So every edge tab registers here
+// too, through components/EdgeTab.tsx itself ('hand', 'voice', 'search'), and
+// so does the header's Updates button ('updates'), which is measured from
+// the top of the window rather than the bottom. Their `open` is what a tap
+// on the button does.
+export type HubKey = 'tab' | 'lens' | 'myItems' | 'quick' | 'study' | 'hand' | 'voice' | 'search' | 'updates';
 
-export type HubSpot = {
+type HubSpotBase = {
   key: HubKey;
   /** The button's box in window coordinates, the way the button itself is positioned. */
   left: number;
-  bottom: number;
   width: number;
   height: number;
-  /** Opens that hub's menu the way its own button would (resets included). */
+  /** Opens that hub's menu the way its own button would (resets included), or does what a tap on the button does. */
   open: () => void;
 };
+
+/** A button placed from the bottom of the window, or (the header's Updates button) from the top. */
+export type HubSpot = HubSpotBase & ({ bottom: number; top?: undefined } | { top: number; bottom?: undefined });
+
+/** The stand-in's box, placed the way the button it stands for is placed. */
+export function hubSpotBox(spot: HubSpot): { left: number; width: number; height: number; top?: number; bottom?: number } {
+  const box = { left: spot.left, width: spot.width, height: spot.height };
+  return spot.top !== undefined ? { ...box, top: spot.top } : { ...box, bottom: spot.bottom };
+}
 
 const spots = new Map<HubKey, HubSpot>();
 let snapshot: readonly HubSpot[] = [];

@@ -118,6 +118,25 @@ check('everything removed', hub.getHubSpots(), []);
 unsubscribe();
 hub.registerHubSpot(spot('tab', 200));
 check('an unsubscribed listener hears nothing more', events, 9);
+
+// 2026-11-13: the edge tabs and the header's Updates button are spots too, so
+// every menu carries a stand-in for each. A bottom spot keeps its bottom; the
+// Updates button is placed from the top and its stand-in is too.
+check('a bottom spot is placed from the bottom', hub.hubSpotBox(spot('voice', 0)), { left: 0, width: 60, height: 60, bottom: 100 });
+check(
+  'the Updates button is placed from the top',
+  hub.hubSpotBox({ key: 'updates', left: 300, top: 24, width: 60, height: 60, open: () => {} }),
+  { left: 300, width: 60, height: 60, top: 24 },
+);
+hub.registerHubSpot(spot('quick', 0));
+hub.registerHubSpot(spot('hand', 340));
+hub.registerHubSpot({ key: 'updates', left: 300, top: 24, width: 60, height: 60, open: () => {} });
+check(
+  'the quick-access menu stands in for every other button, the Updates button included',
+  hub.otherHubSpots(hub.getHubSpots(), 'quick').map((s) => s.key),
+  ['tab', 'hand', 'updates'],
+);
+hub.resetHubSpotsForTests();
 hub.resetHubSpotsForTests();
 
 // When the target may open.

@@ -33,7 +33,7 @@
 // about where something is located. We need a button for them to do that."
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../constants/colors';
@@ -42,9 +42,8 @@ import { useVisualPreferences } from '../hooks/useVisualPreferences';
 import { setVisualPreferences } from '../lib/visualPreferences';
 import { sortByLabel } from '../lib/choiceOrder';
 import { useNavigationHand } from '../lib/navigationHand';
-import { registerHubSpot } from '../lib/hubHandoff';
 import { openQuickAccessSheet } from '../lib/quickAccess';
-import { EDGE_TAB_HEIGHT, EDGE_TAB_WIDTH, EdgeTab } from './EdgeTab';
+import { EDGE_TAB_HEIGHT, EdgeTab } from './EdgeTab';
 import { EdgeTabMenu, type EdgeMenuChoice } from './EdgeTabMenu';
 
 const GAP_ABOVE_FOOTER = 8;
@@ -54,7 +53,7 @@ export function QuickAccessButton() {
   const footerHeight = useFooterBandHeight();
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
+  const { height: windowHeight } = useWindowDimensions();
   const prefs = useVisualPreferences();
   const [open, setOpen] = useState(false);
   const bottom = footerHeight + GAP_ABOVE_FOOTER;
@@ -67,13 +66,7 @@ export function QuickAccessButton() {
   // shows that menu and this one goes away. Both directions run through
   // lib/hubHandoff.ts: this button registers where it is, so the hubs' own
   // menus carry a stand-in for it, and this menu carries a stand-in for each
-  // of theirs over its backdrop.
-  const tabLeft = hand === 'right' ? windowWidth - EDGE_TAB_WIDTH : 0;
-  useEffect(
-    () =>
-      registerHubSpot({ key: 'quick', left: tabLeft, bottom, width: EDGE_TAB_WIDTH, height: EDGE_TAB_HEIGHT, open: () => setOpen(true) }),
-    [tabLeft, bottom],
-  );
+  // of theirs over its backdrop. The EdgeTab below does the registering.
   const close = useCallback(() => setOpen(false), []);
 
   // Alphabetical, top to bottom as drawn.
@@ -126,6 +119,8 @@ export function QuickAccessButton() {
       <EdgeTab
         side={hand}
         bottom={bottom}
+        hubKey="quick"
+        hubOpen={() => setOpen(true)}
         onPress={() => setOpen((was) => !was)}
         hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}
         accessibilityRole="button"

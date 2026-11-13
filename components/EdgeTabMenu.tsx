@@ -6,16 +6,17 @@
 // it. A menu with more than one group puts each group's name on the panel
 // above its wells.
 //
-// While it is open, every other hub button carries a stand-in over the
-// backdrop (lib/hubHandoff.ts), so a change of mind goes straight to that
-// menu and this one goes away.
+// While it is open, every other hub button, every other edge tab and the
+// header's Updates button carry a stand-in over the backdrop
+// (lib/hubHandoff.ts), so a change of mind goes straight there and this menu
+// goes away.
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useSyncExternalStore, type ComponentProps, type ReactNode } from 'react';
+import { useEffect, type ComponentProps, type ReactNode } from 'react';
 import { BackHandler, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../constants/colors';
 import { textShadow, typography } from '../constants/typography';
-import { getHubSpots, otherHubSpots, subscribeHubSpots, type HubKey } from '../lib/hubHandoff';
-import { HANDOFF_LABELS } from './HubHandoff';
+import { type HubKey } from '../lib/hubHandoff';
+import { HubStandIns } from './HubHandoff';
 
 export const EDGE_MENU_WIDTH = 250;
 
@@ -44,9 +45,6 @@ export function EdgeTabMenu({
   groups: EdgeMenuGroup[];
   onClose: () => void;
 }) {
-  const allHubs = useSyncExternalStore(subscribeHubSpots, getHubSpots, getHubSpots);
-  const otherHubs = otherHubSpots(allHubs, hubKey);
-
   useEffect(() => {
     const subscription = BackHandler.addEventListener('hardwareBackPress', () => {
       onClose();
@@ -65,15 +63,7 @@ export function EdgeTabMenu({
   return (
     <View style={StyleSheet.absoluteFill} pointerEvents="box-none">
       <Pressable style={StyleSheet.absoluteFill} onPress={onClose} accessible={false} />
-      {otherHubs.map((spot) => (
-        <Pressable
-          key={spot.key}
-          style={{ position: 'absolute', left: spot.left, bottom: spot.bottom, width: spot.width, height: spot.height }}
-          onPress={() => pick(spot.open)}
-          accessibilityRole="button"
-          accessibilityLabel={HANDOFF_LABELS[spot.key]}
-        />
-      ))}
+      <HubStandIns selfKey={hubKey} close={onClose} />
       <View style={[styles.panel, menuSide, { bottom, maxHeight }]}>
         <ScrollView contentContainerStyle={styles.list} bounces={false}>
           {groups.map((group, index) => (

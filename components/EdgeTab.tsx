@@ -12,9 +12,16 @@
 // EDGE_TAB_MARGIN outside the well all the way round. The well carries the
 // ground theme's buttonColor quietly, the same way TabHub's button does,
 // since neither tab belongs to one tab colour.
-import { type ReactNode } from 'react';
-import { Pressable, StyleSheet, type PressableProps } from 'react-native';
+//
+// Every edge tab registers its spot with lib/hubHandoff.ts under its
+// `hubKey` (2026-11-13), so while any menu is open a tap on this tab still
+// lands: the menu closes and the tab does what it does. `hubOpen` is what
+// that tap does when it differs from onPress (a tab whose own tap toggles
+// its menu wants a stand-in that only opens it).
+import { useEffect, useRef, type ReactNode } from 'react';
+import { Pressable, StyleSheet, useWindowDimensions, type GestureResponderEvent, type PressableProps } from 'react-native';
 import { colors } from '../constants/colors';
+import { registerHubSpot, type HubKey } from '../lib/hubHandoff';
 import { ActiveRingCircle } from './ActiveRingCircle';
 
 export const EDGE_TAB_WELL = 32;
@@ -30,13 +37,29 @@ const EDGE_TAB_WELL_RIM_OPACITY = 0.45;
 export function EdgeTab({
   side,
   bottom,
+  hubKey,
+  hubOpen,
   children,
   ...pressableProps
 }: {
   side: 'left' | 'right';
   bottom: number;
+  hubKey: HubKey;
+  hubOpen?: () => void;
   children: ReactNode;
 } & Omit<PressableProps, 'style' | 'children'>) {
+  const { width: windowWidth } = useWindowDimensions();
+  const left = side === 'right' ? windowWidth - EDGE_TAB_WIDTH : 0;
+  // The registered function stays the same across renders and reads the
+  // latest tap through a ref, since onPress is usually a fresh closure.
+  const onPress = pressableProps.onPress;
+  const openRef = useRef<() => void>(() => {});
+  openRef.current = hubOpen ?? (() => onPress?.({} as GestureResponderEvent));
+  useEffect(
+    () =>
+      registerHubSpot({ key: hubKey, left, bottom, width: EDGE_TAB_WIDTH, height: EDGE_TAB_HEIGHT, open: () => openRef.current() }),
+    [hubKey, left, bottom],
+  );
   return (
     <Pressable
       {...pressableProps}

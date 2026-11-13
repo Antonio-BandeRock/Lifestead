@@ -1,4 +1,7 @@
+import { useIsFocused } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
+import { useEffect, useRef } from 'react';
+import { registerHubSpot } from '../lib/hubHandoff';
 import { Image, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { Text as SvgText } from 'react-native-svg';
@@ -16,6 +19,7 @@ import { useWalkMark } from './WalkMark';
 const UPDATE_BUTTON_SIZE = 44;
 const UPDATE_ICON_SIZE = 26;
 const UPDATE_RIGHT_INSET = 12;
+const UPDATE_HIT_SLOP = 8;
 
 // The gap kept at the row's right end, so the word's canvas never runs to
 // the true screen edge.
@@ -50,6 +54,8 @@ const LOGO = require('../assets/branding/lifestead-window.png');
 // on the dark header; 36 since 1.0.66.5 by direct instruction, about the
 // height of the word's tall letters.
 const HEADER_LOGO_SIZE = 36;
+// The bar is a centred row, so it is as tall as its tallest child.
+const HEADER_BAR_HEIGHT = Math.max(HEADER_LOGO_SIZE, HEADER_TEXT_HEIGHT, UPDATE_BUTTON_SIZE);
 const HEADER_LOGO_TEXT_GAP = 8;
 // An eighth of an inch. A dp is 1/160 of an inch, so 20 dp.
 const HEADER_LEFT_INSET = 20;
@@ -104,6 +110,28 @@ export function ScreenHeader() {
   const insets = useSafeAreaInsets();
   const { width: windowWidth } = useWindowDimensions();
   const walkMark = useWalkMark();
+  const focused = useIsFocused();
+
+  // The Updates button stays reachable while any menu is open (2026-11-13,
+  // lib/hubHandoff.ts): its spot, hitSlop included, is measured from the top
+  // of the window, where the bar centres it under the status bar.
+  const openUpdatesRef = useRef(() => {});
+  openUpdatesRef.current = () =>
+    router.push({ pathname: '/profile', params: { section: 'updates', install: '1', at: String(Date.now()) } });
+  const updateTop = insets.top + (HEADER_BAR_HEIGHT - UPDATE_BUTTON_SIZE) / 2 - UPDATE_HIT_SLOP;
+  const updateLeft = windowWidth - UPDATE_RIGHT_INSET - UPDATE_BUTTON_SIZE - UPDATE_HIT_SLOP;
+  useEffect(() => {
+    if (!focused) return undefined;
+    return registerHubSpot({
+      key: 'updates',
+      left: updateLeft,
+      top: updateTop,
+      width: UPDATE_BUTTON_SIZE + UPDATE_HIT_SLOP * 2,
+      height: UPDATE_BUTTON_SIZE + UPDATE_HIT_SLOP * 2,
+      open: () => openUpdatesRef.current(),
+    });
+  }, [focused, updateLeft, updateTop]);
+
   const textAreaWidth = Math.max(
     120,
     windowWidth -
@@ -158,11 +186,9 @@ export function ScreenHeader() {
             ref={walkMark.ref('header.checkUpdates')}
             accessibilityRole="button"
             accessibilityLabel="Check for updates"
-            hitSlop={8}
+            hitSlop={UPDATE_HIT_SLOP}
             style={styles.updateButton}
-            onPress={() =>
-              router.push({ pathname: '/profile', params: { section: 'updates', install: '1', at: String(Date.now()) } })
-            }
+            onPress={() => openUpdatesRef.current()}
           >
             <Ionicons name="cloud-download-outline" size={UPDATE_ICON_SIZE} color={LOGO_FIGURE_WHITE} />
           </Pressable>
