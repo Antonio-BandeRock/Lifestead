@@ -1,0 +1,9 @@
+{
+  // Email Worker for testers@ghostead.com: Outlook first, Gmail if Outlook
+  // refuses. Bound by the routing rule for that address, not by a route.
+  "name": "ghostead-tester-mail",
+  "main": "worker.js",
+  "compatibility_date": "2026-10-01",
+  "account_id": "50e842969c7475bddfb22aca635bcbe8",
+  "workers_dev": false
+}

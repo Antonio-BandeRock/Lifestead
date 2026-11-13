@@ -232,6 +232,7 @@ import {
   toggleTag,
   type PlanDiet,
 } from '../../lib/mealPlanDiet';
+import { loadMealPlanDraft, saveMealPlanDraft } from '../../lib/mealPlanDraft';
 import {
   createDeviceCalendarEvent,
   deleteDeviceCalendarEvent,
@@ -4043,6 +4044,45 @@ function DailyMealPlanLens() {
   // every day held is shown, frozen, until the person lets it go.
   const [formerPlans, setFormerPlans] = useState<{ id: string; name: string; endedAt: string; plan: PartnerMealPlanNamed }[]>([]);
   const [formerTick, setFormerTick] = useState(0);
+
+  // The plan on screen is saved as a record (lib/mealPlanDraft.ts), so an
+  // update, a restart or the phone closing the app never loses it. Read once
+  // when the screen first opens; nothing is saved until that read is done, so
+  // an empty screen never overwrites a kept plan.
+  const draftLoadedRef = useRef(false);
+  // The plan as read back, so showing it is not written straight back again.
+  const draftReadRef = useRef<unknown>(null);
+  useEffect(() => {
+    let cancelled = false;
+    loadMealPlanDraft()
+      .then((draft) => {
+        if (cancelled || !draft) return;
+        setGeneratedStart(draft.generatedStart);
+        setPlannedOpenRules(draft.plannedOpenRules);
+        setScheduleDate(draft.scheduleDate);
+        setPlanningScope(draft.planningScope);
+        setPlanHousehold(draft.planHousehold);
+        setPlannedDiet(draft.plannedDiet);
+        draftReadRef.current = draft.plans;
+        setPlans((current) => (current.length > 0 ? current : draft.plans));
+      })
+      .catch((error) => console.error('[MealPlan] Failed to read the kept plan', error))
+      .finally(() => {
+        if (!cancelled) draftLoadedRef.current = true;
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  useEffect(() => {
+    if (!draftLoadedRef.current || plans.length === 0 || plans === draftReadRef.current) return;
+    saveMealPlanDraft({ generatedStart, scheduleDate, plannedOpenRules, planningScope, planHousehold, plannedDiet, plans }).catch((error) =>
+      console.error('[MealPlan] Failed to keep the plan', error),
+    );
+    // Saved when the plan itself changes; the start date field alone is
+    // saved with the next change to the plan.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [plans]);
 
   useFocusEffect(
     useCallback(() => {
