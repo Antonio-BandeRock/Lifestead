@@ -70,7 +70,7 @@ export const BEAT_CAPTIONS: Record<BeatKey, string> = {
   interests: 'Hobbies, things you follow, projects',
 };
 
-export const BEATS_QUESTION = 'What parts of your life do you want Lifestead to follow?';
+export const BEATS_QUESTION = 'What areas of your life do you want Lifestead to follow?';
 export const BEATS_NOTE =
   'This only shapes this guide. Every part of the app stays open to you whatever you choose, and you can change it any time.';
 
@@ -119,7 +119,7 @@ export type SectionDef = {
 };
 
 export const SECTIONS: SectionDef[] = [
-  { key: 'frontPage', name: 'What Matters to You', caption: 'The parts of your life to follow, and about you', alwaysShown: true },
+  { key: 'frontPage', name: 'What Matters to You', caption: 'The areas of your life to follow, and about you', alwaysShown: true },
   { key: 'archive', name: 'Keeping Your Records Safe', caption: 'A backup, and your other devices', alwaysShown: true },
   { key: 'onTheRecord', name: 'What You Take', caption: 'Medicines and supplements, written down once', alwaysShown: false },
   { key: 'calendar', name: 'What Your Days Hold', caption: 'Notes, routines, tasks and days to count down', alwaysShown: false },
@@ -135,7 +135,7 @@ export const SECTIONS: SectionDef[] = [
 export const FIRST_EDITION: SectionKey[] = ['frontPage', 'archive', 'onTheRecord', 'calendar', 'dailyReport', 'insideStory'];
 
 export const INSIDE_STORY_EMPTY_LINE =
-  'What shows here depends on the parts of your life you choose under What Matters to You.';
+  'What shows here depends on the areas of your life you choose under What Matters to You.';
 
 // WHERE AN ITEM TAKES YOU. A route is a tab and lens; home is a card on
 // Home itself, opened in place; quickLog is one of Home's quick-log forms.
@@ -226,9 +226,9 @@ export const ITEMS: ItemDef[] = [
     section: 'frontPage',
     kind: 'needed',
     beats: [],
-    todo: 'Choose the parts of your life you want Lifestead to follow.',
-    done: 'Following your chosen parts of life.',
-    why: 'This guide is built from what you choose here, so it only asks about the parts of life you want followed. Nothing in the app is hidden by what you leave out.',
+    todo: 'Choose the areas of your life you want Lifestead to follow.',
+    done: 'Following your chosen areas of life.',
+    why: 'This guide is built from what you choose here, so it only asks about the areas of life you want followed. Nothing in the app is hidden by what you leave out.',
     destination: { kind: 'beats' },
   },
   {

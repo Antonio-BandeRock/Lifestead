@@ -180,14 +180,14 @@ export const GUIDES: GuideDef[] = [
     entries: [
       fromItem(
         'beats',
-        'Choose the parts of your life you want Lifestead to follow.',
+        'Choose the areas of your life you want Lifestead to follow.',
         'Your Guide shows a guide like this one for each part you choose, and the Home card follows along. Nothing anywhere in the app is hidden by what you leave out.',
         {
           when: 'start',
           takes: 'About a minute',
           taps: [
             'Tap Choose, just below.',
-            'Tap each part of life you want followed. You can choose as many as you like.',
+            'Tap each area of life you want followed. You can choose as many as you like.',
             'Tap Close when you have them all.',
           ],
         },
@@ -1722,7 +1722,7 @@ export function guideCardLine(key: GuideKey): string {
 
 export const GUIDES_HEADING = 'How Lifestead works for you';
 export const GUIDES_LEAD =
-  'One guide for each part of your life you chose, plus The Basics. Each one starts with what to set up first and what to do every day, then what to do when something happens, and what fills in once there are a few weeks of records. Every line takes you straight there.';
+  'One guide for each area of your life you chose, plus The Basics. Each one starts with what to set up first and what to do every day, then what to do when something happens, and what fills in once there are a few weeks of records. Every line takes you straight there.';
 export const READ_LABEL = 'Have a look';
 
 // THE TWO WAYS OF WRITING.

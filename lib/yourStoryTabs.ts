@@ -194,10 +194,10 @@ export const FIRST_LABEL = 'First:';
 export const FILLING_LABEL = 'Fills in as you log:';
 export const READY_LABEL = 'Ready.';
 export const MORE_LABEL = 'Says more once this is done:';
-export const NOTHING_NEEDED_LINE = 'Nothing needs doing first for the parts of life you chose. Open it whenever you want it.';
-export const NOT_CHOSEN_LINE = 'Not among the parts of life you chose. Open it any time.';
+export const NOTHING_NEEDED_LINE = 'Nothing needs doing first for the areas of life you chose. Open it whenever you want it.';
+export const NOT_CHOSEN_LINE = 'Not among the areas of life you chose. Open it any time.';
 export const NOTHING_CHOSEN_LINE =
-  'Choose the parts of your life above, and each tab below will say what it needs first.';
+  'Choose the areas of your life above, and each tab below will say what it needs first.';
 
 export type TabStatus = 'first' | 'filling' | 'ready' | 'notChosen' | 'waitingOnChoice';
 

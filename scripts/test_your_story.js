@@ -89,7 +89,7 @@ same(fresh.heading, story.HEADING_BEGINS, 'nothing set up begins here');
 same(sectionKeys(fresh), ['frontPage', 'archive', 'insideStory'], 'before choosing, only the front page, archive and inside story show');
 same(fresh.current, 'frontPage', 'the front page comes first');
 same(fresh.nextItem.def.key, 'beats', 'the first thing is the question');
-check(story.nextLine(fresh).startsWith('Next: Choose the parts of your life'), 'the folded line names it');
+check(story.nextLine(fresh).startsWith('Next: Choose the areas of your life'), 'the folded line names it');
 same(story.sectionSummary(fresh.sections[2]), story.INSIDE_STORY_EMPTY_LINE, 'an empty inside story says why');
 
 // Health and Food chosen, nothing else yet.
@@ -224,7 +224,7 @@ same(freshTabs.before.map((entry) => entry.def.key), ['beats', 'backup'], 'befor
 same(freshTabs.tabs.length, 9, 'every tab is listed from the start');
 check(freshTabs.tabs.every((tab) => tab.status === 'waitingOnChoice'), 'each tab waits on the question');
 same(freshTabs.startHere, null, 'nothing marked start here while the question is open');
-check(tabs.tabGuideLine(freshTabs, '').startsWith('First: Choose the parts of your life'), 'the folded line asks the question');
+check(tabs.tabGuideLine(freshTabs, '').startsWith('First: Choose the areas of your life'), 'the folded line asks the question');
 
 // Everything chosen, the question answered and backed up, nothing else.
 const everything = story.buildYourStory(

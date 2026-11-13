@@ -128,7 +128,7 @@ export const REPORT_KINDS: ReportKindDef[] = [
     label: 'Looking Back',
     icon: 'time-outline',
     title: 'Lifestead: Looking Back',
-    preface: ['How the range went across the parts of life the app follows, read from what was recorded. A stretch with nothing recorded is said as such, never as a zero.'],
+    preface: ['How the range went across the areas of life the app follows, read from what was recorded. A stretch with nothing recorded is said as such, never as a zero.'],
     help: 'The range as a whole: meals planned and eaten, doses, appointments, work weeks, reactions, nights, ferments, and what eating and the conditions cost.',
     core: [],
     extras: ['planned', 'doses', 'care', 'work', 'reactions', 'nights', 'ferments', 'variety', 'eating-cost'],

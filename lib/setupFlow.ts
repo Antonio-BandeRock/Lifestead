@@ -37,7 +37,7 @@ export type SetupPartKey = 'aboutYou' | 'looks' | 'health' | 'food' | 'safe' | '
 export type SetupPart = { key: SetupPartKey; name: string; line: string };
 
 export const SETUP_PARTS: SetupPart[] = [
-  { key: 'aboutYou', name: 'About You', line: 'What brings you here, and the parts of your life to follow.' },
+  { key: 'aboutYou', name: 'About You', line: 'What brings you here, and the areas of your life to follow.' },
   { key: 'looks', name: 'How Lifestead Looks', line: 'Where to start, and how much Home shows.' },
   { key: 'health', name: 'Your Health', line: 'What you take, and what somebody helping you would need to know.' },
   { key: 'food', name: 'Food', line: 'How you eat, and anything you cannot.' },

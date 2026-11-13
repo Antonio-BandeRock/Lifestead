@@ -250,7 +250,7 @@ export function sectionQuestions(interview: InterviewView, beat: BeatKey): Inter
 // parts, then the required questions, then the last ones. The start tab is
 // left out, since setup sets it from the first part chosen.
 const ON_RECORD_NAMES: Record<string, string> = {
-  beats: 'Parts of life to follow',
+  beats: 'Areas of life to follow',
   neuro: 'Autism, ADHD or dyslexia',
   backup: 'Backup',
   security: 'How records are kept closed',
@@ -341,7 +341,7 @@ export function setupWaiting(interview: InterviewView): boolean {
 export const PARTS_NEXT_LABEL = 'Next';
 export const PARTS_SELECT_ALL_LABEL = 'Select all';
 export const PARTS_CLEAR_ALL_LABEL = 'Clear all';
-export const PARTS_NONE_YET = 'Choose at least one part of life first. Select all is there if you want every one.';
+export const PARTS_NONE_YET = 'Choose at least one area of life first. Select all is there if you want every one.';
 export const LIST_FIRST_HEADING = 'Where would you like to start?';
 export const LIST_NEXT_HEADING = 'What would you like to set up next?';
 // What happens on tapping a part, said in full. Direct request,
@@ -350,18 +350,18 @@ export const LIST_NEXT_HEADING = 'What would you like to set up next?';
 // what they will be doing." Each open part also names its cards
 // (PART_SETS_UP).
 export const LIST_LEAD =
-  "Tapping a part opens a page for that part only. It says why the part matters, then lists a few things to set up in it, the ones named under each part below. Set It Up on one takes you to the place in the app where it lives and lights up each button to tap, and Back to Setup brings you here again. None of it has to be done now: set up as many as you like, then tap Done, or Skip if you would rather come to it later, and the next part opens by itself. Back to the list brings you here at any time, the parts you finished are dimmed, and anything skipped can be set up later with Run Setup Again in Profile.";
+  "Tapping an area opens a page for that area only. It says why the area matters, then lists a few things to set up in it, the ones named under each area below. Set It Up on one takes you to the place in the app where it lives and lights up each button to tap, and Back to Setup brings you here again. None of it has to be done now: set up as many as you like, then tap Done, or Skip if you would rather come to it later, and the next area opens by itself. Back to the list brings you here at any time, the areas you finished are dimmed, and anything skipped can be set up later with Run Setup Again in Profile.";
 export const PART_SETS_UP = 'You set up: {list}';
-export const LIST_CHANGE_PARTS_LABEL = 'Change the parts of life';
+export const LIST_CHANGE_PARTS_LABEL = 'Change the areas of life';
 export const PART_DONE_CAPTION = 'Done. Tap to look again.';
 export const PART_SKIPPED_CAPTION = 'Skipped for now. Tap to set it up.';
-export const LIST_ALL_SETTLED = 'Every part has been set up or skipped. Tap one to look at it again.';
-export const SECTION_WHY_LABEL = 'Why this part matters';
+export const LIST_ALL_SETTLED = 'Every area has been set up or skipped. Tap one to look at it again.';
+export const SECTION_WHY_LABEL = 'Why this area matters';
 export const CARD_WHY_LABEL = 'What it feeds';
 export const SECTION_CARDS_HEADING = 'Set these up';
 export const SECTION_CARDS_LEAD = 'Set It Up opens the place for it and shows each tap. Back to Setup brings you here again. Do as many as you like now.';
-export const SECTION_DONE_LABEL = 'Done with this part';
-export const SECTION_SKIP_LABEL = 'Skip this part';
+export const SECTION_DONE_LABEL = 'Done with this area';
+export const SECTION_SKIP_LABEL = 'Skip this area';
 export const SECTION_DONE_NEXT_LABEL = 'Done, on to {part}';
 export const SECTION_SKIP_NEXT_LABEL = 'Skip, on to {part}';
 export const SECTION_BACK_LABEL = 'Back to the list';
@@ -371,4 +371,4 @@ export const ON_RECORD_HEADING = 'Already on record';
 export const ON_RECORD_LEAD = 'Everything answered so far, so nothing is asked twice. Tap one to change it where it is kept.';
 export const REQUIRED_HEADING = 'First, what the app needs to know';
 export const REQUIRED_LEAD =
-  'The parts you chose read these answers, so they come before any of them, one at a time. When they are done, you choose which part to set up first.';
+  'The areas you chose read these answers, so they come before any of them, one at a time. When they are done, you choose which area to set up first.';

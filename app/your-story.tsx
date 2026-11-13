@@ -62,7 +62,7 @@ export default function YourStoryScreen() {
             <Text style={styles.heading}>{view?.heading ?? 'Your Guide'}</Text>
             <Text style={styles.lead}>
               The app asks what it needs first, then shows what each tab is for and how to get started with it. Below
-              those are the guides, one for each part of your life, and then your paper section by section. Every line
+              those are the guides, one for each area of your life, and then your paper section by section. Every line
               takes you straight there.
             </Text>
           </View>

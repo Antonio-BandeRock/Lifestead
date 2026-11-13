@@ -80,8 +80,8 @@ export const INTERVIEW_QUESTIONS: InterviewQuestionDef[] = [
   },
   {
     kind: 'beats',
-    question: 'What parts of your life do you want Lifestead to follow?',
-    why: 'The rest of these questions, and the guides after them, only ask about the parts you choose. Nothing in the app is hidden by what you leave out.',
+    question: 'What areas of your life do you want Lifestead to follow?',
+    why: 'The rest of these questions, and the guides after them, only ask about the areas you choose. Nothing in the app is hidden by what you leave out.',
     beats: [],
   },
   {
@@ -213,7 +213,7 @@ export const LATER_LABEL = 'Later';
 export const LATER_SUMMARY = 'Later. It comes first in the tour.';
 export const SETUP_HEADING = 'Setting up Lifestead';
 export const SETUP_LEAD =
-  'Choose the parts of life you want Lifestead to follow. Setup then takes you through each one in turn, and each says why it is asked for and what it feeds. Every answer can be changed later in Your Guide, or with Run Setup Again in Profile.';
+  'Choose the areas of life you want Lifestead to follow. Setup then takes you through each one in turn, and each says why it is asked for and what it feeds. Every answer can be changed later in Your Guide, or with Run Setup Again in Profile.';
 export const SETUP_BACK_LABEL = 'Back';
 export const SETUP_FINISH_LATER_LABEL = 'Finish Later';
 export const SETUP_FINISH_LATER_LINE = 'Goes on to Home now. Setup comes back the next time Lifestead opens while something is still waiting, and the same cards stay on Home.';
