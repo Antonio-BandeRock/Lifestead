@@ -31,7 +31,12 @@ export function useBringToTopHost(scrollRef: RefObject<ScrollView | null>, frame
     (header) => {
       setTimeout(() => {
         const frame = frameRef.current;
-        if (!header || !frame) return;
+        // Nothing to measure still means the view moved on: the top, rather
+        // than leaving the page scrolled past whatever replaced it.
+        if (!header || !frame) {
+          scrollRef.current?.scrollTo({ y: 0, animated: true });
+          return;
+        }
         frame.measureInWindow((_fx, frameY) => {
           header.measureInWindow((_hx, headerY) => {
             const y = Math.max(0, scrollY.current + headerY - frameY);

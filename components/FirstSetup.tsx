@@ -90,6 +90,8 @@ import {
   SECTION_CARDS_HEADING,
   SECTION_CARDS_LEAD,
   SECTION_DONE_LABEL,
+  SECTION_DONE_NEXT_LABEL,
+  SECTION_SKIP_NEXT_LABEL,
   SECTION_QUESTION_FIRST,
   SECTION_SKIP_LABEL,
   SECTION_WHY,
@@ -110,6 +112,7 @@ import { t } from '../lib/i18n';
 import { TAB_ROUTES } from '../constants/tabs';
 import {
   SETUP_AWAY_SAVED_CARD,
+  SETUP_CONTINUE_LABEL,
   SETUP_DONE_HEADING,
   SETUP_DONE_LINE,
   SETUP_FINISH_LATER_LABEL,
@@ -192,6 +195,12 @@ export function FirstSetup() {
   // The card opened from setup, so the strip can name it and say once it
   // is saved; null for anything else opened from here.
   const [awayCard, setAwayCard] = useState<SetupCardView | null>(null);
+  // The question that opened another screen (Add my medicines opens My
+  // Meds), so the strip can say Saved once its record exists and offer to
+  // carry on. 2026-11-13, direct report: after adding medicines nothing said
+  // that setup was waiting with more to come.
+  const [awayQuestion, setAwayQuestion] = useState<string | null>(null);
+  const shownQuestionRef = useRef<string | null>(null);
   const walk = useStoryWalk();
   const scroller = useRef<ScrollView>(null);
   const frame = useRef<View>(null);
@@ -201,7 +210,7 @@ export function FirstSetup() {
   const testerAccess = useTesterAccess();
   const gateOpen = !isTesterBuild() || testerDoorOpen(testerAccess);
 
-  const load = useCallback(async () => {
+  const load = useCallback(async (): Promise<InterviewView | null> => {
     try {
       const everything = await loadYourStoryEverything(false);
       const waiting = setupWaiting(everything.interview);
@@ -212,9 +221,11 @@ export function FirstSetup() {
         if (was !== 'reading') return was;
         return waiting || reviewRef.current ? 'asking' : 'closed';
       });
+      return everything.interview;
     } catch (error) {
       console.warn('Setup: could not read what is set up', error);
       setPhase('closed');
+      return null;
     }
   }, []);
 
@@ -248,23 +259,30 @@ export function FirstSetup() {
   }, [phase, load]);
 
   const goAway = useCallback(
-    (destination: StoryDestination, card: SetupCardView | null) => {
+    (destination: StoryDestination, card: SetupCardView | null, fromQuestion: string | null = null) => {
       if (destination.kind === 'beats') return;
       setAwayCard(card);
+      setAwayQuestion(fromQuestion);
       setPhase('away');
       goToStoryDestination(router, destination);
-      const guideWalk = card?.def.item ? guideWalkForItem(card.def.item) : null;
+      const item = card?.def.item ?? (fromQuestion as YourStoryItemKey | null);
+      const guideWalk = item ? guideWalkForItem(item) : null;
       if (guideWalk) startStoryWalk(guideWalk.guide, guideWalk.entryKey, !!card?.doneOn);
     },
     [router],
   );
 
   const goElsewhere = useCallback((destination: StoryDestination) => goAway(destination, null), [goAway]);
+  const goFromQuestion = useCallback(
+    (destination: StoryDestination) => goAway(destination, null, shownQuestionRef.current),
+    [goAway],
+  );
   const goCard = useCallback((card: SetupCardView) => goAway(card.def.destination, card), [goAway]);
 
   const comeBack = useCallback(() => {
     setStoryWalk(null);
     setAwayCard(null);
+    setAwayQuestion(null);
     setPhase('asking');
     void load();
   }, [load]);
@@ -323,6 +341,7 @@ export function FirstSetup() {
   const candidate = waitingQuestions.find((question) => !passed.includes(question.key)) ?? null;
   const candidateKey = candidate?.key ?? null;
   const shownQuestion = held ?? candidateKey;
+  shownQuestionRef.current = shownQuestion;
   useEffect(() => {
     if (!held && candidateKey) setHeld(candidateKey);
   }, [held, candidateKey]);
@@ -366,8 +385,15 @@ export function FirstSetup() {
         console.warn('Setup: could not keep how a part was left', error);
       }
       setHeld(null);
-      setSection(null);
-      await load();
+      // 2026-11-13, direct instruction: setup "should always continue ... to
+      // the next and the next and the next thing after that until all things
+      // have been setup from the sections of the app the user chose". So
+      // Done or Skip opens the next part still open, and only once none is
+      // left do the last questions come. Back to the list stays for choosing
+      // a different one.
+      const fresh = await load();
+      const next = fresh ? listParts(fresh).find((part) => part.state === 'open' && part.beat !== beat) : undefined;
+      setSection(next ? next.beat : null);
     },
     [load],
   );
@@ -380,7 +406,9 @@ export function FirstSetup() {
   if (!gateOpen || phase === 'reading' || phase === 'closed' || !interview) return null;
 
   if (phase === 'away') {
-    const saved = !!awayCard && !!view && !!cardDoneOn(awayCard.def, view, records);
+    const saved = awayCard
+      ? !!view && !!cardDoneOn(awayCard.def, view, records)
+      : !!awayQuestion && !!interview.questions.find((question) => question.key === awayQuestion)?.answered;
     return (
       <GuideStripAnchor slot="setup" style={styles.awayAnchor}>
         <View style={[styles.awayStrip, walking && styles.awayStripSmall]}>
@@ -391,7 +419,7 @@ export function FirstSetup() {
             {walking ? <Text style={styles.caption}>{SETUP_AWAY_CAPTION}</Text> : null}
             <TouchableOpacity style={styles.awayButton} accessibilityRole="button" onPress={comeBack}>
               <Ionicons name="arrow-back" size={16} color={colors.textOnButton} />
-              <Text style={styles.awayButtonText}>{SETUP_RETURN_LABEL}</Text>
+              <Text style={styles.awayButtonText}>{saved ? SETUP_CONTINUE_LABEL : SETUP_RETURN_LABEL}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -410,7 +438,7 @@ export function FirstSetup() {
         showKey={shownQuestion}
         onAnswered={answered}
         onChanged={() => void load()}
-        go={goElsewhere}
+        go={goFromQuestion}
       />
     );
   }
@@ -481,6 +509,9 @@ export function FirstSetup() {
         color: TAB_ROUTES.find((route) => route.path === found.tabPath)?.color ?? colors.primary,
       }));
     const cardWidth = Math.min(windowWidth - HOME_BAND_CONTENT_PADDING * 2, 480);
+    // Which part opens after this one, named on the buttons.
+    const nextPart = listParts(shown).find((part) => part.state === 'open' && part.beat !== beat) ?? null;
+    const nextName = nextPart ? t(BEAT_LABELS[nextPart.beat]) : null;
     return (
       <>
         <View style={[styles.band, styles.bandAccent]}>
@@ -531,10 +562,10 @@ export function FirstSetup() {
               }}
             >
               <Ionicons name="checkmark" size={16} color={colors.textOnButton} />
-              <Text style={styles.goText}>{SECTION_DONE_LABEL}</Text>
+              <Text style={styles.goText}>{nextName ? t(SECTION_DONE_NEXT_LABEL, { part: nextName }) : SECTION_DONE_LABEL}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.secondButton} accessibilityRole="button" onPress={() => void settlePart(beat, PART_SKIPPED)}>
-              <Text style={styles.secondText}>{SECTION_SKIP_LABEL}</Text>
+              <Text style={styles.secondText}>{nextName ? t(SECTION_SKIP_NEXT_LABEL, { part: nextName }) : SECTION_SKIP_LABEL}</Text>
             </TouchableOpacity>
           </View>
           <TouchableOpacity

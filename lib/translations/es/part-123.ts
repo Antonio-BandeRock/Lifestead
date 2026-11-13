@@ -68,5 +68,8 @@ export const PART: Readonly<Record<string, string>> = {
  "Not in this app's researched list yet, but you can still track it with the details you know. The app cannot look this up online yet.": "Todavía no está en la lista investigada de esta app, pero igual puedes registrarlo con los datos que conoces. La app todavía no puede buscar esto en internet.",
  "Generic name (optional, helps check interactions)": "Nombre genérico (opcional, ayuda a revisar interacciones)",
  "Whatever you enter in the Harvest Log on the Garden tab shows up here. When you add that food to a meal in your schedule, it comes out of what you have. Each time you log a harvest, the app asks whether to keep it on hand as one of your home-grown whole foods.": "Lo que registres en la Bitácora de cosecha de la pestaña Jardín aparece aquí. Cuando agregas ese alimento a una comida de tu calendario, se descuenta de lo que tienes. Cada vez que registras una cosecha, la app pregunta si quieres tenerla a la mano como uno de tus alimentos naturales de cosecha propia.",
- "Flashcards": "Fichas"
+ "Flashcards": "Fichas",
+ "Continue Setup": "Seguir con la configuración",
+ "Done, on to {part}": "Listo, sigue {part}",
+ "Skip, on to {part}": "Saltar, sigue {part}",
 };

@@ -675,7 +675,17 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
     ) : null;
   }
 
-  if (mode === 'setup') return open ? renderOpen(open) : null;
+  // 2026-11-13, direct report: after Done on conditions in setup the screen
+  // stayed scrolled down past the much shorter medicines question, so it
+  // looked blank. The ref the scroll above measures was only on Home's
+  // card, so in setup and on the Your Story page nothing moved. Every mode
+  // carries it now.
+  if (mode === 'setup')
+    return open ? (
+      <View ref={questionRef} collapsable={false}>
+        {renderOpen(open)}
+      </View>
+    ) : null;
 
   const answered = interview.questions.filter((question) => question.answered && question.key !== openKey);
   return (
@@ -699,7 +709,11 @@ export function YourStoryInterview({ mode, interview, onChanged, go, onQuestionS
           ))}
         </View>
       ) : null}
-      {open ? renderOpen(open) : null}
+      {open ? (
+        <View ref={questionRef} collapsable={false}>
+          {renderOpen(open)}
+        </View>
+      ) : null}
       {interview.finished && !holding ? (
         <View style={styles.band}>
           <Text style={styles.subheading}>{BY_ITSELF_HEADING}</Text>

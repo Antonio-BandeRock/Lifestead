@@ -325,7 +325,7 @@ export const PARTS_NONE_YET = 'Choose at least one part of life first. Select al
 export const LIST_FIRST_HEADING = 'Where would you like to start?';
 export const LIST_NEXT_HEADING = 'What would you like to set up next?';
 export const LIST_LEAD =
-  'Each part opens on its own, with only what belongs to it on the screen. When you tap Done with this part or Skip this part, it comes back here, and the ones you finished are dimmed.';
+  'Each part opens on its own, with only what belongs to it on the screen. When you finish or skip one, the next part opens by itself. Back to the list brings you here at any time, and the parts you finished are dimmed.';
 export const LIST_CHANGE_PARTS_LABEL = 'Change the parts of life';
 export const PART_DONE_CAPTION = 'Done. Tap to look again.';
 export const PART_SKIPPED_CAPTION = 'Skipped for now. Tap to set it up.';
@@ -336,6 +336,8 @@ export const SECTION_CARDS_HEADING = 'Set these up';
 export const SECTION_CARDS_LEAD = 'Set It Up opens the place for it and shows each tap. Back to Setup brings you here again. Do as many as you like now.';
 export const SECTION_DONE_LABEL = 'Done with this part';
 export const SECTION_SKIP_LABEL = 'Skip this part';
+export const SECTION_DONE_NEXT_LABEL = 'Done, on to {part}';
+export const SECTION_SKIP_NEXT_LABEL = 'Skip, on to {part}';
 export const SECTION_BACK_LABEL = 'Back to the list';
 export const SECTION_QUESTION_FIRST = 'Answer the question above first, or tap Later on it.';
 export const CLOSING_HEADING = 'A few last questions';
