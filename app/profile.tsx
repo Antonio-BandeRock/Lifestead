@@ -4441,6 +4441,9 @@ export default function ProfileScreen() {
               Cuisines the Meal Plan leans toward. Every diet chosen above still holds, so Gluten-Free with Mexican
               plans Mexican dishes that are gluten-free.
             </Text>
+            <Text style={styles.helpText}>
+              Picking a cuisine fills the plan with its dishes wherever there are enough of them, so the plan will be mostly or all that cuisine. For a dish from one here and there, pick none, make the plan, then open a day and tap Change beside a dish to put one in its place.
+            </Text>
             <View style={styles.conditionGrid}>
               {CUISINE_CHOICES.map((cuisine) => {
                 const active = cuisinePreferences.includes(cuisine);

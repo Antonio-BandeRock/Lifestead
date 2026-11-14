@@ -4418,6 +4418,9 @@ function DailyMealPlanLens() {
         <Text style={styles.helperText}>
           Leans each meal toward the cuisines you pick, inside the eating style above. Gluten-Free with Mexican means Mexican dishes that are gluten-free. A meal with too few of them draws on every recipe.
         </Text>
+        <Text style={styles.helperText}>
+          Picking a cuisine fills the plan with its dishes wherever there are enough of them, so the plan will be mostly or all that cuisine. For a dish from one here and there, pick none, make the plan, then open a day and tap Change beside a dish to put one in its place.
+        </Text>
         <View ref={walkMark.ref('mealPlan.cuisines')} collapsable={false} style={styles.pillRow}>
           {CUISINE_CHOICES.map((cuisine) => {
             const active = planDiet.cuisines.includes(cuisine);
