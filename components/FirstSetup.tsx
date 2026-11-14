@@ -693,7 +693,7 @@ export function FirstSetup() {
                     <Ionicons name="school-outline" size={14} color={colors.primary} style={textShadow} />
                     <Text style={styles.laterLabel}>{SETUP_TUTORIALS_LABEL}</Text>
                   </TouchableOpacity>
-                  <Text style={styles.caption}>{SETUP_TUTORIALS_LINE}</Text>
+                  <Text style={styles.lead}>{SETUP_TUTORIALS_LINE}</Text>
                 </>
               ) : (
                 <>
@@ -708,7 +708,7 @@ export function FirstSetup() {
                     <Text style={styles.laterLabel}>{SETUP_FINISH_LATER_LABEL}</Text>
                     <Ionicons name="arrow-forward" size={13} color={colors.primary} style={textShadow} />
                   </TouchableOpacity>
-                  <Text style={styles.caption}>{SETUP_FINISH_LATER_LINE}</Text>
+                  <Text style={styles.lead}>{SETUP_FINISH_LATER_LINE}</Text>
                 </>
               )}
               <View style={styles.rule} />
