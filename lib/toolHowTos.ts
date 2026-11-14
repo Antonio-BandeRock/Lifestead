@@ -2468,7 +2468,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Ask for more time on the test version',
       testerOnly: true,
       steps: [
-        { say: 'Open the band with the name of Thank You for Testing Lifestead. Its first line says the day this device can open the test version until.', mark: 'homeBand.testerWelcome', stay: true },
+        { say: 'Open the band with the name of Thank You for Testing Lifestead. Its first line says the day Lifestead opens on this device until.', mark: 'homeBand.testerWelcome', stay: true },
         { say: 'From two weeks before that day, Ask to Renew appears under it. Tap it, and your email app opens with the request ready.', mark: 'tester.renew' },
         { say: 'Press Send in your email app. The request carries your name, a code for this device and which copy of the app is asking, nothing else.' },
         { say: 'The reply carries an approval code. Copy it, or the whole email, press Paste in the box under Ask to Renew, then press Use This Code. The new day shows on the band.' },
