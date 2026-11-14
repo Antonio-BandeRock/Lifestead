@@ -199,8 +199,12 @@ const stateOf = (readyOn, firstDay = '2026-01-01') => ({ step: 1, readyOn, first
 const plan = (over) => basics.planSitting({ cards: many, states: new Map(), today: TODAY, order: 'learning', newLeft: 15, answeredToday: new Set(), ...over });
 check('new cards come in learning order', plan().cardIds.slice(0, 3).join() === 'c0,c1,c2' && !plan().goingOver);
 check('the day limit holds for units', plan({ newLeft: 5 }).cardIds.length === 5);
-check('a sitting stops at 20 cards', plan({ newLeft: 50 }).cardIds.length === basics.SITTING_SIZE);
-check('a deck chosen by hand ignores the limit', plan({ newLeft: null }).cardIds.length === basics.SITTING_SIZE);
+check('a sitting runs through every card it was given', plan({ newLeft: null }).cardIds.length === many.length && plan({ newLeft: null }).cardIds[59] === 'c59');
+{
+  const screen = require('fs').readFileSync(require('path').join(__dirname, '..', 'app', 'language-basics.tsx'), 'utf8');
+  check('the screen lets every card of a unit in, with no day limit', !screen.includes('newLeftToday') && !screen.includes('New cards a day'));
+  check('a unit tapped on Home or in the edge menu starts its cards at once', /startGroup\.current = \{ units: \[unit\], order: 'learning' \}/.test(screen));
+}
 const waiting = new Map([['c30', stateOf('2026-05-01')], ['c40', stateOf('2099-01-01')]]);
 const mixed = plan({ states: waiting, newLeft: 2 }).cardIds;
 check('a card waiting joins the new ones, and one not ready stays away', mixed.join() === 'c0,c1,c30');
@@ -210,7 +214,7 @@ check('random is steady all day', random.join() === plan({ order: 'random', newL
 check('random stirs differently tomorrow', random.join() !== plan({ order: 'random', newLeft: 15, today: '2026-06-02' }).cardIds.join());
 const allSeen = new Map(many.map((card) => [card.id, stateOf('2099-01-01')]));
 const over = plan({ states: allSeen, answeredToday: new Set(['c0']) });
-check('nothing waiting offers extra cards and says so', over.goingOver && over.cardIds.length === basics.SITTING_SIZE && !over.cardIds.includes('c0'));
+check('nothing waiting offers extra cards and says so', over.goingOver && over.cardIds.length === many.length - 1 && !over.cardIds.includes('c0'));
 const usedUp = plan({ newLeft: 0 });
 check('a used up limit with nothing seen still gives something to do', usedUp.goingOver && usedUp.cardIds[0] === 'c0');
 check('no cards at all gives nothing and claims nothing', !basics.planSitting({ cards: [], states: new Map(), today: TODAY, order: 'learning', newLeft: 5, answeredToday: new Set() }).goingOver);

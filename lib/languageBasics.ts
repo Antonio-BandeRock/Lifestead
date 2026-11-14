@@ -22,7 +22,12 @@ import type { LearnGrade, LearnReview } from './learnSchedule';
 export const LADDER_DAYS = [1, 2, 4, 7, 14, 30, 60, 120];
 /** Where a card's very first answer starts from: + gives 1 day, = gives 2, - gives 4. */
 export const LADDER_START = 1;
-export const SITTING_SIZE = 20;
+// 2026-11-14, direct request: a sitting works through every card it was given, one
+// after another, until the person finishes or stops. It used to stop at 20 cards and
+// let only a day's limit of new cards in, so a unit came a couple of cards at a time
+// and had to be opened again, several taps away, for the next few. No size and no
+// daily limit now. DEFAULT_DAILY_NEW stays only because the settings column it fills
+// is kept (the database only grows); nothing reads the limit any more.
 export const DEFAULT_DAILY_NEW = 15;
 
 /** Units studied together, kept so Home can offer them again. */
@@ -148,12 +153,12 @@ export function planSitting({ cards, states, today, order, newLeft, answeredToda
   const allowedNew = newLeft === null ? fresh : fresh.slice(0, newLeft);
   const pool = [...ready, ...allowedNew];
   if (pool.length > 0) {
-    return { cardIds: arrange(pool, order, today).slice(0, SITTING_SIZE).map((card) => card.id), goingOver: false };
+    return { cardIds: arrange(pool, order, today).map((card) => card.id), goingOver: false };
   }
   const seen = cards.filter((card) => states.has(card.id));
   const notToday = seen.filter((card) => !answeredToday.has(card.id));
   const over = notToday.length > 0 ? notToday : seen.length > 0 ? seen : fresh;
-  return { cardIds: arrange(over, order, today).slice(0, SITTING_SIZE).map((card) => card.id), goingOver: over.length > 0 };
+  return { cardIds: arrange(over, order, today).map((card) => card.id), goingOver: over.length > 0 };
 }
 
 // ---- Units and decks ----

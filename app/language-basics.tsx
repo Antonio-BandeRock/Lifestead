@@ -32,7 +32,7 @@ import { useBandFolds } from '../hooks/useBandFolds';
 import { useCourseVoice } from '../hooks/useCourseVoice';
 import { t } from '../lib/i18n';
 import { localDayOf } from '../lib/interests';
-import { cardFits, cardHasFits, deckInfo, deckKeyOf, newLeftToday, planSitting, replayLadder, unitsOf, type CardFits, type DeckInfo, type SittingOrder } from '../lib/languageBasics';
+import { cardFits, cardHasFits, deckInfo, deckKeyOf, planSitting, replayLadder, unitsOf, type CardFits, type DeckInfo, type SittingOrder } from '../lib/languageBasics';
 import { courseCardLayout } from '../lib/learnCourseCard';
 import type { CourseCard } from '../lib/learnCourseFile';
 import { askWhereLanguageBasicsGoes } from '../components/LanguageBasicsButton';
@@ -41,7 +41,6 @@ import type { LearnGrade, LearnReview } from '../lib/learnSchedule';
 import { explainNotYet } from '../lib/notYet';
 
 const TAB_COLOR = colors.tabInterests;
-const DAILY_CHOICES = [5, 10, 15, 20, 30, 50];
 
 /** What a sitting was asked for, so Keep Going can ask again. */
 type Scope = { kind: 'units'; units: number[]; order: SittingOrder } | { kind: 'deck'; key: string };
@@ -96,6 +95,11 @@ export default function LanguageBasicsScreen() {
         if (Number.isInteger(unit) && unit > 0) {
           scrollToUnit.current = unit;
           openFold(`language:${setId}:unit:${unit}`);
+          // A unit tapped on Home or in the edge menu opens its cards straight away and
+          // runs through all of them (2026-11-14, direct request); the fold above is where
+          // the person lands when the sitting ends.
+          startGroup.current = { units: [unit], order: 'learning' };
+          setReloaded((count) => count + 1);
         }
         const group = typeof params.group === 'string' ? params.group.split(',').map(Number).filter((value) => Number.isInteger(value) && value > 0) : [];
         if (group.length > 0) {
@@ -137,7 +141,7 @@ export default function LanguageBasicsScreen() {
             states: knownStates,
             today: day,
             order: scope.order,
-            newLeft: newLeftToday(knownStates, day, settings?.dailyNewLimit ?? 15),
+            newLeft: null,
             answeredToday,
           });
     if (plan.cardIds.length === 0) {
@@ -266,9 +270,6 @@ export default function LanguageBasicsScreen() {
       </CalmBands>
     );
   }
-
-  const dailyLimit = settings.dailyNewLimit;
-  const dailyChoices = DAILY_CHOICES.includes(dailyLimit) ? DAILY_CHOICES : [...DAILY_CHOICES, dailyLimit].sort((a, b) => a - b);
 
   return (
     <CalmBands>
@@ -416,18 +417,6 @@ export default function LanguageBasicsScreen() {
                   );
                 })}
               </View>
-              <Text style={styles.label}>New cards a day</Text>
-              <View style={styles.row}>
-                {dailyChoices.map((choice) => {
-                  const on = dailyLimit === choice;
-                  return (
-                    <TouchableOpacity key={choice} style={[styles.pill, on && styles.pillActive]} onPress={() => void changeSettings({ dailyNewLimit: choice })} accessibilityRole="button">
-                      <Text style={on ? styles.pillOnText : styles.pillText}>{String(choice)}</Text>
-                    </TouchableOpacity>
-                  );
-                })}
-              </View>
-              <Text style={styles.caption}>This applies when you study units. A deck you choose yourself always opens.</Text>
               {hasVerbTable ? (
                 <>
                   <Text style={styles.label}>On verb cards</Text>

@@ -2650,7 +2650,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       title: 'Open a language unit from Home',
       steps: [
         { say: 'Open the band with the name of Interests, then Language Basics.', mark: 'homeBand.languageBasics', stay: true },
-        { say: 'Tap a unit to open it. The ones you turned on are listed in the order they should be learned.', mark: 'home.languageBasicsUnit' },
+        { say: 'Tap a unit. Its cards open straight away, starting with the first, and run one after another until you have been through them all. The ones you turned on are listed in the order they should be learned.', mark: 'home.languageBasicsUnit' },
       ],
       forYou: 'Units go on and off from Interests, Languages, with Show on Home.',
     },
@@ -3409,7 +3409,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap + to see it more often, = to keep it in the same rotation, or the minus sign to see it less often.', mark: 'languages.grade', stay: true },
         { say: 'Tap Stop for Now whenever you like. What you answered is kept.', mark: 'languages.stop' },
       ],
-      forYou: 'New cards come in learning order, up to the number you set for a day. A card you mark + comes back once more at the end of the sitting, and a day away takes nothing from anything.',
+      forYou: 'Cards come in learning order and run through the whole unit, one after another, until you finish or tap Stop for Now. A card you mark + comes back once more at the end of the sitting, and a day away takes nothing from anything.',
     },
     {
       key: 'languagesOnHome',
@@ -3419,7 +3419,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap the unit.', mark: 'languages.unit', stay: true },
         { say: 'Turn on Show on Home.', mark: 'languages.onHome' },
       ],
-      forYou: 'On Home the units you turned on sit under Language Basics, in the order they should be learned, and tapping one opens it here.',
+      forYou: 'On Home the units you turned on sit under Language Basics, in the order they should be learned, and tapping one opens its cards straight away, running through the whole unit.',
     },
     {
       key: 'languagesDeck',
@@ -3430,7 +3430,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap the information icon beside a deck. It says what comes before this deck, which of those you have worked on, and which rules to keep in mind.', mark: 'languages.deckInfo', stay: true },
         { say: 'Tap Study under that deck.', mark: 'languages.deckStudy' },
       ],
-      forYou: 'A deck you choose yourself always opens, whatever the day\'s new cards limit says. While studying, How This Fits on a turned card shows only what that card touches: the note written for it and the rules its words use. A card that touches none has no How This Fits.',
+      forYou: 'A deck runs through all of its cards. While studying, How This Fits on a turned card shows only what that card touches: the note written for it and the rules its words use. A card that touches none has no How This Fits.',
     },
     {
       key: 'languagesTogether',
@@ -3441,7 +3441,7 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'To take every unit, tap Select All.', mark: 'languages.selectAll', stay: true },
         { say: 'Choose In Learning Order or Random, then tap Study.', mark: 'languages.studyTogether' },
       ],
-      forYou: 'Random stirs the cards the same way all day and differently tomorrow, and a sitting is 20 cards with Keep Going at the end. The group you studied is kept on Home, under Language Basics, to start again in one tap.',
+      forYou: 'Random stirs the cards the same way all day and differently tomorrow, and a sitting runs through every card in the units you chose. The group you studied is kept on Home, under Language Basics, to start again in one tap.',
     },
     {
       key: 'languagesHear',
@@ -3458,7 +3458,6 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Tap Open on the set of basics.', mark: 'languages.open', stay: true },
         { say: 'Open the band called Settings.', mark: 'languages.settings', stay: true },
         { say: 'Under Which side comes first, choose what you are learning or what you already know.' },
-        { say: 'Under New cards a day, tap the number you want.' },
         { say: 'On a set with verb tables, Type the Answer hides one form on each verb card for you to type.' },
       ],
       forYou: 'Settings belong to one set, and both directions share one place on the ladder for each card.',
