@@ -4481,6 +4481,36 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'A reading typed wrong comes out of Trends and the reports.',
     },
   ],
+  '/log#weight': [
+    {
+      key: 'log',
+      title: 'Log your weight',
+      steps: [
+        { say: 'Tap + Log your weight.', mark: 'signals.add', stay: true },
+        { say: 'Type the number in the unit Profile uses, and change the day or time if it was earlier.' },
+        { say: 'Tap Save.', mark: 'signals.save' },
+      ],
+      forYou: 'Trends > Weight draws it across the weeks with your usual range beside it, and Profile shows the latest one.',
+    },
+    {
+      key: 'edit',
+      title: 'Correct a weight',
+      steps: [
+        { say: 'Tap Edit on the weight.', mark: 'signals.editFirst', stay: true },
+        { say: 'Change the number or the time, then tap Save changes.' },
+      ],
+      forYou: 'A number typed wrong is fixed in Trends too.',
+    },
+    {
+      key: 'remove',
+      title: 'Remove a weight',
+      steps: [
+        { say: 'Tap Remove on the weight.', mark: 'signals.removeFirst', stay: true },
+        { say: 'Tap Remove again to confirm.' },
+      ],
+      forYou: 'A weight typed wrong comes out of Trends.',
+    },
+  ],
   '/log#therapies': [
     {
       key: 'log',

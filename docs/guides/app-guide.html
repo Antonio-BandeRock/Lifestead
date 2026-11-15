@@ -417,7 +417,7 @@
     <h1>What is inside Lifestead, and how it is put together</h1>
     <p class="dek">Lifestead is an everything-about-a-person's-life app, tagline "Everything in your life has a place." It started with, and runs deepest on, food and autoimmune health: 19 tracked conditions, each a target for the same depth, alone or combined. It is also for somebody who needs an outside place to hold the details of daily living so they stop taking up room in their head, through Life, Schedules, reminders and capture. Garden, budget, family, interests, learning and the body are all in scope.</p>
     <p class="dek">Its job in food and health is finding the personal patterns between what someone eats and how their body responds, and doing that work for the person. Records stay on the person's devices, and no company server holds them.</p>
-    <p class="meta">Kept up to date as the app changes. <!--AUTO:version-->Last refreshed 2026-11-15 (1.0.90.2).<!--/AUTO:version--> The reading is called the Library: the purple group of flip cards on Home and the reading lenses on Life and Garden. To click through the navigation instead of reading about it, see the companion <a href="https://claude.ai/artifact/XzbKH1oPPniiucyxBhXknp" target="_blank" rel="noopener">Lifestead Walkthrough</a>.</p>
+    <p class="meta">Kept up to date as the app changes. <!--AUTO:version-->Last refreshed 2026-11-15 (1.0.90.3).<!--/AUTO:version--> The reading is called the Library: the purple group of flip cards on Home and the reading lenses on Life and Garden. To click through the navigation instead of reading about it, see the companion <a href="https://claude.ai/artifact/XzbKH1oPPniiucyxBhXknp" target="_blank" rel="noopener">Lifestead Walkthrough</a>.</p>
     <div class="stats">
       <div class="stat"><span class="n">16,140</span><span class="l">whole foods shown from the reference database</span></div>
       <div class="stat"><span class="n">10</span><span class="l">data sources (9 national tables plus a Derived set)</span></div>
@@ -756,12 +756,14 @@
         <span class="chip">New Foods &amp; Experiments</span>
         <span class="chip">Exercise</span>
         <span class="chip">Blood Pressure</span>
+        <span class="chip">Weight</span>
         <span class="chip">Hands-On Therapies</span>
         <span class="chip">General Note</span>
         <span class="chip">Nocturia</span>
       </div>
       <p><strong>Hands-On Therapies</strong> sits here because a session logged is something that has already happened. It logs a session of any of 13 therapy types across 4 categories, and it is deliberately its own record rather than a kind of treatment: a treatment describes a substance being taken now, with a dose and a frequency, while a session is an event on a date whose interesting question is what the days after it looked like. Trends' Therapy Response lens is the other half.</p>
       <p>Every entry on Signals can be corrected with Edit, which opens the whole entry in its form, and Remove always asks before anything goes. A reaction can be tied to a meal you logged by tapping it, Exercise offers what you did before, and Blood Pressure and New Foods each show a year of squares. Long lists stop at a page and carry on with Show more.</p>
+      <p><strong>Weight</strong> logs your weight whenever you weigh yourself, with the day and time, in the kg or lb Profile uses. Each one can be corrected or removed, Trends &gt; Weight draws them across the weeks, and Profile shows the latest one.</p>
     </div>
   <div class="tabcard" style="border-left-color: var(--signals)">
       <div class="tabcard-head"><h3>Also here</h3><span class="status-pill status-built">Built</span></div>
@@ -819,9 +821,9 @@
         <li><strong>Nutrients</strong>: a chosen nutrient's own logged intake plotted over 7/30/90 days</li>
         <li><strong>Condition Scores</strong>: a daily count of flagged items, scoped to the conditions actually tracked rather than every criterion the app scores at all</li>
         <li><strong>Symptoms &amp; Flares</strong>: logged severity over time</li>
-        <li><strong>Weight</strong>: a weight trend line, respecting the person's own kg/lb Units preference</li>
-        <li><strong>Labs</strong>: a chosen lab test's own result history, with a reference-range line drawn from the test's own stated normal range</li>
-        <li><strong>Eating Window</strong>: how often a meal was deliberately scheduled outside a declared fasting window, read as a count of exceptions rather than a compliance score, and honest about its own blind spots on screen: a meal logged directly on Food is not counted, and a generated plan never books one outside the window in the first place</li>
+        <li><strong>Weight</strong>: a weight trend line from the weights logged on Signals &gt; Weight, each on the day it was taken, in the kg or lb Profile uses</li>
+        <li><strong>Labs</strong>: a chosen lab test's result history, with a reference-range line drawn from the test's stated normal range. Tests with results are listed first, and it opens on the one with the newest result</li>
+        <li><strong>Eating Window</strong>: how often a meal was deliberately scheduled outside a declared fasting window, read as a count of exceptions rather than a compliance score, and honest about its blind spots on screen: it counts meals scheduled in the app and meals logged straight on Food, each by the time it was eaten, and leaves out meal plan meals, since the plan moves them to fit the window</li>
         <li><strong>Grocery Prices</strong>: what a food has actually cost across shopping trips, with a sale plotted in its own colour so one week at half price is not read as a thing getting cheaper</li>
         <li><strong>Therapy Response</strong>: how long an adjustment, a treatment or a massage held. Built as a second, separate analysis module rather than an extension of Pattern Finder, because the direction is opposite: Pattern Finder looks backward from a symptom to what preceded it, and this looks forward from a session. Four honesty gates live in the module rather than the screen, so nothing is reported below 3 sessions, 3 check-ins at a day offset, or 5 baseline check-ins, and a day with too little data breaks the run rather than being skipped, since skipping it would claim improvement across a day nothing is known about. Days that read worse than baseline are reported too</li>
         <li><strong>Pattern Finder</strong>: the correlation feature: for every logged flare or reaction, looks back a chosen window (6/12/24/48h) across everything eaten, and surfaces any food, flagged 6-DFF tier, or food category that's shown up before at least two separate flares. Shown as a plain count ("logged before 4 of your 6 flares"), never a statistical confidence figure, a deliberate noise guard against surfacing a single coincidence as a pattern. Each food candidate gets a "Start a trial" button, landing directly in Signals' own food-trial flow.</li>
@@ -835,6 +837,7 @@
         <li><strong>Ferments</strong>: ferments started, finished and eaten</li>
         <li><strong>Planned and Eaten</strong>: meals you planned beside meals you ate</li>
       </ul>
+      <p>Every lens with nothing to draw yet names where its records are kept and has a button that opens that place. If something cannot be read, Trends says so, says nothing recorded is lost, and offers Try again.</p>
     </div>
   <div class="tabcard" style="border-left-color: var(--trends)">
       <div class="tabcard-head"><h3>Also here</h3><span class="status-pill status-built">Built</span></div>

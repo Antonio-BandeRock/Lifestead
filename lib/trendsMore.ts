@@ -651,7 +651,7 @@ export function buildReactionsView(input: ReactionsInputs): ReadingView {
     return (started <= input.range.end && (resolved === null || resolved >= input.range.start)) || (started >= input.range.start && started <= input.range.end);
   });
   if (reactions.length === 0 && trials.length === 0) {
-    return emptyView('Nothing yet. Reactions are logged after a meal on Signals, and a new food or an experiment is tried on Signals > New Foods & Experiments.');
+    return emptyView('Nothing yet. Reactions are logged after a meal on Signals > Food Reactions, and a new food or an experiment is tried on Signals > New Foods & Experiments.');
   }
   const bands: ReadingBand[] = [];
 

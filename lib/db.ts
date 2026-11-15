@@ -18606,6 +18606,38 @@ export async function getUpcomingScheduleCountsByType(fromDate: string): Promise
 // scheduled meals at all returns no row and is genuinely nothing to plot.
 export type EatingWindowDayCount = { date: string; outsideCount: number; totalMeals: number };
 
+// Meals logged straight on Food (not tied to a scheduled meal), 1.0.90.3,
+// so Trends > Eating Window counts what was eaten and not only what was
+// scheduled. Reaches a day past the range at both ends because eaten_at may
+// be a UTC stamp; the caller places each one on its local day.
+export async function listUnscheduledMealTimes(startDate: string, endDate: string): Promise<{ eatenAt: string }[]> {
+  const db = await getDatabase();
+  return db.getAllAsync<{ eatenAt: string }>(
+    `
+      SELECT m.eaten_at AS eatenAt
+      FROM meals m
+      WHERE substr(m.eaten_at, 1, 10) BETWEEN date(?, '-1 day') AND date(?, '+1 day')
+        AND NOT EXISTS (SELECT 1 FROM schedule_items s WHERE s.linked_meal_id = m.id)
+    `,
+    startDate,
+    endDate,
+  );
+}
+
+// Every lab test with at least one result, newest result first, 1.0.90.3:
+// Trends > Labs lists these first and opens on the newest one.
+export async function listLabTestCodesWithResults(): Promise<{ testCode: string; count: number }[]> {
+  const db = await getDatabase();
+  return readOrClosed(() => db.getAllAsync<{ testCode: string; count: number }>(
+    `
+      SELECT test_code AS testCode, COUNT(*) AS count
+      FROM lab_results
+      GROUP BY test_code
+      ORDER BY MAX(tested_at) DESC
+    `,
+  ), []);
+}
+
 export async function getOutsideEatingWindowCountsByDateRange(
   startDate: string,
   endDate: string,

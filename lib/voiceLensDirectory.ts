@@ -79,6 +79,7 @@ export const VOICE_LENS_DIRECTORY: VoiceLensPlace[] = [
   { tab: '/log', param: 'openSignalsLens', key: 'newFoods', label: 'New Foods & Experiments' },
   { tab: '/log', param: 'openSignalsLens', key: 'exercise', label: 'Exercise' },
   { tab: '/log', param: 'openSignalsLens', key: 'bloodPressure', label: 'Blood Pressure' },
+  { tab: '/log', param: 'openSignalsLens', key: 'weight', label: 'Weight' },
   { tab: '/log', param: 'openSignalsLens', key: 'therapies', label: 'Hands-On Therapies' },
   { tab: '/log', param: 'openSignalsLens', key: 'generalNote', label: 'General Note' },
   { tab: '/log', param: 'openSignalsLens', key: 'nocturia', label: 'Nocturia' },

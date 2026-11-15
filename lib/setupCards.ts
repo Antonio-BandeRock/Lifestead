@@ -1055,11 +1055,11 @@ export const SETUP_TABS: SetupTabDef[] = [
             icon: 'scale-outline',
             hook: 'Watch the line, not the day.',
             whatItIs: 'Your weight, whenever you weigh yourself.',
-            whatYouDo: "Add today's weight in Profile.",
+            whatYouDo: "Add today's weight in Signals under Weight.",
             takes: 'Seconds',
             getsBack: ['weight', 'reportTrainer'],
             records: ['weight'],
-            destination: route('/profile', { section: 'personal-info' }),
+            destination: signalsLens('weight'),
           },
           {
             key: 'bloodPressure',

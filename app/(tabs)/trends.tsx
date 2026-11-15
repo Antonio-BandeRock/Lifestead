@@ -56,6 +56,7 @@ import {
   getFoodIdentity,
   getLabResultTrend,
   getLabTests,
+  listLabTestCodesWithResults,
   getStoredMeasurementSystem,
   getTherapyResponseInputs,
   getUserProfile,
@@ -179,7 +180,7 @@ import { useListedClosed } from '../../lib/vaultSession';
 import { t, tl } from '../../lib/i18n';
 import { listEmptyTrendsLenses } from '../../lib/trendsLensRecords';
 import { HorizontalScroll } from '../../components/HorizontalScroll';
-import { PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
+import { BUTTON_SECONDARY_COMPACT, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_SMALL, PILL_TEXT } from '../../constants/buttons';
 import { foodDisplayName } from '../../lib/ingredientShortName';
 
 // Every text box on this page belongs to this one page's own tab, so
@@ -502,7 +503,7 @@ const TRENDS_LENSES: LensOption<TrendsLens>[] = [
     help: [
       {
         heading: 'Labs',
-        body: "Pick a test to see every result you've logged for it, over time, with a dashed line at the midpoint of its typical reference range where one exists. Log new results from Insights' own Labs lens.",
+        body: "Pick a test to see every result you've logged for it, over time, with a dashed line at the midpoint of its typical reference range where one exists. Log new results on Insights > Labs.",
       },
     ],
   },
@@ -1338,6 +1339,9 @@ export default function TrendsScreen() {
   // silently move the other.
   const [costMonths, setCostMonths] = useState<12 | 24 | 0>(12);
   const [loading, setLoading] = useState(true);
+  // 1.0.90.3: a read that fails says so, in place of Loading forever.
+  const [loadFailed, setLoadFailed] = useState(false);
+  const [labCodesWithResults, setLabCodesWithResults] = useState<{ testCode: string; count: number }[]>([]);
 
   const [nutrientSeries, setNutrientSeries] = useState<NutrientTrendSeries | null>(null);
   const [sixDsSeries, setSixDsSeries] = useState<TrendPoint[] | null>(null);
@@ -1425,6 +1429,7 @@ export default function TrendsScreen() {
   useFocusEffect(
     useCallback(() => {
       getLabTests().then(setLabTests);
+      listLabTestCodesWithResults().then(setLabCodesWithResults).catch(() => setLabCodesWithResults([]));
       getStoredMeasurementSystem().then(setMeasurementSystem);
     }, []),
   );
@@ -1459,6 +1464,15 @@ export default function TrendsScreen() {
   // three every time the range or lens changes.
   const load = useCallback(() => {
     setLoading(true);
+    setLoadFailed(false);
+    const fail = () => {
+      setLoadFailed(true);
+      setLoading(false);
+    };
+    // The lenses that count in days (everything but Nutrients and Condition
+    // Scores, which have their own range) read the same days as the pills.
+    const dayEnd = todayDateString();
+    const dayStart = dateStringOffsetFrom(dayEnd, -(days - 1));
     if (isMoreLens(lens)) {
       loadTrendsMoreView(lens, days)
         .then(setMoreView)
@@ -1472,7 +1486,7 @@ export default function TrendsScreen() {
         setNutrientSeries(series);
         setFiberSeries(fiber);
         setLoading(false);
-      });
+      }).catch(fail);
     } else if (lens === 'variety') {
       // Always ends today, which is what lets the repetition band say how
       // long ago something was last logged rather than how far it sat from
@@ -1496,6 +1510,7 @@ export default function TrendsScreen() {
             ),
           );
         })
+        .catch(fail)
         .finally(() => setLoading(false));
     } else if (lens === 'keepingUp') {
       // Ends today for the same reason Variety does: a streak is a run up
@@ -1504,6 +1519,7 @@ export default function TrendsScreen() {
       const keepingUpEnd = todayDateString();
       getKeepingUpSummary(dateStringOffsetFrom(keepingUpEnd, -(days - 1)), keepingUpEnd)
         .then(setKeepingUpSummary)
+        .catch(fail)
         .finally(() => setLoading(false));
     } else if (lens === 'harvest') {
       // Ends today, and reaches back in whole months: a picking belongs to
@@ -1521,6 +1537,7 @@ export default function TrendsScreen() {
           ),
         )
         .then(setHarvestSummary)
+        .catch(fail)
         .finally(() => setLoading(false));
     } else if (lens === 'conditions') {
       // Whole months, the same reason Garden Yield uses them.
@@ -1538,6 +1555,7 @@ export default function TrendsScreen() {
           ),
         )
         .then(setConditionsSummary)
+        .catch(fail)
         .finally(() => setLoading(false));
     } else if (lens === 'cost') {
       // Whole months, the same reason Garden Yield uses them: a receipt
@@ -1556,24 +1574,25 @@ export default function TrendsScreen() {
           setCostSummary(summary);
           setPlateValue(plate);
         })
+        .catch(fail)
         .finally(() => setLoading(false));
     } else if (lens === 'sixDs') {
       const conditionCodes = personalizationProfile?.trackedConditions.map((condition) => condition.code) ?? [];
       getSixDimensionsFlagTrendSeriesForRange(resolvedRange.startDate, resolvedRange.endDate, conditionCodes).then((points) => {
         setSixDsSeries(points);
         setLoading(false);
-      });
+      }).catch(fail);
     } else if (lens === 'trackers') {
       getCustomTrackerSeries(days).then((series) => {
         setTrackerSeries(series);
         setLoading(false);
-      });
+      }).catch(fail);
     } else if (lens === 'symptoms') {
       Promise.all([
         getCheckinSeverityTrendSeries(['flare', 'post_meal'], days),
         getDailyScaleSeries(days),
-        listBowelEntriesBetween(resolvedRange.startDate, resolvedRange.endDate),
-        listCheckinsBetween(['flare', 'post_meal', 'food_trial_daily'], resolvedRange.startDate, resolvedRange.endDate),
+        listBowelEntriesBetween(dayStart, dayEnd),
+        listCheckinsBetween(['flare', 'post_meal', 'food_trial_daily'], dayStart, dayEnd),
       ]).then(([points, scales, bowel, checkins]) => {
         setSymptomsSeries(points);
         setScaleSeries(scales);
@@ -1586,7 +1605,7 @@ export default function TrendsScreen() {
             .map((checkin) => ({ loggedAt: checkin.loggedAt, regions: checkin.bodyRegions })),
         );
         setLoading(false);
-      });
+      }).catch(fail);
     } else if (lens === 'eatingWindow') {
       Promise.all([getEatingWindowTrend(days), getUserProfile()]).then(([trend, profile]) => {
         setEatingWindowTrend(trend);
@@ -1596,17 +1615,17 @@ export default function TrendsScreen() {
             : null,
         );
         setLoading(false);
-      });
+      }).catch(fail);
     } else if (lens === 'weight') {
       getWeightTrendPoints(days).then((points) => {
         setWeightSeries(points);
         setLoading(false);
-      });
+      }).catch(fail);
     } else if (lens === 'movement') {
       Promise.all([getStepTrendPoints(days), getSleepTrendPoints(days)]).then(([steps, sleep]) => {
         setMovementSeries({ steps, sleep });
         setLoading(false);
-      });
+      }).catch(fail);
     } else if (lens === 'patterns') {
       // 2026-08-26 -- condition-scoped, same trackedConditions list every
       // other lens on this screen now uses; dimension candidates only
@@ -1624,12 +1643,13 @@ export default function TrendsScreen() {
             })
             .catch(() => {});
         }
-      });
+      }).catch(fail);
     } else if (lens === 'therapyResponse') {
       getTherapyResponseInputs(days)
         .then(({ sessions, checkins }) => {
           setTherapyResponse(summarizeTherapyResponse(sessions, checkins));
         })
+        .catch(fail)
         .finally(() => setLoading(false));
     } else if (lens === 'groceries') {
       // The food list is loaded every time this lens opens rather than
@@ -1643,7 +1663,7 @@ export default function TrendsScreen() {
         setGroceryFoods(foods);
         setGroceryPrices(prices);
         setLoading(false);
-      });
+      }).catch(fail);
     } else if (lens === 'compare' || lens === 'squares') {
       // Compare Two and Your Life in Squares each read for themselves.
       // Compare Two loads both series itself (components/CompareTwoLens.tsx).
@@ -1655,13 +1675,10 @@ export default function TrendsScreen() {
       setLabSeries(null);
       setLoading(false);
     } else {
-      const rangeStart = new Date();
-      rangeStart.setDate(rangeStart.getDate() - (days - 1));
-      const rangeStartStr = rangeStart.toISOString().slice(0, 10);
       getLabResultTrend(selectedTestCode).then((rows) => {
-        setLabSeries(rows.filter((row) => row.testedAt.slice(0, 10) >= rangeStartStr));
+        setLabSeries(rows.filter((row) => row.testedAt.slice(0, 10) >= dayStart));
         setLoading(false);
-      });
+      }).catch(fail);
     }
   }, [lens, days, harvestMonths, conditionMonths, pickedMeasurement, pickedDeviceSource, pickedDeviceDay, costMonths, measurementSystem, resolvedRange, selectedNutrient, selectedTestCode, selectedGroceryFood, patternWindow, patternOutcome, personalizationProfile]);
   useOnVaultChange(load);
@@ -1770,7 +1787,7 @@ export default function TrendsScreen() {
     setRuleDraft(null);
     showInfoAlert(
       'Saved to your rules',
-      `${description}\n\nPause it or delete it under Insights > My Meds.`,
+      `${description}\n\nPause it or delete it under Insights > My Meds & Interactions.`,
     );
   }
 
@@ -1863,7 +1880,26 @@ export default function TrendsScreen() {
   // memoization -- labTests only changes once per visit (see the once-per-
   // focus effect above), so a fresh array on every render would otherwise
   // break PopoverSelect's own memo() bailout for no reason.
-  const labTestOptions = useMemo(() => labTests.map((test) => ({ label: test.displayName, value: test.code })), [labTests]);
+  // 1.0.90.3: tests with results first, newest first, each saying how many;
+  // then every other test, so a new one can still be picked.
+  const labTestOptions = useMemo(() => {
+    const byCode = new Map(labTests.map((test) => [test.code, test]));
+    const withResults = labCodesWithResults
+      .filter((row) => byCode.has(row.testCode))
+      .map((row) => ({
+        label: t(row.count === 1 ? '{name}, 1 result' : '{name}, {count} results', { name: byCode.get(row.testCode)!.displayName, count: row.count }),
+        value: row.testCode,
+      }));
+    const has = new Set(labCodesWithResults.map((row) => row.testCode));
+    return [...withResults, ...labTests.filter((test) => !has.has(test.code)).map((test) => ({ label: test.displayName, value: test.code }))];
+  }, [labTests, labCodesWithResults]);
+  // Opens on the test with the newest result, so the lens shows something
+  // the moment there is something to show.
+  useEffect(() => {
+    if (lens === 'labs' && !selectedTestCode && labCodesWithResults.length > 0) {
+      setSelectedTestCode(labCodesWithResults[0].testCode);
+    }
+  }, [lens, selectedTestCode, labCodesWithResults]);
   // Ordered by how often each food has actually been bought (see
   // listGroceryFoodSummaries), so the things someone buys every week sit
   // at the top of the picker rather than being alphabetized among
@@ -1907,7 +1943,7 @@ export default function TrendsScreen() {
             <VaultClosedBand color={TAB_COLOR} categories={lensVault} />
             <LensFeedersRow tabPath="/trends" lensKey={lens} tabColor={TAB_COLOR} />
 
-            {lens === 'squares' ? null : showsRangePicker ? (
+            {lens === 'squares' || lens === 'compare' || lens === 'groceries' ? null : showsRangePicker ? (
               <>
                 <HorizontalScroll
                   showsHorizontalScrollIndicator={false}
@@ -2075,7 +2111,14 @@ export default function TrendsScreen() {
               </View>
             ) : null}
 
-            {listedClosedHere ? null : lens === 'nutrients' ? (
+            {listedClosedHere ? null : loadFailed ? (
+              <View style={band.boxMuted}>
+                <Text style={styles.loadingText}>This could not be read just now. Nothing you recorded is lost.</Text>
+                <TouchableOpacity style={styles.goButton} onPress={load}>
+                  <Text style={styles.goButtonText}>Try again</Text>
+                </TouchableOpacity>
+              </View>
+            ) : lens === 'nutrients' ? (
               <>
                 {fiberChart && !resolvedRange.isSingleDay ? (
                   <TabBand markRef={walkMark.ref('trends.band')}
@@ -2177,6 +2220,13 @@ export default function TrendsScreen() {
               loading ? (
                 <View style={band.boxMuted}>
                   <Text style={styles.loadingText}>Loading…</Text>
+                </View>
+              ) : personalizationProfile && personalizationProfile.trackedConditions.length === 0 ? (
+                <View style={band.boxMuted}>
+                  <Text style={styles.loadingText}>
+                    Condition Scores counts what your meals flag for the conditions you track. Choose your conditions in Profile and this fills in.
+                  </Text>
+                  <GoToLens label="Choose conditions in Profile" pathname="/profile" params={{ section: 'conditions' }} />
                 </View>
               ) : resolvedRange.isSingleDay ? (
                 <View style={[band.box, styles.chartCard]}>
@@ -2392,9 +2442,12 @@ export default function TrendsScreen() {
                         yMax={Math.max(5, ...varietySummary.safeList.points.map((point) => point.value))}
                         valueFormatter={(value) => `${Math.round(value)} foods`}
                         lineColor={TAB_COLOR}
-                        emptyMessage="Mark a food safe under Food > Safe Foods and this starts filling in."
+                        emptyMessage="Mark a food safe under Insights > Safe Foods and this starts filling in."
                       />
                     </View>
+                    {varietySummary.safeList.points.length === 0 ? (
+                      <GoToLens label="Open Safe Foods" pathname="/insights" params={{ openInsightsLens: 'safeFoods' }} />
+                    ) : null}
                     {varietySummary.safeList.trialNote ? (
                       <Text style={styles.patternRowCaption}>{varietySummary.safeList.trialNote}</Text>
                     ) : null}
@@ -3073,6 +3126,7 @@ export default function TrendsScreen() {
               ) : !trackerSeries || trackerSeries.length === 0 ? (
                 <View style={band.boxMuted}>
                   <Text style={styles.loadingText}>{TRENDS_TRACKERS_EMPTY_LINE}</Text>
+                  <GoToLens label="Open My Trackers" pathname="/log" params={{ openSignalsLens: 'trackers' }} />
                 </View>
               ) : (
                 <>
@@ -3123,6 +3177,12 @@ export default function TrendsScreen() {
                     valueFormatter={(value) => `${Math.round(value)} of 10`}
                     emptyMessage="Log a flare or food reaction in Signals to see a severity trend here."
                   />
+                  {(symptomsSeries ?? []).length === 0 ? (
+                    <View style={styles.goRow}>
+                      <GoToLens label="Open Flares" pathname="/log" params={{ openSignalsLens: 'flares' }} />
+                      <GoToLens label="Open Food Reactions" pathname="/log" params={{ openSignalsLens: 'foodReactions' }} />
+                    </View>
+                  ) : null}
                   <View style={styles.legendRow}>
                     <View style={styles.legendItem}>
                       <View style={[styles.legendDot, { backgroundColor: colors.danger }]} />
@@ -3167,7 +3227,7 @@ export default function TrendsScreen() {
                 <TabBand markRef={walkMark.ref('trends.band')} folds={folds} color={TAB_COLOR} id="trends:symptoms:bowel" title="Bowel Movements" icon="ellipse-outline">
                   <View style={styles.chartCard}>
                     <Text style={styles.caption}>
-                      {bowelRangeSentence(bowelEntries, resolvedRange.startDate, resolvedRange.endDate)}
+                      {bowelRangeSentence(bowelEntries, dateStringOffsetFrom(todayDateString(), -(days - 1)), todayDateString())}
                     </Text>
                     {bowelEntries.length > 0 ? (
                       <>
@@ -3176,13 +3236,16 @@ export default function TrendsScreen() {
                             .map(({ type, count }) => `Type ${type}: ${count}`)
                             .join(' · ')}
                         </Text>
-                        {renderPeriodRows(bowelPeriods(bowelEntries, resolvedRange.startDate, resolvedRange.endDate))}
+                        {renderPeriodRows(bowelPeriods(bowelEntries, dateStringOffsetFrom(todayDateString(), -(days - 1)), todayDateString()))}
                         {bloodSeenLine(bowelEntries) ? (
                           <Text style={styles.caption}>{`${bloodSeenLine(bowelEntries)} ${BLOOD_NOTE}`}</Text>
                         ) : null}
                       </>
                     ) : (
-                      <Text style={styles.caption}>Bowel movements go in Signals &gt; Bowel Movements.</Text>
+                      <>
+                        <Text style={styles.caption}>Bowel movements go in Signals &gt; Bowel Movements.</Text>
+                        <GoToLens label="Open Bowel Movements" pathname="/log" params={{ openSignalsLens: 'bowel' }} />
+                      </>
                     )}
                   </View>
                 </TabBand>
@@ -3233,8 +3296,8 @@ export default function TrendsScreen() {
                   {eatingWindowTrend && eatingWindowTrend.totalMeals > 0 ? (
                     <Text style={styles.caption}>
                       {eatingWindowTrend.totalExceptions === 0
-                        ? t(eatingWindowTrend.totalMeals === 1 ? 'The one scheduled meal in this range fell inside your window.' : 'All {count} scheduled meals in this range fell inside your window.', { count: eatingWindowTrend.totalMeals })
-                        : t(eatingWindowTrend.daysWithExceptions === 1 ? '{kept} of {count} scheduled meals kept outside your window, across {days} day.' : '{kept} of {count} scheduled meals kept outside your window, across {days} days.', {
+                        ? t(eatingWindowTrend.totalMeals === 1 ? 'The one meal in this range fell inside your window.' : 'All {count} meals in this range fell inside your window.', { count: eatingWindowTrend.totalMeals })
+                        : t(eatingWindowTrend.daysWithExceptions === 1 ? '{kept} of {count} meals kept outside your window, across {days} day.' : '{kept} of {count} meals kept outside your window, across {days} days.', {
                             kept: eatingWindowTrend.totalExceptions,
                             count: eatingWindowTrend.totalMeals,
                             days: eatingWindowTrend.daysWithExceptions,
@@ -3242,7 +3305,7 @@ export default function TrendsScreen() {
                     </Text>
                   ) : null}
                   <Text style={styles.caption}>
-                    Counts only meals scheduled in the app. Meals logged straight on Food are not counted. Meal plan meals are never counted either,
+                    Counts meals scheduled in the app and meals logged straight on Food, each by the time it was eaten. Meal plan meals are not counted,
                     because the plan moves them to fit your window.
                   </Text>
                 </View>
@@ -3272,10 +3335,13 @@ export default function TrendsScreen() {
                         yMin={yMin}
                         yMax={yMax}
                         valueFormatter={(value) => `${value.toFixed(1)} ${measurementSystem === 'imperial' ? 'lb' : 'kg'}`}
-                        emptyMessage="Log a weight reading on Profile to see it trend here."
+                        emptyMessage="Log your weight on Signals > Weight to see it trend here."
                         usualBand={usualBandFor(displayPoints.map((point) => point.value))}
                         usualBandLabel={USUAL_BAND_LABEL}
                       />
+                      {displayPoints.length === 0 ? (
+                        <GoToLens label="Open Weight" pathname="/log" params={{ openSignalsLens: 'weight' }} />
+                      ) : null}
                       {latest ? (
                         <Text style={styles.caption}>
                           Most recent: {latest.value.toFixed(1)} {measurementSystem === 'imperial' ? 'lb' : 'kg'}
@@ -3388,6 +3454,7 @@ export default function TrendsScreen() {
                     <Text style={styles.loadingText}>
                       Nothing to chart yet. Prices show up here once you have entered some on a grocery list.
                     </Text>
+                    <GoToLens label="Open Grocery List" pathname="/life" params={{ openLifeLens: 'groceryList' }} />
                   </View>
                 ) : !selectedGroceryFood ? (
                   <View style={band.boxMuted}>
@@ -3565,7 +3632,7 @@ export default function TrendsScreen() {
                           referenceLine={referenceLine}
                           referenceLineLabel={referenceLine != null ? 'Typical range midpoint' : undefined}
                           valueFormatter={(value) => `${value} ${latest?.unit ?? test?.rangeUnit ?? ''}`.trim()}
-                          emptyMessage="Log a result for this test on Insights' own Labs lens to see it trend here."
+                          emptyMessage="Log a result for this test on Insights > Labs to see it trend here."
                           usualBand={latest ? usualBandFor((labSeries ?? []).filter((row) => row.unit === latest.unit).map((row) => row.value)) : null}
                           usualBandLabel={USUAL_BAND_LABEL}
                         />
@@ -4133,7 +4200,21 @@ export default function TrendsScreen() {
 // independently-worded scale, so a Y-axis label on the Symptoms chart says
 // the same thing the person actually tapped when logging it.
 
+// 1.0.90.3: an empty band that names a place opens it, rather than only
+// naming it.
+function GoToLens({ label, pathname, params }: { label: string; pathname: string; params: Record<string, string> }) {
+  const router = useRouter();
+  return (
+    <TouchableOpacity style={styles.goButton} onPress={() => router.push({ pathname: pathname as never, params })}>
+      <Text style={styles.goButtonText}>{label}</Text>
+    </TouchableOpacity>
+  );
+}
+
 const styles = StyleSheet.create({
+  goButton: { ...BUTTON_SECONDARY_COMPACT, alignSelf: 'flex-start', marginTop: 8 },
+  goButtonText: { ...BUTTON_SECONDARY_TEXT },
+  goRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   screen: { flex: 1 },
   scroll: { flex: 1 },
   // No side inset, 2026-09-19: every top-level element is a band that

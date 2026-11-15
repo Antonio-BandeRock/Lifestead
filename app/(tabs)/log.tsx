@@ -69,6 +69,7 @@ import {
   deleteExerciseLog,
   deleteFoodTrial,
   getFoodTrialHistory,
+  getStoredMeasurementSystem,
   getUserConditions,
   listAllConditions,
   listBodyMeasurements,
@@ -183,6 +184,7 @@ import {
   updateTrackerEntry,
 } from '../../lib/customTrackersDb';
 import { ThumbRow } from '../../components/ThumbRow';
+import { kgToLb, lbToKg } from '../../lib/measurement';
 import { useConfirmSheet } from '../../components/ConfirmSheet';
 import { ThumbEndRow } from '../../components/ThumbEndRow';
 import { VaultLensFrame } from '../../components/VaultLensFrame';
@@ -222,6 +224,7 @@ type Lens =
   | 'newFoods'
   | 'exercise'
   | 'bloodPressure'
+  | 'weight'
   | 'therapies'
   | 'generalNote'
   | 'nocturia'
@@ -249,6 +252,7 @@ const LENS_VAULT: Partial<Record<Lens, readonly VaultCategory[]>> = {
   bowel: ['symptoms'],
   newFoods: ['experiments'],
   bloodPressure: ['body'],
+  weight: ['body'],
   therapies: ['therapy'],
   cycle: ['cycle'],
   microbiome: ['labs'],
@@ -311,6 +315,18 @@ const LENSES: LensOption<Lens>[] = [
       {
         heading: 'Blood Pressure',
         body: 'Log a reading (systolic, diastolic, and pulse) whenever you take one.',
+      },
+      LOG_PERSONAL_NOTES_HELP,
+    ],
+  },
+  {
+    key: 'weight',
+    label: 'Weight',
+    icon: 'scale-outline',
+    help: [
+      {
+        heading: 'Weight',
+        body: 'Log your weight whenever you weigh yourself, with the day and time. Trends > Weight draws it across the weeks. Profile shows the latest one.',
       },
       LOG_PERSONAL_NOTES_HELP,
     ],
@@ -3327,6 +3343,169 @@ function BloodPressureSection({ onChanged }: { onChanged?: () => void }) {
   );
 }
 
+// Weight, 1.0.90.3. The same body_measurements rows Profile's Weight field
+// and the phone's health store write, always stored in kg and shown in
+// the measurement system Profile picked. Before this the only place to
+// enter a weight was a field inside Profile.
+function WeightSection() {
+  const walkMark = useWalkMark();
+  const router = useRouter();
+  const [readings, setReadings] = useState<BodyMeasurementRecord[]>([]);
+  const [limit, setLimit] = useState(30);
+  const [imperial, setImperial] = useState(false);
+  const [formOpen, setFormOpen] = useState(false);
+  const [editing, setEditing] = useState<BodyMeasurementRecord | null>(null);
+  const [amount, setAmount] = useState('');
+  const [dateChoice, setDateChoice] = useState<DateChoice>('today');
+  const [customDate, setCustomDate] = useState('');
+  const [time, setTime] = useState<TimeOfDayInput>(() => splitTime24(nowTimeString24()));
+  const [showInfoAlert, infoAlertElement] = useInfoAlert();
+  const [confirm, confirmElement] = useConfirmSheet();
+  const unit = imperial ? 'lb' : 'kg';
+
+  const load = useCallback(() => {
+    Promise.all([listBodyMeasurements('weight', limit), getStoredMeasurementSystem()])
+      .then(([rows, system]) => {
+        setReadings(rows);
+        setImperial(system === 'imperial');
+      })
+      .catch(() => setReadings([]));
+  }, [limit]);
+
+  useFocusEffect(useCallback(() => { load(); }, [load]));
+
+  function shown(kg: number): string {
+    const value = imperial ? kgToLb(kg) : kg;
+    return `${Math.round(value * 10) / 10} ${unit}`;
+  }
+
+  function resetForm() {
+    setAmount('');
+    setDateChoice('today');
+    setCustomDate('');
+    setTime(splitTime24(nowTimeString24()));
+    setEditing(null);
+  }
+
+  function startEdit(reading: BodyMeasurementRecord) {
+    const stamp = localStampOf(reading.loggedAt);
+    const day = dateChoiceFor(stamp.slice(0, 10));
+    const value = imperial ? kgToLb(reading.value) : reading.value;
+    setAmount(String(Math.round(value * 10) / 10));
+    setDateChoice(day.choice);
+    setCustomDate(day.custom);
+    setTime(splitTime24(stamp.slice(11, 16) || '00:00'));
+    setEditing(reading);
+    setFormOpen(true);
+  }
+
+  async function handleSave() {
+    const entered = Number(amount.replace(',', '.'));
+    if (!Number.isFinite(entered) || entered <= 0) {
+      showInfoAlert('Almost there', `Enter your weight in ${unit}.`);
+      return;
+    }
+    const loggedAt = resolveDateTime(dateChoice, customDate, time);
+    if (!loggedAt) {
+      showInfoAlert('Almost there', 'Enter a valid date and time.');
+      return;
+    }
+    const kg = imperial ? lbToKg(entered) : entered;
+    if (editing) {
+      await updateBodyMeasurement(editing.id, { loggedAt, value: kg });
+    } else {
+      await recordBodyMeasurement({ loggedAt, measurementType: 'weight', value: kg, unit: 'kg' });
+    }
+    setFormOpen(false);
+    resetForm();
+    load();
+  }
+
+  async function handleDelete(reading: BodyMeasurementRecord) {
+    const ok = await confirm({ title: 'Remove this weight?', message: 'This cannot be undone.', confirmLabel: 'Remove', destructive: true });
+    if (!ok) return;
+    await deleteBodyMeasurement(reading.id);
+    if (editing?.id === reading.id) {
+      setFormOpen(false);
+      resetForm();
+    }
+    load();
+  }
+
+  return (
+    <View style={styles.sectionColumn}>
+      {infoAlertElement}
+      {confirmElement}
+      {!formOpen ? (
+        <TouchableOpacity ref={walkMark.ref('signals.add')} style={styles.addButton} onPress={() => setFormOpen(true)}>
+          <Text style={styles.addButtonText}>+ Log your weight</Text>
+        </TouchableOpacity>
+      ) : (
+        <View style={styles.formCard}>
+          <Text style={styles.label}>Weight</Text>
+          <View style={styles.timeRow}>
+            <AppTextInput
+              style={[styles.input, styles.timeInput]}
+              placeholder={imperial ? '150' : '68'}
+              keyboardType="decimal-pad"
+              maxLength={6}
+              value={amount}
+              onChangeText={setAmount}
+            />
+            <Text style={styles.helperText}>{unit}</Text>
+          </View>
+          <Text style={styles.label}>When?</Text>
+          <DateChoicePicker value={dateChoice} onChange={setDateChoice} customDate={customDate} onCustomDateChange={setCustomDate} />
+          <Text style={styles.label}>About what time?</Text>
+          <TimePicker value={time} onChange={setTime} />
+          <ThumbRow primary="last" style={styles.formActions}>
+            <TouchableOpacity style={styles.secondaryButton} onPress={() => { setFormOpen(false); resetForm(); }}>
+              <Text style={styles.secondaryButtonText}>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity ref={walkMark.ref('signals.save')} style={styles.primaryButton} onPress={handleSave}>
+              <Text style={styles.primaryButtonText}>{editing ? 'Save changes' : 'Save'}</Text>
+            </TouchableOpacity>
+          </ThumbRow>
+        </View>
+      )}
+
+      {readings.length === 0 ? (
+        <View style={styles.panelStandalone}>
+          <Text style={styles.emptyText}>No weight logged yet.</Text>
+        </View>
+      ) : (
+        <View style={styles.table}>
+          {readings.map((reading) => (
+            <View key={reading.id} style={styles.row}>
+              <View style={styles.rowTextCol}>
+                <Text style={styles.rowTitle}>{shown(reading.value)}</Text>
+                <Text style={styles.rowMeta}>{formatEntryDateTime(reading.loggedAt)}</Text>
+              </View>
+              <View style={styles.rowActions}>
+                <TouchableOpacity ref={reading === readings[0] ? walkMark.ref('signals.editFirst') : undefined} onPress={() => startEdit(reading)}>
+                  <Text style={styles.actionText}>Edit</Text>
+                </TouchableOpacity>
+                <TouchableOpacity ref={reading === readings[0] ? walkMark.ref('signals.removeFirst') : undefined} onPress={() => handleDelete(reading)}>
+                  <Text style={styles.actionTextRemove}>Remove</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          ))}
+        </View>
+      )}
+      {readings.length >= limit ? <ShowMoreButton onPress={() => setLimit((n) => n + LIST_STEP)} /> : null}
+      {readings.length > 0 ? (
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={() => router.push({ pathname: '/trends', params: { openTrendsLens: 'weight' } })}
+        >
+          <Text style={styles.addButtonText}>See it over time in Trends</Text>
+        </TouchableOpacity>
+      ) : null}
+    </View>
+  );
+}
+
 function GeneralNoteSection() {
   const walkMark = useWalkMark();
   const [notesList, setNotesList] = useState<WellbeingCheckin[]>([]);
@@ -3517,6 +3696,15 @@ function BloodPressureLens() {
     <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
       <BloodPressureSection onChanged={() => setChanges((n) => n + 1)} />
       <YearInSquaresBand set="bloodPressure" color={TAB_COLOR} reloadKey={changes} />
+    </ScrollView>
+  );
+}
+
+function WeightLens() {
+  const scrollBottomPadding = useFloatingButtonScrollPadding();
+  return (
+    <ScrollView style={styles.body} contentContainerStyle={[styles.bodyContent, { paddingBottom: scrollBottomPadding }]}>
+      <WeightSection />
     </ScrollView>
   );
 }
@@ -4624,6 +4812,8 @@ export default function LogScreen() {
             <ExerciseLens />
           ) : lens === 'bloodPressure' ? (
             <BloodPressureLens />
+          ) : lens === 'weight' ? (
+            <WeightLens />
           ) : lens === 'therapies' ? (
             <TherapiesLens />
           ) : lens === 'generalNote' ? (

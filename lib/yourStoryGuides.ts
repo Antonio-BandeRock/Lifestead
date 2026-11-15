@@ -477,11 +477,11 @@ export const GUIDES: GuideDef[] = [
         key: 'weight',
         record: 'weight',
         when: 'whenItHappens',
-        doThis: 'Log your weight in Profile, if you track it.',
+        doThis: 'Log your weight in Signals under Weight, if you track it.',
         forYou: 'Trends, under Weight, draws it across the weeks with your usual range beside it, which says what your readings have been and never what they ought to be.',
         takes: 'Under a minute',
-        taps: ['Tap Personal Info to open it.', 'Fill in Weight.'],
-        destination: route('/profile', { section: 'personal-info' }),
+        taps: ['Tap + Log your weight.', 'Type the number and save.'],
+        destination: signalsLens('weight'),
       },
       {
         key: 'therapy',
@@ -1541,6 +1541,7 @@ export const LENS_NAMES: Record<string, Record<string, string>> = {
     newFoods: 'New Foods & Experiments',
     exercise: 'Exercise',
     bloodPressure: 'Blood Pressure',
+    weight: 'Weight',
     therapies: 'Hands-On Therapies',
   },
 };

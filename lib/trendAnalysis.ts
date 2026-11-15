@@ -5,6 +5,9 @@ import {
   getStepCountTrend,
   listHealthRecords,
   getOutsideEatingWindowCountsByDateRange,
+  getUserProfile,
+  isWithinEatingWindow,
+  listUnscheduledMealTimes,
   getProjectedNutrientTotalsByDateRange,
   getProjectedSixDimensionsFlagCountsByDateRange,
   getSixDimensionsFlagCountsByDateRange,
@@ -248,11 +251,30 @@ export async function getSixDimensionsFlagTrendSeries(days: number, conditionCod
 // full ISO datetime (rather than a bare 'YYYY-MM-DD') still produces a
 // real, valid date TrendLineChart's own formatShortDate can parse --
 // that function assumes exactly 3 dash-separated parts.
+// 1.0.90.3: a reading saved with a UTC stamp (Profile and Signals > Weight
+// both save one) is placed on the person's local day, so an evening
+// weigh-in no longer lands on tomorrow.
+const ZONED_STAMP = /(Z|[+-]\d\d:?\d\d)$/;
+
+function localDayAndTime(stamp: string): { day: string; time: string } {
+  if (ZONED_STAMP.test(stamp)) {
+    const at = new Date(stamp);
+    if (!Number.isNaN(at.getTime())) {
+      const pad = (n: number) => String(n).padStart(2, '0');
+      return {
+        day: `${at.getFullYear()}-${pad(at.getMonth() + 1)}-${pad(at.getDate())}`,
+        time: `${pad(at.getHours())}:${pad(at.getMinutes())}`,
+      };
+    }
+  }
+  return { day: stamp.slice(0, 10), time: stamp.slice(11, 16) };
+}
+
 export async function getWeightTrendPoints(days: number): Promise<TrendPoint[]> {
   const rangeStart = dateStringDaysAgo(days - 1);
   const rows = await getBodyMeasurementTrend('weight');
   return rows
-    .map((row) => ({ date: row.loggedAt.slice(0, 10), value: row.value }))
+    .map((row) => ({ date: localDayAndTime(row.loggedAt).day, value: row.value }))
     .filter((point) => point.date >= rangeStart);
 }
 
@@ -309,7 +331,28 @@ export type EatingWindowTrend = {
 };
 
 export async function getEatingWindowTrendForRange(startDate: string, endDate: string): Promise<EatingWindowTrend> {
-  const byDay = await getOutsideEatingWindowCountsByDateRange(startDate, endDate);
+  const [scheduled, logged, profile] = await Promise.all([
+    getOutsideEatingWindowCountsByDateRange(startDate, endDate),
+    listUnscheduledMealTimes(startDate, endDate),
+    getUserProfile(),
+  ]);
+  // 1.0.90.3: meals logged straight on Food join the count, each judged by
+  // the time it was eaten. With no window set there is nothing to judge
+  // them against, so only the scheduled meals' own flags count.
+  const counts = new Map<string, EatingWindowDayCount>(scheduled.map((day) => [day.date, { ...day }]));
+  const windowStart = profile?.fastingEnabled ? profile.eatingWindowStart : null;
+  const windowEnd = profile?.fastingEnabled ? profile.eatingWindowEnd : null;
+  if (windowStart && windowEnd) {
+    for (const meal of logged) {
+      const { day, time } = localDayAndTime(meal.eatenAt);
+      if (day < startDate || day > endDate || !time) continue;
+      const entry = counts.get(day) ?? { date: day, outsideCount: 0, totalMeals: 0 };
+      entry.totalMeals += 1;
+      if (!isWithinEatingWindow(time, windowStart, windowEnd)) entry.outsideCount += 1;
+      counts.set(day, entry);
+    }
+  }
+  const byDay = [...counts.values()].sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
   return {
     points: byDay.map((day) => ({ date: day.date, value: day.outsideCount })),
     totalExceptions: byDay.reduce((sum, day) => sum + day.outsideCount, 0),
