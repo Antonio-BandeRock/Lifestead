@@ -31,6 +31,8 @@ import {
   type ElectricityBill,
 } from '../lib/growSetup';
 import { addElectricityBill, deleteElectricityBill, listAllGrowEquipmentInUse, listElectricityBills, setElectricityBillBaseline } from '../lib/growSetupDb';
+import { readOrClosed, useOnVaultChange } from '../lib/vaultReads';
+import { VaultClosedBand } from './VaultClosedBand';
 import { formatTradeMoney } from '../lib/harvestTrade';
 import { AppTextInput } from './AppTextInput';
 import { PopoverSelect } from './PopoverSelect';
@@ -87,7 +89,7 @@ export function ElectricityBand({ folds, plotOptions, noPlotValue, groupPrefix, 
   const [recordError, setRecordError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
-    const [rows, equipment] = await Promise.all([listElectricityBills(), listAllGrowEquipmentInUse()]);
+    const [rows, equipment] = await Promise.all([readOrClosed(listElectricityBills, []), listAllGrowEquipmentInUse()]);
     setBills(rows);
     const power = summarizeSetupPower(equipment);
     setSetupLine(equipment.length === 0 ? null : describeSetupPower(power, electricityRate(rows)));
@@ -96,6 +98,8 @@ export function ElectricityBand({ folds, plotOptions, noPlotValue, groupPrefix, 
   useEffect(() => {
     load();
   }, [load]);
+  // Electricity bills are money records in the vault (finances).
+  useOnVaultChange(load);
 
   const comparison = compareElectricity(bills);
 
@@ -167,6 +171,7 @@ export function ElectricityBand({ folds, plotOptions, noPlotValue, groupPrefix, 
 
   return (
     <TabBand folds={folds} color={TAB_COLOR} markRef={walkMark.ref('costs.electricity')} id="garden:costs:electricity" title="Electricity" icon="flash-outline" count={bills.length}>
+      <VaultClosedBand color={TAB_COLOR} categories={['finances']} inline />
       <View style={styles.card}>
         <Text style={styles.captionText}>
           Record the bill you have now, from before the grow starts, and mark it as the baseline. Each later bill is compared with that one per day, so short and long bills compare fairly. The difference is what the grow costs in electricity. A bill is the whole household&apos;s, so it lives here rather than under one area.

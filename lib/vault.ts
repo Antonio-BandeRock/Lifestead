@@ -55,6 +55,7 @@ export type VaultCategory =
   | 'cycle'
   | 'therapy'
   | 'neuro'
+  | 'work'
   | 'experiments'
   | 'familyHealth'
   | 'medications'
@@ -71,6 +72,7 @@ export const VAULT_CATEGORIES: readonly VaultCategory[] = [
   'cycle',
   'therapy',
   'neuro',
+  'work',
   'experiments',
   'familyHealth',
   'medications',
@@ -90,6 +92,7 @@ export const VAULT_CATEGORY_KIND: Record<VaultCategory, VaultCategoryKind> = {
   cycle: 'records',
   therapy: 'records',
   neuro: 'records',
+  work: 'records',
   experiments: 'records',
   familyHealth: 'records',
   medications: 'listed',
@@ -107,6 +110,7 @@ export const VAULT_CATEGORY_GROUP: Record<VaultCategory, 'health' | 'money'> = {
   cycle: 'health',
   therapy: 'health',
   neuro: 'health',
+  work: 'health',
   experiments: 'health',
   familyHealth: 'health',
   medications: 'health',
@@ -146,9 +150,10 @@ export const VAULT_TABLES: Record<VaultCategory, readonly string[]> = {
   cycle: ['cycle_days'],
   therapy: ['therapy_sessions'],
   neuro: ['user_neuro_profile'],
+  work: ['work_checkins'],
   experiments: ['personal_rules', 'food_trials', 'food_trial_task_links', 'trial_series', 'trial_series_items', 'trial_steps'],
   familyHealth: ['family_member_conditions'],
-  medications: ['treatments'],
+  medications: ['treatments', 'dose_sites', 'medicine_labels'],
   conditions: ['user_conditions', 'user_food_allergies'],
   appointments: [],
   medicalBills: ['finance_medical_bills'],
@@ -164,6 +169,9 @@ export const VAULT_TABLES: Record<VaultCategory, readonly string[]> = {
     'finance_networth_snapshots',
     'finance_health_accounts',
     'finance_insurance_plans',
+    'work_benefits',
+    'interest_pay_worksheets',
+    'electricity_bills',
   ],
 };
 
@@ -175,6 +183,7 @@ export const VAULT_CATEGORY_LABELS: Record<VaultCategory, string> = {
   cycle: 'Cycle',
   therapy: 'Therapy sessions',
   neuro: 'Neurodivergent profile',
+  work: 'Work check-ins',
   experiments: 'Personal rules and food experiments',
   familyHealth: 'Family health history',
   medications: 'Medications and supplements list',
@@ -192,6 +201,7 @@ export const VAULT_CATEGORY_PHRASES: Record<VaultCategory, string> = {
   cycle: 'cycle records',
   therapy: 'therapy sessions',
   neuro: 'neurodivergent profile notes',
+  work: 'work check-ins',
   experiments: 'personal rules and food experiments',
   familyHealth: 'family health records',
   medications: 'medications and supplements',
@@ -362,6 +372,9 @@ export type VaultSettings = {
   /** Set It Up was pressed on the offer, and setup opens the next time the
    *  app is opened (1.0.67.1: no button on a notification opens the app). */
   setUpWaiting: boolean;
+  /** The offer made the moment a first health or money record was saved,
+   *  once for each group (direct instruction, 2026-11-14). */
+  firstOffered: { health: boolean; money: boolean };
 };
 
 export const EMPTY_VAULT_SETTINGS: VaultSettings = {
@@ -373,6 +386,7 @@ export const EMPTY_VAULT_SETTINGS: VaultSettings = {
   stopOffering: false,
   setupAsked: false,
   setUpWaiting: false,
+  firstOffered: { health: false, money: false },
 };
 
 function cleanCode(value: unknown): VaultCode | null {
@@ -417,6 +431,10 @@ export function parseVaultSettings(text: string | null): VaultSettings | null {
     stopOffering: r.stopOffering === true,
     setupAsked: r.setupAsked === true,
     setUpWaiting: r.setUpWaiting === true,
+    firstOffered: {
+      health: (r.firstOffered as Record<string, unknown> | undefined)?.health === true,
+      money: (r.firstOffered as Record<string, unknown> | undefined)?.money === true,
+    },
   };
 }
 
@@ -481,6 +499,69 @@ export function shouldOfferVault(
   return now - settings.offeredAt >= VAULT_OFFER_EVERY_DAYS * DAY_MS;
 }
 
+// ---------------------------------------------------------------------------
+// The offer at the first protected record (direct instruction, 2026-11-14)
+//
+// "If they choose to wait to set it up then it should be provided to them the
+// moment they enter any data that should be protected", and "The offer should
+// only come if they haven't already turned them on." Made in the app, right
+// after the save, once for the first health record and once for the first
+// money record. Only after setup has put the question (so the medicines and
+// conditions typed in during setup never set it off), never while that
+// group's records are already closed behind a code, and never after Don't
+// Ask Again. The monthly notification above stays as the fallback.
+
+export type VaultGroup = 'health' | 'money';
+
+const INSERT_TABLE = /^\s*(?:INSERT(?:\s+OR\s+\w+)?\s+INTO|REPLACE\s+INTO)\s+"?([A-Za-z0-9_]+)"?/i;
+
+const TABLE_TO_ANY_CATEGORY = new Map<string, VaultCategory>();
+for (const category of VAULT_CATEGORIES) {
+  for (const table of VAULT_TABLES[category]) TABLE_TO_ANY_CATEGORY.set(table, category);
+}
+
+/** The vault category a statement adds a row to, or null when it adds nothing the vault holds. */
+export function vaultCategoryInserted(sql: string): VaultCategory | null {
+  const match = INSERT_TABLE.exec(stripLiteralsAndComments(sql));
+  if (!match) return null;
+  return TABLE_TO_ANY_CATEGORY.get(match[1].toLowerCase()) ?? null;
+}
+
+/** Whether this group's records are already closed behind a code. */
+export function vaultGroupGuarded(group: VaultGroup, appLockOn: boolean, settings: VaultSettings): boolean {
+  return vaultGuarding(appLockOn, settings) && settings.categories.some((c) => VAULT_CATEGORY_GROUP[c] === group);
+}
+
+/** The group to make the offer for after this statement ran, or null for no offer. */
+export function firstRecordOfferFor(sql: string, appLockOn: boolean, settings: VaultSettings): VaultGroup | null {
+  if (settings.stopOffering || !settings.setupAsked) return null;
+  const category = vaultCategoryInserted(sql);
+  if (!category) return null;
+  const group = VAULT_CATEGORY_GROUP[category];
+  if (settings.firstOffered[group]) return null;
+  if (vaultGroupGuarded(group, appLockOn, settings)) return null;
+  return group;
+}
+
+/** The words of the offer, which say what kind of record and never what it says. */
+export function firstRecordOfferText(group: VaultGroup): { title: string; message: string } {
+  return group === 'health'
+    ? {
+        title: 'Keep your health records closed?',
+        message:
+          'You just saved your first health record, and anyone holding this device can open it. Set up a code or fingerprint to keep health and money records closed until you open them. Safety warnings and reminders keep working either way.',
+      }
+    : {
+        title: 'Keep your money records closed?',
+        message:
+          'You just saved your first money record, and anyone holding this device can open it. Set up a code or fingerprint to keep money and health records closed until you open them.',
+      };
+}
+
+export const FIRST_RECORD_SET_UP_LABEL = 'Set It Up';
+export const FIRST_RECORD_NOT_NOW_LABEL = 'Not Now';
+export const FIRST_RECORD_STOP_LABEL = 'Don’t Ask Again';
+
 /** The offer is shown, never queued, so it carries an id of its own that no reconcile cancels. */
 export const VAULT_OFFER_NOTIFICATION_ID = 'inside-story-vault-offer';
 
@@ -512,6 +593,9 @@ export const VAULT_COUNTED_TABLES: readonly string[] = [
   'finance_entries',
   'finance_goals',
   'finance_insurance_plans',
+  'work_checkins',
+  'work_benefits',
+  'electricity_bills',
 ];
 
 /** The offer arrives in the day, never at night or first thing. */

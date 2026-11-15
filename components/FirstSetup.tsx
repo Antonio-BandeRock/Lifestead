@@ -14,9 +14,11 @@
 // shows its questions, one at a time, then its setup cards, each with what it
 // feeds (lib/setupSections.ts holds which questions and cards belong to which
 // part, and every why). Done with this part or Skip this part goes back to
-// the list, a done part dimmed and a skipped one moved to the end. With every
-// part settled come the last questions: the neuro profile, backup, how
-// records are kept closed, then how much Home shows, and then Home.
+// the list, a done part dimmed and a skipped one moved to the end. Before
+// the list come what the app needs to know, then the closing questions (the
+// neuro profile, how much Home shows, how records are kept closed, and the
+// first backup), so the person is protected before setting up any area.
+// With every part settled, Home.
 //
 //   - The header band comes first, with Finish Later at its top, which
 //     lets the person in. Setup comes back the next time the app starts
@@ -71,6 +73,7 @@ import {
   CARD_WHY,
   CARD_WHY_LABEL,
   CLOSING_HEADING,
+  CLOSING_LEAD,
   REQUIRED_HEADING,
   REQUIRED_LEAD,
   requiredQuestions,
@@ -308,10 +311,10 @@ export function FirstSetup() {
       ? 'parts'
       : stage === 'required'
         ? 'required'
-        : section
-          ? 'section'
-          : stage === 'closing'
-            ? 'closing'
+        : stage === 'closing'
+          ? 'closing'
+          : section
+            ? 'section'
             : 'list';
   const allDone = stage === 'finished';
 
@@ -389,9 +392,9 @@ export function FirstSetup() {
       // 2026-11-13, direct instruction: setup "should always continue ... to
       // the next and the next and the next thing after that until all things
       // have been setup from the sections of the app the user chose". So
-      // Done or Skip opens the next part still open, and only once none is
-      // left do the last questions come. Back to the list stays for choosing
-      // a different one.
+      // Done or Skip opens the next part still open, and once none is left
+      // setup is finished. Back to the list stays for choosing a different
+      // one.
       const fresh = await load();
       const next = fresh ? listParts(fresh).find((part) => part.state === 'open' && part.beat !== beat) : undefined;
       setSection(next ? next.beat : null);
@@ -652,6 +655,7 @@ export function FirstSetup() {
       <>
         <View style={styles.band}>
           <Text style={styles.heading}>{CLOSING_HEADING}</Text>
+          <Text style={styles.lead}>{CLOSING_LEAD}</Text>
         </View>
         {renderQuestion()}
         {renderOnRecord()}

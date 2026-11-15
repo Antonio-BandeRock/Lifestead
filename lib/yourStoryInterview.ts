@@ -140,8 +140,8 @@ export const INTERVIEW_QUESTIONS: InterviewQuestionDef[] = [
   // want to start that way, or any of the other ways, they can."
   {
     kind: 'security',
-    question: 'How should your records be kept closed?',
-    why: 'App Lock encrypts the records Lifestead keeps on this device, and nothing else on the phone, and asks for your code when the app opens. The vault keeps your health and money records closed even while the app is open, so a phone handed over for the shopping list does not show your labs. Either, both, or neither, and any of it can be changed in Profile.',
+    question: 'How should your health, money, and budget and spending records be kept closed?',
+    why: 'App Lock encrypts the records Lifestead keeps on this device, and nothing else on the phone, and asks for your code when the app opens. The vault keeps your health records (medicines, conditions, symptoms, labs, therapy and work check-ins) and your money records (accounts, budget and spending, bills and benefits) closed even while the app is open, so a phone handed over for the shopping list does not show your labs. Nothing is in them yet, so this is your choice: either, both, or neither, and any of it can be changed in Profile. If you leave it for later, Lifestead asks again the moment you save your first health or money record.',
     beats: [],
   },
 ];

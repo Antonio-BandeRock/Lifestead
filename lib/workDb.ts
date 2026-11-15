@@ -61,7 +61,7 @@ export async function upsertBenefit(input: {
  *  accumulates and the other is a level. */
 export async function recordBenefitUse(id: string, amount: number): Promise<void> {
   const db = await getDatabase();
-  const row = await db.getFirstAsync<{ kind: string }>('SELECT kind FROM work_benefits WHERE id = ?', id);
+  const row = await db.getFirstAsync<{ kind: string }>('/* vault:tool */ SELECT kind FROM work_benefits WHERE id = ?', id);
   if (!row) return;
   const now = new Date().toISOString();
   if (row.kind === 'match') {
@@ -104,13 +104,18 @@ export async function deleteBenefit(id: string): Promise<void> {
   await removeAttachmentsOf('work_benefit', id);
 }
 
-export async function listBenefits(): Promise<Benefit[]> {
+/**
+ * Every benefit. `forReminders` reads past a closed vault, the way
+ * appointment reminders keep coming: the reminder that a benefit resets
+ * soon is a tool, the list on Work is the record.
+ */
+export async function listBenefits(forReminders = false): Promise<Benefit[]> {
   const db = await getDatabase();
   const rows = await db.getAllAsync<{
     id: string; name: string; kind: string; total: number | null; used: number;
     resets: string; resetOn: string | null; active: number; notes: string | null;
   }>(
-    `
+    `${forReminders ? '/* vault:tool */ ' : ''}
       SELECT id, name, kind, total, used, resets, reset_on AS resetOn, active, notes
       FROM work_benefits
       ORDER BY active DESC, reset_on IS NULL, reset_on, name

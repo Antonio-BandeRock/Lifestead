@@ -45,6 +45,7 @@ import {
   retireGrowEquipment,
   type GrowEquipmentInput,
 } from '../lib/growSetupDb';
+import { readOrClosed } from '../lib/vaultReads';
 import { AppTextInput } from './AppTextInput';
 import { NotesInput } from './NotesInput';
 import { GardenTermField } from './GardenTermField';
@@ -270,7 +271,7 @@ export function GrowSetupSection({ plot, onChanged }: Props) {
   const [error, setError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
-    const [rows, termRows, bills] = await Promise.all([listGrowEquipment(plot.id), listGardenTerms(true), listElectricityBills()]);
+    const [rows, termRows, bills] = await Promise.all([listGrowEquipment(plot.id), listGardenTerms(true), readOrClosed(listElectricityBills, [])]);
     setItems(rows);
     setTerms(termRows);
     setRate(electricityRate(bills));

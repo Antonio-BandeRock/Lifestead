@@ -1,0 +1,62 @@
+// The vault offer at the first protected record (direct instruction,
+// 2026-11-14): "if they choose to wait to set it up then it should be
+// provided to them the moment they enter any data that should be
+// protected", and "the offer should only come if they haven't already
+// turned them on."
+//
+// lib/databaseActivity.ts tells lib/vaultState.ts about every write that
+// went through; the first one adding a health or money row, once setup has
+// put the question, is held there until this sheet shows it. Mounted once at
+// the app root, the GardenPlateOfferHost shape, so it comes up over whichever
+// screen did the saving. Which rows count and when is in lib/vault.ts
+// (firstRecordOfferFor), with its tests in scripts/test_vault.js.
+import { useRouter } from 'expo-router';
+import { useSyncExternalStore } from 'react';
+import {
+  FIRST_RECORD_NOT_NOW_LABEL,
+  FIRST_RECORD_SET_UP_LABEL,
+  FIRST_RECORD_STOP_LABEL,
+  VAULT_DEFAULT_CATEGORIES,
+  firstRecordOfferText,
+} from '../lib/vault';
+import {
+  answerFirstRecordOffer,
+  getPendingVaultOffer,
+  isAppLockOnForVault,
+  subscribeVaultOffer,
+} from '../lib/vaultState';
+import { setVaultCategories } from '../lib/vaultSession';
+import { AppActionSheet } from './AppActionSheet';
+
+export function VaultFirstRecordOfferHost() {
+  const router = useRouter();
+  const group = useSyncExternalStore(subscribeVaultOffer, getPendingVaultOffer, getPendingVaultOffer);
+  if (group === null) return null;
+  const words = firstRecordOfferText(group);
+
+  function setUp(): void {
+    if (group === null) return;
+    const appLockOn = isAppLockOnForVault();
+    answerFirstRecordOffer(group, 'setUp');
+    setVaultCategories(VAULT_DEFAULT_CATEGORIES);
+    if (appLockOn) {
+      router.push({ pathname: '/profile', params: { section: 'applock' } });
+    } else {
+      router.push('/app-lock-setup');
+    }
+  }
+
+  return (
+    <AppActionSheet
+      visible
+      onClose={() => answerFirstRecordOffer(group, 'notNow')}
+      title={words.title}
+      message={words.message}
+      actions={[
+        { label: FIRST_RECORD_SET_UP_LABEL, onPress: setUp },
+        { label: FIRST_RECORD_NOT_NOW_LABEL, onPress: () => answerFirstRecordOffer(group, 'notNow') },
+        { label: FIRST_RECORD_STOP_LABEL, onPress: () => answerFirstRecordOffer(group, 'stop') },
+      ]}
+    />
+  );
+}

@@ -320,6 +320,33 @@ check('closed again refuses', S.vaultRefusalNow(read) instanceof V.VaultClosedEr
   check('the offer never arrives at night', !V.vaultOfferHourOk(new Date(2026, 9, 7, 23, 0)) && V.vaultOfferHourOk(new Date(2026, 9, 7, 14, 0)));
   const notifier = fs.readFileSync(path.join(LIB, 'reminderNotifications.ts'), 'utf8');
   check('a tap on the offer opens Profile on App Lock', notifier.includes("VAULT_OFFER_NOTIFICATION_ID) return { pathname: '/profile', params: { section: 'applock' } }"));
+  // 6b. The offer at the first protected record (2026-11-14).
+  {
+    const asked = { ...V.EMPTY_VAULT_SETTINGS, setupAsked: true };
+    check('a first medicine brings the health offer', V.firstRecordOfferFor('INSERT INTO treatments (id, name) VALUES (?, ?)', false, asked) === 'health');
+    check('a first bill brings the money offer', V.firstRecordOfferFor('INSERT OR REPLACE INTO finance_entries (id) VALUES (?)', false, asked) === 'money');
+    check('a work check-in counts as health', V.firstRecordOfferFor('INSERT INTO work_checkins (id) VALUES (?)', true, asked) === 'health');
+    check('a meal brings no offer', V.firstRecordOfferFor('INSERT INTO meals (id) VALUES (?)', false, asked) === null);
+    check('an update brings no offer', V.firstRecordOfferFor('UPDATE treatments SET name = ?', false, asked) === null);
+    check('a table named inside a string is not an insert', V.firstRecordOfferFor("INSERT INTO meals (note) VALUES ('INSERT INTO treatments')", false, asked) === null);
+    check('nothing before setup has asked', V.firstRecordOfferFor('INSERT INTO treatments (id) VALUES (?)', false, V.EMPTY_VAULT_SETTINGS) === null);
+    check('nothing after Don’t Ask Again', V.firstRecordOfferFor('INSERT INTO treatments (id) VALUES (?)', false, { ...asked, stopOffering: true }) === null);
+    check('health is offered once', V.firstRecordOfferFor('INSERT INTO treatments (id) VALUES (?)', false, { ...asked, firstOffered: { health: true, money: false } }) === null);
+    check('money is still offered after health was', V.firstRecordOfferFor('INSERT INTO finance_entries (id) VALUES (?)', false, { ...asked, firstOffered: { health: true, money: false } }) === 'money');
+    const guarded = { ...asked, categories: ['medications'] };
+    check('nothing while health is already in the vault', V.firstRecordOfferFor('INSERT INTO treatments (id) VALUES (?)', true, guarded) === null);
+    check('money is offered while only health is in the vault', V.firstRecordOfferFor('INSERT INTO finance_entries (id) VALUES (?)', true, guarded) === 'money');
+    check('a chosen category with no code yet still offers', V.firstRecordOfferFor('INSERT INTO treatments (id) VALUES (?)', false, guarded) === 'health');
+    const parsed = V.parseVaultSettings(JSON.stringify({ version: 1, firstOffered: { money: true } }));
+    check('firstOffered survives a reading', parsed.firstOffered.money === true && parsed.firstOffered.health === false);
+    const activity = fs.readFileSync(path.join(LIB, 'databaseActivity.ts'), 'utf8');
+    check('every write the person makes is shown to the offer', activity.includes('if (suspendDepth === 0) noteVaultRecordWritten(args[0]);'));
+    const layoutForOffer = fs.readFileSync(path.join(ROOT, 'app', '_layout.tsx'), 'utf8');
+    check('the offer host is mounted at the root', layoutForOffer.includes('<VaultFirstRecordOfferHost />'));
+    const backupForOffer = fs.readFileSync(path.join(LIB, 'dataBackup.ts'), 'utf8');
+    check('a restore never brings the offer', backupForOffer.includes('return withVaultBypass(() => restoreEnvelopeRows(envelope));'));
+  }
+
   // 7. In the source.
   const backup = fs.readFileSync(path.join(LIB, 'dataBackup.ts'), 'utf8');
   check('the backup reads through unguardedGetAll', backup.includes('await unguardedGetAll<Record<string, unknown>>(db, `SELECT * FROM "${name}"`)'));

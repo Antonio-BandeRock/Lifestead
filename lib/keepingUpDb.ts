@@ -50,6 +50,7 @@ import type {
 } from './keepingUp';
 import { upkeepStanding } from './upkeep';
 import { listUpkeepItems } from './upkeepDb';
+import { readOrClosed } from './vaultReads';
 
 /** A stored UTC timestamp reduced to the local day it landed on. */
 function dayOf(value: string | null | undefined): string | null {
@@ -171,15 +172,19 @@ export async function getKeepingUpInputs(startDate: string, endDate: string): Pr
       startDate,
       endDate,
     ),
-    db.getAllAsync<{
-      weekOf: string; autonomy: number; competence: number; relatedness: number; drain: number;
-    }>(
-      `SELECT week_of AS weekOf, autonomy, competence, relatedness, drain
-         FROM work_checkins
-        WHERE week_of >= ? AND week_of <= ?
-        ORDER BY week_of`,
-      startDate,
-      endDate,
+    readOrClosed(
+      () =>
+        db.getAllAsync<{
+          weekOf: string; autonomy: number; competence: number; relatedness: number; drain: number;
+        }>(
+          `SELECT week_of AS weekOf, autonomy, competence, relatedness, drain
+             FROM work_checkins
+            WHERE week_of >= ? AND week_of <= ?
+            ORDER BY week_of`,
+          startDate,
+          endDate,
+        ),
+      [],
     ),
     readUpkeepStanding(endDate),
   ]);

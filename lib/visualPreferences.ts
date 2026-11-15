@@ -249,6 +249,9 @@ export type HomeSectionKey =
   // Capture. The one card on Home that cannot be turned off: see
   // HOME_SECTIONS_ALWAYS_SHOWN below.
   | 'yourStory'
+  // The App Tour, 2026-11-14 (components/AppTourBand.tsx): every tab's
+  // tutorials in order, or one tab's, from Home.
+  | 'appTour'
   // The greeting card, a section like any other since 2026-09-16.
   // It was outside this system entirely until then, which is what made
   // it the one thing on Home nobody could move, fold or turn off. Named
@@ -436,6 +439,8 @@ const DESIGNED_HOME_SECTION_KEYS: HomeSectionKey[] = [
   // most useful thing on the page, and once everything is it has folded to
   // one line that names nothing left to do.
   'yourStory',
+  // The App Tour, straight after Your Guide, where someone new looks first.
+  'appTour',
   // Capture leads, behind only the one-off folder nudge: it is the one
   // card whose whole value is being reachable before a thought is gone.
   'captureInbox',
@@ -549,6 +554,7 @@ export const HOME_SECTION_LABELS: Record<HomeSectionKey, string> = {
   sharedFolderSetup: 'Shared Folder Setup',
   captureInbox: 'Sort It Out',
   yourStory: 'Your Guide',
+  appTour: 'App Tour',
   today: 'Today',
   lowStimulation: 'Low Stimulation',
   symptomCheckinReminder: 'Symptom Check-In',

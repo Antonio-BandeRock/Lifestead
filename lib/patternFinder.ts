@@ -71,6 +71,7 @@ import {
 } from './patternFactors';
 import { isFlaggedTier } from './sixDimensionsReference';
 import { listWorkCheckins } from './workDb';
+import { readOrClosed } from './vaultReads';
 import {
   compareMovementAgainstSymptoms,
   isMovementRefusal,
@@ -723,7 +724,7 @@ export async function findFoodPatterns(
   // Weekly work answers and weekly steps are compared against flares only;
   // for a kind of day, both are left out rather than half reworded.
   const weeklyApplies = outcome === 'flares';
-  const workCheckins = weeklyApplies ? (await listWorkCheckins()).filter((checkin) => checkin.weekOf >= weekOf(rangeStart)) : [];
+  const workCheckins = weeklyApplies ? (await readOrClosed(() => listWorkCheckins(), [])).filter((checkin) => checkin.weekOf >= weekOf(rangeStart)) : [];
   const symptomsByWeek = new Map<string, number>();
   for (const checkin of workCheckins) symptomsByWeek.set(checkin.weekOf, 0);
   for (const checkin of symptomCheckins) {

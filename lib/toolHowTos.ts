@@ -350,6 +350,9 @@ export type ToolMark =
   | 'home.languageBasicsOpen'
   | 'home.languageBasicsUnit'
   | 'home.languageBasicsGroup'
+  | 'home.tourStart'
+  | 'home.continueSetup'
+  | 'home.tourTab'
   | 'home.waitingAnswer'
   | 'home.waitingKinds'
   | 'home.waitingChoose'
@@ -2506,6 +2509,15 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       forYou: 'A band you turn off leaves Home until you turn it back on here, and nothing it holds is removed.',
     },
     {
+      key: 'continueSetup',
+      title: 'Finish setting up',
+      steps: [
+        { say: 'Open the band with the name of Your Guide. Until setup is finished, it says so.', mark: 'homeBand.yourStory', stay: true },
+        { say: 'Tap Continue Setup. Setup opens where you left it.', mark: 'home.continueSetup' },
+      ],
+      forYou: 'Setup ends with how your records are kept closed and where a copy of them is kept, so they are protected from the start.',
+    },
+    {
       key: 'setupCard',
       title: 'Set something up from Your Guide',
       steps: [
@@ -2644,6 +2656,24 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
         { say: 'Or tap Not now.', mark: 'home.welcomeNotNow' },
       ],
       forYou: 'It steps aside while you are here, and nothing is counted against you for it.',
+    },
+    {
+      key: 'appTour',
+      title: 'Take the tour of the whole app',
+      steps: [
+        { say: 'Open the band with the name of App Tour.', mark: 'homeBand.appTour', stay: true },
+        { say: 'Tap Start from the Beginning to go through every tab and every lens in order, on the screens themselves.', mark: 'home.tourStart' },
+      ],
+      forYou: 'Each step says what a thing is and what it is for, and you can stop at any point and pick it up later.',
+    },
+    {
+      key: 'appTourTab',
+      title: 'Take the tour of one tab',
+      steps: [
+        { say: 'Open the band with the name of App Tour.', mark: 'homeBand.appTour', stay: true },
+        { say: 'Tap a tab in the list. The tour goes through that tab and each of its lenses only.', mark: 'home.tourTab' },
+      ],
+      forYou: "A tick beside a tab means you have been through all of it. Each tab's band on Home has its tour too.",
     },
     {
       key: 'languageBasics',

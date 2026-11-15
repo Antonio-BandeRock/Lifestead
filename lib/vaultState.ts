@@ -8,11 +8,13 @@
 
 import { readLockStateSync } from './appLockSession';
 import {
+  firstRecordOfferFor,
   vaultGuarding,
   vaultKey,
   vaultRefusal,
   type VaultCategory,
   type VaultClosedError,
+  type VaultGroup,
   type VaultKey,
   type VaultSettings,
 } from './vault';
@@ -117,6 +119,63 @@ export function vaultRefusalNow(sql: string): VaultClosedError | null {
   if (vaultOpen || bypassDepth > 0) return null;
   const now = current();
   return vaultRefusal(sql, now.guarding, vaultOpen, now.settings.categories);
+}
+
+// The offer at the first protected record. lib/databaseActivity.ts calls
+// noteVaultRecordWritten after every write that went through; the first one
+// adding a health or money row, once setup has asked, holds the offer here
+// until components/VaultFirstRecordOfferHost.tsx shows it.
+
+let pendingOffer: VaultGroup | null = null;
+const offerListeners = new Set<() => void>();
+
+export function noteVaultRecordWritten(sql: string): void {
+  if (bypassDepth > 0 || pendingOffer !== null) return;
+  let group: VaultGroup | null;
+  try {
+    const now = current();
+    group = firstRecordOfferFor(sql, now.appLockOn, now.settings);
+  } catch {
+    return;
+  }
+  if (group === null) return;
+  pendingOffer = group;
+  for (const listener of offerListeners) {
+    try {
+      listener();
+    } catch (error) {
+      console.error('[vault] an offer listener failed', error);
+    }
+  }
+}
+
+export function getPendingVaultOffer(): VaultGroup | null {
+  return pendingOffer;
+}
+
+export function subscribeVaultOffer(listener: () => void): () => void {
+  offerListeners.add(listener);
+  return () => {
+    offerListeners.delete(listener);
+  };
+}
+
+/** Records the answer, so the offer for that group never comes back (or none ever does). */
+export function answerFirstRecordOffer(group: VaultGroup, answer: 'setUp' | 'notNow' | 'stop'): void {
+  const settings = current().settings;
+  const next: VaultSettings =
+    answer === 'stop'
+      ? { ...settings, stopOffering: true, firstOffered: { ...settings.firstOffered, [group]: true } }
+      : { ...settings, firstOffered: { ...settings.firstOffered, [group]: true } };
+  pendingOffer = null;
+  saveVaultSettings(next);
+  for (const listener of offerListeners) {
+    try {
+      listener();
+    } catch (error) {
+      console.error('[vault] an offer listener failed', error);
+    }
+  }
 }
 
 export function subscribeVault(listener: () => void): () => void {

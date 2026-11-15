@@ -35,6 +35,8 @@ export const HOME_SECTION_TAB_PATH: Record<HomeSectionKey, string | null> = {
   // Your Story, 2026-09-24. Null because it spans every tab: its job is
   // to say where each one fits. A top-level row, like Capture.
   yourStory: null,
+  // The App Tour, 2026-11-14: it goes through every tab, so it belongs to none.
+  appTour: null,
   nextThing: null,
   // The tester welcome, T5: about the app being tested, not any one tab.
   testerWelcome: null,

@@ -166,7 +166,7 @@ export async function loadProgressInputs(): Promise<ProgressInputs> {
   const upkeepRows = await rows<{ name: string | null; at: string | null }>(db, 'SELECT item_name AS name, done_on AS at FROM upkeep_doings');
   const movementRows = await rows<{ name: string | null; at: string | null }>(db, 'SELECT exercise_type AS name, logged_at AS at FROM exercise_logs');
   const markDays = days(await rows(db, 'SELECT marked_at AS at FROM done_check_marks'));
-  const workDays = days(await rows(db, 'SELECT week_of AS at FROM work_checkins'));
+  const workDays = days(await rows(db, '/* vault:tool */ SELECT week_of AS at FROM work_checkins'));
   const accountRows = await rows<{ name: string | null; first: string | null; last: string | null }>(
     db,
     `/* vault:tool */ SELECT a.name AS name, MIN(h.recorded_on) AS first, MAX(h.recorded_on) AS last

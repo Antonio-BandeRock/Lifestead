@@ -522,7 +522,7 @@ export async function loadTrendsMoreView(lens: TrendsMoreLens, days: number): Pr
     }
     case 'work': {
       const [checkins, sleep, flareDates] = await Promise.all([
-        listWorkCheckins(260),
+        readOrClosed(() => listWorkCheckins(260), []),
         getSleepTrendPoints(days + 7),
         listFlareDates(),
       ]);

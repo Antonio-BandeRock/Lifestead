@@ -71,8 +71,8 @@ for (const key of Object.keys(sections.CARD_WHY)) {
   check(beats.some((beat) => sections.SECTION_CARDS[beat].includes(key)), `CARD_WHY ${key} belongs to a part`);
 }
 for (const kind of sections.CLOSING_QUESTIONS) check(kinds.has(kind), `last question ${kind} is asked by the interview`);
-check(sections.CLOSING_QUESTIONS.slice(-2).join() === 'security,homeView', 'records kept closed, then Home, are the last two');
-check(sections.CLOSING_QUESTIONS.indexOf('backup') < sections.CLOSING_QUESTIONS.indexOf('homeView'), 'the backup comes before Home');
+check(sections.CLOSING_QUESTIONS.slice(-2).join() === 'security,backup', 'records kept closed, then the first backup, are the last two (2026-11-14)');
+check(sections.CLOSING_QUESTIONS.indexOf('homeView') < sections.CLOSING_QUESTIONS.indexOf('backup'), 'the backup comes after how Home looks, so the first copy holds it');
 
 // A small interview to walk the stages with.
 function interview({ chosen = true, picked = ['health', 'food', 'garden'], parts = {}, questions = [] } = {}) {
@@ -91,8 +91,12 @@ check(sections.setupStage(interview()) === 'list', 'parts chosen: the list');
 const listed = sections.listParts(interview({ parts: { health: 'skip', food: 'done' } })).map((part) => `${part.beat}:${part.state}`);
 check(listed.join() === 'garden:open,food:done,health:skipped', `open, then done, then skipped (got ${listed.join()})`);
 const settled = interview({ parts: { health: 'done', food: 'skip', garden: 'done' }, questions: [['backup', false], ['homeView', false]] });
-check(sections.setupStage(settled) === 'closing', 'every part settled: the last questions');
-check(sections.closingQuestions(settled).map((q) => q.key).join() === 'backup,homeView', 'the last questions keep their order');
+check(sections.setupStage(settled) === 'closing', 'closing questions still open: they are asked');
+check(sections.closingQuestions(settled).map((q) => q.key).join() === 'homeView,backup', 'the closing questions keep their order');
+const noPartsYet = interview({ questions: [['security', false], ['backup', false]] });
+check(sections.setupStage(noPartsYet) === 'closing', 'protection and the first backup come before the list of areas (2026-11-14)');
+const protectedFirst = interview({ questions: [['security', true], ['backup', true]] });
+check(sections.setupStage(protectedFirst) === 'list', 'once protected, the list of areas');
 const finished = interview({ parts: { health: 'done', food: 'skip', garden: 'done' }, questions: [['backup', true], ['homeView', true]] });
 check(sections.setupStage(finished) === 'finished', 'everything answered: finished');
 check(!sections.setupWaiting(finished), 'finished setup is not waiting');
@@ -117,7 +121,7 @@ check(healthQuestions.map((q) => q.key).join() === 'aboutYou,stage:HASH,meds', `
   check(sections.requiredQuestions(interview({ picked: ['garden'], questions: open })).length === 0, 'a part that needs nothing asks nothing');
   check(!sections.requiredQuestions(gardenFirst).some((q) => q.key === 'backup'), 'the last questions stay last');
   const answeredAll = interview({ picked: ['health'], questions: open.map(([key]) => [key, key === 'backup' ? false : true]) });
-  check(sections.setupStage(answeredAll) === 'list', 'everything needed answered: the list of parts');
+  check(sections.setupStage(answeredAll) === 'closing', 'everything needed answered: the closing questions, before the list');
   const idx = (k) => sections.REQUIRED_ORDER.indexOf(k);
   check(idx('conditions') < idx('stage') && idx('aboutYou') < idx('eatingStyle') && idx('meds') < idx('eatingStyle'), 'nothing is asked before what it needs');
   for (const beat of beats) for (const kind of sections.SECTION_QUESTIONS[beat]) check(sections.REQUIRED_ORDER.includes(kind), `${beat} question ${kind} has a place in the required order`);
@@ -138,7 +142,7 @@ check(healthQuestions.map((q) => q.key).join() === 'aboutYou,stage:HASH,meds', `
   check(rows.every((r) => r.destination && r.destination.kind === 'route'), 'every kept answer opens where it is changed');
   check(!sections.requiredOnRecord(mixed, 'meds').some((r) => r.key === 'meds'), 'the question on the screen is not listed twice');
   const gardenOnly = sections.requiredOnRecord(interview({ picked: ['garden'], questions: [['conditions', true], ['neuro', true], ['homeView', true], ['security', true], ['startTab', true]] })).map((r) => r.key).join();
-  check(gardenOnly === 'conditions,neuro,security,homeView', `answers are listed whatever parts were chosen, start tab left out (got ${gardenOnly})`);
+  check(gardenOnly === 'conditions,neuro,homeView,security', `answers are listed whatever parts were chosen, start tab left out (got ${gardenOnly})`);
   for (const kind of sections.ON_RECORD_ORDER) check(!!sections.requiredOnRecord(interview({ picked: ['garden'], questions: [[kind === 'stage' ? 'stage:HASH' : kind, true]] }))[0]?.destination, `${kind} on record has a place to change it`);
   for (const kind of sections.REQUIRED_ORDER) check(!!sections.requiredOnRecord(interview({ picked: ['food'], questions: [[kind === 'stage' ? 'stage:HASH' : kind, true]] }))[0]?.destination, `${kind} has a place to change it`);
 }

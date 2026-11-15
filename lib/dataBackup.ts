@@ -80,6 +80,7 @@ import type { SQLiteBindValue } from 'expo-sqlite';
 import { encryptBackupPayload } from './backupEncryption';
 import { getDatabase } from './db';
 import { unguardedGetAll } from './databaseActivity';
+import { withVaultBypass } from './vaultState';
 import { APP_META_TABLE, DEVICE_LOCAL_META_KEYS, DEVICE_LOCAL_TABLES } from './snapshotSync';
 
 export const BACKUP_SCHEMA_VERSION = 1;
@@ -390,6 +391,12 @@ export function parseBackupEnvelope(content: string): BackupEnvelope | null {
 // once replaced this device's shared folder with that copy's, which was
 // none, and sync stopped without a word.
 export async function restoreFromBackupEnvelope(envelope: BackupEnvelope): Promise<RestoreResult> {
+  // A restore puts back every row at once: the app doing it, not the
+  // person saving a first record, so it never brings the vault offer.
+  return withVaultBypass(() => restoreEnvelopeRows(envelope));
+}
+
+async function restoreEnvelopeRows(envelope: BackupEnvelope): Promise<RestoreResult> {
   const db = await getDatabase();
   const liveTableNames = new Set(await getRealUserTableNames());
   const tablesSkipped: string[] = [];

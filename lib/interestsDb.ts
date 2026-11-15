@@ -255,7 +255,7 @@ export async function countInterestReferences(
   const money = await db.getFirstAsync<{ n: number }>('SELECT COUNT(*) AS n FROM interest_money WHERE interest_id = ?', id);
   const countdowns = await db.getFirstAsync<{ n: number }>('SELECT COUNT(*) AS n FROM countdowns WHERE interest_id = ?', id);
   const worksheets = await db.getFirstAsync<{ n: number }>(
-    `SELECT COUNT(*) AS n FROM interest_pay_worksheets WHERE instr(',' || interest_ids || ',', ',' || ? || ',') > 0`,
+    `/* vault:tool */ SELECT COUNT(*) AS n FROM interest_pay_worksheets WHERE instr(',' || interest_ids || ',', ',' || ? || ',') > 0`,
     id,
   );
   return {

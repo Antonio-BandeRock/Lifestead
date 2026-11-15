@@ -235,6 +235,7 @@ import {
 } from '../../lib/homeSections';
 import { TAB_TUTORIALS_BAND_TITLE } from '../../lib/tutorials';
 import { TabTutorialCards } from '../../components/TabTutorialCards';
+import { APP_TOUR_BAND_TITLE, AppTourBand } from '../../components/AppTourBand';
 import { homeGroupIdentity } from '../../constants/homeGroups';
 import { HomeArrangeList } from '../../components/HomeArrangeList';
 import { useVisualPreferences } from '../../hooks/useVisualPreferences';
@@ -4878,6 +4879,8 @@ export default function HomeScreen() {
         return renderSharedFolderSetup();
       case 'yourStory':
         return renderYourStory();
+      case 'appTour':
+        return renderBand(key, APP_TOUR_BAND_TITLE, <AppTourBand />, { icon: 'footsteps' });
       case 'captureInbox':
         return renderCaptureInbox();
       case 'today':

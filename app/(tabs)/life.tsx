@@ -127,6 +127,7 @@ import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY
 const LIFE_LENS_VAULT: Partial<Record<LifeLens, readonly VaultCategory[]>> = {
   finances: ['finances', 'medicalBills'],
   movement: ['body', 'labs'],
+  work: ['work', 'finances'],
 };
 
 // The 10th tab, added 2026-09-04, and its first real area, added

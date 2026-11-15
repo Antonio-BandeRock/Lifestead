@@ -23,6 +23,7 @@ import { UsabilitySurveyHost } from '../components/UsabilitySurveyHost';
 import { TesterWatermark } from '../components/TesterWatermark';
 import { GuidedTourHost } from '../components/GuidedTourHost';
 import { GardenPlateOfferHost } from '../components/GardenPlateOfferHost';
+import { VaultFirstRecordOfferHost } from '../components/VaultFirstRecordOfferHost';
 import { StartupFailureScreen } from '../components/StartupFailureScreen';
 import { OverlayProvider, OverlayRoot } from '../components/OverlayContext';
 import { SnapshotSyncWatcher } from '../components/SnapshotSyncWatcher';
@@ -662,6 +663,7 @@ function UnlockedApp() {
                   now, lib/guidedTour.ts. */}
               <GuidedTourHost />
               <GardenPlateOfferHost />
+              <VaultFirstRecordOfferHost />
               {/* Always say why (1.0.60.16): the reason a button cannot do
                   its job yet, lib/notYet.ts. */}
               <NotYetHost />

@@ -50,6 +50,7 @@ import {
   upsertBenefit,
 } from '../lib/workDb';
 import { parsePriceInput } from '../lib/groceryList';
+import { readOrClosed, useOnVaultChange } from '../lib/vaultReads';
 import { useWalkMark } from './WalkMark';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT, BUTTON_SECONDARY, BUTTON_SECONDARY_TEXT, PILL, PILL_ON, PILL_ON_TEXT, PILL_TEXT } from '../constants/buttons';
@@ -135,7 +136,11 @@ export function WorkSection({ tabColor }: Props) {
 
   const load = useCallback(() => {
     setLoading(true);
-    Promise.all([listBenefits(), listWorkCheckins(), getWorkCheckinForWeek(todayLocal())])
+    Promise.all([
+      readOrClosed(() => listBenefits(), [] as Benefit[]),
+      readOrClosed(() => listWorkCheckins(), [] as WorkCheckin[]),
+      readOrClosed(() => getWorkCheckinForWeek(todayLocal()), null),
+    ])
       .then(([benefitRows, checkinRows, current]) => {
         setBenefits(benefitRows);
         setCheckins(checkinRows);
@@ -146,6 +151,8 @@ export function WorkSection({ tabColor }: Props) {
   }, [showInfoAlert]);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
+  // Check-ins (work) and benefits (finances) are in the vault.
+  useOnVaultChange(load);
 
   const summary = useMemo(() => summarizeWork(benefits, todayLocal()), [benefits]);
   const trend = useMemo(() => buildWorkTrend(checkins), [checkins]);

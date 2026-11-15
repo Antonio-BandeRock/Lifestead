@@ -8,10 +8,16 @@
 // would like to start with setup from those items ... When they select one
 // of them they are now presented with the things to setup for that section.
 // Then when that section is setup, they are taken back to the list of areas
-// ... with the areas they have completed dimmed". The last questions come
-// after every part: Autism and ADHD (asked of everyone, and choosable in
-// Profile later), the backup, how records are kept closed, and how much
-// Home shows, in that order, then Home itself.
+// ... with the areas they have completed dimmed".
+//
+// Since 2026-11-14 (direct instruction: "running the first backup should
+// happen after they have completed the basic setup of the app to make sure
+// they are also protected from the start") the order is: the areas chosen,
+// what the app needs to know, then the closing questions (Autism and ADHD,
+// how much Home shows, how records are kept closed, and the backup last of
+// them, so the first copy already holds those answers), and only then the
+// list of areas. Anything that makes the app work the way it promises is
+// setup, so none of it waits until after the areas.
 //
 // "Make sure to tell the user why the information or the setup of each
 // thing needs to happen, explaining what it ties into and feeds in the
@@ -157,10 +163,10 @@ export const CARD_WHY: Record<string, string> = {
   interestProject: 'What is next shows under its name, so you pick it up where you left it.',
 };
 
-// The questions after every part, in the order asked (direct request,
-// 2026-11-02): how records are kept closed, then how much Home shows, are
-// the last two before Home.
-export const CLOSING_QUESTIONS = ['neuro', 'backup', 'security', 'homeView'];
+// The questions after what the app needs and before the areas, in the order
+// asked (2026-11-14): protection before the first backup, and the backup
+// last, once the basic setup is in it.
+export const CLOSING_QUESTIONS = ['neuro', 'homeView', 'security', 'backup'];
 
 // Which tab a part of life starts on, for the startTab answer the tour
 // reads.
@@ -323,13 +329,13 @@ export function closingQuestions(interview: InterviewView): InterviewQuestionVie
 export type SetupStage = 'parts' | 'required' | 'list' | 'closing' | 'finished';
 
 // Where setup stands as a whole: choosing the parts, what the app needs
-// before any of them, picking the next part, the last questions, or nothing
-// left.
+// before any of them, protection and the first backup, picking the next
+// part, or nothing left.
 export function setupStage(interview: InterviewView): SetupStage {
   if (!partsChosen(interview)) return 'parts';
   if (requiredQuestions(interview).length > 0) return 'required';
-  if (!allPartsSettled(interview)) return 'list';
   if (closingQuestions(interview).length > 0) return 'closing';
+  if (!allPartsSettled(interview)) return 'list';
   return 'finished';
 }
 
@@ -366,9 +372,11 @@ export const SECTION_DONE_NEXT_LABEL = 'Done, on to {part}';
 export const SECTION_SKIP_NEXT_LABEL = 'Skip, on to {part}';
 export const SECTION_BACK_LABEL = 'Back to the list';
 export const SECTION_QUESTION_FIRST = 'Answer the question above first, or tap Later on it.';
-export const CLOSING_HEADING = 'A few last questions';
+export const CLOSING_HEADING = 'Keeping your records safe';
+export const CLOSING_LEAD =
+  'A few more questions, then your records are protected from the start: how Home looks, how your records are kept closed, and where a copy of them is kept. When they are done, you choose which area of life to set up first.';
 export const ON_RECORD_HEADING = 'Already on record';
 export const ON_RECORD_LEAD = 'Everything answered so far, so nothing is asked twice. Tap one to change it where it is kept.';
 export const REQUIRED_HEADING = 'First, what the app needs to know';
 export const REQUIRED_LEAD =
-  'The areas you chose read these answers, so they come before any of them, one at a time. When they are done, you choose which area to set up first.';
+  'The areas you chose read these answers, so they come before any of them, one at a time. Keeping your records safe comes next, then you choose which area to set up first.';

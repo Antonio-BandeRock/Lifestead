@@ -47,6 +47,9 @@ import { listInterestSessions } from '../lib/interestSessionsDb';
 import type { InterestThing } from '../lib/interestThings';
 import { listInterestThings } from '../lib/interestThingsDb';
 import { explainNotYet } from '../lib/notYet';
+import { readOrClosed, useOnVaultChange } from '../lib/vaultReads';
+import { useCategoryClosed } from '../lib/vaultSession';
+import { VaultClosedBand } from './VaultClosedBand';
 import { AppTextInput } from './AppTextInput';
 import { useWalkMark } from './WalkMark';
 
@@ -74,10 +77,10 @@ export function CouldThisPaySection({ tabColor }: Props) {
     setEntries(await listInterestMoney());
     setThings(await listInterestThings());
     setSessions(await listInterestSessions());
-    const last = (await lastPayWorksheetInterests()).filter((id) => all.some((interest) => interest.id === id));
+    const last = (await readOrClosed(lastPayWorksheetInterests, [] as string[])).filter((id) => all.some((interest) => interest.id === id));
     setChosen((was) => (was.length > 0 ? was : last));
     if (last.length > 0) {
-      const kept = await getPayWorksheet(last);
+      const kept = await readOrClosed(() => getPayWorksheet(last), {} as PayWords);
       setWords((was) => (Object.keys(was).length > 0 ? was : kept));
       setResult((was) => was ?? workOutPay(kept));
     }
@@ -88,6 +91,11 @@ export function CouldThisPaySection({ tabColor }: Props) {
       load();
     }, [load]),
   );
+  // Worksheets are money records in the vault (finances): opening it loads
+  // the one that was kept, and a closed vault never lets a blank worksheet
+  // be saved over it.
+  useOnVaultChange(load);
+  const worksheetsClosed = useCategoryClosed('finances');
 
   const walkMark = useWalkMark();
   const { current } = groupInterests(interests);
@@ -100,7 +108,7 @@ export function CouldThisPaySection({ tabColor }: Props) {
     setChosen(next);
     setResult(null);
     if (next.length > 0) {
-      const kept = await getPayWorksheet(next);
+      const kept = await readOrClosed(() => getPayWorksheet(next), {} as PayWords);
       if (Object.keys(kept).length > 0) {
         setWords(kept);
         setResult(workOutPay(kept));
@@ -129,6 +137,10 @@ export function CouldThisPaySection({ tabColor }: Props) {
     const missing = missingForPay(words);
     if (missing) {
       explainNotYet(missing);
+      return;
+    }
+    if (worksheetsClosed) {
+      explainNotYet('Your worksheets are in the vault, and keeping this one would write over the one already kept. Open the vault first, then work it out.');
       return;
     }
     await savePayWorksheet(chosen, words);
@@ -181,6 +193,7 @@ export function CouldThisPaySection({ tabColor }: Props) {
 
   return (
     <View style={styles.section}>
+      <VaultClosedBand color={tabColor} categories={['finances']} inline />
       <Text style={styles.captionText}>
         Rough sums for selling from an interest, or several together: what comes in a month, what is left after costs and money kept for tax, what that is per hour, and what to save before you start. Every number used is listed beside the result.
       </Text>

@@ -63,7 +63,11 @@ import { BeatPicker } from './BeatPicker';
 import { HOME_BAND_CONTENT_PADDING, HOME_BAND_GAP, homeBandStyle } from './HomeSectionBand';
 import { useInfoAlert } from './InfoAlert';
 import { YourStoryInterview } from './YourStoryInterview';
+import { BUTTON_PRIMARY, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
+import { runSetupAgain, SETUP_CONTINUE_LABEL, SETUP_CONTINUE_LINE } from '../lib/setupFlow';
+import { setupWaiting } from '../lib/setupSections';
 import { useBringToTop } from './BringToTop';
+import { useWalkMark } from './WalkMark';
 
 // Loads Your Story whenever the screen holding it comes into focus, which is
 // how an item done on another tab is already ticked on the way back.
@@ -169,6 +173,7 @@ export function YourStorySection({ mode, view, guides, interview, records, onCha
   // and the setup cards that follow are scrolled to the top rather than
   // left wherever the page happened to be.
   const bringToTop = useBringToTop();
+  const walkMark = useWalkMark();
   const setupPageRef = useRef<View>(null);
   const wasFinished = useRef(interview?.finished ?? null);
   useEffect(() => {
@@ -405,7 +410,23 @@ export function YourStorySection({ mode, view, guides, interview, records, onCha
     return (
       <View style={styles.cardBody}>
         {renderTourBack()}
-        {interview && !interview.finished ? (
+        {/* While setup is not finished, the way back into it where it stands
+            (2026-11-14): Home's card was showing setup's own pages a second
+            time and was taken for a tour. The tab cards come once it is done. */}
+        {interview && setupWaiting(interview) ? (
+          <View style={styles.continueBlock}>
+            <Text style={styles.body}>{SETUP_CONTINUE_LINE}</Text>
+            <TouchableOpacity
+              ref={walkMark.ref('home.continueSetup')}
+              style={[styles.continueButton, walkMark('home.continueSetup')]}
+              onPress={runSetupAgain}
+              accessibilityRole="button"
+            >
+              <Text style={styles.continueText}>{SETUP_CONTINUE_LABEL}</Text>
+              <Ionicons name="arrow-forward" size={15} color={colors.textOnButton} />
+            </TouchableOpacity>
+          </View>
+        ) : interview && !interview.finished ? (
           <YourStoryInterview mode="card" interview={interview} onChanged={onChanged} go={goElsewhere} />
         ) : (
           renderTabGuide()
@@ -493,6 +514,9 @@ const styles = StyleSheet.create({
   // The Home band this sits in is colors.surface; painting the same colour
   // here keeps every line on a surface wherever the card body is placed.
   cardBody: { gap: 12, backgroundColor: colors.surface },
+  continueBlock: { gap: 8 },
+  continueButton: { ...BUTTON_PRIMARY, alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', gap: 6 },
+  continueText: { ...BUTTON_PRIMARY_TEXT },
   body: { ...typography.body, color: colors.textSecondary, ...textShadow },
   muted: { ...typography.caption, color: colors.textMuted, ...textShadow },
   summary: { ...typography.caption, color: colors.textSecondary, ...textShadow },

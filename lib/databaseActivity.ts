@@ -15,7 +15,7 @@
 // startup or a SELECT is not something the other device needs.
 
 import { APP_META_TABLE, DEVICE_LOCAL_TABLES } from './snapshotSync';
-import { vaultRefusalNow } from './vaultState';
+import { noteVaultRecordWritten, vaultRefusalNow } from './vaultState';
 
 type WriteListener = (count: number) => void;
 
@@ -192,7 +192,12 @@ export function attachWriteTracking<T extends TrackableDatabase>(db: T): T {
     const refusal = typeof args[0] === 'string' ? sessionRefusalFor(args[0]) : null;
     if (refusal) throw new SessionReadOnlyError(refusal);
     const result = await runAsync(...args);
-    if (typeof args[0] === 'string' && countsAsChange(args[0])) noteDatabaseWrite();
+    if (typeof args[0] === 'string' && countsAsChange(args[0])) {
+      noteDatabaseWrite();
+      // A first health or money record, saved by the person rather than
+      // arriving from the other device, may bring the vault offer.
+      if (suspendDepth === 0) noteVaultRecordWritten(args[0]);
+    }
     return result;
   };
   db.execAsync = async (source: string) => {

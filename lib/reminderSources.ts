@@ -136,7 +136,7 @@ export async function listDatedReminderSources(today: string): Promise<DatedRemi
   const [recurring, upkeepItems, benefits, countdowns, freeCountdowns, piles] = await Promise.all([
     listRecurring(true),
     listUpkeepItems(),
-    listBenefits(),
+    listBenefits(true),
     listRunningGardenCountdowns(),
     listRunningCountdowns(),
     listCompostPilesToTurn(),

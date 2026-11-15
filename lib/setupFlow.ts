@@ -107,6 +107,10 @@ export const SETUP_NEXT_LABEL = 'Next in setup';
 export const SETUP_AWAY_CAPTION = 'Setting up';
 export const SETUP_AWAY_SAVED = 'Saved. Add more here if you like, or go on.';
 export const SETUP_RERUN_LABEL = 'Run Setup Again';
+// Home's Getting Set Up while setup is not finished (2026-11-14): one way
+// back into setup where it stands, in place of a second copy of its pages.
+export const SETUP_CONTINUE_LABEL = 'Continue Setup';
+export const SETUP_CONTINUE_LINE = 'Setup is not finished yet. It opens where you left it.';
 export const SETUP_RERUN_LINE =
   'Opens setup again with every answer as it stands, so you can add a condition, change how Home looks or set up something you skipped.';
 
