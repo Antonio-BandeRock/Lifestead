@@ -24,6 +24,8 @@ import {
 } from '../lib/plantingEvents';
 import { addPlantingEvent, deletePlantingEvent, listPlantingEvents } from '../lib/plantingEventsDb';
 import { AppTextInput } from './AppTextInput';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 import { GardenTermField } from './GardenTermField';
 import { NotesInput } from './NotesInput';
 import { ThumbRow } from './ThumbRow';
@@ -60,8 +62,18 @@ export function PlantingEventsSection({ plantingId, plotId, terms, onTermsChange
   const [error, setError] = useState<string | null>(null);
   const [showAll, setShowAll] = useState(false);
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    setEvents(await listPlantingEvents(plantingId));
+    try {
+      // Run as one call so an early return still clears readFailed.
+      await (async () => {
+        setEvents(await listPlantingEvents(plantingId));
+      })();
+    } catch {
+      setReadFailed(true);
+      return;
+    }
+    setReadFailed(false);
   }, [plantingId]);
 
   useEffect(() => {
@@ -87,16 +99,20 @@ export function PlantingEventsSection({ plantingId, plotId, terms, onTermsChange
       setError(problem);
       return;
     }
-    await addPlantingEvent({ plantingId, plotId, occurredOn: day.trim(), kind: kind as string, note });
-    reset();
-    await load();
-    onChanged?.();
+    await saveOrSay('What was done was not saved. Try again.', async () => {
+      await addPlantingEvent({ plantingId, plotId, occurredOn: day.trim(), kind: kind as string, note });
+      reset();
+      await load();
+      onChanged?.();
+    });
   }
 
   async function handleDelete(id: string) {
-    await deletePlantingEvent(id);
-    await load();
-    onChanged?.();
+    await saveOrSay('That entry was not deleted. Try again.', async () => {
+      await deletePlantingEvent(id);
+      await load();
+      onChanged?.();
+    });
   }
 
   const shown = showAll ? events : events.slice(0, SHOWN_AT_FIRST);
@@ -106,6 +122,9 @@ export function PlantingEventsSection({ plantingId, plotId, terms, onTermsChange
       <TouchableOpacity onPress={() => setOpen(!open)} accessibilityRole="button">
         <Text style={styles.linkText}>{open ? 'Hide what was done' : 'What was done'}</Text>
       </TouchableOpacity>
+      {readFailed ? (
+        <ReadProblem message="What was done for this planting could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
+      ) : null}
       {!open ? (
         events.length > 0 ? <Text style={styles.captionText}>{plantingCareSummary(counts)}</Text> : null
       ) : (

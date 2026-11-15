@@ -29,6 +29,20 @@ const fs = require('fs');
 const path = require('path');
 const ts = require('typescript');
 
+// lib/ingredientShortName.ts imports nothing, so any module here that names a
+// food through it gets it loaded on first ask.
+let shortNameModule = null;
+function ingredientShortName() {
+  if (shortNameModule) return shortNameModule;
+  const src = require('fs').readFileSync(require('path').join(__dirname, '..', 'lib', 'ingredientShortName.ts'), 'utf8');
+  const out = require('typescript').transpileModule(src, { compilerOptions: { module: 1, target: 7 } }).outputText;
+  const m = { exports: {} };
+  new Function('exports', 'module', 'require', out)(m.exports, m, () => { throw new Error('ingredientShortName imports nothing'); });
+  shortNameModule = m.exports;
+  return shortNameModule;
+}
+
+
 function transpile(relPath) {
   const source = fs.readFileSync(path.join(__dirname, '..', relPath), 'utf8');
   const { outputText } = ts.transpileModule(source, {
@@ -42,6 +56,7 @@ function run(relPath, resolve) {
   const module = { exports: {} };
   new Function('exports', 'module', 'require', transpile(relPath))(module.exports, module, (name) => {
     const found = resolve[name];
+    if (name === './ingredientShortName') return ingredientShortName();
     if (!found) throw new Error(`unexpected import ${name}`);
     return found;
   });

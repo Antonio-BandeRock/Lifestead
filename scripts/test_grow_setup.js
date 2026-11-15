@@ -51,7 +51,8 @@ function loadModule(relPath, deps = {}) {
   return module.exports;
 }
 
-const H = loadModule('lib/harvestTrade.ts');
+const N = loadModule('lib/ingredientShortName.ts');
+const H = loadModule('lib/harvestTrade.ts', { './ingredientShortName': N });
 const C = loadModule('lib/choiceOrder.ts');
 const S = loadModule('lib/growSetup.ts', { './harvestTrade': H, './choiceOrder': C });
 const {
@@ -88,7 +89,7 @@ check('six built-in light types, LED first', [LIGHT_TYPES.length, LIGHT_TYPES[0]
 check('six built-in materials, fabric and terracotta named', CONTAINER_MATERIALS.slice(0, 2).map((m) => m.code), ['fabric', 'terracotta']);
 checkTrue('every built-in has help', [...GROW_EQUIPMENT_KINDS, ...LIGHT_TYPES, ...LIGHT_SPECTRUMS, ...CONTAINER_MATERIALS].every((e) => e.help.length > 0));
 check('four built-in spectrums, the codes stored rows already carry', LIGHT_SPECTRUMS.map((s) => s.code).sort(), ['adjustable', 'bloom', 'full', 'veg']);
-check('every list has words for its picker', Object.keys(TERM_LIST_WORDS).sort(), ['container_material', 'equipment_kind', 'light_spectrum', 'light_type', 'measurement_kind']);
+check('every list has words for its picker', Object.keys(TERM_LIST_WORDS).sort(), ['container_material', 'equipment_kind', 'light_spectrum', 'light_type', 'measurement_kind', 'planting_event_kind']);
 
 const terms = [
   { id: 'term_a', list: 'equipment_kind', name: 'CO2 tank', retiredAt: null },

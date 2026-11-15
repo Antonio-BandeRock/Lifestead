@@ -56,13 +56,15 @@ function run(relPath, resolve) {
 // growing a second copy of it, and that file takes its day arithmetic from
 // three others.
 const V = run('lib/eatingVariety.ts', {});
-const T = run('lib/harvestTrade.ts', {});
+const N = run('lib/ingredientShortName.ts', {});
+const T = run('lib/harvestTrade.ts', { './ingredientShortName': N });
 const U = run('lib/unitConversion.ts', {});
 const H = run('lib/harvestYield.ts', {
-  './plantingEvents': run('lib/plantingEvents.ts', {}),
+  './plantingEvents': run('lib/plantingEvents.ts', { './ingredientShortName': N }),
   './eatingVariety': V,
   './harvestTrade': T,
   './unitConversion': U,
+  './ingredientShortName': N,
 });
 const LM = run('lib/lightMeter.ts', {});
 const G = run('lib/growingConditions.ts', { './harvestYield': H, './lightMeter': LM });

@@ -33,6 +33,8 @@ import { deleteScheduleSeries, listPlantingSeries, scheduleGardenTask, type Plan
 import { dateLabel } from '../lib/moonSky';
 import { dateKey } from '../lib/plainDate';
 import { AppTextInput } from './AppTextInput';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 import { ThumbEndRow } from './ThumbEndRow';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
 
@@ -63,8 +65,15 @@ export function CropCareSection({ plantingId, plotId, status, guide, expectedHar
   const tasks = guide ? careTasksFor(guide) : [];
   const runs = careStillRuns(status);
 
+  const [readFailed, setReadFailed] = useState(false);
   async function reload() {
-    setRunning(await listPlantingSeries(plantingId));
+    try {
+      setRunning(await listPlantingSeries(plantingId));
+    } catch {
+      setReadFailed(true);
+      return;
+    }
+    setReadFailed(false);
   }
 
   useEffect(() => {
@@ -79,42 +88,46 @@ export function CropCareSection({ plantingId, plotId, status, guide, expectedHar
   const daysText = (task: CareTask) => days[task.key] ?? String(task.everyDays);
 
   async function handleAdd() {
-    if (!guide) return;
-    const chosen = tasks.filter((task) => isTicked(task) && !runningTitles.has(task.title));
-    for (const task of chosen) {
-      if (task.everyDays > 0 && readEveryDays(daysText(task)) === null) {
-        setError(`Days between for "${task.title}" need to be a whole number from 1 to 365.`);
-        return;
-      }
-    }
-    setError(null);
-    setBusy(true);
-    try {
-      const today = dateKey(new Date());
-      const endsOn = careEndsOn(guide, expectedHarvestEnd);
+    await saveOrSay('The care tasks were not added. Try again.', async () => {
+      if (!guide) return;
+      const chosen = tasks.filter((task) => isTicked(task) && !runningTitles.has(task.title));
       for (const task of chosen) {
-        const everyDays = task.everyDays > 0 ? readEveryDays(daysText(task)) ?? task.everyDays : 0;
-        const first = careFirstDate(task, today, expectedHarvestStart);
-        await scheduleGardenTask({
-          title: task.title,
-          scheduledFor: `${first}T09:00`,
-          notes: task.note,
-          plotId,
-          plantingId,
-          repeat: careRepeat(everyDays, endsOn, first),
-        });
+        if (task.everyDays > 0 && readEveryDays(daysText(task)) === null) {
+          setError(`Days between for "${task.title}" need to be a whole number from 1 to 365.`);
+          return;
+        }
       }
-      setAdded(describeAdded(chosen.length));
-      await reload();
-    } finally {
-      setBusy(false);
-    }
+      setError(null);
+      setBusy(true);
+      try {
+        const today = dateKey(new Date());
+        const endsOn = careEndsOn(guide, expectedHarvestEnd);
+        for (const task of chosen) {
+          const everyDays = task.everyDays > 0 ? readEveryDays(daysText(task)) ?? task.everyDays : 0;
+          const first = careFirstDate(task, today, expectedHarvestStart);
+          await scheduleGardenTask({
+            title: task.title,
+            scheduledFor: `${first}T09:00`,
+            notes: task.note,
+            plotId,
+            plantingId,
+            repeat: careRepeat(everyDays, endsOn, first),
+          });
+        }
+        setAdded(describeAdded(chosen.length));
+        await reload();
+      } finally {
+        setBusy(false);
+      }
+    });
   }
 
   async function handleStop(series: PlantingSeries) {
-    await deleteScheduleSeries(series.repeatGroupId);
-    setAdded(null);
-    await reload();
+    await saveOrSay('That care task was not stopped. Try again.', async () => {
+      await deleteScheduleSeries(series.repeatGroupId);
+      setAdded(null);
+      await reload();
+    });
   }
 
   function renderTask(task: CareTask) {
@@ -181,6 +194,9 @@ export function CropCareSection({ plantingId, plotId, status, guide, expectedHar
       </TouchableOpacity>
       {open ? (
         <View style={styles.nested}>
+          {readFailed ? (
+            <ReadProblem message="The care already on the schedule could not be read just now. Nothing you recorded is lost." onTryAgain={() => void reload()} />
+          ) : null}
           {!guide ? (
             <Text style={styles.bodyText}>{CARE_NO_CROP}</Text>
           ) : (

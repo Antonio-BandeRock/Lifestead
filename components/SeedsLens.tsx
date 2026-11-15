@@ -46,6 +46,8 @@ import {
 } from '../lib/seedInventoryDb';
 import { packetDaysRangeLine, readPacketDays } from '../lib/seedPacket';
 import { AppTextInput } from './AppTextInput';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 import { AttachedFiles } from './AttachedFiles';
 import { FoodLookup } from './FoodLookup';
 import { HOME_BAND_ACCENT_WIDTH, HomeSectionBand } from './HomeSectionBand';
@@ -110,8 +112,17 @@ export function SeedsLens({ scrollBottomPadding }: { scrollBottomPadding: number
   const [draft, setDraft] = useState<Draft | null>(null);
   const [putAwayOpen, setPutAwayOpen] = useState(false);
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    const [p, u, t] = await Promise.all([listSeedPackets(), listSeedUses(), listSeedTests()]);
+    let read: [SeedPacket[], SeedUse[], SeedTest[]];
+    try {
+      read = await Promise.all([listSeedPackets(), listSeedUses(), listSeedTests()]);
+    } catch {
+      setReadFailed(true);
+      return;
+    }
+    setReadFailed(false);
+    const [p, u, t] = read;
     setPackets(p);
     setUses(u);
     setTests(t);
@@ -165,6 +176,9 @@ export function SeedsLens({ scrollBottomPadding }: { scrollBottomPadding: number
 
   return (
     <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
+      {readFailed ? (
+        <ReadProblem message="Your seed packets could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
+      ) : null}
       <View style={[band.box, styles.card]}>
         <Text style={styles.bodyText}>{SEEDS_INTRO}</Text>
         {draft ? (
@@ -253,19 +267,21 @@ function PacketForm({
       return;
     }
     const clean = (text: string) => text.trim() || null;
-    await saveSeedPacket(draft.id, {
-      foodId: draft.foodId,
-      source: draft.source,
-      foodName: draft.foodName,
-      variety: clean(draft.variety),
-      fromWhere: clean(draft.fromWhere),
-      packedOn: packed.status === 'date' ? packed.value : null,
-      amount: amount.status === 'amount' ? amount.value : null,
-      amountUnit: amount.status === 'amount' ? draft.unit : null,
-      packetDays: days.status === 'days' ? days.days : null,
-      notes: clean(draft.notes),
+    await saveOrSay('The packet was not saved. Try again.', async () => {
+      await saveSeedPacket(draft.id, {
+        foodId: draft.foodId,
+        source: draft.source,
+        foodName: draft.foodName,
+        variety: clean(draft.variety),
+        fromWhere: clean(draft.fromWhere),
+        packedOn: packed.status === 'date' ? packed.value : null,
+        amount: amount.status === 'amount' ? amount.value : null,
+        amountUnit: amount.status === 'amount' ? draft.unit : null,
+        packetDays: days.status === 'days' ? days.days : null,
+        notes: clean(draft.notes),
+      });
+      onSaved(draft.id);
     });
-    onSaved(draft.id);
   }
 
   return (
@@ -405,11 +421,13 @@ function TestSection({ seedId, tests, onChanged }: { seedId: string; tests: Seed
       setError(read.message);
       return;
     }
-    await addSeedTest({ seedId, testedOn: today(), sown: read.sown, sprouted: read.sprouted });
-    setAdding(false);
-    setSprouted('');
-    setError(null);
-    onChanged();
+    await saveOrSay('The sprout test was not saved. Try again.', async () => {
+      await addSeedTest({ seedId, testedOn: today(), sown: read.sown, sprouted: read.sprouted });
+      setAdding(false);
+      setSprouted('');
+      setError(null);
+      onChanged();
+    });
   }
 
   return (
@@ -420,8 +438,10 @@ function TestSection({ seedId, tests, onChanged }: { seedId: string; tests: Seed
           <Text style={[styles.captionText, styles.flex]}>{`${dateLabel(test.testedOn)} ${test.testedOn.slice(0, 4)}: ${describeTest(test)}`}</Text>
           <TouchableOpacity
             onPress={async () => {
-              await deleteSeedTest(test.id);
-              onChanged();
+              await saveOrSay('The sprout test was not removed. Try again.', async () => {
+                await deleteSeedTest(test.id);
+                onChanged();
+              });
             }}
           >
             <Text style={styles.linkText}>Remove</Text>
@@ -485,8 +505,10 @@ function PacketActions({
       <TouchableOpacity
         ref={walkMark.ref('seeds.putAway')}
         onPress={async () => {
-          await setSeedPacketPutAway(packet.id, true);
-          onChanged();
+          await saveOrSay('The packet was not put away. Try again.', async () => {
+            await setSeedPacketPutAway(packet.id, true);
+            onChanged();
+          });
         }}
       >
         <Text style={styles.linkText}>Put Away</Text>
@@ -494,8 +516,10 @@ function PacketActions({
       {hasRecord ? null : (
         <TouchableOpacity
           onPress={async () => {
-            await removeSeedPacket(packet.id);
-            onChanged();
+            await saveOrSay('The packet was not deleted. Try again.', async () => {
+              await removeSeedPacket(packet.id);
+              onChanged();
+            });
           }}
         >
           <Text style={styles.linkText}>Delete</Text>
@@ -516,8 +540,10 @@ function PutAwayRow({ packet, uses, onChanged }: { packet: SeedPacket; uses: See
       <TouchableOpacity
         ref={walkMark.ref('seeds.bringBack')}
         onPress={async () => {
-          await setSeedPacketPutAway(packet.id, false);
-          onChanged();
+          await saveOrSay('The packet was not brought back. Try again.', async () => {
+            await setSeedPacketPutAway(packet.id, false);
+            onChanged();
+          });
         }}
       >
         <Text style={styles.linkText}>Bring Back</Text>

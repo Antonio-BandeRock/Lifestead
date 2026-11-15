@@ -33,6 +33,8 @@ import { createGardenPlot, listGardenPlots, type GardenPlot } from '../lib/db';
 import { syncReminderNotifications } from '../lib/reminderNotifications';
 import { SOWING_WINDOWS, type FrostAnchor } from '../lib/sowingWindows';
 import { AppTextInput } from './AppTextInput';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 import { PopoverSelect } from './PopoverSelect';
 import { useTabBandStyles, TabBand } from './TabBand';
 import { ThumbRow } from './ThumbRow';
@@ -77,8 +79,17 @@ export function MyCropsBand({
   const [newAreaKind, setNewAreaKind] = useState<AreaKind>('outdoor');
   const [error, setError] = useState<string | null>(null);
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    const [p, s, g] = await Promise.all([listCropPlans(), listCropPlanSteps(), listGardenPlots()]);
+    let read;
+    try {
+      read = await Promise.all([listCropPlans(), listCropPlanSteps(), listGardenPlots()]);
+    } catch {
+      setReadFailed(true);
+      return;
+    }
+    setReadFailed(false);
+    const [p, s, g] = read;
     setPlans(p);
     setSteps(s);
     setPlots(g);
@@ -126,31 +137,37 @@ export function MyCropsBand({
       setError('Pick a crop first.');
       return;
     }
-    let plotId: string | null = areaId === NO_AREA ? null : areaId;
-    if (areaId === NEW_AREA) {
-      const name = newAreaName.trim();
-      if (!name) {
-        setError('Give the new area a name, such as Back bed or Kitchen window.');
-        return;
+    await saveOrSay('The crop was not saved. Try again.', async () => {
+      let plotId: string | null = areaId === NO_AREA ? null : areaId;
+      if (areaId === NEW_AREA) {
+        const name = newAreaName.trim();
+        if (!name) {
+          setError('Give the new area a name, such as Back bed or Kitchen window.');
+          return;
+        }
+        plotId = await createGardenPlot({ name, locationType: newAreaKind });
       }
-      plotId = await createGardenPlot({ name, locationType: newAreaKind });
-    }
-    if (formFor === 'add') await addCropPlan(cropKey as string, plotId);
-    else await setCropPlanArea(formFor.id, plotId);
-    setFormFor(null);
-    await afterChange();
+      if (formFor === 'add') await addCropPlan(cropKey as string, plotId);
+      else await setCropPlanArea(formFor.id, plotId);
+      setFormFor(null);
+      await afterChange();
+    });
   }
 
   async function toggleStep(plan: CropPlan, action: Parameters<typeof recordCropStep>[1], windowStart: string, step: 'prepped' | 'sown', done: boolean) {
-    if (done) await clearCropStep(plan.id, action, windowStart, step);
-    else await recordCropStep(plan.id, action, windowStart, step, today);
-    await afterChange();
+    await saveOrSay('That step was not saved. Try again.', async () => {
+      if (done) await clearCropStep(plan.id, action, windowStart, step);
+      else await recordCropStep(plan.id, action, windowStart, step, today);
+      await afterChange();
+    });
   }
 
   async function handleRemove(plan: CropPlan) {
-    await removeCropPlan(plan.id);
-    if (formFor !== 'add' && formFor?.id === plan.id) setFormFor(null);
-    await afterChange();
+    await saveOrSay('The crop was not removed. Try again.', async () => {
+      await removeCropPlan(plan.id);
+      if (formFor !== 'add' && formFor?.id === plan.id) setFormFor(null);
+      await afterChange();
+    });
   }
 
   function areaLine(plan: CropPlan): string {
@@ -225,7 +242,10 @@ export function MyCropsBand({
   return (
     <TabBand folds={folds} color={color} id="garden:sowing:mycrops" title="My Crops" icon="flower-outline" count={plans.length}>
       <View style={band.rows}>
-        {plans.length === 0 ? (
+        {readFailed ? (
+          <ReadProblem message="Your crops could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
+        ) : null}
+        {plans.length === 0 && !readFailed ? (
           <View style={band.row}>
             <Text style={styles.bodyText}>
               Pick the crops you intend to grow and where each will go. A week before each one&apos;s window opens you are

@@ -86,6 +86,8 @@ import {
 import { listMeasurePlans } from '../lib/measuringPlanDb';
 import { explainNotYet } from '../lib/notYet';
 import { AppTextInput } from './AppTextInput';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 import { MeasuringPlanSection } from './MeasuringPlanSection';
 import { QuickAreaForm } from './QuickAreaForm';
 import { ReadingImportForm } from './ReadingImportForm';
@@ -277,15 +279,24 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
     listening.current = { remove: () => subscription.remove(), timer };
   }, [stopListening]);
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    const [setup, rows, equipment, system, ratios, planRows] = await Promise.all([
-      getConditionsSetup(),
-      listGardenReadings(),
-      listAllGrowEquipmentInUse(),
-      getStoredMeasurementSystem(),
-      getLampRatios(),
-      listMeasurePlans(),
-    ]);
+    let read;
+    try {
+      read = await Promise.all([
+        getConditionsSetup(),
+        listGardenReadings(),
+        listAllGrowEquipmentInUse(),
+        getStoredMeasurementSystem(),
+        getLampRatios(),
+        listMeasurePlans(),
+      ]);
+    } catch {
+      setReadFailed(true);
+      return;
+    }
+    setReadFailed(false);
+    const [setup, rows, equipment, system, ratios, planRows] = read;
     setPlans(planRows);
     setSavedRatios(ratios);
     setLights(equipment.filter((piece) => piece.kind === 'light'));
@@ -503,36 +514,38 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
       setProblem(check.problem);
       return;
     }
-    const noteLux = fromPhone ? meterLux : draft.unit === 'PPFD' ? typedLux : null;
-    await addGardenReading({
-      plotId: draft.plotId,
-      plantingId: draft.plantingId,
-      measurement: draft.measurement as string,
-      value: Number(draft.value.trim()),
-      unit: draft.unit as string,
-      measuredOn: draft.measuredOn,
-      note:
-        noteLux !== null
-          ? [meterNote({ lux: noteLux, unit: draft.unit, source: convSource, distance, distanceUnit, lampRatio }), draft.note.trim()]
-              .filter(Boolean)
-              .join(' ')
-          : draft.note,
-      ...(fromPhone && (draft.unit === 'lux' || draft.unit === 'PPFD')
-        ? { source: 'device' as const, deviceName: LIGHT_METER_DEVICE_NAME }
-        : {}),
+    await saveOrSay('The reading was not saved. Try again.', async () => {
+      const noteLux = fromPhone ? meterLux : draft.unit === 'PPFD' ? typedLux : null;
+      await addGardenReading({
+        plotId: draft.plotId,
+        plantingId: draft.plantingId,
+        measurement: draft.measurement as string,
+        value: Number(draft.value.trim()),
+        unit: draft.unit as string,
+        measuredOn: draft.measuredOn,
+        note:
+          noteLux !== null
+            ? [meterNote({ lux: noteLux, unit: draft.unit, source: convSource, distance, distanceUnit, lampRatio }), draft.note.trim()]
+                .filter(Boolean)
+                .join(' ')
+            : draft.note,
+        ...(fromPhone && (draft.unit === 'lux' || draft.unit === 'PPFD')
+          ? { source: 'device' as const, deviceName: LIGHT_METER_DEVICE_NAME }
+          : {}),
+      });
+      if (noteLux !== null && draft.unit === 'PPFD' && ratioKey && (lampRatio !== null || !lampRatioText.trim())) {
+        await saveLampRatio(ratioKey, lampRatio);
+      }
+      setFromPhone(false);
+      setMeterLux(null);
+      setTypedLuxText('');
+      setMeter({ status: 'idle' });
+      // The area, the measurement and the unit are kept, since the next reading
+      // is usually the same meter in the same bed on another day.
+      setDraft({ ...draft, value: '', note: '', measuredOn: todayDateString() });
+      setProblem(null);
+      await load();
     });
-    if (noteLux !== null && draft.unit === 'PPFD' && ratioKey && (lampRatio !== null || !lampRatioText.trim())) {
-      await saveLampRatio(ratioKey, lampRatio);
-    }
-    setFromPhone(false);
-    setMeterLux(null);
-    setTypedLuxText('');
-    setMeter({ status: 'idle' });
-    // The area, the measurement and the unit are kept, since the next reading
-    // is usually the same meter in the same bed on another day.
-    setDraft({ ...draft, value: '', note: '', measuredOn: todayDateString() });
-    setProblem(null);
-    await load();
   }
 
   function resetMeter() {
@@ -566,10 +579,12 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
 
   // A new area made from the where step is picked for the reading.
   async function handleAreaSaved(id: string) {
-    setAddingArea(false);
-    await load();
-    setDraft((current) => ({ ...current, plotId: id, plantingId: null }));
-    setPickedSource(null);
+    await saveOrSay('The new area was saved, but the list of areas could not be read again. Try again.', async () => {
+      setAddingArea(false);
+      await load();
+      setDraft((current) => ({ ...current, plotId: id, plantingId: null }));
+      setPickedSource(null);
+    });
   }
 
   function handleWhereNext() {
@@ -586,12 +601,17 @@ export function GrowingConditionsLens({ scrollBottomPadding }: { scrollBottomPad
   }
 
   async function handleDelete(id: string) {
-    await deleteGardenReading(id);
-    await load();
+    await saveOrSay('The reading was not deleted. Try again.', async () => {
+      await deleteGardenReading(id);
+      await load();
+    });
   }
 
   return (
     <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
+      {readFailed ? (
+        <ReadProblem message="Your growing conditions readings could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
+      ) : null}
       <View style={[band.box, styles.card]}>
         <Text style={[styles.cardTitle, { color: TAB_COLOR }]}>Record a Reading</Text>
         {recording && step === 'where' ? (

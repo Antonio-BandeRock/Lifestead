@@ -108,6 +108,8 @@ import { areaPath } from '../lib/gardenAreaNesting';
 import { usePlayfulWording } from '../hooks/usePlayfulWording';
 import { wording } from '../lib/playfulCopy';
 import { AppTextInput } from './AppTextInput';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 import { PopoverSelect } from './PopoverSelect';
 import { RecordPhotos } from './RecordPhotos';
 import { ThumbRow } from './ThumbRow';
@@ -207,39 +209,49 @@ export function DaysUntilSection({
   const [interestId, setInterestId] = useState<string>(NO_INTEREST);
 
   const areaId = plot?.id;
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    const today = todayDateString();
-    if (offersFree) setInterests(await listInterests());
-    if (areaId) {
-      const rows = await listGardenCountdowns(areaId);
-      setItems(rows.map((row) => gardenAsAny(row, { namesArea: false })));
+    try {
+      // Run as one call so an early return still clears readFailed.
+      await (async () => {
+        const today = todayDateString();
+        if (offersFree) setInterests(await listInterests());
+        if (areaId) {
+          const rows = await listGardenCountdowns(areaId);
+          setItems(rows.map((row) => gardenAsAny(row, { namesArea: false })));
+          return;
+        }
+        if (scope === 'interests') {
+          const rows = await listInterestCountdowns();
+          setItems((compact ? rows.filter((row) => !row.doneAt) : rows).map(freeAsAny));
+          return;
+        }
+        if (scope === 'free') {
+          const rows = compact ? await listRunningCountdowns() : await listCountdowns();
+          setItems(rows.map(freeAsAny));
+          return;
+        }
+        if (scope === 'everything') {
+          const [rows, areas] = await Promise.all([
+            compact ? listEveryRunningCountdown(today) : listEveryCountdown(today),
+            listGardenPlots(),
+          ]);
+          setItems(rows);
+          setPlots(areas);
+          return;
+        }
+        const [rows, areas] = await Promise.all([
+          compact ? listRunningGardenCountdowns() : listCurrentGardenCountdowns(),
+          listGardenPlots(),
+        ]);
+        setItems(rows.map((row) => gardenAsAny(row)));
+        setPlots(areas);
+      })();
+    } catch {
+      setReadFailed(true);
       return;
     }
-    if (scope === 'interests') {
-      const rows = await listInterestCountdowns();
-      setItems((compact ? rows.filter((row) => !row.doneAt) : rows).map(freeAsAny));
-      return;
-    }
-    if (scope === 'free') {
-      const rows = compact ? await listRunningCountdowns() : await listCountdowns();
-      setItems(rows.map(freeAsAny));
-      return;
-    }
-    if (scope === 'everything') {
-      const [rows, areas] = await Promise.all([
-        compact ? listEveryRunningCountdown(today) : listEveryCountdown(today),
-        listGardenPlots(),
-      ]);
-      setItems(rows);
-      setPlots(areas);
-      return;
-    }
-    const [rows, areas] = await Promise.all([
-      compact ? listRunningGardenCountdowns() : listCurrentGardenCountdowns(),
-      listGardenPlots(),
-    ]);
-    setItems(rows.map((row) => gardenAsAny(row)));
-    setPlots(areas);
+    setReadFailed(false);
   }, [areaId, compact, scope, offersFree]);
 
   // On focus rather than on mount, so Home's card and the lens both read
@@ -322,71 +334,77 @@ export function DaysUntilSection({
   }
 
   async function handleSave() {
-    if (scope === 'interests' && !counterInterest) {
-      setError('Pick the interest this counter belongs to.');
-      return;
-    }
-    if (startingFree && unit === 'timed') {
-      const timedProblem = timedCountdownFormProblem({ name, hours, minutes });
-      if (timedProblem) {
-        setError(timedProblem);
+    await saveOrSay('The counter was not saved. Try again.', async () => {
+      if (scope === 'interests' && !counterInterest) {
+        setError('Pick the interest this counter belongs to.');
         return;
       }
-      const total = (hours.trim() ? Number(hours) : 0) * 60 + (minutes.trim() ? Number(minutes) : 0);
-      await addTimedCountdown({ name, about, startedAt: new Date().toISOString(), minutes: total, interestId: counterInterest });
+      if (startingFree && unit === 'timed') {
+        const timedProblem = timedCountdownFormProblem({ name, hours, minutes });
+        if (timedProblem) {
+          setError(timedProblem);
+          return;
+        }
+        const total = (hours.trim() ? Number(hours) : 0) * 60 + (minutes.trim() ? Number(minutes) : 0);
+        await addTimedCountdown({ name, about, startedAt: new Date().toISOString(), minutes: total, interestId: counterInterest });
+        clearForm();
+        await load();
+        void syncReminderNotifications();
+        if (onChanged) await onChanged();
+        return;
+      }
+      const problem = countdownFormProblem({ name, days, startedOn });
+      if (problem) {
+        setError(problem);
+        return;
+      }
+      if (startingFree) {
+        await addCountdown({ name, about, startedOn, days: Number(days), interestId: counterInterest });
+      } else {
+        if (!plotId || plotId === NO_AREA) {
+          setError('Pick the area the counter is for.');
+          return;
+        }
+        await addGardenCountdown({
+          plotId,
+          plantingId: plantingId === WHOLE_AREA ? null : plantingId,
+          name,
+          startedOn,
+          days: Number(days),
+        });
+      }
       clearForm();
       await load();
       void syncReminderNotifications();
       if (onChanged) await onChanged();
-      return;
-    }
-    const problem = countdownFormProblem({ name, days, startedOn });
-    if (problem) {
-      setError(problem);
-      return;
-    }
-    if (startingFree) {
-      await addCountdown({ name, about, startedOn, days: Number(days), interestId: counterInterest });
-    } else {
-      if (!plotId || plotId === NO_AREA) {
-        setError('Pick the area the counter is for.');
-        return;
-      }
-      await addGardenCountdown({
-        plotId,
-        plantingId: plantingId === WHOLE_AREA ? null : plantingId,
-        name,
-        startedOn,
-        days: Number(days),
-      });
-    }
-    clearForm();
-    await load();
-    void syncReminderNotifications();
-    if (onChanged) await onChanged();
+    });
   }
 
   async function handleDone(item: AnyCountdown) {
-    if (isTimed(item) && item.doneAt) await restartTimedCountdown(item.id);
-    else if (item.kind === 'free') await setCountdownDone(item.id, !item.doneAt);
-    else await setGardenCountdownDone(item.id, !item.doneAt);
-    await load();
-    void syncReminderNotifications();
+    await saveOrSay('The counter was not changed. Try again.', async () => {
+      if (isTimed(item) && item.doneAt) await restartTimedCountdown(item.id);
+      else if (item.kind === 'free') await setCountdownDone(item.id, !item.doneAt);
+      else await setGardenCountdownDone(item.id, !item.doneAt);
+      await load();
+      void syncReminderNotifications();
+    });
   }
 
   async function handleRemove(item: AnyCountdown) {
-    if (item.kind === 'free') await deleteCountdown(item.id);
-    else await deleteGardenCountdown(item.id);
-    await load();
-    void syncReminderNotifications();
-    if (onChanged) await onChanged();
+    await saveOrSay('The counter was not removed. Try again.', async () => {
+      if (item.kind === 'free') await deleteCountdown(item.id);
+      else await deleteGardenCountdown(item.id);
+      await load();
+      void syncReminderNotifications();
+      if (onChanged) await onChanged();
+    });
   }
 
   const today = todayDateString();
   const sorted = sortCountdowns(items, today);
   const ordered = compact ? sorted.slice(0, COMPACT_LIMIT) : sorted;
   const heldBack = sorted.length - ordered.length;
-  if (readOnly && items.length === 0) return null;
+  if (readOnly && items.length === 0 && !readFailed) return null;
   // The whole area is the fixed first entry; the plantings after it read
   // alphabetically, like every chooser list of names.
   const plantingOptions = [
@@ -423,7 +441,10 @@ export function DaysUntilSection({
   return (
     <View style={styles.section}>
       {showHeading ? <Text style={styles.heading}>Days Until</Text> : null}
-      {items.length === 0 ? (
+      {readFailed ? (
+        <ReadProblem message="Your counters could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
+      ) : null}
+      {items.length === 0 && !readFailed ? (
         <Text style={styles.captionText}>
           {noAreaYet
             ? 'A garden counter lives under an area. Add an area on Plots & Plantings first, then count the days to germination, transplanting out, the first harvest, or the cover coming off here.'

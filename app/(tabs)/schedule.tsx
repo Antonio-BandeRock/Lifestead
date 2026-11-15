@@ -287,7 +287,8 @@ import { listUpkeepItems, markUpkeepDone } from '../../lib/upkeepDb';
 import { useAutoOpenLensHubSignal } from '../../hooks/useAutoOpenLensHubSignal';
 import { describeStatus } from '../../lib/reconciliation';
 import { modalAnimationType } from '../../lib/visualPreferences';
-import { describeRepeat, describeRepeatPattern, validateRepeatRule, weekdayOf, weekdaysFromColumn } from '../../lib/repeatRule';
+import { describeRepeatPattern, validateRepeatRule, weekdaysFromColumn } from '../../lib/repeatRule';
+import { RepeatRulePicker } from '../../components/RepeatRulePicker';
 import { stepOn, taperDoseLine, taperLastDay, taperRepeatNote, type TaperStep } from '../../lib/taper';
 import { listTaperSteps } from '../../lib/taperDb';
 import { defaultRotation, isInjected, matchInjectable, nextSite, siteChoices, type InjectionSite, type SiteUse } from '../../lib/injectionSites';
@@ -797,146 +798,11 @@ const BLANK_FORM: FormState = {
   servings: null,
 };
 
-// Recurrence is decided once, at creation time -- editing an existing
-// occurrence only ever touches that one row (see updateScheduledMeal), so
-// this picker is only shown while scheduling a brand-new item, never while
-// editing one that already exists. Five patterns (A1 of the competitive
-// build plan, 2026-09-26; the dates each lands on are worked out in
-// lib/repeatRule.ts), then how it should eventually stop: never, after a
-// fixed number of times, or on a specific date. startDate is the day the
-// series is being set up for, which seeds the weekday chosen first and
-// names the day of the month.
-const REPEAT_PATTERNS: { type: RepeatConfig['type']; label: string }[] = [
-  { type: 'none', label: 'Just once' },
-  { type: 'daily', label: 'Every day' },
-  { type: 'weekly', label: 'Days of the week' },
-  { type: 'every_n_days', label: 'Every few days' },
-  { type: 'monthly', label: 'Every month' },
-];
-
-const WEEKDAY_CHIPS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-function RepeatPicker({
-  repeat,
-  onChange,
-  startDate,
-}: {
-  repeat: RepeatConfig;
-  onChange: (repeat: RepeatConfig) => void;
-  startDate?: string;
-}) {
-  const anchor = startDate && /^\d{4}-\d{2}-\d{2}$/.test(startDate) ? startDate : todayDateString();
-
-  function choosePattern(type: RepeatConfig['type']) {
-    if (type === 'none') {
-      onChange({ type: 'none' });
-      return;
-    }
-    const kept = { endType: repeat.endType ?? 'indefinite', count: repeat.count, until: repeat.until } as const;
-    if (type === 'weekly') {
-      onChange({ type, ...kept, interval: 1, weekdays: repeat.weekdays?.length ? repeat.weekdays : [weekdayOf(anchor)] });
-    } else if (type === 'every_n_days') {
-      onChange({ type, ...kept, interval: repeat.type === 'every_n_days' ? repeat.interval : 2 });
-    } else if (type === 'monthly') {
-      onChange({ type, ...kept, interval: 1 });
-    } else {
-      onChange({ type, ...kept });
-    }
-  }
-
-  function toggleWeekday(day: number) {
-    const current = repeat.weekdays ?? [];
-    const next = current.includes(day) ? current.filter((value) => value !== day) : [...current, day].sort((a, b) => a - b);
-    onChange({ ...repeat, weekdays: next });
-  }
-
-  const intervalLabel =
-    repeat.type === 'every_n_days' ? 'How many days apart' : repeat.type === 'weekly' ? 'How many weeks apart' : 'How many months apart';
-  const summaryError = repeat.type === 'none' ? null : validateRepeatRule(repeat);
-
-  return (
-    <>
-      <Text style={styles.label}>Repeat</Text>
-      <View style={styles.pillRow}>
-        {REPEAT_PATTERNS.map((pattern) => (
-          <TouchableOpacity
-            key={pattern.type}
-            style={[styles.pill, repeat.type === pattern.type && styles.pillActive]}
-            onPress={() => choosePattern(pattern.type)}
-          >
-            <Text style={[styles.pillText, repeat.type === pattern.type && styles.pillTextActive]}>{pattern.label}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      {repeat.type === 'weekly' ? (
-        <View style={[styles.pillRow, { marginTop: 8 }]}>
-          {WEEKDAY_CHIPS.map((name, day) => {
-            const chosen = (repeat.weekdays ?? []).includes(day);
-            return (
-              <TouchableOpacity key={name} style={[styles.pillSmall, chosen && styles.pillActive]} onPress={() => toggleWeekday(day)}>
-                <Text style={[styles.pillTextSmall, chosen && styles.pillTextActive]}>{name}</Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-      ) : null}
-
-      {repeat.type === 'weekly' || repeat.type === 'every_n_days' || repeat.type === 'monthly' ? (
-        <>
-          <Text style={[styles.label, { marginTop: 8 }]}>{intervalLabel}</Text>
-          <AppTextInput
-            style={[styles.input, styles.timeInput]}
-            placeholder={repeat.type === 'every_n_days' ? 'e.g. 3' : '1'}
-            keyboardType="number-pad"
-            value={repeat.interval ? String(repeat.interval) : ''}
-            onChangeText={(text) => onChange({ ...repeat, interval: Number(text) || undefined })}
-          />
-        </>
-      ) : null}
-
-      {repeat.type !== 'none' ? (
-        <>
-          <View style={[styles.pillRow, { marginTop: 8 }]}>
-            {(['indefinite', 'count', 'until_date'] as const).map((option) => (
-              <TouchableOpacity
-                key={option}
-                style={[styles.pillSmall, repeat.endType === option && styles.pillActive]}
-                onPress={() => onChange({ ...repeat, endType: option })}
-              >
-                <Text style={[styles.pillTextSmall, repeat.endType === option && styles.pillTextActive]}>
-                  {option === 'indefinite' ? 'Indefinitely' : option === 'count' ? 'A number of times' : 'Until a date'}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-          {repeat.endType === 'count' ? (
-            <AppTextInput
-              style={[styles.input, styles.timeInput, { marginTop: 8 }]}
-              placeholder="e.g. 14"
-              keyboardType="number-pad"
-              value={repeat.count ? String(repeat.count) : ''}
-              onChangeText={(text) => onChange({ ...repeat, count: Number(text) || undefined })}
-            />
-          ) : null}
-          {repeat.endType === 'until_date' ? (
-            <AppTextInput
-              style={[styles.input, { marginTop: 8 }]}
-              placeholder="YYYY-MM-DD"
-              value={repeat.until ?? ''}
-              onChangeText={(text) => onChange({ ...repeat, until: text })}
-            />
-          ) : null}
-          <Text style={styles.helperText}>
-            {summaryError ?? `${describeRepeat(repeat, anchor)}.`}
-            {repeat.type === 'monthly' && !summaryError ? ' A shorter month lands on its last day.' : ''}
-            {' '}Generates entries about 60 days ahead at a time, topped up automatically as time passes. Editing or
-            skipping one day never affects any other.
-          </Text>
-        </>
-      ) : null}
-    </>
-  );
+// The repeat picker lives in components/RepeatRulePicker.tsx since
+// 2026-11-15, shared with Garden's Upcoming Tasks; this keeps Schedules'
+// colour on it.
+function RepeatPicker(props: { repeat: RepeatConfig; onChange: (repeat: RepeatConfig) => void; startDate?: string }) {
+  return <RepeatRulePicker {...props} color={TAB_COLOR} />;
 }
 
 // The caption for one row of a repeating series: its pattern in a few

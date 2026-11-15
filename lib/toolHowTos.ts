@@ -580,6 +580,9 @@ export type ToolMark =
   | 'garden.onHand'
   | 'garden.yield'
   | 'garden.addTask'
+  | 'garden.taskDone'
+  | 'garden.taskChange'
+  | 'garden.taskDelete'
   | 'sowing.how'
   | 'sowing.now'
   | 'sowing.every'
@@ -5404,10 +5407,40 @@ export const TOOL_HOW_TOS: Record<string, ToolHowTo[]> = {
       key: 'add',
       title: 'Add a garden task',
       steps: [
-        { say: 'Type the task, such as Water the tomatoes.' },
-        { say: 'Tap Add.', mark: 'garden.addTask' },
+        { say: 'Under Add a Task, type the task, such as Water the tomatoes.' },
+        { say: 'Type the day or tap Today or Tomorrow, then type the time and pick AM or PM.' },
+        { say: 'Under Repeat, leave Just once or pick how often it comes back and when it stops.' },
+        { say: 'Tap Add Task.', mark: 'garden.addTask' },
       ],
-      forYou: 'It is put on the schedule for tomorrow morning.',
+      forYou: 'It shows here, on Home and on Schedules > Timeline, and the phone reminds you at the time set.',
+    },
+    {
+      key: 'done',
+      title: 'Mark a garden task done',
+      steps: [
+        { say: 'Find the task in Upcoming Garden Tasks.' },
+        { say: 'Tap Done under it.', mark: 'garden.taskDone' },
+      ],
+      forYou: 'It leaves the list and its reminder stops, and it is kept on the schedule as done.',
+    },
+    {
+      key: 'change',
+      title: 'Change a garden task',
+      steps: [
+        { say: 'Tap Change under the task.', mark: 'garden.taskChange' },
+        { say: 'Change the words, the day or the time in the form below.' },
+        { say: 'Tap Save Change.', mark: 'garden.addTask' },
+      ],
+      forYou: 'Only that one day changes. A repeating task keeps its other days as they were.',
+    },
+    {
+      key: 'delete',
+      title: 'Delete a garden task',
+      steps: [
+        { say: 'Tap Delete under the task.', mark: 'garden.taskDelete' },
+        { say: 'For a repeating task, pick Just this day or This day and every one after.' },
+      ],
+      forYou: 'It no longer shows on Garden, Home or Schedules. Days already marked done stay recorded.',
     },
     {
       key: 'rain',

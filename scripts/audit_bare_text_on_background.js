@@ -128,6 +128,11 @@ const ALLOWED = [
     reason:
       '2026-10-31, tester plan T12: the first name of the tester drawn faintly across every screen of Lifestead Test so a shared screenshot says whose copy it came from. It is a mark meant to sit on whatever is underneath, never something to read, so a surface behind it would defeat it.',
   },
+  {
+    file: 'components/RepeatRulePicker.tsx',
+    reason:
+      '1.0.90.9: the repeat picker moved out of app/(tabs)/schedule.tsx so Garden tasks could share it. It is a set of form fields with no frame of its own, and every caller places it inside a form card (Schedules meals, doses and appointments, Exercise, Garden Upcoming Tasks), checked by reading each one. A surface behind the picker would draw a box inside the card.',
+  },
 ];
 
 function isAllowed(file, styles) {

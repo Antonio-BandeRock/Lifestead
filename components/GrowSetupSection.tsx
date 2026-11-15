@@ -47,6 +47,8 @@ import {
 } from '../lib/growSetupDb';
 import { readOrClosed } from '../lib/vaultReads';
 import { AppTextInput } from './AppTextInput';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 import { NotesInput } from './NotesInput';
 import { GardenTermField } from './GardenTermField';
 import { PopoverSelect } from './PopoverSelect';
@@ -270,11 +272,21 @@ export function GrowSetupSection({ plot, onChanged }: Props) {
   const [draft, setDraft] = useState<Draft>(emptyDraft);
   const [error, setError] = useState<string | null>(null);
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    const [rows, termRows, bills] = await Promise.all([listGrowEquipment(plot.id), listGardenTerms(true), readOrClosed(listElectricityBills, [])]);
-    setItems(rows);
-    setTerms(termRows);
-    setRate(electricityRate(bills));
+    try {
+      // Run as one call so an early return still clears readFailed.
+      await (async () => {
+        const [rows, termRows, bills] = await Promise.all([listGrowEquipment(plot.id), listGardenTerms(true), readOrClosed(listElectricityBills, [])]);
+        setItems(rows);
+        setTerms(termRows);
+        setRate(electricityRate(bills));
+      })();
+    } catch {
+      setReadFailed(true);
+      return;
+    }
+    setReadFailed(false);
   }, [plot.id]);
 
   useEffect(() => {
@@ -299,50 +311,57 @@ export function GrowSetupSection({ plot, onChanged }: Props) {
       setError('Enter the purchase date as YYYY-MM-DD.');
       return;
     }
+    const kind = draft.kind;
     const ongoingAmount = numberOrNull(draft.ongoingAmount);
     if (ongoingAmount !== null && !draft.ongoingCadence) {
       setError('Pick how often that ongoing amount comes round.');
       return;
     }
-    let input: GrowEquipmentInput;
-    if (draft.kind === 'light') {
-      input = lightDraftToInput({ ...draft.light, cost: draft.cost, costDate: draft.costDate }, plot.id, terms);
-    } else {
-      input = {
-        plotId: plot.id,
-        kind: draft.kind,
-        name: draft.name.trim() || null,
-        quantity: numberOrNull(draft.quantity) ?? 1,
-        watts: numberOrNull(draft.watts),
-        hoursPerDay: numberOrNull(draft.hours),
-        onTimer: draft.onTimer,
-        containerMaterial: draft.kind === 'container' ? draft.containerMaterial : null,
-        containerSize: draft.kind === 'container' ? draft.containerSize.trim() || null : null,
-        purchase: cost !== null ? { amount: cost, occurredOn: draft.costDate } : null,
-        terms,
-      };
-    }
-    input.ongoingAmount = ongoingAmount;
-    input.ongoingCadence = ongoingAmount !== null ? draft.ongoingCadence : null;
-    input.notes = draft.notes.trim() || null;
-    await addGrowEquipment(input);
-    setDraft(emptyDraft());
-    setAdding(false);
-    setError(null);
-    await load();
-    if (onChanged) await onChanged();
+    await saveOrSay('The equipment was not saved. Try again.', async () => {
+      let input: GrowEquipmentInput;
+      if (draft.kind === 'light') {
+        input = lightDraftToInput({ ...draft.light, cost: draft.cost, costDate: draft.costDate }, plot.id, terms);
+      } else {
+        input = {
+          plotId: plot.id,
+          kind,
+          name: draft.name.trim() || null,
+          quantity: numberOrNull(draft.quantity) ?? 1,
+          watts: numberOrNull(draft.watts),
+          hoursPerDay: numberOrNull(draft.hours),
+          onTimer: draft.onTimer,
+          containerMaterial: draft.kind === 'container' ? draft.containerMaterial : null,
+          containerSize: draft.kind === 'container' ? draft.containerSize.trim() || null : null,
+          purchase: cost !== null ? { amount: cost, occurredOn: draft.costDate } : null,
+          terms,
+        };
+      }
+      input.ongoingAmount = ongoingAmount;
+      input.ongoingCadence = ongoingAmount !== null ? draft.ongoingCadence : null;
+      input.notes = draft.notes.trim() || null;
+      await addGrowEquipment(input);
+      setDraft(emptyDraft());
+      setAdding(false);
+      setError(null);
+      await load();
+      if (onChanged) await onChanged();
+    });
   }
 
   async function handleRetire(item: GrowEquipment) {
-    await retireGrowEquipment(item.id, !item.retiredAt);
-    await load();
-    if (onChanged) await onChanged();
+    await saveOrSay('The equipment was not changed. Try again.', async () => {
+      await retireGrowEquipment(item.id, !item.retiredAt);
+      await load();
+      if (onChanged) await onChanged();
+    });
   }
 
   async function handleDelete(item: GrowEquipment) {
-    await deleteGrowEquipment(item.id);
-    await load();
-    if (onChanged) await onChanged();
+    await saveOrSay('The equipment was not deleted. Try again.', async () => {
+      await deleteGrowEquipment(item.id);
+      await load();
+      if (onChanged) await onChanged();
+    });
   }
 
   const inUse = items.filter((item) => !item.retiredAt);
@@ -356,6 +375,9 @@ export function GrowSetupSection({ plot, onChanged }: Props) {
   return (
     <View style={styles.section}>
       <Text style={styles.heading}>Grow Setup</Text>
+      {readFailed ? (
+        <ReadProblem message="The grow setup for this area could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
+      ) : null}
       {plot.sunlightExposure === 'indoor_led_timer' && !hasLight ? (
         <Text style={styles.captionText}>This area was recorded as lit by LED lights on a timer before lights had details of their own. Add the light here, with its wattage and hours, and the setup can be priced.</Text>
       ) : null}

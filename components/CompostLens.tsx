@@ -42,6 +42,8 @@ import { sortByLabel } from '../lib/choiceOrder';
 import { areaPath } from '../lib/gardenAreaNesting';
 import { listGardenCostGroups, type GardenCostGroup } from '../lib/gardenMoneyDb';
 import { AppTextInput } from './AppTextInput';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 import { NotesInput } from './NotesInput';
 import { HOME_BAND_ACCENT_WIDTH } from './HomeSectionBand';
 import { PopoverSelect } from './PopoverSelect';
@@ -168,13 +170,17 @@ export function CompostLens({
   const [startError, setStartError] = useState<string | null>(null);
   const today = todayDateString();
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    const [pileRows, eventRows, plotRows, groupRows] = await Promise.all([
-      listCompostPiles(),
-      listCompostEvents(),
-      listGardenPlots(),
-      listGardenCostGroups(),
-    ]);
+    let read: [CompostPile[], CompostEvent[], GardenPlot[], GardenCostGroup[]];
+    try {
+      read = await Promise.all([listCompostPiles(), listCompostEvents(), listGardenPlots(), listGardenCostGroups()]);
+    } catch {
+      setReadFailed(true);
+      return;
+    }
+    setReadFailed(false);
+    const [pileRows, eventRows, plotRows, groupRows] = read;
     setPiles(pileRows);
     setEvents(eventRows);
     setPlots(plotRows);
@@ -197,19 +203,24 @@ export function CompostLens({
       setStartError('The date needs to be YYYY-MM-DD.');
       return;
     }
-    await createCompostPile({ name: newName, kind: newKind, startedOn: newStartedOn, location: newLocation, ...feedsFromValue(newFeeds) });
-    setNewName('');
-    setNewKind('pile');
-    setNewLocation('');
-    setNewFeeds(NO_PLOT);
-    setNewStartedOn(todayDateString());
-    setStartError(null);
-    setStarting(false);
-    await load();
+    await saveOrSay('The new pile was not saved. Try again.', async () => {
+      await createCompostPile({ name: newName, kind: newKind, startedOn: newStartedOn, location: newLocation, ...feedsFromValue(newFeeds) });
+      setNewName('');
+      setNewKind('pile');
+      setNewLocation('');
+      setNewFeeds(NO_PLOT);
+      setNewStartedOn(todayDateString());
+      setStartError(null);
+      setStarting(false);
+      await load();
+    });
   }
 
   return (
     <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
+      {readFailed ? (
+        <ReadProblem message="Your compost piles could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
+      ) : null}
       <View style={[band.box, styles.card]}>
         <Text style={[styles.cardTitle, { color: TAB_COLOR }]}>Start a Pile</Text>
         {starting ? (
@@ -408,27 +419,29 @@ function PileBand({
       setError('Write the note.');
       return;
     }
-    await addCompostEvent({
-      pileId: pile.id,
-      occurredOn: date,
-      kind: action,
-      material: action === 'added' ? material : undefined,
-      materialClass: action === 'added' ? materialClass : null,
-      amount: action === 'added' || action === 'harvested' || action === 'applied' ? (amount ? Number(amount) : null) : null,
-      unit: action === 'added' || action === 'harvested' || action === 'applied' ? amountUnit ?? '' : '',
-      temperature: action === 'temperature' ? tempValue : null,
-      temperatureUnit: action === 'temperature' ? temperatureUnit : null,
-      moisture: action === 'moisture' ? moisture : null,
-      plotId: action === 'applied' && plotId !== NO_PLOT ? plotId : null,
-      note: note.trim() || undefined,
-      cost: action === 'added' && bought ? Math.round(costValue * 100) / 100 : null,
+    await saveOrSay('This was not saved to the pile. Try again.', async () => {
+      await addCompostEvent({
+        pileId: pile.id,
+        occurredOn: date,
+        kind: action,
+        material: action === 'added' ? material : undefined,
+        materialClass: action === 'added' ? materialClass : null,
+        amount: action === 'added' || action === 'harvested' || action === 'applied' ? (amount ? Number(amount) : null) : null,
+        unit: action === 'added' || action === 'harvested' || action === 'applied' ? amountUnit ?? '' : '',
+        temperature: action === 'temperature' ? tempValue : null,
+        temperatureUnit: action === 'temperature' ? temperatureUnit : null,
+        moisture: action === 'moisture' ? moisture : null,
+        plotId: action === 'applied' && plotId !== NO_PLOT ? plotId : null,
+        note: note.trim() || undefined,
+        cost: action === 'added' && bought ? Math.round(costValue * 100) / 100 : null,
+      });
+      reset();
+      await onChanged();
+      // A turn moves the next one on, and going curing or finished stops the
+      // asking altogether, so the queue is rebuilt rather than left to the
+      // next app start.
+      await syncReminderNotifications();
     });
-    reset();
-    await onChanged();
-    // A turn moves the next one on, and going curing or finished stops the
-    // asking altogether, so the queue is rebuilt rather than left to the
-    // next app start.
-    await syncReminderNotifications();
   }
 
   // The cadence, 2026-09-23. This used to book one garden task and then
@@ -438,20 +451,26 @@ function PileBand({
   // out from the pile itself (compostTurnDueOn), which means recording a
   // turn moves it on with nothing else to do.
   async function handleInterval(value: string) {
-    await setCompostTurnInterval(pile.id, Number(value));
-    await onChanged();
-    await syncReminderNotifications();
+    await saveOrSay('How often to turn it was not saved. Try again.', async () => {
+      await setCompostTurnInterval(pile.id, Number(value));
+      await onChanged();
+      await syncReminderNotifications();
+    });
   }
 
   async function handleStatus(status: string) {
-    await setCompostPileStatus(pile.id, status as CompostPileStatus);
-    await onChanged();
-    await syncReminderNotifications();
+    await saveOrSay('The pile status was not saved. Try again.', async () => {
+      await setCompostPileStatus(pile.id, status as CompostPileStatus);
+      await onChanged();
+      await syncReminderNotifications();
+    });
   }
 
   async function handleFeeds(value: string) {
-    await setCompostPileFeeds(pile.id, feedsFromValue(value));
-    await onChanged();
+    await saveOrSay('What this pile feeds was not saved. Try again.', async () => {
+      await setCompostPileFeeds(pile.id, feedsFromValue(value));
+      await onChanged();
+    });
   }
 
   // A pile with photos asks first, since they go with it (I13).
@@ -460,15 +479,19 @@ function PileBand({
       owners: [{ kind: 'compost_pile', id: pile.id }],
       title: `Delete ${pile.name} and its record?`,
       onRemove: async () => {
-        await deleteCompostPile(pile.id);
-        await onChanged();
+        await saveOrSay('The pile was not deleted. Try again.', async () => {
+          await deleteCompostPile(pile.id);
+          await onChanged();
+        });
       },
     });
   }
 
   async function handleDeleteEvent(id: string) {
-    await deleteCompostEvent(id);
-    await onChanged();
+    await saveOrSay('That entry was not deleted. Try again.', async () => {
+      await deleteCompostEvent(id);
+      await onChanged();
+    });
   }
 
   const shownEvents = showAll ? events : events.slice(0, 8);

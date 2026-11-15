@@ -197,7 +197,11 @@ export function SowingCalendarLens({
 
   const load = useCallback(async () => {
     setToday(todayString());
-    setFrost(await getFrostDates());
+    try {
+      setFrost(await getFrostDates());
+    } catch {
+      setFrost({ status: 'error', message: 'The frost dates for this place could not be read just now. Nothing you recorded is lost.' });
+    }
   }, []);
 
   useFocusEffect(

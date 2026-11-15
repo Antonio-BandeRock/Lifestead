@@ -25,6 +25,7 @@ import {
   seedPacketSummary,
 } from '../lib/seedPacket';
 import { AppTextInput } from './AppTextInput';
+import { saveOrSay } from '../lib/saveProblem';
 import { PhotoStrip } from './PhotoStrip';
 import { ThumbRow } from './ThumbRow';
 import { BUTTON_PRIMARY_COMPACT, BUTTON_PRIMARY_TEXT } from '../constants/buttons';
@@ -77,17 +78,19 @@ export function SeedPacketSection({ plantingId, foodName, plantedAt, varietyNote
       setError(packetDaysRangeLine());
       return;
     }
-    const given = reading.status === 'days' ? reading.days : null;
-    const harvestOn = given === null ? null : packetHarvestDate(plantedOn, given);
-    await updateGardenPlanting(plantingId, {
-      varietyNote: variety.trim() || null,
-      packetDays: given,
-      ...(harvestOn ? { expectedHarvestStart: harvestOn, expectedHarvestEnd: harvestOn } : {}),
+    await saveOrSay('The seed packet was not saved. Try again.', async () => {
+      const given = reading.status === 'days' ? reading.days : null;
+      const harvestOn = given === null ? null : packetHarvestDate(plantedOn, given);
+      await updateGardenPlanting(plantingId, {
+        varietyNote: variety.trim() || null,
+        packetDays: given,
+        ...(harvestOn ? { expectedHarvestStart: harvestOn, expectedHarvestEnd: harvestOn } : {}),
+      });
+      setError(null);
+      setOpen(false);
+      await loadCount();
+      await onSaved();
     });
-    setError(null);
-    setOpen(false);
-    await loadCount();
-    await onSaved();
   }
 
   return (

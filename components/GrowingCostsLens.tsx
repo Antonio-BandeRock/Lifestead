@@ -39,6 +39,8 @@ import {
 } from '../lib/gardenMoneyDb';
 import { formatTradeMoney } from '../lib/harvestTrade';
 import { AppTextInput } from './AppTextInput';
+import { ReadProblem } from './ReadProblem';
+import { saveOrSay } from '../lib/saveProblem';
 import { NotesInput } from './NotesInput';
 import { ElectricityBand } from './ElectricityBand';
 import { HOME_BAND_ACCENT_WIDTH } from './HomeSectionBand';
@@ -158,14 +160,23 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
   const [error, setError] = useState<string | null>(null);
   const [addingArea, setAddingArea] = useState(false);
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    const [costRows, money, plotRows, groupRows, kindRows] = await Promise.all([
-      listGrowingCosts(),
-      loadGardenMoneyPicture(),
-      listGardenPlots(),
-      listGardenCostGroups(),
-      listGardenCostKinds(),
-    ]);
+    let read;
+    try {
+      read = await Promise.all([
+        listGrowingCosts(),
+        loadGardenMoneyPicture(),
+        listGardenPlots(),
+        listGardenCostGroups(),
+        listGardenCostKinds(),
+      ]);
+    } catch {
+      setReadFailed(true);
+      return;
+    }
+    setReadFailed(false);
+    const [costRows, money, plotRows, groupRows, kindRows] = read;
     setCosts(costRows);
     setPicture(money);
     setPlots(plotRows);
@@ -265,27 +276,31 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
       setError('The date needs to be YYYY-MM-DD.');
       return;
     }
-    const forGroup = plotId.startsWith(GROUP_PREFIX);
-    await recordGrowingCost({
-      occurredOn: date,
-      amount: Math.round(value * 100) / 100,
-      description: description.trim(),
-      kind,
-      plotId: plotId === NO_PLOT || forGroup ? null : plotId,
-      costGroupId: forGroup ? plotId.slice(GROUP_PREFIX.length) : null,
+    await saveOrSay('The cost was not saved. Try again.', async () => {
+      const forGroup = plotId.startsWith(GROUP_PREFIX);
+      await recordGrowingCost({
+        occurredOn: date,
+        amount: Math.round(value * 100) / 100,
+        description: description.trim(),
+        kind,
+        plotId: plotId === NO_PLOT || forGroup ? null : plotId,
+        costGroupId: forGroup ? plotId.slice(GROUP_PREFIX.length) : null,
+      });
+      setDescription('');
+      setKind(null);
+      setAmount('');
+      setDate(todayDateString());
+      setPlotId(NO_PLOT);
+      setAdding(false);
+      await load();
     });
-    setDescription('');
-    setKind(null);
-    setAmount('');
-    setDate(todayDateString());
-    setPlotId(NO_PLOT);
-    setAdding(false);
-    await load();
   }
 
   async function handleDelete(id: string) {
-    await deleteGrowingCost(id);
-    await load();
+    await saveOrSay('The cost was not deleted. Try again.', async () => {
+      await deleteGrowingCost(id);
+      await load();
+    });
   }
 
   function startKind(entry: CustomGrowingCostKind | null) {
@@ -301,34 +316,40 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
       setKindError('Give the kind a name.');
       return;
     }
-    let id = kindForm.id;
-    if (id) await renameGardenCostKind(id, kindForm.name);
-    else id = await createGardenCostKind(kindForm.name);
-    setCustomKinds(await listGardenCostKinds());
-    setKind(id);
-    setKindForm(null);
+    await saveOrSay('The kind was not saved. Try again.', async () => {
+      let id = kindForm.id;
+      if (id) await renameGardenCostKind(id, kindForm.name);
+      else id = await createGardenCostKind(kindForm.name);
+      setCustomKinds(await listGardenCostKinds());
+      setKind(id);
+      setKindForm(null);
+    });
   }
 
   // Remove goes straight through when no cost is under the kind; otherwise
   // it opens the move-first step and waits for a pick.
   async function handleRemoveKind(id: string) {
-    const count = await countCostsUnderKind(id);
-    setKindForm(null);
-    if (count > 0) {
-      const entry = customKinds.find((item) => item.id === id);
-      setKindRemoval({ id, name: entry?.name ?? '', count, moveTo: null });
-      return;
-    }
-    await finishKindRemoval(id, null);
+    await saveOrSay('The kind was not removed. Try again.', async () => {
+      const count = await countCostsUnderKind(id);
+      setKindForm(null);
+      if (count > 0) {
+        const entry = customKinds.find((item) => item.id === id);
+        setKindRemoval({ id, name: entry?.name ?? '', count, moveTo: null });
+        return;
+      }
+      await finishKindRemoval(id, null);
+    });
   }
 
   async function finishKindRemoval(id: string, moveTo: string | null) {
-    const done = await deleteGardenCostKind(id, moveTo);
-    if (!done) return;
-    setKindRemoval(null);
-    // The cost being entered follows its neighbours to the picked kind.
-    if (kind === id) setKind(moveTo);
-    await load();
+    await saveOrSay('The kind was not removed. Try again.', async () => {
+      const done = await deleteGardenCostKind(id, moveTo);
+      if (!done) return;
+      setKindRemoval(null);
+      // The cost being entered follows its neighbours to the picked kind.
+      if (kind === id) setKind(moveTo);
+      await load();
+    });
   }
 
   function startArea() {
@@ -338,9 +359,11 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
   // The new area is picked for the cost being entered; the cost's other
   // fields are not touched.
   async function handleAreaSaved(id: string) {
-    setPlots(await listGardenPlots());
-    setPlotId(id);
-    setAddingArea(false);
+    await saveOrSay('The new area was saved, but the list of areas could not be read again. Try again.', async () => {
+      setPlots(await listGardenPlots());
+      setPlotId(id);
+      setAddingArea(false);
+    });
   }
 
   function startGroup(group: GardenCostGroup | null) {
@@ -365,18 +388,22 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
       setGroupError('Tick at least two areas to combine.');
       return;
     }
-    await saveGardenCostGroup({ id: groupId ?? undefined, name: groupName, memberIds: groupMemberIds });
-    setGroupEditing(false);
-    setGroupId(null);
-    setGroupName('');
-    setGroupMemberIds([]);
-    await load();
+    await saveOrSay('The group was not saved. Try again.', async () => {
+      await saveGardenCostGroup({ id: groupId ?? undefined, name: groupName, memberIds: groupMemberIds });
+      setGroupEditing(false);
+      setGroupId(null);
+      setGroupName('');
+      setGroupMemberIds([]);
+      await load();
+    });
   }
 
   async function handleDeleteGroup(id: string) {
-    await deleteGardenCostGroup(id);
-    if (groupId === id) setGroupEditing(false);
-    await load();
+    await saveOrSay('The group was not deleted. Try again.', async () => {
+      await deleteGardenCostGroup(id);
+      if (groupId === id) setGroupEditing(false);
+      await load();
+    });
   }
 
   const summary = picture?.summary ?? null;
@@ -394,6 +421,9 @@ export function GrowingCostsLens({ scrollBottomPadding }: { scrollBottomPadding:
   return (
     <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
       <VaultClosedBand color={TAB_COLOR} categories={['finances']} />
+      {readFailed ? (
+        <ReadProblem message="Your growing costs could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
+      ) : null}
       <View style={[band.box, styles.card]}>
         <Text style={[styles.cardTitle, { color: TAB_COLOR }]}>What the Garden Costs and Gives Back</Text>
         {summary ? (

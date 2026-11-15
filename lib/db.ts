@@ -26407,6 +26407,20 @@ export async function scheduleGardenTask(input: {
   return id;
 }
 
+// Change one garden task's words, day and time (2026-11-15). One row only:
+// a repeating series keeps its other days, the same reading moveScheduleItem
+// gives a moved dose.
+export async function updateGardenTask(id: string, input: { title: string; scheduledFor: string }): Promise<void> {
+  const db = await getDatabase();
+  await db.runAsync(
+    `UPDATE schedule_items SET title = ?, scheduled_for = ?, updated_at = ? WHERE id = ? AND item_type = 'garden'`,
+    input.title.trim(),
+    input.scheduledFor,
+    new Date().toISOString(),
+    id,
+  );
+}
+
 // The repeating Garden tasks tied to one planting that still have a day to
 // come (I1, 2026-10-02): what the care band under a planting shows as
 // running. A series is tied through the garden_task_links row on its first

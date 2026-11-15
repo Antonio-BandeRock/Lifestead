@@ -55,6 +55,10 @@ import {
   listGardenPlots,
   listPlantingHarvestCounts,
   listUpcomingGardenTasks,
+  deleteScheduledMeal,
+  deleteScheduleSeries,
+  setScheduleItemStatus,
+  updateGardenTask,
   recordGardenHarvest,
   setGardenHarvestOnHand,
   scheduleGardenTask,
@@ -118,7 +122,15 @@ import {
 import { PhotoStrip } from '../../components/PhotoStrip';
 import { removePhotosOf } from '../../lib/mediaDb';
 import { readAmount } from '../../lib/seedInventory';
-import { addSeedUse } from '../../lib/seedInventoryDb';
+import { addSeedUse, listSeedPackets } from '../../lib/seedInventoryDb';
+import { listGardenReadings } from '../../lib/growingConditionsDb';
+import { saveOrSay } from '../../lib/saveProblem';
+import { ReadProblem } from '../../components/ReadProblem';
+import { AppActionSheet, type AppActionSheetAction } from '../../components/AppActionSheet';
+import { RepeatRulePicker } from '../../components/RepeatRulePicker';
+import { validateRepeatRule, type RepeatConfig } from '../../lib/repeatRule';
+import { buildTime24, describeTimeInputProblem, formatTime12, splitTime24, type TimeOfDayInput } from '../../lib/timeOfDay';
+import { syncReminderNotifications } from '../../lib/reminderNotifications';
 import { removeUnclaimedPacketPhotos } from '../../lib/seedPacketDb';
 import {
   packetDaysRangeLine,
@@ -215,8 +227,11 @@ const GARDEN_LENS_FULL_NAMES: Record<GardenLens, string> = {
 };
 
 const GARDEN_LENSES: LensOption<GardenLens>[] = [
+  // Grouped 2026-11-15 the way the Your Guide tour already groups Garden
+  // (lib/yourStoryInterview.ts), so the menu and the tour read alike.
   {
     key: 'myZone',
+    group: 'Planning',
     label: 'My Zone',
     icon: 'earth-outline',
     help: [
@@ -226,37 +241,12 @@ const GARDEN_LENSES: LensOption<GardenLens>[] = [
       },
     ],
   },
-  {
-    key: 'plotsAndPlantings',
-    label: 'Plots & Plantings',
-    icon: 'flower-outline',
-    help: [
-      {
-        heading: 'Plots & Plantings',
-        body: 'A garden area is a place you grow food: a raised bed, a container, an indoor grow tent, a whole outdoor garden. Adding one walks through where it is, what kind of space it is (a raised bed, containers, a tent, or a space you name yourself from the picker, which then stays on the list), how much sun it gets (or, indoors, what lights it: the kind of light, its wattage, hours a day, timer, spectrum and the stage it suits, since indoors the light is the sun), its size, and its hardiness zone: details a future planting algorithm can use, none of them required to just get started. Each area has a Grow Setup once saved: lights, containers and what they are made of, hydroponic gear, humidity, timers, cooling, heating, water filtration, fans, exhaust, air filters, meters and any kind you name, each with what it cost to buy (recorded under Growing Costs for that area, so the budget sees it once), any ongoing cost, and its wattage and hours, from which the app works out what the setup draws a month and prices it once an electricity bill is recorded under Growing Costs. Each area also has Days Until counters: name something (germination, transplanting out, the first harvest), say how many days and the day it started, tie it to one planting if you like, and it counts down, says Today on the day (the phone reminds you that morning; the switch for it is in Profile > Reminders), and keeps counting past it until you mark it done; every counter in the garden is on the Days Until lens, and the running ones are on the Home screen under Garden; on either, you can start one by picking its area. Add what you’re growing in it (a reference food, the same ones every Food builder already uses) to track it from planting through harvest. Each planting has a status you set as it goes: Growing, Harvested, Failed or Pulled out. Once every grow in an area has finished, Move to Past Areas takes the area off the working list and keeps everything recorded under it readable in Past Areas below, and Bring it back returns it. Delete Area is only offered while nothing has been recorded under an area, so a record of what grew where is never lost.',
-      },
-    ],
-  },
-  // 2026-09-21, direct request: "Add a Days Until counter to the Garden
-  // hub quick access." Every counter across the garden in one place, and
-  // a new one started here by picking its area, rather than only under
-  // that area on Plots & Plantings.
-  {
-    key: 'daysUntil',
-    label: 'Days Until',
-    icon: 'hourglass-outline',
-    help: [
-      {
-        heading: 'Days Until',
-        body: 'Every Days Until counter in the garden, soonest first, each naming its area and the planting it is for. Start one here: pick the area, name what you are counting to (germination, transplanting out, the first harvest, the cover coming off), say how many days and the day it started, and tie it to one planting in that area if you like. A counter says Today on its day (the phone reminds you that morning; the switch for it is in Profile > Reminders), keeps counting past it until you mark it done, and Done keeps it as the record of how long the thing took. The same counters sit under each area on Plots & Plantings, and the running ones are on the Home screen under Garden, where one can also be started and marked done.',
-      },
-    ],
-  },
   // I5, 1.0.55.20: the sowing windows counted from My Zone's frost dates,
   // with the moon, the sun's turning points and the planting traditions
   // beside them.
   {
     key: 'sowingCalendar',
+    group: 'Planning',
     label: 'Sowing Calendar',
     icon: 'moon-outline',
     help: [
@@ -266,25 +256,58 @@ const GARDEN_LENSES: LensOption<GardenLens>[] = [
       },
     ],
   },
+  // I9, 2026-10-02: the seed packets on hand, before any goes in the
+  // ground. A planting sown from one takes what was sown off the packet.
   {
-    key: 'harvestLog',
-    label: 'Harvest Log',
-    icon: 'basket-outline',
+    key: 'seeds',
+    group: 'Planning',
+    label: 'Seeds',
+    icon: 'albums-outline',
     help: [
       {
-        heading: 'Harvest Log',
-        body: 'Log what you actually picked, and how much, from something you already tracked as planted in Plots & Plantings. If nothing shows up here to pick from, add a planting there first. Anything still showing an unused amount here shows up as a selectable "From Your Harvest" ingredient in every Food builder, with the same nutrition/condition scoring as any other reference food, since it’s tied to the same food identity.',
+        heading: 'Seeds',
+        body:
+          'The seed packets you have on hand. Add a packet by picking its crop, then record the variety, where it came from (a seller, a swap, seed you saved), the year or day it was packed for, how much is in it in seeds, grams or packets, its days to maturity, and a photo of the packet. Each packet says how old it is and about how long seed of that crop keeps in cool, dry storage, from the Colorado State University Extension table, given as a guide rather than a date it stops working; a crop the table does not name shows its age alone. A germination test records how many seeds were set to sprout on a damp paper towel and how many did, and says how many to sow for ten seedlings at that rate. On Plots & Plantings, Add a Planting offers your packets of that crop: picking one fills in the variety and the days to maturity, and the amount you sow comes off what the packet has left. Removing that planting puts the amount back. A packet with anything recorded against it is put away rather than deleted, and can be brought back.',
+      },
+    ],
+  },
+  {
+    key: 'plotsAndPlantings',
+    group: 'Planning',
+    label: 'Plots & Plantings',
+    icon: 'flower-outline',
+    help: [
+      {
+        heading: 'Plots & Plantings',
+        body: 'A garden area is a place you grow food: a raised bed, a container, an indoor grow tent, a whole outdoor garden. Adding one walks through where it is, what kind of space it is (a raised bed, containers, a tent, or a space you name yourself from the picker, which then stays on the list), how much sun it gets (or, indoors, what lights it: the kind of light, its wattage, hours a day, timer, spectrum and the stage it suits, since indoors the light is the sun), its size, and its hardiness zone: details a future planting algorithm can use, none of them required to just get started. Each area has a Grow Setup once saved: lights, containers and what they are made of, hydroponic gear, humidity, timers, cooling, heating, water filtration, fans, exhaust, air filters, meters and any kind you name, each with what it cost to buy (recorded under Growing Costs for that area, so the budget sees it once), any ongoing cost, and its wattage and hours, from which the app works out what the setup draws a month and prices it once an electricity bill is recorded under Growing Costs. Each area also has Days Until counters: name something (germination, transplanting out, the first harvest), say how many days and the day it started, tie it to one planting if you like, and it counts down, says Today on the day (the phone reminds you that morning; the switch for it is in Profile > Reminders), and keeps counting past it until you mark it done; every counter in the garden is on the Days Until lens, and the running ones are on the Home screen under Garden; on either, you can start one by picking its area. Add what you’re growing in it (a reference food, the same ones every Food builder already uses) to track it from planting through harvest. Each planting has a status you set as it goes: Growing, Harvested, Failed or Pulled out. Once every grow in an area has finished, Move to Past Areas takes the area off the working list and keeps everything recorded under it readable in Past Areas below, and Bring it back returns it. Delete Area is only offered while nothing has been recorded under an area, so a record of what grew where is never lost.',
       },
     ],
   },
   {
     key: 'upcomingTasks',
+    group: 'Planning',
     label: 'Upcoming Tasks',
     icon: 'calendar-outline',
     help: [
       {
         heading: 'Upcoming Garden Tasks',
-        body: 'Garden chores (watering, feeding, checking on something) scheduled for a specific date, created here and stored the same way any other Schedule item is. A dedicated lens for these inside the Schedules tab itself isn’t built yet, so this is the place to see and add them for now.',
+        body: 'Garden chores (watering, feeding, checking on something) on a day and at a time you pick, once or repeating: every day, on days of the week, every few days or every month. Each one can be marked done, changed or deleted here, and a repeating one asks whether to delete that day or the whole series. They show on Home and on Schedules > Timeline too, and the phone reminds you at the time set. A watering task in the coming week shows the rain forecast for its day once My Zone has a place saved.',
+      },
+    ],
+  },
+  // 2026-09-21, direct request: "Add a Days Until counter to the Garden
+  // hub quick access." Every counter across the garden in one place, and
+  // a new one started here by picking its area, rather than only under
+  // that area on Plots & Plantings.
+  {
+    key: 'daysUntil',
+    group: 'Planning',
+    label: 'Days Until',
+    icon: 'hourglass-outline',
+    help: [
+      {
+        heading: 'Days Until',
+        body: 'Every Days Until counter in the garden, soonest first, each naming its area and the planting it is for. Start one here: pick the area, name what you are counting to (germination, transplanting out, the first harvest, the cover coming off), say how many days and the day it started, and tie it to one planting in that area if you like. A counter says Today on its day (the phone reminds you that morning; the switch for it is in Profile > Reminders), keeps counting past it until you mark it done, and Done keeps it as the record of how long the thing took. The same counters sit under each area on Plots & Plantings, and the running ones are on the Home screen under Garden, where one can also be started and marked done.',
       },
     ],
   },
@@ -293,6 +316,7 @@ const GARDEN_LENSES: LensOption<GardenLens>[] = [
   // turned, watered, and everything else about making good compost."
   {
     key: 'compost',
+    group: 'Growing',
     label: 'Compost',
     icon: 'layers-outline',
     help: [
@@ -308,13 +332,14 @@ const GARDEN_LENSES: LensOption<GardenLens>[] = [
   // of it grew in.
   {
     key: 'growingConditions',
+    group: 'Growing',
     label: 'Growing Conditions',
     icon: 'thermometer-outline',
     help: [
       {
         heading: 'Growing Conditions',
         body:
-          'What the conditions actually were where something grew. Soil moisture, soil and air temperature, humidity, pH, light, EC, rainfall, what you watered, CO2, or anything else you measure, which you can add to the list yourself. Record the figure, the unit it was read in, the day, and the area and planting it was about if it was about one. A figure read off a meter in your hand counts the same as one from a sensor, which is why this is worth keeping whether or not you ever wire anything up. Units are only ever turned into one another where the two mean the same quantity: Celsius and Fahrenheit do, and a moisture percentage and a tensiometer centibar do not, so those stay apart rather than being added together. One band per measurement holds its readings, newest first, and Trends > Growing Conditions draws one measurement month by month, says what you are measuring and how recently, and names the areas with nothing recorded against them.',
+          'What the conditions were where something grew. Soil moisture, soil and air temperature, humidity, pH, light, EC, rainfall, what you watered, CO2, or anything else you measure, which you can add to the list yourself. Record the figure, the unit it was read in, the day, and the area and planting it was about if it was about one. A figure read off a meter in your hand counts the same as one from a sensor, which is why this is worth keeping whether or not you ever wire anything up. Units are only ever turned into one another where the two mean the same quantity: Celsius and Fahrenheit do, and a moisture percentage and a tensiometer centibar do not, so those stay apart rather than being added together. One band per measurement holds its readings, newest first, and Trends > Growing Conditions draws one measurement month by month, says what you are measuring and how recently, and names the areas with nothing recorded against them.',
       },
       {
         heading: 'Measuring the Light With Your Phone',
@@ -323,17 +348,15 @@ const GARDEN_LENSES: LensOption<GardenLens>[] = [
       },
     ],
   },
-  // I9, 2026-10-02: the seed packets on hand, before any goes in the
-  // ground. A planting sown from one takes what was sown off the packet.
   {
-    key: 'seeds',
-    label: 'Seeds',
-    icon: 'albums-outline',
+    key: 'harvestLog',
+    group: 'What It Gives and Costs',
+    label: 'Harvest Log',
+    icon: 'basket-outline',
     help: [
       {
-        heading: 'Seeds',
-        body:
-          'The seed packets you have on hand. Add a packet by picking its crop, then record the variety, where it came from (a seller, a swap, seed you saved), the year or day it was packed for, how much is in it in seeds, grams or packets, its days to maturity, and a photo of the packet. Each packet says how old it is and about how long seed of that crop keeps in cool, dry storage, from the Colorado State University Extension table, given as a guide rather than a date it stops working; a crop the table does not name shows its age alone. A germination test records how many seeds were set to sprout on a damp paper towel and how many did, and says how many to sow for ten seedlings at that rate. On Plots & Plantings, Add a Planting offers your packets of that crop: picking one fills in the variety and the days to maturity, and the amount you sow comes off what the packet has left. Removing that planting puts the amount back. A packet with anything recorded against it is put away rather than deleted, and can be brought back.',
+        heading: 'Harvest Log',
+        body: 'Log what you picked, and how much, from something tracked as planted in Plots & Plantings. If nothing shows up here to pick from, add a planting there first. Saving a harvest asks whether to keep it on hand. Kept on hand, it shows under My Whole Foods on the Food tab and as a From Your Harvest ingredient in every Food builder, with the same nutrition and condition scoring as any other food, and it is drawn down as you cook with it. Some of it sold, traded or given away is recorded on Life > Kitchen with Sold, Traded or Gave Away, and Garden Yield on Trends shows what has gone out to other people.',
       },
     ],
   },
@@ -344,6 +367,7 @@ const GARDEN_LENSES: LensOption<GardenLens>[] = [
   // scraps."
   {
     key: 'growingCosts',
+    group: 'What It Gives and Costs',
     label: 'Growing Costs',
     icon: 'wallet-outline',
     help: [
@@ -360,6 +384,7 @@ const GARDEN_LENSES: LensOption<GardenLens>[] = [
   // the other four lenses do. See components/DigestCategoryLens.tsx.
   {
     key: 'horticulture',
+    group: 'Reading',
     label: 'Horticulture',
     icon: 'leaf-outline',
     help: [
@@ -376,11 +401,11 @@ const GARDEN_LENSES: LensOption<GardenLens>[] = [
 const GARDEN_HELP_SECTIONS: HelpSection[] = [
   {
     heading: 'What this tab is for',
-    body: "So growing food yourself is worth the effort, not just a separate hobby log nobody else in this app ever sees. Track what you're growing, what actually gets harvested, and it becomes a pickable ingredient in the Food builders, the same as anything from the reference database.",
+    body: 'Growing food yourself, kept with the rest of your life rather than in a hobby log of its own. Record where you grow, what is planted there, what it needs and when, what it costs and what it gives, and a harvest becomes an ingredient you can pick in every Food builder, scored the same as any other food.',
   },
   {
     heading: 'What it tracks',
-    body: "Your USDA Plant Hardiness Zone (found automatically from a country + ZIP/postal code, anywhere on Earth, or set directly if you already know it), garden areas and what's planted in them, a harvest log, compost piles and everything done to them, money spent on growing set against what the garden gives back, and upcoming garden tasks. A basic Scheduler tie-in exists too (a garden task creates a schedule_items row; a dedicated lens for it inside the Schedules tab itself isn't built yet).",
+    body: 'Planning: your hardiness zone and frost dates (My Zone), a sowing calendar worked out from them, the seed packets you have on hand, each garden area with its grow setup and what is planted in it, garden tasks with a day, a time and a repeat, and Days Until counters. Growing: compost piles and everything done to them, and the growing conditions you measure. What it gives and costs: harvests and what becomes of them, and the money spent to grow, set against what the garden gives back. Reading: Horticulture, with how to grow each crop and cited guidance for your climate. Garden tasks also show on Home and on Schedules > Timeline, and a harvest kept on hand shows under My Whole Foods on the Food tab.',
   },
 ];
 
@@ -508,24 +533,30 @@ export default function GardenScreen() {
   const [pileCount, setPileCount] = useState<number | undefined>(undefined);
   const [costCount, setCostCount] = useState<number | undefined>(undefined);
   const [countdownCount, setCountdownCount] = useState<number | undefined>(undefined);
-
+  const [seedCount, setSeedCount] = useState<number | undefined>(undefined);
+  const [readingCount, setReadingCount] = useState<number | undefined>(undefined);
+  // Each count is read on its own, 2026-11-15, so one that cannot be read
+  // shows no number rather than taking every other count down with it; a
+  // missing number never reads as zero.
   const loadMyGardenCounts = useCallback(async () => {
-    const [plots, plantings, harvests, tasks, piles, costs, countdowns] = await Promise.all([
-      listGardenPlots(),
-      listGardenPlantings(),
-      listGardenHarvests(),
-      listUpcomingGardenTasks(),
-      listCompostPiles(),
-      listGrowingCosts(),
-      countRunningGardenCountdowns(),
+    const count = async (read: () => Promise<number>, set: (value: number | undefined) => void) => {
+      try {
+        set(await read());
+      } catch {
+        set(undefined);
+      }
+    };
+    await Promise.all([
+      count(async () => (await listGardenPlots()).length, setPlotCount),
+      count(async () => (await listGardenPlantings()).length, setPlantingCount),
+      count(async () => (await listGardenHarvests()).length, setHarvestCount),
+      count(async () => (await listUpcomingGardenTasks()).length, setTaskCount),
+      count(async () => (await listCompostPiles()).length, setPileCount),
+      count(async () => (await listGrowingCosts()).length, setCostCount),
+      count(countRunningGardenCountdowns, setCountdownCount),
+      count(async () => (await listSeedPackets()).filter((packet) => !packet.finishedAt).length, setSeedCount),
+      count(async () => (await listGardenReadings()).length, setReadingCount),
     ]);
-    setPlotCount(plots.length);
-    setPlantingCount(plantings.length);
-    setHarvestCount(harvests.length);
-    setTaskCount(tasks.length);
-    setPileCount(piles.length);
-    setCostCount(costs.length);
-    setCountdownCount(countdowns);
   }, []);
   useOnVaultChange(() => {
     void loadMyGardenCounts();
@@ -541,18 +572,16 @@ export default function GardenScreen() {
     },
     { id: 'countdowns', label: 'Days Until', count: countdownCount, onPress: () => { setLens('daysUntil'); setRevealed(true); } },
     { id: 'harvests', label: 'Harvests', count: harvestCount, onPress: () => { setLens('harvestLog'); setRevealed(true); } },
+    { id: 'seeds', label: 'Seed Packets', count: seedCount, onPress: () => { setLens('seeds'); setRevealed(true); } },
     { id: 'tasks', label: 'Upcoming Tasks', count: taskCount, onPress: () => { setLens('upcomingTasks'); setRevealed(true); } },
     { id: 'compost', label: 'Compost Piles', count: pileCount, onPress: () => { setLens('compost'); setRevealed(true); } },
+    { id: 'readings', label: 'Growing Conditions Readings', count: readingCount, onPress: () => { setLens('growingConditions'); setRevealed(true); } },
     { id: 'costs', label: 'Growing Costs', count: costCount, onPress: () => { setLens('growingCosts'); setRevealed(true); } },
   ];
 
   return (
     <View style={styles.screen}>
       <SwipeableTabScreen enabled={!revealed}>
-        {/* variant="field" -- Garden has no commissioned background artwork
-            of its own yet (a real, named gap, same as Digest before
-            it), so this falls back to the shared wildflower scene every
-            tab rests on before its own art exists. */}
         <CalmBands>
         <GatedTabContent pageTitle="Garden" variant="field" revealed={revealed} lens={lens}>
           {lens === 'myZone' ? (
@@ -640,6 +669,8 @@ function MyZoneLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
   // while they are being read.
   const [frost, setFrost] = useState<FrostDatesResult | null>(null);
   const [fahrenheit, setFahrenheit] = useState(false);
+  const [readFailed, setReadFailed] = useState(false);
+  const [readTick, setReadTick] = useState(0);
 
   const loadFrost = useCallback(async () => {
     setFrost(null);
@@ -648,15 +679,26 @@ function MyZoneLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
 
   useFocusEffect(
     useCallback(() => {
+      // Try again bumps readTick, so the read runs once more.
+      void readTick;
       let cancelled = false;
       (async () => {
-        const [profile, system] = await Promise.all([getUserProfile(), getStoredMeasurementSystem()]);
-        if (!cancelled) {
-          setZone(profile.growingZone);
-          setCountry(profile.growingZoneCountry);
-          setPostalCode(profile.growingZonePostalCode ?? '');
-          setFahrenheit((system ?? detectMeasurementSystemFromLocale()) === 'imperial');
-          setLoading(false);
+        try {
+          const [profile, system] = await Promise.all([getUserProfile(), getStoredMeasurementSystem()]);
+          if (!cancelled) {
+            setZone(profile.growingZone);
+            setCountry(profile.growingZoneCountry);
+            setPostalCode(profile.growingZonePostalCode ?? '');
+            setFahrenheit((system ?? detectMeasurementSystemFromLocale()) === 'imperial');
+            setReadFailed(false);
+            setLoading(false);
+          }
+        } catch {
+          if (!cancelled) {
+            setReadFailed(true);
+            setLoading(false);
+          }
+          return;
         }
         const dates = await getFrostDates();
         if (!cancelled) setFrost(dates);
@@ -664,14 +706,19 @@ function MyZoneLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
       return () => {
         cancelled = true;
       };
-    }, []),
+    }, [readTick]),
   );
 
   const bandInfo = useMemo(() => (zone ? zoneBandInfo(zone) : null), [zone]);
 
   async function handleSetZone(value: string) {
+    const before = zone;
     setZone(value);
-    await setUserProfile({ growingZone: value });
+    const saved = await saveOrSay('Your zone was not saved. Try again.', async () => {
+      await setUserProfile({ growingZone: value });
+      return true;
+    });
+    if (!saved) setZone(before);
   }
 
   async function handleLookup() {
@@ -683,14 +730,32 @@ function MyZoneLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
     const result = await lookupGrowingZone(country, postalCode);
     setLookupResult(result);
     if (result.status === 'success') {
-      setZone(result.zone);
-      await setUserProfile({ growingZone: result.zone, growingZoneCountry: country, growingZonePostalCode: postalCode.trim() });
-      void loadFrost();
+      const saved = await saveOrSay('The zone was found but not saved. Try again.', async () => {
+        await setUserProfile({ growingZone: result.zone, growingZoneCountry: country, growingZonePostalCode: postalCode.trim() });
+        return true;
+      });
+      if (saved) {
+        setZone(result.zone);
+        void loadFrost();
+      }
     }
     setLookupBusy(false);
   }
 
   if (loading) return null;
+  if (readFailed) {
+    return (
+      <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
+        <ReadProblem
+          message="Your zone and place could not be read just now. Nothing you recorded is lost."
+          onTryAgain={() => {
+            setLoading(true);
+            setReadTick((tick) => tick + 1);
+          }}
+        />
+      </ScrollView>
+    );
+  }
 
   const lookupDisabled = !country || !postalCode.trim();
 
@@ -983,8 +1048,17 @@ function PlotsAndPlantingsLens({
     removeUnclaimedPacketPhotos().catch(() => undefined);
   }, []);
 
+  const [plotsReadFailed, setPlotsReadFailed] = useState(false);
   const loadPlots = useCallback(async () => {
-    const [rows, spaces, active, terms] = await Promise.all([listGardenPlots(true), listGardenSpaces(true), listGardenSpaces(), listGardenTerms(true)]);
+    let read: [GardenPlot[], CustomGardenSpace[], CustomGardenSpace[], CustomGardenTerm[]];
+    try {
+      read = await Promise.all([listGardenPlots(true), listGardenSpaces(true), listGardenSpaces(), listGardenTerms(true)]);
+    } catch {
+      setPlotsReadFailed(true);
+      return;
+    }
+    setPlotsReadFailed(false);
+    const [rows, spaces, active, terms] = read;
     setPlots(rows.filter((plot) => !plot.archivedAt));
     setPastPlots(rows.filter((plot) => plot.archivedAt));
     setCustomSpaces(spaces);
@@ -999,12 +1073,19 @@ function PlotsAndPlantingsLens({
   );
 
   async function loadPlantingsFor(plotId: string) {
-    const [rows, harvestsByPlanting, eventsByPlanting, hasRecords] = await Promise.all([
-      listGardenPlantings(plotId),
-      listPlantingHarvestCounts(plotId),
-      listPlantingEventCounts(plotId),
-      gardenPlotHasRecords(plotId),
-    ]);
+    let read: [GardenPlanting[], Record<string, number>, Record<string, number>, boolean];
+    try {
+      read = await Promise.all([
+        listGardenPlantings(plotId),
+        listPlantingHarvestCounts(plotId),
+        listPlantingEventCounts(plotId),
+        gardenPlotHasRecords(plotId),
+      ]);
+    } catch {
+      setPlotsReadFailed(true);
+      return;
+    }
+    const [rows, harvestsByPlanting, eventsByPlanting, hasRecords] = read;
     setPlantingsByPlot((current) => ({ ...current, [plotId]: rows }));
     setPlotFacts((current) => ({ ...current, [plotId]: { harvestsByPlanting, eventsByPlanting, hasRecords } }));
   }
@@ -1015,12 +1096,14 @@ function PlotsAndPlantingsLens({
   // already set their zone in My Zone shouldn't have to redo the lookup for
   // every area, just confirm or override it here.
   async function handleShowAddPlot() {
-    const profile = await getUserProfile();
-    setNewAreaZoneCountry(profile.growingZoneCountry);
-    setNewAreaZonePostal(profile.growingZonePostalCode ?? '');
-    setNewAreaZone(profile.growingZone);
-    setZoneLookupResult(null);
-    setShowAddPlot(true);
+    await saveOrSay('The new area form could not be opened. Try again.', async () => {
+      const profile = await getUserProfile();
+      setNewAreaZoneCountry(profile.growingZoneCountry);
+      setNewAreaZonePostal(profile.growingZonePostalCode ?? '');
+      setNewAreaZone(profile.growingZone);
+      setZoneLookupResult(null);
+      setShowAddPlot(true);
+    });
   }
 
   async function handleZoneLookup() {
@@ -1038,46 +1121,48 @@ function PlotsAndPlantingsLens({
   }
 
   async function handleAddGardenArea() {
-    if (!newAreaName.trim()) {
-      return explainNotYet('Give this area a name first, at the top of the form, so you can tell it apart from your other areas.');
-    }
-    const asksForLight = newAreaLocationType === 'indoor' || (newAreaLocationType === 'greenhouse' && newAreaGreenhouseLit);
-    const plotId = await createGardenPlot({
-      name: newAreaName,
-      locationType: newAreaLocationType,
-      spaceType: newAreaSpaceType,
-      sunlightExposure: newAreaLocationType === 'indoor' ? null : newAreaSunlight,
-      length: newAreaLength.trim() ? Number(newAreaLength) : null,
-      width: newAreaWidth.trim() ? Number(newAreaWidth) : null,
-      sizeUnit: newAreaLength.trim() || newAreaWidth.trim() ? newAreaSizeUnit : null,
-      zone: newAreaZone,
-      zoneCountry: newAreaZoneCountry,
-      zonePostalCode: newAreaZonePostal.trim() || null,
-      insidePlotId: newAreaInsideId,
+    await saveOrSay('The garden area was not saved. Try again.', async () => {
+      if (!newAreaName.trim()) {
+        return explainNotYet('Give this area a name first, at the top of the form, so you can tell it apart from your other areas.');
+      }
+      const asksForLight = newAreaLocationType === 'indoor' || (newAreaLocationType === 'greenhouse' && newAreaGreenhouseLit);
+      const plotId = await createGardenPlot({
+        name: newAreaName,
+        locationType: newAreaLocationType,
+        spaceType: newAreaSpaceType,
+        sunlightExposure: newAreaLocationType === 'indoor' ? null : newAreaSunlight,
+        length: newAreaLength.trim() ? Number(newAreaLength) : null,
+        width: newAreaWidth.trim() ? Number(newAreaWidth) : null,
+        sizeUnit: newAreaLength.trim() || newAreaWidth.trim() ? newAreaSizeUnit : null,
+        zone: newAreaZone,
+        zoneCountry: newAreaZoneCountry,
+        zonePostalCode: newAreaZonePostal.trim() || null,
+        insidePlotId: newAreaInsideId,
+      });
+      if (asksForLight && lightDraftHasLight(newAreaLight)) {
+        await addGrowEquipment(lightDraftToInput(newAreaLight, plotId, gardenTerms));
+      }
+      setNewAreaName('');
+      setNewAreaLocationType('outdoor');
+      setNewAreaSpaceType(null);
+      setNewAreaInsideId(null);
+      setNewAreaSunlight(null);
+      setNewAreaLight(emptyLightDraft());
+      setNewAreaGreenhouseLit(false);
+      setNewAreaLength('');
+      setNewAreaWidth('');
+      setNewAreaSizeUnit('feet');
+      setNewAreaZoneCountry(null);
+      setNewAreaZonePostal('');
+      setNewAreaZone(null);
+      setZoneLookupResult(null);
+      setShowAddPlot(false);
+      await loadPlots();
+      // Next step of setting the area up: what is measured there.
+      setExpandedPlotId(plotId);
+      setPlanStepFor(plotId);
+      loadPlantingsFor(plotId);
     });
-    if (asksForLight && lightDraftHasLight(newAreaLight)) {
-      await addGrowEquipment(lightDraftToInput(newAreaLight, plotId, gardenTerms));
-    }
-    setNewAreaName('');
-    setNewAreaLocationType('outdoor');
-    setNewAreaSpaceType(null);
-    setNewAreaInsideId(null);
-    setNewAreaSunlight(null);
-    setNewAreaLight(emptyLightDraft());
-    setNewAreaGreenhouseLit(false);
-    setNewAreaLength('');
-    setNewAreaWidth('');
-    setNewAreaSizeUnit('feet');
-    setNewAreaZoneCountry(null);
-    setNewAreaZonePostal('');
-    setNewAreaZone(null);
-    setZoneLookupResult(null);
-    setShowAddPlot(false);
-    await loadPlots();
-    // Next step of setting the area up: what is measured there.
-    setExpandedPlotId(plotId);
-    setPlanStepFor(plotId);
-    loadPlantingsFor(plotId);
   }
 
   // Move to Past Areas, only once every grow in the area has finished:
@@ -1085,42 +1170,48 @@ function PlotsAndPlantingsLens({
   // it is completed." The count is re-read from the database rather than
   // trusted from state, so a planting added on another screen still counts.
   async function handleMoveToPast(id: string) {
-    // Areas still in use inside this one hold it back the same way a grow
-    // still going does (lib/gardenAreaNesting.ts).
-    const insideLine = insideAreaBlocker(id, [...plots, ...pastPlots]);
-    if (insideLine) {
-      setPastBlockers((current) => ({ ...current, [id]: insideLine }));
-      return;
-    }
-    const { growing, planned } = await countGrowingPlantings(id);
-    if (growing + planned > 0) {
-      const line = pastAreaBlocker([
-        ...Array.from({ length: growing }, () => ({ status: 'growing' as const })),
-        ...Array.from({ length: planned }, () => ({ status: 'planned' as const })),
-      ]);
-      setPastBlockers((current) => ({ ...current, [id]: line ?? '' }));
-      return;
-    }
-    await archiveGardenPlot(id, true);
-    setPastBlockers((current) => ({ ...current, [id]: '' }));
-    if (expandedPlotId === id) setExpandedPlotId(null);
-    await loadPlots();
+    await saveOrSay('The area was not moved to Past Areas. Try again.', async () => {
+      // Areas still in use inside this one hold it back the same way a grow
+      // still going does (lib/gardenAreaNesting.ts).
+      const insideLine = insideAreaBlocker(id, [...plots, ...pastPlots]);
+      if (insideLine) {
+        setPastBlockers((current) => ({ ...current, [id]: insideLine }));
+        return;
+      }
+      const { growing, planned } = await countGrowingPlantings(id);
+      if (growing + planned > 0) {
+        const line = pastAreaBlocker([
+          ...Array.from({ length: growing }, () => ({ status: 'growing' as const })),
+          ...Array.from({ length: planned }, () => ({ status: 'planned' as const })),
+        ]);
+        setPastBlockers((current) => ({ ...current, [id]: line ?? '' }));
+        return;
+      }
+      await archiveGardenPlot(id, true);
+      setPastBlockers((current) => ({ ...current, [id]: '' }));
+      if (expandedPlotId === id) setExpandedPlotId(null);
+      await loadPlots();
+    });
   }
 
   // Put an area inside another one, or stand it on its own.
   async function handleSetInside(id: string, insideId: string | null) {
-    await updateGardenPlot(id, { insidePlotId: insideId });
-    setPastBlockers((current) => {
-      const next = { ...current };
-      for (const key of Object.keys(next)) next[key] = '';
-      return next;
+    await saveOrSay('Where this area stands was not saved. Try again.', async () => {
+      await updateGardenPlot(id, { insidePlotId: insideId });
+      setPastBlockers((current) => {
+        const next = { ...current };
+        for (const key of Object.keys(next)) next[key] = '';
+        return next;
+      });
+      await loadPlots();
     });
-    await loadPlots();
   }
 
   async function handleBringBack(id: string) {
-    await archiveGardenPlot(id, false);
-    await loadPlots();
+    await saveOrSay('The area was not brought back. Try again.', async () => {
+      await archiveGardenPlot(id, false);
+      await loadPlots();
+    });
   }
 
   // Delete is offered only for an area with nothing recorded under it, and
@@ -1131,126 +1222,134 @@ function PlotsAndPlantingsLens({
       owners: [{ kind: 'garden_area', id }],
       title: `Delete ${name}?`,
       onRemove: async () => {
-        const deleted = await deleteGardenPlot(id);
-        if (!deleted) {
-          await loadPlantingsFor(id);
-          return;
-        }
-        await loadPlots();
+        await saveOrSay('The area was not deleted. Try again.', async () => {
+          const deleted = await deleteGardenPlot(id);
+          if (!deleted) {
+            await loadPlantingsFor(id);
+            return;
+          }
+          await loadPlots();
+        });
       },
     });
   }
 
   async function handlePlantingStatus(plotId: string, plantingId: string, status: string) {
-    const option = PLANTING_STATUS_OPTIONS.find((entry) => entry.value === status);
-    if (!option) return;
-    await updateGardenPlanting(plantingId, { status: option.value });
-    // Care tasks still to come stop once a planting is harvested, failed or
-    // pulled out (I1); what was done under them stays.
-    if (!careStillRuns(option.value)) await stopPlantingSeries(plantingId);
-    setPastBlockers((current) => ({ ...current, [plotId]: '' }));
-    await loadPlantingsFor(plotId);
+    await saveOrSay('The planting status was not saved. Try again.', async () => {
+      const option = PLANTING_STATUS_OPTIONS.find((entry) => entry.value === status);
+      if (!option) return;
+      await updateGardenPlanting(plantingId, { status: option.value });
+      // Care tasks still to come stop once a planting is harvested, failed or
+      // pulled out (I1); what was done under them stays.
+      if (!careStillRuns(option.value)) await stopPlantingSeries(plantingId);
+      setPastBlockers((current) => ({ ...current, [plotId]: '' }));
+      await loadPlantingsFor(plotId);
+    });
   }
 
   // A current area still holding a space the picker no longer offers (a
   // built-in retired since, or a space of the person's removed while this
   // area read it) is moved to one that is.
   async function handleMoveAreaSpace(plotId: string, code: string | null) {
-    if (!code) return;
-    await updateGardenPlot(plotId, { spaceType: code });
-    await loadPlots();
+    await saveOrSay('The space for this area was not saved. Try again.', async () => {
+      if (!code) return;
+      await updateGardenPlot(plotId, { spaceType: code });
+      await loadPlots();
+    });
   }
 
   async function handleAddPlanting(plotId: string) {
-    if (!pendingFood) return;
-    const foodName = pendingFoodName || pendingFood.baseName;
-    const plantedAt = todayDateString();
-    const sowing = sowingWindowForFood(foodName);
-    const startedAs = sowing ? pendingStartedAs ?? defaultPlantingStart(sowing) : null;
-    const expected = sowing && startedAs ? plantingExpected(sowing, plantedAt, startedAs) : null;
-    const packet = readPacketDays(pendingPacketDaysText);
-    if (packet.status === 'invalid') return;
-    const seedAmount = readAmount(pendingSeedAmountText);
-    if (pendingSeedId && seedAmount.status === 'invalid') return;
-    // The packet's days are about this variety, so they stand in for the
-    // crop's usual window (I17).
-    const packetDays = packet.status === 'days' ? packet.days : null;
-    const sure = readSurePercent(pendingSureText);
-    if (pendingIdentifiedWith === 'plantnet' && sure.status === 'invalid') return;
-    const identified = {
-      identifiedWith: pendingIdentifiedWith,
-      identifiedSure: pendingIdentifiedWith === 'plantnet' && sure.status === 'percent' ? sure.percent : null,
-    };
-    const variety = pendingVariety.trim() || null;
-    const harvestFor = (sowOn: string, usual: { harvestStart: string | null; harvestEnd: string | null } | null) =>
-      packetDays !== null
-        ? { expectedHarvestStart: packetHarvestDate(sowOn, packetDays), expectedHarvestEnd: packetHarvestDate(sowOn, packetDays) }
-        : { expectedHarvestStart: usual?.harvestStart ?? null, expectedHarvestEnd: usual?.harvestEnd ?? null };
-    const plantingId = await createGardenPlanting({
-      id: pendingPlantingId,
-      plotId,
-      foodId: pendingFood.foodId,
-      source: pendingFood.source,
-      foodName,
-      varietyNote: variety,
-      packetDays,
-      ...identified,
-      plantedAt,
-      ...harvestFor(plantedAt, expected),
-    });
-    // Sown from a packet on hand (I9): what went in comes off the packet.
-    // Later sowings are not counted here, since none has gone in yet.
-    if (pendingSeedId) {
-      await addSeedUse({
-        seedId: pendingSeedId,
-        plantingId,
-        usedOn: plantedAt,
-        amount: seedAmount.status === 'amount' ? seedAmount.value : null,
-      });
-    }
-    if (expected && pendingCountSprout && expected.sproutDays !== null) {
-      await addGardenCountdown({ plotId, plantingId, name: `${foodName} coming up`, startedOn: plantedAt, days: expected.sproutDays });
-    }
-    if (expected && pendingCountHarvest && expected.harvestDays) {
-      await addGardenCountdown({
+    await saveOrSay('The planting was not saved. Try again.', async () => {
+      if (!pendingFood) return;
+      const foodName = pendingFoodName || pendingFood.baseName;
+      const plantedAt = todayDateString();
+      const sowing = sowingWindowForFood(foodName);
+      const startedAs = sowing ? pendingStartedAs ?? defaultPlantingStart(sowing) : null;
+      const expected = sowing && startedAs ? plantingExpected(sowing, plantedAt, startedAs) : null;
+      const packet = readPacketDays(pendingPacketDaysText);
+      if (packet.status === 'invalid') return;
+      const seedAmount = readAmount(pendingSeedAmountText);
+      if (pendingSeedId && seedAmount.status === 'invalid') return;
+      // The packet's days are about this variety, so they stand in for the
+      // crop's usual window (I17).
+      const packetDays = packet.status === 'days' ? packet.days : null;
+      const sure = readSurePercent(pendingSureText);
+      if (pendingIdentifiedWith === 'plantnet' && sure.status === 'invalid') return;
+      const identified = {
+        identifiedWith: pendingIdentifiedWith,
+        identifiedSure: pendingIdentifiedWith === 'plantnet' && sure.status === 'percent' ? sure.percent : null,
+      };
+      const variety = pendingVariety.trim() || null;
+      const harvestFor = (sowOn: string, usual: { harvestStart: string | null; harvestEnd: string | null } | null) =>
+        packetDays !== null
+          ? { expectedHarvestStart: packetHarvestDate(sowOn, packetDays), expectedHarvestEnd: packetHarvestDate(sowOn, packetDays) }
+          : { expectedHarvestStart: usual?.harvestStart ?? null, expectedHarvestEnd: usual?.harvestEnd ?? null };
+      const plantingId = await createGardenPlanting({
+        id: pendingPlantingId,
         plotId,
-        plantingId,
-        name: `First ${foodName.toLowerCase()} harvest`,
-        startedOn: plantedAt,
-        days: packetDays ?? expected.harvestDays[0],
+        foodId: pendingFood.foodId,
+        source: pendingFood.source,
+        foodName,
+        varietyNote: variety,
+        packetDays,
+        ...identified,
+        plantedAt,
+        ...harvestFor(plantedAt, expected),
       });
-    }
-    const later = laterSowings();
-    if (later) {
-      for (let i = 0; i < later.dates.length; i += 1) {
-        const sowOn = later.dates[i];
-        const laterExpected = sowing && startedAs ? plantingExpected(sowing, sowOn, startedAs) : null;
-        const laterId = await createGardenPlanting({
-          plotId,
-          foodId: pendingFood.foodId,
-          source: pendingFood.source,
-          foodName,
-          varietyNote: variety,
-          packetDays,
-          ...identified,
-          plantedAt: sowOn,
-          ...harvestFor(sowOn, laterExpected),
-          status: 'planned',
+      // Sown from a packet on hand (I9): what went in comes off the packet.
+      // Later sowings are not counted here, since none has gone in yet.
+      if (pendingSeedId) {
+        await addSeedUse({
+          seedId: pendingSeedId,
+          plantingId,
+          usedOn: plantedAt,
+          amount: seedAmount.status === 'amount' ? seedAmount.value : null,
         });
-        if (pendingCountSowings) {
-          await addGardenCountdown({
+      }
+      if (expected && pendingCountSprout && expected.sproutDays !== null) {
+        await addGardenCountdown({ plotId, plantingId, name: `${foodName} coming up`, startedOn: plantedAt, days: expected.sproutDays });
+      }
+      if (expected && pendingCountHarvest && expected.harvestDays) {
+        await addGardenCountdown({
+          plotId,
+          plantingId,
+          name: `First ${foodName.toLowerCase()} harvest`,
+          startedOn: plantedAt,
+          days: packetDays ?? expected.harvestDays[0],
+        });
+      }
+      const later = laterSowings();
+      if (later) {
+        for (let i = 0; i < later.dates.length; i += 1) {
+          const sowOn = later.dates[i];
+          const laterExpected = sowing && startedAs ? plantingExpected(sowing, sowOn, startedAs) : null;
+          const laterId = await createGardenPlanting({
             plotId,
-            plantingId: laterId,
-            name: successionCounterName(foodName, i + 2, later.dates.length + 1),
-            startedOn: plantedAt,
-            days: daysBetween(plantedAt, sowOn),
+            foodId: pendingFood.foodId,
+            source: pendingFood.source,
+            foodName,
+            varietyNote: variety,
+            packetDays,
+            ...identified,
+            plantedAt: sowOn,
+            ...harvestFor(sowOn, laterExpected),
+            status: 'planned',
           });
+          if (pendingCountSowings) {
+            await addGardenCountdown({
+              plotId,
+              plantingId: laterId,
+              name: successionCounterName(foodName, i + 2, later.dates.length + 1),
+              startedOn: plantedAt,
+              days: daysBetween(plantedAt, sowOn),
+            });
+          }
         }
       }
-    }
-    resetPendingPlanting();
-    setAddingPlantingToPlot(null);
-    await loadPlantingsFor(plotId);
+      resetPendingPlanting();
+      setAddingPlantingToPlot(null);
+      await loadPlantingsFor(plotId);
+    });
   }
 
   // The later sowings the Sow again fields describe, or null when it is off
@@ -1505,19 +1604,21 @@ function PlotsAndPlantingsLens({
   // its expected harvest moved by however early or late it went in, and
   // the counter that was waiting for it is marked done.
   async function handleSownToday(plotId: string, planting: { id: string; plantedAt: string; expectedHarvestStart: string | null; expectedHarvestEnd: string | null }) {
-    const today = todayDateString();
-    const moved = daysBetween(planting.plantedAt, today);
-    await updateGardenPlanting(planting.id, {
-      status: 'growing',
-      plantedAt: today,
-      expectedHarvestStart: shiftDate(planting.expectedHarvestStart, moved),
-      expectedHarvestEnd: shiftDate(planting.expectedHarvestEnd, moved),
+    await saveOrSay('The sowing was not marked sown. Try again.', async () => {
+      const today = todayDateString();
+      const moved = daysBetween(planting.plantedAt, today);
+      await updateGardenPlanting(planting.id, {
+        status: 'growing',
+        plantedAt: today,
+        expectedHarvestStart: shiftDate(planting.expectedHarvestStart, moved),
+        expectedHarvestEnd: shiftDate(planting.expectedHarvestEnd, moved),
+      });
+      const counters = await listGardenCountdowns(plotId);
+      for (const counter of counters) {
+        if (counter.plantingId === planting.id && !counter.doneAt) await setGardenCountdownDone(counter.id, true);
+      }
+      await loadPlantingsFor(plotId);
     });
-    const counters = await listGardenCountdowns(plotId);
-    for (const counter of counters) {
-      if (counter.plantingId === planting.id && !counter.doneAt) await setGardenCountdownDone(counter.id, true);
-    }
-    await loadPlantingsFor(plotId);
   }
 
   // Only for a planting with no harvest logged; one with a harvest is a
@@ -1533,8 +1634,10 @@ function PlotsAndPlantingsLens({
       ],
       title: `Remove ${name}?`,
       onRemove: async () => {
-        await deleteGardenPlanting(plantingId);
-        await loadPlantingsFor(plotId);
+        await saveOrSay('The planting was not removed. Try again.', async () => {
+          await deleteGardenPlanting(plantingId);
+          await loadPlantingsFor(plotId);
+        });
       },
     });
   }
@@ -1578,7 +1681,9 @@ function PlotsAndPlantingsLens({
   return (
     <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
       {photoRemovalSheet}
-      {plots.length === 0 ? (
+      {plotsReadFailed ? (
+        <ReadProblem message="Your garden areas and plantings could not be read just now. Nothing you recorded is lost." onTryAgain={() => void loadPlots()} />
+      ) : plots.length === 0 ? (
         <View style={band.boxMuted}>
           <Text style={styles.emptyText}>{wording('gardenEmpty', playful)}</Text>
         </View>
@@ -2136,12 +2241,17 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
   // paying for that food in the same unit, and nothing when there is none.
   const [justSaved, setJustSaved] = useState<{ id: string; foodName: string; quantity: number; unit: string; avoided: string | null } | null>(null);
 
+  const [readFailed, setReadFailed] = useState(false);
   const load = useCallback(async () => {
-    const [harvestRows, plantingRows, plotRows] = await Promise.all([
-      listGardenHarvests(),
-      listGardenPlantings(),
-      listGardenPlots(),
-    ]);
+    let read: [GardenHarvest[], GardenPlanting[], GardenPlot[]];
+    try {
+      read = await Promise.all([listGardenHarvests(), listGardenPlantings(), listGardenPlots()]);
+    } catch {
+      setReadFailed(true);
+      return;
+    }
+    setReadFailed(false);
+    const [harvestRows, plantingRows, plotRows] = read;
     setHarvests(harvestRows);
     // Failed/removed plantings were never a real harvest to begin with --
     // still-growing AND already-harvested-once plantings both stay pickable,
@@ -2158,48 +2268,54 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
   );
 
   async function handleRecordHarvest() {
-    if (!selectedPlanting || !quantity || !unit) return;
-    const amount = Number(quantity);
-    const id = await recordGardenHarvest({
-      plantingId: selectedPlanting.id,
-      plotId: selectedPlanting.plotId,
-      foodId: selectedPlanting.foodId,
-      source: selectedPlanting.source,
-      foodName: selectedPlanting.foodName,
-      harvestedAt: todayDateString(),
-      quantity: amount,
-      unit,
+    await saveOrSay('The harvest was not saved. Try again.', async () => {
+      if (!selectedPlanting || !quantity || !unit) return;
+      const amount = Number(quantity);
+      const id = await recordGardenHarvest({
+        plantingId: selectedPlanting.id,
+        plotId: selectedPlanting.plotId,
+        foodId: selectedPlanting.foodId,
+        source: selectedPlanting.source,
+        foodName: selectedPlanting.foodName,
+        harvestedAt: todayDateString(),
+        quantity: amount,
+        unit,
+      });
+      const valuation = valueReceivedGoods(
+        [{ foodName: selectedPlanting.foodName, quantity: amount, unit: harvestUnitForPricing(unit) }],
+        await getLastPaidPrices(),
+      );
+      const valued = valuation.valued[0];
+      setJustSaved({
+        id,
+        foodName: selectedPlanting.foodName,
+        quantity: amount,
+        unit,
+        avoided: valued
+          ? `That is about ${formatTradeMoney(valued.amount)} you did not have to spend, at the ${formatTradeMoney(valued.pricePaid)} ${perUnit(valued.unit)} you paid on ${valued.pricedOn}.`
+          : null,
+      });
+      setSelectedPlanting(null);
+      setQuantity(null);
+      setUnit('count');
+      await load();
     });
-    const valuation = valueReceivedGoods(
-      [{ foodName: selectedPlanting.foodName, quantity: amount, unit: harvestUnitForPricing(unit) }],
-      await getLastPaidPrices(),
-    );
-    const valued = valuation.valued[0];
-    setJustSaved({
-      id,
-      foodName: selectedPlanting.foodName,
-      quantity: amount,
-      unit,
-      avoided: valued
-        ? `That is about ${formatTradeMoney(valued.amount)} you did not have to spend, at the ${formatTradeMoney(valued.pricePaid)} ${perUnit(valued.unit)} you paid on ${valued.pricedOn}.`
-        : null,
-    });
-    setSelectedPlanting(null);
-    setQuantity(null);
-    setUnit('count');
-    await load();
   }
 
   async function answerOnHand(keep: boolean) {
-    if (!justSaved) return;
-    if (!keep) await setGardenHarvestOnHand(justSaved.id, false);
-    setJustSaved(null);
-    await load();
+    await saveOrSay('Your answer about keeping it on hand was not saved. Try again.', async () => {
+      if (!justSaved) return;
+      if (!keep) await setGardenHarvestOnHand(justSaved.id, false);
+      setJustSaved(null);
+      await load();
+    });
   }
 
   async function handleOnHandChange(id: string, onHand: boolean) {
-    await setGardenHarvestOnHand(id, onHand);
-    await load();
+    await saveOrSay('Whether this harvest is on hand was not saved. Try again.', async () => {
+      await setGardenHarvestOnHand(id, onHand);
+      await load();
+    });
   }
 
   // A harvest with photos asks first, since they go with it (I13).
@@ -2209,8 +2325,10 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
       owners: [{ kind: 'harvest', id }],
       title: `Delete the ${name} harvest?`,
       onRemove: async () => {
-        await deleteGardenHarvest(id);
-        await load();
+        await saveOrSay('The harvest was not deleted. Try again.', async () => {
+          await deleteGardenHarvest(id);
+          await load();
+        });
       },
     });
   }
@@ -2218,6 +2336,9 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
   return (
     <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
       {photoRemovalSheet}
+      {readFailed ? (
+        <ReadProblem message="Your harvests and plantings could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
+      ) : null}
       <View style={[band.box, styles.card]}>
         <Text style={[styles.cardTitle, { color: TAB_COLOR }]}>Log a Harvest</Text>
         {justSaved ? (
@@ -2269,7 +2390,7 @@ function HarvestLogLens({ scrollBottomPadding }: { scrollBottomPadding: number }
           <>
             {plantings.filter((planting) => planting.status !== 'planned').length === 0 ? (
               <Text style={styles.captionText}>
-                Nothing tracked as planted yet. Add a planting in Plots &amp; Plantings first; once something&apos;s actually
+                Nothing tracked as planted yet. Add a planting in Plots &amp; Plantings first; once something&apos;s
                 growing, it&apos;ll show up here to log a harvest from.
               </Text>
             ) : (
@@ -2384,15 +2505,48 @@ function DaysUntilLens({ scrollBottomPadding }: { scrollBottomPadding: number })
   );
 }
 
+// Rebuilt 2026-11-15: a task gets a day, a time and a repeat (the same
+// picker Schedules uses), and each one can be marked done, changed or
+// deleted here. Before this every task went in for tomorrow at 9:00 and
+// could not be touched again from Garden. A repeating task asks whether
+// to delete that day or the whole series, the way Schedules asks.
+type TaskForm = { editingId: string | null; title: string; day: string; time: TimeOfDayInput; repeat: RepeatConfig };
+
+function tomorrowDateString(): string {
+  const next = new Date();
+  next.setDate(next.getDate() + 1);
+  return dateKey(next);
+}
+
+function emptyTaskForm(): TaskForm {
+  return { editingId: null, title: '', day: tomorrowDateString(), time: { hour: '9', minute: '00', ampm: 'AM' }, repeat: { type: 'none' } };
+}
+
+function isCalendarDay(value: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const [y, m, d] = value.split('-').map(Number);
+  const date = new Date(y, m - 1, d);
+  return date.getFullYear() === y && date.getMonth() === m - 1 && date.getDate() === d;
+}
+
 function UpcomingTasksLens({ scrollBottomPadding }: { scrollBottomPadding: number }) {
   const walkMark = useWalkMark();
   const [upcomingTasks, setUpcomingTasks] = useState<Awaited<ReturnType<typeof listUpcomingGardenTasks>>>([]);
-  const [taskTitle, setTaskTitle] = useState('');
+  const [form, setForm] = useState<TaskForm>(emptyTaskForm);
+  const [readFailed, setReadFailed] = useState(false);
+  const [removePrompt, setRemovePrompt] = useState<{ title: string; message?: string; actions: AppActionSheetAction[] } | null>(null);
   // The week's rain, read only when a watering task falls in it (I2).
   const [rain, setRain] = useState<RainForecastResult | null>(null);
 
   const load = useCallback(async () => {
-    const rows = await listUpcomingGardenTasks();
+    let rows: Awaited<ReturnType<typeof listUpcomingGardenTasks>>;
+    try {
+      rows = await listUpcomingGardenTasks();
+    } catch {
+      setReadFailed(true);
+      return;
+    }
+    setReadFailed(false);
     setUpcomingTasks(rows);
     setRain(anyWateringSoon(rows, dateKey(new Date())) ? await getRainForecast() : null);
   }, []);
@@ -2403,28 +2557,130 @@ function UpcomingTasksLens({ scrollBottomPadding }: { scrollBottomPadding: numbe
     }, [load]),
   );
 
-  async function handleAddTask() {
-    if (!taskTitle.trim()) return explainNotYet('Type what the task is first, for example "Water the tomatoes".');
-    const now = new Date();
-    now.setDate(now.getDate() + 1);
-    await scheduleGardenTask({ title: taskTitle, scheduledFor: `${now.toISOString().slice(0, 10)}T09:00` });
-    setTaskTitle('');
-    await load();
+  function patchForm(fields: Partial<TaskForm>) {
+    setForm((current) => ({ ...current, ...fields }));
   }
+
+  async function afterChange() {
+    await load();
+    void syncReminderNotifications();
+  }
+
+  async function handleSaveTask() {
+    const title = form.title.trim();
+    if (!title) return explainNotYet('Type what the task is first, for example "Water the tomatoes".');
+    if (!isCalendarDay(form.day)) return explainNotYet('Type the day as year, month and day, for example 2026-05-14, or tap Today or Tomorrow.');
+    const time = buildTime24(form.time.hour, form.time.minute, form.time.ampm);
+    if (!time) return explainNotYet(`The time is not complete yet: ${describeTimeInputProblem(form.time.hour, form.time.minute, form.time.ampm)}`);
+    if (!form.editingId && form.repeat.type !== 'none') {
+      const problem = validateRepeatRule(form.repeat);
+      if (problem) return explainNotYet(problem);
+    }
+    const scheduledFor = `${form.day}T${time}`;
+    const editingId = form.editingId;
+    const saved = await saveOrSay(editingId ? 'The task was not changed. Try again.' : 'The task was not saved. Try again.', async () => {
+      if (editingId) await updateGardenTask(editingId, { title, scheduledFor });
+      else await scheduleGardenTask({ title, scheduledFor, repeat: form.repeat });
+      return true;
+    });
+    if (!saved) return;
+    setForm(emptyTaskForm());
+    await afterChange();
+  }
+
+  async function handleDone(id: string) {
+    const saved = await saveOrSay('The task was not marked done. Try again.', async () => {
+      await setScheduleItemStatus(id, 'done');
+      return true;
+    });
+    if (saved) await afterChange();
+  }
+
+  function startChange(task: (typeof upcomingTasks)[number]) {
+    const [day, time] = task.scheduledFor.split('T');
+    setForm({ editingId: task.id, title: task.title, day, time: splitTime24(time ? time.slice(0, 5) : null), repeat: { type: 'none' } });
+  }
+
+  function askDelete(task: (typeof upcomingTasks)[number]) {
+    const deleteOne = () => {
+      void (async () => {
+        const saved = await saveOrSay('The task was not deleted. Try again.', async () => {
+          await deleteScheduledMeal(task.id);
+          return true;
+        });
+        if (saved) {
+          if (form.editingId === task.id) setForm(emptyTaskForm());
+          await afterChange();
+        }
+      })();
+    };
+    if (task.repeatGroupId) {
+      const groupId = task.repeatGroupId;
+      setRemovePrompt({
+        title: 'Delete this task?',
+        message: `"${task.title}" repeats. Delete just this day, or this day and every one after it? Days already done stay recorded.`,
+        actions: [
+          { label: 'Just this day', onPress: deleteOne },
+          {
+            label: 'This day and every one after',
+            destructive: true,
+            onPress: () => {
+              void (async () => {
+                const saved = await saveOrSay('The repeating task was not deleted. Try again.', async () => {
+                  await deleteScheduleSeries(groupId);
+                  return true;
+                });
+                if (saved) {
+                  setForm(emptyTaskForm());
+                  await afterChange();
+                }
+              })();
+            },
+          },
+          { label: 'Cancel', onPress: () => {} },
+        ],
+      });
+      return;
+    }
+    setRemovePrompt({
+      title: 'Delete this task?',
+      message: `"${task.title}" will no longer show on Garden, Home or Schedules.`,
+      actions: [
+        { label: 'Delete', destructive: true, onPress: deleteOne },
+        { label: 'Cancel', onPress: () => {} },
+      ],
+    });
+  }
+
+  const today = dateKey(new Date());
+  const tomorrow = tomorrowDateString();
 
   return (
     <ScrollView contentContainerStyle={[styles.body, { paddingBottom: scrollBottomPadding }]}>
+      <AppActionSheet
+        visible={removePrompt !== null}
+        onClose={() => setRemovePrompt(null)}
+        title={removePrompt?.title}
+        message={removePrompt?.message}
+        actions={removePrompt?.actions ?? []}
+      />
+      {readFailed ? (
+        <ReadProblem message="Your garden tasks could not be read just now. Nothing you recorded is lost." onTryAgain={() => void load()} />
+      ) : null}
       <View style={[band.box, styles.card]}>
         <Text style={[styles.cardTitle, { color: TAB_COLOR }]}>Upcoming Garden Tasks</Text>
-        {upcomingTasks.length === 0 ? (
+        {readFailed ? null : upcomingTasks.length === 0 ? (
           <Text style={styles.captionText}>Nothing scheduled.</Text>
         ) : (
-          upcomingTasks.map((task) => {
-            const note = rainNoteForTask(task, rain?.status === 'ready' ? rain.forecast : null, dateKey(new Date()));
+          upcomingTasks.map((task, index) => {
+            const note = rainNoteForTask(task, rain?.status === 'ready' ? rain.forecast : null, today);
+            const [day, time] = task.scheduledFor.split('T');
             return (
-              <View key={task.id}>
+              <View key={task.id} style={styles.taskRow}>
                 <Text style={styles.bodyText}>
-                  {task.title}: {task.scheduledFor.replace('T', ' ')}
+                  {task.title}: {dateLabel(day)}
+                  {time ? `, ${formatTime12(time.slice(0, 5))}` : ''}
+                  {task.repeatGroupId ? ' (repeats)' : ''}
                 </Text>
                 {note ? (
                   <Text style={[styles.captionText, note.rain && { color: colors.textSecondary }]}>
@@ -2432,6 +2688,17 @@ function UpcomingTasksLens({ scrollBottomPadding }: { scrollBottomPadding: numbe
                     {note.line}
                   </Text>
                 ) : null}
+                <View style={styles.actionRow}>
+                  <TouchableOpacity ref={index === 0 ? walkMark.ref('garden.taskDone') : undefined} onPress={() => handleDone(task.id)}>
+                    <Text style={styles.linkText}>Done</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity ref={index === 0 ? walkMark.ref('garden.taskChange') : undefined} onPress={() => startChange(task)}>
+                    <Text style={styles.linkText}>Change</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity ref={index === 0 ? walkMark.ref('garden.taskDelete') : undefined} onPress={() => askDelete(task)}>
+                    <Text style={styles.linkText}>Delete</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             );
           })
@@ -2449,22 +2716,80 @@ function UpcomingTasksLens({ scrollBottomPadding }: { scrollBottomPadding: numbe
             Set a place in My Zone and a watering task shows the rain forecast for its day.
           </Text>
         ) : null}
+      </View>
+      <View style={[band.box, styles.card]}>
+        <Text style={[styles.cardTitle, { color: TAB_COLOR }]}>{form.editingId ? 'Change This Task' : 'Add a Task'}</Text>
+        <AppTextInput
+          onVoiceResult={(transcript) => patchForm({ title: transcript })}
+          micColor={TAB_COLOR}
+          style={styles.textInput}
+          placeholder="Task (e.g. Water the tomatoes)"
+          value={form.title}
+          onChangeText={(text) => patchForm({ title: text })}
+        />
+        <Text style={styles.fieldLabel}>Day</Text>
         <ThumbEndRow style={styles.fieldRow}>
           <AppTextInput
-            onVoiceResult={(transcript) => setTaskTitle(transcript)}
-            micColor={TAB_COLOR}
             style={[styles.textInput, { flex: 1 }]}
-            placeholder="Task (e.g. Water the tomatoes)"
-            value={taskTitle}
-            onChangeText={setTaskTitle}
+            placeholder="YYYY-MM-DD"
+            value={form.day}
+            onChangeText={(text) => patchForm({ day: text })}
           />
-          <TouchableOpacity ref={walkMark.ref('garden.addTask')} style={styles.primaryButton} onPress={handleAddTask}>
-            <Text style={styles.primaryButtonText}>Add</Text>
+          <TouchableOpacity style={[styles.pill, form.day === today && styles.pillActive]} onPress={() => patchForm({ day: today })}>
+            <Text style={[styles.pillText, form.day === today && styles.pillTextActive]}>Today</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.pill, form.day === tomorrow && styles.pillActive]} onPress={() => patchForm({ day: tomorrow })}>
+            <Text style={[styles.pillText, form.day === tomorrow && styles.pillTextActive]}>Tomorrow</Text>
           </TouchableOpacity>
         </ThumbEndRow>
+        <Text style={styles.fieldLabel}>Time</Text>
+        <View style={styles.fieldRow}>
+          <AppTextInput
+            style={[styles.textInput, styles.timeInput]}
+            placeholder="9"
+            keyboardType="number-pad"
+            maxLength={2}
+            value={form.time.hour}
+            onChangeText={(text) => patchForm({ time: { ...form.time, hour: text } })}
+          />
+          <Text style={styles.fieldLabel}>:</Text>
+          <AppTextInput
+            style={[styles.textInput, styles.timeInput]}
+            placeholder="00"
+            keyboardType="number-pad"
+            maxLength={2}
+            value={form.time.minute}
+            onChangeText={(text) => patchForm({ time: { ...form.time, minute: text } })}
+          />
+          {(['AM', 'PM'] as const).map((option) => (
+            <TouchableOpacity
+              key={option}
+              style={[styles.pill, form.time.ampm === option && styles.pillActive]}
+              onPress={() => patchForm({ time: { ...form.time, ampm: option } })}
+            >
+              <Text style={[styles.pillText, form.time.ampm === option && styles.pillTextActive]}>{option}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+        {form.editingId ? (
+          <Text style={styles.captionText}>
+            Changes this one day only. A repeating task keeps its other days as they are.
+          </Text>
+        ) : (
+          <RepeatRulePicker repeat={form.repeat} onChange={(repeat) => patchForm({ repeat })} startDate={form.day} color={TAB_COLOR} />
+        )}
+        <View style={styles.actionRow}>
+          <TouchableOpacity ref={walkMark.ref('garden.addTask')} style={styles.primaryButton} onPress={handleSaveTask}>
+            <Text style={styles.primaryButtonText}>{form.editingId ? 'Save Change' : 'Add Task'}</Text>
+          </TouchableOpacity>
+          {form.editingId ? (
+            <TouchableOpacity onPress={() => setForm(emptyTaskForm())}>
+              <Text style={styles.linkText}>Cancel</Text>
+            </TouchableOpacity>
+          ) : null}
+        </View>
         <Text style={styles.captionText}>
-          Creates a Schedule entry for tomorrow morning. A dedicated lens for these inside the Schedules tab itself
-          isn&apos;t built yet, so this is the way to see and add them for now.
+          Garden tasks also show on Home and on Schedules &gt; Timeline, and the phone reminds you at the time set.
         </Text>
       </View>
     </ScrollView>
@@ -2555,6 +2880,8 @@ const styles = StyleSheet.create({
   // Phase 4's own Length/Width entry boxes -- narrow enough to sit
   // side-by-side with the Feet/Meters toggle in the same fieldRow.
   sizeInput: { width: 90 },
+  timeInput: { width: 56, textAlign: 'center' },
+  taskRow: { gap: 4, paddingTop: 6, borderTopWidth: 1, borderTopColor: colors.border },
   // Dark text: cancel any shadow inherited from a base style it is
   // composed with. See constants/typography.ts.
   pillTextActive: { ...PILL_ON_TEXT },
